@@ -26,7 +26,7 @@ and adding the following line to the `[Main]` section
 
     process_agent_enabled: true
     
-After configuration is complete, restart the Agent.  Note that for collecting Container information in the standard install, the dd-agent user will need to have permissions to access docker.sock.
+After configuration is complete, restart the Agent.
 
 ### Docker container
 
@@ -61,27 +61,14 @@ Refer to the standard [daemonset installation](http://docs.datadoghq.com/integra
 
 ### String Search
 
-Processes and containers are by their nature extremely high cardinality objects.  Our fuzzy string search gives you a view into exactly what you want.  Below is our Demo environment, filtered with the string `postgres /9.`.  Note that `/9.` has matched in the command path, and that `postgres` matches the command itself.
+Processes are by their nature extremely high cardinality objects.  Our fuzzy string search gives you a view into exactly what you want.  Below is our Demo environment, filtered with the string `postgres /9.`.  Note that `/9.` has matched in the command path, and that `postgres` matches the command itself.
 
 {{< img src="infrastructure/process/postgres.png" >}}
 
-### Tagging
-
-Processes and containers are tagged with all existing host-level tags.  Additionally, we tag with metadata associated with individual processes and containers. 
-
-*Processes* are tagged by `#user`
-
-*Containers* are tagged by `#container_image`
-
-Additionally, we include integrations with popular orchestrators, such as ECS and Kubernetes, which provide further container-level tags.  We also decorate each container with Docker, ECS, or Kubernetes icons so you can tell which are being orchestrated at a glance.
-
-ECS Containers are tagged by `#task_name`, `#task_version`, and `#ecs_cluster`
-
-Kubernetes Containers are tagged by `#pod`, `#pod_ip`, `#service`, `#namespace`, `#cluster-name`, `#replica_set`, `#daemon_set`, `#job`, and `#deployment`.
 
 ### Filtering and Pivoting
 
-Making sense of hundreds of thousands or millions of processes and containers can seem overwhelming!  Using tagging, described in the previous section, makes navigation easy.
+Making sense of hundreds of thousands or millions of processes and containers can seem overwhelming!  Using tagging makes navigation easy.  In addition to all existing host-level tags, processes are tagged by `#user`. 
 
 In the below, we have filtered down to a Kubernetes cluster of 9 nodes.  RSS and CPU utilization on containers is reported compared to the limits set on the containers, when they exist.  Here, we see that the containers in this cluster are way overprovisioned, and that we could use tighter limits and bin packing to achieve better utilization of resources.
 
@@ -101,11 +88,9 @@ Below, we have searched for ssh processes and pivoted by `#user` to understand w
 
 Ok, so I guess that last one is less exciting after redaction!
 
-## Broad Inspection, Deep Inspection
+## Enriched Live Containers view
 
-Everyone's workflow differs.  Initially the table is displayed at the finest grain, but with the group-by field, you should start your investigation where it's appropriate for you: Grouping by Availability Zone, Host, Cluster, Pod, or wherever.
-
-From there, you can dig down into finer grains, or inspect each group to see individual processes or containers.  In the below screenshot, you can see an investigation that started by indexing by pod and service, dug into one pod to see the containers, and then expanded a container to see the process tree inside.  In the container inspect tray, we also have some recent context for these metrics.
+Live processes adds extra visibility to your container deployments.  In addition to aggregating on orchestrator metadata, like ECS `task` or Kubernetes `service`
 
 {{< img src="infrastructure/process/containerinspect.png" >}}
 
