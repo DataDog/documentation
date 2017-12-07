@@ -86,7 +86,7 @@ Ok, so I guess that one is less exciting after redaction!
 
 ## Enriched Live Containers view
 
-Live Processes adds extra visibility to your container deployments.  The [Live Containers](https://docs.datadoghq.com/infrastructure/livecontainers/) feature gives you a similarly comprehensive of your container and orcestrator environment.  When Live Processes is enabled, the process tree for each container is included in the container inspection panel on that page.
+Live Processes adds extra visibility to your container deployments.  The [Live Containers](https://docs.datadoghq.com/infrastructure/livecontainers/) feature gives you a similarly comprehensive view of your container and orcestrator environment.  When Live Processes is enabled, the process tree for each container is included in the container inspection panel on that page.
 
 {{< img src="infrastructure/process/containerinspect.png" >}}
 
