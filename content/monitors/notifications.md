@@ -130,6 +130,7 @@ We provide a number of different types of monitors and not all variables are ava
   
 *(Scroll right to see all variable availability)*
 
+{{% table responsive="true" %}}
 ||[host](/monitors/monitor_types/host)| [metric](/monitors/monitor_types/metric)| [integration](/monitors/monitor_types/integration)| [process](/monitors/monitor_types/process)| [network](/monitors/monitor_types/network)| [custom check](/monitors/monitor_types/custom_check)| [event](/monitors/monitor_types/event)|
 | :-------|:-----|:-----|:-------|:-------|:---------|:-------|:------|
 | **Conditionals**      |
@@ -147,7 +148,7 @@ We provide a number of different types of monitors and not all variables are ava
 | `{{ok_threshold}}`    |                   |                               | Y                                     | Y                                 | Y                                                     | Y                         |                   |
 | `{{comparator}}`      | Y                 | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
 | Additional variables  | Contextual        |                               | Contextual<br/>`{{check_message}}`    | Contextual<br/>`{{process.name}}` | Contextual<br/>`{{url.name}}`<br/>`{{instance.name}}` | `{{check_message}}`       |                   |
-
+{{% /table %}}
 <style>
   .tpl-var-table tr td {
     text-align: center;
