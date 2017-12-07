@@ -74,7 +74,7 @@ First, we can filter down to role:McNulty-Query, which is our front end query se
 
 <>
 
-Here, I am checking the Elasticsearch processes for an individual feature team.  I've also added metrics voluntary and involuntary context switches, available in the gear menu on the upper-right of the table.
+Here, I am checking the Elasticsearch processes for an individual feature team.  I've also added metrics for voluntary and involuntary context switches, available in the gear menu on the upper-right of the table.
 
 <>
 
