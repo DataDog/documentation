@@ -13,7 +13,8 @@ If you're new here, read below for the 10,000 foot view of Datadog.
 
 {{< partial name="tile-nav/tile-nav.html" >}}
 
-Your application stack is teeming with unused metadata that's trying to tell a story: things aren't humming along as well as they should be.  
+Your application stack is teeming with unused metadata that's trying to tell a story: things aren't humming along as well as they should be.
+
 Exception thrown; Database queries slowing; Cache misses rising; Upstream service flapping; Error log growing. Each of these chatters a part of the story, but they're hard to make sense of—or act on meaningfully—when taken separately from the others.  
 
 Datadog lets you collect all these metrics, events, and service states in one place. Then, you can visualize and correlate the data with beautiful graphing and set flexible alerting conditions on it—all without running any storage or monitoring infrastructure yourself.
