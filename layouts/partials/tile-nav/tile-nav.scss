@@ -2,17 +2,18 @@ $ddpurple:    #774DA2;
 
 $tilecolors: (
     agent: $ddpurple,
-    integrations: #2BE2D5,
-    graphing: #DEE144,
-    alerting: #FFCA07,
-    tracing: #FE6638,
-    developers: #D6032A
+    integrations: #00D2D2,
+    graphing: #14D071,
+    alerting: #FFAA00,
+    tracing: #FF635A,
+    developers: #3D95FF
 );
 
 .tile-nav {
   p {
     font-size:18px;
     line-height:22px;
+    color:#4A4A4A;
   }
   div:nth-child(n+4) .card {
     margin-bottom:0px;
