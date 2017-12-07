@@ -132,5 +132,6 @@ Here's an example of how we've extended a `webserver.rb` role file to automatica
 {{< snippet-code-block file="guides-chef-integration-apache.rb" nocomments="true" >}}
 
 As you can see, we've added the `datadog::apache` recipe to the run list, and provided some attributes to control what instances of Apache should be monitored by Datadog.
+Log collection is available in the Agent 6, check the [inline docs](https://github.com/DataDog/chef-datadog/blob/v2.13.0/attributes/default.rb#L371-L376) to enable it.
 
 Read each recipe file for the exact details of the integration values to pass into the `instances` part of the attributes.
