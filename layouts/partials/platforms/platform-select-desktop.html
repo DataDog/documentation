@@ -7,7 +7,7 @@
                 <a class="card" href="{{ $dot.Site.BaseURL }}{{ .link }}">
                     <div class="card-body text-center">
                         {{ $src := (print "icons/" .image)}}
-                        {{ $url := (print (.Site.Params.img_url) "images/" (index .Site.Data.manifests.images $src ) "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
+                        {{ $url := (print ($dot.Site.Params.img_url) "images/" (index $dot.Site.Data.manifests.images $src ) "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
                         <picture class="mx-auto">
                             <source srcset="{{ $url }}&w=100 1x, {{ $url }}&w=100&dpr=2 2x" media="(min-width: 1200px)">
                             <source srcset="{{ $url }}&w=103 1x, {{ $url }}&w=103&dpr=2 2x" media="(min-width: 992px)">
