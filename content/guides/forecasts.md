@@ -93,3 +93,7 @@ For Linear: `forecast(metric_name, ‘linear’, 1, interval='60m', history='1w'
 For Seasonal: `forecast(metric_name, 'seasonal', 1, interval='60m', seasonality='weekly')`, where the options for `seasonality` are: `hourly`, `daily`, and `weekly`.
 
 The start and end times to specify when using the API are the start and end times of the forecast itself. If you want the forecast for the next day you would specify the start to be `now` and the end to be `1 day ahead`.
+
+### Limitations
+
+Not all functions may be nested inside of forecast. In particular, you may not include any of the following functions in a forecast monitor or dashboard query: `anomalies()`, `cumsum()`, `default()`, `integral()`, `outliers()`, `piecewise_constant()`, `robust_trend()`, or `trend_line()`
