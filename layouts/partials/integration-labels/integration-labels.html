@@ -1,28 +1,18 @@
-{{ $name := .File.TranslationBaseName }}
-{{ $integration_list := (where (getJSON "integrations.json") "is_public" true) }}
-{{ $.Scratch.Add "data" (slice) }}
-{{ range $index, $element := $integration_list }}
-    {{ if eq ($element.name | lower) ($name | lower) }}
-        {{ $.Scratch.Set "data" $element }}
-    {{ end }}
-{{ end }}
-{{ $data := $.Scratch.Get "data" }}
-
-{{ if $data }}
+{{ if .Params.ddtype }}
 <div class="row integration-labels mb-40">
-    {{ if eq $data.type "check" }}
+    {{ if eq .Params.ddtype "check" }}
         <div class="agent col-12">
-            <img class="static" width="21" src="{{ partial "img.html" (dict "root" . "src" "icons/check_agent.png") }}" /><span>Agent Check</span>
+            {{ partial "img.html" (dict "root" . "src" "icons/check_agent.png" "class" "static" "alt" "Agent Check" "width" "21") }}<span>Agent Check</span>
         </div>
     {{ end }}
-    {{ if eq $data.type "statsd" }}
+    {{ if eq .Params.ddtype "statsd" }}
         <div class="statsd col-12 ">
-            <img class="static" width="21" src="{{ partial "img.html" (dict "root" . "src" "icons/check_statsd.png") }}" /><span>StatsD Check</span>
+            {{ partial "img.html" (dict "root" . "src" "icons/check_statsd.png" "class" "static" "alt" "StatsD Check" "width" "21") }}<span>StatsD Check</span>
         </div>
     {{ end }}
-    {{ if eq $data.type "crawler" }}
+    {{ if eq .Params.ddtype "crawler" }}
         <div class="crawler col-12">
-            <img class="static" width="21" src="{{ partial "img.html" (dict "root" . "src" "icons/check_crawler.png") }}" /><span>Crawler</span>
+            {{ partial "img.html" (dict "root" . "src" "icons/check_crawler.png" "class" "static" "alt" "Crawler" "width" "21") }}<span>Crawler</span>
         </div>
     {{ end }}
 </div>

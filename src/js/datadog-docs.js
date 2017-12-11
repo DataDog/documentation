@@ -1,13 +1,30 @@
 $(document).ready(function () {
 
+    // ie
+    document.createElement('picture');
+
     // bring back size() for jquery pajinate
     // The number of elements contained in the matched element set
     jQuery.fn.size = function() {
         return this.length;
     };
 
+    $('.table-responsive-container table').each(function() {
+        if(!$(this).hasClass('table-responsive')) {
+            $(this).addClass('table-responsive');
+        }
+    });
+
     $('table').each(function() {
-        $(this).addClass('table-responsive-sm');
+        var emptyThead = true;
+        $(this).find('thead th').each(function() {
+            if(!$(this).is(':empty')) {
+                emptyThead = false;
+            }
+        });
+        if(emptyThead) {
+            $(this).find('thead').remove();
+        }
     });
 
     // API page
@@ -324,9 +341,12 @@ $(document).ready(function () {
         if (amount === undefined) {
             // calc from objects instead
             if($(window).width() <= 991) {
-                amount = 183; //at mobile
+                // at mobile
+                amount = $('body > header').height();
+                $('.api-nav > div').each(function() { amount += $(this).height(); });
             } else {
-                amount = 64; //at desktop
+                // at desktop
+                amount = $('body > header').height();
             }
         }
         var href = '#'+id;
@@ -354,6 +374,10 @@ $(document).ready(function () {
         var href = $(this).attr('href');
         if(href.substr(0, 1) === '#') {
             moveToAnchor(href.substr(1));
+            /*var pop = document.getElementById('api-popper')
+            if(pop) {
+                pop.style.display = (pop.style.display === 'none') ? 'block' : 'none';
+            }*/
             return false;
         }
     });
@@ -367,6 +391,34 @@ $(document).ready(function () {
         }
     });
 
+    // api dropdown select
+    $('.api-select').on('change', function(e) {
+        var href = $(this).val();
+        if(href.substr(0, 1) === '#') {
+            moveToAnchor(href.substr(1));
+            return false;
+        }
+    });
+    /*if($('.api-nav').length) {
+        var ref = document.querySelector('.api-popper-button');
+        var pop = document.getElementById('api-popper');
+        if(ref && pop) {
+            ref.addEventListener('click', function(e) {
+                pop.style.display = (pop.style.display === 'none') ? 'block' : 'none';
+                var p = new Popper(ref, pop, {
+                    placement: "start-bottom",
+                    modifiers: {
+                        preventOverflow: { enabled: false },
+                        hide: {
+                            enabled: false
+                        }
+                    }
+                });
+                return false;
+            });
+        }
+    }*/
+
     // make header tags with ids and make clickable as anchors
     $('.main h2[id], .main h3[id], .main h4[id], .main h5[id]').each(function() {
         var id = $(this).attr('id');
@@ -379,4 +431,5 @@ $(document).ready(function () {
     // sticky polyfill trigger
     var elements = document.querySelectorAll('.sticky');
     Stickyfill.add(elements);
+
 });

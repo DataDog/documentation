@@ -4,6 +4,13 @@ kind: documentation
 customnav: developersnav
 aliases:
   - /guides/dogstatsd/
+further_reading:
+- link: "/developers/metrics"
+  tag: "Documentation"
+  text: Learn more about Metrics
+- link: "/developers/libraries"
+  tag: "Docuementation"
+  text: Datadog-official and community contributed API and DogStatsD client libraries
 ---
 
 <p class="aside">
@@ -21,12 +28,14 @@ The easiest way to get your custom application metrics into Datadog is to send t
 * Gauge deltas (see [this issue][1])
 * Timers as a native metric type (though it [does support them via histograms](#timers))
 
+**Note**: Any StatsD client will work just fine, but using the Datadog DogStatsD client will give you a few extra features. 
+
 ## How It Works
 
 DogStatsD accepts [custom metrics](/getting_started/custom_metrics/), events, and service checks over UDP and periodically aggregates and forwards them to Datadog.  
 Because it uses UDP, your application can send metrics to DogStatsD and resume its work without waiting for a response. If DogStatsD ever becomes unavailable, your application won't skip a beat.
 
-{{< img src="developers/dogstatsd/dogstatsd.png" alt="dogstatsd"  responsive="true" >}}
+{{< img src="developers/dogstatsd/dogstatsd.png" alt="dogstatsd"  responsive="true" popup="true">}}
 
 As it receives data, DogStatsD aggregates multiple data points for each unique metric into a single data point over a period of time called the flush interval. Let's walk through an example to see how this works.  
 
@@ -102,7 +111,7 @@ def render_page():
 
 With this one line of code we can start graphing the data:
 
-{{< img src="developers/dogstatsd/graph-guides-metrics-page-views.png" alt="graph guides metrics page views" responsive="true" >}}
+{{< img src="developers/dogstatsd/graph-guides-metrics-page-views.png" alt="graph guides metrics page views" responsive="true" popup="true">}}
 
 DogStatsD normalizes counters over the flush interval to report
 per-second units. In the graph above, the marker is reporting
@@ -193,7 +202,7 @@ def handle_file(file, file_size):
   return
 ```
 
-Histograms are an extension to StatsD, so you'll need to use a [DogStatsD client library][2].
+Since histograms are an extension to StatsD, use a [DogStatsD client library][2].
 
 #### Metric option: Sample Rates
 
@@ -259,7 +268,7 @@ def algorithm_two():
     # Do fancy things (maybe faster?) here ...
 ```
 
-Tagging is an extension to StatsD, so you'll need to use a [DogStatsD client library][2].
+Since tagging is an extension to StatsD, use a [DogStatsD client library][2].
 
 ## Datagram Format
 
@@ -338,14 +347,73 @@ Here's an example datagram:
     # Send a CRITICAL status for a remote connection
     _sc|Redis connection|2|#redis_instance:10.0.0.16:6379|m:Redis connection timed out after 10s
 
+
+## Send metrics and events using dogstatsd and the shell
+
+For Linux and other Unix-like OS, we will used Bash.  
+For Windows we'll need Powershell and [powershell-statsd](https://github.com/joehack3r/powershell-statsd/blob/master/send-statsd.ps1), a simple Powershell function that will take care of the network bits for us.
+
+The idea behind Dogstatsd is simple: create a message that will contain information about your metric/event, and send it to a collector over UDP on port 8125. The message format can be found [here](#datagram-format).
+
+### Sending metrics
+
+The format for sending metrics is `metric.name:value|type|@sample_rate|#tag1:value,tag2,` so let's go ahead and send datapoints for a gauge metric called custom_metric with the shell tag. We'll use a locally installed agent as a collector, so the destination IP address is 127.0.0.1.
+
+On Linux:
+
+```
+vagrant@vagrant-ubuntu-14-04:~$ echo -n "custom_metric:60|g|#shell" >/dev/udp/localhost/8125
+```
+
+or
+
+```
+vagrant@vagrant-ubuntu-14-04:~$ echo -n "custom_metric:60|g|#shell" | nc -4u -w0 127.0.0.1 8125
+```
+
+On Windows:
+```
+PS C:\vagrant> .\send-statsd.ps1 "custom_metric:123|g|#shell"
+PS C:\vagrant>
+```
+
+On any platform with Python (on Windows, the agent's embedded Python interpreter can be used, which is located at `C:\Program Files\Datadog\Datadog Agent\embedded\python.exe`):
+
+```python
+import socket
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
+sock.sendto("custom_metric:60|g|#shell", ("localhost", 8125))
+```
+
+### Sending events
+
+The format for sending events is:
+```
+_e{title.length,text.length}:title|text|d:date_happened|h:hostname|p:priority|t:alert_type|#tag1,tag2. 
+```
+Here we need to calculate the size of the event's title and body.
+
+On Linux:
+```
+vagrant@vagrant-ubuntu-14-04:~$ title="Event from the shell"
+vagrant@vagrant-ubuntu-14-04:~$ text="This was sent from Bash!"
+vagrant@vagrant-ubuntu-14-04:~$ echo "_e{${#title},${#text}}:$title|$text|#shell,bash"  >/dev/udp/localhost/8125
+```
+On Windows:
+
+```
+PS C:\vagrant> $title = "Event from the shell"
+PS C:\vagrant> $text = "This was sent from Powershell!"
+PS C:\vagrant> .\send-statsd.ps1 "_e{$($title.length),$($text.Length)}:$title|$text|#shell,powershell"
+```
+
 ## Further Reading
 
-[Libraries page][2] — find a DogStatsD client library to suit your needs.
-
-[DogStatsD source code][5] — DogStatsD is open-sourced under the BSD License.
+{{< whatsnext  >}}
+    {{< nextlink href="/developers/libraries/" tag="Documentation" >}}Find a DogStatsD client library to suit your needs.{{< /nextlink >}}
+    {{< nextlink href="https://github.com/DataDog/dd-agent/blob/master/dogstatsd.py" tag="Github" >}}DogStatsD source code{{< /nextlink >}}
+{{< /whatsnext >}}
 
 [1]: https://github.com/DataDog/dd-agent/pull/2104
-[2]: /developers/libraries/
 [3]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
 [4]: /developers/metrics/
-[5]: https://github.com/DataDog/dd-agent/blob/master/dogstatsd.py

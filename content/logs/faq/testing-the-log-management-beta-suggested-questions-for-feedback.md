@@ -2,7 +2,6 @@
 title: Testing the Log Management Beta - Suggested Questions for Feedback
 kind: faq
 customnav: lognav
-beta: true
 ---
 
 Datadog's Log Management product is currently in private beta. If you are among the private beta testers, these are some questions you may want to consider so as to help you give really great feedback.

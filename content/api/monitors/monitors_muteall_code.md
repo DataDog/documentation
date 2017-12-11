@@ -7,10 +7,6 @@ order: 8.7
 ##### Signature
 `POST /api/v1/monitor/mute_all`
 ##### Example Request
-{{< snippet-code-block file="content/api/monitors/code_snippets/api-monitor-mute-all.py" highlight="true" >}}
-{{< snippet-code-block file="content/api/monitors/code_snippets/api-monitor-mute-all.sh" highlight="true" >}}
-{{< snippet-code-block file="content/api/monitors/code_snippets/api-monitor-mute-all.rb" highlight="true" >}}
+{{< code-snippets basename="api-monitor-mute-all" >}}
 ##### Example Response
-{{< snippet-result-code-block file="content/api/monitors/code_snippets/result.api-monitor-mute-all.py" >}}
-{{< snippet-result-code-block file="content/api/monitors/code_snippets/result.api-monitor-mute-all.sh" >}}
-{{< snippet-result-code-block file="content/api/monitors/code_snippets/result.api-monitor-mute-all.rb" >}}
+{{< code-snippets basename="result.api-monitor-mute-all" >}}

@@ -1,3 +1,9 @@
+$ddpurple:    #774DA2;
+
+html {
+  font-size:18px;
+}
+
 body {
   font-family: $font-family-sans-serif;
   text-rendering: optimizeLegibility;
@@ -30,17 +36,66 @@ body {
   }
 }
 
+.greyside {
+  position:absolute;
+  height:100%;
+  width:100%;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+  .grey {
+    &:before,
+    &:after {
+      content:"";
+      position:absolute;
+      margin-left:-2000px;
+      left:0;
+      top:0;
+      right:0;
+      bottom:0;
+      background:#F8F8F8;
+      z-index:-1;
+      height:100%;
+    }
+    &:after {
+      background:#F2F2F2;
+      height:50px;
+    }
+  }
+}
+
+
 strong {
   font-weight:600;
 }
 
 a {
-  color:#4A4A4A;
+  color:#555555;
 }
 
 button:focus,
 a:focus {
   outline: none !important;
+}
+
+.custom-select {
+  width:100%;
+  background-color: #fff;
+  color: $ddpurple;
+  border-color: $ddpurple;
+  font-weight: 600;
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  text-align:center;
+  height: 50px;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  border-radius: 0.3rem;
+  text-align-last:center;
+  &:focus {
+    border-color: $ddpurple;
+    outline: none;
+  }
 }
 
 // standard code highlighting
@@ -80,16 +135,33 @@ code {
 p {
   // todo: can i set this with a bootstrap variable?
   font-size:18px;
-  color:#4A4A4A;
-  line-height:22px;
+  color:#000;
+  line-height:24px;
 }
 
-.side {
-  padding-right:0;
+h1 {
+  line-height:42px;
+  padding-bottom:15.5px;
+  /*&~ p {
+    padding-top:10px;
+  }*/
+}
+
+h2 {
+  padding-bottom: 3px;
+  line-height:36px;
+}
+
+.col-lg-7 {
+  #pagetitle {
+    margin-right: -30%;
+  }
 }
 
 .main {
-  padding-top:30px;
+  z-index:2;
+  padding-left:29px;
+  padding-top:29px;
   padding-bottom:100px;
   h2 > a,
   h3 > a,
@@ -105,20 +177,42 @@ p {
   & > p > a,
   & > ol li a,
   & > ul li a {
-    border-bottom: 1px solid rgba(74, 74, 74, 05);
+    //text-decoration:underline;
+    border-bottom: 1px solid #c8c8c8;
     &:hover {
-      border-bottom-color: transparent;
+      color: $ddpurple;
+      border-color: $ddpurple;
     }
   }
 
   ul {
     list-style-type: none;
+    li {
+      &:before {
+        content: "–";
+        position: relative;
+        margin-right: 7px;
+        margin-left: -16px;
+        float: left;
+      }
+      p {
+        margin-bottom:0;
+      }
+    }
   }
-  ul li:before {
-    content: "–";
-    position:absolute;
-    margin-right: 7px;
-    margin-left: -16px;
+
+  pre {
+    margin:0 0 24px 0;
+  }
+  p + .highlight {
+    position: relative;
+    margin-top: -0.8rem;
+  }
+  p + h1,
+  p + h2,
+  p + h3,
+  p + h4 {
+    padding-top:11px;
   }
 }
 
@@ -187,19 +281,202 @@ p {
   }
 }
 
+// expand images
+.wide-parent {
+  width:130%;
+  display:block;
+  figure {
+    position:relative;
+    &:before {
+      height: 26px;
+      top: -26px;
+      background-image: linear-gradient(-179deg,hsla(0,0%,100%,0),#fff 77%);
+      content: "";
+      display: inline-block;
+      width: 300px;
+      position: absolute;
+      right: 0;
+      opacity: .85;
+    }
+    &:after {
+      height: 26px;
+      bottom: -26px;
+      background-image: linear-gradient(1turn,hsla(0,0%,100%,0),#fff 77%);
+      content: "";
+      display: inline-block;
+      width: 300px;
+      position: absolute;
+      right: 0;
+      opacity: .85;
+    }
+  }
+}
+// expand tables
+.table-wide {
+  width:130%;
+  background:#fff;
+  position:relative;
+  display: block;
+  overflow-x: auto;
+  overflow-y:hidden;
+  table {
+    display:table;
+  }
+  &:before {
+    height: 26px;
+    top: -26px;
+    background-image: linear-gradient(-179deg,hsla(0,0%,100%,0),#fff 77%);
+    content: "";
+    display: inline-block;
+    width: 300px;
+    position: absolute;
+    right: 0;
+    opacity: .85;
+  }
+  &:after {
+    height: 26px;
+    bottom: -26px;
+    background-image: linear-gradient(1turn,hsla(0,0%,100%,0),#fff 77%);
+    content: "";
+    display: inline-block;
+    width: 300px;
+    position: absolute;
+    right: 0;
+    opacity: .85;
+  }
+}
+
+// tables for integration metrics
+.table-metrics {
+  tr td {
+    &:nth-child(1) {
+      word-break: break-all;
+    }
+    &:nth-child(1),
+    &:nth-child(2) {
+      width:50%;
+    }
+  }
+}
+
+// responsive tables
+.table-responsive-container {
+  position:relative;
+  overflow: hidden;
+  width: 100%;
+  &:after {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 50px;
+    height: 100%;
+    border-radius: 10px 0 0 10px/50% 0 0 50%;
+    box-shadow: -5px 0 10px rgba(0,0,0,.25);
+    content: "";
+    display:none;
+  }
+}
+
+// loader
+.loader,
+.loader:after {
+  border-radius: 50%;
+  width: 10em;
+  height: 10em;
+}
+.loader {
+  //margin: 60px auto;
+  font-size: 10px;
+  position: relative;
+  text-indent: -9999em;
+  border-top: 1.1em solid rgba(234, 234, 234, 0.5);
+  border-right: 1.1em solid rgba(234, 234, 234, 0.5);
+  border-bottom: 1.1em solid rgba(234, 234, 234, 0.5);
+  border-left: 1.1em solid #ffffff;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation: load8 1.1s infinite linear;
+  animation: load8 1.1s infinite linear;
+}
+@-webkit-keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+
+// modal background
+.modal-backdrop.show {
+    opacity: 0.3;
+}
+
+
+// all external links show an icon
+/*a {
+  &:not([href*='localhost']):not([href*='datadoghq.com']):not([href*='datadog.com']):not( [href^='#'] ):not( [href^='/'] ):after {
+    content: " (external)";
+  }
+}*/
+
 
 // Breakpoint styles go here...
 
-//@include media-breakpoint-down(md)
-@media (max-width: 767px) {
-  h1 {
-    font-size:42px;
-  }
+@media (min-width: 1200px) {
+    .container {
+      max-width: 1170px !important;
+    }
 }
 
 //@include media-breakpoint-up(xs) { ... }
 @media (max-width: 575px) {
   html {
     overflow-x: hidden;
+  }
+  .table-responsive-container {
+    &:after {
+      display:block;
+    }
+  }
+}
+
+//@include media-breakpoint-up(sm) { ... }
+@media (max-width: 767px) {
+  table.table-vertical-mobile {
+    td {
+      display:block !important;
+      width:100% !important;
+    }
+  }
+}
+
+//@include media-breakpoint-up(md) { ... }
+@media (max-width: 991px) {
+
+  .main {
+    padding-left: 15px;
+  }
+  .col-lg-7 {
+    #pagetitle {
+      margin-right: 0 !important;
+    }
+  }
+  .wide-parent {
+    width:100%;
   }
 }

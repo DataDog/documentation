@@ -27,9 +27,9 @@ If you are unsure how to set your SQL Server's authentication mode, you may find
 Do note that any of the above changes that you make to your SQL Server will require that you restart your SQL Server before the changes take effect. 
 
 Here's an example of some SQL Server IP/TCP settings that have worked just fine on one of our testing environments (Windows 2012 R2, SQL Server 2014 Express):
-{{< img src="integrations/faq/sql_server_test_1.png" alt="sql_server_test_1" responsive="true" >}}
+{{< img src="integrations/faq/sql_server_test_1.png" alt="sql_server_test_1" responsive="true" popup="true">}}
 
-{{< img src="integrations/faq/sql_server_test_2.png" alt="sql_server_test_2" responsive="true" >}}
+{{< img src="integrations/faq/sql_server_test_2.png" alt="sql_server_test_2" responsive="true" popup="true">}}
 
 ## Empty Connection String?
 
@@ -46,11 +46,11 @@ In order to connect to SQL Server (either hosted on Linux or Windows) from a Lin
 
 https://docs.microsoft.com/en-us/sql/connect/odbc/linux/installing-the-microsoft-odbc-driver-for-sql-server-on-linux
 
-Next, you will need to install the pyodbc module. This can be done by running pip install pyodbc within your Agent’s python environment. For example:
+Next, install the pyodbc module. This can be done by running pip install pyodbc within your Agent’s python environment. For example:
 ```
 $ sudo /opt/datadog-agent/embedded/bin/pip install pyodbc
 ```
-Lastly, you will need to configure your sqlserver.yaml file to define the ODBC driver you installed and enable the ODBC connector.
+Lastly, configure your `sqlserver.yaml` file to define the ODBC driver you installed and enable the ODBC connector.
 
 ```yaml
 init_config:

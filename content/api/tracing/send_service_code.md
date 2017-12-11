@@ -8,13 +8,9 @@ order: 19.2
 `PUT /v0.3/services`
 
 ##### Example Request
-{{< snippet-code-block file="content/api/tracing/code_snippets/send_service.sh" highlight="true" >}}
-{{< snippet-code-block file="content/api/tracing/code_snippets/send_service.rb" highlight="true" >}}
-{{< snippet-code-block file="content/api/tracing/code_snippets/send_service.py" highlight="true" >}}
+{{< code-snippets basename="send_service" >}}
 
 ##### Example Response
 
-{{< snippet-result-code-block file="content/api/tracing/code_snippets/result.send_service.sh" >}}
-{{< snippet-result-code-block file="content/api/tracing/code_snippets/result.send_service.py" >}}
-{{< snippet-result-code-block file="content/api/tracing/code_snippets/result.send_service.rb" >}}
+{{< code-snippets basename="result.send_service" >}}
 

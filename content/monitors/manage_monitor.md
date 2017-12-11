@@ -3,11 +3,24 @@ title: Manage Monitor
 kind: documentation
 autotocdepth: 2
 customnav: monitornav
+further_reading:
+- link: "/monitors/monitor_types"
+  tag: "Documentation"
+  text: Learn how to create a monitor
+- link: "/monitors/notifications"
+  tag: "Documentation"
+  text: Configure your monitor notifications
+- link: "/monitors/downtimes"
+  tag: "Documentation"
+  text: Schedule a downtime to mute a monitor
+- link: "/monitors/faq"
+  tag: "FAQ"
+  text: Monitors FAQ
 ---
 
 The [Manage Monitors](https://app.datadoghq.com/monitors/manage) page lets you run an advanced search of all monitors so you can delete, mute, resolve, or edit service tags for selected monitors in bulk. You can also clone or fully edit any individual monitor in the search results.
 
-{{< img src="monitors/manage_monitor/manage_monitor_page.png" alt="manage monitor page" responsive="true">}}
+{{< img src="monitors/manage_monitor/manage_monitor_page.png" alt="manage monitor page" responsive="true" popup="true" >}}
 
 ## Find the Monitors
 
@@ -66,11 +79,11 @@ There are a few caveats regarding quoted fields:
 
 When you have found the monitors you were looking for, select one or more that you wish you update using the checkboxes next to each result. You can select all results by ticking the topmost checkbox next to the STATUS column heading. Modify the monitors in bulk using the buttons at the top right of the search results: Mute, Resolve, Delete, and Edit Service Tags.
 
-{{< img src="monitors/manage_monitor/manage-monitors-mute.png" alt="manage-monitors-mute" responsive="true">}}
+{{< img src="monitors/manage_monitor/manage-monitors-mute.png" alt="manage-monitors-mute" responsive="true" popup="true" >}}
 
 To edit an individual monitor, hover over it and use the buttons to the far right in its row: Edit, Clone, Mute, Delete. To see more detail on a monitor, click its Name to visit its status page.
 
-{{< img src="monitors/manage_monitor/manage-monitors-hover-clone.png" alt="manage-monitors-hover-clone" responsive="true">}}
+{{< img src="monitors/manage_monitor/manage-monitors-hover-clone.png" alt="manage-monitors-hover-clone" responsive="true" popup="true" >}}
 
 ## Manage Triggered Monitors with group-level granularity
 
@@ -85,10 +98,6 @@ In writing your search queries, you can use all the same fields available on the
 * It adds the `triggered` field, which lets you filter monitors by how long they've been triggered.
 * It also adds the `group` field, which helps you narrow down search results for monitors grouped by more than one thing. Say you have a monitor grouped by `host` and `env`. You search for this monitor by title and get four rows, where the groups are `host:web01,env:dev`, `host:web02,env:dev`, `host:web01,env:prod`, and `host:web02,env:prod`. Use the `group` field to only show, for example, prod hosts (`group:"env:prod"`) or web02 hosts (`group:"host:web02"`).
 
-## What's next ? 
+## Further Reading 
 
-* [Learn how to create a monitor](/monitors/monitor_types)
-* [Configure your monitor notifications](/monitors/notifications)
-* [Schedule a dowtime to mute a monitor](/monitors/downtimes)
-* [See all your checks into one place](/monitors/check_summary)
-* [Consult our FAQ](/monitors/faq)
+{{< partial name="whats-next/whats-next.html" >}}

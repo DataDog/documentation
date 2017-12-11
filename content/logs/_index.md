@@ -1,24 +1,22 @@
 ---
 title: Log Collection
 kind: Documentation
-autotocdepth: 2
-hideguides: true
 customnav: lognav
 description: "Configure your Datadog agent to gather logs from your host, containers & services."
-beta: true
 ---
 
 <div class="alert alert-info">
-Datadog's Logs is currently available via private beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
+Datadog's Logs is currently available via public beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
 </div>
 
 ## Overview
-{{< img src="logs/index/pipeline_sketch.png" alt="Pipelines sketch" responsive="true" >}}
+
+{{< img src="logs/index/pipeline_sketch.png" alt="Pipelines sketch" responsive="true" popup="true">}}
 
 ## Getting started with the Agent
 
 Log collection requires an Agent version >= 6.0. Older versions of the Agent do not include the `Log collection` interface that we'll be using.
-If you are not using it already, please follow the installation instructions [here](https://github.com/DataDog/datadog-agent/blob/master/docs/beta/upgrade.md). We highly recommend to do a fresh install instead of the upgrade. 
+If you are not using it already, please follow the installation instructions [here](https://github.com/DataDog/datadog-agent/blob/master/docs/beta/upgrade.md).
 
 Collecting logs is **disabled** by default in the Datadog Agent, you need to enable it in `datadog.yaml`:
 
@@ -30,13 +28,14 @@ Collecting logs is **disabled** by default in the Datadog Agent, you need to ena
 
 To start collecting logs for a given integration, you need to uncomment the logs section in that integration's yaml file, and configure it for your environment.
 
-If an integration does not support logs by default, you may need to use use the custom file configuration below.
+If an integration does not support logs by default, you may need to use the custom file configuration below.
 
 <div class="alert alert-warning">
 During the beta phase of Datadog Logs, not all integrations include log configurations out of the box. A current list of supported integrations is available below.
 </div>
 
-### Crawlers
+
+### Cloud
 * [AWS](/logs/aws)
 
 ### Frameworks
@@ -70,10 +69,10 @@ The Datadog Agent can collect logs from files or the network (TCP or UDP) and fo
 ### Tail existing files
 Set `type` to **file** then specify the absolute `path` to the log file you want to tail.
 
-Example: 
+Example:
 If you want to gather your python app logs for instance stored in **/var/log/myapp1.log** and **/var/log/python.log** you would create a `python.yaml` file as follows:
 
-Please note that for the yaml file to be considered valid by the agent, they must include an "init_config" section and have at least one "instance" defined as shown below:
+Note that for the yaml file to be considered valid by the agent, they must include an "init_config" section and have at least one "instance" defined as shown below:
 
 ```yaml
 init_config:
@@ -100,7 +99,7 @@ logs:
 ### Stream logs through TCP/UDP
 Set `type` to **tcp** or **udp** depending of your protocol then specify the `port` of your incomming connection.
 
-Example: 
+Example:
 If your PHP application does not log to a file, but instead forwards its logs via TCP, you will need to create a configuration file that specifies the port to receive as in the example below:
 
 ```yaml
@@ -116,7 +115,43 @@ logs:
     source: php
     sourcecategory: front
 
-``
+```
+
+
+### Docker log collection
+
+Agent 6 is able to collect logs from containers. It can be installed [on the host](https://github.com/DataDog/datadog-agent/blob/master/docs/beta/upgrade.md) or [in a container](https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent).
+
+For containerized installation, here are the command related to log collection:
+
+* `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw`: Store on disk where to pick log file or container stdout when we restart
+* `-v /var/run/docker.sock:/var/run/docker.sock:ro`: Give access to docker api to collect container stdout and stderr
+* `-v /my/path/to/conf.d:/conf.d:ro`: mount configuration repository
+* `-v /my/file/to/tail:/tail.log:ro`: Foreach log file that should be tailed by the agent (not required if you only want to collect container stdout or stderr)
+* `DD_LOG_ENABLED=true`: Activate log collection (disable by default)
+* `-e DD_API_KEY=<YOUR_API_KEY>`: Set the api key
+
+To start collecting logs for a given container filtered by image or label, update the integration log section in its yaml file, or create a custom yaml file.
+Set the type to `docker` and set the proper image or label as shown in the below example for nginx containers with a `httpd` image:
+
+```yaml
+init_config:
+
+instances:
+    [{}]
+
+#Log section
+
+logs:
+   - type: docker
+     image: httpd    #or label: mylabel:mylabelvalue
+     service: nginx
+     source: nginx
+     sourcecategory: http_web_access
+
+```
+
+If the agent is containerized, see [here](https://github.com/DataDog/docker-dd-agent#configuration-files) how to mount the YAML configuration files to the agent container.
 
 ### Filter logs
 
@@ -147,7 +182,7 @@ logs:
 
 ### Search and replace content in your logs
 
-If your logs contain sensitive information that you wish you redact, you can configure sequences to mask in your configuration file. This is accomplished by using the `log_processing_rules` parameter in your configuration file with the **mask_sequences** `type`
+If your logs contain sensitive information that you wish you redact, you can configure sequences to mask in your configuration file. This is accomplished by using the `log_processing_rules` parameter in your configuration file with the **mask_sequences** `type`.
 
 This replaces all matched groups with `replace_placeholder` parameter value.
 Example: Redact credit card numbers
@@ -171,13 +206,51 @@ logs:
         pattern: (?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})
 ```
 
+### Multi-line
+
+If your logs are not sent in JSON and you want to aggregate several lines into one single log, you can configure the agent to detect a new log using a specific regex pattern instead of having one log per line. This is accomplished by using the `log_processing_rules` parameter in your configuration file with the **multi_line** `type`.
+
+This aggregates all lines into one single log until the given pattern is detected again. This is especially useful for database logs and stack traces.
+Example: Every postgres log line starts with a timestamp in `YYYY-dd-mm` format. The below lines would be sent as two logs.
+
+```
+2017-12-05 10:10:46.981 UTC [1107] postgres psql postgres [local] 5a0c58f6.453 LOG:  statement: SELECT d.datname as “Name”,
+               pg_catalog.pg_get_userbyid(d.datdba) as “Owner”,
+               pg_catalog.pg_encoding_to_char(d.encoding) as “Encoding”,
+               d.datcollate as “Collate”,
+               d.datctype as “Ctype”,
+               pg_catalog.array_to_string(d.datacl, E’\n’) AS “Access privileges”
+        FROM pg_catalog.pg_database d
+        ORDER BY 1;
+2017-12-05 10:55:49.061 UTC [20535] postgres psql postgres [local] 5a0d60a5.5037 LOG:  incomplete startup packet
+```
+
+To achieve this, you need to use the following `log_processing_rules`:
+
+```yaml
+init_config:
+
+instances:
+    [{}]
+
+logs:
+ - type: file
+   path: /var/log/pg_log.log
+   service: database
+   source: postgresql
+   log_processing_rules:
+      - type: multi_line
+        name: new_log_start_with_date
+        pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
+```
+
 ## Reserved attributes 
 
-If your logs are formatted as JSON, please note that some attributes are reserved for use by Datadog:
+If your logs are formatted as JSON, be aware that some attributes are reserved for use by Datadog:
 
 ### *date* attribute
 
-By default Datadog generates a timestamp and appends it in a date attribute when logs are received. 
+By default Datadog generates a timestamp and appends it in a date attribute when logs are received.
 However, if a JSON formatted log file includes one of the following attributes, Datadog will interpret its value as the the log’s official date:
 
 * `@timestamp`
@@ -223,14 +296,16 @@ Using the Datadog Agent or the RFC5424 format automatically set the service valu
 
 You can now control the global hostname, service, timestamp, and severity main mapping that are applied before the processing pipelines. This is particularly helpful if logs are sent in JSON or from an external agent.
 
-{{< img src="logs/index/reserved_attribute.png" alt="Reserved Attribute" responsive="true" >}}
+{{< img src="logs/index/reserved_attribute.png" alt="Reserved Attribute" responsive="true" popup="true">}}
 
 To change the default values for each of the reserved attributes, go to the pipeline page and edit the `Reserved Attribute mapping`:
 
-{{< img src="logs/index/reserved_attribute_tile.png" alt="Reserved Attribute Tile" responsive="true" >}}
+{{< img src="logs/index/reserved_attribute_tile.png" alt="Reserved Attribute Tile" responsive="true" popup="true">}}
 
-## What's next
+## Further Reading
 
-* Learn how to [explore your logs](/logs/explore)
-* Learn how to [process your logs](/logs/processing)
-* Learn more about [parsing](/logs/parsing)
+{{< whatsnext >}}
+    {{< nextlink href="/logs/explore" tag="Documentation" >}}Learn how to explore your logs{{< /nextlink >}}
+    {{< nextlink href="/logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers" tag="FAQ" >}}How to Send Logs to Datadog via External Log Shippers{{< /nextlink >}}
+    {{< nextlink href="/logs/parsing" tag="Documentation" >}}Learn more about parsing{{< /nextlink >}}
+{{< /whatsnext >}}

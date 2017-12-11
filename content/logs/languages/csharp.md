@@ -1,9 +1,20 @@
 ---
 title: C# Log Collection
 kind: documentation
-autotocdepth: 2
 customnav: lognav
-beta: true
+further_reading:
+- link: "/logs/processing"
+  tag: "Documentation"
+  text: Learn how to process your logs
+- link: "/logs/parsing"
+  tag: "Documentation"
+  text: Learn more about parsing
+- link: "/logs/explore"
+  tag: "Documentation"
+  text: Learn how to explore your logs
+- link: /logs/faq/log-collection-troubleshooting-guide
+  tag: "FAQ"
+  text: Log Collection Troubleshooting Guide
 ---
 
 To send your C# logs to Datadog, we recommend logging to a file and then tailing that file with your Datadog agent. Here are setup examples for the `log4Net`, `serilog` and `Nlog` logging libraries
@@ -245,4 +256,9 @@ logs:
     sourcecategory: sourcecode
 ```
 
+
 That's it! Now, all your logs are going to be in proper JSON automatically understood by your Datadog application.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

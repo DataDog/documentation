@@ -52,6 +52,7 @@ customnav: integrationsnavv
 ## Elasticsearch 
 
 * [Why isn't Elasticsearch sending all my metrics?](/integrations/faq/why-isn-t-elasticsearch-sending-all-my-metrics)
+* [Agent can't connect](/integrations/faq/elastic-agent-can-t-connect)
 
 ## Git & Github
 
@@ -78,6 +79,9 @@ customnav: integrationsnavv
 
 * [Troubleshooting and Deep Dive for Kafka](/integrations/faq/troubleshooting-and-deep-dive-for-kafka)
 
+* [Agent failed to retrieve RMIServer stub](/integrations/faq/agent-failed-to-retrieve-rmierver-stub)
+* [Producer and Consumer metrics don't appear in my Datadog application](/integrations/faq/producer-and-consumer-metrics-don-t-appear-in-my-datadog-application)
+ 
 ## Kubernetes 
 
 * [Can I install the agent on my Kubernetes master node(s)](/integrations/faq/can-i-install-the-agent-on-my-kubernetes-master-node-s)
@@ -94,6 +98,7 @@ customnav: integrationsnavv
 * [How to collect metrics from custom MySQL queries](/integrations/faq/how-to-collect-metrics-from-custom-mysql-queries)
 * [Can I collect SQL Server performance metrics beyond what is available in the sys.dm_os_performance_counters table? Try WMI](/integrations/faq/can-i-collect-sql-server-performance-metrics-beyond-what-is-available-in-the-sys-dm-os-performance-counters-table-try-wmi)
 * [How can I collect more metrics from my SQL Server integration?](/integrations/faq/how-can-i-collect-more-metrics-from-my-sql-server-integration)
+* [Database user lacks privileges](/integrations/faq/database-user-lacks-privileges)
 
 ## Network
 * [How to send TCP/UDP host metrics via the Datadog API ?](/integrations/faq/how-to-send-tcp-udp-host-metrics-via-the-datadog-api)
@@ -119,6 +124,9 @@ customnav: integrationsnavv
 
 ## VMWare
 * [Can I limit the number of VMs that are pulled in via the VMWare integration?](/integrations/faq/can-i-limit-the-number-of-vms-that-are-pulled-in-via-the-vmware-integration)
+
+## Webhooks
+* [How to make a Trello Card using Webhooks](/integrations/faq/how-to-make-trello-card-using-webhooks)
 
 ## Windows
 

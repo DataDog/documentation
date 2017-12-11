@@ -15,4 +15,4 @@ So for pylons it might be `trace.pylons.request.hits{service:mcnulty}`.
 
 You can use the Chrome inspector on the traces page to find the metric name in the **batch_query** call:
 
-{{< img src="tracing/faq/chrome_inspector.png" alt="Chrome Inspector" responsive="true" >}}
+{{< img src="tracing/faq/chrome_inspector.png" alt="Chrome Inspector" responsive="true" popup="true">}}

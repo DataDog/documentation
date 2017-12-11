@@ -1,9 +1,20 @@
 ---
 title: Java Log Collection
 kind: documentation
-autotocdepth: 2
 customnav: lognav
-beta: true
+further_reading:
+- link: "/logs/processing"
+  tag: "Documentation"
+  text: Learn how to process your logs
+- link: "/logs/parsing"
+  tag: "Documentation"
+  text: Learn more about parsing
+- link: "/logs/explore"
+  tag: "Documentation"
+  text: Learn how to explore your logs
+- link: /logs/faq/log-collection-troubleshooting-guide
+  tag: "FAQ"
+  text: Log Collection Troubleshooting Guide
 ---
 
 Java logs are quite complex to handle, mainly because of stack traces. These stack traces are split into multiple lines which makes them difficult to associate to the original log event:
@@ -159,3 +170,7 @@ logger.info("Emitted 1001 messages during the last 93 seconds");
 ```
 
 **MDC are great but for some reason only string types are allowed. Therefore, providing numerical values for metrics with MDCs would be a bad idea**
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

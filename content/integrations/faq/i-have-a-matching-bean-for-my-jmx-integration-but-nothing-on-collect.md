@@ -32,17 +32,17 @@ java.lang.NumberFormatException: For input string: "false"
 This means that your  Hadoop:service=HBase,name=Master,sub=Server - tag.isActiveMaster is returning string values.
 
 Check your `jmx.yaml` file, the following excerpt should show something similar: 
-{{< img src="integrations/faq/jmx_conf.png" alt="jmx_conf" responsive="true" >}}
+{{< img src="integrations/faq/jmx_conf.png" alt="jmx_conf" responsive="true" popup="true">}}
 
 
 
 The java.lang.String metric_type confirms the issue you were seeing in the logs. 
 
-To resolve this issue please use [this gist](https://github.com/DataDog/jmxfetch/blob/master/src/test/resources/jmx.yaml#L32-L37) that we created to update your file accordingly. 
+To resolve this issue, use [this gist](https://github.com/DataDog/jmxfetch/blob/master/src/test/resources/jmx.yaml#L32-L37) that we created to update your file accordingly. 
 
 That means you'll probably need to change the associated metric_type , and have your jmx.yaml look like this : 
-{{< img src="integrations/faq/jmx_metric_type.png" alt="jmx_metric_type" responsive="true" >}}
+{{< img src="integrations/faq/jmx_metric_type.png" alt="jmx_metric_type" responsive="true" popup="true">}}
 
 Jmxfetch will know it's a string and will use this rule to transform that into a numeric metric. 
 
-Still having issue ? Please send over a description of your problem to support@datadoghq.com along with a copy of your logs and config through a flare. 
+Still having issue ? Send over a description of your problem to support@datadoghq.com along with a copy of your logs and config through a flare. 

@@ -12,7 +12,7 @@ customnav: agentnav
 
 You may graph the metric datadog.dogstatsd.packet.count for the host(s) encountering the gaps:
 
-{{< img src="agent/faq/dogstatsd_metrics.png" alt="DogstasD Metrics" responsive="true" >}}
+{{< img src="agent/faq/dogstatsd_metrics.png" alt="DogstasD Metrics" responsive="true" popup="true">}}
 
 ## How do I resolve this?
 

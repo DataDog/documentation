@@ -1,9 +1,20 @@
 ---
 title: Ruby on Rails Log Collection
 kind: documentation
-autotocdepth: 2
 customnav: lognav
-beta: true
+further_reading:
+- link: "/logs/processing"
+  tag: "Documentation"
+  text: Learn how to process your logs
+- link: "/logs/parsing"
+  tag: "Documentation"
+  text: Learn more about parsing
+- link: "/logs/explore"
+  tag: "Documentation"
+  text: Learn how to explore your logs
+- link: /logs/faq/log-collection-troubleshooting-guide
+  tag: "FAQ"
+  text: Log Collection Troubleshooting Guide
 ---
 
 We are going to use `lograge` here as it'll help us bringing some sanity in logs that are noisy and hardly parseable. 
@@ -55,10 +66,10 @@ config.lograge.custom_options = lambda do |event|
 end
 ```
 
-**Note**:You can also ask Lograge to add contextual information to your logs. Please refer to the official doc if you are interested: [Lograge documentation](https://github.com/roidrage/lograge#installation)
+**Note**:You can also ask Lograge to add contextual information to your logs. Refer to the official doc if you are interested: [Lograge documentation](https://github.com/roidrage/lograge#installation)
 
 ## Disable log coloration
-As it would be weirdly displayed in your Datadog application please disable your log coloration:
+As it would be weirdly displayed in your Datadog application, disable your log coloration:
 
 ```ruby
 config.colorize_logging = false
@@ -205,3 +216,5 @@ ActiveSupport::Notifications.subscribe('grape') do |name, starts, ends, notifica
     grape_logger.info payload
 end
 ```
+
+{{< partial name="whats-next/whats-next.html" >}}

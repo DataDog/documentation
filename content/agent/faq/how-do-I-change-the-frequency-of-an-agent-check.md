@@ -2,6 +2,13 @@
 title: How do I change the frequency of an agent check?
 kind: faq
 customnav: agentnav
+further_reading:
+- link: "/agent/"
+  tag: "Documentation"
+  text: Learn more about the Datadog Agent
+- link: "/agent/agent_checks"
+  tag: "Documentation"
+  text: Learn more about Agent checks
 ---
 
 We typically recommend not adjusting the default frequency of an agent check, however, this may be achieved by adding a new parameter to your integrations YAML configuration.
@@ -17,3 +24,5 @@ You can add this parameter at the **init_config** level or at the **instance** l
 Note: the agent runs every 15 seconds and this parameter makes the agent not collect new instance data unless data was collected for the same instance more than `min_collection_interval` seconds ago. This only works for values > 15, it's not possible to have the agent collect data more frequently this way.
 
 Note: As of version 5.14 of the Datadog Agent, the `min_collection_interval` parameter is available for [Java based checks](/integrations/java/) (jmx.yaml, cassandra.yaml, tomcat.yaml, solr.yaml, activemq.yaml, activemq_xml.yaml).
+
+{{< partial name="whats-next/whats-next.html" >}}

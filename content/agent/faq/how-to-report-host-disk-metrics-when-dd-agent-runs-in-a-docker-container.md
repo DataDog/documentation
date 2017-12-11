@@ -2,6 +2,16 @@
 title: How to report host disk metrics when dd-agent runs in a docker container?
 kind: faq
 customnav: agentnav
+further_reading:
+- link: "/agent/"
+  tag: "Documentation"
+  text: Learn more about the Datadog Agent
+- link: "/integrations/docker_daemon"
+  tag: "Integration"
+  text: Learn more about the Datadog-SNMP integration
+- link: "/integrations/disk"
+  tag: "Integration"
+  text: Learn more about the Datadog-Disk integration
 ---
 
 dd-agent has two mechanisms to report disk statistics: the common disk check (works for any storage mounted on the host and exposed to the container as a volume) and the collect_disk_stats option to the docker_daemon check (only works for devicemapper storage, for example ECS).
@@ -47,3 +57,7 @@ The collect_disk_stats feature of docker_daemon only support devicemapper-backed
 
 This option enables container size computation through the docker ps system. It virtually runs df in every container and will not scale to large container count.
 We run the size computation once every 5 runs to reduce system impact though
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

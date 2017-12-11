@@ -6,9 +6,10 @@ git_integration_title: kubernetes
 newhlevel: true
 updated_for_agent: 5.8.5
 description: "{{< get-desc-from-git >}}"
+is_public: true
 ---
 
-{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard" responsive="true" >}}
+{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard" responsive="true" popup="true">}}
 
 ## Overview
 

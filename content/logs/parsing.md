@@ -1,14 +1,22 @@
 ---
 title: Parsing
 kind: documentation
-autotocdepth: 2
 customnav: lognav
 description: "Parse your logs using the Grok Processor"
-beta: true
+further_reading:
+- link: "/logs/processing"
+  tag: "Documentation"
+  text: Learn how to process your logs
+- link: "/logs/faq/how-to-investigate-a-log-parsing-issue"
+  tag: "FAQ"
+  text: How to investigate a log parsing issue?
+- link: "/logs/faq/log-parsing-best-practice"
+  tag: "FAQ"
+  text: Log Parsing - Best Practice
 ---
 
 <div class="alert alert-info">
-Datadog's Logs is currently available via private beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
+Datadog's Logs is currently available via public beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
 </div>
 
 
@@ -37,14 +45,15 @@ With the following parsing rule:
 MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):connect_date}
 ```
 
-You would have at the end this structued log:
+You would have at the end this structured log:
 
-{{< img src="logs/parsing/parsing_example_1.png" alt="Parsing example 1" responsive="true" >}}
+{{< img src="logs/parsing/parsing_example_1.png" alt="Parsing example 1" responsive="true" popup="true">}}
 
 ## Matcher
 
 Here is the list of all the matchers natively implemented by Datadog:
 
+{{% table responsive="true" %}}
 |||
 |:---|:---|
 |**Pattern**| **Usage**|
@@ -72,10 +81,12 @@ Here is the list of all the matchers natively implemented by Datadog:
 |`hostname`|matches a hostname|
 |`ipOrHost`|matches a hostname or ip|
 |`port` |matches a port number |
+{{% /table %}}
 
 ## Filter
 Here is the list of all the filters natively implemented by Datadog:
 
+{{% table responsive="true" %}}
 |||
 |:---|:---|
 |**Pattern**| **Usage**|
@@ -96,6 +107,7 @@ Here is the list of all the filters natively implemented by Datadog:
 |`scale(factor)` | multiplies the expected numerical value by the provided factor.|
 |`array([[openCloseStr, ] separator][, subRuleOrFilter)` | parses a string sequence of tokens and returns it as an array.|
 |`url`|parses a url and returns all the tokenized members (domain, query params, port, etc) in a JSON object. [More info](/logs/processing/#url-parser)|
+{{% /table %}}
 
 ## Examples
 Below you will find some examples demonstrating how to use parsers:
@@ -122,18 +134,19 @@ Rule
 rule keyvalue("="," "))
 ```
 
-{{< img src="logs/parsing/parsing_example_2.png" alt="Parsing example 2" responsive="true" >}}
+{{< img src="logs/parsing/parsing_example_2.png" alt="Parsing example 2" responsive="true" popup="true">}}
 
 You don't need to specify the name of your parameters as they were already contained in the log.
 If you add an **extract** parameter in your rule pattern you would have:
 
-{{< img src="logs/parsing/parsing_example_2_bis.png" alt="Parsing example 2 bis" responsive="true" >}}
+{{< img src="logs/parsing/parsing_example_2_bis.png" alt="Parsing example 2 bis" responsive="true" popup="true">}}
 
 ### Parsing dates
 
 The date matcher transforms your timestamp in the EPOCH format.
 
 
+{{% table responsive="true" %}}
 ||||
 |:---|:----|:----|
 |**Raw string** | **Parsing rule** | **Result** |
@@ -146,7 +159,7 @@ The date matcher transforms your timestamp in the EPOCH format.
 |06/Feb/2009:12:14:14.655 | `%{date("dd/MMM/yyyy:HH:mm:ss.SSS"):date}` | {“date”: 1233922454655}|
 |Thu Jun 16 08:29:03 2016 | `%{date("EEE MMM dd HH:mm:ss yyyy","Europe/Paris"):date}` |{"date": 1466058543000}|
 |2007-08-31 19:22:22.427 ADT|`%{date("yyyy-MM-dd HH:mm:ss.SSS z"):date}`|{"date": 1188675889244}|
-
+{{% /table %}}
 Parsing a date **doesn't** set its value as the log official date, for this you need to use the Log Date Remapper [Log Date Remapper](/logs/processing/#log-date-remapper) in a subsequent processor.
 
 ### Conditional pattern
@@ -168,9 +181,9 @@ MyParsingRule (%{integer:user.id}|%{word:user.firstname}) connected on %{date("M
 
 **Results**:
 
-{{< img src="logs/parsing/parsing_example_4.png" alt="Parsing example 4" responsive="true" >}}
+{{< img src="logs/parsing/parsing_example_4.png" alt="Parsing example 4" responsive="true" popup="true">}}
 
-{{< img src="logs/parsing/parsing_example_4_bis.png" alt="Parsing example 4 bis" responsive="true" >}}
+{{< img src="logs/parsing/parsing_example_4_bis.png" alt="Parsing example 4 bis" responsive="true" popup="true">}}
 
 ### Optional attribute 
 
@@ -188,9 +201,9 @@ MyParsingRule %{word:user.firstname} (%{integer:user.id} )?connected on %{date("
 
 **Note**: you may usually need to include the space in the optional part otherwise you would end up with two spaces and the rule would not match anymore.
 
-{{< img src="logs/parsing/parsing_example_5.png" alt="Parsing example 5" responsive="true" >}}
+{{< img src="logs/parsing/parsing_example_5.png" alt="Parsing example 5" responsive="true" popup="true">}}
 
-{{< img src="logs/parsing/parsing_example_5_bis.png" alt="Parsing example 5 bis" responsive="true" >}}
+{{< img src="logs/parsing/parsing_example_5_bis.png" alt="Parsing example 5 bis" responsive="true" popup="true">}}
 
 ### Regex 
 Use the regex matcher to match any substring of your log message based on literal regex rules.
@@ -206,9 +219,9 @@ Here we just look for the id to extract
 ```
 MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-Z0-9]*"):user.id} .*
 ```
-{{< img src="logs/parsing/regex_parsing.png" alt="Parsing example 6" responsive="true" >}}
 
-## What's next 
+{{< img src="logs/parsing/regex_parsing.png" alt="Parsing example 6" responsive="true" popup="true">}}
 
-* Learn how to [explore your logs](/logs/explore)
-* Learn how to [process your logs](/logs/processing)
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

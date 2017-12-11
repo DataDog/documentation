@@ -52,7 +52,7 @@ Here is a set of functions there of the pattern &lt;timeperiod&gt;_before(). The
 
 Here is an example of system.load.1 with the hour_before value shown as a dotted line. In this particular example, you can see the machine was started at 6:30am and the hour_before values show up at the 7:30 mark. Of course this example was created specifically so you can see the hour_before values match up with the actual values.
 
-{{< img src="graphing/miscellaneous/functions/simple_hour_before_example.png" alt="simple hour before example" responsive="true" >}}
+{{< img src="graphing/miscellaneous/functions/simple_hour_before_example.png" alt="simple hour before example" responsive="true" popup="true">}}
 
 For now, using functions like hour_before is out of scope for the graphical editor so you have to use the JSON editor. Here is the JSON for this graph:
 
@@ -87,7 +87,7 @@ For now, using functions like hour_before is out of scope for the graphical edit
 
 Here is an example of nginx.net.connections with the day_before value shown as a lighter, thinner line. In this example, you can see a week's worth of data which makes the day_before data easy to identify.
 
-{{< img src="graphing/miscellaneous/functions/simple_day_before_example.png" alt="simple day before example" responsive="true" >}}
+{{< img src="graphing/miscellaneous/functions/simple_day_before_example.png" alt="simple day before example" responsive="true" popup="true">}}
 
 For now, using functions like day_before is out of scope for the graphical editor so you have to use the JSON editor. Here is the JSON for this graph:
 
@@ -116,9 +116,9 @@ For now, using functions like day_before is out of scope for the graphical edito
 
 ### week_before()
 
-Here is an example of cassandra.db.read_count with the week_before value shown as a dotted line. In this example, you can see about three weeks' worth of data which makes the week_before data easy to identify.
+Here is an example of `cassandra.db.read_count` with the week_before value shown as a dotted line. In this example, you can see about three weeks' worth of data which makes the week_before data easy to identify.
 
-{{< img src="graphing/miscellaneous/functions/simple_week_before_example.png" alt="simple week before example" responsive="true" >}}
+{{< img src="graphing/miscellaneous/functions/simple_week_before_example.png" alt="simple week before example" responsive="true" popup="true">}}
 
 For now, using functions like week_before is out of scope for the graphical editor so you have to use the JSON editor. Here is the JSON for this graph:
 
@@ -151,7 +151,7 @@ For now, using functions like week_before is out of scope for the graphical edit
 
 Here is an example of `aws.ec2.cpuutilization` with the month_before value shown as a thin, solid line.
 
-{{< img src="graphing/miscellaneous/functions/simple_month_before_example.png" alt="simple month before example" responsive="true" >}}
+{{< img src="graphing/miscellaneous/functions/simple_month_before_example.png" alt="simple month before example" responsive="true" popup="true">}}
 
 For now, using functions like month_before is out of scope for the graphical editor so you have to use the JSON editor. Here is the JSON for this graph:
 
@@ -249,7 +249,7 @@ The method can be sum/min/max/count/avg and time is in seconds. You can use eith
 
 ### .as_count() or as_rate()
 
-These functions are only intended for metrics submitted as rates or counters via statsd. These functions will have no effect for other metric types. For more on details about how to use `.as_count()` and `.as_rate()` please see [our blog post][1].
+These functions are only intended for metrics submitted as rates or counters via statsd. These functions will have no effect for other metric types. For more on details about how to use `.as_count()` and `.as_rate()` see [our blog post][1].
 
 Note: The only available query with `as_count()` is `sum()` (unless using a rollup summary), which is the only mathematical accurate function with such behavior.
 
@@ -291,7 +291,7 @@ Fit a robust regression trend line using Huber loss:
 
 The most common type of linear regression -- ordinary least squares (OLS) -- can be heavily influenced by a small number of points with extreme values. Robust regression is an alternative method for fitting a regression line; it is not influenced as strongly by a small number of extreme values. As an example, see the following plot.
 
-{{< img src="graphing/miscellaneous/functions/robust-trend.png" alt="robust trend" responsive="true" >}}
+{{< img src="graphing/miscellaneous/functions/robust-trend.png" alt="robust trend" responsive="true" popup="true">}}
 
 The original metric is shown as a solid blue line. The purple dashed line is an OLS regression line, and the yellow dashed line is a robust regression line. The one short-lived spike in the metric leads to the OLS regression line trending upward, but the robust regression line ignores the spike and does a better job fitting the overall trend in the metric.
 
@@ -307,7 +307,7 @@ Approximate the metric with a piecewise function composed of constant-valued seg
 ### anomalies()
 Overlay a gray band showing the expected behavior of a series based on past behavior; see our [anomaly Monitor][2] page for more info.
 ### outliers()
-Highlight outlier series; see our [outlier Monitor][3] page for more info.
+Highlight outliers series; see our [Outlier Monitor][3] page for more info.
 
 [1]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing/
 [2]: /monitors/monitor_types/anomaly

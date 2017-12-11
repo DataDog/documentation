@@ -8,7 +8,7 @@ customnav: tracingnav
 
 An environment is a first class dimension that you can use to scope a whole Datadog APM application.
 
-Some display settings can be shared across environments, but all the measurable data (traces/metrics/statistics) can not be reaggregated across multiple environments.
+Some display settings can be shared across environments, but all the measurable data (traces/metrics/statistics) can not be re-aggregated across multiple environments.
 
 Use cases can be:
 
@@ -18,7 +18,7 @@ Use cases can be:
 Environments are tags, therefore they must follow the following rules:
 
 * They must start with a letter.
-* Other characters must be alphanumeric lower case unicode characters, underscores, minuses, colons, periods or slashes.
+* Other characters must be alphanumeric lower case Unicode characters, underscores, minuses, colons, periods or slashes.
 * They must not be more than 100 characters long.
 
 Environments in traces and configuration files will be normalized:

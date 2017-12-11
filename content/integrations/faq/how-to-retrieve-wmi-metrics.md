@@ -190,7 +190,7 @@ instances:
 # values for your WMI query. The examples below show how you can tag your
 # process metrics with the process name (giving a tag of "name:app_name").
     tag_by: Name
-# Please note that bellow works on Window >= 2008, as process names are appended a `#XYZ` where `XYZ` is an incremental numebr
+# Note that bellow works on Window >= 2008, as process names are appended a `#XYZ` where `XYZ` is an incremental numebr
 # If running on Windows 2003, use a different uniq value like `tag_by: IDProcess`
 ```
 

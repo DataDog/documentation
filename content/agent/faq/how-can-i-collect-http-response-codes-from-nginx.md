@@ -2,8 +2,15 @@
 title: How can I collect HTTP response codes from Nginx?
 kind: faq
 customnav: agentnav
+further_reading:
+- link: "/agent/"
+  tag: "Documentation"
+  text: Learn more about the Datadog Agent
+- link: "/integrations/nginx"
+  tag: "Integration"
+  text: Learn more about Datadog-Nginx integration
 ---
-The Datadog integration collects HTTP response codes and more for NGINX Plus, however, to collect similar metrics for non-Plus you'll need to parse the access logs.
+The Datadog integration collects HTTP response codes and more for NGINX Plus, however, to collect similar metrics for non-Plus parse the access logs.
 
 The following script was provided by a Datadog customer (Credit: Ganesh Swami), it shows how it's possible to collect 5XX codes: https://gist.github.com/gane5h/78cd17c742e618e2c606
 
@@ -76,7 +83,11 @@ Everything looks good, so let's generate some HTTP requests using the curl comma
 ## Visualizing metrics
 
 As you can see from the code, the parser will generate a nginx.net.avg_response gauge metric for each request. Let's make sure that the metric was received by Datadog, by browsing the [Metric Summary](https://app.datadoghq.com/metric/summary) page:
-{{< img src="agent/faq/metric_summary_page_nginx.png" alt="Metric summary Page" responsive="true" >}}
+{{< img src="agent/faq/metric_summary_page_nginx.png" alt="Metric summary Page" responsive="true" popup="true">}}
 
 We can now plot the metric in Metric Explorer:
-{{< img src="agent/faq/plot_nginx_metric.png" alt="Plot Nginx metric" responsive="true" >}}
+{{< img src="agent/faq/plot_nginx_metric.png" alt="Plot Nginx metric" responsive="true" popup="true">}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

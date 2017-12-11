@@ -1,5 +1,5 @@
 #!/bin/sh
-# Make sure you replace the API and/or APP key below
+# Replace the API and/or APP key below
 # with the ones for your account
 
 api_key=9775a026f1ca7d1c6c5af9d94d9595a4

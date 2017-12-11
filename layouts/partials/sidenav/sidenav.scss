@@ -37,9 +37,14 @@ aside.sidenav {
   z-index:2;
   padding-right:15px;
   padding-bottom: 50px;
+
+  .sticky {
+    .col {
+      padding-right:0;
+    }
+  }
+
   &> .row {
-    overflow-x: hidden;
-    overflow-y: auto;
     &:before,
     &:after {
       content:"";
@@ -59,17 +64,20 @@ aside.sidenav {
   }
 
   h4 {
-    padding:10px 0 10px 6px;
+    padding:10px 0 10px 15px;
     color:$ddpurple;
     font-size:24px;
     font-weight:200;
   }
+
   .sidenav-search {
+    margin-left:7px;
+    padding-right: 15px;
     //margin-right: 30px;
     .input-group-addon {
       background:none;
       border:none;
-      padding:10px 0 0 3px;
+      padding:6px 0 0 3px;
       border-radius:0;
       position:absolute;
       left:0;
@@ -95,122 +103,68 @@ aside.sidenav {
   }
 
   .sidenav-nav {
+    margin-left:7px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    ul {
+      padding-bottom:6px;
+    }
+    & > ul {
+      margin-top:5px;
+    }
     ul li > ul {
       display: none;
     }
     ul li.open > ul {
       display:block;
-      li {
-        padding-left:27px;
-        a {
-          font-size:16px;
-          padding:0;
-        }
-      }
     }
+    ul li.open > ul,
     ul li.active > ul {
       li {
         padding-left:27px;
         a {
-          font-size:16px;
           padding:0;
         }
       }
     }
-  }
-
-  ul {
-    li {
-      .toc_scrolled {
-        color:$ddpurple;
-      }
-      &.active {
-
-      }
-      a {
-        color:#000;
-        font-size:18px;
-        font-weight: 600;
-        padding:6px 0 0 2px;
-        display:block;
-        &.active {
-          color: $ddpurple;
-        }
-        .hover {
-          display:none;
-        }
-        span {
-          padding-left: 5px;
-        }
-        span,
-        img {
-          vertical-align:top;
-        }
-        img {
-          margin-top:4px;
-        }
-      }
-
-
-      /* Table of contents */
-      .toctitle {
-        color: $ddpurple;
-        font-size:18px;
-        line-height:18px;
-        padding-left:27px;
-        padding-top:5px;
-        display: inline-block;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;     /** IE6+, Firefox 7+, Opera 11+, Chrome, Safari **/
-        -o-text-overflow: ellipsis;  /** Opera 9 & 10 **/
-        width: 250px;
-        -webkit-font-smoothing:subpixel-antialiased;
-        -moz-osx-font-smoothing:auto;
-      }
-      #TableOfContents {
-        padding:0 0 20px 40px;
-        margin:0;
-        // get the last li and add some space to bottom
-        // we do it like this so if its hidden there is no blank space
-        ul li ul li ul li:last-child {
-          //margin-bottom:20px;
-        }
-        ul {
-          list-style-type:none;
-          margin:0 0 0 10px;
-          padding:0;
-          &:first-child {
-            margin:0;
+    ul {
+      li {
+        a {
+          color:#000;
+          font-size:18px;
+          font-weight: 600;
+          padding:3px 0 0 2px;
+          display:block;
+          &.active {
+            color: $ddpurple;
+            font-weight:600;
           }
-          li {
-            a {
-              font-weight:200;
-              font-size:18px;
-              line-height:24px;
-              color:#323232;
-              padding:0;
-              margin:0;
-              &:hover {
-                color: $ddpurple;
-              }
-              &.toc_scrolled {
-                color:$ddpurple;
-              }
-            }
-          }
-
-          // h2s
-          ul ul {
+          .hover {
             display:none;
           }
-          // h3s
-          ul ul ul {
-            display:none;
+          span {
+            padding-left: 5px;
+          }
+          span,
+          img {
+            vertical-align:top;
+          }
+          img {
+            margin-top:4px;
+          }
+        }
+
+        // 2nd level
+        ul li {
+          a {
+            font-weight:200;
+            line-height:24px;
           }
 
-          .toc_open ~ ul {
-            display:block !important;
+          // 3rd level
+          ul li a {
+            font-size:15px;
+            line-height:22px;
           }
         }
       }
@@ -219,17 +173,31 @@ aside.sidenav {
 }
 
 aside.sidenav-api {
+  .sidenav-nav {
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin:0;
+  }
   .sticky {
     top:65px;
   }
   ul li a {
-    line-height: 22px;
+    line-height: 24px;
+    font-size:18px;
+    font-weight:600;
+    color: #000;
+    padding: 6px 0 0 2px;
+    display: block;
   }
   ul:first-of-type {
-    margin-left:10px;
+    margin-left: 3px;
   }
   h4 {
     padding-left: 10px;
+  }
+  .toc_scrolled {
+    color: $ddpurple !important;
+    font-weight:600 !important;
   }
 }
 
@@ -243,10 +211,10 @@ aside.sidenav-api {
           &:hover,
           &.active {
             color:$ddpurple;
-            &> .hover {
-              display:inline;
+            & .hover {
+              display:inline-block;
             }
-            &> .static {
+            & .static {
               display:none;
             }
           }

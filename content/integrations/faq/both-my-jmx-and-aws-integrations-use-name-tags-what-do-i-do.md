@@ -35,4 +35,4 @@ To stop this from conflicting with an AWS "name" tag, you could change that metr
 ```
 
 In this case, the same metric would be collected, but with the "name" tag applied as "bean_name:messagesinpersec" instead, which would no longer conflict with the AWS "name" tag group. 
-{{< img src="integrations/faq/jmx_metric_collected.png" alt="jmx_metric_collected" responsive="true" >}}
+{{< img src="integrations/faq/jmx_metric_collected.png" alt="jmx_metric_collected" responsive="true" popup="true">}}

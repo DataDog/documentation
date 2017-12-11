@@ -16,6 +16,7 @@ $footer-font-color: rgba(255,255,255,.5);
 $footer-font-color-hover: rgba(255,255,255,1);
 
 body > footer {
+  z-index:3;
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -38,6 +39,7 @@ body > footer {
     padding-bottom:6px;
   }
   a {
+    font-size:16px;
     color:$footer-font-color;
     &:hover {
       color: $footer-font-color-hover;
@@ -49,11 +51,13 @@ body > footer {
       padding:0;
       margin:0;
       line-height: 20px;
+      font-size: 16px;
     }
   }
   .footer-legal {
     font-weight:600;
     text-align:center;
+    font-size: 16px;
     a {
       color:#fff;
       padding:0 5px;
@@ -75,6 +79,7 @@ body > footer {
       position:absolute;
       bottom:0;
       display:block;
+      font-size:16px;
     }
   }
 }

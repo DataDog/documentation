@@ -56,21 +56,31 @@ $(document).ready(function () {
 
     var naturalWidth = 0;
     var naturalHeight = 0;
+    var isShowing = false;
     $('#popupImageModal').on('show.bs.modal', function (e) {
-
+        $('#popupImageModal .modal-content').css({'background': 'transparent', 'border': 'none'});
+        $('#popupImageModal .modal-body, #popupImageModal .modal-dialog, #popupImageModal .modal-content').css('height','100%');
+        $('#popupImageModal .modal-body').html('<div class="loader" style="position:absolute;top:50%;margin:-50px 0 0 -50px;height:100px;width:100px;"></div>');
     }).on('shown.bs.modal', function (e) {
+        $('body').removeClass('modal-open');
         var modal = $(this);
-        modal.hide();
+        //modal.hide();
         var url = e.relatedTarget.href;
+        // try set modal popup imgix to cap out at browser width/height
+        url += '&w='+$(window).width() + '&h='+$(window).height();
         var img = new Image();
-        var imgEl = $('<img src="'+url+'" alt="" class="img-fluid" />');
+        var srcseturl = url+", "+url+"&dpr=2 2x";
+        var imgEl = $('<img src="'+url+'" srcset="'+srcseturl+'" alt="" class="img-fluid" />');
         img.onload  = function() {
             /* Store naturalWidth & height for IE8 */
             naturalWidth = img.width;
             naturalHeight = img.height;
+            $('#popupImageModal .modal-content').css({'background': '', 'border': ''});
             $('#popupImageModal .modal-body').html(imgEl);
             resize(naturalWidth, naturalHeight);
-            modal.fadeIn();
+            if($('#popupImageModal').is(':visible')) {
+                modal.fadeIn();
+            }
         };
         img.src = url;
     }).on('hide.bs.modal', function(e) {
@@ -96,13 +106,27 @@ $(document).ready(function () {
                 ratio = h / Math.floor(h / ratio); /* Round ratio down so height calc works */
                 el.css('width', '' + w / ratio + 'px').css('height', '' + h / ratio + 'px');
                 p.css('width', '' + w / ratio + 'px').css('height', '' + h / ratio + 'px');
+                //el.animate({width: w/ratio+'px', height: h/ratio+'px'}, 200);
+                //p.animate({width: w/ratio+'px', height: h/ratio+'px'}, 200);
+            } else {
+                el.css('width', '' + w  + 'px').css('height', '' + h + 'px');
+                p.css('width', '' + w + 'px').css('height', '' + h + 'px');
+                //el.animate({width: w+'px', height: h+'px'}, 200);
+                //p.animate({width: w+'px', height: h+'px'}, 200);
             }
+
         }
     }
 
     $(window).on('resize', function() {
-        if($('#popupImageModal').hasClass('show')) {
+        if($('#popupImageModal').is(':visible')) {
             resize(naturalWidth, naturalHeight);
+        }
+    });
+
+    $(window).on('scroll', function() {
+        if($('#popupImageModal').is(':visible')) {
+            $('#popupImageModal').modal('hide');
         }
     });
 

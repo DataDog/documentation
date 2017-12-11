@@ -3,21 +3,34 @@ title: Check summary
 kind: documentation
 autotocdepth: 2
 customnav: monitornav
+further_reading:
+- link: "/monitors/monitor_types"
+  tag: "Documentation"
+  text: Learn how to create a monitor
+- link: "/monitors/notifications"
+  tag: "Documentation"
+  text: Configure your monitor notifications
+- link: "/monitors/manage_monitor"
+  tag: "Documentation"
+  text: Manage your monitors
+- link: "/monitors/downtimes"
+  tag: "Documentation"
+  text: Schedule a dowtime to mute a monitor
+- link: "/monitors/faq"
+  tag: "FAQ"
+  text: Monitors FAQ
 ---
+
+## Overview
 
 This page let you see the list of all your checks reporting to Datadog:
 
- {{< img src="monitors/check_summary/check_summary.png" alt="Check Summary" responsive="true" >}}
-
+ {{< img src="monitors/check_summary/check_summary.png" alt="Check Summary" responsive="true" popup="true">}}
 
 You can click on a check in order to have more details:
 
-{{< img src="monitors/check_summary/check_details.png" alt="Check details" responsive="true">}}
+{{< img src="monitors/check_summary/check_details.png" alt="Check details" responsive="true" popup="true" >}}
 
-## What's next ? 
+## Further Reading 
 
-* [Learn how to create a monitor](/monitors/monitor_types)
-* [Configure your monitor notifications](/monitors/notifications)
-* [Manage your monitors](/monitors/manage_monitor)
-* [Schedule a dowtime to mute a monitor](/monitors/downtimes)
-* [Consult our FAQ](/monitors/faq)
+{{< partial name="whats-next/whats-next.html" >}}

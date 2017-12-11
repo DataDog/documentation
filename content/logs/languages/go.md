@@ -1,9 +1,20 @@
 ---
 title: Go log Collection
 kind: documentation
-autotocdepth: 2
 customnav: lognav
-beta: true
+further_reading:
+- link: "/logs/processing"
+  tag: "Documentation"
+  text: Learn how to process your logs
+- link: "/logs/parsing"
+  tag: "Documentation"
+  text: Learn more about parsing
+- link: "/logs/explore"
+  tag: "Documentation"
+  text: Learn how to explore your logs
+- link: /logs/faq/log-collection-troubleshooting-guide
+  tag: "FAQ"
+  text: Log Collection Troubleshooting Guide
 ---
 
 To send your go logs to Datadog, we recommend logging to a file and then tailing that file with your Datadog agent. To achieve that we suggest the following setup with the open source logging library called [logrus](https://github.com/sirupsen/logrus)
@@ -96,3 +107,6 @@ Here are some little advices:
 * Start small and try to log the important stuff first, instead of being comprehensive. Then add what is missing after having a discussion with your team.
 * Use metas! Add context to any log so you can quickly filter over users, customers or any business centric attribute.
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

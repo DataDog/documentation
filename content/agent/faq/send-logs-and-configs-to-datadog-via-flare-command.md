@@ -2,6 +2,10 @@
 title: Send logs and configs to Datadog via flare command
 kind: faq
 customnav: agentnav
+further_reading:
+- link: "/agent/"
+  tag: "Documentation"
+  text: Learn more about the Datadog Agent
 ---
 
 ## Linux and Mac OS X
@@ -61,7 +65,7 @@ To send Datadog support a copy of your Windows logs and configs, do the followin
 
 That's it! Support will be in touch with you shortly.
 
-{{< img src="agent/faq/windows_flare.jpg" alt="Windows Flare" responsive="true" >}}
+{{< img src="agent/faq/windows_flare.jpg" alt="Windows Flare" responsive="true" popup="true">}}
 
 It's also possible to run the flare command using Powershell:
 
@@ -93,7 +97,7 @@ print tempfile.gettempdir()
 
 Example : 
 
-{{< img src="agent/faq/flare_fail.png" alt="Flare Fail" responsive="true" >}}
+{{< img src="agent/faq/flare_fail.png" alt="Flare Fail" responsive="true" popup="true">}}
 
 
 ## What about my sensitive information? 
@@ -101,3 +105,7 @@ Example : 
 The flare will search for any fields like passwords, passwords in a URI, API keys, and Proxy credentials and prevent this info from being sent. 
 
 Since the Datadog Agent is completely open source, you can check out the code for this at any time. See here: https://github.com/DataDog/dd-agent/blob/master/utils/flare.py
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

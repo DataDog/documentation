@@ -18,19 +18,19 @@ Be sure to substitute your API key into the command. Your key can be found [here
 
 If you prefer, the Agent can also be installed by following our step-by-step instructions:
 
-Set up the Datadog deb repo on your system and import Datadog's apt key:
+Set up the Datadog deb repository on your system and import Datadog's apt key:
 ```shell
 sudo sh -c "echo 'deb http://apt.datadoghq.com/ unstable main' > /etc/apt/sources.list.d/datadog.list"
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C7A7DA52
 ```
 
-Update your local apt repo and install the Agent:
+Update your local apt repository and install the Agent:
 ```shell
 sudo apt-get update
 sudo apt-get install datadog-agent-base
 ```
 
-Copy the example config into place. Be sure to plug in your [API key](https://app.datadoghq.com/account/settings#api) into the command:
+Copy the example configuration into place. Be sure to plug in your [API key](https://app.datadoghq.com/account/settings#api) into the command:
 ```shell
 sudo sh -c "sed 's/api_key:.*/api_key: your_api_key' /etc/dd-agent/datadog.conf.example > /etc/dd-agent/datadog.conf"
 ```

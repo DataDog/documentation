@@ -5,6 +5,7 @@ autotocdepth: 3
 customnav: graphingnav
 alias:
     - /guides/graphing
+description: Visualize your data to gain insight
 ---
 Graphs are the window onto your monitored systems. Most of the times that you visit Datadog, you will look at [dashboards][8] made up of graphs. Other times you will see email notifications that include a graph of some fluctuation in the system. And yet other times you will see graphs in your Slack, HipChat, and other chat clients documenting the changes in metrics over the course of time. Graphs are at the heart of monitoring and observability, so it is essential to understand how to define great graphs.
 
@@ -129,9 +130,6 @@ If you don't enter a title, we will automatically generate a title based on the 
 ### Save
 
 The final step is to click Save. You can always come back in to the editor and tweak the graph further depending on your needs.
-
-## Next Steps
-Now that you know how to build graphs, look into using them in [Dashboards][8], discovering new metrics in the []
 
 [1]: /graphing/miscellaneous/graphingjson/
 [2]: https://app.datadoghq.com/metric/explorer/

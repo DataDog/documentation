@@ -12,7 +12,7 @@ In order to gather all tags including custom tags, the agent has to query the EC
 
 ## Details
 
-1. Set in datadog.conf the IAM role name that the instance was created as, e.g. role.
+1. Set in `datadog.conf` the IAM role name that the instance was created as, e.g. role.
 2. On startup, if configured to do so, the agent will query the metadata service to get temporary credentials GET `http://169.254.169.254/latest/meta-data/iam/security-credentials/[role]`
 3. It will then use the EC2 API [DescribeTags](http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeTags.html) to get all the EC2 tags
 4. Last it will merge these tags with the regular instance tags (e.g. region:us-west-1).
@@ -21,4 +21,4 @@ In order to gather all tags including custom tags, the agent has to query the EC
 ## Implementation
 
 * boto, bundled with the agent and deployed to /usr/share/datadog/agent
-* Configuration entries in datadog.conf to specify the IAM role to query to retrieve temporary credentials
+* Configuration entries in `datadog.conf` to specify the IAM role to query to retrieve temporary credentials

@@ -52,14 +52,11 @@ function onScroll() {
             var j = i+1;
             if(j > mapping.length) { j = 0; }
             var nextobj = mapping[j];
-            //console.log(winTop, obj.headerTop - localOffset, winTop >= obj.headerTop - localOffset);
             obj.navLink.removeClass('toc_scrolled');
 
             if( (winTop >= obj.header.offset().top - localOffset) && (typeof(nextobj) === 'undefined' || winTop < nextobj.header.offset().top - localOffset) ) {
-                //console.log(obj.navLink);
                 obj.navLink.addClass('toc_scrolled');
                 // add toc open to parents of this toc_scrolled
-                //console.log(obj.navLink.parents('ul'));
                 obj.navParentLinks.each(function() {
                     var href = $(this).attr('href');
                     var id = href.replace('#', '').replace(' ','-');
@@ -93,8 +90,8 @@ $(document).ready(function () {
     $(window).on('resize scroll', function(e) {
         var header_h = $('body > header').height();
         var footer_h = $('body > footer').height();
-        //console.log(document.documentElement.clientHeight, );
-        $('.sidenav .sticky').css('maxHeight', document.documentElement.clientHeight - header_h);
+        var padding = 105;
+        $('.sidenav-nav').css('maxHeight', document.documentElement.clientHeight - header_h - padding);
     });
 
 

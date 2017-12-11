@@ -23,7 +23,7 @@ A more full dive into Kafka can be found [here](https://sookocheff.com/post/kafk
 
 ## Datadog Kafka Integrations:
 
-It is important to note that we currently have two distinct Kafka Integrations. The first is simply named [Kafka](/integrations/kafka) while the second is [Kafka_Consumer](/integrations/kafka_consumer).
+It is important to note that we currently have two distinct Kafka Integrations. The first is simply named [Kafka](/integrations/kafka) while the second is [Kafka_Consumer](/integrations/kafka).
 
 The Kafka Integration utilizes [Datadog’s JMXFetch](https://github.com/DataDog/jmxfetch) application to pull metrics, just like our other Java based applications such as Cassandra, JMX, Tomcat, etc. This pulls metrics through the use of mBeans, where the engineering team has included a list of commonly used mBeans in the Kafka.yaml file. This can be extended with any other beans the user would like, or if your version of Kafka supports additional metrics.
 

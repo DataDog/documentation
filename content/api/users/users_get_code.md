@@ -7,10 +7,6 @@ order: 16.2
 ##### Signature
 `GET api/v1/user/:handle`
 ##### Example Request
-{{< snippet-code-block file="content/api/users/code_snippets/api-user-get.py" highlight="true" >}}
-{{< snippet-code-block file="content/api/users/code_snippets/api-user-get.sh" highlight="true" >}}
-{{< snippet-code-block file="content/api/users/code_snippets/api-user-get.rb" highlight="true" >}}
+{{< code-snippets basename="api-user-get" >}}
 ##### Example Response
-{{< snippet-result-code-block file="content/api/users/code_snippets/result.api-user-get.py" >}}
-{{< snippet-result-code-block file="content/api/users/code_snippets/result.api-user-get.sh" >}}
-{{< snippet-result-code-block file="content/api/users/code_snippets/result.api-user-get.rb" >}}
+{{< code-snippets basename="result.api-user-get" >}}

@@ -26,6 +26,6 @@ order: 3
 * `Unauthorized 403`
 
 ##### Example Error Response
-{{< snippet-code-block file="content/api/errors/code_snippets/api-error.json" static="true" nocomments="true" highlight="false" >}}
+{{< code-snippets basename="api-error" static="true" >}}
 ##### Example Warning Response</h5>
-{{< snippet-code-block file="content/api/errors/code_snippets/api-warning.json" static="true" nocomments="true" highlight="false" >}}
+{{< code-snippets basename="api-warning" static="true" >}}
