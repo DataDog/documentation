@@ -2,6 +2,13 @@
 title: I have issues with my process check, it doesn't find my processes!
 kind: faq
 customnav: agentnav
+further_reading:
+- link: "/agent/"
+  tag: "Documentation"
+  text: Learn more about the Datadog Agent
+- link: "/integrations/process"
+  tag: "Integration"
+  text: Learn more about the Datadog-Process Agent
 ---
 
 Our process check uses the psutil python package to [check processes on your machine](https://github.com/DataDog/integrations-core/blob/master/process/check.py#L117-L134).
@@ -17,3 +24,5 @@ If you still have issues you can reach out to [us](/help) with the following fi
 * your process.yaml
 * the output of your agent [info](/agent/faq/agent-status-and-information)
 * the output of ps auwx (Windows users: tasklist /v)
+
+{{< partial name="whats-next/whats-next.html" >}}

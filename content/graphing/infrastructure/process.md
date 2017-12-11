@@ -6,23 +6,30 @@ aliases:
   - /guides/process
   - /infrastructure/process/
 customnav: infrastructurenav
+further_reading:
+- link: "/graphing/infrastructure/hostmap"
+  tag: "Graphing"
+  text: See all of your hosts together on one screen with the hostmap
+- link: "/graphing/infrastructure/livecontainers"
+  tag: "Graphing"
+  text: Get real-time visibility of all of the containers across your environment
 ---
 
 ## Introduction
 
 Datadog Process and Container Monitoring allows for real-time visibility of the most granular elements in a deployment.  
-Taking inspiration from bedrock tools like `htop`, this centralized view, combined with existing tagging capabilities, allows you to understand what is going on at any level of your system and drill all the way down into the most fine details.
+Taking inspiration from bedrock tools like *htop*, this centralized view, combined with existing tagging capabilities, allows you to understand what is going on at any level of your system and drill all the way down into the most fine details.
 
-{{< img src="graphing/infrastructure/process/live_process_preview.png" alt="live process preview" responsive="true" >}}
+{{< img src="graphing/infrastructure/process/live_process_preview.png" alt="live process preview" responsive="true" popup="true">}}
 
 ## Installation
 
 ### Standard Agent Configuration
 
 **Live Processes has been introduced in Datadog Agent version 5.16.0.**  
-Please refer to the instructions for standard [Agent installation][1] for platform-specific details.
+Refer to the instructions for standard [Agent installation][1] for platform-specific details.
 
-Once the Datadog Agent is installed, enable Live Processes collection by editing the [config file](/agent/faq/where-is-the-configuration-file-for-the-agent) at :
+Once the Datadog Agent is installed, enable Live Processes collection by editing the [configuration file](/agent/faq/where-is-the-configuration-file-for-the-agent) at :
 
 ```
 /etc/dd-agent/datadog.conf
@@ -34,7 +41,7 @@ and adding the following line to the `[Main]` section:
 ```
 
 After configuration is complete, [restart the Agent](/agent/faq/start-stop-restart-the-datadog-agent).  
-**Note**: Collecting Container information in the standard install, the dd-agent user will need to have permissions to access docker.sock.
+**Note**: Collecting Container information in the standard install, the dd-agent user needs to have permissions to access docker.sock.
 
 ### Docker container
 
@@ -42,7 +49,7 @@ Update to the Datadog Agent image version 5.16.0 or above:
 
     $ docker pull datadog/docker-dd-agent
 
-Follow the instructions for [docker-dd-agent][2], passing in the following attributes, in additon to any other custom settings as appropriate:
+Follow the instructions for [docker-dd-agent][2], passing in the following attributes, in addition to any other custom settings as appropriate:
 
     -v /etc/passwd:/etc/passwd:ro
     -e DD_PROCESS_AGENT_ENABLED=true
@@ -78,7 +85,7 @@ Refer to the standard [daemonset installation][4] and the [docker-dd-agent][5] i
 Processes and containers are by their nature extremely high cardinality objects.  Our fuzzy string search gives you a view into exactly what you want.  Below is our Demo environment, filtered with the string `postgres /9.`.  
 **Note**: `/9.` has matched in the command path, and `postgres` matches the command itself.
 
-{{< img src="graphing/infrastructure/process/postgres.png" alt="Postgres" responsive="true" >}}
+{{< img src="graphing/infrastructure/process/postgres.png" alt="Postgres" responsive="true" popup="true">}}
 
 ### Tagging
 
@@ -112,22 +119,22 @@ Kubernetes Containers are tagged by:
 
 Making sense of hundreds of thousands or millions of processes and containers can seem overwhelming!  Using tagging, described in the previous section, makes navigation easy.
 
-In the below, we have filtered down to a Kubernetes cluster of 9 nodes.  RSS and CPU utilization on containers is reported compared to the limits set on the containers, when they exist.  Here, we see that the containers in this cluster are way overprovisioned, and that we could use tighter limits and bin packing to achieve better utilization of resources.
+In the below, we have filtered down to a Kubernetes cluster of 9 nodes.  RSS and CPU utilization on containers is reported compared to the limits set on the containers, when they exist.  Here, we see that the containers in this cluster are way over provisioned, and that we could use tighter limits and bin packing to achieve better utilization of resources.
 
-{{< img src="graphing/infrastructure/process/overprovisioned.png" alt="overprovisioned" responsive="true" >}}
+{{< img src="graphing/infrastructure/process/overprovisioned.png" alt="over provisioned" responsive="true" popup="true">}}
 
 Container environments are dynamic and can be hard to follow.  Here, we pivot by `#service` and `#host`, and to reduce system noise, filter to `#namespace:default`, and we can see what services are running where, and how saturated key metrics are.
 
 
-{{< img src="graphing/infrastructure/process/hostxservice.png" alt="host x service" responsive="true" >}}
+{{< img src="graphing/infrastructure/process/hostxservice.png" alt="host x service" responsive="true" popup="true">}}
 
 It would be easy to pivot by ECS `#task_name` and `#task_version` and understand changes to resource utilization between updates.
 
-{{< img src="graphing/infrastructure/process/tasksxversion.png" alt="task x version" responsive="true" >}}
+{{< img src="graphing/infrastructure/process/tasksxversion.png" alt="task x version" responsive="true" popup="true">}}
 
 Below, we have searched for ssh processes and pivoted by `#user` to understand who is logged into which hosts.
 
-{{< img src="graphing/infrastructure/process/sshusers.png" alt="sshusers" responsive="true" >}}
+{{< img src="graphing/infrastructure/process/sshusers.png" alt="sshusers" responsive="true" popup="true">}}
 
 Ok, so I guess that last one is less exciting after redaction!
 
@@ -139,7 +146,7 @@ From there, you can dig down into finer grains, or inspect each group to see ind
 In the below screenshot, you can see an investigation that started by indexing by pod and service, dug into one pod to see the containers, and then expanded a container to see the process tree inside.  
 In the container inspect tray, we also have some recent context for these metrics.
 
-{{< img src="graphing/infrastructure/process/containerinspect.png" alt="container inspect" responsive="true" >}}
+{{< img src="graphing/infrastructure/process/containerinspect.png" alt="container inspect" responsive="true" popup="true">}}
 
 ## Real-time monitoring
 
@@ -158,5 +165,9 @@ While actively working with the Process and Containers page, metrics are collect
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://github.com/DataDog/docker-dd-agent
 [3]: https://app.datadoghq.com/account/settings#agent/kubernetes
-[4]: /integrations/kubernetes/#installation-via-daemonsets-kubernetes-110
+[4]: /integrations/kubernetes/
 [5]: https://github.com/DataDog/docker-dd-agent
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

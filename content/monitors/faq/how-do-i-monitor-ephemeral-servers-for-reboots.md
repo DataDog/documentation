@@ -2,6 +2,13 @@
 title: How do I monitor ephemeral servers for reboots?
 kind: faq
 customnav: monitornav
+further_reading:
+- link: "/monitors/monitor_types"
+  tag: "Documentation"
+  text: Learn how to create a monitor
+- link: "/monitors/notifications"
+  tag: "Documentation"
+  text: Configure your monitor notifications
 ---
 
 Ephemeral environments spin up and terminate hosts constantly which can make it challenging to distinguish new hosts from rebooted hosts.
@@ -10,4 +17,7 @@ A metric monitor on the `system.uptime` metric can be used to address this. Th
 
 The example shown below captures how this can be setup:
 
-{{< img src="monitors/faq/ephemeral_set_up.png" alt="ephemeral_set_up" responsive="true">}}
+{{< img src="monitors/faq/ephemeral_set_up.png" alt="ephemeral_set_up" responsive="true" popup="true" >}}
+
+
+{{< partial name="whats-next/whats-next.html" >}}

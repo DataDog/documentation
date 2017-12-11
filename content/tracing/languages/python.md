@@ -14,17 +14,15 @@ To begin tracing applications written in Python, first [install and configure th
 Next, install the Datadog Tracing library using pip:
 
 ```python
-
 pip install ddtrace
 ```
 
 Finally, import the tracer and instrument your code!
 
-
 ## Example
 
 <div class="alert alert-info">
-For Python applciations, please note that tracing is disabled when your application is launched in <b>DEBUG</b> mode. Find more <a href="http://pypi.datadoghq.com/trace/docs/#module-ddtrace.contrib.django">here</a>
+For Python applciations, note that tracing is disabled when your application is launched in <b>DEBUG</b> mode. Find more <a href="http://pypi.datadoghq.com/trace/docs/#module-ddtrace.contrib.django">here</a>
 </div>
 
 ```python
@@ -48,7 +46,7 @@ The ddtrace library includes support for a number of web frameworks, including:
 - [Pylons](http://pylonsproject.org/)
 - [Pyramid](https://trypyramid.com/)
 
-To learn how to instrument these frameworks, please reference [the library documentation](http://pypi.datadoghq.com/trace/docs/#web-frameworks)
+To learn how to instrument these frameworks, reference [the library documentation](http://pypi.datadoghq.com/trace/docs/#web-frameworks)
 
 It also includes support for the following data stores and libraries:
 
@@ -63,10 +61,11 @@ It also includes support for the following data stores and libraries:
 - [SQLAlchemy](http://www.sqlalchemy.org/)
 - [SQLite](https://www.sqlite.org/)
 
-To instrument these libraries, please see [the library documentation](http://pypi.datadoghq.com/trace/docs/#other-libraries)
+To instrument these libraries, see [the library documentation](http://pypi.datadoghq.com/trace/docs/#other-libraries)
 
-## Additional Information
+## Further Reading
 
-The Python library [source code can be found on Github](https://github.com/DataDog/dd-trace-py).
-
-You can find additional documentation on [the library documentation page](http://pypi.datadoghq.com/trace/docs/).
+{{< whatsnext >}}
+    {{< nextlink href="https://github.com/DataDog/dd-trace-py" tag="Github" >}}Tracing Python library source code{{< /nextlink >}}
+    {{< nextlink href="http://pypi.datadoghq.com/trace/docs/" tag="Documentation" >}} Python library documentation page{{< /nextlink >}}
+{{< /whatsnext >}}

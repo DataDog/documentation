@@ -8,7 +8,6 @@ customnav: graphingnav
 ## Events
 
 * [How do I add hostname to event titles and messages submitted by my custom agent checks?](/graphing/faq/how-do-i-add-hostname-to-event-titles-and-messages-submitted-by-my-custom-agent-checks)
-* [Can I show events 'unaggregated' on the event stream?](/graphing/faq/can-i-show-events-unaggregated-on-the-event-stream)
 
 ## Dashboards
 
@@ -17,7 +16,6 @@ customnav: graphingnav
 * [Why am I unable to iFrame certain https:// URLs?](/graphing/faq/why-am-i-unable-to-iframe-certain-https-urls)
 * [Why isn't my AWS Trusted Advisor Dashboard showing any data?](/graphing/faq/why-isn-t-my-aws-trusted-advisor-dashboard-showing-any-data)
 * [How do I see the number of hosts I'm monitoring?](/graphing/faq/how-do-i-see-the-number-of-hosts-i-m-monitoring)
-* [How do I change the name of a Dashboard?](/graphing/faq/how-do-i-change-the-name-of-a-dashboard)
 * [Treemap graph/visualization - can I use this elsewhere?](/graphing/faq/treemap-graph-visualization-can-i-use-this-elsewhere)
 * [Is there a way to share (or revoke previously shared) graphs?](/graphing/faq/is-there-a-way-to-share-or-revoke-previously-shared-graphs)
 * [How to Merge Screenboards ?](/graphing/faq/how-to-merge-screenboards)
@@ -25,6 +23,7 @@ customnav: graphingnav
 
 ## Graphing
 
+* [Troubleshooting - Browser Issues](/graphing/faq/troubleshooting-browser-issues)
 * [Is there a way to share graphs?](/graphing/faq/is-there-a-way-to-share-graphs)
 * [How do I do arithmetic with grouped metrics?](/graphing/faq/how-do-i-do-arithmetic-with-grouped-metrics)
 * [What's the syntax to sum multiple datapoints into a single line?](/graphing/faq/what-s-the-syntax-to-sum-multiple-datapoints-into-a-single-line)

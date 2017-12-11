@@ -1,6 +1,8 @@
 $ddpurple:    #774DA2;
 
 .whatsnext {
+  font-size:18px;
+  line-height:22px;
   .list-group-item {
     margin-bottom: 0;
     border-bottom:1px solid transparent;
@@ -13,22 +15,39 @@ $ddpurple:    #774DA2;
     img {
       max-width:24px;
     }
-    &:hover,
-    &.active {
-      &> .hover {
-        display:inline;
-      }
-      &> .static {
-        display:none;
-      }
-    }
     .hover {
       display:none;
     }
     .badge {
       font-weight: 200;
       border-radius: 2px;
-      margin-left: 9px;
+    }
+    .text {
+      margin-right: 9px;
+    }
+  }
+}
+
+@media (max-width: 575px) {
+  .whatsnext {
+    .badge {
+      display:none;
+    }
+  }
+}
+
+@media (min-width: 576px) {
+  .whatsnext {
+    .list-group-item {
+      &:hover,
+      &.active {
+        & .hover {
+          display: inline;
+        }
+        & .static {
+          display: none;
+        }
+      }
     }
   }
 }

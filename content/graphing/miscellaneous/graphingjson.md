@@ -10,7 +10,7 @@ There are two ways to interact with the Graphing Editor: using the GUI (the defa
 
 ## Graphing with the JSON editor
 
-{{< img src="graphing/miscellaneous/graphing/references-graphing-jsoneditor.png" alt="references graphing jsoneditor" responsive="true" >}}
+{{< img src="graphing/miscellaneous/graphing/references-graphing-jsoneditor.png" alt="references graphing jsoneditor" responsive="true" popup="true">}}
 
 ### Grammar
 
@@ -102,7 +102,7 @@ Examples of scope (meaning in parentheses):
 #### Groups
 
 
-For any given metric, data may come from a number of hosts. The data will normally be aggregated from all these hosts to a single value for each time slot. If you wish to split this out, you can by any tag. To include a data point seperated out by each host,  use {host} for your group.
+For any given metric, data may come from a number of hosts. The data will normally be aggregated from all these hosts to a single value for each time slot. If you wish to split this out, you can by any tag. To include a data point separated out by each host,  use {host} for your group.
 
 #### Arithmetic
 
@@ -187,7 +187,7 @@ The Time Series can be further broken down to:
 
 #### Line Charts
 
-{{< img src="graphing/miscellaneous/graphingjson/multi-lines.png" alt="multi lines" responsive="true" >}}
+{{< img src="graphing/miscellaneous/graphingjson/multi-lines.png" alt="multi lines" responsive="true" popup="true">}}
 
 The representation is automatically derived from having multiple `requests` values.
 
@@ -205,7 +205,7 @@ The representation is automatically derived from having multiple `requests` valu
 
 #### Stacked Series
 
-{{< img src="graphing/miscellaneous/graphingjson/slice-n-stack.png" alt="slice and stack" responsive="true" >}}
+{{< img src="graphing/miscellaneous/graphingjson/slice-n-stack.png" alt="slice and stack" responsive="true" popup="true">}}
 
 In the case of related Time Series, you can easily draw them as stacked areas by using the following syntax:
 

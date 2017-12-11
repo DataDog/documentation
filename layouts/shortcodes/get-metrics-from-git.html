@@ -27,7 +27,7 @@
 
         {{ $metric_namespaces := (split $name_space " ") }}
 
-        <table class="table">
+        <table class="table table-vertical-mobile table-metrics">
           <tbody>
 
             {{ range $i, $m := $metric_namespaces }}
@@ -55,7 +55,7 @@
 
       {{ if $integration }}
 
-        <table class="table">
+        <table class="table table-vertical-mobile table-metrics">
           <tbody>
           {{ range $k, $v := (index $data $integration) }}
             <tr>

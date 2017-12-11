@@ -22,7 +22,7 @@ To define your apdex you need to first define a time threshold - **T** - separa
 
 Once the threshold is defined and your requests are categorized, the apdex is defined as:
 
-{{< img src="tracing/faq/apdex_formula.png" alt="Apdex formula" responsive="true" >}}
+{{< img src="tracing/faq/apdex_formula.png" alt="Apdex formula" responsive="true" popup="true">}}
 
 Selecting the correct threshold is really important since the Frustrated requests are 4 times slower than "normal". If T=3 you can wait 3 seconds for a page to load by you might not tolerate waiting until 12 seconds.
 
@@ -32,22 +32,22 @@ That's why the default Apdex threshold value used by your Datadog application is
 
 To visualize your application/service Apdex, you need to go on your service board, and select Apdex instead of latency:
 
-{{< img src="tracing/faq/apdex_selection.png" alt="Apdex Selection" responsive="true" >}}
+{{< img src="tracing/faq/apdex_selection.png" alt="Apdex Selection" responsive="true" popup="true">}}
 
 You can then use the pencil icon on the top left of your widget to configure your Apdex:
 
-{{< img src="tracing/faq/apdex_edit.png" alt="Apdex Edit" responsive="true" >}}
+{{< img src="tracing/faq/apdex_edit.png" alt="Apdex Edit" responsive="true" popup="true">}}
 
 Enter your threshold directly to visualize your request distribution:
 
-{{< img src="tracing/faq/apdex_update.png" alt="Apdex Update" responsive="true" >}}
+{{< img src="tracing/faq/apdex_update.png" alt="Apdex Update" responsive="true" popup="true">}}
 
 You can then save your widget to follow your Apdex evolution above time:
 
-{{< img src="tracing/faq/apm_save.png" alt="Apdex Save" responsive="true" >}}
+{{< img src="tracing/faq/apm_save.png" alt="Apdex Save" responsive="true" popup="true">}}
 
 ## Display your Apdex on your service page
 
 To display the Apdex on your [service page](https://app.datadoghq.com/apm/services), select it in the configuration menu on the upper right corner of the page:
 
-{{< img src="tracing/faq/apdex_service_list.png" alt="Apdex Service List" responsive="true" >}}
+{{< img src="tracing/faq/apdex_service_list.png" alt="Apdex Service List" responsive="true" popup="true">}}

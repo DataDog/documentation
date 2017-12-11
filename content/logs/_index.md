@@ -1,14 +1,4 @@
 ---
-further_reading:
-- link: "/logs/explore"
-  tag: "Logs"
-  text: Learn how to explore your logs
-- link: "/logs/processing"
-  tag: "Logs"
-  text: Learn how to process your logs
-- link: "/logs/parsing"
-  tag: "Logs"
-  text: Learn more about parsing
 title: Log Collection
 kind: Documentation
 autotocdepth: 2
@@ -19,16 +9,17 @@ beta: true
 ---
 
 <div class="alert alert-info">
-Datadog's Logs is currently available via private beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
+Datadog's Logs is currently available via public beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
 </div>
 
 ## Overview
-{{< img src="logs/index/pipeline_sketch.png" alt="Pipelines sketch" responsive="true" >}}
+
+{{< img src="logs/index/pipeline_sketch.png" alt="Pipelines sketch" responsive="true" popup="true">}}
 
 ## Getting started with the Agent
 
 Log collection requires an Agent version >= 6.0. Older versions of the Agent do not include the `Log collection` interface that we'll be using.
-If you are not using it already, please follow the installation (or update) instructions [here](https://github.com/DataDog/datadog-agent/blob/master/docs/beta/upgrade.md).
+If you are not using it already, follow the installation instructions [here](https://github.com/DataDog/datadog-agent/blob/master/docs/beta/upgrade.md). We highly recommend to do a fresh install instead of the upgrade. 
 
 Collecting logs is **disabled** by default in the Datadog Agent, you need to enable it in `datadog.yaml`:
 
@@ -46,7 +37,8 @@ If an integration does not support logs by default, you may need to use use the 
 During the beta phase of Datadog Logs, not all integrations include log configurations out of the box. A current list of supported integrations is available below.
 </div>
 
-### Crawlers
+
+### Cloud
 * [AWS](/logs/aws)
 
 ### Frameworks
@@ -83,7 +75,7 @@ Set `type` to **file** then specify the absolute `path` to the log file you want
 Example: 
 If you want to gather your python app logs for instance stored in **/var/log/myapp1.log** and **/var/log/python.log** you would create a `python.yaml` file as follows:
 
-Please note that for the yaml file to be considered valid by the agent, they must include an "init_config" section and have at least one "instance" defined as shown below:
+Note that for the yaml file to be considered valid by the agent, they must include an "init_config" section and have at least one "instance" defined as shown below:
 
 ```yaml
 init_config:
@@ -111,7 +103,8 @@ logs:
 Set `type` to **tcp** or **udp** depending of your protocol then specify the `port` of your incomming connection.
 
 Example: 
-If your PHP application does not log to a file, but instead forwards its logs via TCP, you will need to create a configuration file that specifies the port to receive as in the example below:
+
+If your PHP application does not log to a file, but instead forwards its logs via TCP, create a configuration file that specifies the port to receive as in the example below:
 
 ```yaml
 init_config:
@@ -126,7 +119,39 @@ logs:
     source: php
     sourcecategory: front
 
-``
+```
+
+
+### Docker log collection
+
+Agent 6 is able to collect logs from containers. It can be installed [on the host](https://github.com/DataDog/datadog-agent/blob/master/docs/beta/upgrade.md) or [in a container](https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent).
+
+For containerized installation, mount those two repositories:
+
+* `/var/run/docker.sock`: to make sure the agent can access the Docker API.
+* `/opt/datadog-agent/run`: If the agent container is restarted or removed, the registry needs to know the last logs collected for each monitored container or file.
+
+To start collecting logs for a given container filtered by image or label, update the integration log section in its yaml file, or create a custom yaml file.
+Set the type to `docker` and set the proper image or label as shown in the below example for nginx containers with a `httpd` image:
+
+```yaml
+init_config:
+
+instances:
+    [{}]
+
+#Log section
+
+logs:    
+   - type: docker
+     image: httpd    #or label: mylabel:mylabelvalue
+     service: nginx
+     source: nginx
+     sourcecategory: http_web_access
+
+```
+
+If the agent is containerized, see [here](https://github.com/DataDog/docker-dd-agent#configuration-files) how to mount the YAML configuration files to the agent container.
 
 ### Filter logs
 
@@ -183,7 +208,7 @@ logs:
 
 ## Reserved attributes 
 
-If your logs are formatted as JSON, please note that some attributes are reserved for use by Datadog:
+If your logs are formatted as JSON, be aware that some attributes are reserved for use by Datadog:
 
 ### *date* attribute
 
@@ -233,13 +258,16 @@ Using the Datadog Agent or the RFC5424 format automatically set the service valu
 
 You can now control the global hostname, service, timestamp, and severity main mapping that are applied before the processing pipelines. This is particularly helpful if logs are sent in JSON or from an external agent.
 
-{{< img src="logs/index/reserved_attribute.png" alt="Reserved Attribute" responsive="true" >}}
+{{< img src="logs/index/reserved_attribute.png" alt="Reserved Attribute" responsive="true" popup="true">}}
 
 To change the default values for each of the reserved attributes, go to the pipeline page and edit the `Reserved Attribute mapping`:
 
-{{< img src="logs/index/reserved_attribute_tile.png" alt="Reserved Attribute Tile" responsive="true" >}}
+{{< img src="logs/index/reserved_attribute_tile.png" alt="Reserved Attribute Tile" responsive="true" popup="true">}}
 
-## What's Next
+## Further Reading
 
-{{< partial name="whats-next/whats-next.html" >}}
-
+{{< whatsnext >}}
+    {{< nextlink href="/logs/explore" tag="Documentation" >}}Learn how to explore your logs{{< /nextlink >}}
+    {{< nextlink href="/logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers" tag="FAQ" >}}How to Send Logs to Datadog via External Log Shippers{{< /nextlink >}}
+    {{< nextlink href="/logs/parsing" tag="Documentation" >}}Learn more about parsing{{< /nextlink >}}
+{{< /whatsnext >}}

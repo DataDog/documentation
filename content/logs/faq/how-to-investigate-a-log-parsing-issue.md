@@ -3,6 +3,16 @@ title: How to investigate a log parsing issue
 kind: faq
 customnav: lognav
 beta: true
+further_reading:
+- link: "/logs/faq/log-parsing-best-practice"
+  tag: "FAQ"
+  text: Log Parsing - Best Practice
+- link: "/logs/processing"
+  tag: "Documentation"
+  text: Learn how to process your logs
+- link: "/logs/parsing"
+  tag: "Documentation"
+  text: Learn more about parsing
 ---
 
 Integration pipelines support the default log format for a given technology. So if you have customized the log format or written a custom parser which is not working, your logs might not get properly parsed.
@@ -14,9 +24,9 @@ Before you go ahead and troubleshoot your parser, it might be interesting for yo
 1. Identify your log's pipeline
     Thanks to the pipeline filters, you can easily find the processing pipeline your log went through. Integration pipeline take the source as filter, so check that your log source is correctly set.
     
-    {{< img src="logs/faq/integrationpipeline.png" alt="integrationpipeline" responsive="true" >}}
+    {{< img src="logs/faq/integrationpipeline.png" alt="integrationpipeline" responsive="true" popup="true">}}
     
-    For integration pipeline, you will need to clone them and troubleshoot on the clone.
+    For integration pipeline, clone them and troubleshoot on the clone.
 
 2. Spot obvious differences if any
     In most of the cases, you should have examples or log samples in your parsers. Compare your log with the sample to find simple differences such as a missing element, a different order or extra elements.
@@ -48,12 +58,12 @@ Before you go ahead and troubleshoot your parser, it might be interesting for yo
     ```
 
     From the provided sample we can see that there are no obvious differences and that the parser works fine for the sample:
-    {{< img src="logs/faq/sampleparsing.png" alt="sampleparsing" responsive="true" >}}
+    {{< img src="logs/faq/sampleparsing.png" alt="sampleparsing" responsive="true" popup="true">}}
 
     But when we test with our log, it is not working. So let's start to remove attribute one by one from the end until we find the culprit. To do so, we add ```.*``` at the end of the rule and then we remove the attributes.
 
     On the below image, we can see that the rule starts working once we have remove everything up to the user agent:
-    {{< img src="logs/faq/Troubleshootparsing.png" alt="Troubleshootparsing" responsive="true" >}}
+    {{< img src="logs/faq/Troubleshootparsing.png" alt="Troubleshootparsing" responsive="true" popup="true">}}
     
 
     This means that the issue is in the user agent attribute. 
@@ -75,4 +85,6 @@ Before you go ahead and troubleshoot your parser, it might be interesting for yo
     In other situation it might be the rule expecting an "integer" whereas the values are double so the matcher should be changed to "number".
 
 5. Ask for help
-    We are always here to help you if you did not manage to find the cause of the parsing error. So please [contact us](/help).
+    We are always here to help you if you did not manage to find the cause of the parsing error, [contact us](/help).
+
+{{< partial name="whats-next/whats-next.html" >}}

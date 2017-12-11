@@ -12,7 +12,7 @@ Since this aggregation is taken care of on the collection side, this isn't curre
 
 Out of your histogram data you'll get: 95th percentile, 50th percentile, avg, max, count. 
 
-* A quick [introduction to dogstatsd](/agent/faq/can-i-use-my-own-statsd-client)
+* A quick [introduction to dogstatsd](/developers/dogstatsd)
 
 * [Dogstatsd clients available for each programming language](/libraries/).
 

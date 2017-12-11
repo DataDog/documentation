@@ -1,5 +1,5 @@
 ---
-title: Create Monitor
+title: Alerting
 kind: documentation
 autotocdepth: 2
 customnav: monitornav
@@ -16,16 +16,18 @@ availability, network endpoints, and more.
 
 Once a monitor is created, you will be notified when its conditions are met.
 You can notify team members via email, 3rd party services (e.g. Pagerduty or
-Hipchat) or other custom endpoints via webhooks.
+Hipchat) or other custom endpoints via Webhooks.
 
 Triggered monitors will appear in the [event stream](/graphing/event_stream/), allowing collaboration around active issues in your applications or infrastructure. Datadog provides a high-level view of open issues on the [Triggered Monitors](https://app.datadoghq.com/monitors/triggered) page as well as general monitor management on the [Manage Monitors](https://app.datadoghq.com/monitors) page.
+
+Monitors can be managed programmatically, refer to the [Datadog API docs](/api/#monitors) for detailed information on managing monitors through the API using the available [libraries](/developers/libraries) or cURL.
 
 In this section you can:
 
 * [Learn how to create a monitor](/monitors/monitor_types)
 * [Configure your monitor notifications](/monitors/notifications)
 * [Manage your monitors](/monitors/manage_monitor)
-* [Schedule a dowtime to mute a monitor](/monitors/downtimes)
+* [Schedule a downtime to mute a monitor](/monitors/downtimes)
 * [See all your checks into one place](/monitors/check_summary)
 * [Consult our FAQ](/monitors/faq)
 
@@ -45,15 +47,15 @@ Here is a quick overview of the different terms used:
 Navigate to the [Create Monitors](https://app.datadoghq.com/monitors#/create)
 page by hovering over **Monitors** in the main menu and clicking **New Monitor** in the sub-menu (depending on your chosen theme and screen resolution, the main menu may be at the top or on the left). You will be presented with a list of monitor types on the left. See the [Monitoring Reference](/monitors/monitor_types) to learn more about all monitor types.
 
-{{< img src="monitors/index/nav.png" alt="nav" responsive="true" >}}
+{{< img src="monitors/index/nav.png" alt="navigation" responsive="true" popup="true">}}
 
 ## Export your monitor
 
-You can export the configuration JSON for a monitor right from the create screen. 
+You can export the configuration JSON for a monitor right from the create screen.
 
 If you manage and deploy monitors programmatically, it's easier to define the monitor in the UI and export the JSON right away:
 
-{{< img src="monitors/index/export_monitor_json.jpg" alt="export monitor" responsive="true">}}
+{{< img src="monitors/index/export_monitor_json.jpg" alt="export monitor" responsive="true" popup="true" >}}
 
 ## Auditing Monitors
 
@@ -64,8 +66,30 @@ Assuming you've made changes to your Monitors, you can see examples with the fol
 https://app.datadoghq.com/event/stream?per_page=30&query=tags:audit%20status:all
 ```
 
-We also provide you with the ability to be notified on changes to a monitor you create. At the bottom of the Monitor Editor there's an option to notify alert recipients for all changes to the monitor:
+We also provide you with the ability to be notified on changes to a monitor you create. At the bottom of the Monitor Editor there's an option to notify alert recipients for all changes to the monitor:
 
-{{< img src="monitors/index/Monitor_Change_notifications.png" alt="Monitor_Change_notifications" responsive="true" >}}
+{{< img src="monitors/index/Monitor_Change_notifications.png" alt="Monitor_Change_notifications" responsive="true" popup="true">}}
 
 Setting the above to **Notify** will simply send an email for the monitor audit events to all people who are alerted in a specific monitor.
+
+## Manualy resolve your monitor
+
+It only makes sense in a couple cases to resolve manually your monitor:
+
+* If the monitor is in a "no data" state then resolving it hides it from the triggered monitors page.
+* If the monitor is in the triggered state but has stopped reporting data then
+resolving it hides it from the triggered monitors page.
+
+Otherwise the monitor picks up the current state on the next evaluation. 
+
+In other words, if the value is still above/below the configured threshold then the monitor may re-trigger upon the next evaluation (in about 60 seconds).
+
+## Backup your monitors
+
+There are multiple community projects for maintaining or managing Monitors along with some other Datadog components via the API's:
+
+* https://github.com/trueaccord/DogPush
+* https://github.com/winebarrel/barkdog
+* https://github.com/airbnb/interferon
+* https://github.com/rapid7/dogwatch
+* https://www.terraform.io/docs/providers/datadog/r/monitor.html

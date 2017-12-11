@@ -2,6 +2,10 @@
 title: Agent Status and Information
 kind: faq
 customnav: agentnav
+further_reading:
+- link: "/agent/"
+  tag: "Documentation"
+  text: Learn more about the Datadog Agent
 ---
 
 ## Mac OS X
@@ -91,7 +95,7 @@ sudo ~/.datadog-agent/bin/info -v
 
 For 5.2 and later versions of the agent go to the Datadog Agent Manager->Settings->Agent Status
 
-{{< img src="agent/faq/windows_status.png" alt="Windows Status" responsive="true" >}}
+{{< img src="agent/faq/windows_status.png" alt="Windows Status" responsive="true" popup="true">}}
 
 It's also possible to run the info command using Powershell:
 
@@ -107,3 +111,5 @@ If you're running on a version older than 5.2 visit the status page in your web 
 
 http://localhost:17125/status
 The status page is supported in Agent version 3.9.1-5.1.1
+
+{{< partial name="whats-next/whats-next.html" >}}

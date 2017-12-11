@@ -2,9 +2,13 @@
 title: What is the "Do (not) require a full window of data for evaluation" monitor parameter?
 kind: faq
 customnav: monitornav
+further_reading:
+- link: "/monitors/monitor_types"
+  tag: "Documentation"
+  text: Learn how to create a monitor
 ---
 
-{{< img src="monitors/faq/Require_screen.png" alt="Require_screen" responsive="true">}}
+{{< img src="monitors/faq/Require_screen.png" alt="Require_screen" responsive="true" popup="true" >}}
 
 There are 2 main scenarios for which you'll likely need to **require a full window of data** for evaluation:
 
@@ -21,7 +25,8 @@ There are 2 main scenarios for which you'll likely need to **require a full win
 * Datadog monitors are evaluated every minute, so 50% of the time, the monitor will see 2 values over the past 5 minutes (monitor value 4). The other 50% of the time, 3 values are seen (monitor value 6).
 * Without requiring a full window of data, even with constant data, the monitor sees compares different values over time against the threshold you set up.
 
-There are 2 main scenarios for which you'll need to **disable** the full window of data, they correspond to sparse metrics :
+
+**Disable** the full window of data in 2 main scenarios, they correspond to sparse metrics :
 
 * Metric not sent at a regular interval
 * Metric not often sent compared to the alerting window
@@ -35,3 +40,5 @@ There are 2 main scenarios for which you'll need to **disable** the full window
 * It doesn't really make sense to ask for a full window of data, and using this parameter may cause the monitor to skip all evaluations and not alert you at all.
 
 For other scenarios, this **full window of data** doesn't have much influence on your monitor.
+
+{{< partial name="whats-next/whats-next.html" >}}

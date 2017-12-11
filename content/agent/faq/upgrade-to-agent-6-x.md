@@ -16,13 +16,13 @@ Golang has allowed us to take advantage of concurrency. In place of the three pr
 
 Agent 6 has significantly improved resource usage over Agent 5.
 It has decreased CPU usage:
-{{< img src="agent/faq/cpu_usage.png" alt="CPU Usage" responsive="true" >}}
+{{< img src="agent/faq/cpu_usage.png" alt="CPU Usage" responsive="true" popup="true">}}
 
 It has a decrease Memory usage:
-{{< img src="agent/faq/memory_usage.png" alt="Memory Usage" responsive="true" >}}
+{{< img src="agent/faq/memory_usage.png" alt="Memory Usage" responsive="true" popup="true">}}
 
 It uses fewer File Descriptors:
-{{< img src="agent/faq/file_descriptor.png" alt="Dile descriptor" responsive="true" >}}
+{{< img src="agent/faq/file_descriptor.png" alt="Dile descriptor" responsive="true" popup="true">}}
 
 
 It has an all around decreased footprint.

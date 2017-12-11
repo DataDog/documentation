@@ -1,3 +1,3 @@
 #
 # This is not yet supported by the Python Client for Datadog API
-# Please consult the shell example 
+# Consult the curl example 

@@ -9,7 +9,7 @@ When using a custom instrumentation of your application, if you notice any Reso
 
 A Resource is connected to a Service by more than the Service Name - it is also done via the Name of the top-level span of the trace. This means that a Service requires a top level name to be consistent across your resources. You can see this in the following image in the address bar:
 
-{{< img src="tracing/faq/APM_service_name.png" alt="APM Service Name" responsive="true" >}}
+{{< img src="tracing/faq/APM_service_name.png" alt="APM Service Name" responsive="true" popup="true">}}
 
 1. The Service name that is defined for all of these Resources (The name selected from the Services page in the UI).
 

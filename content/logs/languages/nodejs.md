@@ -1,16 +1,29 @@
 ---
-title: NodeJS log Collection
+title: NodeJS Log Collection
 kind: documentation
 autotocdepth: 2
 customnav: lognav
 beta: true
+further_reading:
+- link: "/logs/processing"
+  tag: "Documentation"
+  text: Learn how to process your logs
+- link: "/logs/parsing"
+  tag: "Documentation"
+  text: Learn more about parsing
+- link: "/logs/explore"
+  tag: "Documentation"
+  text: Learn how to explore your logs
+- link: /logs/faq/log-collection-troubleshooting-guide
+  tag: "FAQ"
+  text: Log Collection Troubleshooting Guide
 ---
 
 ## Overview 
 
 To log from your NodeJS application, we recommends to use [Winston](https://github.com/winstonjs/winston) - as you'll get all the features you need to build up your logging strategy. 
 
-We also strongly encourage you to setup your logging library to produce your logs in JSON format to avoid sustaning [custom parsing rules](/logs/parsing).
+We also strongly encourage you to setup your logging libraries to produce your logs in JSON format to avoid sustaning [custom parsing rules](/logs/parsing).
 
 Winston is available through [NPM](https://www.npmjs.com). So, in order to get started, you want to add the dependency to your code.
 
@@ -110,3 +123,7 @@ Here are some little advices:
 - Log a lot in the DEBUG level and log accurately in the INFO, WARNING and FATAL levels; since these are the log levels you'll get in your production environments.
 - Start small and try to log the important stuff first, instead of being comprehensive. Then add what is missing after having a discussion with your team.
 - Use metas! Add context to any log so you can quickly filter over users, customers or any business centric attribute.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

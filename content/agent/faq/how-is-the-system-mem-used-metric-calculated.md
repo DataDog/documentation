@@ -2,6 +2,10 @@
 title: How is the 'system.mem.used' metric calculated?
 kind: faq
 customnav: agentnav
+further_reading:
+- link: "/developers/metrics"
+  tag: "Documentation"
+  text: Learn more about Metrics
 ---
 
 The manner in which Datadog calculates the system.mem.used metric produces a value that may sometimes be different from what might be displayed by common system resource reporting tools.
@@ -29,4 +33,4 @@ Again, Datadog's system.mem.used metric includes cached memory, so subtracting
 
 **The system.mem.usable metric represents free memory plus cached memory plus buffers** (on Linux, it reflects "MemAvailable" attribute from /proc/meminfo whenever possible).
 
- 
+{{< partial name="whats-next/whats-next.html" >}}

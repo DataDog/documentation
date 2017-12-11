@@ -3,6 +3,16 @@ title: How to Send Logs to Datadog via External Log Shippers
 kind: faq
 customnav: lognav
 beta: true
+further_reading:
+- link: "/logs/faq/i-have-a-custom-log-file-with-heightened-read-permissions"
+  tag: "FAQ"
+  text: I have a custom log file with heightened read-permissions; how do I send it to Datadog
+- link: "/logs/"
+  tag: "Documentation"
+  text: Learn how to collect your logs
+- link: "/logs/explore"
+  tag: "Documentation"
+  text: Learn how to explore your logs
 ---
 
 The best and easiest way to send logs to Datadog is through the Datadog Agent. You can read how to configure the dd-agent to send logs to [Datadog here](/logs/). 
@@ -29,7 +39,7 @@ This approach can be especially useful for sending to Datadog logs that have hei
 ## Rsyslog
 
 1. (Optional)Activate Rsyslog file monitoring module
-    If you want to watch/monitor specific log files, then you have to activate the imfile module by adding this to  your rsyslog.conf:
+    If you want to watch/monitor specific log files, then you have to activate the imfile module by adding this to  your `rsyslog.conf`:
 
     * **Rsyslog Version <8**
         ```
@@ -38,6 +48,7 @@ This approach can be especially useful for sending to Datadog logs that have hei
         $PrivDropToGroup adm
         $WorkDirectory /var/spool/rsyslog
         ```
+
     * **Rsyslog Version >= 8**
         ```
         module(load="imfile" PollingInterval="10") #needs to be done just once
@@ -48,6 +59,7 @@ This approach can be especially useful for sending to Datadog logs that have hei
 3. (Optional) Set the file to monitor
     Add the following in `/etc/rsyslog.d/datadog.conf`
         * **Rsyslog Version <8**
+
         ```
         # Input for FILE1
         $InputFileName /<path_to_file1>
@@ -56,22 +68,28 @@ This approach can be especially useful for sending to Datadog logs that have hei
         $InputFileSeverity info
         $InputRunFileMonitor
         ```
+
         * **Rsyslog Version >= 8**
+
         ```
         #For each file to send
         input(type="imfile" ruleset="infiles" Tag="<app_name_of_file1>" File="<path_to_file1>" StateFile="<unique_file_id1>")
         ```
 4. Send the logs to your Datadog platform
     To send logs directly to your Datadog account from Rsyslog over TCP, we firstly need to to define the format in `/etc/rsyslog.d/datadog.conf`:
+
     ```
     $template DatadogFormat,"YOURAPIKEY <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - - %msg%\n"
     ```
+
     Then define the endpoint:
     * **Rsyslog Version <8**
+
     ```
     *.* @@intake.logs.datadoghq.com:10516;DatadogFormat
     ```
     * **Rsyslog Version >= 8**
+
     ```
     ruleset(name="infiles") {
         action(type="omfwd" target="intake.logs.datadoghq.com" protocol="tcp" port="10516" template="DatadogFormat")
@@ -89,12 +107,15 @@ This approach can be especially useful for sending to Datadog logs that have hei
     While sending your logs directly from Rsyslog to your Datadog account, if you want to add TLS encryption, you can take the following steps. 
 
     * Install rsyslog-gnutls:
+     
     ```
     sudo apt-get install rsyslog-gnutls
     ```
+
     Download the public key for TLS encryption of logs from [this link](https://gist.githubusercontent.com/estib/8762bc1a2a5bda781a6e55cca40235f2/raw/665b6b2906a728027f508ea067f01cdf3cf72b49/intake.logs.datadoghq.com.crt). Save it to `/etc/ssl/certs/intake.logs.datadoghq.com.crt
 
     Modify your `/etc/rsyslog.d/datadog.conf` to end with the following content:
+
     ```
     $DefaultNetstreamDriverCAFile /etc/ssl/certs/intake.logs.datadoghq.com.crt
     $ActionSendStreamDriver gtls
@@ -107,9 +128,8 @@ This approach can be especially useful for sending to Datadog logs that have hei
 6. Restart Rsyslog and your new logs will get forwarded directly to your Datadog account.
 
 7. Associate those logs with the host metrics and tags
-    In order to make sure that in your Datadog account these logs are associated with the metrics and tags from the same host, it is important to set the same HOSTNAME in your rsyslog.conf so that its value matches the hostname of your Datadog metrics.
-
-    Please note that if you did not specify any hostname in your configuration file for the metrics via the datadog.conf or datadog.yaml, then you do not need to change anything.
+    In order to make sure that in your Datadog account these logs are associated with the metrics and tags from the same host, it is important to set the same HOSTNAME in your `rsyslog.conf` so that its value matches the hostname of your Datadog metrics.
+    Note that if you did not specify any hostname in your configuration file for the metrics via the `datadog.conf` or datadog.yaml, then you do not need to change anything.
     If you did specify a custom Hostname for your metric, make sure to replace the %HOSTNAME% value in the format to match the same custom name.
 
 8. Enjoy Datadog Integrations
@@ -117,7 +137,8 @@ This approach can be especially useful for sending to Datadog logs that have hei
 
     Otherwise you need a specific format per log source which means you need a specific configuration file per source in /etc/rsyslog.d/
 
-    To set the source, use the following format (if you have several sources, please change the name of the format in each file):
+    To set the source, use the following format (if you have several sources, change the name of the format in each file):
+
     ```
     $template DatadogFormat,"YOURAPIKEY <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - [metas ddsource=\"mysourcename\"] %msg%\n"
     ```
@@ -143,6 +164,7 @@ In order to get the best use out of your logs in Datadog, it is important to hav
 
 1. Configure NXLog to send your logs to your Datadog platform
     Replace the whole file in `C:\Program Files\nxlog\conf` by the following: 
+
     ```
     ## Please set the ROOT to the folder your nxlog was installed into,
     ## otherwise it will not start.
@@ -212,3 +234,4 @@ In order to get the best use out of your logs in Datadog, it is important to hav
     Open the service administrative tool:
     `C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Administrative Tools\Services.lnk`.
 
+{{< partial name="whats-next/whats-next.html" >}}

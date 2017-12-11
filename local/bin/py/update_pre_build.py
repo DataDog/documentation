@@ -8,7 +8,7 @@ import platform
 import re
 import tempfile
 from collections import OrderedDict
-from functools import partial
+from functools import partial, wraps
 from itertools import chain
 from multiprocessing.pool import ThreadPool as Pool
 from optparse import OptionParser
@@ -17,6 +17,33 @@ from os.path import exists, basename, curdir, join, abspath, normpath, dirname
 import requests
 import yaml
 from tqdm import *
+import pickle
+
+
+def cache_by_sha(func):
+    """ only downloads fresh file, if we don't have one or we do and the sha has changed """
+    @wraps(func)
+    def cached_func(*args, **kwargs):
+        cache = {}
+        list_item = args[1]
+        dest_dir = kwargs.get('dest_dir')
+        path_to_file = list_item.get('path', '')
+        file_out = '{}{}'.format(dest_dir, path_to_file)
+        p_file_out = '{}{}.pickle'.format(dest_dir, path_to_file)
+        makedirs(dirname(file_out), exist_ok=True)
+        if exists(p_file_out) and exists(file_out):
+            with open(p_file_out, 'rb') as pf:
+                cache = pickle.load(pf)
+        cache_sha = cache.get('sha', False)
+        input_sha = list_item.get('sha', False)
+        if cache_sha and input_sha and cache_sha == input_sha:
+            # do nothing as we have the up to date file already
+            return None
+        else:
+            with open(p_file_out, mode='wb+') as pf:
+                pickle.dump(list_item, pf, pickle.HIGHEST_PROTOCOL)
+            return func(*args, **kwargs)
+    return cached_func
 
 
 class GitHub:
@@ -35,7 +62,8 @@ class GitHub:
     def extract(self, data):
         out = []
         for item in data.get('tree', []):
-            out.append({'path': item.get('path', ''), 'url': item.get('url', ''), 'type': item.get('type', ''), 'sha': item.get('sha', '')})
+            out.append({'path': item.get('path', ''), 'url': item.get('url', ''), 'type': item.get('type', ''),
+                        'sha': item.get('sha', '')})
             if item.get('tree', None):
                 out.append(self.extract(item.get('tree')))
         return out
@@ -62,28 +90,32 @@ class GitHub:
             filtered_listing = []
             for item in listing:
                 path = item.get('path', '')
-                for glob in globs:
-                    if fnmatch.fnmatch(path, glob):
+                for glob_string in globs:
+                    if fnmatch.fnmatch(path, glob_string):
                         filtered_listing.append(item)
             return filtered_listing
         else:
             return listing
 
-    def raw(self, org, repo, branch, path_to_file, file_out):
+    @cache_by_sha
+    def raw(self, list_item, org, repo, branch, dest_dir):
         headers = self.headers()
+        path_to_file = list_item.get('path', '')
+        file_out = '{}{}'.format(dest_dir, path_to_file)
         raw_response = requests.get(
             'https://raw.githubusercontent.com/{0}/{1}/{2}/{3}'.format(org, repo, branch, path_to_file),
             headers=headers
         )
         if raw_response.status_code == requests.codes.ok:
+            makedirs(dirname(file_out), exist_ok=True)
             with open(file_out, mode='wb+') as f:
                 f.write(raw_response.content)
 
 
 class PreBuild:
-    def __init__(self, options):
+    def __init__(self, opts):
         super().__init__()
-        self.options = options
+        self.options = opts
         self.tempdir = '/tmp' if platform.system() == 'Darwin' else tempfile.gettempdir()
         self.data_dir = '{0}{1}{2}'.format(abspath(normpath(options.source)), sep, 'data' + sep)
         self.content_dir = '{0}{1}{2}'.format(abspath(normpath(options.source)), sep, 'content' + sep)
@@ -107,12 +139,15 @@ class PreBuild:
             'mesos_master': {'action': 'merge', 'target': 'mesos', 'remove_header': True},
             'mesos_slave': {'action': 'merge', 'target': 'mesos', 'remove_header': False},
             'kafka_consumer': {'action': 'merge', 'target': 'kafka', 'remove_header': False},
+            'kube_dns': {'action': 'discard', 'target': 'none', 'remove_header': False},
+            'kubernetes_state': {'action': 'discard', 'target': 'none', 'remove_header': False},
         })
         self.initial_integration_files = glob.glob('{}*.md'.format(self.content_integrations_dir))
         makedirs(self.data_integrations_dir, exist_ok=True)
         makedirs(self.content_integrations_dir, exist_ok=True)
 
-    def csv_to_yaml(self, key_name, csv_filename, yml_filename):
+    @staticmethod
+    def csv_to_yaml(key_name, csv_filename, yml_filename):
         """
         Given a file path to a single csv file convert it to a yaml file
 
@@ -129,19 +164,20 @@ class PreBuild:
                 f.write(yaml.dump(yaml_data, default_flow_style=False))
 
     def download_from_repo(self, org, repo, branch, globs):
-        def download_raw(item, dest, org, repo, branch):
-            path_to_file = item.get('path', '')
-            if path_to_file:
-                file_out = '{}{}'.format(dest, path_to_file)
-                makedirs('{}{}'.format(dest, dirname(path_to_file)), exist_ok=True)
-                gh.raw(org, repo, branch, path_to_file, file_out)
-            return None
+        """
+        Takes github info and file globs and downloads files from github using multiple processes
+        :param org: github organization or person
+        :param repo: github repo name
+        :param branch: the branch name
+        :param globs: list of strings in glob format of what to extract
+        :return:
+        """
         with GitHub(self.options.token) as gh:
             listing = gh.list(org, repo, branch, globs)
             dest = '{0}{1}{2}'.format(self.extract_dir, repo, sep)
             with Pool(processes=self.pool_size) as pool:
-                for result in tqdm(pool.imap_unordered(partial(download_raw, dest=dest, org=org, repo=repo, branch=branch), listing)):
-                    pass
+                r = [x for x in tqdm(
+                    pool.imap_unordered(partial(gh.raw, org=org, repo=repo, branch=branch, dest_dir=dest), listing))]
 
     def process(self):
         """
@@ -165,34 +201,14 @@ class PreBuild:
             self.download_from_repo('DataDog', 'integrations-core', 'master', integrations_globs)
             self.options.integrations = '{0}{1}{2}'.format(self.extract_dir, 'integrations-core', sep)
 
-        globs = ['{}{}'.format(self.options.dogweb, x) for x in dogweb_globs]
-        globs.extend(['{}{}'.format(self.options.integrations, x) for x in integrations_globs])
+        globs = []
+        for d_glob, i_glob in zip(dogweb_globs, integrations_globs):
+            globs.extend(['{}{}'.format(self.options.dogweb, d_glob), '{}{}'.format(self.options.integrations, i_glob)])
 
         for file_name in tqdm(chain.from_iterable(glob.iglob(pattern, recursive=True) for pattern in globs)):
             self.process_integration_metric(file_name)
             self.process_integration_manifest(file_name)
             self.process_integration_readme(file_name)
-
-        for int_file_name in tqdm(glob.iglob('{}*.md'.format(self.content_integrations_dir))):
-            if int_file_name not in self.initial_integration_files:
-                item = [d for d in self.datafile_json if d.get('name', '').lower() == basename(int_file_name).replace('.md', '')]
-                with open(int_file_name, 'r+') as f:
-                    content = f.read()
-                    template = "---\n{front_matter}\n---\n\n{content}\n"
-                    if item and len(item) > 0:
-                        item[0]['kind'] = 'integration'
-                        item[0]['integration_title'] = item[0].get('public_title', '').replace('Datadog-', '').replace('Integration', '').strip()
-                        item[0]['git_integration_title'] = item[0].get('name', '').lower()
-                        if item[0].get('type', None):
-                            item[0]['ddtype'] = item[0].get('type')
-                            del item[0]['type']
-                        fm = yaml.dump(item[0], default_flow_style=False).rstrip()
-                    else:
-                        fm = {'kind': 'integration'}
-                    out = template.format(front_matter=fm, content=content)
-                    f.truncate()
-                    f.seek(0)
-                    f.write(out)
 
         self.merge_integrations()
 
@@ -224,6 +240,8 @@ class PreBuild:
                             target_file.write(content)
                     else:
                         open(output_file, 'w').close()
+                elif action == 'discard':
+                    remove(input_file)
 
     def process_integration_metric(self, file_name):
         """
@@ -268,7 +286,6 @@ class PreBuild:
         :param file_name: path to a readme md file
         """
         if file_name.endswith('.md'):
-            dir_name = basename(dirname(file_name))
             metrics = glob.glob('{path}{sep}*metadata.csv'.format(path=dirname(file_name), sep=sep))
             metrics = metrics[0] if len(metrics) > 0 else None
             metrics_exist = metrics and exists(metrics) and linecache.getline(metrics, 2)
@@ -282,10 +299,35 @@ class PreBuild:
                 if title not in [k for k, v in self.integration_mutations.items() if v.get('action') == 'merge']:
                     result = re.sub(self.regex_h1, '', result, 0)
                 if metrics_exist:
-                    result = re.sub(self.regex_metrics, r'\1{{< get-metrics-from-git "'+title+'" >}}\3\4', result, re.DOTALL)
+                    result = re.sub(self.regex_metrics, r'\1{{< get-metrics-from-git "'+title+'" >}}\3\4', result, 0)
+                result = self.add_integration_frontmatter(new_file_name, result)
                 if not exist_already:
                     with open(self.content_integrations_dir + new_file_name, 'w') as out:
                         out.write(result)
+
+    def add_integration_frontmatter(self, file_name, content):
+        """
+        Takes an integration README.md and injects front matter yaml based on manifest.json data of the same integration
+        :param file_name: new integration markdown filename e.g airbrake.md
+        :param content: string of markdown content
+        :return: formatted string
+        """
+        fm = {}
+        template = "---\n{front_matter}\n---\n\n{content}\n"
+        if file_name not in self.initial_integration_files:
+            item = [d for d in self.datafile_json if d.get('name', '').lower() == basename(file_name).replace('.md', '')]
+            if item and len(item) > 0:
+                item[0]['kind'] = 'integration'
+                item[0]['integration_title'] = item[0].get('public_title', '').replace('Datadog-', '').replace(
+                    'Integration', '').strip()
+                item[0]['git_integration_title'] = item[0].get('name', '').lower()
+                if item[0].get('type', None):
+                    item[0]['ddtype'] = item[0].get('type')
+                    del item[0]['type']
+                fm = yaml.dump(item[0], default_flow_style=False).rstrip()
+            else:
+                fm = {'kind': 'integration'}
+        return template.format(front_matter=fm, content=content)
 
 if __name__ == '__main__':
     parser = OptionParser(usage="usage: %prog [options] link_type")

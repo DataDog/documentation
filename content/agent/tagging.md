@@ -10,15 +10,22 @@ aliases:
 Tagging is used throughout the Datadog product to make it easier to subset and query the machines and metrics that you have to monitor. Without the ability to assign and filter based on tags, finding the problems that exist in your environment and narrowing them down enough to discover the true causes would be extremely difficult.
 
 <div class="alert alert-info">
-We recommend to use the format <code>key:value</code> when using tags. Like <code>env:prod</code> or <code>role:database</code>
+We recommend to use the format <code>key:value</code> when using tags, like <code>env:prod</code>.
 </div>
+
+Tags must start with a letter, and after that may contain alphanumerics,
+underscores, minuses, colons, periods and slashes. Other characters will get
+converted to underscores. Tags can be up to 200 characters long and support
+Unicode. Tags will be converted to lowercase as well.
+
+Note: An exception to this is with trailing underscores, which will be trimmed off of tags (e.g. path:thing_ becomes path:thing).
 
 ## How to assign tags
 There are four primary ways to assign tags: inherited from the integration, in the configuration, in the UI, and using the API, though the UI and API only allow you to assign tags at the host level. The recommended method is to rely on the integration or via the configuration files.
 
 ### Inheriting tags from an integration
 
-The easiest method for assigning tags is to rely on the integration. Tags assigned to your Amazon Web Services instances, Chef recipes, Docker labels, and more are all automatically assigned to the hosts and metrics when they are brought in to Datadog.
+The easiest method for assigning tags is to rely on the integration. Tags assigned to your Amazon Web Services instances, Chef recipes and more are all automatically assigned to the hosts and metrics when they are brought in to Datadog.
 
 The following integration sources create tags automatically in Datadog:
 
@@ -60,15 +67,15 @@ The following integration sources create tags automatically in Datadog:
 | [Kubernetes](/integrations/kubernetes)                            | Minion Name, Namespace, Replication Controller, Labels, Container Alias |
 | [Marathon](/integrations/marathon)                              | URL |
 | [Memcached](/integrations/memcached)                             | Host, Port,  Request, Cache Hit or Miss |
-| [Mesos](/integrations/mesos_master)                                 | Role, URL, PID, Slave or Master Role, Node, Cluster,   |
+| [Mesos](/integrations/mesos)                                 | Role, URL, PID, Slave or Master Role, Node, Cluster,   |
 | [Mongo](/integrations/mongodb)                                 | Server Name |
 | [OpenStack](/integrations/openstack)                             | Network ID, Network Name, Hypervisor Name, ID, and Type, Tenant ID,  Availability Zone |
-| [PHP FPM](/integrations/phpfpm)                               | Pool Name |
+| [PHP FPM](/integrations/php_fpm)                               | Pool Name |
 | [Pivotal](/integrations/pivotal)                               | Current State, Owner, Labels, Requester, Story Type |
 | [Postfix ](/integrations/postfix)                              | Queue, Instance |
 | [Puppet](/integrations/puppet)                              | Puppet Tags |
 | [RabbitMQ](/integrations/rabbitmq)                              | Node, Queue Name, Vhost, Policy, Host |
-| [Redis](/integrations/redis)                                 | Host, Port,  Slave or Master |
+| [Redis](/integrations/redisdb)                                 | Host, Port,  Slave or Master |
 | [RiakCS](/integrations/riakcs)                                | Aggregation Key |
 | [SNMP](/integrations/snmp)                                  | Device IP Address |
 | [Supervisord](/integrations/supervisor)                          | Server Name, Process Name |
@@ -81,7 +88,10 @@ The following integration sources create tags automatically in Datadog:
 
 
 ### Assigning tags using the configuration files
-The Datadog integrations are all configured via the yaml configuration files located in the conf.d directory in your agent install. For more about where to look for your configuration files, refer [to this article][agentinstall]. You can define tags in the configuration file for the overall agent as well as for each integration, though the datadog.conf file is a more traditional ini file. In yaml files, there is a tag dictionary with a list of tags you want assigned at that level. Any tag you assign to the agent will apply to every integration on that agent's host.
+The Datadog integrations are all configured via the yaml configuration files located in the **conf.d** directory in your agent install. For more about where to look for your configuration files, refer [to this article][agentinstall].  
+
+Define tags in the configuration file for the overall agent as well as for each integration, though the `datadog.conf` file is a more traditional init file.  
+In yaml files, there is a tag dictionary with a list of tags you want assigned at that level. Any tag you assign to the agent will apply to every integration on that agent's host.
 
 Dictionaries with lists of values have two different yet functionally equivalent forms:
 
@@ -94,7 +104,7 @@ or
       - key_second_tag:value_2
       - key_third_tag:value_3
 
-You will see both forms in the yaml configuration files, but for the datadog.conf ini file only the first form is valid.
+You will see both forms in the yaml configuration files, but for the `datadog.conf` init file only the first form is valid.
 
 Each tag can be anything you like but you will have the best success with tagging if your tags are key:value pairs. Keys could represent the role, or function, or region, or application and the value is the instance of that role, function, region, or application. Here are some examples of good tags:
 
@@ -124,9 +134,9 @@ After you have assigned tags at the host and integration level, you can start us
 
 ### Using tags in the Events List
 
-The [Events List](/graphing/event_stream/) will show you all the events that have occured in your environment over the time period specified. This can be overwhelming so you can use tags to filter down the list based on the tags you have assigned. You can enter any text you want in the search box above the Event List and a full text search will be performed. You can also enter `tags:` followed by a tag to see all the events that come from a host or integration with that tag. The example in the image is the tag role:cassandra. So the search text is `tags:role:cassandra`.
+The [Events List](/graphing/event_stream/) will show you all the events that have occurred in your environment over the time period specified. This can be overwhelming so you can use tags to filter down the list based on the tags you have assigned. You can enter any text you want in the search box above the Event List and a full text search will be performed. You can also enter `tags:` followed by a tag to see all the events that come from a host or integration with that tag. The example in the image is the tag `role:cassandra`. So the search text is `tags:role:cassandra`.
 
-{{< img src="agent/tagging/eventtags.png" alt="Events List and Tags" responsive="true" >}}
+{{< img src="agent/tagging/eventtags.png" alt="Events List and Tags" responsive="true" popup="true">}}
 
 ### Using tags in Dashboards
 
@@ -134,14 +144,14 @@ You can use tags to narrow down the metrics to display on a dashboard graph, or 
 To narrow down the metrics to display, enter the tag in the `from:` textbox. 
 You will now be looking at a chosen metric over all the hosts that have that particular tag assigned.
 
-{{< img src="agent/tagging/dashboardtags_1.png" alt="Tags in Dashboards from textbox" responsive="true" >}}
+{{< img src="agent/tagging/dashboardtags_1.png" alt="Tags in Dashboards from textbox" responsive="true" popup="true">}}
 
 To group using tags, enter the key part of the tag in the `avg by:` textbox. 
 
 For instance, if you have a time series graph showing a metric tagged by the reporting hosts roles —`role:database`, `role:frontend`, or `role:loadbalancer`— enter role in the **avg_by** textbox.  
 This causes the graph to show just one line for each tag value — `database`, `frontend`, and `loadbalancer`. Each line represents the average metric value across all hosts that share that role.
 
-{{< img src="agent/tagging/dashboardtags.png" alt="Tags in Dashboards avgby textbox" responsive="true" >}}
+{{< img src="agent/tagging/dashboardtags.png" alt="Tags in Dashboards avgby textbox" responsive="true" popup="true">}}
 
 You can also use tags to overlay events on the dashboard. This works in exactly the same way as in the [Events List](/graphing/event_stream/). 
 Simply enter `tags:` followed by the tag and you will see the corresponding events overlaid as vertical bars on each graph.
@@ -150,20 +160,20 @@ Simply enter `tags:` followed by the tag and you will see the corresponding even
 
 To filter the list of hosts in the [Infrastructure list](/graphing/infrastructure/), enter a tag in the filter textbox at the top of the page. You can also group the hosts by entering the key portion of the tag in the group by textbox. So if you enter role in the group box, you will see each role as a group heading followed by the hosts with that tag.
 
-{{< img src="agent/tagging/infrastructuretags.png" alt="Tags in the Infrastructure List" responsive="true" >}}
+{{< img src="agent/tagging/infrastructuretags.png" alt="Tags in the Infrastructure List" responsive="true" popup="true">}}
 
 ### Using tags in Monitors
 
 When creating a [monitor](/monitors/monitor_types/):
 
 * Use tags in the `from:` textbox to limit the monitor scope to only metrics that have those tags.
-{{< img src="agent/tagging/monitortags.png" alt="from textbox tags in Monitors" responsive="true" >}}
+{{< img src="agent/tagging/monitortags.png" alt="from textbox tags in Monitors" responsive="true" popup="true">}}
 
 * Use tags in the `excluding:` textbox to remove the corresponding metrics of the monitor scope.
-{{< img src="agent/tagging/monitortags_1.png" alt="excluding textbox tags in Monitors" responsive="true" >}}
+{{< img src="agent/tagging/monitortags_1.png" alt="excluding textbox tags in Monitors" responsive="true" popup="true">}}
 
 * Use tags in the `avg by` textbox transform your monitor into a multi-alert monitor on each value of this tags.
-{{< img src="agent/tagging/monitortags_2.png" alt="excluding textbox tags in Monitors" responsive="true" >}}
+{{< img src="agent/tagging/monitortags_2.png" alt="excluding textbox tags in Monitors" responsive="true" popup="true">}}
 Tags on these events are related to the `avg by:` value. In order to have host-related tags (such as AWS integration tags), use `avg by: host`
 
 ### Tell me about tagging!
@@ -202,7 +212,7 @@ sum:page.views{domain:example.com} by {host}
 
 Further tagging info can be found [here](/integrations/amazon_web_services/).
 
-For information on AWS tagging, please see [here](/developers/metrics/).
+For information on AWS tagging, see [this tagging doc page](/agent/tagging/).
 
 [tagsapi]: /api#tags
 [agentinstall]: https://app.datadoghq.com/account/settings#agent

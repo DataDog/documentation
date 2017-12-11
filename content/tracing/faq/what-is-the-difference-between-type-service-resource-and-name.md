@@ -7,7 +7,7 @@ customnav: tracingnav
 
 When instrumenting the Traces Agent with your applications, and going through the [Traces Page](https://app.datadoghq.com/trace/services), you will come across the following Strings: "Type", "Service", "Resource", and "Name". What do these terms mean? 
 
-{{< img src="tracing/faq/trace_ui.png" alt="Trace UI" responsive="true" >}}
+{{< img src="tracing/faq/trace_ui.png" alt="Trace UI" responsive="true" popup="true">}}
 
 ## Type
 
@@ -31,7 +31,7 @@ These services are defined by the user when instrumenting their application with
 
 In the Datadog UI, this is the "Name" field in the above image.  An example of setting a custom Service using Python: 
 
-{{< img src="tracing/faq/custom_service.png" alt="Custom Service" responsive="true" >}}
+{{< img src="tracing/faq/custom_service.png" alt="Custom Service" responsive="true" popup="true">}}
 
 ## Resource
 
@@ -43,14 +43,14 @@ The Tracing backend can track thousands (not millions or billions) of unique res
 
 These resources can be found after clicking on a particular service:
 
-{{< img src="tracing/faq/Resources.png" alt="Resources" responsive="true" >}}
+{{< img src="tracing/faq/Resources.png" alt="Resources" responsive="true" popup="true">}}
 
 ## Name (Trace)
 
 The Name field can be found in the URL after clicking on a specific Service.
 
-{{< img src="tracing/faq/trace_url.png" alt="Trace URL" responsive="true" >}}
+{{< img src="tracing/faq/trace_url.png" alt="Trace URL" responsive="true" popup="true">}}
 
  This Name/Trace is the name given around the function or method that would execute the code for each "Resource". This can be modified by using the "tracer.trace" method as seen here (again in Python): 
 
-{{< img src="tracing/faq/name_python.png" alt="Name Python" responsive="true" >}}
+{{< img src="tracing/faq/name_python.png" alt="Name Python" responsive="true" popup="true">}}

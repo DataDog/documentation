@@ -1,14 +1,4 @@
 ---
-further_reading:
-- link: "/graphing/infrastructure/hostmap"
-  tag: ""
-  text: See all of your hosts together on one screen with the hostmap
-- link: "/graphing/infrastructure/livecontainers"
-  tag: ""
-  text: Get real-time visibility of all of the containers across your environment
-- link: "/graphing/infrastructure/process"
-  tag: ""
-  text: Understand what is going on at any level of your system
 title: Infrastructure List
 kind: documentation
 autotocdepth: 3
@@ -16,20 +6,31 @@ customnav: infrastructurenav
 aliases:
   - /hostnames
   - /infrastructure/
+further_reading:
+- link: "/graphing/infrastructure/hostmap"
+  tag: "Graphing"
+  text: See all of your hosts together on one screen with the hostmap
+- link: "/graphing/infrastructure/livecontainers"
+  tag: "Graphing"
+  text: Get real-time visibility of all of the containers across your environment
+- link: "/graphing/infrastructure/process"
+  tag: "Graphing"
+  text: Understand what is going on at any level of your system
 ---
 
 ## Overview
 
 The Infrastructure list page shows all hosts monitored by your datadog application:
 
-{{< img src="graphing/infrastructure/index/infrastructure_list.png" alt="Infrastructure list" responsive="true">}}
+{{< img src="graphing/infrastructure/index/infrastructure_list.png" alt="Infrastructure list" responsive="true" popup="true" >}}
 
+Note: All hosts that have not sent data in 24 hours will disappear from the infrastructure list; you can still query against them, but they will not appear in drop downs.
 
 ## Host details
 
 If you click on one host, You can see the tags applied to it:
 
-{{< img src="graphing/infrastructure/index/infrastructure_list_host_details.png" alt="Infrastructure list host details" responsive="true" >}}
+{{< img src="graphing/infrastructure/index/infrastructure_list_host_details.png" alt="Infrastructure list host details" responsive="true" popup="true">}}
 
 ### Agent Host Names
 
@@ -75,13 +76,13 @@ The names collected by the Agent (detailed [above](#agent-host-names)) are added
 You can see a list of all the hosts in your account from the Infrastructure tab
 in Datadog. From the Inspect panel, you can see (among other things) the list of aliases associated with each host.
 
-{{< img src="graphing/infrastructure/index/host_aliases.png" responsive="true">}}
+{{< img src="graphing/infrastructure/index/host_aliases.png" responsive="true" popup="true" >}}
 
 ### Export your infrastructure list and Agent versions
 
 If you need to print or export the list of hosts reporting to Datadog, use the "JSON API permalink" at the bottom of the Infrastructure List. 
 
-{{< img src="graphing/infrastructure/index/inf_list.png" alt="inf list" responsive="true">}}
+{{< img src="graphing/infrastructure/index/infrastructure_list.png" alt="inf list" responsive="true" popup="true" >}}
 
 Clicking this link will provide you with a JSON formatted list of all your hosts.  
 
@@ -97,8 +98,19 @@ Once you determine which hosts you would like to update you can either manually 
 
 Or you can make use of one our automation integrations like [Chef](/integrations/chef), [Puppet](/integrations/puppet), or [Ansible](/integrations/ansible).
 
-## What's Next
+### List of ec2 instances without the datadog-agent installed
+
+The host list and all its host information of the [Infrastructure List page](https://app.datadoghq.com/infrastructure) of Datadog is made available via the "JSON API permalink" at the bottom of the page.
+
+You can programmatically access host information and get the insights you need, one example is this python script that prints the list of hosts:
+
+* for which Datadog receives AWS EC2 information from Cloudwatch, through our AWS integration.
+* but that don't have the agent installed.
+
+{{< img src="graphing/infrastructure/index/ec2_instances_without_dd_agent.png" alt="ec2_instances_without_dd_agent" responsive="true" popup="true">}}
+
+See the script [here](https://gist.github.com/Martiflex/2803a28ec562fc9a15d404a539f85d38).
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-

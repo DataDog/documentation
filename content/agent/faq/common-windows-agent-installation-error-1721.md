@@ -2,6 +2,10 @@
 title: Common Windows Agent Installation Error 1721
 kind: faq
 customnav: agentnav
+further_reading:
+- link: "/agent/"
+  tag: "Documentation"
+  text: Learn more about the Datadog Agent
 ---
 
 One of the most common errors we see with an [Agent installation on windows](/agent/basic_agent_usage/windows) is a 1721 error that looks something like this:
@@ -23,3 +27,5 @@ We've found that this is generally due to one of two reasons:
  
 
 Hopefully if you encounter a 1721 Error, the above steps will get you running in no time!
+
+{{< partial name="whats-next/whats-next.html" >}}
