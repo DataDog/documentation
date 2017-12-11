@@ -2,7 +2,7 @@
 title: Forecasts
 kind: guide
 listorder: 24
-beta: true
+beta: false
 ---
 
 Forecasting is an algorithmic feature that allows you to predict where
