@@ -1,10 +1,8 @@
 ---
 title: Explore
 kind: documentation
-autotocdepth: 2
 customnav: lognav
 description: "The Logs Explorer is your Datadog home base for troubleshooting and exploration over your logs."
-beta: true
 further_reading:
 - link: "/logs/processing"
   tag: "Documentation"

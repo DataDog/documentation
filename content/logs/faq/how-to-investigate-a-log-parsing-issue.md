@@ -2,7 +2,6 @@
 title: How to investigate a log parsing issue
 kind: faq
 customnav: lognav
-beta: true
 further_reading:
 - link: "/logs/faq/log-parsing-best-practice"
   tag: "FAQ"

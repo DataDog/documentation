@@ -2,7 +2,6 @@
 title: Log FAQ
 kind: faq
 customnav: lognav
-beta: true
 ---
 
 {{< whatsnext desc="List of Frequently Asked Questions:" >}}

@@ -210,5 +210,12 @@ Another option is to apply the `ewma()` [function](/graphing/miscellaneous/funct
 
 {{< img src="monitors/monitor_types/anomaly/ewma_profile_updates.png" alt="Ewma profile updates" responsive="true" popup="true" >}}
 
+
+### Why do I get a query parsing error when trying to combine some functions with anomaly detection?
+
+Not all functions may be nested inside of calls to the `anomalies()` function. In particular, you may not include any of the following functions in an anomaly detection monitor or dashboard query: `cumsum()`, `integral()`, `outliers()`, `piecewise_constant()`, `robust_trend()`, or `trend_line()`.
+
+Anomaly detection uses historical data to establish a baseline for normal behavior for a series. The above-listed functions are sensitive to the placement of the query window; the value of the series at a single timestamp can change significantly based upon where it falls within the query window. This sensitivity prevents anomaly detection from determining a consistent baseline for the series.
+
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -1,10 +1,8 @@
 ---
 title: Parsing
 kind: documentation
-autotocdepth: 2
 customnav: lognav
 description: "Parse your logs using the Grok Processor"
-beta: true
 further_reading:
 - link: "/logs/processing"
   tag: "Documentation"

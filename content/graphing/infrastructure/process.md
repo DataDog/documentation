@@ -17,8 +17,7 @@ further_reading:
 
 ## Introduction
 
-Datadog Process and Container Monitoring allows for real-time visibility of the most granular elements in a deployment.  
-Taking inspiration from bedrock tools like *htop*, this centralized view, combined with existing tagging capabilities, allows you to understand what is going on at any level of your system and drill all the way down into the most fine details.
+Datadog Process Monitoring allows for real-time visibility of the most granular elements in a deployment.  Taking inspiration from bedrock tools like `htop`, this centralized view, combined with existing tagging capabilities, allows you to understand what is going on at any level of your system and drill all the way down into the most fine details.
 
 {{< img src="graphing/infrastructure/process/live_process_preview.png" alt="live process preview" responsive="true" popup="true">}}
 
@@ -51,32 +50,30 @@ Update to the Datadog Agent image version 5.16.0 or above:
 
 Follow the instructions for [docker-dd-agent][2], passing in the following attributes, in addition to any other custom settings as appropriate:
 
-    -v /etc/passwd:/etc/passwd:ro
-    -e DD_PROCESS_AGENT_ENABLED=true
-    -e HOST_PROC=/host/proc
-    -e HOST_SYS=/host/sys
+```
+-v /etc/passwd:/etc/passwd:ro
+-e DD_PROCESS_AGENT_ENABLED=true
+```
 
 ### Kubernetes Daemonset
 
 In the [dd-agent.yaml][3] manifest used to create the daemonset, add the following environmental variables, volume mount, and volume:
 
-    env:
-      - name: DD_PROCESS_AGENT_ENABLED
-        value: "true"
-      - name: HOST_PROC
-        value: /host/proc
-      - name: HOST_SYS
-        value: /host/sys
-    volumeMounts:
-      - name: passwd
-        mountPath: /etc/passwd
-        readOnly: true
-    volumes:
-      - hostPath:
-          path: /etc/passwd
-        name: passwd    
-    
-Refer to the standard [daemonset installation][4] and the [docker-dd-agent][5] information pages for further documentation.
+```
+ env:
+    - name: DD_PROCESS_AGENT_ENABLED
+      value: "true"
+  volumeMounts:
+    - name: passwd
+      mountPath: /etc/passwd
+      readOnly: true
+  volumes:
+    - hostPath:
+        path: /etc/passwd
+      name: passwd    
+```
+
+Refer to the standard [daemonset installation](http://docs.datadoghq.com/integrations/kubernetes/#installation-via-daemonsets-kubernetes-110) and the [docker-dd-agent](https://github.com/DataDog/docker-dd-agent) information pages for further documentation.
 
 ## Searching, Filtering, and Pivoting
 
@@ -87,70 +84,33 @@ Processes and containers are by their nature extremely high cardinality objects.
 
 {{< img src="graphing/infrastructure/process/postgres.png" alt="Postgres" responsive="true" popup="true">}}
 
-### Tagging
-
-Processes and containers are tagged with all existing host-level tags.  Additionally, we tag with metadata associated with individual processes and containers.
-
-* **Processes** are tagged by `#user`
-
-* **Containers** are tagged by `#container_image`
-
-Additionally, we include integrations with popular orchestrators, such as ECS and Kubernetes, which provide further container-level tags.  We also decorate each container with Docker, ECS, or Kubernetes icons so you can tell which are being orchestrated at a glance.
-
-ECS Containers are tagged by:
-
-* `#task_name`
-* `#task_version`
-* `#ecs_cluster`
-
-Kubernetes Containers are tagged by:
-
-* `#pod`
-* `#pod_ip`
-* `#service`
-* `#namespace`
-* `#cluster-name`
-* `#replica_set`
-* `#daemon_set`
-* `#job`
-* `#deployment`.
-
 ### Filtering and Pivoting
 
-Making sense of hundreds of thousands or millions of processes and containers can seem overwhelming!  Using tagging, described in the previous section, makes navigation easy.
+Making sense of hundreds of thousands or millions of processes can seem overwhelming!  Using tagging makes navigation easy.  In addition to all existing host-level tags, processes are tagged by `user`. 
 
-In the below, we have filtered down to a Kubernetes cluster of 9 nodes.  RSS and CPU utilization on containers is reported compared to the limits set on the containers, when they exist.  Here, we see that the containers in this cluster are way over provisioned, and that we could use tighter limits and bin packing to achieve better utilization of resources.
+First, we can filter down to role:McNulty-Query, which is our front end query service, in order to narrow our search.  Then we can search for our NGINX master processes, and pivot the table by Availability-Zone, to be confident about that service staying highly available.
 
-{{< img src="graphing/infrastructure/process/overprovisioned.png" alt="over provisioned" responsive="true" popup="true">}}
+{{< img src="graphing/infrastructure/process/mcnultynginx.png" alt="mcnulty nginx" responsive="true" popup="true">}}
 
-Container environments are dynamic and can be hard to follow.  Here, we pivot by `#service` and `#host`, and to reduce system noise, filter to `#namespace:default`, and we can see what services are running where, and how saturated key metrics are.
+Here, I am checking the Elasticsearch processes for an individual feature team.  I've also added metrics for voluntary and involuntary context switches, available in the gear menu on the upper-right of the table.
 
+{{< img src="graphing/infrastructure/process/burritoelasticsearch.png" alt="burrito elasticsearch " responsive="true" popup="true">}}
 
-{{< img src="graphing/infrastructure/process/hostxservice.png" alt="host x service" responsive="true" popup="true">}}
+Below, we have searched for ssh processes and pivoted by `user` to understand who is logged into which hosts.
 
-It would be easy to pivot by ECS `#task_name` and `#task_version` and understand changes to resource utilization between updates.
+{{< img src="graphing/infrastructure/process/sshusers.png" alt="ssh users" responsive="true" popup="true" >}}
 
-{{< img src="graphing/infrastructure/process/tasksxversion.png" alt="task x version" responsive="true" popup="true">}}
+Ok, so I guess that one is less exciting after redaction!
 
-Below, we have searched for ssh processes and pivoted by `#user` to understand who is logged into which hosts.
+## Enriched Live Containers view
 
-{{< img src="graphing/infrastructure/process/sshusers.png" alt="sshusers" responsive="true" popup="true">}}
+Live Processes adds extra visibility to your container deployments.  The [Live Containers](https://docs.datadoghq.com/infrastructure/livecontainers/) feature gives you a similarly comprehensive view of your container and orcestrator environment.  When Live Processes is enabled, the process tree for each container is included in the container inspection panel on that page.
 
-Ok, so I guess that last one is less exciting after redaction!
-
-## Broad Inspection, Deep Inspection
-
-Everyone's workflow differs.  Initially the table is displayed at the finest grain, but with the group-by field, you should start your investigation where it's appropriate for you: Grouping by Availability Zone, Host, Cluster, Pod, or wherever.
-
-From there, you can dig down into finer grains, or inspect each group to see individual processes or containers.  
-In the below screenshot, you can see an investigation that started by indexing by pod and service, dug into one pod to see the containers, and then expanded a container to see the process tree inside.  
-In the container inspect tray, we also have some recent context for these metrics.
-
-{{< img src="graphing/infrastructure/process/containerinspect.png" alt="container inspect" responsive="true" popup="true">}}
+{{< img src="graphing/infrastructure/process/containerinspect.png" alt="container inspect" responsive="true" popup="true" >}}
 
 ## Real-time monitoring
 
-While actively working with the Process and Containers page, metrics are collected at 2s resolution.  This is very important for highly volatile metrics such as CPU.  In the background, for historical context, metrics are collected at 10s resolution.
+While actively working with the Live Processes, metrics are collected at 2s resolution.  This is very important for highly volatile metrics such as CPU.  In the background, for historical context, metrics are collected at 10s resolution.  
 
 ## Notes/known issues
 

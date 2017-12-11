@@ -138,14 +138,14 @@ Here are the event fields (bold means the field is required):
 
 | Field | Type | Value |
 | --- | --- | --- |
-| msg_title | string | Title of the event. Will get indexed by our full-text search. |
-| timestamp | integer | Unix epoch timestamp. If omitted, will default to the time that the Agent parsed the event. |
-| msg_text | string | Body of the event. Will get indexed by our full-text search. |
+| **msg_title** | string | Title of the event. Will get indexed by our full-text search. |
+| **timestamp** | integer | Unix epoch timestamp. If omitted, will default to the time that the Agent parsed the event. |
+| **msg_text** | string | Body of the event. Will get indexed by our full-text search. |
 | alert_type | string enum | Indicates the severity of the event. Must be one of `error`, `warning`, `success` or `info`. If omitted, will default to `info`. Searchable by `alert_type:value` |
 | event_type | string | Describes what kind of event this is. Used as part of the aggregation key |
 | aggregation_key | string | Describes what this event affected, if anything. Used as part of the aggregation key |
 | host | string | Name of the host this event originated from. The event will automatically get tagged with any tags you've given this host using the [tagging page](https://app.datadoghq.com/infrastructure#tags) or the [tagging api](/api/#tags). The host value is used as part of the aggregation key. |
-| priority | string | Determines whether the event will be visible or hidden by default in the stream; Must be one of `low` or `normal` |
+| **priority** | string | Determines whether the event will be visible or hidden by default in the stream; Must be one of `low` or `normal` |
 
 The events with the same aggregation key within a 24 hour time window will get aggregated together on the stream.
 The aggregation key is a combination of the following fields:

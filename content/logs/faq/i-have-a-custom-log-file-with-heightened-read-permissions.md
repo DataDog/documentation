@@ -2,7 +2,6 @@
 title: I have a custom log file with heightened read-permissions; how do I send it to Datadog?
 kind: faq
 customnav: lognav
-beta: true
 further_reading:
 - link: "/logs/"
   tag: "Documentation"
