@@ -6,7 +6,17 @@
             <div class="col-6 col-sm-3 col-md-3 col-lg-3 col-xl-2-4">
                 <a class="card" href="{{ $dot.Site.BaseURL }}{{ .link }}">
                     <div class="card-body text-center">
-                         {{ partial "img.html" (dict "root" $dot "src" (print "icons/" .image) "class" "img-fluid" "alt" "platform") }}
+                        {{ $src := (print "icons/" .image)}}
+                        {{ $url := (print ($dot.Site.Params.img_url) "images/" (index $dot.Site.Data.manifests.images $src ) "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
+                        <picture class="mx-auto">
+                            <source srcset="{{ $url }}&w=100 1x, {{ $url }}&w=100&dpr=2 2x" media="(min-width: 1200px)">
+                            <source srcset="{{ $url }}&w=103 1x, {{ $url }}&w=103&dpr=2 2x" media="(min-width: 992px)">
+                            <source srcset="{{ $url }}&w=146 1x, {{ $url }}&w=146&dpr=2 2x" media="(min-width: 768px)">
+                            <source srcset="{{ $url }}&w=101 1x, {{ $url }}&w=101&dpr=2 2x" media="(min-width: 0px)">
+                            <img class="img-fluid"
+                                 srcset="{{ $url }}&w=100"
+                                 alt="integration">
+                        </picture>
                     </div>
                 </a>
             </div>

@@ -8,7 +8,7 @@ Java Management Extension (JMX) is the de facto method for emitting performance
 
 If you're interested in monitoring an application that Datadog doesn't currently provide an integration for and it's possible to query via JMX, you can use our existing integrations as examples to help get you started:
 
-* [Tomcat]( https://github.com/DataDog/integrations-core/blob/master/tomcat/conf.yaml.example) 
+* [Tomcat](https://github.com/DataDog/integrations-core/blob/master/tomcat/conf.yaml.example)
 * [ActiveMQ](https://github.com/DataDog/integrations-core/blob/master/activemq/conf.yaml.example)
 * [Kafka](https://github.com/DataDog/integrations-core/blob/master/kafka/conf.yaml.example )
 
