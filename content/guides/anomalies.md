@@ -172,3 +172,9 @@ How can we work around this problem? One approach is to add a `rollup()` to forc
 Another option is to apply the `ewma()` function to take a moving average. Like with rollups, this function will smooth away intermittent zeros so that drops in the metric can correctly be identified as anomalies.
 
 {{< img src="anomalies/ewma_profile_updates.png" >}}
+
+### Why do I get a query parsing error when trying to combine some functions with anomaly detection?
+
+Not all functions may be nested inside of calls to the `anomalies()` function. In particular, you may not include any of the following functions in an anomaly detection monitor or dashboard query: `cumsum()`, `integral()`, `outliers()`, `piecewise_constant()`, `robust_trend()`, or `trend_line()`.
+
+Anomaly detection uses historical data to establish a baseline for normal behavior for a series. The above-listed functions are sensitive to the placement of the query window; the value of the series at a single timestamp can change significantly based upon where it falls within the query window. This sensitivity prevents anomaly detection from determining a consistent baseline for the series.

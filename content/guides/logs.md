@@ -67,9 +67,9 @@ In this format, the agent will attempt to import a function called
 `custom_parser` from `/path/to/my/parsers_module.py`.
 
 If your custom log parser is not working, the first place to check is the
-Agent collector logs: 
+Agent collector logs:
 
-* If the Agent is unable to import your function, there will be a line with `Could not load Dogstream line parser`. 
+* If the Agent is unable to import your function, there will be a line with `Could not load Dogstream line parser`.
 
 * If all goes well you should see `dogstream: parsing {filename} with
 {function name} (requested {config option text})`.
@@ -178,19 +178,19 @@ Here are the event fields (bold means the field is required):
 </thead>
 <tbody>
 <tr>
-<td>msg_title</td>
+<td>**msg_title**</td>
 <td>string</td>
 <td>Title of the event. Will get indexed by our full-text
 search.</td>
 </tr>
 <tr>
-<td>timestamp</td>
+<td>**timestamp**</td>
 <td>integer</td>
 <td>Unix epoch timestamp. If omitted, will default to the time that
 the Agent parsed the event.</td>
 </tr>
 <tr>
-<td>msg_text</td>
+<td>**msg_text**</td>
 <td>string</td>
 <td>Body of the event. Will get indexed by our full-text
 search.</td>
@@ -225,7 +225,7 @@ api</a>. The host value is used as part of the aggregation
 key.</td>
 </tr>
 <tr>
-<td>priority</td>
+<td>**priority**</td>
 <td>string</td>
 <td>Determines whether the event will be visible or hidden by default
 in the stream; Must be one of <code>low</code> or <code>normal</code></td>

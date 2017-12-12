@@ -35,6 +35,7 @@ Function               | Category      | Description
 `piecewise_constant()` | Regression    | approximate the metric with a piecewise function composed of constant-valued segments
 `anomalies()`          | Algorithms    | overlay a gray band showing the expected behavior of a series based on past behavior; see our [guide to anomaly detection](/guides/anomalies)
 `outliers()`           | Algorithms    | highlight outlier series; see our [guide to outlier detection](/guides/outliers)
+`forecast()`           | Algorithms    | forecast metric series; see our [guide to forecasts](/guides/forecasts)
 
 **`.as_count()` & `.as_rate()`**
 
