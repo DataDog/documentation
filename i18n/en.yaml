@@ -329,16 +329,13 @@
   translation: Overview
 
 - id: customnav_accountmanagementnav_team
-  translation: Team
-
-- id: customnav_accountmanagementnav_settings
-  translation: Settings
+  translation: Team management
 
 - id: customnav_accountmanagementnav_saml
-  translation: SAML
+  translation: SSO with SAML
 
 - id: customnav_accountmanagementnav_multi_account
-  translation: Multi Accounts
+  translation: Multi-account organizations
 
 - id: customnav_accountmanagementnav_faq
   translation: FAQ
