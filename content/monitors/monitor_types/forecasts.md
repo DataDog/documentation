@@ -3,6 +3,8 @@ title: Forecasts monitor
 kind: documentation
 autotocdepth: 3
 customnav: monitortypenav
+aliases:
+- /guides/forecasts/ 
 further_reading:
 - link: "/monitors/notifications"
   tag: "Documentation"
