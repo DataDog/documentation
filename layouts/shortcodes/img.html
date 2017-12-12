@@ -88,7 +88,7 @@
     {{- end -}}
     {{ if $wide }}
 
-      {{ $e := (print $img "?auto=format" | relURL | safeURL) }}
+      {{ $e := (print $img "?fit=max" | relURL | safeURL) }}
         <picture {{ if .Get "style" }}
             style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}"
          {{ end }}>
@@ -136,7 +136,7 @@
         </picture>
 
     {{ else }}
-        {{ $e := (print $img "?fit=max" | relURL | safeURL) }}
+        {{ $e := (print $img "?fit=clip" | relURL | safeURL) }}
         <picture {{ if .Get "style" }}
             style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}"
          {{ end }}>
