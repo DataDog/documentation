@@ -26,11 +26,11 @@ Remember that it's a trade off: you decrease traffic but slightly lose in precis
 
 ## How does it work?
 
-Dogstatsd client side: If you sample a counter metrics ("increment") with a sample rate 0.5 in your code, the dogstatsd client is supposed to actually send this increment data only 50% of the times.
+DogStatsD client side: If you sample a counter metrics ("increment") with a sample rate 0.5 in your code, the dogstatsd client is supposed to actually send this increment data only 50% of the times.
 
-Dogstatsd server side: when receiving the counter value, the datadog-agent reads the sample_rate information and sees the value has actually been sampled twice. It performs a simple correction: it multiplies the value received by 2.
+DogStatsD server side: when receiving the counter value, the datadog-agent reads the sample_rate information and sees the value has actually been sampled twice. It performs a simple correction: it multiplies the value received by 2.
 
-## Dogstatsd server corrections by metric type
+## DogStatsD server corrections by metric type
 
 Counter: values received are multiplied by (1/sample_rate), because it's reasonable to suppose in most cases that for 1 datapoint received, 1/sample_rate were actually sampled with the same value.
 

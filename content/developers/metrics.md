@@ -154,7 +154,7 @@ Counters are used to count things.
 |self.count(...)|Submit the number of events that occurred during the check interval. If you're tracking a counter value that persists between checks, this means you must calculate the delta before submission:<ul><li>Should only be called once during a check.</li><li>Stored as a COUNT type in the datadog web application. Each value in the stored timeseries is a delta of the counter's value between samples (not time-normalized).</li></ul>|
 {{% /table %}}
 
-#### Dogstatsd Submission
+#### DogStatsD Submission
 {{% table responsive="true" %}}
 |Method | Overview |
 |:---|:---|
@@ -241,7 +241,7 @@ Gauges measure the value of a particular thing over time:
 |self.gauge(...)|<ul><li>If called multiple times during a check's execution for a metric only the last sample is used.</li><li>Stored as a Web Application GAUGE type</li></ul>|
 {{% /table %}}
 
-#### Dogstatsd Submission
+#### DogStatsD Submission
 {{% table responsive="true" %}}
 |Method | Overview |
 |:---|:---|
@@ -303,7 +303,7 @@ Each one of these becomes a value in their respective metric time series that ar
 |self.histogram(...)|used to track the statistical distribution of a set of values.|
 {{% /table %}}
 
-#### Dogstatsd Submission
+#### DogStatsD Submission
 {{% table responsive="true" %}}
 |Method | Overview |
 |:---|:---|
@@ -421,7 +421,7 @@ Sets are used to count the number of unique elements in a group.
 |self.set(...)|Used count the number of unique elements in a group:<ul><li>Should be called multiple times during an agent check.</li><li>Stored as a GAUGE type in the datadog web application.</li></ul>|
 {{% /table %}}
 
-#### Dogstatsd Submission
+#### DogStatsD Submission
 {{% table responsive="true" %}}
 |Method | Overview |
 |:---|:---|

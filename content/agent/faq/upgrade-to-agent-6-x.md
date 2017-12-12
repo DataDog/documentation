@@ -10,7 +10,7 @@ Agent 6 is the latest major version of the Datadog Agent. The big difference bet
 
 ## What’s Better?
 
-Golang has allowed us to take advantage of concurrency. In place of the three processes the Agent used to run--the Forwarder, the Collector, and Dogstatsd--there is now only one process: the Agent. It also comes with a number of other core improvements:
+Golang has allowed us to take advantage of concurrency. In place of the three processes the Agent used to run--the Forwarder, the Collector, and DogStatsD--there is now only one process: the Agent. It also comes with a number of other core improvements:
 
 ### Improved Resource Usage
 
@@ -47,7 +47,7 @@ We can now do global percentiles on the server. It allows us to calculate real, 
 
 We have improved configuration of the agent and made it much better and easier!
 
-### Dogstatsd Over Sockets
+### DogStatsD Over Sockets
 
 You can now use dogstatsd over a unix socket instead of over udp!
 

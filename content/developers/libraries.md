@@ -41,7 +41,7 @@ You can get data into Datadog from Google Analytics using our API with [this lib
 
 ### Logstash Output
   * [Logstash Output for Datadog][73]
-  * [Logstash Output for Dogstatsd][88]
+  * [Logstash Output for DogStatsD][88]
 
 ### NGINX LUA
   * Emit [custom metrics](/getting_started/custom_metrics/) directly from NGINX configurations using the [nginx_lua_datadog][72] module in your LUA scripts.

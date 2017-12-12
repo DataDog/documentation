@@ -491,7 +491,7 @@ languages:
           weight: 30
           parent: menu_references_developers
         - identifier: customnav_developersnav_dogstatsd
-          name: "Dogstatsd"
+          name: "DogStatsD"
           url: "/developers/dogstatsd/"
           weight: 40
           parent: menu_references_developers
