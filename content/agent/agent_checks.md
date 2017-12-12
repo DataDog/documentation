@@ -6,10 +6,6 @@ aliases:
   - /guides/agent_checks/
 ---
 
-<div class="alert alert-warning">
-AgentCheck requires an Agent version >= 3.2.0.
-</div>
-
 ## Overview
 
 This documentation details how to collect metrics and events from a new data source by writing an Agent Check, a Python plug-in to the Datadog Agent. We'll
@@ -45,7 +41,7 @@ methods available in DogStatsD, then the transition will be very simple. If
 you're not already familiar with that interface, you'll find sending metrics is
 a breeze.
 
-You have the following methods available to you:
+You have the [following methods](/developers/dogstatsd) available to you:
 
     self.gauge( ... ) # Sample a gauge metric
 
@@ -76,24 +72,24 @@ flushed out with the other Agent metrics.
 ### Sending events
 
 At any time during your check, you can make a call to `self.event(...)` with one argument: the payload of the event. Your event should be structured like this:
+```
+{
+    "timestamp": int, the epoch timestamp for the event,
+    "event_type": string, the event name,
+    "api_key": string, the api key for your account,
+    "msg_title": string, the title of the event,
+    "msg_text": string, the text body of the event,
+    "aggregation_key": string, a key to use for aggregating events,
+    "alert_type": (optional) string, one of ('error', 'warning', 'success', 'info');
+        defaults to 'info',
+    "source_type_name": (optional) string, the source type name,
+    "host": (optional) string, the name of the host,
+    "tags": (optional) list, a list of tags to associate with this event
+    "priority": (optional) string which specifies the priority of the event (Normal, Low)
+}
+```
 
-    {
-        "timestamp": int, the epoch timestamp for the event,
-        "event_type": string, the event name,
-        "api_key": string, the api key for your account,
-        "msg_title": string, the title of the event,
-        "msg_text": string, the text body of the event,
-        "aggregation_key": string, a key to use for aggregating events,
-        "alert_type": (optional) string, one of ('error', 'warning', 'success', 'info');
-            defaults to 'info',
-        "source_type_name": (optional) string, the source type name,
-        "host": (optional) string, the name of the host,
-        "tags": (optional) list, a list of tags to associate with this event
-        "priority": (optional) string which specifies the priority of the event (Normal, Low)
-    }
-
-At the end of your check, all events will be collected and flushed with the rest
-of the Agent payload.
+At the end of your check, all events will be collected and flushed with the rest of the Agent payload.
 
 ### Sending service checks
 
@@ -111,12 +107,12 @@ The service_check method will accept the following arguments:
 - `timestamp`: (optional) The POSIX timestamp when the check occurred.
 - `hostname`: (optional) The name of the host submitting the check. Defaults to the host_name of the agent.
 - `check_run_id`: (optional) An integer ID used for logging and tracing purposes. The ID does not need to be unique. If an ID is not provided, one will automatically be generated.
-- `message`: (optional) Additional information or a description of why this status occured.
+- `message`: (optional) Additional information or a description of why this status occurred.
 
 ### Exceptions
 
 If a check cannot run because of improper configuration,  programming error or
-because it could not collect any metrics, it should raise a meaningful exception.
+because it could not collect any metrics, it should raise a meaningful exception.  
 This exception will be logged, as well as be shown in the Agent [info command](/agent/faq/agent-status-and-information) for
 easy debugging. For example:
 
@@ -161,7 +157,12 @@ instances:
       password: 5678
 ```
 
-`min_collection_interval` can be added to the init_config section to help define how often the check should be run. If it is greater than the interval time for the agent collector, a line will be added to the log stating that collection for this script was skipped. The default is `0` which means it will be collected at the same interval as the rest of the integrations on that agent. If the value is set to 30, it does not mean that the metric will be collected every 30 seconds, but rather that it could be collected as often as every 30 seconds. The collector runs every 15-20 seconds depending on how many integrations are enabled. If the interval on this agent happens to be every 20 seconds, then the agent will collect and include the agent check. The next time it collects 20 seconds later, it will see that 20 < 30 and not collect the custom agent check. The next time it will see that the time since last run was 40 which is greater than 30 and therefore the agent check will be collected.
+`min_collection_interval` can be added to the `init_config` section to help define how often the check should be run.  
+If it is greater than the interval time for the agent collector, a line will be added to the log stating that collection for this script was skipped.  
+The default is `0` which means it will be collected at the same interval as the rest of the integrations on that agent.  
+If the value is set to `30`, it does not mean that the metric will be collected every 30 seconds, but rather that it could be collected as often as every 30 seconds.  
+
+The collector runs every 15-20 seconds depending on how many integrations are enabled. If the interval on this agent happens to be every 20 seconds, then the agent will collect and include the agent check. The next time it collects 20 seconds later, it will see that 20 < 30 and not collect the custom agent check. The next time it will see that the time since last run was 40 which is greater than 30 and therefore the agent check will be collected.
 
 <div class="alert alert-info"> YAML files must use spaces instead of tabs. </div>
 
@@ -193,7 +194,7 @@ For Windows Server >= 2008 you'll find it at:
 
     C:\Program Files (x86)\Datadog\Agent\checks.d\
 
-    OR
+OR
 
     C:\Program Files\Datadog\Agent\checks.d\
 
@@ -201,11 +202,11 @@ For Mac OS X and source installations, you'll find it at:
 
     ~/.datadog-agent/agent/checks.d/
 
-    OR
+OR
 
     ~/.pup/agent/checks.d/
 
-    OR
+OR
 
     <sandbox_folder>/checks.d/
 
@@ -220,7 +221,7 @@ For Windows, you'll find it at:
 
     C:\ProgramData\Datadog\conf.d\
 
-    OR
+OR
 
     C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\
 
@@ -228,11 +229,11 @@ For Mac OS X and source installations, you'll find it at:
 
     ~/.datadog-agent/agent/conf.d/
 
-    OR
+OR
 
     ~/.pup/agent/conf.d/
 
-    OR
+OR
 
     <sandbox_folder>/conf.d/
 

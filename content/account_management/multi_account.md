@@ -12,7 +12,7 @@ further_reading:
 ---
 
 There are two ways to allow multiple accounts to have access to the same data. First, simply add multiple users to the same team from the [Team Page][1].  
-The second is through the use of organizations. Organizations are typically used by Managed Service Providers which have multiple large-scale customers which should not have access to each others' data. When a user is added to multiple organizations, they will be able to quickly switch between them from the avatar menu in the main menu.
+The second is through the use of organizations. Organizations are typically used by Managed Service Providers which have multiple large-scale customers which should not have access to each others' data. When a user is added to multiple organizations, they are able to quickly switch between them from the avatar menu in the main menu.
 
 {{< img src="account_management/multi_account/guides-multacct-switchaccts.png" alt="Switch Accounts" responsive="true" popup="true">}}
 
@@ -28,7 +28,7 @@ The Multi-Account Organizations feature must be enabled by support. If this is a
 
 {{< img src="account_management/multi_account/guides-multacct-createorg.png" alt="Create Org" responsive="true" popup="true">}}
 
-A new trial account will be created. If you wish to add this account to your existing billing settings, contact your sales representative.
+A new trial account is created. If you wish to add this account to your existing billing settings, contact your sales representative.
 
 ### Leave an Organization
 
@@ -52,7 +52,7 @@ Once the menu appears, transition to the other Datadog accounts you're associate
 
 Custom sub-domains allow for easy differentiation of the source of notifications and easy switching between organizations when logged in as a member of multiple Datadog organizations.
 
-Custom sub-domains can be especially helpful as when an alert link is generated, (https://account-a.datadoghq.com/event/event?id=<id>) it will always point to a particular Datadog account, whereas the regular alert link (https://app.datadoghq.com/event/event?id=<id>) will only look for the event in the account the user is currently logged into and may result in an unexpected 404 error.
+Custom sub-domains can be especially helpful as when an alert link is generated, (https://account-a.datadoghq.com/event/event?id=<id>) it always points to a particular Datadog account, whereas the regular alert link (https://app.datadoghq.com/event/event?id=<id>) only looks for the event in the account the user is currently logged into and may result in an unexpected 404 error.
 
 
 [1]: https://app.datadoghq.com/account/team
@@ -61,7 +61,7 @@ Custom sub-domains can be especially helpful as when an alert link is generated,
 
 ## Organization API
 
-Here are some API calls that will allow you to manage organizations programmatically.
+Here are some API calls that allow you to manage organizations programmatically.
 
 ### Create a new organization
 Request:

@@ -27,13 +27,13 @@ To run the site without Docker and perform administrative tasks (compile metrics
 
 Documentation is available at `https://localhost:1313`
 
-To run the site with Docker (easier setup, slower server), you will need to install [Docker](https://docs.docker.com/engine/installation/#supported-platforms) then execute: 
+To run the site with Docker (easier setup, slower server), install [Docker](https://docs.docker.com/engine/installation/#supported-platforms) then execute: 
 
 `make docker-start`
 
 ### Makefile
 
-To use the Makefile you will need to create a Makefile.config. See the instructions at the top of the [Makefile.config.example](https://github.com/DataDog/documentation/blob/master/Makefile.config.example).
+To use the Makefile, create a Makefile.config. See the instructions at the top of the [Makefile.config.example](https://github.com/DataDog/documentation/blob/master/Makefile.config.example).
 
 After you have a config file you can run `make help` to see options:
 
@@ -75,13 +75,13 @@ This site uses Blackfriday for markdown. To learn about the syntax, [see this si
 
 If you include ANY Markdown in a file, give it an .md extension.
 
-Make sure all files are lowercase. Macs are case insensitive when creating links to images and pages, but the server is not. The tests will be fine locally but the site will fail in production.
+Make sure all files are lowercase. Macs are case insensitive when creating links to images and pages, but the server is not so tests may be fine locally but the site will fail in production.
 
 ## Releasing
 
 If you receive an error regarding `There was a problem getting GitHub Metrics`, please see the [Github personal access token](#github-personal-token).
 
-Within 5 minutes of merging to master, it will deploy automatically. You can see the status in the internal Datadog Slack #documentation channel.
+Within 5 minutes of merging to master, it deploys automatically. You can see the status in the internal Datadog Slack *#documentation* channel.
 
 ## How to add a new integration
 
@@ -89,7 +89,7 @@ Within 5 minutes of merging to master, it will deploy automatically. You can see
 
 ## Github personal token
 
-Integrations that have metrics will attempt to read the metrics metadata list from the Datadog web application repo. This requires read access to that repository and your Github Personal Token. If you are not a Datadog employee, please skip this step.
+Integrations that have metrics attempts to read the metrics metadata list from the `metadata.csv` file in the Datadog web application repo. This requires read access to that repository and your Github Personal Token. If you are not a Datadog employee, please skip this step.
 
 For more information on generating a token, see [Github's documentation](https://help.github.com/articles/creating-an-access-token-for-command-line-use/).
 

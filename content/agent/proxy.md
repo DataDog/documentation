@@ -15,9 +15,7 @@ hosts that are not directly connected to the Internet.
 3. Using HAProxy (if you want to proxy **more than 16-20 agents** through the
 same proxy)
 
-## Step-by-step Guides
-
-### Using the Agent as a Proxy
+## Using the Agent as a Proxy
 
 1. Designate one node **running datadog-agent** as the proxy.  
     In this example assume that the proxy name is `proxy-node`. This node **must** be able to reach `https://app.datadoghq.com`.
@@ -42,7 +40,7 @@ to
 
 6. Verify on the [Infrastructure page](https://app.datadoghq.com/infrastructure#overview) that all nodes report data to Datadog.
 
-### Using a Web Proxy as Proxy
+## Using a Web Proxy as Proxy
 
 Traditional web proxies are supported natively by the agent. Simply
 edit `datadog.conf` with your proxy information.
@@ -57,7 +55,7 @@ proxy_password: my_password
 
 Do not forget to [restart the agent](/agent/faq/start-stop-restart-the-datadog-agent) for the new settings to take effect.
 
-### Using HAProxy as a Proxy
+## Using HAProxy as a Proxy
 
 [HAProxy](http://haproxy.1wt.eu) is a free, very fast and reliable
 solution offering proxying for TCP and HTTP applications. While

@@ -13,7 +13,7 @@ further_reading:
 
 **This documentation assumes that you already have a SAML Identity Provider up and running.**
 
-Configuring [SAML (Security Assertion Markup Language)](http://en.wikipedia.org/wiki/Security_Assertion_Markup_Language) for your Datadog account will let you and all your teammates log in to Datadog using the credentials stored in your organization’s Active Directory, LDAP, or other identity store that has been configured with a SAML Identity Provider.
+Configuring [SAML (Security Assertion Markup Language)](http://en.wikipedia.org/wiki/Security_Assertion_Markup_Language) for your Datadog account lets you and all your teammates log in to Datadog using the credentials stored in your organization’s Active Directory, LDAP, or other identity store that has been configured with a SAML Identity Provider.
 
 ## Configure SAML
 
@@ -37,7 +37,7 @@ Once SAML is configured in Datadog and your IdP is set up to accept requests fro
 {{< img src="account_management/saml/saml_enabled.png" alt="Saml Enabled" responsive="true" popup="true">}}
 
 The Single Sign On URL will also be displayed on the [Team page](https://app.datadoghq.com/account/team).  
-Loading this URL will initiate a SAML authentication against your IdP. Note that the URL will not be displayed until SAML is enabled for your account.
+Loading this URL initiates a SAML authentication against your IdP. Note that the URL isn't displayed until SAML is enabled for your account.
 
 ## Datadog Service Provider Details
 
@@ -46,7 +46,7 @@ Loading this URL will initiate a SAML authentication against your IdP. Note that
 `urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST`.
 * Datadog will specify `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` for the Format of the **NameIDPolicy** in Assertion Requests.
 * Assertions must be signed.
-* Assertions can be encrypted, but unencrypted assertions will be accepted.
+* Assertions can be encrypted, but unencrypted assertions are accepted.
 * Datadog’s SP Metadata can be found [here](https://app.datadoghq.com/account/saml/metadata.xml).
 
 ##  Setting Attributes
@@ -56,7 +56,7 @@ Loading this URL will initiate a SAML authentication against your IdP. Note that
 2. **sn**: This is optional, and should be set to the user’s surname.
 3. **givenName**: This is optional, and should be set to the user’s first, or given name.
 * Datadog expects that Attributes use the NameFormat
-`urn:oasis:names:tc:SAML:2.0:attrname-format:uri` or `urn:oasis:names:tc:SAML:2.0:attrname-format:basic`. The name used for each attribute will depend on the NameFormat that your IdP uses.
+`urn:oasis:names:tc:SAML:2.0:attrname-format:uri` or `urn:oasis:names:tc:SAML:2.0:attrname-format:basic`. The name used for each attribute depends on the NameFormat that your IdP uses.
 * If your IdP is configured to use the NameFormat `urn:oasis:names:tc:SAML:2.0:attrname-format:uri`:
 1. **eduPersonPrincipalName**: The IdP should set `urn:oid:1.3.6.1.4.1.5923.1.1.1.6` as the Name of the Attribute
 2. **sn**: The IdP should set `urn:oid:2.5.4.4` as the Name of the Attribute
@@ -65,7 +65,7 @@ Loading this URL will initiate a SAML authentication against your IdP. Note that
 1. **eduPersonPrincipalName**: The IdP should set `urn:mace:dir:attribute-def:eduPersonPrincipalName` as the Name of the Attribute
 2. **sn**: The IdP should set `urn:mace:dir:attribute-def:sn` as the Name of the Attribute
 3. **givenName**: The IdP should set `urn:mace:dir:attribute-def:givenName` as the Name of the Attribute
-* If **eduPersonPrincipalName** exists in the AttributeStatement, the value of this attribute will be used for the username. If **eduPersonPrincipalName** is not included in the AttributeStatement, the username will be taken from the NameID in the Subject. The NameID must use the Format `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress`.
+* If **eduPersonPrincipalName** exists in the AttributeStatement, the value of this attribute is used for the username. If **eduPersonPrincipalName** is not included in the AttributeStatement, the username will be taken from the NameID in the Subject. The NameID must use the Format `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress`.
 * If **sn** and **givenName** are provided, they will be used to update the user’s name in their Datadog profile.
 
 ## Specific SAML IdP

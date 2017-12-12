@@ -88,7 +88,7 @@ In this example, for each minute, Datadog will compute the sum across all sourc
 
 {{< img src="getting_started/from_query_to_graph/metrics_graph_4.png" alt="metrics_graph_4" responsive="true" popup="true">}}
 
-The value obtained (20.61GB) is the sum of the values reported by all sources (see previous image).
+The value obtained (25.74GB) is the sum of the values reported by all sources (see previous image).
  
 Note: Of course if there is only one source (if we had chosen the scope {host:bubs, device:/dev/disk} for the query for instance), using sum/avg/max/min will have no effect as no space aggregation needs to be performed, [see here also](/graphing/faq/i-m-switching-between-the-sum-min-max-avg-aggregators-but-the-values-look-the-same).
   
@@ -112,16 +112,16 @@ See a list of functions offered by Datadog [here](/graphing/miscellaneous/).
 {{< img src="getting_started/from_query_to_graph/metric_graph_6.png" alt="metric_graph_6" responsive="true" popup="true">}}
 
 The logic is the same:
- 
+
 1. Our backend finds all different devices associated to the source selected.
 2. For each device, our backend performs the query system.disk.total{host:example, device:<device>} as explained in this article.
 3. All final results are graphed on the same graph.
 
-{{< img src="getting_started/from_query_to_graph/metric_graph_7.png" alt="metric_graph_7" responsive="true" popup="true">}}
+{{< img src="getting_started/from_query_to_graph/metric_graph_7.png" alt="metric_graph_2" responsive="true" popup="true">}}
 
-Note: rollup or as_count modifiers have to be placed after the by {device} mention.
+**Note**: `rollup` or `as_count` modifiers have to be placed after the by {`device`} mention.
 
-Note2: you can use more than one group, for instance system.disk.in_use{*} by {host,device}
+**Note2**: You can use more than one group, for instance `system.disk.in_use{*} by {host,device}`
 
 #### Arithmetic
 

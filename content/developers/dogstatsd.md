@@ -2,6 +2,7 @@
 title: DogStatsD
 kind: documentation
 customnav: developersnav
+description: This page explains what DogStatsD is, how it works, and what data it accepts.
 aliases:
   - /guides/dogstatsd/
 further_reading:
@@ -12,10 +13,6 @@ further_reading:
   tag: "Docuementation"
   text: Datadog-official and community contributed API and DogStatsD client libraries
 ---
-
-<p class="aside">
-This page explains what DogStatsD is, how it works, and what data it accepts.
-</p>
 
 The easiest way to get your custom application metrics into Datadog is to send them to DogStatsD, a metrics aggregation service bundled with the Datadog Agent. DogStatsD implements the [StatsD](https://github.com/etsy/statsd) protocol and adds a few Datadog-specific extensions:
 
@@ -68,7 +65,7 @@ Then [restart your agent](/agent/faq/start-stop-restart-the-datadog-agent).
 
 Once done, your application can reliably reach—grab the [DogStatsD client library][2] for your application language and you'll be ready to start hacking. You _can_ use any generic StatsD client to send metrics to DogStatsD, but you won't be able to use any of the Datadog-specific features mentioned above.
 
-By default, DogStatsD listens on UDP port 8125. If you need to change this, configure the `dogstatsd_port` option in the main [Agent configuration file][3]:
+By default, DogStatsD listens on UDP port **8125**. If you need to change this, configure the `dogstatsd_port` option in the main [Agent configuration file][3]:
 
     # Make sure your client is sending to the same port.
     dogstatsd_port: 8125
@@ -415,5 +412,6 @@ PS C:\vagrant> .\send-statsd.ps1 "_e{$($title.length),$($text.Length)}:$title|$t
 {{< /whatsnext >}}
 
 [1]: https://github.com/DataDog/dd-agent/pull/2104
+[2]: /libraries/
 [3]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
-[4]: /developers/metrics/
+[4]: /developers/metrics/#metric-names

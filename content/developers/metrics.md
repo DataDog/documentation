@@ -45,9 +45,9 @@ A metric's Datadog in-app type affects how its data is interpreted in query resu
 
 In the Datadog web application there are 3 metric types: 
 
-* GAUGE
-* RATE
-* COUNT 
+* [GAUGE](/#gauges)
+* [RATE](/#rates)
+* [COUNT](/#count) 
 * COUNTER (now deprecated)
 
 A metric's type is stored as metrics metadata and is used to determine how a metric is interpreted throughout the application by determining default time aggregation function and `as_rate()`/`as_count()` behavior. The `as_count()` and `as_rate()` modifiers behave differently for different Web Application metric types.
@@ -78,10 +78,10 @@ Datadog accepts metrics submitted from a variety of sources, and as a result the
 2. You realize you should have submitted it as a dogstatsd `counter` metric, that way you can do time aggregation to answer questions like "How many total requests were served in the past day?" by querying `sum:app.requests.served{*}` (this would not make sense for a `gauge`-type  metric.)
 
 3. You like the name `app.requests.served` so rather than submitting a new metric name with the more appropriate `counter` type, you could change the type of `app.requests.served`.
+  
+  * By updating your submission code, calling `dogstatsd.increment('app.requests.served', N)` after N requests are served.
 
-    a. By updating your submission code, calling `dogstatsd.increment('app.requests.served', N)` after N requests are served.
-
-    b. By updating the Datadog in-app type via the metric summary page to `rate`.
+  * By updating the Datadog in-app type via the metric summary page to `rate`.
 
 This will cause data submitted before the type change for `app.requests.served`to behave incorrectly because it was stored in a format to be interpreted as an in-app `gauge` not a `rate`. Data submitted after steps 3a and 3b
 will be interpreted properly.  
@@ -215,15 +215,15 @@ your series like cumulative sum or integral. There is more information on those
 
 ### In-app modifiers
 
-* Effect of as_count():
+* Effect of `as_count()`:
     * Sets the time aggregator to SUM.
 
-* Effect of as_rate():
+* Effect of `as_rate()`:
     
     * Sets the time aggregator to SUM
     * Normalizes the input timeseries values by the query (rollup) interval. For example [1,1,1,1].as_rate() for rollup interval of 20s produces [0.05, 0.05, 0.05, 0.05].
 
-* The raw metric itself will default to the time aggregator AVG, so querying the metric without either as_rate() or as_count()will become non-sensical when time aggregation is applied.
+* The raw metric itself will default to the time aggregator AVG, so querying the metric without either `as_rate()` or `as_count()` becomes nonsensical when time aggregation is applied.
 
 * Note that on very small intervals when no time-aggregation occurs, there is no normalization, and you get the raw metric value counts.
 
@@ -270,8 +270,9 @@ end
 ```
 
 ### In-application modifiers
-* Effect of as_count(): None
-* Effect of as_rate(): None
+
+* Effect of `as_count()`: None
+* Effect of `as_rate()`: None
 
 ## Histograms
 ### Overview
@@ -448,12 +449,12 @@ end
 
 ### In-app modifiers
 
-* Effect of as_count():
+* Effect of `as_count()`:
     
     * Sets the time aggregator to SUM.
     * Uses the metadata interval to convert from raw rates to counts. Does not work if no metadata interval exists for the metric.
 
-* Effect of as_rate():
+* Effect of `as_rate()`:
     * Sets the time aggregator to SUM.
     * Uses the query interval and metadata interval to calculate the time-aggregated rate. Does not work if no metadata interval exists for the metric.
 

@@ -73,7 +73,7 @@ In the [dd-agent.yaml][3] manifest used to create the daemonset, add the followi
       name: passwd    
 ```
 
-Refer to the standard [daemonset installation](http://docs.datadoghq.com/integrations/kubernetes/#installation-via-daemonsets-kubernetes-110) and the [docker-dd-agent](https://github.com/DataDog/docker-dd-agent) information pages for further documentation.
+Refer to the standard [daemonset installation](/integrations/kubernetes/#installation-via-daemonsets-kubernetes-110) and the [docker-dd-agent](https://github.com/DataDog/docker-dd-agent) information pages for further documentation.
 
 ## Searching, Filtering, and Pivoting
 

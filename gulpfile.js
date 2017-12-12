@@ -179,8 +179,8 @@ var writeToManifest = function (directory) {
 
 // ### Styles
 // `gulp styles` - Compiles, combines, and optimizes project CSS.
-// By default this task will only log a warning if a precompiler error is
-// raised. If the `--production` flag is set: this task will fail outright.
+// By default this task only logs a warning if a precompiler error is
+// raised. If the `--production` flag is set: this task fails outright.
 gulp.task('styles', function () {
   var merged = merge();
   for (var i in project["globs"]) {

@@ -7,8 +7,6 @@ aliases:
   - /guides/integration_sdk/
 ---
 
-<style>h5 code{font-size:16px;display:inline-block;margin-top:20px;}</style>
-
 ## Requirements
 
 You will need a working [Ruby](https://www.ruby-lang.org) environment. For more information on installing Ruby, reference [the Ruby installation documentation](https://www.ruby-lang.org/en/documentation/installation/).
@@ -51,6 +49,8 @@ Your README file should provide the following sections:
 - **Metrics** (required): Include a list of the metrics your integration will provide.
 - **Events**: Include a list of events if your integration provides any.
 - **Service Checks**: Include a list of service checks if your integration provides any.
+
+Find more about the overall layout [here](/developers/integrations/#new-integration-documentation)
 
 #### `check.py`
 
@@ -134,8 +134,12 @@ This JSON file provides metadata about your integration and should include:
 - **`short_description`**: Provide a short description of your integration.
 - **`support`**: As a community contributed integration, this should be set to "contrib". Only set this to another value if directed to do so by Datadog staff.
 - **`version`**: The current version of your integration.
+- **`is_public`**: Boolean set to true if your integration is public
+- **`has_logo`**: Boolean set to true if there is a logo for this integration in `/src/images/integrations_logo`
+- **`type`**: **check**
+- **`categories`**: Categories to sort your integration, current categories can be found [here](/integrations)
 
-You can reference one of the existing integrations for an example of the manifest file.
+You can reference one of the existing integrations [for an example of the manifest file](https://github.com/DataDog/integrations-core/blob/master/activemq/manifest.json).
 
 #### `metadata.csv`
 

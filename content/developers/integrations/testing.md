@@ -6,10 +6,6 @@ customnav: developersnav
 aliases:
    - /guides/testing/
 ---
-<style>
-.func-p{margin-left:20px;}
-.func-code{margin-left:40px;}
-</style>
 
 ## Overview
 
@@ -61,7 +57,6 @@ Prints a report of the metrics, events, service checks, service metadata and war
 
 Parameters:
 
-
 * **config** (*dictionary*) – A check configuration dictionary containing an array of `instances`. For example:
 
 ```
@@ -70,8 +65,7 @@ Parameters:
         {
             'name': 'simple_config',
             'url': 'http://httpbin.org',
-        }
-    ]
+        }]
 }
 ```
 
