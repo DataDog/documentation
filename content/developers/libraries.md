@@ -1,7 +1,7 @@
 ---
 title: Libraries
 kind: documentation
-customnav: developersnav
+disable_toc: true
 aliases:
    - /libraries/
 disable_toc: true
