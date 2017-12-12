@@ -127,7 +127,7 @@
                     {{ $e }}&auto=format&w=360&dpr=2 2x"
             media="(min-width: 0px)"
           >
-          <img class="lazyload img-fluid" srcset="{{ $e }}&auto=format&w=807 1x, {{ $e }}&auto=format&w=360&dpr=2 2x"
+          <img class="lazyload img-fluid" srcset="{{ $e }}&auto=format&w=807 1x, {{ $e }}&auto=format&w=807&dpr=2 2x"
                {{ if .Get "style" }}
                 style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}"
               {{ end }}
@@ -175,7 +175,7 @@
                     {{ $e }}&auto=format&w=360&dpr=2 2x"
             media="(min-width: 0px)"
           >
-          <img class="lazyload img-fluid" srcset="{{ $e }}&auto=format&w=621 1x, {{ $e }}&auto=format&w=360&dpr=2 2x"
+          <img class="lazyload img-fluid" srcset="{{ $e }}&auto=format&w=621 1x, {{ $e }}&auto=format&w=621&dpr=2 2x"
           {{ if .Get "style" }}
                 style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}"
               {{ end }}
