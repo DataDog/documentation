@@ -4,6 +4,7 @@ kind: documentation
 customnav: developersnav
 aliases:
    - /libraries/
+disable_toc: true
 ---
 
 ## API and DogStatsD Client Libraries
