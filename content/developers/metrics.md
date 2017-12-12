@@ -16,7 +16,7 @@ aliases:
 ## Overview
 
 This page explains how to send your application's [custom metrics](/getting_started/custom_metrics/) to Datadog.
-Sending your application's [custom metrics](/getting_started/custom_metrics/) to Datadog lets you correlate what's happening with your application, your users and your system.  
+Sending your application's [custom metrics](/getting_started/custom_metrics/) to Datadog lets you correlate what's happening with your application, your users and your system.
 
 Metrics are collected by sending them to StatsD, a small metrics aggregation
 server that is bundled with the Datadog Agent. You can read about how it works [here](/developers/dogstatsd/). If you want to dive into code right away,
@@ -31,8 +31,8 @@ In this tutorial, we'll cover some common instrumentation use cases, like:
 ### Metric names
 There are a few rules to stick to when naming metrics:
 
-* Metric names must start with a letter 
-* Can only contain ASCII alphanumerics, underscore and periods (other characters gets converted to underscores) 
+* Metric names must start with a letter
+* Can only contain ASCII alphanumerics, underscore and periods (other characters gets converted to underscores)
 * Should not exceed 200 characters (though less than 100 is generally preferred from a UI perspective)
 * Unicode is not supported
 * We recommend avoiding spaces
@@ -41,9 +41,10 @@ Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. `
 
 ### Metric Types
 
-A metric's Datadog in-app type affects how its data is interpreted in query results and graph visualizations across the application. The metric type visible on the metric summary page is the Datadog in-app type. You should only change the type if you have started submitting this metric with a new type, and should be aware that changing the type may render historical data nonsensical.  
+A metric's Datadog in-app type affects how its data is interpreted in query results and graph visualizations across the application. The metric type visible on the metric summary page is the Datadog in-app type. You should only change the type if you have started submitting this metric with a new type, and should be aware that changing the type may render historical data nonsensical.
 
-In the Datadog web application there are 3 metric types: 
+In the Datadog web application there are 3 metric types:
+
 
 * [GAUGE](/developers/metrics/#gauges)
 * [RATE](/developers/metrics/#rates)
@@ -59,10 +60,10 @@ Datadog accepts metrics submitted from a variety of sources, and as a result the
 | Submission Source | Submission Method (python) | Submission Type | Datadog In-App Type |
 |-------------------|-------------------|-----------------|--------------|
 | [API][3] | `api.Metric.send(...)` | gauge | gauge |
-| [dogstatsd][1] | `dog.gauge(...)` | gauge | gauge |
-| [dogstatsd][1] | `dog.increment(...)` | counter | rate |
-| [dogstatsd][1] | `dog.histogram(...)` | histogram | gauge, rate |
-| [dogstatsd][1] | `dog.set(...)` | set | gauge |
+| [DogStatsD][1] | `dog.gauge(...)` | gauge | gauge |
+| [DogStatsD][1] | `dog.increment(...)` | counter | rate |
+| [DogStatsD][1] | `dog.histogram(...)` | histogram | gauge, rate |
+| [DogStatsD][1] | `dog.set(...)` | set | gauge |
 | [agent check][2] | `self.gauge(...)` | gauge | gauge |
 | [agent check][2] | `self.increment(...)` | counter | rate |
 | [agent check][2] | `self.rate(...)` | rate | gauge |
@@ -78,13 +79,13 @@ Datadog accepts metrics submitted from a variety of sources, and as a result the
 2. You realize you should have submitted it as a dogstatsd `counter` metric, that way you can do time aggregation to answer questions like "How many total requests were served in the past day?" by querying `sum:app.requests.served{*}` (this would not make sense for a `gauge`-type  metric.)
 
 3. You like the name `app.requests.served` so rather than submitting a new metric name with the more appropriate `counter` type, you could change the type of `app.requests.served`.
-  
+
   * By updating your submission code, calling `dogstatsd.increment('app.requests.served', N)` after N requests are served.
 
   * By updating the Datadog in-app type via the metric summary page to `rate`.
 
 This causes data submitted before the type change for `app.requests.served`to behave incorrectly because it was stored in a format to be interpreted as an in-app `gauge` not a `rate`. Data submitted after steps 3a and 3b
-is interpreted properly.  
+is interpreted properly.
 
 If you are not willing to lose the historical data submitted as a `gauge`, create a new metric name with the new type, leaving the type of `app.requests.served` unchanged.
 
@@ -109,20 +110,20 @@ Next, let's set up a client library for your language.
 
 First, install the module:
 
-For python: 
-```shell 
+For python:
+```shell
 $ pip install datadog
 ```
 
-For Ruby: 
+For Ruby:
 ```shell
 $ gem install dogstatsd-ruby
 ```
 
 And import it, so it's ready to use:
 
-For python: 
-```python 
+For python:
+```python
 from datadog import statsd
 ```
 
@@ -140,7 +141,7 @@ This tutorial has examples for Python and Ruby, but check out the
 
 ## Count
 ### Overview
-Counters are used to count things. 
+Counters are used to count things.
 
 ### Submission
 #### Agent Check Submission
@@ -158,7 +159,7 @@ Counters are used to count things.
 {{% table responsive="true" %}}
 |Method | Overview |
 |:---|:---|
-| dog.increment(...) | Used to increment a counter of events: <ul><li>Stored as a RATE type in the datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter's value over that statsd flush period.</li></ul>| 
+| dog.increment(...) | Used to increment a counter of events: <ul><li>Stored as a RATE type in the datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter's value over that statsd flush period.</li></ul>|
 |dog.decrement(...)| Used to decrement a counter of events: <ul><li>Stored as a RATE type in the datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter's value over that statsd flush period.</li></ul>|
 {{% /table %}}
 
@@ -167,7 +168,7 @@ Counters are used to count things.
 Lets count web page views. To achieve this, we'll increment a metric called
 `web.page_views` each time our `render_page` function is called.
 
-For python: 
+For python:
 ```python
 
 def render_page():
@@ -219,7 +220,7 @@ your series like cumulative sum or integral. There is more information on those
     * Sets the time aggregator to SUM.
 
 * Effect of `as_rate()`:
-    
+
     * Sets the time aggregator to SUM
     * Normalizes the input timeseries values by the query (rollup) interval. For example [1,1,1,1].as_rate() for rollup interval of 20s produces [0.05, 0.05, 0.05, 0.05].
 
@@ -230,7 +231,7 @@ your series like cumulative sum or integral. There is more information on those
 ## Gauges
 
 ### Overview
-Gauges measure the value of a particular thing over time:  
+Gauges measure the value of a particular thing over time:
 
 ### Submission methods
 #### Agent Check Submission
@@ -277,7 +278,7 @@ end
 ## Histograms
 ### Overview
 
-Histograms measure the statistical distribution of a set of values. 
+Histograms measure the statistical distribution of a set of values.
 
 Our histogram and timing metrics are essentially the same thing and are extensions on the StatsD timing metric:
 
@@ -408,9 +409,9 @@ After a service check has been reported, you can use it to trigger a [Custom Che
 {{% /table %}}
 
 ## Sets
-### Overview 
+### Overview
 
-Sets are used to count the number of unique elements in a group. 
+Sets are used to count the number of unique elements in a group.
 
 ### Submission methods
 #### Agent Check Submission
@@ -450,7 +451,7 @@ end
 ### In-app modifiers
 
 * Effect of `as_count()`:
-    
+
     * Sets the time aggregator to SUM.
     * Uses the metadata interval to convert from raw rates to counts. Does not work if no metadata interval exists for the metric.
 
