@@ -31,7 +31,7 @@ To stop the Agent:
 sudo /etc/init.d/datadog-agent stop
 ```
 
-To restart the Agent and to reload the configuration files:
+To restart the Agent and reload the configuration files:
 ```shell
 sudo /etc/init.d/datadog-agent restart
 ```
@@ -51,7 +51,7 @@ Tracebacks for errors can be retrieved by setting the `-v` flag: (since 3.8.0)
 sudo /etc/init.d/datadog-agent info -v
 ```
 
-More information about the metrics, events and service checks for an integration can be retrieved with the check command:
+More information about the metrics, events, and service checks for an integration can be retrieved with the check command:
 ```shell
 sudo /etc/init.d/datadog-agent check [integration]
 ```

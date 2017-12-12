@@ -25,16 +25,16 @@ The easiest way to get your custom application metrics into Datadog is to send t
 * Gauge deltas (see [this issue][1])
 * Timers as a native metric type (though it [does support them via histograms](#timers))
 
-**Note**: Any StatsD client works just fine, but using the Datadog DogStatsD client gives you a few extra features. 
+**Note**: Any StatsD client works just fine, but using the Datadog DogStatsD client gives you a few extra features.
 
 ## How It Works
 
-DogStatsD accepts [custom metrics](/getting_started/custom_metrics/), events, and service checks over UDP and periodically aggregates and forwards them to Datadog.  
+DogStatsD accepts [custom metrics](/getting_started/custom_metrics/), events, and service checks over UDP and periodically aggregates and forwards them to Datadog.
 Because it uses UDP, your application can send metrics to DogStatsD and resume its work without waiting for a response. If DogStatsD ever becomes unavailable, your application won't skip a beat.
 
 {{< img src="developers/dogstatsd/dogstatsd.png" alt="dogstatsd"  responsive="true" popup="true">}}
 
-As it receives data, DogStatsD aggregates multiple data points for each unique metric into a single data point over a period of time called the flush interval. Let's walk through an example to see how this works.  
+As it receives data, DogStatsD aggregates multiple data points for each unique metric into a single data point over a period of time called the flush interval. Let's walk through an example to see how this works.
 
 Suppose you want to know how many times your Python application is calling a particular database query. Your application can tell DogStatsD to increment a counter each time the query is called:
 
@@ -54,7 +54,7 @@ where it is stored and available for graphing alongside the rest of your metrics
 ## Setup
 
 First, take a look at your `datadog.conf` file, and uncommented the following lines:
-``` 
+```
 # If you don't want to enable the DogStatsd server, set this option to no
 use_dogstatsd: yes
 # Make sure your client is sending to the same port.
@@ -347,10 +347,10 @@ Here's an example datagram:
 
 ## Send metrics and events using dogstatsd and the shell
 
-For Linux and other Unix-like OS, we use Bash.  
+For Linux and other Unix-like OS, we use Bash.
 For Windows we'll need Powershell and [powershell-statsd](https://github.com/joehack3r/powershell-statsd/blob/master/send-statsd.ps1), a simple Powershell function that takes care of the network bits for us.
 
-The idea behind Dogstatsd is simple: create a message that contains information about your metric/event, and send it to a collector over UDP on port 8125. The message format can be found [here](#datagram-format).
+The idea behind DogStatsD is simple: create a message that contains information about your metric/event, and send it to a collector over UDP on port 8125. The message format can be found [here](#datagram-format).
 
 ### Sending metrics
 
@@ -386,7 +386,7 @@ sock.sendto("custom_metric:60|g|#shell", ("localhost", 8125))
 
 The format for sending events is:
 ```
-_e{title.length,text.length}:title|text|d:date_happened|h:hostname|p:priority|t:alert_type|#tag1,tag2. 
+_e{title.length,text.length}:title|text|d:date_happened|h:hostname|p:priority|t:alert_type|#tag1,tag2.
 ```
 Here we need to calculate the size of the event's title and body.
 
