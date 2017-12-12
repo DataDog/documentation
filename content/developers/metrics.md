@@ -55,7 +55,7 @@ A metric's type is stored as metrics metadata and is used to determine how a met
 #### How do submission types relate to Datadog in-app types?
 Datadog accepts metrics submitted from a variety of sources, and as a result the submission type does not always map exactly to the Datadog in-app type:
 
-{{% table responsive="true" %}}
+
 | Submission Source | Submission Method (python) | Submission Type | Datadog In-App Type |
 |-------------------|-------------------|-----------------|--------------|
 | [API][3] | `api.Metric.send(...)` | gauge | gauge |
@@ -70,7 +70,6 @@ Datadog accepts metrics submitted from a variety of sources, and as a result the
 | [agent check][2] | `self.monotonic_count(...)` | monotonic_count | count |
 | [agent check][2] | `self.histogram(...)` | histogram | gauge, rate |
 | [agent check][2] | `self.set(...)` | set | gauge |
-{{% /table %}}
 
 #### What's a use case for changing a metric's type?
 
