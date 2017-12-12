@@ -78,10 +78,6 @@ for (var fileName in manifest.dependencies) {
     }
   );
 
-  /*console.log(project);
-  for(var i=0; i < project.globs.length; i++) {
-      console.log(project.globs[i].globs);
-  }*/
 }
 
 // CLI options
@@ -97,7 +93,11 @@ var enabled = {
   // Strip debug statments from javascript when `--production`
   stripJSDebug: false,
   // hash static?
-  hashStatic: true
+  hashStatic: true,
+  // nano
+  nano: true,
+  // uglify
+  uglify: true
 };
 
 // Path to the compiled assets manifest in the dist directory
@@ -137,7 +137,7 @@ var cssTasks = function (filename) {
       ]
     })
     .pipe(function () {
-      return gulpif(argv.production, cssNano({
+      return gulpif(enabled.nano, cssNano({
         safe: true
       }));
     })
@@ -158,7 +158,7 @@ var jsTasks = function (filename) {
   return lazypipe()
     .pipe(concat, filename)
     .pipe(function () {
-      return gulpif(argv.production, uglify({compress: {'drop_debugger': true}}));
+      return gulpif(enabled.uglify, uglify({compress: {'drop_debugger': true}}));
     })
     .pipe(function () {
       return gulpif(enabled.hashStatic, hash())
@@ -179,8 +179,8 @@ var writeToManifest = function (directory) {
 
 // ### Styles
 // `gulp styles` - Compiles, combines, and optimizes project CSS.
-// By default this task will only log a warning if a precompiler error is
-// raised. If the `--production` flag is set: this task will fail outright.
+// By default this task only logs a warning if a precompiler error is
+// raised. If the `--production` flag is set: this task fails outright.
 gulp.task('styles', function () {
   var merged = merge();
   for (var i in project["globs"]) {

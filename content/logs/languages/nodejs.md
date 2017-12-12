@@ -1,9 +1,7 @@
 ---
 title: NodeJS Log Collection
 kind: documentation
-autotocdepth: 2
 customnav: lognav
-beta: true
 further_reading:
 - link: "/logs/processing"
   tag: "Documentation"
@@ -31,7 +29,7 @@ Winston is available through [NPM](https://www.npmjs.com). So, in order to get s
 npm install --save winston
 ```
 
-`package.js` will be updated with the corresponding dependencies:
+`package.js` is updated with the corresponding dependencies:
 
 ```
 {

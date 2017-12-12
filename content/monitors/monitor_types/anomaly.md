@@ -50,9 +50,9 @@ Now, click on the + icon (Add functions and modifiers) on the right side of your
 
 {{< img src="monitors/monitor_types/anomaly/function_menu.png" alt="function menu" responsive="true" popup="true">}}
 
-This will add anomaly detection to your expression, and you should immediately see the preview update to include the gray band. A number of the graphing options will disappear, as anomaly detection has a unique visualization.
+This adds anomaly detection to your expression, and you should immediately see the preview update to include the gray band. A number of the graphing options disappear, as anomaly detection has a unique visualization.
 
-The function has two parameters. The first parameter is for selecting which algorithm will be used. The second parameter is labeled `bounds`, and you can tune this to change the width of the Grey band. You may think of `bounds` like standard deviations; a value of 2 or 3 should be large enough to include most "normal" points. After successfully adding `anomalies`, your editor should show something like this:
+The function has two parameters. The first parameter is for selecting which algorithm is used. The second parameter is labeled `bounds`, and you can tune this to change the width of the Grey band. You may think of `bounds` like standard deviations; a value of 2 or 3 should be large enough to include most "normal" points. After successfully adding `anomalies`, your editor should show something like this:
 
 {{< img src="monitors/monitor_types/anomaly/final_editor.png" alt="final editor" responsive="true" popup="true">}}
 
@@ -64,7 +64,7 @@ Navigate to the [New Monitor](https://app.datadoghq.com/monitors#/create) page a
 
 {{< img src="monitors/monitor_types/anomaly/monitor_options.png" alt="monitor options" responsive="true" popup="true">}}
 
-You should now see something like what's shown above, with a handful of selections that will help determine how sensitive your monitor is to different types of anomalies.
+You should now see something like what's shown above, with a handful of selections that help determine how sensitive your monitor is to different types of anomalies.
 
 1.  This number is equivalent to the `bounds` parameter used in the `anomalies` function in dashboards; it controls the width of the gray band. We recommend using a value of 2 or 3.
 2.  If you only care about unusually high or unusually low values, you can choose to only alert on values above or below the bounds.
@@ -86,11 +86,11 @@ There are four different anomaly detection algorithms:
 
 * _Robust_: Use this algorithm for seasonal metrics where you expect the metric to be stable and want to consider slow level shifts as anomalies. _Robust_ is a [seasonal-trend decomposition](https://en.wikipedia.org/wiki/Decomposition_of_time_series) algorithm. It is very stable and its predictions remain constant even through long-lasting anomalies at the expense of taking longer to respond to intended level shifts (e.g., if the level of a metric shifts due to a code change.)
 
-* _Adaptive_: Use this algorithm for seasonal metrics when you find _agile_ and _robust_ to be too sensitive to minor changes in the metrics behavior. This algorithm is dynamic and will adjust its predictions to a metric's changes much more readily than _agile_ or _robust_. On the other hand, it can be prone to following a metric too closely, which could lead to false negatives.
+* _Adaptive_: Use this algorithm for seasonal metrics when you find _agile_ and _robust_ to be too sensitive to minor changes in the metrics behavior. This algorithm is dynamic and adjusts its predictions to a metric's changes much more readily than _agile_ or _robust_. On the other hand, it can be prone to following a metric too closely, which could lead to false negatives.
 
 All of the seasonal algorithms may use up to a couple of months of historical data when calculating a metric's expected normal range of behavior. By using a significant amount of past data, the algorithms are able to avoid giving too much weight to abnormal behavior that might have occurred in the recent past.
 
-The figures below illustrate how and when these four algorithms behave differently from one another. In the first figure, _basic_ will successfully identify anomalies that spike out of the normal range of values, but it does not incorporate the repeating, seasonal pattern into its predicted range of values. By contrast, _robust_, _agile_, and _adaptive_ all recognize the seasonal pattern and can detect more nuanced anomalies (e.g., if the metric was to flatline near its minimum value).
+The figures below illustrate how and when these four algorithms behave differently from one another. In the first figure, _basic_ successfully identifies anomalies that spike out of the normal range of values, but it does not incorporate the repeating, seasonal pattern into its predicted range of values. By contrast, _robust_, _agile_, and _adaptive_ all recognize the seasonal pattern and can detect more nuanced anomalies (e.g., if the metric was to flatline near its minimum value).
 
 {{< img src="monitors/monitor_types/anomaly/alg_comparison_1.png" alt="alg comparision 1" responsive="true" popup="true">}}
 
@@ -106,13 +106,13 @@ The algorithms also deal with scale differently. _Basic_ and _Robust_ are scale-
 
 {{< img src="monitors/monitor_types/anomaly/alg_comparison_scale.png" alt="algorithm comparison scale" responsive="true" popup="true">}}
 
-Finally, we see how each of the algorithms handle a new metric. _Robust_ and _agile_ won't show any bounds during the first few weeks. _Basic_ and _adaptive_ will start showing bounds shortly after the metric first appears. _Adaptive_ will leverage the metric's daily seasonal patterns in its predictions, while _basic_ simply reflects the range of recent values.
+Finally, we see how each of the algorithms handle a new metric. _Robust_ and _agile_ won't show any bounds during the first few weeks. _Basic_ and _adaptive_ start showing bounds shortly after the metric first appears. _Adaptive_ leverages the metric's daily seasonal patterns in its predictions, while _basic_ simply reflects the range of recent values.
 
 {{< img src="monitors/monitor_types/anomaly/alg_comparison_new_metric.png" alt="algorithm comparison new metric" responsive="true" popup="true">}}
 
 ## Anomaly Monitors via the API
 
-If you are an enterprise-level customer, create an anomaly detection monitor via the API with the standard [create-monitor API endpoint](/api/#monitor-create) if you add the `anomalies` function to the monitor query. The query will then follow this formula:
+If you are an enterprise-level customer, create an anomaly detection monitor via the API with the standard [create-monitor API endpoint](/api/#monitor-create) if you add the `anomalies` function to the monitor query. The query then follows this formula:
 ```
 time_aggr(time_window):anomalies(space_aggr:metric{tags}, 'algorithm_used', deviation_number, direction='both/above/below') >= threshold_value
 ```
@@ -146,11 +146,11 @@ Looking at many separate timeseries in a single graph can lead to [spaghettifica
 
 {{< img src="monitors/monitor_types/anomaly/spaghetti.png" alt="spaghetti" responsive="true" popup="true" >}}
 
-You can, however, add multiple series in a single graph one at a time. The gray envelope will only show up on mouseover.
+You can, however, add multiple series in a single graph one at a time. The gray envelope only shows up on mouseover.
 
 {{< img src="monitors/monitor_types/anomaly/anomaly_multilines.png" alt="anomaly multi lines" responsive="true" popup="true" >}}
 
-### Will past anomalies affect the current predictions?
+### Does past anomalies affect the current predictions?
 
 All the algorithms outside of _Basic_ use extensive amounts of historical data so that they are robust to most anomalies. In the first graph, note how the envelope stays around 400K even after the metric has dropped to 0, and how it continues to do so throughout the day.
 
@@ -161,7 +161,7 @@ The second graph shows the same metric, a day later. Even though it uses the pre
 {{< img src="monitors/monitor_types/anomaly/no_effect.png" alt="no effect" responsive="true" popup="true" >}}
 
 
-### Will past anomalies affect the current predictions?
+### Does past anomalies affect the current predictions?
 
 All the algorithms outside of _Basic_ use extensive amounts of historical data so that they are robust to most anomalies. In the first graph, note how the envelope stays around 400K even after the metric has dropped to 0, and how it continues to do so throughout the day.
 
@@ -202,13 +202,20 @@ It's common that these metrics have points that are at or near zero, especially 
 
 #### How can we work around this problem?
 
-One approach is to add a `rollup()` to force the use of a larger interval. `rollup()` takes as an argument the number of seconds that should be aggregated into a single point on the graph. For example, applying `rollup(120)` will lead to a series with one point every two minutes. With larger intervals, zeros become rare and can correctly be categorized as anomalies. Here's the same series as above but with a 2-minute rollup applied.
+One approach is to add a `rollup()` to force the use of a larger interval. `rollup()` takes as an argument the number of seconds that should be aggregated into a single point on the graph. For example, applying `rollup(120)` leads to a series with one point every two minutes. With larger intervals, zeros become rare and can correctly be categorized as anomalies. Here's the same series as above but with a 2-minute rollup applied.
 
 {{< img src="monitors/monitor_types/anomaly/rollup_profile_updates.png" alt="rollup profile updates" responsive="true" popup="true">}}
 
-Another option is to apply the `ewma()` [function](/graphing/miscellaneous/functions) to take a moving average. Like with rollups, this function will smooth away intermittent zeros so that drops in the metric can correctly be identified as anomalies.
+Another option is to apply the `ewma()` [function](/graphing/miscellaneous/functions) to take a moving average. Like with rollups, this function smooths away intermittent zeros so that drops in the metric can correctly be identified as anomalies.
 
 {{< img src="monitors/monitor_types/anomaly/ewma_profile_updates.png" alt="Ewma profile updates" responsive="true" popup="true" >}}
+
+
+### Why do I get a query parsing error when trying to combine some functions with anomaly detection?
+
+Not all functions may be nested inside of calls to the `anomalies()` function. In particular, you may not include any of the following functions in an anomaly detection monitor or dashboard query: `cumsum()`, `integral()`, `outliers()`, `piecewise_constant()`, `robust_trend()`, or `trend_line()`.
+
+Anomaly detection uses historical data to establish a baseline for normal behavior for a series. The above-listed functions are sensitive to the placement of the query window; the value of the series at a single timestamp can change significantly based upon where it falls within the query window. This sensitivity prevents anomaly detection from determining a consistent baseline for the series.
 
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}

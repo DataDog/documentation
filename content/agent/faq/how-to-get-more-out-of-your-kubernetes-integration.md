@@ -24,13 +24,13 @@ cluster :> NODE=$(kubectl get nodes -o=jsonpath="{.items[0].metadata.name}")
 cluster :> curl localhost:8001/api/v1/proxy/nodes/${NODE}:10255/stats/summary
 ```
 
-This will return [the following output](https://gist.github.com/CharlyF/2d9e7741bef9398386a84fd66f4c8c7d#file-summary-json).
+This returns [the following output](https://gist.github.com/CharlyF/2d9e7741bef9398386a84fd66f4c8c7d#file-summary-json).
 
 ```
 cluster :> curl localhost:8001/api/v1/proxy/nodes/${NODE}:10255/stats/
 ```
 
-This will return [the following output](https://gist.github.com/CharlyF/2d9e7741bef9398386a84fd66f4c8c7d#file-stats-json).  
+This returns [the following output](https://gist.github.com/CharlyF/2d9e7741bef9398386a84fd66f4c8c7d#file-stats-json).  
 
 The last output, despite being very large is very interesting. Say you are interested in monitoring the filesystems data:
 ```
@@ -93,7 +93,7 @@ kubectl label no <NODE_NAME> key=value
 kubectl apply -f ddmaster-ds-kubernetes-events.yaml
 ```
 
-You will only deploy on the agent on one node and this agent will collect kubernetes events.
+You only deploy the agent on one node and this agent collects kubernetes events.
 
 {{< img src="agent/faq/kubernetes_events.png" alt="Kubernetes Events" responsive="true" popup="true">}}
 

@@ -133,7 +133,7 @@ languages:
           weight: 40
           parent: menu_references_agent
         - identifier: customnav_agentnav_installcoreextra
-          name: "Install Core Extra"
+          name: "Install Core & Extra"
           url: "/agent/installcoreextra/"
           weight: 50
           parent: menu_references_agent
@@ -152,11 +152,11 @@ languages:
           url: "/agent/proxy/"
           weight: 90
           parent: menu_references_agent
-        - identifier: customnav_agentnav_faq
-          name: "FAQ"
-          url: "/agent/faq/"
-          weight: 100
-          parent: menu_references_agent
+        #- identifier: customnav_agentnav_faq
+        #  name: "FAQ"
+        #  url: "/agent/faq/"
+        #  weight: 100
+        #  parent: menu_references_agent
         # AGENT - Subnav end
 
 
@@ -249,11 +249,11 @@ languages:
           url: "/graphing/miscellaneous/graphingjson/"
           weight: 820
           parent: customnav_graphingnav_miscellaneous
-        - identifier: customnav_graphingnav_faq
-          name: "FAQ"
-          url: "/graphing/faq/"
-          weight: 90
-          parent: menu_references_graphing
+       # - identifier: customnav_graphingnav_faq
+       #   name: "FAQ"
+       #   url: "/graphing/faq/"
+       #   weight: 90
+       #   parent: menu_references_graphing
         # GRAPHING - Subnav end
 
 
@@ -351,11 +351,11 @@ languages:
           url: "/monitors/downtimes/"
           weight: 160
           parent: menu_references_monitoring
-        - identifier: customnav_monitornav_faq
-          name: "FAQ"
-          url: "/monitors/faq/"
-          weight: 170
-          parent: menu_references_monitoring
+        #- identifier: customnav_monitornav_faq
+        #  name: "FAQ"
+        #  url: "/monitors/faq/"
+        #  weight: 170
+        #  parent: menu_references_monitoring
         # ALERTING - Subnav end
 
 
@@ -406,11 +406,11 @@ languages:
           url: "/api/#traces"
           weight: 90
           parent: menu_references_tracing
-        - identifier: customnav_tracingnav_faq
-          name: "FAQ"
-          url: "/tracing/faq/"
-          weight: 100
-          parent: menu_references_tracing
+        #- identifier: customnav_tracingnav_faq
+        #  name: "FAQ"
+        #  url: "/tracing/faq/"
+        #  weight: 100
+        #  parent: menu_references_tracing
         # TRACING/APM - Subnav end
 
 
@@ -471,11 +471,11 @@ languages:
           url: "/logs/languages/ruby/"
           weight: 850
           parent: customnav_lognav_languages
-        - identifier: customnav_lognav_faq
-          name: "FAQ"
-          url: "/logs/faq/"
-          weight: 90
-          parent: menu_references_logs
+        #- identifier: customnav_lognav_faq
+        #  name: "FAQ"
+        #  url: "/logs/faq/"
+        #  weight: 90
+        #  parent: menu_references_logs
         # LOGS - Subnav end
 
         # DEVELOPERS
@@ -520,11 +520,11 @@ languages:
           url: "/developers/integrations/testing/"
           weight: 910
           parent: customnav_integrationsnav_new_integration
-        - identifier: customnav_developersnav_faq
-          name: "FAQ"
-          url: "/developers/faq/"
-          weight: 140
-          parent: menu_references_developers
+        #- identifier: customnav_developersnav_faq
+        #  name: "FAQ"
+        #  url: "/developers/faq/"
+        #  weight: 140
+        #  parent: menu_references_developers
         # DEVELOPERS - Subnav end
 
         # ACCOUNT MANAGEMENT
@@ -554,11 +554,11 @@ languages:
           url: "/account_management/multi_account/"
           weight: 60
           parent: menu_references_account_management
-        - identifier: customnav_accountmanagementnav_faq
-          name: "FAQ"
-          url: "/account_management/faq/"
-          weight: 70
-          parent: menu_references_account_management
+        #- identifier: customnav_accountmanagementnav_faq
+        #  name: "FAQ"
+        #  url: "/account_management/faq/"
+        #  weight: 70
+        #  parent: menu_references_account_management
         # ACCOUNT MANAGEMENT - Subnav end
 
         - identifier: menu_references_videos

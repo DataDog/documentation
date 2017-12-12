@@ -41,13 +41,13 @@ So what our system actually does is:
 
 More explanation about our graphing system in this [excellent article](/getting_started/from_the_query_to_the_graph):
  
-Back to our example, if you look at a few minutes of data, the graph you’ll see will be as expected. But when zooming out, the local aggregates for each source will inevitably account for X minutes of data. As you zoom out, X grows, and at some point, data from t1 and t2 get aggregated together. Thus values from source `map:1` and from source `map:2`, that didn’t occur at the same time will fall nonetheless in the same time-bucket, therefore, when `sum`ming sources together, these datapoints that didn't occur simultaneously will be summed up together: the result may be twice the value as expected.
+Back to our example, if you look at a few minutes of data, the graph is as expected. But when zooming out, the local aggregates for each source inevitably accounts for X minutes of data. As you zoom out, X grows, and at some point, data from t1 and t2 get aggregated together. Thus values from source `map:1` and from source `map:2`, that didn’t occur at the same time fall nonetheless in the same time-bucket, therefore, when summing sources together, these datapoints that didn't occur simultaneously are summed up together: the result may be twice the value as expected.
 
 ## Other workarounds
  
 In addition to the feature we may apply to your account, here are 3 workarounds you may apply:
 
-* **Zoom on the graph**: The issue is a side-effect of the time-aggregation that occurs for graphs on large time-frames; zooming in will have the spike disappear, and you'll know it's not a legitimate spike and you can ignore it.
+* **Zoom on the graph**: The issue is a side-effect of the time-aggregation that occurs for graphs on large time-frames; zooming in makes the spike disappear, and you'll know it's not a legitimate spike and you can ignore it.
 
 * **Turn-off interpolation**: Our interpolation feature sometimes intensifies the impact of this issue. You may apply the fill(null,0) function with the graph visual editor to disable it and improve your graph display. Syntax for the json tab: sum:your_metric{scope}.fill(null,0) or sum:your_metric{scope} by {tag_key}.fill(null,0)
 

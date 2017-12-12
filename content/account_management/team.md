@@ -18,7 +18,7 @@ further_reading:
 2. Enter the email address of the user you wish to invite to your Datadog account. Click **Invite**
   {{< img src="account_management/team/guides-multacct-addtoteam.png" alt="Add Member To Team" responsive="true" popup="true">}}
 
-The new user will receive an email with a link to login.
+The new user receives an email with a link to login.
 
 ## Datadog User roles
 
@@ -32,7 +32,7 @@ Datadog provides 3 user roles:
 
 ## Disable Existing Members
 
-**NOTE:** You must be an administrator of the team to disable members. You cannot permanently remove users as they might own events, dashboards, etc. which are not supposed to be removed. Disabled team members will disappear from the administrator’s team page UI automatically after one month.
+**NOTE:** You must be an administrator of the team to disable members. You cannot permanently remove users as they might own events, dashboards, etc. which are not supposed to be removed. Disabled team members disappears from the administrator’s team page UI automatically after one month.
 
 1. Go to the [Team Page][1].
 2. Hover over the avatar for the user you wish to disable. Choose **Disable** from the menu.

@@ -90,6 +90,6 @@ And you can see the resulting metric collection below. Because these log lines w
 
 {{< img src="agent/faq/collect_metrics.png" alt="Collect Metrics" responsive="true" popup="true">}}
 
-Of course, gauge type metrics always have their limitations in terms of how frequently you can submit them--if you still run into issues with metric granularity stemming from high-frequency logs, your metric may be better suited for a "counter" type metric, which can also be submitted via the dogstatsd using the statsd.increment() method. 
+Of course, gauge type metrics always have their limitations in terms of how frequently you can submit them--if you still run into issues with metric granularity stemming from high-frequency logs, your metric may be better suited for a "counter" type metric, which can also be submitted via the dogstatsd using the `statsd.increment()`` method. 
 
-The dogstatsd.statsd methods will use the timestamp at the moment the log line is parsed for the metric timestamp. If you need to inherit timestamps from the log lines themselves, you can use the dogstatsd.threadstats method instead. 
+The `dogstatsd.statsd` methods uses the timestamp at the moment the log line is parsed for the metric timestamp. If you need to inherit timestamps from the log lines themselves, you can use the `dogstatsd.threadstats` method instead. 

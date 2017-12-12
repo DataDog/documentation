@@ -1,10 +1,8 @@
 ---
 title: Parsing
 kind: documentation
-autotocdepth: 2
 customnav: lognav
 description: "Parse your logs using the Grok Processor"
-beta: true
 further_reading:
 - link: "/logs/processing"
   tag: "Documentation"
@@ -55,6 +53,7 @@ You would have at the end this structured log:
 
 Here is the list of all the matchers natively implemented by Datadog:
 
+{{% table responsive="true" %}}
 |||
 |:---|:---|
 |**Pattern**| **Usage**|
@@ -82,10 +81,12 @@ Here is the list of all the matchers natively implemented by Datadog:
 |`hostname`|matches a hostname|
 |`ipOrHost`|matches a hostname or ip|
 |`port` |matches a port number |
+{{% /table %}}
 
 ## Filter
 Here is the list of all the filters natively implemented by Datadog:
 
+{{% table responsive="true" %}}
 |||
 |:---|:---|
 |**Pattern**| **Usage**|
@@ -106,9 +107,10 @@ Here is the list of all the filters natively implemented by Datadog:
 |`scale(factor)` | multiplies the expected numerical value by the provided factor.|
 |`array([[openCloseStr, ] separator][, subRuleOrFilter)` | parses a string sequence of tokens and returns it as an array.|
 |`url`|parses a url and returns all the tokenized members (domain, query params, port, etc) in a JSON object. [More info](/logs/processing/#url-parser)|
+{{% /table %}}
 
 ## Examples
-Below you will find some examples demonstrating how to use parsers:
+Find below some examples demonstrating how to use parsers:
 
 ### Key value
 
@@ -144,6 +146,7 @@ If you add an **extract** parameter in your rule pattern you would have:
 The date matcher transforms your timestamp in the EPOCH format.
 
 
+{{% table responsive="true" %}}
 ||||
 |:---|:----|:----|
 |**Raw string** | **Parsing rule** | **Result** |
@@ -156,7 +159,7 @@ The date matcher transforms your timestamp in the EPOCH format.
 |06/Feb/2009:12:14:14.655 | `%{date("dd/MMM/yyyy:HH:mm:ss.SSS"):date}` | {“date”: 1233922454655}|
 |Thu Jun 16 08:29:03 2016 | `%{date("EEE MMM dd HH:mm:ss yyyy","Europe/Paris"):date}` |{"date": 1466058543000}|
 |2007-08-31 19:22:22.427 ADT|`%{date("yyyy-MM-dd HH:mm:ss.SSS z"):date}`|{"date": 1188675889244}|
-
+{{% /table %}}
 Parsing a date **doesn't** set its value as the log official date, for this you need to use the Log Date Remapper [Log Date Remapper](/logs/processing/#log-date-remapper) in a subsequent processor.
 
 ### Conditional pattern
@@ -184,7 +187,7 @@ MyParsingRule (%{integer:user.id}|%{word:user.firstname}) connected on %{date("M
 
 ### Optional attribute 
 
-Some logs will contain values that only appear part of the time. In those cases, you can make attribute extraction optional with `()?` extracting it only when the attribute is contained in your log.
+Some logs contain values that only appear part of the time. In those cases, you can make attribute extraction optional with `()?` extracting it only when the attribute is contained in your log.
 
 **Log**:
 ```

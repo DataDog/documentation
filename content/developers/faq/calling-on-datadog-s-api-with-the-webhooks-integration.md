@@ -10,14 +10,14 @@ But you can also set up webhook notifications to call on [Datadog's API](/api) i
 
 ## How do to this: 
 
-Each webhook must be set up with a name (to be referenced in monitors) and a url (to be pinged by the webhook). For submitting a call to the Datadog API, you will also need to select "Use custom payload" and add your custom payload to the subsequent field.
+Each webhook must be set up with a name (to be referenced in monitors) and a url (to be pinged by the webhook). For submitting a call to the Datadog API, you also need to select "Use custom payload" and add your custom payload to the subsequent field.
 
 * The **name field**: can be whatever you like, although it should be unique among all the other webhook name fields.
 
-* The **url field**: should be the url used when pinging the API. It will look like this:
+* The **url field**: should be the url used when pinging the API. It looks like this:
 `https://app.datadoghq.com/api/v1/<API_ENDPOINT>?api_key=<YOUR_API_KEY>`
 
-* The **custom payload field**: will contain the JSON with all the options you want to include in the API call. Which options are appropriate will depend on the API call you're making. You can sometimes use the monitor's $symbol content to fill in parts of the option values. 
+* The **custom payload field**: contains the JSON with all the options you want to include in the API call. Which options are appropriate depend on the API call you're making. You can sometimes use the monitor's $symbol content to fill in parts of the option values. 
 
 ## Example:
 

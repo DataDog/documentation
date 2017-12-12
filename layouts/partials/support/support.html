@@ -1,0 +1,43 @@
+{{ $dot := . }}
+<hr class="mt-40"/>
+<div class="support">
+    <div class="text-center mb-4">
+        <h2>Contact Us</h2>
+        <h3>Our friendly, knowledgeable solution engineers are here to help</h3>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-4 mb-4">
+            <div class="support-item">{{ partial "img.html" (dict "root" . "src" "envelope.png" "class" "" "alt" "Email" "height" "35") }}</div>
+            <p><strong>Email</strong><br/>You can contact our Support Team via email at <a href="mailto:support@datadoghq.com">support@datadoghq.com</a>.</p>
+        </div>
+        <div class="col-12 col-md-4 mb-4">
+            <div class="support-item">{{ partial "img.html" (dict "root" . "src" "chat.png" "class" "" "alt" "live Chat" "height" "35") }}</div>
+            <p><strong>Live Chat</strong><br/>Chat with our support team any business day between the hours of 10:00 and 19:00 ET. You can reach us through in-app chat, or on Slack, <a href="http://chat.datadoghq.com/" target="_blank" rel="noopener">Datadog Slack</a>.</p>
+        </div>
+        <div class="col-12 col-md-4 mb-4">
+            <div class="support-item">{{ partial "img.html" (dict "root" . "src" "stream.png" "class" "" "alt" "In-app Event Stream Messaging" "height" "35") }}</div>
+            <p><strong>In-app Event Stream Messaging</strong><br/>Messages in the <a href="http://app.datadoghq.com/event/stream" target="_blank" rel="noopener">event stream</a> containing @support-datadog will reach our Support Team. This is a convenient way to reference a graph snapshot.</p>
+        </div>
+    </div>
+    <hr/>
+    <div class="row foot">
+        <div class="col"></div>
+        <div class="col-8 col-md-6 col-lg-4">
+            <div class="row">
+                <div class="col text-center">
+                    <a href="http://status.datadoghq.com/" target="_blank" rel="noopener">
+                        {{ partial "img.html" (dict "root" . "src" "icon_status.png" "class" "" "alt" "status" "height" "50") }}
+                        <span>Status Page</span>
+                    </a>
+                </div>
+                <div class="col text-center">
+                    <a href="https://twitter.com/DatadogOps" target="_blank" rel="noopener">
+                        {{ partial "img.html" (dict "root" . "src" "icon_twitter.png" "class" "" "alt" "twitter" "height" "50") }}
+                        <span>Ops Twitter</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>

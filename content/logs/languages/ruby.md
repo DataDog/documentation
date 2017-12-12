@@ -1,9 +1,7 @@
 ---
 title: Ruby on Rails Log Collection
 kind: documentation
-autotocdepth: 2
 customnav: lognav
-beta: true
 further_reading:
 - link: "/logs/processing"
   tag: "Documentation"
@@ -92,7 +90,7 @@ That generates the `logging.rb` with default configuration inside that we are go
 First of all, we are going to log everything in JSON format. So change `:inspect` into `:json` this in the first lines of the file `logging.rb`:
 
 ```ruby
-# Objects will be converted to strings using the :inspect method.
+# Objects are converted to strings using the :inspect method.
   Logging.format_as :json
 ```
 

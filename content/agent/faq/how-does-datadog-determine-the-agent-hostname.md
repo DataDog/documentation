@@ -29,7 +29,7 @@ Hostnames
 ...
 ```
 
-From these names, a canonical name is picked for the host. This is the name the Agent will primarily use to identify itself to Datadog. The other names are submitted as well, but only as candidates for aliasing.
+From these names, a canonical name is picked for the host. This is the name the Agent primarily uses to identify itself to Datadog. The other names are submitted as well, but only as candidates for aliasing.
 
 The canonical host name is picked according to the following rules. The first match is selected.
 

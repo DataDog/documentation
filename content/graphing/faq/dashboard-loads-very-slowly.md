@@ -13,7 +13,7 @@ This probably means that you submit many different tags for the metrics of your 
 
 For a given metric, and for each unique combination of tags with which you send data to Datadog, we create a new record on our backend to store things separately. We do this so that we are able to exactly identify the data you asked for when you query a metric for any specific tag combination.
 
-With a large number of unique tag combinations, it will take a longer time to query and aggregate data on our end. This causes a delay in populating your graph with data. Within a wider time-window, it's likely that there will be even more unique tag combinations, resulting in a longer delay before you see metrics. You may even see no visualization at all when the delay hits the time out.
+With a large number of unique tag combinations, it takes a longer time to query and aggregate data on our end. This causes a delay in populating your graph with data. Within a wider time-window, it's likely that there is even more unique tag combinations, resulting in a longer delay before you see metrics. You may even see no visualization at all when the delay hits the time out.
 
 ### More information
 

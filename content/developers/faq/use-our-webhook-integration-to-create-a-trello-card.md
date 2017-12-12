@@ -6,7 +6,7 @@ customnav: main_references
 
 You can easily use our [Webhook Integration](/integrations/webhooks) to instantly create a trello card using our [@-notification feature](/monitors/notifications).
 
-This flow will utilize the Trello REST POST card api endpoint to post the @notification to a relevant Trello list.
+This flow utilizes the Trello REST POST card api endpoint to post the @notification to a relevant Trello list.
 
 ## Steps to Success
 
@@ -43,11 +43,11 @@ The API documentation for Trello cards are here and our webhook integration is 
 
 In the configuration:
 
-* name is the alias for how you will reference this hook. (@webhook-NAME)
+* name is the alias for how you references this hook. (@webhook-NAME)
 
-* URL will be `https://api.trello.com/1/cards`
+* URL is `https://api.trello.com/1/cards`
 
-You must enable Custom Payload and fill in a json object that will look like:
+You must enable Custom Payload and fill in a json object that looks like:
 
 ```json
 {

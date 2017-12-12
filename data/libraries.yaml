@@ -164,6 +164,10 @@ Tracing:
     - name: dd-go-opentracing
       link: https://github.com/gchaincl/dd-go-opentracing
       notes: OpenTracing Tracer implementation for Datadog in Go
+    - name: datadog-go
+      link: https://github.com/savaki/datadog
+      authors: Matt Ho
+      notes: OpenTracing Tracer implementation for Datadog in Go
   - Java:
     - name: apm-client
       link: https://github.com/chonton/apm-client

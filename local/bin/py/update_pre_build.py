@@ -134,6 +134,7 @@ class PreBuild:
             'mesos': {'action': 'truncate', 'target': 'mesos', 'remove_header': False},
             'activemq_xml': {'action': 'merge', 'target': 'activemq', 'remove_header': False},
             'cassandra_nodetool': {'action': 'merge', 'target': 'cassandra', 'remove_header': False},
+            'gitlab_runner': {'action': 'merge', 'target': 'gitlab', 'remove_header': False},
             'hdfs_datanode': {'action': 'merge', 'target': 'hdfs', 'remove_header': True},
             'hdfs_namenode': {'action': 'merge', 'target': 'hdfs', 'remove_header': False},
             'mesos_master': {'action': 'merge', 'target': 'mesos', 'remove_header': True},

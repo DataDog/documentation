@@ -21,9 +21,8 @@ Metric: the metric you want to graph
 * [In-depth explanation about time-aggregation](/graphing/faq/what-is-the-granularity-of-my-graphs-am-i-seeing-raw-data-or-aggregates-on-my-graph).
 * [How to set up your parameters with the rollup function](/graphing/miscellaneous/functions/#rollup)
 
-3. Space-aggregation: After time-aggregation has been performed, Datadog will combine these different source in a unique timeseries that will be displayed as a graph. By default for each time, Datadog averages values across several sources, but it can also take the min/max/sum.
+3. Space-aggregation: After time-aggregation has been performed, Datadog combines these different source in a unique timeseries that is displayed as a graph. By default for each time, Datadog averages values across several sources, but it can also take the min/max/sum.
 
-4. Functions: this parameter is optional, if you have specified functions they will apply.
-Check the available functions [here](/graphing/miscellaneous/functions/).
+4. Functions: this parameter is optional, if you have specified functions they would apply. Check the available functions [here](/graphing/miscellaneous/functions/).
 
 You can also use arithmetic on queries.

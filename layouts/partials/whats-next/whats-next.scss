@@ -15,15 +15,6 @@ $ddpurple:    #774DA2;
     img {
       max-width:24px;
     }
-    &:hover,
-    &.active {
-      &> .hover {
-        display:inline;
-      }
-      &> .static {
-        display:none;
-      }
-    }
     .hover {
       display:none;
     }
@@ -33,6 +24,30 @@ $ddpurple:    #774DA2;
     }
     .text {
       margin-right: 9px;
+    }
+  }
+}
+
+@media (max-width: 575px) {
+  .whatsnext {
+    .badge {
+      display:none;
+    }
+  }
+}
+
+@media (min-width: 576px) {
+  .whatsnext {
+    .list-group-item {
+      &:hover,
+      &.active {
+        & .hover {
+          display: inline;
+        }
+        & .static {
+          display: none;
+        }
+      }
     }
   }
 }

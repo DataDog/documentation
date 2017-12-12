@@ -6,7 +6,7 @@ customnav: integrationsnav
 
 ## Context
 
-We will use the example of a postgres "testdb" database with a dummy table "company" containing employee records (3 rows):
+We use the example of a postgres "testdb" database with a dummy table "company" containing employee records (3 rows):
 ```
 testdb=# SELECT * FROM company;
 
@@ -31,9 +31,9 @@ We'll tell the dd-agent to capture the content of columns age and salary as metr
 Corresponding custom metric yaml configuration:
 ```
 - # Capture simple data
-query: SELECT name, address, %s from company where name = 'Paul'; # this query will be run and "%s" replaced with the parameters defined in the metrics section just below
+query: SELECT name, address, %s from company where name = 'Paul'; # this query is run and "%s" replaced with the parameters defined in the metrics section just below
 metrics:
-    age: [postgresql.employee_age, GAUGE] # the value contained in column "age" will be captured and submitted as a gauge metric named "postgresql.employee.age" 
+    age: [postgresql.employee_age, GAUGE] # the value contained in column "age" is captured and submitted as a gauge metric named "postgresql.employee.age" 
     salary: [postgresql.employee_salary, GAUGE]
 relation: false #  when relation is not an empty list, it gathers per-relation metrics on top of that.
 descriptors:
@@ -58,9 +58,9 @@ instances:
 
     custom_metrics:
     - # Capture simple data
-      query: SELECT name, address, %s from company where name = 'Paul'; # this query will be run and %s replaced by the parameters defined in the metrics section
+      query: SELECT name, address, %s from company where name = 'Paul'; # this query is run and %s replaced by the parameters defined in the metrics section
       metrics:
-          age: [postgresql.employee_age, GAUGE] # the value contained in column age will be captured and submitted as a gauge metric named postgresql.  employee.age
+          age: [postgresql.employee_age, GAUGE] # the value contained in column age is captured and submitted as a gauge metric named postgresql.  employee.age
           salary: [postgresql.employee_salary, GAUGE]
       relation: false
       descriptors:

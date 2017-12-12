@@ -24,6 +24,6 @@ order: 10.1
     * `name` [*required*]:  
         The name of the variable.
     * `prefix` [*optional*, *default*=**None**]:  
-        The tag prefix associated with the variable. Only tags with this prefix will appear in the variable dropdown.
+        The tag prefix associated with the variable. Only tags with this prefix appear in the variable dropdown.
     * `default` [*optional*, *default*=**None**]:  
         The default value for the template variable on dashboard load.

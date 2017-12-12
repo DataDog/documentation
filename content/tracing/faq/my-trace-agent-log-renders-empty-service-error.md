@@ -5,7 +5,7 @@ autotocdepth: 3
 customnav: tracingnav
 ---
 
-If your Agent is not rendering your traces on the UI, the first place to look for errors will be the trace-agent.log. 
+If your Agent is not rendering your traces on the UI, the first place to look for errors is the `trace-agent.log. 
 
 You may see the following errors : 
 
@@ -17,11 +17,11 @@ res:<your.request.name>]: span.normalize: empty `Service` (debug for more info)
 
 ### Check that the Service was properly defined
 
-Note that this issue is more likely to happen when manual instrumentation is used, especially in languages such as Go. Refer to our documentations for further details: [this page](/tracing/languages) will lead you to the specific languages libraries we use.
+Note that this issue is more likely to happen when manual instrumentation is used, especially in languages such as Go. Refer to our documentations for further details: [this page](/tracing/languages) leads you to the specific languages libraries we use.
 
 ### My Service is defined properly 
 
-The issue will probably linked to the actual location of your code instrumentation.
+The issue is probably linked to the actual location of your code instrumentation.
 
 The goal here is to always have a Root Span define when a Child Span is called when an application is running. 
 

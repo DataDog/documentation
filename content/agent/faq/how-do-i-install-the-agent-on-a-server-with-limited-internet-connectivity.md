@@ -25,7 +25,7 @@ The example below shows a user copying the [URL to the rpm package](https://y
 
 {{< img src="agent/faq/rpm_package.gif" alt="RPM Package" responsive="true" popup="true">}}
 
-**Note**: The package will bundle all resources necessary to run our agent and our checks (whether the integration is enabled or not). In terms of hard requirements, python 2.7+ and sysstat are required; other dependencies will be mandatory depending on what checks are enabled.
+**Note**: The package bundles all resources necessary to run our agent and our checks (whether the integration is enabled or not). In terms of hard requirements, python 2.7+ and sysstat are required; other dependencies are mandatory depending on what checks are enabled.
 
 Once the package has been transferred to the target system, it can be installed locally by using the appropriate package manager command. 
 

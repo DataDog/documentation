@@ -5,7 +5,7 @@ order: 8.7
 ---
 
 ## Mute All Monitors
-Muting will prevent all monitors from notifying through email and posts to the [event stream](/graphing/event_stream/). State changes will only be visible by checking the alert page.
+Muting prevents all monitors from notifying through email and posts to the [event stream](/graphing/event_stream/). State changes are only visible by checking the alert page.
 
 ##### ARGUMENTS
 

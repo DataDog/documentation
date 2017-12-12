@@ -8,7 +8,7 @@ With the Windows version of the Datadog Agent, it is possible to post Events to 
 
 To do so, open the Datadog Agent Manager and on the left pane navigate to the Windows Event Log section.
 
-Here you will define filters that will be matched against incoming events:
+Here defines filters that are matched against incoming events:
 ```yaml
 # init_config:
 # 
@@ -91,6 +91,6 @@ Save the configuration, enable the integration and [restart the Agent](/agent/fa
 
 You should see an Event appear on your [Event Stream](/graphing/event_stream/) on the Datadog website. 
 
-*Note that the -Get-WmiObject command outlined will not locate all of the event logs by default. If this command does not return any results when you input the Event Log filename you wish to monitor, you will have to add it to the registry. For more on how to add it to the registry, [check out this article](/integrations/faq/how-to-add-event-log-files-to-the-win32-ntlogevent-wmi-class).
+*Note that the -Get-WmiObject command outlined do not locate all of the event logs by default. If this command does not return any results when you input the Event Log filename you wish to monitor, you have to add it to the registry. For more on how to add it to the registry, [check out this article](/integrations/faq/how-to-add-event-log-files-to-the-win32-ntlogevent-wmi-class).
 
 ** For convenience, reference [the YAML example](https://github.com/DataDog/dd-agent/tree/master/conf.d) file to use as a template. 

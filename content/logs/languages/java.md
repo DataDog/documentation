@@ -1,9 +1,7 @@
 ---
 title: Java Log Collection
 kind: documentation
-autotocdepth: 2
 customnav: lognav
-beta: true
 further_reading:
 - link: "/logs/processing"
   tag: "Documentation"
@@ -143,7 +141,7 @@ You can easily change it to:
 logger.info("Emitted quantity=1001 messages during the last durationInMs=93180 ms for customer scope=prod30");
 ```
 
-With the [Key/Value parser](/logs/parsing/#key-value) enabled, **Datadog** will automatically extract each pair from your final JSON document:
+With the [Key/Value parser](/logs/parsing/#key-value) enabled, **Datadog** automatically extracts each pair from your final JSON document:
 
 ```json
 {

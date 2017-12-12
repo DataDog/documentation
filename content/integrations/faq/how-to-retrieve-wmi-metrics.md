@@ -113,7 +113,7 @@ WorkingSetPeak          : 45273088
 
 This command returns details about the Powershell process. It includes a lot of information including memory usage and I/O operations.
 
-For those who can run third-party applications on their machine the tool WMI Explorer will make it very easy to browse the information exposed by WMI. It's available here https://www.ks-soft.net/hostmon.eng/wmi/, it's a self-contained .exe file so you don't have to install it, and it's virus-free https://www.virustotal.com/en/file/df8e909491da38556a6c9a50abf42b3b906127e0d4b35d0198ef491139d1622c/analysis/.
+For those who can run third-party applications on their machine the tool WMI Explorer makes it very easy to browse the information exposed by WMI. It's available here https://www.ks-soft.net/hostmon.eng/wmi/, it's a self-contained .exe file so you don't have to install it, and it's virus-free https://www.virustotal.com/en/file/df8e909491da38556a6c9a50abf42b3b906127e0d4b35d0198ef491139d1622c/analysis/.
 
 ## Leveraging WMI in Datadog
 
@@ -161,7 +161,7 @@ instances:
       - Name: powershell
 ```
 
-In your Metrics Explorer you should find 2 metrics called powershell.threads.count and powershell.mem.virtual. But what happens if you have 2 Powershell consoles opened? You will find the following error in the 'Checks section':
+In your Metrics Explorer you should find 2 metrics called powershell.threads.count and powershell.mem.virtual. But what happens if you have 2 Powershell consoles opened? You may find the following error in the 'Checks section':
 ```
 wmi_check
   Instance #0
@@ -186,7 +186,7 @@ instances:
     filters:
       - Name: powershell
 # `tag_by` optionally lets you tag each metric with a property from the
-# WMI class you're using. This is only useful when you will have multiple
+# WMI class you're using. This is only useful when you have multiple
 # values for your WMI query. The examples below show how you can tag your
 # process metrics with the process name (giving a tag of "name:app_name").
     tag_by: Name
@@ -194,7 +194,7 @@ instances:
 # If running on Windows 2003, use a different uniq value like `tag_by: IDProcess`
 ```
 
-Which will give you 2 metrics per Powershell console opened:
+Which gives you 2 metrics per Powershell console opened:
 ```
 wmi_check
   Instance #0
@@ -204,7 +204,7 @@ wmi_check
 
 If the information that you would like to use as a tag is not part of the class you're getting the data from, you have the possibility to use the tag_queries list to link data from different tables.
 
-Let's say I want to report on PoolNonPagedBytes from Win32_PerfFormattedData_PerfProc_Process and I want to addCreationDate from Win32_Process as a tag. These 2 classes expose the PID with different names: IDProcess inWin32_PerfFormattedData_PerfProc_Process and Handle in Win32_Process. So the former will be thelink source property and the later the target property:
+Let's say I want to report on PoolNonPagedBytes from Win32_PerfFormattedData_PerfProc_Process and I want to addCreationDate from Win32_Process as a tag. These 2 classes expose the PID with different names: IDProcess inWin32_PerfFormattedData_PerfProc_Process and Handle in Win32_Process. So the former is thelink source property and the later the target property:
 ```yaml
 # `tag_queries` optionally lets you specify a list of queries, to tag metrics
 # with a target class property. Each item in the list is a set of
@@ -220,7 +220,7 @@ Let's say I want to report on PoolNonPagedBytes from Win32_PerfFormattedData_Per
 # SELECT 'target property' FROM 'target class'
 #                 WHERE 'link target class property' = 'link source property'
 #
-# Note: setting this will cause any instance number to be removed from tag_by values
+# Note: setting this causes any instance number to be removed from tag_by values
 # i.e. name:process#1 => name:process
 
 init_config:

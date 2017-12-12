@@ -2,7 +2,6 @@
 title: How to Send Logs to Datadog via External Log Shippers
 kind: faq
 customnav: lognav
-beta: true
 further_reading:
 - link: "/logs/faq/i-have-a-custom-log-file-with-heightened-read-permissions"
   tag: "FAQ"
@@ -32,7 +31,7 @@ The Datadog Log Agent can be configured:
 * [To tail logs from files](/logs/#tail-existing-files)
 * [To listen for logs via UDP or TCP over a given port](/logs/#stream-logs-through-tcp-udp). 
  
-So whatever your log shipper is, one option is just to have that shipper forward its logs to the Datadog Log Agent; it is often easy to configure this kind of setup, both from the dd-agent side, and from your log shipper. With this approach, you don't need to add your Datadog API key, hostname, or source values in your log shipper's configurations, since that will be handled by the Datadog Log Agent. 
+So whatever your log shipper is, one option is just to have that shipper forward its logs to the Datadog Log Agent; it is often easy to configure this kind of setup, both from the dd-agent side, and from your log shipper. With this approach, you don't need to add your Datadog API key, hostname, or source values in your log shipper's configurations, since that is handled by the Datadog Log Agent. 
 
 This approach can be especially useful for sending to Datadog logs that have heightened permission requirements. The dd-agent does not run as root (and as a best practice we do not encourage running it as root), so that can block the Datadog Logs Agent from tailing some log files directly, such as /var/log/syslog. If you do not want to modify the permissions on these files or the access that you give to the dd-agent user, many of these open source log shippers do run as root, and can be used to forward logs to the Datadog Logs Agent over UDP / TCP. 
 
@@ -125,7 +124,7 @@ This approach can be especially useful for sending to Datadog logs that have hei
     *.* @@intake.logs.datadoghq.com:10516;DatadogFormat
     ```
 
-6. Restart Rsyslog and your new logs will get forwarded directly to your Datadog account.
+6. Restart Rsyslog and your new logs get forwarded directly to your Datadog account.
 
 7. Associate those logs with the host metrics and tags
     In order to make sure that in your Datadog account these logs are associated with the metrics and tags from the same host, it is important to set the same HOSTNAME in your `rsyslog.conf` so that its value matches the hostname of your Datadog metrics.
@@ -149,7 +148,7 @@ This approach can be especially useful for sending to Datadog logs that have hei
 
 As long as you can forward your FluentD logs over tcp/udp to a specific port, you can use that approach to forward your FluentD logs to your Datadog agent. But another option is to use the [Datadog FluentD plugin](http://www.rubydoc.info/gems/fluent-plugin-datadog/0.9.6) to forward the logs directly from FluentD to your Datadog account. 
 
-In order to get the best use out of your logs in Datadog, it is important to have the proper metadata associated with your logs (including hostname and source). For the current version of the Datadog FluentD plugin, you will have to include this metadata in the logs that you're sending to FluentD, using the following format:
+In order to get the best use out of your logs in Datadog, it is important to have the proper metadata associated with your logs (including hostname and source). For the current version of the Datadog FluentD plugin, you have to include this metadata in the logs that you're sending to FluentD, using the following format:
 
 ```
 {
@@ -167,7 +166,7 @@ In order to get the best use out of your logs in Datadog, it is important to hav
 
     ```
     ## Please set the ROOT to the folder your nxlog was installed into,
-    ## otherwise it will not start.
+    ## otherwise it won't start.
     #To change for your own system if necessary
     define ROOT C:\Program Files\nxlog
     #define ROOT_STRING C:\Program Files\nxlog

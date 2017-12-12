@@ -16,7 +16,7 @@ aliases:
 ## Overview
 
 This page explains how to send your application's [custom metrics](/getting_started/custom_metrics/) to Datadog.
-Sending your application's [custom metrics](/getting_started/custom_metrics/) to Datadog will let you correlate what's happening with your application, your users and your system.  
+Sending your application's [custom metrics](/getting_started/custom_metrics/) to Datadog lets you correlate what's happening with your application, your users and your system.  
 
 Metrics are collected by sending them to StatsD, a small metrics aggregation
 server that is bundled with the Datadog Agent. You can read about how it works [here](/developers/dogstatsd/). If you want to dive into code right away,
@@ -32,7 +32,7 @@ In this tutorial, we'll cover some common instrumentation use cases, like:
 There are a few rules to stick to when naming metrics:
 
 * Metric names must start with a letter 
-* Can only contain ASCII alphanumerics, underscore and periods (other characters will get converted to underscores) 
+* Can only contain ASCII alphanumerics, underscore and periods (other characters gets converted to underscores) 
 * Should not exceed 200 characters (though less than 100 is generally preferred from a UI perspective)
 * Unicode is not supported
 * We recommend avoiding spaces
@@ -41,21 +41,21 @@ Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. `
 
 ### Metric Types
 
-A metric's Datadog in-application type affects how its data is interpreted in query results and graph visualizations across the application. The metric type visible on the metric summary page is the Datadog in-application type. You should only change the type if you have started submitting this metric with a new type, and should be aware that changing the type may render historical data nonsensical.  
+A metric's Datadog in-app type affects how its data is interpreted in query results and graph visualizations across the application. The metric type visible on the metric summary page is the Datadog in-app type. You should only change the type if you have started submitting this metric with a new type, and should be aware that changing the type may render historical data nonsensical.  
 
 In the Datadog web application there are 3 metric types: 
 
-* GAUGE
-* RATE
-* COUNT 
+* [GAUGE](/#gauges)
+* [RATE](/#rates)
+* [COUNT](/#count) 
 * COUNTER (now deprecated)
 
 A metric's type is stored as metrics metadata and is used to determine how a metric is interpreted throughout the application by determining default time aggregation function and `as_rate()`/`as_count()` behavior. The `as_count()` and `as_rate()` modifiers behave differently for different Web Application metric types.
 
-##### How do submission types relate to Datadog in-application types?
-Datadog accepts metrics submitted from a variety of sources, and as a result the submission type does not always map exactly to the Datadog in-application type:
+#### How do submission types relate to Datadog in-app types?
+Datadog accepts metrics submitted from a variety of sources, and as a result the submission type does not always map exactly to the Datadog in-app type:
 
-{{% table responsive="true" %}}
+
 | Submission Source | Submission Method (python) | Submission Type | Datadog In-App Type |
 |-------------------|-------------------|-----------------|--------------|
 | [API][3] | `api.Metric.send(...)` | gauge | gauge |
@@ -70,33 +70,32 @@ Datadog accepts metrics submitted from a variety of sources, and as a result the
 | [agent check][2] | `self.monotonic_count(...)` | monotonic_count | count |
 | [agent check][2] | `self.histogram(...)` | histogram | gauge, rate |
 | [agent check][2] | `self.set(...)` | set | gauge |
-{{% /table %}}
 
-##### What's a use case for changing a metric's type?
+#### What's a use case for changing a metric's type?
 
-1. A user has a metric `app.requests.served` that counts requests served, she accidentally submits it via dogstatsd as a `gauge`. The metric's Datadog type is therefore `gauge`.
+1. You have a metric `app.requests.served` that counts requests served, but accidentally submits it via dogstatsd as a `gauge`. The metric's Datadog type is therefore `gauge`.
 
-2. She realizes she should have submitted it as a dogstatsd `counter` metric, that way she can do time aggregation to answer questions like "How many total requests were served in the past day?" by querying `sum:app.requests.served{*}` (this would not make sense for a `gauge`-type  metric.)
+2. You realize you should have submitted it as a dogstatsd `counter` metric, that way you can do time aggregation to answer questions like "How many total requests were served in the past day?" by querying `sum:app.requests.served{*}` (this would not make sense for a `gauge`-type  metric.)
 
-3. She likes the name `app.requests.served` so rather than submitting a new metric name with the more appropriate `counter` type, she'll change the type of `app.requests.served`.
+3. You like the name `app.requests.served` so rather than submitting a new metric name with the more appropriate `counter` type, you could change the type of `app.requests.served`.
+  
+  * By updating your submission code, calling `dogstatsd.increment('app.requests.served', N)` after N requests are served.
 
-    a. She updates her submission code, calling `dogstatsd.increment('app.requests.served', N)` after N requests are served.
+  * By updating the Datadog in-app type via the metric summary page to `rate`.
 
-    b. She updates the Datadog in-app type via the metric summary page to `rate`.
+This causes data submitted before the type change for `app.requests.served`to behave incorrectly because it was stored in a format to be interpreted as an in-app `gauge` not a `rate`. Data submitted after steps 3a and 3b
+is interpreted properly.  
 
-This will cause data submitted before the type change for `app.requests.served` to behave incorrectly because it
-was stored in a format to be interpreted as an in-app `gauge` not a `rate`. Data submitted after steps 3a and 3b
-will be interpreted properly. If she was not willing to lose the historical data submitted as a `gauge` she would
-have created a new metric name with the new type, leaving the type of `app.requests.served` unchanged.
+If you are not willing to lose the historical data submitted as a `gauge`, create a new metric name with the new type, leaving the type of `app.requests.served` unchanged.
 
 ### Metric submission
 
-There is multiple ways to send metrics to your Datadog application:
+There are multiple ways to send metrics to Datadog:
 
-1. With your Datadog agent directly: Learn more on how [to write an Agent Checks](/agent/agent_checks) && [Aggregator source](https://github.com/DataDog/dd-agent/blob/master/aggregator.py)
+1. With your Datadog agent directly (Learn more on how [to write an Agent Checks](/agent/agent_checks) && [Aggregator source](https://github.com/DataDog/dd-agent/blob/master/aggregator.py))
 
 2. Using your StatsD server bundled with the Datadog Agent (Find more about our available libraries [here](/developers/libraries))
-  Note: Because dogstatsd flushes at a regular interval (**default 10s**) all metrics submitted via this method will be stored with associated interval metadata.
+  Note: Because dogstatsd flushes at a regular interval (**default 10s**) all metrics submitted via this method are stored with associated interval metadata.
 
 3. Submit metrics directly to Datadog's [HTTP API](/api/)
 
@@ -141,7 +140,7 @@ This tutorial has examples for Python and Ruby, but check out the
 
 ## Count
 ### Overview
-Counters are used to (ahem) count things. 
+Counters are used to count things. 
 
 ### Submission
 #### Agent Check Submission
@@ -216,15 +215,15 @@ your series like cumulative sum or integral. There is more information on those
 
 ### In-app modifiers
 
-* Effect of as_count():
+* Effect of `as_count()`:
     * Sets the time aggregator to SUM.
 
-* Effect of as_rate():
+* Effect of `as_rate()`:
     
     * Sets the time aggregator to SUM
     * Normalizes the input timeseries values by the query (rollup) interval. For example [1,1,1,1].as_rate() for rollup interval of 20s produces [0.05, 0.05, 0.05, 0.05].
 
-* The raw metric itself will default to the time aggregator AVG, so querying the metric without either as_rate() or as_count()will become non-sensical when time aggregation is applied.
+* The raw metric itself defaults to the time aggregator AVG, so querying the metric without either `as_rate()` or `as_count()` becomes nonsensical when time aggregation is applied.
 
 * Note that on very small intervals when no time-aggregation occurs, there is no normalization, and you get the raw metric value counts.
 
@@ -239,7 +238,7 @@ Gauges measure the value of a particular thing over time:
 {{% table responsive="true" %}}
 |Method | Overview |
 |:---|:---|
-|self.gauge(...)|<ul><li>If called multiple times during a check's execution for a metric only the last sample will be used.</li><li>Stored as a Web Application GAUGE type</li></ul>|
+|self.gauge(...)|<ul><li>If called multiple times during a check's execution for a metric only the last sample is used.</li><li>Stored as a Web Application GAUGE type</li></ul>|
 {{% /table %}}
 
 #### Dogstatsd Submission
@@ -271,8 +270,9 @@ end
 ```
 
 ### In-application modifiers
-* Effect of as_count(): None
-* Effect of as_rate(): None
+
+* Effect of `as_count()`: None
+* Effect of `as_rate()`: None
 
 ## Histograms
 ### Overview
@@ -343,7 +343,7 @@ statsd.time('database.query.time') do
 end
 ```
 
-The above instrumentation will produce the following metrics:
+The above instrumentation produces the following metrics:
 
 - `database.query.time.count`: number of times this metric was sampled
 - `database.query.time.avg`: average time of the sampled values
@@ -449,12 +449,12 @@ end
 
 ### In-app modifiers
 
-* Effect of as_count():
+* Effect of `as_count()`:
     
     * Sets the time aggregator to SUM.
     * Uses the metadata interval to convert from raw rates to counts. Does not work if no metadata interval exists for the metric.
 
-* Effect of as_rate():
+* Effect of `as_rate()`:
     * Sets the time aggregator to SUM.
     * Uses the query interval and metadata interval to calculate the time-aggregated rate. Does not work if no metadata interval exists for the metric.
 

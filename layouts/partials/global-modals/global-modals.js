@@ -69,7 +69,8 @@ $(document).ready(function () {
         // try set modal popup imgix to cap out at browser width/height
         url += '&w='+$(window).width() + '&h='+$(window).height();
         var img = new Image();
-        var imgEl = $('<img src="'+url+'" alt="" class="img-fluid" />');
+        var srcseturl = url+", "+url+"&dpr=2 2x";
+        var imgEl = $('<img src="'+url+'" srcset="'+srcseturl+'" alt="" class="img-fluid" />');
         img.onload  = function() {
             /* Store naturalWidth & height for IE8 */
             naturalWidth = img.width;

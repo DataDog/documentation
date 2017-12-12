@@ -34,8 +34,8 @@
                     {{ if not $element.hide }}
                     <li>
                         <a href="{{ $element.link }}" {{if $active_page }}class="active"{{ end }}>
-                            <img class="static" width="21" src="{{ partial "img.html" (dict "root" $dot "src" (print "icons/" ($element.image))) }}" />
-                            <img class="hover" width="21" src="{{ partial "img.html" (dict "root" $dot "src" (print "icons/" ($element.image_hover)) ) }}" />
+                            {{ partial "img.html" (dict "root" $dot "src" (print "icons/" ($element.image)) "class" "static" "width" "21") }}
+                            {{ partial "img.html" (dict "root" $dot "src" (print "icons/" ($element.image_hover)) "class" "hover" "width" "21" ) }}
                             <span>{{ $element.display_name }}</span>
                         </a>
                         {{ if (and $active_page (not $element.toc_disable)) }}

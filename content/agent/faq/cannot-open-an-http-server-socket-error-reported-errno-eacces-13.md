@@ -18,7 +18,7 @@ At first glance, that might appear to indicate that the agent is unable to conne
 
 For linux hosts, the following directory must be owned by the dd-agent user in order for it to start correctly: /opt/datadog-agent/run
 
-On rare occasions, the ownership of this directory can get changed to something other than dd-agent, and this will cause the above error the next time you try starting the agent. You can double-check on the ownership of this directory by running the following command:
+On rare occasions, the ownership of this directory can get changed to something other than dd-agent, this causes the above error the next time you try starting the agent. You can double-check on the ownership of this directory by running the following command:
 ```
 ls -al /opt/datadog-agent/run
 ```

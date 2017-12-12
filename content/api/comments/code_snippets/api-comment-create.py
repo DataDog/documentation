@@ -12,7 +12,7 @@ initialize(**options)
 api.Comment.create(handle='matt@example.com', message='Should we use COBOL or Fortran! ')
 
 # Or you can set it to None
-# and the handle will default
+# and the handle defaults
 # to the owner of the application key
 api.Comment.create(message='Should we use COBOL or Fortran?')
 

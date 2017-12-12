@@ -8,7 +8,7 @@ Each metric point is sent over UDP to the StatsD server. This can incur a lot
 of overhead for performance intensive code paths. To work around this, StatsD
 supports sample rates, which allows sending a metric a fraction of the time and scaling up correctly on the server.
 
-The following code will only send points half of the time:
+The following code only sends points half of the time:
 
 For python:
 ```python

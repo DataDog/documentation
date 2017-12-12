@@ -31,15 +31,15 @@ or service checks.
 
 1. Select your **custom check**.
 
-2. Select **host or tags** that you would like to monitor. The check will run
+2. Select **host or tags** that you would like to monitor. The check runs
    for every unique set of tags from all monitored hosts. For example, the
    `Nginx` service check reports one status per `{host,port}`. So if you have
-   multiple servers running on a single host, then each one will alert separately
+   multiple servers running on a single host, then each one alerts separately
    in the case of failure.
 
 3.  Select your **alert options**.
 
-   While each check run will send a status of either CRITICAL, WARNING or OK,
+   While each check run sends a status of either CRITICAL, WARNING or OK,
    you can choose at what consecutive conditions to cause a state change and a
    notification. For example, you might want to know immediately when your check
    fails and only have it recover if it stays that way. In this case you might

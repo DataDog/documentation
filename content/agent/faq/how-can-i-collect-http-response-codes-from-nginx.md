@@ -82,7 +82,7 @@ Everything looks good, so let's generate some HTTP requests using the curl comma
 
 ## Visualizing metrics
 
-As you can see from the code, the parser will generate a nginx.net.avg_response gauge metric for each request. Let's make sure that the metric was received by Datadog, by browsing the [Metric Summary](https://app.datadoghq.com/metric/summary) page:
+As you can see from the code, the parser generates a `nginx.net.avg_response` gauge metric for each request. Let's make sure that the metric was received by Datadog, by browsing the [Metric Summary](https://app.datadoghq.com/metric/summary) page:
 {{< img src="agent/faq/metric_summary_page_nginx.png" alt="Metric summary Page" responsive="true" popup="true">}}
 
 We can now plot the metric in Metric Explorer:

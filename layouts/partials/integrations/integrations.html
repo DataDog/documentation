@@ -33,13 +33,14 @@
     window.integrations = JSON.parse(integrations);
 </script>
 
-<div class="d-block d-sm-none mt-40 mb-40">
-    <select class="integrations-select custom-select" data-ref="mobilecontrols">
-        <option data-ref="filter" data-filter="all" value="#all" selected>ALL</option>
+<div class="d-block d-sm-none mt-40 mb-40 dropdown">
+    <button id="dropdownMenuLink" class="integration-popper-button btn btn-lg btn-block btn-outline-primary" type="button">ALL</button>
+    <div id="integration-popper" class="dropdown-menu" style="display:none;" data-ref="mobilecontrols">
+        <a data-ref="filter" data-filter="all" href="#all" class="dropdown-item sort-time">ALL</a>
         {{ range $i, $e := (sort ($.Scratch.Get "filters") "value" "asc") }}
-            <option data-ref="filter" data-filter=".cat-{{ replace $e "/" "" | urlize }}" value="#cat-{{ replace $e "/" "" | urlize }}" class="dropdown-item sort-time sort-{{ replace $e "/" "" | urlize }}">{{ $e | upper }}</option>
+            <a data-ref="filter" data-filter=".cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}" class="dropdown-item sort-time sort-{{ replace $e "/" "" | urlize }}">{{ $e | upper }}</a>
         {{ end }}
-    </select>
+    </div>
 </div>
 
 <div class="filters controls d-none d-sm-block" data-ref="controls">
@@ -68,8 +69,26 @@
         {{ if $formatname }}
         <div id="mixid_{{$i}}" class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2-4 mix text-center {{ range $i, $e := $v.Params.categories }} cat-{{ replace $e "/" "" | urlize }} {{ end }}" data-id="{{ $i }}" data-ref="item">
             <div class="card">
-                <a class="card-img" href="{{ $dot.Site.BaseURL }}integrations/{{$urlname | lower}}/">{{ partial "img.html" (dict "root" $dot "src" (print "integrations_logos/" ($urlname | lower) ".png") "class" "card-img" "alt" "integration" "disable_lazy" "true") }}</a>
-                <a class="card-img-gray" href="{{ $dot.Site.BaseURL }}integrations/{{$urlname | lower}}/">{{ partial "img.html" (dict "root" $dot "src" (print "integrations_logos/" ($urlname | lower) ".png") "class" "card-img" "alt" "integration" "img_param" "?ch=Width,DPR&fit=max&auto=format&sat=-100" "disable_lazy" "true") }}</a>
+                <a class="card-img" href="{{ $dot.Site.BaseURL }}integrations/{{$urlname | lower}}/">
+                    {{ $src := (print "integrations_logos/" ($urlname | lower) ".png")}}
+                    {{ $url := (print (.Site.Params.img_url) "images/" (index .Site.Data.manifests.images $src ) "?auto=format") | safeURL }}
+                    <picture class="mx-auto">
+                        <source srcset="{{ $url }}&w=144 1x, {{ $url }}&w=144&dpr=2 2x" media="(min-width: 530px)">
+                        <source srcset="{{ $url }}&w=200 1x, {{ $url }}&w=200&dpr=2 2x" media="(min-width: 0px)">
+                        <img class="img-fluid mx-auto"
+                             srcset="{{ $url }}&w=144"
+                             alt="integration">
+                    </picture>
+                </a>
+                <a class="card-img-gray" href="{{ $dot.Site.BaseURL }}integrations/{{$urlname | lower}}/">
+                    <picture class="mx-auto">
+                        <source srcset="{{ $url }}&w=144&sat=-100 1x, {{ $url }}&w=144&sat=-100&dpr=2 2x" media="(min-width: 530px)">
+                        <source srcset="{{ $url }}&w=200&sat=-100 1x, {{ $url }}&w=400&sat=-100&dpr=2 2x" media="(min-width: 0px)">
+                        <img class="img-fluid mx-auto"
+                             srcset="{{ $url }}&w=144&sat=-100"
+                             alt="integration">
+                    </picture>
+                </a>
                 <div class="text-center title" style="display: none;">{{ $formatname }}</div>
                 <div class="card-body">
                     <a class="card-button" href="{{ $dot.Site.BaseURL }}integrations/{{$urlname | lower}}/">

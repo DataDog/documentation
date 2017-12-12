@@ -1,9 +1,7 @@
 ---
 title: Go log Collection
 kind: documentation
-autotocdepth: 2
 customnav: lognav
-beta: true
 further_reading:
 - link: "/logs/processing"
   tag: "Documentation"

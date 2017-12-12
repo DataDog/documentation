@@ -2,6 +2,7 @@
 title: Agent
 kind: documentation
 customnav: agentnav
+description: Install & configure the Agent to collect data 
 ---
 
 {{< partial name="platforms/platforms.html" >}}
@@ -17,7 +18,7 @@ For information on running the Agent through a proxy, see [here](https://github.
 
 The Agent has three main parts: the collector, dogstatsd, and the forwarder:
 
-* **The collector**: runs checks on the current machine for whatever integrations you have and it will capture system metrics such as memory and CPU.
+* **The collector**: runs checks on the current machine for whatever integrations you have and it captures system metrics such as memory and CPU.
 
 * **Dogstatsd**: It is a statsd backend server you can send [custom metrics](/getting_started/custom_metrics/) to from an application.
 
@@ -78,7 +79,7 @@ To check for this, run:
 ```shell
 date -u && curl -s -v https://app.datadoghq.com 2>&1 | grep Date
 ```
-This will output the current system’s date, and then make a request to our endpoint and grab the date on our end.
+This outputs the current system’s date, and then make a request to our endpoint and grab the date on our end.
 If these are more than a few minutes apart, you may want to look at the time settings on your server.
 
 ### Issues getting integrations working

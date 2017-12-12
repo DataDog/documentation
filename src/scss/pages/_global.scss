@@ -1,7 +1,7 @@
 $ddpurple:    #774DA2;
 
 html {
-  font-size:18px;
+  font-size:20px;
 }
 
 body {
@@ -134,17 +134,22 @@ code {
 
 p {
   // todo: can i set this with a bootstrap variable?
-  font-size:18px;
+  font-size:20px;
   color:#000;
-  line-height:22px;
+  line-height:28px;
 }
 
 h1 {
   line-height:42px;
-  padding-bottom:12px;
-  &~ p {
+  padding-bottom:15.5px;
+  /*&~ p {
     padding-top:10px;
-  }
+  }*/
+}
+
+h2 {
+  padding-bottom: 3px;
+  line-height:36px;
 }
 
 .col-lg-7 {
@@ -194,6 +199,20 @@ h1 {
         margin-bottom:0;
       }
     }
+  }
+
+  pre {
+    margin:0 0 24px 0;
+  }
+  p + .highlight {
+    position: relative;
+    margin-top: -0.8rem;
+  }
+  p + h1,
+  p + h2,
+  p + h3,
+  p + h4 {
+    padding-top:11px;
   }
 }
 
@@ -329,8 +348,14 @@ h1 {
 
 // tables for integration metrics
 .table-metrics {
-  tr td:nth-child(1) {
-    word-break:break-all;
+  tr td {
+    &:nth-child(1) {
+      word-break: break-all;
+    }
+    &:nth-child(1),
+    &:nth-child(2) {
+      width:50%;
+    }
   }
 }
 
@@ -401,7 +426,22 @@ h1 {
     opacity: 0.3;
 }
 
+
+// all external links show an icon
+/*a {
+  &:not([href*='localhost']):not([href*='datadoghq.com']):not([href*='datadog.com']):not( [href^='#'] ):not( [href^='/'] ):after {
+    content: " (external)";
+  }
+}*/
+
+
 // Breakpoint styles go here...
+
+@media (min-width: 1200px) {
+    .container {
+      max-width: 1170px !important;
+    }
+}
 
 //@include media-breakpoint-up(xs) { ... }
 @media (max-width: 575px) {
@@ -420,6 +460,7 @@ h1 {
   table.table-vertical-mobile {
     td {
       display:block !important;
+      width:100% !important;
     }
   }
 }

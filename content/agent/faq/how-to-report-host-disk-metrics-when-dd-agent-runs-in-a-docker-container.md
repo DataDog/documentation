@@ -21,27 +21,27 @@ dd-agent has two mechanisms to report disk statistics: the common disk check (wo
 
 The layered nature of the Linux storage subsystem (block devices, logical volumes and partitions) makes it necessary to have a partition mounted to be able to report its free space, as the block layer has no means of knowing what part if the allocated size is used or free, and that logic is specific to every filesystem.
 
-dd-agent will report disk metrics and rates for every partition that is accessible (even if only partially) to its container, but not others, as this separation is enforced by cgroups / docker. To allow disk usage reporting on a partition, you need to expose it through a docker volume via the -v argument to docker run ; here are three ways, from most secure to most convenient:
+dd-agent reports disk metrics and rates for every partition that is accessible (even if only partially) to its container, but not others, as this separation is enforced by cgroups / docker. To allow disk usage reporting on a partition, you need to expose it through a docker volume via the -v argument to docker run ; here are three ways, from most secure to most convenient:
 
-* Create a dummy file in the filesystem they want to watch and expose it through docker: -v /mnt/loop/dummyfile:/host/loop0:ro : the agent will not be able to access any file on this partition
+* Create a dummy file in the filesystem they want to watch and expose it through docker: -v /mnt/loop/dummyfile:/host/loop0:ro : the agent isn't able to access any file on this partition
 
-* Expose the whole mountpoint they want to monitor as read-only: -v /mnt/loop:/host/loop0:ro : the agent will be able to access the folder hierarchy and world-readable files
+* Expose the whole mountpoint they want to monitor as read-only: -v /mnt/loop:/host/loop0:ro : the agent is able to access the folder hierarchy and world-readable files
 
-* If the mount path is unknown (dynamically mounted volumes), but the parent directory is constant, expose the parent folder: -v /mnt/:/host/mnt:ro : the agent will be able to access all volumes mounted in this folder's children
+* If the mount path is unknown (dynamically mounted volumes), but the parent directory is constant, expose the parent folder: -v /mnt/:/host/mnt:ro : the agent is able to access all volumes mounted in this folder's children
 
-* Expose their whole host filesystem to the container: -v /:/host/rootfs:ro : this can be useful if mount points are unpredictable or rapidly changing. The agent will report every partition mounted on the system, but will probably throw "permission denied" warning on some virtual mount points (shm, netns...)
+* Expose their whole host filesystem to the container: -v /:/host/rootfs:ro : this can be useful if mount points are unpredictable or rapidly changing. The agent reports every partition mounted on the system, but might probably throw "permission denied" warning on some virtual mount points (shm, netns...)
 
-If your agent container runs with `--privileged`, it will have full access to the `/dev` folder and its block devices. You can mount the desired block devices into the container so that they are reported by the agent. To monitor loop0, one could add to entrypoint.sh:
+If your agent container runs with `--privileged`, it has full access to the `/dev` folder and its block devices. You can mount the desired block devices into the container so that they are reported by the agent. To monitor loop0, one could add to entrypoint.sh:
 
 ```
 mkdir -p /tmp/mnt/loop0 && mount /dev/loop0 /tmp/mnt/loop0
 ```
 
-This automount logic will not be added to the standard entrypoint, as unforseen edge cases might lead to issues and data loss, but this should be safe if tailored to the specifics of the system.
+This automount logic isn't added to the standard entrypoint, as unforeseen edge cases might lead to issues and data loss, but this should be safe if tailored to the specifics of the system.
 
 ### No disk metrics are sent at all
 
-If you customised the docker image or mount a custom directory to /etc/dd-agent/conf.d, make sure the disk.yaml.default (or a customised disk.yaml) file is present, or the disk check will be disabled.
+If you customized the docker image or mount a custom directory to /etc/dd-agent/conf.d, make sure the disk.yaml.default (or a customized disk.yaml) file is present, or the disk check is disabled.
 
 ### Permision denied errors
 
@@ -55,7 +55,7 @@ The collect_disk_stats feature of docker_daemon only support devicemapper-backed
 
 ### collect_container_size is slow and hangs docker
 
-This option enables container size computation through the docker ps system. It virtually runs df in every container and will not scale to large container count.
+This option enables container size computation through the docker ps system. It virtually runs df in every container and doesn't scale to large container count.
 We run the size computation once every 5 runs to reduce system impact though
 
 ## Further Reading

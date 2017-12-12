@@ -85,7 +85,7 @@ Dashboards contain [graphs][11] with real-time performance metrics
 * Display by zone, host, or total usage.
 * We expose the JSON editor of the graph allowing for [arithmetic][12] and
 [functions][13] to be applied to metrics.
-* Share a graph snapshot that will appear in the stream; clicking on
+* Share a graph snapshot that appears in the stream; clicking on
 that snapshot returns you to the original dashboard (via the camera in the upper right of a graph).
 * Graphs can be embedded in an iframe, giving a 3rd party a live graph
 without access to your data or any other information (via the pencil in the upper right of a graph).

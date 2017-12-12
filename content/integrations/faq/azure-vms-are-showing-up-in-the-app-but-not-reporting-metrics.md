@@ -9,7 +9,7 @@ After properly installing the Azure Integration within Datadog, metrics from you
 If after this time you see Azure VMs in your infrastructure list but no metrics are being reported, a few things can be happening.
 
 1. Make sure you are looking for the right metrics.
-    "Classic" virtual machine metrics will begin with the azure.vm namespace and ARM deployed virtual machine metrics will begin with the azure.compute_virtualmachines namespace.
+    "Classic" virtual machine metrics begin with the azure.vm namespace and ARM deployed virtual machine metrics begin with the `azure.compute_virtualmachines` namespace.
 
 2. If neither of these namespaces are returning metrics, make sure "Diagnostics" is turned on for the Virtual Machines within the Azure Portal. NOTE, only Boot diagnostics and Basic metrics are required.
     * For "Classic" VMs:
@@ -20,5 +20,5 @@ If after this time you see Azure VMs in your infrastructure list but no metrics 
 
 
 3. Make sure the Virtual machine is running.
-    Our integration will not collect performance metrics for stopped/deallocated machines. However, the azure.vm.status metric will return 1 if the machine is running OR stopped (which will result in stopped VMs showing up in the infrastructure list). The associated status tag allows you to differentiate between running and not_running hosts. Make sure the host in question has status:running (and is running in the Azure portal!)
+    Our integration do not collect performance metrics for stopped/deallocated machines. However, the `azure.vm.status metric` returns 1 if the machine is running OR stopped (which results in stopped VMs showing up in the infrastructure list). The associated status tag allows you to differentiate between running and not_running hosts. Make sure the host in question has status:running (and is running in the Azure portal!)
     {{< img src="integrations/faq/azure_vm_running.png" alt="azure_vm_running" responsive="true" popup="true">}}

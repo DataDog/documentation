@@ -12,11 +12,11 @@ You may find here a little code snippet to inspire from
 
 https://gist.github.com/sage-oli-wood/70e0931f037ea0aac132
 
-This will submit your data to Datadog through an HTTP POST.
+This submits your data to Datadog through an HTTP POST.
 
 A more proper way to do this would be to send metrics and events using dogstatsd. You may adapt your cron job to forward your data locally in UDP to your agent, find more here.
 
-You will retrieve from this:
+You retrieve from this:
 
 * TCP: 
 

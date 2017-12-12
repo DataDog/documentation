@@ -35,7 +35,7 @@ Note that for collecting Container information in the standard install rather th
 
 ### String Search
 
-Containers are by their nature extremely high cardinality objects.  Our flexible string search will match substrings in the container name, ID, or image fields.
+Containers are by their nature extremely high cardinality objects. Our flexible string search matches substrings in the container name, ID, or image fields.
 
 ### Tagging
 
@@ -89,7 +89,7 @@ While actively working with the Containers page, metrics are collected at 2s res
 
 - This feature does not support Windows containers at this time.
 
-- Real-time (2s) data collection will be turned off after 30 minutes. To resume real-time collection, refresh the page.
+- Real-time (2s) data collection is turned off after 30 minutes. To resume real-time collection, refresh the page.
 
 - Live Containers is available for the default Debian docker-dd-agent image only.  It is not included in the Alpine image.
 

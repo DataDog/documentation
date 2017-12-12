@@ -45,7 +45,7 @@ https://www.googleapis.com/auth/compute.readonly
 https://www.googleapis.com/auth/monitoring.read
 ~~~
 
-[Also, billing must be enbled for the account(s) you wish to monitor.][1]
+[Also, billing must be enabled for the account(s) you wish to monitor.][1]
 
 
 Optionally, you can limit the GCE instances that are pulled into Datadog by entering tags in the **Limit Metric Collection** textbox. Only hosts that match one of the defined tags will be imported into Datadog. You can use wildcards ('?' for single character, '*' for multi-character) to match many hosts, or '!' to exclude certain hosts. This example includes all c1* sized instances, but excludes staging hosts:

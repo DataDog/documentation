@@ -6,7 +6,7 @@ customnav: integrationsnav
 
 ## JMXFetch
 
-In the agent, the yaml files for the following integrations will all be read by JMXFetch:
+In the agent, the yaml files for the following integrations are all read by JMXFetch:
 
 * Active MQ
 * Cassandra
@@ -24,13 +24,13 @@ There are two kinds of JMX attributes that JMXFetch is able to collect:
 
 These are integer, float, double, long, boolean etc …
 
-Note: Boolean values of true will result in 1 and false in 0. For the list of supported types, check [here](https://github.com/DataDog/jmxfetch/blob/master/src/main/java/org/datadog/jmxfetch/Instance.java#L23-L27)
+Note: Boolean values of true result in 1 and false in 0. For the list of supported types, check [here](https://github.com/DataDog/jmxfetch/blob/master/src/main/java/org/datadog/jmxfetch/Instance.java#L23-L27)
 
 You can use the `list` commands found here in order to get an idea of what your current JMX integration is collecting. Here is a snippet of that output showing a Simple attribute.
 ```
 Matching: x/350. Bean name: domain:mybeanname - Attribute name: myattribute - Attribute type: java.lang.Integer
 ```
-JMXFetch will extract the attribute value directly and use it as the metric value.
+JMXFetch extracts the attribute value directly and use it as the metric value.
 
 ### 'Composite' attributes
 
