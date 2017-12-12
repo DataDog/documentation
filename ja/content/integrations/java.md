@@ -16,7 +16,7 @@ doclevel:
 
 JMX Checks are agents checks that collect metrics from applications that expose them using [JMX](http://www.oracle.com/technetwork/java/javase/tech/javamanagement-140525.html).
 
-In order to collect these metrics, a lightweight Java plugin named JMXFetch is called by the Datadog Agent to connect to the MBean Server and to collect these metrics. This plugin sends metrics to the Datadog Agent using the Dogstatsd server running with the Agent.
+In order to collect these metrics, a lightweight Java plugin named JMXFetch is called by the Datadog Agent to connect to the MBean Server and to collect these metrics. This plugin sends metrics to the Datadog Agent using the DogStatsD server running with the Agent.
 
 JMX Checks have a limit of 350 metrics per instance which should be enough to satisfy your needs as it's really easy to customize which metrics you want to collect.  We are going to see how to do so. -->
 
@@ -25,13 +25,13 @@ JMX Checks have a limit of 350 metrics per instance which should be enough to sa
 
 JMX Checks are agents checks that collect metrics from applications that expose them using [JMX](http://www.oracle.com/technetwork/java/javase/tech/javamanagement-140525.html).
 
-In order to collect these metrics, a lightweight Java plugin named JMXFetch is called by the Datadog Agent to connect to the MBean Server and to collect these metrics. This plugin sends metrics to the Datadog Agent using the Dogstatsd server running with the Agent.
+In order to collect these metrics, a lightweight Java plugin named JMXFetch is called by the Datadog Agent to connect to the MBean Server and to collect these metrics. This plugin sends metrics to the Datadog Agent using the DogStatsD server running with the Agent.
 
 JMX Checks have a limit of 350 metrics per instance which should be enough to satisfy your needs as it's really easy to customize which metrics you want to collect.  We are going to see how to do so.
 
 JMXチェックは、JMXを使用してそれらの公開アプリケーションからメトリックを取得するエージェントチェックです。
 
-これらのメトリックを取得するために、JMXFetchという名前の軽量のJavaプラグインを、MBeanサーバーに接続しDatadogエージェントによって呼び出されます。このプラグインは、エージェントで実行されるDogstatsdサーバーを使用してDatadogエージェントにメトリックを送信します。
+これらのメトリックを取得するために、JMXFetchという名前の軽量のJavaプラグインを、MBeanサーバーに接続しDatadogエージェントによって呼び出されます。このプラグインは、エージェントで実行されるDogStatsDサーバーを使用してDatadogエージェントにメトリックを送信します。
 
 JMXのチェックでは、あなたが取得するメトリックをカスタマイズすることはとても簡単です、取得するメトリックスはインスタンスごとに350メトリックスまでとなっています。
 

@@ -39,13 +39,13 @@ Datadog Agent のソースコードは、[Github](https://github.com/DataDog/dd-
 
 プロキシが設置されている環境で、Datadog Agent がデータを送信する必要がある場合は、次の<a target="_blank" href="https://github.com/DataDog/dd-agent/wiki/Proxy-Configuration">ドキュメント"Network Traffic and Proxy Configuration"</a>を参照してください。プロキシで開放するポートの情報に関しては、<a target="_blank" href="https://github.com/DataDog/dd-agent/wiki/Network-Traffic-and-Proxy-Configuration#open-ports">"Open Ports"</a>の項目を参照してください。
 
-Datadog Agent は、次の３つの要素で構成されています: **Collector**, **Dogstatsd**, **Forwarder**
+Datadog Agent は、次の３つの要素で構成されています: **Collector**, **DogStatsD**, **Forwarder**
 
 <!-- <ul>
 <li>The collector runs checks on the current machine for whatever integrations you have
 and it will capture system metrics like memory and CPU.
 </li>
-<li>Dogstatsd is a statsd backend server you can send custom metrics to from an application.
+<li>DogStatsD is a statsd backend server you can send custom metrics to from an application.
 </li>
 <li>The forwader is pushed data from both dogstatsd and the collector and queues
 it up to be sent to Datadog.
@@ -55,10 +55,10 @@ This is all controlled by one supervisor process. We keep this separate so you d
 overhead of each application if you don't want to run all parts (though we generally recommend you do). -->
 
 - **Collector** は、ターゲットホストのCPU やメモリ等の一般的なシステムメトリクスを取得すると共に、インストールされているIntegrations の情報を取得します。
-- **Dogstatsd** は、ターゲットホストで実行されているアプリケーションやコマンドラインスクリプトからカスタムメトリクスを送信することができるstatsdのサーバです。
+- **DogStatsD** は、ターゲットホストで実行されているアプリケーションやコマンドラインスクリプトからカスタムメトリクスを送信することができるstatsdのサーバです。
 - **Forwader** は、dogstatsd とCollector の両方からデータを受け取り、queueの順番に従ってDatadogに送信します。
 
-**Collector**, **Dogstatsd**, **Forwarder** は、1つのスーパーバイザープロセスによって制御されています。このようにDatadog Agent のプロセスを要素単位で分割しているのは、不要な要素プロセスを停止することにより、Datadog Agent 全体の間接負荷(オーバーヘッド)を削減することができるようにしているためです。(但し一般的な用途では、要素毎のプロセスの停止はお勧めしません。)
+**Collector**, **DogStatsD**, **Forwarder** は、1つのスーパーバイザープロセスによって制御されています。このようにDatadog Agent のプロセスを要素単位で分割しているのは、不要な要素プロセスを停止することにより、Datadog Agent 全体の間接負荷(オーバーヘッド)を削減することができるようにしているためです。(但し一般的な用途では、要素毎のプロセスの停止はお勧めしません。)
 
 
 <!--

@@ -17,7 +17,7 @@ For instance, if you have a counter incremented 1,000 times (+1 each time) over 
 
 ## How is aggregation performed with the dogstatsd server?
 
-Dogstatsd uses a flush interval of 10 seconds. Every 10 seconds, dogstatsd checks all data received since the last flush (in the last 10 seconds). All values that corresponds to the same metric name and the same tags are aggregated together into a single value.
+DogStatsD uses a flush interval of 10 seconds. Every 10 seconds, dogstatsd checks all data received since the last flush (in the last 10 seconds). All values that corresponds to the same metric name and the same tags are aggregated together into a single value.
 
 Note: with the statsd protocol, the statsd client doesn't send metrics with timestamps. The timestamp is added at the flush time. So for a flush occurring at 10:00:10, all data received by the dogstatsd server (embedded in the datadog agent) between 10:00:00 and 10:00:10 is rolled up in a single datapoint that gets 10:00:00 as timestamp.
 
