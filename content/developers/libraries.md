@@ -47,13 +47,13 @@ You can get data into Datadog from Google Analytics using our API with [this lib
   * [lua-resty-dogstatsd][79] is an extension developed by  [mediba inc][80], which enables emiting metrics, events, and service checks to DogStatsD protocol. lua-resty-dogstatsd is released as GPLv3 and relies on the nginx cosocket API.
 
 ### Moogsoft
-A Moogsoft [listener][102] that will ingest Datadog notifications.
+A Moogsoft [listener][102] that ingests Datadog notifications.
 
 ### Phusion Passenger
 Send health metrics from Phusion's Passenger server using the [passenger-datadog-monitor][77] written by [Stevenson Jean-Pierre][78]
 
 ### Pid-stats
-This [library][51] will allow you to generate process information from StatsD, given pid files. It was created by [GitterHQ][52].
+This [library][51] allows you to generate process information from StatsD, given pid files. It was created by [GitterHQ][52].
 
 ### Saltstack
   * [Datadog Saltstack Formula][43]

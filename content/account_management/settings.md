@@ -30,4 +30,4 @@ Access [this link](https://app.datadoghq.com/account/org_settings) to rename you
 4.  Enter the new name of the organization and click **Save**
     {{< img src="account_management/settings/4th.png" alt="New organization name" responsive="true" popup="true">}}
 
-Once done your organization name will update automatically.
+Once done your organization name updates automatically.

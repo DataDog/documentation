@@ -36,7 +36,7 @@ That brings you to the **SAML Single Sign On Configuration** page:
 Once SAML is configured in Datadog and your IdP is set up to accept requests from Datadog, users can log in by using the Single Sign On URL that is shown in the Status box at the top of the [SAML Configuration page](https://app.datadoghq.com/saml/saml_setup).
 {{< img src="account_management/saml/saml_enabled.png" alt="Saml Enabled" responsive="true" popup="true">}}
 
-The Single Sign On URL will also be displayed on the [Team page](https://app.datadoghq.com/account/team).  
+The Single Sign On URL is also displayed on the [Team page](https://app.datadoghq.com/account/team).  
 Loading this URL initiates a SAML authentication against your IdP. Note that the URL isn't displayed until SAML is enabled for your account.
 
 ## Datadog Service Provider Details
@@ -44,7 +44,7 @@ Loading this URL initiates a SAML authentication against your IdP. Note that the
 
 * Datadog supports the **HTTP-POST** binding for **SAML2**:
 `urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST`.
-* Datadog will specify `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` for the Format of the **NameIDPolicy** in Assertion Requests.
+* Datadog specifies  `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` for the Format of the **NameIDPolicy** in Assertion Requests.
 * Assertions must be signed.
 * Assertions can be encrypted, but unencrypted assertions are accepted.
 * Datadog’s SP Metadata can be found [here](https://app.datadoghq.com/account/saml/metadata.xml).
@@ -65,8 +65,8 @@ Loading this URL initiates a SAML authentication against your IdP. Note that the
 1. **eduPersonPrincipalName**: The IdP should set `urn:mace:dir:attribute-def:eduPersonPrincipalName` as the Name of the Attribute
 2. **sn**: The IdP should set `urn:mace:dir:attribute-def:sn` as the Name of the Attribute
 3. **givenName**: The IdP should set `urn:mace:dir:attribute-def:givenName` as the Name of the Attribute
-* If **eduPersonPrincipalName** exists in the AttributeStatement, the value of this attribute is used for the username. If **eduPersonPrincipalName** is not included in the AttributeStatement, the username will be taken from the NameID in the Subject. The NameID must use the Format `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress`.
-* If **sn** and **givenName** are provided, they will be used to update the user’s name in their Datadog profile.
+* If **eduPersonPrincipalName** exists in the AttributeStatement, the value of this attribute is used for the username. If **eduPersonPrincipalName** is not included in the AttributeStatement, the username is taken from the NameID in the Subject. The NameID must use the Format `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress`.
+* If **sn** and **givenName** are provided, they are used to update the user’s name in their Datadog profile.
 
 ## Specific SAML IdP
 
@@ -84,7 +84,7 @@ The following features can be enabled through the [SAML Configuration dialog](ht
 
 ### Just-in-Time (JIT) Provisioning 
 
-With Just-in-Time provisioning, a user will be created within Datadog on the fly the first time they try to log in. This eliminates the need for administrators to manually create user accounts one at a time.
+With Just-in-Time provisioning, a user is created within Datadog on the fly the first time they try to log in. This eliminates the need for administrators to manually create user accounts one at a time.
 
 Some organizations might not want to invite all of their users to Datadog. If you would like to make changes to how SAML works for your account, [contact support](/help).  
 It is up to the organization to configure their IdP to not send assertions to Datadog if they don't want a particular user to access Datadog.
@@ -98,9 +98,9 @@ The default role is currently **Standard**, but you can choose to add new JIT us
 
 When the Datadog url is loaded, the browser is redirected to the customer IdP, user types in credentials, then the IdP redirects back to Datadog. Some IdPs have the ability to send an assertion directly to Datadog without first getting an AuthnRequest (IdP Initiated Login).
 
-In the normal setup, we won't know which organization the assertion came from and this will result in an error page with a message saying that SAML Response is missing "InResponseTo" attribute.
+In the normal setup, we won't know which organization the assertion came from and this results in an error page with a message saying that SAML Response is missing "InResponseTo" attribute.
 
-After enabling the feature (and waiting for caches to clear) the customer will need to get a new version of the SP Metadata, which will have a different, organization-specific AssertionConsumerService endpoint to send assertions to.
+After enabling the feature (and waiting for caches to clear) the customer  needs to get a new version of the SP Metadata, which has a different, organization-specific AssertionConsumerService endpoint to send assertions to.
 
 ## Further Reading
 

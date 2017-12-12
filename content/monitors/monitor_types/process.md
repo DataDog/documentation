@@ -20,22 +20,22 @@ further_reading:
 
 ## Overview
 
-A process monitor will watch the status produced by the `process.up` service
+A process monitor watches the status produced by the `process.up` service
 check reported by the check in the Agent. At the Agent level you can configure
 thresholds based on the number of matching processes.
 
 Read more about configuration on the [Process Check](/integrations/process/)
 page.
 
-For each process, a single service check status will be produced. Through this
+For each process, a single service check status is produced. Through this
 creation interface, you can choose which of those checks to monitor and at what
 point they should notify.
 
 ## Configuration
 
-1. Pick the **process** to monitor. You will see the names configured in any Agent with an active process check.
+1. Pick the **process** to monitor. You see the names configured in any Agent with an active process check.
 
-2. Pick the **monitor scope**. You will only see hosts or tags that are reporting a status for the selected process.
+2. Pick the **monitor scope**. You only see hosts or tags that are reporting a status for the selected process.
 
 3. Select **alerting options**. Refer to the [custom monitors](#custom-monitors) section for details on the available options.
 

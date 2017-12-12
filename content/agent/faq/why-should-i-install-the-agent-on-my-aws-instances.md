@@ -4,7 +4,7 @@ kind: faq
 customnav: agentnav
 ---
 
-If you use AWS CloudWatch or another cloud-based metrics provider, you may already be getting some metrics for your hosts. However, installing the [Datadog agent](/agent/) on these hosts will give you a number of benefits, including:
+If you use AWS CloudWatch or another cloud-based metrics provider, you may already be getting some metrics for your hosts. However, installing the [Datadog agent](/agent/) on these hosts gives you a number of benefits, including:
 
 * **Better resolution** - CloudWatch observes what's happening from the outside by sampling hosts every ~5-25 minutes, whereas Datadog's agent is capturing performance stats every 15 seconds to provide a more realistic understanding of what's happening from the hosts' perspective.
 

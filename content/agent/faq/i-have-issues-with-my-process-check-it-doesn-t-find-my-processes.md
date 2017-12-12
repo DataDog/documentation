@@ -17,7 +17,7 @@ By default this process check works on exact match and looks at the process nam
 
 Would enabling a more flexible search help? https://github.com/DataDog/integrations-core/blob/master/process/conf.yaml.example#L21
 
-By setting `exact_match` to **False** in your yaml file, the agent will look at the command used to launch your process and recognize every process that contains your keywords.
+By setting `exact_match` to **False** in your yaml file, the agent looks at the command used to launch your process and recognize every process that contains your keywords.
 
 If you still have issues you can reach out to [us](/help) with the following files as attachments:
 

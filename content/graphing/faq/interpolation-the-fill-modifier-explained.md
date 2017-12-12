@@ -38,7 +38,7 @@ where X and Y are interpolated using data after and before the interval displaye
 
 Interpolation occurs when more than 1 source corresponds to your graph query i.e.:
 
-1. for space-aggregation: avg:system.cpu.user{env:prod}. If you have 2 or more hosts with the tag “env:prod”, our system will compute the average over time and needs interpolation to do so.
+1. for space-aggregation: avg:system.cpu.user{env:prod}. If you have 2 or more hosts with the tag “env:prod”, our system computes the average over time and needs interpolation to do so.
 2. for group queries: error.count{*} by {host}. No computation across sources may be performed here, but providing aligned series makes graph line mouse over and comparisons easier.
 
 Interpolation is not needed:
@@ -47,7 +47,7 @@ Interpolation is not needed:
 
 Interpolation is not performed for multi part queries (e.g. "avg:system.cpu.user{env:prod},avg:system.cpu.user{env:dev}").
 
-The type of interpolation described in this article is also not performed for arithmetic. When evaluating queries, our backend rolls data up into intervals (one for each point in a time series graph, see [this article](/getting_started/from_the_query_to_the_graph) for more details). If a query involves arithmetic, and one of these intervals is missing data for part of a query, the query system will substitute 0 for that interval. This behavior cannot currently be controlled with the fill modifier.
+The type of interpolation described in this article is also not performed for arithmetic. When evaluating queries, our backend rolls data up into intervals (one for each point in a time series graph, see [this article](/getting_started/from_the_query_to_the_graph) for more details). If a query involves arithmetic, and one of these intervals is missing data for part of a query, the query system substitutes 0 for that interval. This behavior cannot currently be controlled with the fill modifier.
 
 ## How to control interpolation?
 
@@ -64,7 +64,7 @@ The fill modifier controls interpolation parameters:
 
 **There’s a gap in my metric, fill(zero) doesn’t do anything, I still have a long straight line on my graph.**
 
-Graphs in Datadog are just a series of datapoints joined by lines. If you have a long period without any data, this will translate into a long straight line as interpolation is not meant to add values to your metric series.
+Graphs in Datadog are just a series of datapoints joined by lines. If you have a long period without any data, this translates into a long straight line as interpolation is not meant to add values to your metric series.
 Rather, interpolation is about aligning series to make aggregation and multi-line graphs possible.
 
 **I have disabled interpolation but I see my metrics dropping to 0 which is not expected.**
@@ -77,4 +77,4 @@ linear interpolation is a great fit for metrics reported on a steady basis from 
 
 last makes sense for instance if you send datapoints only when the value of the thing you measure changes.
 zero is good if you want to get accurate totals for count metrics (statsd “increment”) like sum:error.count{*}.as_count()
-null will prevent graphs from displaying interpolated values 5 min after the last real value etc.
+null prevents graphs from displaying interpolated values 5 min after the last real value etc.

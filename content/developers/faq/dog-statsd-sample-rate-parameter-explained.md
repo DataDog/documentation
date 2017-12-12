@@ -18,7 +18,7 @@ many dogstatsd clients offer the possibility to configure the host and port to w
 
 ## What the purpose of the sample_rate parameter?
 
-The sample rate is meant to reduce the traffic from your dogstatsd client and the datadog-agent. A sample rate of 0.5 will cut the number of UDP packets sent in half.
+The sample rate is meant to reduce the traffic from your dogstatsd client and the datadog-agent. A sample rate of 0.5 cuts the number of UDP packets sent in half.
 
 It's not useful in all cases, but can be interesting if you sample many many metrics and your dogstatsd client is not on the same host as the dogstatsd server.
 
@@ -47,12 +47,12 @@ See datadog-agent aggregation code [here](https://github.com/DataDog/dd-agent/bl
 "How to divide the traffic by 2?" (python library code):
 ```python
 from datadog import statsd
-# half the increment will be sent; the dd-agent will compensate by multiplying by 2 the value it gets
+# half the increment is sent; the dd-agent compensates by multiplying by 2 the value it gets
 statsd.increment('my.metric_name',1,sample_rate=0.5) 
 
-# remember: for gauge metrics, half the values will be sent, but no good "compensation" can be done on the dd-agent side, you just lose in granularity.
+# remember: for gauge metrics, half the values are sent, but no good "compensation" can be done on the dd-agent side, you just lose in granularity.
 statsd.gauge('foo', 42,sample_rate=0.5) 
 ```
 
 Note 1: Don't change the value you send, only adjust the sample_rate.
-Note 2: using low sample rates will decrease the precision of the collection. It's not recommended unless you really have a lot of data sampled by your code.
+Note 2: using low sample rates decrease the precision of the collection. It's not recommended unless you really have a lot of data sampled by your code.

@@ -64,7 +64,7 @@ requests to pools servers, you can also use it to proxy agent traffic
 to Datadog from hosts that have no outside connectivity.
 
 This is the best option if you do not have a web proxy readily available
-in your network and you wish to proxy a large number of agents. In some cases a single HAProxy instance will be sufficient to handle local agent traffic in your network - each proxy can accommodate upwards of 1000 agents (be aware that this figure is a conservative estimate based on the performance of m3.xl instances specifically. Numerous network-related variables can influence load on proxies. As always, deploy under a watchful eye. Visit http://www.haproxy.org/#perf for additional information).
+in your network and you wish to proxy a large number of agents. In some cases a single HAProxy instance is sufficient to handle local agent traffic in your network - each proxy can accommodate upwards of 1000 agents (be aware that this figure is a conservative estimate based on the performance of m3.xl instances specifically. Numerous network-related variables can influence load on proxies. As always, deploy under a watchful eye. Visit http://www.haproxy.org/#perf for additional information).
 
 `agent ---> haproxy ---> Datadog`
 
@@ -96,7 +96,7 @@ listen stats :3835
     stats enable
     stats uri /
 
-# This declares the endpoint where your agents will connect.
+# This declares the endpoint where your agents connects.
 # In this example we use port 3834 but you can use any other
 # free port.
 frontend forwarder
@@ -105,7 +105,7 @@ frontend forwarder
     default_backend datadog
 
 # This is the Datadog server. In effect any TCP request coming
-# to the forwarder frontend defined above will be proxied to
+# to the forwarder frontend defined above is proxied to
 # Datadog's public endpoints.
 backend datadog
     balance roundrobin

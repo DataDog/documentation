@@ -6,7 +6,7 @@ customnav: integrationsnav
 
 You can easily use our [Webhook Integration](https://app.datadoghq.com/account/settings#integrations/webhooks) to instantly create a trello card using our @-notification feature.
 
-This flow will utilize the Trello REST POST card api endpoint to post the @notification to a relevant Trello list.
+This flow utilizes the Trello REST POST card api endpoint to post the @notification to a relevant Trello list.
 
 ### Steps to Success
 
@@ -36,11 +36,11 @@ The API documentation for Trello cards are [here](https://developers.trello.com/
 
 In the configuration:
 
-* name is the alias for how you will reference this hook. (@webhook-NAME)
+* name is the alias for how you reference this hook. (@webhook-NAME)
 
-* URL will be https://api.trello.com/1/cards 
+* URL is `https://api.trello.com/1/cards`
 
-You must enable Custom Payload and fill in a json object that will look like:
+You must enable Custom Payload and fill in a json object that looks like:
 ```
 {
 "name": "$USER : $EVENT_TITLE",
@@ -52,7 +52,7 @@ You must enable Custom Payload and fill in a json object that will look like:
 }
 ```
 
-*__name__ will correspond to the title of the card
+*__name__ corresponds to the title of the card
 
 *__desc__ corresponds to the description of the card
 

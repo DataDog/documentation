@@ -4,7 +4,7 @@ kind: faq
 customnav: graphingnav
 ---
 
-[This gist](https://gist.githubusercontent.com/MisterRayCo/21e1af9b6cf93bb44a48/raw/c2dcfcf836d0af77daa5c4fb1ec18da175569d7e/agentcountscreenboard.sh) is an API post that will create a new ScreenBoard in Datadog with three widgets:
+[This gist](https://gist.githubusercontent.com/MisterRayCo/21e1af9b6cf93bb44a48/raw/c2dcfcf836d0af77daa5c4fb1ec18da175569d7e/agentcountscreenboard.sh) is an API post that creates a new ScreenBoard in Datadog with three widgets:
 
 * Number of Datadog Agents reporting (timeseries, past week)
 * Number of EC2 hosts reporting (timeseries, past week)

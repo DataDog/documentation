@@ -11,7 +11,7 @@ The first step is to confirm whether or not the logfile can be accessed through 
 $ Get-WmiObject -Query "Select EventCode,SourceName,TimeGenerated,Type,InsertionStrings,Message,Logfile from Win32_NTLogEvent WHERE ( LogFile = '<LogFileName>' )" | select -First 1
 ```
 
-If there are no results, the log file cannot be accessed and you will need to add it through the Windows Registry.
+If there are no results, the log file cannot be accessed and you need to add it through the Windows Registry.
 
 Locate the event logs you want to monitor in the Event Viewer. Locate the log file and click “properties” under the “Actions” section to find the Log path and Full Name. For example, here is how to set up monitoring the “Operational” event Log file located in the Microsoft/Windows/TaskScheduler folder:
 {{< img src="integrations/faq/image1.png" alt="image1" responsive="true" popup="true">}}

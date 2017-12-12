@@ -17,4 +17,4 @@ Each of the aforementioned integrations are nearly identical, the most noticeabl
 * https://github.com/DBLaw/dd-agent/blob/master/conf.d/tomcat.yaml.example#L19
 * https://github.com/DBLaw/dd-agent/blob/master/conf.d/activemq.yaml.example#L19
 
-Prior to getting started with Datadog verify communication using something like [JConsole](http://en.wikipedia.org/wiki/JConsole) to verify JMX is enabled and that you can list the beans you're planning to collect. Essentially, the JMX Integration will act as a filter to match on the mbeans you've listed in your YAML, if it doesn't match 1:1 (wildcards aren't currently supported) it will not be collected.
+Prior to getting started with Datadog verify communication using something like [JConsole](http://en.wikipedia.org/wiki/JConsole) to verify JMX is enabled and that you can list the beans you're planning to collect. Essentially, the JMX Integration acts as a filter to match on the mbeans you've listed in your YAML, if it doesn't match 1:1 (wildcards aren't currently supported) it won't be collected.

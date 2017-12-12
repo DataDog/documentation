@@ -29,7 +29,7 @@ You can also use Windows Powershell if you are running on a modern version of Wi
 
 ### For version < 3.9.1
 
-The Agent can be started, stopped, and restarted from the Services panel. To view the Services panel, execute the following in a `cmd.exe` shell: `services.msc`. Once you're in the console, find the "Datadog Agent" service. Right clicking on the service will reveal options to start, stop, and restart the Agent.
+The Agent can be started, stopped, and restarted from the Services panel. To view the Services panel, execute the following in a `cmd.exe` shell: `services.msc`. Once you're in the console, find the "Datadog Agent" service. Right clicking on the service reveals options to start, stop, and restart the Agent.
 
 ## Status and Information
 
@@ -72,7 +72,9 @@ Log is available at:
 
 ### For version < 3.9.1
 
-Logs for the subsystems are available in Event Viewer, under Windows Logs -> Application. <br/> If you're still having trouble, [our support team](/help) will be glad to provide further assistance.
+Logs for the subsystems are available in Event Viewer, under Windows Logs -> Application.  
+
+If you're still having trouble, [our support team](/help) will be glad to provide further assistance.
 
 ## Adding a custom python package to the agent
 The current way to do so is to add the package in the library zipped folder that can be found at `C:\Program Files (x86)\Datadog\Datadog Agent\files`, and [restart the agent](/agent/faq/start-stop-restart-the-datadog-agent).
@@ -90,7 +92,7 @@ First, to get the name of the service, open services.msc and locate your target 
 
 {{< img src="agent/faq/DHCP.png" alt="DHCP" responsive="true" popup="true">}}
 
-When adding your own services, be sure to follow the formatting exactly as shown - if formatting is not correct it will cause the Integration to fail
+When adding your own services, be sure to follow the formatting exactly as shown - if formatting is not correct the Integration fails.
 
 {{< img src="agent/faq/windows_DHCP_service.png" alt="Windows DHCP Service" responsive="true" popup="true">}}
 
@@ -131,7 +133,7 @@ instances:
   search_string: ['notepad.exe']
 ```
 
-When adding your own processes, be sure to follow the formatting exactly as shown - if formatting is not correct it will cause the integration to fail.
+When adding your own processes, be sure to follow the formatting exactly as shown - if formatting is not correct the integration fails.
 
 When you're done editing the file, press "Save" to save it, then "Enable" to enable it.
 

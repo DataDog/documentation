@@ -14,14 +14,14 @@ If you would like to propose an integration, reach out to support@datadoghq.com 
 
 If you manage or work with a service and would like to see Datadog integrate it, the following information is needed:
 
-  * How will data get into Datadog? There are currently three options:
+  * How does data get into Datadog? There are currently three options:
     1. Push data from the source to Datadog
     2. Crawl the data source's API
     3. Have the Datadog Agent pick up the information from the source
   * What are the metrics and tags should be picked up from the source?
   * What metrics should be included on the default dashboard that we generate for each integration?
 
-We will also need a short blurb describing the integration as well as the correct image to use across our site.
+We also need a short blurb describing the integration as well as the correct image to use across our site.
 
    [1]: /developers/metrics/
    [2]: /api/
@@ -30,7 +30,7 @@ We will also need a short blurb describing the integration as well as the correc
 
 ## New integration documentation
 
-Integrations include information that comes from two different sources. The first and main source are the files under content/integrations. The second source are the metric csv files under dogweb. In order to see the metric tables that appear for some of the integrations, you need to create an environment variable called `github_personal_token` assigned your github personal token (you need to have access to dogweb and therefore must be a Datadog employee to see this). The table will be brought in automatically by the deploy process.
+Integrations include information that comes from two different sources. The first and main source are the files under content/integrations. The second source are the metric csv files under dogweb. In order to see the metric tables that appear for some of the integrations, you need to create an environment variable called `github_personal_token` assigned your github personal token (you need to have access to dogweb and therefore must be a Datadog employee to see this). The table is brought in automatically by the deploy process.
 
 The top of each integration file should include the following frontmatter:
 
@@ -75,7 +75,7 @@ The configuration section should cover anything that you can configure in the Da
 
 ### Configuration Options
 
-Describe each of the options available in the YAML file. This will often be the stuff included in the YAML comments (remove them from the YAML included in the doc), but sometimes you will have to investigate a bit to figure out what the option is for.
+Describe each of the options available in the YAML file. This is often the stuff included in the YAML comments (remove them from the YAML included in the doc), but sometimes you have to investigate a bit to figure out what the option is for.
 
 ### Validation
 **Required**

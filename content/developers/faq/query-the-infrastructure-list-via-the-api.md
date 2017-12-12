@@ -13,15 +13,15 @@ This endpoint takes the following required parameters:
 * **api_key**: string. Your Datadog API key
 * **application_key**: string. Your Datadog Application key
 
-By default, this endpoint will query all the data in your infrastructure list, which can be a very large response indeed. You can use any of the following optional parameters to filter down the content that you receive:
+By default, this endpoint queries all the data in your infrastructure list, which can be a very large response indeed. You can use any of the following optional parameters to filter down the content that you receive:
 
 * **tags**: string. A comma-delimited list of what host tags you want to filter down by (uses AND logic; returns data only for those hosts that have all these tags associated with them)
 * **hostnames[]**: list of strings. A list of those specific hostnames you want to query data from
-* **with_apps**: boolean. If true, will display the applications(integrations) that are associated with a given host.
-with_mute_status: boolean. If true, will display whether the host is muted by a downtime or not
+* **with_apps**: boolean. If true, displays the applications(integrations) that are associated with a given host.
+with_mute_status: boolean. If true, displays whether the host is muted by a downtime or not
 * **with_source**: boolean. If true, returns a list of sources from which metrics are reported for this host. For example, you might see 'aws', or 'agent', or 'azure' in this list.
-* **with_aliases**: boolean. If true, will display aliases for this host. Here is information about aliases and what they are.
-* **with_meta**: boolean. If true, will include metadata about the host with things like disk information/ IP addresses/ etc
+* **with_aliases**: boolean. If true, displays aliases for this host. Here is information about aliases and what they are.
+* **with_meta**: boolean. If true, includes metadata about the host with things like disk information/ IP addresses/ etc
 
 The response to this API call is in JSON. 
 

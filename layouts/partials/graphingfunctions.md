@@ -40,13 +40,13 @@ Function               | Category      | Description
 
 **`.as_count()` & `.as_rate()`**
 
-These functions are only intended for metrics submitted as rates or counters via statsd. These functions will have no effect for other metric types. For more on details about how to use `.as_count()` and `.as_rate()` please see [our blog post](https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing/).
+These functions are only intended for metrics submitted as rates or counters via statsd. These functions have no effect for other metric types. For more on details about how to use `.as_count()` and `.as_rate()` please see [our blog post](https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing/).
 
 **Rollup**
 
 `.rollup()` is recommended for expert users only. Appending this function to the end of a query allows you to control the number of raw points rolled up into a single point plotted on the graph. The function takes two parameters, method and time: `.rollup(method,time)`
 
-The method can be sum/min/max/count/avg and time is in seconds. You can use either one individually, or both together like `.rollup(sum,120)`. We impose a limit of 350 points per time range. For example, if you're requesting `.rollup(20)` for a month-long window, we will return data at a rollup far greater than 20 seconds in order to prevent returning a gigantic number of points.
+The method can be sum/min/max/count/avg and time is in seconds. You can use either one individually, or both together like `.rollup(sum,120)`. We impose a limit of 350 points per time range. For example, if you're requesting `.rollup(20)` for a month-long window, we return data at a rollup far greater than 20 seconds in order to prevent returning a gigantic number of points.
 
 **Top functions**
 

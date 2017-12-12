@@ -19,7 +19,7 @@ If any Resource displays in the UI under another Service, despite having the sam
 
 For example, if you have a Resource with a Service named tornado-notification with a top level name of tornado.notify, any Resource that had both this Service Name and top level Name applied would display under this Service. However, if you have a Resource that has a Service name of tornado-notification with a top level name of web_identification, this Resource won’t be available under the existing tornado-notification | tornado.notify Service in the UI.
 
-These Resources, with a top level name of web_identification will still appear in the Datadog Application, and can be viewed under the Traces section of the APM navigation menu.
+These Resources, with a top level name of web_identification still appear in the Datadog Application, and can be viewed under the Traces section of the APM navigation menu.
 
 An example of modifying the top level name for Python can be found below:
 

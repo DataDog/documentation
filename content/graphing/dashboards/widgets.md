@@ -123,14 +123,14 @@ Example of Query Value widget for the [API](/api/#screenboards)
 
 {{< img src="graphing/miscellaneous/visualization/query_value_widget.png" alt="query_value_widget" responsive="true" popup="true">}}
 
-The Query Value Widget only displays one Value, unlike a timeseries for example, that will display several points. 
+The Query Value Widget only displays one Value, unlike a timeseries for example, that displays several points. 
 
 Let's say you are on a Timeseries and you are currently displaying the past hour, this button allows you to either display the `avg` / `max` / `min` / `avg` / `sum` / `last value` of ALL points that are rendered during that 1 hour range timeframe - depending on the aggregation chosen above. 
 
 ## Heatmap
 *Supported on Screenboards and Timeboards*
 
-The Heatmap visualization is great for showing metrics aggregated across many tags, such as *hosts*. The more hosts that have a particular value, the darker that square will be.
+The Heatmap visualization is great for showing metrics aggregated across many tags, such as *hosts*. The more hosts that have a particular value, the darker that square is.
 
 {{< img src="graphing/miscellaneous/visualization/references-graphing-heatmap-example.png" alt="Heatmap" responsive="true" popup="true">}}
 
@@ -152,7 +152,7 @@ The Toplist visualization is perfect when you want to see the list of hosts with
 ## Change
 *Supported on Screenboards and Timeboards*
 
-The Change graph will show you the change in a value over the time period chosen.
+The Change graph shows you the change in a value over the time period chosen.
 
 {{< img src="graphing/miscellaneous/visualization/references-graphing-change-example.png" alt="Change graph" responsive="true" popup="true">}}
 
@@ -160,7 +160,7 @@ The Change graph will show you the change in a value over the time period chosen
 ## Hostmap
 *Supported on Screenboards and Timeboards*
 
-The Hostmap will graph any metric for any subset of hosts on the same hostmap visualization available from the main [Infrastructure Hostmap](/graphing/infrastructure/hostmap) menu. 
+The Hostmap graphs any metric for any subset of hosts on the same hostmap visualization available from the main [Infrastructure Hostmap](/graphing/infrastructure/hostmap) menu. 
 
 {{< img src="graphing/miscellaneous/visualization/references-graphing-hostmap-example.png" alt="Hostmap" responsive="true" popup="true">}}
 
@@ -276,7 +276,7 @@ Alert values are query values showing the current value of the metric in any mon
 ## Iframe
 *Supported on Screenboards only*
 
-The Iframe widget will allow you to embed a portion of any other web page on your dashboard.
+The Iframe widget allows you to embed a portion of any other web page on your dashboard.
 
 ## Check Status
 *Supported on Screenboards only*

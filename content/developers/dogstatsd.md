@@ -25,7 +25,7 @@ The easiest way to get your custom application metrics into Datadog is to send t
 * Gauge deltas (see [this issue][1])
 * Timers as a native metric type (though it [does support them via histograms](#timers))
 
-**Note**: Any StatsD client will work just fine, but using the Datadog DogStatsD client will give you a few extra features. 
+**Note**: Any StatsD client works just fine, but using the Datadog DogStatsD client gives you a few extra features. 
 
 ## How It Works
 
@@ -46,10 +46,10 @@ def query_my_database():
 ```
 
 If this function executes one hundred times during a flush interval (ten
-seconds, by default), it will send DogStatsD one hundred UDP packets that say
-"increment the counter 'database.query.count'". DogStatsD will aggregate these
+seconds, by default), it sends DogStatsD one hundred UDP packets that say
+"increment the counter 'database.query.count'". DogStatsD aggregates these
 points into a single metric value—100, in this case—and send it to Datadog
-where it will be stored and available for graphing alongside the rest of your metrics.
+where it is stored and available for graphing alongside the rest of your metrics.
 
 ## Setup
 
@@ -80,7 +80,7 @@ Each example is in Python using [datadogpy](http://datadogpy.readthedocs.io/en/l
 
 ### Metrics
 
-The first four metrics types—gauges, counters, timers, and sets—will be familiar to StatsD users. The last one—histograms—is specific to DogStatsD.
+The first four metrics types —gauges, counters, timers, and sets— are familiar to StatsD users. The last one—histograms—is specific to DogStatsD.
 
 #### Gauges
 
@@ -281,7 +281,7 @@ or you're writing your own library, here's how to format the data.
 - `value` — an integer or float.
 - `type` — `c` for counter, `g` for gauge, `ms` for timer, `h` for histogram, `s` for set.
 - `sample rate` (optional) — a float between 0 and 1, inclusive. Only works with counter, histogram, and timer metrics. Default is 1 (i.e. sample 100% of the time).
-- `tags` (optional) — a comma separated list of tags. Use colons for key/value tags, i.e. `env:prod`. The key `device` is reserved; Datadog will drop a user-added tag like `device:foobar`.
+- `tags` (optional) — a comma separated list of tags. Use colons for key/value tags, i.e. `env:prod`. The key `device` is reserved; Datadog drops a user-added tag like `device:foobar`.
 
 Here are some example datagrams:
 
@@ -347,10 +347,10 @@ Here's an example datagram:
 
 ## Send metrics and events using dogstatsd and the shell
 
-For Linux and other Unix-like OS, we will used Bash.  
-For Windows we'll need Powershell and [powershell-statsd](https://github.com/joehack3r/powershell-statsd/blob/master/send-statsd.ps1), a simple Powershell function that will take care of the network bits for us.
+For Linux and other Unix-like OS, we use Bash.  
+For Windows we'll need Powershell and [powershell-statsd](https://github.com/joehack3r/powershell-statsd/blob/master/send-statsd.ps1), a simple Powershell function that takes care of the network bits for us.
 
-The idea behind Dogstatsd is simple: create a message that will contain information about your metric/event, and send it to a collector over UDP on port 8125. The message format can be found [here](#datagram-format).
+The idea behind Dogstatsd is simple: create a message that contains information about your metric/event, and send it to a collector over UDP on port 8125. The message format can be found [here](#datagram-format).
 
 ### Sending metrics
 

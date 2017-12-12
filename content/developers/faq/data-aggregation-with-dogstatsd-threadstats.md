@@ -13,13 +13,13 @@ This article aims at describing why and how the aggregation is performed.
 
 HTTP calls take time. The aggregation is meant to improve performance by reducing the number of api calls.
 
-For instance, if you have a counter incremented 1,000 times (+1 each time) over a short amount of time, instead of making 1,000 separate api calls, the dogstatsd server will aggregate it into a few api calls. Depending on the situation (see below), the library may submit for instance 1 datapoint with value 1,000 or X aggregate datapoints with cumulated value 1,000.
+For instance, if you have a counter incremented 1,000 times (+1 each time) over a short amount of time, instead of making 1,000 separate api calls, the dogstatsd server aggregates it into a few api calls. Depending on the situation (see below), the library may submit for instance 1 datapoint with value 1,000 or X aggregate datapoints with cumulated value 1,000.
 
 ## How is aggregation performed with the dogstatsd server?
 
 Dogstatsd uses a flush interval of 10 seconds. Every 10 seconds, dogstatsd checks all data received since the last flush (in the last 10 seconds). All values that corresponds to the same metric name and the same tags are aggregated together into a single value.
 
-Note: with the statsd protocol, the statsd client doesn't send metrics with timestamps. The timestamp is added at the flush time. So for a flush occurring at 10:00:10, all data received by the dogstatsd server (embedded in the datadog agent) between 10:00:00 and 10:00:10 will be rolled up in a single datapoint that gets 10:00:00 as timestamp.
+Note: with the statsd protocol, the statsd client doesn't send metrics with timestamps. The timestamp is added at the flush time. So for a flush occurring at 10:00:10, all data received by the dogstatsd server (embedded in the datadog agent) between 10:00:00 and 10:00:10 is rolled up in a single datapoint that gets 10:00:00 as timestamp.
 
 ### Aggregation rules per metric type
 
@@ -52,6 +52,6 @@ For instance during the flush interval of 10 seconds (between 10:00:00 and 10:00
 
 1. {09:30:15, 1}, {10:00:00, 2}, {10:00:04,1}, {10:00:05,1}, {10:00:09,1} # 1- original datapoints
 2. {09:30:10, 1}, {10:00:00, 2}, {10:00:00,1}, {10:00:05,1}, {10:00:05,1} # 2- every datapoint in the same roll_up_interval (5 seconds) gets the same timestamp
-3. {09:30:10, 1}, {10:00:00, 3}, {10:00:05,2} # 3- data is aggregated and only 4 values will be eventually submitted to Datadog
+3. {09:30:10, 1}, {10:00:00, 3}, {10:00:05,2} # 3- data is aggregated and only 4 values are eventually submitted to Datadog
 
 You may find more information about Threadstatsd aggregation [here](https://github.com/DataDog/datadogpy/blob/master/datadog/threadstats/metrics.py).

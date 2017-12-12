@@ -110,7 +110,7 @@ Here is the list of all the filters natively implemented by Datadog:
 {{% /table %}}
 
 ## Examples
-Below you will find some examples demonstrating how to use parsers:
+Find below some examples demonstrating how to use parsers:
 
 ### Key value
 
@@ -187,7 +187,7 @@ MyParsingRule (%{integer:user.id}|%{word:user.firstname}) connected on %{date("M
 
 ### Optional attribute 
 
-Some logs will contain values that only appear part of the time. In those cases, you can make attribute extraction optional with `()?` extracting it only when the attribute is contained in your log.
+Some logs contain values that only appear part of the time. In those cases, you can make attribute extraction optional with `()?` extracting it only when the attribute is contained in your log.
 
 **Log**:
 ```

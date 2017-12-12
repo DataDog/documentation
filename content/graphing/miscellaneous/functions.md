@@ -46,7 +46,7 @@ It allows you to tweak the interpolation settings. It takes as parameters a func
 
 ## Timeshift
 
-Here is a set of functions there of the pattern &lt;timeperiod&gt;_before(). These functions will display the values from the corresponding time period on the graph. On their own, they may not be of high value, but together with the current values they may provide useful insight into the performance of your application.
+Here is a set of functions there of the pattern &lt;timeperiod&gt;_before(). These functions display the values from the corresponding time period on the graph. On their own, they may not be of high value, but together with the current values they may provide useful insight into the performance of your application.
 
 ### hour_before()
 
@@ -245,11 +245,11 @@ Rolling median with a span of 9
 
 Recommended for expert users only. Appending this function to the end of a query allows you to control the number of raw points rolled up into a single point plotted on the graph. The function takes two parameters, method and time: `.rollup(method,time)`
 
-The method can be sum/min/max/count/avg and time is in seconds. You can use either one individually, or both together like `.rollup(sum,120)`. We impose a limit of 350 points per time range. For example, if you're requesting `.rollup(20)` for a month-long window, we will return data at a rollup far greater than 20 seconds in order to prevent returning a gigantic number of points.
+The method can be sum/min/max/count/avg and time is in seconds. You can use either one individually, or both together like `.rollup(sum,120)`. We impose a limit of 350 points per time range. For example, if you're requesting `.rollup(20)` for a month-long window, we return data at a rollup far greater than 20 seconds in order to prevent returning a gigantic number of points.
 
 ### .as_count() or as_rate()
 
-These functions are only intended for metrics submitted as rates or counters via statsd. These functions will have no effect for other metric types. For more on details about how to use `.as_count()` and `.as_rate()` see [our blog post][1].
+These functions are only intended for metrics submitted as rates or counters via statsd. These functions have no effect for other metric types. For more on details about how to use `.as_count()` and `.as_rate()` see [our blog post][1].
 
 Note: The only available query with `as_count()` is `sum()` (unless using a rollup summary), which is the only mathematical accurate function with such behavior.
 

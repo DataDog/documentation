@@ -27,9 +27,9 @@ with a status `UP`. You can monitor this heartbeat across one or more hosts.
 
 ## Configuration
 
-1. Select your **host by name or tag(s)**. Providing a tag will monitor every host that has that tag or tag combination.
+1. Select your **host by name or tag(s)**. Providing a tag monitors every host that has that tag or tag combination.
 
-2. Select the **no-data timeframe**. If the heartbeat stops reporting for more than the number of minutes you have selected, then you will get notified.
+2. Select the **no-data timeframe**. If the heartbeat stops reporting for more than the number of minutes you have selected, then you get notified.
 
 3. Configure your **notification options** Refer to the [Notifications](monitors/notifications) dedicated documentation page for a detailed walkthrough of the common notification options.
 

@@ -12,7 +12,7 @@ aliases:
 ## Event Query Language
 
 You can narrow down your search by filtering on certain event properties. See the list of filters below for more details. 
-Note that filters perform an exact match search and will not work with partial strings.
+Note that filters perform an exact match search and don't work with partial strings.
 
 {{% table responsive="true" %}}
 | Filter | Description |
@@ -27,7 +27,7 @@ Note that filters perform an exact match search and will not work with partial s
 |incident:claimed|Show only claimed incidents. (supports: 'open', 'claimed', 'resolved', or 'all')|
 {{% /table %}}
 
-Full text search works on all keywords provided in the search query after applying any filters. Full text search will look inside the event text, title, tags, users who commented on the event and host names and devices tied to the event for any related information.  
+Full text search works on all keywords provided in the search query after applying any filters. Full text search looks inside the event text, title, tags, users who commented on the event and host names and devices tied to the event for any related information.  
 
 You can use full text search to find all events with the same key tags. For example, to show all events with the #service key you would search #service.  
 
@@ -69,7 +69,7 @@ Incidents are unique to regular events and annotations in that they can be claim
 
 {{< img src="graphing/events/claim_incident.png" alt="claim incident" responsive="true" popup="true">}}
 
-By claiming an event a user is essentially assigning it to themselves and signaling to other users that it is being investigated. As an indicator of this, Datadog will pin the user's name and portrait to the record:  
+By claiming an event a user is essentially assigning it to themselves and signaling to other users that it is being investigated. As an indicator of this, Datadog pins the user's name and portrait to the record:  
 
 {{< img src="graphing/events/claimed_incident.png" alt="Claimed incident" responsive="true" popup="true">}}
 
@@ -86,7 +86,7 @@ To remove the top level aggregate event from appearing, change `use_date_happene
 
 When you need to integrate an application or system with Datadog, you have a
 few choices. The first is using one of our many existing [integrations][integrations].  
-This will get you access to a wide variety of metrics and events with minimal
+This gets you access to a wide variety of metrics and events with minimal
 configuration effort on your part. If your application isn't one of the
 integrated applications, then you can opt to create [a check using the agent][agentcheck].  
 This requires much more effort and potentially more knowledge on how the
@@ -98,8 +98,8 @@ the application or system sending an email instead. There are two different ways
 
 <div class="alert alert-info">
 <b>JSON-Formatted vs Plain Text:</b> <br>
-If you have complete control over the email sent by the application to Datadog, then you will probably want to configure a JSON-formatted message to be sent.
-This will allow you to set everything in the event that appears in the event
+If you have complete control over the email sent by the application to Datadog, then you probably want to configure a JSON-formatted message to be sent.
+This allows you to set everything in the event that appears in the event
 stream. See below for examples of each.
 </div>
 
@@ -127,7 +127,7 @@ to take advantage of that to help identify the sending application.
 
 In the source JSON-formatted email, you have 10 fields you can control: sender
 email address, and up to 9 JSON keys. Those keys are title, text, priority, tags, alert type,  date happened,  host, aggregation key, and source type name.  
-**Note: If your JSON is not properly formatted or if your email is sent with a subject, the event will not appear on your Event Stream.**
+**Note: If your JSON is not properly formatted or if your email is sent with a subject, the event won't appear on your Event Stream.**
 
 {{< img src="graphing/events/json-email.png" alt="json email" responsive="true" popup="true">}}
 
@@ -136,15 +136,15 @@ email address, and up to 9 JSON keys. Those keys are title, text, priority, tags
 {{< img src="graphing/events/json-event.png" alt="json event" responsive="true" popup="true">}}
 
 In a JSON-formatted email, the subject of the email message is irrelevant as it
-will be replaced by the title in the JSON in the body of the email. All data that appears in the event is defined in the JSON in the body of the email. This JSON must be well-formed or the message will be ignored. This means that not only should it look correct with commas separating key value pairs, it also must be pure JSON.  
-If you are testing the email with a standard email client, the body may be converted to HTML as a convenience to the user. This will cause the JSON to no longer be JSON and the email will be ignored by Datadog.
+is replaced by the title in the JSON in the body of the email. All data that appears in the event is defined in the JSON in the body of the email. This JSON must be well-formed or the message is ignored. This means that not only should it look correct with commas separating key value pairs, it also must be pure JSON.  
+If you are testing the email with a standard email client, the body may be converted to HTML as a convenience to the user. This causes the JSON to no longer be JSON and the email is ignored by Datadog.
 
 The allowable JSON keys can be found in the [events API documentation][eventsapi].
 
 ### Setting Up The Email Address
 
 To set up the email, first log in to your Datadog account at
-[https://app.datadoghq.com][dd-app]. From the *Integrations* menu, choose *APIs*, then scroll down to *Events API Emails*. This section will show you all the emails available for your applications and who created them. Choose the format for your messages from the Format: dropdown, then click *Create API Email*.
+[https://app.datadoghq.com][dd-app]. From the *Integrations* menu, choose *APIs*, then scroll down to *Events API Emails*. This section shows you all the emails available for your applications and who created them. Choose the format for your messages from the Format: dropdown, then click *Create API Email*.
 
 {{< img src="graphing/events/event-email-api.png" alt="JSON Event Email API" responsive="true" popup="true">}}
 
@@ -178,14 +178,14 @@ Should be encoded to: `http://catchpoint.com/session_id%3A123456`
 
 ## @ notifications
 
-* `@support-datadog` – this will reach Datadog support directly when posted in your stream.
-* `@all` – this will send a notification to all members of your organization.
-* `@yourname` – this will notify the specific user named ‘yourname’.
-* `@test@test.com` this will send an email to test@test.com.
+* `@support-datadog` – Reaches Datadog support directly when posted in your stream.
+* `@all` – Sends a notification to all members of your organization.
+* `@yourname` – Notifies the specific user named ‘yourname’.
+* `@test@test.com` Sends an email to test@test.com.
 * If you have HipChat, Slack, Webhooks, Pagerduty or VictorOps you can use:
     * `@hipchat-[room-name]` or `@slack-[room-name]` – posts the event or graph to that chat room.
-    * `@webhook` – alerts or triggers whatever is attached to that webhook. Check out [our blogpost on Webhooks][events-1]!
-    * `@pagerduty` – sends an alert to Pagerduty. You can also use `@pagerduty-acknowledge` and `@pagerduty-resolve`.
+    * `@webhook` – Alerts or triggers whatever is attached to that webhook. Check out [our blogpost on Webhooks][events-1]!
+    * `@pagerduty` – Sends an alert to Pagerduty. You can also use `@pagerduty-acknowledge` and `@pagerduty-resolve`.
 
 
 [events-1]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio

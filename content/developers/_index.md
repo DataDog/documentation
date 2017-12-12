@@ -5,7 +5,7 @@ customnav: developersnav
 description: Collect custom metrics & create new integration
 ---
 
-Monitoring tools should be flexible, so we provide multiple ways to interact with Datadog. This section will give you a quick overview of the various methods available
+Monitoring tools should be flexible, so we provide multiple ways to interact with Datadog. This section gives you a quick overview of the various methods available
 
 ## API
 Datadog features a powerful API to programmatically access the service. You can submit custom metrics; manage dashboards and monitors; schedule downtimes; and perform administrative actions.

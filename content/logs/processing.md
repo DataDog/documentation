@@ -51,7 +51,7 @@ Pipelines can take logs from a wide variety of formats and translate them all in
 
 ### Pipeline filters
 
-Filters let you limit what kinds of logs a pipeline will apply to.
+Filters let you limit what kinds of logs a pipeline applies to.
 
 The filter syntax is the same as the [search bar](/logs/explore/#search-bar).
 

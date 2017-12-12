@@ -37,7 +37,7 @@ Container support is better and more robust in the new agent. It has been built 
 
 ### Autodiscovery
 
-Service Discovery is now Autodiscovery. It’s been renamed and revamped. The new Auto Discovery is highly decoupled and it will allow us to add more sources beyond docker.
+Service Discovery is now Autodiscovery. It’s been renamed and revamped. The new Auto Discovery is highly decoupled and it allows us to add more sources beyond docker.
 
 ### Global Percentiles
 

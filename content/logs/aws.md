@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-Push your AWS log information to Datadog using Lambda functions that respond to S3 and CloudWatch log events. First configure your AWS services to push logs to S3/ Cloudwatch Logs, then setup the Lambda function(s), and finally create the triggers that will invoke that Lambda and send logs to Datadog.
+Push your AWS log information to Datadog using Lambda functions that respond to S3 and CloudWatch log events. First configure your AWS services to push logs to S3/ Cloudwatch Logs, then setup the Lambda function(s), and finally create the triggers that invokes that Lambda and send logs to Datadog.
 
 ## Setup
 ### Create a new Lambda function
@@ -59,7 +59,7 @@ Push your AWS log information to Datadog using Lambda functions that respond to 
 
 Your Lambda function is now ready to send logs to the Datadog platform. 
 
-There are two ways to configure the triggers that will cause the Lambda to execute and send logs to Datadog. We can [automatically](#automatically-set-up-triggers) manage them for you if you grant us a set of [permissions](#permissions), or you can [manually](#manually-set-up-triggers) set up each trigger yourself in the AWS console.
+There are two ways to configure the triggers that causes the Lambda to execute and send logs to Datadog. We can [automatically](#automatically-set-up-triggers) manage them for you if you grant us a set of [permissions](#permissions), or you can [manually](#manually-set-up-triggers) set up each trigger yourself in the AWS console.
 
 ### Automatically set up triggers
 If you are storing logs in many S3 buckets, Datadog can automatically manage triggers for you.
@@ -85,7 +85,7 @@ If you are storing logs in many S3 buckets, Datadog can automatically manage tri
 4. Check off the services from which you'd like to collect logs and hit save. To stop collecting logs from a particular service, simply uncheck it.
 {{< img src="logs/aws/AWSLogStep2.png" alt="Select services">}}
 5. If you have logs across multiple regions, you must create additional Lambda functions in those regions and enter them in this tile.
-6. To stop collecting all AWS logs, press the *x* next to each Lamdba ARN. All triggers for that function will be removed. 
+6. To stop collecting all AWS logs, press the *x* next to each Lamdba ARN. All triggers for that function are removed. 
 7. Within a few minutes of this initial setup, you will see your AWS Logs appear in our [logging platform](https://app.datadoghq.com/logs) in near real time.
 
 ### Manually set up triggers

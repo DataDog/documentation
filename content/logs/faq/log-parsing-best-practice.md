@@ -17,7 +17,7 @@ further_reading:
 Datadog lets you define parsers to extract all relevant information from your logs. More information about the parsing language and possibilities is available in [our documentation](/logs/parsing/).
 
  At first sight, it can seem complicated to write a parsing rule. But once you have mastered a few tips, it becomes much easier.
-In this article, we will walk through parsing a log from the Datadog agent’s collector log :
+In this article, we walk through parsing a log from the Datadog agent’s collector log :
 
 ```
 2017-10-12 08:54:44 UTC | INFO | dd.collector | checks.collector(collector.py:530) | Finished run #1780. Collection time: 4.06s. Emit time: 0.01s

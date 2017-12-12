@@ -24,9 +24,9 @@ configuration.
 
 ## Network Status
 
-1. Choose a **network check**. You will be able to choose from all HTTP and TCP checks being submitted by your Agents.
+1. Choose a **network check**. You are able to choose from all HTTP and TCP checks being submitted by your Agents.
 
-2. Pick **monitor scope**. You will only see hosts or tags reporting the check you have chosen.
+2. Pick **monitor scope**. You only see hosts or tags reporting the check you have chosen.
 
 3. Select **alerting options**.
 
@@ -34,9 +34,9 @@ configuration.
 
 ## Network Metric
 
-1. Choose a **network metric**. You will be able to choose either the TCP or HTTP response time metric.
+1. Choose a **network metric**. You are able to choose either the TCP or HTTP response time metric.
 
-2. Pick **monitor scope**. You will only see hosts or tags reporting the metric you have chosen.
+2. Pick **monitor scope**. You only see hosts or tags reporting the metric you have chosen.
 
 3. Select **alerting options**. Refer to the [alert-conditions](#metrics-monitors) section for details on the available options.
 

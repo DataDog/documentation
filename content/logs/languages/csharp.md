@@ -48,7 +48,7 @@ var elapsedMs = 34;
 log.Information("Processed {@Position} in {Elapsed:000} ms.", position, elapsedMs);
 ```
 
-Then check the `log.json` file; you will see the following event:
+Then check the `log.json` file to see the following event:
 
 ```json
 {

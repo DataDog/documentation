@@ -85,18 +85,18 @@ Parameters:
 
 #### `run_check_twice(config, agent_config=None, mocks=None, force_reload=False)`
 
-Similar to `run_check`, this method will run the check twice with a 1 second delay between runs.
+Similar to `run_check`, this method runs the check twice with a 1 second delay between runs.
 
 
 #### `run_check_n(config, agent_config=None, mocks=None, force_reload=False, repeat=1, sleep=1)`
 
-Similar to `run_check`, this method will run the check multiple times.
+Similar to `run_check`, this method runs the check multiple times.
 
 
 Parameters:
 
 
-* **repeat** (*integer*) – The number of times the check will run.
+* **repeat** (*integer*) – The number of times the check runs.
 * **sleep** (*integer*) – The delay in seconds between check runs.
 
 ### Metric Methods
@@ -110,7 +110,7 @@ Parameters:
 * **value** (*variable*) – The value for the metric.
 * **tags** (*list of strings*) – The tags associated with the metric.
 * **count** (*integer*) – The number of candidate metrics the assertion should test for. Typical values are:
-  * `None`: will not test for the count
+  * `None`: won't test for the count
   * `1`: tests for exactly one metric
   * `0`: tests for no matches (works as a negation)
 * **at_least** (*integer*) – The minimum number of candidate metrics the assertion should test for.
@@ -147,7 +147,7 @@ Parameters:
 
 * **meta_keys** (*list of strings*) – A list of metadata keys.
 * **count** (*integer*) – The number of candidate metrics the assertion should test for. Typical values are:
-  * `None`: will not test for the count
+  * `None`: won't test for the count
   * `1`: tests for exactly one metric
   * `0`: tests for no matches (works as a negation)
 * **at_least** (*integer*) – The minimum number of candidate metrics the assertion should test for.
@@ -180,7 +180,7 @@ Parameters:
 
 * **msg_text** (*string*) – The event message text.
 * **count** (*integer*) – The number of candidate metrics the assertion should test for. Typical values are:
-  * `None`: will not test for the count
+  * `None`: won't test for the count
   * `1`: tests for exactly one metric
   * `0`: tests for no matches (works as a negation)
 * **at_least** (*integer*) – The minimum number of candidate metrics the assertion should test for.
@@ -197,7 +197,7 @@ Parameters:
 
 * **warning** (*string*) – The warning message text.
 * **count** (*integer*) – The number of candidate warnings the assertion should test for. Typical values are:
-  * `None`: will not test for the count
+  * `None`: won't test for the count
   * `1`: tests for exactly one warning
   * `0`: tests for no matches (works as a negation)
 * **at_least** (*integer*) – The minimum number of candidate warnings the assertion should test for.

@@ -100,7 +100,7 @@ logs:
 Set `type` to **tcp** or **udp** depending of your protocol then specify the `port` of your incomming connection.
 
 Example:
-If your PHP application does not log to a file, but instead forwards its logs via TCP, you will need to create a configuration file that specifies the port to receive as in the example below:
+If your PHP application does not log to a file, but instead forwards its logs via TCP, create a configuration file that specifies the port to receive as in the example below:
 
 ```yaml
 init_config:
@@ -251,7 +251,7 @@ If your logs are formatted as JSON, be aware that some attributes are reserved f
 ### *date* attribute
 
 By default Datadog generates a timestamp and appends it in a date attribute when logs are received.
-However, if a JSON formatted log file includes one of the following attributes, Datadog will interpret its value as the the log’s official date:
+However, if a JSON formatted log file includes one of the following attributes, Datadog interprets its value as the the log’s official date:
 
 * `@timestamp`
 * `timestamp`
@@ -270,11 +270,11 @@ The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-
 
 ### *message* attribute
 
-By default, Datadog will ingest the value of message as the body of the log entry. That value will then be highlighted and display in the [log list](/logs/explore/#log-list), where it will be indexed for [full text search](/logs/explore/#search-bar).
+By default, Datadog ingests the value of message as the body of the log entry. That value is then highlighted and display in the [log list](/logs/explore/#log-list), where it is indexed for [full text search](/logs/explore/#search-bar).
 
 ### *severity* attribute
 
-Each log entry may specify a severity level which will be made available for faceted search within Datadog. However, if a JSON formatted log file includes one of the following attributes, Datadog will interpret its value as the the log’s official severity:
+Each log entry may specify a severity level which is made available for faceted search within Datadog. However, if a JSON formatted log file includes one of the following attributes, Datadog interprets its value as the the log’s official severity:
 
 * `syslog.severity`
 
@@ -282,13 +282,13 @@ If you would like to remap some severities existing in the `severity` attribute,
 
 ### *host* attribute
 
-Using the Datadog Agent or the RFC5424 format automatically set the host value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog will interpret its value as the the log’s host:
+Using the Datadog Agent or the RFC5424 format automatically set the host value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog interprets its value as the the log’s host:
 
 * `syslog.hostname`
 
 ### *service* attribute
 
-Using the Datadog Agent or the RFC5424 format automatically set the service value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog will interpret its value as the the log’s service:
+Using the Datadog Agent or the RFC5424 format automatically set the service value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog interprets its value as the the log’s service:
 
 * `syslog.appname`
 
