@@ -72,3 +72,12 @@ $tilecolors: (
     }
   }
 }
+
+@media (max-width: 1199px) {
+  .tile-nav {
+    .desc {
+      font-size:16px;
+      padding: 0 16px;
+    }
+  }
+}
