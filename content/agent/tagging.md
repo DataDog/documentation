@@ -85,7 +85,7 @@ The following [integrations](/integrations) sources create tags automatically in
 
 
 ### Assigning tags using the configuration files
-[The Datadog integrations](/integrations) are all configured via the yaml configuration files located in the **conf.d** directory in your agent install. For more about where to look for your configuration files, refer [to this article][agentinstall].  
+[The Datadog integrations](/integrations) are all configured via the yaml configuration files located in the **conf.d** directory in your agent install. For more about where to look for your configuration files, refer [to this article][agentinstall].
 
 Define tags in the configuration file for the overall agent as well as for each integration.
 In YAML files, there is a tag dictionary with a list of tags you want assigned at that level. Any tag you assign to the agent is applied to every integration on that agent's host.
@@ -140,8 +140,8 @@ The [Events List](/graphing/event_stream/) shows you all the events that have oc
 
 ### Using tags in Dashboards
 
-You can use tags to narrow down the metrics to display on a [dashboard graph](/graphing/dashboards), or to create groups of metrics to display. 
-To narrow down the metrics to display, enter the tag in the `from:` textbox. 
+You can use tags to narrow down the metrics to display on a [dashboard graph](/graphing/dashboards), or to create groups of metrics to display.
+To narrow down the metrics to display, enter the tag in the `from:` textbox.
 
 You are now looking at a chosen metric over all the hosts that have that particular tag assigned.
 
@@ -154,7 +154,7 @@ This causes the graph to show just one line for each tag value — `database`, `
 
 {{< img src="agent/tagging/dashboardtags.png" alt="Tags in Dashboards avgby textbox" responsive="true" popup="true">}}
 
-Yingou can also use tags to overlay events on the dashboard. This works in exactly the same way as in the [Events List](/graphing/event_stream/).
+You can also use tags to overlay events on the dashboard. This works in exactly the same way as in the [Events List](/graphing/event_stream/).
 Simply enter `tags:` followed by the tag and you see the corresponding events overlaid as vertical bars on each graph.
 
 ### Using tags in the Infrastructure List and the Host Map
