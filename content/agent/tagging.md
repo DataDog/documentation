@@ -10,15 +10,12 @@ aliases:
 Tagging is used throughout the Datadog product to make it easier to subset and query the machines and metrics that you have to monitor. Without the ability to assign and filter based on tags, finding the problems that exist in your environment and narrowing them down enough to discover the true causes would be extremely difficult.
 
 <div class="alert alert-info">
-We recommend to use the format <code>key:value</code> when using tags, like <code>env:prod</code>.
+We recommend using the format <code>key:value</code> when using tags, like <code>env:prod</code>.
 </div>
 
-**Tags must start with a letter**, and after that may contain alphanumerics,
-underscores, minuses, colons, periods and slashes. Other characters gets
-converted to underscores. Tags can be up to 200 characters long and support
-Unicode. Tags are converted to lowercase as well.
+**Tags must start with a letter** and may contain alphanumerics, underscores, minuses, colons, periods, and slashes. Other characters get converted to underscores. Tags can be up to 200 characters long and support Unicode. Tags are converted to lowercase.
 
-Note: An exception to this is with trailing underscores, which is trimmed off of tags (e.g. path:thing_ becomes path:thing).
+Note: An exception to this is trailing underscores, which are trimmed (e.g. path:thing_ becomes path:thing).
 
 ## How to assign tags
 There are four primary ways to assign tags: inherited from the [integration](/integrations), in the configuration, in the UI, and using the API, though the UI and API only allow you to assign tags at the host level. The recommended method is to rely on the [integrations](/integrations) or via the configuration files.
@@ -88,11 +85,10 @@ The following [integrations](/integrations) sources create tags automatically in
 
 
 ### Assigning tags using the configuration files
+[The Datadog integrations](/integrations) are all configured via the yaml configuration files located in the **conf.d** directory in your agent install. For more about where to look for your configuration files, refer [to this article][agentinstall].
 
-[The Datadog integrations](/integrations) are all configured via the yaml configuration files located in the **conf.d** directory in your agent install. For more about where to look for your configuration files, refer [to this article][agentinstall].  
-
-Define tags in the configuration file for the overall agent as well as for each integration, though the `datadog.conf` file is a more traditional init file.  
-In yaml files, there is a tag dictionary with a list of tags you want assigned at that level. Any tag you assign to the agent is applied to every integration on that agent's host.
+Define tags in the configuration file for the overall agent as well as for each integration.
+In YAML files, there is a tag dictionary with a list of tags you want assigned at that level. Any tag you assign to the agent is applied to every integration on that agent's host.
 
 Dictionaries with lists of values have two different yet functionally equivalent forms:
 
@@ -144,20 +140,21 @@ The [Events List](/graphing/event_stream/) shows you all the events that have oc
 
 ### Using tags in Dashboards
 
-You can use tags to narrow down the metrics to display on a [dashboard graph](/graphing/dashboards), or to create groups of metrics to display. 
-To narrow down the metrics to display, enter the tag in the `from:` textbox. 
+You can use tags to narrow down the metrics to display on a [dashboard graph](/graphing/dashboards), or to create groups of metrics to display.
+To narrow down the metrics to display, enter the tag in the `from:` textbox.
+
 You are now looking at a chosen metric over all the hosts that have that particular tag assigned.
 
 {{< img src="agent/tagging/dashboardtags_1.png" alt="Tags in Dashboards from textbox" responsive="true" popup="true">}}
 
-To group using tags, enter the key part of the tag in the `avg by:` textbox. 
+To group using tags, enter the key part of the tag in the `avg by:` textbox.
 
-For instance, if you have a time series graph showing a metric tagged by the reporting hosts roles —`role:database`, `role:frontend`, or `role:loadbalancer`— enter role in the **avg_by** textbox.  
+For instance, if you have a time series graph showing a metric tagged by the reporting hosts roles —`role:database`, `role:frontend`, or `role:loadbalancer`— enter role in the **avg_by** textbox.
 This causes the graph to show just one line for each tag value — `database`, `frontend`, and `loadbalancer`. Each line represents the average metric value across all hosts that share that role.
 
 {{< img src="agent/tagging/dashboardtags.png" alt="Tags in Dashboards avgby textbox" responsive="true" popup="true">}}
 
-You can also use tags to overlay events on the dashboard. This works in exactly the same way as in the [Events List](/graphing/event_stream/). 
+You can also use tags to overlay events on the dashboard. This works in exactly the same way as in the [Events List](/graphing/event_stream/).
 Simply enter `tags:` followed by the tag and you see the corresponding events overlaid as vertical bars on each graph.
 
 ### Using tags in the Infrastructure List and the Host Map
@@ -214,9 +211,7 @@ To get a breakdown by host, you can do:
 sum:page.views{domain:example.com} by {host}
 ```
 
-Further tagging info can be found [here](/integrations/amazon_web_services/).
-
-For information on AWS tagging, see [this tagging doc page](/agent/tagging/).
+For information on AWS tagging, see [this tagging doc page](/integrations/amazon_web_services/).
 
 [tagsapi]: /api#tags
 [agentinstall]: https://app.datadoghq.com/account/settings#agent

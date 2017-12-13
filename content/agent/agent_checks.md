@@ -8,12 +8,9 @@ aliases:
 
 ## Overview
 
-This documentation details how to collect metrics and events from a new data source by writing an Agent Check, a Python plug-in to the Datadog Agent. We'll
-look at the `AgentCheck` interface, and then write a simple Agent Check
-that collects timing metrics and status events from HTTP services.
+This page details how to collect metrics and events from a new data source by writing an Agent Check, a Python plug-in to the Datadog Agent. We'll look at the `AgentCheck` interface, and then write a simple Agent Check that collects timing metrics and status events from HTTP services.
 
-Any custom checks is included in the main check run loop, meaning
-they run every check interval, which defaults to 15 seconds.
+Custom checks are included in the main check run loop, meaning they run every check interval, which defaults to 15 seconds.
 
 ### Should you write an Agent Check or an Integration?
 
@@ -21,11 +18,11 @@ Agent Checks are a great way to collect metrics from custom applications or uniq
 
 Starting with version 5.9 of the Datadog Agent, we've enabled a new method for creating integrations and created a corresponding integrations-extras repository where you can contribute your own integrations. This allows integrations to be released and updated independently from Datadog Agent updates, it also provides an easier way for you to share integrations and makes it easier for the wider Datadog community to use your integrations.
 
-For more information about how to write an Integration, see the [Creating New Integrations][1] and check out the [Integrations-Extras Github repository][2] to see other contributed integrations.
+For more information about how to write an integration, see [Creating New Integrations][1] and check out the [integrations-extras GitHub repository][2] to see other contributed integrations.
 
 ## Setup
 
-First off, ensure you've properly installed the [Agent][3] on your machine. If you run into any issues during the setup, [Get in touch with us!][4], we'll be happy to answer any questions you might have.
+First off, ensure you've properly installed the [Agent][3] on your machine. If you run into any issues during the setup, [contact support][4] and we'll be happy to answer any questions you might have.
 
 ## Agent Check Interface
 
@@ -37,9 +34,7 @@ run once per instance defined in the check configuration (discussed later).
 ### Sending metrics
 
 Sending metrics in a check is easy. If you're already familiar with the
-methods available in DogStatsD, then the transition is very simple. If
-you're not already familiar with that interface, you'll find sending metrics is
-a breeze.
+methods available in DogStatsD, then the transition is very simple.
 
 You have the [following methods](/developers/dogstatsd) available to you:
 
@@ -110,10 +105,9 @@ The service_check method accepts the following arguments:
 
 ### Exceptions
 
-If a check cannot run because of improper configuration,  programming error or
-because it could not collect any metrics, it should raise a meaningful exception.  
-This exception is logged, as well as be shown in the Agent [info command](/agent/faq/agent-status-and-information) for
-easy debugging. For example:
+If a check cannot run because of improper configuration, programming error, or
+because it could not collect any metrics, it should raise a meaningful exception.
+This exception is logged and is shown in the Agent [info command](/agent/faq/agent-status-and-information) for easy debugging. For example:
 
     $ sudo /etc/init.d/datadog-agent info
 
@@ -135,10 +129,9 @@ module).
 
 ## Configuration
 
-Each check has a configuration file that is placed in the `conf.d`
-directory. Configuration is written using [YAML](http://www.yaml.org/). The
-file name should match the name of the check module (e.g.: `haproxy.py` and
-`haproxy.yaml`).
+Each check has a [YAML](http://www.yaml.org/) configuration file that is placed in the `conf.d`
+directory. The file name should match the name of the check module (e.g.: `haproxy.py` and
+`haproxy.yaml`). NOTE: YAML files must use spaces instead of tabs.
 
 The configuration file has the following structure:
 
@@ -156,14 +149,12 @@ instances:
       password: 5678
 ```
 
-`min_collection_interval` can be added to the `init_config` section to help define how often the check should be run.  
-If it is greater than the interval time for the agent collector, a line is added to the log stating that collection for this script was skipped.  
-The default is `0` which means it's collected at the same interval as the rest of the integrations on that agent.  
-If the value is set to `30`, it does not mean that the metric is collected every 30 seconds, but rather that it could be collected as often as every 30 seconds.  
+`min_collection_interval` can be added to the `init_config` section to help define how often the check should be run.
+If it is greater than the interval time for the agent collector, a line is added to the log stating that collection for this script was skipped.
+The default is `0` which means it's collected at the same interval as the rest of the integrations on that agent.
+If the value is set to `30`, it does not mean that the metric is collected every 30 seconds, but rather that it could be collected as often as every 30 seconds.
 
 The collector runs every 15-20 seconds depending on how many integrations are enabled. If the interval on this agent happens to be every 20 seconds, then the agent collects and includes the agent check. The next time it collects 20 seconds later, it sees that 20 < 30 and don't collect the custom agent check. The next time it sees that the time since last run was 40 which is greater than 30 and therefore the agent check is collected.
-
-<div class="alert alert-info"> YAML files must use spaces instead of tabs. </div>
 
 ### init_config
 
@@ -312,7 +303,7 @@ instances:
 
 ### The Check
 
-Now we can start defining our check method. The main part of the check makes 
+Now we can start defining our check method. The main part of the check makes
 a request to the URL and time the response time, handling error cases as it goes.
 
 In this snippet, we start a timer, make the GET request using the
@@ -466,7 +457,7 @@ if __name__ == '__main__':
 
 ## Troubleshooting
 
-Custom Agent checks can't be directly called from python and instead need to be called by the agent.  
+Custom Agent checks can't be directly called from python and instead need to be called by the agent.
 
 To test this, run:
 
@@ -476,7 +467,7 @@ If your issue continues, reach out to Support with the [help page](/help) that l
 
 ### Testing custom checks on Windows
 
-* **For agent version < 5.12**:  
+* **For agent version < 5.12**:
     The Agent install includes a file called shell.exe in your Program Files directory for the Datadog Agent which you can use to run python within the Agent environment. Once your check (called `<CHECK_NAME>`) is written and you have the .py and .yaml files in their correct places, you can run the following in shell.exe:
     ```
     from checks import run_check
@@ -486,7 +477,7 @@ If your issue continues, reach out to Support with the [help page](/help) that l
 
 * **For agent version >= 5.12**:
     Run the following script, with the proper `<CHECK_NAME>`:
-    `<INSTALL_DIR>/embedded/python.exe <INSTALL_DIR>agent/agent.py check <CHECK_NAME>`  
+    `<INSTALL_DIR>/embedded/python.exe <INSTALL_DIR>agent/agent.py check <CHECK_NAME>`
     For example, to run the disk check:
     ```
     C:\Program Files\Datadog\Datadog Agent\embedded\python.exe C:\Program Files\Datadog\Datadog Agent\agent\agent.py check disk
