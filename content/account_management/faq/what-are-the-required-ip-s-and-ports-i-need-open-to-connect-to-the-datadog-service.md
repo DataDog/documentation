@@ -6,7 +6,7 @@ customnav: accountmanagementnav
 
 Traffic is always initiated by the agent to the Datadog service. No sessions are ever initiated from Datadog back to the agent. 
 All traffic is sent (outbound only) over SSL via 443 TCP.
-The destination for all agent data is <version>-app.agent.datadoghq.com (starting with version 5.2.0; was app.datadoghq.com for prior versions). It is a CNAME; its IP address is subject to change but belongs to the ranges listed [here](/agent/proxy):
+The destination for all agent data is `<version>-app.agent.datadoghq.com` (starting with version 5.2.0; was app.datadoghq.com for prior versions). It is a CNAME; its IP address is subject to change but belongs to the ranges listed [here](/agent/proxy):
 
 (Note: In versions prior to 5.18.0 the process-agent uses process.datadoghq.com for traffic)
 

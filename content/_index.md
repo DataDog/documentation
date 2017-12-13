@@ -28,8 +28,6 @@ The [client libraries](/developers/libraries) for these send your [custom metric
 
 Some of your stack may be SaaS, not servers. Datadog can [poll many of these services](/integrations), and the integrations for them are the easiest of all to install; no Agent required.
 
-<Eventually, something about log data.>
-
 ## Visualize It
 
 As soon as you're capturing all this data, see it immediately in the Datadog web application. Use the Metrics Explorer to search for a given metric and watch it ebb and flow. View and comment on events (say, an application deploy) as they pour into your [Event Stream](/graphing/event_stream/). Filter for some group of hosts in the [Infrastructure Map](/graphing/infrastructure). Get an overall picture of how some service (say, MySQL) is running via its default dashboard.
