@@ -16,19 +16,23 @@ The source code for the Datadog Agent can be found [here](https://github.com/Dat
 
 For information on running the Agent through a proxy, see [here](https://github.com/DataDog/dd-agent/wiki/Proxy-Configuration); for which IP ranges to allow, see [here](https://github.com/DataDog/dd-agent/wiki/Network-Traffic-and-Proxy-Configuration#open-ports).
 
-The Agent has three main parts: the collector, dogstatsd, and the forwarder:
+The Agent has three main parts: the collector, DogStatsD, and the forwarder:
 
-* **The collector**: runs checks on the current machine for whatever integrations you have and it captures system metrics such as memory and CPU.
+* **The collector**: runs checks on the current machine for whatever [integrations](/integrations) you have and it captures system metrics such as memory and CPU.
 
 * **DogStatsD**: It is a statsd backend server you can send [custom metrics](/getting_started/custom_metrics/) to from an application.
 
-* **The forwarder**: retrieves data from both dogstatsd and the collector and then queues it up to be sent to Datadog.
+* **The forwarder**: retrieves data from both DogStatsD and the collector and then queues it up to be sent to Datadog.
 
 This is all controlled by one supervisor process. We keep this separate so you don't have to have the overhead of each application if you don't want to run all parts, although we generally recommend you do.
 
+<div class="alert alert-info">
+Only agent versions superior to 5.0 are supported in Datadog documentation.
+</div>
+
 ## Configuration management tools
 
-Manage the Datadog agent and integrations using configuration management tools:
+Manage the Datadog agent and [integrations](/integrations) using configuration management tools:
 
 ### Chef
 * [Chef Github project](https://github.com/DataDog/chef-datadog)
@@ -45,7 +49,7 @@ Manage the Datadog agent and integrations using configuration management tools:
 * [Ansible installation](https://app.datadoghq.com/account/settings#agent/ansible)
 * [Ansible documentation](/integrations/ansible/)
 
-Chef, Puppet, and Ansible integrations were written using our public APIs so if you're interested in using another automation tool, the above could be leveraged as examples to get you started.
+Chef, Puppet, and Ansible [integrations](/integrations) using our public APIs so if you're interested in using another automation tool, the above could be leveraged as examples to get you started.
 
 There is also community support for Saltstack:
 
@@ -86,7 +90,7 @@ If these are more than a few minutes apart, you should correct the time settings
 
 Datadog has many [integrations](/integrations/) which are set up through [YAML files in the Agent](https://github.com/DataDog/dd-agent/tree/master/conf.d).
 
-Here is a quick guide for troubleshooting integration installation:
+Here is a quick guide for troubleshooting [integrations](/integrations) installation:
 
 1. [Run the info command](/agent/faq/agent-status-and-information).
 

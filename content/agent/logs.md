@@ -7,7 +7,7 @@ aliases:
 further_reading:
 - link: "/agent/faq/want-more-flexibility-with-your-custom-log-parser-add-dogstatsd"
   tag: "FAQ"
-  text: Want more flexibility with your custom log parser? Add dogstatsd  
+  text: Want more flexibility with your custom log parser? Add DogStatsD  
 ---
 
 Log files contain tons of valuable application and business data.

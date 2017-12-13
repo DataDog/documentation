@@ -16,7 +16,7 @@ customnav: graphingnav
 ## Read Only
 
 [An Administrator](/account_management/team/#datadog-user-roles) or Screenboard creator can make a Screenboard read-only by clicking the gear icon (upper right corner of a Screenboard) and clicking the **Permissions** link:
-{{< img src="graphing/dashboards/screenbaord/read_only.png" alt="Read Only" responsive="true" popup="true">}}
+{{< img src="graphing/dashboards/screenboard/read_only.png" alt="Read Only" responsive="true" popup="true">}}
 
 **Click "Yes" on the confirmation window to make the Screenboard read-only**
 

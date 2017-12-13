@@ -22,4 +22,6 @@ Tracing data is sent to the Datadog Agent via an HTTP API. We provide some [offi
 *   `error` - _Optional._ Set this value to 1 to indicate if an error occured. If an error occurs, you should pass additional information, such as the error message, type and stack information in the `meta` property.
 *   `meta` - _Optional._ A dictionary of key-value metadata. e.g. tags.
 
+Learn more about the APM (tracing) terminology [here](/tracing/terminology)
+
 Note: You may send multiple spans within a trace array and each span within a trace should use the same trace_id. You may also send multiple traces.

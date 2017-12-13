@@ -23,9 +23,9 @@ It means our histograms are great if you want to get an idea of how your 10-seco
 
 **Consequence 1: the 10 second flush interval can make all histogram stats equal**
 
-Every 10 seconds, the datadog-agent reviews all histogram dogstatsd packets it has received, it computes statistics (max/avg/95percentile/count/mean) and send the resulting statistics as metrics to Datadog.
+Every 10 seconds, the datadog-agent reviews all histogram DogStatsD packets it has received, it computes statistics (max/avg/95percentile/count/mean) and send the resulting statistics as metrics to Datadog.
 
-If during the 10 second flush interval of the dogstatsd server of the datadog-agent, there is only 1 histogram value (value = 1) that has been sent to host:X with histogram name response_time, the datadog-agent of this host:X reports to Datadog the same value for response_time.avg / .max / .95percentile / .mean = 1
+If during the 10 second flush interval of the DogStatsD server of the datadog-agent, there is only 1 histogram value (value = 1) that has been sent to host:X with histogram name response_time, the datadog-agent of this host:X reports to Datadog the same value for response_time.avg / .max / .95percentile / .mean = 1
 
 If you have more than 1 value during the 10 second flush interval, let's say values = {1, 9, 8}, the histogram statistics starts to make sense and be different: .avg <= 6, .median <= 8, .max = 9, .count = 3 (number of points) etc.
 

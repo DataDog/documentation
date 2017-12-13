@@ -6,11 +6,11 @@ customnav: developersnav
 
 Beanstalk allows to deploy only a single container per instance and doesn't support docker links as well.
 
-Thus it is not obvious how to have your application talk to DogStatsD when deploying it on AWS via Elastic Beanstalk.
+Thus it is not obvious how to have your application talk to [DogStatsD server](/developers/dogstatsd) when deploying it on AWS via Elastic Beanstalk.
 
 We suggest you the following workaround:
 
-1. expose the dogstatsd port when you run the dd-agent container.
+1. expose the [DogStatsD server](/developers/dogstatsd) port when you run the dd-agent container.
 2. use the docker bridge ip address to send data from within a container to this port.
 
 More details on achieving that kind of network traffic can be found here :
