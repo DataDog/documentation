@@ -1,4 +1,4 @@
-[DogStatsD](/developers/dogstatsd)---
+---
 title: Libraries
 kind: documentation
 customnav: developersnav
