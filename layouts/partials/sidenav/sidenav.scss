@@ -133,9 +133,14 @@ aside.sidenav {
           color:#000;
           font-size:18px;
           font-weight: 600;
-          padding:3px 0 0 2px;
+          padding:0 0 0 2px;
+          margin-top:3px;
           display:block;
+          &:hover {
+            background:#eee;
+          }
           &.active {
+            background:#eee;
             color: $ddpurple;
             font-weight:600;
           }

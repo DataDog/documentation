@@ -1,7 +1,7 @@
 $ddpurple:    #774DA2;
 
 html {
-  font-size:20px;
+  font-size:24px;
 }
 
 body {
@@ -124,19 +124,25 @@ pre {
 }
 
 code {
-  color:#9B00FF;
-  padding-top:0;
-  padding-bottom:0;
-  font-size:12px;
-  line-height:24px;
+  color: #555;
+  padding: 0;
+  font-size: 17px;
+  background-color: #fafafa;
+  border-left: 5px solid #fafafa;
+  border-right: 5px solid #fafafa;
+  border-bottom: 2px solid #fafafa;
+  border-radius: 4px;
+  display: inline;
+  white-space: normal;
+  font-family: monospace,monospace;
 }
 
 
 p {
   // todo: can i set this with a bootstrap variable?
-  font-size:20px;
+  font-size:24px;
   color:#000;
-  line-height:28px;
+  line-height:30px;
 }
 
 h1 {

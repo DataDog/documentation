@@ -109,10 +109,10 @@ $(document).ready(function () {
 
         $(window).on('resize scroll', function(e) {
             onScroll();
-            var open = $('.mobile-toc-toggle i').hasClass('icon-small-x');
+            /*var open = $('.mobile-toc-toggle i').hasClass('icon-small-x');
             if(open && $(window).width() > 991) {
                 $('.mobile-toc-toggle').click();
-            }
+            }*/
         }).trigger('scroll');
 
 
