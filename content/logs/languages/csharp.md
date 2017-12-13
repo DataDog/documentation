@@ -220,7 +220,7 @@ If you have followed the instructions you should see in your file (for example `
 
 ## Configure your Datadog agent
 
-Create a `csharp.yaml` file in your `conf.d/` folder with the following content:
+Create a `csharp.d/conf.yaml` file in your `conf.d/` folder with the following content:
 
 ```yaml
 init_config:

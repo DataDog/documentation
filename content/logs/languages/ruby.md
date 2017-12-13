@@ -101,7 +101,7 @@ If you want to tweak the log layout, all items available can be found directly f
 
 ## Configure your Datadog agent.
 
-Create a `ruby.yaml` file in your `conf.d/` folder with the following content:
+Create a `ruby.d/conf.yaml` file in your `conf.d/` folder with the following content:
 
 ```yaml
 init_config:
