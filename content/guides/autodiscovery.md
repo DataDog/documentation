@@ -240,7 +240,7 @@ metadata:
   annotations:
     service-discovery.datadoghq.com/apache.check_names: '["apache","http_check"]'
     service-discovery.datadoghq.com/apache.init_configs: '[{},{}]'
-    service-discovery.datadoghq.com/apache.instances: '[{"apache_status_url": "http://%%host%%/server-status?auto"},{"name": "My service", "url": "http://%%host%%", timeout: 1}]'
+    service-discovery.datadoghq.com/apache.instances: '[{"apache_status_url": "http://%%host%%/server-status?auto", "tags": ["%%tags%%"]},{"name": "My service", "url": "http://%%host%%", timeout: 1}]'
   labels:
     name: apache
 spec:
@@ -269,7 +269,7 @@ spec:
       annotations:
         service-discovery.datadoghq.com/apache.check_names: '["apache","http_check"]'
         service-discovery.datadoghq.com/apache.init_configs: '[{},{}]'
-        service-discovery.datadoghq.com/apache.instances: '[{"apache_status_url": "http://%%host%%/server-status?auto"},{"name": "My service", "url": "http://%%host%%", timeout: 1}]'
+        service-discovery.datadoghq.com/apache.instances: '[{"apache_status_url": "http://%%host%%/server-status?auto", "tags": ["%%tags%%"]},{"name": "My service", "url": "http://%%host%%", timeout: 1}]'
     spec:
       containers:
       - name: apache # use this as the container identifier in your annotations
