@@ -13,4 +13,4 @@ videos:
 summary: Learn how to share a screenboard with others.
 ---
 
-Datadog is fantastic for DevOps groups, but it can also be valuable for the executive team and others at your company. See in this short video how easy it is to share your screenboard with your execs, your customers, or anyone else who needs to see the information.
+Datadog is fantastic for DevOps groups, but it can also be valuable for the executive team and others at your company. See in this short video how easy it is to share your [screenboard](/graphing/dashboards/screenboard) with your execs, your customers, or anyone else who needs to see the information.

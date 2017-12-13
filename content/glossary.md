@@ -3,4 +3,11 @@ title: Glossary
 kind: Documentation
 ---
 
-wip
+wip 
+
+## Agent
+## Graphing
+## Integrations
+## Monitors
+## APM (Tracing)
+## Logs

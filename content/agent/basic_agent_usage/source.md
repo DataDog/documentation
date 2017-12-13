@@ -58,7 +58,7 @@ sudo ~/.datadog-agent/bin/info -v
 
 The configuration file for the Agent is located at `~/.datadog-agent/agent/datadog.conf`
 
-Configuration files for integrations are located in `~/.datadog-agent/agent/conf.d/`
+Configuration files for [integrations](/integrations) are located in `~/.datadog-agent/agent/conf.d/`
 
 ## Troubleshooting
 

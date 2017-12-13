@@ -74,9 +74,9 @@ Datadog accepts metrics submitted from a variety of sources, and as a result the
 
 #### What's a use case for changing a metric's type?
 
-1. You have a metric `app.requests.served` that counts requests served, but accidentally submits it via dogstatsd as a `gauge`. The metric's Datadog type is therefore `gauge`.
+1. You have a metric `app.requests.served` that counts requests served, but accidentally submits it via DogStatsD as a `gauge`. The metric's Datadog type is therefore `gauge`.
 
-2. You realize you should have submitted it as a dogstatsd `counter` metric, that way you can do time aggregation to answer questions like "How many total requests were served in the past day?" by querying `sum:app.requests.served{*}` (this would not make sense for a `gauge`-type  metric.)
+2. You realize you should have submitted it as a DogStatsD `counter` metric, that way you can do time aggregation to answer questions like "How many total requests were served in the past day?" by querying `sum:app.requests.served{*}` (this would not make sense for a `gauge`-type  metric.)
 
 3. You like the name `app.requests.served` so rather than submitting a new metric name with the more appropriate `counter` type, you could change the type of `app.requests.served`.
 
@@ -96,7 +96,7 @@ There are multiple ways to send metrics to Datadog:
 1. With your Datadog agent directly (Learn more on how [to write an Agent Checks](/agent/agent_checks) && [Aggregator source](https://github.com/DataDog/dd-agent/blob/master/aggregator.py))
 
 2. Using your StatsD server bundled with the Datadog Agent (Find more about our available libraries [here](/developers/libraries))
-  Note: Because dogstatsd flushes at a regular interval (**default 10s**) all metrics submitted via this method are stored with associated interval metadata.
+  Note: Because DogStatsD flushes at a regular interval (**default 10s**) all metrics submitted via this method are stored with associated interval metadata.
 
 3. Submit metrics directly to Datadog's [HTTP API](/api/)
 

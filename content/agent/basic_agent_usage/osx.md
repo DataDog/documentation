@@ -48,7 +48,7 @@ Tracebacks for errors can be retrieved by setting the -v flag: (since 3.8.0)
 ```
 /usr/local/bin/datadog-agent info -v
 ```
-More information about the metrics, events, and service checks for an integration can be retrieved with the check command:
+More information about the metrics, events, and service checks for an [integrations](/integrations) can be retrieved with the check command:
 ```
 /usr/local/bin/datadog-agent check [integration]
 ```

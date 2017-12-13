@@ -49,11 +49,11 @@ We have improved configuration of the agent and made it much better and easier!
 
 ### DogStatsD Over Sockets
 
-You can now use dogstatsd over a unix socket instead of over udp!
+You can now use [DogStatsD](/developers/dogstatsd) over a unix socket instead of over udp!
 
 ### More Build Options
 
-You can now custom build the agent and dogstatsd much easier and with much more configuration options, to include or exclude almost anything. We even have a “puppy” agent, that’s a truly minimal installation.
+You can now custom build the agent and [DogStatsD](/developers/dogstatsd) much easier and with much more configuration options, to include or exclude almost anything. We even have a “puppy” agent, that’s a truly minimal installation.
 
 ## How do I upgrade?
 

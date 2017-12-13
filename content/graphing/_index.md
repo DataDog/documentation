@@ -14,7 +14,6 @@ There are two ways to interact with the Graphing Editor: using the GUI (the defa
 
 On each graph there is a pencil icon that opens the graph editor.
 
-
 {{< img src="graphing/index/references-graphing-overview.png" alt="Graphing Overview" responsive="true" popup="true" >}}
 
 The graphing editor has three tabs: 
@@ -129,7 +128,7 @@ Just click the Overlay Events button and enter a query to find and display your 
 
 ### Create a title
 
-If you don't enter a title, we automatically generate a title based on the selections you have made. But it may be more useful to the users of the dashboard to create a title that more aptly describes the purpose of the graph. Linking the technical purpose to the business benefits adds even more value.
+If you don't enter a title, we automatically generate a title based on the selections you have made. But it may be more useful to the users of the [dashboard](/graphing/dashboards) to create a title that more aptly describes the purpose of the graph. Linking the technical purpose to the business benefits adds even more value.
 
 ### Save
 

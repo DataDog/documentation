@@ -345,7 +345,7 @@ Here's an example datagram:
     _sc|Redis connection|2|#redis_instance:10.0.0.16:6379|m:Redis connection timed out after 10s
 
 
-## Send metrics and events using dogstatsd and the shell
+## Send metrics and events using DogStatsD and the shell
 
 For Linux and other Unix-like OS, we use Bash.
 For Windows we'll need Powershell and [powershell-statsd](https://github.com/joehack3r/powershell-statsd/blob/master/send-statsd.ps1), a simple Powershell function that takes care of the network bits for us.
