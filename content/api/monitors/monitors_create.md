@@ -105,8 +105,9 @@ order: 8.1
     _These options only apply to metric alerts._
 
     -   `thresholds` a dictionary of thresholds by threshold type. Currently we have two threshold types for metric alerts: critical and warning. Critical is defined in the query, but can also be specified in this option. Warning threshold can only be specified using the thresholds option.
+    If you want to use recovery thresholds for your monitor, use the attributes critical_recovery and warning_recovery.
 
-            Example: `{'critical': 90, 'warning': 80}`
+            Example: `{'critical': 90, 'warning': 80,  'critical_recovery': 70, 'warning_recovery': 50}`
 
     -   `evaluation_delay` Time (in seconds) to delay evaluation, as a non-negative integer. For example, if the value is set to 300 (5min), the timeframe is set to last_5m and the time is 7:00, the monitor evaluates data from 6:50 to 6:55. This is useful for AWS CloudWatch and other backfilled metrics to ensure the monitor always has data during evaluation.
 
