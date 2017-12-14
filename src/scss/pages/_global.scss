@@ -1,7 +1,7 @@
 $ddpurple:    #774DA2;
 
 html {
-  font-size:22px;
+  font-size:18px;
 }
 
 body {
@@ -219,6 +219,12 @@ h2 {
   p + h3,
   p + h4 {
     padding-top:11px;
+  }
+
+
+  ul,
+  p {
+    font-size:22px;
   }
 }
 
