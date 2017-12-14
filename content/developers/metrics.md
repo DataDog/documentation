@@ -360,11 +360,11 @@ most queries take by graphing the `95percentile`.
 
 For this toy example, let's say a query time of 1 second is acceptable. Our median query time (graphed in purple) is usually less than 100 milliseconds, which is great. But unfortunately, our 95th percentile (graphed in blue) has large spikes sometimes nearing three seconds, which is unacceptable. This means most of our queries are running just fine, but our worst ones are very bad. If the 95th percentile was close to the median, than we would know that almost all of our queries are performing just fine.
 
-<p class="alert alert-warning">
+<div class="alert alert-warning">
 Histograms aren't just for measuring times. They can be used to measure the
 distribution of any type of value, like the size of uploaded files or classroom
 test scores.
-</p>
+</div>
 
 ## Service Checks
 

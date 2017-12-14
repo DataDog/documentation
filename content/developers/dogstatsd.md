@@ -316,8 +316,7 @@ Here are some example datagrams:
 - `|p:priority` (optional) — Set to 'normal' or 'low'. Default 'normal'.
 - `|s:source_type_name` (optional) - Add a source type to the event. No default.
 - `|t:alert_type` (optional) — Set to 'error', 'warning', 'info' or 'success'. Default 'info'.
-- `|#tag1:value1,tag2,tag3:value3...` (optional)— <strong><em><br/>
-  The colon in tags is part of the tag list string and has no parsing purpose like for the other parameters.</em></strong> No default.
+- `|#tag1:value1,tag2,tag3:value3...` (optional)— ***The colon in tags is part of the tag list string and has no parsing purpose like for the other parameters.*** No default.
 
 Here are some example datagrams:
 
@@ -336,8 +335,8 @@ Here are some example datagrams:
 - `status` — Integer corresponding to the check status (OK = 0, WARNING = 1, CRITICAL = 2, UNKNOWN = 3).
 - `d:timestamp` (optional) — Add a timestamp to the check. Default is the current Unix epoch timestamp.
 - `h:hostname` (optional) — Add a hostname to the event. No default.
-- `#tag1:value1,tag2,tag3:value3,...` (optional) — <strong><em><br />The colon in tags is part of the tag list string and has no parsing purpose like for the other parameters.</em></strong> No default.
-- `m:service_check_message` (optional) — Add a message describing the current state of the service check. <em>This field MUST be positioned last among the metadata fields.</em> No default.
+- `#tag1:value1,tag2,tag3:value3,...` (optional) — ***The colon in tags is part of the tag list string and has no parsing purpose like for the other parameters.***No default.
+- `m:service_check_message` (optional) — Add a message describing the current state of the service check. *This field MUST be positioned last among the metadata fields.* No default.
 
 Here's an example datagram:
 

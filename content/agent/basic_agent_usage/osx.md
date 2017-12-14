@@ -16,7 +16,7 @@ aliases:
 
 This page outlines the basic functionality of the Datadog Agent.
 If you haven't installed the Agent yet, instructions can be found
-[here](https://app.datadoghq.com/account/settings#agent/mac).<br/>
+[here](https://app.datadoghq.com/account/settings#agent/mac).  
 
 By default, your Agent is installed in its own sandbox located at `/opt/datadog-agent`. You’re free to move this folder wherever you like.
 However, we assume that the Agent is installed in its default location, so be sure to modify the instructions accordingly if you decide to move it to another location.

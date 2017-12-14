@@ -7,12 +7,9 @@ aliases:
 ---
 ## Overview
 
-This page outlines the basic functionality of the Datadog Agent.
-If you haven't installed the Agent yet, instructions can be found
-[here](https://app.datadoghq.com/account/settings#agent/source).<br/>
+This page outlines the basic functionality of the Datadog Agent. If you haven't installed the Agent yet, instructions can be found [here](https://app.datadoghq.com/account/settings#agent/source). 
 
-By default, your Agent is installed in its own sandbox at `'~/.datadog-agent'`.
-You're free to move this folder wherever you like. However, this article assumes that the Agent is installed in its default location, so be sure to modify the instructions accordingly if you decide to move them.
+By default, your Agent is installed in its own sandbox at `~/.datadog-agent`. You're free to move this folder wherever you like. However, this article assumes that the Agent is installed in its default location, so be sure to modify the instructions accordingly if you decide to move them.
 
 ## Starting and Stopping the Agent
 
@@ -22,13 +19,13 @@ To manually start the Agent:
 sudo ~/.datadog-agent/bin/agent start
 ```
 
-To stop the Agent: <br/>
+To stop the Agent: 
 
 ```shell
 sudo ~/.datadog-agent/bin/agent stop
 ```
 
-To restart the Agent: <br/>
+To restart the Agent:  
 
 ```shell
 sudo ~/.datadog-agent/bin/agent restart
@@ -48,7 +45,7 @@ To receive more information about the Agent's state:
 sudo ~/.datadog-agent/bin/info
 ```
 
-Tracebacks for errors can be retrieved by setting the `-v` flag: <em>(since 3.8.0)</em>
+Tracebacks for errors can be retrieved by setting the `-v` flag: *(since 3.8.0)*
 
 ```shell
 sudo ~/.datadog-agent/bin/info -v
