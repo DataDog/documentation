@@ -63,8 +63,6 @@ The log list shows which logs your pipeline applies to:
 
 ### Integration Pipelines
 
-Integration pipelines are automatically installed when you activate an [integration](https://app.datadoghq.com/account/settings).
-
 These pipelines are read-only, but you can clone them and then edit the clone:
 
 {{< img src="logs/processing/cloning_pipeline.png" alt="Cloning pipeline" responsive="true" popup="true">}}

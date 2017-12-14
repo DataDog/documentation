@@ -75,7 +75,7 @@ Check the content of the `your-appname-info.log` file to see that Winston alread
 
 ## Configure your Datadog agent
 
-Create a `nodejs.yaml` file in your `conf.d/` folder with the following content:
+Create a `nodejs.d/conf.yaml` file in your `conf.d/` folder with the following content:
 
 ```yaml
 init_config:

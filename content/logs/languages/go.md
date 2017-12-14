@@ -73,7 +73,7 @@ func main() {
 
 ## Configure your Datadog agent
 
-Create a `go.yaml` file in your `conf.d/` folder with the following content:
+Create a `go.d/conf.yaml` file in your `conf.d/` folder with the following content:
 
 ```yaml
 init_config:

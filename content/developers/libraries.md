@@ -9,7 +9,7 @@ disable_toc: true
 
 ## API and DogStatsD Client Libraries
 
-The following table lists Datadog-official and community contributed API and DogStatsD client libraries. A few libraries support both the API and DogStatsD, but most focus on one or the other.
+The following table lists Datadog-official and community contributed API and [DogStatsD](/developers/dogstatsd) client libraries. A few libraries support both the API and DogStatsD, but most focus on one or the other.
 
 {{< classic-libraries-table >}}
 
@@ -25,7 +25,7 @@ The following table lists Datadog-official and community contributed [Trace](/tr
 In addition to the official Ansible integration, the [monitoring section][46] of the [ansible-modules-extras][47] repository contains modules that interact with Datadog.
 
 ### Consul
-Publish consul service counts into Datadog via dogstatsd with [this library][96].
+Publish consul service counts into Datadog via [DogStatsD](/developers/dogstatsd) with [this library][96].
 
 ### Dogscaler
 Scale up auto-scale groups based on the results of a datadog query with [Dogscaler][97].
@@ -34,7 +34,7 @@ Scale up auto-scale groups based on the results of a datadog query with [Dogscal
 This [plugin][101] sends any Dynatrace measure from a chart to Datadog.
 
 ### FreeSwitch
-This is for a [FreeSwitch ESL ][48] application to export statistics to DataDog using the dogstatsd API and is written by [WiMacTel][49].
+This is for a [FreeSwitch ESL ][48] application to export statistics to DataDog using the DogStatsD API and is written by [WiMacTel][49].
 
 ### Google Analytics
 You can get data into Datadog from Google Analytics using our API with [this library][101] from [Bithaus][102] or [this library][50].
@@ -45,7 +45,7 @@ You can get data into Datadog from Google Analytics using our API with [this lib
 
 ### NGINX LUA
   * Emit [custom metrics](/getting_started/custom_metrics/) directly from NGINX configurations using the [nginx_lua_datadog][72] module in your LUA scripts.
-  * [lua-resty-dogstatsd][79] is an extension developed by  [mediba inc][80], which enables emiting metrics, events, and service checks to DogStatsD protocol. lua-resty-dogstatsd is released as GPLv3 and relies on the nginx cosocket API.
+  * [lua-resty-dogstatsd][79] is an extension developed by  [mediba inc][80], which enables emiting metrics, events, and service checks to [DogStatsD](/developers/dogstatsd) protocol. lua-resty-dogstatsd is released as GPLv3 and relies on the nginx cosocket API.
 
 ### Moogsoft
 A Moogsoft [listener][102] that ingests Datadog notifications.

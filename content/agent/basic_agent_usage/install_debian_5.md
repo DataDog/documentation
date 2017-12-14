@@ -7,7 +7,8 @@ aliases:
 
 ## One-Step
 
-The Agent can be installed on Debian Lenny (5.0) using our one-step install command: <br/>
+The Agent can be installed on Debian Lenny (5.0) using our one-step install command:
+
 ```bash
 DD_API_KEY=your_api_key bash -c "$(wget -qO- http://dtdg.co/agent-install-debian)"
 ```

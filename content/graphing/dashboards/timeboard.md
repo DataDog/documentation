@@ -4,6 +4,7 @@ kind: documentation
 autotocdepth: 3
 customnav: graphingnav
 ---
+
 ## Change Timeboard name
 
 1. Click on the info icon on the top right corner of the Timeboard:

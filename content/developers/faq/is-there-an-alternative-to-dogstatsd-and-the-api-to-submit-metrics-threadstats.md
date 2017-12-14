@@ -1,5 +1,5 @@
 ---
-title: Is there an alternative to dogstatsd and the api to submit metrics? Threadstats.
+title: Is there an alternative to DogStatsD and the api to submit metrics? Threadstats.
 kind: faq
 customnav: developersnav
 ---
@@ -10,7 +10,7 @@ Threadstats comes with our Python [datadogpy library](https://github.com/DataDo
 
 1. api, a python wrapper around [our api](/api)
 2. dogshell, that makes it possible to make direct and simple api calls with "dog" shell commands as soon as you have installed datadogpy on your machine
-3. dogstatsd, a client to send metrics and events to the dogstatsd server embedded with the datadog-agent, it's the most efficient way to submit many metrics
+3. DogStatsD, a client to send metrics and events to the [DogStatsD server](/developers/dogstatsd) embedded with the datadog-agent, it's the most efficient way to submit many metrics
 4. threadstats, an excellent compromise between the simplicity of direct api calls and the performance of statsd + datadog-agent combination
 
 ## Threadstats
@@ -30,9 +30,9 @@ To get started with Threadstats:
 
 Threadstats is good for you if...
 
-1. you want asynchronous monitoring or perfomance close to dogstatsd to submit many metrics and
+1. you want asynchronous monitoring or perfomance close to DogStatsD to submit many metrics and
 2. you don't want to install the datadog-agent
-3. or you want more flexibility than dogstatsd has to offer, for instance, send metrics with timestamps
+3. or you want more flexibility than DogStatsD has to offer, for instance, send metrics with timestamps
 
 ## References
 
