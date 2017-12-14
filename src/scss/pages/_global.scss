@@ -1,7 +1,7 @@
 $ddpurple:    #774DA2;
 
 html {
-  font-size:24px;
+  font-size:22px;
 }
 
 body {
@@ -140,7 +140,7 @@ code {
 
 p {
   // todo: can i set this with a bootstrap variable?
-  font-size:24px;
+  font-size:22px;
   color:#000;
   line-height:30px;
 }
@@ -317,16 +317,19 @@ h2 {
     }
   }
 }
-// expand tables
-.table-wide {
-  width:130%;
-  background:#fff;
-  position:relative;
-  display: block;
-  overflow-x: auto;
-  overflow-y:hidden;
-  table {
-    display:table;
+
+// Tables
+table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 31px;
+  border: 1px solid #ededed;
+  font-size: 16px;
+  a {
+    border-bottom: 1px solid #c8c8c8;
+    &:hover {
+      border-bottom: 1px solid $ddpurple;
+    }
   }
   &:before {
     height: 26px;
@@ -349,6 +352,29 @@ h2 {
     position: absolute;
     right: 0;
     opacity: .85;
+  }
+}
+table > thead > tr > th {
+  vertical-align: bottom;
+  background: #ededed;
+  border: none;
+  font-size: 18px;
+  color: #555;
+}
+table > tbody tr:nth-child(2n) {
+  background: #fafafa;
+}
+
+// expand tables
+.table-wide {
+  width:130%;
+  background:#fff;
+  position:relative;
+  display: block;
+  overflow-x: auto;
+  overflow-y:hidden;
+  table {
+    display:table;
   }
 }
 
