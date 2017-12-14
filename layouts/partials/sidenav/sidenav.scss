@@ -138,14 +138,14 @@ aside.sidenav {
           margin-right: 10px;
           display:block;
           &:hover {
-            background:$ddpurple;
-            color: #fff;
+            background:rgba(120,71,166,.15);
+            color: $ddpurple;
             border-radius:4px;
           }
           &.active {
-            background:$ddpurple;
+            background:rgba(120,71,166,.15);
             border-radius:4px;
-            color: #fff;
+            color: $ddpurple;
             font-weight:600;
           }
           .hover {
