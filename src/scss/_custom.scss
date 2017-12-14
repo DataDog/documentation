@@ -146,6 +146,10 @@ $headings-font-weight:600;
   @include button-size($input-btn-padding-y-sm, $input-btn-padding-x-sm, 16px, $line-height-sm, $btn-border-radius-sm);
 }
 
+.btn {
+  font-size:20px;
+}
+
 //white badge should have black border
 .badge-white {
   border: 1px solid #000;
