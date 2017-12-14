@@ -75,7 +75,7 @@ The following snippet illustrates a `Dockerrun.aws.json` declaring the Datadog a
               "value": "simple-tag-0, tag-key-1:tag-value-1"
             }
       ],
-      "memory": 128,
+      "memory": 256,
       "mountPoints": [
         {
           "sourceVolume": "docker_sock",
