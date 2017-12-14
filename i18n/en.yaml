@@ -334,8 +334,8 @@
 - id: customnav_accountmanagementnav_saml
   translation: SSO with SAML
 
-- id: customnav_accountmanagementnav_multi_account
-  translation: Multi-account organizations
+- id: customnav_accountmanagementnav_multi_organization
+  translation: Multi-org accounts
 
 - id: customnav_accountmanagementnav_faq
   translation: FAQ

@@ -1,7 +1,7 @@
 ---
 title: Get All Embeds
 type: apicontent
-order: 18.1
+order: 19.1
 ---
 
 ## Get All Embeds

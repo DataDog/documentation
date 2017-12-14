@@ -1,7 +1,7 @@
 ---
 title: Get Specific Embed
 type: apicontent
-order: 18.3
+order: 19.3
 ---
 
 ## Get Specific Embed

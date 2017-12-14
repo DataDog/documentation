@@ -33,7 +33,7 @@ If you are an organization administrator, reference the additional documentation
 * [Manage team members](/account_management/team)
 * [Configure single sign on with SAML](/account_management/saml)
 * [Rename your organization](/account_management/??)
-* [Manage multi-account organizations](/account_management/multi_account)
+* [Manage multi-organization accounts](/account_management/multi_organization)
 * [Change your Datadog plan and view usage and billing history](/account_management/plan_usage_billing)
 
 ### Connecting to Github

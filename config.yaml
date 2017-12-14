@@ -544,9 +544,9 @@ languages:
           url: "/account_management/saml/"
           weight: 50
           parent: menu_references_account_management
-        - identifier: customnav_accountmanagementnav_multi_account
-          name: "Multi-account organizations"
-          url: "/account_management/multi_account/"
+        - identifier: customnav_accountmanagementnav_multi_organization
+          name: "Multi-org accounts"
+          url: "/account_management/multi_organization/"
           weight: 60
           parent: menu_references_account_management
         #- identifier: customnav_accountmanagementnav_faq

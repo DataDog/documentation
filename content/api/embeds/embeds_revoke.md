@@ -1,7 +1,7 @@
 ---
 title: Revoke Embed
 type: apicontent
-order: 18.5
+order: 19.5
 ---
 
 ## Revoke Embed

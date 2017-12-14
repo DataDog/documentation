@@ -1,7 +1,7 @@
 ---
 title: Embeddable Graphs
 type: apicontent
-order: 18
+order: 19
 ---
 ## Embeddable Graphs
 You can interact with embeddable graphs through the API.
