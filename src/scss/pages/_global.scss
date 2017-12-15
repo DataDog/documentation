@@ -324,7 +324,7 @@ h2 {
 }
 
 // Tables
-table {
+table, .table {
   width: 100%;
   max-width: 100%;
   margin-bottom: 31px;
@@ -358,16 +358,20 @@ table {
     right: 0;
     opacity: .85;
   }
-}
-table > thead > tr > th {
-  vertical-align: bottom;
-  background: #ededed;
-  border: none;
-  font-size: 18px;
-  color: #555;
-}
-table > tbody tr:nth-child(2n) {
-  background: #fafafa;
+
+  & > thead > tr > th {
+    vertical-align: bottom;
+    background: #ededed;
+    border: none;
+    font-size: 18px;
+    color: #555;
+  }
+  tr:first-child td {
+    border:none;
+  }
+  & > tbody tr:nth-child(2n) {
+    background: #fafafa;
+  }
 }
 
 // expand tables
