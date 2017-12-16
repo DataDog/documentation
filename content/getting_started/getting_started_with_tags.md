@@ -1,5 +1,5 @@
 ---
-title: Getting started with Tags
+title: Getting started with tags
 kind: documentation
 customnav: gettingstartednav
 ---

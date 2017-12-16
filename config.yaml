@@ -35,7 +35,7 @@ languages:
           weight: 30
         # Getting Started - Subnav start
         - identifier: customnav_getting_started_tags
-          name: "Getting started with Tags"
+          name: "Getting started with tags"
           url: "/getting_started/getting_started_with_tags/"
           weight: 310
           parent: menu_references_getting_started
