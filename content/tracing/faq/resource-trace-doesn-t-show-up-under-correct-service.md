@@ -7,7 +7,8 @@ customnav: tracingnav
 
 When using a custom instrumentation of your application, if you notice any Resources/Traces in the Datadog UI that aren’t coupled the Service you expect, the most likely scenario is explained below.
 
-A Resource is connected to a Service by more than the Service Name - it is also done via the Name of the top-level span of the trace. This means that a Service requires a top level name to be consistent across your resources. You can see this in the following image in the address bar:
+A Resource is connected to a Service by more than the Service Name - it is also done via the Name of the top-level span of the trace. This means that a Service requires a top level name to be consistent across your resources.  
+See this in the following image in the address bar:
 
 {{< img src="tracing/faq/APM_service_name.png" alt="APM Service Name" responsive="true" popup="true">}}
 

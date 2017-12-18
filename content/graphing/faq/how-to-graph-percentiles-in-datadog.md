@@ -18,7 +18,7 @@ Out of your histogram data you'll get: 95th percentile, 50th percentile, avg, ma
 
 ### Additional percentiles
 
-Via the "histogram_percentiles" line of the configuration file of the agent, you can get extra percentiles, e.g.:
+Via the "histogram_percentiles" line of the configuration file of the agent, get extra percentiles, e.g.:
 
 histogram_percentiles: 0.95, 0.75
 

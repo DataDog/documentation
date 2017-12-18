@@ -51,7 +51,7 @@ Note: Access can be controlled through Datadog by inviting only specific users
 Review the trust to ensure the appropriate endpoint is configured and click Next.
 {{< img src="account_management/faq/xex71aV.png" alt="xex71aV" responsive="true" popup="true">}}
 
-Finish by clicking Close. This saves the trust definition and open the claims window where you can add a couple of recommended Claim Rules.
+Finish by clicking Close. This saves the trust definition and open the claims window where you may add a couple of recommended Claim Rules.
 
 {{< img src="account_management/faq/5NkUanW.png" alt="5NkUanW" responsive="true" popup="true">}}
 

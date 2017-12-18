@@ -5,7 +5,7 @@ autotocdepth: 2
 customnav: graphingnav
 ---
 
-You can use widgets through the [Screenboard API](/api/#screenboards):
+Use widgets through the [Screenboard API](/api/#screenboards):
 For [create](/api/#create-a-screenboard)/[read](/api/#get-a-screenboard)/[update](/api/#update-a-screenboard) endpoints, the body is one JSON payload describing the Screenboard widgets: 
 
 Base Payload :

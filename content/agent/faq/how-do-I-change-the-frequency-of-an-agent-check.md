@@ -19,7 +19,7 @@ For example, if you need to run an http check every 60 seconds rather than the 
 min_collection_interval: 60
 ```
 
-You can add this parameter at the **init_config** level or at the **instance** level.
+Add this parameter at the **init_config** level or at the **instance** level.
 
 Note: the agent runs every 15 seconds and this parameter makes the agent not collect new instance data unless data was collected for the same instance more than `min_collection_interval` seconds ago. This only works for values > 15, it's not possible to have the agent collect data more frequently this way.
 

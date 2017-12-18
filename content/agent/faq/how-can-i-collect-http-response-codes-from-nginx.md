@@ -52,7 +52,8 @@ The dd-agent user may be unable to read the log file. You need to add the dd-ag
 ```
 $ sudo usermod -a -G adm dd-agent
 ```
-You can check that the dd-agent user has access now.
+
+Check that the dd-agent user has access now.
 ```
 $ ls -al /var/log/nginx/access.log
  -rw-r--r-- 1 root root 1044 Oct 22 15:24 /var/log/nginx/access.log
@@ -82,7 +83,7 @@ Everything looks good, so let's generate some HTTP requests using the curl comma
 
 ## Visualizing metrics
 
-As you can see from the code, the parser generates a `nginx.net.avg_response` gauge metric for each request. Let's make sure that the metric was received by Datadog, by browsing the [Metric Summary](https://app.datadoghq.com/metric/summary) page:
+As you see from the code, the parser generates a `nginx.net.avg_response` gauge metric for each request. Let's make sure that the metric was received by Datadog, by browsing the [Metric Summary](https://app.datadoghq.com/metric/summary) page:
 {{< img src="agent/faq/metric_summary_page_nginx.png" alt="Metric summary Page" responsive="true" popup="true">}}
 
 We can now plot the metric in Metric Explorer:

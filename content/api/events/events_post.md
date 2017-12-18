@@ -5,7 +5,7 @@ order: 6.1
 ---
 
 ## Post An Event
-This end point allows you to post events to the stream. You can tag them, set priority and event aggregate them with other events.
+This end point allows you to post events to the stream. Tag them, set priority and event aggregate them with other events.
 
 ##### ARGUMENTS
 * `title` [*required*]:  

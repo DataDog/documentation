@@ -62,23 +62,23 @@ And the network tcp6 information:
 [...]
 ```
 
-Then, you can update your `kubernetes.yaml` on [these following lines](https://github.com/DataDog/integrations-core/blob/master/kubernetes/conf.yaml.example#L108-L109) with :
+Then, update your `kubernetes.yaml` on [these following lines](https://github.com/DataDog/integrations-core/blob/master/kubernetes/conf.yaml.example#L108-L109) with :
 
 {{< img src="agent/faq/additional_lines.png" alt="Additional Lines" responsive="true" popup="true">}}
 
-Quick tip, as per the original Kubernetes article, you can use the configmaps to configure your integration on the go, thus, you can use the following configmap and daemonset description.
+Quick tip, as per the original Kubernetes article, use the configmaps to configure your integration on the go, thus, use the following configmap and daemonset description.
 
-And as you spin up the daemonset and the configmap, you can see the metrics starting to populate UI :
+And as you spin up the daemonset and the configmap, see the metrics starting to populate UI :
 
 {{< img src="agent/faq/metric_in_ui.gif" alt="Metric UI" responsive="true" popup="true">}}
 
 ## Events
 
-You can collect events from the Kubernetes API, by simply enabling [this option](https://github.com/DataDog/integrations-core/blob/master/kubernetes/conf.yaml.example#L78):
+Collect events from the Kubernetes API, by simply enabling [this option](https://github.com/DataDog/integrations-core/blob/master/kubernetes/conf.yaml.example#L78):
 
 It is important to note that this option has to be enabled on only 1 agent across the whole cluster, to avoid duplicates.
 
-You can also use the environment variable KUBERNETES_COLLECT_EVENTS in your Daemoset/Deployment [as follows](https://gist.github.com/CharlyF/754a5033e6ceea701c32bab5b0f19024#file-ddmaster-ds-kubernetes-events-yaml-L28-L29).
+Use the environment variable KUBERNETES_COLLECT_EVENTS in your Daemoset/Deployment [as follows](https://gist.github.com/CharlyF/754a5033e6ceea701c32bab5b0f19024#file-ddmaster-ds-kubernetes-events-yaml-L28-L29).
 
 Since you have to deploy it only on one node, the best approach if you are using a Daemoset is to use the NodeSelectors.
 

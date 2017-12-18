@@ -17,7 +17,7 @@ Your application stack is teeming with unused metadata that's trying to tell a s
 
 Exception thrown; Database queries slowing; Cache misses rising; Upstream service flapping; Error log growing. Each of these chatters a part of the story, but they're hard to make sense of—or act on meaningfully—when taken separately from the others.  
 
-Datadog lets you collect all these metrics, events, and service states in one place. Then, you can visualize and correlate the data with beautiful graphing and set flexible alerting conditions on it—all without running any storage or monitoring infrastructure yourself.
+Datadog lets you collect all these metrics, events, and service states in one place. Then, visualize and correlate the data with beautiful graphing and set flexible alerting conditions on it—all without running any storage or monitoring infrastructure yourself.
 
 ## Collect Everything
 
@@ -36,7 +36,7 @@ Before long, you'll create custom [Screenboards](/graphing/dashboards/screenboar
 
 ## Monitor It
 
-Once your graphs have exposed problem areas, set some alerting conditions on your metrics using [Monitors](/monitors). You'll [get emails](/monitors/notifications) when the alerts fire, but you can also have them sent to Slack, HipChat, and other channels like these.
+Once your graphs have exposed problem areas, set some alerting conditions on your metrics using [Monitors](/monitors). You'll [get emails](/monitors/notifications) when the alerts fire, but set up the [Slack](/integrations/slack) or [HipChat](/integrations/hipchat)  integration to get a dedicated notifications.
 
 When you're well aware of an ongoing problem, [silence its alerts](/monitors/downtimes). When you're about to bring a service down for maintenance, [schedule a downtime](/monitors/downtimes/) so you won't get spammed with alerts. When you can't define some alert-worthy condition in terms of a single host, event, metric, or service, create a [composite monitor](/monitors/monitor_types/composite/).
 

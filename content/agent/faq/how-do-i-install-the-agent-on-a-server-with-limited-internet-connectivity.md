@@ -19,7 +19,7 @@ For servers with limited outbound Internet connectivity, the agent can be instal
 
 {{< img src="agent/faq/install_agent.gif" alt="Install Agent" responsive="true" popup="true">}}
 
-If the target system is blocked from accessing the package repository directly, you can download the package from the repository using another server then transfer it over to the target system for a local install.
+If the target system is blocked from accessing the package repository directly, download the package from the repository using another server then transfer it over to the target system for a local install.
 
 The example below shows a user copying the [URL to the rpm package](https://yum.datadoghq.com/rpm/x86_64/) for the latest version of the agent :
 
