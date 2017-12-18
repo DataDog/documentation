@@ -80,7 +80,6 @@ It would be easy to pivot by ECS `ecs_task_name` and `ecs_task_version` and unde
 
 {{< img src="graphing/infrastructure/livecontainers/tasksxversion.png" alt="Tasks x version" responsive="true" popup="true">}}
 
-
 ## Real-time monitoring
 
 While actively working with the Containers page, metrics are collected at 2s resolution.  This is very important for highly volatile metrics such as CPU.  In the background, for historical context, metrics are collected at 10s resolution.

@@ -32,7 +32,6 @@ If an integration does not support logs by default, you may need to use the cust
 During the beta phase of Datadog Logs, not all integrations include log configurations out of the box. A current list of supported integrations is available below.
 </div>
 
-
 ### Cloud
 * [AWS](/logs/aws)
 
@@ -56,7 +55,6 @@ During the beta phase of Datadog Logs, not all integrations include log configur
 ## Custom log collection
 
 The Datadog Agent can collect logs from files or the network (TCP or UDP) and forward them to Datadog. To configure this, create a new repository and yaml file named after your log source  in the Agent's **conf.d** directory ( `conf.d/python.d/conf.yaml` for python logs, ...) and set these options:
-
 
 * `type` : (mandatory) type of log input source (**tcp** / **udp** / **file**)
 * `port` / `path` : (mandatory) Set `port` if `type` is **tcp** or **udp**. Set `path` if `type` is **file**.
@@ -117,7 +115,6 @@ logs:
 
 ```
 * [Restart your agent](https://help.datadoghq.com/hc/en-us/articles/203764515-Start-Stop-Restart-the-Datadog-Agent)
-
 
 ### Docker log collection
 

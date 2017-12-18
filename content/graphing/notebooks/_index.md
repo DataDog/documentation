@@ -62,7 +62,6 @@ A time indicator appears in the top-right corner of each graph cell. If the cell
 To unlock a cell from global time, click this time indicator.
 {{< img src="graphing/notebooks/timerange.png" alt="timerange" responsive="true" popup="true">}}
 
-
 Note that clicking and dragging to zoom in on a graph does not unlock that cell from global time. It changes the notebook’s global time frame instead.
 
 ### Splitting by tag and other graph options
@@ -70,7 +69,6 @@ Note that clicking and dragging to zoom in on a graph does not unlock that cell 
 To split a graph by tag, change a graph’s size or toggle the visibility of a graph legend, click the  icon at the right edge of the cell.
 Legends are disabled automatically when the graph size has been set to XS or S. Changing these settings affects only the target cell; the layout of other graph cells is unaffected.
 {{< img src="graphing/notebooks/options.png" alt="options" responsive="true" popup="true">}}
-
 
 ### Linking to individual cells
 

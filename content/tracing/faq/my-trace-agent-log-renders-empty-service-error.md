@@ -41,4 +41,3 @@ It's time to contact [us](/help)! 
 
 Send us your flare, and details about the language / library you're using, and a snippet of your code instrumentation. 
 
-

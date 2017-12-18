@@ -25,7 +25,6 @@ There are 2 main scenarios for which you'll likely need to **require a full win
 * Datadog monitors are evaluated every minute, so 50% of the time, the monitor sees 2 values over the past 5 minutes (monitor value 4). The other 50% of the time, 3 values are seen (monitor value 6).
 * Without requiring a full window of data, even with constant data, the monitor sees compares different values over time against the threshold you set up.
 
-
 **Disable** the full window of data in 2 main scenarios, they correspond to sparse metrics :
 
 * Metric not sent at a regular interval

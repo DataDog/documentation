@@ -24,7 +24,6 @@ It has a decrease Memory usage:
 It uses fewer File Descriptors:
 {{< img src="agent/faq/file_descriptor.png" alt="Dile descriptor" responsive="true" popup="true">}}
 
-
 It has an all around decreased footprint.
 
 ### Better Windows Support

@@ -32,7 +32,6 @@ Once you've revoked your keys, update the `datadog.conf` file on each of your ag
     * Windows: Restart the Datadog Service
     * Other OS's [reference this link](/agent/faq/start-stop-restart-the-datadog-agent)
 
-
 If you're using a configuration management tool such as Chef, Puppet or Ansible we suggest following the instructions [found here](https://app.datadoghq.com/account/settings#agent) for setting the API keys. If you need additional assistance reach out to [us](/help).
  
 {{< partial name="whats-next/whats-next.html" >}}

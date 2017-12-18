@@ -216,7 +216,6 @@ Class TestMyIntegration(AgentCheckTest):
 
 For more information about tests and available test methods, reference the [AgentCheckTest class in the Datadog Agent repository][7]
 
-
 ## Libraries
 
 The [Datadog Agent][8] provides a number of useful libraries in the [`utils` directory][9]. These libraries can be helpful when building your integration and we encourage you to use them, but be aware that these libraries are moved in the upcoming Datadog Agent version 6.0.

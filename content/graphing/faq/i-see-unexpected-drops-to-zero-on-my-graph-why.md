@@ -6,7 +6,6 @@ customnav: graphingnav
 
 With stacked series ("Graph theses queries as a; b") or grouped queries ("avg by host"), you'll have several metric lines on the same graph and you may occasionally see some graph lines dropping back to 0:
 
-
 {{< img src="graphing/faq/drop_to_zero.png" alt="drop to zero" responsive="true" popup="true">}}
 
 You can see from the graph legend "N/A" (or by graphing the serie alone in a graph) that there is actually no data at these times.

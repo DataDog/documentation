@@ -22,7 +22,6 @@ Below the command that works on Unix systems to display the files ownership info
 ```
 ls -l /var/log/datadog/
 
-
 total 52300
 -rw-r--r-- 1 dd-agent dd-agent 5742334 Jul 31 11:49 collector.log
 -rw-r--r-- 1 dd-agent dd-agent 10485467 Jul 28 02:45 collector.log.1

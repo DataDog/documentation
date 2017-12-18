@@ -37,7 +37,6 @@ Latest Event:
 
 {{< img src="developers/faq/latest_event.png" alt="latest_event" responsive="true" popup="true">}}
 
-
 You can use also use Email Templates:
 
 ```json

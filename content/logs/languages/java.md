@@ -31,7 +31,6 @@ Exception in thread "main" java.lang.NullPointerException
         at com.example.myproject.Bootstrap.main(Bootstrap.java:14)
 ```
 
-
 By asking your logging library to log into JSON, you will:
 
 * Ensure to have a stack_trace properly wrapped into the proper LogEvent
@@ -58,7 +57,6 @@ Add a new file appender to `log4j.xml`:
   </layout>
 </appender>
 ```
-
 
 ### Log4j2
 Edit your `log4j2.xml` file:

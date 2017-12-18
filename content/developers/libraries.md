@@ -74,7 +74,6 @@ A Winston Datadog [transport][104].
 ### NixOS
   * [dd-agent nixpkg][100]
 
-
 If you've written a Datadog library and would like to add it to this page, write us at [code@datadoghq.com][9].
 
    [1]: https://github.com/DataDog/datadogpy

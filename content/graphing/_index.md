@@ -43,7 +43,6 @@ When you create a graph, you probably have a metric in mind that you want to sho
 
 The Metrics Explorer allows you to play around with different graph settings in a more ad-hoc way. The Metrics Summary allows to learn more about the type of metric as well as setting the default unit for a metric.
 
-
 ### Select your visualization
 
 Once you have a metric in mind to display in your graph, select your visualization.
@@ -96,7 +95,6 @@ The Datadog UI supports the ability to graph your metrics with various arithmeti
 You can modify how a metric value is displayed on a graph by performing an arithmetic operation on the metric. 
 For example, if you would like to visualize the double of a specific metric, say `system.load.5`:
 
-
 {{< img src="graphing/index/arithmetic_1.png" alt="Arithmetic 1" responsive="true" popup="true" >}}
 
 This can be done inside a graph editor by clicking on the Graph Editor and selecting "advanced...". From there you can enter your arithmetic in the `Graph these queries as` box. In this case: a * 2. 
@@ -124,7 +122,6 @@ By default, the Y-axis for your graph is set to linear with the minimum and maxi
 
 You can repeat all the steps above to add additional metrics to your graph to add context. You can also add events from related system to add even more context. So an example would be to add github commits, Jenkins deploys, or Docker creation events.  
 Just click the Overlay Events button and enter a query to find and display your events. To show anything from a source such as Github, use `sources:github`. For all the events with the tag role:web, use `tag:role:web`.
-
 
 ### Create a title
 

@@ -41,7 +41,6 @@ It's recommended that you set up Datadog as an Okta application manually, as opp
 * **Honor Force Authentication**: Yes
 * **SAML Issuer ID**: `http://www.okta.com/<OKTA_ENTITY_ID>`
 
-
 ## Attribute Statements Details
 
 * **NameFormat**: urn:oasis:names:tc:SAML:2.0:attrname-format:uri

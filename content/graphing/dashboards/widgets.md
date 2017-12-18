@@ -134,7 +134,6 @@ The Heatmap visualization is great for showing metrics aggregated across many ta
 
 {{< img src="graphing/miscellaneous/visualization/references-graphing-heatmap-example.png" alt="Heatmap" responsive="true" popup="true">}}
 
-
 ## Distribution
 *Supported on Screenboards and Timeboards*
 
@@ -148,14 +147,12 @@ The Toplist visualization is perfect when you want to see the list of hosts with
 
 {{< img src="graphing/miscellaneous/visualization/references-graphing-toplist-example.png" alt="TopList" responsive="true" popup="true">}}
 
-
 ## Change
 *Supported on Screenboards and Timeboards*
 
 The Change graph shows you the change in a value over the time period chosen.
 
 {{< img src="graphing/miscellaneous/visualization/references-graphing-change-example.png" alt="Change graph" responsive="true" popup="true">}}
-
 
 ## Hostmap
 *Supported on Screenboards and Timeboards*
@@ -293,5 +290,4 @@ The service summary displays the top portion of any APM trace in your Screenboar
 
 Monitor summary is a summary view of all monitors on your system, or a subset based on a query.
 {{< img src="graphing/miscellaneous/visualization/references-graphing-monitorsummary-example.png" alt="Timeseries" responsive="true" popup="true">}}
-
 

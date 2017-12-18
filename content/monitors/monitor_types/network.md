@@ -42,7 +42,6 @@ configuration.
 
 4. Configure your **notification options** Refer to the [Notifications](/monitors/notifications) dedicated documentation page for a detailed walkthrough of the common notification options.
 
-
 ##  Built a network monitor on an http check.
 
 [Once you have created an HTTP check](/integrations/http_check/) with your Datadog Agent, you might want to monitor it on your Datadog application

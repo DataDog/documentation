@@ -104,7 +104,6 @@ For Seasonal: `forecast(metric_name, 'seasonal', 1, interval='60m', seasonality=
 
 The start and end times to specify when using the API are the start and end times of the forecast itself. If you want the forecast for the next day you would specify the start to be `now` and the end to be `1 day ahead`.
 
-
 ### Things to Note
 
 Not all functions may be nested inside of calls to the `forecast()` function. In particular, you may not include any of the following functions in a forecast monitor or dashboard query: `anomalies()`, `cumsum()`, `integral()`, `outliers()`, `piecewise_constant()`, `robust_trend()`, or `trend_line()`

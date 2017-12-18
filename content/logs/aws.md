@@ -101,7 +101,6 @@ Select the log source and then follow the AWS instructions:
 For instance, do not forget to set the correct event type on S3 Buckets:
 {{< img src="logs/aws/object_created.png" alt="Object Created" responsive="true" popup="true">}}
 
-
 ### ELB
 
 Elastic Load Balancing provides access logs that capture detailed information about requests or connections sent to your load balancer. Each log contains information such as the time it was received, the client's IP address, latencies, request paths, and server responses. Use these access logs to analyze traffic patterns and troubleshoot issues.
@@ -144,7 +143,6 @@ CloudFront is a CDN service which speeds up distribution of your static and dyna
 
 CloudFront delivers your content through a worldwide network of data centers called edge locations. When a user requests content that you're serving with CloudFront, the user is routed to the edge location that provides the lowest latency (time delay), so content is delivered with the best possible performance.
 
-
 When you enable logging for a distribution, specify the Amazon S3 bucket that you want CloudFront to store log files in. 
 If you're using Amazon S3 as your origin, we recommend that you do not use the same bucket for your log files; using a separate bucket simplifies maintenance.
 
@@ -166,7 +164,6 @@ You can then collect the log from the s3 bucket thanks to the Lambda function.
 * `s3:GetBucketNotification`: Get existing Lambda trigger configurations.
 * `s3:ListAllMyBuckets`: List all S3 buckets.
 * `s3:PutBucketNotification`: Add or remove a Lambda trigger based on S3 bucket events.
-
 
 ## Further Reading
 

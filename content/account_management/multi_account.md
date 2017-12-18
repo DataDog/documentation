@@ -35,7 +35,6 @@ A new trial account is created. If you wish to add this account to your existing
 1. Go to your [Account Profile page][4].
 2. Scroll down to Organizations and click **Leave** next to the org you want to leave.
 
-
 {{< img src="account_management/multi_account/guides-multacct-leaveorg.png" alt="Leave Org" responsive="true" popup="true">}}
 
 ## Switch between Organization
@@ -47,17 +46,11 @@ Once the menu appears, transition to the other Datadog accounts you're associate
 
 ## Custom domains for each sub-organizations
 
-
 **Email [the Datadog support team](/help) to enable custom sub-domains.**
 
 Custom sub-domains allow for easy differentiation of the source of notifications and easy switching between organizations when logged in as a member of multiple Datadog organizations.
 
 Custom sub-domains can be especially helpful as when an alert link is generated, (https://account-a.datadoghq.com/event/event?id=<id>) it always points to a particular Datadog account, whereas the regular alert link (https://app.datadoghq.com/event/event?id=<id>) only looks for the event in the account the user is currently logged into and may result in an unexpected 404 error.
-
-
-[1]: https://app.datadoghq.com/account/team
-[3]: https://app.datadoghq.com/account/new_org
-[4]: https://app.datadoghq.com/account/profile
 
 ## Organization API
 
@@ -293,3 +286,7 @@ Response:
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/account/team
+[3]: https://app.datadoghq.com/account/new_org
+[4]: https://app.datadoghq.com/account/profile

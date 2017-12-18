@@ -95,7 +95,6 @@ stream. See below for examples of each.
 In the source plain text email, you only have three fields you can control: sender
 email address (required), subject (required), and body (optional).
 
-
 {{< img src="graphing/events/plain-email.png" alt="plain email" responsive="true" popup="true">}}
 
 #### Datadog Event
@@ -172,7 +171,6 @@ Should be encoded to: `http://catchpoint.com/session_id%3A123456`
     * `@hipchat-[room-name]` or `@slack-[room-name]` – posts the event or graph to that chat room.
     * `@webhook` – Alerts or triggers whatever is attached to that webhook. Check out [our blogpost on Webhooks][events-1]!
     * `@pagerduty` – Sends an alert to Pagerduty. You can also use `@pagerduty-acknowledge` and `@pagerduty-resolve`.
-
 
 [events-1]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio
 

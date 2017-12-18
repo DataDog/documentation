@@ -282,7 +282,6 @@ spec:
         - containerPort: 80
 ```
 
-
 ### Template Source: Docker Label Annotations
 
 Since version 5.17 of the Datadog Agent, you can store check templates in Docker labels. With Autodiscovery enabled, the Agent detects if it's running on Docker and automatically searches all labels for check templates; you don't need to configure a template source (i.e. via `SD_CONFIG_BACKEND`) as you do with key-value stores.
@@ -309,7 +308,6 @@ labels:
 -l com.datadoghq.ad.check_names='[<CHECK_NAME>]' -l com.datadoghq.ad.init_configs='[<INIT_CONFIG>]' -l com.datadoghq.ad.instances='[<INSTANCE_CONFIG>]'
 ```
 
-
 #### Docker Example: NGINX Dockerfile
 
 The following Dockerfile launches an NGINX container with Autodiscovery enabled:
@@ -323,7 +321,6 @@ LABEL "com.datadoghq.ad.check_names"='["nginx"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%/nginx_status:%%port%%"}]'
 ```
-
 
 ## Reference
 

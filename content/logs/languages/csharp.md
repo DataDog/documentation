@@ -131,7 +131,6 @@ namespace Datadog
         // Initialize a logger
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
-
         static void Main(string[] args)
         {
 
@@ -231,7 +230,6 @@ If you have followed the instructions you should see in your file (for example `
     "date": "2016-05-24 15:53:35.7175"
 }
 ```
-
 
 ## Configure your Datadog agent
 

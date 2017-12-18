@@ -83,7 +83,6 @@ The following [integrations](/integrations) sources create tags automatically in
 | [Win32 Events](/integrations/wmi)                                     | Event ID|
 | [Windows Services](/integrations/winservices)                         | Service Name|
 
-
 ### Assigning tags using the configuration files
 [The Datadog integrations](/integrations) are all configured via the yaml configuration files located in the **conf.d** directory in your agent install. For more about where to look for your configuration files, refer [to this article][agentinstall].
 
@@ -116,7 +115,6 @@ The reason why you should use key value pairs instead of simply values becomes a
 ### Assigning host tags in the UI
 
 You can also assign tags to hosts, but not to [integration](/integrations) in the UI. To assign tags in the UI, start by going to the Infrastructure List page. Click on any host and then click the Update Host Tags button. In the host overlay that appears, click Edit Tags and make the changes you wish.
-
 
 ### Assigning host tags using the API
 

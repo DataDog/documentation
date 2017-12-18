@@ -119,7 +119,6 @@ This exception is logged and is shown in the Agent [info command](/agent/faq/age
           - instance #0 [ERROR]: ConnectionError('Connection refused.',)
           - Collected 0 metrics & 0 events
 
-
 ### Logging
 
 As part of the parent class, you're given a logger at `self.log`, so you can do
@@ -167,7 +166,6 @@ configuration options that is available on every run of the check in
 The *instances* section is a list of instances that this check is run
 against. Your actual `check()` method is run once per instance. This means that
 every check supports multiple instances out of the box.
-
 
 ## Directory Structure
 
