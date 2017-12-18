@@ -32,6 +32,12 @@
 - id: menu_references_developers
   translation: "Developers"
 
+- id: menu_references_logs
+  translation: "Logs"
+
+- id: menu_references_examples
+  translation: "Examples"
+
 - id: menu_references_videos
   translation: "Videos"
 
