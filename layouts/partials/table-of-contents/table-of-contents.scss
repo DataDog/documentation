@@ -1,10 +1,15 @@
 $ddpurple:    #774DA2;
 $highlightcolor: rgba(120,71,166,.15);
 
+
+body > header.scrolled ~ .container .mobile-toc-toggle {
+  top:90px;
+}
+
 .mobile-toc-toggle {
   position: fixed;
   right: 20px;
-  bottom: 20px;
+  top: 160px;
   width: 43px;
   height: 43px;
   z-index: 99999;
@@ -34,13 +39,16 @@ $highlightcolor: rgba(120,71,166,.15);
 
 .toc {
   top:100px;
+  padding-top:2px;
   padding-bottom:50px;
   overflow-x:hidden;
   overflow-y:auto;
   z-index:1;
   h5 {
     font-size:18px;
-    font-weight:200;
+    font-weight:600;
+    padding-bottom:5px;
+    color: #000;
   }
   #TableOfContents {
 

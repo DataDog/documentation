@@ -129,6 +129,10 @@ $(document).ready(function () {
                     }
                 }
             }
+
+            var headerHeight = parseInt($('body > header').height());
+            $('.mobile-toc-toggle').css('top', headerHeight + 30 + 'px');
+            $('.toc').css('top', headerHeight + 30 + 'px');
         }).trigger('scroll');
 
 
