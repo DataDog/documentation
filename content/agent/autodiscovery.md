@@ -13,15 +13,15 @@ Autodiscovery was previously called Service Discovery. It's still called Service
 
 Docker is being [adopted rapidly][1]. Orchestration platforms like Docker Swarm, Kubernetes, and Amazon ECS make running Docker-ized services easier and more resilient by managing orchestration and replication across hosts. But all of that makes monitoring more difficult. How can you reliably monitor a service which is unpredictably shifting from one host to another?
 
-The Datadog Agent can automatically track which services are running where, thanks to its Autodiscovery feature. Autodiscovery lets you define configuration templates for Agent checks and specify which containers each check should apply to.  
+The Datadog Agent can automatically track which services are running where, thanks to its Autodiscovery feature. Autodiscovery lets you define configuration templates for Agent checks and specify which containers each check should apply to.
 
 The Agent enables, disables, and regenerates static check configurations from the templates as containers come and go. When your NGINX container moves from 10.0.0.6 to 10.0.0.17, Autodiscovery helps the Agent update its NGINX check configuration with the new IP address so it can keep collecting NGINX metrics without any action on your part.
 
 ## How it Works
 
-In a traditional non-container environment, Datadog Agent configuration is—like the environment in which it runs—static. The Agent reads check configurations from disk when it starts, and as long as it's running, it continuously runs every configured check.  
-The configuration files are static, and any network-related options configured within them serve to identify specific instances of a monitored service (e.g. a Redis instance at 10.0.0.61:6379).  
-When an Agent check cannot connect to such a service, you'll be missing metrics until you troubleshoot the issue. The Agent check retries its failed connection attempts until an administrator revives the monitored service or fixes the check's configuration.  
+In a traditional non-container environment, Datadog Agent configuration is—like the environment in which it runs—static. The Agent reads check configurations from disk when it starts, and as long as it's running, it continuously runs every configured check.
+The configuration files are static, and any network-related options configured within them serve to identify specific instances of a monitored service (e.g. a Redis instance at 10.0.0.61:6379).
+When an Agent check cannot connect to such a service, you'll be missing metrics until you troubleshoot the issue. The Agent check retries its failed connection attempts until an administrator revives the monitored service or fixes the check's configuration.
 
 With Autodiscovery enabled, the Agent runs checks differently.
 
@@ -146,7 +146,7 @@ sd_backend_port: 4001
 
 If you're using Consul and the Consul cluster requires authentication, set `consul_token`.
 
-[Restart the Agent](/agent/faq/start-stop-restart-the-datadog-agent) to effect the configuration change.
+[Restart the Agent](/agent/faq/start-stop-restart-the-datadog-agent) to apply the configuration change.
 
 #### Configure in environment variables
 
@@ -337,7 +337,7 @@ You can also add a network name suffix to the `%%host%%` variable—`%%host_brid
 
 You can identify containers by label rather than container name or image. Just label any container `com.datadoghq.sd.check.id: <SOME_LABEL>`, and then put `<SOME_LABEL>` anywhere you'd normally put a container name or image. For example, if you label a container `com.datadoghq.sd.check.id: special-container`, Autodiscovery applies to that container any auto-conf template that contains `special-container` in its `docker_images` list.
 
-Autodiscovery can only identify each container by label OR image/name—not both—and labels take precedence. For a container that has a `com.datadoghq.ad.check.id: special-nginx` label and runs the `nginx` image, the Agent do NOT apply templates that include only `nginx` as a container identifier.
+Autodiscovery can only identify each container by label OR image/name—not both—and labels take precedence. For a container that has a `com.datadoghq.sd.check.id: special-nginx` label and runs the `nginx` image, the Agent DOESN'T apply templates that include only `nginx` as a container identifier.
 
 ### Template Source Precedence
 

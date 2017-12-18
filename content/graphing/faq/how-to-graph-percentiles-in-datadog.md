@@ -6,7 +6,7 @@ customnav: graphingnav
 
 ## DogStatsD implementation
 
-It's possible to get percentiles in Datadog by submitting data as a histogram metric through dogstatsd. The datadog-agent embeds a dogstatsd server that receives dogstatsd packets, [perform data aggregation](https://github.com/DataDog/dd-agent/blob/master/aggregator.py), and send final percentile metrics to Datadog.
+It's possible to get percentiles in Datadog by submitting data as a histogram metric through dogstatsd. The datadog-agent embeds a [DogStatsD](/developers/dogstatsd) server that receives [DogStatsD](/developers/dogstatsd) packets, [perform data aggregation](https://github.com/DataDog/dd-agent/blob/master/aggregator.py), and send final percentile metrics to Datadog.
 
 Since this aggregation is taken care of on the collection side, this isn't currently available as a graphing function in the GUI.
 
@@ -14,7 +14,7 @@ Out of your histogram data you'll get: 95th percentile, 50th percentile, avg, ma
 
 * A quick [introduction to dogstatsd](/developers/dogstatsd)
 
-* [DogStatsD clients available for each programming language](/libraries/).
+* [DogStatsD clients available for each programming language](/developers/libraries/).
 
 ### Additional percentiles
 

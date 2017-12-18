@@ -25,8 +25,8 @@ As a consequence, we encourage you to tag your metrics with fewer than 1000 tags
 
 ## Billing impact
 
-The number of custom metrics (where a custom metric refers to a single, unique combination of a metric name, host, and any tags) may count towards your billing. We usually offer a soft limit of 100 custom metrics * # hosts monitored via Datadog.
+The number of [custom metrics](/getting_started/custom_metrics/) (where a custom metric refers to a single, unique combination of a metric name, host, and any tags) may count towards your billing. We usually offer a soft limit of `100 custom metrics * # hosts monitored via Datadog.`
 
 ## Any questions?
 
-If you plan on continuing to submit more custom metrics than the billing limit in the future, or if you have any questions, reach out to [us directly](/help)
+If you plan on continuing to submit more [custom metrics](/getting_started/custom_metrics/) than the billing limit in the future, or if you have any questions, reach out to [us directly](/help)

@@ -37,20 +37,6 @@ In the example below, a full text search is performed to find all open chef or N
 
 Note that some of the advanced query language features (e.g. boolean logic) work only in the event stream page, and do not work in graph tiles or in screen board widgets.
 
-### Searching Events Help
-
-Your query runs a full text search of events and their comments. You can also
-target certain event properties, such as the event source or status, by using
-the following search prefixes:
-
-* **`user:`**`pup@datadoghq.com` Find all events with comments by `pup@datadoghq.com`.
-* **`sources:`**`github,chef` Show events from Github and Chef.
-* **`tags:`**`env-prod,db` Show events tagged with #env-prod AND #db.
-* **`hosts:`**`db1.myapp.com,db2.myapp.com` Show events from db1.myapp.com OR db2.myapp.com.
-* **`status:`**`error` Show only error status events. (**supports:** 'error', 'warning', 'success')
-* **`priority:`**`low` Show only low-priority events. (**supports:** 'low' or 'normal'. defaults to 'all')
-* **`incident:`**`claimed` Show only claimed incidents. (**supports:** 'open', 'claimed', 'resolved', or 'all')
-
 Prefixes can easily be combined to make much more complex searches.  For example, if you wanted to find all open chef or nagios errors that mention cassandra, you'd have a search like:
 
 `sources:nagios,chef status:error cassandra`

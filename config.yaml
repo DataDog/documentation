@@ -102,19 +102,19 @@ languages:
           url: "/agent/basic_agent_usage/redhat/"
           weight: 80
           parent: customnav_agentnav_basic_usage
+        - identifier: suse
+          name: "SUSE"
+          url: /agent/basic_agent_usage/suse/
+          weight: 90
+          parent: customnav_agentnav_basic_usage
         - identifier: ubuntu
           name: "Ubuntu"
           url: "/agent/basic_agent_usage/ubuntu/"
-          weight: 90
+          weight: 100
           parent: customnav_agentnav_basic_usage
         - identifier: windows
           name: "Windows"
           url: "/agent/basic_agent_usage/windows/"
-          weight: 100
-          parent: customnav_agentnav_basic_usage
-        - identifier: suse
-          name: "SUSE"
-          url: /agent/basic_agent_usage/suse/
           weight: 110
           parent: customnav_agentnav_basic_usage
         - identifier: source

@@ -231,7 +231,7 @@ If you have followed the instructions you should see in your file (for example `
 
 ## Configure your Datadog agent
 
-Create a `csharp.yaml` file in your `conf.d/` folder with the following content:
+Create a `csharp.d/conf.yaml` file in your `conf.d/` folder with the following content:
 
 ```yaml
 init_config:
@@ -256,9 +256,9 @@ logs:
     sourcecategory: sourcecode
 ```
 
-
 That's it! Now, all your logs are going to be in proper JSON automatically understood by your Datadog application.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+>>>>>>> master
