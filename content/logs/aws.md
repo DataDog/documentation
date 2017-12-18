@@ -54,8 +54,8 @@ Your Lambda function is now ready to send logs to the Datadog platform.
 
 There are two ways to configure the triggers that will cause the Lambda to execute and send logs to Datadog. 
 
-* [automatically](#automatically-set-up-triggers): we manage them for you if you grant us a set of [permissions](#permissions)
-* [manually](#manually-set-up-triggers): set up each trigger yourself in the AWS console without giving any permission to Datadog
+* [automatically](#automatically-set-up-triggers): With the right set of [permissions](#permissions), Datadog manages them for you.
+* [manually](#manually-set-up-triggers): set up each trigger yourself in the AWS console.
 
 ### Automatically set up triggers
 If you are storing logs in many S3 buckets, Datadog can automatically manage triggers for you.
@@ -147,7 +147,7 @@ You can then collect the log from the s3 bucket thanks to the Lambda function.
 
 ## Permissions
 
-Required only for automatically setup triggers:
+*Required only for automatic setup*:
 
 * `elasticloadbalancing:DescribeLoadBalancers`: List all load balancers.
 * `elasticloadbalancing:DescribeLoadBalancerAttributes`: Get the name of the S3 bucket containing ELB access logs.
