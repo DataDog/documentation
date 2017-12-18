@@ -129,11 +129,12 @@ $(document).ready(function () {
                     }
                 }
             }
-
-            var headerHeight = parseInt($('body > header').height());
-            $('.mobile-toc-toggle').css('top', headerHeight + 30 + 'px');
-            $('.toc').css('top', headerHeight + 30 + 'px');
         }).trigger('scroll');
+
+        $(document).on( "headerResize", function( event, height) {
+            $('.mobile-toc-toggle').css('top', height + 30 + 'px');
+            $('.toc').css('top', height + 30 + 'px');
+        });
 
 
         buildMap();

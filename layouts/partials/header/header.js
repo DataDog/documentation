@@ -92,9 +92,10 @@ document.addEventListener('DOMContentLoaded', function () {
         if(width > 991) {
             $('body > header').css({'height': newH + 'px'});
             $('body > header .mainnav').css({'height': newH + 'px'});
-
+            $( document ).trigger( "headerResize", [ newH ] );
         } else {
             $('body > header').css({'height': ''});
+            $( document ).trigger( "headerResize", [ parseInt($('body > header').height()) ] );
             $('body > header .mainnav').css({'height': ''});
         }
 
