@@ -52,26 +52,30 @@ languages:
           name: ""
           url: "integrations/"
           weight: 70
+        - identifier: menu_references_logs
+          name: ""
+          url: "logs/"
+          weight: 80
         - identifier: menu_references_dogstatsd
           name: ""
           url: "guides/dogstatsd/"
-          weight: 80
+          weight: 90
         - identifier: menu_references_examples
           name: ""
           url: "examples/"
-          weight: 90
+          weight: 100
         - identifier: menu_references_videos
           name: ""
           url: "videos/"
-          weight: 100
+          weight: 110
         - identifier: menu_references_billing
           name: ""
           url: "guides/billing/"
-          weight: 110
+          weight: 120
         - identifier: menu_references_faq
           name: ""
           url: "faq/"
-          weight: 120
+          weight: 130
           
       basic_agent:
         - identifier: amazonlinux
