@@ -25,7 +25,7 @@ At a high level, the setup for this is as follows:
 * When Alert A resolves, use a different @webhook-notification to remove the downtimes from the same $scope.
 It should be noted that this can impact previously scheduled downtimes if you have an active downtime overlapping with the defined [$scope](/api/#cancel-downtime-by-scope).
 
-First, create the webhooks (link to in-app integration tile [here](https://app.datadoghq.com/account/settings#integrations/webhooks)):
+First, [create the webhooks](https://app.datadoghq.com/account/settings#integrations/webhooks):
 {{< img src="monitors/faq/mute_demo_webhook.png" alt="mute_demo_webhook" responsive="true" popup="true" >}}
 
 Full text for API endpoints (2nd input box for each in the left column):

@@ -69,7 +69,7 @@ You should now see something like what's shown above, with a handful of selectio
 1.  This number is equivalent to the `bounds` parameter used in the `anomalies` function in dashboards; it controls the width of the gray band. We recommend using a value of 2 or 3.
 2.  If you only care about unusually high or unusually low values, you can choose to only alert on values above or below the bounds.
 3.  We recommend using a window size of at least 15 minutes. (A 30 minute window works well in most cases.)
-4.  You can change the anomaly detection algorithm used [here](/#anomaly-detetion-algorithms).
+4.  [Change the anomaly detection algorithm used](/#anomaly-detetion-algorithms).
 
 Complete all steps in the New Monitor form (**Say what's happening**, etc) and click **Save** to create the Anomaly monitor.
 

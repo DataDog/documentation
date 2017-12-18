@@ -14,7 +14,7 @@ This article walks you through how to use [Postman](https://www.getpostman.com/)
 
 * You have an active Datadog implementation
 * You have admin access and can access the API Key and Application Key (your keys can be found on the API Key page) 
-* You have the Postman API client installed (free download [here](https://www.getpostman.com/))
+* You have the [Postman API client installed](https://www.getpostman.com/)
 * You have some basic knowledge of API structure and JSON formatting
 
 ## Getting Started

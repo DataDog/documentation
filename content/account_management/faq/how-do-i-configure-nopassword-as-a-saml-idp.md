@@ -11,6 +11,6 @@ further_reading:
   text: Configuring Teams & Organizations with Multiple Accounts
 ---
 
-The NoPassword team has written up instructions for configuring this [here](https://help.nopassword.com/portfolio-items/datadog/)
+[The NoPassword team has written up instructions for configuring this SAML IdP](https://help.nopassword.com/portfolio-items/datadog/)
 
 {{< partial name="whats-next/whats-next.html" >}}

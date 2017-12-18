@@ -47,7 +47,7 @@ $ sudo yum remove datadog-agent
 
 **It's important that the original account used to install the agent is also used to remove it, otherwise it’s possible remnants are left behind and it won't be cleanly removed.**
 
-You can uninstall the agent using Add/Remove Programs, alternatively, it's possible to to use Powershell as well. Here is a one liner:
+Uninstall the agent using Add/Remove Programs, alternatively, it's possible to to use Powershell as well. Here is a one liner:
 
 ```
 (Get-WmiObject -Class Win32_Product -Filter "Name='Datadog Agent'" -ComputerName . ).Uninstall()

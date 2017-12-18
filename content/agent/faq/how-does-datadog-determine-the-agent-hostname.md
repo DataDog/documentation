@@ -46,7 +46,7 @@ A single host running in EC2 might have an instance ID (i-abcd1234), a generic h
 
 The names collected by the Agent (detailed above) are added as aliases for the chosen canonical name.
 
-You can see a list of all the hosts in your account from the Infrastructure tab in Datadog. From the Inspect panel, which you can get to by clicking the "Inspect" button while hovering over a host row, you can see (among other things) the list of aliases associated with each host.
+See a list of all the hosts in your account from the Infrastructure tab in Datadog. From the Inspect panel, which you get to by clicking the "Inspect" button while hovering over a host row, see (among other things) the list of aliases associated with each host.
 
 {{< img src="agent/faq/host_aliases.png" alt="Host aliases" responsive="true" popup="true">}}
 

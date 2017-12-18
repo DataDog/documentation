@@ -65,7 +65,7 @@ instances:
       - rack_1
 
     metrics:
-  # If it's just a scalar, you can specify by OID and name it
+  # If it's just a scalar, specify by OID and name it
       - OID: 1.3.6.1.2.1.1.7
          name: sysServices
 ```
@@ -118,7 +118,7 @@ Now we tell the agent to poll it and to use the value of the ifDescr column as t
 
 ```yaml
 init_config:
-#    #You can specify an additional folder for your custom mib files (python format)
+#    #Specify an additional folder for your custom mib files (python format)
 #    mibs_folder: /path/to/your/mibs/folder
 #    ignore_nonincreasing_oid: False
 
@@ -131,10 +131,10 @@ instances:
       - rack_1
 
     metrics:
-  #     # If it's just a scalar, you can specify by OID and name it
+  #     # If it's just a scalar, specify by OID and name it
       - OID: 1.3.6.1.2.1.1.7
         name: sysServices
-  #     # You can also query a table and specify
+  #     #  query a table and specify
   #     #   - which columns to report as value (symbols)
   #     #   - which columns / indexes to use as tags (metric_tags)
       - MIB: IF-MIB

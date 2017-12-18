@@ -148,7 +148,7 @@ CloudFront delivers your content through a worldwide network of data centers cal
 When you enable logging for a distribution, specify the Amazon S3 bucket that you want CloudFront to store log files in. 
 If you're using Amazon S3 as your origin, we recommend that you do not use the same bucket for your log files; using a separate bucket simplifies maintenance.
 
-Store the log files for multiple distributions in the same bucket. When enabling logging, specify an optional prefix for the file names, to keep track of which log files are associated with which distributions, more information [here](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html#access-logs-choosing-s3-bucket ) 
+Store the log files for multiple distributions in the same bucket. When enabling logging, specify an optional prefix for the file names, [to keep track of which log files are associated with which distributions](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html#access-logs-choosing-s3-bucket ) 
 
 You can then collect the log from the s3 bucket thanks to the Lambda function.
 

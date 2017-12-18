@@ -50,7 +50,7 @@ Your README file should provide the following sections:
 - **Events**: Include a list of events if your integration provides any.
 - **Service Checks**: Include a list of service checks if your integration provides any.
 
-Find more about the overall layout [here](/developers/integrations/#new-integration-documentation)
+[Find more about the overall layout](/developers/integrations/#new-integration-documentation)
 
 #### `check.py`
 
@@ -137,7 +137,7 @@ This JSON file provides metadata about your integration and should include:
 - **`is_public`**: Boolean set to true if your integration is public
 - **`has_logo`**: Boolean set to true if there is a logo for this integration in `/src/images/integrations_logo`
 - **`type`**: **check**
-- **`categories`**: Categories to sort your integration, current categories can be found [here](/integrations)
+- **`categories`**: Categories to sort your integration, [current categories can be found on integrations dedicated documentation page](/integrations)
 
 You can reference one of the existing integrations [for an example of the manifest file](https://github.com/DataDog/integrations-core/blob/master/activemq/manifest.json).
 

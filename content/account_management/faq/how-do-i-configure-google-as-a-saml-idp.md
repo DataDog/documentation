@@ -13,7 +13,7 @@ further_reading:
 
 ## Setting up Google as a SAML IdP
 
-Google instructions can be found [here](https://support.google.com/a/answer/6087519?hl=en)
+[Google instructions](https://support.google.com/a/answer/6087519?hl=en)
 
 ## For the "Service Provider Details"
 
@@ -29,7 +29,7 @@ Google instructions can be found [here](https://support.google.com/a/answer/6087
 
 * "urn:oid:1.3.6.1.4.1.5923.1.1.1.6" "Basic Information" "Primary Email"
 
-You can also add:
+Also add:
 * "urn:oid:2.5.4.4" "Basic Information" "Last Name"
 * "urn:oid:2.5.4.42" "Basic Information" "First Name"
 

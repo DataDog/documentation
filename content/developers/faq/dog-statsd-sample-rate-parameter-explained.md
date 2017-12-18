@@ -40,7 +40,7 @@ Set: no correction. The value received is kept as it is.
 
 Histogram: the histogram.count statistic is a counter metric, and receives the correction outlined above. Other statistics are gauge metrics and cannot be "corrected."
 
-See datadog-agent aggregation code [here](https://github.com/DataDog/dd-agent/blob/master/aggregator.py)
+[See datadog-agent aggregation code](https://github.com/DataDog/dd-agent/blob/master/aggregator.py)
 
 ## Code example
 

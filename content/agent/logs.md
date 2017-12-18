@@ -217,7 +217,7 @@ And in your parsers_module.py a function defined as:  
 def custom_parser(logger, line)
 ```
 
-You can now change the arity of your function to take extra parameter as shown [here](https://github.com/DataDog/dd-agent/blob/5.13.x/checks/datadog.py#L210)
+You can now change the parity of your function to take extra parameter as shown [in this agent example](https://github.com/DataDog/dd-agent/blob/5.13.x/checks/datadog.py#L210)
 
 So if you change your configuration file to:
 

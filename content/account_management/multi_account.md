@@ -192,7 +192,7 @@ Available arguments:
         * domains: list of domains (without @ - ex. ["datadoghq.com"])
 * name
 
-More info on SAML and available settings [here](/account_management/saml).
+[More info on SAML and available settings](/account_management/saml).
 
 Request:
 ```
