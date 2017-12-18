@@ -61,10 +61,10 @@ If you use Docker Swarm, run the following command on one of your manager nodes:
 
 Otherwise, see the docker-dd-agent documentation for detailed instructions and a comprehensive list of supported [environment variables][5].
 
-Note that **if you want the Agent to auto-discover JMX-based checks, you MUST**:
+**If you want the Agent to auto-discover JMX-based checks**:
 
 1. Use the `datadog/docker-dd-agent:latest-jmx` image. This image is based on `latest`, but it includes a JVM, which the Agent needs in order to run [jmxfetch](https://github.com/DataDog/jmxfetch).
-1. Pass the environment variable `SD_JMX_ENABLE=yes` when starting `datadog/docker-dd-agent:latest-jmx`.
+2. Pass the environment variable `SD_JMX_ENABLE=yes` when starting `datadog/docker-dd-agent:latest-jmx`.
 
 ## Setting up Check Templates
 
@@ -72,7 +72,7 @@ Each **Template Source** section below shows a different way to configure check 
 
 ### Template Source: Files (Auto-conf)
 
-Storing templates as local files is easy to understand and doesn't require an external service or a specific orchestration platform. The downside is that you must restart your Agent containers each time you change, add, or remove templates.
+Storing templates as local files is easy to understand and doesn't require an external service or a specific orchestration platform. The downside is that you have to restart your Agent containers each time you change, add, or remove templates.
 
 The Agent looks for Autodiscovery templates in its `conf.d/auto_conf` directory, which contains default templates for the following checks:
 
@@ -111,7 +111,7 @@ instances:
 
 It looks like a minimal [Apache check configuration][7], but notice the `docker_images` option. This required option lets you provide container identifiers. Autodiscovery applies this template to any containers on the same host that run an `httpd` image.
 
-_Any_ `httpd` image. Suppose you have one container running `library/httpd:latest` and another running `yourusername/httpd:v2`. Autodiscovery applies the above template to both containers. When it's loading auto-conf files, Autodiscovery cannot distinguish between identically-named images from different sources or with different tags, and **you must provide short names for container images**, e.g. `httpd`, NOT `library/httpd:latest`.
+_Any_ `httpd` image. Suppose you have one container running `library/httpd:latest` and another running `yourusername/httpd:v2`. Autodiscovery applies the above template to both containers. When it's loading auto-conf files, Autodiscovery cannot distinguish between identically-named images from different sources or with different tags, and **you have to provide short names for container images**, e.g. `httpd`, NOT `library/httpd:latest`.
 
 If this is too limiting—if you need to apply different check configurations to different containers running the same image—use labels to identify the containers. Label each container differently, then add each label to any template file's `docker_images` list (yes, `docker_images` is where to put _any_ kind of container identifier, not just images).
 
@@ -282,7 +282,6 @@ spec:
         - containerPort: 80
 ```
 
-
 ### Template Source: Docker Label Annotations
 
 Since version 5.17 of the Datadog Agent, you can store check templates in Docker labels. With Autodiscovery enabled, the Agent detects if it's running on Docker and automatically searches all labels for check templates; you don't need to configure a template source (i.e. via `SD_CONFIG_BACKEND`) as you do with key-value stores.
@@ -309,7 +308,6 @@ labels:
 -l com.datadoghq.ad.check_names='[<CHECK_NAME>]' -l com.datadoghq.ad.init_configs='[<INIT_CONFIG>]' -l com.datadoghq.ad.instances='[<INSTANCE_CONFIG>]'
 ```
 
-
 #### Docker Example: NGINX Dockerfile
 
 The following Dockerfile launches an NGINX container with Autodiscovery enabled:
@@ -323,7 +321,6 @@ LABEL "com.datadoghq.ad.check_names"='["nginx"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%/nginx_status:%%port%%"}]'
 ```
-
 
 ## Reference
 

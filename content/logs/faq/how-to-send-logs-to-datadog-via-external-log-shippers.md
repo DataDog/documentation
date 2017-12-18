@@ -158,7 +158,6 @@ In order to get the best use out of your logs in Datadog, it is important to hav
 }
 ```
 
-
 ## NXLog
 
 1. Configure NXLog to send your logs to your Datadog platform

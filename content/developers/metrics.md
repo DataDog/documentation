@@ -19,7 +19,7 @@ This page explains how to send your application's [custom metrics](/getting_star
 Sending your application's [custom metrics](/getting_started/custom_metrics/) to Datadog lets you correlate what's happening with your application, your users and your system.
 
 Metrics are collected by sending them to StatsD, a small metrics aggregation
-server that is bundled with the Datadog Agent. You can read about how it works [here](/developers/dogstatsd/). If you want to dive into code right away,
+server that is bundled with the Datadog Agent, [read about how it works](/developers/dogstatsd/). If you want to dive into code right away,
 read on.
 
 In this tutorial, we'll cover some common instrumentation use cases, like:
@@ -45,7 +45,6 @@ A metric's Datadog in-app type affects how its data is interpreted in query resu
 
 In the Datadog web application there are 3 metric types:
 
-
 * [GAUGE](/developers/metrics/#gauges)
 * [RATE](/developers/metrics/#rates)
 * [COUNT](/developers/metrics/#count) 
@@ -55,7 +54,6 @@ A metric's type is stored as metrics metadata and is used to determine how a met
 
 #### How do submission types relate to Datadog in-app types?
 Datadog accepts metrics submitted from a variety of sources, and as a result the submission type does not always map exactly to the Datadog in-app type:
-
 
 | Submission Source | Submission Method (python) | Submission Type | Datadog In-App Type |
 |-------------------|-------------------|-----------------|--------------|
@@ -95,7 +93,7 @@ There are multiple ways to send metrics to Datadog:
 
 1. With your Datadog agent directly (Learn more on how [to write an Agent Checks](/agent/agent_checks) && [Aggregator source](https://github.com/DataDog/dd-agent/blob/master/aggregator.py))
 
-2. Using your StatsD server bundled with the Datadog Agent (Find more about our available libraries [here](/developers/libraries))
+2. Using your StatsD server bundled with the Datadog Agent ([Find more about our available libraries](/developers/libraries))
   Note: Because DogStatsD flushes at a regular interval (**default 10s**) all metrics submitted via this method are stored with associated interval metadata.
 
 3. Submit metrics directly to Datadog's [HTTP API](/api/)
@@ -163,7 +161,6 @@ Counters are used to count things.
 |dog.decrement(...)| Used to decrement a counter of events: <ul><li>Stored as a RATE type in the datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter's value over that statsd flush period.</li></ul>|
 {{% /table %}}
 
-
 ### Example
 Lets count web page views. To achieve this, we'll increment a metric called
 `web.page_views` each time our `render_page` function is called.
@@ -211,8 +208,7 @@ def upload_file(file):
 ```
 
 Note that for counters coming from another source that are ever-increasing and never reset -- for example, the number of queries from MySQL over time -- we track the rate between flushed values. While there currently isn't an elegant solution to get raw counts within Datadog, you may want to apply a function to
-your series like cumulative sum or integral. There is more information on those
-[here](/graphing/miscellaneous/functions).
+your series like cumulative sum or integral. [Read more about Datadog functions](/graphing/miscellaneous/functions).
 
 ### In-app modifiers
 

@@ -41,16 +41,15 @@ It's recommended that you set up Datadog as an Okta application manually, as opp
 * **Honor Force Authentication**: Yes
 * **SAML Issuer ID**: `http://www.okta.com/<OKTA_ENTITY_ID>`
 
-
 ## Attribute Statements Details
 
 * **NameFormat**: urn:oasis:names:tc:SAML:2.0:attrname-format:uri
 * **sn**: user.lastName
 * **givenName**: user.firstName
 
-Additional Information on configuring SAML for your Datadog account can be found [here](/account_management/saml):
+Additional Information on configuring SAML for your Datadog account can be found [on the dedicated SAML documentation page](/account_management/saml):
 
-In the event that you need to upload an IDP.XML file to Datadog before being able to fully configure the application in Okta, see [here](https://support.okta.com/help/Documentation/Knowledge_Article/23445146-Acquiring-the-IDPXML-metadata-file-for-a-SAML-Template-App) for field placeholder instructions.
+In the event that you need to upload an `IDP.XML` file to Datadog before being able to fully configure the application in Okta, see [acquiring the idp.xml metadata file for a SAML template App article](https://support.okta.com/help/Documentation/Knowledge_Article/23445146-Acquiring-the-IDPXML-metadata-file-for-a-SAML-Template-App) for field placeholder instructions.
 
 ## Further Reading
 

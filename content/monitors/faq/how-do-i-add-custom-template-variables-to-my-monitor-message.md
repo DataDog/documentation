@@ -30,7 +30,6 @@ Here, the user was able to set up a multi-alert monitor to trigger a separate al
 
 {{< img src="monitors/faq/multi_alert_templating_notification.png" alt="multi_alert_templating_notification" responsive="true" popup="true" >}}
 
-
 ### My tag key has dots in it
 
 A word of warning: the period (".") is a reserved character for monitor template variables syntax.  
@@ -39,7 +38,6 @@ If your tag group's key has a period in it, you have to hardwire your template v
 
 This monitor resulted in the following event (tagged by dot.key.test:five):
 {{< img src="monitors/faq/dot_template_event.png" alt="dot_template_event" responsive="true" popup="true" >}}
-
 
 ## API Example
 

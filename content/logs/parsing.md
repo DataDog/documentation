@@ -19,7 +19,6 @@ further_reading:
 Datadog's Logs is currently available via public beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
 </div>
 
-
 ## Overview 
 
 The Grok syntax provides an easier way to parse logs than pure regular expressions. 
@@ -144,7 +143,6 @@ If you add an **extract** parameter in your rule pattern you would have:
 ### Parsing dates
 
 The date matcher transforms your timestamp in the EPOCH format.
-
 
 {{% table responsive="true" %}}
 ||||

@@ -16,7 +16,7 @@ Datadog's Logs is currently available via public beta. You can apply for inclusi
 ## Getting started with the Agent
 
 Log collection requires an Agent version >= 6.0. Older versions of the Agent do not include the `Log collection` interface that we'll be using.
-If you are not using it already, please follow the installation instructions [here](https://github.com/DataDog/datadog-agent/blob/master/docs/beta/upgrade.md).
+If you are not using it already, please follow [the agent installation instruction](https://github.com/DataDog/datadog-agent/blob/master/docs/beta/upgrade.md).
 
 Collecting logs is **disabled** by default in the Datadog Agent, you need to enable it in `datadog.yaml`:
 
@@ -31,7 +31,6 @@ If an integration does not support logs by default, you may need to use the cust
 <div class="alert alert-warning">
 During the beta phase of Datadog Logs, not all integrations include log configurations out of the box. A current list of supported integrations is available below.
 </div>
-
 
 ### Cloud
 * [AWS](/logs/aws)
@@ -51,11 +50,11 @@ During the beta phase of Datadog Logs, not all integrations include log configur
 * IIS: [iis.d/conf.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/iis/conf.yaml.example)
 * Mongo: [mongo.d/conf.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/mongo/conf.yaml.example)
 * Nginx: [nginx.d/conf.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/nginx/conf.yaml.example)
+* Postgres: [postgres.d/conf.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/postgres/conf.yaml.example)
 
 ## Custom log collection
 
 The Datadog Agent can collect logs from files or the network (TCP or UDP) and forward them to Datadog. To configure this, create a new repository and yaml file named after your log source  in the Agent's **conf.d** directory ( `conf.d/python.d/conf.yaml` for python logs, ...) and set these options:
-
 
 * `type` : (mandatory) type of log input source (**tcp** / **udp** / **file**)
 * `port` / `path` : (mandatory) Set `port` if `type` is **tcp** or **udp**. Set `path` if `type` is **file**.
@@ -117,7 +116,6 @@ logs:
 ```
 * [Restart your agent](https://help.datadoghq.com/hc/en-us/articles/203764515-Start-Stop-Restart-the-Datadog-Agent)
 
-
 ### Docker log collection
 
 Agent 6 is able to collect logs from containers. It can be installed [on the host](https://github.com/DataDog/datadog-agent/blob/master/docs/beta/upgrade.md) or [in a container](https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent).
@@ -128,7 +126,7 @@ For containerized installation, here are the command related to log collection:
 * `-v /var/run/docker.sock:/var/run/docker.sock:ro`: Give access to docker api to collect container stdout and stderr
 * `-v /my/path/to/conf.d:/conf.d:ro`: mount configuration repository
 * `-v /my/file/to/tail:/tail.log:ro`: Foreach log file that should be tailed by the agent (not required if you only want to collect container stdout or stderr)
-* `DD_LOG_ENABLED=true`: Activate log collection (disable by default)
+* `-e DD_LOG_ENABLED=true`: Activate log collection (disable by default)
 * `-e DD_API_KEY=<YOUR_API_KEY>`: Set the api key
 
 To start collecting logs for a given container filtered by image or label, update the integration log section in its yaml file, or create a custom yaml file.
@@ -151,7 +149,7 @@ logs:
 
 ```
 
-If the agent is containerized, see [here](https://github.com/DataDog/docker-dd-agent#configuration-files) how to mount the YAML configuration files to the agent container.
+If the agent is containerized, see [the specific configuration file to mount the YAML configuration files to the agent container](https://github.com/DataDog/docker-dd-agent#configuration-files).
 
 * [Restart your agent](https://help.datadoghq.com/hc/en-us/articles/203764515-Start-Stop-Restart-the-Datadog-Agent)
 

@@ -4,7 +4,6 @@ kind: faq
 customnav: graphingnav
 ---
 
-
 Does your dashboard or graph take a long time to load? When you look at larger time period, does it take a longer time to load, or even completely fail to load?
 
 This probably means that you submit many different tags for the metrics of your graph.

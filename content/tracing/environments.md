@@ -26,7 +26,6 @@ Environments in traces and configuration files are normalized:
 * Unsupported characters are replaced by underscores.
 * Upper case characters are converted to lower case.
 
-
 ## Default environment
 
 If you are not using this feature, your data is put in `env:none` which is the default behavior.
@@ -58,5 +57,4 @@ There are several ways to specify an environment when reporting data:
     # in code this looks like
     span.set_tag('env', 'prod')
     ```
-
 

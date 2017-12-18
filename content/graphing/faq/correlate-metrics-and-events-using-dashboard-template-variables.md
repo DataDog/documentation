@@ -28,11 +28,9 @@ In the following example, the template variable resolves to tags:region:ap-south
 
 {{< img src="graphing/faq/tv7.png" alt="tv7" responsive="true" popup="true">}}
 
-
 You can also use multiple template variables in the search field and the event overlay search displays all events tagged with the same values from the template variables. The following example uses the query tags:role:$role.value,env:$env.value
 
 {{< img src="graphing/faq/tv8.png" alt="tv8" responsive="true" popup="true">}}
-
 
 Since the $variable.value syntax captures the resolved key value from the template variable, it can be used with other filters, such as hosts:. Here is an example that uses the tags field together with the hosts: field in the search term tags:env:$env.value hosts:$host.value
 

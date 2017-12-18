@@ -4,7 +4,7 @@ kind: faq
 customnav: developersnav
 ---
 
-The statsd protocol is a great setup to fire many metrics and monitor your application code without blocking HTTP calls. Data is sampled in your application code then is transmitted via UDP to the [DogStatsD server](/developers/dogstatsd) (embedded in the dd-agent) that aggregates then sends data to Datadog api endpoint. You can read more about the DogStatsD setup [here](/developers/dogstatsd):
+The statsd protocol is a great setup to fire many metrics and monitor your application code without blocking HTTP calls. Data is sampled in your application code then is transmitted via UDP to the [DogStatsD server](/developers/dogstatsd) (embedded in the dd-agent) that aggregates then sends data to Datadog api endpoint. [Read more about the DogStatsD setup](/developers/dogstatsd):
 
 This article aims at describing why and how the aggregation is performed.
 ([Python threadstats library](/developers/faq/is-there-an-alternative-to-dogstatsd-and-the-api-to-submit-metrics-threadstats) variations are mentioned at the end of this article.)
@@ -27,10 +27,11 @@ Among all values received during the same flush interval, the aggregated value i
 
 * Gauge: the most recent datapoint received
 * Count/Counter: the sum of the received values
-* Histogram: the min, max, sum, avg, 95percentiles, count, median of all value received, check [here](/developers/metrics) for more details.
+* Histogram: the min, max, sum, avg, 95percentiles, count, median of all value received, check [metrics documentation page](/developers/metrics) for more details.
 * Set: the number of different values seen
 * Rate: the value difference divided by the time difference of the last 2 datapoints received
-You may find more information about each metric type [here](/developers/metrics).
+
+[Find more information about each metric type](/developers/metrics).
 
 ## Threadstats variations
 
@@ -54,4 +55,4 @@ For instance during the flush interval of 10 seconds (between 10:00:00 and 10:00
 2. {09:30:10, 1}, {10:00:00, 2}, {10:00:00,1}, {10:00:05,1}, {10:00:05,1} # 2- every datapoint in the same roll_up_interval (5 seconds) gets the same timestamp
 3. {09:30:10, 1}, {10:00:00, 3}, {10:00:05,2} # 3- data is aggregated and only 4 values are eventually submitted to Datadog
 
-You may find more information about Threadstatsd aggregation [here](https://github.com/DataDog/datadogpy/blob/master/datadog/threadstats/metrics.py).
+[Find more information about Threadstatsd aggregation](https://github.com/DataDog/datadogpy/blob/master/datadog/threadstats/metrics.py).

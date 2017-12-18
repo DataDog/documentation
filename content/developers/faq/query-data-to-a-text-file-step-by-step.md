@@ -8,7 +8,7 @@ This article explains how to set up the environment to make the most of the API.
 
 In addition of the explanations here, the file attached is commented so you have redundant pieces of information that may help to understand better.
 
-Prerequisite: Python and PIP installed on your localhost, if you're on Windows get it [here](http://docs.python-guide.org/en/latest/starting/install/win/):
+Prerequisite: Python and PIP installed on your localhost, if you're on Windows [get it on the python dedicated documentation page](http://docs.python-guide.org/en/latest/starting/install/win/):
 
 1. Open a Terminal on your Mac or the CMD prompt on Windows.
 2. Verify where you are by typing pwd (or dir on windows) and press Enter

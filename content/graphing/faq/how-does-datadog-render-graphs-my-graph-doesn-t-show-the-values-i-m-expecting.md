@@ -23,6 +23,6 @@ Metric: the metric you want to graph
 
 3. Space-aggregation: After time-aggregation has been performed, Datadog combines these different source in a unique timeseries that is displayed as a graph. By default for each time, Datadog averages values across several sources, but it can also take the min/max/sum.
 
-4. Functions: this parameter is optional, if you have specified functions they would apply. Check the available functions [here](/graphing/miscellaneous/functions/).
+4. Functions: this parameter is optional, if you have specified functions they would apply. [Check the available functions](/graphing/miscellaneous/functions/).
 
 You can also use arithmetic on queries.

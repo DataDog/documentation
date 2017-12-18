@@ -76,7 +76,7 @@ The names collected by the Agent (detailed [above](#agent-host-names)) are added
 You can see a list of all the hosts in your account from the Infrastructure tab
 in Datadog. From the Inspect panel, you can see (among other things) the list of aliases associated with each host.
 
-{{< img src="graphing/infrastructure/index/host_aliases.png" responsive="true" popup="true" >}}
+{{< img src="graphing/infrastructure/index/host_aliases.png" alt="host aliases" responsive="true" popup="true" >}}
 
 ### Export your infrastructure list and Agent versions
 
@@ -109,7 +109,7 @@ You can programmatically access host information and get the insights you need, 
 
 {{< img src="graphing/infrastructure/index/ec2_instances_without_dd_agent.png" alt="ec2_instances_without_dd_agent" responsive="true" popup="true">}}
 
-See the script [here](https://gist.github.com/Martiflex/2803a28ec562fc9a15d404a539f85d38).
+[See the script to prints the list of hosts](https://gist.github.com/Martiflex/2803a28ec562fc9a15d404a539f85d38).
 
 ## Further Reading
 

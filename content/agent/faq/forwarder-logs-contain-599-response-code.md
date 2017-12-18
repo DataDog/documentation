@@ -63,10 +63,9 @@ gaierror: (-2, ' Name of service not known ')
 
 ### IVP6
 
-For disabling IPV6 you can reference the following article:
+For disabling IPV6, reference the following article:
 
 http://linoxide.com/linux-how-to/disable-ipv6-centos-fedora-rhel/
-
 
 ## Changing the agent's Tornado Client
 

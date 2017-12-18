@@ -41,7 +41,7 @@ A user can find all events related to Timeboard changes to the Timeboard they ar
 
 In dashboards, notifications provide the ability to track changes for audit purposes. Any changes made creates an event in the event stream that explains the change and displays the user that made the actual change.
 
-If any changes are made to your dashboards, you can see them with the following event search:
+If any changes are made to your dashboards, see them with the following event search:
 
 https://app.datadoghq.com/event/stream?per_page=30&query=tags:audit%20status:all
 

@@ -17,6 +17,10 @@ further_reading:
   text: Log Collection Troubleshooting Guide
 ---
 
+<div class="alert alert-info">
+Datadog's Logs is currently available via public beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
+</div>
+
 To send your C# logs to Datadog, we recommend logging to a file and then tailing that file with your Datadog agent. Here are setup examples for the `log4Net`, `serilog` and `Nlog` logging libraries
 
 We strongly encourage setting up your logging library to produce your logs in JSON format to avoid the need for [custom parsing rules](/logs/parsing).
@@ -127,7 +131,6 @@ namespace Datadog
         // Initialize a logger
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
-
         static void Main(string[] args)
         {
 
@@ -227,7 +230,6 @@ If you have followed the instructions you should see in your file (for example `
     "date": "2016-05-24 15:53:35.7175"
 }
 ```
-
 
 ## Configure your Datadog agent
 

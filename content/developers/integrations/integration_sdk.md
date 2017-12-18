@@ -28,7 +28,7 @@ Once the required Ruby gems have been installed by Bundler, you can easily creat
 
 ## Building an integration
 
-You can use rake to generate the skeleton for a new integration by running `rake generate:skeleton[my_integration]`, where "my_integration" is the name of your new integration (note: you must enclose your integration name in square brackets).
+You can use rake to generate the skeleton for a new integration by running `rake generate:skeleton[my_integration]`, where "my_integration" is the name of your new integration (note: enclose your integration name in square brackets).
 
 This creates a new directory, `my_integration`, that contains all the files required for your new integration. This also creates an entry for your new integration in our `.travis.yml` and `circle.yml` continuous integration files to ensure that your tests are run whenever new builds are created.
 
@@ -50,7 +50,7 @@ Your README file should provide the following sections:
 - **Events**: Include a list of events if your integration provides any.
 - **Service Checks**: Include a list of service checks if your integration provides any.
 
-Find more about the overall layout [here](/developers/integrations/#new-integration-documentation)
+[Find more about the overall layout](/developers/integrations/#new-integration-documentation)
 
 #### `check.py`
 
@@ -137,7 +137,7 @@ This JSON file provides metadata about your integration and should include:
 - **`is_public`**: Boolean set to true if your integration is public
 - **`has_logo`**: Boolean set to true if there is a logo for this integration in `/src/images/integrations_logo`
 - **`type`**: **check**
-- **`categories`**: Categories to sort your integration, current categories can be found [here](/integrations)
+- **`categories`**: Categories to sort your integration, [current categories can be found on integrations dedicated documentation page](/integrations)
 
 You can reference one of the existing integrations [for an example of the manifest file](https://github.com/DataDog/integrations-core/blob/master/activemq/manifest.json).
 
@@ -215,7 +215,6 @@ Class TestMyIntegration(AgentCheckTest):
 ```
 
 For more information about tests and available test methods, reference the [AgentCheckTest class in the Datadog Agent repository][7]
-
 
 ## Libraries
 

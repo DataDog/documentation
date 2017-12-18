@@ -41,7 +41,7 @@ Datadog provides 3 user roles:
 
 ## Promote existing members to administrator
 
-**NOTE:** You must be an Administrator of the team to promote members
+**NOTE:** Only team Administrator can promote members.
 
 1. Go to the [Team Page][1].
 2. Hover over the avatar for the user you wish to promote. Choose **Make Administrator** from the menu.

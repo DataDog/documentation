@@ -28,14 +28,14 @@ order: 8.1
     -   `operator` <, <=, >, >=, ==, or !=
     -   `#` an integer or decimal number used to set the threshold
 
-    If you are using the `_change_` or `_pct_change_` time aggregator, you can instead use `change_aggr(time_aggr(time_window), timeshift):space_aggr:metric{tags} [by {key}] operator #` with:
+    If you are using the `_change_` or `_pct_change_` time aggregator, instead use `change_aggr(time_aggr(time_window), timeshift):space_aggr:metric{tags} [by {key}] operator #` with:
 
     *   `change_aggr` change, pct_change
     *   `time_aggr` avg, sum, max, min [Learn more](/monitors/monitor_types/#define-the-conditions)
     *   `time_window` last_#m (1, 5, 10, 15, or 30), last_#h (1, 2, or 4), or last_#d (1 or 2)
     *   `timeshift` #m_ago (5, 10, 15, or 30), #h_ago (1, 2, or 4), or 1d_ago
 
-    You can also use this to create an outlier monitor using the following query: `avg(last_30m):outliers(avg:system.cpu.user{role:es-events-data} by {host}, 'dbscan', 7) > 0`
+    Use this to create an outlier monitor using the following query: `avg(last_30m):outliers(avg:system.cpu.user{role:es-events-data} by {host}, 'dbscan', 7) > 0`
 
     ##### Service Check Query
     `"check".over(tags).last(count).count_by_status()`
@@ -68,7 +68,7 @@ order: 8.1
 * `message` [*required*, *default* = **dynamic, based on query**]:  
     A message to include with notifications for this monitor. Email notifications can be sent to specific users by using the same '@username' notation as events.
 * `tags` [*optional*, *default* = **empty list**]: 
-    A list of tags to associate with your monitor. When getting all monitor details via the API, you can use the `monitor_tags` argument to filter results by these tags. It is only available via the API and isn't visible or editable in the Datadog UI.
+    A list of tags to associate with your monitor. When getting all monitor details via the API, use the `monitor_tags` argument to filter results by these tags. It is only available via the API and isn't visible or editable in the Datadog UI.
 
 * `options` [*optional*, *default*=**None**]:  
     A dictionary of options for the monitor. There are options that are common to all types as well as options that are specific to certain monitor types.  

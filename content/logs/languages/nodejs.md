@@ -17,6 +17,10 @@ further_reading:
   text: Log Collection Troubleshooting Guide
 ---
 
+<div class="alert alert-info">
+Datadog's Logs is currently available via public beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
+</div>
+
 ## Overview 
 
 To log from your NodeJS application, we recommends to use [Winston](https://github.com/winstonjs/winston) - as you'll get all the features you need to build up your logging strategy. 

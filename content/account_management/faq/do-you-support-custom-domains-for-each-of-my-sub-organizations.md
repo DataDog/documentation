@@ -6,4 +6,4 @@ customnav: accountmanagementnav
 
 Yes, simply [email the Datadog support team](/help) to enable custom sub-domains.
 
-Learn more [here](/account_management/multi_account)
+[Learn more about multi-organization](/account_management/multi_account)

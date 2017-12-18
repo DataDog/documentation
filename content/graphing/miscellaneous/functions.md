@@ -56,7 +56,6 @@ Here is an example of system.load.1 with the hour_before value shown as a dotted
 
 For now, using functions like hour_before is out of scope for the graphical editor so you have to use the JSON editor. Here is the JSON for this graph:
 
-
 ```json
 { "viz": "timeseries",
   "requests": [
@@ -91,7 +90,6 @@ Here is an example of nginx.net.connections with the day_before value shown as a
 
 For now, using functions like day_before is out of scope for the graphical editor so you have to use the JSON editor. Here is the JSON for this graph:
 
-
 ```json
 {
   "requests": [
@@ -121,7 +119,6 @@ Here is an example of `cassandra.db.read_count` with the week_before value shown
 {{< img src="graphing/miscellaneous/functions/simple_week_before_example.png" alt="simple week before example" responsive="true" popup="true">}}
 
 For now, using functions like week_before is out of scope for the graphical editor so you have to use the JSON editor. Here is the JSON for this graph:
-
 
 ```json
 {
@@ -154,7 +151,6 @@ Here is an example of `aws.ec2.cpuutilization` with the month_before value shown
 {{< img src="graphing/miscellaneous/functions/simple_month_before_example.png" alt="simple month before example" responsive="true" popup="true">}}
 
 For now, using functions like month_before is out of scope for the graphical editor so you have to use the JSON editor. Here is the JSON for this graph:
-
 
 ```json
 {
@@ -266,7 +262,6 @@ Select the top series responsive to a given query, according to some ranking met
 The `top()` method also has convenience functions of the following form, all of which take a single series list as input:
 
 `[top, bottom][5, 10, 15, 20]_[mean, min, max, last, area, l2norm]()`
-
 
 For example, `bottom10_min()` retrieves lowest-valued 10 series using the `min` metric.
 

@@ -5,4 +5,4 @@ order: 20
 ---
 
 ## Tracing
-Learn more about tracing with Datadog [here](/tracing) and the APM terminology [here](/tracing/terminology)
+Learn more about [tracing with Datadog](/tracing) and [the APM terminology](/tracing/terminology)
