@@ -72,7 +72,7 @@ aside.sidenav {
 
   .sidenav-search {
     margin-left:7px;
-    padding-right: 15px;
+    padding-right: 10px;
     //margin-right: 30px;
     .input-group-addon {
       background:none;
@@ -133,9 +133,18 @@ aside.sidenav {
           color:#000;
           font-size:18px;
           font-weight: 600;
-          padding:3px 0 0 2px;
+          padding:0 0 0 2px;
+          margin-top:3px;
+          margin-right: 10px;
           display:block;
+          &:hover {
+            background:rgba(120,71,166,.15);
+            color: $ddpurple;
+            border-radius:4px;
+          }
           &.active {
+            background:rgba(120,71,166,.15);
+            border-radius:4px;
             color: $ddpurple;
             font-weight:600;
           }
@@ -196,6 +205,7 @@ aside.sidenav-api {
     padding-left: 10px;
   }
   .toc_scrolled {
+    background:rgba(120,71,166,.15) !important;
     color: $ddpurple !important;
     font-weight:600 !important;
   }

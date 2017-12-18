@@ -34,7 +34,7 @@
             <div class="d-none d-lg-flex col-12 col-sm-3 side">
                 {{ partial "sidenav/sidenav.html" . }}
             </div>
-            <div class="col-12 {{ if not .Params.disable_toc }}col-lg-7{{ else }}col-lg-9{{ end }} main">
+            <div class="col-12 col-lg-9 main">
                 {{ block "main" . }}{{ end }}
             </div>
             {{ if not .Params.disable_toc}}
