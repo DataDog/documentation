@@ -5,6 +5,7 @@ autotocdepth: 2
 customnav: accountmanagementnav
 aliases:
     - /guides/billing
+    - /account_management/settings
 ---
 
 ## Account settings
