@@ -51,6 +51,7 @@ During the beta phase of Datadog Logs, not all integrations include log configur
 * IIS: [iis.d/conf.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/iis/conf.yaml.example)
 * Mongo: [mongo.d/conf.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/mongo/conf.yaml.example)
 * Nginx: [nginx.d/conf.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/nginx/conf.yaml.example)
+* Postgres: [postgres.d/conf.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/postgres/conf.yaml.example)
 
 ## Custom log collection
 
@@ -128,7 +129,7 @@ For containerized installation, here are the command related to log collection:
 * `-v /var/run/docker.sock:/var/run/docker.sock:ro`: Give access to docker api to collect container stdout and stderr
 * `-v /my/path/to/conf.d:/conf.d:ro`: mount configuration repository
 * `-v /my/file/to/tail:/tail.log:ro`: Foreach log file that should be tailed by the agent (not required if you only want to collect container stdout or stderr)
-* `DD_LOG_ENABLED=true`: Activate log collection (disable by default)
+* `-e DD_LOG_ENABLED=true`: Activate log collection (disable by default)
 * `-e DD_API_KEY=<YOUR_API_KEY>`: Set the api key
 
 To start collecting logs for a given container filtered by image or label, update the integration log section in its yaml file, or create a custom yaml file.
