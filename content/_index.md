@@ -18,6 +18,8 @@ sidebar:
       href: "integrations/"
     - text: DogStatsD
       href: "guides/dogstatsd/"
+    - text: Logs
+      href: "logs/"
     - text: FAQ
       href: "faq/"
     - text: Billing FAQ

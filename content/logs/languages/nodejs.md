@@ -3,8 +3,11 @@ title: NodeJS Log Collection
 kind: documentation
 autotocdepth: 2
 customnav: lognav
-beta: true
 ---
+
+<div class="alert alert-info">
+Datadog's Logs is currently available via public beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
+</div>
 
 ## Overview 
 

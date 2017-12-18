@@ -43,6 +43,9 @@
 - id: menu_references_dogstatsd
   translation: "DogStatsD"
 
+- id: menu_references_logs
+  translation: "Logs"
+
 - id: menu_references_examples
   translation: "Examples"
 
