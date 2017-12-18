@@ -53,7 +53,7 @@ languages:
           url: "integrations/"
           weight: 70
         - identifier: menu_references_logs
-          name: ""
+          name: "Logs"
           url: "logs/"
           weight: 80
         - identifier: menu_references_dogstatsd
