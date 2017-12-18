@@ -123,7 +123,7 @@ logs:
 ## Getting further
 Enrich your log events with valuable attributes!
 
-Logging is great- It tells developers and administrators what is happening at specific moments in time. However, you must always remember to decorate them with contextual attributes.
+Logging is great- It tells developers and administrators what is happening at specific moments in time. However, always remember to decorate them with contextual attributes.
 
 ###Using the Key/Value parser
 

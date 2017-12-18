@@ -40,7 +40,7 @@ In the configuration:
 
 * URL is `https://api.trello.com/1/cards`
 
-You must enable Custom Payload and fill in a json object that looks like:
+Enable Custom Payload and fill in a json object that looks like:
 ```
 {
 "name": "$USER : $EVENT_TITLE",
