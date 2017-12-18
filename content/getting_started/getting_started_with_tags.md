@@ -53,7 +53,6 @@ Here is an example of tags using the time-series chart editor. For the first scr
 
 {{< img src="getting_started/tags/Tags_1.png" alt="Tags_1" responsive="true" popup="true">}}
 
-
 In this next example, we've applied a tag (region:eastus) that enables us to look at CPU across the US East Region. We've used region as an example, but you could use any arbitrary tag, including application, service, environment, etc.
 {{< img src="getting_started/tags/Tags_2.png" alt="Tags_2" responsive="true" popup="true">}}
  

@@ -16,7 +16,6 @@ The following script was provided by a Datadog customer (Credit: Ganesh Swami),
 
 This article is intended to serve as an example for those that are interested in parsing the NGINX access.log using the parser built into the Datadog agent.
 
-
 ## Configuration steps
 
 First, let's copy the code from the gist in a file that's accessible by the agent, here we'll use: `/usr/share/datadog/agent/dogstream/nginx.py`:

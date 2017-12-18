@@ -32,7 +32,7 @@ Datadog provides 3 user roles:
 
 ## Disable Existing Members
 
-**NOTE:** You must be an administrator of the team to disable members. You cannot permanently remove users as they might own events, dashboards, etc. which are not supposed to be removed. Disabled team members disappears from the administrator’s team page UI automatically after one month.
+**NOTE:** Only team administrator can disable members. You cannot permanently remove users as they might own events, dashboards, etc. which are not supposed to be removed. Disabled team members disappears from the administrator’s team page UI automatically after one month.
 
 1. Go to the [Team Page][1].
 2. Hover over the avatar for the user you wish to disable. Choose **Disable** from the menu.
@@ -41,7 +41,7 @@ Datadog provides 3 user roles:
 
 ## Promote Existing Members to Administrator
 
-**NOTE:** You must be an Administrator of the team to promote members
+**NOTE:** Only team Administrator can promote members.
 
 1. Go to the [Team Page][1].
 2. Hover over the avatar for the user you wish to promote. Choose **Make Administrator** from the menu.

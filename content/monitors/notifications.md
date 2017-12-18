@@ -37,7 +37,6 @@ right people get notified so the problem can be resolved as soon as possible.
 
 3. Optionally enable **monitor renotification**. This option is useful to remind your team that a problem is not solved until the monitor is marked as resolved. If enabled, you can configure an escalation message to be sent anytime the monitor renotifies. The original message is included as well.
 
-
 ## Message template variables
 
 Message template variables can be used to customize your monitor notifications.
@@ -63,7 +62,6 @@ and the recovery notification:
 
 {{< img src="monitors/notifications/templateconditionalrecover.png" alt="template conditional recover" responsive="true" popup="true" >}}
 
-
 The conditional variables available are:
 
 * `is_alert`, 
@@ -86,7 +84,6 @@ Here is an example of how you can use template variables for a multi alert:
 and the corresponding event notification:
 
 {{< img src="monitors/notifications/templatevar.png" alt="template var" responsive="true" popup="true" >}}
-
 
 The tag template variables available depend on the tag group selected in Step 1 of the monitor editor. The possible options automatically populate at the bottom of the "Use message template variables" help box in Step 3 of the editor.
 These variables can also be used in the monitor titles (names), but note that the variables are only populated in the text of Datadog child events (not the parent, which displays an aggregation summary).

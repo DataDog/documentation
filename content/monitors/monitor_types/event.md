@@ -31,7 +31,6 @@ Event monitors allows you to alert when an event matching your query occurs.
 4. Configure your **notification options**:  
     Refer to the [Notifications](#monitor-notifications) dedicated documentation page for informations.
 
-
 ## Using event tags in Event Monitors
 
 In Event Monitors, you can use the tags sent with events to identify events and customize the actions and messages of the Monitor. First, define the search parameters for the full text event search.  If you are looking for a specific tag, you can include this in the search as well.  For example:

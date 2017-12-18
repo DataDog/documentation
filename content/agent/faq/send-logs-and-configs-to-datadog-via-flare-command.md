@@ -97,7 +97,6 @@ Example : 
 
 {{< img src="agent/faq/flare_fail.png" alt="Flare Fail" responsive="true" popup="true">}}
 
-
 ## What about my sensitive information? 
 
 The flare searches for any fields like passwords, passwords in a URI, API keys, and Proxy credentials and prevent this info from being sent. 

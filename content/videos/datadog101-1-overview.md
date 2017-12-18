@@ -27,5 +27,4 @@ Get started with Datadog with our Datadog 101 series. This first video introduce
 * [Embedded Graphs](?wtime=391)
 * [Help, Team, & Settings Pages](?wtime=405)
 
-
 Sign up for a trial account here: [https://app.datadoghq.com/signup](https://app.datadoghq.com/signup)

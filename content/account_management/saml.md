@@ -41,7 +41,6 @@ Loading this URL initiates a SAML authentication against your IdP. Note that the
 
 ## Datadog Service Provider Details
 
-
 * Datadog supports the **HTTP-POST** binding for **SAML2**:
 `urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST`.
 * Datadog specifies  `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` for the Format of the **NameIDPolicy** in Assertion Requests.
@@ -76,7 +75,6 @@ For more information about configuring specific IdP's, refer to the following Kn
 * [Microsoft Active Directory Federation Services](/account_management/faq/how-do-i-setup-microsoft-active-directory-federation-services-as-a-saml-idp)
 * [NoPassword](/account_management/faq/how-do-i-configure-nopassword-as-a-saml-idp)
 * [Okta](/account_management/faq/how-do-i-configure-okta-as-a-saml-idp)
-
 
 ## Additional Features
 

@@ -4,7 +4,6 @@ kind: faq
 customnav: graphingnav
 ---
 
-
 ## Events
 
 * [How do I add hostname to event titles and messages submitted by my custom agent checks?](/graphing/faq/how-do-i-add-hostname-to-event-titles-and-messages-submitted-by-my-custom-agent-checks)

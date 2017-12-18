@@ -14,7 +14,6 @@ This page outlines the basic functionality of the Datadog Agent. If you haven't 
 
 The execution of the Agent is controlled by a Windows service.
 
-
 ### For version >= 3.9.1
 
 You can use the Datadog Agent Manager that you can find in the Start Menu.
@@ -25,7 +24,6 @@ You can use the Datadog Agent Manager that you can find in the Start Menu.
 
 You can also use Windows Powershell if you are running on a modern version of Windows:
 `[start|stop|restart]-service datadogagent`
-
 
 ### For version < 3.9.1
 

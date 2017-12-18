@@ -87,7 +87,7 @@ If you are storing logs in many S3 buckets, Datadog can automatically manage tri
 {{< img src="logs/aws/AWSLogStep1.png" alt="Enter Lambda">}}
 4. Check off the services from which you'd like to collect logs and hit save. To stop collecting logs from a particular service, simply uncheck it.
 {{< img src="logs/aws/AWSLogStep2.png" alt="Select services">}}
-5. If you have logs across multiple regions, you must create additional Lambda functions in those regions and enter them in this tile.
+5. If you have logs across multiple regions, create additional Lambda functions in those regions and enter them in this tile.
 6. To stop collecting all AWS logs, press the *x* next to each Lamdba ARN. All triggers for that function are removed. 
 7. Within a few minutes of this initial setup, you will see your AWS Logs appear in our [logging platform](https://app.datadoghq.com/logs) in near real time.
 
@@ -100,7 +100,6 @@ Select the log source and then follow the AWS instructions:
 
 For instance, do not forget to set the correct event type on S3 Buckets:
 {{< img src="logs/aws/object_created.png" alt="Object Created" responsive="true" popup="true">}}
-
 
 ### ELB
 
@@ -144,7 +143,6 @@ CloudFront is a CDN service which speeds up distribution of your static and dyna
 
 CloudFront delivers your content through a worldwide network of data centers called edge locations. When a user requests content that you're serving with CloudFront, the user is routed to the edge location that provides the lowest latency (time delay), so content is delivered with the best possible performance.
 
-
 When you enable logging for a distribution, specify the Amazon S3 bucket that you want CloudFront to store log files in. 
 If you're using Amazon S3 as your origin, we recommend that you do not use the same bucket for your log files; using a separate bucket simplifies maintenance.
 
@@ -166,7 +164,6 @@ You can then collect the log from the s3 bucket thanks to the Lambda function.
 * `s3:GetBucketNotification`: Get existing Lambda trigger configurations.
 * `s3:ListAllMyBuckets`: List all S3 buckets.
 * `s3:PutBucketNotification`: Add or remove a Lambda trigger based on S3 bucket events.
-
 
 ## Further Reading
 

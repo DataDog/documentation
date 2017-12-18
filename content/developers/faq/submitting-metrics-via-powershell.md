@@ -10,7 +10,6 @@ Datadog can collect metrics via the agent as well as via the API independently o
 
 This method doesn't require you to have the agent installed on the system running the PowerShell script. This, however, means you have to explicitly pass your API key as well as an application key when making the POST request. [See/create API key on your Datadog application](https://app.datadoghq.com/account/settings#api)
 
-
 ```
 # Tested on Windows Server 2012 R2 w/ PSVersion 4.0
 

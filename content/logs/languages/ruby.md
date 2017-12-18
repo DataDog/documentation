@@ -79,7 +79,6 @@ As it would be weirdly displayed in your Datadog application, disable your log c
 config.colorize_logging = false
 ```
 
-
 Now let's configure `logging-rails` that is going to convert everything in JSON format.
 
 ## Configuring the logging-rail gem

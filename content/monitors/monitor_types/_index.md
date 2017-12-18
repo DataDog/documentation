@@ -110,7 +110,6 @@ Here is a quick overview of the different terms used:
 
       Note the **on average** and **at all times** aggregations *require* a full window of data in the final series. This does *not* mean that each series must be full but that there shouldn't be a gap of more than 1 minute across all aggregated series. In other words, we recommend using **at least once** or **in total** for metrics with > 1 minute interval.
 
-
     - When you select the **change alert** option, you have additional
     parameters you can adjust.
       - *change* is an absolute change of the value whereas *% change* is the percentage change of your value compared to its previous value (so if it was a value of 2 and now 4, the *% change* is 100%).
@@ -141,7 +140,6 @@ Here is a quick overview of the different terms used:
 
 ### Setup Notifications
 
-
 {{< img src="monitors/index/notification.png" alt="notification" responsive="true" popup="true">}}
 
 1. Give your monitor a **title**. It is often useful to use a succinct
@@ -159,6 +157,5 @@ Here is a quick overview of the different terms used:
    resolved. If enabled, you can configure an escalation message to be sent anytime the monitor renotifies. The original message is included as well.
 
 [Learn more about notifications settings](/monitors/notifications).  
-
 
 ***Note:*** *To avoid notification storms we now group notifications with the same monitor ID and alert type in 20 second buckets. The first two notifications in the group within a 20 second bucket is sent as normal. All other notifications within that 20 seconds are sent as a single message listing all of them after the first two.*

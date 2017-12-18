@@ -28,7 +28,6 @@ For example:
 * The logic behind your metric is the following :
 {{< img src="getting_started/custom_metrics/custom_metric_1.png" alt="custom_metric_1" responsive="true" popup="true">}}
 
-
 The given unique metrics **on a given host** are therefore:
 
 * auth.exceptionCount with tag “method:X”
@@ -37,7 +36,6 @@ The given unique metrics **on a given host** are therefore:
 * auth.exceptionCount with tags “method:X” and “exception:B”
 * auth.exceptionCount with tags “method:Y” and “exception:A”
 * auth.exceptionCount with tags “method:Y” and “exception:B”
-
 
 In this situation, you would end up with 6 different metrics.
 
@@ -75,7 +73,6 @@ Let's say you want to have insight into the request.count from different service
 The logic behind your metric is the following :
 {{< img src="getting_started/custom_metrics/logic_metric.png" alt="logic_metric" responsive="true" popup="true">}}
 
-
 From there, you can see that **on each host reporting this metric**, if all services report both successes and failures, you can have up to 1x2x3 = **6 custom metrics**.
 
 Let’s say you have 3 hosts:
@@ -92,10 +89,8 @@ If you are an administrator, you can see your total custom metrics per hour as w
 So if you only had the first host from the example above reporting, you’d have this:
 {{< img src="getting_started/custom_metrics/metric_summary.png" alt="metric_summary" responsive="true" popup="true">}}
 
-
 Adding the second host:
 {{< img src="getting_started/custom_metrics/metric_summary_2.png" alt="metric_summary_2" responsive="true" popup="true">}}
-
 
 Adding the third host as per the table above, you get your 13 distinct metrics:
 {{< img src="getting_started/custom_metrics/metric_summary_3.png" alt="metric_summary_3" responsive="true" popup="true">}}

@@ -19,6 +19,7 @@ body > footer {
   z-index:3;
   position: absolute;
   bottom: 0;
+  line-height:0;
   width: 100%;
   /* Set the fixed height of the footer here */
   height:$footer_height;

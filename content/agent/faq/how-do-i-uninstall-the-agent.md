@@ -18,7 +18,6 @@ Drag the Datadog Application from the application folder to the Trash Bin.
 * $ sudo rm -rf /usr/local/bin/datadog-agent
 * $ sudo rm -rf ~/.datadog-agent/**​ #to remove broken symlinks
 
-
 If you ran the optional install commands to have the Agent run at boot time, you also need to run the following to finish uninstalling:
 
 * $ sudo launchctl unload -w /Library/LaunchDaemons/com.datadoghq.agent.plist

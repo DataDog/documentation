@@ -27,7 +27,6 @@ We also need a short blurb describing the integration as well as the correct ima
    [2]: /api/
    [3]: /developers/libraries/
 
-
 ## New integration documentation
 
 Integrations include information that comes from two different sources. The first and main source are the files under content/integrations. The second source are the metric csv files under dogweb. In order to see the metric tables that appear for some of the integrations, you need to create an environment variable called `github_personal_token` assigned your github personal token (you need to have access to dogweb and therefore must be a Datadog employee to see this). The table is brought in automatically by the deploy process.

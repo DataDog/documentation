@@ -30,7 +30,6 @@ _Note: we refers variously to 'individual monitors', 'constituent monitors', and
 
 In the Datadog application, go to the [**New Monitor**](https://app.datadoghq.com/monitors#create) page and click **Composite** in the list of monitor types:
 
-
 {{< img src="monitors/monitor_types/composite/select-monitor-type.png" alt="select monitor type" responsive="true" popup="true">}}
 
 ### Choose individual monitors
@@ -52,7 +51,6 @@ Even if you choose multi-alert monitors with the same group-by, the UI may still
 Since there's still a 'Group Matching Error' despite matching group-bys, we can assume that these monitors currently have no common reporting sources (also called common groupings). As long as there are no common reporting sources, Datadog cannot compute a status for the composite monitor, and it never triggers. However, you _can_ ignore the warning and create the monitor anyway. To understand why, [read more below](#how-composite-monitors-select-common-reporting-sources).
 
 When you select a second monitor that doesn't cause a warning in the UI, the UI populates the **Trigger when** field with the default trigger condition `a && b` and show the status of the proposed composite monitor:
-
 
 {{< img src="monitors/monitor_types/composite/create-composite-3.png" alt="create composite 3"  responsive="true" popup="true">}}
 
@@ -195,7 +193,6 @@ The previous table showed the composite monitor status across four points in tim
 | web04 | Skipped      | Warn     | Alert     | Skipped                        |
 {{% /table %}}
 
-
 In this cycle, you would receive two alerts.
 
 #### Many multi-alert monitors
@@ -210,7 +207,6 @@ Here's an example cycle:
 | web04 | Unknown   | Warn      | Alert      | Alert                          |<i class="fa fa-check" aria-hidden="true"></i>
 | web05 | Ok        | Ok        | Alert      | Ok                             |
 {{% /table %}}
-
 
 In this cycle, you would receive one alert.
 

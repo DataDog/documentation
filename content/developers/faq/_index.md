@@ -4,7 +4,6 @@ kind: faq
 customnav: developersnav
 ---
 
-
 ## General
 
 * [How to remove the `host` tag when submitting metrics via dogstatsD](/developers/faq/how-to-remove-the-host-tag-when-submitting-metrics-via-dogstatsd)

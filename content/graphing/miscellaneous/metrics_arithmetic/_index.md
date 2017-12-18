@@ -9,7 +9,6 @@ customnav: graphingnav
 
 The Datadog UI supports the ability to graph your metrics with various arithmetic options. You can utilize any of: +, -, /, * to modify the values that are displayed on your graphs. This syntax allows for both integer values as well as arithmetic using multiple metrics.
 
-
 ## Metric Arithmetic Using an Integer
 
 You can modify how a metric value is displayed on a graph by performing an arithmetic operation on the metric. For example, if you would like to visualize the double of a specific metric, say system.load.5

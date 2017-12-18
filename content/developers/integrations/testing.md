@@ -45,11 +45,9 @@ The following test methods are provided by the `AgentCheckTest` class. For more 
 
 Prints the test coverage status of metrics, events, service checks and service metadata. Also lists items for each that lack test coverage.
 
-
 #### `print_current_state()`
 
 Prints a report of the metrics, events, service checks, service metadata and warnings provided by the integration.
-
 
 ### Run Checks Methods
 
@@ -69,7 +67,6 @@ Parameters:
 }
 ```
 
-
 * **agent_config** (*dictionary*) – A customized Datadog agent configuration.
 * **mocks** (*dictionary*) – A dictionary keyed by method name (string) with values of method. For example:
 
@@ -80,21 +77,17 @@ Parameters:
 }
 ```
 
-
 * **force_reload** (*boolean*) – Reload the check before running it.
 
 #### `run_check_twice(config, agent_config=None, mocks=None, force_reload=False)`
 
 Similar to `run_check`, this method runs the check twice with a 1 second delay between runs.
 
-
 #### `run_check_n(config, agent_config=None, mocks=None, force_reload=False, repeat=1, sleep=1)`
 
 Similar to `run_check`, this method runs the check multiple times.
 
-
 Parameters:
-
 
 * **repeat** (*integer*) – The number of times the check runs.
 * **sleep** (*integer*) – The delay in seconds between check runs.
@@ -104,7 +97,6 @@ Parameters:
 #### `assertMetric(metric_name, value=None, tags=None, count=None, at_least=1, hostname=None, device_name=None, metric_type=None)`
 
 Parameters:
-
 
 * **metric_name** (*string*) – The name of the metric.
 * **value** (*variable*) – The value for the metric.
@@ -122,7 +114,6 @@ Parameters:
 
 Parameters:
 
-
 * **metric_name** (*string*) – The name of the metric.
 * **tag_prefix** (*string*) – Match metrics with tags that begin with this string.
 * **count** (*integer*) – The number of data points the assertion should test for.
@@ -131,7 +122,6 @@ Parameters:
 #### `assertMetricTag(metric_name, tag, count=None, at_least=1)`
 
 Parameters:
-
 
 * **metric_name** (*string*) – The name of the metric.
 * **tag** (*string*) – The tag associated with the metric.
@@ -143,7 +133,6 @@ Parameters:
 #### `assertServiceMetadata(meta_keys, count=None, at_least=1)`
 
 Parameters:
-
 
 * **meta_keys** (*list of strings*) – A list of metadata keys.
 * **count** (*integer*) – The number of candidate metrics the assertion should test for. Typical values are:
@@ -164,19 +153,16 @@ Parameters:
 
 Parameters:
 
-
 * **service_check_name** (*string*) – The name of the service check.
 * **tags** (*list of strings*) – The tags associated with the service check.
 * **count** (*integer*) – The number of data points the assertion should test for.
 * **at_least** (*integer*) – The minimum number of data points the assertion should test for.
-
 
 ### Event Method
 
 #### `assertEvent(msg_text, count=None, at_least=1, exact_match=True, tags=None, **kwargs)`
 
 Parameters:
-
 
 * **msg_text** (*string*) – The event message text.
 * **count** (*integer*) – The number of candidate metrics the assertion should test for. Typical values are:
@@ -193,7 +179,6 @@ Parameters:
 #### `assertWarning(warning, count=None, at_least=1, exact_match=True)`
 
 Parameters:
-
 
 * **warning** (*string*) – The warning message text.
 * **count** (*integer*) – The number of candidate warnings the assertion should test for. Typical values are:

@@ -11,7 +11,6 @@ aliases:
     - /guides/basic_agent_usage/amazonlinux/
 ---
 
-
 ## Overview
 
 This page outlines the basic functionality of the Datadog Agent.

@@ -45,7 +45,6 @@ A metric's Datadog in-app type affects how its data is interpreted in query resu
 
 In the Datadog web application there are 3 metric types:
 
-
 * [GAUGE](/developers/metrics/#gauges)
 * [RATE](/developers/metrics/#rates)
 * [COUNT](/developers/metrics/#count) 
@@ -55,7 +54,6 @@ A metric's type is stored as metrics metadata and is used to determine how a met
 
 #### How do submission types relate to Datadog in-app types?
 Datadog accepts metrics submitted from a variety of sources, and as a result the submission type does not always map exactly to the Datadog in-app type:
-
 
 | Submission Source | Submission Method (python) | Submission Type | Datadog In-App Type |
 |-------------------|-------------------|-----------------|--------------|
@@ -162,7 +160,6 @@ Counters are used to count things.
 | dog.increment(...) | Used to increment a counter of events: <ul><li>Stored as a RATE type in the datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter's value over that statsd flush period.</li></ul>|
 |dog.decrement(...)| Used to decrement a counter of events: <ul><li>Stored as a RATE type in the datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter's value over that statsd flush period.</li></ul>|
 {{% /table %}}
-
 
 ### Example
 Lets count web page views. To achieve this, we'll increment a metric called

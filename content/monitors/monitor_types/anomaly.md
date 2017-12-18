@@ -77,7 +77,6 @@ Both the Monitor Edit page and the Monitor Status pages provide "Historical Cont
 
 ### Anomaly Detection Algorithms
 
-
 There are four different anomaly detection algorithms:
 
 * _Basic_: Use this algorithm for metrics that have no repeating seasonal pattern. _Basic_ uses a simple lagging rolling quantile computation to determine the range of expected values, but it uses very little data and adjusts quickly to changing conditions but has no knowledge of seasonal behavior or longer trends.
@@ -129,7 +128,6 @@ If you wanted to create an anomaly detection monitor to notify you when your av
 avg(last_5m):anomalies(avg:system.cpu.system{name:cassandra}, 'basic', 3, direction='above') >= 0.8
 ```
 
-
 ## FAQ
 
 ###  Should I use anomaly detection for everything?
@@ -138,7 +136,6 @@ No. Anomaly detection is designed to assist with visualizing and monitoring metr
 If your metric does not have any sort of repeated/predictable pattern, then a simple chart overlay or threshold alert might be better than anomaly detection.
 
 Also, anomaly detection requires historical data to make good predictions. If you have only been collecting a metric for a few hours or a few days, anomaly detection probably won't be very useful.
-
 
 ### Why can't I use anomaly detection over groups in the dashboard?
 
@@ -159,7 +156,6 @@ All the algorithms outside of _Basic_ use extensive amounts of historical data s
 The second graph shows the same metric, a day later. Even though it uses the previous day in the calculation of the envelope, it is unaffected by the anomaly that occurred then.
 
 {{< img src="monitors/monitor_types/anomaly/no_effect.png" alt="no effect" responsive="true" popup="true" >}}
-
 
 ### Does past anomalies affect the current predictions?
 
@@ -209,7 +205,6 @@ One approach is to add a `rollup()` to force the use of a larger interval. `roll
 Another option is to apply the `ewma()` [function](/graphing/miscellaneous/functions) to take a moving average. Like with rollups, this function smooths away intermittent zeros so that drops in the metric can correctly be identified as anomalies.
 
 {{< img src="monitors/monitor_types/anomaly/ewma_profile_updates.png" alt="Ewma profile updates" responsive="true" popup="true" >}}
-
 
 ### Why do I get a query parsing error when trying to combine some functions with anomaly detection?
 

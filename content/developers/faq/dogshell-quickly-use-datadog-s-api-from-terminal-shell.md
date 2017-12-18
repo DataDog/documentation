@@ -8,7 +8,6 @@ customnav: main_references
 
 Many users are familiar with [our API](/api) and all the many things you can do in datadog with it, whether sending/querying metrics or events to your datadog account, creating dashboards, monitors, or downtimes, and more. But there’s an easy way to use our API straight from terminal/shell, using a wrapper called “dogshell”.
 
-
 ## Setup:
 
 Dogshell comes with our officially supported [datadogpy Python library](https://github.com/DataDog/datadogpy), often used to send data to datadog via the [dogstatsd](/developers/dogstatsd). [It can easily be installed following the dedicated instructions](https://github.com/DataDog/datadogpy#installation).

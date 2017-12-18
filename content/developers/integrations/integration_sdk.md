@@ -28,7 +28,7 @@ Once the required Ruby gems have been installed by Bundler, you can easily creat
 
 ## Building an integration
 
-You can use rake to generate the skeleton for a new integration by running `rake generate:skeleton[my_integration]`, where "my_integration" is the name of your new integration (note: you must enclose your integration name in square brackets).
+You can use rake to generate the skeleton for a new integration by running `rake generate:skeleton[my_integration]`, where "my_integration" is the name of your new integration (note: enclose your integration name in square brackets).
 
 This creates a new directory, `my_integration`, that contains all the files required for your new integration. This also creates an entry for your new integration in our `.travis.yml` and `circle.yml` continuous integration files to ensure that your tests are run whenever new builds are created.
 
@@ -215,7 +215,6 @@ Class TestMyIntegration(AgentCheckTest):
 ```
 
 For more information about tests and available test methods, reference the [AgentCheckTest class in the Datadog Agent repository][7]
-
 
 ## Libraries
 

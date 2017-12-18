@@ -61,7 +61,6 @@ If you ended up at this page and have not yet installed the Datadog Agent, go [t
 
 If you think you might be experiencing issues, the first thing to do is [run the info command](/agent/faq/agent-status-and-information) and check the [Agent logs](/agent/faq/log-locations). The [info command](/agent/faq/agent-status-and-information) and the log locations are dependent on your OS, which you can select from the navigation to the left for further information.
 
-
 ### Issues getting the Agent installed
 
 If you encountered an issue during the Agent installation process that prevented installation from occurring, reach out to [Datadog support team](/help). Let us know your OS and version, as well as how you are installing the Agent. You should include any error messages you encountered along the way.
@@ -74,7 +73,6 @@ First, [run the info command](/agent/faq/agent-status-and-information). Select y
 If not, you should also check the logs (location of the logs again depends on OS). Errors in the logs may also reveal the cause of any issues.
 
 If not, send both the full output of the [info command](/agent/faq/agent-status-and-information) and the logs with a flare as attachments to the [Datadog support team](mailto:support@datadoghq.com?Subject=Agent%20issues).
-
 
 #### Check your machine's time
 We have also seen a few cases where machines have their clock set further in the future or the past, which can sometimes cause problems with metric submission.
