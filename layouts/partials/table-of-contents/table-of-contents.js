@@ -103,7 +103,7 @@ $(document).ready(function () {
         $(document).on( "moveToAnchor", function() {
             var open = $('.mobile-toc-toggle i').hasClass('icon-small-x');
             if(open) {
-                $('.mobile-toc-toggle').click();
+                //$('.mobile-toc-toggle').click();
             }
         });
 
