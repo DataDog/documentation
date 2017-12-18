@@ -29,7 +29,7 @@ Click the button on the right for Add a Relying Party Trust.
 This opens a wizard for the trust with a welcome screen describing the feature. Review the description and click Start to begin.
 {{< img src="account_management/faq/KWe4h6W.png" alt="KWe4h6W" responsive="true" popup="true">}}
 
-Import the Datadog SAML Metadata file available [here](https://app.datadoghq.com/account/saml/metadata.xml).
+Import the [Datadog SAML Metadata file](https://app.datadoghq.com/account/saml/metadata.xml).
 
 The file requires a login to access it, making it easiest to download then import by file instead of directly via the URL as shown in the import options below. (As a warning: when downloading the file, if you open and/or rename the file, that may end up changing the file type which can cause xml parsing issues at the next step.)
 {{< img src="account_management/faq/UAjeUVL.png" alt="UAjeUVL" responsive="true" popup="true">}}

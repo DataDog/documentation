@@ -47,7 +47,7 @@ Loading this URL initiates a SAML authentication against your IdP. Note that the
 * Datadog specifies  `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` for the Format of the **NameIDPolicy** in Assertion Requests.
 * Assertions must be signed.
 * Assertions can be encrypted, but unencrypted assertions are accepted.
-* Datadog’s SP Metadata can be found [here](https://app.datadoghq.com/account/saml/metadata.xml).
+* [Datadog’s SP Metadata](https://app.datadoghq.com/account/saml/metadata.xml).
 
 ##  Setting Attributes
 

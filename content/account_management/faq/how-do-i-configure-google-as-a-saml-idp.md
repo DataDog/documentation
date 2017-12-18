@@ -13,7 +13,7 @@ further_reading:
 
 ## Setting up Google as a SAML IdP
 
-Google instructions can be found [here](https://support.google.com/a/answer/6087519?hl=en)
+[Google instructions](https://support.google.com/a/answer/6087519?hl=en)
 
 ## For the "Service Provider Details"
 
