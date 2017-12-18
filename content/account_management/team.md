@@ -7,7 +7,7 @@ further_reading:
 - link: "/account_management/saml"
   tag: "Documentation"
   text: Configure SAML for your Datadog account
-- link: "/account_management/multi_account"
+- link: "/account_management/multi_organization"
   tag: "Documentation"
   text: Configuring Teams & Organizations with Multiple Accounts
 ---

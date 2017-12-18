@@ -20,8 +20,6 @@ The Multi-org Account feature must be enabled by support. If this is a feature y
 1. After the feature has been enabled, visit the [New Account Page]( https://app.datadoghq.com/account/new_org).
 2. Enter the name of the child-organization you wish to create and click the **Create** button. **The child-organization name cannot exceed 32 characters.**
 
-{{< img src="account_management/multi_account/guides-multacct-createorg.png" alt="Create Org" responsive="true" popup="true">}}
-
 The new child-organization will be created as a 14-day free trial account. You can change the billing plan on the [Organization account settings page](https://app.datadoghq.com/account/billing). If you wish to add the child-organization's billing to your parent-organization's billing account, contact your sales representative.
 
 ## Custom domains for each child-organization

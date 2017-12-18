@@ -6,7 +6,7 @@ aliases:
   - /guides/saml
 customnav: accountmanagementnav
 further_reading:
-- link: "/account_management/multi_account"
+- link: "/account_management/multi_organization"
   tag: "Documentation"
   text: Configuring Teams & Organizations with Multiple Accounts
 ---
