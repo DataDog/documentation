@@ -125,7 +125,7 @@ class PreBuild:
         self.integration_datafile = '{0}{1}{2}'.format(abspath(normpath(self.options.source)), sep, "integrations.json")
         self.regex_h1 = re.compile(r'^#{1}(?!#)(.*)', re.MULTILINE)
         self.regex_h1_replace = re.compile(r'^(#{1})(?!#)(.*)', re.MULTILINE)
-        self.regex_metrics = re.compile(r'(#{3} Metrics\n)(.*?)(\s*#)(.*)', re.DOTALL)
+        self.regex_metrics = re.compile(r'(#{3} Metrics\n)(.*?)(\s*#)(.*)#{3} Events\n', re.DOTALL)
         self.regex_fm = re.compile(r'(?:-{3})(.*?)(?:-{3})(.*)', re.DOTALL)
         self.datafile_json = []
         self.pool_size = 5
