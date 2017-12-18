@@ -20,15 +20,16 @@ further_reading:
 
 Event monitors allows you to alert when an event matching your query occurs.
 
-{{< img src="monitors/monitor_types/event/event_monitor.png" alt="event monitor" responsive="true" popup="true">}}
+1. Select the query and parameters (status, priority, sources and tags) you want to monitor:
+    {{< img src="monitors/monitor_types/event/event_monitor_selection.png" alt="event monitor selection" responsive="true" popup="true">}}
+2. Select the alert grouping:
+    {{< img src="monitors/monitor_types/event/event_alert_grouping.png" alt="event monitor alert grouping" responsive="true" popup="true">}}
 
-1. Select the query and parameters (status, priority, sources and tags) you want to monitor.
+3. Select the **alerting conditions**. The **threshold value** and **timeframe** options allows you to set the number of occurrence of an event required during a timeframe before triggering the monitor.  
+    {{< img src="monitors/monitor_types/event/event_monitor_alert_conditions.png" alt="event monitor alert conditions" responsive="true" popup="true">}}
 
-2. Select the alert grouping
-
-3. Select the **alerting conditions**. The **threshold value** and **timeframe** options allows you to set the number of occurrence of an event required during a timeframe before triggering the monitor.
-
-4. Configure your **notification options**. Refer to the [Notifications](#monitor-notifications) dedicated documentation page for informations.
+4. Configure your **notification options**:  
+    Refer to the [Notifications](#monitor-notifications) dedicated documentation page for informations.
 
 ## Using event tags in Event Monitors
 
