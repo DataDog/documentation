@@ -4,7 +4,6 @@ kind: documentation
 autotocdepth: 2
 customnav: lognav
 description: "Parse & Enrich your logs so you can create valuable facets & metrics in the Logs Explorer."
-beta: true
 ---
 
 <div class="alert alert-info">

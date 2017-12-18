@@ -3,8 +3,11 @@ title: C# Log Collection
 kind: documentation
 autotocdepth: 2
 customnav: lognav
-beta: true
 ---
+
+<div class="alert alert-info">
+Datadog's Logs is currently available via public beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
+</div>
 
 To send your C# logs to Datadog, we recommend logging to a file and then tailing that file with your Datadog agent. Here are setup examples for the `log4Net`, `serilog` and `Nlog` logging libraries
 

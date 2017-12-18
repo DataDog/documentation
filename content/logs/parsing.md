@@ -4,7 +4,6 @@ kind: documentation
 autotocdepth: 2
 customnav: lognav
 description: "Parse your logs using the Grok Processor"
-beta: true
 ---
 
 <div class="alert alert-info">

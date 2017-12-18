@@ -3,8 +3,11 @@ title: Ruby on Rails Log Collection
 kind: documentation
 autotocdepth: 2
 customnav: lognav
-beta: true
 ---
+
+<div class="alert alert-info">
+Datadog's Logs is currently available via public beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
+</div>
 
 We are going to use `lograge` here as it'll help us bringing some sanity in logs that are noisy and hardly parseable. 
 
