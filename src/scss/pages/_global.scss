@@ -2,7 +2,8 @@ $ddpurple:    #774DA2;
 
 html {
   font-size:18px;
-  display:block !important;
+  opacity:1 !important;
+  transition: opacity .3s ease-in;
 }
 
 body {
