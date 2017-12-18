@@ -539,6 +539,11 @@ languages:
           url: "/account_management/team/"
           weight: 30
           parent: menu_references_account_management
+        - identifier: customnav_accountmanagementnav_org
+          name: "Organization settings"
+          url: "/account_management/org_settings/"
+          weight: 40
+          parent: menu_references_account_management
         - identifier: customnav_accountmanagementnav_saml
           name: "SSO with SAML"
           url: "/account_management/saml/"

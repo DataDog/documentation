@@ -331,6 +331,9 @@
 - id: customnav_accountmanagementnav_team
   translation: Team management
 
+- id: customnav_accountmanagementnav_org
+  translation: Organization settings
+
 - id: customnav_accountmanagementnav_saml
   translation: SSO with SAML
 
