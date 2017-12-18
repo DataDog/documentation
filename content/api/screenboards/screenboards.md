@@ -5,4 +5,4 @@ order: 11
 ---
 ## Screenboards
 
-This endpoint allows you to programmatically create, update delete and query Screenboard. Find more about Screenboard [here](/graphing/dashboards/screenboard).
+This endpoint allows you to programmatically create, update delete and query Screenboard. [Find more about Screenboard](/graphing/dashboards/screenboard).

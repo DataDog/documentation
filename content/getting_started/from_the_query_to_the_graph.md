@@ -8,7 +8,7 @@ While setting up graphs is pretty simple in Datadog, this article aims at helpin
 
 This article focuses on describing the steps performed by our graphing system from the query to the graph, so that you get a good idea how to choose your graph settings.
 
-Note that there is a short version of this article [here](/graphing/faq/how-does-datadog-render-graphs-my-graph-doesn-t-show-the-values-i-m-expecting).
+Tl;Dr ? [there is a short version of this article](/graphing/faq/how-does-datadog-render-graphs-my-graph-doesn-t-show-the-values-i-m-expecting).
 
 We use the metric **system.disk.total** as an example. We want to graph data associated to this metric and coming from a specific server (host:moby).
  
@@ -43,7 +43,7 @@ The idea is then to aggregate data from these sources together to give you a met
  
 **Note**: The tagging system adopted by Datadog is simple and powerful. You don’t have to know and specify the sources to combine, you just have to give a tag, i.e. an ID and Datadog combines all data with this ID and not the rest. For instance, you don’t need to know the number of hosts or devices you have, when you query system.disk.total{*}. Datadog aggregates data from all sources for you.
  
-More information about timeseries and tag cardinality may be found [here](/getting_started/custom_metrics)
+[More information about timeseries and tag cardinality](/getting_started/custom_metrics)
 
 Parameter involved: scope
 You can use more than one tag, e.g. {host:moby, device:udev} if you want to data responding to both tags.
@@ -56,7 +56,7 @@ However, before combining all data from the different sources (step 3), datadog 
 
 ### Why?
 
-As we store data at a 1 second granularity we cannot display all real data on graphs. See [here](/graphing/faq/how-is-data-aggregated-in-graphs)
+As we store data at a 1 second granularity we cannot display all real data on graphs. [See this article to learn more on how data is aggregated in graphs](/graphing/faq/how-is-data-aggregated-in-graphs)
  
 For a graph on a 1-week time window, it would require sending hundreds of thousands values to your browser, and besides not all these points could be graphed on a widget occupying a small portion of your screen. For these reasons we are forced to proceed to data aggregation and to send a limited number of points to your browser to render a graph.
 
@@ -66,7 +66,7 @@ For instance, on a one-day view with the 'lines' display you'll have one datapoi
 
 ### How?
 
-By default our backend computes the rollup aggregate by averaging all real values, which tends to smooth out graphs as you zoom out. You may see more information [here](/graphing/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs).
+By default our backend computes the rollup aggregate by averaging all real values, which tends to smooth out graphs as you zoom out. [See more information about why does zooming out a timeframe also smooth out your graphs](/graphing/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs).
 Data aggregation needs to occur whether you have 1 or 1000 sources as long as you look at a large time window. So what you generally see on graph are not the real values submitted but local aggregates.
 
 {{< img src="getting_started/from_query_to_graph/metrics_graph_3.png" alt="metrics_graph_3" responsive="true" popup="true">}}
@@ -106,7 +106,7 @@ Most of the functions apply at the last step. From the ~300 points obtained afte
 In this example the function abs makes sure that your results are positive numbers.
  
 Parameter involved: function
-See a list of functions offered by Datadog [here](/graphing/miscellaneous/).
+[Consult the list of functions offered by Datadog](/graphing/miscellaneous/).
 
 ### Grouped queries, arithmetic, as_count/rate
  

@@ -11,7 +11,7 @@ Many users are familiar with [our API](/api) and all the many things you can do 
 
 ## Setup:
 
-Dogshell comes with our officially supported [datadogpy Python library](https://github.com/DataDog/datadogpy), often used to send data to datadog via the [dogstatsd](/developers/dogstatsd). It can easily be installed following the instructions [here](https://github.com/DataDog/datadogpy#installation).
+Dogshell comes with our officially supported [datadogpy Python library](https://github.com/DataDog/datadogpy), often used to send data to datadog via the [dogstatsd](/developers/dogstatsd). [It can easily be installed following the dedicated instructions](https://github.com/DataDog/datadogpy#installation).
 
 Once you have that library installed, you have the dog command available to you in your terminal/shell, but it still needs to be “initialized”: you need to provide it with an API and Application key so that it can be used to send/receive data to/from your account. This is easily done; when you first try running a dog command, it recognizes that it needs to be initialized, and walks you through the 2-step process.
 
@@ -54,7 +54,7 @@ appkey = YOUR_APPLICATION_KEY
 
 ## The Dogshell Commands:
 
-For reference, you can find the code for dogshell [here](https://github.com/DataDog/datadogpy/tree/master/datadog/dogshell). But once you have dogshell installed and initialized, you can append the -h option to the following commands to get more information on specific dogshell usage:
+For reference, [find the code for dogshell](https://github.com/DataDog/datadogpy/tree/master/datadog/dogshell). But once you have dogshell installed and initialized, you can append the -h option to the following commands to get more information on specific dogshell usage:
 
 * dog metric
 * dog event

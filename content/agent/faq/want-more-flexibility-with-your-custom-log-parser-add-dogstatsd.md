@@ -27,7 +27,7 @@ In some circumstances, these limitations end up being significant indeed. Fortun
 ## Pre-requisites for this type of custom metric collection
 
 * A datadog agent. More info on how to install that from your [datadog account here](https://app.datadoghq.com/account/settings#agent). 
-* The datadogpy library, which can be installed by following [these instructions](/agent/basic_agent_usage/amazonlinux/#adding-a-custom-python-package-to-the-agent), the datadogpy library itself can be found [here](https://github.com/DataDog/datadogpy#installation). 
+* The datadogpy library, which can be installed by following [these instructions](/agent/basic_agent_usage/amazonlinux/#adding-a-custom-python-package-to-the-agent), the datadogpy library itself can be found on [our Github repository](https://github.com/DataDog/datadogpy#installation). 
 
 ## The big idea
 

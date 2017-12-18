@@ -19,11 +19,11 @@ This flow utilizes the Trello REST POST card api endpoint to post the @notificat
 
 #### Getting the Keys
 
-To get the Trello App Key and Token, simply navigate to Trello's relevant page [here](https://trello.com/app-key). If you are logged in, you should be able to see the [App key](https://cl.ly/2A40141c0p2Z) immediately:
+To get the Trello App Key and Token, simply [navigate to Trello's relevant page](https://trello.com/app-key). If you are logged in, you should be able to see the [App key](https://cl.ly/2A40141c0p2Z) immediately:
 
 NOTE: Trello mentions API key in the url. For this article, API and APP keys are one and the same
 
-Authorize a token with the Trello Account you are currently logged into (Green Arrow [here](https://cl.ly/2A40141c0p2Z))
+Authorize a token with the Trello Account you are currently logged into, [the Green Arrow](https://cl.ly/2A40141c0p2Z).
 
 #### Designate the Trello List
 
@@ -32,7 +32,7 @@ From there, find the [value](https://cl.ly/0R2n1A0V280s) for idList.
 
 #### Configure the Webhook
 
-The API documentation for Trello cards are [here](https://developers.trello.com/advanced-reference/card#put-1-cards-card-id-or-shortlink) and our webhook integration is [here](https://app.datadoghq.com/account/settings#integrations/webhooks).
+[Consult the API documentation for Trello cards](https://developers.trello.com/advanced-reference/card#put-1-cards-card-id-or-shortlink) and our webhook integration [dedicated documentation page](https://app.datadoghq.com/account/settings#integrations/webhooks).
 
 In the configuration:
 

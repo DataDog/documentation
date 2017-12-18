@@ -349,7 +349,7 @@ Here's an example datagram:
 For Linux and other Unix-like OS, we use Bash.
 For Windows we'll need Powershell and [powershell-statsd](https://github.com/joehack3r/powershell-statsd/blob/master/send-statsd.ps1), a simple Powershell function that takes care of the network bits for us.
 
-The idea behind DogStatsD is simple: create a message that contains information about your metric/event, and send it to a collector over UDP on port 8125. The message format can be found [here](#datagram-format).
+The idea behind DogStatsD is simple: create a message that contains information about your metric/event, and send it to a collector over UDP on port 8125. [Read more about the message format](#datagram-format).
 
 ### Sending metrics
 

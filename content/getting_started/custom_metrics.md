@@ -17,7 +17,7 @@ This article explains:
 
 A custom metric refers to a single, unique combination of a metric name, host, and any tags.
 
-Custom metrics generally refer to any metric that you send using statsd, [dogstatsd](/developers/dogstatsd), or through extensions made to the [Datadog Agent](/agent). Some [integrations](/integrations/) can potentially emit an unlimited number of metrics that can also count as custom, further details can be found [here](/integrations/faq/what-standard-integrations-emit-custom-metrics).
+Custom metrics generally refer to any metric that you send using statsd, [dogstatsd](/developers/dogstatsd), or through extensions made to the [Datadog Agent](/agent). Some [integrations](/integrations/) can potentially emit an unlimited number of metrics that can also count as custom, [further details on which standard integrations emit custom metrics](/integrations/faq/what-standard-integrations-emit-custom-metrics).
 
 In order to fully leverage the capabilities of the Datadog product through scoping and alerting, you’ll probably be using tags. As a consequence, one submitted metric actually leads to **multiple unique tag combinations**- counting towards your custom metrics count.
 
@@ -110,4 +110,4 @@ Ultimately, you’ll have 13 metrics using the following query: `count:service.r
 
 * For querying purposes, we encourage you to limit the number of tags applied to 1,000 tags per metric. Going over this amount [slows down the graphs](/graphing/faq/dashboard-loads-very-slowly) in your dashboards due to the increase in cardinality.
 * You can check the number of "distinct metrics" in the metric summary page (click a metric name to see the number of distinct metrics associated). If you need a higher custom metric limit, [email us](/help) and we'll connect you with your Customer Success Manager.
-* Additional information about billing and custom metrics is available [here](/account_management/faq/).
+* [Additional information about billing and custom metrics](/account_management/faq/).

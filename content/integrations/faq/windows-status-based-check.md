@@ -22,7 +22,7 @@ Checks
       - Collected 0 metrics 0 events & 1 service check
 ```
 
-4. Install the integration by clicking "Install" [here](https://app.datadoghq.com/account/settings#integrations/windows_service):
+4. Install the integration by clicking "Install" [on your Datadog application dedicated page](https://app.datadoghq.com/account/settings#integrations/windows_service):
 
 5. Follow [those steps](/monitors/monitor_types/integration) to create an Integration Monitor.
 

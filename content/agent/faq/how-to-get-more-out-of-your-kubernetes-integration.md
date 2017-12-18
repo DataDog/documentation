@@ -88,7 +88,7 @@ kubectl get nodes
 kubectl label no <NODE_NAME> key=value
 ```
 
-2. Then add the node selector in your Daemonset/Deployment. For example, [here](https://gist.github.com/CharlyF/754a5033e6ceea701c32bab5b0f19024#file-ddmaster-ds-kubernetes-events-yaml-L57-L58) we label the node with run=mongo and by running:
+2. Then add the node selector in your Daemonset/Deployment. For example, [here we label the node with `run=mongo`](https://gist.github.com/CharlyF/754a5033e6ceea701c32bab5b0f19024#file-ddmaster-ds-kubernetes-events-yaml-L57-L58)  and by running:
 ```
 kubectl apply -f ddmaster-ds-kubernetes-events.yaml
 ```

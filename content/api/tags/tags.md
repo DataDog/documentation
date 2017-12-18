@@ -9,4 +9,4 @@ All metrics sent from a host have its tags applied. When fetching and applying t
 
 The component of your infrastructure responsible for a tag is identified by a source. Valid sources are: nagios, hudson, jenkins, users, feed, chef, puppet, git, bitbucket, fabric, capistrano...
 
-Read more about tags [here](/agent/tagging).
+[Read more about tags on the dedicated documentation page](/agent/tagging).

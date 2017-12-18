@@ -55,7 +55,7 @@ To build a Network monitor on an http check you need to:
 
     Don't forget to select the threshold values for your monitor
 
-3. Configure the **4 - "Say what's happening"** section to receive the correct notification. Find more about this [here](/monitors/notifications)
+3. Configure the **4 - "Say what's happening"** section to [receive the correct notification](/monitors/notifications)
 
 **Note**: Contrary to metric monitor it's not possible to get alerted after the endpoint is unavailable for X min. Instead you can only be alert after 5 max consecutive bad statuses. Unless a high timeout value is used in the agent config, if a site goes down this translates into 5 * ~15-20 seconds (agent collection period) i.e. 1min30 without data.
 
