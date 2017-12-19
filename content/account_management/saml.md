@@ -33,6 +33,7 @@ That brings you to the **SAML Single Sign On Configuration** page:
 
 3. After you upload the IdP Meta-data and configure your IdP, enable SAML in Datadog by clicking the Enable button.
 {{< img src="account_management/saml/saml_enable.png" alt="saml enable" responsive="true" popup="true">}}
+
 Once SAML is configured in Datadog and your IdP is set up to accept requests from Datadog, users can log in by using the Single Sign On URL that is shown in the Status box at the top of the [SAML Configuration page](https://app.datadoghq.com/saml/saml_setup).
 {{< img src="account_management/saml/saml_enabled.png" alt="Saml Enabled" responsive="true" popup="true">}}
 
