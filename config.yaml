@@ -530,29 +530,29 @@ languages:
 
         # ACCOUNT MANAGEMENT
         - identifier: menu_references_account_management
-          name: "Account Management"
+          name: "Account management"
           url: "/account_management/"
           pre: "nav_account"
           weight: 110
         # ACCOUNT MANAGEMENT - Subnav start
         - identifier: customnav_accountmanagementnav_team
-          name: "Team"
+          name: "Team management"
           url: "/account_management/team/"
           weight: 30
           parent: menu_references_account_management
-        - identifier: customnav_accountmanagementnav_settings
-          name: "Settings"
-          url: "/account_management/settings/"
+        - identifier: customnav_accountmanagementnav_org
+          name: "Organization settings"
+          url: "/account_management/org_settings/"
           weight: 40
           parent: menu_references_account_management
         - identifier: customnav_accountmanagementnav_saml
-          name: "SAML"
+          name: "SSO with SAML"
           url: "/account_management/saml/"
           weight: 50
           parent: menu_references_account_management
-        - identifier: customnav_accountmanagementnav_multi_account
-          name: "Multi Account"
-          url: "/account_management/multi_account/"
+        - identifier: customnav_accountmanagementnav_multi_organization
+          name: "Multi-org accounts"
+          url: "/account_management/multi_organization/"
           weight: 60
           parent: menu_references_account_management
         #- identifier: customnav_accountmanagementnav_faq
