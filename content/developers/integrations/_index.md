@@ -8,24 +8,20 @@ aliases:
 
 ## Overview
 
-Being able to see all of your metrics from across your infrastructure is key within Datadog. While we do have guides to submit [custom metrics][1] via our [API][2] and [code instrumentation][3], it's possible you might want to see a certain source become an official integration. Overall, the largest deciding factor in what integrations we build is what our clients request.
+Being able to see all of your metrics from across your infrastructure is key within Datadog. While we do have guides to submit [custom metrics](/developers/metrics/) via our [API](/api/) and [code instrumentation](/developers/libraries/), it's possible you might want to see a certain source become an official integration. Overall, the largest deciding factor in what integrations we build is what our clients request.
 
 If you would like to propose an integration, reach out to support@datadoghq.com and tell us what metrics you would like to see from that given source.
 
 If you manage or work with a service and would like to see Datadog integrate it, the following information is needed:
 
-  * How does data get into Datadog? There are currently three options:
-    1. Push data from the source to Datadog
-    2. Crawl the data source's API
-    3. Have the Datadog Agent pick up the information from the source
-  * What are the metrics and tags should be picked up from the source?
-  * What metrics should be included on the default dashboard that we generate for each integration?
+* How does data get into Datadog? There are currently three options:
+  *  Push data from the source to Datadog
+  *  Crawl the data source's API
+  *  Have the Datadog Agent pick up the information from the source
+* What are the metrics and tags should be picked up from the source?
+* What metrics should be included on the default dashboard that we generate for each integration?
 
 We also need a short blurb describing the integration as well as the correct image to use across our site.
-
-   [1]: /developers/metrics/
-   [2]: /api/
-   [3]: /developers/libraries/
 
 ## New integration documentation
 
