@@ -53,17 +53,18 @@ where it is stored and available for graphing alongside the rest of your metrics
 
 ## Setup
 
-First, take a look at your `datadog.conf` file, and uncommented the following lines:
+First, edit your `datadog.conf` file to uncomment the following lines:
 ```
-# If you don't want to enable the DogStatsd server, set this option to no
 use_dogstatsd: yes
-# Make sure your client is sending to the same port.
- dogstatsd_port: 8125
+
+...
+
+dogstatsd_port: 8125
 ```
 
 Then [restart your agent](/agent/faq/start-stop-restart-the-datadog-agent).
 
-Once done, your application can reliably reach—grab the [DogStatsD client library][2] for your application language and you'll be ready to start hacking. You _can_ use any generic StatsD client to send metrics to DogStatsD, but you won't be able to use any of the Datadog-specific features mentioned above.
+Once done, your application can reliably reach the [DogStatsD client library][2] for your application language and you'll be ready to start hacking. You _can_ use any generic StatsD client to send metrics to DogStatsD, but you won't be able to use any of the Datadog-specific features mentioned above.
 
 By default, DogStatsD listens on UDP port **8125**. If you need to change this, configure the `dogstatsd_port` option in the main [Agent configuration file][3]:
 
