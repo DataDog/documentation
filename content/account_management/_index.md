@@ -12,7 +12,7 @@ aliases:
 
 The [account settings page](https://app.datadoghq.com/account/profile) in Datadog allows you to control how you appear to others in your organization; switch or leave organizations; manage your notification preferences and more.
 
-### Setting your profile
+## Setting your profile
 
 Your profile is how others in your organization recognize you in Datadog. Set or update your name, email address and organizational role here.  
 
@@ -20,7 +20,7 @@ To update your picture, create an account on [Gravatar](https://gravatar.com/) a
 
 If you log in to Datadog using Google authentication, your email address is provided by your Google account and is *not* editable within Datadog. To change your email address in Google, refer to the [Google documentation](https://support.google.com/accounts/answer/19870?hl=en).
 
-### Managing your organizations
+## Managing your organizations
 
 The account settings page also lists all of the organizations you are associated with. Switch between these organizations from this page or by hovering over the account menu in the left-side navigation.  
 
@@ -41,10 +41,10 @@ If you are an organization administrator, reference the additional documentation
 * [Manage multi-organization accounts](/account_management/multi_organization)
 * [Change your Datadog plan and view usage and billing history](/account_management/org_settings)
 
-### Connecting to Github
+## Connecting to Github
 
 If you have installed the [GitHub integration](https://docs.datadoghq.com/integrations/github/) to create events in Datadog, link your personal GitHub account to your Datadog user account. By linking your accounts, any comments you post to GitHub events in Datadog will be automatically posted back into the corresponding issue or pull request in GitHub.
 
-### Preferences
+## Preferences
 
 You can set your timezone, desktop notification, and email notification preferences from the [Preferences tab within the account settings page](https://app.datadoghq.com/account/preferences).
