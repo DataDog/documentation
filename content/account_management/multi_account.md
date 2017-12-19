@@ -14,8 +14,6 @@ further_reading:
 There are two ways to allow multiple accounts to have access to the same data. First, simply add multiple users to the same team from the [Team Page][1].  
 The second is through the use of organizations. Organizations are typically used by Managed Service Providers which have multiple large-scale customers which should not have access to each others' data. When a user is added to multiple organizations, they are able to quickly switch between them from the avatar menu in the main menu.
 
-{{< img src="account_management/multi_account/guides-multacct-switchaccts.png" alt="Switch Accounts" responsive="true" popup="true" style="width:50%;" >}}
-
 ## Organizations
 
 The Multi-Account Organizations feature must be enabled by support. If this is a feature you need, contact [us](/help)!
@@ -42,7 +40,7 @@ A new trial account is created. If you wish to add this account to your existing
 For users that belong to more than one Datadog organization, it's possible to switch to another organization from any page by hovering over your avatar in the lower left hand corner.
 
 Once the menu appears, transition to the other Datadog accounts you're associated with:
-{{< img src="account_management/multi_account/Switch_Accounts.jpg" alt="Switch Accounts" responsive="true" popup="true">}}
+{{< img src="account_management/multi_account/Switch_Accounts.png" alt="Switch Accounts" style="width:50%;" responsive="true" popup="true">}}
 
 ## Custom domains for each sub-organizations
 
