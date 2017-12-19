@@ -14,7 +14,7 @@ further_reading:
 There are two ways to allow multiple accounts to have access to the same data. First, simply add multiple users to the same team from the [Team Page][1].  
 The second is through the use of organizations. Organizations are typically used by Managed Service Providers which have multiple large-scale customers which should not have access to each others' data. When a user is added to multiple organizations, they are able to quickly switch between them from the avatar menu in the main menu.
 
-{{< img src="account_management/multi_account/guides-multacct-switchaccts.png" alt="Switch Accounts" responsive="true" popup="true">}}
+{{< img src="account_management/multi_account/guides-multacct-switchaccts.png" alt="Switch Accounts" responsive="true" popup="true" style="width:50%;" >}}
 
 ## Organizations
 
@@ -26,7 +26,7 @@ The Multi-Account Organizations feature must be enabled by support. If this is a
 
 2. Enter the name of the organization you wish to create and click the **Create** button. **The organization name cannot exceed 32 characters.**
 
-{{< img src="account_management/multi_account/guides-multacct-createorg.png" alt="Create Org" responsive="true" popup="true">}}
+{{< img src="account_management/multi_account/guides-multacct-createorg.png" alt="Create Org" responsive="true" popup="true" style="width:75%;" >}}
 
 A new trial account is created. If you wish to add this account to your existing billing settings, contact your sales representative.
 

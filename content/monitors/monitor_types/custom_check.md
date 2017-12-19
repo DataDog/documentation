@@ -16,16 +16,11 @@ further_reading:
   text: Monitors FAQ
 ---
 
-{{< img src="monitors/monitor_types/custom_check/custom_monitor.png" alt="custom monitor" responsive="true" popup="true">}}
-
 ## Overview
 
-Custom monitors encompass any service checks that are not reported by one of the
-out-of-the-box integrations included with the Agent.
+Custom monitors encompass any service checks that are not reported by one of the out-of-the-box integrations included with the Agent.
 
-Refer to the [Guide to Agent Checks](/agent/agent_checks/) for detailed
-information on writing your own checks that send metrics, events,
-or service checks.
+Refer to the [Guide to Agent Checks](/agent/agent_checks/) for detailed information on writing your own checks that send metrics, events, or service checks.
 
 ## Configuration
 

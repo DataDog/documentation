@@ -19,7 +19,7 @@ Configuring [SAML (Security Assertion Markup Language)](http://en.wikipedia.org/
 
 If you are a [Datadog Administrators](/account_management/team/#datadog-user-roles), there is a **Configure SAML** option in the drop down menu that is accessed by clicking on your username in the upper right corner of the [Datadog web page](https://app.datadoghq.com/saml/saml_setup).
 
-{{< img src="account_management/saml/saml_configure.png" alt="Saml Configure" responsive="true" popup="true">}}
+{{< img src="account_management/saml/saml_configure.png" alt="Saml Configure" responsive="true" popup="true" style="width:50%;" >}}
 
 That brings you to the **SAML Single Sign On Configuration** page:
 
@@ -90,7 +90,7 @@ It is up to the organization to configure their IdP to not send assertions to Da
 Administrators in accounts using SAML can also set the default role for new Just-in-Time users.  
 The default role is currently **Standard**, but you can choose to add new JIT users as **Read-Only** or even **Administrators**. 
 
-{{< img src="account_management/saml/saml_jit_default.png" alt="saml JIT Default" responsive="true" popup="true">}}
+{{< img src="account_management/saml/saml_jit_default.png" alt="saml JIT Default" responsive="true" popup="true" style="width:50%;" >}}
 
 ### IdP Initiated Login
 
