@@ -18,8 +18,6 @@ further_reading:
 
 *Requires Datadog Agent version >= 5.0.0.*
 
-{{< img src="monitors/monitor_types/host/host_monitor.png" alt="host monitor" responsive="true" popup="true">}}
-
 ## Overview
 
 Every Datadog Agent collection reports a heartbeat called `datadog.agent.up`

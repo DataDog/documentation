@@ -57,7 +57,7 @@ Incidents are unique to regular events and annotations in that they can be claim
 
 By claiming an event a user is essentially assigning it to themselves and signaling to other users that it is being investigated. As an indicator of this, Datadog pins the user's name and portrait to the record:  
 
-{{< img src="graphing/events/claimed_incident.png" alt="Claimed incident" responsive="true" popup="true">}}
+{{< img src="graphing/events/claimed_incident.png" style="width:50%;" alt="Claimed incident" responsive="true" popup="true">}}
 
 Once claimed, an incident can be resolved by clicking the **resolve** button indicating to the team that the underlying issue has been addressed:
 
