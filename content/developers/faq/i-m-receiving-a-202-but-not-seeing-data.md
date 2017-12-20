@@ -17,6 +17,6 @@ To check your timestamp is correct run:
 date -u && curl -s --head https://app.datadoghq.com 2>&1 | grep Date
 ```
 
-This will output the current system’s date, and then make a request to our endpoint and grab the date on our end. If these are more than a few minutes apart, you may want to look at the time settings on your server.
+This outputs the current system’s date, and then make a request to our endpoint and grab the date on our end. If these are more than a few minutes apart, you may want to look at the time settings on your server.
 
-There are also certain fields which are not mandatory for submission, but do require a valid input. For example, in submitting an event the priority field must be one of the four given options. Any other text will result in a 202 'success' but no event showing up. Having an invalid source_type_name will not prevent the event from showing up, but that field will be dropped upon submission.
+There are also certain fields which are not mandatory for submission, but do require a valid input. For example, in submitting an event the priority field must be one of the four given options. Any other text results in a 202 'success' but no event showing up. Having an invalid source_type_name doesn't prevent the event from showing up, but that field is dropped upon submission.

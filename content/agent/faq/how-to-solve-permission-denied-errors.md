@@ -15,13 +15,12 @@ IOError: [Errno 13] Permission denied: '/var/log/datadog/supervisord.log'
 ```
 
 You need to make sure that the agent's log files as well as the directory that contains those files is owned by the Datadog agent (dd-agent). 
-If not, the agent will not be able to write log entries in those files.
+If not, the agent isn't able to write log entries in those files.
 
-Below the command that will work on Unix systems to display the files ownership information:
+Below the command that works on Unix systems to display the files ownership information:
 
 ```
 ls -l /var/log/datadog/
-
 
 total 52300
 -rw-r--r-- 1 dd-agent dd-agent 5742334 Jul 31 11:49 collector.log
@@ -44,6 +43,6 @@ sudo chown -R dd-agent:dd-agent /var/log/datadog/
 
 Then [restart the agent](/agent/faq/start-stop-restart-the-datadog-agent). 
 
-More information on the agent logs locations can be found [here](/agent/faq/log-locations).
+[More information on the agent logs locations](/agent/faq/log-locations).
 
 {{< partial name="whats-next/whats-next.html" >}}

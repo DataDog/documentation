@@ -17,6 +17,10 @@ further_reading:
   text: Log Collection Troubleshooting Guide
 ---
 
+<div class="alert alert-info">
+Datadog's Logs is currently available via public beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
+</div>
+
 ## Overview 
 
 To log from your NodeJS application, we recommends to use [Winston](https://github.com/winstonjs/winston) - as you'll get all the features you need to build up your logging strategy. 
@@ -29,7 +33,7 @@ Winston is available through [NPM](https://www.npmjs.com). So, in order to get s
 npm install --save winston
 ```
 
-`package.js` will be updated with the corresponding dependencies:
+`package.js` is updated with the corresponding dependencies:
 
 ```
 {
@@ -75,7 +79,7 @@ Check the content of the `your-appname-info.log` file to see that Winston alread
 
 ## Configure your Datadog agent
 
-Create a `nodejs.yaml` file in your `conf.d/` folder with the following content:
+Create a `nodejs.d/conf.yaml` file in your `conf.d/` folder with the following content:
 
 ```yaml
 init_config:

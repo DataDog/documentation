@@ -1,7 +1,7 @@
 ---
 title: Get Specific Embed
 type: apicontent
-order: 18.3
+order: 19.3
 ---
 
 ## Get Specific Embed
@@ -17,7 +17,7 @@ Returns: A JSON object with 8 elements:
 * html: HTML fragment for the embed (iframe)
 * revoked: Boolean flag for whther or not the embed is revoked
 
-On failure, the return value will be a JSON containing an error message {errors: [messages]}.
+On failure, the return value is a JSON containing an error message {errors: [messages]}.
 
 ##### ARGUMENTS
 * `size` [*optional*, *default*=**medium**]:  
@@ -29,4 +29,4 @@ On failure, the return value will be a JSON containing an error message {errors:
 * `legend` [*optional*, *default*=**no**]:  
     The flag determining if the graph includes a legend. Must be one of **yes** or **no**.
 * `template_variables` [*optional*, *default*=**None**]:  
-    Replace template variables in queries with form $var. To replace $var with val, use var=val as a parameter for each template variable you wish to replace. If any template variables are missing values in the iframe source url, then (*) will be used as the value.
+    Replace template variables in queries with form $var. To replace $var with val, use var=val as a parameter for each template variable you wish to replace. If any template variables are missing values in the iframe source url, then (*) is used as the value.

@@ -73,7 +73,7 @@ In the [dd-agent.yaml][3] manifest used to create the daemonset, add the followi
       name: passwd    
 ```
 
-Refer to the standard [daemonset installation](http://docs.datadoghq.com/integrations/kubernetes/#installation-via-daemonsets-kubernetes-110) and the [docker-dd-agent](https://github.com/DataDog/docker-dd-agent) information pages for further documentation.
+Refer to the standard [daemonset installation](/integrations/kubernetes/#installation-via-daemonsets-kubernetes-110) and the [docker-dd-agent](https://github.com/DataDog/docker-dd-agent) information pages for further documentation.
 
 ## Searching, Filtering, and Pivoting
 
@@ -116,9 +116,9 @@ While actively working with the Live Processes, metrics are collected at 2s reso
 
 - Requires Linux.
 
-- Collection of open files and current working directory is limited based on the level of privilege of the user running dd-process-agent. In the event that dd-process-agent is able to access these fields, they will be collected automatically.
+- Collection of open files and current working directory is limited based on the level of privilege of the user running dd-process-agent. In the event that dd-process-agent is able to access these fields, they are collected automatically.
 
-- Real-time (2s) data collection will be turned off after 30 minutes. To resume real-time collection, refresh the page.
+- Real-time (2s) data collection is turned off after 30 minutes. To resume real-time collection, refresh the page.
 
 - The Process Agent is available for the default Debian docker-dd-agent image only.  It is not included in the Alpine image.
 

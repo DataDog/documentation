@@ -35,7 +35,7 @@ languages:
           weight: 30
         # Getting Started - Subnav start
         - identifier: customnav_getting_started_tags
-          name: "Getting started with Tags"
+          name: "Getting started with tags"
           url: "/getting_started/getting_started_with_tags/"
           weight: 310
           parent: menu_references_getting_started
@@ -56,6 +56,7 @@ languages:
           url: "/agent/"
           pre: "nav_agent"
           weight: 40
+          
         # AGENT - Subnav start
         - identifier: customnav_agentnav_basic_usage
           name: "Basic Agent Usage"
@@ -102,19 +103,19 @@ languages:
           url: "/agent/basic_agent_usage/redhat/"
           weight: 80
           parent: customnav_agentnav_basic_usage
+        - identifier: suse
+          name: "SUSE"
+          url: /agent/basic_agent_usage/suse/
+          weight: 90
+          parent: customnav_agentnav_basic_usage
         - identifier: ubuntu
           name: "Ubuntu"
           url: "/agent/basic_agent_usage/ubuntu/"
-          weight: 90
+          weight: 100
           parent: customnav_agentnav_basic_usage
         - identifier: windows
           name: "Windows"
           url: "/agent/basic_agent_usage/windows/"
-          weight: 100
-          parent: customnav_agentnav_basic_usage
-        - identifier: suse
-          name: "SUSE"
-          url: /agent/basic_agent_usage/suse/
           weight: 110
           parent: customnav_agentnav_basic_usage
         - identifier: source
@@ -133,7 +134,7 @@ languages:
           weight: 40
           parent: menu_references_agent
         - identifier: customnav_agentnav_installcoreextra
-          name: "Install Core Extra"
+          name: "Install Core & Extra"
           url: "/agent/installcoreextra/"
           weight: 50
           parent: menu_references_agent
@@ -480,7 +481,7 @@ languages:
 
         # DEVELOPERS
         - identifier: menu_references_developers
-          name: "Developer tools"
+          name: "Developer Tools"
           url: "/developers/"
           pre: "nav_developers"
           weight: 100
@@ -491,7 +492,7 @@ languages:
           weight: 30
           parent: menu_references_developers
         - identifier: customnav_developersnav_dogstatsd
-          name: "Dogstatsd"
+          name: "DogStatsD"
           url: "/developers/dogstatsd/"
           weight: 40
           parent: menu_references_developers
@@ -529,29 +530,29 @@ languages:
 
         # ACCOUNT MANAGEMENT
         - identifier: menu_references_account_management
-          name: "Account Management"
+          name: "Account management"
           url: "/account_management/"
           pre: "nav_account"
           weight: 110
         # ACCOUNT MANAGEMENT - Subnav start
         - identifier: customnav_accountmanagementnav_team
-          name: "Team"
+          name: "Team management"
           url: "/account_management/team/"
           weight: 30
           parent: menu_references_account_management
-        - identifier: customnav_accountmanagementnav_settings
-          name: "Settings"
-          url: "/account_management/settings/"
+        - identifier: customnav_accountmanagementnav_org
+          name: "Organization settings"
+          url: "/account_management/org_settings/"
           weight: 40
           parent: menu_references_account_management
         - identifier: customnav_accountmanagementnav_saml
-          name: "SAML"
+          name: "SSO with SAML"
           url: "/account_management/saml/"
           weight: 50
           parent: menu_references_account_management
-        - identifier: customnav_accountmanagementnav_multi_account
-          name: "Multi Account"
-          url: "/account_management/multi_account/"
+        - identifier: customnav_accountmanagementnav_multi_organization
+          name: "Multi-org accounts"
+          url: "/account_management/multi_organization/"
           weight: 60
           parent: menu_references_account_management
         #- identifier: customnav_accountmanagementnav_faq

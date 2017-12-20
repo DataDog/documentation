@@ -46,7 +46,7 @@ Host maps make it easy to see distributions of machines in each of your availabi
 ### Problem Investigation
 
 Imagine you are having a problem in production. Maybe the CPUs on some of your hosts are pegged, which is causing long response times. Host Maps can help you quickly see whether there is anything different about the loaded and not-loaded hosts. You can rapidly group by any dimension you would like to investigate, and visually determine whether the problem servers belong to a certain group.  
-For example, you can group by availability zone, region, instance type, image, or any tag that you use at your company. You will either find a problem very quickly, or rule out these explanations before spending time on deeper investigations. 
+For example, you can group by availability zone, region, instance type, image, or any tag that you use at your company. You either find a problem very quickly, or rule out these explanations before spending time on deeper investigations. 
 
 Below is a screenshot from a recent issue we had a Datadog. As you can see, some hosts had much less usable memory than others, despite being part of the same cluster. Why? We grouped by machine image in Host Maps, and the problem was immediately clear: there were in fact two different images in use, and one of them had become overloaded.
 
@@ -73,7 +73,7 @@ If some of your hosts are running on AWS, the following AWS-specific tags are av
 `Filter by` limits the Host Maps to a specific subset of your infrastructure. Located in the top-left of Host Maps, the filter input bar lets you filter your map by any of your tags, plus the Datadog-provided attributes below.  
 If your filter input bar is empty, then the map displays all hosts that are reporting metrics to Datadog. If you want to focus your attention on just a subset of your hosts, then add filters.  
 
-Example: if you tag your hosts by the environment they are in, you can filter by ‘production’ to remove hosts in your staging and other environments from the map. If you want to eliminate all but one host role in production, then add that role to the filter, too—the filters will be ANDed together.
+Example: if you tag your hosts by the environment they are in, you can filter by ‘production’ to remove hosts in your staging and other environments from the map. If you want to eliminate all but one host role in production, then add that role to the filter, too—the filters is ANDed together.
 
 Filterable host attributes (automatically provided):
 
@@ -87,14 +87,14 @@ Filterable host attributes (automatically provided):
 ### Group hosts by tags
 
 `Group hosts by tags` spatially arranges your hosts into clusters, or groups. Any host in a group shares the tag or tags you group by.  
-A simple example is grouping your hosts by AWS availability zone. If you add a second grouping tag, such as instance type, then the hosts will be further subdivided into groups, first by availability zone and then by instance type, as seen below.
+A simple example is grouping your hosts by AWS availability zone. If you add a second grouping tag, such as instance type, then the hosts are further subdivided into groups, first by availability zone and then by instance type, as seen below.
 
 {{< img src="graphing/infrastructure/hostmap/hostmappart2image2.png" alt="Datadog Host Maps AZ Instance Groups" responsive="true" popup="true" >}}
 
 ### Zoom in
 
-When you’ve identified a host that you want to investigate, click it for details. You will zoom in and see up to six integrations reporting metrics from that host. (If there are more than six integrations, they will be listed under the “Apps” header in the host’s detail pane, as in the screenshot below).  
-Click the name of an integration, and you will get a condensed dashboard of metrics for that integration. In the screenshot below, we have clicked “system” to get system metrics such as CPU usage, memory usage, disk latency, etc.
+When you’ve identified a host that you want to investigate, click it for details. It zooms in and see up to six integrations reporting metrics from that host. (If there are more than six integrations, they are listed under the “Apps” header in the host’s detail pane, as in the screenshot below).  
+Click the name of an integration  to get a condensed dashboard of metrics for that integration. In the screenshot below, we have clicked “system” to get system metrics such as CPU usage, memory usage, disk latency, etc.
 
 {{< img src="graphing/infrastructure/hostmap/blog-host-maps-01.png" alt="Datadog Host Maps Zoom In" responsive="true" popup="true" >}}
 
@@ -112,7 +112,7 @@ In the screenshot below the size of the hexagons is the 15 minute average load, 
 
 ### Display hosts on the Host Map that don't have an agent installed
 
-By default, the Host Map will only show hosts that are reporting certain metrics, which can then be used to set a color or size for the individual hexagon within the grid.
+By default, the Host Map only show hosts that are reporting certain metrics, which can then be used to set a color or size for the individual hexagon within the grid.
 
 Some hosts, like those coming in from Google App Engine, do not pull in these metrics without an agent running. These hosts can still appear within the Host Map selecting the "gear" icon on the top-right of the map and enabling "Show hosts with no metrics" in the Host Map settings:
 
@@ -120,7 +120,7 @@ Some hosts, like those coming in from Google App Engine, do not pull in these me
 
 ### Data freshness and meaning
 
-Data in the Host Maps is refreshed about once a minute—unless you are continuously interacting with the map. In that case it will not refresh because it can be disorienting to have colors and shapes spontaneously change while you are still investigating. The bottom right of your screen will tell you when data was last updated.
+Data in the Host Maps is refreshed about once a minute—unless you are continuously interacting with the map. In that case it doesn't refresh because it can be disorienting to have colors and shapes spontaneously change while you are still investigating. The bottom right of your screen tells you when data was last updated.
 
 ## Further Reading
 

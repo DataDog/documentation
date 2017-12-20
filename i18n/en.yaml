@@ -32,6 +32,12 @@
 - id: menu_references_developers
   translation: "Developers"
 
+- id: menu_references_logs
+  translation: "Logs"
+
+- id: menu_references_examples
+  translation: "Examples"
+
 - id: menu_references_videos
   translation: "Videos"
 
@@ -55,7 +61,7 @@
   translation: "Overview"
 
 - id: customnav_getting_started_tags
-  translation: "Getting started with Tags"
+  translation: "Getting started with tags"
 
 ##########################
 ########## Agent #########
@@ -329,16 +335,16 @@
   translation: Overview
 
 - id: customnav_accountmanagementnav_team
-  translation: Team
+  translation: Team management
 
-- id: customnav_accountmanagementnav_settings
-  translation: Settings
+- id: customnav_accountmanagementnav_org
+  translation: Organization settings
 
 - id: customnav_accountmanagementnav_saml
-  translation: SAML
+  translation: SSO with SAML
 
-- id: customnav_accountmanagementnav_multi_account
-  translation: Multi Accounts
+- id: customnav_accountmanagementnav_multi_organization
+  translation: Multi-org accounts
 
 - id: customnav_accountmanagementnav_faq
   translation: FAQ

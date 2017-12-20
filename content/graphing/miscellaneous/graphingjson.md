@@ -53,7 +53,6 @@ In other words at the highest level the JSON structure is a dictionary with two,
 
 ## Requests
 
-
 The general format for a series is:
 
     "requests": [
@@ -80,11 +79,9 @@ In most cases, the number of data points available outnumbers the maximum number
 
 #### Metrics
 
-
 The metric is the main focus of the graph. You can find the list of metrics available to you in the [Metrics Summary][3]. Click on any metric to see more detail about that metric, including the type of data collected, units, tags, hosts, and more.
 
 #### Scope
-
 
 A scope lets you filter a Series. It can be a host, a device on a host
 or any arbitrary tag you can think of that contains only alphanumeric
@@ -101,11 +98,9 @@ Examples of scope (meaning in parentheses):
 
 #### Groups
 
-
-For any given metric, data may come from a number of hosts. The data will normally be aggregated from all these hosts to a single value for each time slot. If you wish to split this out, you can by any tag. To include a data point separated out by each host,  use {host} for your group.
+For any given metric, data may come from a number of hosts. The data is normally aggregated from all these hosts to a single value for each time slot. If you wish to split this out, you can by any tag. To include a data point separated out by each host,  use {host} for your group.
 
 #### Arithmetic
-
 
 You can apply simple arithmetic to a Series (+, -, * and /). In this
 example we graph 5-minute load and its double:
@@ -141,7 +136,6 @@ apples by oranges.
 
 ### Events
 
-
 You can overlay any event from Datadog. The general format is:
 
     "events": [
@@ -167,7 +161,6 @@ or if you're looking to display all errors:
     ]
 
 ### Visualization
-
 
 Data can be visualized in a few different ways:
 
@@ -219,13 +212,9 @@ Instead of one query per chart you can aggregate all queries into one and simply
 
 #### Slice-n-Stack
 
-
 A useful visualization is to represent a metric shared across
 hosts and stack the results. For instance, when selecting a tag that
-applies to more than 1 host you will see that ingress and egress
-traffic is nicely stacked to give you the sum as well as the split per
-host. This is useful to spot wild swings in the distribution of network
-traffic.
+applies to more than 1 host you see that ingress and egress traffic is nicely stacked to give you the sum as well as the split per host. This is useful to spot wild swings in the distribution of network traffic.
 
 Here's how to do it for any metric:
 
@@ -246,9 +235,7 @@ Note that in this case you can only have 1 query. But you can also split by devi
 to get traffic for all the tagged hosts, split by host and network device.
 
 
-
 ### Y-Axis Controls
-
 
 The Datadog y-axis controls (currently just via the JSON editor) allow you to:
 
@@ -295,30 +282,23 @@ Examples:
 
 #### Filtering
 
-
-Filter configuration allows you to automatically change y-axis bounds based on a
-threshold. Thresholds can be a percentage or an absolute value, and it can apply to
-both both ends of the graph (lower and upper).
+Filter configuration allows you to automatically change y-axis bounds based on a threshold. Thresholds can be a percentage or an absolute value, and it can apply to both both ends of the graph (lower and upper).
 
 For y-axis filtering, there are two ways to set up the configuration.
 
-To begin, there is a simple configuration where you specify an absolute value or a percentage and all
-values above the value or all values that sit within the top ##% will be cutoff.
+To begin, there is a simple configuration where you specify an absolute value or a percentage and all values above the value or all values that sit within the top ##% are cutoff.
 
 Examples:
 
     "yaxis": {
-        "filter": 30 // all values above 30 will not appear
+        "filter": 30 // all values above 30 do not appear
     }
 
     "yaxis": {
-        "filter": "5%" // the top 5% of that data will not appear
+        "filter": "5%" // the top 5% of that data do not appear
     }
 
-Advanced configuration works the same way as simple configuration, with the added
-flexibility of configuring the lower or the upper or both parts of the graph. For
-example, the following configuration will limit the graph to data points that are
-not in the bottom 10% nor in the top 30%.
+Advanced configuration works the same way as simple configuration, with the added flexibility of configuring the lower or the upper or both parts of the graph. For example, the following configuration limits the graph to data points that are not in the bottom 10% nor in the top 30%.
 
     "yaxis": {
         "filter": {
@@ -327,7 +307,7 @@ not in the bottom 10% nor in the top 30%.
         }
     }
 
-The following will show all data except those with values higher than 15:
+The following shows all data except those with values higher than 15:
 
     "yaxis": {
         "filter": {
@@ -335,14 +315,13 @@ The following will show all data except those with values higher than 15:
         }
     }
 
-The following will hide data points below 2:
+The following hides data points below 2:
 
     "yaxis": {
         "filter": {
             "below": 2
         }
     }
-
 
 Here is a full JSON example:
 
@@ -366,9 +345,7 @@ Here is a full JSON example:
 }
 ```
 
-
 #### Examples
-
 
 Here is an example using the ```rate()``` function, which takes only a single metric as a parameter.  Other functions, with the exception of ```top()``` and ```top_offset()```, have identical syntax.
 
@@ -398,8 +375,7 @@ Here is an example using the ```top()``` function:
 }
 ```
 
-This will show the graphs for the five series with the highest peak ```system.cpu.iowait``` values in the query window.
-
+This shows the graphs for the five series with the highest peak ```system.cpu.iowait``` values in the query window.
 
 
 To look at the hosts with the 6th through 10th highest values (for example), use ```top_offset``` instead:

@@ -17,7 +17,7 @@ Tracing can be available on port 8126/tcp from anywhere by adding the options `-
 
 To make it available from your host only, use `-p 127.0.0.1:8126:8126/tcp` instead.
 
-For example, the following command will allow the agent to receive traces from anywhere
+For example, the following command allows the agent to receive traces from anywhere
 
 ```
 docker run -d --name dd-agent \

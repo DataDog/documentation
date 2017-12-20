@@ -25,16 +25,15 @@ At Datadog we give you the capability to create and customize two types of dashb
 | Sharing can be Read-Only | Yes | Yes |
 {{% /table %}}
 
-
 ## Editing template variables
 
-Dashboard templating allows you to create dashboards that use variables like `$scope` or `$redis` in place of specific tags or hosts. You can then dynamically explore the metrics across different sets of tags. Simply select a new variable value in the dropdown menu, and that value will apply across the dashboard.
+Dashboard templating allows you to create dashboards that use variables like `$scope` or `$redis` in place of specific tags or hosts. You can then dynamically explore the metrics across different sets of tags. Simply select a new variable value in the dropdown menu, and that value applies across the dashboard.
 
 To create, edit, and delete template variables click the gear icon at the upper right-hand side of the screen, then select 'Edit Template Variables' from the actions menu.
 
 {{< img src="graphing/dashboards/edit-template-variables.png" alt="edit template variable" responsive="true" popup="true">}}
 
-This will open the template variable editing panel.
+This open the template variable editing panel.
 
 {{< img src="graphing/dashboards/redis-template-var.png" alt="Redis template var" responsive="true" popup="true">}}
 
@@ -44,13 +43,12 @@ A template variable is defined by a name and optional parameters for 'Tag Group'
 
 {{< img src="graphing/dashboards/redis-tpl-graph-editor.png" alt="Redis-tpl graph editor" responsive="true"  >}}
 
-Once defined, template variables appear alongside normal tag and host options in graph editors. If you set `6379` as the value of `$redis`, all graphs defined with `$redis` will be scoped to `redis_port:6379`.
+Once defined, template variables appear alongside normal tag and host options in graph editors. If you set `6379` as the value of `$redis`, all graphs defined with `$redis` is scoped to `redis_port:6379`.
 
 {{< img src="graphing/dashboards/redis-tpl-selected.png" alt="Redis tpl selected" responsive="true" popup="true">}}
 
 ## Event Correlation at Design Time
 Event Correlation refers to overlaying events on top of a dashboard graph and is an important feature of the Datadog platform. You can setup correlation at two different times: either when you setup the dashboard or adhoc at the time you view the dashboard.
-
 
 {{< img src="graphing/dashboards/guides-eventcorrelation-screenboard.png" alt="guides-eventcorrelation-screenboard" responsive="true" popup="true">}}
 
@@ -60,8 +58,7 @@ Setup event correlation at design time by editing any graph on both Time Boards 
 
 {{< img src="graphing/dashboards/guides-eventcorrelation-searchbox.png" alt="guides event correlation" responsive="true" popup="true" >}}
 
-Setup event correlation at view time by adding a query in the Search box at the top left of any Time Board dashboard window. This will replace any events added at design time, but will apply the events to all graphs on that particular dashboard.
-
+Setup event correlation at view time by adding a query in the Search box at the top left of any Time Board dashboard window. This replaces any events added at design time, but applies the events to all graphs on that particular dashboard.
 
 [1]: /graphing/
 [2]: /graphing/event_stream/

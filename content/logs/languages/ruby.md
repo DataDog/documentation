@@ -17,6 +17,10 @@ further_reading:
   text: Log Collection Troubleshooting Guide
 ---
 
+<div class="alert alert-info">
+Datadog's Logs is currently available via public beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
+</div>
+
 We are going to use `lograge` here as it'll help us bringing some sanity in logs that are noisy and hardly parseable. 
 
 Instead of having a Rail logging output like this:
@@ -75,7 +79,6 @@ As it would be weirdly displayed in your Datadog application, disable your log c
 config.colorize_logging = false
 ```
 
-
 Now let's configure `logging-rails` that is going to convert everything in JSON format.
 
 ## Configuring the logging-rail gem
@@ -90,7 +93,7 @@ That generates the `logging.rb` with default configuration inside that we are go
 First of all, we are going to log everything in JSON format. So change `:inspect` into `:json` this in the first lines of the file `logging.rb`:
 
 ```ruby
-# Objects will be converted to strings using the :inspect method.
+# Objects are converted to strings using the :inspect method.
   Logging.format_as :json
 ```
 
@@ -112,7 +115,7 @@ If you want to tweak the log layout, all items available can be found directly f
 
 ## Configure your Datadog agent.
 
-Create a `ruby.yaml` file in your `conf.d/` folder with the following content:
+Create a `ruby.d/conf.yaml` file in your `conf.d/` folder with the following content:
 
 ```yaml
 init_config:

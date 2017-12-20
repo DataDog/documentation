@@ -4,6 +4,7 @@ kind: documentation
 autotocdepth: 3
 customnav: graphingnav
 ---
+
 ## Change Timeboard name
 
 1. Click on the info icon on the top right corner of the Timeboard:
@@ -21,7 +22,7 @@ customnav: graphingnav
 
 Only account [administrator](/account_management/team/#datadog-user-roles) and the Timeboard creator can activate read-only mode for a Timeboard.  Any user in the organization, regardless of administrator privileges, can sign up to receive change notifications for a particular Timeboard.
 
-If a user decides to track changes for a Timeboard, the following Timeboard changes will be reported to the user through an event in the event stream:
+If a user decides to track changes for a Timeboard, the following Timeboard changes are reported to the user through an event in the event stream:
 
 1. Text changes (title, description)
 2. Tile changes
@@ -30,7 +31,7 @@ If a user decides to track changes for a Timeboard, the following Timeboard chan
 
 In order to prevent the above listed changes, an administrator (account administrators + Timeboard creator) can activate read-only view disabling all non-administrator user edits to any tiles or text in the Timeboard, as well as Timeboard deletion.  
 
-Even in read-only mode, non-administrator users can still clone the Timeboard, rearrange the tiles, snapshot each tile, and view the tile in full screen. Any tile rearrangement by a non-administrator user will not persist if the Timeboard is set to read-only.
+Even in read-only mode, non-administrator users can still clone the Timeboard, rearrange the tiles, snapshot each tile, and view the tile in full screen. Any tile rearrangement by a non-administrator user does not persist if the Timeboard is set to read-only.
 
 ## Tracking Changes
 
@@ -38,9 +39,9 @@ A user can find all events related to Timeboard changes to the Timeboard they ar
 
 ## Auditing Dashboards
 
-In dashboards, notifications provide the ability to track changes for audit purposes. Any changes made will create an event in the event stream that explains the change and displays the user that made the actual change.
+In dashboards, notifications provide the ability to track changes for audit purposes. Any changes made creates an event in the event stream that explains the change and displays the user that made the actual change.
 
-If any changes are made to your dashboards, you can see them with the following event search:
+If any changes are made to your dashboards, see them with the following event search:
 
 https://app.datadoghq.com/event/stream?per_page=30&query=tags:audit%20status:all
 

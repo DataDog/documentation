@@ -26,6 +26,6 @@ We've found that this is generally due to one of two reasons:
     * Try the installation once more
  
 
-Hopefully if you encounter a 1721 Error, the above steps will get you running in no time!
+Hopefully if you encounter a 1721 Error, the above steps gets you running in no time!
 
 {{< partial name="whats-next/whats-next.html" >}}

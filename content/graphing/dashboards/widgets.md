@@ -5,7 +5,7 @@ autotocdepth: 2
 customnav: graphingnav
 ---
 
-You can use widgets through the [Screenboard API](/api/#screenboards):
+Use widgets through the [Screenboard API](/api/#screenboards):
 For [create](/api/#create-a-screenboard)/[read](/api/#get-a-screenboard)/[update](/api/#update-a-screenboard) endpoints, the body is one JSON payload describing the Screenboard widgets: 
 
 Base Payload :
@@ -123,17 +123,16 @@ Example of Query Value widget for the [API](/api/#screenboards)
 
 {{< img src="graphing/miscellaneous/visualization/query_value_widget.png" alt="query_value_widget" responsive="true" popup="true">}}
 
-The Query Value Widget only displays one Value, unlike a timeseries for example, that will display several points. 
+The Query Value Widget only displays one Value, unlike a timeseries for example, that displays several points. 
 
 Let's say you are on a Timeseries and you are currently displaying the past hour, this button allows you to either display the `avg` / `max` / `min` / `avg` / `sum` / `last value` of ALL points that are rendered during that 1 hour range timeframe - depending on the aggregation chosen above. 
 
 ## Heatmap
 *Supported on Screenboards and Timeboards*
 
-The Heatmap visualization is great for showing metrics aggregated across many tags, such as *hosts*. The more hosts that have a particular value, the darker that square will be.
+The Heatmap visualization is great for showing metrics aggregated across many tags, such as *hosts*. The more hosts that have a particular value, the darker that square is.
 
 {{< img src="graphing/miscellaneous/visualization/references-graphing-heatmap-example.png" alt="Heatmap" responsive="true" popup="true">}}
-
 
 ## Distribution
 *Supported on Screenboards and Timeboards*
@@ -148,19 +147,17 @@ The Toplist visualization is perfect when you want to see the list of hosts with
 
 {{< img src="graphing/miscellaneous/visualization/references-graphing-toplist-example.png" alt="TopList" responsive="true" popup="true">}}
 
-
 ## Change
 *Supported on Screenboards and Timeboards*
 
-The Change graph will show you the change in a value over the time period chosen.
+The Change graph shows you the change in a value over the time period chosen.
 
 {{< img src="graphing/miscellaneous/visualization/references-graphing-change-example.png" alt="Change graph" responsive="true" popup="true">}}
-
 
 ## Hostmap
 *Supported on Screenboards and Timeboards*
 
-The Hostmap will graph any metric for any subset of hosts on the same hostmap visualization available from the main [Infrastructure Hostmap](/graphing/infrastructure/hostmap) menu. 
+The Hostmap graphs any metric for any subset of hosts on the same hostmap visualization available from the main [Infrastructure Hostmap](/graphing/infrastructure/hostmap) menu. 
 
 {{< img src="graphing/miscellaneous/visualization/references-graphing-hostmap-example.png" alt="Hostmap" responsive="true" popup="true">}}
 
@@ -276,7 +273,7 @@ Alert values are query values showing the current value of the metric in any mon
 ## Iframe
 *Supported on Screenboards only*
 
-The Iframe widget will allow you to embed a portion of any other web page on your dashboard.
+The Iframe widget allows you to embed a portion of any other web page on your dashboard.
 
 ## Check Status
 *Supported on Screenboards only*
@@ -293,5 +290,4 @@ The service summary displays the top portion of any APM trace in your Screenboar
 
 Monitor summary is a summary view of all monitors on your system, or a subset based on a query.
 {{< img src="graphing/miscellaneous/visualization/references-graphing-monitorsummary-example.png" alt="Timeseries" responsive="true" popup="true">}}
-
 

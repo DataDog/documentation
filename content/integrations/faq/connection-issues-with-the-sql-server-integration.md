@@ -38,7 +38,7 @@ Our SQL Server check relies on the adodbapi Python library, which has some limit
 OperationalError: (KeyError('Python string format error in connection string->',), 'Error opening connection to ""')
 ```
 
-At the moment, the only character we know of that causes this specific connectivity issue is the "%" character. If you must use the "%" character in your sqlserver.yaml (e.g, if your datadog SQL Server user password includes a "%"), you will have to escape that character by including a double "%%" in place of each single "%".
+At the moment, the only character we know of that causes this specific connectivity issue is the "%" character. If you want to use the "%" character in your `sqlserver.yaml` (e.g, if your datadog SQL Server user password includes a "%"), you will have to escape that character by including a double "%%" in place of each single "%".
 
 ## Connecting to SQL Server on a Linux Host?
 

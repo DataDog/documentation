@@ -1,16 +1,16 @@
 ---
 title: Create Embed
 type: apicontent
-order: 18.2
+order: 19.2
 ---
 
 ## Create Embed
 
 Creates a new embeddable graph.
 
-Returns: A JSON consisting of the same elements returned by GET api/v1/graph/embed/:embed_id. On failure, the return value will be a JSON containing an error message {errors: [messages]}.
+Returns: A JSON consisting of the same elements returned by GET api/v1/graph/embed/:embed_id. On failure, the return value is a JSON containing an error message {errors: [messages]}.
 
-Note: If an embed already exists for the exact same query in a given organization, the older embed will be returned instead of creating a new embed.
+Note: If an embed already exists for the exact same query in a given organization, the older embed is returned instead of creating a new embed.
 
 ##### ARGUMENTS
 * `graph_json` [*required*]:  

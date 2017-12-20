@@ -1,13 +1,13 @@
 ---
 title: Enable Embed
 type: apicontent
-order: 18.4
+order: 19.4
 ---
 
 ## Enable Embed
 Enable a specified embed.
 
-Returns: A JSON containing the success message {success: [message]}. On failure, the return value will be a JSON containing an error message {errors: [messages]}.
+Returns: A JSON containing the success message {success: [message]}. On failure, the return value is a JSON containing an error message {errors: [messages]}.
 
 ##### ARGUMENTS
 

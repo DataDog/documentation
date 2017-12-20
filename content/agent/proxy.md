@@ -15,9 +15,7 @@ hosts that are not directly connected to the Internet.
 3. Using HAProxy (if you want to proxy **more than 16-20 agents** through the
 same proxy)
 
-## Step-by-step Guides
-
-### Using the Agent as a Proxy
+## Using the Agent as a Proxy
 
 1. Designate one node **running datadog-agent** as the proxy.  
     In this example assume that the proxy name is `proxy-node`. This node **must** be able to reach `https://app.datadoghq.com`.
@@ -42,7 +40,7 @@ to
 
 6. Verify on the [Infrastructure page](https://app.datadoghq.com/infrastructure#overview) that all nodes report data to Datadog.
 
-### Using a Web Proxy as Proxy
+## Using a Web Proxy as Proxy
 
 Traditional web proxies are supported natively by the agent. Simply
 edit `datadog.conf` with your proxy information.
@@ -57,7 +55,7 @@ proxy_password: my_password
 
 Do not forget to [restart the agent](/agent/faq/start-stop-restart-the-datadog-agent) for the new settings to take effect.
 
-### Using HAProxy as a Proxy
+## Using HAProxy as a Proxy
 
 [HAProxy](http://haproxy.1wt.eu) is a free, very fast and reliable
 solution offering proxying for TCP and HTTP applications. While
@@ -66,7 +64,7 @@ requests to pools servers, you can also use it to proxy agent traffic
 to Datadog from hosts that have no outside connectivity.
 
 This is the best option if you do not have a web proxy readily available
-in your network and you wish to proxy a large number of agents. In some cases a single HAProxy instance will be sufficient to handle local agent traffic in your network - each proxy can accommodate upwards of 1000 agents (be aware that this figure is a conservative estimate based on the performance of m3.xl instances specifically. Numerous network-related variables can influence load on proxies. As always, deploy under a watchful eye. Visit http://www.haproxy.org/#perf for additional information).
+in your network and you wish to proxy a large number of agents. In some cases a single HAProxy instance is sufficient to handle local agent traffic in your network - each proxy can accommodate upwards of 1000 agents (be aware that this figure is a conservative estimate based on the performance of m3.xl instances specifically. Numerous network-related variables can influence load on proxies. As always, deploy under a watchful eye. Visit http://www.haproxy.org/#perf for additional information).
 
 `agent ---> haproxy ---> Datadog`
 
@@ -98,7 +96,7 @@ listen stats :3835
     stats enable
     stats uri /
 
-# This declares the endpoint where your agents will connect.
+# This declares the endpoint where your agents connects.
 # In this example we use port 3834 but you can use any other
 # free port.
 frontend forwarder
@@ -107,7 +105,7 @@ frontend forwarder
     default_backend datadog
 
 # This is the Datadog server. In effect any TCP request coming
-# to the forwarder frontend defined above will be proxied to
+# to the forwarder frontend defined above is proxied to
 # Datadog's public endpoints.
 backend datadog
     balance roundrobin

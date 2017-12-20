@@ -19,12 +19,11 @@ further_reading:
 Datadog's Logs is currently available via public beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
 </div>
 
-
 ## Overview
 
 To access the processing panel use the upper left menu:
 
-{{< img src="logs/processing/processing_panel.png" alt="Pipelines panel" responsive="true" popup="true">}}
+{{< img src="logs/processing/processing_panel.png" alt="Pipelines panel" responsive="true" popup="true" style="width:50%;" >}}
 
 ## Processing Pipelines 
 ### Pipelines Goal 
@@ -37,21 +36,21 @@ Each log that comes through the pipelines is tested against every pipeline filte
 
 So for instance a processing pipeline can transform this log:
 
-{{< img src="logs/processing/original_log.png" alt="original log" responsive="true" popup="true">}}
+{{< img src="logs/processing/original_log.png" alt="original log" responsive="true" popup="true" style="width:50%;">}}
 
 into this log: 
 
-{{< img src="logs/processing/log_post_severity.png" alt=" Log post severity " responsive="true" popup="true">}}
+{{< img src="logs/processing/log_post_severity.png" alt=" Log post severity " responsive="true" popup="true" style="width:50%;">}}
 
 With one single pipeline:
 
-{{< img src="logs/processing/pipeline_example.png" alt="Pipelines example" responsive="true" popup="true">}}
+{{< img src="logs/processing/pipeline_example.png" alt="Pipelines example" responsive="true" popup="true" style="width:75%;">}}
 
 Pipelines can take logs from a wide variety of formats and translate them all into a common format in Datadog.
 
 ### Pipeline filters
 
-Filters let you limit what kinds of logs a pipeline will apply to.
+Filters let you limit what kinds of logs a pipeline applies to.
 
 The filter syntax is the same as the [search bar](/logs/explore/#search-bar).
 
@@ -62,8 +61,6 @@ The log list shows which logs your pipeline applies to:
 {{< img src="logs/processing/pipeline_filters.png" alt="Pipelines filters" responsive="true" popup="true">}}
 
 ### Integration Pipelines
-
-Integration pipelines are automatically installed when you activate an [integration](https://app.datadoghq.com/account/settings).
 
 These pipelines are read-only, but you can clone them and then edit the clone:
 
@@ -108,11 +105,11 @@ Use this processor if you want to assign some attributes as the official severit
 
 It transforms this log:
 
-{{< img src="logs/processing/log_pre_severity.png" alt=" Log pre severity " responsive="true" popup="true">}}
+{{< img src="logs/processing/log_pre_severity.png" alt=" Log pre severity " responsive="true" popup="true" style="width:40%;">}}
 
 Into this log:
 
-{{< img src="logs/processing/log_post_severity_bis.png" alt=" Log post severity bis" responsive="true" popup="true">}}
+{{< img src="logs/processing/log_post_severity_bis.png" alt=" Log post severity bis" responsive="true" popup="true" style="width:40%;" >}}
 
 However, beware that each incoming severity value is mapped as follows:
 
@@ -135,10 +132,10 @@ This processor remaps any attribute(s) to another one, for instance here it rema
 
 It transforms this log:
 
-{{< img src="logs/processing/attribute_pre_remapping.png" alt="attribute pre remapping " responsive="true" popup="true">}}
+{{< img src="logs/processing/attribute_pre_remapping.png" alt="attribute pre remapping " responsive="true" popup="true" style="width:40%;">}}
 
 Into this log:
-{{< img src="logs/processing/attribute_post_remapping.png" alt="attribute post remapping " responsive="true" popup="true">}}
+{{< img src="logs/processing/attribute_post_remapping.png" alt="attribute post remapping " responsive="true" popup="true" style="width:40%;">}}
 
 ### URL Parser 
 

@@ -9,9 +9,11 @@ Billing metrics can be collected from AWS by using the Datadog-AWS Billing integ
 Further information on this can be found within the app here: 
 https://app.datadoghq.com/account/settings#integrations/amazon_billing 
 
-To begin collecting billing metrics, it is necessary to select "Billing" on the [AWS configuration tile](/integrations/amazon_web_services) and include the permission 'budgets:ViewBudget' in your Datadog AWS policy.
+To begin collecting billing metrics:
 
-You must also enable billing metrics within the [AWS Console](http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html#turning_on_billing_metrics).
+1. Select "Billing" on the [AWS configuration tile](/integrations/amazon_web_services) and include the permission `budgets:ViewBudget` in your Datadog AWS policy.
+
+2. Enable billing metrics within the [AWS Console](http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html#turning_on_billing_metrics).
 
 The following metrics are currently available using the Datadog-AWS Billing integration:
 

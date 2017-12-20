@@ -6,7 +6,7 @@ order: 5.5
 ## Edit Metric Metadata
 
 The metrics metadata endpoint allows you to edit fields of a metric's metadata.
-Find more about supported types [here](/developers/metrics)
+[Find more about supported types](/developers/metrics)
 ##### ARGUMENTS
 * `type` [*required*]:  
     [Metric type](/developers/metrics) such as **gauge** or **rate**

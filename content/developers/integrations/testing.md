@@ -6,10 +6,6 @@ customnav: developersnav
 aliases:
    - /guides/testing/
 ---
-<style>
-.func-p{margin-left:20px;}
-.func-code{margin-left:40px;}
-</style>
 
 ## Overview
 
@@ -49,18 +45,15 @@ The following test methods are provided by the `AgentCheckTest` class. For more 
 
 Prints the test coverage status of metrics, events, service checks and service metadata. Also lists items for each that lack test coverage.
 
-
 #### `print_current_state()`
 
 Prints a report of the metrics, events, service checks, service metadata and warnings provided by the integration.
-
 
 ### Run Checks Methods
 
 #### `run_check(config, agent_config=None, mocks=None, force_reload=False)`
 
 Parameters:
-
 
 * **config** (*dictionary*) – A check configuration dictionary containing an array of `instances`. For example:
 
@@ -70,11 +63,9 @@ Parameters:
         {
             'name': 'simple_config',
             'url': 'http://httpbin.org',
-        }
-    ]
+        }]
 }
 ```
-
 
 * **agent_config** (*dictionary*) – A customized Datadog agent configuration.
 * **mocks** (*dictionary*) – A dictionary keyed by method name (string) with values of method. For example:
@@ -86,23 +77,19 @@ Parameters:
 }
 ```
 
-
 * **force_reload** (*boolean*) – Reload the check before running it.
 
 #### `run_check_twice(config, agent_config=None, mocks=None, force_reload=False)`
 
-Similar to `run_check`, this method will run the check twice with a 1 second delay between runs.
-
+Similar to `run_check`, this method runs the check twice with a 1 second delay between runs.
 
 #### `run_check_n(config, agent_config=None, mocks=None, force_reload=False, repeat=1, sleep=1)`
 
-Similar to `run_check`, this method will run the check multiple times.
-
+Similar to `run_check`, this method runs the check multiple times.
 
 Parameters:
 
-
-* **repeat** (*integer*) – The number of times the check will run.
+* **repeat** (*integer*) – The number of times the check runs.
 * **sleep** (*integer*) – The delay in seconds between check runs.
 
 ### Metric Methods
@@ -111,12 +98,11 @@ Parameters:
 
 Parameters:
 
-
 * **metric_name** (*string*) – The name of the metric.
 * **value** (*variable*) – The value for the metric.
 * **tags** (*list of strings*) – The tags associated with the metric.
 * **count** (*integer*) – The number of candidate metrics the assertion should test for. Typical values are:
-  * `None`: will not test for the count
+  * `None`: won't test for the count
   * `1`: tests for exactly one metric
   * `0`: tests for no matches (works as a negation)
 * **at_least** (*integer*) – The minimum number of candidate metrics the assertion should test for.
@@ -128,7 +114,6 @@ Parameters:
 
 Parameters:
 
-
 * **metric_name** (*string*) – The name of the metric.
 * **tag_prefix** (*string*) – Match metrics with tags that begin with this string.
 * **count** (*integer*) – The number of data points the assertion should test for.
@@ -137,7 +122,6 @@ Parameters:
 #### `assertMetricTag(metric_name, tag, count=None, at_least=1)`
 
 Parameters:
-
 
 * **metric_name** (*string*) – The name of the metric.
 * **tag** (*string*) – The tag associated with the metric.
@@ -150,10 +134,9 @@ Parameters:
 
 Parameters:
 
-
 * **meta_keys** (*list of strings*) – A list of metadata keys.
 * **count** (*integer*) – The number of candidate metrics the assertion should test for. Typical values are:
-  * `None`: will not test for the count
+  * `None`: won't test for the count
   * `1`: tests for exactly one metric
   * `0`: tests for no matches (works as a negation)
 * **at_least** (*integer*) – The minimum number of candidate metrics the assertion should test for.
@@ -170,12 +153,10 @@ Parameters:
 
 Parameters:
 
-
 * **service_check_name** (*string*) – The name of the service check.
 * **tags** (*list of strings*) – The tags associated with the service check.
 * **count** (*integer*) – The number of data points the assertion should test for.
 * **at_least** (*integer*) – The minimum number of data points the assertion should test for.
-
 
 ### Event Method
 
@@ -183,10 +164,9 @@ Parameters:
 
 Parameters:
 
-
 * **msg_text** (*string*) – The event message text.
 * **count** (*integer*) – The number of candidate metrics the assertion should test for. Typical values are:
-  * `None`: will not test for the count
+  * `None`: won't test for the count
   * `1`: tests for exactly one metric
   * `0`: tests for no matches (works as a negation)
 * **at_least** (*integer*) – The minimum number of candidate metrics the assertion should test for.
@@ -200,10 +180,9 @@ Parameters:
 
 Parameters:
 
-
 * **warning** (*string*) – The warning message text.
 * **count** (*integer*) – The number of candidate warnings the assertion should test for. Typical values are:
-  * `None`: will not test for the count
+  * `None`: won't test for the count
   * `1`: tests for exactly one warning
   * `0`: tests for no matches (works as a negation)
 * **at_least** (*integer*) – The minimum number of candidate warnings the assertion should test for.

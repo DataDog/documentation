@@ -15,11 +15,11 @@ Kafka is essentially a powerful, fast message brokering system used to transfer 
 There are four main components to Kafka:
 
 * **Broker**: Cluster of nodes responsible for establishing the mechanisms to write and read messages. (Main piece of Kafka, always in Java, usually managed by Apache Zookeeper)
-* **Producer**: This will be the application(s) that is writing the messages that you are interested in viewing. (Most commonly in Java, but possibly in other languages)
+* **Producer**: Application(s) that is writing the messages that you are interested in viewing. (Most commonly in Java, but possibly in other languages)
 * **Consumer**: This is the application(s) that is receiving your set of messages. (Most commonly in Java, but possibly in other languages)
-* **Topics** - These are the mailboxes of messages that Producers and Consumers will subscribe to. When writing or reading a message in Kafka, you must specify which "topic" you are to read from. You can think of this like a channel in slack, you join the ones you want to post and read messages to. Each topic then has a list of offsets that will inform you where you are in the number of messages you have read/have left to read.
+* **Topics** - Mailboxes of messages that Producers and Consumers subscribe to. When writing or reading a message in Kafka, specify which "topic" you are to read from. You can think of this like a channel in slack, you join the ones you want to post and read messages to. Each topic then has a list of offsets that informs you where you are in the number of messages you have read/have left to read.
 
-A more full dive into Kafka can be found [here](https://sookocheff.com/post/kafka/kafka-in-a-nutshell/) as well as on a Datadog [Blogpost](https://www.datadoghq.com/blog/monitoring-kafka-performance-metrics/). 
+[A more full dive into Kafka](https://sookocheff.com/post/kafka/kafka-in-a-nutshell/) as well as on [a Datadog Blogpost](https://www.datadoghq.com/blog/monitoring-kafka-performance-metrics/). 
 
 ## Datadog Kafka Integrations:
 
@@ -61,9 +61,9 @@ Additionally, there are cases where users are using custom Producer and Consume
     # env: stage
     # newTag: test
 ```
-if you are running Producers and Consumers from other languages, this isn't an option, and you will have to use another way to submit these metrics from your code, for instance through dogstatsd.
+if you are running Producers and Consumers from other languages, this isn't an option, and you have to use another way to submit these metrics from your code, for instance through dogstatsd.
 
-4. This issue is specifically for the Kafka_Consumer check. If you specify a partition in your Kafka_Consumer.yaml file that doesn't exist in your environment, you will see the following error in info.log:
+4. This issue is specifically for the Kafka_Consumer check. If you specify a partition in your Kafka_Consumer.yaml file that doesn't exist in your environment, you see the following error in info.log:
 ```
 instance - #0 [Error]: ''
 ```

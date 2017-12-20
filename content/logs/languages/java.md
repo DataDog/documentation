@@ -17,6 +17,10 @@ further_reading:
   text: Log Collection Troubleshooting Guide
 ---
 
+<div class="alert alert-info">
+Datadog's Logs is currently available via public beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
+</div>
+
 Java logs are quite complex to handle, mainly because of stack traces. These stack traces are split into multiple lines which makes them difficult to associate to the original log event:
 
 ```java
@@ -26,7 +30,6 @@ Exception in thread "main" java.lang.NullPointerException
         at com.example.myproject.Author.getBookTitles(Author.java:25)
         at com.example.myproject.Bootstrap.main(Bootstrap.java:14)
 ```
-
 
 By asking your logging library to log into JSON, you will:
 
@@ -54,7 +57,6 @@ Add a new file appender to `log4j.xml`:
   </layout>
 </appender>
 ```
-
 
 ### Log4j2
 Edit your `log4j2.xml` file:
@@ -121,7 +123,7 @@ logs:
 ## Getting further
 Enrich your log events with valuable attributes!
 
-Logging is great- It tells developers and administrators what is happening at specific moments in time. However, you must always remember to decorate them with contextual attributes.
+Logging is great- It tells developers and administrators what is happening at specific moments in time. However, always remember to decorate them with contextual attributes.
 
 ###Using the Key/Value parser
 
@@ -141,7 +143,7 @@ You can easily change it to:
 logger.info("Emitted quantity=1001 messages during the last durationInMs=93180 ms for customer scope=prod30");
 ```
 
-With the [Key/Value parser](/logs/parsing/#key-value) enabled, **Datadog** will automatically extract each pair from your final JSON document:
+With the [Key/Value parser](/logs/parsing/#key-value) enabled, **Datadog** automatically extracts each pair from your final JSON document:
 
 ```json
 {

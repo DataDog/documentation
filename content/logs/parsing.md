@@ -19,7 +19,6 @@ further_reading:
 Datadog's Logs is currently available via public beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
 </div>
 
-
 ## Overview 
 
 The Grok syntax provides an easier way to parse logs than pure regular expressions. 
@@ -110,7 +109,7 @@ Here is the list of all the filters natively implemented by Datadog:
 {{% /table %}}
 
 ## Examples
-Below you will find some examples demonstrating how to use parsers:
+Find below some examples demonstrating how to use parsers:
 
 ### Key value
 
@@ -144,7 +143,6 @@ If you add an **extract** parameter in your rule pattern you would have:
 ### Parsing dates
 
 The date matcher transforms your timestamp in the EPOCH format.
-
 
 {{% table responsive="true" %}}
 ||||
@@ -187,7 +185,7 @@ MyParsingRule (%{integer:user.id}|%{word:user.firstname}) connected on %{date("M
 
 ### Optional attribute 
 
-Some logs will contain values that only appear part of the time. In those cases, you can make attribute extraction optional with `()?` extracting it only when the attribute is contained in your log.
+Some logs contain values that only appear part of the time. In those cases, you can make attribute extraction optional with `()?` extracting it only when the attribute is contained in your log.
 
 **Log**:
 ```

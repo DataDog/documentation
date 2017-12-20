@@ -6,7 +6,7 @@ customnav: gettingstartednav
 
 Datadog allows for custom metrics submission through multiple ways to offer a full understanding of what is happening on your infrastructure.
 
-This article will explain:
+This article explains:
 
 * What a custom metric is, and how you can submit it to Datadog.
 * How many custom metrics we allow for out of the box.
@@ -17,9 +17,9 @@ This article will explain:
 
 A custom metric refers to a single, unique combination of a metric name, host, and any tags.
 
-Custom metrics generally refer to any metric that you send using statsd, [dogstatsd](/developers/dogstatsd), or through extensions made to the [Datadog Agent](/agent). Some [integrations](/integrations/) can potentially emit an unlimited number of metrics that can also count as custom, further details can be found [here](/integrations/faq/what-standard-integrations-emit-custom-metrics).
+Custom metrics generally refer to any metric that you send using statsd, [dogstatsd](/developers/dogstatsd), or through extensions made to the [Datadog Agent](/agent). Some [integrations](/integrations/) can potentially emit an unlimited number of metrics that can also count as custom, [further details on which standard integrations emit custom metrics](/integrations/faq/what-standard-integrations-emit-custom-metrics).
 
-In order to fully leverage the capabilities of the Datadog product through scoping and alerting, you’ll probably be using tags. As a consequence, one submitted metric will actually lead to **multiple unique tag combinations**- counting towards your custom metrics count.
+In order to fully leverage the capabilities of the Datadog product through scoping and alerting, you’ll probably be using tags. As a consequence, one submitted metric actually leads to **multiple unique tag combinations**- counting towards your custom metrics count.
 
 For example:
 
@@ -28,8 +28,7 @@ For example:
 * The logic behind your metric is the following :
 {{< img src="getting_started/custom_metrics/custom_metric_1.png" alt="custom_metric_1" responsive="true" popup="true">}}
 
-
-The given unique metrics **on a given host** will therefore be :
+The given unique metrics **on a given host** are therefore:
 
 * auth.exceptionCount with tag “method:X”
 * auth.exceptionCount with tag “method:Y”
@@ -37,7 +36,6 @@ The given unique metrics **on a given host** will therefore be :
 * auth.exceptionCount with tags “method:X” and “exception:B”
 * auth.exceptionCount with tags “method:Y” and “exception:A”
 * auth.exceptionCount with tags “method:Y” and “exception:B”
-
 
 In this situation, you would end up with 6 different metrics.
 
@@ -59,7 +57,7 @@ We do not enforce [any fixed rate limit](/api/#rate-limiting) on custom metric s
 
 ## How do I check my custom metrics count?
 
-When creating a custom metric, all the host tags will be automatically added to that metric as one unique tag combination, to which you'll add the tags linked to the metric itself. Those are the most important as they will add to the actual metric count.
+When creating a custom metric, all the host tags are automatically added to that metric as one unique tag combination, to which you'll add the tags linked to the metric itself. Those are the most important as they add to the actual metric count.
 
 Let's say you want to have insight into the request.count from different services across your infrastructure.
 
@@ -74,7 +72,6 @@ Let's say you want to have insight into the request.count from different service
 
 The logic behind your metric is the following :
 {{< img src="getting_started/custom_metrics/logic_metric.png" alt="logic_metric" responsive="true" popup="true">}}
-
 
 From there, you can see that **on each host reporting this metric**, if all services report both successes and failures, you can have up to 1x2x3 = **6 custom metrics**.
 
@@ -92,10 +89,8 @@ If you are an administrator, you can see your total custom metrics per hour as w
 So if you only had the first host from the example above reporting, you’d have this:
 {{< img src="getting_started/custom_metrics/metric_summary.png" alt="metric_summary" responsive="true" popup="true">}}
 
-
 Adding the second host:
 {{< img src="getting_started/custom_metrics/metric_summary_2.png" alt="metric_summary_2" responsive="true" popup="true">}}
-
 
 Adding the third host as per the table above, you get your 13 distinct metrics:
 {{< img src="getting_started/custom_metrics/metric_summary_3.png" alt="metric_summary_3" responsive="true" popup="true">}}
@@ -108,6 +103,6 @@ Ultimately, you’ll have 13 metrics using the following query: `count:service.r
 
 ## Custom metrics best practices
 
-* For querying purposes, we encourage you to limit the number of tags applied to 1,000 tags per metric. Going over this amount will [slow down the graphs](/graphing/faq/dashboard-loads-very-slowly) in your dashboards due to the increase in cardinality.
+* For querying purposes, we encourage you to limit the number of tags applied to 1,000 tags per metric. Going over this amount [slows down the graphs](/graphing/faq/dashboard-loads-very-slowly) in your dashboards due to the increase in cardinality.
 * You can check the number of "distinct metrics" in the metric summary page (click a metric name to see the number of distinct metrics associated). If you need a higher custom metric limit, [email us](/help) and we'll connect you with your Customer Success Manager.
-* Additional information about billing and custom metrics is available [here](/account_management/faq/).
+* [Additional information about billing and custom metrics](/account_management/faq/).

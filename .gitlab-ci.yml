@@ -26,7 +26,7 @@ before_script:
     - branches
 
 # ================== preview ================== #
-# If the branch has a name of <slack-user>/<feature-name> then ci will build a preview site
+# If the branch has a name of <slack-user>/<feature-name> then ci builds a preview site
 build_preview:
   <<: *base_template
   stage: build
@@ -101,6 +101,7 @@ build_live:
     - sync_integration_descriptions
     - sync_integration_metrics
     - build_hugo_site
+    - build_hugo_site_ja
     - minify_html
     - collect_static_assets
     - push_site_to_s3

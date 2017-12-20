@@ -4,7 +4,7 @@ kind: faq
 customnav: graphingnav
 ---
 
-You can switch commas separating the queries into plus signs, from:
+Switch commas separating the queries into plus signs, from:
 
 ```
 "q": "sum:system.io.rkb_s{device:sda}*1024, sum:system.io.rkb_s{device:sdb}

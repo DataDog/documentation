@@ -5,9 +5,9 @@ customnav: agentnav
 ---
 
 It can take up to 24h for the host to disappear from the infrastructure page,
-but it will only be part of the host count for billing purposes if we're
+but it is only part of the host count for billing purposes if we're
 actually receiving data.
 
-After ~45 minutes the agent will be showed as down ("???" will be displayed next to the hostname) and will be removed from the infrastructure page after 3 hours.
+After ~45 minutes the agent is showed as down ("???" is displayed next to the hostname) and is removed from the infrastructure page after 3 hours.
 
-After 24 hours You can still query against them, but it will not appear in drop downs or infrastructure. There is not a way to immediately delete a metric.
+After 24 hours you can still query against them, but it doesn't appear in drop downs or infrastructure. There is not a way to immediately delete a metric.

@@ -10,7 +10,7 @@ Agent 6 is the latest major version of the Datadog Agent. The big difference bet
 
 ## What’s Better?
 
-Golang has allowed us to take advantage of concurrency. In place of the three processes the Agent used to run--the Forwarder, the Collector, and Dogstatsd--there is now only one process: the Agent. It also comes with a number of other core improvements:
+Golang has allowed us to take advantage of concurrency. In place of the three processes the Agent used to run--the Forwarder, the Collector, and DogStatsD--there is now only one process: the Agent. It also comes with a number of other core improvements:
 
 ### Improved Resource Usage
 
@@ -24,7 +24,6 @@ It has a decrease Memory usage:
 It uses fewer File Descriptors:
 {{< img src="agent/faq/file_descriptor.png" alt="Dile descriptor" responsive="true" popup="true">}}
 
-
 It has an all around decreased footprint.
 
 ### Better Windows Support
@@ -37,7 +36,7 @@ Container support is better and more robust in the new agent. It has been built 
 
 ### Autodiscovery
 
-Service Discovery is now Autodiscovery. It’s been renamed and revamped. The new Auto Discovery is highly decoupled and it will allow us to add more sources beyond docker.
+Service Discovery is now Autodiscovery. It’s been renamed and revamped. The new Auto Discovery is highly decoupled and it allows us to add more sources beyond docker.
 
 ### Global Percentiles
 
@@ -47,13 +46,13 @@ We can now do global percentiles on the server. It allows us to calculate real, 
 
 We have improved configuration of the agent and made it much better and easier!
 
-### Dogstatsd Over Sockets
+### DogStatsD Over Sockets
 
-You can now use dogstatsd over a unix socket instead of over udp!
+You can now use [DogStatsD](/developers/dogstatsd) over a unix socket instead of over udp!
 
 ### More Build Options
 
-You can now custom build the agent and dogstatsd much easier and with much more configuration options, to include or exclude almost anything. We even have a “puppy” agent, that’s a truly minimal installation.
+You can now custom build the agent and [DogStatsD](/developers/dogstatsd) much easier and with much more configuration options, to include or exclude almost anything. We even have a “puppy” agent, that’s a truly minimal installation.
 
 ## How do I upgrade?
 
