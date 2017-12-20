@@ -159,11 +159,36 @@ If the agent is containerized, see [here](https://github.com/DataDog/docker-dd-a
 ### Filter logs
 
 All logs are not equal and you may want to send only a specific subset of logs to Datadog.
-To achieve this use the `log_processing_rules` parameter in your configuration file with the **exclude_at_match** `type`
+To achieve this use the `log_processing_rules` parameter in your configuration file with the **exclude_at_match** or **include_at_match** `type`.
+
+* exclude_at_match:
 
 If the pattern is contained in the message the log is excluded, and not sent to Datadog.
 
-Example: Filter out logs where the user field matches the datadoghq.com domain
+Example: Filtering out logs that contain a Datadog email
+
+```yaml
+init_config:
+
+instances:
+    [{}]
+
+logs:
+ - type: file
+   path: /my/test/file.log
+   service: cardpayment
+   source: java
+   log_processing_rules:
+    - type: include_at_match
+      name: include_datadoghq_users
+      # Regexp can be anything
+      pattern: \w+@datadoghq.com
+```
+* include_at_match:
+
+Only log with a message that includes the pattern are sent to Datadog.
+
+Example: Sending only logs that contain a Datadog email
 
 ```yaml
 init_config:
