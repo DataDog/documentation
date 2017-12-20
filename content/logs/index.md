@@ -159,7 +159,7 @@ If the agent is containerized, see [here](https://github.com/DataDog/docker-dd-a
 ### Filter logs
 
 All logs are not equal and you may want to send only a specific subset of logs to Datadog.
-To achieve this use the `log_processing_rules` parameter in your configuration file with the **exclude_at_match** or **include_at_match** `type`.
+To achieve this use the `log_processing_rules` parameter in your configuration file with the **exclude_at_match** <!--or **include_at_match**--> `type`.
 
 * exclude_at_match:
 
@@ -184,6 +184,8 @@ logs:
       # Regexp can be anything
       pattern: \w+@datadoghq.com
 ```
+
+<!--
 * include_at_match:
 
 Only log with a message that includes the pattern are sent to Datadog.
@@ -207,6 +209,7 @@ logs:
       # Regexp can be anything
       pattern: User=\w+@datadoghq.com
 ```
+-->
 
 ### Search and replace content in your logs
 
