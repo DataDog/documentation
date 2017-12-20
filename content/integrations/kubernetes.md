@@ -18,11 +18,11 @@ Get metrics from kubernetes service in real time to:
 * Visualize and monitor kubernetes states
 * Be notified about kubernetes failovers and events.
 
-For Kubernetes, it’s recommended to run the [Agent in a pod](https://github.com/DataDog/docker-dd-agent). We have created a [Docker image](https://hub.docker.com/r/datadog/docker-dd-agent/) with both the Docker and the Kubernetes integrations enabled.
+For Kubernetes, it’s recommended to run the [Agent in a DaemonSet](https://github.com/DataDog/docker-dd-agent). We have created a [Docker image](https://hub.docker.com/r/datadog/docker-dd-agent/) with both the Docker and the Kubernetes integrations enabled.
 
-You can also just [run the Datadog agent on your host](/#host-setup) and configure it to gather your Kubernetes metrics.
+You can also just [run the Datadog Agent on your host](/#host-setup) and configure it to gather your Kubernetes metrics.
 
-## Setup Kubernetes 
+## Setup Kubernetes
 ### Installation
 #### Container Installation
 
@@ -30,7 +30,7 @@ Thanks to Kubernetes, you can take advantage of DaemonSets to automatically depl
 
 *If DaemonSets are not an option for your Kubernetes cluster, [install the Datadog agent](https://docs.datadoghq.com/integrations/docker_daemon/) as a sidecar container on each Kubernetes node.*
 
-If your Kubernetes has RBAC enabled, see this [dedicated documentation on how to RBAC permission with your Datadog-kubernetes integration](/integrations/faq/using-rbac-permission-with-your-kubernetes-integration).
+If your Kubernetes has RBAC enabled, see the [documentation on how to configure RBAC permissions with your Datadog-Kubernetes integration](/integrations/faq/using-rbac-permission-with-your-kubernetes-integration).
 
 * Create the following `dd-agent.yaml` manifest:
 
@@ -56,7 +56,7 @@ If your Kubernetes has RBAC enabled, see this [dedicated documentation on how to
               protocol: UDP
           env:
             - name: API_KEY
-              value: "YOUR_API_KEY_HERE"
+              value: "YOUR_API_KEY"
             - name: KUBERNETES
               value: "yes"
           volumeMounts:
@@ -80,10 +80,9 @@ If your Kubernetes has RBAC enabled, see this [dedicated documentation on how to
             name: cgroups
 ```
 
-Don't forget to replace `YOUR_API_KEY` with [your api key](https://app.datadoghq.com/account/settings#api), an alternative would be to use  
-[Kubernetes secret](https://kubernetes.io/docs/concepts/configuration/secret/) to set your API key [as an environement variable](https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-environment-variables).
+Replace `YOUR_API_KEY` with [your api key](https://app.datadoghq.com/account/settings#api) or use [Kubernetes secrets](https://kubernetes.io/docs/concepts/configuration/secret/) to set your API key [as an environement variable](https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-environment-variables).
 
-* Deploy the DaemonSet with the command:  
+* Deploy the DaemonSet with the command:
   ```
   kubectl create -f dd-agent.yaml
   ```
@@ -92,7 +91,7 @@ Don't forget to replace `YOUR_API_KEY` with [your api key](https://app.datadoghq
 
 #### Host Installation
 
-Install the `dd-check-kubernetes` package manually or with your favorite configuration manager
+Install the `dd-check-kubernetes` package manually or with your favorite configuration manager.
 
 ### Configuration
 
@@ -105,16 +104,16 @@ instances:
     method: http
 ```
 
-See the [sample kubernetes.yaml](https://github.com/DataDog/integrations-core/blob/master/kubernetes/conf.yaml.example) for all available configuration options.
+See the [example kubernetes.yaml](https://github.com/DataDog/integrations-core/blob/master/kubernetes/conf.yaml.example) for all available configuration options.
 
 ### Validation
 #### Container Running
 
-To verify the Datadog agent is running in your environment as a daemonset, execute:
+To verify the Datadog Agent is running in your environment as a daemonset, execute:
 
     kubectl get daemonset
 
-If the agent is deployed you will see similar output to the text below, where desired and current are equal to the number of running nodes in your cluster.
+If the Agent is deployed you will see output similar to the text below, where desired and current are equal to the number of nodes running in your cluster.
 
     NAME       DESIRED   CURRENT   NODE-SELECTOR   AGE
     dd-agent   3         3         <none>          11h
@@ -132,7 +131,7 @@ If the agent is deployed you will see similar output to the text below, where de
           - Collected 39 metrics, 0 events & 7 service checks
 
 
-## Setup Kubernetes State 
+## Setup Kubernetes State
 ### Installation
 #### Container Installation
 
@@ -195,24 +194,24 @@ The manifest above uses Google's publicly available kube-state-metrics container
 1. Run `make container` to build the container
 1. Run `kubectl apply -f kubernetes`
 
-If you configure your Kubernetes State Metrics service to run on a different URL or port, you can configure the Datadog Agent by setting the `kube_state_url` parameter in `conf.d/kubernetes_state.yaml`, then restarting the agent.  
+If you configure your Kubernetes State Metrics service to run on a different URL or port, you can configure the Datadog Agent by setting the `kube_state_url` parameter in `conf.d/kubernetes_state.yaml`, then restarting the Agent.
 For more information, see the [kubernetes_state.yaml.example file](https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/conf.yaml.example). If you have enabled [Autodiscovery](https://docs.datadoghq.com/agent/autodiscovery), the kube state URL will be configured and managed automatically.
 
 #### Host Installation
 
-Install the `dd-check-kubernetes_state` package manually or with your favorite configuration manager
+Install the `dd-check-kubernetes_state` package manually or with your favorite configuration manager.
 
 ### Configuration
 
-Edit the `kubernetes_state.yaml` file to point to your server and port, set the masters to monitor. See the [sample kubernetes_state.yaml](https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/conf.yaml.example) for all available configuration options.
+Edit the `kubernetes_state.yaml` file to point to your server and port, set the masters to monitor. See the [example kubernetes_state.yaml](https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/conf.yaml.example) for all available configuration options.
 
 ### Validation
 #### Container validation
-To verify the Datadog agent is running in your environment as a daemonset, execute:
+To verify the Datadog Agent is running in your environment as a daemonset, execute:
 
     kubectl get daemonset
 
-If the agent is deployed you will see similar output to the text below, where desired and current are equal to the number of running nodes in your cluster.
+If the Agent is deployed you will see similar output to the text below, where desired and current are equal to the number of running nodes in your cluster.
 
     NAME       DESIRED   CURRENT   NODE-SELECTOR   AGE
     dd-agent   3         3         <none>          11h
@@ -233,7 +232,7 @@ If the agent is deployed you will see similar output to the text below, where de
 ## Setup Kubernetes DNS
 ### Installation
 
-Install the `dd-check-kube_dns` package manually or with your favorite configuration manager
+Install the `dd-check-kube_dns` package manually or with your favorite configuration manager.
 
 ### Configuration
 
@@ -241,9 +240,7 @@ Edit the `kube_dns.yaml` file to point to your server and port, set the masters 
 
 #### Using with service discovery
 
-If you are using 1 dd-agent pod per kubernetes worker nodes, you could use the
-following annotations on your kube-dns pod to get the data retrieve
-automatically.
+If you are using one dd-agent pod per kubernetes worker node, you could use the following annotations on your kube-dns pod to retrieve the data automatically.
 
 ```yaml
 apiVersion: v1
@@ -257,11 +254,8 @@ metadata:
 
 **Remarks:**
 
- - Notice the "dns-pod" tag that will keep track of the target dns
-   pod IP. The other tags will be related to the dd-agent that is polling the
-   informations using the service discovery.
- - The service discovery annotations need to be done on the pod. In case of a deployment,
-   add the annotations to the metadata of the template's spec.
+ - Notice the "dns-pod" tag will keep track of the target DNS pod IP. The other tags will be related to the dd-agent that is polling the informations using the service discovery.
+ - The service discovery annotations need to be applied to the pod. In case of a deployment, add the annotations to the metadata of the template's spec.
 
 
 ### Validation
@@ -289,7 +283,7 @@ metadata:
 
 ### Events
 
-As the 5.17.0 release, Datadog Agent now supports built in [leader election option](/integrations/faq/gathering-kubernetes-events) for the Kubernetes event collector. Once enabled, you no longer need to deploy an additional event collection container to your cluster. Instead agents will coordinate to ensure only one agent instance is gathering events at a given time, events below will be available:
+As the 5.17.0 release, Datadog Agent now supports built in [leader election option](/integrations/faq/gathering-kubernetes-events) for the Kubernetes event collector. Once enabled, you no longer need to deploy an additional event collection container to your cluster. Instead, Agents will coordinate to ensure only one Agent instance is gathering events at a given time, events below will be available:
 
 * Backoff
 * Conflict
@@ -323,7 +317,7 @@ The Kubernetes check does not include any service check at this time.
 
 ## Troubleshooting
 
-* [Can I install the agent on my Kubernetes master node(s)](/integrations/faq/can-i-install-the-agent-on-my-kubernetes-master-node-s)
+* [Can I install the Agent on my Kubernetes master node(s)](/integrations/faq/can-i-install-the-agent-on-my-kubernetes-master-node-s)
 * [Why is the Kubernetes check failing with a ConnectTimeout error to port 10250?](/integrations/faq/why-is-the-kubernetes-check-failing-with-a-connecttimeout-error-to-port-10250)
 * [How to get more out of your Kubernetes integration?](/agent/faq/how-to-get-more-out-of-your-kubernetes-integration)
 * [How to report host disk metrics when dd-agent runs in a docker container?](/agent/faq/how-to-report-host-disk-metrics-when-dd-agent-runs-in-a-docker-container)
