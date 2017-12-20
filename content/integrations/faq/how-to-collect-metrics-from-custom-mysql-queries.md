@@ -4,11 +4,11 @@ kind: faq
 customnav: integrationsnav
 ---
 
-You can configure your MySQL integration to collect metrics from custom queries of your MySQL database by following the configuration syntax [in these lines](https://github.com/DataDog/dd-agent/blob/5.10.x/conf.d/mysql.yaml.example#L50-L66) of our `mysql.yaml.example` file. While you do this, there are a few things you will want to keep in mind...
+You can configure your MySQL integration to collect metrics from custom queries of your MySQL database by following the configuration syntax [in these lines](https://github.com/DataDog/dd-agent/blob/5.10.x/conf.d/mysql.yaml.example#L50-L66) of our `mysql.yaml.example` file. While you do this, there are a few things you want to keep in mind...
 
 ## Qualifying your databases
 
-When you add your custom query, you will have to be careful to make sure each table you reference has its database qualified. This can be done by prepending the table with its database name in the following format:
+When you add your custom query, you have to be careful to make sure each table you reference has its database qualified. This can be done by prepending the table with its database name in the following format:
 ```
 SELECT * FROM database_name.table_name WHERE... 
 ```
@@ -17,19 +17,19 @@ If you don't do this for all table names, the agent may fail to run the custom q
 
 ## Multiple line queries are not supported
 
-If you try running a multi-line SQL query by adding the ";" character to your configuration's "query" string, only that part of the query string that least up to the first ";" will be used by the agent for the custom query.
+If you try running a multi-line SQL query by adding the ";" character to your configuration's "query" string, only that part of the query string that least up to the first ";" is used by the agent for the custom query.
 
 ## Naming your metric
 
-The names applied to your custom query metrics are taken exactly as you provide them. It's generally recommended to begin your custom query metrics with the "mysql." namespace so that they will be included in your MySQL summary dashboards on your infrastructure list and hostmap. But if you would like them to be included among a different namespace, then something other than "mysql." may be more appropriate. 
+The names applied to your custom query metrics are taken exactly as you provide them. It's generally recommended to begin your custom query metrics with the "mysql." namespace so that they are included in your MySQL summary dashboards on your infrastructure list and hostmap. But if you would like them to be included among a different namespace, then something other than "mysql." may be more appropriate. 
 
 ## Frequency of queries
 
-You custom query metric will be collected by your MySQL check at the default agent check schedule, every 15-20 seconds. If you would like to query these metrics less frequently, you could either reduce the frequency of the entire MySQL check (which would affect the frequency of your general mysql.* metrics), or you may prefer to run a custom scheduled/CRON script to submit the results of MySQL queries via the [dogstatsd](/developers/dogstatsd) or [API](/api). 
+You custom query metric is collected by your MySQL check at the default agent check schedule, every 15-20 seconds. If you would like to query these metrics less frequently, you could either reduce the frequency of the entire MySQL check (which would affect the frequency of your general mysql.* metrics), or you may prefer to run a custom scheduled/CRON script to submit the results of MySQL queries via the [dogstatsd](/developers/dogstatsd) or [API](/api). 
 
 ## Maximum number of custom query metrics
 
-The agent caps off the number of custom queries it will collect metrics from at 20, so as to ensure that running custom MySQL queries does not significantly delay its other scheduled checks. If you need to collect metrics from a great number of custom MySQL queries, you may prefer to run a custom scheduled/CRON script to submit the results of MySQL queries via the[dogstatsd](/developers/dogstatsd) or [API](/api).
+The agent caps off the number of custom queries it collects metrics from at 20, so as to ensure that running custom MySQL queries does not significantly delay its other scheduled checks. If you need to collect metrics from a great number of custom MySQL queries, you may prefer to run a custom scheduled/CRON script to submit the results of MySQL queries via the[dogstatsd](/developers/dogstatsd) or [API](/api).
 
 ## Example
 

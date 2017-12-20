@@ -244,7 +244,7 @@ metadata:
   annotations:
     service-discovery.datadoghq.com/apache.check_names: '["apache","http_check"]'
     service-discovery.datadoghq.com/apache.init_configs: '[{},{}]'
-    service-discovery.datadoghq.com/apache.instances: '[{"apache_status_url": "http://%%host%%/server-status?auto"},{"name": "My service", "url": "http://%%host%%", timeout: 1}]'
+    service-discovery.datadoghq.com/apache.instances: '[{"apache_status_url": "http://%%host%%/server-status?auto", "tags": ["%%tags%%"]},{"name": "My service", "url": "http://%%host%%", timeout: 1}]'
   labels:
     name: apache
 spec:
@@ -273,7 +273,7 @@ spec:
       annotations:
         service-discovery.datadoghq.com/apache.check_names: '["apache","http_check"]'
         service-discovery.datadoghq.com/apache.init_configs: '[{},{}]'
-        service-discovery.datadoghq.com/apache.instances: '[{"apache_status_url": "http://%%host%%/server-status?auto"},{"name": "My service", "url": "http://%%host%%", timeout: 1}]'
+        service-discovery.datadoghq.com/apache.instances: '[{"apache_status_url": "http://%%host%%/server-status?auto", "tags": ["%%tags%%"]},{"name": "My service", "url": "http://%%host%%", timeout: 1}]'
     spec:
       containers:
       - name: apache # use this as the container identifier in your annotations
@@ -336,9 +336,9 @@ You can also add a network name suffix to the `%%host%%` variable—`%%host_brid
 
 ### Alternate Container Identifier: Labels
 
-You can identify containers by label rather than container name or image. Just label any container `com.datadoghq.ad.check.id: <SOME_LABEL>`, and then put `<SOME_LABEL>` anywhere you'd normally put a container name or image. For example, if you label a container `com.datadoghq.ad.check.id: special-container`, Autodiscovery will apply to that container any auto-conf template that contains `special-container` in its `docker_images` list.
+You can identify containers by label rather than container name or image. Just label any container `com.datadoghq.sd.check.id: <SOME_LABEL>`, and then put `<SOME_LABEL>` anywhere you'd normally put a container name or image. For example, if you label a container `com.datadoghq.sd.check.id: special-container`, Autodiscovery will apply to that container any auto-conf template that contains `special-container` in its `docker_images` list.
 
-Autodiscovery can only identify each container by label OR image/name—not both—and labels take precedence. For a container that has a `com.datadoghq.ad.check.id: special-nginx` label and runs the `nginx` image, the Agent will NOT apply templates that include only `nginx` as a container identifier.
+Autodiscovery can only identify each container by label OR image/name—not both—and labels take precedence. For a container that has a `com.datadoghq.sd.check.id: special-nginx` label and runs the `nginx` image, the Agent will NOT apply templates that include only `nginx` as a container identifier.
 
 ### Template Source Precedence
 

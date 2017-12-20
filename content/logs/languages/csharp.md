@@ -17,6 +17,10 @@ further_reading:
   text: Log Collection Troubleshooting Guide
 ---
 
+<div class="alert alert-info">
+Datadog's Logs is currently available via public beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
+</div>
+
 To send your C# logs to Datadog, we recommend logging to a file and then tailing that file with your Datadog agent. Here are setup examples for the `log4Net`, `serilog` and `Nlog` logging libraries
 
 We strongly encourage setting up your logging library to produce your logs in JSON format to avoid the need for [custom parsing rules](/logs/parsing).
@@ -48,7 +52,7 @@ var elapsedMs = 34;
 log.Information("Processed {@Position} in {Elapsed:000} ms.", position, elapsedMs);
 ```
 
-Then check the `log.json` file; you will see the following event:
+Then check the `log.json` file to see the following event:
 
 ```json
 {
@@ -126,7 +130,6 @@ namespace Datadog
 
         // Initialize a logger
         private static Logger logger = LogManager.GetCurrentClassLogger();
-
 
         static void Main(string[] args)
         {
@@ -228,10 +231,9 @@ If you have followed the instructions you should see in your file (for example `
 }
 ```
 
-
 ## Configure your Datadog agent
 
-Create a `csharp.yaml` file in your `conf.d/` folder with the following content:
+Create a `csharp.d/conf.yaml` file in your `conf.d/` folder with the following content:
 
 ```yaml
 init_config:
@@ -256,9 +258,9 @@ logs:
     sourcecategory: sourcecode
 ```
 
-
 That's it! Now, all your logs are going to be in proper JSON automatically understood by your Datadog application.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+>>>>>>> master

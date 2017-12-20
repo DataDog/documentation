@@ -12,7 +12,6 @@ summary: Make your graphs more effective by using functions in interesting ways
 
 Datadog 101 shows you everything you need to know about using the Datadog platform. In this fourth video we show you how to use the functions available in graphs and monitors. We cover the following topics:
 
-
 * [Working with functions](?wtime=46)
 * [Absolute value](?wtime=55)
 * [Log2 and log10](?wtime=78)

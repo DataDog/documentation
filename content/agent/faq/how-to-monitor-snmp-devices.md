@@ -17,7 +17,7 @@ In this article, we'll go through monitoring a Juniper SRX firewall, using the D
 
 SNMP uses OIDs, or Object Identifiers, to uniquely identify managed objects. OIDs follow a hierarchical tree pattern: under the root is ISO which is numbered 1, then next level is ORG and numbered 3 and so on, with each level being separated by a ..
 
-A MIB, or Management Information Base will act as a translator between OIDs and human readable names, and will organize a subset of the hierarchy. Because of the way the tree is structured, most SNMP values we’re interested in will always start with the same set of objects: 1.3.6.1.1 for MIB-2 which is a standard that holds system information like uptime, interfaces, network stack, and 1.3.6.1.4.1 which holds vendor specific information.
+A MIB, or Management Information Base acts as a translator between OIDs and human readable names, and organizes a subset of the hierarchy. Because of the way the tree is structured, most SNMP values we’re interested in always start with the same set of objects: 1.3.6.1.1 for MIB-2 which is a standard that holds system information like uptime, interfaces, network stack, and 1.3.6.1.4.1 which holds vendor specific information.
 
 Let's start by installing some useful snmp tools on our ubuntu machine:
 
@@ -29,7 +29,7 @@ Then we install 2 packages:
 sudo apt-get install snmp snmp-mibs-downloader
 ```
 
-This will install the snmp tool suite and download MIBs.
+This installs the snmp tool suite and download MIBs.
 
 Now we'll use the snmpwalk utility to make sure we can communicate over SNMP with the device. We have to supply the version of the SNMP protocol supported by our device, the community string (which acts as a passphrase), the IP address of the device and we'll ask to use all MIB files available:
 
@@ -65,7 +65,7 @@ instances:
       - rack_1
 
     metrics:
-  # If it's just a scalar, you can specify by OID and name it
+  # If it's just a scalar, specify by OID and name it
       - OID: 1.3.6.1.2.1.1.7
          name: sysServices
 ```
@@ -118,7 +118,7 @@ Now we tell the agent to poll it and to use the value of the ifDescr column as t
 
 ```yaml
 init_config:
-#    #You can specify an additional folder for your custom mib files (python format)
+#    #Specify an additional folder for your custom mib files (python format)
 #    mibs_folder: /path/to/your/mibs/folder
 #    ignore_nonincreasing_oid: False
 
@@ -131,10 +131,10 @@ instances:
       - rack_1
 
     metrics:
-  #     # If it's just a scalar, you can specify by OID and name it
+  #     # If it's just a scalar, specify by OID and name it
       - OID: 1.3.6.1.2.1.1.7
         name: sysServices
-  #     # You can also query a table and specify
+  #     #  query a table and specify
   #     #   - which columns to report as value (symbols)
   #     #   - which columns / indexes to use as tags (metric_tags)
       - MIB: IF-MIB

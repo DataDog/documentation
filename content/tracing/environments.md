@@ -21,17 +21,16 @@ Environments are tags, therefore they must follow the following rules:
 * Other characters must be alphanumeric lower case Unicode characters, underscores, minuses, colons, periods or slashes.
 * They must not be more than 100 characters long.
 
-Environments in traces and configuration files will be normalized:
+Environments in traces and configuration files are normalized:
 
-* Unsupported characters will be replaced by underscores.
-* Upper case characters will be converted to lower case.
-
+* Unsupported characters are replaced by underscores.
+* Upper case characters are converted to lower case.
 
 ## Default environment
 
-If you are not using this feature, you will get your data put in `env:none` which is the default behavior.
+If you are not using this feature, your data is put in `env:none` which is the default behavior.
 
-Note that if you are using environments, you will still get a default `env:none` environment where all the non-tagged data will go.
+Note that if you are using environments, you still get a default `env:none` environment where all the non-tagged data goes.
 
 ## Setup
 
@@ -39,7 +38,7 @@ There are several ways to specify an environment when reporting data:
 
 1. Host tag:
 
-    If you use a host tag that looks like `env:XXXX`, all the traces reported from that agent will be tagged accordingly.
+    If you use a host tag that looks like `env:XXXX`, all the traces reported from that agent are tagged accordingly.
 
 2. Agent config:
 
@@ -58,5 +57,4 @@ There are several ways to specify an environment when reporting data:
     # in code this looks like
     span.set_tag('env', 'prod')
     ```
-
 

@@ -37,7 +37,6 @@ func main {
 
 For another example, see the [`example_test.go`](https://github.com/DataDog/dd-trace-go/blob/master/tracer/example_test.go) file in the Go Tracer package
 
-
 ## Compatibility
 
 Currently, only Go 1.7 is supported. The following Go libraries are supported:

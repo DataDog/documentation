@@ -24,7 +24,7 @@ The Infrastructure list page shows all hosts monitored by your datadog applicati
 
 {{< img src="graphing/infrastructure/index/infrastructure_list.png" alt="Infrastructure list" responsive="true" popup="true" >}}
 
-Note: All hosts that have not sent data in 24 hours will disappear from the infrastructure list; you can still query against them, but they will not appear in drop downs.
+Note: A host that has not sent data in 24 hours disappears from the infrastructure list; you can still query against it, but it won't appear in drop downs.
 
 ## Host details
 
@@ -54,7 +54,7 @@ sources. To see all the names the Agent is detecting, [run the Agent info comman
     ...
 
 From these names, a canonical name is picked for the host. This is the name the
-Agent will primarily use to identify itself to Datadog. The other names are
+Agent primarily uses to identify itself to Datadog. The other names are
 submitted as well, but only as candidates for [aliases](#host-aliases).
 
 The canonical host name is picked according to the following rules. The first
@@ -76,7 +76,7 @@ The names collected by the Agent (detailed [above](#agent-host-names)) are added
 You can see a list of all the hosts in your account from the Infrastructure tab
 in Datadog. From the Inspect panel, you can see (among other things) the list of aliases associated with each host.
 
-{{< img src="graphing/infrastructure/index/host_aliases.png" responsive="true" popup="true" >}}
+{{< img src="graphing/infrastructure/index/host_aliases.png" alt="host aliases" responsive="true" popup="true" >}}
 
 ### Export your infrastructure list and Agent versions
 
@@ -84,7 +84,7 @@ If you need to print or export the list of hosts reporting to Datadog, use the "
 
 {{< img src="graphing/infrastructure/index/infrastructure_list.png" alt="inf list" responsive="true" popup="true" >}}
 
-Clicking this link will provide you with a JSON formatted list of all your hosts.  
+Clicking this link provides you with a JSON formatted list of all your hosts.  
 
 At times it may also be prove useful to audit your current Agent version numbers to ensure you are running the latest version of the Agent or to update them following a new release.  
 
@@ -92,7 +92,7 @@ An easy way to accomplish this would be to use the following script that leverag
 
 `https://github.com/DataDog/Miscellany/tree/master/get_hostname_agentversion`
 
-This script will output all the current running Agents and their version numbers to a separate document.  Additionally, you can edit the script to input a desired Version number if you would also like all the running Agents that are under a particular version number.  There is also a separate file if you would like to convert the JSON output into a CSV file for your review.
+This script outputs all the current running Agents and their version numbers to a separate document.  Additionally, you can edit the script to input a desired Version number if you would also like all the running Agents that are under a particular version number.  There is also a separate file if you would like to convert the JSON output into a CSV file for your review.
 
 Once you determine which hosts you would like to update you can either manually install the Agent from the [install page](https://app.datadoghq.com/account/settings#agent).   
 
@@ -109,7 +109,7 @@ You can programmatically access host information and get the insights you need, 
 
 {{< img src="graphing/infrastructure/index/ec2_instances_without_dd_agent.png" alt="ec2_instances_without_dd_agent" responsive="true" popup="true">}}
 
-See the script [here](https://gist.github.com/Martiflex/2803a28ec562fc9a15d404a539f85d38).
+[See the script to prints the list of hosts](https://gist.github.com/Martiflex/2803a28ec562fc9a15d404a539f85d38).
 
 ## Further Reading
 

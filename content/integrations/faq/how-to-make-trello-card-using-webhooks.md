@@ -6,7 +6,7 @@ customnav: integrationsnav
 
 You can easily use our [Webhook Integration](https://app.datadoghq.com/account/settings#integrations/webhooks) to instantly create a trello card using our @-notification feature.
 
-This flow will utilize the Trello REST POST card api endpoint to post the @notification to a relevant Trello list.
+This flow utilizes the Trello REST POST card api endpoint to post the @notification to a relevant Trello list.
 
 ### Steps to Success
 
@@ -19,11 +19,11 @@ This flow will utilize the Trello REST POST card api endpoint to post the @notif
 
 #### Getting the Keys
 
-To get the Trello App Key and Token, simply navigate to Trello's relevant page [here](https://trello.com/app-key). If you are logged in, you should be able to see the [App key](https://cl.ly/2A40141c0p2Z) immediately:
+To get the Trello App Key and Token, simply [navigate to Trello's relevant page](https://trello.com/app-key). If you are logged in, you should be able to see the [App key](https://cl.ly/2A40141c0p2Z) immediately:
 
 NOTE: Trello mentions API key in the url. For this article, API and APP keys are one and the same
 
-Authorize a token with the Trello Account you are currently logged into (Green Arrow [here](https://cl.ly/2A40141c0p2Z))
+Authorize a token with the Trello Account you are currently logged into, [the Green Arrow](https://cl.ly/2A40141c0p2Z).
 
 #### Designate the Trello List
 
@@ -32,15 +32,15 @@ From there, find the [value](https://cl.ly/0R2n1A0V280s) for idList.
 
 #### Configure the Webhook
 
-The API documentation for Trello cards are [here](https://developers.trello.com/advanced-reference/card#put-1-cards-card-id-or-shortlink) and our webhook integration is [here](https://app.datadoghq.com/account/settings#integrations/webhooks).
+[Consult the API documentation for Trello cards](https://developers.trello.com/advanced-reference/card#put-1-cards-card-id-or-shortlink) and our webhook integration [dedicated documentation page](https://app.datadoghq.com/account/settings#integrations/webhooks).
 
 In the configuration:
 
-* name is the alias for how you will reference this hook. (@webhook-NAME)
+* name is the alias for how you reference this hook. (@webhook-NAME)
 
-* URL will be https://api.trello.com/1/cards 
+* URL is `https://api.trello.com/1/cards`
 
-You must enable Custom Payload and fill in a json object that will look like:
+Enable Custom Payload and fill in a json object that looks like:
 ```
 {
 "name": "$USER : $EVENT_TITLE",
@@ -52,7 +52,7 @@ You must enable Custom Payload and fill in a json object that will look like:
 }
 ```
 
-*__name__ will correspond to the title of the card
+*__name__ corresponds to the title of the card
 
 *__desc__ corresponds to the description of the card
 

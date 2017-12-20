@@ -4,7 +4,9 @@ kind: faq
 customnav: integrationsnav
 ---
 
-In general, custom metrics are defined as any single, unique combination of a metric name, host, and tag that are sent using [statsd, dogstatsd](/developers/dogstatsd), via [API](/api), or through [extensions](/agent/agent_checks) made to the Datadog agent. (Further details with examples on how we count a custom metric can be found [here](/getting_started/custom_metrics)) However, certain standard integrations can also emit custom metrics as specified below.
+In general, [custom metrics](/getting_started/custom_metrics/) are defined as any single, unique combination of a metric name, host, and tag that are sent using [statsd, dogstatsd](/developers/dogstatsd), via [API](/api), or through [extensions](/agent/agent_checks) made to the Datadog agent.  
+[Further details with examples on how we count a custom metric](/getting_started/custom_metrics)).  
+However, certain standard integrations can also emit custom metrics as specified below.
 
 Standard integrations that are limited to 350 metrics by default and emit custom metrics: 
 

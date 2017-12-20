@@ -35,7 +35,7 @@ Note that for collecting Container information in the standard install rather th
 
 ### String Search
 
-Containers are by their nature extremely high cardinality objects.  Our flexible string search will match substrings in the container name, ID, or image fields.
+Containers are by their nature extremely high cardinality objects. Our flexible string search matches substrings in the container name, ID, or image fields.
 
 ### Tagging
 
@@ -80,7 +80,6 @@ It would be easy to pivot by ECS `ecs_task_name` and `ecs_task_version` and unde
 
 {{< img src="graphing/infrastructure/livecontainers/tasksxversion.png" alt="Tasks x version" responsive="true" popup="true">}}
 
-
 ## Real-time monitoring
 
 While actively working with the Containers page, metrics are collected at 2s resolution.  This is very important for highly volatile metrics such as CPU.  In the background, for historical context, metrics are collected at 10s resolution.
@@ -89,7 +88,7 @@ While actively working with the Containers page, metrics are collected at 2s res
 
 - This feature does not support Windows containers at this time.
 
-- Real-time (2s) data collection will be turned off after 30 minutes. To resume real-time collection, refresh the page.
+- Real-time (2s) data collection is turned off after 30 minutes. To resume real-time collection, refresh the page.
 
 - Live Containers is available for the default Debian docker-dd-agent image only.  It is not included in the Alpine image.
 

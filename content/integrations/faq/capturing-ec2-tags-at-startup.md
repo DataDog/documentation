@@ -13,9 +13,9 @@ In order to gather all tags including custom tags, the agent has to query the EC
 ## Details
 
 1. Set in `datadog.conf` the IAM role name that the instance was created as, e.g. role.
-2. On startup, if configured to do so, the agent will query the metadata service to get temporary credentials GET `http://169.254.169.254/latest/meta-data/iam/security-credentials/[role]`
-3. It will then use the EC2 API [DescribeTags](http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeTags.html) to get all the EC2 tags
-4. Last it will merge these tags with the regular instance tags (e.g. region:us-west-1).
+2. On startup, if configured to do so, the agent queries the metadata service to get temporary credentials GET `http://169.254.169.254/latest/meta-data/iam/security-credentials/[role]`
+3. It then uses the EC2 API [DescribeTags](http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeTags.html) to get all the EC2 tags
+4. Last it merges these tags with the regular instance tags (e.g. region:us-west-1).
 5. Once the tags are sent, boto, the python library to query the EC2 API is unloaded until the next time it is needed (assuming tags are sent on a regular basis).
 
 ## Implementation

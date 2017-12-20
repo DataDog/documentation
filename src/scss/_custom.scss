@@ -175,7 +175,6 @@ button:focus {
   box-shadow: none;
 }
 
-
 // Tables
 $table-border-color: #D6D6D6;
 // set default table to look like .table
@@ -204,17 +203,5 @@ table {
   table,
   .table {
     background-color: $body-bg;
-  }
-}
-
-// set table headers to match design
-table,
-.table {
-  thead th {
-    color: #969696;
-    text-transform: Uppercase;
-  }
-  td {
-    color:#000000;
   }
 }

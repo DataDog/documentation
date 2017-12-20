@@ -6,7 +6,7 @@ customnav: main_references
 
 [Datadog api](/api) docs has shell examples only for Unix.
 
-Here are two examples translated in Powershell, using Msxml2.XMLHTTP, fully documented [here](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest): 
+Here are two examples translated in Powershell, using Msxml2.XMLHTTP, fully documented [on mozilla documentation page](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest): 
 
 ## The code that makes the api call
 
@@ -32,7 +32,7 @@ $api_key = "9775a026f1ca7d1c6c5af9d94d9595a4"
 $app_key = "87ce4a24b5553d2e482ea8a8500e71b8ad4554ff"
 ```
 
-2. Set up your parameters according to description in [here](/api/#hosts), shell tab
+2. Set up your parameters according to [description in the host API](/api/#hosts), shell tab
 ```
 $host_name = "test.host"
 
@@ -55,7 +55,7 @@ $api_key = "9775a026f1ca7d1c6c5af9d94d9595a4"
 $app_key = "87ce4a24b5553d2e482ea8a8500e71b8ad4554ff"
 ```
 
-3. Set up parameters according to description in [here](/api/#metrics), shell tab
+3. Set up parameters according to [description in the metrics API](/api/#metrics), shell tab
 ```
 $http_method = "POST"
 

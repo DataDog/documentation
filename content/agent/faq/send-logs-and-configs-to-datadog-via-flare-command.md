@@ -44,14 +44,14 @@ Then just use this command with the flare {caseid} arguments, for example:
 $ sudo /etc/init.d/datadog-agent flare 123456
 ```
 
-This will gather all of the agent's configuration files and logs, remove sensitive information like passwords or SNMP community strings and upload it to our server as an archive.
+This gathers all of the agent's configuration files and logs, remove sensitive information like passwords or SNMP community strings and upload it to our server as an archive.
 
-If you have not specified a case ID, the command will ask for an email address that is used to login in your organization and will create a new support case: 
+If you have not specified a case ID, the command asks for an email address that is used to login in your organization and creates a new support case: 
 ```
 $ sudo /etc/init.d/datadog-agent flare
 ```
 
-That's it, you're done! Our Support Team now has all the necessary information to start investigating your issue and will reach out to you shortly.
+That's it, you're done!
 
 ## Windows
 
@@ -63,7 +63,7 @@ To send Datadog support a copy of your Windows logs and configs, do the followin
 4. Next you'll be prompted for your ticket number - if you don't have one leave the value as zero
 5. Lastly, enter the email address you use to log into Datadog
 
-That's it! Support will be in touch with you shortly.
+That's it, you're done!
 
 {{< img src="agent/faq/windows_flare.jpg" alt="Windows Flare" responsive="true" popup="true">}}
 
@@ -84,11 +84,9 @@ To send Datadog support a copy of your pod logs and configs, do the following:
 kubectl exec <pod-name> -it /etc/init.d/dd-agent flare
 ```
 
-That's it! Support will be in touch with you shortly. 
-
 ## Flare Fails to Upload
 
-On Linux and Mac OSX, the output of the flare command will tell you where the compressed flare archive is saved. In case the file fails to upload to Datadog, you can retrieve it from this directory and manually add as an attachment to an email. For Windows, you can find the location of this file by running the following from the agent's python command prompt (C:\Program Files\Datadog\Datadog Agent\dist\shell.exe since Agent v5.12, C:\Program Files (x86)\Datadog\Datadog Agent\files\shell.exe on older installations):
+On Linux and Mac OSX, the output of the flare command tells you where the compressed flare archive is saved. In case the file fails to upload to Datadog, you can retrieve it from this directory and manually add as an attachment to an email. For Windows, you can find the location of this file by running the following from the agent's python command prompt (C:\Program Files\Datadog\Datadog Agent\dist\shell.exe since Agent v5.12, C:\Program Files (x86)\Datadog\Datadog Agent\files\shell.exe on older installations):
 
 ```
 import tempfile
@@ -99,10 +97,9 @@ Example : 
 
 {{< img src="agent/faq/flare_fail.png" alt="Flare Fail" responsive="true" popup="true">}}
 
-
 ## What about my sensitive information? 
 
-The flare will search for any fields like passwords, passwords in a URI, API keys, and Proxy credentials and prevent this info from being sent. 
+The flare searches for any fields like passwords, passwords in a URI, API keys, and Proxy credentials and prevent this info from being sent. 
 
 Since the Datadog Agent is completely open source, you can check out the code for this at any time. See here: https://github.com/DataDog/dd-agent/blob/master/utils/flare.py
 

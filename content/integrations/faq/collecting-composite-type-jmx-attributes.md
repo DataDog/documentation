@@ -6,7 +6,7 @@ customnav: integrationsnav
 
 ## JMXFetch
 
-In the agent, the yaml files for the following integrations will all be read by JMXFetch:
+In the agent, the yaml files for the following integrations are all read by JMXFetch:
 
 * Active MQ
 * Cassandra
@@ -24,13 +24,13 @@ There are two kinds of JMX attributes that JMXFetch is able to collect:
 
 These are integer, float, double, long, boolean etc …
 
-Note: Boolean values of true will result in 1 and false in 0. For the list of supported types, check [here](https://github.com/DataDog/jmxfetch/blob/master/src/main/java/org/datadog/jmxfetch/Instance.java#L23-L27)
+Note: Boolean values of true result in 1 and false in 0. [Check the list of supported types](https://github.com/DataDog/jmxfetch/blob/master/src/main/java/org/datadog/jmxfetch/Instance.java#L23-L27)
 
 You can use the `list` commands found here in order to get an idea of what your current JMX integration is collecting. Here is a snippet of that output showing a Simple attribute.
 ```
 Matching: x/350. Bean name: domain:mybeanname - Attribute name: myattribute - Attribute type: java.lang.Integer
 ```
-JMXFetch will extract the attribute value directly and use it as the metric value.
+JMXFetch extracts the attribute value directly and use it as the metric value.
 
 ### 'Composite' attributes
 
@@ -39,9 +39,9 @@ These can be seen as an array, a hashmap or an object composed of 'simple attrib
 Matching: x/350. Bean name: domain:mybeanname - Attribute name: myattribute - Attribute type: javax.management.openmbean.CompositeData
 In this case, we need to give more details to JMXFetch on how to use this 'composite' attribute to create a numerical value for a metric. In order to do this, you can use a . to specify the component, i.e.:
 
-myattribute.component
+`myattribute.component`
 
-in the YAML configuration file. [Here](https://github.com/DataDog/jmxfetch/blob/master/src/main/resources/jmx-2.yaml#L3-L14) is an example with java.lang HeapMemoryUsage 'composite attribute.
+In the YAML configuration file [is an example with java.lang HeapMemoryUsage composite attribute](https://github.com/DataDog/jmxfetch/blob/master/src/main/resources/jmx-2.yaml#L3-L14).
 
 ### How can I get to see the next level of these composite attributes?
 

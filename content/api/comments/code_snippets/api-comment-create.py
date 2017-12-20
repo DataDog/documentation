@@ -8,11 +8,11 @@ options = {
 initialize(**options)
 
 # Start a new discussion.
-# You can include a handle like this
+# Include a handle like this
 api.Comment.create(handle='matt@example.com', message='Should we use COBOL or Fortran! ')
 
-# Or you can set it to None
-# and the handle will default
+# Or set it to None
+# and the handle defaults
 # to the owner of the application key
 api.Comment.create(message='Should we use COBOL or Fortran?')
 

@@ -6,7 +6,7 @@ further_reading:
 - link: "/account_management/saml"
   tag: "Documentation"
   text: Configure SAML for your Datadog account
-- link: "/account_management/multi_account"
+- link: "/account_management/multi_organization"
   tag: "Documentation"
   text: Configuring Teams & Organizations with Multiple Accounts
 ---
@@ -26,10 +26,10 @@ Open the ADFS management console. This can be done from Server Manager as shown 
 Click the button on the right for Add a Relying Party Trust.
 {{< img src="account_management/faq/O85HjIi.png" alt="O85HjIi" responsive="true" popup="true">}}
 
-This will open a wizard for the trust with a welcome screen describing the feature. Review the description and click Start to begin.
+This opens a wizard for the trust with a welcome screen describing the feature. Review the description and click Start to begin.
 {{< img src="account_management/faq/KWe4h6W.png" alt="KWe4h6W" responsive="true" popup="true">}}
 
-Import the Datadog SAML Metadata file available [here](https://app.datadoghq.com/account/saml/metadata.xml).
+Import the [Datadog SAML Metadata file](https://app.datadoghq.com/account/saml/metadata.xml).
 
 The file requires a login to access it, making it easiest to download then import by file instead of directly via the URL as shown in the import options below. (As a warning: when downloading the file, if you open and/or rename the file, that may end up changing the file type which can cause xml parsing issues at the next step.)
 {{< img src="account_management/faq/UAjeUVL.png" alt="UAjeUVL" responsive="true" popup="true">}}
@@ -51,7 +51,8 @@ Note: Access can be controlled through Datadog by inviting only specific users
 Review the trust to ensure the appropriate endpoint is configured and click Next.
 {{< img src="account_management/faq/xex71aV.png" alt="xex71aV" responsive="true" popup="true">}}
 
-Finish by clicking Close. This will save the trust definition and open the claims window where you can add a couple of recommended Claim Rules.
+Finish by clicking Close. This saves the trust definition and open the claims window where you may add a couple of recommended Claim Rules.
+
 {{< img src="account_management/faq/5NkUanW.png" alt="5NkUanW" responsive="true" popup="true">}}
 
 We recommend two Claim Rules for brokering the SAML assertions. They can be added by first clicking the Add Rule button.
@@ -60,12 +61,12 @@ We recommend two Claim Rules for brokering the SAML assertions. They can be add
 This first rule is an LDAP Attributes rule that ensures the required information is passed between the two systems. Configure the rule as shown below and click OK to save. (Make sure to use three separate fields for "E-Mail-Addresses, Given-Name, and Surname" or else some relevant info may be left as "None" later on.)
 {{< img src="account_management/faq/cogaUQT.png" alt="cogaUQT" responsive="true" popup="true">}}
 
-The second rule is a Transform rule. Datadog will specify urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress for the Format of the NameIDPolicy in Assertion Requests where ADFS natively expects these in Name ID format so we need to transform the format from email to Name ID.
+The second rule is a Transform rule. Datadog specifies `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` for the Format of the NameIDPolicy in Assertion Requests where ADFS natively expects these in Name ID format so we need to transform the format from email to Name ID.
 
-Select Transform an Incoming Claim from the drop-down and click Next to continue.
+Select Transform an Incoming Claim from the drop-down and click **Next** to continue.
 {{< img src="account_management/faq/JS5FNbR.png" alt="JS5FNbR" responsive="true" popup="true">}}
 
-Input the configuration as shown below and click Finish.
+Input the configuration as shown below and click **Finish**.
 {{< img src="account_management/faq/OT9i0K5.png" alt="OT9i0K5" responsive="true" popup="true">}}
 
 Save the new claim rules by clicking OK.
@@ -80,10 +81,10 @@ Import into your Datadog Organization from the SAML configuration page as shown 
 
 That's it! Once SAML is configured, users can login by using the link provided in the SAML configuration page.
 
-Keep in mind that users will still need to be invited and activated before they’re able to login. Be sure to invite new users by using the email address corresponding to their Active Directory user record otherwise they may be denied as shown below.
+Keep in mind that users still need to be invited and activated before they’re able to login. Be sure to invite new users by using the email address corresponding to their Active Directory user record otherwise they may be denied as shown below.
 {{< img src="account_management/faq/6TsPUla.png" alt="6TsPUla" responsive="true" popup="true">}}
 
-While in most setups this will be the user's user@domain login Microsoft does not enforce this. You can confirm the email address used within the user record as shown below.
+While in most setups the user's user@domain is his  Microsoft login does not enforce this. You can confirm the email address used within the user record as shown below.
 {{< img src="account_management/faq/0R81SaK.png" alt="0R81SaK" responsive="true" popup="true">}}
 
 For any questions or help with this, reach out to us using any one of our [many help options](/help)!

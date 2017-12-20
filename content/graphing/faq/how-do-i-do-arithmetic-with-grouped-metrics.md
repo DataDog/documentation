@@ -4,7 +4,6 @@ kind: faq
 customnav: graphingnav
 ---
 
-
 To graph the sum of `app.foo.bar{env:staging}` and `app.foo.baz{env:staging}`
 grouped `by {host}`, write a graph query that looks like:
 

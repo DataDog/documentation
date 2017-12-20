@@ -7,7 +7,7 @@ aliases:
 further_reading:
 - link: "/agent/faq/want-more-flexibility-with-your-custom-log-parser-add-dogstatsd"
   tag: "FAQ"
-  text: Want more flexibility with your custom log parser? Add dogstatsd  
+  text: Want more flexibility with your custom log parser? Add DogStatsD  
 ---
 
 Log files contain tons of valuable application and business data.
@@ -62,13 +62,13 @@ alternative syntax to configure your line parser:
 
     dogstreams: /path/to/log1:/path/to/my/parsers_module.py:custom_parser
 
-In this format, the agent will attempt to import a function called
+In this format, the agent attempts to import a function called
 `custom_parser` from `/path/to/my/parsers_module.py`.
 
 If your custom log parser is not working, the first place to check is the
 Agent collector logs: 
 
-* If the Agent is unable to import your function, there will be a line with `Could not load Dogstream line parser`. 
+* If the Agent is unable to import your function, there is a line with `Could not load Dogstream line parser`. 
 
 * If all goes well you should see `dogstream: parsing {filename} with
 {function name} (requested {config option text})`.
@@ -127,27 +127,27 @@ dogstreams: /path/to/mylogfile.log:/path/to/mylogparser.py:my_log_parser
 
 This example would collect a gauge-type metric called "user.crashes" with a value of 24, and tagged with the 3 applications named at the end.
 
-A word of warning: there is a limit to how many times the same metric can be collected in the same log-pass; effectively the agent will start to over-write logged metrics with the subsequent submissions of the same metric, even if they have different attributes (like tags). This can be somewhat mitigated if the metrics collected from the logs have sufficiently different time-stamps, but it is generally recommended to only submit one metric to the logs for collection once every 10 seconds or so. This over-writing is not an issue for metrics collected with differing names.
+A word of warning: there is a limit to how many times the same metric can be collected in the same log-pass; effectively the agent starts to over-write logged metrics with the subsequent submissions of the same metric, even if they have different attributes (like tags). This can be somewhat mitigated if the metrics collected from the logs have sufficiently different time-stamps, but it is generally recommended to only submit one metric to the logs for collection once every 10 seconds or so. This over-writing is not an issue for metrics collected with differing names.
 
 ## Parsing Events
 
 Event parsing is done via the same custom parsing functions as described above, except if you return a
-`dict` (or a `list` of `dict`) from your custom parsing function, Datadog will treat it as an event instead of a metric.
+`dict` (or a `list` of `dict`) from your custom parsing function, Datadog treats it as an event instead of a metric.
 
 Here are the event fields (bold means the field is required):
 
 | Field | Type | Value |
 | --- | --- | --- |
-| **msg_title** | string | Title of the event. Will get indexed by our full-text search. |
-| **timestamp** | integer | Unix epoch timestamp. If omitted, will default to the time that the Agent parsed the event. |
-| **msg_text** | string | Body of the event. Will get indexed by our full-text search. |
-| alert_type | string enum | Indicates the severity of the event. Must be one of `error`, `warning`, `success` or `info`. If omitted, will default to `info`. Searchable by `alert_type:value` |
+| **msg_title** | string | Title of the event, gets indexed by our full-text search. |
+| **timestamp** | integer | Unix epoch timestamp. If omitted, it defaults to the time that the Agent parsed the event. |
+| **msg_text** | string | Body of the event, get indexed by our full-text search. |
+| alert_type | string enum | Indicates the severity of the event. Must be one of `error`, `warning`, `success` or `info`. If omitted, it defaults to `info`. Searchable by `alert_type:value` |
 | event_type | string | Describes what kind of event this is. Used as part of the aggregation key |
 | aggregation_key | string | Describes what this event affected, if anything. Used as part of the aggregation key |
-| host | string | Name of the host this event originated from. The event will automatically get tagged with any tags you've given this host using the [tagging page](https://app.datadoghq.com/infrastructure#tags) or the [tagging api](/api/#tags). The host value is used as part of the aggregation key. |
-| **priority** | string | Determines whether the event will be visible or hidden by default in the stream; Must be one of `low` or `normal` |
+| host | string | Name of the host this event originated from. The event automatically gets tagged with any tags you've given this host using the [tagging page](https://app.datadoghq.com/infrastructure#tags) or the [tagging api](/api/#tags). The host value is used as part of the aggregation key. |
+| **priority** | string | Determines whether the event is visible or hidden by default in the stream; Must be one of `low` or `normal` |
 
-The events with the same aggregation key within a 24 hour time window will get aggregated together on the stream.
+The events with the same aggregation key within a 24 hour time window gets aggregated together on the stream.
 The aggregation key is a combination of the following fields:
 
 - event_type
@@ -217,7 +217,7 @@ And in your parsers_module.py a function defined as:  
 def custom_parser(logger, line)
 ```
 
-You can now change the arity of your function to take extra parameter as shown [here](https://github.com/DataDog/dd-agent/blob/5.13.x/checks/datadog.py#L210)
+You can now change the parity of your function to take extra parameter as shown [in this agent example](https://github.com/DataDog/dd-agent/blob/5.13.x/checks/datadog.py#L210)
 
 So if you change your configuration file to:
 
@@ -232,9 +232,9 @@ And your parsing function as:
 def custom_parser(logger, line, parser_state, *parser_args):
 ```
 
-You will then have a tuple parameter in **parser_args** as (customvar1, customvar2) which is ready to use in your code by using parser_args[0] and parser_args[1].
+You have a tuple parameter in **parser_args** as (customvar1, customvar2) which is ready to use in your code by using parser_args[0] and parser_args[1].
 
-**Note**: the parameter parser_state does not have to be used but it has to be in the signature of the function. And if you have only one parameter, you will have to use parser_args[1] to get it.
+**Note**: the parameter **parser_state** does not have to be used but it has to be in the signature of the function. And if you have only one parameter, you have to use **parser_args[1]** to get it.
 
 As an example, if we have the same parser as in the documentation but this time we do not want to extract the metric name from the log but to set it thanks to this parameter:
 
@@ -246,11 +246,11 @@ dogstreams: /Users/Documents/Parser/test.log:/Users/Documents/Parser/myparser.py
 
 ## Troubleshooting Your Custom Log-Parser
 
-Bugs happen, so being able to see the traceback from your log-parsers will be very important. You can do this if you are running the agent with its [agent logs](/agent/faq/log-locations) set at the "DEBUG" level. The agent's log-level can be set in the `datadog.conf` by uncommenting and editing [this line](https://github.com/DataDog/dd-agent/blob/5.7.x/datadog.conf.example#L211), and then restarting the agent. Once that's configured properly, traceback resulting from errors in your custom log-parser can be found in the collector.log ([read here for where to find your agent logs](/agent/faq/log-locations)), and it will generally include the string checks.collector(datadog.py:278) | Error while parsing line in them ([here's the agent code where the error is likely to be thrown](https://github.com/DataDog/dd-agent/blob/5.7.x/checks/datadog.py#L278)).
+Bugs happen, so being able to see the traceback from your log-parsers is very important. You can do this if you are running the agent with its [agent logs](/agent/faq/log-locations) set at the "DEBUG" level. The agent's log-level can be set in the `datadog.conf` by uncommenting and editing [this line](https://github.com/DataDog/dd-agent/blob/5.7.x/datadog.conf.example#L211), and then [restarting the agent](/agent/faq/start-stop-restart-the-datadog-agent). Once that's configured properly, traceback resulting from errors in your custom log-parser can be found in the *collector.log* file ([read here for where to find your agent logs](/agent/faq/log-locations)), and it generally includes the string checks.collector(datadog.py:278) | Error while parsing line in them ([here's the agent code where the error is likely to be thrown](https://github.com/DataDog/dd-agent/blob/5.7.x/checks/datadog.py#L278)).
 
-Do note that whenever you make a change to your custom log-parser, you must restart the agent before that change will be put into effect.
+Note that whenever you make a change to your custom log-parser, [restart the agent](/agent/faq/start-stop-restart-the-datadog-agent) to put that change into effect.
 
-If you suspect there is some error occurring beyond the scope of your custom log-parser function, feel free to reach out to support, but do first set the agent's log-level at "DEBUG", run the agent for a few minutes while ensuring that new logs are being added to your files, and then run the flare command from your agent. That will give support the information needed to effectively troubleshoot the issue.
+If you suspect there is some error occurring beyond the scope of your custom log-parser function, feel free to [reach out to support](/help), but do first set the agent's log-level at "DEBUG", run the agent for a few minutes while ensuring that new logs are being added to your files, and then [run the flare command](/agent/faq/send-logs-and-configs-to-datadog-via-flare-command) from your agent. That gives to the support team the information needed to effectively troubleshoot the issue.
 
 ## Further Reading
 

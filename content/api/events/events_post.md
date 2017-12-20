@@ -5,7 +5,7 @@ order: 6.1
 ---
 
 ## Post An Event
-This end point allows you to post events to the stream. You can tag them, set priority and event aggregate them with other events.
+This end point allows you to post events to the stream. Tag them, set priority and event aggregate them with other events.
 
 ##### ARGUMENTS
 * `title` [*required*]:  
@@ -20,14 +20,14 @@ This end point allows you to post events to the stream. You can tag them, set pr
 * `priority` [*optional*, *default* = **normal**]:  
     The priority of the event: **normal** or **low**.
 * `host` [*optional*, *default*=**None**]:  
-    Host name to associate with the event. Any tags associated with the host will also be applied to this event.
+    Host name to associate with the event. Any tags associated with the host are also applied to this event.
 * `tags` [*optional*, *default*=**None**]:  
     A list of tags to apply to the event.
 * `alert_type` [*optional*, *default* = **info**]:  
     If its an alert event, set its type between: **error**, **warning**, **info**, and **success**.
 * `aggregation_key` [*optional*, *default*=**None**]:  
     An arbitrary string to use for aggregation. *Limited to 100 characters.*  
-    If you specify a key, all events using that key will be grouped together in the Event Stream.
+    If you specify a key, all events using that key are grouped together in the Event Stream.
 * `source_type_name` [*optional*, *default*=**None**]:  
     The type of event being posted.  
     Options: **nagios**, **hudson**, **jenkins**, **my_apps**, **chef**, **puppet**, **git**, **bitbucket**...

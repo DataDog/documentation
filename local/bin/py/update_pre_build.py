@@ -125,7 +125,7 @@ class PreBuild:
         self.integration_datafile = '{0}{1}{2}'.format(abspath(normpath(self.options.source)), sep, "integrations.json")
         self.regex_h1 = re.compile(r'^#{1}(?!#)(.*)', re.MULTILINE)
         self.regex_h1_replace = re.compile(r'^(#{1})(?!#)(.*)', re.MULTILINE)
-        self.regex_metrics = re.compile(r'(#{3} Metrics\n)(.*?)(\s*#)(.*)', re.DOTALL)
+        self.regex_metrics = re.compile(r'(#{3} Metrics\n)([\s\S]*)(#{3} Events\n)', re.DOTALL)
         self.regex_fm = re.compile(r'(?:-{3})(.*?)(?:-{3})(.*)', re.DOTALL)
         self.datafile_json = []
         self.pool_size = 5
@@ -134,6 +134,7 @@ class PreBuild:
             'mesos': {'action': 'truncate', 'target': 'mesos', 'remove_header': False},
             'activemq_xml': {'action': 'merge', 'target': 'activemq', 'remove_header': False},
             'cassandra_nodetool': {'action': 'merge', 'target': 'cassandra', 'remove_header': False},
+            'gitlab_runner': {'action': 'merge', 'target': 'gitlab', 'remove_header': False},
             'hdfs_datanode': {'action': 'merge', 'target': 'hdfs', 'remove_header': True},
             'hdfs_namenode': {'action': 'merge', 'target': 'hdfs', 'remove_header': False},
             'mesos_master': {'action': 'merge', 'target': 'mesos', 'remove_header': True},
@@ -299,7 +300,7 @@ class PreBuild:
                 if title not in [k for k, v in self.integration_mutations.items() if v.get('action') == 'merge']:
                     result = re.sub(self.regex_h1, '', result, 0)
                 if metrics_exist:
-                    result = re.sub(self.regex_metrics, r'\1{{< get-metrics-from-git "'+title+'" >}}\3\4', result, 0)
+                    result = re.sub(self.regex_metrics, r'\1{{< get-metrics-from-git "%s" >}}\n\3'%format(title), result, 0)
                 result = self.add_integration_frontmatter(new_file_name, result)
                 if not exist_already:
                     with open(self.content_integrations_dir + new_file_name, 'w') as out:

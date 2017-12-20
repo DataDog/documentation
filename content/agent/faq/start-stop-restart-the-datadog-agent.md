@@ -28,7 +28,7 @@ To reload only the integration configuration files:
 ```
 /usr/local/bin/datadog-agent reload
 ```
-(to reload full agent configuration, you must restart the agent)
+(to reload full agent configuration: restart the agent)
 
 ## Linux
 
@@ -49,7 +49,7 @@ To reload only the integration configuration files:
 sudo /etc/init.d/datadog-agent reload
 ```
 
-(to reload full agent configuration, you must restart the agent)
+(to reload full agent configuration: restart the agent)
 
 ## SmartOS
 
@@ -87,7 +87,7 @@ To reload only the integration configuration files:
 ```
 sudo ~/.datadog-agent/bin/agent reload
 ```
-(to reload full agent configuration, you must restart the agent)
+(to reload full agent configuration: restart the agent)
 
 ## Windows
 

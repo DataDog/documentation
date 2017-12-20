@@ -11,7 +11,7 @@ further_reading:
   text: Learn more about the DogStatsD
 ---
 
-Because DogStatsD can potentially receive a huge amount of data and logging the incoming UDP packets will likely put heavy load onto your resources we don't provide a logging mechanism.
+Because DogStatsD can potentially receive a huge amount of data and logging the incoming UDP packets puts heavy load onto your resources we don't provide a logging mechanism.
 
 That said, for debug purposes with DogStatsD submission there is a workaround using:
 

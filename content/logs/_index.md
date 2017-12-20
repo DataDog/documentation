@@ -16,13 +16,11 @@ Datadog's Logs is currently available via public beta. You can apply for inclusi
 ## Getting started with the Agent
 
 Log collection requires an Agent version >= 6.0. Older versions of the Agent do not include the `Log collection` interface that we'll be using.
-If you are not using it already, please follow the installation instructions [here](https://github.com/DataDog/datadog-agent/blob/master/docs/beta/upgrade.md).
+If you are not using it already, please follow [the agent installation instruction](https://github.com/DataDog/datadog-agent/blob/master/docs/beta/upgrade.md).
 
 Collecting logs is **disabled** by default in the Datadog Agent, you need to enable it in `datadog.yaml`:
 
     log_enabled: true
-
-* [Restart your agent](https://help.datadoghq.com/hc/en-us/articles/203764515-Start-Stop-Restart-the-Datadog-Agent)
 
 ## Enabling log collection from integrations
 
@@ -33,7 +31,6 @@ If an integration does not support logs by default, you may need to use the cust
 <div class="alert alert-warning">
 During the beta phase of Datadog Logs, not all integrations include log configurations out of the box. A current list of supported integrations is available below.
 </div>
-
 
 ### Cloud
 * [AWS](/logs/aws)
@@ -48,16 +45,16 @@ During the beta phase of Datadog Logs, not all integrations include log configur
 
 ### Agent checks
 
-* [Apache](/integrations/apache) 
-* [Haproxy](/integrations/haproxy)
-* [IIS](/integrations/iis)
-* [Mongo](/integrations/mongo)
-* [Nginx](/integrations/nginx)
+* Apache: [apache.d/conf.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/apache/conf.yaml.example)
+* Haproxy: [haproxy.d/conf.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/haproxy/conf.yaml.example)
+* IIS: [iis.d/conf.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/iis/conf.yaml.example)
+* Mongo: [mongo.d/conf.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/mongo/conf.yaml.example)
+* Nginx: [nginx.d/conf.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/nginx/conf.yaml.example)
+* Postgres: [postgres.d/conf.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/postgres/conf.yaml.example)
 
 ## Custom log collection
 
-The Datadog Agent can collect logs from files or the network (TCP or UDP) and forward them to Datadog. To configure this, create a new yaml file named after your log source ( `python.yaml` for python logs, ...)in the Agent's **conf.d** directory and set these options:
-
+The Datadog Agent can collect logs from files or the network (TCP or UDP) and forward them to Datadog. To configure this, create a new repository and yaml file named after your log source  in the Agent's **conf.d** directory ( `conf.d/python.d/conf.yaml` for python logs, ...) and set these options:
 
 * `type` : (mandatory) type of log input source (**tcp** / **udp** / **file**)
 * `port` / `path` : (mandatory) Set `port` if `type` is **tcp** or **udp**. Set `path` if `type` is **file**.
@@ -69,8 +66,8 @@ The Datadog Agent can collect logs from files or the network (TCP or UDP) and fo
 ### Tail existing files
 Set `type` to **file** then specify the absolute `path` to the log file you want to tail.
 
-Example:
-If you want to gather your python app logs for instance stored in **/var/log/myapp1.log** and **/var/log/python.log** you would create a `python.yaml` file as follows:
+Example: 
+To gather python applications stored in **/var/log/myapp1.log** and **/var/log/python.log** create a `python.d/conf.yaml` file as follows::
 
 Note that for the yaml file to be considered valid by the agent, they must include an "init_config" section and have at least one "instance" defined as shown below:
 
@@ -95,12 +92,13 @@ logs:
     source: python
     sourcecategory: sourcecode
 ```
+* [Restart your agent](https://help.datadoghq.com/hc/en-us/articles/203764515-Start-Stop-Restart-the-Datadog-Agent)
 
 ### Stream logs through TCP/UDP
 Set `type` to **tcp** or **udp** depending of your protocol then specify the `port` of your incomming connection.
 
 Example:
-If your PHP application does not log to a file, but instead forwards its logs via TCP, you will need to create a configuration file that specifies the port to receive as in the example below:
+If your PHP application does not log to a file, but instead forwards its logs via TCP, create a configuration file that specifies the port to receive as in the example below:
 
 ```yaml
 init_config:
@@ -116,7 +114,7 @@ logs:
     sourcecategory: front
 
 ```
-
+* [Restart your agent](https://help.datadoghq.com/hc/en-us/articles/203764515-Start-Stop-Restart-the-Datadog-Agent)
 
 ### Docker log collection
 
@@ -128,7 +126,7 @@ For containerized installation, here are the command related to log collection:
 * `-v /var/run/docker.sock:/var/run/docker.sock:ro`: Give access to docker api to collect container stdout and stderr
 * `-v /my/path/to/conf.d:/conf.d:ro`: mount configuration repository
 * `-v /my/file/to/tail:/tail.log:ro`: Foreach log file that should be tailed by the agent (not required if you only want to collect container stdout or stderr)
-* `DD_LOG_ENABLED=true`: Activate log collection (disable by default)
+* `-e DD_LOG_ENABLED=true`: Activate log collection (disable by default)
 * `-e DD_API_KEY=<YOUR_API_KEY>`: Set the api key
 
 To start collecting logs for a given container filtered by image or label, update the integration log section in its yaml file, or create a custom yaml file.
@@ -151,7 +149,9 @@ logs:
 
 ```
 
-If the agent is containerized, see [here](https://github.com/DataDog/docker-dd-agent#configuration-files) how to mount the YAML configuration files to the agent container.
+If the agent is containerized, see [the specific configuration file to mount the YAML configuration files to the agent container](https://github.com/DataDog/docker-dd-agent#configuration-files).
+
+* [Restart your agent](https://help.datadoghq.com/hc/en-us/articles/203764515-Start-Stop-Restart-the-Datadog-Agent)
 
 ### Filter logs
 
@@ -251,7 +251,7 @@ If your logs are formatted as JSON, be aware that some attributes are reserved f
 ### *date* attribute
 
 By default Datadog generates a timestamp and appends it in a date attribute when logs are received.
-However, if a JSON formatted log file includes one of the following attributes, Datadog will interpret its value as the the log’s official date:
+However, if a JSON formatted log file includes one of the following attributes, Datadog interprets its value as the the log’s official date:
 
 * `@timestamp`
 * `timestamp`
@@ -270,11 +270,11 @@ The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-
 
 ### *message* attribute
 
-By default, Datadog will ingest the value of message as the body of the log entry. That value will then be highlighted and display in the [log list](/logs/explore/#log-list), where it will be indexed for [full text search](/logs/explore/#search-bar).
+By default, Datadog ingests the value of message as the body of the log entry. That value is then highlighted and display in the [log list](/logs/explore/#log-list), where it is indexed for [full text search](/logs/explore/#search-bar).
 
 ### *severity* attribute
 
-Each log entry may specify a severity level which will be made available for faceted search within Datadog. However, if a JSON formatted log file includes one of the following attributes, Datadog will interpret its value as the the log’s official severity:
+Each log entry may specify a severity level which is made available for faceted search within Datadog. However, if a JSON formatted log file includes one of the following attributes, Datadog interprets its value as the the log’s official severity:
 
 * `syslog.severity`
 
@@ -282,13 +282,13 @@ If you would like to remap some severities existing in the `severity` attribute,
 
 ### *host* attribute
 
-Using the Datadog Agent or the RFC5424 format automatically set the host value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog will interpret its value as the the log’s host:
+Using the Datadog Agent or the RFC5424 format automatically set the host value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog interprets its value as the the log’s host:
 
 * `syslog.hostname`
 
 ### *service* attribute
 
-Using the Datadog Agent or the RFC5424 format automatically set the service value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog will interpret its value as the the log’s service:
+Using the Datadog Agent or the RFC5424 format automatically set the service value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog interprets its value as the the log’s service:
 
 * `syslog.appname`
 

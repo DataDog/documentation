@@ -8,25 +8,24 @@ customnav: main_references
 
 Many users are familiar with [our API](/api) and all the many things you can do in datadog with it, whether sending/querying metrics or events to your datadog account, creating dashboards, monitors, or downtimes, and more. But there’s an easy way to use our API straight from terminal/shell, using a wrapper called “dogshell”.
 
-
 ## Setup:
 
-Dogshell comes with our officially supported [datadogpy Python library](https://github.com/DataDog/datadogpy), often used to send data to datadog via the [dogstatsd](/developers/dogstatsd). It can easily be installed following the instructions [here](https://github.com/DataDog/datadogpy#installation).
+Dogshell comes with our officially supported [datadogpy Python library](https://github.com/DataDog/datadogpy), often used to send data to datadog via the [dogstatsd](/developers/dogstatsd). [It can easily be installed following the dedicated instructions](https://github.com/DataDog/datadogpy#installation).
 
-Once you have that library installed, you will have the dog command available to you in your terminal/shell, but it still needs to be “initialized”: you need to provide it with an API and Application key so that it can be used to send/receive data to/from your account. This is easily done; when you first try running a dog command, it will recognize that it needs to be initialized, and will walk you through the 2-step process.
+Once you have that library installed, you have the dog command available to you in your terminal/shell, but it still needs to be “initialized”: you need to provide it with an API and Application key so that it can be used to send/receive data to/from your account. This is easily done; when you first try running a dog command, it recognizes that it needs to be initialized, and walks you through the 2-step process.
 
 As one example of a dog command that would trigger the initialization setup (although any old dog command would work), we can run the following:
 ```
 dog metric post test_metric 1
 ```
 
-If your .dogrc file has not yet been created (i.e, the dogshell has not yet been initialized), it will return something like the following:
+If your .dogrc file has not yet been created (i.e, the dogshell has not yet been initialized), it returns something like the following:
 
 ```
 ~/.dogrc does not exist. Would you like to create it? [Y/n] 
 ```
 
-To which, of course you’d submit “Y”. It will respond:
+To which, of course you’d submit “Y”. It then responds:
 
 ```
 What is your api key? (Get it here: https://app.datadoghq.com/account/settings#api) 
@@ -37,7 +36,7 @@ Where you can simply paste your API key, and then
 What is your application key? (Generate one here: https://app.datadoghq.com/account/settings#api)
 ```
 
-Where you can paste your application key. It will finish with:
+Where you can paste your application key. It finishes with:
 ```
 Wrote ~/.dogrc.
 ```
@@ -54,7 +53,7 @@ appkey = YOUR_APPLICATION_KEY
 
 ## The Dogshell Commands:
 
-For reference, you can find the code for dogshell [here](https://github.com/DataDog/datadogpy/tree/master/datadog/dogshell). But once you have dogshell installed and initialized, you can append the -h option to the following commands to get more information on specific dogshell usage:
+For reference, [find the code for dogshell](https://github.com/DataDog/datadogpy/tree/master/datadog/dogshell). But once you have dogshell installed and initialized, you can append the -h option to the following commands to get more information on specific dogshell usage:
 
 * dog metric
 * dog event

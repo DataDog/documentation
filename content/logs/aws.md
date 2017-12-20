@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-Push your AWS log information to Datadog using Lambda functions that respond to S3 and CloudWatch log events. First configure your AWS services to push logs to S3/ Cloudwatch Logs, then setup the Lambda function(s), and finally create the triggers that will invoke that Lambda and send logs to Datadog.
+Push your AWS log information to Datadog using Lambda functions that respond to S3 and CloudWatch log events. First configure your AWS services to push logs to S3/ Cloudwatch Logs, then setup the Lambda function(s), and finally create the triggers that invokes that Lambda and send logs to Datadog.
 
 ## Setup
 ### Create a new Lambda function
@@ -59,7 +59,10 @@ Push your AWS log information to Datadog using Lambda functions that respond to 
 
 Your Lambda function is now ready to send logs to the Datadog platform. 
 
-There are two ways to configure the triggers that will cause the Lambda to execute and send logs to Datadog. We can [automatically](#automatically-set-up-triggers) manage them for you if you grant us a set of [permissions](#permissions), or you can [manually](#manually-set-up-triggers) set up each trigger yourself in the AWS console.
+There are two ways to configure the triggers that will cause the Lambda to execute and send logs to Datadog. 
+
+* [automatically](#automatically-set-up-triggers): With the right set of [permissions](#permissions), Datadog manages them for you.
+* [manually](#manually-set-up-triggers): set up each trigger yourself in the AWS console.
 
 ### Automatically set up triggers
 If you are storing logs in many S3 buckets, Datadog can automatically manage triggers for you.
@@ -84,8 +87,8 @@ If you are storing logs in many S3 buckets, Datadog can automatically manage tri
 {{< img src="logs/aws/AWSLogStep1.png" alt="Enter Lambda">}}
 4. Check off the services from which you'd like to collect logs and hit save. To stop collecting logs from a particular service, simply uncheck it.
 {{< img src="logs/aws/AWSLogStep2.png" alt="Select services">}}
-5. If you have logs across multiple regions, you must create additional Lambda functions in those regions and enter them in this tile.
-6. To stop collecting all AWS logs, press the *x* next to each Lamdba ARN. All triggers for that function will be removed. 
+5. If you have logs across multiple regions, create additional Lambda functions in those regions and enter them in this tile.
+6. To stop collecting all AWS logs, press the *x* next to each Lamdba ARN. All triggers for that function are removed. 
 7. Within a few minutes of this initial setup, you will see your AWS Logs appear in our [logging platform](https://app.datadoghq.com/logs) in near real time.
 
 ### Manually set up triggers
@@ -97,7 +100,6 @@ Select the log source and then follow the AWS instructions:
 
 For instance, do not forget to set the correct event type on S3 Buckets:
 {{< img src="logs/aws/object_created.png" alt="Object Created" responsive="true" popup="true">}}
-
 
 ### ELB
 
@@ -141,15 +143,16 @@ CloudFront is a CDN service which speeds up distribution of your static and dyna
 
 CloudFront delivers your content through a worldwide network of data centers called edge locations. When a user requests content that you're serving with CloudFront, the user is routed to the edge location that provides the lowest latency (time delay), so content is delivered with the best possible performance.
 
-
 When you enable logging for a distribution, specify the Amazon S3 bucket that you want CloudFront to store log files in. 
 If you're using Amazon S3 as your origin, we recommend that you do not use the same bucket for your log files; using a separate bucket simplifies maintenance.
 
-Store the log files for multiple distributions in the same bucket. When enabling logging, specify an optional prefix for the file names, to keep track of which log files are associated with which distributions, more information [here](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html#access-logs-choosing-s3-bucket ) 
+Store the log files for multiple distributions in the same bucket. When enabling logging, specify an optional prefix for the file names, [to keep track of which log files are associated with which distributions](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html#access-logs-choosing-s3-bucket ) 
 
 You can then collect the log from the s3 bucket thanks to the Lambda function.
 
 ## Permissions
+
+*Required only for automatic setup*:
 
 * `elasticloadbalancing:DescribeLoadBalancers`: List all load balancers.
 * `elasticloadbalancing:DescribeLoadBalancerAttributes`: Get the name of the S3 bucket containing ELB access logs.
@@ -161,7 +164,6 @@ You can then collect the log from the s3 bucket thanks to the Lambda function.
 * `s3:GetBucketNotification`: Get existing Lambda trigger configurations.
 * `s3:ListAllMyBuckets`: List all S3 buckets.
 * `s3:PutBucketNotification`: Add or remove a Lambda trigger based on S3 bucket events.
-
 
 ## Further Reading
 

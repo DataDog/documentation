@@ -50,13 +50,13 @@ To instrument an application written in a language that does not yet have offici
 ## Configuration
 
 The Datadog Agent uses the `/etc/dd-agent/datadog.conf` file for both infrastructure monitoring and APM configuration options.  
-Additionally, some configuration options may be set as environment variables. Note that options set as environment variables will override the settings defined in the configuration file.
+Additionally, some configuration options may be set as environment variables. Note that options set as environment variables overrides the settings defined in the configuration file.
 
 {{% table responsive="true" %}}
 | File setting | Environment variable | Description |
 |---|---|---|
 | **main** |
-| `apm_enabled` | `DD_APM_ENABLED` | The Datadog Agent will accept trace metrics when the value is set to `true`. The default value is `false`. |
+| `apm_enabled` | `DD_APM_ENABLED` | The Datadog Agent accepts trace metrics when the value is set to `true`. The default value is `false`. |
 | **trace.sampler** |
 | `extra_sample_rate` | - | Use this setting to adjust the trace sample rate. The value should be a float between `0` (no sampling) and `1` (normal sampling rate). The default value is `1` |
 | `max_traces_per_second` | - | The maximum number of traces to sample per second. To disable the limit (*not recommended*), set to `0`. The default value is `10`.|
@@ -71,6 +71,6 @@ For more information about the Datadog Agent, see the [dedicated doc page](/agen
 
 ## Additional resources
 
-For additional help from Datadog staff and other Datadog community members, join the [*apm* channel](https://datadoghq.slack.com/messages/apm) in our Datadog Slack. Visit [http://chat.datadoghq.com](http://chat.datadoghq.com) to join the Slack. We maintain a list of [community tracing libraries](/libraries/#community-tracing-apm-libraries).
+For additional help from Datadog staff and other Datadog community members, join the [*apm* channel](https://datadoghq.slack.com/messages/apm) in our Datadog Slack. Visit [http://chat.datadoghq.com](http://chat.datadoghq.com) to join the Slack. We maintain a list of [community tracing libraries](/developers/libraries/#community-tracing-apm-libraries).
 
 You can also reach our APM team via email at [tracehelp@datadoghq.com](mailto:tracehelp@datadoghq.com).

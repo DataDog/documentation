@@ -30,7 +30,7 @@ Leave Require MFA disabled.
 6. Review what you selected and click the Create Role button.
     {{< img src="integrations/faq/A7.png" alt="A7" responsive="true" popup="true">}}
 
-7. Update the credentials in Datadog by navigating to the in-app integration tile [here](https://app.datadoghq.com/account/settings#integrations/amazon_web_services):
+7. Update the credentials in Datadog by [navigating to the in-app integration tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services):
     {{< img src="integrations/faq/A8.png" alt="A8" responsive="true" popup="true">}}
 
 8. Click the tab for Role Delegation. The AWS Account ID and AWS External ID should be left to their default values. Enter the name you specified for the AWS Role in step 2.  A green banner will be displayed (momentarily after entering the name) at the top of the account configuration section if the role was successfully validated.

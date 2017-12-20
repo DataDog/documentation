@@ -35,7 +35,7 @@ for you, which helps create structure in your infrastructure with as little
 work as possible (unlike explicitly creating all your clusters).
 Thus if a new machine is tagged, you can immediately see the stats
 for that machine based on what was previously set up for that tag.
-* For more on tagging, see [here](/agent/tagging).
+* [Read more on tagging](/agent/tagging).
 
 ## Host Map
 
@@ -59,7 +59,6 @@ The Event Stream is based on the same conventions as a blog:
 * Every event in the stream can be commented on.
 * Great for distributed [teams](/account_management/team) and maintaining the focus of an investigation.
 * You can [filter][8] by: user, source, tag, host, status, priority, incident
-
 
 For each incident users can:
 
@@ -85,11 +84,10 @@ Dashboards contain [graphs][11] with real-time performance metrics
 * Display by zone, host, or total usage.
 * We expose the JSON editor of the graph allowing for [arithmetic][12] and
 [functions][13] to be applied to metrics.
-* Share a graph snapshot that will appear in the stream; clicking on
+* Share a graph snapshot that appears in the stream; clicking on
 that snapshot returns you to the original dashboard (via the camera in the upper right of a graph).
 * Graphs can be embedded in an iframe, giving a 3rd party a live graph
 without access to your data or any other information (via the pencil in the upper right of a graph).
-
 
 ## Monitoring
 
@@ -105,7 +103,6 @@ metric is above or below a certain threshold:
 * Set alert notification message, including @ capabilities
 
 {{< img src="getting_started/alert_setup.png" alt="alert setup" responsive="true" popup="true">}}
-
 
 [1]: /agent/
 [2]: http://www.datadoghq.com/product/

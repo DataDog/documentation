@@ -5,13 +5,13 @@ autotocdepth: 3
 customnav: tracingnav
 ---
 
-When instrumenting the Traces Agent with your applications, and going through the [Traces Page](https://app.datadoghq.com/trace/services), you will come across the following Strings: "Type", "Service", "Resource", and "Name". What do these terms mean? 
+When instrumenting the Traces Agent with your applications, and going through the [Traces Page](https://app.datadoghq.com/trace/services), you may come across the following Strings: "Type", "Service", "Resource", and "Name". What do these terms mean? 
 
 {{< img src="tracing/faq/trace_ui.png" alt="Trace UI" responsive="true" popup="true">}}
 
 ## Type
 
-Every Service being monitored by your application will be associated with a "Type". This type is automatically determined by Datadog and is applied for you. The "Type" specified the name of the application/framework the Datadog Agent is Integrating with. If you are monitoring a custom application, this will appear as "Custom". For example, if you are using the official Flask Integration, the "Type" will be set to "Web". 
+Every Service being monitored by your application is associated with a "Type". This type is automatically determined by Datadog and is applied for you. The "Type" specified the name of the application/framework the Datadog Agent is Integrating with. If you are monitoring a custom application, this appears as "Custom". For example, if you are using the official Flask Integration, the "Type" is set to "Web". 
 
 The type can be one of:
 
@@ -21,7 +21,7 @@ The type can be one of:
 *  Cache
 *  Custom
 
-We also have some aliases for Integrations such as Postgres, MySQL, and Cassandra which will map to Type: "DB" and Integrations Redis and Memcache which will map to Type: "Cache". 
+We also have some aliases for Integrations such as Postgres, MySQL, and Cassandra which are map to Type: "DB" and Integrations Redis and Memcache which are map to Type: "Cache". 
 
 ## Service
 

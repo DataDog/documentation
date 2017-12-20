@@ -24,13 +24,13 @@ cluster :> NODE=$(kubectl get nodes -o=jsonpath="{.items[0].metadata.name}")
 cluster :> curl localhost:8001/api/v1/proxy/nodes/${NODE}:10255/stats/summary
 ```
 
-This will return [the following output](https://gist.github.com/CharlyF/2d9e7741bef9398386a84fd66f4c8c7d#file-summary-json).
+This returns [the following output](https://gist.github.com/CharlyF/2d9e7741bef9398386a84fd66f4c8c7d#file-summary-json).
 
 ```
 cluster :> curl localhost:8001/api/v1/proxy/nodes/${NODE}:10255/stats/
 ```
 
-This will return [the following output](https://gist.github.com/CharlyF/2d9e7741bef9398386a84fd66f4c8c7d#file-stats-json).  
+This returns [the following output](https://gist.github.com/CharlyF/2d9e7741bef9398386a84fd66f4c8c7d#file-stats-json).  
 
 The last output, despite being very large is very interesting. Say you are interested in monitoring the filesystems data:
 ```
@@ -62,23 +62,23 @@ And the network tcp6 information:
 [...]
 ```
 
-Then, you can update your `kubernetes.yaml` on [these following lines](https://github.com/DataDog/integrations-core/blob/master/kubernetes/conf.yaml.example#L108-L109) with :
+Then, update your `kubernetes.yaml` on [these following lines](https://github.com/DataDog/integrations-core/blob/master/kubernetes/conf.yaml.example#L108-L109) with :
 
 {{< img src="agent/faq/additional_lines.png" alt="Additional Lines" responsive="true" popup="true">}}
 
-Quick tip, as per the original Kubernetes article, you can use the configmaps to configure your integration on the go, thus, you can use the following configmap and daemonset description.
+Quick tip, as per the original Kubernetes article, use the configmaps to configure your integration on the go, thus, use the following configmap and daemonset description.
 
-And as you spin up the daemonset and the configmap, you can see the metrics starting to populate UI :
+And as you spin up the daemonset and the configmap, see the metrics starting to populate UI :
 
 {{< img src="agent/faq/metric_in_ui.gif" alt="Metric UI" responsive="true" popup="true">}}
 
 ## Events
 
-You can collect events from the Kubernetes API, by simply enabling [this option](https://github.com/DataDog/integrations-core/blob/master/kubernetes/conf.yaml.example#L78):
+Collect events from the Kubernetes API, by simply enabling [this option](https://github.com/DataDog/integrations-core/blob/master/kubernetes/conf.yaml.example#L78):
 
 It is important to note that this option has to be enabled on only 1 agent across the whole cluster, to avoid duplicates.
 
-You can also use the environment variable KUBERNETES_COLLECT_EVENTS in your Daemoset/Deployment [as follows](https://gist.github.com/CharlyF/754a5033e6ceea701c32bab5b0f19024#file-ddmaster-ds-kubernetes-events-yaml-L28-L29).
+Use the environment variable KUBERNETES_COLLECT_EVENTS in your Daemoset/Deployment [as follows](https://gist.github.com/CharlyF/754a5033e6ceea701c32bab5b0f19024#file-ddmaster-ds-kubernetes-events-yaml-L28-L29).
 
 Since you have to deploy it only on one node, the best approach if you are using a Daemoset is to use the NodeSelectors.
 
@@ -88,12 +88,12 @@ kubectl get nodes
 kubectl label no <NODE_NAME> key=value
 ```
 
-2. Then add the node selector in your Daemonset/Deployment. For example, [here](https://gist.github.com/CharlyF/754a5033e6ceea701c32bab5b0f19024#file-ddmaster-ds-kubernetes-events-yaml-L57-L58) we label the node with run=mongo and by running:
+2. Then add the node selector in your Daemonset/Deployment. For example, [here we label the node with `run=mongo`](https://gist.github.com/CharlyF/754a5033e6ceea701c32bab5b0f19024#file-ddmaster-ds-kubernetes-events-yaml-L57-L58)  and by running:
 ```
 kubectl apply -f ddmaster-ds-kubernetes-events.yaml
 ```
 
-You will only deploy on the agent on one node and this agent will collect kubernetes events.
+You only deploy the agent on one node and this agent collects kubernetes events.
 
 {{< img src="agent/faq/kubernetes_events.png" alt="Kubernetes Events" responsive="true" popup="true">}}
 

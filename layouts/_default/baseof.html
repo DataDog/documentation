@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" data-type="{{.Type}}" data-relpermalink="{{.RelPermalink}}">
+<html lang="en" data-type="{{.Type}}" data-relpermalink="{{.RelPermalink}}" style="opacity:0">
 <head>
     <meta charset="utf-8">
     {{ partial "prefetch.html" . }}
+    {{ partial "preload.html" . }}
     <title>{{ .Title }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {{ if .Params.external_redirect }} {{ partial "meta-http-equiv.html" . }} {{ end }}
@@ -33,7 +34,7 @@
             <div class="d-none d-lg-flex col-12 col-sm-3 side">
                 {{ partial "sidenav/sidenav.html" . }}
             </div>
-            <div class="col-12 {{ if not .Params.disable_toc }}col-lg-7{{ else }}col-lg-9{{ end }} main">
+            <div class="col-12 col-lg-9 main">
                 {{ block "main" . }}{{ end }}
             </div>
             {{ if not .Params.disable_toc}}

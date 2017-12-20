@@ -4,7 +4,7 @@ kind: faq
 customnav: integrationsnav
 ---
 
-Use these Kubernetes RBAC entities for your Datadog agent to properly configure the previous permissions by [applying this datadog service account to your pods](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/):
+Use these Kubernetes RBAC entities for your Datadog agent to properly configure your permissions by [applying this datadog service account to your pods](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/):
 
 ```yaml
   kind: ClusterRole

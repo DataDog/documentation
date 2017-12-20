@@ -13,13 +13,15 @@ Autodiscovery was previously called Service Discovery. It's still called Service
 
 Docker is being [adopted rapidly][1]. Orchestration platforms like Docker Swarm, Kubernetes, and Amazon ECS make running Docker-ized services easier and more resilient by managing orchestration and replication across hosts. But all of that makes monitoring more difficult. How can you reliably monitor a service which is unpredictably shifting from one host to another?
 
-The Datadog Agent can automatically track which services are running where, thanks to its Autodiscovery feature. Autodiscovery lets you define configuration templates for Agent checks and specify which containers each check should apply to.  
+The Datadog Agent can automatically track which services are running where, thanks to its Autodiscovery feature. Autodiscovery lets you define configuration templates for Agent checks and specify which containers each check should apply to.
+
 The Agent enables, disables, and regenerates static check configurations from the templates as containers come and go. When your NGINX container moves from 10.0.0.6 to 10.0.0.17, Autodiscovery helps the Agent update its NGINX check configuration with the new IP address so it can keep collecting NGINX metrics without any action on your part.
 
 ## How it Works
 
-In a traditional non-container environment, Datadog Agent configuration is—like the environment in which it runs—static. The Agent reads check configurations from disk when it starts, and as long as it's running, it continuously runs every configured check.  
-The configuration files are static, and any network-related options configured within them serve to identify specific instances of a monitored service (e.g. a Redis instance at 10.0.0.61:6379). When an Agent check cannot connect to such a service, you'll be missing metrics until you troubleshoot the issue. The Agent check will retry its failed connection attempts until an administrator revives the monitored service or fixes the check's configuration.  
+In a traditional non-container environment, Datadog Agent configuration is—like the environment in which it runs—static. The Agent reads check configurations from disk when it starts, and as long as it's running, it continuously runs every configured check.
+The configuration files are static, and any network-related options configured within them serve to identify specific instances of a monitored service (e.g. a Redis instance at 10.0.0.61:6379).
+When an Agent check cannot connect to such a service, you'll be missing metrics until you troubleshoot the issue. The Agent check retries its failed connection attempts until an administrator revives the monitored service or fixes the check's configuration.
 
 With Autodiscovery enabled, the Agent runs checks differently.
 
@@ -59,10 +61,10 @@ If you use Docker Swarm, run the following command on one of your manager nodes:
 
 Otherwise, see the docker-dd-agent documentation for detailed instructions and a comprehensive list of supported [environment variables][5].
 
-Note that **if you want the Agent to auto-discover JMX-based checks, you MUST**:
+**If you want the Agent to auto-discover JMX-based checks**:
 
 1. Use the `datadog/docker-dd-agent:latest-jmx` image. This image is based on `latest`, but it includes a JVM, which the Agent needs in order to run [jmxfetch](https://github.com/DataDog/jmxfetch).
-1. Pass the environment variable `SD_JMX_ENABLE=yes` when starting `datadog/docker-dd-agent:latest-jmx`.
+2. Pass the environment variable `SD_JMX_ENABLE=yes` when starting `datadog/docker-dd-agent:latest-jmx`.
 
 ## Setting up Check Templates
 
@@ -70,7 +72,7 @@ Each **Template Source** section below shows a different way to configure check 
 
 ### Template Source: Files (Auto-conf)
 
-Storing templates as local files is easy to understand and doesn't require an external service or a specific orchestration platform. The downside is that you must restart your Agent containers each time you change, add, or remove templates.
+Storing templates as local files is easy to understand and doesn't require an external service or a specific orchestration platform. The downside is that you have to restart your Agent containers each time you change, add, or remove templates.
 
 The Agent looks for Autodiscovery templates in its `conf.d/auto_conf` directory, which contains default templates for the following checks:
 
@@ -97,7 +99,7 @@ These templates may suit you in basic cases, but if you need to use custom check
 
 Here's the `apache.yaml` template packaged with docker-dd-agent:
 
-```
+```yaml
 docker_images:
   - httpd
 
@@ -107,9 +109,9 @@ instances:
   - apache_status_url: http://%%host%%/server-status?auto
 ```
 
-It looks like a minimal [Apache check configuration][7], but notice the `docker_images` option. This required option lets you provide container identifiers. Autodiscovery will apply this template to any containers on the same host that run an `httpd` image.
+It looks like a minimal [Apache check configuration][7], but notice the `docker_images` option. This required option lets you provide container identifiers. Autodiscovery applies this template to any containers on the same host that run an `httpd` image.
 
-_Any_ `httpd` image. Suppose you have one container running `library/httpd:latest` and another running `yourusername/httpd:v2`. Autodiscovery will apply the above template to both containers. When it's loading auto-conf files, Autodiscovery cannot distinguish between identically-named images from different sources or with different tags, and **you must provide short names for container images**, e.g. `httpd`, NOT `library/httpd:latest`.
+_Any_ `httpd` image. Suppose you have one container running `library/httpd:latest` and another running `yourusername/httpd:v2`. Autodiscovery applies the above template to both containers. When it's loading auto-conf files, Autodiscovery cannot distinguish between identically-named images from different sources or with different tags, and **you have to provide short names for container images**, e.g. `httpd`, NOT `library/httpd:latest`.
 
 If this is too limiting—if you need to apply different check configurations to different containers running the same image—use labels to identify the containers. Label each container differently, then add each label to any template file's `docker_images` list (yes, `docker_images` is where to put _any_ kind of container identifier, not just images).
 
@@ -133,7 +135,7 @@ sd_config_backend: etcd
 sd_backend_host: 127.0.0.1
 sd_backend_port: 4001
 
-# By default, the agent will look for the configuration templates under the
+# By default, the agent looks for the configuration templates under the
 # `/datadog/check_configs` key in the back-end.
 # If you wish otherwise, uncomment this option and modify its value.
 # sd_template_dir: /datadog/check_configs
@@ -144,7 +146,7 @@ sd_backend_port: 4001
 
 If you're using Consul and the Consul cluster requires authentication, set `consul_token`.
 
-[Restart the Agent](/agent/faq/start-stop-restart-the-datadog-agent) to effect the configuration change.
+[Restart the Agent](/agent/faq/start-stop-restart-the-datadog-agent) to apply the configuration change.
 
 #### Configure in environment variables
 
@@ -280,7 +282,6 @@ spec:
         - containerPort: 80
 ```
 
-
 ### Template Source: Docker Label Annotations
 
 Since version 5.17 of the Datadog Agent, you can store check templates in Docker labels. With Autodiscovery enabled, the Agent detects if it's running on Docker and automatically searches all labels for check templates; you don't need to configure a template source (i.e. via `SD_CONFIG_BACKEND`) as you do with key-value stores.
@@ -307,10 +308,9 @@ labels:
 -l com.datadoghq.ad.check_names='[<CHECK_NAME>]' -l com.datadoghq.ad.init_configs='[<INIT_CONFIG>]' -l com.datadoghq.ad.instances='[<INSTANCE_CONFIG>]'
 ```
 
-
 #### Docker Example: NGINX Dockerfile
 
-The following Dockerfile will launch an NGINX container with Autodiscovery enabled:
+The following Dockerfile launches an NGINX container with Autodiscovery enabled:
 
 ```
 FROM nginx
@@ -322,7 +322,6 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%/nginx_status:%%port%%"}]'
 ```
 
-
 ## Reference
 
 ### Template Variable Indexes
@@ -333,9 +332,9 @@ You can also add a network name suffix to the `%%host%%` variable—`%%host_brid
 
 ### Alternate Container Identifier: Labels
 
-You can identify containers by label rather than container name or image. Just label any container `com.datadoghq.ad.check.id: <SOME_LABEL>`, and then put `<SOME_LABEL>` anywhere you'd normally put a container name or image. For example, if you label a container `com.datadoghq.ad.check.id: special-container`, Autodiscovery will apply to that container any auto-conf template that contains `special-container` in its `docker_images` list.
+You can identify containers by label rather than container name or image. Just label any container `com.datadoghq.sd.check.id: <SOME_LABEL>`, and then put `<SOME_LABEL>` anywhere you'd normally put a container name or image. For example, if you label a container `com.datadoghq.sd.check.id: special-container`, Autodiscovery applies to that container any auto-conf template that contains `special-container` in its `docker_images` list.
 
-Autodiscovery can only identify each container by label OR image/name—not both—and labels take precedence. For a container that has a `com.datadoghq.ad.check.id: special-nginx` label and runs the `nginx` image, the Agent will NOT apply templates that include only `nginx` as a container identifier.
+Autodiscovery can only identify each container by label OR image/name—not both—and labels take precedence. For a container that has a `com.datadoghq.sd.check.id: special-nginx` label and runs the `nginx` image, the Agent DOESN'T apply templates that include only `nginx` as a container identifier.
 
 ### Template Source Precedence
 
@@ -345,7 +344,7 @@ If you provide a template for the same check type via multiple template sources,
 * Key-value stores
 * Files
 
-So if you configure a `redisdb` template both in Consul and as a file (`conf.d/auto_conf/redisdb.yaml`), the Agent will use the template from Consul.
+So if you configure a `redisdb` template both in Consul and as a file (`conf.d/auto_conf/redisdb.yaml`), the Agent uses the template from Consul.
 
 ## Troubleshooting
 

@@ -4,7 +4,6 @@ kind: faq
 customnav: developersnav
 ---
 
-
 ## General
 
 * [How to remove the `host` tag when submitting metrics via dogstatsD](/developers/faq/how-to-remove-the-host-tag-when-submitting-metrics-via-dogstatsd)
@@ -36,7 +35,7 @@ customnav: developersnav
 * [How to post AppDynamics events to Datadog](/developers/faq/how-to-post-appdynamics-events-to-datadog)
 * [I'm receiving a 202 but not seeing data](/developers/faq/i-m-receiving-a-202-but-not-seeing-data)
 * [Data aggregation with dogstatsd/Threadstats](/developers/faq/data-aggregation-with-dogstatsd-threadstats)
-* [Is there an alternative to dogstatsd and the api to submit metrics? Threadstats](/developers/faq/is-there-an-alternative-to-dogstatsd-and-the-api-to-submit-metrics-threadstats)
+* [Is there an alternative to DogStatsD and the api to submit metrics? Threadstats](/developers/faq/is-there-an-alternative-to-dogstatsd-and-the-api-to-submit-metrics-threadstats)
 * [I want my application deployed in a container through ElasticBeanstalk to talk to DogStatsD](/developers/faq/i-want-my-application-deployed-in-a-container-through-elasticbeanstalk-to-talk-to-dogstatsd)
 * [Can I call scripts and generate events from their results?](/developers/faq/can-i-call-scripts-and-generate-events-from-their-results)
 

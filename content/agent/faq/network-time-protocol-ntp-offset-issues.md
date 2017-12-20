@@ -26,7 +26,6 @@ To check the NTP offset for a host, you can run the Agent [info command](/agent/
     System UTC time: 2015-02-12 22:10:49.524660
 ```
 
-
 Any significant offset can have undesired effects, and we recommend keeping hosts in sync with NTP to ensure this does not cause issues, to help we also offer an [NTP Integration](/integrations/ntp).
 
 ## Syncing a System Clock with NTP

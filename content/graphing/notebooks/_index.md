@@ -20,7 +20,7 @@ While notebooks are great for sharing, you also can use them to graph metrics pr
 
 Anyone on your team may open or edit any notebook, but a notebook may only be deleted by its creator.
 
-Edits to another user’s notebook aren’t saved automatically. If you attempt to save changes to someone else’s notebook, a copy will be created unless you explicitly choose to overwrite the original.
+Edits to another user’s notebook aren’t saved automatically. If you attempt to save changes to someone else’s notebook, a copy is created unless you explicitly choose to overwrite the original.
 
 A new notebook is unsaved by default, which makes it perfect as an ephemeral scratch space. It also means you don’t have to worry about saving one-off notebooks you don’t intend to revisit.
 
@@ -62,7 +62,6 @@ A time indicator appears in the top-right corner of each graph cell. If the cell
 To unlock a cell from global time, click this time indicator.
 {{< img src="graphing/notebooks/timerange.png" alt="timerange" responsive="true" popup="true">}}
 
-
 Note that clicking and dragging to zoom in on a graph does not unlock that cell from global time. It changes the notebook’s global time frame instead.
 
 ### Splitting by tag and other graph options
@@ -71,16 +70,15 @@ To split a graph by tag, change a graph’s size or toggle the visibility of a g
 Legends are disabled automatically when the graph size has been set to XS or S. Changing these settings affects only the target cell; the layout of other graph cells is unaffected.
 {{< img src="graphing/notebooks/options.png" alt="options" responsive="true" popup="true">}}
 
-
 ### Linking to individual cells
 
 To copy the URL for a specific cell, click the link icon at the right edge of the cell. Direct linking is available for both graph and Markdown cells.
-When a user visits the URL for a specific cell, its notebook is opened to show the cell in question at the top of the viewport. Links are absolute, which means a cell’s URL will remain the same if it’s moved to a new position within its notebook.
+When a user visits the URL for a specific cell, its notebook is opened to show the cell in question at the top of the viewport. Links are absolute, which means a cell’s URL remains the same if it’s moved to a new position within its notebook.
 {{< img src="graphing/notebooks/directlink.png" alt="directlink" responsive="true" popup="true">}}
 
 ### Saving, renaming, and deleting a notebook
 
-To save a notebook, press ⌘+ Sor click the “Save” button in the notebook header. After a new notebook has been saved once, it will continue to autosave at regular intervals. A notebook also may be saved manually at any time between autosaves. To ensure you don’t lose work, you’ll be prompted for confirmation if you attempt to leave a notebook with unsaved changes.
+To save a notebook, press ⌘+ Sor click the “Save” button in the notebook header. After a new notebook has been saved once, it continues to autosave at regular intervals. A notebook also may be saved manually at any time between autosaves. To ensure you don’t lose work, you’ll be prompted for confirmation if you attempt to leave a notebook with unsaved changes.
 
 To rename a notebook, click the name field in the notebook header.
 

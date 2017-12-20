@@ -1,11 +1,11 @@
 ---
-title: Developer tools
+title: Developer Tools
 kind: documentation
 customnav: developersnav
 description: Collect custom metrics & create new integration
 ---
 
-Monitoring tools should be flexible, so we provide multiple ways to interact with Datadog. This section will give you a quick overview of the various methods available
+Monitoring tools should be flexible, so we provide multiple ways to interact with Datadog. This section gives you a quick overview of the various methods available
 
 ## API
 Datadog features a powerful API to programmatically access the service. You can submit custom metrics; manage dashboards and monitors; schedule downtimes; and perform administrative actions.
@@ -14,16 +14,16 @@ Available endpoints can be found on [our dedicated API documentation page](/api)
 In addition, [many libraries](/developers/libraries/#api-and-dogstatsd-client-libraries) are available to directly interact with the API.
 
 ## Submitting custom metrics
-While you can submit metrics directly through [our API](/api), you can also submit metrics via the Datadog Agent using DogStatsD and custom checks.
+While you can submit metrics directly through [our API](/api), you can also submit metrics via the Datadog Agent using [DogStatsD](/developers/dogstatsd) and custom checks.
 
 The Datadog Agent includes DogStatsD, a powerful statsd daemon with additional features, that provides better control over your metric metadata and aggregation.
-[Multiple libraries](/developers/libraries) are available to easily send metrics from your application to Datadog using DogStatsD.
+[Multiple libraries](/developers/libraries) are available to easily send metrics from your application to Datadog using [DogStatsD](/developers/dogstatsd).
 
-The API and DogStatsD are handy to _push_ metrics to Datadog from one of your application.
+The API and [DogStatsD](/developers/dogstatsd) are handy to _push_ metrics to Datadog from one of your application.
 If you would like to regularly _pull_ metrics from a particular setup, similar to what is done by the agent for the systems we directly support, you can [add your own integration](/developers/integrations/). We have provided detailed steps and resources for [developing](/developers/integrations/integration_sdk) and [testing](/developers/integrations/testing/) new integrations.
 These integrations can then be easily shared with the Datadog community, for instance through our [Datadog/integrations-extras repository](https://github.com/DataDog/integrations-extras)
 
-When sending metrics via DogStatsD or a custom integration, it is helpful to have a deeper understanding of metrics. Here are some technical resources regarding metric internals:
+When sending metrics via [DogStatsD](/developers/dogstatsd) or a custom integration, it is helpful to have a deeper understanding of metrics. Here are some technical resources regarding metric internals:
 
 * [Learn more about metric behavior](/developers/metrics)
 

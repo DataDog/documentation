@@ -56,17 +56,16 @@ Note, we've also had some customers report that this was resolved by correcting
 
 ### DNS
 
-When DNS responses are more than 512 bytes, DNS will be sent on TCP. If any TCP ports have been blocked this will result in an issue for the Agent. Checking for similar communication restrictions will assist in troubleshooting Agent communication issues. If DNS is the culprit you'll see the following error in your forwarder.log:
+When DNS responses are more than 512 bytes, DNS is sent on TCP. If any TCP ports have been blocked this results in an issue for the Agent. Checking for similar communication restrictions assists in troubleshooting Agent communication issues. If DNS is the culprit you'll see the following error in your forwarder.log:
 ```
 gaierror: (-2, ' Name of service not known ')
 ```
 
 ### IVP6
 
-For disabling IPV6 you can reference the following article:
+For disabling IPV6, reference the following article:
 
 http://linoxide.com/linux-how-to/disable-ipv6-centos-fedora-rhel/
-
 
 ## Changing the agent's Tornado Client
 
