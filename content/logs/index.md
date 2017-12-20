@@ -165,7 +165,7 @@ To achieve this use the `log_processing_rules` parameter in your configuration f
 
 If the pattern is contained in the message the log is excluded, and not sent to Datadog.
 
-Example: Filter out logs that contain a Datadog email
+Example: Filtering out logs that contain a Datadog email
 
 ```yaml
 init_config:
@@ -186,9 +186,9 @@ logs:
 ```
 * include_at_match:
 
-Only the log with a message that includes the pattern are sent to Datadog.
+Only log with a message that includes the pattern are sent to Datadog.
 
-Example: Send only logs that contain a Datadog email
+Example: Sending only logs that contain a Datadog email
 
 ```yaml
 init_config:
