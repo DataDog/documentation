@@ -184,6 +184,8 @@ logs:
       # Regexp can be anything
       pattern: \w+@datadoghq.com
 ```
+
+<!--
 * include_at_match:
 
 Only log with a message that includes the pattern are sent to Datadog.
@@ -207,6 +209,7 @@ logs:
       # Regexp can be anything
       pattern: User=\w+@datadoghq.com
 ```
+-->
 
 ### Search and replace content in your logs
 
