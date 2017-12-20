@@ -14,7 +14,7 @@ description: "Track Chef client runs including metrics on completion times, anal
 
 ## Overview
 
-Chef is a popular configuration management tool written in Ruby and Erlang. 
+Chef is a popular configuration management tool written in Ruby and Erlang.
 
 Deploying Datadog with Chef is meant to be very simple, and provide you with a method of getting the value of monitoring across all of your infrastructure as simply as possible.
 
@@ -120,7 +120,7 @@ From your [events stream](https://app.datadoghq.com/event/stream), enter `source
 
 {{< get-metrics-from-git >}}
 
-## Furter Reading
+## Further Reading
 ### Customizations
 
 The Datadog Chef Cookbook provides more integration-specific recipes.
