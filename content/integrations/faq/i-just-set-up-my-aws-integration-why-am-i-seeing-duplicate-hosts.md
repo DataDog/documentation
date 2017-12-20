@@ -8,7 +8,7 @@ There are three scenarios you may be encountering:
 
 * **Scenario A**: A single host running in EC2 might have an instance ID (i-abcd1234), a generic hostname provided by EC2 based on the host’s IP address (ip-192-0-0-1), and a meaningful host name provided by an internal DNS server or a config-managed hosts file (myhost.mydomain).
 
-Datadog creates aliases for hostnames when there are multiple uniquely identifiable names for a single host. It takes about 10-20 minutes for the single host’s duplicate names to be aliased, this does not impact your billing. [Read more about how datadog determine the agent host name](/agent/faq/how-does-datadog-determine-the-agent-hostname).
+Datadog creates aliases for hostnames when there are multiple uniquely identifiable names for a single host. It takes about 10-20 minutes for the single host’s duplicate names to be aliased, this does not impact your billing. [Read more about how Datadog determine the agent host name](/agent/faq/how-does-datadog-determine-the-agent-hostname).
 
 * **Scenario B**: When installing the agent on an AWS EC2 instance, you might see duplicated hosts on the Infrastructure page or Host Map for a few hours if you manually set the hostname in the agent’s configuration. This second host disappears a few hours later, and won’t affect your billing.
 

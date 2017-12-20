@@ -19,9 +19,9 @@ mysql> select user,host,process_priv from mysql.user where user='datadog';
 +---------+-----------+--------------+
 | user    | host      | process_priv |
 +---------+-----------+--------------+
-| datadog | localhost | N            |
+| Datadog | localhost | N            |
 +---------+-----------+--------------+
 1 row in set (0.00 sec)
 ```
 
-Review the Configuration section and grant the datadog user all necessary privileges. Do NOT grant all privileges on all databases to this user.
+Review the Configuration section and grant the Datadog user all necessary privileges. Do NOT grant all privileges on all databases to this user.

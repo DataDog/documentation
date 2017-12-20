@@ -4,7 +4,7 @@ kind: faq
 customnav: integrationsnav
 ---
 
-In order to pull AWS tags for an EC2 instance through the datadog agent follow these steps:
+In order to pull AWS tags for an EC2 instance through the Datadog Agent follow these steps:
 
 * Create a IAM role for the instance using [this documentation](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html)
 * For the policy section, specify the following permissions:  **ec2:Describe**, **ec2:Get**

@@ -28,7 +28,7 @@ In addition to the official Ansible integration, the [monitoring section][46] of
 Publish consul service counts into Datadog via [DogStatsD](/developers/dogstatsd) with [this library][96].
 
 ### Dogscaler
-Scale up auto-scale groups based on the results of a datadog query with [Dogscaler][97].
+Scale up auto-scale groups based on the results of a Datadog query with [Dogscaler][97].
 
 ### Dynatrace
 This [plugin][101] sends any Dynatrace measure from a chart to Datadog.

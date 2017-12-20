@@ -20,7 +20,7 @@ To enable leader election you need to:
 
 * Set the variable `leader_candidate` to true in your `kubernetes.yaml` file.
 
-* Use these [Kubernetes RBAC entities](/integrations/faq/using-rbac-permission-with-your-kubernetes-integration) for your Datadog agent to properly configure the previous permissions by [applying this datadog service account to your pods](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/):
+* Use these [Kubernetes RBAC entities](/integrations/faq/using-rbac-permission-with-your-kubernetes-integration) for your Datadog agent to properly configure the previous permissions by [applying this Datadog service account to your pods](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/):
 
 * Create the ClusterRole, ServiceAccount, and ClusterRoleBinding:
   ```

@@ -15,7 +15,7 @@ The destination for all agent data is `<version>-app.agent.datadoghq.com` (star
 * 17123: agent forwarder, used to buffer traffic in case of network splits between the agent and Datadog
 * 17124: optional graphite adapter
 * 17125: local metric frontend, a.k.a. Pup
-* 8125: dogstatsd
+* 8125: DogStatsD
 * 8126: traces
 * 123/UDP: NTP - More details on the importance of NTP here.
 

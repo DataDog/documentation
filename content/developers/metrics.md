@@ -147,18 +147,18 @@ Counters are used to count things.
 {{% table responsive="true" %}}
 |Method | Overview |
 |:---|:---|
-| self.increment(...) |  Used to modify a count of events identified by the metric key string: <ul><li>Can be called multiple times during a check's execution.</li><li>Stored as a RATE type in the datadog web application. Each value in the stored timeseries is a delta of the counter's value between samples (time-normalized by the aggregation interval which defaults to 1 for agent checks - so the value is generally the raw count value).</li><li>Handled by the aggregator Counter class</li></ul>|
-|self.decrement(...) |Used to modify a count of events identified by the metric key string:<ul><li>Can be called multiple times during a check's execution.</li><li>Stored as RATE type in the datadog web application. Each value in the stored timeseries is a delta of the counter's value between samples (time-normalized by the aggregation interval which defaults to 1 for agent checks - so the value is generally the raw count value).</li><li>Handled by the aggregator Counter class</li></ul>|
-|self.monotonic_count(...)|Submit the sampled raw value of your counter. Don't normalize the values to a rate, or calculate the deltas before submitting. If the value of your counter ever decreases between submissions the resulting stored value for that submission is 0:<ul><li>Should only be called once during a check. Throws away any value that is less than a previously submitted value. IE the counter should be monotonically increasing.</li><li>Stored as a COUNT type in the datadog web application. Each value in the stored timeseries is a delta of the counter's value between samples (not time-normalized).</li></ul>|
-|self.count(...)|Submit the number of events that occurred during the check interval. If you're tracking a counter value that persists between checks, this means you must calculate the delta before submission:<ul><li>Should only be called once during a check.</li><li>Stored as a COUNT type in the datadog web application. Each value in the stored timeseries is a delta of the counter's value between samples (not time-normalized).</li></ul>|
+| self.increment(...) |  Used to modify a count of events identified by the metric key string: <ul><li>Can be called multiple times during a check's execution.</li><li>Stored as a RATE type in the Datadog web application. Each value in the stored timeseries is a delta of the counter's value between samples (time-normalized by the aggregation interval which defaults to 1 for agent checks - so the value is generally the raw count value).</li><li>Handled by the aggregator Counter class</li></ul>|
+|self.decrement(...) |Used to modify a count of events identified by the metric key string:<ul><li>Can be called multiple times during a check's execution.</li><li>Stored as RATE type in the Datadog web application. Each value in the stored timeseries is a delta of the counter's value between samples (time-normalized by the aggregation interval which defaults to 1 for agent checks - so the value is generally the raw count value).</li><li>Handled by the aggregator Counter class</li></ul>|
+|self.monotonic_count(...)|Submit the sampled raw value of your counter. Don't normalize the values to a rate, or calculate the deltas before submitting. If the value of your counter ever decreases between submissions the resulting stored value for that submission is 0:<ul><li>Should only be called once during a check. Throws away any value that is less than a previously submitted value. IE the counter should be monotonically increasing.</li><li>Stored as a COUNT type in the Datadog web application. Each value in the stored timeseries is a delta of the counter's value between samples (not time-normalized).</li></ul>|
+|self.count(...)|Submit the number of events that occurred during the check interval. If you're tracking a counter value that persists between checks, this means you must calculate the delta before submission:<ul><li>Should only be called once during a check.</li><li>Stored as a COUNT type in the Datadog web application. Each value in the stored timeseries is a delta of the counter's value between samples (not time-normalized).</li></ul>|
 {{% /table %}}
 
 #### DogStatsD Submission
 {{% table responsive="true" %}}
 |Method | Overview |
 |:---|:---|
-| dog.increment(...) | Used to increment a counter of events: <ul><li>Stored as a RATE type in the datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter's value over that statsd flush period.</li></ul>|
-|dog.decrement(...)| Used to decrement a counter of events: <ul><li>Stored as a RATE type in the datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter's value over that statsd flush period.</li></ul>|
+| dog.increment(...) | Used to increment a counter of events: <ul><li>Stored as a RATE type in the Datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter's value over that statsd flush period.</li></ul>|
+|dog.decrement(...)| Used to decrement a counter of events: <ul><li>Stored as a RATE type in the Datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter's value over that statsd flush period.</li></ul>|
 {{% /table %}}
 
 ### Example
@@ -242,7 +242,7 @@ Gauges measure the value of a particular thing over time:
 {{% table responsive="true" %}}
 |Method | Overview |
 |:---|:---|
-|dog.gauge(...)|Stored as a GAUGE type in the datadog web application. Each value in the stored timeseries is the last gauge value submitted for that metric during the statsd flush period.|
+|dog.gauge(...)|Stored as a GAUGE type in the Datadog web application. Each value in the stored timeseries is the last gauge value submitted for that metric during the statsd flush period.|
 {{% /table %}}
 
 ### Example
@@ -401,7 +401,7 @@ After a service check has been reported, you can use it to trigger a [Custom Che
 {{% table responsive="true" %}}
 |Method | Overview |
 |:---|:---|
-|self.rate(...)|Submit the sampled raw value of your counter. Don't normalize the values to a rate, or calculate the deltas before submitting - the agent does both for you:<ul><li>Should only be called once during a check.</li><li>Throws away any value that is less than a previously submitted value. IE the counter should be monotonically increasing.</li><li>Stored as a GAUGE type in the datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter's value between samples.</li></ul>|
+|self.rate(...)|Submit the sampled raw value of your counter. Don't normalize the values to a rate, or calculate the deltas before submitting - the agent does both for you:<ul><li>Should only be called once during a check.</li><li>Throws away any value that is less than a previously submitted value. IE the counter should be monotonically increasing.</li><li>Stored as a GAUGE type in the Datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter's value between samples.</li></ul>|
 {{% /table %}}
 
 ## Sets
@@ -415,14 +415,14 @@ Sets are used to count the number of unique elements in a group.
 {{% table responsive="true" %}}
 |Method | Overview |
 |:---|:---|
-|self.set(...)|Used count the number of unique elements in a group:<ul><li>Should be called multiple times during an agent check.</li><li>Stored as a GAUGE type in the datadog web application.</li></ul>|
+|self.set(...)|Used count the number of unique elements in a group:<ul><li>Should be called multiple times during an agent check.</li><li>Stored as a GAUGE type in the Datadog web application.</li></ul>|
 {{% /table %}}
 
 #### DogStatsD Submission
 {{% table responsive="true" %}}
 |Method | Overview |
 |:---|:---|
-|dog.set(...)|Used count the number of unique elements in a group:<ul><li>Stored as GAUGE type in the datadog web application. Each value in the stored timeseries is the count of unique values submitted to statsd for a metric over that flush period.</li></ul>|
+|dog.set(...)|Used count the number of unique elements in a group:<ul><li>Stored as GAUGE type in the Datadog web application. Each value in the stored timeseries is the count of unique values submitted to statsd for a metric over that flush period.</li></ul>|
 {{% /table %}}
 
 ### Example

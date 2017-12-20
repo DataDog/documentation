@@ -40,7 +40,7 @@ customnav: agentnav
 * [Does the docker dd-agent have JMX in it?](/agent/faq/does-the-docker-dd-agent-have-jmx-in-it)
 * [How to get more out of your Kubernetes integration ?](/agent/faq/how-to-get-more-out-of-your-kubernetes-integration)
 * [Why don't I see the 'system.processes.open_file_descriptors' metric?](/agent/faq/why-don-t-i-see-the-system-processes-open-file-descriptors-metric)
-* [Want more flexibility with your custom log parser? Add dogstatsd](/agent/faq/want-more-flexibility-with-your-custom-log-parser-add-dogstatsd)
+* [Want more flexibility with your custom log parser? Add DogStatsD](/agent/faq/want-more-flexibility-with-your-custom-log-parser-add-dogstatsd)
 * [How do I reset my Datadog API keys?](/agent/faq/how-do-i-reset-my-datadog-api-keys)
 * [How is the 'system.mem.used' metric calculated?](/agent/faq/how-is-the-system-mem-used-metric-calculated)
 * [How can I collect HTTP response codes from Nginx?](/agent/faq/how-can-i-collect-http-response-codes-from-nginx)

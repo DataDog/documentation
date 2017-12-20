@@ -6,11 +6,11 @@ customnav: main_references
 
  
 
-Many users are familiar with [our API](/api) and all the many things you can do in datadog with it, whether sending/querying metrics or events to your datadog account, creating dashboards, monitors, or downtimes, and more. But there’s an easy way to use our API straight from terminal/shell, using a wrapper called “dogshell”.
+Many users are familiar with [our API](/api) and all the many things you can do in Datadog with it, whether sending/querying metrics or events to your Datadog account, creating dashboards, monitors, or downtimes, and more. But there’s an easy way to use our API straight from terminal/shell, using a wrapper called “dogshell”.
 
 ## Setup:
 
-Dogshell comes with our officially supported [datadogpy Python library](https://github.com/DataDog/datadogpy), often used to send data to datadog via the [dogstatsd](/developers/dogstatsd). [It can easily be installed following the dedicated instructions](https://github.com/DataDog/datadogpy#installation).
+Dogshell comes with our officially supported [datadogpy Python library](https://github.com/DataDog/datadogpy), often used to send data to Datadog via the [DogStatsD](/developers/dogstatsd). [It can easily be installed following the dedicated instructions](https://github.com/DataDog/datadogpy#installation).
 
 Once you have that library installed, you have the dog command available to you in your terminal/shell, but it still needs to be “initialized”: you need to provide it with an API and Application key so that it can be used to send/receive data to/from your account. This is easily done; when you first try running a dog command, it recognizes that it needs to be initialized, and walks you through the 2-step process.
 
@@ -41,7 +41,7 @@ Where you can paste your application key. It finishes with:
 Wrote ~/.dogrc.
 ```
 
-Now you're all set to use your dog commands to quickly use the datadog api from your terminal / shell. Check out some further help info on the dog commands by running dog -h. 
+Now you're all set to use your dog commands to quickly use the Datadog api from your terminal / shell. Check out some further help info on the dog commands by running dog -h. 
 
 In the event that you'd rather just write the .dogrc file yourself (perhaps you'd like to push the file to many of your servers programmatically so that you can run dog commands from any of your servers), the content of this file should be as follows:
 
@@ -70,7 +70,7 @@ For reference, [find the code for dogshell](https://github.com/DataDog/datadogpy
 
 ### Example, Dogshell in Use
 
-You can post metrics to your datadog account by using:
+You can post metrics to your Datadog account by using:
 ```
 dog metric post <metric_name> <metric_value> --tags "tag:one,tag:two"
 ```

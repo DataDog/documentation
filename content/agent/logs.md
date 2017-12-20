@@ -98,7 +98,7 @@ Let's imagine that you're collecting metrics from logs that are not canonically 
 user.crashes|2016-05-28 20:24:43.463930|24|LotusNotes,Outlook,Explorer
 ```
 
-We could set up a log-parser like the following to collect a metric from this logged data in our datadog account:
+We could set up a log-parser like the following to collect a metric from this logged data in our Datadog account:
 
 ```python
 
@@ -164,7 +164,7 @@ Let's imagine that you want to collect events from logging where you have enough
 2016-05-28 18:35:31.164705|Crash_Report|Windows95|A terrible crash happened!|A crash was reported on Joe M's computer|LotusNotes,Outlook,InternetExplorer
 ```
 
-We could set up a log parser like the following to create an event from this logged data in our datadog [event stream](/graphing/event_stream/):
+We could set up a log parser like the following to create an event from this logged data in our Datadog [event stream](/graphing/event_stream/):
 
 ```python
 

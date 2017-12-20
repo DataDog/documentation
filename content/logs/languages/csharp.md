@@ -75,7 +75,7 @@ Then check the `log.json` file to see the following event:
 }
 ```
 
-[Monitor now your log file with your agent](/logs/#tail-existing-files) to send your logs to your datadog application
+[Monitor now your log file with your agent](/logs/#tail-existing-files) to send your logs to your Datadog application
 
 ### NLog
 
@@ -144,7 +144,7 @@ namespace Datadog
 }
 ```
 
-[Monitor now your log file with your agent](/logs/#tail-existing-files) to send your logs to your datadog application
+[Monitor now your log file with your agent](/logs/#tail-existing-files) to send your logs to your Datadog application.
 
 ### Log4Net
 

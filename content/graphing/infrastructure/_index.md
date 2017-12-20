@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-The Infrastructure list page shows all hosts monitored by your datadog application:
+The Infrastructure list page shows all hosts monitored by your Datadog application:
 
 {{< img src="graphing/infrastructure/index/infrastructure_list.png" alt="Infrastructure list" responsive="true" popup="true" >}}
 

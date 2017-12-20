@@ -8,7 +8,7 @@ further_reading:
   text: Learn more about the Datadog Agent
 ---
 
-There are a number of issues that can cause the following error when you try starting your datadog agent:
+There are a number of issues that can cause the following error when you try starting your Datadog agent:
 
 ```
 Starting Datadog Agent (using supervisord):Error: Cannot open an HTTP server: socket.error reported errno.EACCES (13)

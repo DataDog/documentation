@@ -9,7 +9,7 @@ correlate with other metrics. For example, you might have a cron'd script to vac
 
     0 0 * * * psql -c 'vacuum verbose my_table' >> /var/log/postgres_vacuums.log 2>&1
 
-Vacuum is particularly resource-intensive though, so you might want Datadog events for each time they run in order to correlate metrics and other events with vacuums. Do this with the dogwrap command line tool provided by the [datadog python client library](https://github.com/DataDog/datadogpy/):
+Vacuum is particularly resource-intensive though, so you might want Datadog events for each time they run in order to correlate metrics and other events with vacuums. Do this with the dogwrap command line tool provided by the [Datadog python client library](https://github.com/DataDog/datadogpy/):
 
     0 0 * * * /path/to/dogwrap -n "Vacuuming mytable" -k $API_KEY --submit_mode errors "psql -c 'vacuum verbose my_table' 2>&1 /var/log/postgres_vacuums.log"
 

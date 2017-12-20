@@ -25,11 +25,11 @@ The names applied to your custom query metrics are taken exactly as you provide 
 
 ## Frequency of queries
 
-You custom query metric is collected by your MySQL check at the default agent check schedule, every 15-20 seconds. If you would like to query these metrics less frequently, you could either reduce the frequency of the entire MySQL check (which would affect the frequency of your general mysql.* metrics), or you may prefer to run a custom scheduled/CRON script to submit the results of MySQL queries via the [dogstatsd](/developers/dogstatsd) or [API](/api). 
+You custom query metric is collected by your MySQL check at the default agent check schedule, every 15-20 seconds. If you would like to query these metrics less frequently, you could either reduce the frequency of the entire MySQL check (which would affect the frequency of your general mysql.* metrics), or you may prefer to run a custom scheduled/CRON script to submit the results of MySQL queries via the [DogStatsD](/developers/dogstatsd) or [API](/api). 
 
 ## Maximum number of custom query metrics
 
-The agent caps off the number of custom queries it collects metrics from at 20, so as to ensure that running custom MySQL queries does not significantly delay its other scheduled checks. If you need to collect metrics from a great number of custom MySQL queries, you may prefer to run a custom scheduled/CRON script to submit the results of MySQL queries via the[dogstatsd](/developers/dogstatsd) or [API](/api).
+The agent caps off the number of custom queries it collects metrics from at 20, so as to ensure that running custom MySQL queries does not significantly delay its other scheduled checks. If you need to collect metrics from a great number of custom MySQL queries, you may prefer to run a custom scheduled/CRON script to submit the results of MySQL queries via the[DogStatsD](/developers/dogstatsd) or [API](/api).
 
 ## Example
 

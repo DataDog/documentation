@@ -12,7 +12,7 @@ Once the Datadog integration has been set up with JIRA, our integration will det
 In the image above, you can see that there is a 'jira-test2-task' ticket type that has been created. Expand this section and you will see this:
 {{< img src="integrations/faq/jira_ticket_type.png" alt="jira_ticket_type" responsive="true" popup="true">}}
 
-The fields set here define how our integration will interact with JIRA. The 'Project Key' field determines which JIRA project this tile references, while the 'Issue Type' field designates the JIRA issue type that will be posted and pulled from the given project board. The 'Tags' field is optional, but here is where you can assign datadog tags if you would like them attached to events as they are pulled in from JIRA.
+The fields set here define how our integration will interact with JIRA. The 'Project Key' field determines which JIRA project this tile references, while the 'Issue Type' field designates the JIRA issue type that will be posted and pulled from the given project board. The 'Tags' field is optional, but here is where you can assign Datadog tags if you would like them attached to events as they are pulled in from JIRA.
 
 The 'Required Fields' field is actually somewhat different in that it only appears after inputting the 'Project Key' and 'Issue Type' and saving the ticket once. This 'Required Fields' section is the area you can add in the values listed at the top of the JIRA tile (the dollar-sign prepended values). 
 

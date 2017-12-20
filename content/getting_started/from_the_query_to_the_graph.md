@@ -59,7 +59,7 @@ You can use more than one tag, e.g. {host:moby, device:udev} if you want to data
 
 Our backend selects all data corresponding to the time-period of your graph.
  
-However, before combining all data from the different sources (step 3), datadog needs to proceed to time-aggregation.
+However, before combining all data from the different sources (step 3), Datadog needs to proceed to time-aggregation.
 
 ### Why?
 
@@ -150,4 +150,4 @@ They are time aggregators specific to rates and counters submitted via statsd/d
 Syntax: instead of adding a rollup, you can use .as_count() or .as_rate().
  
 More information in [this blog post](https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing/).
-Documentation about [statsd/dogstatsd](/developers/dogstatsd).
+Documentation about [statsd/DogStatsD](/developers/dogstatsd).

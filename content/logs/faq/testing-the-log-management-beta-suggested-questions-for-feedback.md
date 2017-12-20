@@ -16,7 +16,7 @@ If you can submit your feedback in [this survey form](https://goo.gl/forms/pKr77
 3. If you used any agent-side processing features (redaction, dropping, multi-line logging), were they easy to set up? Were they effective?
 4. Are there any agent-side processing features that are currently lacking?
 5. Are all three of the methods of collecting logs via the dd-agent (file tailing, TCP, and UDP) sufficient for your needs, and were they easy to set up?
-6. Are there any libraries that would make it easier for you to send logs to datadog if they existed?
+6. Are there any libraries that would make it easier for you to send logs to Datadog if they existed?
 
 ## Processing Logs
 
