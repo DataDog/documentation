@@ -78,7 +78,7 @@ When a user visits the URL for a specific cell, its notebook is opened to show t
 
 ### Saving, renaming, and deleting a notebook
 
-To save a notebook, press ⌘+ Sor click the “Save” button in the notebook header. After a new notebook has been saved once, it continues to autosave at regular intervals. A notebook also may be saved manually at any time between autosaves. To ensure you don’t lose work, you’ll be prompted for confirmation if you attempt to leave a notebook with unsaved changes.
+To save a notebook, press `⌘+` Sor click the “Save” button in the notebook header. After a new notebook has been saved once, it continues to autosave at regular intervals. A notebook also may be saved manually at any time between autosaves. To ensure you don’t lose work, you’ll be prompted for confirmation if you attempt to leave a notebook with unsaved changes.
 
 To rename a notebook, click the name field in the notebook header.
 

@@ -13,7 +13,7 @@ further_reading:
 
 Simple Network Management Protocol (SNMP) is the de facto standard for monitoring network-connected devices, such as routers, switches, servers, and firewalls.
 
-In this article, we'll go through monitoring a Juniper SRX firewall, using the Datadog Agent installed on an Ubuntu 14-04 workstation.
+In this article, we go through monitoring a Juniper SRX firewall, using the Datadog Agent installed on an Ubuntu 14-04 workstation.
 
 SNMP uses OIDs, or Object Identifiers, to uniquely identify managed objects. OIDs follow a hierarchical tree pattern: under the root is ISO which is numbered 1, then next level is ORG and numbered 3 and so on, with each level being separated by a ..
 
@@ -21,7 +21,7 @@ A MIB, or Management Information Base acts as a translator between OIDs and huma
 
 Let's start by installing some useful snmp tools on our ubuntu machine:
 
-First we'll enable the multiverse repo.
+First let's enable the multiverse repo.
 
 Then we install 2 packages:
 
@@ -31,7 +31,7 @@ sudo apt-get install snmp snmp-mibs-downloader
 
 This installs the snmp tool suite and download MIBs.
 
-Now we'll use the snmpwalk utility to make sure we can communicate over SNMP with the device. We have to supply the version of the SNMP protocol supported by our device, the community string (which acts as a passphrase), the IP address of the device and we'll ask to use all MIB files available:
+Now use the snmpwalk utility to make sure we can communicate over SNMP with the device. We have to supply the version of the SNMP protocol supported by our device, the community string (which acts as a passphrase), the IP address of the device and ask to use all MIB files available:
 
 ```
 $ snmpwalk -v 2c -c public -mALL 192.168.33.10 1.3

@@ -42,7 +42,7 @@ First create a new timeseries graph on your dashboard with your chosen metric.
 
 {{< img src="monitors/monitor_types/outliers/outliers-dash-choose-metrics-updated.png" alt="outliers dash choose metrics updated" responsive="true" popup="true">}}
 
-To enable outlier detection, click on the + icon on the right side of the metrics line. Choose **Algorithms** from the function categories, then pick one of the four outlier algorithms.
+To enable outlier detection, click on the `+` icon on the right side of the metrics line. Choose **Algorithms** from the function categories, then pick one of the four outlier algorithms.
 
 {{< img src="monitors/monitor_types/outliers/outliers-algorithm-selector.png" alt="outliers algorithm selector" responsive="true" popup="true">}}
 

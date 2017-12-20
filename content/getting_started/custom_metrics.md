@@ -53,7 +53,7 @@ Using the aforementioned example, below shows three scenarios which would all be
 
 {{< img src="getting_started/custom_metrics/custom-metrics-1.jpg" alt="custom-metrics-1" responsive="true" popup="true">}}
 
-We do not enforce [any fixed rate limit](/api/#rate-limiting) on custom metric submission, we'll simply reach out to you if you're exceeding your default allotment.
+We do not enforce [any fixed rate limit](/api/#rate-limiting) on custom metric submission, if you're exceeding your default allotment, our teams will simply reach out to you.
 
 ## How do I check my custom metrics count?
 
@@ -104,5 +104,5 @@ Ultimately, you’ll have 13 metrics using the following query: `count:service.r
 ## Custom metrics best practices
 
 * For querying purposes, we encourage you to limit the number of tags applied to 1,000 tags per metric. Going over this amount [slows down the graphs](/graphing/faq/dashboard-loads-very-slowly) in your dashboards due to the increase in cardinality.
-* You can check the number of "distinct metrics" in the metric summary page (click a metric name to see the number of distinct metrics associated). If you need a higher custom metric limit, [email us](/help) and we'll connect you with your Customer Success Manager.
+* You can check the number of "distinct metrics" in the metric summary page (click a metric name to see the number of distinct metrics associated). If you need a higher custom metric limit, [email us](/help).
 * [Additional information about billing and custom metrics](/account_management/faq/).

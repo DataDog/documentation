@@ -7,10 +7,7 @@ aliases:
   - /guides/overview/
 ---
 
-So, you've just finished [installing][1] the Datadog
-Agent, or maybe you're just curious about [what Datadog can do for you][2].
-This document gives a high level overview of Datadog's capabilities and how
-it can help you bring your infrastructure to heel.
+So, you've just finished [installing][1] the Datadog Agent, or maybe you're just curious about [what Datadog can do for you][2]. This page gives a high level overview of Datadog's capabilities and how it can help you bring your infrastructure to heel.
 
 ## Integrations
 
@@ -26,7 +23,7 @@ in an online service is treated the same throughout Datadog.
 
 {{< img src="getting_started/infrastructure.png" alt="infrastructure" responsive="true" popup="true">}}
 
-* All machines show up in the infrastructure overview.
+* All machines show up in the [infrastructure list](/graphing/infrastructure).
 * Here you can see the tags applied to each machine; as they're assigned to
 perform certain roles, tagging allows you to indicate machines have
 a certain purpose.
@@ -34,31 +31,30 @@ a certain purpose.
 for you, which helps create structure in your infrastructure with as little
 work as possible (unlike explicitly creating all your clusters).
 Thus if a new machine is tagged, you can immediately see the stats
-for that machine based on what was previously set up for that tag.
-* [Read more on tagging](/agent/tagging).
+for that machine based on what was previously set up for that tag.[Read more on tagging](/agent/tagging).
 
 ## Host Map
 
 {{< img src="getting_started/hostmap-overview.png" alt="hostmap overview" responsive="true" popup="true">}}
 
-The Host Map can be found under the Infrastructure menu and offers the ability to:
+[The Host Map](/graphing/infrastructure/hostmap) can be found under the Infrastructure menu and offers the ability to:
 
 * Quickly visualize your entire environment regardless of whether it's 5, 500, or 50,000 hosts.
 * Identify outliers
 * Detect usage patterns
 * Optimize resources
 
-To learn more about the Host Map, visit the [Host Map Guide][10].
+To learn more about the Host Map, visit the [Host Map dedicated documentation page][10].
 
 ## Events
 
 {{< img src="getting_started/event_stream.png" alt="Event stream" responsive="true" popup="true">}}
 
-The Event Stream is based on the same conventions as a blog:
+[The Event Stream](/graphing/event_stream) is based on the same conventions as a blog:
 
 * Every event in the stream can be commented on.
 * Great for distributed [teams](/account_management/team) and maintaining the focus of an investigation.
-* You can [filter][8] by: user, source, tag, host, status, priority, incident
+* You can [filter][8] by: `user`, `source`, `tag`, `host`, `status`, `priority`, `incident`
 
 For each incident users can:
 
@@ -66,8 +62,8 @@ For each incident users can:
 * Increase/decrease priority
 * Comment
 * See similar incidents
-* [@ notify team members](/graphing/event_stream), who receive an email
-* @support-datadog to ask for assistance
+* [@ notify team members](/graphing/event_stream/#@-notifications), who receive an email
+* `@support-datadog` to ask for [assistance](/help)
 
 {{< img src="getting_started/event_stream_event.png" alt="event stream event" responsive="true" popup="true">}}
 
@@ -77,7 +73,7 @@ For each incident users can:
 
 Dashboards contain [graphs][11] with real-time performance metrics
 
-* Synchronous mousing across all graphs in a dashboard.
+* Synchronous mousing across all graphs in a [screenboard](/graphing/dashboards/screenboard).
 * Vertical bars are events in the context of the metric.
 * Click & drag on a graph to zoom-in on a particular time-frame.
 * As you hover over the graph the event stream moves with you.

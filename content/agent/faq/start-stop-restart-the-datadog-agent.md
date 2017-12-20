@@ -91,7 +91,7 @@ sudo ~/.datadog-agent/bin/agent reload
 
 ## Windows
 
-To manually start the Agent, you can use the Datadog Agent Manager, once open you'll find service controls here:
+To manually start the Agent, you can use the Datadog Agent Manager, once open find the service controls here:
 
 {{< img src="agent/faq/manager-snapshot.png" alt="Manager snapshot" responsive="true" popup="true">}}
 

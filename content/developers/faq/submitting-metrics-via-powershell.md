@@ -4,7 +4,7 @@ kind: faq
 customnav: developersnav
 ---
 
-Datadog can collect metrics via the agent as well as via the API independently of which language you decide to use. Here we'll give examples of both using PowerShell
+Datadog can collect metrics via the agent as well as via the API independently of which language you decide to use. This page gives examples of both using PowerShell
 
 ## Submitting metrics with PowerShell via the API
 

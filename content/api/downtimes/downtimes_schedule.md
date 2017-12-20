@@ -23,8 +23,8 @@ order: 9.1
     The timezone for the downtime.
 * `recurrence` [*optional*, *default*=**None**]:  
     An object defining the recurrence of the downtime with a variety of parameters:
-    +   `type` the type of recurrence. Choose from: `days`, `weeks`, `months`, `years`.
-    +   `period` how often to repeat as an integer. For example to repeat every 3 days, select a type of `days` and a period of `3`.
-    +   `week_days` (optional) a list of week days to repeat on. Choose from: `Mon`, `Tue`, `Wed`, `Thu`, `Fri`, `Sat` or `Sun`. Only applicable when `type` is `weeks`. **First letter must be capitalized.**
-    +   `until_occurrences` (optional) how many times the downtime is rescheduled. **`until_occurences` and `until_date`** are mutually exclusive
-    +   `until_date` (optional) the date at which the recurrence should end as a POSIX timestmap. **`until_occurences` and `until_date`** are mutually exclusive
+    *   `type` the type of recurrence. Choose from: `days`, `weeks`, `months`, `years`.
+    *   `period` how often to repeat as an integer. For example to repeat every 3 days, select a type of `days` and a period of `3`.
+    *   `week_days` (optional) a list of week days to repeat on. Choose from: `Mon`, `Tue`, `Wed`, `Thu`, `Fri`, `Sat` or `Sun`. Only applicable when `type` is `weeks`. **First letter must be capitalized.**
+    *   `until_occurrences` (optional) how many times the downtime is rescheduled. **`until_occurences` and `until_date`** are mutually exclusive
+    *   `until_date` (optional) the date at which the recurrence should end as a POSIX timestmap. **`until_occurences` and `until_date`** are mutually exclusive

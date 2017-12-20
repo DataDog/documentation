@@ -88,7 +88,7 @@ Depending on your analysis needs, you may choose to apply other mathematical fun
 
 ### Perform metric arithmetic
 
-The Datadog UI supports the ability to graph your metrics with various arithmetic options. You can utilize any of: +, -, /, * to modify the values that are displayed on your graphs. This syntax allows for both integer values as well as arithmetic using multiple metrics.
+The Datadog UI supports the ability to graph your metrics with various arithmetic options. You can utilize any of: `+`, `-`, `/`, `*` to modify the values that are displayed on your graphs. This syntax allows for both integer values as well as arithmetic using multiple metrics.
 
 #### Metric Arithmetic Using an Integer
 
@@ -97,7 +97,7 @@ For example, if you would like to visualize the double of a specific metric, say
 
 {{< img src="graphing/index/arithmetic_1.png" alt="Arithmetic 1" responsive="true" popup="true" >}}
 
-This can be done inside a graph editor by clicking on the Graph Editor and selecting "advanced...". From there you can enter your arithmetic in the `Graph these queries as` box. In this case: a * 2. 
+This can be done inside a graph editor by clicking on the Graph Editor and selecting "advanced...". From there you can enter your arithmetic in the `Graph these queries as` box. In this case: `a * 2`. 
 
 {{< img src="graphing/index/arithmetic_2.png" alt="Arithmetic 2" responsive="true" popup="true" >}}
 

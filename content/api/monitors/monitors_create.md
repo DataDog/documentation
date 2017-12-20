@@ -9,11 +9,10 @@ order: 8.1
 ##### ARGUMENTS
 *   `type` [*required*]:  
     The type of the monitor, chosen from:  
-
-    +   `metric alert`
-    +   `service check`
-    +   `event alert`
-    +   `composite`
+    *   `metric alert`
+    *   `service check`
+    *   `event alert`
+    *   `composite`
 
 *   `query` [*required*]:  
     The query defines when the monitor triggers. Query syntax depends on what type of monitor you are creating:  

@@ -21,7 +21,7 @@ The Agent enables, disables, and regenerates static check configurations from th
 
 In a traditional non-container environment, Datadog Agent configuration is—like the environment in which it runs—static. The Agent reads check configurations from disk when it starts, and as long as it's running, it continuously runs every configured check.
 The configuration files are static, and any network-related options configured within them serve to identify specific instances of a monitored service (e.g. a Redis instance at 10.0.0.61:6379).
-When an Agent check cannot connect to such a service, you'll be missing metrics until you troubleshoot the issue. The Agent check retries its failed connection attempts until an administrator revives the monitored service or fixes the check's configuration.
+When an Agent check cannot connect to such a service, metrics will be missing until you troubleshoot the issue. The Agent check retries its failed connection attempts until an administrator revives the monitored service or fixes the check's configuration.
 
 With Autodiscovery enabled, the Agent runs checks differently.
 
@@ -45,7 +45,7 @@ The Agent watches for Docker events—container creation, destruction, starts, a
 
 ### Running the Agent Container
 
-No matter what container orchestration platform you use, you'll first need to run a single [docker-dd-agent container](https://hub.docker.com/r/datadog/docker-dd-agent/) on every host in your cluster. If you use Kubernetes, see the [Kubernetes integration page][3] for instructions on running docker-dd-agent. If you use Amazon ECS, see [its integration page][4].
+No matter what container orchestration platform you use, run a single [docker-dd-agent container](https://hub.docker.com/r/datadog/docker-dd-agent/) on every host in your cluster first. If you use Kubernetes, see the [Kubernetes integration page][3] for instructions on running docker-dd-agent. If you use Amazon ECS, see [its integration page][4].
 
 If you use Docker Swarm, run the following command on one of your manager nodes:
 
@@ -89,7 +89,7 @@ The Agent looks for Autodiscovery templates in its `conf.d/auto_conf` directory,
 - [Redis](https://github.com/DataDog/integrations-core/blob/master/redisdb/auto_conf.yaml)
 - [Riak](https://github.com/DataDog/integrations-core/blob/master/riak/auto_conf.yaml)
 
-These templates may suit you in basic cases, but if you need to use custom check configurations—say you want to enable extra check options, use different container identifiers, or use [template variable indexing](#template-variable-indexes))—you'll have to write your own auto-conf files. You can then provide those in a few ways:
+These templates may suit you in basic cases, but if you need to use custom check configurations—say you want to enable extra check options, use different container identifiers, or use [template variable indexing](#template-variable-indexes))— you'll have to write your own auto-conf files. You can then provide those in a few ways:
 
 1. Add them to each host that runs docker-dd-agent and [mount the directory that contains them][6] into the docker-dd-agent container when starting it
 2. Build your own docker image based on docker-dd-agent, adding your custom templates to `/etc/dd-agent/conf.d/auto_conf`

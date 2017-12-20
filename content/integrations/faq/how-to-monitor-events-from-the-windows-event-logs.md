@@ -33,14 +33,14 @@ Here defines filters that are matched against incoming events:
 
 The most common way to visualize Event Logs in Windows is to use the Windows Event Viewer. Though it is a very convenient GUI tool, its main issue is to alter the details of a log entry to make it more user-friendly and readable, which is not helping when setting up filters.
 
-As the Agent pulls log information from a WMI class, we'll use a Powershell commandlet to filter event logs and look into their internal structure. In this example we want to monitor events with ID 4776 from the Security log, which represent a successful authentication on the system.
+As the Agent pulls log information from a WMI class, we use a Powershell commandlet to filter event logs and look into their internal structure. In this example we want to monitor events with ID 4776 from the Security log, which represent a successful authentication on the system.
 
-First we'll retrieve the last 100 entries from the Security log*: 
+First we retrieve the last 100 entries from the Security log*: 
 ```
 $logs = Get-WmiObject -class Win32_NTLogEvent -filter "(logfile='Security')" | select -First 100
 ```
 
-Now we'll display the first event with an ID of 4776:
+Now we display the first event with an ID of 4776:
 ```
 $logs | where  { $_.EventCode -eq 4776} | select -First 1 | format-list
 

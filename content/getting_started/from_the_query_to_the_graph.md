@@ -4,15 +4,15 @@ kind: documentation
 customnav: gettingstartednav
 ---
 
-While setting up graphs is pretty simple in Datadog, this article aims at helping you leverage even more value from our graphing system.
+While setting up graphs is pretty simple in Datadog, this page aims at helping you leverage even more value from our graphing system.
 
 This article focuses on describing the steps performed by our graphing system from the query to the graph, so that you get a good idea how to choose your graph settings.
 
 Tl;Dr ? [there is a short version of this article](/graphing/faq/how-does-datadog-render-graphs-my-graph-doesn-t-show-the-values-i-m-expecting).
 
-We use the metric **system.disk.total** as an example. We want to graph data associated to this metric and coming from a specific server (host:moby).
+We use the metric **system.disk.total** as an example. We want to graph data associated to this metric and coming from a specific server (`host:moby`).
  
-When setting up a new graph in a [Timeboard](/graphing/dashboards/timeboard)/[Screenboard](/graphing/dashboards/screenboard) you can use the Editor but you can also switch to the JSON tab to set up advanced queries:
+When setting up a new graph in a [Timeboard](/graphing/dashboards/timeboard)/[Screenboard](/graphing/dashboards/screenboard) you can use the editor but you can also switch to the JSON tab to set up advanced queries:
 
 {{< img src="getting_started/from_query_to_graph/graph_metric.png" alt="graph_metric" responsive="true" popup="true">}}
 
@@ -21,27 +21,34 @@ Let's now follow each step executed by our backend to perform the query and rend
 At each step we comment on the effect of each parameter of the query.
 **Before the query, storage: data is stored separately depending on the tags**
 
-The metric system.disk.total (collected by default by the datadog-agent) is seen from different sources.
-First because this metric reported by different hosts, and also because each datadog-agent collects this metric device per device. It adds to metric system.disk.total the tag device:tmpfs when sending data associated to the disk with the same name, etc.
+The metric `system.disk.total` (collected by default by the [datadog-agent](/agent)) is seen from different sources.  
+
+First because this metric reported by different hosts, and also because each datadog-agent collects this metric device per device. It adds to metric `system.disk.total` the tag `device:tmpfs` when sending data associated to the disk with the same name, etc.
  
 Thus this metric is seen with different {host, device} tag combinations.
  
 For each source (defined by a host and a set of tags) we store data separately.
-In this example we consider host:moby as having 5 devices. Thus Datadog is storing 5 timeseries (all datapoints submitted over time for a source) for: {host:moby, device:tmpfs},{host:moby, device:udev},{host:moby, device:/dev/disk},{host:moby, device:rootfs} and {host:moby, device:cgroup}.
+In this example we consider `host:moby` as having 5 devices. Thus Datadog is storing 5 timeseries (all datapoints submitted over time for a source) for: 
+
+* {host:moby, device:tmpfs}
+* {host:moby, device:cgroup_root}
+* {host:moby, device:/dev/vda1}
+* {host:moby, device:overlay}
+* {host:moby, device:shm}.
  
 Let’s now go over the successive steps followed by our backend for the query presented above.
 
 ## Find which timeseries are needed for the query 
 
-In this query we only asked for data associated to host:moby. So the first step for our backend is to scan all sources (in this case all {host, device} combination with which metric system.disk.total is submitted) and only retain those corresponding to the scope of the query. 
+In this query we only asked for data associated to `host:moby`. So the first step for our backend is to scan all sources (in this case all {host, device} combination with which metric system.disk.total is submitted) and only retain those corresponding to the scope of the query. 
  
 As you may have guessed, our backend finds 5 matching sources (see previous paragraph).
 
 {{< img src="getting_started/from_query_to_graph/metrics_graph_2.png" alt="metrics_graph_2" responsive="true" popup="true">}}
 
-The idea is then to aggregate data from these sources together to give you a metric representing the `system.disk.total` for your host. This is done at step 3.
+The idea is then to aggregate data from these sources together to give you a metric representing the `system.disk.total` for your host. This is done at [step 3](/getting_started/from_the_query_to_the_graph/#proceed-to-space-aggregation).
  
-**Note**: The tagging system adopted by Datadog is simple and powerful. You don’t have to know and specify the sources to combine, you just have to give a tag, i.e. an ID and Datadog combines all data with this ID and not the rest. For instance, you don’t need to know the number of hosts or devices you have, when you query system.disk.total{*}. Datadog aggregates data from all sources for you.
+**Note**: The tagging system adopted by Datadog is simple and powerful. You don’t have to know and specify the sources to combine, you just have to give a tag, i.e. an ID and Datadog combines all data with this ID and not the rest. For instance, you don’t need to know the number of hosts or devices you have, when you query `system.disk.total{*}`. Datadog aggregates data from all sources for you.
  
 [More information about timeseries and tag cardinality](/getting_started/custom_metrics)
 
@@ -75,8 +82,8 @@ Our backend computes a series of local aggregates for each source corresponding 
 
 However, you can control how this aggregation is performed.
 
-Parameter involved: rollup (optional)
-How to use the ['rollup' function](/graphing/miscellaneous/functions/#rollup).
+**Parameter involved: rollup (optional)**
+How to use the ['rollup' function](/graphing/miscellaneous/functions/#rollup)?.
 
 In our example rollup(avg,60) defines an aggregate period of 60 seconds. So our X minutes interval is sliced into Y intervals of 1 minute each. Data within a given minute is aggregated into a single point that shows up on your graph (after step 3, the space-aggregation).
 
@@ -93,11 +100,16 @@ In this example, for each minute, Datadog computes the sum across all sources, 
 
 The value obtained (25.74GB) is the sum of the values reported by all sources (see previous image).
  
-Note: Of course if there is only one source (if we had chosen the scope {host:moby, device:/dev/disk} for the query for instance), using sum/avg/max/min have no effect as no space aggregation needs to be performed, [see here also](/graphing/faq/i-m-switching-between-the-sum-min-max-avg-aggregators-but-the-values-look-the-same).
+Note: Of course if there is only one source (if we had chosen the scope {host:moby, device:/dev/disk} for the query for instance), using `sum`/`avg`/`max`/`min` have no effect as no space aggregation needs to be performed, [see here also](/graphing/faq/i-m-switching-between-the-sum-min-max-avg-aggregators-but-the-values-look-the-same).
   
-Parameter involved: space-aggregator
+**Parameter involved: space-aggregator**
 
-Datadog offers 4 space-aggregators: max/min/avg/sum 
+Datadog offers 4 space-aggregators: 
+
+* `max`
+* `min`
+* `avg`
+* `sum` 
 
 ## Apply functions (optional)
 
@@ -105,7 +117,7 @@ Most of the functions apply at the last step. From the ~300 points obtained afte
  
 In this example the function abs makes sure that your results are positive numbers.
  
-Parameter involved: function
+**Parameter involved: function**
 [Consult the list of functions offered by Datadog](/graphing/miscellaneous/).
 
 ### Grouped queries, arithmetic, as_count/rate
@@ -128,7 +140,7 @@ The logic is the same:
 
 #### Arithmetic
 
-Arithmetic is applied after time and space aggregation as well (step 4).
+Arithmetic is applied after time and space aggregation as well ([step 4: Apply function](/getting_started/from_the_query_to_the_graph/#apply-functions-optional)).
 
 {{< img src="getting_started/from_query_to_graph/metric_graph_8.png" alt="metric_graph_8" responsive="true" popup="true">}}
 

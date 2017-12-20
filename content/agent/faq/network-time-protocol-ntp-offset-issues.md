@@ -43,7 +43,7 @@ To prevent NTP issues, you can leverage our monitor for NTP offset to alert you
 
 Also, you can check over all the reporting hosts, the one that have offset issues.
 
-To do so, use our [Check Summary page](https://app.datadoghq.com/check/summary), Inspect the check ntp.in_sync and you'll see a list of the hosts that have NTP issues.
+To do so, use our [Check Summary page](https://app.datadoghq.com/check/summary). Inspect the check `ntp.in_sync` and see the list of the hosts that have NTP issues.
 
 Also note that outgoing UDP traffic over the port 123 should be allowed so the agent can confirm that the local server time is reasonably accurate according the datadog NTP servers.
 

@@ -55,12 +55,12 @@ That's it, you're done!
 
 ## Windows
 
-To send Datadog support a copy of your Windows logs and configs, do the following:
+To send Datadog support a copy of your Windows logs and configurations, do the following:
 
 1. Open the Datadog Agent Manager
 2. Select Actions
 3. Select Flare
-4. Next you'll be prompted for your ticket number - if you don't have one leave the value as zero
+4. Enter your ticket number - if you don't have one leave the value as zero
 5. Lastly, enter the email address you use to log into Datadog
 
 That's it, you're done!

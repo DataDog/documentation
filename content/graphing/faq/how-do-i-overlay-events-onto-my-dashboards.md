@@ -32,6 +32,6 @@ Let's say you have the following template variable : 
 
 {{< img src="graphing/faq/template_event_overlay.png" alt="template_event_overlay" responsive="true" popup="true">}}
 
-You'll be able to use the Event Overlay feature using the following syntax
+To use the Event Overlay feature use the following syntax
 
 * `"events": "tags:$availability-zone"`

@@ -22,7 +22,7 @@ Metrics are collected by sending them to StatsD, a small metrics aggregation
 server that is bundled with the Datadog Agent, [read about how it works](/developers/dogstatsd/). If you want to dive into code right away,
 read on.
 
-In this tutorial, we'll cover some common instrumentation use cases, like:
+This tutorial covers some common instrumentation use cases, like:
 
 - How to count web page views
 - How to time database queries
@@ -162,7 +162,7 @@ Counters are used to count things.
 {{% /table %}}
 
 ### Example
-Lets count web page views. To achieve this, we'll increment a metric called
+Lets count web page views. To achieve this, we increment a metric called
 `web.page_views` each time our `render_page` function is called.
 
 For python:
@@ -194,7 +194,7 @@ per-second units. In the graph above, the marker is reporting
 the web page each second, the graph would be a flat line at y = 1. To increment or measure values over time, see [gauges](#gauges)
 
 We can also count by arbitrary numbers. Suppose we wanted to count the number
-of bytes processed by a file uploading service. We'll increment a metric
+of bytes processed by a file uploading service. We increment a metric
 called `file_service.bytes_uploaded` by the size of the file each time our
 `upload_file` function is called:
 

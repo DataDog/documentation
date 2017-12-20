@@ -84,7 +84,7 @@ The current way to do so is to add the package in the library zipped folder that
 
 On your target host, first launch the Datadog Agent Manager and select the "Windows Service" integration from the list (see below)
 
-For the Windows Service Integration, there is an out-of-the-box example, however, in this example we'll use DHCP.
+For the Windows Service Integration, there is an out-of-the-box example, however, this example uses DHCP.
 
 First, to get the name of the service, open services.msc and locate your target service. Using DHCP as our target, you can see the service name at the top of the service properties window:
 

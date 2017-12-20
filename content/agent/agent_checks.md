@@ -8,33 +8,30 @@ aliases:
 
 ## Overview
 
-This page details how to collect metrics and events from a new data source by writing an Agent Check, a Python plug-in to the Datadog Agent. We'll look at the `AgentCheck` interface, and then write a simple Agent Check that collects timing metrics and status events from HTTP services.
+This page details how to collect metrics and events from a new data source by writing an Agent Check, a Python plug-in to the Datadog Agent. This page looks first at the `AgentCheck` interface, and then propose a simple Agent Check that collects timing metrics and status events from HTTP services.
 
 Custom checks are included in the main check run loop, meaning they run every check interval, which defaults to 15 seconds.
 
 ### Should you write an Agent Check or an Integration?
 
-Agent Checks are a great way to collect metrics from custom applications or unique systems. However, if you are trying to collect metrics from a generally available application, public service or open source project, we recommend that you write an Integration.
+Agent Checks are a great way to collect metrics from custom applications or unique systems. However, if you are trying to collect metrics from a generally available application, public service or open source project, we recommend that you write [an Integration](/developers/integrations).
 
-Starting with version 5.9 of the Datadog Agent, we've enabled a new method for creating integrations and created a corresponding integrations-extras repository where you can contribute your own integrations. This allows integrations to be released and updated independently from Datadog Agent updates, it also provides an easier way for you to share integrations and makes it easier for the wider Datadog community to use your integrations.
+Starting with version 5.9 of the Datadog Agent, a new method for creating integrations is available. This allows integrations to be released and updated independently from Datadog Agent updates, it also provides an easier way for you to share integrations and makes it easier for the wider Datadog community to use your integrations.
 
 For more information about how to write an integration, see [Creating New Integrations][1] and check out the [integrations-extras GitHub repository][2] to see other contributed integrations.
 
 ## Setup
 
-First off, ensure you've properly installed the [Agent][3] on your machine. If you run into any issues during the setup, [contact support][4] and we'll be happy to answer any questions you might have.
+First off, ensure you've properly installed the [Agent][3] on your machine. If you run into any issues during the setup, [contact our support][4].
 
 ## Agent Check Interface
 
-All custom checks inherit from the `AgentCheck` class found in `checks/__init__.py`
-and require a `check()` method that takes one argument, `instance` which is a
-`dict` having the configuration of a particular instance. The `check` method is
-run once per instance defined in the check configuration (discussed later).
+All custom checks inherit from the `AgentCheck` class found in `checks/__init__.py` and require a `check()` method that takes one argument, `instance` which is a `dict` having the configuration of a particular instance. The `check` method is run once per instance defined in the check configuration (discussed later).
 
 ### Sending metrics
 
 Sending metrics in a check is easy. If you're already familiar with the
-methods available in DogStatsD, then the transition is very simple.
+methods available in [DogStatsD](/developers/dogstatsd), then the transition is very simple.
 
 You have the [following methods](/developers/dogstatsd) available to you:
 
@@ -65,7 +62,8 @@ flushed out with the other Agent metrics.
 
 ### Sending events
 
-At any time during your check, you can make a call to `self.event(...)` with one argument: the payload of the event. Your event should be structured like this:
+At any time during your check, make a call to `self.event(...)` with one argument: the payload of the event. Your event should be structured like this:
+
 ```
 {
     "timestamp": int, the epoch timestamp for the event,
@@ -106,8 +104,7 @@ The service_check method accepts the following arguments:
 ### Exceptions
 
 If a check cannot run because of improper configuration, programming error, or
-because it could not collect any metrics, it should raise a meaningful exception.
-This exception is logged and is shown in the Agent [info command](/agent/faq/agent-status-and-information) for easy debugging. For example:
+because it could not collect any metrics, it should raise a meaningful exception. This exception is logged and is shown in the Agent [info command](/agent/faq/agent-status-and-information) for easy debugging. For example:
 
     $ sudo /etc/init.d/datadog-agent info
 
@@ -128,9 +125,9 @@ module).
 
 ## Configuration
 
-Each check has a [YAML](http://www.yaml.org/) configuration file that is placed in the `conf.d`
-directory. The file name should match the name of the check module (e.g.: `haproxy.py` and
-`haproxy.yaml`). NOTE: YAML files must use spaces instead of tabs.
+Each check has a [YAML](http://www.yaml.org/) configuration file that is placed in the `conf.d` directory. The file name should match the name of the check module (e.g.: `haproxy.py` and `haproxy.yaml`).  
+
+**Note**: YAML files must use spaces instead of tabs.
 
 The configuration file has the following structure:
 
@@ -148,9 +145,7 @@ instances:
       password: 5678
 ```
 
-`min_collection_interval` can be added to the `init_config` section to help define how often the check should be run.
-If it is greater than the interval time for the agent collector, a line is added to the log stating that collection for this script was skipped.
-The default is `0` which means it's collected at the same interval as the rest of the integrations on that agent.
+`min_collection_interval` can be added to the `init_config` section to help define how often the check should be run. If it is greater than the interval time for the agent collector, a line is added to the log stating that collection for this script was skipped. The default is `0` which means it's collected at the same interval as the rest of the integrations on that agent.
 If the value is set to `30`, it does not mean that the metric is collected every 30 seconds, but rather that it could be collected as often as every 30 seconds.
 
 The collector runs every 15-20 seconds depending on how many integrations are enabled. If the interval on this agent happens to be every 20 seconds, then the agent collects and includes the agent check. The next time it collects 20 seconds later, it sees that 20 < 30 and don't collect the custom agent check. The next time it sees that the time since last run was 40 which is greater than 30 and therefore the agent check is collected.
@@ -186,7 +181,7 @@ OR
 
     C:\Program Files\Datadog\Agent\checks.d\
 
-For Mac OS X and source installations, you'll find it at:
+For Mac OS X and source installations, find it at:
 
     ~/.datadog-agent/agent/checks.d/
 
@@ -201,11 +196,11 @@ OR
 The other folder that you need to care about is `conf.d` which lives in the
 Agent configuration root.
 
-For Linux, you'll find it at:
+For Linux, find it at:
 
     /etc/dd-agent/conf.d/
 
-For Windows, you'll find it at:
+For Windows, find it at:
 
     C:\ProgramData\Datadog\conf.d\
 
@@ -213,7 +208,7 @@ OR
 
     C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\
 
-For Mac OS X and source installations, you'll find it at:
+For Mac OS X and source installations, find it at:
 
     ~/.datadog-agent/agent/conf.d/
 
@@ -237,7 +232,7 @@ is called <code>mycheck.py</code> your configuration file <em>must</em> be
 named <code>mycheck.yaml</code>.
 </div>
 
-To start off simple, we'll write a check that does nothing more than send a
+To start off simple, write a check that does nothing more than sending a
 value of 1 for the metric `hello.world`. The configuration file is very
 simple, including no real information. This goes into `conf.d/hello.yaml`:
 
@@ -268,16 +263,13 @@ services and return interesting data.
 
 Let's write a basic check that checks the status of an HTTP endpoint. On each run of the check, a *GET* request is made to the HTTP endpoint. Based on the response, one of the following happens:
 
-  - If the response is successful (response is 200, no timeout) the response
-  time is submitted as a metric.
-  - If the response times out, an event is submitted with the URL and
-  timeout.
-  - If the response code != 200, an event is submitted with the URL and
-  the response code.
+* If the response is successful (response is 200, no timeout) the response time is submitted as a metric.
+* If the response times out, an event is submitted with the URL and timeout.
+* If the response code != 200, an event is submitted with the URL and the response code.
 
 ### Configuration
 
-First we define how our configuration should look, so that we know
+First let's define how the configuration should look so that we know
 how to handle the structure of the `instance` payload that is passed into the
 call to `check`.
 
@@ -301,7 +293,7 @@ instances:
 
 ### The Check
 
-Now we can start defining our check method. The main part of the check makes
+Now let's define our check method. The main part of the check makes
 a request to the URL and time the response time, handling error cases as it goes.
 
 In this snippet, we start a timer, make the GET request using the
@@ -331,8 +323,7 @@ if r.status_code != 200:
     self.status_code_event(url, r, aggregation_key)
 ```
 
-If the request passes, we want to submit the timing to Datadog as a metric. Let's
-call it `http.response_time` and tag it with the URL.
+If the request passes, we want to submit the timing to Datadog as a metric. Let's call it `http.response_time` and tag it with the URL.
 
 ```python
 
@@ -340,12 +331,12 @@ timing = end_time - start_time
 self.gauge('http.response_time', timing, tags=['http_check'])
 ```
 
-Finally, we'll want to define what happens in the error cases. We have already
+Finally, define what happens in the error cases. We have already
 seen that we call `self.timeout_event` in the case of a URL timeout and
 we call `self.status_code_event` in the case of a bad status code. Let's
 define those methods now.
 
-First, we'll define `timeout_event`. Note that we want to aggregate all of these events together based on the URL so we define the aggregation_key as a hash of the URL.
+First, define `timeout_event`. Note that we want to aggregate all of these events together based on the URL so we define the aggregation_key as a hash of the URL.
 
 ```python
 
@@ -359,8 +350,7 @@ def timeout_event(self, url, timeout, aggregation_key):
     })
 ```
 
-Next, we'll define `status_code_event` which looks very similar to the timeout
-event method.
+Next, define `status_code_event` which looks very similar to the timeout event method.
 
 ```python
 
@@ -378,13 +368,11 @@ def status_code_event(self, url, r, aggregation_key):
 
 The entire check would be placed into the `checks.d` folder as `http.py`. The corresponding configuration would be placed into the `conf.d` folder as `http.yaml`.
 
-Once the check is in `checks.d`, you can test it by running it as a python
-script. [Restart the Agent](/agent/faq/start-stop-restart-the-datadog-agent) for the changes to be enabled. **Make sure to change the conf.d path in the test method**. From your
-Agent root, run:
+Once the check is in `checks.d`, test it by running it as a python script. [Restart the Agent](/agent/faq/start-stop-restart-the-datadog-agent) for the changes to be enabled. **Make sure to change the conf.d path in the test method**. From your Agent root, run:
 
     PYTHONPATH=. python checks.d/http.py
 
-You'll see what metrics and events are being generated for each instance.
+And confirm what metrics and events are being generated for each instance.
 
 Here's the full source of the check:
 

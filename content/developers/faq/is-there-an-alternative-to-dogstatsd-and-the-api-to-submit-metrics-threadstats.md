@@ -8,10 +8,10 @@ There is an alternative but it's **only in Python**.
 
 Threadstats comes with our Python [datadogpy library](https://github.com/DataDog/datadogpy/tree/master/datadog) that includes:
 
-1. api, a python wrapper around [our api](/api)
-2. dogshell, that makes it possible to make direct and simple api calls with "dog" shell commands as soon as you have installed datadogpy on your machine
+1. Api, a python wrapper around [our api](/api)
+2. Dogshell, that makes it possible to make direct and simple api calls with "dog" shell commands as soon as you have installed datadogpy on your machine
 3. DogStatsD, a client to send metrics and events to the [DogStatsD server](/developers/dogstatsd) embedded with the datadog-agent, it's the most efficient way to submit many metrics
-4. threadstats, an excellent compromise between the simplicity of direct api calls and the performance of statsd + datadog-agent combination
+4. Threadstats, an excellent compromise between the simplicity of direct api calls and the performance of statsd + datadog-agent combination
 
 ## Threadstats
 
@@ -24,15 +24,15 @@ Threadstats leverage the power of Python threads, to collect metrics asynchronou
 
 To get started with Threadstats:
 
-1. install [datadogpy](https://github.com/DataDog/datadogpy) 
-2. initialize + start threadstats, as shown in this example
-3. use gauge/rate/increment/timing/etc exactly as you would with dogstatsd! 
+1. Install [datadogpy](https://github.com/DataDog/datadogpy) 
+2. Initialize and start threadstats, as shown in this example
+3. Use gauge/rate/increment/timing/etc exactly as you would with dogstatsd! 
 
 Threadstats is good for you if...
 
-1. you want asynchronous monitoring or perfomance close to DogStatsD to submit many metrics and
-2. you don't want to install the datadog-agent
-3. or you want more flexibility than DogStatsD has to offer, for instance, send metrics with timestamps
+1. You want asynchronous monitoring or perfomance close to DogStatsD to submit many metrics and
+2. You don't want to install the datadog-agent
+3. Or you want more flexibility than DogStatsD has to offer, for instance, send metrics with timestamps
 
 ## References
 
