@@ -60,7 +60,7 @@ tracer.configure(
 
 ### Using Docker host IP
 
-Agent container port 8126 should be linked to the host directly, Having determined the address of the default route of this container, with `ip route` for example, you can configure your application tracer to report to it.
+Agent container port `8126` should be linked to the host directly. Having determined the address of the default route of this container, with `ip route` for example, you can configure your application tracer to report to it.
 
 An example in python, assuming `172.17.0.1` is the default route:
 
