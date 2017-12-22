@@ -11,7 +11,7 @@
         {{ $open_parent := (or (and (eq $url_first $element.URL) (ne $element.URL "/")) (eq $url_first_second $element.URL) $active_page) }}
         <li class="{{if $open_parent }}open{{ end }}">
             <a href="{{ $dot.Site.BaseURL }}{{ $element.URL }}" {{if $active_page }}class="active"{{ end }}>
-                {{ if $element.Pre }}{{- partial "img.html" (dict "root" $ctx "src" (print "icons/" ($element.Pre) ".png") "class" "static" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21") -}}{{- partial "img.html" (dict "root" $ctx "src" (print "icons/" ($element.Pre) "_p.png") "class" "hover" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21&bri=100" "disable_lazy" "true") -}}{{ end }} <span>{{ $element.Name }}</span>
+                {{ if $element.Pre }}{{- partial "img.html" (dict "root" $ctx "src" (print "icons/" ($element.Pre) ".png") "class" "static" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21") -}}{{- partial "img.html" (dict "root" $ctx "src" (print "icons/" ($element.Pre) "_p.png") "class" "hover" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21" "disable_lazy" "true") -}}{{ end }} <span>{{ $element.Name }}</span>
             </a>
             {{ if eq $element.Name "Integrations" }}
                 {{/* partial "sidenav/integrations-nav.html" (dict "context" $ctx) */}}
