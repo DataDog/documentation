@@ -144,9 +144,9 @@ $(document).ready(function () {
     }
 
 
-    /*$(window).on('resize scroll', function(e) {
+    $(window).on('resize scroll', function(e) {
         var header_h = $('body > header').height();
-        var footer_h = $('body > footer').height();
-        $('.toc').css('maxHeight', document.documentElement.clientHeight - header_h);
-    });*/
+        var offset = header_h + $('#TableOfContents').position().top;
+        $('.toc').css('maxHeight', document.documentElement.clientHeight - offset);
+    });
 });
