@@ -146,7 +146,8 @@ $(document).ready(function () {
 
     $(window).on('resize scroll', function(e) {
         var header_h = $('body > header').height();
-        var offset = header_h + $('#TableOfContents').position().top;
+        var top = $('#TableOfContents').position() ? $('#TableOfContents').position().top : 0;
+        var offset = header_h + top;
         $('.toc').css('maxHeight', document.documentElement.clientHeight - offset);
     });
 });
