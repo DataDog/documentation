@@ -5,13 +5,11 @@
     ul {
       list-style-type: none;
       li {
-        font-size:22px;
         &:before {
           content: "–";
           position: relative;
-          margin-right: 7px;
-          margin-left: -16px;
-          float: left;
+          margin-right: 3px;
+          margin-left: -12px;
         }
         p {
           margin-bottom: 0;
