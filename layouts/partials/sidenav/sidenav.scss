@@ -124,6 +124,7 @@ aside.sidenav {
         padding-left:27px;
         a {
           padding:0;
+          padding-bottom: 3px;
         }
       }
     }
@@ -146,7 +147,6 @@ aside.sidenav {
             background:$ddpurple;
             border-radius:4px;
             color: #fff;
-            font-weight:600;
           }
           .hover {
             display:none;
