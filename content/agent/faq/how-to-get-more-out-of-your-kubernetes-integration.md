@@ -1,7 +1,6 @@
 ---
 title: How to get more out of your Kubernetes integration ?
 kind: faq
-customnav: agentnav
 further_reading:
 - link: "/agent/"
   tag: "Documentation"

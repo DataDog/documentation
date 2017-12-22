@@ -1,7 +1,6 @@
 ---
 title: How to remove the host tag when submitting metrics via dogstatsD
 kind: faq
-customnav: developersnav
 ---
 
 In some cases you may want to take advantage of the features available with dogstatsD but do not necessarily need to view the metrics broken down by a host tag or may be looking to reduce the number of tags on a given metric.

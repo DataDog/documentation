@@ -1,7 +1,6 @@
 ---
 title: Agent Check reports "OK" but Monitor shows Critical
 kind: faq
-customnav: agentnav
 further_reading:
 - link: "/agent/"
   tag: "Documentation"

@@ -1,7 +1,6 @@
 ---
 title: How Can I Submit A Custom Status Check?
 kind: faq
-customnav: developersnav
 ---
 
 Custom status checks can be submitted either through the Datadog API, DogStatsD, or through a custom agent check. All status checks must have one of the following status codes:

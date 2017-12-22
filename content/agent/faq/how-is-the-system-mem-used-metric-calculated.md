@@ -1,7 +1,6 @@
 ---
 title: How is the 'system.mem.used' metric calculated?
 kind: faq
-customnav: agentnav
 further_reading:
 - link: "/developers/metrics"
   tag: "Documentation"

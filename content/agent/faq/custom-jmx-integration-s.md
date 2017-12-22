@@ -1,7 +1,6 @@
 ---
 title: Custom JMX Integration(s)
 kind: faq
-customnav: agentnav
 ---
 
 Java Management Extension (JMX) is the de facto method for emitting performance metrics and other stats from Java based applications, Datadog takes advantage of JMX for a number of applications today such as Cassandra, Kafka and more.

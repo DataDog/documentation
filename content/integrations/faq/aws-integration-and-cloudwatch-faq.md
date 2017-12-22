@@ -1,7 +1,6 @@
 ---
 title: AWS Integration and CloudWatch FAQ
 kind: faq
-customnav: integrationsnav
 ---
 
 ## Can I collect AWS Custom metrics through the Integration?

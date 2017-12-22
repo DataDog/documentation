@@ -1,7 +1,6 @@
 ---
 title: How to monitor SNMP devices?
 kind: faq
-customnav: agentnav
 further_reading:
 - link: "/agent/"
   tag: "Documentation"

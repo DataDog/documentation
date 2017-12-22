@@ -1,7 +1,6 @@
 ---
 title: How to Transform a Timeboard to a Screenboard or vice versa ?
 kind: faq
-customnav: graphingnav
 ---
 
 To transform a TimeBoard to a ScreenBoard you can use the [script here](https://github.com/DataDog/Miscellany/blob/master/dashconverter.py).

@@ -1,7 +1,6 @@
 ---
 title: Datadog security in Docker production environments
 kind: faq
-customnav: agentnav
 further_reading:
 - link: "/agent/basic_agent_usage/docker"
   tag: "Documentation"

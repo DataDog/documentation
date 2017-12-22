@@ -1,8 +1,6 @@
 ---
 title: Metric monitor
 kind: documentation
-autotocdepth: 3
-customnav: monitortypenav
 description: "Compare values of a metric with a user defined threshold"
 further_reading:
 - link: "/monitors/notifications"

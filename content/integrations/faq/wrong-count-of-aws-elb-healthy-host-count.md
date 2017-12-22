@@ -1,7 +1,6 @@
 ---
 title: Wrong count of aws.elb.healthy_host_count?
 kind: faq
-customnav: integrationsnav
 ---
 
 When the Cross-Zone Load Balancing option is enabled on an ELB, all the instances attached to this ELB are considered part of all A-Zs (on cloudwatch’s side), so if you have 2 instances in 1a and 3 in 1b, the metric will display 5 instances per A-Z.

@@ -1,7 +1,6 @@
 ---
 title: Monitor FAQ
 kind: faq
-customnav: monitornav
 ---
 
 {{< whatsnext desc="List of Frequently Asked Questions:">}}

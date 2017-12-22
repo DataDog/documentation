@@ -1,8 +1,6 @@
 ---
 title: Graphing
 kind: documentation
-autotocdepth: 3
-customnav: graphingnav
 alias:
     - /guides/graphing
 description: Visualize your data to gain insight

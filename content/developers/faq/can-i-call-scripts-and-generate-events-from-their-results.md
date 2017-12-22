@@ -1,7 +1,6 @@
 ---
 title: Can I call scripts and generate events from their results?
 kind: faq
-customnav: developersnav
 ---
 
 ## Dogwrap

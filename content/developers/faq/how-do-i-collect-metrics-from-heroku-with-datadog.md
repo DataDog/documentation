@@ -1,7 +1,6 @@
 ---
 title: How do I collect metrics from Heroku with Datadog?
 kind: faq
-customnav: developersnav
 ---
 
 Mike Fiedler wrote an excellent blog post describing how to collect application performance metrics from Heroku via Datadog:

@@ -1,7 +1,6 @@
 ---
 title: As a parent account admin, how do I create new sub-organizations?
 kind: faq
-customnav: accountmanagementnav
 ---
 
 Users can access the [Create New Organization](/account_management/multi_organization) feature in the settings (reach out to your account rep. to enable this feature).  

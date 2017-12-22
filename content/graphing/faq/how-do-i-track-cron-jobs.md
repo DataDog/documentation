@@ -1,7 +1,6 @@
 ---
 title: How do I track cron jobs?
 kind: faq
-customnav: graphingnav
 ---
 
 Often, you set cron jobs that trigger some meaningful script that you want to monitor and

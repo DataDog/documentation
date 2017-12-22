@@ -1,7 +1,6 @@
 ---
 title: What are the required IP's and ports I need open to connect to the Datadog service?
 kind: faq
-customnav: accountmanagementnav
 ---
 
 Traffic is always initiated by the agent to the Datadog service. No sessions are ever initiated from Datadog back to the agent. 

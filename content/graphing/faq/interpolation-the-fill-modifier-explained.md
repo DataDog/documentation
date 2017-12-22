@@ -1,7 +1,6 @@
 ---
 title: Interpolation & the fill modifier explained
 kind: faq
-customnav: graphingnav
 ---
 
 ## Why interpolation?

@@ -1,8 +1,6 @@
 ---
 title: Graphing Functions
 kind: documentation
-autotocdepth: 2
-customnav: graphingnav
 aliases: 
   - /examples/aws-metrics/
   - /examples/month_before/

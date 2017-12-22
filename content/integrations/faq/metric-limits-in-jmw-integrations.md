@@ -1,7 +1,6 @@
 ---
 title: Metric limits in JMX integrations
 kind: faq
-customnav: integrationsnav
 ---
 
 JMX integrations such as: [Cassandra](/integrations/cassandra), [Tomcat](/integrations/tomcat), [Kafka](/integrations/kafka), etc... can potentially generate thousands of metrics and by default, these integrations are limited to 350. If you'd like this number increased, email [us](/help)

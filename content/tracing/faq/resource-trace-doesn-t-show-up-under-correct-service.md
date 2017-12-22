@@ -1,8 +1,6 @@
 ---
 title: Resource/Trace doesn't show up under correct Service
 kind: faq
-autotocdepth: 3
-customnav: tracingnav
 ---
 
 When using a custom instrumentation of your application, if you notice any Resources/Traces in the Datadog UI that aren’t coupled the Service you expect, the most likely scenario is explained below.

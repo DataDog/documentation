@@ -1,7 +1,6 @@
 ---
 title: Log Management - Surveys and Beta Application
 kind: faq
-customnav: lognav
 ---
 
 Datadog is building a log management solution to complement and integrate with its Infrastructure and Application Performance Monitoring solutions. Its log management features are not yet generally available, but you can apply to participate in its [beta here](https://www.datadoghq.com/log-management/), and you can help today by sharing your own experience/interests with log management by completing the following surveys:

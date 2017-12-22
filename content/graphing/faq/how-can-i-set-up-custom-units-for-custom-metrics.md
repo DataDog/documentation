@@ -1,7 +1,6 @@
 ---
 title: How can I set up custom units for custom metrics?
 kind: faq
-customnav: graphingnav
 ---
 
 When submitting custom metrics to Datadog, it is possible to change the [unit of measurement](/developers/metrics/#units) which shows up when hovering over a certain metric in your graph. Note: This will not actually change the way that the graph is displayed (only the units of measurement when hovering over a metric)

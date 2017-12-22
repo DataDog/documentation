@@ -1,7 +1,6 @@
 ---
 title: Log Locations
 kind: faq
-customnav: agentnav
 further_reading:
 - link: "/agent/"
   tag: "Documentation"

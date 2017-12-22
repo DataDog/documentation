@@ -1,7 +1,6 @@
 ---
 title: I'm having problems with DogStatsD - where is the log for this?
 kind: faq
-customnav: agentnav
 further_reading:
 - link: "/agent/"
   tag: "Documentation"

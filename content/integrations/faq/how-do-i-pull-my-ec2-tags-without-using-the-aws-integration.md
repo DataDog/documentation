@@ -1,7 +1,6 @@
 ---
 title: How do I pull my EC2 tags without using the AWS integration ?
 kind: faq
-customnav: integrationsnav
 ---
 
 In order to pull AWS tags for an EC2 instance through the Datadog Agent follow these steps:

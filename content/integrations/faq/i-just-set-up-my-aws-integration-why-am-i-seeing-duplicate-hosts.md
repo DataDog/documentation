@@ -1,7 +1,6 @@
 ---
 title: I just set up my AWS integration. Why am I seeing duplicate hosts?
 kind: faq
-customnav: integrationsnav
 ---
 
 There are three scenarios you may be encountering:

@@ -1,7 +1,6 @@
 ---
 title: What is the granularity of my graphs? Am I seeing raw data or aggregates on my graph?
 kind: faq
-customnav: graphingnav
 ---
 
 Most of the time what you see on graphs are not the real value you submitted but local aggregates.

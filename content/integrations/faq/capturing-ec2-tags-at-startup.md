@@ -1,7 +1,6 @@
 ---
 title: Capturing EC2 tags at startup
 kind: faq
-customnav: integrationsnav
 ---
 
 ## Goal: capture all EC2 tags at startup

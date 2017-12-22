@@ -1,7 +1,6 @@
 ---
 title: Log Collection
 kind: Documentation
-customnav: lognav
 description: "Configure your Datadog agent to gather logs from your host, containers & services."
 ---
 

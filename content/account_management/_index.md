@@ -1,8 +1,6 @@
 ---
 title: Account Management
 kind: documentation
-autotocdepth: 2
-customnav: accountmanagementnav
 aliases:
     - /guides/billing
     - /account_management/settings

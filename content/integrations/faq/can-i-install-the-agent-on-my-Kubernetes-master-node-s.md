@@ -1,7 +1,6 @@
 ---
 title: Can I install the agent on my Kubernetes master node(s)
 kind: faq
-customnav: integrationsnav
 ---
 
 Yes!

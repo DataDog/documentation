@@ -1,8 +1,6 @@
 ---
 title: Event monitor
 kind: documentation
-autotocdepth: 3
-customnav: monitortypenav
 description: "Monitor events gathered by Datadog"
 further_reading:
 - link: "/monitors/notifications"

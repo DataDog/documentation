@@ -1,7 +1,6 @@
 ---
 title: Agent
 kind: documentation
-customnav: agentnav
 description: Install & configure the Agent to collect data
 ---
 

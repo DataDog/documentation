@@ -1,8 +1,6 @@
 ---
 title: Creating New Integrations
 kind: documentation
-autotocdepth: 2
-customnav: developersnav
 aliases:
   - /guides/integration_sdk/
 ---

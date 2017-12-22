@@ -1,7 +1,6 @@
 ---
 title: How can I setup an alert for when a specific tag stops reporting?
 kind: faq
-customnav: monitornav
 further_reading:
 - link: "/monitors/monitor_types"
   tag: "Documentation"

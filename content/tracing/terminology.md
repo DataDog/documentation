@@ -1,8 +1,6 @@
 ---
 title: Tracing Terminology
 kind: Documentation
-autotocdepth: 2
-customnav: tracingnav
 ---
 ## Overview
 

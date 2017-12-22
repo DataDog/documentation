@@ -1,7 +1,6 @@
 ---
 title: Dashboard loads very slowly/displays no data, but I'm correctly sending data to Datadog
 kind: faq
-customnav: graphingnav
 ---
 
 Does your dashboard or graph take a long time to load? When you look at larger time period, does it take a longer time to load, or even completely fail to load?

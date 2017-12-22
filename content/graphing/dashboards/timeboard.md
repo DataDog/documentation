@@ -1,8 +1,6 @@
 ---
 title: Timeboard
 kind: documentation
-autotocdepth: 3
-customnav: graphingnav
 ---
 
 ## Change Timeboard name

@@ -1,7 +1,6 @@
 ---
 title: Get your AutoScaling Group events and metrics
 kind: faq
-customnav: integrationsnav
 ---
 
 Our autoscaling integration does two things:

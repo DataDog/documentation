@@ -1,7 +1,6 @@
 ---
 title: Where are my ELB latency metrics?
 kind: faq
-customnav: integrationsnav
 ---
 
 You may already be familiar with the following metrics for monitoring latency in ELB responses:

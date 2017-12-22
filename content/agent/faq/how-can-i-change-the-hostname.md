@@ -1,7 +1,6 @@
 ---
 title: How can I change the hostname?
 kind: faq
-customnav: agentnav
 further_reading:
 - link: "/agent/"
   tag: "Documentation"

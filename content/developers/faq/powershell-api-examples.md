@@ -1,7 +1,6 @@
 ---
 title: Powershell api examples
 kind: faq
-customnav: main_references
 ---
 
 [Datadog api](/api) docs has shell examples only for Unix.

@@ -1,7 +1,6 @@
 ---
 title: Graphing FAQ
 kind: faq
-customnav: graphingnav
 ---
 
 {{< whatsnext desc="List of Frequently Asked Questions:" >}}

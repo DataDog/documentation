@@ -1,7 +1,6 @@
 ---
 title: How do I do arithmetic with grouped metrics?
 kind: faq
-customnav: graphingnav
 ---
 
 To graph the sum of `app.foo.bar{env:staging}` and `app.foo.baz{env:staging}`

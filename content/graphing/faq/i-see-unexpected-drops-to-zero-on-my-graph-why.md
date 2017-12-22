@@ -1,7 +1,6 @@
 ---
 title: I see unexpected drops to zero on my graph, why?
 kind: faq
-customnav: graphingnav
 ---
 
 With stacked series ("Graph theses queries as a; b") or grouped queries ("avg by host"), you'll have several metric lines on the same graph and you may occasionally see some graph lines dropping back to 0:

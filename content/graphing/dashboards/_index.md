@@ -1,8 +1,6 @@
 ---
 title: Dashboards
 kind: documentation
-autotocdepth: 3
-customnav: graphingnav
 aliases:
     - /guides/templating/
 ---

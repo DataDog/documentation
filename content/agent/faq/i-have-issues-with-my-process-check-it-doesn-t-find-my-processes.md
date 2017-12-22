@@ -1,7 +1,6 @@
 ---
 title: I have issues with my process check, it doesn't find my processes!
 kind: faq
-customnav: agentnav
 further_reading:
 - link: "/agent/"
   tag: "Documentation"

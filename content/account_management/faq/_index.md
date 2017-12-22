@@ -1,7 +1,6 @@
 ---
 title: Account Management FAQ
 kind: faq
-customnav: accountmanagementnav
 ---
 
 ## Account Management

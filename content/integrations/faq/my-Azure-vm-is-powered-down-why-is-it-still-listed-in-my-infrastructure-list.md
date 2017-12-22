@@ -1,7 +1,6 @@
 ---
 title: My Azure VM is powered down... why is it still listed in my infrastructure list?
 kind: faq
-customnav: integrationsnav
 ---
 
 When you power down your VMs in Azure, your Azure integration will still continue to collect one metric for that VM, specifically azure.vm.status, which gets tagged by status:running or status:not_running.

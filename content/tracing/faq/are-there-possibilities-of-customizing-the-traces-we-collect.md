@@ -1,8 +1,6 @@
 ---
 title: Are there possibilities of customizing the traces we collect?
 kind: faq
-autotocdepth: 3
-customnav: tracingnav
 ---
 
 Our product does both: 

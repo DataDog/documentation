@@ -1,7 +1,6 @@
 ---
 title: Apache SSL certificate issues
 kind: faq
-customnav: integrationsnav
 ---
 
 If you're having issues with your Apache integration, it may be because the upgraded version of Python in agent version 5.2 has bug fixes concerning SSL certificates.

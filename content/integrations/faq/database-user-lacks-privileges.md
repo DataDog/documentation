@@ -1,7 +1,6 @@
 ---
 title: Database user lacks privileges
 kind: faq
-customnav: integrationsnav
 ---
 
 ```

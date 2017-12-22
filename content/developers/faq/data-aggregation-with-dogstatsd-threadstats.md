@@ -1,7 +1,6 @@
 ---
 title: Data aggregation with dogstatsd/Threadstats
 kind: faq
-customnav: developersnav
 ---
 
 The statsd protocol is a great setup to fire many metrics and monitor your application code without blocking HTTP calls. Data is sampled in your application code then is transmitted via UDP to the [DogStatsD server](/developers/dogstatsd) (embedded in the dd-agent) that aggregates then sends data to Datadog api endpoint. [Read more about the DogStatsD setup](/developers/dogstatsd):

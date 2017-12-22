@@ -1,8 +1,6 @@
 ---
 title: Team
 kind: documentation
-autotocdepth: 2
-customnav: accountmanagementnav
 further_reading:
 - link: "/account_management/saml"
   tag: "Documentation"

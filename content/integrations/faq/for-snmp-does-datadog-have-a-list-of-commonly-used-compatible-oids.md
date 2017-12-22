@@ -1,7 +1,6 @@
 ---
 title: For SNMP, does Datadog have a list of commonly used/compatible OIDs?  
 kind: faq
-customnav: integrationsnav
 ---
 
 For Cisco devices, you can use the command:

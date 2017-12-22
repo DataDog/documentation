@@ -1,7 +1,6 @@
 ---
 title: Azure VMs are showing up in the App but not reporting metrics
 kind: faq
-customnav: integrationsnav
 ---
 
 After properly installing the Azure Integration within Datadog, metrics from you Azure VMs and other services should begin to flow in ~15 minutes.

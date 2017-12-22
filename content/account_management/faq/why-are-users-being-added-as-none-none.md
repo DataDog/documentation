@@ -1,7 +1,6 @@
 ---
 title: Why are users being added as "none none"?
 kind: faq
-customnav: accountmanagementnav
 ---
 
 Sometimes when a user first signs into [Datadog via SAML / SSO](/account_management/saml), their names are displayed on the team page as "none none" in place of their username.  

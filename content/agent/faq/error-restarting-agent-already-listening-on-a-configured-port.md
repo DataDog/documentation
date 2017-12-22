@@ -1,7 +1,6 @@
 ---
 title: Error Restarting Agent, Already Listening on a Configured Port
 kind: faq
-customnav: agentnav
 further_reading:
 - link: "/agent/"
   tag: "Documentation"

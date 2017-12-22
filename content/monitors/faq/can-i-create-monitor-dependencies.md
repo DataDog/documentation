@@ -1,7 +1,6 @@
 ---
 title: Can I create monitor dependencies?
 kind: faq
-customnav: monitornav
 further_reading:
 - link: "/monitors/monitor_types"
   tag: "Documentation"

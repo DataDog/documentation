@@ -1,7 +1,6 @@
 ---
 title: AWS Log Collection
 kind: Documentation
-customnav: lognav
 further_reading:
 - link: "/logs/explore"
   tag: "Documentation"

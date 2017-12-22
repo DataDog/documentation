@@ -1,7 +1,6 @@
 ---
 title: OmniOS (and possibly SmartOS/OpenIndiana/Nexenta), install from source by tweaking the agent install script 
 kind: faq
-customnav: developersnav
 ---
 
 OmnisOS isn't an OS supported by Datadog, and the [install from source](https://app.datadoghq.com/account/settings#agent/source) doesn't directly work.

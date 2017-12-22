@@ -1,7 +1,6 @@
 ---
 title: Installing Core & Extra Integrations
 kind: documentation
-customnav: agentnav
 aliases:
     - /guides/installcoreextra/
 ---

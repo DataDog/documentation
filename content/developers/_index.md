@@ -1,7 +1,6 @@
 ---
 title: Developer Tools
 kind: documentation
-customnav: developersnav
 description: Collect custom metrics & create new integration
 ---
 

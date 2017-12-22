@@ -1,7 +1,6 @@
 ---
 title: Agent Version Wrong on Infrastructure Page?
 kind: faq
-customnav: agentnav
 further_reading:
 - link: "/agent/"
   tag: "Documentation"

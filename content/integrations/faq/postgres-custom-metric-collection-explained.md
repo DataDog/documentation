@@ -1,7 +1,6 @@
 ---
 title: Postgres custom metric collection explained
 kind: faq
-customnav: integrationsnav
 ---
 
 ## Context

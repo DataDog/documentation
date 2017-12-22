@@ -1,7 +1,6 @@
 ---
 title: Query data to a text file, step by step
 kind: faq
-customnav: main_references
 ---
 
 This article explains how to set up the environment to make the most of the API. At the end you should be able to understand how to pull or push events, metrics and monitors from [our public API's](/api) to a local file.

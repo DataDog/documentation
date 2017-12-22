@@ -1,7 +1,6 @@
 ---
 title: Reduce submission rate
 kind: faq
-customnav: main_references
 ---
 
 Each metric point is sent over UDP to the StatsD server. This can incur a lot

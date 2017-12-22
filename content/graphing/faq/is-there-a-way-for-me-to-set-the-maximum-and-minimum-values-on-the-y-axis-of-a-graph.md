@@ -1,7 +1,6 @@
 ---
 title: Is there a way for me to set the maximum and minimum values on the y-axis of a graph?
 kind: faq
-customnav: graphingnav
 ---
 
 ## Scenario

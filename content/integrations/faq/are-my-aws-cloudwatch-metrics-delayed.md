@@ -1,7 +1,6 @@
 ---
 title: Are my AWS CloudWatch metrics delayed?
 kind: faq
-customnav: integrationsnav
 ---
 
 When using the AWS integration, we’re pulling in metrics via the CloudWatch API. You may see a slight delay in metrics from AWS due to some constraints that exist for their API.

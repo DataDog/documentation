@@ -1,7 +1,6 @@
 ---
 title: DogStatsD
 kind: documentation
-customnav: developersnav
 description: This page explains what DogStatsD is, how it works, and what data it accepts.
 aliases:
   - /guides/dogstatsd/

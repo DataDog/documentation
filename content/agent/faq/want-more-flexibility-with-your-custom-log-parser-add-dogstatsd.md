@@ -1,7 +1,6 @@
 ---
 title: Want more flexibility with your custom log parser? Add dogstatsd
 kind: faq
-customnav: agentnav
 further_reading:
 - link: "/agent/"
   tag: "Documentation"

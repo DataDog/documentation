@@ -1,7 +1,6 @@
 ---
 title: Where is the configuration file for the Agent?
 kind: faq
-customnav: agentnav
 further_reading:
 - link: "/agent/"
   tag: "Documentation"

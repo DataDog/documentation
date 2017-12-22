@@ -1,7 +1,6 @@
 ---
 title: Hadoop Distributed File System (HDFS) Integration Error
 kind: faq
-customnav: integrationsnav
 ---
 
 If you are getting an error when integrating with HDFS first try upgrading pip and Snakebite by following these steps:

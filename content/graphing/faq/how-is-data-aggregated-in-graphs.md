@@ -1,7 +1,6 @@
 ---
 title: How is data aggregated in graphs?
 kind: faq
-customnav: graphingnav
 ---
 
 Within Datadog, a graph can only contain a set number of points and, as the timeframe over which a metric is viewed increases, aggregation between points occurs to stay below that set number.

@@ -1,7 +1,6 @@
 ---
 title: Sending Metrics with DogStatsD
 kind: documentation
-customnav: developersnav
 js_dd_docs_methods:
   - metricsGuidePage
 code_languages:

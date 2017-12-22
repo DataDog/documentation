@@ -1,7 +1,6 @@
 ---
 title: How can I graph the percentage change between an earlier value and a current value?
 kind: faq
-customnav: graphingnav
 ---
 
 If you want to visualize how a metric's values have changed in comparison to an earlier time period, you can do so by leveraging the timeshift functions [detailed here](/graphing/miscellaneous/functions). Currently, you can capture a metric's value from an hour, day, week, or month before. 

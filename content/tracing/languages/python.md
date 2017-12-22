@@ -1,8 +1,6 @@
 ---
 title: Tracing Python Applications
 kind: Documentation
-autotocdepth: 2
-customnav: tracingnav
 aliases:
 - /tracing/python/
 ---

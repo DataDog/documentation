@@ -1,7 +1,6 @@
 ---
 title: Getting started with tags
 kind: documentation
-customnav: gettingstartednav
 ---
 
 ## Introduction

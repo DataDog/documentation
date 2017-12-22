@@ -1,8 +1,6 @@
 ---
 title: Check summary
 kind: documentation
-autotocdepth: 2
-customnav: monitornav
 further_reading:
 - link: "/monitors/monitor_types"
   tag: "Documentation"

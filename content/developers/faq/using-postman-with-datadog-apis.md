@@ -1,7 +1,6 @@
 ---
 title: Using Postman With Datadog APIs
 kind: faq
-customnav: main_references
 ---
 
 ## Overview

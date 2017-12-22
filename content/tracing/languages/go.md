@@ -1,8 +1,6 @@
 ---
 title: Tracing Go Applications
 kind: Documentation
-autotocdepth: 2
-customnav: tracingnav
 aliases:
 - /tracing/go/
 ---

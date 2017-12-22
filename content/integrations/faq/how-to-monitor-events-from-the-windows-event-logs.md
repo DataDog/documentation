@@ -1,7 +1,6 @@
 ---
 title: How to monitor events from the Windows Event Logs ?
 kind: faq
-customnav: integrationsnav
 ---
 
 With the Windows version of the Datadog Agent, it is possible to post Events to your [Event Stream](/graphing/event_stream/) based on logs from the Windows Event Log.

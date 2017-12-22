@@ -1,10 +1,8 @@
 ---
 title: Host Map Overview
 kind: documentation
-autotocdepth: 3
 aliases:
   - /infrastructure/hostmap/
-customnav: infrastructurenav
 further_reading:
 - link: "/graphing/infrastructure/livecontainers"
   tag: "Graphing"

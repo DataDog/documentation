@@ -1,7 +1,6 @@
 ---
 title: Characteristics of Datadog histograms.
 kind: faq
-customnav: developersnav
 ---
 
 ## Characteristics of Datadog histograms?

@@ -1,7 +1,6 @@
 ---
 title: Log Collection Troubleshooting Guide
 kind: faq
-customnav: lognav
 further_reading:
 - link: "/logs/"
   tag: "Documentation"

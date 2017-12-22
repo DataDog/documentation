@@ -1,7 +1,6 @@
 ---
 title: Dogshell, Quickly Use Datadog’s API from Terminal/Shell
 kind: faq
-customnav: main_references
 ---
 
  

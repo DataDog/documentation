@@ -1,7 +1,6 @@
 ---
 title: Common Windows Agent Installation Error 1721
 kind: faq
-customnav: agentnav
 further_reading:
 - link: "/agent/"
   tag: "Documentation"

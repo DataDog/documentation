@@ -1,8 +1,6 @@
 ---
 title: Testing Integrations
 kind: documentation
-autotocdepth: 2
-customnav: developersnav
 aliases:
    - /guides/testing/
 ---

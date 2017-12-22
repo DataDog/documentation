@@ -1,7 +1,6 @@
 ---
 title: The same color is used twice in my graph!
 kind: faq
-customnav: graphingnav
 ---
 
 The same color may be used twice in a graph when the Classic palette is selected and this may be a little confusing.

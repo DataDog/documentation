@@ -1,7 +1,6 @@
 ---
 title: How to graph percentiles in Datadog?
 kind: faq
-customnav: graphingnav
 ---
 
 ## DogStatsD implementation

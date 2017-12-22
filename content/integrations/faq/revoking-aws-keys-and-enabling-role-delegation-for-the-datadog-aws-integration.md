@@ -1,7 +1,6 @@
 ---
 title: Revoking AWS keys and enabling Role Delegation for the Datadog AWS Integration.
 kind: faq
-customnav: integrationsnav
 ---
 
 Prior to revoking your AWS Keys you'll want to configure AWS Role Delegation in your AWS Console, to do so:

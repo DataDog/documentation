@@ -1,7 +1,6 @@
 ---
 title: Why should I install the agent on my AWS instances?
 kind: faq
-customnav: agentnav
 ---
 
 If you use AWS CloudWatch or another cloud-based metrics provider, you may already be getting some metrics for your hosts. However, installing the [Datadog agent](/agent/) on these hosts gives you a number of benefits, including:

@@ -1,8 +1,6 @@
 ---
 title: Widgets
 kind: documentation
-autotocdepth: 2
-customnav: graphingnav
 ---
 
 Use widgets through the [Screenboard API](/api/#screenboards):

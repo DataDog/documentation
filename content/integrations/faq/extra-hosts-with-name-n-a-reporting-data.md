@@ -1,7 +1,6 @@
 ---
 title: Extra hosts with name "N/A" reporting data
 kind: faq
-customnav: integrationsnav
 ---
 
 After enabling the CloudWatch integration, you might see a metric reporting from a node named "N/A". Some AWS crawlers send an aggregate metric in addition to the per-node metrics.

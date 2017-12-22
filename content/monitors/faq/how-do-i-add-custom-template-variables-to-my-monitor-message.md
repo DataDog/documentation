@@ -1,7 +1,6 @@
 ---
 title: How do I add custom template variables to my monitor message?
 kind: faq
-customnav: monitornav
 further_reading:
 - link: "/monitors/monitor_types"
   tag: "Documentation"

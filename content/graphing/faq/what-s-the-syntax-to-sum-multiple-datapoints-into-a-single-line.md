@@ -1,7 +1,6 @@
 ---
 title: What's the syntax to sum multiple datapoints into a single line?
 kind: faq
-customnav: graphingnav
 ---
 
 Switch commas separating the queries into plus signs, from:

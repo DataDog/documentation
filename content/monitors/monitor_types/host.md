@@ -1,8 +1,6 @@
 ---
 title: Host monitor
 kind: documentation
-autotocdepth: 3
-customnav: monitortypenav
 description: "Check if one or more hosts are reporting to Datadog"
 further_reading:
 - link: "/monitors/notifications"

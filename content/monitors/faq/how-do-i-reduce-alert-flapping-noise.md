@@ -1,7 +1,6 @@
 ---
 title: How do I reduce alert flapping / noise?
 kind: faq
-customnav: monitornav
 further_reading:
 - link: "/monitors/faq/how-do-i-setup-conditional-contacts-and-messages-in-a-single-monitor"
   tag: "FAQ"

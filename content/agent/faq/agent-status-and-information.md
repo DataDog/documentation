@@ -1,7 +1,6 @@
 ---
 title: Agent Status and Information
 kind: faq
-customnav: agentnav
 further_reading:
 - link: "/agent/"
   tag: "Documentation"

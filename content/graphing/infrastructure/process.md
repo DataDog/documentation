@@ -1,11 +1,9 @@
 ---
 title: Datadog Process and Container Monitoring
 kind: documentation
-autotocdepth: 3
 aliases:
   - /guides/process
   - /infrastructure/process/
-customnav: infrastructurenav
 further_reading:
 - link: "/graphing/infrastructure/hostmap"
   tag: "Graphing"

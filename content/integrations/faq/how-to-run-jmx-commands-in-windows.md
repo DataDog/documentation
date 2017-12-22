@@ -1,7 +1,6 @@
 ---
 title: How to run JMX commands in Windows?
 kind: faq
-customnav: integrationsnav
 ---
 
 If you are monitoring a JMX application with a Windows Agent, you can get access to the same [troubleshooting tools](/integrations/java/) that are available on Linux.

@@ -1,7 +1,6 @@
 ---
 title: Elasticsearch Agent cannot connect.
 kind: faq
-customnav: integrationsnav
 ---
 
 ```

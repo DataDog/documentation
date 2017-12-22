@@ -1,8 +1,6 @@
 ---
 title: APM (Tracing)
 kind: Documentation
-autotocdepth: 2
-customnav: tracingnav
 description: Instrument your code to improve performance
 ---
 

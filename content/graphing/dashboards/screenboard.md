@@ -1,8 +1,6 @@
 ---
 title: Screenboard
 kind: documentation
-autotocdepth: 3
-customnav: graphingnav
 ---
 
 ## Change Screenboard name 

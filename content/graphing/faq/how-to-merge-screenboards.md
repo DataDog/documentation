@@ -1,7 +1,6 @@
 ---
 title: How to Merge Screenboards ?
 kind: faq
-customnav: graphingnav
 ---
 
 If you want to merge screenboards together, you will first have to get the ID of each of them (The ID can be found in the URL of the dashboards).

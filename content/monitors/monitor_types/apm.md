@@ -1,8 +1,6 @@
 ---
 title: APM monitor
 kind: documentation
-autotocdepth: 3
-customnav: monitortypenav
 description: "Compare an APM metric to a user defined threshold"
 further_reading:
 - link: "/monitors/notifications"

@@ -1,11 +1,9 @@
 ---
 title: Managing Multiple-Organization Accounts
 kind: documentation
-autotocdepth: 2
 aliases:
   - /guides/multiaccountorg
   - /account_management/mult_account
-customnav: accountmanagementnav
 further_reading:
 - link: "/account_management/saml"
   tag: "Documentation"

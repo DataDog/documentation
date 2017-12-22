@@ -1,7 +1,6 @@
 ---
 title: Collect Custom Windows Performance Counters over WMI
 kind: faq
-customnav: integrationsnav
 ---
 
 Datadog's WMI integration is a very versatile approach to collecting relevant metrics from your Windows environments. As long as you're able to query a WMI object for a numerical value, you'll be able to configure your dd-agent's WMI check to run the same query and collect its results as a metric (find a great guide [on how to retrieve WMI metrics](/integrations/faq/how-to-retrieve-wmi-metrics)).

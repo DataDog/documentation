@@ -1,7 +1,6 @@
 ---
 title: Graphing Primer using JSON
 kind: documentation
-customnav: graphingnav
 aliases:
     - /graphingjson/
 ---

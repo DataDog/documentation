@@ -1,7 +1,6 @@
 ---
 title: Why is my AWS error count metric orders of magnitude lower in Datadog than Cloudwatch?
 kind: faq
-customnav: integrationsnav
 ---
 
 An error count metric provided to Datadog from Cloudwatch is a number of errors per minute. Because all Datadog metrics are stored at a 1s resolution, we divide this by 60 during our post-processing.

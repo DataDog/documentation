@@ -1,7 +1,6 @@
 ---
 title: I have a downtime scheduled on my monitor, why did it still alert?!
 kind: faq
-customnav: monitornav
 further_reading:
 - link: "/monitors/monitor_types"
   tag: "Documentation"

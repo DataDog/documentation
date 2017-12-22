@@ -1,7 +1,6 @@
 ---
 title: Gathering Kubernetes events
 kind: faq
-customnav: integrationsnav
 ---
 
 As of the 5.17.0 release, the Datadog Agent supports built in leader election for the Kubernetes event collector.

@@ -1,7 +1,6 @@
 ---
 title: How do I change the frequency of an agent check?
 kind: faq
-customnav: agentnav
 further_reading:
 - link: "/agent/"
   tag: "Documentation"

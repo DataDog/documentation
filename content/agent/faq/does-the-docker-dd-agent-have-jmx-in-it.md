@@ -1,7 +1,6 @@
 ---
 title: Does the docker dd-agent have JMX in it?
 kind: faq
-customnav: agentnav
 further_reading:
 - link: "/agent/"
   tag: "Documentation"

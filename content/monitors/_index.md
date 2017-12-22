@@ -1,8 +1,6 @@
 ---
 title: Alerting
 kind: documentation
-autotocdepth: 2
-customnav: monitornav
 aliases:
     - /guides/monitors/
 description: Create & manage your notifications

@@ -1,7 +1,6 @@
 ---
 title: How can I gather metrics from the UNIX shell?
 kind: faq
-customnav: integrationsnav
 ---
 
 To gather metrics from the UNIX command line, we can use the unannounced shell integration.

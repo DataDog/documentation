@@ -1,10 +1,8 @@
 ---
 title: Single Sign On With SAML
 kind: documentation
-autotocdepth: 2
 aliases:
   - /guides/saml
-customnav: accountmanagementnav
 further_reading:
 - link: "/account_management/multi_organization"
   tag: "Documentation"

@@ -1,7 +1,6 @@
 ---
 title: Redis Integration Error, "unknown command 'CONFIG'"
 kind: faq
-customnav: integrationsnav
 ---
 
 The Redis integration will report this error due to the Redis config command being disabled by AWS. Datadog's Redis integration uses the config command to retrieve only one metric, the error should not affect the collection of all other Redis metrics.

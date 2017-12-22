@@ -1,7 +1,6 @@
 ---
 title: Correlate metrics and events using dashboard template variables
 kind: faq
-customnav: graphingnav
 ---
 
 Dashboard template variables allows you to dynamically explore metrics across different sets of tags by using variables instead of specific tags. The event overlay search can be helpful to correlate metrics to events and you can use dashboard template variables to find events that share certain tags with the metrics on your dashboard. The event overlay search can be [applied through an individual graph](/graphing/faq/how-do-i-overlay-events-onto-my-dashboards), but you can also use it across an entire dashboard.

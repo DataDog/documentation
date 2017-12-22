@@ -1,7 +1,6 @@
 ---
 title: I've set up the JIRA integration, now how do I get events and tickets created?
 kind: faq
-customnav: integrationsnav
 ---
 
 ## Configuration

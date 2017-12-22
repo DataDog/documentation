@@ -1,7 +1,6 @@
 ---
 title: Duplicate Hosts for Google Cloud Engine
 kind: faq
-customnav: agentnav
 further_reading:
 - link: "/integrations/google_app_engine"
   tag: "Integration"

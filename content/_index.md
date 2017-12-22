@@ -1,7 +1,6 @@
 ---
 title: Datadog Docs
 kind: documentation
-customnav: main_references
 aliases:
   - /basic_agent_usage/
   - /guides/

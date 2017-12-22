@@ -1,7 +1,6 @@
 ---
 title: I'm receiving a 202 but not seeing data
 kind: faq
-customnav: developersnav
 ---
 
 We do very minimal error checking on the API front-end, as we queue all data for asynchronous processing (the goal being to always, always accept your data in production situations and decouple our systems from yours).

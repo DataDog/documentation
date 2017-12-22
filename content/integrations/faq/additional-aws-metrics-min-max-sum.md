@@ -1,7 +1,6 @@
 ---
 title: Additional AWS Metrics - Min/Max/Sum
 kind: faq
-customnav: integrationsnav
 ---
 
 Overall, min/max/avg have a different meaning within AWS than in Datadog.

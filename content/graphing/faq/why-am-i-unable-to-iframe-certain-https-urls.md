@@ -1,7 +1,6 @@
 ---
 title: Why am I unable to iFrame certain https URLs?
 kind: faq
-customnav: graphingnav
 ---
 
 The issue most likely has to do with the headers set on the URL page, specifically `X-Frame-Options:`.

@@ -1,7 +1,6 @@
 ---
 title: (dog)statsd sample_rate parameter explained
 kind: faq
-customnav: developersnav
 ---
 
 Here are the components involved when submitting data via (dog)statsd:

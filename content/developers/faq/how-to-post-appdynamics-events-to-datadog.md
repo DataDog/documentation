@@ -1,7 +1,6 @@
 ---
 title: How to post AppDynamics events to Datadog
 kind: faq
-customnav: developersnav
 ---
 
 This article allows you to submit events from your AppDynamics Application into your Datadog Event stream.  

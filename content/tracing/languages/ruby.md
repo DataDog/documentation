@@ -1,8 +1,6 @@
 ---
 title: Tracing Ruby Applications
 kind: Documentation
-autotocdepth: 2
-customnav: tracingnav
 aliases:
 - /tracing/ruby/
 ---

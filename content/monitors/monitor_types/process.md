@@ -1,8 +1,6 @@
 ---
 title: Process monitor
 kind: documentation
-autotocdepth: 3
-customnav: monitortypenav
 description: "Check if a process is running on a host"
 further_reading:
 - link: "/monitors/notifications"

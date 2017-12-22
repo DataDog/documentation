@@ -1,7 +1,6 @@
 ---
 title: False spikes sometimes appear on my sum graph
 kind: faq
-customnav: graphingnav
 ---
 
 We have identified a specific scenario where unexpected spikes (often twice the normal value you expect) are displayed on a graph.

@@ -1,7 +1,6 @@
 ---
 title: Can I use a proxy to connect my servers to Datadog?
 kind: faq
-customnav: accountmanagementnav
 ---
 
 If your network configuration restricts outbound traffic, [proxy all agent traffic](/agent/proxy) through one or several hosts that have more permissive outbound policies.

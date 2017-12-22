@@ -1,7 +1,6 @@
 ---
 title: Writing an Agent Check
 kind: documentation
-customnav: agentnav
 aliases:
   - /guides/agent_checks/
 ---

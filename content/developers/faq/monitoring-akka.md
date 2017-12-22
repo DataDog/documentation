@@ -1,7 +1,6 @@
 ---
 title: Monitoring Akka
 kind: faq
-customnav: developersnav
 ---
 
 Here is an article written by [Jan Macháček](https://twitter.com/honzam399) that talks through monitoring Akka with Datadog:

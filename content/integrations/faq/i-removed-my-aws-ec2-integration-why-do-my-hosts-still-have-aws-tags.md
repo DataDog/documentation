@@ -1,7 +1,6 @@
 ---
 title: I removed my AWS EC2 integration. Why do my hosts still have AWS tags?
 kind: faq
-customnav: integrationsnav
 ---
 
 ## How this can happen:
