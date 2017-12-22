@@ -1,6 +1,25 @@
 // API
 .api {
 
+  .api-content {
+    ul {
+      list-style-type: none;
+      li {
+        font-size:22px;
+        &:before {
+          content: "–";
+          position: relative;
+          margin-right: 7px;
+          margin-left: -16px;
+          float: left;
+        }
+        p {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
   .api-code {
 
     code {
