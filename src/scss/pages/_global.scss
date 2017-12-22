@@ -500,6 +500,9 @@ table, .table {
       display:block;
     }
   }
+  .navbar-brand {
+    margin-right:0;
+  }
 }
 
 //@include media-breakpoint-up(sm) { ... }

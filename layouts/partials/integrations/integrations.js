@@ -24,7 +24,7 @@ $(document).ready(function () {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-
+    var is_safari = navigator.userAgent.indexOf('Safari') !== -1;
     var ref = document.querySelector('.integration-popper-button');
     var pop = document.getElementById('integration-popper');
     if(ref && pop) {
@@ -148,20 +148,45 @@ document.addEventListener('DOMContentLoaded', function () {
             var item = window.integrations[i];
             var domitem = document.getElementById('mixid_'+item.id);
             if(filter === 'all' || filter === '#all') {
-                domitem.classList.remove('grayscale');
+                if(!is_safari) {
+                    domitem.classList.remove('grayscale');
+                }
                 show.push(item);
             } else {
                 if(filter && item.tags.indexOf(filter.substr(1)) !== -1) {
-                    domitem.classList.remove('grayscale');
+                    if(!is_safari) {
+                        domitem.classList.remove('grayscale');
+                    }
                     show.push(item);
                 } else {
-                    domitem.classList.add('grayscale');
+                    if(!is_safari) {
+                        domitem.classList.add('grayscale');
+                    }
                     hide.push(item);
                 }
             }
         }
         var items = [].concat(show, hide);
-        mixer.dataset(items);
+        mixer.dataset(items).then(function(state) {
+            if(is_safari) {
+                for(var i = 0; i < window.integrations.length; i++) {
+                    var item = window.integrations[i];
+                    var domitem = document.getElementById('mixid_'+item.id);
+                    if(filter === 'all' || filter === '#all') {
+                        domitem.classList.remove('grayscale');
+                        //show.push(item);
+                    } else {
+                        if(filter && item.tags.indexOf(filter.substr(1)) !== -1) {
+                            domitem.classList.remove('grayscale');
+                            //show.push(item);
+                        } else {
+                            domitem.classList.add('grayscale');
+                            //hide.push(item);
+                        }
+                    }
+                }
+            }
+        });
     }
 
     // Set controls the active controls on startup
