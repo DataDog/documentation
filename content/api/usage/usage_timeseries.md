@@ -1,7 +1,7 @@
 ---
 title: Usage Metering
 type: apicontent
-order: 20.2
+order: 21.2
 ---
 
 ## Get Hourly Usage For Custom Metrics.

@@ -1,7 +1,7 @@
 ---
 title: Usage Metering
 type: apicontent
-order: 20
+order: 21
 ---
 
 ## Usage Metering

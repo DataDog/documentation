@@ -1,7 +1,7 @@
 ---
 title: Usage Metering
 type: apicontent
-order: 20.3
+order: 21.3
 ---
 
 ## Get Top 500 Custom Metrics By Hourly Average
