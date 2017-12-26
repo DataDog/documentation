@@ -23,6 +23,8 @@ AND/OR
 - Create method named after the prometheus metric they will handle (see self.prometheus_metric_name)
 
 ## Your first Prometheus check
+Let's write a simple kube_dns check:
+
 ### Configuration
 
 <div class="alert alert-warning">
