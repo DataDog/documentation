@@ -1,7 +1,6 @@
 ---
 title: Why don't I see the 'system.processes.open_file_descriptors' metric?
 kind: faq
-customnav: agentnav
 ---
 
 Users that enable the [process check](/integrations/process) in a Datadog agent running on Linux OSs notice that the `system.processes.open_file_descriptors` metric is not collected or reported by default. This occurs when the process being monitored by the process check runs under a different user than the agent - the 'dd-agent' user doesn't have full access to all files in '/proc', which is where the agent looks to collect data for this metric. A workaround for this can be achieved by running the agent as 'root'.

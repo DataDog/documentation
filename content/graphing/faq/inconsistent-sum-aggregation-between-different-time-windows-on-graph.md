@@ -1,7 +1,6 @@
 ---
 title: Inconsistent sum aggregation between different time windows on graph
 kind: faq
-customnav: graphingnav
 ---
 
 You may see conflicting values at different time windows because we have less granularity (fewer data points) on graphs of larger time windows. We do this so we don’t stress our query processes.

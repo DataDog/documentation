@@ -1,7 +1,6 @@
 ---
 title: Explore
 kind: documentation
-customnav: lognav
 description: "The Logs Explorer is your Datadog home base for troubleshooting and exploration over your logs."
 further_reading:
 - link: "/logs/processing"

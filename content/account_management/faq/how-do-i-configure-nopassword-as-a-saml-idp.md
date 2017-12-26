@@ -1,7 +1,6 @@
 ---
 title: How do I configure NoPassword as a SAML IdP?
 kind: faq
-customnav: accountmanagementnav
 further_reading:
 - link: "/account_management/saml"
   tag: "Documentation"

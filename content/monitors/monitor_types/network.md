@@ -1,8 +1,6 @@
 ---
 title: Network monitor
 kind: documentation
-autotocdepth: 3
-customnav: monitortypenav
 description: "Check the status of TCP/HTTP endpoints"
 further_reading:
 - link: "/monitors/notifications"

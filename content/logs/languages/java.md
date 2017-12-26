@@ -1,7 +1,6 @@
 ---
 title: Java Log Collection
 kind: documentation
-customnav: lognav
 further_reading:
 - link: "/logs/processing"
   tag: "Documentation"

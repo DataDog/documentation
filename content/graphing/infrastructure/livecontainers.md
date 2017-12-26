@@ -1,11 +1,9 @@
 ---
 title: Live Containers
 kind: documentation
-autotocdepth: 3
 aliases:
   - /guides/livecontainers
   - /infrastructure/livecontainers/
-customnav: infrastructurenav
 further_reading:
 - link: "/graphing/infrastructure/hostmap"
   tag: "Graphing"

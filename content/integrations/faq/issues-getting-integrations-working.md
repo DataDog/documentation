@@ -1,7 +1,6 @@
 ---
 title: Issues getting integrations working
 kind: faq
-customnav: integrationsnav
 ---
 
 Datadog has quite a [few integrations](/integrations) which are set up through YAML files in the Agent.

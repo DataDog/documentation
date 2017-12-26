@@ -1,7 +1,6 @@
 ---
 title: There are too many lines on my graph, can I only display the most important ones?
 kind: faq
-customnav: graphingnav
 ---
 
 ## Problem

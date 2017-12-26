@@ -1,8 +1,6 @@
 ---
 title: Tracing Docker Applications
 kind: Documentation
-autotocdepth: 2
-customnav: tracingnav
 ---
 
 Enable the [datadog-trace-agent](https://github.com/DataDog/datadog-trace-agent) in the `docker-dd-agent` container by passing `DD_APM_ENABLED=true` as an environment variable.

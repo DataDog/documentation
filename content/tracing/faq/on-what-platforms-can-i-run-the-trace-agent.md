@@ -1,8 +1,6 @@
 ---
 title: On what platforms can I run the Trace Agent?
 kind: faq
-autotocdepth: 3
-customnav: tracingnav
 ---
 
 Trace Agent packages are available for:

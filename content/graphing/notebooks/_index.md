@@ -1,8 +1,6 @@
 ---
 title: Notebooks
 kind: documentation
-autotocdepth: 3
-customnav: graphingnav
 ---
 Notebooks combine graphs and text in a linear, cell-based format. They’re designed to help you explore and share stories with your data.
 

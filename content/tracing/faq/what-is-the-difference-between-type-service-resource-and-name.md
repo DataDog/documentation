@@ -1,8 +1,6 @@
 ---
 title: What is the Difference Between "Type", "Service", "Resource", and "Name"?
 kind: faq
-autotocdepth: 3
-customnav: tracingnav
 ---
 
 When instrumenting the Traces Agent with your applications, and going through the [Traces Page](https://app.datadoghq.com/trace/services), you may come across the following Strings: "Type", "Service", "Resource", and "Name". What do these terms mean? 

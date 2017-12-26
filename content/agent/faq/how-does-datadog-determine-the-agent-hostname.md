@@ -1,7 +1,6 @@
 ---
 title: How does Datadog determine the agent hostname?
 kind: faq
-customnav: agentnav
 further_reading:
 - link: "/agent/"
   tag: "Documentation"

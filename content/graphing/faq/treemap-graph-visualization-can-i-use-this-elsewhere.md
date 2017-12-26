@@ -1,7 +1,6 @@
 ---
 title: Treemap graph/visualization - can I use this elsewhere?
 kind: faq
-customnav: graphingnav
 ---
 
 Currently, the treemap visualization found on the Host Dashboards comes from the output of ps auxww. This is not continuously run on your hosts. Instead, it's run once on agent start/restart.

@@ -1,7 +1,6 @@
 ---
 title: Service checks is deprecated in favor of monitors
 kind: faq
-customnav: integrationsnav
 ---
 
 Iy your are seeing this message:

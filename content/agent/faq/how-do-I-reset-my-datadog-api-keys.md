@@ -1,7 +1,6 @@
 ---
 title: How do I reset my Datadog API keys?
 kind: faq
-customnav: agentnav
 further_reading:
 - link: "/account_management"
   tag: Account Management

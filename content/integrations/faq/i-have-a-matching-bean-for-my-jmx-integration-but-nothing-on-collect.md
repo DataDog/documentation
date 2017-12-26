@@ -1,7 +1,6 @@
 ---
 title: I Have a Matching Bean for my JMX integration but nothing on Collect !
 kind: faq
-customnav: integrationsnav
 ---
 
 

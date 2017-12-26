@@ -1,7 +1,6 @@
 ---
 title: How to solve Permission denied errors?
 kind: faq
-customnav: agentnav
 further_reading:
 - link: "/agent/"
   tag: "Documentation"

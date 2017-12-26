@@ -1,7 +1,6 @@
 ---
 title: How to collect metrics from custom MySQL queries
 kind: faq
-customnav: integrationsnav
 ---
 
 You can configure your MySQL integration to collect metrics from custom queries of your MySQL database by following the configuration syntax [in these lines](https://github.com/DataDog/dd-agent/blob/5.10.x/conf.d/mysql.yaml.example#L50-L66) of our `mysql.yaml.example` file. While you do this, there are a few things you want to keep in mind...

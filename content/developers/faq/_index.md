@@ -1,7 +1,6 @@
 ---
 title: Developers FAQ
 kind: faq
-customnav: developersnav
 ---
 
 ## General

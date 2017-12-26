@@ -1,7 +1,6 @@
 ---
 title: Parsing
 kind: documentation
-customnav: lognav
 description: "Parse your logs using the Grok Processor"
 further_reading:
 - link: "/logs/processing"

@@ -1,8 +1,6 @@
 ---
 title: Custom check monitor
 kind: documentation
-autotocdepth: 3
-customnav: monitortypenav
 description: "Monitor status of arbitrary custom checks"
 further_reading:
 - link: "/monitors/notifications"

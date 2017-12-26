@@ -1,7 +1,6 @@
 ---
 title: Azure VM status is not reporting
 kind: faq
-customnav: integrationsnav
 ---
 
 Azure Virtual Machines that are being monitored by Datadog should report an azure.vm.status metric that determines if the machine is currently running.

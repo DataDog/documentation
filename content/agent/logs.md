@@ -1,7 +1,6 @@
 ---
 title: Log Parsing in the Agent
 kind: documentation
-customnav: agentnav
 aliases:
     - /guides/logs/
 further_reading:

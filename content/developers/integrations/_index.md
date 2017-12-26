@@ -1,7 +1,6 @@
 ---
 title: Create a new integration
 kind: documentation
-customnav: developersnav
 aliases:
    - /guides/new_integration/
 ---

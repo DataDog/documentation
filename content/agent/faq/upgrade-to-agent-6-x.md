@@ -1,7 +1,6 @@
 ---
 title: Upgrade to Agent 6.x
 kind: faq
-customnav: agentnav
 ---
 
 ## What is Agent 6?

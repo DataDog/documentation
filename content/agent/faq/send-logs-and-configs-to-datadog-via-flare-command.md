@@ -1,7 +1,6 @@
 ---
 title: Send logs and configs to Datadog via flare command
 kind: faq
-customnav: agentnav
 further_reading:
 - link: "/agent/"
   tag: "Documentation"

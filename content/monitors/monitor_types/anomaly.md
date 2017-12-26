@@ -1,8 +1,6 @@
 ---
 title: Anomaly monitor
 kind: documentation
-autotocdepth: 3
-customnav: monitortypenav
 aliases:
     - /guides/anomalies
 description: "Detects anomalous behaviour for a metric based on historical data"

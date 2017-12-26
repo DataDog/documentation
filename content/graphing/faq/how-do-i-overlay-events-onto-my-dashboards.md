@@ -1,7 +1,6 @@
 ---
 title: How do I overlay events onto my dashboards?
 kind: faq
-customnav: graphingnav
 ---
 
 You can correlate Events to Metrics on Dashboards thanks to the Event Overlay Feature. 

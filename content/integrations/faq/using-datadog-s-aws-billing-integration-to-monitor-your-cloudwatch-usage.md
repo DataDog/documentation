@@ -1,7 +1,6 @@
 ---
 title: Using Datadog's AWS Billing Integration to monitor your CloudWatch usage
 kind: faq
-customnav: integrationsnav
 ---
 
 Once you have the Datadog AWS Integration installed, it's a very short process to set up the AWS Billing sub-integration to monitor your CloudWatch spend.

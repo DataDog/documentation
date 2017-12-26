@@ -1,7 +1,6 @@
 ---
 title: Agent(s) are no longer reporting data
 kind: faq
-customnav: agentnav
 further_reading:
 - link: "/agent/"
   tag: "Documentation"

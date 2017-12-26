@@ -1,7 +1,6 @@
 ---
 title: Network Time Protocol (NTP) Offset Issues
 kind: faq
-customnav: main_references
 further_reading:
 - link: "/agent/"
   tag: "Documentation"

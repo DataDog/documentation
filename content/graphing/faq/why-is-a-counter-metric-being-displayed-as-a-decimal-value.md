@@ -1,7 +1,6 @@
 ---
 title: Why is a counter metric being displayed as a decimal value?
 kind: faq
-customnav: graphingnav
 ---
 
 Counter metrics submitted are normalized by default at a per second rate. Rates make sense for certain types of metrics, like number of queries, that suggest a value that is constantly changing over time:

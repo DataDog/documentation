@@ -1,7 +1,6 @@
 ---
 title: Using RBAC permission with your Kubernetes integration
 kind: faq
-customnav: integrationsnav
 ---
 
 Use these Kubernetes RBAC entities to configure permissions for your Datadog Agent service account. For more information about service accounts, see the [Kubernetes documentation](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/).

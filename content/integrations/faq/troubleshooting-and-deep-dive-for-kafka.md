@@ -1,7 +1,6 @@
 ---
 title: Troubleshooting and Deep Dive for Kafka
 kind: faq
-customnav: integrationsnav
 ---
 
 ## What is Kafka ?

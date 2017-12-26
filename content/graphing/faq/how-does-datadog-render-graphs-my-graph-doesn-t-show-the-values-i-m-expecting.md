@@ -1,7 +1,6 @@
 ---
 title: How does Datadog render graphs? My graph doesn't show the values I'm expecting.
 kind: faq
-customnav: graphingnav
 ---
 
 This article aims at quickly presenting you Datadog's method to render graphs so that you have a better idea how to choose your graph settings.

@@ -1,7 +1,6 @@
 ---
 title: How to retrieve WMI metrics
 kind: faq
-customnav: integrationsnav
 ---
 
 ## What is WMI?

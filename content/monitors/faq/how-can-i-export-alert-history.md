@@ -1,7 +1,6 @@
 ---
 title: How do I export Monitors Alerts?
 kind: faq
-customnav: monitornav
 further_reading:
 - link: "/monitors/monitor_types"
   tag: "Documentation"

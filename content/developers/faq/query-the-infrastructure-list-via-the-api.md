@@ -1,7 +1,6 @@
 ---
 title: Query the Infrastructure List via the API
 kind: faq
-customnav: main_references
 ---
 
 More advanced Datadog users may sometimes want to use [the API](/api) to query general data about their infrastructure--the kind of data that you can find in your [infrastructure list](https://app.datadoghq.com/infrastructure) or the [host map](https://app.datadoghq.com/infrastructure/map). You can do this via an API GET request on the `reports/v2/overview` endpoint.

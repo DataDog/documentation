@@ -1,7 +1,6 @@
 ---
 title: Collecting Composite type JMX attributes
 kind: faq
-customnav: integrationsnav
 ---
 
 ## JMXFetch

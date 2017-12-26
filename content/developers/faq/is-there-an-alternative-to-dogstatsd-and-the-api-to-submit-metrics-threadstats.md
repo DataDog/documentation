@@ -1,7 +1,6 @@
 ---
 title: Is there an alternative to DogStatsD and the api to submit metrics? Threadstats.
 kind: faq
-customnav: developersnav
 ---
 
 There is an alternative but it's **only in Python**.

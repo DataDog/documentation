@@ -1,8 +1,6 @@
 ---
 title: What are the naming criteria for services, resources, etc?
 kind: faq
-autotocdepth: 3
-customnav: tracingnav
 ---
 
 * Service names and resource names **must be lowercase, alphanumeric characters**.

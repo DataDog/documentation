@@ -1,7 +1,6 @@
 ---
 title: Processing
 kind: documentation
-customnav: lognav
 description: "Parse & Enrich your logs so you can create valuable facets & metrics in the Logs Explorer."
 further_reading:
 - link: "/logs/parsing"

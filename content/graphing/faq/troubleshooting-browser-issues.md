@@ -1,7 +1,6 @@
 ---
 title: Troubleshooting - Browser Issues
 kind: faq
-customnav: main_references
 ---
 
 If you're seeing unexpected results in the Datadog app such as missing data or blank graphs/widgets, try the following checklist to troubleshoot the issue:

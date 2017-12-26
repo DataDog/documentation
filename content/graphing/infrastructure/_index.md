@@ -1,8 +1,6 @@
 ---
 title: Infrastructure List
 kind: documentation
-autotocdepth: 3
-customnav: infrastructurenav
 aliases:
   - /hostnames
   - /infrastructure/

@@ -1,7 +1,6 @@
 ---
 title: Proxy Configuration
 kind: documentation
-customnav: agentnav
 ---
 ## Why use a Proxy
 

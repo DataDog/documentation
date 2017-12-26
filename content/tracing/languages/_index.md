@@ -1,8 +1,6 @@
 ---
 title: Tracing Languages
 kind: Documentation
-autotocdepth: 2
-customnav: tracingnav
 ---
 
 {{< whatsnext desc="Easily integrate Datadog APM with the following languages:">}}

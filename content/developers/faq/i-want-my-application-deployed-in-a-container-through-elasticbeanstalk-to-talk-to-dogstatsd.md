@@ -1,7 +1,6 @@
 ---
 title: I want my application deployed in a container through ElasticBeanstalk to talk to DogStatsD
 kind: faq
-customnav: developersnav
 ---
 
 Beanstalk allows to deploy only a single container per instance and doesn't support docker links as well.

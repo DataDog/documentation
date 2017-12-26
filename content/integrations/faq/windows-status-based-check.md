@@ -1,7 +1,6 @@
 ---
 title: Windows Status Based Check
 kind: faq
-customnav: integrationsnav
 ---
 This guide outlines the workflow for creating a status based check on Windows.
 

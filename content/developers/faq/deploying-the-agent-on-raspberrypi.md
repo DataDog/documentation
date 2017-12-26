@@ -1,7 +1,6 @@
 ---
 title: Deploying the Agent on RaspberryPI
 kind: faq
-customnav: developersnav
 ---
 
 **Using raspbian**

@@ -1,7 +1,6 @@
 ---
 title: Log Parsing - Best Practice
 kind: faq
-customnav: lognav
 further_reading:
 - link: "/logs/processing"
   tag: "Documentation"

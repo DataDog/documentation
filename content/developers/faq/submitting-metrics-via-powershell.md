@@ -1,7 +1,6 @@
 ---
 title: Submitting Metrics via PowerShell
 kind: faq
-customnav: developersnav
 ---
 
 Datadog can collect metrics via the agent as well as via the API independently of which language you decide to use. This page gives examples of both using PowerShell

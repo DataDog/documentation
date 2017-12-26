@@ -1,8 +1,6 @@
 ---
 title: Environments
 kind: Documentation
-autotocdepth: 2
-customnav: tracingnav
 ---
 ## Definition
 

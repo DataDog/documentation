@@ -1,7 +1,6 @@
 ---
 title: How to Monitor Logs with Loggly Live Tail and Datadog ?
 kind: faq
-customnav: developersnav
 ---
 
 Here is a blog written by the Loggly team:

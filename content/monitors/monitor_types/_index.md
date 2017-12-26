@@ -1,8 +1,6 @@
 ---
 title: Monitors Type
 kind: documentation
-autotocdepth: 3
-customnav: monitortypenav
 aliases:
     - /monitoring
 ---

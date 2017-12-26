@@ -1,8 +1,6 @@
 ---
 title: My trace-agent.log renders "empty `Service`" error
 kind: faq
-autotocdepth: 3
-customnav: tracingnav
 ---
 
 If your Agent is not rendering your traces on the UI, the first place to look for errors is the `trace-agent.log. 

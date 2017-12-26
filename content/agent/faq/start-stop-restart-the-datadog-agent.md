@@ -1,7 +1,6 @@
 ---
 title: Start/Stop/Restart the Datadog Agent
 kind: faq
-customnav: agentnav
 further_reading:
 - link: "/agent/"
   tag: "Documentation"

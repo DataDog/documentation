@@ -1,7 +1,6 @@
 ---
 title: Why am I seeing inconsistencies for metrics submitted to DogStatsD?
 kind: faq
-customnav: agentnav
 ---
 
 ## Scenario

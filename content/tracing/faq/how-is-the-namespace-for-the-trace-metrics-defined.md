@@ -1,8 +1,6 @@
 ---
 title: How is the namespace for the trace metrics defined?
 kind: faq
-autotocdepth: 3
-customnav: tracingnav
 ---
 
 The namespace is basically trace.<name>.<metrics> where

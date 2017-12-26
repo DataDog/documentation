@@ -1,7 +1,6 @@
 ---
 title: Is it possible to adjust the y-axis for my graphs?
 kind: faq
-customnav: graphingnav
 ---
 
 The Datadog y-axis controls are available via the UI and the JSON editor. They allow you to:

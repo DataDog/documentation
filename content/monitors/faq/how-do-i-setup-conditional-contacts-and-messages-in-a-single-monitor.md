@@ -1,7 +1,6 @@
 ---
 title: How do I setup conditional contacts and messages in a single monitor?
 kind: faq
-customnav: monitornav
 further_reading:
 - link: "/monitors/monitor_types"
   tag: "Documentation"

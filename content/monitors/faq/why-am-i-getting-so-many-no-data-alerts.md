@@ -1,7 +1,6 @@
 ---
 title: Why am I getting so many No Data alerts?
 kind: faq
-customnav: monitornav
 further_reading:
 - link: "/monitors/notifications"
   tag: "Documentation"

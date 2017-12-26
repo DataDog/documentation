@@ -1,7 +1,6 @@
 ---
 title: Why isn't my AWS Trusted Advisor Dashboard showing any data?
 kind: faq
-customnav: graphingnav
 ---
 
 {{< img src="graphing/faq/aws_service_dashboard.png" alt="aws service dashboard" responsive="true" popup="true">}}

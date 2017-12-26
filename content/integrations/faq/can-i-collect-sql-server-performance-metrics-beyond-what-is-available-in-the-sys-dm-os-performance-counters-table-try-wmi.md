@@ -1,7 +1,6 @@
 ---
 title: Can I collect SQL Server performance metrics beyond what is available in the sys.dm_os_performance_counters table? Try WMI
 kind: faq
-customnav: integrationsnav
 ---
 
 Our [SQL Server check](/integrations/sqlserver) is currently limited to collecting metrics from the [sys.dm_os_performance_counters table](https://github.com/DataDog/dd-agent/blob/5.9.x/conf.d/sqlserver.yaml.example#L3-L5), and by default it only collects what metrics we think are the most likely to be relevant. True, with some simple configuration, you can [extend what metrics are collected from that table](/integrations/faq/how-can-i-collect-more-metrics-from-my-sql-server-integration), but there may be cases where you're interested in collecting more than what is available in that table at all. 

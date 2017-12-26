@@ -1,7 +1,6 @@
 ---
 title: What is the "Do (not) require a full window of data for evaluation" monitor parameter?
 kind: faq
-customnav: monitornav
 further_reading:
 - link: "/monitors/monitor_types"
   tag: "Documentation"

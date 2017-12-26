@@ -1,7 +1,6 @@
 ---
 title: Do you believe you’re seeing a discrepancy between your data in CloudWatch and Datadog?
 kind: faq
-customnav: integrationsnav
 ---
 
 There are two important distinctions to be aware of:

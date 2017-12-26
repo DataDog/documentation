@@ -1,8 +1,6 @@
 ---
 title: Composite monitor
 kind: documentation
-autotocdepth: 3
-customnav: monitortypenav
 aliases:
     - /guides/composite_monitors
 description: "Alert on an expression combining multiple monitors"

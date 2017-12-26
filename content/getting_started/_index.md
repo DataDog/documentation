@@ -1,7 +1,6 @@
 ---
 title: Getting started
 kind: documentation
-customnav: gettingstartednav
 aliases:
   - /overview
   - /guides/overview/

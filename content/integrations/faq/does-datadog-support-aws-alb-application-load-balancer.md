@@ -1,7 +1,6 @@
 ---
 title: Does Datadog support AWS ALB (Application Load Balancer)?
 kind: faq
-customnav: integrationsnav
 ---
 
 Yes! Our AWS integration was updated in August 2016 to support the new Application Load Balancer metrics published by AWS CloudWatch.

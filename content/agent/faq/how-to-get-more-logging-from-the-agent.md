@@ -1,7 +1,6 @@
 ---
 title: How to get more logging from the agent?
 kind: faq
-customnav: agentnav
 further_reading:
 - link: "/agent/"
   tag: "Documentation"

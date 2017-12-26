@@ -1,7 +1,6 @@
 ---
 title: Is there a way to share (or revoke previously shared) graphs?
 kind: faq
-customnav: graphingnav
 ---
 
 There are three ways to share a graph or ScreenBoard:

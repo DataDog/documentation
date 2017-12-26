@@ -1,7 +1,6 @@
 ---
 title: View jmx data in jConsole and set up your jmx.yaml to collect them
 kind: faq
-customnav: integrationsnav
 ---
 
 

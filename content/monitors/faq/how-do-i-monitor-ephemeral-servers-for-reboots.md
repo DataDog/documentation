@@ -1,7 +1,6 @@
 ---
 title: How do I monitor ephemeral servers for reboots?
 kind: faq
-customnav: monitornav
 further_reading:
 - link: "/monitors/monitor_types"
   tag: "Documentation"

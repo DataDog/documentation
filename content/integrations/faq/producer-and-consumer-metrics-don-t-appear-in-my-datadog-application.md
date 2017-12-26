@@ -1,7 +1,6 @@
 ---
 title: Producer and Consumer metrics don't appear in my Datadog application
 kind: faq
-customnav: integrationsnav
 ---
 
 By default we only collect broker based metrics. 

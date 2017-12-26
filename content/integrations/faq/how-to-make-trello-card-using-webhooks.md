@@ -1,7 +1,6 @@
 ---
 title: How to Make a Trello Card using Webhooks
 kind: faq
-customnav: integrationsnav
 ---
 
 You can easily use our [Webhook Integration](https://app.datadoghq.com/account/settings#integrations/webhooks) to instantly create a trello card using our @-notification feature.

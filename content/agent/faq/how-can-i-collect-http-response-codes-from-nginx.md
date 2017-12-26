@@ -1,7 +1,6 @@
 ---
 title: How can I collect HTTP response codes from Nginx?
 kind: faq
-customnav: agentnav
 further_reading:
 - link: "/agent/"
   tag: "Documentation"

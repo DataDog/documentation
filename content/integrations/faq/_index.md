@@ -1,7 +1,6 @@
 ---
 title: FAQ Integrations
 kind: faq
-customnav: integrationsnavv
 ---
 
 ## General

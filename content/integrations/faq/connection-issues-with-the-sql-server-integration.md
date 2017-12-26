@@ -1,7 +1,6 @@
 ---
 title: Connection Issues with the SQL Server Integration
 kind: faq
-customnav: integrationsnav
 ---
 
 ## Common SQL Server Connection Troubles

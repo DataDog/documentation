@@ -1,7 +1,6 @@
 ---
 title: Starting Datadog Agent (using supervisord) Error Cannot open an HTTP server socket.error reported errno.EACCES (13)
 kind: faq
-customnav: agentnav
 further_reading:
 - link: "/agent/"
   tag: "Documentation"

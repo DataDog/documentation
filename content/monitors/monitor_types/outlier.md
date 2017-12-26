@@ -1,8 +1,6 @@
 ---
 title: Outlier monitor
 kind: documentation
-autotocdepth: 3
-customnav: monitortypenav
 aliases:
     - /guides/outliers
 description: "Alert on members of a group behaving differently than the others"

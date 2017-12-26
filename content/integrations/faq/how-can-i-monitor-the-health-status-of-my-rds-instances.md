@@ -1,7 +1,6 @@
 ---
 title: How can I monitor the health/status of my RDS instances?
 kind: faq
-customnav: integrationsnav
 ---
 
 There are several options for monitoring the health of your RDS databases.

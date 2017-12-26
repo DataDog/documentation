@@ -1,7 +1,6 @@
 ---
 title: Calling on Datadog's API with the Webhooks Integration
 kind: faq
-customnav: main_references
 ---
 
 You can use the [Webhooks integration](/integrations/webhooks) to trigger webhooks from Datadog monitors and events--this is often useful for having your Datadog account communicate with your team using custom communication tools, or even [forwarding monitor alerts to text messages](https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio).

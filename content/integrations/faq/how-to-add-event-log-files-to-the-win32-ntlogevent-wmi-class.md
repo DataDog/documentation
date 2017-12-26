@@ -1,7 +1,6 @@
 ---
 title: How to add event log files to the `Win32_NTLogEvent` WMI class
 kind: faq
-customnav: integrationsnav
 ---
 
 Not all event logs are are in the Win32_NTLogEvent WMI class. Since the Event Viewer integration can only pick up events in this class, modify the Windows Registry to add event logs outside of the scope of this class.

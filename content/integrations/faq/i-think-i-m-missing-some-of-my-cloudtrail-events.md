@@ -1,7 +1,6 @@
 ---
 title: I think I'm missing some of my CloudTrail events?
 kind: faq
-customnav: integrationsnav
 ---
 Assuming you've configured the [CloudTrail integration](/integrations/amazon_cloudtrail) appropriately and are at least seeing some of your events, then what you're experiencing is likely by design.
 

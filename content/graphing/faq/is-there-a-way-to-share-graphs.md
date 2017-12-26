@@ -1,7 +1,6 @@
 ---
 title: Is there a way to share graphs?
 kind: faq
-customnav: graphingnav
 ---
 
 There are two ways to share a graph or screenboard: 

@@ -1,7 +1,6 @@
 ---
 title: Can I whitelist the IP addresses for data coming from Datadog via Webhook and integrations?
 kind: faq
-customnav: accountmanagementnav
 ---
 
 All data coming from Datadog Webhooks and integrations, such as those with ticketing systems like ServiceNow and JIRA, are coming from the following set of static IPs.

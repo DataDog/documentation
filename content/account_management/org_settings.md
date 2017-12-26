@@ -1,8 +1,6 @@
 ---
 title: Organization Settings
 kind: documentation
-autotocdepth: 2
-customnav: accountmanagementnav
 ---
 
 [Administrators](http://localhost:1313/account_management/team/#datadog-user-roles) can access the [organization account settings](https://app.datadoghq.com/account/billing) by clicking Plan & Usage from the Account menu in the left side navigation or from the "Go to organization settings" button at the top of the Account Settings page.

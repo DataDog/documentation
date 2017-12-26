@@ -1,7 +1,6 @@
 ---
 title: Can I set up a monitor for a metric that hasn't been reported to Datadog yet?
 kind: faq
-customnav: monitornav
 further_reading:
 - link: "/monitors/monitor_types"
   tag: "Documentation"

@@ -1,7 +1,6 @@
 ---
 title: How can I collect more metrics from my SQL Server integration?
 kind: faq
-customnav: integrationsnav
 ---
 
 ## Answer
