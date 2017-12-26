@@ -128,7 +128,7 @@ pre {
 code {
   color: #555;
   padding: 0;
-  font-size: 17px;
+  font-size: 16px;
   background-color: #fafafa;
   border-left: 5px solid #fafafa;
   border-right: 5px solid #fafafa;
@@ -201,6 +201,7 @@ h2 {
         position: relative;
         margin-right: 3px;
         margin-left: -12px;
+        float:left;
       }
       p {
         margin-bottom:0;
