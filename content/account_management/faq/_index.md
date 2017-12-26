@@ -1,6 +1,7 @@
 ---
 title: Account Management FAQ
 kind: faq
+private: true
 ---
 
 ## Account Management

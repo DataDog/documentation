@@ -1,6 +1,7 @@
 ---
 title: Developers FAQ
 kind: faq
+private: true
 ---
 
 ## General
