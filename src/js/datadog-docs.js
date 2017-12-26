@@ -37,15 +37,6 @@ $(document).ready(function () {
         $('.lang-btn').on('click', function (e) {
             var el = $(this);
 
-            // Show this language's code blocks and language-specific elements
-            var lang = el.data('lang');
-            code_blocks.hide();
-            //$('.code-block-' + lang).fadeIn();
-            $('.code-block-' + lang).show();
-            lang_blocks.hide();
-            //$('.lang-specific-' + lang).fadeIn();
-            $('.lang-specific-' + lang).show();
-
             // Find the element currently in the view port
             var scrollElement;
             hs.each(function () {
@@ -54,6 +45,15 @@ $(document).ready(function () {
                     return false;
                 }
             });
+
+            // Show this language's code blocks and language-specific elements
+            var lang = el.data('lang');
+            code_blocks.hide();
+            //$('.code-block-' + lang).fadeIn();
+            $('.code-block-' + lang).show();
+            lang_blocks.hide();
+            //$('.lang-specific-' + lang).fadeIn();
+            $('.lang-specific-' + lang).show();
 
             // Highlight the active button.
             $('.lang-btn').removeClass('active');
