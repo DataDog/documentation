@@ -1,0 +1,7 @@
+<ul class="codenav nav">
+    {{ range .Site.Params.code_languages }}
+        <li class="nav-item">
+            <a class="lang-btn nav-link" href="#" data-lang="{{ .key }}">{{ .display_name }}</a>
+        </li>
+    {{ end }}
+</ul>

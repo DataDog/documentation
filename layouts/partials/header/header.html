@@ -1,0 +1,61 @@
+{{ $dot := . }}
+<header>
+    <div class="container">
+        <div class="mainnav d-none d-lg-flex row align-items-center no-gutters">
+            <div class="col">
+                <ul class="nav navbar-left">
+                    {{ range $dot.Page.Site.Data.partials.header.left }}
+                        <li class="nav-item {{ if .children }}dropdown{{ end }}">
+                            <a class="nav-link {{ if .children }}dropdown-toggle{{ end }}" {{ if .children }}data-toggle="dropdown"{{ end }} href="{{ if in .link "http"}}{{ .link }}{{ else }}{{.Site.BaseURL}}/{{ .link }}{{ end }}">{{ .title }}</a>
+                            {{ if .children }}
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    {{ range .children }}
+                                        <a class="dropdown-item" href="{{ if in .link "http"}}{{ .link }}{{ else }}{{.Site.BaseURL}}/{{ .link }}{{ end }}">{{ .title }}</a>
+                                    {{ end }}
+                                </div>
+                            {{ end }}
+                        </li>
+                    {{ end }}
+                </ul>
+            </div>
+            <div class="col-1 text-center">
+                <a href="https://www.datadoghq.com/" id="logo">
+                    {{ partial "img.html" (dict "root" . "src" "dd_logo_70x75.png" "class" "logo-img" "alt" "DataDog" "height" "75" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=70&h=75" "disable_lazy" "true") }}
+                    {{ partial "img.html" (dict "root" . "src" "dd-logo-200.png" "class" "logo-text" "alt" "DataDog" "height" "14" "img_param" "?ch=Width,DPR&fit=max&auto=format&h=14" "disable_lazy" "true") }}
+                </a>
+            </div>
+            <div class="col">
+                <ul class="nav navbar-right float-right">
+                    {{ range $dot.Page.Site.Data.partials.header.right }}
+                        <li class="nav-item {{ if .children }}dropdown{{ end }}">
+                            <a class="nav-link {{ if .children }}dropdown-toggle{{ end }}" {{ if .children }}data-toggle="dropdown"{{ end }} href="{{ if in .link "http"}}{{ .link }}{{ else }}{{.Site.BaseURL}}/{{ .link }}{{ end }}">{{ .title }}</a>
+                            {{ if .children }}
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                {{ range .children }}
+                                <a class="dropdown-item" href="{{ if in .link "http"}}{{ .link }}{{ else }}{{.Site.BaseURL}}/{{ .link }}{{ end }}">{{ .title }}</a>
+                                {{ end }}
+                            </div>
+                            {{ end }}
+                        </li>
+                    {{ end }}
+                    <li class="nav-item nav-button">
+                        <a class="btn btn-outline-primary sign-up-trigger" href="#" data-toggle="modal" data-target="#signupModal">GET STARTED FREE</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar d-lg-none navbar-expand-lg navbar-light bg-white rounded">
+        <div class="container">
+            <a class="navbar-brand" href="/" title="DataDog">{{ partial "img.html" (dict "root" . "src" "dd_docs_logo.png" "alt" "DataDog" "disable_lazy" "true") }}</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-sidenav" aria-controls="navbar-sidenav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-sidenav">
+            <div class="container">
+                {{ partial "sidenav/sidenav.html" . }}
+            </div>
+        </div>
+    </nav>
+</header>

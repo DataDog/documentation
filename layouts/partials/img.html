@@ -1,1 +1,31 @@
-{{ .root.Site.Params.img_url }}images/{{ (index .root.Site.Data.manifests.images .src ) }}
+{{ if .img_param }}
+    {{ .root.Scratch.Set "img_param" .img_param }}
+{{ else }}
+    {{ .root.Scratch.Set "img_param" "?ch=Width,DPR&fit=max" }}
+{{ end }}
+{{ $img_param := .root.Scratch.Get "img_param" }}
+{{ $url := (print (.root.Site.Params.img_url) "images/" (index .root.Site.Data.manifests.images .src ) ($img_param)) | safeURL }}
+{{ $image_type_arr := split .src "." }}
+{{ $image_ext := index $image_type_arr 1 }}
+{{ $img_width := .width }}
+{{ $img_height := .height }}
+{{ $img_style := .style }}
+{{ $img_class := .class }}
+{{ $img_alt := .alt }}
+{{ $disable_lazy := .disable_lazy }}
+
+<picture class="{{ if $img_class }} {{ $img_class }} {{ end }}">
+    <source srcset="{{ $url }}&auto=format&w=807 1x, {{ $url }}&auto=format&w=807&dpr=2 2x" media="(min-width: 1200px)">
+    <source srcset="{{ $url }}&auto=format&w=670 1x, {{ $url }}&auto=format&w=670&dpr=2 2x" media="(min-width: 992px)">
+    <source srcset="{{ $url }}&auto=format&w=496 1x, {{ $url }}&auto=format&w=496&dpr=2 2x" media="(min-width: 759px)">
+    <source srcset="{{ $url }}&auto=format&w=496 1x, {{ $url }}&auto=format&w=496&dpr=2 2x" media="(min-width: 630px)">
+    <source srcset="{{ $url }}&auto=format&w=496 1x, {{ $url }}&auto=format&w=496&dpr=2 2x" media="(min-width: 530px)">
+    <source srcset="{{ $url }}&auto=format&w=360 1x, {{ $url }}&auto=format&w=360&dpr=2 2x" media="(min-width: 361px)">
+    <source srcset="{{ $url }}&auto=format&w=360 1x, {{ $url }}&auto=format&w=360&dpr=2 2x" media="(min-width: 0px)">
+    <img width="{{$img_width}}"
+         height="{{$img_height}}"
+         class="{{ if $img_class }} {{ $img_class }} {{ end }}{{ if not ($disable_lazy) }} lazyload {{ end }}"
+         srcset="{{ $url }}&auto=format&w=807"
+         style="{{ if $img_style }}{{ $img_style | safeCSS }}{{ end }}"
+         alt="{{ if $img_alt }}{{ $img_alt }}{{end}}">
+</picture>

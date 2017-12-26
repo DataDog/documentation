@@ -1,0 +1,32 @@
+{{ $dot := .}}
+
+<!-- this is the filename without its extension e.g api-monitor.py basename is api-monitor -->
+{{ $basename := (.Get "basename") }}
+
+<!-- static means it is immune to the language switching nav, it will always show -->
+{{- if .Get ("static") -}}
+    {{ $.Scratch.Add "static" (.Get ("static")) }}
+{{- else -}}
+    {{ $.Scratch.Add "static" false }}
+{{- end -}}
+{{ $static := $.Scratch.Get "static" }}
+
+<!-- we load all snippets from code_snippets of the file this is called from -->
+{{ $snipdir := (print "content/" $dot.Page.File.Dir "code_snippets/") }}
+{{- $files := readDir $snipdir -}}
+{{- range $files }}
+    {{ $file := (print $snipdir (.Name))}}
+    {{ $file_content := readFile $file }}
+    {{ $ext_index := (sub (len (split $file ".")) 1) }}
+    {{ $file_extension := (index (split $file ".") $ext_index) }}
+    {{ $file_basename := replace (replace $file (print "." $file_extension) "") $snipdir "" }}
+    {{ if eq $basename $file_basename }}
+        {{ $lang := index $dot.Site.Data.highlighting.languages $file_extension }}
+        {{ if (or (eq $static true) (eq $static "true")) }}
+            <pre lang="{{$lang.pygments_name}}"><code>{{ $file_content }}</code></pre>
+        {{ else }}
+            <div class="code-block code-block-{{ $lang.pygments_name }}">{{- highlight $file_content $lang.pygments_name "" -}}</div>
+        {{ end }}
+    {{ end }}
+{{- end }}
+

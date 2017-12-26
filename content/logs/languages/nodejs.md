@@ -1,8 +1,19 @@
 ---
 title: NodeJS Log Collection
 kind: documentation
-autotocdepth: 2
-customnav: lognav
+further_reading:
+- link: "/logs/processing"
+  tag: "Documentation"
+  text: Learn how to process your logs
+- link: "/logs/parsing"
+  tag: "Documentation"
+  text: Learn more about parsing
+- link: "/logs/explore"
+  tag: "Documentation"
+  text: Learn how to explore your logs
+- link: /logs/faq/log-collection-troubleshooting-guide
+  tag: "FAQ"
+  text: Log Collection Troubleshooting Guide
 ---
 
 <div class="alert alert-info">
@@ -21,7 +32,7 @@ Winston is available through [NPM](https://www.npmjs.com). So, in order to get s
 npm install --save winston
 ```
 
-`package.js` will be updated with the corresponding dependencies:
+`package.js` is updated with the corresponding dependencies:
 
 ```
 {
@@ -113,3 +124,7 @@ Here are some little advices:
 - Log a lot in the DEBUG level and log accurately in the INFO, WARNING and FATAL levels; since these are the log levels you'll get in your production environments.
 - Start small and try to log the important stuff first, instead of being comprehensive. Then add what is missing after having a discussion with your team.
 - Use metas! Add context to any log so you can quickly filter over users, customers or any business centric attribute.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

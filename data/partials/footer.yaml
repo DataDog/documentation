@@ -1,0 +1,67 @@
+col1:
+  - name: product
+    link: "https://www.datadoghq.com/product/"
+    title: "Features"
+  - name: apm
+    link: "https://www.datadoghq.com/apm/"
+    title: "APM"
+  - name: integrations
+    link: "https://www.datadoghq.com/product/integrations/"
+    title: "Integrations"
+  - name: alerts
+    link: "https://www.datadoghq.com/alerts/"
+    title: "Alerts"
+  - name: api
+    link: "https://docs.datadoghq.com/api/"
+    title: "API"
+  - name: pricing
+    link: "https://www.datadoghq.com/pricing/"
+    title: "Pricing"
+col2:
+  - name: documentation
+    link: "http://docs.datadoghq.com/"
+    title: "Documentation"
+  - name: support
+    link: "https://www.datadoghq.com/support/"
+    title: "Support"
+  - name: resources
+    link: "https://www.datadoghq.com/resources/"
+    title: "Resources"
+  - name: security
+    link: "https://www.datadoghq.com/security/"
+    title: "Security"
+col3:
+  - name: contact
+    link: "https://www.datadoghq.com/about/contact/"
+    title: "Contact Us"
+  - name: partners
+    link: "https://www.datadoghq.com/partner-with-datadog/"
+    title: "Partners"
+  - name: press
+    link: "https://www.datadoghq.com/about/press/"
+    title: "Press"
+  - name: ourteam
+    link: "https://www.datadoghq.com/about/team/"
+    title: "Our Team"
+  - name: careers
+    link: "https://www.datadoghq.com/careers/"
+    title: "Careers"
+  - name: legal
+    link: "https://www.datadoghq.com/legal/"
+    title: "Legal"
+col4:
+  - name: blog
+    link: "https://www.datadoghq.com/blog/"
+    title: "Blog"
+  - name: bloges
+    link: "https://www.datadoghq.com/es/blog/"
+    title: "Español"
+  - name: blogja
+    link: "https://www.datadoghq.com/ja/blog/"
+    title: "日本語"
+  - name: instagram
+    link: "https://www.instagram.com/datadoghq/"
+    title: "Instagram"
+  - name: twitter
+    link: "https://twitter.com/datadoghq"
+    title: "Twitter"

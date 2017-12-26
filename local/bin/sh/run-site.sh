@@ -15,7 +15,14 @@ if [ ${RUN_SERVER} == true ]; then
 	# gulp
 	if [ ${RUN_GULP} == true ]; then
 		echo "checking that node modules are installed and up-to-date"
-		npm install || echo "arch conflicting detected. removing modules and trying again" && rm -rf node_modules && npm install
+		if [ -d node_modules ]; then
+		    MISSING=`npm ls --parseable=true 2>&1 >/dev/null | grep -oc "missing:"`
+		    if [ "$MISSING" -gt 0 ]; then
+                npm install || echo "arch conflicting detected. removing modules and trying again" && rm -rf node_modules && npm install
+            fi
+		else
+		    npm install || echo "arch conflicting detected. removing modules and trying again" && rm -rf node_modules && npm install
+        fi
         echo "starting gulp build"
         gulp build
         sleep 5
@@ -32,8 +39,12 @@ if [ ${RUN_SERVER} == true ]; then
 		fi
 		if [ ${GITHUB_TOKEN} != "false" ]; then
 			args="${args} --token ${GITHUB_TOKEN}"
+		else
+			echo "No GITHUB TOKEN was found. skipping any integration sync that relies on pulling from web."
 		fi
-		integrations_sync.py ${args}
+		if [[ ${args} != "" ]]; then
+			update_pre_build.py ${args}
+		fi
 	fi
 
 	# placeholders

@@ -1,4 +1,5 @@
 ---
 title: API Reference
-kind: documentation
+aliases:
+    - /tracing/api/
 ---

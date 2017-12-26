@@ -1,6 +1,7 @@
 ---
 title: Search Results
 kind: search
+disable_toc: true
 ---
 
 <div id="tipue_search_content">

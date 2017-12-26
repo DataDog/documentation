@@ -17,6 +17,8 @@ var jshint = require('gulp-jshint');
 var manifest = require('./src/manifest.json');
 var hash = require('gulp-hash');
 var del = require('del');
+var fs = require('fs');
+var pathlib = require('path');
 
 // asset manifest is a json object containing paths to dependencies
 var path = manifest.paths;
@@ -40,16 +42,43 @@ for (var fileName in manifest.dependencies) {
   if (fileName.indexOf('.css') > -1) {
     project["css"] = project["css"].concat(manifest.dependencies[fileName]["files"]);
   }
+  var partial_dirs = fs.readdirSync("./layouts/partials/").filter(function(file) {
+      return fs.statSync(pathlib.join("./layouts/partials/", file)).isDirectory();
+  });
+  // add partials
+  var partials = {"main-dd.css":[], "main-dd.js":[]};
+  for(var i=0; i < partial_dirs.length; i++) {
+
+      if (fileName.indexOf('.css') > -1) {
+          var pathToScss = pathlib.join("./layouts/partials/", partial_dirs[i], partial_dirs[i] + ".scss");
+          if (fs.existsSync(pathlib.resolve(pathToScss))) {
+              if (project["css"].indexOf(pathToScss) === -1) {
+                  project["css"].push(pathToScss);
+                  partials[fileName].push(pathToScss);
+              }
+          }
+      }
+
+      if (fileName.indexOf('.js') > -1) {
+          var pathToJs = pathlib.join("./layouts/partials/", partial_dirs[i], partial_dirs[i] + ".js");
+          if (fs.existsSync(pathlib.resolve(pathToJs))) {
+              if (project["js"].indexOf(pathToJs) === -1) {
+                  project["js"].push(pathToJs);
+                  partials[fileName].push(pathToJs);
+              }
+          }
+      }
+  }
   var fileNameArray = fileName.split(".");
   project.globs.push(
     {
       "type": fileNameArray[fileNameArray.length - 1],
       "name": fileName,
-      "globs": manifest.dependencies[fileName]["vendor"].concat(manifest.dependencies[fileName]["files"])
+      "globs": manifest.dependencies[fileName]["vendor"].concat(manifest.dependencies[fileName]["files"], partials[fileName])
     }
   );
-}
 
+}
 
 // CLI options
 var enabled = {
@@ -64,7 +93,11 @@ var enabled = {
   // Strip debug statments from javascript when `--production`
   stripJSDebug: false,
   // hash static?
-  hashStatic: true
+  hashStatic: true,
+  // nano
+  nano: true,
+  // uglify
+  uglify: true
 };
 
 // Path to the compiled assets manifest in the dist directory
@@ -104,7 +137,7 @@ var cssTasks = function (filename) {
       ]
     })
     .pipe(function () {
-      return gulpif(argv.production, cssNano({
+      return gulpif(enabled.nano, cssNano({
         safe: true
       }));
     })
@@ -125,7 +158,7 @@ var jsTasks = function (filename) {
   return lazypipe()
     .pipe(concat, filename)
     .pipe(function () {
-      return gulpif(argv.production, uglify({compress: {'drop_debugger': true}}));
+      return gulpif(enabled.uglify, uglify({compress: {'drop_debugger': true}}));
     })
     .pipe(function () {
       return gulpif(enabled.hashStatic, hash())
@@ -146,8 +179,8 @@ var writeToManifest = function (directory) {
 
 // ### Styles
 // `gulp styles` - Compiles, combines, and optimizes project CSS.
-// By default this task will only log a warning if a precompiler error is
-// raised. If the `--production` flag is set: this task will fail outright.
+// By default this task only logs a warning if a precompiler error is
+// raised. If the `--production` flag is set: this task fails outright.
 gulp.task('styles', function () {
   var merged = merge();
   for (var i in project["globs"]) {
@@ -234,6 +267,8 @@ gulp.task('watch', function () {
   gulp.watch([path.source + 'scss/**/*'], ['styles']);
   gulp.watch([path.source + 'js/**/*'], ['scripts']);
   gulp.watch([path.source + 'images/**/*'], ['images']);
+  gulp.watch([path.html + '**/*.js'], ['scripts']);
+  gulp.watch([path.html + '**/*.scss'], ['styles']);
 });
 
 // ### Build

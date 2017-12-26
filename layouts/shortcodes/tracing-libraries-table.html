@@ -1,4 +1,5 @@
-<table class="table">
+<div class="table-responsive-container">
+<table class="table table-responsive">
   <thead>
     <tr>
       <th>Language</th>
@@ -7,18 +8,20 @@
       <th>Notes</th>
     </tr>
   </thead>
-  {{ range $e := $.Site.Data.libraries.Tracing }}
+
   <tbody>
+  {{ range $e := $.Site.Data.libraries.Tracing }}
     {{ range $libName, $info := . }}
         {{ range $i, $el := $info }}
           <tr>
             <td>{{ if eq $i 0}}<strong>{{ $libName }}</strong>{{ end }}</td>
             <td><a href="{{ $el.link }}">{{ $el.name }}</a></td>
-            <td>{{ if $el.official}}<i class="glyphicon glyphicon-ok" aria-hidden="true"></i>{{ end }}</td>
+            <td>{{ if $el.official}}<i class="icon-tick"></i>{{ end }}</td>
             <td>{{if $el.authors }}Written by {{ $el.authors }}{{ end }}{{ if $el.notes }}{{ $el.notes }}.{{ end }}</td>
           </tr>
         {{ end }}
     {{ end }}
-  </tbody>
   {{ end }}
+  </tbody>
 </table>
+</div>

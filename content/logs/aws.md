@@ -1,19 +1,27 @@
 ---
 title: AWS Log Collection
 kind: Documentation
-autotocdepth: 2
-customnav: lognav
+further_reading:
+- link: "/logs/explore"
+  tag: "Documentation"
+  text: Learn how to explore your logs
+- link: "/logs/processing"
+  tag: "Documentation"
+  text: Learn how to process your logs
+- link: "/logs/parsing"
+  tag: "Documentation"
+  text: Learn more about parsing
 ---
 
 ## Overview
 
-Push your AWS log information to Datadog using Lambda functions that respond to S3 and CloudWatch log events. First configure your AWS services to push logs to S3/ Cloudwatch Logs, then setup the Lambda function(s), and finally create the triggers that will invoke that Lambda and send logs to Datadog.
+Push your AWS log information to Datadog using Lambda functions that respond to S3 and CloudWatch log events. First configure your AWS services to push logs to S3/ Cloudwatch Logs, then setup the Lambda function(s), and finally create the triggers that invokes that Lambda and send logs to Datadog.
 
 ## Setup
 ### Create a new Lambda function
 
 1. Navigate to the [Lambda Console](https://console.aws.amazon.com/lambda/home?region=us-east-1) and create a new function:
-    {{< img src="logs/aws/create_lambda_function.png" alt="Create Lambda function" responsive="true" >}}
+    {{< img src="logs/aws/create_lambda_function.png" alt="Create Lambda function" responsive="true" popup="true">}}
 
 2. Select **Author from scratch** and give the function a unique name.
 3. Change the Runtime to **Python 2.7**
@@ -31,8 +39,7 @@ Push your AWS log information to Datadog using Lambda functions that respond to 
     
     * Setup an environment variable (Preferred)
     * Edit the code directly with your Datadog API Key
-    {{< img src="logs/aws/dd_api_key_setup.png" alt="DD API key setup" responsive="true" >}}
-
+    {{< img src="logs/aws/dd_api_key_setup.png" alt="DD API key setup" responsive="true" popup="true">}}
 4. Scroll down beyond the inline code area to **Basic Settings**.
 5. Set the memory to **around 1GB**.
 6. Set the timeout limit. We recommend **120 seconds.**
@@ -62,7 +69,7 @@ If you are storing logs in many S3 buckets, Datadog can automatically manage tri
 
 1. Add the required permissions to your Datadog role in the [IAM Console](https://console.aws.amazon.com/iam/home#/roles). You may already have some of these permissions from our other AWS integrations. Information on how these permissions are used can be found in the [permissions](#permissions) section below:
 
-{{< highlight json>}}
+```
 "elasticloadbalancing:DescribeLoadBalancers",
 "elasticloadbalancing:DescribeLoadBalancerAttributes",
 "lambda:AddPermission",
@@ -73,7 +80,7 @@ If you are storing logs in many S3 buckets, Datadog can automatically manage tri
 "s3:GetBucketNotification",
 "s3:ListAllMyBuckets",
 "s3:PutBucketNotification"
-{{< /highlight >}}
+```
 
 2. Navigate to the *Collect Logs* tab in the [AWS Integration tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services)
 3. Select the AWS Account from where you want to collect logs, and enter the ARN of the Lambda created in the previous section.
@@ -89,11 +96,10 @@ In your Lambda, go in the triggers tab and select `Add Trigger`:
 {{< img src="logs/aws/adding_trigger.png" alt="Adding trigger" responsive="true" >}}
 
 Select the log source and then follow the AWS instructions: 
-{{< img src="logs/aws/integration_lambda.png" alt="Integration Lambda" responsive="true" >}}
+{{< img src="logs/aws/integration_lambda.png" alt="Integration Lambda" responsive="true" popup="true">}}
 
 For instance, do not forget to set the correct event type on S3 Buckets:
-{{< img src="logs/aws/object_created.png" alt="Object Created" responsive="true" >}}
-
+{{< img src="logs/aws/object_created.png" alt="Object Created" responsive="true" popup="true">}}
 
 ### ELB
 
@@ -109,10 +115,10 @@ Add ELB logs to Datadog to:
 
 ELB logs are written in a s3 bucket and consumed by a Lambda function.
 Enable the logging on your ELB first to collect your logs:
-{{< img src="logs/aws/configure_access_logs.png" alt="Configure Access Logs" responsive="true" >}}
+{{< img src="logs/aws/configure_access_logs.png" alt="Configure Access Logs" responsive="true" popup="true">}}
 
 Set interval to **5 minutes** and define your s3 buckets:
-{{< img src="logs/aws/s3_location.png" alt="S3 Location" responsive="true" >}}
+{{< img src="logs/aws/s3_location.png" alt="S3 Location" responsive="true" popup="true">}}
 
 Then go back to the Lambda function and define a trigger on the corresponding s3 bucket.
 
@@ -121,13 +127,13 @@ Then go back to the Lambda function and define a trigger on the corresponding s3
 AWS CloudTrail is an audit service. Use AWS CloudTrail to get a history of AWS API calls and related events for your account. This includes calls made with the AWS Management Console, AWS SDKs, command line tools, and higher-level AWS services.
 
 When you define your Trails, select a s3 bucket to write the logs in:
-{{< img src="logs/aws/tail_s3_selection.png" alt="S3 Selection" responsive="true" >}}
+{{< img src="logs/aws/tail_s3_selection.png" alt="S3 Selection" responsive="true" popup="true">}}
 
 Link the Lambda function to this s3 bucket to send your logs to Datadog.
 
 ### ECS
 
-ECS logs are the legacy Docker container. They are not directly related to the ECS service, but they correspond to the logs written by the running app (in you Docker Containers). 
+ECS logs are the legacy Docker container. They are not directly related to the ECS service, but they correspond to the logs written by the running application (in you Docker Containers). 
 
 Collect ECS logs directly from the containers thanks to our [Agent 6 Docker integration](/integrations/docker_daemon). You can also [redirect those logs to Cloudwatch](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html#w2ab1c21c21c13 ) and ask the Lambda to ship them to your Datadog platform.
 
@@ -137,11 +143,10 @@ CloudFront is a CDN service which speeds up distribution of your static and dyna
 
 CloudFront delivers your content through a worldwide network of data centers called edge locations. When a user requests content that you're serving with CloudFront, the user is routed to the edge location that provides the lowest latency (time delay), so content is delivered with the best possible performance.
 
-
 When you enable logging for a distribution, specify the Amazon S3 bucket that you want CloudFront to store log files in. 
 If you're using Amazon S3 as your origin, we recommend that you do not use the same bucket for your log files; using a separate bucket simplifies maintenance.
 
-Store the log files for multiple distributions in the same bucket. When enabling logging, specify an optional prefix for the file names, to keep track of which log files are associated with which distributions, more information [here](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html#access-logs-choosing-s3-bucket ) 
+Store the log files for multiple distributions in the same bucket. When enabling logging, specify an optional prefix for the file names, [to keep track of which log files are associated with which distributions](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html#access-logs-choosing-s3-bucket ) 
 
 You can then collect the log from the s3 bucket thanks to the Lambda function.
 
@@ -160,10 +165,6 @@ You can then collect the log from the s3 bucket thanks to the Lambda function.
 * `s3:ListAllMyBuckets`: List all S3 buckets.
 * `s3:PutBucketNotification`: Add or remove a Lambda trigger based on S3 bucket events.
 
+## Further Reading
 
-## What's next
-
-* Learn how to [explore your logs](/logs/explore)
-* Learn how to [process your logs](/logs/processing)
-* Learn more about [parsing](/logs/parsing)
-
+{{< partial name="whats-next/whats-next.html" >}}

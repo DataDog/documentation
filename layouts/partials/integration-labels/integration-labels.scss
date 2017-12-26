@@ -1,0 +1,25 @@
+$ddpurple:    #774DA2;
+$labelcolors: (
+        agent: $ddpurple,
+        statsd: #ACDEDE,
+        crawler: #FE6638
+);
+
+.integration-labels {
+  span {
+    font-size:18px;
+    line-height: 18px;
+    font-weight:600;
+    display:inline;
+    padding-left:7px;
+    vertical-align: middle;
+  }
+  /* assign each label its color from map above */
+  @each $label, $color in $labelcolors {
+    .#{$label} {
+      span {
+        color: $color;
+      }
+    }
+  }
+}

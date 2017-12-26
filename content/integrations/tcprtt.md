@@ -3,6 +3,7 @@ title: TCP RTT check
 integration_title: TCP RTT Check
 kind: integration
 newhlevel: true
+is_public: true
 ---
 ## Overview
 
@@ -31,7 +32,7 @@ Finally, configure PCAP:
 
 ### Configuration
 
-Edit the ```go-metro.yaml``` file in your agent's ```conf.d``` directory. The following is an example file that will show the TCP RTT times for app.datadoghq.com and 192.168.0.22:
+Edit the `go-metro.yaml` file in your agent's `conf.d` directory. The following is an example file that will show the TCP RTT times for app.datadoghq.com and 192.168.0.22:
 
     init_config:
       snaplen: 512

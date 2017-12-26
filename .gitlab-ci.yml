@@ -26,7 +26,7 @@ before_script:
     - branches
 
 # ================== preview ================== #
-# If the branch has a name of <slack-user>/<feature-name> then ci will build a preview site
+# If the branch has a name of <slack-user>/<feature-name> then ci builds a preview site
 build_preview:
   <<: *base_template
   stage: build
@@ -39,9 +39,8 @@ build_preview:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - version_static_assets
     - sync_integration_descriptions
-    - sync_integration_metrics
-    - placehold_translations
     - build_hugo_site
+    - build_hugo_site_ja
     - minify_html
     - collect_static_assets
     - push_site_to_s3
@@ -101,8 +100,8 @@ build_live:
     - version_static_assets
     - sync_integration_descriptions
     - sync_integration_metrics
-    - placehold_translations
     - build_hugo_site
+    - build_hugo_site_ja
     - minify_html
     - collect_static_assets
     - push_site_to_s3

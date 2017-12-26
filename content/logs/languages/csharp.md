@@ -1,8 +1,19 @@
 ---
 title: C# Log Collection
 kind: documentation
-autotocdepth: 2
-customnav: lognav
+further_reading:
+- link: "/logs/processing"
+  tag: "Documentation"
+  text: Learn how to process your logs
+- link: "/logs/parsing"
+  tag: "Documentation"
+  text: Learn more about parsing
+- link: "/logs/explore"
+  tag: "Documentation"
+  text: Learn how to explore your logs
+- link: /logs/faq/log-collection-troubleshooting-guide
+  tag: "FAQ"
+  text: Log Collection Troubleshooting Guide
 ---
 
 <div class="alert alert-info">
@@ -40,7 +51,7 @@ var elapsedMs = 34;
 log.Information("Processed {@Position} in {Elapsed:000} ms.", position, elapsedMs);
 ```
 
-Then check the `log.json` file; you will see the following event:
+Then check the `log.json` file to see the following event:
 
 ```json
 {
@@ -63,7 +74,7 @@ Then check the `log.json` file; you will see the following event:
 }
 ```
 
-[Monitor now your log file with your agent](/logs/) to send your logs to your datadog application
+[Monitor now your log file with your agent](/logs/#tail-existing-files) to send your logs to your Datadog application
 
 ### NLog
 
@@ -119,7 +130,6 @@ namespace Datadog
         // Initialize a logger
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
-
         static void Main(string[] args)
         {
 
@@ -133,7 +143,7 @@ namespace Datadog
 }
 ```
 
-[Monitor now your log file with your agent](/logs/) to send your logs to your datadog application
+[Monitor now your log file with your agent](/logs/#tail-existing-files) to send your logs to your Datadog application.
 
 ### Log4Net
 
@@ -220,7 +230,6 @@ If you have followed the instructions you should see in your file (for example `
 }
 ```
 
-
 ## Configure your Datadog agent
 
 Create a `csharp.d/conf.yaml` file in your `conf.d/` folder with the following content:
@@ -249,3 +258,8 @@ logs:
 ```
 
 That's it! Now, all your logs are going to be in proper JSON automatically understood by your Datadog application.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+>>>>>>> master

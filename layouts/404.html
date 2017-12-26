@@ -1,20 +1,17 @@
-{{ partial "header.html" . }}
-{{ partial "navbar.html" . }}
-<div class="container">
-    <div class="row">
-        <div class="col-sm-3 col-md-3 hidden-xs hidden-print" id="sidebarcolumn">
-            {{ partial "sidebar.html" . }}
-        </div>
-        <div class="col-xs-12 col-sm-9 col-md-9 main">
-            <h1>Uh oh, Something Went Wrong</h1>
-
-            <img src="{{ partial "img.html" (dict "root" . "src" "sad_bits.png") }}" />
-            <p class="alert alert-error pull-left">
-                Head back <a href="https://docs.datadoghq.com/">home</a> and start again.
-            </p>
-        </div>
+{{ define "main" }}
+<div class="row page404">
+    <div class="d-none d-sm-flex col-sm-6 text-right">
+        {{ partial "img.html" (dict "root" . "src" "sad_bits.png" "class" "img-fluid ml-auto" "alt" "sad") }}
+    </div>
+    <div class="col-12 col-sm-6">
+        <h1>Arf.</h1>
+        <h2>404 Not Found</h2>
+    </div>
+    <div class="blurb col-12">
+        <h2>This is somewhat embarrassing, isn't it?</h2>
+        <p style="color:#333; text-align:center;">It seems we can't find what you're looking for.</p>
+        <br>
     </div>
 </div>
-{{ partial "container-footer.html" . }}
-{{ partial "footer.html" . }}
+{{ end }}
 

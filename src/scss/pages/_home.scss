@@ -1,0 +1,15 @@
+.kind-home {
+  .main {
+    h1 {
+      padding-bottom:10px;
+      & + p {
+        //color: #4A4A4A;
+      }
+    }
+    .tile-nav + p,
+    .tile-nav + p + p,
+    .tile-nav + p + p + p {
+      //color: #4A4A4A;
+    }
+  }
+}

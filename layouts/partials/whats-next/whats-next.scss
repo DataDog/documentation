@@ -1,0 +1,53 @@
+$ddpurple:    #774DA2;
+
+.whatsnext {
+  font-size:18px;
+  line-height:22px;
+  .list-group-item {
+    margin-bottom: 0;
+    border-bottom:1px solid transparent;
+    &:last-child {
+      border-bottom:1px solid rgba(0, 0, 0, 0.125);
+      &:hover {
+        border-bottom:1px solid $ddpurple;
+      }
+    }
+    img {
+      max-width:24px;
+    }
+    .hover {
+      display:none;
+    }
+    .badge {
+      font-weight: 200;
+      border-radius: 2px;
+    }
+    .text {
+      margin-right: 9px;
+    }
+  }
+}
+
+@media (max-width: 575px) {
+  .whatsnext {
+    .badge {
+      display:none;
+    }
+  }
+}
+
+@media (min-width: 576px) {
+  .whatsnext {
+    .list-group-item {
+      &:hover,
+      &.active {
+        & .hover {
+          display: inline;
+        }
+        & .static {
+          display: none;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{{ if .Params.ddtype }}
+<div class="row integration-labels mb-40">
+    {{ if eq .Params.ddtype "check" }}
+        <div class="agent col-12">
+            {{ partial "img.html" (dict "root" . "src" "icons/check_agent.png" "class" "static" "alt" "Agent Check" "width" "21") }}<span>Agent Check</span>
+        </div>
+    {{ end }}
+    {{ if eq .Params.ddtype "statsd" }}
+        <div class="statsd col-12 ">
+            {{ partial "img.html" (dict "root" . "src" "icons/check_statsd.png" "class" "static" "alt" "StatsD Check" "width" "21") }}<span>StatsD Check</span>
+        </div>
+    {{ end }}
+    {{ if eq .Params.ddtype "crawler" }}
+        <div class="crawler col-12">
+            {{ partial "img.html" (dict "root" . "src" "icons/check_crawler.png" "class" "static" "alt" "Crawler" "width" "21") }}<span>Crawler</span>
+        </div>
+    {{ end }}
+</div>
+{{ end }}

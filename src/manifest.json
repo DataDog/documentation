@@ -5,11 +5,19 @@
         "src/js/datadog-docs.js"
       ],
       "vendor": [
-        "src/js/vendor/jquery.js",
-        "src/js/vendor/bootstrap.min.js",
-        "src/js/vendor/jquery.tocible.js",
-        "src/js/vendor/algoliasearch.min.js",
-        "src/js/vendor/jquery.pajinate.min.js"
+        "node_modules/jquery/dist/jquery.js",
+        "node_modules/popper.js/dist/umd/popper.js",
+        "node_modules/bootstrap/js/dist/button.js",
+        "node_modules/bootstrap/js/dist/collapse.js",
+        "node_modules/bootstrap/js/dist/dropdown.js",
+        "node_modules/bootstrap/js/dist/modal.js",
+        "node_modules/bootstrap/js/dist/util.js",
+        "node_modules/mixitup/dist/mixitup.js",
+        "node_modules/lazysizes/lazysizes.js",
+        "node_modules/stickyfilljs/dist/stickyfill.js",
+        "node_modules/algoliasearch/dist/algoliasearch.js",
+        "node_modules/mousetrap/mousetrap.js",
+        "node_modules/picturefill/dist/picturefill.js"
       ],
       "main": true
     },
@@ -18,8 +26,7 @@
         "src/scss/style.scss"
       ],
       "vendor": [
-        "src/scss/vendor/tipuesearch.css",
-        "src/scss/vendor/pygments.css"
+        "src/scss/vendor/pygments.scss"
       ],
       "main": true
     }
