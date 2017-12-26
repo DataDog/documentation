@@ -38,7 +38,7 @@ and adding the following line to the `[Main]` section:
 ```
 
 After configuration is complete, [restart the Agent](/agent/faq/start-stop-restart-the-datadog-agent).  
-**Note**: Collecting Container information in the standard install, the dd-agent user needs to have permissions to access docker.sock.
+**Note**: To Collect container information in the standard install, the dd-agent user needs to have permissions to access docker.sock.
 
 ### Docker container
 
