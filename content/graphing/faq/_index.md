@@ -1,6 +1,7 @@
 ---
 title: Graphing FAQ
 kind: faq
+private: true
 ---
 
 {{< whatsnext desc="List of Frequently Asked Questions:" >}}

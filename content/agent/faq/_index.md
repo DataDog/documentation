@@ -1,6 +1,7 @@
 ---
 title: Agent FAQ
 kind: faq
+private: true
 ---
 
 ## Installation

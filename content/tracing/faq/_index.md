@@ -1,6 +1,7 @@
 ---
 title: Tracing FAQ
 kind: faq
+private: true
 ---
 {{< whatsnext desc="List of Frequently Asked Questions:">}}
     {{< nextlink href="/tracing/faq/what-are-the-naming-criteria-for-services-resources" >}}What are the naming criteria for services, resources, etc?{{< /nextlink >}}
