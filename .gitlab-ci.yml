@@ -109,51 +109,51 @@ build_live:
   only:
     - master
 
-#test_live_images:
-#  <<: *base_template
-#  stage: post-deploy
-#  environment: "live"
-#  variables:
-#    URL: ${LIVE_DOMAIN}
-#  script:
-#    - pull_artifact_from_s3
-#    - test_site_links "images" "${URL}" "True" "False" "True"
-#  only:
-#    - master
+test_live_images:
+  <<: *base_template
+  stage: post-deploy
+  environment: "live"
+  variables:
+    URL: ${LIVE_DOMAIN}
+  script:
+    - pull_artifact_from_s3
+    - test_site_links "images" "${URL}" "True" "False" "True"
+  only:
+    - master
 
-#test_live_links:
-#  <<: *base_template
-#  stage: post-deploy
-#  environment: "live"
-#  variables:
-#    URL: ${LIVE_DOMAIN}
-#  script:
-#    - pull_artifact_from_s3
-#    - test_site_links "links" "${URL}" "True" "False" "True"
-#  only:
-#    - master
+test_live_links:
+  <<: *base_template
+  stage: post-deploy
+  environment: "live"
+  variables:
+    URL: ${LIVE_DOMAIN}
+  script:
+    - pull_artifact_from_s3
+    - test_site_links "links" "${URL}" "True" "False" "True"
+  only:
+    - master
 
-#test_live_static:
-#  <<: *base_template
-#  stage: post-deploy
-#  environment: "live"
-#  variables:
-#    URL: ${LIVE_DOMAIN}
-#  script:
-#    - pull_artifact_from_s3
-#    - test_site_links "static" "${URL}" "True" "False" "True"
-#  only:
-#    - master
+test_live_static:
+  <<: *base_template
+  stage: post-deploy
+  environment: "live"
+  variables:
+    URL: ${LIVE_DOMAIN}
+  script:
+    - pull_artifact_from_s3
+    - test_site_links "static" "${URL}" "True" "False" "True"
+  only:
+    - master
 
-#index_algolia:
-#  <<: *base_template
-#  stage: post-deploy
-#  environment: "live"
-#  script:
-#    - pull_artifact_from_s3
-#    - index_algolia
-#  only:
-#    - master
+index_algolia:
+  <<: *base_template
+  stage: post-deploy
+  environment: "live"
+  script:
+    - pull_artifact_from_s3
+    - index_algolia
+  only:
+    - master
 
 #rollback_live:
 #  <<: *base_template
