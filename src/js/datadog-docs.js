@@ -37,6 +37,15 @@ $(document).ready(function () {
         $('.lang-btn').on('click', function (e) {
             var el = $(this);
 
+            // Show this language's code blocks and language-specific elements
+            var lang = el.data('lang');
+            code_blocks.hide();
+            //$('.code-block-' + lang).fadeIn();
+            $('.code-block-' + lang).show();
+            lang_blocks.hide();
+            //$('.lang-specific-' + lang).fadeIn();
+            $('.lang-specific-' + lang).show();
+
             // Find the element currently in the view port
             var scrollElement;
             hs.each(function () {
@@ -49,13 +58,6 @@ $(document).ready(function () {
             // Highlight the active button.
             $('.lang-btn').removeClass('active');
             el.addClass('active');
-
-            // Show this language's code blocks and language-specific elements
-            var lang = el.data('lang');
-            code_blocks.hide();
-            $('.code-block-' + lang).fadeIn();
-            lang_blocks.hide();
-            $('.lang-specific-' + lang).fadeIn();
 
             // Scroll to the element that was in the viewport (ie retain location).
             if(scrollElement) {
@@ -355,13 +357,13 @@ $(document).ready(function () {
         var offset = amount + customPadding;
         var url = window.location.href.replace(window.location.hash, '');
         var newSt = htag.offset().top - offset;
+        var currentSt = $(document).scrollTop();
         if(htag.length) {
-            if($("html, body").scrollTop() !== newSt)
-            {
+            if(currentSt !== newSt) {
                 if(animate) {
                     $("html, body").animate({scrollTop: newSt}, 300);
                 } else {
-                    $("html, body").scrollTop(newSt);
+                    $(document).scrollTop(newSt);
                 }
                 $(document).trigger( "moveToAnchor" );
                 window.history.pushState(null, null, url + href);
