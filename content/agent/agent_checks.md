@@ -465,7 +465,7 @@ If your issue continues, reach out to Support with the [help page](/help) that l
     `<INSTALL_DIR>/embedded/python.exe <INSTALL_DIR>agent/agent.py check <CHECK_NAME>`
     For example, to run the disk check:
     ```
-    C:\Program Files\Datadog\Datadog Agent\embedded\python.exe C:\Program Files\Datadog\Datadog Agent\agent\agent.py check disk
+    C:\Program' 'Files\Datadog\Datadog' 'Agent\embedded\python.exe C:\Program' 'Files\Datadog\Datadog' 'Agent\agent\agent.py check disk
     ```
 
 [1]: /developers/integrations/integration_sdk/
