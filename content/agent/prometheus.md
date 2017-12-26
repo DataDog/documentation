@@ -13,7 +13,7 @@ First off, ensure you've properly installed the [Agent](http://app.datadoghq.com
 
 ## Prometheus check interface 
 
-`PrometheusCheck` is a mother class providing a structure and some helpers
+`PrometheusCheck` is [a mother class](https://github.com/DataDog/dd-agent/blob/master/checks/prometheus_check.py) providing a structure and some helpers
 to collect metrics, events and service checks exposed via Prometheus, minimal configuration for checks based on this class include:
 
 - Overriding self.NAMESPACE
@@ -178,3 +178,25 @@ class KubeDNSCheck(PrometheusCheck):
 
         self.process(endpoint, send_histograms_buckets=send_buckets, instance=instance)
 ```
+
+
+## Getting further
+
+You can improve your Prometheus check with the following methods: 
+
+### `self.ignore_metrics`
+
+Some metrics are ignored because they are duplicates or introduce a very high cardinality. Metrics included in this list will be silently skipped without a `Unable to handle metric` debug line in the logs
+
+### `self.labels_mapper`
+
+If the `labels_mapper` dictionary is provided, the metrics labels names in the `labels_mapper` will use the corresponding value as tag name when sending the gauges.
+
+### `self.exclude_labels`
+
+`exclude_labels` is an array of labels names to exclude. Those labels will just not be added as tags when submitting the metric.
+
+### `self.type_overrides`
+
+`type_overrides` is a dictionary where the keys are Prometheus metric names and the values are a metric type (name as string) to use instead of the one listed in the payload. It can be used to force a type on untyped metrics.
+Note: it is empty in the mother class but will need to be overloaded/hardcoded in the final check not to be counted as custom metric.
