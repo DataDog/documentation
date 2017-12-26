@@ -26,7 +26,7 @@ The Agent has three main parts: the collector, DogStatsD, and the forwarder:
 This is all controlled by one supervisor process. We keep this separate so you don't have to have the overhead of each application if you don't want to run all parts, although we generally recommend you do.
 
 <div class="alert alert-info">
-Only agent versions superior to 5.0 are supported in Datadog documentation.
+This documentation covers Agent versions 5.0.0 and above.
 </div>
 
 ## Configuration management tools
