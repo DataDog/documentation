@@ -226,7 +226,7 @@ languages:
           weight: 40
           parent: customnav_graphingnav_infrastructure
         - identifier: customnav_infrastructurenav_process
-          name: "Process"
+          name: "Live Processes"
           url: "/graphing/infrastructure/process/"
           weight: 50
           parent: customnav_graphingnav_infrastructure
