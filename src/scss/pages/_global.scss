@@ -73,7 +73,7 @@ strong {
 }
 
 a {
-  color:#555555;
+  color:#000;
 }
 
 button:focus,
@@ -142,9 +142,9 @@ code {
 
 p {
   // todo: can i set this with a bootstrap variable?
-  font-size:22px;
-  color:#000;
-  line-height:30px;
+  font-size:18px;
+  color:#4a4a4a;
+  line-height:24px;
 }
 
 h1 {
@@ -186,7 +186,7 @@ h2 {
   & > ol li a,
   & > ul li a {
     //text-decoration:underline;
-    border-bottom: 1px solid #c8c8c8;
+    border-bottom: 1px solid #000;
     &:hover {
       color: $ddpurple;
       border-color: $ddpurple;
@@ -199,9 +199,8 @@ h2 {
       &:before {
         content: "–";
         position: relative;
-        margin-right: 7px;
-        margin-left: -16px;
-        float: left;
+        margin-right: 3px;
+        margin-left: -12px;
       }
       p {
         margin-bottom:0;
@@ -225,7 +224,11 @@ h2 {
 
 
   ul, ol, p {
-    font-size:22px;
+    font-size:18px;
+    color:#4a4a4a;
+    line-height:24px;
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
   }
 }
 
