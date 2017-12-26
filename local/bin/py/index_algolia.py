@@ -108,7 +108,7 @@ def index_algolia(app_id, api_key, content_path=None):
         return articles
 
     index_english_articles = crawl_site(content_path, dirs_exclude + languages)
-    index_japanese_articles = crawl_site(content_path + '/ja', dirs_exclude)
+    #index_japanese_articles = crawl_site(content_path + '/ja', dirs_exclude)
 
     # save to algolia
     try:
@@ -122,15 +122,15 @@ def index_algolia(app_id, api_key, content_path=None):
                 print(e)
                 exit(1)
 
-        if index_japanese_articles:
-            index_japanese_build.clear_index()
-            try:
-                index_japanese_build.save_objects(index_japanese_articles)
-                client.copy_index(DOCS_BUILD_JAPANESE, DOCS_LIVE_JAPANESE)
-                print('Algolia JA Docs Build objects have been successfully updated.')
-            except algoliasearch.AlgoliaException as e:
-                print(e)
-                exit(1)
+        # if index_japanese_articles:
+        #     index_japanese_build.clear_index()
+        #     try:
+        #         index_japanese_build.save_objects(index_japanese_articles)
+        #         client.copy_index(DOCS_BUILD_JAPANESE, DOCS_LIVE_JAPANESE)
+        #         print('Algolia JA Docs Build objects have been successfully updated.')
+        #     except algoliasearch.AlgoliaException as e:
+        #         print(e)
+        #         exit(1)
         pass
 
     except ValueError as e:
