@@ -142,6 +142,7 @@ class PreBuild:
             'kafka_consumer': {'action': 'merge', 'target': 'kafka', 'remove_header': False},
             'kube_dns': {'action': 'discard', 'target': 'none', 'remove_header': False},
             'kubernetes_state': {'action': 'discard', 'target': 'none', 'remove_header': False},
+            'stride': {'action': 'discard', 'target': 'none', 'remove_header': False},
         })
         self.initial_integration_files = glob.glob('{}*.md'.format(self.content_integrations_dir))
         makedirs(self.data_integrations_dir, exist_ok=True)
