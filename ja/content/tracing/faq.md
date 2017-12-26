@@ -18,7 +18,7 @@ title: Tracing FAQ
 * Service names and metadata keys **cannot have more than 50 characters**.
 * Metadata and resource names **cannot exceed 5000 bytes**.
 * Service, resource, and metadata names cannot contain spaces (spaces will be replaced with underscores).
-* Resource and service names must adhere to [metric naming rules](https://docs.datadoghq.com/developers/metrics/#api-metric-names).
+* Resource and service names must adhere to [metric naming rules](https://docs.datadoghq.com/developers/metrics/#metric-names).
 
 ### How long is tracing data stored?
 
