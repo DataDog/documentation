@@ -1,0 +1,180 @@
+---
+title: Prometheus Check
+kind: documentation
+---
+
+## Overview
+
+This page details how to collect metrics and events from a Prometheus data source by writing an Prometheus Check, a Python plug-in to the Datadog Agent. This page looks first at the `PrometheusCheck` interface, and then propose a simple Prometheus Check that collects timing metrics and status events from [Kube DNS](https://github.com/DataDog/integrations-core/blob/master/kube_dns/check.py).
+
+## Setup
+
+First off, ensure you've properly installed the [Agent](http://app.datadoghq.com/account/settings#agent) on your machine. If you run into any issues during the setup, [contact our support](/help).
+
+## Prometheus check interface 
+
+`PrometheusCheck` is a mother class providing a structure and some helpers
+to collect metrics, events and service checks exposed via Prometheus, minimal configuration for checks based on this class include:
+
+- Overriding self.NAMESPACE
+- Overriding self.metrics_mapper
+- Implementing the check method
+AND/OR
+- Create method named after the prometheus metric they will handle (see self.prometheus_metric_name)
+
+## Your first Prometheus check
+### Configuration
+
+<div class="alert alert-warning">
+The names of the configuration and check files must match. If your check
+is called <code>mycheck.py</code> your configuration file <em>must</em> be
+named <code>mycheck.yaml</code>.
+</div>
+
+Configuration for a Prometheus Check is almost the same as a regular Agent Check, please refer to the [dedicated Agent check documentation to learn more](/agent/agent_checks/#configuration)
+
+The main difference is to include the variable `prometheus_endpoint` in your `check.yaml` file. This goes into `conf.d/kube_dns.yaml`:
+
+```yaml
+init_config:
+
+instances:
+    # url of the metrics endpoint of prometheus
+  - prometheus_endpoint: http://localhost:10055/metrics
+    [{}]
+```
+
+### Writing your Prometheus check
+All Prometheus checks inherit from the `PrometheusCheck` class found in `checks/prometheus_check.py`: 
+
+```python
+from checks.prometheus_check import PrometheusCheck
+
+class KubeDNSCheck(PrometheusCheck):
+```
+
+#### Overriding `self.NAMESPACE`
+
+`NAMESPACE` is the prefix metrics will have. It needs to be hardcoded in your check class:
+
+```python
+from checks.prometheus_check import PrometheusCheck
+
+class KubeDNSCheck(PrometheusCheck):
+    def __init__(self, name, init_config, agentConfig, instances=None):
+        super(KubeDNSCheck, self).__init__(name, init_config, agentConfig, instances)
+        self.NAMESPACE = 'kubedns'
+```
+
+#### Overriding `self.metrics_mapper`
+
+`metrics_mapper` is a dictionary where the keys are the metrics to capture and the values are the corresponding metrics names to have in datadog.
+We override it so all metrics reported by your Prometheus checks are not counted as [custom metric](/getting_started/custom_metrics):
+
+```python
+from checks.prometheus_check import PrometheusCheck
+
+class KubeDNSCheck(PrometheusCheck):
+    def __init__(self, name, init_config, agentConfig, instances=None):
+        super(KubeDNSCheck, self).__init__(name, init_config, agentConfig, instances)
+        self.NAMESPACE = 'kubedns'
+        self.metrics_mapper = {
+            #metrics have been renamed to kubedns in kubernetes 1.6.0
+            'kubedns_kubedns_dns_response_size_bytes': 'response_size.bytes',
+            'kubedns_kubedns_dns_request_duration_seconds': 'request_duration.seconds',
+            'kubedns_kubedns_dns_request_count_total': 'request_count',
+            'kubedns_kubedns_dns_error_count_total': 'error_count',
+            'kubedns_kubedns_dns_cachemiss_count_total': 'cachemiss_count'
+        }
+```
+
+#### Implementing the check method
+
+From `instance` we just need `endpoint` which is the metrics endpoint to use to poll metrics from Prometheus:
+
+```python
+def check(self, instance):
+    endpoint = instance.get('prometheus_endpoint')
+```
+
+##### Exceptions
+
+If a check cannot run because of improper configuration, programming error, or
+because it could not collect any metrics, it should raise a meaningful exception. This exception is logged and is shown in the Agent [info command](/agent/faq/agent-status-and-information) for easy debugging. For example:
+
+    $ sudo /etc/init.d/datadog-agent info
+
+      Checks
+      ======
+
+        my_custom_check
+        ---------------
+          - instance #0 [ERROR]: Unable to find prometheus_endpoint in config file.
+          - Collected 0 metrics & 0 events
+
+Improve your `check()` method with `CheckException`:
+
+```python
+from checks import CheckException
+
+def check(self, instance):
+    endpoint = instance.get('prometheus_endpoint')
+    if endpoint is None:
+    raise CheckException("Unable to find prometheus_endpoint in config file.")
+```
+
+Then as soon as you have data available you just need to flush:
+
+```python
+from checks import CheckException
+
+def check(self, instance):
+    endpoint = instance.get('prometheus_endpoint')
+    if endpoint is None:
+    raise CheckException("Unable to find prometheus_endpoint in config file.")
+    # By default we send the buckets.
+    if send_buckets is not None and str(send_buckets).lower() == 'false':
+        send_buckets = False
+    else:
+        send_buckets = True
+
+    self.process(endpoint, send_histograms_buckets=send_buckets, instance=instance)
+```
+
+### Putting It All Together
+
+```python
+from checks import CheckException
+from checks.prometheus_check import PrometheusCheck
+
+class KubeDNSCheck(PrometheusCheck):
+    """
+    Collect kube-dns metrics from Prometheus
+    """
+    def __init__(self, name, init_config, agentConfig, instances=None):
+        super(KubeDNSCheck, self).__init__(name, init_config, agentConfig, instances)
+        self.NAMESPACE = 'kubedns'
+
+        self.metrics_mapper = {
+            # metrics have been renamed to kubedns in kubernetes 1.6.0
+            'kubedns_kubedns_dns_response_size_bytes': 'response_size.bytes',
+            'kubedns_kubedns_dns_request_duration_seconds': 'request_duration.seconds',
+            'kubedns_kubedns_dns_request_count_total': 'request_count',
+            'kubedns_kubedns_dns_error_count_total': 'error_count',
+            'kubedns_kubedns_dns_cachemiss_count_total': 'cachemiss_count',
+        }
+
+    def check(self, instance):
+        endpoint = instance.get('prometheus_endpoint')
+        if endpoint is None:
+            raise CheckException("Unable to find prometheus_endpoint in config file.")
+
+        send_buckets = instance.get('send_histograms_buckets', True)
+        # By default we send the buckets.
+        if send_buckets is not None and str(send_buckets).lower() == 'false':
+            send_buckets = False
+        else:
+            send_buckets = True
+
+        self.process(endpoint, send_histograms_buckets=send_buckets, instance=instance)
+```

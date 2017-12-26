@@ -128,6 +128,11 @@ languages:
           url: "/agent/agent_checks/"
           weight: 30
           parent: menu_references_agent
+        - identifier: customnav_agentnav_prometheus_checks
+          name: "Prometheus Checks"
+          url: "/agent/prometheus/"
+          weight: 31
+          parent: menu_references_agent
         - identifier: customnav_agentnav_autodiscovery
           name: "Autodiscovery"
           url: "/agent/autodiscovery/"
