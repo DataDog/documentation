@@ -49,7 +49,7 @@ During the beta phase of Datadog Logs, not all integrations include log configur
 * IIS: [iis.d/conf.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/iis/conf.yaml.example)
 * Mongo: [mongo.d/conf.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/mongo/conf.yaml.example)
 * Nginx: [nginx.d/conf.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/nginx/conf.yaml.example)
-* Postgres: [postgres.d/conf.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/postgres/conf.yaml.example)
+* PostgreSQL: [postgres.d/conf.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/postgres/conf.yaml.example)
 
 ## Custom log collection
 
@@ -152,7 +152,7 @@ If the agent is containerized, see [the specific configuration file to mount the
 
 * [Restart your agent](https://help.datadoghq.com/hc/en-us/articles/203764515-Start-Stop-Restart-the-Datadog-Agent)
 
-## Log Agent advanced functionalities 
+## Log collection advanced functionalities 
 
 ### Filter logs
 
@@ -237,12 +237,12 @@ logs:
 
 ### Multi-line
 
-If your logs are not sent in JSON and you want to aggregate several lines into one single log, configure the Datadog Agent to detect a new log using a specific regex pattern instead of having one log per line.  
+If your logs are not sent in JSON and you want to aggregate several lines into one single entry, configure the Datadog Agent to detect a new log using a specific regex pattern instead of having one log per line.  
 
 This is accomplished by using the `log_processing_rules` parameter in your configuration file with the **multi_line** `type`.
 
-This aggregates all lines into one single log until the given pattern is detected again. This is especially useful for database logs and stack traces.
-Example: Every Postgres log line starts with a timestamp with `YYYY-dd-mm` format. The below lines would be sent as two logs.
+This aggregates all lines into one single entry until the given pattern is detected again. This is especially useful for database logs and stack traces.
+Example: Every PostgreSQL log line starts with a timestamp with `YYYY-dd-mm` format. The below lines would be sent as two logs.
 
 ```
 2017-12-05 10:10:46.981 UTC [1107] postgres psql postgres [local] 5a0c58f6.453 LOG:  statement: SELECT d.datname as “Name”,
