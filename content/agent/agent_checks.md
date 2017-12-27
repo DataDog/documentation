@@ -8,7 +8,8 @@ aliases:
 
 ## Overview
 
-This page details how to collect metrics and events from a new data source by writing an Agent Check, a Python plug-in to the Datadog Agent. This page looks first at the `AgentCheck` interface, and then propose a simple Agent Check that collects timing metrics and status events from HTTP services.
+This page details how to collect metrics and events from a new data source by writing an Agent Check.  
+This page looks first at the `AgentCheck` interface, and then propose a simple Agent Check that collects timing metrics and status events from HTTP services.
 
 Custom checks are included in the main check run loop, meaning they run every check interval, which defaults to 15 seconds.
 

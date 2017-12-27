@@ -5,22 +5,19 @@ kind: documentation
 
 ## Overview
 
-This page details how to collect metrics and events from a Prometheus data source by writing an Prometheus Check, a Python plug-in to the Datadog Agent. This page looks first at the `PrometheusCheck` interface, and then propose a simple Prometheus Check that collects timing metrics and status events from [Kube DNS](https://github.com/DataDog/integrations-core/blob/master/kube_dns/check.py).
-
-## Setup
-
-First off, ensure you've properly installed the [Agent](http://app.datadoghq.com/account/settings#agent) on your machine. If you run into any issues during the setup, [contact our support](/help).
+This page details how to collect metrics and events from a Prometheus data source by writing a Prometheus Check.  
+This page looks first at the `PrometheusCheck` interface, and then propose a simple Prometheus Check that collects timing metrics and status events from [Kube DNS](https://github.com/DataDog/integrations-core/blob/master/kube_dns/check.py).
 
 ## Prometheus check interface 
 
-`PrometheusCheck` is [a mother class](https://github.com/DataDog/dd-agent/blob/master/checks/prometheus_check.py) providing a structure and some helpers
-to collect metrics, events and service checks exposed via Prometheus, minimal configuration for checks based on this class include:
+`PrometheusCheck` is [a mother class](https://github.com/DataDog/dd-agent/blob/master/checks/prometheus_check.py) providing a structure and some helpers to collect metrics, events, and service checks exposed via Prometheus. Minimal configuration for checks based on this class include:
 
-- Overriding self.NAMESPACE
-- Overriding self.metrics_mapper
-- Implementing the check method
+
+- Overriding `self.NAMESPACE`
+- Overriding `self.metrics_mapper`
+- Implementing the `check()` method
 AND/OR
-- Create method named after the prometheus metric they will handle (see self.prometheus_metric_name)
+- Create method named after the prometheus metric they will handle (see `self.prometheus_metric_name`)
 
 ## Your first Prometheus check
 Let's write a simple kube_dns check:
@@ -70,8 +67,8 @@ class KubeDNSCheck(PrometheusCheck):
 
 #### Overriding `self.metrics_mapper`
 
-`metrics_mapper` is a dictionary where the keys are the metrics to capture and the values are the corresponding metrics names to have in datadog.
-We override it so all metrics reported by your Prometheus checks are not counted as [custom metric](/getting_started/custom_metrics):
+`metrics_mapper` is a dictionary where the key is the metric to capture and the value is the corresponding metric name in Datadog.
+The reason for the override it so metrics reported by the Prometheus checks are not counted as [custom metric](/getting_started/custom_metrics):
 
 ```python
 from checks.prometheus_check import PrometheusCheck
