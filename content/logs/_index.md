@@ -152,7 +152,7 @@ If the agent is containerized, see [the specific configuration file to mount the
 
 * [Restart your agent](https://help.datadoghq.com/hc/en-us/articles/203764515-Start-Stop-Restart-the-Datadog-Agent)
 
-## Log Agent advanced functionalities 
+## Log Agent advanced usage
 
 ### Filter logs
 
