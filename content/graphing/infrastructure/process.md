@@ -120,7 +120,7 @@ While actively working with the Live Processes, metrics are collected at 2s reso
 
 - The Process Agent is available for the default Debian docker-dd-agent image only.  It is not included in the Alpine image.
 
-- The `/etc/passwd` file mounted into the docker-dd-agent is necessary to collect usernames for each process.  This is a public file and the Process Agent does not use any fields except the username.  All features except the `user` metadata field will function without access to this file.
+- In container deployments, the `/etc/passwd` file mounted into the docker-dd-agent is necessary to collect usernames for each process.  This is a public file and the Process Agent does not use any fields except the username.  All features except the `user` metadata field will function without access to this file.
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://github.com/DataDog/docker-dd-agent
