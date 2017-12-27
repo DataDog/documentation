@@ -5,8 +5,7 @@ kind: documentation
 
 ## Overview
 
-This page details how to collect metrics and events from a Prometheus data source by writing a Prometheus Check.  
-This page looks first at the `PrometheusCheck` interface, and then propose a simple Prometheus Check that collects timing metrics and status events from [Kube DNS](https://github.com/DataDog/integrations-core/blob/master/kube_dns/check.py).
+This page first looks at the `PrometheusCheck` interface, and then proposes a simple Prometheus Check that collects timing metrics and status events from [Kube DNS](https://github.com/DataDog/integrations-core/blob/master/kube_dns/check.py).
 
 ## Prometheus check interface 
 
