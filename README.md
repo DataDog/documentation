@@ -19,7 +19,7 @@ Built with [hugo](https://gohugo.io/), a static website generation tool.
 
 Inside `documentation/` folder, create a `Makefile.config` file from the [Makefile.config.example](https://github.com/DataDog/documentation/blob/master/Makefile.config.example)
 
-If you are a Datadog employee, add your [Github personal token](#github-personal-token)
+If you are a Datadog employee, add your [Github personal token](https://github.com/DataDog/documentation/wiki/Github-personal-token)
 
 To run the site without Docker and perform administrative tasks (compile metrics, create i18n placeholders, etc), just execute:
 
@@ -79,30 +79,10 @@ Make sure all files are lowercase. Macs are case insensitive when creating links
 
 ## Releasing
 
-If you receive an error regarding `There was a problem getting GitHub Metrics`, please see the [Github personal access token](#github-personal-token).
+If you receive an error regarding `There was a problem getting GitHub Metrics`, please see the [Github personal access token](https://github.com/DataDog/documentation/wiki/Github-personal-token).
 
 Within 5 minutes of merging to master, it deploys automatically. You can see the status in the internal Datadog Slack *#documentation* channel.
 
 ## How to add a new integration
 
 [See the dedicated doc page](https://docs.datadoghq.com/developers/integrations)
-
-## Github personal token
-
-Integrations that have metrics attempts to read the metrics metadata list from the `metadata.csv` file in the Datadog web application repo. This requires read access to that repository and your Github Personal Token. If you are not a Datadog employee, please skip this step.
-
-For more information on generating a token, see [Github's documentation](https://help.github.com/articles/creating-an-access-token-for-command-line-use/).
-
-After you've generated a token, add the following line to the `.bash_profile` in your home directory:
-
-```
-export github_personal_token=[paste access token here]
-```
-
-You should then run `source ~/.bash_profile` to reload the settings.
-
-Update your Makefile.config to:
-
-```
-FETCH_INTEGRATIONS = true
-```
