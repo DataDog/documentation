@@ -36,7 +36,7 @@ This [plugin][101] sends any Dynatrace measure from a chart to Datadog.
 This is for a [FreeSwitch ESL ][48] application to export statistics to DataDog using the DogStatsD API and is written by [WiMacTel][49].
 
 ### Google Analytics
-You can get data into Datadog from Google Analytics using our API with [this library][101] from [Bithaus][102] or [this library][50].
+You can get data into Datadog from Google Analytics using our API with [this library][105] from [Bithaus][106] or [this library][50].
 
 ### Logstash Output
   * [Logstash Output for Datadog][73]
@@ -177,3 +177,5 @@ If you've written a Datadog library and would like to add it to this page, write
    [102]: https://docs.moogsoft.com/display/060102/Datadog+Solution+Pak
    [103]: https://github.com/sensu-plugins/sensu-plugins-datadog
    [104]: https://github.com/sparkida/winston-datadog
+   [105]: https://github.com/bithauschile/datadog-ga
+   [106]: https://blog.bithaus.cl/2016/04/20/realtime-google-analytics-metrics-in-datadog/
