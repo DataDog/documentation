@@ -26,12 +26,12 @@ Use your favorite python logger to log into a file on your host. Then [monitor t
 
 ## Setup
 Python logs are quite complex to handle, mainly because of tracebacks. They are split into multiple lines which makes them difficult to associate to the original log event.
-We strongly recommend to use a JSON formatter when logging in order to:
+To address this use case we strongly recommend to use a JSON formatter when logging in order to:
 
- * Ensure to have a stack_trace properly wrapped into the proper Log
- * Ensure that all the attributes of a log event are properly extracted (severity, logger name, thread name, etc…)
+* Ensure to have a stack_trace properly wrapped into the proper Log
+* Ensure that all the attributes of a log event are properly extracted (severity, logger name, thread name, etc…)
  
- Here are setup examples for the two following logging libraries:
+Here are setup examples for the two following logging libraries:
 
 - [JSON-log-formatter](https://pypi.python.org/pypi/JSON-log-formatter/0.1.0)
 - [Python-json-logger](https://github.com/madzak/python-json-logger)
@@ -78,9 +78,9 @@ Usage example with [Python-json-logger](https://github.com/madzak/python-json-lo
     formatter = jsonlogger.JsonFormatter()
     logHandler.setFormatter(formatter)
     logger.addHandler(logHandler)
- ```
+```
  
-Once the [handler configured](https://github.com/madzak/python-json-logger#customizing-fields), the log file will contain the following log record (inline):
+Once the [handler configured](https://github.com/madzak/python-json-logger#customizing-fields), the log file contains the following log record (inline):
 
 ```json
 {
