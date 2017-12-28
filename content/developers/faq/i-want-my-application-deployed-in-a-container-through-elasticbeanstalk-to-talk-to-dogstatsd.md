@@ -17,4 +17,4 @@ More details on achieving that kind of network traffic can be found here :
 http://blog.michaelhamrah.com/2014/06/accessing-the-docker-host-server-within-a-container/
 This is not an optimal solution but this should work just fine.
 
-Also if you are going with this solution, putting dd-agent inside a container is not really necessary, you could simply put it on the docker host by following the regular instructions https://www.datadoghq.com/blog/deploy-datadog-aws-elastic-beanstalk/
+Also if you are going with this solution, putting dd-agent inside a container is not really necessary, put it on the docker host by following the regular instructions https://www.datadoghq.com/blog/deploy-datadog-aws-elastic-beanstalk/

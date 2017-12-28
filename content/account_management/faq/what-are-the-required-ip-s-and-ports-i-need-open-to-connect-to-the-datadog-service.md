@@ -24,7 +24,7 @@ Starting with version 3.4.0, these ports are available on localhost (127.0.0.1, 
 
 ### RedHat and CentOS 5 (python2.4-based)
 
-If you run CentOS 5 you can run the agent by simply installing datadog-agent-base. In this case traffic flows like this:
+If you run CentOS 5 you can run the agent by installing datadog-agent-base. In this case traffic flows like this:
 ```
 datadog-agent --(https)--> https://app.datadoghq.com
 ```

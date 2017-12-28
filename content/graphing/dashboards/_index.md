@@ -25,7 +25,7 @@ At Datadog we give you the capability to create and customize two types of dashb
 
 ## Editing template variables
 
-Dashboard templating allows you to create dashboards that use variables like `$scope` or `$redis` in place of specific tags or hosts. You can then dynamically explore the metrics across different sets of tags. Simply select a new variable value in the dropdown menu, and that value applies across the dashboard.
+Dashboard templating allows you to create dashboards that use variables like `$scope` or `$redis` in place of specific tags or hosts. You can then dynamically explore the metrics across different sets of tags. Select a new variable value in the dropdown menu, and that value applies across the dashboard.
 
 To create, edit, and delete template variables click the gear icon at the upper right-hand side of the screen, then select 'Edit Template Variables' from the actions menu.
 

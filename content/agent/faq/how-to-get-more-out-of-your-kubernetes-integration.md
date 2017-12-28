@@ -73,7 +73,7 @@ And as you spin up the daemonset and the configmap, see the metrics starting to 
 
 ## Events
 
-Collect events from the Kubernetes API, by simply enabling [this option](https://github.com/DataDog/integrations-core/blob/master/kubernetes/conf.yaml.example#L78):
+Collect events from the Kubernetes API, by enabling [this option](https://github.com/DataDog/integrations-core/blob/master/kubernetes/conf.yaml.example#L78):
 
 It is important to note that this option has to be enabled on only 1 agent across the whole cluster, to avoid duplicates.
 

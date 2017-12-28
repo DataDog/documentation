@@ -69,7 +69,7 @@ We also provide you with the ability to be notified on changes to a monitor you 
 
 {{< img src="monitors/index/Monitor_Change_notifications.png" alt="Monitor_Change_notifications" responsive="true" popup="true">}}
 
-Setting the above to **Notify** simply send an email for the monitor audit events to all people who are alerted in a specific monitor.
+Setting the above to **Notify** send an email for the monitor audit events to all people who are alerted in a specific monitor.
 
 ## Manualy resolve your monitor
 

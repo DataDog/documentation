@@ -74,7 +74,7 @@ Facets allow you to pivot or filter your datasets based on a given attribute. Ex
 
 ### Create a Facet
 
-To start using an attribute as a Facet or in the search, you simply need to click on it and add it as a Facet:
+To start using an attribute as a Facet or in the search, click on it and add it as a Facet:
 {{< img src="logs/explore/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" popup="true">}}
 
 Once this is done, the value of this attribute is stored **for all new logs** and can be used for searches via the [search bar](#searche-bar) or [Facet Panel](#facet-panel).

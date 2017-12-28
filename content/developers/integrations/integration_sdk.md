@@ -231,7 +231,7 @@ Travis CI automatically runs tests when you create a pull request. Ensure that y
 Add the `@attr(requires='my_integration')` annotation on the test classes or methods that require a full docker testing environment (see next section).
 Don't add this annotation to your unit and mock tests ; those run via `rake ci:run[default]` on Travis CI.
 
-To iterate quickly on your unit and mock tests, instead of running all the tests with `rake ci:run[default]`, you can simply run:
+To iterate quickly on your unit and mock tests, instead of running all the tests with `rake ci:run[default]`, run:
 
 ```
 # run unit and mock tests, in the virtualenv

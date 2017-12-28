@@ -207,7 +207,7 @@ In the case of related Time Series, you can easily draw them as stacked areas by
         }
     ]
 
-Instead of one query per chart you can aggregate all queries into one and simply concatenate the queries.
+Instead of one query per chart you can aggregate all queries into one and concatenate the queries.
 
 #### Slice-n-Stack
 

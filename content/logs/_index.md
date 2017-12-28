@@ -277,7 +277,7 @@ logs:
 
 ### Wildcards
 
-If your log files are labeled by date or simply all stored in the same directory, configure your Datadog Agent to monitor them all and automatically detect new ones by using wildcards in the `path` attribute.
+If your log files are labeled by date or all stored in the same directory, configure your Datadog Agent to monitor them all and automatically detect new ones by using wildcards in the `path` attribute.
 
 * Using `path: /var/log/myapp/*.log` matches all `.log` file contained in the `/var/log/myapp/` directory. But it does not match `/var/log/myapp/myapp.conf`.
 * Using `path: /var/log/myapp/*/*.log` matches `/var/log/myapp/log/myfile.log` or `/var/log/myapp/errorLog/myerrorfile.log` but does not match `/var/log/myapp/mylogfile.log`.

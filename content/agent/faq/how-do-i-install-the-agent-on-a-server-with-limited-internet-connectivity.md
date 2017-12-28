@@ -38,7 +38,7 @@ This can be done with a single command:
 sudo sh -c "sed 's/api_key:.*/api_key: <API_KEY>/' /etc/dd-agent/datadog.conf.example > /etc/dd-agent/datadog.conf"
 ```
 
-Simply run the command above after replacing `<API_KEY>` with [the API KEY for your Organization](https://app.datadoghq.com/account/settings#api)
+Run the command above after replacing `<API_KEY>` with [the API KEY for your Organization](https://app.datadoghq.com/account/settings#api)
 
 Next, start the agent: 
 
