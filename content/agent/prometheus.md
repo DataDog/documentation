@@ -39,7 +39,6 @@ init_config:
 instances:
     # url of the metrics endpoint of prometheus
   - prometheus_endpoint: http://localhost:10055/metrics
-    [{}]
 ```
 
 ### Writing your Prometheus check
