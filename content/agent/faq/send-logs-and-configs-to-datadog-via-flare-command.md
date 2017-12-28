@@ -1,5 +1,5 @@
 ---
-title: Send logs and configs to Datadog via flare command
+title: Send logs and configs to Datadog via flare
 kind: faq
 further_reading:
 - link: "/agent/"
@@ -7,13 +7,15 @@ further_reading:
   text: Learn more about the Datadog Agent
 ---
 
+## Overview
+
 If you are running the 5.3 version of the agent (or higher), you're able to send all necessary troubleshooting information to our Support Team, with one flare command!
 
 Flare gathers all of the agent's configuration files and logs, remove sensitive information like passwords, passwords in a URI, API keys, Proxy credentials, and SNMP community strings... and upload it to our server as an archive. Since the Datadog Agent is completely open source, [check out the code for this at any time](https://github.com/DataDog/dd-agent/blob/master/utils/flare.py).  
 
 In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if you don't specify a case ID, the command asks for an email address that is used to login in your organization and creates a new support case.
 
-## Flare command
+## Flare commands
 ### Debian, Ubuntu, Centos
 
 For Agent 5.3 or higher:
