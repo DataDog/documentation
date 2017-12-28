@@ -7,38 +7,44 @@ further_reading:
   text: Learn more about the Datadog Agent
 ---
 
+## Agent v6 (Beta)
+
+```
+$ sudo -u dd-agent -- datadog-agent flare CASE_ID
+```
+
 ## Linux and Mac OS X
 
 If you are running the 5.3 version of the agent, you're able to send all necessary troubleshooting information to our Support Team, with one command!
 
-First, find the datadog-agent command:
+First, find the right datadog-agent command:
 
-* If you're using the packaged version of the agent (Debian, Ubuntu, Centos..) the command is: 
+* If you're using the packaged version of the agent (Debian, Ubuntu, Centos..):   
     ```
     sudo /etc/init.d/datadog-agent
     ```
-* If you've installed the agent from the source it is: 
+* Agent from the source it is:  
     ```
     sudo ~/.datadog-agent/bin/agent
     ```
-* If you are running the docker agent use:
+* On a docker agent:  
     ```
     docker exec -it dd-agent /etc/init.d/datadog-agent flare
     ```
-* If you are running the alpine based docker agent use:
+* On analpine based docker agent:  
     ```
     docker exec -it dd-agent /opt/datadog-agent/bin/agent flare
     ```
-* On Kubernetes, the command is: 
+* On Kubernetes:  
     ```
     kubectl exec <pod-name> -it /etc/init.d/datadog-agent flare
     ```
-* On Mac, the command is:
+* On Mac:  
     ```
     datadog-agent flare
     ```
 
-Then just use this command with the flare {caseid} arguments, for example:
+Then just use this command with the flare `{caseid}` arguments, for example:
 ```
 $ sudo /etc/init.d/datadog-agent flare 123456
 ```
