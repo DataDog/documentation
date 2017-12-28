@@ -2,6 +2,8 @@
 title: Agent
 kind: documentation
 description: Install & configure the Agent to collect data
+aliases:
+    - /guides/basic_agent_usage/
 ---
 
 {{< partial name="platforms/platforms.html" >}}
