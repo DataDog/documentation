@@ -1,5 +1,5 @@
 ---
-title: Ruby on Rails Log Collection
+title: Ruby on Rails log collection
 kind: documentation
 further_reading:
 - link: "/logs/processing"
