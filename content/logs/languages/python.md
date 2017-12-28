@@ -25,7 +25,13 @@ Datadog's Logs is currently available via public beta. You can apply for inclusi
 Use your favorite python logger to log into a file on your host. Then [monitor this file with your Datadog agent](/logs/languages/python/#configure-the-Datadog-agent) to send your logs to Datadog.
 
 ## Setup
-We strongly recommend to use a JSON formatter when logging in order to fully benefits from Datadog functionalities, please refer to the two following loggers for JSON formatting:
+Python logs are quite complex to handle, mainly because of tracebacks. They are split into multiple lines which makes them difficult to associate to the original log event.
+We strongly recommend to use a JSON formatter when logging in order to:
+
+ * Ensure to have a stack_trace properly wrapped into the proper Log
+ * Ensure that all the attributes of a log event are properly extracted (severity, logger name, thread name, etc…)
+ 
+ Here are setup examples for the two following logging libraries:
 
 - [JSON-log-formatter](https://pypi.python.org/pypi/JSON-log-formatter/0.1.0)
 - [Python-json-logger](https://github.com/madzak/python-json-logger)
@@ -57,6 +63,46 @@ The log file will contain the following log record (inline).
     "message": "Sign up",
     "time": "2015-09-01T06:06:26.524448",
     "referral_code": "52d6ce"
+}
+```
+
+Usage example with [Python-json-logger](https://github.com/madzak/python-json-logger):
+
+```python
+    import logging
+    from pythonjsonlogger import jsonlogger
+
+    logger = logging.getLogger()
+
+    logHandler = logging.StreamHandler()
+    formatter = jsonlogger.JsonFormatter()
+    logHandler.setFormatter(formatter)
+    logger.addHandler(logHandler)
+ ```
+ 
+Once the [handler configured](https://github.com/madzak/python-json-logger#customizing-fields), the log file will contain the following log record (inline):
+
+```json
+{
+    "threadName": "MainThread",
+    "name": "root",
+    "thread": 140735202359648,
+    "created": 1336281068.506248,
+    "process": 41937,
+    "processName": "MainProcess",
+    "relativeCreated": 9.100914001464844,
+    "module": "tests",
+    "funcName": "testFormatKeys",
+    "levelno": 20,
+    "msecs": 506.24799728393555,
+    "pathname": "tests/tests.py",
+    "lineno": 60,
+    "asctime": ["12-05-05 22:11:08,506248"],
+    "message": "testing logging format",
+    "filename": "tests.py",
+    "levelname": "INFO",
+    "special": "value",
+    "run": 12
 }
 ```
 
