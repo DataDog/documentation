@@ -13,6 +13,10 @@ further_reading:
   text: Learn more about parsing
 ---
 
+<div class="alert alert-info">
+Datadog's Logs is currently available via public beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
+</div>
+
 ## Overview
 
 The Datadog Agent can collect logs from containers starting at the version 6. Two installations are possible:
