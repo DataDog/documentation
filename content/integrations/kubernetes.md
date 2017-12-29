@@ -5,7 +5,7 @@ kind: integration
 git_integration_title: kubernetes
 newhlevel: true
 updated_for_agent: 5.8.5
-description: "{{< get-desc-from-git >}}"
+description: "Monitor the health of your Kubernetes cluster and the applications running on it. Capture Pod scheduling events, track the status of your Kubelets, and more."
 is_public: true
 ---
 
