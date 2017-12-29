@@ -1,5 +1,5 @@
 ---
-title: NodeJS Log Collection
+title: NodeJS log collection
 kind: documentation
 further_reading:
 - link: "/logs/processing"

@@ -31,6 +31,9 @@ If an integration does not support logs by default, you may need to use the cust
 During the beta phase of Datadog Logs, not all integrations include log configurations out of the box. A current list of supported integrations is available below.
 </div>
 
+### Containers 
+* [Docker](/logs/docker)
+
 ### Cloud
 * [AWS](/logs/aws)
 
@@ -114,45 +117,6 @@ logs:
 
 ```
 * [Restart your agent](https://help.datadoghq.com/hc/en-us/articles/203764515-Start-Stop-Restart-the-Datadog-Agent)
-
-### Docker log collection
-
-Agent 6 is able to collect logs from containers. It can be installed [on the host](https://github.com/DataDog/datadog-agent/blob/master/docs/beta/upgrade.md) or [in a container](https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent).
-
-For containerized installation, here are the command related to log collection:
-
-* `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw`: Store on disk where to pick log file or container stdout when we restart
-* `-v /var/run/docker.sock:/var/run/docker.sock:ro`: Give access to docker api to collect container stdout and stderr
-* `-v /my/path/to/conf.d:/conf.d:ro`: mount configuration repository
-* `-v /my/file/to/tail:/tail.log:ro`: Foreach log file that should be tailed by the agent (not required if you only want to collect container stdout or stderr)
-* `-e DD_LOG_ENABLED=true`: Activate log collection (disable by default)
-* `-e DD_API_KEY=<YOUR_API_KEY>`: Set the api key
-
-To start collecting logs for a given container filtered by image or label, update the integration log section in its yaml file, or create a custom yaml file.
-Set the type to `docker` and set the proper image or label as shown in the below example for nginx containers with a `httpd` image:
-
-```yaml
-init_config:
-
-instances:
-    [{}]
-
-#Log section
-
-logs:
-   - type: docker
-     image: httpd    #or label: mylabel:mylabelvalue
-     service: nginx
-     source: nginx
-     sourcecategory: http_web_access
-
-```
-
-If the agent is containerized, see [the specific configuration file to mount the YAML configuration files to the agent container](https://github.com/DataDog/docker-dd-agent#configuration-files).
-
-* [Restart your agent](https://help.datadoghq.com/hc/en-us/articles/203764515-Start-Stop-Restart-the-Datadog-Agent)
-
-## Log collection advanced usage 
 
 ### Filter logs
 
