@@ -1,5 +1,5 @@
 ---
-title: C# Log Collection
+title: C# log collection
 kind: documentation
 further_reading:
 - link: "/logs/processing"

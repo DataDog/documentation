@@ -1,5 +1,5 @@
 ---
-title: Java Log Collection
+title: Java log collection
 kind: documentation
 further_reading:
 - link: "/logs/processing"
