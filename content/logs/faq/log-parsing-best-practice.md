@@ -55,7 +55,7 @@ In this article, we walk through parsing a log from the Datadog agent’s collec
     2017-10-12 08:54:44 UTC | INFO | dd.collector | checks.collector(collector.py:530) | Finished run #1780. Collection time: 4.06s. Emit time: 0.01s
     ```
     Let’s say that the information dd.collector is not of any value for me and I do not want to extract it as an attribute.
-    To do  that we simply need to remove the extract section of the rule:
+    To do  that we need to remove the extract section of the rule:
     {{< img src="logs/faq/parsing_best_practice_4.png" alt="parsing_best_practice_4" responsive="true" popup="true">}}
 
 {{< partial name="whats-next/whats-next.html" >}}

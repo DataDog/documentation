@@ -31,7 +31,7 @@ same proxy)
 
     `curl -v http://proxy-node:17123/status 2>&1 | grep "200 OK"`
 
-5. Update non-proxy nodes to forward to `proxy-node`. Simply change the following line in `datadog.conf` from:
+5. Update non-proxy nodes to forward to `proxy-node`. Change the following line in `datadog.conf` from:
 
     `dd_url: https://app.datadoghq.com`
 to
@@ -41,8 +41,8 @@ to
 
 ## Using a Web Proxy as Proxy
 
-Traditional web proxies are supported natively by the agent. Simply
-edit `datadog.conf` with your proxy information.
+Traditional web proxies are supported natively by the agent. 
+Edit `datadog.conf` with your proxy information.
 
 ```
 # If you need a proxy to connect to the Internet, provide the settings here

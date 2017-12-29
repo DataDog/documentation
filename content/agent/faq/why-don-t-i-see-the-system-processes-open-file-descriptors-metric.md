@@ -5,7 +5,7 @@ kind: faq
 
 Users that enable the [process check](/integrations/process) in a Datadog agent running on Linux OSs notice that the `system.processes.open_file_descriptors` metric is not collected or reported by default. This occurs when the process being monitored by the process check runs under a different user than the agent - the 'dd-agent' user doesn't have full access to all files in '/proc', which is where the agent looks to collect data for this metric. A workaround for this can be achieved by running the agent as 'root'.
 
-**NOTE**: We do not recommend running the agent as 'root'; this isn't specific to the Datadog agent or due to any concern that something untrustworthy is happening in any way. Instead, we simply don't recommend running the daemon as 'root' as this is best practice for most processes on Linux. If you have any personal cause for concern the agent is open source and may be audited by you or your team if you’d like to review or build it [from source yourselves](https://github.com/DataDog/dd-agent).
+**NOTE**: We do not recommend running the agent as 'root'; this isn't specific to the Datadog agent or due to any concern that something untrustworthy is happening in any way. Instead, we don't recommend running the daemon as 'root' as this is best practice for most processes on Linux. If you have any personal cause for concern the agent is open source and may be audited by you or your team if you’d like to review or build it [from source yourselves](https://github.com/DataDog/dd-agent).
 
 That said, if you're okay elevating the Datadog agent privileges you could do the following:
 

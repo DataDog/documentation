@@ -85,7 +85,7 @@ If you are storing logs in many S3 buckets, Datadog can automatically manage tri
 2. Navigate to the *Collect Logs* tab in the [AWS Integration tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services)
 3. Select the AWS Account from where you want to collect logs, and enter the ARN of the Lambda created in the previous section.
 {{< img src="logs/aws/AWSLogStep1.png" alt="Enter Lambda">}}
-4. Check off the services from which you'd like to collect logs and hit save. To stop collecting logs from a particular service, simply uncheck it.
+4. Check off the services from which you'd like to collect logs and hit save. To stop collecting logs from a particular service, uncheck it.
 {{< img src="logs/aws/AWSLogStep2.png" alt="Select services">}}
 5. If you have logs across multiple regions, you must create additional Lambda functions in those regions and enter them in this tile.
 6. To stop collecting all AWS logs, press the *x* next to each Lamdba ARN. All triggers for that function will be removed. 

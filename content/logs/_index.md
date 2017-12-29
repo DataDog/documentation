@@ -52,7 +52,7 @@ During the beta phase of Datadog Logs, not all integrations include log configur
 * IIS: [iis.d/conf.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/iis/conf.yaml.example)
 * Mongo: [mongo.d/conf.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/mongo/conf.yaml.example)
 * Nginx: [nginx.d/conf.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/nginx/conf.yaml.example)
-* Postgres: [postgres.d/conf.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/postgres/conf.yaml.example)
+* PostgreSQL: [postgres.d/conf.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/postgres/conf.yaml.example)
 
 ## Custom log collection
 
@@ -175,7 +175,7 @@ logs:
 
 ### Search and replace content in your logs
 
-If your logs contain sensitive information that you wish you redact, you can configure sequences to mask in your configuration file. This is accomplished by using the `log_processing_rules` parameter in your configuration file with the **mask_sequences** `type`.
+If your logs contain sensitive information that you wish you redact, configure the Datadog Agent to mask sensitive sequences by using the `log_processing_rules` parameter in your configuration file with the **mask_sequences** `type`.
 
 This replaces all matched groups with `replace_placeholder` parameter value.
 Example: Redact credit card numbers
@@ -201,10 +201,12 @@ logs:
 
 ### Multi-line
 
-If your logs are not sent in JSON and you want to aggregate several lines into one single log, you can configure the agent to detect a new log using a specific regex pattern instead of having one log per line. This is accomplished by using the `log_processing_rules` parameter in your configuration file with the **multi_line** `type`.
+If your logs are not sent in JSON and you want to aggregate several lines into one single entry, configure the Datadog Agent to detect a new log using a specific regex pattern instead of having one log per line.  
 
-This aggregates all lines into one single log until the given pattern is detected again. This is especially useful for database logs and stack traces.
-Example: Every postgres log line starts with a timestamp in `YYYY-dd-mm` format. The below lines would be sent as two logs.
+This is accomplished by using the `log_processing_rules` parameter in your configuration file with the **multi_line** `type`.
+
+This aggregates all lines into one single entry until the given pattern is detected again. This is especially useful for database logs and stack traces.
+Example: Every PostgreSQL log line starts with a timestamp with `YYYY-dd-mm` format. The below lines would be sent as two logs.
 
 ```
 2017-12-05 10:10:46.981 UTC [1107] postgres psql postgres [local] 5a0c58f6.453 LOG:  statement: SELECT d.datname as “Name”,
@@ -236,6 +238,29 @@ logs:
         name: new_log_start_with_date
         pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
 ```
+
+### Wildcards
+
+If your log files are labeled by date or all stored in the same directory, configure your Datadog Agent to monitor them all and automatically detect new ones by using wildcards in the `path` attribute.
+
+* Using `path: /var/log/myapp/*.log` matches all `.log` file contained in the `/var/log/myapp/` directory. But it does not match `/var/log/myapp/myapp.conf`.
+* Using `path: /var/log/myapp/*/*.log` matches `/var/log/myapp/log/myfile.log` or `/var/log/myapp/errorLog/myerrorfile.log` but does not match `/var/log/myapp/mylogfile.log`.
+
+Configuration example:
+
+```yaml
+init_config:
+
+instances:
+    [{}]
+
+logs:
+ - type: file
+   path: /var/log/myapp/*.log
+   service: mywebapp
+   source: go
+```
+
 
 ## Reserved attributes 
 

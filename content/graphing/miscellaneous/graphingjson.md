@@ -9,7 +9,7 @@ There are two ways to interact with the Graphing Editor: using the GUI (the defa
 
 ## Graphing with the JSON editor
 
-{{< img src="graphing/miscellaneous/graphing/references-graphing-jsoneditor.png" alt="references graphing jsoneditor" responsive="true" popup="true">}}
+{{< img src="graphing/miscellaneous/graphingjson/references-graphing-jsoneditor.png" alt="references graphing jsoneditor" responsive="true" popup="true">}}
 
 ### Grammar
 
@@ -207,7 +207,7 @@ In the case of related Time Series, you can easily draw them as stacked areas by
         }
     ]
 
-Instead of one query per chart you can aggregate all queries into one and simply concatenate the queries.
+Instead of one query per chart you can aggregate all queries into one and concatenate the queries.
 
 #### Slice-n-Stack
 

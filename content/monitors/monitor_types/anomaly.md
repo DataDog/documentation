@@ -103,7 +103,7 @@ The algorithms also deal with scale differently. _Basic_ and _Robust_ are scale-
 
 {{< img src="monitors/monitor_types/anomaly/alg_comparison_scale.png" alt="algorithm comparison scale" responsive="true" popup="true">}}
 
-Finally, we see how each of the algorithms handle a new metric. _Robust_ and _agile_ won't show any bounds during the first few weeks. _Basic_ and _adaptive_ start showing bounds shortly after the metric first appears. _Adaptive_ leverages the metric's daily seasonal patterns in its predictions, while _basic_ simply reflects the range of recent values.
+Finally, we see how each of the algorithms handle a new metric. _Robust_ and _agile_ won't show any bounds during the first few weeks. _Basic_ and _adaptive_ start showing bounds shortly after the metric first appears. _Adaptive_ leverages the metric's daily seasonal patterns in its predictions, while _basic_ reflects the range of recent values.
 
 {{< img src="monitors/monitor_types/anomaly/alg_comparison_new_metric.png" alt="algorithm comparison new metric" responsive="true" popup="true">}}
 

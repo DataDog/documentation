@@ -18,7 +18,7 @@ This flow utilizes the Trello REST POST card api endpoint to post the @notificat
 
 #### Getting the Keys
 
-To get the Trello App Key and Token, simply [navigate to Trello's relevant page](https://trello.com/app-key). If you are logged in, you should be able to see the [App key](https://cl.ly/2A40141c0p2Z) immediately:
+To get the Trello App Key and Token, [navigate to Trello's relevant page](https://trello.com/app-key). If you are logged in, you should be able to see the [App key](https://cl.ly/2A40141c0p2Z) immediately:
 
 NOTE: Trello mentions API key in the url. For this article, API and APP keys are one and the same
 

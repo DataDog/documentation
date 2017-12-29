@@ -109,7 +109,7 @@ Each tag can be anything you like but you have the best success with tagging if 
     database:primary
     role:sobotka
 
-The reason why you should use key value pairs instead of simply values becomes apparent when you start using the tags to filter and group metrics and machines. That said, you are not required to use key value pairs and simple values are valid.
+The reason why you should use key value pairs instead of values becomes apparent when you start using the tags to filter and group metrics and machines. That said, you are not required to use key value pairs and simple values are valid.
 
 ### Assigning host tags in the UI
 
@@ -152,7 +152,7 @@ This causes the graph to show just one line for each tag value — `database`, `
 {{< img src="agent/tagging/dashboardtags.png" alt="Tags in Dashboards avgby textbox" responsive="true" popup="true">}}
 
 You can also use tags to overlay events on the dashboard. This works in exactly the same way as in the [Events List](/graphing/event_stream/).
-Simply enter `tags:` followed by the tag and you see the corresponding events overlaid as vertical bars on each graph.
+Enter `tags:` followed by the tag and you see the corresponding events overlaid as vertical bars on each graph.
 
 ### Using tags in the Infrastructure List and the Host Map
 

@@ -5,6 +5,12 @@ kind: faq
 
 You can configure your MySQL integration to collect metrics from custom queries of your MySQL database by following the configuration syntax [in these lines](https://github.com/DataDog/dd-agent/blob/5.10.x/conf.d/mysql.yaml.example#L50-L66) of our `mysql.yaml.example` file. While you do this, there are a few things you want to keep in mind...
 
+
+<div class="alert alert-warning">
+Custom metrics queried via custom_proc must have type <code>FLOAT</code> and not <code>INT</code>
+</div>
+
+
 ## Qualifying your databases
 
 When you add your custom query, you have to be careful to make sure each table you reference has its database qualified. This can be done by prepending the table with its database name in the following format:
