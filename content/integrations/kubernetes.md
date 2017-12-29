@@ -7,6 +7,9 @@ newhlevel: true
 updated_for_agent: 5.8.5
 description: "Monitor the health of your Kubernetes cluster and the applications running on it. Capture Pod scheduling events, track the status of your Kubelets, and more."
 is_public: true
+aliases:
+    - /tracing/api/
+    - /integrations/kubernetes_state/
 ---
 
 {{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard" responsive="true" popup="true">}}
