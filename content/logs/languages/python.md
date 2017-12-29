@@ -25,10 +25,10 @@ Datadog's Logs is currently available via public beta. You can apply for inclusi
 Use your favorite python logger to log into a file on your host. Then [monitor this file with your Datadog agent](/logs/languages/python/#configure-the-Datadog-agent) to send your logs to Datadog.
 
 ## Setup
-Python logs are quite complex to handle, mainly because of tracebacks. They are split into multiple lines which makes them difficult to associate to the original log event.
-To address this use case we strongly recommend to use a JSON formatter when logging in order to:
+Python logs are quite complex to handle, mainly because of tracebacks. They are split into multiple lines which make them difficult to associate with the original log event.  
+To address this use case we strongly recommend you use a JSON formatter when logging in order to:
 
-* Ensure to have a stack_trace properly wrapped into the proper Log
+* Ensure each stack_trace is properly wrapped into the correct log
 * Ensure that all the attributes of a log event are properly extracted (severity, logger name, thread name, etc…)
  
 Here are setup examples for the two following logging libraries:
@@ -80,7 +80,7 @@ Usage example with [Python-json-logger](https://github.com/madzak/python-json-lo
     logger.addHandler(logHandler)
 ```
  
-Once the [handler configured](https://github.com/madzak/python-json-logger#customizing-fields), the log file contains the following log record (inline):
+Once the [handler is configured](https://github.com/madzak/python-json-logger#customizing-fields), the log file contains the following log record (inline):
 
 ```json
 {
