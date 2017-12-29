@@ -19,7 +19,8 @@ Datadog's Logs is currently available via public beta. You can apply for inclusi
 
 ## Overview
 
-The Datadog Agent can collect logs from containers starting at the version 6. Two installations are possible:
+Datadog Agent version 6 and greater can collect logs from containers.  
+Two installations are possible:
  
 - [on the host](https://github.com/DataDog/datadog-agent/blob/master/docs/beta/upgrade.md).
 - [in a container](https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent).
@@ -29,11 +30,11 @@ The Datadog Agent can collect logs from containers starting at the version 6. Tw
 
 Install the [latest version of the agent 6](/logs/#getting-started-with-the-agent) on your host.
 
-The agent can both collect logs from [files on the host](/logs/#custom-log-collection) or from [container stdout/stderr](/logs/docker/#configuration-file-example). For this you need to update or create new .yaml configuration file in the agent’s `/conf.d` directory as explained in the provided links.
+The agent can both collect logs from [files on the host](/logs/#custom-log-collection) or from [container stdout/stderr](/logs/docker/#configuration-file-example). For this you need to update or create a new .yaml configuration file in the agent’s `/conf.d` directory as explained in the provided links.
 
 ### Container installation
 
-As explained above, the agent also have a [containerized](https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent) installation.
+As explained above, the agent also has a [containerized](https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent) installation.
 
 First let’s create two directories on the host that we will later mount on the containerized agent:
 
