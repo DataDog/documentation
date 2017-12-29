@@ -25,7 +25,7 @@ If a user decides to track changes for a Screenboard, the following Screenboard 
 1. Text changes (title, description)
 
 2. Widget changes
-    - iframe, free_text, image, and note widget changes are reported in the [event stream](/graphing/event_stream/) if a new widget is added or it is removed. There are no specifics about the widget specifying content. It simply says "a text_widget was added to the Screenboard" in the event.
+    - iframe, free_text, image, and note widget changes are reported in the [event stream](/graphing/event_stream/) if a new widget is added or it is removed. There are no specifics about the widget specifying content. It says "a text_widget was added to the Screenboard" in the event.
     - All other widget changes are reported in the [event stream](/graphing/event_stream/) if a new widget is added, edited, or removed. The event specifies the title of the widget in question and say something like "the widget titled 'xyz' was edited"
 3. Screenboard cloning
 

@@ -87,7 +87,7 @@ Replace `YOUR_API_KEY` with [your api key](https://app.datadoghq.com/account/set
   kubectl create -f dd-agent.yaml
   ```
 
-**Note**:  This manifest enables autodiscovery's auto configuration feature. To disable it, simply remove the `SD_BACKEND` environment variable definition. To learn how to configure autodiscovery, please refer to [its documentation](https://docs.datadoghq.com/agent/autodiscovery).
+**Note**:  This manifest enables autodiscovery's auto configuration feature. To disable it, remove the `SD_BACKEND` environment variable definition. To learn how to configure autodiscovery, please refer to [its documentation](https://docs.datadoghq.com/agent/autodiscovery).
 
 #### Host Installation
 

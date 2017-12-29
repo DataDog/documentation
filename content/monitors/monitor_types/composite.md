@@ -68,7 +68,7 @@ Outside of a composite monitor's New Monitor and Edit forms, its individual moni
 
 {{< img src="monitors/monitor_types/composite/composite-status.png" alt="composite status" responsive="true" popup="true">}}
 
-In the API, a composite monitor's trigger condition is called its query. While a non-composite monitor's query can encapsulate many things—a metric, tags, an aggregation function like `avg`, a group-by clause, etc—a composite monitor's query is simply its trigger condition defined in terms of its constituent monitors.
+In the API, a composite monitor's trigger condition is called its query. While a non-composite monitor's query can encapsulate many things—a metric, tags, an aggregation function like `avg`, a group-by clause, etc—a composite monitor's query is its trigger condition defined in terms of its constituent monitors.
 
 For two non-composite monitors with the following queries:
 
@@ -77,7 +77,7 @@ For two non-composite monitors with the following queries:
 "avg(last_1m):avg:system.cpu.system{role:database} > 50" # monitor ID: 5678
 ```
 
-a composite monitor's query is simply `"1234 && 5678"`, `"!1234 || 5678"`, etc.
+a composite monitor's query is `"1234 && 5678"`, `"!1234 || 5678"`, etc.
 
 ### Configure behavior for `No Data`
 

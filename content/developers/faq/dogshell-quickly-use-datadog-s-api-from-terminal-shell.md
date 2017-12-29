@@ -30,7 +30,7 @@ To which, of course you’d submit “Y”. It then responds:
 What is your api key? (Get it here: https://app.datadoghq.com/account/settings#api) 
 ```
 
-Where you can simply paste your API key, and then
+Where you can paste your API key, and then
 ```
 What is your application key? (Generate one here: https://app.datadoghq.com/account/settings#api)
 ```

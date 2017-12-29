@@ -36,7 +36,7 @@ This check collects the number of CPU cores on a host and CPU times (i.e. system
 ## Setup
 ### Installation
 
-The system_core check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on any host.
+The system_core check is packaged with the Agent, so [install the Agent](https://app.datadoghq.com/account/settings#agent) on any host.
 
 ### Configuration
 
@@ -102,7 +102,7 @@ This check monitors the number of bytes a host has swapped in and swapped out.
 ## Setup
 ### Installation
 
-The system swap check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on any host.
+The system swap check is packaged with the Agent, so [install the Agent](https://app.datadoghq.com/account/settings#agent) on any host.
 
 ### Configuration
 

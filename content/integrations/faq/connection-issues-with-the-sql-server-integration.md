@@ -17,7 +17,7 @@ As you'll gather from SQL Server does not exist or access denied, this error ind
 * Your SQL Server's TCP/IP connection has not been enabled
 * Your SQL Server's IPv4 address is incorrect or does not match what you've provided in your sqlserver.yaml
 * Your SQL Server's TCP/IP port is incorrect or does not match what you've provided in your sqlserver.yaml
-* The authentication mode of your SQL Server is not set to the appropriate option between "SQL Server and Windows Authentication mode" vs. simply "Windows Authentication mode"
+* The authentication mode of your SQL Server is not set to the appropriate option between "SQL Server and Windows Authentication mode" vs. "Windows Authentication mode"
 
 If you are unsure of how to set up your server to listen on the correct TCP/IP address/port, [this page](https://msdn.microsoft.com/en-us/library/ms177440.aspx) from Microsoft should give you some direction (IPv4 and IPALL are the specifically relevant parts; there, you may set your port either as a "Dynamic" or as a "Static" port, but whichever you aren't using should be left blank). If the agent is installed on the same host as your SQL Server, it may be appropriate to set your sqlserver.yaml's host option to "127.0.0.1", even if the host is not a localhost from your perspective as a user. The standard port for connections to SQL Server is 1433. 
 

@@ -9,7 +9,7 @@ kind: faq
 * Number of EC2 hosts reporting (timeseries, past week)
 * New hosts running the Agent (event stream, past week)
 
-For setup, simply:
+For setup:
 
 1. Put in your API and application keys in lines 1,2 and 79
 2. Datadog API/app keys can be found in your account here

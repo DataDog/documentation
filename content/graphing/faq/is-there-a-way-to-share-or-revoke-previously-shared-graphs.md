@@ -12,7 +12,7 @@ It's worth noting that if you've enabled Templating, the template variable drop-
 
 For more details on the differences between these types of dashboards, see our [dedicated documentation](/graphing/dashboards)
 
-To revoke the keys used to share your graphs [navigate](https://app.datadoghq.com/account/settings#embeds) to 'Integrations / Embeds' to find a list of all the graphs that are shared, simply click on the 'Revoke' button for the graph you want to stop sharing. The graph moves then to the 'Revoked' list.
+To revoke the keys used to share your graphs [navigate](https://app.datadoghq.com/account/settings#embeds) to 'Integrations / Embeds' to find a list of all the graphs that are shared, click on the 'Revoke' button for the graph you want to stop sharing. The graph moves then to the 'Revoked' list.
 
 To revoke a shared ScreenBoard navigate to 'Dashboard / Dashboard List', select a ScreenBoard, click on the cog to edit it and click 'Revoke public URL'.
 

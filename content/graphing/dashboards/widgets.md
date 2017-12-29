@@ -162,7 +162,7 @@ The Hostmap graphs any metric for any subset of hosts on the same hostmap visual
 ## Free Text
 *Supported on Screenboards only*
 
-Free text is simply a widget that allows you to add headings to your [Screenboard](/graphing/dashboards/screenboard). This is commonly used to state the overall purpose of the dashboard.
+Free text is a widget that allows you to add headings to your [Screenboard](/graphing/dashboards/screenboard). This is commonly used to state the overall purpose of the dashboard.
 
 ## Event Timeline
 *Supported on Screenboards only*

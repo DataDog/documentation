@@ -30,7 +30,7 @@ right people get notified so the problem can be resolved as soon as possible.
 2. Enter a **message** for the monitor. This field allows standard
    [markdown formatting](http://daringfireball.net/projects/markdown/syntax)
    as well as Datadog's @-notification syntax. Note: you can notify any
-   non-Datadog users via email by simply adding `@their-email` to the
+   non-Datadog users via email by adding `@their-email` to the
    message. A common use-case for the monitor message is to include a step-by-step way to resolve the problem. For example if you are monitoring a database then you might want to include steps for failing over to a standby node. All in all, you should attempt to give as much context to the monitor as possible.
 
 3. Optionally enable **monitor renotification**. This option is useful to remind your team that a problem is not solved until the monitor is marked as resolved. If enabled, you can configure an escalation message to be sent anytime the monitor renotifies. The original message is included as well.

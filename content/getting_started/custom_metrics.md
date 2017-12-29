@@ -52,7 +52,7 @@ Using the aforementioned example, below shows three scenarios which would all be
 
 {{< img src="getting_started/custom_metrics/custom-metrics-1.jpg" alt="custom-metrics-1" responsive="true" popup="true">}}
 
-We do not enforce [any fixed rate limit](/api/#rate-limiting) on custom metric submission, if you're exceeding your default allotment, our teams will simply reach out to you.
+We do not enforce [any fixed rate limit](/api/#rate-limiting) on custom metric submission, if you're exceeding your default allotment, our teams will reach out to you.
 
 ## How do I check my custom metrics count?
 
