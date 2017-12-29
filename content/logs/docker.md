@@ -22,8 +22,8 @@ Datadog's Logs is currently available via public beta. You can apply for inclusi
 Datadog Agent version 6 and greater can collect logs from containers.  
 Two installations are possible:
  
-- [on the host](https://github.com/DataDog/datadog-agent/blob/master/docs/beta/upgrade.md).
-- [in a container](https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent).
+- on the host where the agent is external to the Docker environment
+- or by deploying its containerized version in the Docker environment
 
 ## Setup
 ### Host installation
@@ -41,7 +41,7 @@ First let’s create two directories on the host that we will later mount on the
 - `/opt/datadog-agent/run`: to make sure we do not lose any logs from containers during restarts or network issues we store on the host the last line that was collected for each container in this directory
 
 - ` /opt/datadog-agent/conf.d`: this is where you will provide your integration instructions. Any configuration file added there will automatically be picked up by the containerized agent when restarted.  
-[More information about this check](https://github.com/DataDog/docker-dd-agent#enabling-integrations)
+For more information about this check [here](https://github.com/DataDog/docker-dd-agent#enabling-integrations)
 
 To run a Docker container which embeds the Datadog Agent to monitor your host use the following command:
 
@@ -49,26 +49,25 @@ To run a Docker container which embeds the Datadog Agent to monitor your host us
 docker run -d --name dd-agent -h `hostname` -e DD_API_KEY=<YOUR_API_KEY>  -e DD_LOG_ENABLED=true -e SD_BACKEND=docker -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -v /otp/datadog-agent/conf.d:/conf.d:ro datadog/agent:6.0.0-beta.6
 ```
 
-The command related to log collection ae the following:
-
-* `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw`: Store on disk where to pick log file or container stdout when we restart
-* `-v /var/run/docker.sock:/var/run/docker.sock:ro`: Give access to docker api to collect container stdout and stderr
-* `-v /my/path/to/conf.d:/conf.d:ro`: mount configuration repository
-* `-v /my/file/to/tail:/tail.log:ro`: Foreach log file that should be tailed by the agent (not required if you only want to collect container stdout or stderr)
-* `-e DD_LOG_ENABLED=true`: Activate log collection (disable by default)
-* `-e DD_API_KEY=<YOUR_API_KEY>`: Set the api key
-
 Important notes: 
 
 - The Docker integration is enabled by default, as well as [autodiscovery](/agent/autodiscovery/) in auto config mode (remove the `SD_BACKEND` variable to disable it).
 
 - For this example we used the image 6.0.0-beta.6 of the agent. You can find [here](https://hub.docker.com/r/datadog/agent/tags/) the latest available images for agent 6 and we encourage you to always pick the latest version
 
+The command related to log collection are the following:
+
+* `-e DD_LOG_ENABLED=true`: this parameter enables the log collection when set to true. The agent now looks for log instructions in configuration files.
+* `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw`: mount the directory we created to store pointer on each container logs to make sure we do not lose any.
+* `-v /opt/datadog-agent/conf.d:/conf.d:ro`: mount the configuration directory we previously created to the container
+
+
+
 ### Configuration file example
 
 Now that the agent is ready to collect logs, you need to define which containers you want to follow.
 To start collecting logs for a given container filtered by image or label, you need to update the log section in an integration or custom .yaml file. 
-Add a new yaml file in the conf.d directory with the following parameters ([see the specific configuration file to mount the YAML configuration files to the agent container](https://github.com/DataDog/docker-dd-agent#configuration-files)):
+Add a new yaml file in the `conf.d` directory (should be `/opt/datadog-agent/conf.d` on the host if you followed above instruction) with the following parameters:
 
 ```
 init_config:
