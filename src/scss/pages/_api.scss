@@ -1,4 +1,5 @@
 // API
+$ddpurple:    #774DA2;
 .api {
 
   .api-content {
@@ -15,6 +16,12 @@
         p {
           margin-bottom: 0;
         }
+      }
+    }
+    a {
+      border-bottom: 1px solid #000;
+      &:hover {
+        border-bottom: 1px solid $ddpurple;
       }
     }
   }
