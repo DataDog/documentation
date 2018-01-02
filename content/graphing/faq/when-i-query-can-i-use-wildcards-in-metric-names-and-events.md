@@ -20,4 +20,4 @@ I can then have tags associated with different instances of the metric, like:
 * `“q”: “sum:web_page_visitors{*}”` —> graph the sum across all instances.
 * `“q”: “web_page_visitors{*} by {page}”` —> graph the number of visitors, with a separate line for each page
 
-**Note**: wildcards are supported in [Event Monitors](/monitors/monitor_tyes/event).
+**Note**: wildcards are supported in [Event Monitors](/monitors/monitor_types/event).
