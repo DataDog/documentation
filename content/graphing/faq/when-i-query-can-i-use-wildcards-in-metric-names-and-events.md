@@ -9,10 +9,10 @@ For example, instead of having specific metric names you can have slightly more 
 
 I can then have tags associated with different instances of the metric, like:
 
-* ‘page:home’
-* ‘page:info’
-* ‘page:contact’
-* ‘page:signup’
+* `page:home`
+* `page:info`
+* `page:contact`
+* `page:signup`
 
 …and so on. Then, when I want to graph the number of web page visitors, I can do this in a variety of ways fairly easily:
 
