@@ -4,6 +4,7 @@ RUN_SERVER=${RUN_SERVER:=false}
 FETCH_INTEGRATIONS=${FETCH_INTEGRATIONS:=false}
 DOGWEB=${DOGWEB:=false}
 INTEGRATIONS_CORE=${INTEGRATIONS_CORE:=false}
+INTEGRATIONS_EXTRAS=${INTEGRATIONS_EXTRAS:=false}
 GITHUB_TOKEN=${GITHUB_TOKEN:="false"}
 RUN_GULP=${RUN_GULP:=true}
 CREATE_I18N_PLACEHOLDERS=${CREATE_I18N_PLACEHOLDERS:=false}
@@ -36,6 +37,9 @@ if [ ${RUN_SERVER} == true ]; then
 		fi
 		if [ ${INTEGRATIONS_CORE} != "false" ]; then
 			args="${args} --integrations ${INTEGRATIONS_CORE}"
+		fi
+		if [ ${INTEGRATIONS_EXTRAS} != "false" ]; then
+			args="${args} --integrations_extras ${INTEGRATIONS_EXTRAS}"
 		fi
 		if [ ${GITHUB_TOKEN} != "false" ]; then
 			args="${args} --token ${GITHUB_TOKEN}"

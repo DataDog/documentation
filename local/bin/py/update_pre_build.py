@@ -191,6 +191,7 @@ class PreBuild:
 
         dogweb_globs = ['integration/**/*_metadata.csv', 'integration/**/manifest.json', 'integration/**/README.md']
         integrations_globs = ['**/metadata.csv', '**/manifest.json', '**/README.md']
+        integrations_extras_globs = ['**/metadata.csv', '**/manifest.json', '**/README.md']
 
         # sync from dogweb, download if we don't have it (token required)
         if not self.options.dogweb:
@@ -203,9 +204,14 @@ class PreBuild:
             self.download_from_repo('DataDog', 'integrations-core', 'master', integrations_globs)
             self.options.integrations = '{0}{1}{2}'.format(self.extract_dir, 'integrations-core', sep)
 
+        # sync from integrations-extras, download if we don't have it (public repo so no token needed)
+        if not options.integrations_extras:
+            self.download_from_repo('DataDog', 'integrations-extras', 'master', integrations_extras_globs)
+            self.options.integrations = '{0}{1}{2}'.format(self.extract_dir, 'integrations-extras', sep)
+
         globs = []
-        for d_glob, i_glob in zip(dogweb_globs, integrations_globs):
-            globs.extend(['{}{}'.format(self.options.dogweb, d_glob), '{}{}'.format(self.options.integrations, i_glob)])
+        for d_glob, i_glob, e_glob in zip(dogweb_globs, integrations_globs, integrations_extras_globs):
+            globs.extend(['{}{}'.format(self.options.dogweb, d_glob), '{}{}'.format(self.options.integrations, i_glob), '{}{}'.format(self.options.integrations_extras, e_glob)])
 
         for file_name in tqdm(chain.from_iterable(glob.iglob(pattern, recursive=True) for pattern in globs)):
             self.process_integration_metric(file_name)
@@ -336,6 +342,7 @@ if __name__ == '__main__':
     parser.add_option("-t", "--token", help="github access token", default=None)
     parser.add_option("-w", "--dogweb", help="path to dogweb local folder", default=None)
     parser.add_option("-i", "--integrations", help="path to integrations-core local folder", default=None)
+    parser.add_option("-e", "--integrations_extras", help="path to integrations-extras local folder", default=None)
     parser.add_option("-s", "--source", help="location of src files", default=curdir)
 
     options, args = parser.parse_args()
