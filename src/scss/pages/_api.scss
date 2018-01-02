@@ -18,6 +18,12 @@ $ddpurple:    #774DA2;
         }
       }
     }
+    h2 a {
+      &:hover {
+        color:#000;
+        border-bottom: 1px solid #000;
+      }
+    }
     a {
       border-bottom: 1px solid #000;
       &:hover {
