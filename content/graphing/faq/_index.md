@@ -39,4 +39,5 @@ private: true
     {{< nextlink href="/graphing/faq/how-do-i-overlay-events-onto-my-dashboards" >}}How do I overlay events onto my dashboards?{{< /nextlink >}}
     {{< nextlink href="/graphing/faq/how-to-graph-percentiles-in-datadog" >}}How to graph percentiles in Datadog ?{{< /nextlink >}}
     {{< nextlink href="/graphing/faq/i-m-switching-between-the-sum-min-max-avg-aggregators-but-the-values-look-the-same" >}}I'm switching between the sum/min/max/avg aggregators but the values look the same?{{< /nextlink >}}
+    {{< nextlink href="/graphing/faq/when-i-query-can-i-use-wildcards-in-metric-names-and-events" >}}When I query can I use wildcards in metric names and events?{{< /nextlink >}}
 {{< /whatsnext >}}
