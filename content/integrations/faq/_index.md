@@ -48,6 +48,11 @@ kind: faq
 ## Dyn
 * [Why is my dyn.qps metric delayed?](/integrations/faq/why-is-my-dyn-qps-metric-delayed)
 
+## Docker
+
+* [Compose and the Datadog Agent](/integrations/faq/compose-and-the-datadog-agent)
+* [DogStatsD and Docker](/integrations/faq/dogstatsd-and-docker)
+
 ## Elasticsearch 
 
 * [Why isn't Elasticsearch sending all my metrics?](/integrations/faq/why-isn-t-elasticsearch-sending-all-my-metrics)
