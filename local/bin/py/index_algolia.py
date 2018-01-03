@@ -70,7 +70,10 @@ def index_algolia(app_id, api_key, content_path=None):
                                     [tag.extract() for tag in html.findAll("div", {"class": "whatsnext"})]
 
                                     # description
-                                    main = html.find("div", {'main'}).prettify()[:7000]
+                                    main = html.find("div", {'main'})
+                                    if not main:
+                                        main = html.find("div", {'main-api'})
+                                    main = main.prettify()[:7000]
 
                                     fm_description = html.findAll(attrs={"itemprop": "description"})[0]['content']
                                     if fm_description != default_description and '{{' not in fm_description:
