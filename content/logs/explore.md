@@ -76,7 +76,8 @@ Without multi-line:
 With multi-line enabled: 
 {{< img src="logs/explore/multi_line_log.png" alt="Log with Multi-line display" responsive="true" popup="true">}}
 
-**Note**:  If present, `error.stack` attributes is displayed in priority as it should be used for stack traces. You can remap any stack-trace attribute value to this specific attribute by using [the attribute remapper processor](/logs/processing/#attribute-remapper).
+**Note**:  If present, `error.stack` attribute is displayed in priority as it should be used for stack traces.
+Remap any stack-trace attribute to this specific attribute with [the attribute remapper processor](/logs/processing/#attribute-remapper).
 
 ## Facets 
 
