@@ -26,13 +26,13 @@ Two installations are possible:
 - or by deploying its containerized version in the Docker environment
 
 ## Setup
-### Host installation
+### Option 1: Host installation
 
 Install the [latest version of the agent 6](/logs/#getting-started-with-the-agent) on your host.
 
 The agent can both collect logs from [files on the host](/logs/#custom-log-collection) or from [container stdout/stderr](/logs/docker/#configuration-file-example). For this you need to update or create a new .yaml configuration file in the agent’s `/conf.d` directory as explained in the provided links.
 
-### Container installation
+### Option 2: Container installation
 
 As explained above, the agent also has a [containerized](https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent) installation.
 
@@ -69,13 +69,13 @@ Now that the agent is ready to collect logs, you need to define which containers
 To start collecting logs for a given container filtered by image or label, you need to update the log section in an integration or custom .yaml file. 
 Add a new yaml file in the `conf.d` directory (should be `/opt/datadog-agent/conf.d` on the host if you followed above instruction) with the following parameters:
 
-```
+```yaml
 init_config:
 
 instances:
     [{}]
 
-#Log section
+##Log section
 
 logs:    
    - type: docker

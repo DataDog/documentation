@@ -84,7 +84,7 @@ init_config:
 instances:
     [{}]
     
-#Log section
+##Log section
 logs:
 
     # - type : (mandatory) type of log input source (tcp / udp / file)

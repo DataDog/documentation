@@ -25,7 +25,7 @@ In this view you can:
 
 * [Interact with the Time range](#time-range)
 * [Display lists of logs](#log-list)
-* [Use facets to filter your log list](#facets)
+* [Use facets to filter your Logstream](#facets)
 * [Enter search queries](#search-bar)
 
 ## Time Range
@@ -37,32 +37,32 @@ Quickly change the time range by selecting a preset range from the dropdown:
 
 {{< img src="logs/explore/timerange.png" style="width:50%;" alt="Timerange" responsive="true" popup="true" >}}
 
-## Log list
-The log list is the list of logs that match the selected context. A context is defined by a [search bar](#search-bar) filter and a [time range](#time-range).
+## Logstream
+The Logstream is the list of logs that match the selected context. A context is defined by a [search bar](#search-bar) filter and a [time range](#time-range).
 You can sort the list by clicking the **date** column header.
 
-{{< img src="logs/explore/log_list.png" alt="Log List" responsive="true" popup="true">}}
+{{< img src="logs/explore/log_list.png" alt="Logstream" responsive="true" popup="true">}}
 
-### Filtering the log list
+### Filtering the Logstream
 If you enter a valid query into the [search bar](#search-bar), words that match your query are highlighted, and the logs displayed match your facet criteria:
 
-{{< img src="logs/explore/log_list_highlighted.png" alt="Log List highlighted" responsive="true" popup="true">}}
+{{< img src="logs/explore/log_list_highlighted.png" alt="Logstream highlighted" responsive="true" popup="true">}}
 
 ### Displaying a full log
 You can click on any log line to see more details about it:
 
-{{< img src="logs/explore/log_in_log_list.png" alt="Log in log list" responsive="true" popup="true">}}
+{{< img src="logs/explore/log_in_log_list.png" alt="Log in Logstream" responsive="true" popup="true">}}
 
-### Focus on Host and Service
+### View in context
 
-Click on its `host` or `service` and select `Focus on Host & Service` to see log lines dated just before and after a selected log - even if they don't match your filter -
+Click on its `host` or `service` and select `View in context` to see log lines dated just before and after a selected log - even if they don't match your filter -
 
 {{< img src="logs/explore/focus_host_service.png" style="width:50%;" alt="focus on host and service.png" responsive="true" popup="true">}}
 
 ### Columns
 To add more log details to the list, click the **Columns** button and select any facets you want to see:
 
-{{< img src="logs/explore/log_list_with_columns.png" alt="Log List with columns" responsive="true" popup="true">}}
+{{< img src="logs/explore/log_list_with_columns.png" alt="Logstream with columns" responsive="true" popup="true">}}
 
 ## Facets 
 
@@ -83,14 +83,6 @@ Once this is done, the value of this attribute is stored **for all new logs** an
 
 Use facets to easily filters on your logs. The search bar and url automatically reflect your selections.
 {{< img src="logs/explore/facet_panel.png" alt="Facet panel" responsive="true" popup="true">}}
-
-### Expanded view
-
-Expand a facet to access advanced search options like 
-Including or excluding a pattern within a facet.
-
-For example: You want to select all the url values that start with `/test_5*`: 
-{{< img src="logs/explore/expanded_view.png" style="width:50%;" alt="Expanded view" responsive="true" popup="true">}}
 
 ## Search bar
 
