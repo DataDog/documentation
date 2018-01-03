@@ -73,7 +73,6 @@ Add a new yaml file in the `conf.d` directory (should be `/opt/datadog-agent/con
 init_config:
 
 instances:
-    [{}]
 
 ##Log section
 

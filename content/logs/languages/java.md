@@ -100,7 +100,6 @@ Create a file `java.yaml` in the Agent's `conf.d/` directory with the following 
 init_config:
 
 instances:
-    [{}]
     
 ##Log section
 logs:

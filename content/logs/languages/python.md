@@ -114,7 +114,6 @@ Create a file `conf.yaml` in the Agent's `python.d/` directory with the followin
 init_config:
 
 instances:
-    [{}]
 
 ##Log section
 logs:

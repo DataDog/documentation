@@ -105,7 +105,6 @@ If your PHP application does not log to a file, but instead forwards its logs vi
 init_config:
 instances:
 
-
 ##Log section
 logs:
   - type: tcp
@@ -125,40 +124,40 @@ To achieve this use the `log_processing_rules` parameter in your configuration f
 * **exclude_at_match**: If the pattern is contained in the message the log is excluded, and not sent to Datadog.
   Example: Filtering out logs that contain a Datadog email
 
-  ```yaml
-  init_config:
-  instances:
+```yaml
+init_config:
+instances:
 
-  logs:
-   - type: file
-     path: /my/test/file.log
-     service: cardpayment
-     source: java
-     log_processing_rules:
-      - type: exclude_at_match
-        name: exclude_datadoghq_users
-        # Regexp can be anything
-        pattern: User=\w+@datadoghq.com
-  ```
+logs:
+  - type: file
+    path: /my/test/file.log
+    service: cardpayment
+    source: java
+    log_processing_rules:
+    - type: exclude_at_match
+      name: exclude_datadoghq_users
+      ## Regexp can be anything
+      pattern: User=\w+@datadoghq.com
+```
 
 * **include_at_match**: Only log with a message that includes the pattern are sent to Datadog.
   Example: Sending only logs that contain a Datadog email
 
-  ```yaml
-  init_config:
-  instances:
+```yaml
+init_config:
+instances:
 
-  logs:
-   - type: file
-     path: /my/test/file.log
-     service: cardpayment
-     source: java
-     log_processing_rules:
-      - type: include_at_match
-        name: include_datadoghq_users
-        # Regexp can be anything
-        pattern: \w+@datadoghq.com
-  ```
+logs:
+  - type: file
+    path: /my/test/file.log
+    service: cardpayment
+    source: java
+    log_processing_rules:
+    - type: include_at_match
+      name: include_datadoghq_users
+      ## Regexp can be anything
+      pattern: \w+@datadoghq.com
+```
 
 
 ### Search and replace content in your logs

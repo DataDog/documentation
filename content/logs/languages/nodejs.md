@@ -84,7 +84,6 @@ Create a `nodejs.d/conf.yaml` file in your `conf.d/` folder with the following c
 init_config:
 
 instances:
-    [{}]
     
 ##Log section
 logs:

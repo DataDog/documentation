@@ -120,7 +120,6 @@ Create a `ruby.d/conf.yaml` file in your `conf.d/` folder with the following con
 init_config:
 
 instances:
-    [{}]
     
 ##Log section
 logs:
