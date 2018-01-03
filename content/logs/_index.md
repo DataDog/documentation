@@ -75,9 +75,8 @@ Note that for the yaml file to be considered valid by the agent, they must inclu
 
 ```yaml
 init_config:
-
 instances:
-    [{}]
+
 ##Log section
 logs:
 
@@ -104,9 +103,9 @@ If your PHP application does not log to a file, but instead forwards its logs vi
 
 ```yaml
 init_config:
-
 instances:
-    [{}]
+
+
 ##Log section
 logs:
   - type: tcp
@@ -128,9 +127,7 @@ To achieve this use the `log_processing_rules` parameter in your configuration f
 
   ```yaml
   init_config:
-
   instances:
-      [{}]
 
   logs:
    - type: file
@@ -149,9 +146,7 @@ To achieve this use the `log_processing_rules` parameter in your configuration f
 
   ```yaml
   init_config:
-
   instances:
-      [{}]
 
   logs:
    - type: file
@@ -175,9 +170,7 @@ Example: Redact credit card numbers
 
 ```yaml
 init_config:
-
 instances:
-    [{}]
 
 logs:
  - type: file
@@ -199,27 +192,22 @@ If your logs are not sent in JSON and you want to aggregate several lines into o
 This is accomplished by using the `log_processing_rules` parameter in your configuration file with the **multi_line** `type`.
 
 This aggregates all lines into one single entry until the given pattern is detected again. This is especially useful for database logs and stack traces.
-Example: Every PostgreSQL log line starts with a timestamp with `YYYY-dd-mm` format. The below lines would be sent as two logs.
+Example: Every java log line starts with a timestamp with `YYYY-dd-mm` format. The below lines including a stack trace would be sent as two logs.
 
 ```
-2017-12-05 10:10:46.981 UTC [1107] postgres psql postgres [local] 5a0c58f6.453 LOG:  statement: SELECT d.datname as “Name”,
-               pg_catalog.pg_get_userbyid(d.datdba) as “Owner”,
-               pg_catalog.pg_encoding_to_char(d.encoding) as “Encoding”,
-               d.datcollate as “Collate”,
-               d.datctype as “Ctype”,
-               pg_catalog.array_to_string(d.datacl, E’\n’) AS “Access privileges”
-        FROM pg_catalog.pg_database d
-        ORDER BY 1;
-2017-12-05 10:55:49.061 UTC [20535] postgres psql postgres [local] 5a0d60a5.5037 LOG:  incomplete startup packet
+2018-01-03T09:24:24.983Z UTC Exception in thread "main" java.lang.NullPointerException
+        at com.example.myproject.Book.getTitle(Book.java:16)
+        at com.example.myproject.Author.getBookTitles(Author.java:25)
+        at com.example.myproject.Bootstrap.main(Bootstrap.java:14)
+2018-01-03T09:26:24.365Z UTC starting upload of /my/file.gz
+
 ```
 
 To achieve this, you need to use the following `log_processing_rules`:
 
 ```yaml
 init_config:
-
 instances:
-    [{}]
 
 logs:
  - type: file
@@ -249,9 +237,7 @@ Configuration example:
 
 ```yaml
 init_config:
-
 instances:
-    [{}]
 
 logs:
  - type: file
