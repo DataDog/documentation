@@ -1,5 +1,5 @@
 ---
-title: as_count validation
+title: as_count in monitors
 kind: faq
 ---
 
