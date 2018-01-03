@@ -214,6 +214,7 @@ class PreBuild:
             globs.extend(['{}{}'.format(self.options.dogweb, d_glob), '{}{}'.format(self.options.integrations, i_glob), '{}{}'.format(self.options.integrations_extras, e_glob)])
 
         for file_name in tqdm(chain.from_iterable(glob.iglob(pattern, recursive=True) for pattern in globs)):
+            print(file_name)
             self.process_integration_metric(file_name)
             self.process_integration_manifest(file_name)
             self.process_integration_readme(file_name)
