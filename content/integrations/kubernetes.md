@@ -145,48 +145,12 @@ If you are running Kubernetes >= 1.2.0, you can use the [kube-state-metrics](htt
 To run kube-state-metrics, create a `kube-state-metrics.yaml` file using the following manifest to deploy the kube-state-metrics service:
 
 ```yaml
- 
+  
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: kube-state-metrics
 spec:
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: kube-state-metrics
-    spec:
-      containers:
-      - name: kube-state-metrics
-        image: gcr.io/google_containers/kube-state-metrics:v0.3.0
-        ports:
-        - name: metrics
-          containerPort: 8080
-        resources:
-          requests:
-            memory: 30Mi
-            cpu: 100m
-          limits:
-            memory: 50Mi
-            cpu: 200m
----
-apiVersion: v1
-kind: Service
-metadata:
-  annotations:
-    prometheus.io/scrape: 'true'
-  labels:
-    app: kube-state-metrics
-  name: kube-state-metrics
-spec:
-  ports:
-  - name: metrics
-    port: 8080
-    targetPort: metrics
-    protocol: TCP
-  selector:
-    app: kube-state-metrics
 ```
 
 Then deploy it by running:
@@ -194,11 +158,7 @@ Then deploy it by running:
 kubectl create -f kube-state-metrics.yaml
 ```
 
-The manifest above uses Google's publicly available kube-state-metrics container. If you would like to build your own, you can do so by:
-
-1. Clone the [kube-state-metrics Github repository](https://github.com/kubernetes/kube-state-metrics)
-1. Run `make container` to build the container
-1. Run `kubectl apply -f kubernetes`
+The manifest above uses Google’s publicly available `kube-state-metrics` container, it’s also available on https://quay.io/coreos/kube-state-metrics, If you want to build it manually please refer [to the official project documentation](https://github.com/kubernetes/kube-state-metrics).
 
 If you configure your Kubernetes State Metrics service to run on a different URL or port, you can configure the Datadog Agent by setting the `kube_state_url` parameter in `conf.d/kubernetes_state.yaml`, then restarting the Agent.
 For more information, see the [kubernetes_state.yaml.example file](https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/conf.yaml.example). If you have enabled [Autodiscovery](https://docs.datadoghq.com/agent/autodiscovery), the kube state URL will be configured and managed automatically.
@@ -207,7 +167,7 @@ For more information, see the [kubernetes_state.yaml.example file](https://githu
 
 Install the `dd-check-kubernetes_state` package manually or with your favorite configuration manager.
 
-### Configuration
+##### Configuration
 
 Edit the `kubernetes_state.yaml` file to point to your server and port, set the masters to monitor. See the [example kubernetes_state.yaml](https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/conf.yaml.example) for all available configuration options.
 
