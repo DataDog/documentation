@@ -193,14 +193,14 @@ Then deploy it by running:
 kubectl create -f kube-state-metrics.yaml
 ```
 
-The manifest above uses Google’s publicly available `kube-state-metrics` container, it’s also available on https://quay.io/coreos/kube-state-metrics, If you want to build it manually please refer [to the official project documentation](https://github.com/kubernetes/kube-state-metrics).
+The manifest above uses Google’s publicly available `kube-state-metrics` container, which is also available on [Quay](https://quay.io/coreos/kube-state-metrics). If you want to build it manually, refer [to the official project documentation](https://github.com/kubernetes/kube-state-metrics).
 
 If you configure your Kubernetes State Metrics service to run on a different URL or port, you can configure the Datadog Agent by setting the `kube_state_url` parameter in `conf.d/kubernetes_state.yaml`, then restarting the Agent.
 For more information, see the [kubernetes_state.yaml.example file](https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/conf.yaml.example). If you have enabled [Autodiscovery](https://docs.datadoghq.com/agent/autodiscovery), the kube state URL will be configured and managed automatically.
 
 #### Host Installation
 
-Install the `dd-check-kubernetes_state` package manually or with your favorite configuration manager (On CentOS/AWS, [Find your rpm package here](https://yum.datadoghq.com/rpm/x86_64/), and information on installation on [this page](/agent/faq/how-do-i-install-the-agent-on-a-server-with-limited-internet-connectivity).  
+Install the `dd-check-kubernetes_state` package manually or with your favorite configuration manager (On CentOS/AWS, [Find your rpm package here](https://yum.datadoghq.com/rpm/x86_64/), and information on installation on [this page](/agent/faq/how-do-i-install-the-agent-on-a-server-with-limited-internet-connectivity).
 Then edit the `kubernetes_state.yaml` file to point to your server and port and set the masters to monitor. See the [example kubernetes_state.yaml](https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/conf.yaml.example) for all available configuration options.
 
 ### Validation
@@ -315,15 +315,15 @@ As the 5.17.0 release, Datadog Agent now supports built in [leader election opti
 
 The Kubernetes check includes the following service checks:
 
-* `kubernetes.kubelet.check`:  
+* `kubernetes.kubelet.check`:
 
 If `CRITICAL`, either `kubernetes.kubelet.check.ping` or `kubernetes.kubelet.check.syncloop` is in `CRITICAL` state.
 
-* `kubernetes.kubelet.check.ping`:  
+* `kubernetes.kubelet.check.ping`:
 
-If `CRITICAL`, Kubelet's API isn't available 
+If `CRITICAL`, Kubelet's API isn't available
 
-* `kubernetes.kubelet.check.syncloop`:  
+* `kubernetes.kubelet.check.syncloop`:
 
 If `CRITICAL`, Kubelet’s sync loop that updates containers isn't working.
 
