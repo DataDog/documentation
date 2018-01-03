@@ -66,6 +66,9 @@ def index_algolia(app_id, api_key, content_path=None):
                                     title = html.select('h1')[0].text.strip()
 
                                 if title and '://' not in title:
+                                    # strip specific html
+                                    [tag.extract() for tag in html.findAll("div", {"class": "whatsnext"})]
+
                                     # description
                                     main = html.find("div", {'main'}).prettify()[:7000]
 
