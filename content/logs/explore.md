@@ -68,7 +68,7 @@ To add more log details to the list, click the **Columns** button and select any
 
 {{< img src="logs/explore/multi_line_display.png" alt="Multi-line display" responsive="true" popup="true" style="width:30%;">}}
 
-When enabled, your logstream display changes to better focus on your logs `message` attributes now displayed on four lines instead of one.
+When enabled, your logstream display changes to better focus on your logs `message` attributes. They are now displayed on four lines instead of one:
 
 * Without multi-line:
 {{< img src="logs/explore/before_multi_line.png" alt="Before Multi-line display" responsive="true" popup="true">}}
