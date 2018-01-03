@@ -312,7 +312,20 @@ As the 5.17.0 release, Datadog Agent now supports built in [leader election opti
 * Unhealthy
 
 ### Service Checks
-The Kubernetes check does not include any service check at this time.
+
+The Kubernetes check includes the following service checks:
+
+* `kubernetes.kubelet.check`:  
+
+If `CRITICAL`, either `kubernetes.kubelet.check.ping` or `kubernetes.kubelet.check.syncloop` is in `CRITICAL` state.
+
+* `kubernetes.kubelet.check.ping`:  
+
+If `CRITICAL`, Kubelet's API isn't available 
+
+* `kubernetes.kubelet.check.syncloop`:  
+
+If `CRITICAL`, Kubelet’s sync loop that updates containers isn't working.
 
 ## Troubleshooting
 
