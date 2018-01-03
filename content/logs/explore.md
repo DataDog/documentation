@@ -70,10 +70,10 @@ To add more log details to the list, click the **Columns** button and select any
 
 When enabled, your logstream display changes to better focus on your logs `message` attributes now displayed on four lines instead of one.
 
-Without multi-line:
+* Without multi-line:
 {{< img src="logs/explore/before_multi_line.png" alt="Before Multi-line display" responsive="true" popup="true">}}
 
-With multi-line enabled: 
+* With multi-line enabled: 
 {{< img src="logs/explore/multi_line_log.png" alt="Log with Multi-line display" responsive="true" popup="true">}}
 
 **Note**:  If present, `error.stack` attribute is displayed in priority as it should be used for stack traces.

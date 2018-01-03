@@ -102,9 +102,9 @@ Then finally, defines the JSON layout and associate it to the appender you'll go
 # The JSON layout
 json_layout = Logging.layouts.json
 
-# For instance, a file appender that'll going to be forwarder by a syslog agent to Logmatic.io
+# For instance, a file appender that'll going to be forwarder by a syslog agent to Datadog
 Logging.appenders.file(
-    'logmatic',
+    'datadog',
     :filename => config.paths['log'].first,
     :layout => json_layout
 )
