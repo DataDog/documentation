@@ -64,6 +64,20 @@ To add more log details to the list, click the **Columns** button and select any
 
 {{< img src="logs/explore/log_list_with_columns.png" alt="Logstream with columns" responsive="true" popup="true">}}
 
+### Multi-line display
+
+{{< img src="logs/explore/multi_line_display.png" alt="Multi-line display" responsive="true" popup="true" style="width:30%;">}}
+
+When enabled, your logstream display changes to better focus on your logs `message` attributes now displayed on four lines instead of one.
+
+Without multi-line:
+{{< img src="logs/explore/before_multi_line.png" alt="Before Multi-line display" responsive="true" popup="true">}}
+
+With multi-line enabled: 
+{{< img src="logs/explore/multi_line_log.png" alt="Log with Multi-line display" responsive="true" popup="true">}}
+
+**Note**:  If present, `error.stack` attributes is displayed in priority as it should be used for stack traces. You can remap any stack-trace attribute value to this specific attribute by using [the attribute remapper processor](/logs/processing/#attribute-remapper).
+
 ## Facets 
 
 A facet displays all the distinct members of an attribute or a tag as well as provides some basic analytics such as the amount of logs represented. This is also a switch to easily filter your data.
