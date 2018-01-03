@@ -37,7 +37,7 @@ During the beta phase of Datadog Logs, not all integrations include log configur
 ### Cloud
 * [AWS](/logs/aws)
 
-### Frameworks
+### Languages
 
 * [Java](/logs/languages/java) 
 * [C#](/logs/languages/csharp)
@@ -77,7 +77,7 @@ Note that for the yaml file to be considered valid by the agent, they must inclu
 init_config:
 instances:
 
-#Log section
+##Log section
 logs:
 
   - type: file
@@ -105,7 +105,8 @@ If your PHP application does not log to a file, but instead forwards its logs vi
 init_config:
 instances:
 
-#Log section
+
+##Log section
 logs:
   - type: tcp
     port: 10518
@@ -180,11 +181,11 @@ logs:
       - type: mask_sequences
         name: mask_credit_cards
         replace_placeholder: "[masked_credit_card]"
-        #One pattern that contains capture groups
+        ##One pattern that contains capture groups
         pattern: (?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})
 ```
 
-### Multi-line
+### Multi-line aggregation
 
 If your logs are not sent in JSON and you want to aggregate several lines into one single entry, configure the Datadog Agent to detect a new log using a specific regex pattern instead of having one log per line.  
 
@@ -219,12 +220,18 @@ logs:
         pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
 ```
 
-### Wildcards
+### Tail multiple directories or whole directories by using wildcards
 
 If your log files are labeled by date or all stored in the same directory, configure your Datadog Agent to monitor them all and automatically detect new ones by using wildcards in the `path` attribute.
 
-* Using `path: /var/log/myapp/*.log` matches all `.log` file contained in the `/var/log/myapp/` directory. But it does not match `/var/log/myapp/myapp.conf`.
-* Using `path: /var/log/myapp/*/*.log` matches `/var/log/myapp/log/myfile.log` or `/var/log/myapp/errorLog/myerrorfile.log` but does not match `/var/log/myapp/mylogfile.log`.
+* Using `path: /var/log/myapp/*.log`:
+  * Matches all `.log` file contained in the `/var/log/myapp/` directory. 
+  * Doesn't match `/var/log/myapp/myapp.conf`.
+
+* Using `path: /var/log/myapp/*/*.log`:
+  * Matches `/var/log/myapp/log/myfile.log`.
+  * Matches `/var/log/myapp/errorLog/myerrorfile.log` 
+  * Doesn't match `/var/log/myapp/mylogfile.log`.
 
 Configuration example:
 
@@ -266,7 +273,7 @@ The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-
 
 ### *message* attribute
 
-By default, Datadog ingests the value of message as the body of the log entry. That value is then highlighted and display in the [log list](/logs/explore/#log-list), where it is indexed for [full text search](/logs/explore/#search-bar).
+By default, Datadog ingests the value of message as the body of the log entry. That value is then highlighted and display in the [logstream](/logs/explore/#logstream), where it is indexed for [full text search](/logs/explore/#search-bar).
 
 ### *severity* attribute
 
