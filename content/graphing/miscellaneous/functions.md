@@ -245,7 +245,7 @@ The method can be sum/min/max/count/avg and time is in seconds. You can use eith
 
 These functions are only intended for metrics submitted as rates or counters via statsd. These functions have no effect for other metric types. For more on details about how to use `.as_count()` and `.as_rate()` see [our blog post][1].
 
-Note: The only available query with `as_count()` is `sum()` (unless using a rollup summary), which is the only mathematical accurate function with such behavior.
+Note: [The only available query with `as_count()` is `sum()`](/graphing/faq/as_count_validation) (unless using a rollup summary), which is the only mathematical accurate function with such behavior.
 
 ## Rank
 ### top()
