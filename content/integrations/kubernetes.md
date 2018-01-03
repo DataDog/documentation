@@ -38,49 +38,50 @@ If your Kubernetes has RBAC enabled, see the [documentation on how to configure 
 * Create the following `dd-agent.yaml` manifest:
 
 ```yaml
-  apiVersion: extensions/v1beta1
-  kind: DaemonSet
-  metadata:
-    name: dd-agent
-  spec:
-    template:
-      metadata:
-        labels:
-          app: dd-agent
+
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: dd-agent
+spec:
+  template:
+    metadata:
+      labels:
+        app: dd-agent
+      name: dd-agent
+    spec:
+      containers:
+      - image: datadog/docker-dd-agent:latest
+        imagePullPolicy: Always
         name: dd-agent
-      spec:
-        containers:
-        - image: datadog/docker-dd-agent:latest
-          imagePullPolicy: Always
-          name: dd-agent
-          ports:
-            - containerPort: 8125
-              name: dogstatsdport
-              protocol: UDP
-          env:
-            - name: API_KEY
-              value: "YOUR_API_KEY"
-            - name: KUBERNETES
-              value: "yes"
-          volumeMounts:
-            - name: dockersocket
-              mountPath: /var/run/docker.sock
-            - name: procdir
-              mountPath: /host/proc
-              readOnly: true
-            - name: cgroups
-              mountPath: /host/sys/fs/cgroup
-              readOnly: true
-        volumes:
-          - hostPath:
-              path: /var/run/docker.sock
-            name: dockersocket
-          - hostPath:
-              path: /proc
-            name: procdir
-          - hostPath:
-              path: /sys/fs/cgroup
-            name: cgroups
+        ports:
+          - containerPort: 8125
+            name: dogstatsdport
+            protocol: UDP
+        env:
+          - name: API_KEY
+            value: "YOUR_API_KEY"
+          - name: KUBERNETES
+            value: "yes"
+        volumeMounts:
+          - name: dockersocket
+            mountPath: /var/run/docker.sock
+          - name: procdir
+            mountPath: /host/proc
+            readOnly: true
+          - name: cgroups
+            mountPath: /host/sys/fs/cgroup
+            readOnly: true
+      volumes:
+        - hostPath:
+            path: /var/run/docker.sock
+          name: dockersocket
+        - hostPath:
+            path: /proc
+          name: procdir
+        - hostPath:
+            path: /sys/fs/cgroup
+          name: cgroups
 ```
 
 Replace `YOUR_API_KEY` with [your api key](https://app.datadoghq.com/account/settings#api) or use [Kubernetes secrets](https://kubernetes.io/docs/concepts/configuration/secret/) to set your API key [as an environement variable](https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-environment-variables).
@@ -101,6 +102,7 @@ Install the `dd-check-kubernetes` package manually or with your favorite configu
 Edit the `kubernetes.yaml` file to point to your server and port, set the masters to monitor:
 
 ```yaml
+
 instances:
     host: localhost
     port: 4194
@@ -143,47 +145,48 @@ If you are running Kubernetes >= 1.2.0, you can use the [kube-state-metrics](htt
 To run kube-state-metrics, create a `kube-state-metrics.yaml` file using the following manifest to deploy the kube-state-metrics service:
 
 ```yaml
-    apiVersion: extensions/v1beta1
-    kind: Deployment
+ 
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: kube-state-metrics
+spec:
+  replicas: 1
+  template:
     metadata:
-      name: kube-state-metrics
-    spec:
-      replicas: 1
-      template:
-        metadata:
-          labels:
-            app: kube-state-metrics
-        spec:
-          containers:
-          - name: kube-state-metrics
-            image: gcr.io/google_containers/kube-state-metrics:v0.3.0
-            ports:
-            - name: metrics
-              containerPort: 8080
-            resources:
-              requests:
-                memory: 30Mi
-                cpu: 100m
-              limits:
-                memory: 50Mi
-                cpu: 200m
-    ---
-    apiVersion: v1
-    kind: Service
-    metadata:
-      annotations:
-        prometheus.io/scrape: 'true'
       labels:
         app: kube-state-metrics
-      name: kube-state-metrics
     spec:
-      ports:
-      - name: metrics
-        port: 8080
-        targetPort: metrics
-        protocol: TCP
-      selector:
-        app: kube-state-metrics
+      containers:
+      - name: kube-state-metrics
+        image: gcr.io/google_containers/kube-state-metrics:v0.3.0
+        ports:
+        - name: metrics
+          containerPort: 8080
+        resources:
+          requests:
+            memory: 30Mi
+            cpu: 100m
+          limits:
+            memory: 50Mi
+            cpu: 200m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    prometheus.io/scrape: 'true'
+  labels:
+    app: kube-state-metrics
+  name: kube-state-metrics
+spec:
+  ports:
+  - name: metrics
+    port: 8080
+    targetPort: metrics
+    protocol: TCP
+  selector:
+    app: kube-state-metrics
 ```
 
 Then deploy it by running:
@@ -246,6 +249,7 @@ Edit the `kube_dns.yaml` file to point to your server and port, set the masters 
 If you are using one dd-agent pod per kubernetes worker node, you could use the following annotations on your kube-dns pod to retrieve the data automatically.
 
 ```yaml
+
 apiVersion: v1
 kind: Pod
 metadata:
