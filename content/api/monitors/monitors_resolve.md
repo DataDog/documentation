@@ -1,10 +1,10 @@
 ---
-title: Resolve Monitor
+title: Resolve monitor
 type: apicontent
 order: 8.6
 ---
 
-## Resolve Monitor
+## Resolve monitor
 
 ##### ARGUMENTS
 * `resolve` [*required*]:  

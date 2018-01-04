@@ -1,10 +1,10 @@
 ---
-title: Query Time Series Points
+title: Query time series points
 type: apicontent
 order: 5.3
 ---
 
-## Query Time Series Points
+## Query time series points
 This end point allows you to query for metrics from any time period.
 
 ##### ARGUMENTS

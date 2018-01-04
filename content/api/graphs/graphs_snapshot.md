@@ -1,10 +1,10 @@
 ---
-title: Graph Snapshot
+title: Graph snapshot
 type: apicontent
 order: 18.1
 ---
 
-## Graph Snapshot
+## Graph snapshot
 ##### ARGUMENTS
 
 * `metric_query` [*required*]:  

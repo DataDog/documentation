@@ -1,10 +1,10 @@
 ---
-title: Unmute All Monitors
+title: Unmute all monitors
 type: apicontent
 order: 8.8
 ---
 
-## Unmute All Monitors
+## Unmute all monitors
 Disables muting all monitors. Throws an error if mute all was not enabled previously.
 
 ##### ARGUMENTS

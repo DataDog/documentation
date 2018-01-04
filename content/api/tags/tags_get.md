@@ -1,10 +1,10 @@
 ---
-title: Get Tags
+title: Get tags
 type: apicontent
 order: 13.1
 ---
 
-## Get Tags
+## Get tags
 Return a mapping of tags to hosts for your whole infrastructure.
 
 ##### ARGUMENTS

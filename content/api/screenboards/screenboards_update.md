@@ -1,10 +1,10 @@
 ---
-title: Update A Screenboard
+title: Update a Screenboard
 type: apicontent
 order: 11.2
 ---
 
-## Update A Screenboard
+## Update a Screenboard
 ##### ARGUMENTS
 
 * `board_title` [*required*]:  

@@ -1,10 +1,10 @@
 ---
-title: Create A Monitor
+title: Create a monitor
 type: apicontent
 order: 8.1
 ---
 
-## Create A Monitor
+## Create a monitor
 
 ##### ARGUMENTS
 *   `type` [*required*]:  

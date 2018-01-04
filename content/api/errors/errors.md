@@ -1,9 +1,9 @@
 ---
-title: Success and Errors
+title: Success and errors
 type: apicontent
 order: 3
 ---
-## Success and Errors
+## Success and errors
 The Datadog API uses HTTP status codes to indicate the success or failure of a request.
 
 An error indicates that the service did not successfully handle your request. In addition to the status code, the response may contain a JSON object with an errors array containing more detailed error messages. Note: When using libraries, some errors may throw exceptions rather than return JSON objects.

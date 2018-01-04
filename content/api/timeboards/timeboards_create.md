@@ -3,8 +3,8 @@ title: Create a Timeboard
 type: apicontent
 order: 10.1
 ---
-#### Create a Timeboard
 
+## Create a Timeboard
 ##### Arguments
 
 * `title` [*required*]:  

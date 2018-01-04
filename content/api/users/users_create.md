@@ -1,10 +1,10 @@
 ---
-title: Create User
+title: Create user
 type: apicontent
 order: 16.1
 ---
 
-## Create User
+## Create user
 ##### ARGUMENTS
 
 * `handle` [*required*]:  

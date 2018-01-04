@@ -57,8 +57,9 @@ def index_algolia(app_id, api_key, content_path=None):
 
                             # no crawl?
                             private = html.find_all('meta', {'name': 'robots', 'content': 'noindex'})
-                            if private:
-                                print('skipping beta or alias: %s' % dirpath)
+                            refresh = html.find('meta', attrs={'http-equiv': 'refresh'})
+                            if private or refresh:
+                                print('skipping beta or alias or refresh: %s' % dirpath)
                             else:
                                 # title
                                 title = html.title.string

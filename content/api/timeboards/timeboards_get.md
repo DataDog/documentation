@@ -4,7 +4,7 @@ type: apicontent
 order: 10.5
 ---
 
-#### Get a Timeboard
+## Get a Timeboard
 Fetch an existing dashboard's definition.
 
 ##### Arguments

@@ -1,10 +1,10 @@
 ---
-title: Get All Users
+title: Get all users
 type: apicontent
 order: 16.3
 ---
 
-## Get All Users
+## Get all users
 ##### ARGUMENTS
 
 This end point takes no JSON arguments.

@@ -1,10 +1,10 @@
 ---
-title: Get User
+title: Get user
 type: apicontent
 order: 16.2
 ---
 
-## Get User
+## Get user
 ##### ARGUMENTS
 * `handle` [*required*]:  
     The handle of the user.

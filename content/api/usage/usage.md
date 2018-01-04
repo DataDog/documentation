@@ -1,10 +1,10 @@
 ---
-title: Usage Metering
+title: Usage metering
 type: apicontent
 order: 21
 ---
 
-## Usage Metering
+## Usage metering
 
 This API is currently in private beta. Python and Ruby clients are not yet supported.
 

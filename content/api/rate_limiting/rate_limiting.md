@@ -1,9 +1,9 @@
 ---
-title: Rate Limiting
+title: Rate limiting
 type: apicontent
 order: 4
 ---
-## Rate Limiting
+## Rate limiting
 Some of our API endpoints are rate limited. Once you exceed a certain number of requests in a certain time period we return an error.
 
 For rate limited API endpoints we return headers so you can know how close you are to your limit. If you exceed your limit, review these headers to determine when you are able to try again.
