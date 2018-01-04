@@ -143,6 +143,7 @@ class PreBuild:
             'kube_dns': {'action': 'discard', 'target': 'none', 'remove_header': False},
             'kubernetes_state': {'action': 'discard', 'target': 'none', 'remove_header': False},
             'stride': {'action': 'discard', 'target': 'none', 'remove_header': False},
+            'hbase_regionserver': {'action': 'merge', 'target': 'hbase_master', 'remove_header': False},
         })
         self.initial_integration_files = glob.glob('{}*.md'.format(self.content_integrations_dir))
         makedirs(self.data_integrations_dir, exist_ok=True)
@@ -202,19 +203,18 @@ class PreBuild:
         # sync from integrations-core, download if we don't have it (public repo so no token needed)
         if not options.integrations:
             self.download_from_repo('DataDog', 'integrations-core', 'master', integrations_globs)
-            self.options.integrations = '{0}{1}{2}'.format(self.extract_dir, 'integrations-core', sep)
+            self.options.integrations = '{0}{1}{2}'.format(self.extract_dir, 'core', sep)
 
         # sync from integrations-extras, download if we don't have it (public repo so no token needed)
         if not options.integrations_extras:
             self.download_from_repo('DataDog', 'integrations-extras', 'master', integrations_extras_globs)
-            self.options.integrations = '{0}{1}{2}'.format(self.extract_dir, 'integrations-extras', sep)
+            self.options.integrations = '{0}{1}{2}'.format(self.extract_dir, 'extras', sep)
 
         globs = []
         for d_glob, i_glob, e_glob in zip(dogweb_globs, integrations_globs, integrations_extras_globs):
             globs.extend(['{}{}'.format(self.options.dogweb, d_glob), '{}{}'.format(self.options.integrations, i_glob), '{}{}'.format(self.options.integrations_extras, e_glob)])
 
         for file_name in tqdm(chain.from_iterable(glob.iglob(pattern, recursive=True) for pattern in globs)):
-            print(file_name)
             self.process_integration_metric(file_name)
             self.process_integration_manifest(file_name)
             self.process_integration_readme(file_name)
