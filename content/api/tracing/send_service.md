@@ -1,10 +1,10 @@
 ---
-title: Services
+title: Send services
 type: apicontent
 order: 20.2
 ---
 
-## Services
+## Send services
 ##### Arguments
 
 *   `service` - _Required._The service name as a dictionary key, [Learn more](/tracing/terminology).

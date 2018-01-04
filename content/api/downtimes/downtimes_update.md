@@ -1,10 +1,10 @@
 ---
-title: Update Monitor Downtime
+title: Update monitor downtime
 type: apicontent
 order: 9.2
 ---
 
-## Update Monitor Downtime
+## Update monitor downtime
 ##### ARGUMENTS
 
 * `id` [*required*]:  

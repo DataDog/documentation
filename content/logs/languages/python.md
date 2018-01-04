@@ -110,21 +110,20 @@ Once the [handler is configured](https://github.com/madzak/python-json-logger#cu
 
 Create a file `conf.yaml` in the Agent's `python.d/` directory with the following content:
 
-```
+```yaml
 init_config:
 
 instances:
-    [{}]
 
-#Log section
+##Log section
 logs:
 
-    # - type : (mandatory) type of log input source (tcp / udp / file)
-    #   port / path : (mandatory) Set port if type is tcp or udp. Set path if type is file
-    #   service : (mandatory) name of the service owning the log
-    #   source : (mandatory) attribute that defines which integration is sending the logs
-    #   sourcecategory : (optional) Multiple value attribute. Can be used to refine the source attribtue
-    #   tags: (optional) add tags to each logs collected
+    ## - type : file (mandatory) type of log input source (tcp / udp / file)
+    ##   port / path : (mandatory) Set port if type is tcp or udp. Set path if type is file
+    ##   service : (mandatory) name of the service owning the log
+    ##   source : (mandatory) attribute that defines which integration is sending the logs
+    ##   sourcecategory : (optional) Multiple value attribute. Can be used to refine the source attribtue
+    ##   tags: (optional) add tags to each logs collected
 
   - type: file
     path: /path/to/your/python/log.log

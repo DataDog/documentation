@@ -82,9 +82,8 @@ Create a `go.d/conf.yaml` file in your `conf.d/` folder with the following conte
 init_config:
 
 instances:
-    [{}]
     
-#Log section
+##Log section
 logs:
 
     # - type : (mandatory) type of log input source (tcp / udp / file)

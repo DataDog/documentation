@@ -1,7 +1,8 @@
 ---
-title: Embeddable Graphs
+title: Revoke embed
 type: apicode
 order: 19.5
+external_redirect: /api/#revoke-embed
 ---
 
 ##### Signature

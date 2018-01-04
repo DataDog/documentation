@@ -1,10 +1,10 @@
 ---
-title: Get A Screenboard
+title: Get a Screenboard
 type: apicontent
 order: 11.4
 ---
 
-## Get A Screenboard
+## Get a Screenboard
 Fetch an existing screenboard's definition.
 
 ##### ARGUMENTS

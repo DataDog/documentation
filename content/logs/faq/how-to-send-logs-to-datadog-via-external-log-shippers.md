@@ -17,11 +17,11 @@ The best and easiest way to send logs to Datadog is through the Datadog Agent. Y
 
 That said, you can also send logs to Datadog using many common non-Datadog log shippers, like the following:
 
-[Rsyslog](#rsyslog)
-
-[FluentD](#fluentd)
-
-[NXLog (Windows)](#nxlog)
+* [Rsyslog](#rsyslog)
+* [FluentD](#fluentd)
+* [Logstash](#logstash)
+* [Syslog-ng](#syslog-ng)
+* [NXLog (Windows)](#nxlog)
 
 ## Forwarding logs from other shippers to the Datadog Log Agent
 
@@ -156,6 +156,90 @@ In order to get the best use out of your logs in Datadog, it is important to hav
     "ddsource": "mysourcename"
 }
 ```
+
+## Logstash
+
+We have [an ouput plugin](https://github.com/DataDog/logstash-output-datadog_logs) for Logstash that takes care of sending your logs to your Datadog platform.
+
+To install this plugin run the following command:
+
+* `logstash-plugin install logstash-output-datadog_logs`
+
+Then Configure datadog_logs plugin with your Datadog API key:
+
+```
+output {
+    datadog_logs {
+        api_key => "<your_datadog_api_key>"
+    }
+}
+```
+
+In order to get the best use out of your logs in Datadog, it is important to have the proper metadata associated with your logs (including hostname and source). By default, the hostname and timestamp should be properly remapped thanks to our default [remapping for reserved attributes](/logs/#edit-reserved-attributes). To make sure the service is correctly remapped, add its attribute value to the Service remapping list.
+
+To set the source on your logs, you need to setup a Logstash filter:  
+
+```
+filter {
+  mutate {
+    add_field => {
+ "ddsource" => "mysourcevalue"
+       }
+    }
+ }
+```
+
+## Syslog-ng
+
+1. Collect system logs and log files In `/etc/syslog-ng/syslog-ng.conf` make sure the source is correctly defined:
+    ```
+    source s_src {
+    system();
+    internal();
+
+    };
+    ```
+    If you want to monitor files, add the following source:
+    ```
+    #########################
+    # Sources
+    #########################
+
+    ...
+
+    source s_files {
+    file("path/to/your/file1.log",flags(no-parse),follow_freq(1),program_override("<program_name_file1>"));
+     file("path/to/your/file2.log",flags(no-parse),follow_freq(1),program_override("<program_name_file2>"));
+
+    };
+    ```
+
+2. Set the correct log format
+    ```
+    #########################
+    # Destination
+    #########################
+
+    ...
+
+    # For Datadog platform
+    template DatadogFormat { template("YOURAPIKEY <${PRI}>1 ${ISODATE} ${HOST:--} ${PROGRAM:--} ${PID:--} ${MSGID:--} ${SDATA:--} $MSG\n"); };
+    destination d_datadog { tcp("intake.logs.datadoghq.com" port(10514) template(DatadogFormat)); };
+    ```
+
+3. Define the output in the path section
+    ```
+    #########################
+    # Log Path
+    #########################
+
+    ...
+
+    log { source(s_src); source(s_files); destination(d_datadog); };
+    ```
+
+4. Restart syslog-ng 
+
 
 ## NXLog
 

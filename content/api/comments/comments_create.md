@@ -1,5 +1,5 @@
 ---
-title: Create A Comment
+title: Create a comment
 type: apicontent
 order: 15.1
 ---

@@ -438,6 +438,14 @@ $(document).ready(function () {
         });
     });
 
+    $('.api-content h2[id]').each(function() {
+        var id = $(this).attr('id');
+        $(this).wrapInner('<a href="#'+id+'"></a>').on('click', function(e) {
+            moveToAnchor(id, false);
+            return false;
+        });
+    });
+
     // sticky polyfill trigger
     var elements = document.querySelectorAll('.sticky');
     Stickyfill.add(elements);

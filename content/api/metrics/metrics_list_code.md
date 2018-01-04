@@ -1,7 +1,8 @@
 ---
-title: Metrics
+title: Get list of active metrics
 type: apicode
 order: 5.1
+external_redirect: /api/#get-list-of-active-metrics
 ---
 
 ##### Signature

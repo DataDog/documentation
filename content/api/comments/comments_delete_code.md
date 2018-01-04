@@ -1,7 +1,8 @@
 ---
-title: Comments
+title: Delete a comment
 type: apicode
 order: 15.3
+external_redirect: /api/#delete-a-comment
 ---
 
 ##### Signature

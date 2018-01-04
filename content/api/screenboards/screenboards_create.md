@@ -1,10 +1,10 @@
 ---
-title: Create A Screenboard
+title: Create a Screenboard
 type: apicontent
 order: 11.1
 ---
 
-## Create A Screenboard
+## Create a Screenboard
 ##### Arguments
 * `board_title` [*required*]:  
     The name of the dashboard.    

@@ -1,7 +1,8 @@
 ---
-title: Rate Limiting
+title: Rate limiting
 type: apicode
 order: 4
+external_redirect: /api/#rate-limiting
 ---
 ##### Rate Limit Headers
 

@@ -1,10 +1,10 @@
 ---
-title: Mute A Host
+title: Mute a host
 type: apicontent
 order: 12.1
 ---
 
-## Mute A Host
+## Mute a host
 ##### ARGUMENTS
 
 * `end` [*optional*, *default*=**None**]:  

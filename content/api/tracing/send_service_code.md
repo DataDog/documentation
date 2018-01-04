@@ -1,11 +1,12 @@
 ---
-title: Services
+title: Send services
 type: apicode
 order: 20.2
+external_redirect: /api/#send-services
 ---
 
 ##### Signature
-`PUT localhost:8126/v0.3/traces`
+`PUT  http://localhost:8126/v0.3/traces`
 
 ##### Example Request
 {{< code-snippets basename="send_service" >}}

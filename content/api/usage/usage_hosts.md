@@ -1,10 +1,10 @@
 ---
-title: Usage Metering
+title: Get hourly usage for hosts and containers
 type: apicontent
 order: 21.1
 ---
 
-## Get Hourly Usage For Hosts and Containers
+## Get hourly usage for hosts and containers
 
 Get Hourly Usage For Hosts and Containers.
 

@@ -1,7 +1,8 @@
 ---
-title: Downtimes
+title: Get all monitor downtimes
 type: apicode
 order: 9.6
+external_redirect: /api/#get-all-monitor-downtimes
 ---
 
 ##### Signature

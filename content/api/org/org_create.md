@@ -1,10 +1,10 @@
 ---
-title: Organizations
+title: Create child-organization
 type: apicontent
 order: 17.1
 ---
 
-## Create Child-Organization
+## Create child-organization
 
 This endpoint requires the [multi-org account](/account_management/multi_organization) feature and must be enabled by [contacting support](/help).
 

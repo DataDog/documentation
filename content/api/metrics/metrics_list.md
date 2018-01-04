@@ -1,10 +1,10 @@
 ---
-title: Get List Of Active Metrics
+title: Get list of active metrics
 type: apicontent
 order: 5.1
 ---
 
-## Get List Of Active Metrics
+## Get list of active metrics
 Get the list of actively reporting metrics from a given time until now. This endpoint is not available in the Python and Ruby libraries.
 
 ##### ARGUMENTS

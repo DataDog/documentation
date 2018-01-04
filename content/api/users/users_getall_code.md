@@ -1,7 +1,8 @@
 ---
-title: Users
+title: Get all users
 type: apicode
 order: 16.3
+external_redirect: /api/#get-all-users
 ---
 
 ##### Signature

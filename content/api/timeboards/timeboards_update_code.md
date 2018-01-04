@@ -1,7 +1,8 @@
 ---
-title: Timeboards
+title: Update a Timeboard
 type: apicode
 order: 10.2
+external_redirect: /api/#update-a-timeboard
 ---
 
 ##### Signature
