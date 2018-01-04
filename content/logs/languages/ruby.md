@@ -102,9 +102,9 @@ Then finally, defines the JSON layout and associate it to the appender you'll go
 # The JSON layout
 json_layout = Logging.layouts.json
 
-# For instance, a file appender that'll going to be forwarder by a syslog agent to Logmatic.io
+# For instance, a file appender that'll going to be forwarder by a syslog agent to Datadog
 Logging.appenders.file(
-    'logmatic',
+    'datadog',
     :filename => config.paths['log'].first,
     :layout => json_layout
 )
@@ -120,17 +120,16 @@ Create a `ruby.d/conf.yaml` file in your `conf.d/` folder with the following con
 init_config:
 
 instances:
-    [{}]
     
-#Log section
+##Log section
 logs:
 
-    # - type : (mandatory) type of log input source (tcp / udp / file)
-    #   port / path : (mandatory) Set port if type is tcp or udp. Set path if type is file
-    #   service : (mandatory) name of the service owning the log
-    #   source : (mandatory) attribute that defines which integration is sending the logs
-    #   sourcecategory : (optional) Multiple value attribute. Can be used to refine the source attribtue
-    #   tags: (optional) add tags to each logs collected
+    ## - type : file (mandatory) type of log input source (tcp / udp / file)
+    ##   port / path : (mandatory) Set port if type is tcp or udp. Set path if type is file
+    ##   service : (mandatory) name of the service owning the log
+    ##   source : (mandatory) attribute that defines which integration is sending the logs
+    ##   sourcecategory : (optional) Multiple value attribute. Can be used to refine the source attribtue
+    ##   tags: (optional) add tags to each logs collected
 
   - type: file
     path: /path/to/your/ruby/log.log

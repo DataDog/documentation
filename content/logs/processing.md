@@ -1,5 +1,5 @@
 ---
-title: Processing
+title: Pipelines
 kind: documentation
 description: "Parse & Enrich your logs so you can create valuable facets & metrics in the Logs Explorer."
 further_reading:
@@ -55,7 +55,7 @@ The filter syntax is the same as the [search bar](/logs/explore/#search-bar).
 
 **Be aware that the pipeline filtering is applied before any pipeline processing, hence you cannot filter on an attribute that does not exist** 
 
-The log list shows which logs your pipeline applies to:
+The logstream shows which logs your pipeline applies to:
 
 {{< img src="logs/processing/pipeline_filters.png" alt="Pipelines filters" responsive="true" popup="true">}}
 

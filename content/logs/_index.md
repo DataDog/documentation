@@ -37,7 +37,7 @@ During the beta phase of Datadog Logs, not all integrations include log configur
 ### Cloud
 * [AWS](/logs/aws)
 
-### Frameworks
+### Languages
 
 * [Java](/logs/languages/java) 
 * [C#](/logs/languages/csharp)
@@ -75,10 +75,9 @@ Note that for the yaml file to be considered valid by the agent, they must inclu
 
 ```yaml
 init_config:
-
 instances:
-    [{}]
-#Log section
+
+##Log section
 logs:
 
   - type: file
@@ -104,10 +103,9 @@ If your PHP application does not log to a file, but instead forwards its logs vi
 
 ```yaml
 init_config:
-
 instances:
-    [{}]
-#Log section
+
+##Log section
 logs:
   - type: tcp
     port: 10518
@@ -126,44 +124,40 @@ To achieve this use the `log_processing_rules` parameter in your configuration f
 * **exclude_at_match**: If the pattern is contained in the message the log is excluded, and not sent to Datadog.
   Example: Filtering out logs that contain a Datadog email
 
-  ```yaml
-  init_config:
+```yaml
+init_config:
+instances:
 
-  instances:
-      [{}]
-
-  logs:
-   - type: file
-     path: /my/test/file.log
-     service: cardpayment
-     source: java
-     log_processing_rules:
-      - type: exclude_at_match
-        name: exclude_datadoghq_users
-        # Regexp can be anything
-        pattern: User=\w+@datadoghq.com
-  ```
+logs:
+  - type: file
+    path: /my/test/file.log
+    service: cardpayment
+    source: java
+    log_processing_rules:
+    - type: exclude_at_match
+      name: exclude_datadoghq_users
+      ## Regexp can be anything
+      pattern: User=\w+@datadoghq.com
+```
 
 * **include_at_match**: Only log with a message that includes the pattern are sent to Datadog.
   Example: Sending only logs that contain a Datadog email
 
-  ```yaml
-  init_config:
+```yaml
+init_config:
+instances:
 
-  instances:
-      [{}]
-
-  logs:
-   - type: file
-     path: /my/test/file.log
-     service: cardpayment
-     source: java
-     log_processing_rules:
-      - type: include_at_match
-        name: include_datadoghq_users
-        # Regexp can be anything
-        pattern: \w+@datadoghq.com
-  ```
+logs:
+  - type: file
+    path: /my/test/file.log
+    service: cardpayment
+    source: java
+    log_processing_rules:
+    - type: include_at_match
+      name: include_datadoghq_users
+      ## Regexp can be anything
+      pattern: \w+@datadoghq.com
+```
 
 
 ### Search and replace content in your logs
@@ -175,9 +169,7 @@ Example: Redact credit card numbers
 
 ```yaml
 init_config:
-
 instances:
-    [{}]
 
 logs:
  - type: file
@@ -188,38 +180,33 @@ logs:
       - type: mask_sequences
         name: mask_credit_cards
         replace_placeholder: "[masked_credit_card]"
-        #One pattern that contains capture groups
+        ##One pattern that contains capture groups
         pattern: (?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})
 ```
 
-### Multi-line
+### Multi-line aggregation
 
 If your logs are not sent in JSON and you want to aggregate several lines into one single entry, configure the Datadog Agent to detect a new log using a specific regex pattern instead of having one log per line.  
 
 This is accomplished by using the `log_processing_rules` parameter in your configuration file with the **multi_line** `type`.
 
 This aggregates all lines into one single entry until the given pattern is detected again. This is especially useful for database logs and stack traces.
-Example: Every PostgreSQL log line starts with a timestamp with `YYYY-dd-mm` format. The below lines would be sent as two logs.
+Example: Every java log line starts with a timestamp with `YYYY-dd-mm` format. The below lines including a stack trace would be sent as two logs.
 
 ```
-2017-12-05 10:10:46.981 UTC [1107] postgres psql postgres [local] 5a0c58f6.453 LOG:  statement: SELECT d.datname as “Name”,
-               pg_catalog.pg_get_userbyid(d.datdba) as “Owner”,
-               pg_catalog.pg_encoding_to_char(d.encoding) as “Encoding”,
-               d.datcollate as “Collate”,
-               d.datctype as “Ctype”,
-               pg_catalog.array_to_string(d.datacl, E’\n’) AS “Access privileges”
-        FROM pg_catalog.pg_database d
-        ORDER BY 1;
-2017-12-05 10:55:49.061 UTC [20535] postgres psql postgres [local] 5a0d60a5.5037 LOG:  incomplete startup packet
+2018-01-03T09:24:24.983Z UTC Exception in thread "main" java.lang.NullPointerException
+        at com.example.myproject.Book.getTitle(Book.java:16)
+        at com.example.myproject.Author.getBookTitles(Author.java:25)
+        at com.example.myproject.Bootstrap.main(Bootstrap.java:14)
+2018-01-03T09:26:24.365Z UTC starting upload of /my/file.gz
+
 ```
 
 To achieve this, you need to use the following `log_processing_rules`:
 
 ```yaml
 init_config:
-
 instances:
-    [{}]
 
 logs:
  - type: file
@@ -232,20 +219,24 @@ logs:
         pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
 ```
 
-### Wildcards
+### Tail multiple directories or whole directories by using wildcards
 
 If your log files are labeled by date or all stored in the same directory, configure your Datadog Agent to monitor them all and automatically detect new ones by using wildcards in the `path` attribute.
 
-* Using `path: /var/log/myapp/*.log` matches all `.log` file contained in the `/var/log/myapp/` directory. But it does not match `/var/log/myapp/myapp.conf`.
-* Using `path: /var/log/myapp/*/*.log` matches `/var/log/myapp/log/myfile.log` or `/var/log/myapp/errorLog/myerrorfile.log` but does not match `/var/log/myapp/mylogfile.log`.
+* Using `path: /var/log/myapp/*.log`:
+  * Matches all `.log` file contained in the `/var/log/myapp/` directory. 
+  * Doesn't match `/var/log/myapp/myapp.conf`.
+
+* Using `path: /var/log/myapp/*/*.log`:
+  * Matches `/var/log/myapp/log/myfile.log`.
+  * Matches `/var/log/myapp/errorLog/myerrorfile.log` 
+  * Doesn't match `/var/log/myapp/mylogfile.log`.
 
 Configuration example:
 
 ```yaml
 init_config:
-
 instances:
-    [{}]
 
 logs:
  - type: file
@@ -281,7 +272,7 @@ The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-
 
 ### *message* attribute
 
-By default, Datadog ingests the value of message as the body of the log entry. That value is then highlighted and display in the [log list](/logs/explore/#log-list), where it is indexed for [full text search](/logs/explore/#search-bar).
+By default, Datadog ingests the value of message as the body of the log entry. That value is then highlighted and display in the [logstream](/logs/explore/#logstream), where it is indexed for [full text search](/logs/explore/#search-bar).
 
 ### *severity* attribute
 
