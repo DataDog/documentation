@@ -2,6 +2,7 @@
 title: Send services
 type: apicontent
 order: 20.2
+external_redirect: /api/#send-services
 ---
 
 ## Send services

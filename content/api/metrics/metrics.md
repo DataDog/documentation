@@ -2,6 +2,7 @@
 title: Metrics
 type: apicontent
 order: 5
+external_redirect: /api/#metrics
 ---
 ## Metrics
 The metrics end-point allows you to:

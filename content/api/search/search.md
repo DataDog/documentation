@@ -2,6 +2,7 @@
 title: Search
 type: apicontent
 order: 14
+external_redirect: /api/#search
 ---
 ## Search
 This end point allows you to search for entities from the last 24 hours in Datadog. The currently searchable entities are:

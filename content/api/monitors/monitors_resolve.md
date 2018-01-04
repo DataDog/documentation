@@ -2,6 +2,7 @@
 title: Resolve monitor
 type: apicontent
 order: 8.6
+external_redirect: /api/#resolve-monitor
 ---
 
 ## Resolve monitor

@@ -2,6 +2,7 @@
 title: Get specific embed
 type: apicontent
 order: 19.3
+external_redirect: /api/#get-specific-embed
 ---
 
 ## Get specific embed

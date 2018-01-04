@@ -2,6 +2,7 @@
 title: Post a check run
 type: apicontent
 order: 7.1
+external_redirect: /api/#post-a-check-run
 ---
 
 ## Post A check run

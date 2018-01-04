@@ -2,6 +2,7 @@
 title: Query the event stream
 type: apicontent
 order: 6.4
+external_redirect: /api/#query-the-event-stream
 ---
 
 ## Query the event stream

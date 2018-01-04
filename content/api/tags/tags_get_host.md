@@ -2,6 +2,7 @@
 title: Get host tags
 type: apicontent
 order: 13.2
+external_redirect: /api/#get-host-tags
 ---
 
 ## Get host tags

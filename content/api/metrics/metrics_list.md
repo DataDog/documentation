@@ -2,6 +2,7 @@
 title: Get list of active metrics
 type: apicontent
 order: 5.1
+external_redirect: /api/#get-list-of-active-metrics
 ---
 
 ## Get list of active metrics

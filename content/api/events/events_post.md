@@ -2,6 +2,7 @@
 title: Post an event
 type: apicontent
 order: 6.1
+external_redirect: /api/#post-an-event
 ---
 
 ## Post an event

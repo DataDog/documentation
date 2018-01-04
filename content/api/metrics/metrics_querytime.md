@@ -2,6 +2,7 @@
 title: Query time series points
 type: apicontent
 order: 5.3
+external_redirect: /api/#query-time-series-points
 ---
 
 ## Query time series points

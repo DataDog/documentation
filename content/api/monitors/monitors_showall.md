@@ -2,7 +2,9 @@
 title: Get all monitor details
 type: apicontent
 order: 8.5
+external_redirect: /api/#get-all-monitor-details
 ---
+
 ## Get all monitor details
 ##### ARGUMENTS
 * `group_states` [*optional*, *default*=**None**]:  

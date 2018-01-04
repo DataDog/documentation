@@ -2,6 +2,7 @@
 title: Delete a comment
 type: apicontent
 order: 15.3
+external_redirect: /api/#delete-a-comment
 ---
 
 ## Delete A Comment

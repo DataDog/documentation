@@ -2,6 +2,7 @@
 title: Troubleshooting
 type: apicontent
 order: 22
+external_redirect: /api/#troubleshooting
 ---
 
 ## Troubleshooting
