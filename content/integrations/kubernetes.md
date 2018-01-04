@@ -317,15 +317,15 @@ The Kubernetes check includes the following service checks:
 
 * `kubernetes.kubelet.check`:  
 
-If `CRITICAL`, either `kubernetes.kubelet.check.ping` or `kubernetes.kubelet.check.syncloop` is in `CRITICAL` state.
+If `CRITICAL`, either `kubernetes.kubelet.check.ping` or `kubernetes.kubelet.check.syncloop` is in `CRITICAL` or `NO DATA` state.
 
 * `kubernetes.kubelet.check.ping`:  
 
-If `CRITICAL`, Kubelet's API isn't available 
+If `CRITICAL` or `NO DATA`, Kubelet's API isn't available 
 
 * `kubernetes.kubelet.check.syncloop`:  
 
-If `CRITICAL`, Kubelet’s sync loop that updates containers isn't working.
+If `CRITICAL` or `NO DATA`, Kubelet's sync loop that updates containers isn't working.
 
 ## Troubleshooting
 
