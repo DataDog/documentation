@@ -11,7 +11,7 @@ START=$(date +%s%N)
 sleep 2
 
 # Stop the timer.
-DURATION=$(($(date +%s%N) - $START))
+DURATION= $(($(date +%s%N) - $START))
 
 # Send the traces.
 curl -X PUT -H "Content-type: application/json" \

@@ -5,7 +5,7 @@ order: 20.1
 ---
 
 ##### Signature
-`PUT /v0.3/traces`
+`PUT localhost:8126/v0.3/traces`
 
 ##### Example Request
 

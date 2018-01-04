@@ -1,7 +1,7 @@
 ---
 title: Usage Metering
 type: apicontent
-order: 20.1
+order: 21.1
 ---
 
 ## Get Hourly Usage For Hosts and Containers

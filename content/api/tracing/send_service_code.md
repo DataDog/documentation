@@ -5,7 +5,7 @@ order: 20.2
 ---
 
 ##### Signature
-`PUT /v0.3/services`
+`PUT localhost:8126/v0.3/traces`
 
 ##### Example Request
 {{< code-snippets basename="send_service" >}}
