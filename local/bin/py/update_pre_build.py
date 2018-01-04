@@ -74,7 +74,7 @@ class GitHub:
         # get the latest sha
         url = 'https://api.github.com/repos/{0}/{1}/git/refs/heads/{2}'.format(org, repo, branch)
         headers = self.headers()
-        r('Getting latest sha from {}/{}..'.format(repo, branch))
+        print('Getting latest sha from {}/{}..'.format(repo, branch))
         sha_response = requests.get(url, headers=headers)
         if sha_response.status_code == requests.codes.ok:
             sha = sha_response.json().get('object', {}).get('sha', None)
