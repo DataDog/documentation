@@ -9,4 +9,5 @@ Return a mapping of tags to hosts for your whole infrastructure.
 
 ##### ARGUMENTS
 * `source` [*optional*, *default*=**None**]:  
-    Only show tags from a particular source. Otherwise shows all tags.
+    Only show tags from a particular source. Otherwise shows all tags.  
+    [Complete list of source attribute values](/integrations/faq/list-of-api-source-attribute-value)
