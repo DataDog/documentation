@@ -1,10 +1,10 @@
 ---
-title: Add Tags To A Host
+title: Add tags to a host
 type: apicontent
 order: 13.3
 ---
 
-## Add Tags To A Host
+## Add tags to a host
 This end point allows you to add tags to a host.
 
 ##### ARGUMENTS

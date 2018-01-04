@@ -1,10 +1,10 @@
 ---
-title: Post Time Series Points
+title: Post time series points
 type: apicontent
 order: 5.2
 ---
 
-## Post Time Series Points
+## Post time series points
 The metrics end-point allows you to post time-series data that can be graphed on Datadog's dashboards.
 
 #### ARGUMENTS

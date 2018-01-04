@@ -1,10 +1,10 @@
 ---
-title: Remove Host Tags
+title: Remove host tags
 type: apicontent
 order: 13.5
 ---
 
-## Remove Host Tags
+## Remove host tags
 This end point allows you to remove all tags for a given host.
 
 ##### ARGUMENTS

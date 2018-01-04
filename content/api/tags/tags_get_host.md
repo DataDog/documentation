@@ -1,10 +1,10 @@
 ---
-title: Get Host Tags
+title: Get host tags
 type: apicontent
 order: 13.2
 ---
 
-## Get Host Tags
+## Get host tags
 Return the list of tags that apply to a given host.
 
 ##### ARGUMENTS

@@ -1,10 +1,10 @@
 ---
-title: Mute A Monitor
+title: Mute a monitor
 type: apicontent
 order: 8.9
 ---
 
-## Mute A Monitor
+## Mute a monitor
 
 ##### ARGUMENTS
 * `scope` [*optional*, *default*=**None**]:  

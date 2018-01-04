@@ -1,10 +1,10 @@
 ---
-title: Get Specific Embed
+title: Get specific embed
 type: apicontent
 order: 19.3
 ---
 
-## Get Specific Embed
+## Get specific embed
 Get the HTML fragment for a previously generated embed with embed_id.
 
 Returns: A JSON object with 8 elements:

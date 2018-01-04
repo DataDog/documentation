@@ -1,7 +1,8 @@
 ---
-title: Metrics
+title: Edit metric metadata
 type: apicode
 order: 5.5
+external_redirect: /api/#edit-metric-metadata
 ---
 ##### Signature
 `PUT /api/v1/metrics/:metric_name`

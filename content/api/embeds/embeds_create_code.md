@@ -1,7 +1,8 @@
 ---
-title: Embeddable Graphs
+title: Create embed
 type: apicode
 order: 19.2
+external_redirect: /api/#create-embed
 ---
 
 ##### Signature

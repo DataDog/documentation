@@ -1,10 +1,10 @@
 ---
-title: Post A Check Run
+title: Post a check run
 type: apicontent
 order: 7.1
 ---
 
-## Post A Check Run
+## Post A check run
 
 ##### ARGUMENTS
 

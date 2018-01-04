@@ -1,9 +1,9 @@
 ---
-title: Get All Monitor Details
+title: Get all monitor details
 type: apicontent
 order: 8.5
 ---
-## Get All Monitor Details
+## Get all monitor details
 ##### ARGUMENTS
 * `group_states` [*optional*, *default*=**None**]:  
     If this argument is set, the returned data includes additional information (if available) regarding the specified group states, including the last notification timestamp, last resolution timestamp and details about the last time the monitor was triggered. The argument should include a string list indicating what, if any, group states to include. Choose one or more from 'all', 'alert', 'warn', or 'no data'. Example: 'alert,warn'

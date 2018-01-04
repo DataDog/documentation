@@ -1,10 +1,10 @@
 ---
-title: Organizations
+title: Update organization
 type: apicontent
 order: 17.3
 ---
 
-## Update Organization
+## Update organization
 
 ##### ARGUMENTS
 * `name` [*optional*]:  

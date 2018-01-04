@@ -1,7 +1,8 @@
 ---
-title: Traces
+title: Send traces
 type: apicode
 order: 20.1
+external_redirect: /api/#send-traces
 ---
 
 ##### Signature

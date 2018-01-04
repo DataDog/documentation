@@ -1,10 +1,10 @@
 ---
-title: Create Embed
+title: Create embed
 type: apicontent
 order: 19.2
 ---
 
-## Create Embed
+## Create embed
 
 Creates a new embeddable graph.
 

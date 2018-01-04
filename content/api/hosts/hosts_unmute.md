@@ -1,10 +1,10 @@
 ---
-title: UnMute A Host
+title: Unmute a host
 type: apicontent
 order: 12.2
 ---
 
-## UnMute A Host
+## Unmute a host
 ##### ARGUMENTS
 
 This end point takes no JSON arguments.

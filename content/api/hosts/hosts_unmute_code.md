@@ -1,7 +1,8 @@
 ---
-title: Hosts
+title: Unmute a host
 type: apicode
 order: 12.2
+external_redirect: /api/#unmute-a-host
 ---
 
 ##### Signature

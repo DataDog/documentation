@@ -1,7 +1,8 @@
 ---
-title: Metrics
+title: View metric metadata
 type: apicode
 order: 5.4
+external_redirect: /api/#view-metric-metadata
 ---
 
 ##### Signature

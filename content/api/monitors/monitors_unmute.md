@@ -1,10 +1,10 @@
 ---
-title: Unmute A Monitor
+title: Unmute a monitor
 type: apicontent
 order: 8.91
 ---
 
-## Unmute A Monitor
+## Unmute a monitor
 
 ##### ARGUMENTS
 * `scope` [*optional*, *default*=**None**]:  
