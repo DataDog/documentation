@@ -2,6 +2,7 @@
 title: Edit a comment
 type: apicontent
 order: 15.2
+external_redirect: /api/#edit-a-comment
 ---
 
 ## Edit A Comment

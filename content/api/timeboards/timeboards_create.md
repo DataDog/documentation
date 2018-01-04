@@ -2,6 +2,7 @@
 title: Create a Timeboard
 type: apicontent
 order: 10.1
+external_redirect: /api/#create-a-timeboard
 ---
 
 ## Create a Timeboard

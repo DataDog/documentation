@@ -2,6 +2,7 @@
 title: Get an event
 type: apicontent
 order: 6.2
+external_redirect: /api/#get-an-event
 ---
 
 ## Get an event

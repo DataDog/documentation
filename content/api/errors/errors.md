@@ -2,6 +2,7 @@
 title: Success and errors
 type: apicontent
 order: 3
+external_redirect: /api/#success-and-errors
 ---
 ## Success and errors
 The Datadog API uses HTTP status codes to indicate the success or failure of a request.

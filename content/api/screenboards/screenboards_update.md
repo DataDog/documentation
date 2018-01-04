@@ -2,6 +2,7 @@
 title: Update a Screenboard
 type: apicontent
 order: 11.2
+external_redirect: /api/#update-a-screenboard
 ---
 
 ## Update a Screenboard

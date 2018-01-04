@@ -2,6 +2,7 @@
 title: Usage metering
 type: apicontent
 order: 21
+external_redirect: /api/#usage-metering
 ---
 
 ## Usage metering

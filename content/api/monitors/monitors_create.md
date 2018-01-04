@@ -2,6 +2,7 @@
 title: Create a monitor
 type: apicontent
 order: 8.1
+external_redirect: /api/#create-a-monitor
 ---
 
 ## Create a monitor

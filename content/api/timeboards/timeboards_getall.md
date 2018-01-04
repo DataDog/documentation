@@ -2,6 +2,7 @@
 title: Get all Timeboards
 type: apicontent
 order: 10.4
+external_redirect: /api/#get-all-timeboards
 ---
 
 ## Get all Timeboards
