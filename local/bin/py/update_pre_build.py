@@ -190,7 +190,8 @@ class PreBuild:
         """
         print('Processing')
 
-        dogweb_globs = ['integration/**/*_metadata.csv', 'integration/**/manifest.json', 'integration/**/README.md']
+        dogweb_globs = ['integration/**/*_metadata.csv', 'integration/**/manifest.json', 'integration/**/README.md',
+                        'dd/utils/context/source.py']
         integrations_globs = ['**/metadata.csv', '**/manifest.json', '**/README.md']
 
         # sync from dogweb, download if we don't have it (token required)
@@ -257,8 +258,8 @@ class PreBuild:
         :param file_name: path to a source.py file
         """
         if file_name.endswith('dd/utils/context/source.py'):
-            out = '|Integration name | API source attribute|'
-            out += '|:---|:---|'
+            out = '|Integration name | API source attribute|\n'
+            out += '|:---|:---|\n'
             with open(file_name, 'r') as f:
                 result = f.read()
                 m = re.search(self.regex_source, result)
@@ -268,7 +269,14 @@ class PreBuild:
                     pair = line.split(':')
                     if len(pair) > 1:
                         out += '|{0}|{1}|\n'.format(pair[0], pair[1])
-            print(out)
+            with open('{}{}'.format(self.options.source, '/content/integrations/faq/list-of-api-source-attribute-value.md'), mode='r+', encoding='utf-8') as f:
+                boundary = re.compile(r'^-{3,}$', re.MULTILINE)
+                _, fm, content = boundary.split(f.read(), 2)
+                template = "---\n{front_matter}\n---\n\n{content}\n"
+                new_content = template.format(front_matter=fm, content=out)
+                f.truncate(0)
+                f.seek(0)
+                f.write(new_content)
 
     def process_integration_metric(self, file_name):
         """
