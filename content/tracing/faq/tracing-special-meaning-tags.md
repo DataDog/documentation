@@ -7,8 +7,7 @@ When [submitting your traces](/api/#tracing) you may add attributes in the `meta
 Some of them have a special meaning which lead to a dedicated display and behavior in Datadog:
 
 * **`sql.query`**:  
-    Allows specific SQL stats, formating, and display in Datadog UI: 
-{{< img src="tracing/faq/trace_sql_query.png" alt="SQL query" responsive="true" popup="true">}}
+    Allows specific SQL query formating and display in Datadog UI.
 
 * **`error.msg`**:  
     Allows dedicated display for error message.
