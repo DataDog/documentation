@@ -52,6 +52,7 @@ kind: faq
 
 * [Compose and the Datadog Agent](/integrations/faq/compose-and-the-datadog-agent)
 * [DogStatsD and Docker](/integrations/faq/dogstatsd-and-docker)
+* [Docker, ECS, & Kubernetes Events](/integrations/faq/docker-ecs-kubernetes-events)
 
 ## Elasticsearch 
 
