@@ -1,7 +1,7 @@
 ---
 title: Get a monitor's details
 type: apicontent
-order: 8.2
+order: 15.2
 ---
 ## Get a monitor's details
 ##### ARGUMENTS

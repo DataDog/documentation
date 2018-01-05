@@ -1,7 +1,7 @@
 ---
 title: Delete a monitor
 type: apicode
-order: 8.4
+order: 15.4
 external_redirect: /api/#delete-a-monitor
 ---
 

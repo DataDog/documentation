@@ -1,7 +1,7 @@
 ---
 title: Service Checks
 type: apicontent
-order: 7
+order: 6
 external_redirect: /api/#service-checks
 ---
 ## Service Checks

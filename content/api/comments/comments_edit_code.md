@@ -1,7 +1,7 @@
 ---
 title: Edit a comment
 type: apicode
-order: 15.2
+order: 7.2
 external_redirect: /api/#edit-a-comment
 ---
 

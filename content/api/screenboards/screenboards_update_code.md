@@ -1,7 +1,7 @@
 ---
 title: Update a Screenboard
 type: apicode
-order: 11.2
+order: 17.2
 external_redirect: /api/#update-a-screenboard
 ---
 

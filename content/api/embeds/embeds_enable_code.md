@@ -1,7 +1,7 @@
 ---
 title: Enable embed
 type: apicode
-order: 19.4
+order: 9.4
 external_redirect: /api/#enable-embed
 ---
 

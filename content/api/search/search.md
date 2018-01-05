@@ -1,7 +1,7 @@
 ---
 title: Search
 type: apicontent
-order: 14
+order: 18
 external_redirect: /api/#search
 ---
 ## Search

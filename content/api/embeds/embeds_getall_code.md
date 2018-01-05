@@ -1,7 +1,7 @@
 ---
 title: Get all embeds
 type: apicode
-order: 19.1
+order: 9.1
 external_redirect: /api/#get-all-embeds
 ---
 

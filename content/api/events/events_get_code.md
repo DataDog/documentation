@@ -1,7 +1,7 @@
 ---
 title: Get an event
 type: apicode
-order: 6.2
+order: 10.2
 external_redirect: /api/#get-an-event
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Get a Timeboard
 type: apicontent
-order: 10.5
+order: 20.5
 external_redirect: /api/#get-a-timeboard
 ---
 
