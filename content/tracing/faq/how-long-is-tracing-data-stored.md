@@ -32,6 +32,6 @@ For example, at `9:00am UTC Wed, 12/20` you would see:
 * **0%** of traces before `7/1 00:00`
 
 
-Additionally, once a trace has been viewed, it continues to be available based on its trace ID `https://app.datadoghq.com/apm/trace/<trace_id>` even if it “expires” from the UI. This behavior is independent of the UI retention time buckets.
+Once a trace has been viewed, it continues to be available by using its trace ID in the URL: `https://app.datadoghq.com/apm/trace/<trace_id>` This is true even if it “expires” from the UI. This behavior is independent of the UI retention time buckets.
 
 {{< img src="tracing/faq/trace_id.png" alt="Trace ID" responsive="true" popup="true">}}
