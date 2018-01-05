@@ -38,49 +38,50 @@ If your Kubernetes has RBAC enabled, see the [documentation on how to configure 
 * Create the following `dd-agent.yaml` manifest:
 
 ```yaml
-  apiVersion: extensions/v1beta1
-  kind: DaemonSet
-  metadata:
-    name: dd-agent
-  spec:
-    template:
-      metadata:
-        labels:
-          app: dd-agent
+
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: dd-agent
+spec:
+  template:
+    metadata:
+      labels:
+        app: dd-agent
+      name: dd-agent
+    spec:
+      containers:
+      - image: datadog/docker-dd-agent:latest
+        imagePullPolicy: Always
         name: dd-agent
-      spec:
-        containers:
-        - image: datadog/docker-dd-agent:latest
-          imagePullPolicy: Always
-          name: dd-agent
-          ports:
-            - containerPort: 8125
-              name: dogstatsdport
-              protocol: UDP
-          env:
-            - name: API_KEY
-              value: "YOUR_API_KEY"
-            - name: KUBERNETES
-              value: "yes"
-          volumeMounts:
-            - name: dockersocket
-              mountPath: /var/run/docker.sock
-            - name: procdir
-              mountPath: /host/proc
-              readOnly: true
-            - name: cgroups
-              mountPath: /host/sys/fs/cgroup
-              readOnly: true
-        volumes:
-          - hostPath:
-              path: /var/run/docker.sock
-            name: dockersocket
-          - hostPath:
-              path: /proc
-            name: procdir
-          - hostPath:
-              path: /sys/fs/cgroup
-            name: cgroups
+        ports:
+          - containerPort: 8125
+            name: dogstatsdport
+            protocol: UDP
+        env:
+          - name: API_KEY
+            value: "YOUR_API_KEY"
+          - name: KUBERNETES
+            value: "yes"
+        volumeMounts:
+          - name: dockersocket
+            mountPath: /var/run/docker.sock
+          - name: procdir
+            mountPath: /host/proc
+            readOnly: true
+          - name: cgroups
+            mountPath: /host/sys/fs/cgroup
+            readOnly: true
+      volumes:
+        - hostPath:
+            path: /var/run/docker.sock
+          name: dockersocket
+        - hostPath:
+            path: /proc
+          name: procdir
+        - hostPath:
+            path: /sys/fs/cgroup
+          name: cgroups
 ```
 
 Replace `YOUR_API_KEY` with [your api key](https://app.datadoghq.com/account/settings#api) or use [Kubernetes secrets](https://kubernetes.io/docs/concepts/configuration/secret/) to set your API key [as an environement variable](https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-environment-variables).
@@ -101,6 +102,7 @@ Install the `dd-check-kubernetes` package manually or with your favorite configu
 Edit the `kubernetes.yaml` file to point to your server and port, set the masters to monitor:
 
 ```yaml
+
 instances:
     host: localhost
     port: 4194
@@ -143,47 +145,47 @@ If you are running Kubernetes >= 1.2.0, you can use the [kube-state-metrics](htt
 To run kube-state-metrics, create a `kube-state-metrics.yaml` file using the following manifest to deploy the kube-state-metrics service:
 
 ```yaml
-    apiVersion: extensions/v1beta1
-    kind: Deployment
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: kube-state-metrics
+spec:
+  replicas: 1
+  template:
     metadata:
-      name: kube-state-metrics
-    spec:
-      replicas: 1
-      template:
-        metadata:
-          labels:
-            app: kube-state-metrics
-        spec:
-          containers:
-          - name: kube-state-metrics
-            image: gcr.io/google_containers/kube-state-metrics:v0.3.0
-            ports:
-            - name: metrics
-              containerPort: 8080
-            resources:
-              requests:
-                memory: 30Mi
-                cpu: 100m
-              limits:
-                memory: 50Mi
-                cpu: 200m
-    ---
-    apiVersion: v1
-    kind: Service
-    metadata:
-      annotations:
-        prometheus.io/scrape: 'true'
       labels:
         app: kube-state-metrics
-      name: kube-state-metrics
     spec:
-      ports:
-      - name: metrics
-        port: 8080
-        targetPort: metrics
-        protocol: TCP
-      selector:
-        app: kube-state-metrics
+      containers:
+      - name: kube-state-metrics
+        image: gcr.io/google_containers/kube-state-metrics:v1.1.0
+        ports:
+        - name: metrics
+          containerPort: 8080
+        resources:
+          requests:
+            memory: 30Mi
+            cpu: 100m
+          limits:
+            memory: 50Mi
+            cpu: 200m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    prometheus.io/scrape: 'true'
+  labels:
+    app: kube-state-metrics
+  name: kube-state-metrics
+spec:
+  ports:
+  - name: metrics
+    port: 8080
+    targetPort: metrics
+    protocol: TCP
+  selector:
+    app: kube-state-metrics
 ```
 
 Then deploy it by running:
@@ -191,22 +193,15 @@ Then deploy it by running:
 kubectl create -f kube-state-metrics.yaml
 ```
 
-The manifest above uses Google's publicly available kube-state-metrics container. If you would like to build your own, you can do so by:
-
-1. Clone the [kube-state-metrics Github repository](https://github.com/kubernetes/kube-state-metrics)
-1. Run `make container` to build the container
-1. Run `kubectl apply -f kubernetes`
+The manifest above uses Google’s publicly available `kube-state-metrics` container, which is also available on [Quay](https://quay.io/coreos/kube-state-metrics). If you want to build it manually, refer [to the official project documentation](https://github.com/kubernetes/kube-state-metrics).
 
 If you configure your Kubernetes State Metrics service to run on a different URL or port, you can configure the Datadog Agent by setting the `kube_state_url` parameter in `conf.d/kubernetes_state.yaml`, then restarting the Agent.
 For more information, see the [kubernetes_state.yaml.example file](https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/conf.yaml.example). If you have enabled [Autodiscovery](https://docs.datadoghq.com/agent/autodiscovery), the kube state URL will be configured and managed automatically.
 
 #### Host Installation
 
-Install the `dd-check-kubernetes_state` package manually or with your favorite configuration manager.
-
-### Configuration
-
-Edit the `kubernetes_state.yaml` file to point to your server and port, set the masters to monitor. See the [example kubernetes_state.yaml](https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/conf.yaml.example) for all available configuration options.
+Install the `dd-check-kubernetes_state` package manually or with your favorite configuration manager (On CentOS/AWS, [Find your rpm package here](https://yum.datadoghq.com/rpm/x86_64/), and information on installation on [this page](/agent/faq/how-do-i-install-the-agent-on-a-server-with-limited-internet-connectivity).
+Then edit the `kubernetes_state.yaml` file to point to your server and port and set the masters to monitor. See the [example kubernetes_state.yaml](https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/conf.yaml.example) for all available configuration options.
 
 ### Validation
 #### Container validation
@@ -246,6 +241,7 @@ Edit the `kube_dns.yaml` file to point to your server and port, set the masters 
 If you are using one dd-agent pod per kubernetes worker node, you could use the following annotations on your kube-dns pod to retrieve the data automatically.
 
 ```yaml
+
 apiVersion: v1
 kind: Pod
 metadata:
@@ -316,7 +312,17 @@ As the 5.17.0 release, Datadog Agent now supports built in [leader election opti
 * Unhealthy
 
 ### Service Checks
-The Kubernetes check does not include any service check at this time.
+
+The Kubernetes check includes the following service checks:
+
+* `kubernetes.kubelet.check`:
+  If `CRITICAL`, either `kubernetes.kubelet.check.ping` or `kubernetes.kubelet.check.syncloop` is in `CRITICAL` or `NO DATA` state.
+
+* `kubernetes.kubelet.check.ping`:
+  If `CRITICAL` or `NO DATA`, Kubelet's API isn't available
+
+* `kubernetes.kubelet.check.syncloop`:
+  If `CRITICAL` or `NO DATA`, Kubelet's sync loop that updates containers isn't working.
 
 ## Troubleshooting
 

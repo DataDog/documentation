@@ -1,10 +1,10 @@
 ---
-title: Organizations
+title: Upload IdP metadata
 type: apicontent
 order: 17.4
 ---
 
-## Upload IdP Metadata
+## Upload IdP metadata
 
 ##### ARGUMENTS
 * `idp_file` [*required*]:  

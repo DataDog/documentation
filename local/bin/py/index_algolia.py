@@ -57,8 +57,9 @@ def index_algolia(app_id, api_key, content_path=None):
 
                             # no crawl?
                             private = html.find_all('meta', {'name': 'robots', 'content': 'noindex'})
-                            if private:
-                                print('skipping beta or alias: %s' % dirpath)
+                            refresh = html.find('meta', attrs={'http-equiv': 'refresh'})
+                            if private or refresh:
+                                print('skipping beta or alias or refresh: %s' % dirpath)
                             else:
                                 # title
                                 title = html.title.string
@@ -66,8 +67,14 @@ def index_algolia(app_id, api_key, content_path=None):
                                     title = html.select('h1')[0].text.strip()
 
                                 if title and '://' not in title:
+                                    # strip specific html
+                                    [tag.extract() for tag in html.findAll("div", {"class": "whatsnext"})]
+
                                     # description
-                                    main = html.find("div", {'main'}).prettify()[:7000]
+                                    main = html.find("div", {'main'})
+                                    if not main:
+                                        main = html.find("div", {'main-api'})
+                                    main = main.prettify()[:7000]
 
                                     fm_description = html.findAll(attrs={"itemprop": "description"})[0]['content']
                                     if fm_description != default_description and '{{' not in fm_description:

@@ -1,5 +1,5 @@
 ---
-title: Delete A Comment
+title: Delete a comment
 type: apicontent
 order: 15.3
 ---

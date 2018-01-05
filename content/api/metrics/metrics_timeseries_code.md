@@ -1,7 +1,8 @@
 ---
-title: Metrics
+title: Post time series points
 type: apicode
 order: 5.2
+external_redirect: /api/#post-time-series-points
 ---
 
 ##### Signature

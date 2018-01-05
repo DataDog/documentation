@@ -1,7 +1,8 @@
 ---
-title: Monitors
+title: Unmute all monitors
 type: apicode
 order: 8.8
+external_redirect: /api/#unmute-all-monitors
 ---
 
 ##### Signature

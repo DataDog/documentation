@@ -1,7 +1,8 @@
 ---
-title: Embeddable Graphs
+title: Enable embed
 type: apicode
 order: 19.4
+external_redirect: /api/#enable-embed
 ---
 
 ##### Signature

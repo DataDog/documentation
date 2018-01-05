@@ -10,7 +10,7 @@ Datadog's integrated APM tool eliminates the traditional separation between infr
 
 ## Getting started
 
-The Datadog APM is included in our Enterprise plan or as an upgrade to our Pro plan. A free 14-day trial is available.  Registered users can visit the [APM page of the Datadog application](https://app.datadoghq.com/trace/home) to get started.
+Datadog APM is offered as an upgrade to our Pro and Enterprise plans. A free 14-day trial is available.  Registered users can visit the [APM page of the Datadog application](https://app.datadoghq.com/apm/home) to get started.
 
 APM is available as part of the Datadog Agent with versions 5.11+ as part of the one line install for the Linux and Docker Agents. Currently, [Mac](https://github.com/DataDog/datadog-trace-agent#run-on-osx) and [Windows](https://github.com/DataDog/datadog-trace-agent#run-on-windows) users must perform a manual install of the APM Agent (aka Trace Agent) via a separate install process.  
 

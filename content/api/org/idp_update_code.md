@@ -1,7 +1,8 @@
 ---
-title: Organizations
+title: Upload IdP metadata
 type: apicode
 order: 17.4
+external_redirect: /api/#upload-idp-metadata
 ---
 
 ##### Signature

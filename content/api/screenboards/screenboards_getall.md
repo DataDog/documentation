@@ -1,10 +1,10 @@
 ---
-title: Get All Screenboards
+title: Get all Screenboards
 type: apicontent
 order: 11.5
 ---
 
-## Get All Screenboards
+## Get all Screenboards
 Fetch all of your screenboards' definitions.
 
 ##### ARGUMENTS

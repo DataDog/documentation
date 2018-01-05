@@ -1,7 +1,8 @@
 ---
-title: Comments
+title: Edit a comment
 type: apicode
 order: 15.2
+external_redirect: /api/#edit-a-comment
 ---
 
 ##### Signature

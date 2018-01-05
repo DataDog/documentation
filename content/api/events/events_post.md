@@ -1,10 +1,10 @@
 ---
-title: Post An Event
+title: Post an event
 type: apicontent
 order: 6.1
 ---
 
-## Post An Event
+## Post an event
 This end point allows you to post events to the stream. Tag them, set priority and event aggregate them with other events.
 
 ##### ARGUMENTS

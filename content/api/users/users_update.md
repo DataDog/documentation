@@ -1,10 +1,10 @@
 ---
-title: Update User
+title: Update user
 type: apicontent
 order: 16.4
 ---
 
-## Update User
+## Update user
 Can only be used with application keys belonging to administrators.
 
 ##### ARGUMENTS

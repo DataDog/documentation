@@ -1,10 +1,10 @@
 ---
-title: Schedule Monitor Downtime
+title: Schedule monitor downtime
 type: apicontent
 order: 9.1
 ---
 
-## Schedule Monitor Downtime
+## Schedule monitor downtime
 
 ##### ARGUMENTS
 

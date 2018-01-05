@@ -1,7 +1,8 @@
 ---
-title: Events
+title: Get an event
 type: apicode
 order: 6.2
+external_redirect: /api/#get-an-event
 ---
 
 ##### Signature

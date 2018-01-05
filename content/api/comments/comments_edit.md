@@ -1,5 +1,5 @@
 ---
-title: Edit A Comment
+title: Edit a comment
 type: apicontent
 order: 15.2
 ---

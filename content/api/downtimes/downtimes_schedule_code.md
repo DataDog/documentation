@@ -1,7 +1,8 @@
 ---
-title: Downtimes
+title: Schedule monitor downtime
 type: apicode
 order: 9.1
+external_redirect: /api/#schedule-monitor-downtime
 ---
 
 ##### Signature
