@@ -50,7 +50,7 @@ external_redirect: /api/#create-a-monitor
 
     *   `event`, the event query string:
     *   `string_query` free text query to match against event title and text.
-    *   `sources` event sources (comma-separated).
+    *   `sources` event sources (comma-separated). [Complete list of source attribute values](/integrations/faq/list-of-api-source-attribute-value)
     *   `status` event statuses (comma-separated). Valid options: error, warn, and info.
     *   `priority` event priorities (comma-separated). Valid options: low, normal, all.
     *   `host` event reporting host (comma-separated).

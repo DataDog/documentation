@@ -31,4 +31,5 @@ This end point allows you to post events to the stream. Tag them, set priority a
     If you specify a key, all events using that key are grouped together in the Event Stream.
 * `source_type_name` [*optional*, *default*=**None**]:  
     The type of event being posted.  
-    Options: **nagios**, **hudson**, **jenkins**, **my_apps**, **chef**, **puppet**, **git**, **bitbucket**...
+    Options: **nagios**, **hudson**, **jenkins**, **my_apps**, **chef**, **puppet**, **git**, **bitbucket**...  
+    [Complete list of source attribute values](/integrations/faq/list-of-api-source-attribute-value)
