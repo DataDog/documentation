@@ -264,16 +264,16 @@ class PreBuild:
                 result = f.read()
                 m = re.search(self.regex_source, result)
                 result = m.group(2) if m else result
-                result = re.sub(r'[^0-9A-Za-z:,]', '', result)
+                result = re.sub(r'[^0-9A-Za-z:, ]', '', result)
                 for line in result.split(','):
                     pair = line.split(':')
                     if len(pair) > 1:
-                        out += '|{0}|{1}|\n'.format(pair[0], pair[1])
+                        out += '|{0}|{1}|\n'.format(pair[0].strip().title(), pair[1].strip())
             with open('{}{}'.format(self.options.source, '/content/integrations/faq/list-of-api-source-attribute-value.md'), mode='r+', encoding='utf-8') as f:
                 boundary = re.compile(r'^-{3,}$', re.MULTILINE)
                 _, fm, content = boundary.split(f.read(), 2)
                 template = "---\n{front_matter}\n---\n\n{content}\n"
-                new_content = template.format(front_matter=fm, content=out)
+                new_content = template.format(front_matter=fm.strip(), content=out)
                 f.truncate(0)
                 f.seek(0)
                 f.write(new_content)
