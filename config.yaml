@@ -409,7 +409,7 @@ languages:
           parent: menu_references_tracing
         - identifier: customnav_tracingnav_api
           name: "Trace API"
-          url: "/api/#traces"
+          url: "/api/#tracing"
           weight: 90
           parent: menu_references_tracing
         #- identifier: customnav_tracingnav_faq
