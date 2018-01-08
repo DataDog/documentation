@@ -19,4 +19,3 @@ curl -v -X PUT -H "Content-type: application/json" \
 curl -v "https://app.datadoghq.com/api/v1/integration/pagerduty?api_key=${api_key}&application_key=${app_key}" | python -mjson.tool
 
 curl -v -X DELETE "https://app.datadoghq.com/api/v1/integration/pagerduty?api_key=${api_key}&application_key=${app_key}" | python -mjson.tool
-

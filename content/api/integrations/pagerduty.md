@@ -19,10 +19,10 @@ Configure your Datadog-PagerDuty integration directly through Datadog API.
         Your Service name in PagerDuty.
 
     * `service_key` [*required*]:  
-        You Service name associated service key in Pagerduty.
+        Your Service name associated service key in Pagerduty.
 
 * `subdomain` [*required*]:  
-    Your PagerDuty accounts personalized subdomain name.
+    Your PagerDuty accounts personalized sub-domain name.
   
 * `schedules` [*required*]:
     Array of your schedule URLs e.g:  
