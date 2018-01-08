@@ -1,7 +1,7 @@
 ---
 title: Downtimes
 type: apicontent
-order: 9
+order: 8
 external_redirect: /api/#downtimes
 ---
 ## Downtimes

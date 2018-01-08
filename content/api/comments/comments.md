@@ -1,7 +1,7 @@
 ---
 title: Comments
 type: apicontent
-order: 15
+order: 7
 external_redirect: /api/#comments
 ---
 ## Comments

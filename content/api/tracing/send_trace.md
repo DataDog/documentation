@@ -1,7 +1,7 @@
 ---
 title: Send traces
 type: apicontent
-order: 20.1
+order: 21.1
 external_redirect: /api/#send-traces
 ---
 

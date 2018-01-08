@@ -1,7 +1,7 @@
 ---
 title: Revoke embed
 type: apicontent
-order: 19.5
+order: 9.5
 external_redirect: /api/#revoke-embed
 ---
 

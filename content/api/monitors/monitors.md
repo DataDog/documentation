@@ -1,7 +1,7 @@
 ---
 title: Monitors
 type: apicontent
-order: 8
+order: 15
 external_redirect: /api/#monitors
 ---
 ## Monitors

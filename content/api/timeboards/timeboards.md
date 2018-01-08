@@ -1,7 +1,7 @@
 ---
 title: Timeboards
 type: apicontent
-order: 10
+order: 20
 external_redirect: /api/#timeboards
 ---
 
