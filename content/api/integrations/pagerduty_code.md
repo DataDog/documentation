@@ -6,7 +6,9 @@ external_redirect: /api/#pagerduty
 ---
 
 ##### Signature
-`GET https://app.datadoghq.com/api/v1/metrics`
-##### Example Request
+`https://app.datadoghq.com/api/v1/integration/pagerduty`
 
+##### Example Request
+{{< code-snippets basename="api-integrations-pagerduty" >}}
 ##### Example Response
+{{< code-snippets basename="result.api-integrations-pagerduty" >}}
