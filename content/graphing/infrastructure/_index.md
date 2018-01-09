@@ -66,10 +66,18 @@ match is selected.
 If name is recognized as obviously non-unique (e.g. `localhost.localdomain`),
 the current rule fails and passes through to the next.
 
+**Note**: If an EC2 instance is an ECS host, Datadog uses the `instance-id` as the hostname, [even if the DNS hostname isn't an EC2 default](https://github.com/DataDog/dd-agent/blob/5.14.1/utils/hostname.py#L104). If you don't wish to use the `instance-id`, set the hostname in the Agent configuration file.
+
+<div class="alert alert-warning">
+Hostnames must be unique within a Datadog account.<br> 
+For example: you can't have two hosts with the hostname <code>10.8.0.1</code> reporting to the same Datadog account. Otherwise you may see gaps in your graphs.
+</div>
+
 ### Host Aliases
 
-A single host running in EC2 might have an instance ID (`i-abcd1234`), a generic hostname provided by EC2 based on the host's IP address (`ip-192-0-0-1`), and a meaningful host name provided by an internal DNS server or a config-managed hosts file (`myhost.mydomain`). Datadog creates aliases for host names when there are multiple uniquely identifiable names for a single host.  
-The names collected by the Agent (detailed [above](#agent-host-names)) are added as aliases for the chosen canonical name.
+A single host running in EC2 might have an instance ID (`i-abcd1234`), a generic hostname provided by EC2 based on the host's IP address (`ip-192-0-0-1`), and a meaningful host name provided by an internal DNS server or a config-managed hosts file (`myhost.mydomain`).  
+
+Datadog creates aliases for host names when there are multiple uniquely identifiable names for a single host. The names collected by the Agent (detailed [above](#agent-host-names)) are added as aliases for the chosen canonical name.  
 
 You can see a list of all the hosts in your account from the Infrastructure tab
 in Datadog. From the Inspect panel, you can see (among other things) the list of aliases associated with each host.
