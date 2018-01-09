@@ -6,7 +6,8 @@ external_redirect: /api/#get-all-screenboards
 ---
 
 ## Get all Screenboards
-Fetch all of your screenboards' definitions.
+
+Fetch all of your Screenboards' definitions.
 
 ##### ARGUMENTS
 
