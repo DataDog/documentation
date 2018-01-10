@@ -20,7 +20,7 @@ Datadog's Logs is currently available via public beta. You can apply for inclusi
 
 ## Overview 
 
-The Grok syntax provides an easier way to parse logs than pure regular expressions. 
+The Grok syntax provides an easier way to parse logs than pure regular expressions. If your logs are JSON-formatted, Datadog automatically parses them, but for other formats, Datadog allows you to enrich your logs with the help of Grok parsers. 
 The main usage of the Grok Parser is to extract attributes from semi-structured text messages.
 
 Grok comes with a lot of reusable patterns to parse integers, ip addresses, hostnames, etc...

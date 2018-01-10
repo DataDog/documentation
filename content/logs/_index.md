@@ -55,6 +55,10 @@ During the beta phase of Datadog Logs, not all integrations include log configur
 * Nginx: [nginx.d/conf.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/nginx/conf.yaml.example)
 * PostgreSQL: [postgres.d/conf.yaml.example](https://github.com/DataDog/integrations-core/blob/nils/Logs-integration-beta/postgres/conf.yaml.example)
 
+## The Advantage of Collecting JSON-formatted logs
+
+Datadog automatically parses JSON-formattted logs. For this reason, when you have control over the format of the logs you send to Datadog, we encourage you to format them as JSON to avoid the need for custom parsing rules.
+
 ## Custom log collection
 
 The Datadog Agent can collect logs from files or the network (TCP or UDP) and forward them to Datadog. To configure this, create a new repository and yaml file named after your log source  in the Agent's **conf.d** directory ( `conf.d/python.d/conf.yaml` for python logs, ...) and set these options:
