@@ -94,7 +94,7 @@ If your logs put their dates in an attribute not in this list, use the log date 
 
 {{< img src="logs/processing/log_date_remapper.png" alt="Log date Remapper" responsive="true" popup="true">}}
 
-If your logs don't contain any of the default attributes and you haven't defined your own date attribute, Datadog timestamps the logs with the date it received them.
+If your logs don't contain any of the default attributes and you haven't defined your own date attribute, Datadog timestamps the logs with the date it received them.  If the log's official timestamp is from one of the default attributes or an attribute of your choosing, Datadog rejects the log if the date is more than 18 hours in the past.
 
 ### Log Severity Remapper
 

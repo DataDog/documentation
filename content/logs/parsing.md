@@ -157,7 +157,8 @@ The date matcher transforms your timestamp in the EPOCH format.
 |Thu Jun 16 08:29:03 2016 | `%{date("EEE MMM dd HH:mm:ss yyyy","Europe/Paris"):date}` |{"date": 1466058543000}|
 |2007-08-31 19:22:22.427 ADT|`%{date("yyyy-MM-dd HH:mm:ss.SSS z"):date}`|{"date": 1188675889244}|
 {{% /table %}}
-Parsing a date **doesn't** set its value as the log official date, for this you need to use the Log Date Remapper [Log Date Remapper](/logs/processing/#log-date-remapper) in a subsequent processor.
+Parsing a date **doesn't** set its value as the log official date, for this you need to use the Log Date Remapper [Log Date Remapper](/logs/processing/#log-date-remapper) in a subsequent processor.  Note that if your log's official date is more than 18 hours in the past, Datadog rejects the log.
+
 
 ### Conditional pattern
 
