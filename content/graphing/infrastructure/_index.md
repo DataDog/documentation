@@ -69,8 +69,8 @@ the current rule fails and passes through to the next.
 **Note**: If an EC2 instance is an ECS host, Datadog uses the `instance-id` as the hostname, [even if the DNS hostname isn't an EC2 default](https://github.com/DataDog/dd-agent/blob/5.14.1/utils/hostname.py#L104). If you don't wish to use the `instance-id`, set the hostname in the Agent configuration file.
 
 <div class="alert alert-warning">
-Hostnames must be unique within a Datadog account.<br> 
-For example: you can't have two hosts with the hostname <code>10.8.0.1</code> reporting to the same Datadog account. Otherwise you may see gaps in your graphs.
+Hostnames should be unique within a Datadog account.<br> 
+Otherwise you may experience some inconsistencies on your host metric graphs.
 </div>
 
 ### Host Aliases
