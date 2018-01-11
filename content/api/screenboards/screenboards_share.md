@@ -6,7 +6,8 @@ external_redirect: /api/#share-a-screenboard
 ---
 
 ## Share a Screenboard
-Share an existing screenboard's with a public URL.
+
+Share an existing Screenboard's with a public URL.
 
 ##### ARGUMENTS
 

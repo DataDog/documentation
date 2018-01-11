@@ -11,11 +11,11 @@ This end point allows you to post events to the stream. Tag them, set priority a
 ##### ARGUMENTS
 * `title` [*required*]:  
     The event title. *Limited to 100 characters.*  
-    Use `msg_title` with ruby librairy.
+    Use `msg_title` with [the Datadog Ruby library](https://github.com/DataDog/dogapi-rb).
 * `text` [*required*]:  
     The body of the event. *Limited to 4000 characters.*  
     The text supports [markdown](/graphing/event_stream/#markdown-events\).
-    Use `msg_text` with ruby librairy
+    Use `msg_text` with [the Datadog Ruby library](https://github.com/DataDog/dogapi-rb)
 * `date_happened` [*optional*, *default* = **now**]:  
     POSIX timestamp of the event.
 * `priority` [*optional*, *default* = **normal**]:  
