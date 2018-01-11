@@ -50,3 +50,4 @@ private: true
 * [How do I change the frequency of an agent check?](/agent/faq/how-do-i-change-the-frequency-of-an-agent-check)
 * [How does Datadog determine the agent hostname](/agent/faq/how-does-datadog-determine-the-agent-hostname)
 * [Agent check directory structure](/agent/faq/agent-check-directory-structure)
+* [Datadog Agent supported OS versions](/agent/faq/supported-os-versions)
