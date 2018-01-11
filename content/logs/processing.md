@@ -24,8 +24,8 @@ To access the processing panel use the upper left menu:
 
 {{< img src="logs/processing/processing_panel.png" alt="Pipelines panel" responsive="true" popup="true" style="width:50%;" >}}
 
-## Processing Pipelines 
-### Pipelines Goal 
+## Processing Pipelines
+### Pipelines Goal
 
 **A processing pipeline takes a filtered subset of incoming logs and applies over them a list of sequential processors.**
 
@@ -39,7 +39,7 @@ So for instance a processing pipeline can transform this log:
 
 {{< img src="logs/processing/original_log.png" alt="original log" responsive="true" popup="true" style="width:50%;">}}
 
-into this log: 
+into this log:
 
 {{< img src="logs/processing/log_post_severity.png" alt=" Log post severity " responsive="true" popup="true" style="width:50%;">}}
 
@@ -47,7 +47,7 @@ With one single pipeline:
 
 {{< img src="logs/processing/pipeline_example.png" alt="Pipelines example" responsive="true" popup="true" style="width:75%;">}}
 
-Pipelines take logs from a wide variety of formats and translate them all into a common format in Datadog.
+Pipelines take logs from a wide variety of formats and translate them into a common format in Datadog.
 
 ### Pipeline filters
 
@@ -55,7 +55,7 @@ Filters let you limit what kinds of logs a pipeline applies to.
 
 The filter syntax is the same as the [search bar](/logs/explore/#search-bar).
 
-**Be aware that the pipeline filtering is applied before any pipeline processing, hence you cannot filter on an attribute that does not exist** 
+**Be aware that the pipeline filtering is applied before any pipeline processing, hence you cannot filter on an attribute that does not exist**
 
 The logstream shows which logs your pipeline applies to:
 
@@ -81,7 +81,7 @@ Create custom grok rules to parse the full message or a specific attribute of yo
 
 Read more about this in the [parsing section](/logs/parsing)
 
-### Log Date Remapper 
+### Log Date Remapper
 
 As Datadog receives logs, it timestamps them using the value(s) from any of these default attributes:
 
@@ -138,7 +138,7 @@ It transforms this log:
 Into this log:
 {{< img src="logs/processing/attribute_post_remapping.png" alt="attribute post remapping " responsive="true" popup="true" style="width:40%;">}}
 
-### URL Parser 
+### URL Parser
 
 This processor extracts query parameters and other important parameters from a URL. To use it, just enter the source attribute of your url:
 
@@ -151,7 +151,7 @@ It recognizes major bots like the Google Bot, Yahoo Slurp, Bing and others.
 
 If your logs contain encoded useragents (as, for example, IIS logs do), configure this processor to **decode the URL** before parsing it.
 
-These settings: 
+These settings:
 {{< img src="logs/processing/useragent_processor_tile.png" alt="Useragent processor tile" responsive="true" popup="true">}}
 
 Give the following results:
