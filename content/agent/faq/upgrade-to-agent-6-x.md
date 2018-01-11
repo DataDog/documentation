@@ -55,4 +55,4 @@ You can now custom build the agent and [DogStatsD](/developers/dogstatsd) much e
 
 ## How do I upgrade?        
 
-The new Datadog Agent is currently in beta. You can learn how to join the beta by reading [the documentation](https://github.com/DataDog/datadog-agent/blob/beta/docs/beta).
+The new Datadog Agent is currently in beta. You can learn how to join the beta by reading [the documentation](https://github.com/DataDog/datadog-agent/blob/beta/docs/beta.md).
