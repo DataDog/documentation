@@ -283,7 +283,7 @@ In our experience building integrations, we've also faced a number of challenges
 [7]: https://github.com/DataDog/dd-agent/blob/master/tests/checks/common.py
 [8]: https://github.com/DataDog/dd-agent
 [9]: https://github.com/DataDog/dd-agent/tree/master/utils
-[10]: https://github.com/DataDog/integrations-core/blob/master/mysql/ci/mysql.rake
+[10]: https://github.com/DataDog/integrations-core/blob/master/mysql/test/ci/mysql.rake
 [11]: /agent/installcoreextra
 [12]: https://github.com/DataDog/integrations-extras/compare
 [13]: https://github.com/DataDog/integrations-core/tree/master/mongo/ci

@@ -12,7 +12,7 @@ further_reading:
 
 ## Metrics
 
-It is possible to collect more Kubernetes metrics. Via cAdvisor, many metrics are available for you to visualize and monitor. Our [kubernetes integration](https://github.com/DataDog/integrations-core/blob/master/kubernetes/check.py) only collects some of them but there is a way to collect other ones!
+It is possible to collect more Kubernetes metrics. Via cAdvisor, many metrics are available for you to visualize and monitor. Our [kubernetes integration](https://github.com/DataDog/integrations-core/blob/master/kubernetes/datadog_checks/kubernetes/kubernetes.py) only collects some of them but there is a way to collect other ones!
 
 This is a quick example of how to see what is available after you have your cluster running:
 ```
