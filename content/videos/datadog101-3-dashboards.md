@@ -7,7 +7,7 @@ videos:
     - Datadog 101
     - Dashboards
     - Screenboards
-summary: Creating timeboards and screenboards and working with the different types of graphs available in each
+summary: Creating Timeboards and Screenboards and working with the different types of graphs available in each
 ---
 
 Datadog 101 shows you everything you need to know about using the Datadog platform. In this third video we show you how to use dashboards. We cover the following topics:

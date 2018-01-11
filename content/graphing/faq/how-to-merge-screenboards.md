@@ -3,7 +3,7 @@ title: How to Merge Screenboards ?
 kind: faq
 ---
 
-If you want to merge screenboards together, you will first have to get the ID of each of them (The ID can be found in the URL of the dashboards).
+If you want to merge Screenboards together, you will first have to get the ID of each of them (The ID can be found in the URL of the dashboards).
 
 Then use the [script here](https://github.com/DataDog/Miscellany/blob/master/merge_screenboards.py), it relies on the API [get](/api/#screenboards-get) and [push](/api/#screenboards-post) for screenboards.
 
