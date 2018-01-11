@@ -1,7 +1,7 @@
 ---
 title: Pipelines
 kind: documentation
-description: "Parse & Enrich your logs so you can create valuable facets & metrics in the Logs Explorer."
+description: "Parse & Enrich your logs to create valuable facets & metrics in the Logs Explorer."
 further_reading:
 - link: "/logs/parsing"
   tag: "Documentation"
@@ -31,7 +31,7 @@ To access the processing panel use the upper left menu:
 
 Datadog automatically parses JSON-formatted logs. When your logs are not JSON-formatted, Datadog enables you to add value to your raw logs by sending them through a processing pipeline.
 
-With pipelines, you can parse and enrich your logs by chaining them sequentially through [processors](#processors). This lets you extract meaningful information or attributes from semi-structured text to reuse them as [facets](/logs/explore/#facets).
+With pipelines, you parse and enrich your logs by chaining them sequentially through [processors](#processors). This lets you extract meaningful information or attributes from semi-structured text to reuse them as [facets](/logs/explore/#facets).
 
 Each log that comes through the pipelines is tested against every pipeline filter. If it matches one then all the [processors](#processors) are applied sequentially before moving to the next pipeline.
 
@@ -47,7 +47,7 @@ With one single pipeline:
 
 {{< img src="logs/processing/pipeline_example.png" alt="Pipelines example" responsive="true" popup="true" style="width:75%;">}}
 
-Pipelines can take logs from a wide variety of formats and translate them all into a common format in Datadog.
+Pipelines take logs from a wide variety of formats and translate them all into a common format in Datadog.
 
 ### Pipeline filters
 
