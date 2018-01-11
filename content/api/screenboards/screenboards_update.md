@@ -9,7 +9,7 @@ external_redirect: /api/#update-a-screenboard
 
 Override a Screenboard configuration in Datadog.  
 
-**Note**: You need to send the entire original Screenboard configuration along with your updates otherwise the original widgets are erased.
+**Note**: Send the entire original Screenboard configuration along with your updates otherwise the original widgets are erased.
 
 ##### ARGUMENTS
 
