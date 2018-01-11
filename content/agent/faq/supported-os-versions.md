@@ -1,6 +1,7 @@
 ---
 title: Datadog Agent supported OS versions
 kind: faq
+disable_toc: true
 further_reading:
 - link: "/agent/"
   tag: "Documentation"
