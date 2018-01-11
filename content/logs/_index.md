@@ -16,7 +16,7 @@ Datadog's Logs is currently available via public beta. You can apply for inclusi
 
 Log collection requires an Agent version >= 6.0. Older versions of the Agent do not include the `Log collection` interface that is used for log collection.
 
-If you are not using it already, please follow [the agent installation instruction](https://github.com/DataDog/datadog-agent/blob/beta/docs/beta/upgrade.md).
+If you are not using it already, please follow [the agent installation instruction](https://github.com/DataDog/datadog-agent/blob/beta/docs/agent/upgrade).
 
 Collecting logs is **disabled** by default in the Datadog Agent, you need to enable it in `datadog.yaml`:
 
@@ -267,7 +267,7 @@ However, if a JSON formatted log file includes one of the following attributes, 
 
 You can also specify alternate attributes to use as the source of a log's date by setting a [log date remapper processor](/logs/processing/#log-date-remapper)
 
-Note that if you use one of the above attributes or remap an alternate attribute as the official date of your log, Datadog rejects the log if that attribute is more than 18 hours in the past.
+**Note**: Datadog rejects a log entry if its official date is older than 18 hours in the past.
 
 <div class="alert alert-info">
 The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (the milliseconds EPOCH format)</a>  and <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
