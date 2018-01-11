@@ -9,19 +9,3 @@ options = {
 initialize(**options)
 
 api.Screenboard.share(812)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
