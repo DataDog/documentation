@@ -24,5 +24,5 @@ curl -X PUT -H "Content-type: application/json" \
     \"type\": \"web\",
     \"start\": $START,
     \"duration\": $DURATION
-  }]]" \
+}]]" \
   http://localhost:8126/v0.3/traces

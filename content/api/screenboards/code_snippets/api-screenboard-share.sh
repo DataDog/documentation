@@ -18,7 +18,7 @@ board_id=$(curl -X POST -H "Content-type: application/json" \
               "url": "https://path/to/image.jpg"
             }
         ]
-    }' \
+  }' \
 "https://app.datadoghq.com/api/v1/screen?api_key=${api_key}&application_key=${app_key}" | jq '.id')
 
 

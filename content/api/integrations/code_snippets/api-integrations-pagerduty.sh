@@ -13,7 +13,7 @@ curl -v -X PUT -H "Content-type: application/json" \
       "subdomain": "my-pd",
       "schedules": ["https://my-pd.pagerduty.com/schedules#PCPYT4M", "https://my-pd.pagerduty.com/schedules#PKTPB7P"],
       "api_token": "<PAGERDUTY_TOKEN>"
-  }' \
+}' \
 "https://app.datadoghq.com/api/v1/integration/pagerduty?api_key=${api_key}&application_key=${app_key}&run_check=true" | python -mjson.tool
 
 curl -v "https://app.datadoghq.com/api/v1/integration/pagerduty?api_key=${api_key}&application_key=${app_key}" | python -mjson.tool

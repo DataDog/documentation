@@ -22,7 +22,7 @@ curl -v -X POST -H "Content-type: application/json" \
         "account": "doghouse"
       }
     ]
-  }' \
+}' \
 "https://app.datadoghq.com/api/v1/integration/slack?api_key=${api_key}&application_key=${app_key}&run_check=true" | python -mjson.tool
 
 curl -v -X PUT -H "Content-type: application/json" \
@@ -49,7 +49,7 @@ curl -v -X PUT -H "Content-type: application/json" \
         "account": "doghouse"
       }
     ]
-  }' \
+}' \
 "https://app.datadoghq.com/api/v1/integration/slack?api_key=${api_key}&application_key=${app_key}&run_check=true" | python -mjson.tool
 
 

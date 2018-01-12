@@ -18,5 +18,5 @@ curl -X POST -H "Content-type: application/json" \
         "week_days": ["Mon", "Tue", "Wed", "Thu", "Fri"],
         "until_date": '"${end_recurrence}"'
       }
-    }' \
+}' \
     "https://app.datadoghq.com/api/v1/downtime?api_key=${api_key}&application_key=${app_key}"
