@@ -1,6 +1,6 @@
 ["200", {
-	"tags"=>[
-		"role:web", 
-		"environment:test"
-		]
+    "tags" => [
+        "role:web",
+        "environment:test"
+    ]
 }]
