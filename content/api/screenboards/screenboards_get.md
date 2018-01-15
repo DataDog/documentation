@@ -6,7 +6,7 @@ external_redirect: /api/#get-a-screenboard
 ---
 
 ## Get a Screenboard
-Fetch an existing screenboard's definition.
+Fetch an existing Screenboard's definition.
 
 ##### ARGUMENTS
 

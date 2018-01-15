@@ -22,8 +22,8 @@ curl -v -X POST -H "Content-type: application/json" \
         "account": "doghouse"
       }
     ]
-}' \
-"https://app.datadoghq.com/api/v1/integration/slack?api_key=${api_key}&application_key=${app_key}&run_check=true" | python -mjson.tool
+  }' \
+"https://app.datadoghq.com/api/v1/integration/slack?api_key=${api_key}&application_key=${app_key}&run_check=true"
 
 curl -v -X PUT -H "Content-type: application/json" \
 -d '{
@@ -50,10 +50,9 @@ curl -v -X PUT -H "Content-type: application/json" \
       }
     ]
 }' \
-"https://app.datadoghq.com/api/v1/integration/slack?api_key=${api_key}&application_key=${app_key}&run_check=true" | python -mjson.tool
+"https://app.datadoghq.com/api/v1/integration/slack?api_key=${api_key}&application_key=${app_key}&run_check=true"
+
+curl -v "https://app.datadoghq.com/api/v1/integration/slack?api_key=${api_key}&application_key=${app_key}"
 
 
-curl -v "https://app.datadoghq.com/api/v1/integration/slack?api_key=${api_key}&application_key=${app_key}" | python -mjson.tool
-
-
-curl -v -X DELETE "https://app.datadoghq.com/api/v1/integration/slack?api_key=${api_key}&application_key=${app_key}" | python -mjson.tool
+curl -v -X DELETE "https://app.datadoghq.com/api/v1/integration/slack?api_key=${api_key}&application_key=${app_key}"
