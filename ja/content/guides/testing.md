@@ -230,8 +230,8 @@ Parameters:
 
 ### Datadog Integrations
 
-For further examples of testing Datadog integrations, you can view the test files for [core integrations](https://github.com/DataDog/integrations-core) such as the [`test_mysql.py` file](https://github.com/DataDog/integrations-core/blob/master/mysql/test_mysql.py) for the MySQL integration.
+For further examples of testing Datadog integrations, you can view the test files for [core integrations](https://github.com/DataDog/integrations-core) such as the [`test_mysql.py` file](https://github.com/DataDog/integrations-core/blob/master/mysql/test/test_mysql.py) for the MySQL integration.
 
 ### Datadog Agent Checks
 
-For examples of Agent Check tests, you can view the test files for agent checks such as [`test_http_check.py` file](https://github.com/DataDog/integrations-core/blob/master/http_check/test_http_check.py).
+For examples of Agent Check tests, you can view the test files for agent checks such as [`test_http_check.py` file](https://github.com/DataDog/integrations-core/tree/master/http_check/test).
