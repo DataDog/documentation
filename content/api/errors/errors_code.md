@@ -8,7 +8,7 @@ external_redirect: /api/#success-and-errors
 
 * `200 200`
 * `201 Created`
-* `202 202`
+* `202 accepted`
 * `204 No Content`
 * `301 301`
 * `304 Not Modified`
