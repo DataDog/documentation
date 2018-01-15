@@ -1,7 +1,7 @@
 ---
 title: Post an event
 type: apicode
-order: 6.1
+order: 10.1
 external_redirect: /api/#post-an-event
 ---
 

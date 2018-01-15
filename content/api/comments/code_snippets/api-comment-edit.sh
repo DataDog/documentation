@@ -8,5 +8,5 @@ comment_id=$(curl -X POST -H "Content-type: application/json" -d '{"message" : "
 curl -X PUT -H "Content-type: application/json" \
 -d '{
         "message" : "Actually, I am changing my mind."
-    }' \
+}' \
 "https://app.datadoghq.com/api/v1/comments/${comment_id}?api_key=${api_key}&application_key=${app_key}"

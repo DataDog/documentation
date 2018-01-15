@@ -1,7 +1,8 @@
 ---
 title: Unmute a monitor
 type: apicontent
-order: 8.91
+order: 15.91
+external_redirect: /api/#unmute-a-monitor
 ---
 
 ## Unmute a monitor

@@ -1,7 +1,8 @@
 ---
 title: Post time series points
 type: apicontent
-order: 5.2
+order: 14.2
+external_redirect: /api/#post-time-series-points
 ---
 
 ## Post time series points

@@ -1,7 +1,8 @@
 ---
 title: Update a Timeboard
 type: apicontent
-order: 10.2
+order: 20.2
+external_redirect: /api/#update-a-timeboard
 ---
 
 ## Update a Timeboard

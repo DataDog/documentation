@@ -1,7 +1,8 @@
 ---
 title: Cancel monitor downtime
 type: apicontent
-order: 9.3
+order: 8.3
+external_redirect: /api/#cancel-monitor-downtime
 ---
 
 ## Cancel Monitor Downtime

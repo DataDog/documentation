@@ -12,4 +12,3 @@ initialize(**options)
 
 # Mute a monitor
 api.Monitor.mute(2088)xz
-

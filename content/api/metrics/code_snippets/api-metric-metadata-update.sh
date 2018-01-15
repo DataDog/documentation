@@ -12,6 +12,6 @@ curl -X PUT -H "Content-type: application/json" \
       "short_name": "bytes sent",
       "unit": "byte",
       "per_unit": "second"
-    }' \
+}' \
     "https://app.datadoghq.com/api/v1/metrics/${metric_name}?api_key=${api_key}&application_key=${app_key}"
 

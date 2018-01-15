@@ -1,13 +1,13 @@
 {
-	"org" : {
-		"name" : "My Org",
-		"public_id" : "axd2s",
-		"subscription" : {
-			"type" : "pro"
-		},
-		"billing" : {
-			"type" : "parent_billing"
-		}
+  "org" : {
+    "name" : "My Org",
+    "public_id" : "axd2s",
+    "subscription" : {
+      "type" : "pro"
+    },
+    "billing" : {
+      "type" : "parent_billing"
+    }
   },
   "user" : {
     "name" : "Organization admin",

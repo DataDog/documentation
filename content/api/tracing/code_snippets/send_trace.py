@@ -3,8 +3,8 @@ import time
 import requests
 
 # Create IDs.
-TRACE_ID=random.randint(1,1000000)
-SPAN_ID=random.randint(1,1000000)
+TRACE_ID = random.randint(1,1000000)
+SPAN_ID = random.randint(1,1000000)
 
 # Start a timer.
 START=int(time.time() * 1000000)

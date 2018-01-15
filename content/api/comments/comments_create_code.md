@@ -1,7 +1,7 @@
 ---
 title: Create a comment
 type: apicode
-order: 15.1
+order: 7.1
 external_redirect: /api/#create-a-comment
 ---
 

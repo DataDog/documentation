@@ -1,5 +1,5 @@
 {
-    "errors": [
-        "No dashboard matches that dash_id."
-    ]
+  "errors": [
+    "No dashboard matches that dash_id."
+  ]
 }

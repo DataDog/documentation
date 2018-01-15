@@ -1,6 +1,6 @@
 {
   usage: [
-      {
+    {
       "metric_category": "custom",
       "max_metric_hour": 7549,
       "avg_metric_hour": 7479,

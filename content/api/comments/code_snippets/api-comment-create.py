@@ -9,7 +9,10 @@ initialize(**options)
 
 # Start a new discussion.
 # Include a handle like this
-api.Comment.create(handle='matt@example.com', message='Should we use COBOL or Fortran! ')
+api.Comment.create(
+    handle='matt@example.com',
+    message='Should we use COBOL or Fortran!'
+)
 
 # Or set it to None
 # and the handle defaults
@@ -17,4 +20,8 @@ api.Comment.create(handle='matt@example.com', message='Should we use COBOL or Fo
 api.Comment.create(message='Should we use COBOL or Fortran?')
 
 # Reply to a discussion.
-api.Comment.create(handle='joe@example.com', message='Smalltalk?', related_event_id=1234)
+api.Comment.create(
+    handle='joe@example.com',
+    message='Smalltalk?',
+    related_event_id=1234
+)

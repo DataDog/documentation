@@ -1,7 +1,8 @@
 ---
 title: Update user
 type: apicontent
-order: 16.4
+order: 23.4
+external_redirect: /api/#update-user
 ---
 
 ## Update user

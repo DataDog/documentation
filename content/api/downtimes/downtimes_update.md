@@ -1,7 +1,8 @@
 ---
 title: Update monitor downtime
 type: apicontent
-order: 9.2
+order: 8.2
+external_redirect: /api/#update-monitor-downtime
 ---
 
 ## Update monitor downtime

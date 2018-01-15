@@ -2,6 +2,7 @@
 title: Rate limiting
 type: apicontent
 order: 4
+external_redirect: /api/#rate-limiting
 ---
 ## Rate limiting
 Some of our API endpoints are rate limited. Once you exceed a certain number of requests in a certain time period we return an error.

@@ -18,4 +18,4 @@
       "role": null,
       "is_admin": false,
       "email": "test+1@datadoghq.com"
-    }]}
+}]}

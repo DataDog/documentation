@@ -1,3 +1,3 @@
 {
-    "message": "IdP metadata successfully uploaded for org DataDog HQ"
+  "message": "IdP metadata successfully uploaded for org DataDog HQ"
 }

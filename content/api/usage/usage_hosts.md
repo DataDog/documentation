@@ -1,7 +1,8 @@
 ---
 title: Get hourly usage for hosts and containers
 type: apicontent
-order: 21.1
+order: 22.1
+external_redirect: /api/#get-hourly-usage-for-hosts-and-containers
 ---
 
 ## Get hourly usage for hosts and containers

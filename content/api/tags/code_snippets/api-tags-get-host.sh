@@ -3,11 +3,11 @@ app_key=87ce4a24b5553d2e482ea8a8500e71b8ad4554ff
 
 # pass a single hostname as an argument to search for the specified host
 host=$1
- 
+
 # Find a host to add a tag to
 host_name=$(curl -G "https://app.datadoghq.com/api/v1/search" \
     -d "api_key=${api_key}" \
     -d "application_key=${app_key}" \
 	-d "q=hosts:$host" | cut -d'"' -f6)
- 
+
 curl "https://app.datadoghq.com/api/v1/tags/hosts/${host_name}?api_key=${api_key}&application_key=${app_key}"

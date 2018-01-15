@@ -9,7 +9,7 @@ options = {
 initialize(**options)
 
 # Taking the last 24hours
-from_time = int(time.time()) - 60*60*24*1
+from_time = int(time.time()) - 60 * 60 * 24 * 1
 
 result = api.Metric.list(from_time)
 
