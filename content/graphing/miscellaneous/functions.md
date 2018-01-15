@@ -204,35 +204,50 @@ Delta value between points for a given metric
 ## Smoothing
 ### ewma_3()
 
-Exponentially weighted moving average with a span of 3
+Exponentially weighted moving average with a span of 3.  
+
+The span value is the number of data points. So `ewma_3()` uses the last 3 data points to calculate the average.
 
 ### ewma_5()
 
-Exponentially weighted moving average with a span of 5
+Exponentially weighted moving average with a span of 5.  
+
+The span value is the number of data points. So `ewma_5()` uses the last 5 data points to calculate the average.
 
 ### ewma_10()
 
-Exponentially weighted moving average with a span of 10
+Exponentially weighted moving average with a span of 10.  
+
+The span value is the number of data points. So `ewma_10()` uses the last 10 data points to calculate the average.
 
 ### ewma_20()
 
-Exponentially weighted moving average with a span of 20
+Exponentially weighted moving average with a span of 20.  
+
+The span value is the number of data points. So `ewma_20()` uses the last 20 data points to calculate the average.
 
 ### median_3()
 
-Rolling median with a span of 3
+Rolling median with a span of 3.  
+
+The span value is the number of data points. So `median_3()` uses the last 3 data points to calculate the median.
 
 ### median_5()
 
-Rolling median with a span of 5
+Rolling median with a span of 5.  
 
+The span value is the number of data points. So `median_5()` uses the last 5 data points to calculate the median.
 ### median_7()
 
-Rolling median with a span of 7
+Rolling median with a span of 7.  
+
+The span value is the number of data points. So `median_7()` uses the last 7 data points to calculate the median.
 
 ### median_9()
 
-Rolling median with a span of 9
+Rolling median with a span of 9.  
+
+The span value is the number of data points. So `median_9()` uses the last 9 data points to calculate the median.
 
 ## Rollup
 ### .rollup()
