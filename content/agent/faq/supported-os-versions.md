@@ -9,7 +9,8 @@ further_reading:
 ---
 
 ### Agent 5+
-](/agent/basic_agent_usage/deb)
+
+{{% table responsive="true" %}}
 |OS| Supported versions|
 |:----|:----|
 |[Debian x86_64](/agent/basic_agent_usage/deb) | Debian 7 (wheezy) and above |
@@ -20,11 +21,13 @@ further_reading:
 |[MacOS](/agent/basic_agent_usage/osx)| OSX 10.10 and above|
 |[Windows server 64-bit](/agent/basic_agent_usage/windows)| Windows server 2008r2 or above|
 |[Windows 64-bit](/agent/basic_agent_usage/windows)| Windows 7 or above|
+{{% /table %}}
 
 **Note**: Source install may work on operating systems not listed here and is supported on a best effort basis.
 
 ### Agent 6+ (Beta)
 
+{{% table responsive="true" %}}
 |OS| Supported versions|
 |:----|:----|
 |[Debian x86_64](/agent/basic_agent_usage/deb) | Debian 7 (wheezy) and above (we do not support SysVinit)|
@@ -35,6 +38,7 @@ further_reading:
 |[MacOS](/agent/basic_agent_usage/osx)| OSX 10.10 and above|
 |[Windows server 64-bit](/agent/basic_agent_usage/windows)| Windows server 2008r2 or above|
 |[Windows 64-bit](/agent/basic_agent_usage/windows)| Windows 7 or above|
+{{% /table %}}
 
 **Note**: Source install may work on operating systems not listed here and is supported on a best effort basis.
 
