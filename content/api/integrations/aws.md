@@ -31,11 +31,14 @@ Configure your Datadog-AWS integration directly through Datadog API.
 
 * `run_check` [*optional*, *default*=**false**]:  
     Determines if the integration install check is run before returning a response.
-    If **true**:
+
+    * If **true**:
+
         - The install check is run
         - If there’s an error in the configuration the error is returned
         - If there’s no error, *204 No Content* response code is returned
 
-    If **false**:
+    * If **false**:
+
         - We return a *202 accepted*
         - Install check is run after returning a response
