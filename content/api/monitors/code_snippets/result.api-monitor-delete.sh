@@ -1,3 +1,3 @@
 {
-    "deleted_monitor_id": 59409
+  "deleted_monitor_id": 59409
 }

@@ -8,8 +8,3 @@ options = {
 initialize(**options)
 hosts = api.Infrastructure.search(q='hosts:')
 api.Tag.create(hosts['results']['hosts'][0], tags=["role:codesample"])
-
-
-
-
-

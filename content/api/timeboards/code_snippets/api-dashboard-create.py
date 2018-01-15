@@ -15,7 +15,7 @@ graphs = [{
         "requests": [
             {"q": "avg:system.mem.free{*}"}
         ],
-    "viz": "timeseries"
+        "viz": "timeseries"
     },
     "title": "Average Memory Free"
 }]
@@ -27,4 +27,8 @@ template_variables = [{
 }]
 
 read_only = True
-api.Timeboard.create(title=title, description=description, graphs=graphs, template_variables=template_variables, read_only=read_only)
+api.Timeboard.create(title=title,
+                     description=description,
+                     graphs=graphs,
+                     template_variables=template_variables,
+                     read_only=read_only)

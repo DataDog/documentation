@@ -1,7 +1,7 @@
 {
-    "host": "test.host", 
-    "tags": [
-        "role:database", 
-        "environment:test"
-    ]
+  "host": "test.host",
+  "tags": [
+    "role:database",
+    "environment:test"
+  ]
 }

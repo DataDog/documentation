@@ -1,4 +1,3 @@
-
 {
-	'status': 'ok'
+    'status': 'ok'
 }

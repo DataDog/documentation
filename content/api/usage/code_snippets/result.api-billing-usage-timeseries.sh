@@ -1,6 +1,6 @@
 {
   usage: [
-  {
+    {
       "num_custom_timeseries": 11,
       "hour": "2017-05-01T14"
     },

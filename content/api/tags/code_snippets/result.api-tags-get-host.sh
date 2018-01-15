@@ -1,6 +1,6 @@
 {
-    "tags": [
-        "role:database", 
-        "environment:test"
-    ]
+  "tags": [
+    "role:database",
+    "environment:test"
+  ]
 }

@@ -1,4 +1,4 @@
 {
-    "action": "Unmuted",
-    "hostname": "test.host"
+  "action": "Unmuted",
+  "hostname": "test.host"
 }

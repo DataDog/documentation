@@ -49,9 +49,8 @@ curl -v -X PUT -H "Content-type: application/json" \
         "account": "doghouse"
       }
     ]
-  }' \
+}' \
 "https://app.datadoghq.com/api/v1/integration/slack?api_key=${api_key}&application_key=${app_key}&run_check=true"
-
 
 curl -v "https://app.datadoghq.com/api/v1/integration/slack?api_key=${api_key}&application_key=${app_key}"
 
