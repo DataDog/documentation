@@ -1,27 +1,29 @@
 <div class="table-responsive-container">
-<table class="table table-responsive">
-  <thead>
-    <tr>
-      <th>Language</th>
-      <th>Library</th>
-      <th>Official</th>
-      <th>Notes</th>
-    </tr>
-  </thead>
+  <div class="table-scroll">
+    <table class="table table-responsive">
+      <thead>
+        <tr>
+          <th>Language</th>
+          <th>Library</th>
+          <th>Official</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
 
-  <tbody>
-  {{ range $e := $.Site.Data.libraries.Tracing }}
-    {{ range $libName, $info := . }}
-        {{ range $i, $el := $info }}
-          <tr>
-            <td>{{ if eq $i 0}}<strong>{{ $libName }}</strong>{{ end }}</td>
-            <td><a href="{{ $el.link }}">{{ $el.name }}</a></td>
-            <td>{{ if $el.official}}<i class="icon-tick"></i>{{ end }}</td>
-            <td>{{if $el.authors }}Written by {{ $el.authors }}{{ end }}{{ if $el.notes }}{{ $el.notes }}.{{ end }}</td>
-          </tr>
+      <tbody>
+      {{ range $e := $.Site.Data.libraries.Tracing }}
+        {{ range $libName, $info := . }}
+            {{ range $i, $el := $info }}
+              <tr>
+                <td>{{ if eq $i 0}}<strong>{{ $libName }}</strong>{{ end }}</td>
+                <td><a href="{{ $el.link }}">{{ $el.name }}</a></td>
+                <td>{{ if $el.official}}<i class="icon-tick"></i>{{ end }}</td>
+                <td>{{if $el.authors }}Written by {{ $el.authors }}{{ end }}{{ if $el.notes }}{{ $el.notes }}.{{ end }}</td>
+              </tr>
+            {{ end }}
         {{ end }}
-    {{ end }}
-  {{ end }}
-  </tbody>
-</table>
+      {{ end }}
+      </tbody>
+    </table>
+  </div>
 </div>
