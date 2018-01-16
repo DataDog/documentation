@@ -348,7 +348,7 @@ table, .table {
     top: -26px;
     background-image: linear-gradient(-179deg,hsla(0,0%,100%,0),#fff 77%);
     content: "";
-    display: inline-block;
+    display: none;
     width: 300px;
     position: absolute;
     right: 0;
@@ -359,7 +359,7 @@ table, .table {
     bottom: -26px;
     background-image: linear-gradient(1turn,hsla(0,0%,100%,0),#fff 77%);
     content: "";
-    display: inline-block;
+    display: none;
     width: 300px;
     position: absolute;
     right: 0;
@@ -422,6 +422,18 @@ table, .table {
     box-shadow: -5px 0 10px rgba(0,0,0,.25);
     content: "";
     display:none;
+  }
+  .table-scroll {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    margin-bottom:31px;
+  }
+  table {
+    display:table;
+    margin-bottom:0;
   }
 }
 
