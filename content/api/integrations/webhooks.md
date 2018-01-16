@@ -27,7 +27,7 @@ Configure your Datadog-Webhooks integration directly through Datadog API.
         If `use_custom_payloag` is **true**, specify your own payload to add your own custom fields to the request [using those variables](integrations/webhooks/#usage).
 
     * `encode_as_form` [*optional*, *default*=**False**]:  
-        If `use_custom_payloag` is **true**, set this to **true** to have your payload to be URL-encoded.
+        If `use_custom_payload` is **true**, set this to **true** to have your payload to be URL-encoded.
     * `headers` [*optional*, *default*=**None**]:  
         Headers attached to your Webhook.
 
