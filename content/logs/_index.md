@@ -22,6 +22,8 @@ Collecting logs is **disabled** by default in the Datadog Agent, you need to ena
 
     log_enabled: true
 
+The Datadog agent sends its logs to Datadog over TLS-encrypted TCP. This requires outbound communication over port `10516`.
+
 ## Enabling log collection from integrations
 
 To start collecting logs for a given integration, you need to uncomment the logs section in that integration's yaml file, and configure it for your environment.
@@ -57,7 +59,7 @@ During the beta phase of Datadog Logs, not all integrations include log configur
 
 ### The Advantage of Collecting JSON-formatted logs
 
-Datadog automatically parses JSON-formattted logs. For this reason, when you have control over the log format you send to Datadog, we encourage you to format them as JSON to avoid the need for custom parsing rules.
+Datadog automatically parses JSON-formatted logs. For this reason, when you have control over the log format you send to Datadog, we encourage you to format them as JSON to avoid the need for custom parsing rules.
 
 ## Custom log collection
 
@@ -74,7 +76,7 @@ The Datadog Agent can collect logs from files or the network (TCP or UDP) and fo
 Set `type` to **file** then specify the absolute `path` to the log file you want to tail.
 
 Example: 
-To gather python applications stored in **/var/log/myapp1.log** and **/var/log/python.log** create a `python.d/conf.yaml` file as follows::
+To gather python applications stored in **/var/log/myapp1.log** and **/var/log/python.log** create a `python.d/conf.yaml` file as follows:
 
 Note that for the yaml file to be considered valid by the agent, they must include an "init_config" section and have at least one "instance" defined as shown below:
 
