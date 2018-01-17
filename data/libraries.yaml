@@ -1,4 +1,10 @@
 Classic:
+  - C++:
+    - name: cpp-datadogstatsd
+      link: https://github.com/BoardiesITSolutions/cpp-datadogstatsd
+      dogstatsd: true
+      authors: BoardiesITSolutions
+      notes: Send metrics from your C++ applications to your Datadog account
   - C#:
     - name: dogstatsd-csharp-client
       link: https://github.com/DataDog/dogstatsd-csharp-client
