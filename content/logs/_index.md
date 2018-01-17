@@ -22,7 +22,7 @@ Collecting logs is **disabled** by default in the Datadog Agent, you need to ena
 
     log_enabled: true
 
-The Datadog agent sends its logs to Datadog over TLS-encrypted TCP. This requires outbound communication over port 10516.
+The Datadog agent sends its logs to Datadog over TLS-encrypted TCP. This requires outbound communication over port `10516`.
 
 ## Enabling log collection from integrations
 
