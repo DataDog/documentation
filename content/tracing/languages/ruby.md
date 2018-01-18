@@ -33,20 +33,44 @@ For more examples, see the [RubyDoc Gem documentation](http://www.rubydoc.info/g
 
 ## Compatibility
 
+### Framework Compatibility
+
 The ddtrace library includes support for the following web frameworks:
 
-*  [Ruby on Rails](http://rubyonrails.org/).
-*  [Sinatra](http://www.sinatrarb.com/).
+___
 
-To learn how to instrument these frameworks, reference [the RubyDoc documentation](http://www.rubydoc.info/gems/ddtrace)
+{{% table responsive="true" %}}
+| Framework     | Framework Documentation    | DataDog Instrumentation Documentation               |
+|---------------|----------------------------|-----------------------------------------------------|
+| Ruby on Rails | http://rubyonrails.org/    | http://www.rubydoc.info/gems/ddtrace/#Ruby_on_Rails |
+| Sinatra       | http://www.sinatrarb.com/  | http://www.rubydoc.info/gems/ddtrace/#Sinatra       |
+| Grape         | http://www.ruby-grape.org/ | http://www.rubydoc.info/gems/ddtrace#Grape          |
+{{% /table %}}
+
+### Library Compatibility
 
 It also includes support for the following libraries:
 
-* [Elasticsearch](https://www.elastic.co/products/elasticsearch)
-* [Net/HTTP](https://ruby-doc.org/stdlib-2.4.0/libdoc/net/http/rdoc/Net/HTTP.html)
-* [Redis](https://redis.io/)
+___
 
-For information on tracing these libraries, see [the RubyDoc documentation](http://www.rubydoc.info/gems/ddtrace#Other_libraries)
+
+
+{{% table responsive="true" %}}
+| Library       | Library Documentation                                                | DataDog Instrumentation Documentation               |
+|---------------|----------------------------------------------------------------------|-----------------------------------------------------|
+| Rack          | https://rack.github.io/                                              | www.rubydoc.info/gems/ddtrace#Rack                  |
+| ActiveRecord  | https://github.com/rails/rails/tree/master/activerecord              | http://www.rubydoc.info/gems/ddtrace#Active_Record  |
+| Elasticsearch | https://www.elastic.co/products/elasticsearch                        | http://www.rubydoc.info/gems/ddtrace#Elastic_Search |
+| MongoDB       | http://api.mongodb.com/ruby/current/                                 | http://www.rubydoc.info/gems/ddtrace#MongoDB        |
+| Faraday       | https://github.com/lostisland/faraday                                | http://www.rubydoc.info/gems/ddtrace#Faraday        |
+| AWS           | https://aws.amazon.com/sdk-for-ruby/                                 | http://www.rubydoc.info/gems/ddtrace#AWS            |
+| Dalli         | https://github.com/petergoldstein/dalli                              | http://www.rubydoc.info/gems/ddtrace#Dalli          |
+| Sidekiq       | https://sidekiq.org/                                                 | http://www.rubydoc.info/gems/ddtrace#Sidekiq        |
+| Resque        | https://github.com/resque/resque                                     | http://www.rubydoc.info/gems/ddtrace#Resque         |
+| SuckerPunch   | https://github.com/brandonhilkert/sucker_punch                       | http://www.rubydoc.info/gems/ddtrace#Sucker_Punch   |
+| Net/HTTP      | https://ruby-doc.org/stdlib-2.4.0/libdoc/net/http/rdoc/Net/HTTP.html | http://www.rubydoc.info/gems/ddtrace#Net_HTTP       |
+| Redis         | https://github.com/redis/redis-rb                                    | http://www.rubydoc.info/gems/ddtrace#Redis          |
+{{% /table %}}
 
 ## Further Reading
 
