@@ -19,13 +19,15 @@ In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if
 ### Debian, Ubuntu, Centos
 
 * For **Agent 5.3** or higher:
+
     ```
     sudo /etc/init.d/datadog-agent flare <CASE_ID>
     ```
 
 * For **Agent v6** (beta):
+
     ```
-    $ sudo -u dd-agent -- datadog-agent flare <CASE_ID>
+    sudo -u dd-agent -- datadog-agent flare <CASE_ID>
     ```
 
 ### Agent installed from source
@@ -72,7 +74,7 @@ To send Datadog support a copy of your Windows logs and configurations, do the f
 1. Open the Datadog Agent Manager
 2. Select Actions
 3. Select Flare
-4. Enter your ticket number - if you don't have one leave the value as zero
+4. Enter your ticket number (`<CASE_ID>`)- if you don't have one leave the value as zero
 5. Lastly, enter the email address you use to log into Datadog
 
 That's it, you're done!
@@ -82,11 +84,11 @@ That's it, you're done!
 It's also possible to run the flare command using Powershell:
 
 ```
-C:\Program Files\Datadog\Datadog Agent\embedded\python.exe" "C:\Program Files\Datadog\Datadog Agent\agent\agent.py" flare
+C:\Program Files\Datadog\Datadog Agent\embedded\python.exe" "C:\Program Files\Datadog\Datadog Agent\agent\agent.py" flare <CASE_ID>
 ```
 or cmd.exe:
 ```
-C:\Program Files\Datadog\Datadog Agent\embedded\python.exe" "C:\Program Files\Datadog\Datadog Agent\agent\agent.py" flare
+C:\Program Files\Datadog\Datadog Agent\embedded\python.exe" "C:\Program Files\Datadog\Datadog Agent\agent\agent.py" flare <CASE_ID>
 ```
 
 ## Flare Fails to Upload
