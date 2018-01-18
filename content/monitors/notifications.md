@@ -98,7 +98,7 @@ Note that template variable content is escaped by default. If your variable
 contains JSON or code that you would NOT like to be escaped, then use triple braces instead of double braces (e.g. `{{{event.text}}}`).
 
 ### Conditional variables for different triggering scopes
-You can have a monitor event display a different message depending on the group that's causing a notification.
+You can have a monitor event display a different message depending on the group that's causing a notification.  
 
 The `{{is_match}}` conditional lets you match the triggering context to some
 string. For example, you might want to notify your db team if a triggering
@@ -109,14 +109,23 @@ is made if the comparison string is anywhere in the resolved variable.
 
 The variable uses the following format:
 ```
-  {{#is_match "tag_variable" "comparison_string"}}
+{{#is_match "tag_variable" "comparison_string"}}
   This shows if comparison_string is in tag_variable.
-  {{/is_match}}
+{{/is_match}}
 ```
 
 Here is an example of how you can give a different message depending on the triggering context:
 
 {{< img src="monitors/notifications/scope_match_editor.png" alt="scope match editor" responsive="true" popup="true">}}
+
+**Note**: To use `{{is_match}}` conditional to check if a `tag_variable` is **NOT** empty, append `.name` after your tag name, for instance:  
+  
+  ```
+  {{#is_match "tag_variable.name" ""}}
+    This shows if tag_variable is not empty.
+  {{/is_match}}
+  ```
+
 
 ## Variable availability
 
