@@ -18,16 +18,15 @@ In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if
 ## Flare commands
 ### Debian, Ubuntu, Centos
 
-For Agent 5.3 or higher:
-```
-sudo /etc/init.d/datadog-agent flare <CASE_ID>
-```
+* For **Agent 5.3** or higher:
+    ```
+    sudo /etc/init.d/datadog-agent flare <CASE_ID>
+    ```
 
-For Agent v6 currently in beta:
-
-```
-$ sudo -u dd-agent -- datadog-agent flare <CASE_ID>
-```
+* For **Agent v6** (beta):
+    ```
+    $ sudo -u dd-agent -- datadog-agent flare <CASE_ID>
+    ```
 
 ### Agent installed from source
 
@@ -78,7 +77,7 @@ To send Datadog support a copy of your Windows logs and configurations, do the f
 
 That's it, you're done!
 
-{{< img src="agent/faq/windows_flare.jpg" alt="Windows Flare" responsive="true" popup="true">}}
+{{< img src="agent/faq/windows_flare.jpg" alt="Windows Flare" responsive="true" popup="true" style="width:75%;">}}
 
 It's also possible to run the flare command using Powershell:
 
@@ -92,7 +91,15 @@ C:\Program Files\Datadog\Datadog Agent\embedded\python.exe" "C:\Program Files\Da
 
 ## Flare Fails to Upload
 
-On Linux and Mac OSX, the output of the flare command tells you where the compressed flare archive is saved. In case the file fails to upload to Datadog, you can retrieve it from this directory and manually add as an attachment to an email. For Windows, you can find the location of this file by running the following from the agent's python command prompt (C:\Program Files\Datadog\Datadog Agent\dist\shell.exe since Agent v5.12, C:\Program Files (x86)\Datadog\Datadog Agent\files\shell.exe on older installations):
+On Linux and Mac OSX, the output of the flare command tells you where the compressed flare archive is saved. In case the file fails to upload to Datadog, you can retrieve it from this directory and manually add as an attachment to an email.  
+
+For Windows, you can find the location of this file by running the following from the agent's python command prompt:
+
+* Since Agent v5.12:  
+    `C:\Program Files\Datadog\Datadog Agent\dist\shell.exe since`
+
+* On older Agent version:  
+    `C:\Program Files (x86)\Datadog\Datadog Agent\files\shell.exe`
 
 ```
 import tempfile
@@ -101,7 +108,7 @@ print tempfile.gettempdir()
 
 Example : 
 
-{{< img src="agent/faq/flare_fail.png" alt="Flare Fail" responsive="true" popup="true">}}
+{{< img src="agent/faq/flare_fail.png" alt="Flare Fail" responsive="true" popup="true" style="width:75%;">}}
 
 ## Further Reading
 
