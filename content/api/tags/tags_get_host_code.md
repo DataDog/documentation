@@ -1,7 +1,8 @@
 ---
-title: Tags
+title: Get host tags
 type: apicode
-order: 13.2
+order: 19.2
+external_redirect: /api/#get-host-tags
 ---
 
 ##### Signature

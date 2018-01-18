@@ -1,10 +1,11 @@
 ---
-title: Resolve Monitor
+title: Resolve monitor
 type: apicontent
-order: 8.6
+order: 15.6
+external_redirect: /api/#resolve-monitor
 ---
 
-## Resolve Monitor
+## Resolve monitor
 
 ##### ARGUMENTS
 * `resolve` [*required*]:  

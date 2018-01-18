@@ -1,7 +1,8 @@
 ---
-title: Users
+title: Disable user
 type: apicode
-order: 16.5
+order: 23.5
+external_redirect: /api/#disable-user
 ---
 
 ##### Signature

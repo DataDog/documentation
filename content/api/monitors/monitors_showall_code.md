@@ -1,7 +1,8 @@
 ---
-title: Monitors
+title: Get all monitor details
 type: apicode
-order: 8.5
+order: 15.5
+external_redirect: /api/#get-all-monitor-details
 ---
 
 ##### Signature

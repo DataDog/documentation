@@ -1,7 +1,8 @@
 ---
-title: Downtimes
+title: Cancel monitor downtimes by scope
 type: apicode
-order: 9.4
+order: 8.4
+external_redirect: /api/#cancel-monitor-downtime-by-scope
 ---
 
 ##### Signature

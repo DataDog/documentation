@@ -1,10 +1,11 @@
 ---
-title: Create A Monitor
+title: Create a monitor
 type: apicontent
-order: 8.1
+order: 15.1
+external_redirect: /api/#create-a-monitor
 ---
 
-## Create A Monitor
+## Create a monitor
 
 ##### ARGUMENTS
 *   `type` [*required*]:  
@@ -49,7 +50,7 @@ order: 8.1
 
     *   `event`, the event query string:
     *   `string_query` free text query to match against event title and text.
-    *   `sources` event sources (comma-separated).
+    *   `sources` event sources (comma-separated). [Complete list of source attribute values](/integrations/faq/list-of-api-source-attribute-value)
     *   `status` event statuses (comma-separated). Valid options: error, warn, and info.
     *   `priority` event priorities (comma-separated). Valid options: low, normal, all.
     *   `host` event reporting host (comma-separated).

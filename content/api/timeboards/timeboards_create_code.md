@@ -1,7 +1,8 @@
 ---
-title: Timeboards
+title: Create a Timeboard
 type: apicode
-order: 10.1
+order: 20.1
+external_redirect: /api/#create-a-timeboard
 ---
 
 ##### Signature

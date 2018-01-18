@@ -1,8 +1,10 @@
 ---
-title: Monitors
+title: Get a monitor's details
 type: apicode
-order: 8.2
+order: 15.2
+external_redirect: /api/#get-a-monitor-s-details
 ---
+
 ##### Signature
 `GET /api/v1/monitor/:monitor_id`
 ##### Example Request

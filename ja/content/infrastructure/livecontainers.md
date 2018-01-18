@@ -40,21 +40,21 @@ Containers are by their nature extremely high cardinality objects.  Our flexible
 
 Containers are tagged with all existing host-level tags.  We also tag with metadata associated with individual containers.
 
-All containers are tagged by `container_image`, and additionally, we include integrations with popular orchestrators, such as ECS and Kubernetes, which provide further container-level tags.  We also decorate each container with Docker, ECS, or Kubernetes icons so you can tell which are being orchestrated at a glance.
+All containers are tagged by `image_name`, and additionally, we include integrations with popular orchestrators, such as ECS and Kubernetes, which provide further container-level tags.  We also decorate each container with Docker, ECS, or Kubernetes icons so you can tell which are being orchestrated at a glance.
 
-ECS Containers are tagged by `ecs_task_name`, `ecs_task_version`, and `ecs_cluster`
+ECS Containers are tagged by `task_name`, `task_version`, and `ecs_cluster`
 
-Kubernetes Containers are tagged by `kube_pod`, `kube_pod_ip`, `kube_service`, `kube_namespace`, `kube_replica_set`, `kube_daemon_set`, `kube_job`, `kube_deployment`, and `kube_cluster`.
+Kubernetes Containers are tagged by `pod_name`, `kube_pod_ip`, `kube_service`, `kube_namespace`, `kube_replica_set`, `kube_daemon_set`, `kube_job`, `kube_deployment`, and `kube_cluster`.
 -->
 ### タグ付け
 
 コンテナには、既存のすべてのホストレベルのタグがタグ付けされています。さらに個々のコンテナに関連付けられたメタデータもタグ付けします。
 
-すべてのコンテナは `container_image` によってタグ付けされます。さらに、コンテナレベルのタグを追加で提供できるECSやKubernetesといったオーケストレータとのインテグレーションも実装されています。Docker、ECS、あるいはKubernetesの各アイコンを使用して各コンテナが装飾されるので、どのオーケストレーターによって管理されているものかひと目で知ることができます。
+すべてのコンテナは `image_name` によってタグ付けされます。さらに、コンテナレベルのタグを追加で提供できるECSやKubernetesといったオーケストレータとのインテグレーションも実装されています。Docker、ECS、あるいはKubernetesの各アイコンを使用して各コンテナが装飾されるので、どのオーケストレーターによって管理されているものかひと目で知ることができます。
 
-ECSコンテナは、`ecs_task_name`, `ecs_task_version`, `ecs_cluster` タグが付けられ、
+ECSコンテナは、`task_name`, `task_version`, `ecs_cluster` タグが付けられ、
 
-Kubernetesコンテナには、`kube_pod`, `kube_pod_ip`, `kube_service`, `kube_namespace`, `kube_replica_set`, `kube_daemon_set`, `kube_job`, `kube_deployment`, `kube_cluster`.　タグが付けられます。
+Kubernetesコンテナには、`pod_name`, `kube_pod_ip`, `kube_service`, `kube_namespace`, `kube_replica_set`, `kube_daemon_set`, `kube_job`, `kube_deployment`, `kube_cluster`.　タグが付けられます。
 
 <!--
 ### Filtering and Pivoting

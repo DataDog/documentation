@@ -1,10 +1,11 @@
 ---
-title: Organizations
+title: Upload IdP metadata
 type: apicontent
-order: 17.4
+order: 16.4
+external_redirect: /api/#upload-idp-metadata
 ---
 
-## Upload IdP Metadata
+## Upload IdP metadata
 
 ##### ARGUMENTS
 * `idp_file` [*required*]:  

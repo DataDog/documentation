@@ -1,10 +1,11 @@
 ---
-title: Create User
+title: Create user
 type: apicontent
-order: 16.1
+order: 23.1
+external_redirect: /api/#create-user
 ---
 
-## Create User
+## Create user
 ##### ARGUMENTS
 
 * `handle` [*required*]:  

@@ -1,5 +1,5 @@
 
 {
-	'action': 'Muted', 
-	'hostname': 'test.host'
+    'action': 'Muted',
+    'hostname': 'test.host'
 }

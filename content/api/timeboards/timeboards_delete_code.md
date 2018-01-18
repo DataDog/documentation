@@ -1,7 +1,8 @@
 ---
-title: Timeboards
+title: Delete a Timeboard
 type: apicode
-order: 10.3
+order: 20.3
+external_redirect: /api/#delete-a-timeboard
 ---
 
 ##### Signature

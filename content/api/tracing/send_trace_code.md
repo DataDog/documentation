@@ -1,11 +1,12 @@
 ---
-title: Traces
+title: Send traces
 type: apicode
-order: 20.1
+order: 21.1
+external_redirect: /api/#send-traces
 ---
 
 ##### Signature
-`PUT /v0.3/traces`
+`PUT  http://localhost:8126/v0.3/traces`
 
 ##### Example Request
 

@@ -18,10 +18,27 @@ api.Metric.send(metric='page.views', points=1000)
 api.Metric.send(metric='my.pair', points=(now, 15))
 
 # Submit multiple points.
-api.Metric.send(metric='my.series', points=[(now, 15), (future_10s, 16)])
+api.Metric.send(
+    metric='my.series',
+    points=[
+        (now, 15),
+        (future_10s, 16)
+    ]
+)
 
 # Submit a point with a host and tags.
-api.Metric.send(metric='my.series', points=100, host="myhost.example.com", tags=["version:1"])
+api.Metric.send(
+    metric='my.series',
+    points=100,
+    host="myhost.example.com",
+    tags=["version:1"]
+)
 
 # Submit multiple metrics
-api.Metric.send([{'metric':'my.series', 'points':15}, {'metric':'my1.series', 'points':16}])
+api.Metric.send([{
+    'metric': 'my.series',
+    'points': 15
+}, {
+    'metric': 'my1.series',
+    'points': 16
+}])

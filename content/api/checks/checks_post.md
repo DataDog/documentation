@@ -1,10 +1,11 @@
 ---
-title: Post A Check Run
+title: Post a check run
 type: apicontent
-order: 7.1
+order: 6.1
+external_redirect: /api/#post-a-check-run
 ---
 
-## Post A Check Run
+## Post A check run
 
 ##### ARGUMENTS
 

@@ -1,10 +1,11 @@
 ---
-title: Organizations
+title: Update organization
 type: apicontent
-order: 17.3
+order: 16.3
+external_redirect: /api/#update-organization
 ---
 
-## Update Organization
+## Update organization
 
 ##### ARGUMENTS
 * `name` [*optional*]:  

@@ -1,5 +1,6 @@
 ---
-title: Embeddable Graphs
+title: Embeddable graphs
 type: apicode
-order: 19
+order: 9
+external_redirect: /api/#embeddable-graphs
 ---

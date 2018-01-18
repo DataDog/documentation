@@ -1,5 +1,6 @@
 ---
-title: Usage Metering
+title: Usage metering
 type: apicode
-order: 21
+order: 22
+external_redirect: /api/#usage-metering
 ---

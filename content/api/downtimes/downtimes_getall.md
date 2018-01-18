@@ -1,10 +1,11 @@
 ---
-title: Get All Monitor Downtimes
+title: Get all monitor downtimes
 type: apicontent
-order: 9.6
+order: 8.6
+external_redirect: /api/#get-all-monitor-downtimes
 ---
 
-## Get All Monitor Downtimes
+## Get all monitor downtimes
 ##### ARGUMENTS
 * `current_only` [*optional*, *default* = **False**]:  
     Only return downtimes that are activewhen the request is made.

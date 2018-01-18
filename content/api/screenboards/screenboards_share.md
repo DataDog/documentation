@@ -1,11 +1,13 @@
 ---
-title: Share A Screenboard
+title: Share a Screenboard
 type: apicontent
-order: 11.6
+order: 17.6
+external_redirect: /api/#share-a-screenboard
 ---
 
-## Share A Screenboard
-Share an existing screenboard's with a public URL.
+## Share a Screenboard
+
+Share an existing Screenboard's with a public URL.
 
 ##### ARGUMENTS
 

@@ -1,9 +1,10 @@
 ---
-title: View Metric Metadata
+title: View metric metadata
 type: apicontent
-order: 5.4
+order: 14.4
+external_redirect: /api/#view-metric-metadata
 ---
-## View Metric Metadata
+## View metric metadata
 
 The metrics metadata endpoint allows you to get metadata about a specific metric.
 

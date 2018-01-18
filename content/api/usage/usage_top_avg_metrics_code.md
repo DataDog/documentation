@@ -1,7 +1,8 @@
 ---
-title: Usage Metering
+title: Get top 500 custom metrics by hourly average
 type: apicode
-order: 21.3
+order: 22.3
+external_redirect: /api/#get-top-500-custom-metrics-by-hourly-average
 ---
 
 ##### Signature

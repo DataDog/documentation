@@ -1,10 +1,11 @@
 ---
-title: Query Time Series Points
+title: Query time series points
 type: apicontent
-order: 5.3
+order: 14.3
+external_redirect: /api/#query-time-series-points
 ---
 
-## Query Time Series Points
+## Query time series points
 This end point allows you to query for metrics from any time period.
 
 ##### ARGUMENTS

@@ -1,7 +1,8 @@
 ---
-title: Service Checks
+title: Post a check run
 type: apicode
-order: 7.1
+order: 6.1
+external_redirect: /api/#post-a-check-run
 ---
 
 ##### Signature

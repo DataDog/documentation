@@ -1,11 +1,13 @@
 ---
-title: Get All Screenboards
+title: Get all Screenboards
 type: apicontent
-order: 11.5
+order: 17.5
+external_redirect: /api/#get-all-screenboards
 ---
 
-## Get All Screenboards
-Fetch all of your screenboards' definitions.
+## Get all Screenboards
+
+Fetch all of your Screenboards' definitions.
 
 ##### ARGUMENTS
 

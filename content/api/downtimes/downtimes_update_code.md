@@ -1,7 +1,8 @@
 ---
-title: Downtimes
+title: Update monitor downtime
 type: apicode
-order: 9.2
+order: 8.2
+external_redirect: /api/#update-monitor-downtime
 ---
 
 ##### Signature

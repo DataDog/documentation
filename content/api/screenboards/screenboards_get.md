@@ -1,11 +1,12 @@
 ---
-title: Get A Screenboard
+title: Get a Screenboard
 type: apicontent
-order: 11.4
+order: 17.4
+external_redirect: /api/#get-a-screenboard
 ---
 
-## Get A Screenboard
-Fetch an existing screenboard's definition.
+## Get a Screenboard
+Fetch an existing Screenboard's definition.
 
 ##### ARGUMENTS
 

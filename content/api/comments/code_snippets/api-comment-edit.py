@@ -9,6 +9,13 @@ options = {
 initialize(**options)
 
 # Edit a comment.
-newcomment = api.Comment.create(message='Should we use COBOL or Fortran or Widgets?')
+newcomment = api.Comment.create(
+    message='Should we use COBOL or Fortran or Widgets?'
+)
+
 sleep(1)
-api.Comment.update(newcomment['comment']['id'], message='I think differently now!')
+
+api.Comment.update(
+    newcomment['comment']['id'],
+    message='I think differently now!'
+)

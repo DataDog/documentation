@@ -1,10 +1,11 @@
 ---
-title: Usage Metering
+title: Get hourly usage for hosts and containers
 type: apicontent
-order: 20.1
+order: 22.1
+external_redirect: /api/#get-hourly-usage-for-hosts-and-containers
 ---
 
-## Get Hourly Usage For Hosts and Containers
+## Get hourly usage for hosts and containers
 
 Get Hourly Usage For Hosts and Containers.
 

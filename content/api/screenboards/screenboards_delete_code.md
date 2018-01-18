@@ -1,7 +1,8 @@
 ---
-title: Screenboards
+title: Delete a Screenboard
 type: apicode
-order: 11.3
+order: 17.3
+external_redirect: /api/#delete-a-screenboard
 ---
 
 ##### Signature

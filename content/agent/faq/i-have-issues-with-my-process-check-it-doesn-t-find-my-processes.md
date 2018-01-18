@@ -10,7 +10,7 @@ further_reading:
   text: Learn more about the Datadog-Process Agent
 ---
 
-Our process check uses the psutil python package to [check processes on your machine](https://github.com/DataDog/integrations-core/blob/master/process/check.py#L117-L134).
+Our process check uses the psutil python package to [check processes on your machine](https://github.com/DataDog/integrations-core/blob/master/process/datadog_checks/process/process.py#L117).
 
 By default this process check works on exact match and looks at the process names only.
 

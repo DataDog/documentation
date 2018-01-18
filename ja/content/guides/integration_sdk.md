@@ -245,7 +245,7 @@ $ bundle exec rake exec["nosetests my_integration/test_*.py -A 'not requires'"]
 
 At Datadog we're using Docker containers for testing environments and we highly encourage you to do the same. Containers are lightweight, easy to manage, and provide consistent, standardized environments for each test run.
 
-For example in our MySQL integration, the [`ci/mysql.rake` file](https://github.com/DataDog/integrations-core/blob/master/mysql/ci/mysql.rake) uses the [official MySQL container](https://hub.docker.com/_/mysql/) and involves four main tasks
+For example in our MySQL integration, the [`ci/mysql.rake` file](https://github.com/DataDog/integrations-core/blob/master/mysql/test/ci/mysql.rake) uses the [official MySQL container](https://hub.docker.com/_/mysql/) and involves four main tasks
 
 1. `before_install` - Prior to starting our new Docker test environment, we need to ensure that any previous Docker test environments are stopped and removed.
 2. `install` - The install task performs the Docker `run` which will start the MySQL test server.

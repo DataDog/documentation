@@ -1,10 +1,11 @@
 ---
-title: Create Embed
+title: Create embed
 type: apicontent
-order: 19.2
+order: 9.2
+external_redirect: /api/#create-embed
 ---
 
-## Create Embed
+## Create embed
 
 Creates a new embeddable graph.
 

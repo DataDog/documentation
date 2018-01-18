@@ -1,7 +1,8 @@
 ---
-title: Timeboards
+title: Get all Timeboards
 type: apicode
-order: 10.4
+order: 20.4
+external_redirect: /api/#get-all-timeboards
 ---
 
 ##### Signature

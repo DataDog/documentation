@@ -1,7 +1,8 @@
 ---
-title: Metrics
+title: Query time series points
 type: apicode
-order: 5.3
+order: 14.3
+external_redirect: /api/#query-time-series-points
 ---
 
 ##### Signature

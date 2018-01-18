@@ -1,13 +1,14 @@
 ---
-title: Success and Errors
+title: Success and errors
 type: apicode
 order: 3
+external_redirect: /api/#success-and-errors
 ---
 ##### Status Codes
 
 * `200 200`
 * `201 Created`
-* `202 202`
+* `202 accepted`
 * `204 No Content`
 * `301 301`
 * `304 Not Modified`

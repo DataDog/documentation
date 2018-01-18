@@ -1,7 +1,8 @@
 ---
-title: Downtimes
+title: Get a monitor downtime
 type: apicode
-order: 9.5
+order: 8.5
+external_redirect: /api/#get-a-monitor-downtime
 ---
 ##### Signature
 `GET /api/v1/downtime/:downtime_id`

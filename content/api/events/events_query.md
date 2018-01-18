@@ -1,10 +1,11 @@
 ---
-title: Query The Event Stream
+title: Query the event stream
 type: apicontent
-order: 6.4
+order: 10.4
+external_redirect: /api/#query-the-event-stream
 ---
 
-## Query The Event Stream
+## Query the event stream
 The [event stream](/graphing/event_stream/) can be queried and filtered by time, priority, sources and tags.
 Note: if the event you’re querying contains markdown formatting of any kind, you may see characters such as %,\,n in your output
 

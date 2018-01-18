@@ -26,13 +26,13 @@ Two installations are possible:
 - or by deploying its containerized version in the Docker environment
 
 ## Setup
-### Host installation
+### Option 1: Host installation
 
 Install the [latest version of the agent 6](/logs/#getting-started-with-the-agent) on your host.
 
 The agent can both collect logs from [files on the host](/logs/#custom-log-collection) or from [container stdout/stderr](/logs/docker/#configuration-file-example). For this you need to update or create a new .yaml configuration file in the agent’s `/conf.d` directory as explained in the provided links.
 
-### Container installation
+### Option 2: Container installation
 
 As explained above, the agent also has a [containerized](https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent) installation.
 
@@ -46,14 +46,14 @@ For more information about this check [here](https://github.com/DataDog/docker-d
 To run a Docker container which embeds the Datadog Agent to monitor your host use the following command:
 
 ```
-docker run -d --name dd-agent -h `hostname` -e DD_API_KEY=<YOUR_API_KEY>  -e DD_LOG_ENABLED=true -e SD_BACKEND=docker -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -v /otp/datadog-agent/conf.d:/conf.d:ro datadog/agent:6.0.0-beta.6
+docker run -d --name dd-agent -h `hostname` -e DD_API_KEY=<YOUR_API_KEY>  -e DD_LOG_ENABLED=true -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -v /otp/datadog-agent/conf.d:/conf.d:ro datadog/agent:latest
 ```
 
 Important notes: 
 
-- The Docker integration is enabled by default, as well as [autodiscovery](/agent/autodiscovery/) in auto config mode (remove the `SD_BACKEND` variable to disable it).
+- The Docker integration is enabled by default, as well as [autodiscovery](/agent/autodiscovery/) in auto configuration mode (remove the listeners: -docker section in `datadog.yaml` to disable it).
 
-- For this example we used the image 6.0.0-beta.6 of the agent. You can find [here](https://hub.docker.com/r/datadog/agent/tags/) the latest available images for agent 6 and we encourage you to always pick the latest version
+- We recommend to always pick the latest version of Datadog Agent 6. [Consult the full list of available images for Agent 6](https://hub.docker.com/r/datadog/agent/tags/).
 
 The command related to log collection are the following:
 
@@ -69,13 +69,11 @@ Now that the agent is ready to collect logs, you need to define which containers
 To start collecting logs for a given container filtered by image or label, you need to update the log section in an integration or custom .yaml file. 
 Add a new yaml file in the `conf.d` directory (should be `/opt/datadog-agent/conf.d` on the host if you followed above instruction) with the following parameters:
 
-```
+```yaml
 init_config:
-
 instances:
-    [{}]
 
-#Log section
+##Log section
 
 logs:    
    - type: docker

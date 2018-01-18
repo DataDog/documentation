@@ -8,19 +8,3 @@ options = {
 initialize(**options)
 
 api.Screenboard.delete(811)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

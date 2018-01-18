@@ -1,7 +1,8 @@
 ---
-title: Users
+title: Get user
 type: apicode
-order: 16.2
+order: 23.2
+external_redirect: /api/#get-user
 ---
 
 ##### Signature

@@ -16,7 +16,7 @@ curl -X PUT -H "Content-type: application/json" \
               "url": "https://path/to/image.jpg"
             }
         ]
-    }' \
+}' \
 "https://app.datadoghq.com/api/v1/screen/${board_id}?api_key=${api_key}&application_key=${app_key}"
 
 

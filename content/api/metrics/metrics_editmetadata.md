@@ -1,9 +1,10 @@
 ---
-title: Edit Metric Metadata
+title: Edit metric metadata
 type: apicontent
-order: 5.5
+order: 14.5
+external_redirect: /api/#edit-metric-metadata
 ---
-## Edit Metric Metadata
+## Edit metric metadata
 
 The metrics metadata endpoint allows you to edit fields of a metric's metadata.
 [Find more about supported types](/developers/metrics)

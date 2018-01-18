@@ -9,7 +9,7 @@ import re
 import tempfile
 from collections import OrderedDict
 from functools import partial, wraps
-from itertools import chain
+from itertools import chain, zip_longest
 from multiprocessing.pool import ThreadPool as Pool
 from optparse import OptionParser
 from os import sep, makedirs, getenv, remove
@@ -127,6 +127,7 @@ class PreBuild:
         self.regex_h1_replace = re.compile(r'^(#{1})(?!#)(.*)', re.MULTILINE)
         self.regex_metrics = re.compile(r'(#{3} Metrics\n)([\s\S]*this integration.|[\s\S]*this check.)([\s\S]*)(#{3} Events\n)', re.DOTALL)
         self.regex_fm = re.compile(r'(?:-{3})(.*?)(?:-{3})(.*)', re.DOTALL)
+        self.regex_source = re.compile(r'(\S*FROM_DISPLAY_NAME\s*=\s*\{)(.*?)\}', re.DOTALL)
         self.datafile_json = []
         self.pool_size = 5
         self.integration_mutations = OrderedDict({
@@ -190,7 +191,8 @@ class PreBuild:
         """
         print('Processing')
 
-        dogweb_globs = ['integration/**/*_metadata.csv', 'integration/**/manifest.json', 'integration/**/README.md']
+        dogweb_globs = ['integration/**/*_metadata.csv', 'integration/**/manifest.json', 'integration/**/README.md',
+                        'dd/utils/context/source.py']
         integrations_globs = ['**/metadata.csv', '**/manifest.json', '**/README.md']
         extras_globs = ['**/metadata.csv', '**/manifest.json', '**/README.md']
 
@@ -211,10 +213,17 @@ class PreBuild:
             self.options.extras = '{0}{1}{2}'.format(self.extract_dir, 'integrations-extras', sep)
 
         globs = []
-        for d_glob, i_glob, e_glob in zip(dogweb_globs, integrations_globs, extras_globs):
-            globs.extend(['{}{}'.format(self.options.dogweb, d_glob), '{}{}'.format(self.options.integrations, i_glob), '{}{}'.format(self.options.extras, e_glob)])
+
+        for d_glob, i_glob, e_glob  in zip_longest(dogweb_globs, integrations_globs, extras_globs):
+            if d_glob:
+                globs.append('{}{}'.format(self.options.dogweb, d_glob))
+            if i_glob:
+                globs.append('{}{}'.format(self.options.integrations, i_glob))
+            if e_glob:
+                globs.append('{}{}'.format(self.options.extras, e_glob))
 
         for file_name in tqdm(chain.from_iterable(glob.iglob(pattern, recursive=True) for pattern in globs)):
+            self.process_source_attribute(file_name)
             self.process_integration_metric(file_name)
             self.process_integration_manifest(file_name)
             self.process_integration_readme(file_name)
@@ -251,6 +260,33 @@ class PreBuild:
                         open(output_file, 'w').close()
                 elif action == 'discard':
                     remove(input_file)
+
+    def process_source_attribute(self, file_name):
+        """
+        Take a single source.py file extracts the FROM_DISPLAY_NAME dict values
+        and inserts them into the file something.md
+        :param file_name: path to a source.py file
+        """
+        if file_name.endswith('dd/utils/context/source.py'):
+            out = '|Integration name | API source attribute|\n'
+            out += '|:---|:---|\n'
+            with open(file_name, 'r') as f:
+                result = f.read()
+                m = re.search(self.regex_source, result)
+                result = m.group(2) if m else result
+                result = re.sub(r'[^0-9A-Za-z:, ]', '', result)
+                for line in result.split(','):
+                    pair = line.split(':')
+                    if len(pair) > 1:
+                        out += '|{0}|{1}|\n'.format(pair[0].strip().title(), pair[1].strip())
+            with open('{}{}'.format(self.options.source, '/content/integrations/faq/list-of-api-source-attribute-value.md'), mode='r+', encoding='utf-8') as f:
+                boundary = re.compile(r'^-{3,}$', re.MULTILINE)
+                _, fm, content = boundary.split(f.read(), 2)
+                template = "---\n{front_matter}\n---\n\n{content}\n"
+                new_content = template.format(front_matter=fm.strip(), content=out)
+                f.truncate(0)
+                f.seek(0)
+                f.write(new_content)
 
     def process_integration_metric(self, file_name):
         """

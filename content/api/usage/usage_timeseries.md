@@ -1,10 +1,11 @@
 ---
-title: Usage Metering
+title: Get hourly usage for custom metrics
 type: apicontent
-order: 21.2
+order: 22.2
+external_redirect: /api/#get-hourly-usage-for-custom-metrics
 ---
 
-## Get Hourly Usage For Custom Metrics.
+## Get hourly usage for custom metrics
 
 Get Hourly Usage For [Custom Metrics](/getting_started/custom_metrics/).
 

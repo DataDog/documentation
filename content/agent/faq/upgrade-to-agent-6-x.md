@@ -53,6 +53,6 @@ You can now use [DogStatsD](/developers/dogstatsd) over a unix socket instead of
 
 You can now custom build the agent and [DogStatsD](/developers/dogstatsd) much easier and with much more configuration options, to include or exclude almost anything. We even have a “puppy” agent, that’s a truly minimal installation.
 
-## How do I upgrade?
+## How do I upgrade?        
 
-The new Datadog Agent is currently in beta. You can learn how to join the beta by reading [the documentation](https://github.com/DataDog/datadog-agent/tree/master/docs/beta).
+The new Datadog Agent is currently in beta. You can learn how to join the beta by reading [the documentation](https://github.com/DataDog/datadog-agent/blob/beta/docs/beta.md).

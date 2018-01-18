@@ -1,7 +1,8 @@
 ---
-title: Graphs
+title: Graph snapshot
 type: apicode
-order: 18.1
+order: 11.1
+external_redirect: /api/#graph-snapshot
 ---
 
 ##### Signature

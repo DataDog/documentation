@@ -1,7 +1,8 @@
 ---
-title: Embeddable Graphs
+title: Get specific embed
 type: apicode
-order: 19.3
+order: 9.3
+external_redirect: /api/#get-specific-embed
 ---
 
 ##### Signature

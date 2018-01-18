@@ -1,7 +1,8 @@
 ---
-title: Organizations
+title: Get organization
 type: apicode
-order: 17.2
+order: 16.2
+external_redirect: /api/#get-organization
 ---
 
 ##### Signature

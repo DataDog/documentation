@@ -1,10 +1,11 @@
 ---
-title: Services
+title: Send services
 type: apicontent
-order: 20.2
+order: 21.2
+external_redirect: /api/#send-services
 ---
 
-## Services
+## Send services
 ##### Arguments
 
 *   `service` - _Required._The service name as a dictionary key, [Learn more](/tracing/terminology).

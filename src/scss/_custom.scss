@@ -123,6 +123,18 @@ $headings-font-weight:600;
     background-color: #fff;
     color: $ddpurple;
   }
+
+  &:focus,
+  &.focus {
+    box-shadow: none;
+  }
+
+  &:not([disabled]):not(.disabled):active,
+  &:not([disabled]):not(.disabled).active,
+  .show > &.dropdown-toggle {
+    box-shadow: none;
+    background-color:transparent;
+  }
 }
 
 // this button is generated from theme colors but we want to have a gradient

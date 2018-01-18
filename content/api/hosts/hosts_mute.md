@@ -1,10 +1,11 @@
 ---
-title: Mute A Host
+title: Mute a host
 type: apicontent
 order: 12.1
+external_redirect: /api/#mute-a-host
 ---
 
-## Mute A Host
+## Mute a host
 ##### ARGUMENTS
 
 * `end` [*optional*, *default*=**None**]:  

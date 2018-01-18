@@ -1,7 +1,8 @@
 ---
-title: Embeddable Graphs
+title: Embeddable graphs
 type: apicontent
-order: 19
+order: 9
+external_redirect: /api/#embeddable-graphs
 ---
-## Embeddable Graphs
+## Embeddable graphs
 Interact with embeddable graphs through the API.

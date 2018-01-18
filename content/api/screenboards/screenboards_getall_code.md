@@ -1,7 +1,8 @@
 ---
-title: Screenboards
+title: Get all Screenboards
 type: apicode
-order: 11.5
+order: 17.5
+external_redirect: /api/#get-all-screenboards
 ---
 
 ##### Signature

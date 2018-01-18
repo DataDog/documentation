@@ -1,7 +1,8 @@
 ---
-title: Tags
+title: Get tags
 type: apicode
-order: 13.1
+order: 19.1
+external_redirect: /api/#get-tags
 ---
 
 ##### Signature

@@ -1,7 +1,8 @@
 ---
-title: Screenboards
+title: Revoke a shared a Screenboard
 type: apicode
-order: 11.7
+order: 17.7
+external_redirect: /api/#revoke-a-shared-a-screenboard
 ---
 
 ##### Signature
