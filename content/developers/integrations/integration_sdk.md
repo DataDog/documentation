@@ -235,7 +235,7 @@ To iterate quickly on your unit and mock tests, instead of running all the tests
 
 ```
 # run unit and mock tests, in the virtualenv
-$ bundle exec rake exec["nosetests my_integration/test_*.py -A 'not requires'"]
+$ bundle exec rake exec["nosetests my_integration/test/test_*.py -A 'not requires'"]
 ```
 
 ### Docker test environments
