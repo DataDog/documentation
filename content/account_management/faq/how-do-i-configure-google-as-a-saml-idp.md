@@ -1,6 +1,7 @@
 ---
 title: How do I configure Google as a SAML IdP?
 kind: faq
+disable_toc: true
 further_reading:
 - link: "/account_management/saml"
   tag: "Documentation"
@@ -10,11 +11,11 @@ further_reading:
   text: Configuring Teams & Organizations with Multiple Accounts
 ---
 
-## Setting up Google as a SAML IdP
+### Setting up Google as a SAML IdP
 
-[Google instructions](https://support.google.com/a/answer/6087519?hl=en)
+[Please read the dedicated Google instructions](https://support.google.com/a/answer/6087519?hl=en)
 
-## For the "Service Provider Details"
+### For the "Service Provider Details"
 
 **Pre-requisite**: IDP initiated SSO must be checked on DataDog SAML Configuration page
 
@@ -26,18 +27,17 @@ further_reading:
 * **Signed Response**: Leave unchecked
 * **Name ID**: "Basic Information" "Primary Email"
 
-## For the "Attribute Mapping"
+### For the "Attribute Mapping"
 
 * "urn:oid:1.3.6.1.4.1.5923.1.1.1.6" "Basic Information" "Primary Email"
 
 Also add:
+
 * "urn:oid:2.5.4.4" "Basic Information" "Last Name"
 * "urn:oid:2.5.4.42" "Basic Information" "First Name"
 
-{{< img src="account_management/faq/ySPDetails.png" alt="ySPDetails" responsive="true" popup="true">}}
+{{< img src="account_management/faq/zAttributeMapping.png" alt="zAttributeMapping" responsive="true" popup="true" style="width:75%;">}}
 
-{{< img src="account_management/faq/zAttributeMapping.png" alt="zAttributeMapping" responsive="true" popup="true">}}
-
-## Further Reading
+### Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
