@@ -7,16 +7,16 @@ further_reading:
   text: Learn more about your Datadog application settings
 ---
 
-To reset your Datadog API keys do the following:
- 
+To reset your Datadog API keys do the following:  
+
 1. It isn't possible to have zero API keys so before revoking your key(s) you'll first need to create a new one. Go to the Integration -> APIs page and select "Create API key" (located at the bottom of the page):
     *  https://app.datadoghq.com/account/settings#api
 2. Once a new key has been added, select "Revoke" to remove each of your old keys.
 {{< img src="agent/faq/Reset_Datadog_API_Keys.jpg" alt="Reset Datadog API Keys" responsive="true" popup="true">}}
 
 Once you've revoked your keys, update the `datadog.conf` file on each of your agents with this new key. To do so:
- 
-1. On the Integration -> APIs page, create and copy a new API key.
+
+1. On the [Integration -> APIs page](https://app.datadoghq.com/account/settings#api), create and copy a new API key.
  
 2. Navigate to your host's Datadog agent configuration file:
     * Linux: /etc/dd-agent/datadog.conf
