@@ -234,7 +234,8 @@ Note widget is similar to Free Text widget, but allows for more formatting optio
 
 * An arrow can be added to the text box that appears on the dashboard. This is commonly used to document the structure of the dashboard.  
 
-* Use `href` to create internal links in Datadog. *[Screen recording showing how to use href](http://cl.ly/310B2k322j0W)*.  
+* Use `href` to create internal links in Datadog. 
+  {{< img src="graphing/dashboards/widgets/using_link_note_widget.gif" alt="Using links in note widget" responsive="true" popup="true">}}
 
 Example of Note widget for the [API](/api/#screenboards)
 
