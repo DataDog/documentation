@@ -162,7 +162,9 @@ The Hostmap graphs any metric for any subset of hosts on the same hostmap visual
 ## Free Text
 *Supported on Screenboards only*
 
-Free text is a widget that allows you to add headings to your [Screenboard](/graphing/dashboards/screenboard). This is commonly used to state the overall purpose of the dashboard.
+Free text is a widget that allows you to add headings to your [Screenboard](/graphing/dashboards/screenboard).  
+
+This is commonly used to state the overall purpose of the dashboard.
 
 ## Event Timeline
 *Supported on Screenboards only*
@@ -228,7 +230,12 @@ Example of Image widget for the [API](/api/#screenboards)
 ## Note
 *Supported on Screenboards only*
 
-Note is similar to Free Text, but allows for more formatting options. Also, an arrow can be added to the text box that appears on the dashboard. This is commonly used to document the structure of the dashboard.
+Note widget is similar to Free Text widget, but allows for more formatting options: 
+
+* An arrow can be added to the text box that appears on the dashboard. This is commonly used to document the structure of the dashboard.  
+
+* Use `href` to create internal links in Datadog. 
+  {{< img src="graphing/dashboards/widgets/using_link_note_widget.gif" alt="Using links in note widget" responsive="true" popup="true">}}
 
 Example of Note widget for the [API](/api/#screenboards)
 
