@@ -286,5 +286,5 @@ In our experience building integrations, we've also faced a number of challenges
 [10]: https://github.com/DataDog/integrations-core/blob/master/mysql/test/ci/mysql.rake
 [11]: /agent/installcoreextra
 [12]: https://github.com/DataDog/integrations-extras/compare
-[13]: https://github.com/DataDog/integrations-core/tree/master/mongo/ci
+[13]: https://github.com/DataDog/integrations-core/tree/master/mongo/test/ci
 [14]: https://github.com/DataDog/integrations-core/blob/master/mysql/check.py#L1169
