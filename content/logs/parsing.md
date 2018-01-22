@@ -145,9 +145,8 @@ If you add an **extract** parameter in your rule pattern you would have:
 The date matcher transforms your timestamp in the EPOCH format.
 
 {{% table responsive="true" %}}
-||||
-|:---|:----|:----|
 |**Raw string** | **Parsing rule** | **Result** |
+|:---|:----|:----|
 |14:20:15| `%{date("HH:mm:ss"):date}` |{"date": 51615000} |
 |11/10/2014| `%{date("dd/mm/yyyy"):date}`| {"date": 1412978400000}|
 |Thu Jun 16 08:29:03 2016 | `%{date("EEE MMM dd HH:mm:ss yyyy"):date}` | {"date": 1466065743000}|

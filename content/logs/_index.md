@@ -231,7 +231,6 @@ logs:
 More examples:
 
 {{% table responsive="true" %}}
-|||
 |**Raw string** | **Pattern** |
 |:---|:----|
 |14:20:15| `\d{2}:\d{2}:\d{2}` |
