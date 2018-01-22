@@ -123,6 +123,8 @@ logs:
 ```
 * [Restart your agent](https://help.datadoghq.com/hc/en-us/articles/203764515-Start-Stop-Restart-the-Datadog-Agent)
 
+## Advanced log collection functions
+
 ### Filter logs
 
 All logs are not equal and you may want to send only a specific subset of logs to Datadog.  
@@ -225,6 +227,17 @@ logs:
         name: new_log_start_with_date
         pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
 ```
+
+More examples:
+
+{{% table responsive="true" %}}
+|**Raw string** | **Pattern** |
+|:---|:----|
+|14:20:15| `\d{2}:\d{2}:\d{2}` |
+|11/10/2014| `\d{2}\/\d{2}\/\d{4}`|
+|Thu Jun 16 08:29:03 2016 | `\w{3}\s+\w{3}\s+\d{2}\s\d{2}:\d{2}:\d{2}` |
+{{% /table %}}
+
 
 ### Tail multiple directories or whole directories by using wildcards
 
