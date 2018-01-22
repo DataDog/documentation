@@ -12,6 +12,8 @@ further_reading:
 
 It's recommended that you set up Datadog as an Okta application manually, as opposed to using a 'pre-configured' configuration.
 
+[Consult the dedicated Okta documentation, to know how to Configure SAML 2.0 for Datadog](http://saml-doc.okta.com/SAML_Docs/How-to-Configure-SAML-2.0-for-DataDog.html) 
+
 ## General Details
 
 * **Single Sign On URL**: https://app.datadoghq.com/account/saml/assertion 
