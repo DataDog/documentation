@@ -17,8 +17,7 @@ We recommend certain best practices for naming metrics and tags.
 **For metrics the rules defined are**:
 
 * Metric names must start with a letter
-* Can only contain ascii alphanumerics, underscore and periods
-* Other characters will get converted to underscores
+* Can only contain Ascii alphanumerics, underscore and periods (other characters will get converted to underscores)
 * Should not exceed 200 characters (though less than 100 is generally preferred from a UI perspective)
 * Unicode is not supported
 * We recommend avoiding spaces
