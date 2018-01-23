@@ -71,7 +71,14 @@
             <div class="card">
                 <a class="card-img" href="{{ $dot.Site.BaseURL }}integrations/{{$urlname | lower}}/">
                     {{ $src := (print "integrations_logos/" ($urlname | lower) ".png")}}
-                    {{ $url := (print (.Site.Params.img_url) "images/" (index .Site.Data.manifests.images $src ) "?auto=format") | safeURL }}
+                    {{ $indx := (index .Site.Data.manifests.images $src )}}
+                    {{ $.Scratch.Set "url" ""}}
+                    {{ if $indx }}
+                        {{ $.Scratch.Set "url" (print (.Site.Params.img_url) "images/" $indx "?auto=format") | safeURL }}
+                    {{ else }}
+                        {{ $.Scratch.Set "url" (print (.Site.Params.img_url) "images/" (index .Site.Data.manifests.images "integrations_logos/dd-noimage.png") "?auto=format") | safeURL }}
+                    {{ end }}
+                    {{ $url := $.Scratch.Get "url" }}
                     <picture class="mx-auto">
                         <source srcset="{{ $url }}&w=144 1x, {{ $url }}&w=144&dpr=2 2x" media="(min-width: 530px)">
                         <source srcset="{{ $url }}&w=200 1x, {{ $url }}&w=200&dpr=2 2x" media="(min-width: 0px)">
