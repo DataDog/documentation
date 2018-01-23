@@ -8,6 +8,7 @@ private: true
 
 * [How to remove the `host` tag when submitting metrics via dogstatsD](/developers/faq/how-to-remove-the-host-tag-when-submitting-metrics-via-dogstatsd)
 * [What do @ notifications do in Datadog?](/developers/faq/what-do-notifications-do-in-datadog)
+* [What best practices are recommended for naming metrics and tags?](/developers/faq/what-best-practices-are-recommended-for-naming-metrics-and-tags)
 
 ## Metrics
 
