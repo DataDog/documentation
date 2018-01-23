@@ -144,6 +144,7 @@ class PreBuild:
             'kube_dns': {'action': 'discard', 'target': 'none', 'remove_header': False},
             'kubernetes_state': {'action': 'discard', 'target': 'none', 'remove_header': False},
             'stride': {'action': 'discard', 'target': 'none', 'remove_header': False},
+            'hbase_regionserver': {'action': 'merge', 'target': 'hbase_master', 'remove_header': False},
         })
         self.initial_integration_files = glob.glob('{}*.md'.format(self.content_integrations_dir))
         makedirs(self.data_integrations_dir, exist_ok=True)
@@ -193,6 +194,7 @@ class PreBuild:
         dogweb_globs = ['integration/**/*_metadata.csv', 'integration/**/manifest.json', 'integration/**/README.md',
                         'dd/utils/context/source.py']
         integrations_globs = ['**/metadata.csv', '**/manifest.json', '**/README.md']
+        extras_globs = ['**/metadata.csv', '**/manifest.json', '**/README.md']
 
         # sync from dogweb, download if we don't have it (token required)
         if not self.options.dogweb:
@@ -205,12 +207,20 @@ class PreBuild:
             self.download_from_repo('DataDog', 'integrations-core', 'master', integrations_globs)
             self.options.integrations = '{0}{1}{2}'.format(self.extract_dir, 'integrations-core', sep)
 
+        # sync from integrations-extras, download if we don't have it (public repo so no token needed)
+        if not options.extras:
+            self.download_from_repo('DataDog', 'integrations-extras', 'master', extras_globs)
+            self.options.extras = '{0}{1}{2}'.format(self.extract_dir, 'integrations-extras', sep)
+
         globs = []
-        for d_glob, i_glob in zip_longest(dogweb_globs, integrations_globs):
+
+        for d_glob, i_glob, e_glob  in zip_longest(dogweb_globs, integrations_globs, extras_globs):
             if d_glob:
                 globs.append('{}{}'.format(self.options.dogweb, d_glob))
             if i_glob:
                 globs.append('{}{}'.format(self.options.integrations, i_glob))
+            if e_glob:
+                globs.append('{}{}'.format(self.options.extras, e_glob))
 
         for file_name in tqdm(chain.from_iterable(glob.iglob(pattern, recursive=True) for pattern in globs)):
             self.process_source_attribute(file_name)
@@ -369,6 +379,7 @@ if __name__ == '__main__':
     parser.add_option("-t", "--token", help="github access token", default=None)
     parser.add_option("-w", "--dogweb", help="path to dogweb local folder", default=None)
     parser.add_option("-i", "--integrations", help="path to integrations-core local folder", default=None)
+    parser.add_option("-e", "--extras", help="path to integrations-extras local folder", default=None)
     parser.add_option("-s", "--source", help="location of src files", default=curdir)
 
     options, args = parser.parse_args()
