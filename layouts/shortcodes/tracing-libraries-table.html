@@ -6,6 +6,7 @@
           <th>Language</th>
           <th>Library</th>
           <th>Official</th>
+          <th>Author</th>
           <th>Notes</th>
         </tr>
       </thead>
@@ -18,7 +19,8 @@
                 <td>{{ if eq $i 0}}<strong>{{ $libName }}</strong>{{ end }}</td>
                 <td><a href="{{ $el.link }}">{{ $el.name }}</a></td>
                 <td>{{ if $el.official}}<i class="icon-tick"></i>{{ end }}</td>
-                <td>{{if $el.authors }}Written by {{ $el.authors }}{{ end }}{{ if $el.notes }}{{ $el.notes }}.{{ end }}</td>
+                <td>{{if $el.authors }}{{ $el.authors }}{{ end }}</td>
+                <td>{{ if $el.notes }}{{ $el.notes }}.{{ end }}</td>
               </tr>
             {{ end }}
         {{ end }}
