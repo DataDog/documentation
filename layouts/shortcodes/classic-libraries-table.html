@@ -8,6 +8,7 @@
         <th>Official</th>
         <th>API</th>
         <th>DogStatsD</th>
+        <th>Author</th>
         <th>Notes</th>
       </tr>
     </thead>
@@ -21,7 +22,8 @@
                 <td>{{ if $el.official}}<i class="icon-tick"></i>{{ end }}</td>
                 <td>{{ if $el.api}}<i class="icon-tick"></i>{{ end }}</td>
                 <td>{{ if $el.dogstatsd }}<i class="icon-tick"></i>{{ end }}</td>
-                <td>{{if $el.authors }}Written by {{ $el.authors }}{{ end }}{{ if $el.notes }}{{ $el.notes }}.{{ end }}</td>
+                <td>{{ if $el.authors }}{{ $el.authors }}{{ end }}</td>
+                <td>{{ if $el.notes }}{{ $el.notes }}.{{ end }}</td>
               </tr>
             {{ end }}
         {{ end }}
