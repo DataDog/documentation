@@ -96,6 +96,7 @@ Classic:
     - name: DataDogReportingTask
       link: https://nifi.apache.org/docs/nifi-docs/components/org.apache.nifi/nifi-datadog-nar/1.5.0/org.apache.nifi.reporting.datadog.DataDogReportingTask/index.html
       authors: Apache
+      notes: Publishes metrics from NiFi to Datadog
   - Node.js:
     - name: hot-shots
       link: https://github.com/brightcove/hot-shots
