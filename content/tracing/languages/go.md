@@ -48,9 +48,10 @@ ___
 {{% table responsive="true" %}}
 | Framework   | Framework Documentation               | GoDoc Datadog Documentation                                                        |
 |-------------|---------------------------------------|------------------------------------------------------------------------------------|
-| Gin         | https://gin-gonic.github.io/gin/      | https://godoc.org/github.com/DataDog/dd-trace-go/tracer/contrib/gin-gonic/gintrace |
-| Gorilla Mux | http://www.gorillatoolkit.org/pkg/mux | https://godoc.org/github.com/DataDog/dd-trace-go/tracer/contrib/gorilla/muxtrace   |
-| gRPC        | https://github.com/grpc/grpc-go       | https://godoc.org/github.com/DataDog/dd-trace-go/tracer/contrib/tracegrpc          |
+| Gin         | https://gin-gonic.github.io/gin/      | https://godoc.org/github.com/DataDog/dd-trace-go/contrib/gin-gonic/gin |
+| Gorilla Mux | http://www.gorillatoolkit.org/pkg/mux | https://godoc.org/github.com/DataDog/dd-trace-go/contrib/gorilla/mux   |
+| gRPC        | https://github.com/grpc/grpc-go       | https://godoc.org/github.com/DataDog/dd-trace-go/contrib/google.golang.org/grpc         |
+|gRPC v1.2 | https://github.com/grpc/grpc-go | https://godoc.org/github.com/DataDog/dd-trace-go/contrib/google.golang.org/grpc.v12 |
 {{% /table %}}
 
 ### Library Compatibility
@@ -61,13 +62,16 @@ ___
 
 
 {{% table responsive="true" %}}
-| Library           | Library Documentation                            | GoDoc Datadog Documentation                                                              |
+| Library| Library Documentation| GoDoc Datadog Documentation |
 |-------------------|--------------------------------------------------|------------------------------------------------------------------------------------------|
-| Elasticsearch     | https://olivere.github.io/elastic/               | https://godoc.org/github.com/DataDog/dd-trace-go/tracer/contrib/elastictraced            |
-| Cassandra (gocql) | http://gocql.github.io/                          | https://godoc.org/github.com/DataDog/dd-trace-go/tracer/contrib/gocql                    |
-| Redis             | https://godoc.org/github.com/go-redis/redis      | https://godoc.org/github.com/DataDog/dd-trace-go/tracer/contrib/redigo                   |
-| MySQL             | https://godoc.org/github.com/go-sql-driver/mysql | https://godoc.org/github.com/DataDog/dd-trace-go/tracer/contrib/sqltraced/parsedsn/mysql |
-| Postgres (lib/pq) | https://godoc.org/github.com/lib/pq              | https://godoc.org/github.com/DataDog/dd-trace-go/tracer/contrib/sqltraced/parsedsn/pq    |
+|Elasticsearch | https://github.com/olivere/elastic | https://godoc.org/github.com/DataDog/dd-trace-go/contrib/olivere/elastic |
+|gocql| https://github.com/gocql/gocql | https://godoc.org/github.com/DataDog/dd-trace-go/contrib/gocql/gocql |
+|Go Redis| https://github.com/go-redis/redis |https://godoc.org/github.com/DataDog/dd-trace-go/contrib/go-redis/redis |
+|HTTP | https://godoc.org/github.com/DataDog/dd-trace-go/contrib/net/http | https://godoc.org/github.com/DataDog/dd-trace-go/contrib/net/http |
+|HTTP router|https://github.com/julienschmidt/httprouter| https://godoc.org/github.com/DataDog/dd-trace-go/contrib/julienschmidt/httprouter |
+|Redigo Redis| https://github.com/garyburd/redigo | https://godoc.org/github.com/DataDog/dd-trace-go/contrib/garyburd/redigo |
+|SQL| https://godoc.org/github.com/DataDog/dd-trace-go/contrib/database/sql |https://godoc.org/github.com/DataDog/dd-trace-go/contrib/database/sql |
+|SQLx | https://github.com/jmoiron/sqlx | https://godoc.org/github.com/DataDog/dd-trace-go/contrib/jmoiron/sqlx |
 {{% /table %}}
 
 ## Further Reading
