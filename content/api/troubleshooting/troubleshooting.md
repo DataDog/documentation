@@ -25,4 +25,4 @@ There are also certain fields which are not mandatory for submission, but do req
 
 Any other text results in a 202 'success' but no event showing up. Having an invalid `source_type_name` don't prevent the event from showing up, but that field is dropped upon submission.
 
-**Note**: Our API is keys case-sensitive, all your JSON attributes for POST endpoints should be in lowercase.
+**Note**: Our API keys are case-sensitive. All your JSON attributes for POST endpoints should be in lowercase.
