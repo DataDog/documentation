@@ -72,10 +72,10 @@ contains JSON or code that you would NOT like to be escaped, use triple braces i
 
 #### {{comparator}} template variables
 
-The `{{comparator}}` template variable's value is always a relational operator. It correlates to the relational value selected in the monitor's "Set alert conditions" section:
+The `{{comparator}}` template variable's value is always a relational operator. It corresponds to the relational value selected in the monitor's "Set alert conditions" section:
 {{< img src="monitors/notifications/comparator_alert.png" alt="comparator_alert" responsive="true" popup="true" >}}
 
-For example, when an alert set to trigger when a value rises "above" 50, this syntax:
+For example, when an alert is set to trigger when a value rises "above" 50, the following syntax:
 ```
   {{value}} {{comparator}} {{threshold}}
 ```
@@ -102,7 +102,7 @@ Step 3 of the monitor editor.
 
 #### `{{is_alert}}` & `{{is_warning}}`
 
-These variables use simple if-else logic to display a different message depending on whether the event is a trigger, warning, recovery, or no data notification with the following syntax:
+These variables use simple `if-else` logic to display a different message depending on the event type (*warning*, *recovery*, *no data*...)
 
 {{< img src="monitors/notifications/conditionalvars.png" alt="conditional vars" responsive="true" popup="true" >}}
 
@@ -121,10 +121,10 @@ and the recovery notification:
 #### `{{is_recovery}}` or `{{is_alert_recovery}}` 
 
 * `{{is_recovery}}` triggers and a monitor recovers indifferently either from a **WARNING** state or an **ALERT** state. 
-* `{{is_alert_recovery}}` triggers when a monitor recovers directly from an **ALERT** state to **OK** state. 
-* `{{is_warning_recovery}}` triggers when a monitor recovers from a **WARNING** state to **OK** state
+* `{{is_alert_recovery}}` triggers when a monitor recovers directly from an **ALERT** state to an **OK** state. 
+* `{{is_warning_recovery}}` triggers when a monitor recovers from a **WARNING** state to an **OK** state
 
-This means that if the monitor switches from ALERT to WARNING then OK state:
+This means that if the monitor switches from an **ALERT** to a **WARNING** to an **OK** state:
 
 * the `{{is_recovery}}` would trigger
 * the `{{is_alert_recovery}}` wouldn't trigger 
@@ -151,7 +151,7 @@ Here is an example of how you can give a different message depending on the trig
 
 {{< img src="monitors/notifications/scope_match_editor.png" alt="scope match editor" responsive="true" popup="true">}}
 
-**Note**: To use `{{is_match}}` conditional to check if a `tag_variable` is **NOT** empty, append `.name` after your tag name, for instance:  
+**Note**: To use the `{{is_match}}` conditional to check if a `tag_variable` is **NOT** empty, append `.name` after your tag name, for instance:  
   
   ```
   {{#is_match "tag_variable.name" ""}}
@@ -221,13 +221,13 @@ Find below additional examples of links that could be added to Monitors to provi
   ```
   https://app.datadoghq.com/infrastructure/map?fillby=avg%3Acpuutilization&sizeby=avg%3Anometric&filter=cassandra 
   ```
-  The above link has more customizable options than your standard System Dashboard.  Here you have additional variables to define.  Most common variables passed into this URL are the following **Fillby, sizeby, filter**: 
+  The above link has more customizable options than your standard System Dashboard.  Here you have additional variables to define.  Most common variables passed into this URL are the following **fillby, sizeby, filter**: 
 
   * `fillby` is defined by adding `fillby:avg:<MetricName>`.  
   * `sizeby` is defined by adding `sizeby:avg:<SecondMetricName>`.
   * `filter` is used to specify a specific integration (i.e. Cassandra, mysql, apache, snmp, etc) by adding `filter=<integration_name>`
   {{< img src="monitors/notifications/hostmap_url.png" alt="hostmap_url" responsive="true" popup="true" style="width:70%;">}}
-  The above colors fill the hexagons by `system.cpu.system`, it sizes the hexagons by `system.cpu.stolen` and add a filter to only include Cassandra hosts.  
+  The above colors fill the hexagons by `system.cpu.system`, it sizes the hexagons by `system.cpu.stolen` and add a filter to only include Cassandra hosts.   
   
 
 *  **Integration Dashboards**- If you are building Application or Integration specific Monitors, link to that specific Integration Dashboard as well as adding a scope for the host that triggered the monitor.  
@@ -241,7 +241,7 @@ Find below additional examples of links that could be added to Monitors to provi
   ```
   https://app.datadoghq.com/monitors/manage?q=scope:host:{{host.name}}
   ```
-  The above links to all monitors for this host. You have other options available to further refine the link.  
+  The above link links to all monitors for this host. You have other options available to further refine the link.  
   For example, if you would only like monitors that are in an Alert State, you can add the following `status:Alert` (other statuses that can be leveraged are WARN, NO%20DATA, OK and MUTED).  Below is an example link:
   ```
   https://app.datadoghq.com/monitors/manage?q=scope:host:{{host.name}}&status:Alert
