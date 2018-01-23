@@ -48,9 +48,9 @@ ___
 {{% table responsive="true" %}}
 | Framework   | Framework Documentation               | GoDoc Datadog Documentation                                                        |
 |-------------|---------------------------------------|------------------------------------------------------------------------------------|
-| Gin         | https://gin-gonic.github.io/gin/      | https://godoc.org/github.com/DataDog/dd-trace-go/tracer/contrib/gin-gonic/gintrace |
-| Gorilla Mux | http://www.gorillatoolkit.org/pkg/mux | https://godoc.org/github.com/DataDog/dd-trace-go/tracer/contrib/gorilla/muxtrace   |
-| gRPC        | https://github.com/grpc/grpc-go       | https://godoc.org/github.com/DataDog/dd-trace-go/tracer/contrib/tracegrpc          |
+| Gin         | https://gin-gonic.github.io/gin/      | https://godoc.org/github.com/DataDog/dd-trace-go/contrib/gin-gonic/gintrace |
+| Gorilla Mux | http://www.gorillatoolkit.org/pkg/mux | https://godoc.org/github.com/DataDog/dd-trace-go/contrib/gorilla/muxtrace   |
+| gRPC        | https://github.com/grpc/grpc-go       | https://godoc.org/github.com/DataDog/dd-trace-go/contrib/tracegrpc          |
 {{% /table %}}
 
 ### Library Compatibility
@@ -63,11 +63,11 @@ ___
 {{% table responsive="true" %}}
 | Library           | Library Documentation                            | GoDoc Datadog Documentation                                                              |
 |-------------------|--------------------------------------------------|------------------------------------------------------------------------------------------|
-| Elasticsearch     | https://olivere.github.io/elastic/               | https://godoc.org/github.com/DataDog/dd-trace-go/tracer/contrib/elastictraced            |
-| Cassandra (gocql) | http://gocql.github.io/                          | https://godoc.org/github.com/DataDog/dd-trace-go/tracer/contrib/gocql                    |
-| Redis             | https://godoc.org/github.com/go-redis/redis      | https://godoc.org/github.com/DataDog/dd-trace-go/tracer/contrib/redigo                   |
-| MySQL             | https://godoc.org/github.com/go-sql-driver/mysql | https://godoc.org/github.com/DataDog/dd-trace-go/tracer/contrib/sqltraced/parsedsn/mysql |
-| Postgres (lib/pq) | https://godoc.org/github.com/lib/pq              | https://godoc.org/github.com/DataDog/dd-trace-go/tracer/contrib/sqltraced/parsedsn/pq    |
+| Elasticsearch     | https://olivere.github.io/elastic/               | https://godoc.org/github.com/DataDog/dd-trace-go/contrib/elastictraced            |
+| Cassandra (gocql) | http://gocql.github.io/                          | https://godoc.org/github.com/DataDog/dd-trace-go/contrib/gocql                    |
+| Redis             | https://godoc.org/github.com/go-redis/redis      | https://godoc.org/github.com/DataDog/dd-trace-go/contrib/redigo                   |
+| MySQL             | https://godoc.org/github.com/go-sql-driver/mysql | https://godoc.org/github.com/DataDog/dd-trace-go/contrib/sqltraced/parsedsn/mysql |
+| Postgres (lib/pq) | https://godoc.org/github.com/lib/pq              | https://godoc.org/github.com/DataDog/dd-trace-go/contrib/sqltraced/parsedsn/pq    |
 {{% /table %}}
 
 ## Further Reading
