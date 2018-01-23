@@ -62,13 +62,16 @@ ___
 
 
 {{% table responsive="true" %}}
-| Library           | Library Documentation                            | GoDoc Datadog Documentation                                                              |
+| Library| Library Documentation| GoDoc Datadog Documentation |
 |-------------------|--------------------------------------------------|------------------------------------------------------------------------------------------|
-| Elasticsearch     | https://olivere.github.io/elastic/               | https://godoc.org/github.com/DataDog/dd-trace-go/contrib/olivere/elastic            |
-| Cassandra (gocql) | http://gocql.github.io/                          | https://godoc.org/github.com/gocql/gocql
-| Redis             | https://godoc.org/github.com/go-redis/redis      | https://godoc.org/github.com/DataDog/dd-trace-go/contrib/go-redis/redis                   |
-| MySQL             | https://godoc.org/github.com/go-sql-driver/mysql | https://godoc.org/github.com/go-sql-driver/mysql |
-| Postgres (lib/pq) | https://godoc.org/github.com/lib/pq              | https://godoc.org/github.com/lib/pq    |
+|Elasticsearch | https://github.com/olivere/elastic | https://godoc.org/github.com/DataDog/dd-trace-go/contrib/olivere/elastic |
+|gocql| https://github.com/gocql/gocql | https://godoc.org/github.com/DataDog/dd-trace-go/contrib/gocql/gocql |
+|Go Redis| https://github.com/go-redis/redis |https://godoc.org/github.com/DataDog/dd-trace-go/contrib/go-redis/redis |
+|HTTP | https://godoc.org/github.com/DataDog/dd-trace-go/contrib/net/http | https://godoc.org/github.com/DataDog/dd-trace-go/contrib/net/http |
+|HTTP router|https://github.com/julienschmidt/httprouter| https://godoc.org/github.com/DataDog/dd-trace-go/contrib/julienschmidt/httprouter |
+|Redigo Redis| https://github.com/garyburd/redigo | https://godoc.org/github.com/DataDog/dd-trace-go/contrib/garyburd/redigo |
+|SQL| https://godoc.org/github.com/DataDog/dd-trace-go/contrib/database/sql |https://godoc.org/github.com/DataDog/dd-trace-go/contrib/database/sql |
+|SQLx | https://github.com/jmoiron/sqlx | https://godoc.org/github.com/DataDog/dd-trace-go/contrib/jmoiron/sqlx |
 {{% /table %}}
 
 ## Further Reading
