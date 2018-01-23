@@ -235,7 +235,7 @@ To iterate quickly on your unit and mock tests, instead of running all the tests
 
 ```
 # run unit and mock tests, in the virtualenv
-$ bundle exec rake exec["nosetests my_integration/test_*.py -A 'not requires'"]
+$ bundle exec rake exec["nosetests my_integration/test/test_*.py -A 'not requires'"]
 ```
 
 ### Docker test environments
@@ -286,5 +286,5 @@ In our experience building integrations, we've also faced a number of challenges
 [10]: https://github.com/DataDog/integrations-core/blob/master/mysql/test/ci/mysql.rake
 [11]: /agent/installcoreextra
 [12]: https://github.com/DataDog/integrations-extras/compare
-[13]: https://github.com/DataDog/integrations-core/tree/master/mongo/ci
+[13]: https://github.com/DataDog/integrations-core/tree/master/mongo/test/ci
 [14]: https://github.com/DataDog/integrations-core/blob/master/mysql/check.py#L1169
