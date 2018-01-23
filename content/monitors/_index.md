@@ -3,6 +3,7 @@ title: Alerting
 kind: documentation
 aliases:
     - /guides/monitors/
+    - /guides/monitoring/
 description: Create & manage your notifications
 ---
 
