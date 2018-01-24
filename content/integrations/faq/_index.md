@@ -66,6 +66,10 @@ kind: faq
 ## Hadoop
 * [Hadoop Distributed File System (HDFS) Integration Error](/integrations/faq/hadoop-distributed-file-system-hdfs-integration-error)
 
+## HAProxy
+
+* [HAProxy in multi-process mode](/integrations/faq/haproxy-multi-process)
+
 ## Jira
 * [I've set up the JIRA integration, now how do I get events and tickets created?](/integrations/faq/i-ve-set-up-the-jira-integration-now-how-do-i-get-events-and-tickets-created)
 
