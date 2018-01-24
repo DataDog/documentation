@@ -121,7 +121,7 @@ To display only your formula, un-check your metrics **a** and **b**:
 
 ### Metric aliasing
 
-Each queries or formulas, can be aliased. The alias override your query that is displayed on your graph, which is particularly helpful too long metric names.  
+Each query or formula can be aliased. The alias overrides the display on the graph and legend, which is particularly helpful for long metric names or to clarify a formula.  
 At the end of your query/formula click on the **as...** button, then enter your metric alias:  
 
 {{< img src="graphing/index/metric_alias.png" alt="metric alias" responsive="true" popup="true" style="width:75%;" >}}
