@@ -128,18 +128,28 @@ At the end of your query/formula click on the **as...** button, then enter your 
 
 ### Set Y-axis scale
 
-By default, the Y-axis for your graph is set to linear with the minimum and maximum automatically set based on the values in the data and including zero. Change the Y-axis scale with the **Show Y-Axis Controls** button.  
+The Datadog y-axis controls are available via the UI and the JSON editor. They allow you to:
+
+* Clip y-axis to specific ranges
+* Remove outliers either by specifying a percentage or an absolute value to remove outliers
+* Change y-axis scale from linear to log, sqrt or power scale
+
+Change the Y-axis scale with the **Show Y-Axis Controls** button:
 
 {{< img src="graphing/index/y_axis_control.png" alt="y axis control" responsive="true" popup="true" style="width:75%;" >}}
 
-Choose your scale type between:
+There are three configuration settings:
 
-* **linear**: A linear scale (default scale)
-* **log**: A logarithmic scale 
-* **pow**: A Power of 10 scale
-* **sqrt**: A square root scale
+* `Min`/`max` (optional): Specifies minimum (and/or maximum) value to show on y-axis. It takes a number, or "auto" for default behavior. Default value is "auto".
 
-You can then set a `min` and `max` value for your graph and select whether zero should always be shown or not.
+* `Scale` (optional): Specifies the scale type. Possible values:
+    
+    * *linear*: A linear scale (default scale)
+    * *log*: A logarithmic scale 
+    * *pow*: A Power of 10 scale
+    * *sqrt*: A square root scale
+
+* `Always include zero` (optional):  Specifies whether or not to always include zero or fit the axis to the data range. Default is to always include zero.
 
 ### Overlay events for additional context
 
