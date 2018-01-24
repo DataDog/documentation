@@ -70,7 +70,7 @@ external_redirect: /api/#create-a-monitor
 * `tags` [*optional*, *default* = **empty list**]: 
     A list of tags to associate with your monitor. When getting all monitor details via the API, use the `monitor_tags` argument to filter results by these tags. It is only available via the API and isn't visible or editable in the Datadog UI.
 
-* `options` [*optional*, *default*=**None**]:  
+* `options` [*optional*, *default*=**{}**]:  
     A dictionary of options for the monitor. There are options that are common to all types as well as options that are specific to certain monitor types.  
     ##### Common Options
 
