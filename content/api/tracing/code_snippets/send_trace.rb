@@ -21,7 +21,7 @@ path = "/v0.3/traces"
 
 req = Net::HTTP::Put.new(path, initheader = { 'Content-Type' => 'application/json'})
 
-req.body = { \
+req.body = [[{ \
 			"trace_id": TRACE_ID, \
 			"span_id": SPAN_ID, \
 			"name": "span_name", \
@@ -30,6 +30,6 @@ req.body = { \
 			"type": "web", \
 			"start": START, \
 			"duration": DURATION \
-		}
+		}]]
 
 response = Net::HTTP.new(host, port).start {|http| http.request(req) }

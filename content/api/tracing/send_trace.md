@@ -9,6 +9,23 @@ external_redirect: /api/#send-traces
 Datadog's APM allows you to collect performance metrics by tracing your code to determine which parts of your application are slow or inefficient.
 
 Tracing data is sent to the Datadog Agent via an HTTP API. We provide some [official libraries](/tracing/#instrument-your-application) that simplify sending metrics to the Datadog Agent, however you may want to interact directly with the API to instrument applications that cannot use the libraries or are written in languages that don't yet have an official Datadog Tracing library.
+
+Traces can be sent as an array of [trace](/tracing/terminology/#trace):
+```
+[ trace1, trace2, trace3 ]
+```
+
+and each trace is an array of [span](/tracing/terminology/#span):
+```
+trace1 = [ span, span2, span3 ]
+```
+
+and each span is a dictionary with a `trace_id`, `spand_id`, `resource`..
+
+[Learn more about the APM (tracing) terminology](/tracing/terminology)
+
+**Note**: Each span within a trace should use the same trace_id.
+
 ##### Arguments
 
 *   `trace_id` - _Required._ The unique integer (64-bit unsigned) ID of the trace containing this span.
@@ -22,7 +39,3 @@ Tracing data is sent to the Datadog Agent via an HTTP API. We provide some [offi
 *   `parent_id` - _Optional._ The span integer ID of the parent span.
 *   `error` - _Optional._ Set this value to 1 to indicate if an error occured. If an error occurs, you should pass additional information, such as the error message, type and stack information in the `meta` property.
 *   `meta` - _Optional._ A dictionary of key-value metadata. e.g. tags.
-
-[Learn more about the APM (tracing) terminology](/tracing/terminology)
-
-Note: You may send multiple spans within a trace array and each span within a trace should use the same trace_id. You may also send multiple traces.

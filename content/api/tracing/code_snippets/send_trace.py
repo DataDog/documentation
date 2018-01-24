@@ -17,7 +17,7 @@ DURATION= int(time.time() * 1000000) - START
 
 # Send the traces.
 headers = {'Content-type': 'application/json'}
-data = {\
+data = [[{\
 	"trace_id": TRACE_ID,\
 	"span_id": SPAN_ID,\
 	"name": "span_name",\
@@ -25,6 +25,6 @@ data = {\
 	"service": "service_name",\
 	"type": "web",\
 	"start": START,\
-	"duration": DURATION}
+	"duration": DURATION}]]
 	
 requests.put('http://localhost:8126/v0.3/traces', data = data, headers=headers)
