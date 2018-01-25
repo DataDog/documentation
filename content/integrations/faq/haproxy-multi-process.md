@@ -21,7 +21,7 @@ Refreshing the page in your browser shows the stats from a different process tha
 
 {{< img src="integrations/faq/haproxy_stats_2.png" alt=" HAProxy stats 2" responsive="true" popup="true" style="width:85%;" >}}
 
-If your HAproxy integration is no well configured, i.e., you may notice:
+If your HAproxy integration is not well configured, you may notice:
 
 * Missing points on HAProxy metrics that are reported as rate (can be checked here https://github.com/DataDog/integrations-core/blob/master/haproxy/check.py) and for which you should get a value each 20 seconds.
 * High values and high variations on metrics that are low in normal conditions such as 5xx code error responses.
