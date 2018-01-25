@@ -128,7 +128,7 @@ class PreBuild:
         self.regex_h1 = re.compile(r'^#{1}(?!#)(.*)', re.MULTILINE)
         self.regex_h1_replace = re.compile(r'^(#{1})(?!#)(.*)', re.MULTILINE)
         self.regex_metrics = re.compile(r'(#{3} Metrics\n)([\s\S]*this integration.|[\s\S]*this check.)([\s\S]*)(#{3} Events\n)', re.DOTALL)
-        self.regex_service_check = re.compile(r'(#{3} Service Checks\n)([\s\S]*service check at this time.)([\s\S]*)(#{2} Troubleshooting\n)', re.DOTALL)
+        self.regex_service_check = re.compile(r'(#{3} Service Checks\n)([\s\S]*does not include any service check at this time.)([\s\S]*)(#{2} Troubleshooting\n)', re.DOTALL)
         self.regex_fm = re.compile(r'(?:-{3})(.*?)(?:-{3})(.*)', re.DOTALL)
         self.regex_source = re.compile(r'(\S*FROM_DISPLAY_NAME\s*=\s*\{)(.*?)\}', re.DOTALL)
         self.datafile_json = []
