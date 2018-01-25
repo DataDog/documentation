@@ -7,6 +7,7 @@ import linecache
 import platform
 import re
 import tempfile
+import shutil
 from collections import OrderedDict
 from functools import partial, wraps
 from itertools import chain, zip_longest
@@ -120,12 +121,14 @@ class PreBuild:
         self.data_dir = '{0}{1}{2}'.format(abspath(normpath(options.source)), sep, 'data' + sep)
         self.content_dir = '{0}{1}{2}'.format(abspath(normpath(options.source)), sep, 'content' + sep)
         self.data_integrations_dir = join(self.data_dir, 'integrations') + sep
+        self.data_service_checks_dir = join(self.data_dir, 'service_checks') + sep
         self.content_integrations_dir = join(self.content_dir, 'integrations') + sep
         self.extract_dir = '{0}'.format(join(self.tempdir, "extracted") + sep)
         self.integration_datafile = '{0}{1}{2}'.format(abspath(normpath(self.options.source)), sep, "integrations.json")
         self.regex_h1 = re.compile(r'^#{1}(?!#)(.*)', re.MULTILINE)
         self.regex_h1_replace = re.compile(r'^(#{1})(?!#)(.*)', re.MULTILINE)
         self.regex_metrics = re.compile(r'(#{3} Metrics\n)([\s\S]*this integration.|[\s\S]*this check.)([\s\S]*)(#{3} Events\n)', re.DOTALL)
+        self.regex_service_check = re.compile(r'(#{3} Service Checks\n)([\s\S]*service check at this time.)([\s\S]*)(#{2} Troubleshooting\n)', re.DOTALL)
         self.regex_fm = re.compile(r'(?:-{3})(.*?)(?:-{3})(.*)', re.DOTALL)
         self.regex_source = re.compile(r'(\S*FROM_DISPLAY_NAME\s*=\s*\{)(.*?)\}', re.DOTALL)
         self.datafile_json = []
@@ -148,6 +151,7 @@ class PreBuild:
         })
         self.initial_integration_files = glob.glob('{}*.md'.format(self.content_integrations_dir))
         makedirs(self.data_integrations_dir, exist_ok=True)
+        makedirs(self.data_service_checks_dir, exist_ok=True)
         makedirs(self.content_integrations_dir, exist_ok=True)
 
     @staticmethod
@@ -191,10 +195,11 @@ class PreBuild:
         """
         print('Processing')
 
-        dogweb_globs = ['integration/**/*_metadata.csv', 'integration/**/manifest.json', 'integration/**/README.md',
+        dogweb_globs = ['integration/**/*_metadata.csv', 'integration/**/manifest.json',
+                        'integration/**/service_checks.json', 'integration/**/README.md',
                         'dd/utils/context/source.py']
-        integrations_globs = ['**/metadata.csv', '**/manifest.json', '**/README.md']
-        extras_globs = ['**/metadata.csv', '**/manifest.json', '**/README.md']
+        integrations_globs = ['**/metadata.csv', '**/manifest.json', '**/service_checks.json', '**/README.md']
+        extras_globs = ['**/metadata.csv', '**/manifest.json', '**/service_checks.json', '**/README.md']
 
         # sync from dogweb, download if we don't have it (token required)
         if not self.options.dogweb:
@@ -226,6 +231,7 @@ class PreBuild:
             self.process_source_attribute(file_name)
             self.process_integration_metric(file_name)
             self.process_integration_manifest(file_name)
+            self.process_service_checks(file_name)
             self.process_integration_readme(file_name)
 
         self.merge_integrations()
@@ -307,7 +313,7 @@ class PreBuild:
         set is_public to false to hide integrations we merge later
         :param file_name: path to a manifest json file
         """
-        if file_name.endswith('.json'):
+        if file_name.endswith('manifest.json'):
             names = [d.get('name', '').lower() for d in self.datafile_json if 'name' in d]
             with open(file_name) as f:
                 data = json.load(f)
@@ -321,19 +327,33 @@ class PreBuild:
                 else:
                     self.datafile_json.append(data)
 
+    def process_service_checks(self, file_name):
+        """
+        Take a single service_checks.json file and copies it to the data folder
+        as the integration name it came from e.g /data/service_checks/docker.json
+        :param file_name: path to a service_checks json file
+        """
+        if file_name.endswith('service_checks.json'):
+            new_file_name = '{}.json'.format(basename(dirname(normpath(file_name))))
+            shutil.copy(file_name, self.data_service_checks_dir + new_file_name)
+
     def process_integration_readme(self, file_name):
         """
         Take a single README.md file and
         1. extract the first h1, if this isn't a merge item
         2. inject metrics after ### Metrics header if metrics exists for file
-        3. inject hugo front matter params at top of file
-        4. write out file to content/integrations with filename changed to integrationname.md
+        3. inject service checks after ### Service Checks if file exists
+        4. inject hugo front matter params at top of file
+        5. write out file to content/integrations with filename changed to integrationname.md
         :param file_name: path to a readme md file
         """
         if file_name.endswith('.md'):
             metrics = glob.glob('{path}{sep}*metadata.csv'.format(path=dirname(file_name), sep=sep))
             metrics = metrics[0] if len(metrics) > 0 else None
             metrics_exist = metrics and exists(metrics) and linecache.getline(metrics, 2)
+            service_check = glob.glob('{file}.json'.format(file=self.data_service_checks_dir + basename(dirname(file_name))))
+            service_check = service_check[0] if len(service_check) > 0 else None
+            service_check_exist = service_check and exists(service_check)
             manifest = '{0}{1}{2}'.format(dirname(file_name), sep, 'manifest.json')
             manifest_json = json.load(open(manifest)) if exists(manifest) else {}
             new_file_name = '{}.md'.format(basename(dirname(file_name)))
@@ -345,6 +365,8 @@ class PreBuild:
                     result = re.sub(self.regex_h1, '', result, 0)
                 if metrics_exist:
                     result = re.sub(self.regex_metrics, r'\1{{< get-metrics-from-git "%s" >}}\n\3\4'%format(title), result, 0)
+                if service_check_exist:
+                    result = re.sub(self.regex_service_check, r'\1{{< get-service-checks-from-git "%s" >}}\n\3\4' % format(title), result, 0)
                 result = self.add_integration_frontmatter(new_file_name, result)
                 if not exist_already:
                     with open(self.content_integrations_dir + new_file_name, 'w') as out:
