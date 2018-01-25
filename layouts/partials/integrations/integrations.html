@@ -21,7 +21,12 @@
     {{ range $i, $e := $v.Params.categories }}
         {{ $.Scratch.Add "curr_categories" (print "cat-" (replace $e "/" "" | urlize)) }}
     {{ end }}
-    {{ $.Scratch.Add "ints" (dict "id" $k "name" $v.Params.name "tags" ($.Scratch.Get "curr_categories") "item_class" "" "redirect" $v.Params.doc_link "blurb" $v.Params.short_description "public_title" $v.Params.public_title) }}
+    {{ $urlname := $v.File.TranslationBaseName }}
+    {{ $src := (print "integrations_logos/" ($urlname | lower) ".png")}}
+    {{ $indx := (index .Site.Data.manifests.images $src )}}
+    {{ if $indx }}
+        {{ $.Scratch.Add "ints" (dict "id" $k "name" $v.Params.name "tags" ($.Scratch.Get "curr_categories") "item_class" "" "redirect" $v.Params.doc_link "blurb" $v.Params.short_description "public_title" $v.Params.public_title) }}
+    {{ end }}
 {{ end }}
 
 {{ $json := $.Scratch.Get "ints" | jsonify }}
@@ -65,7 +70,6 @@
         {{ $formatname := $.Scratch.Get "formatname" }}
 
         {{ $urlname := $v.File.TranslationBaseName }}
-
         {{ $src := (print "integrations_logos/" ($urlname | lower) ".png")}}
         {{ $indx := (index .Site.Data.manifests.images $src )}}
 
