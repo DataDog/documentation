@@ -9,7 +9,7 @@ further_reading:
 ---
 
 ### Agent 5+
-](/agent/basic_agent_usage/deb)
+
 |OS| Supported versions|
 |:----|:----|
 |[Debian x86_64](/agent/basic_agent_usage/deb) | Debian 7 (wheezy) and above |
