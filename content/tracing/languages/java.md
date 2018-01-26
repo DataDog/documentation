@@ -1,8 +1,6 @@
 ---
 title: Tracing Java Applications
 kind: Documentation
-aliases:
-- /tracing/java/
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-java"
   tag: "Github"
@@ -198,7 +196,7 @@ public class Application {
 }
 ```
 
-Notice the above examples only use the OpenTracing classes. Please reference the [OpenTracing API](https://github.com/opentracing/opentracing-java) for more details and information. [Additional documentation on the api](docs/opentracing-api.md) is also available.
+Notice the above examples only use the OpenTracing classes. Please reference the [OpenTracing API](https://github.com/opentracing/opentracing-java) for more details and information.
 
 ## Sampling / distributed tracing
 
