@@ -48,6 +48,7 @@ clean-exe:  ## remove execs.
 
 clean-integrations:  ## remove built integrations files.
 	@rm -rf data/integrations
+	@rm -rf data/service_checks
 	@find ./content/integrations -type f -maxdepth 1 \
 	    -a -not -name '_index.md' \
 	    -a -not -name 'cloudcheckr.md' \

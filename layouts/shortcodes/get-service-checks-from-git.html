@@ -1,0 +1,30 @@
+{{ $params := .Params }}
+
+{{ $integration_name := .Page.Params.git_integration_title }}
+
+{{ if (.Get 0 ) }}
+
+  {{ $.Scratch.Set "integration" (.Get 0) }}
+
+{{ else }}
+
+  {{ $.Scratch.Set "integration" $integration_name }}
+
+{{ end }}
+
+{{ $integration := $.Scratch.Get "integration" }}
+
+{{ if or (not (eq $.Page.Site.Params.environment "local")) ($.Page.Site.Data.service_checks) }}
+
+  {{ $data := index $.Page.Site.Data.service_checks $integration }}
+  {{ range $data }}
+
+    <p>
+      <strong>{{ .check }}</strong><br>
+      {{ .description | markdownify }}
+    </p>
+
+  {{ end }}
+
+
+{{ end }}

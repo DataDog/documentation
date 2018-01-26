@@ -4,6 +4,7 @@ static/css/
 static/js/
 static/images/
 data/integrations/
+data/service_checks/
 data/manifests/
 content/integrations/*.md
 !content/integrations/_index.md
