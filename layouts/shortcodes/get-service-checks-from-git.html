@@ -21,7 +21,7 @@
 
     <p>
       <strong>{{ .check }}</strong><br>
-      {{ .description }}
+      {{ .description | markdownify }}
     </p>
 
   {{ end }}
