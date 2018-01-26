@@ -57,6 +57,7 @@ During the beta phase of Datadog Logs, not all integrations include log configur
 * [MySQL](/integrations/mysql/#log-collection)
 * [Nginx](/integrations/nginx/#log-collection)
 * [PostgreSQL](/integrations/postgres/#log-collection)
+* [Varnish](/integrations/varnish/#log-collection)
 
 ### The Advantage of Collecting JSON-formatted logs
 
