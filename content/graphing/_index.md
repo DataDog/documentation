@@ -146,7 +146,7 @@ There are three configuration settings:
     
     * *linear*: A linear scale (default scale)
     * *log*: A logarithmic scale 
-    * *pow*: A Power of 10 scale
+    * *pow*: A Power of 2 scale (2 is default, but can be modified in json)
     * *sqrt*: A square root scale
 
 * `Always include zero` (optional):  Specifies whether or not to always include zero or fit the axis to the data range. Default is to always include zero.
