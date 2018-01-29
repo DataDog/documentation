@@ -125,22 +125,22 @@ class InstrumentedClass {
 
     void method0() {
         /* 
-        1. Configure your application using environment variables or system properties
-        2. Using dd-java-agent (-javaagent:/path/to/dd-java-agent.jar),
-        GlobalTracer is automatically instantiated.
-        */
+         * 1. Configure your application using environment variables or system properties
+         * 2. Using dd-java-agent (-javaagent:/path/to/dd-java-agent.jar),
+         *    GlobalTracer is automatically instantiated.
+         */
         Tracer tracer = GlobalTracer.get();
 
         Scope scope = tracer.buildSpan("operation-name").startActive(true);
         try {
-          scope.span().setTag(DDTags.SERVICE_NAME, "my-new-service");
+            scope.span().setTag(DDTags.SERVICE_NAME, "my-new-service");
 
-          // The code you're tracing
-          Thread.sleep(1000);
+            // The code you're tracing
+            Thread.sleep(1000);
 
-          // If you don't call close(), the span data will NOT make it to Datadog!
+        // If you don't call close(), the span data will NOT make it to Datadog!
         finally {
-          scope.close();
+            scope.close();
         }
     }
 }
@@ -222,11 +222,11 @@ import io.opentracing.util.GlobalTracer;
 public class MyClass {
     @Trace
     public static void myMethod() {
-      // grab the active span out of the traced method
-      DDSpan ddspan = (DDSpan) GlobalTracer.get().activeSpan();
-      // ask the sampler to keep the current trace
-      ddspan.setSamplingPriority(PrioritySampling.USER_KEEP);
-      // method impl follows
+        // grab the active span out of the traced method
+        DDSpan ddspan = (DDSpan) GlobalTracer.get().activeSpan();
+        // ask the sampler to keep the current trace
+        ddspan.setSamplingPriority(PrioritySampling.USER_KEEP);
+        // method impl follows
     }
 }
 ```
