@@ -128,7 +128,7 @@ To combine multiple terms into a complex query, you can use any of the following
 {{% /table %}}
 
 ### Facet search 
-To search on a specific [facet](#facets) you need to [add it as a facet first](#create-a-facet) then add `@` to specify you are searcing on a facet.
+To search on a specific [facet](#facets) you need to [add it as a facet first](#create-a-facet) then add `@` to specify you are searching on a facet.
 
 For instance, if your facet name is **url** and you want to filter on the **url** value *www.datadoghq.com* just enter: 
 
@@ -137,9 +137,9 @@ For instance, if your facet name is **url** and you want to filter on the **url*
 ### Wildcards
 To perform a multi-character wildcard search, use the `*` symbol as follows:
 
-* `service:web*`  matches every log message that have an service starting by “web”.
-* `hello*` matches all log message starting with hello
-* `*hello` matches all log message that ends with hello
+* `service:web*`  matches every log message that has a service starting by “web”.
+* `hello*` matches all log messages starting with hello
+* `*hello` matches all log messages that end with hello
 
 ### Numerical values
 Use `<`,`>`, `<=` or `>=` to perform a search on numerical attributes. For instance, retrieve all logs that have a response time over 100ms with:
@@ -156,8 +156,8 @@ Your logs inherit tags from [hosts](/graphing/infrastructure/) and [integrations
 
 * `test` is searching for the string "test".
 * `("env:prod" OR test)` matches all logs with the tag #env:prod or the tag #test 
-* `(service:srvA OR service:srvB)` or `(service:(srvA OR srvB))` Matches all logs that contains tags #service:srvA or #service:srvB.
-* `("env:prod" AND -”version:beta”)` matches all logs that contains #env:prod and that do not contains #version:beta
+* `(service:srvA OR service:srvB)` or `(service:(srvA OR srvB))` Matches all logs that contain tags #service:srvA or #service:srvB.
+* `("env:prod" AND -”version:beta”)` matches all logs that contain #env:prod and that do not contain #version:beta
 
 ### Autocomplete
 Typing a complex query can be cumbersome. Use the search bar's autocomplete feature to complete your query using existing values:
@@ -166,17 +166,17 @@ Typing a complex query can be cumbersome. Use the search bar's autocomplete feat
 
 ### Saved Searches
 
-Don't loose time building the same views everyday. Saved searches contains your search query, columns and time horizon. They are then available in the search bar thanks to the auto-complete matching whether the search name or query.
+Don't lose time building the same views everyday. Saved searches contain your search query, columns and time horizon. They are then available in the search bar thanks to the auto-complete matching whether the search name or query.
 
 {{< img src="logs/explore/saved_search.png" alt="Saved Search" responsive="true" popup="true">}}
 
 ### Escaping of special characters
-The following attributes are considered as specials: `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/`, `\` and require escaping.
-For instance to search logs that contains `user=12345` the following search must be entered:
+The following attributes are considered as special: `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/`, `\` and require escaping.
+For instance, to search logs that contain `user=12345` the following search must be entered:
 
 `user\=12345`
 
-The same logic must be applied to spaces within log attributes. It is not recommended to have spaces in log attributes but if it was to be the case, spaces require escaping.
+The same logic must be applied to spaces within log attributes. It is not recommended to have spaces in log attributes but in such a case, spaces require escaping.
 If an attribute was called `user.first name`, perform a search on this attribute by escaping the space:
 
 `@user.first\ name:myvalue`
