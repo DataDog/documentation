@@ -248,8 +248,9 @@ Also, frameworks like Spring Boot and Dropwizard inherently work because they us
 
 `dd-java-agent` includes support for automatically tracing the following networking frameworks.
 
-| Framework        | Versions           |
-|:------------- |:-------------|
+
+| Framework      | Versions           |
+|:-------------|:-------------|
 | [OkHTTP](https://github.com/opentracing-contrib/java-okhttp) | 3.x |
 | [Apache HTTP Client](https://github.com/opentracing-contrib/java-apache-httpclient) | 4.3 + |
 | [AWS SDK](https://github.com/opentracing-contrib/java-aws-sdk) | 1.11.0+ |
@@ -260,7 +261,7 @@ Also, frameworks like Spring Boot and Dropwizard inherently work because they us
 `dd-java-agent` includes support for automatically tracing the following database frameworks/drivers.
 
 | Database      | Versions           |
-|:------------- |:-------------|
+|:-------------|:-------------|
 | JDBC | 4.x |
 | [MongoDB](https://github.com/opentracing-contrib/java-mongo-driver) | 3.x |
 | [Cassandra](https://github.com/opentracing-contrib/java-cassandra-driver) | 3.2.x |
