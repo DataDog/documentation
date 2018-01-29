@@ -1,4 +1,8 @@
 {{ $dot := . }}
+{{ $announce := .Site.Params.announcement_banner }}
+{{ if $announce }}
+    {{ partial "announcement_banner/announcement_banner.html" . }}
+{{ end }}
 <header>
     <div class="container">
         <div class="mainnav d-none d-lg-flex row align-items-center no-gutters">
