@@ -105,7 +105,7 @@ logs:
 * [Restart your agent](https://help.datadoghq.com/hc/en-us/articles/203764515-Start-Stop-Restart-the-Datadog-Agent)
 
 ### Stream logs through TCP/UDP
-Set `type` to **tcp** or **udp** depending of your protocol then specify the `port` of your incomming connection.
+Set `type` to **tcp** or **udp** depending of your protocol then specify the `port` of your incoming connection.
 
 Example:
 If your PHP application does not log to a file, but instead forwards its logs via TCP, create a configuration file that specifies the port to receive as in the example below:
@@ -148,7 +148,7 @@ logs:
     - type: exclude_at_match
       name: exclude_datadoghq_users
       ## Regexp can be anything
-      pattern: User=\w+@datadoghq.com
+      pattern: \w+@datadoghq.com
 ```
 
 * **include_at_match**: Only log with a message that includes the pattern are sent to Datadog.
