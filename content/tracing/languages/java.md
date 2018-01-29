@@ -24,7 +24,7 @@ Next, download `dd-java-agent.jar` that contains the agent class files:
 wget -O dd-java-agent.jar 'https://search.maven.org/remote_content?g=com.datadoghq&a=dd-java-agent&v=LATEST'
 ```
 
-Finally, add the following JVM argument when starting your application—in your IDE, your Maven or Gradle application script, or your `java -jar` command:
+Finally, add the following JVM argument when starting your application in your IDE, your Maven or Gradle application script, or your `java -jar` command:
 
 ```
 -javaagent:/path/to/the/dd-java-agent.jar
@@ -34,31 +34,24 @@ Finally, add the following JVM argument when starting your application—in your
 
 The tracer is configured using System Properties and Environment Variables as follows:
 
-| Config             | System Property       | Environment Variable      |  Default           |
-| ------------------ | --------------------- | ------------------------- | ------------------ |
-| service.name       | dd.service.name       | DD_SERVICE_NAME           | `unnamed-java-app` |
-| writer.type        | dd.writer.type        | DD_WRITER_TYPE            | `DDAgentWriter`    |
-| agent.host         | dd.agent.host         | DD_AGENT_HOST             | `localhost`        |
-| agent.port         | dd.agent.port         | DD_AGENT_PORT             | `8126`             |
-| priority.sampling  | dd.priority.sampling  | DD_PRIORITY_SAMPLING      | `false`            |
+| Config             | System Property       | Environment Variable      |  Default           | Description |
+|:------------------ |:--------------------- |:------------------------- |:------------------ |:----- |
+| service.name       | dd.service.name       | DD_SERVICE_NAME           | `unnamed-java-app` | The name of a set of processes that do the same job. Used for grouping stats for your application.|
+| writer.type        | dd.writer.type        | DD_WRITER_TYPE            | `DDAgentWriter`    | Default value sends traces to the trace agent. Configuring with `LoggingWriter` instead writes traces out to the console. |
+| agent.host         | dd.agent.host         | DD_AGENT_HOST             | `localhost`        | Hostname for where to send traces to. If using a containerized environment, configure this to be the host ip.  See our [docker docs](https://docs.datadoghq.com/tracing/docker/) for additional detail. |
+| agent.port         | dd.agent.port         | DD_AGENT_PORT             | `8126`             | Port number the agent is listening on for configured host. |
+| priority.sampling  | dd.priority.sampling  | DD_PRIORITY_SAMPLING      | `false`            | Changes how the client and agent sample traces. See [Sampling / distributed tracing](#sampling-distributed-tracing) section for details. |
 
-
-* **service.name**: The name of a set of processes that do the same job. Used for grouping stats for your application.
-* **writer.type**: Default value sends traces to the trace agent. Configuring with `LoggingWriter` instead write traces out to the console.
-* **agent.host**: Hostname for where to send traces to. If using a containerized environment, configure this to be the host ip.  See our [docker docs](https://docs.datadoghq.com/tracing/docker/) for additional detail.
-* **agent.port**: Port number the agent is listening on for configured host.
-* **priority.sampling**: Changes how the client and agent sample traces. See [Sampling / distributed tracing](#sampling) section below for details.
-
-If the same key type is set for both, the system property configuration takes priority.
+**Note**: If the same key type is set for both, the system property configuration takes priority.
 
 ## Manual Instrumentation 
 
 Before instrumenting your application, review Datadog’s [APM Terminology](/tracing/terminology/) and familiarize yourself with the core concepts of Datadog APM.
 
 If you aren't using a [supported framework instrumentation](#integrations), or you would like additional depth in your application’s traces, you may want to to manually instrument your code.  
-Do this either using the `@Trace` annotation for simple method call tracing or with the `OpenTracing` API for complex tracing.
+Do this either using the [Trace annotation](#trace-annotation) for simple method call tracing or with the [OpenTracing API](#opentracing-api) for complex tracing.
 
-### @Trace Annotation
+### Trace Annotation
 
 Add the `dd-trace-api` dependency to your project. For Maven, add this to `pom.xml`:
 
@@ -80,7 +73,7 @@ Now add `@Trace` to methods to have them be traced when running with `dd-java-ag
 
 ### OpenTracing API
 
-Use the Datadog Tracer (`dd-trace-ot`) library to measure execution times for specific pieces of code. This lets you trace your application more precisely than you can with the Java Agent alone.
+Use the [OpenTracing API](https://github.com/opentracing/opentracing-java) and the Datadog Tracer (dd-trace-ot) library to measure execution times for specific pieces of code. This lets you trace your application more precisely than you can with the Java Agent alone.
 
 #### Setup
 
@@ -131,8 +124,11 @@ import io.opentracing.util.GlobalTracer;
 class InstrumentedClass {
 
     void method0() {
-        // 1. Configure your application using environment variables or system properties
-        // 2. Using the Java Agent (-javaagent;/path/to/agent.jar), the GlobalTracer is automatically instantiated.
+        /* 
+        1. Configure your application using environment variables or system properties
+        2. Using dd-java-agent (-javaagent:/path/to/dd-java-agent.jar),
+        GlobalTracer is automatically instantiated.
+        */
         Tracer tracer = GlobalTracer.get();
 
         Scope scope = tracer.buildSpan("operation-name").startActive(true);
@@ -170,7 +166,7 @@ class InstrumentedClass {
 
 In this case, you don't need to call `scope.close()`.
 
-If you’re not using `dd-trace-java.jar`, you must provide a configured tracer. This can be easily done by using the `TracerFactory` or manually in the bootstrap method (i.e. `main`).
+If you’re not using `dd-trace-java.jar`, you must register a configured tracer with `GlobalTracer`. This can be easily done by calling `GlobalTracer.register(new DDTracer())` early on in your application startup (ie, main method).
 
 ```java
 import datadog.opentracing.DDTracer;
@@ -205,16 +201,16 @@ Priority sampling ensures that distributed traces are complete by assigning and 
 Current Priority Values (more may be added in the future):
 
 |Sampling Value | Effect                                                                                                     |
-|---------------|:----------------------------------------------------------------------------------------------------------:|
+|---------------|:----------------------------------------------------------------------------------------------------------|
 |SAMPLER_DROP   | The sampler automatically decided to not keep the trace. The Agent will drop it.                           |
 |SAMPLER_KEEP   | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side. |
 |USER_DROP      | The user asked to not keep the trace. The Agent will drop it.                                              |
 |USER_KEEP      | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                     |
 
 
-Priority sampling is disabled by default. To enable it, configure the `priority.sampling` flag to `true`. [How to configure the client?](# Configuration).
+Priority sampling is disabled by default. To enable it, configure the `priority.sampling` flag to `true`. [How to configure the client?](#configuration).
 
-Once enabled, the sampler automatically assign a priority to traces, depending on their service and volume.
+Once enabled, the sampler automatically assigns a priority to traces, depending on their service and volume.
 
 You can also set this priority manually to either drop a non-interesting trace or to keep an important one.
 ```java
@@ -224,14 +220,14 @@ import datadog.trace.common.sampling.PrioritySampling;
 import io.opentracing.util.GlobalTracer;
 
 public class MyClass {
-  @Trace
-  public static void myMethod() {
-    // grab the active span out of the traced method
-    DDSpan ddspan = (DDSpan) GlobalTracer.get().activeSpan();
-    // ask the sampler to keep the current trace
-    ddspan.setSamplingPriority(PrioritySampling.USER_KEEP);
-    // method impl follows
-  }
+    @Trace
+    public static void myMethod() {
+      // grab the active span out of the traced method
+      DDSpan ddspan = (DDSpan) GlobalTracer.get().activeSpan();
+      // ask the sampler to keep the current trace
+      ddspan.setSamplingPriority(PrioritySampling.USER_KEEP);
+      // method impl follows
+    }
 }
 ```
 
@@ -242,7 +238,7 @@ public class MyClass {
 `dd-java-agent` includes support for automatically tracing the following web frameworks.
 
 | Server | Versions |
-| ------------- |:-------------|
+|:------------- |:-------------|
 | Java Servlet Compatible | 2.3+, 3.0+ |
 
 *Note:* Many application servers are Servlet compatible, such as Tomcat, Jetty, Websphere, Weblogic, etc.
@@ -253,7 +249,7 @@ Also, frameworks like Spring Boot and Dropwizard inherently work because they us
 `dd-java-agent` includes support for automatically tracing the following networking frameworks.
 
 | Framework        | Versions           |
-| ------------- |:-------------:|
+|:------------- |:-------------|
 | [OkHTTP](https://github.com/opentracing-contrib/java-okhttp) | 3.x |
 | [Apache HTTP Client](https://github.com/opentracing-contrib/java-apache-httpclient) | 4.3 + |
 | [AWS SDK](https://github.com/opentracing-contrib/java-aws-sdk) | 1.11.0+ |
@@ -264,7 +260,7 @@ Also, frameworks like Spring Boot and Dropwizard inherently work because they us
 `dd-java-agent` includes support for automatically tracing the following database frameworks/drivers.
 
 | Database      | Versions           |
-| ------------- |:-------------:|
+|:------------- |:-------------|
 | JDBC | 4.x |
 | [MongoDB](https://github.com/opentracing-contrib/java-mongo-driver) | 3.x |
 | [Cassandra](https://github.com/opentracing-contrib/java-cassandra-driver) | 3.2.x |
