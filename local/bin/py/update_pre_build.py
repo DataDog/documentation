@@ -117,6 +117,12 @@ class PreBuild:
     def __init__(self, opts):
         super().__init__()
         self.options = opts
+        if self.options.dogweb and not self.options.dogweb.endswith(sep):
+            self.options.dogweb = self.options.dogweb + sep
+        if self.options.integrations and not self.options.integrations.endswith(sep):
+            self.options.integrations = self.options.integrations + sep
+        if self.options.extras and not self.options.extras.endswith(sep):
+            self.options.extras = self.options.extras + sep
         self.tempdir = '/tmp' if platform.system() == 'Darwin' else tempfile.gettempdir()
         self.data_dir = '{0}{1}{2}'.format(abspath(normpath(options.source)), sep, 'data' + sep)
         self.content_dir = '{0}{1}{2}'.format(abspath(normpath(options.source)), sep, 'content' + sep)
