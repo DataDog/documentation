@@ -12,7 +12,7 @@ further_reading:
 
 ## Compatibility
 
-We officially support Java 1.7 and higher of both Oracle JDK and OpenJDK.  To see what web frameworks, libraries, and datastores we support, see the Integrations section below.
+We officially support Java 1.7 and higher of both Oracle JDK and OpenJDK.  To see what web frameworks, libraries, and datastores we support, see the [Integrations section](#integrations).
 
 ## Installation and Getting Started
 
@@ -46,9 +46,7 @@ The tracer is configured using System Properties and Environment Variables as fo
 
 ## Manual Instrumentation 
 
-Before instrumenting your application, review Datadog’s [APM Terminology](/tracing/terminology/) and familiarize yourself with the core concepts of Datadog APM.
-
-If you aren't using a [supported framework instrumentation](#integrations), or you would like additional depth in your application’s traces, you may want to to manually instrument your code.  
+Before instrumenting your application, review Datadog’s [APM Terminology](/tracing/terminology/) and familiarize yourself with the core concepts of Datadog APM. If you aren't using a [supported framework instrumentation](#integrations), or you would like additional depth in your application’s traces, you may want to to manually instrument your code.  
 Do this either using the [Trace annotation](#trace-annotation) for simple method call tracing or with the [OpenTracing API](#opentracing-api) for complex tracing.
 
 ### Trace Annotation
@@ -164,7 +162,7 @@ class InstrumentedClass {
 }
 ```
 
-In this case, you don't need to call `scope.close()`.
+In this case, you dont need to call `scope.close()`.
 
 If you’re not using `dd-trace-java.jar`, you must register a configured tracer with `GlobalTracer`. This can be easily done by calling `GlobalTracer.register(new DDTracer())` early on in your application startup (ie, main method).
 
@@ -208,7 +206,7 @@ Current Priority Values (more may be added in the future):
 |USER_KEEP      | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                     |
 
 
-Priority sampling is disabled by default. To enable it, configure the `priority.sampling` flag to `true`. [How to configure the client?](#configuration).
+Priority sampling is disabled by default. To enable it, configure the `priority.sampling` flag to `true` ([see how to configure the client above](#configuration)).
 
 Once enabled, the sampler automatically assigns a priority to traces, depending on their service and volume.
 
@@ -244,10 +242,11 @@ public class MyClass {
 *Note:* Many application servers are Servlet compatible, such as Tomcat, Jetty, Websphere, Weblogic, etc.
 Also, frameworks like Spring Boot and Dropwizard inherently work because they use a Servlet compatible embedded application server.
 
+Don't see your desired networking framework? We're continually adding additional support, [check with our team](/help) to see if we can help.
+
 ### Networking Frameworks
 
 `dd-java-agent` includes support for automatically tracing the following networking frameworks.
-
 
 | Framework      | Versions           |
 |:-------------|:-------------|
@@ -255,6 +254,8 @@ Also, frameworks like Spring Boot and Dropwizard inherently work because they us
 | [Apache HTTP Client](https://github.com/opentracing-contrib/java-apache-httpclient) | 4.3 + |
 | [AWS SDK](https://github.com/opentracing-contrib/java-aws-sdk) | 1.11.0+ |
 | [JMS 2](https://github.com/opentracing-contrib/java-jms) | 2.x |
+
+Don't see your desired networking framework? We're continually adding additional support, [check with our team](/help) to see if we can help.
 
 ### Datastores
 
@@ -265,6 +266,8 @@ Also, frameworks like Spring Boot and Dropwizard inherently work because they us
 | JDBC | 4.x |
 | [MongoDB](https://github.com/opentracing-contrib/java-mongo-driver) | 3.x |
 | [Cassandra](https://github.com/opentracing-contrib/java-cassandra-driver) | 3.2.x |
+
+Don't see your desired networking framework? We're continually adding additional support, [check with our team](/help) to see if we can help.
 
 ## Further Reading
 
