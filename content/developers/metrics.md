@@ -1,5 +1,5 @@
 ---
-title: Sending Metrics with DogStatsD
+title: Metrics
 kind: documentation
 js_dd_docs_methods:
   - metricsGuidePage
