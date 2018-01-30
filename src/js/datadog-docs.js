@@ -73,6 +73,10 @@ $(document).ready(function () {
 
             return false;
         });
+    } else {
+        if(window.location.hash) {
+            moveToAnchor(window.location.hash.substr(1), false);
+        }
     }
 
     // algolia
