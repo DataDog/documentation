@@ -4,6 +4,11 @@ body > header.scrolled ~ .container aside.sidenav .sticky {
   top:66px;
 }
 
+.announcement_banner.open ~ header.scrolled ~ .container aside.sidenav .sticky,
+.announcement_banner.open ~ header.scrolled ~ .container-fluid aside.sidenav-api .sticky {
+  top:96px;
+}
+
 .mobilequicknav {
   display:none;
 }

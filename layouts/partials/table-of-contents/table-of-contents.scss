@@ -5,6 +5,9 @@ $highlightcolor: rgba(120,71,166,.15);
 body > header.scrolled ~ .container .mobile-toc-toggle {
   top:90px;
 }
+.announcement_banner.open ~ .container .mobile-toc-toggle {
+  top:190px;
+}
 
 .mobile-toc-toggle {
   position: fixed;

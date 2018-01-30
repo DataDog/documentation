@@ -606,6 +606,10 @@ params:
     png: "?fm=png&auto=format&lossless=1"
     gif: ""
   static_url: "http://localhost:1313/"
+  announcement_banner:
+    text: "<strong>Logging</strong> is here!"
+    link: "blog/announcing-logs/"
+    exclude: []
   code_languages:
     - display_name: Python
       key: python
