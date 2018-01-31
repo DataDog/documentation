@@ -271,6 +271,27 @@ Example of Note widget for the [API](/api/#screenboards)
 
 Alert graphs are time series graphs showing the current status of any monitor defined on your system.
 
+Example of Alert Graph widget for the [API](/api/#screenboards)
+
+```
+{
+   "title_size": 16,
+   "viz_type": "timeseries",
+   "title": true,
+   "title_align": "left",
+   "title_text": "u",
+   "height": 13,
+   "width": 47,
+   "alert_id": "<ENTER ID>",
+   "timeframe": "1mo",
+   "y": 2,
+   "x": 6,
+   "isShared": false,
+   "type": "alert_graph",
+   "add_timeframe": false
+}
+```
+
 ## Alert Value
 *Supported on Screenboards only*
 
