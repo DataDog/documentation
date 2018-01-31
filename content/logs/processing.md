@@ -124,7 +124,7 @@ However, beware that each incoming status value is mapped as follows:
 * Strings beginning with **n** (case unsensitive) map to **notice (5)**
 * Strings beginning with **i** (case unsensitive) map to **info (6)**
 * Strings beginning with **d**, **trace** or **verbose** (case unsensitive) map to **debug (7)**
-* Strings matching **OK** or **Sucess** (case unsensitive) map to **OK (-1 and 8)**
+* Strings matching **OK** or **Sucess** (case unsensitive) map to **OK**
 * All others map to **info (6)**
 
 ### Attribute Remapper
