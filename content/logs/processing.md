@@ -99,9 +99,9 @@ If your logs put their dates in an attribute not in this list, use the log date 
 If your logs don't contain any of the default attributes and you haven't defined your own date attribute, Datadog timestamps the logs with the date it received them.  
 If the log's official timestamp is from one of the default attributes or [an attribute of your choosing](/logs/processing/#log-date-remapper), Datadog rejects the log if the date is more than 18 hours in the past.
 
-### Log Severity Remapper
+### Log Status Remapper
 
-Use this processor if you want to assign some attributes as the official severity, just enter the attribute path in the processor tile as follow:
+Use this processor if you want to assign some attributes as the official status, just enter the attribute path in the processor tile as follow:
 
 {{< img src="logs/processing/severity_remapper_processor_tile.png" alt="Severity Remapper processor tile" responsive="true" popup="true">}}
 
@@ -113,7 +113,7 @@ Into this log:
 
 {{< img src="logs/processing/log_post_severity_bis.png" alt=" Log post severity bis" responsive="true" popup="true" style="width:40%;" >}}
 
-However, beware that each incoming severity value is mapped as follows:
+However, beware that each incoming status value is mapped as follows:
 
 * Integers from 0 to 7 map to the [Syslog severity standards](https://en.wikipedia.org/wiki/Syslog#Severity_level)
 * Strings beginning with **emerg** or **f** (case unsensitive) map to **emerg (0)**
@@ -124,6 +124,7 @@ However, beware that each incoming severity value is mapped as follows:
 * Strings beginning with **n** (case unsensitive) map to **notice (5)**
 * Strings beginning with **i** (case unsensitive) map to **info (6)**
 * Strings beginning with **d**, **trace** or **verbose** (case unsensitive) map to **debug (7)**
+* Strings matching **OK** or **Sucess** (case unsensitive) map to **OK (-1 and 8)**
 * All others map to **info (6)**
 
 ### Attribute Remapper
