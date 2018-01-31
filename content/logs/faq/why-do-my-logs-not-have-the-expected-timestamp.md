@@ -1,5 +1,5 @@
 ---
-title: Why my logs do not have the expected timestamp?
+title: Why do my logs not have the expected timestamp?
 kind: faq
 further_reading:
 - link: "/logs/processing"

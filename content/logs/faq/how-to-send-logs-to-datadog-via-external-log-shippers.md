@@ -67,7 +67,7 @@ This approach can be especially useful for sending to Datadog logs that have hei
     * **Rsyslog Version >= 8**
 
     ```
-    #For each file to send
+    # For each file to send
     input(type="imfile" ruleset="infiles" Tag="<app_name_of_file1>" File="<path_to_file1>" StateFile="<unique_file_id1>")
     ```
 4. Send the logs to your Datadog platform
@@ -140,7 +140,7 @@ This approach can be especially useful for sending to Datadog logs that have hei
     Do not forge to replace mysourcename by the appropriate value.  
 
 9. (Optional) Datadog cuts inactive connections after a period of inactivity.  
-    For some reason, there are Rsyslog versions that are not able to reconnect properly when necessary. To mitigate this issue we propose to use time markers so the connection never stops. Add the following 2 lines in your Rsyslog configuration:  
+    Some Rsyslog versions that are not able to reconnect properly when necessary. To mitigate this issue, use time markers so the connection never stops. To achieve this, add the following 2 lines in your Rsyslog configuration:   
     ```
     $ModLoad immark
     $MarkMessagePeriod 45
