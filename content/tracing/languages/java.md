@@ -252,7 +252,6 @@ Don't see your desired networking framework? We're continually adding additional
 |:-------------|:-------------|
 | [OkHTTP](https://github.com/opentracing-contrib/java-okhttp) | 3.x |
 | [Apache HTTP Client](https://github.com/opentracing-contrib/java-apache-httpclient) | 4.3 + |
-| [AWS SDK](https://github.com/opentracing-contrib/java-aws-sdk) | 1.11.0+ |
 | [JMS 2](https://github.com/opentracing-contrib/java-jms) | 2.x |
 
 Don't see your desired networking framework? We're continually adding additional support, [check with our team](/help) to see if we can help.
