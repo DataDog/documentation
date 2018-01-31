@@ -54,6 +54,23 @@ These are a few of the common configuration issues that are work triple-checking
 
 3. You may have some .yaml parsing errors in your configuration files. Yaml is notoriously finicky, so when in doubt, a good [yaml validator](https://codebeautify.org/yaml-validator) is worth referencing. 
 
+### Check for errors in the logs
+
+There might be an error in the logs that would explain the issue. So just run the following command and check for errors:
+
+```
+sudo cat /var/log/datadog/agent.log | grep log
+```
+
+#### Permission Issues While Tailing Log Files
+
+The dd-agent does not run as root (and we do not recommend that you make it run as root, as a general best-practice). For this reason, when you configure your dd-agent to tail log files (for custom logs or for integrations) take special care to ensure the dd-agent user has read access to tail the log files you want to collect from.  
+
+If the dd-agent user does not have read access to the files you configure it to tail, then a permissions error is captured in the `/var/log/datadog/agent.log`.  
+
+**Note**: when you add the appropriate read permissions, make sure that these permissions are correctly set on your log rotation configuration. Otherwise, when the log rotates next, the dd-agent may lose its read permissions. 
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
