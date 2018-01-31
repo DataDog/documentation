@@ -18,4 +18,4 @@ This end point allows you to query for metrics from any time period.
 * `end` [*optional*, *default*=**None**]:  
     Seconds since the unix epoch
 * `query` [*required*]:  
-    The query strong
+    The query string
