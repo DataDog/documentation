@@ -1,6 +1,7 @@
 ---
 title: Glossary
 kind: Documentation
+draft: true
 ---
 
 ## Agent
