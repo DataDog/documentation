@@ -171,9 +171,9 @@ logs:
 ```
 
 
-### Search and replace content in your logs
+### Scrub sensitive data in your logs
 
-If your logs contain sensitive information that you wish you redact, configure the Datadog Agent to mask sensitive sequences by using the `log_processing_rules` parameter in your configuration file with the **mask_sequences** `type`.
+If your logs contain sensitive information that you wish to redact, configure the Datadog Agent to scrub sensitive sequences by using the `log_processing_rules` parameter in your configuration file with the **mask_sequences** `type`.
 
 This replaces all matched groups with `replace_placeholder` parameter value.
 Example: Redact credit card numbers
@@ -267,6 +267,7 @@ logs:
    source: go
 ```
 
+Note that the agent requires the reand and execute permission (5) on the directory to be able to list all the available files in it.
 
 ## Reserved attributes 
 
