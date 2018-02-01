@@ -58,7 +58,8 @@ Cells also may be re-ordered by using keyboard shortcuts.
 A time indicator appears in the top-right corner of each graph cell. If the cell is locked to the global time, it reads “Global Time.” Otherwise, it specifies the cell’s independent time frame
 
 To unlock a cell from global time, click this time indicator.
-{{< img src="graphing/notebooks/timerange.png" alt="timerange" responsive="true" popup="true">}}
+
+{{< img src="graphing/notebooks/timerange.png" alt="timerange" responsive="true" popup="true" style="width:40%;">}}
 
 Note that clicking and dragging to zoom in on a graph does not unlock that cell from global time. It changes the notebook’s global time frame instead.
 
@@ -66,13 +67,15 @@ Note that clicking and dragging to zoom in on a graph does not unlock that cell 
 
 To split a graph by tag, change a graph’s size or toggle the visibility of a graph legend, click the  icon at the right edge of the cell.
 Legends are disabled automatically when the graph size has been set to XS or S. Changing these settings affects only the target cell; the layout of other graph cells is unaffected.
-{{< img src="graphing/notebooks/options.png" alt="options" responsive="true" popup="true">}}
+
+{{< img src="graphing/notebooks/options.png" alt="options" responsive="true" popup="true" style="width:40%;">}}
 
 ### Linking to individual cells
 
 To copy the URL for a specific cell, click the link icon at the right edge of the cell. Direct linking is available for both graph and Markdown cells.
 When a user visits the URL for a specific cell, its notebook is opened to show the cell in question at the top of the viewport. Links are absolute, which means a cell’s URL remains the same if it’s moved to a new position within its notebook.
-{{< img src="graphing/notebooks/directlink.png" alt="directlink" responsive="true" popup="true">}}
+
+{{< img src="graphing/notebooks/directlink.png" alt="directlink" responsive="true" popup="true" style="width:40%;">}}
 
 ### Saving, renaming, and deleting a notebook
 

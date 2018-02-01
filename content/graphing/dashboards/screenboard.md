@@ -85,7 +85,7 @@ Here is how to proceed to enjoy this css style on Chrome using Stylebot:
 
 If you have any custom css style sheet that you would like to share, [reach out to us](/help)!
 
-## Back up my Screenboard
+## Backup my Screenboard
 
 Using our [APIs](/api) it's possible to write a script to backup your Screenboard definitions as code. See the following projects as examples of how these backups can be accomplished:
 

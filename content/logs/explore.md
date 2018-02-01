@@ -41,28 +41,28 @@ Quickly change the time range by selecting a preset range from the dropdown:
 The Logstream is the list of logs that match the selected context. A context is defined by a [search bar](#search-bar) filter and a [time range](#time-range).
 You can sort the list by clicking the **date** column header.
 
-{{< img src="logs/explore/log_list.png" alt="Logstream" responsive="true" popup="true">}}
+{{< img src="logs/explore/log_list.png" alt="Logstream" responsive="true" popup="true" style="width:80%;">}}
 
 ### Filtering the Logstream
 If you enter a valid query into the [search bar](#search-bar), words that match your query are highlighted, and the logs displayed match your facet criteria:
 
-{{< img src="logs/explore/log_list_highlighted.png" alt="Logstream highlighted" responsive="true" popup="true">}}
+{{< img src="logs/explore/log_list_highlighted.png" alt="Logstream highlighted" responsive="true" popup="true" style="width:80%;">}}
 
 ### Displaying a full log
 You can click on any log line to see more details about it:
 
-{{< img src="logs/explore/log_in_log_list.png" alt="Log in Logstream" responsive="true" popup="true">}}
+{{< img src="logs/explore/log_in_log_list.png" alt="Log in Logstream" responsive="true" popup="true" style="width:80%;">}}
 
 ### View in context
 
 Click on its `host` or `service` and select `View in context` to see log lines dated just before and after a selected log - even if they don't match your filter -
 
-{{< img src="logs/explore/focus_host_service.png" style="width:50%;" alt="focus on host and service.png" responsive="true" popup="true">}}
+{{< img src="logs/explore/focus_host_service.png" style="width:50%;" alt="focus on host and service.png" responsive="true" popup="true" style="width:80%;">}}
 
 ### Columns
 To add more log details to the list, click the **Columns** button and select any facets you want to see:
 
-{{< img src="logs/explore/log_list_with_columns.png" alt="Logstream with columns" responsive="true" popup="true">}}
+{{< img src="logs/explore/log_list_with_columns.png" alt="Logstream with columns" responsive="true" popup="true" style="width:80%;">}}
 
 ### Multi-line display
 
@@ -85,19 +85,21 @@ A facet displays all the distinct members of an attribute or a tag as well as pr
 
 Facets allow you to pivot or filter your datasets based on a given attribute. Examples facets may include users, services, etc...
 
-{{< img src="logs/explore/facets_demo.png" alt="Facets demo" responsive="true" popup="true">}}
+{{< img src="logs/explore/facets_demo.png" alt="Facets demo" responsive="true" popup="true" style="width:80%;">}}
 
 ### Create a Facet
 
 To start using an attribute as a Facet or in the search, click on it and add it as a Facet:
-{{< img src="logs/explore/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" popup="true">}}
+
+{{< img src="logs/explore/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" popup="true" style="width:50%;">}}
 
 Once this is done, the value of this attribute is stored **for all new logs** and can be used for searches via the [search bar](#searche-bar) or [Facet Panel](#facet-panel).
 
 ### Facet Panel
 
 Use facets to easily filters on your logs. The search bar and url automatically reflect your selections.
-{{< img src="logs/explore/facet_panel.png" alt="Facet panel" responsive="true" popup="true">}}
+
+{{< img src="logs/explore/facet_panel.png" alt="Facet panel" responsive="true" popup="true" style="width:80%;">}}
 
 ## Search bar
 
@@ -162,13 +164,13 @@ Your logs inherit tags from [hosts](/graphing/infrastructure/) and [integrations
 ### Autocomplete
 Typing a complex query can be cumbersome. Use the search bar's autocomplete feature to complete your query using existing values:
 
-{{< img src="logs/explore/search_bar_autocomplete.png" alt="search bar autocomplete " responsive="true" popup="true">}}
+{{< img src="logs/explore/search_bar_autocomplete.png" alt="search bar autocomplete " responsive="true" popup="true" style="width:80%;">}}
 
 ### Saved Searches
 
 Don't lose time building the same views everyday. Saved searches contain your search query, columns and time horizon. They are then available in the search bar thanks to the auto-complete matching whether the search name or query.
 
-{{< img src="logs/explore/saved_search.png" alt="Saved Search" responsive="true" popup="true">}}
+{{< img src="logs/explore/saved_search.png" alt="Saved Search" responsive="true" popup="true" style="width:80%;">}}
 
 ### Escaping of special characters
 The following attributes are considered as special: `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/`, `\` and require escaping.

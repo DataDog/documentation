@@ -29,13 +29,13 @@ point they should notify.
 ## Configuration
 
 1. Pick the **process** to monitor. You see the names configured in any Agent with an active process check.
-    {{< img src="monitors/monitor_types/process/process_monitor_pick.png" alt="process monitor pick" responsive="true" popup="true">}}
+    {{< img src="monitors/monitor_types/process/process_monitor_pick.png" alt="process monitor pick" responsive="true" popup="true" style="width:80%;">}}
 
 2. Pick the **monitor scope**. You only see hosts or tags that are reporting a status for the selected process.
-    {{< img src="monitors/monitor_types/process/process_monitor_scope.png" alt="process monitor scope" responsive="true" popup="true">}}
+    {{< img src="monitors/monitor_types/process/process_monitor_scope.png" alt="process monitor scope" responsive="true" popup="true" style="width:80%;">}}
 
 3. Select **alerting options**:
-    {{< img src="monitors/monitor_types/process/process_check_alert_conditions.png" alt="process monitor alert conditions" responsive="true" popup="true">}}
+    {{< img src="monitors/monitor_types/process/process_check_alert_conditions.png" alt="process monitor alert conditions" responsive="true" popup="true" style="width:80%;">}}
 
 4. Configure your **notification options**:  
     Refer to the [Notifications](#monitor-notifications) dedicated documentation page for a detailed walkthrough of the common notification options.

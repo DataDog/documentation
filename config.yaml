@@ -240,11 +240,6 @@ languages:
           url: "/graphing/miscellaneous/"
           weight: 80
           parent: menu_references_graphing
-        - identifier: customnav_graphingnav_metricsmath
-          name: "Metrics Arithmetic"
-          url: "/graphing/miscellaneous/metrics_arithmetic/"
-          weight: 809
-          parent: customnav_graphingnav_miscellaneous
         - identifier: customnav_graphingnav_functions
           name: "Functions"
           url: "/graphing/miscellaneous/functions/"
@@ -302,14 +297,14 @@ languages:
           url: "/monitors/monitor_types/event/"
           weight: 350
           parent: customnav_monitornav_monitor_types
-        - identifier: customnav_monitortypenav_host
-          name: "Host"
-          url: "/monitors/monitor_types/host/"
-          weight: 360
-          parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_forecasts
           name: "Forecasts"
           url: "/monitors/monitor_types/forecasts/"
+          weight: 360
+          parent: customnav_monitornav_monitor_types
+        - identifier: customnav_monitortypenav_host
+          name: "Host"
+          url: "/monitors/monitor_types/host/"
           weight: 370
           parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_integration

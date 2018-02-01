@@ -64,7 +64,7 @@ For each incident users can:
 * [@ notify team members](/graphing/event_stream/#@-notifications), who receive an email
 * `@support-datadog` to ask for [assistance](/help)
 
-{{< img src="getting_started/event_stream_event.png" alt="event stream event" responsive="true" popup="true">}}
+{{< img src="getting_started/event_stream_event.png" alt="event stream event" responsive="true" popup="true" style="width:70%;">}}
 
 ## Dashboards
 
