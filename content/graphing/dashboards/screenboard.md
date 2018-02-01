@@ -54,37 +54,6 @@ This feature can be enabled by following these simple steps:
 2. Select **Notifications** option and enable the notifications:
     {{< img src="graphing/dashboards/faq/notifications_pop_up.png" alt=" notifications pop up" responsive="true" popup="true" style="width:40%;">}}
 
-## Change colors
-
-### Deluminate (Chrome)
-
-This Chrome plug-in helps you change the Color Scheme for your browser (Contrast, Reverse Colors, Image colors, Luminance) [Deluminate](https://chrome.google.com/webstore/detail/deluminate/iebboopaeangfpceklajfohhbpkkfiaa?hl=en-US).
-
-Simple to setup and easily activated/unactivated, Deluminate is a good fit for Datadog Screenboards.
-
-{{< img src="developers/faq/deluminate.png" alt="deluminate" responsive="true" popup="true" style="width:50%;">}}
-
-### Stylebot (Chrome)
-
-Stylish offers more possibilities to customize the css of any web page.
-
-You can use the library created by adamjt for Datadog Screenboards: `http://stylebot.me/styles/4320`
-
-{{< img src="developers/faq/style_bot.jpg" alt="style_bot" responsive="true" popup="true" style="width:50%;">}}
-
-Here is how to proceed to enjoy this css style on Chrome using Stylebot:
-
-1. Install the Stylebot extension for Chrome: `https://chrome.google.com/webstore/detail/stylebot/oiaejidbmkiecgbjeifoejpgmdaleoha?hl=en`
-2. On the css page, `http://stylebot.me/styles/4320`, click the scissors "CSS" icon and copy all the css
-3. Click the Stylebot icon to open the menu, choose "Options"
-4. In the left column choose 'Styles', then click "Add a new Style"
-5. URL: p.datadoghq.com
-6. In the text zone, paste the whole css code previously copied from our css page
-7. Save
-8. Next time you visit a shared dashboard, this new css style will be enabled.
-
-If you have any custom css style sheet that you would like to share, [reach out to us](/help)!
-
 ## Back up my Screenboard
 
 Using our [APIs](/api) it's possible to write a script to backup your Screenboard definitions as code. See the following projects as examples of how these backups can be accomplished:
