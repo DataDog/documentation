@@ -267,7 +267,7 @@ logs:
    source: go
 ```
 
-Note that the agent requires the reand and execute permission (5) on the directory to be able to list all the available files in it.
+**Note**: that the agent requires the read and execute permission (5) on the directory to be able to list all the available files in it.
 
 ## Reserved attributes 
 
