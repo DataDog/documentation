@@ -84,7 +84,7 @@ Otherwise the monitor picks up the current state on the next evaluation.
 
 In other words, if the value is still above/below the configured threshold then the monitor may re-trigger upon the next evaluation (in about 60 seconds).
 
-## Backup your monitors
+## Managing Monitors
 
 There are multiple community projects for maintaining or managing Monitors along with some other Datadog components via the API's:
 
