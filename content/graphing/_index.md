@@ -157,11 +157,11 @@ There are three configuration settings:
 Add events from related system to add even more context to your graph. An example would be to add Github commits, Jenkins deploys, or Docker creation events. Just click the Overlay Events button and enter a query to find and display your events.  
 To show anything from a source such as Github, use `sources:github`. For all the events with the tag role:web, use `tag:role:web`.
 
+{{< img src="graphing/index/overlay_events.png" alt="Overlay Events" responsive="true" popup="true" style="width:75%;" >}}
+
 ## Create a title
 
 If you don't enter a title, we automatically generate a title based on the selections you have made. But it may be more useful to the users of the [dashboard](/graphing/dashboards) to create a title that more aptly describes the purpose of the graph. Linking the technical purpose to the business benefits adds even more value.
-
-{{< img src="graphing/index/overlay_events.png" alt="Overlay Events" responsive="true" popup="true" style="width:75%;" >}}
 
 ## Save
 
