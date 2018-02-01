@@ -39,9 +39,10 @@ For additional information, reference [the Docker page](/tracing/docker)
 
 To instrument your application, select one of the following supported languages.
 
-- [Go](/tracing/go)
-- [Python](/tracing/python)
-- [Ruby](/tracing/ruby)
+- [Go](/tracing/languages/go)
+- [Java](/tracing/languages/java)
+- [Python](/tracing/languages/python)
+- [Ruby](/tracing/languages/ruby)
 
 To instrument an application written in a language that does not yet have official library support, reference the [Tracing API](/api/?lang=console#traces).
 
