@@ -90,7 +90,6 @@ If you've written a Datadog library and would like to add it to this page, write
    [11]: https://github.com/bazaarvoice/metrics-datadog
    [12]: http://www.bazaarvoice.com/
    [13]: https://github.com/bazaarvoice/lassie
-   [14]: https://github.com/HashGo/node-datadog
    [15]: https://github.com/HashGo
    [16]: https://github.com/joybro/node-dogstatsd
    [17]: https://github.com/joybro
@@ -108,7 +107,6 @@ If you've written a Datadog library and would like to add it to this page, write
    [29]: https://github.com/isra00
    [30]: https://github.com/zorkian/go-datadog-api
    [31]: https://github.com/zorkian
-   [32]: https://github.com/ooyala/go-dogstatsd/
    [33]: https://github.com/ooyala
    [34]: https://github.com/tbarbugli/scales_datadog
    [35]: https://github.com/Cue/scales
@@ -126,7 +124,6 @@ If you've written a Datadog library and would like to add it to this page, write
    [47]: https://github.com/ansible/ansible-modules-extras
    [48]: https://github.com/wimactel/FreeSwitch-DataDog-Metrics
    [49]: https://github.com/wimactel
-   [50]: https://github.com/adamdunkley/casperjs-google-analytics-realtime-scrape
    [51]: https://github.com/gitterHQ/pid-stats
    [52]: https://github.com/gitterHQ
    [53]: https://gist.github.com/conorbranagan/c001078d148d2cab38a0
@@ -142,7 +139,6 @@ If you've written a Datadog library and would like to add it to this page, write
    [64]: http://www.pagerduty.com/
    [65]: https://github.com/synrc/mtx
    [66]: https://synrc.com/
-   [67]: https://github.com/Guaranteed-Rate/App.Lib.MetricsDotNetDatadogPlugin
    [68]: https://github.com/alq666/rdog
    [69]: https://github.com/rs/xstats
    [70]: https://github.com/rs
