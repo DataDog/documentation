@@ -261,4 +261,3 @@ That's it! Now, all your logs are going to be in proper JSON automatically under
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
->>>>>>> master

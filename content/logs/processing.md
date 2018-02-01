@@ -59,13 +59,13 @@ The filter syntax is the same as the [search bar](/logs/explore/#search-bar).
 
 The logstream shows which logs your pipeline applies to:
 
-{{< img src="logs/processing/pipeline_filters.png" alt="Pipelines filters" responsive="true" popup="true">}}
+{{< img src="logs/processing/pipeline_filters.png" alt="Pipelines filters" responsive="true" popup="true" style="width:80%;">}}
 
 ### Integration Pipelines
 
 These pipelines are read-only, but you can clone them and then edit the clone:
 
-{{< img src="logs/processing/cloning_pipeline.png" alt="Cloning pipeline" responsive="true" popup="true">}}
+{{< img src="logs/processing/cloning_pipeline.png" alt="Cloning pipeline" responsive="true" popup="true" style="width:80%;">}}
 
 ## Processors
 

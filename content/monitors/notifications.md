@@ -51,11 +51,11 @@ When your monitor is a multi alert, instead of having a generic message (and fin
 
 Here is an example of how you can use template variables for a multi alert:
 
-{{< img src="monitors/notifications/templatevareditor.png" alt="template var editor" responsive="true" popup="true" >}}
+{{< img src="monitors/notifications/templatevareditor.png" alt="template var editor" responsive="true" popup="true" style="width:80%;">}}
 
 and the corresponding event notification:
 
-{{< img src="monitors/notifications/templatevar.png" alt="template var" responsive="true" popup="true" >}}
+{{< img src="monitors/notifications/templatevar.png" alt="template var" responsive="true" popup="true" style="width:80%;">}}
 
 **Note**:  
 
@@ -73,7 +73,8 @@ contains JSON or code that you would NOT like to be escaped, use triple braces i
 #### {{comparator}} template variables
 
 The `{{comparator}}` template variable's value is always a relational operator. It corresponds to the relational value selected in the monitor's "Set alert conditions" section:
-{{< img src="monitors/notifications/comparator_alert.png" alt="comparator_alert" responsive="true" popup="true" >}}
+
+{{< img src="monitors/notifications/comparator_alert.png" alt="comparator_alert" responsive="true" popup="true" style="width:80%;">}}
 
 For example, when an alert is set to trigger when a value rises "above" 50, the following syntax:
 ```
@@ -104,19 +105,19 @@ Step 3 of the monitor editor.
 
 These variables use simple `if-else` logic to display a different message depending on the event type (*warning*, *recovery*, *no data*...)
 
-{{< img src="monitors/notifications/conditionalvars.png" alt="conditional vars" responsive="true" popup="true" >}}
+{{< img src="monitors/notifications/conditionalvars.png" alt="conditional vars" responsive="true" popup="true" style="width:80%;">}}
 
 Here is an example of how you can set it up in the editor:
 
-{{< img src="monitors/notifications/templateconditionaleditor.png" alt="template conditional editor" responsive="true" popup="true" >}}
+{{< img src="monitors/notifications/templateconditionaleditor.png" alt="template conditional editor" responsive="true" popup="true" style="width:80%;">}}
 
 The corresponding trigger event notification looks like this:
 
-{{< img src="monitors/notifications/templateconditionaltrigger.png" alt="template conditional trigger" responsive="true" popup="true">}}
+{{< img src="monitors/notifications/templateconditionaltrigger.png" alt="template conditional trigger" responsive="true" popup="true" style="width:80%;">}}
 
 and the recovery notification:
 
-{{< img src="monitors/notifications/templateconditionalrecover.png" alt="template conditional recover" responsive="true" popup="true" >}}
+{{< img src="monitors/notifications/templateconditionalrecover.png" alt="template conditional recover" responsive="true" popup="true" style="width:80%;">}}
 
 #### `{{is_recovery}}` or `{{is_alert_recovery}}` 
 
@@ -149,7 +150,7 @@ The variable uses the following format:
 
 Here is an example of how you can give a different message depending on the triggering context:
 
-{{< img src="monitors/notifications/scope_match_editor.png" alt="scope match editor" responsive="true" popup="true">}}
+{{< img src="monitors/notifications/scope_match_editor.png" alt="scope match editor" responsive="true" popup="true" style="width:80%;">}}
 
 **Note**: To use the `{{is_match}}` conditional to check if a `tag_variable` is **NOT** empty, append `.name` after your tag name, for instance:  
   
@@ -242,15 +243,16 @@ Find below additional examples of links that could be added to Monitors to provi
   https://app.datadoghq.com/monitors/manage?q=scope:host:{{host.name}}
   ```
   The above link links to all monitors for this host. You have other options available to further refine the link.  
-  For example, if you would only like monitors that are in an Alert State, you can add the following `status:Alert` (other statuses that can be leveraged are WARN, NO%20DATA, OK and MUTED).  Below is an example link:
+  For example, if you would only like monitors that are in an Alert State, you can add the following `status:Alert` (other statuses that can be leveraged are WARN, NO%20DATA, OK and MUTED). Below is an example link:
   ```
   https://app.datadoghq.com/monitors/manage?q=scope:host:{{host.name}}&status:Alert
   ```
-  {{< img src="monitors/notifications/monitor_url.png" alt="monitor_url" responsive="true" popup="true" style="width:70%;">}}
   If you would like all monitors for a specific application or integration,  add the following query to the URL `q=<integration_name> `: 
   ```
   https://app.datadoghq.com/monitors/manage?q=cassandra
   ```
+
+  {{< img src="monitors/notifications/monitor_url.png" alt="monitor_url" responsive="true" popup="true" style="width:70%;">}}
 
 ### Slack integration
 

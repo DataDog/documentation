@@ -200,7 +200,8 @@ dogstreams: /path/to/mylogfile.log:/path/to/mylogparser.py:my_log_parser
 ```
 
 This specific log-line parsed with this parser created the following event in datadog:
-{{< img src="agent/faq/log_event_in_dd.jpg" alt="Log event in Datadog" responsive="true" popup="true">}}
+
+{{< img src="agent/faq/log_event_in_dd.jpg" alt="Log event in Datadog" responsive="true" popup="true" style="width:70%;">}}
 
 ## Send extra parameters to your custom parsing function
 
