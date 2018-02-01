@@ -171,9 +171,9 @@ logs:
 ```
 
 
-### Search and replace content in your logs
+### Scrub sensitive data in your logs
 
-If your logs contain sensitive information that you wish you redact, configure the Datadog Agent to mask sensitive sequences by using the `log_processing_rules` parameter in your configuration file with the **mask_sequences** `type`.
+If your logs contain sensitive information that you wish to redact, configure the Datadog Agent to scrub sensitive sequences by using the `log_processing_rules` parameter in your configuration file with the **mask_sequences** `type`.
 
 This replaces all matched groups with `replace_placeholder` parameter value.
 Example: Redact credit card numbers
@@ -267,6 +267,7 @@ logs:
    source: go
 ```
 
+**Note**: that the agent requires the read and execute permission (5) on the directory to be able to list all the available files in it.
 
 ## Reserved attributes 
 
@@ -298,13 +299,15 @@ The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-
 
 By default, Datadog ingests the value of message as the body of the log entry. That value is then highlighted and display in the [logstream](/logs/explore/#logstream), where it is indexed for [full text search](/logs/explore/#search-bar).
 
-### *severity* attribute
+### *status* attribute
 
-Each log entry may specify a severity level which is made available for faceted search within Datadog. However, if a JSON formatted log file includes one of the following attributes, Datadog interprets its value as the the log’s official severity:
+Each log entry may specify a status level which is made available for faceted search within Datadog. However, if a JSON formatted log file includes one of the following attributes, Datadog interprets its value as the the log’s official status:
 
+* `severity`
+* `level`
 * `syslog.severity`
 
-If you would like to remap some severities existing in the `severity` attribute, you can do so with the [log severity remapper](/logs/processing/#log-severity-remapper)
+If you would like to remap some status existing in the `status` attribute, you can do so with the [log status remapper](/logs/processing/#log-status-remapper)
 
 ### *host* attribute
 
@@ -320,7 +323,7 @@ Using the Datadog Agent or the RFC5424 format automatically set the service valu
 
 ### Edit reserved attributes
 
-You can now control the global hostname, service, timestamp, and severity main mapping that are applied before the processing pipelines. This is particularly helpful if logs are sent in JSON or from an external agent.
+You can now control the global hostname, service, timestamp, and status main mapping that are applied before the processing pipelines. This is particularly helpful if logs are sent in JSON or from an external agent.
 
 {{< img src="logs/index/reserved_attribute.png" alt="Reserved Attribute" responsive="true" popup="true">}}
 
