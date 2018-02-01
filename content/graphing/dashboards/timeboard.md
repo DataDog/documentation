@@ -6,7 +6,7 @@ kind: documentation
 ## Change Timeboard name
 
 1. Click on the info icon on the top right corner of the Timeboard:
-    {{< img src="graphing/dashboards/timeboard/timeboard_name.png" alt="Timeboard name" responsive="true" popup="true">}}
+    {{< img src="graphing/dashboards/timeboard/timeboard_name.png" alt="Timeboard name" responsive="true" popup="true" style="width:75%;">}}
 2. Click on the pencil icon to edit the title and description
 3. Click the checkmark to save changes
 
@@ -14,13 +14,13 @@ kind: documentation
 
 [An Administrator](/account_management/team/#datadog-user-roles) or Timeboard creator can make a Timeboard read-only by clicking the gear icon (upper right corner of a Timeboard) and clicking the **Permissions** link:
 
-{{< img src="graphing/dashboards/timeboard/read_only.png" alt="Read Only" responsive="true" popup="true">}}
+{{< img src="graphing/dashboards/timeboard/read_only.png" alt="Read Only" responsive="true" popup="true" style="width:30%;">}}
 
 **Click "Yes" on the confirmation window to make the Timeboard read-only**
 
 Only account [administrator](/account_management/team/#datadog-user-roles) and the Timeboard creator can activate read-only mode for a Timeboard.  Any user in the organization, regardless of administrator privileges, can sign up to receive change notifications for a particular Timeboard.
 
-If a user decides to track changes for a Timeboard, the following Timeboard changes are reported to the user through an event in the event stream:
+If a user decides to track changes for a Timeboard, the following Timeboard changes are reported to the user through an event in the [event stream](/graphing/event_stream):
 
 1. Text changes (title, description)
 2. Tile changes
@@ -46,10 +46,10 @@ https://app.datadoghq.com/event/stream?per_page=30&query=tags:audit%20status:all
 This feature can be enabled by following these simple steps:
 
 1. At the top right corner of a dashboard, click on the gear icon:
-    {{< img src="graphing/dashboards/faq/enable_notifications.png" alt="enable notifications" responsive="true" popup="true">}}
+    {{< img src="graphing/dashboards/faq/enable_notifications.png" alt="enable notifications" responsive="true" popup="true" style="width:30%;">}}
 
 2. Select **Notifications** option and enable the notifications:
-    {{< img src="graphing/dashboards/faq/notifications_pop_up.png" alt=" notifications pop up" responsive="true" popup="true">}}
+    {{< img src="graphing/dashboards/faq/notifications_pop_up.png" alt=" notifications pop up" responsive="true" popup="true" style="width:30%;">}}
 
 ## Backup my Timeboard
 
@@ -57,5 +57,6 @@ Using our [APIs](/api) it's possible to write a script to backup your Timeboard 
 
 * https://github.com/brightcove/dog-watcher
 * https://github.com/Shopify/doggy
+* https://github.com/grosser/kennel
 
 Special thanks to [Brightcove](https://www.brightcove.com/) and [Shopify](https://www.shopify.com/) for sharing these projects!
