@@ -51,7 +51,7 @@ This feature can be enabled by following these simple steps:
 2. Select **Notifications** option and enable the notifications:
     {{< img src="graphing/dashboards/faq/notifications_pop_up.png" alt=" notifications pop up" responsive="true" popup="true" style="width:30%;">}}
 
-## Back up my Timeboard
+## Backup my Timeboard
 
 Using our [APIs](/api) it's possible to write a script to backup your Timeboard definitions as code. See the following projects as examples of how these backups can be accomplished:
 

@@ -93,13 +93,16 @@ If you are storing logs in many S3 buckets, Datadog can automatically manage tri
 
 ### Manually set up triggers
 In your Lambda, go in the triggers tab and select `Add Trigger`:
-{{< img src="logs/aws/adding_trigger.png" alt="Adding trigger" responsive="true" >}}
+
+{{< img src="logs/aws/adding_trigger.png" alt="Adding trigger" responsive="true" style="width:80%;">}}
 
 Select the log source and then follow the AWS instructions: 
-{{< img src="logs/aws/integration_lambda.png" alt="Integration Lambda" responsive="true" popup="true">}}
+
+{{< img src="logs/aws/integration_lambda.png" alt="Integration Lambda" responsive="true" popup="true" style="width:80%;">}}
 
 For instance, do not forget to set the correct event type on S3 Buckets:
-{{< img src="logs/aws/object_created.png" alt="Object Created" responsive="true" popup="true">}}
+
+{{< img src="logs/aws/object_created.png" alt="Object Created" responsive="true" popup="true" style="width:80%;">}}
 
 ### ELB
 
@@ -118,7 +121,8 @@ Enable the logging on your ELB first to collect your logs:
 {{< img src="logs/aws/configure_access_logs.png" alt="Configure Access Logs" responsive="true" popup="true">}}
 
 Set interval to **5 minutes** and define your s3 buckets:
-{{< img src="logs/aws/s3_location.png" alt="S3 Location" responsive="true" popup="true">}}
+
+{{< img src="logs/aws/s3_location.png" alt="S3 Location" responsive="true" popup="true" style="width:80%;">}}
 
 Then go back to the Lambda function and define a trigger on the corresponding s3 bucket.
 
@@ -127,7 +131,8 @@ Then go back to the Lambda function and define a trigger on the corresponding s3
 AWS CloudTrail is an audit service. Use AWS CloudTrail to get a history of AWS API calls and related events for your account. This includes calls made with the AWS Management Console, AWS SDKs, command line tools, and higher-level AWS services.
 
 When you define your Trails, select a s3 bucket to write the logs in:
-{{< img src="logs/aws/tail_s3_selection.png" alt="S3 Selection" responsive="true" popup="true">}}
+
+{{< img src="logs/aws/tail_s3_selection.png" alt="S3 Selection" responsive="true" popup="true" style="width:80%;">}}
 
 Link the Lambda function to this s3 bucket to send your logs to Datadog.
 

@@ -67,16 +67,16 @@ In the below, we have filtered down to a Kubernetes cluster of 9 nodes.
 RSS and CPU utilization on containers is reported compared to the provisioned limits on the containers, when they exist.  
 Here, we see that the containers in this cluster are way over provisioned, and that we could use tighter limits and bin packing to achieve better utilization of resources.
 
-{{< img src="graphing/infrastructure/livecontainers/overprovisioned.png" alt="Over Provisioned" responsive="true" popup="true">}}
+{{< img src="graphing/infrastructure/livecontainers/overprovisioned.png" alt="Over Provisioned" responsive="true" popup="true" style="width:80%;">}}
 
 Container environments are dynamic and can be hard to follow.  
 Here, we pivot by `kube_service` and `host`, and to reduce system noise, filter to `kube_namespace:default`, and we can see what services are running where, and how saturated key metrics are:  
 
-{{< img src="graphing/infrastructure/livecontainers/hostxservice.png" alt="Host x services" responsive="true" popup="true">}}
+{{< img src="graphing/infrastructure/livecontainers/hostxservice.png" alt="Host x services" responsive="true" popup="true" style="width:80%;">}}
 
 It would be easy to pivot by ECS `ecs_task_name` and `ecs_task_version` and understand changes to resource utilization between updates.
 
-{{< img src="graphing/infrastructure/livecontainers/tasksxversion.png" alt="Tasks x version" responsive="true" popup="true">}}
+{{< img src="graphing/infrastructure/livecontainers/tasksxversion.png" alt="Tasks x version" responsive="true" popup="true" style="width:80%;">}}
 
 ## Real-time monitoring
 

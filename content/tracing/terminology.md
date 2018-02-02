@@ -14,7 +14,7 @@ Used to track the time spent by an application processing a single operation. Fo
 
 Represents a logical unit of work in the system. Each trace consists of one or more spans. Spans are associated with a service and optionally a resource. Each span consists of a start time, a duration, and optional tags. For example, a span can describe the time spent on a distributed call on a separate machine, or the time spent in a small component within a larger operation. Spans can be nested within each other, and in those instances will have a parent-child relationship.
 
-{{< img src="tracing/terminology/tracing-terminology.png" alt="Visualizing tracing terms" responsive="true" popup="true">}}
+{{< img src="tracing/terminology/tracing-terminology.png" alt="Visualizing tracing terms" responsive="true" popup="true" style="width:80%;">}}
 
 ### Service
 The name of a set of processes that do the same job.  
