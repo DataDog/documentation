@@ -118,7 +118,7 @@ kind: faq
 
 ## Process
 
-* [Process open file descriptors metric collection](/integraitons/faq/open-file-descriptors-metric-collection)
+* [Process open file descriptors metric collection](/integrations/faq/open-file-descriptors-metric-collection)
 
 ## RabbitMQ
 
