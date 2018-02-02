@@ -116,6 +116,10 @@ kind: faq
 ## Postgres
 * [Postgres custom metric collection explained](/integrations/faq/postgres-custom-metric-collection-explained)
 
+## Process
+
+* [Process open file descriptors metric collection](/integraitons/faq/open-file-descriptors-metric-collection)
+
 ## RabbitMQ
 
 * [Tagging RabbitMQ queues by tag family](/integrations/faq/tagging-rabbitmq-queues-by-tag-family)
