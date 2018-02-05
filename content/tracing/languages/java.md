@@ -266,6 +266,19 @@ Don't see your desired networking framework? We're continually adding additional
 | [MongoDB](https://github.com/opentracing-contrib/java-mongo-driver) | 3.x |
 | [Cassandra](https://github.com/opentracing-contrib/java-cassandra-driver) | 3.2.x |
 
+`dd-java-agent` is also compatible with common JDBC drivers including:
+
+*  Apache Derby
+*  Firebird SQL
+*  H2 Database Engine
+*  HSQLDB 
+*  IBM DB2
+*  MSSQL (Microsoft SQL Server)
+*  MySQL
+*  MariaDB
+*  Oracle
+*  Postgres SQL
+
 Don't see your desired networking framework? We're continually adding additional support, [check with our team](/help) to see if we can help.
 
 ## Further Reading
