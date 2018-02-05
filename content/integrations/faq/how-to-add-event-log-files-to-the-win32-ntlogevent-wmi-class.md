@@ -16,7 +16,7 @@ Locate the event logs you want to monitor in the Event Viewer. Locate the log fi
 {{< img src="integrations/faq/image1.png" alt="image1" responsive="true" popup="true">}}
 
 
-Open the [Windows Registry](https://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/regedit_o.mspx?mfr=true). (search for regedit.exe, the default name of the registry editor). Inside the registry editor, locate the EventLog folder in the following path:
+Open the Windows Registry. (search for regedit.exe, the default name of the registry editor). Inside the registry editor, locate the EventLog folder in the following path:
 ```
 \HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EventLog\
 ```

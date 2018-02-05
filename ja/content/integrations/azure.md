@@ -187,14 +187,14 @@ On deploy you should see your new hosts appear on your infrastructure overview:
 
 
 <!-- ### I don't know my tenent name
-To locate your tenent name first log into the current [Azure portal][4].
+To locate your tenent name first log into the current [Azure portal]
 After logging in, locate the settings page on the left side of the screen.
 {{< img src="integrations/azure/azure_tenent.png" >}}
 
 The text in the red box shown in sceenshot above is your tenent name. Please only include text between parentheses. -->
 
 ### Tenent name(テナント名)がわかりません。
-Tenent nameを知るためには、まず[Azureのポータル][4]へログインします。その後、スクリーンの左側にあるメニューからSETTINGS(設定)を探し、クリックします。赤枠で囲った部分がTenent name(テナント名)になります。
+Tenent nameを知るためには、まずAzureのポータル へログインします。その後、スクリーンの左側にあるメニューからSETTINGS(設定)を探し、クリックします。赤枠で囲った部分がTenent name(テナント名)になります。
 
 {{< img src="integrations/azure/azure_tenent.png" alt="azure tenent" >}}
 
@@ -220,4 +220,3 @@ VMが持っている時間が、正しく設定されているか確認して下
    [1]: https://app.datadoghq.com/account/settings#integrations/azure
    [2]: https://portal.azure.com
    [3]: mailto:support@datadoghq.com
-   [4]: https://manage.windowsazure.com
