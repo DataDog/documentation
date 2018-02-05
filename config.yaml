@@ -367,51 +367,96 @@ languages:
           pre: "nav_tracing"
           weight: 80
         # TRACING/APM - Subnav start
-        - identifier: customnav_tracingnav_terminology
-          name: "Terminology"
-          url: "/tracing/terminology/"
+        # Tracing docker
+        - identifier: customnav_tracingnav_docker
+          name: "Docker"
+          url: "/tracing/docker/"
           weight: 10
           parent: menu_references_tracing
-        - identifier: customnav_tracingnav_environments
-          name: "Environments"
-          url: "/tracing/environments/"
-          weight: 20
-          parent: menu_references_tracing
+        # Tracing languages  
         - identifier: customnav_tracingnav_langs
           name: "Languages"
           url: "/tracing/languages/"
-          weight: 40
+          weight: 20
           parent: menu_references_tracing
         - identifier: customnav_tracingnav_go
           name: "Go"
           url: "/tracing/languages/go/"
-          weight: 50
+          weight: 210
           parent: customnav_tracingnav_langs
         - identifier: customnav_tracingnav_java
           name: "Java"
           url: "/tracing/languages/java/"
-          weight: 55
+          weight: 220
           parent: customnav_tracingnav_langs
         - identifier: customnav_tracingnav_python
           name: "Python"
           url: "/tracing/languages/python/"
-          weight: 60
+          weight: 230
           parent: customnav_tracingnav_langs
         - identifier: customnav_tracingnav_ruby
           name: "Ruby"
           url: "/tracing/languages/ruby/"
-          weight: 70
+          weight: 240
           parent: customnav_tracingnav_langs
-        - identifier: customnav_tracingnav_docker
-          name: "Docker"
-          url: "/tracing/docker/"
-          weight: 80
+        # Services
+        - identifier: customnav_tracingnav_services
+          name: "Services"
+          url: "/tracing/services/"
+          weight: 30
+          parent: menu_references_tracing
+        - identifier: customnav_tracingnav_cache
+          name: "Service: Cache"
+          url: "/tracing/services/cache"
+          weight: 310
+          parent: customnav_tracingnav_services
+        - identifier: customnav_tracingnav_custom
+          name: "Service: Custom"
+          url: "/tracing/services/custom"
+          weight: 320
+          parent: customnav_tracingnav_services
+        - identifier: customnav_tracingnav_db
+          name: "Service: DB"
+          url: "/tracing/services/DB"
+          weight: 330
+          parent: customnav_tracingnav_services
+        - identifier: customnav_tracingnav_web
+          name: "Service: Web"
+          url: "/tracing/services/web"
+          weight: 340
+          parent: customnav_tracingnav_services
+        # Tracing micellaneous
+        - identifier: customnav_tracingnav_miscellaneous
+          name: "Miscellaneous"
+          url: "/tracing/miscellaneous/"
+          weight: 40
           parent: menu_references_tracing
         - identifier: customnav_tracingnav_api
           name: "Trace API"
           url: "/api/#tracing"
-          weight: 90
-          parent: menu_references_tracing
+          weight: 410
+          parent: customnav_tracingnav_miscellaneous
+        - identifier: customnav_tracingnav_env
+          name: "Environments"
+          url: "/tracing/miscellaneous/environments/"
+          weight: 420
+          parent: customnav_tracingnav_miscellaneous
+        - identifier: customnav_tracingnav_apm_monitor
+          name: "Monitor"
+          url: "/monitors/monitor_types/apm"
+          weight: 430
+          parent: customnav_tracingnav_miscellaneous
+        - identifier: customnav_tracingnav_apm_widget
+          name: "Dashboard widget"
+          url: "/graphing/dashboards/widgets/#service-summary"
+          weight: 440
+          parent: customnav_tracingnav_miscellaneous
+        - identifier: customnav_tracingnav_terminology
+          name: "Terminology"
+          url: "/tracing/miscellaneous/terminology/"
+          weight: 450
+          parent: customnav_tracingnav_miscellaneous
+
         #- identifier: customnav_tracingnav_faq
         #  name: "FAQ"
         #  url: "/tracing/faq/"

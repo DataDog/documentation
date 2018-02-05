@@ -1,7 +1,8 @@
 ---
 title: Environments
-kind: Documentation
+kind: documentation
 ---
+
 ## Definition
 
 An environment is a first class dimension that you can use to scope a whole Datadog APM application.
@@ -55,4 +56,3 @@ There are several ways to specify an environment when reporting data:
     # in code this looks like
     span.set_tag('env', 'prod')
     ```
-
