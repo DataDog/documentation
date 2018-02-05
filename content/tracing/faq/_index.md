@@ -12,7 +12,6 @@ private: true
     {{< nextlink href="/tracing/faq/my-trace-agent-log-renders-empty-service-error" >}}My trace-agent.log renders "empty `Service`" error{{< /nextlink >}}
     {{< nextlink href="/tracing/faq/how-is-the-namespace-for-the-trace-metrics-defined" >}}How is the namespace for the trace metrics defined?{{< /nextlink >}}
     {{< nextlink href="/tracing/faq/if-i-instrument-a-database-with-datadog-apm-will-there-be-sensitive-database-data-sent-to-datadog" >}}If I instrument a database with Datadog APM, will there be sensitive database data sent to Datadog?{{< /nextlink >}}
-    {{< nextlink href="/tracing/faq/can-i-choose-which-hosts-i-will-enable-apm-on" >}}Can I choose which hosts I will enable APM on?{{< /nextlink >}}
     {{< nextlink href="/tracing/faq/tracing-special-meaning-tags" >}}APM (Tracing) special meaning tags{{< /nextlink >}}
     {{< nextlink href="/tracing/faq/are-there-possibilities-of-customizing-the-traces-we-collect" >}}Are there possibilities of customizing the traces we collect?{{< /nextlink >}}
 {{< /whatsnext >}}
