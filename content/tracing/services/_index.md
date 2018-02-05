@@ -12,7 +12,7 @@ After having [instrumented your application](/tracing/languages), your reporting
 
 The service list can be filtered depending of:
 
-* [Your environment](/tracing/miscellaneous/environment).
+* [Your environment](/tracing/miscellaneous/environments).
 * [Your service type](/tracing/miscellaneous/terminology/#type)
 * A query
 
