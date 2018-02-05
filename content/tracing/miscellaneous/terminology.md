@@ -7,7 +7,7 @@ kind: Documentation
 
 When instrumenting your applications with the Traces Agent, and going through the [Service Page](https://app.datadoghq.com/apm/services), you may come across the following Strings: "Type", "Service", "Resource", and "Name". What do these terms mean?
 
-{{< img src="tracing/miscellaneous/terminology/trace_ui.png" alt="Trace UI" responsive="true" popup="true">}}
+{{< img src="tracing/miscellaneous/terminology/trace_ui.png" alt="Trace UI" responsive="true" popup="true" style="width:80%;">}}
 
 ### Name (Trace)
 
@@ -15,11 +15,11 @@ Used to track the time spent by an application processing a single operation. Fo
 
 The Name field can be found in the URL after clicking on a specific Service.
 
-{{< img src="tracing/miscellaneous/terminology/trace_url.png" alt="Trace URL" responsive="true" popup="true">}}
+{{< img src="tracing/miscellaneous/terminology/trace_url.png" alt="Trace URL" responsive="true" popup="true" style="width:80%;">}}
 
 This Name/Trace is the name given around the function or method that would execute the code for each "Resource". This can be modified by using the `tracer.trace` method as seen here (in Python):
 
-{{< img src="tracing/miscellaneous/terminology/name_python.png" alt="Name Python" responsive="true" popup="true">}}
+{{< img src="tracing/miscellaneous/terminology/name_python.png" alt="Name Python" responsive="true" popup="true" style="width:50%;">}}
 
 ## Type
 
@@ -29,7 +29,6 @@ The type can be one of:
 
 *  Web
 *  DB
-*  HTTP
 *  Cache
 *  Custom
 
@@ -57,7 +56,7 @@ These services are defined by the user when instrumenting their application with
 
 In the Datadog UI, this is the "Name" field in the above image.  An example of setting a custom Service using Python:
 
-{{< img src="tracing/miscellaneous/terminology/custom_service.png" alt="Custom Service" responsive="true" popup="true">}}
+{{< img src="tracing/miscellaneous/terminology/custom_service.png" alt="Custom Service" responsive="true" popup="true" style="width:80%;">}}
 
 ### Resource
 
@@ -67,4 +66,4 @@ Resources should be grouped together under a canonical name, like `/user/home` r
 
 These resources can be found after clicking on a particular service:
 
-{{< img src="tracing/miscellaneous/terminology/resources.png" alt="Resources" responsive="true" popup="true">}}
+{{< img src="tracing/miscellaneous/terminology/resources.png" alt="Resources" responsive="true" popup="true" style="width:50%;">}}

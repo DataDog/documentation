@@ -8,35 +8,16 @@ description: Instrument your code to improve performance
 
 Datadog's integrated APM tool eliminates the traditional separation between infrastructure and application performance monitoring. This not only provides greater visibility, but also allows you to see the relationship between application code and the underlying infrastructure.
 
-## Getting started
-
-Datadog APM is offered as an upgrade to our Pro and Enterprise plans. A free 14-day trial is available.  Registered users can visit the [APM page of the Datadog application](https://app.datadoghq.com/apm/home) to get started.
-
-APM is available as part of the Datadog Agent with versions 5.11+ as part of the one line install for the Linux and Docker Agents. Currently, [Mac](https://github.com/DataDog/datadog-trace-agent#run-on-osx) and [Windows](https://github.com/DataDog/datadog-trace-agent#run-on-windows) users must perform a manual install of the APM Agent (aka Trace Agent) via a separate install process.
-
-<div class="alert alert-info">
-APM is enabled by default after Datadog agent 5.13 (on Linux and Docker), and can be disabled by adding the parameter: <code>apm_enabled: no</code> in your Datadog agent configuration file.
-</div>
-
-Trace Agent packages are available for:
-
-* Linux — packaged with the Datadog Agent
-* Mac OS — packaged separately, see the [Trace Agent releases](https://github.com/DataDog/datadog-trace-agent/releases/)
-* Docker — included in the [docker-dd-agent](https://github.com/DataDog/docker-dd-agent) container
-* Heroku - deploy it to Heroku via the [Datadog Heroku Buildpack](https://github.com/DataDog/heroku-buildpack-datadog).
-
-Install from source for other platforms.
+Datadog APM is offered as an upgrade to our Pro and Enterprise plans. A free 14-day trial is available.  
+Registered users can visit the [APM page of the Datadog application](https://app.datadoghq.com/apm/home).
 
 ## Instrument your application
 
-With our infrastructure monitoring, metrics are sent to the Datadog Agent, which then forwards them to Datadog.  
-Similarly, tracing metrics are also sent to the Datadog agent. To enable tracing:
+With our infrastructure monitoring, metrics are sent to the Datadog Agent, which then forwards them to Datadog. Similarly, tracing metrics are also sent to the Datadog agent. To start tracing your application:
 
-Install the latest [Datadog Agent](https://app.datadoghq.com/account/settings#agent) (version 5.11.0 or above is required).
+1. Install and configure the latest [Datadog Agent](https://app.datadoghq.com/account/settings#agent) (version 5.11.0 or above is required). For additional information, reference the [getting started guide](/tracing/getting_started)
 
-For additional information, reference [the tracing languages page](/tracing/languages)
-
-To instrument your application, select one of the following supported languages.
+2. Instrument your application, select one of the following supported languages:
 
 - [Go](/tracing/languages/go)
 - [Java](/tracing/languages/java)

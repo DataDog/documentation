@@ -3,6 +3,13 @@ title: Tracing Ruby Applications
 kind: Documentation
 aliases:
 - /tracing/ruby/
+further_reading:
+- link: "https://github.com/DataDog/dd-trace-rb"
+  tag: "Github"
+  text: Source code
+- link: "http://gems.datadoghq.com/trace/docs/"
+  tag: "Rubydoc"
+  text: Gem documentation
 ---
 
 ## Installation
@@ -29,7 +36,7 @@ tracer.trace("web.request") do |span|
 end
 ```
 
-For more examples, see the [RubyDoc Gem documentation](http://www.rubydoc.info/gems/ddtrace/).
+For more examples, see the [RubyDoc Gem documentation](http://gems.datadoghq.com/trace/docs/).
 
 ## Compatibility
 
@@ -74,7 +81,4 @@ ___
 
 ## Further Reading
 
-{{< whatsnext >}}
-    {{< nextlink href="https://github.com/DataDog/dd-trace-rb" tag="Github" >}}Tracing Ruby integration source code{{< /nextlink >}}
-    {{< nextlink href="http://www.rubydoc.info/gems/ddtrace/" tag="Documentation" >}} RubyDoc Gem page{{< /nextlink >}}
-{{< /whatsnext >}}
+{{< partial name="whats-next/whats-next.html" >}}

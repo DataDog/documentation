@@ -16,7 +16,7 @@ The service list can be filtered depending of:
 * [Your service type](/tracing/miscellaneous/terminology/#type)
 * A query
 
-{{< img src="tracing/services/services_filtering.gif" alt="Services filtering" responsive="true" popup="true">}}
+{{< img src="tracing/services/services_filtering.gif" alt="Services filtering" responsive="true" popup="true" style="width:75%;">}}
 
 ## Services types
 

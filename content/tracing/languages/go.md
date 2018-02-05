@@ -3,6 +3,13 @@ title: Tracing Go Applications
 kind: Documentation
 aliases:
 - /tracing/go/
+further_reading:
+- link: "https://github.com/DataDog/dd-trace-go"
+  tag: "Github"
+  text: Source code
+- link: "https://godoc.org/github.com/DataDog/dd-trace-go/tracer"
+  tag: "GoDoc"
+  text: Package page
 ---
 
 ## Installation
@@ -76,7 +83,4 @@ ___
 
 ## Further Reading
 
-{{< whatsnext >}}
-    {{< nextlink href="https://github.com/DataDog/dd-trace-go" tag="Github" >}}Tracing Go integration source code{{< /nextlink >}}
-    {{< nextlink href="https://godoc.org/github.com/DataDog/dd-trace-go/tracer" tag="Documentation" >}}GoDoc Package page{{< /nextlink >}}
-{{< /whatsnext >}}
+{{< partial name="whats-next/whats-next.html" >}}

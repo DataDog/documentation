@@ -3,6 +3,13 @@ title: Tracing Python Applications
 kind: Documentation
 aliases:
 - /tracing/python/
+further_reading:
+- link: "https://github.com/DataDog/dd-trace-py"
+  tag: "Github"
+  text: Source code
+- link: "http://pypi.datadoghq.com/trace/docs/"
+  tag: "Pypi"
+  text: APM (Tracing)
 ---
 
 ## Installation
@@ -75,7 +82,4 @@ ___
 
 ## Further Reading
 
-{{< whatsnext >}}
-    {{< nextlink href="https://github.com/DataDog/dd-trace-py" tag="Github" >}}Tracing Python library source code{{< /nextlink >}}
-    {{< nextlink href="http://pypi.datadoghq.com/trace/docs/" tag="Documentation" >}} Python library documentation page{{< /nextlink >}}
-{{< /whatsnext >}}
+{{< partial name="whats-next/whats-next.html" >}}
