@@ -72,9 +72,9 @@ We also provide you with the ability to be notified on changes to a monitor you 
 
 Setting the above to **Notify** send an email for the monitor audit events to all people who are alerted in a specific monitor.
 
-## Manualy resolve your monitor
+## Manually resolve your monitor
 
-It only makes sense in a couple cases to resolve manually your monitor:
+It only makes sense in a couple cases to manually resolve your monitor:
 
 * If the monitor is in a "no data" state then resolving it hides it from the triggered monitors page.
 * If the monitor is in the triggered state but has stopped reporting data then
