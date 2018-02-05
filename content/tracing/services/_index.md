@@ -22,7 +22,7 @@ The service list can be filtered depending on:
 
 Every Service monitored by your application is associated with a "Type". This type is automatically determined by Datadog and is applied for you. The "Type" specified the name of the application/framework the Datadog Agent is Integrating with.
 
-For example, if you are using the official Flask Integration, the "Type" is set to "Web". If you are monitoring a custom application, this appears as "Custom".
+For example, if you are using the official Flask Integration, the "Type" is set to "Web". If you are monitoring a custom application, the "Type" appears as "Custom".
 
 The type of the service can be one of:
 

@@ -17,11 +17,11 @@ With our infrastructure monitoring, metrics are sent to the Datadog Agent, which
 
 **1. Install the Datadog Agent**
 
-Install and configure the latest [Datadog Agent](https://app.datadoghq.com/account/settings#agent) (version 5.11.0 or above is required). For additional information, reference the [getting started guide](/tracing/getting_started)
+Install and configure the latest [Datadog Agent](https://app.datadoghq.com/account/settings#agent) (version 5.11.0 or above is required). For additional information, reference the [getting started guide](/tracing/getting_started).
 
 **2. Install the Trace Agent**
 
-If you are running MacOS or Windows, you will need to install and run the [Trace Agent](https://github.com/DataDog/datadog-trace-agent) in addition to the DataDog agent. On Linux, the Trace Agent is packaged with the standard Datadog Agent, so no extra configuration is required.
+If you are running MacOS or Windows, you will need to install and run the [Trace Agent](https://github.com/DataDog/datadog-trace-agent) in addition to the DataDog agent. On Linux, the Trace Agent is packaged with the standard Datadog Agent, so no extra configuration is needed.
 
 - [MacOS Trace Agent Configuration](https://github.com/DataDog/datadog-trace-agent#run-on-osx)
 - [Windows Trace Agent Configuration](https://github.com/DataDog/datadog-trace-agent#run-on-windows)
