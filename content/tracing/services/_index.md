@@ -10,7 +10,7 @@ After having [instrumented your application](/tracing/languages), your reporting
 
 ## Filtering the services list
 
-The service list can be filtered depending of:
+The service list can be filtered depending on:
 
 * [Your environment](/tracing/miscellaneous/environments).
 * [Your service type](/tracing/miscellaneous/terminology/#type)
@@ -20,12 +20,13 @@ The service list can be filtered depending of:
 
 ## Services types
 
-Every Service being monitored by your application is associated with a "Type". This type is automatically determined by Datadog and is applied for you. The "Type" specified the name of the application/framework the Datadog Agent is Integrating with.  
-If you are monitoring a custom application, this appears as "Custom". For example, if you are using the official Flask Integration, the "Type" is set to "Web".
+Every Service monitored by your application is associated with a "Type". This type is automatically determined by Datadog and is applied for you. The "Type" specified the name of the application/framework the Datadog Agent is Integrating with.
 
-The type can be one of:
+For example, if you are using the official Flask Integration, the "Type" is set to "Web". If you are monitoring a custom application, the "Type" appears as "Custom".
 
-*  [Cache](/tracing/services/cache)
-*  [Custom](/tracing/services/custom)
-*  [DB](/tracing/services/db)
-*  [Web](/tracing/services/web)
+The type of the service can be one of:
+
+*  Cache
+*  Custom
+*  DB
+*  Web

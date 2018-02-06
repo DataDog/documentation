@@ -4,6 +4,7 @@ kind: faq
 private: true
 ---
 {{< whatsnext desc="List of Frequently Asked Questions:">}}
+    {{< nextlink href="/tracing/faq/how-long-is-tracing-data-stored" >}}How long is tracing data stored?{{< /nextlink >}}
     {{< nextlink href="/tracing/faq/what-are-the-naming-criteria-for-services-resources" >}}What are the naming criteria for services, resources, etc?{{< /nextlink >}}
     {{< nextlink href="/tracing/faq/how-often-does-the-trace-agent-send-stats" >}}How often does the trace agent send stats?{{< /nextlink >}}
     {{< nextlink href="/tracing/faq/why-am-i-getting-errno-111-connection-refused-errors-in-my-application-logs" >}}Why am I getting [Errno 111] Connection refused errors{{< /nextlink >}}

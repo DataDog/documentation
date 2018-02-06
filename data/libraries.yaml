@@ -191,6 +191,11 @@ Tracing:
       authors: Matt Ho
       notes: OpenTracing Tracer implementation for Datadog in Go
   - Java:
+    - name: dd-trace-java
+      link: https://github.com/DataDog/dd-trace-java
+      official: true
+      authors: Datadog
+      notes: Java package 'tracer'
     - name: apm-client
       link: https://github.com/chonton/apm-client
       authors: Chas Honton
