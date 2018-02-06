@@ -360,9 +360,10 @@ $(document).ready(function () {
         var customPadding = 10; // how much till it looks good with eye
         var offset = amount + customPadding;
         var url = window.location.href.replace(window.location.hash, '');
-        var newSt = htag.offset().top - offset;
+        var newSt = 0 - offset;
         var currentSt = $(document).scrollTop();
         if(htag.length) {
+            newSt = htag.offset().top - offset;
             if(currentSt !== newSt) {
                 if(animate) {
                     $("html, body").animate({scrollTop: newSt}, 300);
