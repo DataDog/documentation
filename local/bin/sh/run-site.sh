@@ -39,7 +39,7 @@ if [ ${RUN_SERVER} == true ]; then
 			args="${args} --integrations ${INTEGRATIONS_CORE}"
 		fi
 		if [ ${INTEGRATIONS_EXTRAS} != "false" ]; then
-			args="${args} --integrations_extras ${INTEGRATIONS_EXTRAS}"
+			args="${args} --extras ${INTEGRATIONS_EXTRAS}"
 		fi
 		if [ ${GITHUB_TOKEN} != "false" ]; then
 			args="${args} --token ${GITHUB_TOKEN}"

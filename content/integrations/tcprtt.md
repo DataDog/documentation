@@ -1,9 +1,14 @@
 ---
-title: TCP RTT check
 integration_title: TCP RTT Check
+name: tcp_rtt
 kind: integration
 newhlevel: true
 is_public: true
+public_title: Datadog-TCP RTT Integration
+short_description: "Monitor TCP connectivity to remote hosts."
+categories:
+- network
+ddtype: check
 ---
 ## Overview
 
