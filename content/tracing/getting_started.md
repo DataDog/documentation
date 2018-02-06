@@ -30,7 +30,9 @@ Install from source for other platforms.
 
 ## Instrument your application
 
-With our infrastructure monitoring, metrics are sent to the Datadog Agent, which then forwards them to Datadog. Similarly, tracing metrics are also sent to the Datadog agent. To start tracing your application:
+With our infrastructure monitoring, metrics are sent to the Datadog Agent, which then forwards them to Datadog. Similarly, tracing metrics are also sent to the Datadog agent: The application code instrumentation flushes to the Agent every 1 s ([see here for the Python client](https://github.com/DataDog/dd-trace-py/blob/69693dc7cdaed3a2b6a855325109fa100e42e254/ddtrace/writer.py#L159) for instance) and the Agent flushes to the [Datadog API every 10s](https://github.com/DataDog/datadog-trace-agent/blob/master/config/agent.go#L170).  
+
+To start tracing your application:
 
 **1. Install the Datadog Agent**
 
@@ -83,7 +85,16 @@ Additionally, some configuration options may be set as environment variables. No
 
 For more information about the Datadog Agent, see the [dedicated doc page](/agent/) or refer to the [`datadog.conf.example` file](https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example).
 
-## How it works?
-### How often does the trace agent send stats?
+## Defining namespace for trace metrics 
 
-The application code instrumentation flushes to the Agent every 1 s ([see here for the Python client](https://github.com/DataDog/dd-trace-py/blob/69693dc7cdaed3a2b6a855325109fa100e42e254/ddtrace/writer.py#L159) for instance) and the Agent flushes to the [Datadog API every 10s](https://github.com/DataDog/datadog-trace-agent/blob/master/config/agent.go#L170).
+The namespace is basically trace.<name>.<metrics> where
+
+* is coming from the name of the integration ("redis", "pylons", etc.)
+* is about the hits, errors or latency ("request.hits", etc.)
+* the metrics are tagged by service & resource.
+
+So for pylons it might be `trace.pylons.request.hits{service:mcnulty}`.
+
+You can use the Chrome inspector on the traces page to find the metric name in the **batch_query** call:
+
+{{< img src="tracing/chrome_inspector.png" alt="Chrome Inspector" responsive="true" popup="true">}}

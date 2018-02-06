@@ -11,7 +11,7 @@ Datadog's integrated APM tool eliminates the traditional separation between infr
 Datadog APM is offered as an upgrade to our Pro and Enterprise plans. A free 14-day trial is available.
 Registered users can visit the [APM page of the Datadog application](https://app.datadoghq.com/apm/home).
 
-Follow our [getting started guide](/tracing/getting_started) to start instrumenting your application!
+**Follow our [getting started guide](/tracing/getting_started) to start instrumenting your application!**
 
 ## How long is tracing data stored?
 

@@ -15,7 +15,8 @@ Consult on this page:
 
 ## Definition
 
-The name of a set of processes that do the same job. For instance, a simple web application may consist of two services: 
+**A Service is the name of a set of processes that do the same job.**  
+For instance, a simple web application may consist of two services: 
 
 * A single `webapp` service and a single `database` service
 
@@ -26,10 +27,14 @@ While a more complex environment may break it out into 6 services:
 
 You defined those service when instrumenting your application with Datadog.
 An example of setting a custom Service using Python:
+```python
+from ddtrace import tracer
+# add the `wrap` decorator to trace an entire function
+@tracer.wrap(service='my-app')
+```
 
-{{< img src="tracing/services/custom_service.png" alt="Custom Service" responsive="true" popup="true" style="width:80%;">}}
+Service names:
 
-Service names
 * **must be lowercase, alphanumeric characters**.
 * **cannot have more than 50 characters**.
 * **cannot contain spaces** (spaces are replaced with underscores).
@@ -37,12 +42,36 @@ Service names
 
 ## Service monitor
 
+Datadog propose list of monitor depending of your service name/(type?): 
+
 {{< img src="tracing/services/service_monitors.png" alt="Service Monitors" responsive="true" popup="true" style="width:90%;">}}
+
+Enable them directly or create your own [APM monitors](/monitors/monitor_type/apm)
 
 ## Out of the box graphs
 
+//  
+// Is there specific graph for specific service type?  
+// Is there graphs that are shared across all services ?  
+//  
+//  
+
 ## Resources
 
-{{< img src="tracing/services/resources.png" alt="Resources" responsive="true" popup="true">}}
+Consult the list of resources associated to your service:
+
+{{< img src="tracing/services/resources.png" alt="Resources" responsive="true" popup="true" style="width:90%;">}}
+
+[Refer to our dedicated resource documentation to learn more](/tracing/services/resource).
 
 ### Columns 
+
+{{< img src="tracing/services/resource_columns.png" alt="Resource columns" responsive="true" popup="true" style="width:50%;">}}
+
+Choose what do display in your resources list:
+
+* **Request**: Absolute amount of requests traced (per seconds)
+* **Avg/p75/p90/p95/p99/Max Latency**: The Avg/p75/p90/p95/p99/Max latency of your traced requests
+* **Total time**: Sum of all time spend in this resource 
+* **Error**: Absolute amount of error for a given resource
+* **Error Rate**: Percent of error for a given resource
