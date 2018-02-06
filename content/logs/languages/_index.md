@@ -10,11 +10,11 @@ Datadog's Logs is currently available via public beta. You can apply for inclusi
 
 ## How to get the most of your application logs
 
-When logging stack traces, there are specific elements that are very important such as the logger name, the current thread, the error type and of course the stack trace itself. 
+When logging stack traces, there are specific attributes that have a dedicated UI display within your Datadog application such as the logger name, the current thread, the error type and of course the stack trace itself. 
 
-https://cl.ly/1w1b1g301Y1r
+{{< img src="logs/languages/stack_trace.png" style="width:80%;" alt="Stack trace" responsive="true" popup="true" >}}
 
-To make sure all those parameters get the special treatment they deserve, make sure that you are using the following attribute names:
+To enable those functionalities use the following attribute names:
 
 * `logger.name`: Name of the logger
 * `logger.thread_name`: Name of the current thread
@@ -22,7 +22,7 @@ To make sure all those parameters get the special treatment they deserve, make s
 * `error.msg`: Error message contained in the stack trace
 * `error.kind`: The type or "kind" of an error (i.e "Exception", "OSError", ...)
 
-By default, integration pipelines attempt to remap default logging library parameters to those specific values and parse stack traces or traceback to automatically extract the `error.msg` and `error.kind`.
+**Note**: By default, [integration pipelines](/logs/processing) attempt to remap default logging library parameters to those specific attributes and parse stack traces or traceback to automatically extract the `error.msg` and `error.kind`.
 
 ## Send your application logs in JSON
 
