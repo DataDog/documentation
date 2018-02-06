@@ -1,6 +1,6 @@
 ---
-title: Datadog-Kubernetes Integration
 integration_title: Kubernetes
+name: kubernetes
 kind: integration
 git_integration_title: kubernetes
 newhlevel: true
@@ -10,6 +10,15 @@ is_public: true
 aliases:
     - /tracing/api/
     - /integrations/kubernetes_state/
+public_title: Datadog-Kubernetes Integration
+short_description: "Capture Pod scheduling events, track the status of your Kublets, and more"
+categories:
+- cloud
+- configuration & deployment
+- containers
+- orchestration
+doc_link: https://docs.datadoghq.com/integrations/kubernetes/
+ddtype: check
 ---
 
 {{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard" responsive="true" popup="true">}}
