@@ -1,10 +1,16 @@
 ---
-title: Datadog-RSS Integration
 integration_title: RSS
+name: rss
 kind: integration
 doclevel: basic
 description: "See RSS feeds in your Datadog event stream."
 is_public: true
+public_title: Datadog-RSS Integration
+short_description: "Capture any RSS feed inside your Datadog event stream"
+categories:
+- notification
+- web
+ddtype: crawler
 ---
 
 {{< img src="integrations/rss/rss.png" alt="RSS event" responsive="true" popup="true">}}

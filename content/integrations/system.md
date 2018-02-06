@@ -1,12 +1,18 @@
 ---
-title: System Check
 integration_title: System Check
+name: system
 newhlevel: true
 kind: integration
 git_integration_title: system
 updated_for_agent: 5.8.5
 description: "Track system resource usage: CPU, memory, disk, filesystem, and more."
 is_public: true
+public_title: Datadog-System Integration
+short_description: "Track system resource usage: CPU, memory, disk, filesystem, and more."
+categories:
+- os & system
+- configuration & deployment
+ddtype: check
 ---
 ## Overview
 

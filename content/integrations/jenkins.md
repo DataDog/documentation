@@ -1,11 +1,16 @@
 ---
-title: Datadog-Jenkins Integration
 integration_title: Jenkins
+name: jenkins
 kind: integration
 git_integration_title: jenkins
 newhlevel: true
-description: "{{< get-desc-from-git >}}"
+description: 
 is_public: true
+public_title: Datadog-Jenkins Integration
+short_description: "Track job statuses and see builds start and stop from your event stream"
+categories:
+- configuration & deployment
+ddtype: crawler
 ---
 
 {{< img src="integrations/jenkins/integration-jenkins-overview.png" alt="Jenkins Plugin" responsive="true" popup="true">}}
