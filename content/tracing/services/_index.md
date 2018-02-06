@@ -85,10 +85,10 @@ We also have some aliases for Integrations such as Postgres, MySQL, and Cassandr
 
 Choose what do display in your services list:
 
-{{< img src="tracing/services/services_columns.png" alt="Services columns" responsive="true" popup="true">}}
+{{< img src="tracing/services/services_columns.png" alt="Services columns" responsive="true" popup="true" style="width:40%;">}}
 
-* Request
-* Avg/p75/p90/p95/p99/Max Latency
-* Error Rate
-* [Apdex](/tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm)
-* [Monitor Status](/tracing/services/service/#service-monitor)
+* **Request**: The total amount of requests traced (per seconds)
+* **Avg/p75/p90/p95/p99/Max Latency**: The Avg/p75/p90/p95/p99/Max latency of your traced requests
+* **Error Rate**: The amount of requests traced (per seconds) that ended with an error
+* **Apdex**: Apdex score of the service, [learn more on Apdex](/tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm)
+* **Monitor status**: [Status of monitors](/tracing/services/service/#service-monitor) attached to a service.
