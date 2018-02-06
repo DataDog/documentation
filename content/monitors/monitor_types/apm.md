@@ -23,7 +23,7 @@ These work just like regular [metric monitors](/monitors/monitor_types/metric) â
 1. Select your environment: 
     {{< img src="monitors/monitor_types/apm/apm_select_env.png" alt="APM select Environment" responsive="true" popup="true" style="width:75%;" >}}
 
-2. Select your [service](/tracing/miscellaneous/terminology/#service):
+2. Select your [service](/tracing/services/service):
     {{< img src="monitors/monitor_types/apm/apm_select_service.png" alt="APM select Service" responsive="true" popup="true" style="width:75%;" >}}
 3. Set your alert conditions:
     {{< img src="monitors/monitor_types/apm/apm_set_alert_conditions.png" alt="APM set alert conditions" responsive="true" popup="true" style="width:75%;" >}}

@@ -407,11 +407,26 @@ languages:
           parent: customnav_tracingnav_langs
         # Services
         - identifier: customnav_tracingnav_services
-          name: "Services"
+          name: "Services List"
           url: "/tracing/services/"
           weight: 30
           parent: menu_references_tracing
-        # Tracing micellaneous
+        - identifier: customnav_tracingnav_service
+          name: "Service"
+          url: "/tracing/services/service"
+          weight: 310
+          parent: customnav_tracingnav_services
+        - identifier: customnav_tracingnav_resource
+          name: "Resource"
+          url: "/tracing/services/resource"
+          weight: 320
+          parent: customnav_tracingnav_services
+        - identifier: customnav_tracingnav_trace
+          name: "Trace"
+          url: "/tracing/services/trace"
+          weight: 330
+          parent: customnav_tracingnav_services
+        # Tracing miscellaneous
         - identifier: customnav_tracingnav_miscellaneous
           name: "Miscellaneous"
           url: "/tracing/miscellaneous/"
@@ -422,11 +437,6 @@ languages:
           url: "/api/#tracing"
           weight: 410
           parent: customnav_tracingnav_miscellaneous
-        - identifier: customnav_tracingnav_env
-          name: "Environments"
-          url: "/tracing/miscellaneous/environments/"
-          weight: 420
-          parent: customnav_tracingnav_miscellaneous
         - identifier: customnav_tracingnav_apm_monitor
           name: "Monitor"
           url: "/monitors/monitor_types/apm"
@@ -436,11 +446,6 @@ languages:
           name: "Dashboard widget"
           url: "/graphing/dashboards/widgets/#service-summary"
           weight: 440
-          parent: customnav_tracingnav_miscellaneous
-        - identifier: customnav_tracingnav_terminology
-          name: "Terminology"
-          url: "/tracing/miscellaneous/terminology/"
-          weight: 450
           parent: customnav_tracingnav_miscellaneous
 
         #- identifier: customnav_tracingnav_faq
