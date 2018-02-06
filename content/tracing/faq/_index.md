@@ -4,7 +4,6 @@ kind: faq
 private: true
 ---
 {{< whatsnext desc="List of Frequently Asked Questions:">}}
-    {{< nextlink href="/tracing/faq/how-often-does-the-trace-agent-send-stats" >}}How often does the trace agent send stats?{{< /nextlink >}}
     {{< nextlink href="/tracing/faq/why-am-i-getting-errno-111-connection-refused-errors-in-my-application-logs" >}}Why am I getting [Errno 111] Connection refused errors{{< /nextlink >}}
     {{< nextlink href="/tracing/faq/resource-trace-doesn-t-show-up-under-correct-service" >}}Resource/Trace doesn't show up under correct Service{{< /nextlink >}}
     {{< nextlink href="/tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm" >}}How to configure an Apdex for your traces with Datadog APM ?{{< /nextlink >}}
