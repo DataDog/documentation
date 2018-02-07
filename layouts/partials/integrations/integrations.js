@@ -1,23 +1,17 @@
 $(document).ready(function () {
     var finder_state = 0;  // closed
-    var titles = document.getElementsByClassName('title');
+    var container = document.querySelector('[data-ref="container"]');
 
     $(window).on('focus', function () {
         if (finder_state) {
-            $.each(titles, function (e, v) {
-                v.style.display = 'none';
-            });
-            $('.integration-row').removeClass('find');
+            container.classList.remove('find');
             finder_state = 0;
         }
     });
 
     Mousetrap.bind(['command+f', 'control+f'], function (e) {
         if (!finder_state) {
-            $.each(titles, function (e, v) {
-                v.style.display = 'block';
-            });
-            $('.integration-row').addClass('find');
+            container.classList.add('find');
             finder_state = 1;
         }
     });
