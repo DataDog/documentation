@@ -46,7 +46,7 @@ Datadog propose list of monitor depending of your service name/(type?):
 
 {{< img src="tracing/services/service_monitors.png" alt="Service Monitors" responsive="true" popup="true" style="width:90%;">}}
 
-Enable them directly or create your own [APM monitors](/monitors/monitor_type/apm)
+Enable them directly or create your own [APM monitors](/monitors/monitor_types/apm)
 
 ## Out of the box graphs
 
