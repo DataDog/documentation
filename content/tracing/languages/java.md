@@ -16,8 +16,9 @@ We officially support the Java JRE 1.7 and higher of both Oracle JDK and OpenJDK
 
 To improve visibility into applications using unsupported frameworks, consider:
 
-* Adding custom instrumentation (with OpenTracing or the `@Trace` annotation), * [Submitting a pull request](https://github.com/DataDog/documentation#outside-contributors) with instrumentation for inclusion in a future release
-* Creating a feature request via [Github Issues](https://github.com/datadog/dd-trace-java/issues)
+* Adding custom instrumentation (with OpenTracing or the `@Trace` annotation).
+* [Submitting a pull request](https://github.com/DataDog/documentation#outside-contributors) with instrumentation for inclusion in a future release.
+* Creating a feature request via [Github Issues](https://github.com/datadog/dd-trace-java/issues).
 
 
 
