@@ -12,9 +12,9 @@ further_reading:
 
 ## Compatibility
 
-We officially support the Java JRE 1.7 and higher of both Oracle JDK and OpenJDK.  Other JVM compatable languages (Scala, Groovy, Kotlin, etc) should work, but may be missing the instrumentation needed to be useful.  To see what web frameworks, libraries, and datastores we support, see the [Integrations section](#integrations).
+We officially support the Java JRE 1.7 and higher of both Oracle JDK and OpenJDK.  Other JVM compatible languages (Scala, Groovy, Kotlin, etc) should work, but may be missing the instrumentation needed to be useful.  To see what web frameworks, libraries, and datastores we support, see the [Integrations section](#integrations).
 
-To improve visibility into applications using unsupported frameworks, you can consider adding custom instrumentation (with OpenTracing or the `@Trace` annotation), submitting a pull request with instrumentation for inclusion in a future release, or creating a feature request via [Github Issues](https://github.com/datadog/dd-trace-java/issues)
+To improve visibility into applications using unsupported frameworks, consider adding custom instrumentation (with OpenTracing or the `@Trace` annotation), submitting a pull request with instrumentation for inclusion in a future release, or creating a feature request via [Github Issues](https://github.com/datadog/dd-trace-java/issues)
 
 ## Installation and Getting Started
 
