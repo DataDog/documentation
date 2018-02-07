@@ -367,12 +367,6 @@ languages:
           pre: "nav_tracing"
           weight: 80
         # TRACING/APM - Subnav start
-        # Getting started
-        - identifier: customnav_tracingnav_getting_started
-          name: "Getting started"
-          url: "/tracing/getting_started/"
-          weight: 5
-          parent: menu_references_tracing
         # Tracing docker
         - identifier: customnav_tracingnav_docker
           name: "Docker"
@@ -446,6 +440,11 @@ languages:
           name: "Dashboard widget"
           url: "/graphing/dashboards/widgets/#service-summary"
           weight: 440
+          parent: customnav_tracingnav_miscellaneous
+        - identifier: customnav_tracingnav_apm_sampling_storage
+          name: "Storage & Sampling"
+          url: "/tracing/miscellaneous/storage_and_sampling"
+          weight: 450
           parent: customnav_tracingnav_miscellaneous
 
         #- identifier: customnav_tracingnav_faq
