@@ -244,8 +244,20 @@ filter {
 
     log { source(s_src); source(s_files); destination(d_datadog); };
     ```
+    
+4. (Optional) TLS Encryption 
 
-4. Restart syslog-ng 
+To activate TLS encryption, you firstly need to download our [certificate](https://gist.githubusercontent.com/estib/8762bc1a2a5bda781a6e55cca40235f2/raw/665b6b2906a728027f508ea067f01cdf3cf72b49/intake.logs.datadoghq.com.crt). Save it to `/etc/syslog-ng/certs.d/datadoghq.crt`. 
+
+Then change the definition of the destination to the following:
+
+```
+destination d_datadog { tcp("intake.logs.datadoghq.com" port(10516)     tls(peer-verify(required-untrusted) ca_dir('/opt/syslog-ng/certs.d/')) template(DatadogFormat)); };
+```
+
+More information about the TLS parameters and possibilities for syslog-ng available in their [official documentation](https://syslog-ng.com/documents/html/syslog-ng-ose-latest-guides/en/syslog-ng-ose-guide-admin/html/tlsoptions.html).
+
+5. Restart syslog-ng 
 
 
 ## NXLog
