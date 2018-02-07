@@ -10,7 +10,7 @@ For example, a trace can be used to track the entire time spent processing a com
 
 The Name field can be found in the URL after clicking on a specific Service.
 
-{{< img src="tracing/services/trace_url.png" alt="Trace URL" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="tracing/services/trace/trace_url.png" alt="Trace URL" responsive="true" popup="true" style="width:80%;">}}
 
 This name is the name given around the function or method that would execute the code for each "Resource". This can be modified by using the `tracer.trace` method as seen here (in Python):
 
@@ -36,28 +36,28 @@ def save_thumbnails(img,sizes):
 **A Span represents a logical unit of work in the system. Each trace consists of one or more spans.**  
 Spans are associated with a service and optionally a resource. Each span consists of a start time, a duration, and optional tags. For example, a span can describe the time spent on a distributed call on a separate machine, or the time spent in a small component within a larger operation. Spans can be nested within each other, and in those instances will have a parent-child relationship.
 
-{{< img src="tracing/services/tracing-terminology.png" alt="Visualizing tracing terms" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="tracing/services/trace/tracing-terminology.png" alt="Visualizing tracing terms" responsive="true" popup="true" style="width:80%;">}}
 
 ## Trace in datadog
 
 Selecting a trace offers you the list of spans associated to it with a flame graph display:
 
-{{< img src="tracing/services/trace.png" alt="Trace" responsive="true" popup="true" style="width:90%;">}}
+{{< img src="tracing/services/trace/trace.png" alt="Trace" responsive="true" popup="true" style="width:90%;">}}
 
 Select between **Service** or **Host** break down:
 
 * **Service**: show all span associated services
 * **Host**: show all spans associated hots
 
-{{< img src="tracing/services/service_host_display.png" alt="Service host display" responsive="true" popup="true" style="width:40%;">}}
+{{< img src="tracing/services/trace/service_host_display.png" alt="Service host display" responsive="true" popup="true" style="width:40%;">}}
 
-You can switch to a list display in order to have all insights on your spans:
+You can switch to a list display in order to have all insights at onces on your spans:
 
-{{< img src="tracing/services/trace_list.png" alt="Trace list" responsive="true" popup="true" style="width:90%;">}}
+{{< img src="tracing/services/trace/trace_list.png" alt="Trace list" responsive="true" popup="true" style="width:90%;">}}
 
 If you are analyzing an error trace, the error has a specific display if you followed the [special meaning tags rules](#traces-special-meaning-tags):
 
-{{< img src="tracing/services/trace_error.png" alt="Trace Error" responsive="true" popup="true" style="width:90%;">}}
+{{< img src="tracing/services/trace/trace_error.png" alt="Trace Error" responsive="true" popup="true" style="width:90%;">}}
 
 ### Traces special meaning tags
 
@@ -76,5 +76,5 @@ Some of them have a special meaning which lead to a dedicated display and behavi
 * **`error.stack`**:  
     Allows a better display of the Stacktrace of an exception in Datadog UI (red boxes etc....)
 
-{{< img src="tracing/services/trace_error_formating.png" alt="Error Formating" responsive="true" popup="true" >}}
+{{< img src="tracing/services/trace/trace_error_formating.png" alt="Error Formating" responsive="true" popup="true" >}}
 

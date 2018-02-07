@@ -3,7 +3,7 @@ title: Resource
 kind: Documentation
 ---
 
-{{< img src="tracing/services/ressource.png" alt="Ressource" responsive="true" popup="true">}}
+{{< img src="tracing/services/resource/ressource.png" alt="Ressource" responsive="true" popup="true">}}
 
 ## Definition
 
@@ -25,15 +25,22 @@ Resource names:
 
 ## Out of the box graphs
 
-//  
-// Is there specific graph for specific resource?  
-// Is there graphs that are shared across all resources?  
-//  
-//  
 
+Sometime a 3 ou 4 graph
+
+Request 
+latency 
+error
+
+when there is multiple service involved then there is a 4th graph breakdown by suplier  (sub services)
+
+### Latency distribution
+
+Zoom on graph to fitler traces
 
 ## Trace
 
 Consult the list of sampled traces associated to your service:
 
 [Refer to our dedicated trace documentation to learn more](/tracing/services/trace).
+

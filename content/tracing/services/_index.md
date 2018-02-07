@@ -10,6 +10,8 @@ Select a service to have more performance insights, [read our dedicated service 
 
 {{< img src="tracing/services/services_page.png" alt="Services page" responsive="true" popup="true">}}
 
+## Filtering the service list
+
 The services list is a bird eyed view of all [services](/tracing/services/service) reporting from your infrastructure. It can be filtered depending on:
 
 * [Your environment](#environment).
@@ -18,7 +20,6 @@ The services list is a bird eyed view of all [services](/tracing/services/servic
 
 {{< img src="tracing/services/services_filtering.gif" alt="Services filtering" responsive="true" popup="true" style="width:75%;">}}
 
-## Filtering the service list
 ### Environment
 #### Definition
 

@@ -5,7 +5,7 @@ kind: Documentation
 
 Selecting a service on the services page leads you to the detailed service page:
 
-{{< img src="tracing/services/detailed_service_page.png" alt="Detailed service page" responsive="true" popup="true" style="width:90%;">}}
+{{< img src="tracing/services/service/detailed_service_page.png" alt="Detailed service page" responsive="true" popup="true" style="width:90%;">}}
 
 Consult on this page:
 
@@ -44,29 +44,49 @@ Service names:
 
 Datadog propose list of monitor depending of your service name/(type?): 
 
-{{< img src="tracing/services/service_monitors.png" alt="Service Monitors" responsive="true" popup="true" style="width:90%;">}}
+{{< img src="tracing/services/service/service_monitors.png" alt="Service Monitors" responsive="true" popup="true" style="width:90%;">}}
 
 Enable them directly or create your own [APM monitors](/monitors/monitor_types/apm)
 
+Hard-coded one + any monitor tagged with the service name in the monitor list
+
+
 ## Out of the box graphs
 
-//  
-// Is there specific graph for specific service type?  
-// Is there graphs that are shared across all services ?  
-//  
-//  
+Each Service has 3 out of the box graphs:
+
+* Request:
+    {{< img src="tracing/services/service/request_graph.png" alt="Request Graph" responsive="true" popup="true" style="width:40%;">}}
+* Latency:
+    {{< img src="tracing/services/service/latency_graph_1.png" alt="Latency Graph" responsive="true" popup="true" style="width:40%;">}}
+Apdex one
+* Error:
+    {{< img src="tracing/services/service/error_graph.png" alt="Error graph" responsive="true" popup="true" style="width:40%;">}}
+
+When there is multiple service involved then there is a 4th graph breakdown by suplier  (sub services)
+
+{{< img src="tracing/services/service/by_service_graph.png" alt="By service graph" responsive="true" popup="true" style="width:40%;">}}
+
+In addition to all those graph there is a latency distribution graph
+
+{{< img src="tracing/services/service/latency_distribution.png" alt="latency distribution" responsive="true" popup="true" style="width:90%;">}}
 
 ## Resources
 
 Consult the list of resources associated to your service:
 
-{{< img src="tracing/services/resources.png" alt="Resources" responsive="true" popup="true" style="width:90%;">}}
+{{< img src="tracing/services/service/resources.png" alt="Resources" responsive="true" popup="true" style="width:90%;">}}
 
 [Refer to our dedicated resource documentation to learn more](/tracing/services/resource).
 
+### Filtering the resources list
+Filter your resources list with a query:
+
+{{< img src="tracing/services/service/resources_filtering.gif" alt="Resource filtering" responsive="true" popup="true" style="width:90%;">}}
+
 ### Columns 
 
-{{< img src="tracing/services/resource_columns.png" alt="Resource columns" responsive="true" popup="true" style="width:50%;">}}
+{{< img src="tracing/services/service/resource_columns.png" alt="Resource columns" responsive="true" popup="true" style="width:50%;">}}
 
 Choose what do display in your resources list:
 
