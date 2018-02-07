@@ -97,7 +97,7 @@ If your logs put their dates in an attribute not in this list, use the log date 
 {{< img src="logs/processing/log_date_remapper.png" alt="Log date Remapper" responsive="true" popup="true">}}
 
 If your logs don't contain any of the default attributes and you haven't defined your own date attribute, Datadog timestamps the logs with the date it received them.  
-If the log's official timestamp is from one of the default attributes or [an attribute of your choosing](/logs/processing/#log-date-remapper), Datadog rejects the log if the date is more than 18 hours in the past.
+If the log's official timestamp is from one of the default attributes or [an attribute of your choosing](/logs/processing/#log-date-remapper).
 
 ### Log Status Remapper
 
@@ -158,6 +158,30 @@ These settings:
 
 Give the following results:
 {{< img src="logs/processing/useragent_processor.png" alt="Useragent processor" responsive="true" popup="true">}}
+
+## Technical limits
+
+To make sure the Log Management solution functions in an optimal way we set the following technical limits and rules to your log events as well as to some product features. These have been designed so you never reach them. However, if this is the case please read the actions we enforce and please contact us if you have any suggestion.
+
+### Limits applied to ingested log events
+
+* The size of a log event should not exceed 25K characters.
+* Log events can be submitted up to 6h in the past and 2h in the future into an index.
+* A log event once converted to JSON format should contain less than 256 attributes, each of those attribute’s key should be less than 50 characters, be nested in less than 10 successive levels and their respective value be less than 1024 characters if promoted as a facet.
+* A log event should not have more than 100 tags and each tag key should not exceed 50 characters and their respective value should not exceed 100 characters for a maximum of 10 millions unique tag per day.
+
+Log events which enforce these limits might be transformed or truncated by the system. Or simply not indexed if outside of the provided time range. However, please be sure that Datadog always tries to do its best to preserve as much as possible the provided user data.
+
+### Limits applied to provided features
+
+* The maximum number of facets is 100.
+* The maximum number of processing pipeline on a platform is 100.
+* The maximum number of processor per pipeline is 20.
+* The maximum number of parsing rule within a grok processor is 10. We reserve the right to disable underperforming parsing rules that might impact our service performance.
+
+Please contact support if you reach one of these limits as Datadog might be able to provide you more.
+
+
 
 ## Further Reading
 
