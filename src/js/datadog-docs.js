@@ -349,10 +349,16 @@ $(document).ready(function () {
             if($(window).width() <= 991) {
                 // at mobile
                 amount = $('body > header').height();
+                if($('.announcement_banner.open').length) {
+                    amount += $('.announcement_banner.open').height();
+                }
                 $('.api-nav > div').each(function() { amount += $(this).height(); });
             } else {
                 // at desktop
                 amount = $('body > header').height();
+                if($('.announcement_banner.open').length) {
+                    amount += $('.announcement_banner.open').height();
+                }
             }
         }
         var href = '#'+id;
