@@ -547,6 +547,7 @@ languages:
         - identifier: menu_references_api
           name: "API"
           url: "/api/"
+          pre: "nav_api"
           weight: 110
 
         # ACCOUNT MANAGEMENT
