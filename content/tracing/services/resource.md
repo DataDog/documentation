@@ -41,18 +41,26 @@ As a result we have a hard limit on the cardinality of resources for a given ser
 
 ## Out of the box graphs
 
-Each Resource has at least 3 out of the box graphs:
+Datadog provides out of the box graphs for any given Resource:
 
-* Requests:
-    {{< img src="tracing/services/resource/resource_requests.png" alt="Resource request" responsive="true" popup="true" style="width:40%;">}}
-* Latency:
-    {{< img src="tracing/services/resource/resource_latency.png" alt="Resource latency" responsive="true" popup="true" style="width:40%;">}}
-* Error:
-    {{< img src="tracing/services/resource/resource_error.png" alt="Resource error" responsive="true" popup="true" style="width:40%;">}}
+* Requests - Choose to display:
+    *  The **Total amount of requests** 
+    *  The amount of **Requests per second**
+* Latency -  Choose to display:
+    *  The Avg/p75/p90/p95/p99/Max latency of your traced requests 
+* Error - Choose to display:
+    * The **Total amount of errors** 
+    * The amount of **Errors per second** 
+    * The **% Error Rate** 
+* Sub-Services: When there is multiple service involved a 4th graph is available that breaks down your **Total time spent**/**%of time spent**/**Avg time per request** of your service by *services* or *type*.
 
-When there is multiple service involved with your resource there is a 4th graph that breaks down your resource by service or type:
+{{< img src="tracing/services/service/resource_otb_graphs.png" alt="Out of the bow resource graphs" responsive="true" popup="true" style="width:90%;">}}
 
-{{< img src="tracing/services/resource/resource_service.png" alt="Resource service" responsive="true" popup="true" style="width:40%;">}}
+### Export to Timeboard
+
+On the upper-right corner of each graphs click on the little arrow in order to export your graph into a pre-existing [Timeboard](/graphing/dashboard/timeboard):
+
+{{< img src="tracing/services/service/save_to_timeboard.png" alt="Save to timeboard" responsive="true" popup="true" style="width:40%;">}}
 
 ### Latency distribution
 

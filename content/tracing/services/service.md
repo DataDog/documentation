@@ -53,19 +53,21 @@ Hard-coded one + any monitor tagged with the service name in the monitor list
 
 ## Out of the box graphs
 
-Each Service has at least 3 out of the box graphs:
+Datadog provides out of the box graphs for any given Service:
 
-* Requests:
-    {{< img src="tracing/services/service/request_graph.png" alt="Request Graph" responsive="true" popup="true" style="width:40%;">}}
-* Latency:
-    {{< img src="tracing/services/service/latency_graph_1.png" alt="Latency Graph" responsive="true" popup="true" style="width:40%;">}}
-Apdex one
-* Error:
-    {{< img src="tracing/services/service/error_graph.png" alt="Error graph" responsive="true" popup="true" style="width:40%;">}}
+* Requests - Choose to display:
+    *  The **Total amount of requests** 
+    *  The amount of **Requests per second**
+* Latency -  Choose to display:
+    *  The Avg/p75/p90/p95/p99/Max latency of your traced requests 
+    *  The **[Apdex](/tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm) score** of your service
+* Error - Choose to display:
+    * The **Total amount of errors** 
+    * The amount of **Errors per second** 
+    * The **% Error Rate** 
+* Sub-Services: When there is multiple service involved a 4th graph is available that breaks down your **Total time spent**/**%of time spent**/**Avg time per request** of your service by *services* or *type*.
 
-When there is multiple service involved then there is a 4th graph that breaks down your service by service or type  (sub services)
-
-{{< img src="tracing/services/service/by_service_graph.png" alt="By service graph" responsive="true" popup="true" style="width:40%;">}}
+{{< img src="tracing/services/service/out_of_the_box_service_graph.png" alt="Out of the bow service graphs" responsive="true" popup="true" style="width:90%;">}}
 
 //
 //
@@ -73,9 +75,15 @@ When there is multiple service involved then there is a 4th graph that breaks do
 //
 //
 
+### Export to Timeboard
+
+On the upper-right corner of each graphs click on the little arrow in order to export your graph into a pre-existing [Timeboard](/graphing/dashboard/timeboard):
+
+{{< img src="tracing/services/service/save_to_timeboard.png" alt="Save to timeboard" responsive="true" popup="true" style="width:40%;">}}
+
 ### Latency distribution
 
-In addition to all those graph there is a service latency distribution graph
+In addition to all those graphs there is a service latency distribution graph
 
 {{< img src="tracing/services/service/latency_distribution.png" alt="latency distribution" responsive="true" popup="true" style="width:90%;">}}
 
