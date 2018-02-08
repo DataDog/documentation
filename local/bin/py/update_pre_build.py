@@ -140,7 +140,7 @@ class PreBuild:
         self.datafile_json = []
         self.pool_size = 5
         self.integration_mutations = OrderedDict({
-            'hdfs': {'action': 'truncate', 'target': 'hdfs', 'remove_header': False},
+            'hdfs': {'action': 'create', 'target': 'hdfs', 'remove_header': False},
             'mesos': {'action': 'truncate', 'target': 'mesos', 'remove_header': False},
             'activemq_xml': {'action': 'merge', 'target': 'activemq', 'remove_header': False},
             'cassandra_nodetool': {'action': 'merge', 'target': 'cassandra', 'remove_header': False},
@@ -272,6 +272,9 @@ class PreBuild:
                         open(output_file, 'w').close()
                 elif action == 'discard':
                     remove(input_file)
+                elif action == 'create':
+                    open(output_file, 'w+').close()
+
 
     def process_source_attribute(self, file_name):
         """
