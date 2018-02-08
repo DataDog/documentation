@@ -18,7 +18,7 @@ To improve visibility into applications using unsupported frameworks, consider:
 
 * Adding custom instrumentation (with OpenTracing or the `@Trace` annotation).
 * [Submitting a pull request](https://github.com/DataDog/documentation#outside-contributors) with instrumentation for inclusion in a future release.
-* [Contact support](https://github.com/DataDog/documentation/blob/master/help) and submit a feature request.
+* [Contact support](/help) and submit a feature request.
 
 
 
