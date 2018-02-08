@@ -543,12 +543,19 @@ languages:
         #  parent: menu_references_developers
         # DEVELOPERS - Subnav end
 
+        # API
+        - identifier: menu_references_api
+          name: "API"
+          url: "/api/"
+          pre: "nav_api"
+          weight: 110
+
         # ACCOUNT MANAGEMENT
         - identifier: menu_references_account_management
           name: "Account management"
           url: "/account_management/"
           pre: "nav_account"
-          weight: 110
+          weight: 120
         # ACCOUNT MANAGEMENT - Subnav start
         - identifier: customnav_accountmanagementnav_team
           name: "Team management"
@@ -581,7 +588,7 @@ languages:
           name: "Videos"
           url: "/videos/"
           pre: "nav_videos"
-          weight: 120
+          weight: 130
 #        - identifier: menu_references_glossary
 #          name: "Glossary"
 #          url: "/glossary/"
