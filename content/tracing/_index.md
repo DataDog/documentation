@@ -43,7 +43,7 @@ To start tracing your application:
 
 **1. Install the Datadog Agent**
 
-Install and configure the latest [Datadog Agent](https://app.datadoghq.com/account/settings#agent) (version 5.11.0 or above is required). For additional information, reference the [getting started guide](/tracing/getting_started).
+Install and configure the latest [Datadog Agent](https://app.datadoghq.com/account/settings#agent) (version 5.11.0 or above is required). For additional information, reference the [getting started guide](https://github.com/DataDog/datadog-trace-agent/tree/master/config#agent-configuration).
 
 **2. Install the Trace Agent**
 
@@ -108,6 +108,7 @@ You can use the Chrome inspector on the traces page to find the metric name in t
 
 ## Additional resources
 
-For additional help from Datadog staff and other Datadog community members, join the [*apm* channel](https://datadoghq.slack.com/messages/apm) in our Datadog Slack. Visit [http://chat.datadoghq.com](http://chat.datadoghq.com) to join the Slack.
+For additional help from Datadog staff and other Datadog community members, please:
 
-You can also reach our APM team via email at [tracehelp@datadoghq.com](mailto:tracehelp@datadoghq.com).
+* Join the [*apm* channel](https://datadoghq.slack.com/messages/apm) in our Datadog Slack. 
+* Reach our APM team via email at [tracehelp@datadoghq.com](mailto:tracehelp@datadoghq.com).

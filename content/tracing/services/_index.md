@@ -86,6 +86,13 @@ The type of the service can be one of:
 
 We also have some aliases for Integrations such as Postgres, MySQL, and Cassandra which are map to Type: "DB" and Integrations Redis and Memcache which are map to Type: "Cache".
 
+#### Change service color
+//
+//
+//
+//
+//
+
 ## Columns
 
 {{< img src="tracing/services/services_columns.png" alt="Services columns" responsive="true" popup="true" style="width:40%;">}}

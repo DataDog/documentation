@@ -53,9 +53,9 @@ Hard-coded one + any monitor tagged with the service name in the monitor list
 
 ## Out of the box graphs
 
-Each Service has 3 out of the box graphs:
+Each Service has at least 3 out of the box graphs:
 
-* Request:
+* Requests:
     {{< img src="tracing/services/service/request_graph.png" alt="Request Graph" responsive="true" popup="true" style="width:40%;">}}
 * Latency:
     {{< img src="tracing/services/service/latency_graph_1.png" alt="Latency Graph" responsive="true" popup="true" style="width:40%;">}}
@@ -63,11 +63,19 @@ Apdex one
 * Error:
     {{< img src="tracing/services/service/error_graph.png" alt="Error graph" responsive="true" popup="true" style="width:40%;">}}
 
-When there is multiple service involved then there is a 4th graph breakdown by suplier  (sub services)
+When there is multiple service involved then there is a 4th graph that breaks down your service by service or type  (sub services)
 
 {{< img src="tracing/services/service/by_service_graph.png" alt="By service graph" responsive="true" popup="true" style="width:40%;">}}
 
-In addition to all those graph there is a latency distribution graph
+//
+//
+// why? what for? how?
+//
+//
+
+### Latency distribution
+
+In addition to all those graph there is a service latency distribution graph
 
 {{< img src="tracing/services/service/latency_distribution.png" alt="latency distribution" responsive="true" popup="true" style="width:90%;">}}
 

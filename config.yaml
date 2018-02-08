@@ -443,7 +443,7 @@ languages:
           parent: customnav_tracingnav_miscellaneous
         - identifier: customnav_tracingnav_apm_sampling_storage
           name: "Storage & Sampling"
-          url: "/tracing/miscellaneous/storage_and_sampling"
+          url: "/tracing/miscellaneous/trace_sampling_and_storage"
           weight: 450
           parent: customnav_tracingnav_miscellaneous
 

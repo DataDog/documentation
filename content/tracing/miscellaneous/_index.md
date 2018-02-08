@@ -7,4 +7,5 @@ kind: documentation
     {{< nextlink href="/api/?lang=python#tracing" >}} Learn more about our Trace API {{< /nextlink >}}
     {{< nextlink href="/monitors/monitor_types/apm/" >}} Learn more about monitors with APM {{< /nextlink >}}
     {{< nextlink href="/graphing/dashboards/widgets/#service-summary" >}} Learn more about the dashboards widgets {{< /nextlink >}}
+    {{< nextlink href="/tracing/miscellaneous/trace_sampling_and_storage" >}} Discover our trace sampling and storage policy {{< /nextlink >}}
 {{< /whatsnext >}}
