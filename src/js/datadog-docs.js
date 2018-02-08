@@ -349,10 +349,16 @@ $(document).ready(function () {
             if($(window).width() <= 991) {
                 // at mobile
                 amount = $('body > header').height();
+                if($('.announcement_banner.open').length) {
+                    amount += $('.announcement_banner.open').height();
+                }
                 $('.api-nav > div').each(function() { amount += $(this).height(); });
             } else {
                 // at desktop
                 amount = $('body > header').height();
+                if($('.announcement_banner.open').length) {
+                    amount += $('.announcement_banner.open').height();
+                }
             }
         }
         var href = '#'+id;
@@ -360,9 +366,10 @@ $(document).ready(function () {
         var customPadding = 10; // how much till it looks good with eye
         var offset = amount + customPadding;
         var url = window.location.href.replace(window.location.hash, '');
-        var newSt = htag.offset().top - offset;
+        var newSt = 0 - offset;
         var currentSt = $(document).scrollTop();
         if(htag.length) {
+            newSt = htag.offset().top - offset;
             if(currentSt !== newSt) {
                 if(animate) {
                     $("html, body").animate({scrollTop: newSt}, 300);
