@@ -69,12 +69,6 @@ Datadog provides out of the box graphs for any given Service:
 
 {{< img src="tracing/services/service/out_of_the_box_service_graph.png" alt="Out of the bow service graphs" responsive="true" popup="true" style="width:90%;">}}
 
-//
-//
-// why? what for? how?
-//
-//
-
 ### Export to Timeboard
 
 On the upper-right corner of each graphs click on the little arrow in order to export your graph into a pre-existing [Timeboard](/graphing/dashboard/timeboard):
@@ -102,8 +96,6 @@ Filter your resources list with a query:
 
 ### Columns 
 
-{{< img src="tracing/services/service/resource_columns.png" alt="Resource columns" responsive="true" popup="true" style="width:50%;">}}
-
 Choose what do display in your resources list:
 
 * **Request**: Absolute amount of requests traced (per seconds)
@@ -111,3 +103,5 @@ Choose what do display in your resources list:
 * **Total time**: Sum of all time spend in this resource 
 * **Error**: Absolute amount of error for a given resource
 * **Error Rate**: Percent of error for a given resource
+
+{{< img src="tracing/services/service/resource_columns.png" alt="Resource columns" responsive="true" popup="true" style="width:50%;">}}

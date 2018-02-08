@@ -29,15 +29,7 @@ When a resource such as URL or SQL query cannot be aggregated, it significantly 
 
 Having a very high cardinality of resources is not useful and becomes difficult to deal with on the Datadog side as each aggregate resources needs to be stored.
 
-As a result we have a hard limit on the cardinality of resources for a given service. This can be triggered when:
-
-//
-//
-//
-//
-//
-//
-
+As a result we have a hard limit on the cardinality of resources for a given service.
 
 ## Out of the box graphs
 
@@ -54,13 +46,13 @@ Datadog provides out of the box graphs for any given Resource:
     * The **% Error Rate** 
 * Sub-Services: When there is multiple service involved a 4th graph is available that breaks down your **Total time spent**/**%of time spent**/**Avg time per request** of your service by *services* or *type*.
 
-{{< img src="tracing/services/service/resource_otb_graphs.png" alt="Out of the bow resource graphs" responsive="true" popup="true" style="width:90%;">}}
+{{< img src="tracing/services/resource/resource_otb_graphs.png" alt="Out of the bow resource graphs" responsive="true" popup="true" style="width:90%;">}}
 
 ### Export to Timeboard
 
 On the upper-right corner of each graphs click on the little arrow in order to export your graph into a pre-existing [Timeboard](/graphing/dashboard/timeboard):
 
-{{< img src="tracing/services/service/save_to_timeboard.png" alt="Save to timeboard" responsive="true" popup="true" style="width:40%;">}}
+{{< img src="tracing/services/resource/save_to_timeboard.png" alt="Save to timeboard" responsive="true" popup="true" style="width:40%;">}}
 
 ### Latency distribution
 
@@ -70,7 +62,7 @@ In addition to all those graph there is a resource latency distribution graph
 
 Zoom on this graph to filter corresponding traces
 
-## Trace
+## Traces
 
 Consult the list of sampled traces associated to your service:
 

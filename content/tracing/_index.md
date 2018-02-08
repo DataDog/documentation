@@ -102,10 +102,6 @@ The namespace is basically `trace.<name>.<metrics>{<tags>}` where
 
 So for pylons it might be `trace.pylons.request.hits{service:mcnulty}`.
 
-You can use the Chrome inspector on the traces page to find the metric name in the **batch_query** call:
-
-{{< img src="tracing/chrome_inspector.png" alt="Chrome Inspector" responsive="true" popup="true" style="width:40%;">}}
-
 ## Additional resources
 
 For additional help from Datadog staff and other Datadog community members, please:
