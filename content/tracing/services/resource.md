@@ -7,7 +7,7 @@ kind: Documentation
 
 ## Definition
 
-**A Resource is particular query to a service**.  
+**A Resource is particular action for a service**.  
 
 * For a web application: some examples might be a canonical URL like `/user/home` or a handler function like `web.user.home` (often referred to as "routes" in MVC frameworks).  
 * For a SQL database: a resource would be the SQL of the query itself like `select * from users where id = ?`.
@@ -50,7 +50,7 @@ Datadog provides out of the box graphs for any given Resource:
 
 ### Export to Timeboard
 
-On the upper-right corner of each graphs click on the little arrow in order to export your graph into a pre-existing [Timeboard](/graphing/dashboard/timeboard):
+On the upper-right corner of each graphs click on the little arrow in order to export your graph into a pre-existing [Timeboard](/graphing/dashboards/timeboard):
 
 {{< img src="tracing/services/resource/save_to_timeboard.png" alt="Save to timeboard" responsive="true" popup="true" style="width:40%;">}}
 

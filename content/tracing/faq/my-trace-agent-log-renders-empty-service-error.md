@@ -15,7 +15,7 @@ res:<your.request.name>]: span.normalize: empty `Service` (debug for more info)
 
 ### Check that the Service was properly defined
 
-Note that this issue is more likely to happen when manual instrumentation is used, especially in languages such as Go. Refer to our documentations for further details: [this page](/tracing/languages) leads you to the specific languages libraries we use.
+Note that this issue is more likely to happen when manual instrumentation is used, especially in languages such as Go. Refer to our documentations for further details: [this page](/tracing/setup) leads you to the specific languages libraries we use.
 
 ### My Service is defined properly 
 

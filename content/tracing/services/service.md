@@ -71,7 +71,7 @@ Datadog provides out of the box graphs for any given Service:
 
 ### Export to Timeboard
 
-On the upper-right corner of each graphs click on the little arrow in order to export your graph into a pre-existing [Timeboard](/graphing/dashboard/timeboard):
+On the upper-right corner of each graphs click on the little arrow in order to export your graph into a pre-existing [Timeboard](/graphing/dashboards/timeboard):
 
 {{< img src="tracing/services/service/save_to_timeboard.png" alt="Save to timeboard" responsive="true" popup="true" style="width:40%;">}}
 
