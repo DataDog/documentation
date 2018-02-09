@@ -86,6 +86,7 @@ We have two modules:
 
     ```
 
+
 * **Thinker Microservice**: Takes a request from **thinker-api** with one or multiple subject and answer a thought if the subject is *technology*:  
     ```python
     import asyncio
