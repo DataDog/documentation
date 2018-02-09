@@ -146,7 +146,7 @@ Selecting the **thinker_handler** resource, brings you to its dedicated [resourc
 
 {{< img src="tracing/traces_thinker_api_GS.png" alt="traces thinker api getting started" responsive="true" popup="true" style="width:50%;">}}
 
-Selecting a [trace](/tracing/service/trace) shows you the time spent by your application processing your two `think` : **technology** and **foo_bar** by measuring the total time needed by `flask.request` to be completed:
+Selecting a [trace](/tracing/services/trace) shows you the time spent by your application processing your two `think` : **technology** and **foo_bar** by measuring the total time needed by `flask.request` to be completed:
 
 {{< img src="tracing/trace_thinker_api_GS.png" alt="trace thinker api getting started" responsive="true" popup="true" style="width:80%;">}}
 
@@ -161,7 +161,8 @@ Which allows us to give us more context:
 
 * The first time `think` is executed, the *subject* is **technology** and everything goes well:
     {{< img src="tracing/traces_thinker_mircroservice_GS_1.png" alt="Thinker microservice getting started 1" responsive="true" popup="true">}}
-* The second time `think` is executed, the *subject* is **foo_bar** which is not an expected value which leads to an error.
+
+* The second time `think` is executed, the *subject* is **foo_bar** which is not an expected value and leads to an error.
     {{< img src="tracing/traces_thinker_mircroservice_GS_2.png" alt="Thinker microservice getting started 2" responsive="true" popup="true">}}
 
     The specific display of this error is achieved automatically by the Datadog instrumentation, but you can override it with [special meaning tags rules](/tracing/services/trace/#traces-special-meaning-tags)
