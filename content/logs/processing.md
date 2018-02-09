@@ -97,7 +97,7 @@ If your logs put their dates in an attribute not in this list, use the log date 
 {{< img src="logs/processing/log_date_remapper.png" alt="Log date Remapper" responsive="true" popup="true">}}
 
 If your logs don't contain any of the default attributes and you haven't defined your own date attribute, Datadog timestamps the logs with the date it received them.  
-If the log's official timestamp is from one of the default attributes or [an attribute of your choosing](/logs/processing/#log-date-remapper).
+If the log's official timestamp is from a custom attribute, use a [date remapper processor](/logs/processing/#log-date-remapper) to override the log's default timestamp.
 
 ### Log Status Remapper
 
@@ -170,7 +170,7 @@ To make sure the Log Management solution functions in an optimal way we set the 
 * A log event once converted to JSON format should contain less than 256 attributes, each of those attribute’s key should be less than 50 characters, be nested in less than 10 successive levels and their respective value be less than 1024 characters if promoted as a facet.
 * A log event should not have more than 100 tags and each tag should not exceed 256 characters for a maximum of 10 millions unique tag per day.
 
-Log events which enforce these limits might be transformed or truncated by the system. Or simply not indexed if outside of the provided time range. However, be sure that Datadog always tries to do its best to preserve as much as possible the provided user data.
+Log events which do not comply with these limits might be transformed or truncated by the system. Or simply not indexed if outside of the provided time range. However, be sure that Datadog always tries to do its best to preserve as much as possible the provided user data.
 
 ### Limits applied to provided features
 
