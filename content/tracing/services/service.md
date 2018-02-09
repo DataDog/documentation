@@ -1,6 +1,11 @@
 ---
 title: Service
 kind: Documentation
+further_reading:
+- link: "/tracing/services/resource"
+  text: "Dive into your resource performances and traces"
+- link: "/tracing/services/trace"
+  text: "Understand how to read a Datadog Trace"
 ---
 
 Selecting a service on the services page leads you to the detailed service page:
@@ -105,3 +110,7 @@ Choose what do display in your resources list:
 * **Error Rate**: Percent of error for a given resource
 
 {{< img src="tracing/services/service/resource_columns.png" alt="Resource columns" responsive="true" popup="true" style="width:50%;">}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

@@ -1,6 +1,13 @@
 ---
 title: Services list
 kind: Documentation
+further_reading:
+- link: "/tracing/services/service"
+  text: Learn more about services in Datadog
+- link: "/tracing/services/resource"
+  text: "Dive into your resource performances and traces"
+- link: "/tracing/services/trace"
+  text: "Understand how to read a Datadog Trace"
 ---
 
 ## Overview
@@ -52,3 +59,7 @@ Choose what do display in your services list:
 * **Monitor status**: [Status of monitors](/tracing/services/service/#service-monitor) attached to a service.
 
 {{< img src="tracing/services/services_columns.png" alt="Services columns" responsive="true" popup="true" style="width:40%;">}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

@@ -1,6 +1,11 @@
 ---
 title: Trace
 kind: Documentation
+further_reading:
+- link: "/tracing/services/service"
+  text: Learn more about services in Datadog
+- link: "/tracing/services/resource"
+  text: "Dive into your resource performances and traces"
 ---
 
 ## Definition
@@ -59,3 +64,6 @@ Some of them have a special meaning which lead to a dedicated display and behavi
 
 {{< img src="tracing/services/trace/trace_error_formating.png" alt="Error Formating" responsive="true" popup="true" >}}
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

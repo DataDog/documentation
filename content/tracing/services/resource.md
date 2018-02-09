@@ -1,6 +1,11 @@
 ---
 title: Resource
 kind: Documentation
+further_reading:
+- link: "/tracing/services/service"
+  text: Learn more about services in Datadog
+- link: "/tracing/services/trace"
+  text: "Understand how to read a Datadog Trace"
 ---
 
 {{< img src="tracing/services/resource/ressource.png" alt="Ressource" responsive="true" popup="true">}}
@@ -69,3 +74,7 @@ Consult the list of sampled traces associated to your service:
 [Refer to our dedicated trace documentation to learn more](/tracing/services/trace).
 
 {{< img src="tracing/services/resource/traces_list.png" alt="Traces list" responsive="true" popup="true" style="width:90%;">}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
