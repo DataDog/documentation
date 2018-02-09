@@ -27,12 +27,14 @@ To understand how tracing work, let's take the following example that represent 
 
 {{< img src="tracing/tracing_overview_GS.jpg" alt="Tracing getting started overview" responsive="true" popup="true">}}
 
-* Request:   
+* Request:
+
     ```bash
     curl 'localhost:5000/think/?subject=technology&subject=foo_bar'
     ```
 
-* Response:  
+* Response:
+
     ```json
     {
         "technology": {
@@ -87,7 +89,7 @@ We have two modules:
     ```
 
 
-* **Thinker Microservice**: Takes a request from **thinker-api** with one or multiple subject and answer a thought if the subject is *technology*:  
+* **Thinker Microservice**: Takes a request from **thinker-api** with one or multiple subject and answer a thought if the subject is *technology*:
     ```python
     import asyncio
 
@@ -137,7 +139,7 @@ We have two modules:
 
 ### Datadog APM
 
-The code above is already instrumented, [refer to the dedicated setup documentation to learn how to instrument your application and configure the Datadog Agent](/tracing/setup).  
+The code above is already instrumented, [refer to the dedicated setup documentation to learn how to instrument your application and configure the Datadog Agent](/tracing/setup).
 
 Once this code is executed, traces and statistics are collected by the Agent and send to a Datadog platform in the [Services list page](/tracing/services) where there is now two services: **thinker-api** and **thinker-microservice** reporting.
 
@@ -145,12 +147,12 @@ Once this code is executed, traces and statistics are collected by the Agent and
 
 Clicking on **thinker-api** service, leads to its dedicated [service page](/tracing/services/service), where there is:
 
-* [Out of the box graphs based on the service performances](/tracing/services/service/#out-of-the-box-graphs) 
+* [Out of the box graphs based on the service performances](/tracing/services/service/#out-of-the-box-graphs)
 * [The list of resources](/tracing/services/resource) attached to this particular service:
 
 {{< img src="tracing/resources_thinker_api_GS.png" alt="Resources thinker api getting started" responsive="true" popup="true" style="width:80%;">}}
 
-In fact, the first function executed in this example is `think_handler()` that handles the request and forward it to the **thinker-microservice** service.  
+In fact, the first function executed in this example is `think_handler()` that handles the request and forward it to the **thinker-microservice** service.
 
 Selecting the **thinker_handler** resource, brings to its dedicated [resource page](/tracing/services/resource), where there is:
 
@@ -170,7 +172,7 @@ Selecting a [trace](/tracing/services/trace) opens the trace panel containing in
 
 {{< img src="tracing/trace_thinker_api_GS.png" alt="trace thinker api getting started" responsive="true" popup="true" style="width:80%;">}}
 
-On the previous image, we can see how the request is first received by the **thinker-api** service with the `flask.request` [span](/tracing/services/trace), which then transmit the processed request to the **thinker-microservice** service that execute the function `think()` twice.  
+On the previous image, we can see how the request is first received by the **thinker-api** service with the `flask.request` [span](/tracing/services/trace), which then transmit the processed request to the **thinker-microservice** service that execute the function `think()` twice.
 
 In our code we added:
 ```
@@ -194,7 +196,7 @@ Datadog APM allows you to trace all interactions of a request with the different
 
 For additional help from Datadog staff and other Datadog community members, please:
 
-* Join the [*apm* channel](https://datadoghq.slack.com/messages/apm) in our Datadog Slack. 
+* Join the [*apm* channel](https://datadoghq.slack.com/messages/apm) in our Datadog Slack.
 * Reach our APM team via email at [tracehelp@datadoghq.com](mailto:tracehelp@datadoghq.com).
 
 ## Further Reading
