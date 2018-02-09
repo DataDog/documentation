@@ -167,7 +167,7 @@ spec:
     spec:
       containers:
       - name: kube-state-metrics
-        image: gcr.io/google_containers/kube-state-metrics:v1.1.0
+        image: gcr.io/google_containers/kube-state-metrics:v1.2.0
         ports:
         - name: metrics
           containerPort: 8080
