@@ -9,7 +9,7 @@ All traces collected by your agents are listed in the [Trace search page](https:
 
 ## Trace time frame
 
-Select the trace time frame you want to display with the time selector in the upper right corner:
+Select the trace time frame you want to display with the time selector in the upper right corner.
 
 {{< img src="tracing/traces/traces_time_selector.png" alt="Trace search UI" responsive="true" popup="true" style="width:40%;">}}
 
