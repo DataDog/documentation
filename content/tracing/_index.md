@@ -23,16 +23,16 @@ Registered users can visit the [APM page of the Datadog application](https://app
 
 ## Getting started
 
-To understand how tracing work, let's take the following example that represent a simple API **thinker-api** and a micro-service behind it **thinker-microservice**, when the api receive a request with the correct *subject* parameter, it answer with a thought, otherwise it answer an error:
+To understand how tracing works, let's take the following example which represents a simple API **thinker-api** and a micro-service behind it **thinker-microservice**. When the API receives a request with the correct *subject* parameter, it responds with a *thought*, otherwise, it responds with an error:
 
 {{< img src="tracing/tracing_overview_GS.jpg" alt="Tracing getting started overview" responsive="true" popup="true">}}
 
-* Request:   
+* Request:
     ```bash
     curl 'localhost:5000/think/?subject=technology&subject=foo_bar'
     ```
 
-* Response:  
+* Response:
     ```json
     {
         "technology": {
@@ -57,8 +57,7 @@ We need to opensource workshop code
 
 We have two modules:
 
-* **Thinker API**: Catches the user request and forward it to *
-**thinker-microservice**
+* **Thinker API**: Catches the users request and forwards it to the **thinker-microservice**
     ```python
     import blinker as _
     import requests
@@ -86,8 +85,7 @@ We have two modules:
 
     ```
 
-
-* **Thinker Microservice**: Takes a request from **thinker-api** with one or multiple subject and answer a thought if the subject is *technology*:  
+* **Thinker Microservice**: Takes a request from **thinker-api** with one or multiple *subjects* and answers with a *thought* if the *subject* is "technology":
     ```python
     import asyncio
 
@@ -135,66 +133,65 @@ We have two modules:
         return web.json_response(response)
     ```
 
+The code above is already instrumented. Please [refer to the dedicated setup documentation](/tracing/setup) to learn how to instrument your application and configure the Datadog Agent.
+
 ### Datadog APM
 
-The code above is already instrumented, [refer to the dedicated setup documentation to learn how to instrument your application and configure the Datadog Agent](/tracing/setup).  
-
-Once this code is executed, traces and statistics are collected by the Agent and send to a Datadog platform in the [Services list page](/tracing/services) where there is now two services: **thinker-api** and **thinker-microservice** reporting.
+Once this code is executed, [traces](tracing/services/trace/) and statistics are collected by the Agent and send to a Datadog platform in the [services list page](/tracing/services) where there are now two services: **thinker-api** and **thinker-microservice** reporting.
 
 {{< img src="tracing/services_GS.png" alt="Services list getting started" responsive="true" popup="true">}}
 
-Clicking on **thinker-api** service, leads to its dedicated [service page](/tracing/services/service), where there is:
+Clicking on **thinker-api** service, directs you to its dedicated [service page](/tracing/services/service), where there are:
 
-* [Out of the box graphs based on the service performances](/tracing/services/service/#out-of-the-box-graphs) 
-* [The list of resources](/tracing/services/resource) attached to this particular service:
+* [Graphs illustrating service performance](/tracing/services/service/#out-of-the-box-graphs)
+* [A list of resources](/tracing/services/resource) attached to this particular service:
 
 {{< img src="tracing/resources_thinker_api_GS.png" alt="Resources thinker api getting started" responsive="true" popup="true" style="width:80%;">}}
 
-In fact, the first function executed in this example is `think_handler()` that handles the request and forward it to the **thinker-microservice** service.  
+The first function executed in this example is `think_handler()`, which handles the request and forwards it to the **thinker-microservice** service.
 
-Selecting the **thinker_handler** resource, brings to its dedicated [resource page](/tracing/services/resource), where there is:
+Selecting the **thinker_handler** resource directs you to its dedicated [resource page](/tracing/services/resource), where there are:
 
-* [Out of the box graphs with your resource performances](/tracing/services/resource/#out-of-the-box-graphs)
-* [The list of sampled traces](/tracing/miscellaneous/trace_sampling_and_storage) attached to this particular resource:
+* [Graphs illustrating resource performances](/tracing/services/resource/#out-of-the-box-graphs)
+* [A list of sampled traces](/tracing/miscellaneous/trace_sampling_and_storage) attached to this particular resource:
 
 {{< img src="tracing/traces_thinker_api_GS.png" alt="traces thinker api getting started" responsive="true" popup="true" style="width:50%;">}}
 
-Selecting a [trace](/tracing/services/trace) opens the trace panel containing information like:
+Selecting a trace opens the _trace panel_ containing information such as:
 
-* The timestamp of the trace
-* The final status of the trace (here *200*)
-* The different services encountered by the request: **thinker_hander** and **thinker-microservice**
-* The time spent by your application processing your two `think` : **technology** and **foo_bar** by measuring the total time needed by `flask.request` to be completed.
-* The complete logic behind the python application
-* Some extra tags like the *http.method*, and the *http.url* ...
+* The timestamp of the request
+* The status of the request (i.e., `200`)
+* The different services encountered by the request: (i.e., **thinker_hander** and **thinker-microservice**)
+* The time spent by your application processing the traced functions
+* Extra tags such as *http.method* and *http.url* ...
 
 {{< img src="tracing/trace_thinker_api_GS.png" alt="trace thinker api getting started" responsive="true" popup="true" style="width:80%;">}}
 
-On the previous image, we can see how the request is first received by the **thinker-api** service with the `flask.request` [span](/tracing/services/trace), which then transmit the processed request to the **thinker-microservice** service that execute the function `think()` twice.  
+From the above image, we can see how the request is first received by the **thinker-api** service with the `flask.request` [span](/tracing/services/trace), which transmits the processed request to the **thinker-microservice** service, which executes the function `think()` twice.
 
 In our code we added:
 ```
 tracer.current_span().set_tag('subject', subject)
 ```
 
-Which allows us to give us more context every time `think()` is called and traced:
+Which allows us to get more context every time `think()` is called and traced:
 
 * The first time `think` is executed, the *subject* is **technology** and everything goes well:
     {{< img src="tracing/traces_thinker_mircroservice_GS_1.png" alt="Thinker microservice getting started 1" responsive="true" popup="true" style="width:80%;">}}
 
-* The second time `think` is executed, the *subject* is **foo_bar** which is not an expected value and leads to an error.
+* The second time `think` is executed, the *subject* is **foo_bar** which is not an expected value and leads to an error:
     {{< img src="tracing/traces_thinker_mircroservice_GS_2.png" alt="Thinker microservice getting started 2" responsive="true" popup="true" style="width:80%;">}}
 
-    The specific display of this error is achieved automatically by the Datadog instrumentation, but you can override it with [special meaning tags rules](/tracing/services/trace/#traces-special-meaning-tags)
+    The specific display of this error is achieved automatically by the Datadog instrumentation, but you can override it with [special meaning tag rules](/tracing/services/trace/#traces-special-meaning-tags).
 
 
-Datadog APM allows you to trace all interactions of a request with the different services and resources of any application.
+The Datadog APM allows you to trace all interactions of a request with the different services and resources of any application.
 
 ## Additional resources
 
-For additional help from Datadog staff and other Datadog community members, please:
+For additional help from Datadog staff and other Datadog community members:
 
-* Join the [*apm* channel](https://datadoghq.slack.com/messages/apm) in our Datadog Slack. 
+* Join the [*apm* channel](https://datadoghq.slack.com/messages/apm) in our Datadog Slack.
 * Reach our APM team via email at [tracehelp@datadoghq.com](mailto:tracehelp@datadoghq.com).
 
 ## Further Reading
