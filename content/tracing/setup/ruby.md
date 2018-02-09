@@ -3,6 +3,7 @@ title: Tracing Ruby Applications
 kind: Documentation
 aliases:
 - /tracing/ruby/
+- /tracing/languages/ruby/
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-rb"
   tag: "Github"

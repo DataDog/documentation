@@ -3,6 +3,7 @@ title: Tracing Go Applications
 kind: Documentation
 aliases:
 - /tracing/go/
+- /tracing/languages/go
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-go"
   tag: "Github"

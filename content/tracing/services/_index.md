@@ -5,16 +5,16 @@ kind: Documentation
 
 ## Overview
 
-After having [instrumented your application](/tracing/languages), your reporting services are listed on [the APM services page](https://app.datadoghq.com/apm/services).  
-Select a service to have more performance insights, [read our dedicated service documentation to learn more](tracing/services/service)
+After you have [instrumented your application](/tracing/languages), your reporting services appear on [the APM services page](https://app.datadoghq.com/apm/services).  
+Select a service view detailed performance insights, [read our dedicated service documentation to learn more](tracing/services/service)
 
 {{< img src="tracing/services/services_page.png" alt="Services page" responsive="true" popup="true">}}
 
 ## Filtering the service list
 
-The services list is a bird eyed view of all [services](/tracing/services/service) reporting from your infrastructure. It can be filtered depending on:
+The services list is a bird's eyed view of all [services](/tracing/services/service) reporting from your infrastructure. It can be filtered depending on:
 
-* [Your environment](#environment).
+* [Your environment](#environment)
 * [Your service type](#services-types)
 * A query
 
@@ -30,7 +30,7 @@ An environment is a first class dimension that you can use to scope a whole Data
 
 Environments are [tags](/agent/tagging), therefore they must follow the following rules:
 
-* They must start with a letter.
+* They must start with a lower case letter.
 * Other characters must be alphanumeric lower case Unicode characters, underscores, minuses, colons, periods or slashes.
 * They must not be more than 100 characters long.
 
@@ -41,11 +41,11 @@ Environments in traces and configuration files are normalized:
 
 #### Default environment
 
-If you are not using this feature, your data is put in `env:none` which is the default behavior.
+The default environment for un-tagged data is `env:none`. See below to see how to specify custom environments.:
 
 **Note**: if you are using environments, you still get a default `env:none` environment where all the non-tagged data goes.
 
-##### Setup
+#### Setup
 
 There are several ways to specify an environment when reporting data:
 
@@ -64,7 +64,7 @@ There are several ways to specify an environment when reporting data:
 
 3. Per trace:
 
-    When submitting a single trace, specify an environment by tagging one of its span with the metadata key `env`. It overrides the agent configuration and the host tags values (if any).
+   When submitting a single trace, specify an environment by tagging one of its spans with the metadata key `env`. This overrides the agent configuration and the host tags values (if any).
 
     ```
     # in code this looks like
