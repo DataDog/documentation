@@ -27,14 +27,12 @@ To understand how tracing work, let's take the following example that represent 
 
 {{< img src="tracing/tracing_overview_GS.jpg" alt="Tracing getting started overview" responsive="true" popup="true">}}
 
-* Request:  
-    .  
+* Request:   
     ```bash
     curl 'localhost:5000/think/?subject=technology&subject=foo_bar'
     ```
 
 * Response:  
-    .  
     ```json
     {
         "technology": {
@@ -61,7 +59,6 @@ We have two modules:
 
 * **Thinker API**: Catches the user request and forward it to *
 **thinker-microservice**
-    .  
     ```python
     import blinker as _
     import requests
@@ -90,7 +87,6 @@ We have two modules:
     ```
 
 * **Thinker Microservice**: Takes a request from **thinker-api** with one or multiple subject and answer a thought if the subject is *technology*:  
-    .  
     ```python
     import asyncio
 

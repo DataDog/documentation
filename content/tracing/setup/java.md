@@ -8,9 +8,9 @@ further_reading:
 - link: "https://github.com/DataDog/dd-trace-java"
   tag: "Github"
   text: Source code
-- link: "/tracing/"
+- link: "/tracing/services"
   tag: "Documentation"
-  text: APM (Tracing)
+  text: "Explore your services, resources and traces"
 ---
 
 ## Compatibility

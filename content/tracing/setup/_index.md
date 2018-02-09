@@ -1,6 +1,22 @@
 ---
 title: Setup
 kind: Documentation
+further_reading:
+- link: "/tracing/setup/docker"
+  tag: "Documentation"
+  text: Docker setup
+- link: "/tracing/setup/go"
+  tag: "Documentation"
+  text: Go language instrumentation
+- link: "/tracing/setup/java"
+  tag: "Documentation"
+  text: Java language instrumentation
+- link: "/tracing/setup/python"
+  tag: "Documentation"
+  text: Python language instrumentation
+- link: "/tracing/setup/ruby"
+  tag: "Documentation"
+  text: Ruby language instrumentation
 ---
 ## Agent installation
 
@@ -76,3 +92,7 @@ Additionally, some configuration options may be set as environment variables. No
 {{% /table %}}
 
 For more information about the Datadog Agent, see the [dedicated doc page](/agent/) or refer to the [`datadog.conf.example` file](https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example).
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

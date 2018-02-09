@@ -11,6 +11,9 @@ further_reading:
 - link: "http://gems.datadoghq.com/trace/docs/"
   tag: "Rubydoc"
   text: Gem documentation
+- link: "/tracing/services"
+  tag: "Documentation"
+  text: "Explore your services, resources and traces"
 ---
 
 ## Installation

@@ -3,6 +3,13 @@ title: Tracing Docker Applications
 kind: Documentation
 aliases:
 - /tracing/docker/
+further_reading:
+- link: "https://github.com/DataDog/docker-dd-agent"
+  tag: "Github"
+  text: Source code
+- link: "/tracing/services"
+  tag: "Documentation"
+  text: "Explore your services, resources and traces"
 ---
 
 Enable the [datadog-trace-agent](https://github.com/DataDog/datadog-trace-agent) in the `docker-dd-agent` container by passing `DD_APM_ENABLED=true` as an environment variable.
@@ -67,3 +74,7 @@ An example in python, assuming `172.17.0.1` is the default route:
 ```
 from ddtrace import tracer; tracer.configure(hostname="172.17.0.1", port=8126)
 ```
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
