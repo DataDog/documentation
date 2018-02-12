@@ -22,7 +22,7 @@ Datadog APM computes aggregate statistics over all the traces instrumented, rega
 
 ### Traces
 
-To ensure keeping a representative sample set of traces, Datadog combines multiple sampling techniques, at various locations: 
+To ensure a representative sample set of traces are kept, Datadog combines multiple sampling techniques, at various locations:
 
 * **Agent sampling**: Reduces the resources and network used by the Agent for sending traces to the backend. Configurable, default to a maximum of 10 traces per second.
 
@@ -34,7 +34,7 @@ To ensure keeping a representative sample set of traces, Datadog combines multip
 
 ### Signature Sampling
 
-Signature Sampling ensures a sampling of a variety of [traces](/tracing/services/trace) (errors, successes) for each [resource](/tracing/services/resource) (endpoint, database query).  
+Signature Sampling ensures a sampling of a variety of traces (errors, successes) for each resource (endpoint, database query).  
 
 Datadog computes a *signature* for every trace reported, based on its services, resources, errors, etc.. Traces of the same signature are considered similar. For example, a signature could be:
 
@@ -62,12 +62,12 @@ Each trace has a `sampling_priority`, which is assigned at its inception and pro
 | :--------------------- | :---------------- | :----------|
 |**-1**|User input| The Agent drops the trace. |
 |**0**|Automatic sampling decision| The Agent drops the trace. |
-|**1**|Automatic sampling decision| The Agent drops the trace. |
+|**1**|Automatic sampling decision| The Agent keeps the trace. |
 |**2**|User input| The Agent keeps the trace, and the backend will only apply sampling if above maximum volume allowed. |
 
 Traces are automatically assigned a priority of **0** or **1**, with a proportion ensuring that the Agent won't have to sample more than it is allowed.  Override it by assigning a value of **2** if it is a trace that should be kept (critical transaction, debug mode, etc.).  
 
-**Note**: Spans dropped by priority sampler can still be sampled by the signature sampler. The backend can re-sample to keep up to 60 traces per minute per host. The distributed traces that are kept will all be complete. 
+**Note**: Spans dropped by priority sampler can still be kept by the signature sampler. The backend can re-sample to keep up to 60 traces per minute per host. The distributed traces that are kept will all be complete. 
 
 #### Using Priority Sampling
 
@@ -75,11 +75,11 @@ Priority Sampling is recommended if your traces are distributed across multiple 
 
 ### Client rate sampling
 
-It is possible to disable the instrumentation for a percentage of transactions. Datadog Tracers are performant and can run with a minimal cost with thousands of requests per second, however client rate sampling can be used to further reduce the instrumentation footprint. In this case, no trace will be generated at all, and Datadog estimates aggregate statistics (requests per second, error rate, etc.). An example of this in Python can be found here: http://pypi.datadoghq.com/trace/docs/#pre-sampling.
+It is possible to disable the instrumentation for a percentage of transactions. Datadog Tracers are performant and can run with a minimal cost with thousands of requests per second, however client rate sampling can be used to further reduce the instrumentation footprint. In this case, no trace will be generated at all, and Datadog will estimates aggregate statistics (requests per second, error rate, etc.). An example of this in Python can be found here: http://pypi.datadoghq.com/trace/docs/#pre-sampling.
 
 ## Trace storage
 
-Individual traces are stored for up to 6 months but to determine how long a particular trace will be stored, the Agent makes a sampling decision early in the trace's lifetime. In Datadog backend, sampled traces are retained according to time buckets:
+Individual traces are retained in the Datadog backend for up to 6 months, according to the following time buckets:
 
 | Retention bucket       |  % of stream kept |
 | :--------------------- | :---------------- |
