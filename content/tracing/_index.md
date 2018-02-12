@@ -41,7 +41,6 @@ from ddtrace.contrib.flask import TraceMiddleware
 
 # Tracer configuration
 tracer.configure(hostname='datadog')
-
 app = Flask('API')
 traced_app = TraceMiddleware(app, tracer, service='doc_service')
 
@@ -66,13 +65,12 @@ Each time its called, the following code produces this **trace**:
 
 The Datadog APM product defines the following terms:
 
-* Service: **Name of a set of processes that do the same job**  
-* Resource: **Particular action for a service**
-* Trace: **Used to track the time spent by an application processing a single operation, Each trace consists of one or more spans.** 
-* Span: **A logical unit of work in the system**  
+* **Service**: Name of a set of processes that do the same job
+* **Resource**: Particular action for a service
+* **Trace**: Used to track the time spent by an application processing a single operation, Each trace consists of one or more spans.
+* **Span**: A logical unit of work in the system*
 
-
-Analise them in Datadog:
+Analyse them in Datadog:
 
 * Services are displayed on the [Datadog Services list](/tracing/services) and have [out of the box performances graphs](/tracing/services/service/#out-of-the-box-graphs)
 * Resources are available on the [Resources list for each service](/tracing/services/service/#resources) and have [out of the box performances graphs](/tracing/services/resource/#out-of-the-box-graphs)
