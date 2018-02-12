@@ -63,7 +63,7 @@ Additionally, there are cases where users are using custom Producer and Consume
 ```
 if you are running Producers and Consumers from other languages, this isn't an option, and you have to use another way to submit these metrics from your code, for instance through dogstatsd.
 
-4. This issue is specifically for the Kafka_Consumer check. If you specify a partition in your `Kafka_Consumer.yaml` file that doesn't exist in your environment, you see the following error in info.log:
+4. This issue is specifically for the Kafka_Consumer check. If you specify a partition in your `Kafka_Consumer.yaml` file that doesn't exist in your environment, you see the following error in `info.log`:
 ```
 instance - #0 [Error]: ''
 ```
