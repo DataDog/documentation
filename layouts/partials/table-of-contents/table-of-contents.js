@@ -132,8 +132,12 @@ $(document).ready(function () {
         }).trigger('scroll');
 
         $(document).on( "headerResize", function( event, height) {
-            $('.mobile-toc-toggle').css('top', height + 30 + 'px');
-            $('.toc').css('top', height + 30 + 'px');
+            var offset = 30;
+            if($('.announcement_banner.open').length) {
+                offset = 60;
+            }
+            $('.mobile-toc-toggle').css('top', height + offset + 'px');
+            $('.toc').css('top', height + offset + 'px');
         });
 
 

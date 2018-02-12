@@ -47,19 +47,19 @@ Datadog refers to events that are generated from triggered monitors as Incidents
 
 The best way to identify these in the [Events stream](/graphing/event_stream) is to select the corresponding filter in the filter list:
 
-{{< img src="graphing/events/filter_monitor_alert.png" alt="filter monitor alert" responsive="true" popup="true">}}
+{{< img src="graphing/events/filter_monitor_alert.png" alt="filter monitor alert" responsive="true" popup="true" style="width:50%;">}}
 
 Incidents are unique to regular events and annotations in that they can be claimed/acknowledged by clicking the **claim** button (shown below) on the parent event or putting a `#claim` in the comments:  
 
-{{< img src="graphing/events/claim_incident.png" alt="claim incident" responsive="true" popup="true">}}
+{{< img src="graphing/events/claim_incident.png" alt="claim incident" responsive="true" popup="true" style="width:75%;">}}
 
 By claiming an event a user is essentially assigning it to themselves and signaling to other users that it is being investigated. As an indicator of this, Datadog pins the user's name and portrait to the record:  
 
-{{< img src="graphing/events/claimed_incident.png" style="width:50%;" alt="Claimed incident" responsive="true" popup="true">}}
+{{< img src="graphing/events/claimed_incident.png" style="width:75%;" alt="Claimed incident" responsive="true" popup="true" >}}
 
 Once claimed, an incident can be resolved by clicking the **resolve** button indicating to the team that the underlying issue has been addressed:
 
-{{< img src="graphing/events/resolved_incident.png" alt="Resolved incident" responsive="true" popup="true">}}
+{{< img src="graphing/events/resolved_incident.png" alt="Resolved incident" responsive="true" popup="true" style="width:75%;">}}
 
 ## Show events unaggregated
 

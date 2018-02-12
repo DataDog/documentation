@@ -173,6 +173,7 @@ kind: faq
 |Ruby|RUBY|
 |Sentry|SENTRY|
 |Servicenow|SERVICENOW|
+|Sketch|SKETCH|
 |Slack|SLACK|
 |Snmp|SNMP|
 |Solidfire|SOLIDFIRE|

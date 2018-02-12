@@ -117,6 +117,12 @@ class PreBuild:
     def __init__(self, opts):
         super().__init__()
         self.options = opts
+        if self.options.dogweb and not self.options.dogweb.endswith(sep):
+            self.options.dogweb = self.options.dogweb + sep
+        if self.options.integrations and not self.options.integrations.endswith(sep):
+            self.options.integrations = self.options.integrations + sep
+        if self.options.extras and not self.options.extras.endswith(sep):
+            self.options.extras = self.options.extras + sep
         self.tempdir = '/tmp' if platform.system() == 'Darwin' else tempfile.gettempdir()
         self.data_dir = '{0}{1}{2}'.format(abspath(normpath(options.source)), sep, 'data' + sep)
         self.content_dir = '{0}{1}{2}'.format(abspath(normpath(options.source)), sep, 'content' + sep)
@@ -134,12 +140,12 @@ class PreBuild:
         self.datafile_json = []
         self.pool_size = 5
         self.integration_mutations = OrderedDict({
-            'hdfs': {'action': 'truncate', 'target': 'hdfs', 'remove_header': False},
+            'hdfs': {'action': 'create', 'target': 'hdfs', 'remove_header': False},
             'mesos': {'action': 'truncate', 'target': 'mesos', 'remove_header': False},
             'activemq_xml': {'action': 'merge', 'target': 'activemq', 'remove_header': False},
             'cassandra_nodetool': {'action': 'merge', 'target': 'cassandra', 'remove_header': False},
             'gitlab_runner': {'action': 'merge', 'target': 'gitlab', 'remove_header': False},
-            'hdfs_datanode': {'action': 'merge', 'target': 'hdfs', 'remove_header': True},
+            'hdfs_datanode': {'action': 'merge', 'target': 'hdfs', 'remove_header': False},
             'hdfs_namenode': {'action': 'merge', 'target': 'hdfs', 'remove_header': False},
             'mesos_master': {'action': 'merge', 'target': 'mesos', 'remove_header': True},
             'mesos_slave': {'action': 'merge', 'target': 'mesos', 'remove_header': False},
@@ -266,6 +272,9 @@ class PreBuild:
                         open(output_file, 'w').close()
                 elif action == 'discard':
                     remove(input_file)
+                elif action == 'create':
+                    open(output_file, 'w+').close()
+
 
     def process_source_attribute(self, file_name):
         """

@@ -1,5 +1,5 @@
 ---
-title: Sending Metrics with DogStatsD
+title: Metrics
 kind: documentation
 js_dd_docs_methods:
   - metricsGuidePage
@@ -394,6 +394,9 @@ After a service check has been reported, you can use it to trigger a [Custom Che
 
 ## Rates
 ### Overview
+
+Rates represent the derivative of a metric, it's the value variation of a metric on a defined time interval.
+
 ### Submission methods
 #### Agent Check Submission
 

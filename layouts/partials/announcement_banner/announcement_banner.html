@@ -1,0 +1,7 @@
+{{ $announce := .Site.Params.announcement_banner }}
+{{ if not (in (slice "dg" "landing-page" "tshirt" "apm" "legal" "event" "webinar" "summit") .Type) }}
+<div class="announcement_banner text-center">
+    <a href="{{.Site.Params.corp_url}}{{$announce.link}}">{{$announce.text | safeHTML }}</a>
+    <i class="icon icon-small-x pull-right"></i>
+</div>
+{{ end }}

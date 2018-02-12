@@ -30,6 +30,10 @@ body {
   word-wrap: break-word;
 }
 
+.banner body {
+  padding-top:159px;
+}
+
 body {
   padding-top:129px;
   //@include media-breakpoint-down(md)

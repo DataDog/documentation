@@ -36,7 +36,7 @@ This approach can be especially useful for sending to Datadog logs that have hei
 
 ## Rsyslog
 
-1. (Optional)Activate Rsyslog file monitoring module
+1. (Optional) Activate Rsyslog file monitoring module:  
     If you want to watch/monitor specific log files, then you have to activate the imfile module by adding this to  your `rsyslog.conf`:
 
     * **Rsyslog Version <8**
@@ -52,27 +52,24 @@ This approach can be especially useful for sending to Datadog logs that have hei
         module(load="imfile" PollingInterval="10") #needs to be done just once
         ```
 
-2. Create a `/etc/rsyslog.d/datadog.conf` file
+2. Create a `/etc/rsyslog.d/datadog.conf` file.  
+3. (Optional) Set the files to monitor. Add the following in `/etc/rsyslog.d/datadog.conf`.  
+    * **Rsyslog Version <8**.  
 
-3. (Optional) Set the file to monitor
-    Add the following in `/etc/rsyslog.d/datadog.conf`
-        * **Rsyslog Version <8**
+    ```
+    # Input for FILE1
+    $InputFileName /<path_to_file1>
+    $InputFileTag <app_name_of_file1>
+    $InputFileStateFile <unique_file_id1>
+    $InputFileSeverity info
+    $InputRunFileMonitor
+    ```
+    * **Rsyslog Version >= 8**
 
-        ```
-        # Input for FILE1
-        $InputFileName /<path_to_file1>
-        $InputFileTag <app_name_of_file1>
-        $InputFileStateFile <unique_file_id1>
-        $InputFileSeverity info
-        $InputRunFileMonitor
-        ```
-
-        * **Rsyslog Version >= 8**
-
-        ```
-        #For each file to send
-        input(type="imfile" ruleset="infiles" Tag="<app_name_of_file1>" File="<path_to_file1>" StateFile="<unique_file_id1>")
-        ```
+    ```
+    # For each file to send
+    input(type="imfile" ruleset="infiles" Tag="<app_name_of_file1>" File="<path_to_file1>" StateFile="<unique_file_id1>")
+    ```
 4. Send the logs to your Datadog platform
     To send logs directly to your Datadog account from Rsyslog over TCP, we firstly need to to define the format in `/etc/rsyslog.d/datadog.conf`:
 
@@ -126,9 +123,9 @@ This approach can be especially useful for sending to Datadog logs that have hei
 6. Restart Rsyslog and your new logs get forwarded directly to your Datadog account.
 
 7. Associate those logs with the host metrics and tags
-    In order to make sure that in your Datadog account these logs are associated with the metrics and tags from the same host, it is important to set the same HOSTNAME in your `rsyslog.conf` so that its value matches the hostname of your Datadog metrics.
-    Note that if you did not specify any hostname in your configuration file for the metrics via the `datadog.conf` or datadog.yaml, then you do not need to change anything.
-    If you did specify a custom Hostname for your metric, make sure to replace the %HOSTNAME% value in the format to match the same custom name.
+    In order to make sure that in your Datadog account these logs are associated with the metrics and tags from the same host, it is important to set the same HOSTNAME in your `rsyslog.conf` so that its value matches the hostname of your Datadog metrics.  
+    Note that if you did not specify any hostname in your configuration file for the metrics via the `datadog.conf` or datadog.yaml, then you do not need to change anything.  
+    If you did specify a custom Hostname for your metric, make sure to replace the **%HOSTNAME%** value in the format to match the same custom name.
 
 8. Enjoy Datadog Integrations
     In order to get the best use out of your logs in Datadog, you need to set the source on your logs. The source can be set directly in the agent if you forward your logs to the Datadog agent.
@@ -140,9 +137,19 @@ This approach can be especially useful for sending to Datadog logs that have hei
     ```
     $template DatadogFormat,"YOURAPIKEY <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - [metas ddsource=\"mysourcename\"] %msg%\n"
     ```
-    Do not forge to replace mysourcename by the appropriate value.
+    Do not forge to replace mysourcename by the appropriate value.  
 
- 
+9. (Optional) Datadog cuts inactive connections after a period of inactivity.  
+    Some Rsyslog versions that are not able to reconnect properly when necessary. To mitigate this issue, use time markers so the connection never stops. To achieve this, add the following 2 lines in your Rsyslog configuration:   
+    ```
+    $ModLoad immark
+    $MarkMessagePeriod 45
+    ```
+    And don't forget to restart:
+    ```
+    sudo service rsyslog restart
+    ```
+
 ## FluentD
 
 As long as you can forward your FluentD logs over tcp/udp to a specific port, you can use that approach to forward your FluentD logs to your Datadog agent. But another option is to use the [Datadog FluentD plugin](http://www.rubydoc.info/gems/fluent-plugin-datadog/0.9.6) to forward the logs directly from FluentD to your Datadog account. 
@@ -237,8 +244,21 @@ filter {
 
     log { source(s_src); source(s_files); destination(d_datadog); };
     ```
+    
+4. (Optional) TLS Encryption 
+    To activate TLS encryption:
+    
+    1. Download our [certificate](https://gist.githubusercontent.com/estib/8762bc1a2a5bda781a6e55cca40235f2/raw/665b6b2906a728027f508ea067f01cdf3cf72b49/intake.logs.datadoghq.com.crt) and save it to `/etc/syslog-ng/certs.d/datadoghq.crt`. 
 
-4. Restart syslog-ng 
+    2. Change the definition of the destination to the following:
+
+        ```
+        destination d_datadog { tcp("intake.logs.datadoghq.com" port(10516)     tls(peer-verify(required-untrusted) ca_dir('/opt/syslog-ng/certs.d/')) template(DatadogFormat)); };
+        ```
+
+    More information about the TLS parameters and possibilities for syslog-ng available in their [official documentation](https://syslog-ng.com/documents/html/syslog-ng-ose-latest-guides/en/syslog-ng-ose-guide-admin/html/tlsoptions.html).
+
+5. Restart syslog-ng 
 
 
 ## NXLog
@@ -311,8 +331,15 @@ filter {
     </Route>
     ```
 
-4. Restart NXLog 
-    Open the service administrative tool:
+4. Restart NXLog.  
+    Open the service administrative tool:  
     `C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Administrative Tools\Services.lnk`.
+
+5. (Optional) Set extra parameters or tags.  
+    Add any specific attribute to your logs in each input section of your NXLog configuration file. For instance, to specify the source that is used in Datadog to identify the integration the logs come from, use:
+
+    ```
+    Exec        $ddsource = 'mysourcevalue';
+    ```
 
 {{< partial name="whats-next/whats-next.html" >}}

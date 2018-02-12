@@ -240,11 +240,6 @@ languages:
           url: "/graphing/miscellaneous/"
           weight: 80
           parent: menu_references_graphing
-        - identifier: customnav_graphingnav_metricsmath
-          name: "Metrics Arithmetic"
-          url: "/graphing/miscellaneous/metrics_arithmetic/"
-          weight: 809
-          parent: customnav_graphingnav_miscellaneous
         - identifier: customnav_graphingnav_functions
           name: "Functions"
           url: "/graphing/miscellaneous/functions/"
@@ -302,14 +297,14 @@ languages:
           url: "/monitors/monitor_types/event/"
           weight: 350
           parent: customnav_monitornav_monitor_types
-        - identifier: customnav_monitortypenav_host
-          name: "Host"
-          url: "/monitors/monitor_types/host/"
-          weight: 360
-          parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_forecasts
           name: "Forecasts"
           url: "/monitors/monitor_types/forecasts/"
+          weight: 360
+          parent: customnav_monitornav_monitor_types
+        - identifier: customnav_monitortypenav_host
+          name: "Host"
+          url: "/monitors/monitor_types/host/"
           weight: 370
           parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_integration
@@ -391,6 +386,11 @@ languages:
           name: "Go"
           url: "/tracing/languages/go/"
           weight: 50
+          parent: customnav_tracingnav_langs
+        - identifier: customnav_tracingnav_java
+          name: "Java"
+          url: "/tracing/languages/java/"
+          weight: 55
           parent: customnav_tracingnav_langs
         - identifier: customnav_tracingnav_python
           name: "Python"
@@ -543,12 +543,19 @@ languages:
         #  parent: menu_references_developers
         # DEVELOPERS - Subnav end
 
+        # API
+        - identifier: menu_references_api
+          name: "API"
+          url: "/api/"
+          pre: "nav_api"
+          weight: 110
+
         # ACCOUNT MANAGEMENT
         - identifier: menu_references_account_management
           name: "Account management"
           url: "/account_management/"
           pre: "nav_account"
-          weight: 110
+          weight: 120
         # ACCOUNT MANAGEMENT - Subnav start
         - identifier: customnav_accountmanagementnav_team
           name: "Team management"
@@ -581,7 +588,7 @@ languages:
           name: "Videos"
           url: "/videos/"
           pre: "nav_videos"
-          weight: 120
+          weight: 130
 #        - identifier: menu_references_glossary
 #          name: "Glossary"
 #          url: "/glossary/"
@@ -606,6 +613,10 @@ params:
     png: "?fm=png&auto=format&lossless=1"
     gif: ""
   static_url: "http://localhost:1313/"
+  announcement_banner:
+    text: "<strong>Logging</strong> is here!"
+    link: "blog/announcing-logs/"
+    exclude: []
   code_languages:
     - display_name: Python
       key: python

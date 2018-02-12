@@ -16,11 +16,6 @@ Classic:
       dogstatsd: true
       notes: Also supports APM
       authors: Yoshifumi Kawai
-    - name: metrics.net-datadog
-      link: https://github.com/Guaranteed-Rate/App.Lib.MetricsDotNetDatadogPlugin
-      dogstatsd: true
-      authors: Guaranteed Rate
-      notes: A .NET translation of the metrics-datadog Java adapter
   - Crystal:
     - name: statsd.cr
       link: https://github.com/miketheman/statsd.cr
@@ -54,10 +49,6 @@ Classic:
       link: https://github.com/PagerDuty/godspeed
       dogstatsd: true
       authors: PagerDuty
-    - name: go-dogstatsd
-      link: https://github.com/ooyala/go-dogstatsd/
-      dogstatsd: true
-      authors: Ooyala
     - name: xstats
       link: https://github.com/rs/xstats
       dogstatsd: true
@@ -106,10 +97,6 @@ Classic:
       link: https://github.com/joybro/node-dogstatsd
       dogstatsd: true
       authors: Young Han Lee
-    - name: node-datadog
-      link: https://github.com/HashGo/node-datadog
-      api: true
-      authors: HashGo
     - name: node-dogapi
       link: https://github.com/brettlangdon/node-dogapi
       api: true
@@ -156,6 +143,12 @@ Classic:
       api: true
       notes: An R package to analyze Datadog metrics into R
       authors: Alexis Lê-Quôc
+  - Racket:
+    - name: racket-dogstatsd
+      link: https://github.com/DarrenN/racket-dogstatsd
+      dogstatsd: true
+      notes: A DogStatsD client for Racket
+      authors: DarrenN
   - Ruby:
     - name: DogApi
       link: https://github.com/DataDog/dogapi-rb

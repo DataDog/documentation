@@ -1,5 +1,11 @@
 $ddpurple:    #774DA2;
 
+
+.announcement_banner.open ~ header {
+  margin-top: 30px !important;
+  background: #fff;
+}
+
 body > header {
   box-shadow: 0 8px 10px 0 rgba(0,0,0,.07);
   background: #fff;

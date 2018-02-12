@@ -59,13 +59,13 @@ The filter syntax is the same as the [search bar](/logs/explore/#search-bar).
 
 The logstream shows which logs your pipeline applies to:
 
-{{< img src="logs/processing/pipeline_filters.png" alt="Pipelines filters" responsive="true" popup="true">}}
+{{< img src="logs/processing/pipeline_filters.png" alt="Pipelines filters" responsive="true" popup="true" style="width:80%;">}}
 
 ### Integration Pipelines
 
 These pipelines are read-only, but you can clone them and then edit the clone:
 
-{{< img src="logs/processing/cloning_pipeline.png" alt="Cloning pipeline" responsive="true" popup="true">}}
+{{< img src="logs/processing/cloning_pipeline.png" alt="Cloning pipeline" responsive="true" popup="true" style="width:80%;">}}
 
 ## Processors
 
@@ -97,11 +97,11 @@ If your logs put their dates in an attribute not in this list, use the log date 
 {{< img src="logs/processing/log_date_remapper.png" alt="Log date Remapper" responsive="true" popup="true">}}
 
 If your logs don't contain any of the default attributes and you haven't defined your own date attribute, Datadog timestamps the logs with the date it received them.  
-If the log's official timestamp is from one of the default attributes or [an attribute of your choosing](/logs/processing/#log-date-remapper), Datadog rejects the log if the date is more than 18 hours in the past.
+If the log's official timestamp is from a custom attribute, use a [date remapper processor](/logs/processing/#log-date-remapper) to override the log's default timestamp.
 
-### Log Severity Remapper
+### Log Status Remapper
 
-Use this processor if you want to assign some attributes as the official severity, just enter the attribute path in the processor tile as follow:
+Use this processor if you want to assign some attributes as the official status, just enter the attribute path in the processor tile as follow:
 
 {{< img src="logs/processing/severity_remapper_processor_tile.png" alt="Severity Remapper processor tile" responsive="true" popup="true">}}
 
@@ -113,7 +113,7 @@ Into this log:
 
 {{< img src="logs/processing/log_post_severity_bis.png" alt=" Log post severity bis" responsive="true" popup="true" style="width:40%;" >}}
 
-However, beware that each incoming severity value is mapped as follows:
+However, beware that each incoming status value is mapped as follows:
 
 * Integers from 0 to 7 map to the [Syslog severity standards](https://en.wikipedia.org/wiki/Syslog#Severity_level)
 * Strings beginning with **emerg** or **f** (case unsensitive) map to **emerg (0)**
@@ -124,6 +124,7 @@ However, beware that each incoming severity value is mapped as follows:
 * Strings beginning with **n** (case unsensitive) map to **notice (5)**
 * Strings beginning with **i** (case unsensitive) map to **info (6)**
 * Strings beginning with **d**, **trace** or **verbose** (case unsensitive) map to **debug (7)**
+* Strings matching **OK** or **Sucess** (case unsensitive) map to **OK**
 * All others map to **info (6)**
 
 ### Attribute Remapper
@@ -157,6 +158,29 @@ These settings:
 
 Give the following results:
 {{< img src="logs/processing/useragent_processor.png" alt="Useragent processor" responsive="true" popup="true">}}
+
+## Technical limits
+
+To make sure the Log Management solution functions in an optimal way we set the following technical limits and rules to your log events as well as to some product features. These have been designed so you may never reach them.
+
+### Limits applied to ingested log events
+
+* The size of a log event should not exceed 25K bytes.
+* Log events can be submitted up to 6h in the past and 2h in the future.
+* A log event once converted to JSON format should contain less than 256 attributes, each of those attribute’s key should be less than 50 characters, be nested in less than 10 successive levels and their respective value be less than 1024 characters if promoted as a facet.
+* A log event should not have more than 100 tags and each tag should not exceed 256 characters for a maximum of 10 millions unique tag per day.
+
+Log events which do not comply with these limits might be transformed or truncated by the system. Or simply not indexed if outside of the provided time range. However, be sure that Datadog always tries to do its best to preserve as much as possible the provided user data.
+
+### Limits applied to provided features
+
+* The maximum number of facets is 100.
+* The maximum number of processing pipeline on a platform is 100.
+* The maximum number of processor per pipeline is 20.
+* The maximum number of parsing rule within a grok processor is 10. We reserve the right to disable underperforming parsing rules that might impact our service performance.
+
+Contact support if you reach one of these limits as Datadog might be able to provide you more.
+
 
 ## Further Reading
 

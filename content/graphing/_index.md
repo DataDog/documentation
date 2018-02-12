@@ -1,8 +1,9 @@
 ---
 title: Graphing
 kind: documentation
-alias:
+aliases:
     - /guides/graphing
+    - /graphing/miscellaneous/metrics_arithmetic
 description: Visualize your data to gain insight
 ---
 Graphs are the window onto your monitored systems. Most of the times that you visit Datadog, you look at [dashboards][8] made up of graphs. Other times you see email notifications that include a graph of some fluctuation in the system. And yet other times you see graphs in your Slack, HipChat, and other chat clients documenting the changes in metrics over the course of time. Graphs are at the heart of monitoring and observability, so it is essential to understand how to define great graphs.
@@ -71,7 +72,7 @@ To use the rollup function, click the plus sign to the right of the aggregation 
 
 To create a single line that represents the total available disk space on average across all machines rolled up in 60 seconds buckets, you would use a query like this:
 
-{{< img src="graphing/index/references-graphing-rollup-example.png" alt="rollup example" responsive="true" popup="true" >}}
+{{< img src="graphing/index/references-graphing-rollup-example.png" alt="rollup example" responsive="true" popup="true" style="width:90%;">}}
 
 When switching to the JSON view, the query looks like this:
 
@@ -156,11 +157,11 @@ There are three configuration settings:
 Add events from related system to add even more context to your graph. An example would be to add Github commits, Jenkins deploys, or Docker creation events. Just click the Overlay Events button and enter a query to find and display your events.  
 To show anything from a source such as Github, use `sources:github`. For all the events with the tag role:web, use `tag:role:web`.
 
+{{< img src="graphing/index/overlay_events.png" alt="Overlay Events" responsive="true" popup="true" style="width:75%;" >}}
+
 ## Create a title
 
 If you don't enter a title, we automatically generate a title based on the selections you have made. But it may be more useful to the users of the [dashboard](/graphing/dashboards) to create a title that more aptly describes the purpose of the graph. Linking the technical purpose to the business benefits adds even more value.
-
-{{< img src="graphing/index/overlay_events.png" alt="Overlay Events" responsive="true" popup="true" style="width:75%;" >}}
 
 ## Save
 

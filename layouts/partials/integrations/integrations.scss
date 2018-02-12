@@ -115,7 +115,15 @@ $ddpurple:    #774DA2;
 // do card hovers at desktop only
 @media (min-width: 576px) {
   .integration-tiles {
+    &.find {
+      .card .title {
+        display:block;
+      }
+    }
     .card {
+      .title {
+        display:none;
+      }
       &:hover {
         border-color: $ddpurple;
         & > .card-img,
@@ -124,6 +132,9 @@ $ddpurple:    #774DA2;
         }
         & > .card-body {
           display: block;
+        }
+        .title {
+          display:none;
         }
       }
     }

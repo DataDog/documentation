@@ -20,60 +20,37 @@ Here is a quick overview of the different terms used:
 ### Choose what to monitor
 
 1. Choose the detection method
-    {{< img src="monitors/index/alert_type.png" alt="alert type" responsive="true" popup="true">}}
+    {{< img src="monitors/index/alert_type.png" alt="alert type" responsive="true" popup="true" style="width:60%;">}}
 
-    A **[Threshold Alert](/monitors/monitor_types/metric)** compares the value in the selected
-    timeframe against a given threshold. There are additional options available
-    in the alerting conditions section. This is the standard alert case
-    where you know what sort values are unexpected.
+    A **[Threshold Alert](/monitors/monitor_types/metric)** compares the value in the selected timeframe against a given threshold. There are additional options available in the alerting conditions section. This is the standard alert case where you know what sort values are unexpected.
 
     A **[Change Alert](/monitors/monitor_types/metric)** compares the absolute or percentage change in
     value between now and some time ago against a given threshold.
     The compared data points are nots single points but are computed using
-    the parameters in the *alert conditions* section.
-
-    This type of alert is useful to track sudden spikes or drops as well as slow
-    changes in a metric when you might not have an exact "unexpected" threshold.
-    *Note:* the calculated value is not the absolute value - meaning it is
+    the parameters in the *alert conditions* section.  
+    This type of alert is useful to track sudden spikes or drops as well as slow changes in a metric when you might not have an exact "unexpected" threshold.  
+    **Note:** the calculated value is not the absolute value - meaning it is
     negative for a downward change.
 
-    **[Anomaly Detection](/monitors/monitor_types/anomaly)** is an algorithmic feature that allows you to identify
-    when a metric is behaving differently than it has in the past, taking into
-    account trends, seasonal day-of-week and time-of-day patterns. It is well-
-    suited for metrics with strong trends and recurring patterns that are hard
-    or impossible to monitor with threshold-based alerting.
+    **[Anomaly Detection](/monitors/monitor_types/anomaly)** is an algorithmic feature that allows you to identify when a metric is behaving differently than it has in the past, taking into account trends, seasonal day-of-week and time-of-day patterns. It is well- suited for metrics with strong trends and recurring patterns that are hard or impossible to monitor with threshold-based alerting.
 
-    **[Outlier Detection](/monitors/monitor_types/outlier)** is an algorithmic feature that allows you to detect
-    when some members of a group are behaving strangely compared to the others.
-    For example, you could detect that one web server in a pool is processing an
-    unusual number of requests, and hence should be a target for replacement. Or,
-    you could get an early warning that significantly more 500s are happening in
-    one AWS Availability Zone (AZ) than the others, which might indicate an issue
-    arising in that AZ.
+    **[Outlier Detection](/monitors/monitor_types/outlier)** is an algorithmic feature that allows you to detect when some members of a group are behaving strangely compared to the others.  
+    For example, you could detect that one web server in a pool is processing an unusual number of requests, and hence should be a target for replacement. Or, you could get an early warning that significantly more 500s are happening in one AWS Availability Zone (AZ) than the others, which might indicate an issue arising in that AZ.
 
 2. Select the metric and scope you want to monitor.
-  {{< img src="monitors/index/metric_scope.png" alt="metric scope" responsive="true" popup="true">}}
+  {{< img src="monitors/index/metric_scope.png" alt="metric scope" responsive="true" popup="true" style="width:80%;">}}
 
     You can create a monitor on any metrics that you are currently sending to
     Datadog. The standard [scoping rules](/graphing/#scope) apply here.
 
 3. Select the alert grouping.
-    {{< img src="monitors/index/alert_grouping.png" alt="alert grouping" responsive="true" popup="true">}}
-
-    A **simple alert** aggregates over all reporting sources. You get one
-    alert when the aggregated value meets the conditions set below. This works
-    best to monitor a metric from a single host, like `avg` of
-    `system.cpu.iowait` over `host:bits`, or for an aggregate metric across many
-    hosts like `sum` of `nginx.bytes.net` over `region:us-east`.
-
-    A **multi alert** applies the alert to each source, according to your group
-    parameters. E.g. to alert on disk space you might group by host and device,
-    creating the query:
-
-        avg:system.disk.in_use{*} by {host,device}
-
-    This triggers a separate alert for each device on each host that is
-    running out of space.
+  {{< img src="monitors/index/alert_grouping.png" alt="alert grouping" responsive="true" popup="true" style="width:80%;">}}
+  A **simple alert** aggregates over all reporting sources. You get one alert when the aggregated value meets the conditions set below. This works best to monitor a metric from a single host, like `avg` of `system.cpu.iowait` over `host:bits`, or for an aggregate metric across many hosts like `sum` of `nginx.bytes.net` over `region:us-east`.  
+  A **multi alert** applies the alert to each source, according to your group parameters. E.g. to alert on disk space you might group by host and device, creating the query:
+  ```
+  avg:system.disk.in_use{*} by {host,device}
+  ```
+  This triggers a separate alert for each device on each host that is running out of space.
 
 ### Define the conditions
 4. Select the alert conditions
@@ -138,7 +115,7 @@ Here is a quick overview of the different terms used:
 
 ### Setup Notifications
 
-{{< img src="monitors/index/notification.png" alt="notification" responsive="true" popup="true">}}
+{{< img src="monitors/index/notification.png" alt="notification" responsive="true" popup="true" style="width:80%;">}}
 
 1. Give your monitor a **title**. It is often useful to use a succinct
    explanation of the monitor so a notified team member can quickly understand

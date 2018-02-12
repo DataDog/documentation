@@ -6,14 +6,15 @@ kind: documentation
 ## Change Screenboard name 
 
 1. Click on Edit Board at the top of the Screenboard
-    {{< img src="graphing/dashboards/screenboard/screenboard_name.png" alt="Screenboard name" responsive="true" popup="true">}}
+    {{< img src="graphing/dashboards/screenboard/screenboard_name.png" alt="Screenboard name" responsive="true" popup="true" style="width:75%;">}}
 2. Change the name to whatever you like
 3. Click Save Changes
 
 ## Read Only
 
 [An Administrator](/account_management/team/#datadog-user-roles) or Screenboard creator can make a Screenboard read-only by clicking the gear icon (upper right corner of a Screenboard) and clicking the **Permissions** link:
-{{< img src="graphing/dashboards/screenboard/read_only.png" alt="Read Only" responsive="true" popup="true">}}
+
+{{< img src="graphing/dashboards/screenboard/read_only.png" alt="Read Only" responsive="true" popup="true" style="width:30%;">}}
 
 **Click "Yes" on the confirmation window to make the Screenboard read-only**
 
@@ -48,40 +49,10 @@ https://app.datadoghq.com/event/stream?per_page=30&query=tags:audit%20status:all
 This feature can be enabled by following these simple steps:
 
 1. At the top right corner of a dashboard, click on the gear icon:
-    {{< img src="graphing/dashboards/faq/enable_notifications.png" alt="enable notifications" responsive="true" popup="true">}}
+    {{< img src="graphing/dashboards/faq/enable_notifications.png" alt="enable notifications" responsive="true" popup="true" style="width:30%;">}}
 
 2. Select **Notifications** option and enable the notifications:
-    {{< img src="graphing/dashboards/faq/notifications_pop_up.png" alt=" notifications pop up" responsive="true" popup="true">}}
-
-## Change colors
-
-### Deluminate (Chrome)
-
-This Chrome plug-in helps you change the Color Scheme for your browser (Contrast, Reverse Colors, Image colors, Luminance) [Deluminate](https://chrome.google.com/webstore/detail/deluminate/iebboopaeangfpceklajfohhbpkkfiaa?hl=en-US).
-
-Simple to setup and easily activated/unactivated, Deluminate is a good fit for Datadog Screenboards.
-{{< img src="developers/faq/deluminate.png" alt="deluminate" responsive="true" popup="true">}}
-
-### Stylebot (Chrome)
-
-Stylish offers more possibilities to customize the css of any web page.
-
-You can use the library created by adamjt for Datadog Screenboards: `http://stylebot.me/styles/4320`
-
-{{< img src="developers/faq/style_bot.jpg" alt="style_bot" responsive="true" popup="true">}}
-
-Here is how to proceed to enjoy this css style on Chrome using Stylebot:
-
-1. Install the Stylebot extension for Chrome: `https://chrome.google.com/webstore/detail/stylebot/oiaejidbmkiecgbjeifoejpgmdaleoha?hl=en`
-2. On the css page, `http://stylebot.me/styles/4320`, click the scissors "CSS" icon and copy all the css
-3. Click the Stylebot icon to open the menu, choose "Options"
-4. In the left column choose 'Styles', then click "Add a new Style"
-5. URL: p.datadoghq.com
-6. In the text zone, paste the whole css code previously copied from our css page
-7. Save
-8. Next time you visit a shared dashboard, this new css style will be enabled.
-
-If you have any custom css style sheet that you would like to share, [reach out to us](/help)!
+    {{< img src="graphing/dashboards/faq/notifications_pop_up.png" alt=" notifications pop up" responsive="true" popup="true" style="width:40%;">}}
 
 ## Backup my Screenboard
 
@@ -89,5 +60,6 @@ Using our [APIs](/api) it's possible to write a script to backup your Screenboar
 
 * https://github.com/brightcove/dog-watcher
 * https://github.com/Shopify/doggy
+* https://github.com/grosser/kennel
 
-Special thanks to [Brightcove](https://www.brightcove.com/) and [Shopify](https://www.shopify.com/) for sharing these projects!
+Special thanks to [Brightcove](https://www.brightcove.com/), [Shopify](https://www.shopify.com/), and [Zendesk](https://www.zendesk.com/) for sharing these projects!

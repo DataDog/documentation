@@ -24,15 +24,16 @@ There are four main components to Kafka:
 
 It is important to note that we currently have two distinct Kafka Integrations. The first is named [Kafka](/integrations/kafka) while the second is [Kafka_Consumer](/integrations/kafka).
 
-The Kafka Integration utilizes [Datadog’s JMXFetch](https://github.com/DataDog/jmxfetch) application to pull metrics, just like our other Java based applications such as Cassandra, JMX, Tomcat, etc. This pulls metrics through the use of mBeans, where the engineering team has included a list of commonly used mBeans in the Kafka.yaml file. This can be extended with any other beans the user would like, or if your version of Kafka supports additional metrics.
+The [Kafka Integration](/integrations/kafka) utilizes [Datadog’s JMXFetch](https://github.com/DataDog/jmxfetch) application to pull metrics, just like our other Java based applications such as Cassandra, JMX, Tomcat, etc. This pulls metrics through the use of mBeans, where the engineering team has included a list of commonly used mBeans in the Kafka.yaml file. This can be extended with any other beans the user would like, or if your version of Kafka supports additional metrics.
 
-The Kafka_Consumer Integration collects metrics like our standard Python based checks. This utilizes an internal Zookeeper API. Zookeeper is an Apache application that is responsible for managing the configuration for the cluster of nodes known as the Kafka broker. (In version 0.9 of Kafka things are a bit different, Zookeeper is no longer required, see the Troubleshooting section for more information). This check picks up only three metrics, and these do not come from JMXFetch.
+The [Kafka_Consumer Integration](/integrations/kafka/#agent-check-kafka-consumer) collects metrics like our standard Python based checks. This utilizes an internal Zookeeper API. Zookeeper is an Apache application that is responsible for managing the configuration for the cluster of nodes known as the Kafka broker. (In version 0.9 of Kafka things are a bit different, Zookeeper is no longer required, see the Troubleshooting section for more information). This check picks up only three metrics, and these do not come from JMXFetch.
 
 ## Troubleshooting:
 
 There are a few common issues you may face when it comes to the Kafka Integration. Here is a common list of issues that could be affecting users.
 
-1. The most common issue stems from a newer feature of Kafka that Datadog does not yet support. This specifically affects the Kafka_Consumer Integration. Since version 0.9 of Kafka, the ability to store consumer based offsets can be done within Kafka itself, no longer requiring the Zookeeper application. This means that the kafka.consumer.offset metric that comes from the Kafka_Consumer Integration is not available as we calculate this metric based off of values pulled in from Zookeeper. There are currently efforts to support this, but it is not currently available. In the meantime, they can use LinkedIn Burrows and the community written [Datadog Plugin](https://github.com/packetloop/datadog-agent-burrow) to get these Kafka Consumer metrics.  
+1. This first troubleshooting issue only applies if you are running version *<5.20* of the [Datadog Agent](/agent). In older versions of Kafka, consumer offsets were stored in Zookeper exclusively. The initial Kafka_consumer check was written when this limitation was in place. Due to this, you cannot get the `kafka.consumer_lag` metric if your offsets are stored in Kafka and you are using an older version of the Agent.  
+With version 5.20+ of the [Datadog Agent](/agent), we are able to support pulling consumer lag from the consumer offsets that are stored within Kafka itself. Please upgrade the Agent to the latest version to see these metrics.  
 
 2. The second most common issue is the following error for the Kafka Integration:
 ```
@@ -62,7 +63,7 @@ Additionally, there are cases where users are using custom Producer and Consume
 ```
 if you are running Producers and Consumers from other languages, this isn't an option, and you have to use another way to submit these metrics from your code, for instance through dogstatsd.
 
-4. This issue is specifically for the Kafka_Consumer check. If you specify a partition in your Kafka_Consumer.yaml file that doesn't exist in your environment, you see the following error in info.log:
+4. This issue is specifically for the Kafka_Consumer check. If you specify a partition in your `Kafka_Consumer.yaml` file that doesn't exist in your environment, you see the following error in `info.log`:
 ```
 instance - #0 [Error]: ''
 ```
