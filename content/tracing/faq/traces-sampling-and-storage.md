@@ -71,7 +71,7 @@ Traces are automatically assigned a priority of **0** or **1**, with a proportio
 
 #### Using Priority Sampling
 
-Priority Sampling is recommended if your traces are distributed across multiple hosts or if you need finer control over the traces sampled. To use it, enable `distributed_sampling` in your client ([Ruby](http://www.rubydoc.info/gems/ddtrace/#Priority_sampling), [Python](http://pypi.datadoghq.com/trace/docs/#priority-sampling), [Go](https://godoc.org/github.com/DataDog/dd-trace-go/tracer#Span.SetSamplingPriority), [Java](/tracing/setup/java/#sampling-distributed-tracing)) as it is disabled by default.
+Priority Sampling is recommended if your traces are distributed across multiple hosts or if you need finer control over the traces sampled. To use it, enable `distributed_sampling` in your client ([Ruby](http://www.rubydoc.info/gems/ddtrace/#Priority_sampling), [Python](http://pypi.datadoghq.com/trace/docs/#priority-sampling), [Go](https://godoc.org/github.com/DataDog/dd-trace-go/tracer#Span.SetSamplingPriority), [Java](/tracing/languages/java/#sampling-distributed-tracing)) as it is disabled by default.
 
 ### Client rate sampling
 
