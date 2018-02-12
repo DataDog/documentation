@@ -464,6 +464,11 @@ languages:
           url: "/tracing/miscellaneous/environment"
           weight: 460
           parent: customnav_tracingnav_miscellaneous
+        - identifier: customnav_tracingnav_distributed_tracing
+          name: "Distributed Tracing "
+          url: "/tracing/miscellaneous/distributed_tracing"
+          weight: 470
+          parent: customnav_tracingnav_miscellaneous
 
         #- identifier: customnav_tracingnav_faq
         #  name: "FAQ"
