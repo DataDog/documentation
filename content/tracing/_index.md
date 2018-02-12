@@ -31,12 +31,10 @@ We have a Flask Python application that when called on `/doc` returns **42**
 We [instrumented our python code](/tracing/setup) in order to generate traces from it:
 
 ```python
-import blinker as _
 import time
+import blinker as _
 
 from flask import Flask, Response
-from flask import jsonify
-from flask import request as flask_request
 
 from ddtrace import tracer
 from ddtrace.contrib.flask import TraceMiddleware
@@ -60,7 +58,7 @@ def doc_resource():
     return Response(str(res), mimetype='application/json')
 ```
 
-Each time its called, the following code would produce the following **trace**:
+Each time its called, the following code produces this **trace**:
 
 {{< img src="tracing/simple_trace.png" alt="Simple Trace" responsive="true" popup="true">}}
 
