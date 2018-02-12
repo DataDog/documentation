@@ -64,7 +64,7 @@ Each time its called, the following code produces this **trace**:
 
 [Learn more about traces with the dedicated Trace documentation](/tracing/services/trace)
 
-The Datadog APM product defines those terms as:
+The Datadog APM product defines the following terms:
 
 * Service: **Name of a set of processes that do the same job**  
 * Resource: **Particular action for a service**
