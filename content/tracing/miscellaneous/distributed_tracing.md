@@ -3,7 +3,7 @@ title: "Getting started: Distributed Tracing "
 kind: documentation
 ---
 
-To understand deeper how tracing works, let's take the following example which represents a simple API **thinker-api** and a micro-service behind it **thinker-microservice**. When the API receives a request with the correct *subject* parameter, it responds with a *thought*, otherwise, it responds with an error:
+If you have read the [first example of tracing](/tracing) and you want to understand deeper how tracing works, let's take the following example which represents a simple API **thinker-api** and a micro-service behind it **thinker-microservice**. When the API receives a request with the correct *subject* parameter, it responds with a *thought*, otherwise, it responds with an error:
 
 {{< img src="tracing/miscellaneous/getting_started_distributed/tracing_overview_GS.jpg" alt="Tracing getting started overview" responsive="true" popup="true">}}
 
@@ -26,12 +26,6 @@ To understand deeper how tracing works, let's take the following example which r
         }
     }
     ```
-
-<!---
-[Find the complete demo project on our github]()
-
-We need to opensource workshop code
--->
 
 ### Code used
 

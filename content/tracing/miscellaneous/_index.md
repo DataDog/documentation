@@ -10,5 +10,6 @@ kind: documentation
     {{< nextlink href="/tracing/miscellaneous/metrics_namespace" >}} Metrics Namespace{{< /nextlink >}}
     {{< nextlink href="/tracing/miscellaneous/trace_sampling_and_storage" >}} Discover our trace sampling and storage policy {{< /nextlink >}}
     {{< nextlink href="/tracing/miscellaneous/environment" >}} Learn more about the environment concept {{< /nextlink >}}
+    {{< nextlink href="/tracing/miscellaneous/distributed_tracing" >}}Discover a distributed tracing example{{< /nextlink >}}
 {{< /whatsnext >}}
 
