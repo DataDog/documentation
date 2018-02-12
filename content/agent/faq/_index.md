@@ -17,7 +17,6 @@ private: true
 * [Network Time Protocol (NTP) Offset Issues](/agent/faq/network-time-protocol-ntp-offset-issues)
 * [How to solve Permission denied errors?](/agent/faq/how-to-solve-permission-denied-errors)
 * [How to report host disk metrics when dd-agent runs in a docker container?](/agent/faq/how-to-report-host-disk-metrics-when-dd-agent-runs-in-a-docker-container)
-* [Agent Check reports "OK" but Monitor shows Critical](/agent/faq/agent-check-reports-ok-but-monitor-shows-critical)
 * [Log Locations](/agent/faq/log-locations)
 * [Where is the configuration file for the Agent?](/agent/faq/where-is-the-configuration-file-for-the-agent)
 * [Start/Stop/Restart the Datadog Agent](/agent/faq/start-stop-restart-the-datadog-agent)
@@ -36,11 +35,9 @@ private: true
 
 ## General
 
-* [Upgrade to Agent 6.x](/agent/faq/upgrade-to-agent-6-x)
 * [Does the docker dd-agent have JMX in it?](/agent/faq/does-the-docker-dd-agent-have-jmx-in-it)
 * [How to get more out of your Kubernetes integration ?](/agent/faq/how-to-get-more-out-of-your-kubernetes-integration)
 * [Why don't I see the 'system.processes.open_file_descriptors' metric?](/agent/faq/why-don-t-i-see-the-system-processes-open-file-descriptors-metric)
-* [Want more flexibility with your custom log parser? Add DogStatsD](/agent/faq/want-more-flexibility-with-your-custom-log-parser-add-dogstatsd)
 * [How do I reset my Datadog API keys?](/agent/faq/how-do-i-reset-my-datadog-api-keys)
 * [How is the 'system.mem.used' metric calculated?](/agent/faq/how-is-the-system-mem-used-metric-calculated)
 * [How can I collect HTTP response codes from Nginx?](/agent/faq/how-can-i-collect-http-response-codes-from-nginx)
@@ -50,4 +47,3 @@ private: true
 * [How do I change the frequency of an agent check?](/agent/faq/how-do-i-change-the-frequency-of-an-agent-check)
 * [How does Datadog determine the agent hostname](/agent/faq/how-does-datadog-determine-the-agent-hostname)
 * [Agent check directory structure](/agent/faq/agent-check-directory-structure)
-* [Datadog Agent supported OS versions](/agent/faq/supported-os-versions)

@@ -3,10 +3,6 @@ title: Log Parsing in the Agent
 kind: documentation
 aliases:
     - /guides/logs/
-further_reading:
-- link: "/agent/faq/want-more-flexibility-with-your-custom-log-parser-add-dogstatsd"
-  tag: "FAQ"
-  text: Want more flexibility with your custom log parser? Add DogStatsD  
 ---
 
 Log files contain tons of valuable application and business data.
@@ -251,7 +247,3 @@ Bugs happen, so being able to see the traceback from your log-parsers is very im
 Note that whenever you make a change to your custom log-parser, [restart the agent](/agent/faq/start-stop-restart-the-datadog-agent) to put that change into effect.
 
 If you suspect there is some error occurring beyond the scope of your custom log-parser function, feel free to [reach out to support](/help), but do first set the agent's log-level at "DEBUG", run the agent for a few minutes while ensuring that new logs are being added to your files, and then [run the flare command](/agent/faq/send-logs-and-configs-to-datadog-via-flare-command) from your agent. That gives to the support team the information needed to effectively troubleshoot the issue.
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}

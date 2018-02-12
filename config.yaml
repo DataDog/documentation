@@ -56,22 +56,22 @@ languages:
           url: "/agent/"
           pre: "nav_agent"
           weight: 40
-          
-        # AGENT - Subnav start
+        
+        ## Basic agent usage
         - identifier: customnav_agentnav_basic_usage
-          name: "Basic Agent Usage"
+          name: "Basic Agents Usage"
           url: "/agent/basic_agent_usage/"
           weight: 10
           parent: menu_references_agent
         - identifier: amazonlinux
           name: "Amazon Linux"
           url: "/agent/basic_agent_usage/amazonlinux/"
-          weight: 10
+          weight: 100
           parent: customnav_agentnav_basic_usage
         - identifier: centos
           name: "CentOs"
           url: "/agent/basic_agent_usage/centos/"
-          weight: 20
+          weight: 101
           parent: customnav_agentnav_basic_usage
         - identifier: docker
           name: "CoreOS/Docker"
@@ -123,41 +123,53 @@ languages:
           url: "/agent/basic_agent_usage/source/"
           weight: 120
           parent: customnav_agentnav_basic_usage
-        - identifier: customnav_agentnav_agent_checks
-          name: "Agent Checks"
-          url: "/agent/agent_checks/"
+
+        # AGENT V6 - Subnav start
+        - identifier: customnav_agentnav_v6
+          name: "Agent V6"
+          url: "/agent/v6/"
+          weight: 20
+          parent: menu_references_agent
+
+
+
+        # AGENT V5 - Subnav start
+        - identifier: customnav_agentnav_v5
+          name: "Agent V5"
+          url: "/agent/v5/"
           weight: 30
           parent: menu_references_agent
+
+        - identifier: customnav_agentnav_agent_checks
+          name: "Agent Checks"
+          url: "/agent/v5/agent_checks/"
+          weight: 310
+          parent: customnav_agentnav_v5
         - identifier: customnav_agentnav_prometheus_checks
           name: "Prometheus Checks"
-          url: "/agent/prometheus/"
-          weight: 31
-          parent: menu_references_agent
+          url: "/agent/v5/prometheus/"
+          weight: 320
+          parent: customnav_agentnav_v5
         - identifier: customnav_agentnav_autodiscovery
           name: "Autodiscovery"
-          url: "/agent/autodiscovery/"
-          weight: 40
-          parent: menu_references_agent
+          url: "/agent/v5/autodiscovery/"
+          weight: 330
+          parent: customnav_agentnav_v5
         - identifier: customnav_agentnav_installcoreextra
           name: "Install Core & Extra"
-          url: "/agent/installcoreextra/"
-          weight: 50
-          parent: menu_references_agent
+          url: "/agent/v5/installcoreextra/"
+          weight: 340
+          parent: customnav_agentnav_v5
         - identifier: customnav_agentnav_logs
           name: "Logs"
-          url: "/agent/logs/"
-          weight: 60
-          parent: menu_references_agent
-        - identifier: customnav_agentnav_tagging
-          name: "Tagging"
-          url: "/agent/tagging/"
-          weight: 80
-          parent: menu_references_agent
+          url: "/agent/v5/logs/"
+          weight: 350
+          parent: customnav_agentnav_v5
         - identifier: customnav_agentnav_proxy
           name: "Proxy Configuration"
-          url: "/agent/proxy/"
-          weight: 90
-          parent: menu_references_agent
+          url: "/agent/v5/proxy/"
+          weight: 360
+          parent: customnav_agentnav_v5
         #- identifier: customnav_agentnav_faq
         #  name: "FAQ"
         #  url: "/agent/faq/"
@@ -520,6 +532,11 @@ languages:
           name: "Metrics"
           url: "/developers/metrics/"
           weight: 70
+          parent: menu_references_developers
+        - identifier: customnav_developersnav_tagging
+          name: "Tagging"
+          url: "/developers/tagging/"
+          weight: 80
           parent: menu_references_developers
         - identifier: customnav_integrationsnav_new_integration
           name: "Create a new integration"

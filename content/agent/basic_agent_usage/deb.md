@@ -1,12 +1,6 @@
 ---
 title: Basic Agent Usage for Debian
 kind: documentation
-platform: Debian
-servicename: /etc/init.d/datadog-agent
-serviceinfoname: /etc/init.d/datadog-agent info
-configdirectory: /etc/dd-agent/
-logdirectory: /var/log/datadog/
-supervisorlog: /var/log/datadog/supervisord.log
 aliases:
     - /guides/basic_agent_usage/deb/
 ---

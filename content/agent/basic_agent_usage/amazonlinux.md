@@ -2,11 +2,6 @@
 title: Basic Agent Usage for Amazon Linux
 kind: documentation
 platform: Amazon Linux
-servicename: /etc/init.d/datadog-agent
-serviceinfoname: /etc/init.d/datadog-agent info
-configdirectory: /etc/dd-agent/
-logdirectory: /var/log/datadog/
-supervisorlog: /var/log/supervisor/datadog-supervisord.log
 aliases:
     - /guides/basic_agent_usage/amazonlinux/
 ---
