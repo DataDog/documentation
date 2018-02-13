@@ -49,8 +49,6 @@ See a list of all the hosts in your account from the Infrastructure tab in Datad
 
 {{< img src="agent/faq/host_aliases.png" alt="Host aliases" responsive="true" popup="true">}}
 
-To learn how to rename your host, [reference this article](/agent/faq/how-can-i-change-the-hostname).
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

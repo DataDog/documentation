@@ -24,7 +24,6 @@ private: true
 * [Agent(s) are no longer reporting data](/agent/faq/agent-s-are-no-longer-reporting-data)
 * [Error Restarting Agent: Already Listening on a Configured Port](/agent/faq/error-restarting-agent-already-listening-on-a-configured-port)
 * [I'm having problems with DogStatsD - where is the log for this?](/agent/faq/i-m-having-problems-with-dogstatsd-where-is-the-log-for-this)
-* [Why am I seeing inconsistencies for metrics submitted to DogStatsD?](/agent/faq/why-am-i-seeing-inconsistencies-for-metrics-submitted-to-dogstatsd)
 * [Forwarder logs contain 599 response code](/agent/faq/forwarder-logs-contain-599-response-code)
 * [Starting Datadog Agent (using supervisord):Error: Cannot open an HTTP server: socket.error reported errno.EACCES (13)](/agent/faq/cannot-open-an-http-server-socket-error-reported-errno-eacces-13)
 
@@ -37,6 +36,5 @@ private: true
 * [How is the 'system.mem.used' metric calculated?](/agent/faq/how-is-the-system-mem-used-metric-calculated)
 * [How can I collect HTTP response codes from Nginx?](/agent/faq/how-can-i-collect-http-response-codes-from-nginx)
 * [Custom JMX Integration(s)](/agent/faq/custom-jmx-integration-s)
-* [Why should I install the agent on my AWS instances?](/agent/faq/why-should-i-install-the-agent-on-my-aws-instances)
 * [How do I change the frequency of an agent check?](/agent/faq/how-do-i-change-the-frequency-of-an-agent-check)
 * [How does Datadog determine the agent hostname](/agent/faq/how-does-datadog-determine-the-agent-hostname)
