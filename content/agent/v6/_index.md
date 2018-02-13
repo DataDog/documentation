@@ -10,20 +10,9 @@ This documentation covers Agent <strong>versions superior to 6.0.0</strong>
 
 {{< partial name="platforms/platforms.html" >}}
 
-Agent 6 is the latest major version of the Datadog Agent. The big difference between Agent 5 and Agent 6 is that Agent 6 is a complete rewrite of the core Agent in Golang.
-
-## Migration
-
-To automatically transition between agent configuration paths and formats from Agent v5 to Agent v6, use the agent command:  
-`sudo -u dd-agent -- datadog-agent import`. 
-
-The command parses an existing `datadog.conf` and convert all the bits that
-the new Agent still supports to the new format, in the new file. It also copies
-configuration files for checks that are currently enabled.
-
 ## What is the Agent v6?
 
-Golang has allowed us to take advantage of concurrency. In place of the three processes [the Agent v5](/agent/v5) used to run --*the Forwarder*, *the Collector*, and *DogStatsD*-- there is now only one process: the Agent. It also comes with a number of other core improvements:
+Agent 6 is the latest major version of the Datadog Agent. The big difference between Agent 5 and Agent 6 is that Agent 6 is a complete rewrite of the core Agent in Golang. Golang has allowed us to take advantage of concurrency. In place of the three processes [the Agent v5](/agent/v5) used to run --*the Forwarder*, *the Collector*, and *DogStatsD*-- there is now only one process: the Agent. It also comes with a number of other core improvements:
 
 * Agent v6 has significantly improved resource usage over Agent v5:
     
@@ -37,6 +26,17 @@ Golang has allowed us to take advantage of concurrency. In place of the three pr
 * [DogStatsD](/developers/dogstatsd) can be used over a unix socket instead of over udp.
 
 * Custom build your agent v6 and [DogStatsD](/developers/dogstatsd) much easier and with much more configuration options, to include or exclude almost anything. There is also a “puppy” agent, that’s a truly minimal installation.
+
+* Agent 6 blocks port 5000 and 5001. If you use these ports, update the port for `expvar_port` and `cmd_port` in the `datadog.yaml` file.
+
+## Migration
+
+To automatically transition between agent configuration paths and formats from Agent v5 to Agent v6, use the agent command:  
+`sudo -u dd-agent -- datadog-agent import`. 
+
+The command parses an existing `datadog.conf` and convert all the bits that
+the new Agent still supports to the new format, in the new file. It also copies
+configuration files for checks that are currently enabled.
 
 ## Supported OSs versions
 
