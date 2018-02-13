@@ -26,7 +26,6 @@ private: true
 * [How to get more logging from the agent?](/agent/faq/how-to-get-more-logging-from-the-agent)
 * [Agent(s) are no longer reporting data](/agent/faq/agent-s-are-no-longer-reporting-data)
 * [Error Restarting Agent: Already Listening on a Configured Port](/agent/faq/error-restarting-agent-already-listening-on-a-configured-port)
-* [Agent Version Wrong on Infrastructure Page?](/agent/faq/agent-version-wrong-on-infrastructure-page)
 * [I'm having problems with DogStatsD - where is the log for this?](/agent/faq/i-m-having-problems-with-dogstatsd-where-is-the-log-for-this)
 * [Why am I seeing inconsistencies for metrics submitted to DogStatsD?](/agent/faq/why-am-i-seeing-inconsistencies-for-metrics-submitted-to-dogstatsd)
 * [Duplicate Hosts for Google Cloud Engine](/agent/faq/duplicate-hosts-for-google-cloud-engine)

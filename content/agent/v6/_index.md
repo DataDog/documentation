@@ -32,7 +32,7 @@ Agent 6 is the latest major version of the Datadog Agent. The big difference bet
 ## Migration
 
 To automatically transition between agent configuration paths and formats from Agent v5 to Agent v6, use the agent command:  
-`sudo -u dd-agent -- datadog-agent import`. 
+`sudo -u dd-agent --datadog-agent import`. 
 
 The command parses an existing `datadog.conf` and convert all the bits that
 the new Agent still supports to the new format, in the new file. It also copies
