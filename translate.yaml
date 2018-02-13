@@ -21,8 +21,8 @@ languages:
 github:
   org: 'DataDog'
   repo: 'documentation'
-  branch_from: 'master'
+  branch_from: 'david.jones/translate'
   commit_message: 'Adding translations'
-  pr_to: 'master'
+  pr_to: 'david.jones/translate'
   pr_title: 'Translation PR'
   pr_body: 'This is a translation'
