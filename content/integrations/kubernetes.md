@@ -107,7 +107,7 @@ Replace `YOUR_API_KEY` with [your api key](https://app.datadoghq.com/account/set
   kubectl create -f datadog-agent.yaml
   ```
 
-**Note**:  This manifest enables autodiscovery's auto configuration feature. To learn how to configure autodiscovery, please refer to [its documentation](https://docs.datadoghq.com/agent/autodiscovery).
+**Note**:  This manifest enables autodiscovery's auto configuration feature. To learn how to configure autodiscovery, please refer to [its documentation](https://docs.datadoghq.com/agent/v6/autodiscovery).
 
 #### TODO: Host Installation
 
@@ -223,7 +223,7 @@ kubectl create -f kube-state-metrics.yaml
 The manifest above uses Google’s publicly available `kube-state-metrics` container, which is also available on [Quay](https://quay.io/coreos/kube-state-metrics). If you want to build it manually, refer [to the official project documentation](https://github.com/kubernetes/kube-state-metrics).
 
 If you configure your Kubernetes State Metrics service to run on a different URL or port, you can configure the Datadog Agent by setting the `kube_state_url` parameter in `conf.d/kubernetes_state.yaml`, then restarting the Agent.
-For more information, see the [kubernetes_state.yaml.example file](https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/conf.yaml.example). If you have enabled [Autodiscovery](https://docs.datadoghq.com/agent/autodiscovery), the kube state URL will be configured and managed automatically.
+For more information, see the [kubernetes_state.yaml.example file](https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/conf.yaml.example). If you have enabled [Autodiscovery](https://docs.datadoghq.com/agent/v6/autodiscovery), the kube state URL will be configured and managed automatically.
 
 #### Host Installation
 

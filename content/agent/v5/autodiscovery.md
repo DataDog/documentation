@@ -4,6 +4,7 @@ kind: documentation
 aliases:
   - /guides/servicediscovery/
   - /guides/autodiscovery/
+  - /agent/autodiscovery
 ---
 
 <div class="alert alert-info">
