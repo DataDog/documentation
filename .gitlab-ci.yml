@@ -47,6 +47,12 @@ build_preview:
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_REF_NAME}> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834"
     - remove_static_from_repo
     - create_artifact
+  artifacts:
+    expire_in: 2 hrs
+    untracked: true
+    paths:
+      - content/
+      - data/
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
@@ -85,6 +91,20 @@ test_preview_links:
     - test_site_links "links" "${URL}" "True" "False" "True"
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
+
+manage_translations:on-schedule:
+  <<: *base_template
+  stage: post-deploy
+  environment: "preview"
+  variables:
+    URL: ${PREVIEW_DOMAIN}
+    CONFIG: ${PREVIEW_CONFIG}
+  script:
+    - manage_translations "${APIKEY}"
+  dependencies:
+    - build_preview
+  only:
+    - schedules
 
 # ================== live ================== #
 build_live:

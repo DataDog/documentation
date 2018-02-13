@@ -1,0 +1,20 @@
+---
+enabled: true
+provider:
+- name: 'transifex'
+  enabled: false
+  project_slug: 'documentation-poc'
+- name: 'smartling'
+  enabled: true
+  project_id: 'a2d680471'
+sources:
+- src: content/**/*.md
+  dst: content/**/*.{lang}.md
+- src: data/**/*.yaml
+  dst: data/**/*.{lang}.yaml
+languages:
+- code: fr_FR
+  reviewers:
+  - github_user: ''
+    slack_user: ''
+    email: ''
