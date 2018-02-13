@@ -7,75 +7,53 @@ further_reading:
   text: Learn more about the Datadog Agent
 ---
 
-## Mac OS X
 
-Logs for the subsystems are in the following files:
+### Linux
 
-* /var/log/supervisor/datadog-supervisord.log (since 3.8.0) /var/log/datadog/collector.log
-* /var/log/datadog/dogstatsd.log
-* /var/log/datadog/forwarder.log
+The Agent logs are located in the `/var/log/datadog/` directory. 
 
-## Debian/Ubuntu
+[The Datadog Agent v5](/agent/v5) logs into:
+    
+* `datadog-supervisord.log`
+* `collector.log`
+* `dogstatsd.log`
+* `forwarder.log`
 
-Logs for the subsystems are in the following files:
+[The Datadog Agent v6](/agent/v6) logs are in the `agent.log` file
 
-* /var/log/datadog/supervisord.log (since 3.8.0)
-* /var/log/datadog/collector.log
-* /var/log/datadog/dogstatsd.log
-* /var/log/datadog/forwarder.log
 
-## RHEL/CentOS/Fedora/Amazon Linux
+On Windows, the 
 
-Logs for the subsystems are in the following files:
+### MacOSx
 
-* /var/log/supervisor/datadog-supervisord.log (since 3.8.0)
-* /var/log/datadog/collector.log
-* /var/log/datadog/dogstatsd.log
-* /var/log/datadog/forwarder.log
+The Agent logs are located in the `/var/log/datadog/` directory. 
 
-## SmartOS
+[The Datadog Agent v5](/agent/v5) logs into:
+    
+* `datadog-supervisord.log`
+* `collector.log`
+* `dogstatsd.log`
+* `forwarder.log`
 
-Logs for the subsystems are in the following files:
+[The Datadog Agent v6](/agent/v6) logs are in the `agent.log` file
 
-* /opt/local/datadog/logs/supervisord/collector.log
-* /opt/local/datadog/logs/supervisord/dogstatsd.log
-* /opt/local/datadog/logs/supervisord/forwarder.log
+### Windows
 
-## Source
+Logs are located in the `c:\programdata\Datadog\logs` directory.
 
-Logs for the subsystems are in the following files:
+[The Datadog Agent v5](/agent/v5) logs into:
+    
+* `datadog-supervisord.log`
+* `collector.log`
+* `dogstatsd.log`
+* `forwarder.log`
 
-* ~/.datadog-agent/supervisord/logs/supervisord.log
-* ~/.datadog-agent/supervisord/logs/collector.log
-* ~/.datadog-agent/supervisord/logs/dogstatsd.log
-* ~/.datadog-agent/supervisord/logs/forwarder.log
+[The Datadog Agent v6](/agent/v6) logs are in the `agent.log` file
 
-## Windows
-
-### For version >= 3.9.1
-
-For Windows Server 2003, XP or older: 
-
-* c:\Documents and Settings\All Users\Application Data\Datadog\logs\collector.log
-* c:\Documents and Settings\All Users\Application Data\Datadog\logs\ddagent.log
-* c:\Documents and Settings\All Users\Application Data\Datadog\logs\dogstatsd.log
-* c:\Documents and Settings\All Users\Application Data\Datadog\logs\forwarder.log
-
-For Windows Server 2008, Vista and newer:
-
-* C:\ProgramData\Datadog\logs\collector.log
-* C:\ProgramData\Datadog\logs\ddagent.log
-* C:\ProgramData\Datadog\logs\dogstatsd.log
-* C:\ProgramData\Datadog\logs\forwarder.log 
-
-### For version < 3.9.1
-
-Logs for the subsystems are available in the Windows Event Viewer, under Windows Logs → Application.
-
-## How often do the logs rollover?
+### How often do the logs rollover?
 
 The Datadog logs does rollover every 10MB. When rollover occurs, one backup is kept (e.g. forwarder.log.1). If a previous backup exists, it is overwritten on rollover (e.g. *forwarder.log.1* isn't rotated to *forwarder.log.2*, but is instead be overwritten).
 
-## Further Reading
+### Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
