@@ -140,19 +140,21 @@ If the Agent is deployed you will see output similar to the text below, where de
 
 #### Agent check running
 
-You can enter one of the running agent's pod to do some additional checks. First we'll need to identify the pods using
+You can enter one of the running agent's pods to do some additional checks. First we'll need to identify the pods using:
 
     kubectl get pod -l "app in (datadog-agent)"
 
-This will output all the running pods like:
+This will output all the running pods:
 
     NAME                  READY     STATUS    RESTARTS   AGE
     datadog-agent-cmwkx   1/1       Running   0          11m
     datadog-agent-w68z6   1/1       Running   0          11m
 
-Then you'll be able to enter one the pod using the command `kubectl exec -it datadog-agent-<id> /bin/bash`
+Then you'll be able to enter one the pod using the command:
 
-[Run the Agent's `status` subcommand](/agent/faq/agent-status-and-information) and look for `kubernetes` under the Checks section:
+    kubectl exec -it datadog-agent-<id> /bin/bash
+
+[Run the Agent's `status` subcommand](/agent/faq/agent-status-and-information) and look for `kubernetes` under the `Checks` section:
 
     Checks
     ======
@@ -265,7 +267,7 @@ Edit the `kube_dns.yaml` file to point to your server and port, set the masters 
 
 #### Using with service discovery
 
-If you are using one datadog-agent pod per kubernetes worker node, you could use the following annotations on your kube-dns pod to retrieve the data automatically.
+If you are using one datadog-agent pod per kubernetes worker node, you can use the following annotations on your `kubedns` pod to retrieve the data automatically.
 
 ```yaml
 
