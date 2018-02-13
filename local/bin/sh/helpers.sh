@@ -472,6 +472,7 @@ index_algolia() {
 
 manage_translations() {
     start_step
+    chmod +x /usr/local/bin/translate.py
     echo "---------"
     echo "Sending Translations"
     echo "---------"
@@ -480,7 +481,7 @@ manage_translations() {
     echo "---------"
     echo "Receiving Translations"
     echo "---------"
-    translate.py --config ./translate.yaml -r -k "${1}" || fail_step "${FUNCNAME}"
+    translate.py --config ./translate.yaml -r -k "${1}" --token $(get_secret 'github_token') || fail_step "${FUNCNAME}"
     echo "Done."
     pass_step  "${FUNCNAME}"
 }

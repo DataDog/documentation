@@ -6,6 +6,8 @@ from os import getenv
 import sys
 import yaml
 import requests
+from github import Github, GithubException, InputGitTreeElement
+from datetime import datetime
 from pprint import pprint
 
 
@@ -28,14 +30,52 @@ def get_provider(config):
     return list(filter(lambda x: x.get('enabled', False), config.get('provider')))[0]
 
 
+def add_to_github(config, file_list):
+    g = Github(config['github']['token'])
+    org = g.get_organization(config['github']['org'])
+    repo = org.get_repo(config['github']['repo'])
+
+    # Create a new branch from master
+    sb = repo.get_branch(config['github']['branch_from'])
+    branch_name = 'translation-{}-{}'.format('fr', datetime.utcnow().strftime('%Y%m%d%H%M'))
+    print('Creating branch {} from {} ..'.format(branch_name, config['github']['branch_from']))
+    branch_ref = repo.create_git_ref(ref='refs/heads/' + branch_name, sha=sb.commit.sha)
+
+    # Commit new files to branch
+    print('Committing {} files to {}..'.format(len(file_list), branch_name))
+    branch_sha = branch_ref.object.sha
+    base_tree = repo.get_git_tree(branch_sha)
+    element_list = list()
+    for entry in file_list:
+        with open(entry, 'r', encoding='utf-8') as input_file:
+            data = str(input_file.read())
+        element = InputGitTreeElement(entry, '100644', 'blob', data)
+        element_list.append(element)
+    tree = repo.create_git_tree(element_list, base_tree)
+    parent = repo.get_git_commit(branch_sha)
+    commit = repo.create_git_commit(config['github']['commit_message'], tree, [parent])
+    branch_ref.edit(commit.sha)
+
+    # create a pr from branch + pr
+    pr = repo.create_pull(config['github']['pr_title'], config['github']['pr_body'], config['github']['pr_to'], branch_name)
+    # there is no create reviewer request yet..
+
+
 def send_translations(config):
+    # 1. just send all marked files from config
     #transifex_send_translations()
     smartling_send_translations(config)
 
 
 def receive_translations(config):
-    #transifex_download_translations()
-    smartling_download_translations()
+    # 1. download translated files
+    #file_list = transifex_download_translations()
+    file_list = smartling_download_translations()
+    # 2. get translations into repo
+    if len(file_list):
+        add_to_github(config, file_list)
+    else:
+        print('no translations downloaded')
 
 
 def smartling_send_translations(config):
@@ -96,6 +136,9 @@ def smartling_download_translations():
                 os.makedirs('./tmp/{}'.format(os.path.split(file.get('fileUri'))[0]), exist_ok=True)
                 with open('./tmp/{}'.format(file.get('fileUri')), 'wb') as f:
                     f.write(r.content)
+        return [file.get('fileUri') for file in file_list if 'fileUri' in file]
+    else:
+        return []
 
 
 if __name__ == '__main__':
@@ -113,7 +156,6 @@ if __name__ == '__main__':
         print("fatal error, config file required", file=sys.stderr)
 
     config = parse_config(options)
-    pprint(config)
     if options.send:
         send_translations(config)
     elif options.receive:

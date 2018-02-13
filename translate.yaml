@@ -18,3 +18,11 @@ languages:
   - github_user: ''
     slack_user: ''
     email: ''
+github:
+  org: 'DataDog'
+  repo: 'documentation'
+  branch_from: 'master'
+  commit_message: 'Adding translations'
+  pr_to: 'master'
+  pr_title: 'Translation PR'
+  pr_body: 'This is a translation'
