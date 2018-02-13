@@ -3,13 +3,7 @@ title: Agent Status and Information
 kind: faq
 ---
 
-## V6
 
-### Status
-### Info
-
-## V5
-## Status
 
 ### Mac OS X
 

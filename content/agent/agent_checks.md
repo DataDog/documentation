@@ -204,7 +204,7 @@ every check supports multiple instances out of the box.
 ## Directory Structure
 
 Before starting your first check it is worth understanding the checks directory
-structure. Add files for your check in the  `checks.d` folder, [which lives in your Agent root](/agent/faq/agent-check-directory-structure).
+structure. Add files for your check in the  `checks.d` folder, which lives in your Agent root.
 
 ## Your First Check
 
