@@ -69,3 +69,124 @@ The Agent logs are located in the `/var/log/datadog/` directory:
 
 If you're still having trouble, [our support team](/help) will be glad to provide further assistance.
 
+## Switch between Agent v5 and v6
+### Upgrade to Agent 6
+A script is available to automatically install or upgrade the new Agent. It sets up the repos and install the package for you; in case of upgrade, the import tool also searches for an existing `datadog.conf` from a prior version and converts Agent and checks configurations according to the new file format and filesystem layout.
+
+#### One-step install
+##### To Upgrade
+
+In case you have an Agent version 5.17 or later and you want to import the
+existing configuration:
+
+```shell
+ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
+```
+
+**Note:** the import process won't automatically move custom checks, this is by
+design since we cannot guarantee full backwards compatibility out of the box.
+
+##### To Install Fresh
+
+To install on a clean box (or have an existing agent 5 install from which you do not wish to import the configuration) provide an api key:
+
+```shell
+ DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
+```
+
+#### Manual install
+1. Set up Datadog's Yum repo on your system
+
+    ```
+    [datadog-beta]
+    name = Beta, Datadog, Inc.
+    baseurl = https://yum.datadoghq.com/beta/x86_64/
+    enabled=1
+    gpgcheck=1
+    priority=1
+    gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
+           https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+    ```
+
+    use this command to do it directly:
+
+    ```shell
+    # Red Hat
+    echo -e '[datadog-beta]\nname = Beta, Datadog, Inc.\nbaseurl = https://yum.datadoghq.com/beta/x86_64/\nenabled=1\ngpgcheck=1\npriority=1\ngpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public\n       https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public' | sudo tee /etc/yum.repos.d/datadog-beta.repo
+    ```
+
+2. Update your local yum cache and install/update the agent
+
+    ```shell
+    sudo yum clean expire-cache
+    sudo yum install datadog-agent
+    ```
+
+3. Import existing configuration (optional)
+
+    If you ran the `install_script.sh` all agent and checks configuration should be already imported.
+
+    If you didn't you can run manually the import command:
+
+    ```shell
+    /opt/datadog-agent/bin/agent/agent import /etc/dd-agent /etc/datadog-agent
+    ```
+
+4. Enable desired custom checks (optional)
+
+    Since all custom checks might not work on Agent 6, we let you enable these manually. Copy them over to the `additional_checksd` location (defaults to `/etc/datadog-agent/checks.d/` for Agent 6):
+
+    ```shell
+    sudo -u dd-agent -- cp /etc/dd-agent/checks.d/<check>.py /etc/datadog-agent/checks.d/
+    ```
+
+    **Note:** custom checks now have a *lower* precedence than the checks bundled by default with the Agent. This affects your custom checks if they have the same name as a check in [integrations-core][https://github.com/DataDog/integrations-core].
+
+5. Restart the agent
+
+    ```shell
+    # Systemd
+    sudo systemctl restart datadog-agent
+    # Upstart
+    sudo restart datadog-agent
+    ```
+
+### Downgrade to Agent v5
+
+1. Remove the Beta Yum repo from your system:
+    ```shell 
+    rm /etc/yum.repos.d/datadog-beta.repo [ ! -f /etc/yum.repos.d/datadog.repo ] && echo -e '[datadog]\nname = Datadog, Inc.\nbaseurl = https://yum.datadoghq.com/rpm/x86_64/\nenabled=1\ngpgcheck=1\npriority=1\ngpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public\n       https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public' | sudo tee /etc/yum.repos.d/datadog.repo
+    ```
+
+2. Update your local yum cache and downgrade the agent
+    ```shell
+    sudo yum clean expire-cache metadata
+    sudo yum check-update
+    sudo yum remove datadog-agent
+    sudo yum install datadog-agent
+    ```
+
+3. Back-sync configurations and AutoDiscovery templates (optional):
+    If you have made any changes to your configurations or templates, you might want to sync these back for agent 5.
+
+    Note: please beware that if you have made any changes to your configurations to support new Agent v6-only options, these will not work anymore with Agent v5.
+
+4. Back-sync custom checks (optional)
+    If you made any changes or added any new custom checks while testing Agent 6 you might want to enable them back on Agent 5. Note: you only need to copy back checks you changed.
+    
+    ```shell
+    sudo -u dd-agent -- cp /etc/datadog-agent/checks.d/<check>.py /etc/dd-agent/checks.d/
+    ```
+
+5. Restart the agent
+    ```shell
+    # Systemd
+    sudo systemctl restart datadog-agent
+    # Upstart
+    sudo /etc/init.d/datadog-agent restart
+    ```
+
+6. Clean out /etc/datadog-agent (optional)
+    ```shell
+    sudo -u dd-agent -- rm -rf /etc/datadog-agent/
+    ```

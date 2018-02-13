@@ -76,4 +76,72 @@ The Agent logs are located in the `/var/log/datadog/` directory:
 
 If you're still having trouble, [our support team](/help) will be glad to provide further assistance.
 
+## Switch between Agent v5 and v6
+### Upgrade to Agent 6
 
+A script is available to automatically install or upgrade the new Agent. It sets up the repos and install the package for you; in case of upgrade, the import tool also searches for an existing `datadog.conf` from a prior version and converts Agent and checks configurations according to the new file format and filesystem layout.
+#### One-step install
+##### To Upgrade
+
+In case you have an Agent version 5.17 or later and you want to import the
+existing configuration:
+
+```shell
+ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
+```
+
+**Note:** the import process won't automatically move custom checks, this is by
+design since we cannot guarantee full backwards compatibility out of the box.
+
+##### To Install Fresh
+
+To install on a clean box (or have an existing agent 5 install from which you do not wish to import the configuration) provide an api key:
+
+```shell
+ DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
+```
+
+#### Manual install
+1. Set up apt so it can download through https
+
+    ```shell
+    sudo apt-get update
+    sudo apt-get install apt-transport-https
+    ```
+
+2. Add the beta repo to your system and import the datadog gpg key
+
+    ```shell
+    echo 'deb https://apt.datadoghq.com/ beta main' | sudo tee /etc/apt/sources.list.d/datadog-beta.list
+    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 C7A7DA52
+    ```
+
+3. Update Apt and Install the agent
+
+    ```shell
+    sudo apt-get update
+    sudo apt-get install datadog-agent
+    ```
+
+### Downgrade to Agent v5
+
+1. Set up apt so it can download through https
+    ```shell
+    sudo apt-get update
+    sudo apt-get install apt-transport-https
+    ```
+
+2. Remove Beta Repo and Ensure the stable repo is present
+
+    ```shell
+    sudo rm /etc/apt/sources.list.d/datadog-beta.list [ ! -f /etc/apt/sources.list.d/datadog.list ] &&  echo 'deb https://apt.datadoghq.com/ stable main' | sudo tee /etc/apt/sources.list.d/datadog.list
+    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 C7A7DA52
+    ```
+
+3. Update apt and downgrade the agent
+
+    ```shell
+    sudo apt-get update
+    sudo apt-get remove datadog-agent
+    sudo apt-get install datadog-agent
+    ```

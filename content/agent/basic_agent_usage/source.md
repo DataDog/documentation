@@ -73,4 +73,3 @@ The Agent logs are located in the `/var/log/datadog/` directory:
     * `forwarder.log`
 
 If you're still having trouble, [our support team](/help) will be glad to provide further assistance.
-

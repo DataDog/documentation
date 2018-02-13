@@ -85,6 +85,18 @@ For Windows Server 2008, Vista and newer:
   * Integration configuration:
 `C:\ProgramData\Datadog\conf.d\`
 
+
+
+## Switch between Agent v5 and v6
+### Upgrade to Agent 6
+
+Download the latest version available [from here](https://github.com/DataDog/datadog-agent/releases) and run the installation package.
+
+### Downgrade to Agent v5
+
+Run the agent installer package for the latest 5.x version,  instructions can be found [in the Datadog agent integration page](https://app.datadoghq.com/account/settings#agent/windows).
+
+
 ## Troubleshooting
 
 First, check if the Agent is running in the Services panel and in the Task Manager. Next, try opening the status page to see the state of the Agent.

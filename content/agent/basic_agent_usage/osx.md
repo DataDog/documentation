@@ -63,3 +63,43 @@ The Agent logs are located in the `/var/log/datadog/` directory:
     * `forwarder.log`
 
 If you're still having trouble, [our support team](/help) will be glad to provide further assistance.
+
+
+## Switch between Agent v5 and v6
+### Upgrade to Agent 6
+
+You can either download the DMG package and install it manually, or use the one-line install script.
+
+### Manual installation
+
+1. Download the DMG package of the latest beta version, use the latest macOS release listed on the [release page](https://github.com/DataDog/datadog-agent/releases) of the repo
+2. Install the DMG package
+3. Add your api key to `/opt/datadog-agent/etc/datadog.yaml`
+
+Then start the Datadog Agent app (once started, you should see it in the system tray), and manage the Agent from there. The Agent6 also ships a web-based GUI to edit the Agent configuration files and much more, refer to the [changes and deprecations document][changes] document for more information.
+### Install script
+#### To Upgrade
+
+In case you have an Agent version 5 and you want to import the existing
+configuration:
+
+```shell
+  DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_mac_os.sh)"
+```
+
+#### To Install Fresh
+
+In case you want to install on a clean box (or have an existing agent 5 install
+from which you do not wish to import the configuration) you have to provide an
+api key:
+
+```shell
+ DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_mac_os.sh)"
+```
+
+### Downgrade to Agent v5
+
+1. Stop the Agent with the systray app, if it's running
+2. Exit the systray app
+3. Uninstall the Datadog Agent application
+4. [Install the Agent 5 DMG package using your preferred installation method](https://app.datadoghq.com/account/settings#agent/mac)
