@@ -8,7 +8,6 @@ private: true
 
 * [Common Windows Agent Installation Error 1721](/agent/faq/common-windows-agent-installation-error-1721)
 * [How do I install the agent on a server with limited internet connectivity?](/agent/faq/how-do-i-install-the-agent-on-a-server-with-limited-internet-connectivity)
-* [How do I uninstall the agent ?](/agent/faq/how-do-i-uninstall-the-agent)
 * [How to monitor SNMP devices?](/agent/faq/how-to-monitor-snmp-devices)
 * [I stopped my agent but I’m still seeing the host in my Datadog account.](/agent/faq/i-stoped-my-agent-but-i-m-still-seeing-the-host)
 

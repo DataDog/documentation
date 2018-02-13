@@ -96,12 +96,15 @@ Download the latest version available [from here](https://github.com/DataDog/dat
 
 Run the agent installer package for the latest 5.x version,  instructions can be found [in the Datadog agent integration page](https://app.datadoghq.com/account/settings#agent/windows).
 
+## Uninstall the agent
 
-## Troubleshooting
+**It's important that the original account used to install the agent is also used to remove it, otherwise it’s possible remnants are left behind and it won't be cleanly removed.**
 
-First, check if the Agent is running in the Services panel and in the Task Manager. Next, try opening the status page to see the state of the Agent.
+Uninstall the agent using Add/Remove Programs, alternatively, it's possible to to use Powershell as well. Here is a one liner:
 
-### For version >= 6.0.0
+```
+(Get-WmiObject -Class Win32_Product -Filter "Name='Datadog Agent'" -ComputerName . ).Uninstall()
+```
 
 ## Troubleshooting
 

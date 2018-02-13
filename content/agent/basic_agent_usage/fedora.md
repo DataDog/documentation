@@ -198,3 +198,10 @@ To install on a clean box (or have an existing agent 5 install from which you do
     ```shell
     sudo -u dd-agent -- rm -rf /etc/datadog-agent/
     ```
+
+## Uninstall the agent
+
+```
+$ sudo apt-get --purge remove datadog-agent -y
+CentOS/RHEL/Amazon Linux
+```

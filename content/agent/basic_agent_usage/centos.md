@@ -145,3 +145,19 @@ To install on a clean box (or have an existing agent 5 install from which you do
     sudo apt-get remove datadog-agent
     sudo apt-get install datadog-agent
     ```
+
+## Uninstall the agent
+
+To uninstall the agent run: 
+
+* For CentOS 5:
+
+    ```
+    $ sudo yum remove datadog-agent-base
+    ```
+
+* For CentOS 6:
+
+    ```
+    $ sudo yum remove datadog-agent
+    ```

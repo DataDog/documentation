@@ -190,3 +190,11 @@ To install on a clean box (or have an existing agent 5 install from which you do
     ```shell
     sudo -u dd-agent -- rm -rf /etc/datadog-agent/
     ```
+
+## Uninstall the agent
+
+To uninstall the agent run: 
+
+    ```
+    $ sudo yum remove datadog-agent
+    ```
