@@ -14,7 +14,7 @@ Datadog APM is offered as an upgrade to our Pro and Enterprise plans. A free 14-
 
 APM is available as part of the Datadog Agent with versions 5.11+ as part of the one line install for the Linux and Docker Agents. Currently, [Mac](https://github.com/DataDog/datadog-trace-agent#run-on-osx) and [Windows](https://github.com/DataDog/datadog-trace-agent#run-on-windows) users must perform a manual install of the APM Agent (aka Trace Agent) via a separate install process.
 
-The Agent can be enabled by including the following in your [Datadog agent configuration file](/agent/faq/where-is-the-configuration-file-for-the-agent):
+The Agent can be enabled by including the following in your [Datadog agent configuration file](/agent/#configuration-file):
 ```
 apm_enabled: yes
 ```
@@ -48,7 +48,7 @@ To instrument an application written in a language that does not yet have offici
 
 ## Configuration
 
-The Datadog Agent uses the [configuration file](/agent/faq/where-is-the-configuration-file-for-the-agent) for both infrastructure monitoring and APM configuration options.
+The Datadog Agent uses the [configuration file](/agent/#configuration-file) for both infrastructure monitoring and APM configuration options.
 
 Additionally, some configuration options may be set as environment variables. Note that options set as environment variables overrides the settings defined in the configuration file.
 

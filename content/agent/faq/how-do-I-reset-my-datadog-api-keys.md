@@ -21,7 +21,7 @@ Once you've revoked your keys, update the `datadog.conf` file on each of your ag
 2. Navigate to your host's Datadog agent configuration file:
     * Linux: /etc/dd-agent/datadog.conf
     * Windows: C:\ProgramData\Datadog\datadog.conf
-    * Other OS's [reference this link](/agent/faq/where-is-the-configuration-file-for-the-agent)
+    * Other OS's [reference this link](/agent/#configuration-file)
 
 3. In your configuration file, replace the API key. It should look like this (leave a single space after the ":" character. Do NOT surround your key with quotations):
     * https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example#L22

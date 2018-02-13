@@ -21,9 +21,6 @@ The Agent logs are located in the `/var/log/datadog/` directory.
 
 [The Datadog Agent v6](/agent/v6) logs are in the `agent.log` file
 
-
-On Windows, the 
-
 ### MacOSx
 
 The Agent logs are located in the `/var/log/datadog/` directory. 

@@ -4,6 +4,7 @@ kind: documentation
 description: Install & configure the Agent to collect data
 aliases:
     - /guides/basic_agent_usage/
+    - /agent/#configuration-file
 ---
 
 {{< partial name="platforms/platforms.html" >}}
@@ -11,14 +12,22 @@ aliases:
 ## What is the Agent?
 
 The Datadog Agent is a piece of software that runs on your hosts. Its job is to faithfully collect events and metrics and bring them to Datadog on
-your behalf so that you can do something useful with your monitoring and performance data.
+your behalf so that you can do something useful with your monitoring and performance data. The Datadog Agent is open-sourced, consult its code on github for [Agent v5](https://github.com/DataDog/dd-agent) and [Agent v6](https://github.com/DataDog/datadog-agent). To see all changes between Agent v5 and v6, [consult our dedicated changes documentation](https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md).
 
-The source code for the Datadog Agent: 
+## Configuration file
 
-* [Agent v5](https://github.com/DataDog/dd-agent)
-* [Agent v6](https://github.com/DataDog/datadog-agent)
+The configuration file for the Agent is located at:
 
-To see all changes between Agent v5 and v6, [consult our dedicated changes documentation](https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md).
+{{% table responsive="true" %}}
+|OS |Agent v5 | Agent v6 |
+|:-------|:--------|:--------|
+|[Mac OS X](/agent/basic_agent_usage/osx)|`~/.datadog-agent/datadog.conf`|`~/.datadog-agent/datadog.yaml`|
+|[Linux](/agent/basic_agent_usage/ubuntu)|`/etc/dd-agent/datadog.conf`||
+|SmartOS|`/opt/local/datadog/agent/datadog.conf`||
+|[Source](/agent/basic_agent_usage/source)|`~/.datadog-agent/agent/datadog.conf`||
+|[Windows Server 2008, Vista and newer](/agent/basic_agent_usage/windows)|`\\ProgramData\Datadog\datadog.conf`||
+|[Windows Server 2003, XP or older](/agent/basic_agent_usage/windows)|`\\Documents and Settings\All Users\Application Data\Datadog\datadog.conf`||
+{{% /table %}}
 
 ## Configuration management tools
 
