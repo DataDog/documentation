@@ -83,45 +83,40 @@ languages:
           url: "/agent/basic_agent_usage/deb/"
           weight: 40
           parent: customnav_agentnav_basic_usage
-        - identifier: customnav_agentnav_install_debian_5
-          name: "Debian Install"
-          url: "/agent/basic_agent_usage/install_debian_5/"
-          weight: 50
-          parent: customnav_agentnav_basic_usage
         - identifier: fedora
           name: "Fedora"
           url: "/agent/basic_agent_usage/fedora/"
-          weight: 60
+          weight: 50
           parent: customnav_agentnav_basic_usage
         - identifier: osx
           name: "Mac OS X"
           url: "/agent/basic_agent_usage/osx/"
-          weight: 70
+          weight: 60
           parent: customnav_agentnav_basic_usage
         - identifier: redhat
           name: "Red Hat"
           url: "/agent/basic_agent_usage/redhat/"
-          weight: 80
+          weight: 70
           parent: customnav_agentnav_basic_usage
         - identifier: suse
           name: "SUSE"
           url: /agent/basic_agent_usage/suse/
-          weight: 90
+          weight: 80
           parent: customnav_agentnav_basic_usage
         - identifier: ubuntu
           name: "Ubuntu"
           url: "/agent/basic_agent_usage/ubuntu/"
-          weight: 100
+          weight: 90
           parent: customnav_agentnav_basic_usage
         - identifier: windows
           name: "Windows"
           url: "/agent/basic_agent_usage/windows/"
-          weight: 110
+          weight: 100
           parent: customnav_agentnav_basic_usage
         - identifier: source
           name: "From Source"
           url: "/agent/basic_agent_usage/source/"
-          weight: 120
+          weight: 110
           parent: customnav_agentnav_basic_usage
 
         # AGENT V6 - Subnav start
