@@ -4,7 +4,8 @@ kind: documentation
 description: Install & configure the Agent to collect data
 aliases:
     - /guides/basic_agent_usage/
-    - /agent/#configuration-file
+    - /agent/faq/where-is-the-configuration-file-for-the-agent/
+    - /agent/faq/log-location
 ---
 
 {{< partial name="platforms/platforms.html" >}}
@@ -28,6 +29,12 @@ The configuration file for the Agent is located at:
 |[Windows Server 2008, Vista and newer](/agent/basic_agent_usage/windows)|`\\ProgramData\Datadog\datadog.conf`||
 |[Windows Server 2003, XP or older](/agent/basic_agent_usage/windows)|`\\Documents and Settings\All Users\Application Data\Datadog\datadog.conf`||
 {{% /table %}}
+
+## Log location
+
+For linux, Mac OSx Agent logs are located in the `/var/log/datadog/` directory.  
+For Windows, logs are located in  the `c:\programdata\Datadog\logs` directory.  
+The Datadog logs does rollover every 10MB. When rollover occurs, one backup is kept (e.g. `agent.log.1`). If a previous backup exists, it is overwritten on rollover.
 
 ## Configuration management tools
 
@@ -58,6 +65,6 @@ There is also community support for Saltstack:
 
 If you ended up at this page and have not yet installed the Datadog Agent, go [to the dedicated agent integration page](https://app.datadoghq.com/account/settings#agent) for installation instructions. If you just installed the Agent, it might take a few moments before you start seeing metrics appear. The first place you should check for metrics is the [Metrics Explorer](https://app.datadoghq.com/metric/explorer).
 
-If you think you might be experiencing issues, the first thing to do is [run the info command](/agent/faq/agent-status-and-information) and check the [Agent logs](/agent/faq/log-locations).
+If you think you might be experiencing issues, the first thing to do is [run the info command](/agent/faq/agent-status-and-information) and check the [Agent logs](/agent/#log-locations).
 
 If nothing obvious pops out reach out to [Datadog support team](/help) along with [a flare](/agent/faq/send-logs-and-configs-to-datadog-via-flare-command) of your agent

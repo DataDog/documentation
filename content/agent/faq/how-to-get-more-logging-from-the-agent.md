@@ -19,6 +19,6 @@ To enable the full debug mode:
 
 - wait a few minutes to generate some logs
 
-[Look here](/agent/faq/log-locations) to find the location of the logs.
+[Look here](/agent/#log-locations) to find the location of the logs.
 
 {{< partial name="whats-next/whats-next.html" >}}

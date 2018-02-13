@@ -17,7 +17,6 @@ private: true
 * [Network Time Protocol (NTP) Offset Issues](/agent/faq/network-time-protocol-ntp-offset-issues)
 * [How to solve Permission denied errors?](/agent/faq/how-to-solve-permission-denied-errors)
 * [How to report host disk metrics when dd-agent runs in a docker container?](/agent/faq/how-to-report-host-disk-metrics-when-dd-agent-runs-in-a-docker-container)
-* [Log Locations](/agent/faq/log-locations)
 * [Start/Stop/Restart the Datadog Agent](/agent/faq/start-stop-restart-the-datadog-agent)
 * [Agent Status and Information](/agent/faq/agent-status-and-information)
 * [Send logs and configs to Datadog via flare command](/agent/faq/send-logs-and-configs-to-datadog-via-flare-command)
