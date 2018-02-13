@@ -130,6 +130,11 @@ languages:
           url: "https://github.com/DataDog/datadog-agent/tree/master/docs/dev"
           weight: 210
           parent: customnav_agentnav_v6
+        - identifier: customnav_agentnav_v6_autodiscovery
+          name: "Autodiscovery"
+          url: "/agent/v6/autodiscovery"
+          weight: 220
+          parent: customnav_agentnav_v6
 
 
         # AGENT V5 - Subnav start
