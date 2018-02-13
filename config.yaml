@@ -139,36 +139,30 @@ languages:
           url: "/agent/v5/"
           weight: 30
           parent: menu_references_agent
-
-        - identifier: customnav_agentnav_agent_checks
-          name: "Agent Checks"
-          url: "/agent/v5/agent_checks/"
-          weight: 310
-          parent: customnav_agentnav_v5
         - identifier: customnav_agentnav_prometheus_checks
           name: "Prometheus Checks"
           url: "/agent/v5/prometheus/"
-          weight: 320
+          weight: 310
           parent: customnav_agentnav_v5
         - identifier: customnav_agentnav_autodiscovery
           name: "Autodiscovery"
           url: "/agent/v5/autodiscovery/"
-          weight: 330
+          weight: 320
           parent: customnav_agentnav_v5
         - identifier: customnav_agentnav_installcoreextra
           name: "Install Core & Extra"
           url: "/agent/v5/installcoreextra/"
-          weight: 340
+          weight: 330
           parent: customnav_agentnav_v5
         - identifier: customnav_agentnav_logs
           name: "Logs"
           url: "/agent/v5/logs/"
-          weight: 350
+          weight: 340
           parent: customnav_agentnav_v5
         - identifier: customnav_agentnav_proxy
           name: "Proxy Configuration"
           url: "/agent/v5/proxy/"
-          weight: 360
+          weight: 350
           parent: customnav_agentnav_v5
         #- identifier: customnav_agentnav_faq
         #  name: "FAQ"
@@ -177,6 +171,11 @@ languages:
         #  parent: menu_references_agent
         # AGENT - Subnav end
 
+        - identifier: customnav_agentnav_agent_checks
+          name: "Agent Checks"
+          url: "/agent/agent_checks/"
+          weight: 40
+          parent: menu_references_agent
 
         # INTEGRATIONS
         - identifier: menu_references_integrations

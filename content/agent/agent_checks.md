@@ -28,6 +28,45 @@ First off, ensure you've properly installed the [Agent][3] on your machine. If y
 
 All custom checks inherit from the `AgentCheck` class found in `checks/__init__.py` and require a `check()` method that takes one argument, `instance` which is a `dict` having the configuration of a particular instance. The `check` method is run once per instance defined in the check configuration (discussed later).
 
+### `AgentCheck` interface for Agent v6
+
+There is some differences between Agent v5 and Agent v6:
+
+* Each check instance is now its own instance of the class. So you cannot share state between them
+* The following methods have been removed from `AgentCheck`:
+
+    - `_roll_up_instance_metadata`
+    - `instance_count`
+    - `is_check_enabled`
+    - `read_config`
+    - `set_check_version`
+    - `set_manifest_path`
+    - `_get_statistic_name_from_method`
+    - `_collect_internal_stats`
+    - `_get_internal_profiling_stats`
+    - `_set_internal_profiling_stats`
+    - `get_library_versions`
+    - `get_library_info`
+    - `from_yaml`
+    - `get_service_checks`
+    - `has_warnings`
+    - `get_metrics`
+    - `has_events`
+    - `get_events`
+
+* The function signature of the metric senders changed from:
+
+    ```python
+    gauge(self, metric, value, tags=None, hostname=None, device_name=None, timestamp=None)
+    ```
+
+    to:
+
+    ```python
+    gauge(self, name, value, tags=None, hostname=None, device_name=None)
+    ```
+
+
 ### Sending metrics
 
 Sending metrics in a check is easy. If you're already familiar with the

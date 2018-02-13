@@ -10,6 +10,20 @@ This documentation covers Agent <strong>versions prior to 6.0.0</strong>
 
 {{< partial name="platforms/platforms.html" >}}
 
+
+## What is the Agent?
+
+The Agent has three main parts: the collector, DogStatsD, and the forwarder:
+
+* **The collector**: runs checks on the current machine for whatever [integrations](/integrations) you have and it captures system metrics such as memory and CPU.
+
+* **DogStatsD**: It is a statsd backend server you can send [custom metrics](/getting_started/custom_metrics/) to from an application.
+
+* **The forwarder**: retrieves data from both DogStatsD and the collector and then queues it up to be sent to Datadog.
+
+This is all controlled by one supervisor process. We keep this separate so you don't have to have the overhead of each application if you don't want to run all parts, although we generally recommend you do.
+
+
 ## Supported OSs version
 
 |OS| Supported versions|

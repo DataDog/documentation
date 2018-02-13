@@ -10,9 +10,39 @@ aliases:
 
 This page outlines the basic functionality of the Datadog Agent. If you haven't installed the Agent yet, instructions can be found [in the Datadog agent integration page](https://app.datadoghq.com/account/settings#agent/windows).
 
+
 ### Starting and Stopping the Agent
 
 The execution of the Agent is controlled by a Windows service.
+
+### For version >= 6.0.0
+
+There are a few major changes compare to older Datadog Windows Agent version:
+
+* the main executable name is now `agent.exe` (it was `ddagent.exe` previously)
+* Commands should be run with the command line `c:\program files\datadog\datadog-agent\embedded\agent.exe <command>`
+* The configuration GUI is now a browser based configuration application.
+
+The agent has a new set of command-line options:
+
+| Command         | Notes
+| --------------- | -------------------------------------------------------------------------- |
+| check           | Run the specified check |
+| diagnose        | Execute some connectivity diagnosis on your system |
+| flare           | Collect a flare and send it to Datadog |
+| help            | Help about any command |
+| hostname        | Print the hostname used by the Agent |
+| import          | Import and convert configuration files from previous versions of the Agent |
+| installservice  | Installs the agent within the service control manager |
+| launch-gui      | starts the Datadog Agent GUI |
+| regimport       | Import the registry settings into datadog.yaml |
+| remove-service  | Removes the agent from the service control manager |
+| restart-service | restarts the agent within the service control manager |
+| start           | Start the Agent |
+| start-service   | starts the agent within the service control manager |
+| status          | Print the current status |
+| stopservice     | stops the agent within the service control manager |
+| version         | Print the version info |
 
 ### For version >= 3.9.1
 
@@ -58,6 +88,15 @@ For Windows Server 2008, Vista and newer:
 ## Troubleshooting
 
 First, check if the Agent is running in the Services panel and in the Task Manager. Next, try opening the status page to see the state of the Agent.
+
+### For version >= 6.0.0
+
+## Troubleshooting
+
+The Agent logs are located in the ``c:\programdata\Datadog\logs` ` directory:
+and all logs are in the `agent.log` file.  
+
+If you're still having trouble, [our support team](/help) will be glad to provide further assistance.
 
 ### For version >= 3.9.1
 

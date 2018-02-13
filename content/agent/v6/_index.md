@@ -10,53 +10,33 @@ This documentation covers Agent <strong>versions superior to 6.0.0</strong>
 
 {{< partial name="platforms/platforms.html" >}}
 
-Agent 6 is the latest major version of the Datadog Agent. The big difference between Agent 5 and Agent 6 is that Agent 6 is a complete rewrite of the core Agent in Golang. Don’t worry! We still support the python checks.
+Agent 6 is the latest major version of the Datadog Agent. The big difference between Agent 5 and Agent 6 is that Agent 6 is a complete rewrite of the core Agent in Golang.
 
-## What’s Better?
+## Migration
 
-Golang has allowed us to take advantage of concurrency. In place of the three processes the Agent used to run--the Forwarder, the Collector, and DogStatsD--there is now only one process: the Agent. It also comes with a number of other core improvements:
+To automatically transition between agent configuration paths and formats from Agent v5 to Agent v6, use the agent command:  
+`sudo -u dd-agent -- datadog-agent import`. 
 
-### Improved Resource Usage
+The command parses an existing `datadog.conf` and convert all the bits that
+the new Agent still supports to the new format, in the new file. It also copies
+configuration files for checks that are currently enabled.
 
-Agent 6 has significantly improved resource usage over Agent 5.
-It has decreased CPU usage:
-{{< img src="agent/faq/cpu_usage.png" alt="CPU Usage" responsive="true" popup="true">}}
+## What is the Agent v6?
 
-It has a decrease Memory usage:
-{{< img src="agent/faq/memory_usage.png" alt="Memory Usage" responsive="true" popup="true">}}
+Golang has allowed us to take advantage of concurrency. In place of the three processes [the Agent v5](/agent/v5) used to run --*the Forwarder*, *the Collector*, and *DogStatsD*-- there is now only one process: the Agent. It also comes with a number of other core improvements:
 
-It uses fewer File Descriptors:
-{{< img src="agent/faq/file_descriptor.png" alt="Dile descriptor" responsive="true" popup="true">}}
+* Agent v6 has significantly improved resource usage over Agent v5:
+    
+    * It has decreased CPU usage:
+    * It has a decrease Memory usage:
+    * It uses fewer File Descriptors:
+    * It has an all around decreased footprint.
 
-It has an all around decreased footprint.
+* Global percentiles can be performed on the server directly to calculate real, effective global percentiles.
 
-### Better Windows Support
+* [DogStatsD](/developers/dogstatsd) can be used over a unix socket instead of over udp.
 
-We wrote the agent with windows in mind from day 1. Our support for windows is much improved
-
-### Containers are first class citizens
-
-Container support is better and more robust in the new agent. It has been built with containers in mind, ensuring that the agent runs better on containers and gathers data better from within containers.
-
-### Autodiscovery
-
-Service Discovery is now Autodiscovery. It’s been renamed and revamped. The new Auto Discovery is highly decoupled and it allows us to add more sources beyond docker.
-
-### Global Percentiles
-
-We can now do global percentiles on the server. It allows us to calculate real, effective global percentiles.
-
-### More Configurable
-
-We have improved configuration of the agent and made it much better and easier!
-
-### DogStatsD Over Sockets
-
-You can now use [DogStatsD](/developers/dogstatsd) over a unix socket instead of over udp!
-
-### More Build Options
-
-You can now custom build the agent and [DogStatsD](/developers/dogstatsd) much easier and with much more configuration options, to include or exclude almost anything. We even have a “puppy” agent, that’s a truly minimal installation.
+* Custom build your agent v6 and [DogStatsD](/developers/dogstatsd) much easier and with much more configuration options, to include or exclude almost anything. There is also a “puppy” agent, that’s a truly minimal installation.
 
 ## Supported OSs versions
 
@@ -73,3 +53,21 @@ You can now custom build the agent and [DogStatsD](/developers/dogstatsd) much e
 
 **Note**: Source install may work on operating systems not listed here and is supported on a best effort basis.
 
+## Using the GUI
+
+The port which the GUI runs on can be configured in your `datadog.yaml` file.
+Setting the port to -1 disables the GUI all together. By default it is enabled
+on port `5002` on Windows and Mac, and is disabled on Linux.
+
+Once the Agent is running, use the `datadog-agent launch-gui` command to launch
+the GUI within your default web browser.
+
+### Requirements
+
+1. Cookies must be enabled in your browser. The GUI generates and saves a token
+in your browser which is used for authenticating all communications with the GUI server.
+
+2. The GUI will only be launched if the user launching it has the correct user
+permissions: if you are able to open `datadog.yaml`, you are able to use the GUI.
+
+3. For security reasons, the GUI can **only** be accessed from the local network interface (```localhost```/```127.0.0.1```), so you must be on the same host that the agent is running to use it. In other words, you can't run the agent on a VM or a container and access it from the host machine.
