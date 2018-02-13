@@ -130,7 +130,11 @@ languages:
           url: "/agent/v6/"
           weight: 20
           parent: menu_references_agent
-
+        - identifier: customnav_agentnav_v6_developer_guide
+          name: "Developer Guide"
+          url: "https://github.com/DataDog/datadog-agent/tree/master/docs/dev"
+          weight: 210
+          parent: customnav_agentnav_v6
 
 
         # AGENT V5 - Subnav start
