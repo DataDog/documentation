@@ -7,9 +7,9 @@ kind: documentation
     {{< nextlink href="/api/?lang=python#tracing" >}} Learn more about our Trace API {{< /nextlink >}}
     {{< nextlink href="/monitors/monitor_types/apm/" >}} Learn more about monitors with APM {{< /nextlink >}}
     {{< nextlink href="/graphing/dashboards/widgets/#service-summary" >}} Learn more about the dashboards widgets {{< /nextlink >}}
-    {{< nextlink href="/tracing/miscellaneous/metrics_namespace" >}} Metrics Namespace{{< /nextlink >}}
-    {{< nextlink href="/tracing/miscellaneous/trace_sampling_and_storage" >}} Discover our trace sampling and storage policy {{< /nextlink >}}
-    {{< nextlink href="/tracing/miscellaneous/environment" >}} Learn more about the environment concept {{< /nextlink >}}
-    {{< nextlink href="/tracing/miscellaneous/distributed_tracing" >}}Discover a distributed tracing example{{< /nextlink >}}
+    {{< nextlink href="/tracing/product_specs/metrics_namespace" >}} Metrics Namespace{{< /nextlink >}}
+    {{< nextlink href="/tracing/product_specs/trace_sampling_and_storage" >}} Discover our trace sampling and storage policy {{< /nextlink >}}
+    {{< nextlink href="/tracing/product_specs/environment" >}} Learn more about the environment concept {{< /nextlink >}}
+    {{< nextlink href="/tracing/product_specs/distributed_tracing" >}}Discover a distributed tracing example{{< /nextlink >}}
 {{< /whatsnext >}}
 

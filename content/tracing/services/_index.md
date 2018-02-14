@@ -21,7 +21,7 @@ Select a service view detailed performance insights, [read our dedicated service
 
 The services list is a bird's eyed view of all [services](/tracing/services/service) reporting from your infrastructure. It can be filtered depending on:
 
-* [Your environment](/tracing/miscellaneous/environment)
+* [Your environment](/tracing/product_specs/environment)
 * [Your service type](#services-types)
 * A query
 

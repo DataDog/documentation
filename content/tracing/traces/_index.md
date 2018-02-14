@@ -17,6 +17,6 @@ Select the trace time frame you want to display with the time selector in the up
 
 Filter your traces depending on:
 
-* Their [Environment](/tracing/miscellaneous/environment)
+* Their [Environment](/tracing/product_specs/environment)
 * Their [Service name](/tracing/services/)
 * Their Duration

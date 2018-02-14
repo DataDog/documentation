@@ -93,6 +93,45 @@ Additionally, some configuration options may be set as environment variables. No
 
 For more information about the Datadog Agent, see the [dedicated doc page](/agent/) or refer to the [`datadog.conf.example` file](https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example).
 
+## Example: Simple tracing
+
+We have a Flask Python application that when called on `/doc` returns **42**
+
+We [instrumented our python code](/tracing/setup) in order to generate traces from it:
+
+```python
+import time
+import blinker as _
+
+from flask import Flask, Response
+
+from ddtrace import tracer
+from ddtrace.contrib.flask import TraceMiddleware
+
+# Tracer configuration
+tracer.configure(hostname='datadog')
+app = Flask('API')
+traced_app = TraceMiddleware(app, tracer, service='doc_service')
+
+@tracer.wrap(name='doc_work')
+def work():
+    time.sleep(0.5)
+    return 42
+
+@app.route('/doc/')
+def doc_resource():
+    time.sleep(0.3)
+    res = work()
+    time.sleep(0.3)
+    return Response(str(res), mimetype='application/json')
+```
+
+Each time its called, the following code produces this **trace**:
+
+{{< img src="tracing/simple_trace.png" alt="Simple Trace" responsive="true" popup="true">}}
+
+[Learn more about traces with the dedicated Trace documentation](/tracing/services/trace)
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
