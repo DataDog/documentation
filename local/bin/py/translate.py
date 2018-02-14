@@ -76,7 +76,7 @@ def add_to_github(config, file_list):
 
 def send_translations(config):
     # 1. just send all marked files from config
-    #transifex_send_translations()
+    #transifex_send_translations(config)
     smartling_send_translations(config)
 
 
@@ -89,6 +89,39 @@ def receive_translations(config):
         add_to_github(config, file_list)
     else:
         print('no translations downloaded')
+
+
+def transifex_send_translations(config):
+    provider = get_provider(config)
+    for source in config.get('sources', []):
+        for file in glob.glob(source.get('src'), recursive=True):
+            print('Uploading {}'.format(file))
+            path, file_name = os.path.split(file)
+            base_name, ext = os.path.splitext(file_name)
+            auth = ('api', provider.get('api_key', ''))
+            slug = file.replace('/', '_').replace('-', '_').replace('.', '_')
+            data = {
+                "i18n_type": "TXT",
+                #"name": file_name,
+                "name": slug,
+                "slug": slug,
+                'content': open(file, 'r').read()
+            }
+            if ext == '.md':
+                data.update({
+                    'i18n_type': 'GITHUBMARKDOWN',
+                })
+            elif ext == '.yaml':
+                data.update({
+                    'i18n_type': 'YML',
+                })
+            response = requests.post('https://www.transifex.com/api/2/project/{proj_slug}/resources/'.format(proj_slug='documentation-poc'), json=data, auth=auth)
+            print(response.status_code)
+            #print(response.content)
+
+
+def transifex_download_translations(config):
+    return []
 
 
 def smartling_send_translations(config):

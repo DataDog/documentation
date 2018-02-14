@@ -4,6 +4,7 @@ provider:
 - name: 'transifex'
   enabled: false
   project_slug: 'documentation-poc'
+  user: 'api'
 - name: 'smartling'
   enabled: true
   project_id: 'a2d680471'
