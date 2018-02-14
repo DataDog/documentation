@@ -30,6 +30,18 @@ def get_provider(config):
     return list(filter(lambda x: x.get('enabled', False), config.get('provider')))[0]
 
 
+def create_reviewer_requests(org, repo, pr_num, token, reviewers=[], team_reviewers=[]):
+    # there is no create reviewer request yet in PyGithub
+    url = 'https://api.github.com/repos/{org}/{repo}/pulls/{pr_num}/requested_reviewers?access_token={token}'.format(
+        org=org, repo=repo, pr_num=pr_num, token=token)
+    data = {
+      "reviewers": reviewers,
+      "team_reviewers": team_reviewers
+    }
+    resp = requests.post(url, json=data)
+    pprint(resp.content)
+
+
 def add_to_github(config, file_list):
     g = Github(config['github']['token'])
     org = g.get_organization(config['github']['org'])
@@ -58,7 +70,8 @@ def add_to_github(config, file_list):
 
     # create a pr from branch + pr
     pr = repo.create_pull(config['github']['pr_title'], config['github']['pr_body'], config['github']['pr_to'], branch_name)
-    # there is no create reviewer request yet..
+    create_reviewer_requests(config['github']['org'], config['github']['repo'], pr.number, config['github']['token'],
+                             reviewers=['davidejones'])
 
 
 def send_translations(config):
@@ -123,7 +136,7 @@ def smartling_download_translations():
         file_count = data['response']['data']['fileCount']
         file_list = data['response']['data']['fileList']
         print('{} files ready to download'.format(file_count))
-        os.makedirs('./tmp', exist_ok=True)
+        return_files = []
         for file in file_list:
             data = [
                 ('apiKey', provider.get('api_key', '')),
@@ -133,11 +146,16 @@ def smartling_download_translations():
             ]
             r = requests.get('https://api.smartling.com/v1/file/get', params=data)
             if r.status_code == 200:
-                os.makedirs('./tmp/{}'.format(os.path.split(file.get('fileUri'))[0]), exist_ok=True)
-                with open('./tmp/{}'.format(file.get('fileUri')), 'wb') as f:
+                path, file_name = os.path.split(file.get('fileUri'))
+                base_name, ext = os.path.splitext(file_name)
+                os.makedirs('{}'.format(path), exist_ok=True)
+                out_file = '{0}/{1}.{2}{3}'.format(path, base_name, 'fr', ext)
+                with open(out_file, 'wb') as f:
                     f.write(r.content)
-        return [file.get('fileUri') for file in file_list if 'fileUri' in file]
+                return_files.append(out_file)
+        return return_files
     else:
+        print(response.content)
         return []
 
 
