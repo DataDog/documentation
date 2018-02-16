@@ -398,7 +398,12 @@ languages:
           url: "/tracing/setup/ruby/"
           weight: 150
           parent: customnav_tracingnav_setup
-
+        - identifier: customnav_tracingnav_librairies
+          name: "Community Librairies"
+          url: "/libraries/"
+          weight: 160
+          parent: customnav_tracingnav_setup
+          
         # Services
         - identifier: customnav_tracingnav_services
           name: "Services List"
