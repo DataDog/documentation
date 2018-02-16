@@ -55,9 +55,10 @@ The tracer is configured using System Properties and Environment Variables as fo
 
 **Note**: If the same key type is set for both, the system property configuration takes priority.
 
-## Manual Instrumentation 
+## Manual Instrumentation
 
 Before instrumenting your application, review Datadog’s [APM Terminology](/tracing/services) and familiarize yourself with the core concepts of Datadog APM. If you aren't using a [supported framework instrumentation](#integrations), or you would like additional depth in your application’s traces, you may want to to manually instrument your code.  
+
 Do this either using the [Trace annotation](#trace-annotation) for simple method call tracing or with the [OpenTracing API](#opentracing-api) for complex tracing.
 
 ### Trace Annotation
@@ -121,19 +122,23 @@ compile group: 'com.datadoghq', name: 'dd-trace-ot', version: "${dd-trace-java.v
 
 Configure your application using environment variables or system properties as discussed in the [configuration](#configuration) section.
 
-#### Custom Instrumentation Examples 
+#### Custom Instrumentation Examples
 
 Use a combination of these if the automatic instrumentation isn’t providing you enough depth or detail.
 
 Using try-finally:
 
 ```java
+import datadog.trace.api.DDTags;
+
+import io.opentracing.Scope;
+import io.opentracing.Tracer;
 import io.opentracing.util.GlobalTracer;
 
 class InstrumentedClass {
 
     void method0() {
-        /* 
+        /*
          * 1. Configure your application using environment variables or system properties
          * 2. Using dd-java-agent (-javaagent:/path/to/dd-java-agent.jar),
          *    GlobalTracer is automatically instantiated.
@@ -148,7 +153,7 @@ class InstrumentedClass {
             Thread.sleep(1000);
 
         // If you don't call close(), the span data will NOT make it to Datadog!
-        finally {
+        } finally {
             scope.close();
         }
     }
@@ -158,6 +163,10 @@ class InstrumentedClass {
 Alternatively, wrap the code you want to trace in a `try-with-resources` statement:
 
 ```java
+import datadog.trace.api.DDTags;
+
+import io.opentracing.Scope;
+import io.opentracing.Tracer;
 import io.opentracing.util.GlobalTracer;
 
 class InstrumentedClass {
@@ -179,8 +188,11 @@ If you’re not using `dd-trace-java.jar`, you must register a configured tracer
 
 ```java
 import datadog.opentracing.DDTracer;
-import io.opentracing.util.GlobalTracer;
 import datadog.trace.api.sampling.AllSampler;
+import datadog.trace.common.writer.DDAgentWriter;
+
+import io.opentracing.Tracer;
+import io.opentracing.util.GlobalTracer;
 
 public class Application {
 
@@ -282,7 +294,7 @@ Don't see your desired networking framework? We're continually adding additional
 *  Apache Derby
 *  Firebird SQL
 *  H2 Database Engine
-*  HSQLDB 
+*  HSQLDB
 *  IBM DB2
 *  MSSQL (Microsoft SQL Server)
 *  MySQL

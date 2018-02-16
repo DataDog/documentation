@@ -30,7 +30,7 @@ with a status `UP`. You can monitor this heartbeat across one or more hosts.
     {{< img src="monitors/monitor_types/host/no_data_timeframe.png" alt="host monitor no data timeframe" responsive="true" popup="true" style="width:80%;">}}
 
 3. Configure your **notification options**:  
-    Refer to the [Notifications](monitors/notifications) dedicated documentation page for a detailed walkthrough of the common notification options.
+    Refer to the [Notifications](/monitors/notifications) dedicated documentation page for a detailed walkthrough of the common notification options.
 
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}

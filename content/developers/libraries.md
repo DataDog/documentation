@@ -24,7 +24,7 @@ The following table lists Datadog-official and community contributed [Trace](/tr
 In addition to the official Ansible integration, the [monitoring section][46] of the [ansible-modules-extras][47] repository contains modules that interact with Datadog.
 
 ### Aptible
-Enclave can deliver your metrics to a Datadog account. [Consult the dedicated Aptible help center to learn how](https://www.aptible.com/documentation/enclave/reference/metrics/metric-drains/datadog.html). 
+Enclave can deliver your metrics to a Datadog account. [Consult the dedicated Aptible help center to learn how](https://www.aptible.com/documentation/enclave/reference/metrics/metric-drains/datadog.html).
 
 ### Consul
 Publish consul service counts into Datadog via [DogStatsD](/developers/dogstatsd) with [this library][96].
@@ -45,12 +45,16 @@ You can get data into Datadog from Google Analytics using our API with [this lib
   * [Logstash Output for Datadog][73]
   * [Logstash Output for DogStatsD][88]
 
+### Moogsoft
+A Moogsoft [listener][102] that ingests Datadog notifications.
+
 ### NGINX LUA
   * Emit [custom metrics](/getting_started/custom_metrics/) directly from NGINX configurations using the [nginx_lua_datadog][72] module in your LUA scripts.
   * [lua-resty-dogstatsd][79] is an extension developed by  [mediba inc][80], which enables emiting metrics, events, and service checks to [DogStatsD](/developers/dogstatsd) protocol. lua-resty-dogstatsd is released as GPLv3 and relies on the nginx cosocket API.
 
-### Moogsoft
-A Moogsoft [listener][102] that ingests Datadog notifications.
+### OpenVPN
+  * Send OpenVPN [bandwidth usage][107] and the count of active connections to Datadog.
+  * Send OpenVPN [licensing information][108] to Datadog.
 
 ### Phusion Passenger
 Send health metrics from Phusion's Passenger server using the [passenger-datadog-monitor][77] written by [Stevenson Jean-Pierre][78]
@@ -178,3 +182,5 @@ If you've written a Datadog library and would like to add it to this page, write
    [104]: https://github.com/sparkida/winston-datadog
    [105]: https://github.com/bithauschile/datadog-ga
    [106]: https://blog.bithaus.cl/2016/04/20/realtime-google-analytics-metrics-in-datadog/
+   [107]: https://github.com/byronwolfman/dd-openvpn
+   [108]: https://github.com/denniswebb/datadog-openvpn
