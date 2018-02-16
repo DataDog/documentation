@@ -9,13 +9,9 @@ For all Linux systems, find it at:
 
     /etc/dd-agent/checks.d/
 
-For Windows Server >= 2008, find it at:
+For Windows Server, find it at:
 
-    C:\Program Files (x86)\Datadog\Agent\checks.d\
-
-OR
-
-    C:\Program Files\Datadog\Agent\checks.d\
+    c:\programdata\datadog\checks.d\
 
 For Mac OS X and source installations, find it at:
 
