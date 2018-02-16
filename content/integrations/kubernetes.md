@@ -52,6 +52,8 @@ kind: DaemonSet
 metadata:
   name: datadog-agent
 spec:
+  updateStrategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -66,19 +68,25 @@ spec:
           - containerPort: 8125
             name: dogstatsdport
             protocol: UDP
+          - containerPort: 8126
+            name: traceport
+            protocol: TCP
         env:
           - name: DD_API_KEY
             value: "YOUR_API_KEY"
           - name: KUBERNETES
             value: "yes"
-          - name: DD_HOSTNAME
-            valueFrom:
-              fieldRef:
-                fieldPath: spec.nodeName
           - name: DD_KUBERNETES_KUBELET_HOST
             valueFrom:
               fieldRef:
                 fieldPath: status.hostIP
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "250m"
         volumeMounts:
           - name: dockersocket
             mountPath: /var/run/docker.sock
@@ -88,6 +96,12 @@ spec:
           - name: cgroups
             mountPath: /host/sys/fs/cgroup
             readOnly: true
+        livenessProbe:
+          exec:
+            command:
+            - ./probe.sh
+          initialDelaySeconds: 15
+          periodSeconds: 5
       volumes:
         - hostPath:
             path: /var/run/docker.sock
@@ -108,23 +122,6 @@ Replace `YOUR_API_KEY` with [your api key](https://app.datadoghq.com/account/set
   ```
 
 **Note**:  This manifest enables autodiscovery's auto configuration feature. To learn how to configure autodiscovery, please refer to [its documentation](https://docs.datadoghq.com/agent/v6/autodiscovery).
-
-#### TODO: Host Installation
-
-Install the `dd-check-kubernetes` package manually or with your favorite configuration manager.
-
-### Configuration
-
-Edit the `kubernetes.yaml` file to point to your server and port, set the masters to monitor:
-
-```yaml
-instances:
-    host: localhost
-    port: 4194
-    method: http
-```
-
-See the [example kubernetes.yaml](https://github.com/DataDog/integrations-core/blob/master/kubernetes/conf.yaml.example) for all available configuration options.
 
 ### Validation
 #### Container Running
@@ -227,11 +224,6 @@ The manifest above uses Google’s publicly available `kube-state-metrics` conta
 If you configure your Kubernetes State Metrics service to run on a different URL or port, you can configure the Datadog Agent by setting the `kube_state_url` parameter in `conf.d/kubernetes_state.yaml`, then restarting the Agent.
 For more information, see the [kubernetes_state.yaml.example file](https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/conf.yaml.example). If you have enabled [Autodiscovery](https://docs.datadoghq.com/agent/v6/autodiscovery), the kube state URL will be configured and managed automatically.
 
-#### Host Installation
-
-Install the `dd-check-kubernetes_state` package manually or with your favorite configuration manager (On CentOS/AWS, [Find your rpm package here](https://yum.datadoghq.com/rpm/x86_64/), and information on installation on [this page](/agent/faq/how-do-i-install-the-agent-on-a-server-with-limited-internet-connectivity).
-Then edit the `kubernetes_state.yaml` file to point to your server and port and set the masters to monitor. See the [example kubernetes_state.yaml](https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/conf.yaml.example) for all available configuration options.
-
 ### Validation
 #### Container validation
 To verify the Datadog Agent is running in your environment as a daemonset, execute:
@@ -257,9 +249,6 @@ If the Agent is deployed you will see similar output to the text below, where de
 
 
 ## Setup Kubernetes DNS
-### Installation
-
-Install the `dd-check-kube_dns` package manually or with your favorite configuration manager.
 
 ### Configuration
 
@@ -270,14 +259,13 @@ Edit the `kube_dns.yaml` file to point to your server and port, set the masters 
 If you are using one datadog-agent pod per kubernetes worker node, you can use the following annotations on your `kubedns` pod to retrieve the data automatically.
 
 ```yaml
-
 apiVersion: v1
 kind: Pod
 metadata:
   annotations:
-    service-discovery.datadoghq.com/kubedns.check_names: '["kube_dns"]'
-    service-discovery.datadoghq.com/kubedns.init_configs: '[{}]'
-    service-discovery.datadoghq.com/kubedns.instances: '[[{"prometheus_endpoint":"http://%%host%%:10055/metrics", "tags":["dns-pod:%%host%%"]}]]'
+    ad.datadoghq.com/kubedns.check_names: '["kube_dns"]'
+    ad.datadoghq.com/kubedns.init_configs: '[{}]'
+    ad.datadoghq.com/kubedns.instances: '[[{"prometheus_endpoint":"http://%%host%%:10055/metrics", "tags":["dns-pod:%%host%%"]}]]'
 ```
 
 **Remarks:**
