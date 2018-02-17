@@ -364,13 +364,9 @@ Linux系のシステムは、以下のディレクトリになります:
 
     /etc/dd-agent/checks.d/
 
-Windows Server > = 2008の場合は、以下のディレクトリになります:
+Windows Server の場合は、以下のディレクトリになります:
 
-    C:\Program Files (x86)\Datadog\Agent\checks.d\
-
-    OR
-
-    C:\Program Files\Datadog\Agent\checks.d\
+    c:\programdata\datadog\checks.d\
 
 Mac OS Xと、ソースからインストールした場合は、以下のディレクトリになります:
 
