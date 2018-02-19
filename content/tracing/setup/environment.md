@@ -1,6 +1,22 @@
 ---
 title: Environment
 kind: documentation
+further_reading:
+- link: "/tracing/setup/docker"
+  tag: "Documentation"
+  text: Docker setup
+- link: "/tracing/setup/go"
+  tag: "Documentation"
+  text: Go language instrumentation
+- link: "/tracing/setup/java"
+  tag: "Documentation"
+  text: Java language instrumentation
+- link: "/tracing/setup/python"
+  tag: "Documentation"
+  text: Python language instrumentation
+- link: "/tracing/setup/ruby"
+  tag: "Documentation"
+  text: Ruby language instrumentation
 ---
 
 #### Definition
@@ -52,3 +68,7 @@ There are several ways to specify an environment when reporting data:
     # in code this looks like
     span.set_tag('env', 'prod')
     ```
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

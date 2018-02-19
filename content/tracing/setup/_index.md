@@ -38,7 +38,7 @@ To start tracing your application:
     On Heroku, Deploy the Datadog tracing Agent via the [Datadog Heroku Buildpack](https://github.com/DataDog/heroku-buildpack-datadog).  
 
 3. **Configure your environment**:  
-  Environment is an important notion for the APM product, configure it in your Datadog Agent in order to benefit from all Datadog functionalities. [Learn how to so with the environment dedicated setup documentation](/setup/environment).
+  Environment is an important notion for the APM product, configure it in your Datadog Agent in order to benefit from all Datadog functionalities. [Learn how to so with the environment dedicated setup documentation](/tracing/setup/environment).
 
 4. **Instrument your application**:   
   Instrument your application, select one of the following supported languages:
