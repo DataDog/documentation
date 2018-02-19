@@ -20,4 +20,6 @@ private: true
     {{< nextlink href="/tracing/faq/can-i-choose-which-hosts-i-will-enable-apm-on" >}}Can I choose which hosts I will enable APM on?{{< /nextlink >}}
     {{< nextlink href="/tracing/faq/tracing-special-meaning-tags" >}}APM (Tracing) special meaning tags{{< /nextlink >}}
     {{< nextlink href="/tracing/faq/are-there-possibilities-of-customizing-the-traces-we-collect" >}}Are there possibilities of customizing the traces we collect?{{< /nextlink >}}
+    {{< nextlink href="/tracing/faq/traces-sampling-and-storage" >}}Traces sampling and storage{{< /nextlink >}}
 {{< /whatsnext >}}
+

@@ -46,7 +46,7 @@ For more information about this check [here](https://github.com/DataDog/docker-d
 To run a Docker container which embeds the Datadog Agent to monitor your host use the following command:
 
 ```
-docker run -d --name dd-agent -h `hostname` -e DD_API_KEY=<YOUR_API_KEY>  -e DD_LOG_ENABLED=true -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -v /otp/datadog-agent/conf.d:/conf.d:ro datadog/agent:latest
+docker run -d --name dd-agent -h `hostname` -e DD_API_KEY=<YOUR_API_KEY>  -e DD_LOGS_ENABLED=true -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -v /otp/datadog-agent/conf.d:/conf.d:ro datadog/agent:latest
 ```
 
 Important notes: 
@@ -57,7 +57,7 @@ Important notes:
 
 The command related to log collection are the following:
 
-* `-e DD_LOG_ENABLED=true`: this parameter enables the log collection when set to true. The agent now looks for log instructions in configuration files.
+* `-e DD_LOGS_ENABLED=true`: this parameter enables the log collection when set to true. The agent now looks for log instructions in configuration files.
 * `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw`: mount the directory we created to store pointer on each container logs to make sure we do not lose any.
 * `-v /opt/datadog-agent/conf.d:/conf.d:ro`: mount the configuration directory we previously created to the container
 

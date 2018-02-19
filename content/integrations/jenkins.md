@@ -58,7 +58,7 @@ You will start to see Jenkins events in the Event Stream when the plugin is up a
 
 ## Metrics
 
-{{< get-metrics-from-git >}}
+The Jenkins check does not include any metric at this time.
 
 ## Events
 
