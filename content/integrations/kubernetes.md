@@ -166,7 +166,7 @@ Then you'll be able to enter one the pod using the command:
 ### Installation
 #### Container Installation
 
-If you are running Kubernetes >= 1.2.0, you can use the [kube-state-metrics](https://github.com/kubernetes/kube-state-metrics) project to provide additional metrics (identified by the `kubernetes_state` prefix in the metrics list below) to Datadog.
+If you are running Kubernetes >= 1.2.0, use the [kube-state-metrics](https://github.com/kubernetes/kube-state-metrics) project to provide additional metrics (identified by the `kubernetes_state` prefix in the metrics list below) to Datadog.
 
 To run kube-state-metrics, create a `kube-state-metrics.yaml` file using the following manifest to deploy the kube-state-metrics service:
 

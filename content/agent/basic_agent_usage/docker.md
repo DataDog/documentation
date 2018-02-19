@@ -10,7 +10,17 @@ If you haven't installed the Agent yet, instructions can be found [in the Datado
 
 ## Run the Docker agent
 
-`docker run -e DD_API_KEY=your-api-key-here -it <image-name>`
+Head over to [datadoghq.com](https://app.datadoghq.com/account/settings#agent/docker) to get the official installation guide.
+
+For a simple docker run, get started with:
+
+```
+docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
+              -v /proc/:/host/proc/:ro \
+              -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+              -e DD_API_KEY=<YOUR_API_KEY> \
+              datadog/agent:latest
+```
 
 - [Find here the list of available images for Agent 6](https://hub.docker.com/r/datadog/agent/tags/), Datadog encourages you to always pick the latest version.
 
@@ -18,12 +28,15 @@ The following environment variables are supported:
 
 | Variable | Description |
 |:-----|:-----|
-|`DD_API_KEY`| your API key (**required**) |
+| `DD_API_KEY`| your API key (**required**) |
 | `DD_HOSTNAME` | hostname to use for metrics |
 | `DD_TAGS`| host tags, separated by spaces. For example: `simple-tag-0 tag-key-1:tag-value-1`|
-| `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` | listen to dogstatsd packets from other containers, required to send custom metrics |
+| `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` | listen to dogstatsd packets from other containers, required to send custom metrics. Send custom metrics via [the statsd protocol](https://docs.datadoghq.com/developers/dogstatsd/) |
 | `DD_APM_ENABLED`| run the trace-agent along with the infrastructure agent, allowing the container to accept traces on 8126/tcp|
-| `DD_PROCESS_AGENT_ENABLED`| run the [process-agent](https://docs.datadoghq.com/graphing/infrastructure/process/) along with the infrastructure agent, feeding data to the Live Process View and Live Containers View| 
+| `DD_PROCESS_AGENT_ENABLED`| enable live process collection in the [process-agent](https://docs.datadoghq.com/graphing/infrastructure/process/). The Live Container View is already enabled by default if the Docker socket is available|
+|`DD_DOCKER_LABELS_AS_TAGS`| extract docker container labels|
+|`DD_DOCKER_ENV_AS_TAGS` | extract docker container environment variables|
+|`DD_KUBERNETES_POD_LABELS_AS_TAGS` | extract pod labels|
 |`DD_LOGS_ENABLED`| run the [log-agent](https://docs.datadoghq.com/logs/) along with the infrastructure agent. See below for details|
 |`DD_JMX_CUSTOM_JARS`| space-separated list of custom jars to load in jmxfetch (only for the `-jmx` variants)|
 |`DD_KUBERNETES_COLLECT_SERVICE_TAGS`| Configures the agent to collect Kubernetes service names as tags.|
@@ -34,22 +47,20 @@ The following environment variables are supported:
 
 For more information about the container's lifecycle, see [our SUPERVISION documentation ](https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/agent/SUPERVISION.md).
 
-## Kubernetes
+## Tagging
 
-To deploy the Agent in your Kubernetes cluster, use the manifest in `manifests`.
-Firstly, make sure you have the correct [RBAC](#rbac) in place. Use the files in manifests/rbac that contain the minimal requirements to run the Kubernetes Cluster level checks and perform the leader election:
+Datadog Docker agent collects automatically common tags from [Docker](https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go), [Kubernetes](https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go), [ECS](https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go), [Swarm, Mesos, Nomad and Rancher](https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go), and allows you to extract even more tags with the following options:
 
-`kubectl create -f manifest/rbac`
+- `DD_DOCKER_LABELS_AS_TAGS` : extract docker container labels
+- `DD_DOCKER_ENV_AS_TAGS` : extract docker container environment variables
+- `DD_KUBERNETES_POD_LABELS_AS_TAGS` : extract pod labels
 
-Then, create the agents with:
-`kubectl create -f manifest/agent.yaml`
+Define them in your custom `datadog.yaml`, or set them as JSON maps in these envvars. The map key is the source (label/envvar) name, and the map value the datadog tag name.
 
-The manifest for the agent has the `KUBERNETES` environment variable enabled, which enables the event collection and the API server check described here.
-If you want the event collection to be resilient, create a ConfigMap `datadogtoken` that agents will use to save and share a state reflecting which events where pulled last.
-
-To create such a ConfigMap, use the following command:
-`kubectl create -f manifest/datadog_configmap.yaml`
-See details in [Event Collection](#event-collection).
+```
+DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app","release":"helm_release"}'
+DD_DOCKER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name","com.docker.compose.project":"project_name"}'
+```
 
 ## Log collection
 
@@ -103,44 +114,4 @@ logs:
      sourcecategory: sourcecode
 ```
 For more examples of configuration files or agent capabilities (such as filtering, redacting, multiline, …) read [the dedicated log documentation](https://docs.datadoghq.com/logs/#filter-logs).
-
-## Event Collection
-
-Similarly to the Agent 5, Agent 6 collects events from the Kubernetes API server.
-First and foremost, set the `collect_kubernetes_events` variable to `true` in the `datadog.yaml` file, this can be achieved via the environment variable `DD_COLLECT_KUBERNETES_EVENTS` that is resolved at start time.
-**Note**: Give the agent some rights to activate this feature. See the [RBAC section](#rbac).
-
-To have a ConfigMap storing the `event.tokenKey` and the `event.tokenTimestamp` deploy it in the `default` namespace and name it `datadogtoken`, simply run:  
-`kubectl create configmap datadogtoken --from-literal="event.tokenKey"="0"` .
-You may also use the example in manifests/datadog_configmap.yaml.
-
-When the ConfigMap is used, if the agent in charge (via the [Leader election](#leader-election)) of collecting the events dies, the next leader elected will use the ConfigMap to identify the last events pulled. This is in order to avoid duplicated events collection, as well as putting less stress on the API Server.
-
-### Leader Election
-The Datadog Agent v6 supports built in leader election option for the Kubernetes event collector and the Kubernetes cluster related checks (i.e. Controle Plane service check).  
-
-This feature relies on Endpoints, enable it by setting the `DD_LEADER_ELECTION` environment variable to `true` the Datadog Agents will need to have a set of actions allowed prior to its deployment nevertheless.
-See the [RBAC section](#rbac)  for more details and keep in mind that these RBAC entities will need to be created before the option is set.  
-
-Agents coordinate by performing a leader election among members of the Datadog DaemonSet through Kubernetes to ensure only one leader agent instance is gathering events at a given time.
-
-This functionality is disabled by default, enabling the event collection activates it to avoid duplicating collecting events and stress on the API server.
-
-The `leaderLeaseDuration` is the duration for which a leader stays elected. It should be > 30 seconds and is 60 seconds by default. The longer it is, the less frequently your agents hit the apiserver with requests, but it also means that if the leader dies (and under certain conditions), events can be missed until the lease expires and a new leader takes over.
-It can be configured with the environment variable `DD_LEADER_LEASE_DURATION`.
-
-### RBAC
-
-In the context of using the Kubernetes integration, and when deploying agents in a Kubernetes cluster, a set of rights are required for the agent to integrate seamlessly.
-
-Allow the agent to be allowed to perform a few actions:
-
-- `get` and `update` of the `Configmaps` named `datadogtoken` to update and query the most up to date version token corresponding to the latest event stored in ETCD.
-- `list` and `watch` of the `Events` to pull the events from the API Server, format and submit them.
-- `get`, `update` and `create` for the `Endpoint`. The Endpoint used by the agent for the [Leader election](#leader-election) feature is named `datadog-leader-election`.
-- `list` the `componentstatuses` resource, in order to submit service checks for the Controle Plane's components status.
-
-You can find the templates in manifests/rbac. This will create the Service Account in the default namespace, a Cluster Role with the above rights and the Cluster Role Binding.
-
-If you're still having trouble, [our support team](/help) will be glad to provide further assistance.
 

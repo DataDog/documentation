@@ -8,6 +8,11 @@ aliases:
     - /agent/faq/log-location
 ---
 
+
+<div class="alert info-block">
+    Agent v6 is now available, <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md">upgrade to the newest version </a> to benefit from all new functionalities 
+</div>
+
 ## What is the Agent?
 
 The Datadog Agent is a piece of software that runs on your hosts. Its job is to faithfully collect events and metrics and bring them to Datadog on
