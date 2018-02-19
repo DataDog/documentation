@@ -1,6 +1,8 @@
 ---
 title: Traces sampling and storage
 kind: documentation
+aliases:
+    - /tracing/faq/traces-sampling-and-storage/
 ---
 
 ## Trace sampling 

@@ -18,57 +18,37 @@ further_reading:
   tag: "Documentation"
   text: Ruby language instrumentation
 ---
-## Agent installation
 
-APM is available as part of the Datadog Agent with versions 5.11+ as part of the one line install for the Linux and Docker Agents. Currently, [Mac](https://github.com/DataDog/datadog-trace-agent#run-on-osx) and [Windows](https://github.com/DataDog/datadog-trace-agent#run-on-windows) users must perform a manual install of the APM Agent (aka Trace Agent) via a separate install process.
-
-<div class="alert alert-info">
-APM is enabled by default after Datadog agent 5.13 (on Linux and Docker), and can be disabled by adding the parameter: <code>apm_enabled: no</code> in your Datadog agent configuration file.
-</div>
-
-Trace Agent packages are available for:
-
-* Linux — packaged with the Datadog Agent
-* Mac OS — packaged separately, see the [Trace Agent releases](https://github.com/DataDog/datadog-trace-agent/releases/)
-* Docker — included in the [docker-dd-agent](https://github.com/DataDog/docker-dd-agent) container
-* Heroku - deploy it to Heroku via the [Datadog Heroku Buildpack](https://github.com/DataDog/heroku-buildpack-datadog).
-* Windows - packaged separately, see the [Windows Trace Agent](https://github.com/DataDog/datadog-trace-agent/#run-on-windows)
-
-Install from source for other platforms.
-
-## Instrument your application
+## Setup process
 
 With our infrastructure monitoring, metrics are sent to the Datadog Agent, which then forwards them to Datadog. Similarly, tracing metrics are also sent to the Datadog agent: The application code instrumentation flushes to the Agent every 1 s ([see here for the Python client](https://github.com/DataDog/dd-trace-py/blob/69693dc7cdaed3a2b6a855325109fa100e42e254/ddtrace/writer.py#L159) for instance) and the Agent flushes to the [Datadog API every 10s](https://github.com/DataDog/datadog-trace-agent/blob/master/config/agent.go#L170).  
 
 To start tracing your application:
 
-**1. Install the Datadog Agent**
+1. **Install the Datadog Agent**:    
+  Install and configure the latest [Datadog Agent](https://app.datadoghq.com/account/settings#agent) (version 5.11.0 or above is required). For additional information, reference the [getting started guide](https://github.com/DataDog/datadog-trace-agent/tree/master/config#agent-configuration).
 
-Install and configure the latest [Datadog Agent](https://app.datadoghq.com/account/settings#agent) (version 5.11.0 or above is required). For additional information, reference the [getting started guide](https://github.com/DataDog/datadog-trace-agent/tree/master/config#agent-configuration).
+2. **Install the Trace Agent**:  
+  Depending on your OS, install next to the Datadog agent, the Datadog trace agent:  
+  * On **Linux**, and **[Docker](/setup/docker)** the Trace Agent is packaged with the standard Datadog Agent, so no extra configuration is needed.
 
-**2. Install the Trace Agent**
+  * On **MacOS** and **Windows**, install and run the [Trace Agent](https://github.com/DataDog/datadog-trace-agent) in addition to the DataDog agent.  
+  See the [MacOS Trace Agent](https://github.com/DataDog/datadog-trace-agent#run-on-osx) and [Windows Trace Agent](https://github.com/DataDog/datadog-trace-agent/#run-on-windows) dedicated documentation.  
 
-If you are running MacOS or Windows, you will need to install and run the [Trace Agent](https://github.com/DataDog/datadog-trace-agent) in addition to the DataDog agent. On Linux, the Trace Agent is packaged with the standard Datadog Agent, so no extra configuration is needed.
+    On Heroku, Deploy the Datadog tracing Agent via the [Datadog Heroku Buildpack](https://github.com/DataDog/heroku-buildpack-datadog).  
 
-- [MacOS Trace Agent Configuration](https://github.com/DataDog/datadog-trace-agent#run-on-osx)
-- [Windows Trace Agent Configuration](https://github.com/DataDog/datadog-trace-agent#run-on-windows)
+3. **Configure your environment**:  
+  Environment is an important notion for the APM product, configure it in your Datadog Agent in order to benefit from all Datadog functionalities. [Learn how to so with the environment dedicated setup documentation](/setup/environment).
 
-**3. Instrument your application**
+4. **Instrument your application**:   
+  Instrument your application, select one of the following supported languages:
 
-Instrument your application, select one of the following supported languages:
+  - [Go](/tracing/setup/go)
+  - [Java](/tracing/setup/java)
+  - [Python](/tracing/setup/python)
+  - [Ruby](/tracing/setup/ruby)
 
-- [Go](/tracing/setup/go)
-- [Java](/tracing/setup/java)
-- [Python](/tracing/setup/python)
-- [Ruby](/tracing/setup/ruby)
-
-To instrument an application written in a language that does not yet have official library support, reference the [Tracing API](/api/?lang=console#traces), or visit our list of [community tracing libraries](/developers/libraries/#community-tracing-apm-libraries).
-
-### Running the agent in Docker
-
-To trace applications in Docker containers, you can use the [docker-dd-agent](https://hub.docker.com/r/datadog/docker-dd-agent/) image (tagged version 11.0.5110 or higher) and enable tracing by passing `DD_APM_ENABLED=true` as an environment variable.
-
-For additional information, reference [the Docker page](/tracing/setup/docker)
+    To instrument an application written in a language that does not yet have official library support, reference the [Tracing API](/api/?lang=console#traces), or visit our list of [community tracing libraries](/developers/libraries/#community-tracing-apm-libraries).
 
 ## Agent configuration
 

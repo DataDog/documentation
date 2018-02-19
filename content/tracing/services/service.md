@@ -45,6 +45,8 @@ Service names:
 * **cannot contain spaces** (spaces are replaced with underscores).
 * must adhere to [metric naming rules](/developers/metrics/).
 
+**Note**: Service must have a type attached, [learn more on Service type]().
+
 ## Service monitor
 
 Datadog propose list of monitor depending of your service name/(type?): 
