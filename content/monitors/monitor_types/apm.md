@@ -20,7 +20,7 @@ These work just like regular [metric monitors](/monitors/monitor_types/metric) â
 
 ## Setup
 
-1. Select your environment: 
+1. Select your [environment](/tracing/setup/environment): 
     {{< img src="monitors/monitor_types/apm/apm_select_env.png" alt="APM select Environment" responsive="true" popup="true" style="width:75%;" >}}
 
 2. Select your [service](/tracing/services/service):
