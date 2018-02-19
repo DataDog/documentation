@@ -4,6 +4,7 @@ kind: documentation
 customnav: agentnav
 aliases:
   - /guides/agent_checks/
+  - /agent/agent_checks
 ---
 
 ## Overview

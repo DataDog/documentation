@@ -5,7 +5,7 @@ further_reading:
 - link: "/agent/"
   tag: "Documentation"
   text: Learn more about the Datadog Agent
-- link: "/agent/agent_checks"
+- link: "/developers/agent_checks"
   tag: "Documentation"
   text: Learn more about Agent checks
 ---
