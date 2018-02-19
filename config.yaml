@@ -134,22 +134,22 @@ languages:
         # Orchestration Tools
         - identifier: customnav_agentnav_orchestration
           name: "Orcherstration Tools"
-          url: "/agent/orcherstration_tools/"
+          url: "/agent/orchestration_tools/"
           weight: 30
           parent: menu_references_agent
         - identifier: customnav_agentnav_ansible
           name: "Ansible"
-          url: "/agent/orcherstration_tools/ansible"
+          url: "/agent/orchestration_tools/ansible"
           weight: 310
           parent: customnav_agentnav_orchestration
         - identifier: customnav_agentnav_chef
           name: "Chef"
-          url: "/agent/orcherstration_tools/chef"
+          url: "/agent/orchestration_tools/chef"
           weight: 320
           parent: customnav_agentnav_orchestration
         - identifier: customnav_agentnav_puppet
           name: "Puppet"
-          url: "/agent/orcherstration_tools/puppet"
+          url: "/agent/orchestration_tools/puppet"
           weight: 330
           parent: customnav_agentnav_orchestration
 

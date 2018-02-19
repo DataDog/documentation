@@ -84,7 +84,7 @@ docker run -d --name dd-agent -h `hostname` -e DD_API_KEY=<YOUR_API_KEY> -e DD_L
 
 **Note**:
 
-- The Docker integration is enabled by default, as well as [autodiscovery](/agent/v6/autodiscovery) in auto config mode (remove the `listeners: -docker` section in `datadog.yaml` to disable it).
+- The Docker integration is enabled by default, as well as [autodiscovery](/agent/kubernetes/autodiscovery) in auto config mode (remove the `listeners: -docker` section in `datadog.yaml` to disable it).
 
 The parameters specific to log collection are the following:
 
