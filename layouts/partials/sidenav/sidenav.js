@@ -18,7 +18,7 @@ function buildMap() {
         var href = $(this).attr('href');
         var id = href.replace('#', '').replace(' ','-');
         var header = $('[id="'+id+'"]');
-        var navParentLinks = $(this).parents('#TableOfContents').find('ul > li').has($(this)).find('> a');
+        var navParentLinks = $(this).parents('.sidenav-api').find('ul > li').has($(this)).find('> a');
 
         if(header.length) {
             if(header.is('h2') || header.is('h3')) {

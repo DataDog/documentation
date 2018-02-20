@@ -194,6 +194,15 @@ aside.sidenav-api {
     overflow-x: hidden;
     overflow-y: auto;
     margin:0;
+    ul li > ul {
+      //display: block;
+      list-style-type:none;
+      padding-left:20px;
+      li a {
+        font-size: 16px;
+        font-weight: 600;
+      }
+    }
   }
   .sticky {
     top:65px;
@@ -218,6 +227,10 @@ aside.sidenav-api {
     font-weight:600 !important;
     border:1px solid $ddpurple !important;
     border-radius:4px !important;
+  }
+  // open adjacent ul to open link
+  .toc_open ~ ul {
+    display:block !important;
   }
 }
 
