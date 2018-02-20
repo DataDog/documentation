@@ -5,7 +5,6 @@ kind: documentation
 
 {{< partial name="platforms/platforms.html" >}}
 
-
 ## Configuration management tools
 
 Manage the Datadog Agent and [integrations](/integrations) using configuration management tools:

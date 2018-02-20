@@ -140,6 +140,11 @@ languages:
           url: "/agent/docker/jmx"
           weight: 240
           parent: customnav_agentnav_docker
+        - identifier: customnav_agentnav_docker_getting_further
+          name: "Getting Further"
+          url: "/agent/docker/getting_further"
+          weight: 250
+          parent: customnav_agentnav_docker
 
         # Kubernetes 
         - identifier: customnav_agentnav_kubernetes
@@ -151,6 +156,16 @@ languages:
           name: "Host installation"
           url: "/agent/kubernetes/host_installation/"
           weight: 310
+          parent: customnav_agentnav_kubernetes
+        - identifier: customnav_agentnav_container_installation
+          name: "Container installation"
+          url: "/agent/kubernetes/container_installation/"
+          weight: 320
+          parent: customnav_agentnav_kubernetes
+        - identifier: customnav_agentnav_event_collection
+          name: "Event collection"
+          url: "/agent/kubernetes/event_collection/"
+          weight: 330
           parent: customnav_agentnav_kubernetes
         - identifier: customnav_agentnav_autodiscovery
           name: "Autodiscovery"
