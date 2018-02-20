@@ -1,5 +1,5 @@
 ---
-title: How to get more out of your Kubernetes integration ?
+title: Getting further with Kubernetes
 kind: faq
 further_reading:
 - link: "/agent/"
@@ -10,7 +10,8 @@ further_reading:
   text: Learn more about the Datadog-Kubernetes integration
 ---
 
-## Metrics
+## How to get more out of your Kubernetes integration ?
+### Metrics
 
 It is possible to collect more Kubernetes metrics. Via cAdvisor, many metrics are available for you to visualize and monitor. Our [kubernetes integration](https://github.com/DataDog/integrations-core/blob/master/kubernetes/datadog_checks/kubernetes/kubernetes.py) only collects some of them but there is a way to collect other ones!
 
@@ -71,7 +72,7 @@ And as you spin up the daemonset and the configmap, see the metrics starting to 
 
 {{< img src="agent/faq/metric_in_ui.gif" alt="Metric UI" responsive="true" popup="true">}}
 
-## Events
+### Events
 
 Collect events from the Kubernetes API, by enabling [this option](https://github.com/DataDog/integrations-core/blob/master/kubernetes/conf.yaml.example#L78):
 

@@ -1,21 +1,15 @@
 platforms:
-  - name: ansible
-    link: "agent/orchestration_tools/ansible/"
-    image: "platform_ansible.png"
   - name: amazonlinux
     link: "agent/basic_agent_usage/amazonlinux/"
     image: "platform_amazonlinux.png"
   - name: centos
     link: "agent/basic_agent_usage/centos/"
     image: "platform_centos.png"
-  - name: chef
-    link: "agent/orchestration_tools/chef/"
-    image: "platform_chef.png"
   - name: deb
     link: "agent/basic_agent_usage/deb/"
     image: "platform_debian.png"
   - name: docker
-    link: "agent/basic_agent_usage/docker/"
+    link: "agent/docker/"
     image: "platform_docker.png"
   - name: fedora
     link: "agent/basic_agent_usage/fedora/"
@@ -26,9 +20,6 @@ platforms:
   - name: osx
     link: "agent/basic_agent_usage/osx/"
     image: "platform_macosx.png"
-  - name: puppet
-    link: "agent/orchestration_tools/puppet/"
-    image: "platform_puppet.png"
   - name: redhat
     link: "agent/basic_agent_usage/redhat/"
     image: "platform_redhat.png"
