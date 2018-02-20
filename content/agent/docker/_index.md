@@ -1,7 +1,6 @@
 ---
-title: Basic Agent Usage for CoreOS and Docker
+title: Basic Docker Agent usage
 kind: documentation
-platform: CoreOS
 aliases:
     - /guides/basic_agent_usage/docker/
     - /agent/basic_agent_usage/docker/

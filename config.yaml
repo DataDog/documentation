@@ -130,6 +130,16 @@ languages:
           url: "/agent/docker/trace_collection"
           weight: 220
           parent: customnav_agentnav_docker
+        - identifier: customnav_agentnav_docker_process_collection
+          name: "Process collection"
+          url: "/agent/docker/process_collection"
+          weight: 230
+          parent: customnav_agentnav_docker
+        - identifier: customnav_agentnav_docker_jmx
+          name: "JMX"
+          url: "/agent/docker/jmx"
+          weight: 240
+          parent: customnav_agentnav_docker
 
         # Kubernetes 
         - identifier: customnav_agentnav_kubernetes
@@ -137,10 +147,20 @@ languages:
           url: "/agent/kubernetes/"
           weight: 30
           parent: menu_references_agent
+        - identifier: customnav_agentnav_host_installation
+          name: "Host installation"
+          url: "/agent/kubernetes/host_installation/"
+          weight: 310
+          parent: customnav_agentnav_kubernetes
         - identifier: customnav_agentnav_autodiscovery
           name: "Autodiscovery"
           url: "/agent/kubernetes/autodiscovery/"
-          weight: 310
+          weight: 390
+          parent: customnav_agentnav_kubernetes
+        - identifier: customnav_agentnav_getting_further
+          name: "Getting Further"
+          url: "/agent/kubernetes/getting_further/"
+          weight: 399
           parent: customnav_agentnav_kubernetes
 
         # AGENT V6 - Subnav start
@@ -159,10 +179,15 @@ languages:
           url: "/agent/v6/trace_collection"
           weight: 520
           parent: customnav_agentnav_v6
+        - identifier: customnav_agentnav_v6_process_collection
+          name: "Process collection"
+          url: "/agent/v6/process_collection"
+          weight: 530
+          parent: customnav_agentnav_v6
         - identifier: customnav_agentnav_v6_developer_guide
           name: "Developer Guide"
           url: "https://github.com/DataDog/datadog-agent/tree/master/docs/dev"
-          weight: 530
+          weight: 599
           parent: customnav_agentnav_v6
 
         # AGENT V5 - Subnav start
