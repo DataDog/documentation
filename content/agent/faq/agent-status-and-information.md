@@ -1,18 +1,65 @@
 ---
 title: Agent Status and Information
 kind: faq
-further_reading:
-- link: "/agent/"
-  tag: "Documentation"
-  text: Learn more about the Datadog Agent
 ---
 
-## Mac OS X
+
+
+### Mac OS X
 
 To check if the Agent is running: (since 3.8.0)
 ```
 /usr/local/bin/datadog-agent status
 ```
+
+### Linux
+
+To check if the Agent is running: (since 3.8.0)
+```
+sudo /etc/init.d/datadog-agent status
+```
+
+### Docker
+
+To check if the Agent is running:
+```
+sudo docker exec -it dd-agent /etc/init.d/datadog-agent status
+```
+
+### SmartOS
+
+To check if the Agent is running:
+```
+svcs datadog
+```
+
+### Source
+
+To check if the Agent is running:
+```
+sudo ~/.datadog-agent/bin/agent status
+```
+
+### Infos
+
+Running an info command displays the status of your Datadog agent, and the status of all integrations enabled for this Agent:
+
+An Agent integration reports “OK” if it's properly configured as seen below:
+
+```
+  Checks
+  ======
+
+    network
+    -------
+      - instance #0 [OK]
+      - Collected 15 metrics, 0 events & 1 service check
+```
+
+The `[OK]` in the Agent output implies that the check was configured/run correctly but does not refer to the value being returned by your check.  
+
+### Mac OS X
+
 To receive information about the Agent’s state:
 ```
 /usr/local/bin/datadog-agent info
@@ -22,12 +69,8 @@ Tracebacks for errors can be retrieved by setting the -v flag: (since 3.8.0)
 /usr/local/bin/datadog-agent info -v
 ```
 
-## Linux
+### Linux
 
-To check if the Agent is running: (since 3.8.0)
-```
-sudo /etc/init.d/datadog-agent status
-```
 To receive information about the Agent’s state:
 ```
 sudo /etc/init.d/datadog-agent info
@@ -37,12 +80,8 @@ Tracebacks for errors can be retrieved by setting the -v flag: (since 3.8.0)
 sudo /etc/init.d/datadog-agent info -v
 ```
 
-## Docker
+### Docker
 
-To check if the Agent is running:
-```
-sudo docker exec -it dd-agent /etc/init.d/datadog-agent status
-```
 To receive information about the Agent’s state:
 ```
 sudo docker exec -it dd-agent /etc/init.d/datadog-agent info
@@ -60,12 +99,8 @@ E.g.
 docker exec -it dd-agent /opt/datadog-agent/bin/agent info
 ```
 
-## SmartOS
+### SmartOS
 
-To check if the Agent is running:
-```
-svcs datadog
-```
 To receive more information about the Agent’s state:
 ```
 /opt/local/datadog/bin/info
@@ -75,12 +110,8 @@ Tracebacks for errors can be retrieved by setting the -v flag: (since 3.8.0)
 /opt/local/datadog/bin/info -v
 ```
 
-## Source
+### Source
 
-To check if the Agent is running:
-```
-sudo ~/.datadog-agent/bin/agent status
-```
 To receive more information about the Agent’s state:
 ```
 sudo ~/.datadog-agent/bin/info
@@ -90,7 +121,7 @@ Tracebacks for errors can be retrieved by setting the -v flag: (since 3.8.0)
 sudo ~/.datadog-agent/bin/info -v
 ```
 
-## Windows
+### Windows
 
 For 5.2 and later versions of the agent go to the Datadog Agent Manager->Settings->Agent Status
 
@@ -110,5 +141,3 @@ If you're running on a version older than 5.2 visit the status page in your web 
 
 http://localhost:17125/status
 The status page is supported in Agent version 3.9.1-5.1.1
-
-{{< partial name="whats-next/whats-next.html" >}}

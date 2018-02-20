@@ -10,9 +10,39 @@ aliases:
 
 This page outlines the basic functionality of the Datadog Agent. If you haven't installed the Agent yet, instructions can be found [in the Datadog agent integration page](https://app.datadoghq.com/account/settings#agent/windows).
 
+
 ### Starting and Stopping the Agent
 
 The execution of the Agent is controlled by a Windows service.
+
+### For version >= 6.0.0
+
+There are a few major changes compare to older Datadog Windows Agent version:
+
+* the main executable name is now `agent.exe` (it was `ddagent.exe` previously)
+* Commands should be run with the command line `c:\program files\datadog\datadog-agent\embedded\agent.exe <command>`
+* The configuration GUI is now a browser based configuration application.
+
+The agent has a new set of command-line options:
+
+| Command         | Notes
+| --------------- | -------------------------------------------------------------------------- |
+| check           | Run the specified check |
+| diagnose        | Execute some connectivity diagnosis on your system |
+| flare           | Collect a flare and send it to Datadog |
+| help            | Help about any command |
+| hostname        | Print the hostname used by the Agent |
+| import          | Import and convert configuration files from previous versions of the Agent |
+| installservice  | Installs the agent within the service control manager |
+| launch-gui      | starts the Datadog Agent GUI |
+| regimport       | Import the registry settings into datadog.yaml |
+| remove-service  | Removes the agent from the service control manager |
+| restart-service | restarts the agent within the service control manager |
+| start           | Start the Agent |
+| start-service   | starts the agent within the service control manager |
+| status          | Print the current status |
+| stopservice     | stops the agent within the service control manager |
+| version         | Print the version info |
 
 ### For version >= 3.9.1
 
@@ -55,9 +85,33 @@ For Windows Server 2008, Vista and newer:
   * Integration configuration:
 `C:\ProgramData\Datadog\conf.d\`
 
+
+
+## Switch between Agent v5 and v6
+### Upgrade to Agent 6
+
+Download the latest version available [from here](https://github.com/DataDog/datadog-agent/releases) and run the installation package.
+
+### Downgrade to Agent v5
+
+Run the agent installer package for the latest 5.x version,  instructions can be found [in the Datadog agent integration page](https://app.datadoghq.com/account/settings#agent/windows).
+
+## Uninstall the agent
+
+**It's important that the original account used to install the agent is also used to remove it, otherwise it’s possible remnants are left behind and it won't be cleanly removed.**
+
+Uninstall the agent using Add/Remove Programs, alternatively, it's possible to to use Powershell as well. Here is a one liner:
+
+```
+(Get-WmiObject -Class Win32_Product -Filter "Name='Datadog Agent'" -ComputerName . ).Uninstall()
+```
+
 ## Troubleshooting
 
-First, check if the Agent is running in the Services panel and in the Task Manager. Next, try opening the status page to see the state of the Agent.
+The Agent logs are located in the ``c:\programdata\Datadog\logs` ` directory:
+and all logs are in the `agent.log` file.  
+
+If you're still having trouble, [our support team](/help) will be glad to provide further assistance.
 
 ### For version >= 3.9.1
 

@@ -26,7 +26,7 @@ Datadog Process Monitoring allows for real-time visibility of the most granular 
 **Live Processes has been introduced in Datadog Agent version 5.16.0.**  
 Refer to the instructions for standard [Agent installation][1] for platform-specific details.
 
-Once the Datadog Agent is installed, enable Live Processes collection by editing the [configuration file](/agent/faq/where-is-the-configuration-file-for-the-agent) at :
+Once the Datadog Agent is installed, enable Live Processes collection by editing the [configuration file](/agent/#configuration-file) at :
 
 ```
 /etc/dd-agent/datadog.conf

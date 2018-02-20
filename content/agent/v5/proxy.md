@@ -1,6 +1,8 @@
 ---
 title: Proxy Configuration
 kind: documentation
+aliases:
+    - /agent/proxy
 ---
 ## Why use a Proxy
 

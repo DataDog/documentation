@@ -132,7 +132,7 @@ To set up the email, first log in to your Datadog account at
 {{< img src="graphing/events/event-email-api.png" alt="JSON Event Email API" responsive="true" popup="true">}}
 
 [integrations]: /integrations
-[agentcheck]: /agent/agent_checks
+[agentcheck]: /developers/agent_checks
 [eventsapi]: /api/#events
 [dd-app]: https://app.datadoghq.com
 

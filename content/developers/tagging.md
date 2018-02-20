@@ -3,6 +3,7 @@ title: Tagging
 kind: documentation
 aliases:
   - /guides/tagging/
+  - /agent/tagging/
 ---
 
 ## Overview

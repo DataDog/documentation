@@ -9,4 +9,4 @@ All data coming from Datadog Webhooks and integrations, such as those with ticke
 * 34.192.254.186
 * 34.204.102.208
 
-More information on network traffic and security can be found [on the agent proxy dedicated documentation page](/agent/proxy).
+More information on network traffic and security can be found [on the agent proxy dedicated documentation page](/agent/v5/proxy).

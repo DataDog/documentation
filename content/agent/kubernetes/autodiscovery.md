@@ -1,9 +1,10 @@
 ---
-title: Using Autodiscovery with Docker
+title: Using Autodiscovery with Docker Agent v5
 kind: documentation
 aliases:
   - /guides/servicediscovery/
   - /guides/autodiscovery/
+  - /agent/autodiscovery
 ---
 
 <div class="alert alert-info">

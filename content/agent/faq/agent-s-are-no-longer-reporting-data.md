@@ -14,7 +14,7 @@ If your Datadog account was disabled and then re-enabled your API key was likel
 2. Log into your host(s) and navigate to the Datadog agent's conf:
     * Linux: `/etc/dd-agent/datadog.conf`
     * Windows: `C:\ProgramData\Datadog\datadog.conf`
-    * Other OS's reference [this link](/agent/faq/where-is-the-configuration-file-for-the-agent)
+    * Other OS's reference [this link](/agent/#configuration-file)
 
 3. In your config, replace/update the API key, it should [look like this](https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example#L22).
 
