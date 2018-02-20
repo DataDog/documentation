@@ -82,6 +82,12 @@ $(document).ready(function () {
             onScroll();
         }).trigger('scroll');
 
+        $(".sidenav-api ul").each(function() {
+            if($(this).children().length === 0) {
+                $(this).remove();
+            }
+        });
+
         buildMap();
         onScroll();
     }
