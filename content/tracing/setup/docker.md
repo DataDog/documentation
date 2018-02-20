@@ -37,42 +37,90 @@ docker run -d --name dd-agent \
   datadog/docker-dd-agent
 ```
 
-Previous instructions required binding to port 7777.
-This is a legacy port used by former client libraries and has been replaced by 8126.
-
 ## Tracing from other containers
-As with DogStatsD, traces can be submitted to the agent from other containers either using the Docker host IP or with Docker links
+
+As with DogStatsD, traces can be submitted to the agent from other containers either using Docker links or with the Docker host IP.
 
 ### Using Docker links
 
 ```
-docker run  --name my_container           \
-            --all_your_flags              \
-            --link dd-agent:dd-agent    \
+docker run  --name my_container \
+            --all_your_flags \
+            --link dd-agent:dd-agent \
             my_image
 ```
 
-It expose `DD_AGENT_PORT_8126_TCP_ADDR` and `DD_AGENT_PORT_8126_TCP_PORT` as environment variables. Your application tracer can be configured to submit to this address.
+This exposes `DD_AGENT_PORT_8126_TCP_ADDR` and `DD_AGENT_PORT_8126_TCP_PORT` as environment variables. Your application tracer must be configured to submit traces to this address.
+See examples for each supported language below:
 
-An example in Python:
+#### Python
 
 ```python
 import os
 from ddtrace import tracer
+
 tracer.configure(
-    hostname=os.environ["DD_AGENT_PORT_8126_TCP_ADDR"],
-    port=os.environ["DD_AGENT_PORT_8126_TCP_PORT"]
+    hostname=os.environ['DD_AGENT_PORT_8126_TCP_ADDR'],
+    port=os.environ['DD_AGENT_PORT_8126_TCP_PORT'],
 )
+```
+
+#### Ruby
+
+```ruby
+Datadog.configure do |c|
+  c.tracer hostname: ENV['DD_AGENT_PORT_8126_TCP_ADDR'],
+           port: ENV['DD_AGENT_PORT_8126_TCP_PORT']
+end
+```
+
+#### Go
+
+```go
+import (
+    "os"
+
+    ddtrace "github.com/DataDog/dd-trace-go/opentracing"
+)
+
+func main() {
+    config := ddtrace.NewConfiguration()
+    config.AgentHostname = os.GetEnv("DD_AGENT_PORT_8126_TCP_ADDR")
+    config.AgentPort = os.GetEnv("DD_AGENT_PORT_8126_TCP_PORT")
+
+    tracer, _, _ := ddtrace.NewTracer(config)
+}
+```
+
+#### Java
+
+You can update the Java Agent configuration via environment variables:
+
+```bash
+DD_AGENT_HOST=$DD_AGENT_PORT_8126_TCP_ADDR \
+DD_AGENT_PORT=$DD_AGENT_PORT_8126_TCP_PORT \
+java -javaagent:/path/to/the/dd-java-agent.jar -jar /your/app.jar
+```
+
+or via system properties:
+
+```bash
+java -javaagent:/path/to/the/dd-java-agent.jar \
+     -Dagent.host=$DD_AGENT_PORT_8126_TCP_ADDR \
+     -Dagent.port=$DD_AGENT_PORT_8126_TCP_PORT \
+     -jar /your/app.jar
 ```
 
 ### Using Docker host IP
 
-Agent container port `8126` should be linked to the host directly. Having determined the address of the default route of this container, with `ip route` for example, you can configure your application tracer to report to it.
+Agent container port `8126` should be linked to the host directly. Configure your application tracer to report to the default route of this container (you can determine this using `ip route`).
 
-An example in python, assuming `172.17.0.1` is the default route:
+The following is an example for the Python Tracer, assuming `172.17.0.1` is the default route:
 
-```
-from ddtrace import tracer; tracer.configure(hostname="172.17.0.1", port=8126)
+```python
+from ddtrace import tracer
+
+tracer.configure(hostname='172.17.0.1', port=8126)
 ```
 
 ## Further Reading
