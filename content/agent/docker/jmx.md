@@ -15,3 +15,18 @@ Execute a docker-run with those images and the `SD_JMX_ENABLE=true` environment
 **If you want the Agent to auto-discover JMX-based checks**:
 
 Use the `datadog/agent:latest-jmx` image. This image is based on `latest`, but it includes a JVM, which the Agent needs in order to run [jmxfetch](https://github.com/DataDog/jmxfetch).
+
+
+### Troubleshooting
+
+To check whether Autodiscovery is loading JMX-based checks:
+
+```
+# docker exec -it <agent_container_name> cat /opt/datadog-agent/run/jmx_status.yaml
+timestamp: 1499296559130
+checks:
+  failed_checks: {}
+  initialized_checks:
+    SD-jmx_0:
+    - {message: null, service_check_count: 0, status: OK, metric_count: 13, instance_name: SD-jmx_0-10.244.2.45-9010}
+```

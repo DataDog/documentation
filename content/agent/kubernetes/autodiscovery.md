@@ -123,27 +123,6 @@ In the `datadog.yaml` file, set the `sd_config_backend`, `sd_backend_host`, and 
 
 #### Configure in environment variables
 
-If you prefer to use environment variables, pass the same options to the container when starting it:
-
-```
-docker service create \
-  --name dd-agent \
-  --mode global \
-  --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
-  --mount type=bind,source=/proc/,target=/host/proc/,ro=true \
-  --mount type=bind,source=/sys/fs/cgroup/,target=/host/sys/fs/cgroup,ro=true \
-  -e API_KEY=<YOUR API KEY> \
-  -e SD_BACKEND=docker \
-  -e SD_CONFIG_BACKEND=etcd \
-  -e SD_BACKEND_HOST=127.0.0.1 \
-  -e SD_BACKEND_PORT=4001 \
-  datadog/docker-dd-agent:latest
-```
-
-Note that the option to enable Autodiscovery is called `service_discovery_backend` in `datadog.yaml`, but it's called just `SD_BACKEND` as an environment variable.
-
----
-
 With the key-value store enabled as a template source, the Agent looks for templates under the key `/datadog/check_configs`. Autodiscovery expects a key-value hierarchy like this:
 
 ```
@@ -156,7 +135,7 @@ With the key-value store enabled as a template source, the Agent looks for templ
     ...
 ```
 
-Each template is a 3-tuple: check name, `init_config`, and `instances`. The `docker_images` option from the previous section, which provided container identifiers to Autodiscovery, is not required here; for key-value stores, container identifiers appear as first-level keys under `check_config`. (Also note, the file-based template in the previous section didn't need a check name like this example does; there, the Agent inferred the check name from the file name.)
+Each template is a 3-tuple: check name, `init_config`, and `instances`. The `ad_identifiers` option from the previous section, which provided container identifiers to Autodiscovery, is not required here; for key-value stores, container identifiers appear as first-level keys under `check_config`. (Also note, the file-based template in the previous section didn't need a check name like this example does; there, the Agent inferred the check name from the file name.)
 
 #### Example: Apache check
 
@@ -187,20 +166,20 @@ Again, the order of each list matters. The Agent can only generate the HTTP chec
 
 ### Template Source: Kubernetes Pod Annotations
 
-As of version 5.12 of the Datadog Agent, you can store check templates in Kubernetes Pod annotations. With Autodiscovery enabled, the Agent detects if it's running on Kubernetes and automatically searches all Pod annotations for check templates if so; you don't need to configure Kubernetes as a template source (i.e. via `SD_CONFIG_BACKEND`) as you do with key-value stores.
+Store check templates in Kubernetes Pod annotations. With Autodiscovery enabled, the Agent detects if it's running on Kubernetes and automatically searches all Pod annotations for check templates.
 
 Autodiscovery expects annotations to look like this:
 
 ```
 annotations:
-  service-discovery.datadoghq.com/<container identifier>.check_names: '[<CHECK_NAME>]'
-  service-discovery.datadoghq.com/<container identifier>.init_configs: '[<INIT_CONFIG>]'
-  service-discovery.datadoghq.com/<container identifier>.instances: '[<INSTANCE_CONFIG>]'
+  ad.datadoghq.com/<container identifier>.check_names: '[<CHECK_NAME>]'
+  ad.datadoghq.com/<container identifier>.init_configs: '[<INIT_CONFIG>]'
+  ad.datadoghq.com/<container identifier>.instances: '[<INSTANCE_CONFIG>]'
 ```
 
 The format is similar to that for key-value stores. The differences are:
 
-- Annotations must begin with `service-discovery.datadoghq.com/` (for key-value stores, the starting indicator is `/datadog/check_configs/`).
+- Annotations must begin with `ad.datadoghq.com/` (for key-value stores, the starting indicator is `/datadog/check_configs/`).
 - For Annotations, Autodiscovery indentifies containers by _name_, NOT image (as it does for auto-conf files and key-value stores). That is, it looks to match `<container identifier>` to `.spec.containers[0].name`, not `.spec.containers[0].image`.
 
 If you define your Kubernetes Pods directly (i.e. `kind: Pod`), add each Pod's annotations directly under its `metadata` section (see the first example below). If you define Pods _indirectly_ via Replication Controllers, Replica Sets, or Deployments, add Pod annotations under `.spec.templates.metadata` (see the second example below).
@@ -215,9 +194,9 @@ kind: Pod
 metadata:
   name: apache
   annotations:
-    service-discovery.datadoghq.com/apache.check_names: '["apache","http_check"]'
-    service-discovery.datadoghq.com/apache.init_configs: '[{},{}]'
-    service-discovery.datadoghq.com/apache.instances: '[{"apache_status_url": "http://%%host%%/server-status?auto"},{"name": "My service", "url": "http://%%host%%", timeout: 1}]'
+    ad.datadoghq.com/apache.check_names: '["apache","http_check"]'
+    ad.datadoghq.com/apache.init_configs: '[{},{}]'
+    ad.datadoghq.com/apache.instances: '[{"apache_status_url": "http://%%host%%/server-status?auto"},{"name": "My service", "url": "http://%%host%%", timeout: 1}]'
   labels:
     name: apache
 spec:
@@ -244,9 +223,9 @@ spec:
       labels:
         name: apache
       annotations:
-        service-discovery.datadoghq.com/apache.check_names: '["apache","http_check"]'
-        service-discovery.datadoghq.com/apache.init_configs: '[{},{}]'
-        service-discovery.datadoghq.com/apache.instances: '[{"apache_status_url": "http://%%host%%/server-status?auto"},{"name": "My service", "url": "http://%%host%%", timeout: 1}]'
+        ad.datadoghq.com/apache.check_names: '["apache","http_check"]'
+        ad.datadoghq.com/apache.init_configs: '[{},{}]'
+        ad.datadoghq.com/apache.instances: '[{"apache_status_url": "http://%%host%%/server-status?auto"},{"name": "My service", "url": "http://%%host%%", timeout: 1}]'
     spec:
       containers:
       - name: apache # use this as the container identifier in your annotations
@@ -257,7 +236,7 @@ spec:
 
 ### Template Source: Docker Label Annotations
 
-Since version 5.17 of the Datadog Agent, you can store check templates in Docker labels. With Autodiscovery enabled, the Agent detects if it's running on Docker and automatically searches all labels for check templates; you don't need to configure a template source (i.e. via `SD_CONFIG_BACKEND`) as you do with key-value stores.
+The Agent detects if it's running on Docker and automatically searches all labels for check templates.
 
 Autodiscovery expects labels to look like these examples, depending on the file type:
 
@@ -305,7 +284,7 @@ You can also add a network name suffix to the `%%host%%` variable—`%%host_brid
 
 ### Alternate Container Identifier: Labels
 
-You can identify containers by label rather than container name or image. Just label any container `com.datadoghq.sd.check.id: <SOME_LABEL>`, and then put `<SOME_LABEL>` anywhere you'd normally put a container name or image. For example, if you label a container `com.datadoghq.sd.check.id: special-container`, Autodiscovery applies to that container any auto-conf template that contains `special-container` in its `docker_images` list.
+You can identify containers by label rather than container name or image. Just label any container `com.datadoghq.sd.check.id: <SOME_LABEL>`, and then put `<SOME_LABEL>` anywhere you'd normally put a container name or image. For example, if you label a container `com.datadoghq.sd.check.id: special-container`, Autodiscovery applies to that container any auto-conf template that contains `special-container` in its `ad_identifiers` list.
 
 Autodiscovery can only identify each container by label OR image/name—not both—and labels take precedence. For a container that has a `com.datadoghq.sd.check.id: special-nginx` label and runs the `nginx` image, the Agent DOESN'T apply templates that include only `nginx` as a container identifier.
 
@@ -314,33 +293,53 @@ Autodiscovery can only identify each container by label OR image/name—not both
 If you provide a template for the same check type via multiple template sources, the Agent looks for templates in the following order (using the first one it finds):
 
 * Kubernetes annotations
-* Key-value stores
 * Files
-
-So if you configure a `redisdb` template both in Consul and as a file (`conf.d/auto_conf/redisdb.yaml`), the Agent uses the template from Consul.
 
 ## Troubleshooting
 
-When you're not sure if Autodiscovery is loading certain checks you've configured, use the Agent's `configcheck` init script command. For example, to confirm that your Redis template is being loaded from a Kubernetes annotation—not the default `auto_conf/redisdb.yaml` file:
+When you're not sure if Autodiscovery is loading certain checks you've configured, use the Agent's `configcheck` init script command. For example, to confirm that your Redis template is being loaded from a docker label annotation—not the default `redisdb.d/auto_conf.yaml` file:
 
 ```
-# docker exec -it <agent_container_name> /etc/init.d/datadog-agent configcheck
+# docker exec -it <agent_container_name> agent configcheck
 .
 ..
 ...
-Check "redisdb":
-  source --> Kubernetes Pod Annotation
-  config --> {'instances': [{u'host': u'10.244.1.32', u'port': u'6379', 'tags': [u'image_name:kubernetes/redis-slave', u'kube_namespace:guestbook', u'app:redis', u'role:slave', u'docker_image:kubernetes/redis-slave:v2', u'image_tag:v2', u'kube_replication_controller:redis-slave']}], 'init_config': {}}
+=== Provider: Docker container labels ===
+
+--- redisdb check ---
+Instance 1:
+host: 172.17.0.3
+port: "6379"
+tags:
+- short_image:redis
+- image_tag:latest
+- docker_image:redis:latest
+- image_name:redis
+~
+Auto-discovery IDs:
+* docker://81e66fd4c948a502b4428417d8cf2ebc58caaff55a6e5879a41887057342aec2
 ```
 
-To check whether Autodiscovery is loading JMX-based checks:
+
+**Note**: Use the `-v` option to see all templates that are loaded but couldn't be resolved:
 
 ```
-# docker exec -it <agent_container_name> cat /opt/datadog-agent/run/jmx_status.yaml
-timestamp: 1499296559130
-checks:
-  failed_checks: {}
-  initialized_checks:
-    SD-jmx_0:
-    - {message: null, service_check_count: 0, status: OK, metric_count: 13, instance_name: SD-jmx_0-10.244.2.45-9010}
+# docker exec -it <agent_container_name> agent configcheck -v
+.
+..
+...
+=== Resolve warnings ===
+
+redisdb
+* No service found with this AD identifier: redis
+* Can't resolve the template for redisdb at this moment.
+
+=== Unresolved Configs ===
+
+Auto-discovery IDs: redis
+Template:
+init_config:
+instances:
+- host: '%%host%%'
+  port: '%%port%%'
 ```
