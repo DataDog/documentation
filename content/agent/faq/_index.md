@@ -20,7 +20,6 @@ private: true
 * [Send logs and configs to Datadog via flare command](/agent/faq/send-logs-and-configs-to-datadog-via-flare-command)
 * [I have issues with my process check, it doesn't find my processes!](/agent/faq/i-have-issues-with-my-process-check-it-doesn-t-find-my-processes)
 * [How to get more logging from the agent?](/agent/faq/how-to-get-more-logging-from-the-agent)
-* [Agent(s) are no longer reporting data](/agent/faq/agent-s-are-no-longer-reporting-data)
 * [Error Restarting Agent: Already Listening on a Configured Port](/agent/faq/error-restarting-agent-already-listening-on-a-configured-port)
 * [Forwarder logs contain 599 response code](/agent/faq/forwarder-logs-contain-599-response-code)
 * [Starting Datadog Agent (using supervisord):Error: Cannot open an HTTP server: socket.error reported errno.EACCES (13)](/agent/faq/cannot-open-an-http-server-socket-error-reported-errno-eacces-13)

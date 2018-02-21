@@ -11,7 +11,7 @@ When hitting an issue you / Datadog support might need more logging from the Dat
 
 To enable the full debug mode:
 
-- modify your local datadog.conf (see [this page](/agent/#configuration-file) to locate this configuration file on your instance)
+- modify your local `datadog.yaml` file (see [this page](/agent/#configuration-file) to locate this configuration file on your instance)
 
 - replace `# log_level: INFO` with `log_level: DEBUG` (make sure to get rid of # to uncomment the line)
 

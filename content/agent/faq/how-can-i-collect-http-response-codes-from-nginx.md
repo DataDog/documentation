@@ -61,7 +61,7 @@ $ sudo -u dd-agent wc -l /var/log/nginx/access.log
 We can now configure the agent to use the parser's parse function on the `access.log` file:
 
 ```
-$ grep '^dogstream' /etc/dd-agent/datadog.conf
+$ grep '^dogstream' /etc/dd-agent/datadog.yaml
 dogstreams: /var/log/nginx/access.log:/usr/share/datadog/agent/dogstream/nginx.py:parse
 ```
 

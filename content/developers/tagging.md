@@ -102,7 +102,7 @@ or
       - key_second_tag:value_2
       - key_third_tag:value_3
 
-You see both forms in the yaml configuration files, but for the `datadog.conf` init file only the first form is valid.
+You see both forms in the yaml configuration files, but for the `datadog.yaml` init file only the first form is valid.
 
 Each tag can be anything you like but you have the best success with tagging if your tags are `key:value` pairs. Keys could represent the role, or function, or region, or application and the value is the instance of that role, function, region, or application. Here are some examples of good tags:
 

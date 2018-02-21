@@ -52,7 +52,7 @@ where it is stored and available for graphing alongside the rest of your metrics
 
 ## Setup
 
-First, edit your `datadog.conf` file to uncomment the following lines:
+First, edit your `datadog.yaml` file to uncomment the following lines:
 ```
 use_dogstatsd: yes
 

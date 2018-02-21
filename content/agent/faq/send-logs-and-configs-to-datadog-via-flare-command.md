@@ -48,7 +48,7 @@ For an agent running in a container behind a proxy use:
 
 ```
 sudo docker exec -it dd-agent /bin/bash
-sed -i 's/# skip_ssl_validation: no/skip_ssl_validation: yes/' /etc/dd-agent/datadog.conf /etc/init.d/datadog-agent flare <CASE_ID>
+sed -i 's/# skip_ssl_validation: no/skip_ssl_validation: yes/' /etc/dd-agent/datadog.yaml /etc/init.d/datadog-agent flare <CASE_ID>
 ```
 
 ### Alpine based docker

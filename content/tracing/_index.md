@@ -67,7 +67,7 @@ Additionally, some configuration options may be set as environment variables. No
 | `resource` | `DD_IGNORE_RESOURCE` | A blacklist of regular expressions to filter out Traces by their Resource name. |
 {{% /table %}}
 
-For more information about the Datadog Agent, see the [dedicated doc page](/agent/) or refer to the [`datadog.conf.example` file](https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example).
+For more information about the Datadog Agent, see the [dedicated doc page](/agent/) or refer to the [`datadog.yaml.example` file](https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example).
 
 ## Additional resources
 

@@ -68,7 +68,7 @@ http://linoxide.com/linux-how-to/disable-ipv6-centos-fedora-rhel/
 
 ## Changing the agent's Tornado Client
 
-Some customers experience these 599 tornado errors only when their Datadog Agent uses the default "Simple HTTP" tornado client. It can sometimes help to switch this to the curl client instead. This can be done from the `datadog.conf` on [this line](https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example#L93). 
+Some customers experience these 599 tornado errors only when their Datadog Agent uses the default "Simple HTTP" tornado client. It can sometimes help to switch this to the curl client instead. This can be done from the `datadog.yaml` on [this line](https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example#L93). 
 
 ## Windows
 

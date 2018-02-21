@@ -11,7 +11,7 @@ Refer to the instructions for standard [Agent installation][1] for platform-spec
 Once the Datadog Agent is installed, enable Live Processes collection by editing the [configuration file](/agent/#configuration-file) at :
 
 ```
-/etc/dd-agent/datadog.conf
+/etc/dd-agent/datadog.yaml
 ```
 
 and adding the following line to the `[Main]` section:
