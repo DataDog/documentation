@@ -3,7 +3,9 @@ title: Kubernetes host installation
 kind: documentation
 ---
 
-Install the `dd-check-kubernetes` package manually or with your favorite configuration manager.
+## Installation 
+
+Install the latest version of the Datadog Agent from [the Datadog agent integration page](https://app.datadoghq.com/account/settings#agent)
 
 ### Configuration
 

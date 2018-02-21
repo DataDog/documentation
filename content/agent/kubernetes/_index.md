@@ -3,16 +3,17 @@ title: Kubernetes
 kind: documentation
 ---
 
-To deploy the Agent in your Kubernetes cluster, you can use the manifest in `manifests`.
-Firstly, make sure you have the correct [RBAC](#rbac) in place. You can use the files in manifests/rbac that contain the minimal requirements to run the Kubernetes Cluster level checks and perform the leader election.
-`kubectl create -f manifests/rbac`
+There is two installation processes available to gather metrics, traces and logs from your Kubernetes Clusters:
 
-Then, you can then create the agents with:
-`kubectl create -f manifests/agent.yaml`
+* [Container installation](/agent/kubernetes/container_installation) - recommended
+* [Host installation](/agent/kubernetes/host_installation) - optional
 
-The manifest for the agent has the `KUBERNETES` environment variable enabled, which will enable the event collection and the API server check described here.
-If you want the event collection to be resilient, you can create a ConfigMap `datadogtoken` that agents will use to save and share a state reflecting which events where pulled last.
+The only advantage from the Host installation is to allow gathering metrics from your Kubernetes cluster while starting.  
 
-To create such a ConfigMap, you can use the following command:
-`kubectl create -f manifests/datadog_configmap.yaml`
-See details in [Event Collection](#event-collection).
+On the contrary, the Container installation allows you to benefit from all Datadog Docker Agent functionalities such as:
+
+* [Autodiscovery](/agent/kubernetes/autodiscovery) 
+* [Event Collection](/agent/kubernetes/event_collection)
+* [Process Collection](/agent/kubernetes/process_collection)
+
+To discover all data collected automatically from the Kubernetes integration, refer to the dedicated [Kubernetes Integration Documentation](/integrations/kubernetes).
