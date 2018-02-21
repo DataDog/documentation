@@ -23,7 +23,6 @@ private: true
 
 ## General
 
-* [How to get more out of your Kubernetes integration ?](/agent/faq/how-to-get-more-out-of-your-kubernetes-integration)
 * [Why don't I see the 'system.processes.open_file_descriptors' metric?](/agent/faq/why-don-t-i-see-the-system-processes-open-file-descriptors-metric)
 * [How is the 'system.mem.used' metric calculated?](/agent/faq/how-is-the-system-mem-used-metric-calculated)
 * [How can I collect HTTP response codes from Nginx?](/agent/faq/how-can-i-collect-http-response-codes-from-nginx)

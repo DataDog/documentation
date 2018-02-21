@@ -119,7 +119,7 @@ In the `datadog.yaml` file, set the `sd_config_backend`, `sd_backend_host`, and 
 #     password:
 ```
 
-[Restart the Agent](/agent/faq/start-stop-ressltart-the-datadog-agent) to apply the configuration change.
+[Restart the Agent](/agent/#start-stop-restart-the-agent) to apply the configuration change.
 
 #### Configure in environment variables
 
