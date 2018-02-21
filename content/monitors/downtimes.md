@@ -22,7 +22,7 @@ You may occasionally need to shut systems down or take them off-line to perform 
 
 You can schedule downtimes and/or mute your Datadog monitors so that they do not alert at specific times when you do not want them to. You can read how to schedule downtimes here and here. 
 
-Monitors trigger events when they change state between ALERT, WARNING (if enabled), RESOLVED, and NO DATA (if enabled). But if a monitor has been silenced either by a downtime or muting, then any transition from RESOLVED to another state won't trigger an event (nor the notification channels that that event would have set off).
+Monitors trigger events when they change state between ALERT, WARNING (if enabled), RESOLVED, and NO DATA (if enabled). But if a monitor has been silenced either by a downtime or muting, then any transition from RESOLVED to another state won't trigger an event (nor the notification channels that the event would have set off).
 
 {{< img src="monitors/downtimes/downtime_on_alert.png" alt="downtime on alert" responsive="true" popup="true" style="width:80%;">}}
 
@@ -32,7 +32,7 @@ If a monitor has a transition from the RESOLVED state to either ALERT or WARNING
 
 By default, this is not true of NO DATA alerts: if a monitor has transitioned from the RESOLVED state to NO DATA while it has been silenced, and if it remains in a NO DATA state once the silence-time expires, then there is no NO DATA alert. But once data returns for that monitor scope, the monitor triggers a recovery event. 
 
-This may seem unintuitive, but is the expected behavior today, and it has been made this way to protect from potentially spammy no-data alerts when using the "Autoresolve" feature. If in these circumstances you would prefer that the monitor trigger a NO DATA event at the time that the silencing expires, there is a feature you can have enabled for your account to enable that behavior. To have that enabled, you can reach out to the support team (add email link) to request it.
+This may seem unintuitive, but it is the expected behavior today, and it has been made this way to protect from potentially spammy no-data alerts when using the "Autoresolve" feature. If in these circumstances you would prefer that the monitor triggers a NO DATA event at the time that the silencing expires, there is a feature you can have enabled for your account to enable that behavior. To have that enabled, you can reach out to the support team (add email link) to request it.
 
 ## Manage Downtime
 
