@@ -21,7 +21,7 @@ further_reading:
 
 #### Definition
 
-An environment is a first class dimension that you can use to scope a whole Datadog APM application. Some display settings can be shared across environments, but all the measurable data (traces/metrics/statistics) can not be re-aggregated across multiple environments. Use cases can be:
+An environment is a first class dimension that you can use to scope an entire Datadog APM application. Some display settings can be shared across environments, but all the measurable data (traces/metrics/statistics) can not be re-aggregated across multiple environments. Use cases can be:
 
 * Stage environments such as production, staging, and pre-production
 * Datacenters and availability zones in isolation
@@ -60,9 +60,8 @@ There are several ways to specify an environment when reporting data:
     env = pre-prod
     ```
 
-3. Per trace:
-
-   When submitting a single trace, specify an environment by tagging one of its spans with the metadata key `env`. This overrides the agent configuration and the host tags values (if any).
+3. Per trace:  
+  When submitting a single trace, specify an environment by tagging one of its spans with the metadata key `env`. This overrides the agent configuration and the host tags values (if any).  
 
     ```
     # in code this looks like

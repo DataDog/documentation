@@ -33,15 +33,15 @@ No installation is required.
 To get Catchpoint alerts into your stream, login into the Catchpoint Portal and goto Settings > API.
 
 1. In the Alerts API select Enable
-2. . Enter the DataDog Endpoint URL. 
+2. . Enter the Datadog Endpoint URL. 
 ```
 https://app.datadoghq.com/api/v1/events?api_key=<YOUR_DATADOG_API_KEY>
 ```
-You will also need the DataDog API Key which can be created in the DataDog portal.
+You will also need the Datadog API Key which can be created in the Datadog portal.
 3. Set Status to Active
 4. Select Template for Format
 5. Add a new template
-6. Enter the template Name e.g. DataDog and set the Format to JSON.
+6. Enter the template Name e.g. Datadog and set the Format to JSON.
 7. Use the following JSON Template and Save it.
 {{< highlight json >}}
 {

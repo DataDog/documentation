@@ -51,7 +51,7 @@ The ddtrace library includes support for the following web frameworks:
 ___
 
 {{% table responsive="true" %}}
-| Framework     | Framework Documentation    | DataDog Instrumentation Documentation               |
+| Framework     | Framework Documentation    | Datadog Instrumentation Documentation               |
 |---------------|----------------------------|-----------------------------------------------------|
 | Ruby on Rails | http://rubyonrails.org/    | http://www.rubydoc.info/gems/ddtrace/#Ruby_on_Rails |
 | Sinatra       | http://www.sinatrarb.com/  | http://www.rubydoc.info/gems/ddtrace/#Sinatra       |
@@ -67,7 +67,7 @@ ___
 
 
 {{% table responsive="true" %}}
-| Library       | Library Documentation                                                | DataDog Instrumentation Documentation               |
+| Library       | Library Documentation                                                | Datadog Instrumentation Documentation               |
 |---------------|----------------------------------------------------------------------|-----------------------------------------------------|
 | Rack          | https://rack.github.io/                                              | www.rubydoc.info/gems/ddtrace#Rack                  |
 | ActiveRecord  | https://github.com/rails/rails/tree/master/activerecord              | http://www.rubydoc.info/gems/ddtrace#Active_Record  |

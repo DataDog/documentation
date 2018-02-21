@@ -23,9 +23,9 @@ Connect Opsmatic to Datadog to get:
 ## Setup
 ### Installation
 
-To see Opsmatic events in your DataDog stream:
+To see Opsmatic events in your Datadog stream:
 
-1.  Add your DataDog API key to your Opsmatic Integrations page.
+1.  Add your Datadog API key to your Opsmatic Integrations page.
 2.  Configure your Opsmatic notifications to go to DataDog.
 
 Check out the [docs on the Opsmatic website for more information](https://opsmatic.com/app/docs/datadog-integration).

@@ -21,27 +21,27 @@ further_reading:
 
 ## Setup process
 
-With our infrastructure monitoring, metrics are sent to the Datadog Agent, which then forwards them to Datadog. Similarly, tracing metrics are also sent to the Datadog agent: The application code instrumentation flushes to the Agent every 1 s ([see here for the Python client](https://github.com/DataDog/dd-trace-py/blob/69693dc7cdaed3a2b6a855325109fa100e42e254/ddtrace/writer.py#L159) for instance) and the Agent flushes to the [Datadog API every 10s](https://github.com/DataDog/datadog-trace-agent/blob/master/config/agent.go#L170).  
+With our infrastructure monitoring, metrics are sent to the Agent, which then forwards them to Datadog. Similarly, tracing metrics are also sent to the Agent: The application code instrumentation flushes to the Agent every 1 s ([see here for the Python client](https://github.com/DataDog/dd-trace-py/blob/69693dc7cdaed3a2b6a855325109fa100e42e254/ddtrace/writer.py#L159) for instance) and the Agent flushes to the [Datadog API every 10s](https://github.com/DataDog/datadog-trace-agent/blob/master/config/agent.go#L170).  
 
 To start tracing your application:
 
 1. **Install the Datadog Agent**:    
-  Install and configure the latest [Datadog Agent](https://app.datadoghq.com/account/settings#agent) (version 5.11.0 or above is required). For additional information, reference the [getting started guide](https://github.com/DataDog/datadog-trace-agent/tree/master/config#agent-configuration).
+  Install and configure the latest [Datadog Agent](https://app.datadoghq.com/account/settings#agent) (version 6.0 or above is required). For additional information, reference the [getting started guide](https://github.com/DataDog/datadog-trace-agent/tree/master/config#agent-configuration).
 
 2. **Install the Trace Agent**:  
-  Depending on your OS, install next to the Datadog agent, the Datadog trace agent:  
-  * On **Linux**, and **[Docker](/tracing/setup/docker)** the Trace Agent is packaged with the standard Datadog Agent, so no extra configuration is needed.
+  Depending on your operating system, install the Datadog Trace Agent separately:
+  * On **Linux**, and **[Docker](/tracing/setup/docker)** the Trace Agent is pre-packaged with the standard Datadog Agent and no extra configuration is needed.
 
-  * On **MacOS** and **Windows**, install and run the [Trace Agent](https://github.com/DataDog/datadog-trace-agent) in addition to the DataDog agent.  
+  * On **MacOS** and **Windows**, install and run the [Trace Agent](https://github.com/DataDog/datadog-trace-agent) in addition to the Datadog Agent.  
   See the [MacOS Trace Agent](https://github.com/DataDog/datadog-trace-agent#run-on-osx) and [Windows Trace Agent](https://github.com/DataDog/datadog-trace-agent/#run-on-windows) dedicated documentation.  
 
-    On Heroku, Deploy the Datadog tracing Agent via the [Datadog Heroku Buildpack](https://github.com/DataDog/heroku-buildpack-datadog).  
+    On Heroku, Deploy the Datadog Trace Agent via the [Datadog Heroku Buildpack](https://github.com/DataDog/heroku-buildpack-datadog).  
 
 3. **Configure your environment**:  
   Environment is an important notion for the APM product, configure it in your Datadog Agent in order to benefit from all Datadog functionalities. [Learn how to so with the environment dedicated setup documentation](/tracing/setup/environment).
 
 4. **Instrument your application**:   
-  Instrument your application, select one of the following supported languages:
+  Select one of the following supported languages:
 
   - [Go](/tracing/setup/go)
   - [Java](/tracing/setup/java)
@@ -52,7 +52,7 @@ To start tracing your application:
 
 ## Agent configuration
 
-The Datadog Agent uses the [configuration file](/agent/faq/where-is-the-configuration-file-for-the-agent) for both infrastructure monitoring and APM configuration options.
+On Linux and Docker the Datadog Agent uses the [configuration file](/agent/faq/where-is-the-configuration-file-for-the-agent) for both infrastructure monitoring and APM configuration options.
 
 Additionally, some configuration options may be set as environment variables. Note that options set as environment variables overrides the settings defined in the configuration file.
 
@@ -62,7 +62,7 @@ Additionally, some configuration options may be set as environment variables. No
 | **main**                |                      |                                                                                                                                                                  |
 | `apm_enabled`           | `DD_APM_ENABLED`     | The Datadog Agent accepts trace metrics when the value is set to `true`. The default value is `true`.                                                            |
 | **trace.sampler**       |                      |                                                                                                                                                                  |
-| `extra_sample_rate`     | -                    | Use this setting to adjust the trace sample rate. The value should be a float between `0` (no sampling) and `1` (normal sampling rate). The default value is `1` |
+| `extra_sample_rate`     | -                    | Use this setting to adjust the trace sample rate. The value should be a float between `0` (no sampling) and `1` (normal sampling). The default value is `1` |
 | `max_traces_per_second` | -                    | The maximum number of traces to sample per second. To disable the limit (*not recommended*), set to `0`. The default value is `10`.                              |
 | **trace.receiver**      |                      |                                                                                                                                                                  |
 | `receiver_port`         | `DD_RECEIVER_PORT`   | The port that the Datadog Agent's trace receiver should listen on. The default value is `8126`.                                                                  |
