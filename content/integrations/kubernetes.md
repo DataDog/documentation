@@ -221,7 +221,6 @@ The Kubernetes check includes the following service checks:
 
 * [Can I install the Agent on my Kubernetes master node(s)](/integrations/faq/can-i-install-the-agent-on-my-kubernetes-master-node-s)
 * [Why is the Kubernetes check failing with a ConnectTimeout error to port 10250?](/integrations/faq/why-is-the-kubernetes-check-failing-with-a-connecttimeout-error-to-port-10250)
-* [How to get more out of your Kubernetes integration?](/agent/faq/how-to-get-more-out-of-your-kubernetes-integration)
 * [How to report host disk metrics when dd-agent runs in a docker container?](/agent/docker/getting_further)
 * [Client Authentication against the apiserver and kubelet](/integrations/faq/client-authentication-against-the-apiserver-and-kubelet)
 * [Gathering Kubernetes events](/integrations/faq/gathering-kubernetes-events)

@@ -6,6 +6,7 @@ aliases:
     - /agent/faq/agent-status-and-information
     - /agent/faq/start-stop-restart-the-datadog-agent
     - /agent/faq/send-logs-and-configs-to-datadog-via-flare-command
+    - /agent/faq/how-to-get-more-logging-from-the-agent
 ---
 
 <div class="alert alert-info">
@@ -24,14 +25,8 @@ your behalf so that you can do something useful with your monitoring and perform
 
 |Platform|Agent v5 |Agent v6|
 |:--------|:-----|:--------|
-|Linux|`sudo /etc/init.d/datadog-agent start `|`sudo service datadog-agent start`|
-|Docker|||
+|Linux|`sudo service datadog-agent start`|`sudo service datadog-agent start`|
 |MacOS x|`/usr/local/bin/datadog-agent start`|`launchctl start com.datadoghq.agent` or systray app |
-|CentOS|`sudo service datadog-agent start` |`sudo service datadog-agent start`|
-|Debian| `sudo service datadog-agent start`              | `sudo service datadog-agent start`      |
-|Fedora| `sudo service datadog-agent start`              | `sudo service datadog-agent start`      |
-|Redhat|`sudo service datadog-agent start`              | `sudo service datadog-agent start`      |
-|Suse|`sudo service datadog-agent start`              | `sudo service datadog-agent start`      |
 |SmartOS|`svcadm enable datadog`||
 |Source|`sudo ~/.datadog-agent/bin/agent start`|`sudo service datadog-agent start`|
 |Windows|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows)|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows)|
@@ -40,14 +35,8 @@ your behalf so that you can do something useful with your monitoring and perform
 
 |Platform|Agent v5 |Agent v6|
 |:--------|:-----|:--------|
-|Linux|`sudo /etc/init.d/datadog-agent stop`|`sudo service datadog-agent stop`|
-|Docker|||
+|Linux|`sudo service datadog-agent stop`|`sudo service datadog-agent stop`|
 |MacOS x|`/usr/local/bin/datadog-agent stop` |`launchctl stop com.datadoghq.agent` or systray app  |
-|CentOS|| `sudo service datadog-agent stop`               | `sudo service datadog-agent stop`       |
-|Debian| `sudo service datadog-agent stop`               | `sudo service datadog-agent stop`       |
-|Fedora|`sudo service datadog-agent stop`               | `sudo service datadog-agent stop`       |
-|Redhat|`sudo service datadog-agent stop`               | `sudo service datadog-agent stop`       |
-|Suse|`sudo service datadog-agent stop`               | `sudo service datadog-agent stop`       |
 |SmartOS|`svcadm disable datadog`||
 |Source|`sudo ~/.datadog-agent/bin/agent stop`|`sudo service datadog-agent stop`|
 |Windows|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows)|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows)|
@@ -55,14 +44,8 @@ your behalf so that you can do something useful with your monitoring and perform
 
 |Platform|Agent v5 |Agent v6|
 |:--------|:-----|:--------|
-|Linux|`sudo /etc/init.d/datadog-agent restart`|`sudo service datadog-agent restart`|
-|Docker|||
+|Linux|`sudo service datadog-agent restart`|`sudo service datadog-agent restart`|
 |MacOS x|`/usr/local/bin/datadog-agent restart `|_run `stop` then `start`_ or systray app|
-|CentOS| `sudo service datadog-agent restart`            | `sudo service datadog-agent restart`    |
-|Debian| `sudo service datadog-agent restart`            | `sudo service datadog-agent restart`    |
-|Fedora|`sudo service datadog-agent restart`            | `sudo service datadog-agent restart`    | 
-|Redhat|`sudo service datadog-agent restart`            | `sudo service datadog-agent restart`    |
-|Suse|`sudo service datadog-agent restart`            | `sudo service datadog-agent restart`    |
 |SmartOS|`svcadm restart datadog`|`sudo service datadog-agent restart`|
 |Source|`sudo ~/.datadog-agent/bin/agent restart`||
 |Windows|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows)|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows)|
@@ -73,15 +56,10 @@ your behalf so that you can do something useful with your monitoring and perform
 
 |Platform|Agent v5 |Agent v6|
 |:--------|:-----|:--------|
-|Linux|`sudo /etc/init.d/datadog-agent status`|`sudo datadog-agent status`|
+|Linux|`sudo service datadog-agent status`|`sudo datadog-agent status`|
 |Docker|`sudo docker exec -it dd-agent /etc/init.d/datadog-agent status`||
 |MacOS x|`datadog-agent status`             | `launchctl list com.datadoghq.agent` or systray app|
-|CentOS| `sudo service datadog-agent status`             | `sudo service datadog-agent status`     |
-|Debian| `sudo service datadog-agent status`             | `sudo service datadog-agent status`     |
-|Fedora|`sudo service datadog-agent status`             | `sudo service datadog-agent status`     |
-|Redhat|`sudo service datadog-agent status`             | `sudo service datadog-agent status`     |
 |SmartOS|`svcs datadog`||
-|Suse|`sudo service datadog-agent status`             | `sudo service datadog-agent status`     |
 |Source|`sudo ~/.datadog-agent/bin/agent status`|`sudo service datadog-agent status`|
 |Windows|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows/#status-and-information)|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows/#status-and-information)|
 
@@ -105,15 +83,10 @@ The `[OK]` in the Agent output implies that the check was configured/run correct
 
 |Platform|Agent v5 |Agent v6|
 |:--------|:-----|:--------|
-|Linux|`sudo /etc/init.d/datadog-agent info`||
+|Linux|`sudo service datadog-agent info`|`sudo datadog-agent status`|
 |Docker|`sudo docker exec -it dd-agent /etc/init.d/datadog-agent info`||
 |Docker (Alpine)|`docker exec -it dd-agent /opt/datadog-agent/bin/agent`||
 |MacOS x|`datadog-agent info`               | `datadog-agent status` or [web GUI](/agent/v6/#using-the-gui)                    |
-|CentOS| `sudo service datadog-agent info`               | `sudo datadog-agent status`             |
-|Debian| `sudo service datadog-agent info`               | `sudo datadog-agent status`             |
-|Fedora|`sudo service datadog-agent info`               | `sudo datadog-agent status`             |
-|Redhat|`sudo service datadog-agent info`               | `sudo datadog-agent status`             |
-|Suse|`sudo service datadog-agent info`               | `sudo datadog-agent status`|
 |SmartOS|`/opt/local/datadog/bin/info`||
 |Source|`sudo ~/.datadog-agent/bin/info`|`sudo datadog-agent status`|
 |Windows|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows/#status-and-information)|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows/#status-and-information)|
@@ -125,6 +98,18 @@ If you ended up at this page and have not yet installed the Datadog Agent, go [t
 If you think you might be experiencing issues, the first thing to do is [run the info command](/agent/#agent-status-and-information) and check the [Agent logs](/agent/#log-locations).
 
 If you're still unsure about the issue, you may reach out to [Datadog support team](/help) along with [a flare](#send-a-flare) of your agent.
+
+### Get more logging from the agent
+
+To enable the full debug mode:
+
+1. Modify your local `datadog.yaml` file (see [this page](/agent/v6/#configuration-file) to locate this configuration file on your instance)
+
+2. Replace `# log_level: INFO` with `log_level: DEBUG` (make sure to get rid of # to uncomment the line)
+
+3. Restart your Datadog Agent (see [that page](/agent/#start-stop-restart-the-agent) to find the restart command depending on your OS)
+
+4. Wait a few minutes to generate some logs. [Look here](/agent/#log-locations) to find the location of the logs.
 
 ### Send a flare
 
@@ -151,3 +136,4 @@ In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if
 |Suse|`sudo service datadog-agent flare <CASE_ID>`              | `sudo datadog-agent flare <CASE_ID>`              |
 |Source|`sudo ~/.datadog-agent/bin/agent flare <CASE_ID>`|`sudo datadog-agent flare <CASE_ID>`|
 |Windows|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows/#send-a-flare)|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows/#send-a-flare)|
+

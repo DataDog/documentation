@@ -15,8 +15,6 @@ private: true
 
 * [Network Time Protocol (NTP) Offset Issues](/agent/faq/network-time-protocol-ntp-offset-issues)
 * [How to solve Permission denied errors?](/agent/faq/how-to-solve-permission-denied-errors)
-* [I have issues with my process check, it doesn't find my processes!](/agent/faq/i-have-issues-with-my-process-check-it-doesn-t-find-my-processes)
-* [How to get more logging from the agent?](/agent/faq/how-to-get-more-logging-from-the-agent)
 * [Error Restarting Agent: Already Listening on a Configured Port](/agent/faq/error-restarting-agent-already-listening-on-a-configured-port)
 * [Forwarder logs contain 599 response code](/agent/faq/forwarder-logs-contain-599-response-code)
 * [Starting Datadog Agent (using supervisord):Error: Cannot open an HTTP server: socket.error reported errno.EACCES (13)](/agent/faq/cannot-open-an-http-server-socket-error-reported-errno-eacces-13)
@@ -25,5 +23,3 @@ private: true
 
 * [Why don't I see the 'system.processes.open_file_descriptors' metric?](/agent/faq/why-don-t-i-see-the-system-processes-open-file-descriptors-metric)
 * [How is the 'system.mem.used' metric calculated?](/agent/faq/how-is-the-system-mem-used-metric-calculated)
-* [How can I collect HTTP response codes from Nginx?](/agent/faq/how-can-i-collect-http-response-codes-from-nginx)
-* [Custom JMX Integration(s)](/agent/faq/custom-jmx-integration-s)

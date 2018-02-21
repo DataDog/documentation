@@ -13,3 +13,5 @@ Follow the instructions for [docker-dd-agent](/agent/docker/#run-the-docker-agen
 -v /etc/passwd:/etc/passwd:ro
 -e DD_PROCESS_AGENT_ENABLED=true
 ```
+
+**Note**: To collect container information in the standard install, the dd-agent user needs to have permissions to access docker.sock.

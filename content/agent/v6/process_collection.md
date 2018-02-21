@@ -20,4 +20,3 @@ and adding the following line to the `[Main]` section:
 ```
 
 After configuration is complete, [restart the Agent](/agent/#start-stop-restart-the-agent).  
-**Note**: To collect container information in the standard install, the dd-agent user needs to have permissions to access docker.sock.
