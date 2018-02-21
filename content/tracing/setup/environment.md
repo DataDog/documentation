@@ -62,7 +62,7 @@ There are several ways to specify an environment when reporting data:
 
 3. Per trace:
 
-   When submitting a single trace, specify an environment by tagging one of its spans with the metadata key `env`. This overrides the agent configuration and the host tags values (if any).
+    When submitting a single trace, specify an environment by tagging one of its spans with the metadata key `env`. This overrides the agent configuration and the host tags values (if any).
 
     ```
     # in code this looks like

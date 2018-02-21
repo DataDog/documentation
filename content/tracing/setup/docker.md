@@ -16,17 +16,17 @@ Enable the [datadog-trace-agent](https://github.com/DataDog/datadog-trace-agent)
 
 **Note: APM is NOT available on Alpine Images**
 
-For additional information, see the [Datadog docker Github repository](https://github.com/DataDog/docker-dd-agent)
+For additional information, see the [Datadog docker Github repository](https://github.com/DataDog/docker-dd-agent).
 
 ## Tracing from the host
 
-Tracing can be available on port 8126/tcp from anywhere by adding the options `-p 8126:8126/tcp` to the `docker run` command
+Tracing can be available on port 8126/tcp from _any host_ by adding the option `-p 8126:8126/tcp` to the `docker run` command.
 
-To make it available from your host only, use `-p 127.0.0.1:8126:8126/tcp` instead.
+To make it available from _your host only_, use `-p 127.0.0.1:8126:8126/tcp` instead.
 
-For example, the following command allows the agent to receive traces from anywhere
+For example, the following command allows the agent to receive traces from anywhere:
 
-```
+```bash
 docker run -d --name dd-agent \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
   -v /proc/:/host/proc/:ro \
@@ -43,7 +43,7 @@ As with DogStatsD, traces can be submitted to the agent from other containers ei
 
 ### Using Docker links
 
-```
+```bash
 docker run  --name my_container \
             --all_your_flags \
             --link dd-agent:dd-agent \
@@ -51,6 +51,7 @@ docker run  --name my_container \
 ```
 
 This exposes `DD_AGENT_PORT_8126_TCP_ADDR` and `DD_AGENT_PORT_8126_TCP_PORT` as environment variables. Your application tracer must be configured to submit traces to this address.
+
 See examples for each supported language below:
 
 #### Python
@@ -88,7 +89,8 @@ func main() {
     config.AgentHostname = os.GetEnv("DD_AGENT_PORT_8126_TCP_ADDR")
     config.AgentPort = os.GetEnv("DD_AGENT_PORT_8126_TCP_PORT")
 
-    tracer, _, _ := ddtrace.NewTracer(config)
+    tracer, closer, err := ddtrace.NewTracer(config)
+    defer closer.Close()
 }
 ```
 
@@ -113,7 +115,7 @@ java -javaagent:/path/to/the/dd-java-agent.jar \
 
 ### Using Docker host IP
 
-Agent container port `8126` should be linked to the host directly. Configure your application tracer to report to the default route of this container (you can determine this using `ip route`).
+Agent container port `8126` should be linked to the host directly. Configure your application tracer to report to the default route of this container (you can determine this using the `ip route` command).
 
 The following is an example for the Python Tracer, assuming `172.17.0.1` is the default route:
 
