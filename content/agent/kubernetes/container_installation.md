@@ -103,3 +103,52 @@ You will need to allow the agent to be allowed to perform a few actions:
 
 You can find the templates in manifests/rbac [here](https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/manifests/rbac).
 This will create the Service Account in the default namespace, a Cluster Role with the above rights and the Cluster Role Binding.
+
+### Custom integrations
+
+#### ConfigMap
+It is possible to leverage the ConfigMaps to configure or enable integrations.
+To do so, you only need to create a ConfigMap with the integration(s)'s configuration.
+Then, reference this ConfigMap among the volumes of your agent's manifest.
+
+For example, in the following case we customize the name, url and tags fields of the http check.
+To enable other integrations, just specify the correct yaml name and make sure it is properly formated.
+
+```
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: dd-agent-config
+  namespace: default
+data:
+  http-config: |-
+    init_config:
+    instances:
+    - name: My service
+      url: my.service:port/healthz
+      tags:
+        - service:critical
+---
+```
+And in the manifest of your agent (Daemonset/Deployment) add the following:
+```
+[...]
+        volumeMounts:
+        [...]
+          - name: dd-agent-config
+            mountPath: /conf.d
+      volumes:
+      [...]
+        - name: dd-agent-config
+          configMap:
+            name: dd-agent-config
+            items:
+            - key: http-config
+              path: http_check.yaml
+[...]
+```
+
+#### Annotations
+
+It is also possible to enable integrations via the annotations in the manifest of your application.
+This can be done with the autodiscovery, for more details, see the [Autodiscovery](/agent/kubernetes/autodiscovery) section.
