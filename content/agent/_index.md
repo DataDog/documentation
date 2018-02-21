@@ -59,7 +59,7 @@ your behalf so that you can do something useful with your monitoring and perform
 |Linux|`sudo service datadog-agent status`|`sudo datadog-agent status`|
 |Docker|`sudo docker exec -it dd-agent /etc/init.d/datadog-agent status`||
 |MacOS x|`datadog-agent status`             | `launchctl list com.datadoghq.agent` or systray app|
-|SmartOS|`svcs datadog`||
+|SmartOS|`svcs datadog`|`n/a`|
 |Source|`sudo ~/.datadog-agent/bin/agent status`|`sudo service datadog-agent status`|
 |Windows|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows/#status-and-information)|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows/#status-and-information)|
 

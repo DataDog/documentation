@@ -26,7 +26,7 @@ Datadog Agent has some commands and only the _lifecycle commands_ (i.e. `start`/
 | `sudo ~/.datadog-agent/bin/info`               | `sudo datadog-agent status`             | Status page of running Agent |
 | `sudo service datadog-agent flare`              | `sudo datadog-agent flare`              | Send flare |
 | `sudo service datadog-agent`                    | `sudo datadog-agent --help`             | Display command usage |
-| `sudo -u dd-agent -- dd-agent check <check_name>` | `sudo -u dd-agent --datadog-agent check <check_name>` | Run a check |
+| `sudo -u dd-agent -- dd-agent check <check_name>` | `sudo -u dd-agent -- datadog-agent check <check_name>` | Run a check |
 {{% /table %}}
 
 More information about the metrics, events, and service checks for an [integrations](/integrations) can be retrieved with the check command:

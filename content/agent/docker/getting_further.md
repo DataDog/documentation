@@ -1,5 +1,5 @@
 ---
-title: Getting further with Kubernetes
+title: Getting further with Docker
 kind: faq
 further_reading:
 - link: "/agent/"
