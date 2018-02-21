@@ -104,6 +104,20 @@ For Windows Server 2008, Vista and newer:
   * Integration configuration:
 `C:\ProgramData\Datadog\conf.d\`
 
+### Agent check directory structure
+
+The `checks.d` folder lives in your Agent root, find it at:
+
+    c:\programdata\datadog\checks.d\
+
+The other folder that you need to care about is `conf.d` which lives in the
+Agent configuration root, find it at:
+
+    C:\ProgramData\Datadog\conf.d\
+
+OR
+
+    C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\
 
 
 ## Switch between Agent v5 and v6
