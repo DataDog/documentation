@@ -66,10 +66,11 @@ If you're still having trouble, [our support team](/help) will be glad to provid
 
 ## Adding a custom python package to the agent
 
-The python version embedded with the agent is located here: `/opt/datadog-agent/embedded/bin/python`.
-The agent also comes with pip, and you can install python libraries using:
+The Python interpreter embedded with the Agent is located here:  
+`/opt/datadog-agent/embedded/bin/python`.
+The agent also comes with pip, install python libraries using:
 ```
-sudo /opt/datadog-agent/embedded/bin/pip install <package_name> .
+sudo -u dd-agent -- /opt/datadog-agent/embedded/bin/pip install <package_name>
 ```
 
 ## Switch between Agent v5 and v6

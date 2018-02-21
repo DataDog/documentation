@@ -27,9 +27,9 @@ Manage the Datadog Agent and [integrations](/integrations) using configuration m
 
 Chef, Puppet, and Ansible [integrations](/integrations) use our public APIs, so if you're interested in using another automation tool, the above could be leveraged as examples to get you started.
 
-There is also community support for Saltstack:
+There is also support for SaltStack:
 
-* Saltstack Formula - https://github.com/DataDog/datadog-formula
+* [Saltstack Formula](https://github.com/DataDog/datadog-formula)
 
 ## Configuration file
 
@@ -42,8 +42,8 @@ The configuration files and folders for the Agent are located at:
 | [Linux](/agent/basic_agent_usage/ubuntu)                                 | `/etc/dd-agent/datadog.conf`                                               | `/etc/datadog-agent/datadog.yaml`                                |
 | SmartOS                                                                  | `/opt/local/datadog/agent/datadog.conf`                                    | `n/a`                                 |
 | [Source](/agent/basic_agent_usage/source)                                | `~/.datadog-agent/agent/datadog.conf`                                      | `/etc/datadog-agent/datadog.yaml`                                |
-| [Windows Server 2008, Vista and newer](/agent/basic_agent_usage/windows) | `\\ProgramData\Datadog\datadog.conf`                                       |                                 |
-| [Windows Server 2003, XP or older](/agent/basic_agent_usage/windows)     | `\\Documents and Settings\All Users\Application Data\Datadog\datadog.conf` |                                 |
+| [Windows Server 2008, Vista and newer](/agent/basic_agent_usage/windows) | `\\ProgramData\Datadog\datadog.conf`                                       | `n/a`                                |
+| [Windows Server 2003, XP or older](/agent/basic_agent_usage/windows)     | `\\Documents and Settings\All Users\Application Data\Datadog\datadog.conf` | `n/a`                                |
 {{% /table %}}
 
 ## Log location
