@@ -135,15 +135,20 @@ languages:
           url: "/agent/docker/process_collection"
           weight: 230
           parent: customnav_agentnav_docker
+        - identifier: customnav_agentnav_docker_autodiscovery
+          name: "Autodiscovery"
+          url: "/agent/docker/autodiscovery/"
+          weight: 240
+          parent: customnav_agentnav_docker
         - identifier: customnav_agentnav_docker_jmx
           name: "JMX"
           url: "/agent/docker/jmx"
-          weight: 240
+          weight: 250
           parent: customnav_agentnav_docker
         - identifier: customnav_agentnav_docker_getting_further
           name: "Getting Further"
           url: "/agent/docker/getting_further"
-          weight: 250
+          weight: 260
           parent: customnav_agentnav_docker
 
         # Kubernetes 
