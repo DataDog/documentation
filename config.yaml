@@ -177,11 +177,6 @@ languages:
           url: "/agent/kubernetes/autodiscovery/"
           weight: 390
           parent: customnav_agentnav_kubernetes
-        - identifier: customnav_agentnav_getting_further
-          name: "Getting Further"
-          url: "/agent/kubernetes/getting_further/"
-          weight: 399
-          parent: customnav_agentnav_kubernetes
 
         # AGENT V6 - Subnav start
         - identifier: customnav_agentnav_v6

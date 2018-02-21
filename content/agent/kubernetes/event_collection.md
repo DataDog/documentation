@@ -1,6 +1,8 @@
 ---
 title: Kubernetes event collection
 kind: documentation
+aliases:
+    - /integrations/faq/gathering-kubernetes-events
 ---
 
 ## Event Collection
