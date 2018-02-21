@@ -42,7 +42,7 @@ sudo service datadog-agent check [integration] check_rate
 
 ## Configuration
 
-The configuration file for the Agent is located at:
+The configuration files and folders for the Agent are located at:
 
 | Agent v5                                  |  Agent v6                          |
 |:-----|:----|
@@ -56,7 +56,7 @@ Configuration files for [integrations](/integrations):
 
 ## Troubleshooting
 
-Run the Agent info command to see the state of the Agent.
+Run the info or status command to see the state of the Agent.
 The Agent logs are located in the `/var/log/datadog/` directory:
 
 * For Agent v6 all logs are in the `agent.log` file

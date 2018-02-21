@@ -15,7 +15,7 @@ To enable the full debug mode:
 
 - replace `# log_level: INFO` with `log_level: DEBUG` (make sure to get rid of # to uncomment the line)
 
-- restart your Datadog Agent (see [that page](/agent/faq/start-stop-restart-the-datadog-agent) to find the restart command depending on your OS)
+- restart your Datadog Agent (see [that page](/agent/#start-stop-restart-the-agent) to find the restart command depending on your OS)
 
 - wait a few minutes to generate some logs
 

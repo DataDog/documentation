@@ -144,7 +144,7 @@ The service_check method accepts the following arguments:
 ### Exceptions
 
 If a check cannot run because of improper configuration, programming error, or
-because it could not collect any metrics, it should raise a meaningful exception. This exception is logged and is shown in the Agent [info command](/agent/faq/agent-status-and-information) for easy debugging. For example:
+because it could not collect any metrics, it should raise a meaningful exception. This exception is logged and is shown in the Agent [info command](/agent/#agent-status-and-information) for easy debugging. For example:
 
     $ sudo /etc/init.d/datadog-agent info
 
@@ -351,7 +351,7 @@ def status_code_event(self, url, r, aggregation_key):
 
 The entire check would be placed into the `checks.d` folder as `http.py`. The corresponding configuration would be placed into the `conf.d` folder as `http.yaml`.
 
-Once the check is in `checks.d`, test it by running it as a python script. [Restart the Agent](/agent/faq/start-stop-restart-the-datadog-agent) for the changes to be enabled. **Make sure to change the conf.d path in the test method**. From your Agent root, run:
+Once the check is in `checks.d`, test it by running it as a python script. [Restart the Agent](/agent/#start-stop-restart-the-agent) for the changes to be enabled. **Make sure to change the conf.d path in the test method**. From your Agent root, run:
 
     PYTHONPATH=. python checks.d/http.py
 

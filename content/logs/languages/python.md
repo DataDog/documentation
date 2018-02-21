@@ -132,7 +132,7 @@ logs:
     sourcecategory: sourcecode
 ```
 
-Then [Restart the Agent](/agent/faq/start-stop-restart-the-datadog-agent) to apply the configuration change.
+Then [Restart the Agent](/agent/#start-stop-restart-the-agent) to apply the configuration change.
 
 ## Further Reading
 

@@ -63,6 +63,25 @@ The Agent can be started, stopped, and restarted from the Services panel. To vie
 
 To check if the Agent is running, check if the service status in the Services panel is listed as "Started". A process called "ddagent.exe" should also exist in the Task Manager. To receive more information about the Agent's state, visit the _status page_ by going to **Settings -> Agent Status** in Agent version 5.2 and above and by going to `http://localhost:17125/status` in Agent version 3.9.1 to 5.1.
 
+For 5.2 and later versions of the agent go to the Datadog Agent Manager->Settings->Agent Status
+
+{{< img src="agent/faq/windows_status.png" alt="Windows Status" responsive="true" popup="true">}}
+
+It's also possible to run the info command using Powershell:
+
+```
+"C:\Program Files\Datadog\Datadog Agent\embedded\python.exe" "C:\Program Files\Datadog\Datadog Agent\agent\agent.py" info
+```
+or cmd.exe:
+```
+C:\Program Files\Datadog\Datadog Agent\embedded\python.exe" "C:\Program Files\Datadog\Datadog Agent\agent\agent.py" info
+```
+
+If you're running on a version older than 5.2 visit the status page in your web browser:
+
+http://localhost:17125/status
+The status page is supported in Agent version 3.9.1-5.1.1
+
 ## Configuration
 
 ### For version >= 3.9.1
@@ -129,9 +148,54 @@ Logs for the subsystems are available in Event Viewer, under Windows Logs -> App
 If you're still having trouble, [our support team](/help) will be glad to provide further assistance.
 
 ## Adding a custom python package to the agent
-The current way to do so is to add the package in the library zipped folder that can be found at `C:\Program Files (x86)\Datadog\Datadog Agent\files`, and [restart the agent](/agent/faq/start-stop-restart-the-datadog-agent).
+The current way to do so is to add the package in the library zipped folder that can be found at `C:\Program Files (x86)\Datadog\Datadog Agent\files`, and [restart the agent](/agent/#start-stop-restart-the-agent).
 
 {{< img src="agent/faq/add_package_windows.png" alt="Add Package Windows" responsive="true" popup="true">}}
+
+### Send a flare
+
+To send Datadog support a copy of your Windows logs and configurations, do the following:
+
+1. Open the Datadog Agent Manager
+2. Select Actions
+3. Select Flare
+4. Enter your ticket number (`<CASE_ID>`)- if you don't have one leave the value as zero
+5. Lastly, enter the email address you use to log into Datadog
+
+That's it, you're done!
+
+{{< img src="agent/faq/windows_flare.jpg" alt="Windows Flare" responsive="true" popup="true" style="width:75%;">}}
+
+It's also possible to run the flare command using Powershell:
+
+```
+C:\Program Files\Datadog\Datadog Agent\embedded\python.exe" "C:\Program Files\Datadog\Datadog Agent\agent\agent.py" flare <CASE_ID>
+```
+or cmd.exe:
+```
+C:\Program Files\Datadog\Datadog Agent\embedded\python.exe" "C:\Program Files\Datadog\Datadog Agent\agent\agent.py" flare <CASE_ID>
+```
+
+#### Flare Fails to Upload
+
+On Linux and Mac OSX, the output of the flare command tells you where the compressed flare archive is saved. In case the file fails to upload to Datadog, you can retrieve it from this directory and manually add as an attachment to an email.  
+
+For Windows, you can find the location of this file by running the following from the agent's python command prompt:
+
+* Since Agent v5.12:  
+    `C:\Program Files\Datadog\Datadog Agent\dist\shell.exe since`
+
+* On older Agent version:  
+    `C:\Program Files (x86)\Datadog\Datadog Agent\files\shell.exe`
+
+```
+import tempfile
+print tempfile.gettempdir()
+```
+
+Example : 
+
+{{< img src="agent/faq/flare_fail.png" alt="Flare Fail" responsive="true" popup="true" style="width:75%;">}}
 
 ## Use Cases
 ###  Monitoring a Windows Service

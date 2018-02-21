@@ -15,9 +15,6 @@ private: true
 
 * [Network Time Protocol (NTP) Offset Issues](/agent/faq/network-time-protocol-ntp-offset-issues)
 * [How to solve Permission denied errors?](/agent/faq/how-to-solve-permission-denied-errors)
-* [Start/Stop/Restart the Datadog Agent](/agent/faq/start-stop-restart-the-datadog-agent)
-* [Agent Status and Information](/agent/faq/agent-status-and-information)
-* [Send logs and configs to Datadog via flare command](/agent/faq/send-logs-and-configs-to-datadog-via-flare-command)
 * [I have issues with my process check, it doesn't find my processes!](/agent/faq/i-have-issues-with-my-process-check-it-doesn-t-find-my-processes)
 * [How to get more logging from the agent?](/agent/faq/how-to-get-more-logging-from-the-agent)
 * [Error Restarting Agent: Already Listening on a Configured Port](/agent/faq/error-restarting-agent-already-listening-on-a-configured-port)

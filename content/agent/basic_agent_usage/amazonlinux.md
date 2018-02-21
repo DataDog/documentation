@@ -26,18 +26,8 @@ Datadog Agent has some commands and only the _lifecycle commands_ (i.e. `start`/
 | `sudo service datadog-agent info`               | `sudo datadog-agent status`             | Status page of running Agent |
 | `sudo service datadog-agent flare`              | `sudo datadog-agent flare`              | Send flare |
 | `sudo service datadog-agent`                    | `sudo datadog-agent --help`             | Display command usage |
-| `sudo -u dd-agent -- dd-agent check <check_name>` | `sudo -u dd-agent --datadog-agent check <check_name>` | Run a check |
+| `sudo -u dd-agent -- dd-agent check <check_name>` | `sudo -u dd-agent -- datadog-agent check <check_name>` | Run a check |
 {{% /table %}}
-
-More information about the metrics, events, and service checks for an [integrations](/integrations) can be retrieved with the check command:
-```shell
-sudo service datadog-agent check [integration]
-```
-
-Add the check_rate argument to get the most recent values for rates:
-```shell
-sudo service datadog-agent check [integration] check_rate
-```
 
 **NB**: If `service` is not available on your system, use:
 
@@ -47,7 +37,7 @@ sudo service datadog-agent check [integration] check_rate
 
 ## Configuration
 
-The configuration file for the Agent is located at:
+The configuration files and folders for for the Agent is located at:
 
 | Agent v5                                  |  Agent v6                          |
 |:-----|:----|
@@ -61,7 +51,7 @@ Configuration files for [integrations](/integrations):
 
 ## Troubleshooting
 
-Run the Agent info command to see the state of the Agent.
+Run the info or status command to see the state of the Agent.
 The Agent logs are located in the `/var/log/datadog/` directory:
 
 * For Agent v6 all logs are in the `agent.log` file

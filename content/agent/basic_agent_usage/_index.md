@@ -1,6 +1,10 @@
 ---
 title: Basic Agents Usage
 kind: documentation
+aliases:
+    - /guides/basic_agent_usage/
+    - /agent/faq/where-is-the-configuration-file-for-the-agent/
+    - /agent/faq/log-location
 ---
 
 {{< partial name="platforms/platforms.html" >}}
@@ -12,17 +16,14 @@ Manage the Datadog Agent and [integrations](/integrations) using configuration m
 ### Chef
 * [Chef Github project](https://github.com/DataDog/chef-datadog)
 * [Chef installation](https://app.datadoghq.com/account/settings#integrations/chef)
-* [Chef documentation](/integrations/chef)
 
 ### Puppet
 * [Puppet Github project](https://github.com/DataDog/puppet-datadog-agent)
 * [Puppet installation](https://app.datadoghq.com/account/settings#integrations/puppet)
-* [Puppet documentation](/integrations/puppet)
 
 ### Ansible
 * [Ansible Github project](https://github.com/DataDog/ansible-datadog)
 * [Ansible installation](https://app.datadoghq.com/account/settings#agent/ansible)
-* [Ansible documentation](/integrations/ansible/)
 
 Chef, Puppet, and Ansible [integrations](/integrations) use our public APIs, so if you're interested in using another automation tool, the above could be leveraged as examples to get you started.
 
@@ -32,15 +33,15 @@ There is also community support for Saltstack:
 
 ## Configuration file
 
-The configuration file for the Agent is located at:
+The configuration files and folders for the Agent are located at:
 
 {{% table responsive="true" %}}
 | OS                                                                       | Agent v5                                                                   |  Agent v6                       |
 | :-------                                                                 | :--------                                                                  | :--------                       |
 | [Mac OS X](/agent/basic_agent_usage/osx)                                 | `~/.datadog-agent/datadog.conf`                                            | `~/.datadog-agent/datadog.yaml` |
-| [Linux](/agent/basic_agent_usage/ubuntu)                                 | `/etc/dd-agent/datadog.conf`                                               |                                 |
+| [Linux](/agent/basic_agent_usage/ubuntu)                                 | `/etc/dd-agent/datadog.conf`                                               | `/etc/datadog-agent/datadog.yaml`                                |
 | SmartOS                                                                  | `/opt/local/datadog/agent/datadog.conf`                                    |                                 |
-| [Source](/agent/basic_agent_usage/source)                                | `~/.datadog-agent/agent/datadog.conf`                                      |                                 |
+| [Source](/agent/basic_agent_usage/source)                                | `~/.datadog-agent/agent/datadog.conf`                                      | `/etc/datadog-agent/datadog.yaml`                                |
 | [Windows Server 2008, Vista and newer](/agent/basic_agent_usage/windows) | `\\ProgramData\Datadog\datadog.conf`                                       |                                 |
 | [Windows Server 2003, XP or older](/agent/basic_agent_usage/windows)     | `\\Documents and Settings\All Users\Application Data\Datadog\datadog.conf` |                                 |
 {{% /table %}}
@@ -54,7 +55,7 @@ The Datadog logs do a rollover every 10MB. When a rollover occurs, one backup is
 
 ## How does Datadog determine the agent hostname?
 
-The Datadog Agent collects potential hostnames from a number of different sources. To see all the names the Agent is detecting, [run the Agent info command](/agent/faq/agent-status-and-information), for example:
+The Datadog Agent collects potential hostnames from a number of different sources. To see all the names the Agent is detecting, [run the Agent info command](/agent/#agent-status-and-information), for example:
 ```
 $ sudo /etc/init.d/datadog-agent info
 

@@ -21,7 +21,7 @@ By setting `exact_match` to **False** in your yaml file, the agent looks at the
 If you still have issues you can reach out to [us](/help) with the following files as attachments:
 
 * your process.yaml
-* the output of your agent [info](/agent/faq/agent-status-and-information)
+* the output of your agent [info](/agent/#agent-status-and-information)
 * the output of ps auwx (Windows users: tasklist /v)
 
 {{< partial name="whats-next/whats-next.html" >}}

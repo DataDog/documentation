@@ -32,7 +32,7 @@ If the Agent is deployed you will see output similar to the text below, where de
 
 #### Agent check running
 
-[Run the Agent's `info` subcommand](/agent/faq/agent-status-and-information) and look for `kubernetes` under the Checks section:
+[Run the Agent's `info` subcommand](/agent/#agent-status-and-information) and look for `kubernetes` under the Checks section:
 
     Checks
     ======

@@ -61,7 +61,7 @@ use_dogstatsd: yes
 dogstatsd_port: 8125
 ```
 
-Then [restart your agent](/agent/faq/start-stop-restart-the-datadog-agent).
+Then [restart your agent](/agent/#start-stop-restart-the-agent).
 
 Once done, your application can reliably reach the [DogStatsD client library][2] for your application language and you'll be ready to start hacking. You _can_ use any generic StatsD client to send metrics to DogStatsD, but you won't be able to use any of the Datadog-specific features mentioned above.
 
@@ -70,7 +70,7 @@ By default, DogStatsD listens on UDP port **8125**. If you need to change this, 
     # Make sure your client is sending to the same port.
     dogstatsd_port: 8125
 
-[Restart DogStatsD](/agent/faq/start-stop-restart-the-datadog-agent) to effect the change.
+[Restart DogStatsD](/agent/#start-stop-restart-the-agent) to effect the change.
 
 ## Data Types
 
