@@ -3,7 +3,7 @@ title: "Getting started: Distributed Tracing "
 kind: documentation
 ---
 
-If you have read the [first example of tracing](/tracing) and you want to understand deeper how tracing works, let's take the following example which represents a simple API **thinker-api** and a micro-service behind it **thinker-microservice**. When the API receives a request with the correct *subject* parameter, it responds with a *thought*, otherwise, it responds with an error:
+If you have read the [first example of tracing](/tracing) and want to more deeply understand how tracing works, let's take the following example which represents a simple API **thinker-api** and a micro-service behind it **thinker-microservice**. When the API receives a request with the correct *subject* parameter, it responds with a *thought*, otherwise, it responds with an error:
 
 {{< img src="tracing/miscellaneous/getting_started_distributed/tracing_overview_GS.jpg" alt="Tracing getting started overview" responsive="true" popup="true">}}
 
@@ -111,11 +111,11 @@ The code above is already instrumented. Please [refer to the dedicated setup doc
 
 ### Datadog APM
 
-Once this code is executed, [traces](tracing/services/trace/) and statistics are collected by the Agent and send to a Datadog platform in the [services list page](/tracing/services) where there are now two services: **thinker-api** and **thinker-microservice** reporting.
+Once the code is executed, we start to see data in [APM](https://app.datadoghq.com/apm/home). On the [Service List](/tracing/service), our two services, **thinker-api** and **thinker-microservice**, have appeared with some metrics about their performance:
 
 {{< img src="tracing/miscellaneous/getting_started_distributed/services_GS.png" alt="Services list getting started" responsive="true" popup="true">}}
 
-Clicking on **thinker-api** service, directs you to its dedicated [service page](/tracing/services/service), where there are:
+Clicking on **thinker-api** directs you to it's automatically generated [service dashboard](/tracing/services/service). Here we can see more detailed performance data, as well as a list of all of the resources associated with this particular service:
 
 * [Graphs illustrating service performance](/tracing/services/service/#out-of-the-box-graphs)
 * [A list of resources](/tracing/services/resource) attached to this particular service:
@@ -124,7 +124,7 @@ Clicking on **thinker-api** service, directs you to its dedicated [service page]
 
 The first function executed in this example is `think_handler()`, which handles the request and forwards it to the **thinker-microservice** service.
 
-Selecting the **thinker_handler** resource directs you to its dedicated [resource page](/tracing/services/resource), where there are:
+Selecting the **thinker_handler** resource directs you to it's automatically generated [resource dashboard](/tracing/services/resource) and a list of traces for this particular resource:
 
 * [Graphs illustrating resource performances](/tracing/services/resource/#out-of-the-box-graphs)
 * [A list of sampled traces](/tracing/product_specs/trace_sampling_and_storage) attached to this particular resource:

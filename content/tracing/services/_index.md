@@ -23,13 +23,13 @@ The services list is a bird's eyed view of all [services](/tracing/services/serv
 
 * [Your environment](/tracing/setup/environment)
 * [Your service type](#services-types)
-* A query
+* A query (basic text filtering).
 
 {{< img src="tracing/services/services_filtering.gif" alt="Services filtering" responsive="true" popup="true" style="width:75%;">}}
 
 ### Services types
 
-Every Service monitored by your application is associated with a "Type". This type is automatically determined by Datadog based on your Service name and is applied for you. The "Type" specified the name of the application/framework the Datadog Agent is Integrating with.
+Every Service monitored by your application is associated with a "Type". This type is automatically determined by Datadog based on the `span.type` attribute attached to your [Spans](/tracing/service/trace/#spans). The "Type" specified the name of the application/framework the Datadog Agent is Integrating with.
 
 For example, if you are using the official Flask Integration, the "Type" is set to "Web". If you are monitoring a custom application, the "Type" appears as "Custom".
 

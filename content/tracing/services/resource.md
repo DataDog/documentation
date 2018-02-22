@@ -25,14 +25,15 @@ Resource names:
 
 * **must be lowercase, alphanumeric characters**
 * **cannot exceed 5000 bytes**
-* **contain spaces** (spaces are replaced with underscores)
-* Must adhere to [metric naming rules](/developers/metrics/).
 
 ### Resource Cardinality
 
-When a resource such as URL or SQL query cannot be aggregated, it significantly increases the cardinality of resources (ie. the number of unique aggregate resources) to be stored in Datadog. 
+When a resource such as URL or SQL query cannot be aggregated, it significantly increases the cardinality of resources (ie. the number of unique aggregate resources) to be stored in Datadog.  
 
-Having a very high cardinality of resources is not useful and becomes difficult to deal with on the Datadog side as each aggregate resources needs to be stored.
+Having a very high cardinality of resources makes Datadog less usable:
+
+* Lots of entry in the resource list is not optimal for navigation
+* Statistics are less relevant (as they are too fragmented)
 
 As a result we have a hard limit on the cardinality of resources for a given service.
 
@@ -49,7 +50,7 @@ Datadog provides out of the box graphs for any given Resource:
     * The **Total amount of errors** 
     * The amount of **Errors per second** 
     * The **% Error Rate** 
-* Sub-Services: When there is multiple service involved a 4th graph is available that breaks down your **Total time spent**/**%of time spent**/**Avg time per request** of your service by *services* or *type*.
+* Sub-Services: When there is multiple service involved a 4th graph is available that breaks down your **Total time spent**/**%of time spent**/**Avg time per request** of your service by *services* or *type*. For services like *Postgres* or *Redis*, which are "final" operations not calling other service underneath, there will be no Sub-services graph.
 
 {{< img src="tracing/services/resource/resource_otb_graphs.png" alt="Out of the bow resource graphs" responsive="true" popup="true" style="width:90%;">}}
 
@@ -65,7 +66,11 @@ In addition to all those graph there is a resource latency distribution graph
 
 {{< img src="tracing/services/resource/resource_latency_distribution.png" alt="Latency distribution" responsive="true" popup="true" style="width:90%;">}}
 
-Zoom on this graph to filter corresponding traces
+Use the top right selector of this graph to zoom on a given percentile of latency distribution:
+
+{{< img src="tracing/services/service/latency_distribution_selector.png" alt="latency distribution selector" responsive="true" popup="true" style="width:20%;">}}
+
+Zoom on this graph to filter corresponding traces.
 
 ## Traces
 

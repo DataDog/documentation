@@ -461,7 +461,7 @@ languages:
 
         # Tracing Product Specs
         - identifier: customnav_tracingnav_product_specs
-          name: "Product specs"
+          name: "Product Specs"
           url: "/tracing/product_specs/"
           weight: 40
           parent: menu_references_tracing

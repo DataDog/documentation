@@ -1,5 +1,5 @@
 ---
-title: Traces sampling and storage
+title: Trace Sampling and Storage
 kind: documentation
 aliases:
     - /tracing/faq/traces-sampling-and-storage/

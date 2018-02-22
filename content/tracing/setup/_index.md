@@ -35,10 +35,11 @@ To start tracing your application:
   * On **macOS** and **Windows**, install and run the [Trace Agent](https://github.com/DataDog/datadog-trace-agent) in addition to the Datadog Agent.  
   See the [macOS Trace Agent](https://github.com/DataDog/datadog-trace-agent#run-on-osx) and [Windows Trace Agent](https://github.com/DataDog/datadog-trace-agent/#run-on-windows) dedicated documentation.  
 
-    On Heroku, Deploy the Datadog Trace Agent via the [Datadog Heroku Buildpack](https://github.com/DataDog/heroku-buildpack-datadog).  
+  * On Heroku, Deploy the Datadog Trace Agent via the [Datadog Heroku Buildpack](https://github.com/DataDog/heroku-buildpack-datadog).  
 
 3. **Configure your environment**:  
-  Environment is an important notion for the APM product, configure it in your Datadog Agent in order to benefit from all Datadog functionalities. [Learn how to so with the environment dedicated setup documentation](/tracing/setup/environment).
+  An environment is a first class dimension used to scope a whole Datadog APM application. A common use case is to disaggregate metrics from stage environments such as production, staging, and pre-production. [Learn how to configure environments](/tracing/setup/environment).  
+  **Note**: if you do not configure your own environments, all data will default to `env:none`.
 
 4. **Instrument your application**:   
   Select one of the following supported languages:
@@ -54,7 +55,7 @@ To start tracing your application:
 
 On Linux and Docker the Datadog Agent uses the [configuration file](/agent/faq/where-is-the-configuration-file-for-the-agent) for both infrastructure monitoring and APM configuration options.
 
-Additionally, some configuration options may be set as environment variables. Note that options set as environment variables overrides the settings defined in the configuration file.
+Additionally, some configuration options may be set as environment variables. Note that options set as environment variables override the settings defined in the configuration file.
 
 {{% table responsive="true" %}}
 | File setting            | Environment variable | Description                                                                                                                                                      |
@@ -77,7 +78,7 @@ For more information about the Datadog Agent, see the [dedicated doc page](/agen
 
 We have a Flask Python application that when called on `/doc` returns **42**
 
-We [instrumented our python code](/tracing/setup) in order to generate traces from it:
+We instrumented our python code in order to generate traces from it:
 
 ```python
 import time
@@ -110,7 +111,12 @@ Each time its called, the following code produces this **trace**:
 
 {{< img src="tracing/simple_trace.png" alt="Simple Trace" responsive="true" popup="true">}}
 
-[Learn more about traces with the dedicated Trace documentation](/tracing/services/trace)
+|Term|Definition|Note|
+|:----|:-----|:---|
+|[Service](/tracing/services/service)|Name of a set of processes that do the same job| Services are displayed on the [Datadog Services list](/tracing/services) and have [out of the box performances graphs](/tracing/services/service/#out-of-the-box-graphs).|
+|[Resource](/tracing/services/resource)|Particular action for a service|Resources are available on the [Resources list for each service](/tracing/services/service/#resources) and have [out of the box performances graphs](/tracing/services/resource/#out-of-the-box-graphs)|
+|[Trace](/tracing/services/trace)|Representation of a request as it flows across a distributed system| A trace can be collected in [any language](/tracing/setup). Traces are found in the [Traces list for each resources](/tracing/services/resource/#traces) or in the [Trace search directly](/tracing/traces)|
+|[Span](/tracing/services/trace/#spans) |A logical unit of work in the system| Spans are associated with a [Service](/tracing/services/service) and optionally a [Resource](/tracing/services/resource). Each span consists of a start time, a duration, and optional tags.|
 
 ## Further Reading
 

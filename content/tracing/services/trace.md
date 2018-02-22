@@ -14,7 +14,7 @@ further_reading:
 
 ### Trace
 
-**A trace is used to track the time spent by an application processing a single operation, Each trace consists of one or more spans.**  
+**A trace is used to track the time spent by an application processing a single operation, each trace consists of one or more spans.**  
 
 For example, a trace can be used to track the entire time spent processing a complicated web request. Even though the request may require multiple resources and machines to handle the request, all of these function calls and sub-requests would be encapsulated within a single trace.
 
@@ -24,20 +24,20 @@ For example, a trace can be used to track the entire time spent processing a com
 
 Spans are associated with a [Service](/tracing/services/service) and optionally a [resource](/tracing/services/resource). Each span consists of a start time, a duration, and optional tags. For example, a span can describe the time spent on a distributed call on a separate machine, or the time spent in a small component within a larger operation. Spans can be nested within each other, and in those instances will have a parent-child relationship.
 
-## Trace in datadog
+## Trace in Datadog
 
 Selecting a trace offers you the list of spans associated to it with a flame graph display:
 
 {{< img src="tracing/services/trace/trace.png" alt="Trace" responsive="true" popup="true" style="width:90%;">}}
 
-Select between **Service** or **Host** break down:
+Select between **Service** or **Host** break down to group your graphs and stats accordingly:
 
 * **Service**: show all span associated services
 * **Host**: show all spans associated hots
 
 {{< img src="tracing/services/trace/service_host_display.png" alt="Service host display" responsive="true" popup="true" style="width:40%;">}}
 
-You can switch to a list display in order to have all insights at onces on your spans:
+Switch to a list display in order to displaying all resources at a glance:
 
 {{< img src="tracing/services/trace/trace_list.png" alt="Trace list" responsive="true" popup="true" style="width:90%;">}}
 

@@ -1,12 +1,12 @@
 ---
-title: Traces metrics namespace
+title: Trace Metrics Namespace
 kind: documentation
 ---
 
 The trace metrics namespace is `trace.<name>.<metrics>{<tags>}` where
 
-* `<name>` is coming from the name of the integration ("redis", "pylons", etc.)
+* `<name>`: is the name of the operation i.e. the `span.name`: (*redis.command*, *pylons.request*, *rails.request*, *mysql.query*)
 * `<metrics>` is about the hits, errors or latency ("request.hits", etc.)
-* `<tags` the metrics are tagged by service & resource.
+* `<tags>` the metrics are tagged by service & resource.
 
-So for pylons it might be `trace.pylons.request.hits{service:mcnulty}`.
+So for pylons it might be `trace.pylons.request.hits{service:web_server}`.
