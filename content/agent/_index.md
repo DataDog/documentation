@@ -16,41 +16,38 @@ aliases:
 ## What is the Agent?
 
 The Datadog Agent is a piece of software that runs on your hosts. Its job is to faithfully collect events and metrics and bring them to Datadog on
-your behalf so that you can do something useful with your monitoring and performance data. The Datadog Agent is open-sourced. You may view the source code on GitHub for [Agent v5](https://github.com/DataDog/dd-agent) and [Agent v6](https://github.com/DataDog/datadog-agent). To see all changes between Agent v5 and v6, [consult our dedicated changes documentation](https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md).
+your behalf so that you can do something useful with your monitoring and performance data. The Datadog Agent is open-source, view the source code on GitHub for [Agent v5](https://github.com/DataDog/dd-agent) and [Agent v6](https://github.com/DataDog/datadog-agent). To see all changes between Agent v5 and v6, [consult our dedicated changes documentation](https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md).
 
 {{< partial name="platforms/platforms.html" >}}
 
-## Start/Stop/Restart the agent 
-### Start the agent
+## Start/Stop/Restart the Agent 
+### Start the Agent
 
 |Platform|Agent v5 |Agent v6|
 |:--------|:-----|:--------|
 |Linux|`sudo service datadog-agent start`|`sudo service datadog-agent start`|
 |MacOS x|`/usr/local/bin/datadog-agent start`|`launchctl start com.datadoghq.agent` or systray app |
-|SmartOS|`svcadm enable datadog`|`n/a`|
 |Source|`sudo ~/.datadog-agent/bin/agent start`|`sudo service datadog-agent start`|
 |Windows|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows)|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows)|
 
-### Stop the agent
+### Stop the Agent
 
 |Platform|Agent v5 |Agent v6|
 |:--------|:-----|:--------|
 |Linux|`sudo service datadog-agent stop`|`sudo service datadog-agent stop`|
 |MacOS x|`/usr/local/bin/datadog-agent stop` |`launchctl stop com.datadoghq.agent` or systray app  |
-|SmartOS|`svcadm disable datadog`|`n/a`|
 |Source|`sudo ~/.datadog-agent/bin/agent stop`|`sudo service datadog-agent stop`|
 |Windows|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows)|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows)|
-### Restart the agent 
+### Restart the Agent 
 
 |Platform|Agent v5 |Agent v6|
 |:--------|:-----|:--------|
 |Linux|`sudo service datadog-agent restart`|`sudo service datadog-agent restart`|
 |MacOS x|`/usr/local/bin/datadog-agent restart `|_run `stop` then `start`_ or systray app|
-|SmartOS|`svcadm restart datadog`|`sudo service datadog-agent restart`|
 |Source|`sudo ~/.datadog-agent/bin/agent restart`|`n/a`|
 |Windows|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows)|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows)|
 
-## Agent Status and information
+## Agent Status and Information
 
 ### Agent Status
 
@@ -59,15 +56,14 @@ your behalf so that you can do something useful with your monitoring and perform
 |Linux|`sudo service datadog-agent status`|`sudo datadog-agent status`|
 |Docker|`sudo docker exec -it dd-agent /etc/init.d/datadog-agent status`|`n/a`|
 |MacOS x|`datadog-agent status`             | `launchctl list com.datadoghq.agent` or systray app|
-|SmartOS|`svcs datadog`|`n/a`|
 |Source|`sudo ~/.datadog-agent/bin/agent status`|`sudo service datadog-agent status`|
 |Windows|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows/#status-and-information)|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows/#status-and-information)|
 
-### Agent information
+### Agent Information
 
-Running an info command displays the status of your Datadog agent, and the status of all integrations enabled for this Agent:
+Running an info command displays the status of your Datadog agent and enabled integrations.
 
-An Agent integration reports “OK” if it's properly configured as seen below:
+A properly configured integration will report "OK" as seen below:
 
 ```
   Checks
@@ -87,7 +83,6 @@ The `[OK]` in the Agent output implies that the check was configured/run correct
 |Docker|`sudo docker exec -it dd-agent /etc/init.d/datadog-agent info`|`n/a`|
 |Docker (Alpine)|`docker exec -it dd-agent /opt/datadog-agent/bin/agent`|`n/a`|
 |MacOS x|`datadog-agent info`               | `datadog-agent status` or [web GUI](/agent/v6/#using-the-gui)                    |
-|SmartOS|`/opt/local/datadog/bin/info`|`n/a`|
 |Source|`sudo ~/.datadog-agent/bin/info`|`sudo datadog-agent status`|
 |Windows|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows/#status-and-information)|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows/#status-and-information)|
 

@@ -80,8 +80,7 @@ A script is available to automatically install or upgrade the new Agent. It sets
 #### One-step install
 ##### To Upgrade
 
-In case you have an Agent version 5.17 or later and you want to import the
-existing configuration:
+The Agent 6.x installer can automatically convert your 5.x style agent configuration at upgrade:
 
 ```shell
  DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
@@ -106,14 +105,14 @@ To install on a clean box (or have an existing agent 5 install from which you do
     sudo apt-get install apt-transport-https
     ```
 
-2. Add the beta repo to your system and import the datadog gpg key
+2. Add the repository to your system and import the Datadog gpg key
 
     ```shell
     echo 'deb https://apt.datadoghq.com/ beta main' | sudo tee /etc/apt/sources.list.d/datadog-beta.list
     sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 C7A7DA52
     ```
 
-3. Update Apt and Install the agent
+3. Update APT and Install the agent
 
     ```shell
     sudo apt-get update

@@ -55,7 +55,7 @@ Datadog Docker agent collects automatically common tags from [Docker](https://gi
 - `DD_DOCKER_ENV_AS_TAGS` : extract docker container environment variables
 - `DD_KUBERNETES_POD_LABELS_AS_TAGS` : extract pod labels
 
-Define them in your custom `datadog.yaml`, or set them as JSON maps in these envvars. The map key is the source (label/envvar) name, and the map value the datadog tag name.
+Define them in your custom `datadog.yaml`, or set them as JSON maps in these envvars. The map key is the source (label/envvar) name, and the map value the Datadogtag name.
 
 ```
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app","release":"helm_release"}'

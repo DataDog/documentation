@@ -76,8 +76,7 @@ A script is available to automatically install or upgrade the new Agent. It sets
 #### One-step install
 ##### To Upgrade
 
-In case you have an Agent version 5.17 or later and you want to import the
-existing configuration:
+The Agent 6.x installer can automatically convert your 5.x style agent configuration at upgrade:  
 
 ```shell
  DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"

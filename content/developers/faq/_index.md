@@ -43,7 +43,7 @@ private: true
 
 ### Libraries and Community Contributions
 
-* [OmniOS (and possibly SmartOS/OpenIndiana/Nexenta): install from source by tweaking the agent install script ](/developers/faq/omnios-and-possibly-smartos-openindiana-nexenta-install-from-source-by-tweaking-the-agent-install-script)
+* [OmniOS (and possibly OpenIndiana/Nexenta): install from source by tweaking the agent install script ](/developers/faq/omnios-and-possibly-smartos-openindiana-nexenta-install-from-source-by-tweaking-the-agent-install-script)
 * [Is it possible to integrate with ThousandEyes?](/developers/faq/is-it-possible-to-integrate-with-thousandeyes)
 * [Deploying the Agent on RaspberryPI](/developers/faq/deploying-the-agent-on-raspberrypi)
 * [How to Monitor Logs with Loggly Live Tail and Datadog](/developers/faq/how-to-monitor-logs-with-loggly-live-tail-and-datadog)

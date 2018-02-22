@@ -13,23 +13,21 @@ aliases:
 
 Manage the Datadog Agent and [integrations](/integrations) using configuration management tools:
 
-### Chef
+### Chef Cookbook
 * [Chef Github project](https://github.com/DataDog/chef-datadog)
-* [Chef installation](https://app.datadoghq.com/account/settings#integrations/chef)
+* [Installing Datadog Agent with Chef](https://app.datadoghq.com/account/settings#integrations/chef)
 
 ### Puppet
 * [Puppet Github project](https://github.com/DataDog/puppet-datadog-agent)
-* [Puppet installation](https://app.datadoghq.com/account/settings#integrations/puppet)
+* [Installing Datadog Agent with Puppet](https://app.datadoghq.com/account/settings#integrations/puppet)
 
 ### Ansible
 * [Ansible Github project](https://github.com/DataDog/ansible-datadog)
-* [Ansible installation](https://app.datadoghq.com/account/settings#agent/ansible)
+* [Installing Datadog Agent with Ansible](https://app.datadoghq.com/account/settings#agent/ansible)
 
-Chef, Puppet, and Ansible [integrations](/integrations) use our public APIs, so if you're interested in using another automation tool, the above could be leveraged as examples to get you started.
+### SaltStack
 
-There is also support for SaltStack:
-
-* [Saltstack Formula](https://github.com/DataDog/datadog-formula)
+* [Installing Datadog Agent with Saltstack](https://github.com/DataDog/datadog-formula)
 
 ## Configuration file
 
@@ -40,7 +38,6 @@ The configuration files and folders for the Agent are located at:
 | :-------                                                                 | :--------                                                                  | :--------                       |
 | [Mac OS X](/agent/basic_agent_usage/osx)                                 | `~/.datadog-agent/datadog.conf`                                            | `~/.datadog-agent/datadog.yaml` |
 | [Linux](/agent/basic_agent_usage/ubuntu)                                 | `/etc/dd-agent/datadog.conf`                                               | `/etc/datadog-agent/datadog.yaml`                                |
-| SmartOS                                                                  | `/opt/local/datadog/agent/datadog.conf`                                    | `n/a`                                 |
 | [Source](/agent/basic_agent_usage/source)                                | `~/.datadog-agent/agent/datadog.conf`                                      | `/etc/datadog-agent/datadog.yaml`                                |
 | [Windows Server 2008, Vista and newer](/agent/basic_agent_usage/windows) | `\\ProgramData\Datadog\datadog.conf`                                       | `n/a`                                |
 | [Windows Server 2003, XP or older](/agent/basic_agent_usage/windows)     | `\\Documents and Settings\All Users\Application Data\Datadog\datadog.conf` | `n/a`                                |

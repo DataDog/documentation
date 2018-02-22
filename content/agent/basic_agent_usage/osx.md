@@ -72,7 +72,7 @@ You can either download the DMG package and install it manually, or use the one-
 
 ### Manual installation
 
-1. Download the DMG package of the latest beta version, use the latest macOS release listed on the [release page](https://github.com/DataDog/datadog-agent/releases) of the repo
+1. Download the DMG package of the latest Agent version, use the latest macOS release listed on the [release page](https://github.com/DataDog/datadog-agent/releases) of the repository
 2. Install the DMG package
 3. Add your api key to `/opt/datadog-agent/etc/datadog.yaml`
 
@@ -80,8 +80,7 @@ Then start the Datadog Agent app (once started, you should see it in the system 
 ### Install script
 #### To Upgrade
 
-In case you have an Agent version 5 and you want to import the existing
-configuration:
+The Agent 6.x installer can automatically convert your 5.x style agent configuration at upgrade:  
 
 ```shell
   DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_mac_os.sh)"
