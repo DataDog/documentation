@@ -10,7 +10,7 @@ variables:
   LIVE_DOMAIN: "https://docs.datadoghq.com/"
   PREVIEW_DOMAIN: "https://docs-staging.datadoghq.com/"
 
-image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/corp-ci:latest
+image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:latest
 
 # ================== copy scripts =============== #
 before_script:
