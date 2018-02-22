@@ -20,7 +20,7 @@ Datadog APM computes aggregate statistics over all the traces instrumented, rega
 * Breakdown of time spent by service/type
 * [Apdex score](/tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm) (web services only)
 
-{{< img src="tracing/miscellaneous/sampling_stats.png" alt="Aggregate statistics are generated on un-sampled data." responsive="true" popup="true" style="width:90%;">}}
+{{< img src="tracing/product_specs/trace_sampling_storage/sampling_stats.png" alt="Aggregate statistics are generated on un-sampled data." responsive="true" popup="true" style="width:90%;">}}
 
 ### Traces
 
@@ -32,7 +32,7 @@ To ensure keeping a representative sample set of traces, Datadog combines multip
 
 * **Client sampling**: Allows reduction of instrumentation overhead by only instrumenting a configurable percentage of the transactions. By default, it is disabled.
 
-{{< img src="tracing/miscellaneous/sampling_trace.png" alt="Individual traces are sampled at the agent, server, and client level." responsive="true" popup="true" style="width:90%;">}}
+{{< img src="tracing/product_specs/trace_sampling_storage/sampling_trace.png" alt="Individual traces are sampled at the agent, server, and client level." responsive="true" popup="true" style="width:90%;">}}
 
 ### Signature Sampling
 
