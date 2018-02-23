@@ -27,7 +27,9 @@ First off, ensure you've properly installed the [Agent][3] on your machine. If y
 
 ## Agent Check Interface
 
-All custom checks inherit from the `AgentCheck` class found in `checks/__init__.py` and require a `check()` method that takes one argument, `instance` which is a `dict` having the configuration of a particular instance. The `check` method is run once per instance defined in the check configuration (discussed later).
+All custom checks inherit from the `AgentCheck` class found in `checks/__init__.py` and require a `check()` method that takes one argument, `instance` which is a `dict` having the configuration of a particular instance. The `check` method is run once per instance defined in the check configuration (discussed later).  
+
+**Note**: Custom Checks aren't able to import modules by default, all your code should be in one single file.
 
 ### `AgentCheck` interface for Agent v6
 
