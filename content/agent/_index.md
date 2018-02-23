@@ -10,7 +10,7 @@ aliases:
 ---
 
 <div class="alert alert-info">
-    Agent v6 is now available, <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md">upgrade to the newest version </a> to benefit from all new functionalities 
+    Agent v6 is now available, <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md">upgrade to the newest version </a> to benefit from all new functionality.
 </div>
 
 ## What is the Agent?
@@ -49,7 +49,7 @@ your behalf so that you can do something useful with your monitoring and perform
 
 ## Agent Status and Information
 
-### Agent Status
+### Service status
 
 |Platform|Agent v5 |Agent v6|
 |:--------|:-----|:--------|
@@ -96,7 +96,7 @@ If you're still unsure about the issue, you may reach out to [Datadog support te
 
 ### Get more logging from the agent
 
-To enable the full debug mode:
+To enable full debug mode:
 
 1. Modify your local `datadog.yaml` file (see [this page](/agent/v6/#configuration-file) to locate this configuration file on your instance)
 

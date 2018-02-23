@@ -79,7 +79,7 @@ If you're still having trouble, [our support team](/help) will be glad to provid
 ## Switch between Agent v5 and v6
 ### Upgrade to Agent 6
 
-A script is available to automatically install or upgrade the new Agent. It sets up the repos and install the package for you; in case of upgrade, the import tool also searches for an existing `datadog.conf` from a prior version and converts Agent and checks configurations according to the new file format and filesystem layout.
+A script is available to automatically install or upgrade the new Agent. It sets up the repos and installs the package for you; in case of upgrade, the import tool also searches for an existing `datadog.conf` from a prior version and converts Agent and checks configurations according to the new file format and filesystem layout.
 #### One-step install
 ##### To Upgrade
 

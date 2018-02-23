@@ -7,7 +7,7 @@ aliases:
 
 <div class="alert alert-info">
 This documentation covers Agent <strong>versions prior to 6.0.0</strong><br>
-Agent v6 is now available, <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md">upgrade to the newest version </a> to benefit from all new functionalities 
+Agent v6 is now available, <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md">upgrade to the newest version </a> to benefit from all new functionality. 
 </div>
 
 Log files contain tons of valuable application and business data.

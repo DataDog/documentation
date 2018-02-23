@@ -14,7 +14,8 @@ If you haven't installed the Agent yet, instructions can be found
 
 ## Commands
 
-Datadog Agent has some commands and only the _lifecycle commands_ (i.e. `start`/`stop`/`restart`/`status` on the Agent service) should be run with `sudo service`/`sudo initctl`/`sudo systemctl`, all other commands need to be run with the `datadog-agent` command.
+The service manager provided by the operating system is responsible for the Agent lifecycle: depending on which one is installed, `sudo service`, `sudo initctl` or `sudo systemctl` should be used to `start`, `stop` or `restart` the Agent.  
+Other functionalities are provided by the Agent binary itself, globally available through the command `datadog-agent`: it's the case for example of the `status` and `flare` commands.
 
 {{% table responsive="true" %}}
 | Agent v5                                  |  Agent v6                          | Notes
@@ -37,7 +38,7 @@ Datadog Agent has some commands and only the _lifecycle commands_ (i.e. `start`/
 
 ## Configuration
 
-The configuration files and folders for for the Agent is located at:
+The configuration files and folders for for the Agent are located at:
 
 | Agent v5                                  |  Agent v6                          |
 |:-----|:----|
@@ -76,7 +77,7 @@ sudo -u dd-agent -- /opt/datadog-agent/embedded/bin/pip install <package_name>
 ## Switch between Agent v5 and v6
 ### Upgrade to Agent 6
 
-A script is available to automatically install or upgrade the new Agent. It sets up the repos and install the package for you; in case of upgrade, the import tool also searches for an existing `datadog.conf` from a prior version and converts Agent and checks configurations according to the new file format and filesystem layout.
+A script is available to automatically install or upgrade the new Agent. It sets up the repos and installs the package for you; in case of upgrade, the import tool also searches for an existing `datadog.conf` from a prior version and converts Agent and checks configurations according to the new file format and filesystem layout.
 #### One-step install
 ##### To Upgrade
 
@@ -127,7 +128,7 @@ To install on a clean box (or have an existing agent 5 install from which you do
     sudo apt-get install apt-transport-https
     ```
 
-2. Remove Beta Repo and Ensure the stable repo is present
+2. Remove the repository and Ensure the stable repository is present
 
     ```shell
     sudo rm /etc/apt/sources.list.d/datadog-beta.list [ ! -f /etc/apt/sources.list.d/datadog.list ] &&  echo 'deb https://apt.datadoghq.com/ stable main' | sudo tee /etc/apt/sources.list.d/datadog.list
