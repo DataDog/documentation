@@ -265,7 +265,7 @@ public class MyClass {
 *Note:* Many application servers are Servlet compatible, such as Tomcat, Jetty, Websphere, Weblogic, etc.
 Also, frameworks like Spring Boot and Dropwizard inherently work because they use a Servlet compatible embedded application server.
 
-Don't see your desired networking framework? We're continually adding additional support, [check with our team](/help) to see if we can help.
+Don't see your desired web frameworks? We're continually adding additional support, [check with our team](/help) to see if we can help.
 
 ### Networking Frameworks
 
@@ -302,7 +302,7 @@ Don't see your desired networking framework? We're continually adding additional
 *  Oracle
 *  Postgres SQL
 
-Don't see your desired networking framework? We're continually adding additional support, [check with our team](/help) to see if we can help.
+Don't see your desired datastores? We're continually adding additional support, [check with our team](/help) to see if we can help.
 
 ## Further Reading
 
