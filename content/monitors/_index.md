@@ -4,6 +4,7 @@ kind: documentation
 aliases:
     - /guides/monitors/
     - /guides/monitoring/
+    - /guides/alerting/
 description: Create & manage your notifications
 ---
 
