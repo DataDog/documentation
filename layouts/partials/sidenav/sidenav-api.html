@@ -5,14 +5,25 @@
             <div class="sidenav-nav">
                 <ul class="list-unstyled">
                     {{ range $index, $element := sort (where .Site.Pages "Type" "=" "apicontent") "Params.order" }}
-                    {{ if (or (in (string $element.Params.order) ".") (eq $index 0)) }}
 
+                    {{ if (or (in (string $element.Params.order) ".") (eq $index 0)) }}
+                        <!-- display nested items in nav, ones with . in order -->
+                        <li>
+                            <a href="#{{ lower (replace $element.Title " " "-") }}">
+                                <span>{{ $element.Title }}</span>
+                            </a>
+                        </li>
                     {{ else }}
-                    <li>
-                        <a href="#{{ lower (replace $element.Title " " "-") }}">
-                        <span>{{ $element.Title }}</span>
-                        </a>
-                    </li>
+                        <!-- display top level items in nav, ones without . in order -->
+                        {{ if (ne $index 1) }}
+                            </ul>
+                            </li>
+                        {{ end }}
+                        <li>
+                            <a href="#{{ lower (replace $element.Title " " "-") }}">
+                                <span>{{ $element.Title }}</span>
+                            </a>
+                            <ul>
                     {{ end }}
                     {{ end }}
                 </ul>
