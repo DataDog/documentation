@@ -3,7 +3,6 @@ title: Tagging
 kind: documentation
 aliases:
   - /guides/tagging/
-  - /agent/tagging/
 ---
 
 ## Overview
@@ -47,7 +46,7 @@ The following [integrations](/integrations) sources create tags automatically in
 | [Consul](/integrations/consul)                                        | Previous and Current Consul Leaders and Followers, Consul Datacenter,  Service Name, Service ID|
 | [CouchDB](/integrations/couchdb)                                      | Database Name,  Instance Name|
 | [CouchBase](/integrations/couchbase)                                  | CouchBase Tags,  Instance Name|
-| [Docker](/integrations/docker)                                        | Docker Container and Image Name, Container Command, Container Labels|
+| [Docker](/integrations/docker)                                        | [Docker](https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go), [Kubernetes](https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go), [ECS](https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go), [Swarm, Mesos, Nomad and Rancher](https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go), collect more tag with [the Docker Agent tags collection options](/agent/basic_agent_usage/docker/#tagging)|
 | [Dyn](/integrations/dyn)                                              | Zone, Record Type|
 | [Elasticsearch](/integrations/elastic)                                | Cluster Name,  Host Name, Port Number|
 | [Etcd](/integrations/etcd)                                            | State Leader or Follower|

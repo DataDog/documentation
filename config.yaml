@@ -165,32 +165,39 @@ languages:
           url: "/agent/process_collection/kubernetes_process_collection"
           weight: 420
           parent: process_collection
+          
+          # Tagging
+        - identifier: customnav_developersnav_tagging
+          name: "Tagging"
+          url: "/agent/tagging/"
+          weight: 50
+          parent: menu_references_agent
 
         # Advanced Features
         - identifier: advanced_features
           name: "Advanced Features"
           url: "/agent/advanced_features/"
-          weight: 50
+          weight: 60
           parent: menu_references_agent
         - identifier: autodiscovery
           name: "Autodiscovery"
           url: "/agent/advanced_features/autodiscovery"
-          weight: 510
+          weight: 610
           parent: advanced_features
         - identifier: proxy
           name: "Proxy"
           url: "/agent/advanced_features/proxy"
-          weight: 520
+          weight: 620
           parent: advanced_features
         - identifier: agent_checks
           name: "Agent Checks"
           url: "/agent/advanced_features/agent_checks"
-          weight: 520
+          weight: 630
           parent: advanced_features
         - identifier: prometheus
           name: "Prometheus Checks"
           url: "/agent/advanced_features/prometheus"
-          weight: 530
+          weight: 640
           parent: advanced_features
 
         # Troubleshooting
@@ -562,15 +569,10 @@ languages:
           url: "/developers/metrics/"
           weight: 50
           parent: menu_references_developers
-        - identifier: customnav_developersnav_tagging
-          name: "Tagging"
-          url: "/developers/tagging/"
-          weight: 60
-          parent: menu_references_developers
         - identifier: customnav_integrationsnav_new_integration
           name: "Create a new integration"
           url: "/developers/integrations/"
-          weight: 70
+          weight: 60
           parent: menu_references_developers
         - identifier: customnav_integrationsnav_integration_sdk
           name: "Integration SDK"
