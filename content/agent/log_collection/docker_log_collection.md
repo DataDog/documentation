@@ -49,8 +49,8 @@ The command related to log collection are the following:
 
 ### Configuration file example
 
-Now that the agent is ready to collect logs, you need to define which containers you want to follow.
-To start collecting logs for a given container filtered by image or label, you need to update the log section in an integration or custom .yaml file. 
+Now that the agent is ready to collect logs, you need to define which containers you want to follow.  
+To start collecting logs for a given container filtered by image or label -see the complete list available with the `docker inspect` command-  update the log section in an integration or custom .yaml file 
 Add a new yaml file in the `conf.d` directory (should be `/opt/datadog-agent/conf.d` on the host if you followed above instruction) with the following parameters:
 
 ```yaml
