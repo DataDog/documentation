@@ -51,7 +51,7 @@ docker run -d --name dd-agent -h `hostname` -e DD_API_KEY=<YOUR_API_KEY>  -e DD_
 
 Important notes: 
 
-- The Docker integration is enabled by default, as well as [autodiscovery](/agent/autodiscovery/) in auto configuration mode (remove the listeners: -docker section in `datadog.yaml` to disable it).
+- The Docker integration is enabled by default, as well as [autodiscovery](/agent/kubernetes/autodiscovery/) in auto configuration mode (remove the listeners: -docker section in `datadog.yaml` to disable it).
 
 - We recommend to always pick the latest version of Datadog Agent 6. [Consult the full list of available images for Agent 6](https://hub.docker.com/r/datadog/agent/tags/).
 
@@ -60,8 +60,6 @@ The command related to log collection are the following:
 * `-e DD_LOGS_ENABLED=true`: this parameter enables the log collection when set to true. The agent now looks for log instructions in configuration files.
 * `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw`: mount the directory we created to store pointer on each container logs to make sure we do not lose any.
 * `-v /opt/datadog-agent/conf.d:/conf.d:ro`: mount the configuration directory we previously created to the container
-
-
 
 ### Configuration file example
 

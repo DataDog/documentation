@@ -3,103 +3,132 @@ title: Agent
 kind: documentation
 description: Install & configure the Agent to collect data
 aliases:
-    - /guides/basic_agent_usage/
+    - /agent/faq/agent-status-and-information
+    - /agent/faq/start-stop-restart-the-datadog-agent
+    - /agent/faq/send-logs-and-configs-to-datadog-via-flare-command
+    - /agent/faq/how-to-get-more-logging-from-the-agent
 ---
 
-{{< partial name="platforms/platforms.html" >}}
+<div class="alert alert-info">
+    Agent v6 is now available, <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md">upgrade to the newest version </a> to benefit from all new functionality.
+</div>
 
 ## What is the Agent?
 
 The Datadog Agent is a piece of software that runs on your hosts. Its job is to faithfully collect events and metrics and bring them to Datadog on
-your behalf so that you can do something useful with your monitoring and performance data.
+your behalf so that you can do something useful with your monitoring and performance data. The Datadog Agent is open-source, view the source code on GitHub for [Agent v5](https://github.com/DataDog/dd-agent) and [Agent v6](https://github.com/DataDog/datadog-agent). To see all changes between Agent v5 and v6, [consult our dedicated changes documentation](https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md).
 
-[The source code for the Datadog Agent](https://github.com/DataDog/dd-agent).
+{{< partial name="platforms/platforms.html" >}}
 
-For information on running the Agent through a proxy, see [the dedicated documentation Datadog Agent and proxy ](/agent/proxy); for which IP ranges to allow, see [the complete list of IP's and ports](https://github.com/DataDog/dd-agent/wiki/Network-Traffic-and-Proxy-Configuration#open-ports).
+## Start/Stop/Restart the Agent 
+### Start the Agent
 
-The Agent has three main parts: the collector, DogStatsD, and the forwarder:
+|Platform|Agent v5 |Agent v6|
+|:--------|:-----|:--------|
+|Linux|`sudo service datadog-agent start`|`sudo service datadog-agent start`|
+|MacOS x|`/usr/local/bin/datadog-agent start`|`launchctl start com.datadoghq.agent` or systray app |
+|Source|`sudo ~/.datadog-agent/bin/agent start`|`sudo service datadog-agent start`|
+|Windows|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows)|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows)|
 
-* **The collector**: runs checks on the current machine for whatever [integrations](/integrations) you have and it captures system metrics such as memory and CPU.
+### Stop the Agent
 
-* **DogStatsD**: It is a statsd backend server you can send [custom metrics](/getting_started/custom_metrics/) to from an application.
+|Platform|Agent v5 |Agent v6|
+|:--------|:-----|:--------|
+|Linux|`sudo service datadog-agent stop`|`sudo service datadog-agent stop`|
+|MacOS x|`/usr/local/bin/datadog-agent stop` |`launchctl stop com.datadoghq.agent` or systray app  |
+|Source|`sudo ~/.datadog-agent/bin/agent stop`|`sudo service datadog-agent stop`|
+|Windows|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows)|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows)|
+### Restart the Agent 
 
-* **The forwarder**: retrieves data from both DogStatsD and the collector and then queues it up to be sent to Datadog.
+|Platform|Agent v5 |Agent v6|
+|:--------|:-----|:--------|
+|Linux|`sudo service datadog-agent restart`|`sudo service datadog-agent restart`|
+|MacOS x|`/usr/local/bin/datadog-agent restart `|_run `stop` then `start`_ or systray app|
+|Source|`sudo ~/.datadog-agent/bin/agent restart`|`n/a`|
+|Windows|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows)|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows)|
 
-This is all controlled by one supervisor process. We keep this separate so you don't have to have the overhead of each application if you don't want to run all parts, although we generally recommend you do.
+## Agent Status and Information
 
-<div class="alert alert-info">
-This documentation covers Agent versions 5.0.0 and above.
-</div>
+### Service status
 
-## Configuration management tools
+|Platform|Agent v5 |Agent v6|
+|:--------|:-----|:--------|
+|Linux|`sudo service datadog-agent status`|`sudo datadog-agent status`|
+|Docker|`sudo docker exec -it dd-agent /etc/init.d/datadog-agent status`|`n/a`|
+|MacOS x|`datadog-agent status`             | `launchctl list com.datadoghq.agent` or systray app|
+|Source|`sudo ~/.datadog-agent/bin/agent status`|`sudo service datadog-agent status`|
+|Windows|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows/#status-and-information)|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows/#status-and-information)|
 
-Manage the Datadog agent and [integrations](/integrations) using configuration management tools:
+### Agent Information
 
-### Chef
-* [Chef Github project](https://github.com/DataDog/chef-datadog)
-* [Chef installation](https://app.datadoghq.com/account/settings#integrations/chef)
-* [Chef documentation](/integrations/chef)
+Running an info command displays the status of your Datadog agent and enabled integrations.
 
-### Puppet
-* [Puppet Github project](https://github.com/DataDog/puppet-datadog-agent)
-* [Puppet installation](https://app.datadoghq.com/account/settings#integrations/puppet)
-* [Puppet documentation](/integrations/puppet)
+A properly configured integration will report "OK" as seen below:
 
-### Ansible
-* [Ansible Github project](https://github.com/DataDog/ansible-datadog)
-* [Ansible installation](https://app.datadoghq.com/account/settings#agent/ansible)
-* [Ansible documentation](/integrations/ansible/)
+```
+  Checks
+  ======
 
-Chef, Puppet, and Ansible [integrations](/integrations) using our public APIs so if you're interested in using another automation tool, the above could be leveraged as examples to get you started.
+    network
+    -------
+      - instance #0 [OK]
+      - Collected 15 metrics, 0 events & 1 service check
+```
 
-There is also community support for Saltstack:
+The `[OK]` in the Agent output implies that the check was configured/run correctly but does not refer to the value being returned by your check.  
 
-* Saltstack Formula - https://github.com/DataDog/datadog-formula
+|Platform|Agent v5 |Agent v6|
+|:--------|:-----|:--------|
+|Linux|`sudo service datadog-agent info`|`sudo datadog-agent status`|
+|Docker|`sudo docker exec -it dd-agent /etc/init.d/datadog-agent info`|`n/a`|
+|Docker (Alpine)|`docker exec -it dd-agent /opt/datadog-agent/bin/agent`|`n/a`|
+|MacOS x|`datadog-agent info`               | `datadog-agent status` or [web GUI](/agent/v6/#using-the-gui)                    |
+|Source|`sudo ~/.datadog-agent/bin/info`|`sudo datadog-agent status`|
+|Windows|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows/#status-and-information)|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows/#status-and-information)|
 
 ## Agent Troubleshooting
 
 If you ended up at this page and have not yet installed the Datadog Agent, go [to the dedicated agent integration page](https://app.datadoghq.com/account/settings#agent) for installation instructions. If you just installed the Agent, it might take a few moments before you start seeing metrics appear. The first place you should check for metrics is the [Metrics Explorer](https://app.datadoghq.com/metric/explorer).
 
-If you think you might be experiencing issues, the first thing to do is [run the info command](/agent/faq/agent-status-and-information) and check the [Agent logs](/agent/faq/log-locations). The [info command](/agent/faq/agent-status-and-information) and the log locations are dependent on your OS, which you can select from the navigation to the left for further information.
+If you think you might be experiencing issues, the first thing to do is [run the info command](/agent/#agent-status-and-information) and check the [Agent logs](/agent/#log-locations).
 
-### Issues getting the Agent installed
+If you're still unsure about the issue, you may reach out to [Datadog support team](/help) along with [a flare](#send-a-flare) of your agent.
 
-If you encountered an issue during the Agent installation process that prevented installation from occurring, reach out to [Datadog support team](/help). Let us know your OS and version, as well as how you are installing the Agent. You should include any error messages you encountered along the way.
+### Get more logging from the agent
 
-### Issues getting the Agent reporting
+To enable full debug mode:
 
-If you get the Agent installed but are not seeing any data in Datadog, you can troubleshoot in the following manner.
-First, [run the info command](/agent/faq/agent-status-and-information). Select your OS in the navigation column on the left of this page to see how to run this. Does running the [info command](/agent/faq/agent-status-and-information) show any errors?
+1. Modify your local `datadog.yaml` file (see [this page](/agent/v6/#configuration-file) to locate this configuration file on your instance)
 
-If not, you should also check the logs (location of the logs again depends on OS). Errors in the logs may also reveal the cause of any issues.
+2. Replace `# log_level: INFO` with `log_level: DEBUG` (make sure to get rid of # to uncomment the line)
 
-If not, send both the full output of the [info command](/agent/faq/agent-status-and-information) and the logs with a flare as attachments to the [Datadog support team](mailto:support@datadoghq.com?Subject=Agent%20issues).
+3. Restart your Datadog Agent (see [that page](/agent/#start-stop-restart-the-agent) to find the restart command depending on your OS)
 
-#### Check your machine's time
-We have also seen a few cases where machines have their clock set further in the future or the past, which can sometimes cause problems with metric submission.
-To check for this, run:
+4. Wait a few minutes to generate some logs. [Look here](/agent/#log-locations) to find the location of the logs.
 
-```shell
-date -u && curl -s -v https://app.datadoghq.com 2>&1 | grep Date
-```
-This outputs the current system’s date, and then makes a request to our endpoint and grabs the date on our end.
-If these are more than a few minutes apart, you should correct the time settings on your server.
+### Send a flare
 
-### Issues getting integrations working
 
-Datadog has many [integrations](/integrations/) which are set up through [YAML files in the Agent](https://github.com/DataDog/dd-agent/tree/master/conf.d).
+If you are running the 5.3 version (or higher) of the agent, you're able to send all necessary troubleshooting information to our Support Team, with one flare command!
 
-Here is a quick guide for troubleshooting [integrations](/integrations) installation:
+`flare` gathers all of the agent's configuration files and logs into an archive file. It removes sensitive information including passwords, API keys, Proxy credentials, and SNMP community strings.  
+**Confirm the upload of the archive to immediately send it to Datadog support**.  
+Since the Datadog Agent is completely open source, you can [verify the code's behavior](https://github.com/DataDog/dd-agent/blob/master/utils/flare.py). You can also review the archive prior to sending as the flare prompts a confirmation before uploading it.  
 
-1. [Run the info command](/agent/faq/agent-status-and-information).
+In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if you don't specify a case ID, the command asks for an email address that is used to login in your organization and creates a new support case.
 
-2. Is the integration showing up in the [info command](/agent/faq/agent-status-and-information)?
+|Platform|Agent v5 |Agent v6|
+|:--------|:-----|:--------|
+|Linux| `sudo /etc/init.d/datadog-agent flare <CASE_ID>` | `sudo -u dd-agent -- datadog-agent flare <CASE_ID>`|
+|Docker|`docker exec -it dd-agent /etc/init.d/datadog-agent flare <CASE_ID>`|`n/a`|
+|Docker (Alpine)|`docker exec -it dd-agent /opt/datadog-agent/bin/agent flare <CASE_ID>`||
+|MacOS x|`datadog-agent flare <CASE_ID>`              | `datadog-agent flare <CASE_ID>` or web [web GUI](/agent/v6/#using-the-gui)
+|CentOS| `sudo service datadog-agent flare <CASE_ID>`              | `sudo datadog-agent flare <CASE_ID>`              |
+|Debian| `sudo service datadog-agent flare <CASE_ID>`              | `sudo datadog-agent flare <CASE_ID>`              |
+|Kubernetes|`kubectl exec <pod-name> -it /etc/init.d/datadog-agent flare <CASE_ID>`|`n/a`|
+|Fedora|`sudo service datadog-agent flare <CASE_ID>`              | `sudo datadog-agent flare <CASE_ID>`              |
+|Redhat|`sudo service datadog-agent flare <CASE_ID>`              | `sudo datadog-agent flare <CASE_ID>`              |
+|Suse|`sudo service datadog-agent flare <CASE_ID>`              | `sudo datadog-agent flare <CASE_ID>`              |
+|Source|`sudo ~/.datadog-agent/bin/agent flare <CASE_ID>`|`sudo datadog-agent flare <CASE_ID>`|
+|Windows|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows/#send-a-flare)|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows/#send-a-flare)|
 
-* **No, it's not**:
-    * Check the configuration file, make sure it is in the right location and named correctly.
-    * Check it in a YAML parser to make sure it has the correct syntax. [Example files](https://github.com/DataDog/dd-agent/tree/master/conf.d).
-    * If you moved or changed the file, [restart the Agent](/agent/faq/start-stop-restart-the-datadog-agent) and rerun the [info command](/agent/faq/agent-status-and-information) to see if it is now showing up.
-
-*  **Yes, it's there**:
-    * Check the [Metrics Explorer](https://app.datadoghq.com/metric/explorer) to see if system metrics are showing up from the host. For example, look for `system.cpu.user` from the host that is running the Agent and has that integration setup.
-    * If there are still no metrics, check the logs for errors and send them along with the [info command](/agent/faq/agent-status-and-information) output, to [the Datadog support team](mailto:support@datadoghq.com?Subject=Agent%20issues).
