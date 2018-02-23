@@ -1,6 +1,10 @@
 ---
-title: Using Autodiscovery with Kubernetes
+title: Using Autodiscovery with Kubernetes and Docker
 kind: documentation
+aliases:
+  - /guides/servicediscovery/
+  - /guides/autodiscovery/
+  - /agent/autodiscovery
 ---
 
 ## How it Works

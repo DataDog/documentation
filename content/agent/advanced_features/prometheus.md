@@ -1,12 +1,7 @@
 ---
-title: Prometheus Check
+title: Writing a Prometheus Check
 kind: documentation
 ---
-
-<div class="alert alert-info">
-This documentation covers Agent <strong>versions prior to 6.0.0</strong><br>
-Agent v6 is now available, <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md">upgrade to the newest version </a> to benefit from all new functionality. 
-</div>
 
 ## Overview
 
@@ -34,7 +29,7 @@ is called <code>mycheck.py</code> your configuration file <em>must</em> be
 named <code>mycheck.yaml</code>.
 </div>
 
-Configuration for a Prometheus Check is almost the same as a regular Agent Check, please refer to the [dedicated Agent check documentation to learn more](/developers/agent_checks/#configuration)
+Configuration for a Prometheus Check is almost the same as a regular Agent Check, please refer to the [dedicated Agent check documentation to learn more](/agent/advanced_features/agent_checks/#configuration)
 
 The main difference is to include the variable `prometheus_endpoint` in your `check.yaml` file. This goes into `conf.d/kube_dns.yaml`:
 

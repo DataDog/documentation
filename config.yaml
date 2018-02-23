@@ -71,166 +71,135 @@ languages:
         - identifier: centos
           name: "CentOs"
           url: "/agent/basic_agent_usage/centos/"
-          weight: 120
+          weight: 115
           parent: customnav_agentnav_basic_usage
         - identifier: deb
           name: "Debian"
           url: "/agent/basic_agent_usage/deb/"
-          weight: 140
+          weight: 120
+          parent: customnav_agentnav_basic_usage
+        - identifier: customnav_agentnav_docker
+          name: "Docker"
+          url: "/agent/basic_agent_usage/docker/"
+          weight: 125
           parent: customnav_agentnav_basic_usage
         - identifier: fedora
           name: "Fedora"
           url: "/agent/basic_agent_usage/fedora/"
-          weight: 150
+          weight: 130
+          parent: customnav_agentnav_basic_usage
+        - identifier: customnav_agentnav_kubernetes
+          name: "Kubernetes"
+          url: "/agent/basic_agent_usage/kubernetes/"
+          weight: 135
           parent: customnav_agentnav_basic_usage
         - identifier: osx
           name: "Mac OS X"
           url: "/agent/basic_agent_usage/osx/"
-          weight: 160
+          weight: 140
           parent: customnav_agentnav_basic_usage
         - identifier: redhat
           name: "Red Hat"
           url: "/agent/basic_agent_usage/redhat/"
-          weight: 170
+          weight: 145
           parent: customnav_agentnav_basic_usage
         - identifier: suse
           name: "SUSE"
           url: /agent/basic_agent_usage/suse/
-          weight: 180
+          weight: 150
           parent: customnav_agentnav_basic_usage
         - identifier: ubuntu
           name: "Ubuntu"
           url: "/agent/basic_agent_usage/ubuntu/"
-          weight: 190
+          weight: 155
           parent: customnav_agentnav_basic_usage
         - identifier: windows
           name: "Windows"
           url: "/agent/basic_agent_usage/windows/"
-          weight: 198
+          weight: 160
           parent: customnav_agentnav_basic_usage
         - identifier: source
           name: "From Source"
           url: "/agent/basic_agent_usage/source/"
-          weight: 199
+          weight: 165
           parent: customnav_agentnav_basic_usage
         
-        # Docker
-        - identifier: customnav_agentnav_docker
-          name: "Docker"
-          url: "/agent/docker/"
+        # Log collection
+        - identifier: log_collection
+          name: "Log collection"
+          url: "/agent/log_collection/"
           weight: 20
           parent: menu_references_agent
-        - identifier: customnav_agentnav_docker_log_collection
-          name: "Log collection"
-          url: "/agent/docker/log_collection"
+        - identifier: docker_log_collection
+          name: "Docker Log collection"
+          url: "/agent/log_collection/docker_log_collection"
           weight: 210
-          parent: customnav_agentnav_docker
-        - identifier: customnav_agentnav_docker_trace_collection
-          name: "Trace collection"
-          url: "/agent/docker/trace_collection"
-          weight: 220
-          parent: customnav_agentnav_docker
-        - identifier: customnav_agentnav_docker_process_collection
-          name: "Process collection"
-          url: "/agent/docker/process_collection"
-          weight: 230
-          parent: customnav_agentnav_docker
-        - identifier: customnav_agentnav_docker_autodiscovery
-          name: "Autodiscovery"
-          url: "/agent/docker/autodiscovery/"
-          weight: 240
-          parent: customnav_agentnav_docker
-        - identifier: customnav_agentnav_docker_jmx
-          name: "JMX"
-          url: "/agent/docker/jmx"
-          weight: 250
-          parent: customnav_agentnav_docker
-        - identifier: customnav_agentnav_docker_getting_further
-          name: "Getting Further"
-          url: "/agent/docker/getting_further"
-          weight: 260
-          parent: customnav_agentnav_docker
+          parent: log_collection
 
-        # Kubernetes 
-        - identifier: customnav_agentnav_kubernetes
-          name: "Kubernetes"
-          url: "/agent/kubernetes/"
+
+        # Trace collection
+        - identifier: trace_collection
+          name: "Trace collection"
+          url: "/agent/trace_collection/"
           weight: 30
           parent: menu_references_agent
-        - identifier: customnav_agentnav_host_installation
-          name: "Host installation"
-          url: "/agent/kubernetes/host_installation/"
+        - identifier: docker_trace_collection
+          name: "Docker Trace collection"
+          url: "/agent/trace_collection/docker_trace_collection"
           weight: 310
-          parent: customnav_agentnav_kubernetes
-        - identifier: customnav_agentnav_container_installation
-          name: "Container installation"
-          url: "/agent/kubernetes/container_installation/"
-          weight: 320
-          parent: customnav_agentnav_kubernetes
-        - identifier: customnav_agentnav_event_collection
-          name: "Event collection"
-          url: "/agent/kubernetes/event_collection/"
-          weight: 330
-          parent: customnav_agentnav_kubernetes
-        - identifier: customnav_agentnav_autodiscovery
-          name: "Autodiscovery"
-          url: "/agent/kubernetes/autodiscovery/"
-          weight: 390
-          parent: customnav_agentnav_kubernetes
+          parent: trace_collection
 
-        # AGENT V6 - Subnav start
-        - identifier: customnav_agentnav_v6
-          name: "Agent V6"
-          url: "/agent/v6/"
+        # Process collection
+        - identifier: process_collection
+          name: "Process collection"
+          url: "/agent/process_collection/"
+          weight: 40
+          parent: menu_references_agent
+        - identifier: docker_process_collection
+          name: "Docker Process collection"
+          url: "/agent/process_collection/docker_process_collection"
+          weight: 410
+          parent: process_collection
+        - identifier: k8_process_collection
+          name: "Kubernetes Process collection"
+          url: "/agent/process_collection/kubernetes_process_collection"
+          weight: 420
+          parent: process_collection
+
+        # Advanced Features
+        - identifier: advanced_features
+          name: "Advanced Features"
+          url: "/agent/advanced_features/"
           weight: 50
           parent: menu_references_agent
-        - identifier: customnav_agentnav_v6_log_collection
-          name: "Log collection"
-          url: "/agent/v6/log_collection"
+        - identifier: autodiscovery
+          name: "Autodiscovery"
+          url: "/agent/advanced_features/autodiscovery"
           weight: 510
-          parent: customnav_agentnav_v6
-        - identifier: customnav_agentnav_v6_trace_collection
-          name: "Trace collection"
-          url: "/agent/v6/trace_collection"
+          parent: advanced_features
+        - identifier: proxy
+          name: "Proxy"
+          url: "/agent/advanced_features/proxy"
           weight: 520
-          parent: customnav_agentnav_v6
-        - identifier: customnav_agentnav_v6_process_collection
-          name: "Process collection"
-          url: "/agent/v6/process_collection"
+          parent: advanced_features
+        - identifier: agent_checks
+          name: "Agent Checks"
+          url: "/agent/advanced_features/agent_checks"
+          weight: 520
+          parent: advanced_features
+        - identifier: prometheus
+          name: "Prometheus Checks"
+          url: "/agent/advanced_features/prometheus"
           weight: 530
-          parent: customnav_agentnav_v6
-        - identifier: customnav_agentnav_v6_developer_guide
-          name: "Developer Guide"
-          url: "https://github.com/DataDog/datadog-agent/tree/master/docs/dev"
-          weight: 599
-          parent: customnav_agentnav_v6
+          parent: advanced_features
 
-        # AGENT V5 - Subnav start
-        - identifier: customnav_agentnav_v5
-          name: "Agent V5 (deprecated)"
-          url: "/agent/v5/"
+        # Troubleshooting
+        - identifier: troubleshooting
+          name: "Troubleshooting"
+          url: "/agent/troubleshooting/"
           weight: 60
           parent: menu_references_agent
-        - identifier: customnav_agentnav_prometheus_checks
-          name: "Prometheus Checks"
-          url: "/agent/v5/prometheus/"
-          weight: 610
-          parent: customnav_agentnav_v5
-        - identifier: customnav_agentnav_installcoreextra
-          name: "Install Core & Extra"
-          url: "/agent/v5/installcoreextra/"
-          weight: 620
-          parent: customnav_agentnav_v5
-        - identifier: customnav_agentnav_logs
-          name: "Logs"
-          url: "/agent/v5/logs/"
-          weight: 630
-          parent: customnav_agentnav_v5
-        - identifier: customnav_agentnav_proxy
-          name: "Proxy Configuration"
-          url: "/agent/v5/proxy/"
-          weight: 640
-          parent: customnav_agentnav_v5
+        
         #- identifier: customnav_agentnav_faq
         #  name: "FAQ"
         #  url: "/agent/faq/"
@@ -578,35 +547,30 @@ languages:
           url: "/api/"
           weight: 20
           parent: menu_references_developers
-        - identifier: customnav_agentnav_agent_checks
-          name: "Agent Checks"
-          url: "/developers/agent_checks/"
-          weight: 30
-          parent: menu_references_developers
         - identifier: customnav_developersnav_dogstatsd
           name: "DogStatsD"
           url: "/developers/dogstatsd/"
-          weight: 40
+          weight: 30
           parent: menu_references_developers
         - identifier: customnav_developersnav_libraries
           name: "Libraries"
           url: "/developers/libraries/"
-          weight: 50
+          weight: 40
           parent: menu_references_developers
         - identifier: customnav_developersnav_metrics
           name: "Metrics"
           url: "/developers/metrics/"
-          weight: 70
+          weight: 50
           parent: menu_references_developers
         - identifier: customnav_developersnav_tagging
           name: "Tagging"
           url: "/developers/tagging/"
-          weight: 80
+          weight: 60
           parent: menu_references_developers
         - identifier: customnav_integrationsnav_new_integration
           name: "Create a new integration"
           url: "/developers/integrations/"
-          weight: 90
+          weight: 70
           parent: menu_references_developers
         - identifier: customnav_integrationsnav_integration_sdk
           name: "Integration SDK"

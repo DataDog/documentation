@@ -23,3 +23,11 @@ private: true
 
 * [Why don't I see the 'system.processes.open_file_descriptors' metric?](/agent/faq/why-don-t-i-see-the-system-processes-open-file-descriptors-metric)
 * [How is the 'system.mem.used' metric calculated?](/agent/faq/how-is-the-system-mem-used-metric-calculated)
+
+## New
+
+* [Getting further with Docker](/agent/faq/getting-further-with-docker)
+* [Docker JMX](/agent/faq/docker-jmx)
+* [Dogstream](/agent/faq/dogstream)
+* [Install core extras](/agent/faq/install-core-extras)
+* [Agent commands](/agent/faq/agent-commands)

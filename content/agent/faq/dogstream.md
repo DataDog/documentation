@@ -1,5 +1,5 @@
 ---
-title: Log Parsing in the Agent
+title: Dogstream
 kind: documentation
 aliases:
     - /guides/logs/

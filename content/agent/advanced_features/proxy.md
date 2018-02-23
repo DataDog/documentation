@@ -1,14 +1,9 @@
 ---
-title: Proxy Configuration
+title: Agent proxy configuration
 kind: documentation
 aliases:
     - /agent/proxy
 ---
-
-<div class="alert alert-info">
-This documentation covers Agent <strong>versions prior to 6.0.0</strong><br>
-Agent v6 is now available, <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md">upgrade to the newest version </a> to benefit from all new functionality. 
-</div>
 
 ## Why use a Proxy
 
@@ -23,6 +18,8 @@ hosts that are not directly connected to the Internet.
 same proxy)
 
 ## Using the Agent as a Proxy
+
+**This feature is not available for Agent v6 yet**
 
 1. Designate one node **running datadog-agent** as the proxy.  
     In this example assume that the proxy name is `proxy-node`. This node **must** be able to reach `https://app.datadoghq.com`.

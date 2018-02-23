@@ -9,13 +9,13 @@ platforms:
     link: "agent/basic_agent_usage/deb/"
     image: "platform_debian.png"
   - name: docker
-    link: "agent/docker/"
+    link: "agent/basic_agent_usage/docker/"
     image: "platform_docker.png"
   - name: fedora
     link: "agent/basic_agent_usage/fedora/"
     image: "platform_fedora.png"
   - name: kubernetes
-    link: "agent/kubernetes/"
+    link: "agent/basic_agent_usage/kubernetes/"
     image: "platform_kubernetes.png"
   - name: osx
     link: "agent/basic_agent_usage/osx/"

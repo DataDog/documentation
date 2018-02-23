@@ -3,6 +3,7 @@ title: Installing Core & Extra Integrations
 kind: documentation
 aliases:
     - /guides/installcoreextra/
+    - /agent/installcoreextra/
 disable_toc: true
 ---
 

@@ -3,14 +3,12 @@ title: Agent
 kind: documentation
 description: Install & configure the Agent to collect data
 aliases:
-    - /agent/faq/agent-status-and-information
-    - /agent/faq/start-stop-restart-the-datadog-agent
     - /agent/faq/send-logs-and-configs-to-datadog-via-flare-command
     - /agent/faq/how-to-get-more-logging-from-the-agent
 ---
 
 <div class="alert alert-info">
-    Agent v6 is now available, <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md">upgrade to the newest version </a> to benefit from all new functionality.
+    Agent v6 is now available, <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md">upgrade to the newest version </a> to benefit from all new functionality 
 </div>
 
 ## What is the Agent?
@@ -20,115 +18,175 @@ your behalf so that you can do something useful with your monitoring and perform
 
 {{< partial name="platforms/platforms.html" >}}
 
-## Start/Stop/Restart the Agent 
-### Start the Agent
 
-|Platform|Agent v5 |Agent v6|
-|:--------|:-----|:--------|
-|Linux|`sudo service datadog-agent start`|`sudo service datadog-agent start`|
-|MacOS x|`/usr/local/bin/datadog-agent start`|`launchctl start com.datadoghq.agent` or systray app |
-|Source|`sudo ~/.datadog-agent/bin/agent start`|`sudo service datadog-agent start`|
-|Windows|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows)|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows)|
+The Agent has three main parts: the collector, DogStatsD, and the forwarder:
 
-### Stop the Agent
+* **The collector**: runs checks on the current machine for whatever [integrations](/integrations) you have and it captures system metrics such as memory and CPU.
 
-|Platform|Agent v5 |Agent v6|
-|:--------|:-----|:--------|
-|Linux|`sudo service datadog-agent stop`|`sudo service datadog-agent stop`|
-|MacOS x|`/usr/local/bin/datadog-agent stop` |`launchctl stop com.datadoghq.agent` or systray app  |
-|Source|`sudo ~/.datadog-agent/bin/agent stop`|`sudo service datadog-agent stop`|
-|Windows|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows)|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows)|
-### Restart the Agent 
+* **DogStatsD**: It is a statsd backend server you can send [custom metrics](/getting_started/custom_metrics/) to from an application.
 
-|Platform|Agent v5 |Agent v6|
-|:--------|:-----|:--------|
-|Linux|`sudo service datadog-agent restart`|`sudo service datadog-agent restart`|
-|MacOS x|`/usr/local/bin/datadog-agent restart `|_run `stop` then `start`_ or systray app|
-|Source|`sudo ~/.datadog-agent/bin/agent restart`|`n/a`|
-|Windows|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows)|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows)|
+* **The forwarder**: retrieves data from both DogStatsD and the collector and then queues it up to be sent to Datadog.
 
-## Agent Status and Information
+This is all controlled by one supervisor process. We keep this separate so you don't have to have the overhead of each application if you don't want to run all parts, although we generally recommend you do.
 
-### Service status
 
-|Platform|Agent v5 |Agent v6|
-|:--------|:-----|:--------|
-|Linux|`sudo service datadog-agent status`|`sudo datadog-agent status`|
-|Docker|`sudo docker exec -it dd-agent /etc/init.d/datadog-agent status`|`n/a`|
-|MacOS x|`datadog-agent status`             | `launchctl list com.datadoghq.agent` or systray app|
-|Source|`sudo ~/.datadog-agent/bin/agent status`|`sudo service datadog-agent status`|
-|Windows|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows/#status-and-information)|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows/#status-and-information)|
+## What is the Agent v6?
 
-### Agent Information
+Agent 6 is the latest major version of the Datadog Agent. The big difference between Agent 5 and Agent 6 is that Agent 6 is a complete rewrite of the core Agent in Golang. Golang has allowed us to take advantage of concurrency. In place of the three processes [the Agent v5](/agent/v5) used to run --*the Forwarder*, *the Collector*, and *DogStatsD*-- there is now only one process: the Agent. It also comes with a number of other core improvements:
 
-Running an info command displays the status of your Datadog agent and enabled integrations.
+* Agent v6 has significantly improved resource usage over Agent v5:
+    
+    * It has decreased CPU usage:
+    * It has a decrease Memory usage:
+    * It uses fewer File Descriptors:
+    * It has an all around decreased footprint.
 
-A properly configured integration will report "OK" as seen below:
+* Global percentiles can be performed on the server directly to calculate real, effective global percentiles.
 
+* [DogStatsD](/developers/dogstatsd) can be used over a unix socket instead of over udp.
+
+* Custom build your agent v6 and [DogStatsD](/developers/dogstatsd) much easier and with much more configuration options, to include or exclude almost anything. There is also a “puppy” agent, that’s a truly minimal installation.
+
+* Agent 6 blocks port 5000 and 5001. If you use these ports, update the port for `expvar_port` and `cmd_port` in the `datadog.yaml` file.
+
+## Migration
+
+To automatically transition between agent configuration paths and formats from Agent v5 to Agent v6, use the agent command:    
+
+`sudo -u dd-agent -- datadog-agent import`
+
+The command parses an existing `datadog.conf` and convert all the bits that
+the new Agent still supports to the new format, in the new file. It also copies
+configuration files for checks that are currently enabled.
+
+## Configuration Files
+
+Prior releases of Datadog Agent stored configuration files in `/etc/dd-agent`.
+Starting with the 6.0 release configuration files will now be stored in
+`/etc/datadog-agent`.
+
+### Agent configuration file
+
+In addition to the location change, the primary agent configuration file has been
+transitioned from **INI** format to **YAML** to better support complex configurations and
+for a more consistent experience across the Agent and the Checks; as such `datadog.conf`
+is now retired in favor of `datadog.yaml`.
+
+To automatically transition between agent configuration paths and formats, you
+may use the agent command: `sudo -u dd-agent -- datadog-agent import`.
+The command will parse an existing `datadog.conf` and convert all the bits that
+the new Agent still supports to the new format, in the new file. It also copies
+configuration files for checks that are currently enabled.
+
+Please refer to [this section][config] of the documentation for a detailed list
+of the configuration options that were either changed or deprecated in the new Agent.
+
+### Checks configuration files
+
+In order to provide a more flexible way to define the configuration for a check,
+from version 6.0.0 the Agent will load any valid YAML file contained in the folder
+`/etc/datadog-agent/conf.d/<check_name>.d/`.
+
+This way, complex configurations can be broken down into multiple files: for example,
+a configuration for the `http_check` might look like this:
 ```
-  Checks
-  ======
-
-    network
-    -------
-      - instance #0 [OK]
-      - Collected 15 metrics, 0 events & 1 service check
+/etc/datadog-agent/conf.d/http_check.d/
+├── backend.yaml
+└── frontend.yaml
 ```
 
-The `[OK]` in the Agent output implies that the check was configured/run correctly but does not refer to the value being returned by your check.  
+Autodiscovery template files will be stored in the configuration folder as well,
+for example this is how the `redisdb` check configuration folder looks like:
+```
+/etc/datadog-agent/conf.d/redisdb.d/
+├── auto_conf.yaml
+└── conf.yaml.example
+```
 
-|Platform|Agent v5 |Agent v6|
-|:--------|:-----|:--------|
-|Linux|`sudo service datadog-agent info`|`sudo datadog-agent status`|
-|Docker|`sudo docker exec -it dd-agent /etc/init.d/datadog-agent info`|`n/a`|
-|Docker (Alpine)|`docker exec -it dd-agent /opt/datadog-agent/bin/agent`|`n/a`|
-|MacOS x|`datadog-agent info`               | `datadog-agent status` or [web GUI](/agent/v6/#using-the-gui)                    |
-|Source|`sudo ~/.datadog-agent/bin/info`|`sudo datadog-agent status`|
-|Windows|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows/#status-and-information)|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows/#status-and-information)|
+To keep backwards compatibility, the Agent will still pick up configuration files
+in the form `/etc/datadog-agent/conf.d/<check_name>.yaml` but migrating to the
+new layout is strongly recommended.
 
-## Agent Troubleshooting
+## CLI
 
-If you ended up at this page and have not yet installed the Datadog Agent, go [to the dedicated agent integration page](https://app.datadoghq.com/account/settings#agent) for installation instructions. If you just installed the Agent, it might take a few moments before you start seeing metrics appear. The first place you should check for metrics is the [Metrics Explorer](https://app.datadoghq.com/metric/explorer).
+The new command line interface for the Agent is sub-command based:
 
-If you think you might be experiencing issues, the first thing to do is [run the info command](/agent/#agent-status-and-information) and check the [Agent logs](/agent/#log-locations).
+| Command         | Notes
+| --------------- | -------------------------------------------------------------------------- |
+| check           | Run the specified check |
+| configcheck     | Print all configurations loaded & resolved of a running agent |
+| diagnose        | Execute some connectivity diagnosis on your system |
+| flare           | Collect a flare and send it to Datadog |
+| health          | Print the current agent health |
+| help            | Help about any command |
+| hostname        | Print the hostname used by the Agent |
+| import          | Import and convert configuration files from previous versions of the Agent |
+| installservice  | Installs the agent within the service control manager |
+| launch-gui      | starts the Datadog Agent GUI |
+| regimport       | Import the registry settings into datadog.yaml |
+| remove-service  | Removes the agent from the service control manager |
+| restart-service | restarts the agent within the service control manager |
+| start           | Start the Agent |
+| start-service   | starts the agent within the service control manager |
+| status          | Print the current status |
+| stopservice     | stops the agent within the service control manager |
+| version         | Print the version info |
 
-If you're still unsure about the issue, you may reach out to [Datadog support team](/help) along with [a flare](#send-a-flare) of your agent.
+To run a sub-command, the Agent binary must be invoked like this:
+```
+<path_to_agent_bin> <sub_command> <options>
+```
 
-### Get more logging from the agent
+Some options have their own set of flags and options detailed in a help message.
+For example, to see how to use the `check` sub-command, run:
+```
+<agent_binary> check --help
+```
 
-To enable full debug mode:
+## Using the GUI
 
-1. Modify your local `datadog.yaml` file (see [this page](/agent/v6/#configuration-file) to locate this configuration file on your instance)
+The port which the GUI runs on can be configured in your `datadog.yaml` file.
+Setting the port to -1 disables the GUI all together. By default it is enabled
+on port `5002` on Windows and Mac, and is disabled on Linux.
 
-2. Replace `# log_level: INFO` with `log_level: DEBUG` (make sure to get rid of # to uncomment the line)
+Once the Agent is running, use the `datadog-agent launch-gui` command to launch
+the GUI within your default web browser.
 
-3. Restart your Datadog Agent (see [that page](/agent/#start-stop-restart-the-agent) to find the restart command depending on your OS)
+### Requirements
 
-4. Wait a few minutes to generate some logs. [Look here](/agent/#log-locations) to find the location of the logs.
+1. Cookies must be enabled in your browser. The GUI generates and saves a token
+in your browser which is used for authenticating all communications with the GUI server.
 
-### Send a flare
+2. The GUI will only be launched if the user launching it has the correct user
+permissions: if you are able to open `datadog.yaml`, you are able to use the GUI.
 
+3. For security reasons, the GUI can **only** be accessed from the local network interface (```localhost```/```127.0.0.1```), so you must be on the same host that the agent is running to use it. In other words, you can't run the agent on a VM or a container and access it from the host machine.
 
-If you are running the 5.3 version (or higher) of the agent, you're able to send all necessary troubleshooting information to our Support Team, with one flare command!
+## Supported OSs versions
+### Agent v6
+|OS| Supported versions|
+|:----|:----|
+|[Debian x86_64](/agent/basic_agent_usage/deb) | Debian 7 (wheezy) and above (we do not support SysVinit)|
+|[Ubuntu x86_64](/agent/basic_agent_usage/ubuntu) | Ubuntu 14.04 and above|
+|[RedHat/CentOS x86_64](/agent/basic_agent_usage/redhat)| RedHat/CentOS 6 and above |
+|[SUSE Enterprise Linux x86_64](/agent/basic_agent_usage/suse) | SUSE 11 SP4 and above (we do not support SysVinit)| 
+|[Fedora x86_64](/agent/basic_agent_usage/fedora) | Fedora 26 and above |
+|[MacOS](/agent/basic_agent_usage/osx)| OSX 10.10 and above|
+|[Windows server 64-bit](/agent/basic_agent_usage/windows)| Windows server 2008r2 or above|
+|[Windows 64-bit](/agent/basic_agent_usage/windows)| Windows 7 or above|
 
-`flare` gathers all of the agent's configuration files and logs into an archive file. It removes sensitive information including passwords, API keys, Proxy credentials, and SNMP community strings.  
-**Confirm the upload of the archive to immediately send it to Datadog support**.  
-Since the Datadog Agent is completely open source, you can [verify the code's behavior](https://github.com/DataDog/dd-agent/blob/master/utils/flare.py). You can also review the archive prior to sending as the flare prompts a confirmation before uploading it.  
+**Note**: Source install may work on operating systems not listed here and is supported on a best effort basis.
+### Agent v5
 
-In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if you don't specify a case ID, the command asks for an email address that is used to login in your organization and creates a new support case.
+|OS| Supported versions|
+|:----|:----|
+|[Debian x86_64](/agent/basic_agent_usage/deb) | Debian 7 (wheezy) and above |
+|[Ubuntu x86_64](/agent/basic_agent_usage/ubuntu) | Ubuntu 12.04 and above|
+|[RedHat/CentOS x86_64](/agent/basic_agent_usage/redhat)| RedHat/CentOS 6 and above |
+|[SUSE Enterprise Linux x86_64](/agent/basic_agent_usage/suse) | SUSE 11 SP4 and above| 
+|[Fedora x86_64](/agent/basic_agent_usage/fedora)| Fedora 26 and above |
+|[MacOS](/agent/basic_agent_usage/osx)| OSX 10.10 and above|
+|[Windows server 64-bit](/agent/basic_agent_usage/windows)| Windows server 2008r2 or above|
+|[Windows 64-bit](/agent/basic_agent_usage/windows)| Windows 7 or above|
 
-|Platform|Agent v5 |Agent v6|
-|:--------|:-----|:--------|
-|Linux| `sudo /etc/init.d/datadog-agent flare <CASE_ID>` | `sudo -u dd-agent -- datadog-agent flare <CASE_ID>`|
-|Docker|`docker exec -it dd-agent /etc/init.d/datadog-agent flare <CASE_ID>`|`n/a`|
-|Docker (Alpine)|`docker exec -it dd-agent /opt/datadog-agent/bin/agent flare <CASE_ID>`||
-|MacOS x|`datadog-agent flare <CASE_ID>`              | `datadog-agent flare <CASE_ID>` or web [web GUI](/agent/v6/#using-the-gui)
-|CentOS| `sudo service datadog-agent flare <CASE_ID>`              | `sudo datadog-agent flare <CASE_ID>`              |
-|Debian| `sudo service datadog-agent flare <CASE_ID>`              | `sudo datadog-agent flare <CASE_ID>`              |
-|Kubernetes|`kubectl exec <pod-name> -it /etc/init.d/datadog-agent flare <CASE_ID>`|`n/a`|
-|Fedora|`sudo service datadog-agent flare <CASE_ID>`              | `sudo datadog-agent flare <CASE_ID>`              |
-|Redhat|`sudo service datadog-agent flare <CASE_ID>`              | `sudo datadog-agent flare <CASE_ID>`              |
-|Suse|`sudo service datadog-agent flare <CASE_ID>`              | `sudo datadog-agent flare <CASE_ID>`              |
-|Source|`sudo ~/.datadog-agent/bin/agent flare <CASE_ID>`|`sudo datadog-agent flare <CASE_ID>`|
-|Windows|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows/#send-a-flare)|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows/#send-a-flare)|
-
+**Note**: Source install may work on operating systems not listed here and is 

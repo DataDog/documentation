@@ -1,6 +1,6 @@
 ---
 title: Docker JMX
-kind: documentation
+kind: faq
 ---
 
 The standard datadog/docker-dd-agent:latest image for running [the docker container](https://app.datadoghq.com/account/settings#agent/docker) dd-agent does not have JMX installed in it, since that's some additional weight that isn't always useful.
