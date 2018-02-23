@@ -17,8 +17,8 @@ aliases:
 
 There are two installation processes available to gather metrics, traces and logs from your Kubernetes Clusters:
 
-* [Container installation](#container_installation) - recommended
-* [Host installation](#host_installation) - optional
+* [Container installation](#container-installation) - recommended
+* [Host installation](#host-installation) - optional
 
 Installing the agent on the host as opposed to in a pod as part of a Deployment or a Daemonset would not benefit the observability of the lifecycle of your Kubernetes cluster.
 
