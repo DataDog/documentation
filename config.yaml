@@ -444,7 +444,7 @@ languages:
           parent: menu_references_logs
         - identifier: customnav_lognav_aws
           name: "AWS"
-          url: "/integrations/amazon_web_service/#log-collection"
+          url: "/integrations/amazon_web_services/#log-collection"
           weight: 60
           parent: menu_references_logs
         - identifier: customnav_lognav_docker
