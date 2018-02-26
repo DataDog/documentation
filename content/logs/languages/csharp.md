@@ -233,6 +233,14 @@ If you have followed the instructions you should see in your file (for example `
 }
 ```
 
+If despite the benefits of logging in JSON you wish to remain in a raw string format, we recommend to update the `log4net convertion pattern` as follows:
+
+```
+<param name="ConversionPattern" value="%date%d{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread] %logger %method:%line - %message%n" />
+```
+
+It will then automatically be parsed by the c# integration pipeline.
+
 ## Configure your Datadog agent
 
 Create a `csharp.d/conf.yaml` file in your `conf.d/` folder with the following content:
