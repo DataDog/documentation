@@ -38,7 +38,7 @@ from ddtrace import tracer
 @tracer.wrap(service='my-app')
 ```
 
-Read more about manually instrumenting your application for [Go](/setup/go/#opentracing-api), [Java](/setup/java/#manual-instrumentation), [Python](/setup/python/#example), [Ruby](/setup/ruby/#example)."
+Read more about manually instrumenting your application for [Go](/tracing/setup/go/#opentracing-api), [Java](/tracing/setup/java/#manual-instrumentation), [Python](/tracing/setup/python/#example), [Ruby](/tracing/setup/ruby/#example)."
 
 Service names:
 

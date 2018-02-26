@@ -29,7 +29,7 @@ The services list is a bird's eye view of all [services](/tracing/services/servi
 
 ### Services types
 
-Every Service monitored by your application is associated with a "type". This type is automatically determined by Datadog based on the `span.type` attribute attached to your [spans](/tracing/service/trace/#spans). The "type" specified the name of the application/framework the Datadog Agent is integrating with.
+Every Service monitored by your application is associated with a "type". This type is automatically determined by Datadog based on the `span.type` attribute attached to your [spans](/tracing/services/trace/#spans). The "type" specified the name of the application/framework the Datadog Agent is integrating with.
 
 For example, if you are using the official Flask Integration, the "Type" is set to "Web". If you are monitoring a custom application, the "Type" appears as "Custom".
 
