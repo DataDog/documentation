@@ -37,7 +37,7 @@ Containers are by their nature extremely high cardinality objects. Our flexible 
 
 ### Tagging
 
-Containers are [tagged](/developers/tagging) with all existing host-level tags.  We also tag with metadata associated with individual containers.  
+Containers are [tagged](/getting_started/tagging) with all existing host-level tags.  We also tag with metadata associated with individual containers.  
 
 All containers are tagged by `image_name`, and additionally, we include integrations with popular orchestrators, such as [ECS](/integrations/amazon_ecs) and [Kubernetes](/integrations/kubernetes), which provide further container-level tags.  We also decorate each container with Docker, ECS, or Kubernetes icons so you can tell which are being orchestrated at a glance.
 

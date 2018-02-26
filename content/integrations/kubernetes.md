@@ -36,7 +36,7 @@ You can also just run the Datadog Agent on your host and configure it to gather 
 
 ## Setup Kubernetes
 
-[Refer to the dedicated documentation to choose the perfect setup for your Kubernetes integration](/agent/kubernetes)
+[Refer to the dedicated documentation to choose the perfect setup for your Kubernetes integration](/agent/basic_agent_usage/kubernetes)
 
 
 ## Setup Kubernetes State
