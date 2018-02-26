@@ -9,7 +9,7 @@ private: true
 * [Getting further with Docker](/agent/faq/getting-further-with-docker)
 * [Docker JMX](/agent/faq/docker-jmx)
 * [Dogstream](/agent/faq/dogstream)
-* [Install core extras](/agent/faq/install-core-extras)
+* [Install core extras](/agent/faq/install-core-extra)
 * [Agent commands](/agent/faq/agent-commands)
 * [How does Datadog determine the agent hostname?](/agent/faq/how-datadog-agent-determines-the-hostname)
 

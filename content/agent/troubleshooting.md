@@ -15,7 +15,7 @@ If you're still unsure about the issue, you may reach out to [Datadog support te
 
 To enable the full debug mode:
 
-1. Modify your local `datadog.yaml` file (see [this page](/agent/v6/#configuration-file) to locate this configuration file on your instance)
+1. Modify your local `datadog.yaml` file (see [this page](/agent/#configuration-file) to locate this configuration file on your instance)
 
 2. Replace `# log_level: INFO` with `log_level: DEBUG` (make sure to get rid of # to uncomment the line)
 
@@ -39,7 +39,7 @@ In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if
 |Linux| `sudo /etc/init.d/datadog-agent flare <CASE_ID>` | `sudo -u dd-agent -- datadog-agent flare <CASE_ID>`|
 |Docker|`docker exec -it dd-agent /etc/init.d/datadog-agent flare <CASE_ID>`|`n/a`|
 |Docker (Alpine)|`docker exec -it dd-agent /opt/datadog-agent/bin/agent flare <CASE_ID>`||
-|MacOS x|`datadog-agent flare <CASE_ID>`              | `datadog-agent flare <CASE_ID>` or web [web GUI](/agent/v6/#using-the-gui)
+|MacOS x|`datadog-agent flare <CASE_ID>`              | `datadog-agent flare <CASE_ID>` or web [web GUI](/agent/#using-the-gui)
 |CentOS| `sudo service datadog-agent flare <CASE_ID>`              | `sudo datadog-agent flare <CASE_ID>`              |
 |Debian| `sudo service datadog-agent flare <CASE_ID>`              | `sudo datadog-agent flare <CASE_ID>`              |
 |Kubernetes|`kubectl exec <pod-name> -it /etc/init.d/datadog-agent flare <CASE_ID>`|`n/a`|

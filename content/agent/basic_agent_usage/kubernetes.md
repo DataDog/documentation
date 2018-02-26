@@ -2,13 +2,10 @@
 title: Kubernetes
 kind: documentation
 further_reading:
-- link: "/agent/kubernetes/autodiscovery"
+- link: "/agent/advanced_features/autodiscovery"
   tag: "Documentation"
   text: Docker Agent Autodiscovery
-- link: "/agent/kubernetes/event_collection"
-  tag: "Documentation"
-  text: Event collection
-- link: "/agent/kubernetes/process_collection"
+- link: "/agent/process_collection/kubernetes_process_collection"
   tag: "Documentation"
   text: Process collection for Kubernetes
 aliases:
@@ -113,7 +110,7 @@ Replace `YOUR_API_KEY` with [your api key](https://app.datadoghq.com/account/set
   kubectl create -f datadog-agent.yaml
   ```
 
-**Note**:  This manifest enables autodiscovery's auto configuration feature. To learn how to configure autodiscovery, please refer to [its documentation](https://docs.datadoghq.com/agent/kubernetes/autodiscovery).
+**Note**:  This manifest enables autodiscovery's auto configuration feature. To learn how to configure autodiscovery, please refer to [its documentation](https://docs.datadoghq.com/agent/advanced_features/autodiscovery).
 
 ### RBAC
 
@@ -176,7 +173,7 @@ And in the manifest of your agent (Daemonset/Deployment) add the following:
 ##### Annotations
 
 It is also possible to enable integrations via the annotations in the manifest of your application.
-This can be done with the autodiscovery, for more details, see the [Autodiscovery](/agent/kubernetes/autodiscovery) section.
+This can be done with the autodiscovery, for more details, see the [Autodiscovery](/agent/advanced_features/autodiscovery) section.
 
 
 ## Host installation
@@ -244,7 +241,7 @@ If the Agent is deployed you will see output similar to the text below, where de
 
 Similarly to the Agent 5, the Agent 6 can collect events from the Kubernetes API server.
 First and foremost, you need to set the `collect_kubernetes_events` variable to `true` in the datadog.yaml, this can be achieved via the environment variable `DD_COLLECT_KUBERNETES_EVENTS` that is resolved at start time.
-You will need to give the agent some rights to activate this feature. See the [RBAC](/agent/kubernetes/container_installation/#rbac) section.
+You will need to give the agent some rights to activate this feature. See the [RBAC](#rbac) section.
 
 A ConfigMap can be used to store the `event.tokenKey` and the `event.tokenTimestamp`. It has to be deployed in the `default` namespace and be named `datadogtoken`.
 One can simply run `kubectl create configmap datadogtoken --from-literal="event.tokenKey"="0"` . You can also use the example in manifests/datadog_configmap.yaml.
@@ -257,7 +254,7 @@ This is in order to avoid duplicate the events collected, as well as putting les
 The Datadog Agent6 supports built in leader election option for the Kubernetes event collector and the Kubernetes cluster related checks (i.e. Controle Plane service check).
 
 This feature relies on Endpoints, you can enable it by setting the `DD_LEADER_ELECTION` environment variable to `true` the Datadog Agents will need to have a set of actions allowed prior to its deployment nevertheless.
-See the [RBAC](/agent/kubernetes/container_installation/#rbac) section for more details and keep in mind that these RBAC entities will need to be created before the option is set.
+See the [RBAC](#rbac) section for more details and keep in mind that these RBAC entities will need to be created before the option is set.
 
 Agents coordinate by performing a leader election among members of the Datadog DaemonSet through kubernetes to ensure only one leader agent instance is gathering events at a given time.
 

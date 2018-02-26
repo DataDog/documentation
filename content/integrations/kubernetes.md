@@ -64,7 +64,7 @@ If the Agent is deployed you will see similar output to the text below, where de
 ## Setup Kubernetes DNS
 ### Configuration
 
-Since [agent v6](/agent/v6), Kubernetes DNS integration works automatically with the [Autodiscovery](/agent/kubernetes/autodiscovery). 
+Since [agent v6](/agent/v6), Kubernetes DNS integration works automatically with the [Autodiscovery](/agent/advanced_features/autodiscovery). 
 
 ## Data Collected
 ### Metrics
@@ -79,7 +79,7 @@ Since [agent v6](/agent/v6), Kubernetes DNS integration works automatically with
 
 ### Events
 
-As the 5.17.0 release, Datadog Agent now supports built in [leader election option](/agent/kubernetes/event_collection) for the Kubernetes event collector. Once enabled, you no longer need to deploy an additional event collection container to your cluster. Instead, Agents will coordinate to ensure only one Agent instance is gathering events at a given time, events below will be available:
+As the 5.17.0 release, Datadog Agent now supports built in [leader election option](/agent/basic_agent_usage/kubernetes/#event_collection) for the Kubernetes event collector. Once enabled, you no longer need to deploy an additional event collection container to your cluster. Instead, Agents will coordinate to ensure only one Agent instance is gathering events at a given time, events below will be available:
 
 * Backoff
 * Conflict
@@ -125,7 +125,7 @@ The Kubernetes check includes the following service checks:
 
 * [Can I install the Agent on my Kubernetes master node(s)](/integrations/faq/can-i-install-the-agent-on-my-kubernetes-master-node-s)
 * [Why is the Kubernetes check failing with a ConnectTimeout error to port 10250?](/integrations/faq/why-is-the-kubernetes-check-failing-with-a-connecttimeout-error-to-port-10250)
-* [How to report host disk metrics when dd-agent runs in a docker container?](/agent/docker/getting_further)
+* [How to report host disk metrics when dd-agent runs in a docker container?](/agent/faq/getting-further-with-docker)
 * [Client Authentication against the apiserver and kubelet](/integrations/faq/client-authentication-against-the-apiserver-and-kubelet)
 * [Gathering Kubernetes events](/integrations/faq/gathering-kubernetes-events)
 * [Using RBAC permission with your Kubernetes integration](/integrations/faq/using-rbac-permission-with-your-kubernetes-integration)

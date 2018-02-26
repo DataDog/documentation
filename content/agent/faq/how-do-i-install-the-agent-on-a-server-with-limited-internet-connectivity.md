@@ -5,7 +5,7 @@ further_reading:
 - link: "/agent/"
   tag: "Documentation"
   text: Learn more about the Datadog Agent
-- link: "/agent/v5/proxy"
+- link: "/agent/advanced_features/proxy"
   tag: "Documentation"
   text: Learn more about Proxy
 ---

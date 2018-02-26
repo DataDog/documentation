@@ -51,7 +51,7 @@ docker run -d --name dd-agent -h `hostname` -e DD_API_KEY=<YOUR_API_KEY>  -e DD_
 
 Important notes: 
 
-- The Docker integration is enabled by default, as well as [autodiscovery](/agent/kubernetes/autodiscovery/) in auto configuration mode (remove the listeners: -docker section in `datadog.yaml` to disable it).
+- The Docker integration is enabled by default, as well as [autodiscovery](/agent/advanced_features/autodiscovery/) in auto configuration mode (remove the listeners: -docker section in `datadog.yaml` to disable it).
 
 - We recommend to always pick the latest version of Datadog Agent 6. [Consult the full list of available images for Agent 6](https://hub.docker.com/r/datadog/agent/tags/).
 

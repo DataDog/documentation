@@ -28,14 +28,14 @@ The Datadog agent sends its logs to Datadog over TLS-encrypted TCP. This require
 
 ## Agent setup 
 
-Refer to [the dedicated Datadog Agent documentation](/agent/v6/log_collection) to learn about all agent configuration options:
+Refer to [the dedicated Datadog Agent documentation](/agent/log_collection) to learn about all agent configuration options:
 
-* [Tail existing files](/agent/v6/log_collection/#tail-existing-files)
-* [Stream logs through TCP/UDP](/agent/v6/log_collection/#stream-logs-through tcp-udp)
-* [Filter logs](/agent/v6/log_collection/#filter-logs)
-* [Scrub sensitive data in your logs](/agent/v6/log_collection/#Scrub-sensitive-data-in-your-logs)
-* [Multi-line aggregation](/agent/v6/log_collection/#multi-line-aggregation)
-* [Tail multiple directories or whole directories by using wildcards](/agent/v6/log_collection/#tail-multiple-directories-or-whole-directories-by-using-wildcards)
+* [Tail existing files](/agent/log_collection/#tail-existing-files)
+* [Stream logs through TCP/UDP](/agent/log_collection/#stream-logs-through tcp-udp)
+* [Filter logs](/agent/log_collection/#filter-logs)
+* [Scrub sensitive data in your logs](/agent/log_collection/#Scrub-sensitive-data-in-your-logs)
+* [Multi-line aggregation](/agent/log_collection/#multi-line-aggregation)
+* [Tail multiple directories or whole directories by using wildcards](/agent/log_collection/#tail-multiple-directories-or-whole-directories-by-using-wildcards)
 
 
 ## Enabling log collection from integrations
