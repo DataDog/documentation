@@ -53,7 +53,10 @@ The tracer is configured using System Properties and Environment Variables as fo
 | agent.port         | dd.agent.port         | DD_AGENT_PORT             | `8126`             | Port number the agent is listening on for configured host. |
 | priority.sampling  | dd.priority.sampling  | DD_PRIORITY_SAMPLING      | `false`            | Changes how the client and agent sample traces. See [Sampling / distributed tracing](#sampling-distributed-tracing) section for details. |
 
-**Note**: If the same key type is set for both, the system property configuration takes priority.
+**Note**: 
+
+* If the same key type is set for both, the system property configuration takes priority.
+* System properties can be used as JVM parameters.
 
 ## Manual Instrumentation
 
