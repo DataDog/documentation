@@ -203,6 +203,11 @@ languages:
           url: "/agent/advanced_features/prometheus"
           weight: 640
           parent: advanced_features
+        - identifier: custom_python_package
+          name: "Adding Python packages"
+          url: "/agent/advanced_features/custom_python_package"
+          weight: 650
+          parent: advanced_features
 
         # Troubleshooting
         - identifier: troubleshooting
