@@ -19,5 +19,5 @@ dog.emit_points('some.metric.name', points, : tags => ["version:1"])
 # Emit differents metrics in a single request to be more efficient
 dog.batch_metrics do
   dog.emit_point('test.api.test_metric',10)
-  dog.emit_point('test.api.this_other_metric', 1, :type => 'counter')
+  dog.emit_point('test.api.this_other_metric', 1)
 end
