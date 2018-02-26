@@ -29,7 +29,7 @@ To start tracing your application:
   Install and configure the latest [Datadog Agent](https://app.datadoghq.com/account/settings#agent) (version 6.0 or above is required). For additional information, reference the [getting started guide](https://github.com/DataDog/datadog-trace-agent/tree/master/config#agent-configuration).
 
 2. **Install the Trace Agent**:  
-  Depending on your operating system, install the Datadog Trace Agent separately:
+
   * On **Linux**,**Windows**, and **[Docker](/tracing/setup/docker)** the Trace Agent is pre-packaged with the standard Datadog Agent and no extra configuration is needed.
 
   * On **macOS** , install and run the [Trace Agent](https://github.com/DataDog/datadog-trace-agent) in addition to the Datadog Agent.  
