@@ -20,7 +20,7 @@ There are two installation processes available to gather metrics, traces and log
 Installing the agent on the host as opposed to in a pod as part of a Deployment or a Daemonset would not benefit the observability of the lifecycle of your Kubernetes cluster.
 
 It could however help give visibility over the start of the Kubernetes ecosystem and health thereof.
-Similarly, one would not be restricted to monitoring applications belonging to the Kubernetes eco system.  
+Similarly, one would not be restricted to monitoring applications belonging to the Kubernetes eco system.
 
 To discover all data collected automatically from the Kubernetes integration, refer to the dedicated [Kubernetes Integration Documentation](/integrations/kubernetes).
 
@@ -89,8 +89,8 @@ spec:
           exec:
             command:
             - ./probe.sh
-          initialDelaySeconds: 15
-          periodSeconds: 5
+          initialDelaySeconds: 60
+          periodSeconds: 30
       volumes:
         - hostPath:
             path: /var/run/docker.sock
@@ -212,8 +212,8 @@ mv /etc/datadog-agent/conf.d/docker.d/conf.yaml.example /etc/datadog-agent/conf.
 
 For the docker check to run properly you'll need to add the `dd-agent` user to the docker group using `adduser dd-agent docker`
 
-#### Validation
-##### Container Running
+## Validation
+### Container Running
 
 To verify the Datadog Agent is running in your environment as a daemonset, execute:
 
@@ -224,7 +224,7 @@ If the Agent is deployed you will see output similar to the text below, where de
     NAME            DESIRED   CURRENT   READY     UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
     datadog-agent   2         2         2         2            2           <none>          16h
 
-##### Agent check running
+### Agent check running
 
 [Run the Agent's `status` subcommand](/agent/#agent-status-and-information) and look for `kubelet` under the Checks section:
 
