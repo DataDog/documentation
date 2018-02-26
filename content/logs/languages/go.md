@@ -98,7 +98,6 @@ logs:
     service: go
     source: go
     sourcecategory: sourcecode
-    # For multiline logs, if they start by the date with the format yyyy-mm-dd uncomment the following processing rule
 ```
 
 ## Getting Further
