@@ -3,6 +3,7 @@ title: Getting started with tags
 kind: documentation
 aliases:
     - /getting_started/getting_started_with_tags
+    - /guides/tagging/
 further_reading:
 - link: "/getting_started/tagging/assigning_tags"
   tag: "Documentation"
@@ -14,7 +15,7 @@ further_reading:
 
 ## Introduction
 
-Tags are a way of adding dimensions to metrics, so they can be sliced, diced, aggregated, and compared on the front end. [Using tags](/developers/tagging/) enables you to observe aggregate performance across a number of hosts and (optionally) narrow the set further based on specific elements. In a nutshell, tagging is a method to scope aggregated data.
+Tags are a way of adding dimensions to metrics, so they can be sliced, diced, aggregated, and compared on the front end. [Using tags](/getting_started/tagging/using_tags) enables you to observe aggregate performance across a number of hosts and (optionally) narrow the set further based on specific elements. In a nutshell, tagging is a method to scope aggregated data.
 
 ## Why It Matters
 
