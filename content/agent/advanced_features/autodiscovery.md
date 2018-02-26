@@ -60,12 +60,12 @@ The Agent looks for Autodiscovery templates in its `conf.d/auto_conf` directory,
 
 These templates may suit you in basic cases, but if you need to use custom check configurations—say you want to enable extra check options, use different container identifiers, or use template variable indexing— you'll have to write your own auto-conf files. You can then provide those in a few ways:
 
-1. Add them to each host that runs docker-datadog-agent and [mount the directory that contains them](https://github.com/DataDog/datadog-agent) into the docker-dd-agent container when starting it
+1. Add them to each host that runs docker-datadog-agent and [mount the directory that contains them](https://github.com/DataDog/datadog-agent) into the datadog-agent container when starting it
 2. On Kubernetes, add them [using ConfigMaps](/agent/basic_agent_usage/kubernetes/#configmap)
 
 ### Example: Apache check
 
-Here's the `apache.yaml` template packaged with docker-dd-agent:
+Here's the `apache.yaml` template packaged with datadog-agent:
 
 ```yaml
 ad_identifiers:
@@ -85,7 +85,7 @@ If this is too limiting—if you need to apply different check configurations to
 
 ### Template Source: Key-value Store
 
-Autodiscovery can use [Consul](/integrations/consul), etcd, and Zookeeper as template sources. To use a key-value store, you must configure it in `datadog.yaml` or in environment variables passed to the docker-dd-agent container.
+Autodiscovery can use [Consul](/integrations/consul), etcd, and Zookeeper as template sources. To use a key-value store, you must configure it in `datadog.yaml` or in environment variables passed to the datadog-agent container.
 
 #### Configure in datadog.yaml
 

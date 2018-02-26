@@ -19,9 +19,9 @@ Datadog's Logs is currently available via public beta. You can apply for inclusi
 
 ## Overview
 
-Datadog Agent version 6 and greater can collect logs from containers.  
+Datadog Agent version 6 and greater can collect logs from containers.
 Two installations are possible:
- 
+
 - on the host where the agent is external to the Docker environment
 - or by deploying its containerized version in the Docker environment
 
@@ -40,16 +40,24 @@ First let’s create two directories on the host that we will later mount on the
 
 - `/opt/datadog-agent/run`: to make sure we do not lose any logs from containers during restarts or network issues we store on the host the last line that was collected for each container in this directory
 
-- ` /opt/datadog-agent/conf.d`: this is where you will provide your integration instructions. Any configuration file added there will automatically be picked up by the containerized agent when restarted.  
+- ` /opt/datadog-agent/conf.d`: this is where you will provide your integration instructions. Any configuration file added there will automatically be picked up by the containerized agent when restarted.
 For more information about this check [here](https://github.com/DataDog/docker-dd-agent#enabling-integrations)
 
 To run a Docker container which embeds the Datadog Agent to monitor your host use the following command:
 
 ```
-docker run -d --name dd-agent -h `hostname` -e DD_API_KEY=<YOUR_API_KEY>  -e DD_LOGS_ENABLED=true -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -v /otp/datadog-agent/conf.d:/conf.d:ro datadog/agent:latest
+docker run -d --name datadog-agent \
+           -e DD_API_KEY=<YOUR_API_KEY> \
+           -e DD_LOGS_ENABLED=true \
+           -v /var/run/docker.sock:/var/run/docker.sock:ro \
+           -v /proc/:/host/proc/:ro \
+           -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw \
+           -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+           -v /opt/datadog-agent/conf.d:/conf.d:ro \
+           datadog/agent:latest
 ```
 
-Important notes: 
+Important notes:
 
 - The Docker integration is enabled by default, as well as [autodiscovery](/agent/advanced_features/autodiscovery/) in auto configuration mode (remove the listeners: -docker section in `datadog.yaml` to disable it).
 
@@ -64,7 +72,7 @@ The command related to log collection are the following:
 ### Configuration file example
 
 Now that the agent is ready to collect logs, you need to define which containers you want to follow.
-To start collecting logs for a given container filtered by image or label, you need to update the log section in an integration or custom .yaml file. 
+To start collecting logs for a given container filtered by image or label, you need to update the log section in an integration or custom .yaml file.
 Add a new yaml file in the `conf.d` directory (should be `/opt/datadog-agent/conf.d` on the host if you followed above instruction) with the following parameters:
 
 ```yaml
@@ -73,7 +81,7 @@ instances:
 
 ##Log section
 
-logs:    
+logs:
    - type: docker
      image: my_image_name    #or label: mylabel
      service: my_application_name
