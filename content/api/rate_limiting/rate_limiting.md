@@ -13,7 +13,7 @@ Rate limits can be increased from defaults by [contacting the Datadog Support te
 
 Here is some information regarding our API rate limit policy:
 
-* We **do not rate limit** on datapoint/metric submission - the limits you'd encounter would be based on [your agreement](/getting_started/custom_metrics)
+* We **do not rate limit** on datapoint/metric submission (see [metrics section](/api/#metrics) for more info on how metric submission rate is handled) - the limits you'd encounter would be the quantity of custom metrics based on [your agreement](/getting_started/custom_metrics)
 * Rate limit for event submission is 1000 per aggregate per day per organization. An aggregate is a group of similar events.
 * Rate limit for the [query_batch API](/api/#query-time-series-points) call is 300 per hour per organization, it can be extended on demand
 * Rate limit for the [query_snapshot API](/api/#graphs) call is 60 per hour per organization, it can be extended on demand
