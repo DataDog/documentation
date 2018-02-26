@@ -4,6 +4,13 @@ kind: documentation
 aliases:
     - /guides/basic_agent_usage/docker/
     - /agent/basic_agent_usage/docker/
+further_reading:
+- link: "/agent/faq/getting-further-with-docker"
+  tag: "FAQ"
+  text: "Getting further with Docker"
+- link: "/agent/faq/docker-jmx"
+  tag: "FAQ"
+  text: "Docker JMX"
 ---
 
 If you haven't installed the Agent yet, instructions can be found [in the Datadog agent integration page](https://app.datadoghq.com/account/settings#agent/docker). You can also consult our [Official Docker agent 6 image](https://hub.docker.com/r/datadog/agent/).
@@ -72,3 +79,7 @@ Exclude containers from the metrics collection and Autodiscovery, if these are n
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app","release":"helm_release"}'
 DD_DOCKER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 ```
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
