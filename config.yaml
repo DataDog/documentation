@@ -35,10 +35,21 @@ languages:
           weight: 30
         # Getting Started - Subnav start
         - identifier: customnav_getting_started_tags
-          name: "Getting started with tags"
-          url: "/getting_started/getting_started_with_tags/"
+          name: "Tagging"
+          url: "/getting_started/tagging/"
           weight: 310
           parent: menu_references_getting_started
+        - identifier: customnav_getting_started_assigning_tags
+          name: "Assigning tags"
+          url: "/getting_started/tagging/assigning_tags"
+          weight: 311
+          parent: customnav_getting_started_tags
+        - identifier: customnav_getting_started_using_tags
+          name: "Using tags"
+          url: "/getting_started/tagging/using_tags"
+          weight: 312
+          parent: customnav_getting_started_tags
+
         - identifier: customnav_getting_started_from_the_query_to_the_graph
           name: "From the query to the Graph"
           url: "/getting_started/from_the_query_to_the_graph/"
@@ -165,13 +176,6 @@ languages:
           url: "/agent/process_collection/kubernetes_process_collection"
           weight: 420
           parent: process_collection
-          
-          # Tagging
-        - identifier: customnav_developersnav_tagging
-          name: "Tagging"
-          url: "/agent/tagging/"
-          weight: 50
-          parent: menu_references_agent
 
         # Advanced Features
         - identifier: advanced_features
