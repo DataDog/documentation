@@ -226,7 +226,10 @@ If you have followed the instructions you should see in your file (for example `
 {
     "level": "DEBUG",
     "message": "This is my debug message",
-    "date": "2016-05-24 15:53:35.7175"
+    "date": "2016-05-24 15:53:35.7175",
+	  "appname": "Datadog.vshost.exe",
+	  "logger": "Datadog.Program",
+	  "thread": "10"
 }
 ```
 
