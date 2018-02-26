@@ -25,6 +25,16 @@ Datadog APM provides you deep insight into your application's performance - from
 
 Datadog APM is offered as an upgrade to our Pro and Enterprise plans. A free 14-day trial is available. Registered users can visit the [APM page of the Datadog application](https://app.datadoghq.com/apm/home) to get started.
 
+## Terminology
+
+In order to get the most from tracing, it’s important to understand the terms used, the data they represent and how they work together:
+
+|Term|Definition|Note|
+|:----|:-----|:---|
+|[service](/tracing/services/service)| Set of processes that do the same job.| Services are displayed on the [Datadog services list](/tracing/services) and have [out of the box performances graphs](/tracing/services/service/#out-of-the-box-graphs).|
+|[resource](/tracing/services/resource)|Particular action for a service|Resources are available on the [resources list for each service](/tracing/services/service/#resources) and have [out of the box performances graphs](/tracing/services/resource/#out-of-the-box-graphs)|
+|[trace](/tracing/services/trace)|Representation of a request as it flows across a distributed system| A trace can be collected in [any language](/tracing/setup). Traces are found in the [traces list for each resources](/tracing/services/resource/#traces) or in the [trace search directly](/tracing/traces)|
+|[span](/tracing/services/trace/#spans) |A logical unit of work in the system| Spans are associated with a [service](/tracing/services/service) and optionally a [resource](/tracing/services/resource). Each span consists of a start time, a duration, and optional tags.|
 
 ## Data collected
 

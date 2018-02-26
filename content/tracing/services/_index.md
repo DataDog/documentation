@@ -19,17 +19,17 @@ Select a service view detailed performance insights, [read our dedicated service
 
 ## Filtering the service list
 
-The services list is a bird's eyed view of all [services](/tracing/services/service) reporting from your infrastructure. It can be filtered depending on:
+The services list is a bird's eye view of all [services](/tracing/services/service) reporting from your infrastructure. It can be filtered by:
 
-* [Your environment](/tracing/setup/environment)
-* [Your service type](#services-types)
-* A query (basic text filtering).
+* [Environment](/tracing/setup/environment)
+* [Service type](#services-types)
+* A query (basic text filtering)
 
 {{< img src="tracing/services/services_filtering.gif" alt="Services filtering" responsive="true" popup="true" style="width:75%;">}}
 
 ### Services types
 
-Every Service monitored by your application is associated with a "Type". This type is automatically determined by Datadog based on the `span.type` attribute attached to your [Spans](/tracing/service/trace/#spans). The "Type" specified the name of the application/framework the Datadog Agent is Integrating with.
+Every Service monitored by your application is associated with a "type". This type is automatically determined by Datadog based on the `span.type` attribute attached to your [spans](/tracing/service/trace/#spans). The "type" specified the name of the application/framework the Datadog Agent is integrating with.
 
 For example, if you are using the official Flask Integration, the "Type" is set to "Web". If you are monitoring a custom application, the "Type" appears as "Custom".
 
@@ -56,7 +56,7 @@ Choose what do display in your services list:
 * **Avg/p75/p90/p95/p99/Max Latency**: Avg/p75/p90/p95/p99/Max latency of your traced requests
 * **Error Rate**: Amount of requests traced (per seconds) that ended with an error
 * **Apdex**: Apdex score of the service, [learn more on Apdex](/tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm)
-* **Monitor status**: [Status of monitors](/tracing/services/service/#service-monitor) attached to a service.
+* **Monitor status**: [Status of monitors](/tracing/services/service/#service-monitor) attached to a service
 
 {{< img src="tracing/services/services_columns.png" alt="Services columns" responsive="true" popup="true" style="width:40%;">}}
 

@@ -1,5 +1,5 @@
 ---
-title: My trace-agent.log renders "empty `Service`" error
+title: My trace-agent.log renders "empty `service`" error
 kind: faq
 ---
 
@@ -13,25 +13,25 @@ invalid span Span[t_id:631844*********,s_id:631844********,p_id:631844*****,ser:
 res:<your.request.name>]: span.normalize: empty `Service` (debug for more info)
 ```
 
-### Check that the Service was properly defined
+### Check that the service was properly defined
 
 Note that this issue is more likely to happen when manual instrumentation is used, especially in languages such as Go. Refer to our documentations for further details: [this page](/tracing/setup) leads you to the specific languages libraries we use.
 
-### My Service is defined properly 
+### My service is defined properly 
 
 The issue is probably linked to the actual location of your code instrumentation.
 
-The goal here is to always have a Root Span define when a Child Span is called when an application is running. 
+The goal here is to always have a Root span define when a Child span is called when an application is running. 
 
-A wrong instrumentation can lead to a dissociation of that Child Span to its Rootspan, either at every Span call, or in some specific path calls in the application. 
+A wrong instrumentation can lead to a dissociation of that Child span to its Rootspan, either at every span call, or in some specific path calls in the application. 
 
 Let's say we have a user hitting a web application >> calls a Database. 
 
 We could expect the path of action to be this
 
-User hit web application >> Handler function called >> lower level span created (child Span ) >> Calling back the Root Span. 
+User hit web application >> Handler function called >> lower level span created (child span ) >> Calling back the Root span. 
 
-If the Child Span isn't associated directly to the Root Span, you could end up with the error described above, especially if the Child Service Span definition is based on the Parent Span definition. 
+If the Child span isn't associated directly to the Root span, you could end up with the error described above, especially if the Child service span definition is based on the Parent span definition. 
 
 ### Nope, my code is properly instrumented 
 

@@ -20,7 +20,7 @@ Consult on this page:
 
 ## Definition
 
-**A Service is the name of a set of processes that do the same job.**  
+**A service is a set of processes that do the same job.**  
 For instance, a simple web application may consist of two services: 
 
 * A single `webapp` service and a single `database` service
@@ -30,13 +30,15 @@ While a more complex environment may break it out into 6 services:
 * 3 separate services: `webapp`, `admin`, and `query`.
 * 3 separate external service:  `master-db`,  `replica-db`, and `yelp-api`.
 
-You defined those service when instrumenting your application with Datadog.
-An example of setting a custom Service using Python:
+Explicitly name services by instrumenting your application. For example in Python:  
+
 ```python
 from ddtrace import tracer
 # add the `wrap` decorator to trace an entire function
 @tracer.wrap(service='my-app')
 ```
+
+Read more about manually instrumenting your application for [Go](/setup/go/#opentracing-api), [Java](/setup/java/#manual-instrumentation), [Python](/setup/python/#example), [Ruby](/setup/ruby/#example)."
 
 Service names:
 
