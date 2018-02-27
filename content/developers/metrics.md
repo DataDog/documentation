@@ -90,7 +90,7 @@ If you are not willing to lose the historical data submitted as a `gauge`, creat
 
 There are multiple ways to send metrics to Datadog:
 
-1. With your Datadog agent directly (Learn more on how [to write an Agent Checks](/agent/advanced_features/agent_checks) && [Aggregator source](https://github.com/DataDog/dd-agent/blob/master/aggregator.py))
+1. With your Datadog agent directly (Learn more on how [to write an Agent Checks](/agent/agent_checks) && [Aggregator source](https://github.com/DataDog/dd-agent/blob/master/aggregator.py))
 
 2. Using your StatsD server bundled with the Datadog Agent ([Find more about our available libraries](/developers/libraries))
   Note: Because DogStatsD flushes at a regular interval (**default 10s**) all metrics submitted via this method are stored with associated interval metadata.
@@ -470,5 +470,5 @@ The following units may be associated with metrics submitted to Datadog.
 {{% /table %}}
 
 [1]: /developers/dogstatsd
-[2]: /agent/advanced_features/agent_checks
+[2]: /agent/agent_checks
 [3]: /api/#metrics

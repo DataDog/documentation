@@ -2,13 +2,13 @@
 title: Adding a custom python package to the agent
 kind: documentation
 further_reading:
-- link: "/agent/log_collection"
+- link: "/logs/"
   tag: "Documentation"
   text: Collect your logs
-- link: "/agent/process_collection"
+- link: "/graphing/infrastructure/process"
   tag: "Documentation"
   text: Collect your processes
-- link: "/agent/trace_collection"
+- link: "/tracing"
   tag: "Documentation"
   text: Collect your traces
 ---
@@ -37,7 +37,7 @@ C:\Program Files (x86)\Datadog\Datadog Agent\files
 ```
 then [restart your agent](/agent/basic_agent_usage/windows).
 
-{{< img src="agent/advanced_features/windows_python_package.png" alt="windows python package" responsive="true" popup="true">}}
+{{< img src="agent/windows_python_package.png" alt="windows python package" responsive="true" popup="true">}}
 
 ## Further Reading
 

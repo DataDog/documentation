@@ -64,7 +64,7 @@ If the Agent is deployed you will see similar output to the text below, where de
 ## Setup Kubernetes DNS
 ### Configuration
 
-Since [agent v6](/agent/), Kubernetes DNS integration works automatically with the [Autodiscovery](/agent/advanced_features/autodiscovery). 
+Since [agent v6](/agent/), Kubernetes DNS integration works automatically with the [Autodiscovery](/agent/autodiscovery). 
 
 ## Data Collected
 ### Metrics

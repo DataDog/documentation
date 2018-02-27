@@ -11,13 +11,13 @@ further_reading:
 - link: "/agent/faq/docker-jmx"
   tag: "FAQ"
   text: "Docker JMX"
-- link: "/agent/log_collection/docker_log_collection"
+- link: "/logs/docker"
   tag: "Documentation"
   text: Collect your Docker logs
-- link: "/agent/process_collection/docker_process_collection"
+- link: "/graphing/infrastructure/process"
   tag: "Documentation"
   text: Collect your Docker processes
-- link: "/agent/trace_collection/docker_trace_collection"
+- link: "/tracing/docker/"
   tag: "Documentation"
   text: Collect your Docker traces
 ---

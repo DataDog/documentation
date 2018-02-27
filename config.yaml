@@ -135,85 +135,32 @@ languages:
           weight: 165
           parent: customnav_agentnav_basic_usage
         
-        # Log collection
-        - identifier: log_collection
-          name: "Log collection"
-          url: "/agent/log_collection/"
-          weight: 20
-          parent: menu_references_agent
-        - identifier: docker_log_collection
-          name: "Docker Log collection"
-          url: "/agent/log_collection/docker_log_collection"
-          weight: 210
-          parent: log_collection
-        - identifier: log_instrument_your_code
-          name: "Instrument your code"
-          url: "/log/languages/docker_log_collection"
-          weight: 220
-          parent: log_collection
 
-
-
-        # Trace collection
-        - identifier: trace_collection
-          name: "Trace collection"
-          url: "/agent/trace_collection/"
-          weight: 30
-          parent: menu_references_agent
-        - identifier: docker_trace_collection
-          name: "Docker Trace collection"
-          url: "/agent/trace_collection/docker_trace_collection"
-          weight: 310
-          parent: trace_collection
-
-        # Process collection
-        - identifier: process_collection
-          name: "Process collection"
-          url: "/agent/process_collection/"
-          weight: 40
-          parent: menu_references_agent
-        - identifier: docker_process_collection
-          name: "Docker Process collection"
-          url: "/agent/process_collection/docker_process_collection"
-          weight: 410
-          parent: process_collection
-        - identifier: k8_process_collection
-          name: "Kubernetes Process collection"
-          url: "/agent/process_collection/kubernetes_process_collection"
-          weight: 420
-          parent: process_collection
-
-        # Advanced Features
-        - identifier: advanced_features
-          name: "Advanced Features"
-          url: "/agent/advanced_features/"
-          weight: 60
-          parent: menu_references_agent
         - identifier: autodiscovery
           name: "Autodiscovery"
-          url: "/agent/advanced_features/autodiscovery"
-          weight: 610
-          parent: advanced_features
+          url: "/agent/autodiscovery"
+          weight: 20
+          parent: menu_references_agent
         - identifier: proxy
           name: "Proxy"
-          url: "/agent/advanced_features/proxy"
-          weight: 620
-          parent: advanced_features
+          url: "/agent/proxy"
+          weight: 30
+          parent: menu_references_agent
         - identifier: agent_checks
           name: "Agent Checks"
-          url: "/agent/advanced_features/agent_checks"
-          weight: 630
-          parent: advanced_features
+          url: "/agent/agent_checks"
+          weight: 40
+          parent: menu_references_agent
         - identifier: prometheus
           name: "Prometheus Checks"
-          url: "/agent/advanced_features/prometheus"
-          weight: 640
-          parent: advanced_features
+          url: "/agent/prometheus"
+          weight: 50
+          parent: menu_references_agent
         - identifier: custom_python_package
           name: "Adding Python packages"
-          url: "/agent/advanced_features/custom_python_package"
-          weight: 650
-          parent: advanced_features
+          url: "/agent/custom_python_package"
+          weight: 60
+          parent: menu_references_agent
 
         # Troubleshooting
         - identifier: troubleshooting
@@ -506,9 +453,14 @@ languages:
           weight: 50
           parent: menu_references_logs
         - identifier: customnav_lognav_aws
-          name: "AWS"
+          name: "AWS Log collection"
           url: "/logs/aws/"
           weight: 60
+          parent: menu_references_logs
+        - identifier: docker_log_collection
+          name: "Docker Log collection"
+          url: "/logs/docker"
+          weight: 70
           parent: menu_references_logs
         - identifier: customnav_lognav_languages
           name: "Languages"

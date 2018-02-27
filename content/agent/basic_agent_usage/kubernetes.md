@@ -2,10 +2,10 @@
 title: Kubernetes
 kind: documentation
 further_reading:
-- link: "/agent/advanced_features/autodiscovery"
+- link: "/agent/autodiscovery"
   tag: "Documentation"
   text: Docker Agent Autodiscovery
-- link: "/agent/process_collection/kubernetes_process_collection"
+- link: "/graphing/infrastructure/process"
   tag: "Documentation"
   text: Process collection for Kubernetes
 aliases:
@@ -110,7 +110,7 @@ Replace `YOUR_API_KEY` with [your api key](https://app.datadoghq.com/account/set
   kubectl create -f datadog-agent.yaml
   ```
 
-**Note**:  This manifest enables autodiscovery's auto configuration feature. To learn how to configure autodiscovery, please refer to [its documentation](https://docs.datadoghq.com/agent/advanced_features/autodiscovery).
+**Note**:  This manifest enables autodiscovery's auto configuration feature. To learn how to configure autodiscovery, please refer to [its documentation](https://docs.datadoghq.com/agent/autodiscovery).
 
 ### RBAC
 
@@ -173,7 +173,7 @@ And in the manifest of your agent (Daemonset/Deployment) add the following:
 ##### Annotations
 
 It is also possible to enable integrations via the annotations in the manifest of your application.
-This can be done with the autodiscovery, for more details, see the [Autodiscovery](/agent/advanced_features/autodiscovery) section.
+This can be done with the autodiscovery, for more details, see the [Autodiscovery](/agent/autodiscovery) section.
 
 
 ## Host installation

@@ -21,11 +21,8 @@ Datadog Process Monitoring allows for real-time visibility of the most granular 
 
 ## Installation
 
-Refer to the dedicated documentation to learn how to collect your processes:
 
-* [Docker process collection](/agent/process_collection/docker_process_collection)
-* [Agent process collection](/agent/process_collection)
-* [Kubernetes process collection](/agent/process_collection/kubernetes_process_collection)
+
 
 ## Searching, Filtering, and Pivoting
 

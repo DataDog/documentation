@@ -6,7 +6,7 @@ kind: faq
 The standard datadog/docker-dd-agent:latest image for running [the docker container](https://app.datadoghq.com/account/settings#agent/docker) dd-agent does not have JMX installed in it, since that's some additional weight that isn't always useful.
 
 If you are interested in adding JMX-related integrations to your docker containerized dd-agent, use the docker images that end in "-jmx" to install a version that does include JMX, e.g, `datadog/agent:latest-jmx`.
-Execute a docker-run with those images and the `SD_JMX_ENABLE=true` environment variable, and then use [service discovery](/agent/advanced_features/autodiscovery) to collect metrics over JMX using your dd-agent. 
+Execute a docker-run with those images and the `SD_JMX_ENABLE=true` environment variable, and then use [service discovery](/agent/autodiscovery) to collect metrics over JMX using your dd-agent. 
 
 ## Autodiscovery
 

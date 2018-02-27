@@ -6,13 +6,13 @@ aliases:
   - /guides/autodiscovery/
   - /agent/autodiscovery
 further_reading:
-- link: "/agent/log_collection"
+- link: "/logs/"
   tag: "Documentation"
   text: Collect your logs
-- link: "/agent/process_collection"
+- link: "/graphing/infrastructure/process"
   tag: "Documentation"
   text: Collect your processes
-- link: "/agent/trace_collection"
+- link: "/tracing"
   tag: "Documentation"
   text: Collect your traces
 ---
@@ -91,7 +91,7 @@ It looks like a minimal [Apache check configuration](https://github.com/Datadog/
 
 _Any_ `httpd` image. Suppose you have one container running `library/httpd:latest` and another running `yourusername/httpd:v2`. Autodiscovery applies the above template to both containers. When it's loading auto-conf files, Autodiscovery cannot distinguish between identically-named images from different sources or with different tags, and **you have to provide short names for container images**, e.g. `httpd`, NOT `library/httpd:latest`.
 
-If this is too limiting—if you need to apply different check configurations to different containers running the same image— [use labels to identify the containers](/agent/advanced_features/autodiscovery/#template-source-kubernetes-pod-annotations). Label each container differently, then add each label to any template file's `ad_identifiers` list (yes, `ad_identifiers` is where to put _any_ kind of container identifier, not just images).
+If this is too limiting—if you need to apply different check configurations to different containers running the same image— [use labels to identify the containers](/agent/autodiscovery/#template-source-kubernetes-pod-annotations). Label each container differently, then add each label to any template file's `ad_identifiers` list (yes, `ad_identifiers` is where to put _any_ kind of container identifier, not just images).
 
 ### Template Source: Key-value Store
 

@@ -275,7 +275,7 @@ In our experience building integrations, we've also faced a number of challenges
 * Consider generating calculated metrics in addition to raw metrics. For example, many databases have slow, but less frequently run queries. So it's often useful to look at percentiles. For example, our MySQL integration includes a calculated metric for the [95th percentile query execution time][16].
 
 [1]: https://github.com/DataDog/integrations-extras
-[2]: /agent/advanced_features/agent_checks/
+[2]: /agent/agent_checks/
 [3]: https://github.com/DataDog/dd-agent/blob/master/tests/README.md#integration-tests
 [4]: https://github.com/DataDog/dd-agent/blob/master/ci/common.rb
 [5]: https://github.com/DataDog/dd-agent/blob/master/CONTRIBUTING.md#submitting-issues

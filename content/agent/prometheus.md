@@ -2,13 +2,13 @@
 title: Writing a Prometheus Check
 kind: documentation
 further_reading:
-- link: "/agent/log_collection"
+- link: "/logs/"
   tag: "Documentation"
   text: Collect your logs
-- link: "/agent/process_collection"
+- link: "/graphing/infrastructure/process"
   tag: "Documentation"
   text: Collect your processes
-- link: "/agent/trace_collection"
+- link: "/tracing"
   tag: "Documentation"
   text: Collect your traces
 ---
@@ -39,7 +39,7 @@ is called <code>mycheck.py</code> your configuration file <em>must</em> be
 named <code>mycheck.yaml</code>.
 </div>
 
-Configuration for a Prometheus Check is almost the same as a regular Agent Check, please refer to the [dedicated Agent check documentation to learn more](/agent/advanced_features/agent_checks/#configuration)
+Configuration for a Prometheus Check is almost the same as a regular Agent Check, please refer to the [dedicated Agent check documentation to learn more](/agent/agent_checks/#configuration)
 
 The main difference is to include the variable `prometheus_endpoint` in your `check.yaml` file. This goes into `conf.d/kube_dns.yaml`:
 

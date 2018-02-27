@@ -6,13 +6,13 @@ os: osx
 aliases:
     - /guides/basic_agent_usage/osx/
 further_reading:
-- link: "/agent/log_collection"
+- link: "/logs/"
   tag: "Documentation"
   text: Collect your logs
-- link: "/agent/process_collection"
+- link: "/graphing/infrastructure/process"
   tag: "Documentation"
   text: Collect your processes
-- link: "/agent/trace_collection"
+- link: "/tracing"
   tag: "Documentation"
   text: Collect your traces
 ---
