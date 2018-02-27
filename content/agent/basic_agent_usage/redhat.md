@@ -4,6 +4,16 @@ kind: documentation
 platform: Red Hat
 aliases:
     - /guides/basic_agent_usage/redhat/
+further_reading:
+- link: "/agent/loG_collection"
+  tag: "Documentation"
+  text: Collect your logs
+- link: "/agent/process_collection"
+  tag: "Documentation"
+  text: Collect your processes
+- link: "/agent/trace_collection"
+  tag: "Documentation"
+  text: Collect your traces
 ---
 
 
@@ -197,3 +207,7 @@ To uninstall the agent run:
     ```
     $ sudo yum remove datadog-agent
     ```
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

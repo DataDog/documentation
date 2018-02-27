@@ -3,6 +3,16 @@ title: Basic Agent Usage for Debian
 kind: documentation
 aliases:
     - /guides/basic_agent_usage/deb/
+further_reading:
+- link: "/agent/log_collection"
+  tag: "Documentation"
+  text: Collect your logs
+- link: "/agent/process_collection"
+  tag: "Documentation"
+  text: Collect your processes
+- link: "/agent/trace_collection"
+  tag: "Documentation"
+  text: Collect your traces
 ---
 
 ## Overview
@@ -151,3 +161,7 @@ To uninstall the agent run:
 $ sudo apt-get --purge remove datadog-agent -y
 CentOS/RHEL/Amazon Linux
 ```
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

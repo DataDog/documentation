@@ -504,11 +504,6 @@ languages:
           url: "/logs/aws/"
           weight: 60
           parent: menu_references_logs
-        - identifier: customnav_lognav_docker
-          name: "Docker"
-          url: "/logs/docker/"
-          weight: 60
-          parent: menu_references_logs
         - identifier: customnav_lognav_languages
           name: "Languages"
           url: "/logs/languages/"

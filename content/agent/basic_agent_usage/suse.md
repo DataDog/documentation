@@ -4,6 +4,16 @@ kind: documentation
 platform: SUSE
 aliases:
     - /guides/basic_agent_usage/suse/
+further_reading:
+- link: "/agent/loG_collection"
+  tag: "Documentation"
+  text: Collect your logs
+- link: "/agent/process_collection"
+  tag: "Documentation"
+  text: Collect your processes
+- link: "/agent/trace_collection"
+  tag: "Documentation"
+  text: Collect your traces
 ---
 
 ## Overview
@@ -76,3 +86,7 @@ The Agent logs are located in the `/var/log/datadog/` directory:
     * `forwarder.log`
 
 If you're still having trouble, [our support team](/help) will be glad to provide further assistance.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

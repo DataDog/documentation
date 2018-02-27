@@ -11,6 +11,15 @@ further_reading:
 - link: "/agent/faq/docker-jmx"
   tag: "FAQ"
   text: "Docker JMX"
+- link: "/agent/log_collection/docker_log_collection"
+  tag: "Documentation"
+  text: Collect your Docker logs
+- link: "/agent/process_collection/docker_process_collection"
+  tag: "Documentation"
+  text: Collect your Docker processes
+- link: "/agent/trace_collection/docker_trace_collection"
+  tag: "Documentation"
+  text: Collect your Docker traces
 ---
 
 If you haven't installed the Agent yet, instructions can be found [in the Datadog agent integration page](https://app.datadoghq.com/account/settings#agent/docker). You can also consult our [Official Docker agent 6 image](https://hub.docker.com/r/datadog/agent/).

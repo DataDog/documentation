@@ -37,41 +37,13 @@ Refer to [the dedicated Datadog Agent documentation](/agent/log_collection) to l
 * [Multi-line aggregation](/agent/log_collection/#multi-line-aggregation)
 * [Tail multiple directories or whole directories by using wildcards](/agent/log_collection/#tail-multiple-directories-or-whole-directories-by-using-wildcards)
 
-
 ## Enabling log collection from integrations
 
-To start collecting logs for a given integration, you need to uncomment the logs section in that integration's yaml file, and configure it for your environment.
-
-If an integration does not support logs by default, you may need to use the custom file configuration below.
+To start collecting logs for a given integration, uncomment the logs section in that integration's yaml file, and configure it for your environment.
 
 <div class="alert alert-warning">
-During the beta phase of Datadog Logs, not all integrations include log configurations out of the box. A current list of supported integrations is available below.
+Not all integrations include out of the box log configurations.  <a href="https://docs.datadoghq.com/integrations/#cat-log-collection">Consult the current list of supported integrations available</a>.
 </div>
-
-### Containers 
-* [Docker](/logs/docker)
-
-### Cloud
-* [AWS](/logs/aws)
-
-### Languages
-
-* [Java](/logs/languages/java) 
-* [C#](/logs/languages/csharp)
-* [Go](/logs/languages/go)
-* [NodeJs](/logs/languages/nodejs)
-* [Ruby](/logs/languages/ruby)
-
-### Agent checks
-
-* [Apache](/integrations/apache/#log-collection)
-* [Haproxy](/integrations/haproxy/#log-collection)
-* [IIS](/integrations/iis/#log-collection)
-* [Mongo](/integrations/mongo/#log-collection)
-* [MySQL](/integrations/mysql/#log-collection)
-* [Nginx](/integrations/nginx/#log-collection)
-* [PostgreSQL](/integrations/postgres/#log-collection)
-* [Varnish](/integrations/varnish/#log-collection)
 
 ### The Advantage of Collecting JSON-formatted logs
 

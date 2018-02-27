@@ -4,6 +4,16 @@ kind: documentation
 platform: Fedora
 aliases:
     - /guides/basic_agent_usage/fedora/
+further_reading:
+- link: "/agent/loG_collection"
+  tag: "Documentation"
+  text: Collect your logs
+- link: "/agent/process_collection"
+  tag: "Documentation"
+  text: Collect your processes
+- link: "/agent/trace_collection"
+  tag: "Documentation"
+  text: Collect your traces
 ---
 
 ## Overview
@@ -204,3 +214,7 @@ To install on a clean box (or have an existing agent 5 install from which you do
 $ sudo apt-get --purge remove datadog-agent -y
 CentOS/RHEL/Amazon Linux
 ```
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

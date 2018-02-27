@@ -5,6 +5,16 @@ platform: OS X
 os: osx
 aliases:
     - /guides/basic_agent_usage/osx/
+further_reading:
+- link: "/agent/loG_collection"
+  tag: "Documentation"
+  text: Collect your logs
+- link: "/agent/process_collection"
+  tag: "Documentation"
+  text: Collect your processes
+- link: "/agent/trace_collection"
+  tag: "Documentation"
+  text: Collect your traces
 ---
 
 ## Overview
@@ -117,3 +127,7 @@ If you ran the optional install commands to have the Agent run at boot time, you
 
 * $ sudo launchctl unload -w /Library/LaunchDaemons/com.datadoghq.agent.plist
 * $ sudo  rm /Library/LaunchDaemons/com.datadoghq.agent.plist
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

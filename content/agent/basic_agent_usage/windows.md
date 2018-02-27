@@ -4,6 +4,16 @@ kind: documentation
 platform: Windows
 aliases:
     - /guides/basic_agent_usage/windows/
+further_reading:
+- link: "/agent/loG_collection"
+  tag: "Documentation"
+  text: Collect your logs
+- link: "/agent/process_collection"
+  tag: "Documentation"
+  text: Collect your processes
+- link: "/agent/trace_collection"
+  tag: "Documentation"
+  text: Collect your traces
 ---
 
 ## Overview
@@ -272,3 +282,7 @@ Any time you modify a Datadog integration you’ll need to restart the Datadog A
 To verify that your Process check is working, click on "Logs and Status", then "Agent Status". Scroll down to the "Checks" section and you should see "process" reporting on each process instance you have setup in your configuration file.
 
 Again, due to the sensitivity of yaml, if you've tried the above and cannot get it to work, use the attached file to get yourself started and confirm your syntax.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

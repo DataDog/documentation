@@ -1,6 +1,16 @@
 ---
 title: Docker Log collection
 kind: documentation
+further_reading:
+- link: "/logs/explore"
+  tag: "Documentation"
+  text: Learn how to explore your logs
+- link: "/logs/processing"
+  tag: "Documentation"
+  text: Learn how to process your logs
+- link: "/logs/parsing"
+  tag: "Documentation"
+  text: Learn more about parsing
 ---
 
 ## Overview
