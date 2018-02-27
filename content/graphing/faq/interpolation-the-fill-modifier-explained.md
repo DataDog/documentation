@@ -12,10 +12,10 @@ Most of the time graphing in Datadog is all about mix together data from separat
 ```
 error.count       |  3:00:00  3:00:10  3:00:20  3:00:30  3:00:40 ...
 ------------------+-------------------------------------------------
-1: host:A,env:prod|    15                         25                
-2: host:B,env:test|             10                         40       
+1: host:A,env:prod|    15                         25
+2: host:B,env:test|             10                         40
 ------------------+-------------------------------------------------
-    sum (1+2)     |    15?      10?               25?      40?      
+    sum (1+2)     |    15?      10?               25?      40?
 
 ```
 
@@ -25,13 +25,13 @@ Interpolation solves this problem by providing relevant values just for calculat
 ```
 error.count       |  3:00:00  3:00:10  3:00:20  3:00:30  3:00:40 ...
 ------------------+-------------------------------------------------
-1: host:A,env:prod|    15       18.3              25        X       
-2: host:B,env:test|     Y       10                30       40       
+1: host:A,env:prod|    15       18.3              25        X
+2: host:B,env:test|     Y       10                30       40
 ------------------+-------------------------------------------------
-    sum (1+2)     |   15 + Y    28.3              55       40 + X         
+    sum (1+2)     |   15 + Y    28.3              55       40 + X
 ```
 
-where X and Y are interpolated using data after and before the interval displayed.   
+where X and Y are interpolated using data after and before the interval displayed.
 
 ## In which cases does interpolation occur?
 
