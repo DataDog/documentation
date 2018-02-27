@@ -41,10 +41,6 @@ After configuration is complete, [restart the Agent](/agent/faq/agent-commands).
 
 ### Docker Process collection
 
-Update to the Datadog Agent image version 5.16.0 or above:
-
-    $ docker pull datadog/docker-dd-agent
-
 Follow the instructions for [docker-dd-agent](/agent/basic_agent_usage/docker/#run-the-docker-agent), passing in the following attributes, in addition to any other custom settings as appropriate:
 
 ```
