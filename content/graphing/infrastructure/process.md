@@ -22,8 +22,7 @@ Datadog Process Monitoring allows for real-time visibility of the most granular 
 ## Installation
 
 ### Standard Agent Configuration
-
-**Live Processes has been introduced in Datadog Agent version 5.16.0.**  
+ 
 Refer to the instructions for standard [Agent installation](https://app.datadoghq.com/account/settings#agent) for platform-specific details.
 
 Once the Datadog Agent is installed, enable Live Processes collection by editing the [configuration file](/agent/#configuration-file) at :
@@ -32,18 +31,15 @@ Once the Datadog Agent is installed, enable Live Processes collection by editing
 /etc/dd-agent/datadog.yaml
 ```
 
-and adding the following line to the `[Main]` section:
+and adding the following:
 ```
-    process_agent_enabled: true
+process_config:
+  enabled: ‘true’
 ```
 
 After configuration is complete, [restart the Agent](/agent/faq/agent-commands).  
 
 ### Docker Process collection
-
-Update to the Datadog Agent image version 5.16.0 or above:
-
-    $ docker pull datadog/docker-dd-agent
 
 Follow the instructions for [docker-dd-agent](/agent/basic_agent_usage/docker/#run-the-docker-agent), passing in the following attributes, in addition to any other custom settings as appropriate:
 
