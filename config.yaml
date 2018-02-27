@@ -146,6 +146,12 @@ languages:
           url: "/agent/log_collection/docker_log_collection"
           weight: 210
           parent: log_collection
+        - identifier: log_instrument_your_code
+          name: "Instrument your code"
+          url: "/log/languages/docker_log_collection"
+          weight: 220
+          parent: log_collection
+
 
 
         # Trace collection

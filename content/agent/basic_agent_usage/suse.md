@@ -72,6 +72,36 @@ Configuration files for [integrations](/integrations):
 |:-----|:----|
 |`/etc/dd-agent/conf.d/`|`/etc/datadog-agent/conf.d/`|
 
+
+## Upgrade to Agent 6
+
+1. Set up Datadog's Yum repo on your system:
+
+  ```
+  [datadog-beta]
+  name=Beta, Datadog, Inc.
+  enabled=1
+  baseurl=https://yum.datadoghq.com/suse/beta/6/x86_64
+  type=rpm-md
+  gpgcheck=1
+  repo_gpgcheck=0
+  gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
+  ```
+
+  or use this command to do it directly 
+
+  ```shell
+  echo -e '[datadog-beta]\nname = Beta, Datadog, Inc.\nbaseurl = https://yum.datadoghq.com/suse/beta/6/x86_64/\nenabled=1\ngpgcheck=1\npriority=1\ngpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public\ntype=rpm-md\nrepo_gpgcheck=0' | sudo tee /etc/zypp/repos.d/datadog-beta.repo
+  ```
+
+2. Update your local zypper cache and install/update the agent
+  
+  ```shell
+  sudo zypper refresh
+  sudo rpm --import https://yum.datadoghq.com/DATADOG_RPM_KEY.public
+  sudo zypper install datadog-agent
+  ```
+
 ## Troubleshooting
 
 Run the info or status command to see the state of the Agent.
