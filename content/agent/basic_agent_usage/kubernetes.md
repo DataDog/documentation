@@ -22,7 +22,9 @@ Installing the agent on the host as opposed to in a pod as part of a Deployment 
 It could however help give visibility over the start of the Kubernetes ecosystem and health thereof.
 Similarly, one would not be restricted to monitoring applications belonging to the Kubernetes eco system.
 
-To discover all data collected automatically from the Kubernetes integration, refer to the dedicated [Kubernetes Integration Documentation](/integrations/kubernetes).
+To discover all data collected automatically from the Kubernetes integration, refer to the dedicated [Kubernetes Integration Documentation](/integrations/kubernetes).  
+
+This documentation is for agent v6 only, if you are still using agent v5, [follow this installation process](/agent/faq/agent-5-kubernetes-basic-agent-usage)
 
 ## Container installation
 ### Setup

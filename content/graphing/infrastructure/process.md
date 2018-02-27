@@ -21,6 +21,8 @@ Datadog Process Monitoring allows for real-time visibility of the most granular 
 
 ## Installation
 
+The following installation processes are for [agent v6 only](/agent), if you are still using agent v5, [follow this specific installation process](/agent/faq/agent-5-process-collection)
+
 ### Standard Agent Configuration
  
 Refer to the instructions for standard [Agent installation](https://app.datadoghq.com/account/settings#agent) for platform-specific details.
