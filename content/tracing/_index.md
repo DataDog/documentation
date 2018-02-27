@@ -35,43 +35,6 @@ Datadog APM collects a variety of performance data at the service and endpoint l
 * Apdex Score
 * Distributed traces for individual transactions
 
-## Example: Simple tracing
-
-We have a Flask Python application that when called on `/doc` returns **42**
-
-We instrumented our python code in order to generate traces from it:
-
-```python
-import time
-import blinker as _
-
-from flask import Flask, Response
-
-from ddtrace import tracer
-from ddtrace.contrib.flask import TraceMiddleware
-
-# Tracer configuration
-tracer.configure(hostname='datadog')
-app = Flask('API')
-traced_app = TraceMiddleware(app, tracer, service='doc_service')
-
-@tracer.wrap(name='doc_work')
-def work():
-    time.sleep(0.5)
-    return 42
-
-@app.route('/doc/')
-def doc_resource():
-    time.sleep(0.3)
-    res = work()
-    time.sleep(0.3)
-    return Response(str(res), mimetype='application/json')
-```
-
-Each time its called, the following code produces this **trace**:
-
-{{< img src="tracing/simple_trace.png" alt="Simple Trace" responsive="true" popup="true">}}
-
 ## Terminology
 
 In order to get the most from tracing, it’s important to understand the terms used, the data they represent and how they work together:
