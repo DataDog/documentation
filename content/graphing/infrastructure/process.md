@@ -30,7 +30,7 @@ Refer to the instructions for standard [Agent installation](https://app.datadogh
 Once the Datadog Agent is installed, enable Live Processes collection by editing the [configuration file](/agent/#configuration-file) at :
 
 ```
-/etc/dd-agent/datadog.yaml
+/etc/datadog-agent/datadog.yaml
 ```
 
 and adding the following:
@@ -70,7 +70,7 @@ In the [dd-agent.yaml](https://app.datadoghq.com/account/settings#agent/kubernet
       name: passwd    
 ```
 
-Refer to the standard [daemonset installation](/integrations/kubernetes/#installation-via-daemonsets-kubernetes-110) and the [docker-dd-agent](https://github.com/DataDog/docker-dd-agent) information pages for further documentation.
+Refer to the standard [daemonset installation](/integrations/kubernetes/#installation-via-daemonsets-kubernetes-110) and the [Docker Agent](/agent/basic_agent_usage/docker/#run-the-docker-agent) information pages for further documentation.
 
 ## Searching, Filtering, and Pivoting
 
