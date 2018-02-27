@@ -21,57 +21,11 @@ Datadog Process Monitoring allows for real-time visibility of the most granular 
 
 ## Installation
 
-### Standard Agent Configuration
+Refer to the dedicated documentation to learn how to collect your processes:
 
-**Live Processes has been introduced in Datadog Agent version 5.16.0.**  
-Refer to the instructions for standard [Agent installation][1] for platform-specific details.
-
-Once the Datadog Agent is installed, enable Live Processes collection by editing the [configuration file](/agent/faq/where-is-the-configuration-file-for-the-agent) at :
-
-```
-/etc/dd-agent/datadog.conf
-```
-
-and adding the following line to the `[Main]` section:
-```
-    process_agent_enabled: true
-```
-
-After configuration is complete, [restart the Agent](/agent/faq/start-stop-restart-the-datadog-agent).  
-**Note**: To collect container information in the standard install, the dd-agent user needs to have permissions to access docker.sock.
-
-### Docker container
-
-Update to the Datadog Agent image version 5.16.0 or above:
-
-    $ docker pull datadog/docker-dd-agent
-
-Follow the instructions for [docker-dd-agent][2], passing in the following attributes, in addition to any other custom settings as appropriate:
-
-```
--v /etc/passwd:/etc/passwd:ro
--e DD_PROCESS_AGENT_ENABLED=true
-```
-
-### Kubernetes Daemonset
-
-In the [dd-agent.yaml][3] manifest used to create the daemonset, add the following environmental variables, volume mount, and volume:
-
-```
- env:
-    - name: DD_PROCESS_AGENT_ENABLED
-      value: "true"
-  volumeMounts:
-    - name: passwd
-      mountPath: /etc/passwd
-      readOnly: true
-  volumes:
-    - hostPath:
-        path: /etc/passwd
-      name: passwd    
-```
-
-Refer to the standard [daemonset installation](/integrations/kubernetes/#installation-via-daemonsets-kubernetes-110) and the [docker-dd-agent](https://github.com/DataDog/docker-dd-agent) information pages for further documentation.
+* [Docker process collection](/agent/process_collection/docker_process_collection)
+* [Agent process collection](/agent/process_collection)
+* [Kubernetes process collection](/agent/process_collection/kubernetes_process_collection)
 
 ## Searching, Filtering, and Pivoting
 
@@ -124,8 +78,6 @@ While actively working with the Live Processes, metrics are collected at 2s reso
   - Note:  Live Processes only uses the host `passwd` file and will not perform username resolution for users created within containers.
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://github.com/DataDog/docker-dd-agent
-[3]: https://app.datadoghq.com/account/settings#agent/kubernetes
 [4]: /integrations/kubernetes/
 [5]: https://github.com/DataDog/docker-dd-agent
 

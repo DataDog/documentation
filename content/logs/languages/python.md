@@ -137,7 +137,7 @@ logs:
     #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
 ```
 
-Then [Restart the Agent](/agent/faq/start-stop-restart-the-datadog-agent) to apply the configuration change.
+Then [Restart the Agent](/agent/#start-stop-restart-the-agent) to apply the configuration change.
 
 ## Further Reading
 
