@@ -172,7 +172,7 @@ Logs for the subsystems are available in Event Viewer, under Windows Logs -> App
 If you're still having trouble, [our support team](/help) will be glad to provide further assistance.
 
 ## Adding a custom python package to the agent
-The current way to do so is to add the package in the library zipped folder that can be found at `C:\Program Files (x86)\Datadog\Datadog Agent\files`, and [restart the agent](/agent/#start-stop-restart-the-agent).
+The current way to do so is to add the package in the library zipped folder that can be found at `C:\Program Files (x86)\Datadog\Datadog Agent\files`, and [restart the agent](/agent/faq/agent-commands).
 
 {{< img src="agent/faq/add_package_windows.png" alt="Add Package Windows" responsive="true" popup="true">}}
 

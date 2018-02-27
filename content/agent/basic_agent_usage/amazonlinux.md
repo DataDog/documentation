@@ -42,9 +42,8 @@ Other functionalities are provided by the Agent binary itself, globally availabl
 
 **NB**: If `service` is not available on your system, use:
 
-* on `upstart`-based systems: `sudo start/stop/restart datadog-agent`
+* on `upstart`-based systems: `sudo initctl start/stop/restart datadog-agent`
 * on `systemd`-based systems: `sudo systemctl start/stop/restart datadog-agent`
-* on `initctl`-based systems: `sudo initctl start/stop/restart datadog-agent`
 
 ## Configuration
 

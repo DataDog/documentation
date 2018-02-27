@@ -363,7 +363,7 @@ def status_code_event(self, url, r, aggregation_key):
 
 The entire check would be placed into the `checks.d` folder as `http.py`. The corresponding configuration would be placed into the `conf.d` folder as `http.yaml`.
 
-Once the check is in `checks.d`, test it by running it as a python script. [Restart the Agent](/agent/#start-stop-restart-the-agent) for the changes to be enabled. **Make sure to change the conf.d path in the test method**. From your Agent root, run:
+Once the check is in `checks.d`, test it by running it as a python script. [Restart the Agent](/agent/faq/agent-commands) for the changes to be enabled. **Make sure to change the conf.d path in the test method**. From your Agent root, run:
 
     PYTHONPATH=. python checks.d/http.py
 
