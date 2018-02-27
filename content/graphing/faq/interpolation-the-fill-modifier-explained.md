@@ -10,7 +10,7 @@ Interpolation is not about filling arbitrary large gaps in a metric series, but
 Most of the time graphing in Datadog is all about mix together data from separate sources into a single line for your graph. However separate sources might not submit data at the same time and with the same frequency.
 
 ```
-error.count       |  3:00:00  3:00:10  3:00:20  3:00:30  3:00:40 ...
+net.bytes_rcvd    |  3:00:00  3:00:10  3:00:20  3:00:30  3:00:40 ...
 ------------------+-------------------------------------------------
 1: host:A,env:prod|    15                         25
 2: host:B,env:test|             10                         40
@@ -23,7 +23,7 @@ The above example shows that merging sources directly produces absurd results ju
 Interpolation solves this problem by providing relevant values just for calculations.
 
 ```
-error.count       |  3:00:00  3:00:10  3:00:20  3:00:30  3:00:40 ...
+net.bytes_rcvd    |  3:00:00  3:00:10  3:00:20  3:00:30  3:00:40 ...
 ------------------+-------------------------------------------------
 1: host:A,env:prod|    15       18.3              25        X
 2: host:B,env:test|     Y       10                30       40
@@ -38,11 +38,11 @@ where X and Y are interpolated using data after and before the interval displaye
 Interpolation occurs when more than 1 source corresponds to your graph query i.e.:
 
 1. for space-aggregation: avg:system.cpu.user{env:prod}. If you have 2 or more hosts with the tag “env:prod”, our system computes the average over time and needs interpolation to do so.
-2. for group queries: error.count{*} by {host}. No computation across sources may be performed here, but providing aligned series makes graph line mouse over and comparisons easier.
+2. for group queries: net.bytes_rcvd{*} by {host}. No computation across sources may be performed here, but providing aligned series makes graph line mouse over and comparisons easier.
 
 Interpolation is not needed:
 
-* when you graph 1 metric submitted from 1 source: avg:error.count{host:a} (we assume this host submits this metric always with the same tag list).
+* when you graph 1 metric submitted from 1 source: avg:net.bytes_rcvd{host:a} (we assume this host submits this metric always with the same tag list).
 
 Interpolation is not performed for multi part queries (e.g. "avg:system.cpu.user{env:prod},avg:system.cpu.user{env:dev}").
 
