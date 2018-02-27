@@ -40,6 +40,10 @@ kind: faq
 * [Issues with Apache Integration](/integrations/faq/issues-with-apache-integration)
 * [Apache SSL certificate issues](/integrations/faq/apache-ssl-certificate-issues)
 
+## Ansible
+
+* [Enabling Process Monitoring in Ansible](/integrations/faq/enabling-process-monitoring-with-ansible)
+
 ## Azure
 * [My Azure VM is powered down... why is it still listed in my infrastructure list?](/integrations/faq/my-azure-vm-is-powered-down-why-is-it-still-listed-in-my-infrastructure-list)
 * [Azure VMs are showing up in the App but not reporting metrics](/integrations/faq/azure-vms-are-showing-up-in-the-app-but-not-reporting-metrics)
