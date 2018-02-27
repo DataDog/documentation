@@ -43,7 +43,7 @@ After configuration is complete, [restart the Agent](/agent/faq/agent-commands).
 
 ### Docker Process collection
 
-Follow the instructions for [docker-dd-agent](/agent/basic_agent_usage/docker/#run-the-docker-agent), passing in the following attributes, in addition to any other custom settings as appropriate:
+Follow the instructions for the [Docker Agent](/agent/basic_agent_usage/docker/#run-the-docker-agent), passing in the following attributes, in addition to any other custom settings as appropriate:
 
 ```
 -v /etc/passwd:/etc/passwd:ro
