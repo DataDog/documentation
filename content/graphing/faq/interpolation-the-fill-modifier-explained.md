@@ -54,7 +54,7 @@ The default interpolation is linear and is performed up to 5 min after real samp
 
 The fill modifier controls interpolation parameters:
 
-* fill(linear,X) gives you a linear interpolation up to X seconds after real samples.
+* fill(linear, X) gives you a linear interpolation up to X seconds after real samples.
 * fill(last, X) just replicates the last sample value up to X secs.
 * fill(zero, X) inserts 0 where the interpolation is needed up to X secs.
 * fill(null, X) disables interpolation, the value of X doesn’t matter.
