@@ -50,7 +50,7 @@ The type of interpolation described in this article is also not performed for ar
 
 ## How to control interpolation?
 
-The default interpolation is linear and is performed up to 5 min after real samples.
+The default interpolation for gauge type metrics is linear and is performed up to 5 min after real samples. The default for count or rate type metrics is to disable interpolation.
 
 The fill modifier controls interpolation parameters:
 
@@ -71,9 +71,9 @@ Rather, interpolation is about aligning series to make aggregation and multi-l
 These artificial dips are caused by front-end visualization enhancement. [See this article for more information](/graphing/faq/i-see-unexpected-drops-to-zero-on-my-graph-why). 
 
 **How to choose the interpolation method?**
+The default interpolation method (which is chosen based on a metric's type) is usually fine, but it is sometimes desirable to override these defaults.
 
-linear interpolation is a great fit for metrics reported on a steady basis from the same sources. For sparse metrics/ metrics reported from varying sources over time, it's often more interesting to disable interpolation.
+Linear interpolation is a great fit for metrics reported on a steady basis from the same sources. For sparse metrics or metrics reported from varying sources over time, it's often more interesting to disable interpolation.
 
-last makes sense for instance if you send datapoints only when the value of the thing you measure changes.
-zero is good if you want to get accurate totals for count metrics (statsd “increment”) like sum:error.count{*}.as_count()
-null prevents graphs from displaying interpolated values 5 min after the last real value etc.
+Last makes sense for instance if you send datapoints only when the value of the thing you measure changes.
+Null prevents graphs from displaying interpolated values 5 min after the last real value, etc.
