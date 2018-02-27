@@ -5,6 +5,16 @@ aliases:
   - /guides/servicediscovery/
   - /guides/autodiscovery/
   - /agent/autodiscovery
+further_reading:
+- link: "/agent/log_collection"
+  tag: "Documentation"
+  text: Collect your logs
+- link: "/agent/process_collection"
+  tag: "Documentation"
+  text: Collect your processes
+- link: "/agent/trace_collection"
+  tag: "Documentation"
+  text: Collect your traces
 ---
 
 ## How it Works
@@ -347,3 +357,7 @@ instances:
 - host: '%%host%%'
   port: '%%port%%'
 ```
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

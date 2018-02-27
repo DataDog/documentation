@@ -26,7 +26,7 @@ Two installations are possible:
 
 Install the [latest version of the agent 6](/logs/#getting-started-with-the-agent) on your host.
 
-The agent can both collect logs from [files on the host](/logs/#custom-log-collection) or from [container stdout/stderr](/logs/docker/#configuration-file-example). For this you need to update or create a new .yaml configuration file in the agent’s `/conf.d` directory as explained in the provided links.
+The agent can both collect logs from [files on the host](/logs/#custom-log-collection) or from [container stdout/stderr](#configuration-file-example). For this you need to update or create a new .yaml configuration file in the agent’s `/conf.d` directory as explained in the provided links.
 
 ### Option 2: Container installation
 

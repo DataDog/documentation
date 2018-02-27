@@ -1,6 +1,19 @@
 ---
 title: Docker Trace collection
 kind: documentation
+further_reading:
+- link: "/tracing/setup"
+  tag: "Documentation"
+  text: Instrument your code to send your first traces
+- link: "/tracing/services"
+  tag: "Documentation"
+  text: Analyze your services
+- link: "/tracing/product_specs/distributed_tracing"
+  tag: "Documentation"
+  text: "Getting started: Distributed tracing"
+- link: "https://datadoghq.slack.com/messages/apm"
+  tag: "Slack"
+  text: "Join the APM channel in our Datadog Slack for additional help from Datadog staff "
 ---
 
 Enable the [datadog-trace-agent](https://github.com/DataDog/datadog-trace-agent) in the `docker-dd-agent` container by passing `DD_APM_ENABLED=true` as an environment variable.
@@ -65,3 +78,7 @@ An example in python, assuming `172.17.0.1` is the default route:
 ```
 from ddtrace import tracer; tracer.configure(hostname="172.17.0.1", port=8126)
 ```
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

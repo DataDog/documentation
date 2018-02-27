@@ -3,6 +3,16 @@ title: Agent proxy configuration
 kind: documentation
 aliases:
     - /agent/proxy
+further_reading:
+- link: "/agent/log_collection"
+  tag: "Documentation"
+  text: Collect your logs
+- link: "/agent/process_collection"
+  tag: "Documentation"
+  text: Collect your processes
+- link: "/agent/trace_collection"
+  tag: "Documentation"
+  text: Collect your traces
 ---
 
 ## Why use a Proxy
@@ -154,3 +164,7 @@ Finally [restart the agent](/agent/#start-stop-restart-the-agent/#windows).
 To verify that everything is working properly, review the
 HAProxy statistics at `http://haproxy.example.com:3835` as well as
 the [Infrastructure Overview](https://app.datadoghq.com/infrastructure)
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

@@ -2,9 +2,16 @@
 title: Agent
 kind: documentation
 description: Install & configure the Agent to collect data
-aliases:
-    - /agent/faq/send-logs-and-configs-to-datadog-via-flare-command
-    - /agent/faq/how-to-get-more-logging-from-the-agent
+further_reading:
+- link: "/agent/log_collection"
+  tag: "Documentation"
+  text: Collect your logs
+- link: "/agent/process_collection"
+  tag: "Documentation"
+  text: Collect your processes
+- link: "/agent/trace_collection"
+  tag: "Documentation"
+  text: Collect your traces
 ---
 
 <div class="alert alert-info">
@@ -190,3 +197,7 @@ permissions: if you are able to open `datadog.yaml`, you are able to use the GUI
 |[Windows 64-bit](/agent/basic_agent_usage/windows)| Windows 7 or above|
 
 **Note**: Source install may work on operating systems not listed here and is 
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

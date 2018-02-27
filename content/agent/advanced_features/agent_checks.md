@@ -5,6 +5,16 @@ customnav: agentnav
 aliases:
   - /guides/agent_checks/
   - /agent/agent_checks
+further_reading:
+- link: "/agent/log_collection"
+  tag: "Documentation"
+  text: Collect your logs
+- link: "/agent/process_collection"
+  tag: "Documentation"
+  text: Collect your processes
+- link: "/agent/trace_collection"
+  tag: "Documentation"
+  text: Collect your traces
 ---
 
 ## Overview
@@ -458,3 +468,7 @@ If your issue continues, reach out to Support with the [help page](/help) that l
 [2]: https://github.com/DataDog/integrations-extras
 [3]: http://app.datadoghq.com/account/settings#agent
 [4]: /help/
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

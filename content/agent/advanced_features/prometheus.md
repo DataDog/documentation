@@ -1,6 +1,16 @@
 ---
 title: Writing a Prometheus Check
 kind: documentation
+further_reading:
+- link: "/agent/log_collection"
+  tag: "Documentation"
+  text: Collect your logs
+- link: "/agent/process_collection"
+  tag: "Documentation"
+  text: Collect your processes
+- link: "/agent/trace_collection"
+  tag: "Documentation"
+  text: Collect your traces
 ---
 
 ## Overview
@@ -197,3 +207,7 @@ If the `labels_mapper` dictionary is provided, the metrics labels names in the `
 
 `type_overrides` is a dictionary where the keys are Prometheus metric names and the values are a metric type (name as string) to use instead of the one listed in the payload. It can be used to force a type on untyped metrics.
 Note: it is empty in the mother class but will need to be overloaded/hardcoded in the final check not to be counted as custom metric.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

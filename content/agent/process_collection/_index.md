@@ -1,6 +1,16 @@
 ---
 title: Process collection
 kind: documentation
+further_reading:
+- link: "/agent/process_collection/docker_process_collection"
+  tag: "Documentation"
+  text: Send your Docker processes
+- link: "/agent/process_collection/kubernetes_process_collection"
+  tag: "Documentation"
+  text: Send your kubernetes processes
+- link: "/graphing/infrastructure/process"
+  tag: "Documentation"
+  text: Analyse your process in Datadog
 ---
 
 {{< img src="graphing/infrastructure/livecontainers/LiveContainersWithSummaries.png" alt="Live containers with summaries" responsive="true" popup="true">}} 
@@ -22,3 +32,7 @@ and adding the following line to the `[Main]` section:
 ```
 
 After configuration is complete, [restart the Agent](/agent/#start-stop-restart-the-agent).  
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

@@ -2,7 +2,18 @@
 title: Agent Troubleshooting
 kind: documentation
 aliases:
-    - /agent/faq/send-logs-and-configs-to-datadog-via-flare-command/
+    - /agent/faq/send-logs-and-configs-to-datadog-via-flare-command
+    - /agent/faq/how-to-get-more-logging-from-the-agent
+further_reading:
+- link: "/agent/log_collection"
+  tag: "Documentation"
+  text: Collect your logs
+- link: "/agent/process_collection"
+  tag: "Documentation"
+  text: Collect your processes
+- link: "/agent/trace_collection"
+  tag: "Documentation"
+  text: Collect your traces
 ---
 
 If you ended up at this page and have not yet installed the Datadog Agent, go [to the dedicated agent integration page](https://app.datadoghq.com/account/settings#agent) for installation instructions. If you just installed the Agent, it might take a few moments before you start seeing metrics appear. The first place you should check for metrics is the [Metrics Explorer](https://app.datadoghq.com/metric/explorer).
@@ -62,3 +73,7 @@ In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if
 * [Why don't I see the 'system.processes.open_file_descriptors' metric?](/agent/faq/why-don-t-i-see-the-system-processes-open-file-descriptors-metric)
 * [How is the 'system.mem.used' metric calculated?](/agent/faq/how-is-the-system-mem-used-metric-calculated)
 * [How do I install the agent on a server with limited internet connectivity?](/agent/faq/how-do-i-install-the-agent-on-a-server-with-limited-internet-connectivity)
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

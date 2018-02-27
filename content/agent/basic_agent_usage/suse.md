@@ -5,7 +5,7 @@ platform: SUSE
 aliases:
     - /guides/basic_agent_usage/suse/
 further_reading:
-- link: "/agent/loG_collection"
+- link: "/agent/log_collection"
   tag: "Documentation"
   text: Collect your logs
 - link: "/agent/process_collection"

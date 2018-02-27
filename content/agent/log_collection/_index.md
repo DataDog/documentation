@@ -2,6 +2,9 @@
 title: Agent Log collection
 kind: documentation
 further_reading:
+- link: "/agent/log_collection/docker_log_collection"
+  tag: "Documentation"
+  text: Send your Docker logs  
 - link: "/logs/explore"
   tag: "Documentation"
   text: Learn how to explore your logs

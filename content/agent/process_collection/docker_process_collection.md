@@ -1,6 +1,13 @@
 ---
 title: Docker Process collection
 kind: documentation
+further_reading:
+- link: "/agent/process_collection/kubernetes_process_collection"
+  tag: "Documentation"
+  text: Send your kubernetes processes
+- link: "/graphing/infrastructure/process"
+  tag: "Documentation"
+  text: Analyse your process in Datadog
 ---
 
 Update to the Datadog Agent image version 5.16.0 or above:
@@ -15,3 +22,7 @@ Follow the instructions for [docker-dd-agent](/agent/basic_agent_usage/docker/#r
 ```
 
 **Note**: To collect container information in the standard install, the dd-agent user needs to have permissions to access docker.sock.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
