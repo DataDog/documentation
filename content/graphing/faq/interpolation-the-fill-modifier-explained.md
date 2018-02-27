@@ -10,12 +10,12 @@ Interpolation is not about filling arbitrary large gaps in a metric series, but
 Most of the time graphing in Datadog is all about mix together data from separate sources into a single line for your graph. However separate sources might not submit data at the same time and with the same frequency.
 
 ```
-error.count       |  3:00:00  3:00:10  3:00:20  3:00:30  3:00:40 ...
+net.bytes_rcvd    |  3:00:00  3:00:10  3:00:20  3:00:30  3:00:40 ...
 ------------------+-------------------------------------------------
-1: host:A,env:prod|    15                         25                
-2: host:B,env:test|             10                         40       
+1: host:A,env:prod|    15                         25
+2: host:B,env:test|             10                         40
 ------------------+-------------------------------------------------
-    sum (1+2)     |    15?      10?               25?      40?      
+    sum (1+2)     |    15?      10?               25?      40?
 
 ```
 
@@ -23,26 +23,26 @@ The above example shows that merging sources directly produces absurd results ju
 Interpolation solves this problem by providing relevant values just for calculations.
 
 ```
-error.count       |  3:00:00  3:00:10  3:00:20  3:00:30  3:00:40 ...
+net.bytes_rcvd    |  3:00:00  3:00:10  3:00:20  3:00:30  3:00:40 ...
 ------------------+-------------------------------------------------
-1: host:A,env:prod|    15       18.3              25        X       
-2: host:B,env:test|     Y       10                30       40       
+1: host:A,env:prod|    15       18.3              25        X
+2: host:B,env:test|     Y       10                30       40
 ------------------+-------------------------------------------------
-    sum (1+2)     |   15 + Y    28.3              55       40 + X         
+    sum (1+2)     |   15 + Y    28.3              55       40 + X
 ```
 
-where X and Y are interpolated using data after and before the interval displayed.   
+where X and Y are interpolated using data after and before the interval displayed.
 
 ## In which cases does interpolation occur?
 
 Interpolation occurs when more than 1 source corresponds to your graph query i.e.:
 
 1. for space-aggregation: avg:system.cpu.user{env:prod}. If you have 2 or more hosts with the tag “env:prod”, our system computes the average over time and needs interpolation to do so.
-2. for group queries: error.count{*} by {host}. No computation across sources may be performed here, but providing aligned series makes graph line mouse over and comparisons easier.
+2. for group queries: net.bytes_rcvd{*} by {host}. No computation across sources may be performed here, but providing aligned series makes graph line mouse over and comparisons easier.
 
 Interpolation is not needed:
 
-* when you graph 1 metric submitted from 1 source: avg:error.count{host:a} (we assume this host submits this metric always with the same tag list).
+* when you graph 1 metric submitted from 1 source: avg:net.bytes_rcvd{host:a} (we assume this host submits this metric always with the same tag list).
 
 Interpolation is not performed for multi part queries (e.g. "avg:system.cpu.user{env:prod},avg:system.cpu.user{env:dev}").
 
@@ -50,11 +50,11 @@ The type of interpolation described in this article is also not performed for ar
 
 ## How to control interpolation?
 
-The default interpolation is linear and is performed up to 5 min after real samples.
+The default interpolation for gauge type metrics is linear and is performed up to 5 min after real samples. The default for count or rate type metrics is to disable interpolation.
 
 The fill modifier controls interpolation parameters:
 
-* fill(linear,X) gives you a linear interpolation up to X seconds after real samples.
+* fill(linear, X) gives you a linear interpolation up to X seconds after real samples.
 * fill(last, X) just replicates the last sample value up to X secs.
 * fill(zero, X) inserts 0 where the interpolation is needed up to X secs.
 * fill(null, X) disables interpolation, the value of X doesn’t matter.
@@ -71,9 +71,9 @@ Rather, interpolation is about aligning series to make aggregation and multi-l
 These artificial dips are caused by front-end visualization enhancement. [See this article for more information](/graphing/faq/i-see-unexpected-drops-to-zero-on-my-graph-why). 
 
 **How to choose the interpolation method?**
+The default interpolation method (which is chosen based on a metric's type) is usually fine, but it is sometimes desirable to override these defaults.
 
-linear interpolation is a great fit for metrics reported on a steady basis from the same sources. For sparse metrics/ metrics reported from varying sources over time, it's often more interesting to disable interpolation.
+Linear interpolation is a great fit for metrics reported on a steady basis from the same sources. For sparse metrics or metrics reported from varying sources over time, it's often more interesting to disable interpolation.
 
-last makes sense for instance if you send datapoints only when the value of the thing you measure changes.
-zero is good if you want to get accurate totals for count metrics (statsd “increment”) like sum:error.count{*}.as_count()
-null prevents graphs from displaying interpolated values 5 min after the last real value etc.
+Last makes sense for instance if you send datapoints only when the value of the thing you measure changes.
+Null prevents graphs from displaying interpolated values 5 min after the last real value, etc.
