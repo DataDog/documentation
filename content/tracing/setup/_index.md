@@ -19,6 +19,8 @@ further_reading:
   text: Ruby language instrumentation
 ---
 
+This documentation covers Agent v6 only, to know how to setup APM tracing with Agent v5, [refer to the dedicated APM with agent v5 doc](/tracing/faq/agent-5-tracing-setup)
+
 ## Setup process
 
 With our infrastructure monitoring, metrics are sent to the Agent, which then forwards them to Datadog. Similarly, tracing metrics are also sent to the Agent: The application code instrumentation flushes to the Agent every 1 s ([see here for the Python client](https://github.com/DataDog/dd-trace-py/blob/69693dc7cdaed3a2b6a855325109fa100e42e254/ddtrace/writer.py#L159) for instance) and the Agent flushes to the [Datadog API every 10s](https://github.com/DataDog/datadog-trace-agent/blob/master/config/agent.go#L170).  
