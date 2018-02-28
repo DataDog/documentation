@@ -148,7 +148,7 @@ instances:
 
 Note that the column name must be present in the output of snmptable.
 
-Now we [restart the agent](/agent/faq/start-stop-restart-the-datadog-agent) and we make sure that the check is collecting metrics, it can take up to 1 minute to update:
+Now we [restart the agent](/agent/faq/agent-commands) and we make sure that the check is collecting metrics, it can take up to 1 minute to update:
 
 ```
 $ sudo service datadog-agent info

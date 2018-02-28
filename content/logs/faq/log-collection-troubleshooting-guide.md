@@ -48,7 +48,7 @@ and then by sending a log like the following:
 
 These are a few of the common configuration issues that are work triple-checking in your dd-agent setup:
 
-1. Your api_key option is not in your `conf.d/logs-agent.yaml` or does not match what is in your `datadog.conf`
+1. Your api_key option is not in your `conf.d/logs-agent.yaml` or does not match what is in your `datadog.yaml`
 
 2. You do not have any .yaml file in your conf.d/ directory that includes a logs section and the appropriate values, or you have added these values only to the `logs-agent.yaml` (N.B. you want to keep the logs-agent.yaml configurations separate from the configuration files that determine where the dd-agent should look/listen for logs).
 

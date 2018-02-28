@@ -130,9 +130,14 @@ logs:
     service: myapplication
     source: python
     sourcecategory: sourcecode
+    # For multiline logs, if they start by the date with the format yyyy-mm-dd uncomment the following processing rule
+    #log_processing_rules:
+    #  - type: multi_line
+    #    name: new_log_start_with_date
+    #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
 ```
 
-Then [Restart the Agent](/agent/faq/start-stop-restart-the-datadog-agent) to apply the configuration change.
+Then [Restart the Agent](/agent/faq/agent-commands) to apply the configuration change.
 
 ## Further Reading
 

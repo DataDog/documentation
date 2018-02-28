@@ -31,11 +31,11 @@ Once the package has been transferred to the target system, it can be installed 
 For yum, using agent 5.7.3 as an example, the command would be:
 sudo yum localinstall datadog-agent-5.7.3-1.x86_64.rpm
 
-Once installed, the `datadog.conf` file needs to be generated from the `datadog.conf.example` file and updated with the API key for your instance.
+Once installed, the `datadog.yaml` file needs to be generated from the `datadog.yaml.example` file and updated with the API key for your instance.
 
 This can be done with a single command:
 ```
-sudo sh -c "sed 's/api_key:.*/api_key: <API_KEY>/' /etc/dd-agent/datadog.conf.example > /etc/dd-agent/datadog.conf"
+sudo sh -c "sed 's/api_key:.*/api_key: <API_KEY>/' /etc/dd-agent/datadog.yaml.example > /etc/dd-agent/datadog.yaml"
 ```
 
 Run the command above after replacing `<API_KEY>` with [the API KEY for your Organization](https://app.datadoghq.com/account/settings#api)
