@@ -10,6 +10,10 @@ further_reading:
   text: "Understand how to read a Datadog Trace"
 ---
 
+<div class="alert alert-info"> 
+<a href="https://docs.datadoghq.com/getting_started/apm_tracing">Read our APM getting started page</a>to have a bird-eyed view of all tracing concepts
+</div>
+
 ## Overview
 
 After you have [instrumented your application](/tracing/setup), your reporting services appear on [the APM services page](https://app.datadoghq.com/apm/services).  

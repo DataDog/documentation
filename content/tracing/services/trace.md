@@ -8,6 +8,10 @@ further_reading:
   text: "Dive into your resource performances and traces"
 ---
 
+<div class="alert alert-info"> 
+<a href="https://docs.datadoghq.com/getting_started/apm_tracing">Read our APM getting started page</a>to have a bird-eyed view of all tracing concepts
+</div>
+
 ## Definition
 
 {{< img src="tracing/services/trace/tracing-terminology.png" alt="Visualizing tracing terms" responsive="true" popup="true" style="width:80%;">}}

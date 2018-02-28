@@ -8,6 +8,10 @@ further_reading:
   text: "Understand how to read a Datadog Trace"
 ---
 
+<div class="alert alert-info"> 
+<a href="https://docs.datadoghq.com/getting_started/apm_tracing">Read our APM getting started page</a>to have a bird-eyed view of all tracing concepts
+</div>
+
 {{< img src="tracing/services/resource/ressource.png" alt="Ressource" responsive="true" popup="true">}}
 
 ## Definition

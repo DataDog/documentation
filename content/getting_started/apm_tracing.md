@@ -1,6 +1,22 @@
 ---
 title: Getting started with APM
 kind: documentation
+further_reading:
+- link: "/tracing/setup/"
+  tag: "Documentation"
+  text: Learn how to setup APM tracing with your application
+- link: "/tracing/services/"
+  tag: "Documentation"
+  text: Discover the list of services reporting to Datadog
+- link: "/tracing/services/service"
+  tag: "Documentation"
+  text: Learn more about services in Datadog
+- link: "/tracing/services/resource"
+  tag: "Documentation"
+  text: Dive into your resource performances and traces
+- link: "/tracing/services/trace"
+  tag: "Documentation"
+  text: Understand how to read a Datadog Trace
 ---
 
 {{< vimeo 203196972 >}}
@@ -9,7 +25,7 @@ APM collects metrics on your app’s performance at three levels of granularity:
 
 ## Services
 
-A service is a set of processes that do the same job. For instance, a simple web application may consist of two services:
+[A service](/tracing/services/service) is a set of processes that do the same job. For instance, a simple web application may consist of two services:
 
 * A single `webapp` service
 * A single `database` service
@@ -53,11 +69,11 @@ APM measures the following at the individual service level:
 * Error volume/rate
 * Sub-Services (total time spent/%of time spent/avg time per request of your service by services or type)
 
-You can also [alert](/monitors/monitor_types/apm/) on any service level metric. Read more about monitoring services in APM on the [service list](URL) and [service dashboard](URL) pages.
+You can also [alert](/monitors/monitor_types/apm/) on any service level metric. Read more about monitoring services in APM on the [service list](/tracing/services) and [service dashboard](/tracing/services/service) pages.
 
 ## Resources
 
-A resource is an individual endpoint or query for a specific service.
+[A resource](/tracing/serviecs/resource) is an individual endpoint or query for a specific service.
 
 * **For a web application**: some examples might be a canonical URL, such as `/user/home` or a handler function like `web.user.home` (often referred to as “routes” in MVC frameworks).
 * **For a SQL database**: a resource is be the query itself, such as `SELECT * FROM users WHERE id = ?`.
@@ -83,7 +99,7 @@ APM measures the following at the individual resource level:
 * Error volume/rate
 * Sub-Services (total time spent/%of time spent/avg time per request of your service by services or type)
 
-You can also [alert](/monitors/monitor_types/apm/) on any resource level metric. Read more about monitoring resources in APM on the [resource dashboard](URL) page.
+You can also [alert](/monitors/monitor_types/apm/) on any resource level metric. Read more about monitoring resources in APM on the [resource dashboard](/tracing/services/resource) page.
 
 ## Traces
 
@@ -93,13 +109,8 @@ Traces measure the timings of operations executed in an individual request. For 
 
 Spans represent one logical unit of work within a trace. Each span consists of a start time, a duration, and optional tags / metadata.
 
-![img](https://datadog-docs.imgix.net/images/tracing/services/trace/tracing-terminology-e601daa6.png?fit=max&auto=format)
+{{< img src="getting_started/trace_span_image.png" alt="Trace span image" responsive="true" popup="true">}}
 
+## Further Reading
 
-## FURTHER READING
-
-APM Setup - /tracing/setup/
-Service list - ...
-Service dashboard - ...
-Resource dashboard - ...
-Traces - ...
+{{< partial name="whats-next/whats-next.html" >}}

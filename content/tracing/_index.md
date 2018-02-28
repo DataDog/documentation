@@ -25,6 +25,10 @@ Datadog APM provides you deep insight into your application's performance - from
 
 Datadog APM is offered as an upgrade to our Pro and Enterprise plans. A free 14-day trial is available. Registered users can visit the [APM page of the Datadog application](https://app.datadoghq.com/apm/home) to get started.
 
+<div class="alert alert-info"> 
+<a href="https://docs.datadoghq.com/getting_started/apm_tracing">Read our APM getting started page</a>to have a bird-eyed view of all tracing concepts
+</div>
+
 ## Data collected
 
 Datadog APM collects a variety of performance data at the service and endpoint level:

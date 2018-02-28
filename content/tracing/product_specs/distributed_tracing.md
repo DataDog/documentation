@@ -1,6 +1,22 @@
 ---
 title: Distributed Tracing
 kind: documentation
+further_reading:
+- link: "/tracing/setup/"
+  tag: "Documentation"
+  text: Learn how to setup APM tracing with your application
+- link: "/tracing/services/"
+  tag: "Documentation"
+  text: Discover the list of services reporting to Datadog
+- link: "/tracing/services/service"
+  tag: "Documentation"
+  text: Learn more about services in Datadog
+- link: "/tracing/services/resource"
+  tag: "Documentation"
+  text: Dive into your resource performances and traces
+- link: "/tracing/services/trace"
+  tag: "Documentation"
+  text: Understand how to read a Datadog Trace
 ---
 
 If you have read the [first example of tracing](/tracing) and want to more deeply understand how tracing works, let's take the following example which represents a simple API **thinker-api** and a micro-service behind it **thinker-microservice**. When the API receives a request with the correct *subject* parameter, it responds with a *thought*, otherwise, it responds with an error:
@@ -160,3 +176,7 @@ Which allows us to get more context every time `think()` is called and traced:
 
 
 The Datadog APM allows you to trace all interactions of a request with the different services and resources of any application.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

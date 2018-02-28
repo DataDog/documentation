@@ -3,6 +3,22 @@ title: Trace Sampling and Storage
 kind: documentation
 aliases:
     - /tracing/faq/traces-sampling-and-storage/
+further_reading:
+- link: "/tracing/setup/"
+  tag: "Documentation"
+  text: Learn how to setup APM tracing with your application
+- link: "/tracing/services/"
+  tag: "Documentation"
+  text: Discover the list of services reporting to Datadog
+- link: "/tracing/services/service"
+  tag: "Documentation"
+  text: Learn more about services in Datadog
+- link: "/tracing/services/resource"
+  tag: "Documentation"
+  text: Dive into your resource performances and traces
+- link: "/tracing/services/trace"
+  tag: "Documentation"
+  text: Understand how to read a Datadog Trace
 ---
 
 ## Trace sampling 
@@ -112,3 +128,7 @@ For example, at `9:00am UTC Wed, 12/20` you would see:
 Once a trace has been viewed, it continues to be available by using its trace ID in the URL: `https://app.datadoghq.com/apm/trace/<trace_id>` This is true even if it “expires” from the UI. This behavior is independent of the UI retention time buckets.
 
 {{< img src="tracing/trace_id.png" alt="Trace ID" responsive="true" popup="true">}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

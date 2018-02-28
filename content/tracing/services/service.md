@@ -8,6 +8,12 @@ further_reading:
   text: "Understand how to read a Datadog Trace"
 ---
 
+<div class="alert alert-info"> 
+<a href="https://docs.datadoghq.com/getting_started/apm_tracing">Read our APM getting started page</a>to have a bird-eyed view of all tracing concepts
+</div>
+
+## Overview 
+
 Selecting a service on the services page leads you to the detailed service page:
 
 {{< img src="tracing/services/service/detailed_service_page.png" alt="Detailed service page" responsive="true" popup="true" style="width:90%;">}}
