@@ -224,13 +224,19 @@ If you have followed the instructions you should see in your file (for example `
 
 ```json
 {
-    "level": "DEBUG",
-    "message": "This is my debug message",
-    "date": "2016-05-24 15:53:35.7175",
-	  "appname": "Datadog.vshost.exe",
-	  "logger": "Datadog.Program",
-	  "thread": "10"
+  "level": "DEBUG",
+  "message": "This is my debug message",
+  "date": "2016-05-24 15:53:35.7175",
+  "appname": "Datadog.vshost.exe",
+  "logger": "Datadog.Program",
+  "thread": "10"
 }
+```
+
+If despite the benefits of logging in JSON you wish to remain in a raw string format, we recommend to update the `log4net convertion pattern` to automatically parse your logs with the c# integration pipeline as follows:
+
+```
+<param name="ConversionPattern" value="%date%d{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread] %logger %method:%line - %message%n" />
 ```
 
 ## Configure your Datadog agent
