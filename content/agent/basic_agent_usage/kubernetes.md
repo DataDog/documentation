@@ -43,14 +43,13 @@ kind: DaemonSet
 metadata:
   name: datadog-agent
 spec:
-  updateStrategy:
-    type: RollingUpdate
   template:
     metadata:
       labels:
         app: datadog-agent
       name: datadog-agent
     spec:
+      serviceAccountName: datadog-agent
       containers:
       - image: datadog/agent:latest
         imagePullPolicy: Always
@@ -64,7 +63,11 @@ spec:
             protocol: TCP
         env:
           - name: DD_API_KEY
-            value: "YOUR_API_KEY"
+            value: <YOUR_API_KEY>
+          - name: DD_COLLECT_KUBERNETES_EVENTS
+            value: "true"
+          - name: DD_LEADER_ELECTION
+            value: "true"
           - name: KUBERNETES
             value: "yes"
           - name: DD_KUBERNETES_KUBELET_HOST
@@ -91,8 +94,8 @@ spec:
           exec:
             command:
             - ./probe.sh
-          initialDelaySeconds: 60
-          periodSeconds: 30
+          initialDelaySeconds: 15
+          periodSeconds: 5
       volumes:
         - hostPath:
             path: /var/run/docker.sock
