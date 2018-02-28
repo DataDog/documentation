@@ -90,7 +90,7 @@
 
       {{ $e := (print $img "?auto=format" | relURL | safeURL) }}
       {{ if eq $image_ext "gif" }}
-        <img class="img-fluid" srcset="{{ $e }}"
+        <img class="img-fluid" src="{{ (print $img "?fm=gif" | relURL | safeURL) }}"
             {{ if .Get "style" }}style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}"{{ end }}
             alt="{{ with .Get "alt"}}{{.}}{{end}}">
       {{ else }}
@@ -109,7 +109,7 @@
     {{ else }}
         {{ $e := (print $img "?auto=format" | relURL | safeURL) }}
         {{ if eq $image_ext "gif" }}
-            <img class="img-fluid" src="{{ $e }}"
+            <img class="img-fluid" src="{{ (print $img "?fm=gif" | relURL | safeURL) }}"
               {{ if .Get "style" }}style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}"{{ end }}
               alt="{{ with .Get "alt"}}{{.}}{{end}}">
         {{ else }}
