@@ -43,10 +43,10 @@ Agent 6 is the latest major version of the Datadog Agent. The big difference bet
 
 * Agent v6 has significantly improved resource usage over Agent v5:
 
-    * It has decreased CPU usage:
-    * It has decrease memory usage:
-    * It uses fewer file descriptors:
-    * It has an all around decreased footprint.
+    * It has decreased CPU usage
+    * It has decrease memory usage
+    * It uses fewer file descriptors
+    * It has an all around decreased footprint
 
 * Global percentiles can be performed on the server directly to calculate real, effective global percentiles. (NOTE: this feature is currently in BETA. Contact support for details on how to have it enabled for your account.)
 
