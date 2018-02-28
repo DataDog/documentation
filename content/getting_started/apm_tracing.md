@@ -73,7 +73,7 @@ You can also [alert](/monitors/monitor_types/apm/) on any service level metric. 
 
 ## Resources
 
-[A resource](/tracing/serviecs/resource) is an individual endpoint or query for a specific service.
+[A resource](/tracing/services/resource) is an individual endpoint or query for a specific service.
 
 * **For a web application**: some examples might be a canonical URL, such as `/user/home` or a handler function like `web.user.home` (often referred to as “routes” in MVC frameworks).
 * **For a SQL database**: a resource is be the query itself, such as `SELECT * FROM users WHERE id = ?`.
