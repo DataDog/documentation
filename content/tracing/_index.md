@@ -29,6 +29,18 @@ Datadog APM is offered as an upgrade to our Pro and Enterprise plans. A free 14-
 <a href="https://docs.datadoghq.com/getting_started/apm_tracing">Read our APM getting started page</a>to have a bird-eyed view of all tracing concepts
 </div>
 
+The APM agent (also known as _trace agent_) is shipped by default with the
+Agent 6 in the Linux, MacOS and Windows packages. The APM agent is enabled by default on linux. To enable the check on other platforms or disable it on linux, update the `apm_config` key in your `datadog.yaml`:
+
+```
+apm_config:
+  enabled: true
+```
+
+For the Docker image, the APM agent is disabled by default. Enable it by setting the `DD_APM_ENABLED` envvar to `true`. It then listen to all interfaces by default.  
+
+[Discover all setup options in our dedicated APM setup section](/tracing/setup)
+
 ## Data collected
 
 Datadog APM collects a variety of performance data at the service and endpoint level:

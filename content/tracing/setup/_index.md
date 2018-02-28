@@ -53,9 +53,18 @@ To start tracing your application:
 
 ## Agent configuration
 
-On Linux and Docker the Datadog Agent uses the [configuration file](/agent/faq/where-is-the-configuration-file-for-the-agent) for both infrastructure monitoring and APM configuration options.
+The APM agent (also known as _trace agent_) is shipped by default with the
+Agent 6 in the Linux, MacOS and Windows packages. The APM agent is enabled by default on linux. To enable the check on other platforms or disable it on linux, update the `apm_config` key in your `datadog.yaml`:
 
-Additionally, some configuration options may be set as environment variables. Note that options set as environment variables override the settings defined in the configuration file.
+```
+apm_config:
+  enabled: true
+```
+
+For the Docker image, the APM agent is disabled by default. Enable it by setting the `DD_APM_ENABLED` envvar to `true`. It then listen to all interfaces by default.  
+
+If you want to listen to non-local trafic on any other platform, set
+`apm_config.apm_non_local_traffic = true` in your `datadog.yaml`.
 
 {{% table responsive="true" %}}
 | File setting            | Environment variable | Description                                                                                                                                                      |
