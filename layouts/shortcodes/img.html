@@ -44,7 +44,11 @@
 
 {{ else }}
 
-  {{ $.Scratch.Add "pop_param" "?fit=max&auto=format" }}
+  {{ if eq $image_ext "gif" }}
+     {{ $.Scratch.Add "pop_param" "?fit=max&fm=gif" }}
+  {{ else }}
+     {{ $.Scratch.Add "pop_param" "?fit=max&auto=format" }}
+  {{ end }}
 
 
 {{ end }}
