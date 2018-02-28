@@ -2,20 +2,29 @@
 title: Agent
 kind: documentation
 description: Install & configure the Agent to collect data
-aliases:
-    - /guides/basic_agent_usage/
+further_reading:
+- link: "/logs/"
+  tag: "Documentation"
+  text: Collect your logs
+- link: "/graphing/infrastructure/process"
+  tag: "Documentation"
+  text: Collect your processes
+- link: "/tracing"
+  tag: "Documentation"
+  text: Collect your traces
 ---
 
-{{< partial name="platforms/platforms.html" >}}
+<div class="alert alert-info">
+    Agent v6 is now available, <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md">upgrade to the newest version </a> to benefit from all new functionality
+</div>
 
 ## What is the Agent?
 
 The Datadog Agent is a piece of software that runs on your hosts. Its job is to faithfully collect events and metrics and bring them to Datadog on
-your behalf so that you can do something useful with your monitoring and performance data.
+your behalf so that you can do something useful with your monitoring and performance data. The Datadog Agent is open source, view the source code on GitHub for [Agent v5](https://github.com/DataDog/dd-agent) and [Agent v6](https://github.com/DataDog/datadog-agent). To see all changes between Agent v5 and v6, [consult our dedicated changes documentation](https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md).
 
-[The source code for the Datadog Agent](https://github.com/DataDog/dd-agent).
+{{< partial name="platforms/platforms.html" >}}
 
-For information on running the Agent through a proxy, see [the dedicated documentation Datadog Agent and proxy ](/agent/proxy); for which IP ranges to allow, see [the complete list of IP's and ports](https://github.com/DataDog/dd-agent/wiki/Network-Traffic-and-Proxy-Configuration#open-ports).
 
 The Agent has three main parts: the collector, DogStatsD, and the forwarder:
 
@@ -27,79 +36,168 @@ The Agent has three main parts: the collector, DogStatsD, and the forwarder:
 
 This is all controlled by one supervisor process. We keep this separate so you don't have to have the overhead of each application if you don't want to run all parts, although we generally recommend you do.
 
-<div class="alert alert-info">
-This documentation covers Agent versions 5.0.0 and above.
-</div>
 
-## Configuration management tools
+## What is the Agent v6?
 
-Manage the Datadog agent and [integrations](/integrations) using configuration management tools:
+Agent 6 is the latest major version of the Datadog Agent. The big difference between Agent 5 and Agent 6 is that Agent 6 is a complete rewrite of the core Agent in Golang. Golang has allowed us to take advantage of concurrency. In place of the three processes the Agent v5 used to run --*the Forwarder*, *the Collector*, and *DogStatsD*-- there is now only one process: the Agent. It also comes with a number of other core improvements:
 
-### Chef
-* [Chef Github project](https://github.com/DataDog/chef-datadog)
-* [Chef installation](https://app.datadoghq.com/account/settings#integrations/chef)
-* [Chef documentation](/integrations/chef)
+* Agent v6 has significantly improved resource usage over Agent v5:
 
-### Puppet
-* [Puppet Github project](https://github.com/DataDog/puppet-datadog-agent)
-* [Puppet installation](https://app.datadoghq.com/account/settings#integrations/puppet)
-* [Puppet documentation](/integrations/puppet)
+    * It has decreased CPU usage:
+    * It has decrease memory usage:
+    * It uses fewer file descriptors:
+    * It has an all around decreased footprint.
 
-### Ansible
-* [Ansible Github project](https://github.com/DataDog/ansible-datadog)
-* [Ansible installation](https://app.datadoghq.com/account/settings#agent/ansible)
-* [Ansible documentation](/integrations/ansible/)
+* Global percentiles can be performed on the server directly to calculate real, effective global percentiles. (NOTE: this feature is currently in BETA. Contact support for details on how to have it enabled for your account.)
 
-Chef, Puppet, and Ansible [integrations](/integrations) using our public APIs so if you're interested in using another automation tool, the above could be leveraged as examples to get you started.
+* [DogStatsD](/developers/dogstatsd) can be used over a unix socket instead of over udp.
 
-There is also community support for Saltstack:
+* Custom build your agent v6 and [DogStatsD](/developers/dogstatsd) much easier and with much more configuration options, to include or exclude almost anything. There is also a “puppy” agent, that’s a truly minimal installation.
 
-* Saltstack Formula - https://github.com/DataDog/datadog-formula
+* Agent 6 blocks port 5000 and 5001. If you use these ports, update the port for `expvar_port` and `cmd_port` in the `datadog.yaml` file.
 
-## Agent Troubleshooting
+## Migration
 
-If you ended up at this page and have not yet installed the Datadog Agent, go [to the dedicated agent integration page](https://app.datadoghq.com/account/settings#agent) for installation instructions. If you just installed the Agent, it might take a few moments before you start seeing metrics appear. The first place you should check for metrics is the [Metrics Explorer](https://app.datadoghq.com/metric/explorer).
+To automatically transition between agent configuration paths and formats from Agent v5 to Agent v6, use the agent command:
 
-If you think you might be experiencing issues, the first thing to do is [run the info command](/agent/faq/agent-status-and-information) and check the [Agent logs](/agent/faq/log-locations). The [info command](/agent/faq/agent-status-and-information) and the log locations are dependent on your OS, which you can select from the navigation to the left for further information.
+`sudo -u dd-agent -- datadog-agent import`
 
-### Issues getting the Agent installed
+The command parses an existing `datadog.conf` and convert all the bits that
+the new Agent still supports to the new format, in the new file. It also copies
+configuration files for checks that are currently enabled.
 
-If you encountered an issue during the Agent installation process that prevented installation from occurring, reach out to [Datadog support team](/help). Let us know your OS and version, as well as how you are installing the Agent. You should include any error messages you encountered along the way.
+## Configuration Files
 
-### Issues getting the Agent reporting
+Prior releases of Datadog Agent stored configuration files in `/etc/dd-agent`.
+Starting with the 6.0 release configuration files will now be stored in
+`/etc/datadog-agent`.
 
-If you get the Agent installed but are not seeing any data in Datadog, you can troubleshoot in the following manner.
-First, [run the info command](/agent/faq/agent-status-and-information). Select your OS in the navigation column on the left of this page to see how to run this. Does running the [info command](/agent/faq/agent-status-and-information) show any errors?
+### Agent configuration file
 
-If not, you should also check the logs (location of the logs again depends on OS). Errors in the logs may also reveal the cause of any issues.
+In addition to the location change, the primary agent configuration file has been
+transitioned from **INI** format to **YAML** to better support complex configurations and
+for a more consistent experience across the Agent and the Checks; as such `datadog.conf`
+is now retired in favor of `datadog.yaml`.
 
-If not, send both the full output of the [info command](/agent/faq/agent-status-and-information) and the logs with a flare as attachments to the [Datadog support team](mailto:support@datadoghq.com?Subject=Agent%20issues).
+To automatically transition between agent configuration paths and formats, you
+may use the agent command: `sudo -u dd-agent -- datadog-agent import`.
+The command will parse an existing `datadog.conf` and convert all the bits that
+the new Agent still supports to the new format, in the new file. It also copies
+configuration files for checks that are currently enabled.
 
-#### Check your machine's time
-We have also seen a few cases where machines have their clock set further in the future or the past, which can sometimes cause problems with metric submission.
-To check for this, run:
+Please refer to [this section][config] of the documentation for a detailed list
+of the configuration options that were either changed or deprecated in the new Agent.
 
-```shell
-date -u && curl -s -v https://app.datadoghq.com 2>&1 | grep Date
+### Checks configuration files
+
+In order to provide a more flexible way to define the configuration for a check,
+from version 6.0.0 the Agent will load any valid YAML file contained in the folder
+`/etc/datadog-agent/conf.d/<check_name>.d/`.
+
+This way, complex configurations can be broken down into multiple files: for example,
+a configuration for the `http_check` might look like this:
 ```
-This outputs the current system’s date, and then makes a request to our endpoint and grabs the date on our end.
-If these are more than a few minutes apart, you should correct the time settings on your server.
+/etc/datadog-agent/conf.d/http_check.d/
+├── backend.yaml
+└── frontend.yaml
+```
 
-### Issues getting integrations working
+Autodiscovery template files will be stored in the configuration folder as well,
+for example this is how the `redisdb` check configuration folder looks like:
+```
+/etc/datadog-agent/conf.d/redisdb.d/
+├── auto_conf.yaml
+└── conf.yaml.example
+```
 
-Datadog has many [integrations](/integrations/) which are set up through [YAML files in the Agent](https://github.com/DataDog/dd-agent/tree/master/conf.d).
+To keep backwards compatibility, the Agent will still pick up configuration files
+in the form `/etc/datadog-agent/conf.d/<check_name>.yaml` but migrating to the
+new layout is strongly recommended.
 
-Here is a quick guide for troubleshooting [integrations](/integrations) installation:
+## CLI
 
-1. [Run the info command](/agent/faq/agent-status-and-information).
+The new command line interface for the Agent is sub-command based:
 
-2. Is the integration showing up in the [info command](/agent/faq/agent-status-and-information)?
+| Command         | Notes
+| --------------- | -------------------------------------------------------------------------- |
+| check           | Run the specified check |
+| configcheck     | Print all configurations loaded & resolved of a running agent |
+| diagnose        | Execute some connectivity diagnosis on your system |
+| flare           | Collect a flare and send it to Datadog |
+| health          | Print the current agent health |
+| help            | Help about any command |
+| hostname        | Print the hostname used by the Agent |
+| import          | Import and convert configuration files from previous versions of the Agent |
+| installservice  | Installs the agent within the service control manager |
+| launch-gui      | starts the Datadog Agent GUI |
+| regimport       | Import the registry settings into datadog.yaml |
+| remove-service  | Removes the agent from the service control manager |
+| restart-service | restarts the agent within the service control manager |
+| start           | Start the Agent |
+| start-service   | starts the agent within the service control manager |
+| status          | Print the current status |
+| stopservice     | stops the agent within the service control manager |
+| version         | Print the version info |
 
-* **No, it's not**:
-    * Check the configuration file, make sure it is in the right location and named correctly.
-    * Check it in a YAML parser to make sure it has the correct syntax. [Example files](https://github.com/DataDog/dd-agent/tree/master/conf.d).
-    * If you moved or changed the file, [restart the Agent](/agent/faq/start-stop-restart-the-datadog-agent) and rerun the [info command](/agent/faq/agent-status-and-information) to see if it is now showing up.
+To run a sub-command, the Agent binary must be invoked like this:
+```
+<path_to_agent_bin> <sub_command> <options>
+```
 
-*  **Yes, it's there**:
-    * Check the [Metrics Explorer](https://app.datadoghq.com/metric/explorer) to see if system metrics are showing up from the host. For example, look for `system.cpu.user` from the host that is running the Agent and has that integration setup.
-    * If there are still no metrics, check the logs for errors and send them along with the [info command](/agent/faq/agent-status-and-information) output, to [the Datadog support team](mailto:support@datadoghq.com?Subject=Agent%20issues).
+Some options have their own set of flags and options detailed in a help message.
+For example, to see how to use the `check` sub-command, run:
+```
+<agent_binary> check --help
+```
+
+## Using the GUI
+
+The port which the GUI runs on can be configured in your `datadog.yaml` file.
+Setting the port to -1 disables the GUI all together. By default it is enabled
+on port `5002` on Windows and Mac, and is disabled on Linux.
+
+Once the Agent is running, use the `datadog-agent launch-gui` command to launch
+the GUI within your default web browser.
+
+### Requirements
+
+1. Cookies must be enabled in your browser. The GUI generates and saves a token
+in your browser which is used for authenticating all communications with the GUI server.
+
+2. The GUI will only be launched if the user launching it has the correct user
+permissions: if you are able to open `datadog.yaml`, you are able to use the GUI.
+
+3. For security reasons, the GUI can **only** be accessed from the local network interface (```localhost```/```127.0.0.1```), so you must be on the same host that the agent is running to use it. In other words, you can't run the agent on a VM or a container and access it from the host machine.
+
+## Supported OSs versions
+### Agent v6
+|OS| Supported versions|
+|:----|:----|
+|[Debian x86_64](/agent/basic_agent_usage/deb) | Debian 7 (wheezy) and above (we do not support SysVinit)|
+|[Ubuntu x86_64](/agent/basic_agent_usage/ubuntu) | Ubuntu 14.04 and above|
+|[RedHat/CentOS x86_64](/agent/basic_agent_usage/redhat)| RedHat/CentOS 6 and above |
+|[SUSE Enterprise Linux x86_64](/agent/basic_agent_usage/suse) | SUSE 11 SP4 and above (we do not support SysVinit)|
+|[Fedora x86_64](/agent/basic_agent_usage/fedora) | Fedora 26 and above |
+|[MacOS](/agent/basic_agent_usage/osx)| OSX 10.10 and above|
+|[Windows server 64-bit](/agent/basic_agent_usage/windows)| Windows server 2008r2 or above|
+|[Windows 64-bit](/agent/basic_agent_usage/windows)| Windows 7 or above|
+
+**Note**: Source install may work on operating systems not listed here and is supported on a best effort basis.
+### Agent v5
+
+|OS| Supported versions|
+|:----|:----|
+|[Debian x86_64](/agent/basic_agent_usage/deb) | Debian 7 (wheezy) and above |
+|[Ubuntu x86_64](/agent/basic_agent_usage/ubuntu) | Ubuntu 12.04 and above|
+|[RedHat/CentOS x86_64](/agent/basic_agent_usage/redhat)| RedHat/CentOS 6 and above |
+|[SUSE Enterprise Linux x86_64](/agent/basic_agent_usage/suse) | SUSE 11 SP4 and above|
+|[Fedora x86_64](/agent/basic_agent_usage/fedora)| Fedora 26 and above |
+|[MacOS](/agent/basic_agent_usage/osx)| OSX 10.10 and above|
+|[Windows server 64-bit](/agent/basic_agent_usage/windows)| Windows server 2008r2 or above|
+|[Windows 64-bit](/agent/basic_agent_usage/windows)| Windows 7 or above|
+
+**Note**: Source install may work on operating systems not listed here and is
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

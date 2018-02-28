@@ -1,15 +1,9 @@
 ---
 title: How does Datadog determine the agent hostname?
 kind: faq
-further_reading:
-- link: "/agent/"
-  tag: "Documentation"
-  text: Learn more about the Datadog Agent
 ---
 
-## Overview 
-
-The Datadog Agent collects potential hostnames from a number of different sources. To see all the names the Agent is detecting, [run the Agent info command](/agent/faq/agent-status-and-information), for example:
+The Datadog Agent collects potential hostnames from a number of different sources. To see all the names the Agent is detecting, [run the Agent info command](/agent/#agent-status-and-information), for example:
 ```
 $ sudo /etc/init.d/datadog-agent info
 
@@ -39,7 +33,7 @@ The canonical host name is picked according to the following rules. The first ma
 
 If name is recognized as obviously non-unique (e.g. localhost.localdomain), the current rule fails and passes through to the next.
 
-## Host Aliases
+### Host Aliases
 
 A single host running in EC2 might have an instance ID (i-abcd1234), a generic hostname provided by EC2 based on the host’s IP address (ip-192-0-0-1), and a meaningful host name provided by an internal DNS server or a config-managed hosts file (myhost.mydomain). Datadog creates aliases for host names when there are multiple uniquely identifiable names for a single host.
 
@@ -48,9 +42,3 @@ The names collected by the Agent (detailed above) are added as aliases for the c
 See a list of all the hosts in your account from the Infrastructure tab in Datadog. From the Inspect panel, which you get to by clicking the "Inspect" button while hovering over a host row, see (among other things) the list of aliases associated with each host.
 
 {{< img src="agent/faq/host_aliases.png" alt="Host aliases" responsive="true" popup="true">}}
-
-To learn how to rename your host, [reference this article](/agent/faq/how-can-i-change-the-hostname).
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}

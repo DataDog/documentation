@@ -8,10 +8,6 @@ description: "Configure your Datadog agent to gather logs from your host, contai
 Datadog's Logs is currently available via public beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
 </div>
 
-## Overview
-
-{{< img src="logs/index/pipeline_sketch.png" alt="Pipelines sketch" responsive="true" popup="true">}}
-
 ## Getting started with the Agent
 
 Log collection requires an Agent version >= 6.0. Older versions of the Agent do not include the `Log collection` interface that is used for log collection.
@@ -27,47 +23,17 @@ logs_enabled: true
 The Datadog agent sends its logs to Datadog over TLS-encrypted TCP. This requires outbound communication over port `10516`.
 
 ## Enabling log collection from integrations
-
-To start collecting logs for a given integration, you need to uncomment the logs section in that integration's yaml file, and configure it for your environment.
-
-If an integration does not support logs by default, you may need to use the custom file configuration below.
+To start collecting logs for a given integration, uncomment the logs section in that integration's yaml file, and configure it for your environment.  
 
 <div class="alert alert-warning">
-During the beta phase of Datadog Logs, not all integrations include log configurations out of the box. A current list of supported integrations is available below.
+Not all integrations include out of the box log configurations.  <a href="https://docs.datadoghq.com/integrations/#cat-log-collection">Consult the current list of supported integrations available</a>.
 </div>
 
-### Containers 
-* [Docker](/logs/docker)
-
-### Cloud
-* [AWS](/logs/aws)
-
-### Languages
-
-* [Java](/logs/languages/java) 
-* [C#](/logs/languages/csharp)
-* [Go](/logs/languages/go)
-* [NodeJs](/logs/languages/nodejs)
-* [Ruby](/logs/languages/ruby)
-
-### Agent checks
-
-* [Apache](/integrations/apache/#log-collection)
-* [Haproxy](/integrations/haproxy/#log-collection)
-* [IIS](/integrations/iis/#log-collection)
-* [Mongo](/integrations/mongo/#log-collection)
-* [MySQL](/integrations/mysql/#log-collection)
-* [Nginx](/integrations/nginx/#log-collection)
-* [PostgreSQL](/integrations/postgres/#log-collection)
-* [Varnish](/integrations/varnish/#log-collection)
-
-### The Advantage of Collecting JSON-formatted logs
-
-Datadog automatically parses JSON-formatted logs. For this reason, when you have control over the log format you send to Datadog, we encourage you to format them as JSON to avoid the need for custom parsing rules.
+If an integration does not support logs by default, use the custom file configuration below.
 
 ## Custom log collection
 
-The Datadog Agent can collect logs from files or the network (TCP or UDP) and forward them to Datadog. To configure this, create a new repository and yaml file named after your log source  in the Agent's **conf.d** directory ( `conf.d/python.d/conf.yaml` for python logs, ...) and set these options:
+The Datadog Agent v6 can collect logs from files or the network (TCP or UDP) and forward them to Datadog. To configure this, create a new repository and yaml file named after your log source  in the Agent's **conf.d** directory ( `conf.d/python.d/conf.yaml` for python logs, ...) and set these options:
 
 * `type` : (mandatory) type of log input source (**tcp** / **udp** / **file**)
 * `port` / `path` : (mandatory) Set `port` if `type` is **tcp** or **udp**. Set `path` if `type` is **file**.
@@ -76,7 +42,7 @@ The Datadog Agent can collect logs from files or the network (TCP or UDP) and fo
 * `sourcecategory` : (optional) Multiple value attribute. Can be used to refine the source attribtue. Example: source:mongodb, sourcecategory:db_slow_logs
 * `tags`: (optional) add tags to each log collected.
 
-### Tail existing files
+## Tail existing files
 Set `type` to **file** then specify the absolute `path` to the log file you want to tail.
 
 Example: 
@@ -106,7 +72,7 @@ logs:
 ```
 * [Restart your agent](https://help.datadoghq.com/hc/en-us/articles/203764515-Start-Stop-Restart-the-Datadog-Agent)
 
-### Stream logs through TCP/UDP
+## Stream logs through TCP/UDP
 Set `type` to **tcp** or **udp** depending of your protocol then specify the `port` of your incoming connection.
 
 Example:
@@ -270,6 +236,10 @@ logs:
 ```
 
 **Note**: that the agent requires the read and execute permission (5) on the directory to be able to list all the available files in it.
+
+### The Advantage of Collecting JSON-formatted logs
+
+Datadog automatically parses JSON-formatted logs. For this reason, when you have control over the log format you send to Datadog, we encourage you to format them as JSON to avoid the need for custom parsing rules.
 
 ## Reserved attributes 
 

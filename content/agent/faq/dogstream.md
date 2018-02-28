@@ -1,13 +1,14 @@
 ---
-title: Log Parsing in the Agent
+title: Dogstream
 kind: documentation
 aliases:
     - /guides/logs/
-further_reading:
-- link: "/agent/faq/want-more-flexibility-with-your-custom-log-parser-add-dogstatsd"
-  tag: "FAQ"
-  text: Want more flexibility with your custom log parser? Add DogStatsD  
 ---
+
+<div class="alert alert-info">
+This documentation covers Agent <strong>versions prior to 6.0.0</strong><br>
+Agent v6 is now available, <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md">upgrade to the newest version </a> to benefit from all new functionality. 
+</div>
 
 Log files contain tons of valuable application and business data.
 Unfortunately, this value is oftentimes never realized because log files go
@@ -246,12 +247,8 @@ dogstreams: /Users/Documents/Parser/test.log:/Users/Documents/Parser/myparser.py
 
 ## Troubleshooting Your Custom Log-Parser
 
-Bugs happen, so being able to see the traceback from your log-parsers is very important. You can do this if you are running the agent with its [agent logs](/agent/faq/log-locations) set at the "DEBUG" level. The agent's log-level can be set in the `datadog.conf` by uncommenting and editing [this line](https://github.com/DataDog/dd-agent/blob/5.7.x/datadog.conf.example#L211), and then [restarting the agent](/agent/faq/start-stop-restart-the-datadog-agent). Once that's configured properly, traceback resulting from errors in your custom log-parser can be found in the *collector.log* file ([read here for where to find your agent logs](/agent/faq/log-locations)), and it generally includes the string checks.collector(datadog.py:278) | Error while parsing line in them ([here's the agent code where the error is likely to be thrown](https://github.com/DataDog/dd-agent/blob/5.7.x/checks/datadog.py#L278)).
+Bugs happen, so being able to see the traceback from your log-parsers is very important. You can do this if you are running the agent with its [agent logs](/agent/#log-locations) set at the "DEBUG" level. The agent's log-level can be set in the `datadog.conf` by uncommenting and editing [this line](https://github.com/DataDog/dd-agent/blob/5.7.x/datadog.conf.example#L211), and then [restarting the agent](/agent/faq/agent-commands). Once that's configured properly, traceback resulting from errors in your custom log-parser can be found in the *collector.log* file ([read here for where to find your agent logs](/agent/#log-locations)), and it generally includes the string checks.collector(datadog.py:278) | Error while parsing line in them ([here's the agent code where the error is likely to be thrown](https://github.com/DataDog/dd-agent/blob/5.7.x/checks/datadog.py#L278)).
 
-Note that whenever you make a change to your custom log-parser, [restart the agent](/agent/faq/start-stop-restart-the-datadog-agent) to put that change into effect.
+Note that whenever you make a change to your custom log-parser, [restart the agent](/agent/faq/agent-commands) to put that change into effect.
 
-If you suspect there is some error occurring beyond the scope of your custom log-parser function, feel free to [reach out to support](/help), but do first set the agent's log-level at "DEBUG", run the agent for a few minutes while ensuring that new logs are being added to your files, and then [run the flare command](/agent/faq/send-logs-and-configs-to-datadog-via-flare-command) from your agent. That gives to the support team the information needed to effectively troubleshoot the issue.
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
+If you suspect there is some error occurring beyond the scope of your custom log-parser function, feel free to [reach out to support](/help), but do first set the agent's log-level at "DEBUG", run the agent for a few minutes while ensuring that new logs are being added to your files, and then [run the flare command](/agent/#send-a-flare) from your agent. That gives to the support team the information needed to effectively troubleshoot the issue.

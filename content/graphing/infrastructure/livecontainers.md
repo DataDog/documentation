@@ -24,10 +24,9 @@ Coupled with Datadog’s integrations with [Docker](/integrations/docker_daemon)
 
 ## Installation
 
-**[Live Containers](https://app.datadoghq.com/containers) has been introduced in Datadog Agent version 5.17.2.**  
-After [updating](https://app.datadoghq.com/account/settings#agent) to this version of the Agent or later, no other configuration is necessary.
+After deploying the [Docker Agent](/agent/basic_agent_usage/docker/#run-the-docker-agent), no other configuration is necessary.
 
-Note that for collecting Container information in the standard install rather than with the [docker-dd-agent][1], the dd-agent user needs to have permissions to access **docker.sock**.
+Note that for collecting Container information in the standard install rather than with the [Docker Agent](/agent/basic_agent_usage/docker/#run-the-docker-agent), the dd-agent user needs to have permissions to access **docker.sock**.
 
 ## Searching, Filtering, and Pivoting
 
@@ -37,7 +36,7 @@ Containers are by their nature extremely high cardinality objects. Our flexible 
 
 ### Tagging
 
-Containers are [tagged](/agent/tagging) with all existing host-level tags.  We also tag with metadata associated with individual containers.  
+Containers are [tagged](/getting_started/tagging) with all existing host-level tags.  We also tag with metadata associated with individual containers.  
 
 All containers are tagged by `image_name`, and additionally, we include integrations with popular orchestrators, such as [ECS](/integrations/amazon_ecs) and [Kubernetes](/integrations/kubernetes), which provide further container-level tags.  We also decorate each container with Docker, ECS, or Kubernetes icons so you can tell which are being orchestrated at a glance.
 

@@ -3,8 +3,14 @@ title: Installing Core & Extra Integrations
 kind: documentation
 aliases:
     - /guides/installcoreextra/
+    - /agent/installcoreextra/
 disable_toc: true
 ---
+
+<div class="alert alert-info">
+This documentation covers Agent <strong>versions prior to 6.0.0</strong><br>
+Agent v6 is now available, <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md">upgrade to the newest version </a> to benefit from all new functionality. 
+</div>
 
 ### Overview
 Starting with version 5.12 of the Datadog Agent, we are moving integrations from the [dd-agent repository](https://github.com/DataDog/dd-agent) on GitHub to the [integrations-core](https://github.com/DataDog/integrations-core) and [integrations-extras](https://github.com/DataDog/integrations-extras) repositories.

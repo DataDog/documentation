@@ -4,6 +4,16 @@ kind: documentation
 platform: Source
 aliases:
     - /guides/basic_agent_usage/source/
+further_reading:
+- link: "/logs/"
+  tag: "Documentation"
+  text: Collect your logs
+- link: "/graphing/infrastructure/process"
+  tag: "Documentation"
+  text: Collect your processes
+- link: "/tracing"
+  tag: "Documentation"
+  text: Collect your traces
 ---
 ## Overview
 
@@ -11,68 +21,69 @@ This page outlines the basic functionality of the Datadog Agent. If you haven't 
 
 By default, your Agent is installed in its own sandbox at `~/.datadog-agent`. You're free to move this folder wherever you like. However, this article assumes that the Agent is installed in its default location, so be sure to modify the instructions accordingly if you decide to move them.
 
-## Starting and Stopping the Agent
 
-To manually start the Agent:
+## Commands
 
+Datadog Agent has some commands and only the _lifecycle commands_ (i.e. `start`/`stop`/`restart`/`status` on the Agent service) should be run with `sudo service`/`sudo initctl`/`sudo systemctl`, all other commands need to be run with the `datadog-agent` command.
+
+{{% table responsive="true" %}}
+| Agent v5                                  |  Agent v6                          | Notes
+| ----------------------------------------------- | --------------------------------------- | ----------------------------- |
+| `sudo ~/.datadog-agent/bin/agent start`              | `sudo service datadog-agent start`      | Start Agent as a service |
+| `sudo ~/.datadog-agent/bin/agent stop`               | `sudo service datadog-agent stop`       | Stop Agent running as a service |
+| `sudo ~/.datadog-agent/bin/agent restart`            | `sudo service datadog-agent restart`    | Restart Agent running as a service |
+| `sudo ~/.datadog-agent/bin/agent status`             | `sudo service datadog-agent status`     | Status of Agent service |
+| `sudo ~/.datadog-agent/bin/info`               | `sudo datadog-agent status`             | Status page of running Agent |
+| `sudo service datadog-agent flare`              | `sudo datadog-agent flare`              | Send flare |
+| `sudo service datadog-agent`                    | `sudo datadog-agent --help`             | Display command usage |
+| `sudo -u dd-agent -- dd-agent check <check_name>` | `sudo -u dd-agent -- datadog-agent check <check_name>` | Run a check |
+{{% /table %}}
+
+More information about the metrics, events, and service checks for an [integrations](/integrations) can be retrieved with the check command:
 ```shell
-sudo ~/.datadog-agent/bin/agent start
+sudo service datadog-agent check [integration]
 ```
 
-To stop the Agent: 
-
+Add the check_rate argument to get the most recent values for rates:
 ```shell
-sudo ~/.datadog-agent/bin/agent stop
+sudo service datadog-agent check [integration] check_rate
 ```
 
-To restart the Agent:  
+**NB**: If `service` is not available on your system, use:
 
-```shell
-sudo ~/.datadog-agent/bin/agent restart
-```
-
-## Status and Information
-
-To check if the Agent is running:
-
-```shell
-sudo ~/.datadog-agent/bin/agent status
-```
-
-To receive more information about the Agent's state:
-
-```shell
-sudo ~/.datadog-agent/bin/info
-```
-
-Tracebacks for errors can be retrieved by setting the `-v` flag: *(since 3.8.0)*
-
-```shell
-sudo ~/.datadog-agent/bin/info -v
-```
+* on `upstart`-based systems: `sudo start/stop/restart datadog-agent`
+* on `systemd`-based systems: `sudo systemctl start/stop/restart datadog-agent`
+* on `initctl`-based systems: `sudo initctl start/stop/restart datadog-agent`
 
 ## Configuration
 
-The configuration file for the Agent is located at `~/.datadog-agent/agent/datadog.conf`
+The configuration files and folders for the Agent are located at:
 
-Configuration files for [integrations](/integrations) are located in `~/.datadog-agent/agent/conf.d/`
+| Agent v5                                  |  Agent v6                          |
+|:-----|:----|
+|`/etc/dd-agent/datadog.conf`| `/etc/datadog-agent/datadog.yaml` |
+
+Configuration files for [integrations](/integrations):
+
+| Agent v5                                  |  Agent v6                          |
+|:-----|:----|
+|`/etc/dd-agent/conf.d/`|`/etc/datadog-agent/conf.d/`|
 
 ## Troubleshooting
 
-First, make sure you are using the correct version of Python. The Agent requires version 2.7. You can check your version by executing:
+Run the info or status command to see the state of the Agent.
+The Agent logs are located in the `/var/log/datadog/` directory:
 
-```shell
-python -c 'import sys; print sys.version'
-```
-
-Next, try running the [info](#status_and_information) command to see the state of the Agent.
-
-Logs for the subsystems are in the following files:
-
-*   `~/.datadog-agent/supervisord/logs/supervisord.log`
-*   `~/.datadog-agent/supervisord/logs/collector.log`
-*   `~/.datadog-agent/supervisord/logs/dogstatsd.log`
-*   `~/.datadog-agent/supervisord/logs/forwarder.log`
+* For Agent v6 all logs are in the `agent.log` file
+* For Agent v5 logs are in:
+    
+    * `datadog-supervisord.log`
+    * `collector.log`
+    * `dogstatsd.log`
+    * `forwarder.log`
 
 If you're still having trouble, [our support team](/help) will be glad to provide further assistance.
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
