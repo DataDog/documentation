@@ -70,11 +70,15 @@ If you are storing logs in many S3 buckets, Datadog can automatically manage tri
 1. Add the required permissions to your Datadog role in the [IAM Console](https://console.aws.amazon.com/iam/home#/roles). You may already have some of these permissions from our other AWS integrations. Information on how these permissions are used can be found in the [permissions](#permissions) section below:
 
 ```
+"cloudfront:GetDistributionConfig",
+"cloudfront:ListDistributions",
 "elasticloadbalancing:DescribeLoadBalancers",
 "elasticloadbalancing:DescribeLoadBalancerAttributes",
 "lambda:AddPermission",
 "lambda:GetPolicy",
 "lambda:RemovePermission",
+"redshift:DescribeClusters",
+"redshift:DescribeLoggingStatus",
 "s3:GetBucketLogging",
 "s3:GetBucketLocation",
 "s3:GetBucketNotification",
@@ -151,7 +155,8 @@ CloudFront delivers your content through a worldwide network of data centers cal
 When you enable logging for a distribution, specify the Amazon S3 bucket that you want CloudFront to store log files in. 
 If you're using Amazon S3 as your origin, we recommend that you do not use the same bucket for your log files; using a separate bucket simplifies maintenance.
 
-Store the log files for multiple distributions in the same bucket. When enabling logging, specify an optional prefix for the file names, [to keep track of which log files are associated with which distributions](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html#access-logs-choosing-s3-bucket ) 
+
+Store the log files for multiple distributions in the same bucket. When enabling logging, specify an optional prefix for the file names, [to keep track of which log files are associated with which distributions](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html#access-logs-choosing-s3-bucket). **In order for Datadog to tag CloudFront logs as `source:cloudfront` you must include `cloudfront` somewhere in prefix.**
 
 You can then collect the log from the s3 bucket thanks to the Lambda function.
 
@@ -159,11 +164,15 @@ You can then collect the log from the s3 bucket thanks to the Lambda function.
 
 *Required only for automatic setup*:
 
+* `cloudfront:GetDistributionConfig`: Get the name of the S3 bucket containing CloudFront access logs.
+* `cloudfront:ListDistributions`: List all CloudFront distributions.
 * `elasticloadbalancing:DescribeLoadBalancers`: List all load balancers.
 * `elasticloadbalancing:DescribeLoadBalancerAttributes`: Get the name of the S3 bucket containing ELB access logs.
 * `lambda:AddPermission`: Add permission allowing a particular S3 bucket to trigger a Lambda function.
 * `lambda:GetPolicy`: Gets the Lambda policy when triggers are to be removed.
 * `lambda:RemovePermission`: Remove permissions from a Lambda policy.
+* `redshift:DescribeClusters`: List all Redshift clusters.
+* `redshift:DescribeLoggingStatus`: Get the name of the S3 bucket containing Redshift Logs.
 * `s3:GetBucketLogging`: Get the name of the S3 bucket containing S3 access logs.
 * `s3:GetBucketLocation`: Get the region of the S3 bucket containing S3 access logs.
 * `s3:GetBucketNotification`: Get existing Lambda trigger configurations.
