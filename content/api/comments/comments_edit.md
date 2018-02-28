@@ -8,8 +8,8 @@ external_redirect: /api/#edit-a-comment
 ## Edit A Comment
 
 ##### ARGUMENTS
-* `message` [*optional*, *default* = **original message**]:  
+* **`message`** [*optional*, *default* = **original message**]:  
     The comment text.
 
-* `handle` [*optional*, *default* = **Application key owner**]:  
+* **`handle`** [*optional*, *default* = **Application key owner**]:  
     The handle of the user making the comment.

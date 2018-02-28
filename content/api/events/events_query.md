@@ -10,13 +10,13 @@ The [event stream](/graphing/event_stream/) can be queried and filtered by time,
 Note: if the event you’re querying contains markdown formatting of any kind, you may see characters such as %,\,n in your output
 
 ##### ARGUMENTS
-* `start` [*required*]:  
+* **`start`** [*required*]:  
     POSIX timestamp.
-* `end` [*required*]:  
+* **`end`** [*required*]:  
     POSIX timestamp.
-* `priority` [*optional*, *default*=**None**]:  
+* **`priority`** [*optional*, *default*=**None**]:  
     Priority of your events: **low** or **normal**.
-* `sources` [*optional*, *default*=**None**]:  
+* **`sources`** [*optional*, *default*=**None**]:  
     A comma separated string of sources.
-* `tags` [*optional*, *default*=**None**]:  
+* **`tags`** [*optional*, *default*=**None**]:  
     A comma separated string of tags.

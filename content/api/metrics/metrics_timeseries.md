@@ -10,17 +10,17 @@ The metrics end-point allows you to post time-series data that can be graphed on
 
 #### ARGUMENTS
 
-* `series` [*required*]:  
+* **`series`** [*required*]:  
     Pass a JSON array where each item in the array contains the following arguments:
     
-    * `metric` [*required*]:  
+    * **`metric`** [*required*]:  
         The name of the time series
-    * `points` [*required*]:  
+    * **`points`** [*required*]:  
         A JSON array of points. Each point is of the form:  
         `[[POSIX_timestamp, numeric_value], ...]`  
         **Note**: The timestamp should be in seconds, current, and its format should be a 32bit float gauge-type value.
         Current is defined as not more than 10 minutes in the future or more than 1 hour in the past.
-    * `host` [*required*]:  
+    * **`host`** [*required*]:  
         The name of the host that produced the metric.
-    * `tags` [*optional*, *default*=**None**]:  
+    * **`tags`** [*optional*, *default*=**None**]:  
         A list of tags associated with the metric.

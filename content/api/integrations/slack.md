@@ -12,30 +12,30 @@ Configure your Datadog-Slack integration directly through Datadog API.
 
 ##### ARGUMENTS
 
-* `service_hooks` [*required*]:  
+* **`service_hooks`** [*required*]:  
     Array of service hook objects (the service hook is generated for your slack account in your Slack account administration page). A service hook object is composed by:
 
-    * `account` [*required*]:  
+    * **`account`** [*required*]:  
         Your Slack account name.
 
-    * `url` [*required*]:  
+    * **`url`** [*required*]:  
         Your Slack Service Hook URL. 
   
   
 
-* `channels` [*required*]:  
+* **`channels`** [*required*]:  
     Array of slack channel objects to post to. A slack channel object is composed by:
 
-    * `channel_name` [*required*]:  
+    * **`channel_name`** [*required*]:  
         Your channel name e.g: `#general`, `#private`
 
-    * `transfer_all_user_comments` [*optional*, *default*=**False**]:  
+    * **`transfer_all_user_comments`** [*optional*, *default*=**False**]:  
         To be notified for every comment on a graph, set it to `true`. If set to `False` use the `@slack-channel_name` syntax [for comments to be posted to slack](/monitors/notifications/#slack-integration).
 
-    * `account` [*required*]:  
+    * **`account`** [*required*]:  
         Account to which the channel belongs to.
 
-* `run_check` [*optional*, *default*=**false**]:  
+* **`run_check`** [*optional*, *default*=**false**]:  
     Determines if the integration install check is run before returning a response.
 
     * If **true**:
