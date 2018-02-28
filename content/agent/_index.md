@@ -15,13 +15,13 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-    Agent v6 is now available, <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md">upgrade to the newest version </a> to benefit from all new functionality 
+    Agent v6 is now available, <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md">upgrade to the newest version </a> to benefit from all new functionality
 </div>
 
 ## What is the Agent?
 
 The Datadog Agent is a piece of software that runs on your hosts. Its job is to faithfully collect events and metrics and bring them to Datadog on
-your behalf so that you can do something useful with your monitoring and performance data. The Datadog Agent is open-source, view the source code on GitHub for [Agent v5](https://github.com/DataDog/dd-agent) and [Agent v6](https://github.com/DataDog/datadog-agent). To see all changes between Agent v5 and v6, [consult our dedicated changes documentation](https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md).
+your behalf so that you can do something useful with your monitoring and performance data. The Datadog Agent is open source, view the source code on GitHub for [Agent v5](https://github.com/DataDog/dd-agent) and [Agent v6](https://github.com/DataDog/datadog-agent). To see all changes between Agent v5 and v6, [consult our dedicated changes documentation](https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md).
 
 {{< partial name="platforms/platforms.html" >}}
 
@@ -42,13 +42,13 @@ This is all controlled by one supervisor process. We keep this separate so you d
 Agent 6 is the latest major version of the Datadog Agent. The big difference between Agent 5 and Agent 6 is that Agent 6 is a complete rewrite of the core Agent in Golang. Golang has allowed us to take advantage of concurrency. In place of the three processes the Agent v5 used to run --*the Forwarder*, *the Collector*, and *DogStatsD*-- there is now only one process: the Agent. It also comes with a number of other core improvements:
 
 * Agent v6 has significantly improved resource usage over Agent v5:
-    
+
     * It has decreased CPU usage:
-    * It has a decrease Memory usage:
-    * It uses fewer File Descriptors:
+    * It has decrease memory usage:
+    * It uses fewer file descriptors:
     * It has an all around decreased footprint.
 
-* Global percentiles can be performed on the server directly to calculate real, effective global percentiles.
+* Global percentiles can be performed on the server directly to calculate real, effective global percentiles. (NOTE: this feature is currently in BETA. Contact support for details on how to have it enabled for your account.)
 
 * [DogStatsD](/developers/dogstatsd) can be used over a unix socket instead of over udp.
 
@@ -58,7 +58,7 @@ Agent 6 is the latest major version of the Datadog Agent. The big difference bet
 
 ## Migration
 
-To automatically transition between agent configuration paths and formats from Agent v5 to Agent v6, use the agent command:    
+To automatically transition between agent configuration paths and formats from Agent v5 to Agent v6, use the agent command:
 
 `sudo -u dd-agent -- datadog-agent import`
 
@@ -176,7 +176,7 @@ permissions: if you are able to open `datadog.yaml`, you are able to use the GUI
 |[Debian x86_64](/agent/basic_agent_usage/deb) | Debian 7 (wheezy) and above (we do not support SysVinit)|
 |[Ubuntu x86_64](/agent/basic_agent_usage/ubuntu) | Ubuntu 14.04 and above|
 |[RedHat/CentOS x86_64](/agent/basic_agent_usage/redhat)| RedHat/CentOS 6 and above |
-|[SUSE Enterprise Linux x86_64](/agent/basic_agent_usage/suse) | SUSE 11 SP4 and above (we do not support SysVinit)| 
+|[SUSE Enterprise Linux x86_64](/agent/basic_agent_usage/suse) | SUSE 11 SP4 and above (we do not support SysVinit)|
 |[Fedora x86_64](/agent/basic_agent_usage/fedora) | Fedora 26 and above |
 |[MacOS](/agent/basic_agent_usage/osx)| OSX 10.10 and above|
 |[Windows server 64-bit](/agent/basic_agent_usage/windows)| Windows server 2008r2 or above|
@@ -190,13 +190,13 @@ permissions: if you are able to open `datadog.yaml`, you are able to use the GUI
 |[Debian x86_64](/agent/basic_agent_usage/deb) | Debian 7 (wheezy) and above |
 |[Ubuntu x86_64](/agent/basic_agent_usage/ubuntu) | Ubuntu 12.04 and above|
 |[RedHat/CentOS x86_64](/agent/basic_agent_usage/redhat)| RedHat/CentOS 6 and above |
-|[SUSE Enterprise Linux x86_64](/agent/basic_agent_usage/suse) | SUSE 11 SP4 and above| 
+|[SUSE Enterprise Linux x86_64](/agent/basic_agent_usage/suse) | SUSE 11 SP4 and above|
 |[Fedora x86_64](/agent/basic_agent_usage/fedora)| Fedora 26 and above |
 |[MacOS](/agent/basic_agent_usage/osx)| OSX 10.10 and above|
 |[Windows server 64-bit](/agent/basic_agent_usage/windows)| Windows server 2008r2 or above|
 |[Windows 64-bit](/agent/basic_agent_usage/windows)| Windows 7 or above|
 
-**Note**: Source install may work on operating systems not listed here and is 
+**Note**: Source install may work on operating systems not listed here and is
 
 ## Further Reading
 
