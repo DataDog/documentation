@@ -471,17 +471,17 @@ index_algolia() {
 
 
 manage_translations() {
+    # $1: api key
     start_step
-    chmod +x /usr/local/bin/translate.py
     echo "---------"
     echo "Sending Translations"
     echo "---------"
-    translate.py --config ./translate.yaml -s -k "${1}" || fail_step "${FUNCNAME}"
+    ./node_modules/.bin/translate -s ./translate.yaml "${1}" || fail_step "${FUNCNAME}"
     echo "Done."
     echo "---------"
     echo "Receiving Translations"
     echo "---------"
-    translate.py --config ./translate.yaml -r -k "${1}" --token $(get_secret 'github_token') || fail_step "${FUNCNAME}"
+    ./node_modules/.bin/translate -r ./translate.yaml "${1}" --token $(get_secret 'github_token') || fail_step "${FUNCNAME}"
     echo "Done."
     pass_step  "${FUNCNAME}"
 }
