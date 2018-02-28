@@ -89,7 +89,12 @@
     {{ if $wide }}
 
       {{ $e := (print $img "?auto=format" | relURL | safeURL) }}
-        <picture {{ if .Get "style" }}
+      {{ if eq $image_ext "gif" }}
+        <img class="img-fluid" srcset="{{ $e }}"
+            {{ if .Get "style" }}style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}"{{ end }}
+            alt="{{ with .Get "alt"}}{{.}}{{end}}">
+      {{ else }}
+          <picture {{ if .Get "style" }}
             style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}"
          {{ end }}>
           <img class="lazyload img-fluid" srcset="{{ $e }}"
@@ -99,19 +104,27 @@
               alt="{{ with .Get "alt"}}{{.}}{{end}}"
           >
         </picture>
+      {{ end }}
 
     {{ else }}
         {{ $e := (print $img "?auto=format" | relURL | safeURL) }}
-        <picture {{ if .Get "style" }}
-            style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}"
-         {{ end }}>
-          <img class="lazyload img-fluid" srcset="{{ $e }}"
-          {{ if .Get "style" }}
+        {{ if eq $image_ext "gif" }}
+            <img class="img-fluid" src="{{ $e }}"
+              {{ if .Get "style" }}style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}"{{ end }}
+              alt="{{ with .Get "alt"}}{{.}}{{end}}">
+        {{ else }}
+              <picture {{ if .Get "style" }}
                 style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}"
-              {{ end }}
-              alt="{{ with .Get "alt"}}{{.}}{{end}}"
-          >
-        </picture>
+             {{ end }}>
+              <img class="lazyload img-fluid" srcset="{{ $e }}"
+              {{ if .Get "style" }}
+                    style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}"
+                  {{ end }}
+                  alt="{{ with .Get "alt"}}{{.}}{{end}}"
+              >
+            </picture>
+        {{ end }}
+
 
     {{ end }}
 
