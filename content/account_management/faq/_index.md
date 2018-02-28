@@ -9,7 +9,7 @@ private: true
 * [Are my data and credentials safe?](/account_management/faq/are-my-data-and-credentials-safe)
 * [Help! My Password email never came through!](/account_management/faq/help-my-password-email-never-came-through)
 * [Is it possible to have my login belong to multiple Datadog organizations?](/account_management/faq/is-it-possible-to-have-my-login-belong-to-multiple-datadog-organizations)
-* [Password Requirements](/account_management/faq/password-requirements)
+* [What are Datadog's password requirements?](/account_management/faq/password-requirements)
 
 ## Service Providers
 

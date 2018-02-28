@@ -1,5 +1,5 @@
 ---
-title: Password Requirements
+title: "What are Datadog's password requirements?"
 kind: faq
 ---
 
