@@ -18,7 +18,7 @@ further_reading:
 
 If you ended up at this page and have not yet installed the Datadog Agent, go [to the dedicated agent integration page](https://app.datadoghq.com/account/settings#agent) for installation instructions. If you just installed the Agent, it might take a few moments before you start seeing metrics appear. The first place you should check for metrics is the [Metrics Explorer](https://app.datadoghq.com/metric/explorer).
 
-If you think you might be experiencing issues, the first thing to do is [run the info command](/agent/#agent-status-and-information) and check the [Agent logs](/agent/#log-locations).
+If you think you might be experiencing issues, the first thing to do is [run the info command](/agent/faq/agent-commands/#agent-status-and-information) and check the [Agent logs](/agent/#log-locations).
 
 If you're still unsure about the issue, you may reach out to [Datadog support team](/help) along with [a flare](#send-a-flare) of your agent.
 
