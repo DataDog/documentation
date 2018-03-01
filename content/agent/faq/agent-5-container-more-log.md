@@ -3,7 +3,7 @@ title: Obtaining debug logs from the container agent v5
 kind: faq
 ---
 
-It isn't possible to restart the container agent with service datadog-agent restart or similar, because those commands cause the container to be killed by Docker (presumably due to a failed health check). Thus, in order to restart the container agent, one must use supervisor:
+It isn't possible to restart the container agent with service datadog-agent restart or similar, because those commands cause the container to be killed by Docker. Thus, in order to restart the container agent, one must use supervisor:
 
 ```
 /opt/datadog-agent/bin/supervisorctl -c /etc/dd-agent/supervisor.conf restart all

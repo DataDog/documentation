@@ -36,7 +36,7 @@ To enable the full debug mode:
 
 ### Obtaining debug logs from the container agent
 
-This process cover agent 6 only, refer to [the dedicated documentation on how to collect more logs with the Datadog container agent v5](/agent/faq/agent-5-container-more-log)
+This process covers agent v6 only, for agent v5 refer to [the dedicated documentation on how to collect more logs with the Datadog container agent v5](/agent/faq/agent-5-container-more-log)
 
 Set `DD_LOG_LEVEL=debug` then start your agent and [send a flare](#send-a-flare).
 
