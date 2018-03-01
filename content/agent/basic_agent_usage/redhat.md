@@ -104,67 +104,49 @@ To install on a clean box (or have an existing agent 5 install from which you do
 ```
 
 #### Manual install
-1. Set up Datadog's Yum repo on your system
+
+1. Set up Datadog's Yum repo on your system by creating /etc/yum.repos.d/datadog.repo with the contents:
 
     ```
-    [datadog-beta]
-    name = Beta, Datadog, Inc.
-    baseurl = https://yum.datadoghq.com/beta/x86_64/
+    [datadog]
+    name = Datadog, Inc.
+    baseurl = https://yum.datadoghq.com/stable/6/x86_64/
     enabled=1
     gpgcheck=1
-    priority=1
     gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
-           https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
     ```
 
-    use this command to do it directly:
+2. Update your local yum repo and install the Agent:
 
-    ```shell
-    # Red Hat
-    echo -e '[datadog-beta]\nname = Beta, Datadog, Inc.\nbaseurl = https://yum.datadoghq.com/beta/x86_64/\nenabled=1\ngpgcheck=1\npriority=1\ngpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public\n       https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public' | sudo tee /etc/yum.repos.d/datadog-beta.repo
     ```
-
-2. Update your local yum cache and install/update the agent
-
-    ```shell
-    sudo yum clean expire-cache
+    sudo yum makecache
+    sudo yum remove datadog-agent-base
     sudo yum install datadog-agent
     ```
 
-3. Import existing configuration (optional)
+3. Copy the example config into place and plug in your API key:
 
-    If you ran the `install_script.sh` all agent and checks configuration should be already imported.
-
-    If you didn't you can run manually the import command:
-
-    ```shell
-    /opt/datadog-agent/bin/agent/agent import /etc/dd-agent /etc/datadog-agent
+    ```
+    sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_API_KEY>/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
     ```
 
-4. Enable desired custom checks (optional)
+4. Re-start the Agent on Centos 7 and above:
 
-    Since all custom checks might not work on Agent 6, we let you enable these manually. Copy them over to the `additional_checksd` location (defaults to `/etc/datadog-agent/checks.d/` for Agent 6):
-
-    ```shell
-    sudo -u dd-agent -- cp /etc/dd-agent/checks.d/<check>.py /etc/datadog-agent/checks.d/
+    ```
+    sudo systemctl restart datadog-agent.service
     ```
 
-    **Note:** custom checks now have a *lower* precedence than the checks bundled by default with the Agent. This affects your custom checks if they have the same name as a check in [integrations-core][https://github.com/DataDog/integrations-core].
+5. Re-start the Agent on Centos 6:
 
-5. Restart the agent
-
-    ```shell
-    # Systemd
-    sudo systemctl restart datadog-agent
-    # Upstart
-    sudo restart datadog-agent
+    ```
+    sudo initctl start datadog-agent
     ```
 
 ### Downgrade to Agent v5
 
-1. Remove the Beta Yum repo from your system:
+1. Remove the Agent 6 Yum repo from your system:
     ```shell 
-    rm /etc/yum.repos.d/datadog-beta.repo [ ! -f /etc/yum.repos.d/datadog.repo ] && echo -e '[datadog]\nname = Datadog, Inc.\nbaseurl = https://yum.datadoghq.com/rpm/x86_64/\nenabled=1\ngpgcheck=1\npriority=1\ngpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public\n       https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public' | sudo tee /etc/yum.repos.d/datadog.repo
+    rm /etc/yum.repos.d/datadog.repo [ ! -f /etc/yum.repos.d/datadog.repo ] && echo -e '[datadog]\nname = Datadog, Inc.\nbaseurl = https://yum.datadoghq.com/rpm/x86_64/\nenabled=1\ngpgcheck=1\npriority=1\ngpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public\n       https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public' | sudo tee /etc/yum.repos.d/datadog.repo
     ```
 
 2. Update your local yum cache and downgrade the agent

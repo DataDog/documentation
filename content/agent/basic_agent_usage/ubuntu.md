@@ -113,23 +113,41 @@ To install on a clean box (or have an existing agent 5 install from which you do
 #### Manual install
 1. Set up apt so it can download through https
 
-    ```shell
+    ```
     sudo apt-get update
     sudo apt-get install apt-transport-https
     ```
 
-2. Add the repository to your system and import the Datadog gpg key
+2. Set up the Datadog deb repo on your system and import Datadog's apt key:
 
-    ```shell
-    echo 'deb https://apt.datadoghq.com/ beta main' | sudo tee /etc/apt/sources.list.d/datadog-beta.list
+    ```
+    sudo sh -c "echo 'deb https://apt.datadoghq.com/ stable 6' > /etc/apt/sources.list.d/datadog.list"
     sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 C7A7DA52
     ```
 
-3. Update APT and Install the agent
+3. Update your local apt repo and install the Agent:
 
-    ```shell
+    ```
     sudo apt-get update
     sudo apt-get install datadog-agent
+    ```
+
+4. Copy the example config into place and plug in your API key:
+
+    ```
+    sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_API_KEY>/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
+    ```
+
+5. Start the Agent with Ubuntu 16.04 and higher:
+
+    ```
+    sudo systemctl restart datadog-agent.service
+    ```
+
+6. Start the Agent with Ubuntu 14.04:
+
+    ```
+    sudo initctl start datadog-agent
     ```
 
 ### Downgrade to Agent v5
@@ -140,10 +158,10 @@ To install on a clean box (or have an existing agent 5 install from which you do
     sudo apt-get install apt-transport-https
     ```
 
-2. Remove the repository and Ensure the stable repository is present
+2. Remove the Agent 6 repository and Ensure the stable repository is present
 
     ```shell
-    sudo rm /etc/apt/sources.list.d/datadog-beta.list [ ! -f /etc/apt/sources.list.d/datadog.list ] &&  echo 'deb https://apt.datadoghq.com/ stable main' | sudo tee /etc/apt/sources.list.d/datadog.list
+    sudo rm /etc/apt/sources.list.d/datadog.list [ ! -f /etc/apt/sources.list.d/datadog.list ] &&  echo 'deb https://apt.datadoghq.com/ stable main' | sudo tee /etc/apt/sources.list.d/datadog.list
     sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 C7A7DA52
     ```
 

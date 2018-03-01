@@ -28,14 +28,14 @@ and each span is a dictionary with a `trace_id`, `spand_id`, `resource`..
 
 ##### Arguments
 
-*   `trace_id` - _Required._ The unique integer (64-bit unsigned) ID of the trace containing this span.
-*   `span_id` - _Required._ The span integer (64-bit unsigned) ID.
-*   `name` - _Required._ The span name.
-*   `resource` - _Required._ The resource you are tracing.
-*   `service` - _Required._The service name.
-*   `type` - _Required._ The type of request.
-*   `start` - _Required._ The start time of the request in nanoseconds from the unix epoch.
-*   `duration` - _Required._ The duration of the request in nanoseconds.
-*   `parent_id` - _Optional._ The span integer ID of the parent span.
-*   `error` - _Optional._ Set this value to 1 to indicate if an error occured. If an error occurs, you should pass additional information, such as the error message, type and stack information in the `meta` property.
-*   `meta` - _Optional._ A dictionary of key-value metadata. e.g. tags.
+*   **`trace_id`** - _Required._ The unique integer (64-bit unsigned) ID of the trace containing this span.
+*   **`span_id`** - _Required._ The span integer (64-bit unsigned) ID.
+*   **`name`** - _Required._ The span name.
+*   **`resource`** - _Required._ The resource you are tracing.
+*   **`service`** - _Required._The service name.
+*   **`type`** - _Required._ The type of request.
+*   **`start`** - _Required._ The start time of the request in nanoseconds from the unix epoch.
+*   **`duration`** - _Required._ The duration of the request in nanoseconds.
+*   **`parent_id`** - _Optional._ The span integer ID of the parent span.
+*   **`error`** - _Optional._ Set this value to 1 to indicate if an error occured. If an error occurs, you should pass additional information, such as the error message, type and stack information in the `meta` property.
+*   **`meta`** - _Optional._ A dictionary of key-value metadata. e.g. tags.

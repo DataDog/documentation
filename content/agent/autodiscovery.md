@@ -17,6 +17,8 @@ further_reading:
   text: Collect your traces
 ---
 
+This page covers Autodiscovery with agent 6 only, [refer to the dedicated documentation to setup Autodiscovery with agent 5](/agent/faq/agent-5-autodiscovery)
+
 ## How it Works
 
 In a traditional non-container environment, Datadog Agent configuration is—like the environment in which it runs—static. The Agent reads check configurations from disk when it starts, and as long as it's running, it continuously runs every configured check.
