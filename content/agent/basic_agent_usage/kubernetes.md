@@ -231,7 +231,7 @@ If the Agent is deployed you will see output similar to the text below, where de
 
 ### Agent check running
 
-[Run the Agent's `status` subcommand](/agent/#agent-status-and-information) and look for `kubelet` under the Checks section:
+[Run the Agent's `status` subcommand](/agent/faq/agent-commands/#agent-status-and-information) and look for `kubelet` under the Checks section:
 
     Checks
     ======
