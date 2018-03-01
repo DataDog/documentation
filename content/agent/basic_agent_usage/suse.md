@@ -20,7 +20,7 @@ further_reading:
 
 This page outlines the basic functionality of the Datadog Agent.
 If you haven't installed the Agent yet, instructions can be found
-[in the Datadog agent integration page](https://app.datadoghq.com/account/settings#agent/centos).
+[in the Datadog agent integration page](https://app.datadoghq.com/account/settings#agent/suse).
 
 The process to upgrade from the previous version of the agent is to re-run the installation.
 
