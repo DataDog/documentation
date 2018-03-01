@@ -58,14 +58,13 @@ Agent 6 is the latest major version of the Datadog Agent. The big difference bet
 
 * Agent 6 blocks port 5000 and 5001. If you use these ports, update the port for `expvar_port` and `cmd_port` in the `datadog.yaml` file.
 
-## Agent configuration file migration
+## Agent configuration files migration
 
 To automatically transition between agent configuration paths and formats from Agent v5 to Agent v6, use the agent command:  
 
 `sudo -u dd-agent -- datadog-agent import`
 
-The command parses an existing `datadog.conf` and convert all the bits that
-the new Agent still supports to the new `datadog.yaml` configuration file. It also copies configuration files for checks that are currently enabled.
+The command parses an existing `datadog.conf` and convert all the bits that the new Agent still supports to the new `datadog.yaml` configuration file. It also copies configuration files for checks that are currently enabled.
 
 ## Configuration Files
 
