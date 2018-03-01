@@ -4,6 +4,7 @@ kind: documentation
 aliases:
   - /basic_agent_usage/
   - /guides/
+  - /faq/
 disable_toc: true
 ---
 # Welcome to Datadog Docs!

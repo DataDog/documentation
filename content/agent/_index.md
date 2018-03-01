@@ -12,6 +12,8 @@ further_reading:
 - link: "/tracing"
   tag: "Documentation"
   text: Collect your traces
+aliases:
+  - /agent/faq/agent-check-directory-structure
 ---
 
 <div class="alert alert-info">
@@ -56,15 +58,13 @@ Agent 6 is the latest major version of the Datadog Agent. The big difference bet
 
 * Agent 6 blocks port 5000 and 5001. If you use these ports, update the port for `expvar_port` and `cmd_port` in the `datadog.yaml` file.
 
-## Migration
+## Agent configuration files migration
 
-To automatically transition between agent configuration paths and formats from Agent v5 to Agent v6, use the agent command:
+To automatically transition between agent configuration paths and formats from Agent v5 to Agent v6, use the agent command:  
 
 `sudo -u dd-agent -- datadog-agent import`
 
-The command parses an existing `datadog.conf` and convert all the bits that
-the new Agent still supports to the new format, in the new file. It also copies
-configuration files for checks that are currently enabled.
+The command parses an existing `datadog.conf` and convert all the bits that the new Agent still supports to the new `datadog.yaml` configuration file. It also copies configuration files for checks that are currently enabled.
 
 ## Configuration Files
 
@@ -72,30 +72,16 @@ Prior releases of Datadog Agent stored configuration files in `/etc/dd-agent`.
 Starting with the 6.0 release configuration files will now be stored in
 `/etc/datadog-agent`.
 
-### Agent configuration file
-
-In addition to the location change, the primary agent configuration file has been
-transitioned from **INI** format to **YAML** to better support complex configurations and
-for a more consistent experience across the Agent and the Checks; as such `datadog.conf`
-is now retired in favor of `datadog.yaml`.
-
-To automatically transition between agent configuration paths and formats, you
-may use the agent command: `sudo -u dd-agent -- datadog-agent import`.
-The command will parse an existing `datadog.conf` and convert all the bits that
-the new Agent still supports to the new format, in the new file. It also copies
-configuration files for checks that are currently enabled.
-
-Please refer to [this section][config] of the documentation for a detailed list
-of the configuration options that were either changed or deprecated in the new Agent.
-
 ### Checks configuration files
 
 In order to provide a more flexible way to define the configuration for a check,
-from version 6.0.0 the Agent will load any valid YAML file contained in the folder
+from version 6.0.0 the Agent will load any valid YAML file contained in the folder:  
+
 `/etc/datadog-agent/conf.d/<check_name>.d/`.
 
 This way, complex configurations can be broken down into multiple files: for example,
 a configuration for the `http_check` might look like this:
+
 ```
 /etc/datadog-agent/conf.d/http_check.d/
 ├── backend.yaml
@@ -104,15 +90,14 @@ a configuration for the `http_check` might look like this:
 
 Autodiscovery template files will be stored in the configuration folder as well,
 for example this is how the `redisdb` check configuration folder looks like:
+
 ```
 /etc/datadog-agent/conf.d/redisdb.d/
 ├── auto_conf.yaml
 └── conf.yaml.example
 ```
 
-To keep backwards compatibility, the Agent will still pick up configuration files
-in the form `/etc/datadog-agent/conf.d/<check_name>.yaml` but migrating to the
-new layout is strongly recommended.
+To keep backwards compatibility, the Agent will still pick up configuration files in the form `/etc/datadog-agent/conf.d/<check_name>.yaml` but migrating to the new layout is strongly recommended.
 
 ## CLI
 

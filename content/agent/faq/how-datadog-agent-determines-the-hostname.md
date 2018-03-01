@@ -1,6 +1,8 @@
 ---
 title: How does Datadog determine the agent hostname?
 kind: faq
+aliases:
+    - /agent/faq/how-can-i-change-the-hostname/
 ---
 
 

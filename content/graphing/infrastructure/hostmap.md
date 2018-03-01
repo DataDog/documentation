@@ -3,6 +3,7 @@ title: Host Map Overview
 kind: documentation
 aliases:
   - /infrastructure/hostmap/
+  - /guides/hostmap
 further_reading:
 - link: "/graphing/infrastructure/livecontainers"
   tag: "Graphing"
