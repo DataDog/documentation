@@ -36,29 +36,27 @@ To enable the full debug mode:
 
 ### Obtaining debug logs from the container agent
 
-It isn't possible to restart the container agent with service datadog-agent restart or similar, because those commands cause the container to be killed by Docker (presumably due to a failed health check). Thus, in order to restart the container agent, one must use supervisor:
+This process cover agent 6 only, refer to [the dedicated documentation on how to collect more logs with the Datadog container agent v5](/agent/faq/agent-5-container-more-log)
 
-```
-/opt/datadog-agent/bin/supervisorctl -c /etc/dd-agent/supervisor.conf restart all
-```
+Set `DD_LOG_LEVEL=debug` then start your agent and [send a flare](#send-a-flare).
 
-The following commands enables debug logging, restart the agent, wait 60 seconds, then send a flare:
+If your container is already running:
 
-```
-sed -i '/\[Main\]/a LOG_LEVEL=DEBUG' /etc/dd-agent/datadog.conf
-/opt/datadog-agent/bin/supervisorctl -c /etc/dd-agent/supervisor.conf restart all
-sleep 60
-/etc/init.d/datadog-agent flare <CASE_ID>
-```
+1. To avoid that your process is restarted by S6, run:  
+    
+    `rm /var/run/s6/services/agent/finish`
 
-Debug logs can be disabled with:
+2. Then stop the agent:
+    
+    ```
+    s6-svc -d /var/run/s6/services/agent/
+    ```
 
-```
-sed -i '/LOG_LEVEL=DEBUG/d' /etc/dd-agent/datadog.conf
-/opt/datadog-agent/bin/supervisorctl -c /etc/dd-agent/supervisor.conf restart all
-```
-
-Or the container can be restarted.
+3. Restart then agent with debug log level by running:
+    
+    ```
+    DD_LOG_LEVEL=debug agent start
+    ```
 
 ## Send a flare
 
