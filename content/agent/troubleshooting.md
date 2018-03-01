@@ -38,7 +38,7 @@ To enable the full debug mode:
 
 This process covers agent v6 only, for agent v5 refer to [the dedicated documentation on how to collect more logs with the Datadog container agent v5](/agent/faq/agent-5-container-more-log)
 
-Set `DD_LOG_LEVEL=debug` then start your agent and [send a flare](#send-a-flare).
+**Set the `DD_LOG_LEVEL=debug` environment variable when starting your agent.**
 
 If your container is already running:
 
@@ -52,14 +52,13 @@ If your container is already running:
     s6-svc -d /var/run/s6/services/agent/
     ```
 
-3. Restart then agent with debug log level by running:
+3. Restart then the agent with debug log level by running:
     
     ```
     DD_LOG_LEVEL=debug agent start
     ```
 
 ## Send a flare
-
 
 If you are running the 5.3 version (or higher) of the agent, you're able to send all necessary troubleshooting information to our Support Team, with one flare command!
 
