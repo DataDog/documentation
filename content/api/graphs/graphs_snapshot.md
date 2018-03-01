@@ -6,6 +6,9 @@ external_redirect: /api/#graph-snapshot
 ---
 
 ## Graph snapshot
+
+**Note**: When a snapshot is created, [there is some delay](http://andreafalzetti.github.io/blog/2017/04/17/datadog-png-snapshot-not-showing.html) before it is available.
+
 ##### ARGUMENTS
 
 * **`metric_query`** [*required*]:  
