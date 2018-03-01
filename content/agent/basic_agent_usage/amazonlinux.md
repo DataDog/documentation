@@ -110,39 +110,39 @@ To install on a clean box (or have an existing agent 5 install from which you do
 #### Manual install
 1. Set up Datadog's Yum repo on your system by creating /etc/yum.repos.d/datadog.repo with the contents:
 
-```
-[datadog]
-name = Datadog, Inc.
-baseurl = https://yum.datadoghq.com/stable/6/x86_64/
-enabled=1
-gpgcheck=1
-gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
-```
+    ```
+    [datadog]
+    name = Datadog, Inc.
+    baseurl = https://yum.datadoghq.com/stable/6/x86_64/
+    enabled=1
+    gpgcheck=1
+    gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
+    ```
 
 2. Update your local yum repo and install the Agent:
 
-```
-sudo yum makecache
-sudo yum install datadog-agent
-```
+    ```
+    sudo yum makecache
+    sudo yum install datadog-agent
+    ```
 
 3. Copy the example config into place and plug in your API key:
 
-```
-sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_API_KEY>/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
-```
+    ```
+    sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_API_KEY>/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
+    ```
 
 4. Re-start the Agent for Amazon linux 2.0:
 
-```
-sudo systemctl restart datadog-agent.service
-```
+    ```
+    sudo systemctl restart datadog-agent.service
+    ```
 
 5. Re-start the Agent for Amazon linux 1.0:
 
-```
-sudo initctl start datadog-agent
-```
+    ```
+    sudo initctl start datadog-agent
+    ```
 
 ### Downgrade to Agent v5
 

@@ -77,36 +77,36 @@ Configuration files for [integrations](/integrations):
 
 1. Set up Datadog's Yum repo on your system by creating /etc/zypp/repos.d/datadog.repo with the contents:
 
-```
-[datadog]
-name=Datadog, Inc.
-enabled=1
-baseurl=https://yum.datadoghq.com/suse/stable/6/x86_64
-type=rpm-md
-gpgcheck=1
-repo_gpgcheck=0
-gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
-```
+  ```
+  [datadog]
+  name=Datadog, Inc.
+  enabled=1
+  baseurl=https://yum.datadoghq.com/suse/stable/6/x86_64
+  type=rpm-md
+  gpgcheck=1
+  repo_gpgcheck=0
+  gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
+  ```
 
 2. Update your local zypper repo and install the Agent:
 
-```
-sudo zypper refresh
-sudo rpm --import https://yum.datadoghq.com/DATADOG_RPM_KEY.public
-sudo zypper install datadog-agent
-```
+  ```
+  sudo zypper refresh
+  sudo rpm --import https://yum.datadoghq.com/DATADOG_RPM_KEY.public
+  sudo zypper install datadog-agent
+  ```
 
 3. Copy the example config into place and plug in your API key:
 
-```
-sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_API_KEY>/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
-```
+  ```
+  sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_API_KEY>/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
+  ```
 
 4. Re-start the Agent:
 
-```
-sudo systemctl restart datadog-agent.service
-```
+  ```
+  sudo systemctl restart datadog-agent.service
+  ```
 
 ## Troubleshooting
 
