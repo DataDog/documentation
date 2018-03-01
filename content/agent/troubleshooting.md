@@ -34,8 +34,31 @@ To enable the full debug mode:
 
 4. Wait a few minutes to generate some logs. [Look here](/agent/#log-locations) to find the location of the logs.
 
-## Send a flare
+### Obtaining debug logs from the container agent
 
+This process covers agent v6 only, for agent v5 refer to [the dedicated documentation on how to collect more logs with the Datadog container agent v5](/agent/faq/agent-5-container-more-log)
+
+**Set the `DD_LOG_LEVEL=debug` environment variable when starting your agent.**
+
+If your container is already running:
+
+1. To avoid that your process is restarted by S6, run:  
+    
+    `rm /var/run/s6/services/agent/finish`
+
+2. Then stop the agent:
+    
+    ```
+    s6-svc -d /var/run/s6/services/agent/
+    ```
+
+3. Restart then the agent with debug log level by running:
+    
+    ```
+    DD_LOG_LEVEL=debug agent start
+    ```
+
+## Send a flare
 
 If you are running the 5.3 version (or higher) of the agent, you're able to send all necessary troubleshooting information to our Support Team, with one flare command!
 
