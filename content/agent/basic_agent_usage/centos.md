@@ -111,25 +111,41 @@ To install on a clean box (or have an existing agent 5 install from which you do
 ```
 
 #### Manual install
-1. Set up apt so it can download through https
+1. Set up Datadog's Yum repo on your system by creating /etc/yum.repos.d/datadog.repo with the contents:
 
-    ```shell
-    sudo apt-get update
-    sudo apt-get install apt-transport-https
+    ```
+    [datadog]
+    name = Datadog, Inc.
+    baseurl = https://yum.datadoghq.com/stable/6/x86_64/
+    enabled=1
+    gpgcheck=1
+    gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
     ```
 
-2. Add the repository to your system and import the Datadog gpg key
+2. Update your local yum repo and install the Agent:
 
-    ```shell
-    echo 'deb https://apt.datadoghq.com/ beta main' | sudo tee /etc/apt/sources.list.d/datadog-beta.list
-    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 C7A7DA52
+    ```
+    sudo yum makecache
+    sudo yum remove datadog-agent-base
+    sudo yum install datadog-agent
     ```
 
-3. Update APT and Install the agent
+3. Copy the example config into place and plug in your API key:
 
-    ```shell
-    sudo apt-get update
-    sudo apt-get install datadog-agent
+    ```
+    sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_API_KEY>/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
+    ```
+
+4. Re-start the Agent on Centos 7 and above:
+
+    ```
+    sudo systemctl restart datadog-agent.service
+    ```
+
+5. Re-start the Agent on Centos 6:
+
+    ```
+    sudo initctl start datadog-agent
     ```
 
 ### Downgrade to Agent v5
@@ -140,10 +156,10 @@ To install on a clean box (or have an existing agent 5 install from which you do
     sudo apt-get install apt-transport-https
     ```
 
-2. Remove Beta Repo and Ensure the stable repo is present
+2. Remove Agent 6 Repo and Ensure the stable repo is present
 
     ```shell
-    sudo rm /etc/apt/sources.list.d/datadog-beta.list [ ! -f /etc/apt/sources.list.d/datadog.list ] &&  echo 'deb https://apt.datadoghq.com/ stable main' | sudo tee /etc/apt/sources.list.d/datadog.list
+    sudo rm /etc/yum.repos.d/datadog.repo [ ! -f /etc/apt/sources.list.d/datadog.list ] &&  echo 'deb https://apt.datadoghq.com/ stable main' | sudo tee /etc/apt/sources.list.d/datadog.list
     sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 C7A7DA52
     ```
 
