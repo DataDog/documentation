@@ -16,6 +16,10 @@ further_reading:
   text: "Explore your services, resources and traces"
 ---
 
+<div class="alert alert-info">
+For Python applciations, note that tracing is disabled when your application is launched in <b>DEBUG</b> mode. Find more <a href="http://pypi.datadoghq.com/trace/docs/#module-ddtrace.contrib.django">here</a>.
+</div>
+
 ## Installation
 
 To begin tracing applications written in Python, first [install and configure the Datadog Agent](/tracing#installing-the-agent).
@@ -29,10 +33,6 @@ pip install ddtrace
 Finally, import the tracer and instrument your code!
 
 ## Example
-
-<div class="alert alert-info">
-For Python applciations, note that tracing is disabled when your application is launched in <b>DEBUG</b> mode. Find more <a href="http://pypi.datadoghq.com/trace/docs/#module-ddtrace.contrib.django">here</a>.
-</div>
 
 ```python
 
