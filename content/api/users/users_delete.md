@@ -9,5 +9,5 @@ external_redirect: /api/#disable-user
 Can only be used with application keys belonging to administrators.
 
 ##### ARGUMENTS
-* `handle` [*required*]:  
+* **`handle`** [*required*]:  
     The handle of the user.

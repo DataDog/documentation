@@ -9,13 +9,13 @@ external_redirect: /api/#query-time-series-points
 This end point allows you to query for metrics from any time period.
 
 ##### ARGUMENTS
-* `from` [*required*]:  
+* **`from`** [*required*]:  
     Seconds from the unix epoch
-* `to` [*required*]:  
+* **`to`** [*required*]:  
     Seconds to the unix epoch
-* `start` [*optional*, *default*=**None**]:  
+* **`start`** [*optional*, *default*=**None**]:  
     Seconds since the unix epoch
-* `end` [*optional*, *default*=**None**]:  
+* **`end`** [*optional*, *default*=**None**]:  
     Seconds since the unix epoch
-* `query` [*required*]:  
+* **`query`** [*required*]:  
     The query string

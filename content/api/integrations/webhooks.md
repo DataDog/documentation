@@ -12,26 +12,26 @@ Configure your Datadog-Webhooks integration directly through Datadog API.
 
 ##### ARGUMENTS
 
-* `hooks` [*required*]:  
+* **`hooks`** [*required*]:  
     Array of Webhook objects. A Webhook object is composed by:
 
-    * `name` [*required*]:  
+    * **`name`** [*required*]:  
         Your Webhook name.  
         [Learn more on how to use it in monitor notifications](/monitors/notifications).
-    * `url` [*required*]:  
+    * **`url`** [*required*]:  
         Your Webhook URL.
-    * `use_custom_payload` [*optional*, *default*=**False**]:  
+    * **`use_custom_payload`** [*optional*, *default*=**False**]:  
         If **true**, allow you to specify a custom payload for your Webhook. 
     
-    * `custom_payload` [*optional*, *default*=**None**]:  
+    * **`custom_payload`** [*optional*, *default*=**None**]:  
         If `use_custom_payloag` is **true**, specify your own payload to add your own custom fields to the request [using those variables](integrations/webhooks/#usage).
 
-    * `encode_as_form` [*optional*, *default*=**False**]:  
+    * **`encode_as_form`** [*optional*, *default*=**False**]:  
         If `use_custom_payload` is **true**, set this to **true** to have your payload to be URL-encoded.
-    * `headers` [*optional*, *default*=**None**]:  
+    * **`headers`** [*optional*, *default*=**None**]:  
         Headers attached to your Webhook.
 
-* `run_check` [*optional*, *default*=**false**]:  
+* **`run_check`** [*optional*, *default*=**false**]:  
     Determines if the integration install check is run before returning a response.
 
     * If **true**:
