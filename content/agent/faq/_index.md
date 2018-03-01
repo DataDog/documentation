@@ -19,6 +19,7 @@ private: true
 * [How do I install the agent on a server with limited internet connectivity?](/agent/faq/how-do-i-install-the-agent-on-a-server-with-limited-internet-connectivity)
 * [How to monitor SNMP devices?](/agent/faq/how-to-monitor-snmp-devices)
 * [I stopped my agent but I’m still seeing the host in my Datadog account.](/agent/faq/i-stoped-my-agent-but-i-m-still-seeing-the-host)
+* [How do I uninstall the agent?](/agent/faq/how-do-i-uninstall-the-agent)
 
 ## Troubleshooting
 
