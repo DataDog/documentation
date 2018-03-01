@@ -250,8 +250,7 @@
       {{ end }}
 
       {{ range sort $guides "Params.listorder" "asc" }}
-
-        {{ if (and ( isset .Params "listorder" ) ( ne .Params.beta true )) }}
+        {{ if (and (and ( isset .Params "listorder" ) ( ne .Params.beta true )) ".Params.is_public" "!=" true) }}
             <li><a href="{{.Permalink}}">{{ .Title }}</a></li>
         {{ end }}
 
