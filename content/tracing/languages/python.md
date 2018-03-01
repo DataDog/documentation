@@ -65,7 +65,6 @@ ___
 | Elasticsearch | https://www.elastic.co/products/elasticsearch | http://pypi.datadoghq.com/trace/docs/#elasticsearch |
 | Flask Cache   | https://pythonhosted.org/Flask-Cache/         | http://pypi.datadoghq.com/trace/docs/#flask-cache   |
 | MongoDB       | https://www.mongodb.com/what-is-mongodb       | http://pypi.datadoghq.com/trace/docs/#mongodb       |
-| Memcached     | https://memcached.org/                        | http://pypi.datadoghq.com/trace/docs/#memcached     |
 | MySQL         | https://www.mysql.com/                        | http://pypi.datadoghq.com/trace/docs/#mysql         |
 | Postgres      | https://www.postgresql.org/                   | http://pypi.datadoghq.com/trace/docs/#postgres      |
 | Redis         | https://redis.io/                             | http://pypi.datadoghq.com/trace/docs/#redis         |
