@@ -12,6 +12,8 @@ further_reading:
 - link: "/tracing"
   tag: "Documentation"
   text: Collect your traces
+aliases:
+  - /agent/faq/agent-check-directory-structure
 ---
 
 <div class="alert alert-info">
