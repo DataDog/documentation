@@ -1,0 +1,100 @@
+---
+categories:
+- web
+ddtype: check
+doc_link: https://docs.datadoghq.com/integrations/lighttpd/
+git_integration_title: lighttpd
+guid: 01dcfe7a-7a56-4388-a388-799ee6daaaab
+has_logo: true
+integration_title: Lighttpd
+is_public: true
+kind: integration
+maintainer: help@datadoghq.com
+manifest_version: 0.1.1
+max_agent_version: 6.0.0
+min_agent_version: 5.6.3
+name: lighttpd
+public_title: Datadog-Lighttpd Integration
+short_description: Track uptime, bytes served, requests per second, response codes,
+  and more.
+support: core
+supported_os:
+- linux
+- mac_os
+- windows
+version: 1.0.0
+---
+
+
+{{< img src="integrations/lighttpd/lighttpddashboard.png" alt="Lighttpd Dashboard" responsive="true" popup="true">}}
+## Overview
+
+The Agent's lighttpd check tracks uptime, bytes served, requests per second, response codes, and more.
+
+## Setup
+### Installation
+
+The lighttpd check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your lighttpd servers.
+
+If you need the newest version of the Lighttpd check, install the `dd-check-lighttpd` package; this package's check overrides the one packaged with the Agent. See the [integrations-core repository README.md for more details](https://github.com/DataDog/integrations-core#installing-the-integrations).
+
+You'll also need to install `mod_status` on your Lighttpd servers.
+
+### Configuration
+
+Create a file `lighttpd.yaml` in the Agent's `conf.d` directory. See the [sample lighttpd.yaml](https://github.com/DataDog/integrations-core/blob/master/lighttpd/conf.yaml.example) for all available configuration options:
+
+```
+init_config:
+
+instances:
+
+  - lighttpd_status_url: http://example.com/server-status?auto
+
+
+```
+
+[Restart the Agent](https://docs.datadoghq.com/agent/faq/start-stop-restart-the-datadog-agent) to begin sending lighttpd metrics to Datadog.
+
+### Validation
+
+[Run the Agent's `status` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `lighttpd` under the Checks section:
+
+```
+  Checks
+  ======
+    [...]
+
+    lighttpd
+    -------
+      - instance #0 [OK]
+      - Collected 30 metrics, 0 events & 1 service check
+
+    [...]
+```
+
+## Compatibility
+
+The lighttpd check is compatible with all major platforms.
+
+## Data Collected
+### Metrics
+{{< get-metrics-from-git "lighttpd" >}}
+
+
+### Events
+The Lighttpd check does not include any event at this time.
+
+### Service Checks
+
+`- lighttpd.can_connect`:
+
+Returns CRITICAL if the Agent cannot connect to lighttpd to collect metrics, otherwise OK.
+
+## Troubleshooting
+
+Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).
+
+## Further Reading
+To get a better idea of how (or why) to monitor Lighttpd web server metrics with Datadog, check out our [series of blog posts](https://www.datadoghq.com/blog/monitor-lighttpd-web-server-metrics/) about it.
+

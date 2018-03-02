@@ -1,0 +1,177 @@
+---
+categories:
+- data store
+ddtype: check
+doc_link: https://docs.datadoghq.com/integrations/cassandra/
+git_integration_title: cassandra
+guid: 03ba454d-425c-4f61-9e9c-54682c3ebce5
+has_logo: true
+integration_title: Cassandra
+is_public: true
+kind: integration
+maintainer: help@datadoghq.com
+manifest_version: 0.1.1
+max_agent_version: 6.0.0
+min_agent_version: 5.6.3
+name: cassandra
+public_title: Datadog-Cassandra Integration
+short_description: Track cluster performance, capacity, overall health, and much more.
+support: core
+supported_os:
+- linux
+- mac_os
+- windows
+version: 1.2.0
+---
+
+
+{{< img src="integrations/cassandra/cassandra.png" alt="Cassandra default dashboard" responsive="true" popup="true">}}
+## Overview
+
+Get metrics from cassandra service in real time to:
+
+* Visualize and monitor cassandra states
+* Be notified about cassandra failovers and events.
+
+## Setup
+### Installation
+
+The Cassandra check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your Cassandra nodes.
+
+If you need the newest version of the Cassandra check, install the `dd-check-cassandra` package; this package's check overrides the one packaged with the Agent. See the [integrations-core repository README.md for more details](https://github.com/DataDog/integrations-core#installing-the-integrations).
+
+We recommend the use of Oracle's JDK for this integration.
+
+This check has a limit of 350 metrics per instance. The number of returned metrics is indicated in the info page. You can specify the metrics you are interested in by editing the configuration below. To learn how to customize the metrics to collect visit the [JMX Checks documentation](https://docs.datadoghq.com/integrations/java/) for more detailed instructions. If you need to monitor more metrics, please send us an email at support@datadoghq.com
+
+### Configuration
+
+1. Configure the Agent to connect to Cassandra, just edit `conf.d/cassandra.yaml`. See the [sample  cassandra.yaml](https://github.com/DataDog/integrations-core/blob/master/cassandra/conf.yaml.example) for all available configuration options.
+2. [Restart the Agent](https://docs.datadoghq.com/agent/faq/start-stop-restart-the-datadog-agent)
+
+### Validation
+
+[Run the Agent's `status` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `cassandra` under the Checks section:
+
+```
+  Checks
+  ======
+    [...]
+
+    cassandra
+    -------
+      - instance #0 [OK]
+      - Collected 26 metrics, 0 events & 1 service check
+
+    [...]
+```
+
+## Compatibility
+
+The cassandra check is compatible with all major platforms.
+
+## Data Collected
+### Metrics
+{{< get-metrics-from-git "cassandra" >}}
+
+
+### Events
+The Cassandra check does not include any event at this time.
+
+### Service Checks
+{{< get-service-checks-from-git "cassandra" >}}
+
+
+## Troubleshooting
+Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).
+
+## Further Reading
+
+* [How to monitor Cassandra performance metrics](https://www.datadoghq.com/blog/how-to-monitor-cassandra-performance-metrics/)
+* [How to collect Cassandra metrics](https://www.datadoghq.com/blog/how-to-collect-cassandra-metrics/)
+* [Monitoring Cassandra with Datadog](https://www.datadoghq.com/blog/monitoring-cassandra-with-datadog/)
+
+
+
+## Agent Check: Cassandra Nodetool
+
+## Overview
+
+This check collects metrics for your Cassandra cluster that are not available through [jmx integration](https://github.com/DataDog/integrations-core/tree/master/cassandra).
+It uses the `nodetool` utility to collect them.
+
+## Setup
+### Installation
+
+The Cassandra nodetool check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your cassandra nodes.
+
+If you need the newest version of the Cassandra nodetool check, install the `dd-check-cassandra-nodetool` package; this package's check overrides the one packaged with the Agent. See the [integrations-core repository README.md for more details](https://github.com/DataDog/integrations-core#installing-the-integrations).
+
+### Configuration
+
+Create a file `cassandra_nodetool.yaml` in the Agent's `conf.d` directory. See the [sample cassandra_nodetool.yaml](https://github.com/DataDog/integrations-core/blob/master/cassandra_nodetool/conf.yaml.example) for all available configuration options:
+
+```
+init_config:
+  # command or path to nodetool (e.g. /usr/bin/nodetool or docker exec container nodetool)
+  # can be overwritten on an instance
+  # nodetool: /usr/bin/nodetool
+
+instances:
+
+  # the list of keyspaces to monitor
+  - keyspaces: []
+
+  # host that nodetool will connect to.
+  # host: localhost
+
+  # the port JMX is listening to for connections.
+  # port: 7199
+
+  # a set of credentials to connect to the host. These are the credentials for the JMX server.
+  # For the check to work, this user must have a read/write access so that nodetool can execute the `status` command
+  # username:
+  # password:
+
+  # a list of additionnal tags to be sent with the metrics
+  # tags: []
+```
+
+### Validation
+
+[Run the Agent's `status` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `cassandra_nodetool` under the Checks section:
+
+    Checks
+    ======
+
+        cassandra_nodetool
+        -----------
+          - instance #0 [OK]
+          - Collected 39 metrics, 0 events & 7 service checks
+
+## Compatibility
+
+The `cassandra_nodetool` check is compatible with all major platforms
+
+## Data Collected
+### Metrics
+{{< get-metrics-from-git "cassandra_nodetool" >}}
+
+
+### Events
+The Cassandra_nodetool check does not include any event at this time.
+
+### Service Checks
+
+**cassandra.nodetool.node_up**:
+The agent sends this service check for each node of the monitored cluster. Returns CRITICAL if the node is down, otherwise OK.
+
+## Troubleshooting
+Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).
+
+## Further Reading
+
+* [How to monitor Cassandra performance metrics](https://www.datadoghq.com/blog/how-to-monitor-cassandra-performance-metrics/)
+* [How to collect Cassandra metrics](https://www.datadoghq.com/blog/how-to-collect-cassandra-metrics/)
+* [Monitoring Cassandra with Datadog](https://www.datadoghq.com/blog/monitoring-cassandra-with-datadog/)
+

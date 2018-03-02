@@ -1,0 +1,106 @@
+---
+categories:
+- configuration & deployment
+ddtype: check
+doc_link: https://docs.datadoghq.com/integrations/teamcity/
+git_integration_title: teamcity
+guid: b390dd3f-47d5-4555-976a-36722833f000
+has_logo: true
+integration_title: Teamcity
+is_public: true
+kind: integration
+maintainer: help@datadoghq.com
+manifest_version: 0.1.1
+max_agent_version: 6.0.0
+min_agent_version: 5.6.3
+name: teamcity
+public_title: Datadog-Teamcity Integration
+short_description: Track builds and understand the performance impact of every deploy.
+support: core
+supported_os:
+- linux
+- mac_os
+- windows
+version: 1.0.0
+---
+
+
+
+## Overview
+
+This check watches for build-related events and sends them to Datadog.
+
+Unlike most Agent checks, this one doesn't collect any metrics—just events.
+
+## Setup
+### Installation
+
+The Teamcity check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your Teamcity servers.
+
+If you need the newest version of the Teamcity check, install the `dd-check-teamcity` package; this package's check overrides the one packaged with the Agent. See the [integrations-core repository README.md for more details](https://github.com/DataDog/integrations-core#installing-the-integrations).
+
+### Configuration
+#### Prepare Teamcity
+
+Follow [Teamcity's documentation](https://confluence.jetbrains.com/display/TCD9/Enabling+Guest+Login) to enable Guest Login.
+
+Create a file `teamcity.yaml` in the Agent's `conf.d` directory. See the [sample teamcity.yaml](https://github.com/DataDog/integrations-core/blob/master/teamcity/conf.yaml.example) for all available configuration options:
+
+```
+init_config:
+
+instances:
+  - name: My Website
+    server: teamcity.mycompany.com
+
+
+    build_configuration: MyWebsite_Deploy # the internal build ID of the build configuration you wish to track
+
+
+
+
+
+```
+
+Add an item like the above to `instances` for each build configuration you want to track.
+
+[Restart the Agent](https://docs.datadoghq.com/agent/faq/start-stop-restart-the-datadog-agent) to start collecting and sending Teamcity events to Datadog.
+
+### Validation
+
+[Run the Agent's `status` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `teamcity` under the Checks section:
+
+```
+  Checks
+  ======
+    [...]
+
+    teamcity
+    -------
+      - instance #0 [OK]
+      - Collected 0 metrics, 3 events & 0 service checks
+
+    [...]
+```
+
+## Compatibility
+
+The teamcity check is compatible with all major platforms.
+
+## Data Collected
+### Metrics
+The Teamcity check does not include any metric at this time.
+
+### Events
+All Teamcity events are forwared to your Datadog application.
+
+### Service Checks
+The Teamcity check does not include any service check at this time.
+
+## Troubleshooting
+Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).
+
+## Further Reading
+
+* [Track performance impact of code changes with TeamCity and Datadog.](https://www.datadoghq.com/blog/track-performance-impact-of-code-changes-with-teamcity-and-datadog/)
+
