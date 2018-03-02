@@ -23,6 +23,8 @@ Datadog Process Monitoring allows for real-time visibility of the most granular 
 
 The following installation processes are for [agent v6 only](/agent), if you are still using agent v5, [follow this specific installation process](/agent/faq/agent-5-process-collection)
 
+**Note**: Live Processes beta for Windows requires Agent 6.
+
 ### Standard Agent Configuration
  
 Refer to the instructions for standard [Agent installation](https://app.datadoghq.com/account/settings#agent) for platform-specific details.
@@ -110,8 +112,6 @@ Live Processes adds extra visibility to your container deployments.  The [Live C
 While actively working with the Live Processes, metrics are collected at 2s resolution.  This is very important for highly volatile metrics such as CPU.  In the background, for historical context, metrics are collected at 10s resolution.  
 
 ## Notes and frequently asked questions
-
-- Requires Linux.
 
 - Collection of open files and current working directory is limited based on the level of privilege of the user running dd-process-agent. In the event that dd-process-agent is able to access these fields, they are collected automatically.
 
