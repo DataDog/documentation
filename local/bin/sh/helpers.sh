@@ -476,12 +476,14 @@ manage_translations() {
     echo "---------"
     echo "Sending Translations"
     echo "---------"
-    ./node_modules/.bin/translate -s ./translate.yaml "${1}" || fail_step "${FUNCNAME}"
+    ./node_modules/.bin/translate --version
+    #./node_modules/.bin/translate -s ./translate.yaml "${1}" || fail_step "${FUNCNAME}"
     echo "Done."
     echo "---------"
     echo "Receiving Translations"
     echo "---------"
-    ./node_modules/.bin/translate -r ./translate.yaml "${1}" --token $(get_secret 'github_token') || fail_step "${FUNCNAME}"
+    ./node_modules/.bin/translate --version
+    #./node_modules/.bin/translate -r ./translate.yaml "${1}" --token $(get_secret 'github_token') || fail_step "${FUNCNAME}"
     echo "Done."
     pass_step  "${FUNCNAME}"
 }
