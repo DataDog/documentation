@@ -4,10 +4,6 @@ kind: Documentation
 description: "Configure your Datadog agent to gather logs from your host, containers & services."
 ---
 
-<div class="alert alert-info">
-Datadog's Logs is currently available via public beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
-</div>
-
 ## Getting started with the Agent
 
 Log collection requires an Agent version >= 6.0. Older versions of the Agent do not include the `Log collection` interface that is used for log collection.

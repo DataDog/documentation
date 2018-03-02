@@ -14,10 +14,6 @@ further_reading:
   text: Log Parsing - Best Practice
 ---
 
-<div class="alert alert-info">
-Datadog's Logs is currently available via public beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
-</div>
-
 ## Overview
 
 To access the processing panel use the upper left menu:
