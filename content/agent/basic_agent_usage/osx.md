@@ -128,7 +128,7 @@ If you ran the optional install commands to have the Agent run at boot time, run
 
 ```
 $ sudo launchctl unload -w /Library/LaunchDaemons/com.datadoghq.agent.plist
-$ sudo  rm /Library/LaunchDaemons/com.datadoghq.agent.plist
+$ sudo rm /Library/LaunchDaemons/com.datadoghq.agent.plist
 ```
 
 ## Further Reading

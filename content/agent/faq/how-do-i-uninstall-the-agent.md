@@ -29,7 +29,7 @@ $ sudo apt-get --purge remove datadog-agent -y
 
 ### Mac OS
 
-Stop and Close the Datadog Agent: via the bone icon in the Tray.
+Stop and close the Datadog Agent: via the bone icon in the Tray.
 
 Drag the Datadog Application from the application folder to the Trash Bin.
 
