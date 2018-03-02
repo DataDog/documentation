@@ -1,0 +1,165 @@
+---
+aliases:
+- /integrations/redis/
+categories:
+- data store
+- caching
+- log collection
+ddtype: check
+doc_link: https://docs.datadoghq.com/integrations/redisdb/
+git_integration_title: redisdb
+guid: 0e2f3ed1-d36b-47a4-b69c-fedb50adf240
+has_logo: true
+integration_title: RedisDB
+is_public: true
+kind: integration
+maintainer: help@datadoghq.com
+manifest_version: 0.1.1
+max_agent_version: 6.0.0
+min_agent_version: 5.20.0
+name: redisdb
+public_title: Datadog-RedisDB Integration
+short_description: Track redis performance, memory use, blocked clients, evicted keys,
+  and more.
+support: core
+supported_os:
+- linux
+- mac_os
+- windows
+version: 1.4.0
+---
+
+
+
+## Overview
+
+Whether you use Redis as a database, cache, or message queue, this integration helps you track problems with your Redis servers and the parts of your infrastructure that they serve. The Datadog Agent's Redis check collects a wealth of metrics related to performance, memory usage, blocked clients, slave connections, disk persistence, expired and evicted keys, and many more.
+
+## Setup
+### Installation
+
+The Redis check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your Redis servers.
+
+If you need the newest version of the Redis check, install the `dd-check-redis` package; this package's check overrides the one packaged with the Agent. See the [integrations-core repository README.md for more details](https://github.com/DataDog/integrations-core#installing-the-integrations).
+
+### Configuration
+
+Create a `redisdb.yaml` in the Datadog Agent's `conf.d` directory.
+
+#### Metric Collection
+
+Add this configuration setup to your `redisdb.yaml` file to start gathering your [Redis metrics](#metrics):
+
+```
+init_config:
+
+instances:
+  - host: localhost
+    port: 6379 # or wherever your Redis listens
+
+
+```
+
+Configuration Options:
+
+* `unix_socket_path` - (Optional) - Can be used instead of `host` and `port`.
+* `db`, `password`, and `socket_timeout` - (Optional) - Additional connection options.
+* `warn_on_missing_keys` - (Optional) - Display a warning in the info page if the keys we're tracking are missing.
+* `slowlog-max-len` - (Optional) - Maximum number of entries to fetch from the slow query log. By default, the check will
+        read this value from the Redis config. If it's above 128, it will default to 128 due to potential increased latency
+        to retrieve more than 128 slowlog entries every 15 seconds. If you need to get more entries from the slow query logs
+        set the value here. Warning: It may impact the performance of your Redis instance
+* `command_stats` - (Optional) - Collect INFO COMMANDSTATS output as metrics.
+
+See the [sample redisdb.yaml](https://github.com/DataDog/integrations-core/blob/master/redisdb/conf.yaml.example) for all available configuration options.
+
+[Restart the Agent](https://docs.datadoghq.com/agent/faq/start-stop-restart-the-datadog-agent) to begin sending Redis metrics to Datadog.
+
+#### Log Collection
+
+**Available for Agent >6.0**
+
+* Collecting logs is disabled by default in the Datadog Agent, you need to enable it in `datadog.yaml`:
+
+  ```
+  logs_enabled: true
+  ```
+
+* Add this configuration setup to your `redisdb.yaml` file to start collecting your Redis Logs:
+
+  ```
+    logs:
+        - type: file
+          path: /var/log/redis_6379.log
+          source: redis
+          sourcecategory: database
+          service: myapplication
+  ```
+
+  Change the `path` and `service` parameter values and configure them for your environment.
+  See the [sample redisdb.yaml](https://github.com/DataDog/integrations-core/blob/master/redisdb/conf.yaml.example) for all available configuration options.
+
+* [Restart the Agent](https://docs.datadoghq.com/agent/faq/start-stop-restart-the-datadog-agent) to begin sending Redis logs to Datadog.
+
+### Validation
+
+[Run the Agent's `status` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `redisdb` under the Checks section:
+
+```
+  Checks
+  ======
+    [...]
+
+    redisdb
+    -------
+      - instance #0 [OK]
+      - Collected 26 metrics, 0 events & 1 service check
+
+    [...]
+```
+
+## Compatibility
+
+The Redis check is compatible with all major platforms.
+
+## Data Collected
+### Metrics
+{{< get-metrics-from-git "redisdb" >}}
+
+
+### Events
+The Redis check does not include any event at this time.
+
+### Service Checks
+
+`redis.can_connect`:
+
+Returns CRITICAL if the Agent cannot connect to Redis to collect metrics, otherwise OK.
+
+## Troubleshooting
+
+* [Redis Integration Error: "unknown command 'CONFIG'"](https://docs.datadoghq.com/integrations/faq/redis-integration-error-unknown-command-config)
+
+### Agent cannot connect
+```
+    redisdb
+    -------
+      - instance #0 [ERROR]: 'Error 111 connecting to localhost:6379. Connection refused.'
+      - Collected 0 metrics, 0 events & 1 service chec
+```
+
+Check that the connection info in `redisdb.yaml` is correct.
+
+### Agent cannot authenticate
+```
+    redisdb
+    -------
+      - instance #0 [ERROR]: 'NOAUTH Authentication required.'
+      - Collected 0 metrics, 0 events & 1 service check
+```
+
+Configure a `password` in `redisdb.yaml`.
+
+## Further Reading
+Read our [series of blog posts](https://www.datadoghq.com/blog/how-to-monitor-redis-performance-metrics/) about how to monitor your Redis servers with Datadog. We detail the key performance metrics, how to collect them, and how to use Datadog to monitor Redis.
+

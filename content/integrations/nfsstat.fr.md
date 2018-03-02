@@ -1,0 +1,78 @@
+---
+categories:
+- os & system
+ddtype: check
+doc_link: https://docs.datadoghq.com/integrations/nfsstat/
+git_integration_title: nfsstat
+guid: 9f2fe3a7-ae19-4da9-a253-ae817a5557ab
+has_logo: true
+integration_title: Nfsstat
+is_public: true
+kind: integration
+maintainer: help@datadoghq.com
+manifest_version: 0.1.1
+max_agent_version: 6.0.0
+min_agent_version: 5.6.3
+name: nfsstat
+public_title: Datadog-Nfsstat Integration
+short_description: nfsstat gets nfsiostat-sysstat metrics.
+support: contrib
+supported_os:
+- linux
+version: 0.1.1
+---
+
+
+
+## Overview
+
+nfsiostat is a tool that gets metrics from NFS mounts. This check grabs these metrics.
+
+## Setup
+### Installation
+
+The NFSstat check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on your servers.
+
+If you need the newest version of the NFSstat check, install the `dd-check-nfsstat` package; this package's check overrides the one packaged with the Agent. See the [integrations-core repository README.md for more details](https://github.com/DataDog/integrations-core#installing-the-integrations).
+
+### Configuration
+
+Edit the `nfsstat.yaml` file to point to your nfsiostat binary script, or use the one included with the binary installer. See the [sample nfsstat.yaml](https://github.com/DataDog/integrations-core/blob/master/nfsstat/conf.yaml.example) for all available configuration options.
+
+### Validation
+
+[Run the Agent's `status` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `nfsstat` under the Checks section:
+
+    Checks
+    ======
+
+        nfsstat
+        -----------
+          - instance #0 [OK]
+          - Collected 39 metrics, 0 events & 7 service checks
+
+## Compatibility
+
+The nfsstat check is compatible with linux
+
+## Data Collected
+### Metrics
+{{< get-metrics-from-git "nfsstat" >}}
+
+
+### Events
+The nfststat check does not include any event at this time.
+
+### Service Checks
+The nfsstat check does not include any service check at this time.
+
+## Troubleshooting
+Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).
+
+## Further Reading
+### Datadog Blog
+Learn more about infrastructure monitoring and all our integrations on [our blog](https://www.datadoghq.com/blog/)
+
+### Knowledge Base
+* [Built a network monitor on an http check](https://docs.datadoghq.com/monitors/monitor_types/network)
+

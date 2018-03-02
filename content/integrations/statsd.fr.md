@@ -1,0 +1,102 @@
+---
+categories:
+- monitoring
+ddtype: check
+doc_link: https://docs.datadoghq.com/integrations/statsd/
+git_integration_title: statsd
+guid: 4830acf3-626b-42ff-a1db-3f37babd0ae6
+has_logo: true
+integration_title: StatsD
+is_public: true
+kind: integration
+maintainer: help@datadoghq.com
+manifest_version: 0.1.1
+max_agent_version: 6.0.0
+min_agent_version: 5.6.3
+name: statsd
+public_title: Datadog-StatsD Integration
+short_description: Monitor the availability of StatsD servers and track metric counts.
+support: core
+supported_os:
+- linux
+- mac_os
+- windows
+version: 1.0.0
+---
+
+
+
+## Overview
+
+This check monitors the availability and uptime of non-Datadog StatsD servers. It also tracks the number of metrics, by metric type, received by StatsD.
+
+This check does **NOT** forward application metrics from StatsD servers to Datadog. It collects metrics about StatsD itself.
+
+## Setup
+### Installation
+
+The StatsD check is packaged with the Agent, so simply [install the Agent](https://app.datadoghq.com/account/settings#agent) on any servers that run StatsD.
+
+If you need the newest version of the StatsD check, install the `dd-check-statsd` package; this package's check overrides the one packaged with the Agent. See the [integrations-core repository README.md for more details](https://github.com/DataDog/integrations-core#installing-the-integrations).
+
+### Configuration
+
+Create a file `statsd.yaml` in the Agent's `conf.d` directory. See the [sample statsd.yaml](https://github.com/DataDog/integrations-core/blob/master/statsd/conf.yaml.example) for all available configuration options:
+
+```
+init_config:
+
+instances:
+  - host: localhost
+    port: 8126 # or wherever your statsd listens
+```
+
+[Restart the Agent](https://docs.datadoghq.com/agent/faq/start-stop-restart-the-datadog-agent) to start sending StatsD metrics and service checks to Datadog.
+
+### Validation
+
+[Run the Agent's `status` subcommand](https://docs.datadoghq.com/agent/faq/agent-status-and-information/) and look for `statsd` under the Checks section:
+
+```
+  Checks
+  ======
+    [...]
+
+    statsd
+    -------
+      - instance #0 [OK]
+      - Collected 3 metrics, 0 events & 2 service checks
+
+    [...]
+```
+
+## Compatibility
+
+The statsd check is compatible with all major platforms.
+
+## Data Collected
+### Metrics
+{{< get-metrics-from-git "statsd" >}}
+
+
+### Events
+The StatsD check does not include any event at this time.
+
+### Service Checks
+
+**statsd.is_up**:
+
+Returns CRITICAL if the StatsD server does not respond to the Agent's health status request, otherwise OK.
+
+**statsd.can_connect**:
+
+Returns CRITICAL if the Agent cannot collect metrics about StatsD, otherwise OK.
+
+## Troubleshooting
+Need help? Contact [Datadog Support](http://docs.datadoghq.com/help/).
+
+## Further Reading
+If you don't know what StatsD is and how does it work, check out [our blog post about it](https://www.datadoghq.com/blog/statsd/)
+
+To get a better idea of how (or why) to visualize StatsD metrics with Counts Graphing with Datadog, check out our [series of blog posts](https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing/) about it.
+
