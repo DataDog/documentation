@@ -64,7 +64,7 @@ To automatically transition between agent configuration paths and formats from A
 
 `sudo -u dd-agent -- datadog-agent import`
 
-The command parses an existing `datadog.conf` and converts all bits the new Agent supports into the `datadog.yaml` configuration file. It also copies configuration files for checks that are currently enabled.  
+The command parses an existing `datadog.conf` and converts all configuration options that the new Agent supports into the `datadog.yaml` configuration file. It also copies configuration files for checks that are currently enabled.  
 
 For Mac and Windows environment use:  
 
