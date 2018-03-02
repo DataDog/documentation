@@ -23,7 +23,7 @@ In DataDog, you can use the @-style notification to reference and push a ticket
 
 ## JIRA to Datadog
 
-All 'Task' issues created in JIRA for the project designated by the key 'TEST2' will be pulled into the DataDog event stream and tagged with the tags defined on the integration tile.
+All 'Task' issues created in JIRA for the project designated by the key 'TEST2' will be pulled into the Datadog event stream and tagged with the tags defined on the integration tile.
 
 ## Important Notes:
 

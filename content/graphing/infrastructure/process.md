@@ -23,9 +23,10 @@ Datadog Process Monitoring allows for real-time visibility of the most granular 
 
 The following installation processes are for [agent v6 only](/agent), if you are still using agent v5, [follow this specific installation process](/agent/faq/agent-5-process-collection)
 
+## Process agent
 ### Standard Agent Configuration
- 
-Refer to the instructions for standard [Agent installation](https://app.datadoghq.com/account/settings#agent) for platform-specific details.
+
+The process agent is shipped by default with the Agent 6 in the Linux packages only. Refer to the instructions for standard [Agent installation](https://app.datadoghq.com/account/settings#agent) for platform-specific details.
 
 Once the Datadog Agent is installed, enable Live Processes collection by editing the [configuration file](/agent/#configuration-file) at :
 
@@ -33,11 +34,22 @@ Once the Datadog Agent is installed, enable Live Processes collection by editing
 /etc/datadog-agent/datadog.yaml
 ```
 
-and adding the following:
+by adding the following:
+
 ```
 process_config:
-  enabled: ‘true’
+  enabled: "true"
 ```
+
+The `enabled` value is a string with the following options:
+
+* `"true"`: Enable the process-agent to collect processes and containers.
+* `"false"`: Only collect containers if available (the default)
+* `"disabled"`: Don't run the process-agent at all.
+
+Additionally, some configuration options may be set as environment variables. 
+
+**Note**: options set as environment variables override the settings defined in the configuration file.
 
 After configuration is complete, [restart the Agent](/agent/faq/agent-commands).  
 
