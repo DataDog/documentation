@@ -26,9 +26,9 @@ version_static_assets() {
     start_step
     if [ -f "gulpfile.js" ]; then  # only compress assets if gulp is installed and configured
         echo "--------"
-        test -d "node_modules" || (echo "cp missing node_modules from /etc/node_modules"; cp -r /etc/node_modules .)
-        #npm install  # make sure everything is uptodate
-        npm install https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/translate-latest.tgz
+        #test -d "node_modules" || (echo "cp missing node_modules from /etc/node_modules"; cp -r /etc/node_modules .)
+        npm install  # make sure everything is uptodate
+        #npm install https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/translate-latest.tgz
         if [[ "$(get_bucket)" == *"preview"* ]]; then
             gulp build || fail_step "${FUNCNAME}"
         else
