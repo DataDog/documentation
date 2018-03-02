@@ -84,7 +84,7 @@
 
 {{ else }}
 
-    {{- if .Get "popup" -}}
+    {{- if (and (.Get "popup") (ne $image_ext "gif")) -}}
       <a href="{{ print $img $pop_param | relURL }}" class="pop" data-toggle="modal" data-target="#popupImageModal">
     {{- else if .Get "href" -}}
       <a href="{{- with .Get "href" -}}{{- . -}}{{- end -}}"
@@ -132,7 +132,7 @@
 
     {{ end }}
 
-    {{- if .Get "popup" -}}
+    {{- if (and (.Get "popup") (ne $image_ext "gif")) -}}
       </a>
     {{- else if .Get "href" -}}
       </a>
