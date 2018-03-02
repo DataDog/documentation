@@ -39,7 +39,11 @@ First off, ensure you've properly installed the [Agent][3] on your machine. If y
 
 All custom checks inherit from the `AgentCheck` class found in `checks/__init__.py` and require a `check()` method that takes one argument, `instance` which is a `dict` having the configuration of a particular instance. The `check` method is run once per instance defined in the check configuration (discussed later).  
 
-**Note**: Custom Checks aren't able to import modules by default, all your code should be in one single file.
+**Note**: 
+
+* Custom Checks aren't able to import modules by default, all your code should be in one single file.
+
+* The datadog agent installation has it's own embedded copy of python. Custom scripts importing pip-installed libraries fail unless datadog's own embedded copy of pip is used to install these third party libraries.
 
 ### `AgentCheck` interface for Agent v6
 
