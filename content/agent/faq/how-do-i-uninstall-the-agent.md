@@ -5,6 +5,8 @@ further_reading:
 - link: "/agent/"
   tag: "Documentation"
   text: Learn more about the Datadog Agent
+aliases:
+  - /agent/faq/how-do-i-uninstall-the-agent/
 ---
 
 ## Agent v6
