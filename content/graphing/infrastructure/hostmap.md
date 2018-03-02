@@ -3,6 +3,7 @@ title: Host Map Overview
 kind: documentation
 aliases:
   - /infrastructure/hostmap/
+  - /guides/hostmap
 further_reading:
 - link: "/graphing/infrastructure/livecontainers"
   tag: "Graphing"
@@ -56,7 +57,7 @@ Below is a screenshot from a recent issue we had a Datadog. As you can see, some
 
 ### Tags
 
-Your hosts probably have a lot of [tags](/agent/tagging). Some tags are applied automatically by [Datadog integrations](/integrations/), and some tags were probably applied by members of your team. Regardless of how the tags were created, you can use any of them to slice and dice your Host Maps.  
+Your hosts probably have a lot of [tags](/getting_started/tagging). Some tags are applied automatically by [Datadog integrations](/integrations/), and some tags were probably applied by members of your team. Regardless of how the tags were created, you can use any of them to slice and dice your Host Maps.  
 If some of your hosts are running on AWS, the following AWS-specific tags are available to you right now:
 
 * availability-zone

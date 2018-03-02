@@ -16,10 +16,6 @@ further_reading:
   text: Log Collection Troubleshooting Guide
 ---
 
-<div class="alert alert-info">
-Datadog's Logs is currently available via public beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
-</div>
-
 We are going to use `lograge` here as it'll help us bringing some sanity in logs that are noisy and hardly parseable. 
 
 Instead of having a Rail logging output like this:
@@ -136,6 +132,11 @@ logs:
     service: ruby
     source: ruby
     sourcecategory: sourcecode
+    # For multiline logs, if they start by the date with the format yyyy-mm-dd uncomment the following processing rule
+    #log_processing_rules:
+    #  - type: multi_line
+    #    name: new_log_start_with_date
+    #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
 ```
 
 That's it! Now, all the rails calls are going to be in proper JSON automatically understood by your Datadog application.

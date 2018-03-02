@@ -1,6 +1,16 @@
 ---
-title: Prometheus Check
+title: Writing a Prometheus Check
 kind: documentation
+further_reading:
+- link: "/logs/"
+  tag: "Documentation"
+  text: Collect your logs
+- link: "/graphing/infrastructure/process"
+  tag: "Documentation"
+  text: Collect your processes
+- link: "/tracing"
+  tag: "Documentation"
+  text: Collect your traces
 ---
 
 ## Overview
@@ -97,7 +107,7 @@ def check(self, instance):
 ##### Exceptions
 
 If a check cannot run because of improper configuration, programming error, or
-because it could not collect any metrics, it should raise a meaningful exception. This exception is logged and is shown in the Agent [info command](/agent/faq/agent-status-and-information) for easy debugging. For example:
+because it could not collect any metrics, it should raise a meaningful exception. This exception is logged and is shown in the Agent [info command](/agent/faq/agent-commands/#agent-status-and-information) for easy debugging. For example:
 
     $ sudo /etc/init.d/datadog-agent info
 
@@ -197,3 +207,7 @@ If the `labels_mapper` dictionary is provided, the metrics labels names in the `
 
 `type_overrides` is a dictionary where the keys are Prometheus metric names and the values are a metric type (name as string) to use instead of the one listed in the payload. It can be used to force a type on untyped metrics.
 Note: it is empty in the mother class but will need to be overloaded/hardcoded in the final check not to be counted as custom metric.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

@@ -16,10 +16,6 @@ further_reading:
   text: Log Collection Troubleshooting Guide
 ---
 
-<div class="alert alert-info">
-Datadog's Logs is currently available via public beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
-</div>
-
 Java logs are quite complex to handle, mainly because of stack traces. These stack traces are split into multiple lines which makes them difficult to associate to the original log event:
 
 ```java
@@ -116,6 +112,11 @@ logs:
     service: java
     source: java
     sourcecategory: sourcecode
+    # For multiline logs, if they start by the date with the format yyyy-mm-dd uncomment the following processing rule
+    #log_processing_rules:
+    #  - type: multi_line
+    #    name: new_log_start_with_date
+    #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
 ```
 
 ## Getting further

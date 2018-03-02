@@ -1,7 +1,20 @@
 ---
-title: Proxy Configuration
+title: Agent proxy configuration
 kind: documentation
+aliases:
+    - /agent/proxy
+further_reading:
+- link: "/logs/"
+  tag: "Documentation"
+  text: Collect your logs
+- link: "/graphing/infrastructure/process"
+  tag: "Documentation"
+  text: Collect your processes
+- link: "/tracing"
+  tag: "Documentation"
+  text: Collect your traces
 ---
+
 ## Why use a Proxy
 
 If your network configuration restricted outbound traffic, proxy all agent traffic through one or several hosts that have more permissive outbound policies.
@@ -15,6 +28,8 @@ hosts that are not directly connected to the Internet.
 same proxy)
 
 ## Using the Agent as a Proxy
+
+**This feature is not available for Agent v6 yet**
 
 1. Designate one node **running datadog-agent** as the proxy.  
     In this example assume that the proxy name is `proxy-node`. This node **must** be able to reach `https://app.datadoghq.com`.
@@ -52,7 +67,7 @@ proxy_user: my_user
 proxy_password: my_password
 ```
 
-Do not forget to [restart the agent](/agent/faq/start-stop-restart-the-datadog-agent) for the new settings to take effect.
+Do not forget to [restart the agent](/agent/faq/agent-commands) for the new settings to take effect.
 
 ## Using HAProxy as a Proxy
 
@@ -121,7 +136,7 @@ Then edit each agent to point to HAProxy by setting its `dd_url` to the address 
 
 `dd_url: https://haproxy.example.com:3834`
 
-Before you [restart the agent](/agent/faq/start-stop-restart-the-datadog-agent) Edit your supervisor configuration to disable SSL certificate verification. This is needed to prevent python from complaining about the discrepancy between the hostname on the SSL certificate (app.datadoghq.com) and your HAProxy hostname.
+Before you [restart the agent](/agent/faq/agent-commands) Edit your supervisor configuration to disable SSL certificate verification. This is needed to prevent python from complaining about the discrepancy between the hostname on the SSL certificate (app.datadoghq.com) and your HAProxy hostname.
 
 ####  On GNU/Linux, Mac OS X, FreeBSD, SmartOS:
 You need to edit the supervisor configuration found at:
@@ -144,8 +159,12 @@ Edit your configuration file `datadog.conf` and add this option:
 skip_ssl_validation: yes
 ```
 
-Finally [restart the agent](/agent/faq/start-stop-restart-the-datadog-agent/#windows).
+Finally [restart the agent](/agent/#start-stop-restart-the-agent/#windows).
 
 To verify that everything is working properly, review the
 HAProxy statistics at `http://haproxy.example.com:3835` as well as
 the [Infrastructure Overview](https://app.datadoghq.com/infrastructure)
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

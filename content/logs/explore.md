@@ -11,10 +11,6 @@ further_reading:
   text: Learn more about parsing
 ---
 
-<div class="alert alert-info">
-Datadog's Logs is currently available via public beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
-</div>
-
 ## Overview 
 
 The Logs explorer is your home base for troubleshooting and exploration:
@@ -29,9 +25,9 @@ In this view you can:
 * [Enter search queries](#search-bar)
 
 ## Time Range
-The time range allows you to display logs within a given time period. It appears directly under the search bar as a timeline. The timeline can be displayed or wrapped up with the **Show Graph** check box:
+The time range allows you to display logs within a given time period. It appears directly under the search bar as a timeline. The timeline can be displayed or wrapped up with the **Show timeline** check box:
 
-{{< img src="logs/explore/timeline.png" alt="Timeline" responsive="true" popup="true" >}}
+{{< img src="logs/explore/timeline.png" alt="Timeline" responsive="true" popup="true" style="width:50%;">}}
 
 Quickly change the time range by selecting a preset range from the dropdown:
 
@@ -57,7 +53,7 @@ You can click on any log line to see more details about it:
 
 Click on its `host` or `service` and select `View in context` to see log lines dated just before and after a selected log - even if they don't match your filter -
 
-{{< img src="logs/explore/focus_host_service.png" style="width:50%;" alt="focus on host and service.png" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="logs/explore/focus_host_service.png" style="width:50%;" alt="focus on host and service.png" responsive="true" popup="true" style="width:70%;">}}
 
 ### Columns
 To add more log details to the list, click the **Columns** button and select any facets you want to see:

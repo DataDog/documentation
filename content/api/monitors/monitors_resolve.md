@@ -8,7 +8,7 @@ external_redirect: /api/#resolve-monitor
 ## Resolve monitor
 
 ##### ARGUMENTS
-* `resolve` [*required*]:  
+* **`resolve`** [*required*]:  
     Array of group(s) to resolve for a given monitor_id e.g.  
     `{"monitor_id": "group_to_resolve"}`  
     It supports multiple groups per monitor as well eg:  

@@ -4,6 +4,17 @@ kind: documentation
 customnav: agentnav
 aliases:
   - /guides/agent_checks/
+  - /agent/agent_checks
+further_reading:
+- link: "/logs/"
+  tag: "Documentation"
+  text: Collect your logs
+- link: "/graphing/infrastructure/process"
+  tag: "Documentation"
+  text: Collect your processes
+- link: "/tracing"
+  tag: "Documentation"
+  text: Collect your traces
 ---
 
 ## Overview
@@ -26,7 +37,48 @@ First off, ensure you've properly installed the [Agent][3] on your machine. If y
 
 ## Agent Check Interface
 
-All custom checks inherit from the `AgentCheck` class found in `checks/__init__.py` and require a `check()` method that takes one argument, `instance` which is a `dict` having the configuration of a particular instance. The `check` method is run once per instance defined in the check configuration (discussed later).
+All custom checks inherit from the `AgentCheck` class found in `checks/__init__.py` and require a `check()` method that takes one argument, `instance` which is a `dict` having the configuration of a particular instance. The `check` method is run once per instance defined in the check configuration (discussed later).  
+
+**Note**: Custom Checks aren't able to import modules by default, all your code should be in one single file.
+
+### `AgentCheck` interface for Agent v6
+
+There is some differences between Agent v5 and Agent v6:
+
+* Each check instance is now its own instance of the class. So you cannot share state between them
+* The following methods have been removed from `AgentCheck`:
+
+    - `_roll_up_instance_metadata`
+    - `instance_count`
+    - `is_check_enabled`
+    - `read_config`
+    - `set_check_version`
+    - `set_manifest_path`
+    - `_get_statistic_name_from_method`
+    - `_collect_internal_stats`
+    - `_get_internal_profiling_stats`
+    - `_set_internal_profiling_stats`
+    - `get_library_versions`
+    - `get_library_info`
+    - `from_yaml`
+    - `get_service_checks`
+    - `has_warnings`
+    - `get_metrics`
+    - `has_events`
+    - `get_events`
+
+* The function signature of the metric senders changed from:
+
+    ```python
+    gauge(self, metric, value, tags=None, hostname=None, device_name=None, timestamp=None)
+    ```
+
+    to:
+
+    ```python
+    gauge(self, name, value, tags=None, hostname=None, device_name=None)
+    ```
+
 
 ### Sending metrics
 
@@ -104,7 +156,7 @@ The service_check method accepts the following arguments:
 ### Exceptions
 
 If a check cannot run because of improper configuration, programming error, or
-because it could not collect any metrics, it should raise a meaningful exception. This exception is logged and is shown in the Agent [info command](/agent/faq/agent-status-and-information) for easy debugging. For example:
+because it could not collect any metrics, it should raise a meaningful exception. This exception is logged and is shown in the Agent [info command](/agent/faq/agent-commands/#agent-status-and-information) for easy debugging. For example:
 
     $ sudo /etc/init.d/datadog-agent info
 
@@ -165,7 +217,7 @@ every check supports multiple instances out of the box.
 ## Directory Structure
 
 Before starting your first check it is worth understanding the checks directory
-structure. Add files for your check in the  `checks.d` folder, [which lives in your Agent root](/agent/faq/agent-check-directory-structure).
+structure. Add files for your check in the  `checks.d` folder, which lives in your Agent root.
 
 ## Your First Check
 
@@ -311,7 +363,7 @@ def status_code_event(self, url, r, aggregation_key):
 
 The entire check would be placed into the `checks.d` folder as `http.py`. The corresponding configuration would be placed into the `conf.d` folder as `http.yaml`.
 
-Once the check is in `checks.d`, test it by running it as a python script. [Restart the Agent](/agent/faq/start-stop-restart-the-datadog-agent) for the changes to be enabled. **Make sure to change the conf.d path in the test method**. From your Agent root, run:
+Once the check is in `checks.d`, test it by running it as a python script. [Restart the Agent](/agent/faq/agent-commands) for the changes to be enabled. **Make sure to change the conf.d path in the test method**. From your Agent root, run:
 
     PYTHONPATH=. python checks.d/http.py
 
@@ -416,3 +468,7 @@ If your issue continues, reach out to Support with the [help page](/help) that l
 [2]: https://github.com/DataDog/integrations-extras
 [3]: http://app.datadoghq.com/account/settings#agent
 [4]: /help/
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

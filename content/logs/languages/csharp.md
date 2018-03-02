@@ -16,10 +16,6 @@ further_reading:
   text: Log Collection Troubleshooting Guide
 ---
 
-<div class="alert alert-info">
-Datadog's Logs is currently available via public beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
-</div>
-
 To send your C# logs to Datadog, we recommend logging to a file and then tailing that file with your Datadog agent. Here are setup examples for the `log4Net`, `serilog` and `Nlog` logging libraries
 
 We strongly encourage setting up your logging library to produce your logs in JSON format to avoid the need for [custom parsing rules](/logs/parsing).
@@ -224,10 +220,19 @@ If you have followed the instructions you should see in your file (for example `
 
 ```json
 {
-    "level": "DEBUG",
-    "message": "This is my debug message",
-    "date": "2016-05-24 15:53:35.7175"
+  "level": "DEBUG",
+  "message": "This is my debug message",
+  "date": "2016-05-24 15:53:35.7175",
+  "appname": "Datadog.vshost.exe",
+  "logger": "Datadog.Program",
+  "thread": "10"
 }
+```
+
+If despite the benefits of logging in JSON you wish to remain in a raw string format, we recommend to update the `log4net convertion pattern` to automatically parse your logs with the c# integration pipeline as follows:
+
+```
+<param name="ConversionPattern" value="%date%d{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread] %logger %method:%line - %message%n" />
 ```
 
 ## Configure your Datadog agent
@@ -254,6 +259,11 @@ logs:
     service: csharp
     source: csharp
     sourcecategory: sourcecode
+    # For multiline logs, if they start by the date with the format yyyy-mm-dd uncomment the following processing rule
+    #log_processing_rules:
+    #  - type: multi_line
+    #    name: new_log_start_with_date
+    #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
 ```
 
 That's it! Now, all your logs are going to be in proper JSON automatically understood by your Datadog application.

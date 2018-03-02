@@ -342,4 +342,21 @@ filter {
     Exec        $ddsource = 'mysourcevalue';
     ```
 
+### NXLog TLS encryption
+
+1. [Download the public key for TLS encryption of logs](https://gist.githubusercontent.com/estib/8762bc1a2a5bda781a6e55cca40235f2/raw/665b6b2906a728027f508ea067f01cdf3cf72b49/intake.logs.datadoghq.com.crt).
+
+2. Add the `om_sll` module in your NXLog configuration to enable secure transfer over port 10516:
+
+    ```
+    <Output out>
+      Module  om_ssl
+      Host    intake.logs.datadoghq.com
+      Port    10516
+      Exec    $raw_event="%YOURAPIKEY% " + $raw_event;
+      CAFile  %CERTDIR%/intake.logs.datadoghq.com.crt
+      AllowUntrusted FALSE
+    </Output>
+    ```
+
 {{< partial name="whats-next/whats-next.html" >}}
