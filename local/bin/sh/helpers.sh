@@ -27,7 +27,7 @@ version_static_assets() {
     if [ -f "gulpfile.js" ]; then  # only compress assets if gulp is installed and configured
         echo "--------"
         test -d "node_modules" || (echo "cp missing node_modules from /etc/node_modules"; cp -r /etc/node_modules .)
-        # npm install  # make sure everything is uptodate
+        npm install  # make sure everything is uptodate
         if [[ "$(get_bucket)" == *"preview"* ]]; then
             gulp build || fail_step "${FUNCNAME}"
         else
@@ -473,17 +473,16 @@ index_algolia() {
 manage_translations() {
     # $1: api key
     start_step
+    pwd
     echo "---------"
     echo "Sending Translations"
     echo "---------"
-    ./node_modules/.bin/translate --version
-    #./node_modules/.bin/translate -s ./translate.yaml "${1}" || fail_step "${FUNCNAME}"
+    ./node_modules/.bin/translate -s ./translate.yaml "${1}" || fail_step "${FUNCNAME}"
     echo "Done."
     echo "---------"
     echo "Receiving Translations"
     echo "---------"
-    ./node_modules/.bin/translate --version
-    #./node_modules/.bin/translate -r ./translate.yaml "${1}" --token $(get_secret 'github_token') || fail_step "${FUNCNAME}"
+    ./node_modules/.bin/translate -r -t $(get_secret 'github_token') ./translate.yaml "${1}" || fail_step "${FUNCNAME}"
     echo "Done."
     pass_step  "${FUNCNAME}"
 }
