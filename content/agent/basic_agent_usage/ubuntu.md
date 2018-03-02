@@ -179,7 +179,6 @@ To uninstall the agent run:
 
 ```
 $ sudo apt-get --purge remove datadog-agent -y
-CentOS/RHEL/Amazon Linux
 ```
 
 ## Further Reading
