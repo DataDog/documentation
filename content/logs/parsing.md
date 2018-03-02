@@ -14,10 +14,6 @@ further_reading:
   text: Log Parsing - Best Practice
 ---
 
-<div class="alert alert-info">
-Datadog's Logs is currently available via public beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
-</div>
-
 ## Overview 
 
 If your logs are JSON-formatted, Datadog automatically parses them, but for other formats, Datadog allows you to enrich your logs with the help of Grok Parser.    
