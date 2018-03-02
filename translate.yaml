@@ -1,24 +1,14 @@
 ---
 enabled: true
-provider:
-- name: 'transifex'
-  enabled: false
+transifex:
+  org: 'datadog'
   project_slug: 'documentation-poc'
   user: 'api'
-- name: 'smartling'
-  enabled: true
-  project_id: 'a2d680471'
 sources:
-- src: content/**/*.md
-  dst: content/**/*.{lang}.md
-- src: data/**/*.yaml
-  dst: data/**/*.{lang}.yaml
-languages:
-- code: fr_FR
-  reviewers:
-  - github_user: ''
-    slack_user: ''
-    email: ''
+- src: "content/**/*.md"
+  dst: "*.{lang}.md"
+#- src: "data/**/*.yaml"
+#  dst: "*.{lang}.yaml"
 github:
   org: 'DataDog'
   repo: 'documentation'
@@ -27,3 +17,7 @@ github:
   pr_to: 'david.jones/translate'
   pr_title: 'Translation PR'
   pr_body: 'This is a translation'
+reviewers:
+  - name: 'David Jones'
+    github_user: 'davidejones'
+    slack_user: 'david.jones'
