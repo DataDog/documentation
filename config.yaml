@@ -453,7 +453,7 @@ languages:
           weight: 50
           parent: menu_references_logs
         - identifier: customnav_lognav_aws
-          name: "AWS"
+          name: "AWS Log collection"
           url: "/integrations/amazon_web_services/#log-collection"
           weight: 60
           parent: menu_references_logs
