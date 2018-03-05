@@ -18,6 +18,12 @@ further_reading:
 
 ## Overview
 
+Write your PHP logs into a file, then [use the Agent](/logs) to forward them to Datadog:
+
+* [Monolog](/logs/languages/php/#php-monolog)
+* [Symfony](/logs/languages/php/#php-symfony)
+* [Zend-Log](/logs/languages/php/#php-zend-log)
+
 ## PHP Monolog
 
 Monolog is one of the most used logging library. Many of frameworks implement Monolog for their logging module. The following documentation is applicable for many frameworks and home-made application.
