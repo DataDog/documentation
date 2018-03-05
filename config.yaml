@@ -620,6 +620,9 @@ languages:
           url: "/help/"
           pre: "nav_help"
           weight: 140
+  #fr:
+  #  disclaimer: ""
+  #  weight: 0
 
 params:
   environment: local
