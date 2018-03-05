@@ -89,7 +89,7 @@ logs:
 ```
 * [Restart your agent](https://help.datadoghq.com/hc/en-us/articles/203764515-Start-Stop-Restart-the-Datadog-Agent)
 
-The agent supports raw string logs (in any format) and JSON objects. If you are sending logs in batch, we expect to find a new line character between each log.
+The agent supports raw string and JSON formated logs. If you are sending logs in batch, use break line characters to separate your logs.
 
 ## Advanced log collection functions
 
