@@ -33,6 +33,7 @@ For integration frameworks, we provide guidelines on how to log in JSON into a f
     {{< nextlink href="/logs/languages/go" >}}Go{{< /nextlink >}}
     {{< nextlink href="/logs/languages/java" >}}Java{{< /nextlink >}}
     {{< nextlink href="/logs/languages/nodejs" >}}Nodejs{{< /nextlink >}}
+    {{< nextlink href="/logs/languages/php" >}}PHP{{< /nextlink >}}
     {{< nextlink href="/logs/languages/python" >}}Python{{< /nextlink >}}
     {{< nextlink href="/logs/languages/ruby" >}}Ruby{{< /nextlink >}}
 {{< /whatsnext >}}
