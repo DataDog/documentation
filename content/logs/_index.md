@@ -1,5 +1,5 @@
 ---
-title: Log Collection
+title: Log Management
 kind: Documentation
 description: "Configure your Datadog agent to gather logs from your host, containers & services."
 ---
