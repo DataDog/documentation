@@ -1,0 +1,78 @@
+{
+  "betaSentence": {
+    "other": "Beta - For support or to report any issues, contact"
+  },
+
+  "additionalSentence": {
+    "other": "Additional helpful documentation, links, and articles"
+  },
+
+  "documentationSearch": {
+    "other": "Documentation Search"
+  },
+
+  "toc": {
+    "other": "Table of Contents"
+  },
+
+  "guides": {
+    "one": "Guide",
+    "other": "Guides"
+  },
+
+  "tags": {
+    "one": "Tag",
+    "other": "Tags"
+  },
+
+  "language": {
+    "one": "Language",
+    "other": "Languages"
+  },
+
+  "library": {
+    "one":  "Library",
+    "other": "Libraries"
+  },
+
+  "official": {
+    "other": "Official"
+  },
+
+  "api": {
+    "other": "API"
+  },
+
+  "dogstatsd": {
+    "other": "DogStatsD"
+  },
+
+  "author": {
+    "other": "Author"
+  },
+
+  "notes": {
+    "other": "Notes"
+  },
+
+
+
+
+
+  "menu_references": {
+    "one":  "Reference",
+    "other":  "References"
+  },
+
+  "menu_references_api": {
+    "other":  "API"
+  },
+
+  "menu_references_getting_started": {
+    "other": "Getting Started"
+  },
+
+  "menu_references_agent": {
+    "other":  "Datadog Agent"
+  }
+}
