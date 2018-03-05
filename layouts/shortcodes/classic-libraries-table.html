@@ -1,3 +1,12 @@
+<!-- get lang specific data file -->
+{{ $.Scratch.Set "data" "" }}
+{{ if ne $.Page.Lang "en"}}
+    {{ $.Scratch.Set "data" (index $.Site.Data (print "libraries." $.Page.Lang)) }}
+{{ else }}
+    {{ $.Scratch.Set "data" $.Site.Data.libraries }}
+{{ end }}
+{{ $datafile := ($.Scratch.Get "data") }}
+
 <div class="table-responsive-container">
   <div class="table-scroll">
     <table class="table table-responsive">
@@ -13,7 +22,7 @@
       </tr>
     </thead>
     <tbody>
-      {{ range $e := $.Site.Data.libraries.Classic }}
+      {{ range $e := $datafile.Classic }}
         {{ range $libName, $info := . }}
             {{ range $i, $el := $info }}
               <tr>
