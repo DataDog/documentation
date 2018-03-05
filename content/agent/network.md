@@ -79,11 +79,9 @@ For a detailed configuration guide on proxy setup, head over to [Proxy Configura
 
 Versioned endpoints start with Agent 5.2.0, i.e. each version of the agent will hit a different endpoint based on the version of the *Forwarder*.  
 
-i.e. Agent 5.2.0 will hit 5-2-0-app.agent.datadoghq.com  
+* i.e. Agent 5.2.0 will hit 5-2-0-app.agent.datadoghq.com  
 
-It is safe to assume that we'll be using *.agent.datadoghq.com for a while, however, the -app suffix will likely change in a future version of the Datadog Agent as we are working on a better separation of metrics and metadata.
-
-As a consequence you should whitelist *.agent.datadoghq.com in your firewalls.
+As a consequence whitelist `*.agent.datadoghq.com` in your firewalls.
 
 ## Further Reading
 
