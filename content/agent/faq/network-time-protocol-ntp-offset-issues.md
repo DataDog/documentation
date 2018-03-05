@@ -31,7 +31,7 @@ Any significant offset can have undesired effects, and we recommend keeping host
 
 Instructions for syncing the system clock with NTP vary based on the operating system being used. Here are some helpful links for different operating systems.
 
-* **Windows**: [How To Synchronize Microsoft Windows to a NTP Server](https://support.microsoft.com/en-us/help/816042/how-to-configure-an-authoritative-time-server-in-windows-server)
+* **Windows**: [How To Synchronize Microsoft Windows with a NTP Server](https://support.microsoft.com/en-us/help/816042/how-to-configure-an-authoritative-time-server-in-windows-server)
 * **Linux**: [How to force a clock update using NTP?](http://askubuntu.com/questions/254826/how-to-force-a-clock-update-using-ntp)
 * **FreeBSD**: [Clock Synchronization with NTP](http://www.freebsd.org/doc/en/books/handbook/network-ntp.html)
 
