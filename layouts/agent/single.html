@@ -4,7 +4,7 @@
     {{ end }}
     <h1 id="pagetitle">{{ .Title }}</h1>
     {{ if .Params.beta }}
-        <p><strong>{{ i18n "betaSentence" }} <a href="mailto:support@datadoghq.com">support@datadoghq.com</a>.</strong></p>
+        <p><strong>{{ i18n "beta_sentence" }} <a href="mailto:support@datadoghq.com">support@datadoghq.com</a>.</strong></p>
     {{ end }}
     {{.Content}}
 {{ end }}

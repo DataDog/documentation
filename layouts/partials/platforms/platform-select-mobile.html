@@ -1,7 +1,7 @@
 {{ $dot := . }}
 <div class="dropdown d-block d-sm-none" style="margin-bottom:24px;">
     <a class="my-button btn btn-lg btn-block btn-outline-primary" href="#">
-        {{ if .Params.platform }}{{ .Params.platform }}{{ else }}Choose A Platform{{ end }}
+        {{ if .Params.platform }}{{ .Params.platform }}{{ else }}{{ i18n "choose_a_platform" }}{{ end }}
     </a>
     <div id="popper" class="dropdown-menu" style="display:none;">
         <div class="px-4 py-3">

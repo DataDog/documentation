@@ -5,7 +5,7 @@
             <div class="col-12 col-md-3 col-lg-4 footer-side">
                 <div class="row">
                     <div class="col-12 col-lg-8">
-                        <button type="button" class="btn btn-block btn-outline-semi-trans" data-toggle="modal" data-target="#signupModal">Free Trial</button>
+                        <button type="button" class="btn btn-block btn-outline-semi-trans" data-toggle="modal" data-target="#signupModal">{{ i18n "free_trial" }}</button>
                     </div>
                 </div>
                 <span class="copyright d-none d-md-block">&copy; Datadog {{ $date := now }} {{ $date.Format "2006"}}</span>
@@ -55,9 +55,9 @@
         </div>
         <div class="row">
             <div class="col-sm-12 footer-legal">
-                <a href="https://www.datadoghq.com/legal/terms/">Terms</a> |
-                <a href="https://www.datadoghq.com/legal/privacy/">Privacy</a> |
-                <a href="https://www.datadoghq.com/legal/cookies/">Cookies</a>
+                <a href="https://www.datadoghq.com/legal/terms/">{{ i18n "terms" }}</a> |
+                <a href="https://www.datadoghq.com/legal/privacy/">{{ i18n "privacy" }}</a> |
+                <a href="https://www.datadoghq.com/legal/cookies/">{{ i18n "cookies" }}</a>
             </div>
         </div>
     </div>

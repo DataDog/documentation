@@ -1,26 +1,114 @@
 {
-  "betaSentence": {
+  "beta_sentence": {
     "other": "Beta - For support or to report any issues, contact"
   },
 
-  "additionalSentence": {
+  "additional_sentence": {
     "other": "Additional helpful documentation, links, and articles"
   },
 
-  "apiaccountSentence1": {
+  "apiaccount_sentence1": {
     "other": "Make sure you replace the API and/or APP key below"
   },
 
-  "apiaccountSentence2": {
+  "apiaccount_sentence2": {
     "other": "with the ones for your account"
   },
 
-  "documentationSearch": {
-    "other": "Documentation Search"
+  "install_agent_sentence": {
+    "other": "Install & configure the Agent to collect data"
+  },
+
+  "integrations_sentence": {
+    "other": "Gather data from all of your systems, apps, & services"
+  },
+
+  "graphing_sentence": {
+    "other": "Visualize your data to<br> gain insight"
+  },
+
+  "alerting_sentence": {
+    "other": "Create & manage your <br> monitors & notifications"
+  },
+
+  "apm_sentence": {
+    "other": "Instrument your code <br> to improve performance"
+  },
+
+  "developer_tools_sentence": {
+    "other": "Collect custom metrics <br> &amp; create new integration"
+  },
+
+  "help_sentence": {
+    "other": "Our friendly, knowledgeable solutions engineers are here to help"
+  },
+
+  "email_support_sentence": {
+    "other": "You can contact our Support Team via email at <a href=\"mailto:support@datadoghq.com\">support@datadoghq.com</a>"
+  },
+
+  "live_chat_support_sentence": {
+    "other": "Chat with our support team any business day between the hours of 10:00 and 19:00 ET. You can reach us through in-app chat, or on Slack,  <a href=\"http://chat.datadoghq.com/\" target=\"_blank\" rel=\"noopener\">Datadog Slack</a>"
+  },
+
+  "event_stream_support_sentence": {
+    "other": "Messages in the <a href=\"http://app.datadoghq.com/event/stream\" target=\"_blank\" rel=\"noopener\">event stream</a> containing @support-datadog will reach our Support Team. This is a convenient way to reference a graph snapshot."
+  },
+
+  "agent_started_sentence": {
+    "other": "To get started using the Agent, please select your platform."
+  },
+
+  "choose_a_platform": {
+    "other": "Choose A Platform"
+  },
+
+  "get_started_datadog": {
+    "other": "Get Started with Datadog"
+  },
+
+  "all": {
+    "other": "All"
+  },
+
+  "free_trial": {
+    "other": "Free Trial"
+  },
+
+  "agent_check": {
+    "other": "Agent Check"
+  },
+
+  "statsd_check": {
+    "other": "StatsD Check"
+  },
+
+  "crawler": {
+    "other": "Crawler"
+  },
+
+  "terms": {
+    "other": "Terms"
+  },
+
+  "privacy": {
+    "other": "Privacy"
+  },
+
+  "cookies": {
+    "other": "Cookies"
   },
 
   "toc": {
     "other": "Table of Contents"
+  },
+
+  "get_started_free": {
+    "other": "GET STARTED FREE"
+  },
+
+  "documentation_search": {
+    "other": "Documentation Search"
   },
 
   "guides": {
@@ -51,6 +139,18 @@
     "other": "API"
   },
 
+  "docs": {
+    "other": "Docs"
+  },
+
+  "home": {
+    "other": "Home"
+  },
+
+  "datadog_docs": {
+    "other": "Datadog Docs"
+  },
+
   "dogstatsd": {
     "other": "DogStatsD"
   },
@@ -61,6 +161,55 @@
 
   "notes": {
     "other": "Notes"
+  },
+
+  "agent": {
+    "other": "Agent"
+  },
+
+  "integrations": {
+    "one": "integration",
+    "other": "integrations"
+  },
+
+  "graphing": {
+    "other": "Graphing"
+  },
+
+  "alerting": {
+    "other": "Alerting"
+  },
+
+  "apm_tracing": {
+    "other": "APM (Tracing)"
+  },
+
+  "developer_tools": {
+    "other": "Developer tools"
+  },
+
+  "contact_us": {
+    "other": "Contact Us"
+  },
+
+  "status_page": {
+    "other": "Status Page"
+  },
+
+  "ops_twitter": {
+    "other": "Ops Twitter"
+  },
+
+  "email": {
+    "other": "Email"
+  },
+
+  "live_chat": {
+    "other": "Live Chat"
+  },
+
+  "event_stream_messaging": {
+    "other": "In-app Event Stream Messaging"
   },
 
 
