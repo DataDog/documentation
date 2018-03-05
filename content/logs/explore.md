@@ -1,5 +1,5 @@
 ---
-title: Explore
+title: Search & Graph
 kind: documentation
 description: "The Logs Explorer is your Datadog home base for troubleshooting and exploration over your logs."
 further_reading:
@@ -23,8 +23,10 @@ In this view you can:
 * [Display lists of logs](#log-list)
 * [Use facets to filter your Logstream](#facets)
 * [Enter search queries](#search-bar)
+* [Perform analytics with Log Graphs](#log-graph)
 
 ## Time Range
+
 The time range allows you to display logs within a given time period. It appears directly under the search bar as a timeline. The timeline can be displayed or wrapped up with the **Show timeline** check box:
 
 {{< img src="logs/explore/timeline.png" alt="Timeline" responsive="true" popup="true" style="width:50%;">}}
@@ -178,6 +180,26 @@ The same logic must be applied to spaces within log attributes. It is not recomm
 If an attribute was called `user.first name`, perform a search on this attribute by escaping the space:
 
 `@user.first\ name:myvalue`
+
+## Log Graph
+
+Switch between the Log List and the Log Graph mode by clicking on this button:
+
+{{< img src="logs/explore/graph/log_graph_switch.png" alt="Log graph switch" responsive="true" popup="true" style="width:80%;">}}
+
+The only available Log Graph (for now) is the timeseries:
+
+{{< img src="logs/explore/graph/basic_timeseries_log_graph.png" alt="basic timeseries log graph" responsive="true" popup="true" style="width:80%;">}}
+
+To start using it:
+
+1. Choose the Measure to graph
+2. Split by [Tag](/getting_started/tagging) or [Facet](#facets) to split your graph over the wanted dimension.
+{{< img src="logs/explore/graph/split_by_log_graph.png" alt="split by log graph" responsive="true" popup="true" style="width:80%;">}}
+
+3. See logs related to a section of the graph:  
+    Select or click on a section of the graph to either zoom in the graph or see the list of logs corresponding to your selection: 
+    {{< img src="logs/explore/graph/using_log_graph.gif" alt="using log graph" responsive="true" popup="true" style="width:80%;">}}
 
 ## Further Reading
 
