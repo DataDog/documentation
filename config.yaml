@@ -437,7 +437,7 @@ languages:
 
         # LOGS
         - identifier: menu_references_logs
-          name: "Logs"
+          name: "Log Management"
           url: "/logs/"
           pre: "nav_logs"
           weight: 90
