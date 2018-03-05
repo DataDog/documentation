@@ -23,7 +23,7 @@
 
     {{- $binsh := "#!/bin/sh\n" -}}
 
-    {{- $apicomment := "# Make sure you replace the API and/or APP key below\n# with the ones for your account\n\n" -}}
+    {{- $apicomment := print "# " (i18n "apiaccountSentence1") "\n# " (i18n "apiaccountSentence2") "\n\n" -}}
 
     {{- $file_content := readFile ($file) -}}
 

@@ -7,6 +7,14 @@
     "other": "Additional helpful documentation, links, and articles"
   },
 
+  "apiaccountSentence1": {
+    "other": "Make sure you replace the API and/or APP key below"
+  },
+
+  "apiaccountSentence2": {
+    "other": "with the ones for your account"
+  },
+
   "documentationSearch": {
     "other": "Documentation Search"
   },
