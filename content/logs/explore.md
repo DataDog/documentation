@@ -187,14 +187,10 @@ Switch between the Log List and the Log Graph mode by clicking on this button:
 
 {{< img src="logs/explore/graph/log_graph_switch.png" alt="Log graph switch" responsive="true" popup="true" style="width:80%;">}}
 
-The only available Log Graph (for now) is the timeseries:
-
-{{< img src="logs/explore/graph/basic_timeseries_log_graph.png" alt="basic timeseries log graph" responsive="true" popup="true" style="width:80%;">}}
-
 To start using it:
 
 1. Choose the Measure to graph
-2. Split by [Tag](/getting_started/tagging) or [Facet](#facets) to split your graph over the wanted dimension.
+2. Split by [Tag](/getting_started/tagging) or [Facet](#facets) to split your graph over the desired dimension.
 {{< img src="logs/explore/graph/split_by_log_graph.png" alt="split by log graph" responsive="true" popup="true" style="width:80%;">}}
 
 3. See logs related to a section of the graph:  
