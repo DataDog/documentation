@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-Write your PHP logs into a file, then [use the Agent](/logs) to forward them to Datadog:
+Write your PHP logs into a file, then [use the Agent](/logs) to forward them to Datadog, choose between the following libraries:
 
 * [Monolog](/logs/languages/php/#php-monolog)
 * [Symfony](/logs/languages/php/#php-symfony)
@@ -26,11 +26,7 @@ Write your PHP logs into a file, then [use the Agent](/logs) to forward them to 
 
 ## PHP Monolog
 
-Monolog is one of the most used logging library. Many of frameworks implement Monolog for their logging module. The following documentation is applicable for many frameworks and home-made application.
-
-There is various way to include Monolog to your application. If you are using a PHP framework like Symfony, please refer to the supported framework section to know if Monolog is already packed.
-
-The recommended way is to use Composer to add Monolog, Add Monolog as dependency
+Use Composer to add Monolog as a dependency:  
  
 ```
 composer require "monolog/monolog"
@@ -38,7 +34,7 @@ composer require "monolog/monolog"
 
 Alternatively, install it manually:
 
-1. Download Monolog from the reposiotry and include it to the librairies
+1. Download Monolog from the repository and include it to the libraries
 2. Initialize the instance in the application's bootstrap
 
     ```php
@@ -55,7 +51,7 @@ Alternatively, install it manually:
 
 ### Setup - Log into a file with Monolog
 
-The following configuration enables the Json formatting and writes the logs and events into the `application-json.log` file. Edit your code, right after the initialization of the Monolog instance and add a new handler.
+The following configuration enables the Json formatting and writes the logs and events into the `application-json.log` file. Edit your code, right after the initialization of the Monolog instance and add a new handler:
 
 ```php
  <?php
@@ -84,12 +80,47 @@ $log->pushHandler($stream);
 $log->info('Adding a new user', array('username' => 'Seldaek'));
 ```
 
-Stream now your log files to Datadog selectively depending on your operating system:
+Then [stream your log file to Datadog](/logs/#custom-log-collection)
 
+### Add meta field and context
+
+Much of the usefulness information comes from additional context data that you add to your logs and events.  
+Monolog makes this very convenient by providing methods to set thread local context data that is then submitted automatically with all events. At any moment, log an event with a contextual data:
+
+```php
+ <?php
+
+$logger->info('Adding a new user', array('username' => 'Seldaek'));
+```
+
+But, most important, Monolog comes with a pre-processor feature. It's a simple callback enriches all your events with, for instance, the session id, the request id, and so on:
+
+```php
+ <?php 
+    
+$log->pushProcessor(function ($record) {
+
+    // record the current user
+    $user = Acme::getCurrentUser();
+    $record['context']['user'] = array(
+        'name' => $user->getName(),
+        'username' => $user->getUsername(),
+        'email' => $user->getEmail(),
+    );
+
+    // Add various tags
+    $record['ddtags'] = array('key' => 'value');
+
+    // Add various generic context
+    $record['extra']['key'] = 'value';
+
+    return $record;
+});
+```
 
 ### Framework integration 
 
-Monolog is a part of the following framewok.
+Monolog is a part of the following framework:
 
 * [Symfony2, Symfony3](/logs/languages/php/#symfony-v2-v3)
 * [PPI](/logs/languages/php/#ppi)
@@ -98,7 +129,7 @@ Monolog is a part of the following framewok.
 * [Lumen](/logs/languages/php/#lumen)
 * [CakePHP](/logs/languages/php/#cakephp)
 
-Then, configure the logger as usual
+Integrate Monolog with your framework then configure your logger: 
  
 ```php
  <?php
@@ -121,7 +152,7 @@ $monolog->pushHandler($stream);
 return $r;});
 ```
 
-and then [stream your log files to Datadog](/logs)
+and then [stream your log files to Datadog](/logs/#custom-log-collection)
 
 #### Symfony (v2+, v3+)
 
@@ -269,11 +300,6 @@ This section is about:
 * How to configure Monolog to send logs in JSON
 * How to enrich your Log events with session contextual data
 
-For some part of this doc you need a working PHP Symfony 2 environment. However, you can also follow the instructions if you are or you are planing to use monolog as your logging library.
-
-Depending on your needs, you can send your logs using a common log shipper or directly from your code with the agentless configuration.
-For performance purpose, we recommended to use a log shipper that implements buffer mechanism like rsyslog.
-
 ### Setup - Log into files with Monolog
 
 1. Declare a Monolog Json formatter as a service:
@@ -283,8 +309,6 @@ For performance purpose, we recommended to use a log shipper that implements buf
         monolog.json_formatter:
             class: Monolog\Formatter\JsonFormatter
     ```
-
-    Declaring it is enough because this class is already provided in the Monolog library.
 
 2. Wire the formatter in your Monolog configuration: declare the formatter field as follows:
 
@@ -298,7 +322,7 @@ For performance purpose, we recommended to use a log shipper that implements buf
                 formatter: monolog.json_formatter
     ```
 
-3. [Stream your log files to Datadog](/logs)
+3. [Stream your log files to Datadog](/logs/#custom-log-collection)
 
 ### Adding a session processor to add variable context in your logs
 
@@ -389,13 +413,11 @@ For performance purpose, we recommended to use a log shipper that implements buf
               - { name: monolog.processor, method: processRecord }
   ```
 
-3. Stream generated JSON file to Datadog
+3. [Stream generated JSON file to Datadog](/logs/#custom-log-collection)
 
 ## PHP Zend-Log
 
-Zend-log is a part of the Zend framework, one of the most used. The following documentation is applicable for many applications. There is various way to include Zend-Log to your application. If you are using Zend framework, it's obviously already included.
-
-For any others cases, the recommended way is to use [Composer](https://getcomposer.org/) to add Zend-Log:
+Zend-log is a part of the Zend framework. Use [Composer](https://getcomposer.org/) to add Zend-Log:
 
 ```
 composer require "zendframework/zend-log"
@@ -414,8 +436,6 @@ use Zend\Log\Logger;
 use Zend\Log\Writer\Stream;
 use Zend\Log\Formatter\JsonFormatter;
 ```
-
-Configure Zend to write log into files. Do not forget that your events need to ship by a log shipper.
 
 ### Setup - Log into files with Zend-log
 
@@ -444,13 +464,11 @@ $logger->addWriter($writer);
 Zend\Log\Logger::registerErrorHandler($logger);
 ```
 
-[Stream your log files to Datadog](/logs)
+Then [Stream your log files to Datadog](/logs/#custom-log-collection)
 
 ### Add meta field and context
 
-Much of the usefulness information comes from additional context data that you can add to your logs and your events. Zend-Log makes this very convenient by providing methods to set thread local context data that is then submitted automatically with all events.
-
-At any moment, you can log an event, with a contextual data.
+Much of the usefulness information comes from additional context data that you can add to your logs and your events. Zend-Log makes this very convenient by providing methods to set thread local context data that is then submitted automatically with all events. At any moment, log an event with a contextual data:  
 
 ```php
 <?php
@@ -466,7 +484,7 @@ Use cases include:
 * Injecting substitutions into the message.
 * Injecting a request identifier (in order to later inspect logs for a specific identifier)
 
-Please, take a peek to this code if you want to use it.
+Take a peek to this code if you want to use it:
 
 ```php
 <?php 
@@ -477,7 +495,7 @@ $logger->addProcessor(new Zend\Log\Processor\ReferenceId());
 $logger->addProcessor(new Zend\Log\Processor\RequestId());
 ```
 
-If you want to develop yours, refer at the [Zend documentation](https://docs.zendframework.com/zend-log/processors/).
+If you want to develop yours, [refer the Zend documentation](https://docs.zendframework.com/zend-log/processors/).
 
 ## Further Reading
 
