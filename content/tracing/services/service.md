@@ -9,7 +9,7 @@ further_reading:
 ---
 
 <div class="alert alert-info"> 
-<a href="https://docs.datadoghq.com/getting_started/apm_tracing">Read our APM getting started page</a>to have a bird-eyed view of all tracing concepts
+<a href="https://docs.datadoghq.com/getting_started/apm_tracing">Read the APM Getting Started Guide</a>to get an overview of key APM concepts.
 </div>
 
 ## Overview 
@@ -20,9 +20,9 @@ Selecting a service on the services page leads you to the detailed service page:
 
 Consult on this page:
 
-* Your [service monitor states](#service-monitor) 
-* Your [out of the box graphs](#out-of-the-box-graphs) 
-* Your [Resources](/tracing/services/resource) 
+* [Service monitor states](#service-monitor) 
+* [Out of the box graphs](#out-of-the-box-graphs) 
+* [Resources associated to this service](/tracing/services/resource) 
 
 ## Definition
 

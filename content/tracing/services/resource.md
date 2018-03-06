@@ -9,7 +9,7 @@ further_reading:
 ---
 
 <div class="alert alert-info"> 
-<a href="https://docs.datadoghq.com/getting_started/apm_tracing">Read our APM getting started page</a>to have a bird-eyed view of all tracing concepts
+<a href="https://docs.datadoghq.com/getting_started/apm_tracing">Read the APM Getting Started Guide</a>to get an overview of key APM concepts.
 </div>
 
 {{< img src="tracing/services/resource/ressource.png" alt="Ressource" responsive="true" popup="true">}}
@@ -78,7 +78,7 @@ Zoom on this graph to filter corresponding traces.
 
 ## Traces
 
-Consult the list of sampled traces associated to your service:
+Consult the list of sampled traces associated to your service. Filter/sort this list to see fast/slow and error/non-error traces:  
 
 [Refer to our dedicated trace documentation to learn more](/tracing/services/trace).
 

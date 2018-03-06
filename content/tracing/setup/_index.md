@@ -19,7 +19,7 @@ further_reading:
   text: Ruby language instrumentation
 ---
 
-This documentation covers Agent v6 only, to know how to setup APM tracing with Agent v5, [refer to the dedicated APM with agent v5 doc](/tracing/faq/agent-5-tracing-setup)
+This documentation covers Agent v6 only, to know how to setup APM tracing with Agent v5, [refer to the dedicated APM with agent v5 doc](/tracing/faq/agent-5-tracing-setup).
 
 ## Setup process
 
@@ -74,7 +74,7 @@ If you want to listen to non-local trafic on any other platform, set
 | **main**                |                      |                                                                                                                                                                  |
 | `apm_enabled`           | `DD_APM_ENABLED`     | The Datadog Agent accepts trace metrics when the value is set to `true`. The default value is `true`.                                                            |
 | **trace.sampler**       |                      |                                                                                                                                                                  |
-| `extra_sample_rate`     | -                    | Use this setting to adjust the trace sample rate. The value should be a float between `0` (no sampling) and `1` (normal sampling). The default value is `1` |
+| `extra_sample_rate`     | -                    | Use this setting to adjust the trace sample rate. The value should be a float between `0` (no sampling) and `1` (normal sampling). The default value is `1`. |
 | `max_traces_per_second` | -                    | The maximum number of traces to sample per second. To disable the limit (*not recommended*), set to `0`. The default value is `10`.                              |
 | **trace.receiver**      |                      |                                                                                                                                                                  |
 | `receiver_port`         | `DD_RECEIVER_PORT`   | The port that the Datadog Agent's trace receiver should listen on. The default value is `8126`.                                                                  |

@@ -1,5 +1,5 @@
 ---
-title: APM (Tracing) with agent v5
+title: APM and Distributed Tracing with agent v5
 kind: faq
 private: true
 ---

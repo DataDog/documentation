@@ -11,7 +11,7 @@ further_reading:
 ---
 
 <div class="alert alert-info"> 
-<a href="https://docs.datadoghq.com/getting_started/apm_tracing">Read our APM getting started page</a>to have a bird-eyed view of all tracing concepts
+<a href="https://docs.datadoghq.com/getting_started/apm_tracing">Read the APM Getting Started Guide</a>to get an overview of key APM concepts.
 </div>
 
 ## Overview
@@ -46,13 +46,13 @@ The type of the service can be one of:
 
 We also have some aliases for Integrations such as Postgres, MySQL, and Cassandra which are map to Type: "DB" and Integrations Redis and Memcache which are map to Type: "Cache".
 
-#### Change service color
+### Changing service color
 
-Select your service color to change it:
+Service color is used in [trace visualizations](/services/trace). Select your service color to change it:
 
 {{< img src="tracing/services/service_color.png" alt="Services colors" responsive="true" popup="true" style="width:30%;">}}
 
-## Columns
+## Selecting Columns
 
 Choose what do display in your services list:
 

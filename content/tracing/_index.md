@@ -26,7 +26,7 @@ Datadog APM provides you deep insight into your application's performance - from
 Datadog APM is offered as an upgrade to our Pro and Enterprise plans. A free 14-day trial is available. Registered users can visit the [APM page of the Datadog application](https://app.datadoghq.com/apm/home) to get started.
 
 <div class="alert alert-info"> 
-<a href="https://docs.datadoghq.com/getting_started/apm_tracing">Read our APM getting started page</a>to have a bird-eyed view of all tracing concepts
+<a href="https://docs.datadoghq.com/getting_started/apm_tracing">Read the APM Getting Started Guide</a>to get an overview of key APM concepts.
 </div>
 
 The APM agent (also known as _trace agent_) is shipped by default with the

@@ -9,7 +9,7 @@ further_reading:
 ---
 
 <div class="alert alert-info"> 
-<a href="https://docs.datadoghq.com/getting_started/apm_tracing">Read our APM getting started page</a>to have a bird-eyed view of all tracing concepts
+<a href="https://docs.datadoghq.com/getting_started/apm_tracing">Read the APM Getting Started Guide</a>to get an overview of key APM concepts.
 </div>
 
 ## Definition
