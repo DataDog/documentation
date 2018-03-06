@@ -443,7 +443,7 @@ languages:
           weight: 90
         # LOGS - Subnav start
         - identifier: customnav_lognav_explore
-          name: "Explore"
+          name: "Search & Graph"
           url: "/logs/explore/"
           weight: 30
           parent: menu_references_logs
