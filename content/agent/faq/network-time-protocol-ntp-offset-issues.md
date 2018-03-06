@@ -16,7 +16,7 @@ If you have noticed any of the following issues, they may be related to the NTP
 * Metric delays
 * Gaps in graphs of metrics
 
-To check the NTP offset for a host, you can run the Agent [info command](/agent/#agent-status-and-information), using the instructions appropriate for your OS, and look for the Clocks section:
+To check the NTP offset for a host, you can run the Agent [info command](/agent/faq/agent-commands/#agent-status-and-information), using the instructions appropriate for your OS, and look for the Clocks section:
 
 ```
   Clocks
@@ -31,7 +31,7 @@ Any significant offset can have undesired effects, and we recommend keeping host
 
 Instructions for syncing the system clock with NTP vary based on the operating system being used. Here are some helpful links for different operating systems.
 
-* **Windows**: [How To Synchronize Microsoft Windows to a NTP Server](http://www.timetoolsglobal.com/2013/06/21/how-to-synchronize-microsoft-windows-to-a-ntp-server-1/)
+* **Windows**: [How To Synchronize Microsoft Windows with a NTP Server](https://support.microsoft.com/en-us/help/816042/how-to-configure-an-authoritative-time-server-in-windows-server)
 * **Linux**: [How to force a clock update using NTP?](http://askubuntu.com/questions/254826/how-to-force-a-clock-update-using-ntp)
 * **FreeBSD**: [Clock Synchronization with NTP](http://www.freebsd.org/doc/en/books/handbook/network-ntp.html)
 

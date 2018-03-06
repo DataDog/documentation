@@ -18,7 +18,7 @@ further_reading:
 
 If you ended up at this page and have not yet installed the Datadog Agent, go [to the dedicated agent integration page](https://app.datadoghq.com/account/settings#agent) for installation instructions. If you just installed the Agent, it might take a few moments before you start seeing metrics appear. The first place you should check for metrics is the [Metrics Explorer](https://app.datadoghq.com/metric/explorer).
 
-If you think you might be experiencing issues, the first thing to do is [run the info command](/agent/#agent-status-and-information) and check the [Agent logs](/agent/#log-locations).
+If you think you might be experiencing issues, the first thing to do is [run the info command](/agent/faq/agent-commands/#agent-status-and-information) and check the [Agent logs](/agent/#log-locations).
 
 If you're still unsure about the issue, you may reach out to [Datadog support team](/help) along with [a flare](#send-a-flare) of your agent.
 
@@ -34,8 +34,31 @@ To enable the full debug mode:
 
 4. Wait a few minutes to generate some logs. [Look here](/agent/#log-locations) to find the location of the logs.
 
-## Send a flare
+### Obtaining debug logs from the container agent
 
+This process covers agent v6 only, for agent v5 refer to [the dedicated documentation on how to collect more logs with the Datadog container agent v5](/agent/faq/agent-5-container-more-log)
+
+**Set the `DD_LOG_LEVEL=debug` environment variable when starting your agent.**
+
+If your container is already running:
+
+1. To avoid that your process is restarted by S6, run:  
+    
+    `rm /var/run/s6/services/agent/finish`
+
+2. Then stop the agent:
+    
+    ```
+    s6-svc -d /var/run/s6/services/agent/
+    ```
+
+3. Restart then the agent with debug log level by running:
+    
+    ```
+    DD_LOG_LEVEL=debug agent start
+    ```
+
+## Send a flare
 
 If you are running the 5.3 version (or higher) of the agent, you're able to send all necessary troubleshooting information to our Support Team, with one flare command!
 

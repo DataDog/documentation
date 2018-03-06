@@ -1,9 +1,14 @@
 ---
 title: How does Datadog determine the agent hostname?
 kind: faq
+aliases:
+    - /agent/faq/how-can-i-change-the-hostname/
 ---
 
-The Datadog Agent collects potential hostnames from a number of different sources. To see all the names the Agent is detecting, [run the Agent info command](/agent/#agent-status-and-information), for example:
+
+{{< img src="agent/faq/agent_hostname.jpeg" alt="Agent hostname scheme" responsive="true" popup="true">}}
+
+The Datadog Agent collects potential hostnames from a number of different sources. To see all the names the Agent is detecting, [run the Agent info command](/agent/faq/agent-commands/#agent-status-and-information), for example:
 ```
 $ sudo /etc/init.d/datadog-agent info
 

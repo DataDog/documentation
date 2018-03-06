@@ -46,11 +46,11 @@ Text in a notebook is formatted with Markdown, which means notebooks can include
 
 ### Manipulating cells
 
-When an existing notebook is opened, its cells are in a closed state. To open a cell for editing, click on it or navigate to it with the arrow keys and press Enter . To close a cell, click outside it or press EnterTo close a cell, click outside it or pressEscor⌘+Enter. Only one cell may be open at any time.
+When an existing notebook is opened, its cells are in a closed state. To open a cell for editing, click on it or navigate to it with the arrow keys and press Enter . To close a cell, click outside it or press `⌘+ Enter`. Only one cell may be open at any time.
 
 {{< img src="graphing/notebooks/states.png" alt="states" responsive="true" popup="true">}}
 
-To insert, clone or delete cells, click **theicon** that appears to the left of the cell number — or use a keyboard shortcut. A list of all keyboard shortcuts is available by clicking **thebutton** in the notebook header or pressing?.
+To insert, clone or delete cells, click the icon that appears to the left of the cell number — or use a keyboard shortcut. A list of all keyboard shortcuts is available by clicking the button in the notebook header.
 Cells also may be re-ordered by using keyboard shortcuts.
 
 ### Changing time frames
@@ -79,7 +79,7 @@ When a user visits the URL for a specific cell, its notebook is opened to show t
 
 ### Saving, renaming, and deleting a notebook
 
-To save a notebook, press `⌘+` Sor click the “Save” button in the notebook header. After a new notebook has been saved once, it continues to autosave at regular intervals. A notebook also may be saved manually at any time between autosaves. To ensure you don’t lose work, you’ll be prompted for confirmation if you attempt to leave a notebook with unsaved changes.
+To save a notebook, press `⌘+` or click the “Save” button in the notebook header. After a new notebook has been saved once, it continues to autosave at regular intervals. A notebook also may be saved manually at any time between autosaves. To ensure you don’t lose work, you’ll be prompted for confirmation if you attempt to leave a notebook with unsaved changes.
 
 To rename a notebook, click the name field in the notebook header.
 

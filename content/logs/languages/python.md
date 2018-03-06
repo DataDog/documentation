@@ -16,10 +16,6 @@ further_reading:
   text: Log Collection Troubleshooting Guide
 ---
 
-<div class="alert alert-info">
-Datadog's Logs is currently available via public beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
-</div>
-
 ## Overview
 
 Use your favorite python logger to log into a file on your host. Then [monitor this file with your Datadog agent](/logs/languages/python/#configure-the-Datadog-agent) to send your logs to Datadog.
