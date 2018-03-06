@@ -89,7 +89,7 @@ $ ls -l /var/log | grep -i mysql
 drwxr-x--- 2 mysql mysql 4096 Feb 20 06:25 mysql
 ```
 
-The easiest path here is to give everyone the read access to ht file in the logrotate configuration:
+The easiest path here is to give everyone read access to the file in the logrotate configuration:
 
 ```
 /var/log/mysql/mysql_error.log /var/log/mysql/mysql-slow.log {
