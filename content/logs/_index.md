@@ -10,7 +10,7 @@ description: "Configure your Datadog agent to gather logs from your host, contai
 
 Log collection requires an Agent version >= 6.0. Older versions of the Agent do not include the `Log collection` interface that is used for log collection.
 
-If you are not using it already, please follow [the agent installation instruction](https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md).
+If you are not using it already, please follow [the agent installation instruction](/agent).
 
 Collecting logs is **disabled** by default in the Datadog Agent, you need to enable it in `datadog.yaml`:
 
