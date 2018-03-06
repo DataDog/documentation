@@ -52,7 +52,7 @@ To ensure keeping a representative sample set of traces, Datadog combines multip
 
 ### Signature Sampling
 
-Signature Sampling ensures a sampling of a variety of [traces](/tracing/services/trace) (errors, successes) for each [resource](/tracing/services/resource) (endpoint, database query).  
+Signature Sampling ensures a sampling of a variety of [traces](/tracing/visualization/trace) (errors, successes) for each [resource](/tracing/visualization/resource) (endpoint, database query).  
 
 Datadog computes a *signature* for every trace reported, based on its services, resources, errors, etc.. Traces of the same signature are considered similar. For example, a signature could be:
 

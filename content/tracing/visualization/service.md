@@ -2,15 +2,19 @@
 title: Service
 kind: Documentation
 further_reading:
-- link: "/tracing/services/resource"
-  text: "Dive into your resource performances and traces"
-- link: "/tracing/services/trace"
-  text: "Understand how to read a Datadog Trace"
+- link: "/tracing/setup/"
+  tag: "Documentation"
+  text: Learn how to setup APM tracing with your application
+- link: "/tracing/visualization/services_list/"
+  tag: "Documentation"
+  text: Discover the list of services reporting to Datadog
+- link: "/tracing/visualization/resource"
+  tag: "Documentation"
+  text: Dive into your resource performances and traces
+- link: "/tracing/visualization/trace"
+  tag: "Documentation"
+  text: Understand how to read a Datadog Trace
 ---
-
-<div class="alert alert-info"> 
-<a href="https://docs.datadoghq.com/getting_started/apm_tracing">Read the APM Getting Started Guide</a>to get an overview of key APM concepts.
-</div>
 
 ## Overview 
 
@@ -22,38 +26,7 @@ Consult on this page:
 
 * [Service monitor states](#service-monitor) 
 * [Out of the box graphs](#out-of-the-box-graphs) 
-* [Resources associated to this service](/tracing/services/resource) 
-
-## Definition
-
-**A service is a set of processes that do the same job.**  
-For instance, a simple web application may consist of two services: 
-
-* A single `webapp` service and a single `database` service
-
-While a more complex environment may break it out into 6 services: 
-
-* 3 separate services: `webapp`, `admin`, and `query`.
-* 3 separate external service:  `master-db`,  `replica-db`, and `yelp-api`.
-
-Explicitly name services by instrumenting your application. For example in Python:  
-
-```python
-from ddtrace import tracer
-# add the `wrap` decorator to trace an entire function
-@tracer.wrap(service='my-app')
-```
-
-Read more about manually instrumenting your application for [Go](/tracing/setup/go/#opentracing-api), [Java](/tracing/setup/java/#manual-instrumentation), [Python](/tracing/setup/python/#example), [Ruby](/tracing/setup/ruby/#example)."
-
-Service names:
-
-* **must be lowercase, alphanumeric characters**.
-* **cannot have more than 50 characters**.
-* **cannot contain spaces** (spaces are replaced with underscores).
-* must adhere to [metric naming rules](/developers/metrics/).
-
-**Note**: Service must have a type attached, [learn more on Service type]().
+* [Resources associated to this service](/tracing/visualization/resource) 
 
 ## Service monitor
 
@@ -105,7 +78,7 @@ Consult the list of resources associated to your service:
 
 {{< img src="tracing/services/service/resources.png" alt="Resources" responsive="true" popup="true" style="width:90%;">}}
 
-[Refer to our dedicated resource documentation to learn more](/tracing/services/resource).
+[Refer to our dedicated resource documentation to learn more](/tracing/visualization/resource).
 
 ### Filtering the resources list
 Filter your resources list with a query for basic text filtering:

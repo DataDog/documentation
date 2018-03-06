@@ -1,6 +1,6 @@
 ---
 title: Distributed Tracing
-kind: documentation
+kind: faq
 further_reading:
 - link: "/tracing/setup/"
   tag: "Documentation"
@@ -127,22 +127,22 @@ The code above is already instrumented. Please [refer to the dedicated setup doc
 
 ### Datadog APM
 
-Once the code is executed, we start to see data in [APM](https://app.datadoghq.com/apm/home). On the [Service List](/tracing/services), our two services, **thinker-api** and **thinker-microservice**, have appeared with some metrics about their performance:
+Once the code is executed, we start to see data in [APM](https://app.datadoghq.com/apm/home). On the [Service List](/tracing/visualization/services_list/), our two services, **thinker-api** and **thinker-microservice**, have appeared with some metrics about their performance:
 
 {{< img src="tracing/product_specs/distributed_tracing/services_GS.png" alt="Services list getting started" responsive="true" popup="true">}}
 
-Clicking on **thinker-api** directs you to it's automatically generated [service dashboard](/tracing/services/service). Here we can see more detailed performance data, as well as a list of all of the resources associated with this particular service:
+Clicking on **thinker-api** directs you to it's automatically generated [service dashboard](/tracing/visualization/service). Here we can see more detailed performance data, as well as a list of all of the resources associated with this particular service:
 
-* [Graphs illustrating service performance](/tracing/services/service/#out-of-the-box-graphs)
-* [A list of resources](/tracing/services/resource) attached to this particular service:
+* [Graphs illustrating service performance](/tracing/visualization/service/#out-of-the-box-graphs)
+* [A list of resources](/tracing/visualization/resource) attached to this particular service:
 
 {{< img src="tracing/product_specs/distributed_tracing/resources_thinker_api_GS.png" alt="Resources thinker api getting started" responsive="true" popup="true" style="width:80%;">}}
 
 The first function executed in this example is `think_handler()`, which handles the request and forwards it to the **thinker-microservice** service.
 
-Selecting the **thinker_handler** resource directs you to it's automatically generated [resource dashboard](/tracing/services/resource) and a list of traces for this particular resource:
+Selecting the **thinker_handler** resource directs you to it's automatically generated [resource dashboard](/tracing/visualization/resource) and a list of traces for this particular resource:
 
-* [Graphs illustrating resource performances](/tracing/services/resource/#out-of-the-box-graphs)
+* [Graphs illustrating resource performances](/tracing/visualization/resource/#out-of-the-box-graphs)
 * [A list of sampled traces](/tracing/product_specs/trace_sampling_and_storage) attached to this particular resource:
 
 {{< img src="tracing/product_specs/distributed_tracing/traces_thinker_api_GS.png" alt="traces thinker api getting started" responsive="true" popup="true" style="width:50%;">}}
@@ -157,7 +157,7 @@ Selecting a trace opens the _trace panel_ containing information such as:
 
 {{< img src="tracing/product_specs/distributed_tracing/trace_thinker_api_GS.png" alt="trace thinker api getting started" responsive="true" popup="true" style="width:80%;">}}
 
-From the above image, we can see how the request is first received by the **thinker-api** service with the `flask.request` [span](/tracing/services/trace), which transmits the processed request to the **thinker-microservice** service, which executes the function `think()` twice.
+From the above image, we can see how the request is first received by the **thinker-api** service with the `flask.request` [span](/tracing/visualization/trace), which transmits the processed request to the **thinker-microservice** service, which executes the function `think()` twice.
 
 In our code we added:
 ```
@@ -172,7 +172,7 @@ Which allows us to get more context every time `think()` is called and traced:
 * The second time `think` is executed, the *subject* is **foo_bar** which is not an expected value and leads to an error:
     {{< img src="tracing/product_specs/distributed_tracing/traces_thinker_mircroservice_GS_2.png" alt="Thinker microservice getting started 2" responsive="true" popup="true" style="width:80%;">}}
 
-    The specific display of this error is achieved automatically by the Datadog instrumentation, but you can override it with [special meaning tag rules](/tracing/services/trace/#traces-special-meaning-tags).
+    The specific display of this error is achieved automatically by the Datadog instrumentation, but you can override it with [special meaning tag rules](/tracing/visualization/trace/#traces-special-meaning-tags).
 
 
 The Datadog APM allows you to trace all interactions of a request with the different services and resources of any application.

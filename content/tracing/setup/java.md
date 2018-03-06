@@ -60,7 +60,7 @@ The tracer is configured using System Properties and Environment Variables as fo
 
 ## Manual Instrumentation
 
-Before instrumenting your application, review Datadog’s [APM Terminology](/tracing/services) and familiarize yourself with the core concepts of Datadog APM. If you aren't using a [supported framework instrumentation](#integrations), or you would like additional depth in your application’s traces, you may want to to manually instrument your code.  
+Before instrumenting your application, review Datadog’s [APM Terminology](/tracing/visualization/services_list/) and familiarize yourself with the core concepts of Datadog APM. If you aren't using a [supported framework instrumentation](#integrations), or you would like additional depth in your application’s traces, you may want to to manually instrument your code.  
 
 Do this either using the [Trace annotation](#trace-annotation) for simple method call tracing or with the [OpenTracing API](#opentracing-api) for complex tracing.
 

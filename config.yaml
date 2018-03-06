@@ -60,11 +60,6 @@ languages:
           url: "/getting_started/custom_metrics/"
           weight: 330
           parent: menu_references_getting_started
-        - identifier: customnav_getting_started_apm
-          name: "Getting started with APM"
-          url: "/getting_started/apm_tracing/"
-          weight: 340
-          parent: menu_references_getting_started
 
         # AGENT
         - identifier: menu_references_agent
@@ -424,34 +419,37 @@ languages:
           weight: 170
           parent: customnav_tracingnav_setup
 
-        # Services
-        - identifier: customnav_tracingnav_services
-          name: "Services List"
-          url: "/tracing/services/"
+        # visualization
+        - identifier: customnav_tracingnav_visualization
+          name: "Visualization"
+          url: "/tracing/visualization/"
           weight: 20
           parent: menu_references_tracing
-        - identifier: customnav_tracingnav_service
-          name: "Service"
-          url: "/tracing/services/service"
+        - identifier: customnav_tracingnav_services_list
+          name: "Services List"
+          url: "/tracing/visualization/service_list"
           weight: 210
-          parent: customnav_tracingnav_services
+          parent: customnav_tracingnav_visualization
+        - identifier: customnav_tracingnav_service
+          name: "Service graphs"
+          url: "/tracing/visualization/service"
+          weight: 210
+          parent: customnav_tracingnav_visualization
         - identifier: customnav_tracingnav_resource
-          name: "Resource"
-          url: "/tracing/services/resource"
+          name: "Resource graphs"
+          url: "/tracing/visualization/resource"
           weight: 220
-          parent: customnav_tracingnav_services
+          parent: customnav_tracingnav_visualization
         - identifier: customnav_tracingnav_trace
           name: "Trace"
-          url: "/tracing/services/trace"
+          url: "/tracing/visualization/trace"
           weight: 230
-          parent: customnav_tracingnav_services
-
-        # Traces
+          parent: customnav_tracingnav_visualization
         - identifier: customnav_tracingnav_traces
           name: "Traces Search"
-          url: "/tracing/traces/"
-          weight: 30
-          parent: menu_references_tracing
+          url: "/tracing/visualization/trace_search/"
+          weight: 240
+          parent: customnav_tracingnav_visualization
 
         # Trace API
         - identifier: customnav_tracingnav_api

@@ -2,44 +2,21 @@
 title: Resource
 kind: Documentation
 further_reading:
-- link: "/tracing/services/service"
+- link: "/tracing/setup/"
+  tag: "Documentation"
+  text: Learn how to setup APM tracing with your application
+- link: "/tracing/visualization/services_list/"
+  tag: "Documentation"
+  text: Discover the list of services reporting to Datadog
+- link: "/tracing/visualization/service"
+  tag: "Documentation"
   text: Learn more about services in Datadog
-- link: "/tracing/services/trace"
-  text: "Understand how to read a Datadog Trace"
+- link: "/tracing/visualization/trace"
+  tag: "Documentation"
+  text: Understand how to read a Datadog Trace
 ---
 
-<div class="alert alert-info"> 
-<a href="https://docs.datadoghq.com/getting_started/apm_tracing">Read the APM Getting Started Guide</a>to get an overview of key APM concepts.
-</div>
-
 {{< img src="tracing/services/resource/ressource.png" alt="Ressource" responsive="true" popup="true">}}
-
-## Definition
-
-**A Resource is particular action for a service**.  
-
-* For a web application: some examples might be a canonical URL like `/user/home` or a handler function like `web.user.home` (often referred to as "routes" in MVC frameworks).  
-* For a SQL database: a resource would be the SQL of the query itself like `select * from users where id = ?`.
-
-Resources should be grouped together under a canonical name, like `/user/home` rather than have `/user/home?id=100` and `/user/home?id=200` as separate resources.
-
-These resources can be found after clicking on a particular [service](/tracing/services/#resource).
-
-Resource names: 
-
-* **must be lowercase, alphanumeric characters**
-* **cannot exceed 5000 bytes**
-
-### Resource Cardinality
-
-When a resource such as URL or SQL query cannot be aggregated, it significantly increases the cardinality of resources (ie. the number of unique aggregate resources) to be stored in Datadog.  
-
-Having a very high cardinality of resources makes Datadog less usable:
-
-* Lots of entry in the resource list is not optimal for navigation
-* Statistics are less relevant (as they are too fragmented)
-
-As a result we have a hard limit on the cardinality of resources for a given service.
 
 ## Out of the box graphs
 
@@ -80,7 +57,7 @@ Zoom on this graph to filter corresponding traces.
 
 Consult the list of sampled traces associated to your service. Filter/sort this list to see fast/slow and error/non-error traces:  
 
-[Refer to our dedicated trace documentation to learn more](/tracing/services/trace).
+[Refer to our dedicated trace documentation to learn more](/tracing/visualization/trace).
 
 {{< img src="tracing/services/resource/traces_list.png" alt="Traces list" responsive="true" popup="true" style="width:90%;">}}
 

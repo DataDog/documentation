@@ -2,33 +2,22 @@
 title: Trace
 kind: Documentation
 further_reading:
-- link: "/tracing/services/service"
+- link: "/tracing/setup/"
+  tag: "Documentation"
+  text: Learn how to setup APM tracing with your application
+- link: "/tracing/visualization/services_list/"
+  tag: "Documentation"
+  text: Discover the list of services reporting to Datadog
+- link: "/tracing/visualization/service"
+  tag: "Documentation"
   text: Learn more about services in Datadog
-- link: "/tracing/services/resource"
-  text: "Dive into your resource performances and traces"
+- link: "/tracing/visualization/resource"
+  tag: "Documentation"
+  text: Dive into your resource performances and traces
+- link: "/tracing/visualization/trace"
+  tag: "Documentation"
+  text: Understand how to read a Datadog Trace
 ---
-
-<div class="alert alert-info"> 
-<a href="https://docs.datadoghq.com/getting_started/apm_tracing">Read the APM Getting Started Guide</a>to get an overview of key APM concepts.
-</div>
-
-## Definition
-
-{{< img src="tracing/services/trace/tracing-terminology.png" alt="Visualizing tracing terms" responsive="true" popup="true" style="width:80%;">}}
-
-### Trace
-
-**A trace is used to track the time spent by an application processing a single operation, each trace consists of one or more spans.**  
-
-For example, a trace can be used to track the entire time spent processing a complicated web request. Even though the request may require multiple resources and machines to handle the request, all of these function calls and sub-requests would be encapsulated within a single trace.
-
-### Spans
-
-**A span represents a logical unit of work in the system.**  
-
-Spans are associated with a [Service](/tracing/services/service) and optionally a [resource](/tracing/services/resource). Each span consists of a start time, a duration, and optional tags. For example, a span can describe the time spent on a distributed call on a separate machine, or the time spent in a small component within a larger operation. Spans can be nested within each other, and in those instances will have a parent-child relationship.
-
-## Trace in Datadog
 
 Selecting a trace offers you the list of spans associated to it with a flame graph display:
 

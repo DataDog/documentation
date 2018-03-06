@@ -19,7 +19,7 @@ further_reading:
   text: Ruby language instrumentation
 ---
 
-This documentation covers Agent v6 only, to know how to setup APM tracing with Agent v5, [refer to the dedicated APM with agent v5 doc](/tracing/faq/agent-5-tracing-setup).
+This documentation covers Agent v6 only, to know how to setup APM tracing with Agent v5, [refer to the dedicated APM with agent v5 doc](/tracing/faq/agent-5-tracing-setup).  
 
 ## Setup process
 
@@ -84,50 +84,6 @@ If you want to listen to non-local trafic on any other platform, set
 {{% /table %}}
 
 For more information about the Datadog Agent, see the [dedicated doc page](/agent/) or refer to the [`datadog.conf.example` file](https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example).
-
-## Example: Simple tracing
-
-We have a Flask Python application that when called on `/doc` returns **42**
-
-We instrumented our python code in order to generate traces from it:
-
-```python
-import time
-import blinker as _
-
-from flask import Flask, Response
-
-from ddtrace import tracer
-from ddtrace.contrib.flask import TraceMiddleware
-
-# Tracer configuration
-tracer.configure(hostname='datadog')
-app = Flask('API')
-traced_app = TraceMiddleware(app, tracer, service='doc_service')
-
-@tracer.wrap(name='doc_work')
-def work():
-    time.sleep(0.5)
-    return 42
-
-@app.route('/doc/')
-def doc_resource():
-    time.sleep(0.3)
-    res = work()
-    time.sleep(0.3)
-    return Response(str(res), mimetype='application/json')
-```
-
-Each time its called, the following code produces this **trace**:
-
-{{< img src="tracing/simple_trace.png" alt="Simple Trace" responsive="true" popup="true">}}
-
-|Term|Definition|Note|
-|:----|:-----|:---|
-|[Service](/tracing/services/service)|Name of a set of processes that do the same job| Services are displayed on the [Datadog Services list](/tracing/services) and have [out of the box performances graphs](/tracing/services/service/#out-of-the-box-graphs).|
-|[Resource](/tracing/services/resource)|Particular action for a service|Resources are available on the [Resources list for each service](/tracing/services/service/#resources) and have [out of the box performances graphs](/tracing/services/resource/#out-of-the-box-graphs)|
-|[Trace](/tracing/services/trace)|Representation of a request as it flows across a distributed system| A trace can be collected in [any language](/tracing/setup). Traces are found in the [Traces list for each resources](/tracing/services/resource/#traces) or in the [Trace search directly](/tracing/traces)|
-|[Span](/tracing/services/trace/#spans) |A logical unit of work in the system| Spans are associated with a [Service](/tracing/services/service) and optionally a [Resource](/tracing/services/resource). Each span consists of a start time, a duration, and optional tags.|
 
 ## Further Reading
 
