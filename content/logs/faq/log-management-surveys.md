@@ -1,6 +1,8 @@
 ---
 title: Log Management - Surveys
 kind: faq
+aliases:
+    - /logs/faq/log-management-surveys-and-beta-application
 ---
 
 Datadog's log management solution complements and integrates with its Infrastructure and Application Performance Monitoring solutions. You can enable Datadog's log features from within your [Datadog account here](https://app.datadoghq.com/logs), and you can help continue to guide its product development by sharing your own experience/interests with log management from the following surveys:
