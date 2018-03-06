@@ -4,6 +4,8 @@ kind: Documentation
 description: "Configure your Datadog agent to gather logs from your host, containers & services."
 ---
 
+{{< vimeo 243374392 >}}
+
 ## Getting started with the Agent
 
 Log collection requires an Agent version >= 6.0. Older versions of the Agent do not include the `Log collection` interface that is used for log collection.
