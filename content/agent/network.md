@@ -52,13 +52,13 @@ The information is structured as JSON following this schema:
 
 ## Open Ports
 
-* 17123/tcp: agent forwarder, used to buffer traffic in case of network
+* **`17123/tcp`**: agent forwarder, used to buffer traffic in case of network
   splits between the agent and Datadog
-* 17124/tcp: optional graphite adapter
-* 8125/udp: dogstatsd
+* **`17124/tcp`**: optional graphite adapter
+* **`8125/udp`**: dogstatsd
 
 Starting with version 3.4.0, these ports are available on localhost
-(127.0.0.1, ::1 and fe80::1 only), unless `non_local_traffic` is set
+(`127.0.0.1`, `::1` and `fe80::1` only), unless `non_local_traffic` is set
 to true.
 
 ## Default Agent Network Traffic
@@ -77,9 +77,9 @@ For a detailed configuration guide on proxy setup, head over to [Proxy Configura
 
 ## New agent endpoints
 
-Versioned endpoints start with Agent 5.2.0, i.e. each version of the agent will hit a different endpoint based on the version of the *Forwarder*.  
+Versioned endpoints start with Agent 5.2.0, i.e. each version of the agent hits a different endpoint based on the version of the *Forwarder*.  
 
-* i.e. Agent 5.2.0 will hit 5-2-0-app.agent.datadoghq.com  
+* i.e. Agent 5.2.0 hits `5-2-0-app.agent.datadoghq.com`  
 
 As a consequence whitelist `*.agent.datadoghq.com` in your firewalls.
 
