@@ -16,7 +16,14 @@
 
 {{ if or (not (eq $.Page.Site.Params.environment "local")) ($.Page.Site.Data.integrations) }}
 
-  {{ $data := index $.Page.Site.Data.integrations $integration }}
+  <!-- get lang specific data file -->
+  {{ $.Scratch.Set "data" "" }}
+  {{ if ne $.Page.Lang "en"}}
+      {{ $.Scratch.Set "data" (index $.Page.Site.Data.integrations (print $integration "." $.Page.Lang)) }}
+  {{ else }}
+      {{ $.Scratch.Set "data" (index $.Page.Site.Data.integrations $integration) }}
+  {{ end }}
+  {{ $data := ($.Scratch.Get "data") }}
 
 
     {{ if (index $params 1 ) }} {{/* Custom metrics set in shortcode param index 1 (second position) */}}
