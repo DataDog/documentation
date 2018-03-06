@@ -29,7 +29,7 @@ This decision was taken after the POODLE problem, now versioned endpoints start 
 
 As a consequence whitelist `*.agent.datadoghq.com` in your firewalls.
 
-These domains are **CNAME** pointing to a set of static IP addresses, these addresses can be found at:  
+These domains are **CNAME** records pointing to a set of static IP addresses, these addresses can be found at:  
 
 * [https://ip-ranges.datadoghq.com](https://ip-ranges.datadoghq.com)
 
