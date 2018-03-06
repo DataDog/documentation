@@ -7,8 +7,8 @@ transifex:
 sources:
 - src: "content/**/*.md"
   dst: "*.{lang}.md"
-#- src: "data/**/*.yaml"
-#  dst: "*.{lang}.yaml"
+- src: "data/**/*.yaml"
+  dst: "*.{lang}.yaml"
 github:
   org: 'DataDog'
   repo: 'documentation'
