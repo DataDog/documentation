@@ -23,7 +23,11 @@ further_reading:
     1. **Agents < 5.2.0** `app.datadoghq.com`
     1. **Agents >= 5.2.0** `<version>-app.agent.datadoghq.com`
 
-This decision was taken after the POODLE problem, see the [new agent endpoints details](#new-agent-endpoints)
+This decision was taken after the POODLE problem, now versioned endpoints start with Agent 5.2.0, i.e. each version of the agent hits a different endpoint based on the version of the *Forwarder*.  
+
+* i.e. Agent 5.2.0 hits `5-2-0-app.agent.datadoghq.com`  
+
+As a consequence whitelist `*.agent.datadoghq.com` in your firewalls.
 
 These domains are **CNAME** pointing to a set of static IP addresses, these addresses can be found at:  
 
@@ -61,27 +65,9 @@ Starting with version 3.4.0, these ports are available on localhost
 (`127.0.0.1`, `::1` and `fe80::1` only), unless `non_local_traffic` is set
 to true.
 
-## Default Agent Network Traffic
-
-### Debian, Ubuntu, RedHat, CentOS Mac OS X
-
-In most cases (on linux) you run the agent by installing `datadog-agent`: In that case traffic flows like this:
-
-    datadog-agent --(localhost:17123)--> datadog-agent --(https)--> https://app.datadoghq.com
-
-_Or `<version>-app.agent.datadoghq.com` from version 5.2.x_
-
 ## Using Proxies
 
 For a detailed configuration guide on proxy setup, head over to [Proxy Configuration](/agent/proxy).
-
-## New agent endpoints
-
-Versioned endpoints start with Agent 5.2.0, i.e. each version of the agent hits a different endpoint based on the version of the *Forwarder*.  
-
-* i.e. Agent 5.2.0 hits `5-2-0-app.agent.datadoghq.com`  
-
-As a consequence whitelist `*.agent.datadoghq.com` in your firewalls.
 
 ## Further Reading
 
