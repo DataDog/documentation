@@ -19,7 +19,7 @@ If you prefer, the Agent can also be installed by following our step-by-step ins
 Set up the Datadog deb repo on your system and import Datadog's apt key:
 
     sudo sh -c "echo 'deb http://apt.datadoghq.com/ unstable main' > /etc/apt/sources.list.d/datadog.list"
-    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C7A7DA52
+    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 382E94DE
 
 Update your local apt repo and install the Agent:
 

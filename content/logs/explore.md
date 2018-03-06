@@ -1,5 +1,5 @@
 ---
-title: Explore
+title: Search & Graph
 kind: documentation
 description: "The Logs Explorer is your Datadog home base for troubleshooting and exploration over your logs."
 further_reading:
@@ -10,10 +10,6 @@ further_reading:
   tag: "Documentation"
   text: Learn more about parsing
 ---
-
-<div class="alert alert-info">
-Datadog's Logs is currently available via public beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
-</div>
 
 ## Overview 
 
@@ -27,11 +23,13 @@ In this view you can:
 * [Display lists of logs](#log-list)
 * [Use facets to filter your Logstream](#facets)
 * [Enter search queries](#search-bar)
+* [Perform analytics with Log Graphs](#log-graph)
 
 ## Time Range
-The time range allows you to display logs within a given time period. It appears directly under the search bar as a timeline. The timeline can be displayed or wrapped up with the **Show Graph** check box:
 
-{{< img src="logs/explore/timeline.png" alt="Timeline" responsive="true" popup="true" >}}
+The time range allows you to display logs within a given time period. It appears directly under the search bar as a timeline. The timeline can be displayed or wrapped up with the **Show timeline** check box:
+
+{{< img src="logs/explore/timeline.png" alt="Timeline" responsive="true" popup="true" style="width:50%;">}}
 
 Quickly change the time range by selecting a preset range from the dropdown:
 
@@ -57,7 +55,7 @@ You can click on any log line to see more details about it:
 
 Click on its `host` or `service` and select `View in context` to see log lines dated just before and after a selected log - even if they don't match your filter -
 
-{{< img src="logs/explore/focus_host_service.png" style="width:50%;" alt="focus on host and service.png" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="logs/explore/focus_host_service.png" style="width:50%;" alt="focus on host and service.png" responsive="true" popup="true" style="width:70%;">}}
 
 ### Columns
 To add more log details to the list, click the **Columns** button and select any facets you want to see:
@@ -182,6 +180,22 @@ The same logic must be applied to spaces within log attributes. It is not recomm
 If an attribute was called `user.first name`, perform a search on this attribute by escaping the space:
 
 `@user.first\ name:myvalue`
+
+## Log Graph
+
+Switch between the Log List and the Log Graph mode by clicking on this button:
+
+{{< img src="logs/explore/graph/log_graph_switch.png" alt="Log graph switch" responsive="true" popup="true" style="width:80%;">}}
+
+To start using it:
+
+1. Choose the Measure to graph
+2. Split by [Tag](/getting_started/tagging) or [Facet](#facets) to split your graph over the desired dimension.
+{{< img src="logs/explore/graph/split_by_log_graph.png" alt="split by log graph" responsive="true" popup="true" style="width:80%;">}}
+
+3. See logs related to a section of the graph:  
+    Select or click on a section of the graph to either zoom in the graph or see the list of logs corresponding to your selection: 
+    {{< img src="logs/explore/graph/using_log_graph.gif" alt="using log graph" responsive="true" popup="true" style="width:80%;">}}
 
 ## Further Reading
 

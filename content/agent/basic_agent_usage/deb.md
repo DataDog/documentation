@@ -3,6 +3,7 @@ title: Basic Agent Usage for Debian
 kind: documentation
 aliases:
     - /guides/basic_agent_usage/deb/
+    - /agent/basic_agent_usage/install_debian_5/
 further_reading:
 - link: "/logs/"
   tag: "Documentation"
@@ -121,7 +122,7 @@ To install on a clean box (or have an existing agent 5 install from which you do
 
     ```
     sudo sh -c "echo 'deb https://apt.datadoghq.com/ stable 6' > /etc/apt/sources.list.d/datadog.list"
-    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 C7A7DA52
+    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 382E94DE
     ```
 
     Note: You might need to install `dirmngr` to add Datadog's apt key.
@@ -158,7 +159,7 @@ To install on a clean box (or have an existing agent 5 install from which you do
 
     ```shell
     sudo rm /etc/apt/sources.list.d/datadog.list [ ! -f /etc/apt/sources.list.d/datadog.list ] &&  echo 'deb https://apt.datadoghq.com/ stable main' | sudo tee /etc/apt/sources.list.d/datadog.list
-    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 C7A7DA52
+    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 382E94DE
     ```
 
 3. Update apt and downgrade the agent

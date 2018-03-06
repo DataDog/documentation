@@ -322,6 +322,11 @@ languages:
           url: "/monitors/monitor_types/integration/"
           weight: 380
           parent: customnav_monitornav_monitor_types
+        - identifier: customnav_monitortypenav_monitor
+          name: "Log"
+          url: "/monitors/monitor_types/log"
+          weight: 385
+          parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_metric
           name: "Metric"
           url: "/monitors/monitor_types/metric/"
@@ -498,13 +503,13 @@ languages:
 
         # LOGS
         - identifier: menu_references_logs
-          name: "Logs"
+          name: "Log Management"
           url: "/logs/"
           pre: "nav_logs"
           weight: 90
         # LOGS - Subnav start
         - identifier: customnav_lognav_explore
-          name: "Explore"
+          name: "Search & Graph"
           url: "/logs/explore/"
           weight: 30
           parent: menu_references_logs
@@ -520,7 +525,7 @@ languages:
           parent: menu_references_logs
         - identifier: customnav_lognav_aws
           name: "AWS Log collection"
-          url: "/logs/aws/"
+          url: "/integrations/amazon_web_services/#log-collection"
           weight: 60
           parent: menu_references_logs
         - identifier: docker_log_collection
@@ -563,6 +568,11 @@ languages:
           url: "/logs/languages/ruby/"
           weight: 860
           parent: customnav_lognav_languages
+        - identifier: customnav_lognav_monitor
+          name: "Log monitor"
+          url: "/monitors/monitor_types/log"
+          weight: 90
+          parent: menu_references_logs
         #- identifier: customnav_lognav_faq
         #  name: "FAQ"
         #  url: "/logs/faq/"

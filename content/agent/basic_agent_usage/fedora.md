@@ -186,7 +186,6 @@ To install on a clean box (or have an existing agent 5 install from which you do
 
 ```
 $ sudo apt-get --purge remove datadog-agent -y
-CentOS/RHEL/Amazon Linux
 ```
 
 ## Further Reading

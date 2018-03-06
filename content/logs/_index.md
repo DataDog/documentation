@@ -1,12 +1,8 @@
 ---
-title: Log Collection
+title: Log Management
 kind: Documentation
 description: "Configure your Datadog agent to gather logs from your host, containers & services."
 ---
-
-<div class="alert alert-info">
-Datadog's Logs is currently available via public beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
-</div>
 
 ## Getting started with the Agent
 
@@ -92,6 +88,8 @@ logs:
 
 ```
 * [Restart your agent](https://help.datadoghq.com/hc/en-us/articles/203764515-Start-Stop-Restart-the-Datadog-Agent)
+
+The agent supports raw string and JSON formated logs. If you are sending logs in batch, use break line characters to separate your logs.
 
 ## Advanced log collection functions
 

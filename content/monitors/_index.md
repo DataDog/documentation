@@ -5,6 +5,7 @@ aliases:
     - /guides/monitors/
     - /guides/monitoring/
     - /guides/alerting/
+    - /guides/monitors/the-conditions
 description: Create & manage your notifications
 ---
 
