@@ -56,17 +56,23 @@ The information is structured as JSON following this schema:
 
 ## Open Ports
 
-* **For all Agent version**:
+### Agent v6
 
   * **`8125/udp`**: dogstatsd
 
-* **For Agent version < 6.0**: 
+  Unless `dogstatsd_non_local_traffic` is set to true. These ports are available on localhost: 
+
+  * `127.0.0.1`
+  * `::1` 
+  * `fe80::1`
+
+### Agent v4 and v5 
 
   * **`17123/tcp`**: agent forwarder, used to buffer traffic in case of network
   splits between the agent and Datadog
   * **`17124/tcp`**: optional graphite adapter
 
-    Unless `non_local_traffic` is set to true. These ports are available on localhost: 
+  Unless `non_local_traffic` is set to true. These ports are available on localhost: 
 
   * `127.0.0.1`
   * `::1` 
