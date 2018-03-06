@@ -50,7 +50,7 @@ We also have some aliases for Integrations such as Postgres, MySQL, and Cassandr
 
 ### Changing service color
 
-Service color is used in [trace visualizations](/services/trace). Select your service color to change it:
+Service color is used in [trace visualizations](/tracing/visualization/trace). Select your service color to change it:
 
 {{< img src="tracing/services/service_color.png" alt="Services colors" responsive="true" popup="true" style="width:30%;">}}
 

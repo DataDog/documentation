@@ -488,12 +488,7 @@ languages:
           url: "/tracing/product_specs/trace_sampling_and_storage"
           weight: 450
           parent: customnav_tracingnav_product_specs
-        - identifier: customnav_tracingnav_distributed_tracing
-          name: "Distributed Tracing "
-          url: "/tracing/product_specs/distributed_tracing"
-          weight: 460
-          parent: customnav_tracingnav_product_specs
-
+        
         #- identifier: customnav_tracingnav_faq
         #  name: "FAQ"
         #  url: "/tracing/faq/"
