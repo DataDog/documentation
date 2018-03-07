@@ -11,6 +11,8 @@ sources:
   dst: "*.{lang}.yaml"
 - src: "data/service_checks/*.json"
   dst: "*.{lang}.json"
+- src: "i18n/en.json"
+  dst: "{lang}.json"
 github:
   org: 'DataDog'
   repo: 'documentation'
