@@ -1,4 +1,8 @@
-## Rsyslog
+---
+title: Rsyslog Log collection
+kind: Documentation
+description: "Configure Rsyslog to gather logs from your host, containers & services."
+---
 
 1. (Optional) Activate Rsyslog file monitoring module:  
     If you want to watch/monitor specific log files, then you have to activate the imfile module by adding this to  your `rsyslog.conf`:

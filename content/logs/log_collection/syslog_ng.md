@@ -1,4 +1,8 @@
-## Syslog-ng
+---
+title: Syslog-ng Log collection
+kind: Documentation
+description: "Configure Syslog-ng to gather logs from your host, containers & services."
+---
 
 1. Collect system logs and log files In `/etc/syslog-ng/syslog-ng.conf` make sure the source is correctly defined:
     ```

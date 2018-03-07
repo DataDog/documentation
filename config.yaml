@@ -446,6 +446,36 @@ languages:
           url: "/logs/"
           pre: "nav_logs"
           weight: 90
+        - identifier: customnav_lognav_collection
+          name: "Log collection"
+          url: "/logs/log_collection/"
+          weight: 20
+          parent: menu_references_logs
+        - identifier: customnav_lognav_fluentd
+          name: "FluentD"
+          url: "/logs/log_collection/fluentd"
+          weight: 210
+          parent: customnav_lognav_collection
+        - identifier: customnav_lognav_logstash
+          name: "Logstash"
+          url: "/logs/log_collection/logstash"
+          weight: 220
+          parent: customnav_lognav_collection
+        - identifier: customnav_lognav_nxlog
+          name: "NxLog"
+          url: "/logs/log_collection/nxlog"
+          weight: 230
+          parent: customnav_lognav_collection
+        - identifier: customnav_lognav_rsyslog
+          name: "Rsyslog"
+          url: "/logs/log_collection/rsyslog"
+          weight: 240
+          parent: customnav_lognav_collection
+        - identifier: customnav_lognav_syslog_ng
+          name: "Syslog-ng"
+          url: "/logs/log_collection/syslog_ng"
+          weight: 250
+          parent: customnav_lognav_collection
         # LOGS - Subnav start
         - identifier: customnav_lognav_explore
           name: "Search & Graph"

@@ -1,3 +1,40 @@
+---
+title: Datadog Agent Log collection
+kind: Documentation
+description: "Configure your Datadog agent to gather logs from your host, containers & services."
+aliases:
+  - /logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers
+---
+
+The best and easiest way to send logs to Datadog is through the Datadog Agent.  Log collection requires an Agent version >= 6.0. Older versions of the Agent do not include the `Log collection` interface that is used for log collection.  
+
+If you are not using it already, please follow [the agent installation instruction](/agent).
+
+Collecting logs is **disabled** by default in the Datadog Agent, you need to enable it in `datadog.yaml`:
+
+```
+logs_enabled: true
+```
+
+The Datadog agent sends its logs to Datadog over TLS-encrypted TCP. This requires outbound communication over port `10516`.
+
+That said, you can also send logs to Datadog using many common non-Datadog log shippers, like the following:
+
+* [Rsyslog](/logs/log_collection/rsyslog)
+* [FluentD](/logs/log_collection/fluentd)
+* [Logstash](/logs/log_collection/logstash)
+* [Syslog-ng](/logs/log_collection/syslog_ng)
+* [NXLog (Windows)](/logs/log_collection/nxlog)
+
+## Enabling log collection from integrations
+To start collecting logs for a given integration, uncomment the logs section in that integration's yaml file, and configure it for your environment.  
+
+<div class="alert alert-warning">
+Not all integrations include out of the box log configurations.  <a href="https://docs.datadoghq.com/integrations/#cat-log-collection">Consult the current list of supported integrations available</a>.
+</div>
+
+If an integration does not support logs by default, [use the custom file configuration](/logs/log_collection).
+
 ## Custom log collection
 
 The Datadog Agent v6 can collect logs from files or the network (TCP or UDP) and forward them to Datadog. To configure this, create a new repository and yaml file named after your log source  in the Agent's **conf.d** directory ( `conf.d/python.d/conf.yaml` for python logs, ...) and set these options:
@@ -8,6 +45,17 @@ The Datadog Agent v6 can collect logs from files or the network (TCP or UDP) and
 * `source` : (mandatory) attribute that defines which integration is sending the logs. "If the logs do not come from an existing integration then this field may include a custom source name. But we recommend matching this value to the namespace of any related [custom metrics](/getting_started/custom_metrics/) you are collecting, e.g, `myapp` from `myapp.request.count`)"
 * `sourcecategory` : (optional) Multiple value attribute. Can be used to refine the source attribtue. Example: source:mongodb, sourcecategory:db_slow_logs
 * `tags`: (optional) add tags to each log collected.
+
+## Forwarding logs from other shippers to the Datadog Log Agent
+
+The Datadog Log Agent can be configured:
+
+* [To tail logs from files](/logs/#tail-existing-files)
+* [To listen for logs via UDP or TCP over a given port](/logs/#stream-logs-through-tcp-udp). 
+ 
+So whatever your log shipper is, one option is just to have that shipper forward its logs to the Datadog Log Agent; it is often easy to configure this kind of setup, both from the dd-agent side, and from your log shipper. With this approach, you don't need to add your Datadog API key, hostname, or source values in your log shipper's configurations, since that is handled by the Datadog Log Agent. 
+
+This approach can be especially useful for sending to Datadog logs that have heightened permission requirements. The dd-agent does not run as root (and as a best practice we do not encourage running it as root), so that can block the Datadog Logs Agent from tailing some log files directly, such as /var/log/syslog. If you do not want to modify the permissions on these files or the access that you give to the dd-agent user, many of these open source log shippers do run as root, and can be used to forward logs to the Datadog Logs Agent over UDP / TCP. 
 
 ## Tail existing files
 Set `type` to **file** then specify the absolute `path` to the log file you want to tail.

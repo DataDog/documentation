@@ -1,4 +1,9 @@
-## NXLog
+---
+title: NXLog Log collection
+kind: Documentation
+description: "Configure NXLog to gather logs from your host, containers & services."
+---
+
 
 1. Configure NXLog to send your logs to your Datadog platform
     Replace the whole file in `C:\Program Files\nxlog\conf` by the following: 

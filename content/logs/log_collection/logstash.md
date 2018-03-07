@@ -1,4 +1,8 @@
-## Logstash
+---
+title: Logstash Log collection
+kind: Documentation
+description: "Configure Logstash to gather logs from your host, containers & services."
+---
 
 We have [an ouput plugin](https://github.com/DataDog/logstash-output-datadog_logs) for Logstash that takes care of sending your logs to your Datadog platform.
 
