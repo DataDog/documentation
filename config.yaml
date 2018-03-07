@@ -424,9 +424,9 @@ languages:
           weight: 170
           parent: customnav_tracingnav_setup
 
-        # visualization
+        # Using the APM UI
         - identifier: customnav_tracingnav_visualization
-          name: "Visualization"
+          name: "Using the APM UI"
           url: "/tracing/visualization/"
           weight: 20
           parent: menu_references_tracing
@@ -436,17 +436,17 @@ languages:
           weight: 210
           parent: customnav_tracingnav_visualization
         - identifier: customnav_tracingnav_service
-          name: "Service graphs"
+          name: "Service page"
           url: "/tracing/visualization/service"
           weight: 210
           parent: customnav_tracingnav_visualization
         - identifier: customnav_tracingnav_resource
-          name: "Resource graphs"
+          name: "Resource page"
           url: "/tracing/visualization/resource"
           weight: 220
           parent: customnav_tracingnav_visualization
         - identifier: customnav_tracingnav_trace
-          name: "Trace"
+          name: "Trace page"
           url: "/tracing/visualization/trace"
           weight: 230
           parent: customnav_tracingnav_visualization

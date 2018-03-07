@@ -17,6 +17,9 @@ further_reading:
 - link: "/tracing/setup/ruby"
   tag: "Documentation"
   text: Ruby language instrumentation
+- link: "/tracing/setup/environment"
+  tag: "Documentation"
+  text: "Learn more about environment configuration"
 ---
 
 This documentation covers Agent v6 only, to know how to setup APM tracing with Agent v5, [refer to the dedicated APM with agent v5 doc](/tracing/faq/agent-5-tracing-setup).  
@@ -28,7 +31,7 @@ With our infrastructure monitoring, metrics are sent to the Agent, which then fo
 To start tracing your application:
 
 1. **Install the Datadog Agent**:    
-  Install and configure the latest [Datadog Agent](https://app.datadoghq.com/account/settings#agent) (version 6.0 or above is required). For additional information, reference the [getting started guide](https://github.com/DataDog/datadog-trace-agent/tree/master/config#agent-configuration).
+  Install and configure the latest [Datadog Agent](https://app.datadoghq.com/account/settings#agent). For additional information, reference the [getting started guide](https://github.com/DataDog/datadog-trace-agent/tree/master/config#agent-configuration).
 
 2. **Install the Trace Agent**:  
 
@@ -51,7 +54,7 @@ To start tracing your application:
   - [Python](/tracing/setup/python)
   - [Ruby](/tracing/setup/ruby)
 
-    To instrument an application written in a language that does not yet have official library support, reference the [Tracing API](/api/?lang=console#traces), or visit our list of [community tracing libraries](/developers/libraries/#community-tracing-apm-libraries).
+    To instrument an application written in a language that does not yet have official library support, visit our list of [community tracing libraries](/developers/libraries/#community-tracing-apm-libraries).
 
 ## Agent configuration
 
@@ -63,10 +66,8 @@ apm_config:
   enabled: true
 ```
 
-For the Docker image, the APM agent is disabled by default. Enable it by setting the `DD_APM_ENABLED` envvar to `true`. It then listen to all interfaces by default.  
+[Reference the dedicated documentation to setup tracing with Docker](/tracing/setup/docker)
 
-If you want to listen to non-local trafic on any other platform, set
-`apm_config.apm_non_local_traffic = true` in your `datadog.yaml`.
 
 {{% table responsive="true" %}}
 | File setting            | Environment variable | Description                                                                                                                                                      |

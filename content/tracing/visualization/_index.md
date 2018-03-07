@@ -19,7 +19,7 @@ further_reading:
   text: Understand how to read a Datadog Trace
 ---
 
-APM collects metrics on your app’s performance at three levels of granularity: _services_, _resources_, and _trace_ level.
+APM collects metrics on your app’s performance at four levels of granularity: _services_, _resources_, _trace_, and _span_ level.
 
 ## Services
 
@@ -33,7 +33,7 @@ While a more complex environment may break it out into 6 services:
 * 3 separate services: `webapp`, `admin`, and `query`.
 * 3 separate external service:  `master-db`,  `replica-db`, and `yelp-api`.
 
-APM automatically assigns names to your services; however you can also name them explicitly. See instructions for: [Go](/tracing/setup/go/), [Java](/tracing/setup/java/#configuration), [Python](/tracing/setup/python/), [Ruby](/tracing/setup/ruby/).
+APM automatically assigns names to your services; however you can also name them explicitly. See instructions for: [Go](https://godoc.org/github.com/DataDog/dd-trace-go/tracer#Service), [Java](/tracing/setup/java/#configuration), [Python](http://pypi.datadoghq.com/trace/docs/#get-started), [Ruby](http://www.rubydoc.info/gems/ddtrace/).
 
 Service names:
 
@@ -62,7 +62,7 @@ Resource names:
 * **must be lowercase, alphanumeric characters**
 * **cannot exceed 5000 bytes**
 
-[Alert](/monitors/monitor_types/apm/) on any resource level metric. Read more about monitoring resources in APM on the [resource dashboard](/tracing/visualization/resource) page.
+[Alert](/tracing/faq/how-to-create-a-monitor-over-every-resource-apm) on any resource level metric. Read more about monitoring resources in APM on the [resource dashboard](/tracing/visualization/resource) page.
 
 ### Resource Cardinality
 
@@ -75,7 +75,6 @@ Having a very high cardinality of resources makes Datadog less usable:
 
 As a result we have a hard limit on the cardinality of resources for a given service.
 
-{{< img src="tracing/services/trace/tracing-terminology.png" alt="Visualizing tracing terms" responsive="true" popup="true" style="width:80%;">}}
 
 ### Trace
 
@@ -89,7 +88,7 @@ For example, a trace can be used to track the entire time spent processing a com
 
 Spans are associated with a [Service](/tracing/visualization/service) and optionally a [resource](/tracing/visualization/resource). Each span consists of a start time, a duration, and optional tags. For example, a span can describe the time spent on a distributed call on a separate machine, or the time spent in a small component within a larger operation. Spans can be nested within each other, and in those instances will have a parent-child relationship.
 
-{{< img src="getting_started/trace_span_image.png" alt="Trace span image" responsive="true" popup="true">}}
+{{< img src="getting_started/trace_span_image.png" alt="Trace span image" responsive="true" popup="true" style="width:80%;">}}
 
 ## Further Reading
 

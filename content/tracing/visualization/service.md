@@ -1,5 +1,5 @@
 ---
-title: Service
+title: Service page
 kind: Documentation
 further_reading:
 - link: "/tracing/setup/"
@@ -15,6 +15,12 @@ further_reading:
   tag: "Documentation"
   text: Understand how to read a Datadog Trace
 ---
+
+A service is a set of processes that do the same job - for example a web framework or database (read more about how services are defined in [Getting Started with APM](/tracing/visualisation). For each service, APM automatically generates a dashboard page covering:
+
+* Key health metrics
+* Monitor status for all monitors associated with this service
+* List and metrics for all resources associated with this service
 
 ## Overview 
 
@@ -36,7 +42,7 @@ Datadog propose list of monitor depending of your service type:
 
 Enable them directly or create your own [APM monitors](/monitors/monitor_types/apm).
 
-**Note**: Tag any monitor with `service:<SERVICE_NAME>` to attach it to an APM service.
+**Note**: Tag any monitor with `service:<SERVICE_NAME>` to attach it to an APM service.  
 
 ## Out of the box graphs
 
@@ -55,6 +61,8 @@ Datadog provides out of the box graphs for any given Service:
 * Sub-Services: When there is multiple service involved a 4th graph is available that breaks down your **Total time spent**/**%of time spent**/**Avg time per request** of your service by *services* or *type*. For services like *Postgres* or *Redis*, which are "final" operations not calling other service underneath, there will be no Sub-services graph.
 
 {{< img src="tracing/services/service/out_of_the_box_service_graph.png" alt="Out of the bow service graphs" responsive="true" popup="true" style="width:90%;">}}
+
+**Note**: Use the *cogs* icon to display all options available for any given graph.
 
 ### Export to Timeboard
 

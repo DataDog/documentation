@@ -3,7 +3,7 @@ title: Resource/Trace doesn't show up under correct service
 kind: faq
 ---
 
-When using a custom instrumentation of your application, if you notice any Resources/Traces in the Datadog UI that aren’t coupled the service you expect, the most likely scenario is explained below.
+When using a custom instrumentation of your application, if you notice any Resources/traces in the Datadog UI that aren’t coupled the service you expect, the most likely scenario is explained below.
 
 A Resource is connected to a service by more than the service Name - it is also done via the Name of the top-level span of the trace. This means that a service requires a top level name to be consistent across your resources.  
 See this in the following image in the address bar:
@@ -18,7 +18,7 @@ If any Resource displays in the UI under another service, despite having the sam
 
 For example, if you have a Resource with a service named tornado-notification with a top level name of tornado.notify, any Resource that had both this service Name and top level Name applied would display under this service. However, if you have a Resource that has a service name of tornado-notification with a top level name of web_identification, this Resource won’t be available under the existing tornado-notification | tornado.sotify Service in the UI.
 
-These Resources, with a top level name of web_identification still appear in the Datadog Application, and can be viewed under the Traces section of the APM navigation menu.
+These Resources, with a top level name of web_identification still appear in the Datadog Application, and can be viewed under the traces section of the APM navigation menu.
 
 An example of modifying the top level name for Python can be found below:
 

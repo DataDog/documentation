@@ -58,7 +58,7 @@ Additionally, some configuration options may be set as environment variables. No
 | `receiver_port` | `DD_RECEIVER_PORT` | The port that the Datadog Agent's trace receiver should listen on. The default value is `8126`. |
 | `connection_limit` | - | The number of unique client connections to allow during one 30 second lease period. The default value is `2000`. |
 | **trace.ignore** |
-| `resource` | `DD_IGNORE_RESOURCE` | A blacklist of regular expressions to filter out Traces by their Resource name. |
+| `resource` | `DD_IGNORE_RESOURCE` | A blacklist of regular expressions to filter out traces by their Resource name. |
 {{% /table %}}
 
 For more information about the Datadog Agent, see the [dedicated doc page](/agent/) or refer to the [`datadog.conf.example` file](https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example).

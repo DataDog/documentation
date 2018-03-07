@@ -41,8 +41,6 @@ Environments in traces and configuration files are normalized:
 
 The default environment for un-tagged data is `env:none`. See below to see how to specify custom environments.:
 
-**Note**: if you are using environments, you still get a default `env:none` environment where all the non-tagged data goes.
-
 #### Setup
 
 There are several ways to specify an environment when reporting data:

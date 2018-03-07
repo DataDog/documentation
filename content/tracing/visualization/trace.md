@@ -1,5 +1,5 @@
 ---
-title: Trace
+title: Trace page
 kind: Documentation
 further_reading:
 - link: "/tracing/setup/"
@@ -19,7 +19,7 @@ further_reading:
   text: Understand how to read a Datadog Trace
 ---
 
-Selecting a trace offers you the list of spans associated to it with a flame graph display:
+Selecting a trace offers you the list of spans associated to it with a flame graph display of each spans with their associated metadata:
 
 {{< img src="tracing/services/trace/trace.png" alt="Trace" responsive="true" popup="true" style="width:90%;">}}
 

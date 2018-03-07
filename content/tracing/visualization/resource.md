@@ -1,5 +1,5 @@
 ---
-title: Resource
+title: Resource page
 kind: Documentation
 further_reading:
 - link: "/tracing/setup/"
@@ -18,6 +18,8 @@ further_reading:
 
 {{< img src="tracing/services/resource/ressource.png" alt="Ressource" responsive="true" popup="true">}}
 
+See the list of resources associated with your service. Resources are particular actions for your services (typically individual endpoints or queries). Read more about resources in [Getting Started with APM](/tracing/visualisation). Sort the resources for this service by requests, latency, errors, and time, to identify areas of high traffic or potential trouble. Note that the these metric columns are configurable (see image below).
+
 ## Out of the box graphs
 
 Datadog provides out of the box graphs for any given Resource:
@@ -34,6 +36,8 @@ Datadog provides out of the box graphs for any given Resource:
 * Sub-Services: When there is multiple service involved a 4th graph is available that breaks down your **Total time spent**/**%of time spent**/**Avg time per request** of your service by *services* or *type*. For services like *Postgres* or *Redis*, which are "final" operations not calling other service underneath, there will be no Sub-services graph.
 
 {{< img src="tracing/services/resource/resource_otb_graphs.png" alt="Out of the bow resource graphs" responsive="true" popup="true" style="width:90%;">}}
+
+**Note**: Use the *cogs* icon to display all options available for any given graph.
 
 ### Export to Timeboard
 
