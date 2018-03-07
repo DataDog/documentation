@@ -73,7 +73,7 @@ The information is structured as JSON following this schema:
   * **`17124/tcp`**: optional graphite adapter
   * **`8125/udp`**: dogstatsd
 
-  Unless `non_local_traffic` is set to true. This port is available on localhost: 
+  Unless `non_local_traffic` is set to true. Those port are available on localhost: 
 
   * `127.0.0.1`
   * `::1` 
