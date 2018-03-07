@@ -60,7 +60,7 @@ The information is structured as JSON following this schema:
 
   * **`8125/udp`**: dogstatsd
 
-  Unless `dogstatsd_non_local_traffic` is set to true. These ports are available on localhost: 
+  Unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost: 
 
   * `127.0.0.1`
   * `::1` 
@@ -71,8 +71,9 @@ The information is structured as JSON following this schema:
   * **`17123/tcp`**: agent forwarder, used to buffer traffic in case of network
   splits between the agent and Datadog
   * **`17124/tcp`**: optional graphite adapter
+  * **`8125/udp`**: dogstatsd
 
-  Unless `non_local_traffic` is set to true. These ports are available on localhost: 
+  Unless `non_local_traffic` is set to true. This port is available on localhost: 
 
   * `127.0.0.1`
   * `::1` 
