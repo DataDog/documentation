@@ -37,7 +37,7 @@ If your Kubernetes has RBAC enabled, see the [documentation on how to configure 
 
 * Create the following `datadog-agent.yaml` manifest:
 
-```yaml
+```
 apiVersion: extensions/v1beta1
 kind: DaemonSet
 metadata:
@@ -117,6 +117,41 @@ Replace `YOUR_API_KEY` with [your api key](https://app.datadoghq.com/account/set
 
 **Note**:  This manifest enables autodiscovery's auto configuration feature. To learn how to configure autodiscovery, please refer to [its documentation](https://docs.datadoghq.com/agent/autodiscovery).
 
+#### Log collection setup
+
+To enable [Log collection](/logs) with your DaemonSet:
+
+1. Set the `DD_LOGS_ENABLED` variable to true in your *env* section:
+    
+    ```
+    (...)
+      env: 
+        (...)
+        - name: DD_LOGS_ENABLED
+            value: "true"
+    (...)
+    ```
+
+
+2. Mount the `pointdir` volume in *volumeMounts*:
+
+  ```
+    (...)
+      volumeMounts:
+        (...)
+        - name: pointerdir
+            mountPath: /opt/datadog-agent/run
+    (...)
+    volumes:
+      (...)
+      - hostPath:
+            path: /opt/datadog-agent/run
+          name: pointerdir
+    (...)
+  ```
+
+Learn more about this in [the Docker log collection documentation](/logs/docker/#configuration-file-example). 
+
 ### RBAC
 
 In the context of using the Kubernetes integration, and when deploying agents in a Kubernetes cluster, a set of rights are required for the agent to integrate seamlessly.
@@ -174,6 +209,22 @@ And in the manifest of your agent (Daemonset/Deployment) add the following:
               path: http_check.yaml
 [...]
 ```
+
+
+To enable [Log collection](/logs) add the following lines in your `http-config`:
+
+```
+(...)
+data:
+  http-config: |-
+  (...)
+    logs:
+      - type: docker
+        service: docker
+        source: kubernetes 
+```
+
+Learn more about this in [the Docker log collection documentation](/logs/docker/#configuration-file-example). 
 
 ##### Annotations
 
