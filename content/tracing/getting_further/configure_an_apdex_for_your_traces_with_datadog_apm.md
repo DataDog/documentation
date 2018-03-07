@@ -1,6 +1,8 @@
 ---
-title: How to configure an Apdex for your traces with Datadog APM ?
-kind: faq
+title: Configure an Apdex for your traces with Datadog APM.
+kind: documentation
+aliases:
+    - /tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm
 ---
 
 [Apdex](http://apdex.org/overview.html) (Application Performance Index) is an open standard developed by an alliance of companies that defines a standardized method to report, benchmark, and track application performance. Based on user experience satisfaction by measuring the response time of web applications and services, its role is to counterbalance response time average and percentiles  which can be misleading by some extreme data points

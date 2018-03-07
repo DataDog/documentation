@@ -468,36 +468,44 @@ languages:
           weight: 410
           parent: menu_references_tracing
 
-        # Trace monitor
-        - identifier: customnav_tracingnav_apm_monitor
-          name: "APM Monitor"
-          url: "/monitors/monitor_types/apm"
-          weight: 420
-          parent: menu_references_tracing
+        
 
-        # Trace Dashboards
+        # Getting further
+        - identifier: customnav_tracingnav_getting_further
+          name: "Getting further"
+          url: "/tracing/getting_further/"
+          weight: 40
+          parent: menu_references_tracing
+        - identifier: customnav_tracingnav_apdex
+          name: "Apdex"
+          url: "/tracing/getting_further/configure_an_apdex_for_your_traces_with_datadog_apm"
+          weight: 410
+          parent: customnav_tracingnav_getting_further
+        - identifier: customnav_tracingnav_resource_monitor
+          name: "Resource Monitor"
+          url: "/tracing/getting_further/resource_monitor"
+          weight: 420
+          parent: customnav_tracingnav_getting_further
+        - identifier: customnav_tracingnav_apm_monitor
+          name: "Service Monitor"
+          url: "/monitors/monitor_types/apm"
+          weight: 430
+          parent: customnav_tracingnav_getting_further
         - identifier: customnav_tracingnav_apm_widget
           name: "APM in Dashboard"
           url: "/graphing/dashboards/widgets/#service-summary"
-          weight: 430
-          parent: menu_references_tracing
-
-        # Tracing Product Specs
-        - identifier: customnav_tracingnav_product_specs
-          name: "Product Specs"
-          url: "/tracing/product_specs/"
-          weight: 40
-          parent: menu_references_tracing
+          weight: 440
+          parent: customnav_tracingnav_getting_further
         - identifier: customnav_tracingnav_metrics_namespace
           name: "Trace metrics namespace"
-          url: "/tracing/product_specs/metrics_namespace"
-          weight: 440
-          parent: customnav_tracingnav_product_specs
+          url: "/tracing/getting_further/metrics_namespace"
+          weight: 450
+          parent: customnav_tracingnav_getting_further
         - identifier: customnav_tracingnav_apm_sampling_storage
           name: "Storage & Sampling"
-          url: "/tracing/product_specs/trace_sampling_and_storage"
-          weight: 450
-          parent: customnav_tracingnav_product_specs
+          url: "/tracing/getting_further/trace_sampling_and_storage"
+          weight: 460
+          parent: customnav_tracingnav_getting_further
         
         #- identifier: customnav_tracingnav_faq
         #  name: "FAQ"

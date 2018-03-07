@@ -143,7 +143,7 @@ The first function executed in this example is `think_handler()`, which handles 
 Selecting the **thinker_handler** resource directs you to it's automatically generated [resource dashboard](/tracing/visualization/resource) and a list of traces for this particular resource:
 
 * [Graphs illustrating resource performances](/tracing/visualization/resource/#out-of-the-box-graphs)
-* [A list of sampled traces](/tracing/product_specs/trace_sampling_and_storage) attached to this particular resource:
+* [A list of sampled traces](/tracing/getting_further/trace_sampling_and_storage) attached to this particular resource:
 
 {{< img src="tracing/product_specs/distributed_tracing/traces_thinker_api_GS.png" alt="traces thinker api getting started" responsive="true" popup="true" style="width:50%;">}}
 

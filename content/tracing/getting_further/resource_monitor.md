@@ -1,6 +1,8 @@
 ---
 title: How to create a Monitor over every Resource (APM)? 
-kind: faq
+kind: documentation
+aliases:
+    - /tracing/faq/how-to-create-a-monitor-over-every-resource-apm
 ---
 
 Datadog’s Application Performance Monitoring component consists of a few key components: Services and Resources being the top most layers.  
