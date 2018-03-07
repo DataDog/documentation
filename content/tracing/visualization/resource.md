@@ -18,7 +18,7 @@ further_reading:
 
 {{< img src="tracing/visualization/resource/ressource.png" alt="Ressource" responsive="true" popup="true">}}
 
-See the list of resources associated with your service. Resources are particular actions for your services (typically individual endpoints or queries). Read more about resources in [Getting Started with APM](/tracing/visualisation). Sort the resources for this service by requests, latency, errors, and time, to identify areas of high traffic or potential trouble. Note that the these metric columns are configurable (see image below).
+See the list of resources associated with your service. Resources are particular actions for your services (typically individual endpoints or queries). Read more about resources in [Getting Started with APM](/tracing/visualization). Sort the resources for this service by requests, latency, errors, and time, to identify areas of high traffic or potential trouble. Note that the these metric columns are configurable (see image below).
 
 ## Out of the box graphs
 
