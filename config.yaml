@@ -451,6 +451,16 @@ languages:
           url: "/logs/log_collection/"
           weight: 20
           parent: menu_references_logs
+        - identifier: customnav_lognav_aws
+          name: "AWS"
+          url: "/integrations/amazon_web_services/#log-collection"
+          weight: 205
+          parent: customnav_lognav_collection
+        - identifier: docker_log_collection
+          name: "Docker"
+          url: "/logs/log_collection/docker"
+          weight: 208
+          parent: customnav_lognav_collection
         - identifier: customnav_lognav_fluentd
           name: "FluentD"
           url: "/logs/log_collection/fluentd"
@@ -491,16 +501,6 @@ languages:
           name: "Parsing"
           url: "/logs/parsing/"
           weight: 50
-          parent: menu_references_logs
-        - identifier: customnav_lognav_aws
-          name: "AWS Log collection"
-          url: "/integrations/amazon_web_services/#log-collection"
-          weight: 60
-          parent: menu_references_logs
-        - identifier: docker_log_collection
-          name: "Docker Log collection"
-          url: "/logs/docker"
-          weight: 70
           parent: menu_references_logs
         - identifier: customnav_lognav_languages
           name: "Languages"
