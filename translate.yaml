@@ -9,6 +9,8 @@ sources:
   dst: "*.{lang}.md"
 - src: "data/**/*.yaml"
   dst: "*.{lang}.yaml"
+- src: "data/service_checks/*.json"
+  dst: "*.{lang}.json"
 github:
   org: 'DataDog'
   repo: 'documentation'
