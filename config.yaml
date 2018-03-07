@@ -437,7 +437,7 @@ languages:
           parent: menu_references_tracing
         - identifier: customnav_tracingnav_services_list
           name: "Services List"
-          url: "/tracing/visualization/service_list"
+          url: "/tracing/visualization/services_list"
           weight: 210
           parent: customnav_tracingnav_visualization
         - identifier: customnav_tracingnav_service

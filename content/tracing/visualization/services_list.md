@@ -19,9 +19,9 @@ further_reading:
 ## Overview
 
 After you have [instrumented your application](/tracing/setup), your reporting services appear on [the APM services page](https://app.datadoghq.com/apm/services).  
-Select a service view detailed performance insights, [read our dedicated service documentation to learn more](.tracing/visualization/service)
+Select a service view detailed performance insights, [read our dedicated service documentation to learn more](/tracing/visualization/service)
 
-{{< img src="tracing/services/services_page.png" alt="Services page" responsive="true" popup="true">}}
+{{< img src="tracing/visualization/services_page.png" alt="Services page" responsive="true" popup="true">}}
 
 ## Filtering the service list
 
@@ -31,7 +31,7 @@ The services list is a bird's eye view of all [services](/tracing/visualization/
 * [Service type](#services-types)
 * A query (basic text filtering)
 
-{{< img src="tracing/services/services_filtering.gif" alt="Services filtering" responsive="true" popup="true" style="width:75%;">}}
+{{< img src="tracing/visualization/services_filtering.gif" alt="Services filtering" responsive="true" popup="true" style="width:75%;">}}
 
 ### Services types
 
@@ -52,7 +52,7 @@ We also have some aliases for Integrations such as Postgres, MySQL, and Cassandr
 
 Service color is used in [trace visualizations](/tracing/visualization/trace). Select your service color to change it:
 
-{{< img src="tracing/services/service_color.png" alt="Services colors" responsive="true" popup="true" style="width:30%;">}}
+{{< img src="tracing/visualization/service_color.png" alt="Services colors" responsive="true" popup="true" style="width:30%;">}}
 
 ## Selecting Columns
 
@@ -64,7 +64,7 @@ Choose what do display in your services list:
 * **Apdex**: Apdex score of the service, [learn more on Apdex](/tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm)
 * **Monitor status**: [Status of monitors](/tracing/visualization/service/#service-monitor) attached to a service
 
-{{< img src="tracing/services/services_columns.png" alt="Services columns" responsive="true" popup="true" style="width:40%;">}}
+{{< img src="tracing/visualization/services_columns.png" alt="Services columns" responsive="true" popup="true" style="width:40%;">}}
 
 ## Further Reading
 
