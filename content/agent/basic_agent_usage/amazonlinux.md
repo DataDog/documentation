@@ -156,7 +156,7 @@ To install on a clean box (or have an existing agent 5 install from which you do
 
     ```shell
     sudo rm /etc/yum.repos.d/datadog.repo [ ! -f /etc/apt/sources.list.d/datadog.list ] &&  echo 'deb https://apt.datadoghq.com/ stable main' | sudo tee /etc/apt/sources.list.d/datadog.list
-    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 C7A7DA52
+    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 382E94DE
     ```
 
 3. Update apt and downgrade the agent
@@ -173,7 +173,6 @@ To uninstall the agent run:
 
 ```
 $ sudo apt-get --purge remove datadog-agent -y
-CentOS/RHEL/Amazon Linux
 ```
 
 ## Further Reading

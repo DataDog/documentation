@@ -30,6 +30,10 @@ body {
   word-wrap: break-word;
 }
 
+iframe {
+  border:none;
+}
+
 .banner body {
   padding-top:159px;
 }
@@ -287,6 +291,10 @@ h2 {
   }
 }
 
+//content images
+.shortcode-img img {
+  border: 1px solid #d6d6d6;
+}
 
 // popup images
 .pop {

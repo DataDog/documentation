@@ -1,8 +1,18 @@
 {{ $dot := . }}
+
+<!-- get lang specific data file -->
+{{ $.Scratch.Set "data" "" }}
+{{ if ne $dot.Page.Lang "en"}}
+    {{ $.Scratch.Set "data" (index $dot.Page.Site.Data.partials (print "platforms." $dot.Page.Lang)) }}
+{{ else }}
+    {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.platforms }}
+{{ end }}
+{{ $datafile := ($.Scratch.Get "data") }}
+
 <div class="d-none d-sm-block">
-    <h3>To get started using the Agent, please select your platform.</h3>
+    <h3>{{ i18n "agent_started_sentence" }}</h3>
     <div class="row cards-dd platform-nav mt-4 d-none d-sm-flex">
-        {{ range $dot.Page.Site.Data.partials.platforms.platforms }}
+        {{ range $datafile.platforms }}
             <div class="col-6 col-sm-3 col-md-2-4 col-lg-2-4 col-xl-2-4">
                 <a class="card" href="{{ $dot.Site.BaseURL }}{{ .link }}">
                     <div class="card-body text-center">

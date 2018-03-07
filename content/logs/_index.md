@@ -1,14 +1,16 @@
 ---
-title: Log Collection
+title: Log Management
 kind: Documentation
 description: "Configure your Datadog agent to gather logs from your host, containers & services."
 ---
+
+{{< vimeo 243374392 >}}
 
 ## Getting started with the Agent
 
 Log collection requires an Agent version >= 6.0. Older versions of the Agent do not include the `Log collection` interface that is used for log collection.
 
-If you are not using it already, please follow [the agent installation instruction](https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md).
+If you are not using it already, please follow [the agent installation instruction](/agent).
 
 Collecting logs is **disabled** by default in the Datadog Agent, you need to enable it in `datadog.yaml`:
 
@@ -88,6 +90,8 @@ logs:
 
 ```
 * [Restart your agent](https://help.datadoghq.com/hc/en-us/articles/203764515-Start-Stop-Restart-the-Datadog-Agent)
+
+The agent supports raw string and JSON formated logs. If you are sending logs in batch, use break line characters to separate your logs.
 
 ## Advanced log collection functions
 

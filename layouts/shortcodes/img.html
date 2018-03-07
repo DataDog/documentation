@@ -59,11 +59,7 @@
 {{ $figure_class :=  .Get "figure_class" }}
 
 <span class="shortcode-wrapper shortcode-img expand {{ if $wide }}wide-parent{{ end }} text-center">
-  <figure class="{{ if $wide }} wide {{ end }} {{ $figure_class }}"
-  {{ if .Get "figure_style" }}
-     style="{{ with .Get "figure_style" }}{{ . | safeCSS }}{{end}}"
-  {{ end }}
-  >
+  <figure class="{{ if $wide }} wide {{ end }} {{ $figure_class }}" {{ if .Get "figure_style" }}style="{{ with .Get "figure_style" }}{{ . | safeCSS }}{{end}}"{{ end }}>
 
 {{ if $video }}
 
@@ -84,7 +80,7 @@
 
 {{ else }}
 
-    {{- if .Get "popup" -}}
+    {{- if (and (.Get "popup") (ne $image_ext "gif")) -}}
       <a href="{{ print $img $pop_param | relURL }}" class="pop" data-toggle="modal" data-target="#popupImageModal">
     {{- else if .Get "href" -}}
       <a href="{{- with .Get "href" -}}{{- . -}}{{- end -}}"
@@ -96,7 +92,7 @@
       {{ if eq $image_ext "gif" }}
         <img class="img-fluid" src="{{ (print $img "?fm=gif" | relURL | safeURL) }}"
             {{ if .Get "style" }}style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}"{{ end }}
-            alt="{{ with .Get "alt"}}{{.}}{{end}}">
+            alt="{{ with .Get "alt"}}{{.}}{{end}}" />
       {{ else }}
           <picture {{ if .Get "style" }}
             style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}"
@@ -105,8 +101,7 @@
                {{ if .Get "style" }}
                 style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}"
               {{ end }}
-              alt="{{ with .Get "alt"}}{{.}}{{end}}"
-          >
+              alt="{{ with .Get "alt"}}{{.}}{{end}}" />
         </picture>
       {{ end }}
 
@@ -115,7 +110,7 @@
         {{ if eq $image_ext "gif" }}
             <img class="img-fluid" src="{{ (print $img "?fm=gif" | relURL | safeURL) }}"
               {{ if .Get "style" }}style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}"{{ end }}
-              alt="{{ with .Get "alt"}}{{.}}{{end}}">
+              alt="{{ with .Get "alt"}}{{.}}{{end}}" />
         {{ else }}
               <picture {{ if .Get "style" }}
                 style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}"
@@ -124,15 +119,14 @@
               {{ if .Get "style" }}
                     style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}"
                   {{ end }}
-                  alt="{{ with .Get "alt"}}{{.}}{{end}}"
-              >
+                  alt="{{ with .Get "alt"}}{{.}}{{end}}" />
             </picture>
         {{ end }}
 
 
     {{ end }}
 
-    {{- if .Get "popup" -}}
+    {{- if (and (.Get "popup") (ne $image_ext "gif")) -}}
       </a>
     {{- else if .Get "href" -}}
       </a>
