@@ -7,7 +7,7 @@ kind: faq
 
 The Datadog API makes it easy to get data in and out of Datadog. The Datadog API uses resource-oriented URLs, uses status codes to indicate the success or failure of requests and returns JSON from all requests. 
 
-This article walks you through how to use [Postman](https://www.getpostman.com/) to perform API calls to Datadog.  This can help you understand the power of the Datadog API, what actions can be performed via the DataDog API, and a high-level introduction to how you can use Postman to GET/PUT/POST/and DELETE via the Datadog API.
+This article walks you through how to use [Postman](https://www.getpostman.com/) to perform API calls to Datadog.  This can help you understand the power of the Datadog API, what actions can be performed via the Datadog API, and a high-level introduction to how you can use Postman to GET/PUT/POST/and DELETE via the Datadog API.
 
 ## Prerequisites
 

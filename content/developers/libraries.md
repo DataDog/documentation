@@ -36,7 +36,7 @@ Scale up auto-scale groups based on the results of a Datadog query with [Dogscal
 This [plugin][101] sends any Dynatrace measure from a chart to Datadog.
 
 ### FreeSwitch
-This is for a [FreeSwitch ESL ][48] application to export statistics to DataDog using the DogStatsD API and is written by [WiMacTel][49].
+This is for a [FreeSwitch ESL ][48] application to export statistics to Datadog using the DogStatsD API and is written by [WiMacTel][49].
 
 ### Google Analytics
 You can get data into Datadog from Google Analytics using our API with [this library][105] from [Bithaus][106] or [this library][50].
