@@ -53,7 +53,7 @@ Prints a report of the metrics, events, service checks, service metadata and war
 
 Parameters:
 
-* **config** (*dictionary*) – A check configuration dictionary containing an array of `instances`. For example:
+* **config** (*dictionary*) – A check configuration dictionary containing an array of `instances`. For example:
 
 ```
 {
@@ -65,7 +65,7 @@ Parameters:
 }
 ```
 
-* **agent_config** (*dictionary*) – A customized Datadog agent configuration.
+* **agent_config** (*dictionary*) – A customized Datadog agent configuration.
 * **mocks** (*dictionary*) – A dictionary keyed by method name (string) with values of method. For example:
 
 ```
@@ -75,7 +75,7 @@ Parameters:
 }
 ```
 
-* **force_reload** (*boolean*) – Reload the check before running it.
+* **force_reload** (*boolean*) – Reload the check before running it.
 
 #### `run_check_twice(config, agent_config=None, mocks=None, force_reload=False)`
 
@@ -87,8 +87,8 @@ Similar to `run_check`, this method runs the check multiple times.
 
 Parameters:
 
-* **repeat** (*integer*) – The number of times the check runs.
-* **sleep** (*integer*) – The delay in seconds between check runs.
+* **repeat** (*integer*) – The number of times the check runs.
+* **sleep** (*integer*) – The delay in seconds between check runs.
 
 ### Metric Methods
 
@@ -96,35 +96,35 @@ Parameters:
 
 Parameters:
 
-* **metric_name** (*string*) – The name of the metric.
+* **metric_name** (*string*) – The name of the metric.
 * **value** (*variable*) – The value for the metric.
-* **tags** (*list of strings*) – The tags associated with the metric.
+* **tags** (*list of strings*) – The tags associated with the metric.
 * **count** (*integer*) – The number of candidate metrics the assertion should test for. Typical values are:
   * `None`: won't test for the count
   * `1`: tests for exactly one metric
   * `0`: tests for no matches (works as a negation)
-* **at_least** (*integer*) – The minimum number of candidate metrics the assertion should test for.
+* **at_least** (*integer*) – The minimum number of candidate metrics the assertion should test for.
 * **hostname** (*string*) – The name of the host associated with the metric.
-* **device_name** (*string*) – The name of the device associated with the metric.
+* **device_name** (*string*) – The name of the device associated with the metric.
 * **metric_type** (*string*) – The type of metric to test for. If set, it must be one of `gauge`, `counter`, `rate`, or `count` as defined by the [checks metric types][6].
 
 #### `assertMetricTagPrefix(metric_name, tag_prefix, count=None, at_least=1)`
 
 Parameters:
 
-* **metric_name** (*string*) – The name of the metric.
+* **metric_name** (*string*) – The name of the metric.
 * **tag_prefix** (*string*) – Match metrics with tags that begin with this string.
 * **count** (*integer*) – The number of data points the assertion should test for.
-* **at_least** (*integer*) – The minimum number of data points the assertion should test for.
+* **at_least** (*integer*) – The minimum number of data points the assertion should test for.
 
 #### `assertMetricTag(metric_name, tag, count=None, at_least=1)`
 
 Parameters:
 
-* **metric_name** (*string*) – The name of the metric.
+* **metric_name** (*string*) – The name of the metric.
 * **tag** (*string*) – The tag associated with the metric.
 * **count** (*integer*) – The number of data points the assertion should test for.
-* **at_least** (*integer*) – The minimum number of data points the assertion should test for.
+* **at_least** (*integer*) – The minimum number of data points the assertion should test for.
 
 ### Service Methods
 
@@ -132,12 +132,12 @@ Parameters:
 
 Parameters:
 
-* **meta_keys** (*list of strings*) – A list of metadata keys.
+* **meta_keys** (*list of strings*) – A list of metadata keys.
 * **count** (*integer*) – The number of candidate metrics the assertion should test for. Typical values are:
   * `None`: won't test for the count
   * `1`: tests for exactly one metric
   * `0`: tests for no matches (works as a negation)
-* **at_least** (*integer*) – The minimum number of candidate metrics the assertion should test for.
+* **at_least** (*integer*) – The minimum number of candidate metrics the assertion should test for.
 
 ##### `assertServiceCheck(service_check_name, status=None, tags=None, count=None, at_least=1)`
 
@@ -152,9 +152,9 @@ Parameters:
 Parameters:
 
 * **service_check_name** (*string*) – The name of the service check.
-* **tags** (*list of strings*) – The tags associated with the service check.
+* **tags** (*list of strings*) – The tags associated with the service check.
 * **count** (*integer*) – The number of data points the assertion should test for.
-* **at_least** (*integer*) – The minimum number of data points the assertion should test for.
+* **at_least** (*integer*) – The minimum number of data points the assertion should test for.
 
 ### Event Method
 
@@ -167,9 +167,9 @@ Parameters:
   * `None`: won't test for the count
   * `1`: tests for exactly one metric
   * `0`: tests for no matches (works as a negation)
-* **at_least** (*integer*) – The minimum number of candidate metrics the assertion should test for.
+* **at_least** (*integer*) – The minimum number of candidate metrics the assertion should test for.
 * **exact_match** (*boolean*) – When true, the event message text must equal `msg_text`. When false, the event message text must contain `msg_text`.
-* **tags** (*list of strings*) – The tags associated with the event.
+* **tags** (*list of strings*) – The tags associated with the event.
 * **kwargs** – Keyword arguments can be used to match additional event attributes.
 
 ### Warning Method
@@ -183,7 +183,7 @@ Parameters:
   * `None`: won't test for the count
   * `1`: tests for exactly one warning
   * `0`: tests for no matches (works as a negation)
-* **at_least** (*integer*) – The minimum number of candidate warnings the assertion should test for.
+* **at_least** (*integer*) – The minimum number of candidate warnings the assertion should test for.
 * **exact_match** (*boolean*) – When true, the warning message text must equal `warning`. When false, the event message text must contain `warning`.
 
 ### Helper Methods
@@ -199,7 +199,7 @@ These methods test if the first argument is contained in the second argument usi
 Parameters:
 
 * **first** (*multiple types*) – The "needle" data.
-* **second** (*multiple types*) – The "haystack" data.
+* **second** (*multiple types*) – The "haystack" data.
 
 ## Examples
 

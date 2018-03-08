@@ -33,7 +33,7 @@ or the similar message in your agent's status output:
 
 This error is benign and is temporarily the intended behavior while the logs product is in beta. It indicates that the Datadog agent did not find any python check whose name corresponds with the configuration file that contains your logs.
 
-If you wish to silence this error, an easy way to do so is to add an agent check with the same name as the configuration file that contains your logs configurations. So if you had added log configurations to `conf.d/my_logs.yaml` or `conf.d/my_logs.d/conf.yaml`, add a `checks.d/my_logs.py` with the following content:
+If you wish to silence this error, an easy way to do so is to add an agent check with the same name as the configuration file that contains your logs configurations. So if you had added log configurations to `conf.d/my_logs.yaml` or `conf.d/my_logs.d/conf.yaml`, add a `checks.d/my_logs.py` with the following content:
 
 ```python
 class MyEmptyCheck(AgentCheck):

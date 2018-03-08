@@ -3,9 +3,9 @@ title: What are the required IP's and ports I need open to connect to the Datado
 kind: faq
 ---
 
-Traffic is always initiated by the agent to the Datadog service. No sessions are ever initiated from Datadog back to the agent. 
+Traffic is always initiated by the agent to the Datadog service. No sessions are ever initiated from Datadog back to the agent.
 All traffic is sent (outbound only) over SSL via 443 TCP.
-The destination for all agent data is `<version>-app.agent.datadoghq.com` (starting with version 5.2.0; was app.datadoghq.com for prior versions). It is a CNAME; its IP address is subject to change but belongs to the ranges listed [in the agent dedicated proxy documentation](/agent/proxy):
+The destination for all agent data is `<version>-app.agent.datadoghq.com` (starting with version 5.2.0; was app.datadoghq.com for prior versions). It is a CNAME; its IP address is subject to change but belongs to the ranges listed [in the agent dedicated proxy documentation](/agent/proxy):
 
 (Note: In versions prior to 5.18.0 the process-agent uses process.datadoghq.com for traffic)
 
@@ -16,7 +16,7 @@ The destination for all agent data is `<version>-app.agent.datadoghq.com` (star
 * 17125: local metric frontend, a.k.a. Pup
 * 8125: DogStatsD
 * 8126: traces
-* 123/UDP: NTP - More details on the importance of NTP here.
+* 123/UDP: NTP - More details on the importance of NTP here.
 
 Starting with version 3.4.0, these ports are available on localhost (127.0.0.1, ::1 and fe80::1 only), unless non_local_traffic is set to true.
 

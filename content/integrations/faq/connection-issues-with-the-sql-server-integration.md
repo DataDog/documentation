@@ -5,7 +5,7 @@ kind: faq
 
 ## Common SQL Server Connection Troubles
 
-You can configure the Datadog Agent to collect metrics from SQL Server by following the instructions in the [SQL Server integration tile](https://app.datadoghq.com/account/settings#integrations/sql_server) in your account. This integration offers a number of basic [SQL Server metrics](/integrations/sqlserver/#metrics), which you can expand to [your own liking](/integrations/faq/how-can-i-collect-more-metrics-from-my-sql-server-integration). 
+You can configure the Datadog Agent to collect metrics from SQL Server by following the instructions in the [SQL Server integration tile](https://app.datadoghq.com/account/settings#integrations/sql_server) in your account. This integration offers a number of basic [SQL Server metrics](/integrations/sqlserver/#metrics), which you can expand to [your own liking](/integrations/faq/how-can-i-collect-more-metrics-from-my-sql-server-integration).
 
 But there is a common connection error that users run into while they're setting up this integration, one that can be especially frustrating to troubleshoot since there are many variables that can cause it. In full, the error looks like this:
 ```
@@ -14,16 +14,16 @@ But there is a common connection error that users run into while they're setting
 As you'll gather from SQL Server does not exist or access denied, this error indicates that the agent was unable to connect to your SQL Server to complete its data collection. This could be caused by any of the following:
 
 * A typo in your sqlserver.yaml host, port, username, or password (it's all worth triple-checking)
-* Your SQL Server's TCP/IP connection has not been enabled
+* Your SQL Server's TCP/IP connection has not been enabled
 * Your SQL Server's IPv4 address is incorrect or does not match what you've provided in your sqlserver.yaml
-* Your SQL Server's TCP/IP port is incorrect or does not match what you've provided in your sqlserver.yaml
-* The authentication mode of your SQL Server is not set to the appropriate option between "SQL Server and Windows Authentication mode" vs. "Windows Authentication mode"
+* Your SQL Server's TCP/IP port is incorrect or does not match what you've provided in your sqlserver.yaml
+* The authentication mode of your SQL Server is not set to the appropriate option between "SQL Server and Windows Authentication mode" vs. "Windows Authentication mode"
 
-If you are unsure of how to set up your server to listen on the correct TCP/IP address/port, [this page](https://msdn.microsoft.com/en-us/library/ms177440.aspx) from Microsoft should give you some direction (IPv4 and IPALL are the specifically relevant parts; there, you may set your port either as a "Dynamic" or as a "Static" port, but whichever you aren't using should be left blank). If the agent is installed on the same host as your SQL Server, it may be appropriate to set your sqlserver.yaml's host option to "127.0.0.1", even if the host is not a localhost from your perspective as a user. The standard port for connections to SQL Server is 1433. 
+If you are unsure of how to set up your server to listen on the correct TCP/IP address/port, [this page](https://msdn.microsoft.com/en-us/library/ms177440.aspx) from Microsoft should give you some direction (IPv4 and IPALL are the specifically relevant parts; there, you may set your port either as a "Dynamic" or as a "Static" port, but whichever you aren't using should be left blank). If the agent is installed on the same host as your SQL Server, it may be appropriate to set your sqlserver.yaml's host option to "127.0.0.1", even if the host is not a localhost from your perspective as a user. The standard port for connections to SQL Server is 1433.
 
 If you are unsure how to set your SQL Server's authentication mode, you may find [this page](https://msdn.microsoft.com/en-us/library/ms144284.aspx) from Microsoft useful.
 
-Do note that any of the above changes that you make to your SQL Server will require that you restart your SQL Server before the changes take effect. 
+Do note that any of the above changes that you make to your SQL Server will require that you restart your SQL Server before the changes take effect.
 
 Here's an example of some SQL Server IP/TCP settings that have worked just fine on one of our testing environments (Windows 2012 R2, SQL Server 2014 Express):
 {{< img src="integrations/faq/sql_server_test_1.png" alt="sql_server_test_1" responsive="true" popup="true">}}
@@ -32,14 +32,14 @@ Here's an example of some SQL Server IP/TCP settings that have worked just fine 
 
 ## Empty Connection String?
 
-Our SQL Server check relies on the adodbapi Python library, which has some limitations in the characters that it is able to use in making a connection string to a SQL Server. If your agent experiences trouble connecting to your SQL Server, and if you find errors similar to the following in your agent's collector.logs, your sqlserver.yaml probably includes some character that causes issues with adodbapi. 
+Our SQL Server check relies on the adodbapi Python library, which has some limitations in the characters that it is able to use in making a connection string to a SQL Server. If your agent experiences trouble connecting to your SQL Server, and if you find errors similar to the following in your agent's collector.logs, your sqlserver.yaml probably includes some character that causes issues with adodbapi.
 ```
 OperationalError: (KeyError('Python string format error in connection string->',), 'Error opening connection to ""')
 ```
 
 At the moment, the only character we know of that causes this specific connectivity issue is the "%" character. If you want to use the "%" character in your `sqlserver.yaml` (e.g, if your Datadog SQL Server user password includes a "%"), you will have to escape that character by including a double "%%" in place of each single "%".
 
-## Connecting to SQL Server on a Linux Host?
+## Connecting to SQL Server on a Linux Host?
 
 In order to connect to SQL Server (either hosted on Linux or Windows) from a Linux host, you first must install the Microsoft ODBC Driver for your Linux distribution by following the instructions on the following page:
 
@@ -49,7 +49,7 @@ Next, install the pyodbc module. This can be done by running pip install pyodbc 
 ```
 $ sudo /opt/datadog-agent/embedded/bin/pip install pyodbc
 ```
-Lastly, configure your `sqlserver.yaml` file to define the ODBC driver you installed and enable the ODBC connector.
+Lastly, configure your `sqlserver.yaml` file to define the ODBC driver you installed and enable the ODBC connector.
 
 ```yaml
 init_config:
@@ -63,7 +63,7 @@ instances:
     username: <my_username>
     password: <my_password>
 ```
-If you are unsure of the driver name to use, you can find it enclosed in brackets at the top of `/etc/odbcinst.ini`.
+If you are unsure of the driver name to use, you can find it enclosed in brackets at the top of `/etc/odbcinst.ini`.
 ```
 $ cat /etc/odbcinst.ini
 [ODBC Driver 13 for SQL Server]

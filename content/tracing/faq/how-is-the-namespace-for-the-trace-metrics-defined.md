@@ -9,7 +9,7 @@ The namespace is basically trace.<name>.<metrics> where
 * is about the hits, errors or latency ("request.hits", etc.)
 * the metrics are tagged by service & resource.
 
-So for pylons it might be `trace.pylons.request.hits{service:mcnulty}`.
+So for pylons it might be `trace.pylons.request.hits{service:mcnulty}`.
 
 You can use the Chrome inspector on the traces page to find the metric name in the **batch_query** call:
 

@@ -27,7 +27,7 @@ A "Service" is the name of a set of processes that work together to provide a fe
 
 These services are defined by the user when instrumenting their application with Datadog. This field is helpful to quickly distinguish between your different processes.
 
-In the Datadog UI, this is the "Name" field in the above image.  An example of setting a custom Service using Python:
+In the Datadog UI, this is the "Name" field in the above image. An example of setting a custom Service using Python:
 
 {{< img src="tracing/faq/custom_service.png" alt="Custom Service" responsive="true" popup="true">}}
 
@@ -49,6 +49,6 @@ The Name field can be found in the URL after clicking on a specific Service.
 
 {{< img src="tracing/faq/trace_url.png" alt="Trace URL" responsive="true" popup="true">}}
 
- This Name/Trace is the name given around the function or method that would execute the code for each "Resource". This can be modified by using the "tracer.trace" method as seen here (again in Python):
+This Name/Trace is the name given around the function or method that would execute the code for each "Resource". This can be modified by using the "tracer.trace" method as seen here (again in Python):
 
 {{< img src="tracing/faq/name_python.png" alt="Name Python" responsive="true" popup="true">}}

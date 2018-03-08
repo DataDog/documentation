@@ -3,7 +3,7 @@ title: Can I limit the number of VMs that are pulled in via the VMWare integrati
 kind: faq
 ---
 
-Yes you can configure this with a regex in your `vsphere.yaml` file: 
+Yes you can configure this with a regex in your `vsphere.yaml` file:
 
 Refer to this example for more info:
 

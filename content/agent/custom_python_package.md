@@ -16,8 +16,8 @@ further_reading:
 
 ### Linux
 
-The python version embedded with the agent is located here: `/opt/datadog-agent/embedded/bin/python`.  
-The agent also comes with pip, install python libraries using:
+The python version embedded with the agent is located here: `/opt/datadog-agent/embedded/bin/python`.
+The agent also comes with pip, install python libraries using:
 
 ```bash
 sudo /opt/datadog-agent/embedded/bin/pip install <package_name>

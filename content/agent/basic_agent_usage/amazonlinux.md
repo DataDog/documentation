@@ -78,7 +78,7 @@ If you're still having trouble, [our support team](/help) will be glad to provid
 
 The Python interpreter embedded with the Agent is located here:  
 `/opt/datadog-agent/embedded/bin/python`.
-The agent also comes with pip, install python libraries using:
+The agent also comes with pip, install python libraries using:
 ```
 sudo -u dd-agent -- /opt/datadog-agent/embedded/bin/pip install <package_name>
 ```

@@ -118,7 +118,7 @@ The Kubernetes check includes the following service checks:
 * [How to report host disk metrics when dd-agent runs in a docker container?](/agent/faq/getting-further-with-docker)
 * [Client Authentication against the apiserver and kubelet](/integrations/faq/client-authentication-against-the-apiserver-and-kubelet)
 * [Gathering Kubernetes events](/integrations/faq/gathering-kubernetes-events)
-* [Using RBAC permission with your Kubernetes integration](/integrations/faq/using-rbac-permission-with-your-kubernetes-integration)
+* [Using RBAC permission with your Kubernetes integration](/integrations/faq/using-rbac-permission-with-your-kubernetes-integration)
 
 ## Further Reading
 To get a better idea of how (or why) to integrate your Kubernetes service, check out our [series of blog posts](https://www.datadoghq.com/blog/monitoring-kubernetes-era/) about it.

@@ -31,13 +31,13 @@ $api_key = "9775a026f1ca7d1c6c5af9d94d9595a4"
 $app_key = "87ce4a24b5553d2e482ea8a8500e71b8ad4554ff"
 ```
 
-2. Set up your parameters according to [description in the host API](/api/#hosts), shell tab
+2. Set up your parameters according to [description in the host API](/api/#hosts), shell tab
 ```
 $host_name = "test.host"
 
 $http_method = "POST"
 
-$url_signature = "api/v1/tags/hosts/$host_name" 
+$url_signature = "api/v1/tags/hosts/$host_name"
 
 $parameters = "{ 
 `"tags`" : [`"environment:production`", `"role:webserver`"] 
@@ -54,7 +54,7 @@ $api_key = "9775a026f1ca7d1c6c5af9d94d9595a4"
 $app_key = "87ce4a24b5553d2e482ea8a8500e71b8ad4554ff"
 ```
 
-3. Set up parameters according to [description in the metrics API](/api/#metrics), shell tab
+3. Set up parameters according to [description in the metrics API](/api/#metrics), shell tab
 ```
 $http_method = "POST"
 

@@ -64,7 +64,7 @@ Edit the `go-metro.yaml` file in your agent's `conf.d` directory. The following 
 
 To validate that the check is running correctly, you should see `system.net.tcp.rtt` metrics showing in the Datadog interface. Also, if you run `sudo /etc/init.d/datadog-agent status`, you should see something similar to the following:
 
-    ● datadog-agent.service - "Datadog Agent"
+     datadog-agent.service - "Datadog Agent"
        Loaded: loaded (/lib/...datadog-agent.service; enabled; vendor preset: enabled)
        Active: active (running) since Thu 2016-03-31 20:35:27 UTC; 42min ago
       Process: 10016 ExecStop=/opt/.../supervisorctl -c /etc/dd-....conf shutdown (code=exited, status=0/SUCCESS)

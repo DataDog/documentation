@@ -156,7 +156,7 @@ Counters are used to count things.
 {{% table responsive="true" %}}
 |Method | Overview |
 |:---|:---|
-| dog.increment(...) | Used to increment a counter of events: <ul><li>Stored as a RATE type in the Datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter's value over that statsd flush period.</li></ul>|
+| dog.increment(...) | Used to increment a counter of events: <ul><li>Stored as a RATE type in the Datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter's value over that statsd flush period.</li></ul>|
 |dog.decrement(...)| Used to decrement a counter of events: <ul><li>Stored as a RATE type in the Datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter's value over that statsd flush period.</li></ul>|
 {{% /table %}}
 
@@ -286,7 +286,7 @@ It aggregates the values that are sent during the flush interval (usually defaul
 * `my_metric.median`: gives you the median of those values in the flush interval
 * `my_metric.95percentile`: gives you the 95th percentile value in the flush interval
 * `my_metric.max`: gives you the max value sent during the flush interval
-* `my_metric.min`: gives you the min value sent during the flush interval
+* `my_metric.min`: gives you the min value sent during the flush interval
 
 Each one of these becomes a value in their respective metric time series that are sent to Datadog. Then you can aggregate these time series the same way you aggregate any other metric time series.
 

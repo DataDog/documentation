@@ -8,7 +8,7 @@ Most of the time what you see on graphs are not the real value you submitted but
 ## Why?
 
 We store data at a 1 second granularity [we cannot display all real data on graphs](/graphing/faq/how-is-data-aggregated-in-graphs).
- 
+
 For a graph on a 1-week time window, it would require sending hundreds of thousands values to your browser, and besides not all these points could be graphed on a widget occupying a small portion of your screen. For these reasons we are forced to proceed to data aggregation and to send a limited number of points to your browser to render a graph.
 Which granularity?
 
@@ -19,16 +19,16 @@ By default our backend computes the rollup aggregate by averaging all real value
 
 ## What can you do?
 
-Data aggregation needs to occur whether you have 1 or 1000 sources as long as you look at a large time window. So what you generally see on graph are not the real values submitted but local aggregates.
- 
+Data aggregation needs to occur whether you have 1 or 1000 sources as long as you look at a large time window. So what you generally see on graph are not the real values submitted but local aggregates.
+
 However what you can do is control how this aggregation is performed by using the [rollup function](/graphing/miscellaneous/functions):
 
-* .rollup(max)/ .rollup(min) have each point be the local MAXIMUM/MINIMUM of the X min of data it represents
-* .rollup(avg) is the default value: each point of your graph be the AVERAGE value of the X min of data it represents
-* .rollup(sum) compute the SUM of all values submitted during the X min period
+* .rollup(max)/ .rollup(min) have each point be the local MAXIMUM/MINIMUM of the X min of data it represents
+* .rollup(avg) is the default value: each point of your graph be the AVERAGE value of the X min of data it represents
+* .rollup(sum) compute the SUM of all values submitted during the X min period
 * .rollup(avg,60) defines that graph points should be 1 min averages, etc.
 
-Note that our backend tries to keep the number of interval to a number below ~300. So if you do rollup(60) over a 2-month time window, you can't have the one-minute granularity requested.
+Note that our backend tries to keep the number of interval to a number below ~300. So if you do rollup(60) over a 2-month time window, you can't have the one-minute granularity requested.
 
 ## Example
 {{< img src="graphing/faq/graph_granularity.png" alt="graph_granularity" responsive="true" popup="true">}}
@@ -37,4 +37,4 @@ The graph above is a bar graph over the past 2 hours. On this graph you have one
 
 ## Is it possible to see the real data submitted?
 
-Yes, if you zoom in enough you'll get the original values. For instance with the datadog-agent (submitting data every ~15 seconds) if you look at a 45-minute (or less) timewindow you have unaggregated values.
+Yes, if you zoom in enough you'll get the original values. For instance with the datadog-agent (submitting data every ~15 seconds) if you look at a 45-minute (or less) timewindow you have unaggregated values.

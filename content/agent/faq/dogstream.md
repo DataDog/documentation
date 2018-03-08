@@ -122,7 +122,7 @@ def my_log_parser(logger, test):
 
 And then we would configure our `datadog.conf` to include the dogstream option as follows:
 ```
-dogstreams: /path/to/mylogfile.log:/path/to/mylogparser.py:my_log_parser
+dogstreams: /path/to/mylogfile.log:/path/to/mylogparser.py:my_log_parser
 # (N.B., Windows users should replace each "/" with the escaped "\\")
 ```
 
@@ -157,7 +157,7 @@ The aggregation key is a combination of the following fields:
 
 For an example of an event parser, see our [Cassandra compaction event parser](https://github.com/DataDog/dd-agent/blob/master/dogstream/cassandra.py) that is bundled with the Agent.
 
-### Example for Events Collecting
+### Example for Events Collecting
 
 Let's imagine that you want to collect events from logging where you have enough control to add all sorts of relevant information, intelligently delimited by a unique character, logged as the following:
 
@@ -197,8 +197,8 @@ def my_log_parser(logger, line):
 
 And then we would configure our `datadog.conf` to include the dogstream option as follows:
 ```
-dogstreams: /path/to/mylogfile.log:/path/to/mylogparser.py:my_log_parser
-# (N.B., Windows users should replace each "/" with the escaped "\\") 
+dogstreams: /path/to/mylogfile.log:/path/to/mylogparser.py:my_log_parser
+# (N.B., Windows users should replace each "/" with the escaped "\\")
 ```
 
 This specific log-line parsed with this parser created the following event in datadog:
@@ -210,10 +210,10 @@ This specific log-line parsed with this parser created the following event in da
 Once you have setup your custom parser to send metric or events to your platform, you should have something like this in your `datadog.conf`:
 
 ```
- dogstreams: /path/to/log1:/path/to/my/parsers_module.py:custom_parser
+ dogstreams: /path/to/log1:/path/to/my/parsers_module.py:custom_parser
 ```
 
-And in your parsers_module.py a function defined as:  
+And in your parsers_module.py a function defined as:
 ```python
 
 def custom_parser(logger, line)
@@ -236,11 +236,11 @@ def custom_parser(logger, line, parser_state, *parser_args):
 
 You have a tuple parameter in **parser_args** as (customvar1, customvar2) which is ready to use in your code by using parser_args[0] and parser_args[1].
 
-**Note**: the parameter **parser_state** does not have to be used but it has to be in the signature of the function. And if you have only one parameter, you have to use **parser_args[1]** to get it.
+**Note**: the parameter **parser_state** does not have to be used but it has to be in the signature of the function. And if you have only one parameter, you have to use **parser_args[1]** to get it.
 
 As an example, if we have the same parser as in the documentation but this time we do not want to extract the metric name from the log but to set it thanks to this parameter:
 
-In my configuration file I would have: 
+In my configuration file I would have:
 
 ```
 dogstreams: /Users/Documents/Parser/test.log:/Users/Documents/Parser/myparser.py:parse_web:logmetric
@@ -248,8 +248,8 @@ dogstreams: /Users/Documents/Parser/test.log:/Users/Documents/Parser/myparser.py
 
 ## Troubleshooting Your Custom Log-Parser
 
-Bugs happen, so being able to see the traceback from your log-parsers is very important. You can do this if you are running the agent with its [agent logs](/agent/#log-locations) set at the "DEBUG" level. The agent's log-level can be set in the `datadog.conf` by uncommenting and editing [this line](https://github.com/DataDog/dd-agent/blob/5.7.x/datadog.conf.example#L211), and then [restarting the agent](/agent/faq/agent-commands). Once that's configured properly, traceback resulting from errors in your custom log-parser can be found in the *collector.log* file ([read here for where to find your agent logs](/agent/#log-locations)), and it generally includes the string checks.collector(datadog.py:278) | Error while parsing line in them ([here's the agent code where the error is likely to be thrown](https://github.com/DataDog/dd-agent/blob/5.7.x/checks/datadog.py#L278)).
+Bugs happen, so being able to see the traceback from your log-parsers is very important. You can do this if you are running the agent with its [agent logs](/agent/#log-locations) set at the "DEBUG" level. The agent's log-level can be set in the `datadog.conf` by uncommenting and editing [this line](https://github.com/DataDog/dd-agent/blob/5.7.x/datadog.conf.example#L211), and then [restarting the agent](/agent/faq/agent-commands). Once that's configured properly, traceback resulting from errors in your custom log-parser can be found in the *collector.log* file ([read here for where to find your agent logs](/agent/#log-locations)), and it generally includes the string checks.collector(datadog.py:278) | Error while parsing line in them ([here's the agent code where the error is likely to be thrown](https://github.com/DataDog/dd-agent/blob/5.7.x/checks/datadog.py#L278)).
 
 Note that whenever you make a change to your custom log-parser, [restart the agent](/agent/faq/agent-commands) to put that change into effect.
 
-If you suspect there is some error occurring beyond the scope of your custom log-parser function, feel free to [reach out to support](/help), but do first set the agent's log-level at "DEBUG", run the agent for a few minutes while ensuring that new logs are being added to your files, and then [run the flare command](/agent/#send-a-flare) from your agent. That gives to the support team the information needed to effectively troubleshoot the issue.
+If you suspect there is some error occurring beyond the scope of your custom log-parser function, feel free to [reach out to support](/help), but do first set the agent's log-level at "DEBUG", run the agent for a few minutes while ensuring that new logs are being added to your files, and then [run the flare command](/agent/#send-a-flare) from your agent. That gives to the support team the information needed to effectively troubleshoot the issue.

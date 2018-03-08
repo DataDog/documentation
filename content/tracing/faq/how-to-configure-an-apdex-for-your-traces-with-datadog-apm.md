@@ -3,7 +3,7 @@ title: How to configure an Apdex for your traces with Datadog APM ?
 kind: faq
 ---
 
-[Apdex](http://apdex.org/overview.html) (Application Performance Index) is an open standard developed by an alliance of companies that defines a standardized method to report, benchmark, and track application performance. Based on user experience satisfaction by measuring the response time of web applications and services, its role is to counterbalance response time average and percentiles  which can be misleading by some extreme data points
+[Apdex](http://apdex.org/overview.html) (Application Performance Index) is an open standard developed by an alliance of companies that defines a standardized method to report, benchmark, and track application performance. Based on user experience satisfaction by measuring the response time of web applications and services, its role is to counterbalance response time average and percentiles which can be misleading by some extreme data points
 
 ## Definition
 
@@ -12,7 +12,7 @@ Apdex is a numerical measure of user satisfaction with the performance of enterp
 * 0 = no users satisfied
 * 1 = all users satisfied
 
-To define your apdex you need to first define a time threshold - **T** - separating satisfactory response times to unsatisfactory response time from your application or service. With one threshold you can then define three categories:
+To define your apdex you need to first define a time threshold - **T** - separating satisfactory response times to unsatisfactory response time from your application or service. With one threshold you can then define three categories:
 
 * Satisfied requests have a response time below **T**
 * Tolerated requests have a response time equal to/above **T** and below/equal to **4T**
@@ -24,7 +24,7 @@ Once the threshold is defined and your requests are categorized, the apdex is de
 
 Selecting the correct threshold is really important since the Frustrated requests are 4 times slower than "normal". If T=3 you can wait 3 seconds for a page to load by you might not tolerate waiting until 12 seconds.
 
-That's why the default Apdex threshold value used by your Datadog application is 0.5 second But you can change its value directly on your service board.
+That's why the default Apdex threshold value used by your Datadog application is 0.5 second But you can change its value directly on your service board.
 
 ## Set your Apdex for your traces
 
@@ -40,7 +40,7 @@ Enter your threshold directly to visualize your request distribution:
 
 {{< img src="tracing/faq/apdex_update.png" alt="Apdex Update" responsive="true" popup="true">}}
 
-You can then save your widget to follow your Apdex evolution above time:
+You can then save your widget to follow your Apdex evolution above time:
 
 {{< img src="tracing/faq/apm_save.png" alt="Apdex Save" responsive="true" popup="true">}}
 
