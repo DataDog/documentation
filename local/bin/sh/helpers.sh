@@ -477,7 +477,7 @@ manage_translations() {
     echo "---------"
     echo "Sending Translations"
     echo "---------"
-    ./node_modules/.bin/translate -s ./translate.yaml "${1}" || fail_step "${FUNCNAME}"
+    #./node_modules/.bin/translate -s ./translate.yaml "${1}" || fail_step "${FUNCNAME}"
     echo "Done."
     echo "---------"
     echo "Receiving Translations"
