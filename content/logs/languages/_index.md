@@ -19,7 +19,7 @@ To enable those functionalities use the following attribute names:
 * `logger.name`: Name of the logger
 * `logger.thread_name`: Name of the current thread
 * `error.stack`: Actual stack trace
-* `error.msg`: Error message contained in the stack trace
+* `error.message`: Error message contained in the stack trace
 * `error.kind`: The type or "kind" of an error (i.e "Exception", "OSError", ...)
 
 **Note**: By default, [integration pipelines](/logs/processing) attempt to remap default logging library parameters to those specific attributes and parse stack traces or traceback to automatically extract the `error.msg` and `error.kind`.
