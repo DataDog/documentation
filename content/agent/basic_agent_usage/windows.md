@@ -58,9 +58,9 @@ The agent has a new set of command-line options:
 
 You can use the Datadog Agent Manager that you can find in the Start Menu.
 
-{{< img src="agent/basic_agent_usage/windows/windows-start-menu.png" alt="windows Start Menu" responsive="true" popup="true">}}
+{{< img src="agent/basic_agent_usage/windows/windows-start-menu.png" alt="windows Start Menu" responsive="true" popup="true" style="width:40%;">}}
 
-{{< img src="agent/basic_agent_usage/windows/manager-snapshot.png" alt="Manager snapshot" responsive="true" popup="true">}}
+{{< img src="agent/basic_agent_usage/windows/manager-snapshot.png" alt="Manager snapshot" responsive="true" popup="true" style="width:40%;">}}
 
 You can also use Windows Powershell if you are running on a modern version of Windows:
 `[start|stop|restart]-service datadogagent`
@@ -75,16 +75,16 @@ To check if the Agent is running, check if the service status in the Services pa
 
 For 5.2 and later versions of the agent go to the Datadog Agent Manager->Settings->Agent Status
 
-{{< img src="agent/faq/windows_status.png" alt="Windows Status" responsive="true" popup="true">}}
+{{< img src="agent/faq/windows_status.png" alt="Windows Status" responsive="true" popup="true" style="width:50%;" >}}
 
 It's also possible to run the info command using Powershell:
 
 ```
-"C:\Program Files\Datadog\Datadog Agent\embedded\python.exe" "C:\Program Files\Datadog\Datadog Agent\agent\agent.py" info
+& 'C:\Program Files\Datadog\Datadog Agent\embedded\python.exe' 'C:\Program Files\Datadog\Datadog Agent\agent\agent.py' info
 ```
 or cmd.exe:
 ```
-C:\Program Files\Datadog\Datadog Agent\embedded\python.exe" "C:\Program Files\Datadog\Datadog Agent\agent\agent.py" info
+& 'C:\Program Files\Datadog\Datadog Agent\embedded\python.exe' 'C:\Program Files\Datadog\Datadog Agent\agent\agent.py' info
 ```
 
 If you're running on a version older than 5.2 visit the status page in your web browser:
@@ -174,9 +174,19 @@ If you're still having trouble, [our support team](/help) will be glad to provid
 ## Adding a custom python package to the agent
 The current way to do so is to add the package in the library zipped folder that can be found at `C:\Program Files (x86)\Datadog\Datadog Agent\files`, and [restart the agent](/agent/faq/agent-commands).
 
-{{< img src="agent/faq/add_package_windows.png" alt="Add Package Windows" responsive="true" popup="true">}}
+{{< img src="agent/faq/add_package_windows.png" alt="Add Package Windows" responsive="true" popup="true" style="width:75%;">}}
 
 ### Send a flare
+
+#### Agent v6
+
+1. Navigate to `localhost:5002` to [display the Agent GUI](/agent/#using-the-gui)
+2. Select flare tab
+  {{< img src="agent/basic_agent_usage/windows/windows_flare_agent_6.png" alt="Windows flare with agent 6" responsive="true" popup="true" style="width:75%;">}}
+3. Enter your ticket number (if you have one) and email address
+4. Press Submit
+
+#### Agent v5
 
 To send Datadog support a copy of your Windows logs and configurations, do the following:
 
@@ -188,16 +198,16 @@ To send Datadog support a copy of your Windows logs and configurations, do the f
 
 That's it, you're done!
 
-{{< img src="agent/faq/windows_flare.jpg" alt="Windows Flare" responsive="true" popup="true" style="width:75%;">}}
+{{< img src="agent/faq/windows_flare.jpg" alt="Windows Flare" responsive="true" popup="true" style="width:70%;">}}
 
 It's also possible to run the flare command using Powershell:
 
 ```
-C:\Program Files\Datadog\Datadog Agent\embedded\python.exe" "C:\Program Files\Datadog\Datadog Agent\agent\agent.py" flare <CASE_ID>
+& 'C:\Program Files\Datadog\Datadog Agent\embedded\python.exe' 'C:\Program Files\Datadog\Datadog Agent\agent\agent.py' flare <CASE_ID>
 ```
 or cmd.exe:
 ```
-C:\Program Files\Datadog\Datadog Agent\embedded\python.exe" "C:\Program Files\Datadog\Datadog Agent\agent\agent.py" flare <CASE_ID>
+& 'C:\Program Files\Datadog\Datadog Agent\embedded\python.exe' 'C:\Program Files\Datadog\Datadog Agent\agent\agent.py' flare <CASE_ID>
 ```
 
 #### Flare Fails to Upload
@@ -219,7 +229,7 @@ print tempfile.gettempdir()
 
 Example : 
 
-{{< img src="agent/faq/flare_fail.png" alt="Flare Fail" responsive="true" popup="true" style="width:75%;">}}
+{{< img src="agent/faq/flare_fail.png" alt="Flare Fail" responsive="true" popup="true" style="width:70%;">}}
 
 ## Use Cases
 ###  Monitoring a Windows Service
@@ -230,11 +240,11 @@ For the Windows Service Integration, there is an out-of-the-box example, however
 
 First, to get the name of the service, open services.msc and locate your target service. Using DHCP as our target, you can see the service name at the top of the service properties window:
 
-{{< img src="agent/faq/DHCP.png" alt="DHCP" responsive="true" popup="true">}}
+{{< img src="agent/faq/DHCP.png" alt="DHCP" responsive="true" popup="true" style="width:75%;">}}
 
 When adding your own services, be sure to follow the formatting exactly as shown - if formatting is not correct the Integration fails.
 
-{{< img src="agent/faq/windows_DHCP_ service.png" alt="Windows DHCP Service" responsive="true" popup="true">}}
+{{< img src="agent/faq/windows_DHCP_ service.png" alt="Windows DHCP Service" responsive="true" popup="true" style="width:75%;">}}
 
 Also, any time you modify an Integration you’ll need to restart the Datadog Service. You can do this from services.msc or right from the UI via Actions.
 

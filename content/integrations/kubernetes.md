@@ -51,20 +51,10 @@ To gather your kube-state metrics:
   kubectl apply -f <NAME_OF_THE_KUBE_STATE_MANIFESTS_FOLDER>
   ```
 
-### Validation
-To verify the Datadog Agent is running in your environment as a daemonset, execute:
-
-    kubectl get daemonset
-
-If the Agent is deployed you will see similar output to the text below, where desired and current are equal to the number of running nodes in your cluster.
-
-    NAME       DESIRED   CURRENT   NODE-SELECTOR   AGE
-    datadog-agent   3         3         <none>          11h
-
 ## Setup Kubernetes DNS
 ### Configuration
 
-Since [agent v6](/agent/), Kubernetes DNS integration works automatically with the [Autodiscovery](/agent/autodiscovery). 
+Since [agent v6](/agent/), Kubernetes DNS integration works automatically with the [Autodiscovery](/agent/autodiscovery).
 
 ## Data Collected
 ### Metrics
