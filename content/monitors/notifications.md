@@ -78,11 +78,11 @@ The `{{comparator}}` template variable's value is always a relational operator. 
 
 For example, when an alert is set to trigger when a value rises "above" 50, the following syntax:
 ```
-  {{value}} {{comparator}} {{threshold}}
+  {{value}} {{comparator}} {{threshold}}
 ```
 would yield a notification message like the following:
 ```
-    51.47 > 50
+    51.47 > 50
 ```
 
 ### Conditional variables
@@ -121,17 +121,17 @@ and the recovery notification:
 
 #### `{{is_recovery}}` or `{{is_alert_recovery}}` 
 
-* `{{is_recovery}}` triggers and a monitor recovers indifferently either from a **WARNING** state or an **ALERT** state. 
-* `{{is_alert_recovery}}` triggers when a monitor recovers directly from an **ALERT** state to an **OK** state. 
-* `{{is_warning_recovery}}` triggers when a monitor recovers from a **WARNING** state to an **OK** state
+* `{{is_recovery}}` triggers and a monitor recovers indifferently either from a **WARNING** state or an **ALERT** state.
+* `{{is_alert_recovery}}` triggers when a monitor recovers directly from an **ALERT** state to an **OK** state.
+* `{{is_warning_recovery}}` triggers when a monitor recovers from a **WARNING** state to an **OK** state
 
 This means that if the monitor switches from an **ALERT** to a **WARNING** to an **OK** state:
 
-* the `{{is_recovery}}` would trigger
-* the `{{is_alert_recovery}}` wouldn't trigger 
-* the `{{is_warning_recovery}}` would trigger. 
+* the `{{is_recovery}}` would trigger
+* the `{{is_alert_recovery}}` wouldn't trigger
+* the `{{is_warning_recovery}}` would trigger.
 
-The @ notification inside the template variables follows the same rules. 
+The @ notification inside the template variables follows the same rules.
 
 #### `{{is_match}}`
 
@@ -200,29 +200,29 @@ We provide a number of different types of monitors and not all variables are ava
 ## Advanced notification configuration
 ### Include links to appropriate dashboards
 
-Many organizations today would like to include additional context to their Alerts.  Quick links to relevant dashboards as a part of the Alert has proven to reduce the overall time it takes during the break fix process to reduce time to resolution.  
+Many organizations today would like to include additional context to their Alerts. Quick links to relevant dashboards as a part of the Alert has proven to reduce the overall time it takes during the break fix process to reduce time to resolution.
 
-Datadog makes message template variables available to each defined monitor.  Using these variables, you can dynamically build a URL that links Datadog Users to an appropriate dashboard using the scope of the monitor.  
+Datadog makes message template variables available to each defined monitor. Using these variables, you can dynamically build a URL that links Datadog Users to an appropriate dashboard using the scope of the monitor.
 
 Here are a few examples of providing links to items like System Dashboards, Integration Dashboards, HostMaps and Managed Monitors pages.  
 
-First example to review is the most common.  Let’s say you would like to provide a link to a System Dashboard when a monitor for a specific system metric has exceeded your defined threshold.  The message template variable that can be leveraged in this instance would be {{host.name}}.  Include the following URL as a part of your Monitor “Say What’s Happening” section: 
+First example to review is the most common. Let’s say you would like to provide a link to a System Dashboard when a monitor for a specific system metric has exceeded your defined threshold. The message template variable that can be leveraged in this instance would be {{host.name}}. Include the following URL as a part of your Monitor “Say What’s Happening” section:
 
 ```
 https://app.datadoghq.com/dash/integration/system_overview?tpl_var_scope=host:{{host.name}}
 ```
 
-As you can see, `{{host.name}}` is replaced with the offending host of the monitor in question. 
+As you can see, `{{host.name}}` is replaced with the offending host of the monitor in question.
 
 {{< img src="monitors/notifications/system_dashboard_url.png" alt="system_dashboard_url" responsive="true" popup="true" style="width:70%;" >}}
 
 Find below additional examples of links that could be added to Monitors to provide Datadog Users quick access to common pages leveraged during the break fix and triage process.
 
-* **Hostmaps** - If you would like to include a HostMap to compare metrics with other similar hosts, you can use a link like below to be included in your Monitor: 
+* **Hostmaps** - If you would like to include a HostMap to compare metrics with other similar hosts, you can use a link like below to be included in your Monitor:
   ```
-  https://app.datadoghq.com/infrastructure/map?fillby=avg%3Acpuutilization&sizeby=avg%3Anometric&filter=cassandra 
+  https://app.datadoghq.com/infrastructure/map?fillby=avg%3Acpuutilization&sizeby=avg%3Anometric&filter=cassandra
   ```
-  The above link has more customizable options than your standard System Dashboard.  Here you have additional variables to define.  Most common variables passed into this URL are the following **fillby, sizeby, filter**: 
+  The above link has more customizable options than your standard System Dashboard. Here you have additional variables to define. Most common variables passed into this URL are the following **fillby, sizeby, filter**:
 
   * `fillby` is defined by adding `fillby:avg:<MetricName>`.  
   * `sizeby` is defined by adding `sizeby:avg:<SecondMetricName>`.
@@ -238,7 +238,7 @@ Find below additional examples of links that could be added to Monitors to provi
   ```
   {{< img src="monitors/notifications/integration_url.png" alt="integration_url" responsive="true" popup="true" style="width:70%;">}}
 
-* **Manage Monitors Page** – To link to a Manage monitors page that displays all of the monitors for the host in question, define a link like below:  
+* **Manage Monitors Page** – To link to a Manage monitors page that displays all of the monitors for the host in question, define a link like below:
   ```
   https://app.datadoghq.com/monitors/manage?q=scope:host:{{host.name}}
   ```
@@ -247,7 +247,7 @@ Find below additional examples of links that could be added to Monitors to provi
   ```
   https://app.datadoghq.com/monitors/manage?q=scope:host:{{host.name}}&status:Alert
   ```
-  If you would like all monitors for a specific application or integration,  add the following query to the URL `q=<integration_name> `: 
+  If you would like all monitors for a specific application or integration,  add the following query to the URL `q=<integration_name> `:
   ```
   https://app.datadoghq.com/monitors/manage?q=cassandra
   ```

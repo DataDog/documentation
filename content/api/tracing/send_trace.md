@@ -10,19 +10,19 @@ Datadog's APM allows you to collect performance metrics by tracing your code to 
 
 Tracing data is sent to the Datadog Agent via an HTTP API. We provide some [official libraries](/tracing/#instrument-your-application) that simplify sending metrics to the Datadog Agent, however you may want to interact directly with the API to instrument applications that cannot use the libraries or are written in languages that don't yet have an official Datadog Tracing library.
 
-Traces can be sent as an array of [traces](/tracing/terminology/#trace):
+Traces can be sent as an array of [traces](/tracing/visualization/trace):
 ```
 [ trace1, trace2, trace3 ]
 ```
 
-and each trace is an array of [spans](/tracing/terminology/#span):
+and each trace is an array of [spans](/tracing/visualization/trace/#spans):
 ```
 trace1 = [ span, span2, span3 ]
 ```
 
 and each span is a dictionary with a `trace_id`, `spand_id`, `resource`..
 
-[Learn more about the APM (tracing) terminology](/tracing/terminology)
+[Learn more about the APM (tracing) terminology](/tracing/visualization/services_list/)
 
 **Note**: Each span within a trace should use the same trace_id.
 

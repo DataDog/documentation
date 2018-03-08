@@ -3,7 +3,7 @@ title: Docker, ECS, & Kubernetes Events
 kind: faq
 ---
 
-### Container Integration Events
+### Container Integration Events
 
 When monitoring containers and orchestrators (Docker, ECS, and Kubernetes) you are familiar with the events that are available once an integration has been enabled and respective configuration steps followed.
 
@@ -75,7 +75,7 @@ The events below will be available per integration:
 
 [Learn more about Datadog-Kubernetes integration](/integrations/kubernetes/)
 
-To access and utilize these events in Datadog, use the following three methods:
+To access and utilize these events in Datadog, use the following three methods:
 
 * [Events stream](/graphing/event_stream)
 * [Monitors](/monitors)

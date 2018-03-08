@@ -73,11 +73,11 @@ The Agent can be started, stopped, and restarted from the Services panel. To vie
 
 To check if the Agent is running, check if the service status in the Services panel is listed as "Started". A process called "ddagent.exe" should also exist in the Task Manager. To receive more information about the Agent's state, visit the _status page_ by going to **Settings -> Agent Status** in Agent version 5.2 and above and by going to `http://localhost:17125/status` in Agent version 3.9.1 to 5.1.
 
-For 5.2 and later versions of the agent go to the Datadog Agent Manager->Settings->Agent Status
+For 5.2 and later versions of the agent go to the Datadog Agent Manager->Settings->Agent Status
 
 {{< img src="agent/faq/windows_status.png" alt="Windows Status" responsive="true" popup="true" style="width:50%;" >}}
 
-It's also possible to run the info command using Powershell:
+It's also possible to run the info command using Powershell:
 
 ```
 & 'C:\Program Files\Datadog\Datadog Agent\embedded\python.exe' 'C:\Program Files\Datadog\Datadog Agent\agent\agent.py' info
@@ -191,7 +191,7 @@ The current way to do so is to add the package in the library zipped folder that
 To send Datadog support a copy of your Windows logs and configurations, do the following:
 
 1. Open the Datadog Agent Manager
-2. Select Actions
+2. Select Actions
 3. Select Flare
 4. Enter your ticket number (`<CASE_ID>`)- if you don't have one leave the value as zero
 5. Lastly, enter the email address you use to log into Datadog
@@ -200,7 +200,7 @@ That's it, you're done!
 
 {{< img src="agent/faq/windows_flare.jpg" alt="Windows Flare" responsive="true" popup="true" style="width:70%;">}}
 
-It's also possible to run the flare command using Powershell:
+It's also possible to run the flare command using Powershell:
 
 ```
 & 'C:\Program Files\Datadog\Datadog Agent\embedded\python.exe' 'C:\Program Files\Datadog\Datadog Agent\agent\agent.py' flare <CASE_ID>
@@ -227,7 +227,7 @@ import tempfile
 print tempfile.gettempdir()
 ```
 
-Example : 
+Example :
 
 {{< img src="agent/faq/flare_fail.png" alt="Flare Fail" responsive="true" popup="true" style="width:70%;">}}
 
@@ -248,39 +248,39 @@ When adding your own services, be sure to follow the formatting exactly as shown
 
 Also, any time you modify an Integration you’ll need to restart the Datadog Service. You can do this from services.msc or right from the UI via Actions.
 
-For Services, Datadog doesn't track the metrics, only their availability. (For metrics you’ll want to use [Process](/#monitoring-windows-processes) or [WMI Integration](/integrations/wmi)). To set up a Monitor, select the "Integration" then "Windows Service" monitor type. There you can "Pick Monitor Scope" and choose the service you would like to monitor.
+For Services, Datadog doesn't track the metrics, only their availability. (For metrics you’ll want to use [Process](/#monitoring-windows-processes) or [WMI Integration](/integrations/wmi)). To set up a Monitor, select the "Integration" then "Windows Service" monitor type. There you can "Pick Monitor Scope" and choose the service you would like to monitor.
 
 ### Monitoring system load for Windows
 
-The Datadog Agent collects a large number of system metrics out of the box. One of the more commonly used system metrics is system.load.*.
+The Datadog Agent collects a large number of system metrics out of the box. One of the more commonly used system metrics is system.load.*.
 
 |||
 |:----|:---|
-|system.load.1 (gauge)   |The average system load over one minute.|
-|system.load.15 (gauge)  |The average system load over fifteen minutes.|
-|system.load.5 (gauge)   |The average system load over five minutes.|
-|system.load.norm.1 (gauge)  |The average system load over one minute normalized by the number of CPUs.|
-|system.load.norm.15 (gauge) |The average system load over fifteen minutes normalized by the number of CPUs.|
-|system.load.norm.5 (gauge)  |The average system load over five minutes normalized by the number of CPUs. |
- 
+|system.load.1 (gauge)   |The average system load over one minute.|
+|system.load.15 (gauge)  |The average system load over fifteen minutes.|
+|system.load.5 (gauge)   |The average system load over five minutes.|
+|system.load.norm.1 (gauge)  |The average system load over one minute normalized by the number of CPUs.|
+|system.load.norm.15 (gauge) |The average system load over fifteen minutes normalized by the number of CPUs.|
+|system.load.norm.5 (gauge)  |The average system load over five minutes normalized by the number of CPUs.|
 
-The system.load.* metric is Unix specific, it conveys the average amount of resources either waiting to use or currently using the CPU. Each process waiting to use or using the CPU increases the load number by 1. The number at the end of the metric name indicates the average number of these processes in the previous X minutes. For system.load.5, this would be the average over the last 5 minutes. A value of 0 indicates a completely idle CPU, and a number equal to the number of CPU cores in the environment indicates that the CPU can handle every request coming in with no delay. Any number greater than this means that processes are waiting to use the CPU. 
 
-#### Where is System Load for Windows? 
+The system.load.* metric is Unix specific, it conveys the average amount of resources either waiting to use or currently using the CPU. Each process waiting to use or using the CPU increases the load number by 1. The number at the end of the metric name indicates the average number of these processes in the previous X minutes. For system.load.5, this would be the average over the last 5 minutes. A value of 0 indicates a completely idle CPU, and a number equal to the number of CPU cores in the environment indicates that the CPU can handle every request coming in with no delay. Any number greater than this means that processes are waiting to use the CPU.
 
-While Windows does not offer this exact metric, there is an equivalent option that's available by default in the system metrics: `system.proc.queue.length`. The `system.proc.queue.length` metric allows you to see the number of threads that are observed as delayed in the processor ready queue and are waiting to be executed. 
+#### Where is System Load for Windows?
+
+While Windows does not offer this exact metric, there is an equivalent option that's available by default in the system metrics: `system.proc.queue.length`. The `system.proc.queue.length` metric allows you to see the number of threads that are observed as delayed in the processor ready queue and are waiting to be executed.
 
 ### Monitoring Windows Processes
 
-You can monitor Windows processes via the [process integration](/integrations/process/). To set this up on Windows, select the "Process" integration from the list of integrations in the Datadog Agent Manager and edit the configuration.
+You can monitor Windows processes via the [process integration](/integrations/process/). To set this up on Windows, select the "Process" integration from the list of integrations in the Datadog Agent Manager and edit the configuration.
 
-For example, to monitor Notepad, your configuration file would include:
+For example, to monitor Notepad, your configuration file would include:
 
 ```yaml
 init_config:
 instances:
 - name: notepad
-  search_string: ['notepad.exe']
+  search_string: ['notepad.exe']
 ```
 
 When adding your own processes, be sure to follow the formatting exactly as shown - if formatting is not correct the integration fails.
@@ -289,7 +289,7 @@ When you're done editing the file, press "Save" to save it, then "Enable" to ena
 
 Any time you modify a Datadog integration you’ll need to restart the Datadog Agent service. You can do this by clicking the "Actions" button in the top left corner, then selecting "Restart", or you can restart "Datadog Agent" in your Services Management Snap-in Console (services.msc).
 
-To verify that your Process check is working, click on "Logs and Status", then "Agent Status". Scroll down to the "Checks" section and you should see "process" reporting on each process instance you have setup in your configuration file.
+To verify that your Process check is working, click on "Logs and Status", then "Agent Status". Scroll down to the "Checks" section and you should see "process" reporting on each process instance you have setup in your configuration file.
 
 Again, due to the sensitivity of yaml, if you've tried the above and cannot get it to work, use the attached file to get yourself started and confirm your syntax.
 

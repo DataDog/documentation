@@ -16,14 +16,14 @@ It's recommended that you set up Datadog as an Okta application manually, as opp
 
 ## General Details
 
-* **Single Sign On URL**: https://app.datadoghq.com/account/saml/assertion 
+* **Single Sign On URL**: https://app.datadoghq.com/account/saml/assertion
     (NOTE: If using IdP initiated login, use a public ID-specific URL which is generated after enabling IdP initiated login in Datadog. Find this URL at the '[Configure SAML](https://app.datadoghq.com/saml/saml_setup)' page, in the 'Assertion Consumer Service URL' field. Example URL: `https://app.datadoghq.com/account/saml/assertion/id/<PUBLIC_ID>` This also applies to the **Recipient URL** and the **Destination URL** fields respectively.)
 
-* **Recipient URL**: https://app.datadoghq.com/account/saml/assertion (or check the box labeled "Use this for Recipient URL and Destination URL" in Okta)
+* **Recipient URL**: https://app.datadoghq.com/account/saml/assertion (or check the box labeled "Use this for Recipient URL and Destination URL" in Okta)
 
-* **Destination URL**: https://app.datadoghq.com/account/saml/assertion (or check the box labeled "Use this for Recipient URL and Destination URL" in Okta)
+* **Destination URL**: https://app.datadoghq.com/account/saml/assertion (or check the box labeled "Use this for Recipient URL and Destination URL" in Okta)
 
-* **Audience URI (SP Entity ID)**: https://app.datadoghq.com/account/saml/metadata.xml
+* **Audience URI (SP Entity ID)**: https://app.datadoghq.com/account/saml/metadata.xml
 
 * **Default Relay State**: <not required/leave blank>
 
@@ -44,9 +44,9 @@ It's recommended that you set up Datadog as an Okta application manually, as opp
 
 ## Attribute Statements Details
 
-* **NameFormat**: urn:oasis:names:tc:SAML:2.0:attrname-format:uri
-* **sn**: user.lastName
-* **givenName**: user.firstName
+* **NameFormat**: urn:oasis:names:tc:SAML:2.0:attrname-format:uri
+* **sn**: user.lastName
+* **givenName**: user.firstName
 
 Additional Information on configuring SAML for your Datadog account can be found [on the dedicated SAML documentation page](/account_management/saml):
 

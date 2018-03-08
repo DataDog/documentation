@@ -97,7 +97,7 @@ kind: faq
 * [Client Authentication against the apiserver and kubelet](/integrations/faq/client-authentication-against-the-apiserver-and-kubelet)
 * [Gathering Kubernetes events](/integrations/faq/gathering-kubernetes-events)
 * [Why is the Kubernetes check failing with a ConnectTimeout error to port 10250?](/integrations/faq/why-is-the-kubernetes-check-failing-with-a-connecttimeout-error-to-port-10250)
-* [Using RBAC permission with your Kubernetes integration](/integrations/faq/using-rbac-permission-with-your-kubernetes-integration)
+* [Using RBAC permission with your Kubernetes integration](/integrations/faq/using-rbac-permission-with-your-kubernetes-integration)
 
 ## MySQL & SQL 
 * [Connection Issues with the SQL Server Integration](/integrations/faq/connection-issues-with-the-sql-server-integration)
@@ -107,7 +107,7 @@ kind: faq
 * [How to collect metrics from custom MySQL queries](/integrations/faq/how-to-collect-metrics-from-custom-mysql-queries)
 * [Can I collect SQL Server performance metrics beyond what is available in the sys.dm_os_performance_counters table? Try WMI](/integrations/faq/can-i-collect-sql-server-performance-metrics-beyond-what-is-available-in-the-sys-dm-os-performance-counters-table-try-wmi)
 * [How can I collect more metrics from my SQL Server integration?](/integrations/faq/how-can-i-collect-more-metrics-from-my-sql-server-integration)
-* [Database user lacks privileges](/integrations/faq/database-user-lacks-privileges)
+* [Database user lacks privileges](/integrations/faq/database-user-lacks-privileges)
 
 ## Network
 * [How to send TCP/UDP host metrics via the Datadog API ?](/integrations/faq/how-to-send-tcp-udp-host-metrics-via-the-datadog-api)

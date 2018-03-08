@@ -2,7 +2,7 @@
 title: Windows Status Based Check
 kind: faq
 ---
-This guide outlines the workflow for creating a status based check on Windows.
+This guide outlines the workflow for creating a status based check on Windows.
 
 1. Configure the Agent using the Agent Manager: Edit the "Windows Service" configuration in the Agent Manager.
 
@@ -23,10 +23,10 @@ Checks
 
 4. Install the integration by clicking "Install" [on your Datadog application dedicated page](https://app.datadoghq.com/account/settings#integrations/windows_service):
 
-5. Follow [those steps](/monitors/monitor_types/integration) to create an Integration Monitor.
+5. Follow [those steps](/monitors/monitor_types/integration) to create an Integration Monitor.
 
 You should now have a monitor based on your Windows Service Integration.
 
-If you are looking at configuring the Windows Event Log Integration, follow this article:
+If you are looking at configuring the Windows Event Log Integration, follow this article:
 
 [How to monitor events from the Windows Event Logs](/integrations/faq/how-to-monitor-events-from-the-windows-event-logs)

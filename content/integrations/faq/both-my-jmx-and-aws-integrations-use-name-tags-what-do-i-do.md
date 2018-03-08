@@ -7,7 +7,7 @@ The "name" tag is one of many host-level tags that are applied by default from t
 
 The best approach is to rename your JMX integration's "name" tag to be something else (e.g, "bean_name"). With our JMX-based integrations, there are two configuration features that make this possible: 1, the ability to exclude default tags via configuration, and 2, the ability to add specified bean attributes as customized metric tags.
 
-For example, the following configuration of your kafka.yaml would collect a metric called "kafka.messages_in.rate" that would be tagged, among other things, by "name:messagesinpersec". 
+For example, the following configuration of your kafka.yaml would collect a metric called "kafka.messages_in.rate" that would be tagged, among other things, by "name:messagesinpersec".
 ```yaml
 - include:
 domain: 'kafka.server'
@@ -33,5 +33,5 @@ To stop this from conflicting with an AWS "name" tag, you could change that metr
         bean_name: $name
 ```
 
-In this case, the same metric would be collected, but with the "name" tag applied as "bean_name:messagesinpersec" instead, which would no longer conflict with the AWS "name" tag group. 
+In this case, the same metric would be collected, but with the "name" tag applied as "bean_name:messagesinpersec" instead, which would no longer conflict with the AWS "name" tag group.
 {{< img src="integrations/faq/jmx_metric_collected.png" alt="jmx_metric_collected" responsive="true" popup="true">}}

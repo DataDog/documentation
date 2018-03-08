@@ -9,10 +9,10 @@ further_reading:
 
 {{< img src="monitors/faq/Require_screen.png" alt="Require_screen" responsive="true" popup="true" >}}
 
-There are 2 main scenarios for which you'll likely need to **require a full window of data** for evaluation:
+There are 2 main scenarios for which you'll likely need to **require a full window of data** for evaluation:
 
 * Multi-alert [monitors](/monitors) triggering a separate alert per {group}, where new groups can appear.
-* [Monitors](/monitors) using the alerting method **In total**.
+* [Monitors](/monitors) using the alerting method **In total**.
 
 **Example 1**: a multi-alert CPU monitor triggering one separate alert per host, over the average of the past 10 min of data:
 
@@ -27,7 +27,7 @@ There are 2 main scenarios for which you'll likely need to **require a full win
 **Disable** the full window of data in 2 main scenarios, they correspond to sparse metrics :
 
 * Metric not sent at a regular interval
-* Metric not often sent compared to the alerting window
+* Metric not often sent compared to the alerting window
 
 **Example 1**: a monitor based on an error counter, only incremented if an error happens:
 
@@ -37,6 +37,6 @@ There are 2 main scenarios for which you'll likely need to **require a full win
 
 * It doesn't really make sense to ask for a full window of data, and using this parameter may cause the monitor to skip all evaluations and not alert you at all.
 
-For other scenarios, this **full window of data** doesn't have much influence on your monitor.
+For other scenarios, this **full window of data** doesn't have much influence on your monitor.
 
 {{< partial name="whats-next/whats-next.html" >}}

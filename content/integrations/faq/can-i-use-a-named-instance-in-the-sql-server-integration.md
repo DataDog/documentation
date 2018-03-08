@@ -3,7 +3,7 @@ title: Can I use a named instance in the SQL Server integration?
 kind: faq
 ---
 
-When connecting to a default instances in SQL Server, users specify the host name with the port (1433 by default) as the host value in the sqlserver.yaml file. When [troubleshooting connection issues with SQL Server](/integrations/faq/connection-issues-with-the-sql-server-integration), make sure we are connecting to a default instance or a named instance. Named instances can be connected using the $SERVER\$INSTANCE_NAME syntax, but only if the SQL Server Browser service is enabled since this service provides the port the instance is on. 
+When connecting to a default instances in SQL Server, users specify the host name with the port (1433 by default) as the host value in the sqlserver.yaml file. When [troubleshooting connection issues with SQL Server](/integrations/faq/connection-issues-with-the-sql-server-integration), make sure we are connecting to a default instance or a named instance. Named instances can be connected using the $SERVER\$INSTANCE_NAME syntax, but only if the SQL Server Browser service is enabled since this service provides the port the instance is on.
 
 Here are the docs from Microsoft with more about the SQL Server Browser service:
 ```
@@ -16,5 +16,5 @@ Once the SQL Server Browser service has been enabled, you can configure the [sql
 
 ```yaml
 instances:
-  - host: $SERVER\$INSTANCENAME
+  - host: $SERVER\$INSTANCENAME
 ```

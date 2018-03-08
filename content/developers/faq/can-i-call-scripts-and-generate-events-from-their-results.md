@@ -5,7 +5,7 @@ kind: faq
 
 ## Dogwrap
 
-This is accomplished via the dogwrap command line tool provided by the dogapi client library:
+This is accomplished via the dogwrap command line tool provided by the dogapi client library:
 
 For an example of dogwrap in action, let's use cron. You might have a cron’d script to vacuum a Postgres table every day:
 
@@ -25,6 +25,6 @@ This calls the command at the end of the script and send Datadog events if it ex
 
 ## Cronner
 
-Another option to consider is cronner, a command line utility that wraps periodic (cron) jobs for statistics gathering and success monitoring written by PagerDuty:
+Another option to consider is cronner, a command line utility that wraps periodic (cron) jobs for statistics gathering and success monitoring written by PagerDuty:
 
 https://gowalker.org/github.com/PagerDuty/cronner

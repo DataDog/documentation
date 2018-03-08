@@ -3,7 +3,7 @@ title: When I query can I use wildcards in metric names and events?
 kind: faq
 ---
 
-We offer a [tagging system](/getting_started/tagging) that is a great feature in Datadog and is intended for easily graphing and scaling many instances of a metric.
+We offer a [tagging system](/getting_started/tagging) that is a great feature in Datadog and is intended for easily graphing and scaling many instances of a metric.
 
 For example, instead of having specific metric names you can have slightly more general ones, and have different instances of that metric reporting with specific tags. Here’s a toy example, using web_page_visitors as the metric name.
 

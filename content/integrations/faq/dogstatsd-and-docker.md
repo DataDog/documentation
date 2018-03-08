@@ -32,7 +32,7 @@ def hello():
     return "Hello World!"
 
 if __name__ == "__main__"
-    app.run()
+    app.run()
 ```
 
 In our example code above, we set the DogStatsD host to match the Datadog Agent container name, `dd-agent`.

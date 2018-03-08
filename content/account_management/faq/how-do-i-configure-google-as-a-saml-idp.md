@@ -17,13 +17,13 @@ further_reading:
 
 ### For the "Service Provider Details"
 
-**Pre-requisite**: IDP initiated SSO must be checked on DataDog SAML Configuration page
+**Pre-requisite**: IDP initiated SSO must be checked on Datadog SAML Configuration page
 
 * **Application Name**: Can be anything
 * **Description**: Can be anything
-* **ACS URL**: Use the url shown under "Assertion Consumer Service URL" on https://app.datadoghq.com/saml/saml_setup (the one containing `/id/<COMPANY_ID>`). If there is more than one value shown for Assertion Consumer Service URL, only enter one of them here.
+* **ACS URL**: Use the url shown under "Assertion Consumer Service URL" on https://app.datadoghq.com/saml/saml_setup (the one containing `/id/<COMPANY_ID>`). If there is more than one value shown for Assertion Consumer Service URL, only enter one of them here.
 * **Entity ID**:  `<COMPANY_ID>` from ACS URL
-* **Start URL**: Can be blank, or use the "Single Sign On Login URL" listed on https://app.datadoghq.com/saml/saml_setup and https://app.datadoghq.com/account/team
+* **Start URL**: Can be blank, or use the "Single Sign On Login URL" listed on https://app.datadoghq.com/saml/saml_setup and https://app.datadoghq.com/account/team
 * **Signed Response**: Leave unchecked
 * **Name ID**: "Basic Information" "Primary Email"
 

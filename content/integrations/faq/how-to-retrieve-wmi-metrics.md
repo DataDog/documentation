@@ -9,7 +9,7 @@ In the Windows world, operating systems and applications metrics are exposed usi
 
 Data in WMI is grouped into classes. There are several hundreds classes that come by default, and each additional role and feature brings its own. Some Applications can also add classes such as Microsoft SQL Server, Microsoft Exchange along with various 3rd party apps.
 
-Microsoft Powershell is considered the standard way to interact with a Windows system programmatically, and it comes with the tools to manage WMI.
+Microsoft Powershell is considered the standard way to interact with a Windows system programmatically, and it comes with the tools to manage WMI.
 
 To list all classes available on a computer, run:
 ```
@@ -116,7 +116,7 @@ For those who can run third-party applications on their machine the tool WMI Exp
 
 ## Leveraging WMI in Datadog
 
-Now that we understand WMI better, let's see how we can get this data into Datadog. Open the Datagog Agent Manager and click on the WMI Check integration in the left panel.
+Now that we understand WMI better, let's see how we can get this data into Datadog. Open the Datagog Agent Manager and click on the WMI Check integration in the left panel.
 
 Let's start with a simple example: monitoring the number of processes on the machine:
 

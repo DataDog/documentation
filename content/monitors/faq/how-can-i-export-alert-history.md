@@ -7,7 +7,7 @@ further_reading:
   text: Learn how to create a monitor
 ---
 
-Customers sometimes require an audit trail of all Monitor Alerts that have triggered during a specific period of time. If you are an Administrator, you can easily generate a CSV of the past half year (182 days) by accessing this link: https://app.datadoghq.com/report/hourly_data/monitor
+Customers sometimes require an audit trail of all Monitor Alerts that have triggered during a specific period of time. If you are an Administrator, you can easily generate a CSV of the past half year (182 days) by accessing this link: https://app.datadoghq.com/report/hourly_data/monitor
 
 If you need a more specific timeframe, adjust the URL to add in the from and to arguments represented in epoch time, for example: https://app.datadoghq.com/report/hourly_data/monitor?from=XXXX&to=YYYY
 

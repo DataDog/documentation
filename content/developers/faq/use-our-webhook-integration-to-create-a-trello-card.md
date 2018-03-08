@@ -19,7 +19,7 @@ This flow utilizes the Trello REST POST card api endpoint to post the @notificat
 
 To get the Trello App Key and Token, [navigate to Trello's relevant page](https://trello.com/app-key). If you are logged in, you should be able to see the App key immediately:
 
-NOTE: Trello mentions API key in the url. For this article, API and APP keys are one and the same
+NOTE: Trello mentions API key in the url. For this article, API and APP keys are one and the same
 
 {{< img src="developers/faq/developer_api_key.png" alt="developer_api_key" responsive="true" popup="true">}}
 
@@ -31,18 +31,18 @@ To get the Token , click the Token link (Green Arrow) above, authorize a token w
 Click on a card in the list you'd like to add cards to and append `.json` to the url and navigate to that url
 {{< img src="developers/faq/card_url.png" alt="card_url" responsive="true" popup="true">}}
 
-From there, find the value of idList 
+From there, find the value of idList
 {{< img src="developers/faq/id_list.png" alt="id_list" responsive="true" popup="true">}}
 
 ## Configure the Webhook
 
-See [the API documentation for Trello cards](https://trello.com/guide) and our [webhook integration](/integrations/webhooks)
+See [the API documentation for Trello cards](https://trello.com/guide) and our [webhook integration](/integrations/webhooks)
 
 In the configuration:
 
-* name is the alias for how you references this hook. (@webhook-NAME)
+* name is the alias for how you references this hook. (@webhook-NAME)
 
-* URL is `https://api.trello.com/1/cards`
+* URL is `https://api.trello.com/1/cards`
 
 Enable Custom Payload and fill in a json object that looks like:
 
