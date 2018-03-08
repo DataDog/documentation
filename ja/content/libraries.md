@@ -46,7 +46,7 @@ Publish consul service counts into Datadog via dogstatsd with [this library][96]
 Scale up auto-scale groups based on the results of a datadog query with [Dogscaler][97].
 
 #### FreeSwitch
-This is for a [FreeSwitch ESL ][48] application to export statistics to DataDog using the dogstatsd API and is written by [WiMacTel][49].
+This is for a [FreeSwitch ESL ][48] application to export statistics to Datadog using the dogstatsd API and is written by [WiMacTel][49].
 
 #### Google Analytics
 You can get data into Datadog from Google Analytics using our API with [this library][50].

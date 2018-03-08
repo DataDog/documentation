@@ -17,7 +17,7 @@ further_reading:
 
 ### For the "Service Provider Details"
 
-**Pre-requisite**: IDP initiated SSO must be checked on DataDog SAML Configuration page
+**Pre-requisite**: IDP initiated SSO must be checked on Datadog SAML Configuration page
 
 * **Application Name**: Can be anything
 * **Description**: Can be anything
