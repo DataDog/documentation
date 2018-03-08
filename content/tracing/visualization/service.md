@@ -16,17 +16,11 @@ further_reading:
   text: Understand how to read a Datadog Trace
 ---
 
-A service is a set of processes that do the same job - for example a web framework or database (read more about how services are defined in [Getting Started with APM](/tracing/visualization). For each service, APM automatically generates a dashboard page covering:
-
-* Key health metrics
-* Monitor status for all monitors associated with this service
-* List and metrics for all resources associated with this service
+{{< img src="tracing/visualization/service/detailed_service_page.png" alt="Detailed service page" responsive="true" popup="true" style="width:90%;">}}
 
 ## Overview 
 
-Selecting a service on the services page leads you to the detailed service page:
-
-{{< img src="tracing/visualization/service/detailed_service_page.png" alt="Detailed service page" responsive="true" popup="true" style="width:90%;">}}
+Selecting a service on the services page leads you to the detailed service page. A service is a set of processes that do the same job - for example a web framework or database (read more about how services are defined in [Getting Started with APM](/tracing/visualization). 
 
 Consult on this page:
 
