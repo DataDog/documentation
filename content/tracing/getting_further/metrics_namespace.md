@@ -25,7 +25,7 @@ The trace metrics namespace is `trace.<name>.<metrics>{<tags>}` where
 * `<metrics>` is about the hits, errors or latency ("request.hits", etc.)
 * `<tags>` the metrics are tagged by service & resource
 
-So for pylons it might be `trace.pylons.request.hits{service:web_server}`.
+So for pylons it might be `trace.pylons.request.hits{service:web_server}`.
 
 ## Further Reading
 

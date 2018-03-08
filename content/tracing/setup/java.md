@@ -45,13 +45,13 @@ Finally, add the following JVM argument when starting your application in your I
 
 The tracer is configured using System Properties and Environment Variables as follows:
 
-| Config             | System Property       | Environment Variable      |  Default           | Description |
+| Config             | System Property       | Environment Variable      |  Default           | Description |
 |:------------------ |:--------------------- |:------------------------- |:------------------ |:----- |
 | service.name       | dd.service.name       | DD_SERVICE_NAME           | `unnamed-java-app` | The name of a set of processes that do the same job. Used for grouping stats for your application.|
-| writer.type        | dd.writer.type        | DD_WRITER_TYPE            | `DDAgentWriter`    | Default value sends traces to the trace agent. Configuring with `LoggingWriter` instead writes traces out to the console. |
-| agent.host         | dd.agent.host         | DD_AGENT_HOST             | `localhost`        | Hostname for where to send traces to. If using a containerized environment, configure this to be the host ip.  See our [docker docs](https://docs.datadoghq.com/tracing/setup/docker/) for additional detail. |
-| agent.port         | dd.agent.port         | DD_AGENT_PORT             | `8126`             | Port number the agent is listening on for configured host. |
-| priority.sampling  | dd.priority.sampling  | DD_PRIORITY_SAMPLING      | `false`            | Changes how the client and agent sample traces. See [Sampling / distributed tracing](#sampling-distributed-tracing) section for details. |
+| writer.type        | dd.writer.type        | DD_WRITER_TYPE            | `DDAgentWriter`    | Default value sends traces to the trace agent. Configuring with `LoggingWriter` instead writes traces out to the console. |
+| agent.host         | dd.agent.host         | DD_AGENT_HOST             | `localhost`        | Hostname for where to send traces to. If using a containerized environment, configure this to be the host ip.  See our [docker docs](https://docs.datadoghq.com/tracing/setup/docker/) for additional detail. |
+| agent.port         | dd.agent.port         | DD_AGENT_PORT             | `8126`             | Port number the agent is listening on for configured host. |
+| priority.sampling  | dd.priority.sampling  | DD_PRIORITY_SAMPLING      | `false`            | Changes how the client and agent sample traces. See [Sampling / distributed tracing](#sampling-distributed-tracing) section for details. |
 
 **Note**: 
 

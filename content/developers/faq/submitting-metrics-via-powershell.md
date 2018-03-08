@@ -10,26 +10,26 @@ Datadog can collect metrics via the agent as well as via the API independently o
 This method doesn't require you to have the agent installed on the system running the PowerShell script. This, however, means you have to explicitly pass your API key as well as an application key when making the POST request. [See/create API key on your Datadog application](https://app.datadoghq.com/account/settings#api)
 
 ```
-# Tested on Windows Server 2012 R2 w/ PSVersion 4.0
+# Tested on Windows Server 2012 R2 w/ PSVersion 4.0
 
 function unixTime() {
   Return (Get-Date -date ((get-date).ToUniversalTime()) -UFormat %s) -Replace("[,\.]\d*", "")
 }
 
 function postMetric($metric,$tags) {
-  $currenttime = unixTime
-  $host_name = $env:COMPUTERNAME #optional param . 
+  $currenttime = unixTime
+  $host_name = $env:COMPUTERNAME #optional param .
 
-  # Construct JSON
-  $points = ,@($currenttime, $metric.amount)
-  $post_obj = [pscustomobject]@{"series" = ,@{"metric" = $metric.name;
-      "points" = $points;
-      "type" = "gauge";
-      "host" = $host_name;
-      "tags" = $tags}}
-  $post_json = $post_obj | ConvertTo-Json -Depth 5 -Compress
-  # POST to DD API
-  $response = Invoke-RestMethod -Method Post -Uri $url -Body $post_json -ContentType "application/json"
+  # Construct JSON
+  $points = ,@($currenttime, $metric.amount)
+  $post_obj = [pscustomobject]@{"series" = ,@{"metric" = $metric.name;
+      "points" = $points;
+      "type" = "gauge";
+      "host" = $host_name;
+      "tags" = $tags}}
+  $post_json = $post_obj | ConvertTo-Json -Depth 5 -Compress
+  # POST to DD API
+  $response = Invoke-RestMethod -Method Post -Uri $url -Body $post_json -ContentType "application/json"
 }
 
 # Datadog account, API information and optional params
@@ -57,11 +57,11 @@ Having the agent enables you to make use of its [DogStatsD](/developers/dogstats
 #           Windows Server 2008 x64 R2 w/ PSVersion 2.0
 
 function dogstatsd($metric) {
-    $udpClient = New-Object System.Net.Sockets.UdpClient
-    $udpClient.Connect('127.0.0.1', '8125')
-    $encodedData=[System.Text.Encoding]::ASCII.GetBytes($metric)
-    $bytesSent=$udpClient.Send($encodedData,$encodedData.Length)
-    $udpClient.Close()
+    $udpClient = New-Object System.Net.Sockets.UdpClient
+    $udpClient.Connect('127.0.0.1', '8125')
+    $encodedData=[System.Text.Encoding]::ASCII.GetBytes($metric)
+    $bytesSent=$udpClient.Send($encodedData,$encodedData.Length)
+    $udpClient.Close()
 }
 $tags = "|#env:test" # datadog tag
 $temp = Get-Process mmc

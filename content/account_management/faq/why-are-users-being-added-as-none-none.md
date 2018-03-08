@@ -11,6 +11,6 @@ These attributes, which are configured for the user's respective assertion withi
 
 ## How do I fix this?
 
-Confirm that you have correctly configured these assertion attributes within your IdP. Directions are detailed in our [SAML documentation here](/account_management/saml) - see the **setting attributes** section.
+Confirm that you have correctly configured these assertion attributes within your IdP. Directions are detailed in our [SAML documentation here](/account_management/saml) - see the **setting attributes** section.
 
 If you've confirmed these are set but continue to experience trouble, reach out to [us](/help)!

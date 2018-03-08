@@ -36,7 +36,7 @@ The permissions set for dd-agent appears in the output of getfacl if ACLs are en
 
 ### Granting dd-agent read and execute permissions on log directories
 
-Once you have verified ACLs are enabled, grant read and execute permissions for the dd-agent user on the appropriate directories for log collection.  For example, to grant access to `/var/log/apache` , run:
+Once you have verified ACLs are enabled, grant read and execute permissions for the dd-agent user on the appropriate directories for log collection. For example, to grant access to `/var/log/apache` , run:
 
 ```
 setfacl -m u:dd-agent:rx /var/log/apache
@@ -75,18 +75,18 @@ getfacl /var/log/<application-directory>
 
 When ACLs are not present in a system, set your permissions based on group access.  
 
-For instance, if your MySQL service is logging to the following locations:
+For instance, if your MySQL service is logging to the following locations:
 
 ```
 /var/log/mysql/mysql_error.log
 /var/log/mysql/mysql-slow.log
 ```
 
-Their permissions are associated with user 'mysql' and the group 'mysql' by default. This logging scheme denies access to the log file to any user not in the 'mysql' group. Typically you may see something like this:
+Their permissions are associated with user 'mysql' and the group 'mysql' by default. This logging scheme denies access to the log file to any user not in the 'mysql' group. Typically you may see something like this:
 
 ```
-$ ls -l /var/log | grep -i mysql
-drwxr-x--- 2 mysql mysql 4096 Feb 20 06:25 mysql
+$ ls -l /var/log | grep -i mysql
+drwxr-x--- 2 mysql mysql 4096 Feb 20 06:25 mysql
 ```
 
 The easiest path here is to give everyone read access to the file in the logrotate configuration:
@@ -94,15 +94,15 @@ The easiest path here is to give everyone read access to the file in the logrota
 ```
 /var/log/mysql/mysql_error.log /var/log/mysql/mysql-slow.log {
 
-        daily
-        rotate 7
-        missing ok
-        create 644 mysql adm
-        Compress
+        daily
+        rotate 7
+        missing ok
+        create 644 mysql adm
+        Compress
 }
 ```
 
-Each common off-the-shelf application will follow a similar nomenclature. The advantage is that we avoid providing privileged access to an individual account and use a standardized practice. This will keep your audit rules in check.
+Each common off-the-shelf application will follow a similar nomenclature. The advantage is that we avoid providing privileged access to an individual account and use a standardized practice. This will keep your audit rules in check.
 
 ## Further Reading
 

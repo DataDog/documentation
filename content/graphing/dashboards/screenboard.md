@@ -56,10 +56,10 @@ This feature can be enabled by following these simple steps:
 
 ## Backup my Screenboard
 
-Using our [APIs](/api) it's possible to write a script to backup your Screenboard definitions as code. See the following projects as examples of how these backups can be accomplished:
+Using our [APIs](/api) it's possible to write a script to backup your Screenboard definitions as code. See the following projects as examples of how these backups can be accomplished:
 
 * https://github.com/brightcove/dog-watcher
 * https://github.com/Shopify/doggy
 * https://github.com/grosser/kennel
 
-Special thanks to [Brightcove](https://www.brightcove.com/), [Shopify](https://www.shopify.com/), and [Zendesk](https://www.zendesk.com/) for sharing these projects!
+Special thanks to [Brightcove](https://www.brightcove.com/), [Shopify](https://www.shopify.com/), and [Zendesk](https://www.zendesk.com/) for sharing these projects!

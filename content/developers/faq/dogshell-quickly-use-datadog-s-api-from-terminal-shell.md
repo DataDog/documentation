@@ -3,7 +3,7 @@ title: Dogshell, Quickly Use Datadog’s API from Terminal/Shell
 kind: faq
 ---
 
- 
+
 
 Many users are familiar with [our API](/api) and all the many things you can do in Datadog with it, whether sending/querying metrics or events to your Datadog account, creating dashboards, monitors, or downtimes, and more. But there’s an easy way to use our API straight from terminal/shell, using a wrapper called “dogshell”.
 
@@ -35,19 +35,19 @@ Where you can paste your API key, and then
 What is your application key? (Generate one here: https://app.datadoghq.com/account/settings#api)
 ```
 
-Where you can paste your application key. It finishes with:
+Where you can paste your application key. It finishes with:
 ```
 Wrote ~/.dogrc.
 ```
 
-Now you're all set to use your dog commands to quickly use the Datadog api from your terminal / shell. Check out some further help info on the dog commands by running dog -h. 
+Now you're all set to use your dog commands to quickly use the Datadog api from your terminal / shell. Check out some further help info on the dog commands by running dog -h.
 
 In the event that you'd rather just write the .dogrc file yourself (perhaps you'd like to push the file to many of your servers programmatically so that you can run dog commands from any of your servers), the content of this file should be as follows:
 
 ```
 [Connection]
-apikey = YOUR_API_KEY
-appkey = YOUR_APPLICATION_KEY
+apikey = YOUR_API_KEY
+appkey = YOUR_APPLICATION_KEY
 ```
 
 ## The Dogshell Commands:
@@ -65,7 +65,7 @@ For reference, [find the code for dogshell](https://github.com/DataDog/datadogpy
 * dog tag
 * dog search
 * dog comment
- 
+
 
 ### Example, Dogshell in Use
 
@@ -74,7 +74,7 @@ You can post metrics to your Datadog account by using:
 dog metric post <metric_name> <metric_value> --tags "tag:one,tag:two"
 ```
 
-So for example, the following command would send a metric named test_dogshell_metric to your account with a value of 1.0 and the tags "test:one" and "another_test":
+So for example, the following command would send a metric named test_dogshell_metric to your account with a value of 1.0 and the tags "test:one" and "another_test":
 
 ```
 dog metric post test_dogshell_metric 1.0 --tags "test:one,another_test"

@@ -16,7 +16,7 @@ further_reading:
 Integration pipelines support the default log format for a given technology. So if you have customized the log format or written a custom parser which is not working, your logs might not get properly parsed.
 Here are some guidelines on how to find the root cause of the issue and correct the parser.
 
-Before you go ahead and troubleshoot your parser, it might be interesting for you to read our documentation on Datadog [log processing](/logs/processing/) and [log parsing](/logs/parsing/), as well as our [parsing best practice article](/logs/faq/log-parsing-best-practice).
+Before you go ahead and troubleshoot your parser, it might be interesting for you to read our documentation on Datadog [log processing](/logs/processing/) and [log parsing](/logs/parsing/), as well as our [parsing best practice article](/logs/faq/log-parsing-best-practice).
 
 1. Identify your log's pipeline
     Thanks to the pipeline filters, you can easily find the processing pipeline your log went through. Integration pipeline take the source as filter, so check that your log source is correctly set.
@@ -63,7 +63,7 @@ Before you go ahead and troubleshoot your parser, it might be interesting for yo
     {{< img src="logs/faq/Troubleshootparsing.png" alt="Troubleshootparsing" responsive="true" popup="true">}}
     
 
-    This means that the issue is in the user agent attribute. 
+    This means that the issue is in the user agent attribute.
 
 4. Fix the issue
     Now that the culprit attribute is identified, let's look at it more closely.
@@ -76,8 +76,8 @@ Before you go ahead and troubleshoot your parser, it might be interesting for yo
 
     * `%{notSpace:http.useragent:nullIf("-")}`
 
-    The first thing to check is the matcher (as a reminder a matcher describes what element the rule expects such as integer, notSpace, regex, ...). Here we have notSpace. But our useragent contains spaces and even specific characeters. Therefore notSpace is not going to work here.
-    The matcher to use is: regex("[^\\\"]*")
+    The first thing to check is the matcher (as a reminder a matcher describes what element the rule expects such as integer, notSpace, regex, ...). Here we have notSpace. But our useragent contains spaces and even specific characeters. Therefore notSpace is not going to work here.
+    The matcher to use is: regex("[^\\\"]*")
 
     In other situation it might be the rule expecting an "integer" whereas the values are double so the matcher should be changed to "number".
 

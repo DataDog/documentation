@@ -7,7 +7,7 @@ aliases:
 
 Datadog’s Application Performance Monitoring component consists of a few key components: [services](/tracing/visualization/service) and [resources](/tracing/visualization/resource) being the top most layers.  
 
-Each graph within the APM service and resource Dashboards consist of some `trace.*` metrics.  
+Each graph within the APM service and resource Dashboards consist of some `trace.*` metrics.
 Utilize [the download button at the top of the graph](/tracing/visualization/service/#export-to-timeboard) to save those Metrics to an existing Timeboard. This can be done for both service level and resource level metrics:
 
 {{< img src="tracing/faq/apm_save_1.png" alt="APM save" responsive="true" popup="true">}}

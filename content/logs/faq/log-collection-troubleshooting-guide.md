@@ -13,7 +13,7 @@ further_reading:
   text: Learn how to explore your logs
 ---
 
-There are a number of common issues that can get in the way when [sending new logs to Datadog](/logs/) via the log collector in the dd-agent. If you experience issues sending new logs to Datadog, this list helps you troubleshoot. If you continue to have trouble, email [us](/help) for further assistance. 
+There are a number of common issues that can get in the way when [sending new logs to Datadog](/logs/) via the log collector in the dd-agent. If you experience issues sending new logs to Datadog, this list helps you troubleshoot. If you continue to have trouble, email [us](/help) for further assistance.
 
 ## The agent needs to be restarted
 
@@ -29,11 +29,11 @@ The dd-agent does not run as root (and we do not recommend that you make it run 
 
 If the dd-agent user does not have read access to the files you configure it to tail, then a permissions error is captured in the `/var/log/datadog/logs-agent.log`
 
-N.B. when you add the appropriate read permissions, you want also to make sure that these permissions are correctly set on your log rotation configuration. Otherwise, when the log rotates next, the dd-agent may lose its read permissions.  
+N.B. when you add the appropriate read permissions, you want also to make sure that these permissions are correctly set on your log rotation configuration. Otherwise, when the log rotates next, the dd-agent may lose its read permissions.
 
 ## Outbound traffic on port 10516 is blocked
 
-The log-agent within the dd-agent sends its logs to Datadog over tcp via port 10516. If that connection is not available, logs fail to be sent and an error is recorded in the logs-agent.log to that effect. 
+The log-agent within the dd-agent sends its logs to Datadog over tcp via port 10516. If that connection is not available, logs fail to be sent and an error is recorded in the logs-agent.log to that effect.
 
 You can test your connection by running starting a telnet command like so (port 10514 would work too, but is less secure):
 ```
@@ -52,7 +52,7 @@ These are a few of the common configuration issues that are work triple-checking
 
 2. You do not have any .yaml file in your conf.d/ directory that includes a logs section and the appropriate values, or you have added these values only to the `logs-agent.yaml` (N.B. you want to keep the logs-agent.yaml configurations separate from the configuration files that determine where the dd-agent should look/listen for logs).
 
-3. You may have some .yaml parsing errors in your configuration files. Yaml is notoriously finicky, so when in doubt, a good [yaml validator](https://codebeautify.org/yaml-validator) is worth referencing. 
+3. You may have some .yaml parsing errors in your configuration files. Yaml is notoriously finicky, so when in doubt, a good [yaml validator](https://codebeautify.org/yaml-validator) is worth referencing.
 
 ### Check for errors in the logs
 
