@@ -13,13 +13,13 @@ further_reading:
   text: Learn more about services in Datadog
 - link: "/tracing/visualization/resource"
   tag: "Documentation"
-  text: Dive into your resource performances and traces
+  text: Dive into your resource performance and traces
 - link: "/tracing/visualization/trace"
   tag: "Documentation"
   text: Understand how to read a Datadog Trace
 ---
 
-APM collects metrics on your app’s performance at four levels of granularity: _services_, _resources_, _trace_, and _span_ level.
+APM collects metrics on your app’s performance at four levels of granularity: _services_, _resources_, _traces_, and _spans_ level.
 
 ## Services
 
@@ -33,13 +33,13 @@ While a more complex environment may break it out into 6 services:
 * 3 separate services: `webapp`, `admin`, and `query`.
 * 3 separate external service:  `master-db`,  `replica-db`, and `yelp-api`.
 
-APM automatically assigns names to your services; however you can also name them explicitly. See instructions for: [Go](https://godoc.org/github.com/DataDog/dd-trace-go/tracer#Service), [Java](/tracing/setup/java/#configuration), [Python](http://pypi.datadoghq.com/trace/docs/#get-started), [Ruby](http://www.rubydoc.info/gems/ddtrace/).
+APM automatically assigns names to your services; however you can also name them explicitly. See instructions for: [Go](https://godoc.org/github.com/DataDog/dd-trace-go/tracer#service), [Java](/tracing/setup/java/#configuration), [Python](http://pypi.datadoghq.com/trace/docs/#get-started), [Ruby](http://www.rubydoc.info/gems/ddtrace/).
 
 Service names:
 
-* **must be lowercase, alphanumeric characters**.
-* **cannot have more than 50 characters**.
-* **cannot contain spaces** (spaces are replaced with underscores).
+* **Must be lowercase, alphanumeric characters**.
+* **Cannot have more than 50 characters**.
+* **Cannot contain spaces** (spaces are replaced with underscores).
 * must adhere to [metric naming rules](/developers/metrics/).
 
 **Note**: Service must have a type attached, APM automatically assigns services one of four types: web, database, cache, custom.
@@ -55,12 +55,12 @@ You can also [alert](/monitors/monitor_types/apm/) on any service level metric. 
 
 Resources should be grouped together under a canonical name, like `/user/home` rather than have `/user/home?id=100` and `/user/home?id=200` as separate resources. APM automatically assigns names to your resources; however you can also name them explicitly. See instructions for: [Go](/tracing/setup/go/), [Java](/tracing/setup/java/#configuration), [Python](/tracing/setup/python/), [Ruby](/tracing/setup/ruby/).
 
-These resources can be found after clicking on a particular [service](/tracing/visualization/services_list/#resource).
+These resources can be found after clicking on a particular [service](/tracing/visualization/service).
 
 Resource names: 
 
-* **must be lowercase, alphanumeric characters**
-* **cannot exceed 5000 bytes**
+* **Must be lowercase, alphanumeric characters**
+* **Cannot exceed 5000 bytes**
 
 [Alert](/tracing/faq/how-to-create-a-monitor-over-every-resource-apm) on any resource level metric. Read more about monitoring resources in APM on the [resource dashboard](/tracing/visualization/resource) page.
 
@@ -86,7 +86,7 @@ For example, a trace can be used to track the entire time spent processing a com
 
 **A span represents a logical unit of work in the system.**  
 
-Spans are associated with a [Service](/tracing/visualization/service) and optionally a [resource](/tracing/visualization/resource). Each span consists of a start time, a duration, and optional tags. For example, a span can describe the time spent on a distributed call on a separate machine, or the time spent in a small component within a larger operation. Spans can be nested within each other, and in those instances will have a parent-child relationship.
+Spans are associated with a [service](/tracing/visualization/service) and optionally a [resource](/tracing/visualization/resource). Each span consists of a start time, a duration, and optional tags. For example, a span can describe the time spent on a distributed call on a separate machine, or the time spent in a small component within a larger operation. Spans can be nested within each other, and in those instances will have a parent-child relationship.
 
 {{< img src="getting_started/trace_span_image.png" alt="Trace span image" responsive="true" popup="true" style="width:80%;">}}
 

@@ -27,7 +27,7 @@ To improve visibility into applications using unsupported frameworks, consider:
 
 ## Installation and Getting Started
 
-To begin tracing applications written in any language, first [install and configure the Datadog Agent](https://docs.datadoghq.com/tracing#installing-the-agent).
+To begin tracing applications written in any language, first [install and configure the Datadog Agent](https://docs.datadoghq.com/tracing/setup).
 
 Next, download `dd-java-agent.jar` that contains the agent class files:
 

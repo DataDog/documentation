@@ -22,7 +22,7 @@ For Python applciations, note that tracing is disabled when your application is 
 
 ## Installation
 
-To begin tracing applications written in Python, first [install and configure the Datadog Agent](/tracing#installing-the-agent).
+To begin tracing applications written in Python, first [install and configure the Datadog Agent](/tracing/setup).
 
 Next, install the Datadog Tracing library using pip:
 

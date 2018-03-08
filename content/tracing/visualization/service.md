@@ -10,7 +10,7 @@ further_reading:
   text: Discover the list of services reporting to Datadog
 - link: "/tracing/visualization/resource"
   tag: "Documentation"
-  text: Dive into your resource performances and traces
+  text: Dive into your resource performance and traces
 - link: "/tracing/visualization/trace"
   tag: "Documentation"
   text: Understand how to read a Datadog Trace
@@ -28,7 +28,7 @@ Consult on this page:
 * [Out of the box graphs](#out-of-the-box-graphs) 
 * [Resources associated to this service](/tracing/visualization/resource) 
 
-## Service monitor
+## Service Monitor
 
 Datadog propose list of monitor depending of your service type: 
 
@@ -47,7 +47,7 @@ Datadog provides out of the box graphs for any given Service:
     *  The amount of **Requests per second**
 * Latency -  Choose to display:
     *  The Avg/p75/p90/p95/p99/Max latency of your traced requests 
-    *  The **[Apdex](/tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm) score** of your service (for *web* type service only)
+    *  The **Apdex score** for web services; [learn more about Apdex](/tracing/getting_further/configure_an_apdex_for_your_traces_with_datadog_apm)
 * Error - Choose to display:
     * The **Total amount of errors** 
     * The amount of **Errors per second** 
@@ -60,7 +60,7 @@ Datadog provides out of the box graphs for any given Service:
 
 ### Export to Timeboard
 
-On the upper-right corner of each graphs click on the little arrow in order to export your graph into a pre-existing [Timeboard](/graphing/dashboards/timeboard):
+On the upper-right corner of each graph click on the arrow in order to export your graph into a pre-existing [Timeboard](/graphing/dashboards/timeboard):
 
 {{< img src="tracing/visualization/service/save_to_timeboard.png" alt="Save to timeboard" responsive="true" popup="true" style="width:40%;">}}
 
@@ -76,7 +76,7 @@ Use the top right selector of this graph to zoom on a given percentile of latenc
 
 ## Resources
 
-Consult the list of resources associated to your service:
+See the list of resources associated with your service. Resources are particular actions for your services (typically individual endpoints or queries). Read more about resources in [Getting Started with APM](/tracing/visualization). Sort the resources for this service by requests, latency, errors, and time, to identify areas of high traffic or potential trouble. Note that the these metric columns are configurable (see image below).
 
 {{< img src="tracing/visualization/service/resources.png" alt="Resources" responsive="true" popup="true" style="width:90%;">}}
 
@@ -89,9 +89,9 @@ Filter your resources list with a query for basic text filtering:
 
 ### Columns 
 
-Choose what do display in your resources list:
+Choose what to display in your resources list:
 
-* **Request**: Absolute amount of requests traced (per seconds)
+* **Requests**: Absolute amount of requests traced (per seconds)
 * **Avg/p75/p90/p95/p99/Max Latency**: The Avg/p75/p90/p95/p99/Max latency of your traced requests
 * **Total time**: Sum of all time spend in this resource 
 * **Error**: Absolute amount of error for a given resource

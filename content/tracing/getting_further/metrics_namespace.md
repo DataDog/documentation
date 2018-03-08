@@ -13,7 +13,7 @@ further_reading:
   text: Learn more about services in Datadog
 - link: "/tracing/visualization/resource"
   tag: "Documentation"
-  text: Dive into your resource performances and traces
+  text: Dive into your resource performance and traces
 - link: "/tracing/visualization/trace"
   tag: "Documentation"
   text: Understand how to read a Datadog Trace

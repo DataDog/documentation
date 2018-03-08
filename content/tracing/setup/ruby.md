@@ -18,7 +18,7 @@ further_reading:
 
 ## Installation
 
-To begin tracing applications written in Ruby, first [install and configure the Datadog Agent](/tracing#installing-the-agent).
+To begin tracing applications written in Ruby, first [install and configure the Datadog Agent](/tracing/setup).
 
 Next, install the ddtrace gem:
 

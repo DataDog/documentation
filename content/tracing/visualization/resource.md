@@ -18,11 +18,15 @@ further_reading:
 
 {{< img src="tracing/visualization/resource/ressource.png" alt="Ressource" responsive="true" popup="true">}}
 
-See the list of resources associated with your service. Resources are particular actions for your services (typically individual endpoints or queries). Read more about resources in [Getting Started with APM](/tracing/visualization). Sort the resources for this service by requests, latency, errors, and time, to identify areas of high traffic or potential trouble. Note that the these metric columns are configurable (see image below).
+A resource is a particular action for a given service (typically an individual endpoint or query). Read more about resources in [Getting Started with APM](/tracing/visualization). For each resource, APM automatically generates a dashboard page covering:
+
+* Key health metrics
+* Monitor status for all monitors associated with this service
+* List and metrics for all resources associated with this service
 
 ## Out of the box graphs
 
-Datadog provides out of the box graphs for any given Resource:
+Datadog provides out of the box graphs for any given resource:
 
 * Requests - Choose to display:
     *  The **Total amount of requests** 
@@ -41,7 +45,7 @@ Datadog provides out of the box graphs for any given Resource:
 
 ### Export to Timeboard
 
-On the upper-right corner of each graphs click on the little arrow in order to export your graph into a pre-existing [Timeboard](/graphing/dashboards/timeboard):
+On the upper-right corner of each graph click on the arrow in order to export your graph into a pre-existing [Timeboard](/graphing/dashboards/timeboard):
 
 {{< img src="tracing/visualization/resource/save_to_timeboard.png" alt="Save to timeboard" responsive="true" popup="true" style="width:40%;">}}
 
@@ -59,7 +63,7 @@ Zoom on this graph to filter corresponding traces.
 
 ## Traces
 
-Consult the list of sampled traces associated to your service. Filter/sort this list to see fast/slow and error/non-error traces:  
+Consult the list of traces associated with this resource. Filter/sort this list to see fast/slow and error/non-error traces:  
 
 [Refer to our dedicated trace documentation to learn more](/tracing/visualization/trace).
 

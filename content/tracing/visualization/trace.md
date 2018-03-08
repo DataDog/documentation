@@ -13,24 +13,21 @@ further_reading:
   text: Learn more about services in Datadog
 - link: "/tracing/visualization/resource"
   tag: "Documentation"
-  text: Dive into your resource performances and traces
+  text: Dive into your resource performance and traces
 - link: "/tracing/visualization/trace"
   tag: "Documentation"
   text: Understand how to read a Datadog Trace
 ---
 
-Selecting a trace offers you the list of spans associated to it with a flame graph display of each spans with their associated metadata:
+View an individual trace to see all of its spans and associated metadata. Each trace can be viewed either as a flame graph or as a list (grouped by service or host).
 
 {{< img src="tracing/visualization/trace/trace.png" alt="Trace" responsive="true" popup="true" style="width:90%;">}}
 
-Select between **Service** or **Host** break down to group your graphs and stats accordingly:
-
-* **Service**: show all span associated services
-* **Host**: show all spans associated hots
+Calculate breakdown of execution time and adjust the color scheme by either **service** or **host**.
 
 {{< img src="tracing/visualization/trace/service_host_display.png" alt="Service host display" responsive="true" popup="true" style="width:40%;">}}
 
-Switch to a list display in order to displaying all resources at a glance:
+List sorts resources by service, not chronologically. Here it's easy to see all resources at a glance and sort by count of spans, average duration, and others:
 
 {{< img src="tracing/visualization/trace/trace_list.png" alt="Trace list" responsive="true" popup="true" style="width:90%;">}}
 

@@ -13,7 +13,7 @@ further_reading:
   text: Learn more about services in Datadog
 - link: "/tracing/visualization/resource"
   tag: "Documentation"
-  text: Dive into your resource performances and traces
+  text: Dive into your resource performance and traces
 - link: "/tracing/visualization/trace"
   tag: "Documentation"
   text: Understand how to read a Datadog Trace
@@ -127,7 +127,7 @@ The code above is already instrumented. Please [refer to the dedicated setup doc
 
 ### Datadog APM
 
-Once the code is executed, we start to see data in [APM](https://app.datadoghq.com/apm/home). On the [Service List](/tracing/visualization/services_list/), our two services, **thinker-api** and **thinker-microservice**, have appeared with some metrics about their performance:
+Once the code is executed, we start to see data in [APM](https://app.datadoghq.com/apm/home). On the [service List](/tracing/visualization/services_list/), our two services, **thinker-api** and **thinker-microservice**, have appeared with some metrics about their performance:
 
 {{< img src="tracing/product_specs/distributed_tracing/services_GS.png" alt="Services list getting started" responsive="true" popup="true">}}
 

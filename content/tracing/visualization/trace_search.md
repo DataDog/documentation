@@ -13,7 +13,7 @@ further_reading:
   text: Learn more about services in Datadog
 - link: "/tracing/visualization/resource"
   tag: "Documentation"
-  text: Dive into your resource performances and traces
+  text: Dive into your resource performance and traces
 - link: "/tracing/visualization/trace"
   tag: "Documentation"
   text: Understand how to read a Datadog Trace
@@ -33,6 +33,6 @@ Select the trace time frame you want to display with the time selector in the up
 
 Filter your traces depending on:
 
-* Their [Environment](/tracing/setup/environment)
-* Their [Service name](/tracing/visualization/services_list/)
-* Their Duration
+* Their [environment](/tracing/setup/environment)
+* Their [service name](/tracing/visualization/services_list/)
+* Their duration
