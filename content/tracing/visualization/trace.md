@@ -50,10 +50,10 @@ Some of them have a special meaning which lead to a dedicated display and behavi
     Allows dedicated display for error message.
 
 * **`error.type`**:  
-    Allows dedicated display for error types. Types available are for instance for python `ValueError` or `Exception` and for Java `ClassNotFoundException` or `NullPointerException`..
+    Allows dedicated display for error types. Types available are for instance for python `ValueError` or `Exception` and for Java `ClassNotFoundException` or `NullPointerException`.
 
 * **`error.stack`**:  
-    Allows a better display of the Stacktrace of an exception in Datadog UI (red boxes etc....)
+    Allows a better display of the Stacktrace of an exception in Datadog UI (red boxes etc...)
 
 {{< img src="tracing/visualization/trace/trace_error_formating.png" alt="Error Formating" responsive="true" popup="true" >}}
 

@@ -26,7 +26,7 @@ APM collects metrics on your app’s performance at four levels of granularity: 
 **A service is a set of processes that do the same job.**  
 For instance, a simple web application may consist of two services: 
 
-* A single `webapp` service and a single `database` service
+* A single `webapp` service and a single `database` service.
 
 While a more complex environment may break it out into 6 services: 
 
@@ -70,8 +70,8 @@ When a resource such as URL or SQL query cannot be aggregated, it significantly 
 
 Having a very high cardinality of resources makes Datadog less usable:
 
-* Lots of entry in the resource list is not optimal for navigation
-* Statistics are less relevant (as they are too fragmented)
+* Too much entries in the resource list is not optimal for navigation.
+* Statistics are less relevant (as they are too fragmented).
 
 As a result we have a hard limit on the cardinality of resources for a given service.
 

@@ -97,7 +97,7 @@ It is possible to disable the instrumentation for a percentage of transactions. 
 
 ## Trace storage
 
-Individual traces are stored for up to 6 months but to determine how long a particular trace will be stored, the Agent makes a sampling decision early in the trace's lifetime. In Datadog backend, sampled traces are retained according to time buckets:
+Individual traces are stored for up to 6 months. To determine how long a particular trace will be stored, the Agent makes a sampling decision early in the trace's lifetime. In Datadog backend, sampled traces are retained according to time buckets:
 
 | Retention bucket       |  % of stream kept |
 | :--------------------- | :---------------- |

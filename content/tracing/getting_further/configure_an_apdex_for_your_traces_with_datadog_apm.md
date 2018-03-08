@@ -1,5 +1,5 @@
 ---
-title: Configure an Apdex for your traces with Datadog APM.
+title: Configure Apdex score by service
 kind: documentation
 aliases:
     - /tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm

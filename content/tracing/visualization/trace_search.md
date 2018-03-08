@@ -1,5 +1,5 @@
 ---
-title: Trace Search
+title: Traces List
 kind: Documentation
 further_reading:
 - link: "/tracing/setup/"
@@ -19,7 +19,7 @@ further_reading:
   text: Understand how to read a Datadog Trace
 ---
 
-All traces collected by your agents are listed in the [Trace search page](https://app.datadoghq.com/apm/search):
+All traces collected by your agents are listed in the [traces list page](https://app.datadoghq.com/apm/search):
 
 {{< img src="tracing/traces/trace_search.png" alt="Trace search UI" responsive="true" popup="true">}}
 

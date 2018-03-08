@@ -19,7 +19,7 @@ further_reading:
 ## Overview
 
 After you have [instrumented your application](/tracing/setup), your reporting services appear on [the APM services page](https://app.datadoghq.com/apm/services).  
-Select a service view detailed performance insights, [read our dedicated service documentation to learn more](/tracing/visualization/service)
+Select an individual service to view detailed performance insights, [read our dedicated service documentation to learn more](/tracing/visualization/service).
 
 {{< img src="tracing/visualization/services_page.png" alt="Services page" responsive="true" popup="true">}}
 

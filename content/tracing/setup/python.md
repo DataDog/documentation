@@ -17,7 +17,7 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-For Python applciations, note that tracing is disabled when your application is launched in <b>DEBUG</b> mode. Find more <a href="http://pypi.datadoghq.com/trace/docs/#module-ddtrace.contrib.django">here</a>.
+For Python applciations, note that tracing is disabled when your application is launched in <code>DEBUG</code> mode. Find more <a href="http://pypi.datadoghq.com/trace/docs/#module-ddtrace.contrib.django">here</a>.
 </div>
 
 ## Installation
@@ -86,8 +86,7 @@ ___
 
 ## Example: Simple tracing
 
-We have a Flask Python application that when called on `/doc` returns **42**
-
+We have a Flask Python application that when called on `/doc` returns **42**.  
 We instrumented our python code in order to generate traces from it:
 
 ```python

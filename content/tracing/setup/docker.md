@@ -20,7 +20,7 @@ For additional information, see the [Datadog docker Github repository](https://g
 
 ## Tracing from the host
 
-Tracing can be available on port 8126/tcp from _any host_ by adding the option `-p 8126:8126/tcp` to the `docker run` command.
+Tracing can be available on port `8126/tcp from _any host_ by adding the option `-p 8126:8126/tcp` to the `docker run` command.
 
 To make it available from _your host only_, use `-p 127.0.0.1:8126:8126/tcp` instead.
 

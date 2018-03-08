@@ -2,6 +2,9 @@
 title: Setup
 kind: Documentation
 further_reading:
+- link: "/tracing/setup/environment"
+  tag: "Documentation"
+  text: "Learn more about environment configuration"
 - link: "/tracing/setup/docker"
   tag: "Documentation"
   text: Docker setup
@@ -17,16 +20,13 @@ further_reading:
 - link: "/tracing/setup/ruby"
   tag: "Documentation"
   text: Ruby language instrumentation
-- link: "/tracing/setup/environment"
-  tag: "Documentation"
-  text: "Learn more about environment configuration"
 ---
 
 This documentation covers Agent v6 only, to know how to setup APM tracing with Agent v5, [refer to the dedicated APM with agent v5 doc](/tracing/faq/agent-5-tracing-setup).  
 
 ## Setup process
 
-With our infrastructure monitoring, metrics are sent to the Agent, which then forwards them to Datadog. Similarly, tracing metrics are also sent to the Agent: The application code instrumentation flushes to the Agent every 1 s ([see here for the Python client](https://github.com/DataDog/dd-trace-py/blob/69693dc7cdaed3a2b6a855325109fa100e42e254/ddtrace/writer.py#L159) for instance) and the Agent flushes to the [Datadog API every 10s](https://github.com/DataDog/datadog-trace-agent/blob/master/config/agent.go#L170).  
+With our infrastructure monitoring, metrics are sent to the Agent, which then forwards them to Datadog. Similarly, tracing metrics are also sent to the Agent: the application code instrumentation flushes to the Agent every 1 s ([see here for the Python client](https://github.com/DataDog/dd-trace-py/blob/69693dc7cdaed3a2b6a855325109fa100e42e254/ddtrace/writer.py#L159) for instance) and the Agent flushes to the [Datadog API every 10s](https://github.com/DataDog/datadog-trace-agent/blob/master/config/agent.go#L170).  
 
 To start tracing your application:
 
@@ -56,6 +56,8 @@ To start tracing your application:
 
     To instrument an application written in a language that does not yet have official library support, visit our list of [community tracing libraries](/developers/libraries/#community-tracing-apm-libraries).
 
+5. Start monitoring your app's performance: Within a few minutes of running APM, you will start to see your services appear in [the APM home page](https://app.datadoghq.com/apm/home?env=). See [Using the APM UI](/tracing/visualization) to learn more.
+
 ## Agent configuration
 
 The APM agent (also known as _trace agent_) is shipped by default with the
@@ -65,9 +67,6 @@ Agent 6 in the Linux, MacOS and Windows packages. The APM agent is enabled by de
 apm_config:
   enabled: true
 ```
-
-[Reference the dedicated documentation to setup tracing with Docker](/tracing/setup/docker)
-
 
 {{% table responsive="true" %}}
 | File setting            | Environment variable | Description                                                                                                                                                      |
@@ -85,6 +84,8 @@ apm_config:
 {{% /table %}}
 
 For more information about the Datadog Agent, see the [dedicated doc page](/agent/) or refer to the [`datadog.conf.example` file](https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example).
+
+[Reference the dedicated documentation to setup tracing with Docker](/tracing/setup/docker).
 
 ## Further Reading
 

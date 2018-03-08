@@ -33,7 +33,7 @@ Datadog provides out of the box graphs for any given Resource:
     * The **Total amount of errors** 
     * The amount of **Errors per second** 
     * The **% Error Rate** 
-* Sub-Services: When there is multiple service involved a 4th graph is available that breaks down your **Total time spent**/**%of time spent**/**Avg time per request** of your service by *services* or *type*. For services like *Postgres* or *Redis*, which are "final" operations not calling other service underneath, there will be no Sub-services graph.
+* Sub-Services: When there are multiple services involved, a fourth graph is available that breaks down your **Total time spent**/**%of time spent**/**Avg time per request** of your service by *services* or *type*. For services like *Postgres* or *Redis*, which are "final" operations not calling other service underneath, there will be no Sub-services graph.
 
 {{< img src="tracing/visualization/resource/resource_otb_graphs.png" alt="Out of the bow resource graphs" responsive="true" popup="true" style="width:90%;">}}
 
@@ -47,7 +47,7 @@ On the upper-right corner of each graphs click on the little arrow in order to e
 
 ### Latency distribution
 
-In addition to all those graph there is a resource latency distribution graph
+In addition to all those graph there is a resource latency distribution graph:
 
 {{< img src="tracing/visualization/resource/resource_latency_distribution.png" alt="Latency distribution" responsive="true" popup="true" style="width:90%;">}}
 

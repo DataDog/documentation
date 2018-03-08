@@ -16,9 +16,9 @@ See this in the following image in the address bar:
 
 If any Resource displays in the UI under another service, despite having the same service name, it is important to ensure that the top level name is the same as the other Resources within the expected service.
 
-For example, if you have a Resource with a service named tornado-notification with a top level name of tornado.notify, any Resource that had both this service Name and top level Name applied would display under this service. However, if you have a Resource that has a service name of tornado-notification with a top level name of web_identification, this Resource won’t be available under the existing tornado-notification | tornado.sotify Service in the UI.
+For example, if you have a Resource with a service named `tornado-notification` with a top level name of `tornado.notify`, any Resource that had both this service Name and top level Name applied would display under this service. However, if you have a Resource that has a service name of `tornado-notification` with a top level name of `web_identification`, this Resource won’t be available under the existing `tornado-notification` | `tornado.notify` Service in the UI.
 
-These Resources, with a top level name of web_identification still appear in the Datadog Application, and can be viewed under the traces section of the APM navigation menu.
+These Resources, with a top level name of `web_identification` still appear in the Datadog Application, and can be viewed under the traces section of the APM navigation menu.  
 
 An example of modifying the top level name for Python can be found below:
 
@@ -29,6 +29,6 @@ An example of modifying the top level name for Python can be found below:
         # do something
 ```
 
-This function explicitly sets both the service name and Top Level Name, being tornado-notification and tornado.notify respectively
+This function explicitly sets both the service name and Top Level Name, being `tornado-notification` and `tornado.notify` respectively.
 
 More examples and documentation can be found on our public docs pages [for the language of your choice](/tracing/setup). 

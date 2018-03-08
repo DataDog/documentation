@@ -19,7 +19,7 @@ further_reading:
   text: Understand how to read a Datadog Trace
 ---
 
-If you have read the [first example of tracing](/tracing) and want to more deeply understand how tracing works, let's take the following example which represents a simple API **thinker-api** and a micro-service behind it **thinker-microservice**. When the API receives a request with the correct *subject* parameter, it responds with a *thought*, otherwise, it responds with an error:
+If you have read the [first example of tracing](/tracing) and want understand how tracing works further, let's take the following example which represents a simple API **thinker-api** and a micro-service behind it **thinker-microservice**. When the API receives a request with the correct *subject* parameter, it responds with a *thought*, otherwise, it responds with an error:
 
 {{< img src="tracing/product_specs/distributed_tracing/tracing_overview_GS.png" alt="Tracing getting started overview" responsive="true" popup="true" style="width:70%;">}}
 
@@ -59,7 +59,7 @@ We have two modules:
     from ddtrace import tracer
     from ddtrace.contrib.flask import TraceMiddleware
 
-    ## Configuring Datadog tracer
+    # Configuring Datadog tracer
     app = Flask('API')
     traced_app = TraceMiddleware(app, tracer, service='thinker-api')
 

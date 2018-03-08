@@ -21,10 +21,10 @@ further_reading:
 
 #### Definition
 
-An environment is a first class dimension that you can use to scope an entire Datadog APM application. Some display settings can be shared across environments, but all the measurable data (traces/metrics/statistics) can not be re-aggregated across multiple environments. Use cases can be:
+An environment is a first class dimension that you use to scope an entire Datadog APM application. Some display settings can be shared across environments, but all the measurable data (traces/metrics/statistics) can not be re-aggregated across multiple environments. Use cases include:
 
 * Stage environments such as production, staging, and pre-production
-* Datacenters and availability zones in isolation
+* Data centers and availability zones in isolation
 
 Environments are [tags](/agent/tagging), therefore they must follow the following rules:
 
@@ -39,14 +39,14 @@ Environments in traces and configuration files are normalized:
 
 #### Default environment
 
-The default environment for un-tagged data is `env:none`. See below to see how to specify custom environments.:
+The default environment for un-tagged data is `env:none`. See below to see how to specify custom environments:
 
 #### Setup
 
 There are several ways to specify an environment when reporting data:
 
 1. Host tag:  
-  Use a host tag with the format env:XXXX to tag all traces from that agent accordingly.
+  Use a host tag with the format `env:XXXX` to tag all traces from that agent accordingly.
 
 2. Agent configuration:  
   Override the default tag used by the trace agent in [the Agent configuration file](/agent/faq/where-is-the-configuration-file-for-the-agent). This tags all traces coming through the agent, overriding the host tag value.

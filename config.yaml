@@ -443,7 +443,7 @@ languages:
         - identifier: customnav_tracingnav_service
           name: "Service page"
           url: "/tracing/visualization/service"
-          weight: 210
+          weight: 215
           parent: customnav_tracingnav_visualization
         - identifier: customnav_tracingnav_resource
           name: "Resource page"
@@ -456,7 +456,7 @@ languages:
           weight: 230
           parent: customnav_tracingnav_visualization
         - identifier: customnav_tracingnav_traces
-          name: "Traces Search"
+          name: "Traces list"
           url: "/tracing/visualization/trace_search/"
           weight: 240
           parent: customnav_tracingnav_visualization

@@ -1,5 +1,5 @@
 ---
-title: How to create a Monitor over every Resource (APM)? 
+title: APM resource monitors
 kind: documentation
 aliases:
     - /tracing/faq/how-to-create-a-monitor-over-every-resource-apm
@@ -7,7 +7,7 @@ aliases:
 
 Datadog’s Application Performance Monitoring component consists of a few key components: [Services](/tracing/visualization/service) and [Resources](/tracing/visualization/resource) being the top most layers.  
 
-Each Graph within the APM Service and Resource Dashboards consist of some `trace.*` metrics.  
+Each graph within the APM Service and Resource Dashboards consist of some `trace.*` metrics.  
 Utilize [the download button at the top of the graph](/tracing/visualization/service/#export-to-timeboard) to save those Metrics to an existing Timeboard. This can be done for both Service level and Resource level metrics:
 
 {{< img src="tracing/faq/apm_save_1.png" alt="APM save" responsive="true" popup="true">}}

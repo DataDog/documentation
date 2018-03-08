@@ -1,5 +1,5 @@
 ---
-title: APM and Distributed Tracing with agent v5
+title: APM and Distributed Tracing with Agent v5
 kind: faq
 private: true
 ---
@@ -8,26 +8,26 @@ private: true
 
 APM is available as part of the Datadog Agent with versions 5.11+ as part of the one line install for the Linux and Docker Agents. Currently, [Mac](https://github.com/DataDog/datadog-trace-agent#run-on-osx) and [Windows](https://github.com/DataDog/datadog-trace-agent#run-on-windows) users must perform a manual install of the APM Agent (aka Trace Agent) via a separate install process.
 
-The Agent can be enabled by including the following in your [Datadog agent configuration file](/agent/faq/where-is-the-configuration-file-for-the-agent):
+The Agent can be enabled by including the following in your [Datadog Agent configuration file](/agent/faq/where-is-the-configuration-file-for-the-agent):
 ```
 apm_enabled: yes
 ```
 
 <div class="alert alert-info">
-APM is enabled by default after Datadog agent 5.13 (on Linux and Docker), and can be disabled by adding the parameter: <code>apm_enabled: no</code> in your Datadog agent configuration file.
+APM is enabled by default after Datadog Agent 5.13 (on Linux and Docker), and can be disabled by adding the parameter: <code>apm_enabled: no</code> in your Datadog agent configuration file.
 </div>
 
 ### Installing the agent
 
-With our infrastructure monitoring, metrics are sent to the Datadog Agent, which then forwards them to Datadog. Similarly, tracing metrics are also sent to the Datadog agent. To enable tracing:
+With our infrastructure monitoring, metrics are sent to the Datadog Agent, which then forwards them to Datadog. Similarly, tracing metrics are also sent to the Datadog Agent. To enable tracing:
 
 Install the latest [Datadog Agent](https://app.datadoghq.com/account/settings#agent) (version 5.11.0 or above is required).
 
-### Running the agent in Docker
+### Running the Agent in Docker
 
 To trace applications in Docker containers, you can use the [docker-dd-agent](https://hub.docker.com/r/datadog/docker-dd-agent/) image (tagged version 11.0.5110 or higher) and enable tracing by passing `DD_APM_ENABLED=true` as an environment variable.
 
-For additional information, reference [the Docker page](/tracing/docker)
+For additional information, reference [the Docker page](/tracing/docker).
 
 ### Instrument your application
 
