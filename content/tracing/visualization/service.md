@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview 
 
-Selecting a service on the services page leads you to the detailed service page. A service is a set of processes that do the same job - for example a web framework or database (read more about how services are defined in [Getting Started with APM](/tracing/visualization). 
+Selecting a service on the services page leads you to the detailed service page. A service is a set of processes that do the same job - for example a web framework or database (read more about how services are defined in [Getting Started with APM](/tracing/visualization)). 
 
 Consult on this page:
 
