@@ -1,5 +1,6 @@
 ---
-enabled: true
+send_enabled: true
+receive_enabled: true
 transifex:
   org: 'datadog'
   project_slug: 'documentation-poc'
@@ -13,6 +14,14 @@ sources:
   dst: "*.{lang}.json"
 - src: "i18n/en.json"
   dst: "{lang}.json"
+ignores:
+  - "**/*.fr.md"
+  - "**/*.fr.yaml"
+  - "**/*.fr.json"
+  - "**/fr.json"
+langs:
+- lang_country: "fr_FR"
+  lang: "fr"
 github:
   org: 'DataDog'
   repo: 'documentation'
@@ -21,6 +30,8 @@ github:
   pr_to: 'david.jones/translate'
   pr_title: 'Translation PR'
   pr_body: 'This is a translation'
+  pr_labels:
+    - "Architecture"
 reviewers:
   - name: 'David Jones'
     github_user: 'davidejones'
