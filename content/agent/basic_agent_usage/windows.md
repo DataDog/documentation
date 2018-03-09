@@ -152,7 +152,7 @@ Uninstall the agent using Add/Remove Programs, alternatively, it's possible to t
 ## Troubleshooting
 
 The Agent logs are located in the ``c:\programdata\Datadog\logs` ` directory:
-and all logs are in the `agent.log` file.  
+and all logs are in the `agent.log` file.
 
 If you're still having trouble, [our support team](/help) will be glad to provide further assistance.
 
@@ -167,7 +167,7 @@ Log is available at:
 
 ### For version < 3.9.1
 
-Logs for the subsystems are available in Event Viewer, under Windows Logs -> Application.  
+Logs for the subsystems are available in Event Viewer, under Windows Logs -> Application.
 
 If you're still having trouble, [our support team](/help) will be glad to provide further assistance.
 
@@ -207,19 +207,19 @@ It's also possible to run the flare command using Powershell:
 ```
 or cmd.exe:
 ```
-& 'C:\Program Files\Datadog\Datadog Agent\embedded\python.exe' 'C:\Program Files\Datadog\Datadog Agent\agent\agent.py' flare <CASE_ID>
+"C:\Program Files\Datadog\Datadog Agent\embedded\python.exe" "C:\Program Files\Datadog\Datadog Agent\agent\agent.py" flare <CASE_ID>
 ```
 
 #### Flare Fails to Upload
 
-On Linux and Mac OSX, the output of the flare command tells you where the compressed flare archive is saved. In case the file fails to upload to Datadog, you can retrieve it from this directory and manually add as an attachment to an email.  
+On Linux and Mac OSX, the output of the flare command tells you where the compressed flare archive is saved. In case the file fails to upload to Datadog, you can retrieve it from this directory and manually add as an attachment to an email.
 
 For Windows, you can find the location of this file by running the following from the agent's python command prompt:
 
-* Since Agent v5.12:  
+* Since Agent v5.12:
     `C:\Program Files\Datadog\Datadog Agent\dist\shell.exe since`
 
-* On older Agent version:  
+* On older Agent version:
     `C:\Program Files (x86)\Datadog\Datadog Agent\files\shell.exe`
 
 ```
