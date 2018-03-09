@@ -700,7 +700,7 @@ languages:
           pre: "nav_help"
           weight: 140
   fr:
-    disclaimer: ""
+    disclaimer: "This page isn't available in your language, help us translate it!"
     weight: 0
     menu:
       # Home Page
