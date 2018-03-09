@@ -3,7 +3,11 @@
 <!-- get lang specific data file -->
 {{ $.Scratch.Set "data" "" }}
 {{ if ne $dot.Page.Lang "en"}}
-    {{ $.Scratch.Set "data" (index $dot.Page.Site.Data.partials (print "footer." $dot.Page.Lang)) }}
+    {{ if (fileExists (print "data/partials/footer." $dot.Page.Lang ".yaml")) }}
+      {{ $.Scratch.Set "data" (index $dot.Page.Site.Data.partials (print "footer." $dot.Page.Lang)) }}
+    {{ else }}
+      {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.footer }}
+    {{ end }}
 {{ else }}
     {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.footer }}
 {{ end }}
