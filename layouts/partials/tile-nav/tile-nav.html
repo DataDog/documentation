@@ -1,6 +1,6 @@
 <div class="row cards-dd tile-nav mb-40">
     <div class="col-6 col-md-4">
-        <a class="card agent" href="{{ .Site.BaseURL }}agent/">
+        <a class="card agent" href="{{ "agent/" | absLangURL }}">
             <div class="card-body text-center">
                 {{ $url := (print (.Site.Params.img_url) "images/" (index .Site.Data.manifests.images "icons/agent.png" ) "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
                 <picture class="mx-auto">
@@ -14,7 +14,7 @@
         </a>
     </div>
     <div class="col-6 col-md-4">
-        <a class="card integrations" href="{{ .Site.BaseURL }}integrations/">
+        <a class="card integrations" href="{{ "integrations/" | absLangURL }}">
             <div class="card-body text-center">
                 {{ $url := (print (.Site.Params.img_url) "images/" (index .Site.Data.manifests.images "icons/integrations.png" ) "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
                 <picture class="mx-auto">
@@ -28,7 +28,7 @@
         </a>
     </div>
     <div class="col-6 col-md-4">
-        <a class="card graphing" href="{{ .Site.BaseURL }}graphing/">
+        <a class="card graphing" href="{{ "graphing/" | absLangURL }}/">
             <div class="card-body text-center">
                 {{ $url := (print (.Site.Params.img_url) "images/" (index .Site.Data.manifests.images "icons/graphing.png" ) "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
                 <picture class="mx-auto">
@@ -42,7 +42,7 @@
         </a>
     </div>
     <div class="col-6 col-md-4">
-        <a class="card alerting" href="{{ .Site.BaseURL }}monitoring/">
+        <a class="card alerting" href="{{ "monitoring/" | absLangURL }}/">
             <div class="card-body text-center">
                 {{ $url := (print (.Site.Params.img_url) "images/" (index .Site.Data.manifests.images "icons/alerting.png" ) "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
                 <picture class="mx-auto">
@@ -56,7 +56,7 @@
         </a>
     </div>
     <div class="col-6 col-md-4">
-        <a class="card tracing" href="{{ .Site.BaseURL }}tracing/">
+        <a class="card tracing" href="{{ "tracing/" | absLangURL }}">
             <div class="card-body text-center">
                 {{ $url := (print (.Site.Params.img_url) "images/" (index .Site.Data.manifests.images "icons/tracing_apm.png" ) "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
                 <picture class="mx-auto">
@@ -70,7 +70,7 @@
         </a>
     </div>
     <div class="col-6 col-md-4">
-        <a class="card developers" href="{{ .Site.BaseURL }}developers/">
+        <a class="card developers" href="{{ "developers/" | absLangURL }}/">
             <div class="card-body text-center">
                 {{ $url := (print (.Site.Params.img_url) "images/" (index .Site.Data.manifests.images "icons/developers.png" ) "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
                 <picture class="mx-auto">

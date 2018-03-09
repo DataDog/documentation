@@ -18,7 +18,7 @@
 <div class="row questions">
     {{ range $datafile.questions }}
     <div class="col-6 col-md-4 mb-4">
-        <a class="card" href="{{ .link }}">
+        <a class="card" href="{{ .link | absLangURL }}">
             <div class="card-body text-center">
                 {{ partial "img.html" (dict "root" $dot "src" (print "icons/" .image) "class" "static" "alt" "question" "width" "70" "height" "70") }}
                 {{ partial "img.html" (dict "root" $dot "src" (print "icons/" .image_hover) "class" "hover" "alt" "question" "width" "70" "height" "70" "disable_lazy" "true") }}
