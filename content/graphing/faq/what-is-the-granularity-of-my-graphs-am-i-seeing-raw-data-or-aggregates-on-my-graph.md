@@ -7,7 +7,7 @@ Datadog graphs will generally display local aggregates, rather than the original
 
 ## Why?
 
-We store data at a 1 second granularity [we cannot display all real data on graphs](/graphing/faq/how-is-data-aggregated-in-graphs).
+Data is stored at a 1 second granularity, but [data can be aggregated when displayed](/graphing/faq/how-is-data-aggregated-in-graphs).
 
 For a graph on a 1-week time window, it would require sending hundreds of thousands values to your browser. Not all of these points can be graphed on a widget occupying a small portion of your screen. For these reasons we are forced to aggregate data and to send a limited number of points to your browser to render a graph.
 
