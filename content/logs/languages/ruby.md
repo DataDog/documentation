@@ -31,7 +31,7 @@ Processing by HomeController#index as HTML
 Completed 200 OK in 79ms (Views: 78.8ms | ActiveRecord: 0.0ms)
 ```
 
-After lograte formating you get a single log line with all the important information, like this:
+After lograge formating you get a single log line with all the important information, like this:
 
 ```
 method=GET path=/jobs/833552.json format=json controller=jobs action=show status=200 duration=58.33 view=40.43 db=15.26
