@@ -30,7 +30,7 @@ github:
   commit_message: 'Adding translations'
   pr_to: 'david.jones/translate'
   pr_title: 'Translation PR'
-  pr_body: 'This is a translation'
+  pr_body: 'This is an automated PR created by the scheduled translation task pulling the latest translated files'
   pr_labels:
     - "Architecture"
 reviewers:
