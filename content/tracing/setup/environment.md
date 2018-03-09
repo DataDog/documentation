@@ -1,6 +1,8 @@
 ---
 title: Environment
 kind: documentation
+aliases:
+  - /tracing/environments/
 further_reading:
 - link: "/tracing/setup/docker"
   tag: "Documentation"
