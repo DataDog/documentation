@@ -31,10 +31,29 @@ Processing by HomeController#index as HTML
 Completed 200 OK in 79ms (Views: 78.8ms | ActiveRecord: 0.0ms)
 ```
 
-You get a single log line with all the important information, like this:
+After lograge formating you get a single log line with all the important information, like this:
 
 ```
 method=GET path=/jobs/833552.json format=json controller=jobs action=show status=200 duration=58.33 view=40.43 db=15.26
+```
+
+And the final result in JSON:
+
+```
+{
+  "timestamp":"2016-01-12T19:15:19.118829+01:00",
+  "level":"INFO",
+  "logger":"Rails",
+  "method":"GET",
+  "path":"/jobs/833552.json",
+  "format":"json",
+  "controller":"jobs",
+  "action":"show",
+  "status":200,
+  "duration":58.33,
+  "view":40.43,
+  "db":15.26
+}
 ```
 
 **To send your logs to Datadog, we recommend logging to a file and then tailing that file with your Datadog agent.**
@@ -59,7 +78,7 @@ config.lograge.formatter = Lograge::Formatters::Raw.new
 
 # This is is useful if you want to log query parameters
 config.lograge.custom_options = lambda do |event|
-    { :@marker => ["sourcecode", "ruby", "rails"],
+    { :ddsource => ["ruby"],
       :params => event.payload[:params].reject { |k| %w(controller action).include? k }
     }
 end
@@ -112,11 +131,7 @@ If you want to tweak the log layout, all items available can be found directly f
 
 Create a `ruby.d/conf.yaml` file in your `conf.d/` folder with the following content:
 
-```yaml
-init_config:
-
-instances:
-    
+```yaml    
 ##Log section
 logs:
 
