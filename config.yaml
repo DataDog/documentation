@@ -794,7 +794,7 @@ languages:
           parent: customnav_agentnav_basic_usage
         - identifier: suse
           name: "SUSE"
-          url: "/agent/basic_agent_usage/suse/
+          url: "agent/basic_agent_usage/suse/"
           weight: 150
           parent: customnav_agentnav_basic_usage
         - identifier: ubuntu
