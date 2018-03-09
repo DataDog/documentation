@@ -9,7 +9,7 @@ Datadog graphs will generally display local aggregates, rather than the original
 
 Data is stored at a 1 second granularity, but [data can be aggregated when displayed](/graphing/faq/how-is-data-aggregated-in-graphs).
 
-For a graph on a 1-week time window, it would require sending hundreds of thousands values to your browser. Not all of these points can be graphed on a widget occupying a small portion of your screen. For these reasons we are forced to aggregate data and to send a limited number of points to your browser to render a graph.
+For a graph on a 1-week time window, it would require sending hundreds of thousands of values to your browser. Not all of these points can be graphed on a widget occupying a small portion of your screen. For these reasons we are forced to aggregate data and to send a limited number of points to your browser to render a graph.
 
 For instance, on a one-day view with the 'lines' display you'll have one datapoint every 5 min. Our backend slices the 1-day interval into 288 buckets of 5 minutes. For each bucket our backend rolls up all data into a single value. For instance, the datapoint rendered on your graph with timestamp 07:00 is actually an aggregate of all real datapoints submitted between 07:00:00 and 07:05:00 that day.
 
