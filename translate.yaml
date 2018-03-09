@@ -1,6 +1,7 @@
 ---
-send_enabled: true
-receive_enabled: true
+enabled: true
+enabled_send: true
+enabled_receive: true
 transifex:
   org: 'datadog'
   project_slug: 'documentation-poc'
