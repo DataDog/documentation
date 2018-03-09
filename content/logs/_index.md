@@ -46,12 +46,7 @@ Set `type` to **file** then specify the absolute `path` to the log file you want
 Example: 
 To gather python applications stored in **/var/log/myapp1.log** and **/var/log/python.log** create a `python.d/conf.yaml` file as follows:
 
-Note that for the yaml file to be considered valid by the agent, they must include an "init_config" section and have at least one "instance" defined as shown below:
-
 ```yaml
-init_config:
-instances:
-
 ##Log section
 logs:
 
