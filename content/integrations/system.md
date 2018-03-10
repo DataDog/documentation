@@ -16,7 +16,7 @@ ddtype: check
 ---
 ## Overview
 
-Get metrics from your base system about the CPU, IO, load, memory, processes, swap, and uptime. Other system-related checks can be found here:
+Get metrics from your base system about the CPU, IO, load, memory, swap, and uptime. Other system-related checks can be found here:
 
 * [Directory Check](/integrations/directory) - Capture metrics from the files in given directories.
 * [Disk Check](/integrations/disk) - Capture metrics about the disk
@@ -30,7 +30,7 @@ No configuration is necessary for the system.
 ## Data Collected
 ### Metrics
 
-{{< get-metrics-from-git "system" "system.cpu system.fs system.io system.load system.mem system.proc system.processes system.swap system.uptime" >}}
+{{< get-metrics-from-git "system" "system.cpu system.fs system.io system.load system.mem system.proc system.swap system.uptime" >}}
 
 
 ## Agent Check: system cores
