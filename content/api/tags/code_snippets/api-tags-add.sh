@@ -14,4 +14,4 @@ curl  -X POST -H "Content-type: application/json" \
 -d "{
       \"tags\" : [\"environment:production\", \"role:webserver\"]
 }" \
-"https://app.datadoghq.com/api/v1/tags/hosts/${host_name}?api_key=${api_key}&application_key=${app_key}&source=$source"
+"https://app.datadoghq.com/api/v1/tags/hosts/${host_name}?api_key=${api_key}&application_key=${app_key}&source=${source}"
