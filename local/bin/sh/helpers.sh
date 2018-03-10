@@ -197,7 +197,7 @@ minify_html() {
     # ============ minify html ============ #
     start_step
     files="$(cat ${ARTIFACT_RESOURCE}/digest.txt)"
-    chmod +x minify_html.py
+    chmod +x /usr/local/bin/minify_html.py
     minify_html.py "${ARTIFACT_RESOURCE}/digest.txt" || fail_step "${FUNCNAME}";
     pass_step  "${FUNCNAME}"
 }
