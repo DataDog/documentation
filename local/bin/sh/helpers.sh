@@ -197,7 +197,7 @@ minify_html() {
     # ============ minify html ============ #
     start_step
     files="$(cat ${ARTIFACT_RESOURCE}/digest.txt)"
-    #minify_html.py "${files}" || fail_step "${FUNCNAME}";
+    minify_html.py "${ARTIFACT_RESOURCE}/digest.txt" || fail_step "${FUNCNAME}";
     pass_step  "${FUNCNAME}"
 }
 
@@ -314,7 +314,7 @@ test_site_links() {
         domain="${2}${CI_COMMIT_REF_NAME}/"
     fi
 
-    check_links.py "${1}" -p 5 -f "${filters}" -d "${domain}" --check_all "${3}" \
+    check_links.py "${1}" -p 5 -F "${ARTIFACT_RESOURCE}/digest.txt" -d "${domain}" --check_all "${3}" \
     --verbose "${4}" --src_path "${curr_dir}" --external "${5}" --timeout 5 --ignore "/etc/links.ignore" || fail_step "${1} check failed."
 
     # update trello with broken external links
