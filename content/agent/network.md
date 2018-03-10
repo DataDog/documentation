@@ -3,6 +3,7 @@ title: Network Traffic
 kind: documentation
 aliases:
     - /agent/proxy
+    - /account_management/faq/what-are-the-required-ip-s-and-ports-i-need-open-to-connect-to-the-datadog-service
 further_reading:
 - link: "/logs/"
   tag: "Documentation"

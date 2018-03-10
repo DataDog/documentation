@@ -29,5 +29,4 @@ private: true
 * [How do I configure Google as a SAML IdP?](/account_management/faq/how-do-i-configure-google-as-a-saml-idp)
 * [How do I setup Microsoft Active Directory Federation Services as a SAML IdP?](/account_management/faq/how-do-i-setup-microsoft-active-directory-federation-services-as-a-saml-idp)
 * [Can I use a proxy to connect my servers to Datadog?](/account_management/faq/can-i-use-a-proxy-to-connect-my-servers-to-datadog)
-* [What are the required IP's and ports I need open to connect to the Datadog service?](/account_management/faq/what-are-the-required-ip-s-and-ports-i-need-open-to-connect-to-the-datadog-service)
 * [How is Datadog retrieving my data? Are my data and credentials safe?](/account_management/faq/how-is-datadog-retrieving-my-data-are-my-data-and-credentials-safe)
