@@ -197,7 +197,7 @@ minify_html() {
     # ============ minify html ============ #
     start_step
     files="$(cat ${ARTIFACT_RESOURCE}/digest.txt)"
-    minify_html.py "${files}" || fail_step "${FUNCNAME}";
+    #minify_html.py "${files}" || fail_step "${FUNCNAME}";
     pass_step  "${FUNCNAME}"
 }
 
@@ -473,7 +473,12 @@ index_algolia() {
 manage_translations() {
     # $1: api key
     start_step
-    pwd
+
+    # grab untracked files
+    #last_tag=$(git describe --tags --abbrev=0 --match="${CI_COMMIT_REF_NAME}*")
+    #export ARTIFACT_NAME="$(git rev-parse --short ${last_tag}).tar.gz"
+    #pull_artifact_from_s3
+
     echo "---------"
     echo "Sending Translations"
     echo "---------"
