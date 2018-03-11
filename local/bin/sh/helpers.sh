@@ -495,6 +495,9 @@ manage_translations() {
     # $1: api key
     start_step
 
+    # do npm install again
+    version_static_assets
+
     # grab untracked translation source files
     export ARTIFACT_NAME="$(git rev-parse --short HEAD)-untracked.tar.gz"
     export ARTIFACT_RESOURCE="data"
