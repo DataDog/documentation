@@ -1,0 +1,191 @@
+oracle:
+  - description: Ratio de hits du buffer du cache
+    integration: oracle
+    metric_name: oracle.buffer_cachehit_ratio
+    metric_type: gauge
+    orientation: '1'
+    short_name: buff cache hit ratio
+    unit_name: fraction
+  - description: Ratio de hits du cursor du cache
+    integration: oracle
+    metric_name: oracle.cursor_cachehit_ratio
+    metric_type: gauge
+    orientation: '1'
+    short_name: cursor cache hit ratio
+    unit_name: fraction
+  - description: Ratio de hits de la librairie du cache
+    integration: oracle
+    metric_name: oracle.library_cachehit_ratio
+    metric_type: gauge
+    orientation: '1'
+    short_name: lib cache hit ratio
+    unit_name: fraction
+  - description: shared pool free memory %
+    integration: oracle
+    metric_name: oracle.shared_pool_free
+    metric_type: gauge
+    orientation: '0'
+    short_name: shared pool free
+    unit_name: percent
+  - description: Lectures physiques par seconde
+    integration: oracle
+    metric_name: oracle.physical_reads
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: sec
+    short_name: phys reads
+    unit_name: reads
+  - description: Ecritures physiques par seconde
+    integration: oracle
+    metric_name: oracle.physical_writes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: sec
+    short_name: phys reads
+    unit_name: writes
+  - description: Nombre de timeouts de la queue par seconde
+    integration: oracle
+    metric_name: oracle.enqueue_timeouts
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: sec
+    short_name: enqueue timeouts
+    unit_name: timeouts
+  - description: GC CR temps reçu
+    integration: oracle
+    metric_name: oracle.gc_cr_receive_time
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: sec
+    short_name: gc cr receive time
+    unit_name: blocks
+  - description: corrupt cache blocks
+    integration: oracle
+    metric_name: oracle.cache_blocks_corrupt
+    metric_type: gauge
+    orientation: '0'
+    short_name: corrupt cache blocks
+    unit_name: blocks
+  - description: lost cache blocks
+    integration: oracle
+    metric_name: oracle.cache_blocks_lost
+    metric_type: gauge
+    orientation: '0'
+    short_name: lost cache blocks
+    unit_name: blocks
+  - description: Nombre de tentatives de connection
+    integration: oracle
+    metric_name: oracle.logons
+    metric_type: gauge
+    orientation: '0'
+    short_name: logons
+    unit_name: attempts
+  - description: Nombre de sessions actives
+    integration: oracle
+    metric_name: oracle.active_sessions
+    metric_type: gauge
+    orientation: '0'
+    short_name: active sessions
+    unit_name: sessions
+  - description: Nombre de long table scans par seconde
+    integration: oracle
+    metric_name: oracle.long_table_scans
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: sec
+    short_name: long tbl scans
+    unit_name: scans
+  - description: Temps de réponse du service
+    integration: oracle
+    metric_name: oracle.service_response_time
+    metric_type: gauge
+    orientation: '0'
+    short_name: svc resp time
+    unit_name: secs
+  - description: Nombre de rollbacks utilisateur
+    integration: oracle
+    metric_name: oracle.user_rollbacks
+    metric_type: gauge
+    orientation: '0'
+    short_name: user rollbacks
+    unit_name: operations
+  - description: 'Nombre de tris par appel utilisateur '
+    integration: oracle
+    metric_name: oracle.sorts_per_user_call
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: attempt
+    short_name: sorts per user call
+    unit_name: sorts
+  - description: Lignes par tri
+    integration: oracle
+    metric_name: oracle.rows_per_sort
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: operation
+    short_name: rows per sort
+    unit_name: rows
+  - description: Nombre de tri par disque par seconde
+    integration: oracle
+    metric_name: oracle.disk_sorts
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: sec
+    short_name: disk sorts
+    unit_name: operations
+  - description: Ratio de mémoire par tri
+    integration: oracle
+    metric_name: oracle.memory_sorts_ratio
+    metric_type: gauge
+    orientation: '0'
+    short_name: memory sort ratio
+    unit_name: fraction
+  - description: memory sorts per second
+    integration: oracle
+    metric_name: oracle.database_wait_time_ratio
+    metric_type: gauge
+    orientation: '0'
+    short_name: db wait-time ratio
+    unit_name: fraction
+  - description: session limit usage
+    integration: oracle
+    metric_name: oracle.session_limit_usage
+    metric_type: gauge
+    orientation: '0'
+    short_name: Limite d'utilisation % d'une session
+    unit_name: percent
+  - description: Compte de sessions
+    integration: oracle
+    metric_name: oracle.session_count
+    metric_type: gauge
+    orientation: '0'
+    short_name: session count
+    unit_name: session
+  - description: Espace utilisé de façon temporaire
+    integration: oracle
+    metric_name: oracle.temp_space_used
+    metric_type: gauge
+    orientation: '0'
+    short_name: temp space used
+    unit_name: bytes
+  - description: Tablespace utilisées
+    integration: oracle
+    metric_name: oracle.tablespace.used
+    metric_type: gauge
+    orientation: '0'
+    short_name: tablespace used
+    unit_name: bytes
+  - description: Taille des tablespace
+    integration: oracle
+    metric_name: oracle.tablespace.size
+    metric_type: gauge
+    orientation: '0'
+    short_name: Taille des tablespace
+    unit_name: bytes
+  - description: Tablespace active
+    integration: oracle
+    metric_name: oracle.tablespace.in_use
+    metric_type: gauge
+    orientation: '0'
+    short_name: tablespace in-use
+    unit_name: fraction
