@@ -4,19 +4,19 @@ kind: documentation
 aliases:
   - /tracing/environments/
 further_reading:
-- link: "/tracing/setup/docker"
+- link: "tracing/setup/docker"
   tag: "Documentation"
   text: Docker setup
-- link: "/tracing/setup/go"
+- link: "tracing/setup/go"
   tag: "Documentation"
   text: Go language instrumentation
-- link: "/tracing/setup/java"
+- link: "tracing/setup/java"
   tag: "Documentation"
   text: Java language instrumentation
-- link: "/tracing/setup/python"
+- link: "tracing/setup/python"
   tag: "Documentation"
   text: Python language instrumentation
-- link: "/tracing/setup/ruby"
+- link: "tracing/setup/ruby"
   tag: "Documentation"
   text: Ruby language instrumentation
 ---

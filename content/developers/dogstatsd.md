@@ -5,10 +5,10 @@ description: This page explains what DogStatsD is, how it works, and what data i
 aliases:
   - /guides/dogstatsd/
 further_reading:
-- link: "/developers/metrics"
+- link: "developers/metrics"
   tag: "Documentation"
   text: Learn more about Metrics
-- link: "/developers/libraries"
+- link: "developers/libraries"
   tag: "Docuementation"
   text: Datadog-official and community contributed API and DogStatsD client libraries
 ---
