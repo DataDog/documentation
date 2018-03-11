@@ -116,7 +116,8 @@ create_artifact_untracked() {
     short_hash="$(git rev-parse --short HEAD)"
     artifact_name="${short_hash}-untracked.tar.gz"
     echo "artifact name is ${artifact_name}"
-    git ls-files --others --exclude-standard > untracked.txt
+    # add git untracked files that aren't covered by gitignore also add modified files
+    git ls-files --others --exclude-standard -m > untracked.txt
     tar -czf "/tmp/${artifact_name}" -T untracked.txt || (echo "artifact build failed. sorry." && fail_step "${FUNCNAME}")
     echo "Deploying artifact: ${artifact_name} to s3://"$(get_secret 'static_bucket')"/build_artifacts/documentation/${CI_COMMIT_REF_NAME}/"
     aws s3 cp \
