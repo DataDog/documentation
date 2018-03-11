@@ -28,7 +28,7 @@
         </a>
     </div>
     <div class="col-6 col-md-4">
-        <a class="card graphing" href="{{ "graphing/" | absLangURL }}/">
+        <a class="card graphing" href="{{ "graphing/" | absLangURL }}">
             <div class="card-body text-center">
                 {{ $url := (print (.Site.Params.img_url) "images/" (index .Site.Data.manifests.images "icons/graphing.png" ) "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
                 <picture class="mx-auto">
@@ -42,7 +42,7 @@
         </a>
     </div>
     <div class="col-6 col-md-4">
-        <a class="card alerting" href="{{ "monitoring/" | absLangURL }}/">
+        <a class="card alerting" href="{{ "monitoring/" | absLangURL }}">
             <div class="card-body text-center">
                 {{ $url := (print (.Site.Params.img_url) "images/" (index .Site.Data.manifests.images "icons/alerting.png" ) "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
                 <picture class="mx-auto">
@@ -70,7 +70,7 @@
         </a>
     </div>
     <div class="col-6 col-md-4">
-        <a class="card developers" href="{{ "developers/" | absLangURL }}/">
+        <a class="card developers" href="{{ "developers/" | absLangURL }}">
             <div class="card-body text-center">
                 {{ $url := (print (.Site.Params.img_url) "images/" (index .Site.Data.manifests.images "icons/developers.png" ) "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
                 <picture class="mx-auto">
