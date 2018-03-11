@@ -1,6 +1,8 @@
 ---
 title: Setup
 kind: Documentation
+aliases:
+  - /tracing/languages/
 further_reading:
 - link: "/tracing/setup/environment"
   tag: "Documentation"

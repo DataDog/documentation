@@ -1,6 +1,9 @@
 ---
 title: Getting started with APM
 kind: documentation
+aliases:
+  - /tracing/terminology/
+  - /tracing/faq/what-is-the-difference-between-type-service-resource-and-name
 further_reading:
 - link: "/tracing/setup/"
   tag: "Documentation"
