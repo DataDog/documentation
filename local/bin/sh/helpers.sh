@@ -497,6 +497,7 @@ manage_translations() {
 
     # grab untracked translation source files
     export ARTIFACT_NAME="$(git rev-parse --short HEAD)-untracked.tar.gz"
+    export ARTIFACT_RESOURCE="data"
     pull_artifact_from_s3
 
     echo "---------"
