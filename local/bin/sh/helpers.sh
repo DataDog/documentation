@@ -111,6 +111,22 @@ create_artifact() {
     pass_step  "${FUNCNAME}"
 }
 
+create_artifact_untracked() {
+    # artifact for untracked git files
+    short_hash="$(git rev-parse --short HEAD)"
+    artifact_name="${short_hash}-untracked.tar.gz"
+    echo "artifact name is ${artifact_name}"
+    git ls-files --others --exclude-standard -z | xargs -0 tar rvf "/tmp/${artifact_name}" || (echo "artifact build failed. sorry." && fail_step "${FUNCNAME}")
+    echo "Deploying artifact: ${artifact_name} to s3://"$(get_secret 'static_bucket')"/build_artifacts/documentation/${CI_COMMIT_REF_NAME}/"
+    aws s3 cp \
+        --quiet \
+        --acl "public-read" \
+        --no-guess-mime-type \
+        "/tmp/${artifact_name}" \
+        "s3://$(get_secret 'static_bucket')/build_artifacts/${CI_COMMIT_REF_NAME}/" || fail_step "${FUNCNAME}"
+    echo "Done."
+    pass_step  "${FUNCNAME}"
+}
 
 pull_artifact_from_s3() {
     # ARTIFACT_RESOURCE (required): path to resource you want to artifact
@@ -475,10 +491,9 @@ manage_translations() {
     # $1: api key
     start_step
 
-    # grab untracked files
-    #last_tag=$(git describe --tags --abbrev=0 --match="${CI_COMMIT_REF_NAME}*")
-    #export ARTIFACT_NAME="$(git rev-parse --short ${last_tag}).tar.gz"
-    #pull_artifact_from_s3
+    # grab untracked translation source files
+    export ARTIFACT_NAME="$(git rev-parse --short HEAD)-untracked.tar.gz"
+    pull_artifact_from_s3
 
     echo "---------"
     echo "Sending Translations"
