@@ -1,5 +1,5 @@
 ---
-title: Agent v5 custom Agent check example
+title: Custom check, Agent v5 example
 kind: faq
 ---
 
