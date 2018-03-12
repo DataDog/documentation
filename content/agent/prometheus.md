@@ -35,6 +35,8 @@ simply add it to the list `- metric_name` or renaming it like `- metric_name: re
 
 Note: It's possible to use a `*` wildcard such as `- metric*` that would fetch all matching metrics (to use with caution as it can potentially send a lot of custom metrics)
 
+Your metrics will be collected in the form of `namespace.metric_name` also you'll by default get a service check named `namespace.prometheus.health` to indicate the health of the prometheus endpoint.
+
 ### Advanced Settings
 
 For a comprehensive list of settings please refer to the [example configuration](https://github.com/DataDog/integrations-core/blob/master/prometheus/conf.yaml.example).
