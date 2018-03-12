@@ -105,27 +105,41 @@ defaults
 # This declares a view into HAProxy statistics, on port 3835
 # You do not need credentials to view this page and you can
 # turn it off once you are done with setup.
-listen stats :3835
+listen stats
+    bind *:3835
     mode http
     stats enable
     stats uri /
 
-# This declares the endpoint where your agents connects.
-# In this example we use port 3834 but you can use any other
-# free port.
-frontend forwarder
-    bind *:3834 # DTDG
+# This declares the endpoint where your agents connects for
+# sending metrics (e.g. the value of "dd_url").
+frontend metrics-forwarder
+    bind *:3834
     mode tcp
-    default_backend datadog
+    default_backend datadog-metrics
+
+# This declares the endpoint where your agents connects for
+# sending traces (e.g. the value of "endpoint" in the "trace.api"
+# section).
+frontend traces-forwarder
+    bind *:3835
+    mode tcp
+    default_backend datadog-traces
 
 # This is the Datadog server. In effect any TCP request coming
-# to the forwarder frontend defined above is proxied to
+# to the forwarder frontends defined above are proxied to
 # Datadog's public endpoints.
-backend datadog
+backend datadog-metrics
     balance roundrobin
     mode tcp
     option tcplog
     server mothership haproxy-app.agent.datadoghq.com:443 check port 80
+
+backend datadog-traces
+    balance roundrobin
+    mode tcp
+    option tcplog
+    server mothership trace.agent.datadoghq.com:443 check port 80
 ```
 
 Once the HAProxy configuration is in place, you can reload it or restart HAProxy.
