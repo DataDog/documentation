@@ -15,11 +15,52 @@ further_reading:
 
 ## Overview
 
-This page first looks at the `PrometheusCheck` interface, and then proposes a simple Prometheus Check that collects timing metrics and status events from [Kube DNS](https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/kube_dns.py).
+This page first looks at the generic `Prometheus` check, the fastest & simpliest way to scrap custom metrics off prometheus endpoints and then dives in the `PrometheusCheck` interface for more advanced usage finishing by an example of writting a simple Check that collects timing metrics and status events from [Kube DNS](https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/kube_dns.py).
 
-## Prometheus check interface 
+## Generic Prometheus check
 
-`PrometheusCheck` is [a mother class](https://github.com/DataDog/dd-agent/blob/master/checks/prometheus_check.py) providing a structure and some helpers to collect metrics, events, and service checks exposed via Prometheus. Minimal configuration for checks based on this class include:
+Starting version 6.1 the agent includes a new [Prometheus](https://github.com/DataDog/integrations-core/tree/master/prometheus) check
+capable of scrapping prometheus endpoints with only a few lines of configuration.
+
+### Configuration
+
+Edit the `prometheus.yaml` file to add your different instances you want to retrieve custom metrics from.
+
+Minimal configuration of an instance includes:
+
+* a `prometheus_url` that points to the metric route (⚠ this has to be unique)
+* a `namespace` that will be prepended to all metrics (to avoid metrics name collision)
+* a list of `metrics` that you want to retrieve as custom metrics, for each metric you can either
+simply add it to the list `- metric_name` or renaming it like `- metric_name: renamed`.
+
+Note: It's possible to use a `*` wildcard such as `- metric*` that would fetch all matching metrics (to use with caution as it can potentially send a lot of custom metrics)
+
+### Advanced Settings
+
+For a comprehensive list of settings please refer to the [example configuration](https://github.com/DataDog/integrations-core/blob/master/prometheus/conf.yaml.example).
+
+### Auto-discovery
+
+As usual you can configure the prometheus check using [Autodiscovery](https://docs.datadoghq.com/agent/autodiscovery/) if you want to quickly scrap a container/pod exposing prometheus metrics.
+
+Example of pod annotations on a `linkerd` pod:
+
+```yaml
+annotations:
+    ad.datadoghq.com/l5d.check_names: '["prometheus"]'
+    ad.datadoghq.com/l5d.init_configs: '[{}]'
+    ad.datadoghq.com/l5d.instances: '[{"prometheus_url": "http://%%host%%:9990/admin/metrics/prometheus","namespace": "linkerd","metrics": ["jvm:thread:daemon_count"],"type_overrides": {"jvm:thread:daemon_count": "gauge"}}]'
+```
+
+### From custom to official integration
+
+By default all metrics retrieved by the generic prometheus check are considered custom metrics, if you are monitoring an off-the-shelf software and you think it would deserve an official integration, don't hesitate to contribute.
+
+Official integrations have there own dedicated directories and there's a default instance mechanism in the generic check to hardcode the default configuration & metrics metadata, have a look at the [kube-proxy](https://github.com/DataDog/integrations-core/tree/master/kube_proxy) integration for an example.
+
+## Advanced usage: Prometheus check interface
+
+If you have more advanced needs than the generic check (have some metrics preprocessing for example) you can write a custom `PrometheusCheck`. It's [the mother class](https://github.com/DataDog/dd-agent/blob/master/checks/prometheus_check.py) of the generic check and it provides a structure and some helpers to collect metrics, events, and service checks exposed via Prometheus. Minimal configuration for checks based on this class include:
 
 
 - Overriding `self.NAMESPACE`
@@ -28,8 +69,21 @@ This page first looks at the `PrometheusCheck` interface, and then proposes a si
 AND/OR
 - Create method named after the prometheus metric they will handle (see `self.prometheus_metric_name`)
 
-## Your first Prometheus check
-Let's write a simple kube_dns check:
+## Writting a custom Prometheus check
+
+This is a simple example of writting a kube DNS check to illustrate the `PrometheusCheck` class usage for learning purposes, but the example bellow could have been handled with configuring the following generic prometheus check:
+
+```yaml
+instances:
+  - prometheus_url: http://localhost:10055/metrics
+    namespace: "kubedns"
+    metrics:
+      - kubedns_kubedns_dns_response_size_bytes: response_size.bytes
+      - kubedns_kubedns_dns_request_duration_seconds: request_duration.seconds
+      - kubedns_kubedns_dns_request_count_total: request_count
+      - kubedns_kubedns_dns_error_count_total: error_count
+      - kubedns_kubedns_dns_cachemiss_count_total: cachemiss_count
+```
 
 ### Configuration
 
@@ -51,11 +105,11 @@ instances:
   - prometheus_endpoint: http://localhost:10055/metrics
 ```
 
-### Writing your Prometheus check
-All Prometheus checks inherit from the `PrometheusCheck` class found in `checks/prometheus_check.py`: 
+### Writing the check
+All Prometheus checks inherit from the `PrometheusCheck` class found in `checks/prometheus_check.py`:
 
 ```python
-from checks.prometheus_check import PrometheusCheck
+from datadog_checks.checks.prometheus import PrometheusCheck
 
 class KubeDNSCheck(PrometheusCheck):
 ```
@@ -65,7 +119,7 @@ class KubeDNSCheck(PrometheusCheck):
 `NAMESPACE` is the prefix metrics will have. It needs to be hardcoded in your check class:
 
 ```python
-from checks.prometheus_check import PrometheusCheck
+from datadog_checks.checks.prometheus import PrometheusCheck
 
 class KubeDNSCheck(PrometheusCheck):
     def __init__(self, name, init_config, agentConfig, instances=None):
@@ -79,7 +133,7 @@ class KubeDNSCheck(PrometheusCheck):
 The reason for the override it so metrics reported by the Prometheus checks are not counted as [custom metric](/getting_started/custom_metrics):
 
 ```python
-from checks.prometheus_check import PrometheusCheck
+from datadog_checks.checks.prometheus import PrometheusCheck
 
 class KubeDNSCheck(PrometheusCheck):
     def __init__(self, name, init_config, agentConfig, instances=None):
@@ -122,7 +176,7 @@ because it could not collect any metrics, it should raise a meaningful exception
 Improve your `check()` method with `CheckException`:
 
 ```python
-from checks import CheckException
+from datadog_checks.errors import CheckException
 
 def check(self, instance):
     endpoint = instance.get('prometheus_endpoint')
@@ -133,7 +187,7 @@ def check(self, instance):
 Then as soon as you have data available you just need to flush:
 
 ```python
-from checks import CheckException
+from datadog_checks.errors import CheckException
 
 def check(self, instance):
     endpoint = instance.get('prometheus_endpoint')
@@ -151,8 +205,8 @@ def check(self, instance):
 ### Putting It All Together
 
 ```python
-from checks import CheckException
-from checks.prometheus_check import PrometheusCheck
+from datadog_checks.errors import CheckException
+from datadog_checks.checks.prometheus import PrometheusCheck
 
 class KubeDNSCheck(PrometheusCheck):
     """
@@ -189,7 +243,7 @@ class KubeDNSCheck(PrometheusCheck):
 
 ## Getting further
 
-You can improve your Prometheus check with the following methods: 
+You can improve your Prometheus check with the following methods:
 
 ### `self.ignore_metrics`
 
