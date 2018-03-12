@@ -13,17 +13,11 @@ further_reading:
   text: How to investigate a log parsing issue?
 ---
 
-By default, the maximum number of log files that can be tailed by the logs agent is 100 logs files and this limit is controllable.
-
-If you would like to increase the number of the tailed log files.
-
-The next config line needs to be added in the `/etc/datadog-agent/datadog.yaml` config file where `XXX` is the number of log files to be tailed by the logs agent.
-
+By default the Agent can tail up to 100 logs files. To increase the amount of tailed log files by your Agent, edit `log_open_files_limit` in your `/etc/datadog-agent/datadog.yaml` configuration file, by replacing `XXX` with the new amount of log files tailed:
 
 ```
 log_open_files_limit: XXX
 ```
 
-
-**NB** Increasing the tailed logs files limit will force the agent to consume more and more CPU, to be used with caution.
+**Note**: Increasing the tailed logs files limit increase the agent CPU usage.
 
