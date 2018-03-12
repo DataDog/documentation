@@ -246,18 +246,13 @@ The check itself inherits from `AgentCheck` and send a gauge of `1` for
 `hello.world` on each call. This goes in `checks.d/hello.py`:
 
 ```python
-
 from checks import AgentCheck
 class HelloCheck(AgentCheck):
     def check(self, instance):
         self.gauge('hello.world', 1)
 ```
 
-As you can see, the check interface is really simple and easy to get started
-with. In the next section we write a more useful check that pings HTTP
-services and return interesting data.  
-  
-If you are using Agent v5, [consult our Custom HTTP check example](/agent/faq/agent-5-custom-agent-check)
+That's it!  If you are using Agent v5, [consult our Custom HTTP check example](/agent/faq/agent-5-custom-agent-check)
 
 ## Troubleshooting
 
