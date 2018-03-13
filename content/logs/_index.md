@@ -20,10 +20,6 @@ logs_enabled: true
 
 The Datadog agent sends its logs to Datadog over TLS-encrypted TCP. This requires outbound communication over port `10516`.
 
-## Using a Proxy for Logs
-
-This is unavailable at this time using the `proxy` setting in the `datadog.yaml` configuration file. 
-
 ## Enabling log collection from integrations
 To start collecting logs for a given integration, uncomment the logs section in that integration's yaml file, and configure it for your environment.  
 
@@ -236,6 +232,10 @@ logs:
 ```
 
 **Note**: that the agent requires the read and execute permission (5) on the directory to be able to list all the available files in it.
+
+## Using a Proxy for Logs
+
+The log agent does not presently respect the the proxy setting in the datadog.yaml configuration file. This feature will be available in a future release.
 
 ### The Advantage of Collecting JSON-formatted logs
 
