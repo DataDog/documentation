@@ -1,0 +1,73 @@
+---
+title: Commandes de l'Agent
+kind: faq
+aliases:
+    - /agent/faq/agent-status-and-information
+    - /agent/faq/start-stop-restart-the-datadog-agent
+---
+
+## Démarrer/Arrêter/Redémarrer l'Agent
+### Démarre l'Agent
+
+|Platforme|Agent v5 |Agent v6|
+|:--------|:-----|:--------|
+|Linux|`sudo service datadog-agent start`|`sudo service datadog-agent start`|
+|MacOS x|`/usr/local/bin/datadog-agent start`|`launchctl start com.datadoghq.agent` or systray app |
+|Source|`sudo ~/.datadog-agent/bin/agent start`|`sudo service datadog-agent start`|
+|Windows|[Consultez notre document Windows dédié](/agent/basic_agent_usage/windows)|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows)|
+
+### Stop the Agent
+
+|Platforme|Agent v5 |Agent v6|
+|:--------|:-----|:--------|
+|Linux|`sudo service datadog-agent stop`|`sudo service datadog-agent stop`|
+|MacOS x|`/usr/local/bin/datadog-agent stop` |`launchctl stop com.datadoghq.agent` or systray app  |
+|Source|`sudo ~/.datadog-agent/bin/agent stop`|`sudo service datadog-agent stop`|
+|Windows|[Consultez notre document Windows dédié](/agent/basic_agent_usage/windows)|[Consultez notre document Windows dédié](/agent/basic_agent_usage/windows)|
+### Redémarer l'Agent
+
+|Platformes|Agent v5 |Agent v6|
+|:--------|:-----|:--------|
+|Linux|`sudo service datadog-agent restart`|`sudo service datadog-agent restart`|
+|MacOS x|`/usr/local/bin/datadog-agent restart `|_run `stop` then `start`_ or systray app|
+|Source|`sudo ~/.datadog-agent/bin/agent restart`|`n/a`|
+|Windows|[Consultez notre document Windows dédié](/agent/basic_agent_usage/windows)|[Consultez notre document Windows dédié](/agent/basic_agent_usage/windows)|
+
+## Status et Informations de l'Agent
+
+### Status du service
+
+|Platformes|Agent v5 |Agent v6|
+|:--------|:-----|:--------|
+|Linux|`sudo service datadog-agent status`|`sudo datadog-agent status`|
+|Docker|`sudo docker exec -it dd-agent /etc/init.d/datadog-agent status`|`n/a`|
+|MacOS x|`datadog-agent status`             | `launchctl list com.datadoghq.agent` or systray app|
+|Source|`sudo ~/.datadog-agent/bin/agent status`|`sudo service datadog-agent status`|
+|Windows|[Consultez notre document Windows dédié](/agent/basic_agent_usage/windows/#status-and-information)|[Consultez notre document Windows dédié](/agent/basic_agent_usage/windows/#status-and-information)|
+
+### Information sur l'Agent
+
+L'exécution d'une commande info affiche l'état de votre agent Datadog et des intégrations activées.
+
+Une intégration correctement configurée indiquera "OK" comme indiqué ci-dessous:
+
+```
+  Checks
+  ======
+
+    network
+    -------
+      - instance #0 [OK]
+      - Collected 15 metrics, 0 events & 1 service check
+```
+
+Le `[OK]` dans le retour de l'Agent implique que la vérification a été configurée/exécutée correctement mais ne fait pas référence à la valeur renvoyée par le check.
+
+|Platformes|Agent v5 |Agent v6|
+|:--------|:-----|:--------|
+|Linux|`sudo service datadog-agent info`|`sudo datadog-agent status`|
+|Docker|`sudo docker exec -it dd-agent /etc/init.d/datadog-agent info`|`n/a`|
+|Docker (Alpine)|`docker exec -it dd-agent /opt/datadog-agent/bin/agent`|`n/a`|
+|MacOS x|`datadog-agent info`               | `datadog-agent status` or [web GUI](/agent/#using-the-gui)                    |
+|Source|`sudo ~/.datadog-agent/bin/info`|`sudo datadog-agent status`|
+|Windows|[Consultez notre document Windows dédié](/agent/basic_agent_usage/windows/#status-and-information)|[Consultez notre document Windows dédié](/agent/basic_agent_usage/windows/#status-and-information)|
