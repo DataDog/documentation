@@ -233,6 +233,10 @@ logs:
 
 **Note**: that the agent requires the read and execute permission (5) on the directory to be able to list all the available files in it.
 
+### Using a Proxy for Logs
+
+The log agent does not presently respect the the proxy setting in the datadog.yaml configuration file. This feature will be available in a future release.
+
 ### The Advantage of Collecting JSON-formatted logs
 
 Datadog automatically parses JSON-formatted logs. For this reason, when you have control over the log format you send to Datadog, we encourage you to format them as JSON to avoid the need for custom parsing rules.
