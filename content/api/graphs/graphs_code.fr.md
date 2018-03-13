@@ -1,0 +1,8 @@
+---
+title: Graphs
+type: apicode
+order: 11
+external_redirect: /api/#graphs
+---
+
+

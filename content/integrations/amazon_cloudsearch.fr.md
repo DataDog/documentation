@@ -46,7 +46,7 @@ Si vous ne l'avez pas déjà fait, configurez [l'Intégration Amazon Web Service
 Chacune des métriques récupérées à partir d'AWS se verra attribuer les mêmes tags qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le nom de l'host, les groupes de sécurité et plus encore.
 
 ### Evénements
-L'intégration AWS Cloudsearch n'inclut aucun événements pour le moment.
+L'intégration AWS Cloudsearch n'inclut aucun événement pour le moment.
 
 ### Checks de Service
 L'intégration AWS Cloudsearch n'inclut aucun check de service pour le moment.
