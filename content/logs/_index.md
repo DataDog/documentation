@@ -233,7 +233,7 @@ logs:
 
 **Note**: that the agent requires the read and execute permission (5) on the directory to be able to list all the available files in it.
 
-## Using a Proxy for Logs
+### Using a Proxy for Logs
 
 The log agent does not presently respect the the proxy setting in the datadog.yaml configuration file. This feature will be available in a future release.
 
