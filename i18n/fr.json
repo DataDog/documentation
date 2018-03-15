@@ -1,86 +1,86 @@
 {
   "beta_sentence": {
-    "other": "Beta - For support or to report any issues, contact"
+    "other": "Bêta - Pour obtenir de l'aide ou signaler tout problème, contactez"
   },
 
   "additional_sentence": {
-    "other": "Additional helpful documentation, links, and articles"
+    "other": "Documentation, liens et articles supplémentaires utiles"
   },
 
   "apiaccount_sentence1": {
-    "other": "Make sure you replace the API and/or APP key below"
+    "other": "Assurez-vous de remplacer l'API et/ou la clé APP ci-dessous"
   },
 
   "apiaccount_sentence2": {
-    "other": "with the ones for your account"
+    "other": "avec ceux de votre compte"
   },
 
   "install_agent_sentence": {
-    "other": "Install & configure the Agent to collect data"
+    "other": "Installer et configurer l'agent pour collecter des données"
   },
 
   "integrations_sentence": {
-    "other": "Gather data from all of your systems, apps, & services"
+    "other": "Rassemblez des données de tous vos systèmes, applications et services"
   },
 
   "graphing_sentence": {
-    "other": "Visualize your data to<br> gain insight"
+    "other": "Visualisez vos données pour<br> pour mieux les comprendre"
   },
 
   "alerting_sentence": {
-    "other": "Create & manage your <br> monitors & notifications"
+    "other": "Créer et gérer vos <br>  monitors et notifications"
   },
 
   "apm_sentence": {
-    "other": "Instrument your code <br> to improve performance"
+    "other": "Instrumenter votre code <br> pour améliorer ses performances"
   },
 
   "developer_tools_sentence": {
-    "other": "Collect custom metrics <br> &amp; create new integration"
+    "other": "Collecter des métriques custom <br> &amp; créer une nouvelle intégration"
   },
 
   "help_sentence": {
-    "other": "Our friendly, knowledgeable solutions engineers are here to help"
+    "other": "Nos ingénieurs amicaux et compétents sont là pour vous aider"
   },
 
   "email_support_sentence": {
-    "other": "You can contact our Support Team via email at <a href=\"mailto:support@datadoghq.com\">support@datadoghq.com</a>"
+    "other": "Vous pouvez contacter notre équipe de support par email à <a href=\"mailto:support@datadoghq.com\">support@datadoghq.com</a>"
   },
 
   "live_chat_support_sentence": {
-    "other": "Chat with our support team any business day between the hours of 10:00 and 19:00 ET. You can reach us through in-app chat, or on Slack,  <a href=\"http://chat.datadoghq.com/\" target=\"_blank\" rel=\"noopener\">Datadog Slack</a>"
+    "other": "Discutez avec notre équipe de support n'importe quel jour ouvrable entre 10h00 et 19h00 EST. Vous pouvez nous joindre via le chat intégré ou sur Slack,<a href=\"http://chat.datadoghq.com/\" target=\"_blank\" rel=\"noopener\">Datadog Slack</a>"
   },
 
   "event_stream_support_sentence": {
-    "other": "Messages in the <a href=\"http://app.datadoghq.com/event/stream\" target=\"_blank\" rel=\"noopener\">event stream</a> containing @support-datadog will reach our Support Team. This is a convenient way to reference a graph snapshot."
+    "other": "Les messages du <a href=\"http://app.datadoghq.com/event/stream\" target=\"_blank\" rel=\"noopener\">flux d'événements</a> contenant @support-datadog parviendront à notre équipe de support. C'est un moyen pratique de pour transmettre un snapshot de graphe."
   },
 
   "agent_started_sentence": {
-    "other": "To get started using the Agent, please select your platform."
+    "other": "Pour commencer à utiliser l'agent, sélectionnez votre plateforme."
   },
 
   "choose_a_platform": {
-    "other": "Choose A Platform"
+    "other": "Choisir une plateforme"
   },
 
   "get_started_datadog": {
-    "other": "Get Started with Datadog"
+    "other": "Commencer avec Datadog"
   },
 
   "all": {
-    "other": "All"
+    "other": "Tout"
   },
 
   "free_trial": {
-    "other": "Free Trial"
+    "other": "Essai gratuit"
   },
 
   "agent_check": {
-    "other": "Agent Check"
+    "other": "Check de l'Agent"
   },
 
   "statsd_check": {
-    "other": "StatsD Check"
+    "other": "Check StatsD"
   },
 
   "crawler": {
@@ -88,7 +88,7 @@
   },
 
   "terms": {
-    "other": "Terms"
+    "other": "Termes"
   },
 
   "privacy": {
@@ -100,15 +100,15 @@
   },
 
   "toc": {
-    "other": "Table of Contents"
+    "other": "Table des matières"
   },
 
   "get_started_free": {
-    "other": "GET STARTED FREE"
+    "other": "COMMENCER GRATUITEMENT"
   },
 
   "documentation_search": {
-    "other": "Documentation Search"
+    "other": "Recherche"
   },
 
   "guides": {
@@ -127,12 +127,12 @@
   },
 
   "library": {
-    "one":  "Library",
-    "other": "Libraries"
+    "one":  "Bibliothèque",
+    "other": "Bibliothèques"
   },
 
   "official": {
-    "other": "Official"
+    "other": "Officiel"
   },
 
   "api": {
@@ -144,11 +144,11 @@
   },
 
   "home": {
-    "other": "Home"
+    "other": "Accueil"
   },
 
   "datadog_docs": {
-    "other": "Datadog Docs"
+    "other": "Documentation de Datadog"
   },
 
   "dogstatsd": {
@@ -156,7 +156,7 @@
   },
 
   "author": {
-    "other": "Author"
+    "other": "Auteur"
   },
 
   "notes": {
@@ -173,7 +173,7 @@
   },
 
   "graphing": {
-    "other": "Graphing"
+    "other": "Graphes"
   },
 
   "alerting": {
@@ -185,19 +185,19 @@
   },
 
   "developer_tools": {
-    "other": "Developer tools"
+    "other": "Outils de développement"
   },
 
   "contact_us": {
-    "other": "Contact Us"
+    "other": "Contactez nous"
   },
 
   "status_page": {
-    "other": "Status Page"
+    "other": "Page de status"
   },
 
   "ops_twitter": {
-    "other": "Ops Twitter"
+    "other": "Twitter Ops"
   },
 
   "email": {
@@ -205,11 +205,11 @@
   },
 
   "live_chat": {
-    "other": "Live Chat"
+    "other": "Chat live"
   },
 
   "event_stream_messaging": {
-    "other": "In-app Event Stream Messaging"
+    "other": "Messagerie depuis le flux d'événements dans l'application"
   },
 
   "questions": {
