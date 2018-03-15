@@ -99,13 +99,13 @@ Use facets to easily filters on your logs. The search bar and url automatically 
 
 {{< img src="logs/explore/facet_panel.png" alt="Facet panel" responsive="true" popup="true" style="width:80%;">}}
 
-## Mesures
+## Measures
 
 A Measure is a attribute with numerical value contained in your logs. Think of it as a "log metric".
 
 ### Create a Measure
 
-To start using an attribute as a mesure, click on a numerical attribute of your log:
+To start using an attribute as a measure, click on a numerical attribute of your log:
 
 {{< img src="logs/explore/create_a_mesure.png" alt="Create a measure" responsive="true" popup="true" style="width:80%;">}}
 
@@ -212,10 +212,12 @@ To start using it:
 2. Select the aggregation function for the Measure you want to graph
     {{< img src="logs/explore/graph/agg_function_log_graph.png" alt="aggregation function for log graph" responsive="true" popup="true" style="width:50%;">}}
 3. Split by [Tag](/getting_started/tagging) or [Facet](#facets) to split your graph over the desired dimension.
+
     {{< img src="logs/explore/graph/split_by_log_graph.png" alt="split by log graph" responsive="true" popup="true" style="width:50%;">}}
 
 4. See logs related to a section of the graph:  
     Select or click on a section of the graph to either zoom in the graph or see the list of logs corresponding to your selection: 
+
     {{< img src="logs/explore/graph/using_log_graph.gif" alt="using log graph" responsive="true" popup="true" style="width:80%;">}}
 
 ## Further Reading
