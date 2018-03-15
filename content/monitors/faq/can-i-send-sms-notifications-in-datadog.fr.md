@@ -2,10 +2,10 @@
 title: Puis-je envoyer des notifications par SMS dans Datadog?
 kind: faq
 further_reading:
-- link: "/monitors/monitor_types"
+- link: "monitors/monitor_types"
   tag: "Documentation"
   text: Apprenez à créer un monitor
-- link: "/monitors/notifications"
+- link: "monitors/notifications"
   tag: "Documentation"
   text: Configurez les notifications de votre monitor
 ---
