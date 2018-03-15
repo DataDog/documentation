@@ -5,13 +5,13 @@ platform: Red Hat
 aliases:
     - /guides/basic_agent_usage/redhat/
 further_reading:
-- link: "/logs/"
+- link: "logs/"
   tag: "Documentation"
   text: Collectez vos logs
-- link: "/graphing/infrastructure/process"
+- link: "graphing/infrastructure/process"
   tag: "Documentation"
   text: Collectez vos processus
-- link: "/tracing"
+- link: "tracing"
   tag: "Documentation"
   text: Collectez vos traces
 ---
@@ -34,7 +34,7 @@ L'Agent Datadog possède quelques commandes. Seules les commandes _lifecycle_ (i
 | `sudo -u dd-agent -- dd-agent check <check_name>` | `sudo -u dd-agent -- datadog-agent check <check_name>` | Run a check |
 {{% /table %}}
 
-Plus d'informations sur les métriques, les événements et les checks de service pour une [intégrations](/intégrations) peuvent être récupérées avec la commande check:
+Plus d'informations sur les métriques, les événements et les checks de service pour une [intégrations](/integrations) peuvent être récupérées avec la commande check:
 ```shell
 sudo service datadog-agent check [integration]
 ```
@@ -58,7 +58,7 @@ Les fichiers et dossiers de configuration de l'Agent se trouvent à:
 |:-----|:----|
 |`/etc/dd-agent/datadog.conf`| `/etc/datadog-agent/datadog.yaml` |
 
-Fichiers de configuration pour [les intégrations](/intégrations):
+Fichiers de configuration pour [les intégrations](/integrations):
 
 | Agent v5                                  |  Agent v6                          |
 |:-----|:----|

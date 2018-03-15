@@ -2,10 +2,10 @@
 title: Comment configurer Azure AD comme un SAML IdP?
 kind: faq
 further_reading:
-- link: "/account_management/saml"
+- link: "account_management/saml"
   tag: "Documentation"
   text: Configurez SAML pour votre compte Datadog
-- link: "/account_management/multi_organization"
+- link: "account_management/multi_organization"
   tag: "Documentation"
   text: Configurez vos Teams et Organisations avec plusieurs comptes
 ---
@@ -28,8 +28,8 @@ Vous trouverez ci-dessous un guide pas à pas pour configurer Azure AD en tant q
     {{< img src="account_management/faq/Active_Directory_-_Microsoft_Azure.png" alt="Active_Directory_-_Microsoft_Azure" responsive="true" popup="true">}}
 
 
-7. Sélectionnez "Custom" -> "Add an unlisted application my organization is using" -> Entrez un nom comme "DatadogSSOApp" pour le nom d'application. Puis pressez le bouton check une fois terminé
-    **NOTE**: Si vous ne voyez pas l'option "Add an unlisted application my organization is using", cela signifie que vous n'avez pas de souscription prémium pour Azure AD.  Upgradez à Azure AD Premium puis rafraichissez votre page
+7. Sélectionnez "Custom" -> "Add an unlisted application my organization is using" -> Entrez un nom tel "DatadogSSOApp" comme nom d'application. Puis appuyez sur le bouton check une fois terminé.
+    **NOTE**: Si vous ne voyez pas l'option "Add an unlisted application my organization is using", cela signifie que vous ne disposez pas de l'abonnement Premium pour Azure AD. Effectuez une mise à niveau vers Azure AD Premium, puis actualisez la page.
     {{< img src="account_management/faq/Active_Directory_-_Microsoft_Azure2.png" alt="Active_Directory_-_Microsoft_Azure2" responsive="true" popup="true">}}
 
 8. Une fois que l'application a été crée, sélectionnez "Configure single sign-on"
@@ -38,7 +38,7 @@ Vous trouverez ci-dessous un guide pas à pas pour configurer Azure AD en tant q
 9. Sélectionnez "Microsoft Azure AD Single Sign-On"
     {{< img src="account_management/faq/Active_Directory_-_Microsoft_Azure4.png" alt="Active_Directory_-_Microsoft_Azure4" responsive="true" popup="true">}}
 
-10. Allez à https://app.datadoghq.com/saml/saml_setup, Trouvez votre Service Provider Entity ID et  l'url de Assertion Consumer Service à la droite de la page.  Copiez/collez ces valeurs respectivement dans les champs "Identifier" et "Reply URL" text.
+10. Allez à https://app.datadoghq.com/saml/saml_setup , Trouvez votre Service Provider Entity ID et  l'url de Assertion Consumer Service à la droite de la page.  Copiez/collez ces valeurs respectivement dans les champs "Identifier" et "Reply URL" text.
     {{< img src="account_management/faq/Step10Redo.png" alt="Step10Redo" responsive="true" popup="true">}}
     {{< img src="account_management/faq/Step10Redo2.png" alt="Step10Redo2" responsive="true" popup="true">}}
 

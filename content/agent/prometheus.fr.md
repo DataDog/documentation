@@ -2,13 +2,13 @@
 title: Écrire un check Prometheus
 kind: documentation
 further_reading:
-- link: "/logs/"
+- link: "logs/"
   tag: "Documentation"
   text: Collectez vos logs
-- link: "/graphing/infrastructure/process"
+- link: "graphing/infrastructure/process"
   tag: "Documentation"
   text: Collectez vos processus
-- link: "/tracing"
+- link: "tracing"
   tag: "Documentation"
   text: Collectez vos traces
 ---
