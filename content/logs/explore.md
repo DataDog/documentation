@@ -91,7 +91,7 @@ To start using an attribute as a Facet or in the search, click on it and add it 
 
 {{< img src="logs/explore/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" popup="true" style="width:50%;">}}
 
-Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the [Log graph query](/logs/log-graph).
+Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the [Log graph query](/logs/#log-graph).
 
 ### Facet Panel
 
@@ -109,7 +109,7 @@ To start using an attribute as a measure, click on a numerical attribute of your
 
 {{< img src="logs/explore/create_a_mesure.png" alt="Create a measure" responsive="true" popup="true" style="width:80%;">}}
 
-Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the [Log graph query](/logs/log-graph).
+Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the [Log graph query](/logs/#log-graph).
 
 ### Select the Measure Unit
 
