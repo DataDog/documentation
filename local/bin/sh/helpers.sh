@@ -503,10 +503,21 @@ manage_translations() {
     export ARTIFACT_RESOURCE="data"
     pull_artifact_from_s3
 
+    # test we actually have remote files, lack of files locally will indicate that we should delete them from transifex
+    untracked_content_integrations_count=$(git ls-files --others content/integrations | wc -l)
+    untracked_data_integrations_count=$(git ls-files --others data/integrations | wc -l)
+    echo $untracked_content_integrations_count
+    echo $untracked_data_integrations_count
+    if [ $untracked_content_integrations_count -lt 0 ] || [ $untracked_data_integrations_count -eq 0 ]
+    then
+        echo "Suspected lack of remote resources (integrations) exiting for safety..."
+        fail_step "${FUNCNAME}"
+    fi
+
     echo "---------"
     echo "Sending Translations"
     echo "---------"
-    #./node_modules/.bin/translate -s ./translate.yaml "${1}" || fail_step "${FUNCNAME}"
+    ./node_modules/.bin/translate -s ./translate.yaml "${1}" || fail_step "${FUNCNAME}"
     echo "Done."
     echo "---------"
     echo "Receiving Translations"
