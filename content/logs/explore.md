@@ -91,13 +91,31 @@ To start using an attribute as a Facet or in the search, click on it and add it 
 
 {{< img src="logs/explore/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" popup="true" style="width:50%;">}}
 
-Once this is done, the value of this attribute is stored **for all new logs** and can be used for searches via the [search bar](#searche-bar) or [Facet Panel](#facet-panel).
+Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the [Log graph query](/logs/log-graph).
 
 ### Facet Panel
 
 Use facets to easily filters on your logs. The search bar and url automatically reflect your selections.
 
 {{< img src="logs/explore/facet_panel.png" alt="Facet panel" responsive="true" popup="true" style="width:80%;">}}
+
+## Mesures
+
+A Measure is a attribute with numerical value contained in your logs. Think of it as a "log metric".
+
+### Create a Measure
+
+To start using an attribute as a mesure, click on a numerical attribute of your log:
+
+{{< img src="logs/explore/create_a_mesure.png" alt="Create a measure" responsive="true" popup="true" style="width:80%;">}}
+
+Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the [Log graph query](/logs/log-graph).
+
+### Select the Measure Unit
+
+All measure have their own unit that is then used for display in the Log explorer columns, Log stream widgets in dashboards, and in the Log Graphs.
+
+{{< img src="logs/explore/edit_a_measure.png" alt="Edit a measure" responsive="true" popup="true" style="width:80%;">}}
 
 ## Search bar
 
@@ -189,11 +207,14 @@ Switch between the Log List and the Log Graph mode by clicking on this button:
 
 To start using it:
 
-1. Choose the Measure to graph
-2. Split by [Tag](/getting_started/tagging) or [Facet](#facets) to split your graph over the desired dimension.
-{{< img src="logs/explore/graph/split_by_log_graph.png" alt="split by log graph" responsive="true" popup="true" style="width:80%;">}}
+1. Choose a [Measure](#measure) or [Facet](#facet) to graph. Choosing a Measure let you then choose the aggregation function whereas selecting a Facet display the unique count.
+    {{< img src="logs/explore/graph/choose_measure_facet.png" alt="choose measure facet" responsive="true" popup="true" style="width:50%;">}}
+2. Select the aggregation function for the Measure you want to graph
+    {{< img src="logs/explore/graph/agg_function_log_graph.png" alt="aggregation function for log graph" responsive="true" popup="true" style="width:50%;">}}
+3. Split by [Tag](/getting_started/tagging) or [Facet](#facets) to split your graph over the desired dimension.
+    {{< img src="logs/explore/graph/split_by_log_graph.png" alt="split by log graph" responsive="true" popup="true" style="width:50%;">}}
 
-3. See logs related to a section of the graph:  
+4. See logs related to a section of the graph:  
     Select or click on a section of the graph to either zoom in the graph or see the list of logs corresponding to your selection: 
     {{< img src="logs/explore/graph/using_log_graph.gif" alt="using log graph" responsive="true" popup="true" style="width:80%;">}}
 
