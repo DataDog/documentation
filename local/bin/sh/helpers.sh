@@ -125,8 +125,6 @@ create_artifact_untracked() {
           echo "$word" >> untracked.txt
         done
     fi
-    echo "data" >> untracked.txt
-    echo "content/integrations" >> untracked.txt
     tar -czf "/tmp/${artifact_name}" -T untracked.txt || (echo "artifact build failed. sorry." && fail_step "${FUNCNAME}")
     echo "Deploying artifact: ${artifact_name} to s3://"$(get_secret 'static_bucket')"/build_artifacts/documentation/${CI_COMMIT_REF_NAME}/"
     aws s3 cp \
