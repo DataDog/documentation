@@ -118,7 +118,13 @@ create_artifact_untracked() {
     echo "artifact name is ${artifact_name}"
     # add git untracked files that aren't ignored by gitignore also add modified files
     git ls-files --others --exclude-standard -m > untracked.txt
-    # for now we are forcing adding data and integrations because weird mix of gitignore and committed files
+    # add any extra dirs we specified in yaml
+    if [ -n "${UNTRACKED_EXTRAS}" ]; then
+        export IFS=","
+        for word in $UNTRACKED_EXTRAS; do
+          echo "$word" >> untracked.txt
+        done
+    fi
     echo "data" >> untracked.txt
     echo "content/integrations" >> untracked.txt
     tar -czf "/tmp/${artifact_name}" -T untracked.txt || (echo "artifact build failed. sorry." && fail_step "${FUNCNAME}")
