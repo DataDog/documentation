@@ -118,8 +118,9 @@ create_artifact_untracked() {
     echo "artifact name is ${artifact_name}"
     # add git untracked files that aren't ignored by gitignore also add modified files
     git ls-files --others --exclude-standard -m > untracked.txt
-    # force add some
+    # for now we are forcing adding data and integrations because weird mix of gitignore and committed files
     echo "data" >> untracked.txt
+    echo "content/integrations" >> untracked.txt
     tar -czf "/tmp/${artifact_name}" -T untracked.txt || (echo "artifact build failed. sorry." && fail_step "${FUNCNAME}")
     echo "Deploying artifact: ${artifact_name} to s3://"$(get_secret 'static_bucket')"/build_artifacts/documentation/${CI_COMMIT_REF_NAME}/"
     aws s3 cp \
@@ -508,7 +509,7 @@ manage_translations() {
     untracked_data_integrations_count=$(git ls-files --others data/integrations | wc -l)
     echo $untracked_content_integrations_count
     echo $untracked_data_integrations_count
-    if [ $untracked_content_integrations_count -lt 0 ] || [ $untracked_data_integrations_count -eq 0 ]
+    if [ $untracked_content_integrations_count -eq 0 ] || [ $untracked_data_integrations_count -eq 0 ]
     then
         echo "Suspected lack of remote resources (integrations) exiting for safety..."
         fail_step "${FUNCNAME}"
