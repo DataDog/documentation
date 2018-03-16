@@ -38,8 +38,9 @@ class LinkChecker(object):
 
     STATIC_REG = '(\.)(js|css|pdf|txt|log|png|jpe?g|gif|ico)'
 
-    def __init__(self, src_path, files, processes, domain, static_domain, check_all, verbose, external, timeout,
+    def __init__(self, src_path, files, file_input, processes, domain, static_domain, check_all, verbose, external, timeout,
                  ignore):
+        self.file_input = file_input
         self.src_path = src_path
         self.files = files.split()
         self.processes = int(processes)
@@ -52,6 +53,9 @@ class LinkChecker(object):
         self.timeout = int(timeout)
         self.internal_domain_regex = 'localhost:1313|%s' % self.domain
         self.ignore = ignore
+        if len(self.file_input) > 0:
+            with open(self.file_input) as f:
+                self.files = f.read().split()
         print('pool: {0}\non: {1}\ndomain: {1}\ncheck_all: {3}'.format(
             self.processes,
             self.src_path,
@@ -298,6 +302,7 @@ def main():
     parser.add_option("-s", "--src_path", help="location of the source you want to crawl",
                       default=os.getcwd() + '/public')
     parser.add_option("-f", "--files", help="list of files to crawl", default="")
+    parser.add_option("-F", "--file_input", help="file with list of files to crawl", default="")
     parser.add_option("-p", "--processes", help="number of process to consume the pool",
                       default=multiprocessing.cpu_count() - 1)
     parser.add_option("-d", "--domain",
