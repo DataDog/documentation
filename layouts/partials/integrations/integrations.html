@@ -65,7 +65,7 @@
             {{ range $i, $word := (split $v.Params.name "_") }}
                 {{ $.Scratch.Add "formatSlice" (print (substr $word 0 1 | upper) (substr $word 1 (len $word))) }}
             {{ end }}
-            {{ $.Scratch.Set "formatname" delimit ($.Scratch.Get "formatSlice") " " }}
+            {{ $.Scratch.Set "formatname" (delimit ($.Scratch.Get "formatSlice") " ") }}
         {{ end }}
         {{ $formatname := $.Scratch.Get "formatname" }}
 
