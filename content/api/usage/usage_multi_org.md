@@ -2,7 +2,7 @@
 title: Get Usage across your Multi-Org Account
 type: apicontent
 order: 22.3
-external_redirect: /api/#get-multi-org-summary
+external_redirect: /api/#get-usage-across-your-multi-org-account
 ---
 #
 ## Get Multi-Org Monthly Usage
