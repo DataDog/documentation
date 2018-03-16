@@ -91,13 +91,7 @@ This approach can be especially useful for sending to Datadog logs that have hei
     }
     ```
     This assumes that you have TLS enabled for your Rsyslog--if you do not, then you should use port 10514 instead of 10516.
-
-    Alternatively, to send logs from Rsyslog to your Datadog Logs Agent, configure your dd-agent to expect logs over UDP/TCP on a port of your choosing, add the following content to the end of your `/etc/rsyslog.d/datadog.conf`:
-    ```
-    $template DatadogFormat,"%msg%\n"
-    *.* @@localhost:PORT;DatadogFormat  # @@ for TCP, @ for UDP
-    ```
-
+    
 5. (Optional) TLS Encryption
     While sending your logs directly from Rsyslog to your Datadog account, if you want to add TLS encryption, you can take the following steps.
 
@@ -120,6 +114,14 @@ This approach can be especially useful for sending to Datadog logs that have hei
     *.* @@intake.logs.datadoghq.com:10516;DatadogFormat
     ```
 
+    If you have any issue with the TLS forwarding with Rsyslog, an alternative is to forward logs locally from Rsyslog to the Datadog Agent which would then take care of the encryption.
+To send logs from Rsyslog to a local UDP or TCP port of your choosing, add the following content to the end of your `/etc/rsyslog.d/datadog.conf`:
+    ```
+    $template DatadogFormat,"%msg%\n"
+    *.* @@localhost:PORT;DatadogFormat  # @@ for TCP, @ for UDP
+    ```
+    Then configure the Datadog agent to listen on that port: https://docs.datadoghq.com/logs/#stream-logs-through-tcp-udp
+
 6. Restart Rsyslog and your new logs get forwarded directly to your Datadog account.
 
 7. Associate those logs with the host metrics and tags
@@ -128,16 +130,15 @@ This approach can be especially useful for sending to Datadog logs that have hei
     If you did specify a custom Hostname for your metric, make sure to replace the **%HOSTNAME%** value in the format to match the same custom name.
 
 8. Enjoy Datadog Integrations
-    In order to get the best use out of your logs in Datadog, you need to set the source on your logs. The source can be set directly in the agent if you forward your logs to the Datadog agent.
-
-    Otherwise you need a specific format per log source which means you need a specific configuration file per source in /etc/rsyslog.d/
+    In order to get the best use out of your logs in Datadog, you need to set the source on your logs.
+    You might need to define a specific format per log source which means you need a specific configuration file per source in /etc/rsyslog.d/
 
     To set the source, use the following format (if you have several sources, change the name of the format in each file):
 
     ```
     $template DatadogFormat,"YOURAPIKEY <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - [metas ddsource=\"mysourcename\"] %msg%\n"
     ```
-    Do not forge to replace mysourcename by the appropriate value.
+    Do not forget to replace `mysourcename` by the appropriate value.
 
 9. (Optional) Datadog cuts inactive connections after a period of inactivity.  
     Some Rsyslog versions that are not able to reconnect properly when necessary. To mitigate this issue, use time markers so the connection never stops. To achieve this, add the following 2 lines in your Rsyslog configuration:   

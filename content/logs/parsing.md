@@ -54,7 +54,8 @@ Here is the list of all the matchers natively implemented by Datadog:
 |**Pattern**| **Usage**|
 |`date("pattern"[, "timezoneId"[, "localeId"]])`| matches a date with the specified pattern and parses to produce a unix timestamp [More info](#parsing-dates)|
 |`regex("pattern")` |matches a regex|
-| `data` |matches a string until the next newline |
+| `data` |matches any string including spaces and newlines. Equivalent to `.*` |
+| `notSpace` |matches any string until the next space |
 |`boolean("truePattern", "falsePattern")`|matches and parses a boolean optionally defining the true and false patterns (defaults to 'true' and 'false' ignoring case)|
 | `numberStr` | matches a decimal floating point number and parses it as a string|
 |`number` |matches a decimal floating point number and parses it as a double precision number |
@@ -126,7 +127,7 @@ user=john connect_date=11/08/2017 id=123 action=click
 Rule
 
 ```
-rule keyvalue("="," "))
+rule %{data::keyvalue}
 ```
 
 {{< img src="logs/parsing/parsing_example_2.png" alt="Parsing example 2" responsive="true" popup="true">}}

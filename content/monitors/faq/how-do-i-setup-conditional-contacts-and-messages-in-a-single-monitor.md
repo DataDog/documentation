@@ -26,9 +26,9 @@ Users may also want to send alarms to additional or different contacts or channe
 
 The example below shows how to use the is_match variable to send the notification to specific contacts based on the value of a host tag named “customer”:
 ```
-{{#is_match host.customer "customer1"}} alert for customer 1 on {{host.name}}  @slack-customer1  {{/is_match}}  
+{{#is_match "host.customer" "customer1"}} alert for customer 1 on {{host.name}}  @slack-customer1  {{/is_match}}  
 
-{{#is_match host.customer "customer2"}} alert for customer2 on  {{host.name}} @slack-customer2  {{/is_match}} 
+{{#is_match "host.customer" "customer2"}} alert for customer2 on  {{host.name}} @slack-customer2  {{/is_match}} 
 ```
 
 Keep in mind when using conditional tags that they must have an open (example: {{#is_alert}}) and closing (example: {{/is_alert}}) pair with the desired text and @ mentions in between.

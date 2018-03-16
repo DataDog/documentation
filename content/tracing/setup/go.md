@@ -18,7 +18,7 @@ further_reading:
 
 ## Installation
 
-To begin tracing applications written in Go, first [install and configure the Datadog Agent](/tracing/setup).
+To begin tracing applications written in Go, first [install and configure the Datadog Agent](/tracing/setup) (see additional documentation for [tracing Docker applications](/tracing/setup/docker/)).
 
 Next, install the Go Tracer from the Github repository:
 

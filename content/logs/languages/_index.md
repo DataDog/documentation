@@ -4,13 +4,9 @@ kind: Documentation
 description: "Configure your Datadog agent to gather logs from your favorite languages."
 ---
 
-<div class="alert alert-info">
-Datadog's Logs is currently available via public beta. You can apply for inclusion in the beta via <a href="https://www.datadoghq.com/log-management/">this form</a>.
-</div>
-
 ## How to get the most of your application logs
 
-When logging stack traces, there are specific attributes that have a dedicated UI display within your Datadog application such as the logger name, the current thread, the error type and of course the stack trace itself. 
+When logging stack traces, there are specific attributes that have a dedicated UI display within your Datadog application such as the logger name, the current thread, the error type and of course the stack trace itself.
 
 {{< img src="logs/languages/stack_trace.png" style="width:80%;" alt="Stack trace" responsive="true" popup="true" >}}
 
