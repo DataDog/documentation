@@ -5,9 +5,9 @@ order: 22.3
 external_redirect: /api/#get-usage-across-your-multi-org-account
 ---
 #
-## Get Multi-Org Monthly Usage
+## Get Usage across your Multi-Org Account
 
-Get Multi-Org Monthly Usage
+Get Usage across your Multi-Org Account
 
 ##### Arguments
 * **`start_month`** [*required*]:  
