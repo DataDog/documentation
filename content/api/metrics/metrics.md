@@ -1,14 +1,16 @@
 ---
 title: Metrics
 type: apicontent
-order: 14
+order: 15
 external_redirect: /api/#metrics
 ---
+
 ## Metrics
+
 The metrics end-point allows you to:
 
-* Post metrics data so it can be graphed on Datadog's dashboards
-* Query metrics from any time period
+*   Post metrics data so it can be graphed on Datadog's dashboards
+*   Query metrics from any time period
 
 As occurs within the Datadog UI, a graph can only contain a set number of points and as the timeframe over which a metric is viewed increases, aggregation between points occurs to stay below that set number.
 

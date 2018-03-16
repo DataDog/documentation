@@ -1,20 +1,21 @@
 ---
 title: Create user
 type: apicontent
-order: 23.1
+order: 24.1
 external_redirect: /api/#create-user
 ---
 
 ## Create user
+
 ##### ARGUMENTS
 
-* **`handle`** [*required*]:  
+*   **`handle`** [*required*]:
     The user handle, must be a valid email.
-* **`name`** [*optional*, *default*=**None**]:  
+*   **`name`** [*optional*, *default*=**None**]:
     The name of the user.
-* **`access_role`** [*optional*, *default*=**st**]:  
+*   **`access_role`** [*optional*, *default*=**st**]:
     The access role of the user. Choose from:
-    *  **st** (standard user), 
-    *  **adm** (admin user),
-    *  **ro** (read-only user).  
-    *Note: users can be created with admin access role only with application keys belonging to administrators.*
+    *   **st** (standard user),
+    *   **adm** (admin user),
+    *   **ro** (read-only user).
+        _Note: users can be created with admin access role only with application keys belonging to administrators._

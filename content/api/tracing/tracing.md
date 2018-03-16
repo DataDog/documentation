@@ -1,11 +1,12 @@
 ---
 title: Tracing
 type: apicontent
-order: 21
+order: 22
 external_redirect: /api/#tracing
 ---
 
 ## Tracing
+
 Learn more about [tracing with Datadog](/tracing) and [the APM terminology](/tracing/visualization/services_list/)
 
 The tracing API is an agent API rather than a service side API. Submit your traces to the `http://localhost:8126/v0.3/traces` local endpoint so your Agent can forward them to Datadog.

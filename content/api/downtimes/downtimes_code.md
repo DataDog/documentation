@@ -1,6 +1,6 @@
 ---
 title: Downtimes
 type: apicode
-order: 8
+order: 9
 external_redirect: /api/#downtimes
 ---

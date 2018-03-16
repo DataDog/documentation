@@ -1,21 +1,24 @@
 ---
 title: Send traces
 type: apicontent
-order: 21.1
+order: 22.1
 external_redirect: /api/#send-traces
 ---
 
 ## Send traces
+
 Datadog's APM allows you to collect performance metrics by tracing your code to determine which parts of your application are slow or inefficient.
 
 Tracing data is sent to the Datadog Agent via an HTTP API. We provide some [official libraries](/tracing/#instrument-your-application) that simplify sending metrics to the Datadog Agent, however you may want to interact directly with the API to instrument applications that cannot use the libraries or are written in languages that don't yet have an official Datadog Tracing library.
 
 Traces can be sent as an array of [traces](/tracing/visualization/trace):
+
 ```
 [ trace1, trace2, trace3 ]
 ```
 
 and each trace is an array of [spans](/tracing/visualization/trace/#spans):
+
 ```
 trace1 = [ span, span2, span3 ]
 ```
@@ -32,7 +35,7 @@ and each span is a dictionary with a `trace_id`, `spand_id`, `resource`..
 *   **`span_id`** - _Required._ The span integer (64-bit unsigned) ID.
 *   **`name`** - _Required._ The span name.
 *   **`resource`** - _Required._ The resource you are tracing.
-*   **`service`** - _Required._The service name.
+*   **`service`** - \_Required.\_The service name.
 *   **`type`** - _Required._ The type of request.
 *   **`start`** - _Required._ The start time of the request in nanoseconds from the unix epoch.
 *   **`duration`** - _Required._ The duration of the request in nanoseconds.
