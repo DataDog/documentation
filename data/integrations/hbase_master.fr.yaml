@@ -58,7 +58,7 @@ hbase_master:
     metric_name: hbase.master.ipc.num_calls_in_priority_queue
     metric_type: gauge
     orientation: '0'
-  - description: Nombre de connections ouvertes.
+  - description: Nombre de connexions ouvertes.
     integration: hbase_master
     metric_name: hbase.master.ipc.num_open_connections
     metric_type: gauge

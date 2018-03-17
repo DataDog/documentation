@@ -28,7 +28,7 @@ version: 1.1.0
 
 ## Aperçu
 
-Ce check surveille le nombre d'octets qu'un host a swap.
+Ce check monitor le nombre d'octets qu'un host a swap.
 
 ## Implémentation
 ### Installation

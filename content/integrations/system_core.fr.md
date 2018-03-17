@@ -39,7 +39,7 @@ Le check system_core est packagé avec l'agent, il vous faut donc simplement [in
 
 ### Configuration
 
-Créez un fichier `system_core.yaml` dans le dossier ` conf.d` de l'Agent. Consultez l'exemple du [canevas system_core.yaml](https://github.com/DataDog/integrations-core/blob/master/cassandra_nodetool/conf.yaml.example) pour apprendre toutes les options de configuration disponibles:
+Créez un fichier `system_core.yaml` dans le dossier ` conf.d` de l'Agent. Consultez l'exemple du [canevas system_core.yaml](https://github.com/DataDog/integrations-core/blob/master/system_core/conf.yaml.example) pour apprendre toutes les options de configuration disponibles:
 
 ```
 init_config:
