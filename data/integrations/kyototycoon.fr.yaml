@@ -13,7 +13,7 @@ kyototycoon:
     orientation: '0'
     short_name: kyot_serv_thrd
     unit_name: thread
-  - description: Nombre total de connections
+  - description: Nombre total de connexions
     integration: kyototycoon
     interval: '10'
     metric_name: kyototycoon.serv_conn_count
