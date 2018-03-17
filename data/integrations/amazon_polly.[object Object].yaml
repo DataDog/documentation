@@ -1,0 +1,113 @@
+amazon_polly:
+  - description: >-
+      Le nombre moyen de caractères dans la requête. Ce sont seulement les
+      caractères facturables et cela n'inclue pas les balises SSML.
+    integration: amazon_polly
+    interval: '60'
+    metric_name: aws.polly.request_characters
+    metric_type: gauge
+    orientation: '0'
+    short_name: avg req chars
+  - description: >-
+      Le nombre total de caractères dans la requête. Ce sont seulement les
+      caractères facturables et cela n'inclue pas les balises SSML.
+    integration: amazon_polly
+    interval: '60'
+    metric_name: aws.polly.request_characters.sum
+    metric_type: count
+    orientation: '0'
+    short_name: total req chars
+  - description: >-
+      Le nombre maximum de caractères dans la requête. Ce sont seulement les
+      caractères facturables et cela n'inclue pas les balises SSML.
+    integration: amazon_polly
+    interval: '60'
+    metric_name: aws.polly.request_characters.maximum
+    metric_type: gauge
+    orientation: '0'
+    short_name: max req chars
+  - description: >-
+      Le nombre minimum de caractères dans la requête. Ce sont seulement les
+      caractères facturables et cela n'inclue pas les balises SSML.
+    integration: amazon_polly
+    interval: '60'
+    metric_name: aws.polly.request_characters.minimum
+    metric_type: gauge
+    orientation: '0'
+    short_name: min req chars
+  - description: >-
+      La latence moyenne entre le moment où la requête a été faite et le début
+      de la réponse.
+    integration: amazon_polly
+    interval: '60'
+    metric_name: aws.polly.response_latency
+    metric_type: gauge
+    orientation: '0'
+    short_name: avg resp latency
+    unit_name: millisecond
+  - description: >-
+      La latence minimale entre le moment où la requête a été faite et le début
+      de la réponse.
+    integration: amazon_polly
+    interval: '60'
+    metric_name: aws.polly.response_latency.minimum
+    metric_type: gauge
+    orientation: '0'
+    short_name: min resp latency
+    unit_name: millisecond
+  - description: >-
+      La latence minimale entre le moment où la requête a été faite et le début
+      de la réponse.
+    integration: amazon_polly
+    interval: '60'
+    metric_name: aws.polly.response_latency.maximum
+    metric_type: gauge
+    orientation: '0'
+    short_name: min resp latency
+    unit_name: millisecond
+  - description: >-
+      La latence cumulée entre le moment où la requête a été faite et le début
+      de la réponse.
+    integration: amazon_polly
+    interval: '60'
+    metric_name: aws.polly.response_latency.sum
+    metric_type: count
+    orientation: '0'
+    short_name: sum resp latency
+    unit_name: millisecond
+  - description: Le nombre total de requêtes réussies.
+    integration: amazon_polly
+    interval: '60'
+    metric_name: aws.polly.response_latency.samplecount
+    metric_type: count
+    orientation: '0'
+    short_name: total responses
+    unit_name: réponse
+  - description: Nombre total de code d'état HTTP 200 renvoyé lors d'une réponse réussie.
+    integration: amazon_polly
+    interval: '60'
+    metric_name: aws.polly.2xx_count
+    metric_type: count
+    orientation: '1'
+    short_name: avg 2xx count
+    unit_name: réponse
+  - description: >-
+      Nombre total de code d'état HTTP 400 renvoyé lors d'une réponse réussie.
+      Pour chaque réponse réussie, un zéro (0) est émis.
+    integration: amazon_polly
+    interval: '60'
+    metric_name: aws.polly.4xx_count
+    metric_type: count
+    orientation: '-1'
+    short_name: avg 4xx count
+    unit_name: réponse
+  - description: >-
+      Nombre total de code d'état HTTP 500 renvoyé lors d'une réponse réussie.
+      Pour chaque réponse réussie, un zéro (0) est émis.
+    integration: amazon_polly
+    interval: '60'
+    metric_name: aws.polly.5xx_count
+    metric_type: count
+    orientation: '-1'
+    short_name: avg 5xx count
+    unit_name: réponse
