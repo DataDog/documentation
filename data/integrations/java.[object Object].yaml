@@ -1,0 +1,88 @@
+java:
+  - description: La mémoire heap totale de Java utilisée.
+    integration: java
+    interval: '10'
+    metric_name: jvm.heap_memory
+    metric_type: gauge
+    orientation: '0'
+    short_name: heap mem used
+    unit_name: byte
+  - description: Total de la mémoire heap de Java validée pour être utilisée.
+    integration: java
+    interval: '10'
+    metric_name: jvm.heap_memory_committed
+    metric_type: gauge
+    orientation: '0'
+    short_name: heap mem committed
+    unit_name: byte
+  - description: La mémoire heap de Java initiale allouée.
+    integration: java
+    interval: '10'
+    metric_name: jvm.heap_memory_init
+    metric_type: gauge
+    orientation: '0'
+    short_name: heap mem initial
+    unit_name: byte
+  - description: Maximum de la taille de la mémoire heap Java.
+    integration: java
+    interval: '10'
+    metric_name: jvm.heap_memory_max
+    metric_type: gauge
+    orientation: '0'
+    short_name: heap mem max
+    unit_name: byte
+  - description: Total de la mémoire non-heap Java utilisée.
+    integration: java
+    interval: '10'
+    metric_name: jvm.non_heap_memory
+    metric_type: gauge
+    orientation: '0'
+    short_name: non-heap mem used
+    unit_name: byte
+  - description: Total de la mémoire non-heap de Java validée pour être utilisée.
+    integration: java
+    interval: '10'
+    metric_name: jvm.non_heap_memory_committed
+    metric_type: gauge
+    orientation: '0'
+    short_name: non-heap mem committed
+    unit_name: byte
+  - description: La mémoire non-heap de Java initiale allouée.
+    integration: java
+    interval: '10'
+    metric_name: jvm.non_heap_memory_init
+    metric_type: gauge
+    orientation: '0'
+    short_name: non-heap mem initial
+    unit_name: byte
+  - description: Maximum de la taille de la mémoire non-heap Java.
+    integration: java
+    interval: '10'
+    metric_name: jvm.non_heap_memory_max
+    metric_type: gauge
+    orientation: '0'
+    short_name: non-heap mem max
+    unit_name: byte
+  - description: Le nombre de threads actifs.
+    integration: java
+    interval: '10'
+    metric_name: jvm.thread_count
+    metric_type: gauge
+    orientation: '0'
+    short_name: thread count
+    unit_name: thread
+  - description: Le nombre total de garbage collections qui ont eu lieu.
+    integration: java
+    interval: '10'
+    metric_name: jvm.gc.cms.count
+    metric_type: gauge
+    orientation: '0'
+    short_name: gc count
+  - description: Le temps approximatif de toutes les garbage collection.
+    integration: java
+    interval: '10'
+    metric_name: jvm.gc.parnew.time
+    metric_type: gauge
+    orientation: '0'
+    short_name: gc time
+    unit_name: millisecond

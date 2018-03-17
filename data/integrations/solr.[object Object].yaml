@@ -1,0 +1,115 @@
+solr:
+  - description: Un plus grand que le plus grand numéro de document possible.
+    integration: solr
+    interval: '10'
+    metric_name: solr.searcher.maxdoc
+    metric_type: gauge
+    orientation: '0'
+    short_name: max doc id
+    unit_name: document
+  - description: Le nombre total de documents indexés.
+    integration: solr
+    interval: '10'
+    metric_name: solr.searcher.numdocs
+    metric_type: gauge
+    orientation: '0'
+    short_name: num docs
+    unit_name: document
+  - description: Le temps passé à s'échauffer.
+    integration: solr
+    interval: '10'
+    metric_name: solr.searcher.warmup
+    metric_type: gauge
+    orientation: '-1'
+    short_name: warmup time
+    unit_name: millisecond
+  - description: Le nombre de hits de cache par seconde.
+    integration: solr
+    interval: '10'
+    metric_name: solr.cache.hits
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: second
+    short_name: cache hits
+    unit_name: hit
+  - description: Le nombre total de cache lookups par seconde.
+    integration: solr
+    interval: '10'
+    metric_name: solr.cache.lookups
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: cache gets
+    unit_name: get
+  - description: Le nombre total d'insertions de cache par seconde.
+    integration: solr
+    interval: '10'
+    metric_name: solr.cache.inserts
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: cache sets
+    unit_name: set
+  - description: Le nombre total d'évictions de cache par seconde.
+    integration: solr
+    interval: '10'
+    metric_name: solr.cache.evictions
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: second
+    short_name: cache evictions
+    unit_name: eviction
+  - description: Nombre d'erreurs par seconde rencontrées par le handler.
+    integration: solr
+    interval: '10'
+    metric_name: solr.search_handler.errors
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: second
+    short_name: search errors
+    unit_name: error
+  - description: Nombre de requêtes par seconde traitées par le handler.
+    integration: solr
+    interval: '10'
+    metric_name: solr.search_handler.requests
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: search requests
+    unit_name: request
+  - description: Nombre de réponses par seconde reçues avec des résultats partiels.
+    integration: solr
+    interval: '10'
+    metric_name: solr.search_handler.timeouts
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: second
+    short_name: search timeouts
+    unit_name: timeout
+  - description: >-
+      La somme de tous les temps de traitement des requêtes (en millisecondes)
+      par seconde.
+    integration: solr
+    interval: '10'
+    metric_name: solr.search_handler.time
+    metric_type: gauge
+    orientation: '0'
+    short_name: search time
+  - description: Le temps moyen par requête.
+    integration: solr
+    interval: '10'
+    metric_name: solr.search_handler.avg_time_per_req
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: request
+    short_name: search time per req
+    unit_name: millisecond
+  - description: Moyenne du nombre de requêtes par seconde.
+    integration: solr
+    interval: '10'
+    metric_name: solr.search_handler.avg_requests_per_sec
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: second
+    short_name: search reqs per sec
+    unit_name: request
