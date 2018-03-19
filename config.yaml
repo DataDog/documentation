@@ -700,7 +700,7 @@ languages:
           pre: "nav_help"
           weight: 140
   fr:
-    disclaimer: "This page isn't available in your language, <a href=\"https://github.com/DataDog/documentation/wiki/Translating-the-documentation\">help us translate it!</a>"
+    disclaimer: "This page isn't available in your language, <a href=\"https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md\">help us translate it!</a>"
     weight: 0
     menu:
       # Home Page
