@@ -257,6 +257,8 @@ public class MyClass {
 ```
 
 
+## Debug
+
 To return debug level application logs, enable debug mode with the flag `-Ddatadog.slf4j.simpleLogger.defaultLogLevel=debug` when starting the JVM.
 
 ## Integrations
