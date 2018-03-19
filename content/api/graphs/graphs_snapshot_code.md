@@ -6,7 +6,7 @@ external_redirect: /api/#graph-snapshot
 ---
 
 ##### Signature
-`GET api/v1/graph/snapshot`
+`GET https://app.datadoghq.com/api/v1/graph/snapshot`
 ##### Example Request
 {{< code-snippets basename="api-graph-snapshot" >}}
 ##### Example Response

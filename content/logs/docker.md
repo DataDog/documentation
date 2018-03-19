@@ -65,10 +65,25 @@ The command related to log collection are the following:
 * `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw`: mount the directory we created to store pointer on each container logs to make sure we do not lose any.
 * `-v /opt/datadog-agent/conf.d:/conf.d:ro`: mount the configuration directory we previously created to the container
 
-### Configuration file example
+### Activate Log Collection
+
+#### Option 1: Collect all container logs without using integrations
+
+To collect logs from all your container without filtering by image or label add the following at the end of `docker.d/conf.yaml` in your agent's `conf.d` directory:
+
+```yaml
+logs:
+    - type: docker
+      service: docker
+```
+
+*Important note*: Integration pipelines and processors will not be installed automatically as the source tag is not set. Use option 2 to automatically have integration pipelines that parse your logs and extract all the relevant information from them.
+
+#### Option 2: Use Integration
 
 Now that the agent is ready to collect logs, you need to define which containers you want to follow.
 To start collecting logs for a given container filtered by image or label, you need to update the log section in an integration or custom .yaml file.
+
 Add a new yaml file in the `conf.d` directory (should be `/opt/datadog-agent/conf.d` on the host if you followed above instruction) with the following parameters:
 
 ```yaml

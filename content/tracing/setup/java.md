@@ -52,15 +52,16 @@ The tracer is configured using System Properties and Environment Variables as fo
 | agent.host         | dd.agent.host         | DD_AGENT_HOST             | `localhost`        | Hostname for where to send traces to. If using a containerized environment, configure this to be the host ip.  See our [docker docs](https://docs.datadoghq.com/tracing/setup/docker/) for additional detail. |
 | agent.port         | dd.agent.port         | DD_AGENT_PORT             | `8126`             | Port number the agent is listening on for configured host. |
 | priority.sampling  | dd.priority.sampling  | DD_PRIORITY_SAMPLING      | `false`            | Changes how the client and agent sample traces. See [Sampling / distributed tracing](#sampling-distributed-tracing) section for details. |
+| trace.span.tags  | dd.trace.span.tags  | DD_TRACE_SPAN_TAGS      | `null`            | (Example: `key1:value1,key2:value2`) A list of default tags to be added to every span. Tags of the same name added directly to a span will overwrite the defaults provided here. |
 
-**Note**: 
+**Note**:
 
 * If the same key type is set for both, the system property configuration takes priority.
 * System properties can be used as JVM parameters.
 
 ## Manual Instrumentation
 
-Before instrumenting your application, review Datadog’s [APM Terminology](/tracing/visualization/services_list/) and familiarize yourself with the core concepts of Datadog APM. If you aren't using a [supported framework instrumentation](#integrations), or you would like additional depth in your application’s traces, you may want to to manually instrument your code.  
+Before instrumenting your application, review Datadog’s [APM Terminology](/tracing/visualization/services_list/) and familiarize yourself with the core concepts of Datadog APM. If you aren't using a [supported framework instrumentation](#integrations), or you would like additional depth in your application’s traces, you may want to to manually instrument your code.
 
 Do this either using the [Trace annotation](#trace-annotation) for simple method call tracing or with the [OpenTracing API](#opentracing-api) for complex tracing.
 
@@ -254,6 +255,11 @@ public class MyClass {
     }
 }
 ```
+
+
+## Debug
+
+To return debug level application logs, enable debug mode with the flag `-Ddatadog.slf4j.simpleLogger.defaultLogLevel=debug` when starting the JVM.
 
 ## Integrations
 

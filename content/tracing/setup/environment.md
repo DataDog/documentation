@@ -61,10 +61,33 @@ There are several ways to specify an environment when reporting data:
 3. Per trace:  
   When submitting a single trace, specify an environment by tagging one of its spans with the metadata key `env`. This overrides the agent configuration and the host tags value (if any).  
 
+  * **Go**:
     ```
-    # in code this looks like
-    span.set_tag('env', 'prod')
+    tracer.SetMeta(“env”, “prod”)
     ```
+  For OpenTracing use the “GlobalTags” field in the “opentracing.Configuration” structure.
+
+  * **Java**:  
+      Via sysprop: 
+      ```
+      -Ddd.trace.span.tags=”env:prod”
+      ```
+      Via env var:
+      ```
+      DD_TRACE_SPAN_TAGS=”env:prod”
+      ```
+
+  * **Ruby**:
+  ```
+  Datadog.tracer.set_tags(‘env’ => ‘prod’)
+  ```
+
+  * **Python**:
+    ```
+    from ddtrace import tracer
+    tracer.set_tags('env', 'prod')
+    ```
+
 
 ## Further Reading
 

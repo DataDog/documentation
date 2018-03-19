@@ -6,7 +6,7 @@ external_redirect: /api/#disable-user
 ---
 
 ##### Signature
-`DELETE api/v1/user/:handle`
+`DELETE https://app.datadoghq.com/api/v1/user/:handle`
 ##### Example Request
 {{< code-snippets basename="api-user-disable" >}}
 ##### Example Response

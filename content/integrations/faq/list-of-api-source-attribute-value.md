@@ -74,7 +74,7 @@ kind: faq
 |Chef|CHEF|
 |Cloud Foundry|CLOUDFOUNDRY|
 |Cloudhealth|CLOUDHEALTH|
-|Cloud Service Health|CLOUDSERVICEHEALTH|
+|Cloudnetworkhealth|CLOUDNETWORKHEALTH|
 |Consul|CONSUL|
 |Couchbase|COUCHBASE|
 |Couchdb|COUCHDB|

@@ -28,3 +28,9 @@ curl -X DELETE -H "Content-type: application/json" \
         "role_name": "DatadogAWSIntegrationRole"
 }' \
 "https://app.datadoghq.com/api/v1/integration/aws?api_key=${api_key}&application_key=${app_key}"
+
+
+
+
+# List available namespace rules
+curl -X GET "https://app.datadoghq.com/api/v1/integration/aws/available_namespace_rules?api_key=${api_key}&application_key=${app_key}" 

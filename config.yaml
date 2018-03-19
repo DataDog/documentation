@@ -388,7 +388,7 @@ languages:
           weight: 80
         # TRACING/APM - Subnav start
         - identifier: customnav_tracingnav_setup
-          name: "Setup"
+          name: "Setup APM"
           url: "tracing/setup/"
           weight: 10
           parent: menu_references_tracing
@@ -431,7 +431,7 @@ languages:
 
         # Using the APM UI
         - identifier: customnav_tracingnav_visualization
-          name: "Using the APM UI"
+          name: "Use the APM UI"
           url: "tracing/visualization/"
           weight: 20
           parent: menu_references_tracing
