@@ -64,9 +64,9 @@ Uninstall the Agent using Add/Remove Programs, alternatively, it's possible to t
 ## Agent v5
 ### Mac OS
 
-Stop and Close the Datadog Agent: via the bone icon in the Tray. 
+Stop and Close the Datadog Agent: via the bone icon in the Tray.
 
-Drag the Datadog Application from the application folder to the Trash Bin. 
+Drag the Datadog Application from the application folder to the Trash Bin.
 
 ```
 sudo rm -rf /opt/datadog-agent
@@ -78,7 +78,7 @@ If you ran the optional install commands to have the Agent run at boot time, run
 
 ```
 sudo launchctl unload -w /Library/LaunchDaemons/com.datadoghq.agent.plist
-sudo  rm /Library/LaunchDaemons/com.datadoghq.agent.plist
+sudo rm /Library/LaunchDaemons/com.datadoghq.agent.plist
 ```
 
 ### Debian/Ubuntu

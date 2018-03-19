@@ -15,7 +15,7 @@ $CounterCollection.Add((New-Object $ccdTypeName "TestNameType", "TestNameDescrip
 [System.Diagnostics.PerformanceCounterCategory]::Create($perfCounterCategoryName, $perfCounterVersion, [Diagnostics.PerformanceCounterCategoryType]::SingleInstance, $CounterCollection);
 ```
 
-That script will create a new performance counter, which will be available for querying once you re-sync your WMI counters thus: 
+That script will create a new performance counter, which will be available for querying once you re-sync your WMI counters thus:
 
 `winmgmt /resyncperf`
 
@@ -36,7 +36,7 @@ You can further identify what numerical properties you have available to query f
 ```
 PS C:\Users\estib> Get-WmiObject -Query "select * from Win32_PerfFormattedData_TestCounterCategory_TestCounterCategory"
 ...
-TestNameType       : 0
+TestNameType       : 0
 ...
 ```
 

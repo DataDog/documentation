@@ -4,11 +4,11 @@ kind: faq
 ---
 
 This article allows you to submit events from your AppDynamics Application into your Datadog Event stream.  
-**Note**: that this plug-in was written by the team at AppDynamics and is not currently supported by Datadog.  Should you encounter any issues [please contact their team](https://www.appdynamics.com/support/)
+**Note**: that this plug-in was written by the team at AppDynamics and is not currently supported by Datadog. Should you encounter any issues [please contact their team](https://www.appdynamics.com/support/)
 
 Prerequisites: Running AppDynamics 4.1 or later
 
-First, create DataDog Policy Single Violation Only HTTP Template:
+First, create Datadog Policy Single Violation Only HTTP Template:
 
 ```json
 {

@@ -9,7 +9,7 @@
             <div class="col-sm-3 col-md-3 hidden-xs hidden-print" id="sidebarcolumn">
                 <ul class="nav nav-tabs nav-stacked sidebar">
                     {{ if ne .Site.Language.Lang "ja"}}
-                    <li class="nav-header">Documentation Search</li>
+                    <li class="nav-header">{{ i18n "documentation_search" }}</li>
                     <li>
                         <form action="/search/">
                             <input type="text" name="q" id="tipue_search_input" autocomplete="off"
@@ -19,7 +19,7 @@
                     </li>
                     {{ end }}
 
-                    {{ if $sidebar }} <li class='nav-header'>Table of Contents</li> {{ end }}
+                    {{ if $sidebar }} <li class='nav-header'>{{ i18n "toc" }}</li> {{ end }}
                     {{ range $k, $v := $sidebar.nav }}
 
                     {{ if ne $v.header nil }}
@@ -32,7 +32,7 @@
 
                     {{ end }}
 
-                    {{ if $guides }} <li class="nav-header">Guides</li> {{ end }}
+                    {{ if $guides }} <li class="nav-header">{{ i18n "guides" }}</li> {{ end }}
 
                     {{ range sort $guides "Params.listorder" "asc" }}
 

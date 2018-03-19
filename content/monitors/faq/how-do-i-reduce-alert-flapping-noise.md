@@ -15,7 +15,7 @@ further_reading:
 
 We often discuss alerting with our clients and a frequent issue or pain point is alert fatigue, or when alerts ‘flap’ (rapidly switching from an ‘ok’ to an ‘alert’ status).  
 
-Your individual Datadog alerts with groups will [have notification](https://www.datadoghq.com/blog/alert-rollup/) rollups on by default, but there is functionality within Datadog that often leads to less noisy, more meaningful alerts.
+Your individual Datadog alerts with groups will [have notification](https://www.datadoghq.com/blog/alert-rollup/) rollups on by default, but there is functionality within Datadog that often leads to less noisy, more meaningful alerts.
 
 * Re-Evaluate the Alert Threshold Value
     * The easiest way to reduce flapping when the alert <-> ok or state changes are frequent could be to increase/decrease the threshold condition.
@@ -25,7 +25,7 @@ Your individual Datadog alerts with groups will [have notification](https://www.
 * Reframe the query using Functions- rates, moving averages, or time-shift differentials
     * This means, you can compare the difference between a metric stream’s values with the values from a week ago and set alert conditions based off the difference
     * A time-shift differential allows you to combine functions and can give a historical view as well. For example:
- abs(system.cpu.system{*} - week_before(system.cpu.system{*}))
+ abs(system.cpu.system{*} - week_before(system.cpu.system{*}))
     * If your metric frequently spikes, and those spikes are not inherently indicative of issues, applying a rate or average to it will allow you to set a more meaningful threshold.
 
 * Consider the states of other monitors using Composite alerts
@@ -37,7 +37,7 @@ Your individual Datadog alerts with groups will [have notification](https://www.
     * Outlier Detection utilizes other data streams of the same context to issue an alert when a stream behaves in a way different compared with its peers
     * Both can also be used in conjunction with Composite alerts.
     * If you would like a visual introduction to anomaly and outlier detection, this gist is a [screenboard](/graphing/dashboards/screenboard) post to the Datadog API with examples and documentation links for both.
- 
+
 
 If the issue is alert routing, template variables and the separation of **warning** or **alert** states will be of interest!
 

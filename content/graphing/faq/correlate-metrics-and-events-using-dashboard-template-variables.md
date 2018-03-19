@@ -3,11 +3,11 @@ title: Correlate metrics and events using dashboard template variables
 kind: faq
 ---
 
-Dashboard template variables allows you to dynamically explore metrics across different sets of tags by using variables instead of specific tags. 
-[The event overlay](/graphing/event_stream) search is helpful to correlate metrics to events and you can use dashboard template variables to find events that share certain tags with the metrics on your dashboard. The event overlay search can be [applied through an individual graph](/graphing/faq/how-do-i-overlay-events-onto-my-dashboards), but you can also use it across an entire dashboard.
+Dashboard template variables allows you to dynamically explore metrics across different sets of tags by using variables instead of specific tags.
+[The event overlay](/graphing/event_stream) search is helpful to correlate metrics to events and you can use dashboard template variables to find events that share certain tags with the metrics on your dashboard. The event overlay search can be [applied through an individual graph](/graphing/faq/how-do-i-overlay-events-onto-my-dashboards), but you can also use it across an entire dashboard.
 
 Values from dashboard template variables can be directly captured by using the `$variable.value` syntax in the event search field.  
-For example, if you have set up an **env** template variable, `$env` resolves to be the key:value pair from the tag and `$env.value` allows you to directly access that tag's value.  
+For example, if you have set up an **env** template variable, `$env` resolves to be the key:value pair from the tag and `$env.value` allows you to directly access that tag's value.
 
 To get started, first set up your dashboard template variables by clicking the gear and selecting **Edit Template Variables**.
 

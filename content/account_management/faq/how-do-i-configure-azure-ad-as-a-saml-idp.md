@@ -28,7 +28,7 @@ Below is a step by step guide to configure Azure AD as a SAML IdP within Datadog
     {{< img src="account_management/faq/Active_Directory_-_Microsoft_Azure.png" alt="Active_Directory_-_Microsoft_Azure" responsive="true" popup="true">}}
     
 
-7. Select "Custom" -> "Add an unlisted application my organization is using" -> Enter a name like "DatadogSSOApp" as the application name. Then press the check button when complete
+7. Select "Custom" -> "Add an unlisted application my organization is using" -> Enter a name like "DatadogSSOApp" as the application name. Then press the check button when complete
     **NOTE**: if you don't see the "Add an unlisted application my organization is using" option, it means that you don't have the Premium subscription for Azure AD. Upgrade to Azure AD Premium and then refresh the page
     {{< img src="account_management/faq/Active_Directory_-_Microsoft_Azure2.png" alt="Active_Directory_-_Microsoft_Azure2" responsive="true" popup="true">}}
 
@@ -38,7 +38,7 @@ Below is a step by step guide to configure Azure AD as a SAML IdP within Datadog
 9. Select "Microsoft Azure AD Single Sign-On"
     {{< img src="account_management/faq/Active_Directory_-_Microsoft_Azure4.png" alt="Active_Directory_-_Microsoft_Azure4" responsive="true" popup="true">}}
 
-10. Navigate to https://app.datadoghq.com/saml/saml_setup, find the Service Provider Entity ID & Assertion Consumer Service URL on the right hand of the page.  Copy and paste those values in the "Identifier" and "Reply URL" text forms respectively
+10. Navigate to https://app.datadoghq.com/saml/saml_setup, find the Service Provider Entity ID & Assertion Consumer Service URL on the right hand of the page.  Copy and paste those values in the "Identifier" and "Reply URL" text forms respectively
     {{< img src="account_management/faq/Step10Redo.png" alt="Step10Redo" responsive="true" popup="true">}}
     {{< img src="account_management/faq/Step10Redo2.png" alt="Step10Redo2" responsive="true" popup="true">}}
 
@@ -49,7 +49,7 @@ Below is a step by step guide to configure Azure AD as a SAML IdP within Datadog
 13. Once you are back to the applications main page, navigate to "Attributes"
     {{< img src="account_management/faq/Active_Directory_-_Microsoft_Azure6.png" alt="Active_Directory_-_Microsoft_Azure6" responsive="true" popup="true">}}
 
-14. In "SAML Token Attributes", hover over the line where "TYPE" is "user attribute (nameid)" (usually the first one) and click on the pencil icon to edit
+14. In "SAML Token Attributes", hover over the line where "TYPE" is "user attribute (nameid)" (usually the first one) and click on the pencil icon to edit
     {{< img src="account_management/faq/Active_Directory_-_Microsoft_Azure7.png" alt="Active_Directory_-_Microsoft_Azure7" responsive="true" popup="true">}}
 
 15. Change the attribute value to "user.mail" and press the check button
@@ -58,7 +58,7 @@ Below is a step by step guide to configure Azure AD as a SAML IdP within Datadog
 16. Press "Apply Changes" at the bottom of the screen
     {{< img src="account_management/faq/Active_Directory_-_Microsoft_Azure9.png" alt="Active_Directory_-_Microsoft_Azure9" responsive="true" popup="true">}}
 
-17. Navigate back to https://app.datadoghq.com/saml/saml_setup and upload the xml file downloaded in step 11:
+17. Navigate back to https://app.datadoghq.com/saml/saml_setup and upload the xml file downloaded in step 11:
     {{< img src="account_management/faq/SAML_Configuration___Datadog10.png" alt="SAML_Configuration___Datadog10" responsive="true" popup="true">}}
 
 18. Make sure to press "Upload File" after choosing the XML file

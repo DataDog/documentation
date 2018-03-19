@@ -6,7 +6,7 @@ description: "Configure your Datadog agent to gather logs from your favorite lan
 
 ## How to get the most of your application logs
 
-When logging stack traces, there are specific attributes that have a dedicated UI display within your Datadog application such as the logger name, the current thread, the error type and of course the stack trace itself. 
+When logging stack traces, there are specific attributes that have a dedicated UI display within your Datadog application such as the logger name, the current thread, the error type and of course the stack trace itself.
 
 {{< img src="logs/languages/stack_trace.png" style="width:80%;" alt="Stack trace" responsive="true" popup="true" >}}
 
@@ -15,7 +15,7 @@ To enable those functionalities use the following attribute names:
 * `logger.name`: Name of the logger
 * `logger.thread_name`: Name of the current thread
 * `error.stack`: Actual stack trace
-* `error.msg`: Error message contained in the stack trace
+* `error.message`: Error message contained in the stack trace
 * `error.kind`: The type or "kind" of an error (i.e "Exception", "OSError", ...)
 
 **Note**: By default, [integration pipelines](/logs/processing) attempt to remap default logging library parameters to those specific attributes and parse stack traces or traceback to automatically extract the `error.msg` and `error.kind`.

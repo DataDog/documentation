@@ -81,7 +81,7 @@ In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if
 |Redhat|`sudo service datadog-agent flare <CASE_ID>`              | `sudo datadog-agent flare <CASE_ID>`              |
 |Suse|`sudo service datadog-agent flare <CASE_ID>`              | `sudo datadog-agent flare <CASE_ID>`              |
 |Source|`sudo ~/.datadog-agent/bin/agent flare <CASE_ID>`|`sudo datadog-agent flare <CASE_ID>`|
-|Windows|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows/#send-a-flare)|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows/#send-a-flare)|
+|Windows|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows/#agent-v5)|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows/#agent-v6)|
 
 ## FAQ
 

@@ -3,9 +3,9 @@ title: Help! My Password email never came through!
 kind: faq
 ---
 
-When a new user creates an account, your login email (or "handle") defaults to your email address. This can cause some confusion when a user wants to update their email. 
+When a new user creates an account, your login email (or "handle") defaults to your email address. This can cause some confusion when a user wants to update their email.
 
-Users can update their communications email independently in the UI, but they aren't able to update their handle without help from support. This means that after updating their communication email address on their own, they still need to sign in with their old email address.
+Users can update their communications email independently in the UI, but they aren't able to update their handle without help from support. This means that after updating their communication email address on their own, they still need to sign in with their old email address.
 
 When attempting to reset your password, check if you previously changed your email in the Datadog platform.
 

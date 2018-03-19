@@ -74,11 +74,7 @@ func main() {
 
 Create a `go.d/conf.yaml` file in your `conf.d/` folder with the following content:
 
-```yaml
-init_config:
-
-instances:
-    
+```yaml    
 ##Log section
 logs:
 

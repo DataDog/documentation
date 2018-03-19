@@ -15,7 +15,7 @@ further_reading:
 
 While Datadog does fully support [composite monitors](/monitors/monitor_types/composite), there is not currently an official way to create alerting trees.
 
-Some Datadog users have combined webhook notifications with downtime scoping via the Datadog API to achieve a similar result. 
+Some Datadog users have combined webhook notifications with downtime scoping via the Datadog API to achieve a similar result.
 
 At a high level, the setup for this is as follows:
 
@@ -31,7 +31,7 @@ Full text for API endpoints (2nd input box for each in the left column):
 
 Mute: `https://app.datadoghq.com/api/v1/downtime?api_key=XXX&application_key=XXX`
 
-Unmute: `https://app.datadoghq.com/api/v1/downtime/cancel/by_scope?api_key=XXX&application_key=XXX`
+Unmute: `https://app.datadoghq.com/api/v1/downtime/cancel/by_scope?api_key=XXX&application_key=XXX`
 
 And the webhook content for both:
 ```

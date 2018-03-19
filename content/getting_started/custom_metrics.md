@@ -10,13 +10,13 @@ This article explains:
 * What a custom metric is, and how you can submit it to Datadog.
 * How many custom metrics we allow for out of the box.
 * How to check your custom metric count over time.
-* Some best practices for using custom metrics.  
+* Some best practices for using custom metrics.
 
 ## How is a custom metric defined ?
 
 A custom metric refers to a single, unique combination of a metric name, host, and any tags.
 
-Custom metrics generally refer to any metric that you send using statsd, [DogStatsD](/developers/dogstatsd), or through extensions made to the [Datadog Agent](/agent). Some [integrations](/integrations/) can potentially emit an unlimited number of metrics that can also count as custom, [further details on which standard integrations emit custom metrics](/integrations/faq/what-standard-integrations-emit-custom-metrics).
+Custom metrics generally refer to any metric that you send using statsd, [DogStatsD](/developers/dogstatsd), or through extensions made to the [Datadog Agent](/agent). Some [integrations](/integrations/) can potentially emit an unlimited number of metrics that can also count as custom, [further details on which standard integrations emit custom metrics](/integrations/faq/what-standard-integrations-emit-custom-metrics).
 
 In order to fully leverage the capabilities of the Datadog product through scoping and alerting, you’ll probably be using tags. As a consequence, one submitted metric actually leads to **multiple unique tag combinations**- counting towards your custom metrics count.
 
@@ -43,7 +43,7 @@ Note that the ordering of tags does not matter, so the following two metrics wou
 * auth.exceptionCount with tags `method:X` and `exception:A`
 * auth.exceptionCount with tags `exception:A` and `method:X`
 
-## How many custom metrics am I allowed?  
+## How many custom metrics am I allowed?
 
 Datadog offers 2 plans - Pro & Enterprise. Pro customers are allotted 100 custom metrics per host & Enterprise customers are allotted 200 custom metrics per host. These are counted across your entire infrastructure rather than on a per-host basis. For example, if you were on the Pro plan and are licensed for 3 hosts, you would have 300 custom metrics by default - these 300 metrics may be divided equally amongst each individual host, or all 300 metrics could be sent from a single host.
 

@@ -36,7 +36,7 @@ services:
     volumes:
      - /var/run/docker.sock:/var/run/docker.sock
      - /proc/mounts:/host/proc/mounts:ro
-     - /sys/fs/cgroup:/host/sys/fs/cgroup:ro
+     - /sys/fs/cgroup:/host/sys/fs/cgroup:ro
 ```
 
 In this file, we can see that Compose will run the Docker image `redis` and it will also build and run a `datadog` container. By default it will look for a matching directory called `datadog` and run the `Dockerfile` in that directory.

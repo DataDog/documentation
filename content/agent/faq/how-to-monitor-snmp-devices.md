@@ -10,7 +10,7 @@ further_reading:
   text: Learn more about the Datadog-SNMP integration
 ---
 
-Simple Network Management Protocol (SNMP) is the de facto standard for monitoring network-connected devices, such as routers, switches, servers, and firewalls.
+Simple Network Management Protocol (SNMP) is the de facto standard for monitoring network-connected devices, such as routers, switches, servers, and firewalls.
 
 In this article, we go through monitoring a Juniper SRX firewall, using the Datadog Agent installed on an Ubuntu 14-04 workstation.
 

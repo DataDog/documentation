@@ -1,14 +1,16 @@
 ---
-title: Log Collection
+title: Log Management
 kind: Documentation
 description: "Configure your Datadog agent to gather logs from your host, containers & services."
 ---
+
+{{< vimeo 243374392 >}}
 
 ## Getting started with the Agent
 
 Log collection requires an Agent version >= 6.0. Older versions of the Agent do not include the `Log collection` interface that is used for log collection.
 
-If you are not using it already, please follow [the agent installation instruction](https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md).
+If you are not using it already, please follow [the agent installation instruction](/agent).
 
 Collecting logs is **disabled** by default in the Datadog Agent, you need to enable it in `datadog.yaml`:
 
@@ -44,12 +46,7 @@ Set `type` to **file** then specify the absolute `path` to the log file you want
 Example: 
 To gather python applications stored in **/var/log/myapp1.log** and **/var/log/python.log** create a `python.d/conf.yaml` file as follows:
 
-Note that for the yaml file to be considered valid by the agent, they must include an "init_config" section and have at least one "instance" defined as shown below:
-
 ```yaml
-init_config:
-instances:
-
 ##Log section
 logs:
 
@@ -88,6 +85,8 @@ logs:
 
 ```
 * [Restart your agent](https://help.datadoghq.com/hc/en-us/articles/203764515-Start-Stop-Restart-the-Datadog-Agent)
+
+The agent supports raw string and JSON formated logs. If you are sending logs in batch, use break line characters to separate your logs.
 
 ## Advanced log collection functions
 
@@ -233,6 +232,10 @@ logs:
 ```
 
 **Note**: that the agent requires the read and execute permission (5) on the directory to be able to list all the available files in it.
+
+### Using a Proxy for Logs
+
+The log agent does not presently respect the the proxy setting in the datadog.yaml configuration file. This feature will be available in a future release.
 
 ### The Advantage of Collecting JSON-formatted logs
 

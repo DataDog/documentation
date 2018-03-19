@@ -3,7 +3,7 @@ title: Why is a counter metric being displayed as a decimal value?
 kind: faq
 ---
 
-Counter metrics submitted are normalized by default at a per second rate. Rates make sense for certain types of metrics, like number of queries, that suggest a value that is constantly changing over time:
+Counter metrics submitted are normalized by default at a per second rate. Rates make sense for certain types of metrics, like number of queries, that suggest a value that is constantly changing over time:
 
 {{< img src="graphing/faq/CountsBlogImage1.png" alt="CountsBlogImage1" responsive="true" popup="true">}}
 
@@ -13,6 +13,6 @@ If you prefer to view the metric as a total count per time frame, you can append
 
 To read more about counts and rates, check out [this blog post](https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing/) on the topic.
 
-Note: these functions are only available for statsd metrics.
-Due to more complex and varying metadata information datadog-agent counters metrics cannot use the as_count/ as_rate functions at the moment.
+Note: these functions are only available for statsd metrics.
+Due to more complex and varying metadata information datadog-agent counters metrics cannot use the as_count/ as_rate functions at the moment.
 

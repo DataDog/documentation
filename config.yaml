@@ -146,20 +146,25 @@ languages:
           url: "/agent/proxy"
           weight: 30
           parent: menu_references_agent
+        - identifier: network
+          name: "Network"
+          url: "/agent/network"
+          weight: 40
+          parent: menu_references_agent
         - identifier: agent_checks
           name: "Agent Checks"
           url: "/agent/agent_checks"
-          weight: 40
+          weight: 50
           parent: menu_references_agent
         - identifier: prometheus
           name: "Prometheus Checks"
           url: "/agent/prometheus"
-          weight: 50
+          weight: 60
           parent: menu_references_agent
         - identifier: custom_python_package
           name: "Adding Python packages"
           url: "/agent/custom_python_package"
-          weight: 60
+          weight: 70
           parent: menu_references_agent
 
         # Troubleshooting
@@ -322,6 +327,11 @@ languages:
           url: "/monitors/monitor_types/integration/"
           weight: 380
           parent: customnav_monitornav_monitor_types
+        - identifier: customnav_monitortypenav_monitor
+          name: "Log"
+          url: "/monitors/monitor_types/log"
+          weight: 385
+          parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_metric
           name: "Metric"
           url: "/monitors/monitor_types/metric/"
@@ -377,51 +387,126 @@ languages:
           pre: "nav_tracing"
           weight: 80
         # TRACING/APM - Subnav start
-        - identifier: customnav_tracingnav_terminology
-          name: "Terminology"
-          url: "/tracing/terminology/"
+        - identifier: customnav_tracingnav_setup
+          name: "Setup"
+          url: "/tracing/setup/"
           weight: 10
           parent: menu_references_tracing
-        - identifier: customnav_tracingnav_environments
-          name: "Environments"
-          url: "/tracing/environments/"
-          weight: 20
-          parent: menu_references_tracing
-        - identifier: customnav_tracingnav_langs
-          name: "Languages"
-          url: "/tracing/languages/"
-          weight: 40
-          parent: menu_references_tracing
-        - identifier: customnav_tracingnav_go
-          name: "Go"
-          url: "/tracing/languages/go/"
-          weight: 50
-          parent: customnav_tracingnav_langs
-        - identifier: customnav_tracingnav_java
-          name: "Java"
-          url: "/tracing/languages/java/"
-          weight: 55
-          parent: customnav_tracingnav_langs
-        - identifier: customnav_tracingnav_python
-          name: "Python"
-          url: "/tracing/languages/python/"
-          weight: 60
-          parent: customnav_tracingnav_langs
-        - identifier: customnav_tracingnav_ruby
-          name: "Ruby"
-          url: "/tracing/languages/ruby/"
-          weight: 70
-          parent: customnav_tracingnav_langs
+          # Setup -subnav
+        - identifier: customnav_tracingnav_apm_environment
+          name: "Environment"
+          url: "/tracing/setup/environment"
+          weight: 110
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_docker
           name: "Docker"
-          url: "/tracing/docker/"
-          weight: 80
+          url: "/tracing/setup/docker/"
+          weight: 120
+          parent: customnav_tracingnav_setup
+        - identifier: customnav_tracingnav_go
+          name: "Go"
+          url: "/tracing/setup/go/"
+          weight: 130
+          parent: customnav_tracingnav_setup
+        - identifier: customnav_tracingnav_java
+          name: "Java"
+          url: "/tracing/setup/java/"
+          weight: 140
+          parent: customnav_tracingnav_setup
+        - identifier: customnav_tracingnav_python
+          name: "Python"
+          url: "/tracing/setup/python/"
+          weight: 150
+          parent: customnav_tracingnav_setup
+        - identifier: customnav_tracingnav_ruby
+          name: "Ruby"
+          url: "/tracing/setup/ruby/"
+          weight: 160
+          parent: customnav_tracingnav_setup
+        - identifier: customnav_tracingnav_librairies
+          name: "Community Librairies"
+          url: "/libraries/#apm-tracing-client-libraries"
+          weight: 170
+          parent: customnav_tracingnav_setup
+
+        # Using the APM UI
+        - identifier: customnav_tracingnav_visualization
+          name: "Using the APM UI"
+          url: "/tracing/visualization/"
+          weight: 20
           parent: menu_references_tracing
+        - identifier: customnav_tracingnav_services_list
+          name: "Services List"
+          url: "/tracing/visualization/services_list"
+          weight: 210
+          parent: customnav_tracingnav_visualization
+        - identifier: customnav_tracingnav_service
+          name: "Service page"
+          url: "/tracing/visualization/service"
+          weight: 215
+          parent: customnav_tracingnav_visualization
+        - identifier: customnav_tracingnav_resource
+          name: "Resource page"
+          url: "/tracing/visualization/resource"
+          weight: 220
+          parent: customnav_tracingnav_visualization
+        - identifier: customnav_tracingnav_trace
+          name: "Trace page"
+          url: "/tracing/visualization/trace"
+          weight: 230
+          parent: customnav_tracingnav_visualization
+        - identifier: customnav_tracingnav_traces
+          name: "Traces list"
+          url: "/tracing/visualization/trace_search/"
+          weight: 240
+          parent: customnav_tracingnav_visualization
+
+        # Trace API
         - identifier: customnav_tracingnav_api
           name: "Trace API"
           url: "/api/#tracing"
-          weight: 90
+          weight: 410
           parent: menu_references_tracing
+
+        
+
+        # Getting further
+        - identifier: customnav_tracingnav_getting_further
+          name: "Getting further"
+          url: "/tracing/getting_further/"
+          weight: 40
+          parent: menu_references_tracing
+        - identifier: customnav_tracingnav_apdex
+          name: "Apdex"
+          url: "/tracing/getting_further/configure_an_apdex_for_your_traces_with_datadog_apm"
+          weight: 410
+          parent: customnav_tracingnav_getting_further
+        - identifier: customnav_tracingnav_resource_monitor
+          name: "Resource Monitor"
+          url: "/tracing/getting_further/resource_monitor"
+          weight: 420
+          parent: customnav_tracingnav_getting_further
+        - identifier: customnav_tracingnav_apm_monitor
+          name: "Service Monitor"
+          url: "/monitors/monitor_types/apm"
+          weight: 430
+          parent: customnav_tracingnav_getting_further
+        - identifier: customnav_tracingnav_apm_widget
+          name: "APM in Dashboard"
+          url: "/graphing/dashboards/widgets/#service-summary"
+          weight: 440
+          parent: customnav_tracingnav_getting_further
+        - identifier: customnav_tracingnav_metrics_namespace
+          name: "Trace metrics namespace"
+          url: "/tracing/getting_further/metrics_namespace"
+          weight: 450
+          parent: customnav_tracingnav_getting_further
+        - identifier: customnav_tracingnav_apm_sampling_storage
+          name: "Storage & Sampling"
+          url: "/tracing/getting_further/trace_sampling_and_storage"
+          weight: 460
+          parent: customnav_tracingnav_getting_further
+        
         #- identifier: customnav_tracingnav_faq
         #  name: "FAQ"
         #  url: "/tracing/faq/"
@@ -429,16 +514,15 @@ languages:
         #  parent: menu_references_tracing
         # TRACING/APM - Subnav end
 
-
         # LOGS
         - identifier: menu_references_logs
-          name: "Logs"
+          name: "Log Management"
           url: "/logs/"
           pre: "nav_logs"
           weight: 90
         # LOGS - Subnav start
         - identifier: customnav_lognav_explore
-          name: "Explore"
+          name: "Search & Graph"
           url: "/logs/explore/"
           weight: 30
           parent: menu_references_logs
@@ -502,6 +586,11 @@ languages:
           url: "/logs/languages/ruby/"
           weight: 870
           parent: customnav_lognav_languages
+        - identifier: customnav_lognav_monitor
+          name: "Log monitor"
+          url: "/monitors/monitor_types/log"
+          weight: 90
+          parent: menu_references_logs
         #- identifier: customnav_lognav_faq
         #  name: "FAQ"
         #  url: "/logs/faq/"
@@ -615,6 +704,9 @@ languages:
           url: "/help/"
           pre: "nav_help"
           weight: 140
+  #fr:
+  #  disclaimer: ""
+  #  weight: 0
 
 params:
   environment: local

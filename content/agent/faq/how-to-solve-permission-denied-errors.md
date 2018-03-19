@@ -40,7 +40,7 @@ If those files are not owned by the dd-agent user, change the ownership with:
 sudo chown -R dd-agent:dd-agent /var/log/datadog/
 ```
 
-Then [restart the agent](/agent/faq/agent-commands). 
+Then [restart the agent](/agent/faq/agent-commands).
 
 [More information on the agent logs locations](/agent/#log-locations).
 

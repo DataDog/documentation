@@ -88,7 +88,7 @@ In other words, if the value is still above/below the configured threshold then 
 
 ## Managing Monitors
 
-There are multiple community projects for maintaining or managing Monitors along with some other Datadog components via the API's:
+There are multiple community projects for maintaining or managing Monitors along with some other Datadog components via the API's:
 
 * https://github.com/trueaccord/DogPush
 * https://github.com/winebarrel/barkdog

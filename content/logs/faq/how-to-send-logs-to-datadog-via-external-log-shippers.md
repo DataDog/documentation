@@ -13,7 +13,7 @@ further_reading:
   text: Learn how to explore your logs
 ---
 
-The best and easiest way to send logs to Datadog is through the Datadog Agent. You can read how to configure the dd-agent to send logs to [Datadog here](/logs/). 
+The best and easiest way to send logs to Datadog is through the Datadog Agent. You can read how to configure the dd-agent to send logs to [Datadog here](/logs/).
 
 That said, you can also send logs to Datadog using many common non-Datadog log shippers, like the following:
 
@@ -30,14 +30,14 @@ The Datadog Log Agent can be configured:
 * [To tail logs from files](/logs/#tail-existing-files)
 * [To listen for logs via UDP or TCP over a given port](/logs/#stream-logs-through-tcp-udp). 
  
-So whatever your log shipper is, one option is just to have that shipper forward its logs to the Datadog Log Agent; it is often easy to configure this kind of setup, both from the dd-agent side, and from your log shipper. With this approach, you don't need to add your Datadog API key, hostname, or source values in your log shipper's configurations, since that is handled by the Datadog Log Agent. 
+So whatever your log shipper is, one option is just to have that shipper forward its logs to the Datadog Log Agent; it is often easy to configure this kind of setup, both from the dd-agent side, and from your log shipper. With this approach, you don't need to add your Datadog API key, hostname, or source values in your log shipper's configurations, since that is handled by the Datadog Log Agent.
 
-This approach can be especially useful for sending to Datadog logs that have heightened permission requirements. The dd-agent does not run as root (and as a best practice we do not encourage running it as root), so that can block the Datadog Logs Agent from tailing some log files directly, such as /var/log/syslog. If you do not want to modify the permissions on these files or the access that you give to the dd-agent user, many of these open source log shippers do run as root, and can be used to forward logs to the Datadog Logs Agent over UDP / TCP. 
+This approach can be especially useful for sending to Datadog logs that have heightened permission requirements. The dd-agent does not run as root (and as a best practice we do not encourage running it as root), so that can block the Datadog Logs Agent from tailing some log files directly, such as /var/log/syslog. If you do not want to modify the permissions on these files or the access that you give to the dd-agent user, many of these open source log shippers do run as root, and can be used to forward logs to the Datadog Logs Agent over UDP / TCP.
 
 ## Rsyslog
 
 1. (Optional) Activate Rsyslog file monitoring module:  
-    If you want to watch/monitor specific log files, then you have to activate the imfile module by adding this to  your `rsyslog.conf`:
+    If you want to watch/monitor specific log files, then you have to activate the imfile module by adding this to  your `rsyslog.conf`:
 
     * **Rsyslog Version <8**
         ```
@@ -52,8 +52,8 @@ This approach can be especially useful for sending to Datadog logs that have hei
         module(load="imfile" PollingInterval="10") #needs to be done just once
         ```
 
-2. Create a `/etc/rsyslog.d/datadog.conf` file.  
-3. (Optional) Set the files to monitor. Add the following in `/etc/rsyslog.d/datadog.conf`.  
+2. Create a `/etc/rsyslog.d/datadog.conf` file.
+3. (Optional) Set the files to monitor. Add the following in `/etc/rsyslog.d/datadog.conf`.
     * **Rsyslog Version <8**.  
 
     ```
@@ -71,7 +71,7 @@ This approach can be especially useful for sending to Datadog logs that have hei
     input(type="imfile" ruleset="infiles" Tag="<app_name_of_file1>" File="<path_to_file1>" StateFile="<unique_file_id1>")
     ```
 4. Send the logs to your Datadog platform
-    To send logs directly to your Datadog account from Rsyslog over TCP, we firstly need to to define the format in `/etc/rsyslog.d/datadog.conf`:
+    To send logs directly to your Datadog account from Rsyslog over TCP, we firstly need to to define the format in `/etc/rsyslog.d/datadog.conf`:
 
     ```
     $template DatadogFormat,"YOURAPIKEY <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - - %msg%\n"
@@ -87,19 +87,13 @@ This approach can be especially useful for sending to Datadog logs that have hei
 
     ```
     ruleset(name="infiles") {
-        action(type="omfwd" target="intake.logs.datadoghq.com" protocol="tcp" port="10516" template="DatadogFormat")
+        action(type="omfwd" target="intake.logs.datadoghq.com" protocol="tcp" port="10516" template="DatadogFormat")
     }
     ```
-    This assumes that you have TLS enabled for your Rsyslog--if you do not, then you should use port 10514 instead of 10516. 
-
-    Alternatively, to send logs from Rsyslog to your Datadog Logs Agent, configure your dd-agent to expect logs over UDP/TCP on a port of your choosing, add the following content to the end of your `/etc/rsyslog.d/datadog.conf`:
-    ```
-    $template DatadogFormat,"%msg%\n"
-    *.* @@localhost:PORT;DatadogFormat  # @@ for TCP, @ for UDP
-    ```
-
+    This assumes that you have TLS enabled for your Rsyslog--if you do not, then you should use port 10514 instead of 10516.
+    
 5. (Optional) TLS Encryption
-    While sending your logs directly from Rsyslog to your Datadog account, if you want to add TLS encryption, you can take the following steps. 
+    While sending your logs directly from Rsyslog to your Datadog account, if you want to add TLS encryption, you can take the following steps.
 
     * Install rsyslog-gnutls:
      
@@ -120,6 +114,14 @@ This approach can be especially useful for sending to Datadog logs that have hei
     *.* @@intake.logs.datadoghq.com:10516;DatadogFormat
     ```
 
+    If you have any issue with the TLS forwarding with Rsyslog, an alternative is to forward logs locally from Rsyslog to the Datadog Agent which would then take care of the encryption.
+To send logs from Rsyslog to a local UDP or TCP port of your choosing, add the following content to the end of your `/etc/rsyslog.d/datadog.conf`:
+    ```
+    $template DatadogFormat,"%msg%\n"
+    *.* @@localhost:PORT;DatadogFormat  # @@ for TCP, @ for UDP
+    ```
+    Then configure the Datadog agent to listen on that port: https://docs.datadoghq.com/logs/#stream-logs-through-tcp-udp
+
 6. Restart Rsyslog and your new logs get forwarded directly to your Datadog account.
 
 7. Associate those logs with the host metrics and tags
@@ -128,16 +130,15 @@ This approach can be especially useful for sending to Datadog logs that have hei
     If you did specify a custom Hostname for your metric, make sure to replace the **%HOSTNAME%** value in the format to match the same custom name.
 
 8. Enjoy Datadog Integrations
-    In order to get the best use out of your logs in Datadog, you need to set the source on your logs. The source can be set directly in the agent if you forward your logs to the Datadog agent.
-
-    Otherwise you need a specific format per log source which means you need a specific configuration file per source in /etc/rsyslog.d/
+    In order to get the best use out of your logs in Datadog, you need to set the source on your logs.
+    You might need to define a specific format per log source which means you need a specific configuration file per source in /etc/rsyslog.d/
 
     To set the source, use the following format (if you have several sources, change the name of the format in each file):
 
     ```
     $template DatadogFormat,"YOURAPIKEY <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - [metas ddsource=\"mysourcename\"] %msg%\n"
     ```
-    Do not forge to replace mysourcename by the appropriate value.  
+    Do not forget to replace `mysourcename` by the appropriate value.
 
 9. (Optional) Datadog cuts inactive connections after a period of inactivity.  
     Some Rsyslog versions that are not able to reconnect properly when necessary. To mitigate this issue, use time markers so the connection never stops. To achieve this, add the following 2 lines in your Rsyslog configuration:   
@@ -152,13 +153,13 @@ This approach can be especially useful for sending to Datadog logs that have hei
 
 ## FluentD
 
-As long as you can forward your FluentD logs over tcp/udp to a specific port, you can use that approach to forward your FluentD logs to your Datadog agent. But another option is to use the [Datadog FluentD plugin](http://www.rubydoc.info/gems/fluent-plugin-datadog/0.9.6) to forward the logs directly from FluentD to your Datadog account. 
+As long as you can forward your FluentD logs over tcp/udp to a specific port, you can use that approach to forward your FluentD logs to your Datadog agent. But another option is to use the [Datadog FluentD plugin](http://www.rubydoc.info/gems/fluent-plugin-datadog/0.9.6) to forward the logs directly from FluentD to your Datadog account.
 
 In order to get the best use out of your logs in Datadog, it is important to have the proper metadata associated with your logs (including hostname and source). For the current version of the Datadog FluentD plugin, you have to include this metadata in the logs that you're sending to FluentD, using the following format:
 
 ```
 {
-    "syslog.hostname": "myhostname",
+    "syslog.hostname": "myhostname",
     "syslog.appname": "myappname",
     "ddsource": "mysourcename"
 }
@@ -172,7 +173,7 @@ To install this plugin run the following command:
 
 * `logstash-plugin install logstash-output-datadog_logs`
 
-Then Configure datadog_logs plugin with your Datadog API key:
+Then Configure datadog_logs plugin with your Datadog API key:
 
 ```
 output {
@@ -184,7 +185,7 @@ output {
 
 In order to get the best use out of your logs in Datadog, it is important to have the proper metadata associated with your logs (including hostname and source). By default, the hostname and timestamp should be properly remapped thanks to our default [remapping for reserved attributes](/logs/#edit-reserved-attributes). To make sure the service is correctly remapped, add its attribute value to the Service remapping list.
 
-To set the source on your logs, you need to setup a Logstash filter:  
+To set the source on your logs, you need to setup a Logstash filter:
 
 ```
 filter {
@@ -198,7 +199,7 @@ filter {
 
 ## Syslog-ng
 
-1. Collect system logs and log files In `/etc/syslog-ng/syslog-ng.conf` make sure the source is correctly defined:
+1. Collect system logs and log files In `/etc/syslog-ng/syslog-ng.conf` make sure the source is correctly defined:
     ```
     source s_src {
     system();
@@ -216,7 +217,7 @@ filter {
 
     source s_files {
     file("path/to/your/file1.log",flags(no-parse),follow_freq(1),program_override("<program_name_file1>"));
-     file("path/to/your/file2.log",flags(no-parse),follow_freq(1),program_override("<program_name_file2>"));
+     file("path/to/your/file2.log",flags(no-parse),follow_freq(1),program_override("<program_name_file2>"));
 
     };
     ```
@@ -253,18 +254,18 @@ filter {
     2. Change the definition of the destination to the following:
 
         ```
-        destination d_datadog { tcp("intake.logs.datadoghq.com" port(10516)     tls(peer-verify(required-untrusted) ca_dir('/opt/syslog-ng/certs.d/')) template(DatadogFormat)); };
+        destination d_datadog { tcp("intake.logs.datadoghq.com" port(10516)     tls(peer-verify(required-untrusted) ca_dir('/opt/syslog-ng/certs.d/')) template(DatadogFormat)); };
         ```
 
     More information about the TLS parameters and possibilities for syslog-ng available in their [official documentation](https://syslog-ng.com/documents/html/syslog-ng-ose-latest-guides/en/syslog-ng-ose-guide-admin/html/tlsoptions.html).
 
-5. Restart syslog-ng 
+5. Restart syslog-ng
 
 
 ## NXLog
 
 1. Configure NXLog to send your logs to your Datadog platform
-    Replace the whole file in `C:\Program Files\nxlog\conf` by the following: 
+    Replace the whole file in `C:\Program Files\nxlog\conf` by the following:
 
     ```
     ## Please set the ROOT to the folder your nxlog was installed into,
@@ -280,7 +281,7 @@ filter {
     LogFile %ROOT%\data\nxlog.log
     ##Extension to format the message in JSON format
     <Extension json>
-        Module xm_json
+        Module xm_json
     </Extension>
     ##Extension to format the message in syslog format
     <Extension syslog>
@@ -289,45 +290,45 @@ filter {
     ########## INPUTS ###########
     ##Input for windows event logs
     <Input syslogs>
-        Module      im_msvistalog
+        Module      im_msvistalog
     ##For windows 2003 and earlier use the following:
-    #    Module      im_mseventlog
+    #    Module      im_mseventlog
     </Input>
     ############ OUTPUTS ##############
     ##TCP output module
     <Output out>
-        Module      om_tcp
-        Host        intake.logs.datadoghq.com
-        Port        10514
-        Exec        to_syslog_ietf();
-        Exec        $raw_event="YOURAPIKEY "+$raw_event;
+        Module      om_tcp
+        Host        intake.logs.datadoghq.com
+        Port        10514
+        Exec        to_syslog_ietf();
+        Exec        $raw_event="YOURAPIKEY "+$raw_event;
     </Output>
     ############ ROUTES TO CHOOSE #####
     <Route 1>
-        Path        syslogs => out
+        Path        syslogs => out
     </Route>
     ```
-    Do not forget to replace YOURAPIKEY in the format.
+    Do not forget to replace YOURAPIKEY in the format.
 
 2. Activate NXLog watchfile module
     Foreach file you want to monitor add the following before the output section:
     ```
     ##Module to watch a file
     <Input file_watch_1>
-      Module im_file
-      File "Path\\to\\your\\file1"
-      Exec   $SourceName = 'my_application_file1';
-      SavePos TRUE
+      Module im_file
+      File "Path\\to\\your\\file1"
+      Exec   $SourceName = 'my_application_file1';
+      SavePos TRUE
 
-      ##include the message and add meta data
-      Exec $Message = $raw_event;
+      ##include the message and add meta data
+      Exec $Message = $raw_event;
     </Input>
     ```
 
 3. Make sure those files are plugged in the output section
     ```
     <Route file1>
-        Path    file_watch_1,file_watch2,... => out
+        Path    file_watch_1,file_watch2,... => out
     </Route>
     ```
 

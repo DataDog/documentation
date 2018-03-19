@@ -51,20 +51,10 @@ To gather your kube-state metrics:
   kubectl apply -f <NAME_OF_THE_KUBE_STATE_MANIFESTS_FOLDER>
   ```
 
-### Validation
-To verify the Datadog Agent is running in your environment as a daemonset, execute:
-
-    kubectl get daemonset
-
-If the Agent is deployed you will see similar output to the text below, where desired and current are equal to the number of running nodes in your cluster.
-
-    NAME       DESIRED   CURRENT   NODE-SELECTOR   AGE
-    datadog-agent   3         3         <none>          11h
-
 ## Setup Kubernetes DNS
 ### Configuration
 
-Since [agent v6](/agent/), Kubernetes DNS integration works automatically with the [Autodiscovery](/agent/autodiscovery). 
+Since [agent v6](/agent/), Kubernetes DNS integration works automatically with the [Autodiscovery](/agent/autodiscovery).
 
 ## Data Collected
 ### Metrics
@@ -128,7 +118,7 @@ The Kubernetes check includes the following service checks:
 * [How to report host disk metrics when dd-agent runs in a docker container?](/agent/faq/getting-further-with-docker)
 * [Client Authentication against the apiserver and kubelet](/integrations/faq/client-authentication-against-the-apiserver-and-kubelet)
 * [Gathering Kubernetes events](/integrations/faq/gathering-kubernetes-events)
-* [Using RBAC permission with your Kubernetes integration](/integrations/faq/using-rbac-permission-with-your-kubernetes-integration)
+* [Using RBAC permission with your Kubernetes integration](/integrations/faq/using-rbac-permission-with-your-kubernetes-integration)
 
 ## Further Reading
 To get a better idea of how (or why) to integrate your Kubernetes service, check out our [series of blog posts](https://www.datadoghq.com/blog/monitoring-kubernetes-era/) about it.

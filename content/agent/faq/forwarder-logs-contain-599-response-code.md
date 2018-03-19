@@ -13,7 +13,7 @@ further_reading:
 * The app is otherwise reachable from the browser.
 * The MTU on the main interface of the server is > 1500 (e.g. jumbo frames)
 
-If you're only seeing this failure intermittently - every couple of weeks and not continues - it's likely fine, the agent is designed to store and forward metrics and events in the case of transient issues so all of your data is still being routed to us.
+If you're only seeing this failure intermittently - every couple of weeks and not continues - it's likely fine, the agent is designed to store and forward metrics and events in the case of transient issues so all of your data is still being routed to us.
 
 ## Cause
 
@@ -51,11 +51,11 @@ Then find the lowest MTU on the way:
 3. (Medium) Use a working Agent as a proxy: https://github.com/DataDog/dd-agent/wiki/Proxy-Configuration#using-the-agent-as-a-proxy
 4. (Medium) reduce the MTU of all routes to EC2 as a whole (sudo ip route add ... via ... mtu 1500); first argument is ip range, second argument is gateway
 5. (Hard) find the MTU black hole on the path to our servers
-Note, we've also had some customers report that this was resolved by correcting DNS or ipv6 issues on their side. For example:
+Note, we've also had some customers report that this was resolved by correcting DNS or ipv6 issues on their side. For example:
 
 ### DNS
 
-When DNS responses are more than 512 bytes, DNS is sent on TCP. If any TCP ports have been blocked this results in an issue for the Agent. Checking for similar communication restrictions assists in troubleshooting Agent communication issues. If DNS is the culprit you'll see the following error in your forwarder.log:
+When DNS responses are more than 512 bytes, DNS is sent on TCP. If any TCP ports have been blocked this results in an issue for the Agent. Checking for similar communication restrictions assists in troubleshooting Agent communication issues. If DNS is the culprit you'll see the following error in your forwarder.log:
 ```
 gaierror: (-2, ' Name of service not known ')
 ```
@@ -68,7 +68,7 @@ http://linoxide.com/linux-how-to/disable-ipv6-centos-fedora-rhel/
 
 ## Changing the agent's Tornado Client
 
-Some customers experience these 599 tornado errors only when their Datadog Agent uses the default "Simple HTTP" tornado client. It can sometimes help to switch this to the curl client instead. This can be done from the `datadog.yaml` on [this line](https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example#L93). 
+Some customers experience these 599 tornado errors only when their Datadog Agent uses the default "Simple HTTP" tornado client. It can sometimes help to switch this to the curl client instead. This can be done from the `datadog.yaml` on [this line](https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example#L93).
 
 ## Windows
 
@@ -78,7 +78,7 @@ https://blogs.technet.microsoft.com/askpfeplat/2014/12/01/psa-incorrect-mtu-size
 
 ## I've done everything above!
 
-If you've done everything above and continue to have issues, send support@datadoghq.com the following information:
+If you've done everything above and continue to have issues, send support@datadoghq.com the following information:
 
 1. [Send a flare](/agent/#send-a-flare)
 2. Let us know if you're seeing this across all instances or only a subset - if unique help us understand what's different.

@@ -7,7 +7,7 @@ In general, [custom metrics](/getting_started/custom_metrics/) are defined as an
 [Further details with examples on how we count a custom metric](/getting_started/custom_metrics)).  
 However, certain standard integrations can also emit custom metrics as specified below.
 
-Standard integrations that are limited to 350 metrics by default and emit custom metrics: 
+Standard integrations that are limited to 350 metrics by default and emit custom metrics:
 
 * [ActiveMQ_XML](/integrations/activemq)
 * [Go_expvar](/integrations/go_expvar)
