@@ -2,13 +2,14 @@
 {{ $ctx := .context }}
 <ul class="list-unstyled">
     {{ range $index, $element := .data }}
+        {{ $el_url := (print "/" $element.URL)}}
         {{ $split_urls := split $ctx.RelPermalink "/" }}
         {{ $url_first := print "/" (index $split_urls 1) "/" }}
         {{ $url_first_second := print $url_first (index $split_urls 2) "/" }}
-        {{ $el_url_first := print "/" (index (split $element.URL "/") 1) "/" }}
+        {{ $el_url_first := print "/" (index (split $el_url "/") 1) "/" }}
         <!-- if url matches then active link or if second part in url and no children --->
-        {{ $active_page := (or (eq $ctx.RelPermalink $element.URL) (and (eq $url_first_second $element.URL) (not $element.Children)) (and (eq $url_first "/integrations/") (eq $element.URL "/integrations/") ) ) }}
-        {{ $open_parent := (or (and (eq $url_first $element.URL) (ne $element.URL "/")) (eq $url_first_second $element.URL) $active_page) }}
+        {{ $active_page := (or (eq $ctx.RelPermalink $el_url) (and (eq $url_first_second $el_url) (not $element.Children)) (and (eq $url_first "/integrations/") (eq $el_url "/integrations/") ) ) }}
+        {{ $open_parent := (or (and (eq $url_first $el_url) (ne $el_url "/")) (eq $url_first_second $el_url) $active_page) }}
         <li class="{{if $open_parent }}open{{ end }}">
             <a href="{{ $element.URL | absLangURL }}" {{if $active_page }}class="active"{{ end }}>
                 {{ if $element.Pre }}{{- partial "img.html" (dict "root" $ctx "src" (print "icons/" ($element.Pre) ".png") "class" "static" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21") -}}{{- partial "img.html" (dict "root" $ctx "src" (print "icons/" ($element.Pre) "_p.png") "class" "hover" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21" "disable_lazy" "true") -}}{{ end }} <span>{{ $element.Name }}</span>
