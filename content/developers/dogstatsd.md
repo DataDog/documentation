@@ -405,7 +405,7 @@ PS C:\vagrant> .\send-statsd.ps1 "_e{$($title.length),$($text.Length)}:$title|$t
 ## Further Reading
 
 {{< whatsnext  >}}
-    {{< nextlink href="/developers/libraries/" tag="Documentation" >}}Find a DogStatsD client library to suit your needs.{{< /nextlink >}}
+    {{< nextlink href="developers/libraries/" tag="Documentation" >}}Find a DogStatsD client library to suit your needs.{{< /nextlink >}}
     {{< nextlink href="https://github.com/DataDog/dd-agent/blob/master/dogstatsd.py" tag="Github" >}}DogStatsD source code{{< /nextlink >}}
 {{< /whatsnext >}}
 
