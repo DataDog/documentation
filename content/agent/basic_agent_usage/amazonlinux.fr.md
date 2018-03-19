@@ -52,7 +52,7 @@ Les fichiers et dossiers de configuration de l'Agent se trouvent à:
 |:-----|:----|
 |`/etc/dd-agent/datadog.conf`| `/etc/datadog-agent/datadog.yaml` |
 
-Fichiers de configuration pour [les intégrations](/intégrations):
+Fichiers de configuration pour [les intégrations](/integrations):
 
 | Agent v5                                  |  Agent v6                          |
 |:-----|:----|
