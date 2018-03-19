@@ -6,7 +6,7 @@ external_redirect: /api/#create-user
 ---
 
 ##### Signature
-`POST api/v1/user`
+`POST https://app.datadoghq.com/api/v1/user`
 ##### Example Request
 {{< code-snippets basename="api-user-create" >}}
 ##### Example Response
