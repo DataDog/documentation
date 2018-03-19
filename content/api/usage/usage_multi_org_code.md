@@ -1,5 +1,5 @@
 ---
-title: Get Usage across your Multi-Org Account
+title: Get usage across your multi-org account
 type: apicode
 order: 22.4
 external_redirect: /api/#get-usage-across-your-multi-org-account

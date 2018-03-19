@@ -1,13 +1,13 @@
 ---
-title: Get Usage across your Multi-Org Account
+title: Get usage across your multi-org account
 type: apicontent
 order: 22.4
 external_redirect: /api/#get-usage-across-your-multi-org-account
 ---
 
-## Get Usage across your Multi-Org Account
+## Get usage across your multi-org account
 
-Get Usage across your Multi-Org Account
+Get usage across your multi-org account
 
 ##### Arguments
 * **`start_month`** [*required*]:  
