@@ -110,7 +110,7 @@ spec:
 
 Replace `YOUR_API_KEY` with [your api key](https://app.datadoghq.com/account/settings#api) or use [Kubernetes secrets](https://kubernetes.io/docs/concepts/configuration/secret/) to set your API key [as an environement variable](https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-environment-variables).  
 
-[Consult our docker integration to discover all configuration options](/agent/basic_agent_usage/docker/#environment-variables)
+[Consult our docker integration to discover all configuration options.](/agent/basic_agent_usage/docker/#environment-variables)
 
 * Deploy the DaemonSet with the command:
   ```
