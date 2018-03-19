@@ -28,3 +28,6 @@ Configure your Datadog-AWS integration directly through Datadog API.
 
 *   **`host_tags`** [*optional*, *default*=**None**]:
     Array of tags (in the form `key:value`) to add to all hosts and metrics reporting through this integration.
+
+*   **`account_specific_namespace_rules`** [*optional*, *default*=**None**]:
+    An object (in the form `{"namespace1":True/False, "namespace2":True/False}`) that enables or disables metric collection for specific AWS namespaces for this AWS account only. A list of namespaces can be found at the `https://app.datadoghq.com/api/v1/integration/aws/available_namespace_rules` endpoint.

@@ -7,7 +7,7 @@ external_redirect: /api/#get-a-monitor-s-details
 
 ##### Signature
 
-`GET /api/v1/monitor/:monitor_id`
+`GET https://app.datadoghq.com/api/v1/monitor/:monitor_id`
 
 ##### Example Request
 

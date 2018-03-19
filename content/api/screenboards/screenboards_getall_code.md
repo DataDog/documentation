@@ -7,7 +7,7 @@ external_redirect: /api/#get-all-screenboards
 
 ##### Signature
 
-`GET /api/v1/screen`
+`GET https://app.datadoghq.com/api/v1/screen`
 
 ##### Example Request
 

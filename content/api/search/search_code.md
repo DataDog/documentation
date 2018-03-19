@@ -7,7 +7,7 @@ external_redirect: /api/#search
 
 ##### Signature
 
-`GET /api/v1/search`
+`GET https://app.datadoghq.com/api/v1/search`
 
 ##### Example Request
 

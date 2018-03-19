@@ -7,7 +7,7 @@ external_redirect: /api/#get-tags
 
 ##### Signature
 
-`GET /api/v1/tags/hosts`
+`GET https://app.datadoghq.com/api/v1/tags/hosts`
 
 ##### Example Request
 

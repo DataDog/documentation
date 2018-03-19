@@ -7,7 +7,7 @@ external_redirect: /api/#update-host-tags
 
 ##### Signature
 
-`PUT /api/v1/tags/hosts/:host_name`
+`PUT https://app.datadoghq.com/api/v1/tags/hosts/:host_name`
 
 ##### Example Request
 

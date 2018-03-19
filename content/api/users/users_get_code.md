@@ -7,7 +7,7 @@ external_redirect: /api/#get-user
 
 ##### Signature
 
-`GET api/v1/user/:handle`
+`GET https://app.datadoghq.com/api/v1/user/:handle`
 
 ##### Example Request
 

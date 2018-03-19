@@ -7,7 +7,7 @@ external_redirect: /api/#create-a-screenboard
 
 ##### Signature
 
-`POST /api/v1/screen`
+`POST https://app.datadoghq.com/api/v1/screen`
 
 ##### Example Request
 

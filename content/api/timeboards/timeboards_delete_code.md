@@ -7,7 +7,7 @@ external_redirect: /api/#delete-a-timeboard
 
 ##### Signature
 
-`DELETE /api/v1/dash/:dash_id`
+`DELETE https://app.datadoghq.com/api/v1/dash/:dash_id`
 
 ##### Example Request
 

@@ -7,7 +7,7 @@ external_redirect: /api/#get-a-timeboard
 
 ##### Signature
 
-`GET /api/v1/dash/:dash_id`
+`GET https://app.datadoghq.com/api/v1/dash/:dash_id`
 
 ##### Example Request
 

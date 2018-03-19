@@ -7,7 +7,7 @@ external_redirect: /api/#edit-metric-metadata
 
 ##### Signature
 
-`PUT /api/v1/metrics/:metric_name`
+`PUT https://app.datadoghq.com/api/v1/metrics/:metric_name`
 
 ##### Example Request
 

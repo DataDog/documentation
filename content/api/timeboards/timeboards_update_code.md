@@ -7,7 +7,7 @@ external_redirect: /api/#update-a-timeboard
 
 ##### Signature
 
-`PUT /api/v1/dash/:dash_id`
+`PUT https://app.datadoghq.com/api/v1/dash/:dash_id`
 
 ##### Example Request
 

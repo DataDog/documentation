@@ -7,7 +7,7 @@ external_redirect: /api/#cancel-monitor-downtime-by-scope
 
 ##### Signature
 
-`POST /api/v1/downtime/cancel/by_scope`
+`POST https://app.datadoghq.com/api/v1/downtime/cancel/by_scope`
 
 ##### Example Request
 

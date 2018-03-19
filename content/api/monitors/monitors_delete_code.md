@@ -7,7 +7,7 @@ external_redirect: /api/#delete-a-monitor
 
 ##### Signature
 
-`DELETE /api/v1/monitor/:monitor_id`
+`DELETE https://app.datadoghq.com/api/v1/monitor/:monitor_id`
 
 ##### Example Request
 

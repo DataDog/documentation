@@ -7,7 +7,7 @@ external_redirect: /api/#edit-a-monitor
 
 ##### Signature
 
-`PUT /api/v1/monitor/:monitor_id`
+`PUT https://app.datadoghq.com/api/v1/monitor/:monitor_id`
 
 ##### Example Request
 

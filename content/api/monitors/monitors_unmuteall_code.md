@@ -7,7 +7,7 @@ external_redirect: /api/#unmute-all-monitors
 
 ##### Signature
 
-`POST /api/v1/monitor/unmute_all`
+`POST https://app.datadoghq.com/api/v1/monitor/unmute_all`
 
 ##### Example Request
 
