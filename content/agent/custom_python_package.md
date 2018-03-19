@@ -2,13 +2,13 @@
 title: Adding a custom python package to the agent
 kind: documentation
 further_reading:
-- link: "/logs/"
+- link: "logs/"
   tag: "Documentation"
   text: Collect your logs
-- link: "/graphing/infrastructure/process"
+- link: "graphing/infrastructure/process"
   tag: "Documentation"
   text: Collect your processes
-- link: "/tracing"
+- link: "tracing"
   tag: "Documentation"
   text: Collect your traces
 ---

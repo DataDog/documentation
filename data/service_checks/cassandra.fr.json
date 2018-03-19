@@ -1,0 +1,10 @@
+[
+    {
+        "agent_version": "5.3.0",
+        "groups": ["host", "instance"],
+        "check": "cassandra.can_connect",
+        "statuses": ["ok", "critical"],
+        "name": "Peut se connecter",
+        "description": "Renvoie `CRITICAL` si l'agent ne peut pas se connecter et collecter les métriques de l'instance Cassandra surveillée. Renvoie `OK` sinon."
+    }
+]

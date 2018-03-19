@@ -47,8 +47,12 @@ clean-exe:  ## remove execs.
 	@rm -rf ${EXE_LIST}
 
 clean-integrations:  ## remove built integrations files.
-	@rm -rf data/integrations
-	@rm -rf data/service_checks
+	@find ./data/integrations -type f -maxdepth 1 \
+	    -a -not -name '*.fr.yaml' \
+	    -exec rm -rf {} \;
+	@find ./data/service_checks -type f -maxdepth 1 \
+	    -a -not -name '*.fr.json' \
+	    -exec rm -rf {} \;
 	@find ./content/integrations -type f -maxdepth 1 \
 	    -a -not -name '_index.md' \
 	    -a -not -name 'cloudcheckr.md' \
@@ -59,6 +63,7 @@ clean-integrations:  ## remove built integrations files.
 	    -a -not -name 'rss.md' \
 	    -a -not -name 'system.md' \
 	    -a -not -name 'tcprtt.md' \
+	    -a -not -name '*.fr.md' \
 	    -exec rm -rf {} \;
 
 clean-node:  ## remove node_modules.

@@ -1,1 +1,222 @@
-{}
+{
+  "beta_sentence": {
+    "other": "Bêta - Pour obtenir de l'aide ou signaler tout problème, contactez"
+  },
+
+  "additional_sentence": {
+    "other": "Documentation, liens et articles supplémentaires utiles"
+  },
+
+  "apiaccount_sentence1": {
+    "other": "Assurez-vous de remplacer l'API et/ou la clé APP ci-dessous"
+  },
+
+  "apiaccount_sentence2": {
+    "other": "avec ceux de votre compte"
+  },
+
+  "install_agent_sentence": {
+    "other": "Installer et configurer l'agent pour collecter des données"
+  },
+
+  "integrations_sentence": {
+    "other": "Rassemblez des données de tous vos systèmes, applications et services"
+  },
+
+  "graphing_sentence": {
+    "other": "Visualisez vos données pour<br> pour mieux les comprendre"
+  },
+
+  "alerting_sentence": {
+    "other": "Créer et gérer vos <br>  monitors et notifications"
+  },
+
+  "apm_sentence": {
+    "other": "Instrumenter votre code <br> pour améliorer ses performances"
+  },
+
+  "developer_tools_sentence": {
+    "other": "Collecter des métriques custom <br> &amp; créer une nouvelle intégration"
+  },
+
+  "help_sentence": {
+    "other": "Nos ingénieurs amicaux et compétents sont là pour vous aider"
+  },
+
+  "email_support_sentence": {
+    "other": "Vous pouvez contacter notre équipe de support par email à <a href=\"mailto:support@datadoghq.com\">support@datadoghq.com</a>"
+  },
+
+  "live_chat_support_sentence": {
+    "other": "Discutez avec notre équipe de support n'importe quel jour ouvrable entre 10h00 et 19h00 EST. Vous pouvez nous joindre via le chat intégré ou sur Slack,<a href=\"http://chat.datadoghq.com/\" target=\"_blank\" rel=\"noopener\">Datadog Slack</a>"
+  },
+
+  "event_stream_support_sentence": {
+    "other": "Les messages du <a href=\"http://app.datadoghq.com/event/stream\" target=\"_blank\" rel=\"noopener\">flux d'événements</a> contenant @support-datadog parviendront à notre équipe de support. C'est un moyen pratique de pour transmettre un snapshot de graphe."
+  },
+
+  "agent_started_sentence": {
+    "other": "Pour commencer à utiliser l'agent, sélectionnez votre plateforme."
+  },
+
+  "choose_a_platform": {
+    "other": "Choisir une plateforme"
+  },
+
+  "get_started_datadog": {
+    "other": "Commencer avec Datadog"
+  },
+
+  "all": {
+    "other": "Tout"
+  },
+
+  "free_trial": {
+    "other": "Essai gratuit"
+  },
+
+  "agent_check": {
+    "other": "Check de l'Agent"
+  },
+
+  "statsd_check": {
+    "other": "Check StatsD"
+  },
+
+  "crawler": {
+    "other": "Crawler"
+  },
+
+  "terms": {
+    "other": "Termes"
+  },
+
+  "privacy": {
+    "other": "Privacy"
+  },
+
+  "cookies": {
+    "other": "Cookies"
+  },
+
+  "toc": {
+    "other": "Table des matières"
+  },
+
+  "get_started_free": {
+    "other": "COMMENCER GRATUITEMENT"
+  },
+
+  "documentation_search": {
+    "other": "Recherche"
+  },
+
+  "guides": {
+    "one": "Guide",
+    "other": "Guides"
+  },
+
+  "tags": {
+    "one": "Tag",
+    "other": "Tags"
+  },
+
+  "language": {
+    "one": "Language",
+    "other": "Languages"
+  },
+
+  "library": {
+    "one":  "Bibliothèque",
+    "other": "Bibliothèques"
+  },
+
+  "official": {
+    "other": "Officiel"
+  },
+
+  "api": {
+    "other": "API"
+  },
+
+  "docs": {
+    "other": "Docs"
+  },
+
+  "home": {
+    "other": "Accueil"
+  },
+
+  "datadog_docs": {
+    "other": "Documentation de Datadog"
+  },
+
+  "datadog_api": {
+    "other": "Datadog API"
+  },
+
+  "dogstatsd": {
+    "other": "DogStatsD"
+  },
+
+  "author": {
+    "other": "Auteur"
+  },
+
+  "notes": {
+    "other": "Notes"
+  },
+
+  "agent": {
+    "other": "Agent"
+  },
+
+  "integrations": {
+    "one": "integration",
+    "other": "integrations"
+  },
+
+  "graphing": {
+    "other": "Graphes"
+  },
+
+  "alerting": {
+    "other": "Alerting"
+  },
+
+  "apm_tracing": {
+    "other": "APM (Tracing)"
+  },
+
+  "developer_tools": {
+    "other": "Outils de développement"
+  },
+
+  "contact_us": {
+    "other": "Contactez nous"
+  },
+
+  "status_page": {
+    "other": "Page de status"
+  },
+
+  "ops_twitter": {
+    "other": "Twitter Ops"
+  },
+
+  "email": {
+    "other": "Email"
+  },
+
+  "live_chat": {
+    "other": "Chat live"
+  },
+
+  "event_stream_messaging": {
+    "other": "Messagerie depuis le flux d'événements dans l'application"
+  },
+
+  "questions": {
+    "other": "Questions?"
+  }
+}
