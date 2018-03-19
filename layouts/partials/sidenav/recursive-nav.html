@@ -2,7 +2,13 @@
 {{ $ctx := .context }}
 <ul class="list-unstyled">
     {{ range $index, $element := .data }}
-        {{ $el_url := (print "/" $element.URL)}}
+        {{ $.Scratch.Set "el_url" "" }}
+        {{ if ne $ctx.Site.Language.Lang "en" }}
+            {{ $ctx.Scratch.Set "el_url" (print "/" $ctx.Site.Language.Lang "/" $element.URL) }}
+        {{ else }}
+            {{ $ctx.Scratch.Set "el_url" (print "/" $element.URL) }}
+        {{ end }}
+        {{ $el_url := ($ctx.Scratch.Get "el_url") }}
         {{ $split_urls := split $ctx.RelPermalink "/" }}
         {{ $url_first := print "/" (index $split_urls 1) "/" }}
         {{ $url_first_second := print $url_first (index $split_urls 2) "/" }}
