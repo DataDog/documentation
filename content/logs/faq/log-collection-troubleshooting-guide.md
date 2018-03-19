@@ -27,7 +27,7 @@ The dd-agent only collects logs that have been written after it has started tryi
 
 The dd-agent does not run as root (and we do not recommend that you make it run as root, as a general best-practice). For this reason, when you configure your dd-agent to tail log files (for custom logs or for integrations) you need to take special care to ensure the dd-agent user has read access to tail the log files you want to collect from.
 
-If the dd-agent user does not have read access to the files you configure it to tail, then a permissions error is captured in the `/var/log/datadog/agent.log`. The agent also required to have an execute permission on the directory containing the file (this is the default permission required to be able to list the file contained in a directory).
+If the dd-agent user does not have read access to the files you configure it to tail, then a permissions error is captured in the `/var/log/datadog/agent.log`. The agent requires to have an execute permission on the directory containing the files (this is the default permission required to be able to list the file contained in a directory).
 
 N.B. when you add the appropriate read permissions, you want also to make sure that these permissions are correctly set on your log rotation configuration. Otherwise, when the log rotates next, the dd-agent may lose its read permissions.
 
@@ -35,12 +35,13 @@ N.B. when you add the appropriate read permissions, you want also to make sure t
 
 The log-agent within the dd-agent sends its logs to Datadog over tcp via port 10516. If that connection is not available, logs fail to be sent and an error is recorded in the logs-agent.log to that effect.
 
-You can manually test your connection by running starting a telnet or openssl command like so (port 10514 would work too, but is less secure):
+Test manually your connection by running a telnet or openssl command like so (port 10514 would work too, but is less secure):
 
 * openssl s_client -connect intake.logs.datadoghq.com:10516
 * telnet intake.logs.datadoghq.com 10514
 
 And then by sending a log like the following:
+
 ```
 <API_KEY> this is a test message
 ```
@@ -51,15 +52,15 @@ These are a few of the common configuration issues that are work triple-checking
 
 1. Run the Agent status config to spot the major configuration issue: `datadog-agent status`.
 
-2. Make sure the api_key is defined in `datadog.yaml`.
+2. Check if the api_key is defined in `datadog.yaml`.
 
 3. By default the agent do not collect any logs, make sure there is at least one .yaml file in the Agent's `conf.d/` directory that includes a logs section and the appropriate values.
 
 4. You may have some .yaml parsing errors in your configuration files. Yaml is notoriously finicky, so when in doubt, a good [yaml validator](https://codebeautify.org/yaml-validator) is worth referencing.
 
-5. Make sure you have `logs_enabled: true` in your `datadog.yaml`
+5. Check if you have `logs_enabled: true` in your `datadog.yaml`
 
-6. You may have some .yaml parsing errors in your configuration files. Yaml is notoriously finicky, so when in doubt, a good [yaml validator](https://codebeautify.org/yaml-validator) is worth referencing.
+6. If you have a `.yaml` parsing errors with your configuration file, use [yaml validator](https://codebeautify.org/yaml-validator) to spot your issue.
 
 ### Check for errors in the logs
 
