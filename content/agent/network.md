@@ -60,13 +60,20 @@ The information is structured as JSON following this schema:
 
 ### Agent v6
 
-  * **`8125/udp`**: dogstatsd
+* `5000`: port for the [go_expvar server](/integrations/go_expvar/)
+* `5001`: port on which the IPC api listens
+* `5002`: port for [the Agent browser GUI to be served](/agent/#using-the-gui)
+* `8125/udp`: dogstatsd
+    
+    Unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost: 
 
-  Unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost: 
-
-  * `127.0.0.1`
-  * `::1` 
-  * `fe80::1`
+    * `127.0.0.1`
+    * `::1` 
+    * `fe80::1`
+* `8126`: port for the [APM Receiver](/tracing)
+* `10516`: port for the [Log collection](/logs)
+* `10255`: port for the [Kubernetes http kubelet](/agent/basic_agent_usage/kubernetes/)
+* `10250`: port for the [Kubernetes https kubelet](/agent/basic_agent_usage/kubernetes/)
 
 ### Agent v4 and v5 
 
