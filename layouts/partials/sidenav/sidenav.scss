@@ -189,6 +189,12 @@ aside.sidenav {
   }
 }
 
+.fr aside.sidenav {
+  h4 {
+    font-size:22px;
+  }
+}
+
 aside.sidenav-api {
   .sidenav-nav {
     overflow-x: hidden;
