@@ -51,7 +51,7 @@ Alternatively, install it manually:
 
 ### Setup - Log into a file with Monolog
 
-The following configuration enables the Json formatting and writes the logs and events into the `application-json.log` file. Edit your code, right after the initialization of the Monolog instance and add a new handler:
+The following configuration enables the JSON formatting and writes the logs and events into the `application-json.log` file. Edit your code, right after the initialization of the Monolog instance and add a new handler:
 
 ```php
  <?php
@@ -80,20 +80,42 @@ $log->pushHandler($stream);
 $log->info('Adding a new user', array('username' => 'Seldaek'));
 ```
 
-Then [stream your log file to Datadog](/logs/#custom-log-collection)
+### Configure your Datadog agent
+
+Create a `php.d/conf.yaml` file in your `conf.d/` folder with the following content:
+
+```yaml
+init_config:
+
+instances:
+    
+##Log section
+logs:
+
+    ## - type : file (mandatory) type of log input source (tcp / udp / file)
+    ##   port / path : (mandatory) Set port if type is tcp or udp. Set path if type is file
+    ##   service : (mandatory) name of the service owning the log
+    ##   source : (mandatory) attribute that defines which integration is sending the logs
+    ##   sourcecategory : (optional) Multiple value attribute. Can be used to refine the source attribtue
+    ##   tags: (optional) add tags to each logs collected
+
+  - type: file
+    path: /path/to/your/php/application-json.log
+    service: php
+    source: php
+    sourcecategory: sourcecode
+```
 
 ### Add meta field and context
 
-Much of the usefulness information comes from additional context data that you add to your logs and events.  
-Monolog makes this very convenient by providing methods to set thread local context data that is then submitted automatically with all events. At any moment, log an event with a contextual data:
+Much of the useful information comes from additional context data added to your logs and events.
+Monolog makes this convenient by providing methods for setting thread-local context data that is then submitted automatically with all events. At any moment, log an event with contextual data:
 
 ```php
- <?php
-
 $logger->info('Adding a new user', array('username' => 'Seldaek'));
 ```
 
-But, most important, Monolog comes with a pre-processor feature. It's a simple callback enriches all your events with, for instance, the session id, the request id, and so on:
+Monolog comes with a pre-processor feature. It's a simple callback that enriches your events with metadata you can set (e.g., the session id, the request id, etc.):
 
 ```php
  <?php 
@@ -120,7 +142,7 @@ $log->pushProcessor(function ($record) {
 
 ### Framework integration 
 
-Monolog is a part of the following framework:
+Monolog is a part of the following frameworks:
 
 * [Symfony2, Symfony3](/logs/languages/php/#symfony-v2-v3)
 * [PPI](/logs/languages/php/#ppi)
@@ -133,7 +155,6 @@ Integrate Monolog with your framework then configure your logger:
  
 ```php
  <?php
-
 // Check if the Monolog library is well loaded
 //use Monolog\Logger;
 //use Monolog\Handler\StreamHandler;
@@ -149,14 +170,38 @@ $stream = new StreamHandler(__DIR__.'/application-json.log', Logger::DEBUG);
 $stream->setFormatter($formatter);
 
 $monolog->pushHandler($stream);
-return $r;});
+return $r;
 ```
 
-and then [stream your log files to Datadog](/logs/#custom-log-collection)
+### Configure your Datadog agent
+
+Create a `php.d/conf.yaml` file in your `conf.d/` folder with the following content:
+
+```yaml
+init_config:
+
+instances:
+    
+##Log section
+logs:
+
+    ## - type : file (mandatory) type of log input source (tcp / udp / file)
+    ##   port / path : (mandatory) Set port if type is tcp or udp. Set path if type is file
+    ##   service : (mandatory) name of the service owning the log
+    ##   source : (mandatory) attribute that defines which integration is sending the logs
+    ##   sourcecategory : (optional) Multiple value attribute. Can be used to refine the source attribtue
+    ##   tags: (optional) add tags to each logs collected
+
+  - type: file
+    path: /path/to/your/php/application-json.log
+    service: php
+    source: php
+    sourcecategory: sourcecode
+```
 
 #### Symfony (v2+, v3+)
 
-Look at your configuration directory, and edit `config_dev.yml` or `config_prod.yml` depending on your needs: 
+In your configuration directory `/path/to/config/directory/`, edit the `config_dev.yml` and `config_prod.yml` to configure log management to suit your needs for development and production environments.
 
 ```yaml
  # app/config/config.yml
@@ -191,7 +236,7 @@ monolog:
 
 #### PPI
 
-Look at your configuration directory, and edit `config_dev.yml` or `config_prod.yml` depending on your needs: 
+In your configuration directory `/path/to/config/directory/`, edit the `config_dev.yml` and `config_prod.yml` to configure log management to suit your needs for development and production environments.
 
 ```yaml
 monolog:
@@ -211,8 +256,6 @@ monolog:
 #### Laravel
 
 ```php
- <?php 
-
 //file: bootstrap/app.php
 $app->configureMonologUsing(function($monolog) {
     $monolog->pushHandler(...);
@@ -226,8 +269,6 @@ return $app;
 #### Silex
 
 ```php
-<?php
-
 // file: bootstrap
 $app->extend('monolog', function($monolog, $app) {
     $monolog->pushHandler(...);
@@ -239,8 +280,6 @@ $app->extend('monolog', function($monolog, $app) {
 #### Lumen
 
 ```php
-<?php 
-
 //file: bootstrap/app.php
 $app->configureMonologUsing(function($monolog) {
     $monolog->pushHandler(...);
@@ -263,7 +302,7 @@ run `composer update`.
 }
 ```
 
-Then, start by creating a logging configuration  file (i.e. `app/Config/log.php`) that you include early in your `app/Config/bootstrap.php`:
+Then, start by creating a logging configuration file (i.e. `app/Config/log.php`) that you include your `app/Config/bootstrap.php`:
 
 ```php
 include 'log.php';
@@ -302,7 +341,7 @@ This section is about:
 
 ### Setup - Log into files with Monolog
 
-1. Declare a Monolog Json formatter as a service:
+1. Declare a Monolog JSON formatter as a service:
 
     ```yaml
     services:
@@ -322,7 +361,31 @@ This section is about:
                 formatter: monolog.json_formatter
     ```
 
-3. [Stream your log files to Datadog](/logs/#custom-log-collection)
+### Configure your Datadog agent
+
+Create a `php.d/conf.yaml` file in your `conf.d/` folder with the following content:
+
+```yaml
+init_config:
+
+instances:
+    
+##Log section
+logs:
+
+    ## - type : file (mandatory) type of log input source (tcp / udp / file)
+    ##   port / path : (mandatory) Set port if type is tcp or udp. Set path if type is file
+    ##   service : (mandatory) name of the service owning the log
+    ##   source : (mandatory) attribute that defines which integration is sending the logs
+    ##   sourcecategory : (optional) Multiple value attribute. Can be used to refine the source attribtue
+    ##   tags: (optional) add tags to each logs collected
+
+  - type: file
+    path: /path/to/your/php/application-json.log
+    service: php
+    source: php
+    sourcecategory: sourcecode
+```
 
 ### Adding a session processor to add variable context in your logs
 
@@ -439,7 +502,7 @@ use Zend\Log\Formatter\JsonFormatter;
 
 ### Setup - Log into files with Zend-log
 
-The following configuration enables the Json formatting and writes the logs and events into the `application-json.log` file. Edit your code, right after the initialization of the Zend-Log instance and add a new handler.
+The following configuration enables the JSON formatting and writes the logs and events into the `application-json.log` file. Edit your code, right after the initialization of the Zend-Log instance and add a new handler.
 
 ```php
 <?php
@@ -471,8 +534,6 @@ Then [Stream your log files to Datadog](/logs/#custom-log-collection)
 Much of the usefulness information comes from additional context data that you can add to your logs and your events. Zend-Log makes this very convenient by providing methods to set thread local context data that is then submitted automatically with all events. At any moment, log an event with a contextual data:  
 
 ```php
-<?php
-
 $logger->info('Adding a new user', array('username' => 'Seldaek'));
 ```
 
@@ -487,8 +548,6 @@ Use cases include:
 Take a peek to this code if you want to use it:
 
 ```php
-<?php 
-
 $logger->addProcessor(new Zend\Log\Processor\Backtrace());
 $logger->addProcessor(new Zend\Log\Processor\PsrPlaceholder());
 $logger->addProcessor(new Zend\Log\Processor\ReferenceId());
