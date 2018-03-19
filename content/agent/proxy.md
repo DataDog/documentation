@@ -56,7 +56,7 @@ to
 
 ## Using a Web Proxy as Proxy
 
-Traditional web proxies are supported natively by the agent. If you need a proxy to connect to the Internet, edit your Agent configuration file.
+Traditional web proxies are supported natively by the Agent. If you need a proxy to connect to the Internet, edit your Agent configuration file.
 
 ### Agent v6
 
