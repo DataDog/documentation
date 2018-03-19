@@ -3,7 +3,7 @@ app_key=87ce4a24b5553d2e482ea8a8500e71b8ad4554ff
 
 start_month=$(date -v -60d +%Y-%m)
 end_month=$(date +%Y-%m)
-include_org_details=false
+include_org_details=true
 
 curl -G \
     "https://app.datadoghq.com/api/v1/usage/summary" \
