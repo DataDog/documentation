@@ -89,18 +89,6 @@ test_preview_links:
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
-manage_translations:on-schedule:
-  <<: *base_template
-  stage: post-deploy
-  environment: "preview"
-  variables:
-    URL: ${PREVIEW_DOMAIN}
-    CONFIG: ${PREVIEW_CONFIG}
-  script:
-    - manage_translations "${APIKEY}"
-  only:
-    - schedules
-
 # ================== live ================== #
 build_live:
   <<: *base_template
@@ -109,18 +97,21 @@ build_live:
   variables:
     CONFIG: ${LIVE_CONFIG}
     URL: ${LIVE_DOMAIN}
+    UNTRACKED_EXTRAS: "data,content/integrations"
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_SHA:0:8}> sent to gitlab for production deployment. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}|details>" "#FFD700"
     - version_static_assets
     - sync_integration_descriptions
     - sync_integration_metrics
+    - placehold_translations
     - build_hugo_site
     - build_hugo_site_ja
     - minify_html
     - collect_static_assets
     - push_site_to_s3
     - create_artifact
+    - create_artifact_untracked
   only:
     - master
 
@@ -169,6 +160,18 @@ index_algolia:
     - index_algolia
   only:
     - master
+
+manage_translations:on-schedule:
+  <<: *base_template
+  stage: post-deploy
+  environment: "live"
+  variables:
+    URL: ${PREVIEW_DOMAIN}
+    CONFIG: ${PREVIEW_CONFIG}
+  script:
+    - manage_translations "${APIKEY}"
+  only:
+    - schedules
 
 #rollback_live:
 #  <<: *base_template

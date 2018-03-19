@@ -26,9 +26,9 @@ langs:
 github:
   org: 'DataDog'
   repo: 'documentation'
-  branch_from: 'david.jones/translate'
+  branch_from: 'master'
   commit_message: 'Adding translations'
-  pr_to: 'david.jones/translate'
+  pr_to: 'master'
   pr_title: 'Translation PR'
   pr_body: 'This is an automated PR created by the scheduled translation task pulling the latest translated files'
   pr_labels:
