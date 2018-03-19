@@ -6,7 +6,7 @@ external_redirect: /api/#create-a-timeboard
 ---
 
 ##### Signature
-`POST /api/v1/dash`
+`POST https://app.datadoghq.com/api/v1/dash`
 ##### Example Request
 {{< code-snippets basename="api-dashboard-create" >}}
 ##### Example Response

@@ -6,7 +6,7 @@ external_redirect: /api/#delete-a-comment
 ---
 
 ##### Signature
-`DELETE api/v1/comments/:comment_id`
+`DELETE https://app.datadoghq.com/api/v1/comments/:comment_id`
 ##### Example Request
 {{< code-snippets basename="api-comment-delete" >}}
 ##### Example Response

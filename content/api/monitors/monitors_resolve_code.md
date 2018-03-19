@@ -6,7 +6,7 @@ external_redirect: /api/#resolve-monitor
 ---
 
 ##### Signature
-`POST /monitor/bulk_resolve`
+`POST https://app.datadoghq.com/monitor/bulk_resolve`
 ##### Example Request
 {{< code-snippets basename="api-monitor-bulk-resolve" >}}
 ##### Example Response
