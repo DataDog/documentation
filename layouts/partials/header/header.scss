@@ -257,3 +257,11 @@ body > header {
     }
   }
 }
+
+
+
+@media (max-width: 1199px) {
+  body.fr > header .mainnav .nav-button .btn {
+    font-size: 15px;
+  }
+}
