@@ -5,10 +5,10 @@ description: This page explains what DogStatsD is, how it works, and what data i
 aliases:
   - /guides/dogstatsd/
 further_reading:
-- link: "developers/metrics"
+- link: "/developers/metrics"
   tag: "Documentation"
   text: Learn more about Metrics
-- link: "developers/libraries"
+- link: "/developers/libraries"
   tag: "Docuementation"
   text: Datadog-official and community contributed API and DogStatsD client libraries
 ---
@@ -405,7 +405,7 @@ PS C:\vagrant> .\send-statsd.ps1 "_e{$($title.length),$($text.Length)}:$title|$t
 ## Further Reading
 
 {{< whatsnext  >}}
-    {{< nextlink href="developers/libraries/" tag="Documentation" >}}Find a DogStatsD client library to suit your needs.{{< /nextlink >}}
+    {{< nextlink href="/developers/libraries/" tag="Documentation" >}}Find a DogStatsD client library to suit your needs.{{< /nextlink >}}
     {{< nextlink href="https://github.com/DataDog/dd-agent/blob/master/dogstatsd.py" tag="Github" >}}DogStatsD source code{{< /nextlink >}}
 {{< /whatsnext >}}
 

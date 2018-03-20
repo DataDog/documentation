@@ -3,13 +3,13 @@ title: Parsing
 kind: documentation
 description: "Parse your logs using the Grok Processor"
 further_reading:
-- link: "logs/processing"
+- link: "/logs/processing"
   tag: "Documentation"
   text: Learn how to process your logs
-- link: "logs/faq/how-to-investigate-a-log-parsing-issue"
+- link: "/logs/faq/how-to-investigate-a-log-parsing-issue"
   tag: "FAQ"
   text: How to investigate a log parsing issue?
-- link: "logs/faq/log-parsing-best-practice"
+- link: "/logs/faq/log-parsing-best-practice"
   tag: "FAQ"
   text: Log Parsing - Best Practice
 ---

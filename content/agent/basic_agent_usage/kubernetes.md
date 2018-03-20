@@ -2,10 +2,10 @@
 title: Kubernetes
 kind: documentation
 further_reading:
-- link: "agent/autodiscovery"
+- link: "/agent/autodiscovery"
   tag: "Documentation"
   text: Docker Agent Autodiscovery
-- link: "graphing/infrastructure/process"
+- link: "/graphing/infrastructure/process"
   tag: "Documentation"
   text: Process collection for Kubernetes
 aliases:

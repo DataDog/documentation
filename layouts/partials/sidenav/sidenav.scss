@@ -271,21 +271,3 @@ aside.sidenav-api {
     }
   }
 }
-
-
-.fr aside.sidenav {
-  h4 {
-    font-size:22px;
-  }
-}
-
-@media (max-width: 1199px) {
-  .fr {
-    aside.sidenav {
-      h4 {
-        font-size:18px;
-        padding-top: 15px;
-      }
-    }
-  }
-}

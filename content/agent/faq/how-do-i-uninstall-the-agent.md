@@ -2,7 +2,7 @@
 title: How do I uninstall the Agent?
 kind: faq
 further_reading:
-- link: "agent/"
+- link: "/agent/"
   tag: "Documentation"
   text: Learn more about the Datadog Agent
 ---

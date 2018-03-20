@@ -3,11 +3,7 @@
 <!-- get lang specific data file -->
 {{ $.Scratch.Set "data" "" }}
 {{ if ne $dot.Page.Lang "en"}}
-    {{ if (fileExists (print "data/partials/platforms." $dot.Page.Lang ".yaml")) }}
-      {{ $.Scratch.Set "data" (index $dot.Page.Site.Data.partials (print "platforms." $dot.Page.Lang)) }}
-    {{ else }}
-      {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.questions }}
-    {{ end }}
+    {{ $.Scratch.Set "data" (index $dot.Page.Site.Data.partials (print "platforms." $dot.Page.Lang)) }}
 {{ else }}
     {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.platforms }}
 {{ end }}
@@ -22,7 +18,7 @@
             <div class="row cards-dd platform-nav" style="margin-top:0">
                 {{ range $datafile.platforms }}
                     <div class="col-6 col-sm-3 col-md-3 col-lg-3 col-xl-2-4">
-                        <a class="card" href="{{ .link | absLangURL }}" style="margin-bottom:15px">
+                        <a class="card" href="{{ $dot.Site.BaseURL }}{{ .link }}" style="margin-bottom:15px">
                             <div class="card-body text-center">
                                 {{ partial "img.html" (dict "root" $dot "src" (print "icons/" .image) "class" "img-fluid" "alt" "platform" "style" "max-height:82px;") }}
                             </div>

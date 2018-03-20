@@ -5,10 +5,10 @@ aliases:
   - /guides/livecontainers
   - /infrastructure/livecontainers/
 further_reading:
-- link: "graphing/infrastructure/hostmap"
+- link: "/graphing/infrastructure/hostmap"
   tag: "Graphing"
   text: See all of your hosts together on one screen with the hostmap
-- link: "graphing/infrastructure/process"
+- link: "/graphing/infrastructure/process"
   tag: "Graphing"
   text: Understand what is going on at any level of your system
 ---

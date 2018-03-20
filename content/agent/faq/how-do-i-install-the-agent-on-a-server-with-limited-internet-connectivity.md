@@ -2,10 +2,10 @@
 title: How do I install the agent on a server with limited internet connectivity?
 kind: faq
 further_reading:
-- link: "agent/"
+- link: "/agent/"
   tag: "Documentation"
   text: Learn more about the Datadog Agent
-- link: "agent/proxy"
+- link: "/agent/proxy"
   tag: "Documentation"
   text: Learn more about Proxy
 ---

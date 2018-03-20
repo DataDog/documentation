@@ -306,7 +306,7 @@ To change the default values for each of the reserved attributes, go to the pipe
 ## Further Reading
 
 {{< whatsnext >}}
-    {{< nextlink href="logs/explore" tag="Documentation" >}}Learn how to explore your logs{{< /nextlink >}}
-    {{< nextlink href="logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers" tag="FAQ" >}}How to Send Logs to Datadog via External Log Shippers{{< /nextlink >}}
-    {{< nextlink href="logs/parsing" tag="Documentation" >}}Learn more about parsing{{< /nextlink >}}
+    {{< nextlink href="/logs/explore" tag="Documentation" >}}Learn how to explore your logs{{< /nextlink >}}
+    {{< nextlink href="/logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers" tag="FAQ" >}}How to Send Logs to Datadog via External Log Shippers{{< /nextlink >}}
+    {{< nextlink href="/logs/parsing" tag="Documentation" >}}Learn more about parsing{{< /nextlink >}}
 {{< /whatsnext >}}
