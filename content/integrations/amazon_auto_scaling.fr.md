@@ -1,6 +1,4 @@
 ---
-aliases:
-- integrations/awsautoscaling/
 categories:
 - cloud
 - provisioning

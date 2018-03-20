@@ -2,8 +2,6 @@
 title: Utilisation basique de l'Agent pour Fedora
 kind: documentation
 platform: Fedora
-aliases:
-    - /guides/basic_agent_usage/fedora/
 further_reading:
 - link: "logs/"
   tag: "Documentation"

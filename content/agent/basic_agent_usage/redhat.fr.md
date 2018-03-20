@@ -2,8 +2,6 @@
 title: Utilisation basique de l'Agent pour Red Hat
 kind: documentation
 platform: Red Hat
-aliases:
-    - /guides/basic_agent_usage/redhat/
 further_reading:
 - link: "logs/"
   tag: "Documentation"

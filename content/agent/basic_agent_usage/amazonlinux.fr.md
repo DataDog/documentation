@@ -2,8 +2,6 @@
 title: Utilisation basique de l'Agent pour Linux
 kind: documentation
 platform: Amazon Linux
-aliases:
-    - /guides/basic_agent_usage/amazonlinux/
 further_reading:
 - link: "/logs/"
   tag: "Documentation"

@@ -2,8 +2,6 @@
 title: Utilisation basique de l'Agent pour CentOS
 kind: documentation
 platform: CentOS
-aliases:
-    - /guides/basic_agent_usage/centos/
 further_reading:
 - link: "logs/"
   tag: "Documentation"
