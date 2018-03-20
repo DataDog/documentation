@@ -5,14 +5,18 @@
         {{ $.Scratch.Set "el_url" "" }}
         {{ if ne $ctx.Site.Language.Lang "en" }}
             {{ $ctx.Scratch.Set "el_url" (print "/" $ctx.Site.Language.Lang "/" $element.URL) }}
+            {{ $ctx.Scratch.Set "split_urls" (split $ctx.RelPermalink "/")}}
+            {{ $ctx.Scratch.Set "url_first" (print "/" (index ($ctx.Scratch.Get "split_urls") 1) "/" (index ($ctx.Scratch.Get "split_urls") 2) "/" )}}
+            {{ $ctx.Scratch.Set "url_first_second" (print ($ctx.Scratch.Get "url_first") (index ($ctx.Scratch.Get "split_urls") 3) "/" )}}
         {{ else }}
             {{ $ctx.Scratch.Set "el_url" (print "/" $element.URL) }}
+            {{ $ctx.Scratch.Set "split_urls" (split $ctx.RelPermalink "/")}}
+            {{ $ctx.Scratch.Set "url_first" (print "/" (index ($ctx.Scratch.Get "split_urls") 1) "/")}}
+            {{ $ctx.Scratch.Set "url_first_second" (print ($ctx.Scratch.Get "url_first") (index ($ctx.Scratch.Get "split_urls") 2) "/")}}
         {{ end }}
         {{ $el_url := ($ctx.Scratch.Get "el_url") }}
-        {{ $split_urls := split $ctx.RelPermalink "/" }}
-        {{ $url_first := print "/" (index $split_urls 1) "/" }}
-        {{ $url_first_second := print $url_first (index $split_urls 2) "/" }}
-        {{ $el_url_first := print "/" (index (split $el_url "/") 1) "/" }}
+        {{ $url_first := ($ctx.Scratch.Get "url_first") }}
+        {{ $url_first_second := ($ctx.Scratch.Get "url_first_second") }}
         <!-- if url matches then active link or if second part in url and no children --->
         {{ $active_page := (or (eq $ctx.RelPermalink $el_url) (and (eq $url_first_second $el_url) (not $element.Children)) (and (eq $url_first "/integrations/") (eq $el_url "/integrations/") ) ) }}
         {{ $open_parent := (or (and (eq $url_first $el_url) (ne $el_url "/")) (eq $url_first_second $el_url) $active_page) }}
