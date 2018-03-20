@@ -16,6 +16,12 @@ Override dashboards of an existing dashboard list.
     Dashboard definitions follow this form:
     *   **`type`** [*required*]:
         The type of the dashboard.
-        The type must be one of `["custom_timeboard", "custom_screenboard", "integration_screenboard", "integration_timeboard", "host_timeboard"]`
+        The type must be one of:
+ 
+        * `"custom_timeboard"`
+        * `"custom_screenboard"`
+        * `"integration_screenboard"`
+        * `"integration_timeboard"`
+        * `"host_timeboard"`
     *   **`id`** [*required*]:
         The id of the dashboard.

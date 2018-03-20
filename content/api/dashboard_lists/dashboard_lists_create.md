@@ -7,6 +7,8 @@ external_redirect: /api/#create-a-dashboard-list
 
 ## Create a Dashboard List
 
+Create an empty dashboard list.
+
 ##### Arguments
 
 *   **`name`** [*required*]:

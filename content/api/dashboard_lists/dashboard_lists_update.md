@@ -7,6 +7,8 @@ external_redirect: /api/#update-a-dashboard-list
 
 ## Update a Dashboard List
 
+Update the name of a dashboard list
+
 ##### Arguments
 
 *   **`name`** [*required*]:
