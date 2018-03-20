@@ -6,7 +6,7 @@
     {{ if (fileExists (print "data/partials/platforms." $dot.Page.Lang ".yaml")) }}
       {{ $.Scratch.Set "data" (index $dot.Page.Site.Data.partials (print "platforms." $dot.Page.Lang)) }}
     {{ else }}
-      {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.questions }}
+      {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.platforms }}
     {{ end }}
 {{ else }}
     {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.platforms }}
