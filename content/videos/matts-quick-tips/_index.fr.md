@@ -1,4 +1,4 @@
 ---
 aliases:
-  - /fr/videos/matts quick tips/
+  - '/[object Object]/videos/matts quick tips/'
 ---

@@ -2,10 +2,9 @@
 title: Commandes de l'Agent
 kind: faq
 aliases:
-    - /fr/agent/faq/agent-status-and-information
-    - /fr/agent/faq/start-stop-restart-the-datadog-agent
+  - '/[object Object]/agent/faq/agent-status-and-information'
+  - '/[object Object]/agent/faq/start-stop-restart-the-datadog-agent'
 ---
-
 ## Démarrer/Arrêter/Redémarrer l'Agent
 ### Démarre l'Agent
 

@@ -2,20 +2,19 @@
 title: Utilisation basique de l'Agent pour Debian
 kind: documentation
 aliases:
-    - /fr/guides/basic_agent_usage/deb/
-    - /fr/agent/basic_agent_usage/install_debian_5/
+  - '/[object Object]/guides/basic_agent_usage/deb/'
+  - '/[object Object]/agent/basic_agent_usage/install_debian_5/'
 further_reading:
-- link: "logs/"
-  tag: "Documentation"
-  text: Collectez vos logs
-- link: "graphing/infrastructure/process"
-  tag: "Documentation"
-  text: Collectez vos processus
-- link: "tracing"
-  tag: "Documentation"
-  text: Collectez vos traces
+  - link: logs/
+    tag: Documentation
+    text: Collectez vos logs
+  - link: graphing/infrastructure/process
+    tag: Documentation
+    text: Collectez vos processus
+  - link: tracing
+    tag: Documentation
+    text: Collectez vos traces
 ---
-
 ## Aperçu
 
 Cette page présente les fonctionnalités de base de l'agent Datadog.

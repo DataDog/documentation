@@ -1,4 +1,4 @@
 ---
 aliases:
-  - /fr/videos/datadog 101/
+  - '/[object Object]/videos/datadog 101/'
 ---

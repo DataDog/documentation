@@ -2,18 +2,17 @@
 title: Utilisation de base de l'Agent
 kind: documentation
 aliases:
-    - /fr/guides/basic_agent_usage/
-    - /fr/agent/faq/where-is-the-configuration-file-for-the-agent/
-    - /fr/agent/faq/log-location
+  - '/[object Object]/guides/basic_agent_usage/'
+  - '/[object Object]/agent/faq/where-is-the-configuration-file-for-the-agent/'
+  - '/[object Object]/agent/faq/log-location'
 further_reading:
-- link: "agent/faq/how-datadog-agent-determines-the-hostname"
-  tag: "FAQ"
-  text: "Comment Datadog determine-t-il le hostname de l'Agent?"
-- link: "agent/faq/agent-commands"
-  tag: "FAQ"
-  text: "Liste de toutes les commandes de l'Agent"
+  - link: agent/faq/how-datadog-agent-determines-the-hostname
+    tag: FAQ
+    text: Comment Datadog determine-t-il le hostname de l'Agent?
+  - link: agent/faq/agent-commands
+    tag: FAQ
+    text: Liste de toutes les commandes de l'Agent
 ---
-
 {{< partial name="platforms/platforms.html" >}}
 
 ## Outils de gestion de configurations
@@ -41,13 +40,13 @@ Gérez l'Agent Datadog et ses [intégrations](/integrations) en utilisant des ou
 Les fichiers et dossiers de configuration de l'Agent se trouvent à:
 
 {{% table responsive="true" %}}
-| OS                                                                       | Agent v5                                                                   |  Agent v6                       |
+| OS                                                                       | Agent v5                                                                   |  Agent v6                       |
 | :-------                                                                 | :--------                                                                  | :--------                       |
 | [Mac OS X](/agent/basic_agent_usage/osx)                                 | `~/.datadog-agent/datadog.conf`                                            | `~/.datadog-agent/datadog.yaml` |
 | [Linux](/agent/basic_agent_usage/ubuntu)                                 | `/etc/dd-agent/datadog.conf`                                               | `/etc/datadog-agent/datadog.yaml`                                |
 | [Source](/agent/basic_agent_usage/source)                                | `~/.datadog-agent/agent/datadog.conf`                                      | `/etc/datadog-agent/datadog.yaml`                                |
-| [Windows Server 2008, Vista and newer](/agent/basic_agent_usage/windows) | `\\ProgramData\Datadog\datadog.conf`                                       | `n/a`                                |
-| [Windows Server 2003, XP or older](/agent/basic_agent_usage/windows)     | `\\Documents and Settings\All Users\Application Data\Datadog\datadog.conf` | `n/a`                                |
+| [Windows Server 2008, Vista and newer](/agent/basic_agent_usage/windows) | `\\ProgramData\Datadog\datadog.conf`                                       | `\\ProgramData\Datadog\datadog.yaml` |
+| [Windows Server 2003, XP or older](/agent/basic_agent_usage/windows)     | `\\Documents and Settings\All Users\Application Data\Datadog\datadog.conf` | `n/a` _(unsupported OS)_        |
 {{% /table %}}
 
 ## Emplacement des logs

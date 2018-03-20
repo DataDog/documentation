@@ -6,7 +6,7 @@ external_redirect: /api/#update-monitor-downtime
 ---
 
 ##### Signature
-`PUT /api/v1/downtime/:downtime_id`
+`PUT https://app.datadoghq.com/api/v1/downtime/:downtime_id`
 ##### Exemple de requête
 {{< code-snippets basename="api-monitor-update-downtime" >}}
 ##### Exemple de réponse

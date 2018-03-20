@@ -13,11 +13,11 @@ external_redirect: /api/#create-a-timeboard
 * **`description`** [*optionnel*, *defaut*=**None**]:  
     Une description du contenu du dashboard.
 * **`graphs`** [*optionnel*, *defaut*=**None**]:  
-    Une liste de définitions de graphe. Les définitions de graphe suivent cette forme:
+    Une liste de définitions de graphique. Les définitions de graphique suivent cette forme:
     * **`title`** [*obligatoire*]:  
-        Le nom du graphe.
+        Le nom du graphique.
     * **`definition`** [*optionnel*, *defaut*=**None**]:  
-        La définition du graphe. Exemple:  
+        La définition du graphique. Exemple:  
         `{"requests": [{"q": "system.cpu.idle{*} by {host}"}`
 
 * **`template_variables`** [*optionnel*, *defaut*=**None**]:  

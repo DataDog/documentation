@@ -3,19 +3,18 @@ title: Utilisation basique de l'Agent pour Fedora
 kind: documentation
 platform: Fedora
 aliases:
-    - /fr/guides/basic_agent_usage/fedora/
+  - '/[object Object]/guides/basic_agent_usage/fedora/'
 further_reading:
-- link: "logs/"
-  tag: "Documentation"
-  text: Collectez vos logs
-- link: "graphing/infrastructure/process"
-  tag: "Documentation"
-  text: Collectez vos processus
-- link: "tracing"
-  tag: "Documentation"
-  text: Collectez vos traces
+  - link: logs/
+    tag: Documentation
+    text: Collectez vos logs
+  - link: graphing/infrastructure/process
+    tag: Documentation
+    text: Collectez vos processus
+  - link: tracing
+    tag: Documentation
+    text: Collectez vos traces
 ---
-
 ## Aperçu
 
 Cette page présente les fonctionnalités de base de l'agent Datadog.

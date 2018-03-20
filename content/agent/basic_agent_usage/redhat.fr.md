@@ -3,20 +3,18 @@ title: Utilisation basique de l'Agent pour Red Hat
 kind: documentation
 platform: Red Hat
 aliases:
-    - /fr/guides/basic_agent_usage/redhat/
+  - '/[object Object]/guides/basic_agent_usage/redhat/'
 further_reading:
-- link: "logs/"
-  tag: "Documentation"
-  text: Collectez vos logs
-- link: "graphing/infrastructure/process"
-  tag: "Documentation"
-  text: Collectez vos processus
-- link: "tracing"
-  tag: "Documentation"
-  text: Collectez vos traces
+  - link: logs/
+    tag: Documentation
+    text: Collectez vos logs
+  - link: graphing/infrastructure/process
+    tag: Documentation
+    text: Collectez vos processus
+  - link: tracing
+    tag: Documentation
+    text: Collectez vos traces
 ---
-
-
 ## Commandes
 
 L'Agent Datadog possède quelques commandes. Seules les commandes _lifecycle_ (ie `start`/`stop`/`restart` /`status` sur le service Agent) doivent être exécutées avec `sudo service` /` sudo initctl` / `sudo systemctl`, toutes les autres commandes doivent être exécutées avec la commande `datadog-agent`.
