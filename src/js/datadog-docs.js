@@ -340,6 +340,9 @@ $(document).ready(function () {
                     changePage(1);
                 }
 
+            } else {
+                var content = document.getElementsByClassName('content')[0];
+                content.innerHTML = "0 results";
             }
         });
     }
