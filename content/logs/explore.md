@@ -3,10 +3,10 @@ title: Search & Graph
 kind: documentation
 description: "The Logs Explorer is your Datadog home base for troubleshooting and exploration over your logs."
 further_reading:
-- link: "logs/processing"
+- link: "/logs/processing"
   tag: "Documentation"
   text: Learn how to process your logs
-- link: "logs/parsing"
+- link: "/logs/parsing"
   tag: "Documentation"
   text: Learn more about parsing
 ---

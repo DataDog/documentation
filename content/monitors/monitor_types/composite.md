@@ -5,13 +5,13 @@ aliases:
     - /guides/composite_monitors
 description: "Alert on an expression combining multiple monitors"
 further_reading:
-- link: "monitors/notifications"
+- link: "/monitors/notifications"
   tag: "Documentation"
   text: Configure your monitor notifications
-- link: "monitors/downtimes"
+- link: "/monitors/downtimes"
   tag: "Documentation"
   text: Schedule a dowtime to mute a monitor
-- link: "monitors/faq"
+- link: "/monitors/faq"
   tag: "FAQ"
   text: Monitors FAQ
 ---

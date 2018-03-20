@@ -2,13 +2,13 @@
 title: Getting further with Docker
 kind: faq
 further_reading:
-- link: "agent/"
+- link: "/agent/"
   tag: "Documentation"
   text: Learn more about the Datadog Agent
-- link: "integrations/docker_daemon"
+- link: "/integrations/docker_daemon"
   tag: "Integration"
   text: Learn more about the Datadog-SNMP integration
-- link: "integrations/disk"
+- link: "/integrations/disk"
   tag: "Integration"
   text: Learn more about the Datadog-Disk integration
 ---

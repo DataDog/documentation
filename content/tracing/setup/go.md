@@ -11,7 +11,7 @@ further_reading:
 - link: "https://godoc.org/github.com/DataDog/dd-trace-go/tracer"
   tag: "GoDoc"
   text: Package page
-- link: "tracing/visualization/"
+- link: "/tracing/visualization/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
 ---

@@ -4,10 +4,10 @@ kind: documentation
 aliases:
     - /agent/tagging
 further_reading:
-- link: "getting_started/tagging"
+- link: "/getting_started/tagging"
   tag: "Documentation"
   text: Getting started with tags
-- link: "getting_started/tagging/using_tags"
+- link: "/getting_started/tagging/using_tags"
   tag: "Documentation"
   text: Learn how to use tags in Datadog
 ---

@@ -2,7 +2,7 @@
 title: Common Windows Agent Installation Error 1721
 kind: faq
 further_reading:
-- link: "agent/"
+- link: "/agent/"
   tag: "Documentation"
   text: Learn more about the Datadog Agent
 ---

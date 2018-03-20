@@ -6,13 +6,13 @@ aliases:
     - /account_management/faq/what-are-the-required-ip-s-and-ports-i-need-open-to-connect-to-the-datadog-service
     - /account_management/faq/can-i-whitelist-the-ip-addresses-for-data-coming-from-datadog-via-webhook-and-integrations
 further_reading:
-- link: "logs/"
+- link: "/logs/"
   tag: "Documentation"
   text: Collect your logs
-- link: "graphing/infrastructure/process"
+- link: "/graphing/infrastructure/process"
   tag: "Documentation"
   text: Collect your processes
-- link: "tracing"
+- link: "/tracing"
   tag: "Documentation"
   text: Collect your traces
 ---

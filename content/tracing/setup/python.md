@@ -11,7 +11,7 @@ further_reading:
 - link: "http://pypi.datadoghq.com/trace/docs/"
   tag: "Pypi"
   text: APM (Tracing)
-- link: "tracing/visualization/"
+- link: "/tracing/visualization/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
 ---

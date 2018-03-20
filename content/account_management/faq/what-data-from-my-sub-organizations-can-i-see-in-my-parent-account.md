@@ -2,10 +2,10 @@
 title: What data from my sub-organizations can I see in my parent account?
 kind: faq
 further_reading:
-- link: "account_management/saml"
+- link: "/account_management/saml"
   tag: "Documentation"
   text: Configure SAML for your Datadog account
-- link: "account_management/multi_organization"
+- link: "/account_management/multi_organization"
   tag: "Documentation"
   text: Configuring Teams & Organizations with Multiple Accounts
 ---

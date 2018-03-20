@@ -2,10 +2,10 @@
 title: Using tags
 kind: documentation
 further_reading:
-- link: "getting_started/tagging"
+- link: "/getting_started/tagging"
   tag: "Documentation"
   text: Getting started with tags
-- link: "getting_started/tagging/assigning_tags"
+- link: "/getting_started/tagging/assigning_tags"
   tag: "Documentation"
   text: Learn how to assign tags
 ---

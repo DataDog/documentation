@@ -1,8 +1,0 @@
-ssh_check:
-  - description: Le temps de réponse de SFTP
-    integration: ssh
-    metric_name: sftp.response_time
-    metric_type: gauge
-    orientation: '-1'
-    short_name: response time
-    unit_name: second

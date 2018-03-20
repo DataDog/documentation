@@ -5,11 +5,11 @@
         {{ partial "img.html" (dict "root" $dot "src" "icons/nav_home.png" "class" "static" "alt" "home" "width" "21") }}
         {{ i18n "home" }}
     </a>
-    <a href="{{ "" | absLangURL }}" class="col text-center">
+    <a href="/" class="col text-center">
         {{ partial "img.html" (dict "root" $dot "src" "icons/nav_docs.png" "class" "static" "alt" "docs" "width" "21") }}
         {{ i18n "docs" }}
     </a>
-    <a href="{{ "api/" | absLangURL }}" class="col text-center">
+    <a href="/api/" class="col text-center">
         {{ partial "img.html" (dict "root" $dot "src" "icons/nav_mobile_api.png" "class" "static" "alt" "api" "width" "21") }}
         {{ i18n "api" }}
     </a>
@@ -18,7 +18,7 @@
 <aside class="sidenav">
     <div class="row sticky">
         <div class="col">
-            <a href="{{ "" | absLangURL }}"><h4>{{ i18n "datadog_docs" }}</h4></a>
+            <a href="{{.Site.BaseURL}}"><h4>{{ i18n "datadog_docs" }}</h4></a>
             <form class="sidenav-search" action="{{.Site.BaseURL}}search/">
                 <div class="input-group">
                     <input type="text" class="form-control" name="s" placeholder="Search" aria-label="Search"/>

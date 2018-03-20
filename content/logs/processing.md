@@ -3,13 +3,13 @@ title: Pipelines
 kind: documentation
 description: "Parse & Enrich your logs to create valuable facets & metrics in the Logs Explorer."
 further_reading:
-- link: "logs/parsing"
+- link: "/logs/parsing"
   tag: "Documentation"
   text: Learn more about parsing
-- link: "logs/faq/how-to-investigate-a-log-parsing-issue"
+- link: "/logs/faq/how-to-investigate-a-log-parsing-issue"
   tag: "FAQ"
   text: How to investigate a log parsing issue?
-- link: "logs/faq/log-parsing-best-practice"
+- link: "/logs/faq/log-parsing-best-practice"
   tag: "FAQ"
   text: Log Parsing - Best Practice
 ---

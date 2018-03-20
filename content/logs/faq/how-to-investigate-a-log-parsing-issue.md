@@ -2,13 +2,13 @@
 title: How to investigate a log parsing issue
 kind: faq
 further_reading:
-- link: "logs/faq/log-parsing-best-practice"
+- link: "/logs/faq/log-parsing-best-practice"
   tag: "FAQ"
   text: Log Parsing - Best Practice
-- link: "logs/processing"
+- link: "/logs/processing"
   tag: "Documentation"
   text: Learn how to process your logs
-- link: "logs/parsing"
+- link: "/logs/parsing"
   tag: "Documentation"
   text: Learn more about parsing
 ---

@@ -4,7 +4,7 @@ kind: documentation
 aliases:
   - /guides/saml
 further_reading:
-- link: "account_management/multi_organization"
+- link: "/account_management/multi_organization"
   tag: "Documentation"
   text: Configuring Teams & Organizations with Multiple Accounts
 ---
