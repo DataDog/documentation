@@ -1,4 +1,6 @@
 ---
+aliases:
+- /integrations/systemcore
 categories:
 - os & system
 ddtype: check

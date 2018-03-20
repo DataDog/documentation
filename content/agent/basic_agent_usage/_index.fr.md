@@ -1,6 +1,10 @@
 ---
 title: Utilisation de base de l'Agent
 kind: documentation
+aliases:
+    - /guides/basic_agent_usage/
+    - /agent/faq/where-is-the-configuration-file-for-the-agent/
+    - /agent/faq/log-location
 further_reading:
 - link: "/agent/faq/how-datadog-agent-determines-the-hostname"
   tag: "FAQ"

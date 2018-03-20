@@ -1,2 +1,4 @@
 ---
+aliases:
+  - /videos/datadog emails/
 ---
