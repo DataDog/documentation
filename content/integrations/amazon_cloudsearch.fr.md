@@ -1,14 +1,16 @@
 ---
 aliases:
-- /fr/integrations/awscloudsearch/
+  - '/[object Object]/integrations/awscloudsearch/'
 categories:
-- cloud
-- processing
-- search
-- aws
+  - cloud
+  - processing
+  - search
+  - aws
 ddtype: crawler
-description: Suivez l'utilisation de vos index, le nombre de requêtes réussies et plus encore.
-doc_link: https://docs.datadoghq.com/integrations/awscloudsearch/
+description: >-
+  Suivez l'utilisation de vos index, le nombre de requêtes réussies et plus
+  encore.
+doc_link: 'https://docs.datadoghq.com/integrations/awscloudsearch/'
 git_integration_title: amazon_cloudsearch
 has_logo: true
 integration_title: AWS CloudSearch
@@ -17,10 +19,11 @@ kind: integration
 manifest_version: '1.0'
 name: amazon_cloudsearch
 public_title: Intégration Datadog-AWS CloudSearch
-short_description: Suivez l'utilisation de vos index, le nombre de requêtes réussies et plus encore.
+short_description: >-
+  Suivez l'utilisation de vos index, le nombre de requêtes réussies et plus
+  encore.
 version: '1.0'
 ---
-
 ## Aperçu
 
 Amazon CloudSearch est un service managé du cloud AWS qui rend facile et rentable l'implémentation d'une solution scalable de recherche.

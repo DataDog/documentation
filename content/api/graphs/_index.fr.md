@@ -1,4 +1,4 @@
 ---
-title: Graphes
+title: Graphiques
 external_redirect: /api/
 ---

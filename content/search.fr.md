@@ -1,5 +1,5 @@
 ---
-title: Résultat de la recherche
+title: Résultats de la recherche
 kind: search
 disable_toc: true
 ---

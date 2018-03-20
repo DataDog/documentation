@@ -2,21 +2,24 @@
 title: Trafic réseau
 kind: documentation
 aliases:
-    - /fr/agent/proxy
-    - /fr/account_management/faq/what-are-the-required-ip-s-and-ports-i-need-open-to-connect-to-the-datadog-service
-    - /fr/account_management/faq/can-i-whitelist-the-ip-addresses-for-data-coming-from-datadog-via-webhook-and-integrations
+  - '/[object Object]/agent/proxy'
+  - >-
+    /[object
+    Object]/account_management/faq/what-are-the-required-ip-s-and-ports-i-need-open-to-connect-to-the-datadog-service
+  - >-
+    /[object
+    Object]/account_management/faq/can-i-whitelist-the-ip-addresses-for-data-coming-from-datadog-via-webhook-and-integrations
 further_reading:
-- link: "logs/"
-  tag: "Documentation"
-  text: Collectez vos logs
-- link: "graphing/infrastructure/process"
-  tag: "Documentation"
-  text: Collectez vos processus
-- link: "tracing"
-  tag: "Documentation"
-  text: Collectez vos traces
+  - link: logs/
+    tag: Documentation
+    text: Collectez vos logs
+  - link: graphing/infrastructure/process
+    tag: Documentation
+    text: Collectez vos processus
+  - link: tracing
+    tag: Documentation
+    text: Collectez vos traces
 ---
-
 ## Sécurité réseau
 
 1. **Le trafic est toujours initié par l'Agent vers Datadog. Aucune session n'est jamais initiée depuis Datadog vers l'Agent.**

@@ -6,7 +6,7 @@ external_redirect: /api/#get-all-monitor-downtimes
 ---
 
 ##### Signature
-`GET /api/v1/downtime`
+`GET https://app.datadoghq.com/api/v1/downtime`
 ##### Exemple de requête
 {{< code-snippets basename="api-monitor-get-downtimes" >}}
 ##### Exemple de réponse

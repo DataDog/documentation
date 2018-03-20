@@ -1,9 +1,9 @@
 ---
-title: Graphes
+title: Graphiques
 type: apicontent
 order: 11
 external_redirect: /api/#graphs
 ---
-## Graphes
-Prenez des snapshots de [graphes](/graphing/) en utilisant l'API.
+## Graphiques
+Prenez des snapshots de [graphiques](/graphing/) en utilisant l'API.
 
