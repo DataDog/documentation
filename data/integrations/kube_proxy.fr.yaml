@@ -1,0 +1,42 @@
+kube_proxy:
+  - description: Total du temps CPU utilisateur et system.
+    integration: kube_proxy
+    metric_name: kubeproxy.cpu.time
+    metric_type: gauge
+    orientation: '0'
+    short_name: cpu time
+    unit_name: second
+  - description: Taille de la mémoire du résident en octets.
+    integration: kube_proxy
+    metric_name: kubeproxy.mem.resident
+    metric_type: gauge
+    orientation: '0'
+    short_name: resident memory
+    unit_name: byte
+  - description: Taille de la mémoire virtuelle en octets.
+    integration: kube_proxy
+    metric_name: kubeproxy.mem.virtual
+    metric_type: gauge
+    orientation: '0'
+    short_name: virtual memory
+    unit_name: byte
+  - description: Nombre de requêtes HTTP partitionnées par leurcode d'état et host.
+    integration: kube_proxy
+    metric_name: kubeproxy.client.http.requests
+    metric_type: gauge
+    orientation: '0'
+    short_name: http request
+    unit_name: request
+  - description: Latence courrante de SyncProxyRules
+    integration: kube_proxy
+    metric_name: kubeproxy.sync_rules.latency.count
+    metric_type: gauge
+    orientation: '0'
+    short_name: rules sync latency count
+  - description: Somme des latence de SyncProxyRules
+    integration: kube_proxy
+    metric_name: kubeproxy.sync_rules.latency.sum
+    metric_type: gauge
+    orientation: '0'
+    short_name: rules sync latency sum
+    unit_name: microsecond

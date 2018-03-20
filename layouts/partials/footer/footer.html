@@ -3,7 +3,11 @@
 <!-- get lang specific data file -->
 {{ $.Scratch.Set "data" "" }}
 {{ if ne $dot.Page.Lang "en"}}
-    {{ $.Scratch.Set "data" (index $dot.Page.Site.Data.partials (print "footer." $dot.Page.Lang)) }}
+    {{ if (fileExists (print "data/partials/footer." $dot.Page.Lang ".yaml")) }}
+      {{ $.Scratch.Set "data" (index $dot.Page.Site.Data.partials (print "footer." $dot.Page.Lang)) }}
+    {{ else }}
+      {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.footer }}
+    {{ end }}
 {{ else }}
     {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.footer }}
 {{ end }}
@@ -26,14 +30,14 @@
                     <div class="col-6">
                         <ul class="list-unstyled">
                             {{ range $datafile.col1 }}
-                                <li><a href="{{ if in .link "http"}}{{ .link }}{{ else }}{{.Site.BaseURL}}/{{ .link }}{{ end }}">{{ .title }}</a></li>
+                                <li><a href="{{ if in .link "http"}}{{ .link }}{{ else }}{{ .link | absLangURL }}{{ end }}">{{ .title }}</a></li>
                             {{ end }}
                         </ul>
                     </div>
                     <div class="col-6">
                         <ul class="list-unstyled">
                             {{ range $datafile.col2 }}
-                                <li><a href="{{ if in .link "http"}}{{ .link }}{{ else }}{{.Site.BaseURL}}/{{ .link }}{{ end }}">{{ .title }}</a></li>
+                                <li><a href="{{ if in .link "http"}}{{ .link }}{{ else }}{{ .link | absLangURL }}{{ end }}">{{ .title }}</a></li>
                             {{ end }}
                         </ul>
                     </div>
@@ -45,7 +49,7 @@
                         <p>About</p>
                         <ul class="list-unstyled">
                             {{ range $datafile.col3 }}
-                                <li><a href="{{ if in .link "http"}}{{ .link }}{{ else }}{{.Site.BaseURL}}/{{ .link }}{{ end }}">{{ .title }}</a></li>
+                                <li><a href="{{ if in .link "http"}}{{ .link }}{{ else }}{{ .link | absLangURL }}{{ end }}">{{ .title }}</a></li>
                             {{ end }}
                         </ul>
                     </div>
@@ -53,7 +57,7 @@
                         <p>Social</p>
                         <ul class="list-unstyled">
                             {{ range $datafile.col4 }}
-                                <li><a href="{{ if in .link "http"}}{{ .link }}{{ else }}{{.Site.BaseURL}}/{{ .link }}{{ end }}">{{ .title }}</a></li>
+                                <li><a href="{{ if in .link "http"}}{{ .link }}{{ else }}{{ .link | absLangURL }}{{ end }}">{{ .title }}</a></li>
                             {{ end }}
                         </ul>
                     </div>

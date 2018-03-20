@@ -1,0 +1,55 @@
+kube_dns:
+  - description: Taille de la réponse en octets.
+    integration: kube_dns
+    metric_name: kubedns.response_size.bytes.sum
+    metric_type: gauge
+    orientation: '0'
+    short_name: response size sum
+    unit_name: byte
+  - description: >-
+      Nombre de réponses sur lesquelles la métrique
+      kubedns.response_size.bytes.sum est évaluée.
+    integration: kube_dns
+    metric_name: kubedns.response_size.bytes.count
+    metric_type: gauge
+    orientation: '0'
+    short_name: response size sample count
+    unit_name: réponse
+  - description: Temps (en secondes) que chaque requête a pris pour résoudre.
+    integration: kube_dns
+    metric_name: kubedns.request_duration.seconds.sum
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: second
+    short_name: request duration time
+    unit_name: second
+  - description: >-
+      Nombre de requêtes sur lesquelles la métrique
+      kubedns.request_duration.seconds.sum est évaluée.
+    integration: kube_dns
+    metric_name: kubedns.request_duration.seconds.count
+    metric_type: gauge
+    orientation: '0'
+    short_name: request duration sample
+    unit_name: request
+  - description: Nombre de requêtes DNS effectuées.
+    integration: kube_dns
+    metric_name: kubedns.request_count
+    metric_type: gauge
+    orientation: '0'
+    short_name: total requests
+    unit_name: request
+  - description: Nombre de requêtes DNS entraînant une erreur
+    integration: kube_dns
+    metric_name: kubedns.error_count
+    metric_type: gauge
+    orientation: '-1'
+    short_name: requests errors
+    unit_name: error
+  - description: Nombre de requêtes DNS entraînant un cache miss.
+    integration: kube_dns
+    metric_name: kubedns.cachemiss_count
+    metric_type: gauge
+    orientation: '-1'
+    short_name: cache miss
+    unit_name: request

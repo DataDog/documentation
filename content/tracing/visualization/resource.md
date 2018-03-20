@@ -2,16 +2,16 @@
 title: Resource page
 kind: Documentation
 further_reading:
-- link: "/tracing/setup/"
+- link: "tracing/setup/"
   tag: "Documentation"
   text: Learn how to setup APM tracing with your application
-- link: "/tracing/visualization/services_list/"
+- link: "tracing/visualization/services_list/"
   tag: "Documentation"
   text: Discover the list of services reporting to Datadog
-- link: "/tracing/visualization/service"
+- link: "tracing/visualization/service"
   tag: "Documentation"
   text: Learn more about services in Datadog
-- link: "/tracing/visualization/trace"
+- link: "tracing/visualization/trace"
   tag: "Documentation"
   text: Understand how to read a Datadog Trace
 ---
