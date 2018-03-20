@@ -1,7 +1,7 @@
 <aside class="sidenav sidenav-api">
     <div class="row sticky">
         <div class="col">
-            <a href="{{.Site.BaseURL}}"><h4>Datadog API</h4></a>
+            <a href="{{ "" | absLangURL }}"><h4>{{ i18n "datadog_api" }}</h4></a>
             <div class="sidenav-nav">
                 <ul class="list-unstyled">
                     {{ range $index, $element := sort (where .Site.Pages "Type" "=" "apicontent") "Params.order" }}

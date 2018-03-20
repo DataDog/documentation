@@ -1,0 +1,766 @@
+gunicorn:
+  - description: Le vitesse d'évolution de requêtes reçues.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.requests
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: requests
+    unit_name: request
+  - description: Le nombre de workers taggé par état (idle ou working).
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.workers
+    metric_type: gauge
+    orientation: '0'
+    short_name: workers
+    unit_name: worker
+  - description: Le 95th percentile de la durée d'un requête.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.duration.95percentile
+    metric_type: gauge
+    orientation: '-1'
+    short_name: 95th pct req time
+    unit_name: millisecond
+  - description: La durée moyenne d'une requête.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.duration.avg
+    metric_type: gauge
+    orientation: '-1'
+    short_name: avg req time
+    unit_name: millisecond
+  - description: Le vitesse d'évolution de requêtes reçues.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.duration.count
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: req count
+    unit_name: request
+  - description: La durée maximum d'un requête.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.duration.max
+    metric_type: gauge
+    orientation: '-1'
+    short_name: max req time
+    unit_name: millisecond
+  - description: La durée médiane d'une requête.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.duration.median
+    metric_type: gauge
+    orientation: '-1'
+    short_name: median req time
+    unit_name: millisecond
+  - description: La fréquence des événements critical loggés.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.log.critical
+    metric_type: rate
+    orientation: '-1'
+    per_unit_name: second
+    short_name: critical logs
+    unit_name: occurrence
+  - description: La fréquence des errors loggées.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.log.error
+    metric_type: rate
+    orientation: '-1'
+    per_unit_name: second
+    short_name: error logs
+    unit_name: occurrence
+  - description: La fréquence des warnings loggées.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.log.warning
+    metric_type: rate
+    orientation: '-1'
+    per_unit_name: second
+    short_name: warning logs
+    unit_name: occurrence
+  - description: La fréquence des exceptions loggées.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.log.exception
+    metric_type: rate
+    orientation: '-1'
+    per_unit_name: second
+    short_name: exception logs
+    unit_name: occurrence
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      100.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.100
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '100'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      101.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.101
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '101'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      102.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.102
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '102'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      200.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.200
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '200'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      201.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.201
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '201'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      202.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.202
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '202'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      203.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.203
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '203'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      204.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.204
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '204'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      205.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.205
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '205'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      206.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.206
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '206'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      207.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.207
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '207'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      208.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.208
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '208'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      226.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.226
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '226'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      300.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.300
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '300'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      301.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.301
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '301'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      302.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.302
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '302'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      303.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.303
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '303'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      304.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.304
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '304'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      305.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.305
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '305'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      307.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.307
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '307'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      308.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.308
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '308'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      400.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.400
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '400'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      401.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.401
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '401'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      402.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.402
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '402'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      403.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.403
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '403'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      404.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.404
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '404'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      405.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.405
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '405'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      406.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.406
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '406'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      407.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.407
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '407'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      408.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.408
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '408'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      409.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.409
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '409'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      410.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.410
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '410'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      411.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.411
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '411'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      412.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.412
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '412'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      413.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.413
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '413'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      414.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.414
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '414'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      415.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.415
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '415'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      416.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.416
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '416'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      417.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.417
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '417'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      419.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.419
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '419'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      421.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.421
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '421'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      422.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.422
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '422'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      423.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.423
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '423'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      424.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.424
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '424'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      426.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.426
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '426'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      428.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.428
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '428'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      429.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.429
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '429'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      431.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.431
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '431'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      451.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.451
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '451'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      500.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.500
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '500'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      501.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.501
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '501'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      502.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.502
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '502'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      503.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.503
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '503'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      504.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.504
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '504'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      505.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.505
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '505'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      506.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.506
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '506'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      507.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.507
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '507'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      508.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.508
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '508'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      510.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.510
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '510'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      511.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.511
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '511'
+    unit_name: request
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      512.
+    integration: gunicorn
+    interval: '10'
+    metric_name: gunicorn.request.status.512
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '512'
+    unit_name: request

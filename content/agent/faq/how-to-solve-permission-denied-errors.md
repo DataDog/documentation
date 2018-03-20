@@ -2,7 +2,7 @@
 title: How to solve Permission denied errors?
 kind: faq
 further_reading:
-- link: "/agent/"
+- link: "agent/"
   tag: "Documentation"
   text: Learn more about the Datadog Agent
 ---
