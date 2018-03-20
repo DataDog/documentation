@@ -56,8 +56,8 @@ def create_placeholder_file(template, new_glob):
         new_content = content
         if new_yml.get('aliases', None):
             new_aliases = []
-            #for alias in new_yml.get('aliases'):
-            #    new_aliases.append('/{0}{1}'.format(new_glob['name'], alias))
+            for alias in new_yml.get('aliases'):
+                new_aliases.append('/{0}{1}'.format(new_glob['name'], alias))
             new_yml['aliases'] = new_aliases
         if new_glob["disclaimer"]:
             disclaimer = "<div class='alert alert-info'><strong>NOTICE:</strong>%s</div>\n\n" % new_glob["disclaimer"]
