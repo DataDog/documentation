@@ -3,13 +3,13 @@ title: Monitor d'événements
 kind: documentation
 description: "Monitorez les événements collectés par Datadog"
 further_reading:
-- link: "/monitors/notifications"
+- link: "monitors/notifications"
   tag: "Documentation"
   text: Configurez les notifications de votre monitor
-- link: "/monitors/downtimes"
+- link: "monitors/downtimes"
   tag: "Documentation"
   text: Planifiez un downtime pour désactiver un monitor
-- link: "/monitors/faq"
+- link: "monitors/faq"
   tag: "FAQ"
   text: FAQ monitors
 ---

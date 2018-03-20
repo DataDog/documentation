@@ -6,6 +6,6 @@
     {{ else }}
         {{ $.Scratch.Set "redurl" (.Params.external_redirect | absLangURL) }}
     {{ end }}
-{{ end}}
+{{ end }}
 {{ $redurl := $.Scratch.Get "redurl" }}
 <meta http-equiv="refresh" content="0;url={{ $redurl }}">

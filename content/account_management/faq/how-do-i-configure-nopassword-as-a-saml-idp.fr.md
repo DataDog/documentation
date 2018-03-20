@@ -2,10 +2,10 @@
 title: Comment configurer NoPassword comme un SAML IdP?
 kind: faq
 further_reading:
-- link: "/account_management/saml"
+- link: "account_management/saml"
   tag: "Documentation"
   text: Configurez SAML pour votre compte Datadog
-- link: "/account_management/multi_organization"
+- link: "account_management/multi_organization"
   tag: "Documentation"
   text: Configurez vos Teams et Organisations avec plusieurs comptes
 ---
