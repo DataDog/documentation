@@ -70,7 +70,7 @@ There are several ways to specify an environment when reporting data:
   * **Java**:  
       Via sysprop: 
       ```
-      -Ddd.trace.span.tags=”env:prod”
+      -dd.trace.span.tags=”env:prod”
       ```
       Via env var:
       ```
