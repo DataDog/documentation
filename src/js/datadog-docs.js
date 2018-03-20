@@ -88,9 +88,15 @@ $(document).ready(function () {
         var query = "";
         try {query = results[1];} catch (e) {}
 
+        // get indexname by language
+        var indexName = "docs_english";
+        if(window.location.pathname.indexOf("/fr/") > -1) {
+            indexName = "docs_french";
+        }
+
         // get results from algolia
         client.search([{
-            indexName: 'docs_english',
+            indexName: indexName,
             query: decodeURIComponent(query),
             params: {
                 hitsPerPage: 200,
