@@ -78,7 +78,7 @@ Edit your `logback.xml` file:
       <file> ~/logs/log-${byDay}.log </file>
       <append>true</append>
       <encoder>
-          <Pattern>%d{yyyy-MM-dd_HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+          <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
         </encoder>
    </appender>
 (....)
@@ -93,11 +93,8 @@ Edit your `logback.xml` file:
 Create a file `java.yaml` in the Agent's `conf.d/` directory with the following content:
 
 ```yaml
-init_config:
 
-instances:
-    
-##Log section
+#Log section
 logs:
 
     ## - type : file (mandatory) type of log input source (tcp / udp / file)
