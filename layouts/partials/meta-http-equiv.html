@@ -1,4 +1,4 @@
-{{ if in .Params.external_redirect "http"}}
+{{ if eq (substr .Params.external_redirect 0 4) "http"}}
     {{ $.Scratch.Set "redurl" .Params.external_redirect}}
 {{ else }}
     {{ if eq (substr .Params.external_redirect 0 1) "/"}}

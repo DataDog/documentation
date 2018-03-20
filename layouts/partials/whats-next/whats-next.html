@@ -3,7 +3,7 @@
     <p>{{ i18n "additional_sentence" }}:</p>
     <ul class="list-group">
         {{ range $dot.Page.Params.further_reading }}
-            {{ if in .link "http"}}
+            {{ if eq (substr .link 0 4) "http"}}
                 {{ $.Scratch.Set "link" .link}}
             {{ else }}
                 {{ if eq (substr .link 0 1) "/"}}
