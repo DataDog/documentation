@@ -3,7 +3,7 @@ title: Utilisation basique de l'Agent pour SUSE
 kind: documentation
 platform: SUSE
 aliases:
-    - /guides/basic_agent_usage/suse/
+    - /fr/guides/basic_agent_usage/suse/
 further_reading:
 - link: "logs/"
   tag: "Documentation"

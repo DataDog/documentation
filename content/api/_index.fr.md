@@ -1,5 +1,5 @@
 ---
 title: API
 aliases:
-    - /tracing/api/
+    - /fr/tracing/api/
 ---

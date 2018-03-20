@@ -3,7 +3,7 @@ title: Utilisation basique de l'Agent pour l'installation source
 kind: documentation
 platform: Source
 aliases:
-    - /guides/basic_agent_usage/source/
+    - /fr/guides/basic_agent_usage/source/
 further_reading:
 - link: "logs/"
   tag: "Documentation"

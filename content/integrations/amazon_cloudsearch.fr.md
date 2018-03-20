@@ -1,6 +1,6 @@
 ---
 aliases:
-- /integrations/awscloudsearch/
+- /fr/integrations/awscloudsearch/
 categories:
 - cloud
 - processing

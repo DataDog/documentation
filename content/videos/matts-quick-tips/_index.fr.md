@@ -1,4 +1,4 @@
 ---
 aliases:
-  - /videos/matts quick tips/
+  - /fr/videos/matts quick tips/
 ---

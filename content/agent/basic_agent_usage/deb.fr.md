@@ -2,8 +2,8 @@
 title: Utilisation basique de l'Agent pour Debian
 kind: documentation
 aliases:
-    - /guides/basic_agent_usage/deb/
-    - /agent/basic_agent_usage/install_debian_5/
+    - /fr/guides/basic_agent_usage/deb/
+    - /fr/agent/basic_agent_usage/install_debian_5/
 further_reading:
 - link: "logs/"
   tag: "Documentation"

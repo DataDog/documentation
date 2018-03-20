@@ -1,6 +1,6 @@
 ---
 aliases:
-- /integrations/systemcore
+- /fr/integrations/systemcore
 categories:
 - os & system
 ddtype: check

@@ -3,7 +3,7 @@ title: Utilisation basique de l'Agent pour Ubuntu
 kind: documentation
 platform: Ubuntu
 aliases:
-    - /guides/basic_agent_usage/ubuntu/
+    - /fr/guides/basic_agent_usage/ubuntu/
 further_reading:
 - link: "logs/"
   tag: "Documentation"

@@ -1,4 +1,4 @@
 ---
 aliases:
-  - /videos/datadog emails/
+  - /fr/videos/datadog emails/
 ---

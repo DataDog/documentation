@@ -1,4 +1,4 @@
 ---
 aliases:
-  - /videos/datadog 101/
+  - /fr/videos/datadog 101/
 ---
