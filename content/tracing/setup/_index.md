@@ -1,5 +1,5 @@
 ---
-title: Setup APM
+title: APM Setup
 kind: Documentation
 aliases:
   - /tracing/languages/
