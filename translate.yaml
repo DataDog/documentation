@@ -4,7 +4,7 @@ enabled_send: true
 enabled_receive: true
 transifex:
   org: 'datadog'
-  project_slug: 'documentation-poc'
+  project_slug: 'documentation_loc'
   user: 'api'
 sources:
 - src: "content/**/*.md"
