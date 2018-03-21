@@ -67,7 +67,7 @@ languages:
           url: "agent/"
           pre: "nav_agent"
           weight: 40
-        
+
         ## Basic agent usage
         - identifier: customnav_agentnav_basic_usage
           name: "Basic Agent Usage"
@@ -134,7 +134,7 @@ languages:
           url: "agent/basic_agent_usage/source/"
           weight: 165
           parent: customnav_agentnav_basic_usage
-        
+
 
         - identifier: autodiscovery
           name: "Autodiscovery"
@@ -173,7 +173,7 @@ languages:
           url: "agent/troubleshooting/"
           weight: 60
           parent: menu_references_agent
-        
+
         #- identifier: customnav_agentnav_faq
         #  name: "FAQ"
         #  url: "agent/faq/"
@@ -388,7 +388,7 @@ languages:
           weight: 80
         # TRACING/APM - Subnav start
         - identifier: customnav_tracingnav_setup
-          name: "Setup APM"
+          name: "APM setup"
           url: "tracing/setup/"
           weight: 10
           parent: menu_references_tracing
@@ -423,8 +423,8 @@ languages:
           url: "tracing/setup/ruby/"
           weight: 160
           parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_librairies
-          name: "Community Librairies"
+        - identifier: customnav_tracingnav_libraries
+          name: "Community Libraries"
           url: "libraries/#apm-tracing-client-libraries"
           weight: 170
           parent: customnav_tracingnav_setup
@@ -468,7 +468,7 @@ languages:
           weight: 410
           parent: menu_references_tracing
 
-        
+
 
         # Getting further
         - identifier: customnav_tracingnav_getting_further
@@ -506,7 +506,7 @@ languages:
           url: "tracing/getting_further/trace_sampling_and_storage"
           weight: 460
           parent: customnav_tracingnav_getting_further
-        
+
         #- identifier: customnav_tracingnav_faq
         #  name: "FAQ"
         #  url: "tracing/faq/"
