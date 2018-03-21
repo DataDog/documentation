@@ -4,22 +4,33 @@
     {{ range $index, $element := .data }}
         {{ $.Scratch.Set "el_url" "" }}
         {{ if ne $ctx.Site.Language.Lang "en" }}
-            {{ $ctx.Scratch.Set "el_url" (print "/" $ctx.Site.Language.Lang "/" $element.URL) }}
+            {{ if eq (substr $element.URL 0 -1) "/" }}
+                {{ $ctx.Scratch.Set "el_url" (print "/" $ctx.Site.Language.Lang "/" $element.URL) }}
+            {{ else }}
+                {{ $ctx.Scratch.Set "el_url" (print "/" $ctx.Site.Language.Lang "/" $element.URL "/") }}
+            {{ end }}
             {{ $ctx.Scratch.Set "split_urls" (split $ctx.RelPermalink "/")}}
             {{ $ctx.Scratch.Set "url_first" (print "/" (index ($ctx.Scratch.Get "split_urls") 1) "/" (index ($ctx.Scratch.Get "split_urls") 2) "/" )}}
             {{ $ctx.Scratch.Set "url_first_second" (print ($ctx.Scratch.Get "url_first") (index ($ctx.Scratch.Get "split_urls") 3) "/" )}}
+            {{ $ctx.Scratch.Set "url_first_second_third" (print ($ctx.Scratch.Get "url_first_second") (index ($ctx.Scratch.Get "split_urls") 4) "/" )}}
         {{ else }}
-            {{ $ctx.Scratch.Set "el_url" (print "/" $element.URL) }}
+            {{ if eq (substr $element.URL -1 1) "/" }}
+                {{ $ctx.Scratch.Set "el_url" (print "/" $element.URL) }}
+            {{ else }}
+                {{ $ctx.Scratch.Set "el_url" (print "/" $element.URL "/") }}
+            {{ end }}
             {{ $ctx.Scratch.Set "split_urls" (split $ctx.RelPermalink "/")}}
             {{ $ctx.Scratch.Set "url_first" (print "/" (index ($ctx.Scratch.Get "split_urls") 1) "/")}}
             {{ $ctx.Scratch.Set "url_first_second" (print ($ctx.Scratch.Get "url_first") (index ($ctx.Scratch.Get "split_urls") 2) "/")}}
+            {{ $ctx.Scratch.Set "url_first_second_third" (print ($ctx.Scratch.Get "url_first_second") (index ($ctx.Scratch.Get "split_urls") 3) "/" )}}
         {{ end }}
         {{ $el_url := ($ctx.Scratch.Get "el_url") }}
         {{ $url_first := ($ctx.Scratch.Get "url_first") }}
         {{ $url_first_second := ($ctx.Scratch.Get "url_first_second") }}
+        {{ $url_first_second_third := ($ctx.Scratch.Get "url_first_second_third") }}
         <!-- if url matches then active link or if second part in url and no children --->
         {{ $active_page := (or (eq $ctx.RelPermalink $el_url) (and (eq $url_first_second $el_url) (not $element.Children)) (and (eq $url_first "/integrations/") (eq $el_url "/integrations/") ) ) }}
-        {{ $open_parent := (or (and (eq $url_first $el_url) (ne $el_url "/")) (eq $url_first_second $el_url) $active_page) }}
+        {{ $open_parent := (or (and (eq $url_first $el_url) (ne $el_url "/")) (eq $url_first_second $el_url) (eq $url_first_second_third $el_url) $active_page) }}
         <li class="{{if $open_parent }}open{{ end }}">
             <a href="{{ $element.URL | absLangURL }}" {{if $active_page }}class="active"{{ end }}>
                 {{ if $element.Pre }}{{- partial "img.html" (dict "root" $ctx "src" (print "icons/" ($element.Pre) ".png") "class" "static" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21") -}}{{- partial "img.html" (dict "root" $ctx "src" (print "icons/" ($element.Pre) "_p.png") "class" "hover" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21" "disable_lazy" "true") -}}{{ end }} <span>{{ $element.Name }}</span>
