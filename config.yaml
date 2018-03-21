@@ -388,13 +388,8 @@ languages:
           weight: 80
         # TRACING/APM - Subnav start
         - identifier: customnav_tracingnav_setup
-<<<<<<< HEAD
           name: "Set up APM"
           url: "/tracing/setup/"
-=======
-          name: "Setup APM"
-          url: "tracing/setup/"
->>>>>>> master
           weight: 10
           parent: menu_references_tracing
           # Setup -subnav
@@ -428,15 +423,9 @@ languages:
           url: "tracing/setup/ruby/"
           weight: 160
           parent: customnav_tracingnav_setup
-<<<<<<< HEAD
         - identifier: customnav_tracingnav_libraries
           name: "Community Libraries"
           url: "/libraries/#apm-tracing-client-libraries"
-=======
-        - identifier: customnav_tracingnav_librairies
-          name: "Community Librairies"
-          url: "libraries/#apm-tracing-client-libraries"
->>>>>>> master
           weight: 170
           parent: customnav_tracingnav_setup
 
