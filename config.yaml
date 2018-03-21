@@ -700,7 +700,7 @@ languages:
           pre: "nav_help"
           weight: 140
   fr:
-    disclaimer: "Cette page n'est pas encore disponible en Français, nous travaillons actuellement sur sa traduction. Si vous avez des questions ou des retours sur ce projet de traduction, <a href=\"https://docs.datadoghq.com/fr/help/\">contactez-nous!</a>"
+    disclaimer: "Cette page n'est pas encore disponible en Français, nous travaillons actuellement sur sa traduction.<br> Si vous avez des questions ou des retours sur ce projet de traduction, <a href=\"https://docs.datadoghq.com/fr/help/\">contactez-nous!</a>"
     weight: 0
     menu:
       # Home Page
