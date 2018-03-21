@@ -14,11 +14,11 @@ external_redirect: /api/#update-a-timeboard
 * **`description`** [*optionnel*]:  
     Une description du contenu du dashboard.
 * **`graphs`** [*optionnel*]:  
-  Une liste de définitions de graphe. Les définitions de graphe suivent cette forme:
+    Une liste de définitions de graphique. Les définitions de graphique suivent cette forme:
     * **`title`** [*obligatoire*]:  
-        Le nom du graphe.
+        Le nom du graphique.
     * **`definition`** [*obligatoire*]:  
-    La définition du graphe Lisez le [Guide du graphe](/graphing/) pour en savoir plus sur les graphe. Exemple:
+    La définition du graphique. Lisez le [Guide du graphique](/graphing/) pour en savoir plus sur les graphique. Exemple:
     `{"requests": [{"q": "system.cpu.idle{*} by {host}"}`
 
 * **`template_variables`** [*optionnel*, *defaut*=**None**]:  

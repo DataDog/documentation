@@ -6,7 +6,7 @@ external_redirect: /api/#mute-a-host
 ---
 
 ##### Signature
-`POST /api/v1/host/:hostname/mute`
+`POST https://app.datadoghq.com/api/v1/host/:hostname/mute`
 ##### Exemple de requête
 {{< code-snippets basename="api-host-mute" >}}
 ##### Exemple de réponse

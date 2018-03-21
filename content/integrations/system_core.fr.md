@@ -1,10 +1,10 @@
 ---
 aliases:
-- /fr/integrations/systemcore
+  - /fr/integrations/systemcore
 categories:
-- os & system
+  - os & system
 ddtype: check
-doc_link: https://docs.datadoghq.com/integrations/system_core/
+doc_link: 'https://docs.datadoghq.com/integrations/system_core/'
 git_integration_title: system_core
 guid: e123ef26-81bb-4c1b-b079-4dd4cc7d7ae7
 has_logo: true
@@ -20,13 +20,11 @@ public_title: Intégration Datadog-System Core
 short_description: Collecter le nombre de cœurs de CPU et les temps CPU sur un host
 support: core
 supported_os:
-- linux
-- mac_os
-- windows
+  - linux
+  - mac_os
+  - windows
 version: 1.0.0
 ---
-
-
 {{< img src="integrations/systemcore/syscoredash.png" alt="System Core" responsive="true" popup="true">}}
 ## Aperçu
 
@@ -91,4 +89,3 @@ Besoin d'aide? Contactez  [l'équipe support de Datadog](http://docs.datadoghq.c
 
 ## En apprendre plus
 Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog](https://www.datadoghq.com/blog/)
-
