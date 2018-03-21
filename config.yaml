@@ -840,7 +840,7 @@ languages:
           weight: 60
           parent: menu_references_agent
         - identifier: custom_python_package
-          name: "Ajout de paquets Python"
+          name: "Ajouter des package Python"
           url: "agent/custom_python_package"
           weight: 70
           parent: menu_references_agent
@@ -939,7 +939,7 @@ languages:
           weight: 810
           parent: customnav_graphingnav_miscellaneous
         - identifier: customnav_graphingnav_graphingjson
-          name: "Graphing Primer"
+          name: "Graphiques JSON"
           url: "graphing/miscellaneous/graphingjson/"
           weight: 820
           parent: customnav_graphingnav_miscellaneous
@@ -1036,7 +1036,7 @@ languages:
           weight: 130
           parent: menu_references_monitoring
         - identifier: customnav_monitornav_check_summary
-          name: "Sommaire des Check"
+          name: "Sommaire des Checks"
           url: "monitors/check_summary/"
           weight: 140
           parent: menu_references_monitoring
