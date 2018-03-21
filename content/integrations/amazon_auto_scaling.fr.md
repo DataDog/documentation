@@ -1,14 +1,14 @@
 ---
 aliases:
-- /fr/integrations/awsautoscaling/
+  - /fr/integrations/awsautoscaling/
 categories:
-- cloud
-- provisioning
-- configuration & deployment
-- aws
+  - cloud
+  - provisioning
+  - configuration & deployment
+  - aws
 ddtype: crawler
 description: Suivez l'état et le nombre d'instances dans vos groupes Auto Scaling.
-doc_link: https://docs.datadoghq.com/integrations/amazon_auto_scaling/
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_auto_scaling/'
 git_integration_title: amazon_auto_scaling
 has_logo: true
 integration_title: AWS Auto Scaling
@@ -20,7 +20,6 @@ public_title: Intégration Datadog-AWS Auto Scaling
 short_description: Suivez l'état et le nombre d'instances dans vos groupes Auto Scaling.
 version: '1.0'
 ---
-
 ## Aperçu
 
 Amazon Auto Scaling est un service permettant de lancer ou de stopper automatiquement des instances EC2 en fonction de stratégies définies par l'utilisateur.

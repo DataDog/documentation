@@ -6,7 +6,7 @@ external_redirect: /api/#edit-a-monitor
 ---
 
 ##### Signature
-`PUT /api/v1/monitor/:monitor_id`
+`PUT https://app.datadoghq.com/api/v1/monitor/:monitor_id`
 ##### Exemple de requête
 {{< code-snippets basename="api-monitor-edit" >}}
 ##### Exemple de réponse
