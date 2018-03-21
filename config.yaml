@@ -425,7 +425,7 @@ languages:
           parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_libraries
           name: "Community Libraries"
-          url: "/libraries/#apm-tracing-client-libraries"
+          url: "libraries/#apm-tracing-client-libraries"
           weight: 170
           parent: customnav_tracingnav_setup
 
