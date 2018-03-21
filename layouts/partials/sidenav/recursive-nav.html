@@ -4,7 +4,7 @@
     {{ range $index, $element := .data }}
         {{ $.Scratch.Set "el_url" "" }}
         {{ if ne $ctx.Site.Language.Lang "en" }}
-            {{ if eq (substr $element.URL 0 -1) "/" }}
+            {{ if eq (substr $element.URL -1 1) "/" }}
                 {{ $ctx.Scratch.Set "el_url" (print "/" $ctx.Site.Language.Lang "/" $element.URL) }}
             {{ else }}
                 {{ $ctx.Scratch.Set "el_url" (print "/" $ctx.Site.Language.Lang "/" $element.URL "/") }}
