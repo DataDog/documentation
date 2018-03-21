@@ -546,6 +546,10 @@ table, .table {
 //@include media-breakpoint-up(md) { ... }
 @media (max-width: 991px) {
 
+  .banner body {
+    padding-top: 95px;
+  }
+
   .main {
     padding-left: 15px;
   }
