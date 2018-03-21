@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-type="{{.Type}}" data-relpermalink="{{.RelPermalink}}" style="opacity:0">
+<html lang="{{ .Site.Language.Lang }}" data-type="{{.Type}}" data-relpermalink="{{.RelPermalink}}" style="opacity:0">
 <head>
     <meta charset="utf-8">
     {{ partial "prefetch.html" . }}
@@ -17,7 +17,7 @@
     {{- end -}}
 </head>
 {{- $bodyClass := $.Scratch.Get "bodyClass" -}}
-<body class="{{ if .Kind }}kind-{{.Kind}}{{ end }} {{ if .IsPage }} {{ replace $.Type "/" "-" }} {{ else }} {{ .Section }} {{ end }} {{ $bodyClass }}">
+<body class="{{ .Site.Language.Lang }} {{ if .Kind }}kind-{{.Kind}}{{ end }} {{ if .IsPage }} {{ replace $.Type "/" "-" }} {{ else }} {{ .Section }} {{ end }} {{ $bodyClass }}">
 
     <div class="greyside">
         <div class="container h-100">

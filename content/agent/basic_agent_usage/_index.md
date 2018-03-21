@@ -6,10 +6,10 @@ aliases:
     - /agent/faq/where-is-the-configuration-file-for-the-agent/
     - /agent/faq/log-location
 further_reading:
-- link: "/agent/faq/how-datadog-agent-determines-the-hostname"
+- link: "agent/faq/how-datadog-agent-determines-the-hostname"
   tag: "FAQ"
   text: "How does Datadog determine the agent hostname?"
-- link: "/agent/faq/agent-commands"
+- link: "agent/faq/agent-commands"
   tag: "FAQ"
   text: "List of all agent commands"
 ---

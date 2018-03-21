@@ -1,0 +1,49 @@
+redis_sentinel:
+  - description: number of sentinels detected
+    integration: redis_sentinel
+    metric_name: redis.sentinel.known_sentinels
+    metric_type: gauge
+    short_name: known sentinels
+    unit_name: instance
+  - description: Nombre d'esclaves détectés
+    integration: redis_sentinel
+    metric_name: redis.sentinel.known_slaves
+    metric_type: gauge
+    short_name: known slaves
+    unit_name: instance
+  - description: Nombre de secondes depuis le dernier ping OK
+    integration: redis_sentinel
+    metric_name: redis.sentinel.last_ok_ping_latency
+    metric_type: gauge
+    short_name: last ok latency
+    unit_name: second
+  - description: Nombre de sentinelles en activité
+    integration: redis_sentinel
+    metric_name: redis.sentinel.ok_sentinels
+    metric_type: gauge
+    short_name: ok sentinels
+    unit_name: instance
+  - description: Nombre d'esclaves en service
+    integration: redis_sentinel
+    metric_name: redis.sentinel.ok_slaves
+    metric_type: gauge
+    short_name: ok slaves
+    unit_name: instance
+  - description: Nombre de commandes Sentinel en attente
+    integration: redis_sentinel
+    metric_name: redis.sentinel.link_pending_commands
+    metric_type: gauge
+    short_name: pending commands
+    unit_name: command
+  - description: Latence d'un ping sentinelle
+    integration: redis_sentinel
+    metric_name: redis.sentinel.ping_latency
+    metric_type: gauge
+    short_name: ping latency
+    unit_name: millisecond
+  - description: Nombre de failovers détéctés
+    integration: redis_sentinel
+    metric_name: redis.sentinel.failover
+    metric_type: count
+    short_name: failovers
+    unit_name: occurrence
