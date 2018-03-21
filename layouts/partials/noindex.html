@@ -1,0 +1,3 @@
+{{ if (or (eq .Params.beta true) (eq .Params.private true) (eq .Params.placeholder true) (eq .Site.Params.environment "preview") (eq .Params.noindex true) ) }}
+<meta name="robots" content="noindex, nofollow">
+{{ end }}
