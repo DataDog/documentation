@@ -8,6 +8,5 @@ external_redirect: /api/#get-user
 ## Get user
 
 ##### ARGUMENTS
-
-*   **`handle`** [*required*]:
+* **`id`** [*required*]:
     The handle of the user.

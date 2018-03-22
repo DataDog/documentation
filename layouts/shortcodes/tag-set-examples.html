@@ -20,7 +20,7 @@
 
             {{ end }}
 
-            <li><a href="{{$.Site.BaseURL}}examples/{{$key}}">{{ $.Scratch.Get "example" }}</a> - ({{len $examples}})</li>
+            <li><a href="{{ (print "examples/" $key) | absLangURL }}">{{ $.Scratch.Get "example" }}</a> - ({{len $examples}})</li>
 
           {{ end }}
 

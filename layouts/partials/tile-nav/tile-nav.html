@@ -1,6 +1,6 @@
-<div class="row cards-dd tile-nav mb-40">
-    <div class="col-6 col-md-4">
-        <a class="card agent" href="{{ .Site.BaseURL }}agent/">
+<div class="container cards-dd tile-nav mb-40">
+    <div class="card-deck">
+        <a class="card agent" href="{{ "agent/" | absLangURL }}">
             <div class="card-body text-center">
                 {{ $url := (print (.Site.Params.img_url) "images/" (index .Site.Data.manifests.images "icons/agent.png" ) "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
                 <picture class="mx-auto">
@@ -12,9 +12,7 @@
                 <p class="desc d-none d-sm-inline-block">{{ i18n "install_agent_sentence" | safeHTML }}</p>
             </div>
         </a>
-    </div>
-    <div class="col-6 col-md-4">
-        <a class="card integrations" href="{{ .Site.BaseURL }}integrations/">
+        <a class="card integrations" href="{{ "integrations/" | absLangURL }}">
             <div class="card-body text-center">
                 {{ $url := (print (.Site.Params.img_url) "images/" (index .Site.Data.manifests.images "icons/integrations.png" ) "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
                 <picture class="mx-auto">
@@ -26,9 +24,8 @@
                 <p class="desc d-none d-sm-inline-block">{{ i18n "integrations_sentence" | safeHTML }}</p>
             </div>
         </a>
-    </div>
-    <div class="col-6 col-md-4">
-        <a class="card graphing" href="{{ .Site.BaseURL }}graphing/">
+        <div class="w-100 d-none d-sm-block d-md-none"><!-- wrap every 2 on sm--></div>
+        <a class="card graphing" href="{{ "graphing/" | absLangURL }}">
             <div class="card-body text-center">
                 {{ $url := (print (.Site.Params.img_url) "images/" (index .Site.Data.manifests.images "icons/graphing.png" ) "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
                 <picture class="mx-auto">
@@ -40,9 +37,10 @@
                 <p class="desc d-none d-sm-inline-block">{{ i18n "graphing_sentence" | safeHTML }}</p>
             </div>
         </a>
-    </div>
-    <div class="col-6 col-md-4">
-        <a class="card alerting" href="{{ .Site.BaseURL }}monitoring/">
+        <div class="w-100 d-none d-md-block d-lg-none"><!-- wrap every 3 on md--></div>
+        <div class="w-100 d-none d-lg-block d-xl-none"><!-- wrap every 3 on lg--></div>
+        <div class="w-100 d-none d-xl-block"><!-- wrap every 3 on xl--></div>
+        <a class="card alerting" href="{{ "monitoring/" | absLangURL }}">
             <div class="card-body text-center">
                 {{ $url := (print (.Site.Params.img_url) "images/" (index .Site.Data.manifests.images "icons/alerting.png" ) "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
                 <picture class="mx-auto">
@@ -54,9 +52,8 @@
                 <p class="desc d-none d-sm-inline-block">{{ i18n "alerting_sentence" | safeHTML }}</p>
             </div>
         </a>
-    </div>
-    <div class="col-6 col-md-4">
-        <a class="card tracing" href="{{ .Site.BaseURL }}tracing/">
+        <div class="w-100 d-none d-sm-block d-md-none"><!-- wrap every 2 on sm--></div>
+        <a class="card tracing" href="{{ "tracing/" | absLangURL }}">
             <div class="card-body text-center">
                 {{ $url := (print (.Site.Params.img_url) "images/" (index .Site.Data.manifests.images "icons/tracing_apm.png" ) "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
                 <picture class="mx-auto">
@@ -68,9 +65,7 @@
                 <p class="desc d-none d-sm-inline-block">{{ i18n "apm_sentence" | safeHTML }}</p>
             </div>
         </a>
-    </div>
-    <div class="col-6 col-md-4">
-        <a class="card developers" href="{{ .Site.BaseURL }}developers/">
+        <a class="card developers" href="{{ "developers/" | absLangURL }}">
             <div class="card-body text-center">
                 {{ $url := (print (.Site.Params.img_url) "images/" (index .Site.Data.manifests.images "icons/developers.png" ) "?ch=Width,DPR&fit=max&auto=format") | safeURL }}
                 <picture class="mx-auto">
@@ -82,5 +77,10 @@
                 <p class="desc d-none d-sm-inline-block">{{ i18n "developer_tools_sentence" | safeHTML }}</p>
             </div>
         </a>
+        <div class="w-100 d-none d-sm-block d-md-none"><!-- wrap every 2 on sm--></div>
+        <div class="w-100 d-none d-md-block d-lg-none"><!-- wrap every 3 on md--></div>
+        <div class="w-100 d-none d-lg-block d-xl-none"><!-- wrap every 3 on lg--></div>
+        <div class="w-100 d-none d-xl-block"><!-- wrap every 3 on xl--></div>
     </div>
 </div>
+

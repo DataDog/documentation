@@ -2,10 +2,10 @@
 title: How to monitor SNMP devices?
 kind: faq
 further_reading:
-- link: "/agent/"
+- link: "agent/"
   tag: "Documentation"
   text: Learn more about the Datadog Agent
-- link: "/integrations/snmp"
+- link: "integrations/snmp"
   tag: "Integration"
   text: Learn more about the Datadog-SNMP integration
 ---

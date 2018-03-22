@@ -2,7 +2,7 @@
 title: How do I export Monitors Alerts?
 kind: faq
 further_reading:
-- link: "/monitors/monitor_types"
+- link: "monitors/monitor_types"
   tag: "Documentation"
   text: Learn how to create a monitor
 ---

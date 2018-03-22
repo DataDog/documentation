@@ -3,10 +3,10 @@ title: How do I configure Google as a SAML IdP?
 kind: faq
 disable_toc: true
 further_reading:
-- link: "/account_management/saml"
+- link: "account_management/saml"
   tag: "Documentation"
   text: Configure SAML for your Datadog account
-- link: "/account_management/multi_organization"
+- link: "account_management/multi_organization"
   tag: "Documentation"
   text: Configuring Teams & Organizations with Multiple Accounts
 ---

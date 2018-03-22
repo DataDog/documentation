@@ -8,8 +8,8 @@ from bs4 import BeautifulSoup
 # indexes
 DOCS_BUILD_ENGLISH = 'docs_build_english'
 DOCS_LIVE_ENGLISH = 'docs_english'
-DOCS_BUILD_JAPANESE = 'docs_build_japanese'
-DOCS_LIVE_JAPANESE = 'docs_japanese'
+DOCS_BUILD_FRENCH = 'docs_build_french'
+DOCS_LIVE_FRENCH = 'docs_french'
 
 
 def content_location():
@@ -19,8 +19,8 @@ def content_location():
 
 
 def index_algolia(app_id, api_key, content_path=None):
-    dirs_exclude = ['js', 'images', 'fonts', 'en', 'css', 'search', 'matts quick tips', 'videos']
-    languages = ['ja']
+    dirs_exclude = ['js', 'images', 'fonts', 'en', 'css', 'search', 'json', 'error', 'matts quick tips', 'videos', 'ja']
+    languages = ['fr']
 
     files_to_exclude = ['404.html']
 
@@ -29,7 +29,7 @@ def index_algolia(app_id, api_key, content_path=None):
     # instantiate the algolia api
     client = algoliasearch.Client(app_id, api_key)
     index_english_build = client.init_index(DOCS_BUILD_ENGLISH)
-    index_japanese_build = client.init_index(DOCS_BUILD_JAPANESE)
+    index_french_build = client.init_index(DOCS_BUILD_FRENCH)
 
     # set the root path (default)
     content_path = content_path or content_location()
@@ -99,8 +99,8 @@ def index_algolia(app_id, api_key, content_path=None):
                                     article['file'] = dirpath + '/' + filename
                                     article['page_description'] = description
 
-                                    if dirpath.startswith('public/ja'):
-                                        language = 'japanese'
+                                    if dirpath.startswith('public/fr'):
+                                        language = 'french'
                                     else:
                                         language = 'english'
 
@@ -115,7 +115,7 @@ def index_algolia(app_id, api_key, content_path=None):
         return articles
 
     index_english_articles = crawl_site(content_path, dirs_exclude + languages)
-    #index_japanese_articles = crawl_site(content_path + '/ja', dirs_exclude)
+    index_french_articles = crawl_site(content_path + '/fr', dirs_exclude)
 
     # save to algolia
     try:
@@ -129,16 +129,15 @@ def index_algolia(app_id, api_key, content_path=None):
                 print(e)
                 exit(1)
 
-        # if index_japanese_articles:
-        #     index_japanese_build.clear_index()
-        #     try:
-        #         index_japanese_build.save_objects(index_japanese_articles)
-        #         client.copy_index(DOCS_BUILD_JAPANESE, DOCS_LIVE_JAPANESE)
-        #         print('Algolia JA Docs Build objects have been successfully updated.')
-        #     except algoliasearch.AlgoliaException as e:
-        #         print(e)
-        #         exit(1)
-        pass
+        if index_french_articles:
+            index_french_build.clear_index()
+            try:
+                index_french_build.save_objects(index_french_articles)
+                client.copy_index(DOCS_BUILD_FRENCH, DOCS_LIVE_FRENCH)
+                print('Algolia FR Docs Build objects have been successfully updated.')
+            except algoliasearch.AlgoliaException as e:
+                print(e)
+                exit(1)
 
     except ValueError as e:
         exit(str(e))
