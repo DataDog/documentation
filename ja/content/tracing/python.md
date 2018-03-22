@@ -24,7 +24,7 @@ pip install ddtrace
 Finally, import the tracer and instrument your code!
 
 <div class="alert alert-info">
-For Python applciations, please note that tracing is disabled when your application is launched in <b>DEBUG</b> mode. Find more <a href="http://pypi.datadoghq.com/trace/docs/#module-ddtrace.contrib.django">here</a>
+For Python applications, please note that tracing is disabled when your application is launched in <b>DEBUG</b> mode. Find more <a href="http://pypi.datadoghq.com/trace/docs/#module-ddtrace.contrib.django">here</a>
 </div>
 
 ### Example
