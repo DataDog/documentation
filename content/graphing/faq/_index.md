@@ -34,8 +34,6 @@ private: true
     {{< nextlink href="graphing/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs" >}}Why does zooming out a timeframe also smooth out my graphs?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/why-is-a-counter-metric-being-displayed-as-a-decimal-value" >}}Why is a counter metric being displayed as a decimal value?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/the-same-color-is-used-twice-in-my-graph" >}}The same color is used twice in my graph!{{< /nextlink >}}
-    {{< nextlink href="graphing/faq/is-there-a-way-for-me-to-set-the-maximum-and-minimum-values-on-the-y-axis-of-a-graph" >}}Is there a way for me to set the maximum and minimum values on the y-axis of a graph?{{< /nextlink >}}
-    {{< nextlink href="graphing/faq/is-it-possible-to-adjust-the-y-axis-for-my-graphs" >}}Is it possible to adjust the y-axis for my graphs?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/how-do-i-overlay-events-onto-my-dashboards" >}}How do I overlay events onto my dashboards?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/how-to-graph-percentiles-in-datadog" >}}How to graph percentiles in Datadog ?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/i-m-switching-between-the-sum-min-max-avg-aggregators-but-the-values-look-the-same" >}}I'm switching between the sum/min/max/avg aggregators but the values look the same?{{< /nextlink >}}

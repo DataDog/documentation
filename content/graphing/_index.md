@@ -4,6 +4,8 @@ kind: documentation
 aliases:
     - /guides/graphing
     - /graphing/miscellaneous/metrics_arithmetic
+    - /graphing/faq/is-there-a-way-for-me-to-set-the-maximum-and-minimum-values-on-the-y-axis-of-a-graph
+    - /graphing/faq/is-it-possible-to-adjust-the-y-axis-for-my-graphs
 description: Visualize your data to gain insight
 ---
 Graphs are the window onto your monitored systems. Most of the times that you visit Datadog, you look at [dashboards][8] made up of graphs. Other times you see email notifications that include a graph of some fluctuation in the system. And yet other times you see graphs in your Slack, HipChat, and other chat clients documenting the changes in metrics over the course of time. Graphs are at the heart of monitoring and observability, so it is essential to understand how to define great graphs.
@@ -151,6 +153,8 @@ There are three configuration settings:
     * *sqrt*: A square root scale
 
 * `Always include zero` (optional):  Specifies whether or not to always include zero or fit the axis to the data range. Default is to always include zero.
+
+Note: as the mathematical log function doesn't accept negative values, our log scale only works if values are of the same sign (everything > 0 or everything < 0). Otherwise an empty graph is returned.
 
 ### Overlay events for additional context
 
