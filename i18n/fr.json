@@ -24,7 +24,7 @@
   },
 
   "graphing_sentence": {
-    "other": "Visualisez vos données pour<br> pour mieux les comprendre"
+    "other": "Visualisez vos données <br> pour mieux les comprendre"
   },
 
   "alerting_sentence": {
@@ -40,7 +40,7 @@
   },
 
   "help_sentence": {
-    "other": "Nos ingénieurs amicaux et compétents sont là pour vous aider"
+    "other": "Nos ingénieurs sont là pour vous aider."
   },
 
   "email_support_sentence": {
@@ -52,7 +52,7 @@
   },
 
   "event_stream_support_sentence": {
-    "other": "Les messages du <a href=\"http://app.datadoghq.com/event/stream\" target=\"_blank\" rel=\"noopener\">flux d'événements</a> contenant @support-datadog parviendront à notre équipe de support. C'est un moyen pratique de pour transmettre un snapshot de graphe."
+    "other": "Les messages du <a href=\"http://app.datadoghq.com/event/stream\" target=\"_blank\" rel=\"noopener\">flux d'événements</a> contenant @support-datadog parviendront à notre équipe de support. C'est un moyen pratique de pour transmettre un snapshot de graphique."
   },
 
   "agent_started_sentence": {
@@ -152,7 +152,7 @@
   },
 
   "datadog_api": {
-    "other": "Datadog API"
+    "other": "API Datadog"
   },
 
   "dogstatsd": {
@@ -177,7 +177,7 @@
   },
 
   "graphing": {
-    "other": "Graphes"
+    "other": "Graphiques"
   },
 
   "alerting": {
