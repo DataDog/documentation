@@ -571,6 +571,11 @@ languages:
           url: "logs/languages/nodejs/"
           weight: 840
           parent: customnav_lognav_languages
+        - identifier: customnav_lognav_php
+          name: "PHP"
+          url: "/logs/languages/php/"
+          weight: 850
+          parent: customnav_lognav_languages
         - identifier: customnav_lognav_python
           name: "Python"
           url: "logs/languages/python/"
