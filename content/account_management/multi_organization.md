@@ -5,7 +5,7 @@ aliases:
   - /guides/multiaccountorg
   - /account_management/mult_account
 further_reading:
-- link: "/account_management/saml"
+- link: "account_management/saml"
   tag: "Documentation"
   text: Configure SAML for your Datadog account
 ---

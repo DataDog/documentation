@@ -151,6 +151,10 @@
     "other": "Datadog Docs"
   },
 
+  "datadog_api": {
+    "other": "Datadog API"
+  },
+
   "dogstatsd": {
     "other": "DogStatsD"
   },

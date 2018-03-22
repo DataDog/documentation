@@ -4,13 +4,13 @@ kind: documentation
 aliases:
     - /agent/proxy
 further_reading:
-- link: "/logs/"
+- link: "logs/"
   tag: "Documentation"
   text: Collect your logs
-- link: "/graphing/infrastructure/process"
+- link: "graphing/infrastructure/process"
   tag: "Documentation"
   text: Collect your processes
-- link: "/tracing"
+- link: "tracing"
   tag: "Documentation"
   text: Collect your traces
 ---
@@ -56,8 +56,24 @@ to
 
 ## Using a Web Proxy as Proxy
 
-Traditional web proxies are supported natively by the agent. 
-Edit `datadog.conf` with your proxy information.
+Traditional web proxies are supported natively by the agent. If you need to connect to the Internet through a proxy, edit your Agent configuration file.
+
+### Agent v6
+
+Edit the `datadog.yaml` file with your proxy information. Use the `no_proxy` list to specify hosts that should bypass the proxy. 
+
+```
+proxy:
+    http: http(s)://user:password@proxy_for_http:port
+    https: http(s)://user:password@proxy_for_https:port
+#   no_proxy:
+#     - host1
+#     - host2
+```
+
+### Agent v5
+
+Edit the `datadog.conf` file with your proxy information:
 
 ```
 # If you need a proxy to connect to the Internet, provide the settings here

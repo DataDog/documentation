@@ -2,10 +2,10 @@
 title: Why am I getting so many "No Data" Alerts for my Metric Monitor
 kind: faq
 further_reading:
-- link: "/monitors/notifications"
+- link: "monitors/notifications"
   tag: "Documentation"
   text: Configure your monitor notifications
-- link: "/monitors/downtimes"
+- link: "monitors/downtimes"
   tag: "Documentation"
   text: Schedule a downtime to mute a monitor
 ---

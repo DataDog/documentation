@@ -4,19 +4,19 @@ kind: documentation
 aliases:
   - /tracing/environments/
 further_reading:
-- link: "/tracing/setup/docker"
+- link: "tracing/setup/docker"
   tag: "Documentation"
   text: Docker setup
-- link: "/tracing/setup/go"
+- link: "tracing/setup/go"
   tag: "Documentation"
   text: Go language instrumentation
-- link: "/tracing/setup/java"
+- link: "tracing/setup/java"
   tag: "Documentation"
   text: Java language instrumentation
-- link: "/tracing/setup/python"
+- link: "tracing/setup/python"
   tag: "Documentation"
   text: Python language instrumentation
-- link: "/tracing/setup/ruby"
+- link: "tracing/setup/ruby"
   tag: "Documentation"
   text: Ruby language instrumentation
 ---
@@ -61,10 +61,33 @@ There are several ways to specify an environment when reporting data:
 3. Per trace:  
   When submitting a single trace, specify an environment by tagging one of its spans with the metadata key `env`. This overrides the agent configuration and the host tags value (if any).  
 
+  * **Go**:
     ```
-    # in code this looks like
-    span.set_tag('env', 'prod')
+    tracer.SetMeta(“env”, “prod”)
     ```
+  For OpenTracing use the “GlobalTags” field in the “opentracing.Configuration” structure.
+
+  * **Java**:  
+      Via sysprop: 
+      ```
+      -Ddd.trace.span.tags=”env:prod”
+      ```
+      Via env var:
+      ```
+      DD_TRACE_SPAN_TAGS=”env:prod”
+      ```
+
+  * **Ruby**:
+  ```
+  Datadog.tracer.set_tags(‘env’ => ‘prod’)
+  ```
+
+  * **Python**:
+    ```
+    from ddtrace import tracer
+    tracer.set_tags('env', 'prod')
+    ```
+
 
 ## Further Reading
 

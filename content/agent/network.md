@@ -6,24 +6,25 @@ aliases:
     - /account_management/faq/what-are-the-required-ip-s-and-ports-i-need-open-to-connect-to-the-datadog-service
     - /account_management/faq/can-i-whitelist-the-ip-addresses-for-data-coming-from-datadog-via-webhook-and-integrations
 further_reading:
-- link: "/logs/"
+- link: "logs/"
   tag: "Documentation"
   text: Collect your logs
-- link: "/graphing/infrastructure/process"
+- link: "graphing/infrastructure/process"
   tag: "Documentation"
   text: Collect your processes
-- link: "/tracing"
+- link: "tracing"
   tag: "Documentation"
   text: Collect your traces
 ---
 
-## Network Security
-
-1. **Traffic is always initiated by the agent to Datadog. No sessions are ever initiated from Datadog back to the agent**
-2. All traffic is sent over SSL
-3. The destination for all agent data is
-    1. **Agents < 5.2.0** `app.datadoghq.com`
-    1. **Agents >= 5.2.0** `<version>-app.agent.datadoghq.com`
+* **Traffic is always initiated by the agent to Datadog. No sessions are ever initiated from Datadog back to the agent**
+* All traffic is sent over SSL
+* The destination for [APM](/tracing) data is `trace.agent.datadoghq.com`
+* The destination for [Live Containers](/graphing/infrastructure/livecontainers) data is `process.datadoghq.com`
+* The destination for [Logs](/logs) data is `intake.logs.datadoghq.com `
+* The destination for all other agent data is
+  * **Agents < 5.2.0** `app.datadoghq.com`
+  *  **Agents >= 5.2.0** `<version>-app.agent.datadoghq.com`
 
 This decision was taken after the POODLE problem, now versioned endpoints start with Agent 5.2.0, i.e. each version of the agent hits a different endpoint based on the version of the *Forwarder*.  
 
@@ -58,28 +59,42 @@ The information is structured as JSON following this schema:
 
 ## Open Ports
 
+**All traffic is sent (outbound only) over SSL via 443 TCP.**
+
+Open the following ports in order to benefit from all the agent functionalities: 
+
 ### Agent v6
 
-  * **`8125/udp`**: dogstatsd
+* `123/UDP`: NTP - [More details on the importance of NTP here](/agent/faq/network-time-protocol-ntp-offset-issues/).
+* `5000/tcp`: port for the [go_expvar server](/integrations/go_expvar/)
+* `5001/tcp`: port on which the IPC api listens
+* `5002/tcp`: port for [the Agent browser GUI to be served](/agent/#using-the-gui)
+* `8125/udp`: dogstatsd
+    
+    Unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost: 
 
-  Unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost: 
-
-  * `127.0.0.1`
-  * `::1` 
-  * `fe80::1`
+    * `127.0.0.1`
+    * `::1` 
+    * `fe80::1`
+* `8126/tcp`: port for the [APM Receiver](/tracing)
+* `10516/tcp`: port for the [Log collection](/logs)
+* `10255/tcp`: port for the [Kubernetes http kubelet](/agent/basic_agent_usage/kubernetes/)
+* `10250/tcp`: port for the [Kubernetes https kubelet](/agent/basic_agent_usage/kubernetes/)
 
 ### Agent v4 and v5 
 
-  * **`17123/tcp`**: agent forwarder, used to buffer traffic in case of network
-  splits between the agent and Datadog
-  * **`17124/tcp`**: optional graphite adapter
-  * **`8125/udp`**: dogstatsd
+* `123/UDP`: NTP - [More details on the importance of NTP here](/agent/faq/network-time-protocol-ntp-offset-issues/).
+* **`8125/udp`**: dogstatsd
 
   Unless `non_local_traffic` is set to true. Those port are available on localhost: 
 
   * `127.0.0.1`
   * `::1` 
   * `fe80::1`
+
+* `8126/tcp`: port for the [APM Receiver](/tracing)
+* `17123/tcp`: agent forwarder, used to buffer traffic in case of network splits between the agent and Datadog
+* `17124/tcp`: optional graphite adapter
 
 ## Using Proxies
 

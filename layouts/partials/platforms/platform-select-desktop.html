@@ -3,7 +3,11 @@
 <!-- get lang specific data file -->
 {{ $.Scratch.Set "data" "" }}
 {{ if ne $dot.Page.Lang "en"}}
-    {{ $.Scratch.Set "data" (index $dot.Page.Site.Data.partials (print "platforms." $dot.Page.Lang)) }}
+    {{ if (fileExists (print "data/partials/platforms." $dot.Page.Lang ".yaml")) }}
+      {{ $.Scratch.Set "data" (index $dot.Page.Site.Data.partials (print "platforms." $dot.Page.Lang)) }}
+    {{ else }}
+      {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.platforms }}
+    {{ end }}
 {{ else }}
     {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.platforms }}
 {{ end }}
@@ -14,7 +18,7 @@
     <div class="row cards-dd platform-nav mt-4 d-none d-sm-flex">
         {{ range $datafile.platforms }}
             <div class="col-6 col-sm-3 col-md-2-4 col-lg-2-4 col-xl-2-4">
-                <a class="card" href="{{ $dot.Site.BaseURL }}{{ .link }}">
+                <a class="card" href="{{ .link | absLangURL }}">
                     <div class="card-body text-center">
                         {{ $src := (print "icons/" .image)}}
                         {{ $url := (print ($dot.Site.Params.img_url) "images/" (index $dot.Site.Data.manifests.images $src ) "?ch=Width,DPR&fit=max&auto=format") | safeURL }}

@@ -25,7 +25,7 @@ Get Hourly Usage For Hosts and Containers.
 * **`hour`**:  
     The hour for the usage.
 * **`apm_host_count`**:  
-    Shows the total number of hosts using APM during the hour. For Pro plans, these are counted as billable (except during trial periods). For Enterprise plans, APM hosts are included in the price of infrastructure hosts (see host_count) and not billed separately.
+    Shows the total number of hosts using APM during the hour, these are counted as billable (except during trial periods).
 * **`agent_host_count`**:  
     Contains the total number of infrastructure hosts reporting during a given hour that were running the Datadog Agent.
 * **`gcp_host_count`**:  

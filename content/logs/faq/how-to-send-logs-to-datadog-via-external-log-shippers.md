@@ -2,13 +2,13 @@
 title: How to Send Logs to Datadog via External Log Shippers
 kind: faq
 further_reading:
-- link: "/logs/faq/i-have-a-custom-log-file-with-heightened-read-permissions"
+- link: "logs/faq/i-have-a-custom-log-file-with-heightened-read-permissions"
   tag: "FAQ"
   text: I have a custom log file with heightened read-permissions; how do I send it to Datadog
-- link: "/logs/"
+- link: "logs/"
   tag: "Documentation"
   text: Learn how to collect your logs
-- link: "/logs/explore"
+- link: "logs/explore"
   tag: "Documentation"
   text: Learn how to explore your logs
 ---

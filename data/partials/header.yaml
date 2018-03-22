@@ -19,10 +19,10 @@ left:
             link: "https://www.datadoghq.com/alerts/"
             title: "Alerts"
           - name: product_api
-            link: "https://docs.datadoghq.com/api"
+            link: "api"
             title: "API"
   - name: docs
-    link: "https://docs.datadoghq.com/"
+    link: ""
     title: "Docs"
   - name: pricing
     link: "https://www.datadoghq.com/pricing/"

@@ -6,7 +6,7 @@ external_redirect: /api/#edit-a-comment
 ---
 
 ##### Signature
-`PUT api/v1/comments/:comment_id`
+`PUT https://app.datadoghq.com/api/v1/comments/:comment_id`
 ##### Example Request
 {{< code-snippets basename="api-comment-edit" >}}
 ##### Example Response
