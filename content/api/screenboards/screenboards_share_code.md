@@ -6,13 +6,8 @@ external_redirect: /api/#share-a-screenboard
 ---
 
 ##### Signature
-
 `POST https://app.datadoghq.com/api/v1/screen/share/:board_id`
-
 ##### Example Request
-
 {{< code-snippets basename="api-screenboard-share" >}}
-
 ##### Example Response
-
 {{< code-snippets basename="result.api-screenboard-share" >}}

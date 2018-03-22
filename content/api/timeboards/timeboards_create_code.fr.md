@@ -1,7 +1,7 @@
 ---
 title: Créer un Timeboard
 type: apicode
-order: 20.1
+order: 21.1
 external_redirect: /api/#create-a-timeboard
 ---
 

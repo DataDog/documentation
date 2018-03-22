@@ -1,7 +1,7 @@
 ---
 title: Désactiver tous les monitors
 type: apicode
-order: 15.7
+order: 16.7
 external_redirect: /api/#mute-all-monitors
 ---
 

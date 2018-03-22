@@ -6,13 +6,8 @@ external_redirect: /api/#revoke-embed
 ---
 
 ##### Signature
-
 `GET https://app.datadoghq.com/api/v1/graph/embed/:embed_id/revoke`
-
 ##### Example Request
-
 {{< code-snippets basename="api-embeds-revoke" >}}
-
 ##### Example Response
-
 {{< code-snippets basename="result.api-embeds-revoke" >}}

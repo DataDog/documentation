@@ -6,6 +6,5 @@ external_redirect: /api/#delete-a-timeboard
 ---
 
 ## Delete a Timeboard
-
 Delete an existing [timeboard](/graphing/dashboards/timeboard).
-_This end point takes no JSON arguments._
+*This end point takes no JSON arguments.*

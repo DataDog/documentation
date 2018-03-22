@@ -6,13 +6,8 @@ external_redirect: /api/#delete-a-timeboard
 ---
 
 ##### Signature
-
 `DELETE https://app.datadoghq.com/api/v1/dash/:dash_id`
-
 ##### Example Request
-
 {{< code-snippets basename="api-dashboard-delete" >}}
-
 ##### Example Response
-
-_This end point does not return JSON on successful requests._
+*This end point does not return JSON on successful requests.*

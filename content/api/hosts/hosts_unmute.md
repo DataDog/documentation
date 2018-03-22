@@ -6,7 +6,6 @@ external_redirect: /api/#unmute-a-host
 ---
 
 ## Unmute a host
-
 ##### ARGUMENTS
 
 This end point takes no JSON arguments.

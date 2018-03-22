@@ -6,9 +6,7 @@ external_redirect: /api/#get-a-timeboard
 ---
 
 ## Get a Timeboard
-
 Fetch an existing dashboard's definition.
 
 ##### Arguments
-
-_This end point takes no JSON arguments._
+*This end point takes no JSON arguments.*

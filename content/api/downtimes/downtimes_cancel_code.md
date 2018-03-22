@@ -6,13 +6,8 @@ external_redirect: /api/#cancel-monitor-downtime
 ---
 
 ##### Signature
-
 `DELETE https://app.datadoghq.com/api/v1/downtime/:downtime_id`
-
 ##### Example Request
-
 {{< code-snippets basename="api-monitor-cancel-downtime" >}}
-
 ##### Example Response
-
-_This end point does not return JSON on successful requests._
+*This end point does not return JSON on successful requests.*

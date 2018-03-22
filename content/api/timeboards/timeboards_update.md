@@ -9,27 +9,25 @@ external_redirect: /api/#update-a-timeboard
 
 ##### Arguments
 
-*   **`title`** [*required*]:
+* **`title`** [*required*]:  
     The name of the dashboard.
-*   **`description`** [*optional*]:
+* **`description`** [*optional*]:  
     A description of the dashboard's contents.
-*   **`graphs`** [*optional*]:
+* **`graphs`** [*optional*]:  
     A list of graph definitions. Graph definitions follow this form:
-
-    *   **`title`** [*required*]:
+    * **`title`** [*required*]:  
         The name of the graph.
-    *   **`definition`** [*required*]:
-        The graph definition. Read the [Graph Guide](/graphing/) for more on graphs. Example:
-        `{"requests": [{"q": "system.cpu.idle{*} by {host}"}`
+    * **`definition`** [*required*]:  
+    The graph definition. Read the [Graph Guide](/graphing/) for more on graphs. Example:  
+    `{"requests": [{"q": "system.cpu.idle{*} by {host}"}`
 
-*   **`template_variables`** [*optional*, *default*=**None**]:
+* **`template_variables`** [*optional*, *default*=**None**]:  
     A list of template variables for using Dashboard templating. Template variable definitions follow this form:
+    * **`name`** [*required*]:  
+     The name of the variable.
 
-    *   **`name`** [*required*]:
-        The name of the variable.
+    * **`prefix`** [*optional*, *default*=**None**]:  
+    The tag prefix associated with the variable. Only tags with this prefix appear in the variable dropdown.
 
-    *   **`prefix`** [*optional*, *default*=**None**]:
-        The tag prefix associated with the variable. Only tags with this prefix appear in the variable dropdown.
-
-    *   **`default`** [*optional*, *default*=**None**]:
-        The default value for the template variable on dashboard load.
+    * **`default`** [*optional*, *default*=**None**]:  
+    The default value for the template variable on dashboard load.

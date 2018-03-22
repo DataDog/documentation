@@ -6,8 +6,7 @@ external_redirect: /api/#send-traces
 ---
 
 ##### Signature
-
-`PUT http://localhost:8126/v0.3/traces`
+`PUT  http://localhost:8126/v0.3/traces`
 
 ##### Example Request
 

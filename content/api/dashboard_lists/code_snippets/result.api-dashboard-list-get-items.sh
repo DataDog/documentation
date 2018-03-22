@@ -36,8 +36,8 @@
         {
             "is_shared": False,
             "author": {
-                "handle": "leo@datadoghq.com",
-                "name": "Leo"
+                "handle": "test1@datadoghq.com",
+                "name": "Author Name"
             },
             "url": "/dash/757575/trace-api",
             "title": "Trace API",
@@ -52,8 +52,8 @@
         {
             "is_shared": False,
             "author": {
-                "handle": "ml@datadoghq.com",
-                "name": "ML"
+                "handle": "test2@datadoghq.com",
+                "name": "Other Author Name"
             },
             "url": "/screen/7373/agent-stats",
             "title": "Agent Stats",

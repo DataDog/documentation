@@ -6,9 +6,7 @@ external_redirect: /api/#get-all-timeboards
 ---
 
 ## Get all Timeboards
-
 Fetch all of your [timeboard](/graphing/dashboards/timeboard)' definitions.
 
 ##### Arguments
-
-_This end point takes no JSON arguments._
+*This end point takes no JSON arguments.*

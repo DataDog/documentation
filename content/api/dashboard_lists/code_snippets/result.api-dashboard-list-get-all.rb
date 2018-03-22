@@ -7,7 +7,7 @@
                 "name" => "My Dashboard List B",
                 "dashboard_count" => 22,
                 "author" => {
-                    "handle" => "author.name@datadoghq.com",
+                    "handle" => "test1@datadoghq.com",
                     "name" => "Author Name"
                 },
                 "created" => "2017-09-14T14:59:59.040891+00:00",
@@ -21,7 +21,7 @@
                 "name" => "My Dashboard List A",
                 "dashboard_count" => 12,
                 "author" => {
-                    "handle" => "otherauthor.name@datadoghq.com",
+                    "handle" => "test2@datadoghq.com",
                     "name" => "Other Author Name"
                 },
                 "created" => "2017-11-17T11:17:43.273931+00:00",

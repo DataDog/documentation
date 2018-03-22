@@ -2,7 +2,7 @@
     'name': 'My Updated Dashboard List',
     'created': '2018-03-16T09:44:41.476018+00:00',
     'author': {
-        'handle': 'author.name@datadoghq.com',
+        'handle': 'test1@datadoghq.com',
         'name': 'Author Name'
     },
     'dashboards': None,

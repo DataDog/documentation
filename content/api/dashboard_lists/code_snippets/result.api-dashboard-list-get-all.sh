@@ -4,7 +4,7 @@
             "name": "My Dashboard List B",
             "created": "2017-09-14T14:59:59.040891+00:00",
             "author": {
-                "handle": "author.name@datadoghq.com",
+                "handle": "test1@datadoghq.com",
                 "name": "Author Name"
             },
             "dashboards": None,
@@ -18,7 +18,7 @@
             "name": "My Dashboard List A",
             "created": "2017-11-17T11:17:43.273931+00:00",
             "author": {
-                "handle": "otherauthor.name@datadoghq.com",
+                "handle": "test2@datadoghq.com",
                 "name": "Other Author Name"
             },
             "dashboards": None,

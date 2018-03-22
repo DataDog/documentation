@@ -6,13 +6,8 @@ external_redirect: /api/#add-tags-to-a-host
 ---
 
 ##### Signature
-
 `POST https://app.datadoghq.com/api/v1/tags/hosts/:host_name`
-
 ##### Example Request
-
 {{< code-snippets basename="api-tags-add" >}}
-
 ##### Example Response
-
 {{< code-snippets basename="result.api-tags-add" >}}

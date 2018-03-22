@@ -5,7 +5,7 @@
         "name" => "My Dashboard List",
         "dashboard_count" => 0,
         "author" => {
-            "handle" => "author.name@datadoghq.com",
+            "handle" => "test1@datadoghq.com",
             "name" => "Author Name"
         },
         "created" => "2018-03-16T09:44:41.476018+00:00",

@@ -6,13 +6,8 @@ external_redirect: /api/#query-the-event-stream
 ---
 
 ##### Signature
-
 `GET https://app.datadoghq.com/api/v1/events`
-
 ##### Example Request
-
 {{< code-snippets basename="api-events-stream" >}}
-
 ##### Example Response
-
 {{< code-snippets basename="result.api-events-stream" >}}

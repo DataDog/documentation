@@ -7,7 +7,7 @@ external_redirect: /api/#update-items-of-a-dashboard-list
 
 ## Update Items of a Dashboard List
 
-Override dashboards of an existing dashboard list.
+Update dashboards of an existing dashboard list.
 
 ##### ARGUMENTS
 

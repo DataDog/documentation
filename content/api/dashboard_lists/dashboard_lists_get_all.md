@@ -7,7 +7,7 @@ external_redirect: /api/#get-all-dashboard-lists
 
 ## Get all Dashboard Lists
 
-Fetch all of your existing dashboard list’s definitions.
+Fetch all of your existing dashboard list definitions.
 
 ##### ARGUMENTS
 

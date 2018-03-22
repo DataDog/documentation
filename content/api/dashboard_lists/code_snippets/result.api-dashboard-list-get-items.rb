@@ -42,8 +42,8 @@
                 "icon" => nil,
                 "is_shared" => false,
                 "author" => {
-                    "handle" => "leo@datadoghq.com",
-                    "name" => "Leo"
+                    "handle" => "test1@datadoghq.com",
+                    "name" => "Author Name"
                 },
                 "url" => "/dash/757575/trace-api",
                 "created" => "2015-10-21T13:22:48.633391+00:00",
@@ -58,8 +58,8 @@
                 "icon" => nil,
                 "is_shared" => false,
                 "author" => {
-                    "handle" => "ml@datadoghq.com",
-                    "name" => "ML"
+                    "handle" => "test2@datadoghq.com",
+                    "name" => "Other Author Name"
                 },
                 "url" => "/screen/7373/agent-stats",
                 "created" => "2014-06-18T18:19:00.974763+00:00",

@@ -6,13 +6,8 @@ external_redirect: /api/#remove-host-tags
 ---
 
 ##### Signature
-
 `DELETE https://app.datadoghq.com/api/v1/tags/hosts/:host_name`
-
 ##### Example Request
-
 {{< code-snippets basename="api-tags-remove" >}}
-
 ##### Example Response
-
-_This end point does not return JSON on successful requests._
+*This end point does not return JSON on successful requests.*
