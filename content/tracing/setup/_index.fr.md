@@ -1,5 +1,5 @@
 ---
-title: Implémenter l'APM
+title: Implémentation de l'APM
 kind: Documentation
 aliases:
   - /fr/tracing/languages/
