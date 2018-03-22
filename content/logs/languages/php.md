@@ -89,14 +89,14 @@ init_config:
 
 instances:
     
-##Log section
+## Log section
 logs:
 
-    ## - type : file (mandatory) type of log input source (tcp / udp / file)
-    ##   port / path : (mandatory) Set port if type is tcp or udp. Set path if type is file
-    ##   service : (mandatory) name of the service owning the log
-    ##   source : (mandatory) attribute that defines which integration is sending the logs
-    ##   sourcecategory : (optional) Multiple value attribute. Can be used to refine the source attribtue
+    ## - type: file (mandatory) type of log input source (tcp / udp / file)
+    ##   port/path: (mandatory) Set port if type is tcp or udp. Set path if type is file
+    ##   service: (mandatory) name of the service owning the log
+    ##   source: (mandatory) attribute that defines which integration is sending the logs
+    ##   sourcecategory: (optional) Multiple value attribute. Can be used to refine the source attribtue
     ##   tags: (optional) add tags to each logs collected
 
   - type: file
@@ -108,7 +108,7 @@ logs:
 
 ### Add meta field and context
 
-Much of the useful information comes from additional context data added to your logs and events.
+It's useful to add additional context data to your logs and events.  
 Monolog makes this convenient by providing methods for setting thread-local context data that is then submitted automatically with all events. At any moment, log an event with contextual data:
 
 ```php
@@ -182,14 +182,14 @@ init_config:
 
 instances:
     
-##Log section
+## Log section
 logs:
 
-    ## - type : file (mandatory) type of log input source (tcp / udp / file)
-    ##   port / path : (mandatory) Set port if type is tcp or udp. Set path if type is file
-    ##   service : (mandatory) name of the service owning the log
-    ##   source : (mandatory) attribute that defines which integration is sending the logs
-    ##   sourcecategory : (optional) Multiple value attribute. Can be used to refine the source attribtue
+    ## - type: file (mandatory) type of log input source (tcp / udp / file)
+    ##   port/path: (mandatory) Set port if type is tcp or udp. Set path if type is file
+    ##   service: (mandatory) name of the service owning the log
+    ##   source: (mandatory) attribute that defines which integration is sending the logs
+    ##   sourcecategory: (optional) Multiple value attribute. Can be used to refine the source attribtue
     ##   tags: (optional) add tags to each logs collected
 
   - type: file
@@ -204,7 +204,7 @@ logs:
 In your configuration directory `/path/to/config/directory/`, edit the `config_dev.yml` and `config_prod.yml` to configure log management to suit your needs for development and production environments.
 
 ```yaml
- # app/config/config.yml
+# app/config/config.yml
 monolog:
 
 # Uncomment this section, if you want to use a processor
@@ -221,7 +221,7 @@ monolog:
           
     handlers:
     
-            # Log shipper configuration
+        # Log shipper configuration
         to_json_files:
             # log to var/logs/(environment).log
             type: stream
@@ -260,7 +260,7 @@ monolog:
 $app->configureMonologUsing(function($monolog) {
     $monolog->pushHandler(...);
     
-  // configure your logger as below 
+  // configure your logger below
 });
 
 return $app;
@@ -272,7 +272,7 @@ return $app;
 // file: bootstrap
 $app->extend('monolog', function($monolog, $app) {
     $monolog->pushHandler(...);
-    // configure your logger as below 
+    // configure your logger below
     return $monolog;
 });
 ```
@@ -283,7 +283,7 @@ $app->extend('monolog', function($monolog, $app) {
 //file: bootstrap/app.php
 $app->configureMonologUsing(function($monolog) {
     $monolog->pushHandler(...);
-    // configure your logger as below 
+    // configure your logger below
 });
 
 return $app;
@@ -302,7 +302,7 @@ run `composer update`.
 }
 ```
 
-Then, start by creating a logging configuration file (i.e. `app/Config/log.php`) that you include your `app/Config/bootstrap.php`:
+Then, start by creating a logging configuration file (i.e., `app/Config/log.php`) that you includes your `app/Config/bootstrap.php`:
 
 ```php
 include 'log.php';
@@ -349,7 +349,7 @@ This section is about:
             class: Monolog\Formatter\JsonFormatter
     ```
 
-2. Wire the formatter in your Monolog configuration: declare the formatter field as follows:
+2. Configure the formatter in your Monolog configuration: declare the formatter field as follows:
 
     ```yaml
      monolog:
@@ -370,14 +370,14 @@ init_config:
 
 instances:
     
-##Log section
+## Log section
 logs:
 
-    ## - type : file (mandatory) type of log input source (tcp / udp / file)
-    ##   port / path : (mandatory) Set port if type is tcp or udp. Set path if type is file
-    ##   service : (mandatory) name of the service owning the log
-    ##   source : (mandatory) attribute that defines which integration is sending the logs
-    ##   sourcecategory : (optional) Multiple value attribute. Can be used to refine the source attribtue
+    ## - type: file (mandatory) type of log input source (tcp / udp / file)
+    ##   port / path: (mandatory) Set port if type is tcp or udp. Set path if type is file
+    ##   service: (mandatory) name of the service owning the log
+    ##   source: (mandatory) attribute that defines which integration is sending the logs
+    ##   sourcecategory: (optional) Multiple value attribute. Can be used to refine the source attribtue
     ##   tags: (optional) add tags to each logs collected
 
   - type: file
@@ -393,14 +393,13 @@ logs:
   This is an example of such processor. It knows the current session and it enriches the content of the log record with valuable information such as the `requestId`, `sessionId`, ...  
 
     ```php
-     <?php
+    <?php
 
     namespace Acme\Bundle\MonologBundle\Log;
 
     use Symfony\Component\HttpFoundation\Session\Session;
 
-    class SessionRequestProcessor
-    {
+    class SessionRequestProcessor {
       private $session;
       private $sessionId;
       private $requestId;
@@ -408,13 +407,11 @@ logs:
       private $_get;
       private $_post;
 
-      public function __construct(Session $session)
-      {
+      public function __construct(Session $session) {
         $this->session = $session;
       }
 
-      public function processRecord(array $record)
-      {
+      public function processRecord(array $record) {
         if (null === $this->requestId) {
           if ('cli' === php_sapi_name()) {
             $this->sessionId = getmypid();
@@ -448,14 +445,13 @@ logs:
         return $record;
       }
 
-      protected function clean($array)
-      {
+      protected function clean($array) {
         $toReturn = array();
         foreach(array_keys($array) as $key) {
           if (false !== strpos($key, 'password')) {
-            //Do not add
+            // Do not add
           } else if (false !== strpos($key, 'csrf_token')) {
-            //Do not add
+            // Do not add
           } else {
             $toReturn[$key] = $array[$key];
           }
@@ -531,7 +527,7 @@ Then [Stream your log files to Datadog](/logs/#custom-log-collection)
 
 ### Add meta field and context
 
-Much of the usefulness information comes from additional context data that you can add to your logs and your events. Zend-Log makes this very convenient by providing methods to set thread local context data that is then submitted automatically with all events. At any moment, log an event with a contextual data:  
+Much of the useful information comes from additional context data that you can add to your logs and your events. Zend-Log makes this very convenient by providing methods to set thread local context data that is then submitted automatically with all events. At any moment, log an event with contextual data:  
 
 ```php
 $logger->info('Adding a new user', array('username' => 'Seldaek'));
@@ -543,7 +539,7 @@ Use cases include:
 
 * Providing exception backtrace information.
 * Injecting substitutions into the message.
-* Injecting a request identifier (in order to later inspect logs for a specific identifier)
+* Injecting a request identifier (in order to later inspect logs for a specific identifier).
 
 Take a peek to this code if you want to use it:
 
