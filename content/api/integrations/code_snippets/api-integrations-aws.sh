@@ -8,7 +8,7 @@ curl -X POST -H "Content-type: application/json" \
 -d '{
         "account_id": "YOUR_AWS_ACCOUNT_ID",
         "filter_tags": ["env:staging"],
-        "host_tags": ["account:staging","account:customer1"],
+        "host_tags": ["account:customer1"],
         "role_name": "DatadogAWSIntegrationRole",
         "account_specific_namespace_rules": {
         	"auto_scaling": False,
