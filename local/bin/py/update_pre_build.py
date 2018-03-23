@@ -255,7 +255,7 @@ class PreBuild:
                         content = content_file.read()
                         content = re.sub(self.regex_fm, r'\2', content, count=0)
                         if action_obj.get('remove_header', False):
-                            content = re.sub(self.regex_h1, '', content, count=1)
+                            content = re.sub(self.regex_h1, '', content, count=0)
                         else:
                             content = re.sub(self.regex_h1_replace, r'##\2', content, count=0)
                         target_file.write(content)
@@ -371,7 +371,7 @@ class PreBuild:
                 result = f.read()
                 title = manifest_json.get('name', '').lower()
                 if title not in [k for k, v in self.integration_mutations.items() if v.get('action') == 'merge']:
-                    result = re.sub(self.regex_h1, '', result, 0)
+                    result = re.sub(self.regex_h1, '', result, 1)
                 if metrics_exist:
                     result = re.sub(self.regex_metrics, r'\1{{< get-metrics-from-git "%s" >}}\n\3\4'%format(title), result, 0)
                 if service_check_exist:
