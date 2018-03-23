@@ -1,148 +1,190 @@
 azure_batch:
   - description: Nombre moyen de cœurs dans le compte batch
     integration: azure_batch
+    interval: ''
     metric_name: azure.batch_batchaccounts.core_count
     metric_type: gauge
     orientation: '0'
+    per_unit_name: ''
     short_name: Core Count
     unit_name: core
   - description: Nombre de nœuds en cours de création
     integration: azure_batch
+    interval: ''
     metric_name: azure.batch_batchaccounts.creating_node_count
     metric_type: gauge
     orientation: '0'
+    per_unit_name: ''
     short_name: Nombre de noeuds en cours de création
     unit_name: node
   - description: Nombre de nœuds inactifs
     integration: azure_batch
+    interval: ''
     metric_name: azure.batch_batchaccounts.idle_node_count
     metric_type: gauge
     orientation: '0'
+    per_unit_name: ''
     short_name: Idle Node Count
     unit_name: node
   - description: Nombre de nœuds quittant le pool
     integration: azure_batch
+    interval: ''
     metric_name: azure.batch_batchaccounts.leaving_pool_node_count
     metric_type: gauge
     orientation: '0'
+    per_unit_name: ''
     short_name: Leaving Pool Node Count
     unit_name: node
   - description: Nombre de noeuds hors ligne
     integration: azure_batch
+    interval: ''
     metric_name: azure.batch_batchaccounts.offline_node_count
     metric_type: gauge
     orientation: '0'
+    per_unit_name: ''
     short_name: Offline Node Count
     unit_name: node
   - description: Nombre total de pools qui ont été créés
     integration: azure_batch
+    interval: ''
     metric_name: azure.batch_batchaccounts.pool_create_event
     metric_type: count
     orientation: '0'
+    per_unit_name: ''
     short_name: Pool Create Events
     unit_name: event
   - description: Nombre total de pools terminés
     integration: azure_batch
+    interval: ''
     metric_name: azure.batch_batchaccounts.pool_delete_complete_event
     metric_type: count
     orientation: '0'
+    per_unit_name: ''
     short_name: Pool Delete Complete Events
     unit_name: event
   - description: Nombre total de suppressions de pool démarrées
     integration: azure_batch
+    interval: ''
     metric_name: azure.batch_batchaccounts.pool_delete_start_event
     metric_type: count
     orientation: '0'
+    per_unit_name: ''
     short_name: Pool Delete Start Events
     unit_name: event
   - description: Nombre total de redimensionnements de pools terminés
     integration: azure_batch
+    interval: ''
     metric_name: azure.batch_batchaccounts.pool_resize_complete_event
     metric_type: count
     orientation: '0'
+    per_unit_name: ''
     short_name: Pool Resize Complete Events
     unit_name: event
   - description: Nombre total de redimensionnements de pools démarrés
     integration: azure_batch
+    interval: ''
     metric_name: azure.batch_batchaccounts.pool_resize_start_event
     metric_type: count
     orientation: '0'
+    per_unit_name: ''
     short_name: Pool Resize Start Events
     unit_name: event
   - description: Nombre de nœuds redémarrant
     integration: azure_batch
+    interval: ''
     metric_name: azure.batch_batchaccounts.rebooting_node_count
     metric_type: gauge
     orientation: '0'
+    per_unit_name: ''
     short_name: Rebooting Node Count
     unit_name: node
   - description: Number of reimaging nodes
     integration: azure_batch
+    interval: ''
     metric_name: azure.batch_batchaccounts.reimaging_node_count
     metric_type: gauge
     orientation: '0'
+    per_unit_name: ''
     short_name: Reimaging Node Count
     unit_name: node
   - description: Nombre de nœuds en cours d'exécution
     integration: azure_batch
+    interval: ''
     metric_name: azure.batch_batchaccounts.running_node_count
     metric_type: gauge
     orientation: '0'
+    per_unit_name: ''
     short_name: Running Node Count
     unit_name: node
   - description: Nombre de nœuds où la tâche de démarrage a échoué
     integration: azure_batch
+    interval: ''
     metric_name: azure.batch_batchaccounts.start_task_failed_node_count
     metric_type: gauge
     orientation: '0'
+    per_unit_name: ''
     short_name: Start Task Failed Node Count
     unit_name: node
   - description: Nombre de nœuds démarrant
     integration: azure_batch
+    interval: ''
     metric_name: azure.batch_batchaccounts.starting_node_count
     metric_type: gauge
     orientation: '0'
+    per_unit_name: ''
     short_name: Starting Node Count
     unit_name: node
   - description: Nombre total de tâches terminées
     integration: azure_batch
+    interval: ''
     metric_name: azure.batch_batchaccounts.task_complete_event
     metric_type: count
     orientation: '0'
+    per_unit_name: ''
     short_name: Task Complete Events
     unit_name: event
   - description: Nombre total de tâches terminées en état d'échec
     integration: azure_batch
+    interval: ''
     metric_name: azure.batch_batchaccounts.task_fail_event
     metric_type: count
     orientation: '0'
+    per_unit_name: ''
     short_name: Task Fail Events
     unit_name: event
   - description: Nombre total de tâches qui ont démarré
     integration: azure_batch
+    interval: ''
     metric_name: azure.batch_batchaccounts.task_start_event
     metric_type: count
     orientation: '0'
+    per_unit_name: ''
     short_name: Task Start Events
     unit_name: event
   - description: Nombre moyen de noeuds dans le compte batch
     integration: azure_batch
+    interval: ''
     metric_name: azure.batch_batchaccounts.total_node_count
     metric_type: gauge
     orientation: '0'
+    per_unit_name: ''
     short_name: Nombre de nœuds
     unit_name: node
   - description: Nombre de noeuds inutilisables
     integration: azure_batch
+    interval: ''
     metric_name: azure.batch_batchaccounts.unusable_node_count
     metric_type: gauge
     orientation: '0'
+    per_unit_name: ''
     short_name: Unusable Node Count
     unit_name: node
   - description: Nombre de nœuds qui attendent la fin de la tâche de démarrage
     integration: azure_batch
+    interval: ''
     metric_name: azure.batch_batchaccounts.waiting_for_start_task_node_count
     metric_type: gauge
     orientation: '0'
+    per_unit_name: ''
     short_name: Waiting For Start Task Node Count
     unit_name: node

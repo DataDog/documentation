@@ -4,29 +4,37 @@ amazon_billing:
       estimés pour un service ou un cumul des frais estimés pour tous les
       services.
     integration: amazon_billing
+    interval: ''
     metric_name: aws.billing.estimated_charges
     metric_type: gauge
     orientation: '-1'
+    per_unit_name: ''
     short_name: bill est charges
     unit_name: dollar
   - description: Les coûts de dépenses réels pour votre période budgétaire
     integration: amazon_billing
+    interval: ''
     metric_name: aws.billing.actual_spend
     metric_type: gauge
     orientation: '-1'
+    per_unit_name: ''
     short_name: bill act spend
     unit_name: dollar
   - description: Les coûts de dépenses prévus pour votre période budgétaire
     integration: amazon_billing
+    interval: ''
     metric_name: aws.billing.forecasted_spend
     metric_type: gauge
     orientation: '-1'
+    per_unit_name: ''
     short_name: bill forecast spend
     unit_name: dollar
   - description: La limite de dépenses pour votre période budgétaire
     integration: amazon_billing
+    interval: ''
     metric_name: aws.billing.budget_limit
     metric_type: gauge
     orientation: '-1'
+    per_unit_name: ''
     short_name: bill budget limit
     unit_name: dollar

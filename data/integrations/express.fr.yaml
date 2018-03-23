@@ -683,6 +683,7 @@ express:
     metric_name: node.express.router.response_time.95percentile
     metric_type: gauge
     orientation: '-1'
+    per_unit_name: ''
     short_name: 95th pct rsp time
     unit_name: millisecond
   - description: La moyenne du temps de réponse.
@@ -691,6 +692,7 @@ express:
     metric_name: node.express.router.response_time.avg
     metric_type: gauge
     orientation: '-1'
+    per_unit_name: ''
     short_name: avg rsp time
     unit_name: millisecond
   - description: La fréquence des réponses reçues.
@@ -708,6 +710,7 @@ express:
     metric_name: node.express.router.response_time.max
     metric_type: gauge
     orientation: '-1'
+    per_unit_name: ''
     short_name: max rsp time
     unit_name: millisecond
   - description: La médiane du temps de réponse.
@@ -716,5 +719,6 @@ express:
     metric_name: node.express.router.response_time.median
     metric_type: gauge
     orientation: '-1'
+    per_unit_name: ''
     short_name: med rsp time
     unit_name: millisecond

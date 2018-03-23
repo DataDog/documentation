@@ -5,6 +5,7 @@ solr:
     metric_name: solr.searcher.maxdoc
     metric_type: gauge
     orientation: '0'
+    per_unit_name: ''
     short_name: max doc id
     unit_name: document
   - description: Le nombre total de documents indexés.
@@ -13,6 +14,7 @@ solr:
     metric_name: solr.searcher.numdocs
     metric_type: gauge
     orientation: '0'
+    per_unit_name: ''
     short_name: num docs
     unit_name: document
   - description: Le temps passé à s'échauffer.
@@ -21,6 +23,7 @@ solr:
     metric_name: solr.searcher.warmup
     metric_type: gauge
     orientation: '-1'
+    per_unit_name: ''
     short_name: warmup time
     unit_name: millisecond
   - description: Le nombre de hits de cache par seconde.
@@ -94,7 +97,9 @@ solr:
     metric_name: solr.search_handler.time
     metric_type: gauge
     orientation: '0'
+    per_unit_name: ''
     short_name: search time
+    unit_name: ''
   - description: Le temps moyen par requête.
     integration: solr
     interval: '10'
