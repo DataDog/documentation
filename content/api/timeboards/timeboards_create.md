@@ -10,7 +10,7 @@ external_redirect: /api/#create-a-timeboard
 
 * **`title`** [*required*]:  
     The name of the dashboard.
-* **`description`** [*optional*, *default*=**None**]:  
+* **`description`** [*required*]:  
     A description of the dashboard's content.
 * **`graphs`** [*optional*, *default*=**None**]:  
     A list of graph definitions. Graph definitions follow this form:
