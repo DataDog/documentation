@@ -69,6 +69,10 @@ This [library][51] allows you to generate process information from StatsD, given
 ### Sensu
 Use these Sensu [handlers][103] to automatically send both metrics and events to Datadog.
 
+### StackStorm
+
+This StackStorm Datadog [integration pack][109] supplies action integration for Datadog.
+
 ### Winston
 A Winston Datadog [transport][104].
 
@@ -184,3 +188,4 @@ If you've written a Datadog library and would like to add it to this page, write
    [106]: https://blog.bithaus.cl/2016/04/20/realtime-google-analytics-metrics-in-datadog/
    [107]: https://github.com/byronwolfman/dd-openvpn
    [108]: https://github.com/denniswebb/datadog-openvpn
+   [109]: https://github.com/StackStorm-Exchange/stackstorm-datadog
