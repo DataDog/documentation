@@ -21,6 +21,8 @@ Two installations are possible:
 - on the host where the agent is external to the Docker environment
 - or by deploying its containerized version in the Docker environment
 
+You can then choose to collect all the logs from all your environment container or to filter by container image name or container label to cherry pick what logs should be collected.
+
 ## Setup
 ### Option 1: Host installation
 
@@ -45,6 +47,7 @@ To run a Docker container which embeds the Datadog Agent to monitor your host us
 docker run -d --name datadog-agent \
            -e DD_API_KEY=<YOUR_API_KEY> \
            -e DD_LOGS_ENABLED=true \
+           -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
            -v /var/run/docker.sock:/var/run/docker.sock:ro \
            -v /proc/:/host/proc/:ro \
            -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw \
@@ -62,6 +65,7 @@ Important notes:
 The command related to log collection are the following:
 
 * `-e DD_LOGS_ENABLED=true`: this parameter enables the log collection when set to true. The agent now looks for log instructions in configuration files.
+* `-e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true`: this parameter add a log configuration that enabled log collection for all containers (see `Option 1` below) 
 * `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw`: mount the directory we created to store pointer on each container logs to make sure we do not lose any.
 * `-v /opt/datadog-agent/conf.d:/conf.d:ro`: mount the configuration directory we previously created to the container
 
@@ -69,7 +73,8 @@ The command related to log collection are the following:
 
 #### Option 1: Collect all container logs without using integrations
 
-To collect logs from all your container without filtering by image or label add the following at the end of `docker.d/conf.yaml` in your agent's `conf.d` directory:
+Using `-e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true` when running the containerized Datadog Agent collects logs from all your containers without filtering by container image or container label.
+You can also add the following at the end of `docker.d/conf.yaml` in your agent's `conf.d` directory to achieve the same goal:
 
 ```yaml
 logs:
@@ -81,10 +86,13 @@ logs:
 
 #### Option 2: Use Integration
 
-Now that the agent is ready to collect logs, you need to define which containers you want to follow.
-To start collecting logs for a given container filtered by image or label, you need to update the log section in an integration or custom .yaml file.
+Now that the agent is ready to collect logs, you need to define which containers you want to monitor.
+To start collecting logs for a given container filtered by container image or container label, you need to update the log section in an integration or custom .yaml file. Autodiscovery is not supported yet for log collection configuration.
 
-Add a new yaml file in the `conf.d` directory (should be `/opt/datadog-agent/conf.d` on the host if you followed above instruction) with the following parameters:
+When filtering on the container image, both exact container image name or short names are supported.
+Suppose you have one container running `library/httpd:latest` and another running `yourusername/httpd:v2`, filtering on `image: httpd` would collects logs from both.
+
+Add a new yaml file in the `conf.d` directory (should be `/opt/datadog-agent/conf.d` on the host if you followed above instructions) with the following parameters:
 
 ```yaml
 init_config:
@@ -94,10 +102,9 @@ instances:
 
 logs:
    - type: docker
-     image: my_image_name    #or label: mylabel
+     image: my_container_image_short_name    #or label: mycontainerlabel
      service: my_application_name
-     source: java #tells Datadog what integration it is
-     sourcecategory: sourcecode
+     source: myintegration #tells Datadog what integration it is
 ```
 
 For more examples of configuration files or agent capabilities (such as filtering, redacting, multiline, …) read [the advanced log collection functions](/logs/#filter-logs).
