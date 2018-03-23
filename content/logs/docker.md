@@ -73,8 +73,8 @@ The command related to log collection are the following:
 
 #### Option 1: Collect all container logs without using integrations
 
-Using `-e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true` when running the containerized Datadog Agent collect logs from all your container without filtering by container image or container label.
-You can also do it by adding the following at the end of `docker.d/conf.yaml` in your agent's `conf.d` directory:
+Using `-e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true` when running the containerized Datadog Agent collects logs from all your containers without filtering by container image or container label.
+You can also add the following at the end of `docker.d/conf.yaml` in your agent's `conf.d` directory to achieve the same goal:
 
 ```yaml
 logs:
