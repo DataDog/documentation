@@ -84,7 +84,7 @@ apm_config:
 | `resource`              | `DD_IGNORE_RESOURCE` | Une liste noire d'expressions régulières pour filtrer les traces par leur nom de ressource.                                                                                |
 {{% /table %}}
 
-Pour plus d'informations sur l'Agent Datadog , consultez la [page de documentation dédiée](/agent/) ou reportez-vous au fichier [`datadog.conf.example`](https://github.com/DataDog/dd-agent/blob /master/datadog.conf.example).
+Pour plus d'informations sur l'Agent Datadog , consultez la [page de documentation dédiée](/agent/) ou reportez-vous au fichier [`datadog.conf.example`](https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example).
 
 [Reportez-vous à notre documentation sur l'implémentation du tracing avec Docker](/tracing/setup/docker).
 
