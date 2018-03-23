@@ -142,7 +142,7 @@ sd_backend_port: 4001
 
 If you're using Consul and the Consul cluster requires authentication, set `consul_token`.
 
-[Restart the Agent](/agent/faq/start-stop-restart-the-datadog-agent) to apply the configuration change.
+[Restart the Agent](/agent/faq/agent-commands/#start-stop-restart-the-agent) to apply the configuration change.
 
 #### Configure in environment variables
 

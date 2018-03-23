@@ -63,7 +63,7 @@ logs:
     source: python
     sourcecategory: sourcecode
 ```
-* [Restart your agent](https://help.datadoghq.com/hc/en-us/articles/203764515-Start-Stop-Restart-the-Datadog-Agent)
+* [Restart your agent](/agent/faq/agent-commands/#start-stop-restart-the-agent)
 
 ## Stream logs through TCP/UDP
 Set `type` to **tcp** or **udp** depending of your protocol then specify the `port` of your incoming connection.
@@ -84,7 +84,7 @@ logs:
     sourcecategory: front
 
 ```
-* [Restart your agent](https://help.datadoghq.com/hc/en-us/articles/203764515-Start-Stop-Restart-the-Datadog-Agent)
+* [Restart your agent](/agent/faq/agent-commands/#start-stop-restart-the-agent)
 
 The agent supports raw string and JSON formated logs. If you are sending logs in batch, use break line characters to separate your logs.
 
