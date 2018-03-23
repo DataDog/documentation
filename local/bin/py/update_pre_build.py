@@ -371,7 +371,7 @@ class PreBuild:
                 result = f.read()
                 title = manifest_json.get('name', '').lower()
                 if title not in [k for k, v in self.integration_mutations.items() if v.get('action') == 'merge']:
-                    result = re.sub(self.regex_h1, '', result, 0)
+                    result = re.sub(self.regex_h1, '', result, 1)
                 if metrics_exist:
                     result = re.sub(self.regex_metrics, r'\1{{< get-metrics-from-git "%s" >}}\n\3\4'%format(title), result, 0)
                 if service_check_exist:
