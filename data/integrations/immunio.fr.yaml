@@ -1,6 +1,7 @@
 immunio:
   - description: Le nombre total de requêtes inspectées par IMMUNIO.
     integration: immunio
+    interval: ''
     metric_name: immunio.requests
     metric_type: count
     orientation: '0'
@@ -11,6 +12,7 @@ immunio:
       Le nombre et la répartition de toutes les attaques détectées pour votre
       compte. Décomposé par App et Environnement.
     integration: immunio
+    interval: ''
     metric_name: immunio.attacks
     metric_type: count
     orientation: '0'
@@ -21,6 +23,7 @@ immunio:
       Nombre de tentatives de connexion infructueuses pour votre compte
       Décomposé par App et Environnement.
     integration: immunio
+    interval: ''
     metric_name: immunio.failed_login
     metric_type: count
     orientation: '-1'
@@ -31,6 +34,7 @@ immunio:
       Le nombre de requêtes suspectes qui ont été arrêtées avec un challenge
       CAPTCHA.
     integration: immunio
+    interval: ''
     metric_name: immunio.mitigated.captcha
     metric_type: count
     orientation: '1'

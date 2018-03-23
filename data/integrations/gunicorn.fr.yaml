@@ -14,6 +14,7 @@ gunicorn:
     metric_name: gunicorn.workers
     metric_type: gauge
     orientation: '0'
+    per_unit_name: ''
     short_name: workers
     unit_name: worker
   - description: Le 95th percentile de la durée d'un requête.
@@ -22,6 +23,7 @@ gunicorn:
     metric_name: gunicorn.request.duration.95percentile
     metric_type: gauge
     orientation: '-1'
+    per_unit_name: ''
     short_name: 95th pct req time
     unit_name: millisecond
   - description: La durée moyenne d'une requête.
@@ -30,6 +32,7 @@ gunicorn:
     metric_name: gunicorn.request.duration.avg
     metric_type: gauge
     orientation: '-1'
+    per_unit_name: ''
     short_name: avg req time
     unit_name: millisecond
   - description: Le vitesse d'évolution de requêtes reçues.
@@ -47,6 +50,7 @@ gunicorn:
     metric_name: gunicorn.request.duration.max
     metric_type: gauge
     orientation: '-1'
+    per_unit_name: ''
     short_name: max req time
     unit_name: millisecond
   - description: La durée médiane d'une requête.
@@ -55,6 +59,7 @@ gunicorn:
     metric_name: gunicorn.request.duration.median
     metric_type: gauge
     orientation: '-1'
+    per_unit_name: ''
     short_name: median req time
     unit_name: millisecond
   - description: La fréquence des événements critical loggés.

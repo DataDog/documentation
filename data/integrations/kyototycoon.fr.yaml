@@ -1,16 +1,20 @@
 kyototycoon:
   - description: Délai de réplication
     integration: kyototycoon
+    interval: ''
     metric_name: kyototycoon.repl_delay
     metric_type: gauge
     orientation: '0'
+    per_unit_name: ''
     short_name: kyot_repl_delay
     unit_name: millisecond
   - description: Nombre total de threads
     integration: kyototycoon
+    interval: ''
     metric_name: kyototycoon.serv_thread_count
     metric_type: gauge
     orientation: '0'
+    per_unit_name: ''
     short_name: kyot_serv_thrd
     unit_name: thread
   - description: Nombre total de connexions
@@ -19,6 +23,7 @@ kyototycoon:
     metric_name: kyototycoon.serv_conn_count
     metric_type: rate
     orientation: '0'
+    per_unit_name: ''
     short_name: kyot_serv_conn
     unit_name: connection
   - description: Fréquence de hit get
@@ -27,6 +32,7 @@ kyototycoon:
     metric_name: kyototycoon.cnt_get
     metric_type: rate
     orientation: '0'
+    per_unit_name: ''
     short_name: kyot_get_hit
     unit_name: hit
   - description: Taux d'échecs
@@ -35,6 +41,7 @@ kyototycoon:
     metric_name: kyototycoon.cnt_get_misses
     metric_type: rate
     orientation: '0'
+    per_unit_name: ''
     short_name: kyot_get_miss
     unit_name: miss
   - description: Fréquence de hit set
@@ -43,6 +50,7 @@ kyototycoon:
     metric_name: kyototycoon.cnt_set
     metric_type: rate
     orientation: '0'
+    per_unit_name: ''
     short_name: kyot_set_hit
     unit_name: hit
   - description: Taux de ratés
@@ -51,6 +59,7 @@ kyototycoon:
     metric_name: kyototycoon.cnt_set_misses
     metric_type: rate
     orientation: '0'
+    per_unit_name: ''
     short_name: kyot_set_miss
     unit_name: miss
   - description: Fréquence de hit deleted
@@ -59,6 +68,7 @@ kyototycoon:
     metric_name: kyototycoon.cnt_remove
     metric_type: rate
     orientation: '0'
+    per_unit_name: ''
     short_name: kyot_remove_hit
     unit_name: hit
   - description: Taux de ratés supprimés
@@ -67,18 +77,24 @@ kyototycoon:
     metric_name: kyototycoon.cnt_remove_misses
     metric_type: rate
     orientation: '0'
+    per_unit_name: ''
     short_name: kyot_remove_miss
     unit_name: miss
   - description: Quantité totale d'enregistrements
     integration: kyototycoon
+    interval: ''
     metric_name: kyototycoon.count
     metric_type: gauge
     orientation: '0'
+    per_unit_name: ''
     short_name: kyot_db_count
     unit_name: record
   - description: Taille actuelle de la base de données kyoto tycoon
     integration: kyototycoon
+    interval: ''
     metric_name: kyototycoon.size
     metric_type: gauge
     orientation: '0'
+    per_unit_name: ''
     short_name: kyot_db_size
+    unit_name: ''

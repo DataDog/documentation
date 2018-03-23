@@ -1,7 +1,10 @@
 filebeat:
   - description: Nombre d'octets non encore traités par Filebeat.
     integration: filebeat
+    interval: ''
     metric_name: filebeat.registry.unprocessed_bytes
     metric_type: gauge
     orientation: '0'
+    per_unit_name: ''
+    short_name: ''
     unit_name: byte

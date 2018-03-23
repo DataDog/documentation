@@ -25,10 +25,11 @@ Pour activer ces fonctionnalités, utilisez les noms d'attribut suivants:
 Pour les frameworks d'intégration, nous fournissons des instructions sur la façon de logger en JSON dans un fichier. Les logs au format JSON permettent de mieux gérer les logs d'application multilignes et sont automatiquement analysés par Datadog.
 
 {{< whatsnext desc="Select your framework in the list below:" >}}
-    {{< nextlink href="logs/languages/csharp" >}}Csharp{{< /nextlink >}}
-    {{< nextlink href="logs/languages/go" >}}Go{{< /nextlink >}}
-    {{< nextlink href="logs/languages/java" >}}Java{{< /nextlink >}}
-    {{< nextlink href="logs/languages/nodejs" >}}Nodejs{{< /nextlink >}}
-    {{< nextlink href="logs/languages/python" >}}Python{{< /nextlink >}}
-    {{< nextlink href="logs/languages/ruby" >}}Ruby{{< /nextlink >}}
+    {{< nextlink href="/logs/languages/csharp" >}}Csharp{{< /nextlink >}}
+    {{< nextlink href="/logs/languages/go" >}}Go{{< /nextlink >}}
+    {{< nextlink href="/logs/languages/java" >}}Java{{< /nextlink >}}
+    {{< nextlink href="/logs/languages/nodejs" >}}Nodejs{{< /nextlink >}}
+    {{< nextlink href="/logs/languages/php" >}}PHP{{< /nextlink >}}
+    {{< nextlink href="/logs/languages/python" >}}Python{{< /nextlink >}}
+    {{< nextlink href="/logs/languages/ruby" >}}Ruby{{< /nextlink >}}
 {{< /whatsnext >}}

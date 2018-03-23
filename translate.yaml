@@ -20,6 +20,9 @@ ignores:
   - "**/*.fr.yaml"
   - "**/*.fr.json"
   - "**/fr.json"
+filters:
+- src: "data/integrations/*.yaml"
+  template: ".translate/templates/integrations.yaml"
 langs:
 - lang_country: "fr_FR"
   lang: "fr"
