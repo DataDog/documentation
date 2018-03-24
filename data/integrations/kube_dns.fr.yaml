@@ -18,7 +18,7 @@ kube_dns:
     orientation: '0'
     per_unit_name: ''
     short_name: response size sample count
-    unit_name: réponse
+    unit_name: response
   - description: Temps (en secondes) que chaque requête a pris pour résoudre.
     integration: kube_dns
     interval: ''

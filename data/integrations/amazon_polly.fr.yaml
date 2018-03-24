@@ -95,7 +95,7 @@ amazon_polly:
     orientation: '0'
     per_unit_name: ''
     short_name: total responses
-    unit_name: réponse
+    unit_name: response
   - description: Nombre total de code d'état HTTP 200 renvoyé lors d'une réponse réussie.
     integration: amazon_polly
     interval: '60'
@@ -104,7 +104,7 @@ amazon_polly:
     orientation: '1'
     per_unit_name: ''
     short_name: avg 2xx count
-    unit_name: réponse
+    unit_name: response
   - description: >-
       Nombre total de code d'état HTTP 400 renvoyé lors d'une réponse réussie.
       Pour chaque réponse réussie, un zéro (0) est émis.
@@ -115,7 +115,7 @@ amazon_polly:
     orientation: '-1'
     per_unit_name: ''
     short_name: avg 4xx count
-    unit_name: réponse
+    unit_name: response
   - description: >-
       Nombre total de code d'état HTTP 500 renvoyé lors d'une réponse réussie.
       Pour chaque réponse réussie, un zéro (0) est émis.
@@ -126,4 +126,4 @@ amazon_polly:
     orientation: '-1'
     per_unit_name: ''
     short_name: avg 5xx count
-    unit_name: réponse
+    unit_name: response

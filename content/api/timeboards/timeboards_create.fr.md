@@ -10,7 +10,7 @@ external_redirect: /api/#create-a-timeboard
 
 * **`title`** [*obligatoire*]:  
     Le nom du dashboard.
-* **`description`** [*obligatoire*]:  
+* **`description`** [*optionnel*, *defaut*=**None**]:  
     Une description du contenu du dashboard.
 * **`graphs`** [*optionnel*, *defaut*=**None**]:  
     Une liste de définitions de graphique. Les définitions de graphique suivent cette forme:

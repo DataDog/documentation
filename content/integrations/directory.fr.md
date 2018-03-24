@@ -59,7 +59,7 @@ instances:
 
 Assurez-vous que l'utilisateur exécutant le processus de Agent (généralement `dd-agent`) ait un accès en lecture aux répertoires, sous-répertoires et fichiers que vous configurez.
 
-2. [Redémarez l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent).
+2. [Redémarrez l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent).
 
 ### Validation
 

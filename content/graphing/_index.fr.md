@@ -4,6 +4,9 @@ kind: documentation
 aliases:
   - /fr/guides/graphing
   - /fr/graphing/miscellaneous/metrics_arithmetic
+  - >-
+    /fr/graphing/faq/is-there-a-way-for-me-to-set-the-maximum-and-minimum-values-on-the-y-axis-of-a-graph
+  - /fr/graphing/faq/is-it-possible-to-adjust-the-y-axis-for-my-graphs
 description: Visualisez vos données pour mieux les comprendre
 ---
 Les graphiques sont une fenêtre sur vos systèmes surveillés. La plupart du temps lors de vos visites de Datadog, vous regardez [des dashboards][8] constitués de graphiques. D'autres fois, vous recevez des notifications par courriel qui incluent un graphique de certaines fluctuations dans le système. Et d'autres fois, vous voyez des graphiques dans votre client Slack, HipChat (ou autres clients de chat) montrant des changements de comportement dans les métriques au cours du temps. Les graphiques sont au cœur de la surveillance et de l'observabilité, il est donc essentiel de comprendre comment définir de superbes graphiques.
@@ -150,6 +153,8 @@ Il y a trois paramètres de configuration:
     * *sqrt*: Une échelle en racine carrée
 
 * `Always include zero` (optionnel): Spécifie s'il faut toujours inclure zéro ou ajuster l'axe à la plage de données. La comportement par défaut est de toujours inclure  zéro.
+
+Note: comme la fonction log logarithmique n'accepte pas les valeurs négatives, notre échelle log ne fonctionne que si les valeurs ont le même signe (tout> 0 ou tout <0). Sinon, un graphique vide est renvoyé.
 
 ### Superposer des événements pour un contexte supplémentaire
 

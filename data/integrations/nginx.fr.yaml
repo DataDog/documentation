@@ -90,7 +90,7 @@ nginx:
     orientation: '0'
     per_unit_name: ''
     short_name: cache bypass responses
-    unit_name: réponse
+    unit_name: response
   - description: Le nombre total de réponses écrites dans le cache
     integration: nginx
     interval: ''
@@ -99,7 +99,7 @@ nginx:
     orientation: '0'
     per_unit_name: ''
     short_name: cache bypass responses_written
-    unit_name: réponse
+    unit_name: response
   - description: >-
       Une valeur booléenne indiquant si le processus "cache loader" charge
       toujours les données du disque dans le cache
@@ -110,7 +110,7 @@ nginx:
     orientation: '0'
     per_unit_name: ''
     short_name: cache cold
-    unit_name: réponse
+    unit_name: response
   - description: Le nombre total d'octets lus sur le serveur proxy
     integration: nginx
     interval: ''
@@ -137,7 +137,7 @@ nginx:
     orientation: '0'
     per_unit_name: ''
     short_name: cache expired responses
-    unit_name: réponse
+    unit_name: response
   - description: Le nombre total de réponses écrites dans le cache
     integration: nginx
     interval: ''
@@ -146,7 +146,7 @@ nginx:
     orientation: '0'
     per_unit_name: ''
     short_name: cache expired responses_written
-    unit_name: réponse
+    unit_name: response
   - description: Le nombre total d'octets lus depuis le cache
     integration: nginx
     interval: ''
@@ -164,7 +164,7 @@ nginx:
     orientation: '0'
     per_unit_name: ''
     short_name: cache hit responses
-    unit_name: réponse
+    unit_name: response
   - description: La limite de la taille maximale du cache spécifiée dans la configuration
     integration: nginx
     interval: ''
@@ -200,7 +200,7 @@ nginx:
     orientation: '0'
     per_unit_name: ''
     short_name: cache miss responses
-    unit_name: réponse
+    unit_name: response
   - description: Le nombre total de réponses écrites dans le cache
     integration: nginx
     interval: ''
@@ -209,7 +209,7 @@ nginx:
     orientation: '0'
     per_unit_name: ''
     short_name: cache miss responses_written
-    unit_name: réponse
+    unit_name: response
   - description: Le nombre total d'octets lus depuis le cache
     integration: nginx
     interval: ''
@@ -236,7 +236,7 @@ nginx:
     orientation: '0'
     per_unit_name: ''
     short_name: cache size
-    unit_name: réponse
+    unit_name: response
   - description: Le nombre total d'octets lus depuis le cache
     integration: nginx
     interval: ''
@@ -254,7 +254,7 @@ nginx:
     orientation: '0'
     per_unit_name: ''
     short_name: cache stale responses
-    unit_name: réponse
+    unit_name: response
   - description: Le nombre total d'octets lus depuis le cache
     integration: nginx
     interval: ''
@@ -272,7 +272,7 @@ nginx:
     orientation: '0'
     per_unit_name: ''
     short_name: cache updating responses
-    unit_name: réponse
+    unit_name: response
   - description: Le nombre total de connexions client acceptées.
     integration: nginx
     interval: ''
@@ -416,7 +416,7 @@ nginx:
     orientation: '0'
     per_unit_name: ''
     short_name: server zone resp 1xx
-    unit_name: réponse
+    unit_name: response
   - description: Le nombre de réponses avec le code d'état 2xx.
     integration: nginx
     interval: ''
@@ -425,7 +425,7 @@ nginx:
     orientation: '0'
     per_unit_name: ''
     short_name: server zone resp 2xx
-    unit_name: réponse
+    unit_name: response
   - description: Le nombre de réponses avec le code d'état 3xx.
     integration: nginx
     interval: ''
@@ -434,7 +434,7 @@ nginx:
     orientation: '0'
     per_unit_name: ''
     short_name: server zone resp 3xx
-    unit_name: réponse
+    unit_name: response
   - description: Le nombre de réponses avec le code d'état 4xx.
     integration: nginx
     interval: ''
@@ -443,7 +443,7 @@ nginx:
     orientation: '0'
     per_unit_name: ''
     short_name: server zone resp 4xx
-    unit_name: réponse
+    unit_name: response
   - description: Le nombre de réponses avec le code d'état 5xx.
     integration: nginx
     interval: ''
@@ -452,7 +452,7 @@ nginx:
     orientation: '0'
     per_unit_name: ''
     short_name: server zone resp 5xx
-    unit_name: réponse
+    unit_name: response
   - description: Le nombre total de réponses envoyées aux clients.
     integration: nginx
     interval: ''
@@ -461,7 +461,7 @@ nginx:
     orientation: '0'
     per_unit_name: ''
     short_name: server zone resp total
-    unit_name: réponse
+    unit_name: response
   - description: Le montant total des données envoyées aux clients.
     integration: nginx
     interval: ''
@@ -940,7 +940,7 @@ nginx:
     orientation: '0'
     per_unit_name: ''
     short_name: upstr peers resp 1xx
-    unit_name: réponse
+    unit_name: response
   - description: Le nombre de réponses avec le code d'état 1xx. (montré comme count)
     integration: nginx
     interval: ''
@@ -949,7 +949,7 @@ nginx:
     orientation: '0'
     per_unit_name: ''
     short_name: upstr peers resp 1xx count
-    unit_name: réponse
+    unit_name: response
   - description: Le nombre de réponses avec le code d'état 2xx.
     integration: nginx
     interval: ''
@@ -958,7 +958,7 @@ nginx:
     orientation: '0'
     per_unit_name: ''
     short_name: upstr peers resp 2xx
-    unit_name: réponse
+    unit_name: response
   - description: Le nombre de réponses avec le code d'état 2xx. (montré comme count)
     integration: nginx
     interval: ''
@@ -967,7 +967,7 @@ nginx:
     orientation: '0'
     per_unit_name: ''
     short_name: upstr peers resp 2xx count
-    unit_name: réponse
+    unit_name: response
   - description: Le nombre de réponses avec le code d'état 3xx.
     integration: nginx
     interval: ''
@@ -976,7 +976,7 @@ nginx:
     orientation: '0'
     per_unit_name: ''
     short_name: upstr peers resp 3xx
-    unit_name: réponse
+    unit_name: response
   - description: Le nombre de réponses avec le code d'état 3xx. (montré comme count)
     integration: nginx
     interval: ''
@@ -985,7 +985,7 @@ nginx:
     orientation: '0'
     per_unit_name: ''
     short_name: upstr peers resp 3xx count
-    unit_name: réponse
+    unit_name: response
   - description: Le nombre de réponses avec le code d'état 4xx.
     integration: nginx
     interval: ''
@@ -994,7 +994,7 @@ nginx:
     orientation: '0'
     per_unit_name: ''
     short_name: upstr peers resp 4xx
-    unit_name: réponse
+    unit_name: response
   - description: Le nombre de réponses avec le code d'état 4xx. (montré comme count)
     integration: nginx
     interval: ''
@@ -1003,7 +1003,7 @@ nginx:
     orientation: '0'
     per_unit_name: ''
     short_name: upstr peers resp 4xx count
-    unit_name: réponse
+    unit_name: response
   - description: Le nombre de réponses avec le code d'état 5xx.
     integration: nginx
     interval: ''
@@ -1012,7 +1012,7 @@ nginx:
     orientation: '0'
     per_unit_name: ''
     short_name: upstr peers resp 5xx
-    unit_name: réponse
+    unit_name: response
   - description: Le nombre de réponses avec le code d'état 5xx. (montré comme count)
     integration: nginx
     interval: ''
@@ -1021,7 +1021,7 @@ nginx:
     orientation: '0'
     per_unit_name: ''
     short_name: upstr peers resp 5xx count
-    unit_name: réponse
+    unit_name: response
   - description: Le nombre total de réponses obtenues à partir de ce serveur.
     integration: nginx
     interval: ''
@@ -1030,7 +1030,7 @@ nginx:
     orientation: '0'
     per_unit_name: ''
     short_name: upstr peers resp
-    unit_name: réponse
+    unit_name: response
   - description: >-
       L'heure (EPOCH) de la dernière sélection du serveur pour traiter une
       requête (1.7.5).

@@ -15,7 +15,7 @@ azure_batch:
     metric_type: gauge
     orientation: '0'
     per_unit_name: ''
-    short_name: Nombre de noeuds en cours de création
+    short_name: Creating Node Count
     unit_name: node
   - description: Nombre de nœuds inactifs
     integration: azure_batch
@@ -168,7 +168,7 @@ azure_batch:
     metric_type: gauge
     orientation: '0'
     per_unit_name: ''
-    short_name: Nombre de nœuds
+    short_name: Node Count
     unit_name: node
   - description: Nombre de noeuds inutilisables
     integration: azure_batch
