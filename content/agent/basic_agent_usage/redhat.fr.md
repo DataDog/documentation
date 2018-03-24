@@ -167,7 +167,7 @@ Pour installer (ou avoir une installation d'Agent v5 à partir de laquelle vous 
     sudo -u dd-agent -- cp /etc/datadog-agent/checks.d/<check>.py /etc/dd-agent/checks.d/
     ```
 
-5. Redémarez votre Agent
+5. Redémarrez votre Agent
     ```shell
     # Systemd
     sudo systemctl restart datadog-agent

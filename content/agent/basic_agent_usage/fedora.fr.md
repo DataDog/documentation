@@ -134,7 +134,7 @@ Pour installer (ou avoir une installation d'Agent v5 à partir de laquelle vous 
     sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_API_KEY>/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
     ```
 
-5. Redémarez votre Agent
+5. Redémarrez votre Agent
 
     ```
     sudo systemctl restart datadog-agent.service
@@ -167,7 +167,7 @@ Pour installer (ou avoir une installation d'Agent v5 à partir de laquelle vous 
     sudo -u dd-agent -- cp /etc/datadog-agent/checks.d/<check>.py /etc/dd-agent/checks.d/
     ```
 
-5. Redémarez votre Agent
+5. Redémarrez votre Agent
     ```shell
     # Systemd
     sudo systemctl restart datadog-agent

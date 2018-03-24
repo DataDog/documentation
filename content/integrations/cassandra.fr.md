@@ -45,7 +45,7 @@ Cette check a une limite de 350 métriques par instance. Le nombre de métriques
 ### Configuration
 
 1. Configurer l'Agent pour qu'il se connecte à Cassandra en éditant le fichier `cassandra.yaml`. Consultez l'exemple du [canevas cassandra.yaml](https://github.com/DataDog/integrations-core/blob/master/cassandra/conf.yaml.example) pour apprendre toutes les options de configuration disponibles:
-2. [Redémarez votre Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent)
+2. [Redémarrez votre Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent)
 
 ### Validation
 

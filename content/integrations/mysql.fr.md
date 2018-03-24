@@ -130,7 +130,7 @@ Query OK, 0 rows affected (0.00 sec)
 
 L'utilisateur `datadog` doit être configuré dans la configuration d'intégration de MySQL en tant que `host: 127.0.0.1` au lieu de `localhost`. Alternativement, vous pouvez également utiliser `sock`.
 
-* [Redémarez l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent) pour commencer à envoyer vos métriques MySQL à Datadog.
+* [Redémarrez l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent) pour commencer à envoyer vos métriques MySQL à Datadog.
 
 #### Collecte de log
 
@@ -203,7 +203,7 @@ L'utilisateur `datadog` doit être configuré dans la configuration d'intégrati
     ```
     Consultez l'exemple du [canevas mysql.yaml](https://github.com/Datadog/integrations-core/blob/master/mysql/conf.yaml.example) pour apprendre toutes les options de configuration disponibles:
 
-4. [Redémarez l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent).
+4. [Redémarrez l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent).
 
 **En apprendre plus sur la collecte de logs [sur la documentation des logs](https://docs.datadoghq.com/logs)**
 

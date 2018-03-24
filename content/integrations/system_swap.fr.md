@@ -46,7 +46,7 @@ init_config:
 instances: [{}]
 ```
 
-[Redémarez l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent) pour commencer à envoyer vos métriques swap à Datadog
+[Redémarrez l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent) pour commencer à envoyer vos métriques swap à Datadog
 
 ### Validation
 
