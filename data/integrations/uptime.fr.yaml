@@ -1,0 +1,10 @@
+uptime:
+  - description: Le temps de réponse lors de l'exécution du check.
+    integration: uptime
+    interval: ''
+    metric_name: uptime.response_time
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: uptime response
+    unit_name: second
