@@ -19,8 +19,7 @@ This page first looks at the generic `Prometheus` check, the fastest & simpliest
 
 ## Generic Prometheus check
 
-Starting version 6.1 the agent includes a new [Prometheus](https://github.com/DataDog/integrations-core/tree/master/prometheus) check
-capable of scrapping prometheus endpoints with only a few lines of configuration.
+Starting with version 6.1 the agent includes a new [Prometheus](https://github.com/DataDog/integrations-core/tree/master/prometheus) check capable of scrapping prometheus endpoints with only a few lines of configuration.
 
 ### Configuration
 
@@ -28,14 +27,13 @@ Edit the `prometheus.yaml` file to add your different instances you want to retr
 
 Minimal configuration of an instance includes:
 
-* a `prometheus_url` that points to the metric route (⚠ this has to be unique)
-* a `namespace` that will be prepended to all metrics (to avoid metrics name collision)
-* a list of `metrics` that you want to retrieve as custom metrics, for each metric you can either
-simply add it to the list `- metric_name` or renaming it like `- metric_name: renamed`.
+* A `prometheus_url` that points to the metric route (⚠ this has to be unique).
+* A `namespace` that is prepended to all metrics (to avoid metrics name collision).
+* A list of `metrics` that you want to retrieve as custom metrics, for each metric you can either simply add it to the list `- metric_name` or renaming it like `- metric_name: renamed`.
 
 Note: It's possible to use a `*` wildcard such as `- metric*` that would fetch all matching metrics (to use with caution as it can potentially send a lot of custom metrics)
 
-Your metrics will be collected in the form of `namespace.metric_name` also you'll by default get a service check named `namespace.prometheus.health` to indicate the health of the prometheus endpoint.
+Your metrics are collected in the form of `namespace.metric_name`. By default you get a service check named `namespace.prometheus.health` to indicate the health of the prometheus endpoint.
 
 ### Advanced Settings
 
@@ -90,9 +88,7 @@ instances:
 ### Configuration
 
 <div class="alert alert-warning">
-The names of the configuration and check files must match. If your check
-is called <code>mycheck.py</code> your configuration file <em>must</em> be
-named <code>mycheck.yaml</code>.
+The names of the configuration and check files must match. If your check is called <code>mycheck.py</code> your configuration file <em>must</em> be named <code>mycheck.yaml</code>.
 </div>
 
 Configuration for a Prometheus Check is almost the same as a regular Agent Check, please refer to the [dedicated Agent check documentation to learn more](/agent/agent_checks/#configuration)
