@@ -12,6 +12,8 @@ aliases:
     - /integrations/faq/gathering-kubernetes-events
 ---
 
+**Disclaimer**: The agent 6 only supports versions of Kubernetes higher than 1.7.6.
+
 There are two installation processes available to gather metrics, traces and logs from your Kubernetes Clusters:
 
 * [Container installation](#container-installation) - recommended
