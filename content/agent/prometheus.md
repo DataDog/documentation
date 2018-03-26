@@ -15,25 +15,25 @@ further_reading:
 
 ## Overview
 
-This page first looks at the generic `Prometheus` check, the fastest & simpliest way to scrap custom metrics off prometheus endpoints and then dives in the `PrometheusCheck` interface for more advanced usage finishing by an example of writting a simple Check that collects timing metrics and status events from [Kube DNS](https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/kube_dns.py).
+This page first looks at the generic `Prometheus` check, the fastest and simplest way to scrape custom metrics from Prometheus endpoints, then dives into the `PrometheusCheck` interface for more advanced usage. Finally we include an example of a simple heck that collects timing metrics and status events from [Kube DNS](https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/kube_dns.py).
 
 ## Generic Prometheus check
 
-Starting with version 6.1 the agent includes a new [Prometheus](https://github.com/DataDog/integrations-core/tree/master/prometheus) check capable of scrapping prometheus endpoints with only a few lines of configuration.
+Starting with version 6.1 the Agent includes a new [Prometheus](https://github.com/DataDog/integrations-core/tree/master/prometheus) check capable of scraping Prometheus endpoints with only a few lines of configuration.
 
 ### Configuration
 
-Edit the `prometheus.yaml` file to add your different instances you want to retrieve custom metrics from.
+Edit the `prometheus.yaml` file to add the different instances you want to retrieve custom metrics from.
 
-Minimal configuration of an instance includes:
+The minimal configuration of an instance includes:
 
-* A `prometheus_url` that points to the metric route (⚠ this has to be unique).
-* A `namespace` that is prepended to all metrics (to avoid metrics name collision).
-* A list of `metrics` that you want to retrieve as custom metrics, for each metric you can either simply add it to the list `- metric_name` or renaming it like `- metric_name: renamed`.
+* A `prometheus_url` that points to the metric route (**Note:** this has to be unique).
+* A `namespace` that is prepended to all metrics to avoid metrics name collision.
+* A list of `metrics` that you want to retrieve as custom metrics. For each metric you can either add it to the list `- metric_name` or rename it by specifying a new metric name `- metric_name: renamed`.
 
-Note: It's possible to use a `*` wildcard such as `- metric*` that would fetch all matching metrics (to use with caution as it can potentially send a lot of custom metrics)
+Note: It's possible to use a `*` wildcard such as `- metric*` that would fetch all matching metrics. Use with caution: this can potentially generate a lot of custom metrics!
 
-Your metrics are collected in the form of `namespace.metric_name`. By default you get a service check named `namespace.prometheus.health` to indicate the health of the prometheus endpoint.
+Your metrics are collected in the form `namespace.metric_name`. By default you get a service check named `namespace.prometheus.health` to indicate the health of the Prometheus endpoint.
 
 ### Advanced Settings
 
@@ -41,9 +41,9 @@ For a comprehensive list of settings please refer to the [example configuration]
 
 ### Auto-discovery
 
-As usual you can configure the prometheus check using [Autodiscovery](https://docs.datadoghq.com/agent/autodiscovery/) if you want to quickly scrap a container/pod exposing prometheus metrics.
+You can configure the prometheus check using [Autodiscovery](https://docs.datadoghq.com/agent/autodiscovery/) to quickly collect Prometheus metrics exposed by a container or pod.
 
-Example of pod annotations on a `linkerd` pod:
+Example of Autodiscovery using pod annotations on a `linkerd` pod:
 
 ```yaml
 annotations:
@@ -54,9 +54,9 @@ annotations:
 
 ### From custom to official integration
 
-By default all metrics retrieved by the generic prometheus check are considered custom metrics, if you are monitoring an off-the-shelf software and you think it would deserve an official integration, don't hesitate to contribute.
+By default all metrics retrieved by the generic Prometheus check are considered custom metrics. If you are monitoring off-the-shelf software and think it deserves an official integration, don't hesitate to contribute.
 
-Official integrations have there own dedicated directories and there's a default instance mechanism in the generic check to hardcode the default configuration & metrics metadata, have a look at the [kube-proxy](https://github.com/DataDog/integrations-core/tree/master/kube_proxy) integration for an example.
+Official integrations have there own dedicated directories. There's a default instance mechanism in the generic check to hardcode the default configuration and metrics metadata. For an example, reference the [kube-proxy](https://github.com/DataDog/integrations-core/tree/master/kube_proxy) integration.
 
 ## Advanced usage: Prometheus check interface
 
@@ -69,9 +69,9 @@ If you have more advanced needs than the generic check (have some metrics prepro
 AND/OR
 - Create method named after the prometheus metric they will handle (see `self.prometheus_metric_name`)
 
-## Writting a custom Prometheus check
+## Writing a custom Prometheus check
 
-This is a simple example of writting a kube DNS check to illustrate the `PrometheusCheck` class usage for learning purposes, but the example bellow could have been handled with configuring the following generic prometheus check:
+This is a simple example of writing a kube DNS check to illustrate the `PrometheusCheck` class usage for learning purposes, but the example bellow could have been handled with configuring the following generic prometheus check:
 
 ```yaml
 instances:
