@@ -20,9 +20,13 @@ Anomaly detection is an algorithmic feature that allows you to identify when a m
 
 For example, anomaly detection can help you discover when your web traffic is unusually low on a weekday afternoon&mdash;even though that same level of traffic would be perfectly normal later in the evening. Or consider a metric measuring the number of logins to your steadily-growing site. As the number is increasing every day, any threshold would be quickly outdated, whereas anomaly detection can quickly alert you if there is an unexpected drop&mdash;potentially indicating an issue with the login system.
 
-## How to Use Anomaly Detection on Your Data
+## How to Create an Anomaly Detection Monitor
 
 There is an `anomalies` function in the Datadog query language. When you apply this function to a series, it returns the usual results along with an expected "normal" range.
+
+Anomaly detection monitors provide both "Historical Context" so that you can see how the metric behaved in the past, as well as a separate "Evaluation Window" that is longer than the alerting window to provide you some immediate context. This should provide some insight into what the anomalies algorithm takes into account when calculating the bounds.
+
+{{< img src="monitors/monitor_types/anomaly/context.png" alt="historical context" responsive="true" popup="true" style="width:80%;">}}
 
 Keep in mind that `anomalies` uses the past to predict what is expected in the future, so using `anomalies` on a new metric, for which you have just started collecting data, may yield poor results.
 
@@ -30,16 +34,14 @@ Navigate to the [New Monitor](https://app.datadoghq.com/monitors#/create) page a
 
 {{< img src="monitors/monitor_types/anomaly/monitor_options.png" alt="monitor options" responsive="true" popup="true" style="width:80%;">}}
 
-You should now see something like what's shown above, with a handful of selections that help determine how sensitive your monitor is to different types of anomalies.
+You should now see something like what's shown above, with a handful of selections that help determine when to alert on anomalous behavior. If you only care about unusually high or unusually low values, you can choose to only alert on values above or below the bounds. The next selection determines the length of the alert window, which specifies how long a metric needs to be anomalous before an alert triggers. If the alert window is too short, you can might get false alarms due to spurious noise. Finally, the recovery period specifies for how long the metric must be normal before the alert recovers.
 
-1.  This number is equivalent to the `bounds` parameter used in the `anomalies` function in dashboards; it controls the width of the gray band. We recommend using a value of 2 or 3.
-2.  If you only care about unusually high or unusually low values, you can choose to only alert on values above or below the bounds.
-3.  We recommend using a window size of at least 15 minutes. (A 30 minute window works well in most cases.)
-4.  [Change the anomaly detection algorithm used][2].
+Complete the rest of the steps in the New Monitor form (**Say what's happening**, etc) and click **Save** to create the Anomaly monitor.
 
-Complete all steps in the New Monitor form (**Say what's happening**, etc) and click **Save** to create the Anomaly monitor.
+### Advanced Options
 
-Both the Monitor Edit page and the Monitor Status pages provide "Historical Context" so that you can see how the metric behaved in the past. This should provide some insight into what the anomalies algorithm takes into account when calculating the bounds.
+4.  [Change the anomaly detection algorithm used](/#anomaly-detetion-algorithms).
+
 
 ### Anomaly Detection Algorithms
 
@@ -72,18 +74,22 @@ The algorithms also deal with scale differently. _Basic_ and _Robust_ are scale-
 
 {{< img src="monitors/monitor_types/anomaly/alg_comparison_scale.png" alt="algorithm comparison scale" responsive="true" popup="true" style="width:90%;">}}
 
-Finally, we see how each of the algorithms handle a new metric. _Robust_ and _agile_ won't show any bounds during the first few seasons. _Basic_ starts showing bounds shortly after the metric first appears.
+Finally, we see how each of the algorithms handle a new metric. _Robust_ and _agile_ won't show any bounds during the first few seasons (here the seasonality is set to "weekly"). _Basic_ starts showing bounds shortly after the metric first appears.
 
 {{< img src="monitors/monitor_types/anomaly/alg_comparison_new_metric.png" alt="algorithm comparison new metric" responsive="true" popup="true" style="width:90%;">}}
 
 ## Anomaly Monitors via the API
 
+<<<<<<< HEAD
 If you are an enterprise-level customer, create an anomaly detection monitor via the API with the standard [create-monitor API endpoint][5] if you add the `anomalies` function to the monitor query. The query then follows this formula:
+=======
+If you are an enterprise-level customer, you can create an anomaly detection monitor via the API with the standard [create-monitor API endpoint](/api/#monitor-create) if you add the `anomalies` function to the monitor query. The query then follows this formula:
+>>>>>>> add historical context png
 ```
 time_aggr(time_window):anomalies(space_aggr:metric{tags}, 'algorithm_used', deviation_number, direction='both/above/below') >= threshold_value
 ```
 
-Acceptable algorithm values are basic, agile, or robust.
+Acceptable algorithm values are _basic_, _agile_, or _robust_.
 
 **Note**: that anomaly detection monitors may only be used by enterprise-level customer subscriptions. If you have a pro-level customer subscription and would like to use the anomaly detection monitoring feature, you can reach out to your customer success representative or [email our billing team][6] to discuss that further.
 
@@ -151,7 +157,7 @@ Anomaly detection uses historical data to establish a baseline for normal behavi
 
 ### What happened to the `adaptive` algorithm?
 
-We used to expose an algorithm called `adaptive` which would try to figure out a metric's inherent seasonality and adjust its predictions accordingly. Now that we automatically detect the seasonality of a metric when setting up a monitor, there is less need for this particular algorithm, which was more slower than the other algorithms. Existing monitors that use the `adaptive` algorithm are untouched and will work as they always have.
+We used to expose an algorithm called `adaptive` which would try to figure out a metric's inherent seasonality and adjust its predictions accordingly. Now that we automatically detect the seasonality of a metric when setting up a monitor, there is less need for this particular algorithm, which was slower and required more data than the other algorithms. Existing monitors that use the `adaptive` algorithm are untouched and will work as they always have.
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
