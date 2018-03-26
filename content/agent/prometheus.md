@@ -41,7 +41,7 @@ For a comprehensive list of settings please refer to the [example configuration]
 
 ### Auto-discovery
 
-You can configure the prometheus check using [Autodiscovery](https://docs.datadoghq.com/agent/autodiscovery/) to quickly collect Prometheus metrics exposed by a container or pod.
+You can configure the Prometheus check using [Autodiscovery](https://docs.datadoghq.com/agent/autodiscovery/) to quickly collect Prometheus metrics exposed by a container or pod.
 
 Example of Autodiscovery using pod annotations on a `linkerd` pod:
 
@@ -54,7 +54,7 @@ annotations:
 
 ### From custom to official integration
 
-By default all metrics retrieved by the generic Prometheus check are considered custom metrics. If you are monitoring off-the-shelf software and think it deserves an official integration, don't hesitate to contribute.
+By default all metrics retrieved by the generic Prometheus check are considered custom metrics. If you are monitoring off-the-shelf software and think it deserves an official integration, please don't hesitate to contribute.
 
 Official integrations have there own dedicated directories. There's a default instance mechanism in the generic check to hardcode the default configuration and metrics metadata. For an example, reference the [kube-proxy](https://github.com/DataDog/integrations-core/tree/master/kube_proxy) integration.
 
@@ -67,11 +67,11 @@ If you have more advanced needs than the generic check (have some metrics prepro
 - Overriding `self.metrics_mapper`
 - Implementing the `check()` method
 AND/OR
-- Create method named after the prometheus metric they will handle (see `self.prometheus_metric_name`)
+- Create method named after the Prometheus metric they will handle (see `self.prometheus_metric_name`)
 
 ## Writing a custom Prometheus check
 
-This is a simple example of writing a kube DNS check to illustrate the `PrometheusCheck` class usage for learning purposes, but the example bellow could have been handled with configuring the following generic prometheus check:
+This is a simple example of writing a kube DNS check to illustrate the `PrometheusCheck` class usage for learning purposes. The example below could have been handled with configuring the following generic Prometheus check:
 
 ```yaml
 instances:
