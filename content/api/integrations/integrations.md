@@ -14,12 +14,12 @@ Configure your Datadog integrations via Datadog API, current configurable integr
 * [Slack](/api/#slack)
 * [Webhooks](/api/#webhooks)
 
-Available Endpoints are:
+Available endpoints are:
 
-* To Create an integration in Datadog:  
+* To create an integration in Datadog:  
     **`POST /api/v1/integration/<source_type_name>`**
     
-* To edit an integration configuration:  
+* To override an integration configuration:  
     **`PUT /api/v1/integration/<source_type_name>`**
 
 * To get an integration status:  
