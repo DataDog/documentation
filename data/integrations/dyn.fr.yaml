@@ -1,0 +1,19 @@
+dyn:
+  - description: Le nombre de requêtes DNS dans une zone donnée.
+    integration: dyn
+    interval: ''
+    metric_name: dyn.qps
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: dyn qps
+    unit_name: query
+  - description: Le nombre de changements de note de zone DNS.
+    integration: dyn
+    interval: ''
+    metric_name: dyn.changes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: dyn changes
+    unit_name: event

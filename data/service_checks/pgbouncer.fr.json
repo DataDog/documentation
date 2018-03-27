@@ -1,0 +1,10 @@
+[
+    {
+        "agent_version": "5.3.0",
+        "check": "pgbouncer.can_connect",
+        "statuses": ["ok", "critical"],
+        "groups": ["host", "port", "db"],
+        "name": "Peut se connecter",
+        "description": "Renvoie `CRITICAL` si l'agent ne peut pas se connecter à l'instance PGBouncer qu'il monitor. Renvoie `OK` sinon."
+    }
+]

@@ -1,0 +1,10 @@
+[
+    {
+        "agent_version": "5.2.0",
+        "check": "couchbase.can_connect",
+        "statuses": ["ok", "critical"],
+        "groups": ["host"],
+        "name": "Peut se connecter",
+        "description": "Renvoie l'état après avoir envoyé une requête ping à votre instance Couchbase. Des informations supplémentaires sur l'état de la réponse au moment de la collecte sont incluses dans le message du check."
+    }
+]

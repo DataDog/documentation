@@ -1,0 +1,140 @@
+activemq_xml:
+  - description: >-
+      En moyenne, le temps (ms) que les messages sont restés dans la file
+      d'attente.
+    integration: activemq
+    interval: '10'
+    metric_name: activemq.queue.avg_enqueue_time
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: avg enq time
+    unit_name: millisecond
+  - description: Le nombre de consumers connectés
+    integration: activemq
+    interval: '10'
+    metric_name: activemq.queue.consumer_count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cnsmr count
+    unit_name: ''
+  - description: Le nombre de producteurs connectés
+    integration: activemq
+    interval: '10'
+    metric_name: activemq.queue.producer_count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: prdcr count
+    unit_name: ''
+  - description: >-
+      La durée maximale (ms) pendant laquelle les messages sont restés en file
+      d'attente.
+    integration: activemq
+    interval: '10'
+    metric_name: activemq.queue.max_enqueue_time
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: max enq time
+    unit_name: millisecond
+  - description: Le durée minimum (ms) que les messages sont restés en file d'attente.
+    integration: activemq
+    interval: '10'
+    metric_name: activemq.queue.min_enqueue_time
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: min enq time
+    unit_name: millisecond
+  - description: Le pourcentage de mémoire actuellement utilisé
+    integration: activemq
+    interval: '10'
+    metric_name: activemq.queue.memory_pct
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: mem pct
+    unit_name: percent
+  - description: La quantité de messages restés en file d'attente.
+    integration: activemq
+    interval: '10'
+    metric_name: activemq.queue.size
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: enq size
+    unit_name: ''
+  - description: La quantité de messages sortis en file d'attente.
+    integration: activemq
+    interval: '10'
+    metric_name: activemq.queue.dequeue_count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: deq size
+    unit_name: ''
+  - description: La quantité de messages qui ont été envoyés.
+    integration: activemq
+    interval: '10'
+    metric_name: activemq.queue.dispatch_count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: dsptch cnt
+    unit_name: ''
+  - description: La quantité de messages qui ont été mis en file d'attente.
+    integration: activemq
+    interval: '10'
+    metric_name: activemq.queue.enqueue_count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: enq cnt
+    unit_name: ''
+  - description: La quantité de messages qui ont expiré
+    integration: activemq
+    interval: '10'
+    metric_name: activemq.queue.expired_count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: exp cnt
+    unit_name: ''
+  - description: La quantité de messages qui ont été en vol.
+    integration: activemq
+    interval: '10'
+    metric_name: activemq.queue.in_flight_count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: enq cnt
+    unit_name: ''
+  - description: Le pourcentage de store utilisé.
+    integration: activemq
+    interval: '10'
+    metric_name: activemq.broker.store_pct
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: str pct
+    unit_name: percent
+  - description: Le pourcentage de temporary utilisé
+    integration: activemq
+    interval: '10'
+    metric_name: activemq.broker.temp_pct
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: temp pct
+    unit_name: percent
+  - description: Le pourcentage de mémoire utilisé.
+    integration: activemq
+    interval: '10'
+    metric_name: activemq.broker.memory_pct
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: mem pct
+    unit_name: percent

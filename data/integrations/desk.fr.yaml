@@ -1,0 +1,19 @@
+desk:
+  - description: Le nombre total de cas ouverts.
+    integration: desk
+    interval: ''
+    metric_name: desk.all_open_cases
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: all open cases
+    unit_name: ''
+  - description: Le nombre de cas ouverts pendant la journée en cours.
+    integration: desk
+    interval: ''
+    metric_name: desk.cases
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cases
+    unit_name: ''

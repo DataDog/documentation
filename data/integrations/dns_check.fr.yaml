@@ -1,0 +1,12 @@
+dns_check:
+  - description: >-
+      Le temps de réponse pour une requête DNS pour un enregistrement donné,
+      taggé par hostname, par ex. 'hostname: example.com'.
+    integration: dns
+    interval: ''
+    metric_name: dns.response_time
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: dns resp time
+    unit_name: second

@@ -1,0 +1,10 @@
+[
+    {
+        "agent_version": "5.3.0",
+        "groups": ["region", "service"],
+        "check": "aws.status",
+        "statuses": ["ok", "critical"],
+        "name": "AWS Status",
+        "description": "Renvoie `CRITICAL` si une ou plusieurs régions AWS rencontrent des problèmes. Renvoie `OK` sinon."
+    }
+]
