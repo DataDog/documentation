@@ -1,7 +1,7 @@
 ---
 title: Revoke a shared a Screenboard
 type: apicode
-order: 17.7
+order: 18.7
 external_redirect: /api/#revoke-a-shared-a-screenboard
 ---
 

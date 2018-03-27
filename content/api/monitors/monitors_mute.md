@@ -1,7 +1,7 @@
 ---
 title: Mute a monitor
 type: apicontent
-order: 15.9
+order: 16.9
 external_redirect: /api/#mute-a-monitor
 ---
 

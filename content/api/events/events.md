@@ -1,7 +1,7 @@
 ---
 title: Events
 type: apicontent
-order: 10
+order: 11
 external_redirect: /api/#events
 ---
 

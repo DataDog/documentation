@@ -1,7 +1,7 @@
 ---
 title: Get all Timeboards
 type: apicode
-order: 20.4
+order: 21.4
 external_redirect: /api/#get-all-timeboards
 ---
 

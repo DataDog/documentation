@@ -1,7 +1,7 @@
 ---
 title: Enable embed
 type: apicontent
-order: 9.4
+order: 10.4
 external_redirect: /api/#enable-embed
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Récupérer le downtime d'un monitor
 type: apicode
-order: 8.5
+order: 9.5
 external_redirect: /api/#get-a-monitor-downtime
 ---
 ##### Signature

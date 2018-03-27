@@ -1,7 +1,7 @@
 ---
 title: Mise à jour d'une organisation
 type: apicode
-order: 16.3
+order: 17.3
 external_redirect: /api/#update-organization
 ---
 

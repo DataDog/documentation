@@ -1,7 +1,7 @@
 ---
 title: Embeddable graphs
 type: apicontent
-order: 9
+order: 10
 external_redirect: /api/#embeddable-graphs
 ---
 ## Embeddable graphs

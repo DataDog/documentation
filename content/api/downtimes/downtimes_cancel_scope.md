@@ -1,7 +1,7 @@
 ---
 title: Cancel monitor downtimes by scope
 type: apicontent
-order: 8.4
+order: 9.4
 external_redirect: /api/#cancel-monitor-downtime-by-scope
 ---
 

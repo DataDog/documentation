@@ -1,7 +1,7 @@
 ---
 title: Delete an event
 type: apicode
-order: 10.3
+order: 11.3
 external_redirect: /api/#delete-an-event
 ---
 ##### Signature
