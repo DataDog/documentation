@@ -263,7 +263,7 @@ To return debug level application logs, enable debug mode with the flag `-Ddatad
 
 ## JMX Metrics
 
-Datadog's [JMX Integration](https://docs.datadoghq.com/integrations/java/) monitors additional metrics around: JVM heap memory, thread count, and garbage collection.  This can be used in conjunction with APM for an even broader view into your Java app's performance.
+Datadog's [JMX Integration](https://docs.datadoghq.com/integrations/java/) monitors additional metrics around: JVM heap memory, thread count, and garbage collection. Use it in conjunction with APM for an even broader view into your Java app's performance.
 
 ## Integrations
 
