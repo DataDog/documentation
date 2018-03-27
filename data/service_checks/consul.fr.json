@@ -1,0 +1,10 @@
+[
+    {
+        "agent_version": "5.5.0",
+        "groups": ["host", "check", "service", "consul_service_id"],
+        "check": "consul.check",
+        "statuses": ["ok", "warning", "critical"],
+        "name": "Health check",
+        "description": "Renvoie `ok` si le service est en cours, `warning` s'il y a un problème et `critical` en cas de panne."
+    }
+]

@@ -1,0 +1,10 @@
+[
+    {
+        "agent_version": "5.2.0",
+        "check": "fluentd.is_ok",
+        "statuses": ["ok", "critical"],
+        "groups": ["host", "fluentd_host", "fluentd_port"],
+        "name": "Etat du service",
+        "description": "Renvoie `OK` si fluentd et son agent de surveillance sont en cours d'exécution, `CRITICAL` sinon."
+    }
+]

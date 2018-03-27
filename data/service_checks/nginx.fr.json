@@ -1,0 +1,10 @@
+[
+    {
+        "agent_version": "5.0.0",
+        "check": "nginx.can_connect",
+        "statuses": ["ok", "critical"],
+        "groups": ["host", "port"],
+        "name": "Peut se connecter",
+        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter et de collecter des métriques depuis l'instance Nginx qu'il monitor. Sinon renvoie `OK`."
+    }
+]

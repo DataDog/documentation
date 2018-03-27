@@ -1,0 +1,10 @@
+[
+    {
+        "agent_version": "5.2.0",
+        "check": "tokumx.can_connect",
+        "statuses": ["ok", "critical"],
+        "groups": ["host", "port", "db"],
+        "name": "Peut se connecter",
+        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter a l'instance TokuMX qu'il monitor. Sinon renvoie `OK`."
+    }
+]

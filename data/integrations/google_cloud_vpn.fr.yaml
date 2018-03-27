@@ -1,0 +1,120 @@
+google_cloud_vpn:
+  - description: Les paquets d'entrées retirés pour le tunnel.
+    integration: google_cloud_vpn
+    interval: ''
+    metric_name: gcp.vpn.network.dropped_received_packets_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vpn rx pkts dropped
+    unit_name: packet
+  - description: Les paquets d'évacuation retirer dans le tunnel.
+    integration: google_cloud_vpn
+    interval: ''
+    metric_name: gcp.vpn.network.dropped_sent_packets_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vpn tx pkts dropped
+    unit_name: packet
+  - description: octets Ingress pour le tunnel.
+    integration: google_cloud_vpn
+    interval: ''
+    metric_name: gcp.vpn.network.received_bytes_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vpn rx bytes
+    unit_name: byte
+  - description: octets Egress pour le tunnel.
+    integration: google_cloud_vpn
+    interval: ''
+    metric_name: gcp.vpn.network.sent_bytes_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vpn tx bytes
+    unit_name: byte
+  - description: Indique l'établissement réussi du tunnel s'il est supérieur à 0.
+    integration: google_cloud_vpn
+    interval: ''
+    metric_name: gcp.vpn.tunnel_established
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: vpn tunnel established
+    unit_name: ''
+  - description: Nombre de meilleurs itinéraires reçus par le routeur.
+    integration: google_cloud_vpn
+    interval: ''
+    metric_name: gcp.router.best_received_routes_count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: router received routes
+    unit_name: route
+  - description: Nombre de routes reçues sur une session bgp.
+    integration: google_cloud_vpn
+    interval: ''
+    metric_name: gcp.router.bgp.received_routes_count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: router bgp received routes
+    unit_name: route
+  - description: Nombre de routes envoyées sur une session bgp.
+    integration: google_cloud_vpn
+    interval: ''
+    metric_name: gcp.router.bgp.sent_routes_count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: router bgp sent routes
+    unit_name: route
+  - description: Indicateur d'établissement de session bgp réussi.
+    integration: google_cloud_vpn
+    interval: ''
+    metric_name: gcp.router.bgp.session_up
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: router bgp session status
+    unit_name: ''
+  - description: Nombre de sessions BGP sur le routeur qui sont en panne.
+    integration: google_cloud_vpn
+    interval: ''
+    metric_name: gcp.router.bgp_sessions_down_count
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: router bgp sessions down
+    unit_name: session
+  - description: Nombre de sessions BGP sur le routeur qui sont up.
+    integration: google_cloud_vpn
+    interval: ''
+    metric_name: gcp.router.bgp_sessions_up_count
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: router bgp sessions up
+    unit_name: session
+  - description: Statut du routeur up ou down.
+    integration: google_cloud_vpn
+    interval: ''
+    metric_name: gcp.router.router_up
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: router status
+    unit_name: ''
+  - description: |-
+
+      Nombre de routes envoyées par le routeur.
+    integration: google_cloud_vpn
+    interval: ''
+    metric_name: gcp.router.sent_routes_count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: router sent routes
+    unit_name: route

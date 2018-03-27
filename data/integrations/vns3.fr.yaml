@@ -1,0 +1,28 @@
+vns3:
+  - description: État de connexion du tunnel IPSec
+    integration: vns3
+    interval: ''
+    metric_name: vns3.ipsec
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vns3 ipsec
+    unit_name: ''
+  - description: Superposition de l'état de la connexion client.
+    integration: vns3
+    interval: ''
+    metric_name: vns3.overlay.clients
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vns3 clients
+    unit_name: ''
+  - description: État de liaison VNS3
+    integration: vns3
+    interval: ''
+    metric_name: vns3.peering
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vns3 peers
+    unit_name: ''

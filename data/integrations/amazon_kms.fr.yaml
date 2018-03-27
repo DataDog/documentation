@@ -1,0 +1,12 @@
+amazon_kms:
+  - description: >-
+      Cette mesure suit le nombre de secondes restantes avant l'expiration du
+      matériel clé importé.
+    integration: amazon_kms
+    interval: '60'
+    metric_name: aws.kms.seconds_until_key_material_expiration
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: second until expiration
+    unit_name: second

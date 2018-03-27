@@ -1,0 +1,536 @@
+google_compute_engine:
+  - description: >-
+      Vérification du statut qui renvoie 1 si l'instance est en cours
+      d'exécution.
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.instance.is_running
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: is running
+    unit_name: ''
+  - description: La limite de quota des services backend
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.backend_services.limit
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: backend services limit
+    unit_name: ''
+  - description: Le pourcentage de quota de services backend utilisé
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.backend_services.usage
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: backend services usage
+    unit_name: percent
+  - description: The firewalls quota limit
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.firewalls.limit
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: firewalls limit
+    unit_name: ''
+  - description: The percentage of firewalls quota being used
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.firewalls.usage
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: firewalls usage
+    unit_name: percent
+  - description: The forwarding rules quota limit
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.forwarding_rules.limit
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: forwarding rules limit
+    unit_name: ''
+  - description: The percentage of the forwarding rules quota being used
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.forwarding_rules.usage
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: forwarding rules usage
+    unit_name: percent
+  - description: The health checks quota limit
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.health_checks.limit
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: health checks limit
+    unit_name: ''
+  - description: The percentage of the health checks quota being used
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.health_checks.usage
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: health checks usage
+    unit_name: percent
+  - description: The images quota limit
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.images.limit
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: images limit
+    unit_name: ''
+  - description: The percentage of the images quota being used
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.images.usage
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: images usage
+    unit_name: percent
+  - description: The in_use_addresses quota limit
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.in_use_addresses.limit
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: in_use_addresses limit
+    unit_name: ''
+  - description: The percentage of the in_use_addresses quota being used
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.in_use_addresses.usage
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: in_use_addresses usage
+    unit_name: percent
+  - description: The instance templates quota limit
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.instance_templates.limit
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: instance template limit
+    unit_name: ''
+  - description: The percentage of the instance templates quota being used
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.instance_templates.usage
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: instance template usage
+    unit_name: percent
+  - description: The networks quota limit
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.networks.limit
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: networks limit
+    unit_name: ''
+  - description: The percentage of the networks quota being used
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.networks.usage
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: networks usage
+    unit_name: percent
+  - description: The routes quota limit
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.routes.limit
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: routes limit
+    unit_name: ''
+  - description: The percentage of the routes quota being used
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.routes.usage
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: routes usage
+    unit_name: percent
+  - description: The snapshots quota limit
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.snapshots.limit
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: snapshots limit
+    unit_name: ''
+  - description: The percentage of the snapshots quota being used
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.snapshots.usage
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: snapshots usage
+    unit_name: percent
+  - description: The SSL certificates quota limit
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.ssl_certificates.limit
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ssl certificate limit
+    unit_name: ''
+  - description: The percentage of the SSL certificates quota being used
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.ssl_certificates.usage
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ssl certificate usage
+    unit_name: percent
+  - description: The static addresses quota limit
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.static_addresses.limit
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: static addresses limit
+    unit_name: ''
+  - description: The percentage of the static addresses quota being used
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.static_addresses.usage
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: static addresses usage
+    unit_name: percent
+  - description: The subnetworks quota limit
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.subnetworks.limit
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: subnetworks limit
+    unit_name: ''
+  - description: The percentage of the subnetworks quota being used
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.subnetworks.usage
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: subnetworks usage
+    unit_name: percent
+  - description: The target http proxies quota limit
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.target_http_proxies.limit
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: target http proxies limit
+    unit_name: ''
+  - description: The percentage of the target http proxies quota being used
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.target_http_proxies.usage
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: target http proxies usage
+    unit_name: percent
+  - description: The target https proxies quota limit
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.target_https_proxies.limit
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: target https proxies limit
+    unit_name: ''
+  - description: The percentage of the target https proxies quota being used
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.target_https_proxies.usage
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: target https proxies usage
+    unit_name: percent
+  - description: The target instances quota limit
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.target_instances.limit
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: target instances limit
+    unit_name: ''
+  - description: The percentage of the target instances quota being used
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.target_instances.usage
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: target instances usage
+    unit_name: percent
+  - description: The target pools quota limit
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.target_pools.limit
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: target pools limit
+    unit_name: ''
+  - description: The percentage of the target pools quota being used
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.target_pools.usage
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: target pools usage
+    unit_name: percent
+  - description: The target vpn gateways quota limit
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.target_vpn_gateways.limit
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: target vpn gateways limit
+    unit_name: ''
+  - description: The percentage of the target vpn gateways quota being used
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.target_vpn_gateways.usage
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: target vpn gateways usage
+    unit_name: percent
+  - description: The url maps quota limit
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.url_maps.limit
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: url maps limit
+    unit_name: ''
+  - description: The percentage of the url maps quota being used
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.url_maps.usage
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: url maps usage
+    unit_name: percent
+  - description: La limite de quota vpn.
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.vpn_tunnels.limit
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vpn tunnels limit
+    unit_name: ''
+  - description: The percentage of the vpn tunnels quota being used
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.project.quota.vpn_tunnels.usage
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vpn tunnels usage
+    unit_name: percent
+  - description: Incoming bytes dropped by the firewall.
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.firewall.dropped_bytes_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: dropped bytes
+    unit_name: byte
+  - description: Incoming packets dropped by the firewall.
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.firewall.dropped_packets_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: dropped packets
+    unit_name: packet
+  - description: Number of cores reserved on the host of the instance.
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.instance.cpu.reserved_cores
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: reserved cores
+    unit_name: core
+  - description: CPU usage time for all cores.
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.instance.cpu.usage_time
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cpu usage
+    unit_name: second
+  - description: >-
+      Fraction of the allocated CPU that is currently in use on the instance.
+      Note that some machine types allow bursting above 100% usage.
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.instance.cpu.utilization
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: cpu utilization
+    unit_name: fraction
+  - description: Nombre total d'octets lus depuis le disque
+    integration: google_compute_engine
+    interval: '60'
+    metric_name: gcp.gce.instance.disk.read_bytes_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: disk read bytes
+    unit_name: byte
+  - description: Nombre d'opération de lecture sur le disque.
+    integration: google_compute_engine
+    interval: '60'
+    metric_name: gcp.gce.instance.disk.read_ops_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: disk read operations
+    unit_name: operation
+  - description: Bytes in throttled read operations.
+    integration: google_compute_engine
+    interval: '60'
+    metric_name: gcp.gce.instance.disk.throttled_read_bytes_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: throttled read bytes
+    unit_name: byte
+  - description: Throttled read operations.
+    integration: google_compute_engine
+    interval: '60'
+    metric_name: gcp.gce.instance.disk.throttled_read_ops_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: throttled read operations
+    unit_name: operation
+  - description: Bytes in throttled write operations.
+    integration: google_compute_engine
+    interval: '60'
+    metric_name: gcp.gce.instance.disk.throttled_write_bytes_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: throttled write bytes
+    unit_name: byte
+  - description: Throttled write operations.
+    integration: google_compute_engine
+    interval: '60'
+    metric_name: gcp.gce.instance.disk.throttled_write_ops_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: throttled write operations
+    unit_name: operation
+  - description: Nombre d'octets écrits sur le disque.
+    integration: google_compute_engine
+    interval: '60'
+    metric_name: gcp.gce.instance.disk.write_bytes_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: disk write bytes
+    unit_name: byte
+  - description: Nombre d'opération d'écriture sur disque.
+    integration: google_compute_engine
+    interval: '60'
+    metric_name: gcp.gce.instance.disk.write_ops_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: disk write operations
+    unit_name: operation
+  - description: Nombre d'octets reçus sur le réseau.
+    integration: google_compute_engine
+    interval: '60'
+    metric_name: gcp.gce.instance.network.received_bytes_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: received bytes
+    unit_name: byte
+  - description: Nombre de packets reçus sur le réseau.
+    integration: google_compute_engine
+    interval: '60'
+    metric_name: gcp.gce.instance.network.received_packets_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: received packets
+    unit_name: packet
+  - description: Nombre d'octets envoyés sur le réseau.
+    integration: google_compute_engine
+    interval: '60'
+    metric_name: gcp.gce.instance.network.sent_bytes_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: sent bytes
+    unit_name: byte
+  - description: Nombre de packets envoyés sur le réseau.
+    integration: google_compute_engine
+    interval: '60'
+    metric_name: gcp.gce.instance.network.sent_packets_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: sent packets
+    unit_name: packet
+  - description: Indique le temps d'exécution de la machine virtuelle en secondes.
+    integration: google_compute_engine
+    interval: ''
+    metric_name: gcp.gce.instance.uptime
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: uptime
+    unit_name: second

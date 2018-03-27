@@ -40,7 +40,7 @@ Le check System swap est packagé avec l'agent, il vous faut donc simplement [in
 Créez un fichier `system_swap.yaml` dans le dossier ` conf.d` de l'Agent. Consultez l'exemple du [canevas cassandra_nodetool.yaml](https://github.com/DataDog/integrations-core/blob/master/system_swap/conf.yaml.example) pour apprendre toutes les options de configuration disponibles:
 
 ```
-
+# This check takes no initial configuration
 init_config:
 
 instances: [{}]
