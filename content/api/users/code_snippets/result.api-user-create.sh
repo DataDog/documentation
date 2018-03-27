@@ -6,6 +6,7 @@
     "disabled": false,
     "role": null,
     "is_admin": false,
-    "email": "test@datadoghq.com"
+    "email": "test@datadoghq.com",
+    "icon": /path/to/matching/gravatar/icon
   }
 }
