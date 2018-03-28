@@ -1,7 +1,7 @@
 ---
 title: Hosts
 type: apicontent
-order: 13
+order: 12
 external_redirect: /api/#hosts
 ---
 

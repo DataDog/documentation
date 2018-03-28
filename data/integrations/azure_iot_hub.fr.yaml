@@ -1,0 +1,478 @@
+azure_iot_hub:
+  - description: Nombre de commandes Cloud to Device abandonnées par l'appareil
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.c2d.commands.egress.abandon.success
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cmds abandoned
+    unit_name: command
+  - description: Nombre de commandes Cloud to Device réussies par l'appareil.
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.c2d.commands.egress.complete.success
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cmds completed
+    unit_name: command
+  - description: Number of Cloud to Device commands rejected by the device
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.c2d.commands.egress.reject.success
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cmds rejected
+    unit_name: command
+  - description: Number of Cloud to Device method invocation failures
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.c2d.methods.failure
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: method failure
+    unit_name: method
+  - description: Request size of Cloud to Device method invocations
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.c2d.methods.request_size
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: method req size
+    unit_name: byte
+  - description: Response size of Cloud to Device method invocations
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.c2d.methods.response_size
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: method resp size
+    unit_name: byte
+  - description: Number of Cloud to Device method invocation successes
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.c2d.methods.success
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: method success
+    unit_name: method
+  - description: Number of failed backend-initiated twin reads
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.c2d.twin.read.failure
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: backend twin read failure
+    unit_name: read
+  - description: Response size of backend-initiated twin reads
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.c2d.twin.read.size
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: backend twin read size
+    unit_name: byte
+  - description: Number of successful backend-initiated twin reads
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.c2d.twin.read.success
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: backend twin read success
+    unit_name: read
+  - description: Number of failed device-initiated twin updates
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.c2d.twin.update.failure
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: backend twin update failure
+    unit_name: update
+  - description: Response size of device-initiated twin updates
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.c2d.twin.update.size
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: backend twin update size
+    unit_name: byte
+  - description: Number of successful device-initiated twin updates
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.c2d.twin.update.success
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: backend twin update success
+    unit_name: update
+  - description: Number of messages successfully written to the built-in endpoint
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.d2c.endpoints.egress.built_in.events
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: msgs written builtin
+    unit_name: message
+  - description: Number of messages successfully written to the Event Hub endpoints
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.d2c.endpoints.egress.event_hubs
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: msgs written event hubs
+    unit_name: message
+  - description: >-
+      Number of messages successfully written to the Service Bus Queues
+      endpoints
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.d2c.endpoints.egress.service_bus_queues
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: msgs written sb queues
+    unit_name: message
+  - description: >-
+      Number of messages successfully written to the Service Bus Topics
+      endpoints
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.d2c.endpoints.egress.service_bus_topics
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: msgs written sb topics
+    unit_name: message
+  - description: >-
+      The average latency between message ingress to the IoT hub and message
+      ingress into the built-in endpoint
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.d2c.endpoints.latency.built_in.events
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: endpoint latency builtin
+    unit_name: millisecond
+  - description: >-
+      The average latency between message ingress to the IoT hub and message
+      ingress into a Event Hub endpoint
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.d2c.endpoints.latency.event_hubs
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: endpoint latency event hubs
+    unit_name: millisecond
+  - description: >-
+      The average latency between message ingress to the IoT hub and message
+      ingress into a Service Bus Queue endpoint
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.d2c.endpoints.latency.service_bus_queues
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: endpoint latency sb queues
+    unit_name: millisecond
+  - description: >-
+      The average latency between message ingress to the IoT hub and message
+      ingress into a Service Bus Topic endpoint
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.d2c.endpoints.latency.service_bus_topics
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: endpoint latency sb topics
+    unit_name: millisecond
+  - description: >-
+      Number of messages dropped because they did not match any routes and the
+      fallback route was disabled
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.d2c.telemetry.egress.dropped
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: dropped msgs
+    unit_name: message
+  - description: Number of messages written to the fallback endpoint
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.d2c.telemetry.egress.fallback
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: fallback msgs
+    unit_name: message
+  - description: >-
+      The count of messages not delivered due to incompatibility with the
+      endpoint
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.d2c.telemetry.egress.invalid
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: invalid msgs
+    unit_name: message
+  - description: The count of messages not matching any routes including the fallback route
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.d2c.telemetry.egress.orphaned
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: orphaned msgs
+    unit_name: message
+  - description: Number of times messages were successfully written to endpoints
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.d2c.telemetry.egress.success
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: successful msgs
+    unit_name: message
+  - description: >-
+      Number of Device to Cloud telemetry messages attempted to be sent to IOT
+      Hub
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.d2c.telemetry.ingress.all_protocol
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: attempted msgs sent
+    unit_name: message
+  - description: Number of Device to Cloud telemetry messages successfully sent to IOT Hub
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.d2c.telemetry.ingress.success
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: successful msgs sent
+    unit_name: message
+  - description: Number of failed device-initiated twin reads
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.d2c.twin.read.failure
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: device twin read failure
+    unit_name: read
+  - description: Response size of device-initiated twin reads
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.d2c.twin.read.size
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: device twin read size
+    unit_name: byte
+  - description: Number of successful device-initiated twin reads
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.d2c.twin.read.success
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: device twin read success
+    unit_name: read
+  - description: Number of failed device-initiated twin updates
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.d2c.twin.update.failure
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: device twin update failure
+    unit_name: update
+  - description: Response size of device-initiated twin updates
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.d2c.twin.update.size
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: device twin update size
+    unit_name: byte
+  - description: Number of successful device-initiated twin updates
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.d2c.twin.update.success
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: device twin update success
+    unit_name: update
+  - description: Number of devices connected to your IoT hub
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.devices.connected_devices.all_protocol
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: devices connected
+    unit_name: device
+  - description: Number of devices registered to your IoT hub
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.devices.total_devices
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: devices registered
+    unit_name: device
+  - description: Nombre d'appels ayant échoué pour annuler un job.
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.jobs.cancel_job.failure
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: cancel job failure
+    unit_name: operation
+  - description: Nombre d'appels ayant réussi pour annuler un job.
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.jobs.cancel_job.success
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cancel job success
+    unit_name: operation
+  - description: Nombre de jobs terminés
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.jobs.completed
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: completed jobs
+    unit_name: job
+  - description: Number of failed creations of direct method invocation jobs
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.jobs.create_direct_method_job.failure
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: create direct method job failure
+    unit_name: operation
+  - description: Number of successful creations of direct method invocation jobs
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.jobs.create_direct_method_job.success
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: create direct method job success
+    unit_name: operation
+  - description: Number of failed creations of twin update jobs
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.jobs.create_twin_update_job.failure
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: twin update job failure
+    unit_name: operation
+  - description: Number of successful creations of twin update jobs
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.jobs.create_twin_update_job.success
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: twin update job success
+    unit_name: operation
+  - description: Number of failed jobs
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.jobs.failed
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: failed jobs
+    unit_name: job
+  - description: Number of failed calls to list jobs
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.jobs.list_jobs.failure
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: list jobs failure
+    unit_name: operation
+  - description: Number of successful calls to list jobs
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.jobs.list_jobs.success
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: list jobs success
+    unit_name: operation
+  - description: Number of failed calls to query jobs
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.jobs.query_jobs.failure
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: query jobs failure
+    unit_name: query
+  - description: Number of successful calls to query jobs
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.jobs.query_jobs.success
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: query jobs success
+    unit_name: query
+  - description: Number of failed twin queries
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.twin_queries.failure
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: failed twin queries
+    unit_name: query
+  - description: Average result size of successful twin queries
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.twin_queries.result_size
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: twin query result size
+    unit_name: byte
+  - description: Number of successful twin queries
+    integration: azure_iot_hub
+    interval: ''
+    metric_name: azure.devices_iothubs.twin_queries.success
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: successful twin queries
+    unit_name: query

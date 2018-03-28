@@ -1,0 +1,271 @@
+azure_logic_app:
+  - description: Latence des actions de workflow terminées
+    integration: azure_logic_app
+    interval: ''
+    metric_name: azure.logic_workflows.action_latency
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Action Latency
+    unit_name: second
+  - description: Latence des actions de flux de travail réussies
+    integration: azure_logic_app
+    interval: ''
+    metric_name: azure.logic_workflows.action_success_latency
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Action Success Latency
+    unit_name: second
+  - description: Number of workflow action throttled events
+    integration: azure_logic_app
+    interval: ''
+    metric_name: azure.logic_workflows.action_throttled_events
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Action Throttled Events
+    unit_name: event
+  - description: Number of workflow actions completed
+    integration: azure_logic_app
+    interval: ''
+    metric_name: azure.logic_workflows.actions_completed
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Actions Completed
+    unit_name: event
+  - description: Number of workflow actions failed
+    integration: azure_logic_app
+    interval: ''
+    metric_name: azure.logic_workflows.actions_failed
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Actions Failed
+    unit_name: event
+  - description: Number of workflow actions skipped
+    integration: azure_logic_app
+    interval: ''
+    metric_name: azure.logic_workflows.actions_skipped
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Actions Skipped
+    unit_name: event
+  - description: Number of workflow actions started
+    integration: azure_logic_app
+    interval: ''
+    metric_name: azure.logic_workflows.actions_started
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Actions Started
+    unit_name: event
+  - description: Number of workflow actions succeeded
+    integration: azure_logic_app
+    interval: ''
+    metric_name: azure.logic_workflows.actions_succeeded
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Actions Succeeded
+    unit_name: event
+  - description: Number of workflow action executions getting billed
+    integration: azure_logic_app
+    interval: ''
+    metric_name: azure.logic_workflows.billable_action_executions
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Billable Action Execs
+    unit_name: event
+  - description: Number of workflow trigger executions getting billed
+    integration: azure_logic_app
+    interval: ''
+    metric_name: azure.logic_workflows.billable_trigger_executions
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Billable Trigger Execs
+    unit_name: event
+  - description: Number of workflow executions getting billed
+    integration: azure_logic_app
+    interval: ''
+    metric_name: azure.logic_workflows.total_billable_executions
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Total Billable Execs
+    unit_name: event
+  - description: Percentage of workflow runs failed
+    integration: azure_logic_app
+    interval: ''
+    metric_name: azure.logic_workflows.run_failure_percentage
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Run Failure Pct
+    unit_name: percent
+  - description: Latency of completed workflow runs
+    integration: azure_logic_app
+    interval: ''
+    metric_name: azure.logic_workflows.run_latency
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Run Latency
+    unit_name: second
+  - description: Latency of succeeded workflow runs
+    integration: azure_logic_app
+    interval: ''
+    metric_name: azure.logic_workflows.run_success_latency
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Run Success Latency
+    unit_name: second
+  - description: Number of workflow action or trigger throttled events
+    integration: azure_logic_app
+    interval: ''
+    metric_name: azure.logic_workflows.run_throttled_events
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Run Throttled Events
+    unit_name: event
+  - description: Number of workflow runs cancelled
+    integration: azure_logic_app
+    interval: ''
+    metric_name: azure.logic_workflows.runs_cancelled
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Runs Cancelled
+    unit_name: event
+  - description: Number of workflow runs completed.
+    integration: azure_logic_app
+    interval: ''
+    metric_name: azure.logic_workflows.runs_completed
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Runs Completed
+    unit_name: event
+  - description: Number of workflow runs failed
+    integration: azure_logic_app
+    interval: ''
+    metric_name: azure.logic_workflows.runs_failed
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Runs Failed
+    unit_name: event
+  - description: Number of workflow runs started
+    integration: azure_logic_app
+    interval: ''
+    metric_name: azure.logic_workflows.runs_started
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Runs Started
+    unit_name: event
+  - description: Number of workflow runs succeeded
+    integration: azure_logic_app
+    interval: ''
+    metric_name: azure.logic_workflows.runs_succeeded
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Runs Succeeded
+    unit_name: event
+  - description: Latency of fired workflow triggers
+    integration: azure_logic_app
+    interval: ''
+    metric_name: azure.logic_workflows.trigger_fire_latency
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Trigger Fire Latency
+    unit_name: second
+  - description: Latency of completed workflow triggers
+    integration: azure_logic_app
+    interval: ''
+    metric_name: azure.logic_workflows.trigger_latency
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Trigger Latency
+    unit_name: second
+  - description: Latency of succeeded workflow triggers
+    integration: azure_logic_app
+    interval: ''
+    metric_name: azure.logic_workflows.trigger_success_latency
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Trigger Success Latency
+    unit_name: second
+  - description: Number of workflow trigger throttled events
+    integration: azure_logic_app
+    interval: ''
+    metric_name: azure.logic_workflows.trigger_throttled_events
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Trigger Throttled Events
+    unit_name: event
+  - description: Number of workflow triggers completed
+    integration: azure_logic_app
+    interval: ''
+    metric_name: azure.logic_workflows.triggers_completed
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Triggers Completed
+    unit_name: event
+  - description: Number of workflow triggers failed
+    integration: azure_logic_app
+    interval: ''
+    metric_name: azure.logic_workflows.triggers_failed
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Triggers Failed
+    unit_name: event
+  - description: Number of workflow triggers fired
+    integration: azure_logic_app
+    interval: ''
+    metric_name: azure.logic_workflows.triggers_fired
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Triggers Fired
+    unit_name: event
+  - description: Number of workflow triggers skipped
+    integration: azure_logic_app
+    interval: ''
+    metric_name: azure.logic_workflows.triggers_skipped
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Triggers Skipped
+    unit_name: event
+  - description: Number of workflow triggers started
+    integration: azure_logic_app
+    interval: ''
+    metric_name: azure.logic_workflows.triggers_started
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Triggers Started
+    unit_name: event
+  - description: Number of workflow triggers succeeded
+    integration: azure_logic_app
+    interval: ''
+    metric_name: azure.logic_workflows.triggers_succeeded
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Triggers Succeeded
+    unit_name: event

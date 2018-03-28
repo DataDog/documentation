@@ -1,0 +1,503 @@
+squid:
+  - description: Le nombre de requêtes reçues depuis les clients.
+    integration: squid
+    interval: ''
+    metric_name: squid.client_http.requests
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: client http reqs
+    unit_name: requests
+  - description: Nombre de hits de cache en réponse aux demandes des clients
+    integration: squid
+    interval: ''
+    metric_name: squid.client_http.hits
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: client http hits
+    unit_name: hits
+  - description: The number of client transactions that resulted in an error.
+    integration: squid
+    interval: ''
+    metric_name: squid.client_http.errors
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: second
+    short_name: client http errs
+    unit_name: errors
+  - description: The amount of traffic received from clients in their requests.
+    integration: squid
+    interval: ''
+    metric_name: squid.client_http.kbytes_in
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: client http kb in
+    unit_name: kilobytes
+  - description: The amount of traffic sent to clients in responses.
+    integration: squid
+    interval: ''
+    metric_name: squid.client_http.kbytes_out
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: client http kb out
+    unit_name: kilobytes
+  - description: The amount of traffic sent to clients in responses that are cache hits
+    integration: squid
+    interval: ''
+    metric_name: squid.client_http.hit_kbytes_out
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: client http hits kb out
+    unit_name: kilobytes
+  - description: >-
+      The number of requests forwarded to origin servers (or neighbor caches)
+      for all server-side protocols.
+    integration: squid
+    interval: ''
+    metric_name: squid.server.all.requests
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: serv all reqs
+    unit_name: requests
+  - description: >-
+      The number of server-side requests (all protocols) that resulted in some
+      kind of error.
+    integration: squid
+    interval: ''
+    metric_name: squid.server.all.errors
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: second
+    short_name: serv all errs
+    unit_name: errors
+  - description: The amount of traffic read from the server-side for all protocols.
+    integration: squid
+    interval: ''
+    metric_name: squid.server.all.kbytes_in
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: serv all kb in
+    unit_name: kilobytes
+  - description: >-
+      The amount of traffic written to origin servers and/or neighbor caches for
+      server-side requests.
+    integration: squid
+    interval: ''
+    metric_name: squid.server.all.kbytes_out
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: serv all kb out
+    unit_name: kilobytes
+  - description: >-
+      The number of server-side requests to HTTP servers, including neighbor
+      caches.
+    integration: squid
+    interval: ''
+    metric_name: squid.server.http.requests
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: serv http reqs
+    unit_name: requests
+  - description: The number of server-side HTTP requests that resulted in an error.
+    integration: squid
+    interval: ''
+    metric_name: squid.server.http.errors
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: second
+    short_name: serv http errs
+    unit_name: errors
+  - description: The amount of traffic read from HTTP origin servers and neighbor caches.
+    integration: squid
+    interval: ''
+    metric_name: squid.server.http.kbytes_in
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: serv http kb in
+    unit_name: kilobytes
+  - description: The amount of traffic written to HTTP origin servers and neighbor caches.
+    integration: squid
+    interval: ''
+    metric_name: squid.server.http.kbytes_out
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: serv http kb out
+    unit_name: kilobytes
+  - description: The number of requests sent to FTP servers.
+    integration: squid
+    interval: ''
+    metric_name: squid.server.ftp.requests
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: serv ftp reqs
+    unit_name: requests
+  - description: The number of requests sent to FTP servers that resulted in an error.
+    integration: squid
+    interval: ''
+    metric_name: squid.server.ftp.errors
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: second
+    short_name: serv ftp errs
+    unit_name: errors
+  - description: >-
+      The amount of traffic read from FTP servers, including control channel
+      traffic.
+    integration: squid
+    interval: ''
+    metric_name: squid.server.ftp.kbytes_in
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: serv ftp kb in
+    unit_name: kilobytes
+  - description: >-
+      The amount of traffic written to FTP servers, including control channel
+      traffic.
+    integration: squid
+    interval: ''
+    metric_name: squid.server.ftp.kbytes_out
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: serv ftp kb out
+    unit_name: kilobytes
+  - description: >-
+      The number of "other" server-side requests. Currently, the other protocols
+      are Gopher, WAIS, and SSL.
+    integration: squid
+    interval: ''
+    metric_name: squid.server.other.requests
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: serv other reqs
+    unit_name: requests
+  - description: 'The number of Gopher, WAIS, and SSL requests that resulted in an error.'
+    integration: squid
+    interval: ''
+    metric_name: squid.server.other.errors
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: second
+    short_name: serv other errs
+    unit_name: errors
+  - description: 'The amount of traffic read from Gopher, WAIS, and SSL servers.'
+    integration: squid
+    interval: ''
+    metric_name: squid.server.other.kbytes_in
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: serv other kb in
+    unit_name: kilobytes
+  - description: 'The amount of traffic written to Gopher, WAIS, and SSL servers.'
+    integration: squid
+    interval: ''
+    metric_name: squid.server.other.kbytes_out
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: serv other kb out
+    unit_name: kilobytes
+  - description: >-
+      The number of ICP messages sent to neighbors. This includes both queries
+      and replies but doesn't include HTCP messages.
+    integration: squid
+    interval: ''
+    metric_name: squid.icp.pkts_sent
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: icp pkts sent
+    unit_name: messages
+  - description: >-
+      The number of ICP messages received from neighbors, including both queries
+      and replies
+    integration: squid
+    interval: ''
+    metric_name: squid.icp.pkts_recv
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: icp pkts recv
+    unit_name: messages
+  - description: The number of ICP queries sent to neighbors.
+    integration: squid
+    interval: ''
+    metric_name: squid.icp.queries_sent
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: icp queries sent
+    unit_name: queries
+  - description: The number of ICP replies sent to neighbors.
+    integration: squid
+    interval: ''
+    metric_name: squid.icp.replies_sent
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: icp replies sent
+    unit_name: replies
+  - description: The number of ICP queries received from neighbors.
+    integration: squid
+    interval: ''
+    metric_name: squid.icp.queries_recv
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: icp queries recv
+    unit_name: queries
+  - description: The number of ICP replies received from neighbors.
+    integration: squid
+    interval: ''
+    metric_name: squid.icp.replies_recv
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: icp replies recv
+    unit_name: replies
+  - description: >-
+      The number of times that Squid timed out waiting for ICP replies to
+      arrive.
+    integration: squid
+    interval: ''
+    metric_name: squid.icp.query_timeouts
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: second
+    short_name: icp query timeouts
+    unit_name: timeouts
+  - description: >-
+      The number of times Squid queued an ICP message after the initial attempt
+      to send failed.
+    integration: squid
+    interval: ''
+    metric_name: squid.icp.replies_queued
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: second
+    short_name: icp replies queued
+    unit_name: messages
+  - description: >-
+      The amount of traffic sent in all ICP messages, including both queries and
+      replies.
+    integration: squid
+    interval: ''
+    metric_name: squid.icp.kbytes_sent
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: icp kb sent
+    unit_name: kilobytes
+  - description: >-
+      The amount of traffic received in all ICP messages, including both queries
+      and replies.
+    integration: squid
+    interval: ''
+    metric_name: squid.icp.kbytes_recv
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: icp kb recv
+    unit_name: kilobytes
+  - description: The amount of traffic sent to neighbors in ICP queries.
+    integration: squid
+    interval: ''
+    metric_name: squid.icp.q_kbytes_sent
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: icp queries kb sent
+    unit_name: kilobytes
+  - description: The amount of traffic sent to neighbors in ICP replies.
+    integration: squid
+    interval: ''
+    metric_name: squid.icp.r_kbytes_sent
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: icp replies kb sent
+    unit_name: kilobytes
+  - description: The amount of traffic received from neighbors in ICP queries.
+    integration: squid
+    interval: ''
+    metric_name: squid.icp.q_kbytes_recv
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: icp queries kb recv
+    unit_name: kilobytes
+  - description: The amount of traffic received from neighbors in ICP replies.
+    integration: squid
+    interval: ''
+    metric_name: squid.icp.r_kbytes_recv
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: icp replies kb recv
+    unit_name: kilobytes
+  - description: >-
+      The number of times ICP resulted in the selection of a neighbor as the
+      next-hop for a cache miss.
+    integration: squid
+    interval: ''
+    metric_name: squid.icp.times_used
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: icp times used
+    unit_name: ''
+  - description: >-
+      The number of times Cache Digests resulted in the selection of a neighbor
+      as the next-hop for a cache miss.
+    integration: squid
+    interval: ''
+    metric_name: squid.cd.times_used
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: cd times used
+    unit_name: ''
+  - description: The number of Cache Digest messages sent to neighbors.
+    integration: squid
+    interval: ''
+    metric_name: squid.cd.msgs_sent
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: cd msgs sent
+    unit_name: messages
+  - description: The number of Cache Digest messages received from neighbors.
+    integration: squid
+    interval: ''
+    metric_name: squid.cd.msgs_recv
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: cd msgs recv
+    unit_name: messages
+  - description: The amount of memory used by enabling the Cache Digests' feature.
+    integration: squid
+    interval: ''
+    metric_name: squid.cd.memory
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: cd mem
+    unit_name: kilobytes
+  - description: The amount of memory used to store Squid's own Cache Digest.
+    integration: squid
+    interval: ''
+    metric_name: squid.cd.local_memory
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: cd local mem
+    unit_name: kilobytes
+  - description: The amount of traffic sent to neighbors in Cache Digest messages.
+    integration: squid
+    interval: ''
+    metric_name: squid.cd.kbytes_sent
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: cd kb sent
+    unit_name: kilobytes
+  - description: The amount of traffic received from neighbors in Cache Digest messages.
+    integration: squid
+    interval: ''
+    metric_name: squid.cd.kbytes_recv
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: cd kb recv
+    unit_name: kilobytes
+  - description: The number of unlink requests given to the (optional) unlinkd process.
+    integration: squid
+    interval: ''
+    metric_name: squid.unlink.requests
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: unlink reqs
+    unit_name: requests
+  - description: The number of (major) page faults as reported by getrusage( ).
+    integration: squid
+    interval: ''
+    metric_name: squid.page_faults
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: second
+    short_name: page faults
+    unit_name: faults
+  - description: >-
+      The number of times Squid called select( ) or poll( ) in the main I/O
+      loop.
+    integration: squid
+    interval: ''
+    metric_name: squid.select_loops
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: select loops
+    unit_name: select
+  - description: 'The amount of CPU used by squid, as reported by getrusage( ).'
+    integration: squid
+    interval: ''
+    metric_name: squid.cpu_time
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cpu time
+    unit_name: percent
+  - description: The number of objects (swap files) saved to disk.
+    integration: squid
+    interval: ''
+    metric_name: squid.swap.outs
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: swap outs
+    unit_name: files
+  - description: The number of objects (swap files) read from disk.
+    integration: squid
+    interval: ''
+    metric_name: squid.swap.ins
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: swap ins
+    unit_name: files
+  - description: >-
+      The number of orphaned cache files removed by the periodic cleanup
+      procedure.
+    integration: squid
+    interval: ''
+    metric_name: squid.swap.files_cleaned
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: swap created
+    unit_name: files
+  - description: The number of server-side HTTP requests aborted due to client-side aborts.
+    integration: squid
+    interval: ''
+    metric_name: squid.aborted_requests
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: aborted reqs
+    unit_name: requests

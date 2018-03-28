@@ -1,0 +1,149 @@
+tomcat:
+  - description: Le nombre maximal de threads de worker autorisés.
+    integration: tomcat
+    interval: '10'
+    metric_name: tomcat.threads.max
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: max threads
+    unit_name: thread
+  - description: Le nombre de threads gérés par le pool de threads.
+    integration: tomcat
+    interval: '10'
+    metric_name: tomcat.threads.count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: thread count
+    unit_name: thread
+  - description: The number of threads that are in use.
+    integration: tomcat
+    interval: '10'
+    metric_name: tomcat.threads.busy
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: busy threads
+    unit_name: thread
+  - description: Bytes per second sent by all the request processors.
+    integration: tomcat
+    interval: '10'
+    metric_name: tomcat.bytes_sent
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: bytes sent
+    unit_name: byte
+  - description: Bytes per second received by all request processors.
+    integration: tomcat
+    interval: '10'
+    metric_name: tomcat.bytes_rcvd
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: bytes rcvd
+    unit_name: byte
+  - description: The number of errors per second on all request processors.
+    integration: tomcat
+    interval: '10'
+    metric_name: tomcat.error_count
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: second
+    short_name: errors
+    unit_name: error
+  - description: The number of requests per second across all request processors.
+    integration: tomcat
+    interval: '10'
+    metric_name: tomcat.request_count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: requests
+    unit_name: request
+  - description: The longest request processing time (in milliseconds).
+    integration: tomcat
+    interval: '10'
+    metric_name: tomcat.max_time
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: max time
+    unit_name: millisecond
+  - description: >-
+      The sum of request processing times across all requests handled by the
+      request processors (in milliseconds) per second.
+    integration: tomcat
+    interval: '10'
+    metric_name: tomcat.processing_time
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: proc time
+    unit_name: ''
+  - description: >-
+      The sum of request processing times across all requests to the servlet (in
+      milliseconds) per second.
+    integration: tomcat
+    interval: '10'
+    metric_name: tomcat.servlet.processing_time
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: servlet proc time
+    unit_name: ''
+  - description: The number of erroneous requests received by the servlet per second.
+    integration: tomcat
+    interval: '10'
+    metric_name: tomcat.servlet.error_count
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: second
+    short_name: servlet err count
+    unit_name: error
+  - description: The number of requests received by the servlet per second.
+    integration: tomcat
+    interval: '10'
+    metric_name: tomcat.servlet.request_count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: servlet requests
+    unit_name: request
+  - description: The number of accesses to the cache per second.
+    integration: tomcat
+    interval: '10'
+    metric_name: tomcat.cache.access_count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: cache accesses
+    unit_name: get
+  - description: Le nombre de hits de cache par seconde.
+    integration: tomcat
+    interval: '10'
+    metric_name: tomcat.cache.hits_count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: cache hits
+    unit_name: hit
+  - description: The number of JSPs per second that have been loaded in the web module.
+    integration: tomcat
+    interval: '10'
+    metric_name: tomcat.jsp.count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: jsp count
+    unit_name: page
+  - description: The number of JSPs per second that have been reloaded in the web module.
+    integration: tomcat
+    interval: '10'
+    metric_name: tomcat.jsp.reload_count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: jsp reloads
+    unit_name: page

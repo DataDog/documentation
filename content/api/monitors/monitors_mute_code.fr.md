@@ -1,7 +1,7 @@
 ---
 title: Désactiver un monitor
 type: apicode
-order: 16.9
+order: 15.9
 external_redirect: /api/#mute-a-monitor
 ---
 

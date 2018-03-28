@@ -1,7 +1,7 @@
 ---
 title: Annuler le downtime d'un monitor
 type: apicode
-order: 9.3
+order: 8.3
 external_redirect: /api/#cancel-monitor-downtime
 ---
 

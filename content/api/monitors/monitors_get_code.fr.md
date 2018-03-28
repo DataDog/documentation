@@ -1,7 +1,7 @@
 ---
 title: Récupérer les détails d'un monitor
 type: apicode
-order: 16.2
+order: 15.2
 external_redirect: /api/#get-a-monitor-s-details
 ---
 

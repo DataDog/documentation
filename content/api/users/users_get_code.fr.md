@@ -1,7 +1,7 @@
 ---
 title: Récupérer un utilisateur
 type: apicode
-order: 24.2
+order: 23.2
 external_redirect: /api/#get-user
 ---
 

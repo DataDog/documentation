@@ -1,7 +1,7 @@
 ---
 title: Activer un embed
 type: apicode
-order: 10.4
+order: 9.4
 external_redirect: /api/#enable-embed
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Mesure d'utilisation
 type: apicode
-order: 23
+order: 22
 external_redirect: /api/#usage-metering
 ---

@@ -1,0 +1,325 @@
+neo4j:
+  - description: La taille du tableau de stockage
+    integration: neo4j
+    interval: ''
+    metric_name: neo4j.arraystore.size
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Array Store Size
+    unit_name: unit
+  - description: Le nombre total d'octets lus.
+    integration: neo4j
+    interval: ''
+    metric_name: neo4j.bytes.read
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Bytes Read
+    unit_name: unit
+  - description: The total number of bytes written
+    integration: neo4j
+    interval: ''
+    metric_name: neo4j.bytes.written
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Bytes Written
+    unit_name: unit
+  - description: Memory Pagecache Size
+    integration: neo4j
+    interval: ''
+    metric_name: neo4j.dbms.memory.pagecache.size
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Pagecache Size
+    unit_name: unit
+  - description: The total number of eviction exceptions
+    integration: neo4j
+    interval: ''
+    metric_name: neo4j.page.cache.evictionexceptions
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Eviction Excptions
+    unit_name: unit
+  - description: The total number of page evictions executed by the page cache.
+    integration: neo4j
+    interval: ''
+    metric_name: neo4j.page.cache.evictions
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Evictions
+    unit_name: unit
+  - description: The total number of faults.
+    integration: neo4j
+    interval: ''
+    metric_name: neo4j.page.cache.faults
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Faults
+    unit_name: unit
+  - description: The total number of file mappings.
+    integration: neo4j
+    interval: ''
+    metric_name: neo4j.page.cache.filemappings
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: File Mappings
+    unit_name: unit
+  - description: The total number of file unmappings.
+    integration: neo4j
+    interval: ''
+    metric_name: neo4j.page.cache.fileunmappings
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: File Unmappings
+    unit_name: unit
+  - description: The total number of flushes executed by the page cache.
+    integration: neo4j
+    interval: ''
+    metric_name: neo4j.page.cache.flushes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Flushes
+    unit_name: unit
+  - description: The HA Pull Time Interval
+    integration: neo4j
+    interval: ''
+    metric_name: neo4j.ha.pull_interval
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Pull Interval
+    unit_name: unit
+  - description: Time when the kernel started
+    integration: neo4j
+    interval: ''
+    metric_name: neo4j.kernel.starttime
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: Kernel Start Time
+    unit_name: second
+  - description: The kernel version
+    integration: neo4j
+    interval: ''
+    metric_name: neo4j.kernel.version
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Kernel Version
+    unit_name: unit
+  - description: The last committed transaction id.
+    integration: neo4j
+    interval: ''
+    metric_name: neo4j.last.committed.transaction.id
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Last Committed Transaction
+    unit_name: unit
+  - description: The total number of locks.
+    integration: neo4j
+    interval: ''
+    metric_name: neo4j.locks
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Number of Locks
+    unit_name: unit
+  - description: The logical log size setting.
+    integration: neo4j
+    interval: ''
+    metric_name: neo4j.logicallog.size
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Logical Log Size
+    unit_name: unit
+  - description: The size of memory pools.
+    integration: neo4j
+    interval: ''
+    metric_name: neo4j.memorypools
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Memory Pools
+    unit_name: unit
+  - description: The size of the node store.
+    integration: neo4j
+    interval: ''
+    metric_name: neo4j.node.store.size
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Node Store Size
+    unit_name: unit
+  - description: The total number of averted deadlocks.
+    integration: neo4j
+    interval: ''
+    metric_name: neo4j.averteddeadlocks
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: Number of Averted Deadlocks
+    unit_name: unit
+  - description: The total number of committed transactions.
+    integration: neo4j
+    interval: ''
+    metric_name: neo4j.committedtransactions
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Number of Committed Transaction
+    unit_name: unit
+  - description: The total number of node ids in use.
+    integration: neo4j
+    interval: ''
+    metric_name: neo4j.nodeidsinuse
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: Number of Nodes in Use
+    unit_name: unit
+  - description: The total number of opened transactions.
+    integration: neo4j
+    interval: ''
+    metric_name: neo4j.opened.transactions
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: Number of Opened Transactions
+    unit_name: unit
+  - description: The total number of open transactions.
+    integration: neo4j
+    interval: ''
+    metric_name: neo4j.open.transactions
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Number of Open Transactions
+    unit_name: unit
+  - description: The total number of property ids in use.
+    integration: neo4j
+    interval: ''
+    metric_name: neo4j.property.ids.inuse
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: Number of Property IDs in Use
+    unit_name: unit
+  - description: The total number of relationship ids in use.
+    integration: neo4j
+    interval: ''
+    metric_name: neo4j.relationship.ids.inuse
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: Number of Relationship IDs in Use
+    unit_name: unit
+  - description: The total number of relationship type ides in use.
+    integration: neo4j
+    interval: ''
+    metric_name: neo4j.relationshiptype.ids.inuse
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Number of Relationship Types in Use
+    unit_name: unit
+  - description: The total number of rolled back transactions.
+    integration: neo4j
+    interval: ''
+    metric_name: neo4j.peak.rolledback.transactions
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Number of Rolled Back Transactions
+    unit_name: unit
+  - description: The peak number of concurrent transactions.
+    integration: neo4j
+    interval: ''
+    metric_name: neo4j.peak.concurrenttransactions
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Number of Concurrent Transactions
+    unit_name: unit
+  - description: The total number of page pins executed by the page cache.
+    integration: neo4j
+    interval: ''
+    metric_name: neo4j.pins
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Number of Pins
+    unit_name: unit
+  - description: The poperty store size.
+    integration: neo4j
+    interval: ''
+    metric_name: neo4j.property.store.size
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Property Store Size
+    unit_name: unit
+  - description: The relationship store size.
+    integration: neo4j
+    interval: ''
+    metric_name: neo4j.relationship.store.size
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Relationship Store Size
+    unit_name: unit
+  - description: The store creation date.
+    integration: neo4j
+    interval: ''
+    metric_name: neo4j.store.creationdate
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Store Creation Date
+    unit_name: unit
+  - description: The store id.
+    integration: neo4j
+    interval: ''
+    metric_name: neo4j.storeid
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Store ID
+    unit_name: unit
+  - description: The store log version.
+    integration: neo4j
+    interval: ''
+    metric_name: neo4j.store.log.version
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: Store Log Version
+    unit_name: unit
+  - description: The string store size.
+    integration: neo4j
+    interval: ''
+    metric_name: neo4j.string.store.size
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: String Store Size
+    unit_name: unit
+  - description: The total store size.
+    integration: neo4j
+    interval: ''
+    metric_name: neo4j.total.store.size
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Total Store Size
+    unit_name: unit

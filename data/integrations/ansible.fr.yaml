@@ -1,0 +1,55 @@
+ansible:
+  - description: Temps nécessaire pour exécuter un playbook
+    integration: ansible
+    interval: ''
+    metric_name: ansible.elapsed_time
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: elapsed time
+    unit_name: second
+  - description: Nombre de tâches qui n'ont pas nécessité de changement
+    integration: ansible
+    interval: ''
+    metric_name: ansible.task.ok
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: tasks ok
+    unit_name: task
+  - description: Number of tasks that failed
+    integration: ansible
+    interval: ''
+    metric_name: ansible.task.failures
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: tasks failures
+    unit_name: task
+  - description: Number of tasks that got skipped
+    integration: ansible
+    interval: ''
+    metric_name: ansible.task.skipped
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: tasks skipped
+    unit_name: task
+  - description: Number of tasks for which nodes were unreachable
+    integration: ansible
+    interval: ''
+    metric_name: ansible.task.unreachable
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: tasks unreachable
+    unit_name: task
+  - description: Number of tasks that successfully applied changes
+    integration: ansible
+    interval: ''
+    metric_name: ansible.task.changed
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: tasks changed
+    unit_name: task

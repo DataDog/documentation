@@ -1,0 +1,28 @@
+fluentd:
+  - description: Le nombre de retries pour ce plugin.
+    integration: fluentd
+    interval: ''
+    metric_name: fluentd.retry_count
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: retry count
+    unit_name: time
+  - description: La longueur de la file d'attente du buffer pour ce plugin.
+    integration: fluentd
+    interval: ''
+    metric_name: fluentd.buffer_queue_length
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: buffer queue length
+    unit_name: buffer
+  - description: The size of the buffer queue for this plugin.
+    integration: fluentd
+    interval: ''
+    metric_name: fluentd.buffer_total_queued_size
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: buffer queue size
+    unit_name: byte

@@ -1,7 +1,7 @@
 ---
 title: Uploader les métadonnées IdP
 type: apicontent
-order: 17.4
+order: 16.4
 external_redirect: /api/#upload-idp-metadata
 ---
 

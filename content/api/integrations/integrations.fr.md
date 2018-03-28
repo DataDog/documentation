@@ -1,7 +1,7 @@
 ---
 title: Intégrations
 type: apicontent
-order: 14
+order: 13
 external_redirect: /api/#integrations
 ---
 
@@ -19,7 +19,7 @@ Les endpoints disponibles sont:
 * Pour créer une intégration dans Datadog :
     **`POST /api/v1/integration/<source_type_name>`**
 
-* Pour éditer une configuration d'intégration :
+* Pour remplacer une configuration d'intégration :
     **`PUT /api/v1/integration/<source_type_name>`**
 
 * Pour récupérer l'état d'une intégration :

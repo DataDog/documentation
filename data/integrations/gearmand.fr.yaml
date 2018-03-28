@@ -1,0 +1,64 @@
+gearmand:
+  - description: Le nombre de toutes les fonctions enregistrées avec Gearman.
+    integration: gearman
+    interval: ''
+    metric_name: gearman.unique_tasks
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: task
+  - description: Le nombre total de jobs Gearman en cours d'exécution.
+    integration: gearman
+    interval: ''
+    metric_name: gearman.running
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: task
+  - description: The total number of jobs in the queue.
+    integration: gearman
+    interval: ''
+    metric_name: gearman.queued
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: task
+  - description: The total number of capable Gearman workers.
+    integration: gearman
+    interval: ''
+    metric_name: gearman.workers
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: workers
+    unit_name: process
+  - description: The number of running Gearman jobs by task.
+    integration: gearman
+    interval: ''
+    metric_name: gearman.running_by_task
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: task
+  - description: The number of jobs in the queue by task.
+    integration: gearman
+    interval: ''
+    metric_name: gearman.queued_by_task
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: task
+  - description: The number of capable Gearman workers by task.
+    integration: gearman
+    interval: ''
+    metric_name: gearman.workers_by_task
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: workers
+    unit_name: process

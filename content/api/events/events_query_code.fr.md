@@ -1,7 +1,7 @@
 ---
 title: Requêter le flux d'événements
 type: apicode
-order: 11.4
+order: 10.4
 external_redirect: /api/#query-the-event-stream
 ---
 

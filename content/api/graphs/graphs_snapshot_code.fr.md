@@ -1,7 +1,7 @@
 ---
 title: Snapshot de graphique
 type: apicode
-order: 12.1
+order: 11.1
 external_redirect: /api/#graph-snapshot
 ---
 

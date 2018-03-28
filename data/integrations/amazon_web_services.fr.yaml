@@ -1,0 +1,1484 @@
+amazon_web_services:
+  - description: Utilisation maximale des ressources aws
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.advisor.service_limit.max
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: aws advisor limit max
+    unit_name: service
+  - description: Utilisation actuelle des ressources aws
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.advisor.service_limit.usage
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: aws TA limit usage
+    unit_name: service
+  - description: The percentage of resource utilization against a service limit.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.advisor.service_limit.usage_ratio
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: aws advisor limit usage ratio
+    unit_name: percent
+  - description: >-
+      The volume of log events in uncompressed bytes uploaded to Cloudwatch
+      Logs.
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.logs.incoming_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: logs bytes
+    unit_name: byte
+  - description: Le nombre de log téléchargés dans Cloudwatch Logs.
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.logs.incoming_log_events
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: logs events
+    unit_name: event
+  - description: >-
+      The volume of log events in compressed bytes forwarded to the subscription
+      destination.
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.logs.forwarded_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: fwd logs bytes
+    unit_name: byte
+  - description: The number of log events forwarded to the subscription destination.
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.logs.forwarded_log_events
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: fwd logs events
+    unit_name: event
+  - description: >-
+      The number of log events for which CloudWatch Logs received an error when
+      forwarding data to the subscription destination.
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.logs.delivery_errors
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: logs delivery err
+    unit_name: event
+  - description: >-
+      The number of log events for which CloudWatch Logs was throttled when
+      forwarding data to the subscription destination.
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.logs.delivery_throttling
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: logs delivery throttle
+    unit_name: event
+  - description: The Spot Instance pools specified in the Spot Fleet request.
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.ec2spot.available_instance_pools_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: spot instance count
+    unit_name: instance
+  - description: The capacity for which Amazon EC2 has submitted bids.
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.ec2spot.bids_submitted_for_capacity
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: spot capacity bids
+    unit_name: instance
+  - description: >-
+      The Spot Instance pools specified in the Spot Fleet request where Amazon
+      EC2 can fulfill bids.
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.ec2spot.eligible_instance_pool_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: spot eligible pool count
+    unit_name: instance
+  - description: La capacité remplie par Amazon EC2.
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.ec2spot.fulfilled_capacity
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: spot fulfilled capacity
+    unit_name: instance
+  - description: >-
+      The maximum value of PercentCapacityAllocation across all Spot Instance
+      pools specified in the Spot Fleet request.
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.ec2spot.max_percent_capacity_allocation
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: spot max capacity alloc
+    unit_name: percent
+  - description: The difference between TargetCapacity and FulfilledCapacity.
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.ec2spot.pending_capacity
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: spot pending capacity
+    unit_name: instance
+  - description: >-
+      The capacity allocated for the Spot Instance pool for the specified
+      dimensions.
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.ec2spot.percent_capacity_allocation
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: spot capacity alloc
+    unit_name: percent
+  - description: The target capacity of the Spot Fleet request.
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.ec2spot.target_capacity
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: spot target capacity
+    unit_name: instance
+  - description: The capacity that is being terminated due to Spot Instance interruptions.
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.ec2spot.terminating_capacity
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: spot terminating capacity
+    unit_name: instance
+  - description: >-
+      The number of bytes observed during a DDoS event for a particular Amazon
+      Resource Name (ARN).
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.ddosprotection.ddo_sattack_bits_per_second
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: ddos bits ps
+    unit_name: byte
+  - description: >-
+      The number of requests observed during a DDoS event for a particular
+      Amazon Resource Name (ARN).
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.ddosprotection.ddo_sattack_requests_per_second
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: ddos request ps
+    unit_name: request
+  - description: Indicates a DDoS event for a particular Amazon Resource Name (ARN).
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.ddosprotection.ddo_sdetected
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ddos sdetected
+    unit_name: ''
+  - description: >-
+      Average percentage of allocated EC2 compute units that are currently in
+      use on the instance.
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.dms.cpuutilization
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: dms cpu utilization
+    unit_name: ''
+  - description: La quantité d'espace de stockage disponible
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.dms.free_storage_space
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: dms free storage space
+    unit_name: byte
+  - description: La quantité de mémoire vive disponible.
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.dms.freeable_memory
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: dms free mem
+    unit_name: byte
+  - description: Le nombre moyen d'opérations d'I/O sur disque par seconde.
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.dms.write_iops
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: dms write iops
+    unit_name: operation
+  - description: Le nombre moyen d'opérations d'I/O sur disque par seconde.
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.dms.read_iops
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: dms read iops
+    unit_name: operation
+  - description: Le nombre moyen d'octets écrits sur le disque par seconde.
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.dms.write_throughput
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: dms write throughput
+    unit_name: byte
+  - description: Le nombre moyen d'octets lus à partir du disque par seconde.
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.dms.read_throughput
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: dms read throughput
+    unit_name: byte
+  - description: The average amount of time taken per write disk I/O operation
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.dms.write_latency
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: dms write latency
+    unit_name: second
+  - description: The average amount of time taken per read disk I/O operation
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.dms.read_latency
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: dms read latency
+    unit_name: second
+  - description: The amount of swap space used on the DB Instance
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.dms.swap_usage
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: dms swam usage
+    unit_name: byte
+  - description: >-
+      The outgoing (Transmit) network traffic on the DB instance including both
+      customer database traffic and Amazon RDS traffic used for monitoring and
+      replication
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.dms.network_transmit_throughput
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: dms net transmit throughput
+    unit_name: byte
+  - description: >-
+      The incoming (Receive) network traffic on the DB instance including both
+      customer database traffic and Amazon RDS traffic used for monitoring and
+      replication.
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.dms.network_receive_throughput
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: dms net receive throughput
+    unit_name: byte
+  - description: Incoming network bandwidth from a full load from the source
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.dms.full_load_throughput_bandwidth_source
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: dms full load throughput bandwidth source
+    unit_name: kibibyte
+  - description: Outgoing network bandwidth from a full load for the target
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.dms.full_load_throughput_bandwidth_target
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: dms full load throughput bandwidth target
+    unit_name: kibibyte
+  - description: Incoming changes from a full load from the source in rows per second
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.dms.full_load_throughput_rows_source
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: dms full load throughput rows source
+    unit_name: row
+  - description: Outgoing changes from a full load for the target
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.dms.full_load_throughput_rows_target
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: dms full load throughput rows target
+    unit_name: row
+  - description: Total row count of changes for the task
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.dms.cdcincoming_changes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: dms cdc incoming changes
+    unit_name: row
+  - description: >-
+      Amount of rows accumulating in a memory and waiting to be committed from
+      the source
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.dms.cdcchanges_memory_source
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: dms cdc changes memory source
+    unit_name: row
+  - description: >-
+      Amount of rows accumulating in a memory and waiting to be committed to the
+      target
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.dms.cdcchanges_memory_target
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: dms cdc changes memory target
+    unit_name: row
+  - description: >-
+      Amount of rows accumulating on disk and waiting to be committed from the
+      source
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.dms.cdcchanges_disk_source
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: dms cdc changes disk source
+    unit_name: row
+  - description: >-
+      Amount of rows accumulating on disk and waiting to be committed to the
+      target
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.dms.cdcchanges_disk_target
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: dms cdc changes disk target
+    unit_name: row
+  - description: Incoming task network bandwidth from the source
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.dms.cdcthroughput_bandwidth_source
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: dms cdc throughput bandwidth source
+    unit_name: kibibyte
+  - description: Outgoing task network bandwidth for the target
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.dms.cdcthroughput_bandwidth_target
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: dms cdc throughput bandwidth target
+    unit_name: kibibyte
+  - description: Incoming task changes from the source
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.dms.cdcthroughput_rows_source
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: dms cdc throughput rows source
+    unit_name: row
+  - description: Outgoing task changes for the target
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.dms.cdcthroughput_rows_target
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: dms cdc throughput rows target
+    unit_name: row
+  - description: Latence de lecture depuis la source
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.dms.cdclatency_source
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: dms cdc latency target
+    unit_name: second
+  - description: Latency writing to the target
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.dms.cdclatency_target
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: dms cdc latency source
+    unit_name: second
+  - description: >-
+      Measures the number of times a target is invoked for a rule in response to
+      an event. This includes successful and failed invocations but does not
+      include throttled or retried attempts until they fail permanently.
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.events.invocations
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: events invocations
+    unit_name: ''
+  - description: >-
+      Measures the number of invocations that failed permanently. This does not
+      include invocations that are retried or that succeeded after a retry
+      attempt
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.events.failed_invocations
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: events failed invocations
+    unit_name: ''
+  - description: Measures the number of triggered rules that matched with any event.
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.events.triggered_rules
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: events triggered rules
+    unit_name: ''
+  - description: Measures the number of events that matched with any rule.
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.events.matched_events
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: events matched events
+    unit_name: ''
+  - description: Measures the number of triggered rules that are being throttled.
+    integration: amazon_web_services
+    interval: ''
+    metric_name: aws.events.throttled_rules
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: events throttled rules
+    unit_name: ''
+  - description: The count of concurrent active TCP connections through the NAT gateway.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.natgateway.active_connection_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: actv conn cnt
+    unit_name: connection
+  - description: The number of bytes received by the NAT Gateway from the destination.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.natgateway.bytes_in_from_destination
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: bytes in from dest
+    unit_name: byte
+  - description: The number of bytes received by the NAT Gateway from the VPC clients.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.natgateway.bytes_in_from_source
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: bytes in from src
+    unit_name: byte
+  - description: The number of bytes sent through the NAT Gateway to the destination.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.natgateway.bytes_out_to_destination
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: bytes out to dest
+    unit_name: byte
+  - description: The number of bytes sent through the NAT Gateway to the VPC clients.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.natgateway.bytes_out_to_source
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: bytes out to src
+    unit_name: byte
+  - description: The count of connections attempted through the NAT Gateway.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.natgateway.connection_attempt_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: conn attempt cnt
+    unit_name: attempt
+  - description: The count of connections established through the NAT Gateway.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.natgateway.connection_established_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: conn established cnt
+    unit_name: connection
+  - description: >-
+      The count of times a source port could not be allocated by the NAT
+      Gateway.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.natgateway.error_port_allocation
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: err port alloc
+    unit_name: error
+  - description: >-
+      The count of timeouts caused by connections going from active to idle
+      state.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.natgateway.idle_timeout_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: idle timeout cnt
+    unit_name: timeout
+  - description: The count of packets dropped by the NAT Gateway.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.natgateway.packets_drop_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: packets dropped
+    unit_name: packet
+  - description: The number of packets received by the NAT Gateway from the destination.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.natgateway.packets_in_from_destination
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: packets in from dest
+    unit_name: packet
+  - description: The number of packets received by the NAT Gateway from the VPC clients.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.natgateway.packets_in_from_source
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: packets in from src
+    unit_name: packet
+  - description: The number of packets sent through the NAT Gateway to the destination.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.natgateway.packets_out_to_destination
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: packets out to dest
+    unit_name: packet
+  - description: The number of packets sent through the NAT Gateway to the VPC clients.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.natgateway.packets_out_to_source
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: packets out to src
+    unit_name: packet
+  - description: >-
+      The average time interval, in milliseconds, between the time the execution
+      started and the time it closed.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.execution_time
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: avg exec time
+    unit_name: millisecond
+  - description: >-
+      The maximum time interval, in milliseconds, between the time the execution
+      started and the time it closed.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.execution_time.maximum
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: max exec time
+    unit_name: millisecond
+  - description: >-
+      The minimum time interval, in milliseconds, between the time the execution
+      started and the time it closed.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.execution_time.minimum
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: min exec time
+    unit_name: millisecond
+  - description: >-
+      The 95th percentile time interval, in milliseconds, between the time the
+      execution started and the time it closed.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.execution_time.p95
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: p95 exec time
+    unit_name: millisecond
+  - description: >-
+      The 99th percentile time interval, in milliseconds, between the time the
+      execution started and the time it closed.il
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.execution_time.p99
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: p99 exec time
+    unit_name: millisecond
+  - description: The number of executions that were aborted/terminated.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.executions_aborted
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: exec aborted
+    unit_name: ''
+  - description: The number of StateEntered events in addition to retries
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.execution_throttled
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: exec throttled
+    unit_name: ''
+  - description: The number of executions that failed.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.executions_failed
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: exec failed
+    unit_name: ''
+  - description: The number of executions started.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.executions_started
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: exec started
+    unit_name: ''
+  - description: The number of executions that completed successfully.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.executions_succeeded
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: exec succeeded
+    unit_name: ''
+  - description: The number of executions that timed out for any reason.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.executions_timed_out
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: exec timed out
+    unit_name: ''
+  - description: >-
+      The average time interval, in milliseconds, between the time the lambda
+      function was started and when it was closed.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.lambda_function_run_time
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: avg func run time
+    unit_name: millisecond
+  - description: >-
+      The  maximum time interval, in milliseconds, between the time the lambda
+      function was started and when it was closed.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.lambda_function_run_time.maximum
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: max func run time
+    unit_name: millisecond
+  - description: >-
+      The minimum time interval, in milliseconds, between the time the lambda
+      function was started and when it was closed.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.lambda_function_run_time.minimum
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: min func run time
+    unit_name: millisecond
+  - description: >-
+      The 95th percentile time interval, in milliseconds, between the time the
+      lambda function was started and when it was closed.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.lambda_function_run_time.p95
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: p95 func run time
+    unit_name: millisecond
+  - description: >-
+      The 99th percentile time interval, in milliseconds, between the time the
+      lambda function was started and when it was closed.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.lambda_function_run_time.p99
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: p99 func run time
+    unit_name: millisecond
+  - description: >-
+      The avg time interval, in milliseconds, that the activity stayed in the
+      schedule state.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.lambda_function_schedule_time
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: avg func sched time
+    unit_name: millisecond
+  - description: >-
+      The maximum time interval, in milliseconds, that the activity stayed in
+      the schedule state.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.lambda_function_schedule_time.maximum
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: max func sched time
+    unit_name: millisecond
+  - description: >-
+      The minimum time interval, in milliseconds, that the activity stayed in
+      the schedule state.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.lambda_function_schedule_time.minimum
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: min func sched time
+    unit_name: millisecond
+  - description: >-
+      The 95th percentile time interval, in milliseconds, that the activity
+      stayed in the schedule state.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.lambda_function_schedule_time.p95
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: p95 func sched time
+    unit_name: millisecond
+  - description: >-
+      The 99th percentile time interval, in milliseconds, that the activity
+      stayed in the schedule state.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.lambda_function_schedule_time.p99
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: p99 func shed time
+    unit_name: millisecond
+  - description: >-
+      The average time interval, in milliseconds, between the time the lambda
+      function was scheduled and when it was closed.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.lambda_function_time
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: avg func time
+    unit_name: millisecond
+  - description: >-
+      The maximum time interval, in milliseconds, between the time the lambda
+      function was scheduled and when it was closed.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.lambda_function_time.maximum
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: max func time
+    unit_name: millisecond
+  - description: >-
+      The minimum time interval, in milliseconds, between the time the lambda
+      function was scheduled and when it was closed.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.lambda_function_time.minimum
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: min func time
+    unit_name: millisecond
+  - description: >-
+      The 95th percentile time interval, in milliseconds, between the time the
+      lambda function was scheduled and when it was closed.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.lambda_function_time.p95
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: p95 func time
+    unit_name: millisecond
+  - description: >-
+      The 99th percentile time interval, in milliseconds, between the time the
+      lambda function was scheduled and when it was closed.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.lambda_function_time.p99
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: p99 func time
+    unit_name: millisecond
+  - description: The number of lambda functions that failed.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.lambda_functions_failed
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: func failed
+    unit_name: ''
+  - description: >-
+      The number of lambda functions that were timed out due to a heartbeat
+      timeout.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.lambda_functions_heartbeat_timed_out
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: func heartbeat timed out
+    unit_name: ''
+  - description: The number of lambda functions that were scheduled.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.lambda_functions_scheduled
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: func scheduled
+    unit_name: ''
+  - description: The number of lambda functions that were started.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.lambda_functions_started
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: func started
+    unit_name: ''
+  - description: The number of lambda functions that completed successfully.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.lambda_functions_succeeded
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: func succeeded
+    unit_name: ''
+  - description: The number of lambda functions that were timed out on close.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.lambda_functions_timed_out
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: func timed out
+    unit_name: ''
+  - description: >-
+      The average time interval, in milliseconds, between the time the activity
+      was started and when it was closed.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.activity_run_time
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: avg act run time
+    unit_name: millisecond
+  - description: >-
+      The  maximum time interval, in milliseconds, between the time the activity
+      was started and when it was closed.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.activity_run_time.maximum
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: max act run time
+    unit_name: millisecond
+  - description: >-
+      The minimum time interval, in milliseconds, between the time the activity
+      was started and when it was closed.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.activity_run_time.minimum
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: min act run time
+    unit_name: millisecond
+  - description: >-
+      The 95th percentile time interval, in milliseconds, between the time the
+      activity was started and when it was closed.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.activity_run_time.p95
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: p95 act run time
+    unit_name: millisecond
+  - description: >-
+      The 99th percentile time interval, in milliseconds, between the time the
+      activity was started and when it was closed.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.activity_run_time.p99
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: p99 act run time
+    unit_name: millisecond
+  - description: >-
+      The avg time interval, in milliseconds, that the activity stayed in the
+      schedule state.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.activity_schedule_time
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: avg act sched time
+    unit_name: millisecond
+  - description: >-
+      The maximum time interval, in milliseconds, that the activity stayed in
+      the schedule state.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.activity_schedule_time.maximum
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: max act sched time
+    unit_name: millisecond
+  - description: >-
+      The minimum time interval, in milliseconds, that the activity stayed in
+      the schedule state.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.activity_schedule_time.minimum
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: min act sched time
+    unit_name: millisecond
+  - description: >-
+      The 95th percentile time interval, in milliseconds, that the activity
+      stayed in the schedule state.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.activity_schedule_time.p95
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: p95 act sched time
+    unit_name: millisecond
+  - description: >-
+      The 99th percentile time interval, in milliseconds, that the activity
+      stayed in the schedule state.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.activity_schedule_time.p99
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: p99 act shed time
+    unit_name: millisecond
+  - description: >-
+      The average time interval, in milliseconds, between the time the activity
+      was scheduled and when it was closed.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.activity_time
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: avg act time
+    unit_name: millisecond
+  - description: >-
+      The maximum time interval, in milliseconds, between the time the activity
+      was scheduled and when it was closed.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.activity_time.maximum
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: max act time
+    unit_name: millisecond
+  - description: >-
+      The minimum time interval, in milliseconds, between the time the activity
+      was scheduled and when it was closed.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.activity_time.minimum
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: min act time
+    unit_name: millisecond
+  - description: >-
+      The 95th percentile time interval, in milliseconds, between the time the
+      activity was scheduled and when it was closed.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.activity_time.p95
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: p95 act time
+    unit_name: millisecond
+  - description: >-
+      The 99th percentile time interval, in milliseconds, between the time the
+      activity was scheduled and when it was closed.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.activity_time.p99
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: p99 act time
+    unit_name: millisecond
+  - description: The number of activities that failed.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.activities_failed
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: act failed
+    unit_name: ''
+  - description: The number of activities that were timed out due to a heartbeat timeout.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.activities_heartbeat_timed_out
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: act heartbeat timed out
+    unit_name: ''
+  - description: The number of activities that were scheduled.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.activities_scheduled
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: act scheduled
+    unit_name: ''
+  - description: The number of activities that were started.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.activities_started
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: act started
+    unit_name: ''
+  - description: The number of activities that completed successfully.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.activities_succeeded
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: act succeeded
+    unit_name: ''
+  - description: The number of activities that were timed out on close.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.states.activities_timed_out
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: act timed out
+    unit_name: ''
+  - description: The number of Trusted Advisor checks in a green (OK) state.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.trustedadvisor.green_checks
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: aws gren checks
+    unit_name: check
+  - description: The number of Trusted Advisor checks in a yellow (WARN) state.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.trustedadvisor.yellow_checks
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: aws yellow checks
+    unit_name: check
+  - description: the number of Trusted Advisor checks in a red (ERROR) state.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.trustedadvisor.red_checks
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: aws red checks
+    unit_name: check
+  - description: The percentage of resource utilization against a service limit.
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.trustedadvisor.service_limit_usage
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: aws TA limit usage
+    unit_name: percent
+  - description: >-
+      ACCEPT or REJECT if the traffic was permitted or not by the securtiy
+      groups or network ACLs
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.vpc.flowlogs.action
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: flowlog action
+    unit_name: ''
+  - description: >-
+      The maximum number of bytes transferred per request during the capture
+      window
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.vpc.flowlogs.bytes.per_request.max
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: request
+    short_name: max bytes per request
+    unit_name: byte
+  - description: >-
+      The median number of bytes transferred per request during the capture
+      window
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.vpc.flowlogs.bytes.per_request.median
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: request
+    short_name: med bytes per request
+    unit_name: byte
+  - description: >-
+      The minimum number of bytes transferred per request during the capture
+      window
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.vpc.flowlogs.bytes.per_request.min
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: request
+    short_name: min bytes per request
+    unit_name: byte
+  - description: >-
+      The 90th percentile number of bytes transferred per request during the
+      capture window
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.vpc.flowlogs.bytes.per_request.p90
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: request
+    short_name: p90 bytes per request
+    unit_name: byte
+  - description: >-
+      The 95th percentile number of bytes transferred per request during the
+      capture window
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.vpc.flowlogs.bytes.per_request.p95
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: request
+    short_name: p95 bytes per request
+    unit_name: byte
+  - description: >-
+      The 99th percentile number of bytes transferred per request during the
+      capture window
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.vpc.flowlogs.bytes.per_request.p99
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: request
+    short_name: p99 bytes per request
+    unit_name: byte
+  - description: The total number of bytes transferred during the capture window
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.vpc.flowlogs.bytes.total
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: flowlog bytes
+    unit_name: byte
+  - description: The maximum duration per request during the capture window
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.vpc.flowlogs.duration.per_request.max
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: request
+    short_name: max duration per request
+    unit_name: second
+  - description: The median duration per request during the capture window
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.vpc.flowlogs.duration.per_request.median
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: request
+    short_name: med duration per request
+    unit_name: second
+  - description: The minimum duration per request during the capture window
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.vpc.flowlogs.duration.per_request.min
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: request
+    short_name: min duration per request
+    unit_name: second
+  - description: The 90th percentile duration per request during the capture window
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.vpc.flowlogs.duration.per_request.p90
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: request
+    short_name: p90 duration per request
+    unit_name: second
+  - description: The 95th percentile duration per request during the capture window
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.vpc.flowlogs.duration.per_request.p95
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: request
+    short_name: p95 duration per request
+    unit_name: second
+  - description: The 99th percentile duration per request during the capture window
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.vpc.flowlogs.duration.per_request.p99
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: request
+    short_name: p99 duration per request
+    unit_name: second
+  - description: 'The logging status of the flow log: OK NODATA or SKIPDATA'
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.vpc.flowlogs.log_status
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: flowlog status
+    unit_name: ''
+  - description: >-
+      The maximum number of packets transferred per request during the capture
+      window
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.vpc.flowlogs.packets.per_request.max
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: request
+    short_name: max packets per request
+    unit_name: packet
+  - description: >-
+      The median number of packets transferred per request during the capture
+      window
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.vpc.flowlogs.packets.per_request.median
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: request
+    short_name: med packets per request
+    unit_name: packet
+  - description: >-
+      The minimum number of packets transferred per request during the capture
+      window
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.vpc.flowlogs.packets.per_request.min
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: request
+    short_name: min packets per request
+    unit_name: packet
+  - description: >-
+      The 90th percentile number of packets transferred per request during the
+      capture window
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.vpc.flowlogs.packets.per_request.p90
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: request
+    short_name: p90 packets per request
+    unit_name: packet
+  - description: >-
+      The 95th percentile number of packets transferred per request during the
+      capture window
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.vpc.flowlogs.packets.per_request.p95
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: request
+    short_name: p95 packets per request
+    unit_name: packet
+  - description: >-
+      The 99th percentile number of packets transferred per request during the
+      capture window
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.vpc.flowlogs.packets.per_request.p99
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: request
+    short_name: p99 packets per request
+    unit_name: packet
+  - description: The total number of packets transferred during the capture window
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.vpc.flowlogs.packets.total
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: packets
+    unit_name: packet
+  - description: The number of bytes that have come in through the VPN tunnel
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.vpn.tunnel_data_in
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vpn data in
+    unit_name: byte
+  - description: The number of bytes that have gone out through the VPN tunnel
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.vpn.tunnel_data_out
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vpn data out
+    unit_name: byte
+  - description: This metric is 1 when the VPN tunnel is up and 0 when it is down
+    integration: amazon_web_services
+    interval: '60'
+    metric_name: aws.vpn.tunnel_state
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: vpn state
+    unit_name: ''

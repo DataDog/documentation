@@ -1,0 +1,37 @@
+system_core:
+  - description: Le nombre de cœurs CPU sur l'host
+    integration: system
+    interval: ''
+    metric_name: system.core.count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cpu cores
+    unit_name: core
+  - description: Le temps CPU d'un espace utilisateur donné
+    integration: system
+    interval: ''
+    metric_name: system.core.user
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cpu user
+    unit_name: ''
+  - description: A given core's system CPU time
+    integration: system
+    interval: ''
+    metric_name: system.core.system
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cpu system
+    unit_name: ''
+  - description: A given core's idle CPU time
+    integration: system
+    interval: ''
+    metric_name: system.core.idle
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cpu idle
+    unit_name: ''
