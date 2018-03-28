@@ -221,7 +221,7 @@ Notice the above examples only use the OpenTracing classes. Please reference the
 
 ## Sampling / Distributed Tracing
 
-Enable Priority Sampling to ensure that distributed traces are complete.  Priority Sampling achieves this by automatically assigning and propagating a priority value along all traces, depending on their service and volume.  Priorities can also be set manually to either drop non-interesting traces or to keep important ones.
+Enable priority sampling to ensure that distributed traces are complete.  Priority sampling achieves this by automatically assigning and propagating a priority value along all traces, depending on their service and volume.  Priorities can also be set manually to either drop non-interesting traces or to keep important ones.
 
 Priority sampling is disabled by default. To enable it, configure the `priority.sampling` flag to `true` ([see how to configure the client above](#configuration)).
 
