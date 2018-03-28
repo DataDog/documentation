@@ -1,0 +1,276 @@
+network:
+  - description: Le nombre d'octets reçu depuis un appareil par seconde.
+    integration: system
+    interval: ''
+    metric_name: system.net.bytes_rcvd
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: bytes rcvd
+    unit_name: byte
+  - description: Le nombre d'octets envoyés depuis un appareil par seconde.
+    integration: system
+    interval: ''
+    metric_name: system.net.bytes_sent
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: bytes sent
+    unit_name: byte
+  - description: The number of packets of data received by the interface.
+    integration: system
+    interval: ''
+    metric_name: system.net.packets_in.count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: packets in
+    unit_name: packet
+  - description: The number of packet receive errors detected by the device driver.
+    integration: system
+    interval: ''
+    metric_name: system.net.packets_in.error
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: second
+    short_name: pkts in err
+    unit_name: error
+  - description: The number of packets of data transmitted by the interface.
+    integration: system
+    interval: ''
+    metric_name: system.net.packets_out.count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: packets out
+    unit_name: packet
+  - description: The number of packet transmit errors detected by the device driver.
+    integration: system
+    interval: ''
+    metric_name: system.net.packets_out.error
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: second
+    short_name: pkts out err
+    unit_name: error
+  - description: The number of TCP segments received.
+    integration: system
+    interval: ''
+    metric_name: system.net.tcp.in_segs
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: segs in
+    unit_name: segment
+  - description: The number of TCP segments transmitted.
+    integration: system
+    interval: ''
+    metric_name: system.net.tcp.out_segs
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: segs out
+    unit_name: segment
+  - description: The number of TCP packets received.
+    integration: system
+    interval: ''
+    metric_name: system.net.tcp.rcv_packs
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: pkts rcvd
+    unit_name: packet
+  - description: The number of TCP packets retransmitted.
+    integration: system
+    interval: ''
+    metric_name: system.net.tcp.retrans_packs
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: pkts retrans
+    unit_name: packet
+  - description: The number of TCP segments retransmitted.
+    integration: system
+    interval: ''
+    metric_name: system.net.tcp.retrans_segs
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: segs retrans
+    unit_name: segment
+  - description: The number of TCP packets transmitted.
+    integration: system
+    interval: ''
+    metric_name: system.net.tcp.sent_packs
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: pkts sent
+    unit_name: packet
+  - description: >-
+      The number of times connections have overflowed the accept buffer.
+      Available since Agent v5.14.0.
+    integration: system
+    interval: ''
+    metric_name: system.net.tcp.listen_overflows
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: tcp listen overflows
+    unit_name: ''
+  - description: >-
+      The number of times connections have dropped out of listen. Available
+      since Agent v5.14.0.
+    integration: system
+    interval: ''
+    metric_name: system.net.tcp.listen_drops
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: tcp listen drops
+    unit_name: ''
+  - description: >-
+      The number of packets dropped because there wasn't room in the TCP
+      backlog. Available since Agent v5.14.0.
+    integration: system
+    interval: ''
+    metric_name: system.net.tcp.backlog_drops
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: tcp backlog drops
+    unit_name: packet
+  - description: 'The number of TCP IPv4 closing connections. '
+    integration: system
+    interval: ''
+    metric_name: system.net.tcp4.closing
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: tcp4 closing
+    unit_name: connection
+  - description: 'The number of TCP IPv4 closing connections. '
+    integration: system
+    interval: ''
+    metric_name: system.net.tcp4.established
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: tcp4 established
+    unit_name: connection
+  - description: 'The number of TCP IPv4 listening connections. '
+    integration: system
+    interval: ''
+    metric_name: system.net.tcp4.listening
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: tcp4 listening
+    unit_name: connection
+  - description: 'The number of TCP IPv4 opening connections. '
+    integration: system
+    interval: ''
+    metric_name: system.net.tcp4.opening
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: tcp4 opening
+    unit_name: connection
+  - description: 'The number of TCP IPv6 closing connections. '
+    integration: system
+    interval: ''
+    metric_name: system.net.tcp6.closing
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: tcp6 closing
+    unit_name: connection
+  - description: 'The number of TCP IPv6 closing connections. '
+    integration: system
+    interval: ''
+    metric_name: system.net.tcp6.established
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: tcp6 established
+    unit_name: connection
+  - description: 'The number of TCP IPv6 listening connections. '
+    integration: system
+    interval: ''
+    metric_name: system.net.tcp6.listening
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: tcp6 listening
+    unit_name: connection
+  - description: 'The number of TCP IPv6 opening connections. '
+    integration: system
+    interval: ''
+    metric_name: system.net.tcp6.opening
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: tcp6 opening
+    unit_name: connection
+  - description: The rate of UDP datagrams delivered to UDP users.
+    integration: system
+    interval: ''
+    metric_name: system.net.udp.in_datagrams
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: udp in datagrams
+    unit_name: datagram
+  - description: >-
+      The rate of received UDP datagrams that could not be delivered for reasons
+      other than the lack of an application at the destination port.
+    integration: system
+    interval: ''
+    metric_name: system.net.udp.in_errors
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: second
+    short_name: udp in errors
+    unit_name: datagram
+  - description: >-
+      The rate of received UDP datagrams for which there was no application at
+      the destination port.
+    integration: system
+    interval: ''
+    metric_name: system.net.udp.no_ports
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: second
+    short_name: udp no_ports
+    unit_name: datagram
+  - description: The rate of UDP datagrams sent from this entity.
+    integration: system
+    interval: ''
+    metric_name: system.net.udp.out_datagrams
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: udp out datagrams
+    unit_name: datagram
+  - description: >-
+      The rate of UDP datagrams lost because there was no room in the receive
+      buffer.
+    integration: system
+    interval: ''
+    metric_name: system.net.udp.rcv_buf_errors
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: second
+    short_name: udp rcv buf errs
+    unit_name: error
+  - description: >-
+      The rate of UDP datagrams lost because there was no room in the send
+      buffer.
+    integration: system
+    interval: ''
+    metric_name: system.net.udp.snd_buf_errors
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: second
+    short_name: udp snd buf errs
+    unit_name: error

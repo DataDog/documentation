@@ -12,14 +12,13 @@ col1:
     link: 'https://www.datadoghq.com/alerts/'
     title: Alertes
   - name: api
-    link: 'api/'
+    link: api/
     title: API
   - name: pricing
     link: 'https://www.datadoghq.com/pricing/'
     title: Prix
 col2:
   - name: documentation
-    link: ''
     title: Documentation
   - name: support
     link: 'https://www.datadoghq.com/support/'

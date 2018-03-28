@@ -1,6 +1,6 @@
 ---
 title: Graphiques incorporables
 type: apicode
-order: 10
+order: 9
 external_redirect: /api/#embeddable-graphs
 ---

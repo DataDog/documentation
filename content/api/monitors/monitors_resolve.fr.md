@@ -1,7 +1,7 @@
 ---
 title: Résoudre un monitor
 type: apicontent
-order: 16.6
+order: 15.6
 external_redirect: /api/#resolve-monitor
 ---
 

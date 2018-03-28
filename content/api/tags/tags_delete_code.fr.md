@@ -1,7 +1,7 @@
 ---
 title: Retirer les tags d'un host
 type: apicode
-order: 20.5
+order: 19.5
 external_redirect: /api/#remove-host-tags
 ---
 

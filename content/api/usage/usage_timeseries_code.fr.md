@@ -1,7 +1,7 @@
 ---
 title: Récupérer l'utilisation horaire pour les métriques custom.
 type: apicode
-order: 23.2
+order: 22.2
 external_redirect: /api/#get-hourly-usage-for-custom-metrics
 ---
 

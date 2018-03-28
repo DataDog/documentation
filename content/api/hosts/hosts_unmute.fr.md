@@ -1,7 +1,7 @@
 ---
 title: Activer un host
 type: apicontent
-order: 13.2
+order: 12.2
 external_redirect: /api/#unmute-a-host
 ---
 

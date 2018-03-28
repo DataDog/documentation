@@ -1,7 +1,7 @@
 ---
 title: Graphiques
 type: apicontent
-order: 12
+order: 11
 external_redirect: /api/#graphs
 ---
 ## Graphiques

@@ -1,0 +1,196 @@
+iis:
+  - description: La durée depuis le démarrage du serveur IIS.
+    integration: iis
+    interval: ''
+    metric_name: iis.uptime
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: uptime
+    unit_name: second
+  - description: Le nombre d'octets envoyés par seconde.
+    integration: iis
+    interval: ''
+    metric_name: iis.net.bytes_sent
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: net bytes sent
+    unit_name: byte
+  - description: The number of bytes received per second
+    integration: iis
+    interval: ''
+    metric_name: iis.net.bytes_rcvd
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: net bytes rcvd
+    unit_name: byte
+  - description: The total number of bytes transferred per second
+    integration: iis
+    interval: ''
+    metric_name: iis.net.bytes_total
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: net bytes total
+    unit_name: byte
+  - description: The number of active connections
+    integration: iis
+    interval: ''
+    metric_name: iis.net.num_connections
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: net conns
+    unit_name: connection
+  - description: The number of files sent per second
+    integration: iis
+    interval: ''
+    metric_name: iis.net.files_sent
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: net files sent
+    unit_name: file
+  - description: The number of files received per second
+    integration: iis
+    interval: ''
+    metric_name: iis.net.files_rcvd
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: net files rcvd
+    unit_name: file
+  - description: Le nombre de tentative de connexions par seconde.
+    integration: iis
+    interval: ''
+    metric_name: iis.net.connection_attempts
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: net conn attempts
+    unit_name: connection
+  - description: The number of GET requests per second
+    integration: iis
+    interval: ''
+    metric_name: iis.httpd_request_method.get
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: requests http get
+    unit_name: request
+  - description: Le nombre de requêtes POST par seconde.
+    integration: iis
+    interval: ''
+    metric_name: iis.httpd_request_method.post
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: requests http post
+    unit_name: request
+  - description: The number of HEAD requests per second
+    integration: iis
+    interval: ''
+    metric_name: iis.httpd_request_method.head
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: requests http head
+    unit_name: request
+  - description: The number of PUT requests per second
+    integration: iis
+    interval: ''
+    metric_name: iis.httpd_request_method.put
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: requests http put
+    unit_name: request
+  - description: The number of DELETE requests per second
+    integration: iis
+    interval: ''
+    metric_name: iis.httpd_request_method.delete
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: requests http delete
+    unit_name: request
+  - description: The number of OPTIONS requests per second
+    integration: iis
+    interval: ''
+    metric_name: iis.httpd_request_method.options
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: requests http options
+    unit_name: request
+  - description: The number of TRACE requests per second
+    integration: iis
+    interval: ''
+    metric_name: iis.httpd_request_method.trace
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: requests http trace
+    unit_name: request
+  - description: >-
+      The number of not found errors per second (typically reported as an HTTP
+      404 response code)
+    integration: iis
+    interval: ''
+    metric_name: iis.errors.not_found
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: second
+    short_name: errors not found
+    unit_name: error
+  - description: >-
+      The number of locked errors per second (typically reported as an HTTP 423
+      response code)
+    integration: iis
+    interval: ''
+    metric_name: iis.errors.locked
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: second
+    short_name: errors locked
+    unit_name: error
+  - description: The number of requests from users over an anonymous connection per second
+    integration: iis
+    interval: ''
+    metric_name: iis.users.anon
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: requests users anon
+    unit_name: request
+  - description: >-
+      The number of requests from users over a non-anonymous connection per
+      second
+    integration: iis
+    interval: ''
+    metric_name: iis.users.nonanon
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: requests users non anon
+    unit_name: request
+  - description: The number of Common Gateway Interface requests executed per second
+    integration: iis
+    interval: ''
+    metric_name: iis.requests.cgi
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: requests cgi
+    unit_name: request
+  - description: The number of ISAPI requests executed per second
+    integration: iis
+    interval: ''
+    metric_name: iis.requests.isapi
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: requests isapi
+    unit_name: request

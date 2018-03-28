@@ -1,7 +1,7 @@
 ---
 title: Obtenez le top 500 des métriques custom les plus fréquentes par heure
 type: apicode
-order: 23.3
+order: 22.3
 external_redirect: /api/#get-top-500-custom-metrics-by-hourly-average
 ---
 

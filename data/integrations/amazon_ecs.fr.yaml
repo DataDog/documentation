@@ -1,0 +1,327 @@
+amazon_ecs:
+  - description: Pourcentage moyen d'unités CPU utilisées dans le cluster ou le service.
+    integration: amazon_ecs
+    interval: ''
+    metric_name: aws.ecs.cpuutilization
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cpu utilization
+    unit_name: percent
+  - description: >-
+      Pourcentage minimum des unités de CPU qui sont utilisées dans le cluster
+      ou le service.
+    integration: amazon_ecs
+    interval: ''
+    metric_name: aws.ecs.cpuutilization.minimum
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cpu utilization
+    unit_name: percent
+  - description: >-
+      Pourcentage maximum des unités de CPU qui sont utilisées dans le cluster
+      ou le service.
+    integration: amazon_ecs
+    interval: ''
+    metric_name: aws.ecs.cpuutilization.maximum
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cpu utilization
+    unit_name: percent
+  - description: Pourcentage moyen de la mémoire utilisée dans le cluster ou le service.
+    integration: amazon_ecs
+    interval: ''
+    metric_name: aws.ecs.memory_utilization
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: mem utilization
+    unit_name: fraction
+  - description: Pourcentage minimum de la mémoire utilisée dans le cluster ou le service.
+    integration: amazon_ecs
+    interval: ''
+    metric_name: aws.ecs.memory_utilization.minimum
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: min mem utilization
+    unit_name: fraction
+  - description: Pourcentage maximum de la mémoire utilisée dans le cluster ou le service.
+    integration: amazon_ecs
+    interval: ''
+    metric_name: aws.ecs.memory_utilization.maximum
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: max mem utilization
+    unit_name: fraction
+  - description: Pourcentage moyen des unités CPU utilisées dans le service.
+    integration: amazon_ecs
+    interval: ''
+    metric_name: aws.ecs.service.cpuutilization
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: srvc cpu utilization
+    unit_name: percent
+  - description: Minimum percentage of CPU units that are used in the service.
+    integration: amazon_ecs
+    interval: ''
+    metric_name: aws.ecs.service.cpuutilization.minimum
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: srvc cpu utilization
+    unit_name: percent
+  - description: Maximum percentage of CPU units that are used in the service.
+    integration: amazon_ecs
+    interval: ''
+    metric_name: aws.ecs.service.cpuutilization.maximum
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: srvc cpu utilization
+    unit_name: percent
+  - description: Average percentage of memory that is used in the service.
+    integration: amazon_ecs
+    interval: ''
+    metric_name: aws.ecs.service.memory_utilization
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: srvc mem utilization
+    unit_name: fraction
+  - description: Minimum percentage of memory that is used in the service.
+    integration: amazon_ecs
+    interval: ''
+    metric_name: aws.ecs.service.memory_utilization.minimum
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: srvc min mem utilization
+    unit_name: fraction
+  - description: Maximum percentage of memory that is used in the service.
+    integration: amazon_ecs
+    interval: ''
+    metric_name: aws.ecs.service.memory_utilization.maximum
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: srvc max mem utilization
+    unit_name: fraction
+  - description: Average percentage of CPU units that are used in the cluster.
+    integration: amazon_ecs
+    interval: ''
+    metric_name: aws.ecs.cluster.cpuutilization
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: clstr cpu utilization
+    unit_name: percent
+  - description: Minimum percentage of CPU units that are used in the cluster.
+    integration: amazon_ecs
+    interval: ''
+    metric_name: aws.ecs.cluster.cpuutilization.minimum
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: clstr cpu utilization
+    unit_name: percent
+  - description: Maximum percentage of CPU units that are used in the cluster.
+    integration: amazon_ecs
+    interval: ''
+    metric_name: aws.ecs.cluster.cpuutilization.maximum
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: clstr cpu utilization
+    unit_name: percent
+  - description: Average percentage of memory that is used in the cluster.
+    integration: amazon_ecs
+    interval: ''
+    metric_name: aws.ecs.cluster.memory_utilization
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: clstr mem utilization
+    unit_name: fraction
+  - description: Minimum percentage of memory that is used in the cluster.
+    integration: amazon_ecs
+    interval: ''
+    metric_name: aws.ecs.cluster.memory_utilization.minimum
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: min clstr mem utilization
+    unit_name: fraction
+  - description: Maximum percentage of memory that is used in the cluster.
+    integration: amazon_ecs
+    interval: ''
+    metric_name: aws.ecs.cluster.memory_utilization.maximum
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: max clstr mem utilization
+    unit_name: fraction
+  - description: >-
+      Average percentage of CPU units that are reserved by running tasks in the
+      cluster.
+    integration: amazon_ecs
+    interval: ''
+    metric_name: aws.ecs.cpureservation
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cpu reservation
+    unit_name: percent
+  - description: >-
+      Maximum percentage of CPU units that are reserved by running tasks in the
+      cluster.
+    integration: amazon_ecs
+    interval: ''
+    metric_name: aws.ecs.cpureservation.maximum
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cpu reservation
+    unit_name: percent
+  - description: >-
+      Minimum percentage of CPU units that are reserved by running tasks in the
+      cluster.
+    integration: amazon_ecs
+    interval: ''
+    metric_name: aws.ecs.cpureservation.minimum
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cpu reservation
+    unit_name: percent
+  - description: >-
+      Average percentage of memory that is reserved by running tasks in the
+      cluster.
+    integration: amazon_ecs
+    interval: ''
+    metric_name: aws.ecs.memory_reservation
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: mem reservation
+    unit_name: percent
+  - description: >-
+      Minimum percentage of memory that is reserved by running tasks in the
+      cluster.
+    integration: amazon_ecs
+    interval: ''
+    metric_name: aws.ecs.memory_reservation.minimum
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: min mem reservation
+    unit_name: percent
+  - description: >-
+      Maximum percentage of memory that is reserved by running tasks in the
+      cluster.
+    integration: amazon_ecs
+    interval: ''
+    metric_name: aws.ecs.memory_reservation.maximum
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: max mem reservation
+    unit_name: percent
+  - description: >-
+      The number of tasks on the container instance that are in the RUNNING
+      status.
+    integration: amazon_ecs
+    interval: ''
+    metric_name: aws.ecs.running_tasks_count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: running tasks count
+    unit_name: ''
+  - description: >-
+      The number of tasks on the container instance that are in the PENDING
+      status.
+    integration: amazon_ecs
+    interval: ''
+    metric_name: aws.ecs.pending_tasks_count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: pending tasks count
+    unit_name: ''
+  - description: The number of CPU units registered on the container instance
+    integration: amazon_ecs
+    interval: ''
+    metric_name: aws.ecs.registered_cpu
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: registered cpu
+    unit_name: ''
+  - description: The number of CPU units remaining on the container instance
+    integration: amazon_ecs
+    interval: ''
+    metric_name: aws.ecs.remaining_cpu
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: remaining cpu
+    unit_name: ''
+  - description: The number of Memory units registered on the container instance
+    integration: amazon_ecs
+    interval: ''
+    metric_name: aws.ecs.registered_memory
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: registered memory
+    unit_name: ''
+  - description: The number of Memory units remaining on the container instance
+    integration: amazon_ecs
+    interval: ''
+    metric_name: aws.ecs.remaining_memory
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: remaining memory
+    unit_name: ''
+  - description: The number of services running per cluster
+    integration: amazon_ecs
+    interval: ''
+    metric_name: aws.ecs.services
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: services
+    unit_name: ''
+  - description: The number of containers pending per service
+    integration: amazon_ecs
+    interval: ''
+    metric_name: aws.ecs.service.pending
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: service pending
+    unit_name: ''
+  - description: The number of containers desired per service
+    integration: amazon_ecs
+    interval: ''
+    metric_name: aws.ecs.service.desired
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: service desired
+    unit_name: ''
+  - description: The number of containers running per service
+    integration: amazon_ecs
+    interval: ''
+    metric_name: aws.ecs.service.running
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: service running
+    unit_name: ''

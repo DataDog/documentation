@@ -1,0 +1,262 @@
+etcd:
+  - description: Taux de requêtes get réussies
+    integration: etcd
+    interval: ''
+    metric_name: etcd.store.gets.success
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: get success
+    unit_name: request
+  - description: Taux de requêtes get échouées.
+    integration: etcd
+    interval: ''
+    metric_name: etcd.store.gets.fail
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: second
+    short_name: get failure
+    unit_name: request
+  - description: Taux de requêtes set réussies
+    integration: etcd
+    interval: ''
+    metric_name: etcd.store.sets.success
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: set success
+    unit_name: request
+  - description: Rate of failed set requests
+    integration: etcd
+    interval: ''
+    metric_name: etcd.store.sets.fail
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: second
+    short_name: set failure
+    unit_name: request
+  - description: Rate of successful delete requests
+    integration: etcd
+    interval: ''
+    metric_name: etcd.store.delete.success
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: delete success
+    unit_name: request
+  - description: Rate of failed delete requests
+    integration: etcd
+    interval: ''
+    metric_name: etcd.store.delete.fail
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: second
+    short_name: delete failure
+    unit_name: request
+  - description: Rate of successful update requests
+    integration: etcd
+    interval: ''
+    metric_name: etcd.store.update.success
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: update success
+    unit_name: request
+  - description: Rate of failed update requests
+    integration: etcd
+    interval: ''
+    metric_name: etcd.store.update.fail
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: second
+    short_name: update failure
+    unit_name: request
+  - description: Rate of successful create requests
+    integration: etcd
+    interval: ''
+    metric_name: etcd.store.create.success
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: create success
+    unit_name: request
+  - description: Rate of failed create requests
+    integration: etcd
+    interval: ''
+    metric_name: etcd.store.create.fail
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: second
+    short_name: create failure
+    unit_name: request
+  - description: Rate of compare and swap requests success
+    integration: etcd
+    interval: ''
+    metric_name: etcd.store.compareandswap.success
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: compare and swap success
+    unit_name: request
+  - description: Rate of compare and swap requests failure
+    integration: etcd
+    interval: ''
+    metric_name: etcd.store.compareandswap.fail
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: second
+    short_name: compare and swap failure
+    unit_name: request
+  - description: Rate of compare and delete requests success
+    integration: etcd
+    interval: ''
+    metric_name: etcd.store.compareanddelete.success
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: compare and delete success
+    unit_name: request
+  - description: Rate of compare and delete requests failure
+    integration: etcd
+    interval: ''
+    metric_name: etcd.store.compareanddelete.fail
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: second
+    short_name: compare and delete failure
+    unit_name: request
+  - description: Rate of expired keys
+    integration: etcd
+    interval: ''
+    metric_name: etcd.store.expire.count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: expired keys
+    unit_name: eviction
+  - description: Rate of watchers
+    integration: etcd
+    interval: ''
+    metric_name: etcd.store.watchers
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: watcher number
+    unit_name: ''
+  - description: Rate of packets received
+    integration: etcd
+    interval: ''
+    metric_name: etcd.self.send.pkgrate
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: packets received
+    unit_name: packet
+  - description: Rate of bytes received
+    integration: etcd
+    interval: ''
+    metric_name: etcd.self.send.bandwidthrate
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: bytes received
+    unit_name: byte
+  - description: Taux de paquets envoyés.
+    integration: etcd
+    interval: ''
+    metric_name: etcd.self.recv.pkgrate
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: packets sent
+    unit_name: packet
+  - description: Rate of bytes sent
+    integration: etcd
+    interval: ''
+    metric_name: etcd.self.recv.bandwidthrate
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: bytes sent
+    unit_name: byte
+  - description: Rate of append requests this node has processed
+    integration: etcd
+    interval: ''
+    metric_name: etcd.self.recv.appendrequest.count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: append requests received
+    unit_name: request
+  - description: Rate of append requests this node has sent
+    integration: etcd
+    interval: ''
+    metric_name: etcd.self.send.appendrequest.count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: append requests sent
+    unit_name: request
+  - description: Rate of failed Raft RPC requests
+    integration: etcd
+    interval: ''
+    metric_name: etcd.leader.counts.fail
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: second
+    short_name: raft success
+    unit_name: request
+  - description: Rate of successful Raft RPC requests
+    integration: etcd
+    interval: ''
+    metric_name: etcd.leader.counts.success
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: raft failure
+    unit_name: request
+  - description: Current latency to each peer in the cluster
+    integration: etcd
+    interval: ''
+    metric_name: etcd.leader.latency.current
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: current latency
+    unit_name: millisecond
+  - description: Average latency to each peer in the cluster
+    integration: etcd
+    interval: ''
+    metric_name: etcd.leader.latency.avg
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: avg latency
+    unit_name: millisecond
+  - description: Minimum latency to each peer in the cluster
+    integration: etcd
+    interval: ''
+    metric_name: etcd.leader.latency.min
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: min latency
+    unit_name: millisecond
+  - description: Maximum latency to each peer in the cluster
+    integration: etcd
+    interval: ''
+    metric_name: etcd.leader.latency.max
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: max latency
+    unit_name: millisecond
+  - description: Standard deviation latency to each peer in the cluster
+    integration: etcd
+    interval: ''
+    metric_name: etcd.leader.latency.stddev
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: stddev latency
+    unit_name: millisecond

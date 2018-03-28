@@ -1,0 +1,847 @@
+storm:
+  - description: Nombre de Tuples Acked.
+    integration: storm
+    interval: ''
+    metric_name: storm.bolt.last_<interval>.acked
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: tuple
+    short_name: ''
+    unit_name: sample
+  - description: Capacité de Bolt
+    integration: storm
+    interval: ''
+    metric_name: storm.bolt.last_<interval>.capacity
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: fraction
+  - description: Nombre de Tuples émis
+    integration: storm
+    interval: ''
+    metric_name: storm.bolt.last_<interval>.emitted
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: tuple
+    short_name: ''
+    unit_name: sample
+  - description: Number of Seconds Since Last Error
+    integration: storm
+    interval: ''
+    metric_name: storm.bolt.last_<interval>.errorLapsedSecs
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: second
+  - description: Nombre de Tuples exécutés
+    integration: storm
+    interval: ''
+    metric_name: storm.bolt.last_<interval>.executed
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: tuple
+    short_name: ''
+    unit_name: sample
+  - description: Bolt Execute Latency
+    integration: storm
+    interval: ''
+    metric_name: storm.bolt.last_<interval>.executeLatency
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: millisecond
+  - description: Number of Bolt Executors
+    integration: storm
+    interval: ''
+    metric_name: storm.bolt.last_<interval>.executors
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: executors
+    short_name: ''
+    unit_name: thread
+  - description: Number of Failed Tuples
+    integration: storm
+    interval: ''
+    metric_name: storm.bolt.last_<interval>.failed
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: tuple
+    short_name: ''
+    unit_name: sample
+  - description: Bolt Process Latency
+    integration: storm
+    interval: ''
+    metric_name: storm.bolt.last_<interval>.processLatency
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: millisecond
+  - description: Bolt Requested CPU
+    integration: storm
+    interval: ''
+    metric_name: storm.bolt.last_<interval>.requestedCpu
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: core
+    short_name: ''
+    unit_name: percent
+  - description: Bolt Requested Memory Off Heap
+    integration: storm
+    interval: ''
+    metric_name: storm.bolt.last_<interval>.requestedMemOffHeap
+    metric_type: guage
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: mebibyte
+  - description: Bolt Requested Memory On Heap
+    integration: storm
+    interval: ''
+    metric_name: storm.bolt.last_<interval>.requestedMemOnHeap
+    metric_type: guage
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: mebibyte
+  - description: Bolt Tasks
+    integration: storm
+    interval: ''
+    metric_name: storm.bolt.last_<interval>.tasks
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: task
+    short_name: ''
+    unit_name: task
+  - description: Number of Transferred Tuples
+    integration: storm
+    interval: ''
+    metric_name: storm.bolt.last_<interval>.transferred
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: tuple
+    short_name: ''
+    unit_name: sample
+  - description: Available Storm Cluster CPU
+    integration: storm
+    interval: ''
+    metric_name: storm.cluster.availCpu
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: core
+  - description: Available Storm Cluster Memory
+    integration: storm
+    interval: ''
+    metric_name: storm.cluster.availMem
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: mebibyte
+  - description: Storm Cluster CPU Assigned Percent
+    integration: storm
+    interval: ''
+    metric_name: storm.cluster.cpuAssignedPercentUtil
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: percent
+  - description: Total Storm Cluster Executors
+    integration: storm
+    interval: ''
+    metric_name: storm.cluster.executorsTotal
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: executor
+    short_name: ''
+    unit_name: thread
+  - description: Storm Cluster Memory Assigned Percent
+    integration: storm
+    interval: ''
+    metric_name: storm.cluster.memAssignedPercentUtil
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: percent
+  - description: Total Cluster Slots Available
+    integration: storm
+    interval: ''
+    metric_name: storm.cluster.slotsFree
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: slot
+    short_name: ''
+    unit_name: process
+  - description: Total Cluster Slots
+    integration: storm
+    interval: ''
+    metric_name: storm.cluster.slotsTotal
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: slot
+    short_name: ''
+    unit_name: process
+  - description: Total Storm Cluster Slots Used
+    integration: storm
+    interval: ''
+    metric_name: storm.cluster.slotsUsed
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: slot
+    short_name: ''
+    unit_name: process
+  - description: Total Storm Cluster Supervisors
+    integration: storm
+    interval: ''
+    metric_name: storm.cluster.supervisors
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: supervisor
+    short_name: ''
+    unit_name: worker
+  - description: Total Storm Cluster Tasks
+    integration: storm
+    interval: ''
+    metric_name: storm.cluster.tasksTotal
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: task
+    short_name: ''
+    unit_name: task
+  - description: Nombre de topologies Storm
+    integration: storm
+    interval: ''
+    metric_name: storm.cluster.topologies
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: Total Number of Topologies on the Cluster
+    short_name: ''
+    unit_name: service
+  - description: Total Storm Cluster CPU
+    integration: storm
+    interval: ''
+    metric_name: storm.cluster.totalCpu
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: core
+  - description: Total Storm Cluster Memory
+    integration: storm
+    interval: ''
+    metric_name: storm.cluster.totalMem
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: mebibyte
+  - description: Number of Dead Nimbus Nodes
+    integration: storm
+    interval: ''
+    metric_name: storm.nimbus.numDead
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: follower
+    short_name: ''
+    unit_name: node
+  - description: Number of Follower Nimbus Nodes
+    integration: storm
+    interval: ''
+    metric_name: storm.nimbus.numFollowers
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: follower
+    short_name: ''
+    unit_name: node
+  - description: Number of Leader Nimbus Nodes
+    integration: storm
+    interval: ''
+    metric_name: storm.nimbus.numLeaders
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: leader
+    short_name: ''
+    unit_name: node
+  - description: Number of Offline Nimbus Nodes
+    integration: storm
+    interval: ''
+    metric_name: storm.nimbus.numOffline
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: follower
+    short_name: ''
+    unit_name: node
+  - description: Nimbus Uptime Seconds
+    integration: storm
+    interval: ''
+    metric_name: storm.nimbus.upTimeSeconds
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: uptime
+    short_name: ''
+    unit_name: second
+  - description: Nombre de Tuples Acked.
+    integration: storm
+    interval: ''
+    metric_name: storm.spout.last_<interval>.acked
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: tuple
+    short_name: ''
+    unit_name: sample
+  - description: Spout Complete Latency
+    integration: storm
+    interval: ''
+    metric_name: storm.spout.last_<interval>.completeLatency
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: millisecond
+  - description: Nombre de Tuples émis
+    integration: storm
+    interval: ''
+    metric_name: storm.spout.last_<interval>.emitted
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: tuple
+    short_name: ''
+    unit_name: sample
+  - description: Number of Seconds Since Last Error
+    integration: storm
+    interval: ''
+    metric_name: storm.spout.last_<interval>.errorLapsedSecs
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: second
+  - description: Number of Spout Executors
+    integration: storm
+    interval: ''
+    metric_name: storm.spout.last_<interval>.executors
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: executor
+    short_name: ''
+    unit_name: thread
+  - description: Number of Failed Tuples
+    integration: storm
+    interval: ''
+    metric_name: storm.spout.last_<interval>.failed
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: tuple
+    short_name: ''
+    unit_name: sample
+  - description: CPU demandé par Spout
+    integration: storm
+    interval: ''
+    metric_name: storm.spout.last_<interval>.requestedCpu
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: core
+    short_name: ''
+    unit_name: percent
+  - description: Spout Requested Memory Off Heap
+    integration: storm
+    interval: ''
+    metric_name: storm.spout.last_<interval>.requestedMemOffHeap
+    metric_type: guage
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: mebibyte
+  - description: Spout Requested Memory On Heap
+    integration: storm
+    interval: ''
+    metric_name: storm.spout.last_<interval>.requestedMemOnHeap
+    metric_type: guage
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: mebibyte
+  - description: Spout Tasks
+    integration: storm
+    interval: ''
+    metric_name: storm.spout.last_<interval>.tasks
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: task
+    short_name: ''
+    unit_name: task
+  - description: Number of Transferred Tuples
+    integration: storm
+    interval: ''
+    metric_name: storm.spout.last_<interval>.transferred
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: tuple
+    short_name: ''
+    unit_name: sample
+  - description: Total Supervisor Slots
+    integration: storm
+    interval: ''
+    metric_name: storm.supervisor.slotsTotal
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: slot
+    short_name: ''
+    unit_name: process
+  - description: Used Supervisor Slots
+    integration: storm
+    interval: ''
+    metric_name: storm.supervisor.slotsUsed
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: slot
+    short_name: ''
+    unit_name: process
+  - description: Total Supervisor CPU
+    integration: storm
+    interval: ''
+    metric_name: storm.supervisor.totalCpu
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: core
+  - description: Total Supervisor Memory
+    integration: storm
+    interval: ''
+    metric_name: storm.supervisor.totalMem
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: mebibyte
+  - description: Supervisor Uptime
+    integration: storm
+    interval: ''
+    metric_name: storm.supervisor.uptimeSeconds
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: uptime
+    short_name: ''
+    unit_name: second
+  - description: Used Supervisor CPU
+    integration: storm
+    interval: ''
+    metric_name: storm.supervisor.usedCpu
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: core
+  - description: Used Supervisor Memory
+    integration: storm
+    interval: ''
+    metric_name: storm.supervisor.usedMem
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: mebibyte
+  - description: All Time Acked Tuples
+    integration: storm
+    interval: ''
+    metric_name: storm.topologyStats.last_<interval>.acked
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: tuple
+    short_name: ''
+    unit_name: sample
+  - description: Assigned CPU Percentage
+    integration: storm
+    interval: ''
+    metric_name: storm.topologyStats.last_<interval>.assignedCpu
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: core
+    short_name: ''
+    unit_name: percent
+  - description: Off Heap Memory Assigned
+    integration: storm
+    interval: ''
+    metric_name: storm.topologyStats.last_<interval>.assignedMemOffHeap
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: mebibyte
+  - description: On Heap Memory Assigned
+    integration: storm
+    interval: ''
+    metric_name: storm.topologyStats.last_<interval>.assignedMemOnHeap
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: mebibyte
+  - description: Total Memory Assigned
+    integration: storm
+    interval: ''
+    metric_name: storm.topologyStats.last_<interval>.assignedTotalMem
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: mebibyte
+  - description: All Time Complete Latence
+    integration: storm
+    interval: ''
+    metric_name: storm.topologyStats.last_<interval>.completeLatency
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: millisecond
+  - description: Boolean indicating if debug mode is enabled.
+    integration: storm
+    interval: ''
+    metric_name: storm.topologyStats.last_<interval>.debug
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: sample
+  - description: All Time Emitted Tuples
+    integration: storm
+    interval: ''
+    metric_name: storm.topologyStats.last_<interval>.emitted
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: tuple
+    short_name: ''
+    unit_name: sample
+  - description: Total Storm Topology Executors
+    integration: storm
+    interval: ''
+    metric_name: storm.topologyStats.last_<interval>.executorsTotal
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: executor
+    short_name: ''
+    unit_name: thread
+  - description: All Time Failed Tuples
+    integration: storm
+    interval: ''
+    metric_name: storm.topologyStats.last_<interval>.failed
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: tuple
+    short_name: ''
+    unit_name: sample
+  - description: Spout Tuple Timeout in Seconds
+    integration: storm
+    interval: ''
+    metric_name: storm.topologyStats.last_<interval>.msgTimeout
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: timeout
+    short_name: ''
+    unit_name: Second
+  - description: Total Number of Bolts
+    integration: storm
+    interval: ''
+    metric_name: storm.topologyStats.last_<interval>.numBolts
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: bolt
+    short_name: ''
+    unit_name: task
+  - description: Nombre de Spouts
+    integration: storm
+    interval: ''
+    metric_name: storm.topologyStats.last_<interval>.numSpouts
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: spout
+    short_name: ''
+    unit_name: task
+  - description: Number of Replications
+    integration: storm
+    interval: ''
+    metric_name: storm.topologyStats.last_<interval>.replicationCount
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: replica
+    short_name: ''
+    unit_name: occurrence
+  - description: Requested Topology CPU resources
+    integration: storm
+    interval: ''
+    metric_name: storm.topologyStats.last_<interval>.requestedCpu
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: core
+    short_name: ''
+    unit_name: percent
+  - description: Requested Topology Off Heap Memory resources
+    integration: storm
+    interval: ''
+    metric_name: storm.topologyStats.last_<interval>.requestedMemOffHeap
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: mebibyte
+  - description: Requested Topology On Heap Memory Resources
+    integration: storm
+    interval: ''
+    metric_name: storm.topologyStats.last_<interval>.requestedMemOnHeap
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: mebibyte
+  - description: Metric Sampling Percentage by Storm
+    integration: storm
+    interval: ''
+    metric_name: storm.topologyStats.last_<interval>.samplingPct
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: percent
+  - description: Total Number of Tasks
+    integration: storm
+    interval: ''
+    metric_name: storm.topologyStats.last_<interval>.tasksTotal
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: task
+    short_name: ''
+    unit_name: task
+  - description: All Time Transferred Tuples
+    integration: storm
+    interval: ''
+    metric_name: storm.topologyStats.last_<interval>.transferred
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: tuple
+    short_name: ''
+    unit_name: sample
+  - description: Total Topology Uptime
+    integration: storm
+    interval: ''
+    metric_name: storm.topologyStats.last_<interval>.uptimeSeconds
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: uptime
+    short_name: ''
+    unit_name: second
+  - description: Total Number of Workers
+    integration: storm
+    interval: ''
+    metric_name: storm.topologyStats.last_<interval>.workersTotal
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: worker
+    short_name: ''
+    unit_name: worker
+  - description: Number of Tuples Acked by Spout & Stream
+    integration: storm
+    interval: ''
+    metric_name: storm.topologyStats.metrics.bolts.last_<interval>..acked
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: tuple
+    short_name: ''
+    unit_name: sample
+  - description: Complete Tuple Latency by Spout & Stream
+    integration: storm
+    interval: ''
+    metric_name: storm.topologyStats.metrics.bolts.last_<interval>.complete_ms_avg
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: millisecond
+  - description: Number of Tuples Emitted by Spout & Stream
+    integration: storm
+    interval: ''
+    metric_name: storm.topologyStats.metrics.bolts.last_<interval>.emitted
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: tuple
+    short_name: ''
+    unit_name: sample
+  - description: Number of Tuples Executed by Spout & Stream
+    integration: storm
+    interval: ''
+    metric_name: storm.topologyStats.metrics.bolts.last_<interval>.executed
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: tuple
+    short_name: ''
+    unit_name: sample
+  - description: Execute Tuple Latency by Spout & Stream
+    integration: storm
+    interval: ''
+    metric_name: storm.topologyStats.metrics.bolts.last_<interval>.executed_ms_avg
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: millisecond
+  - description: Number of Tuples Failed by Spout & Stream
+    integration: storm
+    interval: ''
+    metric_name: storm.topologyStats.metrics.bolts.last_<interval>.failed
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: tuple
+    short_name: ''
+    unit_name: sample
+  - description: Process Tuple Latency by Spout & Stream
+    integration: storm
+    interval: ''
+    metric_name: storm.topologyStats.metrics.bolts.last_<interval>.process_ms_avg
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: millisecond
+  - description: Number of Tuples Transferred by Spout & Stream
+    integration: storm
+    interval: ''
+    metric_name: storm.topologyStats.metrics.bolts.last_<interval>.transferred
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: tuple
+    short_name: ''
+    unit_name: sample
+  - description: Number of Tuples Acked by Spout & Stream
+    integration: storm
+    interval: ''
+    metric_name: storm.topologyStats.metrics.spouts.last_<interval>.acked
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: tuple
+    short_name: ''
+    unit_name: sample
+  - description: Complete Tuple Latency by Spout & Stream
+    integration: storm
+    interval: ''
+    metric_name: storm.topologyStats.metrics.spouts.last_<interval>.complete_ms_avg
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: millisecond
+  - description: Number of Tuples Emitted by Spout & Stream
+    integration: storm
+    interval: ''
+    metric_name: storm.topologyStats.metrics.spouts.last_<interval>.emitted
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: tuple
+    short_name: ''
+    unit_name: sample
+  - description: Number of Tuples Executed by Spout & Stream
+    integration: storm
+    interval: ''
+    metric_name: storm.topologyStats.metrics.spouts.last_<interval>.executed
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: tuple
+    short_name: ''
+    unit_name: sample
+  - description: Execute Tuple Latency by Spout & Stream
+    integration: storm
+    interval: ''
+    metric_name: storm.topologyStats.metrics.spouts.last_<interval>.executed_ms_avg
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: millisecond
+  - description: Number of Tuples Failed by Spout & Stream
+    integration: storm
+    interval: ''
+    metric_name: storm.topologyStats.metrics.spouts.last_<interval>.failed
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: tuple
+    short_name: ''
+    unit_name: sample
+  - description: Process Tuple Latency by Spout & Stream
+    integration: storm
+    interval: ''
+    metric_name: storm.topologyStats.metrics.spouts.last_<interval>.process_ms_avg
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: millisecond
+  - description: Number of Tuples Transferred by Spout & Stream
+    integration: storm
+    interval: ''
+    metric_name: storm.topologyStats.metrics.spouts.last_<interval>.transferred
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: tuple
+    short_name: ''
+    unit_name: sample
+  - description: Assigned Worker CPU Percentage
+    integration: storm
+    interval: ''
+    metric_name: storm.worker.last_<interval>.assignedCpu
+    metric_type: guage
+    orientation: '0'
+    per_unit_name: core
+    short_name: ''
+    unit_name: percent
+  - description: Off Heap Memory Assigned for a Worker
+    integration: storm
+    interval: ''
+    metric_name: storm.worker.last_<interval>.assignedMemOffHeap
+    metric_type: guage
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: mebibyte
+  - description: On Heap Memory Assigned for a Worker
+    integration: storm
+    interval: ''
+    metric_name: storm.worker.last_<interval>.assignedMemOnHeap
+    metric_type: guage
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: mebibyte
+  - description: Total Number of Component Tasks for a Worker
+    integration: storm
+    interval: ''
+    metric_name: storm.worker.last_<interval>.componentNumTasks
+    metric_type: histogram
+    orientation: '0'
+    per_unit_name: task
+    short_name: ''
+    unit_name: task
+  - description: Total Number of Executors for a Worker
+    integration: storm
+    interval: ''
+    metric_name: storm.worker.last_<interval>.executorsTotal
+    metric_type: guage
+    orientation: '0'
+    per_unit_name: executor
+    short_name: ''
+    unit_name: thread
+  - description: Worker Uptime
+    integration: storm
+    interval: ''
+    metric_name: storm.worker.last_<interval>.uptimeSeconds
+    metric_type: guage
+    orientation: '1'
+    per_unit_name: uptime
+    short_name: ''
+    unit_name: second

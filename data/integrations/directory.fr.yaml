@@ -1,0 +1,46 @@
+directory:
+  - description: Taille totale du fichier.
+    integration: directory
+    interval: ''
+    metric_name: system.disk.directory.file.bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: file_size
+    unit_name: byte
+  - description: Durée depuis la dernière modification
+    integration: directory
+    interval: ''
+    metric_name: system.disk.directory.file.modified_sec_ago
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: file_modif
+    unit_name: second
+  - description: Duration since creation
+    integration: directory
+    interval: ''
+    metric_name: system.disk.directory.file.created_sec_ago
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: file_created
+    unit_name: second
+  - description: Number of files in the directory
+    integration: directory
+    interval: ''
+    metric_name: system.disk.directory.files
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: file_number
+    unit_name: file
+  - description: Total size of the directory
+    integration: directory
+    interval: ''
+    metric_name: system.disk.directory.bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: directory_size
+    unit_name: byte

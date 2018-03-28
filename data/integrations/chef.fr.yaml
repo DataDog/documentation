@@ -1,0 +1,28 @@
+chef:
+  - description: Temps total écoulé pendant l'exécution du Client Chef.
+    integration: chef
+    interval: ''
+    metric_name: chef.resources.elapsed_time
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: secs
+    unit_name: second
+  - description: Nombre total de ressources gérées par le Chef.
+    integration: chef
+    interval: ''
+    metric_name: chef.resources.total
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: tot res
+    unit_name: resource
+  - description: Total count of resources updated in the Chef Client Run.
+    integration: chef
+    interval: ''
+    metric_name: chef.resources.updated
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: upd res
+    unit_name: resource

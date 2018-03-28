@@ -1,7 +1,7 @@
 ---
 title: Récupérer tous les utilisateurs
 type: apicontent
-order: 24.3
+order: 23.3
 external_redirect: /api/#get-all-users
 ---
 

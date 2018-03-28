@@ -1,7 +1,7 @@
 ---
 title: Récupérer tous les downtimes de monitor
 type: apicode
-order: 9.6
+order: 8.6
 external_redirect: /api/#get-all-monitor-downtimes
 ---
 

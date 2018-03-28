@@ -1,0 +1,345 @@
+google_cloud_platform:
+  - description: >-
+      Latence moyenne de la demande envoyée par le proxy au backend jusqu'à ce
+      que le proxy reçoive le dernier octet de réponse du backend.
+    integration: google_cloud_platform
+    interval: '60'
+    metric_name: gcp.loadbalancing.https.backend_latencies.avg
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: backend latency avg
+    unit_name: millisecond
+  - description: >-
+      Latence de la demande envoyée par le proxy au backend jusqu'à ce que le
+      proxy reçoive le dernier octet de réponse du backend.
+    integration: google_cloud_platform
+    interval: '60'
+    metric_name: gcp.loadbalancing.https.backend_latencies.samplecount
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: backend latency samplecount
+    unit_name: millisecond
+  - description: >-
+      Sum of Squared Deviation for latency of request sent by the proxy to
+      backend until proxy receives last byte of response from backend.
+    integration: google_cloud_platform
+    interval: '60'
+    metric_name: gcp.loadbalancing.https.backend_latencies.sumsqdev
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: backend latency sumsqdev
+    unit_name: millisecond
+  - description: Average RTT for each connection between client and proxy.
+    integration: google_cloud_platform
+    interval: '60'
+    metric_name: gcp.loadbalancing.https.frontend_tcp_rtt.avg
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: frontend rtt avg
+    unit_name: millisecond
+  - description: Sample Count of RTT for each connection between client and proxy.
+    integration: google_cloud_platform
+    interval: '60'
+    metric_name: gcp.loadbalancing.https.frontend_tcp_rtt.samplecount
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: frontend rtt samplecount
+    unit_name: millisecond
+  - description: >-
+      Sum of Squared Deviation of RTT for each connection between client and
+      proxy.
+    integration: google_cloud_platform
+    interval: '60'
+    metric_name: gcp.loadbalancing.https.frontend_tcp_rtt.sumsqdev
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: frontend rtt sumsqdev
+    unit_name: millisecond
+  - description: Bytes sent as requests from clients to L7 load balancer.
+    integration: google_cloud_platform
+    interval: '60'
+    metric_name: gcp.loadbalancing.https.request_bytes_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: request bytes
+    unit_name: byte
+  - description: Number of requests served by L7 load balancer.
+    integration: google_cloud_platform
+    interval: '60'
+    metric_name: gcp.loadbalancing.https.request_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: request count
+    unit_name: request
+  - description: Bytes sent as responses from L7 load balancer to clients.
+    integration: google_cloud_platform
+    interval: '60'
+    metric_name: gcp.loadbalancing.https.response_bytes_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: response bytes
+    unit_name: byte
+  - description: >-
+      Average latency calculated from request received by proxy until proxy sees
+      ACK from client on last response byte.
+    integration: google_cloud_platform
+    interval: '60'
+    metric_name: gcp.loadbalancing.https.total_latencies.avg
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: total latency avg
+    unit_name: millisecond
+  - description: >-
+      Sample Count of latency calculated from request received by proxy until
+      proxy sees ACK from client on last response byte.
+    integration: google_cloud_platform
+    interval: '60'
+    metric_name: gcp.loadbalancing.https.total_latencies.samplecount
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: total latency samplecount
+    unit_name: millisecond
+  - description: >-
+      Sum of Squared Deviation of latency calculated from request received by
+      proxy until proxy sees ACK from client on last response byte.
+    integration: google_cloud_platform
+    interval: '60'
+    metric_name: gcp.loadbalancing.https.total_latencies.sumsqdev
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: total latency sumsqdev
+    unit_name: millisecond
+  - description: 'Number of connections that were terminated over TCP/SSL proxy. '
+    integration: google_cloud_platform
+    interval: '60'
+    metric_name: gcp.loadbalancing.tcp_ssl_proxy.closed_connections
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: tcp closed conn
+    unit_name: connection
+  - description: 'Number of bytes sent from VM to client using proxy. '
+    integration: google_cloud_platform
+    interval: '60'
+    metric_name: gcp.loadbalancing.tcp_ssl_proxy.egress_bytes_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: tcp egress bytes
+    unit_name: byte
+  - description: >-
+      Average smoothed RTT measured by the proxy's TCP stack. Each minute
+      application layer bytes pass from proxy to client.
+    integration: google_cloud_platform
+    interval: '60'
+    metric_name: gcp.loadbalancing.tcp_ssl_proxy.frontend_tcp_rtt.avg
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: tcp rtt avg
+    unit_name: millisecond
+  - description: >-
+      Sample count of smoothed RTT measured by the proxy's TCP stack. Each
+      minute application layer bytes pass from proxy to client.
+    integration: google_cloud_platform
+    interval: '60'
+    metric_name: gcp.loadbalancing.tcp_ssl_proxy.frontend_tcp_rtt.samplecount
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: tcp rtt samplecount
+    unit_name: millisecond
+  - description: >-
+      Sum of squared deviation of smoothed RTT measured by the proxy's TCP
+      stack. Each minute application layer bytes pass from proxy to client.
+    integration: google_cloud_platform
+    interval: '60'
+    metric_name: gcp.loadbalancing.tcp_ssl_proxy.frontend_tcp_rtt.sumsqdev
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: tcp rtt sumsqdev
+    unit_name: millisecond
+  - description: 'Number of bytes sent from client to VM using proxy. '
+    integration: google_cloud_platform
+    interval: '60'
+    metric_name: gcp.loadbalancing.tcp_ssl_proxy.ingress_bytes_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: tcp ingress bytes
+    unit_name: byte
+  - description: 'Number of connections that were created over TCP/SSL proxy. '
+    integration: google_cloud_platform
+    interval: '60'
+    metric_name: gcp.loadbalancing.tcp_ssl_proxy.new_connections
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: tcp new conn
+    unit_name: connection
+  - description: 'Current number of outstanding connections through the TCP/SSL proxy. '
+    integration: google_cloud_platform
+    interval: '60'
+    metric_name: gcp.loadbalancing.tcp_ssl_proxy.open_connections
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: tcp open conn
+    unit_name: connection
+  - description: Nombre d'octets entrant reçus
+    integration: google_cloud_platform
+    interval: '60'
+    metric_name: gcp.interconnect.network.attachment.received_bytes_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: attachment received bytes
+    unit_name: byte
+  - description: Number of inbound packets received.
+    integration: google_cloud_platform
+    interval: '60'
+    metric_name: gcp.interconnect.network.attachment.received_packets_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: attachment received packets
+    unit_name: packet
+  - description: Number of outbound bytes sent.
+    integration: google_cloud_platform
+    interval: '60'
+    metric_name: gcp.interconnect.network.attachment.sent_bytes_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: attachment sent bytes
+    unit_name: byte
+  - description: Number of outbound packets sent.
+    integration: google_cloud_platform
+    interval: '60'
+    metric_name: gcp.interconnect.network.attachment.sent_packets_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: attachment sent packets
+    unit_name: packet
+  - description: Active capacity of the interconnect.
+    integration: google_cloud_platform
+    interval: '60'
+    metric_name: gcp.interconnect.network.interconnect.capacity
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: capacity
+    unit_name: byte
+  - description: Number of outbound packets dropped due to link congestion.
+    integration: google_cloud_platform
+    interval: '60'
+    metric_name: gcp.interconnect.network.interconnect.dropped_packets_count
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: dropped packets
+    unit_name: packet
+  - description: Whether the operational status of the circuit is up.
+    integration: google_cloud_platform
+    interval: '60'
+    metric_name: gcp.interconnect.network.interconnect.link.operational
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: circuit operational
+    unit_name: ''
+  - description: 'Light level received over physical circuit. '
+    integration: google_cloud_platform
+    interval: '60'
+    metric_name: gcp.interconnect.network.interconnect.link.rx_power
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: light level receieved
+    unit_name: ''
+  - description: 'Light level transmitted over physical circuit. '
+    integration: google_cloud_platform
+    interval: '60'
+    metric_name: gcp.interconnect.network.interconnect.link.tx_power
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: light level sent
+    unit_name: ''
+  - description: Whether the operational status of the interconnect is up.
+    integration: google_cloud_platform
+    interval: '60'
+    metric_name: gcp.interconnect.network.interconnect.operational
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: interconnect operational
+    unit_name: ''
+  - description: Number of errors encountered while receiving packets.
+    integration: google_cloud_platform
+    interval: '60'
+    metric_name: gcp.interconnect.network.interconnect.receive_errors_count
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: receive packet errors
+    unit_name: error
+  - description: Nombre d'octets entrant reçus
+    integration: google_cloud_platform
+    interval: '60'
+    metric_name: gcp.interconnect.network.interconnect.received_bytes_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: receive packet bytes
+    unit_name: byte
+  - description: Number of inbound unicast packets received.
+    integration: google_cloud_platform
+    interval: '60'
+    metric_name: gcp.interconnect.network.interconnect.received_unicast_packets_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: inbound unicast packets
+    unit_name: packet
+  - description: Number of errors encountered while sending packets.
+    integration: google_cloud_platform
+    interval: '60'
+    metric_name: gcp.interconnect.network.interconnect.send_errors_count
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: sent packet errors
+    unit_name: error
+  - description: Number of outbound bytes sent.
+    integration: google_cloud_platform
+    interval: '60'
+    metric_name: gcp.interconnect.network.interconnect.sent_bytes_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: sent packet bytes
+    unit_name: byte
+  - description: Number of outbound unicast packets sent.
+    integration: google_cloud_platform
+    interval: '60'
+    metric_name: gcp.interconnect.network.interconnect.sent_unicast_packets_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: outbound unicast packets
+    unit_name: packet

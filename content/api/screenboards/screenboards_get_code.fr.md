@@ -1,7 +1,7 @@
 ---
 title: Récupérer un Screenboard
 type: apicode
-order: 18.4
+order: 17.4
 external_redirect: /api/#get-a-screenboard
 ---
 

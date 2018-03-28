@@ -1,0 +1,55 @@
+amazon_sns:
+  - description: Nombre de messages publiés.
+    integration: amazon_sns
+    interval: '60'
+    metric_name: aws.sns.number_of_messages_published
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: messages published
+    unit_name: message
+  - description: Taille des messages publiés.
+    integration: amazon_sns
+    interval: ''
+    metric_name: aws.sns.publish_size
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: publish size
+    unit_name: byte
+  - description: Number of messages successfully delivered.
+    integration: amazon_sns
+    interval: '60'
+    metric_name: aws.sns.number_of_notifications_delivered
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: notifications delivered
+    unit_name: message
+  - description: Number of messages that SNS failed to deliver.
+    integration: amazon_sns
+    interval: '60'
+    metric_name: aws.sns.number_of_notifications_failed
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: notifications failed
+    unit_name: message
+  - description: Time waited by a message before it was delivered.
+    integration: amazon_sns
+    interval: ''
+    metric_name: aws.sns.dwell_time
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: dwell time
+    unit_name: millisecond
+  - description: The percentage of successfully delivered sms.
+    integration: amazon_sns
+    interval: ''
+    metric_name: aws.sns.smssuccess_rate
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: sms success
+    unit_name: percent

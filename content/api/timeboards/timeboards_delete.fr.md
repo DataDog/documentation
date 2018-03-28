@@ -1,7 +1,7 @@
 ---
 title: Supprimer un Timeboard
 type: apicontent
-order: 21.3
+order: 20.3
 external_redirect: /api/#delete-a-timeboard
 ---
 

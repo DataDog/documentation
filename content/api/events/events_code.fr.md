@@ -1,6 +1,6 @@
 ---
 title: Evénements
 type: apicode
-order: 11
+order: 10
 external_redirect: /api/#events
 ---

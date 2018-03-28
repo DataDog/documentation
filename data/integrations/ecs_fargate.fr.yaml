@@ -1,0 +1,214 @@
+ecs_fargate:
+  - description: Nombre d'opérations écriture sur le disque.
+    integration: fargate
+    interval: ''
+    metric_name: ecs.fargate.io.ops.write
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: ''
+    short_name: io write count
+    unit_name: ''
+  - description: Nombre d'octets écrits sur le disque.
+    integration: fargate
+    interval: ''
+    metric_name: ecs.fargate.io.bytes.write
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: ''
+    short_name: io write
+    unit_name: byte
+  - description: '# read operation on the disk'
+    integration: fargate
+    interval: ''
+    metric_name: ecs.fargate.io.ops.read
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: ''
+    short_name: io read count
+    unit_name: ''
+  - description: '# bytes read on the disk'
+    integration: fargate
+    interval: ''
+    metric_name: ecs.fargate.io.bytes.read
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: ''
+    short_name: io read
+    unit_name: byte
+  - description: >-
+      Le pourcentage de temps que le CPU est sous le contrôle direct des
+      processus de ce conteneur
+    integration: fargate
+    interval: ''
+    metric_name: ecs.fargate.cpu.user
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cpu user
+    unit_name: percent
+  - description: >-
+      The percent of time the CPU is executing system calls on behalf of
+      processes of this container
+    integration: fargate
+    interval: ''
+    metric_name: ecs.fargate.cpu.system
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cpu system
+    unit_name: percent
+  - description: Limit in percent of the CPU usage
+    integration: fargate
+    interval: ''
+    metric_name: ecs.fargate.cpu.limit
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cpu limit
+    unit_name: percent
+  - description: '# of bytes of page cache memory'
+    integration: fargate
+    interval: ''
+    metric_name: ecs.fargate.mem.cache
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: mem cache
+    unit_name: byte
+  - description: '# of bytes of file-backed memory on active LRU list'
+    integration: fargate
+    interval: ''
+    metric_name: ecs.fargate.mem.active_file
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: mem active file
+    unit_name: byte
+  - description: '# of bytes of file-backed memory on inactive LRU list'
+    integration: fargate
+    interval: ''
+    metric_name: ecs.fargate.mem.inactive_file
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: mem inactive file
+    unit_name: byte
+  - description: '# of bytes memory limit'
+    integration: fargate
+    interval: ''
+    metric_name: ecs.fargate.mem.limit
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: mem limit
+    unit_name: byte
+  - description: '# of bytes of anonymous and swap cache memory on active LRU list'
+    integration: fargate
+    interval: ''
+    metric_name: ecs.fargate.mem.active_anon
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: mem active anon
+    unit_name: byte
+  - description: '# of bytes of memory used'
+    integration: fargate
+    interval: ''
+    metric_name: ecs.fargate.mem.usage
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: mem usage
+    unit_name: byte
+  - description: >-
+      # of bytes of anonymous and swap cache memory (includes transparent
+      hugepages)
+    integration: fargate
+    interval: ''
+    metric_name: ecs.fargate.mem.rss
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: mem rss
+    unit_name: byte
+  - description: >-
+      # of uncharging events to the memory cgroup. The uncharging event happens
+      each time a page is unaccounted from the cgroup
+    integration: fargate
+    interval: ''
+    metric_name: ecs.fargate.mem.pgpgout
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: mem pgpgout
+    unit_name: ''
+  - description: >-
+      # of charging events to the memory cgroup. The charging event happens each
+      time a page is accounted as either mapped anon page(RSS) or cache
+      page(Page Cache) to the cgroup.
+    integration: fargate
+    interval: ''
+    metric_name: ecs.fargate.mem.pgpgin
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: mem pgpgin
+    unit_name: ''
+  - description: '# of page faults per second'
+    integration: fargate
+    interval: ''
+    metric_name: ecs.fargate.mem.pgfault
+    metric_type: rate
+    orientation: '-1'
+    per_unit_name: second
+    short_name: mem pgfault
+    unit_name: ''
+  - description: '# of major page faults per second'
+    integration: fargate
+    interval: ''
+    metric_name: ecs.fargate.mem.pgmajfault
+    metric_type: rate
+    orientation: '-1'
+    per_unit_name: second
+    short_name: mem pgmajfault
+    unit_name: ''
+  - description: '# of bytes of mapped file (includes tmpfs/shmem)'
+    integration: fargate
+    interval: ''
+    metric_name: ecs.fargate.mem.mapped_file
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: mem mapped file
+    unit_name: byte
+  - description: Show max memory usage recorded
+    integration: fargate
+    interval: ''
+    metric_name: ecs.fargate.mem.max_usage
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: mem max usage
+    unit_name: byte
+  - description: >-
+      # of bytes of memory limit with regard to hierarchy under which the memory
+      cgroup is
+    integration: fargate
+    interval: ''
+    metric_name: ecs.fargate.mem.hierarchical_memory_limit
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: mem hierarchical limit
+    unit_name: byte
+  - description: >-
+      # of bytes of memory+swap limit with regard to hierarchy under which
+      memory cgroup is
+    integration: fargate
+    interval: ''
+    metric_name: ecs.fargate.mem.hierarchical_memsw_limit
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: mem hierarchical mem swap limit
+    unit_name: byte

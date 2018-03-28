@@ -1,0 +1,1026 @@
+gitlab:
+  - description: Un résumé des durées d'invocation du GC
+    integration: gitlab
+    interval: ''
+    metric_name: go_gc_duration_seconds
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: gc duration
+    unit_name: request
+  - description: Somme des durées d'invocation du GC.
+    integration: gitlab
+    interval: ''
+    metric_name: go_gc_duration_seconds_sum
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: sum gc duration
+    unit_name: request
+  - description: Comptes des durées d'invocation du GC.
+    integration: gitlab
+    interval: ''
+    metric_name: go_gc_duration_seconds_count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: count gc duration
+    unit_name: request
+  - description: Nombre de goroutines existantes
+    integration: gitlab
+    interval: ''
+    metric_name: go_goroutines
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: goroutines
+    unit_name: request
+  - description: Nombre de bytes alloués et toujours utilisés
+    integration: gitlab
+    interval: ''
+    metric_name: go_memstats_alloc_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: bytes allocated in use
+    unit_name: byte
+  - description: Nombre total de bytes alloués
+    integration: gitlab
+    interval: ''
+    metric_name: go_memstats_alloc_bytes_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: ''
+    short_name: bytes allocated
+    unit_name: byte
+  - description: Nombre de bytes utilisés par le profiling bucket hash table
+    integration: gitlab
+    interval: ''
+    metric_name: go_memstats_buck_hash_sys_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: bytes profiling bucket
+    unit_name: byte
+  - description: Nombre total de frees
+    integration: gitlab
+    interval: ''
+    metric_name: go_memstats_frees_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: ''
+    short_name: number of frees
+    unit_name: request
+  - description: >-
+      The fraction of this program's available CPU time used by the GC since the
+      program started
+    integration: gitlab
+    interval: ''
+    metric_name: go_memstats_gc_cpu_fraction
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: GC cpu fraction
+    unit_name: request
+  - description: Number of bytes used for garbage collection system metadata
+    integration: gitlab
+    interval: ''
+    metric_name: go_memstats_gc_sys_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: bytes garbage collection
+    unit_name: byte
+  - description: Number of heap bytes allocated and still in use
+    integration: gitlab
+    interval: ''
+    metric_name: go_memstats_heap_alloc_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: heap bytes allocated and in use
+    unit_name: byte
+  - description: Number of heap bytes waiting to be used
+    integration: gitlab
+    interval: ''
+    metric_name: go_memstats_heap_idle_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: heap bytes unused
+    unit_name: byte
+  - description: Number of heap bytes that are in use
+    integration: gitlab
+    interval: ''
+    metric_name: go_memstats_heap_inuse_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: heap bytes in use
+    unit_name: byte
+  - description: Nombre d'objets alloués
+    integration: gitlab
+    interval: ''
+    metric_name: go_memstats_heap_objects
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: allocated objects
+    unit_name: request
+  - description: Total number of heap bytes released to OS
+    integration: gitlab
+    interval: ''
+    metric_name: go_memstats_heap_released_bytes_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: ''
+    short_name: heap bytes released
+    unit_name: byte
+  - description: 'Nombre d''octets pour la heap obtenus par le système. '
+    integration: gitlab
+    interval: ''
+    metric_name: go_memstats_heap_sys_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: heap bytes obtained
+    unit_name: byte
+  - description: Number of seconds since 1970 of last garbage collection
+    integration: gitlab
+    interval: ''
+    metric_name: go_memstats_last_gc_time_seconds
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: epoch since last gc
+    unit_name: request
+  - description: Total number of pointer lookups
+    integration: gitlab
+    interval: ''
+    metric_name: go_memstats_lookups_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: ''
+    short_name: pointer lookups
+    unit_name: request
+  - description: Nombre total de mallocs
+    integration: gitlab
+    interval: ''
+    metric_name: go_memstats_mallocs_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: ''
+    short_name: number of mallocs
+    unit_name: request
+  - description: Number of bytes in use by mcache structures
+    integration: gitlab
+    interval: ''
+    metric_name: go_memstats_mcache_inuse_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: mcache bytes used
+    unit_name: byte
+  - description: Number of bytes used for mcache structures obtained from system
+    integration: gitlab
+    interval: ''
+    metric_name: go_memstats_mcache_sys_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: mcache bytes from sys
+    unit_name: byte
+  - description: Number of bytes in use by mspan structures
+    integration: gitlab
+    interval: ''
+    metric_name: go_memstats_mspan_inuse_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: mspan bytes used
+    unit_name: byte
+  - description: Number of bytes used for mspan structures obtained from system
+    integration: gitlab
+    interval: ''
+    metric_name: go_memstats_mspan_sys_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: mspan bytes from sys
+    unit_name: byte
+  - description: Number of heap bytes when next garbage collection will take place
+    integration: gitlab
+    interval: ''
+    metric_name: go_memstats_next_gc_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: heap bytes next gc
+    unit_name: byte
+  - description: Number of bytes used for other system allocations
+    integration: gitlab
+    interval: ''
+    metric_name: go_memstats_other_sys_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: other bytes used
+    unit_name: byte
+  - description: Nombre d'octets utilisés par l'allocateur de stack
+    integration: gitlab
+    interval: ''
+    metric_name: go_memstats_stack_inuse_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: bytes stack allocator
+    unit_name: byte
+  - description: Number of bytes obtained from system for stack allocator
+    integration: gitlab
+    interval: ''
+    metric_name: go_memstats_stack_inuse_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: bytes stack allocator from sys
+    unit_name: byte
+  - description: >-
+      Nombre d'octets obtenus par le système. Somme de toutes les allocations
+      système.
+    integration: gitlab
+    interval: ''
+    metric_name: go_memstats_sys_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: sum system allocations
+    unit_name: byte
+  - description: Number of OS threads create
+    integration: gitlab
+    interval: ''
+    metric_name: go_threads
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: go threads
+    unit_name: request
+  - description: The HTTP request latencies in microseconds
+    integration: gitlab
+    interval: ''
+    metric_name: http_request_duration_microseconds
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: HTTP req latencies
+    unit_name: request
+  - description: The HTTP request sizes in bytes
+    integration: gitlab
+    interval: ''
+    metric_name: http_request_size_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: HTTP req sizes
+    unit_name: byte
+  - description: Total number of HTTP requests made
+    integration: gitlab
+    interval: ''
+    metric_name: http_requests_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: second
+    short_name: total HTTP reqs
+    unit_name: request
+  - description: The HTTP response sizes in bytes
+    integration: gitlab
+    interval: ''
+    metric_name: http_response_size_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: HTTP resp sizes
+    unit_name: byte
+  - description: Total user and system CPU time spent in seconds
+    integration: gitlab
+    interval: ''
+    metric_name: process_cpu_seconds_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: second
+    short_name: user and system cpu time
+    unit_name: request
+  - description: Maximum number of open file descriptors
+    integration: gitlab
+    interval: ''
+    metric_name: process_max_fds
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: max fds
+    unit_name: request
+  - description: Nombre de descripteurs de fichiers ouverts
+    integration: gitlab
+    interval: ''
+    metric_name: process_open_fds
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: open fds
+    unit_name: request
+  - description: Taille de la mémoire du résident en octets.
+    integration: gitlab
+    interval: ''
+    metric_name: process_resident_memory_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: rss bytes
+    unit_name: byte
+  - description: Start time of the process since unix epoch in seconds
+    integration: gitlab
+    interval: ''
+    metric_name: process_start_time_seconds
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: epoch time since start
+    unit_name: request
+  - description: Taille de la mémoire virtuelle en octets.
+    integration: gitlab
+    interval: ''
+    metric_name: process_virtual_memory_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: virtual memory bytes
+    unit_name: byte
+  - description: >-
+      A metric with a constant '1' value labeled by version revision branch and
+      goversion from which prometheus was built
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_build_info
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: build info
+    unit_name: request
+  - description: Timestamp of the last successful configuration reload
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_config_last_reload_success_timestamp_seconds
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: Timestamp successful config reload
+    unit_name: request
+  - description: Whether the last configuration reload attempt was successful
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_config_last_reload_successful
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: flag successful config reload
+    unit_name: request
+  - description: The current number of queries being executed or waiting
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_engine_queries
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: current queries
+    unit_name: request
+  - description: The max number of concurrent queries
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_engine_queries_concurrent_max
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: max concurrent queries
+    unit_name: request
+  - description: Query timing
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_engine_query_duration_seconds
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: query timing
+    unit_name: request
+  - description: The duration of rule group evaluations
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_evaluator_duration_seconds
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: duration evaluator
+    unit_name: request
+  - description: >-
+      The total number of rule group evaluations missed due to slow rule group
+      evaluation
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_evaluator_iterations_missed_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: second
+    short_name: total evaluations missed
+    unit_name: request
+  - description: >-
+      The total number of rule group evaluations skipped due to throttled metric
+      storage
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_evaluator_iterations_skipped_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: second
+    short_name: total evaluations skipped
+    unit_name: request
+  - description: >-
+      The total number of scheduled rule group evaluations whether executed
+      missed or skipped
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_evaluator_iterations_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: second
+    short_name: total evaluations scheduled
+    unit_name: request
+  - description: >-
+      The duration in seconds taken for checkpointing open chunks and chunks yet
+      to be persisted
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_local_storage_checkpoint_duration_seconds
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: duration checkpointing open chunks
+    unit_name: request
+  - description: >-
+      The duration in seconds it took to last checkpoint open chunks and chunks
+      yet to be persisted
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_local_storage_checkpoint_last_duration_seconds
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: duration last checkpoint open chunks
+    unit_name: request
+  - description: >-
+      The size of the last checkpoint of open chunks and chunks yet to be
+      persisted
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_local_storage_checkpoint_last_size_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: size last checkpoint open chunks
+    unit_name: byte
+  - description: >-
+      The number of chunk written per series while checkpointing open chunks and
+      chunks yet to be persisted
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_local_storage_checkpoint_series_chunks_written
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: checkpoint series chunks written
+    unit_name: request
+  - description: 1 if the storage is checkpointing and 0 otherwise
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_local_storage_checkpointing
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: storage checkpointing flag
+    unit_name: request
+  - description: The total number of chunk operations by their type
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_local_storage_chunk_ops_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: second
+    short_name: chunk ops by type
+    unit_name: request
+  - description: The current number of chunks waiting for persistence
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_local_storage_chunks_to_persist
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: second
+    short_name: chunks to be persisted
+    unit_name: request
+  - description: The total number of fingerprints being mapped to avoid collisions
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_local_storage_fingerprint_mappings_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: second
+    short_name: fingerprints mapped
+    unit_name: request
+  - description: >-
+      A counter incremented each time an inconsistency in the local storage is
+      detected. If this is greater zero then restart the server as soon as
+      possible
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_local_storage_inconsistencies_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: second
+    short_name: total storage inconsistencies
+    unit_name: request
+  - description: Quantiles for batch indexing duration in seconds
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_local_storage_indexing_batch_duration_seconds
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: batch indexing duration quantiles
+    unit_name: request
+  - description: Quantiles for indexing batch sizes (number of metrics per batch)
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_local_storage_indexing_batch_sizes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: indexing batch sizes quantiles
+    unit_name: request
+  - description: The capacity of the indexing queue
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_local_storage_indexing_queue_capacity
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: indexing queue capacity
+    unit_name: request
+  - description: The number of metrics waiting to be indexed
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_local_storage_indexing_queue_length
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: metrics queued for indexing
+    unit_name: request
+  - description: Le nombre total d'échantillons ingérés
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_local_storage_ingested_samples_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: second
+    short_name: samples ingested
+    unit_name: request
+  - description: The duration in seconds it took to perform maintenance on a series
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_local_storage_maintain_series_duration_seconds
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: series maintenance duration
+    unit_name: request
+  - description: The current number of chunk descriptors in memory
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_local_storage_memory_chunkdescs
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: chunk descriptors in memory
+    unit_name: request
+  - description: >-
+      The current number of chunks in memory. The number does not include cloned
+      chunks (i.e. chunks without a descriptor)
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_local_storage_memory_chunks
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: chunks in memory
+    unit_name: request
+  - description: >-
+      The current number of series that would require a disk seek during crash
+      recovery
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_local_storage_memory_dirty_series
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: memory dirty series
+    unit_name: request
+  - description: The current number of series in memory
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_local_storage_memory_series
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: series in memory
+    unit_name: request
+  - description: >-
+      How often a non-existent series was referred to during label matching or
+      chunk preloading. This is an indication of outdated label indexes
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_local_storage_non_existent_series_matches_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: second
+    short_name: total non-existent series matches
+    unit_name: request
+  - description: The current number of open head chunks
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_local_storage_open_head_chunks
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: open head chunks
+    unit_name: request
+  - description: >-
+      The total number of samples that were discarded because their timestamps
+      were at or before the last received sample for a series
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_local_storage_out_of_order_samples_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: second
+    short_name: samples out of order
+    unit_name: request
+  - description: The total number of errors while writing to the persistence layer
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_local_storage_persist_errors_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: second
+    short_name: persistence write errors
+    unit_name: request
+  - description: A score of urgency to persist chunks. 0 is least urgent and 1 most
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_local_storage_persistence_urgency_score
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: chunk persistence urgency score
+    unit_name: request
+  - description: The total number of chunks queued for persistence
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_local_storage_queued_chunks_to_persist_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: second
+    short_name: chunks queued for persistence
+    unit_name: request
+  - description: 1 if the storage is in rushed mode and 0 otherwise
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_local_storage_rushed_mode
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: flag storage in rushed mode
+    unit_name: request
+  - description: The number of chunks persisted per series
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_local_storage_series_chunks_persisted
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: chunks persisted per series
+    unit_name: request
+  - description: The total number of series operations by their type
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_local_storage_series_ops_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: second
+    short_name: series ops by type
+    unit_name: request
+  - description: >-
+      Whether the local storage was found to be dirty (and crash recovery
+      occurred) during Prometheus startup
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_local_storage_started_dirty
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: local storage started dirty
+    unit_name: request
+  - description: The configured target heap size in bytes
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_local_storage_target_heap_size_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: target heap size
+    unit_name: byte
+  - description: The number of alertmanagers discovered and active
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_notifications_alertmanagers_discovered
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: alertmanagers active
+    unit_name: request
+  - description: Total number of alerts dropped due to errors when sending to Alertmanager
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_notifications_dropped_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: second
+    short_name: alerts dropped
+    unit_name: request
+  - description: The capacity of the alert notifications queue
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_notifications_queue_capacity
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: alert notifications capacity
+    unit_name: request
+  - description: The number of alert notifications in the queue
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_notifications_queue_length
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: alert notifications queued
+    unit_name: request
+  - description: The total number of rule evaluation failures
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_rule_evaluation_failures_total
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: evaluation failures
+    unit_name: request
+  - description: The duration of a Azure-SD refresh in seconds
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_sd_azure_refresh_duration_seconds
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: Azure-SD refresh duration
+    unit_name: request
+  - description: Nombre d'échec de rafraichissement de Azure-SD
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_sd_azure_refresh_failures_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: second
+    short_name: Azure-SD refresh failures
+    unit_name: request
+  - description: The duration of a Consul RPC call in seconds
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_sd_consul_rpc_duration_seconds
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: Consul RPC call duration
+    unit_name: request
+  - description: The number of Consul RPC call failures
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_sd_consul_rpc_failures_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: second
+    short_name: Consul RPC lookup failures
+    unit_name: request
+  - description: The number of DNS-SD lookup failures
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_sd_dns_lookup_failures_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: second
+    short_name: DNS-SD lookup failures
+    unit_name: request
+  - description: The number of DNS-SD lookups
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_sd_dns_lookups_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: second
+    short_name: DNS-SD lookups
+    unit_name: request
+  - description: The duration of a EC2-SD refresh in seconds
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_sd_ec2_refresh_duration_seconds
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: EC2-SD refresh duration
+    unit_name: request
+  - description: The number of EC2-SD scrape failures
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_sd_ec2_refresh_failures_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: second
+    short_name: EC2-SD scrape failures
+    unit_name: request
+  - description: The number of File-SD read errors
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_sd_file_read_errors_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: second
+    short_name: File-SD read errors
+    unit_name: request
+  - description: The duration of the File-SD scan in seconds
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_sd_file_scan_duration_seconds
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: File-SD scan duration
+    unit_name: request
+  - description: The duration of a GCE-SD refresh in seconds
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_sd_gce_refresh_duration
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: GCE-SD refresh duration
+    unit_name: request
+  - description: The number of GCE-SD refresh failures
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_sd_gce_refresh_failures_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: second
+    short_name: GCE-SD refresh failures
+    unit_name: request
+  - description: The number of Kubernetes events handled
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_sd_kubernetes_events_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: second
+    short_name: K8s events handled
+    unit_name: request
+  - description: The duration of a Marathon-SD refresh in seconds
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_sd_marathon_refresh_duration_seconds
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: Marathon-SD refresh duration
+    unit_name: request
+  - description: The number of Marathon-SD refresh failures
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_sd_marathon_refresh_failures_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: second
+    short_name: Marathon-SD refresh failures
+    unit_name: request
+  - description: The duration of an OpenStack-SD refresh in seconds
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_sd_openstack_refresh_duration_seconds
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: OpenStack-SD refresh duration
+    unit_name: request
+  - description: The number of OpenStack-SD scrape failures
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_sd_openstack_refresh_failures_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: second
+    short_name: OpenStack-SD scrape failures
+    unit_name: request
+  - description: The duration of a Triton-SD refresh in seconds
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_sd_triton_refresh_duration_seconds
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: Triton-SD refresh duration
+    unit_name: request
+  - description: The number of Triton-SD scrape failures
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_sd_triton_refresh_failures_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: second
+    short_name: Triton-SD scrape failures
+    unit_name: request
+  - description: Actual intervals between scrapes
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_target_interval_length_seconds
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: interval between scrapes
+    unit_name: request
+  - description: Total number of syncs that were executed on a scrape pool
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_target_scrape_pool_sync_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: second
+    short_name: total syncs on scrape pool
+    unit_name: request
+  - description: Total number of scrapes that hit the sample limit and were rejected
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_target_scrapes_exceeded_sample_limit_total
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: total scrapes rejected
+    unit_name: request
+  - description: >-
+      Total number of scrapes that were skipped because the metric storage was
+      throttled
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_target_skipped_scrapes_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: second
+    short_name: total scrapes skipped
+    unit_name: request
+  - description: Actual interval to sync the scrape pool
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_target_sync_length_seconds
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: scrape pool sync interval
+    unit_name: request
+  - description: The current number of watcher goroutines
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_treecache_watcher_goroutines
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: watcher goroutines
+    unit_name: request
+  - description: The total number of ZooKeeper failures
+    integration: gitlab
+    interval: ''
+    metric_name: prometheus_treecache_zookeeper_failures_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: second
+    short_name: total Zookeeper failures
+    unit_name: request

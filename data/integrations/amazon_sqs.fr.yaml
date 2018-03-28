@@ -1,0 +1,91 @@
+amazon_sqs:
+  - description: >-
+      L'âge approximatif du plus ancien message non supprimé dans la file
+      d'attente.
+    integration: amazon_sqs
+    interval: ''
+    metric_name: aws.sqs.approximate_age_of_oldest_message
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: oldest non del
+    unit_name: second
+  - description: >-
+      Le nombre de messages dans la file d'attente qui sont retardés et non
+      disponibles pour la lecture immédiatement. Cela peut se produire lorsque
+      la file d'attente est configurée en tant que delay queue ou lorsqu'un
+      message a été envoyé avec un paramètre de délai.
+    integration: amazon_sqs
+    interval: ''
+    metric_name: aws.sqs.approximate_number_of_messages_delayed
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: approx num msgs delayed
+    unit_name: message
+  - description: >-
+      The number of messages that are in flight. Messages are considered in
+      flight if they have been sent to a client but have not yet been deleted or
+      have not yet reached the end of their visibility window.
+    integration: amazon_sqs
+    interval: ''
+    metric_name: aws.sqs.approximate_number_of_messages_not_visible
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: approx num msgs not visible
+    unit_name: message
+  - description: The number of messages available for retrieval from the queue.
+    integration: amazon_sqs
+    interval: ''
+    metric_name: aws.sqs.approximate_number_of_messages_visible
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: approx num msgs visible
+    unit_name: message
+  - description: The number of ReceiveMessage API calls that did not return a message.
+    integration: amazon_sqs
+    interval: '60'
+    metric_name: aws.sqs.number_of_empty_receives
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: num empty responses
+    unit_name: message
+  - description: The number of messages deleted from the queue.
+    integration: amazon_sqs
+    interval: '60'
+    metric_name: aws.sqs.number_of_messages_deleted
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: num deleted
+    unit_name: message
+  - description: The number of messages returned by calls to the ReceiveMessage API action.
+    integration: amazon_sqs
+    interval: '60'
+    metric_name: aws.sqs.number_of_messages_received
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: num received
+    unit_name: message
+  - description: Le nombre de messages ajouté à la file.
+    integration: amazon_sqs
+    interval: '60'
+    metric_name: aws.sqs.number_of_messages_sent
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: num sent
+    unit_name: message
+  - description: The size of messages added to a queue.
+    integration: amazon_sqs
+    interval: ''
+    metric_name: aws.sqs.sent_message_size
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: sent msg size
+    unit_name: byte

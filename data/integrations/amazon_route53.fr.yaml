@@ -1,0 +1,70 @@
+amazon_route53:
+  - description: >-
+
+      Pourcentage de vérificateurs d'intégrité Amazon Route 53 qui considèrent
+      que
+
+      l'endpoint sélectionné est healthy.
+    integration: amazon_route53
+    interval: ''
+    metric_name: aws.route53.health_check_percentage_healthy
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: health chk pct healthy
+    unit_name: percent
+  - description: >-
+      L'état du check de l'endpoint de santé que CloudWatch vérifie. 1 indique
+      sain, et 0 indique malsain.
+    integration: amazon_route53
+    interval: ''
+    metric_name: aws.route53.health_check_status
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: health chk stat
+    unit_name: ''
+  - description: >-
+      The average time that it took Amazon Route 53 health checkers to establish
+      a TCP connection with the endpoint.
+    integration: amazon_route53
+    interval: ''
+    metric_name: aws.route53.connection_time
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: connection time
+    unit_name: millisecond
+  - description: >-
+      The average time that it took Amazon Route 53 health checkers to receive
+      the first byte of the response to an HTTP or HTTPS request.
+    integration: amazon_route53
+    interval: ''
+    metric_name: aws.route53.time_to_first_byte
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: time to first byte
+    unit_name: millisecond
+  - description: >-
+      The average time that it took Amazon Route 53 health checkers to complete
+      the SSL handshake.
+    integration: amazon_route53
+    interval: ''
+    metric_name: aws.route53.sslhandshake_time
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: handshake time
+    unit_name: ''
+  - description: >-
+      For a calculated health check, the number of health checks that are
+      healthy among the health checks that Amazon Route 53 is monitoring.
+    integration: amazon_route53
+    interval: ''
+    metric_name: aws.route53.child_health_check_healthy_count
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: child health chk healthy count
+    unit_name: ''

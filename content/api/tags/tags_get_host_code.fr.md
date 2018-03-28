@@ -1,7 +1,7 @@
 ---
 title: Récupérer les tags d'un host
 type: apicode
-order: 20.2
+order: 19.2
 external_redirect: /api/#get-host-tags
 ---
 

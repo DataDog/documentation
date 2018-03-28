@@ -1,0 +1,202 @@
+marathon:
+  - description: Nombre d'applications
+    integration: marathon
+    interval: ''
+    metric_name: marathon.apps
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: apps
+    unit_name: ''
+  - description: Nombre de déploiements en cours ou en attente
+    integration: marathon
+    interval: ''
+    metric_name: marathon.deployments
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: deployments
+    unit_name: ''
+  - description: Number of apps waiting to be deployed
+    integration: marathon
+    interval: ''
+    metric_name: marathon.queue.size
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: apps
+    unit_name: ''
+  - description: >-
+      Backoff time multiplication factor for each consecutive failed task
+      launch; tagged by app_id and version
+    integration: marathon
+    interval: ''
+    metric_name: marathon.backoffFactor
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: backoff factor
+    unit_name: ''
+  - description: Task backoff period; tagged by app_id and version
+    integration: marathon
+    interval: ''
+    metric_name: marathon.backoffSeconds
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: backoff
+    unit_name: second
+  - description: Configured CPUs for each instance of a given application
+    integration: marathon
+    interval: ''
+    metric_name: marathon.cpus
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cpus
+    unit_name: ''
+  - description: Configured CPU for each instance of a given application
+    integration: marathon
+    interval: ''
+    metric_name: marathon.disk
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: disk
+    unit_name: mebibyte
+  - description: Number of instances of a given application; tagged by app_id and version
+    integration: marathon
+    interval: ''
+    metric_name: marathon.instances
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: instances
+    unit_name: ''
+  - description: >-
+      Configured memory for each instance of a given application; tagged by
+      app_id and version
+    integration: marathon
+    interval: ''
+    metric_name: marathon.mem
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: mem
+    unit_name: mebibyte
+  - description: The task rate limit for a given application; tagged by app_id and version
+    integration: marathon
+    interval: ''
+    metric_name: marathon.taskRateLimit
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: task rate limit
+    unit_name: ''
+  - description: >-
+      Number of tasks running for a given application; tagged by app_id and
+      version
+    integration: marathon
+    interval: ''
+    metric_name: marathon.tasksRunning
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: tasks running
+    unit_name: task
+  - description: >-
+      Number of tasks staged for a given application; tagged by app_id and
+      version
+    integration: marathon
+    interval: ''
+    metric_name: marathon.tasksStaged
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: tasks staged
+    unit_name: task
+  - description: >-
+      Number of healthy tasks for a given application; tagged by app_id and
+      version
+    integration: marathon
+    interval: ''
+    metric_name: marathon.tasksHealthy
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: healthy tasks
+    unit_name: task
+  - description: >-
+      Number of unhealthy tasks for a given application; tagged by app_id and
+      version
+    integration: marathon
+    interval: ''
+    metric_name: marathon.tasksUnhealthy
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: unhealthy tasks
+    unit_name: task
+  - description: Number of app offer queues
+    integration: marathon
+    interval: ''
+    metric_name: marathon.queue.size
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: num queues
+    unit_name: task
+  - description: Number of instances left to launch
+    integration: marathon
+    interval: ''
+    metric_name: marathon.queue.count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: count
+    unit_name: task
+  - description: Wait before the next launch attempt
+    integration: marathon
+    interval: ''
+    metric_name: marathon.queue.delay
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: delay
+    unit_name: second
+  - description: The number of processed offers for this launch attempt
+    integration: marathon
+    interval: ''
+    metric_name: marathon.queue.offers.processed
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: offers proc
+    unit_name: task
+  - description: The number of unused offers for this launch attempt
+    integration: marathon
+    interval: ''
+    metric_name: marathon.queue.offers.unused
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: offers unused
+    unit_name: task
+  - description: Summary of unused offers for all last offers
+    integration: marathon
+    interval: ''
+    metric_name: marathon.queue.offers.reject.last
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: offers rej
+    unit_name: task
+  - description: Summary of unused offers for the launch attempt
+    integration: marathon
+    interval: ''
+    metric_name: marathon.queue.offers.reject.launch
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: offers rej
+    unit_name: task
