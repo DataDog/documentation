@@ -51,7 +51,7 @@ The tracer is configured using System Properties and Environment Variables as fo
 | writer.type        | dd.writer.type        | DD_WRITER_TYPE            | `DDAgentWriter`    | Default value sends traces to the trace agent. Configuring with `LoggingWriter` instead writes traces out to the console. |
 | agent.host         | dd.agent.host         | DD_AGENT_HOST             | `localhost`        | Hostname for where to send traces to. If using a containerized environment, configure this to be the host ip.  See our [docker docs](https://docs.datadoghq.com/tracing/setup/docker/) for additional detail. |
 | agent.port         | dd.agent.port         | DD_AGENT_PORT             | `8126`             | Port number the agent is listening on for configured host. |
-| priority.sampling  | dd.priority.sampling  | DD_PRIORITY_SAMPLING      | `false`            | Changes how the client and agent sample traces. See [Sampling / distributed tracing](#sampling-distributed-tracing) section for details. |
+| priority.sampling  | dd.priority.sampling  | DD_PRIORITY_SAMPLING      | `false`            | Enable priority sampling to ensure distributed traces are complete or to require sampling of specific traces. See [Sampling / distributed tracing](#sampling-distributed-tracing) section for details. |
 | trace.span.tags  | dd.trace.span.tags  | DD_TRACE_SPAN_TAGS      | `null`            | (Example: `key1:value1,key2:value2`) A list of default tags to be added to every span. Tags of the same name added directly to a span will overwrite the defaults provided here. |
 
 **Note**:
@@ -219,9 +219,11 @@ public class Application {
 
 Notice the above examples only use the OpenTracing classes. Please reference the [OpenTracing API](https://github.com/opentracing/opentracing-java) for more details and information.
 
-## Sampling / distributed tracing
+## Sampling / Distributed Tracing
 
-Priority sampling ensures that distributed traces are complete by assigning and propagating a priority value along each trace.
+Enable Priority Sampling to ensure that distributed traces are complete.  Priority Sampling achieves this by automatically assigning and propagating a priority value along all traces, depending on their service and volume.  Priorities can also be set manually to either drop non-interesting traces or to keep important ones.
+
+Priority sampling is disabled by default. To enable it, configure the `priority.sampling` flag to `true` ([see how to configure the client above](#configuration)).
 
 Current Priority Values (more may be added in the future):
 
@@ -233,11 +235,7 @@ Current Priority Values (more may be added in the future):
 |USER_KEEP      | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                     |
 
 
-Priority sampling is disabled by default. To enable it, configure the `priority.sampling` flag to `true` ([see how to configure the client above](#configuration)).
-
-Once enabled, the sampler automatically assigns a priority to traces, depending on their service and volume.
-
-You can also set this priority manually to either drop a non-interesting trace or to keep an important one.
+Manually set trace priority:
 ```java
 import datadog.opentracing.DDSpan;
 import datadog.trace.api.Trace;
