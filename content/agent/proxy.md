@@ -168,9 +168,10 @@ Then edit each agent to point to HAProxy by setting its `dd_url` to the address 
 
 If you want to send traces through the proxy, you need to setup the following in `datadog.conf`:
 
-`[trace.api]
-
- endpoint = https://haproxy.example.com:3835`
+```
+[trace.api]
+endpoint = https://haproxy.example.com:3835
+ ```
 
 Before you [restart the agent](/agent/faq/agent-commands) Edit your supervisor configuration to disable SSL certificate verification. This is needed to prevent python from complaining about the discrepancy between the hostname on the SSL certificate (app.datadoghq.com) and your HAProxy hostname.
 
