@@ -12,7 +12,7 @@ aliases:
     - /integrations/faq/gathering-kubernetes-events
 ---
 
-**Note**: The agent v6 only supports versions of Kubernetes higher than 1.7.6, for prior versions, use agent v5.
+**Note**: Agent version 6.0 and greater only support versions of Kubernetes higher than 1.7.6. For prior versions of Kubernetes, you must use Agent 5.x.
 
 There are two installation processes available to gather metrics, traces and logs from your Kubernetes Clusters:
 
@@ -24,7 +24,7 @@ Installing the agent on the host as opposed to in a pod as part of a Deployment 
 It could however help give visibility over the start of the Kubernetes ecosystem and health thereof.
 Similarly, one would not be restricted to monitoring applications belonging to the Kubernetes eco system.
 
-To discover all data collected automatically from the Kubernetes integration, refer to the dedicated [Kubernetes Integration Documentation](/integrations/kubernetes).  
+To discover all data collected automatically from the Kubernetes integration, refer to the dedicated [Kubernetes Integration Documentation](/integrations/kubernetes).
 
 This documentation is for agent v6 only, if you are still using agent v5, [follow this installation process](/agent/faq/agent-5-kubernetes-basic-agent-usage)
 
@@ -110,7 +110,7 @@ spec:
           name: cgroups
 ```
 
-Replace `YOUR_API_KEY` with [your api key](https://app.datadoghq.com/account/settings#api) or use [Kubernetes secrets](https://kubernetes.io/docs/concepts/configuration/secret/) to set your API key [as an environement variable](https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-environment-variables).  
+Replace `YOUR_API_KEY` with [your api key](https://app.datadoghq.com/account/settings#api) or use [Kubernetes secrets](https://kubernetes.io/docs/concepts/configuration/secret/) to set your API key [as an environement variable](https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-environment-variables).
 
 [Consult our docker integration to discover all configuration options.](/agent/basic_agent_usage/docker/#environment-variables)
 
@@ -126,10 +126,10 @@ Replace `YOUR_API_KEY` with [your api key](https://app.datadoghq.com/account/set
 To enable [Log collection](/logs) with your DaemonSet:
 
 1. Set the `DD_LOGS_ENABLED` variable to true in your *env* section:
-    
+
     ```
     (...)
-      env: 
+      env:
         (...)
         - name: DD_LOGS_ENABLED
             value: "true"
@@ -154,7 +154,7 @@ To enable [Log collection](/logs) with your DaemonSet:
     (...)
   ```
 
-Learn more about this in [the Docker log collection documentation](/logs/docker/#configuration-file-example). 
+Learn more about this in [the Docker log collection documentation](/logs/docker/#configuration-file-example).
 
 ### RBAC
 
@@ -225,10 +225,10 @@ data:
     logs:
       - type: docker
         service: docker
-        source: kubernetes 
+        source: kubernetes
 ```
 
-Learn more about this in [the Docker log collection documentation](/logs/docker/#configuration-file-example). 
+Learn more about this in [the Docker log collection documentation](/logs/docker/#configuration-file-example).
 
 ##### Annotations
 
