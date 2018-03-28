@@ -51,8 +51,8 @@ Avoid ‘Please’ in almost all cases; no need to say “Please configure the f
     * **YES**: You can add up to 20 monitors in a composite monitor.
 
 * **Rarely use ‘we’**: Same goes for ‘us’/’our’, too.‘You’/’your’ is good, even encouraged (though don’t use excessively).
-    **NO**: Datadog APM is included in our Enterprise plan or as an upgrade to our Pro plan. Pro plan members can visit the APM page in Datadog to begin a free 14-day trial.
-    **YES**: Datadog APM is included in Enterprise plans or as an upgrade from Pro plans. If you have a Pro plan, visit the APM page in Datadog to begin a free 14-day trial.
+    * **NO**: Datadog APM is included in our Enterprise plan or as an upgrade to our Pro plan. Pro plan members can visit the APM page in Datadog to begin a free 14-day trial.
+    * **YES**: Datadog APM is included in Enterprise plans or as an upgrade from Pro plans. If you have a Pro plan, visit the APM page in Datadog to begin a free 14-day trial.
 
 * **Don’t use passive voice**: No need to avoid it at all costs, but use active voice most often.
     * **NO**: “With our infrastructure monitoring, metrics are sent to the Datadog Agent, which then forwards them to Datadog. Similarly, tracing metrics are also sent to the Datadog agent.”
