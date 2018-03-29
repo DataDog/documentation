@@ -63,6 +63,7 @@ clean-integrations:  ## remove built integrations files.
 	    -a -not -name 'rss.md' \
 	    -a -not -name 'system.md' \
 	    -a -not -name 'tcprtt.md' \
+	    -a -not -name 'cloud_foundry.md' \
 	    -a -not -name '*.fr.md' \
 	    -exec rm -rf {} \;
 
