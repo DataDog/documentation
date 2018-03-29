@@ -1,0 +1,34 @@
+[
+    {
+        "agent_version": "5.6.0",
+        "check": "kubernetes.kubelet.check.ping",
+        "statuses": ["ok", "critical"],
+        "groups": ["host"],
+        "name": "Kubelet Ping",
+        "description": "Renvoie `CRITICAL` si le Kubelet ne répond pas au Ping. `OK` sinon"
+    },
+    {
+        "agent_version": "5.6.0",
+        "check": "kubernetes.kubelet.check.docker",
+        "statuses": ["ok", "critical"],
+        "groups": ["host"],
+        "name": "Kubelet Docker Service",
+        "description": "Renvoie `CRITICAL` si le service Docker ne s'exécute pas sur le Kubelet. `OK`, sinon"
+    },
+    {
+        "agent_version": "5.6.0",
+        "check": "kubernetes.kubelet.check.syncloop",
+        "statuses": ["ok", "critical"],
+        "groups": ["host"],
+        "name": "Kubelet Syncloop",
+        "description": "Renvoie `CRITICAL` si le health check de syncloop est arrêté. `OK`, sinon"
+    },
+    {
+        "agent_version": "5.6.0",
+        "check": "kubernetes.kubelet.check",
+        "statuses": ["ok", "critical"],
+        "groups": ["host"],
+        "name": "Kubelet Health",
+        "description": "Renvoie `CRITICAL` si la vérification d'intégrité globale de Kubelet est arrêtée. `OK`, sinon"
+    }
+]

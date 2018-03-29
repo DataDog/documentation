@@ -170,7 +170,7 @@ Il est également possible de rechercher un attribut numérique dans une plage s
 
 ### Tags
 
-Vos journaux héritent les tags de [l'hosts](/graphing/infrastructure/) et de [l'integrations](/integrations/) qui les génèrent. Ils peuvent être utilisés dans la recherche et en tant que facettes:
+Vos logs héritent les tags de [l'hosts](/graphing/infrastructure/) et de [l'integrations](/integrations/) qui les génèrent. Ils peuvent être utilisés dans la recherche et en tant que facettes:
 
 * `test` recherche la chaîne "test".
 * `("env:prod" OR test)` renvoie tous les logs avec le tag #env:prod ou le tag #test

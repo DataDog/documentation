@@ -1,7 +1,7 @@
 ---
 title: Récupérer un embed spécifique
 type: apicode
-order: 9.3
+order: 10.3
 external_redirect: /api/#get-specific-embed
 ---
 

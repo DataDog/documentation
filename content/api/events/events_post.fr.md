@@ -1,7 +1,7 @@
 ---
 title: Envoyer un événement
 type: apicontent
-order: 10.1
+order: 11.1
 external_redirect: /api/#post-an-event
 ---
 

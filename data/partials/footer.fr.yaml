@@ -19,7 +19,6 @@ col1:
     title: Prix
 col2:
   - name: documentation
-    link: '/'
     title: Documentation
   - name: support
     link: 'https://www.datadoghq.com/support/'

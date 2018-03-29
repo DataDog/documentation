@@ -1,7 +1,7 @@
 ---
 title: Récupère les détails d'un monitor
 type: apicontent
-order: 15.2
+order: 16.2
 ---
 ## Récupère les détails d'un monitor
 ##### ARGUMENTS

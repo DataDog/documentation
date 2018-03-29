@@ -2,6 +2,7 @@
 [
     {
         "agent_version": "5.0.0",
+        "integration":"ceph",
         "check": "ceph.overall_status",
         "statuses": ["ok", "warning", "critical"],
         "groups": ["host"],
@@ -10,6 +11,7 @@
     },
     {
         "agent_version": "5.21.0",
+        "integration":"ceph",
         "check": "ceph.osd_down",
         "statuses": ["ok", "warning", "critical"],
         "groups": ["host"],
@@ -18,6 +20,7 @@
     },
     {
         "agent_version": "5.21.0",
+        "integration":"ceph",
         "check": "ceph.osd_orphan",
         "statuses": ["ok", "warning", "critical"],
         "groups": ["host"],
@@ -26,6 +29,7 @@
     },
     {
         "agent_version": "5.21.0",
+        "integration":"ceph",
         "check": "ceph.osd_full",
         "statuses": ["ok", "warning", "critical"],
         "groups": ["host"],
@@ -34,6 +38,7 @@
     },
     {
         "agent_version": "5.21.0",
+        "integration":"ceph",
         "check": "ceph.osd_nearfull",
         "statuses": ["ok", "warning", "critical"],
         "groups": ["host"],
@@ -42,6 +47,7 @@
     },
     {
         "agent_version": "5.21.0",
+        "integration":"ceph",
         "check": "ceph.pool_full",
         "statuses": ["ok", "warning", "critical"],
         "groups": ["host"],
@@ -50,6 +56,7 @@
     },
     {
         "agent_version": "5.21.0",
+        "integration":"ceph",
         "check": "ceph.pool_near_full",
         "statuses": ["ok", "warning", "critical"],
         "groups": ["host"],
@@ -58,6 +65,7 @@
     },
     {
         "agent_version": "5.21.0",
+        "integration":"ceph",
         "check": "ceph.pg_availability",
         "statuses": ["ok", "warning", "critical"],
         "groups": ["host"],
@@ -66,6 +74,7 @@
     },
     {
         "agent_version": "5.21.0",
+        "integration":"ceph",
         "check": "ceph.pg_degraded",
         "statuses": ["ok", "warning", "critical"],
         "groups": ["host"],
@@ -74,6 +83,7 @@
     },
     {
         "agent_version": "5.21.0",
+        "integration":"ceph",
         "check": "ceph.pg_degraded_full",
         "statuses": ["ok", "warning", "critical"],
         "groups": ["host"],
@@ -82,6 +92,7 @@
     },
     {
         "agent_version": "5.21.0",
+        "integration":"ceph",
         "check": "ceph.pg_damaged",
         "statuses": ["ok", "warning", "critical"],
         "groups": ["host"],
@@ -90,6 +101,7 @@
     },
     {
         "agent_version": "5.21.0",
+        "integration":"ceph",
         "check": "ceph.pg_not_scrubbed",
         "statuses": ["ok", "warning", "critical"],
         "groups": ["host"],
@@ -98,6 +110,7 @@
     },
     {
         "agent_version": "5.21.0",
+        "integration":"ceph",
         "check": "ceph.pg_not_deep_scrubbed",
         "statuses": ["ok", "warning", "critical"],
         "groups": ["host"],
@@ -106,6 +119,7 @@
     },
     {
         "agent_version": "5.21.0",
+        "integration":"ceph",
         "check": "ceph.cache_pool_near_full",
         "statuses": ["ok", "warning", "critical"],
         "groups": ["host"],
@@ -114,6 +128,7 @@
     },
     {
         "agent_version": "5.21.0",
+        "integration":"ceph",
         "check": "ceph.too_few_pgs",
         "statuses": ["ok", "warning", "critical"],
         "groups": ["host"],
@@ -122,6 +137,7 @@
     },
     {
         "agent_version": "5.21.0",
+        "integration":"ceph",
         "check": "ceph.too_many_pgs",
         "statuses": ["ok", "warning", "critical"],
         "groups": ["host"],
@@ -130,6 +146,7 @@
     },
     {
         "agent_version": "5.21.0",
+        "integration":"ceph",
         "check": "ceph.object_unfound",
         "statuses": ["ok", "warning", "critical"],
         "groups": ["host"],
@@ -138,6 +155,7 @@
     },
     {
         "agent_version": "5.21.0",
+        "integration":"ceph",
         "check": "ceph.request_slow",
         "statuses": ["ok", "warning", "critical"],
         "groups": ["host"],
@@ -146,6 +164,7 @@
     },
     {
         "agent_version": "5.21.0",
+        "integration":"ceph",
         "check": "ceph.request_stuck",
         "statuses": ["ok", "warning", "critical"],
         "groups": ["host"],

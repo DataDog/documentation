@@ -16,7 +16,7 @@ further_reading:
 
 ## Aperçu
 
-Si vos logs sont au format JSON, Datadog les parse automatiquement, mais pour les autres formats, Datadog vous permet d'enrichir vos journaux à l'aide de parser Grok.
+Si vos logs sont au format JSON, Datadog les parse automatiquement, mais pour les autres formats, Datadog vous permet d'enrichir vos logs à l'aide de parser Grok.
 La syntaxe Grok fournit un moyen plus simple de parser les logs que les expressions régulières pures.
 L'utilisation principale d'un parser Grok consiste à extraire des attributs à partir de messages texte semi-structurés.
 

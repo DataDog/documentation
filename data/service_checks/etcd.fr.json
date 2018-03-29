@@ -1,6 +1,7 @@
 [
     {
         "agent_version": "5.2.0",
+        "integration":"etcd",
         "check": "etcd.can_connect",
         "statuses": ["ok", "critical"],
         "groups": ["host", "url"],
@@ -9,6 +10,7 @@
     },
     {
         "agent_version": "5.21.0",
+        "integration":"etcd",
         "check": "etcd.healthy",
         "statuses": ["ok", "critical"],
         "groups": ["host", "url"],
