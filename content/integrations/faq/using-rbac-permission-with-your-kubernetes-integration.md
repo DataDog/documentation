@@ -19,18 +19,26 @@ Use these Kubernetes RBAC entities to configure permissions for your Datadog Age
     resources:
       - "nodes"
       - "namespaces"  #
-      - "events"      # Cluster events + kube_service cache invalidation
+      - "events"      # Cluster events 
       - "services"    # kube_service tag
+      - "pods"
+      - "endpoints"   # kube_service tag
+      - "componentstatuses"
     verbs: ["get", "list"]
   - apiGroups: [""]
     resources:
       - "configmaps"
-    resourceNames: ["datadog-leader-elector"]
-    verbs: ["get", "delete", "update"]
+    resourceNames: ["datadog-leader-election"]
+    verbs: ["get", "list", "create", "delete", "update"]
   - apiGroups: [""]
     resources:
       - "configmaps"
     verbs: ["create"]
+  - apiGroups: [""]
+    resources:
+      - "configmaps"
+    resourceNames: ["datadogtoken"]
+    verbs: ["get", "update"]    
   ---
   # You need to use that account for your dd-agent DaemonSet
   apiVersion: v1
