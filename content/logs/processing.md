@@ -45,13 +45,15 @@ With one single pipeline:
 
 Pipelines take logs from a wide variety of formats and translate them into a common format in Datadog.
 
+For instance, a first pipeline can be defined to extract application log prefix and then each team is free to define their own pipeline to process the rest of the log message.
+
 ### Pipeline filters
 
 Filters let you limit what kinds of logs a pipeline applies to.
 
 The filter syntax is the same as the [search bar](/logs/explore/#search-bar).
 
-**Be aware that the pipeline filtering is applied before any pipeline processing, hence you cannot filter on an attribute that does not exist**
+**Be aware that the pipeline filtering is applied before any of the pipeline's processors, hence you cannot filter on an attribute that is extracted in the pipeline itself** 
 
 The logstream shows which logs your pipeline applies to:
 
