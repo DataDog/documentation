@@ -1,7 +1,7 @@
 ---
 title: Envoyer vos services
 type: apicode
-order: 21.2
+order: 22.2
 external_redirect: /api/#send-services
 ---
 

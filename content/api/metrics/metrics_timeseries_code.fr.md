@@ -1,7 +1,7 @@
 ---
 title: Envoyer des points de séries temporelles
 type: apicode
-order: 14.2
+order: 15.2
 external_redirect: /api/#post-time-series-points
 ---
 

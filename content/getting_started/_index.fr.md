@@ -5,7 +5,7 @@ aliases:
   - /fr/overview
   - /fr/guides/overview/
 ---
-Donc, vous venez de terminer [installation][1] de l'Agent Datadog, ou peut-être êtes vous simplement curieux de savoir [ce que Datadog peut faire pour vous][2]. Cette page donne un aperçu général des capacités de Datadog et de la façon dont il peut vous aider à mettre votre infrastructure au pas.
+Donc, vous venez de terminer [l'installation][1] de l'Agent Datadog, ou peut-être êtes vous simplement curieux de savoir [ce que Datadog peut faire pour vous][2]. Cette page donne un aperçu général des capacités de Datadog et de la façon dont il peut vous aider à mettre votre infrastructure au pas.
 
 ## Intégrations
 

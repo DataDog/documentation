@@ -1,7 +1,7 @@
 ---
 title: Mettre à jour le temps d'arrêt d'un monitor
 type: apicode
-order: 8.2
+order: 9.2
 external_redirect: /api/#update-monitor-downtime
 ---
 

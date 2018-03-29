@@ -1,7 +1,7 @@
 ---
 title: Mettre à jour un Timeboard
 type: apicode
-order: 20.2
+order: 21.2
 external_redirect: /api/#update-a-timeboard
 ---
 
