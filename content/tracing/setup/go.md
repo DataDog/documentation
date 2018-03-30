@@ -48,7 +48,7 @@ For another example, see the [`example_test.go`](https://github.com/DataDog/dd-t
 
 ## Compatibility
 
-Currently, only Go 1.7 is supported.
+Currently, only Go 1.7+ is supported.
 
 ### Framework Compatibility
 
