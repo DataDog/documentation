@@ -55,7 +55,7 @@ cf restage $YOUR_APP_NAME
 To build this buildpack, edit the relevant files and run the `./build` script. If you want to upload it, run `./upload`.
 
 ### DogStatsD
-DogStatsD setup is now complete. See [the documentation](https://docs.datadoghq.com/guides/DogStatsD/) for more information. We maintain [a list of DogStatsD libraries](https://docs.datadoghq.com/libraries/) compatible with a wide range of applications.
+DogStatsD setup is now complete. See [the documentation](/developers/dogstatsd) for more information. We maintain [a list of DogStatsD libraries](https://docs.datadoghq.com/libraries/) compatible with a wide range of applications.
 
 ## Monitoring your Cloud Foundry cluster
 
