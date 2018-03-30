@@ -1,0 +1,11 @@
+[
+    {
+        "agent_version": "5.1.0",
+        "integration":"mongodb",
+        "check": "mongodb.can_connect",
+        "statuses": ["ok", "critical"],
+        "groups": ["host", "port", "db"],
+        "name": "Peut se connecter",
+        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter a l'instance MongoDB qu'il monitor. Sinon renvoie `OK`."
+    }
+]
