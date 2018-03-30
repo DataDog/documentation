@@ -113,6 +113,26 @@ system:
     per_unit_name: ''
     short_name: process mem vms
     unit_name: byte
+  - description: Le taux de changement de contexte volontaire effectué par ce processus.
+    integration: system
+    interval: ''
+    metric_name: process.stat.voluntary_ctx_switches
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: process ctx switches
+    unit_name: event
+  - description: >-
+      Le taux de changements de contexte involontaires effectués par ce
+      processus.
+    integration: system
+    interval: ''
+    metric_name: process.stat.involuntary_ctx_switches
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: process ctx switches
+    unit_name: event
   - description: The number of system read calls per second by this process.
     integration: system
     interval: ''
@@ -376,7 +396,7 @@ system:
     per_unit_name: ''
     short_name: cpu user
     unit_name: percent
-  - description: The amount of disk space that is free.
+  - description: La quantité d'espace disque libre.
     integration: system
     interval: ''
     metric_name: system.disk.free
@@ -1091,9 +1111,7 @@ system:
     per_unit_name: ''
     short_name: proc queue length
     unit_name: thread
-  - description: |-
-
-      L'utilisation du CPU du processus.
+  - description: L'utilisation CPU du processus.
     integration: system
     interval: ''
     metric_name: system.processes.cpu.pct
@@ -1221,11 +1239,8 @@ system:
     short_name: processes mem rss
     unit_name: byte
   - description: >-
-
       La quantité totale de mémoire virtuelle utilisée par le processus. aka
-      "Virtual
-
-      Memory Size".
+      "Virtual Memory Size".
     integration: system
     interval: ''
     metric_name: system.processes.mem.vms

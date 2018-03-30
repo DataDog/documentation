@@ -30,7 +30,7 @@ version: 1.2.1
 
 Obtenez les métriques du service Cassandra en temps réel pour:
 
-* Visualisez et monitorez les états de Cassandra
+* Visualiser et monitorer les états de Cassandra
 * Soyez informé des failovers et des événements de Cassandra.
 
 ## Implémentation
