@@ -157,6 +157,10 @@ These settings:
 Give the following results:
 {{< img src="logs/processing/useragent_processor.png" alt="Useragent processor" responsive="true" popup="true">}}
 
+### Log Message Remapper
+
+The message is a key attribute in Datadog. You can do full string search on it, it is also displayed in the message column of the log explorer. Use this processor if you want to assign some attributes as the official log message, just enter the attribute path in the processor tile as follow:
+
 ## Technical limits
 
 To make sure the Log Management solution functions in an optimal way we set the following technical limits and rules to your log events as well as to some product features. These have been designed so you may never reach them.
