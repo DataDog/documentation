@@ -55,7 +55,7 @@ Stockez les logs pour plusieurs distributions dans le même bucket. Lorsque vous
 #### Envoyer des logs à Datadog
 
 1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda pour collecte de log AWS](/integrations/amazon_web_services/#create-a-new-lambda-function).
-2. Une fois la fonction lambda installée, ajoutez manuellement un déclencheur sur le bucket S3 contenant vos journaux Cloudfront dans la console AWS. Dans votre Lambda, cliquez sur S3 dans la liste des déclencheurs:
+2. Une fois la fonction lambda installée, ajoutez manuellement un déclencheur sur le bucket S3 contenant vos logs Cloudfront dans la console AWS. Dans votre Lambda, cliquez sur S3 dans la liste des déclencheurs:
 {{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="S3 trigger configuration" responsive="true" popup="true" style="width:70%;">}}
     Configurez votre déclencheur en choisissant le bucket S3 qui contient vos logs ELB et changez le type d'événement en `Object Created (All)`, puis cliquez sur le bouton *add*.
 {{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="S3 Lambda trigger configuration" responsive="true" popup="true" style="width:70%;">}}

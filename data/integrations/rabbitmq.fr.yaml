@@ -1,0 +1,463 @@
+rabbitmq:
+  - description: Descripteurs de fichiers utilisés.
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.node.fd_used
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: fd used
+    unit_name: ''
+  - description: Espace disque libre
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.node.disk_free
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: disk free
+    unit_name: byte
+  - description: Mémoire utilisée en bytes
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.node.mem_used
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: mem used
+    unit_name: byte
+  - description: Average number of Erlang processes waiting to run
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.node.run_queue
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: run queue
+    unit_name: process
+  - description: Number of file descriptors used as sockets
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.node.sockets_used
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: skts used
+    unit_name: ''
+  - description: Number of network partitions this node is seeing
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.node.partitions
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: partitions
+    unit_name: partition
+  - description: Is the node running or not
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.node.running
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: running
+    unit_name: ''
+  - description: Does the host has memory alarm
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.node.mem_alarm
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: mem_alarm
+    unit_name: ''
+  - description: Est ce que le node à une alarme sur son disque.
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.node.disk_alarm
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: disk_alarm
+    unit_name: ''
+  - description: Number of messages delivered to clients and acknowledged
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.exchange.messages.ack.count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: xchng msgs ack
+    unit_name: message
+  - description: 'Rate of messages delivered to clients and acknowledged per second '
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.exchange.messages.ack.rate
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: xchng msgs ack rate
+    unit_name: message
+  - description: Count of messages confirmed
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.exchange.messages.confirm.count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: xchng msgs cnfrm
+    unit_name: message
+  - description: Taux de messages confirmés par seconde
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.exchange.messages.confirm.rate
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: xchng msgs cnfrm rate
+    unit_name: message
+  - description: >-
+      Sum of messages delivered in acknowledgement mode to consumers, in
+      no-acknowledgement mode to consumers, in acknowledgement mode in response
+      to basic.get, and in no-acknowledgement mode in response to basic.get
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.exchange.messages.deliver_get.count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: xchng msgs dlv get
+    unit_name: message
+  - description: >-
+      Rate per second of the sum of messages delivered in acknowledgement mode
+      to consumers, in no-acknowledgement mode to consumers, in acknowledgement
+      mode in response to basic.get, and in no-acknowledgement mode in response
+      to basic.get
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.exchange.messages.deliver_get.rate
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: xchng msgs dlv get rate
+    unit_name: message
+  - description: >-
+      Count of subset of messages in deliver_get which had the redelivered flag
+      set
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.exchange.messages.redeliver.count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: xchng msgs redlv
+    unit_name: message
+  - description: >-
+      Rate of subset of messages in deliver_get which had the redelivered flag
+      set per second
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.exchange.messages.redeliver.rate
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: xchng msgs redlv rate
+    unit_name: message
+  - description: Count of messages returned to publisher as unroutable
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.exchange.messages.return_unroutable.count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: xchng msgs unroutable
+    unit_name: message
+  - description: Rate of messages returned to publisher as unroutable per second
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.exchange.messages.return_unroutable.rate
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: xchng msgs unroutable rate
+    unit_name: message
+  - description: Count of messages published
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.exchange.messages.publish.count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: xchng msgs pub
+    unit_name: message
+  - description: Rate of messages published per second
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.exchange.messages.publish.rate
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: xchng msgs pub rate
+    unit_name: message
+  - description: Count of messages published from channels into this exchange
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.exchange.messages.publish_in.count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: xchng msgs pub in
+    unit_name: message
+  - description: Rate of messages published from channels into this exchange per sec
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.exchange.messages.publish_in.rate
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: xchng msgs pub in rate
+    unit_name: message
+  - description: Count of messages published from this exchange into queues
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.exchange.messages.publish_out.count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: xchng msgs pub out
+    unit_name: message
+  - description: Rate of messages published from this exchange into queues per second
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.exchange.messages.publish_out.rate
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: xchng msgs pub out rate
+    unit_name: message
+  - description: >-
+      Number of active consumers, consumers that can immediately receive any
+      messages sent to the queue
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.queue.active_consumers
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: act cons
+    unit_name: consumer
+  - description: Number of bindings for a specific queue
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.queue.bindings.count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: queue bind
+    unit_name: bind
+  - description: Number of consumers
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.queue.consumers
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cons
+    unit_name: consumer
+  - description: The ratio of time that a queue's consumers can take new messages
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.queue.consumer_utilisation
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cons util
+    unit_name: fraction
+  - description: >-
+      Bytes of memory consumed by the Erlang process associated with the queue,
+      including stack, heap and internal structures
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.queue.memory
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: mem
+    unit_name: byte
+  - description: Count of the total messages in the queue
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.queue.messages
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: msgs
+    unit_name: message
+  - description: Compte par seconde du nombre total de messages dans la file d'attente
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.queue.messages.rate
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: msgs rate
+    unit_name: message
+  - description: Number of messages ready to be delivered to clients
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.queue.messages_ready
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: msgs rdy
+    unit_name: message
+  - description: Number per second of messages ready to be delivered to clients
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.queue.messages_ready.rate
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: msgs rdy rate
+    unit_name: message
+  - description: Number of messages delivered to clients but not yet acknowledged
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.queue.messages_unacknowledged
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: msgs unack
+    unit_name: message
+  - description: >-
+      Number per second of messages delivered to clients but not yet
+      acknowledged
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.queue.messages_unacknowledged.rate
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: msgs unack rate
+    unit_name: message
+  - description: Number of messages delivered to clients and acknowledged
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.queue.messages.ack.count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: msgs ack
+    unit_name: message
+  - description: Number per second of messages delivered to clients and acknowledged
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.queue.messages.ack.rate
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: msgs ack rate
+    unit_name: message
+  - description: Nombre de messages délivrés en mode "acknowledgement" aux consumers
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.queue.messages.deliver.count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: msgs delv
+    unit_name: message
+  - description: Nombre de messages délivrés en mode "acknowledgement" aux consumers
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.queue.messages.deliver.rate
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: msgs delv rate
+    unit_name: message
+  - description: >-
+      Sum of messages delivered in acknowledgement mode to consumers, in
+      no-acknowledgement mode to consumers, in acknowledgement mode in response
+      to basic.get, and in no-acknowledgement mode in response to basic.get.
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.queue.messages.deliver_get.count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: msgs delv get
+    unit_name: message
+  - description: >-
+      Rate per second of the sum of messages delivered in acknowledgement mode
+      to consumers, in no-acknowledgement mode to consumers, in acknowledgement
+      mode in response to basic.get, and in no-acknowledgement mode in response
+      to basic.get.
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.queue.messages.deliver_get.rate
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: msgs delv get rate
+    unit_name: message
+  - description: Count of messages published
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.queue.messages.publish.count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: msgs pub
+    unit_name: message
+  - description: Rate per second of messages published
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.queue.messages.publish.rate
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: msgs pub rate
+    unit_name: message
+  - description: >-
+      Count of subset of messages in deliver_get which had the redelivered flag
+      set
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.queue.messages.redeliver.count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: msgs redelv
+    unit_name: message
+  - description: >-
+      Rate per second of subset of messages in deliver_get which had the
+      redelivered flag set
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.queue.messages.redeliver.rate
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: msgs redelv rate
+    unit_name: message
+  - description: >-
+      Number of current connections to a given rabbitmq vhost, tagged
+      'rabbitmq_vhost:<vhost_name>'
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.connections
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: connections
+    unit_name: connection
+  - description: Number of connections in the specified connection state
+    integration: rabbitmq
+    interval: ''
+    metric_name: rabbitmq.connections.state
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: connection_state
+    unit_name: connection_state

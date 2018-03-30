@@ -1,0 +1,122 @@
+amazon_ops_works:
+  - description: Le pourcentage de temps que le processeur gère les opérations du système.
+    integration: amazon_ops_works
+    interval: ''
+    metric_name: aws.opsworks.cpusystem
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cpu system
+    unit_name: percent
+  - description: >-
+      Le pourcentage de temps que le processeur gère les opérations de
+      l'utilisateur.
+    integration: amazon_ops_works
+    interval: ''
+    metric_name: aws.opsworks.cpuuser
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cpu user
+    unit_name: percent
+  - description: >-
+      The percentage of time that the CPU is waiting for input/output
+      operations.
+    integration: amazon_ops_works
+    interval: ''
+    metric_name: aws.opsworks.cpuwaitio
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cpu iowait
+    unit_name: percent
+  - description: The load averaged over a 1-minute window.
+    integration: amazon_ops_works
+    interval: ''
+    metric_name: aws.opsworks.load_1
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: load 1
+    unit_name: ''
+  - description: The load averaged over a 15-minute window.
+    integration: amazon_ops_works
+    interval: ''
+    metric_name: aws.opsworks.load_1_5
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: load 15
+    unit_name: ''
+  - description: The load averaged over a 5-minute window.
+    integration: amazon_ops_works
+    interval: ''
+    metric_name: aws.opsworks.load_5
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: load 5
+    unit_name: ''
+  - description: The amount of buffered memory.
+    integration: amazon_ops_works
+    interval: ''
+    metric_name: aws.opsworks.memorybuffers
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: mem buffers
+    unit_name: kibibyte
+  - description: The amount of cached memory.
+    integration: amazon_ops_works
+    interval: ''
+    metric_name: aws.opsworks.memorycached
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: mem cached
+    unit_name: kibibyte
+  - description: La quantité de mémoire libre.
+    integration: amazon_ops_works
+    interval: ''
+    metric_name: aws.opsworks.memoryfree
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: mem free
+    unit_name: kibibyte
+  - description: The amount of swap space.
+    integration: amazon_ops_works
+    interval: ''
+    metric_name: aws.opsworks.memoryswap
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: mem swap
+    unit_name: kibibyte
+  - description: The total amount of memory.
+    integration: amazon_ops_works
+    interval: ''
+    metric_name: aws.opsworks.memorytotal
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: mem total
+    unit_name: kibibyte
+  - description: The amount of memory in use.
+    integration: amazon_ops_works
+    interval: ''
+    metric_name: aws.opsworks.memoryused
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: mem used
+    unit_name: kibibyte
+  - description: The number of active processes.
+    integration: amazon_ops_works
+    interval: ''
+    metric_name: aws.opsworks.procs
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: proc
+    unit_name: process

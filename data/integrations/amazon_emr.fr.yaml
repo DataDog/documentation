@@ -1,0 +1,554 @@
+amazon_emr:
+  - description: Le nombre de demandes soumises à YARN qui ont été complétées.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.apps_completed
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: apps completed
+    unit_name: ''
+  - description: Le nombre de demandes soumises à YARN qui n'ont pas été complétées.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.apps_failed
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: apps failed
+    unit_name: ''
+  - description: The number of applications submitted to YARN that have been killed.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.apps_killed
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: apps killed
+    unit_name: ''
+  - description: The number of applications submitted to YARN that are in a pending state.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.apps_pending
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: apps pending
+    unit_name: ''
+  - description: The number of applications submitted to YARN that are running.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.apps_running
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: apps running
+    unit_name: ''
+  - description: The number of applications submitted to YARN.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.apps_submitted
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: apps submitted
+    unit_name: ''
+  - description: The amount of remaining HDFS disk capacity.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.capacity_remaining_gb
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: capacity remaining gb
+    unit_name: byte
+  - description: The number of resource containers allocated by the ResourceManager.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.container_allocated
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: container allocated
+    unit_name: ''
+  - description: The number of containers in the queue that have not yet been allocated.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.container_pending
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: container pending
+    unit_name: ''
+  - description: >-
+      The percentage of containers in the queue that have not yet been
+      allocated.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.container_pending_ratio
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: container pending ratio
+    unit_name: percent
+  - description: The number of containers reserved.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.container_reserved
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: container reserved
+    unit_name: ''
+  - description: >-
+      The number of core nodes waiting to be assigned. All of the core nodes
+      requested may not be immediately available; this metric reports the
+      pending requests. Data points for this metric are reported only when a
+      corresponding instance group exists.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.core_nodes_pending
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: core nodes pending
+    unit_name: node
+  - description: >-
+      The number of core nodes working. Data points for this metric are reported
+      only when a corresponding instance group exists.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.core_nodes_running
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: core nodes running
+    unit_name: node
+  - description: The number of blocks that HDFS reports as corrupted.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.corrupt_blocks
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: corrupt blocks
+    unit_name: block
+  - description: >-
+      The status of block replication: blocks being replicated, age of
+      replication requests, and unsuccessful replication requests.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.dfs_fsnamesystem_pending_replication_blocks
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: dfs fsnamesystem pending replication blocks
+    unit_name: ''
+  - description: >-
+      Whether the last backup failed. This is set to 0 by default and updated to
+      1 if the previous backup attempt failed. This metric is only reported for
+      HBase clusters.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.hbase_backup_failed
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: hbase backup failed
+    unit_name: ''
+  - description: >-
+      The amount of time it took the previous backup to complete. This metric is
+      set regardless of whether the last completed backup succeeded or failed.
+      While the backup is ongoing, this metric returns the number of minutes
+      after the backup started. This metric is only reported for HBase clusters.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.hbase_most_recent_backup_duration
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: hbase most recent backup duration
+    unit_name: minute
+  - description: >-
+      The number of elapsed minutes after the last successful HBase backup
+      started on your cluster. This metric is only reported for HBase clusters.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.hbase_time_since_last_successful_backup
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: hbase time since last successful backup
+    unit_name: minute
+  - description: The number of bytes read from HDFS.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.hdfsbytes_read
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: hdfsbytes read
+    unit_name: byte
+  - description: The number of bytes written to HDFS.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.hdfsbytes_written
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: hdfsbytes written
+    unit_name: byte
+  - description: The percentage of HDFS storage currently used.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.hdfsutilization
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: hdfsutilization
+    unit_name: percent
+  - description: >-
+      Indicates that a cluster is no longer performing work, but is still alive
+      and accruing charges. It is set to 1 if no tasks are running and no jobs
+      are running, and set to 0 otherwise. This value is checked at five-minute
+      intervals and a value of 1 indicates only that the cluster was idle when
+      checked, not that it was idle for the entire five minutes.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.is_idle
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: is idle
+    unit_name: ''
+  - description: The number of jobs in the cluster that have failed.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.jobs_failed
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: jobs failed
+    unit_name: ''
+  - description: The number of jobs in the cluster that are currently running.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.jobs_running
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: jobs running
+    unit_name: ''
+  - description: The percentage of data nodes that are receiving work from Hadoop.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.live_data_nodes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: live data nodes
+    unit_name: percent
+  - description: The percentage of task trackers that are functional.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.live_task_trackers
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: live task trackers
+    unit_name: percent
+  - description: >-
+      The unused map task capacity. This is calculated as the maximum number of
+      map tasks for a given cluster, less the total number of map tasks
+      currently running in that cluster.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.map_slots_open
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: map slots open
+    unit_name: ''
+  - description: The amount of memory allocated to the cluster.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.memory_allocated_mb
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: memory allocated mb
+    unit_name: byte
+  - description: The amount of memory available to be allocated.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.memory_available_mb
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: memory available mb
+    unit_name: byte
+  - description: The amount of memory reserved.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.memory_reserved_mb
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: memory reserved mb
+    unit_name: byte
+  - description: The total amount of memory in the cluster.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.memory_total_mb
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: memory total mb
+    unit_name: byte
+  - description: >-
+      The number of blocks in which HDFS has no replicas. These might be corrupt
+      blocks.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.missing_blocks
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: missing blocks
+    unit_name: block
+  - description: The number of nodes presently running MapReduce tasks or jobs.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.mractive_nodes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: mractive nodes
+    unit_name: node
+  - description: >-
+      The number of nodes allocated to MapReduce applications that have been
+      marked in a DECOMMISSIONED state.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.mrdecommissioned_nodes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: mrdecommissioned nodes
+    unit_name: ''
+  - description: >-
+      The number of nodes allocated to MapReduce that have been marked in a LOST
+      state.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.mrlost_nodes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: mrlost nodes
+    unit_name: node
+  - description: >-
+      The number of nodes available to MapReduce that have been rebooted and
+      marked in a REBOOTED state.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.mrrebooted_nodes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: mrrebooted nodes
+    unit_name: node
+  - description: The number of nodes presently available to MapReduce jobs.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.mrtotal_nodes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: mrtotal nodes
+    unit_name: node
+  - description: >-
+      The number of nodes available to MapReduce jobs marked in an UNHEALTHY
+      state.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.mrunhealthy_nodes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: mrunhealthy nodes
+    unit_name: node
+  - description: The number of blackisted TaskTracker nodes.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.no_of_black_listed_task_trackers
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: blacklisted tasktrackers
+    unit_name: node
+  - description: The number of graylisted TaskTracker nodes.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.no_of_gray_listed_task_trackers
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: graylisted tasktrackers
+    unit_name: node
+  - description: The number of blocks marked for deletion.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.pending_deletion_blocks
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: pending deletion blocks
+    unit_name: block
+  - description: >-
+      Unused reduce task capacity. This is calculated as the maximum reduce task
+      capacity for a given cluster, less the number of reduce tasks currently
+      running in that cluster.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.reduce_slots_open
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: reduce slots open
+    unit_name: ''
+  - description: >-
+      The number of remaining map tasks for each job. If you have a scheduler
+      installed and multiple jobs running, multiple graphs are generated. A
+      remaining map task is one that is not in any of the following states:
+      Running, Killed, or Completed.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.remaining_map_tasks
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: remaining map tasks
+    unit_name: task
+  - description: >-
+      The ratio of the total map tasks remaining to the total map slots
+      available in the cluster.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.remaining_map_tasks_per_slot
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: remaining map tasks per slot
+    unit_name: ''
+  - description: >-
+      The number of remaining reduce tasks for each job. If you have a scheduler
+      installed and multiple jobs running, multiple graphs are generated.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.remaining_reduce_tasks
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: remaining reduce tasks
+    unit_name: task
+  - description: >-
+      The number of running map tasks for each job. If you have a scheduler
+      installed and multiple jobs running, multiple graphs are generated.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.running_map_tasks
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: running map tasks
+    unit_name: task
+  - description: >-
+      The number of running reduce tasks for each job. If you have a scheduler
+      installed and multiple jobs running, multiple graphs are generated.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.running_reduce_tasks
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: running reduce tasks
+    unit_name: task
+  - description: The number of bytes read from Amazon S3.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.s_3bytes_read
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: s3 bytes read
+    unit_name: byte
+  - description: The number of bytes written to Amazon S3.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.s_3bytes_written
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: s3 bytes written
+    unit_name: byte
+  - description: >-
+      The number of task nodes waiting to be assigned. All of the task nodes
+      requested may not be immediately available; this metric reports the
+      pending requests. Data points for this metric are reported only when a
+      corresponding instance group exists.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.task_nodes_pending
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: task nodes pending
+    unit_name: node
+  - description: >-
+      The number of task nodes working. Data points for this metric are reported
+      only when a corresponding instance group exists.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.task_nodes_running
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: task nodes running
+    unit_name: node
+  - description: The total number of concurrent data transfers.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.total_load
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: total load
+    unit_name: ''
+  - description: The total number of map tasks.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.total_map_tasks
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: total map tasks
+    unit_name: task
+  - description: The total number of reduce tasks.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.total_reduce_tasks
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: total reduce tasks
+    unit_name: task
+  - description: The number of blocks that need to be replicated one or more times.
+    integration: amazon_emr
+    interval: ''
+    metric_name: aws.elasticmapreduce.under_replicated_blocks
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: under replicated blocks
+    unit_name: block

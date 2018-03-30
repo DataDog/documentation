@@ -1,7 +1,7 @@
 ---
 title: Récupérer un Timeboard
 type: apicontent
-order: 21.5
+order: 20.5
 external_redirect: /api/#get-a-timeboard
 ---
 

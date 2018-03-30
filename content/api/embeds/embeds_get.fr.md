@@ -1,7 +1,7 @@
 ---
 title: Récupérer un embed spécifique
 type: apicontent
-order: 9.3
+order: 10.3
 external_redirect: /api/#get-specific-embed
 ---
 
@@ -29,5 +29,5 @@ En cas d'échec, la valeur de retour est un JSON contenant un message d'erreur {
     * **xlarge**.
 * **`legend`** [*optionnel*, *default*=**no**]:  
     Le flag déterminant si le graphique inclut une légende. Doit être soit **yes** soit **no**.
-* **`template_variables`** [*optionnel*, *defaut*=**None**]:  
+* **`template_variables`** [*optionnel*, *défaut*=**None**]:  
     Remplacez les template variables dans les requêtes par form $var. Pour remplacer $var par val, utilisez var=val comme paramètre pour chaque template variable que vous souhaitez remplacer. Si des template variables manquantes sont manquantes dans l'URL d' iframe source, alors (*) est utilisé comme valeur.

@@ -59,6 +59,7 @@ When DNS responses are more than 512 bytes, DNS is sent on TCP. If any TCP ports
 ```
 gaierror: (-2, ' Name of service not known ')
 ```
+If your system or network doesn't support DNS over TCP, disabling IPv6 may help to reduce DNS message sizes and allow the use of UDP.
 
 ### IVP6
 

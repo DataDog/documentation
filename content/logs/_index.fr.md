@@ -69,7 +69,7 @@ logs:
 Définissez `type` sur **tcp** ou **udp** en fonction de votre protocole, puis spécifiez le `port` de votre connexion entrante.
 
 Exemple:
-Si votre application PHP ne se connecte pas à un fichier, mais transmet ses journaux via TCP, créez un fichier de configuration qui spécifie le port à recevoir comme dans l'exemple ci-dessous:
+Si votre application PHP ne se connecte pas à un fichier, mais transmet ses logs via TCP, créez un fichier de configuration qui spécifie le port à recevoir comme dans l'exemple ci-dessous:
 
 ```yaml
 init_config:

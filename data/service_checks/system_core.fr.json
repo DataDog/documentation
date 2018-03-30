@@ -1,0 +1,11 @@
+[
+    {
+        "agent_version": "5.0.0",
+        "integration":"system",
+        "check": "datadog.agent.up",
+        "statuses": ["ok", "critical"],
+        "groups": ["host"],
+        "name": "L'Agent est UP",
+        "description": "Renvoie OK si l'Agent fonctionne correctement. Des alertes sont créées si l'hôte ne répond pas."
+    }
+]

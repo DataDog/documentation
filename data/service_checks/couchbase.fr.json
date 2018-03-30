@@ -1,6 +1,7 @@
 [
     {
         "agent_version": "5.2.0",
+        "integration":"couchbase",
         "check": "couchbase.can_connect",
         "statuses": ["ok", "critical"],
         "groups": ["host"],

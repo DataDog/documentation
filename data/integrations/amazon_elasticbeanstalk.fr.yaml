@@ -1,0 +1,315 @@
+amazon_elasticbeanstalk:
+  - description: Le délai moyen pour terminer les 10% des requêtes les plus rapides.
+    integration: amazon_elasticbeanstalk
+    interval: '60'
+    metric_name: aws.elasticbeanstalk.application_latency_p_1_0
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: app latency 10
+    unit_name: second
+  - description: Le délai moyen pour terminer les 50% des requêtes les plus rapides.
+    integration: amazon_elasticbeanstalk
+    interval: '60'
+    metric_name: aws.elasticbeanstalk.application_latency_p_5_0
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: app latency 50
+    unit_name: second
+  - description: Le délai moyen pour terminer les 75% des requêtes les plus rapides.
+    integration: amazon_elasticbeanstalk
+    interval: '60'
+    metric_name: aws.elasticbeanstalk.application_latency_p_7_5
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: app latency 75
+    unit_name: second
+  - description: Le délai moyen pour terminer les 85% des requêtes les plus rapides.
+    integration: amazon_elasticbeanstalk
+    interval: '60'
+    metric_name: aws.elasticbeanstalk.application_latency_p_8_5
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: app latency 85
+    unit_name: second
+  - description: Le délai moyen pour terminer les 90% des requêtes les plus rapides.
+    integration: amazon_elasticbeanstalk
+    interval: '60'
+    metric_name: aws.elasticbeanstalk.application_latency_p_9_0
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: app latency 90
+    unit_name: second
+  - description: Le délai moyen pour terminer les 95% des requêtes les plus rapides.
+    integration: amazon_elasticbeanstalk
+    interval: '60'
+    metric_name: aws.elasticbeanstalk.application_latency_p_9_5
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: app latency 95
+    unit_name: second
+  - description: Le délai moyen pour terminer les 99% des requêtes les plus rapides.
+    integration: amazon_elasticbeanstalk
+    interval: '60'
+    metric_name: aws.elasticbeanstalk.application_latency_p_9_9
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: app latency 99
+    unit_name: second
+  - description: Le délai moyen pour terminer les 99% des requêtes les plus rapides.
+    integration: amazon_elasticbeanstalk
+    interval: '60'
+    metric_name: aws.elasticbeanstalk.application_latency_p_9_9_9
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: app latency 99.9
+    unit_name: second
+  - description: Le nombre de requêtes complétées avec un code d'état 2XX.
+    integration: amazon_elasticbeanstalk
+    interval: '60'
+    metric_name: aws.elasticbeanstalk.application_requests_2xx
+    metric_type: count
+    orientation: '1'
+    per_unit_name: ''
+    short_name: 2xx requests
+    unit_name: request
+  - description: Le nombre de requêtes complétées avec un code d'état 3XX.
+    integration: amazon_elasticbeanstalk
+    interval: '60'
+    metric_name: aws.elasticbeanstalk.application_requests_3xx
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: 3xx requests
+    unit_name: request
+  - description: Le nombre de requêtes complétées avec un code d'état 4XX.
+    integration: amazon_elasticbeanstalk
+    interval: '60'
+    metric_name: aws.elasticbeanstalk.application_requests_4xx
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: 4xx requests
+    unit_name: request
+  - description: Le nombre de requêtes complétées avec un code d'état 5XX.
+    integration: amazon_elasticbeanstalk
+    interval: '60'
+    metric_name: aws.elasticbeanstalk.application_requests_5xx
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: 5xx requests
+    unit_name: request
+  - description: Le nombre de demandes complétées par l'instance ou l'environnement.
+    integration: amazon_elasticbeanstalk
+    interval: '60'
+    metric_name: aws.elasticbeanstalk.application_requests_total
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: total requests
+    unit_name: request
+  - description: >-
+      [Instance] The percentage of time the CPU was in the idle state in the
+      last minute.
+    integration: amazon_elasticbeanstalk
+    interval: '60'
+    metric_name: aws.elasticbeanstalk.cpuidle
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cpu idle
+    unit_name: percent
+  - description: >-
+      [Instance] The percentage of time the CPU was in the iowait state in the
+      last minute.
+    integration: amazon_elasticbeanstalk
+    interval: '60'
+    metric_name: aws.elasticbeanstalk.cpuiowait
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cpu iowait
+    unit_name: percent
+  - description: >-
+      [Instance] The percentage of time the CPU was in the interrupt request
+      state in the last minute.
+    integration: amazon_elasticbeanstalk
+    interval: '60'
+    metric_name: aws.elasticbeanstalk.cpuirq
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cpu irq
+    unit_name: percent
+  - description: >-
+      [Instance] The percentage of time the CPU was in the nice state in the
+      last minute.
+    integration: amazon_elasticbeanstalk
+    interval: '60'
+    metric_name: aws.elasticbeanstalk.cpunice
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cpu nice
+    unit_name: percent
+  - description: >-
+      [Instance] The percentage of time the CPU was in the soft interrupt
+      request state in the last minute.
+    integration: amazon_elasticbeanstalk
+    interval: '60'
+    metric_name: aws.elasticbeanstalk.cpusoftirq
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cpu soft irq
+    unit_name: percent
+  - description: >-
+      [Instance] The percentage of time the CPU was in the system state in the
+      last minute.
+    integration: amazon_elasticbeanstalk
+    interval: '60'
+    metric_name: aws.elasticbeanstalk.cpusystem
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cpu system
+    unit_name: percent
+  - description: >-
+      [Instance] The percentage of time the CPU was in the user state in the
+      last minute.
+    integration: amazon_elasticbeanstalk
+    interval: '60'
+    metric_name: aws.elasticbeanstalk.cpuuser
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cpu user
+    unit_name: percent
+  - description: >-
+      [Environment] The health status of the environment. The possible values
+      are 0 (OK) 1 (Info) 5 (Unknown) 10 (No data) 15 (Warning) 20 (Degraded)
+      and 25 (Severe).
+    integration: amazon_elasticbeanstalk
+    interval: '60'
+    metric_name: aws.elasticbeanstalk.environment_health
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: env hlth
+    unit_name: ''
+  - description: '[Instance] The health status of the instance.'
+    integration: amazon_elasticbeanstalk
+    interval: '60'
+    metric_name: aws.elasticbeanstalk.instance_health
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: instance health
+    unit_name: instance
+  - description: '[Environment] The number of instances with Degraded health status.'
+    integration: amazon_elasticbeanstalk
+    interval: '60'
+    metric_name: aws.elasticbeanstalk.instances_degraded
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: degraded instances
+    unit_name: instance
+  - description: '[Environment] The number of instances with Info health status.'
+    integration: amazon_elasticbeanstalk
+    interval: '60'
+    metric_name: aws.elasticbeanstalk.instances_info
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: info instances
+    unit_name: instance
+  - description: '[Environment] The number of instances with no health status data.'
+    integration: amazon_elasticbeanstalk
+    interval: '60'
+    metric_name: aws.elasticbeanstalk.instances_no_data
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: no data instances
+    unit_name: instance
+  - description: '[Environment] The number of instances with OK health status.'
+    integration: amazon_elasticbeanstalk
+    interval: '60'
+    metric_name: aws.elasticbeanstalk.instances_ok
+    metric_type: count
+    orientation: '1'
+    per_unit_name: ''
+    short_name: ok instances
+    unit_name: instance
+  - description: '[Environment] The number of instances with Pending health status.'
+    integration: amazon_elasticbeanstalk
+    interval: '60'
+    metric_name: aws.elasticbeanstalk.instances_pending
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: pending instances
+    unit_name: instance
+  - description: '[Environment] The number of instances with Severe health status.'
+    integration: amazon_elasticbeanstalk
+    interval: '60'
+    metric_name: aws.elasticbeanstalk.instances_severe
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: severe instances
+    unit_name: instance
+  - description: '[Environment] The number of instances with Unknown health status.'
+    integration: amazon_elasticbeanstalk
+    interval: '60'
+    metric_name: aws.elasticbeanstalk.instances_unknown
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: unknown instances
+    unit_name: instance
+  - description: '[Environment] The number of instances with Warning health status.'
+    integration: amazon_elasticbeanstalk
+    interval: '60'
+    metric_name: aws.elasticbeanstalk.instances_warning
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: warning instances
+    unit_name: instance
+  - description: '[Instance] The average CPU load over the last minute.'
+    integration: amazon_elasticbeanstalk
+    interval: '60'
+    metric_name: aws.elasticbeanstalk.load_average_1min
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: 1 min load
+    unit_name: ''
+  - description: '[Instance] The average CPU load over the last five minutes.'
+    integration: amazon_elasticbeanstalk
+    interval: '60'
+    metric_name: aws.elasticbeanstalk.load_average_5min
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: 5 min load
+    unit_name: ''
+  - description: '[Instance] The percentage of disk space in use.'
+    integration: amazon_elasticbeanstalk
+    interval: '60'
+    metric_name: aws.elasticbeanstalk.root_filesystem_util
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: prct disk space
+    unit_name: percent

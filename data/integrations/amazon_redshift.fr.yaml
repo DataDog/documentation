@@ -1,0 +1,125 @@
+amazon_redshift:
+  - description: >-
+      Le pourcentage d'utilisation du processeur. Pour les clusters, cette
+      métrique représente une agrégation de tous les nœuds (leader et compute)
+      des valeurs d'utilisation du processeur.
+    integration: amazon_redshift
+    interval: ''
+    metric_name: aws.redshift.cpuutilization
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cpu % util
+    unit_name: percent
+  - description: Le nombre de connexions de base de données à un cluster.
+    integration: amazon_redshift
+    interval: ''
+    metric_name: aws.redshift.database_connections
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: db cxn
+    unit_name: connection
+  - description: >-
+      Indicates the health of the cluster. 1 indicates healthy, and 0 indicates
+      unhealthy.
+    integration: amazon_redshift
+    interval: ''
+    metric_name: aws.redshift.health_status
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: health stat
+    unit_name: ''
+  - description: >-
+      Indicates whether the cluster is in maintenance mode. 1 indicates on, and
+      0 indicates off.
+    integration: amazon_redshift
+    interval: ''
+    metric_name: aws.redshift.maintenance_mode
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: maint mode
+    unit_name: ''
+  - description: The rate at which the node or cluster receives data.
+    integration: amazon_redshift
+    interval: '60'
+    metric_name: aws.redshift.network_receive_throughput
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: net rcv thrpt
+    unit_name: byte
+  - description: The rate at which the node or cluster writes data.
+    integration: amazon_redshift
+    interval: '60'
+    metric_name: aws.redshift.network_transmit_throughput
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: net trans thrpt
+    unit_name: byte
+  - description: The percent of disk space used.
+    integration: amazon_redshift
+    interval: ''
+    metric_name: aws.redshift.percentage_disk_space_used
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: '% disk used'
+    unit_name: percent
+  - description: The average number of disk read operations per second.
+    integration: amazon_redshift
+    interval: '60'
+    metric_name: aws.redshift.read_iops
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: read iops
+    unit_name: operation
+  - description: The average amount of time taken for disk read I/O operations.
+    integration: amazon_redshift
+    interval: ''
+    metric_name: aws.redshift.read_latency
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: read lat
+    unit_name: second
+  - description: Le nombre moyen d'octets lus à partir du disque par seconde.
+    integration: amazon_redshift
+    interval: '60'
+    metric_name: aws.redshift.read_throughput
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: read thrpt
+    unit_name: byte
+  - description: The average number of write operations per second.
+    integration: amazon_redshift
+    interval: '60'
+    metric_name: aws.redshift.write_iops
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: write iops
+    unit_name: operation
+  - description: The average amount of time taken for disk write I/O operations.
+    integration: amazon_redshift
+    interval: ''
+    metric_name: aws.redshift.write_latency
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: write lat
+    unit_name: second
+  - description: Le nombre moyen d'octets écrits sur le disque par seconde.
+    integration: amazon_redshift
+    interval: '60'
+    metric_name: aws.redshift.write_throughput
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: write thrpt
+    unit_name: byte

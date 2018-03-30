@@ -199,6 +199,7 @@ kind: faq
 |Verisign|VERISIGN|
 |Victorops|VICTOROPS|
 |Vsphere|VSPHERE|
+|Watchdog|WATCHDOG|
 |Webhooks|WEBHOOKS|
 |Webmetrics|WEBMETRICS|
 |Windows Service|WINDOWSSERVICE|

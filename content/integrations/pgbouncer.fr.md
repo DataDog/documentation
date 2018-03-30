@@ -48,11 +48,11 @@ instances:
     port: 15433
     username: <YOUR_USERNAME>
     password: <YOUR_PASSWORD>
-
-
+#   tags:
+#     - env:prod
   - database_url: postgresql://<DB_USER>:<DB_PASS>@<DB_HOST>:<DB_PORT>/dbname?sslmode=require
-
-
+#   tags:
+#     - role:main
 ```
 
 Dans votre fichier PGBouncer userlist.txt, ajoutez

@@ -1,0 +1,154 @@
+kubelet:
+  - description: Nombr de cœurs dans cette machine.
+    integration: kubernetes
+    interval: ''
+    metric_name: kubernetes.cpu.capacity
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: k8s.cpu.capacity
+    unit_name: ''
+  - description: Pourcentage de temps CPU utilisé.
+    integration: kubelet
+    interval: ''
+    metric_name: kubernetes.cpu.usage.total
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: k8s.cpu
+    unit_name: percent_nano
+  - description: The limit of cpu cores set
+    integration: kubelet
+    interval: ''
+    metric_name: kubernetes.cpu.limits
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: k8s.cpu.limits
+    unit_name: cpu
+  - description: The requested cpu cores
+    integration: kubelet
+    interval: ''
+    metric_name: kubernetes.cpu.requests
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: k8s.cpu.requests
+    unit_name: cpu
+  - description: La quantité d'espace disque utilisée.
+    integration: kubelet
+    interval: ''
+    metric_name: kubernetes.filesystem.usage
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: k8s.disk.usage
+    unit_name: byte
+  - description: The percentage of disk used
+    integration: kubelet
+    interval: ''
+    metric_name: kubernetes.filesystem.usage_pct
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: k8s.disk.used_pct
+    unit_name: fraction
+  - description: The amount of memory (in bytes) in this machine
+    integration: kubelet
+    interval: ''
+    metric_name: kubernetes.memory.capacity
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: k8s.mem.capacity
+    unit_name: byte
+  - description: The limit of memory set
+    integration: kubelet
+    interval: ''
+    metric_name: kubernetes.memory.limits
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: k8s.mem.limits
+    unit_name: byte
+  - description: The requested memory
+    integration: kubelet
+    interval: ''
+    metric_name: kubernetes.memory.requests
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: k8s.mem.requests
+    unit_name: byte
+  - description: The amount of memory used
+    integration: kubelet
+    interval: ''
+    metric_name: kubernetes.memory.usage
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: k8s.mem
+    unit_name: byte
+  - description: The percentage of memory used
+    integration: kubelet
+    interval: ''
+    metric_name: kubernetes.memory.usage_pct
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: k8s.mem.used_pct
+    unit_name: fraction
+  - description: The amount of bytes per second received
+    integration: kubelet
+    interval: ''
+    metric_name: kubernetes.network.rx_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: k8s.net.rx
+    unit_name: byte
+  - description: The amount of rx packets dropped per second
+    integration: kubelet
+    interval: ''
+    metric_name: kubernetes.network.rx_dropped
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: second
+    short_name: k8s.net.rx.drop
+    unit_name: packet
+  - description: Le nombre d'erreur rx par seconde
+    integration: kubelet
+    interval: ''
+    metric_name: kubernetes.network.rx_errors
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: second
+    short_name: k8s.net.rx.errors
+    unit_name: error
+  - description: The amount of bytes per second transmitted
+    integration: kubelet
+    interval: ''
+    metric_name: kubernetes.network.tx_bytes
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: second
+    short_name: k8s.net.tx
+    unit_name: byte
+  - description: The amount of tx packets dropped per second
+    integration: kubelet
+    interval: ''
+    metric_name: kubernetes.network.tx_dropped
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: second
+    short_name: k8s.net.tx.drop
+    unit_name: packet
+  - description: The amount of tx errors per second
+    integration: kubelet
+    interval: ''
+    metric_name: kubernetes.network.tx_errors
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: second
+    short_name: k8s.net.tx.errors
+    unit_name: error

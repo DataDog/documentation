@@ -19,7 +19,7 @@ col1:
     title: "Pricing"
 col2:
   - name: documentation
-    link: ""
+    link: "/"
     title: "Documentation"
   - name: support
     link: "https://www.datadoghq.com/support/"

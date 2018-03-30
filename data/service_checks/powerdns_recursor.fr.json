@@ -1,7 +1,8 @@
 [
     {
         "agent_version": "5.8.0",
-        "check": "powerdns_recursor.can_connect",
+        "integration":"powerdns_recursor",
+        "check": "powerdns.recursor.can_connect",
         "statuses": ["ok", "critical"],
         "groups": ["host", "port"],
         "name": "Peut se connecter",

@@ -1,7 +1,7 @@
 ---
 title: Mettre à jour un utilisateur
 type: apicode
-order: 24.4
+order: 23.4
 external_redirect: /api/#update-user
 ---
 

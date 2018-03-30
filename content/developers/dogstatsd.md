@@ -4,6 +4,7 @@ kind: documentation
 description: This page explains what DogStatsD is, how it works, and what data it accepts.
 aliases:
   - /guides/dogstatsd/
+  - /guides/DogStatsD/
 further_reading:
 - link: "developers/metrics"
   tag: "Documentation"
