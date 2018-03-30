@@ -12,7 +12,6 @@ $labelcolors: (
     font-weight:600;
     display:inline;
     padding-left:7px;
-    vertical-align: middle;
   }
   /* assign each label its color from map above */
   @each $label, $color in $labelcolors {
