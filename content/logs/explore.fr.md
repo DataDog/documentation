@@ -1,5 +1,5 @@
 ---
-title: Recherche & Graphiques
+title: Recherche & Graphique
 kind: documentation
 description: "Le Logs explorer est votre point de départ dans Datadog pour le troubleshooting et l'exploration de vos logs."
 further_reading:

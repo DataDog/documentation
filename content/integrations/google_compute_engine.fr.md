@@ -24,7 +24,7 @@ Google Cloud Compute Engine fournit des machines virtuelles fonctionnant dans le
 
 Obtenir les métriques de Google Compute Engine pour:
 
-* Visualisez les performances de vos Compute Engines
+* Visualiser les performances de vos Compute Engines
 * Corréler les performances de vos Compute Engines avec vos applications
 
 ## Implémentation

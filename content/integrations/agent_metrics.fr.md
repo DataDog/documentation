@@ -24,7 +24,7 @@ version: 1.1.0
 
 Obtenez les métriques du service agent_metrics en temps réel pour:
 
-* Visualisez et monitorez les états de agent_metrics
+* Visualiser et monitorer les états de agent_metrics
 * Soyez informé des failovers et des événements de agent_metrics.
 
 ## Implémentation
