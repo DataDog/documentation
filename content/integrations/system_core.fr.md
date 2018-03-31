@@ -82,7 +82,8 @@ Selon la plate-forme, la vérification peut collecter d'autres métriques de tem
 Le check System Core n'inclut aucun événement pour le moment.
 
 ### Checks de Service
-Le check System Core n'inclut aucun check de service pour le moment.
+{{< get-service-checks-from-git "system_core" >}}
+
 
 ## Troubleshooting
 Besoin d'aide? Contactez  [l'équipe support de Datadog](http://docs.datadoghq.com/help/).
