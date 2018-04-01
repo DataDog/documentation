@@ -1,0 +1,11 @@
+[
+    {
+        "agent_version": "5.3.0",
+        "integration":"system",
+        "check": "ntp.in_sync",
+        "statuses": ["ok", "critical", "unknown"],
+        "groups": ["host"],
+        "name": "Clock in Sync",
+        "description": "Renvoie CRITICAL si l'horloge de l'host est supérieure au seuil configuré à partir de l'heure NTP. Renvoie UNKNOWN si l'agent ne peut pas se connecter au serveur NTP. Retourne OK sinon."
+    }
+]
