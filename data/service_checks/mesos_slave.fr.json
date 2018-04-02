@@ -1,0 +1,11 @@
+[
+    {
+        "agent_version": "5.2.0",
+        "integration":"mesos",
+        "check": "mesos_slave.can_connect",
+        "statuses": ["ok", "critical"],
+        "name": "Peut se connecter",
+        "groups": ["host", "url"],
+        "description": "Renvoie CRITICAL si l'agent ne peut pas se connecter à  Mesos slave metrics endpoint, sinon OK."
+    }
+]
