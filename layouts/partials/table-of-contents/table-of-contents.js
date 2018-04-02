@@ -98,6 +98,7 @@ $(document).ready(function () {
                 $('.toc-container').toggleClass('mobile-open').toggleClass('d-none');
             }
             $(this).find('i').toggleClass('icon-small-x').toggleClass('icon-small-bookmark');
+            $( document ).trigger( "headerResize", [ parseInt($('body > header').height()) ] );
         });
 
         $(document).on( "moveToAnchor", function() {
