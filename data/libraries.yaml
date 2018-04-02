@@ -5,6 +5,11 @@ Classic:
       dogstatsd: true
       authors: BoardiesITSolutions
       notes: Send metrics from your C++ applications to your Datadog account
+    - name: DogFood
+      link: https://github.com/garrettsickles/DogFood
+      dogstatsd: true
+      authors: Garrett Sickles
+      notes: C++ header library to send metrics to your Datadog account
   - C#:
     - name: dogstatsd-csharp-client
       link: https://github.com/DataDog/dogstatsd-csharp-client
