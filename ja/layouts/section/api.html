@@ -69,7 +69,7 @@
             There are many client libraries that wrap the Datadog API. <a href="/libraries/">Check them out.</a>
 
             <h5>API Endpoint</h5>
-            <code>https://app.datadoghq.com/api/</code>
+            <code>https://api.datadoghq.com/api/</code>
           </div>
         </div>
 
@@ -207,7 +207,7 @@
           </div>
           <div class="col-xs-12 col-md-6 api-right">
             <h5>Signature</h5>
-            <code>GET https://app.datadoghq.com/api/v1/metrics</code>
+            <code>GET https://api.datadoghq.com/api/v1/metrics</code>
             <h5>Example Request</h5>
               {{ partial "snippet-code-block" (dict "highlight" true  "context" . "file" "api-metrics-list.sh" ) }}
             <h5>Example Response</h5>
@@ -247,7 +247,7 @@
           </div>
           <div class="col-xs-12 col-md-6 api-right">
             <h5>Signature</h5>
-            <code>POST https://app.datadoghq.com/api/v1/series</code>
+            <code>POST https://api.datadoghq.com/api/v1/series</code>
             <h5>Example Request</h5>
             {{ range $ext := (slice "py" "sh" "rb" ) }}
 
@@ -280,7 +280,7 @@
           </div>
           <div class="col-xs-12 col-md-6 api-right">
             <h5>Signature</h5>
-            <code>GET https://app.datadoghq.com/api/v1/query</code>
+            <code>GET https://api.datadoghq.com/api/v1/query</code>
             <h5>Example Request</h5>
             {{ range $ext := (slice "py" "sh" "rb" ) }}
 
@@ -2383,7 +2383,7 @@
             </div>
             <div class="col-xs-12 col-md-6 api-right">
               <h5>Signature</h5>
-              <code>GET https://app.datadoghq.com/api/v1/usage/hosts</code>
+              <code>GET https://api.datadoghq.com/api/v1/usage/hosts</code>
               <h5>Example Request</h5>
                 {{ partial "snippet-code-block" (dict "highlight" true  "context" . "file" "api-billing-usage-hosts.sh" ) }}
               <h5>Example Response</h5>
@@ -2406,7 +2406,7 @@
           </div>
           <div class="col-xs-12 col-md-6 api-right">
             <h5>Signature</h5>
-            <code>GET https://app.datadoghq.com/api/v1/usage/timeseries</code>
+            <code>GET https://api.datadoghq.com/api/v1/usage/timeseries</code>
             <h5>Example Request</h5>
             {{ partial "snippet-code-block" (dict "context" . "file" "api-billing-usage-timeseries.sh" )}}
             <h5>Example Response</h5>
@@ -2427,7 +2427,7 @@
           </div>
           <div class="col-xs-12 col-md-6 api-right">
             <h5>Signature</h5>
-            <code>GET https://app.datadoghq.com/api/v1/usage/top_avg_metrics</code>
+            <code>GET https://api.datadoghq.com/api/v1/usage/top_avg_metrics</code>
             <h5>Example Request</h5>
             {{ partial "snippet-code-block" (dict "context" . "file" "api-billing-usage-top-avg-metrics.sh" )}}
             <h5>Example Response</h5>
