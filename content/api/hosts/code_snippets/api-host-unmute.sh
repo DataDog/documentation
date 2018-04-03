@@ -5,7 +5,7 @@ app_key=87ce4a24b5553d2e482ea8a8500e71b8ad4554ff
 
 
 
-curl -X POST -H "Content-type: application/json" "https://app.datadoghq.com/api/v1/host/test.host/unmute?api_key=${api_key}&application_key=${app_key}"
+curl -X POST -H "Content-type: application/json" "https://api.datadoghq.com/api/v1/host/test.host/unmute?api_key=${api_key}&application_key=${app_key}"
 
 
 

@@ -5,4 +5,4 @@ app_key=87ce4a24b5553d2e482ea8a8500e71b8ad4554ff
 event_id=1377281704830403917
 
 
-curl -X DELETE "https://app.datadoghq.com/api/v1/events/${event_id}?api_key=${api_key}&application_key=${app_key}"
+curl -X DELETE "https://api.datadoghq.com/api/v1/events/${event_id}?api_key=${api_key}&application_key=${app_key}"

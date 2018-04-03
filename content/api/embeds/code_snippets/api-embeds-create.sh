@@ -12,7 +12,7 @@ curl -POST \
     -d "timeframe=1_hour" \
     -d "size=medium" \
     -d "legend=yes" \
-    "https://app.datadoghq.com/api/v1/graph/embed?api_key=${api_key}&application_key=${app_key}"
+    "https://api.datadoghq.com/api/v1/graph/embed?api_key=${api_key}&application_key=${app_key}"
 
 
 

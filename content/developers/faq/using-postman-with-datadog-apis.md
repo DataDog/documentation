@@ -53,7 +53,7 @@ If you click on any API from the collection pane, it loads the API on the right 
 
 Example call:
 
-`https://app.datadoghq.com/api/v1/screen/{screenId}?api_key={apiKey}&application_key={appKey}`
+`https://api.datadoghq.com/api/v1/screen/{screenId}?api_key={apiKey}&application_key={appKey}`
 
 ## API PUT/POST Calls
 
@@ -73,7 +73,7 @@ If you need to delete any entity, it is a relatively easy process by using the D
 
 Example Call:
 
-`https://app.datadoghq.com/api/v1/screen/{screenId}?api_key={apiKey}&application_key={appKey}`
+`https://api.datadoghq.com/api/v1/screen/{screenId}?api_key={apiKey}&application_key={appKey}`
 
 After sending the DELETE API call, you should receive a 200 Status, as well as an API response that shows what you just deleted.
 

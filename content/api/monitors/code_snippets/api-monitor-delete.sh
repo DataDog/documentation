@@ -10,6 +10,6 @@ monitor_id=$(curl -X POST -H "Content-type: application/json" \
       "name": "Bytes received on host0",
       "message": "We may need to add web hosts if this is consistently high."
   }' \
-    "https://app.datadoghq.com/api/v1/monitor?api_key=${api_key}&application_key=${app_key}" | jq '.id')
+    "https://api.datadoghq.com/api/v1/monitor?api_key=${api_key}&application_key=${app_key}" | jq '.id')
 
-curl -X DELETE "https://app.datadoghq.com/api/v1/monitor/${monitor_id}?api_key=${api_key}&application_key=${app_key}"
+curl -X DELETE "https://api.datadoghq.com/api/v1/monitor/${monitor_id}?api_key=${api_key}&application_key=${app_key}"

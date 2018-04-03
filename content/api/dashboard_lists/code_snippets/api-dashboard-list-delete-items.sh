@@ -28,5 +28,5 @@ curl -X DELETE -H "Content-type: application/json" \
             }
         ]
 }' \
-"https://app.datadoghq.com/api/v1/dashboard/lists/manual/${list_id}/dashboards?api_key=${api_key}&application_key=${app_key}"
+"https://api.datadoghq.com/api/v1/dashboard/lists/manual/${list_id}/dashboards?api_key=${api_key}&application_key=${app_key}"
 

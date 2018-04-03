@@ -5,6 +5,6 @@ app_key="87ce4a24b5553d2e482ea8a8500e71b8ad4554ff"
 
 
 
-curl -X GET "https://app.datadoghq.com/api/v1/graph/embed?api_key=${api_key}&application_key=${app_key}"
+curl -X GET "https://api.datadoghq.com/api/v1/graph/embed?api_key=${api_key}&application_key=${app_key}"
 
 

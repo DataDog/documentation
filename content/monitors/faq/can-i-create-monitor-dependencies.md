@@ -29,9 +29,9 @@ First, [create the webhooks](https://app.datadoghq.com/account/settings#integrat
 
 Full text for API endpoints (2nd input box for each in the left column):
 
-Mute: `https://app.datadoghq.com/api/v1/downtime?api_key=XXX&application_key=XXX`
+Mute: `https://api.datadoghq.com/api/v1/downtime?api_key=XXX&application_key=XXX`
 
-Unmute: `https://app.datadoghq.com/api/v1/downtime/cancel/by_scope?api_key=XXX&application_key=XXX`
+Unmute: `https://api.datadoghq.com/api/v1/downtime/cancel/by_scope?api_key=XXX&application_key=XXX`
 
 And the webhook content for both:
 ```

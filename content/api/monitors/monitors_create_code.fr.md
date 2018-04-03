@@ -6,7 +6,7 @@ external_redirect: /api/#create-a-monitor
 ---
 
 ##### Signature
-`POST https://app.datadoghq.com/api/v1/monitor`
+`POST https://api.datadoghq.com/api/v1/monitor`
 ##### Exemple de requête
 {{< code-snippets basename="api-monitor-create" >}}
 ##### Exemple de réponse

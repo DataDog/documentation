@@ -19,4 +19,4 @@ curl -X POST -H "Content-type: application/json" \
         "until_date": '"${end_recurrence}"'
       }
 }' \
-    "https://app.datadoghq.com/api/v1/downtime?api_key=${api_key}&application_key=${app_key}"
+    "https://api.datadoghq.com/api/v1/downtime?api_key=${api_key}&application_key=${app_key}"

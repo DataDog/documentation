@@ -6,5 +6,5 @@ app_key=87ce4a24b5553d2e482ea8a8500e71b8ad4554ff
 metric_name="system.net.bytes_sent"
 
 
-curl "https://app.datadoghq.com/api/v1/metrics/${metric_name}?api_key=${api_key}&application_key=${app_key}"
+curl "https://api.datadoghq.com/api/v1/metrics/${metric_name}?api_key=${api_key}&application_key=${app_key}"
 

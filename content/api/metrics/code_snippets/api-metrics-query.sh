@@ -4,7 +4,7 @@ to_time=$(date +%s)
 from_time=$(date -v -1d +%s)
 
 curl -G \
-    "https://app.datadoghq.com/api/v1/query" \
+    "https://api.datadoghq.com/api/v1/query" \
     -d "api_key=${api_key}" \
     -d "application_key=${app_key}" \
     -d "from=${from_time}" \

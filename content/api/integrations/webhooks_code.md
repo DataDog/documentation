@@ -6,7 +6,7 @@ external_redirect: /api/#webhooks
 ---
 
 ##### Signature
-`https://app.datadoghq.com/api/v1/integration/webhooks`
+`https://api.datadoghq.com/api/v1/integration/webhooks`
 
 ##### Example Request
 {{< code-snippets basename="api-integrations-webhooks" >}}
