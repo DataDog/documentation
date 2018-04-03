@@ -269,7 +269,7 @@ The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-
 
 ### *message* attribute
 
-By default, Datadog ingests the value of message as the body of the log entry. That value is then highlighted and display in the [logstream](/logs/explore/#logstream), where it is indexed for [full text search](/logs/explore/#search-bar).
+By default, Datadog ingests the value of message as the body of the log entry. That value is then highlighted and displayed in the [logstream](/logs/explore/#logstream), where it is indexed for [full text search](/logs/explore/#search-bar).
 
 ### *status* attribute
 
