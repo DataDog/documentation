@@ -37,17 +37,19 @@ The Datadog agent provides a listening port on 8125 for statsd/dogstatsd metrics
 
 In addition to the environment variables shown above, there are a number of others you can set:
 
+{{% table responsive="true" %}}
 | Setting | Description|
 | --- | --- |
- `DD_API_KEY` | *Required.* Your API key is available from the [Datadog API integrations](https://app.datadoghq.com/account/settings#api) page. Note that this is the *API* key, not the application key. |
- `DD_HOSTNAME` | *Required.* Because Heroku Dynos are ephemeral and your application my be served by any available Dyno resource, set the hostname to the application or service name. To view metrics by Dyno hosts, the tag `dynohost` is added by the buildpack. |
- `DD_TAGS` | *Optional.* Sets additional tags provided as a comma-delimited string. For example, `heroku config:set DD_TAGS=simple-tag-0,tag-key-1:tag-value-1`. The buildpack automatically adds the tags `dyno` and `dynohost` which represent the Dyno name (e.g. web.1) and host ID (e.g. 33f232db-7fa7-461e-b623-18e60944f44f) respectively. See the ["Guide to tagging"](http://docs.datadoghq.com/guides/tagging/) for more information. |
- `DD_HISTOGRAM_PERCENTILES` | *Optional.* Optionally set additional percentiles for your histogram metrics. See [Histogram percentiles](#histogram-percentiles) below for more information. |
- `DISABLE_DATADOG_AGENT` | *Optional.* When set, the Datadog agent will not be run. |
- `DD_APM_ENABLED` | *Optional.* The Datadog Trace Agent (APM) is run by default. Set this to `false` to disable the Trace Agent. |
- `DD_AGENT_VERSION` | *Optional.* By default, the buildpack installs the latest version of the Datadog Agent available in the package repository. Use this variable to install older versions of the Datadog Agent (note that not all versions of the Agent may be available). |
- `DD_SERVICE_NAME` | *Optional.* While not read directly by the Datadog Agent, it is highly recommend that you set an environment variable for your service name. See the [Service Name](#service-name) section below for more information. |
- `DD_SERVICE_ENV` | *Optional.* The Datadog Agent automatically tries to identify your environment by searching for a tag in the form `env:<environment name>`. For more information, see the [Datadog Tracing environments page](https://docs.datadoghq.com/tracing/environments/). |
+| `DD_API_KEY` | *Required.* Your API key is available from the [Datadog API integrations](https://app.datadoghq.com/account/settings#api) page. Note that this is the *API* key, not the application key. |
+| `DD_HOSTNAME` | *Required.* Because Heroku Dynos are ephemeral and your application my be served by any available Dyno resource, set the hostname to the application or service name. To view metrics by Dyno hosts, the tag `dynohost` is added by the buildpack. |
+| `DD_TAGS` | *Optional.* Sets additional tags provided as a comma-delimited string. For example, `heroku config:set DD_TAGS=simple-tag-0,tag-key-1:tag-value-1`. The buildpack automatically adds the tags `dyno` and `dynohost` which represent the Dyno name (e.g. web.1) and host ID (e.g. 33f232db-7fa7-461e-b623-18e60944f44f) respectively. See the ["Guide to tagging"](http://docs.datadoghq.com/guides/tagging/) for more information. |
+| `DD_HISTOGRAM_PERCENTILES` | *Optional.* Optionally set additional percentiles for your histogram metrics. See [Histogram percentiles](#histogram-percentiles) below for more information. |
+| `DISABLE_DATADOG_AGENT` | *Optional.* When set, the Datadog agent will not be run. |
+| `DD_APM_ENABLED` | *Optional.* The Datadog Trace Agent (APM) is run by default. Set this to `false` to disable the Trace Agent. |
+| `DD_AGENT_VERSION` | *Optional.* By default, the buildpack installs the latest version of the Datadog Agent available in the package repository. Use this variable to install older versions of the Datadog Agent (note that not all versions of the Agent may be available). |
+| `DD_SERVICE_NAME` | *Optional.* While not read directly by the Datadog Agent, it is highly recommend that you set an environment variable for your service name. See the [Service Name](#service-name) section below for more information. |
+| `DD_SERVICE_ENV` | *Optional.* The Datadog Agent automatically tries to identify your environment by searching for a tag in the form `env:<environment name>`. For more information, see the [Datadog Tracing environments page](https://docs.datadoghq.com/tracing/environments/). |
+{{% /table %}}
 
 ### Histogram percentiles
 
