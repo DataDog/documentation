@@ -1,6 +1,8 @@
 ---
 title: Heroku Buildpack
 kind: documentation
+aliases:
+- /developers/faq/how-do-i-collect-metrics-from-heroku-with-datadog
 ---
 
 This buildpack installs the Datadog Agent in your Heroku Dyno to collect system metrics, custom application metrics and traces. To collect custom application metrics or traces, include the language appropriate [DogStatsD or Datadog APM library](http://docs.datadoghq.com/libraries/) in your application.
