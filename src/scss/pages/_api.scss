@@ -51,12 +51,12 @@ $ddpurple:    #774DA2;
       margin: 0 0 10px;
       font-size: 13px;
       line-height: 1.428571429;
-      word-break: break-all;
-      word-wrap: break-word;
       color: #FFF;
       background-color: #0F0F0F;
       border-radius: 4px;
       font-family: $font-family-monospace;
+      word-break: normal;
+      word-wrap: normal;
       code {
         padding: 0;
         font-size: 12px;
@@ -66,12 +66,16 @@ $ddpurple:    #774DA2;
         font-family: $font-family-monospace;
         color:#efefef;
         border:none;
+        word-break: normal;
+        word-wrap: normal;
       }
     }
     code {
       padding-top:0;
       padding-bottom:0;
       font-size:90%;
+      word-break: normal;
+      word-wrap: normal;
     }
   }
 
