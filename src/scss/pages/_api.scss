@@ -66,12 +66,16 @@ $ddpurple:    #774DA2;
         font-family: $font-family-monospace;
         color:#efefef;
         border:none;
+        word-break: normal;
+        word-wrap: normal;
       }
     }
     code {
       padding-top:0;
       padding-bottom:0;
       font-size:90%;
+      word-break: normal;
+      word-wrap: normal;
     }
   }
 
