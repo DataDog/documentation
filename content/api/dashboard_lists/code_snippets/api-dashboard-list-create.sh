@@ -5,4 +5,4 @@ curl -X POST -H "Content-type: application/json" \
 -d '{
         "name": "My Dashboard List"
 }' \
-"https://app.datadoghq.com/api/v1/dashboard/lists/manual?api_key=${api_key}&application_key=${app_key}"
+"https://api.datadoghq.com/api/v1/dashboard/lists/manual?api_key=${api_key}&application_key=${app_key}"

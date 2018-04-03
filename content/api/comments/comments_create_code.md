@@ -6,7 +6,7 @@ external_redirect: /api/#create-a-comment
 ---
 
 ##### Signature
-`POST https://app.datadoghq.com/api/v1/comments`
+`POST https://api.datadoghq.com/api/v1/comments`
 ##### Example Request
 {{< code-snippets basename="api-comment-create" >}}
 ##### Example Response

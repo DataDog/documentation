@@ -6,7 +6,7 @@ external_redirect: /api/#cancel-monitor-downtime
 ---
 
 ##### Signature
-`DELETE https://app.datadoghq.com/api/v1/downtime/:downtime_id`
+`DELETE https://api.datadoghq.com/api/v1/downtime/:downtime_id`
 ##### Exemple de requête
 {{< code-snippets basename="api-monitor-cancel-downtime" >}}
 ##### Exemple de réponse

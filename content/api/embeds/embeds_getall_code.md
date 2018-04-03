@@ -6,7 +6,7 @@ external_redirect: /api/#get-all-embeds
 ---
 
 ##### Signature
-`GET https://app.datadoghq.com/api/v1/graph/embed`
+`GET https://api.datadoghq.com/api/v1/graph/embed`
 ##### Example Request
 {{< code-snippets basename="api-embeds-get-all" >}}
 ##### Example Response

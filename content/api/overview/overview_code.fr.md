@@ -8,4 +8,4 @@ external_redirect: /api/#overview
 De nombreuses bibliothèques exploitent l'API Datadog. [Découvrez-les] (https://docs.datadoghq.com/developers/libraries/).
 
 ### SIGNATURE
-https://app.datadoghq.com/api/
+https://api.datadoghq.com/api/

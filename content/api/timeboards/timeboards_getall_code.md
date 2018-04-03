@@ -6,7 +6,7 @@ external_redirect: /api/#get-all-timeboards
 ---
 
 ##### Signature
-`GET https://app.datadoghq.com/api/v1/dash`
+`GET https://api.datadoghq.com/api/v1/dash`
 ##### Example Request
 {{< code-snippets basename="api-dashboard-get-all" >}}
 ##### Example Response

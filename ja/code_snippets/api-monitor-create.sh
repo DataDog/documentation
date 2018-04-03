@@ -13,4 +13,4 @@ curl -X POST -H "Content-type: application/json" \
       	"no_data_timeframe": 20
       }
     }' \
-    "https://app.datadoghq.com/api/v1/monitor?api_key=${api_key}&application_key=${app_key}"
+    "https://api.datadoghq.com/api/v1/monitor?api_key=${api_key}&application_key=${app_key}"

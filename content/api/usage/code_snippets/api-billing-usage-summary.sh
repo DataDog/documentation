@@ -6,7 +6,7 @@ end_month=$(date +%Y-%m)
 include_org_details=true
 
 curl -G \
-    "https://app.datadoghq.com/api/v1/usage/summary" \
+    "https://api.datadoghq.com/api/v1/usage/summary" \
     -d "api_key=${api_key}" \
     -d "application_key=${app_key}" \
     -d "start_month=${start_month}" \

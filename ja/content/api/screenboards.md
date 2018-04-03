@@ -175,7 +175,7 @@ curl -X POST -H "Content-type: application/json" \
             }
         ]
     }' \
-"https://app.datadoghq.com/api/v1/screen?api_key=${api_key}&application_key=${app_key}"
+"https://api.datadoghq.com/api/v1/screen?api_key=${api_key}&application_key=${app_key}"
 {{< /highlight >}}
   </div>
 </div>
@@ -277,7 +277,7 @@ curl -X PUT -H "Content-type: application/json" \
             }
         ]
     }' \
-"https://app.datadoghq.com/api/v1/screen/${board_id}?api_key=${api_key}&application_key=${app_key}"
+"https://api.datadoghq.com/api/v1/screen/${board_id}?api_key=${api_key}&application_key=${app_key}"
 {{< /highlight >}}
   </div>
 </div>
@@ -333,7 +333,7 @@ app_key=87ce4a24b5553d2e482ea8a8500e71b8ad4554ff
 board_id=1234
 
 curl -X GET \
-"https://app.datadoghq.com/api/v1/screen/${board_id}?api_key=${api_key}&application_key=${app_key}"
+"https://api.datadoghq.com/api/v1/screen/${board_id}?api_key=${api_key}&application_key=${app_key}"
 {{< /highlight >}}
   </div>
 </div>
@@ -388,7 +388,7 @@ app_key=87ce4a24b5553d2e482ea8a8500e71b8ad4554ff
 board_id=1234
 
 curl -X DELETE \
-"https://app.datadoghq.com/api/v1/screen/${board_id}?api_key=${api_key}&application_key=${app_key}"
+"https://api.datadoghq.com/api/v1/screen/${board_id}?api_key=${api_key}&application_key=${app_key}"
 {{< /highlight >}}
   </div>
 </div>
@@ -444,7 +444,7 @@ app_key=87ce4a24b5553d2e482ea8a8500e71b8ad4554ff
 board_id=1234
 
 curl -X POST \
-"https://app.datadoghq.com/api/v1/screen/share/${board_id}?api_key=${api_key}&application_key=${app_key}"
+"https://api.datadoghq.com/api/v1/screen/share/${board_id}?api_key=${api_key}&application_key=${app_key}"
 {{< /highlight >}}
   </div>
 </div>

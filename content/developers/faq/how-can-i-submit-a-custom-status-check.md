@@ -28,7 +28,7 @@ curl  -X POST -H "Content-type: application/json" \
       \"message\": \"App1 is up and running\",
       \"tags\":[\"environment:production\", \"role:webserver\"]
 }" \ 
-'https://app.datadoghq.com/api/v1/check_run?api_key=<api_key>'
+'https://api.datadoghq.com/api/v1/check_run?api_key=<api_key>'
 ```
 
 ## Submitting a check with DogStatsD

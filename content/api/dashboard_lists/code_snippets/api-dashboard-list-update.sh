@@ -7,7 +7,7 @@ curl -X PUT -H "Content-type: application/json" \
 -d '{
         "name": "My Updated Dashboard List"
 }' \
-"https://app.datadoghq.com/api/v1/dashboard/lists/manual/${list_id}?api_key=${api_key}&application_key=${app_key}"
+"https://api.datadoghq.com/api/v1/dashboard/lists/manual/${list_id}?api_key=${api_key}&application_key=${app_key}"
 
 
 

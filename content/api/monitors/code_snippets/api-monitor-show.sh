@@ -10,9 +10,9 @@ monitor_id=$(curl -X POST -H "Content-type: application/json" \
       "name": "Bytes received on host0",
       "message": "We may need to add web hosts if this is consistently high."
   }' \
-    "https://app.datadoghq.com/api/v1/monitor?api_key=${api_key}&application_key=${app_key}" | jq '.id')
+    "https://api.datadoghq.com/api/v1/monitor?api_key=${api_key}&application_key=${app_key}" | jq '.id')
 
-curl -G "https://app.datadoghq.com/api/v1/monitor/${monitor_id}" \
+curl -G "https://api.datadoghq.com/api/v1/monitor/${monitor_id}" \
      -d "api_key=${api_key}" \
      -d "application_key=${app_key}" \
      -d "group_states=all"

@@ -6,7 +6,7 @@ external_redirect: /api/#get-all-users
 ---
 
 ##### Signature
-`GET https://app.datadoghq.com/api/v1/user`
+`GET https://api.datadoghq.com/api/v1/user`
 ##### Example Request
 {{< code-snippets basename="api-user-get-all" >}}
 ##### Example Response

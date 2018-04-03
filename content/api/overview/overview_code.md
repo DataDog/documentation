@@ -8,4 +8,4 @@ external_redirect: /api/#overview
 There are many client libraries that wrap the Datadog API. [Check them out](https://docs.datadoghq.com/developers/libraries/).
 
 ### SIGNATURE
-https://app.datadoghq.com/api/
+https://api.datadoghq.com/api/

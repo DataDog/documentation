@@ -14,7 +14,7 @@ Each webhook must be set up with a name (to be referenced in monitors) and a url
 * The **name field**: can be whatever you like, although it should be unique among all the other webhook name fields.
 
 * The **url field**: should be the url used when pinging the API. It looks like this:
-`https://app.datadoghq.com/api/v1/<API_ENDPOINT>?api_key=<YOUR_API_KEY>`
+`https://api.datadoghq.com/api/v1/<API_ENDPOINT>?api_key=<YOUR_API_KEY>`
 
 * The **custom payload field**: contains the JSON with all the options you want to include in the API call. Which options are appropriate depend on the API call you're making. You can sometimes use the monitor's $symbol content to fill in parts of the option values.
 
@@ -25,10 +25,10 @@ Imagine that you have a series of monitors that someone on your team would like 
 In that case, you would need two separate webhooks, one for "mymonitorgroup-alert-check" and the other for "mymonitorgroup-ok-check". Both would use the same API endpoint, so their respective "name and url" values would be as follows:
 
 * Name: mymonitorgroup-alert-check
-    Url: `https://app.datadoghq.com/api/v1/check_run?api_key=<MY_API_KEY>`
+    Url: `https://api.datadoghq.com/api/v1/check_run?api_key=<MY_API_KEY>`
 
 * Name: mymonitorgroup-ok-check
-    Url: `https://app.datadoghq.com/api/v1/check_run?api_key=<MY_API_KEY>`
+    Url: `https://api.datadoghq.com/api/v1/check_run?api_key=<MY_API_KEY>`
 
 The custom payload is where the name and tags of the check_run would be applied. For our "alert" webhook, something like the following might fit:
 
