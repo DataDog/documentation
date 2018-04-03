@@ -16,7 +16,7 @@ ddtype: check
 ---
 ## Aperçu
 
-Obtenez les métriques de votre système à propos du processeur, de ses I/O, de sa charge, de la mémoire, des processus, du swap et de la disponibilité. D'autres checks liées au système peuvent être trouvées ici:
+Obtenez les métriques de votre système à propos du processeur, de ses I/O, de sa charge, de la mémoire, du swap et de la disponibilité. D'autres checks liées au système peuvent être trouvées ici:
 
 * [Check dossier](/integrations/directory) - Capture des métriques à partir des fichiers dans des dossiers donnés.
 * [Check de disque](/integrations/disk) - Capturez des métriques sur vos disques
@@ -30,7 +30,7 @@ Aucune configuration n'est nécessaire pour le système.
 ## Données collectées
 ### Métriques
 
-{{< get-metrics-from-git "system" "system.cpu system.fs system.io system.load system.mem system.proc system.processes system.swap system.uptime" >}}
+{{< get-metrics-from-git "system" "system.cpu system.fs system.io system.load system.mem system.swap system.uptime" >}}
 
 
 ## Check de l'Agent: System Core

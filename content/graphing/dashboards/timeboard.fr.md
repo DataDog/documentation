@@ -54,10 +54,10 @@ Cette fonctionnalité peut être activée en suivant ces étapes simples:
 
 ## Sauvegarder mon Timeboard
 
-En utilisant notre [API](/api), il est possible d'écrire un script pour sauvegarder vos définitions de Timeboard. Consultez ci-dessous des projets exemples de la façon dont ces sauvegardes peuvent être réalisées:
+En utilisant notre [APIs](/api), il est possible d'écrire un script pour sauvegarder vos définitions de Timeboard en tant que code. Consultez les projets suivants comme exemples de la façon dont ces sauvegardes peuvent être accomplies:
 
 * https://github.com/brightcove/dog-watcher
 * https://github.com/Shopify/doggy
 * https://github.com/grosser/kennel
 
-Un grand merci à [Brightcove](https://www.brightcove.com/), [Shopify](https://www.shopify.com/), et [Zendesk](https://www.zendesk.com/) pour partager ces projets!
+Un grand merci à  [Brightcove](https://www.brightcove.com/), [Shopify](https://www.shopify.com/), et [Zendesk](https://www.zendesk.com/) pour partager ces projets!
