@@ -6,6 +6,7 @@ $labelcolors: (
 );
 
 .integration-labels {
+  display: inline-block;
   span {
     font-size:18px;
     line-height: 18px;
@@ -19,6 +20,19 @@ $labelcolors: (
       span {
         color: $color;
       }
+    }
+  }
+}
+
+.integration-os{
+  display: inline-block;
+  padding-top: 16px;
+  margin-left: 10px;
+  border-left: 1px solid gray;
+
+  @media screen and (max-width: 767px){
+    .supported-os-text{
+      display:none;
     }
   }
 }
