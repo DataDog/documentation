@@ -5,7 +5,7 @@ aliases:
 - /developers/faq/how-do-i-collect-metrics-from-heroku-with-datadog
 ---
 
-This buildpack installs the Datadog Agent in your Heroku Dyno to collect system metrics, custom application metrics and traces. To collect custom application metrics or traces, include the language appropriate [DogStatsD or Datadog APM library](http://docs.datadoghq.com/libraries/) in your application.
+This buildpack installs the Datadog Agent in your Heroku Dyno to collect system metrics, custom application metrics, and traces. To collect custom application metrics or traces, include the language appropriate [DogStatsD or Datadog APM library](http://docs.datadoghq.com/libraries/) in your application.
 
 ## Installation
 
@@ -31,7 +31,7 @@ git push heroku master
 
 Once complete, the Datadog Agent is started automatically when each Dyno starts.
 
-The Datadog agent provides a listening port on 8125 for statsd/dogstatsd metrics and events. Traces are collected on port 8126.
+The Datadog agent provides a listening port on 8125 for StatsD/DogStatsD metrics and events. Traces are collected on port 8126.
 
 ## Configuration
 
