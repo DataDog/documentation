@@ -44,8 +44,6 @@ pre {
   margin: 0 0 ($line-height-computed / 2);
   font-size: ($font-size-base - 1); // 14px to 13px
   line-height: $line-height-base;
-  word-break: break-all;
-  word-wrap: break-word;
   color: $pre-color;
   background-color: $pre-bg;
   border: 1px solid $pre-border-color;
