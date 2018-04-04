@@ -48,4 +48,4 @@ private: true
 [14]: /account_management/faq/how-do-i-configure-google-as-a-saml-idp
 [15]: /account_management/faq/how-do-i-setup-microsoft-active-directory-federation-services-as-a-saml-idp
 [16]: /account_management/faq/can-i-use-a-proxy-to-connect-my-servers-to-datadog
-[17]: /account_management/faq/how-is-datadog-retrieving-my-data-are-my-data-and-credentials-saf
+[17]: /account_management/faq/how-is-datadog-retrieving-my-data-are-my-data-and-credentials-safe
