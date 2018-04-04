@@ -7,5 +7,5 @@ external_redirect: /api/#get-user
 
 ## Récupérer un utilisateur
 ##### ARGUMENTS
-* **`id`** [*obligatoire*]:  
+* **`handle`** [*obligatoire*]:  
     Le handle de l'utilisateur.

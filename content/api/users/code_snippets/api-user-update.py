@@ -8,5 +8,5 @@ options = {
 initialize(**options)
 
 # Update user
-api.User.update('test@datadoghq.com', name='alt name',
+api.User.update(handle='test@datadoghq.com', name='alt name',
                 email='test+1@datadoghq.com')
