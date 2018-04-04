@@ -19,9 +19,10 @@ Available endpoints are:
 * To **create** an integration or **append** its configuration in Datadog:  
     **`POST /api/v1/integration/<source_type_name>`**
     
-* To **replace** an integration configuration: 
+* To **replace** an integration configuration:  
     **`PUT /api/v1/integration/<source_type_name>`**
-  *  CAUTION: Using `PUT` will remove/replace existing configurations.
+    
+     CAUTION: Using `PUT` will remove/replace existing configurations.
 
 * To read an integration configuration:  
     **`GET /api/v1/integration/<source_type_name>`**
