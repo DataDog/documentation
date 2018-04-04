@@ -99,40 +99,45 @@ languages:
           url: "agent/basic_agent_usage/fedora/"
           weight: 130
           parent: customnav_agentnav_basic_usage
+        - identifier: heroku
+          name: "Heroku"
+          url: "agent/basic_agent_usage/heroku/"
+          weight: 135
+          parent: customnav_agentnav_basic_usage
         - identifier: customnav_agentnav_kubernetes
           name: "Kubernetes"
           url: "agent/basic_agent_usage/kubernetes/"
-          weight: 135
+          weight: 140
           parent: customnav_agentnav_basic_usage
         - identifier: osx
           name: "Mac OS X"
           url: "agent/basic_agent_usage/osx/"
-          weight: 140
+          weight: 145
           parent: customnav_agentnav_basic_usage
         - identifier: redhat
           name: "Red Hat"
           url: "agent/basic_agent_usage/redhat/"
-          weight: 145
+          weight: 150
           parent: customnav_agentnav_basic_usage
         - identifier: suse
           name: "SUSE"
           url: "agent/basic_agent_usage/suse/"
-          weight: 150
+          weight: 155
           parent: customnav_agentnav_basic_usage
         - identifier: ubuntu
           name: "Ubuntu"
           url: "agent/basic_agent_usage/ubuntu/"
-          weight: 155
+          weight: 160
           parent: customnav_agentnav_basic_usage
         - identifier: windows
           name: "Windows"
           url: "agent/basic_agent_usage/windows/"
-          weight: 160
+          weight: 165
           parent: customnav_agentnav_basic_usage
         - identifier: source
           name: "From Source"
           url: "agent/basic_agent_usage/source/"
-          weight: 165
+          weight: 170
           parent: customnav_agentnav_basic_usage
 
 
