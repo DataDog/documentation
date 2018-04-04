@@ -24,7 +24,7 @@
 <div class="row integration-os">
     <div class="agent col-12">
         <p class="mb-3"><strong class="supported-os-text">Supported OS:</strong>
-            <a href="{{ .Site.BaseURL }}/agent/#supported-oss-versions">
+            <a href="{{ .Site.BaseURL }}agent/#supported-oss-versions">
                 {{ range .Params.supported_os }}
                     {{ if eq . "linux"}}<span>{{ partial "img.html" (dict "root" $dot "src" "os-linux.png" "class" "static" "alt" "Linux" "width" "28") }}</span>{{end}}
                     {{ if eq . "mac_os"}}<span class="mr-1">{{ partial "img.html" (dict "root" $dot "src" "os-macos.png" "class" "static" "alt" "Mac OS" "width" "28") }}</span>{{end}}
