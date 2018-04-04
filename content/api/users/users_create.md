@@ -8,7 +8,7 @@ external_redirect: /api/#create-user
 ## Create user
 ##### ARGUMENTS
 
-* **`id`** [*required*]:  
+* **`handle`** [*required*]:  
     The user handle, must be a valid email.
 * **`name`** [*optional*, *default*=**None**]:  
     The name of the user.

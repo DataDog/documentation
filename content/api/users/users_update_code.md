@@ -6,7 +6,7 @@ external_redirect: /api/#update-user
 ---
 
 ##### Signature
-`PUT https://api.datadoghq.com/api/v1/user/:handle`
+`PUT https://api.datadoghq.com/api/v1/user/:id`
 ##### Example Request
 {{< code-snippets basename="api-user-update" >}}
 ##### Example Response
