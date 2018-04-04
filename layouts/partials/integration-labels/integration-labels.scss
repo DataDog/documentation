@@ -6,13 +6,13 @@ $labelcolors: (
 );
 
 .integration-labels {
+  display: inline-block;
   span {
     font-size:18px;
     line-height: 18px;
     font-weight:600;
     display:inline;
     padding-left:7px;
-    vertical-align: middle;
   }
   /* assign each label its color from map above */
   @each $label, $color in $labelcolors {
@@ -21,5 +21,21 @@ $labelcolors: (
         color: $color;
       }
     }
+  }
+}
+
+.integration-os{
+  display: inline-block;
+  padding-top: 16px;
+  margin-left: 10px;
+  border-left: 1px solid gray;
+
+  @media screen and (max-width: 767px){
+    .supported-os-text{
+      display:none;
+    }
+  }
+  a:hover{
+    opacity: .7;
   }
 }
