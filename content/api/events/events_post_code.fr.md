@@ -6,7 +6,7 @@ external_redirect: /api/#post-an-event
 ---
 
 ##### Signature
-`POST https://api.datadoghq.com/api/v1/events`
+`POST https://app.datadoghq.com/api/v1/events`
 ##### Exemple de requête
 {{< code-snippets basename="api-events-post" >}}
 ##### Exemple de réponse

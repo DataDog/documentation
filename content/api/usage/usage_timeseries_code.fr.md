@@ -6,7 +6,7 @@ external_redirect: /api/#get-hourly-usage-for-custom-metrics
 ---
 
 ##### Signature
-`GET https://api.datadoghq.com/api/v1/usage/timeseries`
+`GET https://app.datadoghq.com/api/v1/usage/timeseries`
 ##### Exemple de requête
 {{< code-snippets basename="api-billing-usage-timeseries" >}}
 ##### Exemple de réponse

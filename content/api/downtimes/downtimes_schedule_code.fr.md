@@ -6,7 +6,7 @@ external_redirect: /api/#schedule-monitor-downtime
 ---
 
 ##### Signature
-`POST https://api.datadoghq.com/api/v1/downtime`
+`POST https://app.datadoghq.com/api/v1/downtime`
 ##### Exemple de requête
 {{< code-snippets basename="api-monitor-schedule-downtime" >}}
 ##### Exemple de réponse

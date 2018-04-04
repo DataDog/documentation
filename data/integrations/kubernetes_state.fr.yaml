@@ -471,7 +471,9 @@ kubernetes_state:
     per_unit_name: ''
     short_name: k8s_state.hpa.desired_replicas
     unit_name: ''
-  - description: Whether the pod is ready to serve requests
+  - description: >-
+      In association with the `condition` tag, whether the pod is ready to serve
+      requests, e.g. `condition:true` keeps the pods that are in a ready state
     integration: kubernetes
     interval: ''
     metric_name: kubernetes_state.pod.ready

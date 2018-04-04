@@ -6,7 +6,7 @@ external_redirect: /api/#post-a-check-run
 ---
 
 ##### Signature
-`POST https://api.datadoghq.com/api/v1/check_run`
+`POST https://app.datadoghq.com/api/v1/check_run`
 ##### Exemple de requête
 {{< code-snippets basename="api-checks-post" >}}
 
