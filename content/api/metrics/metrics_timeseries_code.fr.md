@@ -6,6 +6,6 @@ external_redirect: /api/#post-time-series-points
 ---
 
 ##### Signature
-`POST https://api.datadoghq.com/api/v1/series`
+`POST https://app.datadoghq.com/api/v1/series`
 ##### Exemple de requête
 {{< code-snippets basename="api-metrics-post" >}}

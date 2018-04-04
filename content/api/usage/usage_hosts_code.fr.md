@@ -6,7 +6,7 @@ external_redirect: /api/#get-hourly-usage-for-hosts-and-containers
 ---
 
 ##### Signature
-`GET https://api.datadoghq.com/api/v1/usage/hosts`
+`GET https://app.datadoghq.com/api/v1/usage/hosts`
 ##### Exemple de requête
 {{< code-snippets basename="api-billing-usage-hosts" >}}
 ##### Exemple de réponse

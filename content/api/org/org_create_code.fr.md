@@ -6,7 +6,7 @@ external_redirect: /api/#create-child-organization
 ---
 
 ##### Signature
-`POST https://api.datadoghq.com/api/v1/org`
+`POST https://app.datadoghq.com/api/v1/org`
 ##### Exemple de requête
 {{< code-snippets basename="api-org-create" >}}
 ##### Exemple de réponse

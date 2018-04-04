@@ -6,7 +6,7 @@ external_redirect: /api/#slack
 ---
 
 ##### Signature
-`https://api.datadoghq.com/api/v1/integration/slack`
+`https://app.datadoghq.com/api/v1/integration/slack`
 
 
 ##### Exemple de requête
