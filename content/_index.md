@@ -1,43 +1,58 @@
+
 ---
-title: Datadog Docs
+title: Team
 kind: documentation
-aliases:
-  - /basic_agent_usage/
-  - /guides/
-  - /faq/
-disable_toc: true
+further_reading:
+- link: "account_management/saml"
+  tag: "Documentation"
+  text: Configure SAML for your Datadog account
+- link: "account_management/multi_organization"
+  tag: "Documentation"
+  text: Configuring Teams & Organizations with Multiple Accounts
 ---
-# Welcome to Datadog Docs!
 
-If you're new here, read below for the 10,000 foot view of Datadog.
+## Add new members
 
-{{< partial name="tile-nav/tile-nav.html" >}}
+1. To add members to a team, start by visiting the [Team Page][1].
+2. Enter the email address of the user you wish to invite to your Datadog account. Click **Invite**
+  {{< img src="account_management/team/guides-multacct-addtoteam.png" alt="Add Member To Team" responsive="true" popup="true" style="width:50%;">}}
 
-Your application stack is teeming with unused metadata that's trying to tell a story: things aren't humming along as well as they should be.
+The new user will receive an email with a link to login.
 
-Exception thrown; Database queries slowing; Cache misses rising; Upstream service flapping; Error log growing. Each of these chatters a part of the story, but they're hard to make sense of—or act on meaningfully—when taken separately from the others.
+## Datadog user roles
 
-Datadog lets you collect all these metrics, events, and service states in one place. Then, visualize and correlate the data with beautiful graphing and set flexible alerting conditions on it—all without running any storage or monitoring infrastructure yourself.
+Datadog provides 3 user roles:
 
-## Collect Everything
+* **Administrators** have access to billing information, the ability to revoke API keys, can manage users, and can configure [read-only dashboards][2]. They can also promote standard users to Administrators.
 
-Collect a wealth of already-available data without writing any code. [Install the Datadog Agent](/agent) everywhere—every server, instance, VM, node, [container-running host](https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent)—and then enable and configure any of our 200+ out-of-the-box [integrations](/integrations) to start the metrics flowing to Datadog's backend.
+* **Standard users** have access to view and modify all monitoring features that Datadog offers such as [dashboards](/graphing/dashboards/), [monitors][3], [events][4], and [notebooks][5].
 
-Submit custom application metrics by writing a little code. Instrument your own gauges, counters, timers, and histograms with [DogStatsD](/developers/dogstatsd), or use [APM](/tracing) to trace the execution time of any code path to see how it impacts overall request-response times.
-The [client libraries](/developers/libraries) for these send your [custom metrics](/getting_started/custom_metrics/) and trace data to the Datadog Agent, which ships them off to Datadog.
+* **Read only users** are created by administrators and do not have access to edit within Datadog. This comes in handy when you'd like to share specific read-only views with a client or where a member of one business unit needs to share a [dashboard][6] with someone outside their unit.
 
-Some of your stack may be SaaS, not servers. Datadog can [poll many of these services](/integrations), and the integrations for them are the easiest of all to install; no Agent required.
+## Disable existing members
 
-## Visualize It
+**NOTE:** You must be an administrator of the team to disable members. You cannot permanently remove users as they might own events, dashboards, etc. which are not supposed to be removed. Disabled team members will disappear from the administrator’s team page UI automatically after one month.
 
-As soon as you're capturing all this data, see it immediately in the Datadog web application. Use the Metrics Explorer to search for a given metric and watch it ebb and flow. View and comment on events (say, an application deploy) as they pour into your [Event Stream](/graphing/event_stream/). Filter for some group of hosts in the [Infrastructure Map](/graphing/infrastructure). Get an overall picture of how some service (say, MySQL) is running via its default dashboard.
+1. Go to the [Team Page][1].
+2. Hover over the avatar for the user you wish to disable. Choose **Disable** from the menu.
 
-Before long, you will create custom [Screenboards](/graphing/dashboards/screenboard), where you will combine all the graphs, numbers, events, and service states you care about the most. You can customize the graphs in whatever way helps you suss out problems—skewing their metric values using other metrics, applying [anomaly](/monitors/monitor_types/anomaly), [outlier](/monitors/monitor_types/outlier) or [forecasts](/monitors/monitor_types/forecasts) detection, overlaying events onto them, and more.
+    {{< img src="account_management/team/guides-multacct-disable.png" alt="Disable Member" responsive="true" popup="true" style="width:50%;" >}}
 
-## Monitor It
+## Promote existing members to administrator
 
-Once your graphs have exposed problem areas, set some alerting conditions on your metrics using [Monitors](/monitors). You will [get emails](/monitors/notifications) when the alerts fire, but set up the [Slack](/integrations/slack) or [HipChat](/integrations/hipchat)  integration to get a dedicated notifications.
+**NOTE:** Only team Administrator can promote members.
 
-When you're well aware of an ongoing problem, [silence its alerts](/monitors/downtimes). When you're about to bring a service down for maintenance, [schedule a downtime](/monitors/downtimes/) so you won't get spammed with alerts. When you can't define some alert-worthy condition in terms of a single host, event, metric, or service, create a [composite monitor](/monitors/monitor_types/composite/).
+1. Go to the [Team Page][1].
+2. Hover over the avatar for the user you wish to promote. Choose **Make Administrator** from the menu.
 
-{{< partial name="support/support.html" >}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/account/team
+[2]: /graphing/dashboards/
+[3]: /monitors/
+[4]: /graphing/event_stream
+[5]: /graphing/notebooks
+[6]: /graphing/dashboards
