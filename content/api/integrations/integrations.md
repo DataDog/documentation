@@ -16,13 +16,14 @@ Configure your Datadog integrations via Datadog API, current configurable integr
 
 Available endpoints are:
 
-* To create an integration or update its configuration in Datadog:  
+* To **create** an integration or **append** its configuration in Datadog:  
     **`POST /api/v1/integration/<source_type_name>`**
     
-* To override an integration configuration:  
+* To **replace** an integration configuration: 
     **`PUT /api/v1/integration/<source_type_name>`**
+  *  CAUTION: Using `PUT` will remove/replace existing configurations.
 
-* To get an integration status:  
+* To read an integration configuration:  
     **`GET /api/v1/integration/<source_type_name>`**
 
 * To delete an integration from Datadog:  
