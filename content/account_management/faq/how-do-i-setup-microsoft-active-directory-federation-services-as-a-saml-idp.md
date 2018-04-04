@@ -1,3 +1,4 @@
+
 ---
 title: How do I setup Microsoft Active Directory Federation Services as a SAML IdP?
 kind: faq
@@ -14,7 +15,7 @@ The Datadog SAML integration for SSO provides an easy pathway for linking an org
 
 This article is meant to be used as an add-on to the main guide on this integration which is available by clicking the link below and focuses on some extra steps that may be required when connecting Datadog to ADFS.
 
-[Single Sign On With SAML (main doc)](/account_management/saml)
+[Single Sign On With SAML (main doc)][1]
 
 **The following steps should be followed when configure this with ADFS.**
 
@@ -28,7 +29,7 @@ Click the button on the right for Add a Relying Party Trust.
 This opens a wizard for the trust with a welcome screen describing the feature. Review the description and click Start to begin.
 {{< img src="account_management/faq/KWe4h6W.png" alt="KWe4h6W" responsive="true" popup="true">}}
 
-Import the [Datadog SAML Metadata file](https://app.datadoghq.com/account/saml/metadata.xml).
+Import the [Datadog SAML Metadata file][2].
 
 The file requires a login to access it, making it easiest to download then import by file instead of directly via the URL as shown in the import options below. (As a warning: when downloading the file, if you open and/or rename the file, that may end up changing the file type which can cause xml parsing issues at the next step.)
 {{< img src="account_management/faq/UAjeUVL.png" alt="UAjeUVL" responsive="true" popup="true">}}
@@ -86,6 +87,10 @@ Keep in mind that users still need to be invited and activated before they’re 
 While in most setups the user's user@domain is his  Microsoft login does not enforce this. You can confirm the email address used within the user record as shown below.
 {{< img src="account_management/faq/0R81SaK.png" alt="0R81SaK" responsive="true" popup="true">}}
 
-For any questions or help with this, reach out to us using any one of our [many help options](/help)!
+For any questions or help with this, reach out to us using any one of our [many help options][3]!
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /account_management/saml
+[2]: https://app.datadoghq.com/account/saml/metadata.xml
+[3]: /help
