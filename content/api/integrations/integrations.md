@@ -16,7 +16,7 @@ Configure your Datadog integrations via Datadog API, current configurable integr
 
 Available endpoints are:
 
-* To create an integration in Datadog:  
+* To create an integration or update its configuration in Datadog:  
     **`POST /api/v1/integration/<source_type_name>`**
     
 * To override an integration configuration:  
