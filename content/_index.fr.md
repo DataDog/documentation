@@ -33,7 +33,7 @@ Certaines parties de votre stack peuvent être des outils SaaS et non des serveu
 
 Dès que vous capturez toutes ces données, consultez-les immédiatement dans l'application Web Datadog. Utilisez le Metrics Explorer pour trouver une métrique donnée et l'observer en temps réel. Visualisez et commentez des événements (par exemple, le déploiement d'une application) lorsqu'ils se déversent dans votre [flux d'événements][8]. Filtrez pour un groupe d'hosts dans [l'Infrastructure Map][9]. Obtenez une image globale de la façon dont certains services (par exemple, MySQL) fonctionnent via son dashboard par défaut.
 
-Créez des [Screenboards][10] personnalisés, où vous combinerez tous les graphiques, nombres, événements et états de services qui vous intéressent le plus. Personnalisez les graphiques selon vos besoins afin de résoudre au mieux vos problèmes: en modifiant leurs valeurs de mesure à l'aide d'autres métriques, en appliquant une détection [d'anomalie](monitors/monitor_types/anomaly), [de singularité][11] ou de [prévisions][12], superposant de des événements sur eux, et plus encore.
+Créez des [Screenboards][10] personnalisés, où vous combinerez tous les graphiques, nombres, événements et états de services qui vous intéressent le plus. Personnalisez les graphiques selon vos besoins afin de résoudre au mieux vos problèmes: en modifiant leurs valeurs de mesure à l'aide d'autres métriques, en appliquant une détection [d'anomalie][20], [de singularité][11] ou de [prévisions][12], superposant de des événements sur eux, et plus encore.
 
 ## Monitorer le
 
@@ -62,3 +62,4 @@ Lorsque vous êtes au courant d'un problème en cours [mettez en sourdine vos al
 [17]: /monitors/downtimes
 [18]: /monitors/downtimes/
 [19]: /monitors/monitor_types/composite/
+[20]: /monitors/monitor_types/anomaly/
