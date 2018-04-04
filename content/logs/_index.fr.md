@@ -261,7 +261,7 @@ Toutefois, si un fichier de log au format JSON inclut l'un des attributs suivant
 
 Vous pouvez également spécifier d'autres attributs à utiliser comme source de la date d'un log en définissant un processor [log date remapper](/logs/processing/#log-date-remapper)
 
-**Note**: Datadog rejette un log si sa date officielle est antérieure à 18 heures.
+**Note**: Datadog rejette un log si sa date officielle est antérieure à 6 heures.
 
 <div class="alert alert-info">
 Les formats de date reconnus sont: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (le format milliseconds EPOCH)</a>  and <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
