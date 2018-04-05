@@ -188,6 +188,10 @@ Don't lose time building the same views everyday. Saved searches contain your se
 
 {{< img src="logs/explore/saved_search.png" alt="Saved Search" responsive="true" popup="true" style="width:80%;">}}
 
+To delete a saved search, click on the bin icon:
+
+{{< img src="logs/explore/delete_saved_search.png" alt="Delete Saved Search" responsive="true" popup="true" style="width:80%;">}}
+
 ### Escaping of special characters
 The following attributes are considered as special: `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/`, `\` and require escaping.
 For instance, to search logs that contain `user=12345` the following search must be entered:
