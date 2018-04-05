@@ -67,7 +67,7 @@ Le `[OK]` dans le retour de l'Agent implique que la vérification a été config
 |:--------|:-----|:--------|
 |Linux|`sudo service datadog-agent info`|`sudo datadog-agent status`|
 |Docker|`sudo docker exec -it dd-agent /etc/init.d/datadog-agent info`|`sudo docker exec -it datadog-agent agent status`|
-|Docker (Alpine)|`docker exec -it dd-agent /opt/datadog-agent/bin/agent`|`n/a`|
+|Docker (Alpine)|`docker exec -it dd-agent /opt/datadog-agent/bin/agent info`|`n/a`|
 |MacOS x|`datadog-agent info`               | `datadog-agent status` or [web GUI](/agent/#using-the-gui)                    |
 |Source|`sudo ~/.datadog-agent/bin/info`|`sudo datadog-agent status`|
 |Windows|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows/#status-and-information)|[Consult our dedicated windows doc](/agent/basic_agent_usage/windows/#status-and-information)|
