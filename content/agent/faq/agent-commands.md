@@ -40,7 +40,7 @@ aliases:
 |Platform|Agent v5 |Agent v6|
 |:--------|:-----|:--------|
 |Linux|`sudo service datadog-agent status`|`sudo datadog-agent status`|
-|Docker (Debian)|`sudo docker exec -it <container_name> /etc/init.d/datadog-agent status`|`sudo docker exec -it agent s6-svstat /var/run/s6/services/agent/`|
+|Docker (Debian)|`sudo docker exec -it <container_name> /etc/init.d/datadog-agent status`|`sudo docker exec -it <container_name> s6-svstat /var/run/s6/services/agent/`|
 |Docker (Alpine)|`sudo docker exec -it <container_name> supervisorctl -c /opt/datadog-agent/agent/supervisor.conf status`|`n/a`|
 |MacOS x|`datadog-agent status`             | `launchctl list com.datadoghq.agent` or systray app|
 |Source|`sudo ~/.datadog-agent/bin/agent status`|`sudo service datadog-agent status`|
