@@ -188,7 +188,7 @@ Don't lose time building the same views everyday. Saved searches contain your se
 
 {{< img src="logs/explore/saved_search.png" alt="Saved Search" responsive="true" popup="true" style="width:80%;">}}
 
-To delete a saved search, click on the bin icon:
+To delete a saved search, click on the bin icon under the log search drop-down:
 
 {{< img src="logs/explore/delete_saved_search.png" alt="Delete Saved Search" responsive="true" popup="true" style="width:80%;">}}
 
