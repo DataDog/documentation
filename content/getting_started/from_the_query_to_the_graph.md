@@ -22,7 +22,7 @@ At each step we comment on the effect of each parameter of the query.
 
 The metric `system.disk.total` (collected by default by the [datadog-agent](/agent)) is seen from different sources.  
 
-First because this metric reported by different hosts, and also because each datadog-agent collects this metric device per device. It adds to metric `system.disk.total` the tag `device:tmpfs` when sending data associated to the disk with the same name, etc.
+First because this metric is reported by different hosts, and also because each datadog-agent collects this metric device per device. It adds to metric `system.disk.total` the tag `device:tmpfs` when sending data associated to the disk with the same name, etc.
 
 Thus this metric is seen with different {host, device} tag combinations.
 
@@ -37,7 +37,7 @@ In this example we consider `host:moby` as having 5 devices. Thus Datadog is sto
 
 Let’s now go over the successive steps followed by our backend for the query presented above.
 
-## Find which timeseries are needed for the query
+## Fetch timeseries are needed for the query
 
 In this query we only asked for data associated to `host:moby`. So the first step for our backend is to scan all sources (in this case all {host, device} combination with which metric system.disk.total is submitted) and only retain those corresponding to the scope of the query.
 
@@ -51,8 +51,8 @@ The idea is then to aggregate data from these sources together to give you a met
 
 [More information about timeseries and tag cardinality](/getting_started/custom_metrics)
 
-Parameter involved: scope
-You can use more than one tag, e.g. {host:moby, device:udev} if you want to data responding to both tags.
+Parameter involved: scope  
+You can use more than one tag, e.g. {host:moby, device:udev} if you want to fetch data responding to both tags.
 
 ## Proceed to time-aggregation
 
@@ -135,7 +135,7 @@ The logic is the same:
 
 **Note**: `rollup` or `as_count` modifiers have to be placed after the by {`device`} mention.
 
-**Note2**: You can use more than one group, for instance `system.disk.in_use{*} by {host,device}`
+**Note2**: You can use multiple tags, for instance `system.disk.in_use{*} by {host,device}`
 
 #### Arithmetic
 

@@ -46,11 +46,11 @@ Text in a notebook is formatted with Markdown, which means notebooks can include
 
 ### Manipulating cells
 
-When an existing notebook is opened, its cells are in a closed state. To open a cell for editing, click on it or navigate to it with the arrow keys and press Enter . To close a cell, click outside it or press `⌘+ Enter`. Only one cell may be open at any time.
+When an existing notebook is opened, its cells are in a closed state. To open a cell for editing, click on it or navigate to it with the arrow keys and press Enter . To close a cell, click outside it or press  `⌘+ Enter`. Only one cell may be open at any time.
 
 {{< img src="graphing/notebooks/states.png" alt="states" responsive="true" popup="true">}}
 
-To insert, clone or delete cells, click the icon that appears to the left of the cell number — or use a keyboard shortcut. A list of all keyboard shortcuts is available by clicking the button in the notebook header.
+To insert, clone or delete cells, click the gear icon that appears to the left of the cell number — or use a keyboard shortcut. A list of all keyboard shortcuts is available by clicking the keyboard button in the notebook header.
 Cells also may be re-ordered by using keyboard shortcuts.
 
 ### Changing time frames
