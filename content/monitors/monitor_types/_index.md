@@ -13,8 +13,8 @@ Here is a quick overview of the different terms used:
 - **Check**: Emits one or more statuses.
 - **Monitor**: Sends notifications based on a sequence of check statuses, metric
   threshold or other alerting conditions.
-- **Monitor type**: [host](/monitors/monitor_types/host)-, [metric](/monitors/monitor_types/metric)-, [integration](/monitors/monitor_types/integration)-, [process](/monitors/monitor_types/process)-, [outlier](/monitors/monitor_types/outlier)-, [anomaly](/monitors/monitor_types/anomaly)-, [apm](/monitors/monitor_types/apm)-, [composite](/monitors/monitor_types/composite)-, [network](/monitors/monitor_types/network)-, [event](/monitors/monitor_types/event)-based, and [custom](/monitors/monitor_types/custom_check). See side navigation to drill into a specific type.
-- **Tags**: Configurable labels that can be applied to each metric and host. See the [Tagging](/getting_started/tagging) page for more details.
+- **Monitor type**: [host][1]-, [metric][2]-, [integration][3]-, [process][4]-, [outlier][5]-, [anomaly][6]-, [apm][7]-, [composite][8]-, [network][9]-, [event][10]-based, and [custom][11]. See side navigation to drill into a specific type.
+- **Tags**: Configurable labels that can be applied to each metric and host. See the [Tagging][12] page for more details.
 
 ## Create a monitor
 ### Choose what to monitor
@@ -22,9 +22,9 @@ Here is a quick overview of the different terms used:
 1. Choose the detection method
     {{< img src="monitors/index/alert_type.png" alt="alert type" responsive="true" popup="true" style="width:60%;">}}
 
-    A **[Threshold Alert](/monitors/monitor_types/metric)** compares the value in the selected timeframe against a given threshold. There are additional options available in the alerting conditions section. This is the standard alert case where you know what sort values are unexpected.
+    A **[Threshold Alert][2]** compares the value in the selected timeframe against a given threshold. There are additional options available in the alerting conditions section. This is the standard alert case where you know what sort values are unexpected.
 
-    A **[Change Alert](/monitors/monitor_types/metric)** compares the absolute or percentage change in
+    A **[Change Alert][2]** compares the absolute or percentage change in
     value between now and some time ago against a given threshold.
     The compared data points are nots single points but are computed using
     the parameters in the *alert conditions* section.  
@@ -32,16 +32,16 @@ Here is a quick overview of the different terms used:
     **Note:** the calculated value is not the absolute value - meaning it is
     negative for a downward change.
 
-    **[Anomaly Detection](/monitors/monitor_types/anomaly)** is an algorithmic feature that allows you to identify when a metric is behaving differently than it has in the past, taking into account trends, seasonal day-of-week and time-of-day patterns. It is well- suited for metrics with strong trends and recurring patterns that are hard or impossible to monitor with threshold-based alerting.
+    **[Anomaly Detection][6]** is an algorithmic feature that allows you to identify when a metric is behaving differently than it has in the past, taking into account trends, seasonal day-of-week and time-of-day patterns. It is well- suited for metrics with strong trends and recurring patterns that are hard or impossible to monitor with threshold-based alerting.
 
-    **[Outlier Detection](/monitors/monitor_types/outlier)** is an algorithmic feature that allows you to detect when some members of a group are behaving strangely compared to the others.  
+    **[Outlier Detection][5]** is an algorithmic feature that allows you to detect when some members of a group are behaving strangely compared to the others.  
     For example, you could detect that one web server in a pool is processing an unusual number of requests, and hence should be a target for replacement. Or, you could get an early warning that significantly more 500s are happening in one AWS Availability Zone (AZ) than the others, which might indicate an issue arising in that AZ.
 
 2. Select the metric and scope you want to monitor.
   {{< img src="monitors/index/metric_scope.png" alt="metric scope" responsive="true" popup="true" style="width:80%;">}}
 
     You can create a monitor on any metrics that you are currently sending to
-    Datadog. The standard [scoping rules](/graphing/#scope) apply here.
+    Datadog. The standard [scoping rules][13] apply here.
 
 3. Select the alert grouping.
   {{< img src="monitors/index/alert_grouping.png" alt="alert grouping" responsive="true" popup="true" style="width:80%;">}}
@@ -72,16 +72,16 @@ Here is a quick overview of the different terms used:
       Let's look at the details of each option:
 
       * **on average**: The series is averaged to produce a single
-        value that is checked against the threshold. It adds the `avg()` [functions](/graphing/miscellaneous/functions) at the beggining of your monitor query. 
+        value that is checked against the threshold. It adds the `avg()` [functions][14] at the beggining of your monitor query. 
 
       * **at least once**: If any single value in the generated series crosses
-        the threshold then an alert is triggered. It adds the `max()` [functions](/graphing/miscellaneous/functions) at the beggining of your monitor query.
+        the threshold then an alert is triggered. It adds the `max()` [functions][14] at the beggining of your monitor query.
 
       * **at all times**: If every point in the generated series is outside the
-        threshold then an alert is triggered. It adds the `min()` [functions](/graphing/miscellaneous/functions) at the beggining of your monitor query.
+        threshold then an alert is triggered. It adds the `min()` [functions][14] at the beggining of your monitor query.
 
       * **in total**: If the summation of every point in the series is outside
-        the threshold then an alert is triggered. It adds the `sum()` [functions](/graphing/miscellaneous/functions) at the beggining of your monitor query.
+        the threshold then an alert is triggered. It adds the `sum()` [functions][14] at the beggining of your monitor query.
 
       Note the **on average** and **at all times** aggregations *require* a full window of data in the final series. This does *not* mean that each series must be full but that there shouldn't be a gap of more than 1 minute across all aggregated series. In other words, we recommend using **at least once** or **in total** for metrics with > 1 minute interval.
 
@@ -91,9 +91,9 @@ Here is a quick overview of the different terms used:
       - You can compare the change of the value during a given timeframe by selecting the period you want to compare against. This can range from 5 minutes to up to 2 days.
       - Like the **threshold alert**, select the *time aggregation* and a *time window* on which the change is calculated.
 
-    - For details on how to configure Anomaly Detection, see the [Anomaly Monitor](/monitors/monitor_types/anomaly)
+    - For details on how to configure Anomaly Detection, see the [Anomaly Monitor][6]
 
-    - For details on how to configure Outlier Detection, see the [Outlier Monitor](/monitors/monitor_types/outlier)
+    - For details on how to configure Outlier Detection, see the [Outlier Monitor][5]
 
 5. Select your **evaluation_delay** Time (in seconds) to delay evaluation, as a non-negative integer. For example, if the value is set to 300 (5min), the timeframe is set to last_5m and the time is 7:00, the monitor evaluates data from 6:50 to 6:55. This is useful for AWS CloudWatch and other backfilled metrics to ensure the monitor always has data during evaluation.
 
@@ -122,7 +122,7 @@ Here is a quick overview of the different terms used:
    what is going on.
 
 2. Enter a **message** for the monitor. This field allows standard
-   [markdown formatting](http://daringfireball.net/projects/markdown/syntax)
+   [markdown formatting][15]
    as well as Datadog's @-notification syntax. Note: you can notify any
    non-Datadog users via email by adding `@their-email` to the
    message.
@@ -131,6 +131,23 @@ Here is a quick overview of the different terms used:
 4. Remind your team that a problem is not solved until the monitor is marked as
    resolved. If enabled, you can configure an escalation message to be sent anytime the monitor renotifies. The original message is included as well.
 
-[Learn more about notifications settings](/monitors/notifications).  
+[Learn more about notifications settings][16].  
 
 ***Note:*** *To avoid notification storms we now group notifications with the same monitor ID and alert type in 20 second buckets. The first two notifications in the group within a 20 second bucket is sent as normal. All other notifications within that 20 seconds are sent as a single message listing all of them after the first two.*
+
+[1]: /monitors/monitor_types/host
+[2]: /monitors/monitor_types/metric
+[3]: /monitors/monitor_types/integration
+[4]: /monitors/monitor_types/process
+[5]: /monitors/monitor_types/outlier
+[6]: /monitors/monitor_types/anomaly
+[7]: /monitors/monitor_types/apm
+[8]: /monitors/monitor_types/composite
+[9]: /monitors/monitor_types/network
+[10]: /monitors/monitor_types/event
+[11]: /monitors/monitor_types/custom_check
+[12]: /getting_started/tagging
+[13]: /graphing/#scope
+[14]: /graphing/miscellaneous/functions
+[15]: http://daringfireball.net/projects/markdown/syntax
+[16]: /monitors/notifications

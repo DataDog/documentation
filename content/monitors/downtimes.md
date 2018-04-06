@@ -32,7 +32,7 @@ This may seem unintuitive, but it is the expected behavior today, and it has bee
 
 ## Manage Downtime
 
-Navigate to the [Manage Downtime](https://app.datadog.com/monitors#/downtime) page by highlighting the "Monitors" tab in the main menu and selecting the "Manage Downtime" link. You may also navigate to the "Manage Downtime" page from other Monitor related pages by clicking the link at the top of the page.
+Navigate to the [Manage Downtime][1] page by highlighting the "Monitors" tab in the main menu and selecting the "Manage Downtime" link. You may also navigate to the "Manage Downtime" page from other Monitor related pages by clicking the link at the top of the page.
 
 {{< img src="monitors/downtimes/downtime-nav.png" alt="downtime-nav" responsive="true" popup="true" >}}
 
@@ -47,7 +47,7 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
 1. Choose what to silence.
   {{< img src="monitors/downtimes/downtime-silence.png" alt="downtime-silence" responsive="true" popup="true" style="width:80%;">}}
   You can select a specific monitor to silence, or leave this field empty to silence all monitors. You can also select a scope to constrain your downtime to a specific host, device or arbitrary tag.
-  Refer to the [scope section](/graphing/miscellaneous/graphingjson/#scope) of the Graphing Primer using JSON for further information about scope.
+  Refer to the [scope section][2] of the Graphing Primer using JSON for further information about scope.
   If you choose to silence all monitors constrained by a scope, clicking the "Preview affected monitors" shows which monitors are currently affected. Any monitors within your scope that are created or edited after the downtime is schedule is also silenced.
   Note that if a multi alert is included, it is only silenced for systems covered by the scope. For example, if a downtime scope is set for `host:X` and a multi alert is triggered on both `host:X` and `host:Y`, Datadog generates a monitor notification for `host:Y`, but not `host:X`.
 
@@ -57,8 +57,14 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
 
 3. Add an optional message to notify your team
   {{< img src="monitors/downtimes/downtime-notify.png" alt="downtime-notify" responsive="true" popup="true" style="width:80%;">}}
-  Enter a message to notify your team about this downtime. The message field allows standard [markdown formatting](http://daringfireball.net/projects/markdown/syntax) as well as Datadog's @-notification syntax. The "Notify your team" field allows you to specify team members or send the message to a service [integration](https://app.datadoghq.com/account/settings#integrations).
+  Enter a message to notify your team about this downtime. The message field allows standard [markdown formatting][3] as well as Datadog's @-notification syntax. The "Notify your team" field allows you to specify team members or send the message to a service [integration][4].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: https://app.datadog.com/monitors#/downtime
+[2]: /graphing/miscellaneous/graphingjson/#scope
+[3]: http://daringfireball.net/projects/markdown/syntax
+[4]: https://app.datadoghq.com/account/settings#integrations

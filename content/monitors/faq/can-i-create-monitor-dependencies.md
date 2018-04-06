@@ -13,18 +13,18 @@ further_reading:
   text: Schedule a downtime to mute a monitor
 ---
 
-While Datadog does fully support [composite monitors](/monitors/monitor_types/composite), there is not currently an official way to create alerting trees.
+While Datadog does fully support [composite monitors][1], there is not currently an official way to create alerting trees.
 
 Some Datadog users have combined webhook notifications with downtime scoping via the Datadog API to achieve a similar result.
 
 At a high level, the setup for this is as follows:
 
 * Alert A triggers and has an `@webhook-notification`.
-* Notification reaches out to the [Datadog downtime API](/api/#downtimes) by `$scope` to mute any other alerts.
+* Notification reaches out to the [Datadog downtime API][2] by `$scope` to mute any other alerts.
 * When Alert A resolves, use a different @webhook-notification to remove the downtimes from the same $scope.
-It should be noted that this can impact previously scheduled downtimes if you have an active downtime overlapping with the defined [$scope](/api/#cancel-downtime-by-scope).
+It should be noted that this can impact previously scheduled downtimes if you have an active downtime overlapping with the defined [$scope][3].
 
-First, [create the webhooks](https://app.datadoghq.com/account/settings#integrations/webhooks):
+First, [create the webhooks][4]:
 {{< img src="monitors/faq/mute_demo_webhook.png" alt="mute_demo_webhook" responsive="true" popup="true" >}}
 
 Full text for API endpoints (2nd input box for each in the left column):
@@ -61,3 +61,9 @@ That's alot of missing data - check first to see if there is an AWS outage?
 ```
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: /monitors/monitor_types/composite
+[2]: /api/#downtimes
+[3]: /api/#cancel-downtime-by-scope
+[4]: https://app.datadoghq.com/account/settings#integrations/webhooks

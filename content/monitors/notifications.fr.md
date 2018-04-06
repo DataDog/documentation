@@ -18,7 +18,7 @@ further_reading:
 
 ## Aperçu
 
-Les notifications sont un composant clé de tout [monitor](/monitors). Vous voulez vous assurer que les bonnes personnes sont averties afin que le problème puisse être résolu le plus rapidement possible.
+Les notifications sont un composant clé de tout [monitor][1]. Vous voulez vous assurer que les bonnes personnes sont averties afin que le problème puisse être résolu le plus rapidement possible.
 
 {{< img src="monitors/notifications/notification.png" alt="notification" responsive="true" popup="true" >}}
 
@@ -26,7 +26,7 @@ Les notifications sont un composant clé de tout [monitor](/monitors). Vous voul
    explication du monitor afin qu'un membre de l'équipe peut rapidement comprendre
    ce qu'il se passe.
 
-2. Entrez un **message** pour le monitor. Ce champ permet la mise en forme standard [markdown formatting](http://daringfireball.net/projects/markdown/syntax) ainsi que la syntaxe @ -notification de Datadog.
+2. Entrez un **message** pour le monitor. Ce champ permet la mise en forme standard [markdown formatting][2] ainsi que la syntaxe @ -notification de Datadog.
   Remarque: vous pouvez notifier les utilisateurs non-Datadog par e-mail en ajoutant `@ leur-email` au message. Un cas d'utilisation courant pour le message du moniteur consiste à inclure une procédure pas à pas pour résoudre le problème.
   Par exemple, si vous monitorez une base de données, vous pouvez inclure des étapes de basculement vers un nœud de secours. Dans l'ensemble, vous devriez essayer de donner le plus de contexte possible au monitor.
 
@@ -164,7 +164,7 @@ Nous fournissons un certain nombre de types différents de monitor et toutes les
 *(Faites défiler vers la droite pour voir toutes les variables disponibles)*
 
 {{% table responsive="true" %}}
-||[host](/monitors/monitor_types/host)| [métrique](/monitors/monitor_types/metric)| [intégration](/monitors/monitor_types/integration)| [processus](/monitors/monitor_types/process)| [réseau](/monitors/monitor_types/network)| [check custom](/monitors/monitor_types/custom_check)| [événement](/monitors/monitor_types/event)|
+||[host][3]| [métrique][4]| [intégration][5]| [processus][6]| [réseau][7]| [check custom][8]| [événement][9]|
 | :-------|:-----|:-----|:-------|:-------|:---------|:-------|:------|
 | **Conditionals**      |
 | `is_alert`            | Y                 | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
@@ -274,8 +274,20 @@ Par exemple, si la variable rendue est configurée en tant que channel  dans l'i
 
 * `@slack-{{host.name}}` post un message slack dans le channel #host.name.
 
-[En savoir plus sur la configuration de contacts et de messages conditionnels dans un seul monitor.](/monitors/faq/how-do-i-setup-conditional-contacts-and-messages-in-a-single-monitor)
+[En savoir plus sur la configuration de contacts et de messages conditionnels dans un seul monitor.][10]
 
 ## En apprendre plus
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: /monitors
+[2]: http://daringfireball.net/projects/markdown/syntax
+[3]: /monitors/monitor_types/host
+[4]: /monitors/monitor_types/metric
+[5]: /monitors/monitor_types/integration
+[6]: /monitors/monitor_types/process
+[7]: /monitors/monitor_types/network
+[8]: /monitors/monitor_types/custom_check
+[9]: /monitors/monitor_types/event
+[10]: /monitors/faq/how-do-i-setup-conditional-contacts-and-messages-in-a-single-monitor
