@@ -148,7 +148,7 @@ instances:
 
 Note that the column name must be present in the output of snmptable.
 
-Now we [restart the agent](/agent/faq/agent-commands) and we make sure that the check is collecting metrics, it can take up to 1 minute to update:
+Now we [restart the agent][1] and we make sure that the check is collecting metrics, it can take up to 1 minute to update:
 
 ```
 $ sudo service datadog-agent info
@@ -171,3 +171,5 @@ In the Metrics Explorer or a dashboard, we can plot snmp.ifInOctets, filter by d
 {{< img src="agent/faq/metric_explorer_plot.png" alt="Metric Explorer Plot" responsive="true" popup="true">}}
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /agent/faq/agent-commands

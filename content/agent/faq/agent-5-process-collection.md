@@ -9,7 +9,7 @@ kind: faq
 **Live Processes has been introduced in Datadog Agent version 5.16.0.**  
 Refer to the instructions for standard [Agent installation][1] for platform-specific details.
 
-Once the Datadog Agent is installed, enable Live Processes collection by editing the [configuration file](/agent/faq/where-is-the-configuration-file-for-the-agent) at :
+Once the Datadog Agent is installed, enable Live Processes collection by editing the [configuration file][4] at :
 
 ```
 /etc/dd-agent/datadog.conf
@@ -20,7 +20,7 @@ and adding the following line to the `[Main]` section:
     process_agent_enabled: true
 ```
 
-After configuration is complete, [restart the Agent](/agent/faq/agent-commands/#start-stop-restart-the-agent).  
+After configuration is complete, [restart the Agent][5].  
 **Note**: To collect container information in the standard install, the dd-agent user needs to have permissions to access docker.sock.
 
 ## Docker container
@@ -54,4 +54,10 @@ In the [dd-agent.yaml][3] manifest used to create the daemonset, add the followi
       name: passwd    
 ```
 
-Refer to the standard [daemonset installation](/integrations/kubernetes/#installation-via-daemonsets-kubernetes-110) and the [docker-dd-agent](https://github.com/DataDog/docker-dd-agent) information pages for further documentation.
+Refer to the standard [daemonset installation][6] and the [docker-dd-agent][7] information pages for further documentation.
+
+
+[4]: /agent/faq/where-is-the-configuration-file-for-the-agent
+[5]: /agent/faq/agent-commands/#start-stop-restart-the-agent
+[6]: /integrations/kubernetes/#installation-via-daemonsets-kubernetes-110
+[7]: https://github.com/DataDog/docker-dd-agent

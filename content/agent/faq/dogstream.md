@@ -145,7 +145,7 @@ Here are the event fields (bold means the field is required):
 | alert_type | string enum | Indicates the severity of the event. Must be one of `error`, `warning`, `success` or `info`. If omitted, it defaults to `info`. Searchable by `alert_type:value` |
 | event_type | string | Describes what kind of event this is. Used as part of the aggregation key |
 | aggregation_key | string | Describes what this event affected, if anything. Used as part of the aggregation key |
-| host | string | Name of the host this event originated from. The event automatically gets tagged with any tags you've given this host using the [tagging page](https://app.datadoghq.com/infrastructure#tags) or the [tagging api](/api/#tags). The host value is used as part of the aggregation key. |
+| host | string | Name of the host this event originated from. The event automatically gets tagged with any tags you've given this host using the [tagging page][2] or the [tagging api][3]. The host value is used as part of the aggregation key. |
 | **priority** | string | Determines whether the event is visible or hidden by default in the stream; Must be one of `low` or `normal` |
 
 The events with the same aggregation key within a 24 hour time window gets aggregated together on the stream.
@@ -155,7 +155,7 @@ The aggregation key is a combination of the following fields:
 - aggregation_key
 - host
 
-For an example of an event parser, see our [Cassandra compaction event parser](https://github.com/DataDog/dd-agent/blob/master/dogstream/cassandra.py) that is bundled with the Agent.
+For an example of an event parser, see our [Cassandra compaction event parser][4] that is bundled with the Agent.
 
 ### Example for Events Collecting
 
@@ -165,7 +165,7 @@ Let's imagine that you want to collect events from logging where you have enough
 2016-05-28 18:35:31.164705|Crash_Report|Windows95|A terrible crash happened!|A crash was reported on Joe M's computer|LotusNotes,Outlook,InternetExplorer
 ```
 
-We could set up a log parser like the following to create an event from this logged data in our Datadog [event stream](/graphing/event_stream/):
+We could set up a log parser like the following to create an event from this logged data in our Datadog [event stream][5]:
 
 ```python
 
@@ -219,7 +219,7 @@ And in your parsers_module.py a function defined as:
 def custom_parser(logger, line)
 ```
 
-You can now change the parity of your function to take extra parameter as shown [in this agent example](https://github.com/DataDog/dd-agent/blob/5.13.x/checks/datadog.py#L210)
+You can now change the parity of your function to take extra parameter as shown [in this agent example][6]
 
 So if you change your configuration file to:
 
@@ -248,8 +248,19 @@ dogstreams: /Users/Documents/Parser/test.log:/Users/Documents/Parser/myparser.py
 
 ## Troubleshooting Your Custom Log-Parser
 
-Bugs happen, so being able to see the traceback from your log-parsers is very important. You can do this if you are running the agent with its [agent logs](/agent/#log-locations) set at the "DEBUG" level. The agent's log-level can be set in the `datadog.conf` by uncommenting and editing [this line](https://github.com/DataDog/dd-agent/blob/5.7.x/datadog.conf.example#L211), and then [restarting the agent](/agent/faq/agent-commands). Once that's configured properly, traceback resulting from errors in your custom log-parser can be found in the *collector.log* file ([read here for where to find your agent logs](/agent/#log-locations)), and it generally includes the string checks.collector(datadog.py:278) | Error while parsing line in them ([here's the agent code where the error is likely to be thrown](https://github.com/DataDog/dd-agent/blob/5.7.x/checks/datadog.py#L278)).
+Bugs happen, so being able to see the traceback from your log-parsers is very important. You can do this if you are running the agent with its [agent logs][7] set at the "DEBUG" level. The agent's log-level can be set in the `datadog.conf` by uncommenting and editing [this line][8], and then [restarting the agent][9]. Once that's configured properly, traceback resulting from errors in your custom log-parser can be found in the *collector.log* file ([read here for where to find your agent logs][7]), and it generally includes the string checks.collector(datadog.py:278) | Error while parsing line in them ([here's the agent code where the error is likely to be thrown](https://github.com/DataDog/dd-agent/blob/5.7.x/checks/datadog.py#L278)).
 
-Note that whenever you make a change to your custom log-parser, [restart the agent](/agent/faq/agent-commands) to put that change into effect.
+Note that whenever you make a change to your custom log-parser, [restart the agent][9] to put that change into effect.
 
-If you suspect there is some error occurring beyond the scope of your custom log-parser function, feel free to [reach out to support](/help), but do first set the agent's log-level at "DEBUG", run the agent for a few minutes while ensuring that new logs are being added to your files, and then [run the flare command](/agent/#send-a-flare) from your agent. That gives to the support team the information needed to effectively troubleshoot the issue.
+If you suspect there is some error occurring beyond the scope of your custom log-parser function, feel free to [reach out to support][10], but do first set the agent's log-level at "DEBUG", run the agent for a few minutes while ensuring that new logs are being added to your files, and then [run the flare command][11] from your agent. That gives to the support team the information needed to effectively troubleshoot the issue.
+
+[2]: https://app.datadoghq.com/infrastructure#tags
+[3]: /api/#tags
+[4]: https://github.com/DataDog/dd-agent/blob/master/dogstream/cassandra.py
+[5]: /graphing/event_stream/
+[6]: https://github.com/DataDog/dd-agent/blob/5.13.x/checks/datadog.py#L210
+[7]: /agent/#log-locations
+[8]: https://github.com/DataDog/dd-agent/blob/5.7.x/datadog.conf.example#L211
+[9]: /agent/faq/agent-commands
+[10]: /help
+[11]: /agent/#send-a-flare

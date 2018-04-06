@@ -41,7 +41,7 @@ Now let's define our check method. The main part of the check makes
 a request to the URL and time the response time, handling error cases as it goes.
 
 In this snippet, we start a timer, make the GET request using the
-[requests library](http://docs.python-requests.org/en/latest/) and handle and
+[requests library][1] and handle and
 errors that might arise.
 
 ```python
@@ -108,7 +108,7 @@ def status_code_event(self, url, r, aggregation_key):
 
 The entire check would be placed into the `checks.d` folder as `http.py`. The corresponding configuration would be placed into the `conf.d` folder as `http.yaml`.
 
-Once the check is in `checks.d`, test it by running it as a python script. [Restart the Agent](/agent/faq/agent-commands) for the changes to be enabled. **Make sure to change the conf.d path in the test method**. From your Agent root, run:
+Once the check is in `checks.d`, test it by running it as a python script. [Restart the Agent][2] for the changes to be enabled. **Make sure to change the conf.d path in the test method**. From your Agent root, run:
 
     PYTHONPATH=. python checks.d/http.py
 
@@ -180,3 +180,6 @@ if __name__ == '__main__':
             print 'Events: %s' % (check.get_events())
         print 'Metrics: %s' % (check.get_metrics())
 ```
+
+[1]: http://docs.python-requests.org/en/latest/
+[2]: /agent/faq/agent-commands
