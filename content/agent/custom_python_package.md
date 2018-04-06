@@ -35,10 +35,12 @@ Or the package can be added in the library zipped folder that can be found at
 ```
 C:\Program Files (x86)\Datadog\Datadog Agent\files
 ```
-then [restart your agent](/agent/basic_agent_usage/windows).
+then [restart your agent][1].
 
 {{< img src="agent/windows_python_package.png" alt="windows python package" responsive="true" popup="true">}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /agent/basic_agent_usage/windows

@@ -15,11 +15,11 @@ further_reading:
 
 ## Overview
 
-This page first looks at the generic `Prometheus` check, the fastest and simplest way to scrape custom metrics from Prometheus endpoints, then dives into the `PrometheusCheck` interface for more advanced usage. Finally, we include an example of a simple check that collects timing metrics and status events from [Kube DNS](https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/kube_dns.py).
+This page first looks at the generic `Prometheus` check, the fastest and simplest way to scrape custom metrics from Prometheus endpoints, then dives into the `PrometheusCheck` interface for more advanced usage. Finally, we include an example of a simple check that collects timing metrics and status events from [Kube DNS][1].
 
 ## Generic Prometheus check
 
-Starting with version 6.1.0, the Agent includes a new [Prometheus](https://github.com/DataDog/integrations-core/tree/master/prometheus) check capable of scraping Prometheus endpoints with only a few lines of configuration.
+Starting with version 6.1.0, the Agent includes a new [Prometheus][2] check capable of scraping Prometheus endpoints with only a few lines of configuration.
 
 ### Configuration
 
@@ -37,11 +37,11 @@ Your metrics are collected in the form `namespace.metric_name`. By default, you 
 
 ### Advanced settings
 
-For a comprehensive list of settings refer to the [example configuration](https://github.com/DataDog/integrations-core/blob/master/prometheus/conf.yaml.example).
+For a comprehensive list of settings refer to the [example configuration][3].
 
 ### Auto-discovery
 
-You can configure the Prometheus check using [Autodiscovery](https://docs.datadoghq.com/agent/autodiscovery/) to quickly collect Prometheus metrics exposed by a container or pod.
+You can configure the Prometheus check using [Autodiscovery][4] to quickly collect Prometheus metrics exposed by a container or pod.
 
 Example of Autodiscovery using pod annotations on a `linkerd` pod:
 
@@ -56,11 +56,11 @@ annotations:
 
 By default, all metrics retrieved by the generic Prometheus check are considered custom metrics. If you are monitoring off-the-shelf software and think it deserves an official integration, please don't hesitate to contribute.
 
-Official integrations have their own dedicated directories. There's a default instance mechanism in the generic check to hardcode the default configuration and metrics metadata. For an example, reference the [kube-proxy](https://github.com/DataDog/integrations-core/tree/master/kube_proxy) integration.
+Official integrations have their own dedicated directories. There's a default instance mechanism in the generic check to hardcode the default configuration and metrics metadata. For an example, reference the [kube-proxy][5] integration.
 
 ## Advanced usage: Prometheus check interface
 
-If you have more advanced needs than the generic check (metrics preprocessing for example) you can write a custom `PrometheusCheck`. It's [the mother class](https://github.com/DataDog/dd-agent/blob/master/checks/prometheus_check.py) of the generic check and it provides a structure and some helpers to collect metrics, events, and service checks exposed via Prometheus. Minimal configuration for checks based on this class include:
+If you have more advanced needs than the generic check (metrics preprocessing for example) you can write a custom `PrometheusCheck`. It's [the mother class][6] of the generic check and it provides a structure and some helpers to collect metrics, events, and service checks exposed via Prometheus. Minimal configuration for checks based on this class include:
 
 
 - Overriding `self.NAMESPACE`
@@ -91,7 +91,7 @@ instances:
 The names of the configuration and check files must match. If your check is called <code>mycheck.py</code> your configuration file <em>must</em> be named <code>mycheck.yaml</code>.
 </div>
 
-Configuration for a Prometheus check is almost the same as a regular [Agent Check](/agent/agent_checks/#configuration). The main difference is to include the variable `prometheus_endpoint` in your `check.yaml` file. This goes into `conf.d/kube_dns.yaml`:
+Configuration for a Prometheus check is almost the same as a regular [Agent Check][7]. The main difference is to include the variable `prometheus_endpoint` in your `check.yaml` file. This goes into `conf.d/kube_dns.yaml`:
 
 ```yaml
 init_config:
@@ -126,7 +126,7 @@ class KubeDNSCheck(PrometheusCheck):
 #### Overriding `self.metrics_mapper`
 
 `metrics_mapper` is a dictionary where the key is the metric to capture and the value is the corresponding metric name in Datadog.
-The reason for the override is so metrics reported by the Prometheus checks are not counted as [custom metric](/getting_started/custom_metrics):
+The reason for the override is so metrics reported by the Prometheus checks are not counted as [custom metric][8]:
 
 ```python
 from datadog_checks.checks.prometheus import PrometheusCheck
@@ -156,7 +156,7 @@ def check(self, instance):
 
 ##### Exceptions
 
-If a check cannot run because of improper configuration, programming error, or because it could not collect any metrics, it should raise a meaningful exception. This exception is logged and is shown in the Agent [info command](/agent/faq/agent-commands/#agent-status-and-information) for easy debugging. For example:
+If a check cannot run because of improper configuration, programming error, or because it could not collect any metrics, it should raise a meaningful exception. This exception is logged and is shown in the Agent [info command][9] for easy debugging. For example:
 
     $ sudo /etc/init.d/datadog-agent info
 
@@ -260,3 +260,14 @@ Note: it is empty in the mother class but will need to be overloaded/hardcoded i
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/kube_dns.py
+[2]: https://github.com/DataDog/integrations-core/tree/master/prometheus
+[3]: https://github.com/DataDog/integrations-core/blob/master/prometheus/conf.yaml.example
+[4]: https://docs.datadoghq.com/agent/autodiscovery/
+[5]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
+[6]: https://github.com/DataDog/dd-agent/blob/master/checks/prometheus_check.py
+[7]: /agent/agent_checks/#configuration
+[8]: /getting_started/custom_metrics
+[9]: /agent/faq/agent-commands/#agent-status-and-information
