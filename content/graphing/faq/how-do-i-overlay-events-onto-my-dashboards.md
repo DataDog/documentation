@@ -34,3 +34,4 @@ Let's say you have the following template variable :
 To use the Event Overlay feature use the following syntax
 
 * `"events": "tags:$availability-zone"`
+

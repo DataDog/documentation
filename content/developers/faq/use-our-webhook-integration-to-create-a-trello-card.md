@@ -3,7 +3,7 @@ title: Use our Webhook Integration to create a trello card
 kind: faq
 ---
 
-You can easily use our [Webhook Integration](/integrations/webhooks) to instantly create a trello card using our [@-notification feature](/monitors/notifications).
+You can easily use our [Webhook Integration][1] to instantly create a trello card using our [@-notification feature][2].
 
 This flow utilizes the Trello REST POST card api endpoint to post the @notification to a relevant Trello list.
 
@@ -17,7 +17,7 @@ This flow utilizes the Trello REST POST card api endpoint to post the @notificat
 
 ## Getting the Keys
 
-To get the Trello App Key and Token, [navigate to Trello's relevant page](https://trello.com/app-key). If you are logged in, you should be able to see the App key immediately:
+To get the Trello App Key and Token, [navigate to Trello's relevant page][3]. If you are logged in, you should be able to see the App key immediately:
 
 NOTE: Trello mentions API key in the url. For this article, API and APP keys are one and the same
 
@@ -36,7 +36,7 @@ From there, find the value of idList
 
 ## Configure the Webhook
 
-See [the API documentation for Trello cards](https://trello.com/guide) and our [webhook integration](/integrations/webhooks)
+See [the API documentation for Trello cards][4] and our [webhook integration][1]
 
 In the configuration:
 
@@ -75,3 +75,8 @@ This flow involves Trello generating a server token for our application. As you 
 The token provides read/write access to all your boards and teams, so this is a potential concern if you do not want to give away access like that.
 
 A good workaround would be to create a specific trello user that is only joined to the board you designate. Have that user receive the server token.
+
+[1]: /integrations/webhooks
+[2]: /monitors/notifications
+[3]: https://trello.com/app-key
+[4]: https://trello.com/guide

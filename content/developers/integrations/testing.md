@@ -218,3 +218,4 @@ For examples of Agent Check tests, you can view the test files for agent checks 
 [5]: https://github.com/DataDog/integrations-core/blob/master/mysql/test/test_mysql.py
 [6]: https://github.com/DataDog/dd-agent/blob/master/checks/metric_types.py
 [7]: https://github.com/DataDog/integrations-core/tree/master/http_check/test
+

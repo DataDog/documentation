@@ -15,7 +15,7 @@ further_reading:
 ---
 ## Introduction
 
-Les tags sont un moyen d'ajouter des dimensions aux métriques, de sorte qu'elles peuvent être projetées, agrégées et comparées. [L'utilisation des tags](/getting_started/tagging/using_tags) vous permet d'observer les performances globales sur un certain nombre d'hosts  puis de restreindre (éventuellement) l'ensemble observé en fonction d'éléments spécifiques. En un mot, les tags et leur utilisation permettent de modifier votre contexte d'observation des séries temporelles.
+Les tags sont un moyen d'ajouter des dimensions aux métriques, de sorte qu'elles peuvent être projetées, agrégées et comparées. [L'utilisation des tags][1] vous permet d'observer les performances globales sur un certain nombre d'hosts  puis de restreindre (éventuellement) l'ensemble observé en fonction d'éléments spécifiques. En un mot, les tags et leur utilisation permettent de modifier votre contexte d'observation des séries temporelles.
 
 ## Pourquoi ça compte
 
@@ -42,19 +42,19 @@ Des exemples de clés de tag de métrique couramment utilisées sont env, instan
 Les tags peuvent être ajoutés en utilisant n'importe laquelle des méthodes suivantes:
 
 * Tags de l'Agent (`datadog.yaml`)
-* Tags [DogStatsD](/developers/dogstatsd)
+* Tags [DogStatsD][2]
 * Intégration / Check Tags (chaque check sur l'host local prend en charge les tags en modifiant le yaml)
-* Tags générés par d'autres services tels que  [AWS](/integrations/amazon_web_services), [Azure](/integrations/azure), [GCE](/integrations/google_app_engine), etc.
-* Tags dans l '[API](/api) - notez que beaucoup d'endpoints supportent les tags, comme les événements et les métriques.
-* [Chef Roles](/integrations/chef) et [Puppet](/integrations/puppet) Tags (Chef and Puppet use the API - this may obviously be extended to other configuration management tools by you or Datadog)
-* Ajout manuel de tags en utilisant [Infrastructure List](/graphing/infrastructure) (survolez l'host-> sélectionnez "Inspect" -> "EditTags")
+* Tags générés par d'autres services tels que  [AWS][3], [Azure][4], [GCE][5], etc.
+* Tags dans l '[API][6] - notez que beaucoup d'endpoints supportent les tags, comme les événements et les métriques.
+* [Chef Roles][7] et [Puppet][8] Tags (Chef and Puppet use the API - this may obviously be extended to other configuration management tools by you or Datadog)
+* Ajout manuel de tags en utilisant [Infrastructure List][9] (survolez l'host-> sélectionnez "Inspect" -> "EditTags")
 
 ## Limitations
 
 Nous stockons une série temporelle par combinaison host + metric + tag sur notre backend, donc nous ne pouvons pas supporter une quantité de tags infini.
 N'incluez pas de tags qui ne cessent de croître dans vos métriques, comme les timestamp ou les identifiants d'utilisateur. Généralement, essayez de **Limiter chaque métrique à 1000 tags**.
 
-[En savoir plus sur les limitations des métriques](/getting_started/custom_metrics)
+[En savoir plus sur les limitations des métriques][10]
 
 ## Exemples
 
@@ -75,3 +75,14 @@ Nous pouvons également ajouter des tags supplémentaires pour affiner davantage
 ### En apprendre plus
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /getting_started/tagging/using_tags
+[2]: /developers/dogstatsd
+[3]: /integrations/amazon_web_services
+[4]: /integrations/azure
+[5]: /integrations/google_app_engine
+[6]: /api
+[7]: /integrations/chef
+[8]: /integrations/puppet
+[9]: /graphing/infrastructure
+[10]: /getting_started/custom_metrics

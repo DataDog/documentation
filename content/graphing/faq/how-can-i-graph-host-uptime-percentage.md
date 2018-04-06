@@ -43,3 +43,4 @@ The following two graph definitions will generate the graphs on the dashboard in
 ```
 
 {{< img src="graphing/faq/up_time.png" alt="up time" responsive="true" popup="true">}}
+

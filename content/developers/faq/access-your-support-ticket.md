@@ -14,3 +14,4 @@ From here, you should be able to see your requests:
     {{< img src="help/my_activities.png" alt="my activities" responsive="true" popup="true">}}
 
 However, if you don't see this after logging in, click on your name in the upper right hand corner, and then select "My Activities" from there.
+

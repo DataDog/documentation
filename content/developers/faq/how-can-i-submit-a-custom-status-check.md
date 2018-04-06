@@ -46,3 +46,4 @@ When submitting a status check through a custom agent check, the predefined serv
 ```
 self.service_check('app.is_ok', 0, tags=['environment:production','role:webserver'], hostname='app1', message='App1 is up and running')
 ```
+

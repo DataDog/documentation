@@ -14,4 +14,6 @@ And here is the same metric, graphed using a day-long rollup with .rollup(86400)
 
 {{< img src="graphing/faq/smooth_2.png" alt="smooth_2" responsive="true" popup="true">}}
 
-[See here](/graphing/miscellaneous/functions) for more detailed information about the .rollup() function.
+[See here][1] for more detailed information about the .rollup() function.
+
+[1]: /graphing/miscellaneous/functions
