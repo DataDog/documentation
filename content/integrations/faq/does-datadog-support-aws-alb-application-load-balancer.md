@@ -16,3 +16,4 @@ For instance, "aws.applicationelb.active_connection_count" is the Datadog metric
 {{< img src="integrations/faq/alb_metrics.png" alt="alb_metrics" responsive="true" popup="true">}}
 
 Note that former ALB metrics that were reporting under the aws.elb namespace may still be present in this namespace as deprecated metrics.
+

@@ -3,7 +3,7 @@ title: Utilisation de l'autorisation RBAC avec votre intégration Kubernetes
 kind: faq
 ---
 
-Utilisez ces entités RBAC Kubernetes pour configurer les autorisations pour votre compte de service Datadog Agent. Pour plus d'informations sur les comptes de service, consultez la documentation [Kubernetes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/).
+Utilisez ces entités RBAC Kubernetes pour configurer les autorisations pour votre compte de service Datadog Agent. Pour plus d'informations sur les comptes de service, consultez la documentation [Kubernetes][1].
 
 ```yaml
   kind: ClusterRole
@@ -81,3 +81,5 @@ Utilisez ces entités RBAC Kubernetes pour configurer les autorisations pour vot
   ```
   kubectl replace --force -f configs/dd-agent/dd-agent.yaml
   ```
+
+[1]: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/

@@ -21,6 +21,9 @@ Note, enabling this feature increases the number of API requests and information
 
 More information on this behavior and AWS billing can be found here:
 
-* [Do you believe you’re seeing a discrepancy between your data in CloudWatch and Datadog?](/integrations/faq/do-you-believe-you-re-seeing-a-discrepancy-between-your-data-in-cloudwatch-and-datadog)
+* [Do you believe you’re seeing a discrepancy between your data in CloudWatch and Datadog?][1]
 
-* [How do I monitor my AWS billing details?](/integrations/faq/how-do-i-monitor-my-aws-billing-details)
+* [How do I monitor my AWS billing details?][2]
+
+[1]: /integrations/faq/do-you-believe-you-re-seeing-a-discrepancy-between-your-data-in-cloudwatch-and-datadog
+[2]: /integrations/faq/how-do-i-monitor-my-aws-billing-details

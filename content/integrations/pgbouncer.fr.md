@@ -34,11 +34,11 @@ La check PgBouncer suit les métriques du pool de connexions et vous permet de m
 ## Implémentation
 ### Installation
 
-Le check PgBouncer est packagé avec l'agent, il vous faut donc simplement [installer l'agent] (https://app.datadoghq.com/account/settings#agent) sur vos noeuds PgBouncer.
+Le check PgBouncer est packagé avec l'agent, il vous faut donc simplement [installer l'agent] [1] sur vos noeuds PgBouncer.
 
 ### Configuration
 
-Editez le fichier `pgbouncer.yaml` dans le dossier `conf.d` de l'Agent. Consultez l'exemple du [canevas  pgbouncer.yaml](https://github.com/DataDog/integrations-core/blob/master/pgbouncer/conf.yaml.example) pour apprendre toutes les options de configuration disponibles:
+Editez le fichier `pgbouncer.yaml` dans le dossier `conf.d` de l'Agent. Consultez l'exemple du [canevas  pgbouncer.yaml][2] pour apprendre toutes les options de configuration disponibles:
 
 ```
 init_config:
@@ -65,11 +65,11 @@ Ensuite, dans votre fichier PGBouncer pgbouncer.ini ajoutez
 stats_users = datadog
 ```
 
-[Redémarrez l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent) pour commencer à envoyer vos métriques PgBouncer à Datadog
+[Redémarrez l'Agent][3] pour commencer à envoyer vos métriques PgBouncer à Datadog
 
 ### Validation
 
-[Lancez la commande `status`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `pgbouncer` dans la section Checks:
+[Lancez la commande `status`de l'Agent][4] et cherchez `pgbouncer` dans la section Checks:
 
 ```
   Checks
@@ -105,8 +105,16 @@ Le check PGboucer n'inclut aucun événement pour le moment.
 Renvoie CRITICAL si l'agent ne peut pas se connecter à PgBouncer pour collecter des métriques, sinon OK.
 
 ## Troubleshooting
-Besoin d'aide? Contactez  [l'équipe support de Datadog](http://docs.datadoghq.com/help/).
+Besoin d'aide? Contactez  [l'équipe support de Datadog][5].
 
 ## En apprendre plus
-Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog](https://www.datadoghq.com/blog/)
+Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][6]
 
+
+
+[1]: https://app.datadoghq.com/account/settings#agent
+[2]: https://github.com/DataDog/integrations-core/blob/master/pgbouncer/conf.yaml.example
+[3]: https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent
+[4]: https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information
+[5]: http://docs.datadoghq.com/help/
+[6]: https://www.datadoghq.com/blog/

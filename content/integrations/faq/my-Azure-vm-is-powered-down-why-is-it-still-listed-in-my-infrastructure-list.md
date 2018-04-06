@@ -8,3 +8,4 @@ When you power down your VMs in Azure, your Azure integration will still continu
 This is intended, but one side effect is that the VM will remain listed on your infrastructure list page so long as even this one metric is being reported for your VM. If your VM reports only this metric, it will not count towards your billable host-count. (See our [Billing FAQs](/account_management/faq/) for more info on billing matters)
 
 Only if you destroy your Azure VM will it then phase out of your infrastructure list 3 hours later.
+

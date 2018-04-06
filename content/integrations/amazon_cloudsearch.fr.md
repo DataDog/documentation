@@ -33,13 +33,13 @@ Activez cette intégration pour voir dans Datadog toutes vos métriques CloudSea
 ## Implémentation
 ### Installation
 
-Si vous ne l'avez pas déjà fait, configurez [l'Intégration Amazon Web Services en premier](https://docs.datadoghq.com/integrations/amazon_web_services/).
+Si vous ne l'avez pas déjà fait, configurez [l'Intégration Amazon Web Services en premier][1].
 
 ### Configuration
 
-1. Dans la [vignette d'intégration AWS] (https://app.datadoghq.com/account/settings#integrations/amazon_web_services), assurez-vous que `CloudSearch` est coché dans la partie "metric collection".
+1. Dans la [vignette d'intégration AWS] [2], assurez-vous que `CloudSearch` est coché dans la partie "metric collection".
 
-2. Installez l'intégration [Datadog - AWS CloudSearch] (https://app.datadoghq.com/account/settings#integrations/amazon_cloudsearch).
+2. Installez l'intégration [Datadog - AWS CloudSearch] [3].
 
 ## Données collectées
 ### Métriques
@@ -55,7 +55,13 @@ L'intégration AWS Cloudsearch n'inclut aucun événement pour le moment.
 L'intégration AWS Cloudsearch n'inclut aucun check de service pour le moment.
 
 ## Troubleshooting
-Besoin d'aide? Contactez  [l'équipe support de Datadog](http://docs.datadoghq.com/help/).
+Besoin d'aide? Contactez  [l'équipe support de Datadog][4].
 
 ## En apprendre plus
-Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog](https://www.datadoghq.com/blog/)
+Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][5]
+
+[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[3]: https://app.datadoghq.com/account/settings#integrations/amazon_cloudsearch
+[4]: http://docs.datadoghq.com/help/
+[5]: https://www.datadoghq.com/blog/

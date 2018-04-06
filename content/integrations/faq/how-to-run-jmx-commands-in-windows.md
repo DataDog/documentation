@@ -3,7 +3,7 @@ title: How to run JMX commands in Windows?
 kind: faq
 ---
 
-If you are monitoring a JMX application with a Windows Agent, you can get access to the same [troubleshooting tools](/integrations/java/) that are available on Linux.
+If you are monitoring a JMX application with a Windows Agent, you can get access to the same [troubleshooting tools][1] that are available on Linux.
 
 If java is in your path, from a command prompt you should be able to run:
 ```
@@ -34,3 +34,6 @@ Instance: localhost:9012
        Matching: 9/350. Bean name: Catalina:j2eeType=Servlet,WebModule=//localhost/manager,name=default,J2EEApplication=none,J2EEServer=none - Attribute name: errorCount  - Attribute type: int
 [...]
 ```
+
+
+[1]: /integrations/java/

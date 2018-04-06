@@ -21,4 +21,6 @@ Pour obtenir vos événements et métriques d'Autoscaling, suivez les étapes su
 
 4. Cliquez sur "update the tile", vous devriez voir la vignette de l'intégration Autoscaling Group apparaître dans votre liste d'intégrations.
 
-5. [Suivez ces 4 étapes pour obtenir vos métriques ASG](http://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-monitoring.html#enable-detailed-instance-metrics).
+5. [Suivez ces 4 étapes pour obtenir vos métriques ASG][1].
+
+[1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-monitoring.html#enable-detailed-instance-metrics
