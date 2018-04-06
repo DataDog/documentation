@@ -26,7 +26,7 @@ Containers and cloud environments regularly churn through hosts, so it is critic
 
 ## Tags best practices
 
-A few best practices on tags :
+A few best practices on tags:
 
 1. Tags must **start with a letter**, and after that may contain:
 
@@ -37,17 +37,17 @@ A few best practices on tags :
     * Periods 
     * Slashes 
 
-    Other special characters gets converted to underscores.  
+    Other special characters get converted to underscores.  
     **Note**: A tag cannot end with a colon (e.g., `tag:`)
 2. Tags can be **up to 200 characters** long and support unicode. 
-3. Tags are converted to lowercase, uppercase letter are useless.
+3. Tags are converted to lowercase.
 4. A tag can have a `value` or a `key:value` syntax:  
     **For optimal functionality, we recommend constructing tags that use the `key:value` syntax.** The key is always what precedes the first colon of the global tag definition, e.g.:
 
     * `role:database:mysql` is parsed as **key**:`role` , **value**:`database:mysql`
     * `role_database:mysql` is parsed as **key**:`role_database` , **value**:`mysql`  
 
-      
+
     Examples of commonly used metric tag keys are `env`, `instance`, `name`, and `role`.  
     **Note**: `device`, `host`, and `source` are **reserved tag keys** and cannot be specified in the standard way.
 
