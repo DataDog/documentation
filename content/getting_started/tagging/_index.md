@@ -24,21 +24,34 @@ Typically, it's helpful to look at containers, VMs and cloud infrastructure at t
 
 Containers and cloud environments regularly churn through hosts, so it is critical to tag these to allow for aggregation of the metrics you're getting.
 
+## Tags best practices
+
+A few best practices on tags :
+
+1. Tags must **start with a letter**, and after that may contain:
+
+    * Alphanumerics
+    * Underscores
+    * Minuses
+    * Colons
+    * Periods 
+    * Slashes 
+
+    Other special characters gets converted to underscores.
+2. Tags can be **up to 200 characters** long and support unicode. 
+3. Tags are converted to lowercase, uppercase letter are useless.
+4. A tag cannot end with a colon (e.g., `tag:`)
+5. A tag can have a `value` or a `key:value` syntax:  
+    **For optimal functionality, we recommend constructing tags that use the `key:value` syntax.** The key is always what precedes the first colon of the global tag definition, e.g.:
+
+    * `role:database:mysql` is parsed as **key**:`role` , **value**:`database:mysql`
+    * `role_database:mysql` is parsed as **key**:`role_database` , **value**:`mysql`
+
+    Examples of commonly used metric tag keys are `env`, `instance`, `name`, and `role`.  
+
+    **Note**: `device`, `host`, and `source` are **reserved tag keys** and cannot be specified in the standard way.
+
 ## Applying Tags
-
-Tags must **start with a letter**, and after that may contain:
-
-* Alphanumerics
-* Underscores
-* Minuses
-* Colons
-* Periods 
-* Slashes 
-
-Other characters will get converted to underscores. Tags can be up to 200 characters long and support unicode. Tags will be converted to lowercase.
-
-**For optimal functionality, we recommend constructing tags that use the `key:value` syntax.**  
-Examples of commonly used metric tag keys are env, instance, name, and role. Note that device, host, and source are "reserved" tag keys and cannot be specified in the standard way.
 
 Tags may be added using any (or all) of the following methods:
 
