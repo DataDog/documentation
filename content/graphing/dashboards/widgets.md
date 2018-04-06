@@ -117,7 +117,7 @@ Example of Query Value widget for the [API](/api/#screenboards)
 }
 ```
 
-### What does "Take the X value from the displayed timeframe" ?
+### What does "Take the X value from the displayed timeframe" mean?
 
 {{< img src="graphing/miscellaneous/visualization/query_value_widget.png" alt="query_value_widget" responsive="true" popup="true" style="width:50%;">}}
 

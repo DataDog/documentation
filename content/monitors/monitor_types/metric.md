@@ -36,7 +36,7 @@ further_reading:
     **[Outlier Detection](/monitors/monitor_types/outlier)** is an algorithmic feature that allows you to detect when some members of a group are behaving strangely compared to the others.  
     For example, you could detect that one web server in a pool is processing an unusual number of requests, and hence should be a target for replacement. Or, you could get an early warning that significantly more 500s are happening in one AWS Availability Zone (AZ) than the others, which might indicate an issue arising in that AZ.
 
-    **[Forecast Detection](/monitors/monitor_types/forecasts) is an algorithmic feature that allows you to predict where a metric is heading in the future. It is well-suited for metrics with strong trends or recurring patterns.
+    **[Forecast Detection](/monitors/monitor_types/forecasts)** is an algorithmic feature that allows you to predict where a metric is heading in the future. It is well-suited for metrics with strong trends or recurring patterns.
 
 2. Select the metric and scope you want to monitor.
   {{< img src="monitors/monitor_types/metric/metric_scope.png" alt="metric scope" responsive="true" popup="true">}}
@@ -93,7 +93,7 @@ further_reading:
 7. You can opt to **automatically resolve the monitor from a triggered state**.  
     In general you'll want to leave this option off as you only want an alert to be resolved when it's fixed.  
   
-    This most common use-case for this option is when you have very sparse counters, e.g. for errors. When errors stop occuring the metric stops reporting. This means the monitor don't resolve because there are not anymore values to trigger a resolution. You can also choose a **Recovery thresholds**, those are additional thresholds added to your monitor that indicates an additional condition to a monitor’s recovery from alert or warning states.  
+    The most common use-case for this option is when you have very sparse counters, e.g. for errors. When errors stop occurring, the metric stops reporting. This prevents the monitor from resolving because there are no more values to trigger a resolution. You can also set **Recovery thresholds**: thresholds added to your monitor that define an additional condition to a monitor’s recovery from alert or warning states.  
   
     When you set up a threshold metric monitor, you get alerted when a metric passes the alert threshold. The recovery threshold adds a condition to the monitor’s recovery such that it only enters recovered state once it has passed the recovery threshold.  
   

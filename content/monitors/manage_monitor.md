@@ -75,7 +75,7 @@ There are a few caveats regarding quoted fields:
 
 ## Manage chosen Monitors
 
-When you have found the monitors you were looking for, select one or more that you wish you update using the checkboxes next to each result. You can select all results by ticking the topmost checkbox next to the STATUS column heading. Modify the monitors in bulk using the buttons at the top right of the search results: Mute, Resolve, Delete, and Edit Service Tags.
+When you have found the monitors you were looking for, select one or more that you wish to update using the checkboxes next to each result. You can select all results by ticking the topmost checkbox next to the STATUS column heading. Modify the monitors in bulk using the buttons at the top right of the search results: Mute, Resolve, Delete, and Edit Service Tags.
 
 {{< img src="monitors/manage_monitor/manage-monitors-mute.png" alt="manage-monitors-mute" responsive="true" popup="true" style="width:80%;" >}}
 
@@ -94,7 +94,7 @@ In writing your search queries, you can use all the same fields available on the
 
 * It uses the `group_status` field instead of `status`.
 * It adds the `triggered` field, which lets you filter monitors by how long they've been triggered.
-* It also adds the `group` field, which helps you narrow down search results for monitors grouped by more than one thing. Say you have a monitor grouped by `host` and `env`. You search for this monitor by title and get four rows, where the groups are `host:web01,env:dev`, `host:web02,env:dev`, `host:web01,env:prod`, and `host:web02,env:prod`. Use the `group` field to only show, for example, prod hosts (`group:"env:prod"`) or web02 hosts (`group:"host:web02"`).
+* It also adds the `group` field, which helps you narrow down search results for monitors grouped by more than one tag. Say you have a monitor grouped by `host` and `env`. You search for this monitor by title and get four rows, where the groups are `host:web01,env:dev`, `host:web02,env:dev`, `host:web01,env:prod`, and `host:web02,env:prod`. Use the `group` field to only show, for example, prod hosts (`group:"env:prod"`) or web02 hosts (`group:"host:web02"`).
 
 ## Further Reading 
 

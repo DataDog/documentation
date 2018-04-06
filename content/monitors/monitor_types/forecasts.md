@@ -42,7 +42,7 @@ The function has two parameters. The first parameter is for selecting which algo
 {{< img src="monitors/monitor_types/forecasts/query_editor.png" alt="query editor" responsive="true" popup="true" style="width:80%;">}}
 
 ### Forecast Alerts
-In addition to viewing forecasts in dashboards, you can create monitors that trigger when metrics are forecast to reach a threshold. The alert triggers when any part of the range of forecasted values crosses the threshold. The prototypical use case is for monitoring a group of disks with similar usage patterns: `max:system.disk.in_use{service:service_name, device:/data} by {host}`.
+In addition to viewing forecasts in dashboards, you can create monitors that trigger when metrics are forecasted to reach a threshold. The alert triggers when any part of the range of forecasted values crosses the threshold. The prototypical use case is for monitoring a group of disks with similar usage patterns: `max:system.disk.in_use{service:service_name, device:/data} by {host}`.
 
 Navigate to the [Monitor page](https://app.datadoghq.com/monitors#create/forecast) for **Forecast Alerts**. Then fill out the **Define the metric** section just as you would for any other metric monitor.
 
