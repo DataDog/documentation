@@ -26,20 +26,20 @@ You can then choose to collect all the logs from all your environment container 
 ## Setup
 ### Option 1: Host installation
 
-Install the [latest version of the agent 6](/logs/#getting-started-with-the-agent) on your host.
+Install the [latest version of the agent 6][1] on your host.
 
-The agent can both collect logs from [files on the host](/logs/#custom-log-collection) or from [container stdout/stderr](#configuration-file-example). For this you need to update or create a new .yaml configuration file in the agent’s `/conf.d` directory as explained in the provided links.
+The agent can both collect logs from [files on the host][2] or from [container stdout/stderr](#configuration-file-example). For this you need to update or create a new .yaml configuration file in the agent’s `/conf.d` directory as explained in the provided links.
 
 ### Option 2: Container installation
 
-As explained above, the agent also has a [containerized](https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent) installation.
+As explained above, the agent also has a [containerized][3] installation.
 
 First let’s create two directories on the host that we will later mount on the containerized agent:
 
 - `/opt/datadog-agent/run`: to make sure we do not lose any logs from containers during restarts or network issues we store on the host the last line that was collected for each container in this directory
 
 - ` /opt/datadog-agent/conf.d`: this is where you will provide your integration instructions. Any configuration file added there will automatically be picked up by the containerized agent when restarted.
-For more information about this check [here](https://github.com/DataDog/docker-dd-agent#enabling-integrations)
+For more information about this check [here][4]
 
 To run a Docker container which embeds the Datadog Agent to monitor your host use the following command:
 
@@ -58,9 +58,9 @@ docker run -d --name datadog-agent \
 
 Important notes:
 
-- The Docker integration is enabled by default, as well as [autodiscovery](/agent/autodiscovery/) in auto configuration mode (remove the listeners: -docker section in `datadog.yaml` to disable it).
+- The Docker integration is enabled by default, as well as [autodiscovery][5] in auto configuration mode (remove the listeners: -docker section in `datadog.yaml` to disable it).
 
-- We recommend to always pick the latest version of Datadog Agent 6. [Consult the full list of available images for Agent 6](https://hub.docker.com/r/datadog/agent/tags/).
+- We recommend to always pick the latest version of Datadog Agent 6. [Consult the full list of available images for Agent 6][6].
 
 The command related to log collection are the following:
 
@@ -107,8 +107,17 @@ logs:
      source: myintegration #tells Datadog what integration it is
 ```
 
-For more examples of configuration files or agent capabilities (such as filtering, redacting, multiline, …) read [the advanced log collection functions](/logs/#filter-logs).
+For more examples of configuration files or agent capabilities (such as filtering, redacting, multiline, …) read [the advanced log collection functions][7].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: /logs/#getting-started-with-the-agent
+[2]: /logs/#custom-log-collection
+[3]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
+[4]: https://github.com/DataDog/docker-dd-agent#enabling-integrations
+[5]: /agent/autodiscovery/
+[6]: https://hub.docker.com/r/datadog/agent/tags/
+[7]: /logs/#filter-logs

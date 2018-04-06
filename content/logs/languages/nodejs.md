@@ -18,11 +18,11 @@ further_reading:
 
 ## Overview 
 
-To log from your NodeJS application, we recommends to use [Winston](https://github.com/winstonjs/winston) - as you'll get all the features you need to build up your logging strategy. 
+To log from your NodeJS application, we recommends to use [Winston][1] - as you'll get all the features you need to build up your logging strategy. 
 
-We also strongly encourage you to setup your logging libraries to produce your logs in JSON format to avoid sustaning [custom parsing rules](/logs/parsing).
+We also strongly encourage you to setup your logging libraries to produce your logs in JSON format to avoid sustaning [custom parsing rules][2].
 
-Winston is available through [NPM](https://www.npmjs.com). So, in order to get started, you want to add the dependency to your code.
+Winston is available through [NPM][3]. So, in order to get started, you want to add the dependency to your code.
 
 ```
 npm install --save winston
@@ -123,3 +123,7 @@ Here are some little advices:
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://github.com/winstonjs/winston
+[2]: /logs/parsing
+[3]: https://www.npmjs.com

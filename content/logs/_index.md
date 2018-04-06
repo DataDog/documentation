@@ -10,7 +10,7 @@ description: "Configure your Datadog agent to gather logs from your host, contai
 
 Log collection requires an Agent version >= 6.0. Older versions of the Agent do not include the `Log collection` interface that is used for log collection.
 
-If you are not using it already, please follow [the agent installation instruction](/agent).
+If you are not using it already, please follow [the agent installation instruction][1].
 
 Collecting logs is **disabled** by default in the Datadog Agent, you need to enable it in `datadog.yaml`:
 
@@ -36,7 +36,7 @@ The Datadog Agent v6 can collect logs from files or the network (TCP or UDP) and
 * `type` : (mandatory) type of log input source (**tcp** / **udp** / **file**)
 * `port` / `path` : (mandatory) Set `port` if `type` is **tcp** or **udp**. Set `path` if `type` is **file**.
 * `service` : (mandatory) name of the service owning the log
-* `source` : (mandatory) attribute that defines which integration is sending the logs. "If the logs do not come from an existing integration then this field may include a custom source name. But we recommend matching this value to the namespace of any related [custom metrics](/getting_started/custom_metrics/) you are collecting, e.g, `myapp` from `myapp.request.count`)"
+* `source` : (mandatory) attribute that defines which integration is sending the logs. "If the logs do not come from an existing integration then this field may include a custom source name. But we recommend matching this value to the namespace of any related [custom metrics][2] you are collecting, e.g, `myapp` from `myapp.request.count`)"
 * `sourcecategory` : (optional) Multiple value attribute. Can be used to refine the source attribtue. Example: source:mongodb, sourcecategory:db_slow_logs
 * `tags`: (optional) add tags to each log collected.
 
@@ -63,7 +63,7 @@ logs:
     source: python
     sourcecategory: sourcecode
 ```
-* [Restart your agent](/agent/faq/agent-commands/#start-stop-restart-the-agent)
+* [Restart your agent][3]
 
 ## Stream logs through TCP/UDP
 Set `type` to **tcp** or **udp** depending of your protocol then specify the `port` of your incoming connection.
@@ -84,7 +84,7 @@ logs:
     sourcecategory: front
 
 ```
-* [Restart your agent](/agent/faq/agent-commands/#start-stop-restart-the-agent)
+* [Restart your agent][3]
 
 The agent supports raw string and JSON formated logs. If you are sending logs in batch, use break line characters to separate your logs.
 
@@ -259,7 +259,7 @@ However, if a JSON formatted log file includes one of the following attributes, 
 * `published_date`
 * `syslog.timestamp`
 
-You can also specify alternate attributes to use as the source of a log's date by setting a [log date remapper processor](/logs/processing/#log-date-remapper)
+You can also specify alternate attributes to use as the source of a log's date by setting a [log date remapper processor][4]
 
 **Note**: Datadog rejects a log entry if its official date is older than 18 hours in the past.
 
@@ -269,7 +269,7 @@ The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-
 
 ### *message* attribute
 
-By default, Datadog ingests the value of message as the body of the log entry. That value is then highlighted and displayed in the [logstream](/logs/explore/#logstream), where it is indexed for [full text search](/logs/explore/#search-bar).
+By default, Datadog ingests the value of message as the body of the log entry. That value is then highlighted and displayed in the [logstream][5], where it is indexed for [full text search][6].
 
 ### *status* attribute
 
@@ -279,7 +279,7 @@ Each log entry may specify a status level which is made available for faceted se
 * `level`
 * `syslog.severity`
 
-If you would like to remap some status existing in the `status` attribute, you can do so with the [log status remapper](/logs/processing/#log-status-remapper)
+If you would like to remap some status existing in the `status` attribute, you can do so with the [log status remapper][7]
 
 ### *host* attribute
 
@@ -310,3 +310,12 @@ To change the default values for each of the reserved attributes, go to the pipe
     {{< nextlink href="logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers" tag="FAQ" >}}How to Send Logs to Datadog via External Log Shippers{{< /nextlink >}}
     {{< nextlink href="logs/parsing" tag="Documentation" >}}Learn more about parsing{{< /nextlink >}}
 {{< /whatsnext >}}
+
+
+[1]: /agent
+[2]: /getting_started/custom_metrics/
+[3]: /agent/faq/agent-commands/#start-stop-restart-the-agent
+[4]: /logs/processing/#log-date-remapper
+[5]: /logs/explore/#logstream
+[6]: /logs/explore/#search-bar
+[7]: /logs/processing/#log-status-remapper

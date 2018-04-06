@@ -17,11 +17,11 @@ The Datadog Agent runs under the `dd-agent` user and `dd-agent` group. This prev
 
 ## Setting permissions using ACLs
 
-In order to allow read-only access for dd-agent only, [create ACLs and modify logrotate to persist the permissions changes](https://help.ubuntu.com/community/FilePermissionsACLs).
+In order to allow read-only access for dd-agent only, [create ACLs and modify logrotate to persist the permissions changes][1].
 
 ### Verifying ACLs are enabled on your system
 
-[ACLs needs to be enabled](https://www.tecmint.com/secure-files-using-acls-in-linux/) on your file system to set permissions using the methods outlined in this article.  Verify ACLs are enabled by using the`getfacl` and `setfacl` commands to set permissions for the dd-agent user on a test directory, for example:
+[ACLs needs to be enabled][2] on your file system to set permissions using the methods outlined in this article.  Verify ACLs are enabled by using the`getfacl` and `setfacl` commands to set permissions for the dd-agent user on a test directory, for example:
 
 ```
 mkdir /var/log/test-dir
@@ -46,7 +46,7 @@ setfacl -m u:dd-agent:rx /var/log/apache
 
 ### Setting permissions for log file rotation
 
-[Setting the permissions](http://bencane.com/2012/05/27/acl-using-access-control-lists-on-linux/) once will not persist for rotating logs, as logrotate does not re-apply the ACL setting. For a more permanent solution add a rule to logrotate to reset the ACL in a new file:
+[Setting the permissions][3] once will not persist for rotating logs, as logrotate does not re-apply the ACL setting. For a more permanent solution add a rule to logrotate to reset the ACL in a new file:
 
 ```
 sudo touch /etc/logrotate.d/dd-agent_ACLs
@@ -107,3 +107,8 @@ Each common off-the-shelf application will follow a similar nomenclature. The ad
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: https://help.ubuntu.com/community/FilePermissionsACLs
+[2]: https://www.tecmint.com/secure-files-using-acls-in-linux/
+[3]: http://bencane.com/2012/05/27/acl-using-access-control-lists-on-linux/

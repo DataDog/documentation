@@ -16,9 +16,9 @@ further_reading:
   text: Log Collection Troubleshooting Guide
 ---
 
-To send your go logs to Datadog, we recommend logging to a file and then tailing that file with your Datadog agent. To achieve that we suggest the following setup with the open source logging library called [logrus](https://github.com/sirupsen/logrus)
+To send your go logs to Datadog, we recommend logging to a file and then tailing that file with your Datadog agent. To achieve that we suggest the following setup with the open source logging library called [logrus][1]
 
-We strongly encourage setting up your logging library to produce your logs in JSON format to avoid the need for [custom parsing rules](/logs/parsing).
+We strongly encourage setting up your logging library to produce your logs in JSON format to avoid the need for [custom parsing rules][2].
 
 ## Configure your logger
 For a classic Go configuration, open a `main.go` file and paste the following code:
@@ -104,3 +104,7 @@ Here are some little advices:
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: https://github.com/sirupsen/logrus
+[2]: /logs/parsing

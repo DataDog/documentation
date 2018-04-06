@@ -75,7 +75,7 @@ When enabled, your logstream display changes to better focus on your logs `messa
 {{< img src="logs/explore/multi_line_log.png" alt="Log with Multi-line display" responsive="true" popup="true">}}
 
 **Note**:  If present, `error.stack` attribute is displayed in priority as it should be used for stack traces.
-Remap any stack-trace attribute to this specific attribute with [the attribute remapper processor](/logs/processing/#attribute-remapper).
+Remap any stack-trace attribute to this specific attribute with [the attribute remapper processor][1].
 
 ## Facets 
 
@@ -91,7 +91,7 @@ To start using an attribute as a Facet or in the search, click on it and add it 
 
 {{< img src="logs/explore/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" popup="true" style="width:50%;">}}
 
-Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the [Log graph query](/logs/#log-graph).
+Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the [Log graph query][2].
 
 ### Facet Panel
 
@@ -109,7 +109,7 @@ To start using an attribute as a measure, click on a numerical attribute of your
 
 {{< img src="logs/explore/create_a_mesure.png" alt="Create a measure" responsive="true" popup="true" style="width:80%;">}}
 
-Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the [Log graph query](/logs/#log-graph).
+Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the [Log graph query][2].
 
 ### Select the Measure Unit
 
@@ -121,7 +121,7 @@ All measure have their own unit that is then used for display in the Log explore
 
 The search query language is based on the Lucene query syntax:
 
-[Apache Lucene - Query Parser Syntax](http://lucene.apache.org/core/2_9_4/queryparsersyntax.html)
+[Apache Lucene - Query Parser Syntax][3]
 
 All search parameters are contained in the url, so it is very simple to share your view.
 
@@ -170,7 +170,7 @@ It is also possible to search for numerical attribute within a specific range. F
 
 ### Tags
 
-Your logs inherit tags from [hosts](/graphing/infrastructure/) and [integrations](/integrations/) that generate them. They can be used in the search and as facets as well:
+Your logs inherit tags from [hosts][4] and [integrations][5] that generate them. They can be used in the search and as facets as well:
 
 * `test` is searching for the string "test".
 * `("env:prod" OR test)` matches all logs with the tag #env:prod or the tag #test 
@@ -211,7 +211,7 @@ To start using it:
     {{< img src="logs/explore/graph/choose_measure_facet.png" alt="choose measure facet" responsive="true" popup="true" style="width:50%;">}}
 2. Select the aggregation function for the Measure you want to graph
     {{< img src="logs/explore/graph/agg_function_log_graph.png" alt="aggregation function for log graph" responsive="true" popup="true" style="width:50%;">}}
-3. Split by [Tag](/getting_started/tagging) or [Facet](#facets) to split your graph over the desired dimension.
+3. Split by [Tag][6] or [Facet](#facets) to split your graph over the desired dimension.
 
     {{< img src="logs/explore/graph/split_by_log_graph.png" alt="split by log graph" responsive="true" popup="true" style="width:50%;">}}
 
@@ -223,3 +223,11 @@ To start using it:
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: /logs/processing/#attribute-remapper
+[2]: /logs/#log-graph
+[3]: http://lucene.apache.org/core/2_9_4/queryparsersyntax.html
+[4]: /graphing/infrastructure/
+[5]: /integrations/
+[6]: /getting_started/tagging

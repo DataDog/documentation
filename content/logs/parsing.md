@@ -102,7 +102,7 @@ Here is the list of all the filters natively implemented by Datadog:
 |`keyvalue([separatorStr[, characterWhiteList [, quotingStr]])` |extracts key value pattern and returns a JSON object. [More info](#key-value) |
 |`scale(factor)` | multiplies the expected numerical value by the provided factor.|
 |`array([[openCloseStr, ] separator][, subRuleOrFilter)` | parses a string sequence of tokens and returns it as an array.|
-|`url`|parses a url and returns all the tokenized members (domain, query params, port, etc) in a JSON object. [More info](/logs/processing/#url-parser)|
+|`url`|parses a url and returns all the tokenized members (domain, query params, port, etc) in a JSON object. [More info][1]|
 {{% /table %}}
 
 ## Examples
@@ -156,7 +156,7 @@ The date matcher transforms your timestamp in the EPOCH format.
 |2007-08-31 19:22:22.427 ADT|`%{date("yyyy-MM-dd HH:mm:ss.SSS z"):date}`|{"date": 1188675889244}|
 {{% /table %}}
 
-**Note**: Parsing a date **doesn't** set its value as the log official date, for this use the Log Date Remapper [Log Date Remapper](/logs/processing/#log-date-remapper) in a subsequent processor.
+**Note**: Parsing a date **doesn't** set its value as the log official date, for this use the Log Date Remapper [Log Date Remapper][2] in a subsequent processor.
 
 
 ### Conditional pattern
@@ -222,3 +222,7 @@ MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-Z0-9]*"):user.id} .*
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: /logs/processing/#url-parser
+[2]: /logs/processing/#log-date-remapper
