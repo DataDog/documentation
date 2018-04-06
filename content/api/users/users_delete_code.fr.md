@@ -11,3 +11,4 @@ external_redirect: /api/#disable-user
 {{< code-snippets basename="api-user-disable" >}}
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-user-disable" >}}
+

@@ -24,3 +24,4 @@ The metrics end-point allows you to post time-series data that can be graphed on
         The name of the host that produced the metric.
     * **`tags`** [*optional*, *default*=**None**]:  
         A list of tags associated with the metric.
+

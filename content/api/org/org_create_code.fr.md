@@ -11,3 +11,5 @@ external_redirect: /api/#create-child-organization
 {{< code-snippets basename="api-org-create" >}}
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-org-create" >}}
+
+

@@ -11,3 +11,4 @@ external_redirect: /api/#mute-all-monitors
 {{< code-snippets basename="api-monitor-mute-all" >}}
 ##### Example Response
 {{< code-snippets basename="result.api-monitor-mute-all" >}}
+

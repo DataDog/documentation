@@ -12,3 +12,4 @@ Share an existing Screenboard's with a public URL.
 ##### ARGUMENTS
 
 This end point takes no JSON arguments.
+

@@ -11,3 +11,4 @@ external_redirect: /api/#post-an-event
 {{< code-snippets basename="api-events-post" >}}
 ##### Example Response
 {{< code-snippets basename="result.api-events-post" >}}
+

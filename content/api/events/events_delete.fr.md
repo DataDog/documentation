@@ -10,3 +10,5 @@ Cet endpoint vous permet de supprimer un événement.
 #### ARGUMENTS
 
 Cet endpoint ne prend aucun argument JSON.
+
+

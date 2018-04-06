@@ -11,3 +11,4 @@ external_redirect: /api/#revoke-a-shared-a-screenboard
 {{< code-snippets basename="api-screenboard-revoke" >}}
 ##### Exemple de réponse
 *Cet endpoint ne renvoie aucun objet JSON en cas de requête réussie.*
+

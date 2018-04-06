@@ -11,3 +11,4 @@ external_redirect: /api/#get-host-tags
 {{< code-snippets basename="api-tags-get-host" >}}
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-tags-get-host" >}}
+

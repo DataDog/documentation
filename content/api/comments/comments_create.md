@@ -6,7 +6,7 @@ external_redirect: /api/#create-a-comment
 ---
 
 ## Create A Comment
-Comments are essentially special forms of events that appear in the [event stream](/graphing/event_stream). They can start a new discussion thread or optionally, reply in another thread.
+Comments are essentially special forms of events that appear in the [event stream][1]. They can start a new discussion thread or optionally, reply in another thread.
 
 ##### ARGUMENTS
 * **`message`** [*required*]:  
@@ -19,3 +19,6 @@ Comments are essentially special forms of events that appear in the [event strea
     The id of another comment or event to reply to.
 
 
+
+
+[1]: /graphing/event_stream

@@ -13,3 +13,4 @@ external_redirect: /api/#slack
 {{< code-snippets basename="api-integrations-slack" >}}
 ##### Example Response
 {{< code-snippets basename="result.api-integrations-slack" >}}
+

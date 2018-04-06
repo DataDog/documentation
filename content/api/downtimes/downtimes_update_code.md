@@ -11,3 +11,4 @@ external_redirect: /api/#update-monitor-downtime
 {{< code-snippets basename="api-monitor-update-downtime" >}}
 ##### Example Response
 {{< code-snippets basename="result.api-monitor-update-downtime" >}}
+

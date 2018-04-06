@@ -11,11 +11,11 @@ This end point allows you to post events to the stream. Tag them, set priority a
 ##### ARGUMENTS
 * **`title`** [*required*]:  
     The event title. *Limited to 100 characters.*  
-    Use `msg_title` with [the Datadog Ruby library](https://github.com/DataDog/dogapi-rb).
+    Use `msg_title` with [the Datadog Ruby library][1].
 * **`text`** [*required*]:  
     The body of the event. *Limited to 4000 characters.*  
-    The text supports [markdown](/graphing/event_stream/#markdown-events\).
-    Use `msg_text` with [the Datadog Ruby library](https://github.com/DataDog/dogapi-rb)
+    The text supports [markdown][2].
+    Use `msg_text` with [the Datadog Ruby library][1]
 * **`date_happened`** [*optional*, *default* = **now**]:  
     POSIX timestamp of the event. Must be sent as an integer (i.e. no quotes). *Limited to events no older than 1 year, 24 days (389 days)*
 * **`priority`** [*optional*, *default* = **normal**]:  
@@ -32,4 +32,9 @@ This end point allows you to post events to the stream. Tag them, set priority a
 * **`source_type_name`** [*optional*, *default*=**None**]:  
     The type of event being posted.  
     Options: **nagios**, **hudson**, **jenkins**, **my_apps**, **chef**, **puppet**, **git**, **bitbucket**...  
-    [Complete list of source attribute values](/integrations/faq/list-of-api-source-attribute-value)
+    [Complete list of source attribute values][3]
+
+
+[1]: https://github.com/DataDog/dogapi-rb
+[2]: /graphing/event_stream/#markdown-events\
+[3]: /integrations/faq/list-of-api-source-attribute-value
