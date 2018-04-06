@@ -25,7 +25,7 @@ Si vous n'êtes toujours pas sûr du problème, vous pouvez contacter [l'équipe
 
 Pour activer le mode debug complet:
 
-1. Modifiez votre fichier `datadog.yaml` local (consultez [cette page](/agent/#configuration-files) pour localiser ce fichier de configuration sur votre instance)
+1. Modifiez votre fichier `datadog.yaml` local (consultez [cette page](/agent/basic_agent_usage/#configuration-files) pour localiser ce fichier de configuration sur votre instance)
 
 2. Remplacez `# log_level: INFO` par` log_level: DEBUG` (assurez-vous de vous débarrasser de # pour décommenter la ligne)
 
