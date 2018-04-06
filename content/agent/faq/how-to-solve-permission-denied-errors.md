@@ -42,6 +42,6 @@ sudo chown -R dd-agent:dd-agent /var/log/datadog/
 
 Then [restart the agent](/agent/faq/agent-commands).
 
-[More information on the agent logs locations](/agent/#log-locations).
+[More information on the agent logs locations](/agent/basic_agent_usage/#log-location).
 
 {{< partial name="whats-next/whats-next.html" >}}
