@@ -22,7 +22,7 @@ For Python applications, note that tracing is disabled when your application is 
 
 ## Installation
 
-To begin tracing applications written in Python, first [install and configure the Datadog Agent](/tracing/setup) (see additional documentation for [tracing Docker applications](/tracing/setup/docker/)).
+To begin tracing applications written in Python, first [install and configure the Datadog Agent][1] (see additional documentation for [tracing Docker applications](/tracing/setup/docker/)).
 
 Next, install the Datadog Tracing library using pip:
 
@@ -42,7 +42,7 @@ with tracer.trace("web.request", service="my_service") as span:
   span.set_tag("my_tag", "my_value")
 ```
 
-For more examples, see the [Getting Started section of library documentation](http://pypi.datadoghq.com/trace/docs/#get-started).
+For more examples, see the [Getting Started section of library documentation][2].
 
 ## Compatibility
 
@@ -123,3 +123,7 @@ Each time its called, the following code produces this **trace**:
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: /tracing/setup
+[2]: http://pypi.datadoghq.com/trace/docs/#get-started

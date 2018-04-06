@@ -33,11 +33,20 @@ This series shows you everything you need to know to get started with Datadog. T
 
 For more information, be sure to check out these links talked about in the video:
 
-* [The open source agent](http://dtdg.co/101-agent-gh)
-* [Datadog agent documentation](http://dtdg.co/101-agent)
-* [Integrations - Inside the Datadog app](http://dtdg.co/101-tiles)
-* [Integrations - Documentation](http://dtdg.co/101-int-docs)
-* [Getting started with DogStatsD](http://dtdg.co/101-dogstatsd)
-* [Sending metrics with DogStatsD](http://dtdg.co/101-senddogstatsd)
-* [Datadog API](http://dtdg.co/101-api)
-* [Datadog Libraries & Frameworks](http://dtdg.co/101-libs)
+* [The open source agent][1]
+* [Datadog agent documentation][2]
+* [Integrations - Inside the Datadog app][3]
+* [Integrations - Documentation][4]
+* [Getting started with DogStatsD][5]
+* [Sending metrics with DogStatsD][6]
+* [Datadog API][7]
+* [Datadog Libraries & Frameworks][8]
+
+[1]: http://dtdg.co/101-agent-gh
+[2]: http://dtdg.co/101-agent
+[3]: http://dtdg.co/101-tiles
+[4]: http://dtdg.co/101-int-docs
+[5]: http://dtdg.co/101-dogstatsd
+[6]: http://dtdg.co/101-senddogstatsd
+[7]: http://dtdg.co/101-api
+[8]: http://dtdg.co/101-libs

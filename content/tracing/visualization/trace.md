@@ -37,7 +37,7 @@ If you are analyzing an error trace, the error has a specific display if you fol
 
 ### Traces special meaning tags
 
-When [submitting your traces](/api/#tracing) you may add attributes in the `meta` parameter.  
+When [submitting your traces][1] you may add attributes in the `meta` parameter.  
 Some of them have a special meaning which lead to a dedicated display and behavior in Datadog:
 
 * **`sql.query`**:  
@@ -57,3 +57,5 @@ Some of them have a special meaning which lead to a dedicated display and behavi
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /api/#tracing

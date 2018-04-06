@@ -18,7 +18,7 @@ further_reading:
 
 ## Installation
 
-To begin tracing applications written in Ruby, first [install and configure the Datadog Agent](/tracing/setup) (see additional documentation for [tracing Docker applications](/tracing/setup/docker/)).
+To begin tracing applications written in Ruby, first [install and configure the Datadog Agent][1] (see additional documentation for [tracing Docker applications](/tracing/setup/docker/)).
 
 Next, install the ddtrace gem:
 
@@ -40,7 +40,7 @@ tracer.trace("web.request") do |span|
 end
 ```
 
-For more examples, see the [RubyDoc Gem documentation](http://gems.datadoghq.com/trace/docs/).
+For more examples, see the [RubyDoc Gem documentation][2].
 
 ## Compatibility
 
@@ -86,3 +86,7 @@ ___
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: /tracing/setup
+[2]: http://gems.datadoghq.com/trace/docs/
