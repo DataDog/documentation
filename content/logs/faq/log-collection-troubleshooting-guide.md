@@ -21,7 +21,7 @@ After you've made any configuration changes to the dd-agent, the changes only ta
 
 ## No new logs have been written
 
-The dd-agent only collects logs that have been written after it has started trying to collect them (whether it be tailing or listening for them. In order to confirm whether log collection has been successfully set up, make sure that new logs have been written.
+The dd-agent only collects logs that have been written after it has started trying to collect them (whether it be tailing or listening for them). In order to confirm whether log collection has been successfully set up, make sure that new logs have been written.
 
 ## Permission Issues While Tailing Log Files
 
@@ -33,7 +33,7 @@ N.B. when you add the appropriate read permissions, you want also to make sure t
 
 ## Outbound traffic on port 10516 is blocked
 
-The log-agent within the dd-agent sends its logs to Datadog over tcp via port 10516. If that connection is not available, logs fail to be sent and an error is recorded in the logs-agent.log to that effect.
+The log-agent within the dd-agent sends its logs to Datadog over tcp via port 10516. If that connection is not available, logs fail to be sent and an error is recorded in the agent.log to that effect.
 
 Test manually your connection by running a telnet or openssl command like so (port 10514 would work too, but is less secure):
 
