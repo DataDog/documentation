@@ -14,6 +14,9 @@ platforms:
   - name: fedora
     link: agent/basic_agent_usage/fedora/
     image: platform_fedora.png
+  - name: heroku
+    link: agent/basic_agent_usage/heroku/
+    image: platform_heroku.png
   - name: kubernetes
     link: agent/basic_agent_usage/kubernetes/
     image: platform_kubernetes.png
