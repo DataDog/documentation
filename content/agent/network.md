@@ -17,7 +17,8 @@ further_reading:
   text: Collect your traces
 ---
 
-* **Traffic is always initiated by the agent to Datadog. No sessions are ever initiated from Datadog back to the agent**
+**Traffic is always initiated by the agent to Datadog. No sessions are ever initiated from Datadog back to the agent**:
+
 * All traffic is sent over SSL
 * The destination for [APM](/tracing) data is `trace.agent.datadoghq.com`
 * The destination for [Live Containers](/graphing/infrastructure/livecontainers) data is `process.datadoghq.com`
@@ -34,7 +35,7 @@ As a consequence whitelist `*.agent.datadoghq.com` in your firewalls.
 
 These domains are **CNAME** records pointing to a set of static IP addresses, these addresses can be found at:  
 
-* [https://ip-ranges.datadoghq.com](https://ip-ranges.datadoghq.com)
+* **[https://ip-ranges.datadoghq.com](https://ip-ranges.datadoghq.com)**
 
 The information is structured as JSON following this schema: 
 
