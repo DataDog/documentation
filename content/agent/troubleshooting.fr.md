@@ -17,7 +17,7 @@ further_reading:
 ---
 Si vous êtes arrivé sur cette page et que vous n'avez pas encore installé l'agent Datadog, [accédez à la page d'intégration de l'agent](https://app.datadoghq.com/account/settings#agent) pour obtenir des instructions d'installation. Si vous venez d'installer l'agent, cela peut prendre quelques instants avant que vous ne commenciez à voir apparaître des métriques. Le premier endroit où vous devriez vérifier l'envoi de métriques est la page [Metrics Explorer](https://app.datadoghq.com/metric/explorer).
 
-Si vous pensez que vous rencontrez des problèmes, la première chose à faire est [d'exécutez la commande info](/agent/faq/agent-commands/#agent-status-and-information) et vérifiez les [logs de l'agent](/agent/basic_agent_usage/#log-location).
+Si vous pensez que vous rencontrez des problèmes, la première chose à faire est [d'exécutez la commande info](/agent/faq/agent-commands/#agent-status-and-information) et vérifiez les [logs de l'agent](/agent/#log-locations).
 
 Si vous n'êtes toujours pas sûr du problème, vous pouvez contacter [l'équipe support de Datadog](/help) avec [un flare](#send-a-flare) de votre agent.
 
@@ -25,13 +25,13 @@ Si vous n'êtes toujours pas sûr du problème, vous pouvez contacter [l'équipe
 
 Pour activer le mode debug complet:
 
-1. Modifiez votre fichier `datadog.yaml` local (consultez [cette page](/agent/basic_agent_usage/#configuration-files) pour localiser ce fichier de configuration sur votre instance)
+1. Modifiez votre fichier `datadog.yaml` local (consultez [cette page](/agent/#configuration-files) pour localiser ce fichier de configuration sur votre instance)
 
 2. Remplacez `# log_level: INFO` par` log_level: DEBUG` (assurez-vous de vous débarrasser de # pour décommenter la ligne)
 
 3. Redémarrez votre Agent Datadog (consultez [cette page](/agent/faq/agent-commands) pour trouver la commande de redémarrage en fonction de votre système d'exploitation)
 
-4. Attendez quelques minutes pour générer des logs. [Consultez cette page](/agent/basic_agent_usage/#log-location) pour trouver l'emplacement des logs.
+4. Attendez quelques minutes pour générer des logs. [Consultez cette page](/agent/#log-locations) pour trouver l'emplacement des logs.
 
 ### Obtention des logs de debug à partir de l'agent conteneur
 

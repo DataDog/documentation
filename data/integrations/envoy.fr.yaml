@@ -2793,3 +2793,222 @@ envoy:
     per_unit_name: ''
     short_name: ''
     unit_name: occurrence
+  - description: >-
+      Total cluster membership updates ending with empty cluster load assignment
+      and continuing with previous config
+    integration: envoy
+    interval: ''
+    metric_name: envoy.cluster.update_empty
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: occurrence
+  - description: >-
+      The number of times locality aware routing structures are regenerated for
+      fast decisions on upstream locality selection
+    integration: envoy
+    interval: ''
+    metric_name: envoy.cluster.lb_recalculate_zone_structures
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: occurrence
+  - description: >-
+      Total number of times ended with random zone selection due to rounding
+      error
+    integration: envoy
+    interval: ''
+    metric_name: envoy.cluster.lb_zone_no_capacity_left
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: occurrence
+  - description: Total number of traceable decisions by random sampling
+    integration: envoy
+    interval: ''
+    metric_name: envoy.http.tracing.random_sampling
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: occurrence
+  - description: >-
+      Total number of traceable decisions by server runtime flag
+      tracing.global_enabled
+    integration: envoy
+    interval: ''
+    metric_name: envoy.http.tracing.service_forced
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: occurrence
+  - description: Total number of traceable decisions by request header x-envoy-force-trace
+    integration: envoy
+    interval: ''
+    metric_name: envoy.http.tracing.client_enabled
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: occurrence
+  - description: Total number of non-traceable decisions by request id
+    integration: envoy
+    interval: ''
+    metric_name: envoy.http.tracing.not_traceable
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: occurrence
+  - description: Total number of non-traceable decisions by health check
+    integration: envoy
+    interval: ''
+    metric_name: envoy.http.tracing.health_check
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: occurrence
+  - description: Total requests that resulted in a direct response
+    integration: envoy
+    interval: ''
+    metric_name: envoy.http.rq_direct_response
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: request
+  - description: >-
+      Total number of times Envoy cannot allocate a statistic due to a shortage
+      of shared memory
+    integration: envoy
+    interval: ''
+    metric_name: envoy.stats.overflow
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: error
+  - description: Current server uptime in seconds
+    integration: envoy
+    interval: ''
+    metric_name: envoy.server.uptime
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: second
+  - description: Current amount of allocated memory in bytes
+    integration: envoy
+    interval: ''
+    metric_name: envoy.server.memory_allocated
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: byte
+  - description: Current reserved heap size in bytes
+    integration: envoy
+    interval: ''
+    metric_name: envoy.server.memory_heap_size
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: byte
+  - description: '1 if the server is not currently draining, 0 otherwise'
+    integration: envoy
+    interval: ''
+    metric_name: envoy.server.live
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: occurrence
+  - description: Total connections of the old Envoy process on hot restart
+    integration: envoy
+    interval: ''
+    metric_name: envoy.server.parent_connections
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: connection
+  - description: Total connections of both new and old Envoy processes
+    integration: envoy
+    interval: ''
+    metric_name: envoy.server.total_connections
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: connection
+  - description: Integer represented version number based on SCM revision
+    integration: envoy
+    interval: ''
+    metric_name: envoy.server.version
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: item
+  - description: Number of days until the next certificate being managed will expire
+    integration: envoy
+    interval: ''
+    metric_name: envoy.server.days_until_first_cert_expiring
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: day
+  - description: Total number of times file data is moved to Envoy’s internal flush buffer
+    integration: envoy
+    interval: ''
+    metric_name: envoy.filesystem.write_buffered
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: occurrence
+  - description: Total number of times a file was written
+    integration: envoy
+    interval: ''
+    metric_name: envoy.filesystem.write_completed
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: occurrence
+  - description: >-
+      Total number of times internal flush buffers are written to a file due to
+      flush timeout
+    integration: envoy
+    interval: ''
+    metric_name: envoy.filesystem.flushed_by_timer
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: occurrence
+  - description: Total number of times a file was failed to be opened
+    integration: envoy
+    interval: ''
+    metric_name: envoy.filesystem.reopen_failed
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: occurrence
+  - description: Current total size of internal flush buffer in bytes
+    integration: envoy
+    interval: ''
+    metric_name: envoy.filesystem.write_total_buffered
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: byte
