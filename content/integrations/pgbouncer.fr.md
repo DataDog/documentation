@@ -22,7 +22,7 @@ support: core
 supported_os:
 - linux
 - mac_os
-version: 1.1.0
+version: 1.2.0
 ---
 
 
