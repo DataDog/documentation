@@ -41,7 +41,7 @@ In addition to the environment variables shown above, there are a number of othe
 | Setting | Description|
 | --- | --- |
 | `DD_API_KEY` | *Required.* Your API key is available from the [Datadog API integrations](https://app.datadoghq.com/account/settings#api) page. Note that this is the *API* key, not the application key. |
-| `DD_HOSTNAME` | *Required.* Because Heroku Dynos are ephemeral and your application my be served by any available Dyno resource, set the hostname to the application or service name. To view metrics by Dyno hosts, the tag `dynohost` is added by the buildpack. |
+| `DD_HOSTNAME` | *Deprecated.* **WARNING**: Setting the hostname manually may result in metrics continuity errors. It is recommended that you do *not* set this variable. Because dyno hosts are ephemeral it is recommended that you monitor based on the tags `dynoname` or `appname`. |
 | `DD_TAGS` | *Optional.* Sets additional tags provided as a comma-delimited string. For example, `heroku config:set DD_TAGS=simple-tag-0,tag-key-1:tag-value-1`. The buildpack automatically adds the tags `dyno` and `dynohost` which represent the Dyno name (e.g. web.1) and host ID (e.g. 33f232db-7fa7-461e-b623-18e60944f44f) respectively. See the ["Guide to tagging"](http://docs.datadoghq.com/guides/tagging/) for more information. |
 | `DD_HISTOGRAM_PERCENTILES` | *Optional.* Optionally set additional percentiles for your histogram metrics. See [Histogram percentiles](#histogram-percentiles) below for more information. |
 | `DISABLE_DATADOG_AGENT` | *Optional.* When set, the Datadog agent will not be run. |
@@ -51,48 +51,6 @@ In addition to the environment variables shown above, there are a number of othe
 | `DD_SERVICE_ENV` | *Optional.* The Datadog Agent automatically tries to identify your environment by searching for a tag in the form `env:<environment name>`. For more information, see the [Datadog Tracing environments page](https://docs.datadoghq.com/tracing/environments/). |
 {{% /table %}}
 
-### Histogram percentiles
+## More information
 
-Optionally set additional percentiles for your histogram metrics. By default only the 95th percentile is generated. To generate additional percentiles, set *all* percentiles, including the default, using the env variable `DD_HISTOGRAM_PERCENTILES`.  For example, to generate 0.95 and 0.99 percentiles, use the following command:
-
-```shell
-heroku config:add DD_HISTOGRAM_PERCENTILES="0.95, 0.99"
-```
-
-For more information about about additional percentiles, see the [percentiles documentation](https://help.datadoghq.com/hc/en-us/articles/204588979-How-to-graph-percentiles-in-Datadog).
-
-### Service name
-
-A service is a named set of processes that do the same job, such as `webapp` or `database`. The service name provides context when evaluating your trace data.
-
-Although the service name is passed to Datadog on the application level, it is recommended that you set the value as an environment variable rather than directly in your application code.
-
-For example, set the service name as an environment variable:
-
-```shell
-heroku config:set DD_SERVICE_NAME=my-webapp
-```
-
-Then in a python web application, set the service name from the environment variable:
-
-```python
-import os
-from ddtrace import tracer
-
-service_nane = os.environ.get('DD_SERVICE_NAME')
-span = tracer.trace("web.request", service=service_name)
-...
-span.finish()
-```
-
-For Ruby on Rails applications, configure the `config/initializers/datadog-tracer.rb` file:
-
-```ruby
-require 'ddtrace'
-ies
-Datadog.configure do |c|
-  c.use :rails, service_name: ENV['DD_SERVICE_NAME'] || 'my-app'
-end
-```
-
-Setting the service name varies according to your language or supported framework. Reference the [Datadog libraries list](https://docs.datadoghq.com/libraries/) for specific language support.
+For more information, view the source code, or contribute to this project, refer to the [Github project page](https://github.com/DataDog/heroku-buildpack-datadog).
