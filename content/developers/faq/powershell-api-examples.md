@@ -27,8 +27,8 @@ $http_request.responseText
 
 1. Replace the api/app key with yours
 ```
-$api_key = "9775a026f1ca7d1c6c5af9d94d9595a4" 
-$app_key = "87ce4a24b5553d2e482ea8a8500e71b8ad4554ff"
+$api_key = "<YOUR_API_KEY>" 
+$app_key = "<YOUR_APP_KEY>"
 ```
 
 2. Set up your parameters according to [description in the host API](/api/#hosts), shell tab
@@ -50,8 +50,8 @@ $parameters = "{
 
 1. Replace the api/app key with yours
 ```
-$api_key = "9775a026f1ca7d1c6c5af9d94d9595a4" 
-$app_key = "87ce4a24b5553d2e482ea8a8500e71b8ad4554ff"
+$api_key = "<YOUR_API_KEY>" 
+$app_key = "<YOUR_APP_KEY>"
 ```
 
 3. Set up parameters according to [description in the metrics API](/api/#metrics), shell tab
