@@ -26,7 +26,7 @@ Here is a quick overview of the different terms used:
 
     A **[Change Alert][2]** compares the absolute or percentage change in
     value between now and some time ago against a given threshold.
-    The compared data points are nots single points but are computed using
+    The compared data points are not single points but are computed using
     the parameters in the *alert conditions* section.  
     This type of alert is useful to track sudden spikes or drops as well as slow changes in a metric when you might not have an exact "unexpected" threshold.  
     **Note:** the calculated value is not the absolute value - meaning it is

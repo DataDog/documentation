@@ -3,7 +3,7 @@ title: Custom Metrics
 kind: documentation
 ---
 
-Datadog allows for custom metrics submission through multiple ways to offer a full understanding of what is happening on your infrastructure.
+Datadog allows you to submit custom metrics in multiple ways in order to provide a comprehensive view of what is happening in your infrastructure
 
 This article explains:
 

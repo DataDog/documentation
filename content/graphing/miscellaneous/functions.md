@@ -44,7 +44,7 @@ It allows you to tweak the interpolation settings. It takes as parameters a func
 
 ## Timeshift
 
-Here is a set of functions there of the pattern &lt;timeperiod&gt;_before(). These functions display the values from the corresponding time period on the graph. On their own, they may not be of high value, but together with the current values they may provide useful insight into the performance of your application.
+Here is a set of functions of the pattern &lt;timeperiod&gt;_before(). These functions display the values from the corresponding time period on the graph. On their own, they may not be of high value, but together with the current values they may provide useful insight into the performance of your application.
 
 ### hour_before()
 
@@ -280,7 +280,7 @@ For example, `bottom10_min()` retrieves lowest-valued 10 series using the `min` 
 
 ### top_offset()
 
-Similar to `top()`, except with an additional offset parameter, which controls where in the ordered sequence of series the graphing starts.  
+Similar to `top()`, except with an additional offset parameter that controls where in the ordered sequence of series the graphing starts.  
 For example, an offset of 2 would start graphing at the number 3 ranked series, according to the chosen ranking metric.
 
 ## Count

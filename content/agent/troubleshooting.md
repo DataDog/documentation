@@ -1,4 +1,3 @@
-
 ---
 title: Agent Troubleshooting
 kind: documentation
@@ -27,11 +26,11 @@ If you're still unsure about the issue, you may reach out to [Datadog support te
 
 To enable the full debug mode:
 
-1. Modify your local `datadog.yaml` file (see [this page][22] to locate this configuration file on your instance)
+1. Modify your local `datadog.yaml` file (see [this page](/agent/basic_agent_usage/#configuration-files) to locate this configuration file on your instance)
 
 2. Replace `# log_level: INFO` with `log_level: DEBUG` (make sure to get rid of # to uncomment the line)
 
-3. Restart your Datadog Agent (see [that page][3] to find the restart command depending on your OS)
+3. Restart your Datadog Agent (see [that page](/agent/faq/agent-commands) to find the restart command depending on your OS)
 
 4. Wait a few minutes to generate some logs. [Look here][4] to find the location of the logs.
 
@@ -67,21 +66,21 @@ If you are running the 5.3 version (or higher) of the agent, you're able to send
 **Confirm the upload of the archive to immediately send it to Datadog support**.  
 Since the Datadog Agent is completely open source, you can [verify the code's behavior][7]. You can also review the archive prior to sending as the flare prompts a confirmation before uploading it.  
 
-In the commands below, replace `` with your Datadog support case ID, if you don't specify a case ID, the command asks for an email address that is used to login in your organization and creates a new support case.
+In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if you don't specify a case ID, the command asks for an email address that is used to login in your organization and creates a new support case.
 
 |Platform|Agent v5 |Agent v6|
 |:--------|:-----|:--------|
-|Linux| `sudo /etc/init.d/datadog-agent flare ` | `sudo -u dd-agent -- datadog-agent flare `|
-|Docker|`docker exec -it dd-agent /etc/init.d/datadog-agent flare `|`docker exec -it datadog-agent agent flare `|
-|Docker (Alpine)|`docker exec -it dd-agent /opt/datadog-agent/bin/agent flare `||
-|MacOS x|`datadog-agent flare `              | `datadog-agent flare ` or web [web GUI][8]
-|CentOS| `sudo service datadog-agent flare `              | `sudo datadog-agent flare `              |
-|Debian| `sudo service datadog-agent flare `              | `sudo datadog-agent flare `              |
-|Kubernetes|`kubectl exec  -it /etc/init.d/datadog-agent flare `|`kubectl exec  -it agent flare `|
-|Fedora|`sudo service datadog-agent flare `              | `sudo datadog-agent flare `              |
-|Redhat|`sudo service datadog-agent flare `              | `sudo datadog-agent flare `              |
-|Suse|`sudo service datadog-agent flare `              | `sudo datadog-agent flare `              |
-|Source|`sudo ~/.datadog-agent/bin/agent flare `|`sudo datadog-agent flare `|
+|Linux| `sudo /etc/init.d/datadog-agent flare <CASE_ID>` | `sudo -u dd-agent -- datadog-agent flare <CASE_ID>`|
+|Docker|`docker exec -it dd-agent /etc/init.d/datadog-agent flare <CASE_ID>`|`docker exec -it datadog-agent agent flare <CASE_ID>`|
+|Docker (Alpine)|`docker exec -it dd-agent /opt/datadog-agent/bin/agent flare <CASE_ID>`||
+|MacOS x|`datadog-agent flare <CASE_ID>`              | `datadog-agent flare <CASE_ID>` or web [web GUI][8]
+|CentOS| `sudo service datadog-agent flare <CASE_ID>`              | `sudo datadog-agent flare <CASE_ID>`              |
+|Debian| `sudo service datadog-agent flare <CASE_ID>`              | `sudo datadog-agent flare <CASE_ID>`              |
+|Kubernetes|`kubectl exec <pod-name> -it /etc/init.d/datadog-agent flare <CASE_ID>`|`kubectl exec <pod-name> -it agent flare <CASE_ID>`|
+|Fedora|`sudo service datadog-agent flare <CASE_ID>`              | `sudo datadog-agent flare <CASE_ID>`              |
+|Redhat|`sudo service datadog-agent flare <CASE_ID>`              | `sudo datadog-agent flare <CASE_ID>`              |
+|Suse|`sudo service datadog-agent flare <CASE_ID>`              | `sudo datadog-agent flare <CASE_ID>`              |
+|Source|`sudo ~/.datadog-agent/bin/agent flare <CASE_ID>`|`sudo datadog-agent flare <CASE_ID>`|
 |Windows|[Consult our dedicated windows doc][9]|[Consult our dedicated windows doc][10]|
 
 ## FAQ
@@ -106,7 +105,7 @@ In the commands below, replace `` with your Datadog support case ID, if you don'
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://app.datadoghq.com/metric/explorer
 [3]: /agent/faq/agent-commands/#agent-status-and-information
-[4]: /agent/#log-locations
+[4]: /agent/basic_agent_usage/#log-location
 [5]: /help
 [6]: /agent/faq/agent-5-container-more-log
 [7]: https://github.com/DataDog/dd-agent/blob/master/utils/flare.py
@@ -124,5 +123,3 @@ In the commands below, replace `` with your Datadog support case ID, if you don'
 [19]: /agent/faq/why-don-t-i-see-the-system-processes-open-file-descriptors-metric
 [20]: /agent/faq/how-is-the-system-mem-used-metric-calculated
 [21]: /agent/faq/how-do-i-install-the-agent-on-a-server-with-limited-internet-connectivity
-[22]: /agent/#configuration-files
-

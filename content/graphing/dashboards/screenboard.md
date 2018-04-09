@@ -40,9 +40,9 @@ A user can find all events related to Screenboard changes to the Screenboard the
 
 ## Auditing Dashboards
 
-In dashboards, notifications provide the ability to track changes for audit purposes. Any changes made creates an event in the [event stream][2] that explains the change and displays the user that made the actual change.
+In dashboards, notifications provide the ability to track changes for audit purposes. Any change creates an event in the [event stream][2] that explains the change and displays the user that made the actual change.
 
-If any changes are made to your dashboards, see them with the following event search:
+If any changes are made to your dashboards, they can be seen with the following event search:
 
 https://app.datadoghq.com/event/stream?per_page=30&query=tags:audit%20status:all
 

@@ -62,3 +62,7 @@ Reportez-vous à l'installation standard du [daemonset][6] et à  la page d'info
 [4]: https://github.com/DataDog/docker-dd-agent
 [5]: https://github.com/DataDog/docker-dd-agent#configuration-files
 [6]: /integrations/kubernetes/#installation-via-daemonsets-kubernetes-110
+
+
+
+

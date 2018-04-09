@@ -62,7 +62,7 @@ Kubernetes Containers are tagged by:
 
 Making sense of thousands or tens of thousands of containers can seem overwhelming!  Using tagging, described in the previous section, makes navigation easy.
 
-In the below, we have filtered down to a Kubernetes cluster of 9 nodes.  
+In the screenshot below, we have filtered down to a Kubernetes cluster of 9 nodes.  
 RSS and CPU utilization on containers is reported compared to the provisioned limits on the containers, when they exist.  
 Here, we see that the containers in this cluster are way over provisioned, and that we could use tighter limits and bin packing to achieve better utilization of resources.
 

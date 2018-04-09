@@ -100,9 +100,7 @@ An easy way to accomplish this would be to use the following script that leverag
 
 This script outputs all the current running Agents and their version numbers to a separate document.  Additionally, you can edit the script to input a desired Version number if you would also like all the running Agents that are under a particular version number.  There is also a separate file if you would like to convert the JSON output into a CSV file for your review.
 
-Once you determine which hosts you would like to update you can either manually install the Agent from the [install page][3].   
-
-Or you can make use of one our automation integrations like [Chef][4], [Puppet][5], or [Ansible][6].
+Once you determine which hosts you would like to update you can either manually install the Agent from the [install page][3], or you can use one of our automation integrations like [Chef][4], [Puppet][5], or [Ansible][6].
 
 ### List of ec2 instances without the datadog-agent installed
 
@@ -120,6 +118,7 @@ You can programmatically access host information and get the insights you need, 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: /agent/faq/agent-commands/#agent-status-and-information
 [2]: https://github.com/DataDog/dd-agent/blob/5.14.1/utils/hostname.py#L104

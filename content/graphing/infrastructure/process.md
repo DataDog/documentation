@@ -31,11 +31,16 @@ The following installation processes are for [agent v6 only][6], if you are stil
 
 The process agent is shipped by default with Agent 6 in Linux packages only. Refer to the instructions for standard [Agent installation][8] for platform-specific details.
 
-Once the Datadog Agent is installed, enable Live Processes collection by editing the [configuration file][9] at :
+Once the Datadog Agent is installed, enable Live Processes collection by editing the [configuration file][9] at:
 
-```
-/etc/datadog-agent/datadog.yaml
-```
+* Linux
+  ```
+  /etc/datadog-agent/datadog.yaml
+  ```
+* Windows:
+  ```
+  \\ProgramData\Datadog\datadog.yaml
+  ```
 
 by adding the following:
 
@@ -116,7 +121,7 @@ Ok, so I guess that one is less exciting after redaction!
 
 ## Enriched Live Containers view
 
-Live Processes adds extra visibility to your container deployments.  The [Live Containers][14] feature gives you a similarly comprehensive view of your container and orcestrator environment.  When Live Processes is enabled, the process tree for each container is included in the container inspection panel on that page.
+Live Processes adds extra visibility to your container deployments.  The [Live Containers][14] feature gives you a similarly comprehensive view of your container and orchestrator environment.  When Live Processes is enabled, the process tree for each container is included in the container inspection panel on that page.
 
 {{< img src="graphing/infrastructure/process/containerinspect.png" alt="container inspect" responsive="true" popup="true" style="width:80%;">}}
 
@@ -135,19 +140,18 @@ While actively working with the Live Processes, metrics are collected at 2s reso
 - In container deployments, the `/etc/passwd` file mounted into the docker-dd-agent is necessary to collect usernames for each process.  This is a public file and the Process Agent does not use any fields except the username.  All features except the `user` metadata field will function without access to this file.
   - Note:  Live Processes only uses the host `passwd` file and will not perform username resolution for users created within containers.
 
-[1]: https://app.datadoghq.com/account/settings#agent
-[4]: /integrations/kubernetes/
-[5]: https://github.com/DataDog/docker-dd-agent
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
+[1]: https://app.datadoghq.com/account/settings#agent
+[4]: /integrations/kubernetes/
+[5]: https://github.com/DataDog/docker-dd-agent
 [6]: /agent
 [7]: /agent/faq/agent-5-process-collection
 [8]: https://app.datadoghq.com/account/settings#agent
-[9]: /agent/#configuration-file
+[9]: /agent/basic_agent_usage/#configuration-file
 [10]: /agent/faq/agent-commands
 [11]: /agent/basic_agent_usage/docker/#run-the-docker-agent
 [12]: https://app.datadoghq.com/account/settings#agent/kubernetes

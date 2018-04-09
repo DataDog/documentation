@@ -259,8 +259,12 @@ If you suspect there is some error occurring beyond the scope of your custom log
 [4]: https://github.com/DataDog/dd-agent/blob/master/dogstream/cassandra.py
 [5]: /graphing/event_stream/
 [6]: https://github.com/DataDog/dd-agent/blob/5.13.x/checks/datadog.py#L210
-[7]: /agent/#log-locations
+[7]: /agent/basic_agent_usage/#log-location
 [8]: https://github.com/DataDog/dd-agent/blob/5.7.x/datadog.conf.example#L211
 [9]: /agent/faq/agent-commands
 [10]: /help
 [11]: /agent/#send-a-flare
+
+
+
+

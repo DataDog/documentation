@@ -161,7 +161,8 @@ In order to get the best use out of your logs in Datadog, it is important to hav
 {
     "syslog.hostname": "myhostname",
     "syslog.appname": "myappname",
-    "ddsource": "mysourcename"
+    "ddsource": "mysourcename",
+    "ddtags":"tag1:value1, tag2:value2"
 }
 ```
 

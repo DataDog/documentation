@@ -188,19 +188,21 @@ The configuration file has the following structure:
 
 ```yaml
 init_config:
-    min_collection_interval: 20
     key1: val1
     key2: val2
 
 instances:
     - username: jon_smith
       password: 1234
-
+      min_collection_interval: 20
     - username: jane_smith
       password: 5678
+      min_collection_interval: 20
 ```
 
-`min_collection_interval` can be added to the `init_config` section to help define how often the check should be run. If it is greater than the interval time for the agent collector, a line is added to the log stating that collection for this script was skipped. The default is `0` which means it's collected at the same interval as the rest of the integrations on that agent.
+For Agent 5, `min_collection_interval` can be added to the `init_config` section to help define how often the check should be run globally, or defined at the instance level. For Agent 6, `min_collection_interval` must be added at an instance level, and can be configured individually for each instance. 
+
+If it is greater than the interval time for the agent collector, a line is added to the log stating that collection for this script was skipped. The default is `0` which means it's collected at the same interval as the rest of the integrations on that agent.
 If the value is set to `30`, it does not mean that the metric is collected every 30 seconds, but rather that it could be collected as often as every 30 seconds.
 
 The collector runs every 15-20 seconds depending on how many integrations are enabled. If the interval on this agent happens to be every 20 seconds, then the agent collects and includes the agent check. The next time it collects 20 seconds later, it sees that 20 < 30 and don't collect the custom agent check. The next time it sees that the time since last run was 40 which is greater than 30 and therefore the agent check is collected.
@@ -252,7 +254,178 @@ class HelloCheck(AgentCheck):
         self.gauge('hello.world', 1)
 ```
 
-That's it!  If you are using Agent v5, [consult our Custom HTTP check example][9]
+## An HTTP Check
+
+Let's write a basic check that checks the status of an HTTP endpoint. On each run of the check, a *GET* request is made to the HTTP endpoint. Based on the response, one of the following happens:
+
+* If the response is successful (response is 200, no timeout) the response time is submitted as a metric.
+* If the response times out, an event is submitted with the URL and timeout.
+* If the response code != 200, an event is submitted with the URL and the response code.
+
+### Configuration
+
+First let's define how the configuration should look so that we know
+how to handle the structure of the `instance` payload that is passed into the
+call to `check`.
+
+Besides just defining a URL per call, it'd be nice to allow you to set a timeout for each URL. We'd also want to be able to configure a default timeout if no timeout value is given for a particular URL.
+
+So our final configuration looks something like this:
+
+```yaml
+init_config:
+    default_timeout: 5
+
+instances:
+    -   url: https://google.com
+
+    -   url: http://httpbin.org/delay/10
+        timeout: 8
+
+    -   url: http://httpbin.org/status/400
+
+```
+
+### The Check
+
+Now let's define our check method. The main part of the check makes
+a request to the URL and time the response time, handling error cases as it goes.
+
+In this snippet, we start a timer, make the GET request using the
+[requests library][9] and handle and
+errors that might arise.
+
+```python
+# Load values from the instance config
+url = instance['url']
+default_timeout = self.init_config.get('default_timeout', 5)
+timeout = float(instance.get('timeout', default_timeout))
+
+# Use a hash of the URL as an aggregation key
+aggregation_key = md5(url).hexdigest()
+
+# Check the URL
+start_time = time.time()
+try:
+    r = requests.get(url, timeout=timeout)
+    end_time = time.time()
+except requests.exceptions.Timeout as e:
+    # If there's a timeout
+    self.timeout_event(url, timeout, aggregation_key)
+
+if r.status_code != 200:
+    self.status_code_event(url, r, aggregation_key)
+```
+
+If the request passes, we want to submit the timing to Datadog as a metric. Let's call it `http.response_time` and tag it with the URL.
+
+```python
+timing = end_time - start_time
+self.gauge('http.response_time', timing, tags=['http_check'])
+```
+
+Finally, define what happens in the error cases. We have already
+seen that we call `self.timeout_event` in the case of a URL timeout and
+we call `self.status_code_event` in the case of a bad status code. Let's
+define those methods now.
+
+First, define `timeout_event`. Note that we want to aggregate all of these events together based on the URL so we define the aggregation_key as a hash of the URL.
+
+```python
+def timeout_event(self, url, timeout, aggregation_key):
+    self.event({
+        'timestamp': int(time.time()),
+        'event_type': 'http_check',
+        'msg_title': 'URL timeout',
+        'msg_text': '%s timed out after %s seconds.' % (url, timeout),
+        'aggregation_key': aggregation_key
+    })
+```
+
+Next, define `status_code_event` which looks very similar to the timeout event method.
+
+```python
+def status_code_event(self, url, r, aggregation_key):
+    self.event({
+        'timestamp': int(time.time()),
+        'event_type': 'http_check',
+        'msg_title': 'Invalid response code for %s' % url,
+        'msg_text': '%s returned a status of %s' % (url, r.status_code),
+        'aggregation_key': aggregation_key
+    })
+```
+
+### Putting It All Together
+
+The entire check would be placed into the `checks.d` folder as `http.py`. The corresponding configuration would be placed into the `conf.d` folder as `http.yaml`.
+
+Once the check is in `checks.d`, test it by running it as a python script. [Restart the Agent][10] for the changes to be enabled. **Make sure to change the conf.d path in the test method**. From your Agent root, run:
+
+* For agent v5:
+  `sudo -u dd-agent -- dd-agent check <check_name>`
+
+* For agent v6:
+  `sudo -u dd-agent -- datadog-agent check <check_name>`
+
+And confirm what metrics and events are being generated for each instance.
+
+Here's the full source of the check:
+
+```python
+import time
+import requests
+
+from checks import AgentCheck
+from hashlib import md5
+
+class HTTPCheck(AgentCheck):
+    def check(self, instance):
+        if 'url' not in instance:
+            self.log.info("Skipping instance, no url found.")
+            return
+
+        # Load values from the instance configuration
+        url = instance['url']
+        default_timeout = self.init_config.get('default_timeout', 5)
+        timeout = float(instance.get('timeout', default_timeout))
+
+        # Use a hash of the URL as an aggregation key
+        aggregation_key = md5(url).hexdigest()
+
+        # Check the URL
+        start_time = time.time()
+        try:
+            r = requests.get(url, timeout=timeout)
+            end_time = time.time()
+        except requests.exceptions.Timeout as e:
+            # If there's a timeout
+            self.timeout_event(url, timeout, aggregation_key)
+            return
+
+        if r.status_code != 200:
+            self.status_code_event(url, r, aggregation_key)
+
+        timing = end_time - start_time
+        self.gauge('http.response_time', timing, tags=['http_check'])
+
+    def timeout_event(self, url, timeout, aggregation_key):
+        self.event({
+            'timestamp': int(time.time()),
+            'event_type': 'http_check',
+            'msg_title': 'URL timeout',
+            'msg_text': '%s timed out after %s seconds.' % (url, timeout),
+            'aggregation_key': aggregation_key
+        })
+
+    def status_code_event(self, url, r, aggregation_key):
+        self.event({
+            'timestamp': int(time.time()),
+            'event_type': 'http_check',
+            'msg_title': 'Invalid response code for %s' % url,
+            'msg_text': '%s returned a status of %s' % (url, r.status_code),
+            'aggregation_key': aggregation_key
+        })
+```
 
 ## Troubleshooting
 
@@ -262,7 +435,7 @@ To test this, run:
 
     sudo -u dd-agent dd-agent check <CHECK_NAME>
 
-If your issue continues, reach out to Support with the [help page][10] that lists the paths it installs.
+If your issue continues, reach out to Support with the [help page][11] that lists the paths it installs.
 
 ### Testing custom checks on Windows
 
@@ -294,5 +467,6 @@ If your issue continues, reach out to Support with the [help page][10] that list
 [6]: /developers/dogstatsd
 [7]: /agent/faq/agent-commands/#agent-status-and-information
 [8]: http://www.yaml.org/
-[9]: /agent/faq/agent-5-custom-agent-check
-[10]: /help
+[9]: http://docs.python-requests.org/en/latest/
+[10]: /agent/faq/agent-commands
+[11]: /help
