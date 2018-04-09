@@ -322,7 +322,6 @@ class PreBuild:
         :param file_name: path to a metadata csv file
         """
         if ('/integrations-core/docs/dev/' in file_name and file_name.endswith('.md')): 
-            print(file_name)
             doc_directory = '/content/developers/integrations/'
             with open(file_name, mode='r+') as f:
                 content = f.read()
