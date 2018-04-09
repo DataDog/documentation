@@ -38,7 +38,7 @@ Suivez les instructions pour [docker-dd-agent](https://github.com/DataDog/docker
 
 ## Daemonset Kubernetes
 
-Dans le manifeste [dd-agent.yaml][3] utilisé pour créer le daemonset, ajoutez les variables d'environnement, volume mount et volume suivantes:
+Dans le manifeste [dd-agent.yaml](https://github.com/DataDog/docker-dd-agent#configuration-files) utilisé pour créer le daemonset, ajoutez les variables d'environnement, volume mount et volume suivantes:
 
 ```
  env:
