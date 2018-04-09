@@ -209,5 +209,3 @@ kind: faq
 |Zendesk|ZENDESK|
 |Zookeeper|ZOOKEEPER|
 
-
-
