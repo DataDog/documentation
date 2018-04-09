@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-Notifications are a key component of any [monitor](/monitors). You want to make sure the
+Notifications are a key component of any [monitor][1]. You want to make sure the
 right people get notified so the problem can be resolved as soon as possible.
 
 {{< img src="monitors/notifications/notification.png" alt="notification" responsive="true" popup="true" >}}
@@ -27,7 +27,7 @@ right people get notified so the problem can be resolved as soon as possible.
    explanation of the monitor so a notified team member can quickly understand
    what is going on.
 
-2. Enter a **message** for the monitor. This field allows standard [markdown formatting](http://daringfireball.net/projects/markdown/syntax) as well as Datadog's @-notification syntax.  
+2. Enter a **message** for the monitor. This field allows standard [markdown formatting][2] as well as Datadog's @-notification syntax.  
   Note: you can notify any non-Datadog users via email by adding `@their-email` to the message. A common use-case for the monitor message is to include a step-by-step way to resolve the problem.  
   For example if you are monitoring a database then you might want to include steps for failing over to a standby node. All in all, you should attempt to give as much context to the monitor as possible.
 
@@ -168,7 +168,7 @@ We provide a number of different types of monitors and not all variables are ava
 *(Scroll right to see all variable availability)*
 
 {{% table responsive="true" %}}
-||[host](/monitors/monitor_types/host)| [metric](/monitors/monitor_types/metric)| [integration](/monitors/monitor_types/integration)| [process](/monitors/monitor_types/process)| [network](/monitors/monitor_types/network)| [custom check](/monitors/monitor_types/custom_check)| [event](/monitors/monitor_types/event)|
+||[host][3]| [metric][4]| [integration][5]| [process][6]| [network][7]| [custom check][8]| [event][9]|
 | :-------|:-----|:-----|:-------|:-------|:---------|:-------|:------|
 | **Conditionals**      |
 | `is_alert`            | Y                 | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
@@ -277,8 +277,20 @@ For example, if the rendered variable is setup as a channel in the Slack integra
 
 * `@slack-{{host.name}}` post a slack message to the #host.name channel in Slack.
 
-[Learn more about how to setup conditional contacts and messages in a single monitor](/monitors/faq/how-do-i-setup-conditional-contacts-and-messages-in-a-single-monitor)
+[Learn more about how to setup conditional contacts and messages in a single monitor][10]
 
 ## Further Reading 
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: /monitors
+[2]: http://daringfireball.net/projects/markdown/syntax
+[3]: /monitors/monitor_types/host
+[4]: /monitors/monitor_types/metric
+[5]: /monitors/monitor_types/integration
+[6]: /monitors/monitor_types/process
+[7]: /monitors/monitor_types/network
+[8]: /monitors/monitor_types/custom_check
+[9]: /monitors/monitor_types/event
+[10]: /monitors/faq/how-do-i-setup-conditional-contacts-and-messages-in-a-single-monitor

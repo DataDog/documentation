@@ -17,4 +17,6 @@ The top function is a good fit to display only the few relevant lines on the gra
 
 {{< img src="graphing/faq/too_many_metrics_2.png" alt="too_many_metrics_2" responsive="true" popup="true">}}
 
-[Find more documentation about the top function, its parameters and its aliases](/graphing/miscellaneous/functions)
+[Find more documentation about the top function, its parameters and its aliases][1]
+
+[1]: /graphing/miscellaneous/functions

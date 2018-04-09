@@ -24,3 +24,4 @@ mysql> select user,host,process_priv from mysql.user where user='datadog';
 ```
 
 Review the Configuration section and grant the Datadog user all necessary privileges. Do NOT grant all privileges on all databases to this user.
+

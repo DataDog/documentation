@@ -27,7 +27,7 @@ To access the processing panel use the upper left menu:
 
 Datadog automatically parses JSON-formatted logs. When your logs are not JSON-formatted, Datadog enables you to add value to your raw logs by sending them through a processing pipeline.
 
-With pipelines, you parse and enrich your logs by chaining them sequentially through [processors](#processors). This lets you extract meaningful information or attributes from semi-structured text to reuse them as [facets](/logs/explore/#facets).
+With pipelines, you parse and enrich your logs by chaining them sequentially through [processors](#processors). This lets you extract meaningful information or attributes from semi-structured text to reuse them as [facets][1].
 
 Each log that comes through the pipelines is tested against every pipeline filter. If it matches one then all the [processors](#processors) are applied sequentially before moving to the next pipeline.
 
@@ -51,7 +51,7 @@ For instance, a first pipeline can be defined to extract application log prefix 
 
 Filters let you limit what kinds of logs a pipeline applies to.
 
-The filter syntax is the same as the [search bar](/logs/explore/#search-bar).
+The filter syntax is the same as the [search bar][2].
 
 **Be aware that the pipeline filtering is applied before any of the pipeline's processors, hence you cannot filter on an attribute that is extracted in the pipeline itself** 
 
@@ -77,7 +77,7 @@ Create custom grok rules to parse the full message or a specific attribute of yo
 
 {{< img src="logs/processing/parser.png" alt="Parser" responsive="true" popup="true">}}
 
-Read more about this in the [parsing section](/logs/parsing)
+Read more about this in the [parsing section][3]
 
 ### Log Date Remapper
 
@@ -95,7 +95,7 @@ If your logs put their dates in an attribute not in this list, use the log date 
 {{< img src="logs/processing/log_date_remapper.png" alt="Log date Remapper" responsive="true" popup="true">}}
 
 If your logs don't contain any of the default attributes and you haven't defined your own date attribute, Datadog timestamps the logs with the date it received them.  
-If the log's official timestamp is from a custom attribute, use a [date remapper processor](/logs/processing/#log-date-remapper) to override the log's default timestamp.
+If the log's official timestamp is from a custom attribute, use a [date remapper processor][4] to override the log's default timestamp.
 
 ### Log Status Remapper
 
@@ -113,7 +113,7 @@ Into this log:
 
 However, beware that each incoming status value is mapped as follows:
 
-* Integers from 0 to 7 map to the [Syslog severity standards](https://en.wikipedia.org/wiki/Syslog#Severity_level)
+* Integers from 0 to 7 map to the [Syslog severity standards][5]
 * Strings beginning with **emerg** or **f** (case unsensitive) map to **emerg (0)**
 * Strings beginning with **a** (case unsensitive) map to **alert (1)**
 * Strings beginning with **c** (case unsensitive) map to **critical (2)**
@@ -189,3 +189,10 @@ Contact support if you reach one of these limits as Datadog might be able to pro
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: /logs/explore/#facets
+[2]: /logs/explore/#search-bar
+[3]: /logs/parsing
+[4]: /logs/processing/#log-date-remapper
+[5]: https://en.wikipedia.org/wiki/Syslog#Severity_level

@@ -20,18 +20,18 @@ Once a monitor is created, you are notified when its conditions are met.
 You can notify team members via email, 3rd party services (e.g. Pagerduty or
 Hipchat) or other custom endpoints via Webhooks.
 
-Triggered monitors appear in the [event stream](/graphing/event_stream/), allowing collaboration around active issues in your applications or infrastructure. Datadog provides a high-level view of open issues on the [Triggered Monitors](https://app.datadoghq.com/monitors/triggered) page as well as general monitor management on the [Manage Monitors](https://app.datadoghq.com/monitors) page.
+Triggered monitors appear in the [event stream][1], allowing collaboration around active issues in your applications or infrastructure. Datadog provides a high-level view of open issues on the [Triggered Monitors][2] page as well as general monitor management on the [Manage Monitors][3] page.
 
-Monitors can be managed programmatically, refer to the [Datadog API docs](/api/#monitors) for detailed information on managing monitors through the API using the available [libraries](/developers/libraries) or cURL.
+Monitors can be managed programmatically, refer to the [Datadog API docs][4] for detailed information on managing monitors through the API using the available [libraries][5] or cURL.
 
 In this section you can:
 
-* [Learn how to create a monitor](/monitors/monitor_types)
-* [Configure your monitor notifications](/monitors/notifications)
-* [Manage your monitors](/monitors/manage_monitor)
-* [Schedule a downtime to mute a monitor](/monitors/downtimes)
-* [See all your checks into one place](/monitors/check_summary)
-* [Consult our FAQ](/monitors/faq)
+* [Learn how to create a monitor][6]
+* [Configure your monitor notifications][7]
+* [Manage your monitors][8]
+* [Schedule a downtime to mute a monitor][9]
+* [See all your checks into one place][10]
+* [Consult our FAQ][11]
 
 ### Glossary
 
@@ -42,12 +42,12 @@ Here is a quick overview of the different terms used:
 - **Monitor**: Sends notifications based on a sequence of check statuses, metric
   threshold or other alerting conditions.
 - **Monitor type**: host-, metric-, integration-, process-, network-, event-based, and custom. See side navigation to drill into a specific type.
-- **Tags**: Configurable labels that can be applied to each metric and host. See the [Tagging](/getting_started/tagging) page for more details.
+- **Tags**: Configurable labels that can be applied to each metric and host. See the [Tagging][12] page for more details.
 
 ## Creating a Monitor
 
-Navigate to the [Create Monitors](https://app.datadoghq.com/monitors#/create)
-page by hovering over **Monitors** in the main menu and clicking **New Monitor** in the sub-menu (depending on your chosen theme and screen resolution, the main menu may be at the top or on the left). You are presented with a list of monitor types on the left. See the [Monitoring Reference](/monitors/monitor_types) to learn more about all monitor types.
+Navigate to the [Create Monitors][13]
+page by hovering over **Monitors** in the main menu and clicking **New Monitor** in the sub-menu (depending on your chosen theme and screen resolution, the main menu may be at the top or on the left). You are presented with a list of monitor types on the left. See the [Monitoring Reference][6] to learn more about all monitor types.
 
 {{< img src="monitors/index/nav.png" alt="navigation" responsive="true" popup="true">}}
 
@@ -61,7 +61,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 
 ## Auditing Monitors
 
-Any changes to monitors creates an event in the [event stream](/graphing/event_stream) that explains the change and shows the user that made the actual change.
+Any changes to monitors creates an event in the [event stream][14] that explains the change and shows the user that made the actual change.
 
 Assuming you've made changes to your Monitors, you can see examples with the following event search:
 ```
@@ -95,3 +95,19 @@ There are multiple community projects for maintaining or managing Monitors along
 * https://github.com/airbnb/interferon
 * https://github.com/rapid7/dogwatch
 * https://www.terraform.io/docs/providers/datadog/r/monitor.html
+
+
+[1]: /graphing/event_stream/
+[2]: https://app.datadoghq.com/monitors/triggered
+[3]: https://app.datadoghq.com/monitors
+[4]: /api/#monitors
+[5]: /developers/libraries
+[6]: /monitors/monitor_types
+[7]: /monitors/notifications
+[8]: /monitors/manage_monitor
+[9]: /monitors/downtimes
+[10]: /monitors/check_summary
+[11]: /monitors/faq
+[12]: /getting_started/tagging
+[13]: https://app.datadoghq.com/monitors#/create
+[14]: /graphing/event_stream

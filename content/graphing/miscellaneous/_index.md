@@ -7,3 +7,4 @@ kind: documentation
     {{< nextlink href="graphing/miscellaneous/functions" tag="Documentation" >}}Graphing Functions{{< /nextlink >}}
     {{< nextlink href="graphing/miscellaneous/graphingjson" tag="Documentation" >}}Graphing Primer using JSON{{< /nextlink >}}
 {{< /whatsnext >}}
+

@@ -9,3 +9,4 @@ external_redirect: /api/#post-time-series-points
 `POST https://api.datadoghq.com/api/v1/series`
 ##### Example Request
 {{< code-snippets basename="api-metrics-post" >}}
+

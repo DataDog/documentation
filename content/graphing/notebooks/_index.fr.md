@@ -84,3 +84,5 @@ Pour enregistrer un notebook, appuyez sur `⌘ +` ou cliquez sur le bouton “Sa
 Pour renommer un notebook, cliquez sur le champ nom dans l'en-tête du notebook.
 
 Pour supprimer un notebook que vous avez créé, cliquez sur l'icône dans l'en-tête du notebook et sélectionnez "Delete Notebook." . Vous pouvez également supprimer vos propres notebook à partir de la page Notebook List.
+
+

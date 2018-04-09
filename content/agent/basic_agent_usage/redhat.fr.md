@@ -32,7 +32,7 @@ L'Agent Datadog possède quelques commandes. Seules les commandes _lifecycle_ (i
 | `sudo -u dd-agent -- dd-agent check <check_name>` | `sudo -u dd-agent -- datadog-agent check <check_name>` | Run a check |
 {{% /table %}}
 
-Plus d'informations sur les métriques, les événements et les checks de service pour une [intégrations](/integrations) peuvent être récupérées avec la commande check:
+Plus d'informations sur les métriques, les événements et les checks de service pour une [intégrations][1] peuvent être récupérées avec la commande check:
 ```shell
 sudo service datadog-agent check [integration]
 ```
@@ -56,7 +56,7 @@ Les fichiers et dossiers de configuration de l'Agent se trouvent à:
 |:-----|:----|
 |`/etc/dd-agent/datadog.conf`| `/etc/datadog-agent/datadog.yaml` |
 
-Fichiers de configuration pour [les intégrations](/integrations):
+Fichiers de configuration pour [les intégrations][1]:
 
 | Agent v5                                  |  Agent v6                          |
 |:-----|:----|
@@ -75,7 +75,7 @@ Les logs de l'Agent se trouvent dans le dossier `/var/log/datadog/`:
     * `dogstatsd.log`
     * `forwarder.log`
 
-Si vous rencontrez toujours des problèmes, [notre équipe de support](/help) se fera un plaisir de vous aider.
+Si vous rencontrez toujours des problèmes, [notre équipe de support][2] se fera un plaisir de vous aider.
 
 ## Basculer entre Agent v5 et v6
 ### Mettre à niveau vers l'agent v6
@@ -191,3 +191,6 @@ Pour désinstaller l'agent, exécutez:
 ## En apprendre plus
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /integrations
+[2]: /help

@@ -19,7 +19,7 @@ further_reading:
 ## Overview
 
 This page outlines the basic functionality of the Datadog Agent.
-If you haven't installed the Agent yet, instructions can be found [in the Datadog agent integration page](https://app.datadoghq.com/account/settings#agent/ubuntu).
+If you haven't installed the Agent yet, instructions can be found [in the Datadog agent integration page][1].
 
 The process to upgrade from the previous version of the agent is to re-run the installation.
 
@@ -41,7 +41,7 @@ Datadog Agent has some commands and only the _lifecycle commands_ (i.e. `start`/
 | `sudo -u dd-agent -- dd-agent check <check_name>` | `sudo -u dd-agent -- datadog-agent check <check_name>` | Run a check |
 {{% /table %}}
 
-More information about the metrics, events, and service checks for an [integrations](/integrations) can be retrieved with the check command:
+More information about the metrics, events, and service checks for an [integrations][2] can be retrieved with the check command:
 ```shell
 sudo service datadog-agent check [integration]
 ```
@@ -65,7 +65,7 @@ The configuration files and folders for the Agent are located at:
 |:-----|:----|
 |`/etc/dd-agent/datadog.conf`| `/etc/datadog-agent/datadog.yaml` |
 
-Configuration files for [integrations](/integrations):
+Configuration files for [integrations][2]:
 
 | Agent v5                                  |  Agent v6                          |
 |:-----|:----|
@@ -84,7 +84,7 @@ The Agent logs are located in the `/var/log/datadog/` directory:
     * `dogstatsd.log`
     * `forwarder.log`
 
-If you're still having trouble, [our support team](/help) will be glad to provide further assistance.
+If you're still having trouble, [our support team][3] will be glad to provide further assistance.
 
 ## Switch between Agent v5 and v6
 ### Upgrade to Agent 6
@@ -184,3 +184,7 @@ $ sudo apt-get --purge remove datadog-agent -y
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/account/settings#agent/ubuntu
+[2]: /integrations
+[3]: /help

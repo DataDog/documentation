@@ -30,13 +30,13 @@ When you first open the graphing editor window, you are on the **Edit** tab. Her
 
 Configuring a graph is a multi-step process: 
 
-1. [Choose the metric to graph](/graphing/#choose-the-metric-to-graph)
-2. [Select the visualization](/graphing/#select-your-visualization)
-3. [Filter](/graphing/#filter) 
-4. [Aggregate and Rollup](/graphing/#aggregate-and-rollup) 
-5. [Apply additional functions](/graphing/#advanced-graphing)
-6. [Enhance your graphs](/graphing/#graphs-enhancement)
-7. [Title the graph](/graphing/#create-a-title)
+1. [Choose the metric to graph][9]
+2. [Select the visualization][10]
+3. [Filter][11] 
+4. [Aggregate and Rollup][12] 
+5. [Apply additional functions][13]
+6. [Enhance your graphs][14]
+7. [Title the graph][15]
 
 ## Choose the metric to graph
 
@@ -165,7 +165,7 @@ To show anything from a source such as Github, use `sources:github`. For all the
 
 ## Create a title
 
-If you don't enter a title, we automatically generate a title based on the selections you have made. But it may be more useful to the users of the [dashboard](/graphing/dashboards) to create a title that more aptly describes the purpose of the graph. Linking the technical purpose to the business benefits adds even more value.
+If you don't enter a title, we automatically generate a title based on the selections you have made. But it may be more useful to the users of the [dashboard][16] to create a title that more aptly describes the purpose of the graph. Linking the technical purpose to the business benefits adds even more value.
 
 ## Save
 
@@ -179,3 +179,11 @@ The final step is to click Save. You can always come back in to the editor and t
 [6]: /graphing/miscellaneous/functions/
 [7]: https://app.datadoghq.com/notebook/list
 [8]: /graphing/dashboards
+[9]: /graphing/#choose-the-metric-to-graph
+[10]: /graphing/#select-your-visualization
+[11]: /graphing/#filter
+[12]: /graphing/#aggregate-and-rollup
+[13]: /graphing/#advanced-graphing
+[14]: /graphing/#graphs-enhancement
+[15]: /graphing/#create-a-title
+[16]: /graphing/dashboards

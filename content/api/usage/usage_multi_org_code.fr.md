@@ -12,3 +12,5 @@ external_redirect: /api/#get-usage-across-your-multi-org-account
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-billing-usage-summary" >}}
 
+
+

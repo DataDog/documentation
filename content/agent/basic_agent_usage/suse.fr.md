@@ -18,7 +18,7 @@ further_reading:
 ## Aperçu
 
 Cette page présente les fonctionnalités de base de l'agent Datadog.
-Si vous n'avez pas encore installé l'Agent, les instructions d'installation peuvent être trouvées [sur la page d'intégration de l'agent Datadog](https://app.datadoghq.com/account/settings#agent/suse).
+Si vous n'avez pas encore installé l'Agent, les instructions d'installation peuvent être trouvées [sur la page d'intégration de l'agent Datadog][1].
 
 Le processus de mise à niveau à partir de la version précédente de l'agent consiste à réexécuter l'installation depuis le début.
 
@@ -40,7 +40,7 @@ L'Agent Datadog possède quelques commandes. Seules les commandes _lifecycle_ (i
 | `sudo -u dd-agent -- dd-agent check <check_name>` | `sudo -u dd-agent -- datadog-agent check <check_name>` | Run a check |
 {{% /table %}}
 
-Plus d'informations sur les métriques, les événements et les checks de service pour une [intégrations](/integrations) peuvent être récupérées avec la commande check:
+Plus d'informations sur les métriques, les événements et les checks de service pour une [intégrations][2] peuvent être récupérées avec la commande check:
 ```shell
 sudo service datadog-agent check [integration]
 ```
@@ -64,7 +64,7 @@ Les fichiers et dossiers de configuration de l'Agent se trouvent à:
 |:-----|:----|
 |`/etc/dd-agent/datadog.conf`| `/etc/datadog-agent/datadog.yaml` |
 
-Fichiers de configuration pour [les intégrations](/integrations):
+Fichiers de configuration pour [les intégrations][2]:
 
 | Agent v5                                  |  Agent v6                          |
 |:-----|:----|
@@ -119,8 +119,12 @@ Les logs de l'Agent se trouvent dans le dossier `/var/log/datadog/`:
     * `dogstatsd.log`
     * `forwarder.log`
 
-Si vous rencontrez toujours des problèmes, [notre équipe de support](/help) se fera un plaisir de vous aider.
+Si vous rencontrez toujours des problèmes, [notre équipe de support][3] se fera un plaisir de vous aider.
 
 ## En apprendre plus
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/account/settings#agent/suse
+[2]: /integrations
+[3]: /help

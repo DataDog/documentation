@@ -7,3 +7,5 @@ Lorsque l'option Cross-Zone Load Balancing est activée sur un ELB, toutes les i
 
 Comme cela peut être contre-intuitif, nous avons ajouté de nouvelles mesures, aws.elb.healthy_host_count_deduped et aws.elb.un_healthy_host_count_deduped, qui affichent le nombre d'instances saines et malsaines par AZ, que cette option d'équilibrage de charge entre zones soit activé ou non. Ces métriques devraient avoir la valeur que vous attendez.
 
+
+

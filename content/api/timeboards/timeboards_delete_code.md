@@ -11,3 +11,4 @@ external_redirect: /api/#delete-a-timeboard
 {{< code-snippets basename="api-dashboard-delete" >}}
 ##### Example Response
 *This end point does not return JSON on successful requests.*
+

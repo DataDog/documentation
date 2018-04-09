@@ -11,3 +11,4 @@ external_redirect: /api/#unmute-all-monitors
 {{< code-snippets basename="api-monitor-unmute-all" >}}
 ##### Example Response
 *This end point does not return JSON on successful requests.*
+

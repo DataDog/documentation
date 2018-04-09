@@ -35,3 +35,4 @@ As for files, we are able to store a pointer for each tailed container. Therefor
 However, if the tailed container is removed before the network is available again, the logs are not accessible anymore.
 
 {{< partial name="whats-next/whats-next.html" >}}
+

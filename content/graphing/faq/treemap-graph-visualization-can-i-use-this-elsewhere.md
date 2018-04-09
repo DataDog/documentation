@@ -11,5 +11,9 @@ https://github.com/DataDog/dd-agent/blob/master/checks/system/unix.py
 
 Currently, the treemap is only supported for process data on a single host dashboard - this may not be reused in other dashboards or for other metrics.
 
-If you're interested in visualizing process data outside of the treemap (and have it continuously updated), use the [Process Integration](/integrations/process/).
-Note that this integration does not support wildcards, so explicitly define each process you'd like to monitor. To display process stats, we'd suggest leveraging a [toplist](https://www.datadoghq.com/blog/easy-ranking-new-top-lists/), or if you're monitoring a large number of processes across a large number of hosts the [heatmap](https://www.datadoghq.com/blog/detecting-outliers-cloud-infrastructure-datadog-heatmaps/) is the best.
+If you're interested in visualizing process data outside of the treemap (and have it continuously updated), use the [Process Integration][1].
+Note that this integration does not support wildcards, so explicitly define each process you'd like to monitor. To display process stats, we'd suggest leveraging a [toplist][2], or if you're monitoring a large number of processes across a large number of hosts the [heatmap][3] is the best.
+
+[1]: /integrations/process/
+[2]: https://www.datadoghq.com/blog/easy-ranking-new-top-lists/
+[3]: https://www.datadoghq.com/blog/detecting-outliers-cloud-infrastructure-datadog-heatmaps/

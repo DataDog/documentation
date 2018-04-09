@@ -13,3 +13,4 @@ external_redirect: /api/#webhooks
 
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-integrations-webhooks" >}}
+

@@ -78,3 +78,5 @@ instances:
       query: SELECT %s FROM mylag LIMIT 1;
       relation: false
 ```
+
+

@@ -84,7 +84,7 @@ config.lograge.custom_options = lambda do |event|
 end
 ```
 
-**Note**:You can also ask Lograge to add contextual information to your logs. Refer to the official doc if you are interested: [Lograge documentation](https://github.com/roidrage/lograge#installation)
+**Note**:You can also ask Lograge to add contextual information to your logs. Refer to the official doc if you are interested: [Lograge documentation][1]
 
 ## Disable log coloration
 As it would be weirdly displayed in your Datadog application, disable your log coloration:
@@ -125,7 +125,7 @@ Logging.appenders.file(
 )
 ```
 
-If you want to tweak the log layout, all items available can be found directly from the [source repository](https://github.com/TwP/logging/blob/master/lib/logging/layouts/parseable.rb#L100)
+If you want to tweak the log layout, all items available can be found directly from the [source repository][2]
 
 ## Configure your Datadog agent.
 
@@ -235,3 +235,7 @@ end
 ```
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: https://github.com/roidrage/lograge#installation
+[2]: https://github.com/TwP/logging/blob/master/lib/logging/layouts/parseable.rb#L100

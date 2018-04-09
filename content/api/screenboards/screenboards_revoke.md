@@ -12,3 +12,4 @@ Revoke a currently shared Screenboard's.
 ##### ARGUMENTS
 
 This end point takes no JSON arguments.
+

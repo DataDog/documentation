@@ -15,7 +15,9 @@ Examples:
 Furthermore, if you have HipChat, Slack, Webhooks, Pagerduty or VictorOps you can use:
 
 * `@hipchat-[room-name]` or `@slack-[room-name]` – posts the event or graph to that chat room.
-* `@webhook` – alerts or triggers whatever is attached to that webhook. [Check out this blogpost on Webhooks](https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio/)!
+* `@webhook` – alerts or triggers whatever is attached to that webhook. [Check out this blogpost on Webhooks][1]!
 * `@pagerduty` or `@oncall` – sends an alert to Pagerduty. You can also use `@pagerduty-acknowledgeand` `@pagerduty-resolve`.
 
 **Note**: that an @-notification in a comment doesn't send an email to the user posting that comment. So, you cannot @-notify yourself in a comment, but configuring an @-notification to yourself still works in a monitor message.
+
+[1]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio/

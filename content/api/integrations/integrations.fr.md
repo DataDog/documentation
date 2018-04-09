@@ -9,10 +9,10 @@ external_redirect: /api/#integrations
 
 Configurez vos intégrations avec l'API Datadog. Les intégrations disponibles sont:
 
-* [AWS](/api/#aws)
-* [PagerDuty](/api/#pagerduty)
-* [Slack](/api/#slack)
-* [Webhooks](/api/#webhooks)
+* [AWS][1]
+* [PagerDuty][2]
+* [Slack][3]
+* [Webhooks][4]
 
 Les endpoints disponibles sont:
 
@@ -27,3 +27,9 @@ Les endpoints disponibles sont:
 
 * Pour supprimer une intégration de Datadog :
     **`DELETE /api/v1/integration/<source_type_name>`**
+
+
+[1]: /api/#aws
+[2]: /api/#pagerduty
+[3]: /api/#slack
+[4]: /api/#webhooks

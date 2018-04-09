@@ -18,7 +18,7 @@ further_reading:
 
 {{< img src="tracing/visualization/resource/ressource.png" alt="Ressource" responsive="true" popup="true">}}
 
-A resource is a particular action for a given service (typically an individual endpoint or query). Read more about resources in [Getting Started with APM](/tracing/visualization). For each resource, APM automatically generates a dashboard page covering:
+A resource is a particular action for a given service (typically an individual endpoint or query). Read more about resources in [Getting Started with APM][1]. For each resource, APM automatically generates a dashboard page covering:
 
 * Key health metrics
 * Monitor status for all monitors associated with this service
@@ -45,7 +45,7 @@ Datadog provides out of the box graphs for any given resource:
 
 ### Export to Timeboard
 
-On the upper-right corner of each graph click on the arrow in order to export your graph into a pre-existing [Timeboard](/graphing/dashboards/timeboard):
+On the upper-right corner of each graph click on the arrow in order to export your graph into a pre-existing [Timeboard][2]:
 
 {{< img src="tracing/visualization/resource/save_to_timeboard.png" alt="Save to timeboard" responsive="true" popup="true" style="width:40%;">}}
 
@@ -65,10 +65,14 @@ Zoom on this graph to filter corresponding traces.
 
 Consult the list of traces associated with this resource. Filter/sort this list to see fast/slow and error/non-error traces:  
 
-[Refer to our dedicated trace documentation to learn more](/tracing/visualization/trace).
+[Refer to our dedicated trace documentation to learn more][3].
 
 {{< img src="tracing/visualization/resource/traces_list.png" alt="Traces list" responsive="true" popup="true" style="width:90%;">}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /tracing/visualization
+[2]: /graphing/dashboards/timeboard
+[3]: /tracing/visualization/trace

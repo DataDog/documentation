@@ -7,7 +7,7 @@ We have identified a specific scenario where unexpected spikes (often twice the 
 
 Datadog engineering team has worked on a solution that works on specific accounts only and strongly reduce the presence of these artifacts. We are working on improving this fix and hope to generalize it soon.
 
-For a diagnosis, read this article, and reach out to [us](/help) with a precise reference of the dashboard, the graph and the timeframe at which this problem occurs.
+For a diagnosis, read this article, and reach out to [us][1] with a precise reference of the dashboard, the graph and the timeframe at which this problem occurs.
 
 ## The scenario
 
@@ -38,7 +38,7 @@ So what our system actually does is:
 1. Slice the time-frame into ~300 time buckets. Reduce each source to a serie of ~300 X-min local aggregates (each local aggregate accounts for all values of 1 time-bucket).
 2. Merge all these aggregate series together by sum
 
-More explanation about our graphing system in this [excellent article](/getting_started/from_the_query_to_the_graph):
+More explanation about our graphing system in this [excellent article][2]:
 
 Back to our example, if you look at a few minutes of data, the graph is as expected. But when zooming out, the local aggregates for each source inevitably accounts for X minutes of data. As you zoom out, X grows, and at some point, data from t1 and t2 get aggregated together. Thus values from source `map:1` and from source `map:2`, that didn’t occur at the same time fall nonetheless in the same time-bucket, therefore, when summing sources together, these datapoints that didn't occur simultaneously are summed up together: the result may be twice the value as expected.
 
@@ -51,3 +51,6 @@ In addition to the feature we may apply to your account, here are 3 workarounds 
 * **Turn-off interpolation**: Our interpolation feature sometimes intensifies the impact of this issue. You may apply the fill(null,0) function with the graph visual editor to disable it and improve your graph display. Syntax for the json tab: sum:your_metric{scope}.fill(null,0) or sum:your_metric{scope} by {tag_key}.fill(null,0)
 
 * **Submit the metric without the changing tags**: The obvious drawback are the disparities between the levels of detail provided by this tag, but you’ll get accurate results on your graphs. Thus we would recommend continuing to send the metric as you do right now (to enjoy this level of detail) and in addition submit the same data under a slightly different name `<your.metric>.no_tag_<tag_name>` without this tag for graphing global queries without the spikes otherwise caused by `<tag_name>`.
+
+[1]: /help
+[2]: /getting_started/from_the_query_to_the_graph

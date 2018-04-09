@@ -18,7 +18,7 @@ further_reading:
 ## Aperçu
 
 Cette page présente les fonctionnalités de base de l'agent Datadog.
-Si vous n'avez pas encore installé l'Agent, les instructions d'installation peuvent être trouvées [sur la page d'intégration de l'agent Datadog](https://app.datadoghq.com/account/settings#agent/aws).
+Si vous n'avez pas encore installé l'Agent, les instructions d'installation peuvent être trouvées [sur la page d'intégration de l'agent Datadog][1].
 
 ## Commandes
 
@@ -51,7 +51,7 @@ Les fichiers et dossiers de configuration de l'Agent se trouvent à:
 |:-----|:----|
 |`/etc/dd-agent/datadog.conf`| `/etc/datadog-agent/datadog.yaml` |
 
-Fichiers de configuration pour [les intégrations](/integrations):
+Fichiers de configuration pour [les intégrations][2]:
 
 | Agent v5                                  |  Agent v6                          |
 |:-----|:----|
@@ -70,7 +70,7 @@ Les logs de l'Agent se trouvent dans le dossier `/var/log/datadog/`:
     * `dogstatsd.log`
     * `forwarder.log`
 
-Si vous rencontrez toujours des problèmes, [notre équipe de support](/help) se fera un plaisir de vous aider.
+Si vous rencontrez toujours des problèmes, [notre équipe de support][3] se fera un plaisir de vous aider.
 
 ## Ajouter d'un package python personnalisé à l'agent
 
@@ -176,3 +176,7 @@ $ sudo apt-get --purge remove datadog-agent -y
 ## En apprendre plus
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/account/settings#agent/aws
+[2]: /integrations
+[3]: /help

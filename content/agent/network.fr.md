@@ -34,7 +34,7 @@ En conséquence whitelistez `* .agent.datadoghq.com` dans vos firewalls.
 
 Ces domaines sont des **CNAME** pointant vers un ensemble d'adresses IP statiques, ces adresses peuvent être trouvées à:
 
-* [https://ip-ranges.datadoghq.com](https://ip-ranges.datadoghq.com)
+* [https://ip-ranges.datadoghq.com][1]
 
 Les informations sont structurées en JSON suivant ce schéma:
 
@@ -84,8 +84,11 @@ Les informations sont structurées en JSON suivant ce schéma:
 
 ## Utiliser des proxies
 
-Pour un guide de configuration détaillé sur la configuration du proxy, rendez-vous sur la page [Configuration du proxy](/agent/proxy).
+Pour un guide de configuration détaillé sur la configuration du proxy, rendez-vous sur la page [Configuration du proxy][2].
 
 ## En apprendre plus
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://ip-ranges.datadoghq.com
+[2]: /agent/proxy

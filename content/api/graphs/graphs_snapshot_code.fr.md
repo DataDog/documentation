@@ -11,3 +11,5 @@ external_redirect: /api/#graph-snapshot
 {{< code-snippets basename="api-graph-snapshot" >}}
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-graph-snapshot" >}}
+
+

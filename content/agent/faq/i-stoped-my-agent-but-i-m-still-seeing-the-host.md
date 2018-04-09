@@ -10,3 +10,4 @@ actually receiving data.
 After ~45 minutes the agent is showed as down ("???" is displayed next to the hostname) and is removed from the infrastructure page after 3 hours.
 
 After 24 hours you can still query against them, but it doesn't appear in drop downs or infrastructure. There is not a way to immediately delete a metric.
+
