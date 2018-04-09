@@ -29,7 +29,7 @@ Update to the Datadog Agent image version 5.16.0 or above:
 
     $ docker pull datadog/docker-dd-agent
 
-Follow the instructions for [docker-dd-agent][2], passing in the following attributes, in addition to any other custom settings as appropriate:
+Follow the instructions for [docker-dd-agent](https://github.com/DataDog/docker-dd-agent), passing in the following attributes, in addition to any other custom settings as appropriate:
 
 ```
 -v /etc/passwd:/etc/passwd:ro
@@ -38,7 +38,7 @@ Follow the instructions for [docker-dd-agent][2], passing in the following attri
 
 ## Kubernetes Daemonset
 
-In the [dd-agent.yaml][3] manifest used to create the daemonset, add the following environmental variables, volume mount, and volume:
+In the [dd-agent.yaml](https://github.com/DataDog/docker-dd-agent#configuration-files) manifest used to create the daemonset, add the following environmental variables, volume mount, and volume:
 
 ```
  env:
