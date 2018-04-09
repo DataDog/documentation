@@ -204,7 +204,7 @@ class PreBuild:
         dogweb_globs = ['integration/**/*_metadata.csv', 'integration/**/manifest.json',
                         'integration/**/service_checks.json', 'integration/**/README.md',
                         'dd/utils/context/source.py']
-        integrations_globs = ['**/metadata.csv', '**/manifest.json', '**/service_checks.json', '**/README.md']
+        integrations_globs = ['**/metadata.csv', '**/manifest.json', '**/service_checks.json', '**/README.md','docs/**']
         extras_globs = ['**/metadata.csv', '**/manifest.json', '**/service_checks.json', '**/README.md']
 
         # sync from dogweb, download if we don't have it (token required)
@@ -315,6 +315,21 @@ class PreBuild:
                 key_name = basename(file_name.replace('_metadata.csv', ''))
             new_file_name = '{}{}.yaml'.format(self.data_integrations_dir, key_name)
             self.csv_to_yaml(key_name, file_name, new_file_name)
+
+    def dev_doc_integrations_core(self, file_name):
+        """
+        Take the doc from integrations-core/docs/dev and display it on the doc.
+        :param file_name: path to a metadata csv file
+        """
+        if ('/integrations-core/docs/dev/' in file_name and file_name.endswith('.md')): 
+            print(file_name)
+            doc_directory = '/content/developers/integrations/'
+            with open(file_name, mode='r+') as f:
+                content = f.read()
+                with open('{}{}'.format(self.options.source, '{}{}'.format(doc_directory,basename(normpath(file_name)))), mode='w+', encoding='utf-8') as f_doc:
+                    f_doc.truncate(0)
+                    f_doc.seek(0)
+                    f_doc.write(content)
 
     def process_integration_manifest(self, file_name):
         """
