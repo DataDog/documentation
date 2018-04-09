@@ -29,7 +29,7 @@ Mettez à jour l'image de l'Agent Datadog pour la version 5.16.0 ou supérieure:
 
     $ docker pull datadog/docker-dd-agent
 
-Suivez les instructions pour [docker-dd-agent][2], en passant les attributs suivants en plus de tous vos autres paramètres:
+Suivez les instructions pour [docker-dd-agent](https://github.com/DataDog/docker-dd-agent), en passant les attributs suivants en plus de tous vos autres paramètres:
 
 ```
 -v /etc/passwd:/etc/passwd:ro
