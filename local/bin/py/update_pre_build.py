@@ -239,6 +239,7 @@ class PreBuild:
             self.process_integration_manifest(file_name)
             self.process_service_checks(file_name)
             self.process_integration_readme(file_name)
+            self.dev_doc_integrations_core(file_name)
 
         self.merge_integrations()
 
@@ -319,13 +320,20 @@ class PreBuild:
     def dev_doc_integrations_core(self, file_name):
         """
         Take the doc from integrations-core/docs/dev and display it on the doc.
+        Transform the README.md into _index.md
         :param file_name: path to a metadata csv file
         """
         if ('/integrations-core/docs/dev/' in file_name and file_name.endswith('.md')): 
             doc_directory = '/content/developers/integrations/'
+            
+            if file_name.endswith('README.md'):
+                doc_file_name = '_index.md'
+            else:
+                doc_file_name = basename(normpath(file_name))
+            
             with open(file_name, mode='r+') as f:
                 content = f.read()
-                with open('{}{}'.format(self.options.source, '{}{}'.format(doc_directory,basename(normpath(file_name)))), mode='w+', encoding='utf-8') as f_doc:
+                with open('{}{}'.format(self.options.source, '{}{}'.format(doc_directory,doc_file_name)), mode='w+', encoding='utf-8') as f_doc:
                     f_doc.truncate(0)
                     f_doc.seek(0)
                     f_doc.write(content)

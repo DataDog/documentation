@@ -630,11 +630,28 @@ languages:
           url: "developers/metrics/"
           weight: 50
           parent: menu_references_developers
+
+        # Integrations core doc
         - identifier: customnav_integrationsnav_new_integration
           name: "Integration"
           url: "developers/integrations/"
           weight: 60
           parent: menu_references_developers
+        - identifier: customnav_integrationsnav_legacy
+          name: "Legacy"
+          url: "developers/integrations/legacy"
+          weight: 601
+          parent: customnav_integrationsnav_new_integration
+        - identifier: customnav_integrationsnav_python
+          name: "Python"
+          url: "developers/integrations/python"
+          weight: 602
+          parent: customnav_integrationsnav_new_integration
+        - identifier: customnav_integrationsnav_new_check_howto
+          name: "Create a new Check"
+          url: "developers/integrations/new_check_howto"
+          weight: 603
+          parent: customnav_integrationsnav_new_integration
         #- identifier: customnav_developersnav_faq
         #  name: "FAQ"
         #  url: "developers/faq/"
