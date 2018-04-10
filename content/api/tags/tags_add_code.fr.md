@@ -11,4 +11,3 @@ external_redirect: /api/#add-tags-to-a-host
 {{< code-snippets basename="api-tags-add" >}}
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-tags-add" >}}
-

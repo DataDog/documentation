@@ -9,4 +9,3 @@ external_redirect: /api/#cancel-monitor-downtime
 ##### ARGUMENTS
 * **`id`** [*obligatoire*]:  
     L'id entier du downtime à annuler
-

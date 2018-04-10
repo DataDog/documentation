@@ -28,5 +28,3 @@ external_redirect: /api/#create-a-timeboard
         Le préfixe de tag associé à la variable. Seuls les tags avec ce préfixe apparaissent dans la liste déroulante des variables.
     * **`default`** [*optionnel*, *défaut*=**None**]:  
         La valeur par défaut de la Template variable lors du chargement du dasboard.
-
-

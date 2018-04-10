@@ -11,4 +11,3 @@ external_redirect: /api/#delete-a-monitor
 {{< code-snippets basename="api-monitor-delete" >}}
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-monitor-delete" >}}
-

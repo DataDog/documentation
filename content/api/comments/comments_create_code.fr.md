@@ -11,4 +11,3 @@ external_redirect: /api/#create-a-comment
 {{< code-snippets basename="api-comment-create" >}}
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-comment-create" >}}
-

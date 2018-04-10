@@ -10,4 +10,3 @@ external_redirect: /api/#delete-an-event
 {{< code-snippets basename="api-events-delete" >}}
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-events-delete" >}}
-

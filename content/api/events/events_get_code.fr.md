@@ -11,4 +11,3 @@ external_redirect: /api/#get-an-event
 {{< code-snippets basename="api-events-get" >}}
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-events-get" >}}
-

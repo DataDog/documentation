@@ -11,4 +11,3 @@ external_redirect: /api/#query-time-series-points
 {{< code-snippets basename="api-metrics-query" >}}
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-metrics-query" >}}
-

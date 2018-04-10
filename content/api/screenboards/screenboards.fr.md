@@ -6,6 +6,4 @@ external_redirect: /api/#screenboards
 ---
 ## Screenboards
 
-Cette endpoint vous permet de créer, mettre à jour, supprimer et récupérer des Screenboards. [En apprendre plus sur les Screenboards][1].
-
-[1]: /graphing/dashboards/screenboard
+Cette endpoint vous permet de créer, mettre à jour, supprimer et récupérer des Screenboards. [En apprendre plus sur les Screenboards](/graphing/dashboards/screenboard).

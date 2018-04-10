@@ -22,4 +22,3 @@ while true do
   statsd.increment('loop.count', :sample_rate => 0.5)
 end
 ```
-

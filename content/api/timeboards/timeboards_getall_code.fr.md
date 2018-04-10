@@ -11,4 +11,3 @@ external_redirect: /api/#get-all-timeboards
 {{< code-snippets basename="api-dashboard-get-all" >}}
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-dashboard-get-all" >}}
-

@@ -11,4 +11,3 @@ kind: faq
 ```
 
 Vérifiez que le paramètre `url` dans `elastic.yaml` est correcte.
-

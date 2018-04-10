@@ -16,14 +16,14 @@ further_reading:
 
 ## Aperçu
 
-Ils fonctionnent exactement comme les [monitors de métriques][1], mais avec des paramètres spécifiquement adaptés aux métriques APM. Ils vous permettent d'alerter au niveau du service sur les hits, les erreurs et diverses mesures de latence.
+Ils fonctionnent exactement comme les [monitors de métriques](/monitors/monitor_types/metric), mais avec des paramètres spécifiquement adaptés aux métriques APM. Ils vous permettent d'alerter au niveau du service sur les hits, les erreurs et diverses mesures de latence.
 
 ## Implémentation
 
-1. Sélectionnez votre [environnement][2]: 
+1. Sélectionnez votre [environnement](/tracing/setup/environment): 
     {{< img src="monitors/monitor_types/apm/apm_select_env.png" alt="APM select Environment" responsive="true" popup="true" style="width:75%;" >}}
 
-2. Sélectionnez votre [service][3]:
+2. Sélectionnez votre [service](/tracing/visualization/service):
     {{< img src="monitors/monitor_types/apm/apm_select_service.png" alt="APM select Service" responsive="true" popup="true" style="width:75%;" >}}
 3. Définir les conditions d'alerte:
     {{< img src="monitors/monitor_types/apm/apm_set_alert_conditions.png" alt="APM set alert conditions" responsive="true" popup="true" style="width:75%;" >}}
@@ -32,7 +32,3 @@ Ils fonctionnent exactement comme les [monitors de métriques][1], mais avec des
 
 ## En apprendre plus
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /monitors/monitor_types/metric
-[2]: /tracing/setup/environment
-[3]: /tracing/visualization/service

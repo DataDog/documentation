@@ -13,4 +13,3 @@ external_redirect: /api/#unmute-a-monitor
     Par exemple, si votre alerte est groupée par {host}, vous pouvez ignorer 'host:app1'
 * **`all_scopes`** [*optionnel*, *défaut* = **False**]:  
     Suppression des silences de tous les contextes
-

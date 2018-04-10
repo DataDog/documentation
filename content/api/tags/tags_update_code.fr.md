@@ -11,4 +11,3 @@ external_redirect: /api/#update-host-tags
 {{< code-snippets basename="api-tags-update" >}}
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-tags-update" >}}
-

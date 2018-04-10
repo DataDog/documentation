@@ -10,4 +10,3 @@ external_redirect: /api/#get-a-monitor-downtime
 {{< code-snippets basename="api-monitor-get-downtime" >}}
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-monitor-get-downtime" >}}
-

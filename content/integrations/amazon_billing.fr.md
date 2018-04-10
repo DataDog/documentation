@@ -28,21 +28,21 @@ Activez cette intégration pour voir dans Datadog toutes vos métriques de Billi
 ## Implémentation
 ### Installation
 
-Si vous ne l'avez pas déjà fait, configurez [l'Intégration Amazon Web Services en premier][1].
+Si vous ne l'avez pas déjà fait, configurez [l'Intégration Amazon Web Services en premier](https://docs.datadoghq.com/integrations/amazon_web_services/).
 
 ### Installation
 
-1. Dans la [vignette d'intégration AWS] [2], assurez-vous que `Billing` est coché dans la partie "metric collection".
+1. Dans la [vignette d'intégration AWS] (https://app.datadoghq.com/account/settings#integrations/amazon_web_services), assurez-vous que `Billing` est coché dans la partie "metric collection".
 
-2. Ajoutez ces permissions votre politique [IAM Datadog][3] afin de collecter les métriques Amazon Billing.
+2. Ajoutez ces permissions votre politique [IAM Datadog](https://docs.datadoghq.com/integrations/amazon_web_services/#installation) afin de collecter les métriques Amazon Billing.
 
     * `budgets:ViewBudget`: Permet d'afficher les métriques sur les budgets AWS
 
-    Pour plus d'information sur les polices Budgets, consultez [la documentation AWS dédiée][4].
+    Pour plus d'information sur les polices Budgets, consultez [la documentation AWS dédiée](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_budgets.html).
 
-3. Activer les métriques Billing dans la [Console AWS][5].
+3. Activer les métriques Billing dans la [Console AWS](http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html#turning_on_billing_metrics).
 
-4. Installez l'intégration [Datadog - AWS Billing][6].
+4. Installez l'intégration [Datadog - AWS Billing](https://app.datadoghq.com/account/settings#integrations/amazon_billing).
 
 **Les statistiques AWS Budgets ne peuvent être collectées qu'à partir du compte principal AWS.**
 
@@ -70,17 +70,8 @@ Voici une liste de vérification que vous pouvez appliquer pour résoudre votre 
 
 ### `aws.billing.actual_spend` `aws.billing.forecasted_spend` `aws.billing.budget_limit` n'apparaissent pas sur Datadog 
 
-[Créez un budget AWS][7] afin de commencer à voir ces métriques sur votre application Datadog.
+[Créez un budget AWS](https://console.aws.amazon.com/billing/home?#/createbudget) afin de commencer à voir ces métriques sur votre application Datadog.
 Sachez que les métriques AWS Billing sont collectées toutes les 4 ou 8 heures par Datadog.
 
 ## En apprendre plus
-Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][8]
-
-[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[3]: https://docs.datadoghq.com/integrations/amazon_web_services/#installation
-[4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_budgets.html
-[5]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html#turning_on_billing_metrics
-[6]: https://app.datadoghq.com/account/settings#integrations/amazon_billing
-[7]: https://console.aws.amazon.com/billing/home?#/createbudget
-[8]: https://www.datadoghq.com/blog/
+Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog](https://www.datadoghq.com/blog/)

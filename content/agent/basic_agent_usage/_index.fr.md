@@ -17,23 +17,23 @@ further_reading:
 
 ## Outils de gestion de configurations
 
-Gérez l'Agent Datadog et ses [intégrations][1] en utilisant des outils de gestion de configurations:
+Gérez l'Agent Datadog et ses [intégrations](/integrations) en utilisant des outils de gestion de configurations:
 
 ### Cookbook Chef
-* [Github du projet Chef][2]
-* [Installer l'Agent Datadog avec Chef][3]
+* [Github du projet Chef](https://github.com/DataDog/chef-datadog)
+* [Installer l'Agent Datadog avec Chef](https://app.datadoghq.com/account/settings#integrations/chef)
 
 ### Puppet
-* [Github du projet Puppet][4]
-* [Installer l'Agent Datadog avec Puppet][5]
+* [Github du projet Puppet](https://github.com/DataDog/puppet-datadog-agent)
+* [Installer l'Agent Datadog avec Puppet](https://app.datadoghq.com/account/settings#integrations/puppet)
 
 ### Ansible
-* [Github du projet Ansible][6]
-* [Installer l'Agent Datadog avec Ansible][7]
+* [Github du projet Ansible](https://github.com/DataDog/ansible-datadog)
+* [Installer l'Agent Datadog avec Ansible](https://app.datadoghq.com/account/settings#agent/ansible)
 
 ### SaltStack
 
-* [Installer l'Agent Datadog avec Saltstack][8]
+* [Installer l'Agent Datadog avec Saltstack](https://github.com/DataDog/datadog-formula)
 
 ## Fichier de configuration
 
@@ -42,11 +42,11 @@ Les fichiers et dossiers de configuration de l'Agent se trouvent à:
 {{% table responsive="true" %}}
 | OS                                                                       | Agent v5                                                                   |  Agent v6                       |
 | :-------                                                                 | :--------                                                                  | :--------                       |
-| [Mac OS X][9]                                 | `~/.datadog-agent/datadog.conf`                                            | `~/.datadog-agent/datadog.yaml` |
-| [Linux][10]                                 | `/etc/dd-agent/datadog.conf`                                               | `/etc/datadog-agent/datadog.yaml`                                |
-| [Source][11]                                | `~/.datadog-agent/agent/datadog.conf`                                      | `/etc/datadog-agent/datadog.yaml`                                |
-| [Windows Server 2008, Vista and newer][12] | `\\ProgramData\Datadog\datadog.conf`                                       | `\\ProgramData\Datadog\datadog.yaml` |
-| [Windows Server 2003, XP or older][12]     | `\\Documents and Settings\All Users\Application Data\Datadog\datadog.conf` | `n/a` _(unsupported OS)_        |
+| [Mac OS X](/agent/basic_agent_usage/osx)                                 | `~/.datadog-agent/datadog.conf`                                            | `~/.datadog-agent/datadog.yaml` |
+| [Linux](/agent/basic_agent_usage/ubuntu)                                 | `/etc/dd-agent/datadog.conf`                                               | `/etc/datadog-agent/datadog.yaml`                                |
+| [Source](/agent/basic_agent_usage/source)                                | `~/.datadog-agent/agent/datadog.conf`                                      | `/etc/datadog-agent/datadog.yaml`                                |
+| [Windows Server 2008, Vista and newer](/agent/basic_agent_usage/windows) | `\\ProgramData\Datadog\datadog.conf`                                       | `\\ProgramData\Datadog\datadog.yaml` |
+| [Windows Server 2003, XP or older](/agent/basic_agent_usage/windows)     | `\\Documents and Settings\All Users\Application Data\Datadog\datadog.conf` | `n/a` _(unsupported OS)_        |
 {{% /table %}}
 
 ## Emplacement des logs
@@ -59,16 +59,3 @@ Tous les 10MB les fichiers de logs de l'Agent Datadog sont archivés. Lors d'un 
 ## En apprendre plus
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /integrations
-[2]: https://github.com/DataDog/chef-datadog
-[3]: https://app.datadoghq.com/account/settings#integrations/chef
-[4]: https://github.com/DataDog/puppet-datadog-agent
-[5]: https://app.datadoghq.com/account/settings#integrations/puppet
-[6]: https://github.com/DataDog/ansible-datadog
-[7]: https://app.datadoghq.com/account/settings#agent/ansible
-[8]: https://github.com/DataDog/datadog-formula
-[9]: /agent/basic_agent_usage/osx
-[10]: /agent/basic_agent_usage/ubuntu
-[11]: /agent/basic_agent_usage/source
-[12]: /agent/basic_agent_usage/windows

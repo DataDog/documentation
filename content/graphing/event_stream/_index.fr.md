@@ -42,9 +42,9 @@ Note: aucun espace après les deux points ou des virgules dans ces listes et tou
 
 ## Acknowledge un événement
 
-Datadog récupère les événements générés à partir de monitors déclenchés en tant qu'incidents. Ils sont également connus sous le nom de [Monitor Alerts][1]. 
+Datadog récupère les événements générés à partir de monitors déclenchés en tant qu'incidents. Ils sont également connus sous le nom de [Monitor Alerts](/monitors/). 
 
-La meilleure façon de les identifier dans le [flux d'événements][2] est de sélectionner le filtre correspondant dans la liste des filtres:
+La meilleure façon de les identifier dans le [flux d'événements](/graphing/event_stream) est de sélectionner le filtre correspondant dans la liste des filtres:
 
 {{< img src="graphing/events/filter_monitor_alert.png" alt="filter monitor alert" responsive="true" popup="true" style="width:50%;">}}
 
@@ -63,7 +63,7 @@ Une fois réclamé, un incident peut être résolu en cliquant sur le bouton **r
 ## Afficher les événements non agrégé
 
 Remplacez le paramètre "aggregate_up" dans l'URL par "false". Pour supprimer l'événement d'agrégat de plus haut niveau, configurez `use_date_happened` par true.
- [Voici un lien d'exemple][3]
+ [Voici un lien d'exemple](https://app.datadoghq.com/event/stream?show_private=true&aggregate_up=false&use_date_happened=true&per_page=30&display_timeline=true&from_ts=1418047200000&to_ts=1418050800000&incident=true&codemirror_editor=true&live=true&bucket_size=60000)
 
 ## Evénements par Email
 
@@ -153,7 +153,3 @@ Devrait être codé en: `http://catchpoint.com/session_id%3A123456`
     * `@pagerduty` – Envoie une alerte à Pagerduty. Vous pouvez aussi utiliser `@pagerduty-acknowledge` and `@pagerduty-resolve`.
 
 [events-1]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio
-
-[1]: /monitors/
-[2]: /graphing/event_stream
-[3]: https://app.datadoghq.com/event/stream?show_private=true&aggregate_up=false&use_date_happened=true&per_page=30&display_timeline=true&from_ts=1418047200000&to_ts=1418050800000&incident=true&codemirror_editor=true&live=true&bucket_size=60000

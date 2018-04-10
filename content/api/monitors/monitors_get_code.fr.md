@@ -11,4 +11,3 @@ external_redirect: /api/#get-a-monitor-s-details
 {{< code-snippets basename="api-monitor-show" >}}
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-monitor-show" >}}
-

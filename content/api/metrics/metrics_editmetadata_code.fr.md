@@ -10,5 +10,3 @@ external_redirect: /api/#edit-metric-metadata
 {{< code-snippets basename="api-metric-metadata-update" >}}
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-metric-metadata-update" >}}
-
-
