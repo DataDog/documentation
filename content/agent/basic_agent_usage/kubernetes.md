@@ -244,7 +244,7 @@ Install the latest version of the Datadog Agent from [the Datadog agent integrat
 
 #### Configuration
 
-Enable the kubelet check & optionnaly the docker check if your kubernetes is using the docker runtime:
+Enable the kubelet check & optionally the docker check if your kubernetes is using the docker runtime:
 
 ```shell
 mv /etc/datadog-agent/conf.d/kubelet.d/conf.yaml.example /etc/datadog-agent/conf.d/kubelet.d/conf.yaml.default
