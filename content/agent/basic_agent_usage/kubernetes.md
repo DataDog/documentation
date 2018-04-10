@@ -12,7 +12,7 @@ aliases:
     - /integrations/faq/gathering-kubernetes-events
 ---
 
-**Note**: Agent version 6.0 and greater only support versions of Kubernetes higher than 1.7.6. For prior versions of Kubernetes, you must use Agent 5.x.
+**Note**: Agent version 6.0 and above only support versions of Kubernetes higher than 1.7.6. For prior versions of Kubernetes, use [Agent 5.x][16].
 
 There are two installation processes available to gather metrics, traces and logs from your Kubernetes Clusters:
 
@@ -343,3 +343,4 @@ It can be configured with the environment variable `DD_LEADER_LEASE_DURATION`.
 [13]: /agent/autodiscovery
 [14]: https://app.datadoghq.com/account/settings#agent
 [15]: /agent/faq/agent-commands/#agent-status-and-information
+[16]: https://github.com/DataDog/dd-agent
