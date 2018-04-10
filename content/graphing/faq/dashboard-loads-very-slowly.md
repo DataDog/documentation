@@ -19,7 +19,7 @@ You may find information and examples about unique tag combinations in [this art
 
 ## Recommendation
 
-As a consequence, we encourage you to tag your metrics with fewer than 1000 tags for querying purposes.
+As a consequence, we encourage you to tag your metrics with fewer than 1000 tags for querying purposes. You can review the number of tags for any specific metric on your [Metric Summary page][4].
 
 ## Billing impact
 
@@ -32,3 +32,4 @@ If you plan on continuing to submit more [custom metrics][2] than the billing li
 [1]: /getting_started/custom_metrics
 [2]: /getting_started/custom_metrics/
 [3]: /help
+[4]: https://app.datadoghq.com/metric/summary
