@@ -292,7 +292,7 @@ Now let's define our check method. The main part of the check makes
 a request to the URL and time the response time, handling error cases as it goes.
 
 In this snippet, we start a timer, make the GET request using the
-[requests library][9] and handle and
+{{< link-ext >}}[requests library][9] and handle and
 errors that might arise.
 
 ```python
