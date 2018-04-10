@@ -1,4 +1,3 @@
-
 ---
 title: Single Sign On With SAML
 kind: documentation

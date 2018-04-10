@@ -1,4 +1,3 @@
-
 ---
 title: Configuration de Agent pour proxy
 kind: documentation

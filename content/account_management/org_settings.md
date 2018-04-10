@@ -1,4 +1,3 @@
-
 ---
 title: Organization Settings
 kind: documentation

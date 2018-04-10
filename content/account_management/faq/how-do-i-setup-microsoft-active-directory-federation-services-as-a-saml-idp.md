@@ -1,4 +1,3 @@
-
 ---
 title: How do I setup Microsoft Active Directory Federation Services as a SAML IdP?
 kind: faq

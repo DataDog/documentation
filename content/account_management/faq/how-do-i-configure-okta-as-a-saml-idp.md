@@ -1,4 +1,3 @@
-
 ---
 title: How do I configure Okta as a SAML IdP?
 kind: faq

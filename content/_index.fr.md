@@ -1,4 +1,3 @@
-
 ---
 title: Documentation de Datadog
 kind: documentation

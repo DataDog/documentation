@@ -1,4 +1,3 @@
-
 ---
 title: FAQ gestion de compte
 kind: faq

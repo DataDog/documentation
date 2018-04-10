@@ -1,4 +1,3 @@
-
 ---
 title: Gestion du compte
 kind: documentation

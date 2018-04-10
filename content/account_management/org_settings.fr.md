@@ -1,4 +1,3 @@
-
 ---
 title: Paramètres de l'organisation
 kind: documentation

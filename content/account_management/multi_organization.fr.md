@@ -1,4 +1,3 @@
-
 ---
 title: Gestion des comptes à plusieurs organisations
 kind: documentation

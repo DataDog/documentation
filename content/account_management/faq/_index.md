@@ -1,4 +1,3 @@
-
 ---
 title: Account Management FAQ
 kind: faq

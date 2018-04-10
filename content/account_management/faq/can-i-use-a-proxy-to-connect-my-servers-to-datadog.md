@@ -1,4 +1,3 @@
-
 ---
 title: Can I use a proxy to connect my servers to Datadog?
 kind: faq
