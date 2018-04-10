@@ -9,6 +9,6 @@ This end point allows you to delete an event.
 
 #### ARGUMENTS
 
-This end point takes no JSON arguments.'
+This end point takes no JSON arguments.
 
 
