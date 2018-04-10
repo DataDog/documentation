@@ -11,4 +11,3 @@ Récupère toutes les spécifications d'un Screenboard.
 ##### ARGUMENTS
 
 Cet endpoint ne prend aucun argument JSON.
-

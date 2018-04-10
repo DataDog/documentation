@@ -11,4 +11,3 @@ external_redirect: /api/#get-list-of-active-metrics
 {{< code-snippets basename="api-metrics-list" >}}
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-metrics-list" >}}
-

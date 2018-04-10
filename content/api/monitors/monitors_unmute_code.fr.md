@@ -11,4 +11,3 @@ external_redirect: /api/#unmute-a-monitor
 {{< code-snippets basename="api-monitor-unmute" >}}
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-monitor-unmute" >}}
-

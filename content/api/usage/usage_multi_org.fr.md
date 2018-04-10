@@ -16,4 +16,3 @@ Récupérer l'utilisation de votre compte multi-org
     datetime dans le format ISO-8601 , UTC, précis au mois: [YYYY-MM] Pour l'usage depuis le début de cette heure
 * **`include_org_details`** [*optionnel*, *défaut*=**true**]:
   Inclus les résumés d'utilisation pour chaque sous-organisation.
-

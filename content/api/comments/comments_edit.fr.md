@@ -13,4 +13,3 @@ external_redirect: /api/#edit-a-comment
 
 * **`handle`** [*optionnel*, *défaut* = **Application key owner**]: 
     Le handle de l'utilisateur qui a fait le commentaire.
-

@@ -11,4 +11,3 @@ external_redirect: /api/#get-all-screenboards
 {{< code-snippets basename="api-screenboard-get-all" >}}
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-screenboard-get-all" >}}
-

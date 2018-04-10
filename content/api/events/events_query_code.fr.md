@@ -11,4 +11,3 @@ external_redirect: /api/#query-the-event-stream
 {{< code-snippets basename="api-events-stream" >}}
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-events-stream" >}}
-

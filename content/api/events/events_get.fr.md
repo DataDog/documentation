@@ -12,4 +12,3 @@ Note: si l'événement que vous interrogez contient des mises en forme de n'impo
 #### ARGUMENTS
 
 Cet endpoint ne prend aucun argument JSON.
-

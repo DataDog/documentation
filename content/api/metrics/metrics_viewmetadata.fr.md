@@ -11,4 +11,3 @@ L'endpoint des métadonnées des métriques vous permet d'obtenir des métadonn�
 ##### ARGUMENTS
 
 Cet endpoint ne prend aucun argument JSON.
-

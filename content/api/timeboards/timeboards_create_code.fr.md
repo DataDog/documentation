@@ -11,4 +11,3 @@ external_redirect: /api/#create-a-timeboard
 {{< code-snippets basename="api-dashboard-create" >}}
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-dashboard-create" >}}
-

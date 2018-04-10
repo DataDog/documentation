@@ -13,4 +13,3 @@ external_redirect: /api/#aws
 
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-integrations-aws" >}}
-

@@ -10,4 +10,3 @@ external_redirect: /api/#rate-limiting
 * `X-RateLimit-Period` durée en secondes pour les réinitialisations (alignées sur le calendrier)
 * `X-RateLimit-Remaining` nombre de requêtes autorisées restantes pour la période en cours
 * `X-RateLimit-Reset` temps en secondes jusqu'à la prochaine réinitialisation
-

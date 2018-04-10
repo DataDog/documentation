@@ -10,5 +10,3 @@ Plus de 200 intégrations par défaut. Récupérez des données pour tous vos sy
 {{< partial name="integrations/integrations.html" >}}
 
 
-
-

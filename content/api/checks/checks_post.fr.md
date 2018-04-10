@@ -31,4 +31,3 @@ external_redirect: /api/#post-a-check-run
 
 * **`tags`** *[optionnel]*:  
     Une liste de tags key:val pour ce check
-

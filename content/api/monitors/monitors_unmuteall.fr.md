@@ -11,4 +11,3 @@ Désactive l'inhibition de tous les monitors. Lève une erreur si la fonction "m
 ##### ARGUMENTS
 
 Cet endpoint ne prend aucun argument JSON.
-

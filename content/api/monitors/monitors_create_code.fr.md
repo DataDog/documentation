@@ -11,4 +11,3 @@ external_redirect: /api/#create-a-monitor
 {{< code-snippets basename="api-monitor-create" >}}
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-monitor-create" >}}
-

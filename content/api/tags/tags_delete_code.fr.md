@@ -11,4 +11,3 @@ external_redirect: /api/#remove-host-tags
 {{< code-snippets basename="api-tags-remove" >}}
 ##### Exemple de réponse
 *Cet endpoint ne renvoie aucun objet JSON en cas de requête réussie.*
-

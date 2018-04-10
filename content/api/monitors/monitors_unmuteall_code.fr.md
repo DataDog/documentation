@@ -11,4 +11,3 @@ external_redirect: /api/#unmute-all-monitors
 {{< code-snippets basename="api-monitor-unmute-all" >}}
 ##### Exemple de réponse
 *Cet endpoint ne renvoie aucun objet JSON en cas de requête réussie.*
-

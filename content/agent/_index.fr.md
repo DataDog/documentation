@@ -21,16 +21,16 @@ aliases:
 
 ## Qu'est ce que l'Agent?
 
-L'agent Datadog est un logiciel qui s'exécute sur vos hosts. Son travail consiste à collecter fidèlement des événements et des métriques et à les envoyer à Datadog pour vous afin que vous puissiez utiliser vos données de monitoring et de performance. L'agent Datadog est open source, consultez le code source sur GitHub pour [Agent v5][1] et [Agent v6][2]. Pour voir tous les changements entre l'Agent v5 et v6, [consultez notre documentation dédiée aux changements][3].
+L'agent Datadog est un logiciel qui s'exécute sur vos hosts. Son travail consiste à collecter fidèlement des événements et des métriques et à les envoyer à Datadog pour vous afin que vous puissiez utiliser vos données de monitoring et de performance. L'agent Datadog est open source, consultez le code source sur GitHub pour [Agent v5](https://github.com/DataDog/dd-agent) et [Agent v6](https://github.com/DataDog/datadog-agent). Pour voir tous les changements entre l'Agent v5 et v6, [consultez notre documentation dédiée aux changements](https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md).
 
 {{< partial name="platforms/platforms.html" >}}
 
 
 L'agent comporte trois parties principales: le collector, DogStatsD, et le forwarder:
 
-* **Le collector**: exécute des checks sur la machine pour les [intégrations][4] que vous avez et capture les métriques du système telles que la mémoire et le processeur.
+* **Le collector**: exécute des checks sur la machine pour les [intégrations](/integrations) que vous avez et capture les métriques du système telles que la mémoire et le processeur.
 
-* **DogStatsD**: C'est un serveur backend statsd auquel vous pouvez envoyer [des métriques custom][5] à partir d'une application.
+* **DogStatsD**: C'est un serveur backend statsd auquel vous pouvez envoyer [des métriques custom](/getting_started/custom_metrics/) à partir d'une application.
 
 * **le forwarder**: récupère les données de DogStatsD et du collector, puis les met en file d'attente pour les envoyer à Datadog.
 
@@ -50,9 +50,9 @@ L'Agent 6 est la dernière version majeure de l'Agent Datadog. La grande différ
 
 * Les percentiles globaux peuvent être directement exécutés sur le serveur pour calculer des percentiles globaux réels et efficaces. (REMARQUE: cette fonctionnalité est actuellement en version BETA. Contactez le support pour plus de détails sur la façon de l'activer pour votre compte.)
 
-* [DogStatsD][6] peut être utilisé sur un socket unix plutôt que sur udp.
+* [DogStatsD](/developers/dogstatsd) peut être utilisé sur un socket unix plutôt que sur udp.
 
-* Personnalisez votre agent v6 et [DogStatsD][6] beaucoup plus facilement et avec beaucoup plus d'options de configuration, pour inclure ou exclure presque tout. Il y a aussi un agent «puppy» qui est installation vraiment minimale.
+* Personnalisez votre agent v6 et [DogStatsD](/developers/dogstatsd) beaucoup plus facilement et avec beaucoup plus d'options de configuration, pour inclure ou exclure presque tout. Il y a aussi un agent «puppy» qui est installation vraiment minimale.
 
 * L'agent 6 bloque les ports 5000 et 5001. Si vous utilisez ces ports, mettez à jour le port pour `expvar_port` et` cmd_port` dans le fichier `datadog.yaml`.
 
@@ -167,45 +167,31 @@ les bonne permissions: Si vous êtes capable d'ouvrir `datadog.yaml`, vous pouve
 ### Agent v6
 |OS| Versions supportées|
 |:----|:----|
-|[Debian x86_64][7] | Debian 7 (wheezy) et plus (nous ne supportons pas SysVinit)|
-|[Ubuntu x86_64][8] | Ubuntu 14.04 et plus|
-|[RedHat/CentOS x86_64][9]| RedHat/CentOS 6 et plus |
-|[SUSE Enterprise Linux x86_64][10] | SUSE 11 SP4 et plus (nous ne supportons pas SysVinit)|
-|[Fedora x86_64][11] | Fedora 26 et plus |
-|[MacOS][12]| OSX 10.10 et plus|
-|[Windows server 64-bit][13]| Windows server 2008r2 et plus|
-|[Windows 64-bit][13]| Windows 7 et plus|
+|[Debian x86_64](/agent/basic_agent_usage/deb) | Debian 7 (wheezy) et plus (nous ne supportons pas SysVinit)|
+|[Ubuntu x86_64](/agent/basic_agent_usage/ubuntu) | Ubuntu 14.04 et plus|
+|[RedHat/CentOS x86_64](/agent/basic_agent_usage/redhat)| RedHat/CentOS 6 et plus |
+|[SUSE Enterprise Linux x86_64](/agent/basic_agent_usage/suse) | SUSE 11 SP4 et plus (nous ne supportons pas SysVinit)|
+|[Fedora x86_64](/agent/basic_agent_usage/fedora) | Fedora 26 et plus |
+|[MacOS](/agent/basic_agent_usage/osx)| OSX 10.10 et plus|
+|[Windows server 64-bit](/agent/basic_agent_usage/windows)| Windows server 2008r2 et plus|
+|[Windows 64-bit](/agent/basic_agent_usage/windows)| Windows 7 et plus|
 
 **Note**: L'installation depuis les sources peut fonctionner sur les systèmes d'exploitation non répertoriés ici.
 ### Agent v5
 
 |OS| Versions supportées|
 |:----|:----|
-|[Debian x86_64][7] | Debian 7 (wheezy) et plus |
-|[Ubuntu x86_64][8] | Ubuntu 12.04 et plus|
-|[RedHat/CentOS x86_64][9]| RedHat/CentOS 6 et plus |
-|[SUSE Enterprise Linux x86_64][10] | SUSE 11 SP4 et plus|
-|[Fedora x86_64][11]| Fedora 26 et plus |
-|[MacOS][12]| OSX 10.10 et plus|
-|[Windows server 64-bit][13]| Windows server 2008r2 et plus|
-|[Windows 64-bit][13]| Windows 7 et plus|
+|[Debian x86_64](/agent/basic_agent_usage/deb) | Debian 7 (wheezy) et plus |
+|[Ubuntu x86_64](/agent/basic_agent_usage/ubuntu) | Ubuntu 12.04 et plus|
+|[RedHat/CentOS x86_64](/agent/basic_agent_usage/redhat)| RedHat/CentOS 6 et plus |
+|[SUSE Enterprise Linux x86_64](/agent/basic_agent_usage/suse) | SUSE 11 SP4 et plus|
+|[Fedora x86_64](/agent/basic_agent_usage/fedora)| Fedora 26 et plus |
+|[MacOS](/agent/basic_agent_usage/osx)| OSX 10.10 et plus|
+|[Windows server 64-bit](/agent/basic_agent_usage/windows)| Windows server 2008r2 et plus|
+|[Windows 64-bit](/agent/basic_agent_usage/windows)| Windows 7 et plus|
 
 **Note**: L'installation depuis les sources peut fonctionner sur les systèmes d'exploitation non répertoriés ici.
 
 ## En apprendre plus
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: https://github.com/DataDog/dd-agent
-[2]: https://github.com/DataDog/datadog-agent
-[3]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md
-[4]: /integrations
-[5]: /getting_started/custom_metrics/
-[6]: /developers/dogstatsd
-[7]: /agent/basic_agent_usage/deb
-[8]: /agent/basic_agent_usage/ubuntu
-[9]: /agent/basic_agent_usage/redhat
-[10]: /agent/basic_agent_usage/suse
-[11]: /agent/basic_agent_usage/fedora
-[12]: /agent/basic_agent_usage/osx
-[13]: /agent/basic_agent_usage/windows

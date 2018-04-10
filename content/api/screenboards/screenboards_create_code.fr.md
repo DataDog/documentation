@@ -11,4 +11,3 @@ external_redirect: /api/#create-a-screenboard
 {{< code-snippets basename="api-screenboard-create" >}}
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-screenboard-create" >}}
-

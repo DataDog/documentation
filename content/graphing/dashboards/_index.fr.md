@@ -4,13 +4,13 @@ kind: documentation
 aliases:
   - /fr/guides/templating/
 ---
-Pour créer un [TimeBoard][3] ou un [ScreenBoard][4] Sélectionnez ceux que vous préférez créer après avoir cliqué sur 'New Dashboard' dans la liste déroulante 'Dashboards' .
+Pour créer un [TimeBoard](/graphing/dashboards/timeboard/) ou un [ScreenBoard](/graphing/dashboards/screenboard/) Sélectionnez ceux que vous préférez créer après avoir cliqué sur 'New Dashboard' dans la liste déroulante 'Dashboards' .
 
 {{< img src="graphing/dashboards/board_selection.jpg" alt="Board selection" responsive="true" popup="true">}}
 
 ## Quelle est la différence entre un Screenboard et un Timeboard?
 
-Chez Datadog, nous vous donnons la possibilité de créer et de personnaliser deux types de tableaux de bord; [ScreenBoards][5] et [TimeBoards][6]. Pour mieux comprendre les différences entre les deux, considérez ce qui suit:
+Chez Datadog, nous vous donnons la possibilité de créer et de personnaliser deux types de tableaux de bord; [ScreenBoards](/graphing/dashboards/screenboard) et [TimeBoards](/graphing/dashboards/timeboard). Pour mieux comprendre les différences entre les deux, considérez ce qui suit:
 
 {{% table responsive="true" %}}
 |  | Timeboards | Screenboards|
@@ -59,7 +59,3 @@ Configurez la corrélation d'événements au moment de l'affichage en ajoutant u
 
 [1]: /graphing/
 [2]: /graphing/event_stream/
-[3]: /graphing/dashboards/timeboard/
-[4]: /graphing/dashboards/screenboard/
-[5]: /graphing/dashboards/screenboard
-[6]: /graphing/dashboards/timeboard

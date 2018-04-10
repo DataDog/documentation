@@ -29,12 +29,12 @@ Activez cette intégration pour voir dans Datadog toutes vos métriques Auto Sca
 ## Implémentation
 ### Installation
 
-Si vous ne l'avez pas déjà fait, configurez [l'Intégration Amazon Web Services en premier][1].
+Si vous ne l'avez pas déjà fait, configurez [l'Intégration Amazon Web Services en premier](https://docs.datadoghq.com/integrations/amazon_web_services/).
 ### Configuration
 
-1. Dans la [vignette d'intégration AWS] [2], assurez-vous que `AutoScaling` est coché dans la partie "metric collection".
+1. Dans la [vignette d'intégration AWS] (https://app.datadoghq.com/account/settings#integrations/amazon_web_services), assurez-vous que `AutoScaling` est coché dans la partie "metric collection".
 
-2. Ajoutez ces permissions à votre [Police IAM Datadog][3] afin de collecter vos métriques Amazon Auto Scaling: 
+2. Ajoutez ces permissions à votre [Police IAM Datadog](https://docs.datadoghq.com/integrations/amazon_web_services/#installation) afin de collecter vos métriques Amazon Auto Scaling: 
 
     * `autoscaling:DescribeAutoScalingGroups`: Utilisé pour lister tous les groupes autoscaling.
     * `autoscaling:DescribePolicies`: Liste les stratégies disponibles (pour l'autocompletion des événements et des monitors).
@@ -43,9 +43,9 @@ Si vous ne l'avez pas déjà fait, configurez [l'Intégration Amazon Web Service
     * `autoscaling:ExecutePolicy`: Exécute une stratégie (mise à l'échelle vers le haut ou vers le bas à partir d'un monitor ou du flux d'événements).
     Ceci n'est pas inclus dans le [document de politique d'installation] (#installation) et ne doit être inclus que si vous utilisez des monitors ou des événements pour exécuter une politique de mise à l'échelle automatique.
 
-    Pour plus d'information sur les polices Auto Scaling, consultez [la documentation AWS dédiée][4].
+    Pour plus d'information sur les polices Auto Scaling, consultez [la documentation AWS dédiée](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_application-autoscaling.html).
 
-3. Installez l'intégration [Datadog - AWS Auto Scaling] [5].
+3. Installez l'intégration [Datadog - AWS Auto Scaling] (https://app.datadoghq.com/account/settings#integrations/amazon_auto_scaling).
 
 
 ## Données collectées
@@ -62,15 +62,7 @@ L'intégration AWS Auto-Scaling n'inclut aucun événements pour le moment.
 L'intégration AWS Auto-Scaling n'inclut aucun check de service pour le moment.
 
 ## Troubleshooting
-Besoin d'aide? Contactez  [l'équipe support de Datadog][6].
+Besoin d'aide? Contactez  [l'équipe support de Datadog](http://docs.datadoghq.com/help/).
 
 ## En apprendre plus
-Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][7]
-
-[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[3]: https://docs.datadoghq.com/integrations/amazon_web_services/#installation
-[4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_application-autoscaling.html
-[5]: https://app.datadoghq.com/account/settings#integrations/amazon_auto_scaling
-[6]: http://docs.datadoghq.com/help/
-[7]: https://www.datadoghq.com/blog/
+Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog](https://www.datadoghq.com/blog/)

@@ -26,20 +26,20 @@ Vous pouvez ensuite choisir de collecter tous les journaux d'événements de tou
 ## Implémentation
 ### Option 1: Installation dans l'hôte
 
-Installez la [version le plus récente de l'agent 6][1] dans votre hôte.
+Installez la [version le plus récente de l'agent 6](/logs/#getting-started-with-the-agent) dans votre hôte.
 
-L'agent peut récupérer les journaux d'événements depuis des [fichiers dans l'hôte][2] ou depuis un [conteneur](#configuration-file-example). Pour l'utiliser, vous devrez mettre à jour ou créer un nouveau fichier de configuration dans le dossier `/conf.d/` de l'agent (comme expliqué dans les liens fournis).
+L'agent peut récupérer les journaux d'événements depuis des [fichiers dans l'hôte](/logs/#custom-log-collection) ou depuis un [conteneur](#configuration-file-example). Pour l'utiliser, vous devrez mettre à jour ou créer un nouveau fichier de configuration dans le dossier `/conf.d/` de l'agent (comme expliqué dans les liens fournis).
 
 ### Option 2: Installation dans un conteneur
 
-Comme expliqué ci-dessus, l'agent a aussi une installation [conteneurisée][3].
+Comme expliqué ci-dessus, l'agent a aussi une installation [conteneurisée](https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent).
 
 D'abord, créons deux dossiers dans l'hôte que nous monterons plus tard dans l'agent conteneurisé.
 
 - `/opt/datadog-agent/run` : pour nous assurer que nous ne perdrons aucun journal d'événement de nos conteneurs suite à un redémarrage (ou une faute réseautique), nous gardons directement dans l'hôte la dernière ligne récupérer depuis chaque conteneur dans ce dossier
 
 - `/opt/datadog-agent/conf.d` : c'est ici que vous fournirez vos instructions d'intégration. Tout fichier de configuration présente ici sera récupérée par l'agent conteneurisé lors d'un redémarrage.
-Pour [plus d'informations][4] concernent ce check.
+Pour [plus d'informations](https://github.com/DataDog/docker-dd-agent#enabling-integrations) concernent ce check.
 
 Pour exécuter un conteneur Docker qui intègre l'Agent Datadog pour surveiller votre hôte, utilisez la commande suivante :
 
@@ -60,7 +60,7 @@ Notes importantes:
 
 - L'intégration Docker et la découverte automatique sont activées par défaut dans le mode configuration automatique (désactiver les écouteurs : section -docker dans `datadog.yaml`).
 
-- Nous vous recommandons de choisir systématiquement la version le plus récente de l'Agent 6 de Datadog. Consultez la [liste complète des images][5] pour l'Agent 6.
+- Nous vous recommandons de choisir systématiquement la version le plus récente de l'Agent 6 de Datadog. Consultez la [liste complète des images](https://hub.docker.com/r/datadog/agent/tags/) pour l'Agent 6.
 
 Les commandes liées à la récupération des journaux d'événements sont les suivantes :
 
@@ -107,16 +107,8 @@ logs:
      source: myintegration #tells Datadog what integration it is
 ```
 
-Pour encore plus d'exemples des fichiers de configuration ou des capacités d'agent (tel que le filtrage, la rédaction, des lignes multiples, ...) lisez davantage les [fonctionnalités avancées de la collection des journaux d'événements][6].
+Pour encore plus d'exemples des fichiers de configuration ou des capacités d'agent (tel que le filtrage, la rédaction, des lignes multiples, ...) lisez davantage les [fonctionnalités avancées de la collection des journaux d'événements](/logs/#filter-logs).
 
 ## En apprendre plus
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-
-[1]: /logs/#getting-started-with-the-agent
-[2]: /logs/#custom-log-collection
-[3]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
-[4]: https://github.com/DataDog/docker-dd-agent#enabling-integrations
-[5]: https://hub.docker.com/r/datadog/agent/tags/
-[6]: /logs/#filter-logs

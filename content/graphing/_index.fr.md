@@ -31,13 +31,13 @@ Lorsque vous ouvrez la fenêtre de l'éditeur graphique pour la première fois, 
 
 La configuration d'un graphique est un processus en plusieurs étapes:
 
-1. [Choisissez la métrique à grapher][9]
-2. [Sélectionner la visualisation][10]
-3. [Filtrer][11] 
-4. [Agréger et cumuler][12] 
-5. [Appliquer des fonctions suplémentaires][13]
-6. [Améliorer vos graphiques][14]
-7. [Titre du graphique][15]
+1. [Choisissez la métrique à grapher](/graphing/#choose-the-metric-to-graph)
+2. [Sélectionner la visualisation](/graphing/#select-your-visualization)
+3. [Filtrer](/graphing/#Filtrer) 
+4. [Agréger et cumuler](/graphing/#agreger-et-cumuler) 
+5. [Appliquer des fonctions suplémentaires](/graphing/#advanced-graphing)
+6. [Améliorer vos graphiques](/graphing/#graphs-enhancement)
+7. [Titre du graphique](/graphing/#create-a-title)
 
 ## Choisissez la métrique à grapher
 
@@ -165,7 +165,7 @@ Pour montrer quelque chose d'une source telle que Github, utilisez `sources: git
 
 ## Créez un titre
 
-Si vous ne saisissez pas de titre, nous générons automatiquement un titre en fonction des sélections que vous avez effectuées. Mais il peut être plus utile aux utilisateurs du [dashboard][16] de créer un titre qui décrit plus précisément le but du graphique. Lier l'objectif technique aux avantages business ajoute encore plus de valeur.
+Si vous ne saisissez pas de titre, nous générons automatiquement un titre en fonction des sélections que vous avez effectuées. Mais il peut être plus utile aux utilisateurs du [dashboard](/graphing/dashboards) de créer un titre qui décrit plus précisément le but du graphique. Lier l'objectif technique aux avantages business ajoute encore plus de valeur.
 
 ## Sauvegardez
 
@@ -179,11 +179,3 @@ La dernière étape consiste à cliquer sur Save. Vous pourrez toujours revenir 
 [6]: /graphing/miscellaneous/functions/
 [7]: https://app.datadoghq.com/notebook/list
 [8]: /graphing/dashboards
-[9]: /graphing/#choose-the-metric-to-graph
-[10]: /graphing/#select-your-visualization
-[11]: /graphing/#Filtrer
-[12]: /graphing/#agreger-et-cumuler
-[13]: /graphing/#advanced-graphing
-[14]: /graphing/#graphs-enhancement
-[15]: /graphing/#create-a-title
-[16]: /graphing/dashboards

@@ -18,7 +18,7 @@ external_redirect: /api/#update-a-timeboard
     * **`title`** [*obligatoire*]:  
         Le nom du graphique.
     * **`definition`** [*obligatoire*]:  
-    La définition du graphique. Lisez le [Guide du graphique][1] pour en savoir plus sur les graphique. Exemple:
+    La définition du graphique. Lisez le [Guide du graphique](/graphing/) pour en savoir plus sur les graphique. Exemple:
     `{"requests": [{"q": "system.cpu.idle{*} by {host}"}`
 
 * **`template_variables`** [*optionnel*, *défaut*=**None**]:  
@@ -31,6 +31,3 @@ external_redirect: /api/#update-a-timeboard
 
     * **`default`** [*optionnel*, *défaut*=**None**]:  
     La valeur par défaut de la Template variable lors du chargement du dasboard.
-
-
-[1]: /graphing/

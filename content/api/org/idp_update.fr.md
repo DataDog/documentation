@@ -10,5 +10,3 @@ external_redirect: /api/#upload-idp-metadata
 ##### ARGUMENTS
 * **`idp_file`** [*obligatoire*]:  
      Le chemin vers le fichier de métadonnées XML que vous voulez utiliser
-
-

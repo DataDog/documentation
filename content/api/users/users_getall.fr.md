@@ -9,4 +9,3 @@ external_redirect: /api/#get-all-users
 ##### ARGUMENTS
 
 Cet endpoint ne prend aucun argument JSON.
-
