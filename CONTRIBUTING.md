@@ -84,7 +84,7 @@ This section sets the record straight (for the Docs site, not for all humankind)
 * **Code substitution**: When adding something to a code block that isn’t meant literally, use the format <DATADOG_API_KEY>. Don’t use $DATADOG_API_KEY, {DATADOG API KEY}, and certainly not the naked DATADOG_API_KEY.
 
 ## Words and Phrases
-The [Gobwords Style Guide](https://github.com/DataDog/gobwords/tree/master/style-guide) is an index of commonly mis-capitalized, mispunctuated, and misused words that often appear on the corporate blog. Use this word guide when writing for the Docs site, too.
+The [Gobwords Style Guide][1] is an index of commonly mis-capitalized, mispunctuated, and misused words that often appear on the corporate blog. Use this word guide when writing for the Docs site, too.
 
 Otherwise, here are some words and phrases to avoid or use sparingly:
 
@@ -95,3 +95,10 @@ Datadog app/in the Datadog app (use Datadog/in Datadog)
 product (in reference to Datadog, i.e. ‘the Datadog product’; omit, or use ‘service’)
 * Integration (in the context of describing/discussing Agent checks; use ‘check’)
 * Please, use please sparingly: it’s a knee-jerk word we all sprinkle around: “For more information, please read the documentation.” There’s no reason to plead with users here. Maybe they’ll read the docs, maybe they won’t. 
+
+## Link
+
+All links have to be set as footnote in order to improve [the translation process][2].
+
+[1]: https://github.com/DataDog/gobwords/tree/master/style-guide
+[2]: https://github.com/DataDog/documentation/wiki/Translations-Overview
