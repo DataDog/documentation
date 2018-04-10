@@ -25,7 +25,7 @@ further_reading:
 ## Trace sampling 
 
 Due to the extremely high volume of traces in a web-scale application, sampling is applied to traces in Datadog.  
-**Statistics (requests, errors, latency, etc.) are calculated based on the full volume of traces at the agent level, and are therefore always accurate**.
+**Statistics (requests, errors, latency, etc.) are calculated based on the full volume of traces at the Agent level, and are therefore always accurate**.
 
 ### Statistics (Requests, Errors, Latencies etc.)
 
@@ -45,11 +45,11 @@ To ensure keeping a representative sample set of traces, Datadog combines multip
 
 * **Agent sampling**: Reduces the resources and network used by the Agent for sending traces to the backend. Configurable, default to a maximum of 10 traces per second.
 
-* **Server sampling**: Looks at all reporting agents, keeping samples representative of the overall infrastructure. Allows a volume up to 60 traces per minute per host.
+* **Server sampling**: Looks at all reporting Agents, keeping samples representative of the overall infrastructure. Allows a volume up to 60 traces per minute per host.
 
 * **Client sampling**: Allows reduction of instrumentation overhead by only instrumenting a configurable percentage of the transactions. By default, it is disabled.
 
-{{< img src="tracing/product_specs/trace_sampling_storage/sampling_trace.png" alt="Individual traces are sampled at the agent, server, and client level." responsive="true" popup="true" style="width:90%;">}}
+{{< img src="tracing/product_specs/trace_sampling_storage/sampling_trace.png" alt="Individual traces are sampled at the Agent, server, and client level." responsive="true" popup="true" style="width:90%;">}}
 
 ### Signature Sampling
 

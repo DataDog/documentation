@@ -7,7 +7,7 @@ Much like the "Native" [AWS RDS Integration][1] with MySQL, you can set up a Dat
 
 To set up this "extra" integration on your Google CloudSQL instance, you can set up the MySQL integration on a Datadog Agent and [configure it to remotely connect][4] to your Google CloudSQL instance instead of using the localhost default. The setup steps are otherwise the same as any other locally hosted MySQL instance.
 
-With one caveat: Google CloudSQL [does not support performance_schemas][5], so you can't `GRANT SELECT ON performance_schema.*` to the Datadog agent user. As a result, two of the MySQL check's extra/optional metrics are not available for Google CloudSQL instances. Otherwise, the integration should work just as it would with any locally hosted MySQL instance.
+With one caveat: Google CloudSQL [does not support performance_schemas][5], so you can't `GRANT SELECT ON performance_schema.*` to the Datadog Agent user. As a result, two of the MySQL check's extra/optional metrics are not available for Google CloudSQL instances. Otherwise, the integration should work just as it would with any locally hosted MySQL instance.
 
 [1]: /integrations/amazon_rds
 [2]: /integrations/google_cloudsql/

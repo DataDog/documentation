@@ -13,7 +13,7 @@ https://gist.github.com/sage-oli-wood/70e0931f037ea0aac132
 
 This submits your data to Datadog through an HTTP POST.
 
-A more proper way to do this would be to send metrics and events using DogStatsD. You may adapt your cron job to forward your data locally in UDP to your agent, find more here.
+A more proper way to do this would be to send metrics and events using DogStatsD. You may adapt your cron job to forward your data locally in UDP to your Agent, find more here.
 
 You retrieve from this:
 

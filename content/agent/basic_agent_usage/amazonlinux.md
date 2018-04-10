@@ -20,7 +20,7 @@ further_reading:
 
 This page outlines the basic functionality of the Datadog Agent for Amazon linux.  
 If you haven't installed the Agent yet, instructions can be found
-[in the Datadog agent integration page][1]
+[in the Datadog Agent integration page][1]
 
 ## Commands
 
@@ -74,11 +74,11 @@ The Agent logs are located in the `/var/log/datadog/` directory:
 
 If you're still having trouble, [our support team][3] will be glad to provide further assistance.
 
-## Adding a custom python package to the agent
+## Adding a custom python package to the Agent
 
 The Python interpreter embedded with the Agent is located here:  
 `/opt/datadog-agent/embedded/bin/python`.
-The agent also comes with pip, install python libraries using:
+The Agent also comes with pip, install python libraries using:
 ```
 sudo -u dd-agent -- /opt/datadog-agent/embedded/bin/pip install <package_name>
 ```
@@ -90,7 +90,7 @@ A script is available to automatically install or upgrade the new Agent. It sets
 #### One-step install
 ##### To Upgrade
 
-The Agent 6.x installer can automatically convert your 5.x style agent configuration at upgrade:
+The Agent 6.x installer can automatically convert your 5.x style Agent configuration at upgrade:
 
 ```shell
  DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
@@ -101,7 +101,7 @@ design since we cannot guarantee full backwards compatibility out of the box.
 
 ##### To Install Fresh
 
-To install on a clean box (or have an existing agent 5 install from which you do not wish to import the configuration) provide an api key:
+To install on a clean box (or have an existing Agent 5 install from which you do not wish to import the configuration) provide an api key:
 
 ```shell
  DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
@@ -159,7 +159,7 @@ To install on a clean box (or have an existing agent 5 install from which you do
     sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 382E94DE
     ```
 
-3. Update apt and downgrade the agent
+3. Update apt and downgrade the Agent
 
     ```shell
     sudo apt-get update
@@ -167,9 +167,9 @@ To install on a clean box (or have an existing agent 5 install from which you do
     sudo apt-get install datadog-agent
     ```
 
-## Uninstall the agent
+## Uninstall the Agent
 
-To uninstall the agent run: 
+To uninstall the Agent run: 
 
 ```
 $ sudo apt-get --purge remove datadog-agent -y

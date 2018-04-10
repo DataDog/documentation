@@ -16,7 +16,7 @@ further_reading:
   text: Log Collection Troubleshooting Guide
 ---
 
-To send your go logs to Datadog, we recommend logging to a file and then tailing that file with your Datadog agent. To achieve that we suggest the following setup with the open source logging library called [logrus][1]
+To send your go logs to Datadog, we recommend logging to a file and then tailing that file with your Datadog Agent. To achieve that we suggest the following setup with the open source logging library called [logrus][1]
 
 We strongly encourage setting up your logging library to produce your logs in JSON format to avoid the need for [custom parsing rules][2].
 
@@ -70,7 +70,7 @@ func main() {
 }
 ```
 
-## Configure your Datadog agent
+## Configure your Datadog Agent
 
 Create a `go.d/conf.yaml` file in your `conf.d/` folder with the following content:
 

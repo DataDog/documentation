@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-This page outlines the basic functionality of the Datadog Agent. If you haven't installed the Agent yet, instructions can be found [in the Datadog agent integration page][1].
+This page outlines the basic functionality of the Datadog Agent. If you haven't installed the Agent yet, instructions can be found [in the Datadog Agent integration page][1].
 
 
 ### Starting and Stopping the Agent
@@ -33,7 +33,7 @@ There are a few major changes compare to older Datadog Windows Agent version:
 * Commands should be run with the command line `c:\program files\datadog\datadog-agent\embedded\agent.exe <command>`
 * The configuration GUI is now a browser based configuration application.
 
-The agent has a new set of command-line options:
+The Agent has a new set of command-line options:
 
 | Command         | Notes
 | --------------- | -------------------------------------------------------------------------- |
@@ -43,15 +43,15 @@ The agent has a new set of command-line options:
 | help            | Help about any command |
 | hostname        | Print the hostname used by the Agent |
 | import          | Import and convert configuration files from previous versions of the Agent |
-| installservice  | Installs the agent within the service control manager |
+| installservice  | Installs the Agent within the service control manager |
 | launch-gui      | starts the Datadog Agent GUI |
 | regimport       | Import the registry settings into datadog.yaml |
-| remove-service  | Removes the agent from the service control manager |
-| restart-service | restarts the agent within the service control manager |
+| remove-service  | Removes the Agent from the service control manager |
+| restart-service | restarts the Agent within the service control manager |
 | start           | Start the Agent |
-| start-service   | starts the agent within the service control manager |
+| start-service   | starts the Agent within the service control manager |
 | status          | Print the current status |
-| stopservice     | stops the agent within the service control manager |
+| stopservice     | stops the Agent within the service control manager |
 | version         | Print the version info |
 
 ### For version >= 3.9.1
@@ -73,7 +73,7 @@ The Agent can be started, stopped, and restarted from the Services panel. To vie
 
 To check if the Agent is running, check if the service status in the Services panel is listed as "Started". A process called "ddagent.exe" should also exist in the Task Manager. To receive more information about the Agent's state, visit the _status page_ by going to **Settings -> Agent Status** in Agent version 5.2 and above and by going to `http://localhost:17125/status` in Agent version 3.9.1 to 5.1.
 
-For 5.2 and later versions of the agent go to the Datadog Agent Manager->Settings->Agent Status
+For 5.2 and later versions of the Agent go to the Datadog Agent Manager->Settings->Agent Status
 
 {{< img src="agent/faq/windows_status.png" alt="Windows Status" responsive="true" popup="true" style="width:50%;" >}}
 
@@ -96,7 +96,7 @@ The status page is supported in Agent version 3.9.1-5.1.1
 
 ### For version >= 3.9.1
 
-You can use the Datadog Agent Manager located in the start menu to enable, disable and configure checks. You have to restart the agent in order for your changes to be applied.
+You can use the Datadog Agent Manager located in the start menu to enable, disable and configure checks. You have to restart the Agent in order for your changes to be applied.
 
 ### For version < 3.9.1
 
@@ -137,13 +137,13 @@ Download the latest version available [from here][2] and run the installation pa
 
 ### Downgrade to Agent v5
 
-Run the agent installer package for the latest 5.x version,  instructions can be found [in the Datadog agent integration page][1].
+Run the Agent installer package for the latest 5.x version,  instructions can be found [in the Datadog Agent integration page][1].
 
-## Uninstall the agent
+## Uninstall the Agent
 
-**It's important that the original account used to install the agent is also used to remove it, otherwise it’s possible remnants are left behind and it won't be cleanly removed.**
+**It's important that the original account used to install the Agent is also used to remove it, otherwise it’s possible remnants are left behind and it won't be cleanly removed.**
 
-Uninstall the agent using Add/Remove Programs, alternatively, it's possible to to use Powershell as well. Here is a one liner:
+Uninstall the Agent using Add/Remove Programs, alternatively, it's possible to to use Powershell as well. Here is a one liner:
 
 ```
 (Get-WmiObject -Class Win32_Product -Filter "Name='Datadog Agent'" -ComputerName . ).Uninstall()
@@ -171,8 +171,8 @@ Logs for the subsystems are available in Event Viewer, under Windows Logs -> App
 
 If you're still having trouble, [our support team][3] will be glad to provide further assistance.
 
-## Adding a custom python package to the agent
-The current way to do so is to add the package in the library zipped folder that can be found at `C:\Program Files (x86)\Datadog\Datadog Agent\files`, and [restart the agent][4].
+## Adding a custom python package to the Agent
+The current way to do so is to add the package in the library zipped folder that can be found at `C:\Program Files (x86)\Datadog\Datadog Agent\files`, and [restart the Agent][4].
 
 {{< img src="agent/faq/add_package_windows.png" alt="Add Package Windows" responsive="true" popup="true" style="width:75%;">}}
 
@@ -182,7 +182,7 @@ The current way to do so is to add the package in the library zipped folder that
 
 1. Navigate to `localhost:5002` to [display the Agent GUI][5]
 2. Select flare tab
-  {{< img src="agent/basic_agent_usage/windows/windows_flare_agent_6.png" alt="Windows flare with agent 6" responsive="true" popup="true" style="width:75%;">}}
+  {{< img src="agent/basic_agent_usage/windows/windows_flare_agent_6.png" alt="Windows flare with Agent 6" responsive="true" popup="true" style="width:75%;">}}
 3. Enter your ticket number (if you have one) and email address
 4. Press Submit
 
@@ -214,7 +214,7 @@ or cmd.exe:
 
 On Linux and Mac OSX, the output of the flare command tells you where the compressed flare archive is saved. In case the file fails to upload to Datadog, you can retrieve it from this directory and manually add as an attachment to an email.
 
-For Windows, you can find the location of this file by running the following from the agent's python command prompt:
+For Windows, you can find the location of this file by running the following from the Agent's python command prompt:
 
 * Since Agent v5.12:
     `C:\Program Files\Datadog\Datadog Agent\dist\shell.exe since`

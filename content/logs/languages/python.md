@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-Use your favorite python logger to log into a file on your host. Then [monitor this file with your Datadog agent][1] to send your logs to Datadog.
+Use your favorite python logger to log into a file on your host. Then [monitor this file with your Datadog Agent][1] to send your logs to Datadog.
 
 ## Setup
 Python logs are quite complex to handle, mainly because of tracebacks. They are split into multiple lines which make them difficult to associate with the original log event.  
@@ -102,7 +102,7 @@ Once the [handler is configured][4], the log file contains the following log rec
 }
 ```
 
-### Configure the Datadog agent
+### Configure the Datadog Agent
 
 Create a file `conf.yaml` in the Agent's `python.d/` directory with the following content:
 

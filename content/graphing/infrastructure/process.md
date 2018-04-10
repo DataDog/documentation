@@ -21,15 +21,15 @@ Datadog Process Monitoring allows for real-time visibility of the most granular 
 
 ## Installation
 
-The following installation processes are for [agent v6 only][6], if you are still using Agent v5, [follow this specific installation process][7]
+The following installation processes are for [Agent v6 only][6], if you are still using Agent v5, [follow this specific installation process][7]
 
-## Process agent
+## Process Agent
 
 **Note**: Live Processes beta for Windows requires Agent 6.
 
 ### Standard Agent Configuration
 
-The process agent is shipped by default with Agent 6 in Linux packages only. Refer to the instructions for standard [Agent installation][8] for platform-specific details.
+The process Agent is shipped by default with Agent 6 in Linux packages only. Refer to the instructions for standard [Agent installation][8] for platform-specific details.
 
 Once the Datadog Agent is installed, enable Live Processes collection by editing the [configuration file][9] at:
 

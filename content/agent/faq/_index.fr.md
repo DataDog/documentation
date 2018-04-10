@@ -18,7 +18,7 @@ private: true
 * [Erreur d'installation 1721 de l'agent Windows ][7]
 * [Comment installer l'agent sur un serveur avec une connexion Internet limitée?][8]
 * [Comment monitorer les périphériques SNMP?][9]
-* [J'ai arrêté mon agent mais je vois toujours l'host sur mon compte Datadog.][10]
+* [J'ai arrêté mon Agent mais je vois toujours l'host sur mon compte Datadog.][10]
 * [Comment désinstaller l'Agent?][11]
 
 ## Troubleshooting

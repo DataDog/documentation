@@ -47,7 +47,7 @@ aliases:
 
 ### Information sur l'Agent
 
-L'exécution d'une commande info affiche l'état de votre agent Datadog et des intégrations activées.
+L'exécution d'une commande info affiche l'état de votre Agent Datadog et des intégrations activées.
 
 Une intégration correctement configurée indiquera "OK" comme indiqué ci-dessous:
 

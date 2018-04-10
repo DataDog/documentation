@@ -24,7 +24,7 @@ Tracing can be available on port `8126/tcp from _any host_ by adding the option 
 
 To make it available from _your host only_, use `-p 127.0.0.1:8126:8126/tcp` instead.
 
-For example, the following command allows the agent to receive traces from anywhere:
+For example, the following command allows the Agent to receive traces from anywhere:
 
 ```bash
 docker run -d --name dd-agent \
@@ -39,7 +39,7 @@ docker run -d --name dd-agent \
 
 ## Tracing from other containers
 
-As with DogStatsD, traces can be submitted to the agent from other containers either using Docker links or with the Docker host IP.
+As with DogStatsD, traces can be submitted to the Agent from other containers either using Docker links or with the Docker host IP.
 
 ### Using Docker links
 

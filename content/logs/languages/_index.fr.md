@@ -1,7 +1,7 @@
 ---
 title: Collecte de log depuis vos languages
 kind: Documentation
-description: Configurez votre agent Datadog pour rassembler les logs de vos languages.
+description: Configurez votre Agent Datadog pour rassembler les logs de vos languages.
 ---
 
 ## Comment tirer le meilleur parti de vos logs

@@ -91,10 +91,10 @@ The following [integrations][1] sources create tags automatically in Datadog:
 {{% /table %}}
 
 ### Assigning tags using the configuration files
-[The Datadog integrations][1] are all configured via the yaml configuration files located in the **conf.d** directory in your agent install. For more about where to look for your configuration files, refer [to this article][59].
+[The Datadog integrations][1] are all configured via the yaml configuration files located in the **conf.d** directory in your Agent install. For more about where to look for your configuration files, refer [to this article][59].
 
-Define tags in the configuration file for the overall agent as well as for each integration.
-In YAML files, there is a tag dictionary with a list of tags you want assigned at that level. Any tag you assign to the agent is applied to every integration on that agent's host.
+Define tags in the configuration file for the overall Agent as well as for each integration.
+In YAML files, there is a tag dictionary with a list of tags you want assigned at that level. Any tag you assign to the Agent is applied to every integration on that Agent's host.
 
 Dictionaries with lists of values have two different yet functionally equivalent forms:
 

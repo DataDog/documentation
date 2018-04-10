@@ -48,7 +48,7 @@ aliases:
 
 ### Agent Information
 
-Running an info command displays the status of your Datadog agent and enabled integrations.
+Running an info command displays the status of your Datadog Agent and enabled integrations.
 
 A properly configured integration will report "OK" as seen below:
 

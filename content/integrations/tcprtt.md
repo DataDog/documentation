@@ -12,7 +12,7 @@ ddtype: check
 ---
 ## Overview
 
-The TCP RTT check reports on roundtrip times between the host the agent is running on and any host it is communicating with. This check is passive and will only report RTT times for packets being sent and received from outside the check. The check itself will not send any packets.
+The TCP RTT check reports on roundtrip times between the host the Agent is running on and any host it is communicating with. This check is passive and will only report RTT times for packets being sent and received from outside the check. The check itself will not send any packets.
 
 This check is only shipped in the 64-bit DEB and RPM Datadog Agent packages.
 
@@ -37,7 +37,7 @@ Finally, configure PCAP:
 
 ### Configuration
 
-Edit the `go-metro.yaml` file in your agent's `conf.d` directory. The following is an example file that will show the TCP RTT times for app.datadoghq.com and 192.168.0.22:
+Edit the `go-metro.yaml` file in your Agent's `conf.d` directory. The following is an example file that will show the TCP RTT times for app.datadoghq.com and 192.168.0.22:
 
     init_config:
       snaplen: 512

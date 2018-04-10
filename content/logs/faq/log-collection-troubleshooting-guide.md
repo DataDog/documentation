@@ -15,7 +15,7 @@ further_reading:
 
 There are a number of common issues that can get in the way when [sending new logs to Datadog][1] via the log collector in the dd-agent. If you experience issues sending new logs to Datadog, this list helps you troubleshoot. If you continue to have trouble, email [us][2] for further assistance.
 
-## The agent needs to be restarted
+## The Agent needs to be restarted
 
 After you've made any configuration changes to the dd-agent, the changes only take effect after you restart the dd-agent.
 
@@ -27,13 +27,13 @@ The dd-agent only collects logs that have been written after it has started tryi
 
 The dd-agent does not run as root (and we do not recommend that you make it run as root, as a general best-practice). For this reason, when you configure your dd-agent to tail log files (for custom logs or for integrations) you need to take special care to ensure the dd-agent user has read access to tail the log files you want to collect from.
 
-If the dd-agent user does not have read access to the files you configure it to tail, then a permissions error is captured in the `/var/log/datadog/agent.log`. The agent requires to have an execute permission on the directory containing the files (this is the default permission required to be able to list the file contained in a directory).
+If the dd-agent user does not have read access to the files you configure it to tail, then a permissions error is captured in the `/var/log/datadog/agent.log`. The Agent requires to have an execute permission on the directory containing the files (this is the default permission required to be able to list the file contained in a directory).
 
 N.B. when you add the appropriate read permissions, you want also to make sure that these permissions are correctly set on your log rotation configuration. Otherwise, when the log rotates next, the dd-agent may lose its read permissions.
 
 ## Outbound traffic on port 10516 is blocked
 
-The log-agent within the dd-agent sends its logs to Datadog over tcp via port 10516. If that connection is not available, logs fail to be sent and an error is recorded in the agent.log to that effect.
+The log-agent within the dd-agent sends its logs to Datadog over tcp via port 10516. If that connection is not available, logs fail to be sent and an error is recorded in the `agent.log` file to that effect.
 
 Test manually your connection by running a telnet or openssl command like so (port 10514 would work too, but is less secure):
 
@@ -54,7 +54,7 @@ These are a few of the common configuration issues that are work triple-checking
 
 2. Check if the api_key is defined in `datadog.yaml`.
 
-3. By default the agent do not collect any logs, make sure there is at least one .yaml file in the Agent's `conf.d/` directory that includes a logs section and the appropriate values.
+3. By default the Agent do not collect any logs, make sure there is at least one .yaml file in the Agent's `conf.d/` directory that includes a logs section and the appropriate values.
 
 4. You may have some .yaml parsing errors in your configuration files. Yaml is notoriously finicky, so when in doubt, a good [yaml validator][3] is worth referencing.
 

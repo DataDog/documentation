@@ -18,11 +18,11 @@ When you add your custom query, you have to be careful to make sure each table y
 SELECT * FROM database_name.table_name WHERE...
 ```
 
-If you don't do this for all table names, the agent may fail to run the custom query with the following error, or similar: No database selected. The agent may be somewhat less forgiving than some other tools used to query MySQL, so even if you do not hit this error while running your custom query manually, that the agent may still hit it if there are tables/views that are not prepended by their appropriate database name.
+If you don't do this for all table names, the Agent may fail to run the custom query with the following error, or similar: No database selected. The Agent may be somewhat less forgiving than some other tools used to query MySQL, so even if you do not hit this error while running your custom query manually, that the Agent may still hit it if there are tables/views that are not prepended by their appropriate database name.
 
 ## Multiple line queries are not supported
 
-If you try running a multi-line SQL query by adding the ";" character to your configuration's "query" string, only that part of the query string that least up to the first ";" is used by the agent for the custom query.
+If you try running a multi-line SQL query by adding the ";" character to your configuration's "query" string, only that part of the query string that least up to the first ";" is used by the Agent for the custom query.
 
 ## Naming your metric
 
@@ -30,11 +30,11 @@ The names applied to your custom query metrics are taken exactly as you provide 
 
 ## Frequency of queries
 
-You custom query metric is collected by your MySQL check at the default agent check schedule, every 15-20 seconds. If you would like to query these metrics less frequently, you could either reduce the frequency of the entire MySQL check (which would affect the frequency of your general mysql.* metrics), or you may prefer to run a custom scheduled/CRON script to submit the results of MySQL queries via the [DogStatsD][2] or [API][3].
+You custom query metric is collected by your MySQL check at the default Agent check schedule, every 15-20 seconds. If you would like to query these metrics less frequently, you could either reduce the frequency of the entire MySQL check (which would affect the frequency of your general mysql.* metrics), or you may prefer to run a custom scheduled/CRON script to submit the results of MySQL queries via the [DogStatsD][2] or [API][3].
 
 ## Maximum number of custom query metrics
 
-The agent caps off the number of custom queries it collects metrics from at 20, so as to ensure that running custom MySQL queries does not significantly delay its other scheduled checks. If you need to collect metrics from a great number of custom MySQL queries, you may prefer to run a custom scheduled/CRON script to submit the results of MySQL queries via the[DogStatsD][2] or [API][3].
+The Agent caps off the number of custom queries it collects metrics from at 20, so as to ensure that running custom MySQL queries does not significantly delay its other scheduled checks. If you need to collect metrics from a great number of custom MySQL queries, you may prefer to run a custom scheduled/CRON script to submit the results of MySQL queries via the[DogStatsD][2] or [API][3].
 
 ## Example
 
@@ -58,7 +58,7 @@ If you were to add a custom query to your mysql.yaml with the following configur
         field: col_1
 ```
 
-Then your agent's MySQL check would run that query to collect a metric called "mysql.custom_query.test.b" with a value of "2", as shown below:
+Then your Agent's MySQL check would run that query to collect a metric called "mysql.custom_query.test.b" with a value of "2", as shown below:
 
 
 {{< img src="integrations/faq/mysql_metric_query.png" alt="mysql_metric_query" responsive="true" popup="true">}}

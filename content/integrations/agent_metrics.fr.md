@@ -30,7 +30,7 @@ Obtenez les métriques du service agent_metrics en temps réel pour:
 ## Implémentation
 ### Installation
 
-Le check agent metric est packagé avec l'agent, il vous faut donc simplement [installer l'agent] [1].
+Le check Agent metric est packagé avec l'agent, il vous faut donc simplement [installer l'agent] [1].
 
 ### Configuration
 

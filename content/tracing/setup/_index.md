@@ -24,7 +24,7 @@ further_reading:
   text: Ruby language instrumentation
 ---
 
-This documentation covers Agent v6 only, to know how to set up APM tracing with Agent v5, [refer to the dedicated APM with agent v5 doc][1].
+This documentation covers Agent v6 only, to know how to set up APM tracing with Agent v5, [refer to the dedicated APM with Agent v5 doc][1].
 
 ## Setup process
 
@@ -62,8 +62,8 @@ To start tracing your application:
 
 ## Agent configuration
 
-The APM agent (also known as _trace agent_) is shipped by default with the
-Agent 6 in the Linux, MacOS, and Windows packages. The APM agent is enabled by default on Linux. To enable the check on other platforms or disable it on Linux, update the `apm_config` key in your `datadog.yaml`:
+The APM Agent (also known as *trace Agent*) is shipped by default with the
+Agent 6 in the Linux, MacOS, and Windows packages. The APM Agent is enabled by default on Linux. To enable the check on other platforms or disable it on Linux, update the `apm_config` key in your `datadog.yaml`:
 
 ```
 apm_config:

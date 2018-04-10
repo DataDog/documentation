@@ -31,7 +31,7 @@ git push heroku master
 
 Once complete, the Datadog Agent is started automatically when each Dyno starts.
 
-The Datadog agent provides a listening port on 8125 for StatsD/DogStatsD metrics and events. Traces are collected on port 8126.
+The Datadog Agent provides a listening port on 8125 for StatsD/DogStatsD metrics and events. Traces are collected on port 8126.
 
 ## Configuration
 
@@ -44,7 +44,7 @@ In addition to the environment variables shown above, there are a number of othe
 | `DD_HOSTNAME` | *Required.* Because Heroku Dynos are ephemeral and your application my be served by any available Dyno resource, set the hostname to the application or service name. To view metrics by Dyno hosts, the tag `dynohost` is added by the buildpack. |
 | `DD_TAGS` | *Optional.* Sets additional tags provided as a comma-delimited string. For example, `heroku config:set DD_TAGS=simple-tag-0,tag-key-1:tag-value-1`. The buildpack automatically adds the tags `dyno` and `dynohost` which represent the Dyno name (e.g. web.1) and host ID (e.g. 33f232db-7fa7-461e-b623-18e60944f44f) respectively. See the ["Guide to tagging"][3] for more information. |
 | `DD_HISTOGRAM_PERCENTILES` | *Optional.* Optionally set additional percentiles for your histogram metrics. See [Histogram percentiles](#histogram-percentiles) below for more information. |
-| `DISABLE_DATADOG_AGENT` | *Optional.* When set, the Datadog agent will not be run. |
+| `DISABLE_DATADOG_AGENT` | *Optional.* When set, the Datadog Agent will not be run. |
 | `DD_APM_ENABLED` | *Optional.* The Datadog Trace Agent (APM) is run by default. Set this to `false` to disable the Trace Agent. |
 | `DD_AGENT_VERSION` | *Optional.* By default, the buildpack installs the latest version of the Datadog Agent available in the package repository. Use this variable to install older versions of the Datadog Agent (note that not all versions of the Agent may be available). |
 | `DD_SERVICE_NAME` | *Optional.* While not read directly by the Datadog Agent, it is highly recommend that you set an environment variable for your service name. See the [Service Name](#service-name) section below for more information. |

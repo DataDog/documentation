@@ -80,7 +80,7 @@ $log->pushHandler($stream);
 $log->info('Adding a new user', array('username' => 'Seldaek'));
 ```
 
-### Configure your Datadog agent
+### Configure your Datadog Agent
 
 Create a `php.d/conf.yaml` file in your `conf.d/` folder with the following content:
 
@@ -173,7 +173,7 @@ $monolog->pushHandler($stream);
 return $r;
 ```
 
-### Configure your Datadog agent
+### Configure your Datadog Agent
 
 Create a `php.d/conf.yaml` file in your `conf.d/` folder with the following content:
 
@@ -361,7 +361,7 @@ This section is about:
                 formatter: monolog.json_formatter
     ```
 
-### Configure your Datadog agent
+### Configure your Datadog Agent
 
 Create a `php.d/conf.yaml` file in your `conf.d/` folder with the following content:
 

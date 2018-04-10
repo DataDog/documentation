@@ -63,7 +63,7 @@ alternative syntax to configure your line parser:
 
     dogstreams: /path/to/log1:/path/to/my/parsers_module.py:custom_parser
 
-In this format, the agent attempts to import a function called
+In this format, the Agent attempts to import a function called
 `custom_parser` from `/path/to/my/parsers_module.py`.
 
 If your custom log parser is not working, the first place to check is the
@@ -128,7 +128,7 @@ dogstreams: /path/to/mylogfile.log:/path/to/mylogparser.py:my_log_parser
 
 This example would collect a gauge-type metric called "user.crashes" with a value of 24, and tagged with the 3 applications named at the end.
 
-A word of warning: there is a limit to how many times the same metric can be collected in the same log-pass; effectively the agent starts to over-write logged metrics with the subsequent submissions of the same metric, even if they have different attributes (like tags). This can be somewhat mitigated if the metrics collected from the logs have sufficiently different time-stamps, but it is generally recommended to only submit one metric to the logs for collection once every 10 seconds or so. This over-writing is not an issue for metrics collected with differing names.
+A word of warning: there is a limit to how many times the same metric can be collected in the same log-pass; effectively the Agent starts to over-write logged metrics with the subsequent submissions of the same metric, even if they have different attributes (like tags). This can be somewhat mitigated if the metrics collected from the logs have sufficiently different time-stamps, but it is generally recommended to only submit one metric to the logs for collection once every 10 seconds or so. This over-writing is not an issue for metrics collected with differing names.
 
 ## Parsing Events
 
@@ -219,7 +219,7 @@ And in your parsers_module.py a function defined as:
 def custom_parser(logger, line)
 ```
 
-You can now change the parity of your function to take extra parameter as shown [in this agent example][6]
+You can now change the parity of your function to take extra parameter as shown [in this Agent example][6]
 
 So if you change your configuration file to:
 
@@ -248,11 +248,11 @@ dogstreams: /Users/Documents/Parser/test.log:/Users/Documents/Parser/myparser.py
 
 ## Troubleshooting Your Custom Log-Parser
 
-Bugs happen, so being able to see the traceback from your log-parsers is very important. You can do this if you are running the agent with its [agent logs][7] set at the "DEBUG" level. The agent's log-level can be set in the `datadog.conf` by uncommenting and editing [this line][8], and then [restarting the agent][9]. Once that's configured properly, traceback resulting from errors in your custom log-parser can be found in the *collector.log* file ([read here for where to find your agent logs][7]), and it generally includes the string checks.collector(datadog.py:278) | Error while parsing line in them ([here's the agent code where the error is likely to be thrown](https://github.com/DataDog/dd-agent/blob/5.7.x/checks/datadog.py#L278)).
+Bugs happen, so being able to see the traceback from your log-parsers is very important. You can do this if you are running the Agent with its [Agent logs][7] set at the "DEBUG" level. The Agent's log-level can be set in the `datadog.conf` by uncommenting and editing [this line][8], and then [restarting the Agent][9]. Once that's configured properly, traceback resulting from errors in your custom log-parser can be found in the *collector.log* file ([read here for where to find your Agent logs][7]), and it generally includes the string checks.collector(datadog.py:278) | Error while parsing line in them ([here's the Agent code where the error is likely to be thrown](https://github.com/DataDog/dd-agent/blob/5.7.x/checks/datadog.py#L278)).
 
-Note that whenever you make a change to your custom log-parser, [restart the agent][9] to put that change into effect.
+Note that whenever you make a change to your custom log-parser, [restart the Agent][9] to put that change into effect.
 
-If you suspect there is some error occurring beyond the scope of your custom log-parser function, feel free to [reach out to support][10], but do first set the agent's log-level at "DEBUG", run the agent for a few minutes while ensuring that new logs are being added to your files, and then [run the flare command][11] from your agent. That gives to the support team the information needed to effectively troubleshoot the issue.
+If you suspect there is some error occurring beyond the scope of your custom log-parser function, feel free to [reach out to support][10], but do first set the Agent's log-level at "DEBUG", run the Agent for a few minutes while ensuring that new logs are being added to your files, and then [run the flare command][11] from your Agent. That gives to the support team the information needed to effectively troubleshoot the issue.
 
 [2]: https://app.datadoghq.com/infrastructure#tags
 [3]: /api/#tags

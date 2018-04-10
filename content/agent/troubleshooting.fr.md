@@ -87,7 +87,7 @@ Dans les commandes ci-dessous, remplacez  `` par votre ID de ticket de support D
 
 * [Erreur d'installation 1721 de l'agent Windows ][11]
 * [Comment monitorer les périphériques SNMP?][12]
-* [J'ai arrêté mon agent mais je vois toujours l'host sur mon compte Datadog.][13]
+* [J'ai arrêté mon Agent mais je vois toujours l'host sur mon compte Datadog.][13]
 * [Problèmes de décalage du protocole NTP (Network Time Protocol)][14]
 * [Comment résoudre les erreurs "Permission denied"?][15]
 * [Erreur lors du redémarrage de l'agent: écoute déjà sur un port configuré][16]

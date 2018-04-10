@@ -62,7 +62,7 @@ use_dogstatsd: yes
 dogstatsd_port: 8125
 ```
 
-Then [restart your agent][7].
+Then [restart your Agent][7].
 
 Once done, your application can reliably reach the [DogStatsD client library][2] for your application language and you'll be ready to start hacking. You _can_ use any generic StatsD client to send metrics to DogStatsD, but you won't be able to use any of the Datadog-specific features mentioned above.
 
@@ -353,7 +353,7 @@ The idea behind DogStatsD is simple: create a message that contains information 
 
 ### Sending metrics
 
-The format for sending metrics is `metric.name:value|type|@sample_rate|#tag1:value,tag2,` so let's go ahead and send datapoints for a gauge metric called custom_metric with the shell tag. We use a locally installed agent as a collector, so the destination IP address is 127.0.0.1.
+The format for sending metrics is `metric.name:value|type|@sample_rate|#tag1:value,tag2,` so let's go ahead and send datapoints for a gauge metric called custom_metric with the shell tag. We use a locally installed Agent as a collector, so the destination IP address is 127.0.0.1.
 
 On Linux:
 
@@ -373,7 +373,7 @@ PS C:\vagrant> .\send-statsd.ps1 "custom_metric:123|g|#shell"
 PS C:\vagrant>
 ```
 
-On any platform with Python (on Windows, the agent's embedded Python interpreter can be used, which is located at `C:\Program Files\Datadog\Datadog Agent\embedded\python.exe`):
+On any platform with Python (on Windows, the Agent's embedded Python interpreter can be used, which is located at `C:\Program Files\Datadog\Datadog Agent\embedded\python.exe`):
 
 ```python
 import socket

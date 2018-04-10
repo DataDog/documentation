@@ -342,7 +342,7 @@ L'idée derrière DogStatsD est simple : créez un message qui contient des info
 
 ### Envoyer des métriques
 
-Le format d'envoi des métriques est `metric.name:value|type|@sample_rate|#tag1:value,tag2,`, alors allons-y et envoyons des points de données pour une métrique de type gauge nommé custom_metric avec le tag shell. Nous utilisons un agent installé localement en tant que collecteur, donc l'adresse IP de la destination et 127.0.0.1.
+Le format d'envoi des métriques est `metric.name:value|type|@sample_rate|#tag1:value,tag2,`, alors allons-y et envoyons des points de données pour une métrique de type gauge nommé custom_metric avec le tag shell. Nous utilisons un Agent installé localement en tant que collecteur, donc l'adresse IP de la destination et 127.0.0.1.
 
 Sur Linux:
 

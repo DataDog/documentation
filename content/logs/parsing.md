@@ -94,7 +94,7 @@ Here is the list of all the filters natively implemented by Datadog:
 |`json`| parses properly formatted JSON |
 |`rubyhash`| parses properly formatted Ruby Hash (eg {name => "John" "job" => {"company" => "Big Company", "title" => "CTO"}})|
 |`geoip` |parses an IP or a host and returns a JSON object that contains the continent, country, city and location of the IP address.|
-|`useragent([decodeuricomponent:true/false])`| parses a user-agent and returns a JSON object that contains the device, os and the browser represented by the agent. [More info](#useragent-parser)|
+|`useragent([decodeuricomponent:true/false])`| parses a user-agent and returns a JSON object that contains the device, os and the browser represented by the Agent. [More info](#useragent-parser)|
 |`querystring`| extracts all the key-value pairs in a matching URL query string (eg. "productId=superproduct&promotionCode=superpromo")|
 |`decodeuricomponent`| this core filter decodes uri components.|
 |`lowercase`| returns the lower cased string.|

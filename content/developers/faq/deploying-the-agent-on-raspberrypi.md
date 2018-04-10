@@ -24,7 +24,7 @@ DD_API_KEY=<YOUR-API-KEY> sh -c "$(curl -L https://raw.githubusercontent.com/Dat
 If installed correctly you should see an output that looks like:
 {{< img src="developers/faq/rasberypi_install.png" alt="rasberypi_install"  responsive="true" popup="true">}}
 
-The agent will run in the foreground. Some users may find benefit in creating an RC script for it or putting it into the /etc/rc.local like this:
+The Agent will run in the foreground. Some users may find benefit in creating an RC script for it or putting it into the /etc/rc.local like this:
 ```
 nohup sh /root/.datadog-agent/bin/agent &
 ```

@@ -1,5 +1,5 @@
 ---
-title: J'ai arrêté mon agent mais je vois toujours l'host sur mon compte Datadog. 
+title: J'ai arrêté mon Agent mais je vois toujours l'host sur mon compte Datadog. 
 kind: faq
 ---
 

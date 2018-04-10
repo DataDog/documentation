@@ -20,7 +20,7 @@ further_reading:
 Cette page présente les fonctionnalités de base de l'agent Datadog.
 Si vous n'avez pas encore installé l'Agent, les instructions d'installation peuvent être trouvées [sur la page d'intégration de l'agent Datadog][1].
 
-Par défaut, votre agent est installé dans sa propre sandbox à `~/.datadog-agent`. Vous êtes libre de déplacer ce dossier où vous le souhaitez. Cependant, cet article suppose que l'agent est installé dans son emplacement par défaut. Veillez donc à modifier les instructions en conséquence si vous avez décidé de le déplacer.
+Par défaut, votre Agent est installé dans sa propre sandbox à `~/.datadog-agent`. Vous êtes libre de déplacer ce dossier où vous le souhaitez. Cependant, cet article suppose que l'agent est installé dans son emplacement par défaut. Veillez donc à modifier les instructions en conséquence si vous avez décidé de le déplacer.
 
 
 ## Commandes

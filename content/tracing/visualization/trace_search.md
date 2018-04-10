@@ -19,7 +19,7 @@ further_reading:
   text: Understand how to read a Datadog Trace
 ---
 
-All traces collected by your agents are listed in the [traces list page][1]:
+All traces collected by your Agents are listed in the [traces list page][1]:
 
 {{< img src="tracing/traces/trace_search.png" alt="Trace search UI" responsive="true" popup="true">}}
 

@@ -26,7 +26,7 @@ the [HTTP check documentation][1] for details on Agent configuration.
 3. Select **alerting options**:
     {{< img src="monitors/monitor_types/network/network_check_alert_conditions.png" alt="network check alert conditions" responsive="true" popup="true" style="width:80%;">}}
 
-    **Note**: Contrary to [metric monitor][2] it's not possible to get alerted after the endpoint is unavailable for X min. Instead you can only be alert after 5 max consecutive bad statuses. Unless a high timeout value is used in the agent configuration, if a site goes down this translates into 5 * ~15-20 seconds (agent collection period) i.e. 1min30 without data.
+    **Note**: Contrary to [metric monitor][2] it's not possible to get alerted after the endpoint is unavailable for X min. Instead you can only be alert after 5 max consecutive bad statuses. Unless a high timeout value is used in the Agent configuration, if a site goes down this translates into 5 * ~15-20 seconds (agent collection period) i.e. 1min30 without data.
 
 4. Configure your **notification options**:  
     Refer to the [Notifications][3] dedicated documentation page for a detailed walkthrough of the common notification options.

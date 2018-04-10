@@ -54,7 +54,7 @@ To gather your kube-state metrics:
 ## Setup Kubernetes DNS
 ### Configuration
 
-Since [agent v6][4], Kubernetes DNS integration works automatically with the [Autodiscovery][5].
+Since [Agent v6][4], Kubernetes DNS integration works automatically with the [Autodiscovery][5].
 
 ## Data Collected
 ### Metrics

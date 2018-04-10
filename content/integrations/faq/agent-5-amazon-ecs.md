@@ -1,11 +1,11 @@
 ---
-title: AWS ECS with agent v5
+title: AWS ECS with Agent v5
 kind: faq
 ---
 
 
 <div class="alert alert-warning">
-This documentation is to setup AWS EC2 container Service with <strong>Datadog agent 5</strong>
+This documentation is to setup AWS EC2 container Service with <strong>Datadog Agent 5</strong>
 </div>
 
 ## Setup
@@ -101,7 +101,7 @@ aws ecs register-task-definition --cli-input-json file://path/to/dd-agent-ecs.js
 
 #### Create a new instance including a startup script
 
-Ideally you want the Datadog agent to load on one container on each EC2 instance. The easiest way to achieve this is to have a startup script on each instance used. Unfortunately there is no way to add a script to an existing instance. So you need to create a new instance and add it to your ECS cluster.
+Ideally you want the Datadog Agent to load on one container on each EC2 instance. The easiest way to achieve this is to have a startup script on each instance used. Unfortunately there is no way to add a script to an existing instance. So you need to create a new instance and add it to your ECS cluster.
 
 ##### Create a new Amazon Linux instance
 

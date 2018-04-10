@@ -120,7 +120,7 @@ To send logs from Rsyslog to a local UDP or TCP port of your choosing, add the f
     $template DatadogFormat,"%msg%\n"
     *.* @@localhost:PORT;DatadogFormat  # @@ for TCP, @ for UDP
     ```
-    Then configure the Datadog agent to listen on that port: https://docs.datadoghq.com/logs/#stream-logs-through-tcp-udp
+    Then configure the Datadog Agent to listen on that port: https://docs.datadoghq.com/logs/#stream-logs-through-tcp-udp
 
 6. Restart Rsyslog and your new logs get forwarded directly to your Datadog account.
 
@@ -153,7 +153,7 @@ To send logs from Rsyslog to a local UDP or TCP port of your choosing, add the f
 
 ## FluentD
 
-As long as you can forward your FluentD logs over tcp/udp to a specific port, you can use that approach to forward your FluentD logs to your Datadog agent. But another option is to use the [Datadog FluentD plugin][5] to forward the logs directly from FluentD to your Datadog account.
+As long as you can forward your FluentD logs over tcp/udp to a specific port, you can use that approach to forward your FluentD logs to your Datadog Agent. But another option is to use the [Datadog FluentD plugin][5] to forward the logs directly from FluentD to your Datadog account.
 
 In order to get the best use out of your logs in Datadog, it is important to have the proper metadata associated with your logs (including hostname and source). For the current version of the Datadog FluentD plugin, you have to include this metadata in the logs that you're sending to FluentD, using the following format:
 

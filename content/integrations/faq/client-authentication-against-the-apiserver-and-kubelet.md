@@ -15,14 +15,14 @@ kubelet_client_key: /path/to/client.key
 
 ## Server Authentication for apiserver and kubelet
 
-We use the default CA certificate of the agent's service account to verify the apiserver's identity. To use custom certificates, specify the path in your configuration file.
+We use the default CA certificate of the Agent's service account to verify the apiserver's identity. To use custom certificates, specify the path in your configuration file.
 
 ```
 apiserver_ca_cert: /path/to/cacert.crt
 kubelet_cert: /path/to/ca.pem
 ```
 
-The default for kubelet traffic is to first try to use the read-only port that doesn't require TLS and then to fall back to the HTTPS API with simple TLS validation. Providing a cert forces TLS validation on. Explicitly disabling tls_verify should be used with caution: if an attacker sniffs the agent requests they will see the agent's service account bearer token.
+The default for kubelet traffic is to first try to use the read-only port that doesn't require TLS and then to fall back to the HTTPS API with simple TLS validation. Providing a cert forces TLS validation on. Explicitly disabling tls_verify should be used with caution: if an attacker sniffs the Agent requests they will see the Agent's service account bearer token.
 
 ```
 kubelet_tls_verify: True

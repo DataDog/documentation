@@ -93,7 +93,7 @@ kind: faq
  
 ## Kubernetes 
 
-* [Can I install the agent on my Kubernetes master node(s)][52]
+* [Can I install the Agent on my Kubernetes master node(s)][52]
 * [Client Authentication against the apiserver and kubelet][53]
 * [Gathering Kubernetes events][54]
 * [Why is the Kubernetes check failing with a ConnectTimeout error to port 10250?][55]

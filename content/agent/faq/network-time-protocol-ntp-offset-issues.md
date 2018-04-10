@@ -44,7 +44,7 @@ Also, you can check over all the reporting hosts, the one that have offset issue
 
 To do so, use our [Check Summary page][6]. Inspect the check `ntp.in_sync` and see the list of the hosts that have NTP issues.
 
-Also note that outgoing UDP traffic over the port 123 should be allowed so the agent can confirm that the local server time is reasonably accurate according the Datadog NTP servers.
+Also note that outgoing UDP traffic over the port 123 should be allowed so the Agent can confirm that the local server time is reasonably accurate according the Datadog NTP servers.
 
 ## Further Reading
 

@@ -17,7 +17,7 @@ further_reading:
   text: Collect your traces
 ---
 
-This page covers Autodiscovery with agent 6 only, [refer to the dedicated documentation to setup Autodiscovery with agent 5][1]
+This page covers Autodiscovery with Agent 6 only, [refer to the dedicated documentation to setup Autodiscovery with Agent 5][1]
 
 ## How it Works
 
@@ -45,7 +45,7 @@ The Agent watches for Docker events—container creation, destruction, starts, a
 
 ## How to set it up
 
-The Datadog Docker agent automatically auto-discovers other containers.
+The Datadog Docker Agent automatically auto-discovers other containers.
 
 ## Setting up Check Templates
 
@@ -294,7 +294,7 @@ LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%/nginx
 
 ### Supported Template Variables
 
-The following template variables are currently handled by the agent:
+The following template variables are currently handled by the Agent:
 
 - Container IP: `host`
   - `%%host%%`: autodetect the network (use `bridge` or, if only one network is attached, this one)

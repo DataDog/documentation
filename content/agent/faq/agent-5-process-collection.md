@@ -1,5 +1,5 @@
 ---
-title: Process collection with agent v5
+title: Process collection with Agent v5
 kind: faq
 ---
 

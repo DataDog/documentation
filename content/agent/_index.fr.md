@@ -52,7 +52,7 @@ L'Agent 6 est la dernière version majeure de l'Agent Datadog. La grande différ
 
 * [DogStatsD][6] peut être utilisé sur un socket unix plutôt que sur udp.
 
-* Personnalisez votre agent v6 et [DogStatsD][6] beaucoup plus facilement et avec beaucoup plus d'options de configuration, pour inclure ou exclure presque tout. Il y a aussi un agent «puppy» qui est installation vraiment minimale.
+* Personnalisez votre Agent v6 et [DogStatsD][6] beaucoup plus facilement et avec beaucoup plus d'options de configuration, pour inclure ou exclure presque tout. Il y a aussi un Agent «puppy» qui est installation vraiment minimale.
 
 * L'agent 6 bloque les ports 5000 et 5001. Si vous utilisez ces ports, mettez à jour le port pour `expvar_port` et` cmd_port` dans le fichier `datadog.yaml`.
 
@@ -62,7 +62,7 @@ Pour faire automatiquement la transition entre les paths et les formats de confi
 
 `sudo -u dd-agent -- datadog-agent import`
 
-La commande analyse un `datadog.conf` existant et convertit toutes les options de configuration que le nouvel agent supporte dans le fichier de configuration` datadog.yaml`. Il copie également les fichiers de configuration pour les check actuellement activés.
+La commande analyse un `datadog.conf` existant et convertit toutes les options de configuration que le nouvel Agent supporte dans le fichier de configuration` datadog.yaml`. Il copie également les fichiers de configuration pour les check actuellement activés.
 
 Pour l'environnement Mac et Windows, utilisez:
 

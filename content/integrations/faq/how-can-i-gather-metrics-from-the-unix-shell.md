@@ -5,7 +5,7 @@ kind: faq
 
 To gather metrics from the UNIX command line, we can use the unannounced shell integration.
 
-This integration has not yet been merged into the master branch, install this check as a custom check in the appropriate Datadog agent [directories][1].
+This integration has not yet been merged into the master branch, install this check as a custom check in the appropriate Datadog Agent [directories][1].
 
 You can find the integration files on GitHub:
 
@@ -16,7 +16,7 @@ This solution is a good alternative to creating a custom check for data you can 
 
 Caveat: 
 
-The user that the agent runs as may need sudo access for the shell command. Sudo access is not required when running the agent as root (not recommended).
+The user that the Agent runs as may need sudo access for the shell command. Sudo access is not required when running the Agent as root (not recommended).
 
 
 

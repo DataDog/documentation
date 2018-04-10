@@ -50,7 +50,7 @@ Et beaucoup plus. Vous pouvez également inventer vos propres métriques à l'ai
 ## Implémentation
 ### Installation
 
-Le check MySQL est packagé avec l'agent, il vous faut donc simplement [installer l'agent] [1].
+Le check MySQL est packagé avec l'Agent, il vous faut donc simplement [installer l'Agent] [1].
 
 ### Configuration
 
@@ -58,14 +58,14 @@ Créez un fichier `mysql.yaml` dans le répertoire` conf.d` de l'Agent pour le c
 
 #### Préparer MySQL
 
-Sur chaque serveur MySQL, créez un utilisateur de base de données pour l'agent Datadog:
+Sur chaque serveur MySQL, créez un utilisateur de base de données pour l'Agent Datadog:
 
 ```
 mysql> CREATE USER 'datadog'@'localhost' IDENTIFIED BY '<UNIQUEPASSWORD>';
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-Veuillez noter que `@'localhost'` est seulement pour les connexions locales, utilisez le nom d'host/IP de votre agent pour les connexions à distance, en savoir plus [ici][2]
+Veuillez noter que `@'localhost'` est seulement pour les connexions locales, utilisez le nom d'host/IP de votre Agent pour les connexions à distance, en savoir plus [ici][2]
 
 
 Vérifiez que l'utilisateur a été créé avec succès en utilisant la commande suivante, en remplaçant  ```<UNIQUEPASSWORD>``` par le mot de passe ci-dessus:
@@ -79,7 +79,7 @@ echo -e "\033[0;32mMySQL grant - OK\033[0m" || \
 echo -e "\033[0;31mMissing REPLICATION CLIENT grant\033[0m"
 ```
 
-L'agent a besoin de quelques privilèges pour collecter des métriques. Accordez à son utilisateur SEULEMENT les privilèges suivants:
+L'Agent a besoin de quelques privilèges pour collecter des métriques. Accordez à son utilisateur SEULEMENT les privilèges suivants:
 
 ```
 mysql> GRANT REPLICATION CLIENT ON *.* TO 'datadog'@'localhost' WITH MAX_USER_CONNECTIONS 5;
