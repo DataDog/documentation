@@ -45,8 +45,8 @@ You can also set up multi alert monitors using the Datadog API. The following ex
 #!/bin/sh
 # Make sure you replace the API and APP keys below
 # with the ones for your account
-api_key=9775a026f1ca7d1c6c5af9d94d9595a4
-app_key=87ce4a24b5553d2e482ea8a8500e71b8ad4554ff
+api_key=<YOUR_API_KEY>
+app_key=<YOUR_APP_KEY>
 
 curl -X POST -H "Content-type: application/json" \
 -d '{
