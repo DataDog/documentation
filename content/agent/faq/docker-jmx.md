@@ -10,10 +10,11 @@ Execute a docker-run with those images and the `SD_JMX_ENABLE=true` environment 
 
 ## Autodiscovery
 
-**If you want the Agent to auto-discover JMX-based checks**:
+**If you want the Agent to auto-discover JMX-based checks**:  
 
 Use the `datadog/agent:latest-jmx` image. This image is based on `latest`, but it includes a JVM, which the Agent needs in order to run [jmxfetch][3].
 
+**Note**: On JMX, use `%%host%%`, but using `%%port%%` is bound to cause issues. Best workaround is to replace `%%port%%` by an hardcoded JMX port.
 
 ### Troubleshooting
 
