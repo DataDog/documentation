@@ -264,9 +264,7 @@ Let's write a basic check that checks the status of an HTTP endpoint. On each ru
 
 ### Configuration
 
-First let's define how the configuration should look so that we know
-how to handle the structure of the `instance` payload that is passed into the
-call to `check`.
+First let's define how the configuration should look so that we know how to handle the structure of the `instance` payload that is passed into the call to `check`.
 
 Besides just defining a URL per call, it'd be nice to allow you to set a timeout for each URL. We'd also want to be able to configure a default timeout if no timeout value is given for a particular URL.
 
@@ -291,9 +289,7 @@ instances:
 Now let's define our check method. The main part of the check makes
 a request to the URL and time the response time, handling error cases as it goes.
 
-In this snippet, we start a timer, make the GET request using the
-{{< link-ext >}}[requests library][9] and handle and
-errors that might arise.
+In this snippet, we start a timer, make the GET request using the [requests library][9] and handle and errors that might arise.
 
 ```python
 # Load values from the instance config
