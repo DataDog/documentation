@@ -63,7 +63,7 @@ function dogstatsd($metric) {
     $bytesSent=$udpClient.Send($encodedData,$encodedData.Length)
     $udpClient.Close()
 }
-$tags = "|#env:test" # datadog tag
+$tags = "|#env:test" # Datadog tag
 $temp = Get-Process mmc
 $metric = "dogstatsd.ps1." + $temp.Name + ":" + $temp.Handles + "|g" + $tags # metric
 dogstatsd($metric)

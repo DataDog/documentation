@@ -9,7 +9,7 @@ Here are the components involved when submitting data via (dog)statsd:
 
 1. your code. Where you sample metric values using a [DogStatsD][1] client, in charge of sampling metric values and sending them to 2.
 2. the DogStatsD server (embedded with the datadog-agent), in charge of receiving the value sampled. Every 10 seconds, it aggregates data received into final metric values that are sent to 3.
-3. the datadog service, from where you can graph your metric data.
+3. the Datadog service, from where you can graph your metric data.
 
 Generally the DogStatsD client (i.e. your code) and the [DogStatsD server][1] (i.e. the datadog-agent) run on the same host, but they could be on different hosts as well:
 

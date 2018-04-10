@@ -201,7 +201,7 @@ dogstreams: /path/to/mylogfile.log:/path/to/mylogparser.py:my_log_parser
 # (N.B., Windows users should replace each "/" with the escaped "\\")
 ```
 
-This specific log-line parsed with this parser created the following event in datadog:
+This specific log-line parsed with this parser created the following event in Datadog:
 
 {{< img src="agent/faq/log_event_in_dd.jpg" alt="Log event in Datadog" responsive="true" popup="true" style="width:70%;">}}
 
