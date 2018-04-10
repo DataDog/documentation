@@ -1,3 +1,4 @@
+
 ---
 title: Agent proxy configuration
 kind: documentation
@@ -52,7 +53,7 @@ same proxy)
 to
     `dd_url: http://proxy-node:17123`
 
-6. Verify on the [Infrastructure page](https://app.datadoghq.com/infrastructure#overview) that all nodes report data to Datadog.
+6. Verify on the [Infrastructure page][1] that all nodes report data to Datadog.
 
 ## Using a Web Proxy as Proxy
 
@@ -83,11 +84,11 @@ proxy_user: my_user
 proxy_password: my_password
 ```
 
-Do not forget to [restart the agent](/agent/faq/agent-commands) for the new settings to take effect.
+Do not forget to [restart the agent][2] for the new settings to take effect.
 
 ## Using HAProxy as a Proxy
 
-[HAProxy](http://haproxy.1wt.eu) is a free, very fast and reliable
+[HAProxy][3] is a free, very fast and reliable
 solution offering proxying for TCP and HTTP applications. While
 HAProxy is usually used as a load balancer to distribute incoming
 requests to pools servers, you can also use it to proxy agent traffic
@@ -173,7 +174,7 @@ If you want to send traces through the proxy, you need to setup the following in
 endpoint = https://haproxy.example.com:3835
  ```
 
-Before you [restart the agent](/agent/faq/agent-commands) Edit your supervisor configuration to disable SSL certificate verification. This is needed to prevent python from complaining about the discrepancy between the hostname on the SSL certificate (app.datadoghq.com) and your HAProxy hostname.
+Before you [restart the agent][2] Edit your supervisor configuration to disable SSL certificate verification. This is needed to prevent python from complaining about the discrepancy between the hostname on the SSL certificate (app.datadoghq.com) and your HAProxy hostname.
 
 ####  On GNU/Linux, Mac OS X, FreeBSD, SmartOS:
 You need to edit the supervisor configuration found at:
@@ -196,12 +197,20 @@ Edit your configuration file `datadog.conf` and add this option:
 skip_ssl_validation: yes
 ```
 
-Finally [restart the agent](/agent/#start-stop-restart-the-agent/#windows).
+Finally [restart the agent][4].
 
 To verify that everything is working properly, review the
 HAProxy statistics at `http://haproxy.example.com:3835` as well as
-the [Infrastructure Overview](https://app.datadoghq.com/infrastructure)
+the [Infrastructure Overview][5]
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: https://app.datadoghq.com/infrastructure#overview
+[2]: /agent/faq/agent-commands
+[3]: http://haproxy.1wt.eu
+[4]: /agent/#start-stop-restart-the-agent/#windows
+[5]: https://app.datadoghq.com/infrastructure
+

@@ -11,11 +11,11 @@ Ce endpoint vous permet de publier des événements dans le flux d'événement d
 ##### ARGUMENTS
 * **`title`** [*obligatoire*]:  
     Le titre de l'événement *Limité à 100 caractères.*
-    Utilisez `msg_title` avec [La bibliothèque Datadog Ruby](https://github.com/DataDog/dogapi-rb).
+    Utilisez `msg_title` avec [La bibliothèque Datadog Ruby][1].
 * **`text`** [*obligatoire*]:  
     Le corps de l'événement *Limité à 4000 caractères.*
-    Le texte supporte le [markdown](/graphing/event_stream/#markdown-events).
-    Utilisez `msg_text` avec [La bibliothèque Datadog Ruby](https://github.com/DataDog/dogapi-rb).
+    Le texte supporte le [markdown][2].
+    Utilisez `msg_text` avec [La bibliothèque Datadog Ruby][1].
 * **`date_happened`** [*optionnel*, *défaut* = **now**]:  
     Timestamp POSIX de l'événement. Doit être envoyé en entier (c'est-à-dire sans guillemets). *Limité aux événements de moins de 1 an et 24 jours (389 jours)*
 * **`priority`** [*optionnel*, *défaut* = **normal**]:  
@@ -32,4 +32,9 @@ Ce endpoint vous permet de publier des événements dans le flux d'événement d
 * **`source_type_name`** [*optionnel*, *défaut*=**None**]:  
     Le type d'événement envoyé.
     Options: **nagios**, **hudson**, **jenkins**, **my_apps**, **chef**, **puppet**, **git**, **bitbucket**...  
-    [Liste complète des valeurs d'attribut source](/integrations/faq/list-of-api-source-attribute-value)
+    [Liste complète des valeurs d'attribut source][3]
+
+
+[1]: https://github.com/DataDog/dogapi-rb
+[2]: /graphing/event_stream/#markdown-events
+[3]: /integrations/faq/list-of-api-source-attribute-value

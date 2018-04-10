@@ -4,7 +4,7 @@ kind: faq
 ---
 
 This article allows you to submit events from your AppDynamics Application into your Datadog Event stream.  
-**Note**: that this plug-in was written by the team at AppDynamics and is not currently supported by Datadog. Should you encounter any issues [please contact their team](https://www.appdynamics.com/support/)
+**Note**: that this plug-in was written by the team at AppDynamics and is not currently supported by Datadog. Should you encounter any issues [please contact their team][1]
 
 Prerequisites: Running AppDynamics 4.1 or later
 
@@ -49,3 +49,5 @@ You can use also use Email Templates:
 ```
 
 {{< img src="developers/faq/email_template.png" alt="email_template" responsive="true" popup="true">}}
+
+[1]: https://www.appdynamics.com/support/

@@ -11,4 +11,6 @@ Renvoie un mappage des tags et hosts pour l'ensemble de votre infrastructure.
 ##### ARGUMENTS
 * **`source`** [*optionnel*, *défaut*=**None**]:  
     Affiche uniquement les tags d'une source particulière Sinon, montre tous les tags.
-    [Liste complète des valeurs d'attribut source](/integrations/faq/list-of-api-source-attribute-value)
+    [Liste complète des valeurs d'attribut source][1]
+
+[1]: /integrations/faq/list-of-api-source-attribute-value

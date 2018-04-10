@@ -11,3 +11,4 @@ external_redirect: /api/#edit-a-monitor
 {{< code-snippets basename="api-monitor-edit" >}}
 ##### Example Response
 {{< code-snippets basename="result.api-monitor-edit" >}}
+

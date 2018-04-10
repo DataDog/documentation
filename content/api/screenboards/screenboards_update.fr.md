@@ -18,7 +18,7 @@ Remplacer une configuration de Screenboard dans Datadog.
 * **`description`** [*optionnel*, *défaut*=**None**]:  
     Une description du contenu du dashboard.
 * **`widgets`** [*obligatoire*]:  
-    [Liste des définitions de widget](/graphing/dashboards/widgets/).
+    [Liste des définitions de widget][1].
 * **`template_variables`** [*optionnel*, *défaut*=**None**]:  
     Liste des template variables utilisable dans le templating Dashboard.
 * **`width`** [*optionnel*, *défaut*=**None**]:  
@@ -27,3 +27,6 @@ Remplacer une configuration de Screenboard dans Datadog.
     Hauteur du Screenboard en pixels.
 * **`read_only`** [*optionnel*, *défaut*=**False**]:  
     Si le Screenboard est en lecture seule ou non.
+
+
+[1]: /graphing/dashboards/widgets/

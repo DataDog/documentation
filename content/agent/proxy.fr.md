@@ -1,3 +1,4 @@
+
 ---
 title: Configuration de Agent pour proxy
 kind: documentation
@@ -16,7 +17,7 @@ further_reading:
 ---
 ## Pourquoi utiliser un Proxy
 
-Si votre configuration réseau restreint le trafic sortant, [proxy tout le trafic d'agent](/agent/proxy) via un ou plusieurs host qui ont des stratégies sortantes plus permissives.
+Si votre configuration réseau restreint le trafic sortant, [proxy tout le trafic d'agent][1] via un ou plusieurs host qui ont des stratégies sortantes plus permissives.
 
 Quelques options sont disponibles pour envoyer du trafic vers Datadog via SSL/TLS pour
 des hosts qui ne sont pas directement connectés à Internet.
@@ -51,7 +52,7 @@ le même proxy)
 to
     `dd_url: http://proxy-node:17123`
 
-6. Vérifiez sur la [page Infrastructure](https://app.datadoghq.com/infrastructure#overview) que tous les nœuds rapportent des données à Datadog.
+6. Vérifiez sur la [page Infrastructure][2] que tous les nœuds rapportent des données à Datadog.
 
 ## Utilisation d'un proxy Web en tant que proxy
 
@@ -82,11 +83,11 @@ proxy_user: my_user
 proxy_password: my_password
 ```
 
-N'oubliez pas de [Redémarrer l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent) pour prendre en compte le changement de configuration.
+N'oubliez pas de [Redémarrer l'Agent][3] pour prendre en compte le changement de configuration.
 
 ## Utiliser HAProxy comme proxy
 
-[HAProxy](http://haproxy.1wt.eu) est une solution gratuite, rapide et fiable
+[HAProxy][4] est une solution gratuite, rapide et fiable
 offrant un proxying pour les applications TCP et HTTP. Tandis que
 HAProxy est généralement utilisé comme un équilibreur de charge pour distribuer les requêtes entrantes sur des pools de serveurs, vous pouvez également l'utiliser pour proxy le trafic de l'agent vers Datadog à partir d'host qui ne sont pas relié à internet.
 
@@ -169,7 +170,7 @@ Si vous voulez envoyer des traces à travers le proxy, vous devez implémenter l
 endpoint = https://haproxy.example.com:3835
  ```
 
-Avant de [redémarrer l'agent](/agent/faq/agent-commands), modifiez la configuration de votre supervisor pour désactiver la vérification du certificat SSL. Ceci est nécessaire pour empêcher python de se plaindre de l'écart entre le nom d'host sur le certificat SSL (app.datadoghq.com) et votre nom d'host HAProxy.
+Avant de [redémarrer l'agent][5], modifiez la configuration de votre supervisor pour désactiver la vérification du certificat SSL. Ceci est nécessaire pour empêcher python de se plaindre de l'écart entre le nom d'host sur le certificat SSL (app.datadoghq.com) et votre nom d'host HAProxy.
 
 ####  Sur GNU/Linux, Mac OS X, FreeBSD, SmartOS:
 Vous devez modifier la configuration du supervisor trouvée sur:
@@ -192,12 +193,21 @@ Editez votre fichier de configuration `datadog.conf` et ajoutez cette option:
 skip_ssl_validation: yes
 ```
 
-Enfin [redémarrez l'Agent](/agent/#start-stop-restart-the-agent/#windows).
+Enfin [redémarrez l'Agent][6].
 
 Pour vérifier que tout fonctionne correctement, examinez
 les statistiques HAProxy à `http://haproxy.example.com:3835` ainsi que
-la [Présentation de l'infrastructure](https://app.datadoghq.com/infrastructure).
+la [Présentation de l'infrastructure][7].
 
 ## En apprendre plus
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /agent/proxy
+[2]: https://app.datadoghq.com/infrastructure#overview
+[3]: https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent
+[4]: http://haproxy.1wt.eu
+[5]: /agent/faq/agent-commands
+[6]: /agent/#start-stop-restart-the-agent/#windows
+[7]: https://app.datadoghq.com/infrastructure
+

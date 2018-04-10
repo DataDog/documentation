@@ -12,15 +12,15 @@ kind: documentation
 
 ## Read Only
 
-[An Administrator](/account_management/team/#datadog-user-roles) or Timeboard creator can make a Timeboard read-only by clicking the gear icon (upper right corner of a Timeboard) and clicking the **Permissions** link:
+[An Administrator][1] or Timeboard creator can make a Timeboard read-only by clicking the gear icon (upper right corner of a Timeboard) and clicking the **Permissions** link:
 
 {{< img src="graphing/dashboards/timeboard/read_only.png" alt="Read Only" responsive="true" popup="true" style="width:30%;">}}
 
 **Click "Yes" on the confirmation window to make the Timeboard read-only**
 
-Only account [administrator](/account_management/team/#datadog-user-roles) and the Timeboard creator can activate read-only mode for a Timeboard.  Any user in the organization, regardless of administrator privileges, can sign up to receive change notifications for a particular Timeboard.
+Only account [administrator][1] and the Timeboard creator can activate read-only mode for a Timeboard.  Any user in the organization, regardless of administrator privileges, can sign up to receive change notifications for a particular Timeboard.
 
-If a user decides to track changes for a Timeboard, the following Timeboard changes are reported to the user through an event in the [event stream](/graphing/event_stream):
+If a user decides to track changes for a Timeboard, the following Timeboard changes are reported to the user through an event in the [event stream][2]:
 
 1. Text changes (title, description)
 2. Tile changes
@@ -53,10 +53,17 @@ This feature can be enabled by following these simple steps:
 
 ## Backup my Timeboard
 
-Using our [APIs](/api) it's possible to write a script to backup your Timeboard definitions as code. See the following projects as examples of how these backups can be accomplished:
+Using our [APIs][3] it's possible to write a script to backup your Timeboard definitions as code. See the following projects as examples of how these backups can be accomplished:
 
 * https://github.com/brightcove/dog-watcher
 * https://github.com/Shopify/doggy
 * https://github.com/grosser/kennel
 
-Special thanks to [Brightcove](https://www.brightcove.com/), [Shopify](https://www.shopify.com/), and [Zendesk](https://www.zendesk.com/) for sharing these projects!
+Special thanks to [Brightcove][4], [Shopify][5], and [Zendesk][6] for sharing these projects!
+
+[1]: /account_management/team/#datadog-user-roles
+[2]: /graphing/event_stream
+[3]: /api
+[4]: https://www.brightcove.com/
+[5]: https://www.shopify.com/
+[6]: https://www.zendesk.com/

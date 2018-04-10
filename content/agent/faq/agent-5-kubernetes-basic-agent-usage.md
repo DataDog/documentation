@@ -12,9 +12,9 @@ Get metrics from kubernetes service in real time to:
 * Visualize and monitor kubernetes states
 * Be notified about kubernetes failovers and events.
 
-For Kubernetes, it’s recommended to run the [Agent in a DaemonSet](https://github.com/DataDog/docker-dd-agent). We have created a [Docker image](https://hub.docker.com/r/datadog/docker-dd-agent/) with both the Docker and the Kubernetes integrations enabled.
+For Kubernetes, it’s recommended to run the [Agent in a DaemonSet][1]. We have created a [Docker image][2] with both the Docker and the Kubernetes integrations enabled.
 
-You can also just [run the Datadog Agent on your host](/#host-setup) and configure it to gather your Kubernetes metrics.
+You can also just [run the Datadog Agent on your host][3] and configure it to gather your Kubernetes metrics.
 
 ## Setup Kubernetes
 ### Installation
@@ -22,9 +22,9 @@ You can also just [run the Datadog Agent on your host](/#host-setup) and configu
 
 Thanks to Kubernetes, you can take advantage of DaemonSets to automatically deploy the Datadog Agent on all your nodes (or on specific nodes by using nodeSelectors).
 
-*If DaemonSets are not an option for your Kubernetes cluster, [install the Datadog agent](https://docs.datadoghq.com/integrations/docker_daemon/) as a sidecar container on each Kubernetes node.*
+*If DaemonSets are not an option for your Kubernetes cluster, [install the Datadog agent][4] as a sidecar container on each Kubernetes node.*
 
-If your Kubernetes has RBAC enabled, see the [documentation on how to configure RBAC permissions with your Datadog-Kubernetes integration](/integrations/faq/using-rbac-permission-with-your-kubernetes-integration).
+If your Kubernetes has RBAC enabled, see the [documentation on how to configure RBAC permissions with your Datadog-Kubernetes integration][5].
 
 * Create the following `dd-agent.yaml` manifest:
 
@@ -75,14 +75,14 @@ spec:
           name: cgroups
 ```
 
-Replace `YOUR_API_KEY` with [your api key](https://app.datadoghq.com/account/settings#api) or use [Kubernetes secrets](https://kubernetes.io/docs/concepts/configuration/secret/) to set your API key [as an environement variable](https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-environment-variables).
+Replace `YOUR_API_KEY` with [your api key][6] or use [Kubernetes secrets][7] to set your API key [as an environement variable][8].
 
 * Deploy the DaemonSet with the command:
   ```
   kubectl create -f dd-agent.yaml
   ```
 
-**Note**:  This manifest enables autodiscovery's auto configuration feature. To disable it, remove the `SD_BACKEND` environment variable definition. To learn how to configure autodiscovery, please refer to [its documentation](https://docs.datadoghq.com/agent/autodiscovery).
+**Note**:  This manifest enables autodiscovery's auto configuration feature. To disable it, remove the `SD_BACKEND` environment variable definition. To learn how to configure autodiscovery, please refer to [its documentation][9].
 
 #### Host Installation
 
@@ -100,7 +100,7 @@ instances:
     method: http
 ```
 
-See the [example kubernetes.yaml](https://github.com/DataDog/integrations-core/blob/master/kubernetes/conf.yaml.example) for all available configuration options.
+See the [example kubernetes.yaml][10] for all available configuration options.
 
 ### Validation
 #### Container Running
@@ -116,7 +116,7 @@ If the Agent is deployed you will see output similar to the text below, where de
 
 #### Agent check running
 
-[Run the Agent's `info` subcommand](/agent/faq/agent-status-and-information) and look for `kubernetes` under the Checks section:
+[Run the Agent's `info` subcommand][11] and look for `kubernetes` under the Checks section:
 
     Checks
     ======
@@ -131,7 +131,7 @@ If the Agent is deployed you will see output similar to the text below, where de
 ### Installation
 #### Container Installation
 
-If you are running Kubernetes >= 1.2.0, you can use the [kube-state-metrics](https://github.com/kubernetes/kube-state-metrics) project to provide additional metrics (identified by the `kubernetes_state` prefix in the metrics list below) to Datadog.
+If you are running Kubernetes >= 1.2.0, you can use the [kube-state-metrics][12] project to provide additional metrics (identified by the `kubernetes_state` prefix in the metrics list below) to Datadog.
 
 To run kube-state-metrics, create a `kube-state-metrics.yaml` file using the following manifest to deploy the kube-state-metrics service:
 
@@ -184,15 +184,15 @@ Then deploy it by running:
 kubectl create -f kube-state-metrics.yaml
 ```
 
-The manifest above uses Google’s publicly available `kube-state-metrics` container, which is also available on [Quay](https://quay.io/coreos/kube-state-metrics). If you want to build it manually, refer [to the official project documentation](https://github.com/kubernetes/kube-state-metrics).
+The manifest above uses Google’s publicly available `kube-state-metrics` container, which is also available on [Quay][13]. If you want to build it manually, refer [to the official project documentation][12].
 
 If you configure your Kubernetes State Metrics service to run on a different URL or port, you can configure the Datadog Agent by setting the `kube_state_url` parameter in `conf.d/kubernetes_state.yaml`, then restarting the Agent.
-For more information, see the [kubernetes_state.yaml.example file](https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/conf.yaml.example). If you have enabled [Autodiscovery](https://docs.datadoghq.com/agent/autodiscovery), the kube state URL will be configured and managed automatically.
+For more information, see the [kubernetes_state.yaml.example file][14]. If you have enabled [Autodiscovery][9], the kube state URL will be configured and managed automatically.
 
 #### Host Installation
 
-Install the `dd-check-kubernetes_state` package manually or with your favorite configuration manager (On CentOS/AWS, [Find your rpm package here](https://yum.datadoghq.com/rpm/x86_64/), and information on installation on [this page](/agent/faq/how-do-i-install-the-agent-on-a-server-with-limited-internet-connectivity).
-Then edit the `kubernetes_state.yaml` file to point to your server and port and set the masters to monitor. See the [example kubernetes_state.yaml](https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/conf.yaml.example) for all available configuration options.
+Install the `dd-check-kubernetes_state` package manually or with your favorite configuration manager (On CentOS/AWS, [Find your rpm package here](https://yum.datadoghq.com/rpm/x86_64/), and information on installation on [this page][15].
+Then edit the `kubernetes_state.yaml` file to point to your server and port and set the masters to monitor. See the [example kubernetes_state.yaml][14] for all available configuration options.
 
 ### Validation
 #### Container validation
@@ -207,7 +207,7 @@ If the Agent is deployed you will see similar output to the text below, where de
 
 #### Agent check validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) and look for `kubernetes_state` under the Checks section:
+[Run the Agent's `info` subcommand][16] and look for `kubernetes_state` under the Checks section:
 
     Checks
     ======
@@ -225,7 +225,7 @@ Install the `dd-check-kube_dns` package manually or with your favorite configura
 
 ### Configuration
 
-Edit the `kube_dns.yaml` file to point to your server and port, set the masters to monitor. See the [sample kube_dns.yaml](https://github.com/DataDog/integrations-core/blob/master/kube_dns/conf.yaml.example) for all available configuration options.
+Edit the `kube_dns.yaml` file to point to your server and port, set the masters to monitor. See the [sample kube_dns.yaml][17] for all available configuration options.
 
 #### Using with service discovery
 
@@ -250,7 +250,7 @@ metadata:
 
 ### Validation
 
-[Run the Agent's `info` subcommand](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) and look for `kube_dns` under the Checks section:
+[Run the Agent's `info` subcommand][16] and look for `kube_dns` under the Checks section:
 
     Checks
     ======
@@ -259,3 +259,21 @@ metadata:
         -----------
           - instance #0 [OK]
           - Collected 39 metrics, 0 events & 7 service checks
+
+[1]: https://github.com/DataDog/docker-dd-agent
+[2]: https://hub.docker.com/r/datadog/docker-dd-agent/
+[3]: /#host-setup
+[4]: https://docs.datadoghq.com/integrations/docker_daemon/
+[5]: /integrations/faq/using-rbac-permission-with-your-kubernetes-integration
+[6]: https://app.datadoghq.com/account/settings#api
+[7]: https://kubernetes.io/docs/concepts/configuration/secret/
+[8]: https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-environment-variables
+[9]: https://docs.datadoghq.com/agent/autodiscovery
+[10]: https://github.com/DataDog/integrations-core/blob/master/kubernetes/conf.yaml.example
+[11]: /agent/faq/agent-status-and-information
+[12]: https://github.com/kubernetes/kube-state-metrics
+[13]: https://quay.io/coreos/kube-state-metrics
+[14]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/conf.yaml.example
+[15]: /agent/faq/how-do-i-install-the-agent-on-a-server-with-limited-internet-connectivity
+[16]: https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information
+[17]: https://github.com/DataDog/integrations-core/blob/master/kube_dns/conf.yaml.example

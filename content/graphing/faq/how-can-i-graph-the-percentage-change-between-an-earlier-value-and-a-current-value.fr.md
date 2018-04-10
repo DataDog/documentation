@@ -3,7 +3,7 @@ title: Comment puis-je représenter graphiquement le pourcentage de changement e
 kind: faq
 ---
 
-Si vous voulez visualiser comment les valeurs d'une métrique ont changé par rapport à une période antérieure, faites-le en utilisant les fonctions Timeshift [détaillées ici](/graphing/miscellaneous/functions/#timeshift). Actuellement, vous pouvez capturer la valeur d'une mesure d'une heure, d'un jour, d'une semaine ou d'un mois auparavant.
+Si vous voulez visualiser comment les valeurs d'une métrique ont changé par rapport à une période antérieure, faites-le en utilisant les fonctions Timeshift [détaillées ici][1]. Actuellement, vous pouvez capturer la valeur d'une mesure d'une heure, d'un jour, d'une semaine ou d'un mois auparavant.
 
 Pour calculer cela, vous pouvez créer une requête comme celle-ci:
 ```
@@ -13,3 +13,6 @@ Pour calculer cela, vous pouvez créer une requête comme celle-ci:
 Voici un exemple où nous pouvons voir le pourcentage de changement d'une métrique du système d'un jour à l'instant présent:
 
 {{< img src="graphing/faq/percentage_timeshift.png" alt="percentage timeshift" responsive="true" popup="true">}}
+
+
+[1]: /graphing/miscellaneous/functions/#timeshift

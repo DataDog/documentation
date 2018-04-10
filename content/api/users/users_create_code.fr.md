@@ -11,3 +11,4 @@ external_redirect: /api/#create-user
 {{< code-snippets basename="api-user-create" >}}
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-user-create" >}}
+

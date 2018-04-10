@@ -17,4 +17,6 @@ custom.aws.metric.sum
 custom.aws.metric.samplecount
 ```
 
-A request to Datadog support is required in order to enable the collection of custom AWS/Cloudwatch metric values other than averages. Contact [us](/help) for assistance.
+A request to Datadog support is required in order to enable the collection of custom AWS/Cloudwatch metric values other than averages. Contact [us][1] for assistance.
+
+[1]: /help

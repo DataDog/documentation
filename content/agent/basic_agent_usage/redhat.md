@@ -34,7 +34,7 @@ Datadog Agent has some commands and only the _lifecycle commands_ (i.e. `start`/
 | `sudo -u dd-agent -- dd-agent check <check_name>` | `sudo -u dd-agent -- datadog-agent check <check_name>` | Run a check |
 {{% /table %}}
 
-More information about the metrics, events, and service checks for an [integrations](/integrations) can be retrieved with the check command:
+More information about the metrics, events, and service checks for an [integrations][1] can be retrieved with the check command:
 ```shell
 sudo service datadog-agent check [integration]
 ```
@@ -58,7 +58,7 @@ The configuration files and folders for the Agent are located at:
 |:-----|:----|
 |`/etc/dd-agent/datadog.conf`| `/etc/datadog-agent/datadog.yaml` |
 
-Configuration files for [integrations](/integrations):
+Configuration files for [integrations][1]:
 
 | Agent v5                                  |  Agent v6                          |
 |:-----|:----|
@@ -77,7 +77,7 @@ The Agent logs are located in the `/var/log/datadog/` directory:
     * `dogstatsd.log`
     * `forwarder.log`
 
-If you're still having trouble, [our support team](/help) will be glad to provide further assistance.
+If you're still having trouble, [our support team][2] will be glad to provide further assistance.
 
 ## Switch between Agent v5 and v6
 ### Upgrade to Agent 6
@@ -193,3 +193,6 @@ To uninstall the agent run:
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /integrations
+[2]: /help

@@ -18,7 +18,7 @@ further_reading:
 
 To send your C# logs to Datadog, we recommend logging to a file and then tailing that file with your Datadog agent. Here are setup examples for the `log4Net`, `serilog` and `Nlog` logging libraries
 
-We strongly encourage setting up your logging library to produce your logs in JSON format to avoid the need for [custom parsing rules](/logs/parsing).
+We strongly encourage setting up your logging library to produce your logs in JSON format to avoid the need for [custom parsing rules][1].
 
 ## Configure your logger
 ### SeriLog
@@ -70,7 +70,7 @@ Then check the `log.json` file to see the following event:
 }
 ```
 
-[Monitor now your log file with your agent](/logs/#tail-existing-files) to send your logs to your Datadog application
+[Monitor now your log file with your agent][2] to send your logs to your Datadog application
 
 ### NLog
 
@@ -139,7 +139,7 @@ namespace Datadog
 }
 ```
 
-[Monitor now your log file with your agent](/logs/#tail-existing-files) to send your logs to your Datadog application.
+[Monitor now your log file with your agent][2] to send your logs to your Datadog application.
 
 ### Log4Net
 
@@ -271,3 +271,7 @@ That's it! Now, all your logs are going to be in proper JSON automatically under
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: /logs/parsing
+[2]: /logs/#tail-existing-files

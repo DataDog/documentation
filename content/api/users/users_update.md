@@ -22,3 +22,4 @@ Can only be used with application keys belonging to administrators.
     *  **st** (standard user), 
     *  **adm** (admin user),
     *  **ro** (read-only user).  
+

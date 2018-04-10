@@ -12,3 +12,4 @@ external_redirect: /api/#post-a-check-run
 
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-checks-post" >}}
+

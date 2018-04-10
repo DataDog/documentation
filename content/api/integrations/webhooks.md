@@ -8,7 +8,7 @@ external_redirect: /api/#webhooks
 ## Webhooks
 
 Configure your Datadog-Webhooks integration directly through Datadog API.  
-[Read more about Datadog-Webhooks integration](/integrations/webhooks)
+[Read more about Datadog-Webhooks integration][1]
 
 ##### ARGUMENTS
 
@@ -17,7 +17,7 @@ Configure your Datadog-Webhooks integration directly through Datadog API.
 
     * **`name`** [*required*]:  
         Your Webhook name.  
-        [Learn more on how to use it in monitor notifications](/monitors/notifications).
+        [Learn more on how to use it in monitor notifications][2].
     * **`url`** [*required*]:  
         Your Webhook URL.
     * **`use_custom_payload`** [*optional*, *default*=**False**]:  
@@ -44,3 +44,6 @@ Configure your Datadog-Webhooks integration directly through Datadog API.
 
         - We return a *202 accepted*
         - Install check is run after returning a response
+
+[1]: /integrations/webhooks
+[2]: /monitors/notifications

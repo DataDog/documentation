@@ -13,3 +13,4 @@ external_redirect: /api/#edit-a-comment
 
 * **`handle`** [*optional*, *default* = **Application key owner**]:  
     The handle of the user making the comment.
+

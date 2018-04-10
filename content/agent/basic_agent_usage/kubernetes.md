@@ -24,18 +24,18 @@ Installing the agent on the host as opposed to in a pod as part of a Deployment 
 It could however help give visibility over the start of the Kubernetes ecosystem and health thereof.
 Similarly, one would not be restricted to monitoring applications belonging to the Kubernetes eco system.
 
-To discover all data collected automatically from the Kubernetes integration, refer to the dedicated [Kubernetes Integration Documentation](/integrations/kubernetes).
+To discover all data collected automatically from the Kubernetes integration, refer to the dedicated [Kubernetes Integration Documentation][1].
 
-This documentation is for agent v6 only, if you are still using agent v5, [follow this installation process](/agent/faq/agent-5-kubernetes-basic-agent-usage)
+This documentation is for agent v6 only, if you are still using agent v5, [follow this installation process][2]
 
 ## Container installation
 ### Setup
 
 Take advantage of DaemonSets to automatically deploy the Datadog Agent on all your nodes (or on specific nodes by [using nodeSelectors](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector )).
 
-*If DaemonSets are not an option for your Kubernetes cluster, [install the Datadog agent](https://hub.docker.com/r/datadog/agent/) as a sidecar container on each Kubernetes node.*
+*If DaemonSets are not an option for your Kubernetes cluster, [install the Datadog agent][3] as a sidecar container on each Kubernetes node.*
 
-If your Kubernetes has RBAC enabled, see the [documentation on how to configure RBAC permissions with your Datadog-Kubernetes integration](/integrations/faq/using-rbac-permission-with-your-kubernetes-integration).
+If your Kubernetes has RBAC enabled, see the [documentation on how to configure RBAC permissions with your Datadog-Kubernetes integration][4].
 
 * Create the following `datadog-agent.yaml` manifest:
 
@@ -110,20 +110,20 @@ spec:
           name: cgroups
 ```
 
-Replace `YOUR_API_KEY` with [your api key](https://app.datadoghq.com/account/settings#api) or use [Kubernetes secrets](https://kubernetes.io/docs/concepts/configuration/secret/) to set your API key [as an environement variable](https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-environment-variables).
+Replace `YOUR_API_KEY` with [your api key][5] or use [Kubernetes secrets][6] to set your API key [as an environement variable][7].
 
-[Consult our docker integration to discover all configuration options.](/agent/basic_agent_usage/docker/#environment-variables)
+[Consult our docker integration to discover all configuration options.][8]
 
 * Deploy the DaemonSet with the command:
   ```
   kubectl create -f datadog-agent.yaml
   ```
 
-**Note**:  This manifest enables autodiscovery's auto configuration feature. To learn how to configure autodiscovery, please refer to [its documentation](https://docs.datadoghq.com/agent/autodiscovery).
+**Note**:  This manifest enables autodiscovery's auto configuration feature. To learn how to configure autodiscovery, please refer to [its documentation][9].
 
 #### Log collection setup
 
-To enable [Log collection](/logs) with your DaemonSet:
+To enable [Log collection][10] with your DaemonSet:
 
 1. Set the `DD_LOGS_ENABLED` variable to true in your *env* section:
 
@@ -154,7 +154,7 @@ To enable [Log collection](/logs) with your DaemonSet:
     (...)
   ```
 
-Learn more about this in [the Docker log collection documentation](/logs/docker/#configuration-file-example).
+Learn more about this in [the Docker log collection documentation][11].
 
 ### RBAC
 
@@ -167,7 +167,7 @@ You will need to allow the agent to be allowed to perform a few actions:
 - `get`, `update` and `create` for the `Endpoint`. The Endpoint used by the agent for the [Leader election](#leader-election) feature is named `datadog-leader-election`.
 - `list` the `componentstatuses` resource, in order to submit service checks for the Controle Plane's components status.
 
-You can find the templates in manifests/rbac [here](https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/manifests/rbac).
+You can find the templates in manifests/rbac [here][12].
 This will create the Service Account in the default namespace, a Cluster Role with the above rights and the Cluster Role Binding.
 
 #### Custom integrations
@@ -215,7 +215,7 @@ And in the manifest of your agent (Daemonset/Deployment) add the following:
 ```
 
 
-To enable [Log collection](/logs) add the following lines in your `http-config`:
+To enable [Log collection][10] add the following lines in your `http-config`:
 
 ```
 (...)
@@ -228,19 +228,19 @@ data:
         source: kubernetes
 ```
 
-Learn more about this in [the Docker log collection documentation](/logs/docker/#configuration-file-example).
+Learn more about this in [the Docker log collection documentation][11].
 
 ##### Annotations
 
 It is also possible to enable integrations via the annotations in the manifest of your application.
-This can be done with the autodiscovery, for more details, see the [Autodiscovery](/agent/autodiscovery) section.
+This can be done with the autodiscovery, for more details, see the [Autodiscovery][13] section.
 
 
 ## Host installation
 
 ### Installation
 
-Install the latest version of the Datadog Agent from [the Datadog agent integration page](https://app.datadoghq.com/account/settings#agent)
+Install the latest version of the Datadog Agent from [the Datadog agent integration page][14]
 
 #### Configuration
 
@@ -286,7 +286,7 @@ If the Agent is deployed you will see output similar to the text below, where de
 
 ### Agent check running
 
-[Run the Agent's `status` subcommand](/agent/faq/agent-commands/#agent-status-and-information) and look for `kubelet` under the Checks section:
+[Run the Agent's `status` subcommand][15] and look for `kubelet` under the Checks section:
 
     Checks
     ======
@@ -326,3 +326,20 @@ It can be configured with the environment variable `DD_LEADER_LEASE_DURATION`.
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: /integrations/kubernetes
+[2]: /agent/faq/agent-5-kubernetes-basic-agent-usage
+[3]: https://hub.docker.com/r/datadog/agent/
+[4]: /integrations/faq/using-rbac-permission-with-your-kubernetes-integration
+[5]: https://app.datadoghq.com/account/settings#api
+[6]: https://kubernetes.io/docs/concepts/configuration/secret/
+[7]: https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-environment-variables
+[8]: /agent/basic_agent_usage/docker/#environment-variables
+[9]: https://docs.datadoghq.com/agent/autodiscovery
+[10]: /logs
+[11]: /logs/docker/#configuration-file-example
+[12]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/manifests/rbac
+[13]: /agent/autodiscovery
+[14]: https://app.datadoghq.com/account/settings#agent
+[15]: /agent/faq/agent-commands/#agent-status-and-information

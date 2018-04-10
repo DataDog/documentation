@@ -18,7 +18,7 @@ Prior to revoking your AWS Keys you'll want to configure AWS Role Delegation in 
     {{< img src="integrations/faq/A4.png" alt="A4" responsive="true" popup="true">}}
 
 
-For External ID, enter the one generated in the Role Delegation tab of the [AWS Integration](/integrations/amazon_web_services) configuration page. For more information about the External ID, refer to this document in the [IAM User Guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html).
+For External ID, enter the one generated in the Role Delegation tab of the [AWS Integration][1] configuration page. For more information about the External ID, refer to this document in the [IAM User Guide][2].
     {{< img src="integrations/faq/A5.png" alt="A5" responsive="true" popup="true">}}
 
 Leave Require MFA disabled.
@@ -29,7 +29,7 @@ Leave Require MFA disabled.
 6. Review what you selected and click the Create Role button.
     {{< img src="integrations/faq/A7.png" alt="A7" responsive="true" popup="true">}}
 
-7. Update the credentials in Datadog by [navigating to the in-app integration tile](https://app.datadoghq.com/account/settings#integrations/amazon_web_services):
+7. Update the credentials in Datadog by [navigating to the in-app integration tile][3]:
     {{< img src="integrations/faq/A8.png" alt="A8" responsive="true" popup="true">}}
 
 8. Click the tab for Role Delegation. The AWS Account ID and AWS External ID should be left to their default values. Enter the name you specified for the AWS Role in step 2. A green banner will be displayed (momentarily after entering the name) at the top of the account configuration section if the role was successfully validated.
@@ -38,7 +38,14 @@ Leave Require MFA disabled.
 9. Scroll down to the bottom of the configuration page and click Update Configuration. A green banner will be displayed once the configuration has been validated and applied. This process will also remove the previously used Access Key credentials.
     {{< img src="integrations/faq/A10.png" alt="A10" responsive="true" popup="true">}}
 
-10. Once you've setup Datadog for AWS Roles, revoke your AWS Keys per [this article](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html). This can be done from the AWS Console Security Credentials page by expanding the section for Access Keys and clicking the Make Inactive or Delete link for the appropriate Access Key ID.
+10. Once you've setup Datadog for AWS Roles, revoke your AWS Keys per [this article][4]. This can be done from the AWS Console Security Credentials page by expanding the section for Access Keys and clicking the Make Inactive or Delete link for the appropriate Access Key ID.
     {{< img src="integrations/faq/A11.png" alt="A11" responsive="true" popup="true">}}
 
-If you encounter any issues or have additional questions, [contact us](/help)!
+If you encounter any issues or have additional questions, [contact us][5]!
+
+
+[1]: /integrations/amazon_web_services
+[2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
+[3]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[4]: https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html
+[5]: /help

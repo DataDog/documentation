@@ -12,11 +12,11 @@ further_reading:
   text: "Explore your services, resources and traces"
 ---
 
-Enable the [datadog-trace-agent](https://github.com/DataDog/datadog-trace-agent) in the `docker-dd-agent` container by passing `DD_APM_ENABLED=true` as an environment variable.
+Enable the [datadog-trace-agent][1] in the `docker-dd-agent` container by passing `DD_APM_ENABLED=true` as an environment variable.
 
 **Note: APM is NOT available on Alpine Images**
 
-For additional information, see the [Datadog docker Github repository](https://github.com/DataDog/docker-dd-agent).
+For additional information, see the [Datadog docker Github repository][2].
 
 ## Tracing from the host
 
@@ -128,3 +128,7 @@ tracer.configure(hostname='172.17.0.1', port=8126)
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: https://github.com/DataDog/datadog-trace-agent
+[2]: https://github.com/DataDog/docker-dd-agent

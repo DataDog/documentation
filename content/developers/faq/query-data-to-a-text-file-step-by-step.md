@@ -3,11 +3,11 @@ title: Query data to a text file, step by step
 kind: faq
 ---
 
-This article explains how to set up the environment to make the most of the API. At the end you should be able to understand how to pull or push events, metrics and monitors from [our public API's](/api) to a local file.
+This article explains how to set up the environment to make the most of the API. At the end you should be able to understand how to pull or push events, metrics and monitors from [our public API's][1] to a local file.
 
 In addition of the explanations here, the file attached is commented so you have redundant pieces of information that may help to understand better.
 
-Prerequisite: Python and PIP installed on your localhost, if you're on Windows [get it on the python dedicated documentation page](http://docs.python-guide.org/en/latest/starting/install/win/):
+Prerequisite: Python and PIP installed on your localhost, if you're on Windows [get it on the python dedicated documentation page][2]:
 
 1. Open a Terminal on your Mac or the CMD prompt on Windows.
 2. Verify where you are by typing pwd (or dir on windows) and press Enter
@@ -33,4 +33,7 @@ Once the above is complete:
 
 At this point, if everything went fine, you should see data in your terminal, additionally, a file has been created in the folder, named out.txt. You can then select your data and start exploiting them.
 
-Now, if you want to interact in different ways with your API, you only need to proceed in an analog way with the examples in [our documentation](/api).
+Now, if you want to interact in different ways with your API, you only need to proceed in an analog way with the examples in [our documentation][1].
+
+[1]: /api
+[2]: http://docs.python-guide.org/en/latest/starting/install/win/

@@ -9,3 +9,4 @@ This articles provides a quick example showing you how you can convert the metri
 
 Once you have the datadog-agent submit these jmx metrics correctly to Datadog, you can graph them and use tags to specify your graph query:
 {{< img src="integrations/faq/jmxGraphMetric.png" alt="jmxGraphMetric" responsive="true" popup="true">}}
+

@@ -15,7 +15,7 @@ sudo apt-get update
 sudo apt-get install sysstat
 ```
 
-3. [Navigate to the Agent Install Screen](https://app.datadoghq.com/account/settings#agent/source) in the Datadog Application and select “from source”
+3. [Navigate to the Agent Install Screen][1] in the Datadog Application and select “from source”
 4. Execute the installation command.
 ```
 DD_API_KEY=<YOUR-API-KEY> sh -c "$(curl -L https://raw.githubusercontent.com/DataDog/dd-agent/master/packaging/datadog-agent/source/setup_agent.sh)"
@@ -32,4 +32,7 @@ nohup sh /root/.datadog-agent/bin/agent &
 You should now see metrics being ingested from your RasberryPI device:
 {{< img src="developers/faq/rasberry_dashboard.png" alt="rasberry_dashboard"  responsive="true" popup="true">}}
 
-Thank you to Karim Vaes for the [excellent blog post](https://kvaes.wordpress.com/2015/12/29/datadog-on-raspberry-pi/)!
+Thank you to Karim Vaes for the [excellent blog post][2]!
+
+[1]: https://app.datadoghq.com/account/settings#agent/source
+[2]: https://kvaes.wordpress.com/2015/12/29/datadog-on-raspberry-pi/

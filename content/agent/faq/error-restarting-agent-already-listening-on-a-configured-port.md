@@ -32,6 +32,8 @@ After the above steps, start the agent:
 sudo /etc/init.d/datadog-agent start
 ```
 
-If this doesn't solve your issue, reach out to [us](/help)!
+If this doesn't solve your issue, reach out to [us][1]!
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /help

@@ -3,7 +3,7 @@ title: Query the Infrastructure List via the API
 kind: faq
 ---
 
-More advanced Datadog users may sometimes want to use [the API](/api) to query general data about their infrastructure--the kind of data that you can find in your [infrastructure list](https://app.datadoghq.com/infrastructure) or the [host map](https://app.datadoghq.com/infrastructure/map). You can do this via an API GET request on the `reports/v2/overview` endpoint.
+More advanced Datadog users may sometimes want to use [the API][1] to query general data about their infrastructure--the kind of data that you can find in your [infrastructure list][2] or the [host map][3]. You can do this via an API GET request on the `reports/v2/overview` endpoint.
 
 ## Overview 
 
@@ -57,3 +57,7 @@ infra_content = s.request(
     method='GET', url=infra_link, params=s.params
 ).text
 ```
+
+[1]: /api
+[2]: https://app.datadoghq.com/infrastructure
+[3]: https://app.datadoghq.com/infrastructure/map

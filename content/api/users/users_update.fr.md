@@ -9,7 +9,7 @@ external_redirect: /api/#update-user
 Ne peut être utilisé qu'avec des clés d'application disponibles pour les administrateurs.
 
 ##### ARGUMENTS
-* **`handle`** [*obligatoire*]:  
+* **`id`** [*obligatoire*]:  
     Le handle de l'utilisateur.
 * **`name`** [*optionnel*, *défaut*=**None**]:  
     Le nouveau nom de l'utilisateur.
@@ -22,3 +22,4 @@ Ne peut être utilisé qu'avec des clés d'application disponibles pour les admi
     *  **st** (utilisateur standard), 
     *  **adm** (admin user),
     *  **ro** (read-only user).  
+
