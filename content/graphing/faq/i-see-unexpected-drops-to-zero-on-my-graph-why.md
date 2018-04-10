@@ -17,5 +17,7 @@ Instead of displaying nothing, our system displays 0s and this really improves t
 
 This feature might be changed in the future. For now, if you find it confusing you may use the following solutions to reduce its visual impact (short data gaps only):
 
-* "grouped by" queries only: increase the [fill interpolation](/graphing/miscellaneous/functions) timeframe
-* all multi-line graphs: increase the [rollup](/graphing/miscellaneous/functions) interval.
+* "grouped by" queries only: increase the [fill interpolation][1] timeframe
+* all multi-line graphs: increase the [rollup][1] interval.
+
+[1]: /graphing/miscellaneous/functions

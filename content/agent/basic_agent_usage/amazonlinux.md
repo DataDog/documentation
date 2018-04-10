@@ -20,7 +20,7 @@ further_reading:
 
 This page outlines the basic functionality of the Datadog Agent for Amazon linux.  
 If you haven't installed the Agent yet, instructions can be found
-[in the Datadog agent integration page](https://app.datadoghq.com/account/settings#agent/aws)
+[in the Datadog agent integration page][1]
 
 ## Commands
 
@@ -53,7 +53,7 @@ The configuration files and folders for for the Agent are located at:
 |:-----|:----|
 |`/etc/dd-agent/datadog.conf`| `/etc/datadog-agent/datadog.yaml` |
 
-Configuration files for [integrations](/integrations):
+Configuration files for [integrations][2]:
 
 | Agent v5                                  |  Agent v6                          |
 |:-----|:----|
@@ -72,7 +72,7 @@ The Agent logs are located in the `/var/log/datadog/` directory:
     * `dogstatsd.log`
     * `forwarder.log`
 
-If you're still having trouble, [our support team](/help) will be glad to provide further assistance.
+If you're still having trouble, [our support team][3] will be glad to provide further assistance.
 
 ## Adding a custom python package to the agent
 
@@ -178,3 +178,7 @@ $ sudo apt-get --purge remove datadog-agent -y
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/account/settings#agent/aws
+[2]: /integrations
+[3]: /help

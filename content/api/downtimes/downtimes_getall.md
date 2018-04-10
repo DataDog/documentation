@@ -9,3 +9,4 @@ external_redirect: /api/#get-all-monitor-downtimes
 ##### ARGUMENTS
 * **`current_only`** [*optional*, *default* = **False**]:  
     Only return downtimes that are activewhen the request is made.
+

@@ -24,8 +24,11 @@ Quickly make data-driven decisions based on current and past resource consumptio
 To bind your Datadog application to your CloudCheckr account:
 
 * Click into your CloudCheckr Extensions
-* Add your [Datadog API and application keys](https://app.datadoghq.com/account/settings#api).
+* Add your [Datadog API and application keys][1].
 
 ## Further Reading
 
-Learn more about [Better rightsizing your cloud resources with the Datadog CloudCheckr](https://www.datadoghq.com/blog/rightsizing-cloudcheckr/) on our blog.
+Learn more about [Better rightsizing your cloud resources with the Datadog CloudCheckr][2] on our blog.
+
+[1]: https://app.datadoghq.com/account/settings#api
+[2]: https://www.datadoghq.com/blog/rightsizing-cloudcheckr/

@@ -13,7 +13,7 @@ further_reading:
   text: Learn how to explore your logs
 ---
 
-The best and easiest way to send logs to Datadog is through the Datadog Agent. You can read how to configure the dd-agent to send logs to [Datadog here](/logs/).
+The best and easiest way to send logs to Datadog is through the Datadog Agent. You can read how to configure the dd-agent to send logs to [Datadog here][1].
 
 That said, you can also send logs to Datadog using many common non-Datadog log shippers, like the following:
 
@@ -27,8 +27,8 @@ That said, you can also send logs to Datadog using many common non-Datadog log s
 
 The Datadog Log Agent can be configured:
 
-* [To tail logs from files](/logs/#tail-existing-files)
-* [To listen for logs via UDP or TCP over a given port](/logs/#stream-logs-through-tcp-udp). 
+* [To tail logs from files][2]
+* [To listen for logs via UDP or TCP over a given port][3]. 
  
 So whatever your log shipper is, one option is just to have that shipper forward its logs to the Datadog Log Agent; it is often easy to configure this kind of setup, both from the dd-agent side, and from your log shipper. With this approach, you don't need to add your Datadog API key, hostname, or source values in your log shipper's configurations, since that is handled by the Datadog Log Agent.
 
@@ -101,7 +101,7 @@ This approach can be especially useful for sending to Datadog logs that have hei
     sudo apt-get install rsyslog-gnutls
     ```
 
-    Download the public key for TLS encryption of logs from [this link](https://gist.githubusercontent.com/estib/8762bc1a2a5bda781a6e55cca40235f2/raw/665b6b2906a728027f508ea067f01cdf3cf72b49/intake.logs.datadoghq.com.crt). Save it to `/etc/ssl/certs/intake.logs.datadoghq.com.crt
+    Download the public key for TLS encryption of logs from [this link][4]. Save it to `/etc/ssl/certs/intake.logs.datadoghq.com.crt
 
     Modify your `/etc/rsyslog.d/datadog.conf` to end with the following content:
 
@@ -153,7 +153,7 @@ To send logs from Rsyslog to a local UDP or TCP port of your choosing, add the f
 
 ## FluentD
 
-As long as you can forward your FluentD logs over tcp/udp to a specific port, you can use that approach to forward your FluentD logs to your Datadog agent. But another option is to use the [Datadog FluentD plugin](http://www.rubydoc.info/gems/fluent-plugin-datadog/0.9.6) to forward the logs directly from FluentD to your Datadog account.
+As long as you can forward your FluentD logs over tcp/udp to a specific port, you can use that approach to forward your FluentD logs to your Datadog agent. But another option is to use the [Datadog FluentD plugin][5] to forward the logs directly from FluentD to your Datadog account.
 
 In order to get the best use out of your logs in Datadog, it is important to have the proper metadata associated with your logs (including hostname and source). For the current version of the Datadog FluentD plugin, you have to include this metadata in the logs that you're sending to FluentD, using the following format:
 
@@ -161,13 +161,14 @@ In order to get the best use out of your logs in Datadog, it is important to hav
 {
     "syslog.hostname": "myhostname",
     "syslog.appname": "myappname",
-    "ddsource": "mysourcename"
+    "ddsource": "mysourcename",
+    "ddtags":"tag1:value1, tag2:value2"
 }
 ```
 
 ## Logstash
 
-We have [an ouput plugin](https://github.com/DataDog/logstash-output-datadog_logs) for Logstash that takes care of sending your logs to your Datadog platform.
+We have [an ouput plugin][6] for Logstash that takes care of sending your logs to your Datadog platform.
 
 To install this plugin run the following command:
 
@@ -183,7 +184,7 @@ output {
 }
 ```
 
-In order to get the best use out of your logs in Datadog, it is important to have the proper metadata associated with your logs (including hostname and source). By default, the hostname and timestamp should be properly remapped thanks to our default [remapping for reserved attributes](/logs/#edit-reserved-attributes). To make sure the service is correctly remapped, add its attribute value to the Service remapping list.
+In order to get the best use out of your logs in Datadog, it is important to have the proper metadata associated with your logs (including hostname and source). By default, the hostname and timestamp should be properly remapped thanks to our default [remapping for reserved attributes][7]. To make sure the service is correctly remapped, add its attribute value to the Service remapping list.
 
 To set the source on your logs, you need to setup a Logstash filter:
 
@@ -249,7 +250,7 @@ filter {
 4. (Optional) TLS Encryption 
     To activate TLS encryption:
     
-    1. Download our [certificate](https://gist.githubusercontent.com/estib/8762bc1a2a5bda781a6e55cca40235f2/raw/665b6b2906a728027f508ea067f01cdf3cf72b49/intake.logs.datadoghq.com.crt) and save it to `/etc/syslog-ng/certs.d/datadoghq.crt`. 
+    1. Download our [certificate][4] and save it to `/etc/syslog-ng/certs.d/datadoghq.crt`. 
 
     2. Change the definition of the destination to the following:
 
@@ -257,7 +258,7 @@ filter {
         destination d_datadog { tcp("intake.logs.datadoghq.com" port(10516)     tls(peer-verify(required-untrusted) ca_dir('/opt/syslog-ng/certs.d/')) template(DatadogFormat)); };
         ```
 
-    More information about the TLS parameters and possibilities for syslog-ng available in their [official documentation](https://syslog-ng.com/documents/html/syslog-ng-ose-latest-guides/en/syslog-ng-ose-guide-admin/html/tlsoptions.html).
+    More information about the TLS parameters and possibilities for syslog-ng available in their [official documentation][8].
 
 5. Restart syslog-ng
 
@@ -345,7 +346,7 @@ filter {
 
 ### NXLog TLS encryption
 
-1. [Download the public key for TLS encryption of logs](https://gist.githubusercontent.com/estib/8762bc1a2a5bda781a6e55cca40235f2/raw/665b6b2906a728027f508ea067f01cdf3cf72b49/intake.logs.datadoghq.com.crt).
+1. [Download the public key for TLS encryption of logs][4].
 
 2. Add the `om_sll` module in your NXLog configuration to enable secure transfer over port 10516:
 
@@ -361,3 +362,13 @@ filter {
     ```
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: /logs/
+[2]: /logs/#tail-existing-files
+[3]: /logs/#stream-logs-through-tcp-udp
+[4]: https://gist.githubusercontent.com/estib/8762bc1a2a5bda781a6e55cca40235f2/raw/665b6b2906a728027f508ea067f01cdf3cf72b49/intake.logs.datadoghq.com.crt
+[5]: http://www.rubydoc.info/gems/fluent-plugin-datadog/0.9.6
+[6]: https://github.com/DataDog/logstash-output-datadog_logs
+[7]: /logs/#edit-reserved-attributes
+[8]: https://syslog-ng.com/documents/html/syslog-ng-ose-latest-guides/en/syslog-ng-ose-guide-admin/html/tlsoptions.html

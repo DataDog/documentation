@@ -3,7 +3,7 @@ title: Comment exécuter les commandes JMX dans Windows?
 kind: faq
 ---
 
-Si vous monitorez une application JMX avec un agent Windows, vous pouvez accéder aux mêmes [outils de dépannage](/integrations/java/) que ceux disponibles sur Linux.
+Si vous monitorez une application JMX avec un agent Windows, vous pouvez accéder aux mêmes [outils de dépannage][1] que ceux disponibles sur Linux.
 
 Si java est dans votre chemin de fichier, à partir d'un terminal, vous devriez pouvoir exécuter:
 ```
@@ -34,3 +34,6 @@ Instance: localhost:9012
        Matching: 9/350. Bean name: Catalina:j2eeType=Servlet,WebModule=//localhost/manager,name=default,J2EEApplication=none,J2EEServer=none - Attribute name: errorCount  - Attribute type: int
 [...]
 ```
+
+
+[1]: /integrations/java/

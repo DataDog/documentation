@@ -11,3 +11,4 @@ Fetch an existing Screenboard's definition.
 ##### ARGUMENTS
 
 This end point takes no JSON arguments.
+

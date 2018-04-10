@@ -42,3 +42,4 @@ class MyEmptyCheck(AgentCheck):
 ```
 
 {{< partial name="whats-next/whats-next.html" >}}
+

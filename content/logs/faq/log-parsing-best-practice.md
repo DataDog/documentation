@@ -13,7 +13,7 @@ further_reading:
   text: How to investigate a log parsing issue?
 ---
 
-Datadog lets you define parsers to extract all relevant information from your logs. More information about the parsing language and possibilities is available in [our documentation](/logs/parsing/).
+Datadog lets you define parsers to extract all relevant information from your logs. More information about the parsing language and possibilities is available in [our documentation][1].
 
 At first sight, it can seem complicated to write a parsing rule. But once you have mastered a few tips, it becomes much easier.
 In this article, we walk through parsing a log from the Datadog agent’s collector log :
@@ -47,7 +47,7 @@ In this article, we walk through parsing a log from the Datadog agent’s collec
 
 4. **KeyValue**:
     Never forget that there is a keyvalue filter than can automatically extract all your attributes.
-    Learn more about this with [our examples](/logs/parsing/#key-value)
+    Learn more about this with [our examples][2]
 
 5. **How to skip some part of your log message that should not be extracted as attribute**:  
     Let’s use our example again:
@@ -59,3 +59,6 @@ In this article, we walk through parsing a log from the Datadog agent’s collec
     {{< img src="logs/faq/parsing_best_practice_4.png" alt="parsing_best_practice_4" responsive="true" popup="true">}}
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /logs/parsing/
+[2]: /logs/parsing/#key-value

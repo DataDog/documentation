@@ -10,7 +10,7 @@ curl  -X POST -H "Content-type: application/json" \
       "tags": ["environment:test"],
       "alert_type": "info"
 }' \
-'https://api.datadoghq.com/api/v1/events?api_key=9775a026f1ca7d1c6c5af9d94d9595a4'
+'https://api.datadoghq.com/api/v1/events?api_key=<YOUR_API_KEY>'
 
 
 

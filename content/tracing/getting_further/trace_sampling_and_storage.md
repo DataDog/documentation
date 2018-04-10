@@ -35,7 +35,7 @@ Datadog APM computes aggregate statistics over all the traces instrumented, rega
 * Total errors and errors per second
 * Latency
 * Breakdown of time spent by service/type
-* [Apdex score](/tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm) (web services only)
+* [Apdex score][1] (web services only)
 
 {{< img src="tracing/product_specs/trace_sampling_storage/sampling_stats.png" alt="Aggregate statistics are generated on un-sampled data." responsive="true" popup="true" style="width:90%;">}}
 
@@ -53,7 +53,7 @@ To ensure keeping a representative sample set of traces, Datadog combines multip
 
 ### Signature Sampling
 
-Signature Sampling ensures a sampling of a variety of [traces](/tracing/visualization/trace) (errors, successes) for each [resource](/tracing/visualization/resource) (endpoint, database query).  
+Signature Sampling ensures a sampling of a variety of [traces][2] (errors, successes) for each [resource][3] (endpoint, database query).  
 
 Datadog computes a *signature* for every trace reported, based on its services, resources, errors, etc.. Traces of the same signature are considered similar. For example, a signature could be:
 
@@ -62,11 +62,11 @@ Datadog computes a *signature* for every trace reported, based on its services, 
 
 A proportion of traces with each signature is then kept, so you get full visibility into all the different kinds of transactions happening in your system. This method ensures traces for resources with low volumes are still kept.  
 
-Both the [Datadog Agent](/agent) and backend apply Signature Sampling to limit network consumption and the total volume of stored traces while still making a representative set of traces available to you.
+Both the [Datadog Agent][4] and backend apply Signature Sampling to limit network consumption and the total volume of stored traces while still making a representative set of traces available to you.
 
 ### Priority Sampling for Distributed Tracing 
 
-Because Signature Sampling decisions are made at the [Agent](/agent) level, it is not guaranteed that a trace will be complete when one is running a distributed architecture and requests are across multiple services, hosts, containers etc... This is because each host would need to choose to sample (keep) spans from the same trace.  
+Because Signature Sampling decisions are made at the [Agent][4] level, it is not guaranteed that a trace will be complete when one is running a distributed architecture and requests are across multiple services, hosts, containers etc... This is because each host would need to choose to sample (keep) spans from the same trace.  
 
 **Priority Sampling is an additional sampling option in which you indicate whether a trace should be kept. Priority Sampling runs prior to Signature Sampling, and a decision is made at the beginning of a trace**. As the decision is propagated in the trace context, it has two main properties:
 
@@ -90,7 +90,7 @@ Traces are automatically assigned a priority of **0** or **1**, with a proportio
 
 #### Using Priority Sampling
 
-Priority Sampling is recommended if your traces are distributed across multiple hosts or if you need finer control over the traces sampled. To use it, enable `distributed_sampling` in your client ([Ruby](http://www.rubydoc.info/gems/ddtrace/#Priority_sampling), [Python](http://pypi.datadoghq.com/trace/docs/#priority-sampling), [Go](https://godoc.org/github.com/DataDog/dd-trace-go/tracer#Span.SetSamplingPriority), [Java](/tracing/setup/java/#sampling-distributed-tracing)) as it is disabled by default.
+Priority Sampling is recommended if your traces are distributed across multiple hosts or if you need finer control over the traces sampled. To use it, enable `distributed_sampling` in your client ([Ruby](http://www.rubydoc.info/gems/ddtrace/#Priority_sampling), [Python][5], [Go][6], [Java][7]) as it is disabled by default.
 
 ### Client rate sampling
 
@@ -133,3 +133,12 @@ Once a trace has been viewed, it continues to be available by using its trace ID
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: /tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm
+[2]: /tracing/visualization/trace
+[3]: /tracing/visualization/resource
+[4]: /agent
+[5]: http://pypi.datadoghq.com/trace/docs/#priority-sampling
+[6]: https://godoc.org/github.com/DataDog/dd-trace-go/tracer#Span.SetSamplingPriority
+[7]: /tracing/setup/java/#sampling-distributed-tracing

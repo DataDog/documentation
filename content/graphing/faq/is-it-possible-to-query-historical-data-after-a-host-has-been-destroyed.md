@@ -7,4 +7,9 @@ If a host stops reporting data for more than 24 hours Datadog will no longer lis
 
 {{< img src="graphing/faq/query_post_deletion.png" alt="query post deletion" responsive="true" popup="true">}}
 
-If you're planning to frequently churn hosts, add a tag [to the Agent](/agent) in the `datadog.yaml` file or in the the [Infrastructure page](/graphing/infrastructure) (user tags) or learn more about other methods [here](/getting_started/tagging).
+If you're planning to frequently churn hosts, add a tag [to the Agent][1] in the `datadog.yaml` file or in the the [Infrastructure page][2] (user tags) or learn more about other methods [here][3].
+
+
+[1]: /agent
+[2]: /graphing/infrastructure
+[3]: /getting_started/tagging

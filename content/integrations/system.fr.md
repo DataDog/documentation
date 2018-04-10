@@ -18,9 +18,9 @@ ddtype: check
 
 Obtenez les métriques de votre système à propos du processeur, de ses I/O, de sa charge, de la mémoire, du swap et de la disponibilité. D'autres checks liées au système peuvent être trouvées ici:
 
-* [Check dossier](/integrations/directory) - Capture des métriques à partir des fichiers dans des dossiers donnés.
-* [Check de disque](/integrations/disk) - Capturez des métriques sur vos disques
-* [Check de processus](/integrations/process/) - Capturez des métriques à partir d'un processus en cours d'exécution sur un système.
+* [Check dossier][1] - Capture des métriques à partir des fichiers dans des dossiers donnés.
+* [Check de disque][2] - Capturez des métriques sur vos disques
+* [Check de processus][3] - Capturez des métriques à partir d'un processus en cours d'exécution sur un système.
 
 ## Implémentation
 ### Configuration
@@ -42,11 +42,11 @@ Ce check recueille le nombre de cœurs de processeur sur un host et les temps de
 ## Implémentation
 ### Installation
 
-Le check system_core est packagé avec l'agent, il vous faut donc simplement [installer l'agent] (https://app.datadoghq.com/account/settings#agent) sur n'importe quel host.
+Le check system_core est packagé avec l'agent, il vous faut donc simplement [installer l'agent] [4] sur n'importe quel host.
 
 ### Configuration
 
-Créez un fichier `system_core.yaml` dans le dossier ` conf.d` de l'Agent. Consultez l'exemple du [canevas system_core.yaml](https://github.com/DataDog/integrations-core/blob/master/system_core/conf.yaml.example) pour apprendre toutes les options de configuration disponibles:
+Créez un fichier `system_core.yaml` dans le dossier ` conf.d` de l'Agent. Consultez l'exemple du [canevas system_core.yaml][5] pour apprendre toutes les options de configuration disponibles:
 
 ```
 init_config:
@@ -61,7 +61,7 @@ Redémarrez l'Agent afin d'activer le check.
 
 ### Validation
 
-[Lancez la commande `info`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `system_core` dans la section Checks:
+[Lancez la commande `info`de l'Agent][6] et cherchez `system_core` dans la section Checks:
 
 ```
   Checks
@@ -94,10 +94,10 @@ Le check System Core n'inclut aucun événement pour le moment.
 Le check System Core n'inclut aucun check de service pour le moment.
 
 ## Troubleshooting
-Besoin d'aide? Contactez  [l'équipe support de Datadog](/help/).
+Besoin d'aide? Contactez  [l'équipe support de Datadog][7].
 
 ## En apprendre plus
-Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog](https://www.datadoghq.com/blog/)
+Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][8]
 
 ## Check de l'Agent: Swap
 
@@ -108,11 +108,11 @@ Ce check monitor le nombre d'octets qu'un host a swap.
 ## Implémentation
 ### Installation
 
-Le check System swap est packagé avec l'agent, il vous faut donc simplement [installer l'agent] (https://app.datadoghq.com/account/settings#agent) sur n'importe quel host.
+Le check System swap est packagé avec l'agent, il vous faut donc simplement [installer l'agent] [4] sur n'importe quel host.
 
 ### Configuration
 
-Créez un fichier `system_swap.yaml` dans le dossier ` conf.d` de l'Agent. Consultez l'exemple du [canevas cassandra_nodetool.yaml](https://github.com/DataDog/integrations-core/blob/master/system_swap/conf.yaml.example) pour apprendre toutes les options de configuration disponibles:
+Créez un fichier `system_swap.yaml` dans le dossier ` conf.d` de l'Agent. Consultez l'exemple du [canevas cassandra_nodetool.yaml][9] pour apprendre toutes les options de configuration disponibles:
 
 ```
 # This check takes no initial configuration
@@ -125,7 +125,7 @@ Redémarrez l'Agent pour commencer à collecter les métriques swap.
 
 ### Validation
 
-[Lancez la commande `info`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `system_swap` dans la section Checks:
+[Lancez la commande `info`de l'Agent][6] et cherchez `system_swap` dans la section Checks:
 
 ```
   Checks
@@ -156,7 +156,17 @@ Le check System Swap n'inclut aucun événement pour le moment.
 Le check System Swap n'inclut aucun check de service pour le moment.
 
 ## Troubleshooting
-Besoin d'aide? Contactez  [l'équipe support de Datadog](/help/).
+Besoin d'aide? Contactez  [l'équipe support de Datadog][7].
 
 ## En apprendre plus
-Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog](https://www.datadoghq.com/blog/)
+Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][8]
+
+[1]: /integrations/directory
+[2]: /integrations/disk
+[3]: /integrations/process/
+[4]: https://app.datadoghq.com/account/settings#agent
+[5]: https://github.com/DataDog/integrations-core/blob/master/system_core/conf.yaml.example
+[6]: https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information
+[7]: /help/
+[8]: https://www.datadoghq.com/blog/
+[9]: https://github.com/DataDog/integrations-core/blob/master/system_swap/conf.yaml.example

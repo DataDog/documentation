@@ -15,11 +15,11 @@ further_reading:
 
 ## Aperçu
 
-Cette page examine d'abord l'interface `PrometheusCheck`, puis propose une check Prometheus simple qui collecte les métriques de synchronisation et les événements d'état à partir de [Kube DNS](https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/kube_dns.py).
+Cette page examine d'abord l'interface `PrometheusCheck`, puis propose une check Prometheus simple qui collecte les métriques de synchronisation et les événements d'état à partir de [Kube DNS][1].
 
 ## l'interface des checks Prometheus
 
-`PrometheusCheck` est une [class mère](https://github.com/DataDog/dd-agent/blob/master/checks/prometheus_check.py) qui fournit une structure et quelques aides pour collecter des métriques, des événements et des check de services exposés via Prometheus. La configuration minimale pour les contrôles basés sur cette classe sont:
+`PrometheusCheck` est une [class mère][2] qui fournit une structure et quelques aides pour collecter des métriques, des événements et des check de services exposés via Prometheus. La configuration minimale pour les contrôles basés sur cette classe sont:
 
 
 - Remplacer `self.NAMESPACE`
@@ -36,7 +36,7 @@ ET/OU
 <div class="alert alert-warning">Le nom de vos fichiers de configuration et du check doivent être identique. Si votre check s'appelle <code>mycheck.py</code> votre  fichier de configuration <em>doit</em> s'appeler <code>mycheck.yaml</code>.
 </div>
 
-La configuration d'un check Prometheus est presque la même que celle d'un check d'agent classique. Reportez-vous à la [documentation de check d'agent dédiée pour en savoir plus](/agent/agent_checks/#configuration)
+La configuration d'un check Prometheus est presque la même que celle d'un check d'agent classique. Reportez-vous à la [documentation de check d'agent dédiée pour en savoir plus][3]
 
 La principale différence est d'inclure la variable `prometheus_endpoint` dans votre fichier` check.yaml`. Cela va dans `conf.d/kube_dns.yaml`:
 
@@ -73,7 +73,7 @@ class KubeDNSCheck(PrometheusCheck):
 #### Remplacer `self.metrics_mapper`
 
 `metrics_mapper` est un dictionnaire où la clé est la métrique à récupérer et la valeur est le nom de la métrique correspondante dans Datadog.
-La raison du remplacement de cette métrique par le check Prometheus n'est pas comptabilisée comme [une métrique custom] (/getting_started/custom_metrics):
+La raison du remplacement de cette métrique par le check Prometheus n'est pas comptabilisée comme [une métrique custom] [4]:
 
 ```python
 from checks.prometheus_check import PrometheusCheck
@@ -103,7 +103,7 @@ def check(self, instance):
 
 ##### Exceptions
 
-Si un check ne peut pas être effectuée en raison d'une configuration incorrecte, d'une erreur de programmation ou parce qu'il ne peut collecter aucune statistique, il devrait générer une exception significative. Cette exception est enregistrée et est affichée dans  [ la commande info de l'agent](/agent/faq/agent-commands/#agent-status-and-information) pour faciliter le débogage. Par exemple:
+Si un check ne peut pas être effectuée en raison d'une configuration incorrecte, d'une erreur de programmation ou parce qu'il ne peut collecter aucune statistique, il devrait générer une exception significative. Cette exception est enregistrée et est affichée dans  [ la commande info de l'agent][5] pour faciliter le débogage. Par exemple:
 
     $ sudo /etc/init.d/datadog-agent info
 
@@ -207,3 +207,9 @@ Note: il est vide dans la classe mère mais devra être surchargé/codé en dur 
 ## En apprendre plus
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/kube_dns.py
+[2]: https://github.com/DataDog/dd-agent/blob/master/checks/prometheus_check.py
+[3]: /agent/agent_checks/#configuration
+[4]: /getting_started/custom_metrics
+[5]: /agent/faq/agent-commands/#agent-status-and-information

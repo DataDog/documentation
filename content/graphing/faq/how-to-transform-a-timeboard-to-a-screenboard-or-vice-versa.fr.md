@@ -3,11 +3,11 @@ title: Comment transformer un Timeboard en un Screenboard ou vice versa?
 kind: faq
 ---
 
-Pour transformer un Timeboard en un Screenboard utilisez [ce script](https://github.com/DataDog/Miscellany/blob/master/dashconverter.py).
+Pour transformer un Timeboard en un Screenboard utilisez [ce script][1].
 
 L'utilisation est très simple, vous fournissez l'ID dashboard que vous voulez convertir, et la sortie est l'URL du dashboard converti.
 
-Cela s'appuie sur l'API get et post pout mes [TimeBoards](/api/#timeboards) et les [ScreenBoards](/api/#screenboards). 
+Cela s'appuie sur l'API get et post pout mes [TimeBoards][2] et les [ScreenBoards][3]. 
 
 Tout d'abord, récupérer l'ID du dashboard, vous pouvez le trouver dans l'URL du dashboard
 
@@ -59,3 +59,7 @@ Note: Si vous clonez un OTB dashboard, certains widgets peuvent avoir un ancien 
 Si vous voulez éviter cela, il suffit d'ouvrir le widget obsolète (le titre est donné dans l'avertissement) et enregistrez-le (pas besoin de modifier quoi que ce soit).
 Ensuite, exécutez le script à nouveau. Même si vous aviez plusieurs avertissements, mettre à jour un des widgets obsolètes devrait suffire à tous les régler.
 Si vous voyez cet avertissement, et que vous souhaitez convertir tout le dashboard, ne le supprimez pas tout de suite, assurez-vous qu'il est correctement mis à jour en premier.
+
+[1]: https://github.com/DataDog/Miscellany/blob/master/dashconverter.py
+[2]: /api/#timeboards
+[3]: /api/#screenboards

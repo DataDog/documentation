@@ -21,6 +21,9 @@ Notez que l'activation de cette fonctionnalité augmente le nombre de requêtes 
 
 Plus d'informations sur ce comportement et la facturation AWS peuvent être trouvés ici:
 
-* [Croyez-vous constater un écart entre vos données dans CloudWatch et Datadog?](/integrations/faq/do-you-believe-you-re-seeing-a-discrepancy-between-your-data-in-cloudwatch-and-datadog)
+* [Croyez-vous constater un écart entre vos données dans CloudWatch et Datadog?][1]
 
-* [Comment puis-je surveiller mes informations de facturation AWS?](/integrations/faq/how-do-i-monitor-my-aws-billing-details)
+* [Comment puis-je surveiller mes informations de facturation AWS?][2]
+
+[1]: /integrations/faq/do-you-believe-you-re-seeing-a-discrepancy-between-your-data-in-cloudwatch-and-datadog
+[2]: /integrations/faq/how-do-i-monitor-my-aws-billing-details

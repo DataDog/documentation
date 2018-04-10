@@ -18,7 +18,7 @@ further_reading:
 
 {{< img src="tracing/visualization/resource/ressource.png" alt="Ressource" responsive="true" popup="true">}}
 
-Une ressource est une action particulière pour un service donné (généralement un endpoint ou une requête). Apprenez en plus sur les ressources sur la page [débuter avec l'APM](/tracing/visualization). Pour chaque ressource, APM génère automatiquement une page dashboard couvrant:
+Une ressource est une action particulière pour un service donné (généralement un endpoint ou une requête). Apprenez en plus sur les ressources sur la page [débuter avec l'APM][1]. Pour chaque ressource, APM génère automatiquement une page dashboard couvrant:
 
 * Indicateurs de santé clés
 * Monitorer l'état de tous les monitors associés à ce service
@@ -45,7 +45,7 @@ Datadog fournit des graphiques par défaut pour une ressource donnée:
 
 ### Exporter dans un Timeboard
 
-Dans le coin supérieur droit de chaque graphique, cliquez sur la flèche pour exporter votre graphique dans un [Timeboard](/graphing/dashboards/timeboard) éxistant:
+Dans le coin supérieur droit de chaque graphique, cliquez sur la flèche pour exporter votre graphique dans un [Timeboard][2] éxistant:
 
 {{< img src="tracing/visualization/resource/save_to_timeboard.png" alt="Save to timeboard" responsive="true" popup="true" style="width:40%;">}}
 
@@ -65,10 +65,14 @@ Zoomez sur ce graphique pour filtrer les traces correspondantes.
 
 Consultez la liste des traces associées à cette ressource. Filtrer/trier cette liste pour voir les traces rapides/lentes et en erreurs/non-erreurs:
 
-[Reportez-vous à notre documentation sur les traces pour en apprendre plus](/tracing/visualization/trace).
+[Reportez-vous à notre documentation sur les traces pour en apprendre plus][3].
 
 {{< img src="tracing/visualization/resource/traces_list.png" alt="Traces list" responsive="true" popup="true" style="width:90%;">}}
 
 ## En apprendre plus
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /tracing/visualization
+[2]: /graphing/dashboards/timeboard
+[3]: /tracing/visualization/trace

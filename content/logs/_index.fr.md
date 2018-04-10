@@ -10,7 +10,7 @@ description: "Configurez votre agent Datadog pour rassembler les logs de votre h
 
 La collecte de logs nécessite une version de l'agent >= 6.0. Les anciennes versions de l'agent n'incluent pas l'interface `Log collection` qui est utilisée pour la collecte de logs.
 
-Si vous ne l'utilisez pas déjà, veuillez suivre [les instructions d'installation de l'agent](/agent).
+Si vous ne l'utilisez pas déjà, veuillez suivre [les instructions d'installation de l'agent][1].
 
 La collecte des logs est **désactivée** par défaut dans l'Agent Datadog, vous devez l'activer dans `datadog.yaml`:
 
@@ -36,7 +36,7 @@ Datadog Agent v6 peut collecter des logs à partir de fichiers ou du réseau (TC
 * `type` : (obligatoire) type de la source d'entrée des logs (**tcp** / **udp** / **file**)
 * `port` / `path` : (obligatoire) mettez `port` si `type` est **tcp** ou **udp**. mettez `path` si `type` est **file**.
 * `service` : (obligatoire) nom du service propriétaire des logs
-* `source` : (obligatoire) attribut qui définit l'intégration qui envoie les logs. "Si les logs ne proviennent pas d'une intégration existante, ce champ peut inclure un nom source personnalisé, mais nous vous recommandons de faire correspondre cette valeur au nommage du nom de toutes les [métriques custom](/getting_started/custom_metrics/) que vous collectez, par exemple `myapp` de` myapp.request.count`) "
+* `source` : (obligatoire) attribut qui définit l'intégration qui envoie les logs. "Si les logs ne proviennent pas d'une intégration existante, ce champ peut inclure un nom source personnalisé, mais nous vous recommandons de faire correspondre cette valeur au nommage du nom de toutes les [métriques custom][2] que vous collectez, par exemple `myapp` de` myapp.request.count`) "
 * `sourcecategory`: (optionnel) Attribut à valeurs multiples. Peut être utilisé pour affiner l'attribut source. Exemple: source: mongodb, sourcecategory: db_slow_logs.
 * `tags`: (optionnel) ajouter des tags à chaque log collecté.
 
@@ -63,7 +63,7 @@ logs:
     source: python
     sourcecategory: sourcecode
 ```
-* [Redémarrez votre Agent](/agent/faq/agent-commands/#start-stop-restart-the-agent)
+* [Redémarrez votre Agent][3]
 
 ## Envoyer des logs via TCP/UDP
 Définissez `type` sur **tcp** ou **udp** en fonction de votre protocole, puis spécifiez le `port` de votre connexion entrante.
@@ -84,7 +84,7 @@ logs:
     sourcecategory: front
 
 ```
-* [Redémarrez votre Agent](/agent/faq/agent-commands/#start-stop-restart-the-agent)
+* [Redémarrez votre Agent][3]
 
 L'agent prend en charge des logs contenant des chaines de caractères brutes ou formatées en JSON. Si vous envoyez plusieurs logs d'un coup, utilisez le caractère de séparation de ligne pour séparer vos logs.
 
@@ -259,7 +259,7 @@ Toutefois, si un fichier de log au format JSON inclut l'un des attributs suivant
 * `published_date`
 * `syslog.timestamp`
 
-Vous pouvez également spécifier d'autres attributs à utiliser comme source de la date d'un log en définissant un processor [log date remapper](/logs/processing/#log-date-remapper)
+Vous pouvez également spécifier d'autres attributs à utiliser comme source de la date d'un log en définissant un processor [log date remapper][4]
 
 **Note**: Datadog rejette un log si sa date officielle est antérieure à 6 heures.
 
@@ -269,7 +269,7 @@ Les formats de date reconnus sont: <a href="https://www.iso.org/iso-8601-date-an
 
 ### Attribut *message* 
 
-Par défaut, Datadog ingère la valeur du message en tant que corps du log. Cette valeur est ensuite mise en évidence et affichée dans le [logstream](/logs/explore/#logstream), où elle est indexée pour permettre [une recherche ultérieur](/logs/explore/#search-bar).
+Par défaut, Datadog ingère la valeur du message en tant que corps du log. Cette valeur est ensuite mise en évidence et affichée dans le [logstream][5], où elle est indexée pour permettre [une recherche ultérieur][6].
 
 ### Attribut *status* 
 
@@ -279,7 +279,7 @@ Chaque log peut avoir un niveau de statut qui est ensuite disponible pour la rec
 * `level`
 * `syslog.severity`
 
-Si vous souhaitez remapper un statut existant dans l'attribut `status`, vous pouvez le faire avec le processor [log status remapper](/logs/processing/#log-status-remapper).
+Si vous souhaitez remapper un statut existant dans l'attribut `status`, vous pouvez le faire avec le processor [log status remapper][7].
 
 ### Attribut *host* 
 
@@ -312,3 +312,12 @@ Apprendre à explorer vos logs{{< /nextlink >}}
 Comment envoyer des logs à Datadog via des logs shippers externes{{< /nextlink >}}
     {{< nextlink href="logs/parsing" tag="Documentation" >}}En apprendre plus sur le parsing{{< /nextlink >}}
 {{< /whatsnext >}}
+
+
+[1]: /agent
+[2]: /getting_started/custom_metrics/
+[3]: /agent/faq/agent-commands/#start-stop-restart-the-agent
+[4]: /logs/processing/#log-date-remapper
+[5]: /logs/explore/#logstream
+[6]: /logs/explore/#search-bar
+[7]: /logs/processing/#log-status-remapper

@@ -11,3 +11,4 @@ external_redirect: /api/#get-tags
 {{< code-snippets basename="api-tags-get" >}}
 ##### Example Response
 {{< code-snippets basename="result.api-tags-get" >}}
+

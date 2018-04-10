@@ -15,7 +15,7 @@ further_reading:
 
 We often discuss alerting with our clients and a frequent issue or pain point is alert fatigue, or when alerts ‘flap’ (rapidly switching from an ‘ok’ to an ‘alert’ status).  
 
-Your individual Datadog alerts with groups will [have notification](https://www.datadoghq.com/blog/alert-rollup/) rollups on by default, but there is functionality within Datadog that often leads to less noisy, more meaningful alerts.
+Your individual Datadog alerts with groups will [have notification][1] rollups on by default, but there is functionality within Datadog that often leads to less noisy, more meaningful alerts.
 
 * Re-Evaluate the Alert Threshold Value
     * The easiest way to reduce flapping when the alert <-> ok or state changes are frequent could be to increase/decrease the threshold condition.
@@ -36,9 +36,13 @@ Your individual Datadog alerts with groups will [have notification](https://www.
     * Anomaly Detection utilizes some seasonality analysis to issue an alert when a data stream behaves in a historically inconsistent way.
     * Outlier Detection utilizes other data streams of the same context to issue an alert when a stream behaves in a way different compared with its peers
     * Both can also be used in conjunction with Composite alerts.
-    * If you would like a visual introduction to anomaly and outlier detection, this gist is a [screenboard](/graphing/dashboards/screenboard) post to the Datadog API with examples and documentation links for both.
+    * If you would like a visual introduction to anomaly and outlier detection, this gist is a [screenboard][2] post to the Datadog API with examples and documentation links for both.
 
 
 If the issue is alert routing, template variables and the separation of **warning** or **alert** states will be of interest!
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: https://www.datadoghq.com/blog/alert-rollup/
+[2]: /graphing/dashboards/screenboard

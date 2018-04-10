@@ -14,7 +14,7 @@ further_reading:
   text: Datadog-official and community contributed API and DogStatsD client libraries
 ---
 
-The easiest way to get your custom application metrics into Datadog is to send them to DogStatsD, a metrics aggregation service bundled with the Datadog Agent. DogStatsD implements the [StatsD](https://github.com/etsy/statsd) protocol and adds a few Datadog-specific extensions:
+The easiest way to get your custom application metrics into Datadog is to send them to DogStatsD, a metrics aggregation service bundled with the Datadog Agent. DogStatsD implements the [StatsD][5] protocol and adds a few Datadog-specific extensions:
 
 * Histogram metric type
 * Service checks and Events
@@ -29,7 +29,7 @@ The easiest way to get your custom application metrics into Datadog is to send t
 
 ## How It Works
 
-DogStatsD accepts [custom metrics](/getting_started/custom_metrics/), events, and service checks over UDP and periodically aggregates and forwards them to Datadog.
+DogStatsD accepts [custom metrics][6], events, and service checks over UDP and periodically aggregates and forwards them to Datadog.
 Because it uses UDP, your application can send metrics to DogStatsD and resume its work without waiting for a response. If DogStatsD ever becomes unavailable, your application won't skip a beat.
 
 {{< img src="developers/dogstatsd/dogstatsd.png" alt="dogstatsd"  responsive="true" popup="true">}}
@@ -62,7 +62,7 @@ use_dogstatsd: yes
 dogstatsd_port: 8125
 ```
 
-Then [restart your agent](/agent/faq/agent-commands).
+Then [restart your agent][7].
 
 Once done, your application can reliably reach the [DogStatsD client library][2] for your application language and you'll be ready to start hacking. You _can_ use any generic StatsD client to send metrics to DogStatsD, but you won't be able to use any of the Datadog-specific features mentioned above.
 
@@ -71,13 +71,13 @@ By default, DogStatsD listens on UDP port **8125**. If you need to change this, 
     # Make sure your client is sending to the same port.
     dogstatsd_port: 8125
 
-[Restart DogStatsD](/agent/faq/agent-commands) to effect the change.
+[Restart DogStatsD][7] to effect the change.
 
 ## Data Types
 
 While StatsD only accepts metrics, DogStatsD accepts all three major data types Datadog supports: metrics, events, and service checks. This section shows typical use cases for each type.
 
-Each example is in Python using [datadogpy](http://datadogpy.readthedocs.io/en/latest/), but each data type shown is supported similarly in [other DogStatsD client libraries][2].
+Each example is in Python using [datadogpy][8], but each data type shown is supported similarly in [other DogStatsD client libraries][2].
 
 ### Metrics
 
@@ -347,7 +347,7 @@ Here's an example datagram:
 ## Send metrics and events using DogStatsD and the shell
 
 For Linux and other Unix-like OS, we use Bash.
-For Windows we need Powershell and [powershell-statsd](https://github.com/joehack3r/powershell-statsd/blob/master/send-statsd.ps1), a simple Powershell function that takes care of the network bits for us.
+For Windows we need Powershell and [powershell-statsd][9], a simple Powershell function that takes care of the network bits for us.
 
 The idea behind DogStatsD is simple: create a message that contains information about your metric/event, and send it to a collector over UDP on port 8125. [Read more about the message format](#datagram-format).
 
@@ -413,4 +413,9 @@ PS C:\vagrant> .\send-statsd.ps1 "_e{$($title.length),$($text.Length)}:$title|$t
 [1]: https://github.com/DataDog/dd-agent/pull/2104
 [2]: /libraries/
 [3]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
-[4]: /developers/metrics/#metric-names
+[4]: /developers/metrics/#metric-names 
+[5]: https://github.com/etsy/statsd
+[6]: /getting_started/custom_metrics/
+[7]: /agent/faq/agent-commands
+[8]: http://datadogpy.readthedocs.io/en/latest/
+[9]: https://github.com/joehack3r/powershell-statsd/blob/master/send-statsd.ps1

@@ -36,18 +36,18 @@ While a more complex environment may break it out into 6 services:
 * 3 separate services: `webapp`, `admin`, and `query`.
 * 3 separate external service:  `master-db`,  `replica-db`, and `yelp-api`.
 
-APM automatically assigns names to your services; however you can also name them explicitly. See instructions for: [Go](https://godoc.org/github.com/DataDog/dd-trace-go/tracer#service), [Java](/tracing/setup/java/#configuration), [Python](http://pypi.datadoghq.com/trace/docs/#get-started), [Ruby](http://www.rubydoc.info/gems/ddtrace/).
+APM automatically assigns names to your services; however you can also name them explicitly. See instructions for: [Go][1], [Java][2], [Python][3], [Ruby][4].
 
 Service names:
 
 * **Must be lowercase, alphanumeric characters**.
 * **Cannot have more than 50 characters**.
 * **Cannot contain spaces** (spaces are replaced with underscores).
-* must adhere to [metric naming rules](/developers/metrics/).
+* must adhere to [metric naming rules][5].
 
 **Note**: Service must have a type attached, APM automatically assigns services one of four types: web, database, cache, custom.
 
-You can also [alert](/monitors/monitor_types/apm/) on any service level metric. Read more about monitoring services in APM on the [service list](/tracing/visualization/services_list/) and [service dashboard](/tracing/visualization/service) pages.
+You can also [alert][6] on any service level metric. Read more about monitoring services in APM on the [service list][7] and [service dashboard][8] pages.
 
 ## Resources
 
@@ -56,16 +56,16 @@ You can also [alert](/monitors/monitor_types/apm/) on any service level metric. 
 * **For a web application**: some examples might be a canonical URL, such as `/user/home` or a handler function like `web.user.home` (often referred to as “routes” in MVC frameworks).
 * **For a SQL database**: a resource is be the query itself, such as `SELECT * FROM users WHERE id = ?`.
 
-Resources should be grouped together under a canonical name, like `/user/home` rather than have `/user/home?id=100` and `/user/home?id=200` as separate resources. APM automatically assigns names to your resources; however you can also name them explicitly. See instructions for: [Go](/tracing/setup/go/), [Java](/tracing/setup/java/#configuration), [Python](/tracing/setup/python/), [Ruby](/tracing/setup/ruby/).
+Resources should be grouped together under a canonical name, like `/user/home` rather than have `/user/home?id=100` and `/user/home?id=200` as separate resources. APM automatically assigns names to your resources; however you can also name them explicitly. See instructions for: [Go][9], [Java][2], [Python][10], [Ruby][11].
 
-These resources can be found after clicking on a particular [service](/tracing/visualization/service).
+These resources can be found after clicking on a particular [service][8].
 
 Resource names: 
 
 * **Must be lowercase, alphanumeric characters**
 * **Cannot exceed 5000 bytes**
 
-[Alert](/tracing/faq/how-to-create-a-monitor-over-every-resource-apm) on any resource level metric. Read more about monitoring resources in APM on the [resource dashboard](/tracing/visualization/resource) page.
+[Alert][12] on any resource level metric. Read more about monitoring resources in APM on the [resource dashboard][13] page.
 
 ### Resource Cardinality
 
@@ -89,10 +89,25 @@ For example, a trace can be used to track the entire time spent processing a com
 
 **A span represents a logical unit of work in the system.**  
 
-Spans are associated with a [service](/tracing/visualization/service) and optionally a [resource](/tracing/visualization/resource). Each span consists of a start time, a duration, and optional tags. For example, a span can describe the time spent on a distributed call on a separate machine, or the time spent in a small component within a larger operation. Spans can be nested within each other, and in those instances will have a parent-child relationship.
+Spans are associated with a [service][8] and optionally a [resource][13]. Each span consists of a start time, a duration, and optional tags. For example, a span can describe the time spent on a distributed call on a separate machine, or the time spent in a small component within a larger operation. Spans can be nested within each other, and in those instances will have a parent-child relationship.
 
 {{< img src="getting_started/trace_span_image.png" alt="Trace span image" responsive="true" popup="true" style="width:80%;">}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: https://godoc.org/github.com/DataDog/dd-trace-go/tracer#service
+[2]: /tracing/setup/java/#configuration
+[3]: http://pypi.datadoghq.com/trace/docs/#get-started
+[4]: http://www.rubydoc.info/gems/ddtrace/
+[5]: /developers/metrics/
+[6]: /monitors/monitor_types/apm/
+[7]: /tracing/visualization/services_list/
+[8]: /tracing/visualization/service
+[9]: /tracing/setup/go/
+[10]: /tracing/setup/python/
+[11]: /tracing/setup/ruby/
+[12]: /tracing/faq/how-to-create-a-monitor-over-every-resource-apm
+[13]: /tracing/visualization/resource

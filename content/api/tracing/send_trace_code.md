@@ -15,3 +15,5 @@ external_redirect: /api/#send-traces
 ##### Example Response
 
 {{< code-snippets basename="result.send_trace" >}}
+
+

@@ -7,3 +7,5 @@ When the Cross-Zone Load Balancing option is enabled on an ELB, all the instance
 
 As this can be counter-intuitive, we’ve added new metrics, aws.elb.healthy_host_count_deduped and aws.elb.un_healthy_host_count_deduped, that displays the count of healthy and unhealthy instances per AZ, regardless of if this Cross-Zone Load Balancing option is enabled or not. These metrics should have the value you would expect.
 
+
+

@@ -22,3 +22,4 @@ Ne peut être utilisé qu'avec des clés d'application disponibles pour les admi
     *  **st** (utilisateur standard), 
     *  **adm** (admin user),
     *  **ro** (read-only user).  
+

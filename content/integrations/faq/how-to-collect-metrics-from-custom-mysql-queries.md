@@ -3,7 +3,7 @@ title: How to collect metrics from custom MySQL queries
 kind: faq
 ---
 
-You can configure your MySQL integration to collect metrics from custom queries of your MySQL database by following the configuration syntax [in these lines](https://github.com/DataDog/dd-agent/blob/5.10.x/conf.d/mysql.yaml.example#L50-L66) of our `mysql.yaml.example` file. While you do this, there are a few things you want to keep in mind...
+You can configure your MySQL integration to collect metrics from custom queries of your MySQL database by following the configuration syntax [in these lines][1] of our `mysql.yaml.example` file. While you do this, there are a few things you want to keep in mind...
 
 
 <div class="alert alert-warning">
@@ -30,11 +30,11 @@ The names applied to your custom query metrics are taken exactly as you provide 
 
 ## Frequency of queries
 
-You custom query metric is collected by your MySQL check at the default agent check schedule, every 15-20 seconds. If you would like to query these metrics less frequently, you could either reduce the frequency of the entire MySQL check (which would affect the frequency of your general mysql.* metrics), or you may prefer to run a custom scheduled/CRON script to submit the results of MySQL queries via the [DogStatsD](/developers/dogstatsd) or [API](/api).
+You custom query metric is collected by your MySQL check at the default agent check schedule, every 15-20 seconds. If you would like to query these metrics less frequently, you could either reduce the frequency of the entire MySQL check (which would affect the frequency of your general mysql.* metrics), or you may prefer to run a custom scheduled/CRON script to submit the results of MySQL queries via the [DogStatsD][2] or [API][3].
 
 ## Maximum number of custom query metrics
 
-The agent caps off the number of custom queries it collects metrics from at 20, so as to ensure that running custom MySQL queries does not significantly delay its other scheduled checks. If you need to collect metrics from a great number of custom MySQL queries, you may prefer to run a custom scheduled/CRON script to submit the results of MySQL queries via the[DogStatsD](/developers/dogstatsd) or [API](/api).
+The agent caps off the number of custom queries it collects metrics from at 20, so as to ensure that running custom MySQL queries does not significantly delay its other scheduled checks. If you need to collect metrics from a great number of custom MySQL queries, you may prefer to run a custom scheduled/CRON script to submit the results of MySQL queries via the[DogStatsD][2] or [API][3].
 
 ## Example
 
@@ -62,3 +62,7 @@ Then your agent's MySQL check would run that query to collect a metric called "m
 
 
 {{< img src="integrations/faq/mysql_metric_query.png" alt="mysql_metric_query" responsive="true" popup="true">}}
+
+[1]: https://github.com/DataDog/dd-agent/blob/5.10.x/conf.d/mysql.yaml.example#L50-L66
+[2]: /developers/dogstatsd
+[3]: /api

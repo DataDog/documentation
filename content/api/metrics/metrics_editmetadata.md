@@ -7,12 +7,12 @@ external_redirect: /api/#edit-metric-metadata
 ## Edit metric metadata
 
 The metrics metadata endpoint allows you to edit fields of a metric's metadata.
-[Find more about supported types](/developers/metrics)
+[Find more about supported types][1]
 
 ##### ARGUMENTS
 
 * **`type`** [*required*]:  
-    [Metric type](/developers/metrics) such as **gauge** or **rate**
+    [Metric type][1] such as **gauge** or **rate**
 * **`description`** [*optional*, *default*=**None**]:  
     String description of the metric" default
 * **`short_name`** [*required*]:  
@@ -23,3 +23,5 @@ The metrics metadata endpoint allows you to edit fields of a metric's metadata.
     Per unit of the metric such as **second** in **bytes per second**
 * **`statsd_interval`** [*optional*, *default*=**None**]:  
     If applicable, statds flush interval in seconds for the metric
+
+[1]: /developers/metrics

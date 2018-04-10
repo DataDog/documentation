@@ -12,3 +12,4 @@ external_redirect: /api/#pagerduty
 {{< code-snippets basename="api-integrations-pagerduty" >}}
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-integrations-pagerduty" >}}
+

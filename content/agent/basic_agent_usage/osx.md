@@ -21,7 +21,7 @@ further_reading:
 
 This page outlines the basic functionality of the Datadog Agent.
 If you haven't installed the Agent yet, instructions can be found
-[in the Datadog agent integration page](https://app.datadoghq.com/account/settings#agent/mac).  
+[in the Datadog agent integration page][1].  
 
 By default, your Agent is installed in its own sandbox located at `/opt/datadog-agent`. You’re free to move this folder wherever you like.
 However, we assume that the Agent is installed in its default location, so be sure to modify the instructions accordingly if you decide to move it to another location.
@@ -52,7 +52,7 @@ The configuration files and folders for the Agent are located at:
 |:-----|:----|
 |`~/.datadog-agent/datadog.conf`| `~/.datadog-agent/datadog.yaml` |
 
-Configuration files for [integrations](/integrations):
+Configuration files for [integrations][2]:
 
 | Agent v5                                  |  Agent v6                          |
 |:-----|:----|
@@ -72,7 +72,7 @@ The Agent logs are located in the `/var/log/datadog/` directory:
     * `dogstatsd.log`
     * `forwarder.log`
 
-If you're still having trouble, [our support team](/help) will be glad to provide further assistance.
+If you're still having trouble, [our support team][3] will be glad to provide further assistance.
 
 
 ## Switch between Agent v5 and v6
@@ -82,7 +82,7 @@ You can either download the DMG package and install it manually, or use the one-
 
 ### Manual installation
 
-1. Download the DMG package of the latest Agent version, use the latest macOS release listed on the [release page](https://github.com/DataDog/datadog-agent/releases) of the repository
+1. Download the DMG package of the latest Agent version, use the latest macOS release listed on the [release page][4] of the repository
 2. Install the DMG package
 3. Add your api key to `/opt/datadog-agent/etc/datadog.yaml`
 
@@ -111,7 +111,7 @@ api key:
 1. Stop the Agent with the systray app, if it's running
 2. Exit the systray app
 3. Uninstall the Datadog Agent application
-4. [Install the Agent 5 DMG package using your preferred installation method](https://app.datadoghq.com/account/settings#agent/mac)
+4. [Install the Agent 5 DMG package using your preferred installation method][1]
 
 ## Uninstall the agent
 
@@ -134,3 +134,8 @@ $ sudo rm /Library/LaunchDaemons/com.datadoghq.agent.plist
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/account/settings#agent/mac
+[2]: /integrations
+[3]: /help
+[4]: https://github.com/DataDog/datadog-agent/releases

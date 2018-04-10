@@ -12,3 +12,4 @@ Révoque un Screenboard qui est actuellement partagé.
 ##### ARGUMENTS
 
 Cet endpoint ne prend aucun argument JSON.
+

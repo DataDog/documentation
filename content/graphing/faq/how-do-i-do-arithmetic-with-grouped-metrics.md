@@ -9,3 +9,4 @@ grouped `by {host}`, write a graph query that looks like:
 ```
 metric.foo.bar{env:staging} by {host} + metric.foo.baz{env:staging} by {host}
 ```
+

@@ -13,7 +13,7 @@ further_reading:
   text: Learn how to explore your logs
 ---
 
-There are a number of common issues that can get in the way when [sending new logs to Datadog](/logs/) via the log collector in the dd-agent. If you experience issues sending new logs to Datadog, this list helps you troubleshoot. If you continue to have trouble, email [us](/help) for further assistance.
+There are a number of common issues that can get in the way when [sending new logs to Datadog][1] via the log collector in the dd-agent. If you experience issues sending new logs to Datadog, this list helps you troubleshoot. If you continue to have trouble, email [us][2] for further assistance.
 
 ## The agent needs to be restarted
 
@@ -56,11 +56,11 @@ These are a few of the common configuration issues that are work triple-checking
 
 3. By default the agent do not collect any logs, make sure there is at least one .yaml file in the Agent's `conf.d/` directory that includes a logs section and the appropriate values.
 
-4. You may have some .yaml parsing errors in your configuration files. Yaml is notoriously finicky, so when in doubt, a good [yaml validator](https://codebeautify.org/yaml-validator) is worth referencing.
+4. You may have some .yaml parsing errors in your configuration files. Yaml is notoriously finicky, so when in doubt, a good [yaml validator][3] is worth referencing.
 
 5. Check if you have `logs_enabled: true` in your `datadog.yaml`
 
-6. If you have a `.yaml` parsing errors with your configuration file, use [yaml validator](https://codebeautify.org/yaml-validator) to spot your issue.
+6. If you have a `.yaml` parsing errors with your configuration file, use [yaml validator][3] to spot your issue.
 
 ### Check for errors in the logs
 
@@ -82,3 +82,8 @@ If the dd-agent user does not have read access to the files you configure it to 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: /logs/
+[2]: /help
+[3]: https://codebeautify.org/yaml-validator

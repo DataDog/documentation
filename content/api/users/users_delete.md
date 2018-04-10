@@ -11,3 +11,4 @@ Can only be used with application keys belonging to administrators.
 ##### ARGUMENTS
 * **`id`** [*required*]:  
     The handle of the user.
+

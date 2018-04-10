@@ -10,9 +10,9 @@ further_reading:
   text: Configure your monitor notifications
 ---
 
-In some cases, you would like to know when one of your tag disappears from some of your systems. It is possible to setup a [monitor](/monitors/) for such an alert scheme within Datadog:
+In some cases, you would like to know when one of your tag disappears from some of your systems. It is possible to setup a [monitor][1] for such an alert scheme within Datadog:
 
-* First, setup a classic [metric monitor](/monitors/monitor_types/metric), and specify the metric and tag that you want to be alerted on when it is missing
+* First, setup a classic [metric monitor][2], and specify the metric and tag that you want to be alerted on when it is missing
 * Then, select some simple alert condition which should never be triggered, such as an alert over a very large value (e.g. `a > 1000000`) or under an impossible negative value (e.g. `a < -1` for a positive metric such as `system.cpu.user`)
 * Finally, activate the _Notify if data is missing_ option, as you can see on this example:
 
@@ -21,3 +21,6 @@ In some cases, you would like to know when one of your tag disappears from some 
 You should then be notified when the tag stops to be sent along with the chosen metric!
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /monitors/
+[2]: /monitors/monitor_types/metric

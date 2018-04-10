@@ -11,3 +11,4 @@ kind: faq
 ```
 
 Check that the `url` in `elastic.yaml` is correct.
+

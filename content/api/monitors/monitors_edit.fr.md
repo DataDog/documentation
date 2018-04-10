@@ -17,3 +17,4 @@ external_redirect: /api/#edit-a-monitor
     Reportez-vous à la documentation de création de monitor pour plus de détails sur les options disponibles.
 * **`tags`** [*optionnel*, *défaut*=**None**]:  
     Une liste de tags à associer à votre monitor. Cela peut vous aider à catégoriser et filtrer les monitors
+

@@ -18,7 +18,7 @@ further_reading:
 
 Custom monitors encompass any service checks that are not reported by one of the out-of-the-box integrations included with the Agent.
 
-Refer to the [Guide to Agent Checks](/agent/agent_checks/) for detailed information on writing your own checks that send metrics, events, or service checks.
+Refer to the [Guide to Agent Checks][1] for detailed information on writing your own checks that send metrics, events, or service checks.
 
 ## Configuration
 
@@ -34,7 +34,11 @@ Refer to the [Guide to Agent Checks](/agent/agent_checks/) for detailed informat
   You can optionally **notify on no data** after a configurable timeframe. You must choose at least 2 minutes for your timeframe.
 
 4. Configure your **notification options**:  
-  Refer to the [Notifications](/monitors/notifications) dedicated documentation page for a detailed walkthrough of the common notification options.
+  Refer to the [Notifications][2] dedicated documentation page for a detailed walkthrough of the common notification options.
 
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: /agent/agent_checks/
+[2]: /monitors/notifications

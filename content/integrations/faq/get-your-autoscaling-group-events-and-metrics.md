@@ -21,4 +21,6 @@ To get your Autoscaling events and metrics, you have to follow the next steps:
 
 4. Click on update the tile, you should see the Autoscaling Group tile showing up in your integration list.
 
-5. [Follow those 4 steps to get your ASG metrics](http://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-monitoring.html#enable-detailed-instance-metrics).
+5. [Follow those 4 steps to get your ASG metrics][1].
+
+[1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-monitoring.html#enable-detailed-instance-metrics

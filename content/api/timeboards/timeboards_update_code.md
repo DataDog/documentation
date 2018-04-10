@@ -11,3 +11,4 @@ external_redirect: /api/#update-a-timeboard
 {{< code-snippets basename="api-dashboard-update" >}}
 ##### Example Response
 {{< code-snippets basename="result.api-dashboard-update" >}}
+

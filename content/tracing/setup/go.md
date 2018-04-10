@@ -18,7 +18,7 @@ further_reading:
 
 ## Installation
 
-To begin tracing applications written in Go, first [install and configure the Datadog Agent](/tracing/setup) (see additional documentation for [tracing Docker applications](/tracing/setup/docker/)).
+To begin tracing applications written in Go, first [install and configure the Datadog Agent][1] (see additional documentation for [tracing Docker applications](/tracing/setup/docker/)).
 
 Next, install the Go Tracer from the Github repository:
 
@@ -44,7 +44,7 @@ func main {
 }
 ```
 
-For another example, see the [`example_test.go`](https://github.com/DataDog/dd-trace-go/blob/master/tracer/example_test.go) file in the Go Tracer package
+For another example, see the [`example_test.go`][2] file in the Go Tracer package
 
 ## Compatibility
 
@@ -87,7 +87,7 @@ ___
 
 ### OpenTracing API
 
-Datadog APM client that implements an [OpenTracing](http://opentracing.io) Tracer.
+Datadog APM client that implements an [OpenTracing][3] Tracer.
 
 **Initialization**
 
@@ -124,8 +124,15 @@ Function `NewTracer(config)` returns an `io.Closer` instance that can be used to
 
 **Usage**
 
-See [Opentracing documentation](https://github.com/opentracing/opentracing-go) for some usage patterns. Legacy documentation is available in [GoDoc format](https://godoc.org/github.com/DataDog/dd-trace-go/tracer).
+See [Opentracing documentation][4] for some usage patterns. Legacy documentation is available in [GoDoc format][5].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: /tracing/setup
+[2]: https://github.com/DataDog/dd-trace-go/blob/master/tracer/example_test.go
+[3]: http://opentracing.io
+[4]: https://github.com/opentracing/opentracing-go
+[5]: https://godoc.org/github.com/DataDog/dd-trace-go/tracer

@@ -19,3 +19,5 @@ This end point allows you to query for metrics from any time period.
     Seconds since the unix epoch
 * **`query`** [*required*]:  
     The query string
+
+

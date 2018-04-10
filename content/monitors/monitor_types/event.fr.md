@@ -60,3 +60,4 @@ Incluez des informations spécifiques à l'événement dans les notifications de
 
 ## En apprendre plus
 {{< partial name="whats-next/whats-next.html" >}}
+

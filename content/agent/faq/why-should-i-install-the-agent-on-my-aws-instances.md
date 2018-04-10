@@ -16,4 +16,6 @@ If you use AWS CloudWatch or another cloud-based metrics provider, you may alrea
 
 The Datadog Agent is lightweight and fully open source, so you can review the code and even contribute by making a pull request.
 
-Also reference this article if you suspect you're seeing [latency reporting AWS metrics](/integrations/faq/are-my-aws-cloudwatch-metrics-delayed).
+Also reference this article if you suspect you're seeing [latency reporting AWS metrics][1].
+
+[1]: /integrations/faq/are-my-aws-cloudwatch-metrics-delayed

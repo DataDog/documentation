@@ -11,3 +11,4 @@ external_redirect: /api/#view-metric-metadata
 {{< code-snippets basename="api-metric-metadata-get" >}}
 ##### Example Response
 {{< code-snippets basename="result.api-metric-metadata-get" >}}
+

@@ -54,7 +54,7 @@ Win32_PerfFormattedData_PerfProc_Process
 [...]
 ```
 
-To browse the data exposed by a class, we can use a syntax similar to SQL called [WQL](https://msdn.microsoft.com/en-us/library/aa392902).
+To browse the data exposed by a class, we can use a syntax similar to SQL called [WQL][1].
 
 Many performance related metrics are reported by the PerfMon tool, and are called `Win32_PerfFormattedData_`. In this example we want to look at processes information so we query the `Win32_PerfFormattedData_PerfProc_Process` class:
 
@@ -238,3 +238,5 @@ instances:
     tag_queries:
       - [IDProcess, Win32_Process, Handle, CreationDate]
 ```
+
+[1]: https://msdn.microsoft.com/en-us/library/aa392902

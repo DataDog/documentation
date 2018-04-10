@@ -7,7 +7,7 @@ further_reading:
   text: Learn more about the Datadog Agent
 ---
 
-One of the most common errors we see with an [Agent installation on windows](/agent/basic_agent_usage/windows) is a 1721 error that looks something like this:
+One of the most common errors we see with an [Agent installation on windows][1] is a 1721 error that looks something like this:
 
 ```
 Product: Datadog Agent - Error 1721. There is a problem with this Windows Installer package. The program required for this install to complete could not be run. Contact your support personnel or package vendor.
@@ -28,3 +28,5 @@ We've found that this is generally due to one of two reasons:
 Hopefully if you encounter a 1721 Error, the above steps gets you running in no time!
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /agent/basic_agent_usage/windows

@@ -11,8 +11,8 @@ further_reading:
 
 There are 2 main scenarios for which you'll likely need to **require a full window of data** for evaluation:
 
-* Multi-alert [monitors](/monitors) triggering a separate alert per {group}, where new groups can appear.
-* [Monitors](/monitors) using the alerting method **In total**.
+* Multi-alert [monitors][1] triggering a separate alert per {group}, where new groups can appear.
+* [Monitors][1] using the alerting method **In total**.
 
 **Example 1**: a multi-alert CPU monitor triggering one separate alert per host, over the average of the past 10 min of data:
 
@@ -40,3 +40,5 @@ There are 2 main scenarios for which you'll likely need to **require a full wind
 For other scenarios, this **full window of data** doesn't have much influence on your monitor.
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /monitors

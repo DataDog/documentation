@@ -6,7 +6,7 @@ kind: faq
 ## Characteristics of Datadog histograms?
 
 At the moment, Datadog cannot compute percentiles on the server side.
-Thus, percentiles & histogram statistics are computed by each datadog-agent every 10 seconds, [for configuration see here](/graphing/faq/how-to-graph-percentiles-in-datadog).
+Thus, percentiles & histogram statistics are computed by each datadog-agent every 10 seconds, [for configuration see here][1].
 
 So you cannot get the 95thpercentile of metric values over the past X hours, you gets the metric of the 95th percentile:
 
@@ -49,3 +49,6 @@ response_time.avg{source1} is 10, for the other sources it is 1.
 Datadog returns (10 + 1 + 1 + 1)/4 = 3.25 which is different from the global average = 5.5
 
 Whether the histogram value of source 1 was computed on 100 statsd values or 1, it has the same weight in the calculation, hence the difference with a centralized aggregation system.
+
+
+[1]: /graphing/faq/how-to-graph-percentiles-in-datadog
