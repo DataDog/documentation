@@ -211,7 +211,7 @@ Switch between the Log List and the Log Graph mode by clicking on this button:
 
 To start using it:
 
-1. Choose a [Measure](#measure) or [Facet](#facet) to graph. Choosing a Measure let you then choose the aggregation function whereas selecting a Facet display the unique count.
+1. Choose a [Measure](#measure) or [Facet](#facet) to graph. Choosing a Measure lets you choose the aggregation function whereas selecting a Facet displays the unique count.
     {{< img src="logs/explore/graph/choose_measure_facet.png" alt="choose measure facet" responsive="true" popup="true" style="width:50%;">}}
 2. Select the aggregation function for the Measure you want to graph
     {{< img src="logs/explore/graph/agg_function_log_graph.png" alt="aggregation function for log graph" responsive="true" popup="true" style="width:50%;">}}
