@@ -224,7 +224,6 @@ Pour commencer à l'utiliser:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /logs/processing/#attribute-remapper
 [2]: /logs/#log-graph
 [3]: http://lucene.apache.org/core/2_9_4/queryparsersyntax.html

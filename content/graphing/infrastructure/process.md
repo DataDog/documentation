@@ -144,7 +144,6 @@ While actively working with the Live Processes, metrics are collected at 2s reso
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: https://app.datadoghq.com/account/settings#agent
 [4]: /integrations/kubernetes/
 [5]: https://github.com/DataDog/docker-dd-agent

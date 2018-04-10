@@ -47,7 +47,6 @@ If you have installed the [GitHub integration][10] to create events in Datadog, 
 
 You can set your timezone, desktop notification, and email notification preferences from the [Preferences tab within the account settings page][11].
 
-
 [1]: https://app.datadoghq.com/account/profile
 [2]: https://gravatar.com/
 [3]: https://support.google.com/accounts/answer/19870?hl=en

@@ -113,7 +113,6 @@ Pour encore plus d'exemples des fichiers de configuration ou des capacités d'ag
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /logs/#getting-started-with-the-agent
 [2]: /logs/#custom-log-collection
 [3]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent

@@ -265,6 +265,3 @@ If you suspect there is some error occurring beyond the scope of your custom log
 [10]: /help
 [11]: /agent/#send-a-flare
 
-
-
-

@@ -93,7 +93,6 @@ For more information about the Datadog Agent, see the [dedicated doc page][18] o
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /tracing/faq/agent-5-tracing-setup
 [2]: https://github.com/DataDog/datadog-trace-agent/blob/master/config/agent.go#L170
 [3]: https://app.datadoghq.com/account/settings#agent

@@ -11,4 +11,3 @@ An error indicates that the service did not successfully handle your request. In
 
 If the service is able to handle your request, but some issues are present (e.g. using a deprecated API or API version), the HTTP status code indicates success and the response body  contains the expected result with the addition of a warnings array containing detailed warning messages.
 
-

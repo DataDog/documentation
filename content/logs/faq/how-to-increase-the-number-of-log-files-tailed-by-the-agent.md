@@ -24,5 +24,3 @@ logs_config:
 
 **Note**: Increasing the tailed logs files limit might increase the ressource consumption of the Agent.
 
-
-

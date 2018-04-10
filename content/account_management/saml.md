@@ -106,7 +106,6 @@ After enabling the IdP Initiated Login feature (and waiting for caches to clear)
 
 If you do not use the updated SP Metadata, Datadog will not be able to associate the assertion with your organization and will display an error page with a message that the SAML response is missing the "InResponseTo" attribute.
 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

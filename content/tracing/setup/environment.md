@@ -88,11 +88,9 @@ There are several ways to specify an environment when reporting data:
     tracer.set_tags('env', 'prod')
     ```
 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /agent/tagging
 [2]: /agent/faq/where-is-the-configuration-file-for-the-agent

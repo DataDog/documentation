@@ -3,7 +3,6 @@ title: AWS ECS with Agent v5
 kind: faq
 ---
 
-
 <div class="alert alert-warning">
 This documentation is to setup AWS EC2 container Service with <strong>Datadog Agent 5</strong>
 </div>
@@ -64,7 +63,6 @@ aws ecs register-task-definition --cli-input-json file://path/to/dd-agent-ecs.js
   * `ecs:DescribeContainerInstances`: Describe instances to add metrics on resources and tasks running, adds cluster tag to ec2 instances.
 
   For more information on ECS policies, [review the documentation on the AWS website][7].
-
 
 2. Using the Identity and Access Management (IAM) console, create a new role called ```dd-agent-ecs```.
 3. Select **Amazon EC2 Role for EC2 Container Service**. On the next screen do not check any checkboxes and click **Next Step**.
@@ -133,7 +131,6 @@ This user script above will:
 ##### Dynamic detection and monitoring of running services
 
 Datadog's <a href="https://docs.datadoghq.com/agent/autodiscovery/">Autodiscovery</a> can be used in conjunction with ECS and Docker to automatically discovery and monitor running tasks in your environment.
-
 
 [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_GetStarted.html
 [2]: https://aws.amazon.com/cli/

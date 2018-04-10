@@ -7,9 +7,6 @@ title: Using Markdown in Datadog events
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-
-
-
 ## Overview
 Datadog event text supports markdown. This guide help you better format Datadog events by using Markdown.
 

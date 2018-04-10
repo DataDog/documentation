@@ -18,7 +18,6 @@ Pour obtenir vos événements et métriques d'Autoscaling, suivez les étapes su
 3. Cochez la case Autoscaling dans l'intégration AWS
     {{< img src="integrations/faq/autoscalling_checkbox.png" alt="autoscalling_checkbox" responsive="true" popup="true">}}
 
-
 4. Cliquez sur "update the tile", vous devriez voir la vignette de l'intégration Autoscaling Group apparaître dans votre liste d'intégrations.
 
 5. [Suivez ces 4 étapes pour obtenir vos métriques ASG][1].

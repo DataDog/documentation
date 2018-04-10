@@ -35,7 +35,6 @@ Si vous ne l'avez pas déjà fait, configurez [Intégration Google Cloud Platfor
 ### Métriques
 {{< get-metrics-from-git "google_container_engine" >}}
 
-
 ### Evénements
 L'intégration Google Container Engine n'inclut aucun événement pour le moment.
 
@@ -47,7 +46,6 @@ Besoin d'aide? Contactez  [l'équipe support de Datadog][2].
 
 ## En apprendre plus
 Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][3]
-
 
 [1]: https://docs.datadoghq.com/integrations/google_cloud_platform/
 [2]: http://docs.datadoghq.com/help/

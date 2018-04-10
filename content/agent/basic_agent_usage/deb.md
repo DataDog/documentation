@@ -146,7 +146,6 @@ To install on a clean box (or have an existing Agent 5 install from which you do
     sudo systemctl restart datadog-agent.service
     ```
 
-
 ### Downgrade to Agent v5
 
 1. Set up apt so it can download through https

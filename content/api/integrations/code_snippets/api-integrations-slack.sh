@@ -54,5 +54,4 @@ curl -v -X PUT -H "Content-type: application/json" \
 
 curl -v "https://api.datadoghq.com/api/v1/integration/slack?api_key=${api_key}&application_key=${app_key}"
 
-
 curl -v -X DELETE "https://api.datadoghq.com/api/v1/integration/slack?api_key=${api_key}&application_key=${app_key}"

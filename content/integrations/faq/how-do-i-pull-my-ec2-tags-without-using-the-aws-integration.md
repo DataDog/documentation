@@ -15,6 +15,5 @@ Note:  This option sets no tags like availability_zone, region, or instance_type
 
 {{< img src="integrations/faq/ec2_tags.png" alt="ec2_tags" responsive="true" popup="true">}}
 
-
 [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html
 [2]: /agent/faq/agent-commands/#start-stop-restart-the-agent

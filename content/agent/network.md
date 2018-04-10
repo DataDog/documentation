@@ -105,7 +105,6 @@ For a detailed configuration guide on proxy setup, head over to [Proxy Configura
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /tracing
 [2]: /graphing/infrastructure/livecontainers
 [3]: /logs

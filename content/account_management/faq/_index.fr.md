@@ -30,7 +30,6 @@ private: true
 * [Puis-je utiliser un proxy pour connecter mes serveurs à Datadog?][16]
 * [Comment Datadog récupère mes données? Mes données et informations d'identification sont-elles sécurisées?][17]
 
-
 [1]: /account_management/faq/are-my-data-and-credentials-safe
 [2]: /account_management/faq/help-my-password-email-never-came-through
 [3]: /account_management/faq/is-it-possible-to-have-my-login-belong-to-multiple-datadog-organizations

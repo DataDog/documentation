@@ -3,7 +3,6 @@ title: Est-il possible que mon identifiant appartienne à plusieurs organisation
 kind: faq
 ---
 
-
 Oui! Il y a la [fonctionnalité multi-comptes][1] pour aider à créer de nouvelles organisations qui n'est actuellement pas activée par défaut donc la première chose que vous aurez à faire est d'envoyer un email à support@datadoghq.com en leur demandant d'activer la création de nouveaux comptes pour votre organisation
 
 Une fois cette fonctionnalité activée, vous pourrez accéder à [cette page de création d'organisation][2] pour définir de nouvelles organisations:

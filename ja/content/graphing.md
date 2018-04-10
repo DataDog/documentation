@@ -14,7 +14,6 @@ There are two ways to interact with the Graphing Editor: using the GUI (the defa
 <!--
 ## Find the Graph Editor
 
-
 On each graph you will find a pencil icon that opens the graph editor.
 
 {{< img src="graphing/references-graphing-overview.png" alt="Graphing Overview" >}}
@@ -259,7 +258,6 @@ Depending on your analysis needs, you may choose to apply other mathematical fun
 ### より高度な演算関数の適用
 
 分析のニーズによっては、他の数値演算関数が必要なこともあるでしょう。変化量や微分、平滑化や回帰計算などがあります。利用可能な関数は、<a href="#collapseGraphicFunctionTable" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseGraphicFunctionTable">ここをクリック</a>..
-
 
 <div class="collapse" id="collapseGraphicFunctionTable" markdown="1">
 <!-- The graphing functions section is a partial -->

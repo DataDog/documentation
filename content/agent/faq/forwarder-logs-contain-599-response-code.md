@@ -90,6 +90,5 @@ If you've done everything above and continue to have issues, send support@datado
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example#L93
 [2]: /agent/#send-a-flare

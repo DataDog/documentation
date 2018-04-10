@@ -145,7 +145,6 @@ Pour installer (ou avoir une installation d'Agent v5 à partir de laquelle vous 
     sudo systemctl restart datadog-agent.service
     ```
 
-
 ### Revenir à l'Agent v5
 
 1. Configurez apt pour pouvoir le télécharger via https

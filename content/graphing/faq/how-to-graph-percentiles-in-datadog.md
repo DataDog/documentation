@@ -42,7 +42,6 @@ Histograms are computed every 10 seconds on a host per host basis by the datadog
 
 [Read more about the Datadog histograms characteristics][4]
 
-
 [1]: /developers/dogstatsd
 [2]: https://github.com/DataDog/dd-agent/blob/master/aggregator.py
 [3]: /developers/libraries/

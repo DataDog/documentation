@@ -158,7 +158,6 @@ Le date matcher transforme votre timestamp au format EPOCH.
 
 **Note**: Le parsing d'une date **ne définit pas** sa valeur en tant que date officielle du log. Pour cela, utilisez le [Log Date Remapper][2] sur le log dans le processor suivant.
 
-
 ### Modèle conditionnel
 
 Vous pouvez avoir des logs avec deux formats possibles qui diffèrent par un seul attribut. Ces cas peuvent être traités avec une seule règle, en utilisant une conditionnelle avec `|`.
@@ -222,7 +221,6 @@ MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-Z0-9]*"):user.id} .*
 ## En apprendre plus
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /logs/processing/#url-parser
 [2]: /logs/processing/#log-date-remapper

@@ -19,7 +19,6 @@ Here is an example of nginx.net.connections with the day_before value shown as a
 
 For now, using functions like day_before is out of scope for the graphical editor so you have to use the JSON editor. Here is the JSON for this graph:
 
-
 {{< highlight json >}}
 {
   "requests": [

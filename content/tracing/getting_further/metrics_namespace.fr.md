@@ -31,4 +31,3 @@ Donc pour pylons cela serait: `trace.pylons.request.hits{service:web_server}`.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-

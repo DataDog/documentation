@@ -17,7 +17,6 @@ short_description: Consultez les temps de disponibilité, les temps de réponse 
 version: '1.0'
 ---
 
-
 ## Aperçu
 
 Suivre les métriques de performance centrées sur l'utilisateur Pingdom dans Datadog, pour la corrélation avec d'autres événements et métriques pertinentes.
@@ -42,13 +41,11 @@ Les métriques peuvent uniquement être importées pour les clients Pingdom de n
 ### Métriques
 {{< get-metrics-from-git "pingdom" >}}
 
-
 ### Evénements
 L'intégration Pingdom n'inclut aucun événement pour le moment.
 
 ### Checks de Service
 {{< get-service-checks-from-git "pingdom" >}}
-
 
 ## Troubleshooting
 ### Pourquoi ai-je une erreur lors de la mise à jour de l'utilisateur / du mot de passe?
@@ -60,8 +57,6 @@ Ajoutez l'adresse e-mail de votre propriétaire de compte pingdom dans le champ 
 
 ## En apprendre plus
 Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][2]
-
-
 
 [1]: https://app.datadoghq.com/monitors#create/integration
 [2]: https://www.datadoghq.com/blog/

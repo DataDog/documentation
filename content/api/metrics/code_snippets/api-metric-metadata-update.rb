@@ -13,6 +13,5 @@ updates = {
     "per_unit" => "second"
 }
 
-
 # Submit updates for metric
 result = dog.update_metadata('system.net.bytes_sent', updates)

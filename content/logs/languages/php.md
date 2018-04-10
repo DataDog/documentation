@@ -48,7 +48,6 @@ Alternatively, install it manually:
     use Monolog\Formatter\JsonFormatter;    
     ```
 
-
 ### Setup - Log into a file with Monolog
 
 The following configuration enables the JSON formatting and writes the logs and events into the `application-json.log` file. Edit your code, right after the initialization of the Monolog instance and add a new handler:
@@ -555,8 +554,6 @@ If you want to develop yours, [refer the Zend documentation][13].
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-
 
 [1]: /logs
 [2]: /logs/languages/php/#php-monolog

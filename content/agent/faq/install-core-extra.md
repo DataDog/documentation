@@ -43,7 +43,6 @@ To either install an out-of-band update to a core integration or to install one 
 1.  Copy the Python script for your chosen integration to the `checks.d` directory where you installed the Agent.
 2.  Copy the corresponding yaml configuration file to the `conf.d` directory where you installed the Agent.
 
-
 [1]: https://github.com/DataDog/dd-agent
 [2]: https://github.com/DataDog/integrations-core
 [3]: https://github.com/DataDog/integrations-extras

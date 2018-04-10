@@ -16,7 +16,6 @@ further_reading:
   text: Collect your traces
 ---
 
-
 ## Commands
 
 Datadog Agent has some commands and only the _lifecycle commands_ (i.e. `start`/`stop`/`restart`/`status` on the Agent service) should be run with `sudo service`/`sudo initctl`/`sudo systemctl`, all other commands need to be run with the `datadog-agent` command.

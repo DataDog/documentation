@@ -112,7 +112,6 @@ kind: faq
 ## Network
 * [How to send TCP/UDP host metrics via the Datadog API ?][65]
 
-
 ## Postgres
 * [Postgres custom metric collection explained][66]
 
@@ -144,7 +143,6 @@ kind: faq
 * [Windows Status Based Check][75]
 * [How to monitor events from the Windows Event Logs][76]
 * [How to retrieve WMI metrics][77]
-
 
 [1]: /integrations/faq/what-standard-integrations-emit-custom-metrics
 [2]: /integrations/faq/using-events-for-service-checks-is-deprecated-in-favor-of-monitors

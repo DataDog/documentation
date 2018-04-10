@@ -18,5 +18,3 @@ azure provider register Microsoft.ResourceHealth
 
 Et c'est tout. La métrique azure.vm.status devrait commencer à reporter à Datadog en 5 à 10 minutes.
 
-
-

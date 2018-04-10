@@ -18,8 +18,6 @@ Caveat:
 
 The user that the Agent runs as may need sudo access for the shell command. Sudo access is not required when running the Agent as root (not recommended).
 
-
-
 [1]: /agent/agent_checks/#directory
 [2]: https://github.com/DataDog/dd-agent/blob/garner/shell-integration/conf.d/shell.yaml.example
 [3]: https://github.com/DataDog/dd-agent/blob/garner/shell-integration/checks.d/shell.py

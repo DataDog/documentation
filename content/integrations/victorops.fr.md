@@ -17,7 +17,6 @@ short_description: Utiliser VictorOps comme canal de notification pour les alert
 version: '1.0'
 ---
 
-
 ## Aperçu
 Envoyez les alertes Datadog à VictorOps et bénéficiez d'un contrôle précis du routage et des processus d'escalation.
 Obtenez plus rapidement l'information de l'apparition d'un problème et réduisez son temps de résolution.
@@ -62,7 +61,5 @@ Les caractères spéciaux ne sont pas autorisés dans les noms. Les lettres maju
 ### Choisissez un endpoint personnalisé
 
 Si ce champ est vide, l'endpoint par défaut sera 'https://alert.victorops.com/integrations/datadog/20140523/alert'
-
-
 
 [1]: http://docs.datadoghq.com/help/

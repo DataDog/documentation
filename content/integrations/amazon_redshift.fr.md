@@ -70,7 +70,6 @@ Allez désormais dans la section [Log de Datadog][9] pour commencer à explorer 
 ### Métriques
 {{< get-metrics-from-git "amazon_redshift" >}}
 
-
 Chacune des métriques récupérées à partir d'AWS se verra attribuer les mêmes tags qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le nom de l'host, les groupes de sécurité et plus encore.
 
 ### Evénements

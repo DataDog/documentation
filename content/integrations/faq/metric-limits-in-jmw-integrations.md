@@ -16,7 +16,6 @@ To list attributes that do match one of your instances configuration but that ar
 sudo /etc/init.d/datadog-agent jmx list_limited_attributes
 ```
 
-
 [1]: /integrations/cassandra
 [2]: /integrations/tomcat
 [3]: /integrations/kafka

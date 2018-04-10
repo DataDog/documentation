@@ -24,7 +24,6 @@ supported_os:
 version: 1.2.1
 ---
 
-
 {{< img src="integrations/cassandra/cassandra.png" alt="Cassandra default dashboard" responsive="true" popup="true">}}
 ## Aperçu
 
@@ -72,7 +71,6 @@ Le check Cassandra est compatible avec toutes les principales plateformes.
 ### Métriques
 {{< get-metrics-from-git "cassandra" >}}
 
-
 ### Evénements
 Le check Cassandra n'inclut aucun événement pour le moment.
 
@@ -89,8 +87,6 @@ Besoin d'aide? Contactez  [l'équipe support de Datadog][6].
 * [Comment monitorer les métriques de performance de Cassandra][7]
 * [Comment collecter les métriques de Cassandra][8]
 * [Monitorer Cassandra avec Datadog][9]
-
-
 
 ## Check de l'Agent: Cassandra Nodetool
 
@@ -154,7 +150,6 @@ Le check `cassandra_nodetool` est compatible avec toutes les principales platefo
 ### Métriques
 {{< get-metrics-from-git "cassandra_nodetool" >}}
 
-
 ### Evénements
 Le check Cassandra_nodetool n'inclut aucun événement pour le moment.
 
@@ -171,8 +166,6 @@ Besoin d'aide? Contactez  [l'équipe support de Datadog][6].
 * [Comment monitorer les métriques de performance de Cassandra][7]
 * [Comment collecter les métriques de Cassandra][8]
 * [Monitorer Cassandra avec Datadog][9]
-
-
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/integrations/java/

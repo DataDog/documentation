@@ -22,5 +22,4 @@ The Datadog Trusted Advisor Dashboard needs access to the full set of [AWS Trust
 
 {{< img src="graphing/faq/aws_support_plan.png" alt="aws support plan" responsive="true" popup="true">}}
 
-
 [1]: https://aws.amazon.com/premiumsupport/trustedadvisor/

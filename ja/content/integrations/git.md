@@ -10,7 +10,6 @@ doclevel: complete
 
 <!-- ## Overview
 
-
 Capture Git commits directly from your Git server to:
 
 - Keep track of code changes in real time.
@@ -18,7 +17,6 @@ Capture Git commits directly from your Git server to:
 - Discuss code changes with your team. -->
 
 ## 概要
-
 
 次の目的で、GitサーバーからGitのコミット情報をDatadogと連携します:
 

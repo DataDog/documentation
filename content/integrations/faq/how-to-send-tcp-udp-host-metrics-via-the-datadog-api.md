@@ -28,12 +28,10 @@ You retrieve from this:
 |Alloc|   TCP sockets allocated  |  ( All type for example, ESTABLISH, CLOSE_WAIT, TIME_WAIT, etc)|
 |mem| total memory for TCP socket | integer (KiloBytes)|
 
-
 * UDP: 
 
 ||||
 |:---|:---|:---|
 |inuse|   total established connections  | integer|
 |mem |total memory for UDP socket | integer (KB)|
-
 

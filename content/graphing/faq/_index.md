@@ -41,6 +41,3 @@ private: true
     {{< nextlink href="graphing/faq/is-it-possible-to-query-historical-data-after-a-host-has-been-destroyed" >}}Is it possible to query historical data after a host has been destroyed?{{< /nextlink >}}
 {{< /whatsnext >}}
 
-
-
-

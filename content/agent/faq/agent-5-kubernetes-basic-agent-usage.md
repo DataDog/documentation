@@ -126,7 +126,6 @@ If the Agent is deployed you will see output similar to the text below, where de
           - instance #0 [OK]
           - Collected 39 metrics, 0 events & 7 service checks
 
-
 ## Setup Kubernetes State
 ### Installation
 #### Container Installation
@@ -217,7 +216,6 @@ If the Agent is deployed you will see similar output to the text below, where de
           - instance #0 [OK]
           - Collected 39 metrics, 0 events & 7 service checks
 
-
 ## Setup Kubernetes DNS
 ### Installation
 
@@ -246,7 +244,6 @@ metadata:
 
  - Notice the "dns-pod" tag will keep track of the target DNS pod IP. The other tags will be related to the dd-agent that is polling the informations using the service discovery.
  - The service discovery annotations need to be applied to the pod. In case of a deployment, add the annotations to the metadata of the template's spec.
-
 
 ### Validation
 

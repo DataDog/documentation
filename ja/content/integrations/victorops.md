@@ -25,11 +25,9 @@ When a metric alert is triggered -->
 
 ## 概要
 
-
 VictorOpsと連携することで、Datadogで検知したアラートを、非常に高い制度での通知とエスカレーションを実現します。
 
 ## 設定
-
 
 1. VictorOpsのサイトでインテグレーションの設定ページを表示します。
 
@@ -44,7 +42,6 @@ VictorOpsと連携することで、Datadogで検知したアラートを、非�
 4. DatadogのVictorOpsインテグレーションのポップアップ画面で、先にコピーしたAPIキーを記述します。
 
 5. Datadogの各Monitorのアラートの通知欄に @victorops を追記して、メッセージを記述しておきます。
-
 
 ## VictorOps Routing Keysについて
 

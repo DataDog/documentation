@@ -1,7 +1,5 @@
 
 
-
-
 curl  -X POST -H "Content-type: application/json" \
 -d '{
       "title": "Did you hear the news today?",
@@ -11,6 +9,4 @@ curl  -X POST -H "Content-type: application/json" \
       "alert_type": "info"
 }' \
 'https://api.datadoghq.com/api/v1/events?api_key=<YOUR_API_KEY>'
-
-
 

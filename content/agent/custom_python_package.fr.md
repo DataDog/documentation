@@ -13,7 +13,6 @@ further_reading:
   text: Collectez vos traces
 ---
 
-
 ### Linux
 
 La version python intégrée à l'agent se trouve ici: `/opt/datadog-agent/embedded/bin/python`.

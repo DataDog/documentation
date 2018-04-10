@@ -98,7 +98,6 @@ While actively working with the Containers page, metrics are collected at 2s res
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [3]: https://app.datadoghq.com/containers
 [4]: /integrations/docker_daemon
 [5]: /integrations/kubernetes

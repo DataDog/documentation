@@ -70,7 +70,6 @@ Check the ACL status of a file with:
 getfacl /var/log/<application-directory>
 ```
 
-
 ## Setting permissions when ACLs are not present
 
 When ACLs are not present in a system, set your permissions based on group access.  
@@ -107,7 +106,6 @@ Each common off-the-shelf application will follow a similar nomenclature. The ad
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: https://help.ubuntu.com/community/FilePermissionsACLs
 [2]: https://www.tecmint.com/secure-files-using-acls-in-linux/

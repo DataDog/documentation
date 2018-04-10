@@ -129,6 +129,5 @@ tracer.configure(hostname='172.17.0.1', port=8126)
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: https://github.com/DataDog/datadog-trace-agent
 [2]: https://github.com/DataDog/docker-dd-agent

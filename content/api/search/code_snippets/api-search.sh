@@ -6,10 +6,3 @@ curl -G "https://api.datadoghq.com/api/v1/search" \
     -d "application_key=${app_key}" \
     -d "q=test"
 
-
-
-
-
-
-
-

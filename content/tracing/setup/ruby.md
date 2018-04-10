@@ -275,7 +275,6 @@ ___
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /tracing/setup
 [2]: /tracing/setup/docker/
 [3]: https://app.datadoghq.com/apm/services

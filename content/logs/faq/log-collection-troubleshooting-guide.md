@@ -78,11 +78,9 @@ If the dd-agent user does not have read access to the files you configure it to 
 
 **Note**: when you add the appropriate read permissions, make sure that these permissions are correctly set on your log rotation configuration. Otherwise, when the log rotates next, the dd-agent may lose its read permissions. 
 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /logs/
 [2]: /help

@@ -22,7 +22,6 @@ Si vous n'avez pas encore installé l'Agent, les instructions d'installation peu
 
 Le processus de mise à niveau à partir de la version précédente de l'agent consiste à réexécuter l'installation depuis le début.
 
-
 ## Commandes
 
 L'Agent Datadog possède quelques commandes. Seules les commandes _lifecycle_ (ie `start`/`stop`/`restart` /`status` sur le service Agent) doivent être exécutées avec `sudo service` /` sudo initctl` / `sudo systemctl`, toutes les autres commandes doivent être exécutées avec la commande `datadog-agent`.
@@ -69,7 +68,6 @@ Fichiers de configuration pour [les intégrations][2]:
 | Agent v5                                  |  Agent v6                          |
 |:-----|:----|
 |`/etc/dd-agent/conf.d/`|`/etc/datadog-agent/conf.d/`|
-
 
 ## Mettre à niveau vers l'agent v6
 

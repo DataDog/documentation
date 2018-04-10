@@ -24,8 +24,6 @@ supported_os:
 version: 1.1.0
 ---
 
-
-
 ## Aperçu
 
 Ce check monitor le nombre d'octets qu'un host a swap.
@@ -73,7 +71,6 @@ Le check system_swap est compatible avec toutes les principales plateformes.
 ### Métriques
 {{< get-metrics-from-git "system_swap" >}}
 
-
 ### Evénements
 Le check System Swap n'inclut aucun événement pour le moment.
 
@@ -85,8 +82,6 @@ Besoin d'aide? Contactez  [l'équipe support de Datadog][5].
 
 ## En apprendre plus
 Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][6]
-
-
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://github.com/DataDog/integrations-core/blob/master/system_swap/conf.yaml.example

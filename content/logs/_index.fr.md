@@ -133,7 +133,6 @@ logs:
       pattern: \w+@datadoghq.com
 ```
 
-
 ### Scruber les données sensibles dans vos logs
 
 Si vos logs contiennent des informations sensibles que vous souhaitez supprimer, configurez l'agent Datadog pour parcourir les séquences sensibles en utilisant le paramètre `log_processing_rules` dans votre fichier de configuration avec le `type` **mask_sequences**.
@@ -203,7 +202,6 @@ Plus d'exemples:
 |Thu Jun 16 08:29:03 2016 | `\w{3}\s+\w{3}\s+\d{2}\s\d{2}:\d{2}:\d{2}` |
 |20180228 | `\d{8}` |
 {{% /table %}}
-
 
 ### Suivez plusieurs répertoires ou un répertoire entier en utilisant des wildcards
 
@@ -312,7 +310,6 @@ Apprendre à explorer vos logs{{< /nextlink >}}
 Comment envoyer des logs à Datadog via des logs shippers externes{{< /nextlink >}}
     {{< nextlink href="logs/parsing" tag="Documentation" >}}En apprendre plus sur le parsing{{< /nextlink >}}
 {{< /whatsnext >}}
-
 
 [1]: /agent
 [2]: /getting_started/custom_metrics/

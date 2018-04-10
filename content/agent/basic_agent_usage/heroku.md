@@ -97,7 +97,6 @@ end
 
 Setting the service name varies according to your language or supported framework. Reference the [Datadog libraries list][6] for specific language support.
 
-
 [1]: http://docs.datadoghq.com/libraries/
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: http://docs.datadoghq.com/guides/tagging/

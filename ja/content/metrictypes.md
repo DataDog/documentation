@@ -23,7 +23,6 @@ Datadog accepts metrics submitted from a variety of sources, and as a result the
 | [agent check](http://docs.datadoghq.com/guides/agent_checks/#sending-metrics) | `self.histogram(...)` | histogram | gauge, rate |
 | [agent check](http://docs.datadoghq.com/guides/agent_checks/#sending-metrics) | `self.set(...)` | set | gauge |
 
-
 ## What's a use case for changing a metric's type?
 
 1. A user has a metric `app.requests.served` that counts requests served, she accidently submits it via dogstatsd as a `gauge`. The metric's Datadog type is therefore `gauge`.

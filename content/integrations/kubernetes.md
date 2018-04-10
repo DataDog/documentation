@@ -38,7 +38,6 @@ You can also just run the Datadog Agent on your host and configure it to gather 
 
 [Refer to the dedicated documentation to choose the perfect setup for your Kubernetes integration][2]
 
-
 ## Setup Kubernetes State
 ### Installation
 
@@ -122,7 +121,6 @@ The Kubernetes check includes the following service checks:
 
 ## Further Reading
 To get a better idea of how (or why) to integrate your Kubernetes service, check out our [series of blog posts][13] about it.
-
 
 [1]: https://hub.docker.com/r/datadog/agent/
 [2]: /agent/basic_agent_usage/kubernetes

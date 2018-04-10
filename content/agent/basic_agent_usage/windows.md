@@ -20,7 +20,6 @@ further_reading:
 
 This page outlines the basic functionality of the Datadog Agent. If you haven't installed the Agent yet, instructions can be found [in the Datadog Agent integration page][1].
 
-
 ### Starting and Stopping the Agent
 
 The execution of the Agent is controlled by a Windows service.
@@ -128,7 +127,6 @@ Agent configuration root, find it at:
 OR
 
     C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\
-
 
 ## Switch between Agent v5 and v6
 ### Upgrade to Agent 6
@@ -263,7 +261,6 @@ The Datadog Agent collects a large number of system metrics out of the box. One 
 |system.load.norm.15 (gauge) |The average system load over fifteen minutes normalized by the number of CPUs.|
 |system.load.norm.5 (gauge)  |The average system load over five minutes normalized by the number of CPUs.|
 
-
 The system.load.* metric is Unix specific, it conveys the average amount of resources either waiting to use or currently using the CPU. Each process waiting to use or using the CPU increases the load number by 1. The number at the end of the metric name indicates the average number of these processes in the previous X minutes. For system.load.5, this would be the average over the last 5 minutes. A value of 0 indicates a completely idle CPU, and a number equal to the number of CPU cores in the environment indicates that the CPU can handle every request coming in with no delay. Any number greater than this means that processes are waiting to use the CPU.
 
 #### Where is System Load for Windows?
@@ -296,7 +293,6 @@ Again, due to the sensitivity of yaml, if you've tried the above and cannot get 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: https://app.datadoghq.com/account/settings#agent/windows
 [2]: https://github.com/DataDog/datadog-agent/releases

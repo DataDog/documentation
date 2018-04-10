@@ -21,8 +21,6 @@ supported_os:
 version: 1.0.0
 ---
 
-
-
 ## Aperçu
 
 Obtenir des métriques à partir de Microsoft Active Directory
@@ -58,13 +56,11 @@ Le check ative_directory est compatible avec Windows.
 ### Métriques
 {{< get-metrics-from-git "active_directory" >}}
 
-
 ### Evénements
 Le check Active Directory n'inclut aucun événement pour le moment.
 
 ### Checks de Service
 Le check Active Directory n'inclut aucun check de service pour le moment.
-
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/active_directory/conf.yaml.example
 [2]: https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information

@@ -21,7 +21,6 @@ Cette page examine d'abord l'interface `PrometheusCheck`, puis propose une check
 
 `PrometheusCheck` est une [class mère][2] qui fournit une structure et quelques aides pour collecter des métriques, des événements et des check de services exposés via Prometheus. La configuration minimale pour les contrôles basés sur cette classe sont:
 
-
 - Remplacer `self.NAMESPACE`
 - Remplacer `self.metrics_mapper`
 - Implémenter la methode `check()`
@@ -181,7 +180,6 @@ class KubeDNSCheck(PrometheusCheck):
 
         self.process(endpoint, send_histograms_buckets=send_buckets, instance=instance)
 ```
-
 
 ## En apprendre plus
 

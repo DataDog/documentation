@@ -34,5 +34,4 @@ Pour les frameworks d'int√©gration, nous fournissons des instructions sur la fa√
     {{< nextlink href="/logs/languages/ruby" >}}Ruby{{< /nextlink >}}
 {{< /whatsnext >}}
 
-
 [1]: /logs/processing

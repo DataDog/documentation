@@ -35,7 +35,6 @@ Consultez nos [bibliothèque de tracing pour l'APM][10], afin de les utiliser ou
 De nombreux utilisateurs de notre communauté ont déjà créé [des intégrations][11] avec un grand nombre d'applications couramment utilisées.
 Ces ressources sont utiles comme références lors de la création d'une nouvelle intégration d'agent.
 
-
 [1]: /api
 [2]: /developers/libraries/#api-and-dogstatsd-client-libraries
 [3]: /developers/dogstatsd

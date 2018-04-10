@@ -36,7 +36,6 @@ Si vous ne l'avez pas déjà fait, configurez [l'Intégration Microsoft Azure en
 ### Métriques
 {{< get-metrics-from-git "azure_redis_cache" >}}
 
-
 ### Evénements
 L'intégration Azure Redis Cache n'inclut aucun événement pour le moment.
 
@@ -48,7 +47,6 @@ Besoin d'aide? Contactez  [l'équipe support de Datadog][2].
 
 ## En apprendre plus
 Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][3]
-
 
 [1]: https://docs.datadoghq.com/integrations/azure/
 [2]: http://docs.datadoghq.com/help/

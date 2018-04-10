@@ -5,11 +5,9 @@ kind: faq
 
 You can configure your MySQL integration to collect metrics from custom queries of your MySQL database by following the configuration syntax [in these lines][1] of our `mysql.yaml.example` file. While you do this, there are a few things you want to keep in mind...
 
-
 <div class="alert alert-warning">
 Custom metrics queried via custom_proc must have type <code>FLOAT</code> and not <code>INT</code>
 </div>
-
 
 ## Qualifying your databases
 
@@ -59,7 +57,6 @@ If you were to add a custom query to your mysql.yaml with the following configur
 ```
 
 Then your Agent's MySQL check would run that query to collect a metric called "mysql.custom_query.test.b" with a value of "2", as shown below:
-
 
 {{< img src="integrations/faq/mysql_metric_query.png" alt="mysql_metric_query" responsive="true" popup="true">}}
 

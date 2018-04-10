@@ -15,6 +15,5 @@ Nous avons [un article de blog][2] qui explique en détail la logique.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /integrations/webhooks
 [2]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio

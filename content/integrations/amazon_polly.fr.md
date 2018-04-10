@@ -39,7 +39,6 @@ Si vous ne l'avez pas déjà fait, configurez [l'Intégration Amazon Web Service
 ### Métriques
 {{< get-metrics-from-git "amazon_polly" >}}
 
-
 Chacune des métriques récupérées à partir d'AWS se verra attribuer les mêmes tags qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le nom de l'host, les groupes de sécurité et plus encore.
 
 ### Evénements

@@ -21,7 +21,6 @@ This page outlines the basic functionality of the Datadog Agent. If you haven't 
 
 By default, your Agent is installed in its own sandbox at `~/.datadog-agent`. You're free to move this folder wherever you like. However, this article assumes that the Agent is installed in its default location, so be sure to modify the instructions accordingly if you decide to move them.
 
-
 ## Commands
 
 Datadog Agent has some commands and only the _lifecycle commands_ (i.e. `start`/`stop`/`restart`/`status` on the Agent) should be run with `sudo`.

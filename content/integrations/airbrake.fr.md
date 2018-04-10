@@ -50,7 +50,6 @@ A chaque fois qu'une nouvelle erreur survient, elle apparaitra dans votre flux d
 ### Métriques
 {{< get-metrics-from-git "airbrake" >}}
 
-
 ### Evénements
 Le check Airbrake n'inclut aucun événement pour le moment.
 

@@ -29,7 +29,6 @@ To rename your organization, enter the new name, then click save.
 
 For more information about configuring SAML, reference the [Single sign on with SAML documentation][5].
 
-
 [1]: http://localhost:1313/account_management/team/#datadog-user-roles
 [2]: https://app.datadoghq.com/account/billing
 [3]: mailto://success@datadoghq.com

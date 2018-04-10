@@ -105,6 +105,5 @@ Here are some little advices:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: https://github.com/sirupsen/logrus
 [2]: /logs/parsing

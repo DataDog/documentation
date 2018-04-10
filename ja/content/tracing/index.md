@@ -9,8 +9,6 @@ title: APM (Tracing)
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-
-
 ### Overview
 
 Datadog's integrated APM tool eliminates the traditional separation between infrastructure and application performance monitoring. This not only provides greater visibility, but also allows you to see the relationship between application code and the underlying infrastructure.
@@ -63,7 +61,6 @@ The Datadog Agent uses the `/etc/dd-agent/datadog.conf` file for both infrastruc
 | `connection_limit` | - | The number of unique client connections to allow during one 30 second lease period. The default value is `2000`. |
 | **trace.ignore** |
 | `resource` | `DD_IGNORE_RESOURCE` | A blacklist of regular expressions to filter out Traces by their resource name. |
-
 
 For more information about the Datadog Agent, see the [Getting Started guide](/guides/basic_agent_usage/) or refer to the [`datadog.conf.example` file](https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example).
 

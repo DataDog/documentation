@@ -61,7 +61,6 @@ The Datadog logs do a rollover every 10MB. When a rollover occurs, one backup is
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /integrations
 [2]: https://github.com/DataDog/chef-datadog
 [3]: https://app.datadoghq.com/account/settings#integrations/chef

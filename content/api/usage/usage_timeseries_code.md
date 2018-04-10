@@ -12,4 +12,3 @@ external_redirect: /api/#get-hourly-usage-for-custom-metrics
 ##### Example Response
 {{< code-snippets basename="result.api-billing-usage-timeseries" >}}
 
-

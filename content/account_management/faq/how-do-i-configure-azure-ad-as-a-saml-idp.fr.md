@@ -27,7 +27,6 @@ Vous trouverez ci-dessous un guide pas à pas pour configurer Azure AD en tant q
 6. Selectionnez "Add an application from the gallery"
     {{< img src="account_management/faq/Active_Directory_-_Microsoft_Azure.png" alt="Active_Directory_-_Microsoft_Azure" responsive="true" popup="true">}}
 
-
 7. Sélectionnez "Custom" -> "Add an unlisted application my organization is using" -> Entrez un nom tel "DatadogSSOApp" comme nom d'application. Puis appuyez sur le bouton check une fois terminé.
     **NOTE**: Si vous ne voyez pas l'option "Add an unlisted application my organization is using", cela signifie que vous ne disposez pas de l'abonnement Premium pour Azure AD. Effectuez une mise à niveau vers Azure AD Premium, puis actualisez la page.
     {{< img src="account_management/faq/Active_Directory_-_Microsoft_Azure2.png" alt="Active_Directory_-_Microsoft_Azure2" responsive="true" popup="true">}}

@@ -24,7 +24,6 @@ If you haven't installed the Agent yet, instructions can be found
 
 The process to upgrade from the previous version of the Agent is to re-run the installation.
 
-
 ## Commands
 
 Datadog Agent has some commands and only the _lifecycle commands_ (i.e. `start`/`stop`/`restart`/`status` on the Agent service) should be run with `sudo service`/`sudo initctl`/`sudo systemctl`, all other commands need to be run with the `datadog-agent` command.
@@ -71,7 +70,6 @@ Configuration files for [integrations][2]:
 | Agent v5                                  |  Agent v6                          |
 |:-----|:----|
 |`/etc/dd-agent/conf.d/`|`/etc/datadog-agent/conf.d/`|
-
 
 ## Upgrade to Agent 6
 
@@ -126,7 +124,6 @@ If you're still having trouble, [our support team][3] will be glad to provide fu
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: https://app.datadoghq.com/account/settings#agent/suse
 [2]: /integrations

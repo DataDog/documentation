@@ -37,4 +37,3 @@ Examples of commonly used metric tag keys are env, instance, name, and role.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-

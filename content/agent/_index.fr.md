@@ -25,7 +25,6 @@ L'agent Datadog est un logiciel qui s'exécute sur vos hosts. Son travail consis
 
 {{< partial name="platforms/platforms.html" >}}
 
-
 L'agent comporte trois parties principales: le collector, DogStatsD, et le forwarder:
 
 * **Le collector**: exécute des checks sur la machine pour les [intégrations][4] que vous avez et capture les métriques du système telles que la mémoire et le processeur.
@@ -35,7 +34,6 @@ L'agent comporte trois parties principales: le collector, DogStatsD, et le forwa
 * **le forwarder**: récupère les données de DogStatsD et du collector, puis les met en file d'attente pour les envoyer à Datadog.
 
 Tout est contrôlé par un processus supervisor. Nous gardons ceci séparé de sorte que vous n'ayez pas à avoir l'overhead de chaque application si vous ne voulez pas exécuter toutes les sous-parties, (bien que nous vous recommandons généralement de le faire).
-
 
 ## Qu'est ce que l'Agent v6?
 

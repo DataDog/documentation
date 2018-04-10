@@ -32,6 +32,5 @@ Refer to our [Monitors API][2] on creating a metric monitor.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /api
 [2]: /api/#monitors

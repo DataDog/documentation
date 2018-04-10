@@ -3,6 +3,3 @@ app_key=<YOUR_APP_KEY>
 
 curl "https://api.datadoghq.com/api/v1/dash?api_key=${api_key}&application_key=${app_key}"
 
-
-
-

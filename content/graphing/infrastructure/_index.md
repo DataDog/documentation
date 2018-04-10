@@ -119,7 +119,6 @@ You can programmatically access host information and get the insights you need, 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /agent/faq/agent-commands/#agent-status-and-information
 [2]: https://github.com/DataDog/dd-agent/blob/5.14.1/utils/hostname.py#L104
 [3]: https://app.datadoghq.com/account/settings#agent

@@ -25,8 +25,6 @@ supported_os:
 version: 1.2.0
 ---
 
-
-
 ## Aperçu
 
 La check PgBouncer suit les métriques du pool de connexions et vous permet de monitorer le trafic vers et depuis votre application.
@@ -92,7 +90,6 @@ Le check PgBouncer est compatible avec toutes les principales plateformes.
 ### Métriques
 {{< get-metrics-from-git "pgbouncer" >}}
 
-
 Note: Toutes les métriques ne sont pas disponibles avec toutes les versions de PGBouncer.
 
 ### Evénements
@@ -109,8 +106,6 @@ Besoin d'aide? Contactez  [l'équipe support de Datadog][5].
 
 ## En apprendre plus
 Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][6]
-
-
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://github.com/DataDog/integrations-core/blob/master/pgbouncer/conf.yaml.example

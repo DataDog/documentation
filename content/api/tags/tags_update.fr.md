@@ -15,5 +15,4 @@ Cet endpoint vous permet de mettre à jour les tags d'un host donné.
     La source des tags (par exemple, chef, puppet).
     [Liste complète des valeurs d'attribut source][1]
 
-
 [1]: /integrations/faq/list-of-api-source-attribute-value

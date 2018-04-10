@@ -37,7 +37,6 @@ Filter your traces depending on:
 * Their [service name][3]
 * Their duration
 
-
 [1]: https://app.datadoghq.com/apm/search
 [2]: /tracing/setup/environment
 [3]: /tracing/visualization/services_list/

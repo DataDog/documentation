@@ -28,5 +28,4 @@ Remplacer une configuration de Screenboard dans Datadog.
 * **`read_only`** [*optionnel*, *défaut*=**False**]:  
     Si le Screenboard est en lecture seule ou non.
 
-
 [1]: /graphing/dashboards/widgets/

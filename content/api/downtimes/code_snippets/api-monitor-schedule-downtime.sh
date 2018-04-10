@@ -1,11 +1,9 @@
 api_key=<YOUR_API_KEY>
 app_key=<YOUR_APP_KEY>
 
-
 start=$(date +%s)
 end=$(date -v+3H +%s)
 end_recurrence=$(date -v+21d +%s)
-
 
 curl -X POST -H "Content-type: application/json" \
 -d '{

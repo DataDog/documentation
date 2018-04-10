@@ -101,7 +101,6 @@ In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://app.datadoghq.com/metric/explorer
 [3]: /agent/faq/agent-commands/#agent-status-and-information

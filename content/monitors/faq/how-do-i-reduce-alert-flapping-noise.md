@@ -38,11 +38,9 @@ Your individual Datadog alerts with groups will [have notification][1] rollups o
     * Both can also be used in conjunction with Composite alerts.
     * If you would like a visual introduction to anomaly and outlier detection, this gist is a [screenboard][2] post to the Datadog API with examples and documentation links for both.
 
-
 If the issue is alert routing, template variables and the separation of **warning** or **alert** states will be of interest!
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: https://www.datadoghq.com/blog/alert-rollup/
 [2]: /graphing/dashboards/screenboard

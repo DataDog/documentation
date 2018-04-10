@@ -13,8 +13,6 @@ doclevel: basic
 
 ## 概要
 
-
-
 <!-- Capture commits and pull requests events directly from your bitbucket to:
 
 - Keep track of code changes in real time
@@ -26,7 +24,6 @@ doclevel: basic
 - コード変更をリアルタイムでトラッキングします
 - 全てのダッシュボードにコード変更のタイミングを合成して表示します
 - コードの変更に関し、Datadogのイベントストリーム上でチャット可能にします
-
 
 <!-- We've written extensively about the Bitbuck integration on our [blog](https://www.datadoghq.com/blog/understand-code-changes-impact-system-performance-bitbucket-datadog/). -->
 

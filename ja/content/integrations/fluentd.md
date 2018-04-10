@@ -16,7 +16,6 @@ doclevel: basic
 
 ## 概要
 
-
 <!--
 Get metrics from Fluentd in real time to:
 -->

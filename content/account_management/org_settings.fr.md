@@ -29,7 +29,6 @@ Pour renommer votre organisation, entrez le nouveau nom, puis cliquez sur Enregi
 
 Pour plus d'informations sur la configuration SAML, reportez-vous à la section [Connexion unique avec documentation SAML][5].
 
-
 [1]: /account_management/team/#datadog-user-roles
 [2]: https://app.datadoghq.com/account/billing
 [3]: mailto://success@datadoghq.com

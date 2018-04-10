@@ -34,8 +34,6 @@ supported_os:
 version: 1.1.3
 ---
 
-
-
 ## Aperçu
 
 L'agent Datadog peut collecter de nombreuses métriques à partir des bases de données MySQL, notamment:
@@ -66,7 +64,6 @@ Query OK, 0 rows affected (0.00 sec)
 ```
 
 Veuillez noter que `@'localhost'` est seulement pour les connexions locales, utilisez le nom d'host/IP de votre Agent pour les connexions à distance, en savoir plus [ici][2]
-
 
 Vérifiez que l'utilisateur a été créé avec succès en utilisant la commande suivante, en remplaçant  ```<UNIQUEPASSWORD>``` par le mot de passe ci-dessus:
 
@@ -232,7 +229,6 @@ L'intégration MySQL est supportée sur les versions x.x+
 ## Données collectées
 ### Métriques
 {{< get-metrics-from-git "mysql" >}}
-
 
 Le check ne collecte pas toutes les métriques par défaut. Définissez les options de configuration booléenne suivantes sur `true` pour activer ces métriques:
 
@@ -403,8 +399,6 @@ Renvoie CRITICAL si l'agent ne peut pas se connecter à MySQL pour collecter des
 
 ## En apprendre plus
 Lisez notre [série d'articles de blog][16] sur le monitoring de MySQL avec Datadog.
-
-
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://dev.mysql.com/doc/refman/5.7/en/adding-users.html

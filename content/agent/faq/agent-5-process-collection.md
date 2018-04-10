@@ -3,7 +3,6 @@ title: Process collection with Agent v5
 kind: faq
 ---
 
-
 ## Standard Agent Configuration
 
 **Live Processes has been introduced in Datadog Agent version 5.16.0.**  

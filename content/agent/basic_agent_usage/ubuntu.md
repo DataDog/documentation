@@ -23,7 +23,6 @@ If you haven't installed the Agent yet, instructions can be found [in the Datado
 
 The process to upgrade from the previous version of the Agent is to re-run the installation.
 
-
 ## Commands
 
 Datadog Agent has some commands and only the _lifecycle commands_ (i.e. `start`/`stop`/`restart`/`status` on the Agent service) should be run with `sudo service`/`sudo initctl`/`sudo systemctl`, all other commands need to be run with the `datadog-agent` command.

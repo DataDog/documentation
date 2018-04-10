@@ -27,7 +27,6 @@ your behalf so that you can do something useful with your monitoring and perform
 
 {{< partial name="platforms/platforms.html" >}}
 
-
 The Agent has three main parts: the collector, DogStatsD, and the forwarder:
 
 * **The collector**: runs checks on the current machine for whatever [integrations][4] you have and it captures system metrics such as memory and CPU.
@@ -37,7 +36,6 @@ The Agent has three main parts: the collector, DogStatsD, and the forwarder:
 * **The forwarder**: retrieves data from both DogStatsD and the collector and then queues it up to be sent to Datadog.
 
 This is all controlled by one supervisor process. We keep this separate so you don't have to have the overhead of each application if you don't want to run all parts, although we generally recommend you do.
-
 
 ## What is the Agent v6?
 
@@ -197,7 +195,6 @@ permissions: if you are able to open `datadog.yaml`, you are able to use the GUI
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: https://github.com/DataDog/dd-agent
 [2]: https://github.com/DataDog/datadog-agent

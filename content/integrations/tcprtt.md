@@ -57,7 +57,6 @@ Edit the `go-metro.yaml` file in your Agent's `conf.d` directory. The following 
         hosts:
           - app.datadoghq.com
 
-
 {{< insert-example-links conf="go-metro" check="none" >}}
 
 ### Validation

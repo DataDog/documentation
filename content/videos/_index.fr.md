@@ -6,6 +6,5 @@ Chez Datadog, nous voulons nous assurer que vous avez tous les outils dont vous 
 
 Les vidéos sont organisées par mot-clé. Cliquez sur l'un des mots-clés ci-dessous pour trouver une vidéo pertinente.
 
-
 [1]: /help
 [2]: http://twitter.com/datadoghq

@@ -139,7 +139,6 @@ Then [Restart the Agent][5] to apply the configuration change.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /logs/languages/python/#configure-the-Datadog-agent
 [2]: https://pypi.python.org/pypi/JSON-log-formatter/0.1.0
 [3]: https://github.com/madzak/python-json-logger

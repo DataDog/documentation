@@ -21,7 +21,6 @@ instances:
       tag_by: Name
 ```
 
-
 [1]: /integrations/sqlserver
 [2]: https://github.com/DataDog/dd-agent/blob/5.9.x/conf.d/sqlserver.yaml.example#L3-L5
 [3]: /integrations/faq/how-can-i-collect-more-metrics-from-my-sql-server-integration

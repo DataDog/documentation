@@ -6,7 +6,6 @@ app_key = '<YOUR_APP_KEY>'
 
 dog = Dogapi::Client.new(api_key, app_key)
 
-
 # Create a timeboard.
 title = 'My First Metrics'
 description = 'And they are marvelous.'

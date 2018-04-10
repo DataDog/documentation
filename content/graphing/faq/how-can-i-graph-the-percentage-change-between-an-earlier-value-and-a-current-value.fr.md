@@ -14,5 +14,4 @@ Voici un exemple où nous pouvons voir le pourcentage de changement d'une métri
 
 {{< img src="graphing/faq/percentage_timeshift.png" alt="percentage timeshift" responsive="true" popup="true">}}
 
-
 [1]: /graphing/miscellaneous/functions/#timeshift

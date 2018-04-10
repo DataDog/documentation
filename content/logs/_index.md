@@ -133,7 +133,6 @@ logs:
       pattern: \w+@datadoghq.com
 ```
 
-
 ### Scrub sensitive data in your logs
 
 If your logs contain sensitive information that you wish to redact, configure the Datadog Agent to scrub sensitive sequences by using the `log_processing_rules` parameter in your configuration file with the **mask_sequences** `type`.
@@ -203,7 +202,6 @@ More examples:
 |Thu Jun 16 08:29:03 2016 | `\w{3}\s+\w{3}\s+\d{2}\s\d{2}:\d{2}:\d{2}` |
 |20180228 | `\d{8}` |
 {{% /table %}}
-
 
 ### Tail multiple directories or whole directories by using wildcards
 
@@ -310,7 +308,6 @@ To change the default values for each of the reserved attributes, go to the pipe
     {{< nextlink href="logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers" tag="FAQ" >}}How to Send Logs to Datadog via External Log Shippers{{< /nextlink >}}
     {{< nextlink href="logs/parsing" tag="Documentation" >}}Learn more about parsing{{< /nextlink >}}
 {{< /whatsnext >}}
-
 
 [1]: /agent
 [2]: /getting_started/custom_metrics/

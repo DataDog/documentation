@@ -344,7 +344,6 @@ Auto-discovery IDs:
 * docker://81e66fd4c948a502b4428417d8cf2ebc58caaff55a6e5879a41887057342aec2
 ```
 
-
 **Note**: Use the `-v` option to see all templates that are loaded but couldn't be resolved:
 
 ```
@@ -371,7 +370,6 @@ instances:
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /agent/faq/agent-5-autodiscovery
 [2]: https://github.com/DataDog/integrations-core/blob/master/go_expvar/conf.yaml.example

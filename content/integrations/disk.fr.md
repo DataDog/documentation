@@ -21,8 +21,6 @@ supported_os:
 - windows
 ---
 
-
-
 ## Aperçu
 
 Collectez les métriques relatives à l'utilisation du disque et aux IOs.
@@ -57,7 +55,6 @@ La check disk est activée par défaut et l'agent collecte des métriques pour t
 ### Métriques
 {{< get-metrics-from-git "disk" >}}
 
-
 ### Evénements
 Le check Disk n'inclut aucun événement pour le moment.
 
@@ -69,8 +66,6 @@ Besoin d'aide? Contactez  [l'équipe support de Datadog][4].
 
 ## En apprendre plus
 Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][5]
-
-
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://github.com/DataDog/integrations-core/blob/master/disk/conf.yaml.default

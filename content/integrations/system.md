@@ -32,7 +32,6 @@ No configuration is necessary for the system.
 
 {{< get-metrics-from-git "system" "system.cpu system.fs system.io system.load system.mem system.swap system.uptime" >}}
 
-
 ## Agent Check: system cores
 
 ## Overview

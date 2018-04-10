@@ -48,7 +48,6 @@ The following metrics are collected by default with the Cassandra integration:
 
 ## 概要
 
-
 Cassandraに関する情報に関しては、次の[「JMX Checks」](http://docs.datadoghq.com/ja/integrations/java/)を参照してください。
 
 Cassandraインテグレーションがデフォルトで取得しているメトリクス:

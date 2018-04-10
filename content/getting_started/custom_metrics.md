@@ -114,7 +114,6 @@ Ultimately, you’ll have 13 metrics using the following query: `count:service.r
 * You can check the number of "distinct metrics" in the metric summary page (click a metric name to see the number of distinct metrics associated). If you need a higher custom metric limit, [email us][9].
 * [Additional information about billing and custom metrics][10].
 
-
 [1]: /developers/dogstatsd
 [2]: /agent
 [3]: /integrations/

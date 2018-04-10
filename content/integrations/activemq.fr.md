@@ -26,8 +26,6 @@ supported_os:
 version: 1.0.1
 ---
 
-
-
 ## Aperçu
 
 Le check ActiveMQ vous permettez de collectionner des métriques pour des courtiers, queues, producteurs et consommateurs de messages, et encore plus.
@@ -114,7 +112,6 @@ init_config:
 ```bash
 sudo /etc/init.d/datadog-agent restart
 
-
 if [ $(sudo supervisorctl status | egrep "datadog-agent.*RUNNING" | wc -l) == 3 ]; \
 then echo -e "\e[0;32mAgent is running\e[0m"; \
 else echo -e "\e[031mAgent is not running\e[0m"; fi
@@ -162,8 +159,6 @@ Besoin d'aide? Contactez  [l'équipe support de Datadog][7].
 
 * [Surveilliez les métriques et la performance d'ActiveMQ.][8]
 
-
-
 ## Intégration Activemq_xml
 
 ## Aperçu
@@ -202,7 +197,6 @@ Le check activemq_xml est compatible avec toutes les plateformes principales.
 ### Métriques
 {{< get-metrics-from-git "activemq_xml" >}}
 
-
 ### Evénements
 Le check Activemq_xml n'inclut aucun événement pour le moment.
 
@@ -215,8 +209,6 @@ Besoin d'aide? Contactez  [l'équipe support de Datadog][7].
 ## En apprendre plus
 
 * [Surveilliez les métriques et la performance d'ActiveMQ.][8]
-
-
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://github.com/DataDog/jmxfetch

@@ -272,6 +272,5 @@ That's it! Now, all your logs are going to be in proper JSON automatically under
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /logs/parsing
 [2]: /logs/#tail-existing-files

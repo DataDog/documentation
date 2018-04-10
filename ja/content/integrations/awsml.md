@@ -10,8 +10,6 @@ title: Datadog-AWS Machine Learning Integration
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-
-
 ## Overview
 
 Amazon Machine Learning is a service that makes it easy for developers of all skill levels to use machine learning technology.

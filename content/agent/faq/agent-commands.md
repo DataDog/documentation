@@ -73,11 +73,7 @@ The `[OK]` in the Agent output implies that the check was configured/run correct
 |Source|`sudo ~/.datadog-agent/bin/info`|`sudo datadog-agent status`|
 |Windows|[Consult our dedicated windows doc][2]|[Consult our dedicated windows doc][2]|
 
-
 [1]: /agent/basic_agent_usage/windows
 [2]: /agent/basic_agent_usage/windows/#status-and-information
 [3]: /agent/#using-the-gui
-
-
-
 

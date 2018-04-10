@@ -12,5 +12,4 @@ doclevel: basic
 
 ## 概要
 
-
 Windowsサービスのステートを監視します。

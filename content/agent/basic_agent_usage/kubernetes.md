@@ -136,7 +136,6 @@ To enable [Log collection][10] with your DaemonSet:
     (...)
     ```
 
-
 2. Mount the `pointdir` volume in *volumeMounts*:
 
   ```
@@ -214,7 +213,6 @@ And in the manifest of your Agent (Daemonset/Deployment) add the following:
 [...]
 ```
 
-
 To enable [Log collection][10] add the following lines in your `http-config`:
 
 ```
@@ -234,7 +232,6 @@ Learn more about this in [the Docker log collection documentation][11].
 
 It is also possible to enable integrations via the annotations in the manifest of your application.
 This can be done with the autodiscovery, for more details, see the [Autodiscovery][13] section.
-
 
 ## Host installation
 
@@ -296,7 +293,6 @@ If the Agent is deployed you will see output similar to the text below, where de
           - instance #0 [OK]
           - Collected 39 metrics, 0 events & 7 service checks
 
-
 ## Event collection
 
 Similarly to the Agent 5, the Agent 6 can collect events from the Kubernetes API server.
@@ -326,7 +322,6 @@ It can be configured with the environment variable `DD_LEADER_LEASE_DURATION`.
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /integrations/kubernetes
 [2]: /agent/faq/agent-5-kubernetes-basic-agent-usage

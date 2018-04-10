@@ -43,7 +43,6 @@ _lifecycle commands_ (former `datadog-agent start`/`stop`/`restart`/`status` on 
 | `datadog-agent check <check_name>` | `datadog-agent check <check_name>`                   | Run a check           |
 {{% /table %}}
 
-
 ## Configuration
 
 The configuration files and folders for the Agent are located at:
@@ -57,7 +56,6 @@ Configuration files for [integrations][2]:
 | Agent v5                                  |  Agent v6                          |
 |:-----|:----|
 |`~/.datadog-agent/conf.d/`|`~/.datadog-agent/conf.d/`|
-
 
 ## Troubleshooting
 
@@ -73,7 +71,6 @@ The Agent logs are located in the `/var/log/datadog/` directory:
     * `forwarder.log`
 
 If you're still having trouble, [our support team][3] will be glad to provide further assistance.
-
 
 ## Switch between Agent v5 and v6
 ### Upgrade to Agent 6

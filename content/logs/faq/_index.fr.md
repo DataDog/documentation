@@ -17,4 +17,3 @@ kind: faq
     {{< nextlink href="logs/faq/how-to-increase-the-number-of-log-files-tailed-by-the-agent" >}}How to increase the number of log files tailed by the Agent files?{{< /nextlink >}}
 {{< /whatsnext >}}
 
-

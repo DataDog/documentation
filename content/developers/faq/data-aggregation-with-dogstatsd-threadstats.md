@@ -56,7 +56,6 @@ For instance during the flush interval of 10 seconds (between 10:00:00 and 10:00
 
 [Find more information about Threadstatsd aggregation][3].
 
-
 [1]: /developers/dogstatsd
 [2]: /developers/metrics
 [3]: https://github.com/DataDog/datadogpy/blob/master/datadog/threadstats/metrics.py

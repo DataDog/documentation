@@ -34,5 +34,4 @@ For integration frameworks, we provide guidelines on how to log in JSON into a f
     {{< nextlink href="/logs/languages/ruby" >}}Ruby{{< /nextlink >}}
 {{< /whatsnext >}}
 
-
 [1]: /logs/processing

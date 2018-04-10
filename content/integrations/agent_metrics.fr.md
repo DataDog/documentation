@@ -18,8 +18,6 @@ supported_os:
 version: 1.1.0
 ---
 
-
-
 ## Aperçu
 
 Obtenez les métriques du service agent_metrics en temps réel pour:
@@ -67,8 +65,6 @@ Besoin d'aide? Contactez  [l'équipe support de Datadog][5].
 
 ## En apprendre plus
 Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][6]
-
-
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://github.com/DataDog/integrations-core/blob/master/agent_metrics/conf.yaml.default

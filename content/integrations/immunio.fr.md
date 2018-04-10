@@ -61,7 +61,6 @@ Checks
 ### Métriques
 {{< get-metrics-from-git "immunio" >}}
 
-
 ### Evénements
 L'intégration IMMUNIO n'inclut aucun événement pour le moment.
 
@@ -73,9 +72,6 @@ Besoin d'aide? Contactez  [l'équipe support de Datadog][3].
 
 ## En apprendre plus
 Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][4]
-
-
-
 
 [1]: http://www.immun.io/
 [2]: https://dashboard.immun.io/#/settings/integrations

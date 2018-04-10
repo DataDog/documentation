@@ -9,7 +9,6 @@ title: Datadog-Cloud Foundry Integration
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-
 ## Overview
 
 Any Cloud Foundry deployment can send metrics and events to Datadog. The data helps you track the health and availability of all nodes in the deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more.
@@ -274,7 +273,6 @@ bosh create-env --state=your-state-file.json bosh.yml
 On the [Metrics explorer](https://app.datadoghq.com/metric/explorer) page in Datadog, search for metrics beginning `bosh.healthmonitor`:
 
 {{< img src="integrations/cloud_foundry/cloud-foundry-bosh-hm-metrics.png" alt="cloud-foundry-bosh-hm-metrics" >}}
-
 
 ## Data Collected
 ### Events

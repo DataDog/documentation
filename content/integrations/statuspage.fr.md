@@ -45,7 +45,6 @@ Besoin d'aide? Contactez  [l'équipe support de Datadog][2].
 ## En apprendre plus
 Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][3]
 
-
 [1]: https://docs.datadoghq.com/monitors/monitor_types/event/
 [2]: http://docs.datadoghq.com/help/
 [3]: https://www.datadoghq.com/blog/

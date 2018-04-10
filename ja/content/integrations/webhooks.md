@@ -10,7 +10,6 @@ doclevel: basic
 
 <!-- ### Overview
 
-
 With Webhooks you'll be able to:
 
 - Connect to your services.
@@ -18,15 +17,12 @@ With Webhooks you'll be able to:
 
 ## 概要
 
-
 WebhooksとDatadogを連携することにより次のようなことが可能になります:
 
 - 他のサービスと連携する
 - メトリクスを基にしたアラートが発生した際に、連携したサービスに通知する
 
-
 <!-- ## Setup
-
 
 To create a webhook, just enter the URL and a name. Then to use your
 webhook in Datadog, just add @webhook-name_of_the_webhook in the
@@ -58,7 +54,6 @@ If you want to post your webhooks to a service requiring authentication, you can
 `https://my.service.com` to `https://username:password@my.service.com`. -->
 
 ## 設定
-
 
 webhooksインテグレーションを設定するには、`Integrations`タブ-->`Integrations`ドロップダウンメニューと移動し、webhookインテグレーションの設定用ポップアップ画面で、接続先サービスのwebhook URLとそのサービスの名前を入力します。webhookを使ってメッセージを送信するには、アラートの通知欄やイベントでメッセージを書き込む際に、 @webhook-name_of_the_webhook と記述します。この記述を使うことで、アラートの発生時やイベントメッセージに書き込みをした時に、webhookインテグレーションが、設定先URLに対してjson形式でメッセージをPOSTするようになります。
 
@@ -103,11 +98,9 @@ webhookの認証を必要とするサービスと連携するには、HTTPのベ
 
 `https://my.service.com` ---> `https://username:password@my.service.com`
 
-
 <!-- ## Examples
 
 ### Sending SMS through Twilio
-
 
 Use as URL:
 
@@ -124,7 +117,6 @@ and as payload
 replacing `To` by your phone number and `From` by the one twilio attributed to you.  Check the "Encode as form" checkbox.
 
 ### Creating an issue in Jira
-
 
 Use as URL:
 
@@ -151,7 +143,6 @@ Don't check the "Encode as form" checkbox. -->
 
 ### Twilioを使って、SMSを送信する
 
-
 URLは記述は次のように記述します:
 
 `https://{Your-Account-id}:{Your-Auth-Token}@api.twilio.com/2010-04-01/Accounts/{Your-Account-id}/Messages.json`
@@ -167,7 +158,6 @@ URLは記述は次のように記述します:
 `To`の部分に送信先電話番号を記載し、`From`の部分にtwilioで取得した電話番号を記載します。URLの先のjsonをエンコードて追加するために、"Encode as form"の欄にチェックマークを追加します。
 
 ### Creating an issue in Jira
-
 
 URLは記述は次のようになります:
 

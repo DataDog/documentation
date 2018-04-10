@@ -5,7 +5,6 @@ aliases:
     - /agent/faq/how-can-i-change-the-hostname/
 ---
 
-
 {{< img src="agent/faq/agent_hostname.jpeg" alt="Agent hostname scheme" responsive="true" popup="true">}}
 
 The Datadog Agent collects potential hostnames from a number of different sources. To see all the names the Agent is detecting, [run the Agent info command][1], for example:

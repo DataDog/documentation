@@ -19,5 +19,4 @@ Datadog APM est proposé en tant qu'upgrade de nos plans Pro et Enterprise. Un e
     {{< nextlink href="https://datadoghq.slack.com/messages/apm" >}}Rejoindre le channel APM dans notre Slack Datadog pour de l'aide supplémentaire de la part d'ingénieurs Datadog{{< /nextlink >}}
 {{< /whatsnext >}}
 
-
 [1]: https://app.datadoghq.com/apm/home

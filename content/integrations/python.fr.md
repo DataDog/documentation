@@ -50,7 +50,6 @@ tags = ['version:1', 'application:web']
 
 api.Event.create(title=title, text=text, tags=tags)
 
-
 # Use Statsd, a Python client for DogStatsd
 from datadog import statsd
 
@@ -77,7 +76,6 @@ Besoin d'aide? Contactez  [l'équipe support de Datadog][4].
 
 ## En apprendre plus
 Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][5]
-
 
 [1]: /guides/metrics
 [2]: /api

@@ -262,7 +262,6 @@ filter {
 
 5. Restart syslog-ng
 
-
 ## NXLog
 
 1. Configure NXLog to send your logs to your Datadog platform
@@ -362,7 +361,6 @@ filter {
     ```
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /logs/
 [2]: /logs/#tail-existing-files

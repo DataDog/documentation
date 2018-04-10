@@ -236,6 +236,5 @@ end
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: https://github.com/roidrage/lograge#installation
 [2]: https://github.com/TwP/logging/blob/master/lib/logging/layouts/parseable.rb#L100

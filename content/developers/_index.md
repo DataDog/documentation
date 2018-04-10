@@ -35,7 +35,6 @@ You can also find our [APM tracing utilities][10], which you can use and contrib
 Many users from our community have already [shared integrations][11] with a large number of commonly used applications.
 These resources are also useful to reference when starting the work on a new Agent integration.
 
-
 [1]: /api
 [2]: /developers/libraries/#api-and-dogstatsd-client-libraries
 [3]: /developers/dogstatsd

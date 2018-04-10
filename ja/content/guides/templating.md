@@ -26,7 +26,6 @@ value will apply across the dashboard.</p> -->
 
 この機能を使うことにより、異なるタグの組み合わせを瞬時に切り替えて、システムの状況を多面的に把握することができるようになります。
 
-
 <!-- <h3 id="def">Editing template variables</h3>
 <p>To create, edit, and delete template variables click the gear icon at the upper right-hand side of the screen, then select 'Edit Template Variables' from the actions menu.</p>
 {{< img src="guides/templating/edit-template-variables.png" >}}
@@ -54,7 +53,6 @@ The 'Default Tag' option determines the initial value for the variable on dashbo
 タググループは、複数のタグに渡り設定されているプレフィックスで、`redis_port:6379`タグや`redis_port:6380`タグの場合の`redis_port`にあたります。
 タググループを設定することによって、変数スコープセレクタから不適切なタグを排除することができます。更にリスト内でプレフィックスを非表示にし、視認性を確保します。結果、`6379`や`6380`というような数字が'Default Tag'がドロップダウンメニューに表示されるようになります。
 'Default Tag'は、ダッシュボードをロードした際のテンプレート変数のデフォルト値になります。
-
 
 <!-- <h3 id="graph">Using template variables in graph editors</h3>
 {{< img src="guides/templating/redis-tpl-graph-editor.png" >}}

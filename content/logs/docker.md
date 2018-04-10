@@ -113,7 +113,6 @@ For more examples of configuration files or Agent capabilities (such as filterin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /logs/#getting-started-with-the-agent
 [2]: /logs/#custom-log-collection
 [3]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent

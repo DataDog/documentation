@@ -32,14 +32,11 @@ Les clients Verisign DDoS Protection Service recevront une copie du guide de l'u
 
 Veuillez vous référer à ce guide pour compléter [la configuration de l'intégration OpenSymbid ™ de Verisign dans Datadog][1] en configurant votre `Account ID`, votre` API key` et votre "application name"
 
-
 ## Troubleshooting
 Besoin d'aide? Contactez  [l'équipe support de Datadog][2].
 
 ## En apprendre plus
 Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][3]
-
-
 
 [1]: https://app.datadoghq.com/account/settings#integrations/verisign_openhybrid
 [2]: http://docs.datadoghq.com/help/

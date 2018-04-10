@@ -13,14 +13,12 @@ doclevel: basic
 
 ## 概要
 
-
 次の目的で、Sumo LogicとDatadogを連携します:
 
 * Sumo Logicに蓄積しているログデータをDatadogが取得しているメトリクスと関連付ける
 * Sumo Logicへアラート通知を送信する
 
 ## 設定
-
 
 1. Sumo Logic側(Manage > Collectors > Add Collector)でHTTP Collectorを作成します。
 2. umo Logic側で作成したHTTP CollectorのURLを、Datadog側のSumo Logicインテグレーションのタイルに書き込みます。

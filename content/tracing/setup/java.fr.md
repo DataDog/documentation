@@ -22,8 +22,6 @@ Pour améliorer la visibilité des applications utilisant des frameworks non pri
 * [Soumettre une pull request][1] avec l'instrumentation à inclure dans une future version.
 * [Contacter le support][2] et soumettre une demande de fonctionnalité.
 
-
-
 ## Installation et démarrage
 
 Pour commencer à tracer les applications écrites dans n'importe quelle language, commencez par [installer et configurer Datadog Agent][3] (consultez la documentation supplémentaire pour [le traçage des applications Docker](/tracing/setup/docker/)).
@@ -233,7 +231,6 @@ Valeurs prioritaires actuelles (d'autres peuvent être ajoutées à l'avenir):
 |USER_DROP      | L'utilisateur a demandé de ne pas garder la trace. L'agent va la supprimer.                                              |
 |USER_KEEP      | L'utilisateur a demandé de garder la trace. L'agent la gardera. Le serveur la gardera aussi.                     |
 
-
 Définir manuellement la priorité de trace:
 ```java
 import datadog.opentracing.DDSpan;
@@ -252,7 +249,6 @@ public class MyClass {
     }
 }
 ```
-
 
 ## Débogage
 

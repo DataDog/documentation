@@ -30,7 +30,6 @@ Connectez-vous à Amazon Web Services (AWS) pour:
 * Voir les périodes maintenances de EC2 planifiées dans votre flux
 * Collecte des métriques et les événements CloudWatch des nombreux autres produits AWS
 
-
 Les intégrations connexes incluent:
 
 |                                                           |                                                                               |
@@ -245,7 +244,6 @@ Pour commencer à récupérer des journaux d'évènements à partir d'un de vos 
   * [automatiquement](#automatic-log-collection) : Avec les [permissions](#permissions) appropriées, Datadog les gère pour vous.
   * [manuellement](#manually-set-up-triggers) : configurez vous-même chaque déclencheur dans la console AWS.
 
-
 ### Créez une nouvelle fonction Lambda
 
 1. Naviguez vers le [Console Lambda](https://console.aws.amazon.com/lambda/home?region=us-east-1) et créez une nouvelle fonction :
@@ -281,7 +279,6 @@ Pour commencer à récupérer des journaux d'évènements à partir d'un de vos 
     {{< img src="logs/aws/test_event.png" alt="Test Event" responsive="true" style="width:80%;" >}}
 2. Fournissez un nom unique pour l'évènement et appuyez **Create**.
 3. Appuyez Test et assurez-vous que le test réussisse sans aucune erreur.
-
 
 ### Activez le journal d'évènements pour votre service AWS.
 
@@ -371,7 +368,6 @@ Par exemple, n'oubliez pas de définir le type d'évènement correct pour les co
 ### Métriques
 {{< get-metrics-from-git "amazon_web_services" >}}
 
-
 ### Evénements
 
 Les intégrations Datadog-AWS enverrez tous vos évènements CloudWatch dans votre [Event stream](https://docs.datadoghq.com/graphing/event_stream/)
@@ -395,26 +391,18 @@ Du côté de Datadog, nous avons la possibilité de classer par ordre de priorit
 
 Afin d'obtenir des métriques avec un délai quasiment nul, nous vous recommandons d'installer l'Agent Datadog sur ces hôtes. Nous avons écrit un peu à ce sujet [ici][7], particulièrement en ce qui concerne CloudWatch.
 
-
-
 ### Métriques manquantes?
 
 L'API de CloudWatch ne renvoie que des métriques avec des points de données, donc si une instance ELB n'a aucune instances attachés (par exemple), il ne devrait pas voir les métriques associées à cet ELB dans Datadog.
 
-
-
 ### Mauvais compte de aws.elb.healthy_host_count?
-
 
 Lorsque l'option d'équilibrage de charge entre zones est activée dans un ELB, toutes les instances attachées à cet ELB seront considérées comme faisant partie de toutes les zones de disponibilité (côté CloudWatch), donc si vous avez 2 instances dans 1a et 3 dans ab, la métrique affichera 5 instances par zone de disponibilité.
 Comme cela peut être contre-intuitif, nous avons ajouté de nouvelles métriques, **aws.elb.healthy_host_count_deduped** et **aws.elb.un_healthy_host_count_deduped**, qui affichent le nombre d'instances disponibles par zone de disponibilité, peu importe si cette option d'équilibrage de charge entre zones est activée ou non.
 
 ### Hosts dupliqués lors de l'installation de l'agent?
 
-
 Lors de l'installation de l'agent sur un host aws, vous pouvez voir des host dupliqués sur la page infra pendant quelques heures si vous définissez manuellement le nom d'hôte dans la configuration de l'agent. Ce second host disparaîtra quelques heures plus tard et n'affectera pas votre facturation.
-
-
 
    [1]: https://console.aws.amazon.com/iam/home#s=Home
    [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services

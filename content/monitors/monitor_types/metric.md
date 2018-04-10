@@ -105,7 +105,6 @@ further_reading:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /monitors/monitor_types/metric
 [2]: /monitors/monitor_types/anomaly
 [3]: /monitors/monitor_types/outlier

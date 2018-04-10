@@ -11,8 +11,6 @@ wistiaid: mug2bisg96
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-
-
 This series shows you everything you need to know to get started with Datadog. This video covers Collection: How to get the metrics and events from your hosts up to Datadog. We cover the following topics:
 
 * [What is a host](?wtime=25.5)

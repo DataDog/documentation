@@ -185,11 +185,9 @@ Log events which do not comply with these limits might be transformed or truncat
 
 Contact support if you reach one of these limits as Datadog might be able to provide you more.
 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /logs/explore/#facets
 [2]: /logs/explore/#search-bar

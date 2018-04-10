@@ -75,7 +75,6 @@ Le check system_core est compatible avec toutes les principales plateformes.
 ### Métriques
 {{< get-metrics-from-git "system_core" >}}
 
-
 Selon la plate-forme, la vérification peut collecter d'autres métriques de temps CPU, par ex. `system.core.interrupt` sous Windows,` system.core.iowait` sous Linux, etc...
 
 ### Evénements
@@ -83,7 +82,6 @@ Le check System Core n'inclut aucun événement pour le moment.
 
 ### Checks de Service
 {{< get-service-checks-from-git "system_core" >}}
-
 
 ## Troubleshooting
 Besoin d'aide? Contactez  [l'équipe support de Datadog][5].

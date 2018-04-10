@@ -41,7 +41,6 @@ Dans la [vignette d'intégration AWS] [2], assurez-vous que `Workspaces` est coc
 ### Métriques
 {{< get-metrics-from-git "amazon_workspaces" >}}
 
-
 Chacune des métriques récupérées à partir d'AWS se verra attribuer les mêmes tags qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le nom de l'host, les groupes de sécurité et plus encore.
 
 ### Evénements

@@ -32,11 +32,9 @@ Obtenir les métriques de Azure Logc App pour:
 
 Si vous ne l'avez pas déjà fait, configurez [l'Intégration Microsoft Azure en premier][1]. Aucune autre étape d'installation ne doit être effectuée.
 
-
 ## Données collectées
 ### Métriques
 {{< get-metrics-from-git "azure_logic_app" >}}
-
 
 ### Evénements
 L'intégration Azure Logic App n'inclut aucun événements pour le moment.
@@ -49,7 +47,6 @@ Besoin d'aide? Contactez  [l'équipe support de Datadog][2].
 
 ## En apprendre plus
 Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][3]
-
 
 [1]: https://docs.datadoghq.com/integrations/azure/
 [2]: http://docs.datadoghq.com/help/

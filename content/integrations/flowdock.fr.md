@@ -51,6 +51,5 @@ Besoin d'aide? Contactez  [l'équipe support de Datadog][1].
 ## En apprendre plus
 Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][2]
 
-
 [1]: http://docs.datadoghq.com/help/
 [2]: https://www.datadoghq.com/blog/

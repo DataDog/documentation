@@ -23,8 +23,6 @@ To improve visibility into applications using unsupported frameworks, consider:
 * [Submitting a pull request][1] with instrumentation for inclusion in a future release.
 * [Contact support][2] and submit a feature request.
 
-
-
 ## Installation and Getting Started
 
 To begin tracing applications written in any language, first [install and configure the Datadog Agent][3] (see additional documentation for [tracing Docker applications](/tracing/setup/docker/)).
@@ -234,7 +232,6 @@ Current Priority Values (more may be added in the future):
 |USER_DROP      | The user asked to not keep the trace. The Agent will drop it.                                              |
 |USER_KEEP      | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                     |
 
-
 Manually set trace priority:
 ```java
 import datadog.opentracing.DDSpan;
@@ -253,7 +250,6 @@ public class MyClass {
     }
 }
 ```
-
 
 ## Debugging
 
@@ -318,7 +314,6 @@ Don't see your desired datastores? We're continually adding additional support, 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: https://github.com/DataDog/documentation#outside-contributors
 [2]: /help

@@ -172,8 +172,6 @@ Should be encoded to: `http://catchpoint.com/session_id%3A123456`
 
 [events-1]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio
 
-
-
 [1]: /monitors/
 [2]: /graphing/event_stream
 [3]: https://app.datadoghq.com/event/stream?show_private=true&aggregate_up=false&use_date_happened=true&per_page=30&display_timeline=true&from_ts=1418047200000&to_ts=1418050800000&incident=true&codemirror_editor=true&live=true&bucket_size=60000

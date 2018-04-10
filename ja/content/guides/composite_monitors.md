@@ -297,7 +297,6 @@ The previous table showed the composite monitor status across four points in tim
 | web03 | Warn         | Warn     | Alert     | Alert                          |<i class="fa fa-check" aria-hidden="true"></i>|
 | web04 | Skipped      | Warn     | Alert     | Skipped                        |
 
-
 In this cycle, you would receive two alerts.
 -->
 #### multi-alert Monitor が1つだけ使用されるケース
@@ -313,7 +312,6 @@ The previous table showed the composite monitor status across four points in tim
 | web03 | Warn         | Warn     | Alert     | Alert                          |<i class="fa fa-check" aria-hidden="true"></i>|
 | web04 | Skipped      | Warn     | Alert     | Skipped                        |
 
-
 In this cycle, you would receive two alerts.
 
 <!--
@@ -328,7 +326,6 @@ Here's an example cycle:
 | web04 | Unknown   | Warn      | Alert      | Alert                          |<i class="fa fa-check" aria-hidden="true"></i>
 | web05 | Ok        | Ok        | Alert      | Ok                             |
 
-
 In this cycle, you would receive one alert.
 -->
 #### 複数の multi-alert Monitor が使用されるケース
@@ -341,7 +338,6 @@ Here's an example cycle:
 |-------|-----------|-----------|------------|--------------------------------|----------------|
 | web04 | Unknown   | Warn      | Alert      | Alert                          |<i class="fa fa-check" aria-hidden="true"></i>
 | web05 | Ok        | Ok        | Alert      | Ok                             |
-
 
 In this cycle, you would receive one alert.
 

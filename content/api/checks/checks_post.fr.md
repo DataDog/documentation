@@ -22,7 +22,6 @@ external_redirect: /api/#post-a-check-run
     * 2 : CRITICAL
     * 3 : UNKNOWN
 
-
 * **`timestamp`** *[optionnel]*:  
     Timestamp POSIX de l'événement.
 

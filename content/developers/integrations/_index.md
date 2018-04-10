@@ -103,7 +103,6 @@ Include a list of service checks if the integration provides any.
 Include any links to Docs pages or Datadog blog articles that highlight the integration.
 ```
 
-
 [1]: /developers/metrics/
 [2]: /api/
 [3]: /developers/libraries/

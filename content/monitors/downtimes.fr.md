@@ -63,7 +63,6 @@ Pour planifier les downtimes, cliquez sur le bouton "Schedule Downtime" dans le 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: https://app.datadog.com/monitors#/downtime
 [2]: /graphing/miscellaneous/graphingjson/#scope
 [3]: http://daringfireball.net/projects/markdown/syntax

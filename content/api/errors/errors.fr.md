@@ -11,4 +11,3 @@ Une erreur indique que le service n'a pas géré votre demande avec succès. En 
 
 Si le service est capable de traiter votre requête, mais que certains problèmes sont présents (par exemple, utilisation d'une API ou d'une version d'API obsolète), le code d'état HTTP indique le succès et le corps de la réponse contient le résultat attendu, avec l'ajout d'un tableau d'avertissements contenant des messages d'avertissement détaillés.
 
-

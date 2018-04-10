@@ -11,4 +11,3 @@ This end point allows you to delete an event.
 
 This end point takes no JSON arguments.
 
-

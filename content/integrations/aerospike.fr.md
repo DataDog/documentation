@@ -17,8 +17,6 @@ supported_os:
 version: 0.1.0
 ---
 
-
-
 ## Aperçu
 
 Obtenir des métriques de Aerospike Database en temps réel pour:
@@ -49,6 +47,4 @@ Lorsque vous exécutez `info datadog-agent`, vous devriez voir quelque chose com
 ## Compatibilité
 
 Le check Aerospike est compatible avec toutes les principales plateformes et Aerospike Community Edition.
-
-
 

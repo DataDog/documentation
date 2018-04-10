@@ -78,7 +78,6 @@ Avoir une très grande cardinalité de ressources rend Datadog plus difficilemen
 
 En conséquence, nous avons une limite stricte sur la cardinalité des ressources pour un service donné.
 
-
 ### Trace
 
 **Une trace est utilisée pour suivre le temps passé par une application traitant une seule opération, chaque trace est constituée d'une ou plusieurs span.**

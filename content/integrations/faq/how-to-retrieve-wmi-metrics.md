@@ -61,7 +61,6 @@ Many performance related metrics are reported by the PerfMon tool, and are calle
 ```
 PS C:\> Get-WmiObject -Query "select * from Win32_PerfFormattedData_PerfProc_Process where Name = 'Powershell'"
 
-
 __GENUS                 : 2
 __CLASS                 : Win32_PerfFormattedData_PerfProc_Process
 __SUPERCLASS            : Win32_PerfFormattedData

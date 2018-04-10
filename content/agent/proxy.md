@@ -206,7 +206,6 @@ the [Infrastructure Overview][5]
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: https://app.datadoghq.com/infrastructure#overview
 [2]: /agent/faq/agent-commands
 [3]: http://haproxy.1wt.eu

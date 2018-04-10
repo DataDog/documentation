@@ -32,7 +32,6 @@ Les notifications sont un composant clé de tout [monitor][1]. Vous voulez vous 
 
 3. Activez éventuellement **monitor renotification**. Cette option est utile pour rappeler à votre équipe qu'un problème n'est pas résolu tant que le moniteur n'est pas marqué comme résolu. Si cette option est activée, vous pouvez configurer un message d'escalade à envoyer à chaque fois que le moniteur se réactive. Le message original est également inclus.
 
-
 ## Say what's happening
 ### Template variables du message
 
@@ -160,7 +159,6 @@ Voici un exemple de comment vous pouvez donner un message différent en fonction
 
 Nous fournissons un certain nombre de types différents de monitor et toutes les variables ne sont pas disponibles pour chaque type de monitor. Les variables du monitor d'intégration dépendent en grande partie de l'intégration et de la configuration du monitor.
 
-
 *(Faites défiler vers la droite pour voir toutes les variables disponibles)*
 
 {{% table responsive="true" %}}
@@ -226,7 +224,6 @@ Vous trouverez ci-dessous des exemples supplémentaires de liens qui pourraient 
   {{< img src="monitors/notifications/hostmap_url.png" alt="hostmap_url" responsive="true" popup="true" style="width:70%;">}}
   Les couleurs ci-dessus remplissent les hexagones par `system.cpu.system`, elles dimensionnent les hexagones par` system.cpu.stolen` et ajoutent un filtre pour n'inclure que les hosts Cassandra.
 
-
 *  **Dashboard d'intégration**: si vous créez des monitors spécifiques à l'application ou à l'intégration, créez un lien vers ce dashboard d'intégration spécifique et ajoutez un context pour l'host qui a déclenché ce monitor.
   Dans l'exemple ci-dessous, tout ce qui est nécessaire pour le remplir est la section `<integration_name>`  pour quelque chose comme Cassandra, Apache, SNMP, etc. ainsi que le context de l'host incriminé:
   ```
@@ -279,7 +276,6 @@ Par exemple, si la variable rendue est configurée en tant que channel  dans l'i
 ## En apprendre plus
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /monitors
 [2]: http://daringfireball.net/projects/markdown/syntax

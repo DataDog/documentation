@@ -19,5 +19,4 @@ This is not an optimal solution but this should work just fine.
 
 Also if you are going with this solution, putting dd-agent inside a container is not really necessary, put it on the docker host by following the regular instructions https://www.datadoghq.com/blog/deploy-datadog-aws-elastic-beanstalk/
 
-
 [1]: /developers/dogstatsd

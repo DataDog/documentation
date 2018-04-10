@@ -11,7 +11,6 @@ doclevel: basic
 
 <!-- ### Overview
 
-
 Connect your Splunk log monitoring to be able to:
 
 - Get notified of your reports.
@@ -20,13 +19,11 @@ Connect your Splunk log monitoring to be able to:
 
 ## 概要
 
-
 次の目的の為に、Splunkのログ監視とDatadogを連携します:
 
 * ログレポートに基づいて、通知を受ける
 * ログレポートと他のアプリケーションの情報を連携し状況を把握する
 * イベントの発生を検知し、チームで共同して作業をする
-
 
 <!-- To receive your reports from Splunk into Datadog, you need to have `dogapi` installed
 
@@ -49,7 +46,6 @@ Refer [here](https://wiki.splunk.com/Community:Use_Splunk_alerts_with_scripts_to
 You can now configure your splunk reports to exectue this script in order to get published into Datadog -->
 
 ## 設定
-
 
 1. pythonパッケージの`datadog`をインストールします。
 

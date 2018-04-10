@@ -82,7 +82,6 @@ Besoin d'aide? Contactez  [l'équipe support de Datadog][5].
 ## En apprendre plus
 Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][6]
 
-
 [1]: /guides/metrics
 [2]: /api
 [3]: https://github.com/DataDog/dogstatsd-ruby

@@ -174,7 +174,6 @@ Which allows us to get more context every time `think()` is called and traced:
 
     The specific display of this error is achieved automatically by the Datadog instrumentation, but you can override it with [special meaning tag rules][11].
 
-
 The Datadog APM allows you to trace all interactions of a request with the different services and resources of any application.
 
 ## Further Reading
