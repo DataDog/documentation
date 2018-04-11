@@ -13,7 +13,11 @@ categories:
 - os & system
 - configuration & deployment
 ddtype: check
+aliases:
+- /integrations/system_swap/
+- /integrations/system_core/
 ---
+
 ## Overview
 
 Get metrics from your base system about the CPU, IO, load, memory, swap, and uptime. Other system-related checks can be found here:
@@ -23,7 +27,6 @@ Get metrics from your base system about the CPU, IO, load, memory, swap, and upt
 * [Process check][3] - Capture metrics from specific running processes on a system.
 
 ## Setup
-### Configuration
 
 No configuration is necessary for the system.
 
@@ -33,18 +36,16 @@ No configuration is necessary for the system.
 {{< get-metrics-from-git "system" "system.cpu system.fs system.io system.load system.mem system.swap system.uptime" >}}
 
 
-## Agent Check: system cores
-
-## Overview
+## Agent Check: System cores
 
 This check collects the number of CPU cores on a host and CPU times (i.e. system, user, idle, etc).
 
-## Setup
-### Installation
+### Setup
+#### Installation
 
 The system_core check is packaged with the Agent, so [install the Agent][4] on any host.
 
-### Configuration
+#### Configuration
 
 Create a file `system_core.yaml` in the Agent's `conf.d` directory. See the [sample system_core.yaml][5] for all available configuration options:
 
@@ -59,7 +60,7 @@ The Agent just needs one item in `instances` in order to enable the check. The c
 
 Restart the Agent to enable the check.
 
-### Validation
+#### Validation
 
 [Run the Agent's `info` subcommand][6] and look for `system_core` under the Checks section:
 
@@ -76,43 +77,29 @@ Restart the Agent to enable the check.
     [...]
 ```
 
-## Compatibility
+### Compatibility
 
 The system_core check is compatible with all major platforms.
 
-## Data Collected
-### Metrics
+### Data Collected
+#### Metrics
 
 {{< get-metrics-from-git "system_core" >}}
 
 Depending on the platform, the check may collect other CPU time metrics, e.g. `system.core.interrupt` on Windows, `system.core.iowait` on Linux, etc.
 
-### Events
-The System Core check does not include any event at this time.
-
-### Service Checks
-The System Core check does not include any service check at this time.
-
-## Troubleshooting
-Need help? Contact [Datadog Support][7].
-
-## Further Reading
-Learn more about infrastructure monitoring and all our integrations on [our blog][8]
-
-## Agent Check: swap
-
-## Overview
+## Agent Check: Swap
 
 This check monitors the number of bytes a host has swapped in and swapped out.
 
-## Setup
-### Installation
+### Setup
+#### Installation
 
 The system swap check is packaged with the Agent, so [install the Agent][4] on any host.
 
-### Configuration
+#### Configuration
 
-Create a blank Agent check configuration file called `system_swap.yaml` in the Agent's `conf.d` directory. See the [sample system_swap.yaml][9] for all available configuration options:
+Create a blank Agent check configuration file called `system_swap.yaml` in the Agent's `conf.d` directory. See the [sample system_swap.yaml][7] for all available configuration options:
 
 ```
 # This check takes no initial configuration
@@ -123,7 +110,7 @@ instances: [{}]
 
 Restart the Agent to start collecting swap metrics.
 
-### Validation
+#### Validation
 
 [Run the Agent's `info` subcommand][6] and look for `system_swap` under the Checks section:
 
@@ -140,33 +127,19 @@ Restart the Agent to start collecting swap metrics.
     [...]
 ```
 
-## Compatibility
+### Compatibility
 
 The system_swap check is compatible with all major platforms.
 
-## Data Collected
-### Metrics
+### Data Collected
+#### Metrics
 
 {{< get-metrics-from-git "system_swap" >}}
-
-### Events
-The System Swap check does not include any event at this time.
-
-### Service Checks
-The System Swap check does not include any service check at this time.
-
-## Troubleshooting
-Need help? Contact [Datadog Support][7].
-
-## Further Reading
-Learn more about infrastructure monitoring and all our integrations on [our blog][8]
 
 [1]: /integrations/directory
 [2]: /integrations/disk
 [3]: /integrations/process/
 [4]: https://app.datadoghq.com/account/settings#agent
 [5]: https://github.com/DataDog/integrations-core/blob/master/system_core/conf.yaml.example
-[6]: https://help.datadoghq.com/hc/en-us/articles/203764635-Agent-Status-and-Information
-[7]: /help/
-[8]: https://www.datadoghq.com/blog/
-[9]: https://github.com/DataDog/integrations-core/blob/master/system_swap/conf.yaml.example
+[6]: /agent/faq/agent-commands/#agent-information
+[7]: https://github.com/DataDog/integrations-core/blob/master/system_swap/conf.yaml.example
