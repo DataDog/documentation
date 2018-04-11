@@ -17,7 +17,7 @@ version: '1.0'
 ---
 
 ## Aperçu
-L'intégration de Python vous permet de monitorer des métriques personnalisées en ajoutant simplement quelques lignes de code à votre application Python. Par exemple, vous pouvez avoir une métrique qui renvoie le nombre de pages vues ou le temp de tout appel de fonction. Pour plus d'informations sur l'intégration Python, reportez-vous au [guide sur la soumission des métriques][1]. Pour une utilisation avancée, veuillez vous reporter à la documentation dans les dépôts répertoriés ci-dessous. Vous pouvez également consulter [l'API Datadog][2] pour plus de détails sur l'utilisation de l'API avec Python.
+L'intégration de Python vous permet de monitorer des métriques personnalisées en ajoutant simplement quelques lignes de code à votre application Python. Par exemple, vous pouvez avoir une métrique qui renvoie le nombre de pages vues ou le temp de tout appel de fonction. Pour plus d'informations sur l'intégration Python, reportez-vous au [guide sur la soumission des métriques](/guides/metrics). Pour une utilisation avancée, veuillez vous reporter à la documentation dans les dépôts répertoriés ci-dessous. Vous pouvez également consulter [l'API Datadog](/api) pour plus de détails sur l'utilisation de l'API avec Python.
 
 ## Implémentation
 ### Installation
@@ -70,17 +70,10 @@ Vous ne devez rien faire dans l'application Datadog pour configurer Python.
 
 ### Validation
 
-Allez sur la page [Metrics Explorer][3] afin de voir vos métriques.
+Allez sur la page [Metrics Explorer](https://app.datadoghq.com/metric/explorer) afin de voir vos métriques.
 
 ## Troubleshooting
-Besoin d'aide? Contactez  [l'équipe support de Datadog][4].
+Besoin d'aide? Contactez  [l'équipe support de Datadog](http://docs.datadoghq.com/help/).
 
 ## En apprendre plus
-Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][5]
-
-
-[1]: /guides/metrics
-[2]: /api
-[3]: https://app.datadoghq.com/metric/explorer
-[4]: http://docs.datadoghq.com/help/
-[5]: https://www.datadoghq.com/blog/
+Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog](https://www.datadoghq.com/blog/)

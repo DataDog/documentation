@@ -17,5 +17,3 @@ external_redirect: /api/#users
 
 
 
-
-

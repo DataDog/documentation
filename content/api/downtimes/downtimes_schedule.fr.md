@@ -29,3 +29,4 @@ external_redirect: /api/#schedule-monitor-downtime
     *   **`week_days`** (optionnel) une liste des jours de la semaine à répéter. Choisissez parmi:`Mon`, `Tue`, `Wed`, `Thu`, `Fri`, `Sat` or `Sun`. Seulement applicable quand le `type` est `weeks`. **La première lettre doit être en majuscule.**
     *   **`until_occurrences`** (optionnel) combien de fois le downtime est replanifié. **`until_occurences` et` until_date`** sont mutuellement exclusifs.
     *   **`until_date`** (optionnel) la date à laquelle la récurrence doit se terminer en tant que Timestmap POSIX. **`until_occurences` et` until_date`** sont mutuellement exclusifs.
+

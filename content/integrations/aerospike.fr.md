@@ -50,5 +50,3 @@ Lorsque vous exécutez `info datadog-agent`, vous devriez voir quelque chose com
 
 Le check Aerospike est compatible avec toutes les principales plateformes et Aerospike Community Edition.
 
-
-

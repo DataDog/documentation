@@ -13,4 +13,3 @@ external_redirect: /api/#resolve-monitor
     `{"monitor_id": "group_to_resolve"}`  
     Il prend également en charge plusieurs groupes par monitor, par exemple:
     `resolve: [{"monitor_id": "group_1"}, {"monitor_id": "group_2"}]`
-

@@ -11,4 +11,3 @@ external_redirect: /api/#update-user
 {{< code-snippets basename="api-user-update" >}}
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-user-update" >}}
-
