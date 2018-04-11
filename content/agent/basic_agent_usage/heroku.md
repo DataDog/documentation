@@ -37,7 +37,6 @@ The Datadog agent provides a listening port on 8125 for StatsD/DogStatsD metrics
 
 In addition to the environment variables shown above, there are a number of others you can set:
 
-{{% table responsive="true" %}}
 | Setting | Description|
 | --- | --- |
 | `DD_API_KEY` | *Required.* Your API key is available from the [Datadog API integrations][2] page. Note that this is the *API* key, not the application key. |
@@ -49,7 +48,6 @@ In addition to the environment variables shown above, there are a number of othe
 | `DD_AGENT_VERSION` | *Optional.* By default, the buildpack installs the latest version of the Datadog Agent available in the package repository. Use this variable to install older versions of the Datadog Agent (note that not all versions of the Agent may be available). |
 | `DD_SERVICE_NAME` | *Optional.* While not read directly by the Datadog Agent, it is highly recommend that you set an environment variable for your service name. See the [Service Name](#service-name) section below for more information. |
 | `DD_SERVICE_ENV` | *Optional.* The Datadog Agent automatically tries to identify your environment by searching for a tag in the form `env:<environment name>`. For more information, see the [Datadog Tracing environments page][4]. |
-{{% /table %}}
 
 ### Histogram percentiles
 
