@@ -492,4 +492,12 @@ $(document).ready(function () {
     var elements = document.querySelectorAll('.sticky');
     Stickyfill.add(elements);
 
+    // add targer-blank to external links
+    var newLinks = document.getElementsByTagName("a");
+    for(i = 0; i < newLinks.length; i++) {
+        if(!newLinks[i].href.includes("datadoghq.com") && !newLinks[i].href.includes("localhost:1313")){
+            $("a[href='" + newLinks[i].href + "']").attr("target", "_blank");
+        }
+    }
+
 });
