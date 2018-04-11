@@ -39,7 +39,6 @@ The Datadog agent provides a listening port on 8125 for StatsD/DogStatsD metrics
 
 In addition to the environment variables shown above, there are a number of others you can set:
 
-{{% table responsive="true" %}}
 | Setting | Description|
 | --- | --- |
 | `DD_API_KEY` | *Required.* Your API key is available from the [Datadog API integrations][2] page. Note that this is the *API* key, not the application key. |
@@ -50,11 +49,10 @@ In addition to the environment variables shown above, there are a number of othe
 | `DD_APM_ENABLED` | *Optional.* The Datadog Trace Agent (APM) is run by default. Set this to `false` to disable the Trace Agent. |
 | `DD_AGENT_VERSION` | *Optional.* By default, the buildpack installs the latest version of the Datadog Agent available in the package repository. Use this variable to install older versions of the Datadog Agent (note that not all versions of the Agent may be available). |
 | `DD_SERVICE_ENV` | *Optional.* The Datadog Agent automatically tries to identify your environment by searching for a tag in the form `env:<environment name>`. For more information, see the [Datadog Tracing environments page][5]. |
-{{% /table %}}
 
 ## More information
 
-For more information, view the source code, or contribute to this project, refer to the [Github project page][6].
+Visit the [Github project page][6] for more information and to view the source code.
 
 [1]: http://docs.datadoghq.com/libraries/
 [2]: https://app.datadoghq.com/account/settings#api
