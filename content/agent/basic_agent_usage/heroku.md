@@ -20,10 +20,12 @@ heroku create
 # Add the appropriate language-specific buildpack. For example:
 heroku buildpacks:add heroku/ruby
 
-# Add this buildpack and set your environment variables
+# Enable Heroku Labs Dyno Metadata
+heroku labs:enable runtime-dyno-metadata -a $(heroku apps:info|grep ===|cut -d' ' -f2)
+
+# Add this buildpack and set your Datadog API key
 heroku buildpacks:add --index 1 https://github.com/DataDog/heroku-buildpack-datadog.git
-heroku config:set DD_HOSTNAME=$(heroku apps:info|grep ===|cut -d' ' -f2)
-heroku config:add DD_API_KEY=<DATADOG_API_KEY>
+heroku config:add DD_API_KEY=<your API key>
 
 # Deploy to Heroku
 git push heroku master
