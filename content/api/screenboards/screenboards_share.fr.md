@@ -12,4 +12,3 @@ Partage un Screenboard existant avec un URL public.
 ##### ARGUMENTS
 
 Cet endpoint ne prend aucun argument JSON.
-

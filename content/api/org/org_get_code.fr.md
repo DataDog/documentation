@@ -11,5 +11,3 @@ external_redirect: /api/#get-organization
 {{< code-snippets basename="api-org-get" >}}
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-org-get" >}}
-
-

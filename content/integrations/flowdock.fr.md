@@ -46,11 +46,7 @@ L'intégration Flowdock n'inclut aucun événement pour le moment.
 L'intégration Flowdock n'inclut aucun check de service pour le moment.
 
 ## Troubleshooting
-Besoin d'aide? Contactez  [l'équipe support de Datadog][1].
+Besoin d'aide? Contactez  [l'équipe support de Datadog](http://docs.datadoghq.com/help/).
 
 ## En apprendre plus
-Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][2]
-
-
-[1]: http://docs.datadoghq.com/help/
-[2]: https://www.datadoghq.com/blog/
+Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog](https://www.datadoghq.com/blog/)

@@ -35,14 +35,14 @@ Le check ActiveMQ vous permettez de collectionner des métriques pour des courti
 ## Implémentation
 ### Installation
 
-Le check ActiveMQ est packagé avec l'agent, il vous faut simplement [installer l'agent][1] dans vos noeuds ActiveMQ.
+Le check ActiveMQ est packagé avec l'agent, il vous faut simplement [installer l'agent](https://app.datadoghq.com/account/settings#agent) dans vos noeuds ActiveMQ.
 
-Le check collectionne les métriques via JMX, donc vous avez besoin d'un JVM dans chaque noeud pour que l'agent puisse bifurquer [jmxfetch][2]. Nous vous conseillons d'utiliser un JVM approuvé par Oracle.
+Le check collectionne les métriques via JMX, donc vous avez besoin d'un JVM dans chaque noeud pour que l'agent puisse bifurquer [jmxfetch](https://github.com/DataDog/jmxfetch). Nous vous conseillons d'utiliser un JVM approuvé par Oracle.
 
 ### Configuration
 
-1. **Assurez-vous que [JMX Remote est activé][3] dans votre serveur ActiveMQ.**
-2. Configurer l'agent pour qu'il se connecte vers ActiveMQ. Editez le fichier `${confd_help('`conf.d/activemq.yaml`')}`. Consultez l'exemple [activemq.yaml][4] pour apprendre toutes les options de configuration disponibles.
+1. **Assurez-vous que [JMX Remote est activé](http://activemq.apache.org/jmx.html) dans votre serveur ActiveMQ.**
+2. Configurer l'agent pour qu'il se connecte vers ActiveMQ. Editez le fichier `${confd_help('`conf.d/activemq.yaml`')}`. Consultez l'exemple [activemq.yaml](https://github.com/DataDog/integrations-core/blob/master/activemq/conf.yaml.example) pour apprendre toutes les options de configuration disponibles.
 
 ```
 instances:
@@ -124,7 +124,7 @@ else echo -e "\e[031mAgent is not running\e[0m"; fi
 
 ### Validation
 
-[Lancez la commande `status`de l'Agent][5] et cherchez `activemq` dans la section Checks:
+[Lancez la commande `status`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `activemq` dans la section Checks:
 
 ```
   Checks
@@ -145,7 +145,7 @@ Le check d'ActiveMQ ne fonctionne que sous Linux ou Mac (OS X ou macOS).
 
 ## Données collectées
 ### Métriques
-Consultez [metadata.csv][6] pour avoir la liste complète des métriques fournies par cette intégration.
+Consultez [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/activemq/metadata.csv) pour avoir la liste complète des métriques fournies par cette intégration.
 
 ### Evénements
 Le check ActiveMQ n'inclut aucun événement pour le moment.
@@ -156,11 +156,11 @@ Le check ActiveMQ n'inclut aucun événement pour le moment.
 Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter et de collecter des métriques depuis l'instance ActiveMQ qu'il monitor. Sinon renvoie `OK`.
 
 ## Troubleshooting
-Besoin d'aide? Contactez  [l'équipe support de Datadog][7].
+Besoin d'aide? Contactez  [l'équipe support de Datadog](http://docs.datadoghq.com/help/).
 
 ## En apprendre plus
 
-* [Surveilliez les métriques et la performance d'ActiveMQ.][8]
+* [Surveilliez les métriques et la performance d'ActiveMQ.](https://www.datadoghq.com/blog/monitor-activemq-metrics-performance/)
 
 
 
@@ -176,15 +176,15 @@ Obtenez les métriques du service activemq_xml en temps réel pour:
 ## Implémentation
 ### Installation
 
-Le check ActiveMQ XML est packagé avec l'Agent, il vous faut donc simplement [installer l'Agent][1] dans vos serveurs.
+Le check ActiveMQ XML est packagé avec l'Agent, il vous faut donc simplement [installer l'Agent](https://app.datadoghq.com/account/settings#agent) dans vos serveurs.
 
 ### Configuration
 
-Editez le fichier `activemq_xml.yaml` afin de d'indiquer votre serveur et son port, configurez le master à surveiller. Consultez l'exemple du [activemq_xml.yaml][9] pour apprendre toutes les options de configuration disponibles.
+Editez le fichier `activemq_xml.yaml` afin de d'indiquer votre serveur et son port, configurez le master à surveiller. Consultez l'exemple du [activemq_xml.yaml](https://github.com/DataDog/integrations-core/blob/master/activemq_xml/conf.yaml.example) pour apprendre toutes les options de configuration disponibles.
 
 ### Validation
 
-[Lancez la commande `status`de l'Agent][5] et cherchez `activemq_xml` dans la section Checks:
+[Lancez la commande `status`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `activemq_xml` dans la section Checks:
 
     Checks
     ======
@@ -210,20 +210,9 @@ Le check Activemq_xml n'inclut aucun événement pour le moment.
 Le check Activemq_xml n'inclut aucun check de service pour le moment.
 
 ## Troubleshooting
-Besoin d'aide? Contactez  [l'équipe support de Datadog][7].
+Besoin d'aide? Contactez  [l'équipe support de Datadog](http://docs.datadoghq.com/help/).
 
 ## En apprendre plus
 
-* [Surveilliez les métriques et la performance d'ActiveMQ.][8]
+* [Surveilliez les métriques et la performance d'ActiveMQ.](https://www.datadoghq.com/blog/monitor-activemq-metrics-performance/)
 
-
-
-[1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://github.com/DataDog/jmxfetch
-[3]: http://activemq.apache.org/jmx.html
-[4]: https://github.com/DataDog/integrations-core/blob/master/activemq/conf.yaml.example
-[5]: https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information
-[6]: https://github.com/DataDog/integrations-core/blob/master/activemq/metadata.csv
-[7]: http://docs.datadoghq.com/help/
-[8]: https://www.datadoghq.com/blog/monitor-activemq-metrics-performance/
-[9]: https://github.com/DataDog/integrations-core/blob/master/activemq_xml/conf.yaml.example
