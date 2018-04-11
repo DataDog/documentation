@@ -14,7 +14,7 @@ Execute a docker-run with those images and the `SD_JMX_ENABLE=true` environment 
 
 Use the `datadog/agent:latest-jmx` image. This image is based on `latest`, but it includes a JVM, which the Agent needs in order to run [jmxfetch][3].
 
-**Note**: On JMX, use `%%host%%`, but using `%%port%%` is bound to cause issues. Best workaround is to replace `%%port%%` by an hardcoded JMX port.
+**Note**: Using `%%port%%` has proven problematic in practice. If you experience an issue, the best workaround is to replace `%%port%%` with a hardcoded JMX port.
 
 ### Troubleshooting
 
