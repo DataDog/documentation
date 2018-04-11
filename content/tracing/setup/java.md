@@ -272,6 +272,8 @@ Datadog's [JMX Integration][7] monitors additional metrics around: JVM heap memo
 | Server | Versions |
 |:------------- |:-------------|
 | Java Servlet Compatible | 2.3+, 3.0+ |
+| Jax-RS Annotations | JSR311-API |
+| Spring-Web | 4.0+ |
 
 *Note:* Many application servers are Servlet compatible, such as Tomcat, Jetty, Websphere, Weblogic, etc.
 Also, frameworks like Spring Boot and Dropwizard inherently work because they use a Servlet compatible embedded application server.
@@ -287,6 +289,9 @@ Don't see your desired web frameworks? We're continually adding additional suppo
 | [OkHTTP][8] | 3.x |
 | [Apache HTTP Client][9] | 4.3 + |
 | [JMS 2][10] | 2.x |
+| AWS Java SDK | 1.11.0+ |
+| Kafka-Clients | 0.11+ |
+| Kafka-Streams | 0.11+ |
 
 Don't see your desired networking framework? We're continually adding additional support, [check with our team][2] to see if we can help.
 
@@ -299,6 +304,7 @@ Don't see your desired networking framework? We're continually adding additional
 | JDBC | 4.x |
 | [MongoDB][11] | 3.x |
 | [Cassandra][12] | 3.2.x |
+| Jedis | 1.4.0+ |
 
 `dd-java-agent` is also compatible with common JDBC drivers including:
 
@@ -314,6 +320,14 @@ Don't see your desired networking framework? We're continually adding additional
 *  Postgres SQL
 
 Don't see your desired datastores? We're continually adding additional support, [check with our team][2] to see if we can help.
+
+### Beta Instrumentation
+
+`dd-java-agent` ships with some newer instrumentation disabled by default.
+
+| Instrumentation      | Versions           | JVM Arg to enable |
+|:-------------|:-------------|:-------------|
+| Jax RS Client | 1.11.0+ | -Ddd.integration.jax-rs.enabled=true |
 
 ## Further Reading
 
