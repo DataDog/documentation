@@ -18,4 +18,6 @@ aws.elb.target_response_time.average
 aws.elb.target_response_time.maximum
 ```
 
-Further documentation on these metrics can be found in our [AWS ELB metrics list](/integrations/amazon_elb/#metrics).
+Further documentation on these metrics can be found in our [AWS ELB metrics list][1].
+
+[1]: /integrations/amazon_elb/#metrics

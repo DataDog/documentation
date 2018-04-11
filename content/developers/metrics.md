@@ -14,11 +14,11 @@ aliases:
 ---
 ## Overview
 
-This page explains how to send your application's [custom metrics](/getting_started/custom_metrics/) to Datadog.
-Sending your application's [custom metrics](/getting_started/custom_metrics/) to Datadog lets you correlate what's happening with your application, your users and your system.
+This page explains how to send your application's [custom metrics][4] to Datadog.
+Sending your application's [custom metrics][4] to Datadog lets you correlate what's happening with your application, your users and your system.
 
 Metrics are collected by sending them to StatsD, a small metrics aggregation
-server that is bundled with the Datadog Agent, [read about how it works](/developers/dogstatsd/). If you want to dive into code right away,
+server that is bundled with the Datadog Agent, [read about how it works][5]. If you want to dive into code right away,
 read on.
 
 This tutorial covers some common instrumentation use cases, like:
@@ -44,9 +44,9 @@ A metric's Datadog in-app type affects how its data is interpreted in query resu
 
 In the Datadog web application there are 3 metric types:
 
-* [GAUGE](/developers/metrics/#gauges)
-* [RATE](/developers/metrics/#rates)
-* [COUNT](/developers/metrics/#count) 
+* [GAUGE][6]
+* [RATE][7]
+* [COUNT][8] 
 * COUNTER (now deprecated)
 
 A metric's type is stored as metrics metadata and is used to determine how a metric is interpreted throughout the application by determining default time aggregation function and `as_rate()`/`as_count()` behavior. The `as_count()` and `as_rate()` modifiers behave differently for different Web Application metric types.
@@ -90,18 +90,18 @@ If you are not willing to lose the historical data submitted as a `gauge`, creat
 
 There are multiple ways to send metrics to Datadog:
 
-1. With your Datadog agent directly (Learn more on how [to write an Agent Checks](/agent/agent_checks) && [Aggregator source](https://github.com/DataDog/dd-agent/blob/master/aggregator.py))
+1. With your Datadog agent directly (Learn more on how [to write an Agent Checks](/agent/agent_checks) && [Aggregator source][9])
 
-2. Using your StatsD server bundled with the Datadog Agent ([Find more about our available libraries](/developers/libraries))
+2. Using your StatsD server bundled with the Datadog Agent ([Find more about our available libraries][16])
   Note: Because DogStatsD flushes at a regular interval (**default 10s**) all metrics submitted via this method are stored with associated interval metadata.
 
-3. Submit metrics directly to Datadog's [HTTP API](/api/)
+3. Submit metrics directly to Datadog's [HTTP API][10]
 
-4. Use Dropwizard's Java [metrics](https://github.com/dropwizard/metrics) library, with the [metrics-datadog](https://github.com/coursera/metrics-datadog) backend (thanks to the good folks at [Vistar Media](http://www.vistarmedia.com/),[Coursera](https://www.coursera.org), and [Bazaarvoice](http://www.bazaarvoice.com) for the great contributions).
+4. Use Dropwizard's Java [metrics][11] library, with the [metrics-datadog][12] backend (thanks to the good folks at [Vistar Media](http://www.vistarmedia.com/),[Coursera][13], and [Bazaarvoice][14] for the great contributions).
 
 ### Setup
 
-First off, [install](https://app.datadoghq.com/account/settings#agent) the Datadog Agent (version 3 or greater), which contains our StatsD server, and make sure it's running.
+First off, [install][15] the Datadog Agent (version 3 or greater), which contains our StatsD server, and make sure it's running.
 
 Next, let's set up a client library for your language.
 
@@ -134,7 +134,7 @@ statsd = Datadog::Statsd.new
 ```
 
 This tutorial has examples for Python and Ruby, but check out the
-[libraries page](/developers/libraries) if you use another language.
+[libraries page][16] if you use another language.
 
 ## Count
 ### Overview
@@ -207,7 +207,7 @@ def upload_file(file):
 ```
 
 Note that for counters coming from another source that are ever-increasing and never reset -- for example, the number of queries from MySQL over time -- we track the rate between flushed values. While there currently isn't an elegant solution to get raw counts within Datadog, you may want to apply a function to
-your series like cumulative sum or integral. [Read more about Datadog functions](/graphing/miscellaneous/functions).
+your series like cumulative sum or integral. [Read more about Datadog functions][17].
 
 ### In-app modifiers
 
@@ -390,7 +390,7 @@ opts = {
 statsd.service_check(name, status, opts)
 ```
 
-After a service check has been reported, you can use it to trigger a [Custom Check monitor](/monitors/monitor_types/custom_check).
+After a service check has been reported, you can use it to trigger a [Custom Check monitor][18].
 
 ## Rates
 ### Overview
@@ -469,6 +469,22 @@ The following units may be associated with metrics submitted to Datadog.
 |<ul><li>bit</li><li>byte</li><li>kibibyte</li><li>mebibyte</li><li>gibibyte</li><li>tebibyte</li><li>pebibyte</li><li>exbibyte</li></ul>|<ul><li>microsecond</li><li>millisecond</li><li>second</li><li>minute</li><li>hour</li><li>day</li><li>week</li><li>nanosecond</li></ul>|<ul><li>fraction</li><li>percent</li><li>percent_nano</li><li>apdex</li></ul>|<ul><li>connection</li><li>request</li><li>packet</li><li>segment</li><li>response</li><li>message</li><li>payload</li><li>timeout</li><li>datagram</li><li>route</li><li>session</li></ul>|<ul><li>process</li><li>core</li><li>thread</li><li>host</li><li>node</li><li>fault</li><li>service</li><li>instance</li><li>cpu</li></ul>|<ul><li>file</li><li>inode</li><li>sector</li><li>block</li></ul>|<ul><li>buffer</li><li>error</li><li>read</li><li>write</li><li>occurrence</li><li>event</li><li>time</li><li>unit</li><li>operation</li><li>item</li><li>task</li><li>worker</li><li>resource</li><li>garbage collection</li><li>email</li><li>sample</li><li>stage</li><li>monitor</li><li>location</li><li>check</li><li>attempt</li><li>device</li><li>update</li><li>method</li><li>job</li><li>container</li></ul>|<ul><li>table</li><li>index</li><li>lock</li><li>transaction</li><li>query</li><li>row</li><li>key</li><li>command</li><li>offset</li><li>record</li><li>object</li><li>cursor</li><li>assertion</li><li>scan</li><li>document</li><li>shard</li><li>flush</li><li>merge</li><li>refresh</li><li>fetch</li><li>column</li><li>commit</li><li>wait</li><li>ticket</li><li>question</li></ul>|<ul><li>hit</li><li>miss</li><li>eviction</li><li>get</li><li>set</li></ul>|<ul><li>dollar</li><li>cent</li></ul>|<ul><li>page</li><li>split</li></ul>|<ul><li>hertz</li><li>kilohertz</li><li>megahertz</li><li>gigahertz</li></ul>|<ul><li>entry</li></ul>|
 {{% /table %}}
 
+
 [1]: /developers/dogstatsd
 [2]: /agent/agent_checks
 [3]: /api/#metrics
+[4]: /getting_started/custom_metrics/
+[5]: /developers/dogstatsd/
+[6]: /developers/metrics/#gauges
+[7]: /developers/metrics/#rates
+[8]: /developers/metrics/#count
+[9]: https://github.com/DataDog/dd-agent/blob/master/aggregator.py
+[10]: /api/
+[11]: https://github.com/dropwizard/metrics
+[12]: https://github.com/coursera/metrics-datadog
+[13]: https://www.coursera.org
+[14]: http://www.bazaarvoice.com
+[15]: https://app.datadoghq.com/account/settings#agent
+[16]: /developers/libraries
+[17]: /graphing/miscellaneous/functions
+[18]: /monitors/monitor_types/custom_check

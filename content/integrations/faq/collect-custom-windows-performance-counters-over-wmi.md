@@ -48,3 +48,4 @@ instances:
     metrics:
       - [TestNameType, wmi.testnametype.count, gauge]
 ```
+

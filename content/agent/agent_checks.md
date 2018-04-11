@@ -25,7 +25,7 @@ Custom checks are included in the main check run loop, meaning they run every ch
 
 ### Should you write an Agent Check or an Integration?
 
-Agent Checks are a great way to collect metrics from custom applications or unique systems. However, if you are trying to collect metrics from a generally available application, public service or open source project, we recommend that you write [an Integration](/developers/integrations).
+Agent Checks are a great way to collect metrics from custom applications or unique systems. However, if you are trying to collect metrics from a generally available application, public service or open source project, we recommend that you write [an Integration][5].
 
 Starting with version 5.9 of the Datadog Agent, a new method for creating integrations is available. This allows integrations to be released and updated independently from Datadog Agent updates, it also provides an easier way for you to share integrations and makes it easier for the wider Datadog community to use your integrations.
 
@@ -86,9 +86,9 @@ There is some differences between Agent v5 and Agent v6:
 ### Sending metrics
 
 Sending metrics in a check is easy. If you're already familiar with the
-methods available in [DogStatsD](/developers/dogstatsd), then the transition is very simple.
+methods available in [DogStatsD][6], then the transition is very simple.
 
-You have the [following methods](/developers/dogstatsd) available to you:
+You have the [following methods][6] available to you:
 
     self.gauge( ... ) # Sample a gauge metric
 
@@ -159,7 +159,7 @@ The service_check method accepts the following arguments:
 ### Exceptions
 
 If a check cannot run because of improper configuration, programming error, or
-because it could not collect any metrics, it should raise a meaningful exception. This exception is logged and is shown in the Agent [info command](/agent/faq/agent-commands/#agent-status-and-information) for easy debugging. For example:
+because it could not collect any metrics, it should raise a meaningful exception. This exception is logged and is shown in the Agent [info command][7] for easy debugging. For example:
 
     $ sudo /etc/init.d/datadog-agent info
 
@@ -180,7 +180,7 @@ module).
 
 ## Configuration
 
-Each check has a [YAML](http://www.yaml.org/) configuration file that is placed in the `conf.d` directory. The file name should match the name of the check module (e.g.: `haproxy.py` and `haproxy.yaml`).  
+Each check has a [YAML][8] configuration file that is placed in the `conf.d` directory. The file name should match the name of the check module (e.g.: `haproxy.py` and `haproxy.yaml`).  
 
 **Note**: YAML files must use spaces instead of tabs.
 
@@ -264,9 +264,7 @@ Let's write a basic check that checks the status of an HTTP endpoint. On each ru
 
 ### Configuration
 
-First let's define how the configuration should look so that we know
-how to handle the structure of the `instance` payload that is passed into the
-call to `check`.
+First let's define how the configuration should look so that we know how to handle the structure of the `instance` payload that is passed into the call to `check`.
 
 Besides just defining a URL per call, it'd be nice to allow you to set a timeout for each URL. We'd also want to be able to configure a default timeout if no timeout value is given for a particular URL.
 
@@ -291,9 +289,7 @@ instances:
 Now let's define our check method. The main part of the check makes
 a request to the URL and time the response time, handling error cases as it goes.
 
-In this snippet, we start a timer, make the GET request using the
-[requests library](http://docs.python-requests.org/en/latest/) and handle and
-errors that might arise.
+In this snippet, we start a timer, make the GET request using the [requests library][9] and handle and errors that might arise.
 
 ```python
 # Load values from the instance config
@@ -359,7 +355,7 @@ def status_code_event(self, url, r, aggregation_key):
 
 The entire check would be placed into the `checks.d` folder as `http.py`. The corresponding configuration would be placed into the `conf.d` folder as `http.yaml`.
 
-Once the check is in `checks.d`, test it by running it as a python script. [Restart the Agent](/agent/faq/agent-commands) for the changes to be enabled. **Make sure to change the conf.d path in the test method**. From your Agent root, run:
+Once the check is in `checks.d`, test it by running it as a python script. [Restart the Agent][10] for the changes to be enabled. **Make sure to change the conf.d path in the test method**. From your Agent root, run:
 
 * For agent v5:
   `sudo -u dd-agent -- dd-agent check <check_name>`
@@ -435,7 +431,7 @@ To test this, run:
 
     sudo -u dd-agent dd-agent check <CHECK_NAME>
 
-If your issue continues, reach out to Support with the [help page](/help) that lists the paths it installs.
+If your issue continues, reach out to Support with the [help page][11] that lists the paths it installs.
 
 ### Testing custom checks on Windows
 
@@ -455,11 +451,18 @@ If your issue continues, reach out to Support with the [help page](/help) that l
     C:\Program' 'Files\Datadog\Datadog' 'Agent\embedded\python.exe C:\Program' 'Files\Datadog\Datadog' 'Agent\agent\agent.py check disk
     ```
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /developers/integrations/integration_sdk/
 [2]: https://github.com/DataDog/integrations-extras
 [3]: http://app.datadoghq.com/account/settings#agent
 [4]: /help/
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
+[5]: /developers/integrations
+[6]: /developers/dogstatsd
+[7]: /agent/faq/agent-commands/#agent-status-and-information
+[8]: http://www.yaml.org/
+[9]: http://docs.python-requests.org/en/latest/
+[10]: /agent/faq/agent-commands
+[11]: /help

@@ -5,7 +5,7 @@ kind: faq
 
 If you want to merge Screenboards together, you will first have to get the ID of each of them (The ID can be found in the URL of the dashboards).
 
-Then use the [script here](https://github.com/DataDog/Miscellany/blob/master/merge_screenboards.py), it relies on the API [get](/api/#screenboards-get) and [push](/api/#screenboards-post) for screenboards.
+Then use the [script here][1], it relies on the API [get][2] and [push][3] for screenboards.
 
 The usage is very simple, run the following:
 ```
@@ -24,3 +24,7 @@ The output of the script will be the URL of your merged screenboard.
 Note: You can merge integration dashboards, but you first have to clone them so you can have an ID.
 
 You have to enter your API and APP keys in the script for it to work.
+
+[1]: https://github.com/DataDog/Miscellany/blob/master/merge_screenboards.py
+[2]: /api/#screenboards-get
+[3]: /api/#screenboards-post

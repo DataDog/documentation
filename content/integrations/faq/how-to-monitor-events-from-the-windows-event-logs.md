@@ -3,7 +3,7 @@ title: How to monitor events from the Windows Event Logs ?
 kind: faq
 ---
 
-With the Windows version of the Datadog Agent, it is possible to post Events to your [Event Stream](/graphing/event_stream/) based on logs from the Windows Event Log.
+With the Windows version of the Datadog Agent, it is possible to post Events to your [Event Stream][1] based on logs from the Windows Event Log.
 
 To do so, open the Datadog Agent Manager and on the left pane navigate to the Windows Event Log section.
 
@@ -86,10 +86,15 @@ instances:
 ######################
 ```
 
-Save the configuration, enable the integration and [restart the Agent](/agent/faq/agent-commands/#start-stop-restart-the-agent). Now disconnect from the Windows machine and reconnect.
+Save the configuration, enable the integration and [restart the Agent][2]. Now disconnect from the Windows machine and reconnect.
 
-You should see an Event appear on your [Event Stream](/graphing/event_stream/) on the Datadog website.
+You should see an Event appear on your [Event Stream][1] on the Datadog website.
 
-*Note that the -Get-WmiObject command outlined do not locate all of the event logs by default. If this command does not return any results when you input the Event Log filename you wish to monitor, you have to add it to the registry. For more on how to add it to the registry, [check out this article](/integrations/faq/how-to-add-event-log-files-to-the-win32-ntlogevent-wmi-class).
+*Note that the -Get-WmiObject command outlined do not locate all of the event logs by default. If this command does not return any results when you input the Event Log filename you wish to monitor, you have to add it to the registry. For more on how to add it to the registry, [check out this article][3].
 
-** For convenience, reference [the YAML example](https://github.com/DataDog/dd-agent/tree/master/conf.d) file to use as a template.
+** For convenience, reference [the YAML example][4] file to use as a template.
+
+[1]: /graphing/event_stream/
+[2]: /agent/faq/agent-commands/#start-stop-restart-the-agent
+[3]: /integrations/faq/how-to-add-event-log-files-to-the-win32-ntlogevent-wmi-class
+[4]: https://github.com/DataDog/dd-agent/tree/master/conf.d

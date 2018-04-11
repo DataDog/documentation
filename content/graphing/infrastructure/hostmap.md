@@ -57,7 +57,7 @@ Below is a screenshot from a recent issue we had a Datadog. As you can see, some
 
 ### Tags
 
-Your hosts probably have a lot of [tags](/getting_started/tagging). Some tags are applied automatically by [Datadog integrations](/integrations/), and some tags were probably applied by members of your team. Regardless of how the tags were created, you can use any of them to slice and dice your Host Maps.  
+Your hosts probably have a lot of [tags][1]. Some tags are applied automatically by [Datadog integrations][2], and some tags were probably applied by members of your team. Regardless of how the tags were created, you can use any of them to slice and dice your Host Maps.  
 If some of your hosts are running on AWS, the following AWS-specific tags are available to you right now:
 
 * availability-zone
@@ -124,3 +124,6 @@ Data in the Host Maps is refreshed about once a minute—unless you are continuo
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /getting_started/tagging
+[2]: /integrations/

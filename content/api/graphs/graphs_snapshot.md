@@ -7,7 +7,7 @@ external_redirect: /api/#graph-snapshot
 
 ## Graph snapshot
 
-**Note**: When a snapshot is created, [there is some delay](http://andreafalzetti.github.io/blog/2017/04/17/datadog-png-snapshot-not-showing.html) before it is available.
+**Note**: When a snapshot is created, [there is some delay][1] before it is available.
 
 ##### ARGUMENTS
 
@@ -20,6 +20,10 @@ external_redirect: /api/#graph-snapshot
 * **`event_query`** [*optional*, *default*=**None**]:  
     A query that adds event bands to the graph.
 * **`graph_def`** [*optional*, *default*=**None**]:  
-    A JSON document defining the graph. `graph_def` can be used instead of `metric_query`. The JSON document uses the [grammar defined here](/graphing/miscellaneous/graphingjson/#grammar) and should be formatted to a single line then URLEncoded.
+    A JSON document defining the graph. `graph_def` can be used instead of `metric_query`. The JSON document uses the [grammar defined here][2] and should be formatted to a single line then URLEncoded.
 * **`title`** [*optional*, *default*=**None**]:  
     A title for the graph. If no title is specified, the graph doesn't have a title.
+
+
+[1]: http://andreafalzetti.github.io/blog/2017/04/17/datadog-png-snapshot-not-showing.html
+[2]: /graphing/miscellaneous/graphingjson/#grammar

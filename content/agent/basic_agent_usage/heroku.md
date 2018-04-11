@@ -5,7 +5,7 @@ aliases:
 - /developers/faq/how-do-i-collect-metrics-from-heroku-with-datadog
 ---
 
-This buildpack installs the Datadog Agent in your Heroku Dyno to collect system metrics, custom application metrics, and traces. To collect custom application metrics or traces, include the language appropriate [DogStatsD or Datadog APM library](http://docs.datadoghq.com/libraries/) in your application.
+This buildpack installs the Datadog Agent in your Heroku Dyno to collect system metrics, custom application metrics, and traces. To collect custom application metrics or traces, include the language appropriate [DogStatsD or Datadog APM library][1] in your application.
 
 ## Installation
 
@@ -40,17 +40,23 @@ In addition to the environment variables shown above, there are a number of othe
 {{% table responsive="true" %}}
 | Setting | Description|
 | --- | --- |
-| `DD_API_KEY` | *Required.* Your API key is available from the [Datadog API integrations](https://app.datadoghq.com/account/settings#api) page. Note that this is the *API* key, not the application key. |
+| `DD_API_KEY` | *Required.* Your API key is available from the [Datadog API integrations][2] page. Note that this is the *API* key, not the application key. |
 | `DD_HOSTNAME` | *Deprecated.* **WARNING**: Setting the hostname manually may result in metrics continuity errors. It is recommended that you do *not* set this variable. Because dyno hosts are ephemeral it is recommended that you monitor based on the tags `dynoname` or `appname`. |
-| `DD_TAGS` | *Optional.* Sets additional tags provided as a comma-delimited string. For example, `heroku config:set DD_TAGS=simple-tag-0,tag-key-1:tag-value-1`. The buildpack automatically adds the tags `dyno` and `dynohost` which represent the Dyno name (e.g. web.1) and host ID (e.g. 33f232db-7fa7-461e-b623-18e60944f44f) respectively. See the ["Guide to tagging"](http://docs.datadoghq.com/guides/tagging/) for more information. |
-| `DD_HISTOGRAM_PERCENTILES` | *Optional.* Optionally set additional percentiles for your histogram metrics. See [Histogram percentiles](#histogram-percentiles) below for more information. |
+| `DD_TAGS` | *Optional.* Sets additional tags provided as a comma-delimited string. For example, `heroku config:set DD_TAGS=simple-tag-0,tag-key-1:tag-value-1`. The buildpack automatically adds the tags `dyno` and `dynohost` which represent the Dyno name (e.g. web.1) and host ID (e.g. 33f232db-7fa7-461e-b623-18e60944f44f) respectively. See the ["Guide to tagging"][3] for more information. |
+| `DD_HISTOGRAM_PERCENTILES` | *Optional.* Optionally set additional percentiles for your histogram metrics. See [How to grpah percentiles][4]. |
 | `DISABLE_DATADOG_AGENT` | *Optional.* When set, the Datadog agent will not be run. |
 | `DD_APM_ENABLED` | *Optional.* The Datadog Trace Agent (APM) is run by default. Set this to `false` to disable the Trace Agent. |
 | `DD_AGENT_VERSION` | *Optional.* By default, the buildpack installs the latest version of the Datadog Agent available in the package repository. Use this variable to install older versions of the Datadog Agent (note that not all versions of the Agent may be available). |
-| `DD_SERVICE_NAME` | *Optional.* While not read directly by the Datadog Agent, it is highly recommend that you set an environment variable for your service name. See the [Service Name](#service-name) section below for more information. |
-| `DD_SERVICE_ENV` | *Optional.* The Datadog Agent automatically tries to identify your environment by searching for a tag in the form `env:<environment name>`. For more information, see the [Datadog Tracing environments page](https://docs.datadoghq.com/tracing/environments/). |
+| `DD_SERVICE_ENV` | *Optional.* The Datadog Agent automatically tries to identify your environment by searching for a tag in the form `env:<environment name>`. For more information, see the [Datadog Tracing environments page][5]. |
 {{% /table %}}
 
 ## More information
 
-For more information, view the source code, or contribute to this project, refer to the [Github project page](https://github.com/DataDog/heroku-buildpack-datadog).
+For more information, view the source code, or contribute to this project, refer to the [Github project page][6].
+
+[1]: http://docs.datadoghq.com/libraries/
+[2]: https://app.datadoghq.com/account/settings#api
+[3]: http://docs.datadoghq.com/guides/tagging/
+[4]: https://help.datadoghq.com/hc/en-us/articles/204588979-How-to-graph-percentiles-in-Datadog
+[5]: https://docs.datadoghq.com/tracing/environments/
+[6]: https://github.com/DataDog/heroku-buildpack-datadog

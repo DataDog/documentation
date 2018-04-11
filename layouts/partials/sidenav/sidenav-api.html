@@ -9,7 +9,7 @@
                     {{ if (or (in (string $element.Params.order) ".") (eq $index 0)) }}
                         <!-- display nested items in nav, ones with . in order -->
                         <li>
-                            <a href="#{{ lower (replace $element.Title " " "-") }}">
+                            <a href="#{{ lower (replace (replace $element.Title "'" " ") " " "-") }}">
                                 <span>{{ $element.Title }}</span>
                             </a>
                         </li>
@@ -20,7 +20,7 @@
                             </li>
                         {{ end }}
                         <li>
-                            <a href="#{{ lower (replace $element.Title " " "-") }}">
+                            <a href="#{{ lower (replace (replace $element.Title "'" " ") " " "-") }}">
                                 <span>{{ $element.Title }}</span>
                             </a>
                             <ul>

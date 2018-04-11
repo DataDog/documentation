@@ -75,7 +75,7 @@ Lorsque cette option est activée, l'affichage de votre Logstream change pour mi
 {{< img src="logs/explore/multi_line_log.png" alt="Log with Multi-line display" responsive="true" popup="true">}}
 
 **Note**: Si présent, l'attribut `error.stack` est affiché en priorité.
-Remapper tout attribut stack-trace sur cet attribut spécifique avec le processor [attribute remapper](/logs/processing/#attribute-remapper) afin de bénéficier de cet affichage.
+Remapper tout attribut stack-trace sur cet attribut spécifique avec le processor [attribute remapper][1] afin de bénéficier de cet affichage.
 
 ## Facettes
 
@@ -91,7 +91,7 @@ Pour commencer à utiliser un attribut en tant que facette ou dans la recherche,
 
 {{< img src="logs/explore/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" popup="true" style="width:50%;">}}
 
-Une fois cela fait, la valeur de cet attribut est stockée **pour tous les nouveaux logs** et peut être utilisée dans [la barre de recherche](#barre-de-recherche), [le panneau de facettes](#panneau-de-facettes), et dans les [Log graph](/logs/#log-graph).
+Une fois cela fait, la valeur de cet attribut est stockée **pour tous les nouveaux logs** et peut être utilisée dans [la barre de recherche](#barre-de-recherche), [le panneau de facettes](#panneau-de-facettes), et dans les [Log graph][2].
 
 ### Panneau de facettes
 
@@ -109,7 +109,7 @@ Pour commencer à utiliser un attribut comme mesure, cliquez sur un attribut num
 
 {{< img src="logs/explore/create_a_mesure.png" alt="Create a measure" responsive="true" popup="true" style="width:80%;">}}
 
-Une fois cela fait, la valeur de cet attribut est stockée **pour tous les nouveaux logs** et peut être utilisée dans [la barre de recherche](#barre-de-recherche), [le panneau de facettes](#panneau-a-facettes), et dans les [Log graph](/logs/#log-graph).
+Une fois cela fait, la valeur de cet attribut est stockée **pour tous les nouveaux logs** et peut être utilisée dans [la barre de recherche](#barre-de-recherche), [le panneau de facettes](#panneau-a-facettes), et dans les [Log graph][2].
 
 ### Sélectionnez l'unité de votre mesure
 
@@ -121,7 +121,7 @@ Toutes les mesures ont leur propre unité qui est ensuite utilisée pour l'affic
 
 Le langage de requête de recherche est basé sur la syntaxe de requête Lucene:
 
-[Apache Lucene - Syntaxe des requêtes](http://lucene.apache.org/core/2_9_4/queryparsersyntax.html)
+[Apache Lucene - Syntaxe des requêtes][3]
 
 Tous les paramètres de recherche sont contenus dans l'URL, il est donc très simple de partager votre vue.
 
@@ -170,7 +170,7 @@ Il est également possible de rechercher un attribut numérique dans une plage s
 
 ### Tags
 
-Vos logs héritent les tags de [l'hosts](/graphing/infrastructure/) et de [l'integrations](/integrations/) qui les génèrent. Ils peuvent être utilisés dans la recherche et en tant que facettes:
+Vos logs héritent les tags de [l'hosts][4] et de [l'integrations][5] qui les génèrent. Ils peuvent être utilisés dans la recherche et en tant que facettes:
 
 * `test` recherche la chaîne "test".
 * `("env:prod" OR test)` renvoie tous les logs avec le tag #env:prod ou le tag #test
@@ -211,7 +211,7 @@ Pour commencer à l'utiliser:
     {{< img src="logs/explore/graph/choose_measure_facet.png" alt="choose measure facet" responsive="true" popup="true" style="width:50%;">}}
 2. Sélectionnez la fonction d'agrégation pour la mesure que vous voulez grapher
     {{< img src="logs/explore/graph/agg_function_log_graph.png" alt="aggregation function for log graph" responsive="true" popup="true" style="width:50%;">}}
-3. Splitez par [Tag](/getting_started/tagging) ou [Facette](#facettes) pour spliter votre graphique sur la dimension désirée.
+3. Splitez par [Tag][6] ou [Facette](#facettes) pour spliter votre graphique sur la dimension désirée.
 
     {{< img src="logs/explore/graph/split_by_log_graph.png" alt="split by log graph" responsive="true" popup="true" style="width:50%;">}}
 
@@ -223,3 +223,11 @@ Pour commencer à l'utiliser:
 ## En apprendre plus
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: /logs/processing/#attribute-remapper
+[2]: /logs/#log-graph
+[3]: http://lucene.apache.org/core/2_9_4/queryparsersyntax.html
+[4]: /graphing/infrastructure/
+[5]: /integrations/
+[6]: /getting_started/tagging

@@ -17,3 +17,4 @@ external_redirect: /api/#get-all-monitor-details
     A comma separated list indicating what service and/or custom tags, if any, should be used to filter the list of monitors. Tags created in the Datadog UI automatically have the **service** key prepended (e.g. `service:my-app`)
 * **`with_downtimes`** [*optional*, *default* = **true**]:  
     If this argument is set to `true`, then the returned data includes all current downtimes for each monitor.
+

@@ -40,7 +40,7 @@ The following steps will help you quickly start tracing your Ruby application.
 
 The Ruby APM tracer sends trace data through the Datadog Agent.
 
-[Install and configure the Datadog Agent](/tracing/setup), see additional documentation for [tracing Docker applications](/tracing/setup/docker/).
+[Install and configure the Datadog Agent][1], see additional documentation for [tracing Docker applications][2].
 
 ### Quickstart for Rails applications
 
@@ -79,7 +79,7 @@ The Ruby APM tracer sends trace data through the Datadog Agent.
 
 ### Final steps for installation
 
-After setting up, your services will appear on the [APM services page](https://app.datadoghq.com/apm/services) within a few minutes. Learn more about [using the APM UI](https://docs.datadoghq.com/tracing/visualization/).
+After setting up, your services will appear on the [APM services page][3] within a few minutes. Learn more about [using the APM UI][4].
 
 ## Configuration
 
@@ -133,7 +133,7 @@ get '/home' do
 end
 ```
 
-For more details about manual instrumentation, check out the [API documentation](https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#manual-instrumentation).
+For more details about manual instrumentation, check out the [API documentation][5].
 
 ### Integration instrumentation
 
@@ -182,19 +182,19 @@ Datadog.configure do |c|
 end
 ```
 
-For more tracer settings, check out the [API documentation](https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#tracer-settings).
+For more tracer settings, check out the [API documentation][6].
 
 ### Priority sampling
 
 Priority sampling allows you to configure which traces are most important and should be kept after sampling.
 
-Priority sampling is disabled by default. For more details about how to activate and configure priority sampling, check out the [API documentation](https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#priority-sampling).
+Priority sampling is disabled by default. For more details about how to activate and configure priority sampling, check out the [API documentation][7].
 
 ### Distributed tracing
 
 Distributed tracing allows you to propagate a single trace across multiple services, so you can see performance end-to-end.
 
-Distributed tracing is disabled by default. For more details about how to activate and configure distributed tracing, check out the [API documentation](https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#distributed-tracing).
+Distributed tracing is disabled by default. For more details about how to activate and configure distributed tracing, check out the [API documentation][8].
 
 ### Processing pipeline
 
@@ -202,7 +202,7 @@ The processing pipeline allows you to modify traces before they are sent to the 
 
 It provides **filtering** for removing spans that match certain criteria, and **processing** for modifying spans.
 
-For more details about how to activate and configure the processing pipeline, check out the [API documentation](https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#processing-pipeline).
+For more details about how to activate and configure the processing pipeline, check out the [API documentation][9].
 
 ## Compatibility
 
@@ -274,3 +274,14 @@ ___
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: /tracing/setup
+[2]: /tracing/setup/docker/
+[3]: https://app.datadoghq.com/apm/services
+[4]: https://docs.datadoghq.com/tracing/visualization/
+[5]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#manual-instrumentation
+[6]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#tracer-settings
+[7]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#priority-sampling
+[8]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#distributed-tracing
+[9]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#processing-pipeline

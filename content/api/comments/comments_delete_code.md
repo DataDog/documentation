@@ -11,3 +11,4 @@ external_redirect: /api/#delete-a-comment
 {{< code-snippets basename="api-comment-delete" >}}
 ##### Example Response
 *This end point does not return JSON on successful requests.*
+

@@ -26,3 +26,4 @@ sed -i '/LOG_LEVEL=DEBUG/d' /etc/dd-agent/datadog.conf
 ```
 
 Or the container can be restarted.
+

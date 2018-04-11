@@ -11,3 +11,4 @@ external_redirect: /api/#get-all-users
 {{< code-snippets basename="api-user-get-all" >}}
 ##### Example Response
 {{< code-snippets basename="result.api-user-get-all" >}}
+

@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-This page outlines the basic functionality of the Datadog Agent. If you haven't installed the Agent yet, instructions can be found [in the Datadog agent integration page](https://app.datadoghq.com/account/settings#agent/windows).
+This page outlines the basic functionality of the Datadog Agent. If you haven't installed the Agent yet, instructions can be found [in the Datadog agent integration page][1].
 
 
 ### Starting and Stopping the Agent
@@ -133,11 +133,11 @@ OR
 ## Switch between Agent v5 and v6
 ### Upgrade to Agent 6
 
-Download the latest version available [from here](https://github.com/DataDog/datadog-agent/releases) and run the installation package.
+Download the latest version available [from here][2] and run the installation package.
 
 ### Downgrade to Agent v5
 
-Run the agent installer package for the latest 5.x version,  instructions can be found [in the Datadog agent integration page](https://app.datadoghq.com/account/settings#agent/windows).
+Run the agent installer package for the latest 5.x version,  instructions can be found [in the Datadog agent integration page][1].
 
 ## Uninstall the agent
 
@@ -154,7 +154,7 @@ Uninstall the agent using Add/Remove Programs, alternatively, it's possible to t
 The Agent logs are located in the ``c:\programdata\Datadog\logs` ` directory:
 and all logs are in the `agent.log` file.
 
-If you're still having trouble, [our support team](/help) will be glad to provide further assistance.
+If you're still having trouble, [our support team][3] will be glad to provide further assistance.
 
 ### For version >= 3.9.1
 
@@ -169,10 +169,10 @@ Log is available at:
 
 Logs for the subsystems are available in Event Viewer, under Windows Logs -> Application.
 
-If you're still having trouble, [our support team](/help) will be glad to provide further assistance.
+If you're still having trouble, [our support team][3] will be glad to provide further assistance.
 
 ## Adding a custom python package to the agent
-The current way to do so is to add the package in the library zipped folder that can be found at `C:\Program Files (x86)\Datadog\Datadog Agent\files`, and [restart the agent](/agent/faq/agent-commands).
+The current way to do so is to add the package in the library zipped folder that can be found at `C:\Program Files (x86)\Datadog\Datadog Agent\files`, and [restart the agent][4].
 
 {{< img src="agent/faq/add_package_windows.png" alt="Add Package Windows" responsive="true" popup="true" style="width:75%;">}}
 
@@ -180,7 +180,7 @@ The current way to do so is to add the package in the library zipped folder that
 
 #### Agent v6
 
-1. Navigate to `localhost:5002` to [display the Agent GUI](/agent/#using-the-gui)
+1. Navigate to `localhost:5002` to [display the Agent GUI][5]
 2. Select flare tab
   {{< img src="agent/basic_agent_usage/windows/windows_flare_agent_6.png" alt="Windows flare with agent 6" responsive="true" popup="true" style="width:75%;">}}
 3. Enter your ticket number (if you have one) and email address
@@ -248,7 +248,7 @@ When adding your own services, be sure to follow the formatting exactly as shown
 
 Also, any time you modify an Integration you’ll need to restart the Datadog Service. You can do this from services.msc or right from the UI via Actions.
 
-For Services, Datadog doesn't track the metrics, only their availability. (For metrics you’ll want to use [Process](/#monitoring-windows-processes) or [WMI Integration](/integrations/wmi)). To set up a Monitor, select the "Integration" then "Windows Service" monitor type. There you can "Pick Monitor Scope" and choose the service you would like to monitor.
+For Services, Datadog doesn't track the metrics, only their availability. (For metrics you’ll want to use [Process](/#monitoring-windows-processes) or [WMI Integration][6]). To set up a Monitor, select the "Integration" then "Windows Service" monitor type. There you can "Pick Monitor Scope" and choose the service you would like to monitor.
 
 ### Monitoring system load for Windows
 
@@ -272,7 +272,7 @@ While Windows does not offer this exact metric, there is an equivalent option th
 
 ### Monitoring Windows Processes
 
-You can monitor Windows processes via the [process integration](/integrations/process/). To set this up on Windows, select the "Process" integration from the list of integrations in the Datadog Agent Manager and edit the configuration.
+You can monitor Windows processes via the [process integration][7]. To set this up on Windows, select the "Process" integration from the list of integrations in the Datadog Agent Manager and edit the configuration.
 
 For example, to monitor Notepad, your configuration file would include:
 
@@ -296,3 +296,12 @@ Again, due to the sensitivity of yaml, if you've tried the above and cannot get 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: https://app.datadoghq.com/account/settings#agent/windows
+[2]: https://github.com/DataDog/datadog-agent/releases
+[3]: /help
+[4]: /agent/faq/agent-commands
+[5]: /agent/#using-the-gui
+[6]: /integrations/wmi
+[7]: /integrations/process/

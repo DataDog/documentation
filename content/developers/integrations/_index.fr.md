@@ -6,7 +6,7 @@ aliases:
 ---
 ## Aperçu
 
-Être capable de voir toutes vos métriques à travers votre infrastructure est la clé de Datadog. Alors que nous avons des guides pour soumettre [des métriques custom](/developers/metrics/) via notre [API](/api/) et des [instrumentation de code](/developers/libraries/), il est possible que vous souhaitiez voir une certaine source devenir une intégration officielle. Dans l'ensemble, le facteur déterminant le plus important dans la construction des intégrations Datadog est d'être à l'écoute de ce que nos clients demandent.
+Être capable de voir toutes vos métriques à travers votre infrastructure est la clé de Datadog. Alors que nous avons des guides pour soumettre [des métriques custom][1] via notre [API][2] et des [instrumentation de code][3], il est possible que vous souhaitiez voir une certaine source devenir une intégration officielle. Dans l'ensemble, le facteur déterminant le plus important dans la construction des intégrations Datadog est d'être à l'écoute de ce que nos clients demandent.
 
 Si vous souhaitez proposer une intégration, contactez-nous à l'adresse support@datadoghq.com et indiquez-nous les métriques que vous souhaiteriez afficher à partir de cette source.
 
@@ -101,3 +101,7 @@ Include a list of service checks if the integration provides any.
 
 Include any links to Docs pages or Datadog blog articles that highlight the integration.
 ```
+
+[1]: /developers/metrics/
+[2]: /api/
+[3]: /developers/libraries/

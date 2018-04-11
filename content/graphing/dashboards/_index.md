@@ -5,13 +5,13 @@ aliases:
     - /guides/templating/
 ---
 
-To create a [TimeBoard](/graphing/dashboards/timeboard/) or a [ScreenBoard](/graphing/dashboards/screenboard/) Select which of these you would prefer to create after clicking 'New Dashboard' in the 'Dashboards' dropdown.
+To create a [TimeBoard][3] or a [ScreenBoard][4] Select which of these you would prefer to create after clicking 'New Dashboard' in the 'Dashboards' dropdown.
 
 {{< img src="graphing/dashboards/board_selection.jpg" alt="Board selection" responsive="true" popup="true">}}
 
 ## What is the difference between a ScreenBoard and a TimeBoard?
 
-At Datadog we give you the capability to create and customize two types of dashboards; [ScreenBoards](/graphing/dashboards/screenboard) and [TimeBoards](/graphing/dashboards/timeboard). To more clearly understand the differences between the two, consider the following:
+At Datadog we give you the capability to create and customize two types of dashboards; [ScreenBoards][5] and [TimeBoards][6]. To more clearly understand the differences between the two, consider the following:
 
 {{% table responsive="true" %}}
 |  | Timeboards | Screenboards|
@@ -60,3 +60,7 @@ Setup event correlation at view time by adding a query in the Search box at the 
 
 [1]: /graphing/
 [2]: /graphing/event_stream/
+[3]: /graphing/dashboards/timeboard/
+[4]: /graphing/dashboards/screenboard/
+[5]: /graphing/dashboards/screenboard
+[6]: /graphing/dashboards/timeboard

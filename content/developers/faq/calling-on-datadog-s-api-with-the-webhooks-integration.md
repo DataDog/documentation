@@ -3,9 +3,9 @@ title: Calling on Datadog's API with the Webhooks Integration
 kind: faq
 ---
 
-You can use the [Webhooks integration](/integrations/webhooks) to trigger webhooks from Datadog monitors and events--this is often useful for having your Datadog account communicate with your team using custom communication tools, or even [forwarding monitor alerts to text messages](https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio).
+You can use the [Webhooks integration][1] to trigger webhooks from Datadog monitors and events--this is often useful for having your Datadog account communicate with your team using custom communication tools, or even [forwarding monitor alerts to text messages][2].
 
-But you can also set up webhook notifications to call on [Datadog's API](/api) if, for example, you wanted to submit a metric/event to your Datadog account every time a monitor triggered.
+But you can also set up webhook notifications to call on [Datadog's API][3] if, for example, you wanted to submit a metric/event to your Datadog account every time a monitor triggered.
 
 ## How do to this:
 
@@ -20,7 +20,7 @@ Each webhook must be set up with a name (to be referenced in monitors) and a url
 
 ## Example:
 
-Imagine that you have a series of monitors that someone on your team would like to see a running, momentary count of, in terms of how many of these monitors are in an OK vs. a CRITICAL status. You could add a webhook notification to submit a "check_run" API call whenever one of these monitors went into an alert or OK state, and from there you could add a "check status" widget in a [screenboard](/graphing/dashboards/screenboard) to show your teammate what the status of all these monitors were at any given moment.
+Imagine that you have a series of monitors that someone on your team would like to see a running, momentary count of, in terms of how many of these monitors are in an OK vs. a CRITICAL status. You could add a webhook notification to submit a "check_run" API call whenever one of these monitors went into an alert or OK state, and from there you could add a "check status" widget in a [screenboard][4] to show your teammate what the status of all these monitors were at any given moment.
 
 In that case, you would need two separate webhooks, one for "mymonitorgroup-alert-check" and the other for "mymonitorgroup-ok-check". Both would use the same API endpoint, so their respective "name and url" values would be as follows:
 
@@ -52,8 +52,13 @@ With both of those webhooks set, you would go to your monitors (the ones your te
 {{#is_recovery}} @webhook-mymonitorgroup-ok-check {{/is_recovery}}
 ```
 
-Once your monitors are set and alerting (they'll all need to alert at least once in either OK or CRITICAL state in order to be included in the complete status count), you can then set up a "check status" widget in a [screenboard](/graphing/dashboards/screenboard) over your "mymonitorgroup.check", grouped out by, in this case, the "monitor" tag.
+Once your monitors are set and alerting (they'll all need to alert at least once in either OK or CRITICAL state in order to be included in the complete status count), you can then set up a "check status" widget in a [screenboard][4] over your "mymonitorgroup.check", grouped out by, in this case, the "monitor" tag.
 
 Here's an example of one such widget (although in this example, the check's name was "composite.status" and only one monitor in our group has yet triggered as "alert" and then "ok" again):
 
 {{< img src="developers/faq/check_status_editor.png" alt="check_status_editor" responsive="true" popup="true">}}
+
+[1]: /integrations/webhooks
+[2]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio
+[3]: /api
+[4]: /graphing/dashboards/screenboard

@@ -15,7 +15,7 @@ res:<your.request.name>]: span.normalize: empty `Service` (debug for more info)
 
 ### Check that the service was properly defined
 
-Note that this issue is more likely to happen when manual instrumentation is used, especially in languages such as Go. Refer to our documentations for further details: [this page](/tracing/setup) leads you to the specific languages libraries we use.
+Note that this issue is more likely to happen when manual instrumentation is used, especially in languages such as Go. Refer to our documentations for further details: [this page][1] leads you to the specific languages libraries we use.
 
 ### My service is defined properly
 
@@ -35,7 +35,11 @@ If the Child span isn't associated directly to the Root span, you could end up w
 
 ### Nope, my code is properly instrumented
 
-It's time to contact [us](/help)!
+It's time to contact [us][2]!
 
 Send us your flare, and details about the language / library you're using, and a snippet of your code instrumentation.
 
+
+
+[1]: /tracing/setup
+[2]: /help

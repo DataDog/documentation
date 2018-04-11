@@ -32,7 +32,7 @@ Cela peut sembler contre intuitif, mais c'est le comportement attendu aujourd'hu
 
 ## Gérer les downtime
 
-Accédez à la page [Gérer les temps d'arrêt](https://app.datadog.com/monitors#/downtime) en sélectionnant l'onglet "Monitors" dans le menu principal et en sélectionnant le lien "Manage Downtime". Vous pouvez également accéder à la page "Manage Downtime" en cliquant sur le lien en haut de la page d'un monitor.
+Accédez à la page [Gérer les temps d'arrêt][1] en sélectionnant l'onglet "Monitors" dans le menu principal et en sélectionnant le lien "Manage Downtime". Vous pouvez également accéder à la page "Manage Downtime" en cliquant sur le lien en haut de la page d'un monitor.
 
 {{< img src="monitors/downtimes/downtime-nav.png" alt="downtime-nav" responsive="true" popup="true" >}}
 
@@ -47,7 +47,7 @@ Pour planifier les downtimes, cliquez sur le bouton "Schedule Downtime" dans le 
 1. Choisissez quoi mettre en sourdine
   {{< img src="monitors/downtimes/downtime-silence.png" alt="downtime-silence" responsive="true" popup="true" style="width:80%;">}}
   Vous pouvez sélectionner un monitor spécifique pour le rendre silencieux ou laisser ce champ vide pour désactiver tous les monitors. Vous pouvez également sélectionner un context pour limiter votre downtime à un host, un périphérique ou un tag spécifique.
-  Reportez-vous à la section [context](/graphing/miscellaneous/graphingjson/#scope) du Graphing Primer en utilisant JSON pour plus d'informations sur le context.
+  Reportez-vous à la section [context][2] du Graphing Primer en utilisant JSON pour plus d'informations sur le context.
   Si vous choisissez de rendre silencieux tous les monitors contenu dans un context, cliquez sur "Preview affected monitors" pour voir quels moniteurs sont actuellement affectés. Tous les monitors de votre context créés ou modifiés après la date de downtime seront également désactivés.
   Notez que si une alerte multiple est incluse, elle est uniquement désactivée pour les systèmes couverts par le context. Par exemple, si un downtime est définie pour `host:X` et qu'une alerte multiple est déclenchée à la fois sur `host:X` et `host:Y`, Datadog génère une notification pour` host:Y`, mais pas `host:X`.
 
@@ -57,8 +57,14 @@ Pour planifier les downtimes, cliquez sur le bouton "Schedule Downtime" dans le 
 
 3. Ajouter un message pour avertir votre équipe
   {{< img src="monitors/downtimes/downtime-notify.png" alt="downtime-notify" responsive="true" popup="true" style="width:80%;">}}
-  Entrez un message pour informer votre équipe de ce downtime. Le champ message supporte la mise en forme standard [markdown formatting](http://daringfireball.net/projects/markdown/syntax) ainsi que la syntaxe @ -notification de Datadog. Le champ "Notify your team" vous permet de spécifier les membres de l'équipe ou d'envoyer le message à un service [d'intégration](https://app.datadoghq.com/account/settings#integrations).
+  Entrez un message pour informer votre équipe de ce downtime. Le champ message supporte la mise en forme standard [markdown formatting][3] ainsi que la syntaxe @ -notification de Datadog. Le champ "Notify your team" vous permet de spécifier les membres de l'équipe ou d'envoyer le message à un service [d'intégration][4].
 
 ## En apprendre plus
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: https://app.datadog.com/monitors#/downtime
+[2]: /graphing/miscellaneous/graphingjson/#scope
+[3]: http://daringfireball.net/projects/markdown/syntax
+[4]: https://app.datadoghq.com/account/settings#integrations

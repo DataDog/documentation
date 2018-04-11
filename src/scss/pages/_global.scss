@@ -422,6 +422,13 @@ table, .table {
   }
 }
 
+// external link logos
+
+.link-logo{
+  transform: translateY(-1px);
+  margin-right: -1px;
+}
+
 // responsive tables
 .table-responsive-container {
   position:relative;

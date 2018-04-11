@@ -11,3 +11,4 @@ external_redirect: /api/#cancel-monitor-downtime-by-scope
 {{< code-snippets basename="api-monitor-cancel-downtime-by-scope" >}}
 ##### Example Response
 {{< code-snippets basename="result.api-monitor-cancel-downtime-by-scope" >}}
+

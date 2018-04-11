@@ -19,3 +19,4 @@ submitted points every 15 seconds. Any metrics with fractions of a second timest
 
 We have a soft limit of 100 time series per host, where a time series is
 defined as a unique combination of metric name and tag.
+

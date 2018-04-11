@@ -12,3 +12,5 @@ kind: documentation
     {{< nextlink href="tracing/getting_further/trace_sampling_and_storage" >}} échantillonnage et stockage des Traces{{< /nextlink >}}
 {{< /whatsnext >}}
 
+
+

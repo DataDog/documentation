@@ -12,9 +12,9 @@ further_reading:
 
 ## Conditional Contacts
 
-[Datadog monitors](/monitors/) allow for different text to be sent to different contacts based on the state of the monitor and the details of how it was triggered.
+[Datadog monitors][1] allow for different text to be sent to different contacts based on the state of the monitor and the details of how it was triggered.
 
-[Message template variables](/monitors/notifications) provide this kind of conditional processing and are described within the help text in section 3 of the monitor edit page shown below:
+[Message template variables][2] provide this kind of conditional processing and are described within the help text in section 3 of the monitor edit page shown below:
 
 {{< img src="monitors/faq/conditional_notification.png" alt="conditional_notification" responsive="true" popup="true" >}}
 
@@ -45,3 +45,7 @@ alert for {{host.customer}} on {{host.name}} @slack-{{host.customer}}
 In this case, @slack-{{host.customer}} could render to @slack-customer1 or @slack-customer2, which would then alert either the #customer1 or #customer2 channel in Slack.
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: /monitors/
+[2]: /monitors/notifications

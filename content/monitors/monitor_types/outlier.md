@@ -56,13 +56,13 @@ You can also define a monitor to alert when an outlier is detected in an importa
 
 {{< img src="monitors/monitor_types/outliers/outliers-alert-snapshot.png" alt="outliers alert snapshot" responsive="true" popup="true" style="width:80%;">}}
 
-For example, to alert when a Cassandra host is abnormally loaded compared to the rest of the group, you can [add a new outlier monitor](https://app.datadoghq.com/monitors#create/outlier) for the metric.
+For example, to alert when a Cassandra host is abnormally loaded compared to the rest of the group, you can [add a new outlier monitor][1] for the metric.
 
-Navigate to the [New Monitor](https://app.datadoghq.com/monitors#/create) page and click **Outlier**. Then fill out the **Define the metric** section just as you would for any other monitor.
+Navigate to the [New Monitor][2] page and click **Outlier**. Then fill out the **Define the metric** section just as you would for any other monitor.
 
 {{< img src="monitors/monitor_types/outliers/outliers-new-monitor-define-metric.png" alt="outliers new monitor define metric" responsive="true" popup="true" style="width:80%;">}}
 
-In the [alert conditions](/monitors/monitor_types/#define-the-conditions), select the grouping and timeframe. Then select an algorithm and parameter values to use for outlier detection.
+In the [alert conditions][3], select the grouping and timeframe. Then select an algorithm and parameter values to use for outlier detection.
 
 {{< img src="monitors/monitor_types/outliers/outliers-newer-monitor-set-conditions.png" alt="outliers newer monitor set condition" responsive="true" popup="true" style="width:80%;">}}
 
@@ -76,7 +76,7 @@ There are two different types of outlier detection algorithms you can use on you
 
 ### DBSCAN/ScaledDBSCAN
 
-A natural way to group together hosts that are behaving similarly is to use a clustering algorithm. We use [DBSCAN](https://en.wikipedia.org/wiki/DBSCAN), a popular density-based clustering algorithm, for this purpose. DBSCAN works by greedily agglomerating points that are close to each other. Clusters with few points in them are considered outliers.
+A natural way to group together hosts that are behaving similarly is to use a clustering algorithm. We use [DBSCAN][4], a popular density-based clustering algorithm, for this purpose. DBSCAN works by greedily agglomerating points that are close to each other. Clusters with few points in them are considered outliers.
 
 Traditionally, DBSCAN takes: 1) a parameter 𝜀 that specifies a distance threshold under which two points are considered to be close; and 2) the minimum number of points that have to be within a point’s 𝜀-radius before that point can start agglomerating. The image below shows an example of DBSCAN in action on points in the plane. There are two clusters. The large points had enough close neighbors to agglomerate those points, while the small colored points did no agglomerating themselves but are within the 𝜀-radius of a large point. The points in black are the outliers.
 
@@ -106,7 +106,7 @@ Here is a comparison of DBSCAN and ScaledDBSCAN with tolerances of 3 on field da
 
 ### MAD/ScaledMAD
 
-The  [Median Absolute Deviation](https://en.wikipedia.org/wiki/Median_absolute_deviation) is a robust measure of variability, and can be viewed as the robust analog for standard deviation. Robust statistics describe data in such a way that they are not unduly influenced by outliers.
+The  [Median Absolute Deviation][5] is a robust measure of variability, and can be viewed as the robust analog for standard deviation. Robust statistics describe data in such a way that they are not unduly influenced by outliers.
 
 For a given set of data D = {d<sub>1</sub>, ..., d<sub>n</sub>}, the deviations are the difference between each d<sub>i</sub> and median(D). The MAD is then the median of the absolute values of all the deviations. For example if D = {1, 2, 3, 4, 5, 6, 100}, then the median is 4, the deviations are {-3, -2, -1, 0, 1, 2, 96}, and the MAD is 2. (Note that the standard deviation by contrast is 33.8.)
 
@@ -154,3 +154,10 @@ Both algorithms are set up to identify outliers that differ from the majority of
 
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: https://app.datadoghq.com/monitors#create/outlier
+[2]: https://app.datadoghq.com/monitors#/create
+[3]: /monitors/monitor_types/#define-the-conditions
+[4]: https://en.wikipedia.org/wiki/DBSCAN
+[5]: https://en.wikipedia.org/wiki/Median_absolute_deviation

@@ -110,3 +110,5 @@ Uninstall the Agent using Add/Remove Programs, alternatively, it's possible to t
 ```
 (Get-WmiObject -Class Win32_Product -Filter "Name='Datadog Agent'" -ComputerName . ).Uninstall()
 ```
+
+

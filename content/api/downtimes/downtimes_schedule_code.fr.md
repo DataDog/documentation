@@ -11,3 +11,4 @@ external_redirect: /api/#schedule-monitor-downtime
 {{< code-snippets basename="api-monitor-schedule-downtime" >}}
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-monitor-schedule-downtime" >}}
+

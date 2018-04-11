@@ -5,7 +5,7 @@ aliases:
     - /tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm
 ---
 
-[Apdex](http://apdex.org/overview.html) (Application Performance Index) is an open standard developed by an alliance of companies that defines a standardized method to report, benchmark, and track application performance. Based on user experience satisfaction by measuring the response time of web applications and services, its role is to counterbalance response time average and percentiles which can be misleading by some extreme data points
+[Apdex][1] (Application Performance Index) is an open standard developed by an alliance of companies that defines a standardized method to report, benchmark, and track application performance. Based on user experience satisfaction by measuring the response time of web applications and services, its role is to counterbalance response time average and percentiles which can be misleading by some extreme data points
 
 ## Definition
 
@@ -48,6 +48,9 @@ You can then save your widget to follow your Apdex evolution above time:
 
 ## Display your Apdex on your service page
 
-To display the Apdex on your [service page](https://app.datadoghq.com/apm/services), select it in the configuration menu on the upper right corner of the page:
+To display the Apdex on your [service page][2], select it in the configuration menu on the upper right corner of the page:
 
 {{< img src="tracing/faq/apdex_service_list.png" alt="Apdex Service List" responsive="true" popup="true">}}
+
+[1]: http://apdex.org/overview.html
+[2]: https://app.datadoghq.com/apm/services

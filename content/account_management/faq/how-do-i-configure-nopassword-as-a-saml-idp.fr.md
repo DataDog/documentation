@@ -10,6 +10,8 @@ further_reading:
   text: Configurez vos Teams et Organisations avec plusieurs comptes
 ---
 
-[L'équipe de NoPassword a écrit un guide pour configurer ce SAML IdP](https://help.nopassword.com/portfolio-items/datadog/)
+[L'équipe de NoPassword a écrit un guide pour configurer ce SAML IdP][1]
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://help.nopassword.com/portfolio-items/datadog/

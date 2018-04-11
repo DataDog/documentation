@@ -32,3 +32,5 @@ Cliquez sur un check pour avoir plus de détails.
 ## En apprendre plus
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+

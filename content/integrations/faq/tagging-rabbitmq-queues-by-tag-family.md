@@ -45,3 +45,5 @@ instances:
 
 So in this case, the tags queue_family:thisqueue, queue_family:another, and queue_family:lepidorae tags would be added to those families of queues. These could then be used in any of your graphs to aggregate these queues together, to exclude this group of queues from a monitor, etc.
 
+
+

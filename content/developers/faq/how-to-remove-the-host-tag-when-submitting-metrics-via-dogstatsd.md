@@ -17,10 +17,14 @@ statsd.gauge('metric.test', randint(0,100), tags=['host:', 'box:vagrant'])
 
 This results in `metric.test` being reported without a host tag and only box:vagrant as the only tag.
 
-The following article have more information about [custom metrics](/getting_started/custom_metrics/):
+The following article have more information about [custom metrics][1]:
 
-* [Getting Started on custom metrics](/getting_started/custom_metrics)
+* [Getting Started on custom metrics][2]
 
-And as always, feel free to reach out to [us](/help) if you are looking for help with your [custom metrics](/getting_started/custom_metrics/).
+And as always, feel free to reach out to [us][3] if you are looking for help with your [custom metrics][1].
 
-**DISCLAIMER**: When removing the host tag you are removing a unique identifier for the submission of [custom metrics](/getting_started/custom_metrics/). When two datapoints are submitted with the same timestamp/metric/tag combination and do not have unique identifiers the last received/processed value overwrites the value stored. To avoid this edge case, ensure that no host is submitting the same exact metric/tag combination at any given timestamp
+**DISCLAIMER**: When removing the host tag you are removing a unique identifier for the submission of [custom metrics][1]. When two datapoints are submitted with the same timestamp/metric/tag combination and do not have unique identifiers the last received/processed value overwrites the value stored. To avoid this edge case, ensure that no host is submitting the same exact metric/tag combination at any given timestamp
+
+[1]: /getting_started/custom_metrics/
+[2]: /getting_started/custom_metrics
+[3]: /help
