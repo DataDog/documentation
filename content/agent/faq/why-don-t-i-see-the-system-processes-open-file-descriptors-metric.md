@@ -9,7 +9,15 @@ Users that enable the [process check][1] in a Datadog agent running on Linux OSs
 
 That said, if you're okay elevating the Datadog agent privileges you could do the following:
 
-* Stop the agent
+#### Agent v6 
+
+* [Stop the agent](/agent/faq/agent-commands)
+* Open `/etc/systemd/system/multi-user.target.wants/datadog-agent.service` and change the `user​` attribute under `[Service]`​ 
+* [Start the agent](/agent/faq/agent-commands)
+
+#### Agent v5
+
+* [Stop the agent](/agent/faq/agent-commands)
 * Open `/etc/dd-agent/supervisor.conf` and replace 'dd-agent' with 'root' on both of these lines (Do this again if you upgrade or reinstall the agent):
     * https://github.com/DataDog/dd-agent/blob/master/packaging/supervisor.conf#L20
     * https://github.com/DataDog/dd-agent/blob/master/packaging/supervisor.conf#L30
