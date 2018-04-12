@@ -10,3 +10,5 @@ Récupère toutes les spécifications d'un Dashboard.
 
 ##### Arguments
 *Cet endpoint ne prend aucun argument JSON.*
+
+
