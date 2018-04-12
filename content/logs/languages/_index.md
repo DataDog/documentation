@@ -1,7 +1,7 @@
 ---
 title: Log Collection Languages
 kind: Documentation
-description: "Configure your Datadog agent to gather logs from your favorite languages."
+description: "Configure your Datadog Agent to gather logs from your favorite languages."
 ---
 
 ## How to get the most of your application logs
@@ -33,6 +33,5 @@ For integration frameworks, we provide guidelines on how to log in JSON into a f
     {{< nextlink href="/logs/languages/python" >}}Python{{< /nextlink >}}
     {{< nextlink href="/logs/languages/ruby" >}}Ruby{{< /nextlink >}}
 {{< /whatsnext >}}
-
 
 [1]: /logs/processing

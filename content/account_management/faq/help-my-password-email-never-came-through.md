@@ -1,4 +1,3 @@
-
 ---
 title: Help! My Password email never came through!
 kind: faq

@@ -1,5 +1,5 @@
 ---
-title: Can I install the agent on my Kubernetes master node(s)
+title: Can I install the Agent on my Kubernetes master node(s)
 kind: faq
 ---
 

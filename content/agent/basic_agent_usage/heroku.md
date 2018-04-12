@@ -33,7 +33,7 @@ git push heroku master
 
 Once complete, the Datadog Agent is started automatically when each Dyno starts.
 
-The Datadog agent provides a listening port on 8125 for StatsD/DogStatsD metrics and events. Traces are collected on port 8126.
+The Datadog Agent provides a listening port on 8125 for StatsD/DogStatsD metrics and events. Traces are collected on port 8126.
 
 ## Configuration
 
@@ -51,7 +51,6 @@ In addition to the environment variables shown above, there are a number of othe
 | `DD_SERVICE_ENV` | *Optional.* The Datadog Agent automatically tries to identify your environment by searching for a tag in the form `env:<environment name>`. For more information, see the [Datadog Tracing environments page][5]. |
 
 ## More information
-
 Visit the [Github project page][6] for more information and to view the source code.
 
 [1]: http://docs.datadoghq.com/libraries/

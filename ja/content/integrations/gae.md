@@ -18,7 +18,6 @@ You can also send custom metrics to Datadog. -->
 
 ## 概要
 
-
 次の目的で、Google App EngineインテグレーションをPythonプロジェクトに使用します:
 
 * Google App Engine servicesのメトリクス(memcache, task queues, datastores)をDatadog側でも表示するため。

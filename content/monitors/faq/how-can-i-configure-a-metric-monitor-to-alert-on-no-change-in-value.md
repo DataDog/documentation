@@ -38,6 +38,5 @@ Other [alert conditions/options][2] can be set to preference. Your monitor's UI 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /graphing/miscellaneous/functions
 [2]: /monitors/monitor_types/#define-the-conditions

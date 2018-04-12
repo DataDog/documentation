@@ -11,7 +11,6 @@ doclevel: complete
 
 <!-- ### Overview
 
-
 Connect IIS to Datadog in order to:
 
 - Visualize your web server performance.
@@ -19,18 +18,15 @@ Connect IIS to Datadog in order to:
 
 ## 概要
 
-
 次の目的で、IISのメトリクスをDatadogに送信します:
 
 * IISのパフォーマンスを可視化する
 * IISのパフォーマンス情報と他のアプリケーションの情報を連携し状況を把握する
 
-
 Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
 * [IISインテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/iis/conf.yaml.example)
 * [IISインテグレーション checks.d](https://github.com/DataDog/integrations-core/blob/master/iis/check.py)
-
 
 <!-- The following metrics are collected by default with the IIS integration:
 
@@ -55,7 +51,6 @@ Datadog Agentの設定ファイルサンプルとメトリクス取得プログ�
     iis.uptime
     iis.users.anon
     iis.users.nonanon
-
 
 Overall metric definitions from IIS can be found [here](http://msdn.microsoft.com/en-us/library/aa394298(v=vs.85).aspx). -->
 
@@ -82,6 +77,5 @@ IIS インテグレーションがデフォルトで取得しているメトリ�
     iis.uptime
     iis.users.anon
     iis.users.nonanon
-
 
 IISのメトリクスに関する詳細は、Microsoftの[「Win32_PerfFormattedData_W3SVC_WebService class」](https://msdn.microsoft.com/en-us/library/aa394298(v=vs.85).aspx)ページを参照してください。

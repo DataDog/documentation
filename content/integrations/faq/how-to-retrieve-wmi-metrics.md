@@ -61,7 +61,6 @@ Many performance related metrics are reported by the PerfMon tool, and are calle
 ```
 PS C:\> Get-WmiObject -Query "select * from Win32_PerfFormattedData_PerfProc_Process where Name = 'Powershell'"
 
-
 __GENUS                 : 2
 __CLASS                 : Win32_PerfFormattedData_PerfProc_Process
 __SUPERCLASS            : Win32_PerfFormattedData
@@ -171,7 +170,7 @@ wmi_check
   Collected 0 metrics, 0 events and 1 service check 
 ```
 
-This is because the agent cannot report on 2 different metrics that have the same set of name and tags. To be able to differentiate between the 2 we can use the tag_by: Instance_Property_Name statement to use the value of an instance's property as an additional tag:
+This is because the Agent cannot report on 2 different metrics that have the same set of name and tags. To be able to differentiate between the 2 we can use the tag_by: Instance_Property_Name statement to use the value of an instance's property as an additional tag:
 ```yaml
 init_config:
 

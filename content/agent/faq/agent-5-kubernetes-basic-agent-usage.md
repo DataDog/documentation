@@ -1,5 +1,5 @@
 ---
-title: Agent v5 Kubernetes basic agent usage
+title: Agent v5 Kubernetes basic Agent usage
 kind: faq
 ---
 
@@ -22,7 +22,7 @@ You can also just [run the Datadog Agent on your host][3] and configure it to ga
 
 Thanks to Kubernetes, you can take advantage of DaemonSets to automatically deploy the Datadog Agent on all your nodes (or on specific nodes by using nodeSelectors).
 
-*If DaemonSets are not an option for your Kubernetes cluster, [install the Datadog agent][4] as a sidecar container on each Kubernetes node.*
+*If DaemonSets are not an option for your Kubernetes cluster, [install the Datadog Agent][4] as a sidecar container on each Kubernetes node.*
 
 If your Kubernetes has RBAC enabled, see the [documentation on how to configure RBAC permissions with your Datadog-Kubernetes integration][5].
 
@@ -126,7 +126,6 @@ If the Agent is deployed you will see output similar to the text below, where de
           - instance #0 [OK]
           - Collected 39 metrics, 0 events & 7 service checks
 
-
 ## Setup Kubernetes State
 ### Installation
 #### Container Installation
@@ -217,7 +216,6 @@ If the Agent is deployed you will see similar output to the text below, where de
           - instance #0 [OK]
           - Collected 39 metrics, 0 events & 7 service checks
 
-
 ## Setup Kubernetes DNS
 ### Installation
 
@@ -229,7 +227,7 @@ Edit the `kube_dns.yaml` file to point to your server and port, set the masters 
 
 #### Using with service discovery
 
-If you are using one dd-agent pod per kubernetes worker node, you could use the following annotations on your kube-dns pod to retrieve the data automatically.
+If you are using one `dd-agent` pod per kubernetes worker node, you could use the following annotations on your kube-dns pod to retrieve the data automatically.
 
 ```yaml
 
@@ -246,7 +244,6 @@ metadata:
 
  - Notice the "dns-pod" tag will keep track of the target DNS pod IP. The other tags will be related to the dd-agent that is polling the informations using the service discovery.
  - The service discovery annotations need to be applied to the pod. In case of a deployment, add the annotations to the metadata of the template's spec.
-
 
 ### Validation
 

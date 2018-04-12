@@ -15,6 +15,5 @@ We have [a blog post][2] which should help you achieve this.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /integrations/webhooks
 [2]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio

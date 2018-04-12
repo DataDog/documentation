@@ -33,7 +33,6 @@ not include the `AgentCheck` interface that we'll be using.
 Agent Checkを使うには、Datadog Agent 3.2.0 以降をインストールしている必要があります。 それ以前のバージョンには、Agent Checkのインターフェースは実装されていません。
 </div>
 
-
 <!--
 ======================================================
 OVERVIEW
@@ -49,14 +48,12 @@ that collects timing metrics and status events from HTTP services.
 Any custom checks will be included in the main check run loop, meaning
 they will run every check interval, which defaults to 15 seconds. -->
 
-
 <h3 id="overview">概要</h3>
 
 このガイドでは、Pythonで記述したDatadog Agent のpluginであるAgent Check を記述することで、新しいデータソースからメトリクスとイベント情報を取得する方法について説明します。
 `AgentCheck`のインターフェースを確認した後、HTTP サービスからタイミングメトリクスやステータスに関するイベント情報を取得する簡単なAgent Checkを記述してみます。
 
 Agent Checkは、メインチェックの実行ループに組み込まれ、デフォルト設定では15秒間隔で実行されます。
-
 
 <!--
 ======================================================
@@ -80,7 +77,6 @@ web chat client, too</a>.) -->
 
 セットアップ中に問題が発生した場合は、[freenode にあるDatadog](irc://irc.freenode.net/datadog)のチャットルームで気兼ねなく質問してください。 ([web チャットクライアント](http://webchat.freenode.net/?randomnick=1&channels=datadog&prompt=1))
 
-
 <!--
 ======================================================
 INTERFACE
@@ -99,7 +95,6 @@ run once per instance defined in the check configuration (discussed later). -->
 すべてのカスタムチェックは、`checks/__init__.py`に記述されている`AgentCheck`クラスを継承し、`check()`関数をオーバーライドして生成します。
 `check()` 関数には、そのインスタンスの構成が記述された辞書型の情報を引数に渡します。
 `check()` 関数は、Check設定で定義されたインスタンスごとに一回実行されることになります。(詳細に関しては、後述します)
-
 
 <!-- #### Sending metrics
 
@@ -142,7 +137,6 @@ flushed out with the other Agent metrics.
 Agent Checkでメトリクスを送信することは非常に簡単です。既にDogStatsDが提供している関数に精通しているなら、移行は非常に簡単です。
 まだそれらの関数に慣れていない場合でも、それほど大変ではないことがすぐに分かるはずです。
 
-
 Agent Checkでは、以下の関数を利用することが出来ます:
 
     self.gauge( ... ) # Sample a gauge metric
@@ -169,7 +163,6 @@ Agent Checkでは、以下の関数を利用することが出来ます:
 
 これらの関数は、チェックロジックのどこからでも呼び出すことが出来ます。これらの関数を使って取得したメトリクスは、`check` 機能の実行の最後に他のAgent メトリクスと共にDatadogのサービスに転送されます。
 
-
 <!-- #### Sending events
 
 At any time during your check, you can make a call to `self.event(...)` with one argument: the payload of the event. Your event should be structured like this:
@@ -188,10 +181,8 @@ At any time during your check, you can make a call to `self.event(...)` with one
         "tags": (optional) list, a list of tags to associate with this event
     }
 
-
 At the end of your check, all events will be collected and flushed with the rest
 of the Agent payload. -->
-
 
 #### イベントの送信
 
@@ -211,9 +202,7 @@ Check 内でイベントを送信するには、`self.event(...)`を呼び出し
         "tags": (optional) list, a list of tags to associate with this event
     }
 
-
 全てのイベントは、`check` 機能の実行の最後に、他のAgent Checkの内容と共にDatadogのサービスに転送されます。
-
 
 <!-- #### Exceptions
 
@@ -236,7 +225,6 @@ easy debugging. For example:
 
 不適切な設定、プログラミング時のエラー、いずれかのメトリクスが取得できない時など、Checkが正常に実行できない場合には、状況を把握しやすい例外メッセージが必要です。この例外メッセージはログに記録されると同時に、`datadog-agent info` コマンドで表示出来るので、デバッグに利用することが出来ます:
 
-
     $ sudo /etc/init.d/datadog-agent info
 
       Checks
@@ -246,7 +234,6 @@ easy debugging. For example:
         ---------------
           - instance #0 [ERROR]: ConnectionError('Connection refused.',)
           - Collected 0 metrics & 0 events
-
 
 <!-- #### Logging
 
@@ -261,7 +248,6 @@ AgentCheckクラスを承継しているので、親クラスで実装されて�
 **The log handler will be `checks.{name}`
 where `{name}` is the name of your check (based on the filename of the check
 module).**
-
 
 <!--
 ======================================================
@@ -316,7 +302,6 @@ instances:
 
 <div class="alert alert-block">注: YAML ファイルは、タブを使わず、スペースを使って記述してください。</div>
 
-
 <!-- #### init_config
 
 The *init_config* section allows you to have an arbitrary number of global
@@ -326,7 +311,6 @@ configuration options that will be available on every run of the check in
 #### init_config
 
 *init_config*のセクションでは、Agent Check実行時に利用できるグローバルな設定オプションを複数記述することが出来ます。このオプションは、全てのCheckの実行において`self.init_config`の方法で、アクセスすることが出来ます。
-
 
 <!-- #### instances
 
@@ -339,7 +323,6 @@ every check will support multiple instances out of the box. -->
 *instances*のセクションは、Checkが実行される全ての対象(instance)のリストになります。
 
 Checkの中で実行される`check()` 関数の実体は、各チェック対象(instance)に対して個別に実行されていきます。このことより全てのCheckは、そのままの状態で複数のチェック対象(instance)をサポートしていることを意味しています。
-
 
 <!--
 ======================================================
@@ -481,7 +464,6 @@ class HelloCheck(AgentCheck):
 
 次のセクションでは、HTTPサービスに対しpingを実行し、レスポンス時間を計測してDatadogに送信するCheckを書いてみることにします。
 
-
 <!--
 ======================================================
 HTTP CHECK
@@ -502,7 +484,6 @@ following will happen:
   - If the response code != 200, an event will be submitted with the URL and
   the response code. -->
 
-
 <h3 id="http">HTTP のCheck</h3>
 
 ここからは、HTTPのエンドポイントの状況を確認するための基本的なCheckの書き方を解説します。
@@ -512,8 +493,6 @@ Checkが実行される度に、HTTPのエンドポイントに対してGETリ�
 - レスポンスが成功と判定された場合（レスポンスステータスが200で、タイムアウトをしていない）、レスポンス時間をメトリクスとして送信します。
 - レスポンスがタイムアウトした場合、URLとタイムアウトのイベントを送信します。
 - レスポンスステータスが200以外の場合、URL及びレスポンスコードのイベントを送信します。
-
-
 
 <!-- #### Configuration
 
@@ -541,7 +520,6 @@ instances:
 
 {{< /highlight >}} -->
 
-
 #### 設定
 
 インスタンス定義の中身が各Check本体でどのように処理されるのかを理解するために、
@@ -550,7 +528,6 @@ instances:
 設定ファイルは、Checkの実行先のURLの定義以外に、それぞれのURLに対してのタイムアウトを設定すると、より環境に合ったCheckを実行出来ることになります。更に、それぞれのインスタンスでタイムアウトを設定しなかった時のために、デフォルトのタイムアウトを設定しておくことも必要になります。
 
 上記をふまえると、設定ファイルは次のようになります:
-
 
 {{< highlight console >}}
 init_config:
@@ -705,7 +682,6 @@ def status_code_event(self, url, r, aggregation_key):
     })
 {{< /highlight >}}
 
-
 <!-- #### Putting It All Together
 
 For the last part of this guide, we'll show the entire check. This module would
@@ -741,7 +717,6 @@ Agent のroot から、次のコマンドでテストを実行します:
 チェックの完全なソースは次の通りです。
 
 {{< snippet-code-block file="guides-agentchecks-ex-all.py" nocomments="true">}}
-
 
 <!--
 ======================================================

@@ -1,4 +1,3 @@
-
 ---
 title: Single Sign On With SAML
 kind: documentation
@@ -106,7 +105,6 @@ When the Datadog url is loaded, the browser is redirected to the customer IdP wh
 After enabling the IdP Initiated Login feature (and waiting for caches to clear), you will need to get a new version of the SP Metadata. Your new SP Metadata will contain a different, organization-specific AssertionConsumerService endpoint to send assertions to.
 
 If you do not use the updated SP Metadata, Datadog will not be able to associate the assertion with your organization and will display an error page with a message that the SAML response is missing the "InResponseTo" attribute.
-
 
 ## Further Reading
 

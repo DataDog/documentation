@@ -20,5 +20,4 @@ The example shown below captures how this can be setup:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /graphing/miscellaneous/functions

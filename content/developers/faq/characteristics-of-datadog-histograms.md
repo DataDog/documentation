@@ -50,5 +50,4 @@ Datadog returns (10 + 1 + 1 + 1)/4 = 3.25 which is different from the global ave
 
 Whether the histogram value of source 1 was computed on 100 statsd values or 1, it has the same weight in the calculation, hence the difference with a centralized aggregation system.
 
-
 [1]: /graphing/faq/how-to-graph-percentiles-in-datadog

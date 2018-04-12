@@ -26,7 +26,7 @@ Coupled with Datadog’s integrations with [Docker][4], [Kubernetes][5], [ECS][6
 
 After deploying the [Docker Agent][7], no other configuration is necessary.
 
-Note that for collecting Container information in the standard install rather than with the [Docker Agent][7], the dd-agent user needs to have permissions to access **docker.sock**.
+Note that for collecting Container information in the standard install rather than with the [Docker Agent][7], the `dd-agent` user needs to have permissions to access **docker.sock**.
 
 ## Searching, Filtering, and Pivoting
 
@@ -97,7 +97,6 @@ While actively working with the Containers page, metrics are collected at 2s res
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [3]: https://app.datadoghq.com/containers
 [4]: /integrations/docker_daemon

@@ -10,25 +10,20 @@ kind: integration
 
 <!-- ## Overview
 
-
 - Capture metrics from specific running processes on a system such as CPU %, memory, and I/O.
 - Monitor the status of running processes with [Process Monitors](/guides/monitoring#process) (**Requires Datadog Agent >= 5.1.0**). -->
 
 ## 概要
 
-
 - システム上の特定のプロセスのCPU%、メモリー、I/Oのメトリクスを取得します。
 - [Process Monitors](/guides/monitors#process)の設定に基づいて動作しているプロセスのステータスを監視し、アラートを出力します。(**このインテグレーションには、Datadog Agent >= 5.1.0が必要です。**).
-
 
 Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
 * [Process check インテグレーションのscript](https://github.com/DataDog/integrations-core/blob/master/process/conf.yaml.example)
 * [Process check インテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/process/conf.yaml.example)
 
-
 <!-- ## Configuration
-
 
  *To capture Process metrics you need to install the Datadog Agent.*
 
@@ -67,7 +62,6 @@ Datadog Agentの設定ファイルサンプルとメトリクス取得プログ�
             - Collected 8 metrics & 0 events -->
 
 ## 設定
-
 
  *プロセスメトリクスを取得するには、Datadog Agentのインストールが必要です。*
 

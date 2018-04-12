@@ -1,11 +1,10 @@
 ---
-title: AWS ECS with agent v5
+title: AWS ECS with Agent v5
 kind: faq
 ---
 
-
 <div class="alert alert-warning">
-This documentation is to setup AWS EC2 container Service with <strong>Datadog agent 5</strong>
+This documentation is to setup AWS EC2 container Service with <strong>Datadog Agent 5</strong>
 </div>
 
 ## Setup
@@ -65,7 +64,6 @@ aws ecs register-task-definition --cli-input-json file://path/to/dd-agent-ecs.js
 
   For more information on ECS policies, [review the documentation on the AWS website][7].
 
-
 2. Using the Identity and Access Management (IAM) console, create a new role called ```dd-agent-ecs```.
 3. Select **Amazon EC2 Role for EC2 Container Service**. On the next screen do not check any checkboxes and click **Next Step**.
 4. Click **Create Role**.
@@ -101,7 +99,7 @@ aws ecs register-task-definition --cli-input-json file://path/to/dd-agent-ecs.js
 
 #### Create a new instance including a startup script
 
-Ideally you want the Datadog agent to load on one container on each EC2 instance. The easiest way to achieve this is to have a startup script on each instance used. Unfortunately there is no way to add a script to an existing instance. So you need to create a new instance and add it to your ECS cluster.
+Ideally you want the Datadog Agent to load on one container on each EC2 instance. The easiest way to achieve this is to have a startup script on each instance used. Unfortunately there is no way to add a script to an existing instance. So you need to create a new instance and add it to your ECS cluster.
 
 ##### Create a new Amazon Linux instance
 
@@ -133,7 +131,6 @@ This user script above will:
 ##### Dynamic detection and monitoring of running services
 
 Datadog's <a href="https://docs.datadoghq.com/agent/autodiscovery/">Autodiscovery</a> can be used in conjunction with ECS and Docker to automatically discovery and monitor running tasks in your environment.
-
 
 [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_GetStarted.html
 [2]: https://aws.amazon.com/cli/

@@ -25,7 +25,7 @@ further_reading:
 ## Trace sampling 
 
 Due to the extremely high volume of traces in a web-scale application, sampling is applied to traces in Datadog.  
-**Statistics (requests, errors, latency, etc.) are calculated based on the full volume of traces at the agent level, and are therefore always accurate**.
+**Statistics (requests, errors, latency, etc.) are calculated based on the full volume of traces at the Agent level, and are therefore always accurate**.
 
 ### Statistics (Requests, Errors, Latencies etc.)
 
@@ -45,11 +45,11 @@ To ensure keeping a representative sample set of traces, Datadog combines multip
 
 * **Agent sampling**: Reduces the resources and network used by the Agent for sending traces to the backend. Configurable, default to a maximum of 10 traces per second.
 
-* **Server sampling**: Looks at all reporting agents, keeping samples representative of the overall infrastructure. Allows a volume up to 60 traces per minute per host.
+* **Server sampling**: Looks at all reporting Agents, keeping samples representative of the overall infrastructure. Allows a volume up to 60 traces per minute per host.
 
 * **Client sampling**: Allows reduction of instrumentation overhead by only instrumenting a configurable percentage of the transactions. By default, it is disabled.
 
-{{< img src="tracing/product_specs/trace_sampling_storage/sampling_trace.png" alt="Individual traces are sampled at the agent, server, and client level." responsive="true" popup="true" style="width:90%;">}}
+{{< img src="tracing/product_specs/trace_sampling_storage/sampling_trace.png" alt="Individual traces are sampled at the Agent, server, and client level." responsive="true" popup="true" style="width:90%;">}}
 
 ### Signature Sampling
 
@@ -107,7 +107,6 @@ Individual traces are stored for up to 6 months. To determine how long a particu
 | 6 days                 |               10% |
 | 6 months               |                1% |
 
-
 That is to say, on a given day you would see in the UI:
 
 * **100%** of sampled traces from the last 6 hours
@@ -115,7 +114,6 @@ That is to say, on a given day you would see in the UI:
 * **10%** from the previous six calendar days
 * **1%** of those from the previous six months (starting from the first day of the month six months ago)
 * **0%** of traces older than 6 months
-
 
 For example, at `9:00am UTC Wed, 12/20` you would see:
 
@@ -125,7 +123,6 @@ For example, at `9:00am UTC Wed, 12/20` you would see:
 * **1%** of traces sampled on `7/1 00:00` - `12/13 23:59`
 * **0%** of traces before `7/1 00:00`
 
-
 Once a trace has been viewed, it continues to be available by using its trace ID in the URL: `https://app.datadoghq.com/apm/trace/<trace_id>` This is true even if it “expires” from the UI. This behavior is independent of the UI retention time buckets.
 
 {{< img src="tracing/trace_id.png" alt="Trace ID" responsive="true" popup="true">}}
@@ -133,7 +130,6 @@ Once a trace has been viewed, it continues to be available by using its trace ID
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm
 [2]: /tracing/visualization/trace

@@ -33,7 +33,6 @@ right people get notified so the problem can be resolved as soon as possible.
 
 3. Optionally enable **monitor renotification**. This option is useful to remind your team that a problem is not solved until the monitor is marked as resolved. If enabled, you can configure an escalation message to be sent anytime the monitor renotifies. The original message is included as well.
 
-
 ## Say what's happening
 ### Message template variables
 
@@ -282,7 +281,6 @@ For example, if the rendered variable is setup as a channel in the Slack integra
 ## Further Reading 
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /monitors
 [2]: http://daringfireball.net/projects/markdown/syntax

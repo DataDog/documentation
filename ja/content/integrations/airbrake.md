@@ -26,7 +26,6 @@ AirbrakeとDatadogの連携
 * グラフ内で、例外を検索することが出来るようになります。
 * 例外に関して、イベントストリームでコミュニケーションを取ることが出来ます。
 
-
 <!-- <div id="int-configuration">
 <h2>Configuration</h2>
 

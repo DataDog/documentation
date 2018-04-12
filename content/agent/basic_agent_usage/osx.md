@@ -21,7 +21,7 @@ further_reading:
 
 This page outlines the basic functionality of the Datadog Agent.
 If you haven't installed the Agent yet, instructions can be found
-[in the Datadog agent integration page][1].  
+[in the Datadog Agent integration page][1].  
 
 By default, your Agent is installed in its own sandbox located at `/opt/datadog-agent`. You’re free to move this folder wherever you like.
 However, we assume that the Agent is installed in its default location, so be sure to modify the instructions accordingly if you decide to move it to another location.
@@ -43,7 +43,6 @@ _lifecycle commands_ (former `datadog-agent start`/`stop`/`restart`/`status` on 
 | `datadog-agent check <check_name>` | `datadog-agent check <check_name>`                   | Run a check           |
 {{% /table %}}
 
-
 ## Configuration
 
 The configuration files and folders for the Agent are located at:
@@ -57,7 +56,6 @@ Configuration files for [integrations][2]:
 | Agent v5                                  |  Agent v6                          |
 |:-----|:----|
 |`~/.datadog-agent/conf.d/`|`~/.datadog-agent/conf.d/`|
-
 
 ## Troubleshooting
 
@@ -74,7 +72,6 @@ The Agent logs are located in the `/var/log/datadog/` directory:
 
 If you're still having trouble, [our support team][3] will be glad to provide further assistance.
 
-
 ## Switch between Agent v5 and v6
 ### Upgrade to Agent 6
 
@@ -90,7 +87,7 @@ Then start the Datadog Agent app (once started, you should see it in the system 
 ### Install script
 #### To Upgrade
 
-The Agent 6.x installer can automatically convert your 5.x style agent configuration at upgrade:  
+The Agent 6.x installer can automatically convert your 5.x style Agent configuration at upgrade:  
 
 ```shell
   DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_mac_os.sh)"
@@ -98,7 +95,7 @@ The Agent 6.x installer can automatically convert your 5.x style agent configura
 
 #### To Install Fresh
 
-In case you want to install on a clean box (or have an existing agent 5 install
+In case you want to install on a clean box (or have an existing Agent 5 install
 from which you do not wish to import the configuration) you have to provide an
 api key:
 
@@ -113,7 +110,7 @@ api key:
 3. Uninstall the Datadog Agent application
 4. [Install the Agent 5 DMG package using your preferred installation method][1]
 
-## Uninstall the agent
+## Uninstall the Agent
 
 Stop and Close the Datadog Agent: via the bone icon in the Tray.
 

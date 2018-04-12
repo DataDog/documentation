@@ -23,13 +23,11 @@ To improve visibility into applications using unsupported frameworks, consider:
 * [Submitting a pull request][1] with instrumentation for inclusion in a future release.
 * [Contact support][2] and submit a feature request.
 
-
-
 ## Installation and Getting Started
 
 To begin tracing applications written in any language, first [install and configure the Datadog Agent][3] (see additional documentation for [tracing Docker applications](/tracing/setup/docker/)).
 
-Next, download `dd-java-agent.jar` that contains the agent class files:
+Next, download `dd-java-agent.jar` that contains the Agent class files:
 
 ```shell
 wget -O dd-java-agent.jar 'https://search.maven.org/remote_content?g=com.datadoghq&a=dd-java-agent&v=LATEST'
@@ -48,9 +46,9 @@ The tracer is configured using System Properties and Environment Variables as fo
 | Config             | System Property       | Environment Variable      |  Default           | Description |
 |:------------------ |:--------------------- |:------------------------- |:------------------ |:----- |
 | service.name       | dd.service.name       | DD_SERVICE_NAME           | `unnamed-java-app` | The name of a set of processes that do the same job. Used for grouping stats for your application.|
-| writer.type        | dd.writer.type        | DD_WRITER_TYPE            | `DDAgentWriter`    | Default value sends traces to the trace agent. Configuring with `LoggingWriter` instead writes traces out to the console. |
+| writer.type        | dd.writer.type        | DD_WRITER_TYPE            | `DDAgentWriter`    | Default value sends traces to the trace Agent. Configuring with `LoggingWriter` instead writes traces out to the console. |
 | agent.host         | dd.agent.host         | DD_AGENT_HOST             | `localhost`        | Hostname for where to send traces to. If using a containerized environment, configure this to be the host ip.  See our [docker docs][4] for additional detail. |
-| agent.port         | dd.agent.port         | DD_AGENT_PORT             | `8126`             | Port number the agent is listening on for configured host. |
+| agent.port         | dd.agent.port         | DD_AGENT_PORT             | `8126`             | Port number the Agent is listening on for configured host. |
 | priority.sampling  | dd.priority.sampling  | DD_PRIORITY_SAMPLING      | `false`            | Enable priority sampling to ensure distributed traces are complete or to require sampling of specific traces. See [Sampling / distributed tracing](#sampling-distributed-tracing) section for details. |
 | trace.span.tags  | dd.trace.span.tags  | DD_TRACE_SPAN_TAGS      | `null`            | (Example: `key1:value1,key2:value2`) A list of default tags to be added to every span. Tags of the same name added directly to a span will overwrite the defaults provided here. |
 
@@ -83,7 +81,7 @@ For Gradle, add:
 compile group: 'com.datadoghq', name: 'dd-trace-api', version: {version}
 ```
 
-Now add `@Trace` to methods to have them be traced when running with `dd-java-agent.jar`.  If the agent is not attached, this annotation will have no effect on your application.
+Now add `@Trace` to methods to have them be traced when running with `dd-java-agent.jar`.  If the Agent is not attached, this annotation will have no effect on your application.
 
 ### OpenTracing API
 
@@ -234,7 +232,6 @@ Current Priority Values (more may be added in the future):
 |USER_DROP      | The user asked to not keep the trace. The Agent will drop it.                                              |
 |USER_KEEP      | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                     |
 
-
 Manually set trace priority:
 ```java
 import datadog.opentracing.DDSpan;
@@ -253,7 +250,6 @@ public class MyClass {
     }
 }
 ```
-
 
 ## Debugging
 
@@ -332,7 +328,6 @@ Don't see your desired datastores? We're continually adding additional support, 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: https://github.com/DataDog/documentation#outside-contributors
 [2]: /help

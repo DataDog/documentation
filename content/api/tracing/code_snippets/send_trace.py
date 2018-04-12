@@ -11,7 +11,6 @@ SPAN_ID = random.randint(1,1000000)
 # START and DURATION must be nanoseconds
 START = int(time.time() * 1000000000)
 
-
 # Do things...
 time.sleep(2)
 

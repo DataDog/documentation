@@ -21,7 +21,6 @@ OVERVIEW
 
 ### 概要
 
-
 <!-- This guide will outline the basic functionality of the Datadog Agent.
 If you haven't installed the Agent yet, instructions can be found
 <a href='https://app.datadoghq.com/account/settings#agent'>here</a>. -->

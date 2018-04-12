@@ -20,4 +20,3 @@ This end point allows you to query for metrics from any time period.
 * **`query`** [*required*]:  
     The query string
 
-

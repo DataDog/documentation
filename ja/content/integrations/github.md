@@ -10,7 +10,6 @@ doclevel: complete
 
 <!-- ## Overview
 
-
 Capture GitHub commits in Datadog to:
 
 - Track new features from code changes
@@ -19,16 +18,13 @@ Capture GitHub commits in Datadog to:
 
 ## 概要
 
-
 次の目的でGitHubのコミット情報をDatadogと連携します:
 
 - ソースコードの変更履歴から、フューチャ追加の追跡をする。
 - アラート発生時やビルドの失敗時にソースコードの変更が起因していないかを確認する。
 - ソースコードの変更に関し、Datadogのイベントストリーム上でチャットをする。
 
-
 <!-- ## Configuration
-
 
 Select 'Github' [here](https://app.datadoghq.com/account/settings) and link your account.
 You can then select which repos you would like to integrate, which branches, and if you'd like to
@@ -36,9 +32,7 @@ receive commits and/or issues. -->
 
 ## 設定
 
-
 Datadogのインテグレーションページで['Github'](https://app.datadoghq.com/account/settings)タイルを選択し、`Configuration`タブから`Sign in with Github`をクリックし、アカウントを設定します。その後リポジトリ、ブランチ、コミットなどの情報を設定します。
-
 
 <!-- ### What to Expect
 Once the integration is complete, whatever you select (commits and/or issues) will populate

@@ -4,7 +4,6 @@ require 'net/http'
 TRACE_ID = rand(1..1000000)
 SPAN_ID = rand(1..1000000)
 
-
 # Start a timer.
 START = Time.now.to_f
 

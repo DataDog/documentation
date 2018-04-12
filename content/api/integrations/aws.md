@@ -32,7 +32,6 @@ Configure your Datadog-AWS integration directly through Datadog API.
 * **`account_specific_namespace_rules`** [*optional*, *default*=**None**]:
     An object (in the form `{"namespace1":True/False, "namespace2":True/False}`) that enables or disables metric collection for specific AWS namespaces for this AWS account only. A list of namespaces can be found at the `https://api.datadoghq.com/api/v1/integration/aws/available_namespace_rules` endpoint.
 
-
 [1]: /integrations/amazon_web_services
 [2]: https://docs.datadoghq.com/integrations/amazon_web_services/#configuration
 [3]: https://docs.datadoghq.com/integrations/amazon_web_services/#installation

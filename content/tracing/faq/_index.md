@@ -12,5 +12,3 @@ private: true
     {{< nextlink href="tracing/faq/terminology" >}}Terminology{{< /nextlink >}}
 {{< /whatsnext >}}
 
-
-

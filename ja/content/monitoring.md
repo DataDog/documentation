@@ -33,7 +33,6 @@ Here is a quick overview of the different terms used in this guide.
 - **Monitorタイプ**: [ホスト](#ホストを対象にしたmonitor)-, [メトリクス](#メトリクスを対象にしたmonitor)-, [インテグレーション](#インテグレーションを対象にしたmonitor)-, [プロセス](#プロセスを対象にしたmonitor)-, [ネットワーク](#ネットワークを対象にしたmonitor)-, [イベント](#イベントを対象にしたmonitor)-, [カスタムチェック](#カスタムチェックを対象にしたmonitor), APM-, [コンポジット](#コンポジット-複合-monitor)-, があります。特定のMonitorタイプの詳細に関しては、サイドバーからそれぞれのタイプの項目を確認してください。
 - **タグ**: 各メトリクスやホストに対して付けることができるラベルです。タグの詳細に関しては、[Tagging](/guides/tagging) ページを参照して下さい。
 
-
 <!-- ## Creating a Monitor
 
 Navigate to the [Create Monitors](https://app.datadoghq.com/monitors#/create)
@@ -45,7 +44,6 @@ on the left. This document will walk through the configuration of each type.
 ## 新しい Monitor の作成
 
 [Create Monitors](https://app.datadoghq.com/monitors#/create)のページへ移動するには、メインメニューの`Monitors`タブからドロップダウンメニューの`New Monitor`を選択します(テーマの選択次第により、メインメニューは画面の左側あるいは上部に配置されています)。ページが表示されると各Monitorタイプが左側に一覧で表示されます。このドキュメントでは、これらの各Monitorタイプの設定方法について解説していきます。
-
 
 <!-- ### Host Monitors
 
@@ -67,7 +65,6 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
 `UP`というステータスで定期的に送信します。
 このハートビート信号の状態をMonitor対象に追加することで、Datadog Agentやホストの死活状態が把握できます。
 
-
 <!--
 1. Select your **host by name or tag(s)**. Providing a tag will monitor every
    host that has that tag or tag combination.
@@ -85,7 +82,6 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
 2. `Check Alert`または`Cluster Alert`を選択します。その後、**no-data timeframe**の項目で、分単位で時間を設定します。ここで設定した時間を超えてハートビート信号が受信できなかった場合に、通知が送信されます。
 
 3. 通知先の設定をします。通知先の設定に関しては、このドキュメントの[”通知先の設定”](#通知先の設定)の項目を参照してください。
-
 
 <!--
 ### Metric Monitors
@@ -295,10 +291,8 @@ Datadog Agentが起動していると`datadog.agent.up`と呼ばれるハート�
 
 7. 通知先の設定をします。通知先の設定に関しては、このドキュメントの[”通知先の設定”](#通知先の設定)の項目を参照してください。
 
-
 <!--
 ### Integration Monitors
-
 
 {{< img src="guides/monitor/es_status.png" >}}
 
@@ -329,7 +323,6 @@ selection, you can choose to monitor either a "Status" or a "Metric".
 <!--
 ### Process Monitors
 
-
 {{< img src="guides/monitor/process_monitor.png" >}}
 
 A process monitor will watch the status produced by the `process.up` service
@@ -352,7 +345,6 @@ point they should notify.
 設定の詳細については、[Process チェック](/ja/integrations/process/)のページをお読みください。
 
 各プロセスに対しサービスチェックのステータスが生成されます。プロセスを対象にしたMonitorの作成画面を介して、どのサービスチェックのステータスを監視し、どのような状態になったときに通知するか設定することができます。
-
 
 <!--
 1. Pick the **process** to monitor. You will see the names configured in any
@@ -377,10 +369,8 @@ point they should notify.
 
 4. **通知のオプション**を設定します。通知先の設定に関しては、このドキュメントの[”通知先の設定”](#通知先の設定)の項目を参照してください。
 
-
 <!--
 ### Network Monitors
-
 
 {{< img src="guides/monitor/network_monitor.png" >}}
 
@@ -450,10 +440,8 @@ configuration.
 
 4. **通知のオプション**を設定します。通知先の設定に関しては、このドキュメントの[”通知先の設定”](#通知先の設定)の項目を参照してください。
 
-
 <!--
 ### Event Monitors
-
 
 Event monitors allows you to alert when an event matching your query occurs.
 
@@ -485,10 +473,8 @@ Event monitors allows you to alert when an event matching your query occurs.
 
 5. 4. **通知のオプション**を設定します。通知先の設定に関しては、このドキュメントの[”通知先の設定”](#通知先の設定)の項目を参照してください。
 
-
 <!--
 ### Custom Monitors
-
 
 {{< img src="guides/monitor/custom_monitor.png" >}}
 
@@ -506,7 +492,6 @@ or service checks.
 カスタムチェックを対象にしたMonitorでは、独自に作成したAgent Checkによって収集しているサービスチェックのステータスを監視します。
 
 メトリクスやイベント、あるいはサービスチェックを送信する独自のCheckの作成方法については、[「Agent Checkの書き方」](/ja/guides/agent_checks/)を参照してください。
-
 
 <!--
 1. Select your **custom check**.
@@ -560,7 +545,6 @@ No Article at this time.
 <!--
 ## Monitor Notifications
 
-
 Notifications are a key component of any monitor. You want to make sure the
 right people get notified so the problem can be resolved as soon as possible.
 
@@ -572,7 +556,6 @@ right people get notified so the problem can be resolved as soon as possible.
 通知は、監視において非常に重要な要素です。可能な限り素早く障害を解決するためには、適切な人材が通知を受けるように設定する必要があります。
 
 {{< img src="guides/monitor/notification.png" >}}
-
 
 <!--
 1. Give your monitor a **title**. It is often useful to use a succinct
@@ -607,7 +590,6 @@ right people get notified so the problem can be resolved as soon as possible.
 
 ***注釈:*** 通知の嵐を避けるために、20秒の間に発生した同一 monitor ID/アラートタイプをまとめる新たなグループ通知が実装されました。このグループ通知では、20秒のグループのうち最初の2つの通知は通常通り送信され、その他のすべての通知は最初の2つの通知の後に1つのメッセージとしてまとめて送信されます。(この機能は標準の通知方法として実装されておりますので、特に設定は不要です)
 
-
 <!-- ### Message template variables
 
 Message template variables can be used to customize your monitor notifications.
@@ -627,7 +609,6 @@ Monitorの通知の内容を状況に応じて書き換えるためにテンプ�
 
 それぞれの主要ユースケースについて解説します。
 
-
 <!--
 1. **Conditional variables for different notification types**: You can have a
     monitor event display a different message depending on whether the event is a
@@ -640,16 +621,13 @@ Monitorの通知の内容を状況に応じて書き換えるためにテンプ�
 
     {{< img src="guides/monitor/templateconditionaleditor.png" >}}
 
-
     The corresponding trigger event notification will look like this:
 
     {{< img src="guides/monitor/templateconditionaltrigger.png" >}}
 
-
     and the recovery notification:
 
     {{< img src="guides/monitor/templateconditionalrecover.png" >}}
-
 
     The conditional variables available are `is_alert`, `is_alert_recovery`,
     `is_warning`, `is_warning_recovery`, `is_recovery`, and `is_no_data`.
@@ -664,7 +642,6 @@ Monitorの通知の内容を状況に応じて書き換えるためにテンプ�
     Here is an example of how you can use template variables for a multi alert:
 
     {{< img src="guides/monitor/templatevareditor.png" >}}
-
 
     and the corresponding event notification:
 
@@ -721,16 +698,13 @@ Monitorの通知の内容を状況に応じて書き換えるためにテンプ�
 
     {{< img src="guides/monitor/templateconditionaleditor.png" >}}
 
-
     実際に送信されたアラート通知文は、次のようになります:
 
     {{< img src="guides/monitor/templateconditionaltrigger.png" >}}
 
-
     リカバーした際の通知文は、次のようになります:
 
     {{< img src="guides/monitor/templateconditionalrecover.png" >}}
-
 
     使用可能な条件変数は `is_alert`, `is_alert_recovery`,
     `is_warning`, `is_warning_recovery`, `is_recovery`, そして `is_no_data` です。
@@ -742,11 +716,9 @@ Monitorの通知の内容を状況に応じて書き換えるためにテンプ�
 
     {{< img src="guides/monitor/templatevareditor.png" >}}
 
-
     実際に送信されたアラート通知文は、次のようになります:
 
     {{< img src="guides/monitor/templatevar.png" >}}
-
 
     利用可能なタグ変数は、第1ステップで選択したタググループに依存します。利用可能なタグ変数のオプションは自動的に選別され、第3ステップの"Use message template variables"ヘルプボックスの内に表示されます。またこれらのタグ変数は、Monitorのタイトル（名前）で使用することもできます。
 
@@ -812,7 +784,6 @@ Datadgogでは、さまざまなタイプのMonitor (アラート)を提供し�
 
 **注)** 一部のMonitor　(アラート)では、監視している対象に基づいて追加でテンプレート変数を提供しています。 例えば、ホストMonitor　は `host.availability-zone`と` host.cloud_provider`の変数を提供しています。 メッセージ欄の設定を進めている際に、利用可能なテンプレート変数のリストを見るには、欄の右上の"Use message template variables” リンクをクリックするか、メッセージ欄に"{{"を入力し、補完候補リストを表示してください。
 
-
 <!-- ## Monitor FAQs
 
 - *Can I manage my monitors programatically?*
@@ -832,7 +803,6 @@ Datadgogでは、さまざまなタイプのMonitor (アラート)を提供し�
 - *Monitorは、プログラム的に管理することはできますか？*
 
   **はい**。各プログラミング言語毎ライブラリやcURLを使ってMonitorを制御する方法に関しては、[Datadog APIドキュメント](http://docs.datadoghq.com/api/#alerts)を参照してください。
-
 
 - *ファンクションを基にアラートを発報することはできますか？*
 

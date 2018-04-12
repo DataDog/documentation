@@ -1,4 +1,3 @@
-
 ---
 title: As a parent account admin, how do I create new sub-organizations?
 kind: faq

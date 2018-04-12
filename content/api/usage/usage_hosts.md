@@ -34,4 +34,3 @@ Get Hourly Usage For Hosts and Containers.
     Contains the total number of hosts that reported via the AWS integration (and were NOT running the Datadog Agent).
     When AWS or GCP hosts are also running the Datadog Agent, they are counted as Agent hosts, NOT as AWS or GCP.
 
-

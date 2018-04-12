@@ -1,7 +1,6 @@
 ---
 title: Writing an Agent Check
 kind: documentation
-customnav: agentnav
 aliases:
   - /guides/agent_checks/
   - /agent/agent_checks
@@ -43,7 +42,7 @@ All custom checks inherit from the `AgentCheck` class found in `checks/__init__.
 
 * Custom Checks aren't able to import modules by default, all your code should be in one single file.
 
-* The datadog agent installation has it's own embedded copy of python. Custom scripts importing pip-installed libraries fail unless datadog's own embedded copy of pip is used to install these third party libraries.
+* The datadog Agent installation has it's own embedded copy of python. Custom scripts importing pip-installed libraries fail unless datadog's own embedded copy of pip is used to install these third party libraries.
 
 ### `AgentCheck` interface for Agent v6
 
@@ -152,7 +151,7 @@ The service_check method accepts the following arguments:
   - `AgentCheck.UNKNOWN` or `3` for indeterminate status
 - `tags`: (optional) A list of key:val tags for this check.
 - `timestamp`: (optional) The POSIX timestamp when the check occurred.
-- `hostname`: (optional) The name of the host submitting the check. Defaults to the host_name of the agent.
+- `hostname`: (optional) The name of the host submitting the check. Defaults to the host_name of the Agent.
 - `check_run_id`: (optional) An integer ID used for logging and tracing purposes. The ID doesn't need to be unique. If an ID is not provided, one is automatically generated.
 - `message`: (optional) Additional information or a description of why this status occurred.
 
@@ -202,10 +201,10 @@ instances:
 
 For Agent 5, `min_collection_interval` can be added to the `init_config` section to help define how often the check should be run globally, or defined at the instance level. For Agent 6, `min_collection_interval` must be added at an instance level, and can be configured individually for each instance. 
 
-If it is greater than the interval time for the agent collector, a line is added to the log stating that collection for this script was skipped. The default is `0` which means it's collected at the same interval as the rest of the integrations on that agent.
+If it is greater than the interval time for the Agent collector, a line is added to the log stating that collection for this script was skipped. The default is `0` which means it's collected at the same interval as the rest of the integrations on that Agent.
 If the value is set to `30`, it does not mean that the metric is collected every 30 seconds, but rather that it could be collected as often as every 30 seconds.
 
-The collector runs every 15-20 seconds depending on how many integrations are enabled. If the interval on this agent happens to be every 20 seconds, then the agent collects and includes the agent check. The next time it collects 20 seconds later, it sees that 20 < 30 and don't collect the custom agent check. The next time it sees that the time since last run was 40 which is greater than 30 and therefore the agent check is collected.
+The collector runs every 15-20 seconds depending on how many integrations are enabled. If the interval on this Agent happens to be every 20 seconds, then the Agent collects and includes the Agent check. The next time it collects 20 seconds later, it sees that 20 is less than 30 and doesn't collect the custom Agent check. The next time it sees that the time since last run was 40 which is greater than 30 and therefore the Agent check is collected.
 
 ### init_config
 
@@ -357,10 +356,10 @@ The entire check would be placed into the `checks.d` folder as `http.py`. The co
 
 Once the check is in `checks.d`, test it by running it as a python script. [Restart the Agent][10] for the changes to be enabled. **Make sure to change the conf.d path in the test method**. From your Agent root, run:
 
-* For agent v5:
+* For Agent v5:
   `sudo -u dd-agent -- dd-agent check <check_name>`
 
-* For agent v6:
+* For Agent v6:
   `sudo -u dd-agent -- datadog-agent check <check_name>`
 
 And confirm what metrics and events are being generated for each instance.
@@ -425,7 +424,7 @@ class HTTPCheck(AgentCheck):
 
 ## Troubleshooting
 
-Custom Agent checks can't be directly called from python and instead need to be called by the agent.
+Custom Agent checks can't be directly called from python and instead need to be called by the Agent.
 
 To test this, run:
 
@@ -435,7 +434,7 @@ If your issue continues, reach out to Support with the [help page][11] that list
 
 ### Testing custom checks on Windows
 
-* **For agent version < 5.12**:
+* **For Agent version < 5.12**:
     The Agent install includes a file called shell.exe in your Program Files directory for the Datadog Agent which you can use to run python within the Agent environment. Once your check (called `<CHECK_NAME>`) is written and you have the .py and .yaml files in their correct places, you can run the following in shell.exe:
     ```
     from checks import run_check
@@ -443,7 +442,7 @@ If your issue continues, reach out to Support with the [help page][11] that list
     ```
     This outputs any metrics or events that the check returns.
 
-* **For agent version >= 5.12**:
+* **For Agent version >= 5.12**:
     Run the following script, with the proper `<CHECK_NAME>`:
     `<INSTALL_DIR>/embedded/python.exe <INSTALL_DIR>agent/agent.py check <CHECK_NAME>`
     For example, to run the disk check:

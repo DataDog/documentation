@@ -80,7 +80,7 @@ class MyIntegrationCheck(AgentCheck):
     })
 ```
 
-For more information about writing checks and how to send metrics to the Datadog agent, reference our [Writing an Agent Check guide][2]
+For more information about writing checks and how to send metrics to the Datadog Agent, reference our [Writing an Agent Check guide][2]
 
 If you need to import any third party libraries, you can add them to the `requirements.txt` file.
 
@@ -107,7 +107,7 @@ namespace :ci do
       $(docker run -p 80:80 --name my_int_container -d my_docker)
 ```
 
-For more information about writing integration tests, see [the documentation in the Datadog agent repository][3]. You can also reference the [ci common library][4] for helper functions such as `install_requirements` and `sleep_for`.
+For more information about writing integration tests, see [the documentation in the Datadog Agent repository][3]. You can also reference the [ci common library][4] for helper functions such as `install_requirements` and `sleep_for`.
 
 A note about terminology: You may notice the variable `flavor` in this file and other areas of testing. *Flavor* is a term we use to denote variations of integrated software, typically versions. This allows you to write one set of tests, but target different *flavors*, variants or versions of the software you are integrating.
 
@@ -126,8 +126,8 @@ This JSON file provides metadata about your integration and should include:
 
 - **`maintainer`**: Provide a valid email address where you can be contacted regarding this integration.
 - **`manifest_version`**: The version of this manifest file.
-- **`max_agent_version`**: The maximum version of the Datadog agent that is compatible with your integration. We do our best to maintain integration stability within major versions, so you should leave this at the number generated for you. If your integration breaks with a new release of the Datadog agent, set this number and [submit an issue on the Datadog Agent project][5].
-- **`min_agent_version`**: The minimum version of the Datadog agent that is compatible with your integration.
+- **`max_agent_version`**: The maximum version of the Datadog Agent that is compatible with your integration. We do our best to maintain integration stability within major versions, so you should leave this at the number generated for you. If your integration breaks with a new release of the Datadog Agent, set this number and [submit an issue on the Datadog Agent project][5].
+- **`min_agent_version`**: The minimum version of the Datadog Agent that is compatible with your integration.
 - **`name`**: The name of your integration.
 - **`short_description`**: Provide a short description of your integration.
 - **`support`**: As a community contributed integration, this should be set to "contrib". Only set this to another value if directed to do so by Datadog staff.
@@ -192,7 +192,7 @@ If you require any additional Python libraries, you can list them here and they 
 
 #### `test_my_integration.py`
 
-Integration tests ensure that the Datadog agent is correctly receiving and recording metrics from the software you are integrating.
+Integration tests ensure that the Datadog Agent is correctly receiving and recording metrics from the software you are integrating.
 
 Though we don't require test for each of the metrics collected by your integration, we strongly encourage you to provide as much coverage as possible. You can run the `self.coverage_report()` method in your test to see which metrics are covered.
 

@@ -12,8 +12,6 @@ title: Datadog-AWS S3 Integration
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-
-
 {{< img src="integrations/awss3/s3_db_screenshot.png" alt="S3 Dashboard" >}}
 
 ## Overview
@@ -45,6 +43,5 @@ In the Amazon Web Services integration tile, ensure that S3 is checked under met
 {{< get-metrics-from-git >}}
 
 Each of the metrics retrieved from AWS will be assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
-
 
 [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html

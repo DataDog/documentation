@@ -1,4 +1,3 @@
-
 ---
 title: Account Management FAQ
 kind: faq
@@ -30,7 +29,6 @@ private: true
 * [How do I setup Microsoft Active Directory Federation Services as a SAML IdP?][15]
 * [Can I use a proxy to connect my servers to Datadog?][16]
 * [How is Datadog retrieving my data? Are my data and credentials safe?][17]
-
 
 [1]: /account_management/faq/are-my-data-and-credentials-safe
 [2]: /account_management/faq/help-my-password-email-never-came-through

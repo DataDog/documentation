@@ -10,14 +10,12 @@ doclevel: basic
 
 <!-- ### Overview
 
-
 Capture RSS feed activity in Datadog to:
 
 - Add events from custom sources to your stream.
 - Discuss feed events with your team. -->
 
 ## 概要
-
 
 RSSフィードで起きているイベントをDatadogと連携します:
 

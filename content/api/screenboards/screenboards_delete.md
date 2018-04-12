@@ -10,6 +10,3 @@ Delete an existing Screenboard.
 ##### ARGUMENTS
 This end point takes no JSON arguments.
 
-
-
-

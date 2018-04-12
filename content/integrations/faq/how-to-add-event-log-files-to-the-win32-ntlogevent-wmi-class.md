@@ -15,7 +15,6 @@ If there are no results, the log file cannot be accessed and you need to add it 
 Locate the event logs you want to monitor in the Event Viewer. Locate the log file and click “properties” under the “Actions” section to find the Log path and Full Name. For example, here is how to set up monitoring the “Operational” event Log file located in the Microsoft/Windows/TaskScheduler folder:
 {{< img src="integrations/faq/image1.png" alt="image1" responsive="true" popup="true">}}
 
-
 Open the Windows Registry. (search for regedit.exe, the default name of the registry editor). Inside the registry editor, locate the EventLog folder in the following path:
 ```
 \HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EventLog\
@@ -39,6 +38,5 @@ The changes should be immediate. To confirm that the event log is accesible thro
 
 Note: if there still aren’t events when running the query, check the event viewer to confirm that there are any events in the log file. Also, make sure that the event log isn’t disabled and that there are recent events available.
 {{< img src="integrations/faq/image8.png" alt="image8" responsive="true" popup="true">}}
-
 
 [1]: /integrations/faq/how-to-monitor-events-from-the-windows-event-logs

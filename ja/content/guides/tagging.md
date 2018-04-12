@@ -7,8 +7,6 @@ title: Guide to Tagging
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-
-
 ## Overview
 Tagging is used throughout the Datadog product to make it easier to subset and query the machines and metrics that you have to monitor. Without the ability to assign and filter based on tags, finding the problems that exist in your environment and narrowing them down enough to discover the true causes would be extremely difficult.
 
@@ -78,7 +76,6 @@ The following integration sources create tags automatically in Datadog:
 | [Win32 Events](http://docs.datadoghq.com/integrations/wmi)                          | Event ID |
 | [Windows Services](http://docs.datadoghq.com/integrations/winservices)                      | Service Name |
 
-
 ### Assigning tags using the configuration files
 The Datadog integrations are all configured via the yaml configuration files located in the conf.d directory in your agent install. For more about where to look for your configuration files, refer [to this article][agentinstall]. You can define tags in the configuration file for the overall agent as well as for each integration, though the datadog.conf file is a more traditional ini file. In yaml files, there is a tag dictionary with a list of tags you want assigned at that level. Any tag you assign to the agent will apply to every integration on that agent's host.
 
@@ -108,7 +105,6 @@ The reason why you should use key value pairs instead of simply values will beco
 ### Assigning host tags in the UI
 You can also assign tags to hosts, but not to integrations in the UI. To assign tags in the UI, start by going to the Infrastructure List page. Click on any host and then click the Update Host Tags button. In the host overlay that appears, click Edit Tags and make the changes you wish.
 
-
 ### Assigning host tags using the API
 You can also assign tags to hosts, but not to integrations using the API. The endpoints you want to work with are /tags/hosts and depending on whether you PUT, POST, or DELETE you will update, add, or delete tags for the chosen host. For more details on using the Tags endpoints in the API, [review this document][tagsapi]
 
@@ -129,7 +125,6 @@ The Events List will show you all the events that have occured in your environme
 
 ### Using tags in Dashboards
 
-
 You can use tags to narrow down the metrics to display on a dashboard graph, or to create groups of metrics to display. 
 To narrow down the metrics to display, enter the tag in the ```from:``` textbox. 
 You will now be looking at a chosen metric over all the hosts that have that particular tag assigned.
@@ -141,7 +136,6 @@ To group using tags, enter the key part of the tag in the ```avg by:``` textbox.
 For instance, if you have a time series graph showing a metric tagged by the reporting hosts' roles —`role:database`, `role:frontend`, or `role:loadbalancer`— enter role in the **avg_by** textbox. This causes the graph to show just one line for each tag value — `database`, `frontend`, and `loadbalancer`. Each line represents the average metric value across all hosts that share that role.
 
 {{< img src="guides/tagging/dashboardtags.png" alt="Tags in Dashboards avgby textbox" >}}
-
 
 You can also use tags to overlay events on the dashboard. This works in exactly the same way as in the Events List. 
 Simply enter ```tags:``` followed by the tag and you will see the corresponding events overlaid as vertical bars on each graph.
@@ -165,7 +159,6 @@ When creating a monitor:
 * Use tags in the ```avg by``` textbox transform your monitor into a multi-alert monitor on each value of this tags.
 {{< img src="guides/tagging/monitortags_2.png" alt="excluding textbox tags in Monitors" >}}
 Tags on these events are related to the ```avg by:``` value. In order to have host-related tags (such as AWS integration tags), use ```avg by: host```
-
 
 [tagsapi]: /api#tags
 [agentinstall]: https://app.datadoghq.com/account/settings#agent

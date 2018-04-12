@@ -10,8 +10,6 @@ title: Datadog-AWS Kinesis Integration
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-
-
 ## Overview
 
 Amazon Kinesis is a fully managed, cloud-based service for real-time processing of large, distributed data streams.

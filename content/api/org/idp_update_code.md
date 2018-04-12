@@ -12,4 +12,3 @@ external_redirect: /api/#upload-idp-metadata
 ##### Example Response
 {{< code-snippets basename="result.api-org-update" >}}
 
-

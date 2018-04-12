@@ -9,6 +9,3 @@ More than 200 built-in integrations. See across all your systems, apps, and serv
 
 {{< partial name="integrations/integrations.html" >}}
 
-
-
-

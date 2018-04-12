@@ -46,6 +46,5 @@ In this case, @slack-{{host.customer}} could render to @slack-customer1 or @slac
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /monitors/
 [2]: /monitors/notifications

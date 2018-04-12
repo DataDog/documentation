@@ -20,6 +20,5 @@ This endpoint requires the [multi-org account][1] feature and must be enabled by
 
 Once a new child-organization is created, you can interact with it by using the `org.public_id`, `api_key.key`, and `application_key.hash` provided in the response.
 
-
 [1]: /account_management/multi_organization
 [2]: /help

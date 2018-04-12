@@ -23,15 +23,10 @@ SNMP Checkを使用するには、`conf.d`ディレクトリにある`snmp.yaml.
 
 デバイスを監視するには、少なくともIP_ADDRESSと認証方法を指定する必要があります。又、アクセスするポート番号の指定がない場合は、デフォルトとして161番ポートを使用します。
 
-
 <!-- <p> Our agent allows you to monitor the SNMP Counters and Gauge of your choice. Specify for each device the metrics that you want to monitor in the <code>metrics</code> subsection using one of the following method:</p>
 <dl class='snmp'> -->
 
 Datadog Agentは、瞬間値や積算値をSNMPから取得出来ます。次に示す方法で監視対象となる`metrics`を、それぞれのデバイスに対して指定してください:
-
-
-
-
 
 <!-- #### Specify a MIB and the symbol that you want to export
 
@@ -112,9 +107,7 @@ You can also gather tags based on the indices of your row, in case they are mean
 
 必要に応じて行のインデックスに基づいてタグを付与することも出来ます。この例では、最初の行のインデックスがIPのバージョン（IPv6, IPv4）を見分け、タグ付けするように指定しています。
 
-
 <!-- ## Use your own Mib
-
 
 To use your own MIB with the datadog-agent, you need to convert them to the pysnmp format. This can be done using the `build-pysnmp-mibs` script that ships with pysnmp.
 
@@ -129,7 +122,6 @@ where YOUR-MIB.mib is the MIB you want to convert.
 Put all your pysnmp mibs into a folder and specify this folder's path in your `snmp.yaml` file, in the `init_config` section.` -->
 
 ## 独自MIBの変換
-
 
 独自のMIBを使用するには、ysnmp形式に変換する必要があります。この変換には、pysnmpのパッケージに含まれている`build-pysnmp-mibs`を使うことが出来ます。
 

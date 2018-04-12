@@ -1,4 +1,3 @@
-
 ---
 title: Datadog Docs
 kind: documentation
@@ -8,6 +7,7 @@ aliases:
   - /faq/
 disable_toc: true
 ---
+
 # Welcome to Datadog Docs!
 
 If you're new here, read below for the 10,000 foot view of Datadog.

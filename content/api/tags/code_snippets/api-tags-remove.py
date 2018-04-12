@@ -7,5 +7,4 @@ options = {
 
 initialize(**options)
 
-
 api.Tag.delete('hostname')

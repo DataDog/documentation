@@ -1,5 +1,5 @@
 ---
-title: Data aggregation with dogstatsd/Threadstats
+title: Data aggregation with DogStatsD/Threadstats
 kind: faq
 ---
 
@@ -18,7 +18,7 @@ For instance, if you have a counter incremented 1,000 times (+1 each time) over 
 
 [DogStatsD][1] uses a flush interval of 10 seconds. Every 10 seconds, [DogStatsD][1] checks all data received since the last flush (in the last 10 seconds). All values that corresponds to the same metric name and the same tags are aggregated together into a single value.
 
-Note: with the statsd protocol, the statsd client doesn't send metrics with timestamps. The timestamp is added at the flush time. So for a flush occurring at 10:00:10, all data received by the [DogStatsD][1] server (embedded in the Datadog agent) between 10:00:00 and 10:00:10 is rolled up in a single datapoint that gets 10:00:00 as timestamp.
+Note: with the statsd protocol, the statsd client doesn't send metrics with timestamps. The timestamp is added at the flush time. So for a flush occurring at 10:00:10, all data received by the [DogStatsD][1] server (embedded in the Datadog Agent) between 10:00:00 and 10:00:10 is rolled up in a single datapoint that gets 10:00:00 as timestamp.
 
 ### Aggregation rules per metric type
 
@@ -55,7 +55,6 @@ For instance during the flush interval of 10 seconds (between 10:00:00 and 10:00
 3. {09:30:10, 1}, {10:00:00, 3}, {10:00:05,2} # 3- data is aggregated and only 4 values are eventually submitted to Datadog
 
 [Find more information about Threadstatsd aggregation][3].
-
 
 [1]: /developers/dogstatsd
 [2]: /developers/metrics

@@ -15,5 +15,4 @@ This end point allows you to update all tags for a given host.
     The source of the tags (e.g. chef, puppet).  
     [Complete list of source attribute values][1]
 
-
 [1]: /integrations/faq/list-of-api-source-attribute-value

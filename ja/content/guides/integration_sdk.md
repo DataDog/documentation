@@ -8,7 +8,6 @@ title: Creating New Integrations
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-
 <!-- Additional styling to help file name headers stand out -->
 <style>h5 code{font-size:16px;display:inline-block;margin-top:20px;}</style>
 
