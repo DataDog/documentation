@@ -80,7 +80,7 @@ Either define them in your custom `datadog.yaml`, or set them as JSON maps in th
 
 Exclude containers from the metrics collection and Autodiscovery, if these are not useful for you. We already exclude Kubernetes and OpenShift `pause` containers by default. See the `datadog.yaml.example` file for more documentation, and examples:
 
-* `DD_AC_INCLUDE`: Space-separated strings of the whitelist of containers to always include e.g `"image:image_name_1 image:image_name_1"`
+* `DD_AC_INCLUDE`: Space-separated strings of the whitelist of containers to always include e.g `"image:image_name_1 image:image_name_2"`
 * `DD_AC_EXCLUDE`: Space-separated strings of the blacklist of containers to exclude e.g `"image:image_name_3 image:image_name_4"`
 
 **Note**: The `docker.containers.running`, `.stopped`, `.running.total` and `.stopped.total` metrics are not affected by these settings and always count all containers. This does not affect your per-container billing.
