@@ -25,7 +25,7 @@ The process to upgrade from the previous version of the Agent is to re-run the i
 
 ## Commands
 
-Datadog Agent has some commands and only the _lifecycle commands_ (i.e. `start`/`stop`/`restart`/`status` on the Agent service) should be run with `sudo service`/`sudo initctl`/`sudo systemctl`, all other commands need to be run with the `datadog-agent` command.
+Datadog Agent has some commands and only the _lifecycle commands_ (i.e. `start`/`stop`/`restart`/`status` on the Agent service) should be run with `sudo service`/`sudo systemctl`, all other commands need to be run with the `datadog-agent` command.
 
 {{% table responsive="true" %}}
 | Agent v5                                  |  Agent v6                          | Notes
@@ -52,9 +52,9 @@ sudo service datadog-agent check [integration] check_rate
 
 **NB**: If `service` is not available on your system, use:
 
-* on `upstart`-based systems: `sudo start/stop/restart datadog-agent`
 * on `systemd`-based systems: `sudo systemctl start/stop/restart datadog-agent`
-* on `initctl`-based systems: `sudo initctl start/stop/restart datadog-agent`
+
+[Learn more about Service lifecycle commands][4]
 
 ## Configuration
 
@@ -185,3 +185,4 @@ CentOS/RHEL/Amazon Linux
 [1]: https://app.datadoghq.com/account/settings#agent/debian
 [2]: /integrations
 [3]: /help
+[4]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands
