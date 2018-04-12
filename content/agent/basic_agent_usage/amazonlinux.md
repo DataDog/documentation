@@ -45,6 +45,8 @@ Other functionalities are provided by the Agent binary itself, globally availabl
 * on `upstart`-based systems: `sudo initctl start/stop/restart datadog-agent`
 * on `systemd`-based systems: `sudo systemctl start/stop/restart datadog-agent`
 
+[Learn more about Service lifecycle commands][4]
+
 ## Configuration
 
 The configuration files and folders for for the Agent are located at:
@@ -182,3 +184,4 @@ $ sudo apt-get --purge remove datadog-agent -y
 [1]: https://app.datadoghq.com/account/settings#agent/aws
 [2]: /integrations
 [3]: /help
+[4]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands

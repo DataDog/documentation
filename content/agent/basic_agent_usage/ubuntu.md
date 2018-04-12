@@ -56,6 +56,8 @@ sudo service datadog-agent check [integration] check_rate
 * on `systemd`-based systems: `sudo systemctl start/stop/restart datadog-agent`
 * on `initctl`-based systems: `sudo initctl start/stop/restart datadog-agent`
 
+[Learn more about Service lifecycle commands][4]
+
 ## Configuration
 
 The configuration files and folders for the Agent are located at:
@@ -187,3 +189,4 @@ $ sudo apt-get --purge remove datadog-agent -y
 [1]: https://app.datadoghq.com/account/settings#agent/ubuntu
 [2]: /integrations
 [3]: /help
+[4]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands
