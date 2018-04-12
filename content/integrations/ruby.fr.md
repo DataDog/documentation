@@ -19,11 +19,11 @@ version: '1.0'
 
 ## Aperçu
 
-L'intégration de Ruby vous permet de monitorer des métriques personnalisées en ajoutant simplement quelques lignes de code à votre application Ruby. Par exemple, vous pouvez avoir une métrique qui renvoie le nombre de pages vues ou le temp de tout appel de fonction. Pour plus d'informations sur l'intégration Ruby, reportez-vous au [guide sur la soumission des métriques][1]. Pour une utilisation avancée, veuillez vous reporter à la documentation dans les dépôts répertoriés ci-dessous. Vous pouvez également consulter [l'API Datadog][2] pour plus de détails sur l'utilisation de l'API avec Ruby.
+L'intégration de Ruby vous permet de monitorer des métriques personnalisées en ajoutant simplement quelques lignes de code à votre application Ruby. Par exemple, vous pouvez avoir une métrique qui renvoie le nombre de pages vues ou le temp de tout appel de fonction. Pour plus d'informations sur l'intégration Ruby, reportez-vous au [guide sur la soumission des métriques](/guides/metrics). Pour une utilisation avancée, veuillez vous reporter à la documentation dans les dépôts répertoriés ci-dessous. Vous pouvez également consulter [l'API Datadog](/api) pour plus de détails sur l'utilisation de l'API avec Ruby.
 
 Datadog propose deux bibliothèques pour vous aider à collecter des métriques d'application Ruby:
 
-* [dogstatsd-ruby][3]. Un client pour DogStatsD, une extension du serveur de statistiques StatsD pour Datadog.
+* [dogstatsd-ruby](https://github.com/DataDog/dogstatsd-ruby). Un client pour DogStatsD, une extension du serveur de statistiques StatsD pour Datadog.
 * Le client Ruby est une bibliothèque qui peut être incluse dans des projets Ruby existants ou pour le développement de scripts autonomes. Il fournit une abstraction au-dessus de l'interface HTTP brute de Datadog pour envoyer des événements et des métriques.
 
 ## Implémentation
@@ -74,12 +74,13 @@ Vous ne devez rien faire dans l'application Datadog pour configurer Ruby.
 
 ### Validation
 
-Allez sur la page [Metrics Explorer][4] afin de voir vos métriques.
+Allez sur la page [Metrics Explorer](https://app.datadoghq.com/metric/explorer) afin de voir vos métriques.
 
 ## Troubleshooting
-Besoin d'aide? Contactez  [l'équipe support de Datadog][5].
+Besoin d'aide? Contactez  [l'équipe support de Datadog](http://docs.datadoghq.com/help/).
 
 ## En apprendre plus
+<<<<<<< HEAD
 Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][6]
 
 [1]: /guides/metrics
@@ -88,3 +89,6 @@ Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Dat
 [4]: https://app.datadoghq.com/metric/explorer
 [5]: http://docs.datadoghq.com/help/
 [6]: https://www.datadoghq.com/blog/
+=======
+Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog](https://www.datadoghq.com/blog/)
+>>>>>>> master

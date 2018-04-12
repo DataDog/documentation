@@ -11,4 +11,3 @@ external_redirect: /api/#share-a-screenboard
 {{< code-snippets basename="api-screenboard-share" >}}
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-screenboard-share" >}}
-

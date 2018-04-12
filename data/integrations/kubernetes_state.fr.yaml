@@ -430,7 +430,7 @@ kubernetes_state:
     integration: kubernetes
     interval: ''
     metric_name: kubernetes_state.nodes.by_condition
-    metric_type: count
+    metric_type: gauge
     orientation: '0'
     per_unit_name: ''
     short_name: k8s_state.nodes.by_cond

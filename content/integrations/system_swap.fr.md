@@ -31,11 +31,11 @@ Ce check monitor le nombre d'octets qu'un host a swap.
 ## Implémentation
 ### Installation
 
-Le check System swap est packagé avec l'agent, il vous faut donc simplement [installer l'agent] [1] sur n'importe quel host.
+Le check System swap est packagé avec l'agent, il vous faut donc simplement [installer l'agent] (https://app.datadoghq.com/account/settings#agent) sur n'importe quel host.
 
 ### Configuration
 
-Créez un fichier `system_swap.yaml` dans le dossier ` conf.d` de l'Agent. Consultez l'exemple du [canevas cassandra_nodetool.yaml][2] pour apprendre toutes les options de configuration disponibles:
+Créez un fichier `system_swap.yaml` dans le dossier ` conf.d` de l'Agent. Consultez l'exemple du [canevas cassandra_nodetool.yaml](https://github.com/DataDog/integrations-core/blob/master/system_swap/conf.yaml.example) pour apprendre toutes les options de configuration disponibles:
 
 ```
 # This check takes no initial configuration
@@ -44,11 +44,11 @@ init_config:
 instances: [{}]
 ```
 
-[Redémarrez l'Agent][3] pour commencer à envoyer vos métriques swap à Datadog
+[Redémarrez l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent) pour commencer à envoyer vos métriques swap à Datadog
 
 ### Validation
 
-[Lancez la commande `status`de l'Agent][4] et cherchez `system_swap` dans la section Checks:
+[Lancez la commande `status`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `system_swap` dans la section Checks:
 
 ```
   Checks
@@ -78,14 +78,17 @@ Le check System Swap n'inclut aucun événement pour le moment.
 Le check System Swap n'inclut aucun check de service pour le moment.
 
 ## Troubleshooting
-Besoin d'aide? Contactez  [l'équipe support de Datadog][5].
+Besoin d'aide? Contactez  [l'équipe support de Datadog](http://docs.datadoghq.com/help/).
 
 ## En apprendre plus
-Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][6]
+Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog](https://www.datadoghq.com/blog/)
 
+<<<<<<< HEAD
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://github.com/DataDog/integrations-core/blob/master/system_swap/conf.yaml.example
 [3]: https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent
 [4]: https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information
 [5]: http://docs.datadoghq.com/help/
 [6]: https://www.datadoghq.com/blog/
+=======
+>>>>>>> master

@@ -37,11 +37,11 @@ Collectez des métriques à partir des répertoires et des fichiers de votre cho
 ## Implémentation
 ### Installation
 
-Le check directory est packagé avec l'agent, il vous faut donc simplement [installer l'agent] [1] sur vos noeuds Cassandra.
+Le check directory est packagé avec l'agent, il vous faut donc simplement [installer l'agent] (https://app.datadoghq.com/account/settings#agent) sur vos noeuds Cassandra.
 
 ### Configuration
 
-1. Editez le fichier `directory.yaml` dans le dossier `conf.d` de l'Agent. Consultez l'exemple du [canevas  directory.yaml][2] pour apprendre toutes les options de configuration disponibles:
+1. Editez le fichier `directory.yaml` dans le dossier `conf.d` de l'Agent. Consultez l'exemple du [canevas  directory.yaml](https://github.com/DataDog/integrations-core/blob/master/directory/conf.yaml.example) pour apprendre toutes les options de configuration disponibles:
 
 ```
 init_config:
@@ -57,11 +57,11 @@ instances:
 
 Assurez-vous que l'utilisateur exécutant le processus de Agent (généralement `dd-agent`) ait un accès en lecture aux répertoires, sous-répertoires et fichiers que vous configurez.
 
-2. [Redémarrez l'Agent][3].
+2. [Redémarrez l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent).
 
 ### Validation
 
-[Lancez la commande `status`de l'Agent][4] et cherchez `directory` dans la section Checks:
+[Lancez la commande `status`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `directory` dans la section Checks:
 
 ```
   Checks
@@ -91,14 +91,17 @@ Le check Directory n'inclut aucun événement pour le moment.
 Le check Directory n'inclut aucun check de service pour le moment.
 
 ## Troubleshooting
-Besoin d'aide? Contactez  [l'équipe support de Datadog][5].
+Besoin d'aide? Contactez  [l'équipe support de Datadog](http://docs.datadoghq.com/help/).
 
 ## En apprendre plus
-Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][6]
+Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog](https://www.datadoghq.com/blog/)
 
+<<<<<<< HEAD
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://github.com/DataDog/integrations-core/blob/master/directory/conf.yaml.example
 [3]: https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent
 [4]: https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information
 [5]: http://docs.datadoghq.com/help/
 [6]: https://www.datadoghq.com/blog/
+=======
+>>>>>>> master

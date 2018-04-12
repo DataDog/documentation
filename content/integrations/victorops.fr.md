@@ -45,7 +45,7 @@ L'intégration VictorOps n'inclut aucun événement pour le moment.
 L'intégration VictorOps n'inclut aucun check de service pour le moment.
 
 ## Troubleshooting
-Besoin d'aide? Contactez  [l'équipe support de Datadog][1].
+Besoin d'aide? Contactez  [l'équipe support de Datadog](http://docs.datadoghq.com/help/).
 
 ## En apprendre plus
 ### Base de connaissances
@@ -62,4 +62,7 @@ Les caractères spéciaux ne sont pas autorisés dans les noms. Les lettres maju
 
 Si ce champ est vide, l'endpoint par défaut sera 'https://alert.victorops.com/integrations/datadog/20140523/alert'
 
+<<<<<<< HEAD
 [1]: http://docs.datadoghq.com/help/
+=======
+>>>>>>> master

@@ -8,3 +8,4 @@ Cela peut prendre jusqu'à 24h pour que l'host disparaisse de la page d'infrastr
 Après environ 45 minutes que l'agent est en panne (« ??? » est visible à côté du nom d'hôte), il est enlevé de la page web d'infrastructure après trois heures.
 
 Après 24 heures, vous pouvez toujours les interroger, mais elles n'apparaîtront plus dans les listes déroulantes ou l'infrastructure. Il n'y a pas moyen de supprimer immédiatement une métrique.
+

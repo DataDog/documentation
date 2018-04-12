@@ -8,4 +8,3 @@ Cet article fournit un exemple rapide vous montrant comment vous pouvez converti
 
 Une fois que l'agent de datadog a correctement envoyé ces métriques jmx à Datadog, vous pouvez les représenter graphiquement et utiliser des tags pour affiner votre requête graphique:
 {{< img src="integrations/faq/jmxGraphMetric.png" alt="jmxGraphMetric" responsive="true" popup="true">}}
-

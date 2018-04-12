@@ -14,6 +14,4 @@ Et voici la même métrique, représentée graphiquement en utilisant un rollup 
 
 {{< img src="graphing/faq/smooth_2.png" alt="smooth_2" responsive="true" popup="true">}}
 
-[Consultez cette page][1] pour plus d'informations sur la fonction .rollup().
-
-[1]: /graphing/miscellaneous/functions
+[Consultez cette page](/graphing/miscellaneous/functions) pour plus d'informations sur la fonction .rollup().

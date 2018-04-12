@@ -12,7 +12,7 @@ aliases:
     - /integrations/faq/gathering-kubernetes-events
 ---
 
-**Note**: Agent version 6.0 and greater only support versions of Kubernetes higher than 1.7.6. For prior versions of Kubernetes, you must use Agent 5.x.
+**Note**: Agent version 6.0 and above only support versions of Kubernetes higher than 1.7.6. For prior versions of Kubernetes, use [Agent 5.x][16].
 
 There are two installation processes available to gather metrics, traces and logs from your Kubernetes Clusters:
 
@@ -110,7 +110,7 @@ spec:
           name: cgroups
 ```
 
-Replace `YOUR_API_KEY` with [your api key][5] or use [Kubernetes secrets][6] to set your API key [as an environement variable][7].
+Replace `YOUR_API_KEY` with [your api key][5] or use [Kubernetes secrets][6] to set your API key [as an environment variable][7].
 
 [Consult our docker integration to discover all configuration options.][8]
 
@@ -241,7 +241,7 @@ Install the latest version of the Datadog Agent from [the Datadog Agent integrat
 
 #### Configuration
 
-Enable the kubelet check & optionnaly the docker check if your kubernetes is using the docker runtime:
+Enable the kubelet check & optionally the docker check if your kubernetes is using the docker runtime:
 
 ```shell
 mv /etc/datadog-agent/conf.d/kubelet.d/conf.yaml.example /etc/datadog-agent/conf.d/kubelet.d/conf.yaml.default
@@ -338,3 +338,4 @@ It can be configured with the environment variable `DD_LEADER_LEASE_DURATION`.
 [13]: /agent/autodiscovery
 [14]: https://app.datadoghq.com/account/settings#agent
 [15]: /agent/faq/agent-commands/#agent-status-and-information
+[16]: https://github.com/DataDog/dd-agent

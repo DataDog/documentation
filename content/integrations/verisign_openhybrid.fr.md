@@ -30,14 +30,17 @@ Pour profiter du service Verisign OpenHybrid™, vous devez être un client du s
 
 Les clients Verisign DDoS Protection Service recevront une copie du guide de l'utilisateur de Verisign Integration qui fournit des détails sur la configuration du service Verisign OpenHybrid ™.
 
-Veuillez vous référer à ce guide pour compléter [la configuration de l'intégration OpenSymbid ™ de Verisign dans Datadog][1] en configurant votre `Account ID`, votre` API key` et votre "application name"
+Veuillez vous référer à ce guide pour compléter [la configuration de l'intégration OpenSymbid ™ de Verisign dans Datadog](https://app.datadoghq.com/account/settings#integrations/verisign_openhybrid) en configurant votre `Account ID`, votre` API key` et votre "application name"
 
 ## Troubleshooting
-Besoin d'aide? Contactez  [l'équipe support de Datadog][2].
+Besoin d'aide? Contactez  [l'équipe support de Datadog](http://docs.datadoghq.com/help/).
 
 ## En apprendre plus
-Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][3]
+Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog](https://www.datadoghq.com/blog/)
 
+<<<<<<< HEAD
 [1]: https://app.datadoghq.com/account/settings#integrations/verisign_openhybrid
 [2]: http://docs.datadoghq.com/help/
 [3]: https://www.datadoghq.com/blog/
+=======
+>>>>>>> master

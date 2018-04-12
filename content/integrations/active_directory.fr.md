@@ -34,11 +34,11 @@ Installer le paquet `dd-check-active_directory` manuellement ou avec votre gesti
 
 ### Configuration
 
-Editez le fichier `active_directory.yaml` dans le dossier `conf.d` de l'Agent. Consultez l'exemple du [canevas  active_directory.yaml][1] pour apprendre toutes les options de configuration disponibles:
+Editez le fichier `active_directory.yaml` dans le dossier `conf.d` de l'Agent. Consultez l'exemple du [canevas  active_directory.yaml](https://github.com/DataDog/integrations-core/blob/master/active_directory/conf.yaml.example) pour apprendre toutes les options de configuration disponibles:
 
 ### Validation
 
-[Lancez la commande `info`de l'Agent][2] et cherchez `system_core` dans la section Checks:
+[Lancez la commande `info`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `system_core` dans la section Checks:
 
     Checks
     ======
@@ -61,6 +61,9 @@ Le check Active Directory n'inclut aucun événement pour le moment.
 
 ### Checks de Service
 Le check Active Directory n'inclut aucun check de service pour le moment.
+<<<<<<< HEAD
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/active_directory/conf.yaml.example
 [2]: https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information
+=======
+>>>>>>> master
