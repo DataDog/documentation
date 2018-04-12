@@ -20,12 +20,12 @@ To resolve this issue, take the following steps:
     ```
     sudo /etc/init.d/datadog-agent stop
     ```
-2. Confirm that there are no processes running for the user dd-agent after stopping:
+2. Confirm that there are no processes running for the user `dd-agent` after stopping:
     ```
     top -U dd-agent
     ```
 
-If you do find processes running under dd-agent, kill them.
+If you do find processes running under `dd-agent`, kill them.
 
 After the above steps, start the Agent:
 ```

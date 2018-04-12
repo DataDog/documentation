@@ -227,7 +227,7 @@ Edit the `kube_dns.yaml` file to point to your server and port, set the masters 
 
 #### Using with service discovery
 
-If you are using one dd-agent pod per kubernetes worker node, you could use the following annotations on your kube-dns pod to retrieve the data automatically.
+If you are using one `dd-agent` pod per kubernetes worker node, you could use the following annotations on your kube-dns pod to retrieve the data automatically.
 
 ```yaml
 

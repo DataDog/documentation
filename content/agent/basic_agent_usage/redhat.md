@@ -183,7 +183,7 @@ To install on a clean box (or have an existing Agent 5 install from which you do
 
 ## Uninstall the Agent
 
-To uninstall the Agent run: 
+To uninstall the Agent, run: 
 
     ```
     $ sudo yum remove datadog-agent

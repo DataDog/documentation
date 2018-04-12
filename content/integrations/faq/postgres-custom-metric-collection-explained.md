@@ -25,7 +25,7 @@ SQL query:
 SELECT age,salary,name,address FROM company WHERE name = 'Paul'
 ```
 
-We tell the dd-agent to capture the content of columns age and salary as metrics, and name and address as tags.
+We tell the `dd-agent` to capture the content of columns age and salary as metrics, and name and address as tags.
 
 Corresponding custom metric yaml configuration:
 ```

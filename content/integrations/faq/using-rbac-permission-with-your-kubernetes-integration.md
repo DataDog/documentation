@@ -69,7 +69,7 @@ Use these Kubernetes RBAC entities to configure permissions for your Datadog Age
   kubectl create -f datadog-serviceaccount.yaml
   ```
 
-* Update the dd-agent daemonset config as follows:
+* Update the `dd-agent` daemonset config as follows:
   ```
   ...
       spec:

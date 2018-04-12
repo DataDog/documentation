@@ -40,7 +40,7 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
 
 ### Environment variables
 
-The Agent is highly customizable, here are the most used environment variables:
+The Agent is highly customizable; here are the most used environment variables:
 
 #### Global options
 

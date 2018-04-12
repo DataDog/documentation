@@ -43,14 +43,14 @@ The Agent has a new set of command-line options:
 | hostname        | Print the hostname used by the Agent |
 | import          | Import and convert configuration files from previous versions of the Agent |
 | installservice  | Installs the Agent within the service control manager |
-| launch-gui      | starts the Datadog Agent GUI |
+| launch-gui      | Starts the Datadog Agent GUI |
 | regimport       | Import the registry settings into datadog.yaml |
 | remove-service  | Removes the Agent from the service control manager |
-| restart-service | restarts the Agent within the service control manager |
+| restart-service | Restarts the Agent within the service control manager |
 | start           | Start the Agent |
-| start-service   | starts the Agent within the service control manager |
+| start-service   | Starts the Agent within the service control manager |
 | status          | Print the current status |
-| stopservice     | stops the Agent within the service control manager |
+| stopservice     | Stops the Agent within the service control manager |
 | version         | Print the version info |
 
 ### For version >= 3.9.1

@@ -15,14 +15,14 @@ Starting Datadog Agent (using supervisord):Error: Cannot open an HTTP server: so
 
 At first glance, that might appear to indicate that the Agent is unable to connect to the appropriate sockets because they're already occupied. But if you've already double-checked that there are [no lingering Agent processes remaining][1], and if you can ensure that the [appropriate ports][2] are available to the Agent, sometimes this above error persists.
 
-For linux hosts, the following directory must be owned by the dd-agent user in order for it to start correctly: /opt/datadog-agent/run
+For linux hosts, the following directory must be owned by the `dd-agent` user in order for it to start correctly: /opt/datadog-agent/run
 
-On rare occasions, the ownership of this directory can get changed to something other than dd-agent, this causes the above error the next time you try starting the Agent. You can double-check on the ownership of this directory by running the following command:
+On rare occasions, the ownership of this directory can get changed to something other than `dd-agent`, this causes the above error the next time you try starting the Agent. You can double-check on the ownership of this directory by running the following command:
 ```
 ls -al /opt/datadog-agent/run
 ```
 
-And if the owner of the file is other than dd-agent, you can run the following command to fix this.
+And if the owner of the file is other than `dd-agent`, you can run the following command to fix this.
 ```
 chown dd-agent -R /opt/datadog-agent/run
 ```

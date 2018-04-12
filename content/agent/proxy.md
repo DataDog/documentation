@@ -94,7 +94,7 @@ requests to pools servers, you can also use it to proxy Agent traffic
 to Datadog from hosts that have no outside connectivity.
 
 This is the best option if you do not have a web proxy readily available
-in your network and you wish to proxy a large number of Agents. In some cases a single HAProxy instance is sufficient to handle local Agent traffic in your network - each proxy can accommodate upwards of 1000 Agents (be aware that this figure is a conservative estimate based on the performance of m3.xl instances specifically. Numerous network-related variables can influence load on proxies. As always, deploy under a watchful eye. Visit http://www.haproxy.org/#perf for additional information).
+in your network and you wish to proxy a large number of Agents. In some cases a single HAProxy instance is sufficient to handle local Agent traffic in your network - each proxy can accommodate upwards of 1000 Agents (be aware that this figure is a conservative estimate based on the performance of m3.xl instances specifically. Numerous network-related variables can influence load on proxies. As always, deploy under a watchful eye. Visit [HAProxy documentation][6] for additional information).
 
 `agent ---> haproxy ---> Datadog`
 
@@ -211,4 +211,4 @@ the [Infrastructure Overview][5]
 [3]: http://haproxy.1wt.eu
 [4]: /agent/#start-stop-restart-the-agent/#windows
 [5]: https://app.datadoghq.com/infrastructure
-
+[6]: http://www.haproxy.org/#perf

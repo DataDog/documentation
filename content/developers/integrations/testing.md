@@ -31,7 +31,7 @@ To test integrations, add your test code to the `test_[integration_name].py` fil
 
 ### Datadog Agent Checks
 
-If you are submitting your Agent Check as a Pull Request to be included with the Datadog Agent, reference the [`README.md` in the dd-agent repository][2].
+If you are submitting your Agent Check as a Pull Request to be included with the Datadog Agent, reference the [`README.md` in the `dd-agent` repository][2].
 
 ## The AgentCheckTest Class
 

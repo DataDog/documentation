@@ -103,7 +103,7 @@ kind: faq
 * [Connection Issues with the SQL Server Integration][57]
 * [MySQL Localhost Error - Localhost VS 127.0.0.1][58]
 * [Can I use a named instance in the SQL Server integration?][59]
-* [Can I set up the dd-agent mysql check on my Google CloudSQL?][60]
+* [Can I set up the `dd-agent` mysql check on my Google CloudSQL?][60]
 * [How to collect metrics from custom MySQL queries][61]
 * [Can I collect SQL Server performance metrics beyond what is available in the sys.dm_os_performance_counters table? Try WMI][62]
 * [How can I collect more metrics from my SQL Server integration?][63]

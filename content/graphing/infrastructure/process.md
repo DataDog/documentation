@@ -70,7 +70,7 @@ Follow the instructions for the [Docker Agent][11], passing in the following att
 -e DD_PROCESS_AGENT_ENABLED=true
 ```
 
-**Note**: To collect container information in the standard install, the dd-agent user needs to have permissions to access docker.sock.
+**Note**: To collect container information in the standard install, the `dd-agent` user needs to have permissions to access docker.sock.
 
 ### Kubernetes Daemonset
 

@@ -34,7 +34,7 @@ To enable leader election you need to:
   ```
   Without this, creating Roles/ClusterRoles/RoleBindings/ClusterRoleBindings may give you errors.
 
-* Update the dd-agent daemonset config as follows:
+* Update the `dd-agent` daemonset config as follows:
   ```
           env:
             - name: KUBERNETES_LEADER_CANDIDATE

@@ -204,7 +204,7 @@ For Agent 5, `min_collection_interval` can be added to the `init_config` section
 If it is greater than the interval time for the Agent collector, a line is added to the log stating that collection for this script was skipped. The default is `0` which means it's collected at the same interval as the rest of the integrations on that Agent.
 If the value is set to `30`, it does not mean that the metric is collected every 30 seconds, but rather that it could be collected as often as every 30 seconds.
 
-The collector runs every 15-20 seconds depending on how many integrations are enabled. If the interval on this Agent happens to be every 20 seconds, then the Agent collects and includes the Agent check. The next time it collects 20 seconds later, it sees that 20 < 30 and don't collect the custom Agent check. The next time it sees that the time since last run was 40 which is greater than 30 and therefore the Agent check is collected.
+The collector runs every 15-20 seconds depending on how many integrations are enabled. If the interval on this Agent happens to be every 20 seconds, then the Agent collects and includes the Agent check. The next time it collects 20 seconds later, it sees that 20 is less than 30 and doesn't collect the custom Agent check. The next time it sees that the time since last run was 40 which is greater than 30 and therefore the Agent check is collected.
 
 ### init_config
 

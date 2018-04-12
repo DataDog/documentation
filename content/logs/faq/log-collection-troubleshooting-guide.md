@@ -17,23 +17,23 @@ There are a number of common issues that can get in the way when [sending new lo
 
 ## The Agent needs to be restarted
 
-After you've made any configuration changes to the dd-agent, the changes only take effect after you restart the dd-agent.
+After you've made any configuration changes to the `datadog-agent`, the changes only take effect after you restart the dd-agent.
 
 ## No new logs have been written
 
-The dd-agent only collects logs that have been written after it has started trying to collect them (whether it be tailing or listening for them). In order to confirm whether log collection has been successfully set up, make sure that new logs have been written.
+The `datadog-agent` only collects logs that have been written after it has started trying to collect them (whether it be tailing or listening for them). In order to confirm whether log collection has been successfully set up, make sure that new logs have been written.
 
 ## Permission Issues While Tailing Log Files
 
-The dd-agent does not run as root (and we do not recommend that you make it run as root, as a general best-practice). For this reason, when you configure your dd-agent to tail log files (for custom logs or for integrations) you need to take special care to ensure the dd-agent user has read access to tail the log files you want to collect from.
+The `datadog-agent` does not run as root (and we do not recommend that you make it run as root, as a general best-practice). For this reason, when you configure your `datadog-agent` to tail log files (for custom logs or for integrations) you need to take special care to ensure the `datadog-agent` user has read access to tail the log files you want to collect from.
 
-If the dd-agent user does not have read access to the files you configure it to tail, then a permissions error is captured in the `/var/log/datadog/agent.log`. The Agent requires to have an execute permission on the directory containing the files (this is the default permission required to be able to list the file contained in a directory).
+If the `datadog-agent` user does not have read access to the files you configure it to tail, then a permissions error is captured in the `/var/log/datadog/agent.log`. The Agent requires to have an execute permission on the directory containing the files (this is the default permission required to be able to list the file contained in a directory).
 
-N.B. when you add the appropriate read permissions, you want also to make sure that these permissions are correctly set on your log rotation configuration. Otherwise, when the log rotates next, the dd-agent may lose its read permissions.
+N.B. when you add the appropriate read permissions, you want also to make sure that these permissions are correctly set on your log rotation configuration. Otherwise, when the log rotates next, the `datadog-agent` may lose its read permissions.
 
 ## Outbound traffic on port 10516 is blocked
 
-The log-agent within the dd-agent sends its logs to Datadog over tcp via port 10516. If that connection is not available, logs fail to be sent and an error is recorded in the `agent.log` file to that effect.
+The log-agent within the `datadog-agent` sends its logs to Datadog over tcp via port 10516. If that connection is not available, logs fail to be sent and an error is recorded in the `agent.log` file to that effect.
 
 Test manually your connection by running a telnet or openssl command like so (port 10514 would work too, but is less secure):
 
@@ -48,7 +48,7 @@ And then by sending a log like the following:
 
 ## Configuration issues
 
-These are a few of the common configuration issues that are work triple-checking in your dd-agent setup:
+These are a few of the common configuration issues that are work triple-checking in your `datadog-agent` setup:
 
 1. Run the Agent status config to spot the major configuration issue: `datadog-agent status`.
 
@@ -72,11 +72,11 @@ sudo cat /var/log/datadog/agent.log | grep logs
 
 #### Permission Issues While Tailing Log Files
 
-The dd-agent does not run as root (and we do not recommend that you make it run as root, as a general best-practice). For this reason, when you configure your dd-agent to tail log files (for custom logs or for integrations) take special care to ensure the dd-agent user has read access to tail the log files you want to collect from.  
+The `datadog-agent` does not run as root (and we do not recommend that you make it run as root, as a general best-practice). For this reason, when you configure your `datadog-agent` to tail log files (for custom logs or for integrations) take special care to ensure the `datadog-agent` user has read access to tail the log files you want to collect from.  
 
-If the dd-agent user does not have read access to the files you configure it to tail, then a permissions error is captured in the `/var/log/datadog/agent.log`.  
+If the `datadog-agent` user does not have read access to the files you configure it to tail, then a permissions error is captured in the `/var/log/datadog/agent.log`.  
 
-**Note**: when you add the appropriate read permissions, make sure that these permissions are correctly set on your log rotation configuration. Otherwise, when the log rotates next, the dd-agent may lose its read permissions. 
+**Note**: when you add the appropriate read permissions, make sure that these permissions are correctly set on your log rotation configuration. Otherwise, when the log rotates next, the `datadog-agent` may lose its read permissions. 
 
 ## Further Reading
 

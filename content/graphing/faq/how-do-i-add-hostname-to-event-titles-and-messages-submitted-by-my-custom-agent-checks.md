@@ -3,7 +3,7 @@ title: How do I add hostname to event titles and messages submitted by my custom
 kind: faq
 ---
 
-When you submit events to your Datadog account from a [custom Agent check][1], they get a host tag associated with them by default. But it can sometimes be useful to include the hostname as part of the event title or content. This can be achieved if, in your custom check's code, you import "get_hostname" from "util", and then feed "self.agentConfig" as an argument to "get_hostname", as in this example:
+When you submit events to your Datadog account from a [custom Agent check][1], they get a host tag associated with them by default. But it can sometimes be useful to include the hostname as part of the event title or content. This can be achieved if, in your custom check's code, you import `get_hostname` from `util`, and then feed `self.agentConfig` as an argument to `get_hostname`, as in this example:
 
 ```python
 
@@ -28,6 +28,6 @@ class TestCheck(AgentCheck):
 Such an Agent check would create the following event in your event stream:
 {{< img src="graphing/faq/event_example.png" alt="event_example" responsive="true" popup="true">}}
 
-In this example, the host tag would have been applied even without referencing get_hostname(self.agentConfig), but that reference added the hostname to the event title and content.
+In this example, the host tag would have been applied even without referencing `get_hostname(self.agentConfig)`, but that reference added the hostname to the event title and content.
 
 [1]: /agent/agent_checks

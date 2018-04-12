@@ -13,7 +13,7 @@ further_reading:
   text: Learn how to explore your logs
 ---
 
-The best and easiest way to send logs to Datadog is through the Datadog Agent. You can read how to configure the dd-agent to send logs to [Datadog here][1].
+The best and easiest way to send logs to Datadog is through the Datadog Agent. You can read how to configure the `datadog-agent` to send logs to [Datadog here][1].
 
 That said, you can also send logs to Datadog using many common non-Datadog log shippers, like the following:
 
@@ -30,9 +30,9 @@ The Datadog Log Agent can be configured:
 * [To tail logs from files][2]
 * [To listen for logs via UDP or TCP over a given port][3]. 
  
-So whatever your log shipper is, one option is just to have that shipper forward its logs to the Datadog Log Agent; it is often easy to configure this kind of setup, both from the dd-agent side, and from your log shipper. With this approach, you don't need to add your Datadog API key, hostname, or source values in your log shipper's configurations, since that is handled by the Datadog Log Agent.
+So whatever your log shipper is, one option is just to have that shipper forward its logs to the Datadog Log Agent; it is often easy to configure this kind of setup, both from the `datadog-agent` side, and from your log shipper. With this approach, you don't need to add your Datadog API key, hostname, or source values in your log shipper's configurations, since that is handled by the Datadog Log Agent.
 
-This approach can be especially useful for sending to Datadog logs that have heightened permission requirements. The dd-agent does not run as root (and as a best practice we do not encourage running it as root), so that can block the Datadog Logs Agent from tailing some log files directly, such as /var/log/syslog. If you do not want to modify the permissions on these files or the access that you give to the dd-agent user, many of these open source log shippers do run as root, and can be used to forward logs to the Datadog Logs Agent over UDP / TCP.
+This approach can be especially useful for sending to Datadog logs that have heightened permission requirements. The `datadog-agent` does not run as root (and as a best practice we do not encourage running it as root), so that can block the Datadog Logs Agent from tailing some log files directly, such as /var/log/syslog. If you do not want to modify the permissions on these files or the access that you give to the `datadog-agent` user, many of these open source log shippers do run as root, and can be used to forward logs to the Datadog Logs Agent over UDP / TCP.
 
 ## Rsyslog
 

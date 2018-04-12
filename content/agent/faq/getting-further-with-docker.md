@@ -24,15 +24,15 @@ The layered nature of the Linux storage subsystem (block devices, logical volume
 
 dd-agent reports disk metrics and rates for every partition that is accessible (even if only partially) to its container, but not others, as this separation is enforced by cgroups / docker. To allow disk usage reporting on a partition, you need to expose it through a docker volume via the -v argument to docker run ; here are three ways, from most secure to most convenient:
 
-* Create a dummy file in the filesystem they want to watch and expose it through docker: -v /mnt/loop/dummyfile:/host/loop0:ro : the Agent isn't able to access any file on this partition
+* Create a dummy file in the filesystem they want to watch and expose it through docker: `-v /mnt/loop/dummyfile:/host/loop0:ro` : the Agent isn't able to access any file on this partition
 
-* Expose the whole mountpoint they want to monitor as read-only: -v /mnt/loop:/host/loop0:ro : the Agent is able to access the folder hierarchy and world-readable files
+* Expose the whole mountpoint they want to monitor as read-only: `-v /mnt/loop:/host/loop0:ro` : the Agent is able to access the folder hierarchy and world-readable files
 
-* If the mount path is unknown (dynamically mounted volumes), but the parent directory is constant, expose the parent folder: -v /mnt/:/host/mnt:ro : the Agent is able to access all volumes mounted in this folder's children
+* If the mount path is unknown (dynamically mounted volumes), but the parent directory is constant, expose the parent folder: `-v /mnt/:/host/mnt:ro :` the Agent is able to access all volumes mounted in this folder's children
 
-* Expose their whole host filesystem to the container: -v /:/host/rootfs:ro : this can be useful if mount points are unpredictable or rapidly changing. The Agent reports every partition mounted on the system, but might probably throw "permission denied" warning on some virtual mount points (shm, netns...)
+* Expose their whole host filesystem to the container: `-v /:/host/rootfs:ro` : this can be useful if mount points are unpredictable or rapidly changing. The Agent reports every partition mounted on the system, but might probably throw "permission denied" warning on some virtual mount points (shm, netns...)
 
-If your Agent container runs with `--privileged`, it has full access to the `/dev` folder and its block devices. You can mount the desired block devices into the container so that they are reported by the Agent. To monitor loop0, one could add to entrypoint.sh:
+If your Agent container runs with `--privileged`, it has full access to the `/dev` folder and its block devices. You can mount the desired block devices into the container so that they are reported by the Agent. To monitor `loop0, one could add to `entrypoint.sh`:
 
 ```
 mkdir -p /tmp/mnt/loop0 && mount /dev/loop0 /tmp/mnt/loop0
@@ -42,7 +42,7 @@ This automount logic isn't added to the standard entrypoint, as unforeseen edge 
 
 #### No disk metrics are sent at all
 
-If you customized the docker image or mount a custom directory to /etc/dd-agent/conf.d, make sure the disk.yaml.default (or a customized disk.yaml) file is present, or the disk check is disabled.
+If you customized the docker image or mount a custom directory to `/etc/dd-agent/conf.d`, make sure the `disk.yaml.default` (or a customized `disk.yaml`) file is present, or the disk check is disabled.
 
 #### Permision denied errors
 
@@ -52,7 +52,7 @@ This probably happens because the user exposed the host's whole root filesystem 
 
 #### No disk metrics are sent at all with collect_disk_stats enabled
 
-The collect_disk_stats feature of docker_daemon only support devicemapper-backed docker storage. This is not the case in vanilla Docker or Kubernetes, but is the default configuration for ECS. If you use a different storage driver (aufs, overlayfs...), you should use the disk check or collect_container_size
+The `collect_disk_stats` feature of docker_daemon only support devicemapper-backed docker storage. This is not the case in vanilla Docker or Kubernetes, but is the default configuration for ECS. If you use a different storage driver (aufs, overlayfs...), you should use the disk check or collect_container_size
 
 #### collect_container_size is slow and hangs docker
 
