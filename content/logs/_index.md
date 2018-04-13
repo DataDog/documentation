@@ -21,7 +21,7 @@ logs_enabled: true
 The Datadog Agent sends its logs to Datadog over TLS-encrypted TCP. This requires outbound communication over port `10516`.
 
 ## Enabling log collection from integrations
-To start collecting logs for a given integration, uncomment the logs section in that integration's yaml file, and configure it for your environment.  
+To start collecting logs for a given integration, uncomment the logs section in that integration's yaml file, and configure it for your environment.
 
 <div class="alert alert-warning">
 Not all integrations include out of the box log configurations.  <a href="https://docs.datadoghq.com/integrations/#cat-log-collection">Consult the current list of supported integrations available</a>.
@@ -43,7 +43,7 @@ The Datadog Agent v6 can collect logs from files or the network (TCP or UDP) and
 ## Tail existing files
 Set `type` to **file** then specify the absolute `path` to the log file you want to tail.
 
-Example: 
+Example:
 To gather python applications stored in **/var/log/myapp1.log** and **/var/log/python.log** create a `python.d/conf.yaml` file as follows:
 
 ```yaml
@@ -92,7 +92,7 @@ The Agent supports raw string and JSON formated logs. If you are sending logs in
 
 ### Filter logs
 
-All logs are not equal and you may want to send only a specific subset of logs to Datadog.  
+All logs are not equal and you may want to send only a specific subset of logs to Datadog.
 To achieve this use the `log_processing_rules` parameter in your configuration file with the **exclude_at_match** or **include_at_match** `type`.
 
 * **exclude_at_match**: If the pattern is contained in the message the log is excluded, and not sent to Datadog.
@@ -133,6 +133,9 @@ logs:
       pattern: \w+@datadoghq.com
 ```
 
+**Note**: If you set up multiple processing rules, they will be applied sequentially.
+Each rule will be applied on the result of the previous one.
+
 ### Scrub sensitive data in your logs
 
 If your logs contain sensitive information that you wish to redact, configure the Datadog Agent to scrub sensitive sequences by using the `log_processing_rules` parameter in your configuration file with the **mask_sequences** `type`.
@@ -159,7 +162,7 @@ logs:
 
 ### Multi-line aggregation
 
-If your logs are not sent in JSON and you want to aggregate several lines into one single entry, configure the Datadog Agent to detect a new log using a specific regex pattern instead of having one log per line.  
+If your logs are not sent in JSON and you want to aggregate several lines into one single entry, configure the Datadog Agent to detect a new log using a specific regex pattern instead of having one log per line.
 
 This is accomplished by using the `log_processing_rules` parameter in your configuration file with the **multi_line** `type`.
 
@@ -208,12 +211,12 @@ More examples:
 If your log files are labeled by date or all stored in the same directory, configure your Datadog Agent to monitor them all and automatically detect new ones by using wildcards in the `path` attribute.
 
 * Using `path: /var/log/myapp/*.log`:
-  * Matches all `.log` file contained in the `/var/log/myapp/` directory. 
+  * Matches all `.log` file contained in the `/var/log/myapp/` directory.
   * Doesn't match `/var/log/myapp/myapp.conf`.
 
 * Using `path: /var/log/myapp/*/*.log`:
   * Matches `/var/log/myapp/log/myfile.log`.
-  * Matches `/var/log/myapp/errorLog/myerrorfile.log` 
+  * Matches `/var/log/myapp/errorLog/myerrorfile.log`
   * Doesn't match `/var/log/myapp/mylogfile.log`.
 
 Configuration example:
@@ -239,7 +242,7 @@ The log Agent does not presently respect the the proxy setting in the datadog.ya
 
 Datadog automatically parses JSON-formatted logs. For this reason, when you have control over the log format you send to Datadog, we encourage you to format them as JSON to avoid the need for custom parsing rules.
 
-## Reserved attributes 
+## Reserved attributes
 
 If your logs are formatted as JSON, be aware that some attributes are reserved for use by Datadog:
 
