@@ -207,7 +207,6 @@ Anomaly detection uses historical data to establish a baseline for normal behavi
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: https://app.datadoghq.com/monitors#/create
 [2]: /#anomaly-detetion-algorithms
 [3]: https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average

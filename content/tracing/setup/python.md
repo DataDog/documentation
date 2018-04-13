@@ -124,6 +124,5 @@ Each time its called, the following code produces this **trace**:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /tracing/setup
 [2]: http://pypi.datadoghq.com/trace/docs/#get-started

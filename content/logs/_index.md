@@ -1,7 +1,7 @@
 ---
 title: Log Management
 kind: Documentation
-description: "Configure your Datadog agent to gather logs from your host, containers & services."
+description: "Configure your Datadog Agent to gather logs from your host, containers & services."
 ---
 
 {{< vimeo 243374392 >}}
@@ -10,7 +10,7 @@ description: "Configure your Datadog agent to gather logs from your host, contai
 
 Log collection requires an Agent version >= 6.0. Older versions of the Agent do not include the `Log collection` interface that is used for log collection.
 
-If you are not using it already, please follow [the agent installation instruction][1].
+If you are not using it already, please follow [the Agent installation instruction][1].
 
 Collecting logs is **disabled** by default in the Datadog Agent, you need to enable it in `datadog.yaml`:
 
@@ -18,7 +18,7 @@ Collecting logs is **disabled** by default in the Datadog Agent, you need to ena
 logs_enabled: true
 ```
 
-The Datadog agent sends its logs to Datadog over TLS-encrypted TCP. This requires outbound communication over port `10516`.
+The Datadog Agent sends its logs to Datadog over TLS-encrypted TCP. This requires outbound communication over port `10516`.
 
 ## Enabling log collection from integrations
 To start collecting logs for a given integration, uncomment the logs section in that integration's yaml file, and configure it for your environment.  
@@ -63,7 +63,7 @@ logs:
     source: python
     sourcecategory: sourcecode
 ```
-* [Restart your agent][3]
+* [Restart your Agent][3]
 
 ## Stream logs through TCP/UDP
 Set `type` to **tcp** or **udp** depending of your protocol then specify the `port` of your incoming connection.
@@ -84,9 +84,9 @@ logs:
     sourcecategory: front
 
 ```
-* [Restart your agent][3]
+* [Restart your Agent][3]
 
-The agent supports raw string and JSON formated logs. If you are sending logs in batch, use break line characters to separate your logs.
+The Agent supports raw string and JSON formated logs. If you are sending logs in batch, use break line characters to separate your logs.
 
 ## Advanced log collection functions
 
@@ -132,7 +132,6 @@ logs:
       ## Regexp can be anything
       pattern: \w+@datadoghq.com
 ```
-
 
 ### Scrub sensitive data in your logs
 
@@ -204,7 +203,6 @@ More examples:
 |20180228 | `\d{8}` |
 {{% /table %}}
 
-
 ### Tail multiple directories or whole directories by using wildcards
 
 If your log files are labeled by date or all stored in the same directory, configure your Datadog Agent to monitor them all and automatically detect new ones by using wildcards in the `path` attribute.
@@ -231,11 +229,11 @@ logs:
    source: go
 ```
 
-**Note**: that the agent requires the read and execute permission (5) on the directory to be able to list all the available files in it.
+**Note**: that the Agent requires the read and execute permission (5) on the directory to be able to list all the available files in it.
 
 ### Using a Proxy for Logs
 
-The log agent does not presently respect the the proxy setting in the datadog.yaml configuration file. This feature will be available in a future release.
+The log Agent does not presently respect the the proxy setting in the datadog.yaml configuration file. This feature will be available in a future release.
 
 ### The Advantage of Collecting JSON-formatted logs
 
@@ -295,7 +293,7 @@ Using the Datadog Agent or the RFC5424 format automatically set the service valu
 
 ### Edit reserved attributes
 
-You can now control the global hostname, service, timestamp, and status main mapping that are applied before the processing pipelines. This is particularly helpful if logs are sent in JSON or from an external agent.
+You can now control the global hostname, service, timestamp, and status main mapping that are applied before the processing pipelines. This is particularly helpful if logs are sent in JSON or from an external Agent.
 
 {{< img src="logs/index/reserved_attribute.png" alt="Reserved Attribute" responsive="true" popup="true" style="width:80%;">}}
 
@@ -310,7 +308,6 @@ To change the default values for each of the reserved attributes, go to the pipe
     {{< nextlink href="logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers" tag="FAQ" >}}How to Send Logs to Datadog via External Log Shippers{{< /nextlink >}}
     {{< nextlink href="logs/parsing" tag="Documentation" >}}Learn more about parsing{{< /nextlink >}}
 {{< /whatsnext >}}
-
 
 [1]: /agent
 [2]: /getting_started/custom_metrics/

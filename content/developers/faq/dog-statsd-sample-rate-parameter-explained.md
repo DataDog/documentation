@@ -9,7 +9,7 @@ Here are the components involved when submitting data via (dog)statsd:
 
 1. your code. Where you sample metric values using a [DogStatsD][1] client, in charge of sampling metric values and sending them to 2.
 2. the DogStatsD server (embedded with the datadog-agent), in charge of receiving the value sampled. Every 10 seconds, it aggregates data received into final metric values that are sent to 3.
-3. the datadog service, from where you can graph your metric data.
+3. the Datadog service, from where you can graph your metric data.
 
 Generally the DogStatsD client (i.e. your code) and the [DogStatsD server][1] (i.e. the datadog-agent) run on the same host, but they could be on different hosts as well:
 
@@ -55,7 +55,6 @@ statsd.gauge('foo', 42,sample_rate=0.5)
 
 Note 1: Don't change the value you send, only adjust the sample_rate.
 Note 2: using low sample rates decrease the precision of the collection. It's not recommended unless you really have a lot of data sampled by your code.
-
 
 [1]: /developers/dogstatsd
 [2]: https://github.com/DataDog/dd-agent/blob/master/aggregator.py

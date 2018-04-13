@@ -10,8 +10,6 @@ title: Datadog-AWS Route 53 Integration
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-
-
 {{< img src="integrations/awsroute53/route53_graph.png" >}}
 
 ## Overview
@@ -41,7 +39,6 @@ Configure Route 53 on AWS and ensure that the policy you created has the **route
   ]
 }
 {{< /highlight >}}
-
 
 ### Configuration
 

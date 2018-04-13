@@ -26,5 +26,3 @@ Datadog 101 shows you everything you need to know about using the Datadog platfo
 * [Regressions](?wtime=413)
 * [Outliers and anomalies](?wtime=444)
 
-
-

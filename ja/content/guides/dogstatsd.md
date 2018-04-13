@@ -46,7 +46,6 @@ protocol, along with a few extensions for special Datadog features. -->
 
 Datadogにカスタムメトリクスを取り込ませる最も簡単な方法はDogStatsDを使うことです。DogStatsDは、Datadog Agent 3.0以上に同胞されているメトリクス集約サーバです。DogStatsDは、<a href="https://github.com/etsy/statsd">StatsD</a>プロトコルをサポートすると共に、datadog専用の機能にも対応するよう拡張されています。
 
-
 <!-- ## How It Works
 
 DogStatsD accepts custom application metrics points over
@@ -68,7 +67,6 @@ DogStatsDは、アプリケーションのカスタムメトリクスを<a href=
 <p>
 {{< img src="guides/dogstatsd/dogstatsd.png" >}}
 </p>
-
 
 <!-- ### Aggregation
 
@@ -115,7 +113,6 @@ DogStatsDは、これらのUDPパケットが送られたデータポイント�
 
 このようにすることにより、計測対象のデータが不規則に発生している状態でも、メトリクス送信タイミングの間隔ごとに一つのメトリクスと値のセットを生成することを保証しています。
 
-
 <!-- ### Why UDP?
 
 Like StatsD, DogStatsD receives points over UDP. UDP is good fit for application
@@ -127,7 +124,6 @@ server is down or inaccessible. -->
 ### なぜUDPなのですか。
 
 StatsDと同様にDogSt​​atsDは、UDPを使って計測ポイント情報を受け取ります。UDPは、パケットの到達を管理していないのでアプリケーションの計測には最適です。パケットの到達を管理しないということは、アプリケーションがメトリクスサーバからの応答を待って、実行中の作業を停止し待機状態になる必要がないということです。パッケットの応答を待つ状態がないということは、メトリクスサーバが停止している時やそれにアクセスできない事態が発生した際に実行中のアプリケーションに影響を与えないという観点では、非常に有効です。
-
 
 <!-- ## Set Up
 
@@ -142,7 +138,6 @@ just fine, but using a Datadog StatsD client will give you a few extra features
 
 既にDatadog Agentが起動し動作しているなら、開発に使用しているプログラミング言語に対応したDogSt​​atsDクライアントをインストールすれば、準備完了です。もちろん、一般的なStatsDクライアントでも問題なく動作します。しかし、DogStatsDクライアントを利用すれば、いくつかの追加機能(例: tags、histogramsなど)が使えるようになります。
 
-
 <!-- ### DogStatsD Clients
 
 You can see the list of StatsD clients on our [libraries page](/libraries/).　-->
@@ -150,7 +145,6 @@ You can see the list of StatsD clients on our [libraries page](/libraries/).　-
 ### DogStatsDクライアントについて
 
 プログラミング言語ごとのDogStatsDクライアントに関しては、[ライブラリー](/ja/libraries/)ページを参照してください。
-
 
 <!-- ## Metrics
 
@@ -165,7 +159,6 @@ DogStatsD supports the following types of metrics: -->
 Pythonを使ってDogStatsDがサポートしているメトリクスのタイプを解説してきます。ここで解説する内容は、他のプログラミング言語でも同様に適用することができます。
 
 DogStatsDは、次のメトリクスタイプに対応しています:
-
 
 <!-- ### Gauges
 
@@ -187,7 +180,6 @@ dog.gauge('gas_tank.level', 0.75)
 dog.gauge('users.active', 1001)
 {{< /highlight >}}
 
-
 <!-- ### Counters
 
 Counters track how many times something happened per second, like the number of
@@ -206,7 +198,6 @@ dog.increment('page_view.count', 10)
 dog.increment('database.query.count')
 dog.increment('page_view.count', 10)
 {{< /highlight >}}
-
 
 <!-- ### Histograms
 
@@ -227,14 +218,12 @@ supports them. -->
 
 データベースへのクエリ実行時間やユーザーによってアップロードされたファイルのサイズなどの集計数のように、ヒストグラムは、値の集合の度数分布を追跡します。各ヒストグラムは、平均値、最小値、最大値、中央値及び95パーセンタイルを追跡します。
 
-
 {{< highlight python >}}
 dog.histogram('database.query.time', 0.5)
 dog.histogram('file.upload.size', file.get_size())
 {{< /highlight >}}
 
 ヒストグラムは、StatsDの拡張です。この機能が必要な場合は、DogStatsDクライアントを使用する必要があります。
-
 
 <!-- ### Sets
 
@@ -259,7 +248,6 @@ dog.set('users.uniques', user.id)
 
 セットは、StatsDの拡張です。この機能が必要な場合は、DogStatsDクライアントを使用する必要があります。
 
-
 <!-- ### Timers
 
 StatsD only supports histograms for timing, not generic values (like the size
@@ -270,7 +258,6 @@ by DogStatsD for backwards compatibility. -->
 ### Timers (タイマー)
 
 StatsDの度数分布は、一般的な値(アップロードされたファイルのサイズやクエリから返される行数など)には対応しておらず、時間計測のみにしか使うことができません。時間計測は、度数分布の特殊のケースであり、後方互換のためにDogStatsDでも同じように扱うようになっています。
-
 
 <!-- ## Sample Rates
 
@@ -299,7 +286,6 @@ dog.histogram('my.histogram', 1, sample_rate=0.5)
 
 この例では、実際の半分のデータポイントのデータをDogStatsDサーバに送信するよいうになります。しかし、メトリクスの生成には、受信値をサンプルレートの逆数倍し、実際の値の推定するようになっています。
 
-
 <!-- ## Tags
 
 Tags are a Datadog specific extension to StatsD. They allow you to tag a metric
@@ -308,10 +294,8 @@ dimension in your graphs. For example, if you wanted to measure the
 performance of two video rendering algorithms, you could tag the rendering time
 metric with the version of the algorithm you used.
 
-
 Since tags are an extension to StatsD, so you'll need to use a client that
 supports them.
-
 
 {{< highlight python >}}
 
@@ -352,7 +336,6 @@ renderer()
 duration = time() - start_time
 dog.histogram('rendering.duration', tags=[version])
 {{< /highlight >}}
-
 
 <!-- ## Events
 You can post events to your Datadog event stream. You can tag them, set priority and even aggregate them with other events.
@@ -399,7 +382,6 @@ statsd.event('There might be a storm tomorrow', 'A friend warned me earlier.')
 statsd.event('SO MUCH SNOW', 'The city is paralyzed!', alert_type='error', tags=['urgent', 'endoftheworld'])
 {{< /highlight >}}
 
-
 <!-- #### Fields
 - Mandatory:
   - Event title.
@@ -426,7 +408,6 @@ statsd.event('SO MUCH SNOW', 'The city is paralyzed!', alert_type='error', tags=
   - `alert_type` (String, None) — default: 'info' — 'error', 'warning', 'info', 'success'のどれかを指定します。
   - `tags` - (Array\[str\], None) — default: None — タグのリストを付けます。
 
-
 <!-- ## Configuration
 
 DogStatsD supports the following options, all of which can be tweaked in the
@@ -452,7 +433,6 @@ DogStatsDでは、UDPパケットの受信ポートとメトリクスの送信�
 
     # The number of seconds to wait between flushes to the server.
     dogstatsd_interval: 10
-
 
 <!-- ## Datagram Format
 
@@ -512,7 +492,6 @@ Here are some example datagrams and comments explaining them:
 - サンプルレートは、オプション指定項目です。 指定する場合は、0~1 の浮動小数点数になります。
 - タグは、オプション指定項目です。タグとタグの間位には","が入ります。キーバリューがセットのタグについては、":"を開いただに挟みます。
 
-
 次は、データグラムのサンプルとその内容の解説です:
 
     # ページビューのカウンタのインクリメント指示を送信
@@ -533,7 +512,6 @@ Here are some example datagrams and comments explaining them:
     # 上記のすべてのコンセプトを取り込んだデータグラムの例
     users.online:1|c|@0.5|#country:china
 
-
 <!-- ### Events
 
 If you want to send events to DogStatsD in your own way, here is the format of
@@ -546,7 +524,6 @@ the packets:
 独自の方法でDogSt​​atsDにイベントを送信したい場合は、以下がパケットのフォーマットになります:
 
 `_e{title.length,text.length}:title|text|d:date_happened|h:hostname|p:priority|t:alert_type|#tag1,tag2`
-
 
 <!-- #### Fields
 - Mandatory:
@@ -575,7 +552,6 @@ the packets:
   - `|t:alert_type` — default: 'info' — ‘error’, ‘warning’, ‘info’, ‘success’が指定できます。
   - `|#tag1:value1,tag2,tag3:value3` — default: None.
   <strong><em><br/>注: それぞれのタグ文字列に含まれる`:`は、タグの一部です。</em></strong>
-
 
 <!-- ## Source
 

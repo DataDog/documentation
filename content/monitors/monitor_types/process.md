@@ -43,5 +43,4 @@ point they should notify.
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /integrations/process/

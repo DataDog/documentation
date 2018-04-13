@@ -3,8 +3,6 @@ title: Dogshell, Quickly Use Datadog’s API from Terminal/Shell
 kind: faq
 ---
 
-
-
 Many users are familiar with [our API][1] and all the many things you can do in Datadog with it, whether sending/querying metrics or events to your Datadog account, creating dashboards, monitors, or downtimes, and more. But there’s an easy way to use our API straight from terminal/shell, using a wrapper called “dogshell”.
 
 ## Setup:
@@ -65,7 +63,6 @@ For reference, [find the code for dogshell][5]. But once you have dogshell insta
 * dog tag
 * dog search
 * dog comment
-
 
 ### Example, Dogshell in Use
 

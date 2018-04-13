@@ -11,7 +11,6 @@ doclevel: complete
 
 <!-- ## Overview
 
-
 Capture HAProxy activity in Datadog to:
 
 - Visualize HAProxy load-balancing performance.
@@ -19,7 +18,6 @@ Capture HAProxy activity in Datadog to:
 -  Correlate the performance of HAProxy with the rest of your applications. -->
 
 ## 概要
-
 
 次の目的で、HAProxyの動作状況をDatadogと連携します:
 
@@ -31,7 +29,6 @@ Datadog Agentの設定ファイルサンプルとメトリクス取得プログ�
 
 * [HAProxyインテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/haproxy/conf.yaml.example)
 * [HAProxyインテグレーション checks.d](https://github.com/DataDog/integrations-core/blob/master/haproxy/datadog_checks/haproxy/haproxy.py)
-
 
 <!-- The following metrics are collected by default with the HAProxy integration:
 

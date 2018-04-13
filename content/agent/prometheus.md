@@ -62,7 +62,6 @@ Official integrations have their own dedicated directories. There's a default in
 
 If you have more advanced needs than the generic check (metrics preprocessing for example) you can write a custom `PrometheusCheck`. It's [the mother class][6] of the generic check and it provides a structure and some helpers to collect metrics, events, and service checks exposed via Prometheus. Minimal configuration for checks based on this class include:
 
-
 - Overriding `self.NAMESPACE`
 - Overriding `self.metrics_mapper`
 - Implementing the `check()` method
@@ -235,7 +234,6 @@ class KubeDNSCheck(PrometheusCheck):
         self.process(endpoint, send_histograms_buckets=send_buckets, instance=instance)
 ```
 
-
 ## Going further
 
 You can improve your Prometheus check with the following methods:
@@ -260,7 +258,6 @@ Note: it is empty in the mother class but will need to be overloaded/hardcoded i
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/kube_dns.py
 [2]: https://github.com/DataDog/integrations-core/tree/master/prometheus

@@ -16,7 +16,6 @@ doclevel: basic
 
 ## 概要
 
-
 次の目的で、TokuMXのメトリクスをDatadogと連携します:
 
 * TokuMXのキーメトリクスを可視化する

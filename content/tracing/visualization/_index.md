@@ -78,7 +78,6 @@ Having a very high cardinality of resources makes Datadog less usable:
 
 As a result we have a hard limit on the cardinality of resources for a given service.
 
-
 ### Trace
 
 **A trace is used to track the time spent by an application processing a single operation, each trace consists of one or more spans.**  
@@ -96,7 +95,6 @@ Spans are associated with a [service][8] and optionally a [resource][13]. Each s
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: https://godoc.org/github.com/DataDog/dd-trace-go/tracer#service
 [2]: /tracing/setup/java/#configuration

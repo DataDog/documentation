@@ -13,8 +13,6 @@ title: Datadog-Jira Integration
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-
-
 {{< img src="integrations/jira/JiraInstallation9.png" alt="settings" >}}
 
 ## Overview
@@ -108,7 +106,6 @@ A full list of variables can be seen below.
 |$ALERT_QUERY| Query of the monitor that triggered the webhook|
 |$ALERT_STATUS| Summary of the alert status *(ex: system.load.1 over host:my-host was > 0 at least once during the last 1m)*|
 |$ALERT_TRANSITION| Type of alert notification *(ex: Triggered)*|
-
 
 #### Automatically Create Tickets from Datadog Alerts
 

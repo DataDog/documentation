@@ -71,7 +71,6 @@ It also includes support for the following data stores and libraries:
 
 ___
 
-
 {{% table responsive="true" %}}
 | Library| Library Documentation| GoDoc Datadog Documentation |
 |-------------------|--------------------------------------------------|------------------------------------------------------------------------------------------|
@@ -129,7 +128,6 @@ See [Opentracing documentation][4] for some usage patterns. Legacy documentation
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /tracing/setup
 [2]: https://github.com/DataDog/dd-trace-go/blob/master/tracer/example_test.go

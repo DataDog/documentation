@@ -25,7 +25,7 @@ The two integration repositories are defined as follows:
 * **[integrations-core][2]** - Datadog-supported integrations that were formerly found in the core Agent.
 * **[integrations-extras][3]** - Community-supported integrations that have been written according to the guidelines specified by Datadog
 
-All core integrations continue to be installed with the agent install. You only have to install an integration in core separately if there is an out of band update to that integration.
+All core integrations continue to be installed with the Agent install. You only have to install an integration in core separately if there is an out of band update to that integration.
 To either install an out-of-band update to a core integration or to install one of the extra integrations, follow these steps:
 
 ### Installing on yum-based systems
@@ -42,7 +42,6 @@ To either install an out-of-band update to a core integration or to install one 
 
 1.  Copy the Python script for your chosen integration to the `checks.d` directory where you installed the Agent.
 2.  Copy the corresponding yaml configuration file to the `conf.d` directory where you installed the Agent.
-
 
 [1]: https://github.com/DataDog/dd-agent
 [2]: https://github.com/DataDog/integrations-core

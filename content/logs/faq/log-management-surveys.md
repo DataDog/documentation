@@ -14,5 +14,4 @@ Datadog's log management solution complements and integrates with its Infrastruc
     {{< nextlink href="https://docs.google.com/forms/d/e/1FAIpQLSfptWfkUH9kLALhNaG-OZ5BGhExyAQjbw1_90ZvyM2L0Pk7mA/viewform?usp=sf_link" >}}Volume Survey{{< /nextlink >}}
 {{< /whatsnext >}}
 
-
 [1]: https://app.datadoghq.com/logs

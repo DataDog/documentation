@@ -32,7 +32,6 @@ Datadog Agentは、仮の設置パスとして<code> '~/.datadog-agent'</code>�
 このガイドでは、Datadog Agent は、この仮の設置パスに存在していることを前提としています。
 ディレクトリを変更した場合は、そのパスに合わせて手順を変更してください。
 
-
 <!--
 ======================================================
 Starting and Stopping the Agent
@@ -43,18 +42,13 @@ Starting and Stopping the Agent
 
 To manually start the Agent:
 
-
     sudo ~/.datadog-agent/bin/agent start
-
 
 To stop the Agent: <br/>
 
-
     sudo ~/.datadog-agent/bin/agent stop
 
-
 To restart the Agent: <br/>
-
 
     sudo ~/.datadog-agent/bin/agent restart
  -->
@@ -63,22 +57,15 @@ To restart the Agent: <br/>
 
 手動で Datadog Agent を起動する:
 
-
     sudo ~/.datadog-agent/bin/agent start
-
 
 停止する:
 
-
     sudo ~/.datadog-agent/bin/agent stop
-
 
 リスタートする:
 
-
     sudo ~/.datadog-agent/bin/agent restart
-
-
 
 <!--
 ======================================================
@@ -90,18 +77,13 @@ Status and Information
 
 To check if the Agent is running:
 
-
     sudo ~/.datadog-agent/bin/agent status
-
 
 To receive more information about the Agent's state:
 
-
     sudo ~/.datadog-agent/bin/info
 
-
 Tracebacks for errors can be retrieved by setting the <code>-v</code> flag: <em>(since 3.8.0)</em>
-
 
     sudo ~/.datadog-agent/bin/info -v
  -->
@@ -110,22 +92,15 @@ Tracebacks for errors can be retrieved by setting the <code>-v</code> flag: <em>
 
 Datadog Agent が起動しているか確認する: <em>(ver. 3.8.0 ~)</em>
 
-
     sudo ~/.datadog-agent/bin/agent status
-
 
 Datadog Agent のステータスに関する情報を収集する:
 
-
     sudo ~/.datadog-agent/bin/info info
-
 
 エラーをトレースバックする: <code>-v</code> フラグをinfoコマンドに追記する。 <em>(ver. 3.8.0 ~)</em>
 
-
     sudo ~/.datadog-agent/bin/info info -v
-
-
 
 <!--
 ======================================================
@@ -144,7 +119,6 @@ Configuration files for integrations are located in <code>~/.datadog-agent/agent
 Datadog Agent の設定ファイルの保存先 <code>~/.datadog-agent/agent/datadog.conf</code>
 
 インストールしたIntegrations の設定ファイルの保存先 <code>~/.datadog-agent/agent/conf.d/</code>
-
 
 <!--
 ======================================================

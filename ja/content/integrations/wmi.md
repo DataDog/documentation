@@ -18,7 +18,6 @@ Get metrics from your Windows applications/servers with Windows Management Instr
 
 ## 概要
 
-
 ### Windows Management Instrumentation(WMI) Integration
 
 次の目的で、Windows Management Instrumentation (WMI) を使って、WindowsアプリケーションやWindowsサーバーのメトリクスを、Datadogへ送信します:

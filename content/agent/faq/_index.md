@@ -11,15 +11,15 @@ private: true
 * [Dogstream][3]
 * [Install core extras][4]
 * [Agent commands][5]
-* [How does Datadog determine the agent hostname?][6]
+* [How does Datadog determine the Agent hostname?][6]
 
 ## Installation
 
 * [Common Windows Agent Installation Error 1721][7]
-* [How do I install the agent on a server with limited internet connectivity?][8]
+* [How do I install the Agent on a server with limited internet connectivity?][8]
 * [How to monitor SNMP devices?][9]
-* [I stopped my agent but I’m still seeing the host in my Datadog account.][10]
-* [How do I uninstall the agent?][11]
+* [I stopped my Agent but I’m still seeing the host in my Datadog account.][10]
+* [How do I uninstall the Agent?][11]
 
 ## Troubleshooting
 

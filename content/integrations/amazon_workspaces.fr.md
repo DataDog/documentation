@@ -4,6 +4,7 @@ aliases:
 categories:
   - cloud
   - aws
+  - log collection
 ddtype: crawler
 description: >-
   Suivre les connexions ayant échoué, la latence de session, les espaces de

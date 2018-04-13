@@ -1,10 +1,9 @@
 ---
-title: How does Datadog determine the agent hostname?
+title: How does Datadog determine the Agent hostname?
 kind: faq
 aliases:
     - /agent/faq/how-can-i-change-the-hostname/
 ---
-
 
 {{< img src="agent/faq/agent_hostname.jpeg" alt="Agent hostname scheme" responsive="true" popup="true">}}
 

@@ -12,7 +12,6 @@ Accordingly, in the Datadog configuration file for HAProxy, **each socket or end
 
 {{< img src="integrations/faq/haproxy_multi_process_agent_conf.png" alt="HAProxy multiprocess configuration" responsive="true" popup="true" style="width:50%;">}}
 
-
 Otherwise they share the same `/haproxy_stats` endpoint, and getting the HAProxy statistics from it shows the stats only for the process assigned to the current request.
 
 {{< img src="integrations/faq/haproxy_stats_1.png" alt="HAProxy stats 1" responsive="true" popup="true" style="width:85%;" >}}

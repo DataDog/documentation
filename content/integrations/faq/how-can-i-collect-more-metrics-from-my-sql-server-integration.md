@@ -40,7 +40,6 @@ instances:
       - test:sqlserver
 ```
 
-
 [1]: /integrations/sqlserver/
 [2]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/conf.yaml.example
 [3]: https://msdn.microsoft.com/en-us/library/ms187743.aspx

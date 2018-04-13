@@ -43,7 +43,6 @@ For `create`/`read`/`update` endpoints, the body is one JSON payload describing 
 
 {{< snippet-code-block file="sb-payload-example.js" >}}
 
-
 ## General Notes
 
 ### Sizing and positioning
@@ -76,7 +75,6 @@ If you would like to create or update boards that use templated variables, you m
 The final "base" payload of a templated board would look like this:
 
 {{< snippet-code-block file="sb-payload-tpl-example.js" >}}
-
 
 ## API Usage
 
@@ -282,7 +280,6 @@ curl -X PUT -H "Content-type: application/json" \
   </div>
 </div>
 
-
 <!--
 ======================================================
 GET SCREENBOARD
@@ -448,7 +445,6 @@ curl -X POST \
 {{< /highlight >}}
   </div>
 </div>
-
 
 <h2>Widget Examples</h2>
 

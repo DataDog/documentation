@@ -30,7 +30,6 @@ Available endpoints are:
 * To delete an integration from Datadog:  
     **`DELETE /api/v1/integration/<source_type_name>`**
 
-
 [1]: /api/#aws
 [2]: /api/#pagerduty
 [3]: /api/#slack

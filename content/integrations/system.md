@@ -35,7 +35,6 @@ No configuration is necessary for the system.
 
 {{< get-metrics-from-git "system" "system.cpu system.fs system.io system.load system.mem system.swap system.uptime" >}}
 
-
 ## Agent Check: System cores
 
 This check collects the number of CPU cores on a host and CPU times (i.e. system, user, idle, etc).

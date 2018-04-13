@@ -96,7 +96,6 @@ There are multiple community projects for maintaining or managing Monitors along
 * https://github.com/rapid7/dogwatch
 * https://www.terraform.io/docs/providers/datadog/r/monitor.html
 
-
 [1]: /graphing/event_stream/
 [2]: https://app.datadoghq.com/monitors/triggered
 [3]: https://app.datadoghq.com/monitors

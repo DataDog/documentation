@@ -16,7 +16,6 @@ doclevel: basic
 
 ## 概要
 
-
 次の目的で、SentryをDatadogと連携します:
 
 * イベントストリーム上にexceptions(例外)を表示します

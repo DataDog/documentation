@@ -11,7 +11,6 @@ doclevel:
 
 <!-- ### Overview
 
-
 Connect Jenkins to Datadog in order to:
 
 - Add build & deployment markers on all your dashboards.
@@ -20,14 +19,12 @@ Connect Jenkins to Datadog in order to:
 
 ## 概要
 
-
 Connect Jenkins to Datadog in order to:
 次の目的で、JenkinsとDatadogを連携します:
 
 * ダッシュボード上で、Jenkinsのビルドとデプロイタイミングを表示する
 * JenkinsでのビルドのトレンドをDatadog上で把握する
 * Jenkinsでのビルドの状況についてイベントストリームでチームメンバーと検討する
-
 
 <!-- From the open-source Jenkins plugin:
 

@@ -7,7 +7,6 @@ title: Single Sign On With SAML
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-
 This guide assumes that you already have a SAML Identity Provider up and running.
 
 ## SAML
@@ -38,7 +37,6 @@ The Single Sign On URL will also be displayed on the Team page. Loading this URL
 
 ## Datadog Service Provider Details
 
-
 * Datadog supports the **HTTP-POST** binding for **SAML2**:
 `urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST`.
 * Datadog will specify `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` for the Format of the **NameIDPolicy** in Assertion Requests.
@@ -49,7 +47,6 @@ The Single Sign On URL will also be displayed on the Team page. Loading this URL
    [7]: https://app.datadoghq.com/account/saml/metadata.xml
 
 ##  Setting Attributes
-
 
 * Attributes may be included with the Assertion. Datadog looks for 3 Attributes in the AttributeStatement:
 1. **eduPersonPrincipalName**: If specified, the eduPersonPrincipalName must correspond to the user’s Datadog username. The username is usually the user’s email address.
@@ -77,7 +74,6 @@ For more information about configuring specific IdP's, refer to the following Kn
 * [NoPassword](https://help.datadoghq.com/hc/en-us/articles/211023623-How-do-I-configure-NoPassword-as-a-SAML-IdP-)
 * [Okta](https://help.datadoghq.com/hc/en-us/articles/210132743-How-do-I-configure-Okta-as-a-SAML-IdP-)
 
-
 ## Additional Features
 
 The following features can be enabled through the SAML Configuration dialog.
@@ -92,7 +88,6 @@ Admins in accounts using SAML can also set the default role for new Just-in-Time
 The default role is currently Standard, but you can choose to add new JIT users as **Read-Only** or even **Admin**. 
 
 {{< img src="guides/saml/saml_jit_default.png" >}}
-
 
 ### IdP Initiated Login
 

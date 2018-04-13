@@ -15,13 +15,11 @@ There are two ways to interact with the Graphing Editor: using the GUI (the defa
 
 ## JSONエディターを使用したグラフ表示
 
-
 {{< img src="graphing/references-graphing-jsoneditor.png" >}}
 
 <!--### Grammar-->
 
 ### JSON書式の構文
-
 
 <!--
 The graph definition language is well-formed JSON and is structured in four parts:
@@ -120,7 +118,6 @@ A Series can be further combined together via binary operators (+, -, /, *):
 
 #### 関数
 
-
 <!--
 You can apply functions to the result of each query.
 
@@ -176,7 +173,6 @@ For more on <code>.as_count()</code> please see our blog post
 
 #### データポイントの集計
 
-
 <!--
 In most cases, the number of data points available outnumbers the maximum number that can be shown on screen. To overcome this, the data is aggregated using one of 4 available methods: average,  max, min, and sum.
 -->
@@ -186,7 +182,6 @@ In most cases, the number of data points available outnumbers the maximum number
 
 #### メトリクスの確認
 
-
 <!--
 The metric is the main focus of the graph. You can find the list of metrics available to you in the [Metrics Summary](https://app.datadoghq.com/metric/summary). Click on any metric to see more detail about that metric, including the type of data collected, units, tags, hosts, and more.
 -->
@@ -195,7 +190,6 @@ The metric is the main focus of the graph. You can find the list of metrics avai
 <!-- #### Scope -->
 
 #### 対象範囲の指定(Scope, スコープ)
-
 
 <!--
 A scope lets you filter a Series. It can be a host, a device on a host
@@ -227,7 +221,6 @@ Examples of scope (meaning in parentheses):
 
 #### グループの指定
 
-
 <!--
 For any given metric, data may come from a number of hosts. The data will normally be aggregated from all these hosts to a single value for each time slot. If you wish to split this out, you can by any tag. To include a data point seperated out by each host,  use {host} for your group.
 -->
@@ -236,7 +229,6 @@ For any given metric, data may come from a number of hosts. The data will normal
 <!-- #### Arithmetic -->
 
 #### 演算子の利用
-
 
 <!--
 You can apply simple arithmetic to a Series (+, -, * and /). In this
@@ -303,7 +295,6 @@ Datadogでは、ここでは一貫性を強制していないので、*異なる
 
 ### イベントの表示
 
-
 <!--
 You can overlay any event from Datadog. The general format is:
 
@@ -356,7 +347,6 @@ Datadogに保存したイベント情報は、次の書式で記述すること�
 
 ### グラフによる可視化
 
-
 <!--
 Data can be visualized in a few different ways:
 
@@ -394,7 +384,6 @@ The Time Series can be further broken down to:
 <!-- #### Line Charts -->
 
 #### 折れ線グラフ
-
 
 {{< img src="graphingjson/multi-lines.png" >}}
 
@@ -435,7 +424,6 @@ The Time Series can be further broken down to:
 
 #### Slice-n-Stack
 
-
 <!--
 A useful visualization is to represent a metric shared across
 hosts and stack the results. For instance, when selecting a tag that
@@ -474,7 +462,6 @@ Note that in this case you can only have 1 query. But you can also split by devi
 <!-- ### Y-Axis Controls -->
 
 ### Y軸の操作
-
 
 <!--
 The Datadog y-axis controls (currently just via the JSON editor) allow you to:
@@ -541,7 +528,6 @@ Examples:
 <!-- #### Filtering -->
 
 #### Y軸のフィルタリング
-
 
 <!--
 Filter configuration allows you to automatically change y-axis bounds based on a
@@ -633,7 +619,6 @@ not in the bottom 10% nor in the top 30%.
 <!-- #### Examples -->
 
 #### 設定例
-
 
 <!--
 Here is an example using the <code>rate()</code> function, which takes only a single metric as a parameter.  Other functions, with the exception of <code>top()</code> and <code>top_offset()</code>, have identical syntax.

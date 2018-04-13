@@ -5,6 +5,7 @@ categories:
   - cloud
   - Cost Management
   - aws
+  - log collection
 ddtype: crawler
 description: Surveiller les dépenses réelles et estimées sur votre compte AWS.
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_billing/'

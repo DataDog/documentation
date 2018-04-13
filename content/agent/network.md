@@ -17,17 +17,17 @@ further_reading:
   text: Collect your traces
 ---
 
-**Traffic is always initiated by the agent to Datadog. No sessions are ever initiated from Datadog back to the agent**:
+**Traffic is always initiated by the Agent to Datadog. No sessions are ever initiated from Datadog back to the Agent**:
 
 * All traffic is sent over SSL
 * The destination for [APM][1] data is `trace.agent.datadoghq.com`
 * The destination for [Live Containers][2] data is `process.datadoghq.com`
 * The destination for [Logs][3] data is `intake.logs.datadoghq.com `
-* The destination for all other agent data is
+* The destination for all other Agent data is
   * **Agents < 5.2.0** `app.datadoghq.com`
   *  **Agents >= 5.2.0** `<version>-app.agent.datadoghq.com`
 
-This decision was taken after the POODLE problem, now versioned endpoints start with Agent 5.2.0, i.e. each version of the agent hits a different endpoint based on the version of the *Forwarder*.  
+This decision was taken after the POODLE problem, now versioned endpoints start with Agent 5.2.0, i.e. each version of the Agent hits a different endpoint based on the version of the *Forwarder*.  
 
 * i.e. Agent 5.2.0 hits `5-2-0-app.agent.datadoghq.com`  
 
@@ -43,7 +43,7 @@ The information is structured as JSON following this schema:
 {
     "version": 1,                       // <-- we increment this every time the information is changed
     "modified": "YYYY-MM-DD-HH-MM-SS",  // <-- the timestamp of the last modification
-    "agents": {                         // <-- in this section the IPs used for the agent traffic intake
+    "agents": {                         // <-- in this section the IPs used for the Agent traffic intake
         "prefixes_ipv4": [              // <-- a list of IPv4 CIDR blocks
             "a.b.c.d/x",
             ...
@@ -53,7 +53,7 @@ The information is structured as JSON following this schema:
         ]
     },
     "webhooks": {                       // <-- same structure as "agents" but this section is not relevant
-        ...                             //     for agent traffic (webhooks delivered by Datadog to the internet)
+        ...                             //     for Agent traffic (webhooks delivered by Datadog to the internet)
     }
 }
 ```
@@ -62,7 +62,7 @@ The information is structured as JSON following this schema:
 
 **All traffic is sent (outbound only) over SSL via 443 TCP.**
 
-Open the following ports in order to benefit from all the agent functionalities: 
+Open the following ports in order to benefit from all the Agent functionalities: 
 
 ### Agent v6
 
@@ -94,7 +94,7 @@ Open the following ports in order to benefit from all the agent functionalities:
   * `fe80::1`
 
 * `8126/tcp`: port for the [APM Receiver][1]
-* `17123/tcp`: agent forwarder, used to buffer traffic in case of network splits between the agent and Datadog
+* `17123/tcp`: Agent forwarder, used to buffer traffic in case of network splits between the Agent and Datadog
 * `17124/tcp`: optional graphite adapter
 
 ## Using Proxies
@@ -104,7 +104,6 @@ For a detailed configuration guide on proxy setup, head over to [Proxy Configura
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /tracing
 [2]: /graphing/infrastructure/livecontainers

@@ -19,5 +19,4 @@ Datadog APM is offered as an upgrade to our Pro and Enterprise plans. A free 14-
     {{< nextlink href="https://datadoghq.slack.com/messages/apm" >}}Join the APM channel in our Datadog Slack for additional help from Datadog staff{{< /nextlink >}}
 {{< /whatsnext >}}
 
-
 [1]: https://app.datadoghq.com/apm/home

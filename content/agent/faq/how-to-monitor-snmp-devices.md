@@ -113,7 +113,7 @@ SNMP table: IF-MIB::ifTable
 [...]
 ```
 
-Now we tell the agent to poll it and to use the value of the ifDescr column as tag, so we can differentiate the ports:
+Now we tell the Agent to poll it and to use the value of the ifDescr column as tag, so we can differentiate the ports:
 
 ```yaml
 init_config:
@@ -148,7 +148,7 @@ instances:
 
 Note that the column name must be present in the output of snmptable.
 
-Now we [restart the agent][1] and we make sure that the check is collecting metrics, it can take up to 1 minute to update:
+Now we [restart the Agent][1] and we make sure that the check is collecting metrics, it can take up to 1 minute to update:
 
 ```
 $ sudo service datadog-agent info

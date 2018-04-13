@@ -9,7 +9,6 @@ title: Environments
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-
 ### Definition
 
 An environment is a first class dimension that you can use to scope a whole Datadog APM application.
@@ -31,7 +30,6 @@ Environments in traces and configuration files will be normalized:
 
 - unsupported characters will be replaced by underscores;
 - upper case characters will be converted to lower case.
-
 
 #### Default environment
 

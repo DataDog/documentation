@@ -6,6 +6,7 @@ categories:
   - processing
   - search
   - aws
+  - log collection
 ddtype: crawler
 description: >-
   Suivez l'utilisation de vos index, le nombre de requêtes réussies et plus

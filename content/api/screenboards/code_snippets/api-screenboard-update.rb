@@ -6,7 +6,6 @@ app_key = '<YOUR_APP_KEY>'
 
 dog = Dogapi::Client.new(api_key, app_key)
 
-
 board_id = 7953
 board = {
     "width" => 1024,

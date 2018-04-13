@@ -13,5 +13,3 @@ kind: documentation
     {{< nextlink href="tracing/getting_further/instrumentation_overhead" >}} Instrumentation overhead {{< /nextlink >}}
 {{< /whatsnext >}}
 
-
-

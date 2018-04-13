@@ -5,6 +5,7 @@ categories:
   - cloud
   - security
   - aws
+  - log collection
 ddtype: crawler
 description: Suivre le nombre de requêtes autorisées ou bloquées.
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_waf/'

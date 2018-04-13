@@ -39,6 +39,5 @@ Refer to the [Guide to Agent Checks][1] for detailed information on writing your
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /agent/agent_checks/
 [2]: /monitors/notifications

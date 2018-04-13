@@ -5,6 +5,7 @@ categories:
   - cloud
   - configuration & deployment
   - aws
+  - log collection
 ddtype: crawler
 description: Suivre les métriques clés Amazon Simple Workflow Service.
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_swf/'

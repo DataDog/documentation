@@ -16,7 +16,6 @@ git_integration_title: btrfs
 
 ## 概要
 
-
 次の目的で、BtrfsのメトリクスをDatadogに送信します:
 
 * Btrfsファイルシステムのパフォーマンスの可視化

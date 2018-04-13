@@ -24,7 +24,6 @@ We've found that this is generally due to one of two reasons:
     * Click Start, click Run, type MSIEXEC /REGSERVER, and then click OK. Even if you do this correctly, it may look like nothing occurs, or you may briefly see an hourglass.
     * Try the installation once more
 
-
 Hopefully if you encounter a 1721 Error, the above steps gets you running in no time!
 
 {{< partial name="whats-next/whats-next.html" >}}

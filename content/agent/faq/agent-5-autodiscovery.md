@@ -1,5 +1,5 @@
 ---
-title: Autodiscovery with agent 5
+title: Autodiscovery with Agent 5
 kind: faq
 ---
 
@@ -131,7 +131,7 @@ sd_config_backend: etcd
 sd_backend_host: 127.0.0.1
 sd_backend_port: 4001
 
-# By default, the agent looks for the configuration templates under the
+# By default, the Agent looks for the configuration templates under the
 # `/datadog/check_configs` key in the back-end.
 # If you wish otherwise, uncomment this option and modify its value.
 # sd_template_dir: /datadog/check_configs

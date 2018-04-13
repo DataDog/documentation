@@ -13,8 +13,6 @@ wistiaid: 4kjgeqdb5o
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-
-
 Datadog 101 shows you everything you need to know about using the Datadog platform. In this sixth video we show you how to use notifications. We cover the following topics:
 
 * [Notification Types](?wtime=28)

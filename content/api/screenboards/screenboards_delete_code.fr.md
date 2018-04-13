@@ -11,3 +11,4 @@ external_redirect: /api/#delete-a-screenboard
 {{< code-snippets basename="api-screenboard-delete" >}}
 ##### Exemple de réponse
 *Cet endpoint ne renvoie aucun objet JSON en cas de requête réussie.*
+
