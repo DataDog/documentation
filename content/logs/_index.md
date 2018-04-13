@@ -133,6 +133,9 @@ logs:
       pattern: \w+@datadoghq.com
 ```
 
+**Note**: that if you set up multiple processing rules, they will be applied sequentially.
+Meaning, each rule will be applied on the result of the previous one.
+
 ### Scrub sensitive data in your logs
 
 If your logs contain sensitive information that you wish to redact, configure the Datadog Agent to scrub sensitive sequences by using the `log_processing_rules` parameter in your configuration file with the **mask_sequences** `type`.
