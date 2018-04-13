@@ -2,6 +2,7 @@
 title: Graphing Functions
 kind: documentation
 aliases: 
+  - /examples/
   - /examples/aws-metrics/
   - /examples/month_before/
   - /examples/graphing-functions/
