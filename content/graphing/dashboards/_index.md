@@ -45,7 +45,7 @@ Once defined, template variables appear alongside normal tag and host options in
 
 {{< img src="graphing/dashboards/redis-tpl-selected.png" alt="Redis tpl selected" responsive="true" popup="true" style="width:70%;">}}
 
-You can also use them explicitly in widgets like Event Stream, with a query like `tags:$redis`.
+You can also use them explicitly in widgets such as Event Stream, with a query of the form `tags:$redis`.
 
 
 ## Event Correlation at Design Time
