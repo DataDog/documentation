@@ -24,23 +24,27 @@ For the 5 min timeframe there are 5 time series points (zeros excluded):
 
 **Numerator**, `sum:dd.alerting.sla.missing.1m0s{*}.as_count()`:
 
-| Timestamp | Value|
-|:----------|:-----|
+```
+| Timestamp           | Value     |
+|:--------------------|:----------|
 | 2018-03-13 11:00:30 | 82        |
 | 2018-03-13 11:01:30 | 78        |
 | 2018-03-13 11:02:40 | 608       |
 | 2018-03-13 11:03:30 | 161.00001 |
 | 2018-03-13 11:04:40 | 166       |
+```
 
 **Denominator**, `sum:dd.alerting.sla.expected.1m0s{*}.as_count()`:
 
-| Timestamp | Value|
-|:----------|:-----|
+```
+| Timestamp           | Value  |
+|:--------------------|:-------|
 | 2018-03-13 11:00:30 | 464972 |
 | 2018-03-13 11:01:30 | 464974 |
 | 2018-03-13 11:02:40 | 464973 |
 | 2018-03-13 11:03:30 | 464974 |
 | 2018-03-13 11:04:40 | 464973 |
+```
 
 Here is the result of the evaluation depending of the path:
 
