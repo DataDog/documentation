@@ -22,7 +22,5 @@ logs_config:
   open_files_limit: 100
 ```
 
-**Note**: L'augmentation de la limite du nombre de fichiers de log à tracker peut augmenter la consommation de ressources de l'agent.
-
-
+**Note**: L'augmentation de la limite du nombre de fichiers de log à tracker peut augmenter la consommation de ressources de l'Agent.
 

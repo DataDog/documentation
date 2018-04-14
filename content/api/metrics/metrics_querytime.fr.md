@@ -20,4 +20,3 @@ Cet endpoint vous permet de requêter des métriques de n'importe quelle périod
 * **`query`** [*obligatoire*]:  
   Le contenu de la requête
 
-

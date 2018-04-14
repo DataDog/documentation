@@ -1,0 +1,61 @@
+---
+title: Data aggregation with DogStatsD/Threadstats
+kind: faq
+---
+
+The statsd protocol is a great setup to fire many metrics and monitor your application code without blocking HTTP calls. Data is sampled in your application code then is transmitted via UDP to the [DogStatsD server][1] (embedded in the dd-agent) that aggregates then sends data to Datadog api endpoint. [Read more about the DogStatsD setup][1]:
+
+This article aims at describing why and how the aggregation is performed.
+([Python threadstats library](/developers/faq/is-there-an-alternative-to-dogstatsd-and-the-api-to-submit-metrics-threadstats) variations are mentioned at the end of this article.)
+
+## Pourquoi agréger les métriques?
+
+HTTP calls take time. The aggregation is meant to improve performance by reducing the number of api calls.
+
+For instance, if you have a counter incremented 1,000 times (+1 each time) over a short amount of time, instead of making 1,000 separate api calls, the DogStatsD server aggregates it into a few api calls. Depending on the situation (see below), the library may submit for instance 1 datapoint with value 1,000 or X aggregate datapoints with cumulated value 1,000.
+
+## Comment l'agrégation est-elle effectuée avec le serveur DogStatsD?
+
+[DogStatsD][1] uses a flush interval of 10 seconds. Every 10 seconds, [DogStatsD][1] checks all data received since the last flush (in the last 10 seconds). All values that corresponds to the same metric name and the same tags are aggregated together into a single value.
+
+Note: with the statsd protocol, the statsd client doesn't send metrics with timestamps. The timestamp is added at the flush time. So for a flush occurring at 10:00:10, all data received by the [DogStatsD][1] server (embedded in the Datadog Agent) between 10:00:00 and 10:00:10 is rolled up in a single datapoint that gets 10:00:00 as timestamp.
+
+### Règles d'agrégation par type de métrique
+
+Among all values received during the same flush interval, the aggregated value is:
+
+* Gauge: the most recent datapoint received
+* Count/Counter: the sum of the received values
+* Histogram: the min, max, sum, avg, 95percentiles, count, median of all value received, check [metrics documentation page][2] for more details.
+* Set: the number of different values seen
+* Rate: the value difference divided by the time difference of the last 2 datapoints received
+
+[Find more information about each metric type][2].
+
+## Threadstats variations
+
+As in dogstatsd, Threadstats performs data aggregation for performance reasons.
+
+### Variations
+
+* the main difference is that metrics received by Threadstats may already have a timestamp
+* besides, metrics are not aggregated via a centralized server, but they are aggregated and flushed in a python thread of your script. So you'll get a per script aggregation instead of a per host aggregation
+
+To handle timestamps, Threadstats uses 2 parameters: a flush interval and a roll-up interval.
+
+* The flush interval defines the time interval between two consecutive {data aggregation + data submission}.
+* L'intervalle du rool up définit la granularité des données après l'agrégation.
+
+### Example with flush_interval=10 and roll_up_interval=5
+
+For instance during the flush interval of 10 seconds (between 10:00:00 and 10:00:10), Threadstatsd has received 5 datapoints for the same metric name (a counter) and same tags, with {timestamps, values} being:
+
+1. {09:30:15, 1}, {10:00:00, 2}, {10:00:04,1}, {10:00:05,1}, {10:00:09,1} # 1- points de données d'origine
+2. {09:30:10, 1}, {10:00:00, 2}, {10:00:00,1}, {10:00:05,1}, {10:00:05,1} # 2- chaque point de données dans le même roll_up_interval (5 secondes) obtient le même *timestamp*
+3. {09:30:10, 1}, {10:00:00, 3}, {10:00:05,2} # 3- les données sont agrégées et seulement 4 valeurs sont finalement soumises à Datadog
+
+[Find more information about Threadstatsd aggregation][3].
+
+[1]: /developers/dogstatsd
+[2]: /developers/metrics
+[3]: https://github.com/DataDog/datadogpy/blob/master/datadog/threadstats/metrics.py
