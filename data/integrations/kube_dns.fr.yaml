@@ -39,7 +39,7 @@ kube_dns:
     per_unit_name: ''
     short_name: request duration sample
     unit_name: request
-  - description: Nombre de requêtes DNS effectuées.
+  - description: Total number of DNS requests made.
     integration: kube_dns
     interval: ''
     metric_name: kubedns.request_count
@@ -47,6 +47,15 @@ kube_dns:
     orientation: '0'
     per_unit_name: ''
     short_name: total requests
+    unit_name: request
+  - description: Instant number of DNS requests made.
+    integration: kube_dns
+    interval: '30'
+    metric_name: kubedns.request_count.count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: requests
     unit_name: request
   - description: Nombre de requêtes DNS entraînant une erreur
     integration: kube_dns
@@ -57,11 +66,29 @@ kube_dns:
     per_unit_name: ''
     short_name: requests errors
     unit_name: error
-  - description: Nombre de requêtes DNS entraînant un cache miss.
+  - description: Instant number of DNS requests made resulting in an error.
+    integration: kube_dns
+    interval: '30'
+    metric_name: kubedns.error_count.count
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: requests errors
+    unit_name: error
+  - description: Number of DNS requests resulting in a cache miss.
     integration: kube_dns
     interval: ''
     metric_name: kubedns.cachemiss_count
     metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: cache miss
+    unit_name: request
+  - description: Instant number of DNS requests made resulting in a cache miss.
+    integration: kube_dns
+    interval: '30'
+    metric_name: kubedns.cachemiss_count.count
+    metric_type: count
     orientation: '-1'
     per_unit_name: ''
     short_name: cache miss

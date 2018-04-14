@@ -1,4 +1,13 @@
 spark:
+  - description: Number of jobs
+    integration: spark
+    interval: ''
+    metric_name: spark.job.count
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: ''
+    short_name: jb count
+    unit_name: task
   - description: Nombre de tâches dans l'application.
     integration: spark
     interval: ''
@@ -34,6 +43,15 @@ spark:
     orientation: '0'
     per_unit_name: second
     short_name: jb nm fld tsk
+    unit_name: task
+  - description: Number of completed tasks in the application
+    integration: spark
+    interval: ''
+    metric_name: spark.job.num_completed_tasks
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: jb nm completed tsk
     unit_name: task
   - description: Number of active stages in the application
     integration: spark
@@ -71,6 +89,15 @@ spark:
     per_unit_name: second
     short_name: jb nm fld stg
     unit_name: stage
+  - description: Number of stages
+    integration: spark
+    interval: ''
+    metric_name: spark.stage.count
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: ''
+    short_name: stg count
+    unit_name: task
   - description: Number of active tasks in the application's stages
     integration: spark
     interval: ''
@@ -305,6 +332,15 @@ spark:
     per_unit_name: second
     short_name: dvr max mem
     unit_name: byte
+  - description: Number of executors
+    integration: spark
+    interval: ''
+    metric_name: spark.executor.count
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: ''
+    short_name: exe count
+    unit_name: task
   - description: Number of persisted RDD blocks in the application's executors
     integration: spark
     interval: ''
@@ -322,6 +358,15 @@ spark:
     orientation: '0'
     per_unit_name: second
     short_name: exe mem usd
+    unit_name: byte
+  - description: Max memory across all executors working for a particular application
+    integration: spark
+    interval: ''
+    metric_name: spark.executor.max_memory
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: exe mem max
     unit_name: byte
   - description: Amount of disk space used by persisted RDDs in the application's executors
     integration: spark
@@ -417,6 +462,15 @@ spark:
     per_unit_name: second
     short_name: exe max mem
     unit_name: byte
+  - description: Number of RDDs
+    integration: spark
+    interval: ''
+    metric_name: spark.rdd.count
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: ''
+    short_name: rdd count
+    unit_name: ''
   - description: Number of persisted RDD partitions in the application
     integration: spark
     interval: ''

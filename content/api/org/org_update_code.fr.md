@@ -12,4 +12,3 @@ external_redirect: /api/#update-organization
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-org-update" >}}
 
-

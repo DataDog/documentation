@@ -5,4 +5,3 @@ order: 6
 external_redirect: /api/#service-checks
 ---
 
-
