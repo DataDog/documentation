@@ -29,4 +29,3 @@ external_redirect: /api/#create-a-timeboard
     * **`default`** [*optionnel*, *défaut*=**None**]:  
         La valeur par défaut de la Template variable lors du chargement du dasboard.
 
-

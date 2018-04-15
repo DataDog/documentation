@@ -23,7 +23,7 @@ Plus d'informations sur ce comportement et la facturation AWS peuvent être trou
 
 * [Do you believe you’re seeing a discrepancy between your data in CloudWatch and Datadog?][1]
 
-* [How do I monitor my AWS billing details?][2]
+* [Comment puis-je monitorer mes informations de facturation AWS?][2]
 
 [1]: /integrations/faq/do-you-believe-you-re-seeing-a-discrepancy-between-your-data-in-cloudwatch-and-datadog
 [2]: /integrations/faq/how-do-i-monitor-my-aws-billing-details
