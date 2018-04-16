@@ -14,44 +14,52 @@ Let's call the current evaluation path for `as_count` monitors `current_eva_path
 
 The consequence of this is that complex monitor query, **especially those that have division or multiplication**, produce different result depending on the time aggregation function.
 
+## Why ?
+
+Many of our customers need to be alerted when the total global error rate over a certain time-period is too high.
+
+Normal timeserie graphs `sum:requests.error{*}.as_count()/ sum:requests.total{*}.as_count()` compute the point by point ratio so it wasn't possible to accommodate this important use case.
+
+Thus an exception has been made for monitors involving arithmetics and at least 1 `as_count` modifier.
+
 ## Example
 
 Let’s take this query for the  *2018-03-13T11:00:00* *2018-03-13T11:05:00* time frame.:
 
-`sum(last_5m):sum:dd.alerting.sla.missing.1m0s{*}.as_count() / sum:dd.alerting.sla.expected.1m0s{*}.as_count()`   
+`sum:requests.error{*}.as_count()/sum:requests.total{*}.as_count()`   
 
 For the 5 min timeframe there are 5 time series points (zeros excluded):
 
-**Numerator**, `sum:dd.alerting.sla.missing.1m0s{*}.as_count()`:
+**Numerator**, `sum:requests.error{*}.as_count()`:
 
 ```
-| Timestamp           | Value     |
-|:--------------------|:----------|
-| 2018-03-13 11:00:30 | 82        |
-| 2018-03-13 11:01:30 | 78        |
-| 2018-03-13 11:02:40 | 608       |
-| 2018-03-13 11:03:30 | 161.00001 |
-| 2018-03-13 11:04:40 | 166       |
+| Timestamp             | Value       |
+| :-------------------- | :---------- |
+| 2018-03-13 11:00:30   | 1           |
+| 2018-03-13 11:01:30   | 2           |
+| 2018-03-13 11:02:40   | 3           |
+| 2018-03-13 11:03:30   | 4           |
+| 2018-03-13 11:04:40   | 5           |
 ```
 
-**Denominator**, `sum:dd.alerting.sla.expected.1m0s{*}.as_count()`:
+**Denominator**, `sum:requests.total{*}.as_count()`:
 
 ```
-| Timestamp           | Value  |
-|:--------------------|:-------|
-| 2018-03-13 11:00:30 | 464972 |
-| 2018-03-13 11:01:30 | 464974 |
-| 2018-03-13 11:02:40 | 464973 |
-| 2018-03-13 11:03:30 | 464974 |
-| 2018-03-13 11:04:40 | 464973 |
+| Timestamp             | Value    |
+| :-------------------- | :------- |
+| 2018-03-13 11:00:30   | 5        |
+| 2018-03-13 11:01:30   | 5        |
+| 2018-03-13 11:02:40   | 5        |
+| 2018-03-13 11:03:30   | 5        |
+| 2018-03-13 11:04:40   | 5        |
 ```
 
 Here is the result of the evaluation depending of the path:
 
 | Path | Expanded expression | Result|
 |:--------|:--------|:-----|
-|`current_eva_path`: Aggregation function applied **before** evaluation | **(a0+...+a4)/(b0+...+b4)** | **0.00047099 ~ 0.0005**|
-|`new_eva_path`: Aggregation function applied **after** evaluation|**(a0/b0+...+a4/b4)**|**0.0023549 ~ 0.0024**|
+|`current_eva_path`: Aggregation function applied **before** evaluation | **(a0+...+a4)/(b0+...+b4)** | **0.6**|
+|`new_eva_path`: Aggregation function applied **after** evaluation|**(a0/b0+...+a4/b4)**|**1**|
 
 As one may notice the results are completely different.
 
@@ -73,6 +81,12 @@ Here is the behavior difference:
 
 ## Quiz: which result is correct?
 
-**Both**, it depends on your intention. The understanding of the internals of each way is crucial to properly treat the results, feel free [to reach out to us][1] if you have any question regarding those changes
+**Both**, It depends on your intention. The understanding of the internals of each way is crucial to properly treat the results, feel free [to reach out to us][1] if you have any question regarding those changes
+
+### Covering other use cases
+
+Since this special behavior is tied to the `as_count`​ modifier, we encourage replacing `as_count` with `as_rate()` or `rollup(sum)` in these scenarios in order to benefit from the `new_eva_path` logic right now.  
+
+*Example*: `min(last_5m):sum:requests.error{*}.as_rate() / sum:requests.total{*}.as_rate() > 0.5 ` alerts you when the error rate is above 50% at all times during the past 5 min.
 
 [1]: /help
