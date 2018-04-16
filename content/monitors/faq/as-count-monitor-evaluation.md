@@ -20,7 +20,7 @@ The difference between those two evaluation paths is that complex monitor querie
 
 Many of our customers need to be alerted when the total global error rate over a certain time-period is too high.
 
-Normal timeserie graphs like:  
+Normal timeseries graphs like:  
 
 `sum:requests.error{*}.as_count()/ sum:requests.total{*}.as_count()` 
 
