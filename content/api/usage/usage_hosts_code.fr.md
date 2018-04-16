@@ -12,4 +12,3 @@ external_redirect: /api/#get-hourly-usage-for-hosts-and-containers
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-billing-usage-hosts" >}}
 
-

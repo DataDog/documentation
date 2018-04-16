@@ -3,7 +3,6 @@ title: Pourquoi devrais-je installer l'Agent Datadog sur mes instances AWS?
 kind: faq
 ---
 
-
 Si vous utilisez AWS CloudWatch ou un autre fournisseur de métriques basé sur le cloud, vous pouvez déjà obtenir des statistiques pour vos hosts. Toutefois, l'installation de l'agent Datadog sur ces hosts vous apporte un certain nombre d'avantages, notamment:
 
 * **Better resolution** - CloudWatch observes what's happening from the outside by sampling hosts every ~5-25 minutes, whereas the Datadog Agent captures performance statistics every 15 seconds to provide a more accurate understanding of what's happening from the hosts' perspective.
