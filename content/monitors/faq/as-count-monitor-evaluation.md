@@ -5,7 +5,7 @@ kind: faq
 
 ## Overview
 
-Currently all monitors that have the `as_count` modifier use a separate evaluation path than other monitors. In certain use-cases this this can result in unexpected behavior. We intend to migrate all monitors with `as_count` to the same evaluation path as other monitors, but this doc explains the underlying issue and will guide you through the migration process.
+Currently monitors that have the `as_count` modifier use a separate evaluation path than other monitors. In certain use-cases this this can result in unexpected behavior. We intend to migrate all monitors with `as_count` to the same evaluation path as other monitors, but this doc explains the underlying issue and will guide you through the migration process.
 
 Let's call the current evaluation path for `as_count` monitors `current_eva_path` and the new one `new_eva_path`.  
 
