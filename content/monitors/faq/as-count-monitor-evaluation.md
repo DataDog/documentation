@@ -13,8 +13,8 @@ The difference between those two evaluation paths is that complex monitor querie
 
 | Path | Behavior | Expanded expression |
 |:--------|:--------|:--------|
-|**`current_eva_path`** | Aggregation function applied **before** evaluation | **(a0+...+a4)/(b0+...+b4)** |
-|**`new_eva_path`** | Aggregation function applied **after** evaluation |**(a0/b0+...+a4/b4)**|
+|**`current_eva_path`** | Aggregation function applied *before* evaluation | **(a0 + a1 + ... + a4)/(b0 + b1 + ... + b4)** |
+|**`new_eva_path`** | Aggregation function applied *after* evaluation |**(a0/b0 + a1/b2 + ... + a4/b4)**|
 
 #### Why ?
 
@@ -28,7 +28,7 @@ compute the point by point ratio so it wasn't possible to accommodate such an im
 
 ## Example
 
-Let’s take this query for the  *2018-03-13T11:00:00* *2018-03-13T11:05:00* time frame.:
+Let’s take this query for the  *2018-03-13T11:00:00* to *2018-03-13T11:05:00* time frame:
 
 `sum:requests.error{*}.as_count()/sum:requests.total{*}.as_count()`   
 
@@ -62,8 +62,8 @@ Here is the result of the evaluation depending of the path:
 
 | Path | Behavior | Expanded expression | Result|
 |:--------|:--------|:-----|:-----|
-|**`current_eva_path`** | Aggregation function applied **before** evaluation | **(a0+...+a4)/(b0+...+b4)** | **0.6**|
-|**`new_eva_path`** | Aggregation function applied **after** evaluation|**(a0/b0+...+a4/b4)**|**3**|
+|**`current_eva_path`** | Aggregation function applied *before* evaluation | **(1+2+...+5)/(5+5+...+5)** | **0.6**|
+|**`new_eva_path`** | Aggregation function applied *after* evaluation|**(1/5 + 2/5 + ... + 5/5)**|**3**|
 
 As one may notice the results are completely different.
 
@@ -83,16 +83,16 @@ Here is the behavior difference:
 | `current_eva_path` | (10 + 10 + 10) / (0 + 1 + NaN) | 30 |
 | `new_eva_path` | 10/0 + 10/1 + 10/NaN | 10 |
 
-Note that both evaluations are correct -- it depends on your intention. Because the current query language is ambiguous, we recommend rewriting your query to make your intended query explicit. Please [reach out to us][1] if you have any question regarding those changes.  
+Note that both evaluations are correct -- it depends on your intention. Because the current query language is ambiguous, we recommend rewriting your query to make your intended query explicit. Please [reach out to us][1] if you have any questions regarding these changes.  
 
 
 ## Workaround
 
-Since this special behavior is tied to the `as_count`​ modifier, we encourage replacing `as_count` with `as_rate()` or `rollup(sum)` in these scenarios.  
+Since this special behavior is tied to the `as_count` modifier, we encourage replacing `as_count` with `as_rate()` or `rollup(sum)` in these scenarios.  
 
-*Example*: Suppose you wish to monitor the error rate of a service:
+*Example:* Suppose you wish to monitor the error rate of a service:
 
-***Incorrect!***
+
 
 Suppose you want to be alerted when the error rate is above 50% at all times during the past 5 min. You might have a query like:
 `min(last_5m):sum:requests.error{*}.as_count() / sum:requests.total{*}.as_count() > 0.5 ` 
