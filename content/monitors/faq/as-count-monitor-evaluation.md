@@ -83,12 +83,15 @@ Here is the behavior difference:
 | `current_eva_path` | (10 + 10 + 10) / (0 + 1 + NaN) | 30 |
 | `new_eva_path` | 10/0 + 10/1 + 10/NaN | 10 |
 
-## Which result is correct?
+Note that both evaluations are correct -- it depends on your intention. Because the current query language is ambiguous, we recommend rewriting your query to make your intended query explicit. Please [reach out to us][1] if you have any question regarding those changes.  
 
-**Both**, It depends on your intention. The understanding of the internals of each way is crucial to properly treat the results, feel free [to reach out to us][1] if you have any question regarding those changes.  
 
-Since this special behavior is tied to the `as_count`​ modifier, we encourage replacing `as_count` with `as_rate()` or `rollup(sum)` in these scenarios in order to benefit from the `new_eva_path` logic right now, a.k.a: Aggregation function applied **after** evaluation.  
+## Workaround
 
-*Example*: `min(last_5m):sum:requests.error{*}.as_rate() / sum:requests.total{*}.as_rate() > 0.5 ` alerts you when the error rate is above 50% at all times during the past 5 min.
+Since this special behavior is tied to the `as_count`​ modifier, we encourage replacing `as_count` with `as_rate()` or `rollup(sum)` in these scenarios.  
+
+*Example*: Suppose you wish to monitor the error rate of a service:
+
+`min(last_5m):sum:requests.error{*}.as_rate() / sum:requests.total{*}.as_rate() > 0.5 ` alerts you when the error rate is above 50% at all times during the past 5 min.
 
 [1]: /help
