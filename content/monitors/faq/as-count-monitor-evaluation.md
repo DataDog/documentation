@@ -5,14 +5,14 @@ kind: faq
 
 ## Overview
 
-Currently all monitors that have `as_count` modifier are using a separate evaluation path that the other monitors, which can lead in certain use-cases to a different monitor behavior one could expect. **We intend to migrate monitor with `as_count` to the same evaluation path as all monitor. Here is the impact of such decisions.**  
+Currently all monitors that have the `as_count` modifier are using a separate evaluation path than the other monitors. In certain use-cases this this can result in unexpected behavior. **We intend to migrate all monitors with `as_count` to the same evaluation path as other monitors.**
 
 Let's call the current evaluation path for `as_count` monitors `current_eva_path` and the new one `new_eva_path`. The biggest difference between the two paths is that:
 
 * `current_eva_path`: applies the time aggregation function for each metric series **before** evaluating the expression.
 * `new_eva_path`: applies the time aggregation function for each metric series **after** evaluating the expression.
 
-The consequence of this is that complex monitor query, **especially those that have division or multiplication**, produce different result depending on the time aggregation function.
+The consequence of this is that complex monitor queries, **especially those that have division or multiplication**, produce different results depending on the time aggregation function.
 
 ## Why ?
 
@@ -69,10 +69,10 @@ In case of sparse or *0* metrics in the denominator some results are rejected in
 
 Let’s have following metrics:
 
-* `A = (10, 10, 10)` 
+* `A = (10, 10, 10)`
 * `B = (0, 1, -)`
 
-Here is the behavior difference: 
+Here is the behavior difference:
 
 | Path | Evaluation | Result |
 |:------|:------|:-------|
