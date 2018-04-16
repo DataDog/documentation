@@ -135,12 +135,20 @@ frontend metrics-forwarder
     default_backend datadog-metrics
 
 # This declares the endpoint where your Agents connects for
-# sending traces (e.g. the value of "endpoint" in the "trace.api"
-# section).
+# sending traces (e.g. the value of "endpoint" in the APM
+# configuration section).
 frontend traces-forwarder
     bind *:3835
     mode tcp
     default_backend datadog-traces
+
+# This declares the endpoint where your agents connects for
+# sending processes (e.g. the value of "url" in the process
+# configuration section).
+frontend processes-forwarder
+    bind *:3836
+    mode tcp
+    default_backend datadog-processes
 
 # This is the Datadog server. In effect any TCP request coming
 # to the forwarder frontends defined above are proxied to
@@ -156,21 +164,40 @@ backend datadog-traces
     mode tcp
     option tcplog
     server mothership trace.agent.datadoghq.com:443 check port 80
+
+backend datadog-processes
+    balance roundrobin
+    mode tcp
+    option tcplog
+    server mothership process.agent.datadoghq.com:443 check port 80
 ```
 
 Once the HAProxy configuration is in place, you can reload it or restart HAProxy.
 
 **We recommend having a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.com` fails over to another IP.
 
-Then edit each Agent to point to HAProxy by setting its `dd_url` to the address of HAProxy (e.g. haproxy.example.com). This `dd_url` setting can be found in `datadog.conf`.
+Then edit each agent to point to HAProxy by setting its `dd_url` to the address of HAProxy (e.g. haproxy.example.com). This `dd_url` setting can be found in `datadog.conf` for Agent v5 and `datadog.yaml` for Agent v6.
 
 `dd_url: https://haproxy.example.com:3834`
 
-If you want to send traces through the proxy, you need to setup the following in `datadog.conf`:
+If you want to send traces or processes through the proxy, you need to setup the following in `datadog.conf` for Agent v5:
 
 ```
 [trace.api]
 endpoint = https://haproxy.example.com:3835
+
+[process.api]
+url = https://haproxy.example.com:3836
+ ```
+
+For Agent v6, set up the following in `datadog.yaml`:
+
+```
+apm_config:
+    endpoint: https://haproxy.example.com:3836
+
+process_config:
+    url: https://haproxy.example.com:3835
 ```
 
 Before you [restart the Agent][2] Edit your supervisor configuration to disable SSL certificate verification. This is needed to prevent python from complaining about the discrepancy between the hostname on the SSL certificate (app.datadoghq.com) and your HAProxy hostname.
