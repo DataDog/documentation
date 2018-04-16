@@ -24,11 +24,11 @@ Normal timeseries graphs like:
 
 `sum:requests.error{*}.as_count()/ sum:requests.total{*}.as_count()` 
 
-compute the point by point ratio so it wasn't possible to accommodate such an important use case as what's my ratio of request error. Thus an exception has been made for monitors involving arithmetics and at least 1 `as_count` modifier.
+compute the point by point ratio so it wasn't possible to accommodate such an important use case as what's my ratio of request error. Thus an exception has been made for monitors involving arithmetic and at least 1 `as_count` modifier.
 
 ## Example
 
-Let’s take this query for the  *2018-03-13T11:00:00* to *2018-03-13T11:05:00* time frame:
+Let’s take this query for the time frame between *11:00:00* and *11:05:00*:
 
 `sum:requests.error{*}.as_count()/sum:requests.total{*}.as_count()`   
 
@@ -83,22 +83,22 @@ Here is the behavior difference:
 | `current_eva_path` | (10 + 10 + 10) / (0 + 1 + NaN) | 30 |
 | `new_eva_path` | 10/0 + 10/1 + 10/NaN | 10 |
 
-Note that both evaluations are correct -- it depends on your intention. Because the current query language is ambiguous, we recommend rewriting your query to make your intended query explicit. Please [reach out to us][1] if you have any questions regarding these changes.  
+Note that both evaluations are correct -- it depends on your intention. 
 
 
 ## Workaround
 
-Since this special behavior is tied to the `as_count` modifier, we encourage replacing `as_count` with `as_rate()` or `rollup(sum)` in these scenarios.  
+Since this special behavior is tied to the `as_count` modifier, we encourage replacing `as_count` with the `as_rate()` and  `rollup(sum)` operators to make your intended query explicit.  
 
 *Example:* Suppose you wish to monitor the error rate of a service:
-
-
 
 Suppose you want to be alerted when the error rate is above 50% at all times during the past 5 min. You might have a query like:
 `min(last_5m):sum:requests.error{*}.as_count() / sum:requests.total{*}.as_count() > 0.5 ` 
 
 To correctly rewrite it in the explicit format, the query can be rewritten like:
 
-`min(last_5m):sum:requests.error{*}.as_rate() / sum:requests.total{*}.as_rate() > 0.5 ` 
+`min(last_30m): ( default(sum:requests.error{*}.as_rate().rollup(60, sum),0) / sum:requests.total{*}.as_rate().rollup(60, sum) )`
+
+Please [reach out to us][1] if you have any questions regarding these changes.  
 
 [1]: /help
