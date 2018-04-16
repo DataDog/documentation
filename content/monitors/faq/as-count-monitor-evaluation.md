@@ -5,11 +5,11 @@ kind: faq
 
 ## Overview
 
-Currently all monitors that have the `as_count` modifier are using a separate evaluation path than the other monitors. In certain use-cases this this can result in unexpected behavior. **We intend to migrate all monitors with `as_count` to the same evaluation path as other monitors.**
+Currently all monitors that have the `as_count` modifier are using a separate evaluation path than the other monitors. In certain use-cases this this can result in unexpected behavior. We intend to migrate all monitors with `as_count` to the same evaluation path as other monitors, but this doc explains the underlying issue and will guide you with the migration process.
 
-Let's call the current evaluation path for `as_count` monitors **`current_eva_path`** and the new one **`new_eva_path`**.  
+Let's call the current evaluation path for `as_count` monitors `current_eva_path` and the new one `new_eva_path`.  
 
-The difference between those two evaluation paths is that complex monitor queries, **especially those that have division or multiplication**, produce different results depending on the time aggregation function:
+The difference between those two evaluation paths is that complex monitor queries, especially those that have division or multiplication, may produce **unintended results** depending on the time aggregation function:
 
 | Path | Behavior | Expanded expression |
 |:--------|:--------|:--------|
@@ -92,6 +92,13 @@ Since this special behavior is tied to the `as_count`​ modifier, we encourage 
 
 *Example*: Suppose you wish to monitor the error rate of a service:
 
-`min(last_5m):sum:requests.error{*}.as_rate() / sum:requests.total{*}.as_rate() > 0.5 ` alerts you when the error rate is above 50% at all times during the past 5 min.
+***Incorrect!***
+
+Suppose you want to be alerted when the error rate is above 50% at all times during the past 5 min. You might have a query like:
+`min(last_5m):sum:requests.error{*}.as_count() / sum:requests.total{*}.as_count() > 0.5 ` 
+
+To correctly rewrite it in the explicit format, the query can be rewritten like:
+
+`min(last_5m):sum:requests.error{*}.as_rate() / sum:requests.total{*}.as_rate() > 0.5 ` 
 
 [1]: /help
