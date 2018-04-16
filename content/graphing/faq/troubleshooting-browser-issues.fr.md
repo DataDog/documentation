@@ -32,6 +32,5 @@ If you continue to have issues,contact [us][2] for assistance, to help expedite 
 * Version du navigateur
 * Versions OS 
 
-
 [1]: /agent/faq/network-time-protocol-ntp-offset-issues
 [2]: /help

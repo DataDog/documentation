@@ -260,6 +260,53 @@ kafka:
     per_unit_name: second
     short_name: follow expire rate
     unit_name: eviction
+  - description: >-
+      The total amount of buffer memory that is not being used (either
+      unallocated or in the free list)
+    integration: kafka
+    interval: '10'
+    metric_name: kafka.producer.available_buffer_bytes
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: available buffer bytes
+    unit_name: bytes
+  - description: The average number of bytes sent per partition per-request.
+    integration: kafka
+    interval: '10'
+    metric_name: kafka.producer.batch_size_avg
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: avg batch size
+    unit_name: bytes
+  - description: The average compression rate of record batches.
+    integration: kafka
+    interval: '10'
+    metric_name: kafka.producer.compression_rate_avg
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: ''
+    short_name: avg compression rate
+    unit_name: batches
+  - description: The fraction of time an appender waits for space allocation.
+    integration: kafka
+    interval: '10'
+    metric_name: kafka.producer.bufferpool_wait_time
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: bufferpool wait time
+    unit_name: ''
+  - description: The average compression rate of record batches for a topic
+    integration: kafka
+    interval: '10'
+    metric_name: kafka.producer.compression_rate
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: second
+    short_name: 'compression rate '
+    unit_name: records
   - description: Number of producer requests delayed.
     integration: kafka
     interval: '10'
@@ -278,6 +325,87 @@ kafka:
     per_unit_name: second
     short_name: prod req expire
     unit_name: eviction
+  - description: The max number of bytes sent per partition per-request.
+    integration: kafka
+    interval: '10'
+    metric_name: kafka.producer.batch_size_max
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: max batch size
+    unit_name: bytes
+  - description: The average number of records sent per second for a topic
+    integration: kafka
+    interval: '10'
+    metric_name: kafka.producer.record_send_rate
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: second
+    short_name: rec send
+    unit_name: record
+  - description: The average per-second number of retried record sends for a topic
+    integration: kafka
+    interval: '10'
+    metric_name: kafka.producer.record_retry_rate
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: second
+    short_name: rec retry
+    unit_name: record
+  - description: The average per-second number of retried record sends for a topic
+    integration: kafka
+    interval: '10'
+    metric_name: kafka.producer.record_error_rate
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: second
+    short_name: rec error
+    unit_name: error
+  - description: "\tThe average number of records sent per second."
+    integration: kafka
+    interval: '10'
+    metric_name: kafka.producer.records_per_request
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: rec per req
+    unit_name: record
+  - description: The average time in ms record batches spent in the record accumulator.
+    integration: kafka
+    interval: '10'
+    metric_name: kafka.producer.record_queue_time_avg
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: avg record queue time
+    unit_name: milisecond
+  - description: The maximum time in ms record batches spent in the record accumulator.
+    integration: kafka
+    interval: '10'
+    metric_name: kafka.producer.record_queue_time_max
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: max record queue time
+    unit_name: milisecond
+  - description: The average record size.
+    integration: kafka
+    interval: '10'
+    metric_name: kafka.producer.record_size_avg
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: avg record size
+    unit_name: bytes
+  - description: "\tThe maximum record size."
+    integration: kafka
+    interval: '10'
+    metric_name: kafka.producer.record_size_max
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: max record size
+    unit_name: bytes
   - description: Number of producer requests per second.
     integration: kafka
     interval: '10'
@@ -296,6 +424,15 @@ kafka:
     per_unit_name: second
     short_name: prod resp
     unit_name: response
+  - description: The current number of in-flight requests awaiting a response.
+    integration: kafka
+    interval: '10'
+    metric_name: kafka.producer.requests_in_flight
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: req in flight
+    unit_name: request
   - description: Producer average request latency.
     integration: kafka
     interval: '10'
@@ -305,6 +442,15 @@ kafka:
     per_unit_name: ''
     short_name: prod req latency avg
     unit_name: millisecond
+  - description: The maximum request latency in ms.
+    integration: kafka
+    interval: '10'
+    metric_name: kafka.producer.request_latency_max
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: ' prod req latency max'
+    unit_name: milisecond
   - description: Producer bytes out rate.
     integration: kafka
     interval: '10'
@@ -313,7 +459,16 @@ kafka:
     orientation: '1'
     per_unit_name: second
     short_name: prod bytes out
-    unit_name: byte
+    unit_name: bytes
+  - description: The age in seconds of the current producer metadata being used.
+    integration: kafka
+    interval: '10'
+    metric_name: kafka.producer.metadata_age
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: metadata age
+    unit_name: seconds
   - description: Producer message rate.
     integration: kafka
     interval: '10'
@@ -323,6 +478,17 @@ kafka:
     per_unit_name: second
     short_name: prod msg rate
     unit_name: message
+  - description: >-
+      The maximum amount of buffer memory the client can use (whether or not it
+      is currently used).
+    integration: kafka
+    interval: '10'
+    metric_name: kafka.producer.buffer_bytes_total
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: buffer bytes
+    unit_name: bytes
   - description: Producer I/O wait time.
     integration: kafka
     interval: '10'
@@ -332,6 +498,35 @@ kafka:
     per_unit_name: ''
     short_name: prod io wait
     unit_name: nanosecond
+  - description: The average time in ms a request was throttled by a broker.
+    integration: '-1'
+    interval: '10'
+    metric_name: kafka.producer.throttle_time_avg
+    metric_type: gauge
+    orientation: kafka
+    per_unit_name: ''
+    short_name: avg throttle time
+    unit_name: milisecond
+  - description: "\tThe maximum time in ms a request was throttled by a broker."
+    integration: '-1'
+    interval: '10'
+    metric_name: kafka.producer.throttle_time_max
+    metric_type: gauge
+    orientation: kafka
+    per_unit_name: ''
+    short_name: max throttle time
+    unit_name: milisecond
+  - description: >-
+      The number of user threads blocked waiting for buffer memory to enqueue
+      their records.
+    integration: kafka
+    interval: '10'
+    metric_name: kafka.producer.waiting_threads
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: waiting threads
+    unit_name: threads
   - description: |
       Maximum du lag consumer.
     integration: kafka
@@ -351,6 +546,33 @@ kafka:
     per_unit_name: ''
     short_name: con min fetch
     unit_name: request
+  - description: The average number of bytes fetched per request for a specific topic.
+    integration: kafka
+    interval: '10'
+    metric_name: kafka.consumer.fetch_size_avg
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: con avg fetch size
+    unit_name: request
+  - description: The maximum number of bytes fetched per request for a specific topic.
+    integration: kafka
+    interval: '10'
+    metric_name: kafka.consumer.fetch_size_max
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: con max fetch size
+    unit_name: request
+  - description: The average number of bytes consumed per second for a specific topic.
+    integration: kafka
+    interval: '10'
+    metric_name: kafka.consumer.bytes_consumed
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: second
+    short_name: con bytes consumed
+    unit_name: byte
   - description: Consumer bytes in rate.
     integration: kafka
     interval: '10'
@@ -387,3 +609,21 @@ kafka:
     per_unit_name: second
     short_name: kafka offset commit
     unit_name: write
+  - description: The average number of records consumed per second for a specific topic.
+    integration: kafka
+    interval: '10'
+    metric_name: kafka.consumer.records_consumed
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: sec
+    short_name: con rec consumed
+    unit_name: records
+  - description: The average number of records in each request for a specific topic.
+    integration: kafka
+    interval: '10'
+    metric_name: kafka.consumer.records_per_request_avg
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: request
+    short_name: rec per request
+    unit_name: records

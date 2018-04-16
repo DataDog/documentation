@@ -3,7 +3,6 @@ title: Afficher les données jmx dans jConsole et configurer votre jmx.yaml pour
 kind: faq
 ---
 
-
 Cet article fournit un exemple rapide vous montrant comment vous pouvez convertir les données métriques que vous pouvez voir dans jConsole en une configuration valide pour le fichier jmx.yaml de l'agent datadog.
 {{< img src="integrations/faq/jConsolejmx.png" alt="jConsolejmx" responsive="true" popup="true">}}
 
