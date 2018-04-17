@@ -7,7 +7,7 @@ kind: faq
 
 ## Aperçu
 
-Obtenez les métriques de kubernetes en temps réel pour:
+Obtenir les métriques de kubernetes en temps réel pour:
 
 * Visualize and monitor kubernetes states
 * Be notified about kubernetes failovers and events.

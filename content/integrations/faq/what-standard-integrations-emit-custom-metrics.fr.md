@@ -3,9 +3,9 @@ title: Quelles intégrations standard émettent des métriques custom?
 kind: faq
 ---
 
-In general, [custom metrics][1] are defined as any single, unique combination of a metric name, host, and tag that are sent using [statsd, DogStatsD][2], via [API][3], or through [extensions][4] made to the Datadog agent.  
-[Further details with examples on how we count a custom metric][5]).  
-However, certain standard integrations can also emit custom metrics as specified below.
+En général, [les métriques customs][1] sont définies comme une combinaison unique d'un nom de métrique, d'un host et d'un tag envoyés en utilisant [statsd, DogStatsD][2], via [API][3] ou via les [intégrations][4] faites pour l'agent Datadog.
+[Plus de détails avec des exemples sur la façon dont nous comptons les métriques personnalisées][5].
+Cependant, certaines intégrations standards peuvent également émettre des métriques customs comme indiqué ci-dessous.
 
 Standard integrations that are limited to 350 metrics by default and emit custom metrics:
 

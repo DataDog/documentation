@@ -3,11 +3,11 @@ title: Envoyer de métriques via PowerShell
 kind: faq
 ---
 
-Datadog peut collecter des métriques via l'agent ainsi que via l'API indépendamment de la langue que vous décidez d'utiliser. Cette page donne des exemples des deux moyens en utilisant PowerShell
+Datadog peut collecter des métriques via l'Agent ainsi que via l'API indépendamment de la langue que vous décidez d'utiliser. Cette page donne des exemples des deux moyens en utilisant PowerShell
 
 ## Envoi de métriques avec PowerShell via l'API
 
-This method doesn't require you to have the agent installed on the system running the PowerShell script. This, however, means you have to explicitly pass your API key as well as an application key when making the POST request. [See/create API key on your Datadog application][1]
+Cette méthode requiert d'avoir l'Agent installé sur le système qui exécute le script PowerShell. Cependant vous devez passer explicitement votre clef d'API et d'Application lors de votre requête POST. [Consultez les clés d'API de votre plateforme Datadog][1]
 
 ```
 # Tested on Windows Server 2012 R2 w/ PSVersion 4.0
@@ -49,7 +49,7 @@ postMetric($metric)($tags) # pass our metric as a param to postMetric()
 
 ## Submitting metrics with PowerShell via DogStatsD
 
-Having the agent enables you to make use of its [DogStatsD][2] listener. The following example shows how we could send the same metric via DogStatsD. Notice that we no longer need to specify the API or application keys, this is information that's already in our local `datadog.yaml`.
+Having the Agent enables you to make use of its [DogStatsD][2] listener. The following example shows how we could send the same metric via DogStatsD. Notice that we no longer need to specify the API or application keys, this is information that's already in our local `datadog.yaml`.
 
 ```
 
@@ -63,7 +63,7 @@ function dogstatsd($metric) {
     $bytesSent=$udpClient.Send($encodedData,$encodedData.Length)
     $udpClient.Close()
 }
-$tags = "|#env:test" # datadog tag
+$tags = "|#env:test" # Datadog tag
 $temp = Get-Process mmc
 $metric = "dogstatsd.ps1." + $temp.Name + ":" + $temp.Handles + "|g" + $tags # metric
 dogstatsd($metric)
