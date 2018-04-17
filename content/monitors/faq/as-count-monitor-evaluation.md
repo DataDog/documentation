@@ -7,14 +7,19 @@ kind: faq
 
 Currently monitors that have the `as_count` modifier use a separate evaluation path than other monitors. In certain use-cases this this can result in unexpected behavior. We intend to migrate all monitors with `as_count` to the same evaluation path as other monitors, but this doc explains the underlying issue and will guide you through the migration process.
 
-Let's call the current evaluation path for `as_count` monitors `current_eva_path` and the new one `new_eva_path`.  
+Let's call the current evaluation path for `as_count` monitors `current_eval_path` and the new one `new_eval_path`.  
 
-The difference between those two evaluation paths is that complex monitor queries, especially those that have division or multiplication, may produce **unintended results** depending on the time aggregation function:
+The difference between those two evaluation paths is that complex monitor queries, especially those that have division, may produce **unintended results** depending on the time aggregation function. Let's say that you have 2 metrics: A and B:
+
+* A have the following datapoint (a0,a1...,ax)
+* B have the following datapoint (b0,b1...,bx)
+
+Here is the main difference between `current_eval_path` and the new one `new_eval_path`: 
 
 | Path | Behavior | Expanded expression |
 |:--------|:--------|:--------|
-|**`current_eva_path`** | Aggregation function applied *before* evaluation | **(a0 + a1 + ... + a4)/(b0 + b1 + ... + b4)** |
-|**`new_eva_path`** | Aggregation function applied *after* evaluation |**(a0/b0 + a1/b2 + ... + a4/b4)**|
+|**`current_eval_path`** | Aggregation function applied *before* evaluation | **(a0 + a1 + ... + ax)/(b0 + b1 + ... + bx)** |
+|**`new_eval_path`** | Aggregation function applied *after* evaluation |**(a0/b0 + a1/b2 + ... + ax/bx)**|
 
 #### Why ?
 
@@ -22,7 +27,7 @@ Many of our customers need to be alerted when the total global error rate over a
 
 Normal timeseries graphs like:  
 
-`sum:requests.error{*}.as_count()/ sum:requests.total{*}.as_count()` 
+`min(last_5m): sum:requests.error{*}.as_count() / sum:requests.total{*}.as_count()` 
 
 compute the point by point ratio so it wasn't possible to accommodate such an important use case as what's my ratio of request error. Thus an exception has been made for monitors involving arithmetic and at least 1 `as_count` modifier.
 
@@ -30,7 +35,7 @@ compute the point by point ratio so it wasn't possible to accommodate such an im
 
 Let’s take this query for the time frame between *11:00:00* and *11:05:00*:
 
-`sum:requests.error{*}.as_count()/sum:requests.total{*}.as_count()`   
+`min(last_5m): sum:requests.error{*}.as_count() / sum:requests.total{*}.as_count()`   
 
 For the 5 min timeframe there are 5 time series points (zeros excluded):
 
@@ -62,14 +67,14 @@ Here is the result of the evaluation depending of the path:
 
 | Path | Behavior | Expanded expression | Result|
 |:--------|:--------|:-----|:-----|
-|**`current_eva_path`** | Aggregation function applied *before* evaluation | **(1+2+...+5)/(5+5+...+5)** | **0.6**|
-|**`new_eva_path`** | Aggregation function applied *after* evaluation|**(1/5 + 2/5 + ... + 5/5)**|**3**|
+|**`current_eval_path`** | Aggregation function applied *before* evaluation | **(1+2+...+5)/(5+5+...+5)** | **0.6**|
+|**`new_eval_path`** | Aggregation function applied *after* evaluation|**(1/5 + 2/5 + ... + 5/5)**|**3**|
 
 As one may notice the results are completely different.
 
 ### Sparse metric problem
 
-In case of sparse or *0* metrics in the denominator some results are rejected in case of `new_eva_path`.
+In case of sparse or *0* metrics in the denominator some results are rejected in case of `new_eval_path`.
 
 Let’s have following metrics:
 
@@ -78,17 +83,17 @@ Let’s have following metrics:
 
 Here is the behavior difference:
 
-| Path | Evaluation | Result |
+| Path | Evaluation of `A/B` | Result |
 |:------|:------|:-------|
-| `current_eva_path` | (10 + 10 + 10) / (0 + 1 + NaN) | 30 |
-| `new_eva_path` | 10/0 + 10/1 + 10/NaN | 10 |
+| `current_eval_path` | (10 + 10 + 10) / (0 + 1 + NaN) | 30 |
+| `new_eval_path` | 10/0 + 10/1 + 10/NaN | 10 |
 
 Note that both evaluations are correct -- it depends on your intention. 
 
 
 ## Workaround
 
-Since this special behavior is tied to the `as_count` modifier, we encourage replacing `as_count` with the `as_rate()` and  `rollup(sum)` operators to make your intended query explicit.  
+Since this special behavior is tied to the `as_count` modifier, we encourage replacing `as_count` with the `as_rate()` operators to make your intended query explicit.  
 
 *Example:* Suppose you wish to monitor the error rate of a service:
 
@@ -99,6 +104,6 @@ To correctly rewrite it in the explicit format, the query can be rewritten like:
 
 `min(last_5m): ( default(sum:requests.error{*}.as_rate().rollup(60, sum),0) / sum:requests.total{*}.as_rate().rollup(60, sum) )`
 
-Please [reach out to us][1] if you have any questions regarding these changes.  
+Please [reach out to us][1] if you have any questions regarding these changes.
 
 [1]: /help
