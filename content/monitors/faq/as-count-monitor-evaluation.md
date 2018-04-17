@@ -9,17 +9,17 @@ Currently monitors that have the `as_count` modifier use a separate evaluation p
 
 Let's call the current evaluation path for `as_count` monitors `current_eval_path` and the new one `new_eval_path`.  
 
-The difference between those two evaluation paths is that complex monitor queries, especially those that have division, may produce **unintended results** depending on the time aggregation function. Let's say that you have 2 metrics: A and B:
+The difference between those two evaluation paths is that complex monitor queries, especially those that have division, may produce **unintended results** depending on the time aggregation function. Let's say that you have 2 metrics, *A* and *B*:
 
-* A have the following datapoint (a0,a1...,ax)
-* B have the following datapoint (b0,b1...,bx)
+* *A* has the following datapoint (a0, a1, ..., ax)
+* *B* has the following datapoint (b0, b1, ..., bx)
 
 Here is the main difference between `current_eval_path` and the new one `new_eval_path`: 
 
 | Path | Behavior | Expanded expression |
 |:--------|:--------|:--------|
-|**`current_eval_path`** | Aggregation function applied *before* evaluation | **(a0 + a1 + ... + ax)/(b0 + b1 + ... + bx)** |
-|**`new_eval_path`** | Aggregation function applied *after* evaluation |**(a0/b0 + a1/b2 + ... + ax/bx)**|
+|**`current_eval_path`** | Aggregation function applied **before** evaluation | **(a0 + a1 + ... + ax)/(b0 + b1 + ... + bx)** |
+|**`new_eval_path`** | Aggregation function applied **after** evaluation |**(a0/b0 + a1/b2 + ... + ax/bx)**|
 
 #### Why ?
 
@@ -89,7 +89,6 @@ Here is the behavior difference:
 | `new_eval_path` | 10/0 + 10/1 + 10/NaN | 10 |
 
 Note that both evaluations are correct -- it depends on your intention. 
-
 
 ## Workaround
 
