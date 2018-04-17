@@ -74,6 +74,11 @@ We automatically collect common tags from [Docker][6], [Kubernetes][7], [ECS][8]
 - `DD_DOCKER_ENV_AS_TAGS` : extract docker container environment variables
 - `DD_KUBERNETES_POD_LABELS_AS_TAGS` : extract pod labels
 
+```shell
+DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app","release":"helm_release"}'
+DD_DOCKER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
+```
+
 Either define them in your custom `datadog.yaml`, or set them as JSON maps in these envvars. The map key is the source (`label/envvar`) name, and the map value the datadog tag name.
 
 #### Ignore containers
@@ -84,11 +89,6 @@ Exclude containers from the metrics collection and Autodiscovery, if these are n
 * `DD_AC_EXCLUDE`: Space-separated strings of the blacklist of containers to exclude e.g `"image:image_name_3 image:image_name_4"`
 
 **Note**: The `docker.containers.running`, `.stopped`, `.running.total` and `.stopped.total` metrics are not affected by these settings and always count all containers. This does not affect your per-container billing.
-
-```shell
-DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app","release":"helm_release"}'
-DD_DOCKER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
-```
 
 ## Further Reading
 
