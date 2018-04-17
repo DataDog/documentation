@@ -19,8 +19,7 @@ further_reading:
 
 If your network configuration restricted outbound traffic, proxy all Agent traffic through one or several hosts that have more permissive outbound policies.
 
-A few options are available to send traffic to Datadog over SSL/TLS for
-hosts that are not directly connected to the Internet.
+A few options are available to send traffic to Datadog over SSL/TLS for hosts that are not directly connected to the Internet.
 
 1. Using the Agent as a proxy (for **up to 16 Agents** per proxy)
 2. Using a web proxy (e.g. Squid, Microsoft Web Proxy) that is already deployed in your network
@@ -87,14 +86,9 @@ Do not forget to [restart the Agent][2] for the new settings to take effect.
 
 ## Using HAProxy as a Proxy
 
-[HAProxy][3] is a free, very fast and reliable
-solution offering proxying for TCP and HTTP applications. While
-HAProxy is usually used as a load balancer to distribute incoming
-requests to pools servers, you can also use it to proxy Agent traffic
-to Datadog from hosts that have no outside connectivity.
+[HAProxy][3] is a free, very fast and reliable solution offering proxying for TCP and HTTP applications. While HAProxy is usually used as a load balancer to distribute incoming requests to pools servers, you can also use it to proxy Agent traffic to Datadog from hosts that have no outside connectivity.
 
-This is the best option if you do not have a web proxy readily available
-in your network and you wish to proxy a large number of Agents. In some cases a single HAProxy instance is sufficient to handle local Agent traffic in your network - each proxy can accommodate upwards of 1000 Agents (be aware that this figure is a conservative estimate based on the performance of m3.xl instances specifically. Numerous network-related variables can influence load on proxies. As always, deploy under a watchful eye. Visit [HAProxy documentation][6] for additional information).
+This is the best option if you do not have a web proxy readily available in your network and you wish to proxy a large number of Agents. In some cases a single HAProxy instance is sufficient to handle local Agent traffic in your network - each proxy can accommodate upwards of 1000 Agents (be aware that this figure is a conservative estimate based on the performance of m3.xl instances specifically. Numerous network-related variables can influence load on proxies. As always, deploy under a watchful eye. Visit [HAProxy documentation][6] for additional information).
 
 `agent ---> haproxy ---> Datadog`
 
@@ -176,7 +170,7 @@ Once the HAProxy configuration is in place, you can reload it or restart HAProxy
 
 **We recommend having a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.com` fails over to another IP.
 
-Then edit each agent to point to HAProxy by setting its `dd_url` to the address of HAProxy (e.g. haproxy.example.com). This `dd_url` setting can be found in `datadog.conf` for Agent v5 and `datadog.yaml` for Agent v6.
+Then edit each Agent to point to HAProxy by setting its `dd_url` to the address of HAProxy (e.g. haproxy.example.com). This `dd_url` setting can be found in `datadog.conf` for Agent v5 and `datadog.yaml` for Agent v6.
 
 `dd_url: https://haproxy.example.com:3834`
 
@@ -225,9 +219,7 @@ skip_ssl_validation: yes
 
 Finally [restart the Agent][4].
 
-To verify that everything is working properly, review the
-HAProxy statistics at `http://haproxy.example.com:3835` as well as
-the [Infrastructure Overview][5]
+To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3835` as well as the [Infrastructure Overview][5]
 
 ## Further Reading
 
