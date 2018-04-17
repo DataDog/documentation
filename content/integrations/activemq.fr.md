@@ -168,7 +168,7 @@ Besoin d'aide? Contactez  [l'équipe support de Datadog](http://docs.datadoghq.c
 
 ## Aperçu
 
-Obtenez les métriques du service activemq_xml en temps réel pour:
+Obtenir les métriques du service activemq_xml en temps réel pour:
 
 * Visualiser et monitorer les états de activemq_xml
 * Soyez informé des basculements et événements de activemq_xml.
