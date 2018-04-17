@@ -169,6 +169,14 @@ Anomaly detection uses historical data to establish a baseline for normal behavi
 
 We used to expose an algorithm called `adaptive` which would try to figure out a metric's inherent seasonality and adjust its predictions accordingly. Now that we automatically detect the seasonality of a metric when setting up a monitor, there is less need for this particular algorithm, which was slower and required more data than the other algorithms. Existing monitors that use the `adaptive` algorithm are untouched and will work as they always have.
 
+### What is the `count_default_zero` argument?
+
+Previously we were treating count metrics as gauges, and thus interpolating between reported points. This led to some very odd-looking metrics for sparsely reported counts. Anomalies are no longer interpolating between counts, but for legacy monitors, the old behavior is preserved using the `count_default_zero` argument.
+
+### How does setting the rollup interval in "Advanced Options" differ from setting it on the query using `.rollup()`?
+
+If the rollup is set explicitly on the query, the rollup interval option for the anomaly monitor will be ignored.
+
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
