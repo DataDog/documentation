@@ -67,3 +67,25 @@ Setup event correlation at view time by adding a query in the Search box at the 
 [4]: /graphing/dashboards/screenboard/
 [5]: /graphing/dashboards/screenboard
 [6]: /graphing/dashboards/timeboard
+
+## Correlation between Logs and Metrics
+
+### Jump from metric to logs
+
+Fast and easy correlation is key when troubleshooting an issue. This is why we added a shortcut from any dashboard graph to the most related logs.
+On timeseries, click on any part of the graph to open a contextual menu.
+
+https://cl.ly/11333Z3L181d
+
+Select `View related logs` to jump to the log explorer zoomed on the selected timeframe with all the current context of your graph.
+
+### How do we define the search query
+
+To define the most related logs, we use the following parameters:
+
+* Timeframe: We focus on the selected data point and use the graph steps to display data before and after the selected point.
+* Integration prefix: If the metric are coming from an integration, we filter on the `source` attribute with the integration name.
+* Tags: All tags used in the graph (template variable, split by, filter) are automatically added to the search query.
+
+
+
