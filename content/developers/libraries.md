@@ -24,10 +24,10 @@ The following table lists Datadog-official and community contributed [Trace](/tr
 In addition to the official Ansible integration, the [monitoring section][46] of the [ansible-modules-extras][47] repository contains modules that interact with Datadog.
 
 ### Aptible
-Enclave can deliver your metrics to a Datadog account. [Consult the dedicated Aptible help center to learn how][111].
+Enclave delivers your metrics to a Datadog account. [Consult the dedicated Aptible help center to learn how][111].
 
 ### Auth0
-[This extension][110] will take your Auth0 logs and ship them to Datadog.
+[This extension][110] takes your Auth0 logs and ships them to Datadog.
 ### Consul
 Publish consul service counts into Datadog via [DogStatsD](/developers/dogstatsd) with [this library][96].
 
