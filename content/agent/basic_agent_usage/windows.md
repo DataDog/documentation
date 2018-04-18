@@ -29,7 +29,7 @@ The execution of the Agent is controlled by a Windows service.
 There are a few major changes compare to older Datadog Windows Agent version:
 
 * the main executable name is now `agent.exe` (it was `ddagent.exe` previously)
-* Commands should be run with the command line `c:\program files\datadog\datadog-agent\embedded\agent.exe <command>`
+* Commands should be run with the command line `c:\program files\datadog\datadog agent\embedded\agent.exe <command>`
 * The configuration GUI is now a browser based configuration application.
 
 The Agent has a new set of command-line options:
@@ -149,14 +149,14 @@ Uninstall the Agent using Add/Remove Programs, alternatively, it's possible to t
 
 ## Troubleshooting
 
-The Agent logs are located in the ``c:\programdata\Datadog\logs` ` directory:
+The Agent logs are located in the `C:\programdata\Datadog\logs` directory:
 and all logs are in the `agent.log` file.
 
 If you're still having trouble, [our support team][3] will be glad to provide further assistance.
 
-### For version >= 3.9.1
+### For version >= 3.9.1 to < 6.0
 
-Log is available at:
+Logs are available at:
 
   * For Windows Server 2003, XP or older:
 `C:\Documents and Settings\All Users\Application Data\Datadog\logs\ddagent.log`
