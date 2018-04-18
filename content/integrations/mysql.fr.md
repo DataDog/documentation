@@ -50,7 +50,7 @@ Et beaucoup plus. Vous pouvez également inventer vos propres métriques à l'ai
 ## Implémentation
 ### Installation
 
-Le check MySQL est packagé avec l'agent, il vous faut donc simplement [installer l'agent] (https://app.datadoghq.com/account/settings#agent).
+Le check MySQL est packagé avec l'agent, il vous faut donc simplement [installer l'agent](https://app.datadoghq.com/account/settings#agent).
 
 ### Configuration
 

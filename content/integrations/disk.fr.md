@@ -30,7 +30,7 @@ Collectez les métriques relatives à l'utilisation du disque et aux IOs.
 ## Implémentation
 ### Installation
 
-Le check disk est packagé avec l'agent, il vous faut donc simplement [installer l'agent] (https://app.datadoghq.com/account/settings#agent) sur vos noeuds Cassandra.
+Le check disk est packagé avec l'agent, il vous faut donc simplement [installer l'agent](https://app.datadoghq.com/account/settings#agent) sur vos noeuds Cassandra.
 
 ### Configuration
 

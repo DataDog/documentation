@@ -9,8 +9,8 @@ kind: faq
 
 Obtenir les métriques de kubernetes en temps réel pour:
 
-* Visualize and monitor kubernetes states
-* Be notified about kubernetes failovers and events.
+* Visualiser et monitorer les états de kubernetes
+* Être informé des failovers et des événements kubernetes.
 
 For Kubernetes, it’s recommended to run the [Agent in a DaemonSet][1]. We have created a [Docker image][2] with both the Docker and the Kubernetes integrations enabled.
 

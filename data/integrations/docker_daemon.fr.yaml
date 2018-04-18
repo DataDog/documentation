@@ -129,6 +129,15 @@ docker_daemon:
     per_unit_name: ''
     short_name: cpu throttled
     unit_name: ''
+  - description: Shares of CPU usage allocated to the container
+    integration: docker
+    interval: ''
+    metric_name: docker.cpu.shares
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cpu shares
+    unit_name: ''
   - description: >-
       The amount of memory that is being used to cache data from disk (e.g.
       memory contents that can be associated precisely with a block on a block

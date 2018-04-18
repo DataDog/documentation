@@ -24,7 +24,7 @@ version: 0.1.0
 Obtenir des métriques de Aerospike Database en temps réel pour:
 
 * Visualiser et monitorer les états de Aerospike
-* Soyez informé des failovers et des événements d'aerospike.
+* Être informé des failovers et des événements d'aerospike.
 
 ## Installation
 
