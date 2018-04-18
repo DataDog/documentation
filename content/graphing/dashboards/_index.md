@@ -61,9 +61,30 @@ Setup event correlation at design time by editing any graph on both Time Boards 
 
 Setup event correlation at view time by adding a query in the Search box at the top left of any Time Board dashboard window. This replaces any events added at design time, but applies the events to all graphs on that particular dashboard.
 
+## Correlation between Logs and Metrics
+
+### Jump from a metric to its logs
+
+Fast and easy correlation is key when troubleshooting an issue. Use the following shortcut from any dashboard timeseries graphs to open a contextual menu with the most related logs.
+
+{{< img src="graphing/dashboards/related_logs.png" alt="Related logs" responsive="true" popup="true" style="width:80%;">}}
+
+Select `View related logs` to jump to the log explorer page zoomed on the selected timeframe with all the current context of your graph.
+
+### How do we define the search query ?
+
+To define the most related logs, we use the following parameters:
+
+* *Timeframe*: Focused on the selected data point and uses the graph bucket size to display data before and after the selected point.
+* *Integration prefix*: If the metric is coming from an integration, Datadog filters on the `source` attribute with the same integration name.
+* *Tags*: All tags used in the graph (*template variable*, *split by*, *filter by*) are automatically added to the search query.
+
 [1]: /graphing/
 [2]: /graphing/event_stream/
 [3]: /graphing/dashboards/timeboard/
 [4]: /graphing/dashboards/screenboard/
 [5]: /graphing/dashboards/screenboard
 [6]: /graphing/dashboards/timeboard
+
+
+
