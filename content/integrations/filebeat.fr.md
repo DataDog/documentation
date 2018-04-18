@@ -30,7 +30,7 @@ version: 0.1.0
 Obtenir les métriques du service filebeat en temps réel pour:
 
 * Visualiser et monitorer les états de filebeat.
-* Soyez informé des basculements et des événements de filebeat.
+* Être informé des basculements et des événements de filebeat.
 
 ## Implémentation
 

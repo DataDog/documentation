@@ -34,7 +34,7 @@ La check PgBouncer suit les métriques du pool de connexions et vous permet de m
 ## Implémentation
 ### Installation
 
-Le check PgBouncer est packagé avec l'agent, il vous faut donc simplement [installer l'agent] (https://app.datadoghq.com/account/settings#agent) sur vos noeuds PgBouncer.
+Le check PgBouncer est packagé avec l'agent, il vous faut donc simplement [installer l'agent](https://app.datadoghq.com/account/settings#agent) sur vos noeuds PgBouncer.
 
 ### Configuration
 

@@ -39,7 +39,7 @@ Collectez des métriques à partir des répertoires et des fichiers de votre cho
 ## Implémentation
 ### Installation
 
-Le check directory est packagé avec l'agent, il vous faut donc simplement [installer l'agent] (https://app.datadoghq.com/account/settings#agent) sur vos noeuds Cassandra.
+Le check directory est packagé avec l'agent, il vous faut donc simplement [installer l'agent](https://app.datadoghq.com/account/settings#agent) sur vos noeuds Cassandra.
 
 ### Configuration
 

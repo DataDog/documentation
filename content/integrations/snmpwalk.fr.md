@@ -1,21 +1,23 @@
 ---
 categories:
-- data store
+- monitoring
+- notification
+- network
 ddtype: check
-doc_link: https://docs.datadoghq.com/integrations/stardog/
-git_integration_title: stardog
-guid: 1b32f0d4-49ef-40fb-aec3-365e4e7cd6ee
+doc_link: https://docs.datadoghq.com/integrations/snmpwalk/
+git_integration_title: snmpwalk
+guid: a2864821-994c-4ebb-8532-b6879ea9a9ab
 has_logo: false
-integration_title: Stardog
+integration_title: SNMP walk
 is_public: true
 kind: integration
-maintainer: support@stardog.com
+maintainer: help@datadoghq.com
 manifest_version: 0.1.0
 max_agent_version: 6.0.0
 min_agent_version: 5.6.3
-name: stardog
-public_title: Intégration Datadog-Stardog
-short_description: Un collecteur de données Stardog pour Datadog.
+name: snmpwalk
+public_title: Intégration Datadog-SNMP walk
+short_description: snmpwalk description.
 support: contrib
 supported_os:
 - linux
@@ -28,16 +30,16 @@ version: 0.1.0
 
 ## Aperçu
 
-Obtenir les métriques du service Stardog en temps réel pour:
+Obtenir les métriques du service SNMP walk en temps réel pour:
 
-* Visualiser et surveiller les états de Stardog
-* Être informé des basculements et des évènements de Stardog.
+* Visualiser et surveiller les états de SNMP walk 
+* Être informé des failovers et des événements SNMP walk.
 
 ## Implémentation
 
 ### Configuration
 
-Modifiez le fichier `stardog.yaml` afin d'indiquer votre serveur et définissez l'utilisateur et mot de passe administratif.
+Modifiez le fichier `snmpwalk.yaml` pour pointer vers votre serveur et votre port, définissez les masters à monitorer
 
 ### Validation
 
@@ -46,25 +48,25 @@ Modifiez le fichier `stardog.yaml` afin d'indiquer votre serveur et définissez 
     Checks
     ======
 
-        stardog
+        snmpwalk
         -----------
           - instance #0 [OK]
           - Collected 39 metrics, 0 events & 7 service checks
 
 ## Compatibilité
 
-Le check Stardog est compatible avec toutes les principales plateformes.
+Le check SNMP est compatible avec toutes les principales plateformes.
 
 ## Données collectées
 ### Métriques
-{{< get-metrics-from-git "stardog" >}}
 
+Le check SNMP walk n'inclut aucune métrique pour le moment.
 
 ### Evénements
-Le check Stardog n'inclut aucun événement pour le moment.
+Le check SNMP walk n'inclut aucun événement pour le moment.
 
 ### Checks de Service
-Le check Stardog n'inclut aucun check de service pour le moment.
+Le check SNMP walk n'inclut aucun check de service pour le moment.
 
 ## Troubleshooting
 Besoin d'aide? Contactez  [l'équipe support de Datadog](http://docs.datadoghq.com/help/).
