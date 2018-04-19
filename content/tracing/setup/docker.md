@@ -108,8 +108,8 @@ or via system properties:
 
 ```bash
 java -javaagent:/path/to/the/dd-java-agent.jar \
-     -Dagent.host=$DD_AGENT_PORT_8126_TCP_ADDR \
-     -Dagent.port=$DD_AGENT_PORT_8126_TCP_PORT \
+     -Ddd.agent.host=$DD_AGENT_PORT_8126_TCP_ADDR \
+     -Ddd.agent.port=$DD_AGENT_PORT_8126_TCP_PORT \
      -jar /your/app.jar
 ```
 
