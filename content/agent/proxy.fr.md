@@ -18,8 +18,7 @@ further_reading:
 
 Si votre configuration réseau restreint le trafic sortant, proxy tout le trafic d'Agent] via un ou plusieurs host qui ont des stratégies sortantes plus permissives.
 
-Quelques options sont disponibles pour envoyer du trafic vers Datadog via SSL/TLS pour
-des hosts qui ne sont pas directement connectés à Internet.
+Quelques options sont disponibles pour envoyer du trafic vers Datadog via SSL/TLS pour des hosts qui ne sont pas directement connectés à Internet.
 
 1. Utilisation de l'agent comme proxy (pour **jusqu'à 16 agents** par proxy)
 2. Utilisation d'un proxy Web (par exemple, Squid, Microsoft Web Proxy) déjà déployé sur votre réseau
@@ -86,9 +85,7 @@ N'oubliez pas de [Redémarrer l'Agent][2] pour prendre en compte le changement d
 
 ## Utiliser HAProxy comme proxy
 
-[HAProxy][3] est une solution gratuite, rapide et fiable
-offrant un proxying pour les applications TCP et HTTP. Tandis que
-HAProxy est généralement utilisé comme un équilibreur de charge pour distribuer les requêtes entrantes sur des pools de serveurs, vous pouvez également l'utiliser pour proxy le trafic de l'agent vers Datadog à partir d'host qui ne sont pas relié à internet.
+[HAProxy][3] est une solution gratuite, rapide et fiable offrant un proxying pour les applications TCP et HTTP. Tandis que HAProxy est généralement utilisé comme un équilibreur de charge pour distribuer les requêtes entrantes sur des pools de serveurs, vous pouvez également l'utiliser pour proxy le trafic de l'agent vers Datadog à partir d'host qui ne sont pas relié à internet.
 
 C'est la meilleure option si vous n'avez pas de proxy web disponible dans votre réseau et que vous souhaitez utiliser un grand nombre d'agents. Dans certains cas, une seule instance HAProxy est suffisante pour gérer le trafic d'agent local sur votre réseau - chaque proxy peut héberger jusqu'à 1000 agents (sachez que ce chiffre est une estimation prudente basée sur les performances des instances m3.xl en particulier. les variables liées peuvent influencer la charge sur les proxies. Comme toujours, pensez à déployer prudemment .Visitez [HAProxy documentation][6] pour plus d'informations).
 
@@ -131,12 +128,20 @@ frontend metrics-forwarder
     default_backend datadog-metrics
 
 # This declares the endpoint where your Agents connects for
-# sending traces (e.g. the value of "endpoint" in the "trace.api"
-# section).
+# sending traces (e.g. the value of "endpoint" in the APM
+# configuration section).
 frontend traces-forwarder
     bind *:3835
     mode tcp
     default_backend datadog-traces
+
+# This declares the endpoint where your agents connects for
+# sending processes (e.g. the value of "url" in the process
+# configuration section).
+frontend processes-forwarder
+    bind *:3836
+    mode tcp
+    default_backend datadog-processes
 
 # This is the Datadog server. In effect any TCP request coming
 # to the forwarder frontends defined above are proxied to
@@ -152,21 +157,40 @@ backend datadog-traces
     mode tcp
     option tcplog
     server mothership trace.agent.datadoghq.com:443 check port 80
+
+backend datadog-processes
+    balance roundrobin
+    mode tcp
+    option tcplog
+    server mothership process.agent.datadoghq.com:443 check port 80
 ```
 
 Une fois la configuration HAProxy en place, vous pouvez la reload ou redémarrer HAProxy.
 
 **Nous recommandons d'avoir un job `cron` qui reloads HAProxy toutes les 10 minutes** (en faisant quelque chose comme` service haproxy reload`) pour forcer l'actualisation du cache DNS de HAProxy, dans le cas où `app.datadoghq.com` changerait d'adresse IP.
 
-Ensuite, éditez chaque Agent pour qu'il pointe sur HAProxy en définissant leur paramètre `dd_url` sur l'adresse de HAProxy (par exemple haproxy.example.com). Ce paramètre `dd_url` peut être trouvé dans` datadog.conf`.
+Ensuite, éditez chaque Agent pour qu'il pointe sur HAProxy en définissant leur paramètre `dd_url` sur l'adresse de HAProxy (par exemple haproxy.example.com). Ce paramètre `dd_url` peut être trouvé dans` datadog.conf` pour l'Agent v5 et `datadog.yaml` pour l'Agent v6.
 
 `dd_url: https://haproxy.example.com:3834`
 
-Si vous voulez envoyer des traces à travers le proxy, vous devez implémenter le code suivant dans votre `datadog.conf`:
+Si vous voulez envoyer des traces ou des processus à travers le proxy, vous devez implémenter le code suivant dans votre `datadog.conf` pour l'Agent v5:
 
 ```
 [trace.api]
 endpoint = https://haproxy.example.com:3835
+
+[process.api]
+url = https://haproxy.example.com:3836
+ ```
+
+Pour l'Agent v6, ajoutez la configuration suivante dans `datadog.yaml`:
+
+```
+apm_config:
+    endpoint: https://haproxy.example.com:3836
+
+process_config:
+    url: https://haproxy.example.com:3835
 ```
 
 Avant de [redémarrer l'agent][2], modifiez la configuration de votre supervisor pour désactiver la vérification du certificat SSL. Ceci est nécessaire pour empêcher python de se plaindre de l'écart entre le nom d'host sur le certificat SSL (app.datadoghq.com) et votre nom d'host HAProxy.
@@ -194,9 +218,7 @@ skip_ssl_validation: yes
 
 [Redémarez votre Agent][4]
 
-Pour vérifier que tout fonctionne correctement, examinez
-les statistiques HAProxy à `http://haproxy.example.com:3835` ainsi que
-la [Présentation de l'infrastructure][5].
+Pour vérifier que tout fonctionne correctement, examinez les statistiques HAProxy à `http://haproxy.example.com:3835` ainsi que la [Présentation de l'infrastructure][5].
 
 ## En apprendre plus
 

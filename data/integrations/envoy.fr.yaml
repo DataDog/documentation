@@ -1746,10 +1746,19 @@ envoy:
     per_unit_name: ''
     short_name: ''
     unit_name: node
-  - description: Number of currently loaded clusters
+  - description: Number of currently active (warmed) clusters
     integration: envoy
     interval: ''
-    metric_name: envoy.cluster_manager.total_clusters
+    metric_name: envoy.cluster_manager.active_clusters
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: ''
+    unit_name: node
+  - description: Number of currently warming (not active) clusters
+    integration: envoy
+    interval: ''
+    metric_name: envoy.cluster_manager.warming_clusters
     metric_type: gauge
     orientation: '0'
     per_unit_name: ''
@@ -2411,9 +2420,7 @@ envoy:
     per_unit_name: ''
     short_name: ''
     unit_name: ''
-  - description: |-
-
-      Agréger les codes d'état HTTP 1xx
+  - description: Agréger les codes d'état HTTP 1xx
     integration: envoy
     interval: ''
     metric_name: envoy.cluster.upstream_rq_1xx
@@ -2422,7 +2429,7 @@ envoy:
     per_unit_name: ''
     short_name: ''
     unit_name: response
-  - description: Agréger les codes d'état HTTP 1xx
+  - description: Agréger les codes d'état HTTP 2xx
     integration: envoy
     interval: ''
     metric_name: envoy.cluster.upstream_rq_2xx
@@ -2629,9 +2636,7 @@ envoy:
     per_unit_name: ''
     short_name: ''
     unit_name: millisecond
-  - description: |-
-
-      Agréger les codes d'état HTTP 1xx
+  - description: Agréger les codes d'état HTTP 1xx
     integration: envoy
     interval: ''
     metric_name: envoy.cluster.zone.upstream_rq_1xx
@@ -2640,7 +2645,7 @@ envoy:
     per_unit_name: ''
     short_name: ''
     unit_name: response
-  - description: Agréger les codes d'état HTTP 1xx
+  - description: Agréger les codes d'état HTTP 2xx
     integration: envoy
     interval: ''
     metric_name: envoy.cluster.zone.upstream_rq_2xx
