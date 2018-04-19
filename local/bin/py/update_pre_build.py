@@ -140,8 +140,8 @@ class PreBuild:
         self.datafile_json = []
         self.pool_size = 5
         self.integration_mutations = OrderedDict({
-            'hdfs': {'action': 'create', 'target': 'hdfs', 'remove_header': False},
-            'mesos': {'action': 'truncate', 'target': 'mesos', 'remove_header': False},
+            'hdfs': {'action': 'create', 'target': 'hdfs', 'remove_header': False, 'fm': {'is_public': True, 'kind': 'integration', 'integration_title': 'Hdfs', 'short_description': 'Track cluster disk usage, volume failures, dead DataNodes, and more.'}},
+            'mesos': {'action': 'create', 'target': 'mesos', 'remove_header': False, 'fm': {'is_public': True, 'kind': 'integration', 'integration_title': 'Mesos', 'short_description': 'Track cluster resource usage, master and slave counts, tasks statuses, and more.'}},
             'activemq_xml': {'action': 'merge', 'target': 'activemq', 'remove_header': False},
             'cassandra_nodetool': {'action': 'merge', 'target': 'cassandra', 'remove_header': False},
             'gitlab_runner': {'action': 'merge', 'target': 'gitlab', 'remove_header': False},
@@ -275,7 +275,10 @@ class PreBuild:
                 elif action == 'discard':
                     remove(input_file)
                 elif action == 'create':
-                    open(output_file, 'w+').close()
+                    with open(output_file, 'w+') as f:
+                        fm = yaml.dump(action_obj.get('fm'), default_flow_style=False).rstrip()
+                        data = '---\n{0}\n---\n'.format(fm)
+                        f.write(data)
 
 
     def process_source_attribute(self, file_name):
