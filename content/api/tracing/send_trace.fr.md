@@ -36,7 +36,7 @@ et chaque span est une dictionnaire avec un `trace_id`, `spand_id`, `resource`�
 *   **`type`** - _Obligatoire_ Le type de requête.
 *   **`start`** - _Obligatoire_ L'heure de début de la requête en nanosecondes à partir de l'époque Unix.
 *   **`duration`** - _Obligatoire_ La durée de la requête en nanosecondes.
-*   **`parent_id`** _Obligatoire_ L'identifiant entier de la span de la span parent.
+*   **`parent_id`** _Facultatif_ L'identifiant de span (nombre entier) de la span parent.
 *   **`error`** - _Facultatif_ Configurez cette valeur à 1 afin d'indiquer si une erreur s'est produite. Si une erreur se produit, vous devez transmettre des informations supplémentaires, telles que le message d'erreur, le type et l'information de la pile dans la propriété `meta`.
 *   **`meta`** - _Facultatif_ Une dictionnaire en format clés & valeurs des metadonnées, ex. tags
 

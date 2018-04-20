@@ -91,7 +91,7 @@ Besoin d'aide? Contactez  [l'équipe support de Datadog](http://docs.datadoghq.c
 
 ## Aperçu
 
-Surveillez vos nœuds primaires et secondaires HDFS NameNode pour savoir si votre cluster tombe dans un état précaire: quand il ne reste plus qu'un seul NameNode, ou quand il est temps d'ajouter plus de capacité au cluster. Ce  check de l'Agent collecte les métriques pour la capacité restante, les blocs corrompus/manquants, les DataNodes morts, la charge du système de fichiers, les blocs sous-répliqués, les échecs de volumes totaux (sur tous les DataNodes) et bien d'autres métriques.
+Surveillez vos nœuds primaires et secondaires HDFS NameNode pour savoir si votre cluster tombe dans un état précaire: quand il ne reste plus qu'un seul NameNode, ou quand il est temps d'ajouter plus de capacité au cluster. Ce check de l'Agent collecte les métriques pour la capacité restante, les blocs corrompus/manquants, les DataNodes morts, la charge du système de fichiers, les blocs sous-répliqués, les échecs de volumes totaux (sur tous les DataNodes) et bien d'autres métriques.
 
 Utilisez ce check (hdfs_namenode) et son check complémentaire (hdfs_datanode), et non l'ancienne vérification deux-en-un (hdfs); ce check est en effet obsolète.
 

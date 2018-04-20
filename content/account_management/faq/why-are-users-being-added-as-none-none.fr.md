@@ -1,5 +1,5 @@
 ---
-title: Pourquoi des utilisateurs sont-ils ajoutés en tant que "none none"?
+title: Pourquoi des utilisateurs sont-ils ajoutés en tant que « none none » ?
 kind: faq
 ---
 
