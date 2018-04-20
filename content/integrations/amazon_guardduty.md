@@ -5,7 +5,7 @@ categories:
 - log collection
 - security
 ddtype: crawler
-description: Gather you AWS GuardDuty logs.
+description: Gather your AWS GuardDuty logs.
 doc_link: https://docs.datadoghq.com/integrations/amazon_guardduty/
 has_logo: true
 integration_title: AWS GuardDuty
@@ -13,7 +13,7 @@ is_public: true
 kind: integration
 name: amazon_guardduty
 public_title: Datadog-AWS GuardDuty Integration
-short_description: Gather you AWS GuardDuty logs.
+short_description: Gather your AWS GuardDuty logs.
 version: '1.0'
 ---
 
@@ -32,7 +32,7 @@ Datadog integrates with AWS GuardDuty via a Lambda function that ships GuardDuty
 
 2. If you haven't already, set up the [Datadog log collection AWS Lambda function](/integrations/amazon_web_services/#create-a-new-lambda-function).
 
-3. Once the lambda function is created, define the Datadog Lambda function as target: 
+3. Once the Lambda function is created, define the Datadog Lambda function as the target:
 
     {{< img src="integrations/amazon_guardduty/aws_gd_2.png" alt="aws gd 2" responsive="true" popup="true" style="width:75%;" >}}
 
@@ -46,6 +46,6 @@ Datadog integrates with AWS GuardDuty via a Lambda function that ships GuardDuty
 
     {{< img src="integrations/amazon_guardduty/aws_gd_3.png" alt="aws gd 3" responsive="true" popup="true" style="width:75%;">}}
 
-3. Once done, go in your [Datadog Log section](https://app.datadoghq.com/logs) to start exploring your logs!
+3. Once done, visit your [Datadog Log section](https://app.datadoghq.com/logs) to start exploring your logs!
 
 [1]: /integrations/amazon_web_services/#create-a-new-lambda-function
