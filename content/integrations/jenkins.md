@@ -62,8 +62,8 @@ The following metrics are available in Datadog:
 |Metric name| Description|
 |:----|:------|
 |`jenkins.queue.size`| (Gauge) Size of your Jenkins queue|
-|`jenkins.job.waiting`| (Gauge) Time spend by a job waiting in second|
-|`jenkins.job.duration`| (Gauge) Duration of a job in second|
+|`jenkins.job.waiting`| (Gauge) Time spent by a job waiting in seconds|
+|`jenkins.job.duration`| (Gauge) Duration of a job in seconds|
 
 ## Events
 
