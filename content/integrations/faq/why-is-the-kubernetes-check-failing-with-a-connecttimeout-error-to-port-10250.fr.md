@@ -1,5 +1,5 @@
 ---
-title: Pourquoi la vérification de Kubernetes échoue-t-elle avec une erreur ConnectTimeout sur le port 10250?
+title: Pourquoi le check de Kubernetes échoue-t-elle avec une erreur ConnectTimeout sur le port 10250?
 kind: faq
 ---
 

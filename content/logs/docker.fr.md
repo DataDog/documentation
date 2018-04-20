@@ -66,7 +66,7 @@ Les commandes liées à la récupération des journaux d'événements sont les s
 
 * `-e DD_LOGS_ENABLED=true` : ce paramètre activera la collection des journaux d'événements lorsqu'elle est réglée en tant que « true ». L'Agent recherche désormais les instructions de journal d'événements dans les fichiers de configuration.
 * `-e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true` : ce paramètre ajoutera une configuration pour activer la récupération des journaux d'événements depuis tous les conteneurs (voir `Option 1` ci-dessous).
-* `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw` : monter le dossier que nous avons créé pour garder les pointeurs de tous les journaux d'événements des conteneurs afin d'assurer que nous ne les perdrons pas.
+* `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw` : monter le dossier que nous avons créé pour garder les pointeurs de tous les logs des conteneurs afin d'assurer que nous ne les perdrons pas.
 * `-v /opt/datadog-agent/conf.d:/conf.d:ro` : monter le dossier de configuration que nous avons déjà crée dans le conteneur
 
 ### Activer la Collection de Journal d'Événements
