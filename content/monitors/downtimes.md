@@ -18,7 +18,7 @@ further_reading:
 
 You may occasionally need to shut systems down or take them off-line to perform maintenance or upgrades. Scheduling downtime allows you to do this without triggering monitors.
 
-## What happens to a monitor when it is muted (or has a downtime)?
+## What happens to a monitor when it is muted (or has a scheduled downtime)?
 
 You can schedule downtimes and/or mute your Datadog monitors so that they do not alert at specific times when you do not want them to.
 
@@ -26,9 +26,9 @@ Monitors trigger events when they change state between ALERT, WARNING (if enable
 
 {{< img src="monitors/downtimes/downtime_on_alert.png" alt="downtime on alert" responsive="true" popup="true" style="width:80%;">}}
 
-By default, this is not true of NO DATA alerts: if a monitor has transitioned from the RESOLVED state to NO DATA while it has been silenced, and if it remains in a NO DATA state once the silence-time expires, then there is no NO DATA alert. But once data returns for that monitor scope, the monitor triggers a recovery event.
+If a monitor transitions states during downtime (such as from OK to ALERT, WARNING, or NO DATA) and remains in that state once a scheduled downtime expires, it will NOT trigger a notification. However it WILL trigger a recovery event once data returns for that scope or the monitor returns to an OK state.
 
-This may seem unintuitive, but it is the expected behavior today, and it has been made this way to protect from potentially spammy no-data alerts when using the "Autoresolve" feature. If in these circumstances you would prefer that the monitor triggers a NO DATA event at the time that the silencing expires, there is a feature you can have enabled for your account to enable that behavior. To have that enabled, you can [reach out to the support team][5] to request it.
+This may seem unintuitive, but it is the expected behavior today, and it has been made this way to protect from potentially spammy no-data alerts when using the "Autoresolve" feature. If in these circumstances you would prefer that the monitor triggers a NO DATA event at the time that the silencing expires, there is a feature you can have enabled for your account to enable that behavior. To have that enabled, you can [reach out to the support team][5] to request it. This will only affect instances when a monitor exits a downtime period in a NO DATA state.
 
 ## Manage Downtime
 
