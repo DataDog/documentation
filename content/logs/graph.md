@@ -46,7 +46,7 @@ Available visualizations:
 
 ### Timeseries
 
-Visualize the evolution of a single [measure][1] over a selected time frame, and (optionally) split by an available [facet][2].
+Visualize the evolution of a single [measure][1] (or a [facet][2] unique count of values) over a selected time frame, and (optionally) split by an available [facet][2].
 
 The following timeseries Log Graph shows:
 The evolution of the **top 5 URL Paths** according to the number of **unique Client IPs** over the last month.
@@ -55,7 +55,7 @@ The evolution of the **top 5 URL Paths** according to the number of **unique Cli
 
 ### Top List 
 
-Consult the top of values from a [facet][2] according to the chosen [measure][1]:
+Visualize the top values from a [facet][2] according to the chosen [measure][1]:
 
 The following Top List Log Graph shows:
 The evolution of the **top 5 URL Paths** according to the number of **unique Client IPs** over the last month.
@@ -77,7 +77,7 @@ Export your Log Graph:
 * To create a new [log monitor][4]:  
     The query of your Log Graph is used to create the log monitor query.
 * To an existing [Timeboard][5]:  
-    This functionality is not released yet–stay  tuned ;)
+    This functionality is not released yet–stay tuned!
 
 ## Further Reading
 
