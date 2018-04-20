@@ -55,6 +55,8 @@ clean-integrations:  ## remove built integrations files.
 	    -exec rm -rf {} \;
 	@find ./content/integrations -type f -maxdepth 1 \
 	    -a -not -name '_index.md' \
+	    -a -not -name 'amazon_guardduty.md' \
+	    -a -not -name 'cloud_foundry.md' \
 	    -a -not -name 'cloudcheckr.md' \
 	    -a -not -name 'integration_sdk.md' \
 	    -a -not -name 'jenkins.md' \
@@ -63,7 +65,6 @@ clean-integrations:  ## remove built integrations files.
 	    -a -not -name 'rss.md' \
 	    -a -not -name 'system.md' \
 	    -a -not -name 'tcprtt.md' \
-	    -a -not -name 'cloud_foundry.md' \
 	    -a -not -name '*.fr.md' \
 	    -exec rm -rf {} \;
 
