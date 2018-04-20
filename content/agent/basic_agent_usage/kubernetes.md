@@ -329,7 +329,7 @@ It can be configured with the environment variable `DD_LEADER_LEASE_DURATION`.
 [4]: /integrations/faq/using-rbac-permission-with-your-kubernetes-integration
 [5]: https://app.datadoghq.com/account/settings#api
 [6]: https://kubernetes.io/docs/concepts/configuration/secret/
-[7]: https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-environment-variables
+[7]: https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/
 [8]: /agent/basic_agent_usage/docker/#environment-variables
 [9]: https://docs.datadoghq.com/agent/autodiscovery
 [10]: /logs
