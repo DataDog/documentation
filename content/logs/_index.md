@@ -86,7 +86,7 @@ logs:
 ```
 * [Restart your Agent][3]
 
-The Agent supports raw string and JSON formated logs. If you are sending logs in batch, use break line characters to separate your logs.
+The Agent supports raw string, JSON and Syslog formated logs. If you are sending logs in batch, use break line characters to separate your logs.
 
 ## Advanced log collection functions
 
