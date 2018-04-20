@@ -44,7 +44,7 @@ Datadog integrates with AWS GuardDuty via a Lambda function that ships GuardDuty
 
 2. After setting up the Lambda function, add GuardDuty as a trigger by choosing **CloudWatch Events** as a trigger and creating a `GuardDutyRule`:
 
-{{< img src="integrations/amazon_guardduty/aws_gd_3.png" alt="aws gd 3" responsive="true" popup="true" style="width:75%;">}}
+    {{< img src="integrations/amazon_guardduty/aws_gd_3.png" alt="aws gd 3" responsive="true" popup="true" style="width:75%;">}}
 
 3. Once done, go in your [Datadog Log section](https://app.datadoghq.com/logs) to start exploring your logs!
 
