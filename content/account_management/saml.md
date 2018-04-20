@@ -13,6 +13,8 @@ further_reading:
 
 Configuring [SAML (Security Assertion Markup Language)][1] for your Datadog account lets you and all your teammates log in to Datadog using the credentials stored in your organization’s Active Directory, LDAP, or other identity store that has been configured with a SAML Identity Provider.
 
+**Note**: Created users must accept email verification in order for SAML to work.
+
 ## Configure SAML
 
 If you are a [Datadog Administrator][2], there is a [Configure SAML][3] option in the drop down menu that is accessed by hover over your username in the left-side navigation menu.
