@@ -10,7 +10,6 @@ public_title: Datadog-Jenkins Integration
 short_description: "Track job statuses and see builds start and stop from your event stream"
 categories:
 - configuration & deployment
-ddtype: crawler
 ---
 
 {{< img src="integrations/jenkins/integration-jenkins-overview.png" alt="Jenkins Plugin" responsive="true" popup="true">}}
@@ -58,7 +57,13 @@ You will start to see Jenkins events in the Event Stream when the plugin is up a
 
 ## Metrics
 
-The Jenkins check does not include any metric at this time.
+The following metrics are available in Datadog:
+
+|Metric name| Description|
+|:----|:------|
+|`jenkins.queue.size`| (Gauge) Size of your Jenkins queue|
+|`jenkins.job.waiting`| (Gauge) Time spend by a job waiting in second|
+|`jenkins.job.duration`| (Gauge) Duration of a job in second|
 
 ## Events
 
