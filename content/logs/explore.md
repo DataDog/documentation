@@ -1,8 +1,11 @@
 ---
-title: Search & Graph
+title: Search
 kind: documentation
 description: "The Logs Explorer is your Datadog home base for troubleshooting and exploration over your logs."
 further_reading:
+- link: "logs/graph"
+  tag: "Documentation"
+  text: "Perform analytics with Log Graphs"
 - link: "logs/processing"
   tag: "Documentation"
   text: Learn how to process your logs
@@ -23,7 +26,6 @@ In this view you can:
 * [Display lists of logs](#log-list)
 * [Use facets to filter your Logstream](#facets)
 * [Enter search queries](#search-bar)
-* [Perform analytics with Log Graphs](#log-graph)
 
 ## Time Range
 
@@ -203,27 +205,6 @@ If an attribute was called `user.first name`, perform a search on this attribute
 
 `@user.first\ name:myvalue`
 
-## Log Graph
-
-Switch between the Log List and the Log Graph mode by clicking on this button:
-
-{{< img src="logs/explore/graph/log_graph_switch.png" alt="Log graph switch" responsive="true" popup="true" style="width:80%;">}}
-
-To start using it:
-
-1. Choose a [Measure](#measure) or [Facet](#facet) to graph. Choosing a Measure lets you choose the aggregation function whereas selecting a Facet displays the unique count.
-    {{< img src="logs/explore/graph/choose_measure_facet.png" alt="choose measure facet" responsive="true" popup="true" style="width:50%;">}}
-2. Select the aggregation function for the Measure you want to graph
-    {{< img src="logs/explore/graph/agg_function_log_graph.png" alt="aggregation function for log graph" responsive="true" popup="true" style="width:50%;">}}
-3. Split by [Tag][6] or [Facet](#facets) to split your graph over the desired dimension.
-
-    {{< img src="logs/explore/graph/split_by_log_graph.png" alt="split by log graph" responsive="true" popup="true" style="width:50%;">}}
-
-4. See logs related to a section of the graph:  
-    Select or click on a section of the graph to either zoom in the graph or see the list of logs corresponding to your selection: 
-
-    {{< img src="logs/explore/graph/using_log_graph.gif" alt="using log graph" responsive="true" popup="true" style="width:80%;">}}
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -233,4 +214,3 @@ To start using it:
 [3]: http://lucene.apache.org/core/2_9_4/queryparsersyntax.html
 [4]: /graphing/infrastructure/
 [5]: /integrations/
-[6]: /getting_started/tagging
