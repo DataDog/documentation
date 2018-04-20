@@ -14,6 +14,7 @@ further_reading:
   text: Collect your traces
 aliases:
   - /agent/faq/agent-check-directory-structure
+  - /agent/faq/install-core-extra/
 ---
 
 <div class="alert alert-info">
