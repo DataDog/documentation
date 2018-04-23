@@ -13,6 +13,7 @@ external_redirect: /api/#create-a-monitor
     *   `metric alert`
     *   `service check`
     *   `event alert`
+    *   `process alert`
     *   `composite`
 
 *   **`query`** [*required*]:  
