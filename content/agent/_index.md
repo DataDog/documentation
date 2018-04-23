@@ -152,7 +152,9 @@ Setting the port to -1 disables the GUI all together. By default it is enabled
 on port `5002` on Windows and Mac, and is disabled on Linux.
 
 Once the Agent is running, use the `datadog-agent launch-gui` command to launch
-the GUI within your default web browser.
+the GUI within your default web browser.  
+
+**Note**: The agent GUI isn't supported on Windows 32bits platforms.
 
 ### Requirements
 
