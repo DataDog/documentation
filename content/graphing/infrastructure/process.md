@@ -55,7 +55,7 @@ The `enabled` value is a string with the following options:
 * `"false"`: Only collect containers if available (the default).
 * `"disabled"`: Don't run the process-agent at all.
 
-Additionally, some configuration options may be set as environment variables. 
+Additionally, some configuration options may be set as environment variables.
 
 **Note**: options set as environment variables override the settings defined in the configuration file.
 
@@ -92,6 +92,39 @@ In the [dd-agent.yaml][12] manifest used to create the daemonset, add the follow
 
 Refer to the standard [daemonset installation][13] and the [Docker Agent][11] information pages for further documentation.
 
+### Process Arguments Scrubbing
+
+In order to avoid that sensitive data is sent to our servers and displayed on the Live Processes page, the Process Agent is shipped with a Data Scrubber tool enabled by default. Any process argument that matches one of the following words has its value hidden.
+
+```
+"password", "passwd", "mysql_pwd", "access_token", "auth_token", "api_key", "apikey", "secret", "credentials", "stripetoken"
+```
+
+This list can be expanded by using the `custom_sensitive_words` field on the `datadog.yaml` file. The user can also use wildcards to widen the matching scope of a word. The use of a purely wildcard `*` is not supported.  
+
+```
+process_config:
+  scrub_args: true
+  custom_sensitive_words: ['personal_key', '*token', 'sql*', *pass*d*']
+```
+
+The  next image shows one process on the Live Processes page whose arguments have been hidden by using the configuration above.
+
+{{< img src="graphing/infrastructure/process/process_arg_scrubbing.png" alt="process arguments scrubbing" responsive="true" popup="true" style="width:100%;">}}
+
+The process arguments scrubbing can be completely disabled by setting `scrub_args` to `false`.
+
+#### Agent 5
+
+The agent 5 also supports the scrubbing feature. Its behavior can be managed by using the following fields on the `datadog.conf` file under the `[process.config]` section:
+
+```
+[process.config]
+scrub_args: true
+custom_sensitive_words: personal_key,*token,sql*,*pass*d*
+```
+
+
 ## Searching, Filtering, and Pivoting
 
 ### String Search
@@ -103,7 +136,7 @@ Processes and containers are by their nature extremely high cardinality objects.
 
 ### Filtering and Pivoting
 
-Making sense of hundreds of thousands or millions of processes can seem overwhelming!  Using tagging makes navigation easy.  In addition to all existing host-level tags, processes are tagged by `user`. 
+Making sense of hundreds of thousands or millions of processes can seem overwhelming!  Using tagging makes navigation easy.  In addition to all existing host-level tags, processes are tagged by `user`.
 
 First, we can filter down to role:McNulty-Query, which is our front end query service, in order to narrow our search.  Then we can search for our NGINX master processes, and pivot the table by Availability-Zone, to be confident about that service staying highly available.
 
