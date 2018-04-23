@@ -9,7 +9,7 @@ transifex:
 sources:
 - src: "content/**/*.md"
   dst: "*.{lang}.md"
-- src: "data/**/*.yaml"
+- src: "data/partials/*.yaml"
   dst: "*.{lang}.yaml"
 - src: "data/service_checks/*.json"
   dst: "*.{lang}.json"
