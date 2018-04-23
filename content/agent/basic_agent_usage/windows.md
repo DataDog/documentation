@@ -30,7 +30,7 @@ There are a few major changes compare to older Datadog Windows Agent version:
 
 * The main executable name is now `agent.exe` (it was `ddagent.exe` previously)
 * Commands should be run with the command line `C:\program files\datadog\datadog agent\embedded\agent.exe <command>`
-* The configuration GUI is now a browser based configuration application (for Windows 64bits only)
+* The configuration GUI is now a browser based configuration application (for Windows 64-bit only)
 
 The Agent has a new set of command-line options:
 
