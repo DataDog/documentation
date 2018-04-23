@@ -1,0 +1,724 @@
+express:
+  - description: >-
+      La vitesse de variation des requêtes conduisant à une réponse avec le
+      status code 100.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.100
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '100'
+    unit_name: response
+  - description: >-
+      La vitesse de variation des requêtes conduisant à une réponse avec le
+      status code 101.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.101
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '101'
+    unit_name: response
+  - description: >-
+      La vitesse de variation des requêtes conduisant à une réponse avec le
+      status code 102.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.102
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '102'
+    unit_name: response
+  - description: >-
+      La vitesse de variation des requêtes conduisant à une réponse avec le
+      status code 200.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.200
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '200'
+    unit_name: response
+  - description: >-
+      La vitesse de variation des requêtes conduisant à une réponse avec le
+      status code 201.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.201
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '201'
+    unit_name: response
+  - description: >-
+      La vitesse de variation des requêtes conduisant à une réponse avec le
+      status code 202.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.202
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '202'
+    unit_name: response
+  - description: >-
+      La vitesse de variation des requêtes conduisant à une réponse avec le
+      status code 203.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.203
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '203'
+    unit_name: response
+  - description: >-
+      La vitesse de variation des requêtes conduisant à une réponse avec le
+      status code 204.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.204
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '204'
+    unit_name: response
+  - description: The rate of requests that generate responses with a 205 status code.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.205
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '205'
+    unit_name: response
+  - description: >-
+      La vitesse de variation des requêtes conduisant à une réponse avec le
+      status code 206.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.206
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '206'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      206.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.207
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '207'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      208.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.208
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '208'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      226.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.226
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '226'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      300.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.300
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '300'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      301.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.301
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '301'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      302.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.302
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '302'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      303.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.303
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '303'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      304.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.304
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '304'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      305.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.305
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '305'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      306.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.306
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '306'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      307.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.307
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '307'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      308.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.308
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '308'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      400.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.400
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '400'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      401.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.401
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '401'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      402.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.402
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '402'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      403.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.403
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '403'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      404.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.404
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '404'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      405.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.405
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '405'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      406.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.406
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '406'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      407.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.407
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '407'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      408.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.408
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '408'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      409.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.409
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '409'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      410.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.410
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '410'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      411.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.411
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '411'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      412.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.412
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '412'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      413.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.413
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '413'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      414.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.414
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '414'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      415.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.415
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '415'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      416.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.416
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '416'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      417.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.417
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '417'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      421.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.421
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '421'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      422.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.422
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '422'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      423.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.423
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '423'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      424.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.424
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '424'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      425.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.425
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '425'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      426.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.426
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '426'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      428.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.428
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '428'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      429.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.429
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '429'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      431.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.431
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '431'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      451.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.451
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '451'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      500.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.500
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '500'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      501.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.501
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '501'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      502.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.502
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '502'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      503.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.503
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '503'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      504.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.504
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '504'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      505.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.505
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '505'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      506.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.506
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '506'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      507.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.507
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '507'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      508.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.508
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '508'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      510.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.510
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '510'
+    unit_name: response
+  - description: >-
+      La fréquence des requêtes conduisant à une réponse avec le status code
+      511.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.511
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: '511'
+    unit_name: response
+  - description: La fréquence des requêtes conduisant à une réponse.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_code.all
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: all rsps
+    unit_name: response
+  - description: Le 95eme percentile du temps de réponse.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_time.95percentile
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: 95th pct rsp time
+    unit_name: millisecond
+  - description: La moyenne du temps de réponse.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_time.avg
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: avg rsp time
+    unit_name: millisecond
+  - description: La fréquence des réponses reçues.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_time.count
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: rsp count
+    unit_name: response
+  - description: Le maximum du temps de réponse.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_time.max
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: max rsp time
+    unit_name: millisecond
+  - description: La médiane du temps de réponse.
+    integration: express
+    interval: '10'
+    metric_name: node.express.router.response_time.median
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: med rsp time
+    unit_name: millisecond

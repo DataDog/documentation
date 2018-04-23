@@ -40,13 +40,13 @@ In addition to the official Ansible integration, the [monitoring section][46] of
 公式の Ansible インテグレーションに加えて、[Ansible公式のモニタリングセクション][46]で紹介されている、 [ansible-modules-extras][47]レポジトリがあります。Datadogにイベントをpostするものと、DatadogのMonitor設定をするものがあります。
 
 #### Consul
-Publish consul service counts into Datadog via dogstatsd with [this library][96].
+Publish consul service counts into Datadog via DogStatsD with [this library][96].
 
 #### Dogscaler
 Scale up auto-scale groups based on the results of a datadog query with [Dogscaler][97].
 
 #### FreeSwitch
-This is for a [FreeSwitch ESL ][48] application to export statistics to DataDog using the dogstatsd API and is written by [WiMacTel][49].
+This is for a [FreeSwitch ESL ][48] application to export statistics to Datadog using the DogStatsD API and is written by [WiMacTel][49].
 
 #### Google Analytics
 You can get data into Datadog from Google Analytics using our API with [this library][50].

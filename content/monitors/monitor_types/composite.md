@@ -5,13 +5,13 @@ aliases:
     - /guides/composite_monitors
 description: "Alert on an expression combining multiple monitors"
 further_reading:
-- link: "/monitors/notifications"
+- link: "monitors/notifications"
   tag: "Documentation"
   text: Configure your monitor notifications
-- link: "/monitors/downtimes"
+- link: "monitors/downtimes"
   tag: "Documentation"
   text: Schedule a dowtime to mute a monitor
-- link: "/monitors/faq"
+- link: "monitors/faq"
   tag: "FAQ"
   text: Monitors FAQ
 ---
@@ -26,7 +26,7 @@ _Note: we refers variously to 'individual monitors', 'constituent monitors', and
 
 ## Creating composite monitors
 
-In the Datadog application, go to the [**New Monitor**](https://app.datadoghq.com/monitors#create) page and click **Composite** in the list of monitor types:
+In the Datadog application, go to the [**New Monitor**][1] page and click **Composite** in the list of monitor types:
 
 {{< img src="monitors/monitor_types/composite/select-monitor-type.png" alt="select monitor type" responsive="true" popup="true">}}
 
@@ -222,3 +222,5 @@ Use your best judgment to choose multi-alert monitors that makes sense together.
 
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/monitors#create

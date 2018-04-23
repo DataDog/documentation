@@ -5,6 +5,11 @@ Classic:
       dogstatsd: true
       authors: BoardiesITSolutions
       notes: Send metrics from your C++ applications to your Datadog account
+    - name: DogFood
+      link: https://github.com/garrettsickles/DogFood
+      dogstatsd: true
+      authors: Garrett Sickles
+      notes: C++ header library to send metrics to your Datadog account
   - C#:
     - name: dogstatsd-csharp-client
       link: https://github.com/DataDog/dogstatsd-csharp-client
@@ -83,6 +88,12 @@ Classic:
       link: https://github.com/chonton/dogstatd-client
       dogstatsd: true
       authors: Chas Honton
+  - Lambda:
+    - name: serverless-datadog-metrics
+      link: https://github.com/DanteInc/serverless-datadog-metrics
+      api: true
+      authors: Dante Consulting, Inc.
+      notes: This library logs useful metrics from AWS Lambda functions, so that they can be accumulated via Datadog's AWS Lambda integration
   - NiFi:
     - name: DataDogReportingTask
       link: https://nifi.apache.org/docs/nifi-docs/components/org.apache.nifi/nifi-datadog-nar/1.5.0/org.apache.nifi.reporting.datadog.DataDogReportingTask/index.html
@@ -191,6 +202,11 @@ Tracing:
       authors: Matt Ho
       notes: OpenTracing Tracer implementation for Datadog in Go
   - Java:
+    - name: dd-trace-java
+      link: https://github.com/DataDog/dd-trace-java
+      official: true
+      authors: Datadog
+      notes: Java package 'tracer'
     - name: apm-client
       link: https://github.com/chonton/apm-client
       authors: Chas Honton

@@ -1,0 +1,11 @@
+[
+    {
+        "agent_version": "5.17.0",
+        "integration":"cassandra",
+        "groups": ["host", "instance"],
+        "check": "cassandra.nodetool.node_up",
+        "statuses": ["ok", "critical"],
+        "name": "Node Up",
+        "description": "L'agent envoie ce check de service pour chaque noeud du cluster surveillé. Renvoie CRITICAL si le nœud est en panne, sinon OK."
+    }
+]

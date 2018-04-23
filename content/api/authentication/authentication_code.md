@@ -6,3 +6,4 @@ external_redirect: /api/#authentication
 ---
 ### EXAMPLE
 {{< code-snippets basename="api-auth" >}}
+

@@ -2,31 +2,31 @@
 title: Using tags
 kind: documentation
 further_reading:
-- link: "/getting_started/tagging"
+- link: "getting_started/tagging"
   tag: "Documentation"
   text: Getting started with tags
-- link: "/getting_started/tagging/assigning_tags"
+- link: "getting_started/tagging/assigning_tags"
   tag: "Documentation"
   text: Learn how to assign tags
 ---
 
-After you have assigned tags at the host and [integration](/integrations) level, you can start using them to filter and group in interesting ways. There are several places you can use tags:
+After you have assigned tags at the host and [integration][1] level, you can start using them to filter and group in interesting ways. There are several places you can use tags:
 
-- [Events List](/graphing/event_stream/)
-- [Dashboards](/graphing/dashboards/)
-- [Infrastructure List](/graphing/infrastructure/)
-- [Host Map](/graphing/infrastructure/hostmap)
-- [Monitors](/monitors/)
+- [Events List][2]
+- [Dashboards][3]
+- [Infrastructure List][4]
+- [Host Map][5]
+- [Monitors][6]
 
 ## Using tags in the Events List
 
-The [Events List](/graphing/event_stream/) shows you all the events that have occurred in your environment over the time period specified. This can be overwhelming so you can use tags to filter down the list based on the tags you have assigned. You can enter any text you want in the search box above the Event List and a full text search is performed. You can also enter `tags:` followed by a tag to see all the events that come from a host or [integration](/integrations) with that tag. The example in the image is the tag `role:cassandra`. So the search text is `tags:role:cassandra`.
+The [Events List][2] shows you all the events that have occurred in your environment over the time period specified. This can be overwhelming so you can use tags to filter down the list based on the tags you have assigned. You can enter any text you want in the search box above the Event List and a full text search is performed. You can also enter `tags:` followed by a tag to see all the events that come from a host or [integration][1] with that tag. The example in the image is the tag `role:cassandra`. So the search text is `tags:role:cassandra`.
 
 {{< img src="getting_started/tags/eventtags.png" alt="Events List and Tags" responsive="true" popup="true" style="width:70%;">}}
 
 ## Using tags in Dashboards
 
-You can use tags to narrow down the metrics to display on a [dashboard graph](/graphing/dashboards), or to create groups of metrics to display.
+You can use tags to narrow down the metrics to display on a [dashboard graph][7], or to create groups of metrics to display.
 To narrow down the metrics to display, enter the tag in the `from:` textbox.
 
 You are now looking at a chosen metric over all the hosts that have that particular tag assigned.
@@ -40,18 +40,18 @@ This causes the graph to show just one line for each tag value — `database`, `
 
 {{< img src="getting_started/tags/dashboardtags.png" alt="Tags in Dashboards avgby textbox" responsive="true" popup="true" style="width:70%;">}}
 
-You can also use tags to overlay events on the dashboard. This works in exactly the same way as in the [Events List](/graphing/event_stream/).
+You can also use tags to overlay events on the dashboard. This works in exactly the same way as in the [Events List][2].
 Enter `tags:` followed by the tag and you see the corresponding events overlaid as vertical bars on each graph.
 
 ## Using tags in the Infrastructure List and the Host Map
 
-To filter the list of hosts in the [Infrastructure list](/graphing/infrastructure/), enter a tag in the filter textbox at the top of the page. You can also group the hosts by entering the key portion of the tag in the group by textbox. So if you enter role in the group box, you see each role as a group heading followed by the hosts with that tag.  
+To filter the list of hosts in the [Infrastructure list][4], enter a tag in the filter textbox at the top of the page. You can also group the hosts by entering the key portion of the tag in the group by textbox. So if you enter role in the group box, you see each role as a group heading followed by the hosts with that tag.  
 
 {{< img src="getting_started/tags/infrastructuretags.png" alt="Tags in the Infrastructure List" responsive="true" popup="true" style="width:70%;">}}
 
 ## Using tags in Monitors
 
-When creating a [monitor](/monitors/monitor_types/):
+When creating a [monitor][8]:
 
 * Use tags in the `from:` textbox to limit the monitor scope to only metrics that have those tags.
 {{< img src="getting_started/tags/monitortags.png" alt="from textbox tags in Monitors" responsive="true" popup="true" style="width:70%;">}}
@@ -97,8 +97,18 @@ To get a breakdown by host, you can do:
 sum:page.views{domain:example.com} by {host}
 ```
 
-For information on AWS tagging, see [this tagging doc page](/integrations/amazon_web_services/).
+For information on AWS tagging, see [this tagging doc page][9].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /integrations
+[2]: /graphing/event_stream/
+[3]: /graphing/dashboards/
+[4]: /graphing/infrastructure/
+[5]: /graphing/infrastructure/hostmap
+[6]: /monitors/
+[7]: /graphing/dashboards
+[8]: /monitors/monitor_types/
+[9]: /integrations/amazon_web_services/

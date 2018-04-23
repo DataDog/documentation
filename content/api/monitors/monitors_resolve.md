@@ -1,7 +1,7 @@
 ---
 title: Resolve monitor
 type: apicontent
-order: 15.6
+order: 16.6
 external_redirect: /api/#resolve-monitor
 ---
 
@@ -13,3 +13,4 @@ external_redirect: /api/#resolve-monitor
     `{"monitor_id": "group_to_resolve"}`  
     It supports multiple groups per monitor as well eg:  
     `resolve: [{"monitor_id": "group_1"}, {"monitor_id": "group_2"}]`
+

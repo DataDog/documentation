@@ -11,12 +11,10 @@ doclevel:
 
 ## 概要
 
-
 次の目的の為に、New RelicのメトリクスをDatadogに送信します:
 
 - New Relic キーメトリクス(レスポンス時間、Apdexスコアなど)をDatadogで取得したメトリクスと連携
 - New Relic が検知したアラートをDatadogのイベントストリームにも表示
-
 
 <!-- #### What does the 'Collect metrics by host' option do ?
 
@@ -34,7 +32,6 @@ This also import New Relic hosts to Datadog Infrastructure section. -->
 このオプションを設定する事により、Datadog側では関連付けられた全てのホストのアプリケーションメトリクスを取得するようになります。(オプションを設定していない状態では、下記に示す"overall host throughput based average"になります。)
 
 メトリクスを個別に扱おうとしている場合は、この方法が理にかなっています。例えば、ホストXが問題となるようなエラー率値Yになっているにも関わらず、各ホストに分散するアプリケーションZの集約したエラー率は、容認範囲に収まっている場合がその例です。
-
 
 <!-- #### I have the 'Collect metrics by host' option enable. Why do my application-level metrics have different values in New Relic and Datadog?
 

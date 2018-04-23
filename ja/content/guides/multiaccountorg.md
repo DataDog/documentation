@@ -7,8 +7,6 @@ title: Configuring Teams & Organizations with Multiple Accounts
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-
-
 There are two ways to have multiple accounts have access to the same data. First, you can simply add multiple users to the same team from the [Team Page](https://app.datadoghq.com/account/team). The second is through the use of organizations. Organizations are typically used by Managed Service Providers which have multiple large scale customers which should not have access to each others' data. When a user is added to multiple organizations, they will be able to quickly switch between orgs from the avatar menu in the main menu.
 
 {{< img src="guides/multiaccountorg/guides-multacct-switchaccts.png" style="width:200px;" alt="Switch Accounts" >}}
@@ -58,10 +56,6 @@ A new trial account will be created. If you wish to add this account to your exi
 
 {{< img src="guides/multiaccountorg/guides-multacct-leaveorg.png" alt="Leave Org" >}}
 
-
 To add, disable, and promote members, see the instructions above for Teams.
-
-
-
 
 [TeamPage]: https://app.datadoghq.com/account/team

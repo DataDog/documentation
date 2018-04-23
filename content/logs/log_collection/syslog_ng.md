@@ -54,7 +54,7 @@ description: "Configure Syslog-ng to gather logs from your host, containers & se
 4. (Optional) TLS Encryption 
     To activate TLS encryption:
     
-    1. Download our [certificate](https://gist.githubusercontent.com/estib/8762bc1a2a5bda781a6e55cca40235f2/raw/665b6b2906a728027f508ea067f01cdf3cf72b49/intake.logs.datadoghq.com.crt) and save it to `/etc/syslog-ng/certs.d/datadoghq.crt`. 
+    1. Download our [certificate][1] and save it to `/etc/syslog-ng/certs.d/datadoghq.crt`. 
 
     2. Change the definition of the destination to the following:
 
@@ -62,6 +62,10 @@ description: "Configure Syslog-ng to gather logs from your host, containers & se
         destination d_datadog { tcp("intake.logs.datadoghq.com" port(10516)     tls(peer-verify(required-untrusted) ca_dir('/opt/syslog-ng/certs.d/')) template(DatadogFormat)); };
         ```
 
-    More information about the TLS parameters and possibilities for syslog-ng available in their [official documentation](https://syslog-ng.com/documents/html/syslog-ng-ose-latest-guides/en/syslog-ng-ose-guide-admin/html/tlsoptions.html).
+    More information about the TLS parameters and possibilities for syslog-ng available in their [official documentation][2].
 
 5. Restart syslog-ng 
+
+
+[1]: https://gist.githubusercontent.com/estib/8762bc1a2a5bda781a6e55cca40235f2/raw/665b6b2906a728027f508ea067f01cdf3cf72b49/intake.logs.datadoghq.com.crt
+[2]: https://syslog-ng.com/documents/html/syslog-ng-ose-latest-guides/en/syslog-ng-ose-guide-admin/html/tlsoptions.html

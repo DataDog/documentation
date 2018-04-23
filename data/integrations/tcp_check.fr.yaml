@@ -1,0 +1,12 @@
+tcp_check:
+  - description: >-
+      Le temps de réponse d'un host donné et d'un port TCP, étiqueté avec url,
+      par ex. 'url:192.168.1.100:22'.
+    integration: network
+    interval: ''
+    metric_name: network.tcp.response_time
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: tcp resp time
+    unit_name: second

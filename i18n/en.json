@@ -40,7 +40,7 @@
   },
 
   "help_sentence": {
-    "other": "Our friendly, knowledgeable solutions engineers are here to help"
+    "other": "Our friendly, knowledgeable solution engineers are here to help"
   },
 
   "email_support_sentence": {
@@ -151,6 +151,10 @@
     "other": "Datadog Docs"
   },
 
+  "datadog_api": {
+    "other": "Datadog API"
+  },
+
   "dogstatsd": {
     "other": "DogStatsD"
   },
@@ -214,5 +218,9 @@
 
   "questions": {
     "other": "Questions?"
+  },
+
+  "search": {
+    "other": "Search"
   }
 }

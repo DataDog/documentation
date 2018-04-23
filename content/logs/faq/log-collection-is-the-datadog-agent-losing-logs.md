@@ -14,16 +14,16 @@ further_reading:
 
 ### Log Rotate
 
-When a file is rotated, the agent keeps tailing the old file until its end before starting to look at the newly created file.
+When a file is rotated, the Agent keeps tailing the old file until its end before starting to look at the newly created file.
 
 ### Network issues
 #### File Tailing
 
-The agent stores a pointer for each tailed file. So, if there is a network connection issue, we stop sending logs until the connection is restored and automatically pick up where we stopped to ensure no logs are lost.
+The Agent stores a pointer for each tailed file. So, if there is a network connection issue, we stop sending logs until the connection is restored and automatically pick up where we stopped to ensure no logs are lost.
 
 #### Port Listening
 
-If the agent is listening to a TCP or UDP port and faces a network issue, we store the logs in a local buffer until the network is available again.  
+If the Agent is listening to a TCP or UDP port and faces a network issue, we store the logs in a local buffer until the network is available again.  
 However, there are some limits for this buffer as we do not want to create memory issues. That's why unfortunately new logs are dropped when the buffer is full.
 
 #### Container logs
@@ -32,3 +32,4 @@ As for files, we are able to store a pointer for each tailed container. Therefor
 However, if the tailed container is removed before the network is available again, the logs are not accessible anymore.
 
 {{< partial name="whats-next/whats-next.html" >}}
+

@@ -1,7 +1,7 @@
 ---
 title: Edit a monitor
 type: apicontent
-order: 15.3
+order: 16.3
 external_redirect: /api/#edit-a-monitor
 ---
 
@@ -17,3 +17,4 @@ external_redirect: /api/#edit-a-monitor
     Refer to the create monitor documentation for details on the available options.
 * **`tags`** [*optional*, *default*=**None**]:  
     A list of tags to associate with your monitor. This can help you categorize and filter monitors
+

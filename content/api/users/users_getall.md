@@ -1,7 +1,7 @@
 ---
 title: Get all users
 type: apicontent
-order: 23.3
+order: 24.3
 external_redirect: /api/#get-all-users
 ---
 
@@ -9,3 +9,4 @@ external_redirect: /api/#get-all-users
 ##### ARGUMENTS
 
 This end point takes no JSON arguments.
+

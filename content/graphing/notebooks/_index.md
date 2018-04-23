@@ -50,7 +50,7 @@ When an existing notebook is opened, its cells are in a closed state. To open a 
 
 {{< img src="graphing/notebooks/states.png" alt="states" responsive="true" popup="true">}}
 
-To insert, clone or delete cells, click the icon that appears to the left of the cell number — or use a keyboard shortcut. A list of all keyboard shortcuts is available by clicking the button in the notebook header.
+To insert, clone or delete cells, click the gear icon that appears to the left of the cell number — or use a keyboard shortcut. A list of all keyboard shortcuts is available by clicking the keyboard button in the notebook header.
 Cells also may be re-ordered by using keyboard shortcuts.
 
 ### Changing time frames
@@ -84,3 +84,4 @@ To save a notebook, press `⌘+` or click the “Save” button in the notebook 
 To rename a notebook, click the name field in the notebook header.
 
 To delete a notebook that you’ve created, click the icon in the notebook header and select "Delete Notebook." You also may delete your own notebooks from the Notebook List page.
+

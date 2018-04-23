@@ -19,9 +19,6 @@
 {{ end }}
 {{ $meta_desc := $.Scratch.Get "meta_desc" }}
 
-{{- if (or (eq $.Params.noindex true) (eq $.Params.private true) (eq .Site.Params.environment "preview")) -}}
-    <meta name="robots" content="noindex, nofollow">
-{{- end -}}
 
 <!-- Schema.org markup for Google+ -->
 <meta itemprop="name" content="{{ $meta_title | safeHTML }}">

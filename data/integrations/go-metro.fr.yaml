@@ -1,0 +1,30 @@
+go-metro:
+  - description: Le temps d'aller-retour TCP. Disponible depuis l'agent v5.7.0.
+    integration: system
+    interval: '10'
+    metric_name: system.net.tcp.rtt
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: tcp rtt
+    unit_name: millisecond
+  - description: >-
+      La durée moyenne d'un aller-retour TCP est généralement calculée par la
+      stack TCP. Disponible depuis l'agent v5.7.0.
+    integration: system
+    interval: '10'
+    metric_name: system.net.tcp.rtt.avg
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: tcp rtt avg
+    unit_name: millisecond
+  - description: Le temps d'aller-retour TCP. Disponible depuis l'agent v5.7.0.
+    integration: system
+    interval: '10'
+    metric_name: system.net.tcp.rtt.jitter
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: tcp rtt jitter
+    unit_name: millisecond

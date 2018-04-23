@@ -19,7 +19,11 @@
   <!-- get lang specific data file -->
   {{ $.Scratch.Set "data" "" }}
   {{ if ne $.Page.Lang "en"}}
-      {{ $.Scratch.Set "data" (index $.Page.Site.Data.integrations (print $integration "." $.Page.Lang)) }}
+      {{ if (fileExists (print "data/integrations/" $integration "." $.Page.Lang ".yaml")) }}
+        {{ $.Scratch.Set "data" (index $.Page.Site.Data.integrations (print $integration "." $.Page.Lang)) }}
+      {{ else }}
+        {{ $.Scratch.Set "data" (index $.Page.Site.Data.integrations $integration) }}
+      {{ end }}
   {{ else }}
       {{ $.Scratch.Set "data" (index $.Page.Site.Data.integrations $integration) }}
   {{ end }}
@@ -46,7 +50,7 @@
                   <tr>
                     <td>
                     <strong>{{$v.metric_name}}</strong><br>({{$v.metric_type}})</td>
-                    <td>{{$v.description}}<br><em>shown as {{$v.unit_name}}</em>
+                    <td>{{$v.description}}{{if $v.unit_name}}<br><em>shown as {{$v.unit_name}}</em>{{end}}
                     </td>
                   </tr>
 
@@ -68,7 +72,7 @@
             <tr>
               <td>
               <strong>{{$v.metric_name}}</strong><br>({{$v.metric_type}})</td>
-              <td>{{$v.description}}<br><em>shown as {{$v.unit_name}}</em>
+              <td>{{$v.description}}{{if $v.unit_name}}<br><em>shown as {{$v.unit_name}}</em>{{end}}
               </td>
             </tr>
           {{ end }}

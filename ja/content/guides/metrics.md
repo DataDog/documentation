@@ -26,7 +26,7 @@ what's happening with your application, your users and your system.
 
 Metrics are collected by sending them to StatsD, a small metrics aggregation
 server that is bundled with the Datadog Agent. You can read about how it works <a
-href="https://docs.datadoghq.com/guides/dogstatsd/">here</a>. If you want to dive into code right away,
+href="">here</a>. If you want to dive into code right away,
 read on.
 
 In this tutorial, we'll cover some common instrumentation use cases, like:
@@ -173,13 +173,11 @@ Datadog Agent によって転送されるメトリクスは、擬似階層ドッ
 ここで"疑似階層"と言っている理由は、階層的表記のメリットを生かし、メトリクスを検索する仕組みとして使ってはいるが、監視対象のシステムは階層構造である必要がないということです。
 (例えば: "ねえ、ホストAとホストBが、'http.nginx.*'というメトリクスを送信している。これらは、Webのフロントエンドのメトリクスだよね〜")
 
-
 <!--
 ======================================================
 COUNTERS
 ======================================================
 -->
-
 
 <!-- <h3 id="counters">Counters</h3>
 
@@ -325,13 +323,11 @@ end
 現状のDatadogでは、大本のカウント値を取得するための洗練された解決策を持ち合わせいませんが、必要に応じ送信されたシリーズ(時系列データ)に対し数値計算functionを使って累積合計や積分をとることも検討してみると良いかもしれません。
 これらのfunctionに関する詳細は、Graphingページの<a href="http://docs.datadoghq.com/graphing/#functions">"Arithmetic and Functions"</a>を参照してください。 -->
 
-
 <!--
 ======================================================
 GAUGES
 ======================================================
 -->
-
 
 <!-- <h3 id="gauges">Gauges</h3>
 
@@ -389,13 +385,11 @@ end
   </div>
 </div>
 
-
 <!--
 ======================================================
 HISTOGRAMS
 ======================================================
 -->
-
 
 <!-- <h3 id="histograms">Histograms</h3>
 
@@ -528,13 +522,11 @@ end
 (例えば、"アップロード操作で受け付けたファイルのサイズ"や"試験の点数"のような値です。)
 </p>
 
-
 <!--
 ======================================================
 SETS
 ======================================================
 -->
-
 
 <!-- <h3 id="sets">Sets</h3>
 
@@ -588,13 +580,11 @@ end
   </div>
 </div>
 
-
 <!--
 ======================================================
 TAGS
 ======================================================
 -->
-
 
 <!-- <h3 id="tags">Tags</h3>
 
@@ -644,14 +634,12 @@ query like this:
 In this query, all instances of this metric (e.g. across all hosts, indicated by `*`) are averaged
 (`avg`) and broken down by the tag key `algorithm`.
 
-
 <p class="alert alert-warning">
 We store one time series per host + metric + tag combination on our backend,
 thus we cannot support infinitely bounded tags. Please don't include endlessly
 growing tags in your metrics, like timestamps or user ids. Please limit each
 metric to 1000 tags.
 </p>
-
 
 Tags must start with a letter, and after that may contain alphanumerics,
 underscores, minuses, colons, periods and slashes. Other characters will get
@@ -706,7 +694,6 @@ end
   </div>
 </div>
 
-
 ダッシュボード上にグラフ表示する際、メトリクス名だけでもメトリクス合計や平均を計算したり、最小値/最大値を表示したりすることができます。タグを使うつと更に高度な集計ができるようになります。同じ名前のメトリクスでも、タグで設定した'key'文字列を基に、'value syntax'にセットされた値毎に分類することができます。
 
 例えば、次のようなクエリを実行することができます:
@@ -736,7 +723,6 @@ Datadogのバックエンドでは、ホスト、メトリクス, タグの組�
 注: `device`, `host`, `source`の'key'文字列は、特別な文字列として取り扱われるために、標準的な方法では設定できないようになっていますので注意してください。
 
 特殊文字を含むタグの設定方法に関しては、次のドキュメントを参照してください:
-
 
 - <a href="https://docs.datadoghq.com/ja/api/#metrics">API レファレンスのmetrics</a>
 - <a href="https://docs.datadoghq.com/ja/api/#tags">API レファレンスのtag</a>
@@ -812,7 +798,6 @@ end
 
 <hr>
 
-
 <!-- <h3 id="methods">Other Submission Methods</h3>
 
 Using the StatsD server bundled with the Datadog Agent is the simplest
@@ -847,7 +832,6 @@ Datagogにメトリクスを送信するには、Datadog Agent にバンドル�
     codahaleのJava用 metrics ライブラリーと（<a href="https://github.com/vistarmedia">Vistar Media</a>が寄贈してくれた)<a href="https://github.com/vistarmedia/metrics-datadog">metrics-datadog</a>を使って送信する方法
   </li>
 </ul>
-
 
 <!-- <h3 id="custom">Seeing Your Custom Metrics</h3>
 

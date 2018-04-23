@@ -140,8 +140,8 @@ class PreBuild:
         self.datafile_json = []
         self.pool_size = 5
         self.integration_mutations = OrderedDict({
-            'hdfs': {'action': 'create', 'target': 'hdfs', 'remove_header': False},
-            'mesos': {'action': 'truncate', 'target': 'mesos', 'remove_header': False},
+            'hdfs': {'action': 'create', 'target': 'hdfs', 'remove_header': False, 'fm': {'is_public': True, 'kind': 'integration', 'integration_title': 'Hdfs', 'short_description': 'Track cluster disk usage, volume failures, dead DataNodes, and more.'}},
+            'mesos': {'action': 'create', 'target': 'mesos', 'remove_header': False, 'fm': {'is_public': True, 'kind': 'integration', 'integration_title': 'Mesos', 'short_description': 'Track cluster resource usage, master and slave counts, tasks statuses, and more.'}},
             'activemq_xml': {'action': 'merge', 'target': 'activemq', 'remove_header': False},
             'cassandra_nodetool': {'action': 'merge', 'target': 'cassandra', 'remove_header': False},
             'gitlab_runner': {'action': 'merge', 'target': 'gitlab', 'remove_header': False},
@@ -153,6 +153,8 @@ class PreBuild:
             'kube_dns': {'action': 'discard', 'target': 'none', 'remove_header': False},
             'kubernetes_state': {'action': 'discard', 'target': 'none', 'remove_header': False},
             'stride': {'action': 'discard', 'target': 'none', 'remove_header': False},
+            'system_core': {'action': 'discard', 'target': 'system', 'remove_header': False},
+            'system_swap': {'action': 'discard', 'target': 'system', 'remove_header': False},
             'hbase_regionserver': {'action': 'merge', 'target': 'hbase_master', 'remove_header': False},
         })
         self.initial_integration_files = glob.glob('{}*.md'.format(self.content_integrations_dir))
@@ -273,7 +275,10 @@ class PreBuild:
                 elif action == 'discard':
                     remove(input_file)
                 elif action == 'create':
-                    open(output_file, 'w+').close()
+                    with open(output_file, 'w+') as f:
+                        fm = yaml.dump(action_obj.get('fm'), default_flow_style=False).rstrip()
+                        data = '---\n{0}\n---\n'.format(fm)
+                        f.write(data)
 
 
     def process_source_attribute(self, file_name):
@@ -371,7 +376,7 @@ class PreBuild:
                 result = f.read()
                 title = manifest_json.get('name', '').lower()
                 if title not in [k for k, v in self.integration_mutations.items() if v.get('action') == 'merge']:
-                    result = re.sub(self.regex_h1, '', result, 0)
+                    result = re.sub(self.regex_h1, '', result, 1)
                 if metrics_exist:
                     result = re.sub(self.regex_metrics, r'\1{{< get-metrics-from-git "%s" >}}\n\3\4'%format(title), result, 0)
                 if service_check_exist:

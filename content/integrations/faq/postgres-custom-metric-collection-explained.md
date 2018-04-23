@@ -5,7 +5,7 @@ kind: faq
 
 ## Context
 
-We use the example of a postgres "testdb" database with a dummy table "company" containing employee records (3 rows):
+We use the example of a postgres "testdb" database with a dummy table "company" containing employee records (3 rows):
 ```
 testdb=# SELECT * FROM company;
 
@@ -16,16 +16,16 @@ id| name  | age| address    |salary | entry_date | last_raise_time
 3 | Teddy | 23 | Norway     | 45000 | 1457570120 | 1457570300
 ```
 
-## From a SQL query to the YAML configuration
+## From a SQL query to the YAML configuration
 
-Goal: capture the age and salary of Paul as metric values, add his name and address as tags.
+Goal: capture the age and salary of Paul as metric values, add his name and address as tags.
 
-SQL query: 
+SQL query:
 ```
 SELECT age,salary,name,address FROM company WHERE name = 'Paul'
 ```
 
-We tell the dd-agent to capture the content of columns age and salary as metrics, and name and address as tags.
+We tell the `dd-agent` to capture the content of columns age and salary as metrics, and name and address as tags.
 
 Corresponding custom metric yaml configuration:
 ```
@@ -39,7 +39,7 @@ descriptors:
     - [name, name] # captures the content of the "name" column as a tag for the 2 metrics defined
     - [address, localisation] #captures the content of "address" column as a tag and renames this tag "localisation"
 ```
-Result: 
+Result:
 {{< img src="integrations/faq/sql_metric_explorer.png" alt="sql_metric_explorer" responsive="true" popup="true">}}
 
 ## Full postgres.yaml file with more queries
@@ -78,3 +78,4 @@ instances:
       query: SELECT %s FROM mylag LIMIT 1;
       relation: false
 ```
+

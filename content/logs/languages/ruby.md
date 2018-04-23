@@ -2,16 +2,19 @@
 title: Ruby on Rails log collection
 kind: documentation
 further_reading:
-- link: "/logs/processing"
+- link: "logs/processing"
   tag: "Documentation"
   text: Learn how to process your logs
-- link: "/logs/parsing"
+- link: "logs/parsing"
   tag: "Documentation"
   text: Learn more about parsing
-- link: "/logs/explore"
+- link: "logs/explore"
   tag: "Documentation"
   text: Learn how to explore your logs
-- link: /logs/faq/log-collection-troubleshooting-guide
+- link: "logs/graph"
+  tag: "Documentation"
+  text: "Perform analytics with Log Graphs"
+- link: "/logs/faq/log-collection-troubleshooting-guide"
   tag: "FAQ"
   text: Log Collection Troubleshooting Guide
 ---
@@ -31,13 +34,32 @@ Processing by HomeController#index as HTML
 Completed 200 OK in 79ms (Views: 78.8ms | ActiveRecord: 0.0ms)
 ```
 
-You get a single log line with all the important information, like this:
+After lograge formating you get a single log line with all the important information, like this:
 
 ```
 method=GET path=/jobs/833552.json format=json controller=jobs action=show status=200 duration=58.33 view=40.43 db=15.26
 ```
 
-**To send your logs to Datadog, we recommend logging to a file and then tailing that file with your Datadog agent.**
+And the final result in JSON:
+
+```
+{
+  "timestamp":"2016-01-12T19:15:19.118829+01:00",
+  "level":"INFO",
+  "logger":"Rails",
+  "method":"GET",
+  "path":"/jobs/833552.json",
+  "format":"json",
+  "controller":"jobs",
+  "action":"show",
+  "status":200,
+  "duration":58.33,
+  "view":40.43,
+  "db":15.26
+}
+```
+
+**To send your logs to Datadog, we recommend logging to a file and then tailing that file with your Datadog Agent.**
 
 ## Adding the GEMs
 Add the 2 following GEMs in your project:
@@ -59,13 +81,13 @@ config.lograge.formatter = Lograge::Formatters::Raw.new
 
 # This is is useful if you want to log query parameters
 config.lograge.custom_options = lambda do |event|
-    { :@marker => ["sourcecode", "ruby", "rails"],
+    { :ddsource => ["ruby"],
       :params => event.payload[:params].reject { |k| %w(controller action).include? k }
     }
 end
 ```
 
-**Note**:You can also ask Lograge to add contextual information to your logs. Refer to the official doc if you are interested: [Lograge documentation](https://github.com/roidrage/lograge#installation)
+**Note**:You can also ask Lograge to add contextual information to your logs. Refer to the official doc if you are interested: [Lograge documentation][1]
 
 ## Disable log coloration
 As it would be weirdly displayed in your Datadog application, disable your log coloration:
@@ -98,7 +120,7 @@ Then finally, defines the JSON layout and associate it to the appender you'll go
 # The JSON layout
 json_layout = Logging.layouts.json
 
-# For instance, a file appender that'll going to be forwarder by a syslog agent to Datadog
+# For instance, a file appender that'll going to be forwarder by a syslog Agent to Datadog
 Logging.appenders.file(
     'datadog',
     :filename => config.paths['log'].first,
@@ -106,17 +128,13 @@ Logging.appenders.file(
 )
 ```
 
-If you want to tweak the log layout, all items available can be found directly from the [source repository](https://github.com/TwP/logging/blob/master/lib/logging/layouts/parseable.rb#L100)
+If you want to tweak the log layout, all items available can be found directly from the [source repository][2]
 
-## Configure your Datadog agent.
+## Configure your Datadog Agent.
 
 Create a `ruby.d/conf.yaml` file in your `conf.d/` folder with the following content:
 
-```yaml
-init_config:
-
-instances:
-    
+```yaml    
 ##Log section
 logs:
 
@@ -220,3 +238,6 @@ end
 ```
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://github.com/roidrage/lograge#installation
+[2]: https://github.com/TwP/logging/blob/master/lib/logging/layouts/parseable.rb#L100

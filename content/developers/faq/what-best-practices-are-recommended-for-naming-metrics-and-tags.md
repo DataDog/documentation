@@ -2,10 +2,10 @@
 title: What best practices are recommended for naming metrics and tags?
 kind: faq
 further_reading:
-- link: "/developers/metrics"
+- link: "developers/metrics"
   tag: "Documentation"
   text: Learn more about Datadog metrics
-- link: "/getting_started/getting_started_with_tags"
+- link: "getting_started/getting_started_with_tags"
   tag: "Documentation"
   text: Getting started with tags
 ---
@@ -33,6 +33,7 @@ Other characters will get converted to underscores
 * Tags will be converted to lowercase
 * For optimal functionality, we recommend constructing tags that use the `key:value` syntax
 
-Examples of commonly used metric tag keys are env, instance, name, and role.
+Examples of commonly used metric tag keys are env, instance, name, and role.
 
 {{< partial name="whats-next/whats-next.html" >}}
+

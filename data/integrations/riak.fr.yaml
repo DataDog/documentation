@@ -1,0 +1,639 @@
+riak:
+  - description: Quantité totale de mémoire allouée pour le stockage d'Atom
+    integration: riak
+    interval: ''
+    metric_name: riak.memory_atom
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: mem atom
+    unit_name: byte
+  - description: Quantité totale de mémoire actuellement utilisée pour le stockage d'atom
+    integration: riak
+    interval: ''
+    metric_name: riak.memory_atom_used
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: mem atom used
+    unit_name: byte
+  - description: Montant total de mémoire utilisé pour les binaires.
+    integration: riak
+    interval: ''
+    metric_name: riak.memory_binary
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: mem bin
+    unit_name: byte
+  - description: Total amount of memory allocated for Erlang code
+    integration: riak
+    interval: ''
+    metric_name: riak.memory_code
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: mem code
+    unit_name: byte
+  - description: Total memory allocated for Erlang Term Storage
+    integration: riak
+    interval: ''
+    metric_name: riak.memory_ets
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: mem ets
+    unit_name: byte
+  - description: Total amount of memory allocated for Erlang processes
+    integration: riak
+    interval: ''
+    metric_name: riak.memory_processes
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: mem proc
+    unit_name: byte
+  - description: Total amount of memory used by Erlang processes
+    integration: riak
+    interval: ''
+    metric_name: riak.memory_processes_used
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: mem proc used
+    unit_name: byte
+  - description: Total allocated memory (sum of processes and system)
+    integration: riak
+    interval: ''
+    metric_name: riak.memory_total
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: mem total
+    unit_name: byte
+  - description: Number of active GET FSMs
+    integration: riak
+    interval: ''
+    metric_name: riak.node_get_fsm_active_60s
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: get fsm active
+    unit_name: ''
+  - description: Average number of GET FSMs enqueued by Sidejob
+    integration: riak
+    interval: ''
+    metric_name: riak.node_get_fsm_in_rate
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: get fsm in
+    unit_name: ''
+  - description: Average number of GET FSMs dequeued by Sidejob
+    integration: riak
+    interval: ''
+    metric_name: riak.node_get_fsm_out_rate
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: get fsm out
+    unit_name: ''
+  - description: >-
+      Number of GET FSMs actively being rejected by Sidejob's overload
+      protection
+    integration: riak
+    interval: ''
+    metric_name: riak.node_get_fsm_rejected_60s
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: get fsm rejected
+    unit_name: ''
+  - description: Number of GETs coordinated by this node
+    integration: riak
+    interval: ''
+    metric_name: riak.node_gets
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: node gets
+    unit_name: operation
+  - description: Number of active PUT FSMs
+    integration: riak
+    interval: ''
+    metric_name: riak.node_put_fsm_active_60s
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: put fsm active
+    unit_name: ''
+  - description: Average number of PUT FSMs enqueued by Sidejob
+    integration: riak
+    interval: ''
+    metric_name: riak.node_put_fsm_in_rate
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: put fsm in
+    unit_name: ''
+  - description: Average number of PUT FSMs dequeued by Sidejob
+    integration: riak
+    interval: ''
+    metric_name: riak.node_put_fsm_out_rate
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: put fsm out
+    unit_name: ''
+  - description: >-
+      Number of PUT FSMs actively being rejected by Sidejob's overload
+      protection
+    integration: riak
+    interval: ''
+    metric_name: riak.node_put_fsm_rejected_60s
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: put fsm rejected
+    unit_name: ''
+  - description: Number of PUTs coordinated by this node
+    integration: riak
+    interval: ''
+    metric_name: riak.node_puts
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: node puts
+    unit_name: operation
+  - description: Nombre de connexions de buffers de protocol actifs
+    integration: riak
+    interval: ''
+    metric_name: riak.pbc_active
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: pbc active
+    unit_name: connection
+  - description: Number of protocol buffers connections
+    integration: riak
+    interval: ''
+    metric_name: riak.pbc_connects
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: pbc conns
+    unit_name: connection
+  - description: >-
+      Number of read repair operations this this node has coordinated in the
+      last minute
+    integration: riak
+    interval: ''
+    metric_name: riak.read_repairs
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: read repairs
+    unit_name: operation
+  - description: Number of GET operations coordinated by vnodes on this node
+    integration: riak
+    interval: ''
+    metric_name: riak.vnode_gets
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vnode gets
+    unit_name: operation
+  - description: Number of vnode index delete operations
+    integration: riak
+    interval: ''
+    metric_name: riak.vnode_index_deletes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vnode index deletes
+    unit_name: operation
+  - description: Number of vnode index read operations
+    integration: riak
+    interval: ''
+    metric_name: riak.vnode_index_reads
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vnode index reads
+    unit_name: read
+  - description: Number of vnode index write operations
+    integration: riak
+    interval: ''
+    metric_name: riak.vnode_index_writes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vnode index writes
+    unit_name: write
+  - description: Number of PUT operations coordinated by vnodes on this node
+    integration: riak
+    interval: ''
+    metric_name: riak.vnode_puts
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vnode puts
+    unit_name: operation
+  - description: Object size encountered by this node
+    integration: riak
+    interval: ''
+    metric_name: riak.node_get_fsm_objsize_mean
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: get objsize mean
+    unit_name: byte
+  - description: Number of siblings encountered during all GET operations by this node
+    integration: riak
+    interval: ''
+    metric_name: riak.node_get_fsm_siblings_mean
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: get siblings mean
+    unit_name: node
+  - description: >-
+      Time between reception of client GET request and subsequent response to
+      client
+    integration: riak
+    interval: ''
+    metric_name: riak.node_get_fsm_time_mean
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: get time mean
+    unit_name: microsecond
+  - description: >-
+      Time between reception of client PUT request and subsequent response to
+      client
+    integration: riak
+    interval: ''
+    metric_name: riak.node_put_fsm_time_mean
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: put time mean
+    unit_name: microsecond
+  - description: Object size encountered by this node
+    integration: riak
+    interval: ''
+    metric_name: riak.node_get_fsm_objsize_median
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: get objsize median
+    unit_name: byte
+  - description: Number of siblings encountered during all GET operations by this node
+    integration: riak
+    interval: ''
+    metric_name: riak.node_get_fsm_siblings_median
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: get siblings median
+    unit_name: node
+  - description: >-
+      Time between reception of client GET request and subsequent response to
+      client
+    integration: riak
+    interval: ''
+    metric_name: riak.node_get_fsm_time_median
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: get time median
+    unit_name: microsecond
+  - description: >-
+      Time between reception of client PUT request and subsequent response to
+      client
+    integration: riak
+    interval: ''
+    metric_name: riak.node_put_fsm_time_median
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: put time median
+    unit_name: microsecond
+  - description: Object size encountered by this node
+    integration: riak
+    interval: ''
+    metric_name: riak.node_get_fsm_objsize_95
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: get objsize 95
+    unit_name: byte
+  - description: Number of siblings encountered during all GET operations by this node
+    integration: riak
+    interval: ''
+    metric_name: riak.node_get_fsm_siblings_95
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: get siblings 95
+    unit_name: node
+  - description: >-
+      Time between reception of client GET request and subsequent response to
+      client
+    integration: riak
+    interval: ''
+    metric_name: riak.node_get_fsm_time_95
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: get time 95
+    unit_name: microsecond
+  - description: >-
+      Time between reception of client PUT request and subsequent response to
+      client
+    integration: riak
+    interval: ''
+    metric_name: riak.node_put_fsm_time_95
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: put time 95
+    unit_name: microsecond
+  - description: Object size encountered by this node
+    integration: riak
+    interval: ''
+    metric_name: riak.node_get_fsm_objsize_99
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: get objsize 99
+    unit_name: byte
+  - description: Number of siblings encountered during all GET operations by this node
+    integration: riak
+    interval: ''
+    metric_name: riak.node_get_fsm_siblings_99
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: get siblings 99
+    unit_name: node
+  - description: >-
+      Time between reception of client GET request and subsequent response to
+      client
+    integration: riak
+    interval: ''
+    metric_name: riak.node_get_fsm_time_99
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: get time 99
+    unit_name: microsecond
+  - description: >-
+      Time between reception of client PUT request and subsequent response to
+      client
+    integration: riak
+    interval: ''
+    metric_name: riak.node_put_fsm_time_99
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: put time 99
+    unit_name: microsecond
+  - description: Object size encountered by this node
+    integration: riak
+    interval: ''
+    metric_name: riak.node_get_fsm_objsize_100
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: get objsize 100
+    unit_name: byte
+  - description: Number of siblings encountered during all GET operations by this node
+    integration: riak
+    interval: ''
+    metric_name: riak.node_get_fsm_siblings_100
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: get siblings 100
+    unit_name: node
+  - description: >-
+      Time between reception of client GET request and subsequent response to
+      client
+    integration: riak
+    interval: ''
+    metric_name: riak.node_get_fsm_time_100
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: get time 100
+    unit_name: microsecond
+  - description: >-
+      Time between reception of client PUT request and subsequent response to
+      client
+    integration: riak
+    interval: ''
+    metric_name: riak.node_put_fsm_time_100
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: put time 100
+    unit_name: microsecond
+  - description: Total number of documents that have failed to index
+    integration: riak
+    interval: ''
+    metric_name: riak.search_index_fail_count
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: index fail count
+    unit_name: object
+  - description: Number of documents that have failed to index in the past one minute
+    integration: riak
+    interval: ''
+    metric_name: riak.search_index_fail_one
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: index fail one
+    unit_name: object
+  - description: Total number of queries that have failed
+    integration: riak
+    interval: ''
+    metric_name: riak.search_query_fail_count
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: query fail count
+    unit_name: event
+  - description: Number of queries that have failed in the last one minute
+    integration: riak
+    interval: ''
+    metric_name: riak.search_query_fail_one
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: query fail one
+    unit_name: event
+  - description: Total number of documents that have been indexed
+    integration: riak
+    interval: ''
+    metric_name: riak.search_index_throughput_count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: total indexed
+    unit_name: operation
+  - description: Number of documents that have been indexed in the last one minute
+    integration: riak
+    interval: ''
+    metric_name: riak.search_index_throughput_one
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: indexed one
+    unit_name: operation
+  - description: Total number of queries that have been performed
+    integration: riak
+    interval: ''
+    metric_name: riak.search_query_throughput_count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: total queries
+    unit_name: operation
+  - description: Number of searches that have been performed in the last one minute
+    integration: riak
+    interval: ''
+    metric_name: riak.search_query_throughput_one
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: queries one
+    unit_name: operation
+  - description: 'Time between reception of query and response: 95th percentile'
+    integration: riak
+    interval: ''
+    metric_name: riak.search_query_latency_95
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: query latency 95
+    unit_name: microsecond
+  - description: 'Time between reception of query and response: 99th percentile'
+    integration: riak
+    interval: ''
+    metric_name: riak.search_query_latency_99
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: query latency 99
+    unit_name: microsecond
+  - description: 'Time between reception of query and response: 99.9th percentile'
+    integration: riak
+    interval: ''
+    metric_name: riak.search_query_latency_999
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: query latency 999
+    unit_name: microsecond
+  - description: 'Time between reception of query and response: max'
+    integration: riak
+    interval: ''
+    metric_name: riak.search_query_latency_max
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: query latency max
+    unit_name: microsecond
+  - description: 'Time between reception of query and response: min'
+    integration: riak
+    interval: ''
+    metric_name: riak.search_query_latency_min
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: query latency min
+    unit_name: microsecond
+  - description: 'Time between reception of query and response: mean'
+    integration: riak
+    interval: ''
+    metric_name: riak.search_query_latency_mean
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: query latency mean
+    unit_name: microsecond
+  - description: 'Time between reception of query and response: median'
+    integration: riak
+    interval: ''
+    metric_name: riak.search_query_latency_median
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: index latency median
+    unit_name: microsecond
+  - description: 'Time between insertion of document and it being indexed: 95th percentile'
+    integration: riak
+    interval: ''
+    metric_name: riak.search_index_latency_95
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: index latency 95
+    unit_name: microsecond
+  - description: 'Time between insertion of document and it being indexed: 99th percentile'
+    integration: riak
+    interval: ''
+    metric_name: riak.search_index_latency_99
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: index latency 99
+    unit_name: microsecond
+  - description: 'Time between insertion of document and it being indexed: 99.9th percentile'
+    integration: riak
+    interval: ''
+    metric_name: riak.search_index_latency_999
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: index latency 999
+    unit_name: microsecond
+  - description: 'Time between insertion of document and it being indexed: max'
+    integration: riak
+    interval: ''
+    metric_name: riak.search_index_latency_max
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: index latency max
+    unit_name: microsecond
+  - description: 'Time between insertion of document and it being indexed: min'
+    integration: riak
+    interval: ''
+    metric_name: riak.search_index_latency_min
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: index latency min
+    unit_name: microsecond
+  - description: 'Time between insertion of document and it being indexed: mean'
+    integration: riak
+    interval: ''
+    metric_name: riak.search_index_latency_mean
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: index latency mean
+    unit_name: microsecond
+  - description: 'Time between insertion of document and it being indexed: median'
+    integration: riak
+    interval: ''
+    metric_name: riak.search_index_latency_median
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: index latency median
+    unit_name: microsecond

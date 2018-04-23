@@ -6,9 +6,11 @@ aliases:
   - /logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers
 ---
 
-The best and easiest way to send logs to Datadog is through the Datadog Agent.  Log collection requires an Agent version >= 6.0. Older versions of the Agent do not include the `Log collection` interface that is used for log collection.  
+## Getting started with the Agent
 
-If you are not using it already, please follow [the agent installation instruction](/agent).
+Log collection requires an Agent version >= 6.0. Older versions of the Agent do not include the `Log collection` interface that is used for log collection.
+
+If you are not using it already, please follow [the Agent installation instruction][1].
 
 Collecting logs is **disabled** by default in the Datadog Agent, you need to enable it in `datadog.yaml`:
 
@@ -16,24 +18,16 @@ Collecting logs is **disabled** by default in the Datadog Agent, you need to ena
 logs_enabled: true
 ```
 
-The Datadog agent sends its logs to Datadog over TLS-encrypted TCP. This requires outbound communication over port `10516`.
-
-That said, you can also send logs to Datadog using many common non-Datadog log shippers, like the following:
-
-* [Rsyslog](/logs/log_collection/rsyslog)
-* [FluentD](/logs/log_collection/fluentd)
-* [Logstash](/logs/log_collection/logstash)
-* [Syslog-ng](/logs/log_collection/syslog_ng)
-* [NXLog (Windows)](/logs/log_collection/nxlog)
+The Datadog Agent sends its logs to Datadog over TLS-encrypted TCP. This requires outbound communication over port `10516`.
 
 ## Enabling log collection from integrations
-To start collecting logs for a given integration, uncomment the logs section in that integration's yaml file, and configure it for your environment.  
+To start collecting logs for a given integration, uncomment the logs section in that integration's yaml file, and configure it for your environment.
 
 <div class="alert alert-warning">
 Not all integrations include out of the box log configurations.  <a href="https://docs.datadoghq.com/integrations/#cat-log-collection">Consult the current list of supported integrations available</a>.
 </div>
 
-If an integration does not support logs by default, [use the custom file configuration](/logs/log_collection).
+If an integration does not support logs by default, use the custom file configuration below.
 
 ## Custom log collection
 
@@ -42,33 +36,17 @@ The Datadog Agent v6 can collect logs from files or the network (TCP or UDP) and
 * `type` : (mandatory) type of log input source (**tcp** / **udp** / **file**)
 * `port` / `path` : (mandatory) Set `port` if `type` is **tcp** or **udp**. Set `path` if `type` is **file**.
 * `service` : (mandatory) name of the service owning the log
-* `source` : (mandatory) attribute that defines which integration is sending the logs. "If the logs do not come from an existing integration then this field may include a custom source name. But we recommend matching this value to the namespace of any related [custom metrics](/getting_started/custom_metrics/) you are collecting, e.g, `myapp` from `myapp.request.count`)"
+* `source` : (mandatory) attribute that defines which integration is sending the logs. "If the logs do not come from an existing integration then this field may include a custom source name. But we recommend matching this value to the namespace of any related [custom metrics][2] you are collecting, e.g, `myapp` from `myapp.request.count`)"
 * `sourcecategory` : (optional) Multiple value attribute. Can be used to refine the source attribtue. Example: source:mongodb, sourcecategory:db_slow_logs
 * `tags`: (optional) add tags to each log collected.
-
-## Forwarding logs from other shippers to the Datadog Log Agent
-
-The Datadog Log Agent can be configured:
-
-* [To tail logs from files](/logs/#tail-existing-files)
-* [To listen for logs via UDP or TCP over a given port](/logs/#stream-logs-through-tcp-udp). 
- 
-So whatever your log shipper is, one option is just to have that shipper forward its logs to the Datadog Log Agent; it is often easy to configure this kind of setup, both from the dd-agent side, and from your log shipper. With this approach, you don't need to add your Datadog API key, hostname, or source values in your log shipper's configurations, since that is handled by the Datadog Log Agent. 
-
-This approach can be especially useful for sending to Datadog logs that have heightened permission requirements. The dd-agent does not run as root (and as a best practice we do not encourage running it as root), so that can block the Datadog Logs Agent from tailing some log files directly, such as /var/log/syslog. If you do not want to modify the permissions on these files or the access that you give to the dd-agent user, many of these open source log shippers do run as root, and can be used to forward logs to the Datadog Logs Agent over UDP / TCP. 
 
 ## Tail existing files
 Set `type` to **file** then specify the absolute `path` to the log file you want to tail.
 
-Example: 
+Example:
 To gather python applications stored in **/var/log/myapp1.log** and **/var/log/python.log** create a `python.d/conf.yaml` file as follows:
 
-Note that for the yaml file to be considered valid by the agent, they must include an "init_config" section and have at least one "instance" defined as shown below:
-
 ```yaml
-init_config:
-instances:
-
 ##Log section
 logs:
 
@@ -85,7 +63,7 @@ logs:
     source: python
     sourcecategory: sourcecode
 ```
-* [Restart your agent](https://help.datadoghq.com/hc/en-us/articles/203764515-Start-Stop-Restart-the-Datadog-Agent)
+* [Restart your Agent][3]
 
 ## Stream logs through TCP/UDP
 Set `type` to **tcp** or **udp** depending of your protocol then specify the `port` of your incoming connection.
@@ -106,15 +84,15 @@ logs:
     sourcecategory: front
 
 ```
-* [Restart your agent](https://help.datadoghq.com/hc/en-us/articles/203764515-Start-Stop-Restart-the-Datadog-Agent)
+* [Restart your Agent][3]
 
-The agent supports raw string and JSON formated logs. If you are sending logs in batch, use break line characters to separate your logs.
+The Agent supports raw string, JSON and Syslog formated logs. If you are sending logs in batch, use break line characters to separate your logs.
 
 ## Advanced log collection functions
 
 ### Filter logs
 
-All logs are not equal and you may want to send only a specific subset of logs to Datadog.  
+All logs are not equal and you may want to send only a specific subset of logs to Datadog.
 To achieve this use the `log_processing_rules` parameter in your configuration file with the **exclude_at_match** or **include_at_match** `type`.
 
 * **exclude_at_match**: If the pattern is contained in the message the log is excluded, and not sent to Datadog.
@@ -155,6 +133,8 @@ logs:
       pattern: \w+@datadoghq.com
 ```
 
+**Note**: If you set up multiple processing rules, they will be applied sequentially.
+Each rule will be applied on the result of the previous one.
 
 ### Scrub sensitive data in your logs
 
@@ -182,7 +162,7 @@ logs:
 
 ### Multi-line aggregation
 
-If your logs are not sent in JSON and you want to aggregate several lines into one single entry, configure the Datadog Agent to detect a new log using a specific regex pattern instead of having one log per line.  
+If your logs are not sent in JSON and you want to aggregate several lines into one single entry, configure the Datadog Agent to detect a new log using a specific regex pattern instead of having one log per line.
 
 This is accomplished by using the `log_processing_rules` parameter in your configuration file with the **multi_line** `type`.
 
@@ -226,18 +206,17 @@ More examples:
 |20180228 | `\d{8}` |
 {{% /table %}}
 
-
 ### Tail multiple directories or whole directories by using wildcards
 
 If your log files are labeled by date or all stored in the same directory, configure your Datadog Agent to monitor them all and automatically detect new ones by using wildcards in the `path` attribute.
 
 * Using `path: /var/log/myapp/*.log`:
-  * Matches all `.log` file contained in the `/var/log/myapp/` directory. 
+  * Matches all `.log` file contained in the `/var/log/myapp/` directory.
   * Doesn't match `/var/log/myapp/myapp.conf`.
 
 * Using `path: /var/log/myapp/*/*.log`:
   * Matches `/var/log/myapp/log/myfile.log`.
-  * Matches `/var/log/myapp/errorLog/myerrorfile.log` 
+  * Matches `/var/log/myapp/errorLog/myerrorfile.log`
   * Doesn't match `/var/log/myapp/mylogfile.log`.
 
 Configuration example:
@@ -253,13 +232,17 @@ logs:
    source: go
 ```
 
-**Note**: that the agent requires the read and execute permission (5) on the directory to be able to list all the available files in it.
+**Note**: that the Agent requires the read and execute permission (5) on the directory to be able to list all the available files in it.
+
+### Using a Proxy for Logs
+
+The log Agent does not presently respect the the proxy setting in the datadog.yaml configuration file. This feature will be available in a future release.
 
 ### The Advantage of Collecting JSON-formatted logs
 
 Datadog automatically parses JSON-formatted logs. For this reason, when you have control over the log format you send to Datadog, we encourage you to format them as JSON to avoid the need for custom parsing rules.
 
-## Reserved attributes 
+## Reserved attributes
 
 If your logs are formatted as JSON, be aware that some attributes are reserved for use by Datadog:
 
@@ -277,9 +260,9 @@ However, if a JSON formatted log file includes one of the following attributes, 
 * `published_date`
 * `syslog.timestamp`
 
-You can also specify alternate attributes to use as the source of a log's date by setting a [log date remapper processor](/logs/processing/#log-date-remapper)
+You can also specify alternate attributes to use as the source of a log's date by setting a [log date remapper processor][4]
 
-**Note**: Datadog rejects a log entry if its official date is older than 18 hours in the past.
+**Note**: Datadog rejects a log entry if its official date is older than 6 hours in the past.
 
 <div class="alert alert-info">
 The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (the milliseconds EPOCH format)</a>  and <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
@@ -287,7 +270,7 @@ The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-
 
 ### *message* attribute
 
-By default, Datadog ingests the value of message as the body of the log entry. That value is then highlighted and display in the [logstream](/logs/explore/#logstream), where it is indexed for [full text search](/logs/explore/#search-bar).
+By default, Datadog ingests the value of message as the body of the log entry. That value is then highlighted and displayed in the [logstream][5], where it is indexed for [full text search][6].
 
 ### *status* attribute
 
@@ -297,7 +280,7 @@ Each log entry may specify a status level which is made available for faceted se
 * `level`
 * `syslog.severity`
 
-If you would like to remap some status existing in the `status` attribute, you can do so with the [log status remapper](/logs/processing/#log-status-remapper)
+If you would like to remap some status existing in the `status` attribute, you can do so with the [log status remapper][7]
 
 ### *host* attribute
 
@@ -313,10 +296,18 @@ Using the Datadog Agent or the RFC5424 format automatically set the service valu
 
 ### Edit reserved attributes
 
-You can now control the global hostname, service, timestamp, and status main mapping that are applied before the processing pipelines. This is particularly helpful if logs are sent in JSON or from an external agent.
+You can now control the global hostname, service, timestamp, and status main mapping that are applied before the processing pipelines. This is particularly helpful if logs are sent in JSON or from an external Agent.
 
 {{< img src="logs/index/reserved_attribute.png" alt="Reserved Attribute" responsive="true" popup="true" style="width:80%;">}}
 
 To change the default values for each of the reserved attributes, go to the pipeline page and edit the `Reserved Attribute mapping`:
 
 {{< img src="logs/index/reserved_attribute_tile.png" alt="Reserved Attribute Tile" responsive="true" popup="true" style="width:80%;">}}
+
+[1]: /agent
+[2]: /getting_started/custom_metrics/
+[3]: /agent/faq/agent-commands/#start-stop-restart-the-agent
+[4]: /logs/processing/#log-date-remapper
+[5]: /logs/explore/#logstream
+[6]: /logs/explore/#search-bar
+[7]: /logs/processing/#log-status-remapper

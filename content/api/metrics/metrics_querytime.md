@@ -1,7 +1,7 @@
 ---
 title: Query time series points
 type: apicontent
-order: 14.3
+order: 15.3
 external_redirect: /api/#query-time-series-points
 ---
 
@@ -19,3 +19,4 @@ This end point allows you to query for metrics from any time period.
     Seconds since the unix epoch
 * **`query`** [*required*]:  
     The query string
+

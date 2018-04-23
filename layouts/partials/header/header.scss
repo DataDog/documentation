@@ -96,7 +96,7 @@ body > header {
       }
       .btn {
         padding: 8.5px 8px 9.5px;
-        width: 200px;
+        min-width: 200px;
         font-size:18px;
         letter-spacing: .4px;
         line-height:31px;
@@ -255,5 +255,13 @@ body > header {
         position: relative;
       }
     }
+  }
+}
+
+
+
+@media (max-width: 1199px) {
+  body.fr > header .mainnav .nav-button .btn {
+    font-size: 15px;
   }
 }

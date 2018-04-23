@@ -1,0 +1,109 @@
+upsc:
+  - description: "Status UPS\_"
+    integration: upsc
+    interval: ''
+    metric_name: upsc.status
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: status
+    short_name: status
+    unit_name: sample
+  - description: Charge UPS
+    integration: upsc
+    interval: ''
+    metric_name: upsc.battery.charge
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: percent
+    short_name: charge %
+    unit_name: sample
+  - description: 'Seuil de charge bas d''UPS '
+    integration: upsc
+    interval: ''
+    metric_name: upsc.battery.charge.low
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: percent
+    short_name: low charge %
+    unit_name: sample
+  - description: Seuil de charge chaud d'UPS
+    integration: upsc
+    interval: ''
+    metric_name: upsc.battery.charge.warning
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: percent
+    short_name: warn charge %
+    unit_name: sample
+  - description: Runtime restant pour UPS
+    integration: upsc
+    interval: ''
+    metric_name: upsc.battery.runtime
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: minutes
+    short_name: runtime min
+    unit_name: minutes
+  - description: 'Seuil de runtime bas d''UPS '
+    integration: upsc
+    interval: ''
+    metric_name: upsc.battery.runtime.low
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: minutes
+    short_name: runtime low min threshold
+    unit_name: minutes
+  - description: Tension de batterie d'UPS
+    integration: upsc
+    interval: ''
+    metric_name: upsc.battery.voltage
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: voltage
+    short_name: V
+    unit_name: sample
+  - description: Tension nominale de la batterie de l'UPS.
+    integration: upsc
+    interval: ''
+    metric_name: upsc.battery.voltage.nominal
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: voltage
+    short_name: V
+    unit_name: sample
+  - description: Tension d'entrée de l'UPS
+    integration: upsc
+    interval: ''
+    metric_name: upsc.input.voltage
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: voltage
+    short_name: V
+    unit_name: sample
+  - description: Tension nominale d'entrée de l'UPS
+    integration: upsc
+    interval: ''
+    metric_name: upsc.input.voltage.nominal
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: voltage
+    short_name: V
+    unit_name: sample
+  - description: Tension de sortie de l'UPs
+    integration: upsc
+    interval: ''
+    metric_name: upsc.output.voltage
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: voltage
+    short_name: V
+    unit_name: sample
+  - description: Charge de l'UPS
+    integration: upsc
+    interval: ''
+    metric_name: upsc.load
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: load
+    short_name: load
+    unit_name: sample

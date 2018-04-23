@@ -1,7 +1,7 @@
 ---
 title: Create user
 type: apicontent
-order: 23.1
+order: 24.1
 external_redirect: /api/#create-user
 ---
 
@@ -18,3 +18,4 @@ external_redirect: /api/#create-user
     *  **adm** (admin user),
     *  **ro** (read-only user).  
     *Note: users can be created with admin access role only with application keys belonging to administrators.*
+

@@ -1,14 +1,14 @@
 ---
 title: Slack
 type: apicontent
-order: 13.3
+order: 14.3
 external_redirect: /api/#slack
 ---
 
 ## Slack
 
 Configure your Datadog-Slack integration directly through Datadog API.  
-[Read more about Datadog-Slack integration](/integrations/slack)
+[Read more about Datadog-Slack integration][1]
 
 ##### ARGUMENTS
 
@@ -30,7 +30,7 @@ Configure your Datadog-Slack integration directly through Datadog API.
         Your channel name e.g: `#general`, `#private`
 
     * **`transfer_all_user_comments`** [*optional*, *default*=**False**]:  
-        To be notified for every comment on a graph, set it to `true`. If set to `False` use the `@slack-channel_name` syntax [for comments to be posted to slack](/monitors/notifications/#slack-integration).
+        To be notified for every comment on a graph, set it to `true`. If set to `False` use the `@slack-channel_name` syntax [for comments to be posted to slack][2].
 
     * **`account`** [*required*]:  
         Account to which the channel belongs to.
@@ -48,3 +48,6 @@ Configure your Datadog-Slack integration directly through Datadog API.
 
         - We return a *202 accepted*
         - Install check is run after returning a response
+
+[1]: /integrations/slack
+[2]: /monitors/notifications/#slack-integration

@@ -1,0 +1,118 @@
+azure_event_hub:
+  - description: Messages archivés de l'Event Hub dans la backlog pour un namespace donné
+    integration: azure_event_hub
+    interval: '60'
+    metric_name: azure.eventhub_namespaces.archive_backlog_messages
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: archv bklg msgs
+    unit_name: message
+  - description: Le débit de messages archivés de l'Event Hub pour un namespace donné
+    integration: azure_event_hub
+    interval: '60'
+    metric_name: azure.eventhub_namespaces.archive_message_throughput
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: archv msg throughput
+    unit_name: byte
+  - description: Messages archivés de l'Event Hub pour un namespace donné
+    integration: azure_event_hub
+    interval: '60'
+    metric_name: azure.eventhub_namespaces.archive_messages
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: archv msgs
+    unit_name: message
+  - description: Le débit de messages entrants dans l'Event Hub pour un namespace donné
+    integration: azure_event_hub
+    interval: '60'
+    metric_name: azure.eventhub_namespaces.incoming_bytes_per_sec
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: inc bps
+    unit_name: byte
+  - description: Le débit de messages sortants de l'Event Hub pour un namespace donné
+    integration: azure_event_hub
+    interval: '60'
+    metric_name: azure.eventhub_namespaces.outgoing_bytes_per_sec
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: out bps
+    unit_name: byte
+  - description: Total des requêtes ayant échouées pour un namespace donné
+    integration: azure_event_hub
+    interval: '60'
+    metric_name: azure.eventhub_namespaces.failed_requests
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: failed reqs
+    unit_name: request
+  - description: Total des messages entrants pour un namespace donné
+    integration: azure_event_hub
+    interval: '60'
+    metric_name: azure.eventhub_namespaces.incoming_messages
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: inc msgs
+    unit_name: message
+  - description: Total des requêtes entrantes pour un namespace donné
+    integration: azure_event_hub
+    interval: '60'
+    metric_name: azure.eventhub_namespaces.incoming_requests
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: inc reqs
+    unit_name: request
+  - description: Total des erreurs internes du serveur pour un namespace donné
+    integration: azure_event_hub
+    interval: '60'
+    metric_name: azure.eventhub_namespaces.internal_server_errors
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: internal svr errs
+    unit_name: error
+  - description: Total de toutes les autres erreurs pour un namespace donnée
+    integration: azure_event_hub
+    interval: '60'
+    metric_name: azure.eventhub_namespaces.other_errors
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: other errs
+    unit_name: error
+  - description: Total des messages sortants pour un namespace donné
+    integration: azure_event_hub
+    interval: '60'
+    metric_name: azure.eventhub_namespaces.outgoing_messages
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: out msgs
+    unit_name: message
+  - description: 'Total des requêtes se terminant par un succès pour un namespace donné '
+    integration: azure_event_hub
+    interval: '60'
+    metric_name: azure.eventhub_namespaces.successful_requests
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: success reqs
+    unit_name: request
+  - description: Total des erreurs de type serveur occupé pour un namespace donné
+    integration: azure_event_hub
+    interval: '60'
+    metric_name: azure.eventhub_namespaces.server_busy_errors
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: svr busy errs
+    unit_name: error

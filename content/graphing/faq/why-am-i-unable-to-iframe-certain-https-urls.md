@@ -5,11 +5,10 @@ kind: faq
 
 The issue most likely has to do with the headers set on the URL page, specifically `X-Frame-Options:`.
 
-To allow Datadog to iFrame that URL, run a curl on that URL to check the value of that field, and modify **DENY** or **SAMEORIGIN** to **ALLOW-FROM <uri>**, which permits the specified 'uri' to frame this page.
+To allow Datadog to iFrame that URL, run a curl on that URL to check the value of that field, and modify **DENY** or **SAMEORIGIN** to **ALLOW-FROM <uri>**, which permits the specified 'uri' to frame this page.
 
-Using `https://ozcruising.fogbugz.com/login` as an example: 
+Using `https://ozcruising.fogbugz.com/login` as an example:
 
- 
 ```
 curl -I -X GET https://ozcruising.fogbugz.com/login
 HTTP/1.1 200 OK
@@ -28,7 +27,5 @@ Set-Cookie: SERVERID=webny7; path=/
 
 This header is set on the OzCruising side, and is a security measure that is intended to tell browsers not to allow the page to be loaded in an iframe on another site.
 
-Reference: https://www.owasp.org/index.php/Clickjacking_Defense_Cheat_Sheet#Defending_with_X-Frame-Options_Response_Headers
-
- 
+Reference: https://www.owasp.org/index.php/Clickjacking_Defense_Cheat_Sheet#Defending_with_X-Frame-Options_Response_Headers
 

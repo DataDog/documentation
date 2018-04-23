@@ -11,7 +11,6 @@ doclevel: complete
 
 <!-- ## Overview
 
-
 Bring Gearman metrics to Datadog to:
 
 - Visualize Gearman performance.
@@ -20,7 +19,6 @@ Bring Gearman metrics to Datadog to:
 
 ## 概要
 
-
 Bring Gearman metrics to Datadog to:
 次の目的で、GearmanのメトリクスをDatadogと連携します:
 
@@ -28,12 +26,10 @@ Bring Gearman metrics to Datadog to:
 * キューに溜まったタスクや進行形のタスクを把握する。
 * Gearmanのパフォーマンスを他のアプルケーションと連携し状況を把握する
 
-
 Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
 * [Gearmanインテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/gearmand/conf.yaml.example)
 * [Gearmanインテグレーション checks.d](https://github.com/DataDog/integrations-core/blob/master/gearmand/check.py
-
 
 <!-- The following metrics are collected by default with the Gearman integration:
 

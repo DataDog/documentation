@@ -14,9 +14,7 @@ doclevel: basic
 * Visualize your SSH performance in real-time
 * Detect any protocol failure or network outage -->
 
-
 ## 概要
-
 
 次の目的で、SSHに関するアクティビティーをDatadogに送信します:
 

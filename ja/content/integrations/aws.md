@@ -93,7 +93,6 @@ Amazon Web Services用のインテグレーションを導入するには、AWS 
 
 注：現状、GovCloudと中国リージョンでは、AWS IAMのロール委任機能がサポートされていません。 これらのリージョンに対してインテグレーションを設定しようとしている場合は、[GovCloudと中国リージョンでの設定](#ChinaリージョンまたはGovCloudリージョンで利用する場合は)のセクションへ進んでください。
 
-
 <!--
 1.  First create a new policy in the [IAM Console](https://console.aws.amazon.com/iam/home#s=Home). Name the policy `DatadogAWSIntegrationPolicy`, or choose a name that is more relevant for you. To take advantage of every AWS integration offered by Datadog, using the following in the **Policy Document** textbox. As we add other components to the integration, these permissions may change.
  -->
@@ -413,9 +412,7 @@ For more information on [Tag policies](http://docs.aws.amazon.com/resourcegroups
 <!--
 ## Troubleshooting
 
-
 ### Do you believe you're seeing a discrepancy between your data in CloudWatch and Datadog?
-
 
 There are two important distinctions to be aware of:
 
@@ -424,7 +421,6 @@ There are two important distinctions to be aware of:
 -->
 
 ## トラブルシューティング
-
 
 ### CloudWatchとDatadogのデータ間で不一致があるのでは？という場合
 
@@ -436,7 +432,6 @@ There are two important distinctions to be aware of:
 <!--
 ### Metrics delayed?
 
-
 When using the AWS integration, we're pulling in metrics via the CloudWatch API. You may see a slight delay in metrics from AWS due to some constraints that exist for their API.
 
 To begin, the CloudWatch API only offers a metric-by-metric crawl to pull data. The CloudWatch APIs have a rate limit that varies based on the combination of authentication credentials, region, and service. Metrics are made available by AWS dependent on the account level. For example, if you are paying for "detailed metrics" within AWS, they are available more quickly. This level of service for detailed metrics also applies to granularity, with some metrics being available per minute and others per five minutes.
@@ -447,7 +442,6 @@ To obtain metrics with virtually zero delay, we recommend installing the Datadog
 written a bit about this [here][7],  especially in relation to CloudWatch.
 -->
 ### メトリクスが遅延している？という場合
-
 
 When using the AWS integration, we're pulling in metrics via the CloudWatch API. You may see a slight delay in metrics from AWS due to some constraints that exist for their API.
 
@@ -467,16 +461,13 @@ CloudWatch's api returns only metrics with datapoints, so if for instance an ELB
 
 CloudWatch's api returns only metrics with datapoints, so if for instance an ELB has no attached instances, it is expected not to see metrics related to this ELB in Datadog.
 
-
 <!--
 ### Wrong count of aws.elb.healthy_host_count?
-
 
 When the cross-zone load balancing option is enabled on an ELB, all the instances attached to this ELB are considered part of all availability zones (on CloudWatch’s side), so if you have 2 instances in 1a and 3 in ab, the metric will display 5 instances per availability zone.
 As this can be counter intuitive, we’ve added new metrics, **aws.elb.healthy_host_count_deduped** and **aws.elb.un_healthy_host_count_deduped**, that display the count of healthy and unhealthy instances per availability zone, regardless of if this cross-zone load balancing option is enabled or not.
 -->
 ### aws.elb.healthy_host_count のカウントが間違っているのでは？という場合
-
 
 When the cross-zone load balancing option is enabled on an ELB, all the instances attached to this ELB are considered part of all availability zones (on CloudWatch’s side), so if you have 2 instances in 1a and 3 in ab, the metric will display 5 instances per availability zone.
 As this can be counter intuitive, we’ve added new metrics, **aws.elb.healthy_host_count_deduped** and **aws.elb.un_healthy_host_count_deduped**, that display the count of healthy and unhealthy instances per availability zone, regardless of if this cross-zone load balancing option is enabled or not.
@@ -484,14 +475,11 @@ As this can be counter intuitive, we’ve added new metrics, **aws.elb.healthy_h
 <!--
 ### Duplicated hosts when installing the agent?
 
-
 When installing the agent on an aws host, you might see duplicated hosts on the infra page for a few hours if you manually set the hostname in the agent's configuration. This second host will disapear a few hours later, and won't affect your billing.
 -->
 ### Datadog Agentのインストール時、ホストが重複して登録されているのでは？という場合
 
-
 When installing the agent on an aws host, you might see duplicated hosts on the infra page for a few hours if you manually set the hostname in the agent's configuration. This second host will disapear a few hours later, and won't affect your billing.
-
 
    [1]: https://console.aws.amazon.com/iam/home#s=Home
    [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services

@@ -21,7 +21,6 @@ npm install --global --production gulp-cli && npm install
 
 `gulp watch`
 
-
 ## Makefile
 
 To use the Makefile you will need to create a Makefile.config. See the instructions at the top of the Makefile.config.example.
@@ -56,7 +55,6 @@ To run the site without Docker and perform administrative tasks (compile metrics
 * Install Python3: https://www.python.org/downloads/ or https://github.com/pyenv/pyenv
 
 Once the dependencies are installed you can run `make start` to start the site.
-
 
 ### Running tests
 coming soon
@@ -121,7 +119,6 @@ Get metrics from Docker in real time to:
 * Correlate the performance of containers with the applications running inside.
 
 There are three ways to setup the Docker integration: install the agent on the host, on a single priviledged container, and on each individual container.
-
 
 ### Installation
 **Required with some exceptions**
@@ -188,7 +185,6 @@ Create a markdown file under content/guides. Add the following front matter at t
     ---
 
 Each guide has a listorder. Change the list order number of this doc and any other docs to make sure stuff appears in the right order. There is no need to update any index, menu, or sidebars. Those are automatically generated.
-
 
 # Github personal token
 

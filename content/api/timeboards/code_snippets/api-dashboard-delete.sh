@@ -1,5 +1,5 @@
-api_key=9775a026f1ca7d1c6c5af9d94d9595a4
-app_key=87ce4a24b5553d2e482ea8a8500e71b8ad4554ff
+api_key=<YOUR_API_KEY>
+app_key=<YOUR_APP_KEY>
 dash_id=2471
 
 # Create a dashboard to delete. Use jq (http://stedolan.github.io/jq/download/) to get the dash id.
@@ -23,7 +23,7 @@ dash_id=$(curl  -X POST -H "Content-type: application/json" \
           "default": "host:my-host"
       }]
   }' \
-"https://app.datadoghq.com/api/v1/dash?api_key=${api_key}&application_key=${app_key}" | jq '.dash.id')
+"https://api.datadoghq.com/api/v1/dash?api_key=${api_key}&application_key=${app_key}" | jq '.dash.id')
 
-curl -X DELETE "https://app.datadoghq.com/api/v1/dash/${dash_id}?api_key=${api_key}&application_key=${app_key}"
+curl -X DELETE "https://api.datadoghq.com/api/v1/dash/${dash_id}?api_key=${api_key}&application_key=${app_key}"
 

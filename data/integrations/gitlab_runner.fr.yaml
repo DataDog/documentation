@@ -1,0 +1,390 @@
+gitlab_runner:
+  - description: Histogramme du temps de création de la machine Docker
+    integration: gitlab_runner
+    interval: ''
+    metric_name: ci_docker_machines_provider_machine_creation_duration_seconds_bucket
+    metric_type: histogram
+    orientation: '0'
+    per_unit_name: second
+    short_name: docker machine creation time
+    unit_name: request
+  - description: Somme du temps de création de la machine Docker
+    integration: gitlab_runner
+    interval: ''
+    metric_name: ci_docker_machines_provider_machine_creation_duration_seconds_sum
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: sum docker machine creation time
+    unit_name: request
+  - description: Count of Docker machine creation time
+    integration: gitlab_runner
+    interval: ''
+    metric_name: ci_docker_machines_provider_machine_creation_duration_seconds_count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: count docker machine creation time
+    unit_name: request
+  - description: The current number of machines per state in this provider
+    integration: gitlab_runner
+    interval: ''
+    metric_name: ci_docker_machines_provider_machine_states
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: total docker machines per state
+    unit_name: request
+  - description: The number of catched errors
+    integration: gitlab_runner
+    interval: ''
+    metric_name: ci_runner_errors
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: second
+    short_name: errors
+    unit_name: request
+  - description: A metric with a constant '1' value labeled by different build stats fields
+    integration: gitlab_runner
+    interval: ''
+    metric_name: ci_runner_version_info
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: version info
+    unit_name: request
+  - description: Histogram of SSH Docker machine creation time
+    integration: gitlab_runner
+    interval: ''
+    metric_name: ci_ssh_docker_machines_provider_machine_creation_duration_seconds_bucket
+    metric_type: histogram
+    orientation: '0'
+    per_unit_name: second
+    short_name: ssh docker machine creation time
+    unit_name: request
+  - description: Sum of SSH Docker machine creation time
+    integration: gitlab_runner
+    interval: ''
+    metric_name: ci_ssh_docker_machines_provider_machine_creation_duration_seconds_sum
+    metric_type: histogram
+    orientation: '0'
+    per_unit_name: second
+    short_name: sum ssh docker machine creation time
+    unit_name: request
+  - description: Count of SSH Docker machine creation time
+    integration: gitlab_runner
+    interval: ''
+    metric_name: ci_ssh_docker_machines_provider_machine_creation_duration_seconds_count
+    metric_type: histogram
+    orientation: '0'
+    per_unit_name: second
+    short_name: count ssh docker machine creation time
+    unit_name: request
+  - description: The current number of machines per state in this provider
+    integration: gitlab_runner
+    interval: ''
+    metric_name: ci_ssh_docker_machines_provider_machine_states
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: total ssh docker machines per state
+    unit_name: request
+  - description: Un résumé des durées d'invocation du GC
+    integration: gitlab_runner
+    interval: ''
+    metric_name: go_gc_duration_seconds
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: gc duration
+    unit_name: request
+  - description: Somme des durées d'invocation du GC.
+    integration: gitlab_runner
+    interval: ''
+    metric_name: go_gc_duration_seconds_sum
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: sum gc duration
+    unit_name: request
+  - description: Comptes des durées d'invocation du GC.
+    integration: gitlab_runner
+    interval: ''
+    metric_name: go_gc_duration_seconds_count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: count gc duration
+    unit_name: request
+  - description: Nombre de goroutines existantes
+    integration: gitlab_runner
+    interval: ''
+    metric_name: go_goroutines
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: goroutines
+    unit_name: request
+  - description: Nombre de bytes alloués et toujours utilisés
+    integration: gitlab_runner
+    interval: ''
+    metric_name: go_memstats_alloc_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: bytes allocated in use
+    unit_name: byte
+  - description: Nombre total de bytes alloués
+    integration: gitlab_runner
+    interval: ''
+    metric_name: go_memstats_alloc_bytes_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: ''
+    short_name: bytes allocated
+    unit_name: byte
+  - description: Nombre de bytes utilisés par le profiling bucket hash table
+    integration: gitlab_runner
+    interval: ''
+    metric_name: go_memstats_buck_hash_sys_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: bytes profiling bucket
+    unit_name: byte
+  - description: Total number of frees
+    integration: gitlab_runner
+    interval: ''
+    metric_name: go_memstats_frees_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: ''
+    short_name: number of frees
+    unit_name: request
+  - description: Number of bytes used for garbage collection system metadata
+    integration: gitlab_runner
+    interval: ''
+    metric_name: go_memstats_gc_sys_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: bytes garbage collection
+    unit_name: byte
+  - description: Number of heap bytes allocated and still in use
+    integration: gitlab_runner
+    interval: ''
+    metric_name: go_memstats_heap_alloc_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: heap bytes allocated and in use
+    unit_name: byte
+  - description: Number of heap bytes waiting to be used
+    integration: gitlab_runner
+    interval: ''
+    metric_name: go_memstats_heap_idle_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: heap bytes unused
+    unit_name: byte
+  - description: Number of heap bytes that are in use
+    integration: gitlab_runner
+    interval: ''
+    metric_name: go_memstats_heap_inuse_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: heap bytes in use
+    unit_name: byte
+  - description: Nombre d'objets alloués
+    integration: gitlab_runner
+    interval: ''
+    metric_name: go_memstats_heap_objects
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: allocated objects
+    unit_name: request
+  - description: Total number of heap bytes released to OS
+    integration: gitlab_runner
+    interval: ''
+    metric_name: go_memstats_heap_released_bytes_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: ''
+    short_name: heap bytes released
+    unit_name: byte
+  - description: 'Nombre d''octets pour la heap obtenus par le système. '
+    integration: gitlab_runner
+    interval: ''
+    metric_name: go_memstats_heap_sys_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: heap bytes obtained
+    unit_name: byte
+  - description: Number of seconds since 1970 of last garbage collection
+    integration: gitlab_runner
+    interval: ''
+    metric_name: go_memstats_last_gc_time_seconds
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: epoch since last gc
+    unit_name: request
+  - description: Total number of pointer lookups
+    integration: gitlab_runner
+    interval: ''
+    metric_name: go_memstats_lookups_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: ''
+    short_name: pointer lookups
+    unit_name: request
+  - description: Nombre total de mallocs
+    integration: gitlab_runner
+    interval: ''
+    metric_name: go_memstats_mallocs_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: ''
+    short_name: number of mallocs
+    unit_name: request
+  - description: Number of bytes in use by mcache structures
+    integration: gitlab_runner
+    interval: ''
+    metric_name: go_memstats_mcache_inuse_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: mcache bytes used
+    unit_name: byte
+  - description: Number of bytes used for mcache structures obtained from system
+    integration: gitlab_runner
+    interval: ''
+    metric_name: go_memstats_mcache_sys_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: mcache bytes from sys
+    unit_name: byte
+  - description: Number of bytes in use by mspan structures
+    integration: gitlab_runner
+    interval: ''
+    metric_name: go_memstats_mspan_inuse_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: mspan bytes used
+    unit_name: byte
+  - description: Number of bytes used for mspan structures obtained from system
+    integration: gitlab_runner
+    interval: ''
+    metric_name: go_memstats_mspan_sys_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: mspan bytes from sys
+    unit_name: byte
+  - description: Number of heap bytes when next garbage collection will take place
+    integration: gitlab_runner
+    interval: ''
+    metric_name: go_memstats_next_gc_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: heap bytes next gc
+    unit_name: byte
+  - description: Number of bytes used for other system allocations
+    integration: gitlab_runner
+    interval: ''
+    metric_name: go_memstats_other_sys_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: other bytes used
+    unit_name: byte
+  - description: Nombre d'octets utilisés par le stack allocator
+    integration: gitlab_runner
+    interval: ''
+    metric_name: go_memstats_stack_inuse_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: bytes stack allocator
+    unit_name: byte
+  - description: Number of bytes obtained from system for stack allocator
+    integration: gitlab_runner
+    interval: ''
+    metric_name: go_memstats_stack_inuse_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: bytes stack allocator from sys
+    unit_name: byte
+  - description: >-
+      Nombre d'octets obtenus par le système. Somme de toutes les allocations
+      système.
+    integration: gitlab_runner
+    interval: ''
+    metric_name: go_memstats_sys_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: sum system allocations
+    unit_name: byte
+  - description: Total user and system CPU time spent in seconds
+    integration: gitlab_runner
+    interval: ''
+    metric_name: process_cpu_seconds_total
+    metric_type: counter
+    orientation: '0'
+    per_unit_name: second
+    short_name: user and system cpu time
+    unit_name: request
+  - description: Maximum number of open file descriptors
+    integration: gitlab_runner
+    interval: ''
+    metric_name: process_max_fds
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: max fds
+    unit_name: request
+  - description: Nombre de descripteurs de fichiers ouverts
+    integration: gitlab_runner
+    interval: ''
+    metric_name: process_open_fds
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: open fds
+    unit_name: request
+  - description: Taille de la mémoire du résident en octets.
+    integration: gitlab_runner
+    interval: ''
+    metric_name: process_resident_memory_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: rss bytes
+    unit_name: byte
+  - description: Start time of the process since unix epoch in seconds
+    integration: gitlab_runner
+    interval: ''
+    metric_name: process_start_time_seconds
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: epoch time since start
+    unit_name: request
+  - description: Taille de la mémoire virtuelle en octets.
+    integration: gitlab_runner
+    interval: ''
+    metric_name: process_virtual_memory_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: virtual memory bytes
+    unit_name: byte

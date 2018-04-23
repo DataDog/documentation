@@ -1,0 +1,149 @@
+google_cloud_big_query:
+  - description: Requêtes en cours.
+    integration: google_cloud_big_query
+    interval: ''
+    metric_name: gcp.bigquery.query.count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: query count
+    unit_name: query
+  - description: Moyenne des temps d'exécution des requêtes.
+    integration: google_cloud_big_query
+    interval: ''
+    metric_name: gcp.bigquery.query.execution_times.avg
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: query execution times avg
+    unit_name: second
+  - description: Estimation du temps d'exécution des requêtes.
+    integration: google_cloud_big_query
+    interval: ''
+    metric_name: gcp.bigquery.query.execution_times.samplecount
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: query execution times samplecount
+    unit_name: second
+  - description: Maximum des temps d'exécution des requêtes.
+    integration: google_cloud_big_query
+    interval: ''
+    metric_name: gcp.bigquery.query.execution_times.max
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: query execution times max
+    unit_name: second
+  - description: Minimum of query execution times.
+    integration: google_cloud_big_query
+    interval: ''
+    metric_name: gcp.bigquery.query.execution_times.min
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: query execution times min
+    unit_name: second
+  - description: Sum of Squared Deviation for query execution times.
+    integration: google_cloud_big_query
+    interval: ''
+    metric_name: gcp.bigquery.query.execution_times.sumsqdev
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: query execution times sumsqdev
+    unit_name: second
+  - description: 'Number of scanned bytes. Note: this metric is available with a 12h delay'
+    integration: google_cloud_big_query
+    interval: ''
+    metric_name: gcp.bigquery.query.scanned_bytes
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: minute
+    short_name: scanned bytes
+    unit_name: byte
+  - description: >-
+      Number of scanned bytes billed. Note: this metric is available with a 12h
+      delay
+    integration: google_cloud_big_query
+    interval: ''
+    metric_name: gcp.bigquery.query.scanned_bytes_billed
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: minute
+    short_name: scanned bytes billed
+    unit_name: byte
+  - description: Number of BigQuery slots currently allocated for the project.
+    integration: google_cloud_big_query
+    interval: ''
+    metric_name: gcp.bigquery.slots.allocated_for_project
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: slots used by project
+    unit_name: resource
+  - description: Number of BigQuery slots currently allocated for the reservation.
+    integration: google_cloud_big_query
+    interval: ''
+    metric_name: gcp.bigquery.slots.allocated_for_reservation
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: slots used by reservation
+    unit_name: resource
+  - description: Total number of BigQuery slots available for the project.
+    integration: google_cloud_big_query
+    interval: ''
+    metric_name: gcp.bigquery.slots.total_available
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: total slots
+    unit_name: resource
+  - description: 'Number of bytes stored. Note: this metric is available with a 12h delay'
+    integration: google_cloud_big_query
+    interval: ''
+    metric_name: gcp.bigquery.storage.stored_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: stored bytes
+    unit_name: byte
+  - description: 'Number of tables. Note: this metric is available with a 12h delay'
+    integration: google_cloud_big_query
+    interval: ''
+    metric_name: gcp.bigquery.storage.table_count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: table count
+    unit_name: table
+  - description: 'Number of uploaded bytes. Note: this metric is available with a 12h delay'
+    integration: google_cloud_big_query
+    interval: ''
+    metric_name: gcp.bigquery.storage.uploaded_bytes
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: minute
+    short_name: uploaded bytes
+    unit_name: byte
+  - description: >-
+      Number of uploaded bytes billed. Note: this metric is available with a 12h
+      delay
+    integration: google_cloud_big_query
+    interval: ''
+    metric_name: gcp.bigquery.storage.uploaded_bytes_billed
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: minute
+    short_name: uploaded bytes billed
+    unit_name: byte
+  - description: 'Number of uploaded rows. Note: this metric is available with a 12h delay'
+    integration: google_cloud_big_query
+    interval: ''
+    metric_name: gcp.bigquery.storage.uploaded_row_count
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: minute
+    short_name: uploaded rows
+    unit_name: row

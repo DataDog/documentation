@@ -1,7 +1,7 @@
 ---
 title: Update user
 type: apicontent
-order: 23.4
+order: 24.4
 external_redirect: /api/#update-user
 ---
 
@@ -9,7 +9,7 @@ external_redirect: /api/#update-user
 Can only be used with application keys belonging to administrators.
 
 ##### ARGUMENTS
-* **`handle`** [*required*]:  
+* **`id`** [*required*]:  
     The handle of the user.
 * **`name`** [*optional*, *default*=**None**]:  
     The new name of the user.
@@ -22,3 +22,4 @@ Can only be used with application keys belonging to administrators.
     *  **st** (standard user), 
     *  **adm** (admin user),
     *  **ro** (read-only user).  
+

@@ -1,0 +1,86 @@
+kong:
+  - description: Le nombre total de tables dans la base de données.
+    integration: kong
+    interval: ''
+    metric_name: kong.table.count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: table count
+    unit_name: table
+  - description: Nombre d'éléments dans chaque table de la base de données.
+    integration: kong
+    interval: ''
+    metric_name: kong.table.items
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: items count
+    unit_name: row
+  - description: Total number of accepted client connections.
+    integration: kong
+    interval: ''
+    metric_name: kong.connections_accepted
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: srvr conn accepted
+    unit_name: connection
+  - description: Current number of active client connections including Waiting connections.
+    integration: kong
+    interval: ''
+    metric_name: kong.connections_active
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: srvr conn active
+    unit_name: connection
+  - description: >-
+      Total number of handled connections. (Same as accepts unless resource
+      limits were reached).
+    integration: kong
+    interval: ''
+    metric_name: kong.connections_handled
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: srvr conn handled
+    unit_name: connection
+  - description: Current number of connections where Kong is reading the request header.
+    integration: kong
+    interval: ''
+    metric_name: kong.connections_reading
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: srvr conn reading
+    unit_name: connection
+  - description: Current number of idle client connections waiting for a request.
+    integration: kong
+    interval: ''
+    metric_name: kong.connections_waiting
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: srvr conn waiting
+    unit_name: connection
+  - description: >-
+      Current number of connections where nginx is writing the response back to
+      the client.
+    integration: kong
+    interval: ''
+    metric_name: kong.connections_writing
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: srvr conn writing
+    unit_name: connection
+  - description: Le nombre de requêtes clients.
+    integration: kong
+    interval: ''
+    metric_name: kong.total_requests
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: srvr requests
+    unit_name: request

@@ -1,0 +1,118 @@
+google_cloud_firebase:
+  - description: Pourcentage d'utilisation IO.
+    integration: google_cloud_firebase
+    interval: ''
+    metric_name: gcp.firebasedatabase.io.utilization
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: i/o utilization
+    unit_name: percent
+  - description: Nombre connections exceptionnelles
+    integration: google_cloud_firebase
+    interval: ''
+    metric_name: gcp.firebasedatabase.network.active_connections
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: connections
+    unit_name: connection
+  - description: Number of operations
+    integration: google_cloud_firebase
+    interval: ''
+    metric_name: gcp.firebasedatabase.network.operations_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: operations
+    unit_name: operation
+  - description: Outgoing bandwidth usage for Firebase database
+    integration: google_cloud_firebase
+    interval: ''
+    metric_name: gcp.firebasedatabase.network.sent_bytes_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: bytes sent
+    unit_name: byte
+  - description: Total size of the Firebase database storage.
+    integration: google_cloud_firebase
+    interval: ''
+    metric_name: gcp.firebasedatabase.storage.total_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: bytes stored
+    unit_name: byte
+  - description: Outgoing bandwidth usage for Firebase Hosting
+    integration: google_cloud_firebase
+    interval: ''
+    metric_name: gcp.firebasehosting.network.sent_bytes_count
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: bytes sent
+    unit_name: byte
+  - description: Total size of the Firebase Hosting storage.
+    integration: google_cloud_firebase
+    interval: ''
+    metric_name: gcp.firebasehosting.storage.total_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: bytes stored
+    unit_name: byte
+  - description: Indicates if the Firebase database has been disabled for network overages
+    integration: google_cloud_firebase
+    interval: ''
+    metric_name: gcp.firebasedatabase.network.disabled_for_overages
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: dsbld for ntwrk ovrgs
+    unit_name: ''
+  - description: The total outgoing bytes sent aggregated and reset monthly
+    integration: google_cloud_firebase
+    interval: ''
+    metric_name: gcp.firebasedatabase.network.monthly_sent
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: monthly sent
+    unit_name: byte
+  - description: The monthly network limit for the Firebase database
+    integration: google_cloud_firebase
+    interval: ''
+    metric_name: gcp.firebasedatabase.network.monthly_sent_limit
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: monthly limit
+    unit_name: byte
+  - description: Indicates if the Firebase database has been disabled for overages
+    integration: google_cloud_firebase
+    interval: ''
+    metric_name: gcp.firebasedatabase.status.disabled_for_overages
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: dsbld for ovrgs
+    unit_name: ''
+  - description: Indicates if the Firebase database has been disabled for storage overages
+    integration: google_cloud_firebase
+    interval: ''
+    metric_name: gcp.firebasedatabase.storage.disabled_for_overages
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: dsbld for strge ovrgs
+    unit_name: ''
+  - description: The storage limit for the Firebase database
+    integration: google_cloud_firebase
+    interval: ''
+    metric_name: gcp.firebasedatabase.storage.limit
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: byte limit
+    unit_name: byte

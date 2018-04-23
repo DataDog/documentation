@@ -3,13 +3,13 @@ title: Pipelines
 kind: documentation
 description: "Parse & Enrich your logs to create valuable facets & metrics in the Logs Explorer."
 further_reading:
-- link: "/logs/parsing"
+- link: "logs/parsing"
   tag: "Documentation"
   text: Learn more about parsing
-- link: "/logs/faq/how-to-investigate-a-log-parsing-issue"
+- link: "logs/faq/how-to-investigate-a-log-parsing-issue"
   tag: "FAQ"
   text: How to investigate a log parsing issue?
-- link: "/logs/faq/log-parsing-best-practice"
+- link: "logs/faq/log-parsing-best-practice"
   tag: "FAQ"
   text: Log Parsing - Best Practice
 ---
@@ -27,7 +27,7 @@ To access the processing panel use the upper left menu:
 
 Datadog automatically parses JSON-formatted logs. When your logs are not JSON-formatted, Datadog enables you to add value to your raw logs by sending them through a processing pipeline.
 
-With pipelines, you parse and enrich your logs by chaining them sequentially through [processors](#processors). This lets you extract meaningful information or attributes from semi-structured text to reuse them as [facets](/logs/explore/#facets).
+With pipelines, you parse and enrich your logs by chaining them sequentially through [processors](#processors). This lets you extract meaningful information or attributes from semi-structured text to reuse them as [facets][1].
 
 Each log that comes through the pipelines is tested against every pipeline filter. If it matches one then all the [processors](#processors) are applied sequentially before moving to the next pipeline.
 
@@ -45,13 +45,15 @@ With one single pipeline:
 
 Pipelines take logs from a wide variety of formats and translate them into a common format in Datadog.
 
+For instance, a first pipeline can be defined to extract application log prefix and then each team is free to define their own pipeline to process the rest of the log message.
+
 ### Pipeline filters
 
 Filters let you limit what kinds of logs a pipeline applies to.
 
-The filter syntax is the same as the [search bar](/logs/explore/#search-bar).
+The filter syntax is the same as the [search bar][2].
 
-**Be aware that the pipeline filtering is applied before any pipeline processing, hence you cannot filter on an attribute that does not exist**
+**Be aware that the pipeline filtering is applied before any of the pipeline's processors, hence you cannot filter on an attribute that is extracted in the pipeline itself** 
 
 The logstream shows which logs your pipeline applies to:
 
@@ -75,7 +77,7 @@ Create custom grok rules to parse the full message or a specific attribute of yo
 
 {{< img src="logs/processing/parser.png" alt="Parser" responsive="true" popup="true">}}
 
-Read more about this in the [parsing section](/logs/parsing)
+Read more about this in the [parsing section][3]
 
 ### Log Date Remapper
 
@@ -93,7 +95,7 @@ If your logs put their dates in an attribute not in this list, use the log date 
 {{< img src="logs/processing/log_date_remapper.png" alt="Log date Remapper" responsive="true" popup="true">}}
 
 If your logs don't contain any of the default attributes and you haven't defined your own date attribute, Datadog timestamps the logs with the date it received them.  
-If the log's official timestamp is from a custom attribute, use a [date remapper processor](/logs/processing/#log-date-remapper) to override the log's default timestamp.
+If the log's official timestamp is from a custom attribute, use a [date remapper processor][4] to override the log's default timestamp.
 
 ### Log Status Remapper
 
@@ -111,7 +113,7 @@ Into this log:
 
 However, beware that each incoming status value is mapped as follows:
 
-* Integers from 0 to 7 map to the [Syslog severity standards](https://en.wikipedia.org/wiki/Syslog#Severity_level)
+* Integers from 0 to 7 map to the [Syslog severity standards][5]
 * Strings beginning with **emerg** or **f** (case unsensitive) map to **emerg (0)**
 * Strings beginning with **a** (case unsensitive) map to **alert (1)**
 * Strings beginning with **c** (case unsensitive) map to **critical (2)**
@@ -155,6 +157,12 @@ These settings:
 Give the following results:
 {{< img src="logs/processing/useragent_processor.png" alt="Useragent processor" responsive="true" popup="true">}}
 
+### Log Message Remapper
+
+The message is a key attribute in Datadog. It is displayed in the message column of the log explorer and you can do full string search on it. Use this processor to define some attributes as the official log message, just enter the attribute path in the processor tile as follows:
+
+{{< img src="logs/processing/message_processor.png" alt="Message processor" responsive="true" popup="true">}}
+
 ## Technical limits
 
 To make sure the Log Management solution functions in an optimal way we set the following technical limits and rules to your log events as well as to some product features. These have been designed so you may never reach them.
@@ -177,7 +185,12 @@ Log events which do not comply with these limits might be transformed or truncat
 
 Contact support if you reach one of these limits as Datadog might be able to provide you more.
 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /logs/explore/#facets
+[2]: /logs/explore/#search-bar
+[3]: /logs/parsing
+[4]: /logs/processing/#log-date-remapper
+[5]: https://en.wikipedia.org/wiki/Syslog#Severity_level

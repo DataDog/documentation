@@ -19,7 +19,6 @@ Capture metrics from the files in given directories:
 
 ## 概要
 
-
 特定ディレクトリ内のファイルに関するメトリクスをDatadogへ送信します:
 
 - ディレクトリ内のファイル数
@@ -31,7 +30,6 @@ Datadog Agentの設定ファイルサンプルとメトリクス取得プログ�
 
 * [Directoryインテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/directory/conf.yaml.example)
 * [Directoryインテグレーション check script](https://github.com/DataDog//integrations-core/blob/master/directory/check.py)
-
 
 <!-- ## Configuration
  *To capture Directory metrics you need to install the Datadog Agent.*
@@ -79,7 +77,6 @@ Datadog Agentの設定ファイルサンプルとメトリクス取得プログ�
             - Collected 8 metrics & 0 events -->
 
 ## 設定
-
 
  *ディレクトリ関連のメトリクスを取得するには、Datadog Agentのインストールが必要です。*
 

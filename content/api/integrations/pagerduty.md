@@ -1,19 +1,19 @@
 ---
 title: PagerDuty
 type: apicontent
-order: 13.2
+order: 14.2
 external_redirect: /api/#pagerduty
 ---
 
 ## PagerDuty
 
 Configure your Datadog-PagerDuty integration directly through Datadog API.  
-[Read more about Datadog-PagerDuty integration](/integrations/pagerduty)
+[Read more about Datadog-PagerDuty integration][1]
 
 ##### ARGUMENTS
 
 * **`services`** [*required*]:    
-    Array of PagerDuty service objects. [Learn how to configure you Datadog service with PagerDuty documentation](https://www.pagerduty.com/docs/guides/datadog-integration-guide/). A PagerDuty service object is composed by:  
+    Array of PagerDuty service objects. [Learn how to configure you Datadog service with PagerDuty documentation][2]. A PagerDuty service object is composed by:  
     
     * **`service_name`** [*required*]:  
         Your Service name in PagerDuty.
@@ -44,3 +44,6 @@ Configure your Datadog-PagerDuty integration directly through Datadog API.
 
         - We return a *202 accepted*
         - Install check is run after returning a response
+
+[1]: /integrations/pagerduty
+[2]: https://www.pagerduty.com/docs/guides/datadog-integration-guide/

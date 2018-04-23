@@ -1,0 +1,320 @@
+amazon_ebs:
+  - description: >-
+      Balance available in the burst bucket. This metric contains values for all
+      volume types including io1.
+    integration: amazon_ebs
+    interval: '300'
+    metric_name: aws.ebs.burst_balance
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vol burst balance
+    unit_name: percent
+  - description: >-
+      Balance available in the burst bucket. Better granularity but only for io1
+      volumes.
+    integration: amazon_ebs
+    interval: '60'
+    metric_name: aws.ebs.burst_balance.io1
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vol burst balance io1
+    unit_name: percent
+  - description: >-
+      The total amount of read and write operations (normalized to 256K capacity
+      units). Only for io1 volume types.
+    integration: amazon_ebs
+    interval: '60'
+    metric_name: aws.ebs.volume_consumed_read_write_ops
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vol consumed I/O ops
+    unit_name: ''
+  - description: >-
+      The total number of seconds in a specified period of time when no read or
+      write operations were submitted. This metric contains values for all
+      volume types including io1.
+    integration: amazon_ebs
+    interval: '300'
+    metric_name: aws.ebs.volume_idle_time
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vol idle time
+    unit_name: second
+  - description: >-
+      The total number of seconds in a specified period of time when no read or
+      write operations were submitted. Better granularity but only for io1
+      volumes.
+    integration: amazon_ebs
+    interval: '60'
+    metric_name: aws.ebs.volume_idle_time.io1
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vol idle time io1
+    unit_name: second
+  - description: >-
+      The number of read and write operation requests waiting to be completed.
+      This metric contains values for all volume types including io1.
+    integration: amazon_ebs
+    interval: '300'
+    metric_name: aws.ebs.volume_queue_length
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vol queue len
+    unit_name: ''
+  - description: >-
+      The number of read and write operation requests waiting to be completed.
+      Better granularity but only for io1 volumes.
+    integration: amazon_ebs
+    interval: '60'
+    metric_name: aws.ebs.volume_queue_length.io1
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vol queue len io1
+    unit_name: ''
+  - description: >-
+      Average size of each read operation. This metric contains values for all
+      volume types including io1.
+    integration: amazon_ebs
+    interval: '300'
+    metric_name: aws.ebs.volume_read_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vol read B
+    unit_name: byte
+  - description: >-
+      Average size of each read operation. Better granularity but only for io1
+      volumes.
+    integration: amazon_ebs
+    interval: '60'
+    metric_name: aws.ebs.volume_read_bytes.io1
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vol read B io1
+    unit_name: byte
+  - description: >-
+      Total number of bytes read by read operations. This metric contains values
+      for all volume types including io1.
+    integration: amazon_ebs
+    interval: '300'
+    metric_name: aws.ebs.volume_read_bytes.sum
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vol tot read B
+    unit_name: byte
+  - description: >-
+      Total number of bytes read by read operations. Better granularity but only
+      for io1 volumes.
+    integration: amazon_ebs
+    interval: '60'
+    metric_name: aws.ebs.volume_read_bytes.sum.io1
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vol tot read B io1
+    unit_name: byte
+  - description: >-
+      The total number of read operations. This metric contains values for all
+      volume types including io1.
+    integration: amazon_ebs
+    interval: '300'
+    metric_name: aws.ebs.volume_read_ops
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vol read ops
+    unit_name: operation
+  - description: >-
+      The total number of read operations. Better granularity but only for io1
+      volumes.
+    integration: amazon_ebs
+    interval: '60'
+    metric_name: aws.ebs.volume_read_ops.io1
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vol read ops io1
+    unit_name: operation
+  - description: >-
+      The percentage of I/O operations per second (IOPS) delivered of the total
+      IOPS provisioned for an Amazon EBS volume. Only for io1 volume types.
+    integration: amazon_ebs
+    interval: '60'
+    metric_name: aws.ebs.volume_throughput_percentage
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: vol thrghput %
+    unit_name: percent
+  - description: >-
+      The Average time spent by read operations. This metric contains values for
+      all volume types including io1.
+    integration: amazon_ebs
+    interval: '300'
+    metric_name: aws.ebs.volume_total_read_time
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vol avg read time
+    unit_name: second
+  - description: >-
+      The Average time spent by read operations. Better granularity but only for
+      io1 volumes.
+    integration: amazon_ebs
+    interval: '60'
+    metric_name: aws.ebs.volume_total_read_time.io1
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vol avg read time io1
+    unit_name: second
+  - description: >-
+      The total number of seconds spent for read operations. This metric
+      contains values for all volume types including io1.
+    integration: amazon_ebs
+    interval: '300'
+    metric_name: aws.ebs.volume_total_read_time.sum
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vol total read time
+    unit_name: second
+  - description: >-
+      The total number of seconds spent for read operations. Better granularity
+      but only for io1 volumes.
+    integration: amazon_ebs
+    interval: '60'
+    metric_name: aws.ebs.volume_total_read_time.sum.io1
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vol total read time io1
+    unit_name: second
+  - description: >-
+      The average time spent by write operations. This metric contains values
+      for all volume types including io1.
+    integration: amazon_ebs
+    interval: '300'
+    metric_name: aws.ebs.volume_total_write_time
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vol avg write time
+    unit_name: second
+  - description: >-
+      The average time spent by write operations. Better granularity but only
+      for io1 volumes.
+    integration: amazon_ebs
+    interval: '60'
+    metric_name: aws.ebs.volume_total_write_time.io1
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vol avg write time io1
+    unit_name: second
+  - description: >-
+      The total number of seconds spent for write operations. This metric
+      contains values for all volume types including io1.
+    integration: amazon_ebs
+    interval: '300'
+    metric_name: aws.ebs.volume_total_write_time.sum
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vol total write time
+    unit_name: second
+  - description: >-
+      The total number of seconds spent for write operations. Better granularity
+      but only for io1 volumes.
+    integration: amazon_ebs
+    interval: '60'
+    metric_name: aws.ebs.volume_total_write_time.sum.io1
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vol total write time io1
+    unit_name: second
+  - description: >-
+      Average size of each write operation. This metric contains values for all
+      volume types including io1.
+    integration: amazon_ebs
+    interval: '300'
+    metric_name: aws.ebs.volume_write_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vol write B
+    unit_name: byte
+  - description: >-
+      Average size of each write operation. Better granularity but only for io1
+      volumes.
+    integration: amazon_ebs
+    interval: '60'
+    metric_name: aws.ebs.volume_write_bytes.io1
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vol write B io1
+    unit_name: byte
+  - description: >-
+      Total amount of bytes written by write operations. This metric contains
+      values for all volume types including io1.
+    integration: amazon_ebs
+    interval: '300'
+    metric_name: aws.ebs.volume_write_bytes.sum
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vol tot write B
+    unit_name: byte
+  - description: >-
+      Total amount of bytes written by write operations. Better granularity but
+      only for io1 volumes.
+    integration: amazon_ebs
+    interval: '60'
+    metric_name: aws.ebs.volume_write_bytes.sum.io1
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vol tot write B io1
+    unit_name: byte
+  - description: >-
+      The total number of write operations. This metric contains values for all
+      volume types including io1.
+    integration: amazon_ebs
+    interval: '300'
+    metric_name: aws.ebs.volume_write_ops
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vol write ops
+    unit_name: operation
+  - description: >-
+      The total number of write operations. Better granularity but only for io1
+      volumes.
+    integration: amazon_ebs
+    interval: '60'
+    metric_name: aws.ebs.volume_write_ops.io1
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: vol write ops io1
+    unit_name: operation
+  - description: Time since the most recent complete snapshot was created
+    integration: amazon_ebs
+    interval: '60'
+    metric_name: aws.ebs.snapshot_age
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: snapshot age
+    unit_name: second

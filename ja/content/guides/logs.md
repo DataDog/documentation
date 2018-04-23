@@ -23,7 +23,6 @@ logs, so the data within can ｂe graphed in real-time, all the time. -->
 残念ながら多くの場合この重要性には気が付かずログファイルは放置されています。
 Datadog　Agent は、ログからメトリクスとイベントを解析することによって、その中のデータをリアルタイムでグラフ化するのに役立ちます。
 
-
 <!-- <h2 id="metrics">Parsing Metrics</h2>
 
 The Datadog Agent can read metrics directly from your log files:
@@ -38,7 +37,6 @@ Datadog Agent は、ログファイルから直接メトリクスを、抽出す
 
 - Datadog の公式ログフォーマットの場合は、追加のプログラミングは不要です。
 - Datadog の公式ログフォーマット以外の場合は、Python によるログパース関数を準備し、それをimport して抽出します。
-
 
 <!-- ### Datadog Canonical Log Format
 
@@ -139,7 +137,6 @@ Where attributes should at least contain the key metric_type, specifying whether
 Datadog Agent がその関数をimport できていない場合は、`Could not load Dogstream line parser` という行が出力されます。全てが正常に動作している場合は、`dogstream: parsing {filename} with
 {function name} (requested {config option text})` が、出力されます。
 
-
 <!-- ### Writing Parsing Functions
 
 Custom parsing functions must:
@@ -162,7 +159,6 @@ Where attributes should at least contain the key metric_type, specifying whether
      `(metric (str), timestamp (unix timestamp), value (float), attributes (dict))`
 
 `attributes` には、最低限でもkey文字として`metric_type` を指定する必要があります。`metric_type` の値には、`counter` 又は、`gauge` を指定することになります。
-
 
 <!-- ### Example
 
@@ -199,7 +195,6 @@ def parse_web(logger, line):
     return (metric_name, date, metric_value, attr_dict)
 {{< /highlight >}}
 
-
 You'll want to be able to test your parser outside of the Agent, so for the above example,
 you might add a test function like this:
 
@@ -225,7 +220,6 @@ def test():
     # Validate the results
     assert expected == actual, "%s != %s" % (expected, actual)
     print 'test passes'
-
 
 if __name__ == '__main__':
     # For local testing, callable as "python /path/to/parsers.py"
@@ -294,7 +288,6 @@ def test():
     assert expected == actual, "%s != %s" % (expected, actual)
     print 'test passes'
 
-
 if __name__ == '__main__':
     # For local testing, callable as "python /path/to/parsers.py"
     test()
@@ -303,7 +296,6 @@ if __name__ == '__main__':
 次のようにパーサを実行し、関数のテストをします。
 
     python /path/to/parsers.py
-
 
 <!-- <h2 id="events">Parsing Events</h2>
 
@@ -391,7 +383,6 @@ that is bundled with the Agent. -->
 
 Event parsing is done via the same custom parsing functions as described above, except if you return a
 `dict` (or a `list` of `dict`) from your custom parsing function, Datadog will treat it as an event instead of a metric.
-
 
 イベントフィールド項目 (**太文字のフィールド**は、必須項目です):
 

@@ -3,19 +3,19 @@ title: Network monitor
 kind: documentation
 description: "Check the status of TCP/HTTP endpoints"
 further_reading:
-- link: "/monitors/notifications"
+- link: "monitors/notifications"
   tag: "Documentation"
   text: Configure your monitor notifications
-- link: "/monitors/downtimes"
+- link: "monitors/downtimes"
   tag: "Documentation"
   text: Schedule a dowtime to mute a monitor
-- link: "/monitors/faq"
+- link: "monitors/faq"
   tag: "FAQ"
   text: Monitors FAQ
 ---
 
 Network monitors cover the TCP and HTTP checks available in the Agent. Read
-the [HTTP check documentation](/integrations/http_check/) for details on Agent configuration.
+the [HTTP check documentation][1] for details on Agent configuration.
 
 ## Network Status
 
@@ -26,10 +26,10 @@ the [HTTP check documentation](/integrations/http_check/) for details on Agent c
 3. Select **alerting options**:
     {{< img src="monitors/monitor_types/network/network_check_alert_conditions.png" alt="network check alert conditions" responsive="true" popup="true" style="width:80%;">}}
 
-    **Note**: Contrary to [metric monitor](/monitors/monitor_types/metric) it's not possible to get alerted after the endpoint is unavailable for X min. Instead you can only be alert after 5 max consecutive bad statuses. Unless a high timeout value is used in the agent configuration, if a site goes down this translates into 5 * ~15-20 seconds (agent collection period) i.e. 1min30 without data.
+    **Note**: Contrary to [metric monitor][2] it's not possible to get alerted after the endpoint is unavailable for X min. Instead you can only be alert after 5 max consecutive bad statuses. Unless a high timeout value is used in the Agent configuration, if a site goes down this translates into 5 * ~15-20 seconds (agent collection period) i.e. 1min30 without data.
 
 4. Configure your **notification options**:  
-    Refer to the [Notifications](/monitors/notifications) dedicated documentation page for a detailed walkthrough of the common notification options.
+    Refer to the [Notifications][3] dedicated documentation page for a detailed walkthrough of the common notification options.
 
 ## Network Metric
 
@@ -40,7 +40,11 @@ the [HTTP check documentation](/integrations/http_check/) for details on Agent c
 3. Select **alerting options**. Refer to the [alert-conditions](#metrics-monitors) section for details on the available options.
 
 4. Configure your **notification options**:  
-    Refer to the [Notifications](/monitors/notifications) dedicated documentation page for a detailed walkthrough of the common notification options.
+    Refer to the [Notifications][3] dedicated documentation page for a detailed walkthrough of the common notification options.
 
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /integrations/http_check/
+[2]: /monitors/monitor_types/metric
+[3]: /monitors/notifications

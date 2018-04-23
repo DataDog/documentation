@@ -4,6 +4,8 @@ kind: documentation
 aliases:
     - /guides/graphing
     - /graphing/miscellaneous/metrics_arithmetic
+    - /graphing/faq/is-there-a-way-for-me-to-set-the-maximum-and-minimum-values-on-the-y-axis-of-a-graph
+    - /graphing/faq/is-it-possible-to-adjust-the-y-axis-for-my-graphs
 description: Visualize your data to gain insight
 ---
 Graphs are the window onto your monitored systems. Most of the times that you visit Datadog, you look at [dashboards][8] made up of graphs. Other times you see email notifications that include a graph of some fluctuation in the system. And yet other times you see graphs in your Slack, HipChat, and other chat clients documenting the changes in metrics over the course of time. Graphs are at the heart of monitoring and observability, so it is essential to understand how to define great graphs.
@@ -28,13 +30,13 @@ When you first open the graphing editor window, you are on the **Edit** tab. Her
 
 Configuring a graph is a multi-step process: 
 
-1. [Choose the metric to graph](/graphing/#choose-the-metric-to-graph)
-2. [Select the visualization](/graphing/#select-your-visualization)
-3. [Filter](/graphing/#filter) 
-4. [Aggregate and Rollup](/graphing/#aggregate-and-rollup) 
-5. [Apply additional functions](/graphing/#advanced-graphing)
-6. [Enhance your graphs](/graphing/#graphs-enhancement)
-7. [Title the graph](/graphing/#create-a-title)
+1. [Choose the metric to graph][9]
+2. [Select the visualization][10]
+3. [Filter][11] 
+4. [Aggregate and Rollup][12] 
+5. [Apply additional functions][13]
+6. [Enhance your graphs][14]
+7. [Title the graph][15]
 
 ## Choose the metric to graph
 
@@ -66,7 +68,7 @@ After the aggregation method you can determine what constitutes a line or groupi
 
 Regardless of the options chosen above, there is always some aggregation of data due to the physical size constraints of the window holding the graph. If a metric is updated every second and you are looking at 4 hours of data, you need 14,400 points to display everything. Each graph we display has about 300 points shown at any given time.
 
-In the example above, each point displayed on the screen represents 48 data points. In practice, metrics are collected by the agent every 15-20 seconds. So one day's worth of data is 4,320 data points. You might consider a rollup function that looks at 5 or 10 minutes worth of data if you would like to have more control over the display of your data for a graph that shows 1 day.
+In the example above, each point displayed on the screen represents 48 data points. In practice, metrics are collected by the Agent every 15-20 seconds. So one day's worth of data is 4,320 data points. You might consider a rollup function that looks at 5 or 10 minutes worth of data if you would like to have more control over the display of your data for a graph that shows 1 day.
 
 To use the rollup function, click the plus sign to the right of the aggregation group and choose `rollup` from the dropdown. Now choose how you want to aggregate the data and the interval in seconds.
 
@@ -152,6 +154,8 @@ There are three configuration settings:
 
 * `Always include zero` (optional):  Specifies whether or not to always include zero or fit the axis to the data range. Default is to always include zero.
 
+Note: as the mathematical log function doesn't accept negative values, our log scale only works if values are of the same sign (everything > 0 or everything < 0). Otherwise an empty graph is returned.
+
 ### Overlay events for additional context
 
 Add events from related system to add even more context to your graph. An example would be to add Github commits, Jenkins deploys, or Docker creation events. Just click the Overlay Events button and enter a query to find and display your events.  
@@ -161,7 +165,7 @@ To show anything from a source such as Github, use `sources:github`. For all the
 
 ## Create a title
 
-If you don't enter a title, we automatically generate a title based on the selections you have made. But it may be more useful to the users of the [dashboard](/graphing/dashboards) to create a title that more aptly describes the purpose of the graph. Linking the technical purpose to the business benefits adds even more value.
+If you don't enter a title, we automatically generate a title based on the selections you have made. But it may be more useful to the users of the [dashboard][16] to create a title that more aptly describes the purpose of the graph. Linking the technical purpose to the business benefits adds even more value.
 
 ## Save
 
@@ -175,3 +179,11 @@ The final step is to click Save. You can always come back in to the editor and t
 [6]: /graphing/miscellaneous/functions/
 [7]: https://app.datadoghq.com/notebook/list
 [8]: /graphing/dashboards
+[9]: /graphing/#choose-the-metric-to-graph
+[10]: /graphing/#select-your-visualization
+[11]: /graphing/#filter
+[12]: /graphing/#aggregate-and-rollup
+[13]: /graphing/#advanced-graphing
+[14]: /graphing/#graphs-enhancement
+[15]: /graphing/#create-a-title
+[16]: /graphing/dashboards

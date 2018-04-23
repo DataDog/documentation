@@ -1,0 +1,91 @@
+disk:
+  - description: La quantité d'espace disque libre.
+    integration: system
+    interval: ''
+    metric_name: system.disk.free
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: disk free
+    unit_name: byte
+  - description: La quantité d'espace disque utilisée en tant que fraction du total.
+    integration: system
+    interval: ''
+    metric_name: system.disk.in_use
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: disk in use
+    unit_name: fraction
+  - description: Pourcentage de temps passé à lire à partir du disque.
+    integration: system
+    interval: ''
+    metric_name: system.disk.read_time_pct
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: disk read time pct
+    unit_name: percent
+  - description: La quantité d'espace disque totale.
+    integration: system
+    interval: ''
+    metric_name: system.disk.total
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: disk total
+    unit_name: byte
+  - description: La quantité d'espace disque utilisée.
+    integration: system
+    interval: ''
+    metric_name: system.disk.used
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: disk used
+    unit_name: byte
+  - description: Pourcentage de temps passé à écrire sur le disque.
+    integration: system
+    interval: ''
+    metric_name: system.disk.write_time_pct
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: disk write time pct
+    unit_name: percent
+  - description: Le nombre d'inodes libres.
+    integration: system
+    interval: ''
+    metric_name: system.fs.inodes.free
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: inodes free
+    unit_name: inode
+  - description: Le nombre d'inodes utilisés en tant que fraction du total.
+    integration: system
+    interval: ''
+    metric_name: system.fs.inodes.in_use
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: inodes in use
+    unit_name: fraction
+  - description: Nombre total d'inodes.
+    integration: system
+    interval: ''
+    metric_name: system.fs.inodes.total
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: inodes total
+    unit_name: inode
+  - description: Nombre d'inodes utilisés.
+    integration: system
+    interval: ''
+    metric_name: system.fs.inodes.used
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: inodes used
+    unit_name: inode

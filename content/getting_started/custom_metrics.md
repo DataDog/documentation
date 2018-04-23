@@ -3,20 +3,20 @@ title: Custom Metrics
 kind: documentation
 ---
 
-Datadog allows for custom metrics submission through multiple ways to offer a full understanding of what is happening on your infrastructure.
+Datadog allows you to submit custom metrics in multiple ways in order to provide a comprehensive view of what is happening in your infrastructure
 
 This article explains:
 
 * What a custom metric is, and how you can submit it to Datadog.
 * How many custom metrics we allow for out of the box.
 * How to check your custom metric count over time.
-* Some best practices for using custom metrics.  
+* Some best practices for using custom metrics.
 
 ## How is a custom metric defined ?
 
 A custom metric refers to a single, unique combination of a metric name, host, and any tags.
 
-Custom metrics generally refer to any metric that you send using statsd, [DogStatsD](/developers/dogstatsd), or through extensions made to the [Datadog Agent](/agent). Some [integrations](/integrations/) can potentially emit an unlimited number of metrics that can also count as custom, [further details on which standard integrations emit custom metrics](/integrations/faq/what-standard-integrations-emit-custom-metrics).
+Custom metrics generally refer to any metric that you send using statsd, [DogStatsD][1], or through extensions made to the [Datadog Agent][2]. Some [integrations][3] can potentially emit an unlimited number of metrics that can also count as custom, [further details on which standard integrations emit custom metrics][4].
 
 In order to fully leverage the capabilities of the Datadog product through scoping and alerting, you’ll probably be using tags. As a consequence, one submitted metric actually leads to **multiple unique tag combinations**- counting towards your custom metrics count.
 
@@ -43,7 +43,7 @@ Note that the ordering of tags does not matter, so the following two metrics wou
 * auth.exceptionCount with tags `method:X` and `exception:A`
 * auth.exceptionCount with tags `exception:A` and `method:X`
 
-## How many custom metrics am I allowed?  
+## How many custom metrics am I allowed?
 
 Datadog offers 2 plans - Pro & Enterprise. Pro customers are allotted 100 custom metrics per host & Enterprise customers are allotted 200 custom metrics per host. These are counted across your entire infrastructure rather than on a per-host basis. For example, if you were on the Pro plan and are licensed for 3 hosts, you would have 300 custom metrics by default - these 300 metrics may be divided equally amongst each individual host, or all 300 metrics could be sent from a single host.
 
@@ -53,7 +53,7 @@ Using the aforementioned example, below shows three scenarios which would all be
 
 {{< img src="getting_started/custom_metrics/custom-metrics-1.jpg" alt="custom-metrics-1" responsive="true" popup="true" style="width:75%;">}}
 
-We do not enforce [any fixed rate limit](/api/#rate-limiting) on custom metric submission, if you're exceeding your default allotment, our teams will reach out to you.
+We do not enforce [any fixed rate limit][5] on custom metric submission, if you're exceeding your default allotment, our teams will reach out to you.
 
 ## How do I check my custom metrics count?
 
@@ -86,7 +86,7 @@ Across your 3 hosts, you’d have 13 distinct metrics, here is why :
 
 {{< img src="getting_started/custom_metrics/metric_count.png" alt="metric_count" responsive="true" popup="true" style="width:75%;">}}
 
-If you are an administrator, you can see your total custom metrics per hour as well as the top 500 custom metrics by cardinality in your account in [the usage details page](https://app.datadoghq.com/account/billing_history). You can also see this metric count on your [metric summary page](https://app.datadoghq.com/metric/summary), where you’d see, clicking on the service.request.count metric, the exact number of unique tag combinations:
+If you are an administrator, you can see your total custom metrics per hour as well as the top 500 custom metrics by cardinality in your account in [the usage details page][6]. You can also see this metric count on your [metric summary page][7], where you’d see, clicking on the service.request.count metric, the exact number of unique tag combinations:
 
 So if you only had the first host from the example above reporting, you’d have this:
 
@@ -110,6 +110,17 @@ Ultimately, you’ll have 13 metrics using the following query: `count:service.r
 
 ## Custom metrics best practices
 
-* For querying purposes, we encourage you to limit the number of tags applied to 1,000 tags per metric. Going over this amount [slows down the graphs](/graphing/faq/dashboard-loads-very-slowly) in your dashboards due to the increase in cardinality.
-* You can check the number of "distinct metrics" in the metric summary page (click a metric name to see the number of distinct metrics associated). If you need a higher custom metric limit, [email us](/help).
-* [Additional information about billing and custom metrics](/account_management/faq/).
+* For querying purposes, we encourage you to limit the number of tags applied to 1,000 tags per metric. Going over this amount [slows down the graphs][8] in your dashboards due to the increase in cardinality.
+* You can check the number of "distinct metrics" in the metric summary page (click a metric name to see the number of distinct metrics associated). If you need a higher custom metric limit, [email us][9].
+* [Additional information about billing and custom metrics][10].
+
+[1]: /developers/dogstatsd
+[2]: /agent
+[3]: /integrations/
+[4]: /integrations/faq/what-standard-integrations-emit-custom-metrics
+[5]: /api/#rate-limiting
+[6]: https://app.datadoghq.com/account/billing_history
+[7]: https://app.datadoghq.com/metric/summary
+[8]: /graphing/faq/dashboard-loads-very-slowly
+[9]: /help
+[10]: /account_management/faq/

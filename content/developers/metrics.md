@@ -14,11 +14,11 @@ aliases:
 ---
 ## Overview
 
-This page explains how to send your application's [custom metrics](/getting_started/custom_metrics/) to Datadog.
-Sending your application's [custom metrics](/getting_started/custom_metrics/) to Datadog lets you correlate what's happening with your application, your users and your system.
+This page explains how to send your application's [custom metrics][4] to Datadog.
+Sending your application's [custom metrics][4] to Datadog lets you correlate what's happening with your application, your users and your system.
 
 Metrics are collected by sending them to StatsD, a small metrics aggregation
-server that is bundled with the Datadog Agent, [read about how it works](/developers/dogstatsd/). If you want to dive into code right away,
+server that is bundled with the Datadog Agent, [read about how it works][5]. If you want to dive into code right away,
 read on.
 
 This tutorial covers some common instrumentation use cases, like:
@@ -44,9 +44,9 @@ A metric's Datadog in-app type affects how its data is interpreted in query resu
 
 In the Datadog web application there are 3 metric types:
 
-* [GAUGE](/developers/metrics/#gauges)
-* [RATE](/developers/metrics/#rates)
-* [COUNT](/developers/metrics/#count) 
+* [GAUGE][6]
+* [RATE][7]
+* [COUNT][8] 
 * COUNTER (now deprecated)
 
 A metric's type is stored as metrics metadata and is used to determine how a metric is interpreted throughout the application by determining default time aggregation function and `as_rate()`/`as_count()` behavior. The `as_count()` and `as_rate()` modifiers behave differently for different Web Application metric types.
@@ -61,13 +61,13 @@ Datadog accepts metrics submitted from a variety of sources, and as a result the
 | [DogStatsD][1] | `dog.increment(...)` | counter | rate |
 | [DogStatsD][1] | `dog.histogram(...)` | histogram | gauge, rate |
 | [DogStatsD][1] | `dog.set(...)` | set | gauge |
-| [agent check][2] | `self.gauge(...)` | gauge | gauge |
-| [agent check][2] | `self.increment(...)` | counter | rate |
-| [agent check][2] | `self.rate(...)` | rate | gauge |
-| [agent check][2] | `self.count(...)` | count | count |
-| [agent check][2] | `self.monotonic_count(...)` | monotonic_count | count |
-| [agent check][2] | `self.histogram(...)` | histogram | gauge, rate |
-| [agent check][2] | `self.set(...)` | set | gauge |
+| [Agent check][2] | `self.gauge(...)` | gauge | gauge |
+| [Agent check][2] | `self.increment(...)` | counter | rate |
+| [Agent check][2] | `self.rate(...)` | rate | gauge |
+| [Agent check][2] | `self.count(...)` | count | count |
+| [Agent check][2] | `self.monotonic_count(...)` | monotonic_count | count |
+| [Agent check][2] | `self.histogram(...)` | histogram | gauge, rate |
+| [Agent check][2] | `self.set(...)` | set | gauge |
 
 #### What's a use case for changing a metric's type?
 
@@ -90,18 +90,18 @@ If you are not willing to lose the historical data submitted as a `gauge`, creat
 
 There are multiple ways to send metrics to Datadog:
 
-1. With your Datadog agent directly (Learn more on how [to write an Agent Checks](/agent/agent_checks) && [Aggregator source](https://github.com/DataDog/dd-agent/blob/master/aggregator.py))
+1. With your Datadog Agent directly (Learn more on how [to write an Agent Checks](/agent/agent_checks) && [Aggregator source][9])
 
-2. Using your StatsD server bundled with the Datadog Agent ([Find more about our available libraries](/developers/libraries))
+2. Using your StatsD server bundled with the Datadog Agent ([Find more about our available libraries][16])
   Note: Because DogStatsD flushes at a regular interval (**default 10s**) all metrics submitted via this method are stored with associated interval metadata.
 
-3. Submit metrics directly to Datadog's [HTTP API](/api/)
+3. Submit metrics directly to Datadog's [HTTP API][10]
 
-4. Use Dropwizard's Java [metrics](https://github.com/dropwizard/metrics) library, with the [metrics-datadog](https://github.com/coursera/metrics-datadog) backend (thanks to the good folks at [Vistar Media](http://www.vistarmedia.com/),[Coursera](https://www.coursera.org), and [Bazaarvoice](http://www.bazaarvoice.com) for the great contributions).
+4. Use Dropwizard's Java [metrics][11] library, with the [metrics-datadog][12] backend (thanks to the good folks at [Vistar Media](http://www.vistarmedia.com/),[Coursera][13], and [Bazaarvoice][14] for the great contributions).
 
 ### Setup
 
-First off, [install](https://app.datadoghq.com/account/settings#agent) the Datadog Agent (version 3 or greater), which contains our StatsD server, and make sure it's running.
+First off, [install][15] the Datadog Agent (version 3 or greater), which contains our StatsD server, and make sure it's running.
 
 Next, let's set up a client library for your language.
 
@@ -134,7 +134,7 @@ statsd = Datadog::Statsd.new
 ```
 
 This tutorial has examples for Python and Ruby, but check out the
-[libraries page](/developers/libraries) if you use another language.
+[libraries page][16] if you use another language.
 
 ## Count
 ### Overview
@@ -146,8 +146,8 @@ Counters are used to count things.
 {{% table responsive="true" %}}
 |Method | Overview |
 |:---|:---|
-| self.increment(...) |  Used to modify a count of events identified by the metric key string: <ul><li>Can be called multiple times during a check's execution.</li><li>Stored as a RATE type in the Datadog web application. Each value in the stored timeseries is a delta of the counter's value between samples (time-normalized by the aggregation interval which defaults to 1 for agent checks - so the value is generally the raw count value).</li><li>Handled by the aggregator Counter class</li></ul>|
-|self.decrement(...) |Used to modify a count of events identified by the metric key string:<ul><li>Can be called multiple times during a check's execution.</li><li>Stored as RATE type in the Datadog web application. Each value in the stored timeseries is a delta of the counter's value between samples (time-normalized by the aggregation interval which defaults to 1 for agent checks - so the value is generally the raw count value).</li><li>Handled by the aggregator Counter class</li></ul>|
+| self.increment(...) |  Used to modify a count of events identified by the metric key string: <ul><li>Can be called multiple times during a check's execution.</li><li>Stored as a RATE type in the Datadog web application. Each value in the stored timeseries is a delta of the counter's value between samples (time-normalized by the aggregation interval which defaults to 1 for Agent checks - so the value is generally the raw count value).</li><li>Handled by the aggregator Counter class</li></ul>|
+|self.decrement(...) |Used to modify a count of events identified by the metric key string:<ul><li>Can be called multiple times during a check's execution.</li><li>Stored as RATE type in the Datadog web application. Each value in the stored timeseries is a delta of the counter's value between samples (time-normalized by the aggregation interval which defaults to 1 for Agent checks - so the value is generally the raw count value).</li><li>Handled by the aggregator Counter class</li></ul>|
 |self.monotonic_count(...)|Submit the sampled raw value of your counter. Don't normalize the values to a rate, or calculate the deltas before submitting. If the value of your counter ever decreases between submissions the resulting stored value for that submission is 0:<ul><li>Should only be called once during a check. Throws away any value that is less than a previously submitted value. IE the counter should be monotonically increasing.</li><li>Stored as a COUNT type in the Datadog web application. Each value in the stored timeseries is a delta of the counter's value between samples (not time-normalized).</li></ul>|
 |self.count(...)|Submit the number of events that occurred during the check interval. If you're tracking a counter value that persists between checks, this means you must calculate the delta before submission:<ul><li>Should only be called once during a check.</li><li>Stored as a COUNT type in the Datadog web application. Each value in the stored timeseries is a delta of the counter's value between samples (not time-normalized).</li></ul>|
 {{% /table %}}
@@ -156,7 +156,7 @@ Counters are used to count things.
 {{% table responsive="true" %}}
 |Method | Overview |
 |:---|:---|
-| dog.increment(...) | Used to increment a counter of events: <ul><li>Stored as a RATE type in the Datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter's value over that statsd flush period.</li></ul>|
+| dog.increment(...) | Used to increment a counter of events: <ul><li>Stored as a RATE type in the Datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter's value over that statsd flush period.</li></ul>|
 |dog.decrement(...)| Used to decrement a counter of events: <ul><li>Stored as a RATE type in the Datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter's value over that statsd flush period.</li></ul>|
 {{% /table %}}
 
@@ -207,7 +207,7 @@ def upload_file(file):
 ```
 
 Note that for counters coming from another source that are ever-increasing and never reset -- for example, the number of queries from MySQL over time -- we track the rate between flushed values. While there currently isn't an elegant solution to get raw counts within Datadog, you may want to apply a function to
-your series like cumulative sum or integral. [Read more about Datadog functions](/graphing/miscellaneous/functions).
+your series like cumulative sum or integral. [Read more about Datadog functions][17].
 
 ### In-app modifiers
 
@@ -286,7 +286,7 @@ It aggregates the values that are sent during the flush interval (usually defaul
 * `my_metric.median`: gives you the median of those values in the flush interval
 * `my_metric.95percentile`: gives you the 95th percentile value in the flush interval
 * `my_metric.max`: gives you the max value sent during the flush interval
-* `my_metric.min`: gives you the min value sent during the flush interval
+* `my_metric.min`: gives you the min value sent during the flush interval
 
 Each one of these becomes a value in their respective metric time series that are sent to Datadog. Then you can aggregate these time series the same way you aggregate any other metric time series.
 
@@ -390,7 +390,7 @@ opts = {
 statsd.service_check(name, status, opts)
 ```
 
-After a service check has been reported, you can use it to trigger a [Custom Check monitor](/monitors/monitor_types/custom_check).
+After a service check has been reported, you can use it to trigger a [Custom Check monitor][18].
 
 ## Rates
 ### Overview
@@ -403,7 +403,7 @@ Rates represent the derivative of a metric, it's the value variation of a metric
 {{% table responsive="true" %}}
 |Method | Overview |
 |:---|:---|
-|self.rate(...)|Submit the sampled raw value of your counter. Don't normalize the values to a rate, or calculate the deltas before submitting - the agent does both for you:<ul><li>Should only be called once during a check.</li><li>Throws away any value that is less than a previously submitted value. IE the counter should be monotonically increasing.</li><li>Stored as a GAUGE type in the Datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter's value between samples.</li></ul>|
+|self.rate(...)|Submit the sampled raw value of your counter. Don't normalize the values to a rate, or calculate the deltas before submitting - the Agent does both for you:<ul><li>Should only be called once during a check.</li><li>Throws away any value that is less than a previously submitted value. IE the counter should be monotonically increasing.</li><li>Stored as a GAUGE type in the Datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter's value between samples.</li></ul>|
 {{% /table %}}
 
 ## Sets
@@ -417,7 +417,7 @@ Sets are used to count the number of unique elements in a group.
 {{% table responsive="true" %}}
 |Method | Overview |
 |:---|:---|
-|self.set(...)|Used count the number of unique elements in a group:<ul><li>Should be called multiple times during an agent check.</li><li>Stored as a GAUGE type in the Datadog web application.</li></ul>|
+|self.set(...)|Used count the number of unique elements in a group:<ul><li>Should be called multiple times during an Agent check.</li><li>Stored as a GAUGE type in the Datadog web application.</li></ul>|
 {{% /table %}}
 
 #### DogStatsD Submission
@@ -472,3 +472,18 @@ The following units may be associated with metrics submitted to Datadog.
 [1]: /developers/dogstatsd
 [2]: /agent/agent_checks
 [3]: /api/#metrics
+[4]: /getting_started/custom_metrics/
+[5]: /developers/dogstatsd/
+[6]: /developers/metrics/#gauges
+[7]: /developers/metrics/#rates
+[8]: /developers/metrics/#count
+[9]: https://github.com/DataDog/dd-agent/blob/master/aggregator.py
+[10]: /api/
+[11]: https://github.com/dropwizard/metrics
+[12]: https://github.com/coursera/metrics-datadog
+[13]: https://www.coursera.org
+[14]: http://www.bazaarvoice.com
+[15]: https://app.datadoghq.com/account/settings#agent
+[16]: /developers/libraries
+[17]: /graphing/miscellaneous/functions
+[18]: /monitors/monitor_types/custom_check

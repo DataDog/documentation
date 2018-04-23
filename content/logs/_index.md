@@ -1,11 +1,10 @@
 ---
 title: Log Management
 kind: Documentation
-description: "Configure your Datadog agent to gather logs from your host, containers & services."
+description: "Configure your Datadog Agent to gather logs from your host, containers & services."
 ---
 
 {{< vimeo 243374392 >}}
-
 
 ## Further Reading
 

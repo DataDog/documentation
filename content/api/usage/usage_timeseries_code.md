@@ -1,13 +1,14 @@
 ---
 title: Get hourly usage for custom metrics
 type: apicode
-order: 22.2
+order: 23.2
 external_redirect: /api/#get-hourly-usage-for-custom-metrics
 ---
 
 ##### Signature
-`GET https://app.datadoghq.com/api/v1/usage/timeseries`
+`GET https://api.datadoghq.com/api/v1/usage/timeseries`
 ##### Example Request
 {{< code-snippets basename="api-billing-usage-timeseries" >}}
 ##### Example Response
 {{< code-snippets basename="result.api-billing-usage-timeseries" >}}
+

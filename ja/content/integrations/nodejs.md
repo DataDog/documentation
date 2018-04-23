@@ -16,7 +16,6 @@ doclevel: basic
 
 ## 概要
 
-
 次の目的で、Node.js アプリケーションのメトリクスをDatadogへ送信します:
 
 * Node.js アプリケーションのパフォーマンスを可視化する

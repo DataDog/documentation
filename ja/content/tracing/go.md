@@ -9,11 +9,9 @@ title: Tracing Go Applications
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-
-
 ### Installation
 
-To begin tracing applications written in Go, first [install and configure the Datadog Agent](/tracing#installing-the-agent).
+To begin tracing applications written in Go, first [install and configure the Datadog Agent](/tracing).
 
 Next, install the Go Tracer from the Github repository:
 
@@ -40,7 +38,6 @@ func main {
 ~~~
 
 For another example, see the [`example_test.go`](https://github.com/DataDog/dd-trace-go/blob/master/tracer/example_test.go) file in the Go Tracer package
-
 
 ### Compatibility
 

@@ -14,3 +14,4 @@ Include the following JVM arguments when starting the Kafka instance to solve re
 ```
 -Dcom.sun.management.jmxremote.port=<PORT_NUM> -Dcom.sun.management.jmxremote.rmi.port=<PORT_NUM>
 ```
+

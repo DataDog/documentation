@@ -14,8 +14,6 @@ doclevel: basic
 
 ## 概要
 
-
-
 <!-- Connect Memcached to Datadog in order to:
 
 - Visualize its performance
@@ -26,12 +24,10 @@ doclevel: basic
 - パフォーマンスの可視化
 - Meｍcachedのパフォーマンス情報と他アプリケーションの情報を連携
 
-
 Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
 * [Memcachedインテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/mcache/conf.yaml.example)
 * [Memcachedインテグレーション checks.d](https://github.com/DataDog/integrations-core/blob/master/mcache/check.py)
-
 
 <!-- The following metrics are collected by default with the Memcache integration:
 

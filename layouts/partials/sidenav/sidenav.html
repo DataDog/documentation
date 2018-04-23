@@ -5,11 +5,11 @@
         {{ partial "img.html" (dict "root" $dot "src" "icons/nav_home.png" "class" "static" "alt" "home" "width" "21") }}
         {{ i18n "home" }}
     </a>
-    <a href="/" class="col text-center">
+    <a href="{{ "" | absLangURL }}" class="col text-center">
         {{ partial "img.html" (dict "root" $dot "src" "icons/nav_docs.png" "class" "static" "alt" "docs" "width" "21") }}
         {{ i18n "docs" }}
     </a>
-    <a href="/api/" class="col text-center">
+    <a href="{{ "api/" | absLangURL }}" class="col text-center">
         {{ partial "img.html" (dict "root" $dot "src" "icons/nav_mobile_api.png" "class" "static" "alt" "api" "width" "21") }}
         {{ i18n "api" }}
     </a>
@@ -18,49 +18,13 @@
 <aside class="sidenav">
     <div class="row sticky">
         <div class="col">
-            <a href="{{.Site.BaseURL}}"><h4>{{ i18n "datadog_docs" }}</h4></a>
-            <form class="sidenav-search" action="{{.Site.BaseURL}}search/">
+            <a href="{{ "" | absLangURL }}"><h4>{{ i18n "datadog_docs" }}</h4></a>
+            <form class="sidenav-search" action="{{ absLangURL "search/" }}">
                 <div class="input-group">
-                    <input type="text" class="form-control" name="s" placeholder="Search" aria-label="Search"/>
+                    <input type="text" class="form-control" name="s" placeholder="{{ i18n "search" }}" aria-label="Search"/>
                     <span class="input-group-addon">{{ partial "img.html" (dict "root" . "src" "icons/nav_search.png" "alt" "search" "width" "21") }}</span>
                 </div>
             </form>
-
-            <!--<ul class="list-unstyled">
-                {{ range $index, $element := $.Site.Data.sidenav.general.nav }}
-                    {{ $split_urls := split $dot.RelPermalink "/" }}
-                    {{ $url_first := print "/" (index $split_urls 1) "/" }}
-                    {{ $active_page := (or (and (eq $url_first $element.link) (ne $element.link "/")) (eq $dot.RelPermalink $element.link)) }}
-                    {{ if not $element.hide }}
-                    <li>
-                        <a href="{{ $element.link }}" {{if $active_page }}class="active"{{ end }}>
-                            {{ partial "img.html" (dict "root" $dot "src" (print "icons/" ($element.image)) "class" "static" "width" "21") }}
-                            {{ partial "img.html" (dict "root" $dot "src" (print "icons/" ($element.image_hover)) "class" "hover" "width" "21" ) }}
-                            <span>{{ $element.display_name }}</span>
-                        </a>
-                        {{ if (and $active_page (not $element.toc_disable)) }}
-                        {{ if $dot.Params.integration_title }}<span class="toctitle">{{ $dot.Params.integration_title | upper }}</span>{{ end }}
-                        {{ if $dot.Params.platform }}<span class="toctitle">{{ $dot.Params.platform | upper }}</span>{{ end }}
-                        {{ $dot.TableOfContents }}
-                        {{ end }}
-                        {{/* comments here {{ if (and (in ($element.display_name | lower) "integrations") (in $dot.RelPermalink "integrations") ) }}
-                        <nav id="TableOfContents">
-                            <ul>
-                                <li>
-                                    <ul>
-                                        <li><a data-ref="filter" data-filter="all" href="#all" class="">ALL</a></li>
-                                        {{ range $i, $e := (sort ($.Scratch.Get "filters")) }}
-                                        <li><a data-ref="filter" data-filter=".cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}" class="">{{ $e }}</a></li>
-                                        {{ end }}
-                                    </ul>
-                                </li>
-                            </ul>
-                        </nav>
-                        {{ end }}*/}}
-                    </li>
-                    {{ end }}
-                {{ end }}
-            </ul>-->
             <div class="sidenav-nav">
                 {{ partial "sidenav/recursive-nav.html" (dict "context" $dot "data" .Site.Menus.main) }}
             </div>

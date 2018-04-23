@@ -3,7 +3,7 @@ title: How do I overlay events onto my dashboards?
 kind: faq
 ---
 
-You can correlate Events to Metrics on Dashboards thanks to the Event Overlay Feature. 
+You can correlate Events to Metrics on Dashboards thanks to the Event Overlay Feature.
 
 ## Via the UI Editor
 
@@ -12,7 +12,7 @@ You can correlate Events to Metrics on Dashboards thanks to the Event Overlay Fe
 ## Via the JSON tab
 {{< img src="graphing/faq/event_overlay_json.png" alt="event_overlay_json" responsive="true" popup="true">}}
 
-In addition to being able to overlay events within the UI dashboard editor through the search field, you can also modify the JSON to add any event from Datadog. The general format is:
+In addition to being able to overlay events within the UI dashboard editor through the search field, you can also modify the JSON to add any event from Datadog. The general format is:
 
 * `"events": "search query"`
 
@@ -27,10 +27,11 @@ or if you’re looking to display all errors:
 ## Events related to Template Variables
 
 Template variables bring flexibility into Dashboarding.
-Let's say you have the following template variable : 
+Let's say you have the following template variable :
 
 {{< img src="graphing/faq/template_event_overlay.png" alt="template_event_overlay" responsive="true" popup="true">}}
 
 To use the Event Overlay feature use the following syntax
 
 * `"events": "tags:$availability-zone"`
+

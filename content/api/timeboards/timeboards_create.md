@@ -1,7 +1,7 @@
 ---
 title: Create a Timeboard
 type: apicontent
-order: 20.1
+order: 21.1
 external_redirect: /api/#create-a-timeboard
 ---
 
@@ -10,7 +10,7 @@ external_redirect: /api/#create-a-timeboard
 
 * **`title`** [*required*]:  
     The name of the dashboard.
-* **`description`** [*optional*, *default*=**None**]:  
+* **`description`** [*required*]:  
     A description of the dashboard's content.
 * **`graphs`** [*optional*, *default*=**None**]:  
     A list of graph definitions. Graph definitions follow this form:
@@ -28,3 +28,4 @@ external_redirect: /api/#create-a-timeboard
         The tag prefix associated with the variable. Only tags with this prefix appear in the variable dropdown.
     * **`default`** [*optional*, *default*=**None**]:  
         The default value for the template variable on dashboard load.
+

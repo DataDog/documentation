@@ -13,12 +13,12 @@ This series shows you everything you need to know to get started with Datadog. T
 
 * [What is a host](?wtime=25.5)
 * [Useful Resources](?wtime=55)
-* [Install the agent](?wtime=74)
-* [Configuring the agent](?wtime=129)
+* [Install the Agent](?wtime=74)
+* [Configuring the Agent](?wtime=129)
 * [Tags](?wtime=159)
-* [Restarting the agent](?wtime=234)
+* [Restarting the Agent](?wtime=234)
 * [What metrics are being collected](?wtime=248)
-* [Local vs Cloud: Is the agent even necessary?](?wtime=268)
+* [Local vs Cloud: Is the Agent even necessary?](?wtime=268)
 * [EC2 vs system metrics](?wtime=305)
 * [Integrations](?wtime=336)
 * [Setting up the AWS Integration](?wtime=404)
@@ -26,18 +26,27 @@ This series shows you everything you need to know to get started with Datadog. T
 * [Running the info command](?wtime=489)
 * [Setting up the Docker Integration](?wtime=497)
 * [Setting up the Postgres Integration](?wtime=526)
-* [Updating the agent](?wtime=541)
+* [Updating the Agent](?wtime=541)
 * [Learn about new technologies on the blog](?wtime=564)
 * [Libraries & Frameworks](?wtime=610)
 * [Agent architecture](?wtime=645)
 
 For more information, be sure to check out these links talked about in the video:
 
-* [The open source agent](http://dtdg.co/101-agent-gh)
-* [Datadog agent documentation](http://dtdg.co/101-agent)
-* [Integrations - Inside the Datadog app](http://dtdg.co/101-tiles)
-* [Integrations - Documentation](http://dtdg.co/101-int-docs)
-* [Getting started with DogStatsD](http://dtdg.co/101-dogstatsd)
-* [Sending metrics with DogStatsD](http://dtdg.co/101-senddogstatsd)
-* [Datadog API](http://dtdg.co/101-api)
-* [Datadog Libraries & Frameworks](http://dtdg.co/101-libs)
+* [The open source Agent][1]
+* [Datadog Agent documentation][2]
+* [Integrations - Inside the Datadog app][3]
+* [Integrations - Documentation][4]
+* [Getting started with DogStatsD][5]
+* [Sending metrics with DogStatsD][6]
+* [Datadog API][7]
+* [Datadog Libraries & Frameworks][8]
+
+[1]: http://dtdg.co/101-agent-gh
+[2]: http://dtdg.co/101-agent
+[3]: http://dtdg.co/101-tiles
+[4]: http://dtdg.co/101-int-docs
+[5]: http://dtdg.co/101-dogstatsd
+[6]: http://dtdg.co/101-senddogstatsd
+[7]: http://dtdg.co/101-api
+[8]: http://dtdg.co/101-libs

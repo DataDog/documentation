@@ -3,15 +3,15 @@ title: Docker, ECS, & Kubernetes Events
 kind: faq
 ---
 
-### Container Integration Events
+### Container Integration Events
 
 When monitoring containers and orchestrators (Docker, ECS, and Kubernetes) you are familiar with the events that are available once an integration has been enabled and respective configuration steps followed.
 
-As your containerized environment grows, containers and orchestrators start emitting a high volume of events that leads to more noise in the [events stream](/graphing/event_stream), [monitors](/monitors), and overlays.
+As your containerized environment grows, containers and orchestrators start emitting a high volume of events that leads to more noise in the [events stream][1], [monitors][2], and overlays.
 
 To ensure that you don't have to worry about the eventual noise, events provided by default are limited to only severe and important events listed below.  
 
-If further access is needed to any other events in a specific integration, please [reach out to us](/help) to have these events enabled for your organization.
+If further access is needed to any other events in a specific integration, please [reach out to us][3] to have these events enabled for your organization.
 
 ## Docker, ECS, and Kubernetes Integration Details
 
@@ -30,7 +30,7 @@ The events below will be available per integration:
 * Restart Daemon
 * Update
 
-[Learn more about Datadog-Docker integration](/integrations/docker_daemon/)
+[Learn more about Datadog-Docker integration][4]
 
 ### ECS
 
@@ -42,7 +42,7 @@ The events below will be available per integration:
 * Reboot
 * Terminate
 
-[Learn more about Datadog-AWS ECS integration](/integrations/amazon_ecs/)
+[Learn more about Datadog-AWS ECS integration][5]
 
 ### Kubernetes
 
@@ -73,10 +73,18 @@ The events below will be available per integration:
 * Unable
 * Unhealthy
 
-[Learn more about Datadog-Kubernetes integration](/integrations/kubernetes/)
+[Learn more about Datadog-Kubernetes integration][6]
 
-To access and utilize these events in Datadog, use the following three methods:
+To access and utilize these events in Datadog, use the following three methods:
 
-* [Events stream](/graphing/event_stream)
-* [Monitors](/monitors)
-* [Event overlays on graphs](/graphing/dashboards/#event-correlation-at-view-time)
+* [Events stream][1]
+* [Monitors][2]
+* [Event overlays on graphs][7]
+
+[1]: /graphing/event_stream
+[2]: /monitors
+[3]: /help
+[4]: /integrations/docker_daemon/
+[5]: /integrations/amazon_ecs/
+[6]: /integrations/kubernetes/
+[7]: /graphing/dashboards/#event-correlation-at-view-time

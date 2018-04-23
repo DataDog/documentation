@@ -1,0 +1,140 @@
+azure_redis_cache:
+  - description: La quantité de données lues dans le cache en octets par seconde
+    integration: azure_redis_cache
+    interval: ''
+    metric_name: azure.cache_redis.cache_read
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: cache read
+    unit_name: byte
+  - description: La quantité de données écrites dans le cache en octets par seconde
+    integration: azure_redis_cache
+    interval: ''
+    metric_name: azure.cache_redis.cache_write
+    metric_type: rate
+    orientation: '0'
+    per_unit_name: second
+    short_name: cache write
+    unit_name: byte
+  - description: The number of successful key lookups
+    integration: azure_redis_cache
+    interval: ''
+    metric_name: azure.cache_redis.cachehits
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cache hits
+    unit_name: hit
+  - description: The number of failed key lookups
+    integration: azure_redis_cache
+    interval: ''
+    metric_name: azure.cache_redis.cachemisses
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: cache misses
+    unit_name: miss
+  - description: The number of client connections to the cache
+    integration: azure_redis_cache
+    interval: ''
+    metric_name: azure.cache_redis.connectedclients
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: connected clients
+    unit_name: connection
+  - description: The number of items evicted from the cache
+    integration: azure_redis_cache
+    interval: ''
+    metric_name: azure.cache_redis.evictedkeys
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: evicted keys
+    unit_name: key
+  - description: The number of items expired from the cache
+    integration: azure_redis_cache
+    interval: ''
+    metric_name: azure.cache_redis.expiredkeys
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: expired keys
+    unit_name: key
+  - description: The number of get operations from the cache
+    integration: azure_redis_cache
+    interval: ''
+    metric_name: azure.cache_redis.getcommands
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: gets
+    unit_name: get
+  - description: The CPU utilization of the Azure Redis Cache server as a percentage
+    integration: azure_redis_cache
+    interval: ''
+    metric_name: azure.cache_redis.percent_processor_time
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cpu
+    unit_name: percent
+  - description: >-
+      The percentage of cycles in which the Redis server is busy processing and
+      not waiting idle for messages
+    integration: azure_redis_cache
+    interval: ''
+    metric_name: azure.cache_redis.server_load
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: server load
+    unit_name: percent
+  - description: The number of set operations to the cache
+    integration: azure_redis_cache
+    interval: ''
+    metric_name: azure.cache_redis.setcommands
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: sets
+    unit_name: set
+  - description: The total number of commands processed by the cache server
+    integration: azure_redis_cache
+    interval: ''
+    metric_name: azure.cache_redis.totalcommandsprocessed
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: total operations
+    unit_name: operation
+  - description: The total number of keys in the cache
+    integration: azure_redis_cache
+    interval: ''
+    metric_name: azure.cache_redis.totalkeys
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: total keys
+    unit_name: key
+  - description: The amount of cache memory used for key/value pairs in the cache in bytes
+    integration: azure_redis_cache
+    interval: ''
+    metric_name: azure.cache_redis.usedmemory
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: used mem
+    unit_name: byte
+  - description: >-
+      The amount of cache memory used in bytes during the specified reporting
+      interval, including fragmentation and metadata
+    integration: azure_redis_cache
+    interval: ''
+    metric_name: azure.cache_redis.usedmemory_rss
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: used mem rss
+    unit_name: byte

@@ -1,0 +1,20 @@
+[
+    {
+        "agent_version": "5.2.0",
+        "integration":"etcd",
+        "check": "etcd.can_connect",
+        "statuses": ["ok", "critical"],
+        "groups": ["host", "url"],
+        "name": "Peut se connecter",
+        "description": "Renvoie `CRITICAL` s'il est impossible d'obtenir des métriques de etcd (timeout ou code d'état HTTP autre que 200)"
+    },
+    {
+        "agent_version": "5.21.0",
+        "integration":"etcd",
+        "check": "etcd.healthy",
+        "statuses": ["ok", "critical"],
+        "groups": ["host", "url"],
+        "name": "Healthy",
+        "description": "Renvoie `CRITICAL` quand un membre est malsain"
+    }
+]

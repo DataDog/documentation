@@ -1,0 +1,361 @@
+mesos_slave:
+  - description: Nombre de CPU disponibles
+    integration: mesos
+    interval: ''
+    metric_name: mesos.stats.system.cpus_total
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: cpus total
+    unit_name: ''
+  - description: Charge moyenne pour les 15 dernières minutes
+    integration: mesos
+    interval: ''
+    metric_name: mesos.stats.system.load_15min
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: load 15
+    unit_name: ''
+  - description: Charge moyenne pour les dernières minutes
+    integration: mesos
+    interval: ''
+    metric_name: mesos.stats.system.load_1min
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: load 1
+    unit_name: ''
+  - description: Charge moyenne pour les 5 dernières minutes
+    integration: mesos
+    interval: ''
+    metric_name: mesos.stats.system.load_5min
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: load 5
+    unit_name: ''
+  - description: Mémoire libre.
+    integration: mesos
+    interval: ''
+    metric_name: mesos.stats.system.mem_free_bytes
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: mem free
+    unit_name: byte
+  - description: Mémoire totale
+    integration: mesos
+    interval: ''
+    metric_name: mesos.stats.system.mem_total_bytes
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: mem total
+    unit_name: byte
+  - description: Tâche CPU
+    integration: mesos
+    interval: ''
+    metric_name: mesos.state.task.cpu
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: task cpu
+    unit_name: ''
+  - description: Tâche mémoire
+    integration: mesos
+    interval: ''
+    metric_name: mesos.state.task.mem
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: task memory
+    unit_name: mebibyte
+  - description: Tâche disque
+    integration: mesos
+    interval: ''
+    metric_name: mesos.state.task.disk
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: task disk
+    unit_name: mebibyte
+  - description: Nombre de tache échouée
+    integration: mesos
+    interval: ''
+    metric_name: mesos.slave.tasks_failed
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: failed tasks
+    unit_name: task
+  - description: Nombre de taches terminées
+    integration: mesos
+    interval: ''
+    metric_name: mesos.slave.tasks_finished
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: finished tasks
+    unit_name: task
+  - description: Nombre de taches tuées
+    integration: mesos
+    interval: ''
+    metric_name: mesos.slave.tasks_killed
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: killed tasks
+    unit_name: task
+  - description: Nombre de taches perdues
+    integration: mesos
+    interval: ''
+    metric_name: mesos.slave.tasks_lost
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: lost tasks
+    unit_name: task
+  - description: 'Nombre de tâches '
+    integration: mesos
+    interval: ''
+    metric_name: mesos.slave.tasks_running
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: running tasks
+    unit_name: task
+  - description: Nombre de tâche en staging
+    integration: mesos
+    interval: ''
+    metric_name: mesos.slave.tasks_staging
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: staging tasks
+    unit_name: task
+  - description: Nombre de tâche en train de démarrer
+    integration: mesos
+    interval: ''
+    metric_name: mesos.slave.tasks_starting
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: starting tasks
+    unit_name: task
+  - description: Si ce slave est enregistré avec un master
+    integration: mesos
+    interval: ''
+    metric_name: mesos.stats.registered
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: slave registered
+    unit_name: ''
+  - description: Uptime du slave
+    integration: mesos
+    interval: ''
+    metric_name: mesos.stats.uptime_secs
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: slave uptime
+    unit_name: ''
+  - description: Pourcentage de CPU alloués
+    integration: mesos
+    interval: ''
+    metric_name: mesos.slave.cpus_percent
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cpus percent
+    unit_name: percent
+  - description: Nombre de CPU alloués
+    integration: mesos
+    interval: ''
+    metric_name: mesos.slave.cpus_used
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cpus used
+    unit_name: ''
+  - description: Nombre de CPU
+    integration: mesos
+    interval: ''
+    metric_name: mesos.slave.cpus_total
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: cpus total
+    unit_name: ''
+  - description: Pourcentage de GPU alloués
+    integration: mesos
+    interval: ''
+    metric_name: mesos.slave.gpus_percent
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: gpus percent
+    unit_name: percent
+  - description: Nombre de GPU alloués
+    integration: mesos
+    interval: ''
+    metric_name: mesos.slave.gpus_used
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: gpus used
+    unit_name: ''
+  - description: Nombre de GPU
+    integration: mesos
+    interval: ''
+    metric_name: mesos.slave.gpus_total
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: gpus total
+    unit_name: ''
+  - description: Pourcentage d'espace disque alloué
+    integration: mesos
+    interval: ''
+    metric_name: mesos.slave.disk_percent
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: disk percent
+    unit_name: percent
+  - description: Espace disque alloué
+    integration: mesos
+    interval: ''
+    metric_name: mesos.slave.disk_used
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: disk used
+    unit_name: mebibyte
+  - description: Espace disque
+    integration: mesos
+    interval: ''
+    metric_name: mesos.slave.disk_total
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: disk total
+    unit_name: mebibyte
+  - description: Pourcentage de mémoire allouée
+    integration: mesos
+    interval: ''
+    metric_name: mesos.slave.mem_percent
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: mem percent
+    unit_name: percent
+  - description: Mémoire allouée
+    integration: mesos
+    interval: ''
+    metric_name: mesos.slave.mem_used
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: mem used
+    unit_name: mebibyte
+  - description: Mémoire totale
+    integration: mesos
+    interval: ''
+    metric_name: mesos.slave.mem_total
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: mem total
+    unit_name: mebibyte
+  - description: Nombre d'executors enregistrés
+    integration: mesos
+    interval: ''
+    metric_name: mesos.slave.executors_registering
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: executors registering
+    unit_name: ''
+  - description: Nombre d'executors actifs
+    integration: mesos
+    interval: ''
+    metric_name: mesos.slave.executors_running
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: executors running
+    unit_name: ''
+  - description: Nombre d'executors terminés
+    integration: mesos
+    interval: ''
+    metric_name: mesos.slave.executors_terminated
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: executors terminated
+    unit_name: ''
+  - description: Nombre d'executors en train de se terminer
+    integration: mesos
+    interval: ''
+    metric_name: mesos.slave.executors_terminating
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: executors terminating
+    unit_name: ''
+  - description: Nombre de frameworks actifs
+    integration: mesos
+    interval: ''
+    metric_name: mesos.slave.frameworks_active
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: active frameworks
+    unit_name: ''
+  - description: Nombre de message de framework invalide
+    integration: mesos
+    interval: ''
+    metric_name: mesos.slave.invalid_framework_messages
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: invalid framework msgs
+    unit_name: message
+  - description: Nombre d'updates de status invalides
+    integration: mesos
+    interval: ''
+    metric_name: mesos.slave.invalid_status_updates
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: invalid status updates
+    unit_name: ''
+  - description: Nombre d'erreurs rencontrées lors de la récupération du slave
+    integration: mesos
+    interval: ''
+    metric_name: mesos.slave.recovery_errors
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: recovery errors
+    unit_name: error
+  - description: Nombre de message de framework valide
+    integration: mesos
+    interval: ''
+    metric_name: mesos.slave.valid_framework_messages
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: valid framework msgs
+    unit_name: message
+  - description: Nombre d'updates de status valide
+    integration: mesos
+    interval: ''
+    metric_name: mesos.slave.valid_status_updates
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: valid status updates
+    unit_name: ''

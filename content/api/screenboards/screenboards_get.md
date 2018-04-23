@@ -1,7 +1,7 @@
 ---
 title: Get a Screenboard
 type: apicontent
-order: 17.4
+order: 18.4
 external_redirect: /api/#get-a-screenboard
 ---
 
@@ -11,3 +11,4 @@ Fetch an existing Screenboard's definition.
 ##### ARGUMENTS
 
 This end point takes no JSON arguments.
+

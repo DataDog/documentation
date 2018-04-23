@@ -1,12 +1,12 @@
 ---
 title: Unmute a host
 type: apicode
-order: 12.2
+order: 13.2
 external_redirect: /api/#unmute-a-host
 ---
 
 ##### Signature
-`POST /api/v1/host/:hostname/unmute`
+`POST https://api.datadoghq.com/api/v1/host/:hostname/unmute`
 ##### Example Request
 {{< code-snippets basename="api-host-unmute" >}}
 ##### Example Response

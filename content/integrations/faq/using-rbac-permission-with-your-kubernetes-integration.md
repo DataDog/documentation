@@ -3,7 +3,7 @@ title: Using RBAC permission with your Kubernetes integration
 kind: faq
 ---
 
-Use these Kubernetes RBAC entities to configure permissions for your Datadog Agent service account. For more information about service accounts, see the [Kubernetes documentation](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/).
+Use these Kubernetes RBAC entities to configure permissions for your Datadog Agent service account. For more information about service accounts, see the [Kubernetes documentation][1].
 
 ```yaml
   kind: ClusterRole
@@ -19,18 +19,26 @@ Use these Kubernetes RBAC entities to configure permissions for your Datadog Age
     resources:
       - "nodes"
       - "namespaces"  #
-      - "events"      # Cluster events + kube_service cache invalidation
+      - "events"      # Cluster events 
       - "services"    # kube_service tag
+      - "pods"
+      - "endpoints"   # kube_service tag
+      - "componentstatuses"
     verbs: ["get", "list"]
   - apiGroups: [""]
     resources:
       - "configmaps"
-    resourceNames: ["datadog-leader-elector"]
-    verbs: ["get", "delete", "update"]
+    resourceNames: ["datadog-leader-election"]
+    verbs: ["get", "list", "create", "delete", "update"]
   - apiGroups: [""]
     resources:
       - "configmaps"
     verbs: ["create"]
+  - apiGroups: [""]
+    resources:
+      - "configmaps"
+    resourceNames: ["datadogtoken"]
+    verbs: ["get", "update"]    
   ---
   # You need to use that account for your dd-agent DaemonSet
   apiVersion: v1
@@ -61,7 +69,7 @@ Use these Kubernetes RBAC entities to configure permissions for your Datadog Age
   kubectl create -f datadog-serviceaccount.yaml
   ```
 
-* Update the dd-agent daemonset config as follows:
+* Update the `dd-agent` daemonset config as follows:
   ```
   ...
       spec:
@@ -73,3 +81,5 @@ Use these Kubernetes RBAC entities to configure permissions for your Datadog Age
   ```
   kubectl replace --force -f configs/dd-agent/dd-agent.yaml
   ```
+
+[1]: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/

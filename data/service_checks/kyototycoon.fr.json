@@ -1,0 +1,11 @@
+[
+    {
+        "agent_version": "5.2.0",
+        "integration":"kyoto_tycoon",
+        "check": "kyototycoon.can_connect",
+        "statuses": ["ok", "critical"],
+        "groups": ["host", "instance"],
+        "name": "Peut se connecter",
+        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter a l'instance KyotoTycoon qu'il monitor. Sinon renvoie `OK`."
+    }
+]

@@ -86,7 +86,7 @@ description: "Configure NXLog to gather logs from your host, containers & servic
 
 ### NXLog TLS encryption
 
-1. [Download the public key for TLS encryption of logs](https://gist.githubusercontent.com/estib/8762bc1a2a5bda781a6e55cca40235f2/raw/665b6b2906a728027f508ea067f01cdf3cf72b49/intake.logs.datadoghq.com.crt).
+1. [Download the public key for TLS encryption of logs][1].
 
 2. Add the `om_sll` module in your NXLog configuration to enable secure transfer over port 10516:
 
@@ -100,3 +100,5 @@ description: "Configure NXLog to gather logs from your host, containers & servic
       AllowUntrusted FALSE
     </Output>
     ```
+
+[1]: https://gist.githubusercontent.com/estib/8762bc1a2a5bda781a6e55cca40235f2/raw/665b6b2906a728027f508ea067f01cdf3cf72b49/intake.logs.datadoghq.com.crt

@@ -1,0 +1,106 @@
+azure_sql_elastic_pool:
+  - description: Utilisation moyenne du calcul en pourcentage de la limite du pool
+    integration: azure_sql_elastic_pool
+    interval: ''
+    metric_name: azure.sql_servers_elasticpools.cpu_percent
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cpu pct
+    unit_name: percent
+  - description: >-
+      Utilisation moyenne de l'eDTU en pourcentage de la limite eDTU pour le
+      pool.
+    integration: azure_sql_elastic_pool
+    interval: ''
+    metric_name: azure.sql_servers_elasticpools.dtu_consumption_percent
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: DTU pct
+    unit_name: percent
+  - description: Current max elastic pool DTU setting for this elastic pool
+    integration: azure_sql_elastic_pool
+    interval: ''
+    metric_name: azure.sql_servers_elasticpools.e_dtu_limit
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: eDTU Limit
+    unit_name: unit
+  - description: Moyenne de eDTUs utilisés par le pool
+    integration: azure_sql_elastic_pool
+    interval: ''
+    metric_name: azure.sql_servers_elasticpools.e_dtu_used
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: eDTU Used
+    unit_name: unit
+  - description: Average write resource utilization in percentage of the limit of the pool
+    integration: azure_sql_elastic_pool
+    interval: ''
+    metric_name: azure.sql_servers_elasticpools.log_write_percent
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Log IO pct
+    unit_name: percent
+  - description: Average I/O utilization in percentage based on the limit of the pool
+    integration: azure_sql_elastic_pool
+    interval: ''
+    metric_name: azure.sql_servers_elasticpools.physical_data_read_percent
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Data IO pct
+    unit_name: percent
+  - description: Maximum concurrent sessions in percentage based on the limit of the pool
+    integration: azure_sql_elastic_pool
+    interval: ''
+    metric_name: azure.sql_servers_elasticpools.sessions_percent
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Sessions pct
+    unit_name: percent
+  - description: >-
+      Current max elastic pool storage limit setting for this elastic pool in
+      megabytes during this interval
+    integration: azure_sql_elastic_pool
+    interval: ''
+    metric_name: azure.sql_servers_elasticpools.storage_limit
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Storage Limit
+    unit_name: byte
+  - description: Current max elastic pool storage limit setting for this elastic pool
+    integration: azure_sql_elastic_pool
+    interval: ''
+    metric_name: azure.sql_servers_elasticpools.storage_percent
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Database Size pct
+    unit_name: percent
+  - description: Average storage used by the pool in this interval in bytes
+    integration: azure_sql_elastic_pool
+    interval: ''
+    metric_name: azure.sql_servers_elasticpools.storage_used
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Storage Used
+    unit_name: byte
+  - description: >-
+      Maximum concurrent workers (requests) in percentage based on the limit of
+      the pool
+    integration: azure_sql_elastic_pool
+    interval: ''
+    metric_name: azure.sql_servers_elasticpools.workers_percent
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Workers pct
+    unit_name: percent

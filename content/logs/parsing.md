@@ -3,13 +3,13 @@ title: Parsing
 kind: documentation
 description: "Parse your logs using the Grok Processor"
 further_reading:
-- link: "/logs/processing"
+- link: "logs/processing"
   tag: "Documentation"
   text: Learn how to process your logs
-- link: "/logs/faq/how-to-investigate-a-log-parsing-issue"
+- link: "logs/faq/how-to-investigate-a-log-parsing-issue"
   tag: "FAQ"
   text: How to investigate a log parsing issue?
-- link: "/logs/faq/log-parsing-best-practice"
+- link: "logs/faq/log-parsing-best-practice"
   tag: "FAQ"
   text: Log Parsing - Best Practice
 ---
@@ -54,7 +54,8 @@ Here is the list of all the matchers natively implemented by Datadog:
 |**Pattern**| **Usage**|
 |`date("pattern"[, "timezoneId"[, "localeId"]])`| matches a date with the specified pattern and parses to produce a unix timestamp [More info](#parsing-dates)|
 |`regex("pattern")` |matches a regex|
-| `data` |matches a string until the next newline |
+| `data` |matches any string including spaces and newlines. Equivalent to `.*` |
+| `notSpace` |matches any string until the next space |
 |`boolean("truePattern", "falsePattern")`|matches and parses a boolean optionally defining the true and false patterns (defaults to 'true' and 'false' ignoring case)|
 | `numberStr` | matches a decimal floating point number and parses it as a string|
 |`number` |matches a decimal floating point number and parses it as a double precision number |
@@ -93,7 +94,7 @@ Here is the list of all the filters natively implemented by Datadog:
 |`json`| parses properly formatted JSON |
 |`rubyhash`| parses properly formatted Ruby Hash (eg {name => "John" "job" => {"company" => "Big Company", "title" => "CTO"}})|
 |`geoip` |parses an IP or a host and returns a JSON object that contains the continent, country, city and location of the IP address.|
-|`useragent([decodeuricomponent:true/false])`| parses a user-agent and returns a JSON object that contains the device, os and the browser represented by the agent. [More info](#useragent-parser)|
+|`useragent([decodeuricomponent:true/false])`| parses a user-agent and returns a JSON object that contains the device, os and the browser represented by the Agent. [More info](#useragent-parser)|
 |`querystring`| extracts all the key-value pairs in a matching URL query string (eg. "productId=superproduct&promotionCode=superpromo")|
 |`decodeuricomponent`| this core filter decodes uri components.|
 |`lowercase`| returns the lower cased string.|
@@ -101,7 +102,7 @@ Here is the list of all the filters natively implemented by Datadog:
 |`keyvalue([separatorStr[, characterWhiteList [, quotingStr]])` |extracts key value pattern and returns a JSON object. [More info](#key-value) |
 |`scale(factor)` | multiplies the expected numerical value by the provided factor.|
 |`array([[openCloseStr, ] separator][, subRuleOrFilter)` | parses a string sequence of tokens and returns it as an array.|
-|`url`|parses a url and returns all the tokenized members (domain, query params, port, etc) in a JSON object. [More info](/logs/processing/#url-parser)|
+|`url`|parses a url and returns all the tokenized members (domain, query params, port, etc) in a JSON object. [More info][1]|
 {{% /table %}}
 
 ## Examples
@@ -126,7 +127,7 @@ user=john connect_date=11/08/2017 id=123 action=click
 Rule
 
 ```
-rule keyvalue("="," "))
+rule %{data::keyvalue}
 ```
 
 {{< img src="logs/parsing/parsing_example_2.png" alt="Parsing example 2" responsive="true" popup="true">}}
@@ -141,22 +142,21 @@ If you add an **extract** parameter in your rule pattern you would have:
 The date matcher transforms your timestamp in the EPOCH format.
 
 {{% table responsive="true" %}}
-|**Raw string** | **Parsing rule** | **Result** |
+|**Raw string** | **Parsing rule** | **Result** |
 |:---|:----|:----|
-|14:20:15| `%{date("HH:mm:ss"):date}` |{"date": 51615000} |
+|14:20:15| `%{date("HH:mm:ss"):date}` |{"date": 51615000} |
 |11/10/2014| `%{date("dd/mm/yyyy"):date}`| {"date": 1412978400000}|
-|Thu Jun 16 08:29:03 2016 | `%{date("EEE MMM dd HH:mm:ss yyyy"):date}` | {"date": 1466065743000}|
-|Tue Nov 1 08:29:03 2016 | `%{date("EEE MMM d HH:mm:ss yyyy"):date}` | {"date": 1466065743000}|
+|Thu Jun 16 08:29:03 2016 | `%{date("EEE MMM dd HH:mm:ss yyyy"):date}` | {"date": 1466065743000}|
+|Tue Nov 1 08:29:03 2016 | `%{date("EEE MMM d HH:mm:ss yyyy"):date}` | {"date": 1466065743000}|
 |06/Mar/2013:01:36:30 +0900| `%{date("dd/MMM/yyyy:HH:mm:ss Z"):date}` | {"date": 1362501390000}|
-|2016-11-29T16:21:36.431+0000| `%{date("yyyy-MM-dd'T'HH:mm:ss.SSSZ"):date}` | {"date": 1480436496431} |
-|2016-11-29T16:21:36.431+00:00| `%{date("yyyy-MM-dd'T'HH:mm:ss.SSSZZ"):date}` | {"date": 1480436496431} |
-|06/Feb/2009:12:14:14.655 | `%{date("dd/MMM/yyyy:HH:mm:ss.SSS"):date}` | {“date”: 1233922454655}|
+|2016-11-29T16:21:36.431+0000| `%{date("yyyy-MM-dd'T'HH:mm:ss.SSSZ"):date}` | {"date": 1480436496431} |
+|2016-11-29T16:21:36.431+00:00| `%{date("yyyy-MM-dd'T'HH:mm:ss.SSSZZ"):date}` | {"date": 1480436496431} |
+|06/Feb/2009:12:14:14.655 | `%{date("dd/MMM/yyyy:HH:mm:ss.SSS"):date}` | {“date”: 1233922454655}|
 |Thu Jun 16 08:29:03 2016 | `%{date("EEE MMM dd HH:mm:ss yyyy","Europe/Paris"):date}` |{"date": 1466058543000}|
 |2007-08-31 19:22:22.427 ADT|`%{date("yyyy-MM-dd HH:mm:ss.SSS z"):date}`|{"date": 1188675889244}|
 {{% /table %}}
 
-**Note**: Parsing a date **doesn't** set its value as the log official date, for this use the Log Date Remapper [Log Date Remapper](/logs/processing/#log-date-remapper) in a subsequent processor.
-
+**Note**: Parsing a date **doesn't** set its value as the log official date, for this use the Log Date Remapper [Log Date Remapper][2] in a subsequent processor.
 
 ### Conditional pattern
 
@@ -221,3 +221,6 @@ MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-Z0-9]*"):user.id} .*
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /logs/processing/#url-parser
+[2]: /logs/processing/#log-date-remapper

@@ -1,7 +1,7 @@
 ---
 title: Unmute a monitor
 type: apicontent
-order: 15.91
+order: 16.10
 external_redirect: /api/#unmute-a-monitor
 ---
 
@@ -13,3 +13,4 @@ external_redirect: /api/#unmute-a-monitor
     For example, if your alert is grouped by {host}, you might mute 'host:app1'
 * **`all_scopes`** [*optional*, *default* = **False**]:  
     Clear muting across all scopes
+

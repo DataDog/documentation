@@ -3,13 +3,13 @@ title: Host monitor
 kind: documentation
 description: "Check if one or more hosts are reporting to Datadog"
 further_reading:
-- link: "/monitors/notifications"
+- link: "monitors/notifications"
   tag: "Documentation"
   text: Configure your monitor notifications
-- link: "/monitors/downtimes"
+- link: "monitors/downtimes"
   tag: "Documentation"
   text: Schedule a dowtime to mute a monitor
-- link: "/monitors/faq"
+- link: "monitors/faq"
   tag: "FAQ"
   text: Monitors FAQ
 ---
@@ -30,7 +30,9 @@ with a status `UP`. You can monitor this heartbeat across one or more hosts.
     {{< img src="monitors/monitor_types/host/no_data_timeframe.png" alt="host monitor no data timeframe" responsive="true" popup="true" style="width:80%;">}}
 
 3. Configure your **notification options**:  
-    Refer to the [Notifications](/monitors/notifications) dedicated documentation page for a detailed walkthrough of the common notification options.
+    Refer to the [Notifications][1] dedicated documentation page for a detailed walkthrough of the common notification options.
 
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /monitors/notifications

@@ -1,0 +1,662 @@
+mesos_master:
+  - description: Framework cpu
+    integration: mesos
+    interval: ''
+    metric_name: mesos.framework.cpu
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: framework cpu
+    unit_name: ''
+  - description: Framework mem
+    integration: mesos
+    interval: ''
+    metric_name: mesos.framework.mem
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: framework mem
+    unit_name: mebibyte
+  - description: Framework disk
+    integration: mesos
+    interval: ''
+    metric_name: mesos.framework.disk
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: framework disk
+    unit_name: mebibyte
+  - description: Role cpu
+    integration: mesos
+    interval: ''
+    metric_name: mesos.role.cpu
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: role cpu
+    unit_name: ''
+  - description: Role mem
+    integration: mesos
+    interval: ''
+    metric_name: mesos.role.mem
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: role mem
+    unit_name: mebibyte
+  - description: Role disk
+    integration: mesos
+    interval: ''
+    metric_name: mesos.role.disk
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: role disk
+    unit_name: mebibyte
+  - description: Nombre de tâches invalides
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.tasks_error
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: task errors
+    unit_name: task
+  - description: Nombre de tâche échouée
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.tasks_failed
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: failed tasks
+    unit_name: task
+  - description: Nombre de tâches terminées
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.tasks_finished
+    metric_type: count
+    orientation: '0'
+    per_unit_name: ''
+    short_name: finished tasks
+    unit_name: task
+  - description: Nombre de tâches tuées
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.tasks_killed
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: tasks killed
+    unit_name: task
+  - description: Nombre de tâches perdues
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.tasks_lost
+    metric_type: count
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: tasks lost
+    unit_name: task
+  - description: Nombre de tâches en cours
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.tasks_running
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: running tasks
+    unit_name: task
+  - description: Nombre de tâche en staging
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.tasks_staging
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: staging tasks
+    unit_name: task
+  - description: Nombre de tâche en train de démarrer
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.tasks_starting
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: starting tasks
+    unit_name: task
+  - description: >-
+      Number of slaves that were able to cleanly re-join the cluster and connect
+      back to the master after the master is disconnected.
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.slave_registrations
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: slave registrations
+    unit_name: ''
+  - description: 'Nombre de slaves retirés pour différentes raison, incluant la maintenance'
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.slave_removals
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: slave removals
+    unit_name: ''
+  - description: Number of slave re-registrations
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.slave_reregistrations
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: slave reregistrations
+    unit_name: ''
+  - description: Number of cancelled slave shutdowns
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.slave_shutdowns_canceled
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: slave shutdowns canceled
+    unit_name: ''
+  - description: >-
+      Number of slaves which have failed their health check and are scheduled to
+      be removed
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.slave_shutdowns_scheduled
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: slave shutdowns scheduled
+    unit_name: ''
+  - description: Number of active slaves
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.slaves_active
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: active slaves
+    unit_name: ''
+  - description: Number of connected slaves
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.slaves_connected
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: connected slaves
+    unit_name: ''
+  - description: Number of disconnected slaves
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.slaves_disconnected
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: disconnected slaves
+    unit_name: ''
+  - description: Number of inactive slaves
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.slaves_inactive
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: inactive slaves
+    unit_name: ''
+  - description: Pourcentage de CPU alloués
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.cpus_percent
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cpus percent
+    unit_name: percent
+  - description: Nombre de CPU alloués
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.cpus_used
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cpus used
+    unit_name: ''
+  - description: Nombre de CPU
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.cpus_total
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: cpus total
+    unit_name: ''
+  - description: Pourcentage de GPU alloués
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.gpus_percent
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: gpus percent
+    unit_name: percent
+  - description: Nombre de GPU alloués
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.gpus_used
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: gpus used
+    unit_name: ''
+  - description: Nombre de GPU
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.gpus_total
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: gpus total
+    unit_name: ''
+  - description: Pourcentage d'espace disque alloués
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.disk_percent
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: disk percent
+    unit_name: percent
+  - description: Espace disque alloué
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.disk_used
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: disk used
+    unit_name: mebibyte
+  - description: Espace disque
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.disk_total
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: disk total
+    unit_name: mebibyte
+  - description: Pourcentage de mémoire alloué
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.mem_percent
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: mem percent
+    unit_name: percent
+  - description: Mémoire allouée
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.mem_used
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: mem used
+    unit_name: mebibyte
+  - description: Mémoire totale
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.mem_total
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: mem total
+    unit_name: mebibyte
+  - description: Nombre d'opérations en file d'attente
+    integration: mesos
+    interval: ''
+    metric_name: mesos.registrar.queued_operations
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: queued operations
+    unit_name: ''
+  - description: Registry size
+    integration: mesos
+    interval: ''
+    metric_name: mesos.registrar.registry_size_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: registry size
+    unit_name: byte
+  - description: Registry read latency
+    integration: mesos
+    interval: ''
+    metric_name: mesos.registrar.state_fetch_ms
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: read latency
+    unit_name: millisecond
+  - description: Registry write latency
+    integration: mesos
+    interval: ''
+    metric_name: mesos.registrar.state_store_ms
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: write latency
+    unit_name: millisecond
+  - description: Registry write count
+    integration: mesos
+    interval: ''
+    metric_name: mesos.registrar.state_store_ms.count
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: write count
+    unit_name: ''
+  - description: Maximum registry write latency
+    integration: mesos
+    interval: ''
+    metric_name: mesos.registrar.state_store_ms.max
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: latency max
+    unit_name: millisecond
+  - description: Minimum registry write latency
+    integration: mesos
+    interval: ''
+    metric_name: mesos.registrar.state_store_ms.min
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: latency min
+    unit_name: millisecond
+  - description: Median registry write latency
+    integration: mesos
+    interval: ''
+    metric_name: mesos.registrar.state_store_ms.p50
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: latency p50
+    unit_name: millisecond
+  - description: 90th percentile registry write latency
+    integration: mesos
+    interval: ''
+    metric_name: mesos.registrar.state_store_ms.p90
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: latency p90
+    unit_name: millisecond
+  - description: 95th percentile registry write latency
+    integration: mesos
+    interval: ''
+    metric_name: mesos.registrar.state_store_ms.p95
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: latency p95
+    unit_name: millisecond
+  - description: 99th percentile registry write latency
+    integration: mesos
+    interval: ''
+    metric_name: mesos.registrar.state_store_ms.p99
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: latency p99
+    unit_name: millisecond
+  - description: 99.9th percentile registry write latency
+    integration: mesos
+    interval: ''
+    metric_name: mesos.registrar.state_store_ms.p999
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: latency p999
+    unit_name: millisecond
+  - description: 99.99th percentile registry write latency
+    integration: mesos
+    interval: ''
+    metric_name: mesos.registrar.state_store_ms.p9999
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: latency p9999
+    unit_name: millisecond
+  - description: Registrar log recovered
+    integration: mesos
+    interval: ''
+    metric_name: mesos.registrar.log.recovered
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: registrar log recovered
+    unit_name: ''
+  - description: Nombre de frameworks actifs
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.frameworks_active
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: active frameworks
+    unit_name: ''
+  - description: Number of connected frameworks
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.frameworks_connected
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: connected frameworks
+    unit_name: ''
+  - description: Number of disconnected frameworks
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.frameworks_disconnected
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: disconnected frameworks
+    unit_name: ''
+  - description: Number of inactive frameworks
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.frameworks_inactive
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: inactive frameworks
+    unit_name: ''
+  - description: Nombre de CPU disponibles
+    integration: mesos
+    interval: ''
+    metric_name: mesos.stats.system.cpus_total
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: cpus total
+    unit_name: ''
+  - description: Charge moyenne pour les 15 dernières minutes
+    integration: mesos
+    interval: ''
+    metric_name: mesos.stats.system.load_15min
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: load 15
+    unit_name: ''
+  - description: Charge moyenne pour les dernières minutes
+    integration: mesos
+    interval: ''
+    metric_name: mesos.stats.system.load_1min
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: load 1
+    unit_name: ''
+  - description: Charge moyenne pour les 5 dernières minutes
+    integration: mesos
+    interval: ''
+    metric_name: mesos.stats.system.load_5min
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: load 5
+    unit_name: ''
+  - description: Mémoire libre.
+    integration: mesos
+    interval: ''
+    metric_name: mesos.stats.system.mem_free_bytes
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: mem free
+    unit_name: byte
+  - description: Mémoire totale
+    integration: mesos
+    interval: ''
+    metric_name: mesos.stats.system.mem_total_bytes
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: mem total
+    unit_name: byte
+  - description: Whether this is the elected master
+    integration: mesos
+    interval: ''
+    metric_name: mesos.stats.elected
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: elected master
+    unit_name: ''
+  - description: Uptime
+    integration: mesos
+    interval: ''
+    metric_name: mesos.stats.uptime_secs
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: uptime
+    unit_name: second
+  - description: Number of dropped messages
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.dropped_messages
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: dropped msgs
+    unit_name: message
+  - description: Nombre d'offres de ressources exceptionnelles
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.outstanding_offers
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: outstanding msgs
+    unit_name: ''
+  - description: Number of dispatches in the event queue
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.event_queue_dispatches
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: event queue dispatches
+    unit_name: ''
+  - description: Number of HTTP requests in the event queue
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.event_queue_http_requests
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: event queue http requests
+    unit_name: request
+  - description: Number of messages in the event queue
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.event_queue_messages
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: event queue msgs
+    unit_name: message
+  - description: Nombre de message de framework invalide
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.invalid_framework_to_executor_messages
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: invalid framework msgs
+    unit_name: message
+  - description: Number of invalid status update acknowledgements
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.invalid_status_update_acknowledgements
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: invalid status update acknowledgements
+    unit_name: ''
+  - description: Nombre d'updates de status invalides
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.invalid_status_updates
+    metric_type: gauge
+    orientation: '-1'
+    per_unit_name: ''
+    short_name: status updates
+    unit_name: ''
+  - description: Number of valid framework messages
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.valid_framework_to_executor_messages
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: valid framework msgs
+    unit_name: message
+  - description: Number of valid status update acknowledgements
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.valid_status_update_acknowledgements
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: valid status update acknowledgements
+    unit_name: ''
+  - description: Nombre d'updates de status valide
+    integration: mesos
+    interval: ''
+    metric_name: mesos.cluster.valid_status_updates
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: valid status updates
+    unit_name: ''
+  - description: Si ce slave est enregistré avec un master
+    integration: mesos
+    interval: ''
+    metric_name: mesos.stats.registered
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: slave registered
+    unit_name: ''

@@ -74,7 +74,7 @@ kind: faq
 |Chef|CHEF|
 |Cloud Foundry|CLOUDFOUNDRY|
 |Cloudhealth|CLOUDHEALTH|
-|Cloud Service Health|CLOUDSERVICEHEALTH|
+|Cloudnetworkhealth|CLOUDNETWORKHEALTH|
 |Consul|CONSUL|
 |Couchbase|COUCHBASE|
 |Couchdb|COUCHDB|
@@ -199,6 +199,7 @@ kind: faq
 |Verisign|VERISIGN|
 |Victorops|VICTOROPS|
 |Vsphere|VSPHERE|
+|Watchdog|WATCHDOG|
 |Webhooks|WEBHOOKS|
 |Webmetrics|WEBMETRICS|
 |Windows Service|WINDOWSSERVICE|

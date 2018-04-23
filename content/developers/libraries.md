@@ -24,8 +24,10 @@ The following table lists Datadog-official and community contributed [Trace](/tr
 In addition to the official Ansible integration, the [monitoring section][46] of the [ansible-modules-extras][47] repository contains modules that interact with Datadog.
 
 ### Aptible
-Enclave can deliver your metrics to a Datadog account. [Consult the dedicated Aptible help center to learn how](https://www.aptible.com/documentation/enclave/reference/metrics/metric-drains/datadog.html).
+Enclave delivers your metrics to a Datadog account. [Consult the dedicated Aptible help center to learn how][111].
 
+### Auth0
+[This extension][110] takes your Auth0 logs and ships them to Datadog.
 ### Consul
 Publish consul service counts into Datadog via [DogStatsD](/developers/dogstatsd) with [this library][96].
 
@@ -36,7 +38,7 @@ Scale up auto-scale groups based on the results of a Datadog query with [Dogscal
 This [plugin][101] sends any Dynatrace measure from a chart to Datadog.
 
 ### FreeSwitch
-This is for a [FreeSwitch ESL ][48] application to export statistics to DataDog using the DogStatsD API and is written by [WiMacTel][49].
+This is for a [FreeSwitch ESL ][48] application to export statistics to Datadog using the DogStatsD API and is written by [WiMacTel][49].
 
 ### Google Analytics
 You can get data into Datadog from Google Analytics using our API with [this library][105] from [Bithaus][106] or [this library][50].
@@ -68,6 +70,10 @@ This [library][51] allows you to generate process information from StatsD, given
 
 ### Sensu
 Use these Sensu [handlers][103] to automatically send both metrics and events to Datadog.
+
+### StackStorm
+
+This StackStorm Datadog [integration pack][109] supplies action integration for Datadog.
 
 ### Winston
 A Winston Datadog [transport][104].
@@ -184,3 +190,6 @@ If you've written a Datadog library and would like to add it to this page, write
    [106]: https://blog.bithaus.cl/2016/04/20/realtime-google-analytics-metrics-in-datadog/
    [107]: https://github.com/byronwolfman/dd-openvpn
    [108]: https://github.com/denniswebb/datadog-openvpn
+   [109]: https://github.com/StackStorm-Exchange/stackstorm-datadog
+   [110]: https://github.com/BetaProjectWave/auth0-logs-to-datadog
+   [111]: https://www.aptible.com/documentation/enclave/reference/metrics/metric-drains/datadog.html

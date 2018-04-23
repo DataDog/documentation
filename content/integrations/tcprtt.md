@@ -12,7 +12,7 @@ ddtype: check
 ---
 ## Overview
 
-The TCP RTT check reports on roundtrip times between the host the agent is running on and any host it is communicating with. This check is passive and will only report RTT times for packets being sent and received from outside the check. The check itself will not send any packets.
+The TCP RTT check reports on roundtrip times between the host the Agent is running on and any host it is communicating with. This check is passive and will only report RTT times for packets being sent and received from outside the check. The check itself will not send any packets.
 
 This check is only shipped in the 64-bit DEB and RPM Datadog Agent packages.
 
@@ -37,7 +37,7 @@ Finally, configure PCAP:
 
 ### Configuration
 
-Edit the `go-metro.yaml` file in your agent's `conf.d` directory. The following is an example file that will show the TCP RTT times for app.datadoghq.com and 192.168.0.22:
+Edit the `go-metro.yaml` file in your Agent's `conf.d` directory. The following is an example file that will show the TCP RTT times for app.datadoghq.com and 192.168.0.22:
 
     init_config:
       snaplen: 512
@@ -57,14 +57,13 @@ Edit the `go-metro.yaml` file in your agent's `conf.d` directory. The following 
         hosts:
           - app.datadoghq.com
 
-
 {{< insert-example-links conf="go-metro" check="none" >}}
 
 ### Validation
 
 To validate that the check is running correctly, you should see `system.net.tcp.rtt` metrics showing in the Datadog interface. Also, if you run `sudo /etc/init.d/datadog-agent status`, you should see something similar to the following:
 
-    ● datadog-agent.service - "Datadog Agent"
+     datadog-agent.service - "Datadog Agent"
        Loaded: loaded (/lib/...datadog-agent.service; enabled; vendor preset: enabled)
        Active: active (running) since Thu 2016-03-31 20:35:27 UTC; 42min ago
       Process: 10016 ExecStop=/opt/.../supervisorctl -c /etc/dd-....conf shutdown (code=exited, status=0/SUCCESS)

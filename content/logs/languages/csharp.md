@@ -2,23 +2,26 @@
 title: C# log collection
 kind: documentation
 further_reading:
-- link: "/logs/processing"
+- link: "logs/processing"
   tag: "Documentation"
   text: Learn how to process your logs
-- link: "/logs/parsing"
+- link: "logs/parsing"
   tag: "Documentation"
   text: Learn more about parsing
-- link: "/logs/explore"
+- link: "logs/explore"
   tag: "Documentation"
   text: Learn how to explore your logs
-- link: /logs/faq/log-collection-troubleshooting-guide
+- link: "logs/graph"
+  tag: "Documentation"
+  text: "Perform analytics with Log Graphs"
+- link: "logs/faq/log-collection-troubleshooting-guide"
   tag: "FAQ"
   text: Log Collection Troubleshooting Guide
 ---
 
-To send your C# logs to Datadog, we recommend logging to a file and then tailing that file with your Datadog agent. Here are setup examples for the `log4Net`, `serilog` and `Nlog` logging libraries
+To send your C# logs to Datadog, we recommend logging to a file and then tailing that file with your Datadog Agent. Here are setup examples for the `log4Net`, `serilog` and `Nlog` logging libraries
 
-We strongly encourage setting up your logging library to produce your logs in JSON format to avoid the need for [custom parsing rules](/logs/parsing).
+We strongly encourage setting up your logging library to produce your logs in JSON format to avoid the need for [custom parsing rules][1].
 
 ## Configure your logger
 ### SeriLog
@@ -70,7 +73,7 @@ Then check the `log.json` file to see the following event:
 }
 ```
 
-[Monitor now your log file with your agent](/logs/#tail-existing-files) to send your logs to your Datadog application
+[Monitor now your log file with your Agent][2] to send your logs to your Datadog application
 
 ### NLog
 
@@ -139,7 +142,7 @@ namespace Datadog
 }
 ```
 
-[Monitor now your log file with your agent](/logs/#tail-existing-files) to send your logs to your Datadog application.
+[Monitor now your log file with your Agent][2] to send your logs to your Datadog application.
 
 ### Log4Net
 
@@ -235,7 +238,7 @@ If despite the benefits of logging in JSON you wish to remain in a raw string fo
 <param name="ConversionPattern" value="%date%d{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread] %logger %method:%line - %message%n" />
 ```
 
-## Configure your Datadog agent
+## Configure your Datadog Agent
 
 Create a `csharp.d/conf.yaml` file in your `conf.d/` folder with the following content:
 
@@ -271,3 +274,6 @@ That's it! Now, all your logs are going to be in proper JSON automatically under
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /logs/parsing
+[2]: /logs/#tail-existing-files

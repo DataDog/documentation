@@ -21,7 +21,6 @@ wistiaid: ypvryxgc2c
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-
 Orchestration platforms like Docker Swarm, Kubernetes, and Amazon ECS make running containerized services easier and more resilient by handling workload scheduling and request routing. But all of that makes monitoring more difficult. How can you reliably monitor a service which by design constantly changes the definition normal as it moves applications between hosts? The Datadog Agent can automatically track which services are running where, thanks to its Autodiscovery feature. This video will show you how easy it is to get started with Autodiscovery on Kubernetes with Datadog.
 
 * [Container Challenges](?wtime=5)

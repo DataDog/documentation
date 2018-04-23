@@ -1,0 +1,11 @@
+[
+    {
+        "agent_version": "5.2.0",
+        "integration":"vsphere",
+        "check": "vcenter.can_connect",
+        "statuses": ["ok", "critical"],
+        "groups": ["host", "vcenter_server", "vcenter_host"],
+        "name": "Peut se connecter",
+        "description": "Renvoie le statut après avoir ping votre instance vCenter. Des informations supplémentaires sur la statut de la réponse et son temps de collection sont inclus dans le message du check."
+    }
+]

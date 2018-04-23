@@ -1,13 +1,14 @@
 ---
 title: Get user
 type: apicode
-order: 23.2
+order: 24.2
 external_redirect: /api/#get-user
 ---
 
 ##### Signature
-`GET api/v1/user/:handle`
+`GET https://api.datadoghq.com/api/v1/user/:id`
 ##### Example Request
 {{< code-snippets basename="api-user-get" >}}
 ##### Example Response
 {{< code-snippets basename="result.api-user-get" >}}
+

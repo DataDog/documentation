@@ -2,15 +2,15 @@
 title: How to monitor SNMP devices?
 kind: faq
 further_reading:
-- link: "/agent/"
+- link: "agent/"
   tag: "Documentation"
   text: Learn more about the Datadog Agent
-- link: "/integrations/snmp"
+- link: "integrations/snmp"
   tag: "Integration"
   text: Learn more about the Datadog-SNMP integration
 ---
 
-Simple Network Management Protocol (SNMP) is the de facto standard for monitoring network-connected devices, such as routers, switches, servers, and firewalls.
+Simple Network Management Protocol (SNMP) is the de facto standard for monitoring network-connected devices, such as routers, switches, servers, and firewalls.
 
 In this article, we go through monitoring a Juniper SRX firewall, using the Datadog Agent installed on an Ubuntu 14-04 workstation.
 
@@ -113,7 +113,7 @@ SNMP table: IF-MIB::ifTable
 [...]
 ```
 
-Now we tell the agent to poll it and to use the value of the ifDescr column as tag, so we can differentiate the ports:
+Now we tell the Agent to poll it and to use the value of the ifDescr column as tag, so we can differentiate the ports:
 
 ```yaml
 init_config:
@@ -148,7 +148,7 @@ instances:
 
 Note that the column name must be present in the output of snmptable.
 
-Now we [restart the agent](/agent/faq/agent-commands) and we make sure that the check is collecting metrics, it can take up to 1 minute to update:
+Now we [restart the Agent][1] and we make sure that the check is collecting metrics, it can take up to 1 minute to update:
 
 ```
 $ sudo service datadog-agent info
@@ -171,3 +171,5 @@ In the Metrics Explorer or a dashboard, we can plot snmp.ifInOctets, filter by d
 {{< img src="agent/faq/metric_explorer_plot.png" alt="Metric Explorer Plot" responsive="true" popup="true">}}
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /agent/faq/agent-commands

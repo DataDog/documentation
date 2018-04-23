@@ -15,8 +15,6 @@ doclevel:
 
 ## 概要
 
-
-
 <!-- Connect PostgreSQL to Datadog in order to:
 
 - Visualize your database performance.

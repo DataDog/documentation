@@ -88,9 +88,15 @@ $(document).ready(function () {
         var query = "";
         try {query = results[1];} catch (e) {}
 
+        // get indexname by language
+        var indexName = "docs_english";
+        if(window.location.pathname.indexOf("/fr/") > -1) {
+            indexName = "docs_french";
+        }
+
         // get results from algolia
         client.search([{
-            indexName: 'docs_english',
+            indexName: indexName,
             query: decodeURIComponent(query),
             params: {
                 hitsPerPage: 200,
@@ -155,6 +161,7 @@ $(document).ready(function () {
                             if(current_page < page_nums[0]) {
                                 less(null);
                             } else {
+                                addHistory(current_page);
                                 changePage(current_page);
                             }
                         }
@@ -166,6 +173,7 @@ $(document).ready(function () {
                             if(current_page > page_nums[page_nums.length-1]) {
                                 more(null);
                             } else {
+                                addHistory(current_page);
                                 changePage(current_page);
                             }
                         }
@@ -181,6 +189,7 @@ $(document).ready(function () {
                             page_nums.push(i);
                         }
                         current_page = page_nums[page_nums.length-1];
+                        addHistory(current_page);
                         changePage(current_page);
                         return false;
                     }
@@ -197,6 +206,7 @@ $(document).ready(function () {
                             page_nums.push(i);
                         }
                         current_page = page_nums[0];
+                        addHistory(current_page);
                         changePage(current_page);
                         return false;
                     }
@@ -239,6 +249,7 @@ $(document).ready(function () {
                             page = 1;
                         }
                         current_page = page;
+                        addHistory(current_page);
                         changePage(current_page);
                         return false;
                     }
@@ -281,6 +292,19 @@ $(document).ready(function () {
                         html += '<a class="mr-1 btn btn-sm-tag btn-outline-secondary" href="#" id="btn_next">Next</a>';
                         page_navigation.innerHTML = html;
                         setHandlers();
+                    }
+
+                    window.onpopstate = function (event) {
+                        if (event.state.page) {
+                            current_page = event.state.page;
+                            changePage(current_page);
+                        } 
+                    };
+
+                    function addHistory(page) {
+                        var pageName = '?s=' + query;
+                        if (page !== 1) pageName += '&p=' + page;
+                        history.pushState({ page: page }, '', pageName);
                     }
 
                     function changePage(page)
@@ -330,10 +354,17 @@ $(document).ready(function () {
 
                     // init page nums
                     initPageNums();
-                    // set first page
-                    changePage(1);
+
+                    // set initial page
+                    var searchParams = new URLSearchParams(window.location.search);
+                    if (searchParams.get('p') !== null) current_page = parseInt(searchParams.get('p'));
+                    history.replaceState({ page: current_page }, '', '');
+                    changePage(current_page);
                 }
 
+            } else {
+                var content = document.getElementsByClassName('content')[0];
+                content.innerHTML = "0 results";
             }
         });
     }
@@ -460,5 +491,13 @@ $(document).ready(function () {
     // sticky polyfill trigger
     var elements = document.querySelectorAll('.sticky');
     Stickyfill.add(elements);
+
+    // add targer-blank to external links
+    var newLinks = document.getElementsByTagName("a");
+    for(i = 0; i < newLinks.length; i++) {
+        if(!newLinks[i].href.includes("datadoghq.com") && !newLinks[i].href.includes("localhost:1313")){
+            $("a[href='" + newLinks[i].href + "']").attr("target", "_blank");
+        }
+    }
 
 });

@@ -1,12 +1,12 @@
 ---
 title: Enable embed
 type: apicode
-order: 9.4
+order: 10.4
 external_redirect: /api/#enable-embed
 ---
 
 ##### Signature
-`GET api/v1/graph/embed/:embed_id/enable`
+`GET https://api.datadoghq.com/api/v1/graph/embed/:embed_id/enable`
 ##### Example Request
 {{< code-snippets basename="api-embeds-enable" >}}
 ##### Example Response

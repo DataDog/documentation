@@ -1,0 +1,70 @@
+azure_vm_scale_set:
+  - description: Nombre total d'octets lus depuis le disque
+    integration: azure_vm_scale_set
+    interval: ''
+    metric_name: azure.compute_virtualmachinescalesets.disk_read_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Disk Read Bytes
+    unit_name: byte
+  - description: I/O des lectures disque.
+    integration: azure_vm_scale_set
+    interval: ''
+    metric_name: azure.compute_virtualmachinescalesets.disk_read_operations_sec
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: Disk Read Ops Per Sec
+    unit_name: read
+  - description: Total bytes written to disk
+    integration: azure_vm_scale_set
+    interval: ''
+    metric_name: azure.compute_virtualmachinescalesets.disk_write_bytes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Disk Write Bytes
+    unit_name: byte
+  - description: Disk Write IOPS
+    integration: azure_vm_scale_set
+    interval: ''
+    metric_name: azure.compute_virtualmachinescalesets.disk_write_operations_sec
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: second
+    short_name: Disk Write Ops Per Sec
+    unit_name: write
+  - description: >-
+      The number of bytes received on all network interfaces by the Virtual
+      Machine(s) (Incoming Traffic)
+    integration: azure_vm_scale_set
+    interval: ''
+    metric_name: azure.compute_virtualmachinescalesets.network_in
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Network In
+    unit_name: byte
+  - description: >-
+      The number of bytes out on all network interfaces by the Virtual
+      Machine(s) (Outgoing Traffic)
+    integration: azure_vm_scale_set
+    interval: ''
+    metric_name: azure.compute_virtualmachinescalesets.network_out
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Network Out
+    unit_name: byte
+  - description: >-
+      The percentage of allocated compute units that are currently in use by the
+      Virtual Machine(s)
+    integration: azure_vm_scale_set
+    interval: ''
+    metric_name: azure.compute_virtualmachinescalesets.percentage_cpu
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: Percentage CPU
+    unit_name: percent

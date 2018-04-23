@@ -13,8 +13,6 @@ doclevel: basic
 
 ## 概要
 
-
-
 <!-- Connect PagerDuty to Datadog in order to:
 
 - Trigger and resolve incidents from your stream by mentioning @pagerduty in your post
@@ -26,7 +24,6 @@ doclevel: basic
 - **@paperduty** を使ってメンションすることにより、イベントストリーム上でインシデントの発動と解除
 - インシデントとエスカレーションを発生順にイベントストリームで閲覧
 - 毎日、オンコール担当者にリマインダーの送信
-
 
 <!-- You can also check out [this documentation](http://www.pagerduty.com/docs/guides/datadog-integration-guide/) from Pagerduty.
 

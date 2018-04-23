@@ -3,13 +3,13 @@ title: Process monitor
 kind: documentation
 description: "Check if a process is running on a host"
 further_reading:
-- link: "/monitors/notifications"
+- link: "monitors/notifications"
   tag: "Documentation"
   text: Configure your monitor notifications
-- link: "/monitors/downtimes"
+- link: "monitors/downtimes"
   tag: "Documentation"
   text: Schedule a dowtime to mute a monitor
-- link: "/monitors/faq"
+- link: "monitors/faq"
   tag: "FAQ"
   text: Monitors FAQ
 ---
@@ -20,7 +20,7 @@ A process monitor watches the status produced by the `process.up` service
 check reported by the check in the Agent. At the Agent level you can configure
 thresholds based on the number of matching processes.
 
-Read more about configuration on the [Process Check](/integrations/process/)
+Read more about configuration on the [Process Check][1]
 page.
 
 For each process, a single service check status is produced. Through this creation interface, you can choose which of those checks to monitor and at what
@@ -42,3 +42,5 @@ point they should notify.
 
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /integrations/process/

@@ -1,0 +1,100 @@
+hdfs_datanode:
+  - description: L'espace disque restant en octets.
+    integration: hdfs
+    interval: ''
+    metric_name: hdfs.datanode.dfs_remaining
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: dfs rem
+    unit_name: byte
+  - description: Capacité du disque en octets.
+    integration: hdfs
+    interval: ''
+    metric_name: hdfs.datanode.dfs_capacity
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: dfs cap
+    unit_name: byte
+  - description: Utilisation du disque en octets
+    integration: hdfs
+    interval: ''
+    metric_name: hdfs.datanode.dfs_used
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: dfs usd
+    unit_name: byte
+  - description: Cache capacity in bytes
+    integration: hdfs
+    interval: ''
+    metric_name: hdfs.datanode.cache_capacity
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cache cap
+    unit_name: byte
+  - description: Cache used in bytes
+    integration: hdfs
+    interval: ''
+    metric_name: hdfs.datanode.cache_used
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cache usd
+    unit_name: byte
+  - description: Number of failed volumes
+    integration: hdfs
+    interval: ''
+    metric_name: hdfs.datanode.num_failed_volumes
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: faild vols
+    unit_name: ''
+  - description: The date/time of the last volume failure in milliseconds since epoch
+    integration: hdfs
+    interval: ''
+    metric_name: hdfs.datanode.last_volume_failure_date
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: lst faild vol
+    unit_name: millisecond
+  - description: The estimated capacity lost in bytes
+    integration: hdfs
+    interval: ''
+    metric_name: hdfs.datanode.estimated_capacity_lost_total
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: cap lst
+    unit_name: byte
+  - description: The number of blocks cached
+    integration: hdfs
+    interval: ''
+    metric_name: hdfs.datanode.num_blocks_cached
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: blk cachd
+    unit_name: block
+  - description: The number of blocks that failed to cache
+    integration: hdfs
+    interval: ''
+    metric_name: hdfs.datanode.num_blocks_failed_to_cache
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: blk fld
+    unit_name: block
+  - description: The number of failed blocks to remove from cache
+    integration: hdfs
+    interval: ''
+    metric_name: hdfs.datanode.num_blocks_failed_to_uncache
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: blk faild uncache
+    unit_name: block

@@ -1,3 +1,4 @@
+conf.yaml.example
 linkedin.com/share
 reddit.com/submit
 twitter.com/share
@@ -9,6 +10,7 @@ localhost:
 url.to.snpashot.com
 app.datadoghq.com
 app.datadog.com
+api.datadoghq.com
 some-account.atlassian.net
 bitbucket.org/groupname/reponame
 alert.victorops.com/integrations/datadog/20140523/alert

@@ -11,7 +11,6 @@ doclevel: basic
 
 <!-- ### Overview
 
-
 Install the Datadog VMware vSphere integration to:
 
 - Get your performance metrics from vSphere and see them all in Datadog.
@@ -20,13 +19,11 @@ Install the Datadog VMware vSphere integration to:
 
 ## 概要
 
-
 次の目的で、DatadogのVMware vSphereインテグレーションをインストールします:
 
 - vSphereのパフォーマンスメトリクスを取得し、Datadogのダッシュボードに表示する
 - vSphere上で発生しているイベントを取得し、ダッシュボード上のグラフ内にマーカー表示する　(vMotion、設定変更、on/offなど)
 - vSphereメトリクスにつてイベントストーリーやグラフ上でチームメンバーで検討し、作業を進める
-
 
 <!-- We also have an awesome blog post on vSphere which can be seen [here](https://www.datadoghq.com/blog/unified-vsphere-app-monitoring-datadog/). -->
 vSphereに関するblog記事を準備しています。[「Unified vSphere and app monitoring with Datadog」](https://www.datadoghq.com/blog/unified-vsphere-app-monitoring-datadog/)も一読してみてください。
@@ -69,25 +66,19 @@ VMwareインテグレーションが取得しているメトリクスです:
 
 (各メトリクスの詳細に関しては、githubの["basic_metrics.py"](https://github.com/DataDog/dd-agent/blob/v5.0.2/checks/libs/vmware/basic_metrics.py)を参照してください):
 
-
 <!-- ## FAQ
 
-
 ### How should the Datadog Agent be set up with vCenter and ESX?
-
 
 {{< img src="vmware_agent.png" >}}
 
 ### How will a VMware integration impact my monthly billing?
 
-
 The base pricing is $15 per virtual machine per month. For general info on Datadog pricing, please visit our [Billing FAQ](http://docs.datadoghq.com/guides/billing/) page. -->
 
 ## FAQ
 
-
 ### vCenterとESXを監視するためのDatadog Agentの配置
-
 
 {{< img src="integrations/vmware/vmware_agent.png" >}}
 

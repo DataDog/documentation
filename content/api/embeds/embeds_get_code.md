@@ -1,12 +1,12 @@
 ---
 title: Get specific embed
 type: apicode
-order: 9.3
+order: 10.3
 external_redirect: /api/#get-specific-embed
 ---
 
 ##### Signature
-`GET api/v1/graph/embed/:embed_id`
+`GET https://api.datadoghq.com/api/v1/graph/embed/:embed_id`
 ##### Example Request
 {{< code-snippets basename="api-embeds-get" >}}
 ##### Example Response

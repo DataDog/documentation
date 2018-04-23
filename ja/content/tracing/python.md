@@ -9,11 +9,9 @@ title: Tracing Python Applications
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-
-
 ## Installation
 
-To begin tracing applications written in Python, first [install and configure the Datadog Agent](/tracing#installing-the-agent).
+To begin tracing applications written in Python, first [install and configure the Datadog Agent](/tracing).
 
 Next, install the Datadog Tracing library using pip:
 
@@ -24,7 +22,7 @@ pip install ddtrace
 Finally, import the tracer and instrument your code!
 
 <div class="alert alert-info">
-For Python applciations, please note that tracing is disabled when your application is launched in <b>DEBUG</b> mode. Find more <a href="http://pypi.datadoghq.com/trace/docs/#module-ddtrace.contrib.django">here</a>
+For Python applications, please note that tracing is disabled when your application is launched in <b>DEBUG</b> mode. Find more <a href="http://pypi.datadoghq.com/trace/docs/#module-ddtrace.contrib.django">here</a>
 </div>
 
 ### Example

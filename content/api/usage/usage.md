@@ -1,7 +1,7 @@
 ---
 title: Usage metering
 type: apicontent
-order: 22
+order: 23
 external_redirect: /api/#usage-metering
 ---
 
@@ -16,3 +16,4 @@ The usage metering end-point allows you to:
 * Get Top Custom Metrics By Hourly Average
 
 Usage data is delayed by up to 72 hours from when it was incurred. It is retained for the past 15 months.
+

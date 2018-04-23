@@ -1,12 +1,12 @@
 ---
 title: Search
 type: apicode
-order: 18
+order: 19
 external_redirect: /api/#search
 ---
 
 ##### Signature
-`GET /api/v1/search`
+`GET https://api.datadoghq.com/api/v1/search`
 ##### Example Request
 {{< code-snippets basename="api-search" >}}
 ##### Example Response

@@ -1,7 +1,7 @@
 ---
 title: Get an event
 type: apicontent
-order: 10.2
+order: 11.2
 external_redirect: /api/#get-an-event
 ---
 
@@ -12,3 +12,4 @@ Note: if the event you’re querying contains markdown formatting of any kind, y
 #### ARGUMENTS
 
 This end point takes no JSON arguments.
+

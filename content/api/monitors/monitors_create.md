@@ -1,7 +1,7 @@
 ---
 title: Create a monitor
 type: apicontent
-order: 15.1
+order: 16.1
 external_redirect: /api/#create-a-monitor
 ---
 
@@ -31,7 +31,7 @@ external_redirect: /api/#create-a-monitor
     If you are using the `_change_` or `_pct_change_` time aggregator, instead use `change_aggr(time_aggr(time_window), timeshift):space_aggr:metric{tags} [by {key}] operator #` with:
 
     *   `change_aggr` change, pct_change
-    *   `time_aggr` avg, sum, max, min [Learn more](/monitors/monitor_types/#define-the-conditions)
+    *   `time_aggr` avg, sum, max, min [Learn more][1]
     *   `time_window` last_#m (1, 5, 10, 15, or 30), last_#h (1, 2, or 4), or last_#d (1 or 2)
     *   `timeshift` #m_ago (5, 10, 15, or 30), #h_ago (1, 2, or 4), or 1d_ago
 
@@ -50,7 +50,7 @@ external_redirect: /api/#create-a-monitor
 
     *  **`event`**, the event query string:
     *   **`string_query`** free text query to match against event title and text.
-    *   **`sources`** event sources (comma-separated). [Complete list of source attribute values](/integrations/faq/list-of-api-source-attribute-value)
+    *   **`sources`** event sources (comma-separated). [Complete list of source attribute values][2]
     *   **`status`** event statuses (comma-separated). Valid options: error, warn, and info.
     *   **`priority`** event priorities (comma-separated). Valid options: low, normal, all.
     *   **`host`** event reporting host (comma-separated).
@@ -117,3 +117,6 @@ external_redirect: /api/#create-a-monitor
     -   **`thresholds`** a dictionary of thresholds by status. Because service checks can have multiple thresholds, we don't define them directly in the query.
 
             Example: `{'ok': 1, 'critical': 1, 'warning': 1}`
+
+[1]: /monitors/monitor_types/#define-the-conditions
+[2]: /integrations/faq/list-of-api-source-attribute-value

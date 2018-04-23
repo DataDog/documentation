@@ -1,0 +1,52 @@
+cassandra_nodetool:
+  - description: >-
+      Pourcentage de données disponibles par facteur de réplication de l'espace
+      de clés
+    integration: cassandra_nodetool
+    interval: ''
+    metric_name: cassandra.nodetool.status.replication_availability
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: available data
+    unit_name: percent
+  - description: Facteur de réplication par keyspace
+    integration: cassandra_nodetool
+    interval: ''
+    metric_name: cassandra.nodetool.status.replication_factor
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: replication factor
+    unit_name: ''
+  - description: 'Node status: up (1) or down (0)'
+    integration: cassandra_nodetool
+    interval: ''
+    metric_name: cassandra.nodetool.status.status
+    metric_type: gauge
+    orientation: '1'
+    per_unit_name: ''
+    short_name: node status
+    unit_name: ''
+  - description: >-
+      Percentage of the data owned by the node per datacenter times the
+      replication factor
+    integration: cassandra_nodetool
+    interval: ''
+    metric_name: cassandra.nodetool.status.owns
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: owns
+    unit_name: percent
+  - description: >-
+      Quantité de données du système de fichiers dans le répertoire de données
+      de cassandra sans contenu snapshot
+    integration: cassandra_nodetool
+    interval: ''
+    metric_name: cassandra.nodetool.status.load
+    metric_type: gauge
+    orientation: '0'
+    per_unit_name: ''
+    short_name: load
+    unit_name: byte
