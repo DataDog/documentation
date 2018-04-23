@@ -63,7 +63,7 @@ external_redirect: /api/#create-a-monitor
 
     `processes(search).over(tags).rollup('count').last(timeframe) operator #`
 
-    *   **`search`** free text search string for querying processes. Matching processes will match results on the [Live Processes](/graphing/infrastructure/process/) page
+    *   **`search`** free text search string for querying processes. Matching processes match results on the [Live Processes](/graphing/infrastructure/process/) page
     *   **`tags`** one or more tags (comma-separated)
     *   **`timeframe`** the timeframe to roll up the counts. Examples: 60s, 4h. Supported timeframes: s, m, h and d
     *   **`operator`** <, <=, >, >=, ==, or !=
