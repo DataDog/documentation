@@ -59,17 +59,17 @@ Agent 6 is the latest major version of the Datadog Agent. The big difference bet
 
 ## Agent configuration files migration
 
-To automatically transition between Agent configuration paths and formats from Agent v5 to Agent v6, use the Agent command:  
+To automatically transition between Agent configuration paths and formats from Agent v5 to Agent v6, use the Agent command:
 
 `sudo -u dd-agent -- datadog-agent import`
 
-The command parses an existing `datadog.conf` and converts all configuration options that the new Agent supports into the `datadog.yaml` configuration file. It also copies configuration files for checks that are currently enabled.  
+The command parses an existing `datadog.conf` and converts all configuration options that the new Agent supports into the `datadog.yaml` configuration file. It also copies configuration files for checks that are currently enabled.
 
-For Mac and Windows environment use:  
+For Mac and Windows environment use:
 
-`datadog-agent import <old_configuration_dir> <destination_dir>` 
+`datadog-agent import <old_configuration_dir> <destination_dir>`
 
-With: 
+With:
 
 * `<old_configuration_dir>` is the directory containing the `datadog.conf` file
 * `<destination_dir>` is the directory where the imported `datadog.yaml` is written (use the same directory as `<old_configuration_dir>` on both Mac & Windows environment).
@@ -85,7 +85,7 @@ Starting with the 6.0 release configuration files will now be stored in
 ### Checks configuration files
 
 In order to provide a more flexible way to define the configuration for a check,
-from version 6.0.0 the Agent will load any valid YAML file contained in the folder:  
+from version 6.0.0 the Agent will load any valid YAML file contained in the folder:
 
 `/etc/datadog-agent/conf.d/<check_name>.d/`.
 
@@ -153,6 +153,8 @@ on port `5002` on Windows and Mac, and is disabled on Linux.
 
 Once the Agent is running, use the `datadog-agent launch-gui` command to launch
 the GUI within your default web browser.
+
+**Note**: The agent GUI isn't supported on Windows 32-bit platforms.
 
 ### Requirements
 
