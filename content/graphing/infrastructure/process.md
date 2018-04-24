@@ -94,13 +94,13 @@ Refer to the standard [daemonset installation][13] and the [Docker Agent][11] in
 
 ### Process Arguments Scrubbing
 
-In order to avoid that sensitive data is sent to our servers and displayed on the Live Processes page, the Process Agent is shipped with a Data Scrubber tool enabled by default. Any process argument that matches one of the following words has its value hidden.
+In order to avoid that sensitive data is sent to Datadog servers and displayed on the Live Processes page, a Data Scrubber tool is shipped with the Process Agent. This feature is enabled by default and any process argument that matches one of the following words has its value hidden.
 
 ```
 "password", "passwd", "mysql_pwd", "access_token", "auth_token", "api_key", "apikey", "secret", "credentials", "stripetoken"
 ```
 
-This list can be expanded by using the `custom_sensitive_words` field on the `datadog.yaml` file. The user can also use wildcards to widen the matching scope of a word. The use of a purely wildcard `*` is not supported.  
+To expand this list, use the `custom_sensitive_words` field on the `datadog.yaml` file. The user can also insert wildcards to widen the matching scope of a word. The use of a purely wildcard `*` is not supported.
 
 ```
 process_config:
@@ -112,11 +112,11 @@ The  next image shows one process on the Live Processes page whose arguments hav
 
 {{< img src="graphing/infrastructure/process/process_arg_scrubbing.png" alt="process arguments scrubbing" responsive="true" popup="true" style="width:100%;">}}
 
-The process arguments scrubbing can be completely disabled by setting `scrub_args` to `false`.
+Set `scrub_args` to `false` to completely disable the process arguments scrubbing.
 
 #### Agent 5
 
-The agent 5 also supports the scrubbing feature. Its behavior can be managed by using the following fields on the `datadog.conf` file under the `[process.config]` section:
+The agent 5 also supports the scrubbing feature. To manage its behavior, use the following fields on the `datadog.conf` file under the `[process.config]` section:
 
 ```
 [process.config]
