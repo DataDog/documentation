@@ -1,0 +1,68 @@
+left:
+  - name: product
+    link: 'https://www.datadoghq.com/product/'
+    title: Produit
+    children:
+      - name: product_features
+        link: 'https://www.datadoghq.com/product/'
+        title: Caractéristiques
+      - name: product_integrations
+        link: 'https://www.datadoghq.com/product/integrations/'
+        title: Intégrations
+      - name: product_apm
+        link: 'https://www.datadoghq.com/apm/'
+        title: APM
+      - name: product_dashboards
+        link: 'https://www.datadoghq.com/dashboarding/'
+        title: Dashboards
+      - name: product_alerts
+        link: 'https://www.datadoghq.com/alerts/'
+        title: Alertes
+      - name: product_api
+        link: api
+        title: API
+  - name: docs
+    link: ''
+    title: Docs
+  - name: pricing
+    link: 'https://www.datadoghq.com/pricing/'
+    title: Prix
+  - name: customers
+    link: 'https://www.datadoghq.com/customers/'
+    title: Clients
+right:
+  - name: about
+    link: 'https://www.datadoghq.com/about/'
+    title: Datadog
+    children:
+      - name: about_contact
+        link: 'https://www.datadoghq.com/about/contact/'
+        title: Contact
+      - name: about_partners
+        link: 'https://www.datadoghq.com/partner-with-datadog/'
+        title: Partenaires
+      - name: about_press
+        link: 'https://www.datadoghq.com/about/press/'
+        title: Presse
+      - name: about_team
+        link: 'https://www.datadoghq.com/about/team/'
+        title: Équipe
+      - name: about_careers
+        link: 'https://www.datadoghq.com/careers/'
+        title: Carrières
+  - name: blog
+    link: 'https://www.datadoghq.com/blog/'
+    title: Blog
+    children:
+      - name: blog_themonitor
+        link: 'https://www.datadoghq.com/blog/'
+        title: Le Monitor
+      - name: blog_engineering
+        link: 'https://www.datadoghq.com/blog/engineering/'
+        title: Engineering
+      - name: blog_pupculture
+        link: 'https://www.datadoghq.com/blog/pup-culture/'
+        title: Pup Culture
+  - name: login
+    link: 'https://app.datadoghq.com/'
+    title: Login

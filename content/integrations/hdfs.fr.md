@@ -1,3 +1,10 @@
+---
+integration_title: Hdfs
+is_public: true
+kind: integration
+short_description: Suivre l'utilisation des disques du cluster, les échecs de volume, les DataNodes morts et
+  more.
+---
 
 
 ## Intégration HDFS DataNode
@@ -66,7 +73,7 @@ Le check hdfs_datanode est compatible avec toutes les principales plateformes.
 {{< get-metrics-from-git "hdfs_datanode" >}}
 
 
-### Evénements
+### Évènements
 Le check HDFS-datanode n'inclut aucun événement pour le moment.
 
 ### Checks de Service
@@ -153,7 +160,7 @@ Le check hdfs_namenode est compatible avec toutes les principales plateformes.
 {{< get-metrics-from-git "hdfs_namenode" >}}
 
 
-### Evénements
+### Évènements
 Le check HDFS-namenode n'inclut aucun événement pour le moment.
 
 ### Checks de Service

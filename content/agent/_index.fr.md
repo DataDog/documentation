@@ -14,6 +14,7 @@ further_reading:
     text: Collectez vos traces
 aliases:
   - /fr/agent/faq/agent-check-directory-structure
+  - /fr/agent/faq/install-core-extra/
 ---
 <div class="alert alert-info">
     Agent v6 est désormais disponible, <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md">mettez à jour votre Agent </a> afin de bénéficier de toutes les nouvelles fonctionnalités
