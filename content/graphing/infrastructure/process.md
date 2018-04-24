@@ -94,13 +94,13 @@ Refer to the standard [daemonset installation][13] and the [Docker Agent][11] in
 
 ### Process Arguments Scrubbing
 
-In order to hide sensitive data on the Live Process page, a Data Scrubber tool is shipped with the Process Agent. This feature is enabled by default and any process argument that matches one of the following words has its value hidden.
+In order to hide sensitive data on the Live Processes page the Agent will scrub sensitive arguments from the process command line. This feature is enabled by default and any process argument that matches one of the following words has its value hidden.
 
 ```
 "password", "passwd", "mysql_pwd", "access_token", "auth_token", "api_key", "apikey", "secret", "credentials", "stripetoken"
 ```
 
-The matching is case insensitive and users can define their own list to be merged with the default one, using the `custom_sensitive_words` field in `datadog.yaml` file under `process_config` section. Users can also use wildcards * to define their own matching scope. However, single wildcard `*` is not supported.
+The matching is case insensitive and users can define their own list to be merged with the default one, using the `custom_sensitive_words` field in `datadog.yaml` file under `process_config` section. Users can also use wildcards (`*`) to define their own matching scope. However, a single wildcard (`'*'`) is not supported as a sensitive word.
 
 ```
 process_config:
@@ -116,7 +116,7 @@ Set `scrub_args` to `false` to completely disable the process arguments scrubbin
 
 #### Agent 5
 
-The agent 5 also supports the scrubbing feature. To manage its behavior, use the following fields on the `datadog.conf` file under the `[process.config]` section:
+The Agent 5 also supports the scrubbing feature. To manage its behavior, use the following fields on the `datadog.conf` file under the `[process.config]` section:
 
 ```
 [process.config]
