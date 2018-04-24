@@ -4,6 +4,7 @@ kind: documentation
 aliases:
     - /guides/billing
     - /account_management/settings
+description:"Manage your Datadog account and organization"
 ---
 
 ## Account settings
