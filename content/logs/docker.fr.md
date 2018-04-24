@@ -5,6 +5,9 @@ further_reading:
 - link: "logs/explore"
   tag: "Documentation"
   text: Apprenez à explorer vos logs
+- link: "logs/graph"
+  tag: "Documentation"
+  text: "Construire des analyses grâce aux Log Graphs"
 - link: "logs/processing"
   tag: "Documentation"
   text: Apprenez à traiter vos logs
