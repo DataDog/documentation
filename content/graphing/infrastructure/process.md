@@ -100,7 +100,7 @@ In order to avoid that sensitive data is sent to Datadog servers and displayed o
 "password", "passwd", "mysql_pwd", "access_token", "auth_token", "api_key", "apikey", "secret", "credentials", "stripetoken"
 ```
 
-To expand this list, use the `custom_sensitive_words` field on the `datadog.yaml` file. The user can also insert wildcards to widen the matching scope of a word. The use of a purely wildcard `*` is not supported.
+The matching process is case insensitive and to expand this list, use the `custom_sensitive_words` field on the `datadog.yaml` file. The user can also insert wildcards to widen the matching scope of a word. However, the use of a purely wildcard `*` is not supported.
 
 ```
 process_config:
