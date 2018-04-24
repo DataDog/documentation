@@ -1,10 +1,11 @@
 ---
 title: Account Management
 kind: documentation
+description: "Manage your Datadog account and organization"
 aliases:
     - /guides/billing
     - /account_management/settings
-description:"Manage your Datadog account and organization"
+
 ---
 
 ## Account settings
