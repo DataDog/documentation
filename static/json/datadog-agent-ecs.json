@@ -9,7 +9,8 @@
       "mountPoints": [
         {
           "containerPath": "/var/run/docker.sock",
-          "sourceVolume": "docker_sock"
+          "sourceVolume": "docker_sock",
+          "readOnly": true
         },
         {
           "containerPath": "/host/sys/fs/cgroup",
