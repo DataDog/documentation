@@ -11,18 +11,23 @@ If you're able to connect using JConsole, run the following:
 java -jar /opt/datadog-agent/agent/checks/libs/jmxterm-1.0-DATADOG-uber.jar -l localhost:PORT -u USER -p PASSWORD
 ```
 
-If you're able to connect using the command above run: beans
+If you're able to connect using the command above run: `beans`. Then send us a copy of the results from above along with for Agent v6:
 
-Send us a copy of the results from above along with:
+* Content of `/var/log/datadog/agent.log`
+* Output of the [info command][3]
+* Output of: `ps aux | grep jmxfetch`
+* A copy of the YAML integration (send the file)
+
+For Agent v5, please follow those instructions: 
 
 * [Agent logs][2]
-* Output of the [info command][3])
-* Output of: ps aux | grep jmxfetch
-* /var/log/datadog/jmxfetch.log
+* Output of the [info command][3]
+* Output of: `ps aux | grep jmxfetch`
+* Content of `/var/log/datadog/jmxfetch.log`
 * Output of: `sudo /etc/init.d/datadog-agent jmx list_everything`
 * A copy of the YAML integration (send the file)
 
-Note, if you're able to see some metrics (`jvm.heap_memory`, `jvm.non_heap_memory`, etc.) it is a sign that JMXFetch is properly running, in this scenario the likely issue is connected to a misconfiguration in your YAML if you're targeting another application.
+**Note**: if you're able to see some metrics (`jvm.heap_memory`, `jvm.non_heap_memory`, etc.) it is a sign that JMXFetch is properly running, in this scenario the likely issue is connected to a misconfiguration in your YAML if you're targeting another application.
 
 [1]: https://docs.oracle.com/javase/8/docs/technotes/guides/management/faq.html
 [2]: /agent/faq/send-logs-and-configs-to-datadog-via-flare-command
