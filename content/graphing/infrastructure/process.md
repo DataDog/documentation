@@ -94,13 +94,13 @@ Refer to the standard [daemonset installation][13] and the [Docker Agent][11] in
 
 ### Process Arguments Scrubbing
 
-In order to hide sensitive data on the Live Processes page the Agent will scrub sensitive arguments from the process command line. This feature is enabled by default and any process argument that matches one of the following words has its value hidden.
+In order to hide sensitive data on the Live Processes page the Agent scrubs sensitive arguments from the process command line. This feature is enabled by default and any process argument that matches one of the following words has its value hidden.
 
 ```
 "password", "passwd", "mysql_pwd", "access_token", "auth_token", "api_key", "apikey", "secret", "credentials", "stripetoken"
 ```
 
-The matching is case insensitive and users can define their own list to be merged with the default one, using the `custom_sensitive_words` field in `datadog.yaml` file under `process_config` section. Users can also use wildcards (`*`) to define their own matching scope. However, a single wildcard (`'*'`) is not supported as a sensitive word.
+The matching is **case insensitive** and define your own list to be merged with the default one, using the `custom_sensitive_words` field in `datadog.yaml` file under the `process_config` section. Use wildcards (`*`) to define your own matching scope. However, a single wildcard (`'*'`) is not supported as a sensitive word.
 
 ```
 process_config:
@@ -136,7 +136,7 @@ Processes and containers are by their nature extremely high cardinality objects.
 
 ### Filtering and Pivoting
 
-Making sense of hundreds of thousands or millions of processes can seem overwhelming!  Using tagging makes navigation easy.  In addition to all existing host-level tags, processes are tagged by `user`.
+Making sense of hundreds of thousands or millions of processes can seem overwhelming! Using [tagging][15] makes navigation easy. In addition to all existing host-level tags, processes are tagged by `user`.
 
 First, we can filter down to role:McNulty-Query, which is our front end query service, in order to narrow our search.  Then we can search for our NGINX master processes, and pivot the table by Availability-Zone, to be confident about that service staying highly available.
 
@@ -189,3 +189,4 @@ While actively working with the Live Processes, metrics are collected at 2s reso
 [12]: https://app.datadoghq.com/account/settings#agent/kubernetes
 [13]: /integrations/kubernetes/#installation-via-daemonsets-kubernetes-110
 [14]: https://docs.datadoghq.com/infrastructure/livecontainers/
+[15]: /getting_started/tagging/
