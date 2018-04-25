@@ -60,4 +60,4 @@ You can set your timezone, desktop notification, and email notification preferen
 [9]: /account_management/org_settings
 [10]: https://docs.datadoghq.com/integrations/github/
 [11]: https://app.datadoghq.com/account/preferences
-[12]: https://app.datadoghq.com/account/profile)
+[12]: https://app.datadoghq.com/account/profile
