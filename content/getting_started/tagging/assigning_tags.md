@@ -12,15 +12,7 @@ further_reading:
   text: Learn how to use tags in Datadog
 ---
 
-Tagging is used throughout the Datadog product to make it easier to subset and query the machines and metrics that you have to monitor. Without the ability to assign and filter based on tags, finding the problems that exist in your environment and narrowing them down enough to discover the true causes would be extremely difficult.
-
-<div class="alert alert-info">
-We recommend using the format <code>key:value</code> when using tags, like <code>env:prod</code>.
-</div>
-
-**Tags must start with a letter** and may contain alphanumerics, underscores, minuses, colons, periods, and slashes. Other characters get converted to underscores. Tags can be up to 200 characters long and support Unicode. Tags are converted to lowercase.
-
-Note: An exception to this is trailing underscores, which are trimmed (e.g. path:thing_ becomes path:thing).
+Tagging is used throughout the Datadog product to make it easier to subset and query the machines and metrics that you have to monitor. Without the ability to assign and filter based on tags, finding the problems that exist in your environment and narrowing them down enough to discover the true causes would be extremely difficult. [Discover our tagging best practices before going further][61].
 
 ## How to assign tags
 There are four primary ways to assign tags: inherited from the [integration][1], in the configuration, in the UI, and using the API, though the UI and API only allow you to assign tags at the host level. The recommended method is to rely on the [integrations][1] or via the configuration files.
@@ -191,3 +183,4 @@ You can also assign tags to hosts, but not to [integration][1] using the API. Th
 [58]: /integrations/winservices
 [59]: https://app.datadoghq.com/account/settings#agent
 [60]: /api#tags
+[61]: /getting_started/tagging/#tags-best-practices
