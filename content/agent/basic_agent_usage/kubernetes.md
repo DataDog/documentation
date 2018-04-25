@@ -12,7 +12,7 @@ aliases:
     - /integrations/faq/gathering-kubernetes-events
 ---
 
-**Note**: Agent version 6.0 and above only support versions of Kubernetes higher than 1.7.6. For prior versions of Kubernetes, use [Agent 5.x][16].
+**Note**: Agent version 6.0 and above only support versions of Kubernetes higher than 1.7.6. For prior versions of Kubernetes, consult the [Legacy Kubernetes versions section](#legacy-kubernetes-versions).
 
 There are two installation processes available to gather metrics, traces and logs from your Kubernetes Clusters:
 
@@ -319,6 +319,40 @@ This functionality is disabled by default, enabling the event collection will ac
 The leaderLeaseDuration is the duration for which a leader stays elected. It should be > 30 seconds and is 60 seconds by default. The longer it is, the less frequently your Agents hit the apiserver with requests, but it also means that if the leader dies (and under certain conditions), events can be missed until the lease expires and a new leader takes over.
 It can be configured with the environment variable `DD_LEADER_LEASE_DURATION`.
 
+### Legacy Kubernetes versions
+
+Our default configuration targets Kubernetes 1.7.6 and later, as the Datadog Agent relies on features and endpoints introduced in this version. More installation steps are required for older versions:
+
+- [RBAC objects][16] (`ClusterRoles` and `ClusterRoleBindings`) are available since Kubernetes 1.6 and OpenShift 1.3, but are available under different `apiVersion` prefixes:
+
+  * `rbac.authorization.k8s.io/v1` in Kubernetes 1.8+ (and OpenShift 3.9+), the default apiVersion we target
+  * `rbac.authorization.k8s.io/v1beta1` in Kubernetes 1.5 to 1.7 (and OpenShift 3.7)
+  * `v1` in Openshift 1.3 to 3.6
+
+    Apply our yaml manifests with the following `sed` invocations:
+
+    ```
+    sed "s%authorization.k8s.io/v1%authorization.k8s.io/v1beta1%" clusterrole.yaml | kubectl apply -f -
+    sed "s%authorization.k8s.io/v1%authorization.k8s.io/v1beta1%" clusterrolebinding.yaml | kubectl apply -f -
+    ```
+
+    or for Openshift 1.3 to 3.6:
+
+    ```
+    sed "s%rbac.authorization.k8s.io/v1%v1%" clusterrole.yaml | oc apply -f -
+    sed "s%rbac.authorization.k8s.io/v1%v1%" clusterrolebinding.yaml | oc apply -f -
+    ```
+
+- The `kubelet` check retrieves metrics from the Kubernetes 1.7.6+ (OpenShift 3.7.0+) prometheus endpoint. [Enable cAdvisor port mode][17] for older versions.
+
+- Our default daemonset makes use of the [downward API][7] to pass the kubelet's IP to the agent. This only works on versions 1.7 and up. For older versions, here are other ways to enable kubelet connectivity:
+
+  * On version 1.6, use `fieldPath: spec.nodeName` and verify your node name is resolvable and reachable from the pod.
+  * If `DD_KUBERNETES_KUBELET_HOST` is unset, the agent retrieves the node hostname from docker and tries to connect there. See `docker info | grep "Name:"` and verify the name is resolvable and reachable.
+  * If the IP of the docker default gateway is constant across your cluster, pass that IP in the `DD_KUBERNETES_KUBELET_HOST` envvar. You can retrieve the IP with the `ip addr show | grep docker0` command.
+
+- Our default configuration relies on [bearer token authentication][18] to the APIserver and kubelet. On 1.3, the kubelet does not support bearer token auth, setup client certificates for the `datadog-agent` serviceaccount and pass them to the agent.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -338,4 +372,6 @@ It can be configured with the environment variable `DD_LEADER_LEASE_DURATION`.
 [13]: /agent/autodiscovery
 [14]: https://app.datadoghq.com/account/settings#agent
 [15]: /agent/faq/agent-commands/#agent-status-and-information
-[16]: https://github.com/DataDog/dd-agent
+[16]: https://kubernetes.io/docs/admin/authorization/rbac/
+[17]: https://github.com/DataDog/integrations-core/tree/master/kubelet#compatibility
+[18]: https://kubernetes.io/docs/admin/authentication/#service-account-tokens
