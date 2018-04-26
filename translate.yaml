@@ -16,6 +16,7 @@ sources:
 - src: "i18n/en.json"
   dst: "{lang}.json"
 ignores:
+  - "content/**/faq/*.md"
   - "**/*.fr.md"
   - "**/*.fr.yaml"
   - "**/*.fr.json"
