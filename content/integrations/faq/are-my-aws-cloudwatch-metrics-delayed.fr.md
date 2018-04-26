@@ -5,7 +5,7 @@ kind: faq
 
 Lorsque vous utilisez l'intégration AWS, nous récupérons les métriques via l'API CloudWatch. Vous pouvez voir un léger retard dans les métriques d'AWS en raison de certaines contraintes inhérente à leur API.
 
-If you receive 5-minute metrics from CloudWatch, there can be up to ~15-20 min delay in receiving your metrics. This is because CloudWatch makes your data available with a 5-10 minute latency, and we run the crawler every 5 minutes.
+Si vous recevez des métriques toutes les 5 minutes de CloudWatch, la réception de vos métriques peut être retardée d'environ 15 à 20 minutes. C'est parce que CloudWatch rend vos données disponibles avec une latence de 5 à 10 minutes, et que nous exécutons notre bot toutes les 10 minutes.
 
 In addition, queuing and CloudWatch API limitations can add up to another 5 minutes. If you receive 1-minute metrics with CloudWatch, then their availability delay is about 2 minutes so total latency to view your metrics may be ~10-12 minutes.
 
