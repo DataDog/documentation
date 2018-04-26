@@ -1,6 +1,7 @@
 ---
 title: Downtimes
 kind: documentation
+description: "Schedule downtimes so that your Datadog monitors do not alert at specific times when you do not want them to."
 further_reading:
 - link: "monitors/monitor_types"
   tag: "Documentation"
