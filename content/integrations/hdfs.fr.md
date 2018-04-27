@@ -49,20 +49,7 @@ instances:
 
 ### Validation
 
-[Lancez la commande `status`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `hdfs_datanode` dans la section Checks:
-
-```
-  Checks
-  ======
-    [...]
-
-    hdfs_datanode
-    -------
-      - instance #0 [OK]
-      - Collected 26 metrics, 0 events & 1 service check
-
-    [...]
-```
+[Lancez la commande `status`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `hdfs_datanode` dans la section Checks.
 
 ## Compatibilité
 
@@ -136,20 +123,7 @@ instances:
 
 ### Validation
 
-[Lancez la commande `status`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `hdfs_namenode` dans la section Checks:
-
-```
-  Checks
-  ======
-    [...]
-
-    hdfs_namenode
-    -------
-      - instance #0 [OK]
-      - Collected 26 metrics, 0 events & 1 service check
-
-    [...]
-```
+[Lancez la commande `status`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `hdfs_namenode` dans la section Checks.
 
 ## Compatibilité
 

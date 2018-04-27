@@ -124,20 +124,7 @@ else echo -e "\e[031mAgent is not running\e[0m"; fi
 
 ### Validation
 
-[Lancez la commande `status`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `activemq` dans la section Checks:
-
-```
-  Checks
-  ======
-    [...]
-
-    activemq
-    -------
-      - instance #0 [OK]
-      - Collected 8 metrics, 0 events & 0 service checks
-
-    [...]
-```
+[Lancez la commande `status`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `activemq` dans la section Checks.
 
 ## Compatibilité
 
@@ -147,7 +134,7 @@ Le check d'ActiveMQ ne fonctionne que sous Linux ou Mac (OS X ou macOS).
 ### Métriques
 Consultez [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/activemq/metadata.csv) pour avoir la liste complète des métriques fournies par cette intégration.
 
-### Evénements
+### Évènements
 Le check ActiveMQ n'inclut aucun événement pour le moment.
 
 ### Checks de Service
@@ -184,15 +171,7 @@ Editez le fichier `activemq_xml.yaml` afin de d'indiquer votre serveur et son po
 
 ### Validation
 
-[Lancez la commande `status`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `activemq_xml` dans la section Checks:
-
-    Checks
-    ======
-
-        activemq_xml
-        -----------
-          - instance #0 [OK]
-          - Collected 39 metrics, 0 events & 7 service checks
+[Lancez la commande `status`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `activemq_xml` dans la section Checks.
 
 ## Compatibilité
 
@@ -203,7 +182,7 @@ Le check activemq_xml est compatible avec toutes les plateformes principales.
 {{< get-metrics-from-git "activemq_xml" >}}
 
 
-### Evénements
+### Évènements
 Le check Activemq_xml n'inclut aucun événement pour le moment.
 
 ### Checks de Service

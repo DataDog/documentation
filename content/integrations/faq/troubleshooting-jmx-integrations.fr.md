@@ -11,18 +11,25 @@ Si vous êtes en mesure de vous connecter à l'aide de JConsole, exécutez les o
 java -jar /opt/datadog-agent/agent/checks/libs/jmxterm-1.0-DATADOG-uber.jar -l localhost:PORT -u USER -p PASSWORD
 ```
 
-Si vous êtes capable de vous connecter en utilisant la commande ci-dessus, lancez: beans
+If you're able to connect using the command above, run: `beans` and send us a copy of the results from above along with the following information.
 
-Envoyez-nous une copie des résultats ci-dessus avec:
+Pour l'Agent v6:
+
+* Content of `/var/log/datadog/agent.log`
+* Output of the [info command][3]
+* Output of: `ps aux | grep jmxfetch`
+* Une copie de l'intégration de YAML (envoyer le fichier)
+
+Pour l'Agent v5:
 
 * [Logs de l'Agent][2]
-* Output of the [info command][3])
-* Résultat de: ps aux | grep jmxfetch
-* /var/log/datadog/jmxfetch.log
+* Output of the [info command][3]
+* Output of: `ps aux | grep jmxfetch`
+* Content of `/var/log/datadog/jmxfetch.log`
 * Résultat de: `sudo /etc/init.d/datadog-agent jmx list_everything`
 * Une copie de l'intégration de YAML (envoyer le fichier)
 
-Note, si vous êtes capable de voir des métriques (`jvm.heap_memory`,`jvm.non_heap_memory`, etc.) c'est un signe que JMXFetch fonctionne correctement, dans ce scénario le problème probable est donc lié à une mauvaise configuration dans votre YAML si vous ciblez une autre application.
+**Note**: if you're able to see some metrics (`jvm.heap_memory`, `jvm.non_heap_memory`, etc.) it is a sign that JMXFetch is properly running. If you're targeting another application and not seeing related metrics, the likely issue is a misconfiguration in your YAML.
 
 [1]: https://docs.oracle.com/javase/8/docs/technotes/guides/management/faq.html
 [2]: /agent/faq/send-logs-and-configs-to-datadog-via-flare-command

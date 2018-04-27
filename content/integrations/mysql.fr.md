@@ -14,9 +14,7 @@ integration_title: MySQL
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
-manifest_version: 0.1.1
-max_agent_version: 6.0.0
-min_agent_version: 5.6.3
+manifest_version: 1.0.0
 name: MySQL
 public_title: Intégration Datadog-MySQL
 resources:
@@ -31,7 +29,6 @@ supported_os:
 - linux
 - mac_os
 - windows
-version: 1.2.0
 ---
 
 
@@ -212,21 +209,7 @@ L'utilisateur `datadog` doit être configuré dans la configuration d'intégrati
 
 ### Validation
 
-[Lancez la commande `status`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `mysql` dans la section Checks:
-
-```
-Checks
-======
-
-  [...]
-
-  mysql
-  -----
-    - instance #0 [OK]
-    - Collected 168 metrics, 0 events & 1 service check
-
-  [...]
-```
+[Lancez la commande `status`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `mysql` dans la section Checks.
 
 ## Compatibilité
 
@@ -380,7 +363,7 @@ Le check ne collecte pas toutes les métriques par défaut. Définissez les opti
 |----------|--------|
 | mysql.info.schema.size | GAUGE |
 
-### Evénements
+### Évènements
 Le check MySQL n'inclut aucun événement pour le moment.
 
 ### Checks de Service
