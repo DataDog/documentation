@@ -234,8 +234,8 @@ Current Priority Values (more may be added in the future):
 
 Manually set trace priority:
 ```java
-import datadog.opentracing.DDSpan;
 import datadog.trace.api.Trace;
+import datadog.trace.api.interceptor.MutableSpan;
 import datadog.trace.common.sampling.PrioritySampling;
 import io.opentracing.util.GlobalTracer;
 
@@ -243,7 +243,7 @@ public class MyClass {
     @Trace
     public static void myMethod() {
         // grab the active span out of the traced method
-        DDSpan ddspan = (DDSpan) GlobalTracer.get().activeSpan();
+        MutableSpan ddspan = (MutableSpan) GlobalTracer.get().activeSpan();
         // ask the sampler to keep the current trace
         ddspan.setSamplingPriority(PrioritySampling.USER_KEEP);
         // method impl follows
