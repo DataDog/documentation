@@ -18,6 +18,8 @@ In the IAM Console, add support:* as an action in the policy document text box:
 
 ## AWS Support Plan
 
-The Datadog Trusted Advisor Dashboard needs access to the full set of [AWS Trusted Advisor checks](https://aws.amazon.com/premiumsupport/trustedadvisor/). AWS makes these only available for upgraded AWS support plans. Make sure that your AWS plan includes full access:
+The Datadog Trusted Advisor Dashboard needs access to the full set of [AWS Trusted Advisor checks][1]. AWS makes these only available for upgraded AWS support plans. Make sure that your AWS plan includes full access:
 
 {{< img src="graphing/faq/aws_support_plan.png" alt="aws support plan" responsive="true" popup="true">}}
+
+[1]: https://aws.amazon.com/premiumsupport/trustedadvisor/

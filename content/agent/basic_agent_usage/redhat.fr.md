@@ -17,7 +17,7 @@ further_reading:
 ---
 ## Commandes
 
-L'Agent Datadog possède quelques commandes. Seules les commandes _lifecycle_ (ie `start`/`stop`/`restart` /`status` sur le service Agent) doivent être exécutées avec `sudo service` /` sudo initctl` / `sudo systemctl`, toutes les autres commandes doivent être exécutées avec la commande `datadog-agent`.
+L'Agent Datadog possède quelques commandes. Seules les commandes _lifecycle_ (ie `start`/`stop`/`restart` /`status` sur le service Agent) doivent être exécutées avec `sudo service` /` sudo systemctl`, toutes les autres commandes doivent être exécutées avec la commande `datadog-agent`.
 
 {{% table responsive="true" %}}
 | Agent v5                                  |  Agent v6                          | Notes
@@ -32,7 +32,7 @@ L'Agent Datadog possède quelques commandes. Seules les commandes _lifecycle_ (i
 | `sudo -u dd-agent -- dd-agent check <check_name>` | `sudo -u dd-agent -- datadog-agent check <check_name>` | Run a check |
 {{% /table %}}
 
-Plus d'informations sur les métriques, les événements et les checks de service pour une [intégrations](/integrations) peuvent être récupérées avec la commande check:
+Plus d'informations sur les métriques, les événements et les checks de service pour une [intégrations][1] peuvent être récupérées avec la commande check:
 ```shell
 sudo service datadog-agent check [integration]
 ```
@@ -46,7 +46,8 @@ sudo service datadog-agent check [integration] check_rate
 
 * pour les système basés sur `upstart`: `sudo start/stop/restart datadog-agent`
 * pour les systèmes basés sur `systemd` : `sudo systemctl start/stop/restart datadog-agent`
-* pour les système basés sur `initctl`: `sudo initctl start/stop/restart datadog-agent`
+
+[En apprendre plus sur les commandes pour l'Agent][3]
 
 ## Configuration
 
@@ -56,7 +57,7 @@ Les fichiers et dossiers de configuration de l'Agent se trouvent à:
 |:-----|:----|
 |`/etc/dd-agent/datadog.conf`| `/etc/datadog-agent/datadog.yaml` |
 
-Fichiers de configuration pour [les intégrations](/integrations):
+Fichiers de configuration pour [les intégrations][1]:
 
 | Agent v5                                  |  Agent v6                          |
 |:-----|:----|
@@ -75,7 +76,7 @@ Les logs de l'Agent se trouvent dans le dossier `/var/log/datadog/`:
     * `dogstatsd.log`
     * `forwarder.log`
 
-Si vous rencontrez toujours des problèmes, [notre équipe de support](/help) se fera un plaisir de vous aider.
+Si vous rencontrez toujours des problèmes, [notre équipe de support][2] se fera un plaisir de vous aider.
 
 ## Basculer entre Agent v5 et v6
 ### Mettre à niveau vers l'agent v6
@@ -147,7 +148,7 @@ Pour installer (ou avoir une installation d'Agent v5 à partir de laquelle vous 
     rm /etc/yum.repos.d/datadog.repo [ ! -f /etc/yum.repos.d/datadog.repo ] && echo -e '[datadog]\nname = Datadog, Inc.\nbaseurl = https://yum.datadoghq.com/rpm/x86_64/\nenabled=1\ngpgcheck=1\npriority=1\ngpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public\n       https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public' | sudo tee /etc/yum.repos.d/datadog.repo
     ```
 
-2. Mettez à jour votre cache yum local et rétrograder l'agent
+2. Mettez à jour votre cache yum local et rétrograder l'Agent
     ```shell
     sudo yum clean expire-cache metadata
     sudo yum check-update
@@ -191,3 +192,7 @@ Pour désinstaller l'agent, exécutez:
 ## En apprendre plus
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /integrations
+[2]: /help
+[3]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands

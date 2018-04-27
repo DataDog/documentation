@@ -3,7 +3,6 @@ title: Why should I install the Datadog Agent on my AWS instances?
 kind: faq
 ---
 
-
 If you use AWS CloudWatch or another cloud-based metrics provider, you may already get some metrics for your hosts. However, installing the Datadog Agent on these hosts gives you a number of benefits, including:
 
 * **Better resolution** - CloudWatch observes what's happening from the outside by sampling hosts every ~5-25 minutes, whereas the Datadog Agent captures performance statistics every 15 seconds to provide a more accurate understanding of what's happening from the hosts' perspective.
@@ -16,4 +15,6 @@ If you use AWS CloudWatch or another cloud-based metrics provider, you may alrea
 
 The Datadog Agent is lightweight and fully open source, so you can review the code and even contribute by making a pull request.
 
-Also reference this article if you suspect you're seeing [latency reporting AWS metrics](/integrations/faq/are-my-aws-cloudwatch-metrics-delayed).
+Also reference this article if you suspect you're seeing [latency reporting AWS metrics][1].
+
+[1]: /integrations/faq/are-my-aws-cloudwatch-metrics-delayed

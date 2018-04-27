@@ -21,12 +21,10 @@ doclevel: complete
 
 ## 概要と目的
 
-
 Apacheからリアルタイムでメトリクスを取得しグラフ化すると共に、他の関連したメトリクスやイベントと相互に関係付ける。
 
 * Webサーバのパフォーマンスの可視化する
 * Apacheのパフォーマンスをインフラに含まれる他のアプリケーションと相互に関連付けて把握する
-
 
 <!-- From the open-source Agent:
 
@@ -37,7 +35,6 @@ Apacheからリアルタイムでメトリクスを取得しグラフ化する�
 
 * [Apache checks.d](https://github.com/DataDog/integrations-core/blob/master/apache/check.py)
 * [Apache YAML example](https://github.com/DataDog/integrations-core/blob/master/apache/conf.yaml.example)
-
 
 <!-- The following metrics are collected by default with the Apache integration:
 
@@ -62,7 +59,6 @@ Apacheインテグレーションは、次のメトリクスをデフォルト�
     apache.performance.cpu_load
     apache.performance.idle_workers
     apache.performance.uptime
-
 
 <!-- <div id="int-configuration">
 <h3>Configuration</h3>
@@ -92,9 +88,7 @@ instances:
 </ol>
 </div> -->
 
-
 ## 設定
-
 
 **Apacheのメトリクスを取得するには、Datadog Agentのインストールが必要です。**
 *詳細は、[Datadog Agent 入門](/ja/guides/basic_agent_usage/)を参照して下さい。*

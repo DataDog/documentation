@@ -3,8 +3,8 @@ title: Widgets
 kind: documentation
 ---
 
-Use widgets through the [Screenboard API](/api/#screenboards):
-For [create](/api/#create-a-screenboard)/[read](/api/#get-a-screenboard)/[update](/api/#update-a-screenboard) endpoints, the body is one JSON payload describing the Screenboard widgets: 
+Use widgets through the [Screenboard API][1]:
+For [create][2]/[read][3]/[update][4] endpoints, the body is one JSON payload describing the Screenboard widgets: 
 
 Base Payload :
 ```
@@ -27,12 +27,12 @@ Each type of widget is described below:
 ## Timeseries
 *Supported on Screenboards and Timeboards*
 
-The Timeseries visualization is great for showing one or more metrics over time. The time window depends on what is selected on the [Timeboard](/graphing/dashboards/timeboard/) or in the graph on a [Screenboard](/graphing/dashboards/screenboard/).  
+The Timeseries visualization is great for showing one or more metrics over time. The time window depends on what is selected on the [Timeboard][5] or in the graph on a [Screenboard][6].  
 Timeseries can be displayed as **lines**, **areas**, and **bars**.
 
 {{< img src="graphing/miscellaneous/visualization/references-graphing-timeseries-example.png" alt="Timeseries" responsive="true" popup="true" style="width:80%;">}}
 
-Example of Timeseries widget for the [API](/api/#screenboards)
+Example of Timeseries widget for the [API][1]
 ```
 {
   "type": "timeseries",
@@ -78,7 +78,7 @@ The widget can display the latest value reported, or an aggregate computed from 
 
 {{< img src="graphing/miscellaneous/visualization/references-graphing-queryvalue-example.png" alt="Query value widget" responsive="true" popup="true" style="width:50%;">}}
 
-Example of Query Value widget for the [API](/api/#screenboards)
+Example of Query Value widget for the [API][1]
 
 ```
 {
@@ -117,7 +117,7 @@ Example of Query Value widget for the [API](/api/#screenboards)
 }
 ```
 
-### What does "Take the X value from the displayed timeframe" ?
+### What does "Take the X value from the displayed timeframe" mean?
 
 {{< img src="graphing/miscellaneous/visualization/query_value_widget.png" alt="query_value_widget" responsive="true" popup="true" style="width:50%;">}}
 
@@ -156,34 +156,34 @@ The Change graph shows you the change in a value over the time period chosen.
 ## Hostmap
 *Supported on Screenboards and Timeboards*
 
-The Hostmap graphs any metric for any subset of hosts on the same hostmap visualization available from the main [Infrastructure Hostmap](/graphing/infrastructure/hostmap) menu. 
+The Hostmap graphs any metric for any subset of hosts on the same hostmap visualization available from the main [Infrastructure Hostmap][7] menu. 
 
 {{< img src="graphing/miscellaneous/visualization/references-graphing-hostmap-example.png" alt="Hostmap" responsive="true" popup="true">}}
 
 ## Free Text
 *Supported on Screenboards only*
 
-Free text is a widget that allows you to add headings to your [Screenboard](/graphing/dashboards/screenboard).  
+Free text is a widget that allows you to add headings to your [Screenboard][8].  
 
 This is commonly used to state the overall purpose of the dashboard.
 
 ## Event Timeline
 *Supported on Screenboards only*
 
-The event timeline is a widget version of the timeline that appears at the top of the [Event Stream view](https://app.datadoghq.com/event/stream).
+The event timeline is a widget version of the timeline that appears at the top of the [Event Stream view][9].
 
 {{< img src="graphing/miscellaneous/visualization/references-graphing-eventtimeline-example.png" alt="Timeseries" responsive="true" popup="true" style="width:80%;">}}
 
 ## Event Stream
 *Supported on Screenboards only*
 
-The event stream is a widget version of the stream of events on the [Event Stream view](/graphing/event_stream/).
+The event stream is a widget version of the stream of events on the [Event Stream view][10].
 
 {{< img src="graphing/miscellaneous/visualization/references-graphing-eventstream-example.png" alt="Timeseries" responsive="true" popup="true" style="width:70%;">}}
 
 **This widgets displays only the 100 most recent events**
 
-Example of Event Stream widget for the [API](/api/#screenboards)
+Example of Event Stream widget for the [API][1]
 
 ```
 {
@@ -211,7 +211,7 @@ Example of Event Stream widget for the [API](/api/#screenboards)
 
 Image allows you to embed an image on your dashboard. Images can be PNG, JPG, or even animated GIF files.
 
-Example of Image widget for the [API](/api/#screenboards)
+Example of Image widget for the [API][1]
 
 ```
 {
@@ -240,7 +240,7 @@ Note widget is similar to Free Text widget, but allows for more formatting optio
 * Use `href` to create internal links in Datadog. 
   {{< img src="graphing/dashboards/widgets/using_link_note_widget.gif" alt="Using links in note widget" responsive="true" popup="true">}}
 
-Example of Note widget for the [API](/api/#screenboards)
+Example of Note widget for the [API][1]
 
 ```
 {
@@ -274,7 +274,7 @@ Example of Note widget for the [API](/api/#screenboards)
 
 Alert graphs are time series graphs showing the current status of any monitor defined on your system.
 
-Example of Alert Graph widget for the [API](/api/#screenboards)
+Example of Alert Graph widget for the [API][1]
 
 ```
 {
@@ -322,3 +322,13 @@ Monitor summary is a summary view of all monitors on your system, or a subset ba
 
 {{< img src="graphing/miscellaneous/visualization/references-graphing-monitorsummary-example.png" alt="Timeseries" responsive="true" popup="true" style="width:80%;">}}
 
+[1]: /api/#screenboards
+[2]: /api/#create-a-screenboard
+[3]: /api/#get-a-screenboard
+[4]: /api/#update-a-screenboard
+[5]: /graphing/dashboards/timeboard/
+[6]: /graphing/dashboards/screenboard/
+[7]: /graphing/infrastructure/hostmap
+[8]: /graphing/dashboards/screenboard
+[9]: https://app.datadoghq.com/event/stream
+[10]: /graphing/event_stream/

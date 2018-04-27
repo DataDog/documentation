@@ -8,6 +8,8 @@ external_redirect: /api/#send-services
 ## Send services
 ##### Arguments
 
-*   **`service`** - _Required._ The service name as a dictionary key, [Learn more](/tracing/visualization/service).
+*   **`service`** - _Required._ The service name as a dictionary key, [Learn more][1].
 *   **`app`** - _Required._ The name of the application.
 *   **`app_type`** - _Required._ The type of application.
+
+[1]: /tracing/visualization/service

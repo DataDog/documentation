@@ -1,8 +1,11 @@
 ---
-title: Search & Graph
+title: Search
 kind: documentation
 description: "The Logs Explorer is your Datadog home base for troubleshooting and exploration over your logs."
 further_reading:
+- link: "logs/graph"
+  tag: "Documentation"
+  text: "Perform analytics with Log Graphs"
 - link: "logs/processing"
   tag: "Documentation"
   text: Learn how to process your logs
@@ -23,7 +26,6 @@ In this view you can:
 * [Display lists of logs](#log-list)
 * [Use facets to filter your Logstream](#facets)
 * [Enter search queries](#search-bar)
-* [Perform analytics with Log Graphs](#log-graph)
 
 ## Time Range
 
@@ -53,7 +55,7 @@ You can click on any log line to see more details about it:
 
 ### View in context
 
-Click on its `host` or `service` and select `View in context` to see log lines dated just before and after a selected log - even if they don't match your filter -
+Click on its `host` or `service` and select `View in context` (also known as `Focus on Host & Service`) to see log lines dated just before and after a selected log - even if they don't match your filter -
 
 {{< img src="logs/explore/focus_host_service.png" style="width:50%;" alt="focus on host and service.png" responsive="true" popup="true" style="width:70%;">}}
 
@@ -75,7 +77,7 @@ When enabled, your logstream display changes to better focus on your logs `messa
 {{< img src="logs/explore/multi_line_log.png" alt="Log with Multi-line display" responsive="true" popup="true">}}
 
 **Note**:  If present, `error.stack` attribute is displayed in priority as it should be used for stack traces.
-Remap any stack-trace attribute to this specific attribute with [the attribute remapper processor](/logs/processing/#attribute-remapper).
+Remap any stack-trace attribute to this specific attribute with [the attribute remapper processor][1].
 
 ## Facets 
 
@@ -91,7 +93,7 @@ To start using an attribute as a Facet or in the search, click on it and add it 
 
 {{< img src="logs/explore/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" popup="true" style="width:50%;">}}
 
-Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the [Log graph query](/logs/#log-graph).
+Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the [Log graph query][2].
 
 ### Facet Panel
 
@@ -109,7 +111,7 @@ To start using an attribute as a measure, click on a numerical attribute of your
 
 {{< img src="logs/explore/create_a_mesure.png" alt="Create a measure" responsive="true" popup="true" style="width:80%;">}}
 
-Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the [Log graph query](/logs/#log-graph).
+Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the [Log graph query][2].
 
 ### Select the Measure Unit
 
@@ -121,7 +123,7 @@ All measure have their own unit that is then used for display in the Log explore
 
 The search query language is based on the Lucene query syntax:
 
-[Apache Lucene - Query Parser Syntax](http://lucene.apache.org/core/2_9_4/queryparsersyntax.html)
+[Apache Lucene - Query Parser Syntax][3]
 
 All search parameters are contained in the url, so it is very simple to share your view.
 
@@ -170,7 +172,7 @@ It is also possible to search for numerical attribute within a specific range. F
 
 ### Tags
 
-Your logs inherit tags from [hosts](/graphing/infrastructure/) and [integrations](/integrations/) that generate them. They can be used in the search and as facets as well:
+Your logs inherit tags from [hosts][4] and [integrations][5] that generate them. They can be used in the search and as facets as well:
 
 * `test` is searching for the string "test".
 * `("env:prod" OR test)` matches all logs with the tag #env:prod or the tag #test 
@@ -188,6 +190,10 @@ Don't lose time building the same views everyday. Saved searches contain your se
 
 {{< img src="logs/explore/saved_search.png" alt="Saved Search" responsive="true" popup="true" style="width:80%;">}}
 
+To delete a saved search, click on the bin icon under the log search drop-down:
+
+{{< img src="logs/explore/delete_saved_search.png" alt="Delete Saved Search" responsive="true" popup="true" style="width:80%;">}}
+
 ### Escaping of special characters
 The following attributes are considered as special: `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/`, `\` and require escaping.
 For instance, to search logs that contain `user=12345` the following search must be entered:
@@ -199,27 +205,12 @@ If an attribute was called `user.first name`, perform a search on this attribute
 
 `@user.first\ name:myvalue`
 
-## Log Graph
-
-Switch between the Log List and the Log Graph mode by clicking on this button:
-
-{{< img src="logs/explore/graph/log_graph_switch.png" alt="Log graph switch" responsive="true" popup="true" style="width:80%;">}}
-
-To start using it:
-
-1. Choose a [Measure](#measure) or [Facet](#facet) to graph. Choosing a Measure let you then choose the aggregation function whereas selecting a Facet display the unique count.
-    {{< img src="logs/explore/graph/choose_measure_facet.png" alt="choose measure facet" responsive="true" popup="true" style="width:50%;">}}
-2. Select the aggregation function for the Measure you want to graph
-    {{< img src="logs/explore/graph/agg_function_log_graph.png" alt="aggregation function for log graph" responsive="true" popup="true" style="width:50%;">}}
-3. Split by [Tag](/getting_started/tagging) or [Facet](#facets) to split your graph over the desired dimension.
-
-    {{< img src="logs/explore/graph/split_by_log_graph.png" alt="split by log graph" responsive="true" popup="true" style="width:50%;">}}
-
-4. See logs related to a section of the graph:  
-    Select or click on a section of the graph to either zoom in the graph or see the list of logs corresponding to your selection: 
-
-    {{< img src="logs/explore/graph/using_log_graph.gif" alt="using log graph" responsive="true" popup="true" style="width:80%;">}}
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /logs/processing/#attribute-remapper
+[2]: /logs/#log-graph
+[3]: http://lucene.apache.org/core/2_9_4/queryparsersyntax.html
+[4]: /graphing/infrastructure/
+[5]: /integrations/

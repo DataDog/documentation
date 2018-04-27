@@ -5,6 +5,11 @@ Classic:
       dogstatsd: true
       authors: BoardiesITSolutions
       notes: Send metrics from your C++ applications to your Datadog account
+    - name: DogFood
+      link: https://github.com/garrettsickles/DogFood
+      dogstatsd: true
+      authors: Garrett Sickles
+      notes: C++ header library to send metrics to your Datadog account
   - C#:
     - name: dogstatsd-csharp-client
       link: https://github.com/DataDog/dogstatsd-csharp-client
@@ -27,10 +32,6 @@ Classic:
       dogstatsd: true
       authors: Rodrigo Farias Rezino
   - Elixir:
-    - name: ExStatsD
-      link: https://github.com/CargoSense/ex_statsd
-      dogstatsd: true
-      authors: CargoSense
     - name: dogstatsd-elixir
       link: https://github.com/adamkittelson/dogstatsd-elixir
       dogstatsd: true
@@ -39,6 +40,10 @@ Classic:
       link: https://github.com/synrc/mtx
       dogstatsd: true
       authors: N2O Ecosystem
+    - name: statix
+      link: https://github.com/lexmag/statix
+      dogstatsd: true
+      authors: Aleksei Magusev
   - Go:
     - name: datadog-go
       link: https://github.com/DataDog/datadog-go
@@ -83,6 +88,12 @@ Classic:
       link: https://github.com/chonton/dogstatd-client
       dogstatsd: true
       authors: Chas Honton
+  - Lambda:
+    - name: serverless-datadog-metrics
+      link: https://github.com/DanteInc/serverless-datadog-metrics
+      api: true
+      authors: Dante Consulting, Inc.
+      notes: This library logs useful metrics from AWS Lambda functions, so that they can be accumulated via Datadog's AWS Lambda integration
   - NiFi:
     - name: DataDogReportingTask
       link: https://nifi.apache.org/docs/nifi-docs/components/org.apache.nifi/nifi-datadog-nar/1.5.0/org.apache.nifi.reporting.datadog.DataDogReportingTask/index.html

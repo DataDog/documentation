@@ -14,9 +14,7 @@ integration_title: MySQL
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
-manifest_version: 0.1.1
-max_agent_version: 6.0.0
-min_agent_version: 5.6.3
+manifest_version: 1.0.0
 name: MySQL
 public_title: Intégration Datadog-MySQL
 resources:
@@ -31,7 +29,6 @@ supported_os:
 - linux
 - mac_os
 - windows
-version: 1.1.3
 ---
 
 
@@ -50,7 +47,7 @@ Et beaucoup plus. Vous pouvez également inventer vos propres métriques à l'ai
 ## Implémentation
 ### Installation
 
-Le check MySQL est packagé avec l'agent, il vous faut donc simplement [installer l'agent] (https://app.datadoghq.com/account/settings#agent).
+Le check MySQL est packagé avec l'agent, il vous faut donc simplement [installer l'agent](https://app.datadoghq.com/account/settings#agent).
 
 ### Configuration
 
@@ -114,7 +111,7 @@ Query OK, 0 rows affected (0.00 sec)
   instances:
     - server: 127.0.0.1
       user: datadog
-      pass: <YOUR_CHOSEN_PASSWORD> # from the CREATE USER step earlier
+      pass: '<YOUR_CHOSEN_PASSWORD>' # from the CREATE USER step earlier
       port: <YOUR_MYSQL_PORT> # e.g. 3306
       options:
           replication: 0
@@ -125,8 +122,11 @@ Query OK, 0 rows affected (0.00 sec)
           schema_size_metrics: false
           disable_innodb_metrics: false
   ```
-  Afin de rassembler extra_performance_metrics, votre serveur MySQL doit avoir le performance_schema activé. [Consultez la documentation de MySQL](https://dev.mysql.com/doc/refman/5.7/en/performance-schema-quick-start.html) pour l'activer, sinon définissez extra_performance_metrics sur false.
-  Créez un fichier `mysql.yaml` dans le dossier ` conf.d` de l'Agent. Consultez l'exemple du [canevas mysql.yaml](https://github.com/Datadog/integrations-core/blob/master/mysql/conf.yaml.example) pour apprendre toutes les options de configuration disponibles:
+
+**Note**: Mettez votre password entre single quotes s'il contient un caractère spécial.
+
+Afin de rassembler extra_performance_metrics, votre serveur MySQL doit avoir le performance_schema activé. [Consultez la documentation de MySQL](https://dev.mysql.com/doc/refman/5.7/en/performance-schema-quick-start.html) pour l'activer, sinon définissez extra_performance_metrics sur false.
+  Consultez notre canevas [mysql.yaml](https://github.com/Datadog/integrations-core/blob/master/mysql/conf.yaml.example) pour découvrir toutes les options de configurations, incluant celle pour les custom métriques.
 
 L'utilisateur `datadog` doit être configuré dans la configuration d'intégration de MySQL en tant que `host: 127.0.0.1` au lieu de `localhost`. Alternativement, vous pouvez également utiliser `sock`.
 
@@ -209,21 +209,7 @@ L'utilisateur `datadog` doit être configuré dans la configuration d'intégrati
 
 ### Validation
 
-[Lancez la commande `status`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `mysql` dans la section Checks:
-
-```
-Checks
-======
-
-  [...]
-
-  mysql
-  -----
-    - instance #0 [OK]
-    - Collected 168 metrics, 0 events & 1 service check
-
-  [...]
-```
+[Lancez la commande `status`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `mysql` dans la section Checks.
 
 ## Compatibilité
 
@@ -377,7 +363,7 @@ Le check ne collecte pas toutes les métriques par défaut. Définissez les opti
 |----------|--------|
 | mysql.info.schema.size | GAUGE |
 
-### Evénements
+### Évènements
 Le check MySQL n'inclut aucun événement pour le moment.
 
 ### Checks de Service

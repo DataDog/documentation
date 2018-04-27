@@ -12,15 +12,15 @@ kind: documentation
 
 ## Lecture seule
 
-[Un Administrateur](/account_management/team/#datadog-user-roles) ou le créateur d'un Timeboard peut passer un Timeboard en lecture seule en cliquant sur l'icône engrenage (coin droit du Timeboard) puis sur le lien **Permissions**:
+[Un Administrateur][1] ou le créateur d'un Timeboard peut passer un Timeboard en lecture seule en cliquant sur l'icône engrenage (coin droit du Timeboard) puis sur le lien **Permissions**:
 
 {{< img src="graphing/dashboards/timeboard/read_only.png" alt="Read Only" responsive="true" popup="true" style="width:30%;">}}
 
 **Cliquer sur "Yes" dans la fenêtre de confirmation passe le Timeboard en lecture seule**
 
-Seul les comptes [administrateurs](/account_management/team/#datadog-user-roles) et le créateur du Timeboard peuvent passer le Timeboard en lecture seule. Tous les utilisateurs de l'organisation pourront cependant souscrire au Timeboard afin de recevoir des notifications de modifications.
+Seul les comptes [administrateurs][1] et le créateur du Timeboard peuvent passer le Timeboard en lecture seule. Tous les utilisateurs de l'organisation pourront cependant souscrire au Timeboard afin de recevoir des notifications de modifications.
 
-Si un utilisateur décide de suivre les modifications pour un Timeboard, les modifications du Timeboard sont signalées à l'utilisateur via un événement dans [l'event stream](/graphing/event_stream):
+Si un utilisateur décide de suivre les modifications pour un Timeboard, les modifications suivantes du Timeboard sont signalées à l'utilisateur via un événement dans [le flux d'événements][2]:
 
 1. Changements de texte (titre, description)
 2. Changement d'élément
@@ -54,10 +54,17 @@ Cette fonctionnalité peut être activée en suivant ces étapes simples:
 
 ## Sauvegarder mon Timeboard
 
-En utilisant notre [API](/api), il est possible d'écrire un script pour sauvegarder vos définitions de Timeboard. Consultez ci-dessous des projets exemples de la façon dont ces sauvegardes peuvent être réalisées:
+En utilisant notre [APIs][3], il est possible d'écrire un script pour sauvegarder vos définitions de Timeboard en tant que code. Consultez les projets suivants comme exemples de la façon dont ces sauvegardes peuvent être accomplies:
 
 * https://github.com/brightcove/dog-watcher
 * https://github.com/Shopify/doggy
 * https://github.com/grosser/kennel
 
-Un grand merci à [Brightcove](https://www.brightcove.com/), [Shopify](https://www.shopify.com/), et [Zendesk](https://www.zendesk.com/) pour partager ces projets!
+Un grand merci à  [Brightcove][4], [Shopify][5], et [Zendesk][6] pour partager ces projets!
+
+[1]: /account_management/team/#datadog-user-roles
+[2]: /graphing/event_stream
+[3]: /api
+[4]: https://www.brightcove.com/
+[5]: https://www.shopify.com/
+[6]: https://www.zendesk.com/

@@ -15,18 +15,18 @@ further_reading:
 
 ## Introduction
 
-[Datadog Live Containers](https://app.datadoghq.com/containers) enable real-time visibility into all containers across your environment.
+[Datadog Live Containers][3] enable real-time visibility into all containers across your environment.
 
 Taking inspiration from bedrock tools like *htop* and *ctop*, Live Containers give you complete coverage of your container infrastructure, in a continuously updated table with resource metrics at two-second resolution and faceted search.  
-Coupled with Datadog’s integrations with [Docker](/integrations/docker_daemon), [Kubernetes](/integrations/kubernetes), [ECS](/integrations/amazon_ecs), and other container technologies, plus our built-in tagging of dynamic components, this new Live Container view provides a detailed overview of your containers’ health, resource consumption, and deployment in real time:
+Coupled with Datadog’s integrations with [Docker][4], [Kubernetes][5], [ECS][6], and other container technologies, plus our built-in tagging of dynamic components, this new Live Container view provides a detailed overview of your containers’ health, resource consumption, and deployment in real time:
 
 {{< img src="graphing/infrastructure/livecontainers/LiveContainersWithSummaries.png" alt="Live containers with summaries" responsive="true" popup="true">}} 
 
 ## Installation
 
-After deploying the [Docker Agent](/agent/basic_agent_usage/docker/#run-the-docker-agent), no other configuration is necessary.
+After deploying the [Docker Agent][7], no other configuration is necessary.
 
-Note that for collecting Container information in the standard install rather than with the [Docker Agent](/agent/basic_agent_usage/docker/#run-the-docker-agent), the dd-agent user needs to have permissions to access **docker.sock**.
+Note that for collecting Container information in the standard install rather than with the [Docker Agent][7], the `dd-agent` user needs to have permissions to access **docker.sock**.
 
 ## Searching, Filtering, and Pivoting
 
@@ -36,9 +36,9 @@ Containers are by their nature extremely high cardinality objects. Our flexible 
 
 ### Tagging
 
-Containers are [tagged](/getting_started/tagging) with all existing host-level tags.  We also tag with metadata associated with individual containers.  
+Containers are [tagged][8] with all existing host-level tags.  We also tag with metadata associated with individual containers.  
 
-All containers are tagged by `image_name`, and additionally, we include integrations with popular orchestrators, such as [ECS](/integrations/amazon_ecs) and [Kubernetes](/integrations/kubernetes), which provide further container-level tags.  We also decorate each container with Docker, ECS, or Kubernetes icons so you can tell which are being orchestrated at a glance.
+All containers are tagged by `image_name`, and additionally, we include integrations with popular orchestrators, such as [ECS][6] and [Kubernetes][5], which provide further container-level tags.  We also decorate each container with Docker, ECS, or Kubernetes icons so you can tell which are being orchestrated at a glance.
 
 ECS Containers are tagged by:
 
@@ -62,7 +62,7 @@ Kubernetes Containers are tagged by:
 
 Making sense of thousands or tens of thousands of containers can seem overwhelming!  Using tagging, described in the previous section, makes navigation easy.
 
-In the below, we have filtered down to a Kubernetes cluster of 9 nodes.  
+In the screenshot below, we have filtered down to a Kubernetes cluster of 9 nodes.  
 RSS and CPU utilization on containers is reported compared to the provisioned limits on the containers, when they exist.  
 Here, we see that the containers in this cluster are way over provisioned, and that we could use tighter limits and bin packing to achieve better utilization of resources.
 
@@ -97,3 +97,10 @@ While actively working with the Containers page, metrics are collected at 2s res
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[3]: https://app.datadoghq.com/containers
+[4]: /integrations/docker_daemon
+[5]: /integrations/kubernetes
+[6]: /integrations/amazon_ecs
+[7]: /agent/basic_agent_usage/docker/#run-the-docker-agent
+[8]: /getting_started/tagging

@@ -60,7 +60,6 @@ Service checks will post an event on your stream when:
 - サービスのステータスが変更されたとき
 - first check で、サービスが停止しているとき
 
-
 <!--
 ======================================================
 SETUP
@@ -86,7 +85,6 @@ web chat client, too</a>.) -->
 未だDatadog Agentをインストールしていない場合は、[Datadog Agent 入門](/ja/guides/basic_agent_usage/)又は、ダッシュボード内タブの[Installations -> Agent](http://app.datadoghq.com/account/settings#agent)をクリックし、インストールドキュメントを参照してください。これらのドキュメントでは、特定のOS用のDatadog Agent をインストールする手順を解説しています。
 
 セットアップ中に問題が発生した場合は、[freenode にあるDatadog](irc://irc.freenode.net/datadog)のチャットルームで気兼ねなく質問してください。 ([web チャットクライアント](http://webchat.freenode.net/?randomnick=1&channels=datadog&prompt=1))
-
 
 <!--
 ======================================================
@@ -127,7 +125,6 @@ TCP のサービスチェックのための設定ファイルには、**tcp_chec
 
 両設定ファイルとも、他のファイル名を指定することはできません。
 
-
 <!--
 ======================================================
 HTTP CHECK CONFIGURATION
@@ -135,8 +132,6 @@ HTTP CHECK CONFIGURATION
 -->
 
 <!-- <h3 id="http_config">HTTP Check Configuration</h3>
-
-
 
 The HTTP(S) Check configuration file has the following structure:
 
@@ -288,7 +283,6 @@ TCP のサービスチェックの設定ファイるの構造は、次のよう�
 - port **(必須)**: サービスチェックが接続するポート番号。
 - timeout (オプション): TCP リクエストのタイムアウト時間です。デフォルト値は10秒。リクエストのタイムアウトが発生した場合、そのサービスは停止していると見なされます。
 - notify (オプション): *init_config* セクションで指定した内容を、変更するための通知先リストです。
-
 
 #### 通知条件の追加設定項目:
 

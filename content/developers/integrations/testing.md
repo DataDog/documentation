@@ -31,7 +31,7 @@ To test integrations, add your test code to the `test_[integration_name].py` fil
 
 ### Datadog Agent Checks
 
-If you are submitting your Agent Check as a Pull Request to be included with the Datadog Agent, reference the [`README.md` in the dd-agent repository][2].
+If you are submitting your Agent Check as a Pull Request to be included with the Datadog Agent, reference the [`README.md` in the `dd-agent` repository][2].
 
 ## The AgentCheckTest Class
 
@@ -65,7 +65,7 @@ Parameters:
 }
 ```
 
-* **agent_config** (*dictionary*) – A customized Datadog agent configuration.
+* **agent_config** (*dictionary*) – A customized Datadog Agent configuration.
 * **mocks** (*dictionary*) – A dictionary keyed by method name (string) with values of method. For example:
 
 ```
@@ -209,7 +209,7 @@ For further examples of testing Datadog integrations, you can view the test file
 
 ### Datadog Agent Checks
 
-For examples of Agent Check tests, you can view the test files for agent checks such as [`test_http_check.py` file][7].
+For examples of Agent Check tests, you can view the test files for Agent checks such as [`test_http_check.py` file][7].
 
 [1]: /developers/integrations/integration_sdk/#testing-your-integration
 [2]: https://github.com/DataDog/dd-agent/blob/master/tests/README.md
@@ -218,3 +218,4 @@ For examples of Agent Check tests, you can view the test files for agent checks 
 [5]: https://github.com/DataDog/integrations-core/blob/master/mysql/test/test_mysql.py
 [6]: https://github.com/DataDog/dd-agent/blob/master/checks/metric_types.py
 [7]: https://github.com/DataDog/integrations-core/tree/master/http_check/test
+

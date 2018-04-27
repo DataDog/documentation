@@ -22,11 +22,11 @@ The new user will receive an email with a link to login.
 
 Datadog provides 3 user roles:
 
-* **Administrators** have access to billing information, the ability to revoke API keys, can manage users, and can configure [read-only dashboards](/graphing/dashboards/). They can also promote standard users to Administrators.
+* **Administrators** have access to billing information, the ability to revoke API keys, can manage users, and can configure [read-only dashboards][2]. They can also promote standard users to Administrators.
 
-* **Standard users** have access to view and modify all monitoring features that Datadog offers such as [dashboards](/graphing/dashboards/), [monitors](/monitors/), [events](/graphing/event_stream), and [notebooks](/graphing/notebooks).
+* **Standard users** have access to view and modify all monitoring features that Datadog offers such as [dashboards][2], [monitors][3], [events][4], and [notebooks][5].
 
-* **Read only users** are created by administrators and do not have access to edit within Datadog. This comes in handy when you'd like to share specific read-only views with a client or where a member of one business unit needs to share a [dashboard](/graphing/dashboards) with someone outside their unit.
+* **Read only users** are created by administrators and do not have access to edit within Datadog. This comes in handy when you'd like to share specific read-only views with a client or where a member of one business unit needs to share a [dashboard][6] with someone outside their unit.
 
 ## Disable existing members
 
@@ -44,8 +44,13 @@ Datadog provides 3 user roles:
 1. Go to the [Team Page][1].
 2. Hover over the avatar for the user you wish to promote. Choose **Make Administrator** from the menu.
 
-[1]: https://app.datadoghq.com/account/team
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/account/team
+[2]: /graphing/dashboards/
+[3]: /monitors/
+[4]: /graphing/event_stream
+[5]: /graphing/notebooks
+[6]: /graphing/dashboards

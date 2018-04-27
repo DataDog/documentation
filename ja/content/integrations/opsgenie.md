@@ -16,7 +16,6 @@ doclevel:
 
 <!-- ## Overview
 
-
 Create alerts using @opsgenie:
 
 - From your event stream
@@ -25,16 +24,13 @@ Create alerts using @opsgenie:
 
 ## 概要
 
-
 OpenGineインテグレーションを使用すると、`@opengenie:`を使ってOpengenieへアラートを送信できます:
 
 - Datadogのイベントストリームへコメントを書き込む時
 - グラフのスナップショットを撮った時 (メッセージ欄)
 - メトリクスを基にした、アラートが発生した時　(通知メッセージ欄)
 
-
 <!-- ## Configuration
-
 
 ### Create a Datadog integration in OpsGenie
 
@@ -83,7 +79,6 @@ Acknowledge and close OpsGenie alerts from OpsGenie. When you do this, the assoc
 {{< img src="integrations/opsgenie/og_closed_dd_updated.png" >}} -->
 
 ## 設定
-
 
 ### OpsGenie側でDatadogインテグレーションを作成する
 

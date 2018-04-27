@@ -8,7 +8,6 @@ title: TCP RTT check
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-
 ## Overview
 
 The TCP RTT check reports on roundtrip times between the host the agent is running on and any host it is communicating with. This check is passive and will only report RTT times for packets being sent and received from outside the check. The check itself will not send any packets.
@@ -55,7 +54,6 @@ Edit the ```go-metro.yaml``` file in your agent's ```conf.d``` directory. The fo
           - 45.33.125.153
         hosts:
           - app.datadoghq.com
-
 
 {{< insert-example-links conf="go-metro" check="none" >}}
 

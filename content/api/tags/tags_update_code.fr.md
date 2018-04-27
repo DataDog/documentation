@@ -6,8 +6,9 @@ external_redirect: /api/#update-host-tags
 ---
 
 ##### Signature
-`PUT https://app.datadoghq.com/api/v1/tags/hosts/:host_name`
+`PUT https://api.datadoghq.com/api/v1/tags/hosts/:host_name`
 ##### Exemple de requête
 {{< code-snippets basename="api-tags-update" >}}
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-tags-update" >}}
+

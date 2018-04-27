@@ -33,7 +33,7 @@ Si vous cliquez sur un host, vous pouvez voir ses tags associés:
 
 ### Nom de l'host de l'Agent
 
-L'agent Datadog collecte des noms d'host potentiels à partir de plusieurs sources. Pour voir tous les noms détectés par l'Agent, [exécutez la commande Agent info] (/agent/faq/agent-commands/#agent-status-and-information):
+L'agent Datadog collecte des noms d'host potentiels à partir de plusieurs sources. Pour voir tous les noms détectés par l'Agent, [exécutez la commande Agent info] [1]:
 
     $ sudo /etc/init.d/datadog-agent info
 
@@ -64,7 +64,7 @@ la correspondance qui est valide est sélectionnée.
 
 Si le nom est reconnu comme manifestement non unique (par exemple `localhost.localdomain`), la règle actuelle échoue et passe à la suivante.
 
-**Note**: Si une instance EC2 est un host ECS, Datadog utilise l'`instance-id` comme nom d'host, [même si le nom d'host depuis le DNS n'est pas celui un EC2 par défaut](https://github.com/DataDog/dd-agent/blob/5.14.1/utils/hostname.py#L104). Si vous ne souhaitez pas utiliser l'`instance-id`, définissez le nom de l'host dans le fichier de configuration de l'agent.
+**Note**: Si une instance EC2 est un host ECS, Datadog utilise l'`instance-id` comme nom d'host, [même si le nom d'host depuis le DNS n'est pas celui un EC2 par défaut][2]. Si vous ne souhaitez pas utiliser l'`instance-id`, définissez le nom de l'host dans le fichier de configuration de l'agent.
 
 <div class="alert alert-warning">
 Les noms d'hosts doivent être uniques au sein d'un compte Datadog.<br> 
@@ -98,13 +98,11 @@ Un moyen facile d'accomplir ceci serait d'utiliser le script suivant qui utilise
 
 Ce script affiche tous les agents en cours d'exécution et leurs numéros de version dans un document distinct. De plus, vous pouvez modifier le script pour entrer un numéro de version si vous souhaitez également que tous les agents en cours d'exécution soient sous un numéro de version particulier. Il existe également un fichier séparé si vous souhaitez convertir la sortie JSON dans un fichier CSV pour des examens ulterieurs.
 
-Une fois que vous avez déterminé les hosts que vous souhaitiez mettre à jour, vous pouvez installer manuellement l'agent à partir de la [page d'installation](https://app.datadoghq.com/account/settings#agent).
-
-Ou vous pouvez utiliser l'une de nos intégrations d'automatisation comme [Chef](/integrations/chef), [Puppet](/integrations/puppet), ou [Ansible](/integrations/ansible).
+Une fois que vous avez déterminé les hosts que vous souhaitiez mettre à jour, vous pouvez installer manuellement l'agent à partir de la [page d'installation][3], ou alors  grâce à une intégration comme [Chef][4], [Puppet][5], ou [Ansible][6].
 
 ### Liste des instances ec2 sans l'agent de Datadog installé
 
-La liste des hosts et toutes leurs informations sur la page [Infrastructure List](https://app.datadoghq.com/infrastructure) de Datadog sont disponibles via le lien permanent "API JSON" en bas de la page.
+La liste des hosts et toutes leurs informations sur la page [Infrastructure List][7] de Datadog sont disponibles via le lien permanent "API JSON" en bas de la page.
 
 Vous pouvez accéder grâce à un script aux informations de l'host et obtenir les informations dont vous avez besoin, par exemple ce script python imprime la liste des hosts:
 
@@ -113,8 +111,17 @@ Vous pouvez accéder grâce à un script aux informations de l'host et obtenir l
 
 {{< img src="graphing/infrastructure/index/ec2_instances_without_dd_agent.png" alt="ec2_instances_without_dd_agent" responsive="true" popup="true" style="width:90%;">}}
 
-[Consultez le script qui affiche la list des hosts](https://gist.github.com/Martiflex/2803a28ec562fc9a15d404a539f85d38).
+[Consultez le script pour afficher la liste des hosts][8].
 
 ## En apprendre plus
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /agent/faq/agent-commands/#agent-status-and-information
+[2]: https://github.com/DataDog/dd-agent/blob/5.14.1/utils/hostname.py#L104
+[3]: https://app.datadoghq.com/account/settings#agent
+[4]: /integrations/chef
+[5]: /integrations/puppet
+[6]: /integrations/ansible
+[7]: https://app.datadoghq.com/infrastructure
+[8]: https://gist.github.com/Martiflex/2803a28ec562fc9a15d404a539f85d38

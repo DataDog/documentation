@@ -43,7 +43,6 @@ For `create`/`read`/`update` endpoints, the body is one JSON payload describing 
 
 {{< snippet-code-block file="sb-payload-example.js" >}}
 
-
 ## General Notes
 
 ### Sizing and positioning
@@ -76,7 +75,6 @@ If you would like to create or update boards that use templated variables, you m
 The final "base" payload of a templated board would look like this:
 
 {{< snippet-code-block file="sb-payload-tpl-example.js" >}}
-
 
 ## API Usage
 
@@ -130,8 +128,8 @@ result = api.Screenboard.create(**board)
 require 'rubygems'
 require 'dogapi'
 
-api_key='9775a026f1ca7d1c6c5af9d94d9595a4'
-app_key='87ce4a24b5553d2e482ea8a8500e71b8ad4554ff'
+api_key='<YOUR_API_KEY>'
+app_key='<YOUR_APP_KEY>'
 
 dog = Dogapi::Client.new(api_key, app_key)
 
@@ -156,8 +154,8 @@ result = dog.create_screenboard(board)
   </div>
   <div class="tab-pane fade in" id="screenboard_create-console">
 {{< highlight console >}}
-api_key=9775a026f1ca7d1c6c5af9d94d9595a4
-app_key=87ce4a24b5553d2e482ea8a8500e71b8ad4554ff
+api_key=<YOUR_API_KEY>
+app_key=<YOUR_APP_KEY>
 
 curl -X POST -H "Content-type: application/json" \
 -d '{
@@ -175,7 +173,7 @@ curl -X POST -H "Content-type: application/json" \
             }
         ]
     }' \
-"https://app.datadoghq.com/api/v1/screen?api_key=${api_key}&application_key=${app_key}"
+"https://api.datadoghq.com/api/v1/screen?api_key=${api_key}&application_key=${app_key}"
 {{< /highlight >}}
   </div>
 </div>
@@ -230,8 +228,8 @@ result = api.Screenboard.update(board_id, **updated_board)
 require 'rubygems'
 require 'dogapi'
 
-api_key='9775a026f1ca7d1c6c5af9d94d9595a4'
-app_key='87ce4a24b5553d2e482ea8a8500e71b8ad4554ff'
+api_key='<YOUR_API_KEY>'
+app_key='<YOUR_APP_KEY>'
 board_id = 1234
 
 dog = Dogapi::Client.new(api_key, app_key)
@@ -257,8 +255,8 @@ result = dog.update_screenboard(board_id, updated_board)
   </div>
   <div class="tab-pane fade in" id="screenboard_update-console">
 {{< highlight console >}}
-api_key=9775a026f1ca7d1c6c5af9d94d9595a4
-app_key=87ce4a24b5553d2e482ea8a8500e71b8ad4554ff
+api_key=<YOUR_API_KEY>
+app_key=<YOUR_APP_KEY>
 board_id=1234
 
 curl -X PUT -H "Content-type: application/json" \
@@ -277,11 +275,10 @@ curl -X PUT -H "Content-type: application/json" \
             }
         ]
     }' \
-"https://app.datadoghq.com/api/v1/screen/${board_id}?api_key=${api_key}&application_key=${app_key}"
+"https://api.datadoghq.com/api/v1/screen/${board_id}?api_key=${api_key}&application_key=${app_key}"
 {{< /highlight >}}
   </div>
 </div>
-
 
 <!--
 ======================================================
@@ -317,8 +314,8 @@ result = api.Screenboard.get(board_id)
 require 'rubygems'
 require 'dogapi'
 
-api_key='9775a026f1ca7d1c6c5af9d94d9595a4'
-app_key='87ce4a24b5553d2e482ea8a8500e71b8ad4554ff'
+api_key='<YOUR_API_KEY>'
+app_key='<YOUR_APP_KEY>'
 board_id = 1234
 
 dog = Dogapi::Client.new(api_key, app_key)
@@ -328,12 +325,12 @@ result = dog.get_screenboard(board_id)
   </div>
   <div class="tab-pane fade in" id="screenboard_get-console">
 {{< highlight console >}}
-api_key=9775a026f1ca7d1c6c5af9d94d9595a4
-app_key=87ce4a24b5553d2e482ea8a8500e71b8ad4554ff
+api_key=<YOUR_API_KEY>
+app_key=<YOUR_APP_KEY>
 board_id=1234
 
 curl -X GET \
-"https://app.datadoghq.com/api/v1/screen/${board_id}?api_key=${api_key}&application_key=${app_key}"
+"https://api.datadoghq.com/api/v1/screen/${board_id}?api_key=${api_key}&application_key=${app_key}"
 {{< /highlight >}}
   </div>
 </div>
@@ -372,8 +369,8 @@ result = api.Screenboard.delete(board_id)
 require 'rubygems'
 require 'dogapi'
 
-api_key='9775a026f1ca7d1c6c5af9d94d9595a4'
-app_key='87ce4a24b5553d2e482ea8a8500e71b8ad4554ff'
+api_key='<YOUR_API_KEY>'
+app_key='<YOUR_APP_KEY>'
 board_id = 1234
 
 dog = Dogapi::Client.new(api_key, app_key)
@@ -383,12 +380,12 @@ result = dog.delete_screenboard(board_id)
   </div>
   <div class="tab-pane fade in" id="screenboard_delete-console">
 {{< highlight console >}}
-api_key=9775a026f1ca7d1c6c5af9d94d9595a4
-app_key=87ce4a24b5553d2e482ea8a8500e71b8ad4554ff
+api_key=<YOUR_API_KEY>
+app_key=<YOUR_APP_KEY>
 board_id=1234
 
 curl -X DELETE \
-"https://app.datadoghq.com/api/v1/screen/${board_id}?api_key=${api_key}&application_key=${app_key}"
+"https://api.datadoghq.com/api/v1/screen/${board_id}?api_key=${api_key}&application_key=${app_key}"
 {{< /highlight >}}
   </div>
 </div>
@@ -427,8 +424,8 @@ result = api.Screenboard.share(board_id)
 require 'rubygems'
 require 'dogapi'
 
-api_key='9775a026f1ca7d1c6c5af9d94d9595a4'
-app_key='87ce4a24b5553d2e482ea8a8500e71b8ad4554ff'
+api_key='<YOUR_API_KEY>'
+app_key='<YOUR_APP_KEY>'
 board_id = 1234
 
 dog = Dogapi::Client.new(api_key, app_key)
@@ -439,16 +436,15 @@ result = dog.share_screenboard(board_id)
   </div>
   <div class="tab-pane fade in" id="screenboard_share-console">
 {{< highlight console >}}
-api_key=9775a026f1ca7d1c6c5af9d94d9595a4
-app_key=87ce4a24b5553d2e482ea8a8500e71b8ad4554ff
+api_key=<YOUR_API_KEY>
+app_key=<YOUR_APP_KEY>
 board_id=1234
 
 curl -X POST \
-"https://app.datadoghq.com/api/v1/screen/share/${board_id}?api_key=${api_key}&application_key=${app_key}"
+"https://api.datadoghq.com/api/v1/screen/share/${board_id}?api_key=${api_key}&application_key=${app_key}"
 {{< /highlight >}}
   </div>
 </div>
-
 
 <h2>Widget Examples</h2>
 

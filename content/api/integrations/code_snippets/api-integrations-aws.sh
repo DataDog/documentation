@@ -1,7 +1,5 @@
 # List AWS Accounts (role-based only) in Datadog
-curl -X GET "https://app.datadoghq.com/api/v1/integration/aws?api_key=${api_key}&application_key=${app_key}"
-
-
+curl -X GET "https://api.datadoghq.com/api/v1/integration/aws?api_key=${api_key}&application_key=${app_key}"
 
 # Create an AWS Account in Datadog
 curl -X POST -H "Content-type: application/json" \
@@ -16,10 +14,7 @@ curl -X POST -H "Content-type: application/json" \
         }
     }
 }' \
-"https://app.datadoghq.com/api/v1/integration/aws?api_key=${api_key}&application_key=${app_key}"
-
-
-
+"https://api.datadoghq.com/api/v1/integration/aws?api_key=${api_key}&application_key=${app_key}"
 
 # Delete an AWS Account in Datadog
 curl -X DELETE -H "Content-type: application/json" \
@@ -27,10 +22,7 @@ curl -X DELETE -H "Content-type: application/json" \
         "account_id": "YOUR_AWS_ACCOUNT_ID",
         "role_name": "DatadogAWSIntegrationRole"
 }' \
-"https://app.datadoghq.com/api/v1/integration/aws?api_key=${api_key}&application_key=${app_key}"
-
-
-
+"https://api.datadoghq.com/api/v1/integration/aws?api_key=${api_key}&application_key=${app_key}"
 
 # List available namespace rules
-curl -X GET "https://app.datadoghq.com/api/v1/integration/aws/available_namespace_rules?api_key=${api_key}&application_key=${app_key}" 
+curl -X GET "https://api.datadoghq.com/api/v1/integration/aws/available_namespace_rules?api_key=${api_key}&application_key=${app_key}" 

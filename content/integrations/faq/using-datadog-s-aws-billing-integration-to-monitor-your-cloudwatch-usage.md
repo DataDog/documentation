@@ -8,11 +8,11 @@ Once you have the Datadog AWS Integration installed, it's a very short process t
 To allow Datadog to monitor your AWS Billing information you need to configure your AWS account as follows:
 
 1. Add the `budgets:ViewBudget` permission to your AWS policy for the Datadog role
-2. Enable billing alerts in the AWS console using the steps in the [AWS documentation](/integrations/amazon_web_services)
+2. Enable billing alerts in the AWS console using the steps in the [AWS documentation][1]
 
 **Important: billing metrics are always delivered to the us-east-1 region, and for linked AWS accounts, always under the main AWS account.**
 
-Once you have done that, install the Billing sub-integration by checking the box from the list in the main tile or clicking "Install" on the [AWS Billing sub-integration tile](https://app.datadoghq.com/account/settings#integrations/amazon_billing).
+Once you have done that, install the Billing sub-integration by checking the box from the list in the main tile or clicking "Install" on the [AWS Billing sub-integration tile][2].
 
 AWS billing metrics are available about once every four hours, so you may have to wait that long for Datadog to collect the metrics.
 
@@ -24,5 +24,8 @@ Either of these cloud be useful for making an alert. Let's use aws.billing.estim
 
 After creating this monitor, Datadog will alert you when your CloudWatch spend becomes unexpectedly high. 
 
-You can read more about our [AWS billing integration here](/integrations/faq/how-do-i-monitor-my-aws-billing-details).
+You can read more about our [AWS billing integration here][3].
 
+[1]: /integrations/amazon_web_services
+[2]: https://app.datadoghq.com/account/settings#integrations/amazon_billing
+[3]: /integrations/faq/how-do-i-monitor-my-aws-billing-details

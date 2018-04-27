@@ -233,7 +233,6 @@ Note that in this case you can only have 1 query. But you can also split by devi
 
 to get traffic for all the tagged hosts, split by host and network device.
 
-
 ### Y-Axis Controls
 
 The Datadog y-axis controls (currently just via the JSON editor) allow you to:
@@ -376,7 +375,6 @@ Here is an example using the ```top()``` function:
 
 This shows the graphs for the five series with the highest peak ```system.cpu.iowait``` values in the query window.
 
-
 To look at the hosts with the 6th through 10th highest values (for example), use ```top_offset``` instead:
 
 ```python
@@ -409,3 +407,4 @@ Here is an example using the ```week_before()``` function:
 [1]: /graphing/
 [2]: /graphing/miscellaneous/functions/
 [3]: https://app.datadoghq.com/metric/summary
+

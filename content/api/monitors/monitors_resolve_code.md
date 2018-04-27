@@ -11,3 +11,4 @@ external_redirect: /api/#resolve-monitor
 {{< code-snippets basename="api-monitor-bulk-resolve" >}}
 ##### Example Response
 {{< code-snippets basename="result.api-monitor-bulk-resolve" >}}
+

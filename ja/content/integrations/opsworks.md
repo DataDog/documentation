@@ -14,7 +14,6 @@ Enable this integration to see in Datadog all your Ops Works metrics. -->
 
 ## 概要
 
-
 AWS OpsWorks は、すべての形状およびサイズのアプリケーションを容易にデプロイおよび操作できるアプリケーション管理サービスです。
 
 このインテグレーションは、Datadogのダッシュボード上でOpsWorksのメトリクスを他のメトリクスと連携し、インフラの状況を把握するために使用します。

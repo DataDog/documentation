@@ -43,9 +43,9 @@ Note: no spaces after the colon or commas in these lists and anything not attach
 
 ## Acknowledge an event
 
-Datadog refers to events that are generated from triggered monitors as Incidents. They're also known as a [Monitor Alerts](/monitors/).  
+Datadog refers to events that are generated from triggered monitors as Incidents. They're also known as a [Monitor Alerts][1].  
 
-The best way to identify these in the [Events stream](/graphing/event_stream) is to select the corresponding filter in the filter list:
+The best way to identify these in the [Events stream][2] is to select the corresponding filter in the filter list:
 
 {{< img src="graphing/events/filter_monitor_alert.png" alt="filter monitor alert" responsive="true" popup="true" style="width:50%;">}}
 
@@ -64,7 +64,7 @@ Once claimed, an incident can be resolved by clicking the **resolve** button ind
 ## Show events unaggregated
 
 Change the “aggregate_up” parameter in the url to `false`.
-To remove the top level aggregate event from appearing, change `use_date_happened` to true. [Here is an example link](https://app.datadoghq.com/event/stream?show_private=true&aggregate_up=false&use_date_happened=true&per_page=30&display_timeline=true&from_ts=1418047200000&to_ts=1418050800000&incident=true&codemirror_editor=true&live=true&bucket_size=60000)
+To remove the top level aggregate event from appearing, change `use_date_happened` to true. [Here is an example link][3]
 
 ## Events Email
 
@@ -72,12 +72,12 @@ When you need to integrate an application or system with Datadog, you have a
 few choices. The first is using one of our many existing [integrations][integrations].  
 This gets you access to a wide variety of metrics and events with minimal
 configuration effort on your part. If your application isn't one of the
-integrated applications, then you can opt to create [a check using the agent][agentcheck].  
+integrated applications, then you can opt to create [a check using the Agent][agentcheck].  
 This requires much more effort and potentially more knowledge on how the
 application and how Datadog work.  
 
 There is another option available if you aren't using an application that has
-an integration and you don't want to create an agent check. You can rely on
+an integration and you don't want to create an Agent check. You can rely on
 the application or system sending an email instead. There are two different ways to use Events via Email, depending mostly on whether the application offers you the ability to customize the format of the email body being sent.
 
 <div class="alert alert-info">
@@ -172,3 +172,6 @@ Should be encoded to: `http://catchpoint.com/session_id%3A123456`
 
 [events-1]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio
 
+[1]: /monitors/
+[2]: /graphing/event_stream
+[3]: https://app.datadoghq.com/event/stream?show_private=true&aggregate_up=false&use_date_happened=true&per_page=30&display_timeline=true&from_ts=1418047200000&to_ts=1418050800000&incident=true&codemirror_editor=true&live=true&bucket_size=60000

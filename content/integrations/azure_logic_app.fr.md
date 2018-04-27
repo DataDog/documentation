@@ -24,7 +24,7 @@ Logic App permet aux développeurs de concevoir des workflows articulant l'inten
 
 Obtenir les métriques de Azure Logc App pour:
 
-* Visualisez les performances de vos workflows de Logic App
+* Visualiser les performances de vos workflows de Logic App
 * Corréler les performances de vos workflows Logic App avec vos applications
 
 ## Implémentation

@@ -11,18 +11,15 @@ kind: integration
 
 <!-- ### Overview
 
-
 Track and graph your Redis activity and performance metrics with slice-and-dice at
 all levels from individual column families to entire clusters. -->
 
 ## 概要
 
-
 次の目的で、RedisのメトリクスをDatadogへ送信します:
 
 - データベースのパフォーマンスの可視化する
 - Redisのパフォーマンス情報と他のアプリケーションの情報を連携し状況を把握する
-
 
 <!-- The following metrics are collected by default with the Redis integration:
 
@@ -134,7 +131,6 @@ can select multiple environments and then select “Save these tiles to:
 a new dashboard.”
 
 {{< img src="integrations/redis/metric-explorer-redis.png" >}} -->
-
 
 ## FAQs
 

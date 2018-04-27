@@ -12,3 +12,4 @@ Fetch all of your Screenboards' definitions.
 ##### ARGUMENTS
 
 This end point takes no JSON arguments.
+

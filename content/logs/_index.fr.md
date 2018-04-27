@@ -1,7 +1,7 @@
 ---
 title: Log Management
 kind: Documentation
-description: "Configurez votre agent Datadog pour rassembler les logs de votre host, de vos conteneurs et de vos services."
+description: "Configurez votre Agent Datadog pour rassembler les logs de votre host, de vos conteneurs et de vos services."
 ---
 
 {{< vimeo 243374392 >}}
@@ -10,7 +10,7 @@ description: "Configurez votre agent Datadog pour rassembler les logs de votre h
 
 La collecte de logs nécessite une version de l'agent >= 6.0. Les anciennes versions de l'agent n'incluent pas l'interface `Log collection` qui est utilisée pour la collecte de logs.
 
-Si vous ne l'utilisez pas déjà, veuillez suivre [les instructions d'installation de l'agent](/agent).
+Si vous ne l'utilisez pas déjà, veuillez suivre [les instructions d'installation de l'Agent][1].
 
 La collecte des logs est **désactivée** par défaut dans l'Agent Datadog, vous devez l'activer dans `datadog.yaml`:
 
@@ -18,7 +18,7 @@ La collecte des logs est **désactivée** par défaut dans l'Agent Datadog, vous
 logs_enabled: true
 ```
 
-L'agent Datadog envoie ses logs à Datadog via TLS-encrypted TCP. Cela nécessite une communication sortante sur le port `10516`.
+L'Agent Datadog envoie ses logs à Datadog via TLS-encrypted TCP. Cela nécessite une communication sortante sur le port `10516`.
 
 ## Activation de la collecte de log à partir d'intégrations
 Pour commencer à collecter des logs pour une intégration donnée, supprimez la mise en commentaire de la section logs du fichier yaml de cette intégration et configurez-la pour votre environnement.
@@ -36,7 +36,7 @@ Datadog Agent v6 peut collecter des logs à partir de fichiers ou du réseau (TC
 * `type` : (obligatoire) type de la source d'entrée des logs (**tcp** / **udp** / **file**)
 * `port` / `path` : (obligatoire) mettez `port` si `type` est **tcp** ou **udp**. mettez `path` si `type` est **file**.
 * `service` : (obligatoire) nom du service propriétaire des logs
-* `source` : (obligatoire) attribut qui définit l'intégration qui envoie les logs. "Si les logs ne proviennent pas d'une intégration existante, ce champ peut inclure un nom source personnalisé, mais nous vous recommandons de faire correspondre cette valeur au nommage du nom de toutes les [métriques custom](/getting_started/custom_metrics/) que vous collectez, par exemple `myapp` de` myapp.request.count`) "
+* `source` : (obligatoire) attribut qui définit l'intégration qui envoie les logs. "Si les logs ne proviennent pas d'une intégration existante, ce champ peut inclure un nom source personnalisé, mais nous vous recommandons de faire correspondre cette valeur au nommage du nom de toutes les [métriques custom][2] que vous collectez, par exemple `myapp` de` myapp.request.count`) "
 * `sourcecategory`: (optionnel) Attribut à valeurs multiples. Peut être utilisé pour affiner l'attribut source. Exemple: source: mongodb, sourcecategory: db_slow_logs.
 * `tags`: (optionnel) ajouter des tags à chaque log collecté.
 
@@ -63,7 +63,7 @@ logs:
     source: python
     sourcecategory: sourcecode
 ```
-* [Redémarrez votre Agent](/agent/faq/agent-commands/#start-stop-restart-the-agent)
+* [Redémarez votre Agent][3]
 
 ## Envoyer des logs via TCP/UDP
 Définissez `type` sur **tcp** ou **udp** en fonction de votre protocole, puis spécifiez le `port` de votre connexion entrante.
@@ -84,16 +84,16 @@ logs:
     sourcecategory: front
 
 ```
-* [Redémarrez votre Agent](/agent/faq/agent-commands/#start-stop-restart-the-agent)
+* [Redémarez votre Agent][3]
 
-L'agent prend en charge des logs contenant des chaines de caractères brutes ou formatées en JSON. Si vous envoyez plusieurs logs d'un coup, utilisez le caractère de séparation de ligne pour séparer vos logs.
+L'Agent prend en charge des logs contenant des chaines de caractères brutes ou formatées en JSON. Si vous envoyez plusieurs logs d'un coup, utilisez le caractère de séparation de ligne pour séparer vos logs.
 
 ## Fonctions avancées de collecte de logs
 
 ### Filtrer les logs
 
 Tous les logs ne sont pas égaux et vous pouvez envoyer uniquement un sous-ensemble spécifique de logs à Datadog.
-Pour ce faire, utilisez le paramètre `log_processing_rules` dans votre fichier de configuration avec le `type` **exclude_at_match** or **include_at_match** 
+Pour ce faire, utilisez le paramètre `log_processing_rules` dans votre fichier de configuration avec le `type` **exclude_at_match** or **include_at_match**
 
 * **exclude_at_match**: Si le pattern est contenu dans le message, le logs est exclu et n'est pas envoyé à Datadog.
   Exemple: Filtrage des logs contenant un e-mail Datadog
@@ -133,6 +133,8 @@ logs:
       pattern: \w+@datadoghq.com
 ```
 
+**Note**: Si vous configurez plusieurs règles de processing, elles seront appliquées de façon séquentielle.
+Chaque règle s'appliquera sur le résultat de la précédente.
 
 ### Scruber les données sensibles dans vos logs
 
@@ -204,7 +206,6 @@ Plus d'exemples:
 |20180228 | `\d{8}` |
 {{% /table %}}
 
-
 ### Suivez plusieurs répertoires ou un répertoire entier en utilisant des wildcards
 
 Si vos logs sont étiquetés par date ou tous stockés dans le même répertoire, configurez votre agent Datadog pour les monitorer tous en même temps et en détecter automatiquement de nouveaux en utilisant des wildcards dans l'attribut `path`.
@@ -231,11 +232,11 @@ logs:
    source: go
 ```
 
-**Note**: l'agent requiert l'autorisation de lecture et d'exécution (5) sur le répertoire pour pouvoir lister tous les fichiers disponibles.
+**Note**: l'Agent requiert l'autorisation de lecture et d'exécution (5) sur le répertoire pour pouvoir lister tous les fichiers disponibles.
 
 ### Utilisation d'un proxy pour les logs
 
-L'agent de log ne respecte actuellement pas le paramètre proxy dans le fichier de configuration `datadog.yaml`. Cette fonctionnalité sera disponible dans une prochaine version.
+L'Agent de log ne respecte actuellement pas le paramètre proxy dans le fichier de configuration `datadog.yaml`. Cette fonctionnalité sera disponible dans une prochaine version.
 
 ### L'avantage de la collecte de logs au format JSON
 
@@ -259,9 +260,9 @@ Toutefois, si un fichier de log au format JSON inclut l'un des attributs suivant
 * `published_date`
 * `syslog.timestamp`
 
-Vous pouvez également spécifier d'autres attributs à utiliser comme source de la date d'un log en définissant un processor [log date remapper](/logs/processing/#log-date-remapper)
+Vous pouvez également spécifier d'autres attributs à utiliser comme source de la date d'un log en définissant un processor [log date remapper][4]
 
-**Note**: Datadog rejette un log si sa date officielle est antérieure à 18 heures.
+**Note**: Datadog rejette un log si sa date officielle est antérieure à 6 heures.
 
 <div class="alert alert-info">
 Les formats de date reconnus sont: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (le format milliseconds EPOCH)</a>  and <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
@@ -269,7 +270,7 @@ Les formats de date reconnus sont: <a href="https://www.iso.org/iso-8601-date-an
 
 ### Attribut *message* 
 
-Par défaut, Datadog ingère la valeur du message en tant que corps du log. Cette valeur est ensuite mise en évidence et affichée dans le [logstream](/logs/explore/#logstream), où elle est indexée pour permettre [une recherche ultérieur](/logs/explore/#search-bar).
+Par défaut, Datadog ingère la valeur du message en tant que corps du log. Cette valeur est ensuite mise en évidence et affichée dans le [logstream][5], où elle est indexée pour permettre [une recherche ultérieur][6].
 
 ### Attribut *status* 
 
@@ -279,7 +280,7 @@ Chaque log peut avoir un niveau de statut qui est ensuite disponible pour la rec
 * `level`
 * `syslog.severity`
 
-Si vous souhaitez remapper un statut existant dans l'attribut `status`, vous pouvez le faire avec le processor [log status remapper](/logs/processing/#log-status-remapper).
+Si vous souhaitez remapper un statut existant dans l'attribut `status`, vous pouvez le faire avec le processor [log status remapper][7].
 
 ### Attribut *host* 
 
@@ -295,7 +296,7 @@ L'utilisation de l'agent Datadog ou du format RFC5424 définit automatiquement l
 
 ### Modifier les attributs réservés
 
-Vous pouvez désormais contrôler le mappage global d'host, de service, de timestamp et de status qui sont appliqués avant les pipelines de traitement. Ceci est particulièrement utile si les logs sont envoyés en JSON ou à partir d'un agent externe.
+Vous pouvez désormais contrôler le mappage global d'host, de service, de timestamp et de status qui sont appliqués avant les pipelines de traitement. Ceci est particulièrement utile si les logs sont envoyés en JSON ou à partir d'un Agent externe.
 
 {{< img src="logs/index/reserved_attribute.png" alt="Reserved Attribute" responsive="true" popup="true" style="width:80%;">}}
 
@@ -312,3 +313,11 @@ Apprendre à explorer vos logs{{< /nextlink >}}
 Comment envoyer des logs à Datadog via des logs shippers externes{{< /nextlink >}}
     {{< nextlink href="logs/parsing" tag="Documentation" >}}En apprendre plus sur le parsing{{< /nextlink >}}
 {{< /whatsnext >}}
+
+[1]: /agent
+[2]: /getting_started/custom_metrics/
+[3]: /agent/faq/agent-commands/#start-stop-restart-the-agent
+[4]: /logs/processing/#log-date-remapper
+[5]: /logs/explore/#logstream
+[6]: /logs/explore/#search-bar
+[7]: /logs/processing/#log-status-remapper

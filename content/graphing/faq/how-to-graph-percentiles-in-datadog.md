@@ -5,19 +5,19 @@ kind: faq
 
 ## DogStatsD implementation
 
-It's possible to get percentiles in Datadog by submitting data as a histogram metric through DogStatsD. The datadog-agent embeds a [DogStatsD](/developers/dogstatsd) server that receives [DogStatsD](/developers/dogstatsd) packets, [perform data aggregation](https://github.com/DataDog/dd-agent/blob/master/aggregator.py), and send final percentile metrics to Datadog.
+It's possible to get percentiles in Datadog by submitting data as a histogram metric through DogStatsD. The datadog-agent embeds a [DogStatsD][1] server that receives [DogStatsD][1] packets, [perform data aggregation][2], and send final percentile metrics to Datadog.
 
 Since this aggregation is taken care of on the collection side, this isn't currently available as a graphing function in the GUI.
 
 Out of your histogram data you'll get: 95th percentile, 50th percentile, avg, max, count.
 
-* A quick [introduction to DogStatsD](/developers/dogstatsd)
+* A quick [introduction to DogStatsD][1]
 
-* [DogStatsD clients available for each programming language](/developers/libraries/).
+* [DogStatsD clients available for each programming language][3].
 
 ### Additional percentiles
 
-Via the "histogram_percentiles" line of the configuration file of the agent, get extra percentiles, e.g.:
+Via the "histogram_percentiles" line of the configuration file of the Agent, get extra percentiles, e.g.:
 
 * histogram_percentiles: 0.95, 0.75
 
@@ -40,4 +40,9 @@ Histograms are computed every 10 seconds on a host per host basis by the datadog
 * Making a change to increase tag complexity (adding additional tags to be more specific) leads to changes in the behavior of a rolled up metric visualization
     * EX: Whereas before the change METRIC_NAME.avg (without any tags) would be aggregating across all raw points (statsd takes all the raw datapoints, aggregates it and then ships over a single metric stream), adding a tag like region (US, EU) tag causes statsd to bin raw datapoints into two region bins, aggregate them, and ship over two streams. This means when graphing METRIC_NAME.avg AVG by * means an aggregate across the two streams rather than a single one
 
-[Read more about the Datadog histograms characteristics](/developers/faq/characteristics-of-datadog-histograms)
+[Read more about the Datadog histograms characteristics][4]
+
+[1]: /developers/dogstatsd
+[2]: https://github.com/DataDog/dd-agent/blob/master/aggregator.py
+[3]: /developers/libraries/
+[4]: /developers/faq/characteristics-of-datadog-histograms

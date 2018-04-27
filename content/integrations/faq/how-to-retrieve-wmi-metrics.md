@@ -54,13 +54,12 @@ Win32_PerfFormattedData_PerfProc_Process
 [...]
 ```
 
-To browse the data exposed by a class, we can use a syntax similar to SQL called [WQL](https://msdn.microsoft.com/en-us/library/aa392902).
+To browse the data exposed by a class, we can use a syntax similar to SQL called [WQL][1].
 
 Many performance related metrics are reported by the PerfMon tool, and are called `Win32_PerfFormattedData_`. In this example we want to look at processes information so we query the `Win32_PerfFormattedData_PerfProc_Process` class:
 
 ```
 PS C:\> Get-WmiObject -Query "select * from Win32_PerfFormattedData_PerfProc_Process where Name = 'Powershell'"
-
 
 __GENUS                 : 2
 __CLASS                 : Win32_PerfFormattedData_PerfProc_Process
@@ -171,7 +170,7 @@ wmi_check
   Collected 0 metrics, 0 events and 1 service check 
 ```
 
-This is because the agent cannot report on 2 different metrics that have the same set of name and tags. To be able to differentiate between the 2 we can use the tag_by: Instance_Property_Name statement to use the value of an instance's property as an additional tag:
+This is because the Agent cannot report on 2 different metrics that have the same set of name and tags. To be able to differentiate between the 2 we can use the tag_by: Instance_Property_Name statement to use the value of an instance's property as an additional tag:
 ```yaml
 init_config:
 
@@ -238,3 +237,5 @@ instances:
     tag_queries:
       - [IDProcess, Win32_Process, Handle, CreationDate]
 ```
+
+[1]: https://msdn.microsoft.com/en-us/library/aa392902

@@ -1,6 +1,7 @@
 ---
 categories:
 - data store
+- log collection
 ddtype: check
 doc_link: https://docs.datadoghq.com/integrations/cassandra/
 git_integration_title: cassandra
@@ -30,13 +31,13 @@ version: 1.2.1
 
 Obtenez les métriques du service Cassandra en temps réel pour:
 
-* Visualisez et monitorez les états de Cassandra
-* Soyez informé des failovers et des événements de Cassandra.
+* Visualiser et monitorer les états de Cassandra
+* Être informé des failovers et des événements de Cassandra.
 
 ## Implémentation
 ### Installation
 
-Le check Cassandra est packagé avec l'agent, il vous faut donc simplement [installer l'agent] (https://app.datadoghq.com/account/settings#agent) sur vos noeuds Cassandra.
+Le check Cassandra est packagé avec l'agent, il vous faut donc simplement [installer l'agent](https://app.datadoghq.com/account/settings#agent) sur vos noeuds Cassandra.
 
 Nous recommandons l'utilisation du JDK d'Oracle pour cette intégration.
 
@@ -44,25 +45,44 @@ Cette check a une limite de 350 métriques par instance. Le nombre de métriques
 
 ### Configuration
 
-1. Configurer l'Agent pour qu'il se connecte à Cassandra en éditant le fichier `cassandra.yaml`. Consultez l'exemple du [canevas cassandra.yaml](https://github.com/DataDog/integrations-core/blob/master/cassandra/conf.yaml.example) pour apprendre toutes les options de configuration disponibles:
-2. [Redémarrez votre Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent)
+Créez un fichier `cassandra.yaml` dans le répertoire` conf.d` de l'Agent:
+
+#### Collecte de métrique
+
+*  La configuration par défaut dans votre fichier `cassandra.yaml` active la collecte de [vos métriques Cassandra](#metrics).
+ Consultez l'exemple du [canevas cassandra.yaml](https://github.com/DataDog/integrations-core/blob/master/cassandra/conf.yaml.example) pour apprendre toutes les options de configuration disponibles:
+
+2. [Redémarrez l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent).
+
+#### Collecte de log
+
+**Disponible pour l'Agent >6.0**
+
+* La collecte des logs est désactivée par défaut dans l'Agent Datadog, vous devez l'activer dans `datadog.yaml`:
+
+  ```
+  logs_enabled: true
+  ```
+
+* Ajoutez cette configuration à votre fichier `cassandra.yaml` pour commencer à collecter vos logs Cassandra:
+
+  ```
+    logs:
+        - type: file
+          path: /var/log/cassandra/*.log
+          source: cassandra
+          sourcecategory: database
+          service: myapplication
+  ```
+
+  Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement.
+Consultez l'exemple du [canevas cassandra.yaml](https://github.com/DataDog/integrations-core/blob/master/cassandra/conf.yaml.example) pour apprendre toutes les options de configuration disponibles:
+
+* [Redémarrez l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent).
 
 ### Validation
 
-[Lancez la commande `status`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `cassandra` dans la section Checks:
-
-```
-  Checks
-  ======
-    [...]
-
-    cassandra
-    -------
-      - instance #0 [OK]
-      - Collected 26 metrics, 0 events & 1 service check
-
-    [...]
-```
+[Lancez la commande `status`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `cassandra` dans la section Checks.
 
 ## Compatibilité
 
@@ -73,7 +93,7 @@ Le check Cassandra est compatible avec toutes les principales plateformes.
 {{< get-metrics-from-git "cassandra" >}}
 
 
-### Evénements
+### Évènements
 Le check Cassandra n'inclut aucun événement pour le moment.
 
 ### Checks de Service
@@ -102,7 +122,7 @@ Il utilise l'utilitaire `nodetool` pour les collecter.
 ## Implémentation
 ### Installation
 
-Le check Cassandra nodetool est packagé avec l'agent, il vous faut donc simplement [installer l'agent] (https://app.datadoghq.com/account/settings#agent) sur vos noeuds Cassandra.
+Le check Cassandra nodetool est packagé avec l'agent, il vous faut donc simplement [installer l'agent](https://app.datadoghq.com/account/settings#agent) sur vos noeuds Cassandra.
 
 ### Configuration
 
@@ -136,15 +156,7 @@ instances:
 
 ### Validation
 
-[Lancez la commande `status`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `cassandra_nodetool` dans la section Checks:
-
-    Checks
-    ======
-
-        cassandra_nodetool
-        -----------
-          - instance #0 [OK]
-          - Collected 39 metrics, 0 events & 7 service checks
+[Lancez la commande `status`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `cassandra_nodetool` dans la section Checks.
 
 ## Compatibilité
 
@@ -155,7 +167,7 @@ Le check `cassandra_nodetool` est compatible avec toutes les principales platefo
 {{< get-metrics-from-git "cassandra_nodetool" >}}
 
 
-### Evénements
+### Évènements
 Le check Cassandra_nodetool n'inclut aucun événement pour le moment.
 
 ### Checks de Service

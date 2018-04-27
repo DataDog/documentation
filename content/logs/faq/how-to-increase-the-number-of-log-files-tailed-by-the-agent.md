@@ -22,5 +22,5 @@ logs_config:
   open_files_limit: 100
 ```
 
-**Note**: Increasing the tailed logs files limit might increase the ressource consumption of the agent.
+**Note**: Increasing the tailed logs files limit might increase the ressource consumption of the Agent.
 

@@ -9,9 +9,6 @@ title: Datadog-Google App Engine Integration
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-
-
-
 ## Overview
 
 Install the Google App Engine integration in your Python project to:
@@ -41,7 +38,6 @@ Ensure that Billing is enabled on your Google App Engine project to collect all 
           # so it's not clobbered by a catchall route
           - url: /datadog
             script: gae_datadog.datadog.app
-
 
     b. Set your API key. This should be at the top level of the file and not in the handler section.
 

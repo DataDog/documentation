@@ -28,7 +28,7 @@ An environment is a first class dimension that you use to scope an entire Datado
 * Stage environments such as production, staging, and pre-production
 * Data centers and availability zones in isolation
 
-Environments are [tags](/agent/tagging), therefore they must follow the following rules:
+Environments are [tags][1], therefore they must follow the following rules:
 
 * They must start with a lower case letter.
 * Other characters must be alphanumeric lower case Unicode characters, underscores, minuses, colons, periods or slashes.
@@ -48,10 +48,10 @@ The default environment for un-tagged data is `env:none`. See below to see how t
 There are several ways to specify an environment when reporting data:
 
 1. Host tag:  
-  Use a host tag with the format `env:XXXX` to tag all traces from that agent accordingly.
+  Use a host tag with the format `env:XXXX` to tag all traces from that Agent accordingly.
 
 2. Agent configuration:  
-  Override the default tag used by the trace agent in [the Agent configuration file](/agent/faq/where-is-the-configuration-file-for-the-agent). This tags all traces coming through the agent, overriding the host tag value.
+  Override the default tag used by the trace Agent in [the Agent configuration file][2]. This tags all traces coming through the Agent, overriding the host tag value.
 
     ```
     [trace.config]
@@ -59,7 +59,7 @@ There are several ways to specify an environment when reporting data:
     ```
 
 3. Per trace:  
-  When submitting a single trace, specify an environment by tagging one of its spans with the metadata key `env`. This overrides the agent configuration and the host tags value (if any).  
+  When submitting a single trace, specify an environment by tagging one of its spans with the metadata key `env`. This overrides the Agent configuration and the host tags value (if any).  
 
   * **Go**:
     ```
@@ -88,7 +88,9 @@ There are several ways to specify an environment when reporting data:
     tracer.set_tags('env', 'prod')
     ```
 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /agent/tagging
+[2]: /agent/faq/where-is-the-configuration-file-for-the-agent

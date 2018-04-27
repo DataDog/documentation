@@ -11,14 +11,11 @@ title: Infrastructure List
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-
-
 ## Overview
 
 The Infrastructure list page shows all hosts monitored by your datadog application:
 
 {{< img src="infrastructure/index/infrastructure_list.png" alt="Infrastructure list" >}}
-
 
 ## Host details
 

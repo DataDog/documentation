@@ -12,7 +12,6 @@ doclevel: basic
 
 Enable this integration to see in Datadog all your Amazon Storage Gateway metrics. -->
 
-
 AWS Storage Gatewayは、企業のオンプレミスのソフトウェアアプライアンスをクラウド上のストレージと接続するサービスです。
 AWS Storage Gatewayを活用することにより、企業のオンプレミスのIT環境とAWSのストレージ間をシームレスでセキュアに統合することが出来ます。
 

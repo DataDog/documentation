@@ -1,9 +1,9 @@
 ---
-title: Data aggregation with dogstatsd/Threadstats
+title: Data aggregation with DogStatsD/Threadstats
 kind: faq
 ---
 
-The statsd protocol is a great setup to fire many metrics and monitor your application code without blocking HTTP calls. Data is sampled in your application code then is transmitted via UDP to the [DogStatsD server](/developers/dogstatsd) (embedded in the dd-agent) that aggregates then sends data to Datadog api endpoint. [Read more about the DogStatsD setup](/developers/dogstatsd):
+The statsd protocol is a great setup to fire many metrics and monitor your application code without blocking HTTP calls. Data is sampled in your application code then is transmitted via UDP to the [DogStatsD server][1] (embedded in the dd-agent) that aggregates then sends data to Datadog api endpoint. [Read more about the DogStatsD setup][1]:
 
 This article aims at describing why and how the aggregation is performed.
 ([Python threadstats library](/developers/faq/is-there-an-alternative-to-dogstatsd-and-the-api-to-submit-metrics-threadstats) variations are mentioned at the end of this article.)
@@ -16,9 +16,9 @@ For instance, if you have a counter incremented 1,000 times (+1 each time) over 
 
 ## How is aggregation performed with the DogStatsD server?
 
-[DogStatsD](/developers/dogstatsd) uses a flush interval of 10 seconds. Every 10 seconds, [DogStatsD](/developers/dogstatsd) checks all data received since the last flush (in the last 10 seconds). All values that corresponds to the same metric name and the same tags are aggregated together into a single value.
+[DogStatsD][1] uses a flush interval of 10 seconds. Every 10 seconds, [DogStatsD][1] checks all data received since the last flush (in the last 10 seconds). All values that corresponds to the same metric name and the same tags are aggregated together into a single value.
 
-Note: with the statsd protocol, the statsd client doesn't send metrics with timestamps. The timestamp is added at the flush time. So for a flush occurring at 10:00:10, all data received by the [DogStatsD](/developers/dogstatsd) server (embedded in the Datadog agent) between 10:00:00 and 10:00:10 is rolled up in a single datapoint that gets 10:00:00 as timestamp.
+Note: with the statsd protocol, the statsd client doesn't send metrics with timestamps. The timestamp is added at the flush time. So for a flush occurring at 10:00:10, all data received by the [DogStatsD][1] server (embedded in the Datadog Agent) between 10:00:00 and 10:00:10 is rolled up in a single datapoint that gets 10:00:00 as timestamp.
 
 ### Aggregation rules per metric type
 
@@ -26,11 +26,11 @@ Among all values received during the same flush interval, the aggregated value i
 
 * Gauge: the most recent datapoint received
 * Count/Counter: the sum of the received values
-* Histogram: the min, max, sum, avg, 95percentiles, count, median of all value received, check [metrics documentation page](/developers/metrics) for more details.
+* Histogram: the min, max, sum, avg, 95percentiles, count, median of all value received, check [metrics documentation page][2] for more details.
 * Set: the number of different values seen
 * Rate: the value difference divided by the time difference of the last 2 datapoints received
 
-[Find more information about each metric type](/developers/metrics).
+[Find more information about each metric type][2].
 
 ## Threadstats variations
 
@@ -54,4 +54,8 @@ For instance during the flush interval of 10 seconds (between 10:00:00 and 10:00
 2. {09:30:10, 1}, {10:00:00, 2}, {10:00:00,1}, {10:00:05,1}, {10:00:05,1} # 2- every datapoint in the same roll_up_interval (5 seconds) gets the same timestamp
 3. {09:30:10, 1}, {10:00:00, 3}, {10:00:05,2} # 3- data is aggregated and only 4 values are eventually submitted to Datadog
 
-[Find more information about Threadstatsd aggregation](https://github.com/DataDog/datadogpy/blob/master/datadog/threadstats/metrics.py).
+[Find more information about Threadstatsd aggregation][3].
+
+[1]: /developers/dogstatsd
+[2]: /developers/metrics
+[3]: https://github.com/DataDog/datadogpy/blob/master/datadog/threadstats/metrics.py

@@ -9,3 +9,4 @@ external_redirect: /api/#get-organization
 ##### ARGUMENTS
 * **`public_id`** [*obligatoire*]:  
     L'ID public de l'organisation
+

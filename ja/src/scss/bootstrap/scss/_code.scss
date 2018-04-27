@@ -18,6 +18,8 @@ code {
   color: $code-color;
   background-color: $code-bg;
   border-radius: $border-radius-base;
+  word-break: normal;
+  word-wrap: normal;
 }
 
 // User input typically entered via keyboard
@@ -44,8 +46,8 @@ pre {
   margin: 0 0 ($line-height-computed / 2);
   font-size: ($font-size-base - 1); // 14px to 13px
   line-height: $line-height-base;
-  word-break: break-all;
-  word-wrap: break-word;
+  word-break: normal;
+  word-wrap: normal;
   color: $pre-color;
   background-color: $pre-bg;
   border: 1px solid $pre-border-color;
@@ -59,6 +61,8 @@ pre {
     white-space: pre-wrap;
     background-color: transparent;
     border-radius: 0;
+    word-break: normal;
+    word-wrap: normal;
   }
 }
 

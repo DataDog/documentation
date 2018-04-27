@@ -6,7 +6,7 @@ external_redirect: /api/#search
 ---
 
 ##### Signature
-`GET https://app.datadoghq.com/api/v1/search`
+`GET https://api.datadoghq.com/api/v1/search`
 ##### Example Request
 {{< code-snippets basename="api-search" >}}
 ##### Example Response

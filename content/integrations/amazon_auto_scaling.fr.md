@@ -6,6 +6,7 @@ categories:
   - provisioning
   - configuration & deployment
   - aws
+  - log collection
 ddtype: crawler
 description: Suivez l'état et le nombre d'instances dans vos groupes Auto Scaling.
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_auto_scaling/'

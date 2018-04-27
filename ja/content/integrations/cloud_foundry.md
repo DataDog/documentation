@@ -9,7 +9,6 @@ title: Datadog-Cloud Foundry Integration
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-
 ## Overview
 
 Any Cloud Foundry deployment can send metrics and events to Datadog. The data helps you track the health and availability of all nodes in the deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more.
@@ -184,7 +183,7 @@ jobs:
   properties:
     datadog:
       api_key: <YOUR_DATADOG_API_KEY>
-      api_url: https://app.datadoghq.com/api/v1/series
+      api_url: https://api.datadoghq.com/api/v1/series
       flush_duration_seconds: 15 # seconds between flushes to Datadog. Default is 15.
     loggregator:
       # do NOT append '/firehose' or even a trailing slash to the URL; 'ws://<host>:<port>' will do
@@ -259,7 +258,7 @@ instance_groups:
 
 BOSH cannot simply configure the plugin and restart the Health Monitor; it must destroy the Director and redeploy it as a new instance. To do this while retaining the Director's current disk and database, you MUST redeploy using a `state.json` (or similarly named) file that accurately reflects the current state of your Director. If you don't have such a file, follow the BOSH docs on [Deployment State](https://bosh.io/docs/cli-envs.html#deployment-state) to create a basic `state.yml`.
 
-You may use [bosh-init](https://bosh.io/docs/install-bosh-init.html) or BOSH CLI v2 to redeploy the Director. If you use bosh-init, your state file must be named similarly to your manifest; for a manifest named `bosh.yml`, `bosh-init` expects a state file named `bosh-state.yml`.
+You may use [bosh-init](https://bosh.io/docs) or BOSH CLI v2 to redeploy the Director. If you use bosh-init, your state file must be named similarly to your manifest; for a manifest named `bosh.yml`, `bosh-init` expects a state file named `bosh-state.yml`.
 
 ~~~
 # bosh-init (legacy)
@@ -274,7 +273,6 @@ bosh create-env --state=your-state-file.json bosh.yml
 On the [Metrics explorer](https://app.datadoghq.com/metric/explorer) page in Datadog, search for metrics beginning `bosh.healthmonitor`:
 
 {{< img src="integrations/cloud_foundry/cloud-foundry-bosh-hm-metrics.png" alt="cloud-foundry-bosh-hm-metrics" >}}
-
 
 ## Data Collected
 ### Events

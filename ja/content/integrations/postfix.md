@@ -13,5 +13,4 @@ Get metrics from Postfix in real time to monitor the messages pending in your Po
 
 ## 概要
 
-
 Postfixのメールキュー内の保留中のメッセージを監視する為に、リアルタイムでメトリクスを取得します。

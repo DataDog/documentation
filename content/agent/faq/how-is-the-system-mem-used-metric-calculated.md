@@ -16,7 +16,7 @@ For example, running 'free -m' on an Ubuntu machine may produce the following me
 |total|   used|    free|    shared|  cached|  available|
 |128831|  1203|    71975|  4089|   55653|     122380|
 
-A Datadog agent running on this same machine reports a `system.mem.used` metric with a value of 56856 MB - clearly different from the 'free -m' used memory value of 1203 MB.
+A Datadog Agent running on this same machine reports a `system.mem.used` metric with a value of 56856 MB - clearly different from the 'free -m' used memory value of 1203 MB.
 
 The reason for this discrepancy is because Datadog includes cached memory in its formula for used memory, where 'free -m' does not.
 
@@ -33,3 +33,4 @@ Again, Datadog's system.mem.used metric includes cached memory, so subtracting t
 **The system.mem.usable metric represents free memory plus cached memory plus buffers** (on Linux, it reflects "MemAvailable" attribute from /proc/meminfo whenever possible).
 
 {{< partial name="whats-next/whats-next.html" >}}
+

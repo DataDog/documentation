@@ -9,8 +9,6 @@ title: Datadog-AWS ElastiCache Integration
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-
-
 {{< img src="integrations/awselasticache/elasticache-memcached.png" alt="ElastiCache Memcached default dashboard" >}}
 
 ## Overview
@@ -23,7 +21,6 @@ To collect all available ElastiCache metrics, you need to do two things:
 
 1.  [Turn on the ElastiCache integration](https://app.datadoghq.com/account/settings#integrations/amazon_elasticache) to pull metrics from ElastiCache into Datadog
 2.  Set up the Datadog Agent as described in this article (optional, but recommended)
-
 
 #### Collecting native metrics with the Agent
 
@@ -51,7 +48,6 @@ Then click on the “node” link to access its endpoint URL:
 
 Write down the endpoint URL (e.g. **replica-001.xxxx.use1.cache.amazonaws.com**) and the `cacheclusterid` (e.g. **replica-001**). You will need these values to configure the agent and to create graphs and dashboards.
 
-
 ##### Configure the Agent
 
 The Redis/Memcached integrations support the tagging of individual cache instances. Originally designed to allow the monitoring of multiple instances on the same machine, you can use these tags to your advantage. Here is an example of a configuration for ElastiCache with Redis using `redisdb.yaml`, usually found in `/etc/dd-agent/conf.d`
@@ -65,9 +61,7 @@ instances:
       - cacheclusterid:replicaa-001 # Cache Cluster ID from AWS console
 {{< /highlight >}}
 
-
 Then restart the agent: `sudo /etc/init.d/datadog-agent restart` (on linux).
-
 
 ##### Visualize ElastiCache and Redis/Memcached metrics together
 

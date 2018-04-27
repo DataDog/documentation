@@ -22,12 +22,15 @@ On the integration tab you see a list of your installed integrations. Upon
 selection, you can choose to monitor either a "Status" or a "Metric".
 
 - Choosing **Integration Status** presents you with one or more service
-  checks for each integration. Refer to the [custom monitors](/monitors/monitor_types/custom_check) section for details on the available options.
+  checks for each integration. Refer to the [custom monitors][1] section for details on the available options.
 
 - Choosing **Integration Metric** provides a familiar interface used for a
   interface used for a Metric Monitor. You are able to choose from any of
-  the metrics provided by this integration. Refer to the [alert conditions](/monitors/monitor_types/#define-the-conditions) section for details on the available options.
+  the metrics provided by this integration. Refer to the [alert conditions][2] section for details on the available options.
 
 ## Further Reading 
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /monitors/monitor_types/custom_check
+[2]: /monitors/monitor_types/#define-the-conditions

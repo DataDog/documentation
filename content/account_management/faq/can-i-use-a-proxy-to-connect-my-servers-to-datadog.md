@@ -3,13 +3,13 @@ title: Can I use a proxy to connect my servers to Datadog?
 kind: faq
 ---
 
-If your network configuration restricts outbound traffic, [proxy all agent traffic](/agent/proxy) through one or several hosts that have more permissive outbound policies.
+If your network configuration restricts outbound traffic, [proxy all Agent traffic][1] through one or several hosts that have more permissive outbound policies.
 
 You have a few options to send traffic to Datadog over SSL/TLS for hosts that are not directly connected to the Internet: 
 
-* [Using the agent as a proxy](/agent/proxy/#using-the-agent-as-a-proxy) (for up to 16 agents per proxy)
-* [Using a web proxy](/agent/proxy/#using-a-web-proxy-as-proxy) (e.g. Squid, Microsoft Web Proxy) that is already deployed in your network
-* [Using HAProxy](/agent/proxy/#using-haproxy-as-a-proxy) (High volume solution. A single HAProxy instance can accommodate traffic from ~1000 Datadog agents)
+* [Using the Agent as a proxy][2] (for up to 16 Agents per proxy)
+* [Using a web proxy][3] (e.g. Squid, Microsoft Web Proxy) that is already deployed in your network
+* [Using HAProxy][4] (High volume solution. A single HAProxy instance can accommodate traffic from ~1000 Datadog Agents)
 
 Here is a common scenario with an Amazon VPC:
 {{< img src="account_management/faq/Datadog_Amazon_VPC.jpg" alt="Datadog Amazon VPC" responsive="true" popup="true">}}
@@ -18,3 +18,8 @@ In the above, the six EC2 instances in the VPC aren't Internet facing, however, 
 {{< img src="account_management/faq/Datadog_Physical.jpg" alt="Datadog Physical" responsive="true" popup="true">}}
 
 In the above, the six physical servers in the data center aren't Internet facing, however, they have communication to a single instance acting as a proxy that is open and may be used to route local traffic (one way) from the hosts out to Datadog via 443 TCP/HTTPS for external communication.
+
+[1]: /agent/proxy
+[2]: /agent/proxy/#using-the-agent-as-a-proxy
+[3]: /agent/proxy/#using-a-web-proxy-as-proxy
+[4]: /agent/proxy/#using-haproxy-as-a-proxy

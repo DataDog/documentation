@@ -7,7 +7,7 @@ aliases:
   - >-
     /fr/graphing/faq/is-there-a-way-for-me-to-set-the-maximum-and-minimum-values-on-the-y-axis-of-a-graph
   - /fr/graphing/faq/is-it-possible-to-adjust-the-y-axis-for-my-graphs
-description: Visualisez vos données pour mieux les comprendre
+description: Visualiser vos données pour mieux les comprendre
 ---
 Les graphiques sont une fenêtre sur vos systèmes surveillés. La plupart du temps lors de vos visites de Datadog, vous regardez [des dashboards][8] constitués de graphiques. D'autres fois, vous recevez des notifications par courriel qui incluent un graphique de certaines fluctuations dans le système. Et d'autres fois, vous voyez des graphiques dans votre client Slack, HipChat (ou autres clients de chat) montrant des changements de comportement dans les métriques au cours du temps. Les graphiques sont au cœur de la surveillance et de l'observabilité, il est donc essentiel de comprendre comment définir de superbes graphiques.
 
@@ -31,13 +31,13 @@ Lorsque vous ouvrez la fenêtre de l'éditeur graphique pour la première fois, 
 
 La configuration d'un graphique est un processus en plusieurs étapes:
 
-1. [Choisissez la métrique à grapher](/graphing/#choose-the-metric-to-graph)
-2. [Sélectionner la visualisation](/graphing/#select-your-visualization)
-3. [Filtrer](/graphing/#Filtrer) 
-4. [Agréger et cumuler](/graphing/#agreger-et-cumuler) 
-5. [Appliquer des fonctions suplémentaires](/graphing/#advanced-graphing)
-6. [Améliorer vos graphiques](/graphing/#graphs-enhancement)
-7. [Titre du graphique](/graphing/#create-a-title)
+1. [Choisissez la métrique à grapher][9]
+2. [Sélectionner la visualisation][10]
+3. [Filter][11] 
+4. [Agréger et cumuler][12]
+5. [Appliquer des fonctions suplémentaires][13]
+6. [Améliorer vos graphiques][14]
+7. [Titre du graphique][15]
 
 ## Choisissez la métrique à grapher
 
@@ -69,7 +69,7 @@ Après la méthode d'agrégation, vous pouvez déterminer ce qui constitue une l
 
 Indépendamment des options choisies ci-dessus, il y a toujours une certaine agrégation de données due aux contraintes de taille physique de la fenêtre contenant le graphique. Si une métrique est mise à jour toutes les secondes et que vous consultez 4 heures de données, vous avez besoin de 14 400 points pour tout afficher. Chaque graphique que nous affichons a environ 300 points affichés à un moment donné.
 
-Dans l'exemple ci-dessus, chaque point affiché à l'écran représente 48 points de données. En pratique, les métriques sont collectées par l'agent toutes les 15-20 secondes. Donc, un jour de données représente 4.320 points. Vous pourriez envisager une fonction de rollup qui prend en compte 5 ou 10 minutes de données si vous souhaiteriez avoir plus de contrôle sur l'affichage de vos données pour un graphique qui affiche 1 jour entier.
+Dans l'exemple ci-dessus, chaque point affiché à l'écran représente 48 points de données. En pratique, les métriques sont collectées par l'Agent toutes les 15-20 secondes. Donc, un jour de données représente 4.320 points. Vous pourriez envisager une fonction de rollup qui prend en compte 5 ou 10 minutes de données si vous souhaiteriez avoir plus de contrôle sur l'affichage de vos données pour un graphique qui affiche 1 jour entier.
 
 Pour utiliser la fonction de rollup, cliquez sur le signe plus à droite du groupe d'agrégation et choisissez "rollup" dans la liste déroulante. Maintenant, choisissez comment vous voulez agréger les données et l'intervalle en secondes.
 
@@ -165,7 +165,7 @@ Pour montrer quelque chose d'une source telle que Github, utilisez `sources: git
 
 ## Créez un titre
 
-Si vous ne saisissez pas de titre, nous générons automatiquement un titre en fonction des sélections que vous avez effectuées. Mais il peut être plus utile aux utilisateurs du [dashboard](/graphing/dashboards) de créer un titre qui décrit plus précisément le but du graphique. Lier l'objectif technique aux avantages business ajoute encore plus de valeur.
+Si vous ne saisissez pas de titre, nous générons automatiquement un titre en fonction des sélections que vous avez effectuées. Mais il peut être plus utile aux utilisateurs du [dashboard][16] de créer un titre qui décrit plus précisément le but du graphique. Lier l'objectif technique aux avantages business ajoute encore plus de valeur.
 
 ## Sauvegardez
 
@@ -179,3 +179,11 @@ La dernière étape consiste à cliquer sur Save. Vous pourrez toujours revenir 
 [6]: /graphing/miscellaneous/functions/
 [7]: https://app.datadoghq.com/notebook/list
 [8]: /graphing/dashboards
+[9]: /graphing/#choose-the-metric-to-graph
+[10]: /graphing/#select-your-visualization
+[11]: /graphing/#filter
+[12]: /graphing/#aggregate-and-rollup
+[13]: /graphing/#advanced-graphing
+[14]: /graphing/#graphs-enhancement
+[15]: /graphing/#create-a-title
+[16]: /graphing/dashboards

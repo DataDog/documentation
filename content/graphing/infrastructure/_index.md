@@ -33,7 +33,7 @@ If you click on one host, You can see the tags applied to it:
 ### Agent Host Names
 
 The Datadog Agent collects potential hostnames from a number of different
-sources. To see all the names the Agent is detecting, [run the Agent info command](/agent/faq/agent-commands/#agent-status-and-information):
+sources. To see all the names the Agent is detecting, [run the Agent info command][1]:
 
     $ sudo /etc/init.d/datadog-agent info
 
@@ -66,7 +66,7 @@ match is selected.
 If name is recognized as obviously non-unique (e.g. `localhost.localdomain`),
 the current rule fails and passes through to the next.
 
-**Note**: If an EC2 instance is an ECS host, Datadog uses the `instance-id` as the hostname, [even if the DNS hostname isn't an EC2 default](https://github.com/DataDog/dd-agent/blob/5.14.1/utils/hostname.py#L104). If you don't wish to use the `instance-id`, set the hostname in the Agent configuration file.
+**Note**: If an EC2 instance is an ECS host, Datadog uses the `instance-id` as the hostname, [even if the DNS hostname isn't an EC2 default][2]. If you don't wish to use the `instance-id`, set the hostname in the Agent configuration file.
 
 <div class="alert alert-warning">
 Hostnames should be unique within a Datadog account.<br> 
@@ -100,23 +100,30 @@ An easy way to accomplish this would be to use the following script that leverag
 
 This script outputs all the current running Agents and their version numbers to a separate document.  Additionally, you can edit the script to input a desired Version number if you would also like all the running Agents that are under a particular version number.  There is also a separate file if you would like to convert the JSON output into a CSV file for your review.
 
-Once you determine which hosts you would like to update you can either manually install the Agent from the [install page](https://app.datadoghq.com/account/settings#agent).   
-
-Or you can make use of one our automation integrations like [Chef](/integrations/chef), [Puppet](/integrations/puppet), or [Ansible](/integrations/ansible).
+Once you determine which hosts you would like to update you can either manually install the Agent from the [install page][3], or you can use one of our automation integrations like [Chef][4], [Puppet][5], or [Ansible][6].
 
 ### List of ec2 instances without the datadog-agent installed
 
-The host list and all its host information of the [Infrastructure List page](https://app.datadoghq.com/infrastructure) of Datadog is made available via the "JSON API permalink" at the bottom of the page.
+The host list and all its host information of the [Infrastructure List page][7] of Datadog is made available via the "JSON API permalink" at the bottom of the page.
 
 You can programmatically access host information and get the insights you need, one example is this python script that prints the list of hosts:
 
 * for which Datadog receives AWS EC2 information from Cloudwatch, through our AWS integration.
-* but that don't have the agent installed.
+* but that don't have the Agent installed.
 
 {{< img src="graphing/infrastructure/index/ec2_instances_without_dd_agent.png" alt="ec2_instances_without_dd_agent" responsive="true" popup="true" style="width:90%;">}}
 
-[See the script to prints the list of hosts](https://gist.github.com/Martiflex/2803a28ec562fc9a15d404a539f85d38).
+[See the script to prints the list of hosts][8].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /agent/faq/agent-commands/#agent-status-and-information
+[2]: https://github.com/DataDog/dd-agent/blob/5.14.1/utils/hostname.py#L104
+[3]: https://app.datadoghq.com/account/settings#agent
+[4]: /integrations/chef
+[5]: /integrations/puppet
+[6]: /integrations/ansible
+[7]: https://app.datadoghq.com/infrastructure
+[8]: https://gist.github.com/Martiflex/2803a28ec562fc9a15d404a539f85d38

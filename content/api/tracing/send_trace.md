@@ -8,21 +8,21 @@ external_redirect: /api/#send-traces
 ## Send traces
 Datadog's APM allows you to collect performance metrics by tracing your code to determine which parts of your application are slow or inefficient.
 
-Tracing data is sent to the Datadog Agent via an HTTP API. We provide some [official libraries](/tracing/#instrument-your-application) that simplify sending metrics to the Datadog Agent, however you may want to interact directly with the API to instrument applications that cannot use the libraries or are written in languages that don't yet have an official Datadog Tracing library.
+Tracing data is sent to the Datadog Agent via an HTTP API. We provide some [official libraries][1] that simplify sending metrics to the Datadog Agent, however you may want to interact directly with the API to instrument applications that cannot use the libraries or are written in languages that don't yet have an official Datadog Tracing library.
 
-Traces can be sent as an array of [traces](/tracing/visualization/trace):
+Traces can be sent as an array of [traces][2]:
 ```
 [ trace1, trace2, trace3 ]
 ```
 
-and each trace is an array of [spans](/tracing/visualization/trace/#spans):
+and each trace is an array of [spans][3]:
 ```
 trace1 = [ span, span2, span3 ]
 ```
 
 and each span is a dictionary with a `trace_id`, `spand_id`, `resource`..
 
-[Learn more about the APM (tracing) terminology](/tracing/visualization/services_list/)
+[Learn more about the APM (tracing) terminology][4]
 
 **Note**: Each span within a trace should use the same trace_id.
 
@@ -39,3 +39,8 @@ and each span is a dictionary with a `trace_id`, `spand_id`, `resource`..
 *   **`parent_id`** - _Optional._ The span integer ID of the parent span.
 *   **`error`** - _Optional._ Set this value to 1 to indicate if an error occured. If an error occurs, you should pass additional information, such as the error message, type and stack information in the `meta` property.
 *   **`meta`** - _Optional._ A dictionary of key-value metadata. e.g. tags.
+
+[1]: /tracing/#instrument-your-application
+[2]: /tracing/visualization/trace
+[3]: /tracing/visualization/trace/#spans
+[4]: /tracing/visualization/services_list/

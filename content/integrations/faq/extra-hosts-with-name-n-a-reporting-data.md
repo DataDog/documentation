@@ -9,5 +9,6 @@ After enabling the CloudWatch integration, you might see a metric reporting from
 
 If you'd like to remove the "N/A" tagged metrics, we can enable a feature that filters out all AWS aggregate metrics. Be advised that monitors and graphs set up for AWS metrics using sum values may be affected after we enable filtering.
 
-[Contact support](/help) to enable filtering and check if any of your monitors is affected.
+[Contact support][1] to enable filtering and check if any of your monitors is affected.
 
+[1]: /help

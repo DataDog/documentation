@@ -20,16 +20,14 @@ We officially support the Java JRE 1.7 and higher of both Oracle JDK and OpenJDK
 To improve visibility into applications using unsupported frameworks, consider:
 
 * Adding custom instrumentation (with OpenTracing or the `@Trace` annotation).
-* [Submitting a pull request](https://github.com/DataDog/documentation#outside-contributors) with instrumentation for inclusion in a future release.
-* [Contact support](/help) and submit a feature request.
-
-
+* [Submitting a pull request][1] with instrumentation for inclusion in a future release.
+* [Contact support][2] and submit a feature request.
 
 ## Installation and Getting Started
 
-To begin tracing applications written in any language, first [install and configure the Datadog Agent](https://docs.datadoghq.com/tracing/setup) (see additional documentation for [tracing Docker applications](/tracing/setup/docker/)).
+To begin tracing applications written in any language, first [install and configure the Datadog Agent][3] (see additional documentation for [tracing Docker applications](/tracing/setup/docker/)).
 
-Next, download `dd-java-agent.jar` that contains the agent class files:
+Next, download `dd-java-agent.jar` that contains the Agent class files:
 
 ```shell
 wget -O dd-java-agent.jar 'https://search.maven.org/remote_content?g=com.datadoghq&a=dd-java-agent&v=LATEST'
@@ -48,9 +46,9 @@ The tracer is configured using System Properties and Environment Variables as fo
 | Config             | System Property       | Environment Variable      |  Default           | Description |
 |:------------------ |:--------------------- |:------------------------- |:------------------ |:----- |
 | service.name       | dd.service.name       | DD_SERVICE_NAME           | `unnamed-java-app` | The name of a set of processes that do the same job. Used for grouping stats for your application.|
-| writer.type        | dd.writer.type        | DD_WRITER_TYPE            | `DDAgentWriter`    | Default value sends traces to the trace agent. Configuring with `LoggingWriter` instead writes traces out to the console. |
-| agent.host         | dd.agent.host         | DD_AGENT_HOST             | `localhost`        | Hostname for where to send traces to. If using a containerized environment, configure this to be the host ip.  See our [docker docs](https://docs.datadoghq.com/tracing/setup/docker/) for additional detail. |
-| agent.port         | dd.agent.port         | DD_AGENT_PORT             | `8126`             | Port number the agent is listening on for configured host. |
+| writer.type        | dd.writer.type        | DD_WRITER_TYPE            | `DDAgentWriter`    | Default value sends traces to the trace Agent. Configuring with `LoggingWriter` instead writes traces out to the console. |
+| agent.host         | dd.agent.host         | DD_AGENT_HOST             | `localhost`        | Hostname for where to send traces to. If using a containerized environment, configure this to be the host ip.  See our [docker docs][4] for additional detail. |
+| agent.port         | dd.agent.port         | DD_AGENT_PORT             | `8126`             | Port number the Agent is listening on for configured host. |
 | priority.sampling  | dd.priority.sampling  | DD_PRIORITY_SAMPLING      | `false`            | Enable priority sampling to ensure distributed traces are complete or to require sampling of specific traces. See [Sampling / distributed tracing](#sampling-distributed-tracing) section for details. |
 | trace.span.tags  | dd.trace.span.tags  | DD_TRACE_SPAN_TAGS      | `null`            | (Example: `key1:value1,key2:value2`) A list of default tags to be added to every span. Tags of the same name added directly to a span will overwrite the defaults provided here. |
 
@@ -61,7 +59,7 @@ The tracer is configured using System Properties and Environment Variables as fo
 
 ## Manual Instrumentation
 
-Before instrumenting your application, review Datadog’s [APM Terminology](/tracing/visualization/services_list/) and familiarize yourself with the core concepts of Datadog APM. If you aren't using a [supported framework instrumentation](#integrations), or you would like additional depth in your application’s traces, you may want to to manually instrument your code.
+Before instrumenting your application, review Datadog’s [APM Terminology][5] and familiarize yourself with the core concepts of Datadog APM. If you aren't using a [supported framework instrumentation](#integrations), or you would like additional depth in your application’s traces, you may want to to manually instrument your code.
 
 Do this either using the [Trace annotation](#trace-annotation) for simple method call tracing or with the [OpenTracing API](#opentracing-api) for complex tracing.
 
@@ -83,11 +81,11 @@ For Gradle, add:
 compile group: 'com.datadoghq', name: 'dd-trace-api', version: {version}
 ```
 
-Now add `@Trace` to methods to have them be traced when running with `dd-java-agent.jar`.  If the agent is not attached, this annotation will have no effect on your application.
+Now add `@Trace` to methods to have them be traced when running with `dd-java-agent.jar`.  If the Agent is not attached, this annotation will have no effect on your application.
 
 ### OpenTracing API
 
-Use the [OpenTracing API](https://github.com/opentracing/opentracing-java) and the Datadog Tracer (dd-trace-ot) library to measure execution times for specific pieces of code. This lets you trace your application more precisely than you can with the Java Agent alone.
+Use the [OpenTracing API][6] and the Datadog Tracer (dd-trace-ot) library to measure execution times for specific pieces of code. This lets you trace your application more precisely than you can with the Java Agent alone.
 
 #### Setup
 
@@ -217,7 +215,7 @@ public class Application {
 }
 ```
 
-Notice the above examples only use the OpenTracing classes. Please reference the [OpenTracing API](https://github.com/opentracing/opentracing-java) for more details and information.
+Notice the above examples only use the OpenTracing classes. Please reference the [OpenTracing API][6] for more details and information.
 
 ## Sampling / Distributed Tracing
 
@@ -233,7 +231,6 @@ Current Priority Values (more may be added in the future):
 |SAMPLER_KEEP   | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side. |
 |USER_DROP      | The user asked to not keep the trace. The Agent will drop it.                                              |
 |USER_KEEP      | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                     |
-
 
 Manually set trace priority:
 ```java
@@ -254,14 +251,13 @@ public class MyClass {
 }
 ```
 
-
 ## Debugging
 
 To return debug level application logs, enable debug mode with the flag `-Ddatadog.slf4j.simpleLogger.defaultLogLevel=debug` when starting the JVM.
 
 ## JMX Metrics
 
-Datadog's [JMX Integration](https://docs.datadoghq.com/integrations/java/) monitors additional metrics around: JVM heap memory, thread count, and garbage collection. Use it in conjunction with APM for an even broader view into your Java app's performance.
+Datadog's [JMX Integration][7] monitors additional metrics around: JVM heap memory, thread count, and garbage collection. Use it in conjunction with APM for an even broader view into your Java app's performance.
 
 ## Integrations
 
@@ -272,11 +268,13 @@ Datadog's [JMX Integration](https://docs.datadoghq.com/integrations/java/) monit
 | Server | Versions |
 |:------------- |:-------------|
 | Java Servlet Compatible | 2.3+, 3.0+ |
+| Jax-RS Annotations | JSR311-API |
+| Spring-Web | 4.0+ |
 
 *Note:* Many application servers are Servlet compatible, such as Tomcat, Jetty, Websphere, Weblogic, etc.
 Also, frameworks like Spring Boot and Dropwizard inherently work because they use a Servlet compatible embedded application server.
 
-Don't see your desired web frameworks? We're continually adding additional support, [check with our team](/help) to see if we can help.
+Don't see your desired web frameworks? We're continually adding additional support, [check with our team][2] to see if we can help.
 
 ### Networking Frameworks
 
@@ -284,11 +282,14 @@ Don't see your desired web frameworks? We're continually adding additional suppo
 
 | Framework      | Versions           |
 |:-------------|:-------------|
-| [OkHTTP](https://github.com/opentracing-contrib/java-okhttp) | 3.x |
-| [Apache HTTP Client](https://github.com/opentracing-contrib/java-apache-httpclient) | 4.3 + |
-| [JMS 2](https://github.com/opentracing-contrib/java-jms) | 2.x |
+| [OkHTTP][8] | 3.x |
+| [Apache HTTP Client][9] | 4.3 + |
+| [JMS 2][10] | 2.x |
+| AWS Java SDK | 1.11.0+ |
+| Kafka-Clients | 0.11+ |
+| Kafka-Streams | 0.11+ |
 
-Don't see your desired networking framework? We're continually adding additional support, [check with our team](/help) to see if we can help.
+Don't see your desired networking framework? We're continually adding additional support, [check with our team][2] to see if we can help.
 
 ### Datastores
 
@@ -297,8 +298,9 @@ Don't see your desired networking framework? We're continually adding additional
 | Database      | Versions           |
 |:-------------|:-------------|
 | JDBC | 4.x |
-| [MongoDB](https://github.com/opentracing-contrib/java-mongo-driver) | 3.x |
-| [Cassandra](https://github.com/opentracing-contrib/java-cassandra-driver) | 3.2.x |
+| [MongoDB][11] | 3.x |
+| [Cassandra][12] | 3.2.x |
+| Jedis | 1.4.0+ |
 
 `dd-java-agent` is also compatible with common JDBC drivers including:
 
@@ -313,8 +315,29 @@ Don't see your desired networking framework? We're continually adding additional
 *  Oracle
 *  Postgres SQL
 
-Don't see your desired datastores? We're continually adding additional support, [check with our team](/help) to see if we can help.
+Don't see your desired datastores? We're continually adding additional support, [check with our team][2] to see if we can help.
+
+### Beta Instrumentation
+
+`dd-java-agent` ships with some newer instrumentation disabled by default.
+
+| Instrumentation      | Versions           | JVM Arg to enable |
+|:-------------|:-------------|:-------------|
+| Jax RS Client | 1.11.0+ | -Ddd.integration.jax-rs.enabled=true |
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://github.com/DataDog/documentation#outside-contributors
+[2]: /help
+[3]: https://docs.datadoghq.com/tracing/setup
+[4]: https://docs.datadoghq.com/tracing/setup/docker/
+[5]: /tracing/visualization/services_list/
+[6]: https://github.com/opentracing/opentracing-java
+[7]: https://docs.datadoghq.com/integrations/java/
+[8]: https://github.com/opentracing-contrib/java-okhttp
+[9]: https://github.com/opentracing-contrib/java-apache-httpclient
+[10]: https://github.com/opentracing-contrib/java-jms
+[11]: https://github.com/opentracing-contrib/java-mongo-driver
+[12]: https://github.com/opentracing-contrib/java-cassandra-driver

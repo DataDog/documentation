@@ -5,8 +5,9 @@ order: 11.3
 external_redirect: /api/#delete-an-event
 ---
 ##### Signature
-`DELETE https://app.datadoghq.com/api/v1/events/:event_id`
+`DELETE https://api.datadoghq.com/api/v1/events/:event_id`
 ##### Exemple de requête
 {{< code-snippets basename="api-events-delete" >}}
 ##### Exemple de réponse
 {{< code-snippets basename="result.api-events-delete" >}}
+

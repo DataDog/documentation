@@ -11,11 +11,13 @@ further_reading:
 
 **This documentation assumes that you already have a SAML Identity Provider up and running.**
 
-Configuring [SAML (Security Assertion Markup Language)](http://en.wikipedia.org/wiki/Security_Assertion_Markup_Language) for your Datadog account lets you and all your teammates log in to Datadog using the credentials stored in your organization’s Active Directory, LDAP, or other identity store that has been configured with a SAML Identity Provider.
+Configuring [SAML (Security Assertion Markup Language)][1] for your Datadog account lets you and all your teammates log in to Datadog using the credentials stored in your organization’s Active Directory, LDAP, or other identity store that has been configured with a SAML Identity Provider.
+
+**Note**: Created users must accept email verification in order for SAML to work.
 
 ## Configure SAML
 
-If you are a [Datadog Administrator](/account_management/team/#datadog-user-roles), there is a [Configure SAML](https://app.datadoghq.com/saml/saml_setup) option in the drop down menu that is accessed by hover over your username in the left-side navigation menu.
+If you are a [Datadog Administrator][2], there is a [Configure SAML][3] option in the drop down menu that is accessed by hover over your username in the left-side navigation menu.
 
 {{< img src="account_management/saml/saml_configure.png" alt="Saml Configure" responsive="true" popup="true" style="width:50%;" >}}
 
@@ -27,7 +29,7 @@ That brings you to the **SAML Single Sign On Configuration** page:
 
     After you've chosen the file, click "Upload File".
 
-2. Download Datadog’s [Service Provider metadata](https://app.datadoghq.com/account/saml/metadata.xml) to configure your IdP to recognize Datadog as a Service Provider.
+2. Download Datadog’s [Service Provider metadata][4] to configure your IdP to recognize Datadog as a Service Provider.
 
 3. After you upload the IdP Meta-data and configure your IdP, enable SAML in Datadog by clicking the Enable button.
 {{< img src="account_management/saml/saml_enable.png" alt="saml enable" responsive="true" popup="true">}}
@@ -35,7 +37,7 @@ That brings you to the **SAML Single Sign On Configuration** page:
 Once SAML is configured in Datadog and your IdP is set up to accept requests from Datadog, users can log in by using the Single Sign On URL that is shown in the Status box at the top of the [SAML Configuration page](https://app.datadoghq.com/saml/saml_setup).
 {{< img src="account_management/saml/saml_enabled.png" alt="Saml Enabled" responsive="true" popup="true">}}
 
-The Single Sign On URL is also displayed on the [Team page](https://app.datadoghq.com/account/team).
+The Single Sign On URL is also displayed on the [Team page][5].
 Loading this URL initiates a SAML authentication against your IdP. Note that the URL isn't displayed until SAML is enabled for your account.
 
 ## Datadog Service Provider Details
@@ -45,7 +47,7 @@ Loading this URL initiates a SAML authentication against your IdP. Note that the
 * Datadog specifies  `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` for the Format of the **NameIDPolicy** in Assertion Requests.
 * Assertions must be signed.
 * Assertions can be encrypted, but unencrypted assertions are accepted.
-* [Datadog’s SP Metadata](https://app.datadoghq.com/account/saml/metadata.xml).
+* [Datadog’s SP Metadata][4].
 
 ##  Setting Attributes
 
@@ -77,10 +79,10 @@ If **sn** and **givenName** are provided, they are used to update the user’s n
 
 For more information about configuring specific IdP's, refer to the following Knowledge Base articles:
 
-* [Google](/account_management/faq/how-do-i-configure-google-as-a-saml-idp)
-* [Microsoft Active Directory Federation Services](/account_management/faq/how-do-i-setup-microsoft-active-directory-federation-services-as-a-saml-idp)
-* [NoPassword](/account_management/faq/how-do-i-configure-nopassword-as-a-saml-idp)
-* [Okta](/account_management/faq/how-do-i-configure-okta-as-a-saml-idp)
+* [Google][6]
+* [Microsoft Active Directory Federation Services][7]
+* [NoPassword][8]
+* [Okta][9]
 
 ## Additional Features
 
@@ -90,7 +92,7 @@ The following features can be enabled through the [SAML Configuration dialog](ht
 
 With Just-in-Time provisioning, a user is created within Datadog on the fly the first time they try to log in. This eliminates the need for administrators to manually create user accounts one at a time.
 
-Some organizations might not want to invite all of their users to Datadog. If you would like to make changes to how SAML works for your account, [contact support](/help).
+Some organizations might not want to invite all of their users to Datadog. If you would like to make changes to how SAML works for your account, [contact support][10].
 It is up to the organization to configure their IdP to not send assertions to Datadog if they don't want a particular user to access Datadog.
 
 Administrators in accounts using SAML can also set the default role for new Just-in-Time users.
@@ -106,7 +108,17 @@ After enabling the IdP Initiated Login feature (and waiting for caches to clear)
 
 If you do not use the updated SP Metadata, Datadog will not be able to associate the assertion with your organization and will display an error page with a message that the SAML response is missing the "InResponseTo" attribute.
 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: http://en.wikipedia.org/wiki/Security_Assertion_Markup_Language
+[2]: /account_management/team/#datadog-user-roles
+[3]: https://app.datadoghq.com/saml/saml_setup
+[4]: https://app.datadoghq.com/account/saml/metadata.xml
+[5]: https://app.datadoghq.com/account/team
+[6]: /account_management/faq/how-do-i-configure-google-as-a-saml-idp
+[7]: /account_management/faq/how-do-i-setup-microsoft-active-directory-federation-services-as-a-saml-idp
+[8]: /account_management/faq/how-do-i-configure-nopassword-as-a-saml-idp
+[9]: /account_management/faq/how-do-i-configure-okta-as-a-saml-idp
+[10]: /help

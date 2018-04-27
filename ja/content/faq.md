@@ -153,16 +153,6 @@ Please refer to the [Basic Agent Usage Guide][basic_agent_usage]. -->
 
 <!--
 
-
-
-
-
-
-
-
-
-
-
 <!--
 ===============================================================================
     Alerts
@@ -172,7 +162,6 @@ Please refer to the [Basic Agent Usage Guide][basic_agent_usage]. -->
 <!--### Alerts {#alerts}
 
 #### I set up an alert with one of my integration metrics. Why am I getting so many No Data alerts?
-
 
 For the AWS No Data errors, the issue here has to do with how frequently we
 receive AWS metrics. Because our crawlers are rate-limited by the Cloudwatch
@@ -201,8 +190,6 @@ alert when at 80% or above:
   5. Add a custom message for alert if you'd like.
 * You can read more about setting up alerts [here][alerting]</a>.
 
-
-
 ### リソースの利用率に基づいてアラートを発生することはできますか。例えば、メモリの利用率が50％になった時や、ディスク領域の使用率が80％になった時など。 {#alert-disk-utilization}
 
 * **はい、可能です。**
@@ -213,9 +200,6 @@ alert when at 80% or above:
   3. `simple alert` グループタイプを選択します。
   4. "Set alert conditions:" で、`Above`を選択し、 値に`0.8`を入力します。
   5. "Say what's happening" にアラートメッセージを設定します。
-
-
-
 
 <!--
 ===============================================================================
@@ -324,7 +308,6 @@ into Datadog, we'd probably say:
 ~~~
 <application>.requests.mean_90{http_method:<HTTP Method>, handler_class:<HTTP Method>, handler_method:<Handler Method>}
 ~~~
-
 
 Where ~~~<application>.requests.mean_90~~~ is the metric name, and
   ~~~http_method:<HTTP Method>, handler_class:<HTTP Method>, handler_method:<Handler Method>~~~
@@ -572,12 +555,10 @@ Yes you can! Follow the steps below to set this up:
 
 <!--### Billing {#billing}
 
-
 #### How can I change the Billing contact? {#billing-contact}
 
 You can set a specific email address to receive invoices, even if that address
 is not a team member within Datadog (invoices@yourcompany.com) [here][app-billing].
-
 
 #### Where can I get a copy of the invoice? {#billing-invoice}
 
@@ -733,7 +714,6 @@ You can do this with the dogwrap command line tool provided by the dogapi client
 library:
 
     dogwrap -n "Vacuuming mytable" -k $API_KEY --submit_mode errors "psql -c 'vacuum verbose my_table' 2>&1 /var/log/postgres_vacuums.log
-
 
 This will call the command at the end of the script and
 send Datadog events if it exits with a non-zero exit code (i.e. an error). <code>--submit_mode all</code>
@@ -898,7 +878,6 @@ Datadog Agentがデフォルトで送信しているディスクの使用量関�
 従って、グラフで<code>system.disk.in_use</code>を指定すれば、パーセントで監視できます。
 
 <!--#### How is data aggregated in graphs
-
 
 Within Datadog, a graph can only contain a set number of points and, as the timeframe over which a metric is viewed increases, aggregation between points will occur to stay below that set number.
 

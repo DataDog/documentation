@@ -37,7 +37,7 @@ pour cette machine en fonction de ce qui a été précédemment configuré pour 
 
 [La Host Map](/graphing/infrastructure/hostmap) se trouve dans le menu Infrastructure et offre la possibilité de:
 
-* Visualisez rapidement l'intégralité de votre environnement, qu'il s'agisse de 5, 500 ou 50 000 hôtes.
+* Visualiser rapidement l'intégralité de votre environnement, qu'il s'agisse de 5, 500 ou 50 000 hôtes.
 * Identifier les singularités
 * Détecter les habitudes d'utilisation
 * Optimiser les ressources

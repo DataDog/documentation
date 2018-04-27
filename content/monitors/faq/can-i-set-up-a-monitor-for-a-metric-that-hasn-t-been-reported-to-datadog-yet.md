@@ -16,7 +16,7 @@ This is useful in situations where you want to be alerted on a system-critical m
 
 {{< img src="monitors/faq/my_custom_metric.png" alt="my_custom_metric" responsive="true" popup="true" >}}
 
-To workaround this, you can make use of the monitor's Source tab or create events via the [API](/api).
+To workaround this, you can make use of the monitor's Source tab or create events via the [API][1].
 
 **Using the monitor's Source tab**
 
@@ -28,6 +28,9 @@ Though the metric may not yet be recognized by Datadog, the monitor should still
 
 **Using the API**
 
-Refer to our [Monitors API](/api/#monitors) on creating a metric monitor.
+Refer to our [Monitors API][2] on creating a metric monitor.
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /api
+[2]: /api/#monitors

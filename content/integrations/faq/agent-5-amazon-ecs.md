@@ -1,11 +1,10 @@
 ---
-title: AWS ECS with agent v5
+title: AWS ECS with Agent v5
 kind: faq
 ---
 
-
 <div class="alert alert-warning">
-This documentation is to setup AWS EC2 container Service with <strong>Datadog agent 5</strong>
+This documentation is to setup AWS EC2 container Service with <strong>Datadog Agent 5</strong>
 </div>
 
 ## Setup
@@ -16,18 +15,18 @@ To monitor your ECS containers and tasks with Datadog, run the Agent as a contai
 2. **Create or Modify your IAM Policy**
 3. **Create a new Instance with a User Script**
 
-This documentation assume you already have a working EC2 Container Service cluster configured. If not, review the [Getting Started section in the ECS documentation](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_GetStarted.html).
+This documentation assume you already have a working EC2 Container Service cluster configured. If not, review the [Getting Started section in the ECS documentation][1].
 
 #### Create an ECS Task
 
 This task launches the Datadog container. When you need to modify the configuration, update this Task Definition as described further down in this guide.
 
-You may either configure the task using the [AWS CLI tools](https://aws.amazon.com/cli/) or using the Amazon Web Console.
+You may either configure the task using the [AWS CLI tools][2] or using the Amazon Web Console.
 
 ##### AWS CLI
 
-1. Download [dd-agent-ecs.json](/json/dd-agent-ecs.json).
-1. Edit dd-agent-ecs.json and update it with the [API_KEY](https://app.datadoghq.com/account/settings#api) for your account.
+1. Download [dd-agent-ecs.json][3].
+1. Edit dd-agent-ecs.json and update it with the [API_KEY][4] for your account.
 1. Execute the following command:
 ```
 aws ecs register-task-definition --cli-input-json file://path/to/dd-agent-ecs.json
@@ -48,7 +47,7 @@ aws ecs register-task-definition --cli-input-json file://path/to/dd-agent-ecs.js
 11. For **Image** enter ```datadog/docker-dd-agent:latest```.
 12. For **Maximum memory** enter ```256```.
 13. Scroll down to the **Advanced container configuration** section and enter ```10``` in **CPU units**.
-14. For **Env Variables**, add a **Key** of ```API_KEY``` and enter your Datadog API Key in the value. *If you feel more comfortable storing secrets like this in s3, take a [look at the ECS Configuration guide](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html#ecs-config-s3).*
+14. For **Env Variables**, add a **Key** of ```API_KEY``` and enter your Datadog API Key in the value. *If you feel more comfortable storing secrets like this in s3, take a [look at the ECS Configuration guide][5].*
 15. Add another Environment Variable for any tags you want to add using the key ```TAGS```.
 16. Scroll down to the **Storage and Logging** section.
 17. In **Mount points** select the **docker_sock** source volume and enter ```/var/run/docker.sock``` in the Container path. Leave the **Read only** checkbox un-checked.
@@ -57,14 +56,13 @@ aws ecs register-task-definition --cli-input-json file://path/to/dd-agent-ecs.js
 
 #### Create or Modify your IAM Policy
 
-1. Add those permissions to your [Datadog IAM policy](https://docs.datadoghq.com/integrations/amazon_web_services/#installation) in order to collect Amazon ECS metrics: 
+1. Add those permissions to your [Datadog IAM policy][6] in order to collect Amazon ECS metrics: 
 
   * `ecs:ListClusters`: List available clusters.
   * `ecs:ListContainerInstances`: List instances of a cluster.
   * `ecs:DescribeContainerInstances`: Describe instances to add metrics on resources and tasks running, adds cluster tag to ec2 instances.
 
-  For more information on ECS policies, [review the documentation on the AWS website](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_ecs.html).
-
+  For more information on ECS policies, [review the documentation on the AWS website][7].
 
 2. Using the Identity and Access Management (IAM) console, create a new role called ```dd-agent-ecs```.
 3. Select **Amazon EC2 Role for EC2 Container Service**. On the next screen do not check any checkboxes and click **Next Step**.
@@ -101,13 +99,13 @@ aws ecs register-task-definition --cli-input-json file://path/to/dd-agent-ecs.js
 
 #### Create a new instance including a startup script
 
-Ideally you want the Datadog agent to load on one container on each EC2 instance. The easiest way to achieve this is to have a startup script on each instance used. Unfortunately there is no way to add a script to an existing instance. So you need to create a new instance and add it to your ECS cluster.
+Ideally you want the Datadog Agent to load on one container on each EC2 instance. The easiest way to achieve this is to have a startup script on each instance used. Unfortunately there is no way to add a script to an existing instance. So you need to create a new instance and add it to your ECS cluster.
 
 ##### Create a new Amazon Linux instance
 
 1. Log in to the AWS console and navigate to the EC2 section.
 2. Create a new instance by clicking the **Launch Instance** button.
-3. Click on Community AMIs. Visit [this page to see a list of current ECS optimized instances](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html). Choose the appropriate AMI for your region and copy the ID into the search box. Choose the AMI that comes up as a result of the  search.
+3. Click on Community AMIs. Visit [this page to see a list of current ECS optimized instances][8]. Choose the appropriate AMI for your region and copy the ID into the search box. Choose the AMI that comes up as a result of the  search.
 4. Follow the prompts as you normally would when setting up an instance.
 5. On the third dialog, select the IAM role you created above.
 6. Expand the Advanced Details section and copy the following script into the User Data section. Change cluster name to your cluster's name and task definition to the name you gave your task definition.
@@ -133,3 +131,12 @@ This user script above will:
 ##### Dynamic detection and monitoring of running services
 
 Datadog's <a href="https://docs.datadoghq.com/agent/autodiscovery/">Autodiscovery</a> can be used in conjunction with ECS and Docker to automatically discovery and monitor running tasks in your environment.
+
+[1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_GetStarted.html
+[2]: https://aws.amazon.com/cli/
+[3]: /json/dd-agent-ecs.json
+[4]: https://app.datadoghq.com/account/settings#api
+[5]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html#ecs-config-s3
+[6]: https://docs.datadoghq.com/integrations/amazon_web_services/#installation
+[7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_ecs.html
+[8]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html

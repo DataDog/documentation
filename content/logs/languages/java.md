@@ -11,6 +11,9 @@ further_reading:
 - link: "logs/explore"
   tag: "Documentation"
   text: Learn how to explore your logs
+- link: "logs/graph"
+  tag: "Documentation"
+  text: "Perform analytics with Log Graphs"
 - link: "logs/faq/log-collection-troubleshooting-guide"
   tag: "FAQ"
   text: Log Collection Troubleshooting Guide
@@ -30,11 +33,11 @@ By asking your logging library to log into JSON, you will:
 
 * Ensure to have a stack_trace properly wrapped into the proper LogEvent
 * Ensure that all the attributes of a log event are properly extracted (severity, logger name, thread name, etc...)
-* You'll have access to [MDC](http://logback.qos.ch/manual/mdc.html), which are attributes you can attach to any log events
+* You'll have access to [MDC][1], which are attributes you can attach to any log events
 
-**To send your logs to Datadog, we recommend logging to a file and then tailing that file with your Datadog agent.**
+**To send your logs to Datadog, we recommend logging to a file and then tailing that file with your Datadog Agent.**
 
-We also strongly encourage you to setup your logging libraries to produce your logs in JSON format to avoid sustaning [custom parsing rules](/logs/parsing).
+We also strongly encourage you to setup your logging libraries to produce your logs in JSON format to avoid sustaning [custom parsing rules][2].
 
 Here are setup examples for the `log4j`, `slf4j` and `log4j2` logging libraries:
 
@@ -88,7 +91,7 @@ Edit your `logback.xml` file:
 </configuration>
 ```
 
-## Configure the Datadog agent
+## Configure the Datadog Agent
 
 Create a file `java.yaml` in the Agent's `conf.d/` directory with the following content:
 
@@ -123,7 +126,7 @@ Logging is great- It tells developers and administrators what is happening at sp
 
 ### Using the Key/Value parser
 
-The [Key/Value parser](/logs/parsing/#key-value) extracts any `<key>=<value>` pattern recognized in any log event.
+The [Key/Value parser][3] extracts any `<key>=<value>` pattern recognized in any log event.
 
 To enrich your log events in Java, you can re-write messages in your code and introduce `<key>=<value>` sequences.
 
@@ -139,7 +142,7 @@ You can easily change it to:
 logger.info("Emitted quantity=1001 messages during the last durationInMs=93180 ms for customer scope=prod30");
 ```
 
-With the [Key/Value parser](/logs/parsing/#key-value) enabled, **Datadog** automatically extracts each pair from your final JSON document:
+With the [Key/Value parser][3] enabled, **Datadog** automatically extracts each pair from your final JSON document:
 
 ```json
 {
@@ -156,7 +159,7 @@ So you can exploit *scope* as a field, and *durationInMs* & *quantity* as metric
 
 ### MDC (Mapped Diagnostic Context)
 
-Another option to enrich your logs is to use Java's [MDC (Mapped Diagnostic Contexts)](http://logback.qos.ch/manual/mdc.html).
+Another option to enrich your logs is to use Java's [MDC (Mapped Diagnostic Contexts)][1].
 
 If you use the logback technologie. It would give us the following Java code:
 
@@ -172,3 +175,7 @@ logger.info("Emitted 1001 messages during the last 93 seconds");
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: http://logback.qos.ch/manual/mdc.html
+[2]: /logs/parsing
+[3]: /logs/parsing/#key-value

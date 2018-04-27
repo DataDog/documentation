@@ -21,7 +21,7 @@ further_reading:
 
 This page outlines the basic functionality of the Datadog Agent.
 If you haven't installed the Agent yet, instructions can be found
-[in the Datadog agent integration page](https://app.datadoghq.com/account/settings#agent/mac).  
+[in the Datadog Agent integration page][1].  
 
 By default, your Agent is installed in its own sandbox located at `/opt/datadog-agent`. You’re free to move this folder wherever you like.
 However, we assume that the Agent is installed in its default location, so be sure to modify the instructions accordingly if you decide to move it to another location.
@@ -43,7 +43,6 @@ _lifecycle commands_ (former `datadog-agent start`/`stop`/`restart`/`status` on 
 | `datadog-agent check <check_name>` | `datadog-agent check <check_name>`                   | Run a check           |
 {{% /table %}}
 
-
 ## Configuration
 
 The configuration files and folders for the Agent are located at:
@@ -52,12 +51,11 @@ The configuration files and folders for the Agent are located at:
 |:-----|:----|
 |`~/.datadog-agent/datadog.conf`| `~/.datadog-agent/datadog.yaml` |
 
-Configuration files for [integrations](/integrations):
+Configuration files for [integrations][2]:
 
 | Agent v5                                  |  Agent v6                          |
 |:-----|:----|
 |`~/.datadog-agent/conf.d/`|`~/.datadog-agent/conf.d/`|
-
 
 ## Troubleshooting
 
@@ -72,8 +70,7 @@ The Agent logs are located in the `/var/log/datadog/` directory:
     * `dogstatsd.log`
     * `forwarder.log`
 
-If you're still having trouble, [our support team](/help) will be glad to provide further assistance.
-
+If you're still having trouble, [our support team][3] will be glad to provide further assistance.
 
 ## Switch between Agent v5 and v6
 ### Upgrade to Agent 6
@@ -82,7 +79,7 @@ You can either download the DMG package and install it manually, or use the one-
 
 ### Manual installation
 
-1. Download the DMG package of the latest Agent version, use the latest macOS release listed on the [release page](https://github.com/DataDog/datadog-agent/releases) of the repository
+1. Download the DMG package of the latest Agent version, use the latest macOS release listed on the [release page][4] of the repository
 2. Install the DMG package
 3. Add your api key to `/opt/datadog-agent/etc/datadog.yaml`
 
@@ -90,7 +87,7 @@ Then start the Datadog Agent app (once started, you should see it in the system 
 ### Install script
 #### To Upgrade
 
-The Agent 6.x installer can automatically convert your 5.x style agent configuration at upgrade:  
+The Agent 6.x installer can automatically convert your 5.x style Agent configuration at upgrade:  
 
 ```shell
   DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_mac_os.sh)"
@@ -98,7 +95,7 @@ The Agent 6.x installer can automatically convert your 5.x style agent configura
 
 #### To Install Fresh
 
-In case you want to install on a clean box (or have an existing agent 5 install
+In case you want to install on a clean box (or have an existing Agent 5 install
 from which you do not wish to import the configuration) you have to provide an
 api key:
 
@@ -111,9 +108,9 @@ api key:
 1. Stop the Agent with the systray app, if it's running
 2. Exit the systray app
 3. Uninstall the Datadog Agent application
-4. [Install the Agent 5 DMG package using your preferred installation method](https://app.datadoghq.com/account/settings#agent/mac)
+4. [Install the Agent 5 DMG package using your preferred installation method][1]
 
-## Uninstall the agent
+## Uninstall the Agent
 
 Stop and Close the Datadog Agent: via the bone icon in the Tray.
 
@@ -134,3 +131,8 @@ $ sudo rm /Library/LaunchDaemons/com.datadoghq.agent.plist
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/account/settings#agent/mac
+[2]: /integrations
+[3]: /help
+[4]: https://github.com/DataDog/datadog-agent/releases

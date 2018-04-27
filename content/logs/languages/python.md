@@ -11,6 +11,9 @@ further_reading:
 - link: "logs/explore"
   tag: "Documentation"
   text: Learn how to explore your logs
+- link: "logs/graph"
+  tag: "Documentation"
+  text: "Perform analytics with Log Graphs"
 - link: "logs/faq/log-collection-troubleshooting-guide"
   tag: "FAQ"
   text: Log Collection Troubleshooting Guide
@@ -18,7 +21,7 @@ further_reading:
 
 ## Overview
 
-Use your favorite python logger to log into a file on your host. Then [monitor this file with your Datadog agent](/logs/languages/python/#configure-the-Datadog-agent) to send your logs to Datadog.
+Use your favorite python logger to log into a file on your host. Then [monitor this file with your Datadog Agent][1] to send your logs to Datadog.
 
 ## Setup
 Python logs are quite complex to handle, mainly because of tracebacks. They are split into multiple lines which make them difficult to associate with the original log event.  
@@ -29,12 +32,12 @@ To address this use case we strongly recommend you use a JSON formatter when log
  
 Here are setup examples for the two following logging libraries:
 
-- [JSON-log-formatter](https://pypi.python.org/pypi/JSON-log-formatter/0.1.0)
-- [Python-json-logger](https://github.com/madzak/python-json-logger)
+- [JSON-log-formatter][2]
+- [Python-json-logger][3]
 
 ### Log into a file
 
-Usage example with [JSON-log-formatter](https://pypi.python.org/pypi/JSON-log-formatter/0.1.0):
+Usage example with [JSON-log-formatter][2]:
 
 ```python
 import logging
@@ -62,7 +65,7 @@ The log file will contain the following log record (inline).
 }
 ```
 
-Usage example with [Python-json-logger](https://github.com/madzak/python-json-logger):
+Usage example with [Python-json-logger][3]:
 
 ```python
     import logging
@@ -76,7 +79,7 @@ Usage example with [Python-json-logger](https://github.com/madzak/python-json-lo
     logger.addHandler(logHandler)
 ```
  
-Once the [handler is configured](https://github.com/madzak/python-json-logger#customizing-fields), the log file contains the following log record (inline):
+Once the [handler is configured][4], the log file contains the following log record (inline):
 
 ```json
 {
@@ -102,7 +105,7 @@ Once the [handler is configured](https://github.com/madzak/python-json-logger#cu
 }
 ```
 
-### Configure the Datadog agent
+### Configure the Datadog Agent
 
 Create a file `conf.yaml` in the Agent's `python.d/` directory with the following content:
 
@@ -133,8 +136,14 @@ logs:
     #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
 ```
 
-Then [Restart the Agent](/agent/faq/agent-commands) to apply the configuration change.
+Then [Restart the Agent][5] to apply the configuration change.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /logs/languages/python/#configure-the-Datadog-agent
+[2]: https://pypi.python.org/pypi/JSON-log-formatter/0.1.0
+[3]: https://github.com/madzak/python-json-logger
+[4]: https://github.com/madzak/python-json-logger#customizing-fields
+[5]: /agent/faq/agent-commands

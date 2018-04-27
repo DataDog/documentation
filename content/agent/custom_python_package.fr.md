@@ -1,5 +1,5 @@
 ---
-title: Ajouter d'un package python personnalisé à l'agent
+title: Ajouter d'un package python personnalisé à l'Agent
 kind: documentation
 further_reading:
 - link: "logs/"
@@ -13,11 +13,10 @@ further_reading:
   text: Collectez vos traces
 ---
 
-
 ### Linux
 
-La version python intégrée à l'agent se trouve ici: `/opt/datadog-agent/embedded/bin/python`.
-L'agent vient également avec pip, installer les bibliothèques python en utilisant:
+La version python intégrée à l'Agent se trouve ici: `/opt/datadog-agent/embedded/bin/python`.
+L'Agent vient également avec pip, installer les bibliothèques python en utilisant:
 
 ```bash
 sudo /opt/datadog-agent/embedded/bin/pip install <package_name>
@@ -35,10 +34,12 @@ Ou le package peut être ajouté dans le dossier compressé de la bibliothèque 
 ```
 C:\Program Files (x86)\Datadog\Datadog Agent\files
 ```
-puis [redémarrez votre Agent](/agent/basic_agent_usage/windows).
+Puis [redémarrez votre Agent][1].
 
 {{< img src="agent/windows_python_package.png" alt="windows python package" responsive="true" popup="true">}}
 
 ## En apprendre plus
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /agent/basic_agent_usage/windows

@@ -7,7 +7,7 @@ external_redirect: /api/#create-child-organization
 
 ## Create child-organization
 
-This endpoint requires the [multi-org account](/account_management/multi_organization) feature and must be enabled by [contacting support](/help).
+This endpoint requires the [multi-org account][1] feature and must be enabled by [contacting support][2].
 
 ##### ARGUMENTS
 
@@ -19,3 +19,6 @@ This endpoint requires the [multi-org account](/account_management/multi_organiz
     A JSON array of billing type. Currently only `parent_billing` is supported.
 
 Once a new child-organization is created, you can interact with it by using the `org.public_id`, `api_key.key`, and `application_key.hash` provided in the response.
+
+[1]: /account_management/multi_organization
+[2]: /help

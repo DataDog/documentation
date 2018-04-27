@@ -19,4 +19,6 @@ Enter your email address in the password reset link:
 
 If you have confirmed your email address is correct and you still have not received your password reset email, check your Spam and filtered emails.  
 
-Once you have confirmed that you have not received your email contact [us](/help)!
+Once you have confirmed that you have not received your email contact [us][1]!
+
+[1]: /help

@@ -32,7 +32,6 @@ Datadog Agentの[インストール](/ja/guides/basic_agent_usage/)は、無事�
 
 このドキュメントでは、**Datadogの各機能**と**それらの有要性**を解説します。
 
-
 <!-- <h2 id="integrations">Integrations</h2>
 
 {{< img src="guides/overview/integrations.png" >}}
@@ -58,7 +57,6 @@ in an online service is treated the same throughout Datadog.</li>
 <li><a target="_blank" href="https://github.com/DataDog/dd-agent/">Datadog Agent</a> はオープンソースです。 必要に応じて独自に改造することもできます。</li>
 <li>Integrationの設定が完了すればデータセンターやオンラインサービス等から転送したデータもDatadogを介し同じように取り扱うことができます。</li>
 </ul>
-
 
 <!-- <h2 id="infrastructure">Infrastructures</h2>
 
@@ -89,9 +87,7 @@ for that machine based on what was previously set up for that tag.</li>
 * Datadogでは、インフラ全体の構造を最小限の努力で表現できるように、ホストをできる限り自動的に分類するようにしています。明示的に、すべてのクラスタを作成する必要はありません。従って新しいホストにタグが付与されると、以前にそのタグ用に設定した内容にしたがい直ちにステータスを見ることができるように成ります。
 * タグ設定の詳細は、<a target="_blank" href="https://docs.datadoghq.com/ja/faq/#tagging">"FAQ:タグの詳細"</a>をご参照ください。
 
-
 <!-- ## Host Map
-
 
 {{< img src="guides/overview/hostmap-overview.png" >}}
 
@@ -116,7 +112,6 @@ Host Mapは、`Infrastructure`メニューのドロップダウンメニュー�
 * リソース利用の最適化
 
 Host Map表示について詳しく知りたい場合は、[Host Map ガイド](/ja/guides/hostmap)ページを参照してください。
-
 
 <!-- <h2 id="events">Events</h2>
 {{< img src="guides/overview/event_stream.png" >}}
@@ -144,7 +139,6 @@ For each incident users can:
  -->
 
 ## イベントの時系列表示
-
 
 {{< img src="guides/overview/event_stream.png" >}}
 
@@ -202,7 +196,6 @@ without access to your data or any other information (via the pencil in the uppe
 <li>グラフのスナップショットをEventストリームで共有することができます。Eventストリームに掲載されたスナップショットを"Click"すると、そのグラフが表示されているダッシュボードに移動することができます。(グラフ右上のカメラマークから)</li>
 <li>グラフは、iframeに挿入することができます。この機能を使い、基礎データや他の情報を隠蔽したまま、第３者に<!-- ライブな -->グラフを公開することができます。(グラフ右上の鉛筆マークから)</li>
 </ul>
-
 
 <!-- <h2 id="alerting">Alerting</h2>
 {{< img src="guides/overview/alert.png" >}}

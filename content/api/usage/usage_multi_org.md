@@ -16,3 +16,4 @@ Get usage across your multi-org account
     Datetime in ISO-8601 format, UTC, precise to month: [YYYY-MM] for usage ending this month.
 * **`include_org_details`** [*optional*, *default*=**true**]:
     Include usage summaries for each sub-org.
+

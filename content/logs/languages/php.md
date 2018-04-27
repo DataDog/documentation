@@ -11,6 +11,9 @@ further_reading:
 - link: "/logs/explore"
   tag: "Documentation"
   text: Learn how to explore your logs
+- link: "logs/graph"
+  tag: "Documentation"
+  text: "Perform analytics with Log Graphs"
 - link: /logs/faq/log-collection-troubleshooting-guide
   tag: "FAQ"
   text: Log Collection Troubleshooting Guide
@@ -18,11 +21,11 @@ further_reading:
 
 ## Overview
 
-Write your PHP logs into a file, then [use the Agent](/logs) to forward them to Datadog, choose between the following libraries:
+Write your PHP logs into a file, then [use the Agent][1] to forward them to Datadog, choose between the following libraries:
 
-* [Monolog](/logs/languages/php/#php-monolog)
-* [Symfony](/logs/languages/php/#php-symfony)
-* [Zend-Log](/logs/languages/php/#php-zend-log)
+* [Monolog][2]
+* [Symfony][3]
+* [Zend-Log][4]
 
 ## PHP Monolog
 
@@ -47,7 +50,6 @@ Alternatively, install it manually:
     use Monolog\Handler\StreamHandler;
     use Monolog\Formatter\JsonFormatter;    
     ```
-
 
 ### Setup - Log into a file with Monolog
 
@@ -80,7 +82,7 @@ $log->pushHandler($stream);
 $log->info('Adding a new user', array('username' => 'Seldaek'));
 ```
 
-### Configure your Datadog agent
+### Configure your Datadog Agent
 
 Create a `php.d/conf.yaml` file in your `conf.d/` folder with the following content:
 
@@ -144,12 +146,12 @@ $log->pushProcessor(function ($record) {
 
 Monolog is a part of the following frameworks:
 
-* [Symfony2, Symfony3](/logs/languages/php/#symfony-v2-v3)
-* [PPI](/logs/languages/php/#ppi)
-* [Laravel 4 & 5](/logs/languages/php/#laravel)
-* [Silex](/logs/languages/php/#silex)
-* [Lumen](/logs/languages/php/#lumen)
-* [CakePHP](/logs/languages/php/#cakephp)
+* [Symfony2, Symfony3][5]
+* [PPI][6]
+* [Laravel 4 & 5][7]
+* [Silex][8]
+* [Lumen][9]
+* [CakePHP][10]
 
 Integrate Monolog with your framework then configure your logger: 
  
@@ -173,7 +175,7 @@ $monolog->pushHandler($stream);
 return $r;
 ```
 
-### Configure your Datadog agent
+### Configure your Datadog Agent
 
 Create a `php.d/conf.yaml` file in your `conf.d/` folder with the following content:
 
@@ -361,7 +363,7 @@ This section is about:
                 formatter: monolog.json_formatter
     ```
 
-### Configure your Datadog agent
+### Configure your Datadog Agent
 
 Create a `php.d/conf.yaml` file in your `conf.d/` folder with the following content:
 
@@ -472,11 +474,11 @@ logs:
               - { name: monolog.processor, method: processRecord }
   ```
 
-3. [Stream generated JSON file to Datadog](/logs/#custom-log-collection)
+3. [Stream generated JSON file to Datadog][11]
 
 ## PHP Zend-Log
 
-Zend-log is a part of the Zend framework. Use [Composer](https://getcomposer.org/) to add Zend-Log:
+Zend-log is a part of the Zend framework. Use [Composer][12] to add Zend-Log:
 
 ```
 composer require "zendframework/zend-log"
@@ -523,7 +525,7 @@ $logger->addWriter($writer);
 Zend\Log\Logger::registerErrorHandler($logger);
 ```
 
-Then [Stream your log files to Datadog](/logs/#custom-log-collection)
+Then [Stream your log files to Datadog][11]
 
 ### Add meta field and context
 
@@ -550,9 +552,22 @@ $logger->addProcessor(new Zend\Log\Processor\ReferenceId());
 $logger->addProcessor(new Zend\Log\Processor\RequestId());
 ```
 
-If you want to develop yours, [refer the Zend documentation](https://docs.zendframework.com/zend-log/processors/).
+If you want to develop yours, [refer the Zend documentation][13].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: /logs
+[2]: /logs/languages/php/#php-monolog
+[3]: /logs/languages/php/#php-symfony
+[4]: /logs/languages/php/#php-zend-log
+[5]: /logs/languages/php/#symfony-v2-v3
+[6]: /logs/languages/php/#ppi
+[7]: /logs/languages/php/#laravel
+[8]: /logs/languages/php/#silex
+[9]: /logs/languages/php/#lumen
+[10]: /logs/languages/php/#cakephp
+[11]: /logs/#custom-log-collection
+[12]: https://getcomposer.org/
+[13]: https://docs.zendframework.com/zend-log/processors/

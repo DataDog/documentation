@@ -20,10 +20,9 @@ further_reading:
 
 This page outlines the basic functionality of the Datadog Agent.
 If you haven't installed the Agent yet, instructions can be found
-[in the Datadog agent integration page](https://app.datadoghq.com/account/settings#agent/fedora).
+[in the Datadog Agent integration page][1].
 
-The process to upgrade from the previous version of the agent is to re-run the installation.
-
+The process to upgrade from the previous version of the Agent is to re-run the installation.
 
 ## Commands
 
@@ -42,7 +41,7 @@ Datadog Agent has some commands and only the _lifecycle commands_ (i.e. `start`/
 | `sudo -u dd-agent -- dd-agent check <check_name>` | `sudo -u dd-agent -- datadog-agent check <check_name>` | Run a check |
 {{% /table %}}
 
-More information about the metrics, events, and service checks for an [integrations](/integrations) can be retrieved with the check command:
+More information about the metrics, events, and service checks for an [integrations][2] can be retrieved with the check command:
 ```shell
 sudo service datadog-agent check [integration]
 ```
@@ -66,7 +65,7 @@ The configuration files and folders for the Agent are located at:
 |:-----|:----|
 |`/etc/dd-agent/datadog.conf`| `/etc/datadog-agent/datadog.yaml` |
 
-Configuration files for [integrations](/integrations):
+Configuration files for [integrations][2]:
 
 | Agent v5                                  |  Agent v6                          |
 |:-----|:----|
@@ -85,7 +84,7 @@ The Agent logs are located in the `/var/log/datadog/` directory:
     * `dogstatsd.log`
     * `forwarder.log`
 
-If you're still having trouble, [our support team](/help) will be glad to provide further assistance.
+If you're still having trouble, [our support team][3] will be glad to provide further assistance.
 
 ## Switch between Agent v5 and v6
 ### Upgrade to Agent 6
@@ -94,7 +93,7 @@ A script is available to automatically install or upgrade the new Agent. It sets
 #### One-step install
 ##### To Upgrade
 
-The Agent 6.x installer can automatically convert your 5.x style agent configuration at upgrade:  
+The Agent 6.x installer can automatically convert your 5.x style Agent configuration at upgrade:  
 
 ```shell
  DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
@@ -105,7 +104,7 @@ design since we cannot guarantee full backwards compatibility out of the box.
 
 ##### To Install Fresh
 
-To install on a clean box (or have an existing agent 5 install from which you do not wish to import the configuration) provide an api key:
+To install on a clean box (or have an existing Agent 5 install from which you do not wish to import the configuration) provide an api key:
 
 ```shell
  DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
@@ -123,7 +122,7 @@ To install on a clean box (or have an existing agent 5 install from which you do
     gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
     ```
 
-2. Update your local yum cache and install/update the agent
+2. Update your local yum cache and install/update the Agent
 
     ```
     sudo yum makecache
@@ -136,7 +135,7 @@ To install on a clean box (or have an existing agent 5 install from which you do
     sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_API_KEY>/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
     ```
 
-5. Restart the agent
+5. Restart the Agent
 
     ```
     sudo systemctl restart datadog-agent.service
@@ -149,7 +148,7 @@ To install on a clean box (or have an existing agent 5 install from which you do
     rm  /etc/yum.repos.d/datadog.repo [ ! -f /etc/yum.repos.d/datadog.repo ] && echo -e '[datadog]\nname = Datadog, Inc.\nbaseurl = https://yum.datadoghq.com/rpm/x86_64/\nenabled=1\ngpgcheck=1\npriority=1\ngpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public\n       https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public' | sudo tee /etc/yum.repos.d/datadog.repo
     ```
 
-2. Update your local yum cache and downgrade the agent
+2. Update your local yum cache and downgrade the Agent
     ```shell
     sudo yum clean expire-cache metadata
     sudo yum check-update
@@ -158,7 +157,7 @@ To install on a clean box (or have an existing agent 5 install from which you do
     ```
 
 3. Back-sync configurations and AutoDiscovery templates (optional):
-    If you have made any changes to your configurations or templates, you might want to sync these back for agent 5.
+    If you have made any changes to your configurations or templates, you might want to sync these back for Agent 5.
 
     Note: please beware that if you have made any changes to your configurations to support new Agent v6-only options, these will not work anymore with Agent v5.
 
@@ -169,7 +168,7 @@ To install on a clean box (or have an existing agent 5 install from which you do
     sudo -u dd-agent -- cp /etc/datadog-agent/checks.d/<check>.py /etc/dd-agent/checks.d/
     ```
 
-5. Restart the agent
+5. Restart the Agent
     ```shell
     # Systemd
     sudo systemctl restart datadog-agent
@@ -182,7 +181,7 @@ To install on a clean box (or have an existing agent 5 install from which you do
     sudo -u dd-agent -- rm -rf /etc/datadog-agent/
     ```
 
-## Uninstall the agent
+## Uninstall the Agent
 
 ```
 $ sudo apt-get --purge remove datadog-agent -y
@@ -191,3 +190,7 @@ $ sudo apt-get --purge remove datadog-agent -y
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/account/settings#agent/fedora
+[2]: /integrations
+[3]: /help

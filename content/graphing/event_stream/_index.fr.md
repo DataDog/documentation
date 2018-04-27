@@ -42,9 +42,9 @@ Note: aucun espace après les deux points ou des virgules dans ces listes et tou
 
 ## Acknowledge un événement
 
-Datadog récupère les événements générés à partir de monitors déclenchés en tant qu'incidents. Ils sont également connus sous le nom de [Monitor Alerts](/monitors/). 
+Datadog récupère les événements générés à partir de monitors déclenchés en tant qu'incidents. Ils sont également connus sous le nom de [Monitor Alerts][1]. 
 
-La meilleure façon de les identifier dans le [flux d'événements](/graphing/event_stream) est de sélectionner le filtre correspondant dans la liste des filtres:
+La meilleure façon de les identifier dans le [flux d'événements][2] est de sélectionner le filtre correspondant dans la liste des filtres:
 
 {{< img src="graphing/events/filter_monitor_alert.png" alt="filter monitor alert" responsive="true" popup="true" style="width:50%;">}}
 
@@ -62,14 +62,14 @@ Une fois réclamé, un incident peut être résolu en cliquant sur le bouton **r
 
 ## Afficher les événements non agrégé
 
-Remplacez le paramètre "aggregate_up" dans l'URL par "false". Pour supprimer l'événement d'agrégat de plus haut niveau, configurez `use_date_happened` par true.
- [Voici un lien d'exemple](https://app.datadoghq.com/event/stream?show_private=true&aggregate_up=false&use_date_happened=true&per_page=30&display_timeline=true&from_ts=1418047200000&to_ts=1418050800000&incident=true&codemirror_editor=true&live=true&bucket_size=60000)
+Remplacez le paramètre "aggregate_up" dans l'URL par "false".
+Pour supprimer l'événement d'agrégat de plus haut niveau, configurez `use_date_happened` par true. [Voici un lien d'exemple][3]
 
 ## Evénements par Email
 
 Lorsque vous avez besoin d'intégrer une application ou un système avec Datadog, vous avez peu de choix. Le premier utilise l'une de nos nombreuses [intégrations][integrations] existantes. Cela vous donne accès à une grande variété de métriques et d'événements avec un minimum d'effort de configuration de votre part. Si votre application n'est pas présente dans la liste d'intégrations, vous pouvez choisir de créer [check pour l'Agent][agentcheck]. Cela nécessite beaucoup plus d'efforts et potentiellement plus de connaissances sur la façon dont l'application et Datadog fonctionnent.
 
-Une autre option est disponible si vous n'utilisez pas une application via une intégration et que vous ne souhaitez pas créer de check d'agent. Vous pouvez vous appuyer sur l'application ou le système envoyant un email à la place. Il existe deux manières différentes d'utiliser les événements par e-mail, selon que l'application vous offre la possibilité de personnaliser le format du corps de l'e-mail envoyé ou non.
+Une autre option est disponible si vous n'utilisez pas une application via une intégration et que vous ne souhaitez pas créer de check d'Agent. Vous pouvez vous appuyer sur l'application ou le système envoyant un email à la place. Il existe deux manières différentes d'utiliser les événements par e-mail, selon que l'application vous offre la possibilité de personnaliser le format du corps de l'e-mail envoyé ou non.
 
 <div class="alert alert-info">
 <b>JSON-Formatted vs texte brute:</b> <br>
@@ -153,3 +153,7 @@ Devrait être codé en: `http://catchpoint.com/session_id%3A123456`
     * `@pagerduty` – Envoie une alerte à Pagerduty. Vous pouvez aussi utiliser `@pagerduty-acknowledge` and `@pagerduty-resolve`.
 
 [events-1]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio
+
+[1]: /monitors/
+[2]: /graphing/event_stream
+[3]: https://app.datadoghq.com/event/stream?show_private=true&aggregate_up=false&use_date_happened=true&per_page=30&display_timeline=true&from_ts=1418047200000&to_ts=1418050800000&incident=true&codemirror_editor=true&live=true&bucket_size=60000

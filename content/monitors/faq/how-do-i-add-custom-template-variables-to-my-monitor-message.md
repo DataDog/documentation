@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview 
 
-For multi-alert monitors, you can add [template variables](/monitors/notifications) to include information in your alert message that's specific to the tag scope that triggered the alert. This is dependent on the tags you use in the "trigger a separate alert for each" field in Section 1 of your monitor.
+For multi-alert monitors, you can add [template variables][1] to include information in your alert message that's specific to the tag scope that triggered the alert. This is dependent on the tags you use in the "trigger a separate alert for each" field in Section 1 of your monitor.
 
 For example, if you trigger by each **host** tag, then a number of template variables related to **host** are available to you in your Section 3: **Say what's happening**, such as `{{host.name}}`, `{{host.ip}}`, etc.  
 Using those variables, when the alert is triggered, you can be told the name and IP of the specific host that breached the monitor threshold.
@@ -20,7 +20,7 @@ Using those variables, when the alert is triggered, you can be told the name and
 But this also works for custom tags as well. If you've added a custom tag that follows the `key:value` syntax, then you can group data by those tag keys.  
 This means you'll be able to apply the tag's **key** to the list of tags that a multi alert has a separate trigger for. Which in turn means you can use that tag's ".name" variable in your monitor message. (Of course, template variables can get confusing, so take a look at the "[use message template variables](https://cl.ly/3Y3f1b1T2k3Y)" button for a list of available variables and a walkthrough of how to use them effectively).
 
-You can also use these template variables to [set conditional contacts and messages within the same monitor](/monitors/faq/how-do-i-setup-conditional-contacts-and-messages-in-a-single-monitor).
+You can also use these template variables to [set conditional contacts and messages within the same monitor][2].
 
 ## Examples
 
@@ -45,8 +45,8 @@ You can also set up multi alert monitors using the Datadog API. The following ex
 #!/bin/sh
 # Make sure you replace the API and APP keys below
 # with the ones for your account
-api_key=9775a026f1ca7d1c6c5af9d94d9595a4
-app_key=87ce4a24b5553d2e482ea8a8500e71b8ad4554ff
+api_key=<YOUR_API_KEY>
+app_key=<YOUR_APP_KEY>
 
 curl -X POST -H "Content-type: application/json" \
 -d '{
@@ -60,12 +60,16 @@ curl -X POST -H "Content-type: application/json" \
           "no_data_timeframe": 20
       }
     }' \
-    "https://app.datadoghq.com/api/v1/monitor?api_key=${api_key}&application_key=${app_key}"
+    "https://api.datadoghq.com/api/v1/monitor?api_key=${api_key}&application_key=${app_key}"
 ```
 
 The `by {host}` section of the monitor query creates a multi alert by host. You can also group by multiple tag keys, e.g. `by {host,env}`.
 
-For more information about using our API to manage monitors, see [our API docs](/api/#monitors)
+For more information about using our API to manage monitors, see [our API docs][3]
 
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /monitors/notifications
+[2]: /monitors/faq/how-do-i-setup-conditional-contacts-and-messages-in-a-single-monitor
+[3]: /api/#monitors

@@ -12,7 +12,6 @@ Accordingly, in the Datadog configuration file for HAProxy, **each socket or end
 
 {{< img src="integrations/faq/haproxy_multi_process_agent_conf.png" alt="HAProxy multiprocess configuration" responsive="true" popup="true" style="width:50%;">}}
 
-
 Otherwise they share the same `/haproxy_stats` endpoint, and getting the HAProxy statistics from it shows the stats only for the process assigned to the current request.
 
 {{< img src="integrations/faq/haproxy_stats_1.png" alt="HAProxy stats 1" responsive="true" popup="true" style="width:85%;" >}}
@@ -23,5 +22,7 @@ Refreshing the page in your browser shows the stats from a different process tha
 
 If your HAproxy integration is not well configured, you may notice:
 
-* Missing points on HAProxy metrics that are reported as rate [can be checked here](https://github.com/DataDog/integrations-core/blob/master/haproxy/datadog_checks/haproxy/haproxy.py) and for which you should get a value each 20 seconds.
+* Missing points on HAProxy metrics that are reported as rate [can be checked here][1] and for which you should get a value each 20 seconds.
 * High values and high variations on metrics that are low in normal conditions such as 5xx code error responses.
+
+[1]: https://github.com/DataDog/integrations-core/blob/master/haproxy/datadog_checks/haproxy/haproxy.py

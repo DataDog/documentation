@@ -3,9 +3,9 @@ title: Powershell api examples
 kind: faq
 ---
 
-[Datadog api](/api) docs has shell examples only for Unix.
+[Datadog api][1] docs has shell examples only for Unix.
 
-Here are two examples translated in Powershell, using Msxml2.XMLHTTP, fully documented [on mozilla documentation page](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest): 
+Here are two examples translated in Powershell, using Msxml2.XMLHTTP, fully documented [on mozilla documentation page][2]: 
 
 ## The code that makes the api call
 
@@ -27,11 +27,11 @@ $http_request.responseText
 
 1. Replace the api/app key with yours
 ```
-$api_key = "9775a026f1ca7d1c6c5af9d94d9595a4" 
-$app_key = "87ce4a24b5553d2e482ea8a8500e71b8ad4554ff"
+$api_key = "<YOUR_API_KEY>" 
+$app_key = "<YOUR_APP_KEY>"
 ```
 
-2. Set up your parameters according to [description in the host API](/api/#hosts), shell tab
+2. Set up your parameters according to [description in the host API][3], shell tab
 ```
 $host_name = "test.host"
 
@@ -50,11 +50,11 @@ $parameters = "{
 
 1. Replace the api/app key with yours
 ```
-$api_key = "9775a026f1ca7d1c6c5af9d94d9595a4" 
-$app_key = "87ce4a24b5553d2e482ea8a8500e71b8ad4554ff"
+$api_key = "<YOUR_API_KEY>" 
+$app_key = "<YOUR_APP_KEY>"
 ```
 
-3. Set up parameters according to [description in the metrics API](/api/#metrics), shell tab
+3. Set up parameters according to [description in the metrics API][4], shell tab
 ```
 $http_method = "POST"
 
@@ -73,3 +73,8 @@ $parameters = "{ `"series`" :
 ```
 
 3. Execute the code presented in this [section](#the-code-that-makes-the-api call).
+
+[1]: /api
+[2]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+[3]: /api/#hosts
+[4]: /api/#metrics

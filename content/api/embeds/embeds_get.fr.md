@@ -13,7 +13,7 @@ Réponse: Un objet JSON avec 8 éléments:
 * embed_id: Token de l'embed
 * graph_title: titre du graphique
 * dash_name: Nom du dashboard sur lequel le graphique est activé (null si aucun)
-* dash_url: URL du tableau de bord sur lequel le graphique est activé (null si aucun)
+* dash_url: URL du dashboard sur lequel le graphique est activé (null si aucun)
 * shared_by: ID de l'utilisation qui a partagé l'intégration
 * html: Fragment HTML pour l'embed (iframe)
 * revoked: Indicateur booléen pour indiquer si l'embed est révoquée ou non

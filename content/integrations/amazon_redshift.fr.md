@@ -4,6 +4,7 @@ aliases:
 categories:
   - cloud
   - aws
+  - log collection
 ddtype: crawler
 description: Suivre les métriques clés Amazon Redshift.
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_redshift/'

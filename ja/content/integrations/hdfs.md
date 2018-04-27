@@ -16,7 +16,6 @@ doclevel: basic
 
 ## 概要
 
-
 次の目的で、HDFSのメトリクをDatadogと連携します:
 
 * HDFSのキーメトリクスを可視化する

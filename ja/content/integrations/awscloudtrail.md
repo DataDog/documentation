@@ -9,8 +9,6 @@ title: Datadog-AWS CloudTrail Integration
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-
-
 {{< img src="integrations/awscloudtrail/cloudtrail_event.png" >}}
 
 ## Overview
@@ -43,11 +41,9 @@ Configure CloudWatch on AWS and ensure that the policy you created has the equiv
 }
 {{< /highlight >}}
 
-
 ### Configuration
 
 Open the AWS CloudTrail tile. The accounts you configured in the Amazon Web Services tile are shown here and you can choose what kinds of events will be collected by Datadog. If you would like to see other events that are not mentioned here, please reach out to [our support team][2].
-
 
 ## Troubleshooting
 

@@ -22,15 +22,15 @@ version: 1.1.0
 
 ## Aperçu
 
-Obtenez les métriques du service agent_metrics en temps réel pour:
+Obtenir les métriques du service agent_metrics en temps réel pour:
 
-* Visualisez et monitorez les états de agent_metrics
-* Soyez informé des failovers et des événements de agent_metrics.
+* Visualiser et monitorer les états de agent_metrics
+* Être informé des failovers et des événements de agent_metrics.
 
 ## Implémentation
 ### Installation
 
-Le check agent metric est packagé avec l'agent, il vous faut donc simplement [installer l'agent] (https://app.datadoghq.com/account/settings#agent).
+Le check agent metric est packagé avec l'agent, il vous faut donc simplement [installer l'agent](https://app.datadoghq.com/account/settings#agent).
 
 ### Configuration
 

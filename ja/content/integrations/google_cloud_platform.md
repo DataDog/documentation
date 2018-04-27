@@ -8,8 +8,6 @@ title: Datadog-Google Cloud Platform Integration
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-
-
 ## Overview
 
 Connect to Google Cloud Platform to see all your Google Compute Engine (GCE) hosts in Datadog. You'll see your hosts in the infrastructure overview in Datadog and be able to sort through them easily, since Datadog automatically tags them with GCE host tags and any GCP labels you've added.
@@ -46,7 +44,6 @@ https://www.googleapis.com/auth/monitoring.read
 ~~~
 
 [Also, billing must be enabled for the account(s) you wish to monitor.][1]
-
 
 Optionally, you can limit the GCE instances that are pulled into Datadog by entering tags in the **Limit Metric Collection** textbox. Only hosts that match one of the defined tags will be imported into Datadog. You can use wildcards ('?' for single character, '*' for multi-character) to match many hosts, or '!' to exclude certain hosts. This example includes all c1* sized instances, but excludes staging hosts:
 

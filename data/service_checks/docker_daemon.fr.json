@@ -1,0 +1,29 @@
+[
+    {
+        "agent_version": "5.1.0",
+        "integration":"docker",
+        "check": "docker.service_up",
+        "statuses": ["ok", "critical"],
+        "groups": ["host"],
+        "name": "Peut se connecter",
+        "description": "Renvoie `CRITICAL` si l'agent est incapable de collecter la liste des conteneurs du daemon Docker. Renvoie `OK` sinon."
+    },
+    {
+        "agent_version": "5.1.0",
+        "integration":"docker",
+        "check": "docker.container_health",
+        "statuses": ["ok", "critical", "unknown"],
+        "groups": ["host"],
+        "name": "Container Health",
+        "description": "Renvoie `CRITICAL` si un conteneur est unhealthy. Renvoie `OK` sinon ou `UNKNOWN` si l'état de santé est inconnu."
+    },
+    {
+        "agent_version": "5.1.0",
+        "integration":"docker",
+        "check": "docker.exit",
+        "statuses": ["ok", "critical"],
+        "groups": ["host"],
+        "name": "Exit Code",
+        "description": "Renvoie `CRITICAL` si un conteneur est fermé avec un code de sortie différent de zéro. Renvoie `OK` sinon."
+    }
+]

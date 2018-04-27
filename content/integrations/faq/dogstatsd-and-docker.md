@@ -3,11 +3,11 @@ title: Compose and the Datadog Agent
 kind: faq
 ---
 
-Datadog has a huge number of [integrations with common applications](/integrations/), but it can also be used to instrument your custom applications. This is typically using one of the many [Datadog libraries](/developers/libraries/).
+Datadog has a huge number of [integrations with common applications][1], but it can also be used to instrument your custom applications. This is typically using one of the many [Datadog libraries][2].
 
-Libraries that communicate over HTTP using the [Datadog API](/api/) don't require any special configuration with regard to Docker. However, applications using libraries that integrate with DogStatsD or StatsD will need to configure the library to connect to the Agent. Note that each library will handle this configuration differently, so please refer to the individual library's documentation for more details.
+Libraries that communicate over HTTP using the [Datadog API][3] don't require any special configuration with regard to Docker. However, applications using libraries that integrate with DogStatsD or StatsD will need to configure the library to connect to the Agent. Note that each library will handle this configuration differently, so please refer to the individual library's documentation for more details.
 
-After your code is configured you can run your custom application container using [the `--link` option](https://docs.docker.com/engine/reference/run/#/expose-incoming-ports) to create a network connection between your application container and the Datadog Agent container.
+After your code is configured you can run your custom application container using [the `--link` option][4] to create a network connection between your application container and the Datadog Agent container.
 
 ##### Example: Monitoring a basic Python application
 
@@ -43,4 +43,10 @@ After we build our web application container, we can run it and use the `--link`
       --link dd-agent:dd-agent
       my-web-app
 
-For another example using DogStatsD, see our [Docker Compose example project on Github](https://github.com/DataDog/docker-compose-example).
+For another example using DogStatsD, see our [Docker Compose example project on Github][5].
+
+[1]: /integrations/
+[2]: /developers/libraries/
+[3]: /api/
+[4]: https://docs.docker.com/engine/reference/run/#/expose-incoming-ports
+[5]: https://github.com/DataDog/docker-compose-example

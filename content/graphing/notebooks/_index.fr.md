@@ -50,7 +50,7 @@ Lorsqu'un notebook existant est ouvert, ses cellules sont dans un état fermé. 
 
 {{< img src="graphing/notebooks/states.png" alt="states" responsive="true" popup="true">}}
 
-Pour insérer, cloner ou supprimer des cellules, cliquez sur l'icône qui apparaît à gauche du numéro de cellule,  ou utilisez un raccourci clavier. Une liste de tous les raccourcis clavier est disponible en cliquant sur le bouton dans l'en-tête du notebook.
+Pour insérer, cloner ou supprimer des cellules, cliquez sur l'icône de roue dentée qui apparaît à gauche du numéro de cellule,  ou utilisez un raccourci clavier. Une liste de tous les raccourcis clavier est disponible en cliquant sur l'icône du clavier dans l'en-tête du notebook.
 Les cellules peuvent également être réorganisées en utilisant des raccourcis clavier.
 
 ### Changer l'horizon temporel
@@ -84,3 +84,4 @@ Pour enregistrer un notebook, appuyez sur `⌘ +` ou cliquez sur le bouton “Sa
 Pour renommer un notebook, cliquez sur le champ nom dans l'en-tête du notebook.
 
 Pour supprimer un notebook que vous avez créé, cliquez sur l'icône dans l'en-tête du notebook et sélectionnez "Delete Notebook." . Vous pouvez également supprimer vos propres notebook à partir de la page Notebook List.
+

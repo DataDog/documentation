@@ -6,7 +6,7 @@ aliases:
 ---
 ## Aperçu
 
-Être capable de voir toutes vos métriques à travers votre infrastructure est la clé de Datadog. Alors que nous avons des guides pour soumettre [des métriques custom](/developers/metrics/) via notre [API](/api/) et des [instrumentation de code](/developers/libraries/), il est possible que vous souhaitiez voir une certaine source devenir une intégration officielle. Dans l'ensemble, le facteur déterminant le plus important dans la construction des intégrations Datadog est d'être à l'écoute de ce que nos clients demandent.
+Être capable de voir toutes vos métriques à travers votre infrastructure est la clé de Datadog. Alors que nous avons des guides pour soumettre [des métriques custom][1] via notre [API][2] et des [instrumentation de code][3], il est possible que vous souhaitiez voir une certaine source devenir une intégration officielle. Dans l'ensemble, le facteur déterminant le plus important dans la construction des intégrations Datadog est d'être à l'écoute de ce que nos clients demandent.
 
 Si vous souhaitez proposer une intégration, contactez-nous à l'adresse support@datadoghq.com et indiquez-nous les métriques que vous souhaiteriez afficher à partir de cette source.
 
@@ -53,18 +53,18 @@ Get metrics from Docker in real time to:
 * Visualize your containers' performance.
 * Correlate the performance of containers with the applications running inside.
 
-There are three ways to setup the Docker integration: install the agent on the host, on a single priviledged container, and on each individual container.
+There are three ways to setup the Docker integration: install the Agent on the host, on a single priviledged container, and on each individual container.
 
 ## Setup
 ### Installation
 **Required with some exceptions**
 
-The installation section should cover anything that needs to be installed on the agent host. For instance, in the Docker installation section you learn about installing the agent into a container. If there is nothing to install on the agent host, this section can be left out. To be a complete integration, either an installation section or a configuration section must be included.
+The installation section should cover anything that needs to be installed on the Agent host. For instance, in the Docker installation section you learn about installing the Agent into a container. If there is nothing to install on the Agent host, this section can be left out. To be a complete integration, either an installation section or a configuration section must be included.
 
 ### Configuration
 **Required with some exceptions**
 
-The configuration section should cover anything that you can configure in the Datadog interface or the agent configuration files. In almost every case this section should be included since there is almost always something to configure. To be a complete integration, either an installation section or a configuration section must be included.
+The configuration section should cover anything that you can configure in the Datadog interface or the Agent configuration files. In almost every case this section should be included since there is almost always something to configure. To be a complete integration, either an installation section or a configuration section must be included.
 
 ### Configuration Options
 
@@ -101,3 +101,7 @@ Include a list of service checks if the integration provides any.
 
 Include any links to Docs pages or Datadog blog articles that highlight the integration.
 ```
+
+[1]: /developers/metrics/
+[2]: /api/
+[3]: /developers/libraries/

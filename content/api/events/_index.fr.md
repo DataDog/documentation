@@ -1,4 +1,5 @@
 ---
-title: Événements
+title: Évènements
 external_redirect: /api/
 ---
+

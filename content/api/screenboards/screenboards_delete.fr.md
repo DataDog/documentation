@@ -10,4 +10,3 @@ Supprime un Screenboard existant.
 ##### ARGUMENTS
 Cet endpoint ne prend aucun argument JSON.
 
-

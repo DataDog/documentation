@@ -18,7 +18,7 @@ Override a Screenboard configuration in Datadog.
 * **`description`** [*optional*, *default*=**None**]:
     A description of the dashboard's content.
 * **`widgets`** [*required*]:
-    [A list of widget definitions](/graphing/dashboards/widgets).
+    [A list of widget definitions][1].
 * **`template_variables`** [*optional*, *default*=**None**]:
     A list of template variables for using Dashboard templating.
 * **`width`** [*optional*, *default*=**None**]:
@@ -27,3 +27,5 @@ Override a Screenboard configuration in Datadog.
     Screenboard height in pixels.
 * **`read_only`** [*optional*, *default*=**False**]:
     The read-only status of the screenboard.
+
+[1]: /graphing/dashboards/widgets

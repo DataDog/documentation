@@ -12,3 +12,4 @@ How do I conform my data on Datadog to what I am seeing on CloudWatch? Can I use
 
 1. Using the example above, AWS CloudWatch reports metrics at 1 minute granularity normalized to per minute data, so it is as easy as multiplying by 60 because we report metrics at 1 minute granularity normalized to per second data.
 2. Rollups don't display similar results; the attempted rollup call would be rollup(sum, 60), where the server groups all data points in minute bins and return the sum of each bin as a datapoint. However, the granularity of AWS metrics is 1 minute, so there is only one datapoint per bin leading to no change.
+

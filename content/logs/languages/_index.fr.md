@@ -1,7 +1,7 @@
 ---
 title: Collecte de log depuis vos languages
 kind: Documentation
-description: Configurez votre agent Datadog pour rassembler les logs de vos languages.
+description: "Configurez votre Agent Datadog pour rassembler les logs de vos languages."
 ---
 
 ## Comment tirer le meilleur parti de vos logs
@@ -18,7 +18,7 @@ Pour activer ces fonctionnalités, utilisez les noms d'attribut suivants:
 * `error.message`: Message d'erreur contenu dans la stack trace
 * `error.kind`: Le type ou "kind" d'une erreur (i.e "Exception", "OSError", ...)
 
-**Note**: Par défaut, [les pipelines d'intégration](/logs/processing) tentent de remapper les paramètres par défaut de la bibliothèque de logging sur ces attributs spécifiques et analysent les traces ou traceback pour extraire automatiquement les erreurs `error.msg` et `error.kind`.
+**Note**: Par défaut, [les pipelines d'intégration][1] tentent de remapper les paramètres par défaut de la bibliothèque de logging sur ces attributs spécifiques et analysent les traces ou traceback pour extraire automatiquement les erreurs `error.msg` et `error.kind`.
 
 ## Envoyez vos logs en JSON
 
@@ -33,3 +33,5 @@ Pour les frameworks d'intégration, nous fournissons des instructions sur la fa�
     {{< nextlink href="/logs/languages/python" >}}Python{{< /nextlink >}}
     {{< nextlink href="/logs/languages/ruby" >}}Ruby{{< /nextlink >}}
 {{< /whatsnext >}}
+
+[1]: /logs/processing

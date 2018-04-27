@@ -5,7 +5,7 @@ private: true
 ---
 
 {{< whatsnext desc="List of Frequently Asked Questions:" >}}
-    {{< nextlink href="graphing/faq/how-do-i-add-hostname-to-event-titles-and-messages-submitted-by-my-custom-agent-checks" >}}How do I add hostname to event titles and messages submitted by my custom agent checks?{{< /nextlink >}}
+    {{< nextlink href="graphing/faq/how-do-i-add-hostname-to-event-titles-and-messages-submitted-by-my-custom-agent-checks" >}}How do I add hostname to event titles and messages submitted by my custom Agent checks?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/how-to-transform-a-timeboard-to-a-screenboard-or-vice-versa" >}}How to Transform a Timeboard to a Screenboard or vice versa ?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/dashboard-loads-very-slowly" >}}Dashboard loads very slowly/displays no data, but I'm correctly sending data to Datadog{{< /nextlink >}}
     {{< nextlink href="graphing/faq/why-am-i-unable-to-iframe-certain-https-urls" >}}Why am I unable to iFrame certain https:// URLs?{{< /nextlink >}}
@@ -40,5 +40,4 @@ private: true
     {{< nextlink href="graphing/faq/when-i-query-can-i-use-wildcards-in-metric-names-and-events" >}}When I query can I use wildcards in metric names and events?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/is-it-possible-to-query-historical-data-after-a-host-has-been-destroyed" >}}Is it possible to query historical data after a host has been destroyed?{{< /nextlink >}}
 {{< /whatsnext >}}
-
 

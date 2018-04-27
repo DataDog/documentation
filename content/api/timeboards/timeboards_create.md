@@ -28,3 +28,4 @@ external_redirect: /api/#create-a-timeboard
         The tag prefix associated with the variable. Only tags with this prefix appear in the variable dropdown.
     * **`default`** [*optional*, *default*=**None**]:  
         The default value for the template variable on dashboard load.
+

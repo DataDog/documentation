@@ -10,7 +10,7 @@ If you're seeing unexpected results in the Datadog app such as missing data or b
 * Check if you have the same issue using a different browser
 * Ask teammates to check their accounts from their machines and confirm whether they can reproduce the issue
 * Log in to your account from a different machine to see whether the issue persists
-* Check that your system clock is not [significantly offset from NTP](/agent/faq/network-time-protocol-ntp-offset-issues)
+* Check that your system clock is not [significantly offset from NTP][1]
 * Are you experiencing this from multiple locations? Can you send the output of:
     * traceroute app.datadoghq.com
     * tracepath app.datadoghq.com
@@ -23,7 +23,7 @@ If you're seeing unexpected results in the Datadog app such as missing data or b
 
 In most of the scenarios above, the root cause of the issue is very likely related to a browser extension, outdated browser, or something similar.
 
-If you continue to have issues,contact [us](/help) for assistance, to help expedite your issue include:
+If you continue to have issues,contact [us][2] for assistance, to help expedite your issue include:
 
 * Results of the above tests
 * A screenshot of your issue
@@ -31,3 +31,6 @@ If you continue to have issues,contact [us](/help) for assistance, to help exped
 * Extensions you're running
 * Browser version
 * OS versions
+
+[1]: /agent/faq/network-time-protocol-ntp-offset-issues
+[2]: /help

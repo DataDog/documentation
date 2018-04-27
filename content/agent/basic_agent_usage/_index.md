@@ -8,33 +8,33 @@ aliases:
 further_reading:
 - link: "agent/faq/how-datadog-agent-determines-the-hostname"
   tag: "FAQ"
-  text: "How does Datadog determine the agent hostname?"
+  text: "How does Datadog determine the Agent hostname?"
 - link: "agent/faq/agent-commands"
   tag: "FAQ"
-  text: "List of all agent commands"
+  text: "List of all Agent commands"
 ---
 
 {{< partial name="platforms/platforms.html" >}}
 
 ## Configuration management tools
 
-Manage the Datadog Agent and [integrations](/integrations) using configuration management tools:
+Manage the Datadog Agent and [integrations][1] using configuration management tools:
 
 ### Chef Cookbook
-* [Chef Github project](https://github.com/DataDog/chef-datadog)
-* [Installing Datadog Agent with Chef](https://app.datadoghq.com/account/settings#integrations/chef)
+* [Chef Github project][2]
+* [Installing Datadog Agent with Chef][3]
 
 ### Puppet
-* [Puppet Github project](https://github.com/DataDog/puppet-datadog-agent)
-* [Installing Datadog Agent with Puppet](https://app.datadoghq.com/account/settings#integrations/puppet)
+* [Puppet Github project][4]
+* [Installing Datadog Agent with Puppet][5]
 
 ### Ansible
-* [Ansible Github project](https://github.com/DataDog/ansible-datadog)
-* [Installing Datadog Agent with Ansible](https://app.datadoghq.com/account/settings#agent/ansible)
+* [Ansible Github project][6]
+* [Installing Datadog Agent with Ansible][7]
 
 ### SaltStack
 
-* [Installing Datadog Agent with Saltstack](https://github.com/DataDog/datadog-formula)
+* [Installing Datadog Agent with Saltstack][8]
 
 ## Configuration file
 
@@ -43,11 +43,11 @@ The configuration files and folders for the Agent are located at:
 {{% table responsive="true" %}}
 | OS                                                                       | Agent v5                                                                   |  Agent v6                       |
 | :-------                                                                 | :--------                                                                  | :--------                       |
-| [Mac OS X](/agent/basic_agent_usage/osx)                                 | `~/.datadog-agent/datadog.conf`                                            | `~/.datadog-agent/datadog.yaml` |
-| [Linux](/agent/basic_agent_usage/ubuntu)                                 | `/etc/dd-agent/datadog.conf`                                               | `/etc/datadog-agent/datadog.yaml`                                |
-| [Source](/agent/basic_agent_usage/source)                                | `~/.datadog-agent/agent/datadog.conf`                                      | `/etc/datadog-agent/datadog.yaml`                                |
-| [Windows Server 2008, Vista and newer](/agent/basic_agent_usage/windows) | `\\ProgramData\Datadog\datadog.conf`                                       | `\\ProgramData\Datadog\datadog.yaml` |
-| [Windows Server 2003, XP or older](/agent/basic_agent_usage/windows)     | `\\Documents and Settings\All Users\Application Data\Datadog\datadog.conf` | `n/a` _(unsupported OS)_        |
+| [Mac OS X][9]                                 | `~/.datadog-agent/datadog.conf`                                            | `~/.datadog-agent/datadog.yaml` |
+| [Linux][10]                                 | `/etc/dd-agent/datadog.conf`                                               | `/etc/datadog-agent/datadog.yaml`                                |
+| [Source][11]                                | `~/.datadog-agent/agent/datadog.conf`                                      | `/etc/datadog-agent/datadog.yaml`                                |
+| [Windows Server 2008, Vista and newer][12] | `\\ProgramData\Datadog\datadog.conf`                                       | `\\ProgramData\Datadog\datadog.yaml` |
+| [Windows Server 2003, XP or older][12]     | `\\Documents and Settings\All Users\Application Data\Datadog\datadog.conf` | `n/a` _(unsupported OS)_        |
 {{% /table %}}
 
 ## Log location
@@ -60,3 +60,16 @@ The Datadog logs do a rollover every 10MB. When a rollover occurs, one backup is
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /integrations
+[2]: https://github.com/DataDog/chef-datadog
+[3]: https://app.datadoghq.com/account/settings#integrations/chef
+[4]: https://github.com/DataDog/puppet-datadog-agent
+[5]: https://app.datadoghq.com/account/settings#integrations/puppet
+[6]: https://github.com/DataDog/ansible-datadog
+[7]: https://app.datadoghq.com/account/settings#agent/ansible
+[8]: https://github.com/DataDog/datadog-formula
+[9]: /agent/basic_agent_usage/osx
+[10]: /agent/basic_agent_usage/ubuntu
+[11]: /agent/basic_agent_usage/source
+[12]: /agent/basic_agent_usage/windows

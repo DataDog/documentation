@@ -14,7 +14,7 @@
 				{
 					"name": "Authentication Check",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/validate?api_key=INSERT_API_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/validate?api_key=INSERT_API_KEY_HERE",
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -34,7 +34,7 @@
 				{
 					"name": "Enter Check Status",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/check_run?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/check_run?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "POST",
 						"header": [
 							{
@@ -60,7 +60,7 @@
 				{
 					"name": "POST A Comment",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/comments?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/comments?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "POST",
 						"header": [
 							{
@@ -80,7 +80,7 @@
 				{
 					"name": "Reply To Comment",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/comments?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/comments?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "POST",
 						"header": [
 							{
@@ -100,7 +100,7 @@
 				{
 					"name": "Change Previous Comment",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/comments/3843084207937032193?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/comments/3843084207937032193?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "PUT",
 						"header": [
 							{
@@ -120,7 +120,7 @@
 				{
 					"name": "Delete Comment",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/comments/3843084207937032193?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/comments/3843084207937032193?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "DELETE",
 						"header": [
 							{
@@ -146,7 +146,7 @@
 				{
 					"name": "Schedule Downtime",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/downtime?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&start=1493343426&end=1556415426&type=weeks&period=1&week_days=Mon,Tue,Wed,Thu,Fri&until_date=1491026399&scope=region:midwest",
+						"url": "https://api.datadoghq.com/api/v1/downtime?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&start=1493343426&end=1556415426&type=weeks&period=1&week_days=Mon,Tue,Wed,Thu,Fri&until_date=1491026399&scope=region:midwest",
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -160,7 +160,7 @@
 				{
 					"name": "Update A Downtime",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/downtime/223886958?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&start=1493343426&end=1556415426&type=weeks&period=1&week_days=Mon,Tue,Wed,Thu,Fri,Sat&until_date=1491026399&scope=region:midwest",
+						"url": "https://api.datadoghq.com/api/v1/downtime/223886958?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&start=1493343426&end=1556415426&type=weeks&period=1&week_days=Mon,Tue,Wed,Thu,Fri,Sat&until_date=1491026399&scope=region:midwest",
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -174,7 +174,7 @@
 				{
 					"name": "GET A Downtime",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/downtime/223886958?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/downtime/223886958?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -188,7 +188,7 @@
 				{
 					"name": "GET ALL Downtimes",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/downtime?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/downtime?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -202,7 +202,7 @@
 				{
 					"name": "DELETE All Downtimes By Scope",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/downtime/cancel/by_scope?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/downtime/cancel/by_scope?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "POST",
 						"header": [
 							{
@@ -222,7 +222,7 @@
 				{
 					"name": "DELTE A Downtime",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/downtime/223886958?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/downtime/223886958?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "DELETE",
 						"header": [],
 						"body": {
@@ -242,7 +242,7 @@
 				{
 					"name": "GET ALL Embeddable Graphs",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/graph/embed?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/graph/embed?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -256,7 +256,7 @@
 				{
 					"name": "GET A Specific Embeddable Graphs",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/graph/embed/45d8cf2d01e0673beadeb88f4368db271376eefd11d76e4eaf3cfae18f47e0f5?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/graph/embed/45d8cf2d01e0673beadeb88f4368db271376eefd11d76e4eaf3cfae18f47e0f5?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -270,7 +270,7 @@
 				{
 					"name": "Create An Embeddable Graph",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/graph/embed?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/graph/embed?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "POST",
 						"header": [
 							{
@@ -311,7 +311,7 @@
 				{
 					"name": "Enable A Specific Embed",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/graph/embed/9405f66beea59813e322e236da9dd31006267c4fc970442c5547f9fd7a676678/enable?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/graph/embed/9405f66beea59813e322e236da9dd31006267c4fc970442c5547f9fd7a676678/enable?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -325,7 +325,7 @@
 				{
 					"name": "Revoke A Specific Embed",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/graph/embed/9405f66beea59813e322e236da9dd31006267c4fc970442c5547f9fd7a676678/revoke?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/graph/embed/9405f66beea59813e322e236da9dd31006267c4fc970442c5547f9fd7a676678/revoke?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -345,7 +345,7 @@
 				{
 					"name": "Post an Event",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/events?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/events?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "POST",
 						"header": [
 							{
@@ -365,7 +365,7 @@
 				{
 					"name": "Get Event Details",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/events/1044739812528776191?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/events/1044739812528776191?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "GET",
 						"header": [
 							{
@@ -385,7 +385,7 @@
 				{
 					"name": "DELETE An Event",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/events/1044739812528776191?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/events/1044739812528776191?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "DELETE",
 						"header": [
 							{
@@ -405,7 +405,7 @@
 				{
 					"name": "Query Event Stream",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/events?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&start=1493127756&end=1493386969",
+						"url": "https://api.datadoghq.com/api/v1/events?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&start=1493127756&end=1493386969",
 						"method": "GET",
 						"header": [
 							{
@@ -431,7 +431,7 @@
 				{
 					"name": "Graph a Snapshot",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/graph/snapshot?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&metric_query=system.load.1{*}&start=1493127756&end=1493387140",
+						"url": "https://api.datadoghq.com/api/v1/graph/snapshot?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&metric_query=system.load.1{*}&start=1493127756&end=1493387140",
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -451,7 +451,7 @@
 				{
 					"name": "Mute a Host",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/host/my_hostname/mute?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/host/my_hostname/mute?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "POST",
 						"header": [
 							{
@@ -471,7 +471,7 @@
 				{
 					"name": "Unmute a Host",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/host/my_hostname/unmute?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/host/my_hostname/unmute?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "POST",
 						"header": [
 							{
@@ -497,7 +497,7 @@
 				{
 					"name": "Get All Active Metrics",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/metrics?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&from=1488386651",
+						"url": "https://api.datadoghq.com/api/v1/metrics?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&from=1488386651",
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -511,7 +511,7 @@
 				{
 					"name": "View Metric Data",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/metrics/system.cpu.system?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/metrics/system.cpu.system?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -525,7 +525,7 @@
 				{
 					"name": "Edit Metric Data",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/metrics/system.cpu.system?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/metrics/system.cpu.system?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "PUT",
 						"header": [
 							{
@@ -545,7 +545,7 @@
 				{
 					"name": "POST Time Series Point",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/series?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/series?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "POST",
 						"header": [
 							{
@@ -565,7 +565,7 @@
 				{
 					"name": "Query Time Series Points",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/query?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&from=1493127756&to=1493388187&query=system.cpu.idle{*}by{host}",
+						"url": "https://api.datadoghq.com/api/v1/query?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&from=1493127756&to=1493388187&query=system.cpu.idle{*}by{host}",
 						"method": "GET",
 						"header": [
 							{
@@ -591,7 +591,7 @@
 				{
 					"name": "Create a Monitor ",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/monitor?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/monitor?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "POST",
 						"header": [
 							{
@@ -611,7 +611,7 @@
 				{
 					"name": "Get a Monitor's Details",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/monitor/1959920?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/monitor/1959920?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "GET",
 						"header": [
 							{
@@ -631,7 +631,7 @@
 				{
 					"name": "Edit a Monitor's Details",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/monitor/1959920?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/monitor/1959920?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "PUT",
 						"header": [
 							{
@@ -651,7 +651,7 @@
 				{
 					"name": "DELETE a Monitor",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/monitor/1959920?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/monitor/1959920?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "DELETE",
 						"header": [
 							{
@@ -671,7 +671,7 @@
 				{
 					"name": "GET All Monitor Details",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/monitor?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/monitor?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "GET",
 						"header": [
 							{
@@ -691,7 +691,7 @@
 				{
 					"name": "Mute All Monitors",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/monitor/mute_all?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/monitor/mute_all?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "POST",
 						"header": [
 							{
@@ -711,7 +711,7 @@
 				{
 					"name": "Unmute All Monitors",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/monitor/unmute_all?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/monitor/unmute_all?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "POST",
 						"header": [
 							{
@@ -731,7 +731,7 @@
 				{
 					"name": "Mute A Specific Monitor",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/monitor/1959920/mute?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/monitor/1959920/mute?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "POST",
 						"header": [
 							{
@@ -751,7 +751,7 @@
 				{
 					"name": "Unmute A Specific Monitor",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/monitor/1959920/unmute?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/monitor/1959920/unmute?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "POST",
 						"header": [
 							{
@@ -778,7 +778,7 @@
 					"name": "Get all Orgs",
 					"request": {
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/org?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://api.datadoghq.com/api/v1/org?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -826,7 +826,7 @@
 					"name": "Create Child Org",
 					"request": {
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/org?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://api.datadoghq.com/api/v1/org?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -879,7 +879,7 @@
 				{
 					"name": "Setup New ScreenBoard",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/screen?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/screen?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "POST",
 						"header": [
 							{
@@ -899,7 +899,7 @@
 				{
 					"name": "Update ScreenBoard",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/screen/177964?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/screen/177964?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "PUT",
 						"header": [
 							{
@@ -919,7 +919,7 @@
 				{
 					"name": "GET ScreenBoard Definition",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/screen/177964?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/screen/177964?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "GET",
 						"header": [
 							{
@@ -939,7 +939,7 @@
 				{
 					"name": "DELETE ScreenBoard",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/screen/177964?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/screen/177964?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "DELETE",
 						"header": [
 							{
@@ -959,7 +959,7 @@
 				{
 					"name": "Get All Screenboards",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/screen?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/screen?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "GET",
 						"header": [
 							{
@@ -979,7 +979,7 @@
 				{
 					"name": "Share A Screenboard",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/screen/share/178837?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/screen/share/178837?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "GET",
 						"header": [
 							{
@@ -999,7 +999,7 @@
 				{
 					"name": "Revoke Share of Screenboard",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/screen/share/178837?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/screen/share/178837?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "DELETE",
 						"header": [
 							{
@@ -1025,7 +1025,7 @@
 				{
 					"name": "Search",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/search?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&q=cpu",
+						"url": "https://api.datadoghq.com/api/v1/search?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&q=cpu",
 						"method": "GET",
 						"header": [
 							{
@@ -1051,7 +1051,7 @@
 				{
 					"name": "Get All Host Tags",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/tags/hosts/i-0f125915827da9af1?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&hostname=i-0f125915827da9af1",
+						"url": "https://api.datadoghq.com/api/v1/tags/hosts/i-0f125915827da9af1?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&hostname=i-0f125915827da9af1",
 						"method": "GET",
 						"header": [
 							{
@@ -1071,7 +1071,7 @@
 				{
 					"name": "Add Tags By Hostname",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/tags/hosts/i-0f125915827da9af1?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&hostname=i-0f125915827da9af1",
+						"url": "https://api.datadoghq.com/api/v1/tags/hosts/i-0f125915827da9af1?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&hostname=i-0f125915827da9af1",
 						"method": "POST",
 						"header": [
 							{
@@ -1091,7 +1091,7 @@
 				{
 					"name": "Update All Tags By Hostname",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/tags/hosts/i-0f125915827da9af1?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&hostname=i-0f125915827da9af1",
+						"url": "https://api.datadoghq.com/api/v1/tags/hosts/i-0f125915827da9af1?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&hostname=i-0f125915827da9af1",
 						"method": "PUT",
 						"header": [
 							{
@@ -1117,7 +1117,7 @@
 				{
 					"name": "Create a Timeboard",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/dash?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/dash?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "POST",
 						"header": [
 							{
@@ -1137,7 +1137,7 @@
 				{
 					"name": "Update a Timeboard",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/dash/281866?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/dash/281866?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "PUT",
 						"header": [
 							{
@@ -1157,7 +1157,7 @@
 				{
 					"name": "Get All TimeBoards",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/dash?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/dash?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "GET",
 						"header": [
 							{
@@ -1177,7 +1177,7 @@
 				{
 					"name": "Get A TimeBoard",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/dash/281799?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/dash/281799?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "GET",
 						"header": [
 							{
@@ -1203,7 +1203,7 @@
 				{
 					"name": "Get All Users of An Org",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/user?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/user?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -1217,7 +1217,7 @@
 				{
 					"name": "Get Single User of An Org by handle",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/user/bmroche@gmail.com?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/user/bmroche@gmail.com?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -1231,7 +1231,7 @@
 				{
 					"name": "Update User Info by Handle",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/user/bmroche@gmail.com?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/user/bmroche@gmail.com?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "PUT",
 						"header": [
 							{
@@ -1251,7 +1251,7 @@
 				{
 					"name": "Create User for an Org",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/user?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/user?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "POST",
 						"header": [
 							{
@@ -1271,7 +1271,7 @@
 				{
 					"name": "Disable A Users by Handle",
 					"request": {
-						"url": "https://app.datadoghq.com/api/v1/user/test@gmail.com?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+						"url": "https://api.datadoghq.com/api/v1/user/test@gmail.com?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "DELETE",
 						"header": [],
 						"body": {

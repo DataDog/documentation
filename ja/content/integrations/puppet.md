@@ -13,8 +13,6 @@ kind: integration
 
 ## 概要
 
-
-
 <!-- Connect Puppet to Datadog in order to:
 
 - Get real-time reports on Puppet Agent runs.

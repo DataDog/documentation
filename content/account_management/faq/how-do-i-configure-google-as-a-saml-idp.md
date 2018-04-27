@@ -13,7 +13,7 @@ further_reading:
 
 ### Setting up Google as a SAML IdP
 
-[Please read the dedicated Google instructions](https://support.google.com/a/answer/6087519?hl=en)
+[Please read the dedicated Google instructions][1]
 
 ### For the "Service Provider Details"
 
@@ -21,8 +21,8 @@ further_reading:
 
 * **Application Name**: Can be anything
 * **Description**: Can be anything
-* **ACS URL**: Use the url shown under "Assertion Consumer Service URL" on https://app.datadoghq.com/saml/saml_setup (the one containing `/id/<COMPANY_ID>`). If there is more than one value shown for Assertion Consumer Service URL, only enter one of them here.
-* **Entity ID**:  `<COMPANY_ID>` from ACS URL
+* **ACS URL**: Use the url shown under "Assertion Consumer Service URL" on https://app.datadoghq.com/saml/saml_setup (the one containing `/id/`). If there is more than one value shown for Assertion Consumer Service URL, only enter one of them here.
+* **Entity ID**:  `` from ACS URL
 * **Start URL**: Can be blank, or use the "Single Sign On Login URL" listed on https://app.datadoghq.com/saml/saml_setup and https://app.datadoghq.com/account/team
 * **Signed Response**: Leave unchecked
 * **Name ID**: "Basic Information" "Primary Email"
@@ -41,3 +41,5 @@ Also add:
 ### Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://support.google.com/a/answer/6087519?hl=en

@@ -19,7 +19,7 @@ further_reading:
   text: Understand how to read a Datadog Trace
 ---
 
-All traces collected by your agents are listed in the [traces list page](https://app.datadoghq.com/apm/search):
+All traces collected by your Agents are listed in the [traces list page][1]:
 
 {{< img src="tracing/traces/trace_search.png" alt="Trace search UI" responsive="true" popup="true">}}
 
@@ -33,6 +33,10 @@ Select the trace time frame you want to display with the time selector in the up
 
 Filter your traces depending on:
 
-* Their [environment](/tracing/setup/environment)
-* Their [service name](/tracing/visualization/services_list/)
+* Their [environment][2]
+* Their [service name][3]
 * Their duration
+
+[1]: https://app.datadoghq.com/apm/search
+[2]: /tracing/setup/environment
+[3]: /tracing/visualization/services_list/

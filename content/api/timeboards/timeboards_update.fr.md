@@ -13,21 +13,23 @@ external_redirect: /api/#update-a-timeboard
     Le nom du dashboard.
 * **`description`** [*optionnel*]:  
     Une description du contenu du dashboard.
-* **`graphs`** [*optionnel*]:  
+* **`graphs`** [*obligatoire*]:  
     Une liste de définitions de graphique. Les définitions de graphique suivent cette forme:
     * **`title`** [*obligatoire*]:  
         Le nom du graphique.
     * **`definition`** [*obligatoire*]:  
-    La définition du graphique. Lisez le [Guide du graphique](/graphing/) pour en savoir plus sur les graphique. Exemple:
+    La définition du graphique. Lisez le [Guide du graphique][1] pour en savoir plus sur les graphique. Exemple:
     `{"requests": [{"q": "system.cpu.idle{*} by {host}"}`
 
-* **`template_variables`** [*optionnel*, *defaut*=**None**]:  
+* **`template_variables`** [*optionnel*, *défaut*=**None**]:  
     Liste des template variables utilisable dans le templating Dashboard. Les Templates variables suivent cette forme:
     * **`name`** [*obligatoire*]:
      Le nom de la variable.
 
-    * **`prefix`** [*optionnel*, *defaut*=**None**]:  
+    * **`prefix`** [*optionnel*, *défaut*=**None**]:  
     Le préfixe de tag associé à la variable. Seuls les tags avec ce préfixe apparaissent dans la liste déroulante des variables.
 
-    * **`default`** [*optionnel*, *defaut*=**None**]:  
+    * **`default`** [*optionnel*, *défaut*=**None**]:  
     La valeur par défaut de la Template variable lors du chargement du dasboard.
+
+[1]: /graphing/
