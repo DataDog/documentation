@@ -17,3 +17,4 @@ external_redirect: /api/#resolve-monitor
 
     It can also resolve all triggered groups with the pseudo-group `ALL_GROUPS`:
     `resolve: [{"monitor_id": "ALL_GROUPS"}]`
+
