@@ -7,11 +7,4 @@ options = {
 
 initialize(**options)
 
-# Search by `host` facet.
-api.Infrastructure.search(q="hosts:database")
-
-# Search by `metric` facet.
 api.Infrastructure.search(q="metrics:system")
-
-# Search all facets.
-api.Infrastructure.search(q="test")

@@ -1,7 +1,7 @@
 ---
 title: Unmute a host
 type: apicontent
-order: 13.2
+order: 13.4
 external_redirect: /api/#unmute-a-host
 ---
 
