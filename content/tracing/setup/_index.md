@@ -73,21 +73,44 @@ apm_config:
 {{% table responsive="true" %}}
 | File setting            | Environment variable | Description                                                                                                                                                      |
 |------------------------------|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **main**                |                      |                                                                                                                                                                  |
 | `apm_enabled`           | `DD_APM_ENABLED`     | The Datadog Agent accepts trace metrics when the value is set to `true`. The default value is `true`.                                                            |
-| **trace.sampler**       |                      |                                                                                                                                                                  |
 | `extra_sample_rate`     | -                    | Use this setting to adjust the trace sample rate. The value should be a float between `0` (no sampling) and `1` (normal sampling). The default value is `1`. |
 | `max_traces_per_second` | -                    | The maximum number of traces to sample per second. To disable the limit (*not recommended*), set to `0`. The default value is `10`.                              |
-| **trace.receiver**      |                      |                                                                                                                                                                  |
 | `receiver_port`         | `DD_RECEIVER_PORT`   | The port that the Datadog Agent's trace receiver should listen on. The default value is `8126`.                                                                  |
 | `connection_limit`      | -                    | The number of unique client connections to allow during one 30 second lease period. The default value is `2000`.                                                 |
-| **trace.ignore**        |                      |                                                                                                                                                                  |
 | `resource`              | `DD_IGNORE_RESOURCE` | A blacklist of regular expressions to filter out Traces by their resource name.                                                                                  |
+| `replace_tags`          |                      | A list of tag replacement rules. See the [Scrubbing sensitive information](#scrubbing-sensitive-information) section.                                            |
 {{% /table %}}
 
-For more information about the Datadog Agent, see the [dedicated doc page][18] or refer to the [`datadog.conf.example` file][19].
+For more information about the Datadog Agent, see the [dedicated doc page][18] or refer to the [`datadog.yaml` templates][19].
 
 [Reference the dedicated documentation to setup tracing with Docker][5].
+
+## Scrubbing sensitive information
+
+To scrub sensitive data from your span's tags, use the `replace_tags` setting. It is a list containing one or more groups of parameters that describe how to perform replacements of sensitive data within your tags. These parameters are:
+
+* `name`: The key of the tag to replace. To match all tags, use `*`. To match the resource, use `resource.name`.
+* `pattern`: The regexp pattern to match against.
+* `repl`: The replacement string.
+
+For example:
+
+```
+apm_config:
+  replace_tags:
+    # Replace all numbers following the `token/` string in the tag "http.url" with "?":
+    - name: "http.url"
+      pattern: "token/(.*)"
+      repl: "?"
+    # Replace all the occurrences of "foo" in any tag with "bar":
+    - name: "*"
+      pattern: "foo"
+      repl: "bar"
+    # Remove all "error.stack" tag's value.
+    - name: "error.stack"
+      pattern: "(?s).*"
+```
 
 ## Further Reading
 
@@ -111,4 +134,4 @@ For more information about the Datadog Agent, see the [dedicated doc page][18] o
 [16]: https://app.datadoghq.com/apm/home?env=
 [17]: /tracing/visualization
 [18]: /agent/
-[19]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
+[19]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
