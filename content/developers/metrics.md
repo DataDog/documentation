@@ -56,9 +56,9 @@ Datadog accepts metrics submitted from a variety of sources, and as a result the
 
 | Submission Source | Submission Method (python) | Submission Type | Datadog In-App Type |
 |-------------------|-------------------|-----------------|--------------|
-| [API][3] | `api.Metric.send(...)` | gauge | gauge |
-| [API][3] | `api.Metric.send(...)` | count | count |
-| [API][3] | `api.Metric.send(...)` | rate | rate |
+| [API][3] | `api.Metric.send(type="gauge", ...)` | gauge | gauge |
+| [API][3] | `api.Metric.send(type="count", ...)` | count | count |
+| [API][3] | `api.Metric.send(type="rate", ...)` | rate | rate |
 | [DogStatsD][1] | `dog.gauge(...)` | gauge | gauge |
 | [DogStatsD][1] | `dog.increment(...)` | counter | rate |
 | [DogStatsD][1] | `dog.histogram(...)` | histogram | gauge, rate |
