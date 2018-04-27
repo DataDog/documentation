@@ -88,12 +88,12 @@ For more information about the Datadog Agent, see the [dedicated doc page][18] o
 
 ## Scrubbing sensitive information
 
-To scrub sensitive data from your span's tags, use the `replace_tags` parameter. It is a list containing one or more
-options that describe how to perform replacements of sensitive data within your tags. These options are:
+To scrub sensitive data from your span's tags, use the `replace_tags` setting. It is a list containing one or more
+group of parameters that describe how to perform replacements of sensitive data within your tags. These parameters are:
 
-* `name`: the key of the tag to replace. To match all tags, use `*`. To match the resource, use `resource.name`.
-* `pattern`: a regexp pattern to match against.
-* `repl`: the replacement string.
+* `name`: The key of the tag to replace. To match all tags, use `*`. To match the resource, use `resource.name`.
+* `pattern`: The regexp pattern to match against.
+* `repl`: The replacement string.
 
 For example:
 
