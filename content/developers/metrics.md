@@ -46,7 +46,7 @@ In the Datadog web application there are 3 metric types:
 
 * [GAUGE](/developers/metrics/#gauges)
 * [RATE](/developers/metrics/#rates)
-* [COUNT](/developers/metrics/#count) 
+* [COUNT](/developers/metrics/#count)
 * COUNTER (now deprecated)
 
 A metric's type is stored as metrics metadata and is used to determine how a metric is interpreted throughout the application by determining default time aggregation function and `as_rate()`/`as_count()` behavior. The `as_count()` and `as_rate()` modifiers behave differently for different Web Application metric types.
@@ -57,6 +57,8 @@ Datadog accepts metrics submitted from a variety of sources, and as a result the
 | Submission Source | Submission Method (python) | Submission Type | Datadog In-App Type |
 |-------------------|-------------------|-----------------|--------------|
 | [API][3] | `api.Metric.send(...)` | gauge | gauge |
+| [API][3] | `api.Metric.send(...)` | count | count |
+| [API][3] | `api.Metric.send(...)` | rate | rate |
 | [DogStatsD][1] | `dog.gauge(...)` | gauge | gauge |
 | [DogStatsD][1] | `dog.increment(...)` | counter | rate |
 | [DogStatsD][1] | `dog.histogram(...)` | histogram | gauge, rate |
