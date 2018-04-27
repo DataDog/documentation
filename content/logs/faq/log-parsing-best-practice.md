@@ -26,8 +26,8 @@ In this article, we walk through parsing a log from the Datadog Agent's collecto
     {{< img src="logs/faq/parsing_best_practice_1.png" alt="parsing_best_practice_1" responsive="true" popup="true">}}
     It is possible to test your parsing rule on a sample log. As it is very helpful when you first write the rule, it might be very important in the future when coming back to the parser to investigate an issue or support a new log format.
 
-2. **Parse one attribute at the time thanks to the star trick.**:  
-    We do not expect you to write a parsing rule for the full log on the first draft. To make sure you check your rule one attribute at a time use a .* at the end of the rule. This matches anything that would follow the end of your rule.
+2. **Parse one attribute at a time thanks to the star trick**:  
+    We do not expect you to write a parsing rule for the full log on the first draft. To make sure you check your rule one attribute at a time use a `.*` at the end of the rule. This matches anything that would follow the end of your rule.
     For example here, we first want to parse the log date, no matter what is next so we create the rule:
     {{< img src="logs/faq/parsing_best_practice_2.png" alt="parsing_best_practice_2" responsive="true" popup="true">}}
     So we know the date is correctly parsed. We can now move on to the next attribute, the severity.
@@ -43,6 +43,7 @@ In this article, we walk through parsing a log from the Datadog Agent's collecto
     * data: matches everything (equivalent to .*)
     * word: matches all coming alphanumeric characters.
     * integer
+    
     Most of the rules can be written with those 4 matchers. You can see here the full list of available matchers.
 
 4. **KeyValue**:
