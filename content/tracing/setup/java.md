@@ -234,8 +234,8 @@ Current Priority Values (more may be added in the future):
 
 Manually set trace priority:
 ```java
-import datadog.opentracing.DDSpan;
 import datadog.trace.api.Trace;
+import datadog.trace.api.interceptor.MutableSpan;
 import datadog.trace.common.sampling.PrioritySampling;
 import io.opentracing.util.GlobalTracer;
 
@@ -243,7 +243,7 @@ public class MyClass {
     @Trace
     public static void myMethod() {
         // grab the active span out of the traced method
-        DDSpan ddspan = (DDSpan) GlobalTracer.get().activeSpan();
+        MutableSpan ddspan = (MutableSpan) GlobalTracer.get().activeSpan();
         // ask the sampler to keep the current trace
         ddspan.setSamplingPriority(PrioritySampling.USER_KEEP);
         // method impl follows
@@ -323,7 +323,10 @@ Don't see your desired datastores? We're continually adding additional support, 
 
 | Instrumentation      | Versions           | JVM Arg to enable |
 |:-------------|:-------------|:-------------|
-| Jax RS Client | 1.11.0+ | -Ddd.integration.jax-rs.enabled=true |
+| Jax RS Client | 1.11.0+ | `-Ddd.integration.jax-rs.enabled=true` |
+| Play | 2.4-2.6 | `-Ddd.integration.java_concurrent.enabled=true -Ddd.integration.play.enabled=true` |
+| Ratpack | 1.4.0+ | `-Ddd.integration.ratpack.enabled=true` |
+| Spark Java | 2.4+ | `-Ddd.integration.sparkjava.enabled=true -Ddd.integration.jetty.enabled=true` |
 
 ## Further Reading
 
