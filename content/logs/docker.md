@@ -31,18 +31,24 @@ You can then choose to collect all the logs from all your environment container 
 
 Install the [latest version of the Agent 6][1] on your host.
 
-The Agent can both collect logs from [files on the host][2] or from [container stdout/stderr](#configuration-file-example). For this you need to update or create a new .yaml configuration file in the Agent's `/conf.d` directory as explained in the provided links.
+The Agent can both collect logs from [files on the host][2] or from [container stdout/stderr](#configuration-file-example).
+
+To collect logs from all your container without filtering by image or label add the following at the end of `docker.d/conf.yaml` in your agent's `conf.d` directory:
+
+```
+logs:
+    - type: docker
+      service: docker
+```
+**Important note**: Integration pipelines and processors will not be installed automatically as the source tag is not set. The setup with integrations is described below and it automatically installs integration pipelines that parse your logs and extract all the relevant information from them.
 
 ### Option 2: Container installation
 
 As explained above, the Agent also has a [containerized][3] installation.
 
-First let’s create two directories on the host that we will later mount on the containerized Agent:
+First let’s create one directories on the host that we will later mount on the containerized Agent:
 
 - `/opt/datadog-agent/run`: to make sure we do not lose any logs from containers during restarts or network issues we store on the host the last line that was collected for each container in this directory
-
-- ` /opt/datadog-agent/conf.d`: this is where you will provide your integration instructions. Any configuration file added there will automatically be picked up by the containerized Agent when restarted.
-For more information about this check [here][4]
 
 To run a Docker container which embeds the Datadog Agent to monitor your host use the following command:
 
@@ -55,7 +61,6 @@ docker run -d --name datadog-agent \
            -v /proc/:/host/proc/:ro \
            -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw \
            -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-           -v /opt/datadog-agent/conf.d:/conf.d:ro \
            datadog/agent:latest
 ```
 
@@ -70,47 +75,79 @@ The command related to log collection are the following:
 * `-e DD_LOGS_ENABLED=true`: this parameter enables the log collection when set to true. The Agent now looks for log instructions in configuration files.
 * `-e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true`: this parameter add a log configuration that enabled log collection for all containers (see `Option 1` below) 
 * `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw`: mount the directory we created to store pointer on each container logs to make sure we do not lose any.
-* `-v /opt/datadog-agent/conf.d:/conf.d:ro`: mount the configuration directory we previously created to the container
 
 ### Activate Log Collection
 
-#### Option 1: Collect all container logs without using integrations
+#### Option 1: Configuration file
 
-Using `-e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true` when running the containerized Datadog Agent collects logs from all your containers without filtering by container image or container label.
-You can also add the following at the end of `docker.d/conf.yaml` in your Agent's `conf.d` directory to achieve the same goal:
+To start using integrations, the attribute `source` needs to be set in order to identify the log source for each container.
+
+For containerized installation, let's first create the configuration directory on the host:
+
+- ` /opt/datadog-agent/conf.d`: this is where you will provide your integration instructions. Any configuration file added there will automatically be picked up by the containerized Agent when restarted.
+For more information about this check [here][4]
+
+Then mount the directory by adding `-v /opt/datadog-agent/conf.d:/conf.d:ro` in the run command of the containerized agent.
+
+To set the source for a given container filtered by image or label or name, you need to update the log section in an integration or custom .yaml file in your agent's `conf.d` directory or the directory we just created for containerized installation.
 
 ```yaml
+#Log section
 logs:
-    - type: docker
-      service: docker
+
+    # - type : (mandatory) type of log input source (tcp / udp / file / docker)
+    #   port / path : (mandatory) Set port if type is tcp or udp. Set path if type is file
+    #   service : (mandatory) name of the service owning the log
+    #   source : (mandatory) attribute that defines which integration is sending the logs
+    #   sourcecategory : (optional) Multiple value attribute. Can be used to refine the source attribtue
+    #   tags: (optional) add tags to each logs collected
+
+  - type: docker
+    image: <IMAGE_NAME>    #or label: <MY_LABEL> or name: <CONTAINER_NAME>
+    source: <SOURCE>
+    sourcecategory: <SOURCE_CATEGORY>
+    service: <SERVICE>
 ```
-
-*Important note*: Integration pipelines and processors will not be installed automatically as the source tag is not set. Use option 2 to automatically have integration pipelines that parse your logs and extract all the relevant information from them.
-
-#### Option 2: Use Integration
-
-Now that the Agent is ready to collect logs, you need to define which containers you want to monitor.
-To start collecting logs for a given container filtered by container image or container label, you need to update the log section in an integration or custom .yaml file. Autodiscovery is not supported yet for log collection configuration.
 
 When filtering on the container image, both exact container image name or short names are supported.
-Suppose you have one container running `library/httpd:latest` and another running `yourusername/httpd:v2`, filtering on `image: httpd` would collects logs from both.
+Suppose you have one container running `library/httpd:latest` the following filtering match this image name:
 
-Add a new yaml file in the `conf.d` directory (should be `/opt/datadog-agent/conf.d` on the host if you followed above instructions) with the following parameters:
-
-```yaml
-init_config:
-instances:
-
-##Log section
-
-logs:
-   - type: docker
-     image: my_container_image_short_name    #or label: mycontainerlabel
-     service: my_application_name
-     source: myintegration #tells Datadog what integration it is
-```
+* - `image: httpd`
+* - `image: library/httpd`
+* - `image: httpd:latest`
+* - `image: library/httpd:latest`
 
 For more examples of configuration files or Agent capabilities (such as filtering, redacting, multiline, …) read [the advanced log collection functions][7].
+
+#### Option 2: Autodiscovery
+
+Since version 6.2 of the Datadog Agent, you can configure log collection in the container labels.
+
+Autodiscovery expects labels to look like these examples, depending on the file type:
+
+* - Dockerfile: `LABEL "com.datadoghq.ad.logs"='[<LOGS_CONFIG>]'`
+* - docker-compose.yaml: 
+```
+labels:
+  com.datadoghq.ad.logs: '[<LOGS_CONFIG>]'
+``` 
+* - run command: `-l com.datadoghq.ad.logs='[<LOGS_CONFIG>]'`
+
+**Docker Example: NGINX Dockerfile**:
+
+The following Dockerfile launches an NGINX container with Autodiscovery enabled:
+```
+FROM nginx
+
+EXPOSE 8080
+COPY nginx.conf /etc/nginx/nginx.conf
+LABEL "com.datadoghq.ad.check_names"='["nginx"]'
+LABEL "com.datadoghq.ad.init_configs"='[{}]'
+LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%/nginx_status:%%port%%"}]'
+LABEL "com.datadoghq.ad.logs"='[{"source": "nginx", "service": "webapp"}]'
+```
+
+Check our [Autodiscovery Guide][8]for more information about autodiscovery setup and examples.
 
 ## Further Reading
 
@@ -123,3 +160,4 @@ For more examples of configuration files or Agent capabilities (such as filterin
 [5]: /agent/autodiscovery/
 [6]: https://hub.docker.com/r/datadog/agent/tags/
 [7]: /logs/#filter-logs
+[8]: https://docs.datadoghq.com/agent/autodiscovery/#template-source-docker-label-annotations
