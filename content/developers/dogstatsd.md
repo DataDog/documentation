@@ -10,8 +10,11 @@ further_reading:
   tag: "Documentation"
   text: Learn more about Metrics
 - link: "developers/libraries"
-  tag: "Docuementation"
-  text: Datadog-official and community contributed API and DogStatsD client libraries
+  tag: "Documentation"
+  text: Official and Community-contributed API and DogStatsD client libraries
+- link: "https://github.com/DataDog/dd-agent/blob/master/dogstatsd.py"
+  tag: "Github"
+  text: DogStatsD source code
 ---
 
 The easiest way to get your custom application metrics into Datadog is to send them to DogStatsD, a metrics aggregation service bundled with the Datadog Agent. DogStatsD implements the [StatsD][5] protocol and adds a few Datadog-specific extensions:
@@ -405,10 +408,7 @@ PS C:\vagrant> .\send-statsd.ps1 "_e{$($title.length),$($text.Length)}:$title|$t
 
 ## Further Reading
 
-{{< whatsnext  >}}
-    {{< nextlink href="developers/libraries/" tag="Documentation" >}}Find a DogStatsD client library to suit your needs.{{< /nextlink >}}
-    {{< nextlink href="https://github.com/DataDog/dd-agent/blob/master/dogstatsd.py" tag="Github" >}}DogStatsD source code{{< /nextlink >}}
-{{< /whatsnext >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-agent/pull/2104
 [2]: /libraries/
