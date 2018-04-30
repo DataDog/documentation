@@ -284,6 +284,8 @@ spec:
 
 Since version 5.17 of the Datadog Agent, you can store check templates in Docker labels. With Autodiscovery enabled, the Agent detects if it's running on Docker and automatically searches all labels for check templates; you don't need to configure a template source (i.e. via `SD_CONFIG_BACKEND`) as you do with key-value stores.
 
+Since version 6.2 of the Datadog Agent, you can store log collection configuration in the container labels as well. Follow our [Docker log collection guide](https://docs.datadoghq.com/logs/docker/) to learn more about the setup steps.
+
 Autodiscovery expects labels to look like these examples, depending on the file type:
 
 **Dockerfile**
@@ -291,6 +293,7 @@ Autodiscovery expects labels to look like these examples, depending on the file 
 LABEL "com.datadoghq.ad.check_names"='[<CHECK_NAME>]'
 LABEL "com.datadoghq.ad.init_configs"='[<INIT_CONFIG>]'
 LABEL "com.datadoghq.ad.instances"='[<INSTANCE_CONFIG>]'
+LABEL "com.datadoghq.ad.logs"='[<LOGS_CONFIG>]'
 ~~~
 
 **docker-compose.yaml**
@@ -299,11 +302,12 @@ labels:
   com.datadoghq.ad.check_names: '[<CHECK_NAME>]'
   com.datadoghq.ad.init_configs: '[<INIT_CONFIG>]'
   com.datadoghq.ad.instances: '[<INSTANCE_CONFIG>]'
+  com.datadoghq.ad.logs: '[<LOGS_CONFIG>]'
 ~~~
 
 **docker run command**
 ~~~
--l com.datadoghq.ad.check_names='[<CHECK_NAME>]' -l com.datadoghq.ad.init_configs='[<INIT_CONFIG>]' -l com.datadoghq.ad.instances='[<INSTANCE_CONFIG>]'
+-l com.datadoghq.ad.check_names='[<CHECK_NAME>]' -l com.datadoghq.ad.init_configs='[<INIT_CONFIG>]' -l com.datadoghq.ad.instances='[<INSTANCE_CONFIG>]' -l com.datadoghq.ad.logs='[<LOGS_CONFIG>]'
 ~~~
 
 #### Docker Example: NGINX Dockerfile
@@ -318,6 +322,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 LABEL "com.datadoghq.ad.check_names"='["nginx"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%/nginx_status:%%port%%"}]'
+LABEL "com.datadoghq.ad.logs"='[{"source": "nginx", "service": "webapp"}]'
 ~~~
 
 ## Reference
