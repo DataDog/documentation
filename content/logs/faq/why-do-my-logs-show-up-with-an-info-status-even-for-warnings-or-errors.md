@@ -21,7 +21,7 @@ However, this default `status` does not always reflect the actual value that mig
 ## Raw logs
 ### Extract the status value with a parser
 
-While writing a parsing rule for your logs, you need to extract the timestamp in a specific attribute.  
+While writing a parsing rule for your logs, you need to extract the status in a specific attribute.  
 
 For the above log, we would use the following rule with the `word()` [matcher][1] to extract the date and pass it into a custom `log_status` attribute:
 
