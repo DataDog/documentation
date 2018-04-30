@@ -51,7 +51,7 @@ You can also [alert][6] on any service level metric. Read more about monitoring 
 
 ## Resources
 
-**A Resource is particular action for a service**.  
+**A Resource is a particular action for a service**.  
 
 * **For a web application**: some examples might be a canonical URL, such as `/user/home` or a handler function like `web.user.home` (often referred to as “routes” in MVC frameworks).
 * **For a SQL database**: a resource is be the query itself, such as `SELECT * FROM users WHERE id = ?`.
