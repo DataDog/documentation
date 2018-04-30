@@ -1,7 +1,7 @@
 ---
 title: Mettre en sourdine un serveur
 type: apicode
-order: 13.1
+order: 13.3
 external_redirect: /api/#mute-a-host
 ---
 
