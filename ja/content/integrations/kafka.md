@@ -29,7 +29,6 @@ JMXインテグレーションには、取得メトリクス数の上限値と�
         #        #trust_store_path: /path/to/trustStore.jks # Optional, should be set if ssl is enabled
         #        #trust_store_password: password
 
-
         init_config:
             is_jmx: true
 

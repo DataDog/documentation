@@ -11,6 +11,4 @@ If you'd like to remove the "N/A" tagged metrics, we can enable a feature that f
 
 [Contact support][1] to enable filtering and check if any of your monitors is affected.
 
-
-
 [1]: /help

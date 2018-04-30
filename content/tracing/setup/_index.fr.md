@@ -23,7 +23,7 @@ further_reading:
     tag: Documentation
     text: Instrumentation avec Ruby
 ---
-Cette documentation est valable uniquement avec l'Agent v6, pour savoir comment implémenter l'APM avec l'agent v5, [reportez-vous à la documentation APM avec l'agent v5  dédiée][1].
+Cette documentation est valable uniquement avec l'Agent v6, pour savoir comment implémenter l'APM avec l'agent v5, [reportez-vous à la documentation APM avec l'Agent v5  dédiée][1].
 
 ## Processus d'implémentation
 
@@ -32,14 +32,14 @@ Avec notre monitoring d'infrastructure, les métriques sont envoyées à l'agent
 Pour commencer à Tracer votre application:
 
 1. **Installer l'Agent Datadog**:
-  Installez et configurez la dernière version de [l'Agent Datadog ][3]. Pour plus d'informations, reportez-vous au [guide de démarrage dédié][4].
+  Installez et configurez la dernière version de [l'Agent Datadog][3]. Pour plus d'informations, reportez-vous au [guide de démarrage dédié][4].
 
 2. **Installer l'Agent Trace**:  
 
   * Sur **Linux**, **Windows** et **[Docker][5]** l'agent de Traces est packagé avec l'agent Datadog standard et aucune configuration supplémentaire n'est nécessaire.
 
   * Sur **macOS**, installez et exécutez [Agent de trace][6] en plus de l'Agent Datadog.
-  Consulter la documentation pour l'Agent de trace [macOS][7] et [Windows][8]
+  Consulter la documentation pour l'Agent de trace [macOS][7] et [Windows][8].
 
   * Sur Heroku, déployez l'agent de trace Datadog via le [Datadog Heroku Buildpack][9].
 
@@ -61,7 +61,7 @@ Pour commencer à Tracer votre application:
 
 ## Configuration de l'Agent
 
-L'agent APM (également appelé _trace agent_) est livré par défaut avec
+L'Agent APM (également appelé _trace agent_) est livré par défaut avec
 Agent v6 sur les plateformes Linux, MacOS et Windows. L'agent APM est activé par défaut sur Linux. Pour activer l'APM  sur d'autres plateformes ou la désactiver sur Linux, mettez à jour la variable `apm_config` dans votre fichier `datadog.yaml`:
 
 ```
@@ -84,7 +84,7 @@ apm_config:
 | `resource`              | `DD_IGNORE_RESOURCE` | Une liste noire d'expressions régulières pour filtrer les traces par leur nom de ressource.                                                                                |
 {{% /table %}}
 
-Pour plus d'informations sur l'Agent Datadog , consultez la [page de documentation dédiée][18] ou reportez-vous au fichier [`datadog.conf.example`][19].
+For more information about the Datadog Agent, see the [dedicated doc page][18] or refer to the [`datadog.conf.example` file][19].
 
 [Reportez-vous à notre documentation sur l'implémentation du tracing avec Docker][5].
 

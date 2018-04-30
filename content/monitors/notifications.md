@@ -33,7 +33,6 @@ right people get notified so the problem can be resolved as soon as possible.
 
 3. Optionally enable **monitor renotification**. This option is useful to remind your team that a problem is not solved until the monitor is marked as resolved. If enabled, you can configure an escalation message to be sent anytime the monitor renotifies. The original message is included as well.
 
-
 ## Say what's happening
 ### Message template variables
 
@@ -64,7 +63,7 @@ and the corresponding event notification:
 * Template variable content is escaped by default. If your variable
 contains JSON or code that you would NOT like to be escaped, use triple braces instead of double braces (e.g. `{{{event.text}}}`).
 
-* See a complete list of contextual template variables available to your monitor by clicking the "Use message template variables" link or in the list of suggestions that appears when you type `{{` to begin a template variable name.
+* See a complete list of contextual template variables available to your monitor by clicking the **Use message template variables** link or in the list of suggestions that appears when you type `{{` to begin a template variable name. The variables available are different depending on the combination of metric, tags, and other features of the monitor you are working on.
 
 * The tag template variables can also be used in the monitor titles (names), but the variables are only populated in the text of Datadog child events (not the parent, which displays an aggregation summary). 
 
@@ -282,7 +281,6 @@ For example, if the rendered variable is setup as a channel in the Slack integra
 ## Further Reading 
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /monitors
 [2]: http://daringfireball.net/projects/markdown/syntax

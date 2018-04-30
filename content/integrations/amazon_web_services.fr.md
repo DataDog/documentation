@@ -292,6 +292,7 @@ N'importe quel service AWS qui génère des journaux d'évènements et leur plac
 |[API Gateway](/integrations/amazon_api_gateway)| [Activer les logs de AWS API Gateway:](/integrations/amazon_api_gateway/#log-collection)|La récupération des journaux d'évènements [manuelle](/integrations/amazon_api_gateway/#send-logs-to-datadog) |
 |[Cloudfront](/integrations/amazon_cloudfront)| [Activez le journal d'évènements de AWS Cloudfront](/integrations/amazon_cloudfront/#enable-cloudfront-logging)|Collecte de log [manuelle](/integrations/amazon_cloudfront/#send-logs-to-datadog)  |
 |[Cloudtrail](/integrations/amazon_cloudtrail)| [Activez le journal d'évènements de AWS Cloudtrail](/integrations/amazon_cloudtrail/#enable-cloudtrail-logging)|Collecte de log [manuelle](/integrations/amazon_cloudtrail/#send-logs-to-datadog) |
+|[DynamoDB](/integrations/amazon_dynamodb)| [Activez le journal d'évènements de AWS DynamoDB](/integrations/amazon_dynamodb/#enable-dynamodb-logging)|Collecte de log [manuelle](/integrations/amazon_dynamodb/#send-logs-to-datadog) |
 |[EC2](/integrations/amazon_ec2)|`-`| Utilisez [l'Agent Datadog](/logs) ou un autre [expéditeur](/logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers) des journaux d'évènements afin d'envoyer vos journaux d'évènements vers Datadog|
 |[ECS](/integrations/amazon_ecs)|`-`|[Utilisez l'agent Docker afin de récupérer vos journaux d'évènements](/integrations/amazon_ecs/#log-collection)|
 | [Elastic Load Balancing (ELB)](/integrations/amazon_elb) | [Activez le journal d'évènements de AWS ELB](/integrations/amazon_elb/#enable-aws-elb-logging) |Collecte de log [manuelle](/integrations/amazon_elb/#manual-installation-steps) et [automatique](#automatic-log-collection) |
@@ -372,7 +373,7 @@ Par exemple, n'oubliez pas de définir le type d'évènement correct pour les co
 {{< get-metrics-from-git "amazon_web_services" >}}
 
 
-### Evénements
+### Évènements
 
 Les intégrations Datadog-AWS enverrez tous vos évènements CloudWatch dans votre [Event stream](https://docs.datadoghq.com/graphing/event_stream/)
 

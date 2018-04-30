@@ -20,12 +20,11 @@ further_reading:
 Cette page présente les fonctionnalités de base de l'agent Datadog.
 Si vous n'avez pas encore installé l'Agent, les instructions d'installation peuvent être trouvées [sur la page d'intégration de l'agent Datadog][1].
 
-Le processus de mise à niveau à partir de la version précédente de l'agent consiste à réexécuter l'installation depuis le début.
-
+Le processus de mise à niveau à partir de la version précédente de l'Agent consiste à réexécuter l'installation depuis le début.
 
 ## Commandes
 
-L'Agent Datadog possède quelques commandes. Seules les commandes _lifecycle_ (ie `start`/`stop`/`restart` /`status` sur le service Agent) doivent être exécutées avec `sudo service` /` sudo initctl` / `sudo systemctl`, toutes les autres commandes doivent être exécutées avec la commande `datadog-agent`.
+L'Agent Datadog possède quelques commandes. Seules les commandes _lifecycle_ (ie `start`/`stop`/`restart` /`status` sur le service Agent) doivent être exécutées avec `sudo service` /` sudo systemctl`, toutes les autres commandes doivent être exécutées avec la commande `datadog-agent`.
 
 {{% table responsive="true" %}}
 | Agent v5                                  |  Agent v6                          | Notes
@@ -52,9 +51,9 @@ sudo service datadog-agent check [integration] check_rate
 
 **NB**: Si `service` n'est pas disponible sur votre système, utilisez:
 
-* pour les système basés sur `upstart`: `sudo start/stop/restart datadog-agent`
 * pour les systèmes basés sur `systemd` : `sudo systemctl start/stop/restart datadog-agent`
-* pour les système basés sur `initctl`: `sudo initctl start/stop/restart datadog-agent`
+
+[En apprendre plus sur les commandes pour l'Agent][4]
 
 ## Configuration
 
@@ -69,7 +68,6 @@ Fichiers de configuration pour [les intégrations][2]:
 | Agent v5                                  |  Agent v6                          |
 |:-----|:----|
 |`/etc/dd-agent/conf.d/`|`/etc/datadog-agent/conf.d/`|
-
 
 ## Mettre à niveau vers l'agent v6
 
@@ -128,3 +126,4 @@ Si vous rencontrez toujours des problèmes, [notre équipe de support][3] se fer
 [1]: https://app.datadoghq.com/account/settings#agent/suse
 [2]: /integrations
 [3]: /help
+[4]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands

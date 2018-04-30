@@ -19,7 +19,7 @@ further_reading:
   text: Comprendre comment lire une trace Datadog
 ---
 
-Toutes les traces collectées par vos agents sont répertoriées dans la [page trace list][1]:
+Toutes les traces collectées par vos Agents sont répertoriées dans la [page trace list][1]:
 
 {{< img src="tracing/traces/trace_search.png" alt="Trace search UI" responsive="true" popup="true">}}
 
@@ -34,9 +34,8 @@ Sélectionnez l'horizon temporel que vous souhaitez afficher avec le sélecteur 
 Filtrer vos traces en fonction de:
 
 * Leur [environnement][2]
-* Leur [nom de service][3]
+* Leur [service name][3]
 * Leur durée
-
 
 [1]: https://app.datadoghq.com/apm/search
 [2]: /tracing/setup/environment

@@ -11,3 +11,4 @@ Ne peut être utilisé qu'avec des clés d'application disponibles pour les admi
 ##### ARGUMENTS
 * **`id`** [*obligatoire*]:  
     Le handle de l'utilisateur.
+

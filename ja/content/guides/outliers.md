@@ -16,7 +16,6 @@ Outlier Detectionはアルゴリズムベースの異常検出機能であり、
 
 {{< img src="outliers/outliers-metric-alert.png" >}}
 
-
 <!--
 ## How to Use Outlier Detection on Your Data
 
@@ -31,10 +30,8 @@ You can use this function to display and alert on outliers in your data. To try 
 
 Outlier Detectionはダッシュボード上の時系列データのグラフとして可視化することも、アラートとして設定することもできます。これを適用するためには、ホスト(あるいはアベイラビリティゾーン、パーティションなど)のグループから取得され、そのグループのメンバーがある程度均一な挙動をしているメトリクスを選ぶ必要があります。そして、この関数が機能するためには少なくとも3つ以上のメンバーを含むグループであることが必要です。次から、そのグループでOutlier Detectionを利用する2つの方法について説明します。
 
-
 <!--
 ### Show Outliers in Dashboards or Screenboards
-
 
 Here's a graph of gunicorn requests by host with outlier detection enabled:
 
@@ -43,11 +40,9 @@ Here's a graph of gunicorn requests by host with outlier detection enabled:
 
 ### Outlier Detectionをダッシュボードで可視化する
 
-
 下記はOutlier Detectionを適用したメトリクス、gunicornのホストごとのリクエスト数のグラフ表示例です:
 
 {{< img src="outliers/outliers-graph-dbscan-gunicorn.png" >}}
-
 
 <!--
 You can see that one of the series is an outlier: it is handling significantly lower traffic than the others for the time window in question.
@@ -67,7 +62,6 @@ Outlier Detectionをグラフ表示に適用するには、対象とするグル
 
 {{< img src="outliers/outliers-dash-choose-metrics-updated.png" >}}
 
-
 <!--
 To enable outlier detection, click on the + icon on the right side of the metrics line. Choose **Algorithms** from the function categories, then pick one of the four outlier algorithms.
 
@@ -86,17 +80,14 @@ This will add the outliers function to your graph, and you’ll see any outliers
 
 {{< img src="outliers/outliers-algorithm-annotated-newer.png" >}}
 
-
 <!--
 There are several outlier detection algorithms you can choose. The default algorithm (DBSCAN) and parameter values should work for most scenarios. However, if you see too many or too few outliers identified, you can tune the algorithm or try an alternate algorithm. To learn more, see the "Outlier Algorithms and Parameters" section below.
 -->
 
 Outlier Detectionのアルゴリズムは選択することができます。そして、デフォルトのアルゴリズム(DBSCAN)とそのパラメータの指定によって多くのシナリオでOutlier Detectionを有効に機能させることができるでしょう。しかし、もし検出される外れ値(Outlier)が多すぎたり少なすぎる場合には、アルゴリズムの調整や他のアルゴリズムへの変更ができます。詳しくは、後で述べる "Outlier Detectionのアルゴリズムとパラメータ" セクションを参照して下さい。
 
-
 <!--
 ### Alert on Outliers
-
 
 You can also define a monitor to alert when an outlier is detected in an important group.
 
@@ -111,7 +102,6 @@ Navigate to the [New Monitor](https://app.datadoghq.com/monitors#/create) page a
 
 ### 外れ値データ(Outlier)をアラートする
 
-
 監視すべき重要なグループにおいて外れ値データ(Outlier)を検出したときにアラートするMonitorを設定します。
 
 {{< img src="outliers/outliers-alert-snapshot.png" >}}
@@ -122,7 +112,6 @@ Navigate to the [New Monitor](https://app.datadoghq.com/monitors#/create) page a
 [New Monitor](https://app.datadoghq.com/monitors#/create) ページに進んだら、**Outlier** をクリックし、他のメトリクスを対象にしたMonitor同様、**Define the metric** セクションにてメトリクスとそのメトリクスを監視する範囲(スコープ)を選択します。
 
 {{< img src="outliers/outliers-new-monitor-define-metric.png" >}}
-
 
 <!--
 In the alert conditions, select the grouping and timeframe. Then select an algorithm and parameter values to use for outlier detection.
@@ -142,19 +131,15 @@ To ensure that your alert is properly calibrated, you can set the time window at
 
 {{< img src="outliers/outliers-new-monitor-graph-calibrate.png" >}}
 
-
 <!--
 ## Reference: Outlier Algorithms and Parameters
-
 
 There are two different outlier detection algorithms you can use on your data: DBSCAN and Median Absolute Deviation (MAD). We recommend starting with the default algorithm, DBSCAN. If you have trouble detecting the right outliers, you can adjust the parameters to DBSCAN or try the alternate algorithm, MAD. Explanation of each algorithm and its parameters follows.
 -->
 
 ## レファレンス Outlier Detection のアルゴリズムとパラメータ
 
-
 Outlier Detection では、DBSCAN と Median Absolute Deviation (MAD)の2つのアルゴリズムを使用することができます。まずは、デフォルトのアルゴリズムであるDBSCANから始めることをおすすめします。そして、もし上手く外れ値(Outlier)の検出ができないような場合には、そのパラメータを調整するか、もう一方のアルゴリズムであるMADを試してみてください。以下で、それぞれのアルゴリズムとそのパラメータについて解説します。
-
 
 <!--
 ### DBSCAN/ScaledDBSCAN
@@ -176,7 +161,6 @@ Datadogでは幅広く使われている[DBSCAN](https://en.wikipedia.org/wiki/D
 
 {{< img src="outliers/outliers-dbscan-2d.png" >}}
 
-
 <!--
 #### Parameters
 
@@ -190,7 +174,6 @@ We set the initial distance threshold as follows. We create a new median time se
 Datadogでは外れ値(Outlier)を検出するために、DBSCANを簡略化した形式で使用しています。それぞれのホストはサイズd内の1ポイントと考えます。ここで、"d"とは時系列データの要素数です。いずれのポイントも密集していると見なすことができ、そしていずれもポイントも大きなクラスタに属しなければ外れ値(Outlier)と見なされ得るということです。
 
 距離の閾値の初期値については、以下のように設定しています。まず、各時刻における時系列データの中央値をとった、"中央値時系列データ" を新たに作成します。そして、 その"中央値時系列データ"と、各ホストとの(ユークリッド)距離を算出します。閾値は、この算出された距離の中央値を正規化した定数で乗じたものになります。
-
 
 <!--
 The only parameter we take is `tolerance`, the constant by which the initial threshold is multiplied to yield DBSCAN’s distance parameter 𝜀. Here is DBSCAN with a tolerance of 3.0 in action on a pool of Cassandra workers:
@@ -241,7 +224,6 @@ For a given set of data D = {d<sub>1</sub>, ..., d<sub>n</sub>}, the deviations 
 
 あるデータセット D = {d<sub>1</sub>, ..., d<sub>n</sub>} について、それぞれの偏差は d<sub>i</sub> と 中央値(D) の差になります。中央絶対偏差(MAD)は、このそれぞれの偏差の絶対値の中央値となります。例えば、データセット D = {1, 2, 3, 4, 5, 6, 100} について、中央値は4、それぞれの偏差は {-3, -2, -1, 0, 1, 2, 96} となる場合、中央絶対偏差(MAD)は2となります。(これとは対照的に標準偏差は33.8となり、データセットのばらつきの影響を強く受けています)
 
-
 <!--
 #### Parameters
 
@@ -259,7 +241,6 @@ Datadogでは、データセットは各時系列ごと、それぞれの時系�
 そして特定の時系列データを外れ値(Outlier)とマークするために、2つめのパラメータである`pct` を使用します。もしある時系列データの`pct`%のデータポイントが外れ値(Outlier)だと判定された場合に、その時系列データ全体を外れ値(Outlier)とマークすることになります。次のグラフ表示は、中央絶対偏差(MAD)アルゴリズムで`tolerance` は3,`pct` は20(%)と指定した場合での、AWSアベイラビリティゾーン(AZ)ごとのシステムのロードアベレージを表示したものです。
 
 {{< img src="outliers/outliers-mad-az.png" >}}
-
 
 <!--
 The tolerance parameter should be tuned depending on the expected variability of the data. For example, if the data is generally within a small range of values, then this should be small. On the other hand, if points can vary greatly, then you want a higher scale so these variabilities do not trigger a false positive.

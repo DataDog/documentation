@@ -15,7 +15,6 @@ This flow utilizes the Trello REST POST card api endpoint to post the @notificat
 
 * Configure Webhook
 
-
 #### Getting the Keys
 
 To get the Trello App Key and Token, [navigate to Trello's relevant page][2]. If you are logged in, you should be able to see the [App key][3] immediately:

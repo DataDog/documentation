@@ -18,3 +18,4 @@ external_redirect: /api/#create-user
     *  **adm** (admin user),
     *  **ro** (read-only user).  
     *Note: Les utilisateurs ne peuvent être crées qu'avec des clés d'application disponibles pour les administrateurs.*
+

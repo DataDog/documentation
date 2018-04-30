@@ -1,14 +1,16 @@
 ---
 title: Account Management
 kind: documentation
+description: "Manage your Datadog account and organization"
 aliases:
     - /guides/billing
     - /account_management/settings
+
 ---
 
 ## Account settings
 
-The [account settings page][1] in Datadog allows you to control how you appear to others in your organization; switch or leave organizations; manage your notification preferences and more.
+The *[account settings][1]* page in Datadog allows you to control how you appear to others in your organization; switch or leave organizations; manage your notification preferences and more.
 
 ## Setting your profile
 
@@ -20,14 +22,14 @@ If you log in to Datadog using Google authentication, your email address is prov
 
 ## Managing your organizations
 
-The account settings page also lists all of the organizations you are associated with. Switch between these organizations from this page or by hovering over the account menu in the left-side navigation.  
+The *account settings* page also lists all of the organizations you are associated with. Switch between these organizations from this page or by hovering over the account menu in the left-side navigation.  
 
 **Note**: If you leave an organization, you will not be able to rejoin unless invited by an administrator in that organization.
 
 To join an existing organization, you must be invited by an administrator. To request an invite:
 
-1. Log out of Datadog by clicking the button on the [account settings page](https://app.datadoghq.com/account/profile).
-2. Visit the [new user sign up page][4] and click the "Join an existing team" link.
+1. Log out of Datadog by clicking the button on the [*account settings* page][12].
+2. Visit the [*new user sign up* page][4] and click the *Join an existing team* link.
 3. Enter the email address associated with your Datadog account, your name, and the email address of an administrator in the organization you wish to join.
 4. Click the "Request Invite" to submit the request. The organization administrator will receive a notification with instruction on how to add you.
 
@@ -45,8 +47,7 @@ If you have installed the [GitHub integration][10] to create events in Datadog, 
 
 ## Preferences
 
-You can set your timezone, desktop notification, and email notification preferences from the [Preferences tab within the account settings page][11].
-
+You can set your timezone, desktop notification, and email notification preferences from the [*Preferences* tab within the *account settings* page][11].
 
 [1]: https://app.datadoghq.com/account/profile
 [2]: https://gravatar.com/
@@ -59,3 +60,4 @@ You can set your timezone, desktop notification, and email notification preferen
 [9]: /account_management/org_settings
 [10]: https://docs.datadoghq.com/integrations/github/
 [11]: https://app.datadoghq.com/account/preferences
+[12]: https://app.datadoghq.com/account/profile

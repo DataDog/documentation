@@ -10,8 +10,6 @@ title: Datadog-AWS SQS Integration
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-
-
 {{< img src="integrations/awssqs/sqsdashboard.png" alt="SQS Dashboard" >}}
 
 ## Overview
@@ -28,7 +26,6 @@ If you haven't already, set up the [Amazon Web Services integration first](/inte
 ### Configuration
 
 In the Amazon Web Services integration tile, ensure that SQS is checked under metric collection.
-
 
 ## Data Collected
 ### Metrics

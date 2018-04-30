@@ -14,10 +14,7 @@ wistiaid: t7d17bw844
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-
-
 Datadog 101 shows you everything you need to know about using the Datadog platform. In this third video we show you how to use dashboards. We cover the following topics:
-
 
 * [Creating a timeboard](?wtime=40.5)
 * [Timeseries line graph](?wtime=64)
@@ -44,7 +41,6 @@ Datadog 101 shows you everything you need to know about using the Datadog platfo
 * [Other widgets](?wtime=641)
 * [Creating a public read-only version of a dashboard](?wtime=671)
 * [Templating](?wtime=689)
-
 
 For more information, be sure to check out these links talked about in the video:
 

@@ -11,4 +11,3 @@ Fetch an existing dashboard's definition.
 ##### Arguments
 *This end point takes no JSON arguments.*
 
-

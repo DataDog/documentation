@@ -93,7 +93,7 @@ kind: faq
  
 ## Kubernetes 
 
-* [Can I install the agent on my Kubernetes master node(s)][52]
+* [Can I install the Agent on my Kubernetes master node(s)][52]
 * [Client Authentication against the apiserver and kubelet][53]
 * [Gathering Kubernetes events][54]
 * [Why is the Kubernetes check failing with a ConnectTimeout error to port 10250?][55]
@@ -103,7 +103,7 @@ kind: faq
 * [Connection Issues with the SQL Server Integration][57]
 * [MySQL Localhost Error - Localhost VS 127.0.0.1][58]
 * [Can I use a named instance in the SQL Server integration?][59]
-* [Can I set up the dd-agent mysql check on my Google CloudSQL?][60]
+* [Can I set up the `dd-agent` mysql check on my Google CloudSQL?][60]
 * [How to collect metrics from custom MySQL queries][61]
 * [Can I collect SQL Server performance metrics beyond what is available in the sys.dm_os_performance_counters table? Try WMI][62]
 * [How can I collect more metrics from my SQL Server integration?][63]
@@ -111,7 +111,6 @@ kind: faq
 
 ## Network
 * [How to send TCP/UDP host metrics via the Datadog API ?][65]
-
 
 ## Postgres
 * [Postgres custom metric collection explained][66]
@@ -144,7 +143,6 @@ kind: faq
 * [Windows Status Based Check][75]
 * [How to monitor events from the Windows Event Logs][76]
 * [How to retrieve WMI metrics][77]
-
 
 [1]: /integrations/faq/what-standard-integrations-emit-custom-metrics
 [2]: /integrations/faq/using-events-for-service-checks-is-deprecated-in-favor-of-monitors

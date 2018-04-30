@@ -11,6 +11,9 @@ further_reading:
 - link: "logs/explore"
   tag: "Documentation"
   text: Learn how to explore your logs
+- link: "logs/graph"
+  tag: "Documentation"
+  text: "Perform analytics with Log Graphs"
 - link: "logs/faq/log-collection-troubleshooting-guide"
   tag: "FAQ"
   text: Log Collection Troubleshooting Guide
@@ -72,7 +75,7 @@ Check the content of the `your-appname-info.log` file to see that Winston alread
 {"color":"blue","level":"info","message":"Hello log with metas","timestamp":"2015-04-23T16:52:05.339Z"}
 ```
 
-## Configure your Datadog agent
+## Configure your Datadog Agent
 
 Create a `nodejs.d/conf.yaml` file in your `conf.d/` folder with the following content:
 

@@ -59,16 +59,16 @@ Before you go ahead and troubleshoot your parser, it might be interesting for yo
 
     But when we test with our log, it is not working. So let's start to remove attribute one by one from the end until we find the culprit. To do so, we add ```.*``` at the end of the rule and then we remove the attributes.
 
-    On the below image, we can see that the rule starts working once we have remove everything up to the user agent:
+    On the below image, we can see that the rule starts working once we have remove everything up to the user Agent:
     {{< img src="logs/faq/Troubleshootparsing.png" alt="Troubleshootparsing" responsive="true" popup="true">}}
     
 
-    This means that the issue is in the user agent attribute.
+    This means that the issue is in the user Agent attribute.
 
 4. Fix the issue
     Now that the culprit attribute is identified, let's look at it more closely.
 
-    The user agent we have in our log is: 
+    The user Agent we have in our log is: 
 
     * Mozilla/5.0 (Windows NT 5.1; rv:52.0) Gecko/20100101 Firefox/52.0.
 

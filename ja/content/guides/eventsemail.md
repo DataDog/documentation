@@ -35,7 +35,6 @@ the ability to customize the format of the email body being sent. -->
 
 ## 概要
 
-
 Datadogの監視下にアプリケーションやシステムを統合する場合には、いくつかの統合方法の選択肢があります。
 まず最初の選択肢は、Datadogが提供している[integration][integrations]を利用することです。
 これらのIntegrationを使うことによって、最小限の設定作業​で、多種多様なメトリクスやイベントの収集ができるようになります。
@@ -46,7 +45,6 @@ Datadog Agent のCheckをプログラミングしたくない場合には、更�
 システム又はアプリケーションにメールを送信させることで、Checkの代替わりをさせる選択肢です。
 メールによるイベント情報の送信には、アプリケーション内からメールを生成するための自由度により、次の２つの方法が選択できます。
 
-
 <!-- ## JSON-Formatted vs Plain Text {#json-vs-plain}
 
 If you have complete control over the email sent by the application to Datadog,
@@ -56,11 +54,9 @@ stream. Here are examples of each: -->
 
 ## JSON形式 vs 平文形式
 
-
 アプリケーションからDatadogに送信するメールを自由にコントロールできるなら、JSON形式でのメッセージ送信の設定をするとよいでしょう。この形式を使うことによって、イベントストリームに表示されるイベントに必要な情報の全てを送信することができるでしょう。
 
 それぞれの例を以下に紹介します:
-
 
 <!-- ### Plain Text
 
@@ -69,13 +65,11 @@ stream. Here are examples of each: -->
 In the source plain text email, you only have three fields you can control: sender
 email address, subject, and body.
 
-
 ![Plain Text Email](/images/plain-email.png)
 
 #### Datadog Event
 
 ![Plain Text Event](/images/plain-event.png)
-
 
 Note that the subject of the email becomes the title of the event and the body
 of the email becomes the body of the event. Although it looks like a tag appears
@@ -103,7 +97,6 @@ to take advantage of that to help identify the sending application. -->
 イベントのタイトルと本文の最後にタグが表示されるように見えますが、どちらの部分もDatadogではタグとしては扱われてはいません。
 メールの送信者は、イベント欄の一番下の部分に表示されますのでこの部分を有効に活用しアプリケーションの識別に利用するとよいでしょう。
 
-
 <!-- ### JSON
 
 #### Source Email
@@ -117,7 +110,6 @@ alert type,  date happened,  host, aggregation key, and source type name.
 #### Datadog Event
 
 {{< img src="guides/eventsemail/json-event.png" >}}
-
 
 In a JSON-formatted email, the subject of the email message is irrelevant as it
 will be replaced by the title in the JSON in the body of the email. All data that
@@ -163,7 +155,6 @@ JSON形式のメールでは、メールのタイトルは無視され、本文�
 
 JSON形式で利用できるキーの詳細は、[events API documentation][eventsapi]で確認することができます。
 
-
 <!-- ## Setting Up The Email Address {#setup-address}
 
 To set up the email, first log in to your Datadog account at
@@ -185,7 +176,6 @@ messages from the Format: dropdown, then click *Create API Email*.
 新しくメールアドレスを追加する場合は、**New API Email**のセクションで、送信するメールの形式をドロップダウンメニューで選択し、`Create API Email`をクリックします。
 
 {{< img src="guides/eventsemail/event_email_set.png" alt="JSON Event Email API">}}
-
 
 [integrations]: /ja/integrations
 [agentcheck]: /ja/guides/agent_checks

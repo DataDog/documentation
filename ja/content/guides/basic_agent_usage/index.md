@@ -60,7 +60,6 @@ overhead of each application if you don't want to run all parts (though we gener
 
 **Collector**, **DogStatsD**, **Forwarder** は、1つのスーパーバイザープロセスによって制御されています。このようにDatadog Agent のプロセスを要素単位で分割しているのは、不要な要素プロセスを停止することにより、Datadog Agent 全体の間接負荷(オーバーヘッド)を削減することができるようにしているためです。(但し一般的な用途では、要素毎のプロセスの停止はお勧めしません。)
 
-
 <!--
 ======================================================
 Agent Troubleshooting
@@ -84,7 +83,6 @@ If you encountered an issue during the Agent installation that prevented any ins
 Please let us know your OS and version, as well as how you are installing the Agent (and which agent version).
 Also, please include the errors you encountered along the way.
 
-
 <h4 id="issue_reporting">Issues getting the Agent reporting</h4>
 
 If you get the Agent installed but are not seeing any data in Datadog, you can troubleshoot in the following manner.
@@ -95,8 +93,6 @@ If not, you should also check the logs (location of the logs again depends on OS
 
 If not, please send both the full output of the info command and the logs as attachments to <a href="mailto:support@datadoghq.com?Subject=Agent%20issues" target="_top">support@datadoghq.com</a>.
 
-
-
 <h4 id="machine_time">Check your machine's time</h4>
 We have also seen a few cases where machines have their clock set further in the future or the past, which can sometimes cause problems with metric submission.
 To check for this, run:
@@ -106,7 +102,6 @@ To check for this, run:
 This will output the current system’s date, and then make a request to our endpoint and grab the date on our end.
 If these are more than a few minutes apart, you may want to look at the time settings on your server.
 </p>
-
 
 <h4 id="integrations">Issues getting integrations working</h4>
 
@@ -134,7 +129,6 @@ Here is a quick guide for troubleshooting getting integrations installed:
 インストールが完了し、基本的なメトリクスを確認するには、<a href="https://app.datadoghq.com/metric/explorer" target="_blank">Metrics Explorer</a> のページが最適です。
 
 問題が発生していることが疑われる場合は、info コマンドを実行し、Datadog Agentのログを確認してください。 info コマンドと各ログの場所は、OSによって異なります。詳細については、左側のナビゲーションからお使いのOSを選択し、**トラブルシューティング**の項目を参照してください。
-
 
 <h4 id="issue_installing">Datadog Agent のインストールに関わる問題</h4>
 

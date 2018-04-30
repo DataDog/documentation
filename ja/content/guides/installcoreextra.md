@@ -7,7 +7,6 @@ title: Installing Core & Extra Integrations
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-
 ## Overview
 Starting with version 5.12 of the Datadog Agent, we are moving integrations from the dd-agent repository on GitHub to the integrations-core and integrations-extras repositories. This move will allow us to have a method to distribute more community-developed integrations, as well as being able to update supported integrations out of band with the Agent. Note: these integrations are not designed for Windows operating systems.
 

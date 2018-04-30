@@ -21,15 +21,15 @@ Datadog Process Monitoring allows for real-time visibility of the most granular 
 
 ## Installation
 
-The following installation processes are for [agent v6 only][6], if you are still using Agent v5, [follow this specific installation process][7]
+The following installation processes are for [Agent v6 only][6], if you are still using Agent v5, [follow this specific installation process][7]
 
-## Process agent
+## Process Agent
 
 **Note**: Live Processes beta for Windows requires Agent 6.
 
 ### Standard Agent Configuration
 
-The process agent is shipped by default with Agent 6 in Linux packages only. Refer to the instructions for standard [Agent installation][8] for platform-specific details.
+The process Agent is shipped by default with Agent 6 in Linux packages only. Refer to the instructions for standard [Agent installation][8] for platform-specific details.
 
 Once the Datadog Agent is installed, enable Live Processes collection by editing the [configuration file][9] at:
 
@@ -70,7 +70,7 @@ Follow the instructions for the [Docker Agent][11], passing in the following att
 -e DD_PROCESS_AGENT_ENABLED=true
 ```
 
-**Note**: To collect container information in the standard install, the dd-agent user needs to have permissions to access docker.sock.
+**Note**: To collect container information in the standard install, the `dd-agent` user needs to have permissions to access docker.sock.
 
 ### Kubernetes Daemonset
 
@@ -143,7 +143,6 @@ While actively working with the Live Processes, metrics are collected at 2s reso
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [4]: /integrations/kubernetes/

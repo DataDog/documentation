@@ -14,7 +14,6 @@ Enable this integration to see in Datadog all your Kinesis metrics, and collect 
 
 ## 概要
 
-
 Amazon Kinesis は、大規模な分散データストリームをリアルタイムで処理するための完全管理型のクラウドベースのサービスです。
 
 このインテグレーションは、Datadogのダッシュボード上でKinesisのメトリクスを他のメトリクスと連携するために使用します。

@@ -20,8 +20,7 @@ further_reading:
 Cette page présente les fonctionnalités de base de l'agent Datadog.
 Si vous n'avez pas encore installé l'Agent, les instructions d'installation peuvent être trouvées [sur la page d'intégration de l'agent Datadog][1].
 
-Le processus de mise à niveau à partir de la version précédente de l'agent consiste à réexécuter l'installation depuis le début.
-
+Le processus de mise à niveau à partir de la version précédente de l'Agent consiste à réexécuter l'installation depuis le début.
 
 ## Commandes
 
@@ -147,7 +146,7 @@ Pour installer (ou avoir une installation d'Agent v5 à partir de laquelle vous 
     rm  /etc/yum.repos.d/datadog.repo [ ! -f /etc/yum.repos.d/datadog.repo ] && echo -e '[datadog]\nname = Datadog, Inc.\nbaseurl = https://yum.datadoghq.com/rpm/x86_64/\nenabled=1\ngpgcheck=1\npriority=1\ngpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public\n       https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public' | sudo tee /etc/yum.repos.d/datadog.repo
     ```
 
-2. Mettez à jour votre cache yum local et rétrograder l'agent
+2. Mettez à jour votre cache yum local et rétrograder l'Agent
     ```shell
     sudo yum clean expire-cache metadata
     sudo yum check-update

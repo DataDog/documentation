@@ -70,7 +70,6 @@ For more information about using our API to manage monitors, see [our API docs][
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /monitors/notifications
 [2]: /monitors/faq/how-do-i-setup-conditional-contacts-and-messages-in-a-single-monitor
 [3]: /api/#monitors

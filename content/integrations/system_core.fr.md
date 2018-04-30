@@ -33,11 +33,11 @@ Ce check collecte le nombre de cœurs de processeur sur un host et les temps de 
 ## Implémentation
 ### Installation
 
-Le check system_core est packagé avec l'agent, il vous faut donc simplement [installer l'agent] [1] sur n'importe quel host.
+Le check system_core est packagé avec l'agent, il vous faut donc simplement [installer l'agent] (https://app.datadoghq.com/account/settings#agent) sur n'importe quel host.
 
 ### Configuration
 
-Créez un fichier `system_core.yaml` dans le dossier ` conf.d` de l'Agent. Consultez l'exemple du [canevas system_core.yaml][2] pour apprendre toutes les options de configuration disponibles:
+Créez un fichier `system_core.yaml` dans le dossier ` conf.d` de l'Agent. Consultez l'exemple du [canevas system_core.yaml](https://github.com/DataDog/integrations-core/blob/master/system_core/conf.yaml.example) pour apprendre toutes les options de configuration disponibles:
 
 ```
 init_config:
@@ -48,11 +48,11 @@ instances:
 
 L'agent n'a besoin que d'un élément dans `instances` pour activer le check. Le contenu de l'élément n'a pas d'importance.
 
-[Redémarrez l'Agent][3] pour activer le check.
+[Redémarrez l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent) pour activer le check.
 
 ### Validation
 
-[Lancez la commande `status`de l'Agent][4] et cherchez `system_core` dans la section Checks:
+[Lancez la commande `status`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `system_core` dans la section Checks:
 
 ```
   Checks
@@ -86,14 +86,7 @@ Le check System Core n'inclut aucun événement pour le moment.
 
 
 ## Troubleshooting
-Besoin d'aide? Contactez  [l'équipe support de Datadog][5].
+Besoin d'aide? Contactez  [l'équipe support de Datadog](http://docs.datadoghq.com/help/).
 
 ## En apprendre plus
-Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][6]
-
-[1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://github.com/DataDog/integrations-core/blob/master/system_core/conf.yaml.example
-[3]: https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent
-[4]: https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information
-[5]: http://docs.datadoghq.com/help/
-[6]: https://www.datadoghq.com/blog/
+Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog](https://www.datadoghq.com/blog/)

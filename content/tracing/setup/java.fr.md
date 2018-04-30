@@ -22,13 +22,11 @@ Pour améliorer la visibilité des applications utilisant des frameworks non pri
 * [Soumettre une pull request][1] avec l'instrumentation à inclure dans une future version.
 * [Contacter le support][2] et soumettre une demande de fonctionnalité.
 
-
-
 ## Installation et démarrage
 
-Pour commencer à tracer les applications écrites dans n'importe quelle language, commencez par [installer et configurer Datadog Agent][3] (consultez la documentation supplémentaire pour [le traçage des applications Docker](/tracing/setup/docker/)).
+Pour commencer à tracer les applications écrites en Ruby, commencez par [installer et configurer Datadog Agent][3] (consultez la documentation supplémentaire pour [le traçage des applications Docker](/tracing/setup/docker/)).
 
-Ensuite, téléchargez `dd-java-agent.jar` qui contient les fichiers de classe de l'agent:
+Ensuite, téléchargez `dd-java-agent.jar` qui contient les fichiers de classe de l'Agent:
 
 ```shell
 wget -O dd-java-agent.jar 'https://search.maven.org/remote_content?g=com.datadoghq&a=dd-java-agent&v=LATEST'
@@ -49,7 +47,7 @@ Le traceur est configuré en utilisant les propriétés système et les variable
 | service.name       | dd.service.name       | DD_SERVICE_NAME           | `unnamed-java-app` | Le nom d'un ensemble de processus qui font le même travail. Utilisé pour regrouper les statistiques pour votre application.|
 | writer.type        | dd.writer.type        | DD_WRITER_TYPE            | `DDAgentWriter`    | La valeur par défaut envoie des traces à l'Agent. La configuration avec `LoggingWriter` écrit à la place des traces dans console. |
 | agent.host         | dd.agent.host         | DD_AGENT_HOST             | `localhost`        | Nom d'host auquel vous voulez envoyer des traces. Si vous utilisez un environnement conteneurisé, configurez-le comme l'host IP. Consultez notre [documentation docker][4] pour plus de détails. |
-| agent.port         | dd.agent.port         | DD_AGENT_PORT             | `8126`             | Numéro de port sur lequel l'agent écoute pour l'host. |
+| agent.port         | dd.agent.port         | DD_AGENT_PORT             | `8126`             | Numéro de port sur lequel l'Agent écoute pour l'host. |
 | priority.sampling  | dd.priority.sampling  | DD_PRIORITY_SAMPLING      | `false`            | Activez l'échantillonnage prioritaire pour vous assurer que les traces distribuées sont complètes ou pour exiger l'échantillonnage de traces spécifiques. Voir la section [Echantillonnage / traçage distribué](#sampling-distributed-tracing) pour plus de détails. |
 | trace.span.tags  | dd.trace.span.tags  | DD_TRACE_SPAN_TAGS      | `null`            | (Exemple: `key1:value1,key2:value2`) liste des tags par défaut à ajouter à chaque span. Les tags du même nom ajoutées directement à une span remplaceront les valeurs par défaut fournies ici. |
 
@@ -60,7 +58,7 @@ Le traceur est configuré en utilisant les propriétés système et les variable
 
 ## Instrumentation manuelle
 
-Avant d'instrumentaliser votre application, consultez la [Terminologie APM] de Datadog[5] et familiarisez-vous avec les concepts de base de Datadog APM. Si vous n'utilisez pas une [instrumentation de framework prise en charge](#integrations), ou si vous souhaitez une profondeur supplémentaire pour les traces de votre application, instrumentaliser manuellement votre code.
+Avant d'instrumentaliser votre application, consultez la [Terminologie APM][5] de Datadog et familiarisez-vous avec les concepts de base de Datadog APM. Si vous n'utilisez pas une [instrumentation de framework prise en charge](#integrations), ou si vous souhaitez une profondeur supplémentaire pour les traces de votre application, instrumentaliser manuellement votre code.
 
 Pour ce faire, utilisez l'annotation [Trace](#trace-annotation) pour le traçage simple des appels de méthode ou avec [API OpenTracing](#opentracing-api) pour un traçage plus complexe.
 
@@ -82,7 +80,7 @@ Pour Gradle, ajoutez:
 compile group: 'com.datadoghq', name: 'dd-trace-api', version: {version}
 ```
 
-Maintenant, ajoutez `@Trace` à vos méthodes pour qu'elles soient tracées lors de l'exécution avec` dd-java-agent.jar`. Si l'agent n'est pas attaché, cette annotation n'aura aucun effet sur votre application.
+Maintenant, ajoutez `@Trace` à vos méthodes pour qu'elles soient tracées lors de l'exécution avec` dd-java-agent.jar`. Si l'Agent n'est pas attaché, cette annotation n'aura aucun effet sur votre application.
 
 ### API OpenTracing
 
@@ -233,7 +231,6 @@ Valeurs prioritaires actuelles (d'autres peuvent être ajoutées à l'avenir):
 |USER_DROP      | L'utilisateur a demandé de ne pas garder la trace. L'agent va la supprimer.                                              |
 |USER_KEEP      | L'utilisateur a demandé de garder la trace. L'agent la gardera. Le serveur la gardera aussi.                     |
 
-
 Définir manuellement la priorité de trace:
 ```java
 import datadog.opentracing.DDSpan;
@@ -253,7 +250,6 @@ public class MyClass {
 }
 ```
 
-
 ## Débogage
 
 Pour renvoyer les journaux d'application de niveau debug, activez le mode de debug avec le flag `-Ddatadog.slf4j.simpleLogger.defaultLogLevel = debug` lors du démarrage de la JVM.
@@ -271,6 +267,8 @@ Pour renvoyer les journaux d'application de niveau debug, activez le mode de deb
 | Server | Versions |
 |:------------- |:-------------|
 | Java Servlet Compatible | 2.3+, 3.0+ |
+| Jax-RS Annotations | JSR311-API |
+| Spring-Web | 4.0+ |
 
 *Note:* De nombreux serveurs d'applications sont compatibles avec Servlet, tels que Tomcat, Jetty, Websphere, Weblogic, etc.
 En outre, les frameworks tels que Spring Boot et Dropwizard fonctionnent de manière inhérente car ils utilisent un serveur d'applications intégré compatible Servlet.
@@ -286,6 +284,9 @@ Vous ne voyez pas votre framework web? Nous ajoutons continuellement des framewo
 | [OkHTTP][8] | 3.x |
 | [Apache HTTP Client][9] | 4.3 + |
 | [JMS 2][10] | 2.x |
+| AWS Java SDK | 1.11.0+ |
+| Kafka-Clients | 0.11+ |
+| Kafka-Streams | 0.11+ |
 
 Vous ne voyez pas votre framework réseau? Nous ajoutons continuellement des frameworks supportés, [vérifiez auprès de notre équipe][2] pour voir si nous pouvons vous aider.
 
@@ -298,6 +299,7 @@ Vous ne voyez pas votre framework réseau? Nous ajoutons continuellement des fra
 | JDBC | 4.x |
 | [MongoDB][11] | 3.x |
 | [Cassandra][12] | 3.2.x |
+| Jedis | 1.4.0+ |
 
 `dd-java-agent` est également compatible avec les pilotes JDBC courants, notamment:
 
@@ -313,6 +315,14 @@ Vous ne voyez pas votre framework réseau? Nous ajoutons continuellement des fra
 *  Postgres SQL
 
 Vous ne voyez pas votre datastores? Nous ajoutons continuellement des frameworks supportés, [vérifiez auprès de notre équipe][2] pour voir si nous pouvons vous aider.
+
+### Instrumentation Beta
+
+`dd-java-agent` Livré avec des instrumentations plus récentes désactivées par défaut.
+
+| Instrumentation      | Versions           | Argument JVM à activer |
+|:-------------|:-------------|:-------------|
+| Jax RS Client | 1.11.0+ | -Ddd.integration.jax-rs.enabled=true |
 
 ## En apprendre plus
 

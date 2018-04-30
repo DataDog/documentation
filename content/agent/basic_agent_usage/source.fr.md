@@ -17,44 +17,23 @@ further_reading:
 ---
 ## Aperçu
 
-Cette page présente les fonctionnalités de base de l'agent Datadog.
-Si vous n'avez pas encore installé l'Agent, les instructions d'installation peuvent être trouvées [sur la page d'intégration de l'agent Datadog][1].
+Cette page présente les fonctionnalités de base de l'agent Datadog. Si vous n'avez pas encore installé l'Agent, les instructions d'installation peuvent être trouvées [sur la page d'intégration de l'agent Datadog][1].
 
 Par défaut, votre agent est installé dans sa propre sandbox à `~/.datadog-agent`. Vous êtes libre de déplacer ce dossier où vous le souhaitez. Cependant, cet article suppose que l'agent est installé dans son emplacement par défaut. Veillez donc à modifier les instructions en conséquence si vous avez décidé de le déplacer.
 
-
 ## Commandes
 
-L'Agent Datadog possède quelques commandes. Seules les commandes _lifecycle_ (ie `start`/`stop`/`restart` /`status` sur le service Agent) doivent être exécutées avec `sudo service` /` sudo initctl` / `sudo systemctl`, toutes les autres commandes doivent être exécutées avec la commande `datadog-agent`.
+L'Agent Datadog possède quelques commandes. Seules les commandes _lifecycle_ (ie `start`/`stop`/`restart` /`status` sur l'Agent) doivent être exécutées avec `sudo`
 
 {{% table responsive="true" %}}
 | Agent v5                                  |  Agent v6                          | Notes
 | ----------------------------------------------- | --------------------------------------- | ----------------------------- |
-| `sudo ~/.datadog-agent/bin/agent start`              | `sudo service datadog-agent start`      | Start Agent as a service |
-| `sudo ~/.datadog-agent/bin/agent stop`               | `sudo service datadog-agent stop`       | Stop Agent running as a service |
-| `sudo ~/.datadog-agent/bin/agent restart`            | `sudo service datadog-agent restart`    | Restart Agent running as a service |
-| `sudo ~/.datadog-agent/bin/agent status`             | `sudo service datadog-agent status`     | Status of Agent service |
-| `sudo ~/.datadog-agent/bin/info`               | `sudo datadog-agent status`             | Status page of running Agent |
-| `sudo service datadog-agent flare`              | `sudo datadog-agent flare`              | Send flare |
-| `sudo service datadog-agent`                    | `sudo datadog-agent --help`             | Display command usage |
-| `sudo -u dd-agent -- dd-agent check <check_name>` | `sudo -u dd-agent -- datadog-agent check <check_name>` | Run a check |
+| `sudo ~/.datadog-agent/bin/agent start`              | `sudo ./bin/agent/agent start`      | Start Agent|
+| `sudo ~/.datadog-agent/bin/agent stop`               | `sudo ./bin/agent/agent  stop`       | Stop Agent |
+| `sudo ~/.datadog-agent/bin/agent info`               | `sudo ./bin/agent/agent  info`             | Status page of running Agent |
+| `sudo ~/.datadog-agent/bin/agent flare`              | `sudo ./bin/agent/agent  flare`              | Send flare |
+| `sudo ~/.datadog-agent/bin/agent help`                    | `sudo ./bin/agent/agent  help`             | Display command usage |
 {{% /table %}}
-
-Plus d'informations sur les métriques, les événements et les checks de service pour une [intégrations][2] peuvent être récupérées avec la commande check:
-```shell
-sudo service datadog-agent check [integration]
-```
-
-Ajoutez l'argument check_rate pour avoir les valeurs les plus récentes pour les fréquences:
-```shell
-sudo service datadog-agent check [integration] check_rate
-```
-
-**NB**: Si `service` n'est pas disponible sur votre système, utilisez:
-
-* pour les système basés sur `upstart`: `sudo start/stop/restart datadog-agent`
-* pour les systèmes basés sur `systemd` : `sudo systemctl start/stop/restart datadog-agent`
-* pour les système basés sur `initctl`: `sudo initctl start/stop/restart datadog-agent`
 
 ## Configuration
 

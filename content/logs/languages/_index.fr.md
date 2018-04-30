@@ -1,7 +1,7 @@
 ---
 title: Collecte de log depuis vos languages
 kind: Documentation
-description: Configurez votre agent Datadog pour rassembler les logs de vos languages.
+description: "Configurez votre Agent Datadog pour rassembler les logs de vos languages."
 ---
 
 ## Comment tirer le meilleur parti de vos logs
@@ -33,6 +33,5 @@ Pour les frameworks d'int√©gration, nous fournissons des instructions sur la fa√
     {{< nextlink href="/logs/languages/python" >}}Python{{< /nextlink >}}
     {{< nextlink href="/logs/languages/ruby" >}}Ruby{{< /nextlink >}}
 {{< /whatsnext >}}
-
 
 [1]: /logs/processing

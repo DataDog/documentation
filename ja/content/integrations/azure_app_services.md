@@ -11,8 +11,6 @@ title: Datadog-Microsoft Azure App Service Integration
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-
-
 ## Overview
 
 Azure App Service is a platform-as-a-service that runs web, mobile, API and business logic applications and automatically manages the resources required by those apps.

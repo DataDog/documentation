@@ -12,7 +12,6 @@ summary: Datadog APM is incredibly easy to setup. This video shows how to get up
 ---
 [Datadog APM][1] is incredibly easy to setup. This video shows how to get up and running in just a few minutes with any Ruby on Rails application.
 
-
 Sign up for a trial account here: [https://app.datadoghq.com/signup][2]
 
 [1]: /tracing

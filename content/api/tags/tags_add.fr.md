@@ -14,4 +14,6 @@ Cet endpoint vous permet d'ajouter des tags à un host.
     Une liste de tags à appliquer à l'host.
 * **`source`** [*optionnel*, *défaut*=**users**]:  
     La source des tags (par exemple, chef, puppet).
-    [Liste complète des valeurs d'attribut source](/integrations/faq/list-of-api-source-attribute-value)
+    [Liste des valeurs de l'attribut source de l'API][1].
+
+[1]: /integrations/faq/list-of-api-source-attribute-value

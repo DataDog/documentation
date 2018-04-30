@@ -17,7 +17,7 @@ further_reading:
 ---
 ## Aperçu
 
-Cette page présente les fonctionnalités de base de l'agent Datadog.
+Cette page présente les fonctionnalités de base de l'Agent Datadog pour Amazon Linux.
 Si vous n'avez pas encore installé l'Agent, les instructions d'installation peuvent être trouvées [sur la page d'intégration de l'agent Datadog][1].
 
 ## Commandes
@@ -42,6 +42,8 @@ D'autres fonctionnalités sont fournies par le binaire de l'Agent lui-même, tou
 
 * pour les système basés sur `upstart`: `sudo initctl start/stop/restart datadog-agent`
 * pour les systèmes basés sur `systemd` : `sudo systemctl start/stop/restart datadog-agent`
+
+[En apprendre plus sur les commandes pour l'Agent][4]
 
 ## Configuration
 
@@ -72,11 +74,11 @@ Les logs de l'Agent se trouvent dans le dossier `/var/log/datadog/`:
 
 Si vous rencontrez toujours des problèmes, [notre équipe de support][3] se fera un plaisir de vous aider.
 
-## Ajouter d'un package python personnalisé à l'agent
+## Ajouter d'un package python personnalisé à l'Agent
 
 L'interpréteur Python intégré à l'agent se trouve ici:
 `/opt/datadog-agent/embedded/bin/python`.
-L'agent est également livré avec pip, installez les bibliothèques python avec:
+L'Agent est également livré avec pip, installez les bibliothèques python avec:
 ```
 sudo -u dd-agent -- /opt/datadog-agent/embedded/bin/pip install <package_name>
 ```
@@ -86,7 +88,7 @@ sudo -u dd-agent -- /opt/datadog-agent/embedded/bin/pip install <package_name>
 
 Un script est disponible pour installer ou mettre à jour automatiquement le nouvel agent. Il configure les repos et installe le paquet de l'Agent pour vous; En cas de mise à niveau, l'outil d'importation cherche également si il existe un `datadog.conf` depuis version antérieure de l'Agent afin de le garder tout en vérifiant que les configurations sont toujours valable avec l'Agent 6.
 #### Installation en une étape
-##### Mettre à jour
+##### Mettre à niveau
 
 Le programme d'installation d'Agent 6.x peut convertir automatiquement votre configuration d'Agent  5.x lors de la mise à niveau:
 
@@ -157,7 +159,7 @@ Pour installer (ou avoir une installation d'Agent v5 à partir de laquelle vous 
     sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 382E94DE
     ```
 
-3. Mettez à jour apt et rétrograder l'agent
+3. Mettez à jour apt et rétrograder l'Agent
 
     ```shell
     sudo apt-get update
@@ -167,7 +169,7 @@ Pour installer (ou avoir une installation d'Agent v5 à partir de laquelle vous 
 
 ## Désinstaller l'Agent
 
-Pour désinstaller l'agent, exécutez:
+Pour désinstaller l'Agent, exécutez:
 
 ```
 $ sudo apt-get --purge remove datadog-agent -y
@@ -180,3 +182,4 @@ $ sudo apt-get --purge remove datadog-agent -y
 [1]: https://app.datadoghq.com/account/settings#agent/aws
 [2]: /integrations
 [3]: /help
+[4]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands

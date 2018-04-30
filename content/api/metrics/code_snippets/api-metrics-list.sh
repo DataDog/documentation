@@ -9,6 +9,3 @@ curl -G \
     -d "application_key=${app_key}" \
     -d "from=${from_time}"
 
-
-
-

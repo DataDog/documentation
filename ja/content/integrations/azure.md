@@ -19,16 +19,13 @@ aliases:
   - /ja/guides/azure/
 ---
 
-
 <!-- ## Configure Azure Monitoring -->
 
 ## Azure監視機能の設定
 
-
 <!-- Microsoft Azure supports both PaaS and IaaS (VM) services. Right now Datadog monitoring is tailored for IaaS services. But it can also be installed in worker and web roles. -->
 
 Microsoft Azureは、PaaSのとIaaS(VM)の両方のサービスをサポートしています。現状Datadogの監視は、IaaSのサービスを主たる監視対象として調整されています。しかし、この監視をワーカープロセスやwebサーバまで広げることが出来ます。
-
 
 <!-- To setup Azure monitoring, go to [Azure integrations][1] and follow instructions on the page. -->
 
@@ -62,11 +59,9 @@ VMを指定した後の手順:
 
 Datadogの監視が正しく動作するためには、"Basic metrics", "network and web metrics", ".Net metrics"を有効にする必要があります。更に、"logs collection"のチェックマークを外すことでストレージのスペースを節約することもできます。
 
-
 <!-- ## Deploy agents -->
 
 ## Datadog Agentのインストール
-
 
 ### Azureポータルからのインストール
 
@@ -75,7 +70,6 @@ Azureのポータル](http://portal.azure.com)から、運用中のVMを選択�
 
 {{< img src="azure-image-4.gif" alt="Azure performance monitoring with One-Click Deployment through Datadog" >}}
 
-
 インストール手順:
 
 1. 新規または既存の仮想マシンに移動し、`Settings`をクリックします。
@@ -83,7 +77,6 @@ Azureのポータル](http://portal.azure.com)から、運用中のVMを選択�
 3. `Create`をクリックし、APIキーを入力します。
 
 [Datadog APIキー](https://app.datadoghq.com/azure/landing/)は、Azureのインテグレーションタイル内で見つけることが出来ます。
-
 
 ### 手作業でのインストール
 
@@ -136,14 +129,12 @@ Azureのポータル](http://portal.azure.com)から、運用中のVMを選択�
 Visual Studioを使用している場合は、このファイルがパッケージに含まれていることを確認してください。
 また、このファイルの*Copy to Output Directory*プロパティーを*Copy Always*に設定し、*Build Action*を*Content*にしてください。
 
-
 <!-- **Add** the installation task to your `ServiceDefinition.csdef` file by adding the following in the `<Startup>` section:
 
     <Task commandLine="installDatadogAgent.cmdi YOUR_API_KEY" executionContext="elevated" />
 -->
 
 `ServiceDefinition.csdef`ファイルの`<Startup>`セクションに、次の部分を追記することによって、インストールタスクを追加します:
-
 
     <Task commandLine="installDatadogAgent.cmdi YOUR_API_KEY" executionContext="elevated" />
 
@@ -154,7 +145,6 @@ The created file will download and install the latest version of the Agent on ap
 ``YOUR_API_KEY``の部分は、Datadogのダッシュボードから[API key](https://app.datadoghq.com/account/settings#api)を取得し、置き換えてください。
 
 ここで作成したファイルにより、アプリケーションデプロイで最新バージョンのDatadog Agentがインストールされます。
-
 
 <!-- ### Deploy your app
 
@@ -175,16 +165,13 @@ On deploy you should see your new hosts appear on your infrastructure overview:
 
 {{< img src="guides/azure/azure_infrastructure_overview.png" alt="infrastructure view" >}}
 
-
 <!-- ## Troubleshooting -->
 
 ## トラブルシュート
 
-
 <!-- Here are some common issues you might be seeing. -->
 
 次に一般的に遭遇しやすいトラブルの対処方法を紹介します。
-
 
 <!-- ### I don't know my tenent name
 To locate your tenent name first log into the current [Azure portal]
@@ -204,7 +191,6 @@ If you have experienced error logging in while trying to install the integration
 ### ログインすることが出来ません。
 Azureのインテグレーションをインストールする際にログインすることが出来ない場合は、お気兼ねなく[support@datadoghq.com][3]にお問い合わせ下さい。お問い合わせの際は、スクリーンショット画像の添付をお願いします。
 
-
 <!-- ### No metrics are showing up
 Please make sure you have enabled diagnostics on your VMs. Diagnostics allows VMs to collect logging information which includes metrics for CPU, Network etc. -->
 
@@ -215,7 +201,6 @@ VM上でDiagnostics機能が"ON"になっていることを確認して下さい
 
 #### Agentをインストールした場合で、Agentからのメトリクスが表示されない場合:
 VMが持っている時間が、正しく設定されているか確認して下さい。Datadogに送信されるメトリクス情報に記録されている時間が、現在の時間と大きく離れているとグラフに表示されないことが有ります。
-
 
    [1]: https://app.datadoghq.com/account/settings#integrations/azure
    [2]: https://portal.azure.com

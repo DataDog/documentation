@@ -10,8 +10,6 @@ title: Datadog-Lightbend Reactive Platform Integration
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-
-
 {{< img src="integrations/lightbendrp/dashboard_lightbendrp.png" alt="lightbendrp Dashboard" >}}
 
 ## Overview 
@@ -60,7 +58,6 @@ The configuration values explained:
 * `cinnamon.datadog.statsd.frequency`: the frequency with with data is pushed from Cinnamon to the DogStatsD instance.
 
 * `cinnamon.datadog.report.histogram`: instruction for how to filter histogram data sent to DogStatsD. In the above example only `max` and `p99` will be sent.
-
 
 Please see the [Lightbend Monitoring documentation](https://developer.lightbend.com/docs/monitoring/2.3.x/home.html) for more details on configuration.
 

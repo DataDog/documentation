@@ -25,7 +25,6 @@ Host Mapは、異常値の察知、利用パターンの把握、リソースの
 
 Host Mapを使っているときは、ユーザに魔法の杖を振っているような体験をしてもらいたいと考えています。したがって、全てのホストは指示にしたがって速やかに移動し、直ちに全体像を伝えられる位置につき、次の指示を待ちます。
 
-
 <!-- ## Ways to use it
 
 We built Host Maps for ultimate flexibility; with just a few clicks, you can ask innumerable infrastructure-level questions and get instant, visual answers. Below are some common uses, but we would also love to hear on twitter about the ways you use Host Maps at your company (@datadoghq). -->
@@ -33,7 +32,6 @@ We built Host Maps for ultimate flexibility; with just a few clicks, you can ask
 ## Host Mapの操作方法
 
 Host Mapは、究極の柔軟性を持って実装されています。数回クリックするだけで、インフラレベルでの無数のフィルタリングと、そのフィルタリングに対する可視化を即座に実現してくれます。以下に紹介する内容は、一般的な用途の例です。それ以外にもHost Mapによって把握できる内容はたくさんあると思います。是非皆さんの会社で考えたHost Mapの使い方をTiwtter(@datadoghq)でシェアしてもらえると嬉しいです。
-
 
 <!-- ### Resource Optimization
 
@@ -97,7 +95,6 @@ Below is a screenshot from a recent issue we had a Datadog. As you can see, some
 
 {{< img src="infrastructure/hostmap/hostmappart1image6.png" alt="Datadog Host Maps Two Image Groups">}}
 
-
 <!-- ## More Details -->
 
 ## Host Mapの操作の解説
@@ -128,7 +125,6 @@ AWS上でホストを起動している場合、以下の様なAWS固有のタ�
 * security-group
 * ‘name’のような、EC2インスタンスに付与したタグ
 
-
 <!-- ### Filter by
 
 ‘Filter by’ limits the Host Maps to a specific subset of your infrastructure. Located in the top-left of Host Maps, the filter input bar lets you filter your map by any of your tags, plus the Datadog-provided attributes below. If your filter input bar is empty, then the map displays all hosts that are reporting metrics to Datadog. If you want to focus your attention on just a subset of your hosts, then add filters. Example: if you tag your hosts by the environment they are in, you can filter by ‘production’ to remove hosts in your staging and other environments from the map. If you want to eliminate all but one host role in production, then add that role to the filter, too—the filters will be ANDed together.
@@ -154,7 +150,6 @@ Datadogが特別に準備している抽出に利用できるホストの状態�
 * agent : ホスト上でDatadog Agentが実行されている状態。
 * agent_issue : リソース情報へのアクセスができなくなるなど、インテグレーションに問題が発生した状態。
 * upgrade_required : Datadog Agentのアップグレートが必要な状態。
-
 
 <!-- ### Group hosts by tags
 
@@ -183,7 +178,6 @@ When you’ve identified a host that you want to investigate, click it for detai
 
 {{< img src="infrastructure/hostmap/blog-host-maps-01.png" alt="Datadog Host Maps Zoom In">}}
 
-
 <!-- ### Shapes and colors
 
 By default the color of each host (hexagon) is set to represent the percentage of CPU usage on each host, where the color ranges from green (0% utilized) to red (100% utilized). You can select different metrics from the ‘Color by’ selector. The Host Maps can also communicate an additional, optional metric with the size of the hexagon; use the ‘Size by’ selector. In the screenshot below the size of the hexagons is the 15 minute average load, normalized so that machines’ workloads can be compared even if they have different numbers of cores.
@@ -201,7 +195,6 @@ Note that the “% CPU utilized” metric uses the most reliable and up-to-date 
 {{< img src="infrastructure/hostmap/hostmappart2image4.png" alt="Datadog Host Maps Using Color And Size">}}
 
 注) "% CPU utilized"のメトリクスは、 Datadog Agentからか、AWS CloudWatchからか、vSphereからかに関わらず、**最も信頼性の高い最新のCPU使用率の測定値** を表示しています。
-
 
 <!-- ### Data freshness and meaning
 

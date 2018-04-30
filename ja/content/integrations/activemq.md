@@ -20,12 +20,10 @@ doclevel: complete
 
 ## 概要
 
-
 ActiveMQyより、リアルタイムでメトリクスを取得します。
 
 * ActiveMQサーバーのパフォーマンスを可視化します。
 * ActiveMQのパフォーマンスメトリクスを他のアプリケーション情報と関連付けられるようにします。
-
 
 <!-- <div id="int-configuration">
 <h2>Configuration</h2>
@@ -35,7 +33,6 @@ ActiveMQyより、リアルタイムでメトリクスを取得します。
 Metrics will be captured using a JMX connection.
 <br /><b>We recommend the use of Oracle's JDK for this integration.</b>
 </em></p> -->
-
 
 ## 設定
 
@@ -57,7 +54,6 @@ ActiveMQのメトリクスを取得するには、Datadog Agentをインスト�
          user: username
          password: password
          name: activemq_instance
-
 
  # List of metrics to be collected by the integration
  # You should not have to modify this.

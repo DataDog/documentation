@@ -11,7 +11,6 @@ git_integration_title: cacti
 
 <!-- ## Overview
 
-
 Connect Cacti to Datadog to:
 
 - Visualize Cacti metrics in Datadog.
@@ -19,12 +18,10 @@ Connect Cacti to Datadog to:
 
 ## 概要
 
-
 次の目的でCactiのコミット情報をDatadogと連携します:
 
 * Cactiファイルシステムのパフォーマンスの可視化
 * Cactiファイルシステムのパフォーマンス情報と他アプリケーションとの情報の連携
-
 
 <!-- From the open-source Agent:
 

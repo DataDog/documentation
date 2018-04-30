@@ -13,13 +13,13 @@ further_reading:
   text: Learn how to explore your logs
 ---
 
-Often, log files, especially system logs such as *syslog* or *journald*, have heightened read-permissions blocking Datadog agent log collection as it does not have *sudo* or *admin* access.  
+Often, log files, especially system logs such as *syslog* or *journald*, have heightened read-permissions blocking Datadog Agent log collection as it does not have *sudo* or *admin* access.  
 
 There are three potential solutions to get around this:  
 
-* (Not Recommended) Give the agent root access so it can tail those files. Datadog strongly recommends against going this route.
+* (Not Recommended) Give the Agent root access so it can tail those files. Datadog strongly recommends against going this route.
 * Change the file permission to let the Agent access it.
-* Configure an open source log shipper (such as Rsyslog, NXLog, …) that has root access to send those logs either directly to your Datadog platform or locally to a running Datadog agent. All configuration are explained in the [How to Send Logs to Datadog via External Log Shippers?][1] article.
+* Configure an open source log shipper (such as Rsyslog, NXLog, …) that has root access to send those logs either directly to your Datadog platform or locally to a running Datadog Agent. All configuration are explained in the [How to Send Logs to Datadog via External Log Shippers?][1] article.
 
 {{< partial name="whats-next/whats-next.html" >}}
 

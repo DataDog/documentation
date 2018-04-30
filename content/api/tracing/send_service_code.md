@@ -15,5 +15,3 @@ external_redirect: /api/#send-services
 
 {{< code-snippets basename="result.send_service" >}}
 
-
-

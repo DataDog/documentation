@@ -32,8 +32,8 @@ IMMUNIO monitor vos applications pour détecter et vous défendre contre tout ce
 ## Implémentation
 ### Installation
 
-1.  Connectez vous à votre [compte  IMMUNIO][1].
-1.  Accédez à la [page d'implémentation des intégrations][2].
+1.  Connectez vous à votre [compte  IMMUNIO](http://www.immun.io/).
+1.  Accédez à la [page d'implémentation des intégrations](https://dashboard.immun.io/#/settings/integrations).
     {{< img src="integrations/immunio/immuniosetup1.png" alt="Integration Setup Page" responsive="true" popup="true">}}
 1.  Cliquez sur "Add an API Key".
     {{< img src="integrations/immunio/immuniosetup2.png" alt="Add API Key" responsive="true" popup="true">}}
@@ -69,15 +69,9 @@ L'intégration IMMUNIO n'inclut aucun événement pour le moment.
 L'intégration IMMUNIO n'inclut aucun check de service pour le moment.
 
 ## Troubleshooting
-Besoin d'aide? Contactez  [l'équipe support de Datadog][3].
+Besoin d'aide? Contactez  [l'équipe support de Datadog](http://docs.datadoghq.com/help/).
 
 ## En apprendre plus
-Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][4]
+Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog](https://www.datadoghq.com/blog/)
 
 
-
-
-[1]: http://www.immun.io/
-[2]: https://dashboard.immun.io/#/settings/integrations
-[3]: http://docs.datadoghq.com/help/
-[4]: https://www.datadoghq.com/blog/

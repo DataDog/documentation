@@ -14,6 +14,7 @@ further_reading:
     text: Collectez vos traces
 aliases:
   - /fr/agent/faq/agent-check-directory-structure
+  - /fr/agent/faq/install-core-extra/
 ---
 <div class="alert alert-info">
     Agent v6 est désormais disponible, <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md">mettez à jour votre Agent </a> afin de bénéficier de toutes les nouvelles fonctionnalités
@@ -25,7 +26,6 @@ L'agent Datadog est un logiciel qui s'exécute sur vos hosts. Son travail consis
 
 {{< partial name="platforms/platforms.html" >}}
 
-
 L'agent comporte trois parties principales: le collector, DogStatsD, et le forwarder:
 
 * **Le collector**: exécute des checks sur la machine pour les [intégrations][4] que vous avez et capture les métriques du système telles que la mémoire et le processeur.
@@ -35,7 +35,6 @@ L'agent comporte trois parties principales: le collector, DogStatsD, et le forwa
 * **le forwarder**: récupère les données de DogStatsD et du collector, puis les met en file d'attente pour les envoyer à Datadog.
 
 Tout est contrôlé par un processus supervisor. Nous gardons ceci séparé de sorte que vous n'ayez pas à avoir l'overhead de chaque application si vous ne voulez pas exécuter toutes les sous-parties, (bien que nous vous recommandons généralement de le faire).
-
 
 ## Qu'est ce que l'Agent v6?
 
@@ -52,7 +51,7 @@ L'Agent 6 est la dernière version majeure de l'Agent Datadog. La grande différ
 
 * [DogStatsD][6] peut être utilisé sur un socket unix plutôt que sur udp.
 
-* Personnalisez votre agent v6 et [DogStatsD][6] beaucoup plus facilement et avec beaucoup plus d'options de configuration, pour inclure ou exclure presque tout. Il y a aussi un agent «puppy» qui est installation vraiment minimale.
+* Personnalisez votre Agent v6 et [DogStatsD][6] beaucoup plus facilement et avec beaucoup plus d'options de configuration, pour inclure ou exclure presque tout. Il y a aussi un Agent «puppy» qui est installation vraiment minimale.
 
 * L'agent 6 bloque les ports 5000 et 5001. Si vous utilisez ces ports, mettez à jour le port pour `expvar_port` et` cmd_port` dans le fichier `datadog.yaml`.
 
@@ -66,7 +65,7 @@ La commande analyse un `datadog.conf` existant et convertit toutes les options d
 
 Pour l'environnement Mac et Windows, utilisez:
 
-`datadog-agent import <old_configuration_dir> <destination_dir>` 
+`datadog-agent import <old_configuration_dir> <destination_dir>`
 
 Avec:
 
@@ -83,8 +82,7 @@ Les versions antérieures de l'Agent Datadog stockaient les fichiers de configur
 
 ### Fichier de configuration du check
 
-Afin de fournir une manière plus flexible de définir la configuration pour un contrôle,
-à partir de la version 6.0.0, l'Agent chargera tout fichier YAML valide contenu dans le dossier:
+Afin de fournir une manière plus flexible de définir la configuration pour un check, à partir de la version 6.0.0, l'Agent chargera tout fichier YAML valide contenu dans le dossier:
 
 `/etc/datadog-agent/conf.d/<check_name>.d/`.
 
@@ -125,10 +123,10 @@ La nouvelle interface de ligne de commande de l'Agent est basée sur une sous-co
 | installservice  | Installe l'Agent avec le manageur de controleur de services |
 | launch-gui      | Démarre la GUI de l'Agent Datadog |
 | regimport       | Importe les paramètres de registre dans datadog.yaml |
-| remove-service  | Supprime l'agent du gestionnaire de contrôle de service |
-| restart-service | Redémarrez l'agent dans le service control manager |
+| remove-service  | Supprime l'Agent du gestionnaire de contrôle de service |
+| restart-service | Redémarrez l'Agent dans le service control manager |
 | start           | Démarre l'Agent |
-| start-service   | Démarre l'Agent avec le manager de controleur de service |
+| start-service   | Démarre l'Agent avec le manageur de contrôleur de services |
 | status          | Affiche le status courrant |
 | stopservice     | Stop l'Agent dans le manageur de controleur de services |
 | version         | Affiche des informations sur la version |
@@ -153,6 +151,8 @@ sur le port `5002` sur Windows et Mac, et est désactivé sur Linux.
 Une fois l'agent lancé, utilisez la commande `datadog-agent launch-gui` pour lancer
 l'interface graphique dans votre navigateur Web par défaut
 
+**Note**: L'interface visuelle de l'Agent ne fonctionne pas sur les plateformes Windows 32-bits.
+
 ### Exigences
 
 1. Les cookies doivent être activés dans votre navigateur. L'interface graphique génère et enregistre un token
@@ -161,7 +161,7 @@ dans votre navigateur qui est utilisé pour authentifier toutes les communicatio
 2. L'interface graphique ne sera lancée que si l'utilisateur qui la lance à
 les bonne permissions: Si vous êtes capable d'ouvrir `datadog.yaml`, vous pouvez utiliser l'interface graphique.
 
-3. Pour des raisons de sécurité, l'interface graphique ne peut être accessible que depuis l'interface réseau locale (```localhost``` /```127.0.0.1```), vous devez donc être sur le même host que l'agent en cours d'exécution pour l'utiliser. En d'autres termes, vous ne pouvez pas exécuter l'agent sur une machine virtuelle ou un conteneur et y accéder depuis l'ordinateur host.
+3. Pour des raisons de sécurité, l'interface graphique ne peut être accessible que depuis l'interface réseau locale (```localhost``` /```127.0.0.1```), vous devez donc être sur le même host que l'Agent en cours d'exécution pour l'utiliser. En d'autres termes, vous ne pouvez pas exécuter l'Agent sur une machine virtuelle ou un conteneur et y accéder depuis l'ordinateur host.
 
 ## Versions d'OS supportées
 ### Agent v6

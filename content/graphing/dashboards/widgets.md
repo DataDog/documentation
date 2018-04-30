@@ -322,8 +322,6 @@ Monitor summary is a summary view of all monitors on your system, or a subset ba
 
 {{< img src="graphing/miscellaneous/visualization/references-graphing-monitorsummary-example.png" alt="Timeseries" responsive="true" popup="true" style="width:80%;">}}
 
-
-
 [1]: /api/#screenboards
 [2]: /api/#create-a-screenboard
 [3]: /api/#get-a-screenboard

@@ -1,4 +1,3 @@
-
 ---
 title: Managing Multiple-Organization Accounts
 kind: documentation

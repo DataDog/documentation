@@ -1,4 +1,3 @@
-
 ---
 title: Documentation de Datadog
 kind: documentation
@@ -18,7 +17,7 @@ Votre stack d'applications regorge de métadonnées inutilisées qui tentent de 
 
 Des exceptions qui apparaissent,  les requêtes de base de données qui ralentissent; les cache miss sont en augmentation; les logs d'erreurs commencent à remplir vos fichiers. Chacun de ces bavardages fait partie de l'histoire, mais ils sont difficiles à comprendre lorsqu'ils sont pris séparément des autres.
 
-Datadog collecte tous ces métriques, événements et états de services en un seul endroit sans que vous ayez à gérer vous-même l'infrastructure de stockage ou de surveillance. Vous pouvez alors vous concentrer pleinement sur la visualisation et la corrélation des données collectées avec de superbes graphiques, tout en  définissant des conditions de monitoring flexibles.
+Datadog collecte toutes ces métriques, événements et check de services en un seul endroit sans que vous ayez à gérer vous-même l'infrastructure de stockage ou de surveillance. Vous pouvez alors vous concentrer pleinement sur la visualisation et la corrélation des données collectées via des graphiques, tout en  définissant vos conditions de monitoring.
 
 ## Collecter tout
 
@@ -33,13 +32,13 @@ Certaines parties de votre stack peuvent être des outils SaaS et non des serveu
 
 Dès que vous capturez toutes ces données, consultez-les immédiatement dans l'application Web Datadog. Utilisez le Metrics Explorer pour trouver une métrique donnée et l'observer en temps réel. Visualisez et commentez des événements (par exemple, le déploiement d'une application) lorsqu'ils se déversent dans votre [flux d'événements][8]. Filtrez pour un groupe d'hosts dans [l'Infrastructure Map][9]. Obtenez une image globale de la façon dont certains services (par exemple, MySQL) fonctionnent via son dashboard par défaut.
 
-Créez des [Screenboards][10] personnalisés, où vous combinerez tous les graphiques, nombres, événements et états de services qui vous intéressent le plus. Personnalisez les graphiques selon vos besoins afin de résoudre au mieux vos problèmes: en modifiant leurs valeurs de mesure à l'aide d'autres métriques, en appliquant une détection [d'anomalie][20], [de singularité][11] ou de [prévisions][12], superposant de des événements sur eux, et plus encore.
+Créez des [Screenboards][10] personnalisés, où vous combinerez tous les graphiques, nombres, événements et états de services qui vous intéressent le plus. Personnalisez les graphiques selon vos besoins afin de résoudre au mieux vos problèmes: en modifiant leurs valeurs de mesure à l'aide d'autres métriques, en appliquant une détection [d'anomalie][11], [de singularité][12] ou de [prévisions][13], superposant de des événements sur eux, et plus encore.
 
 ## Monitorer le
 
-Une fois que vos graphiques ont mis l'accent sur des points de tensions potentiels, définissez des conditions d'alerte sur vos métriques à l'aide de [Monitors][13].  Par défaut vous [recevrez des courriels][14] lorsque les alertes se déclenchent, mais configurez l'intégration[Slack][15] ou [HipChat][16] afin d'obtenir des notifications dédiées.
+Une fois que vos graphiques ont mis l'accent sur des points de tensions potentiels, définissez des conditions d'alerte sur vos métriques à l'aide de [Monitors][14].  Par défaut vous [recevrez des courriels][15] lorsque les alertes se déclenchent, mais configurez l'intégration[Slack][16] ou [HipChat][17] afin d'obtenir des notifications dédiées.
 
-Lorsque vous êtes au courant d'un problème en cours [mettez en sourdine vos alertes grâce aux downtimes][17], et lorsque vous êtes sur le point d'arrêter un service pour maintenance,,[planifier un temps d'arrêt][18] afin de ne pas être spammé avec des notifications. Lorsque vous ne pouvez pas définir une condition unique d'alerte en matière d'hosts, d'événements, de métriques ou de services, créez un [monitor composite][19].
+Lorsque vous êtes au courant d'un problème en cours [mettez en sourdine vos alertes grâce aux downtimes][18], et lorsque vous êtes sur le point d'arrêter un service pour maintenance, [planifier un temps d'arrêt][19] afin de ne pas être spammé avec des notifications. Lorsque vous ne pouvez pas définir une condition unique d'alerte en matière d'hosts, d'événements, de métriques ou de services, créez un [monitor composite][20].
 
 {{< partial name="support/support.html" >}}
 
@@ -53,13 +52,13 @@ Lorsque vous êtes au courant d'un problème en cours [mettez en sourdine vos al
 [8]: /graphing/event_stream/
 [9]: /graphing/infrastructure
 [10]: /graphing/dashboards/screenboard
-[11]: /monitors/monitor_types/outlier
-[12]: /monitors/monitor_types/forecasts
-[13]: /monitors
-[14]: /monitors/notifications
-[15]: /integrations/slack
-[16]: /integrations/hipchat
-[17]: /monitors/downtimes
-[18]: /monitors/downtimes/
-[19]: /monitors/monitor_types/composite/
-[20]: /monitors/monitor_types/anomaly/
+[11]: /monitors/monitor_types/anomaly
+[12]: /monitors/monitor_types/outlier
+[13]: /monitors/monitor_types/forecasts
+[14]: /monitors
+[15]: /monitors/notifications
+[16]: /integrations/slack
+[17]: /integrations/hipchat
+[18]: /monitors/downtimes
+[19]: /monitors/downtimes/
+[20]: /monitors/monitor_types/composite/

@@ -8,10 +8,10 @@ aliases:
 further_reading:
 - link: "agent/faq/how-datadog-agent-determines-the-hostname"
   tag: "FAQ"
-  text: "How does Datadog determine the agent hostname?"
+  text: "How does Datadog determine the Agent hostname?"
 - link: "agent/faq/agent-commands"
   tag: "FAQ"
-  text: "List of all agent commands"
+  text: "List of all Agent commands"
 ---
 
 {{< partial name="platforms/platforms.html" >}}
@@ -60,7 +60,6 @@ The Datadog logs do a rollover every 10MB. When a rollover occurs, one backup is
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /integrations
 [2]: https://github.com/DataDog/chef-datadog

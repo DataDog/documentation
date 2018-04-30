@@ -14,7 +14,7 @@ La surveillance de l'ensemble de votre infrastructure ne serait pas complète sa
 
 Une fois qu'un monitor est créé, vous êtes averti lorsque ses conditions sont remplies. Vous pouvez informer les membres de l'équipe par courriel ou via des services tiers (par exemple, Pagerduty ou Hipchat) ou d'autres endpoints personnalisés via Webhooks.
 
-Les monitors déclenchés apparaissent dans le [flux d'événements][1], permettant la collaboration autour de problèmes actifs dans vos applications ou votre infrastructure. Datadog fournit une vue de haut niveau des problèmes en cours sur la page [Triggered Monitors][2] ainsi que la gestion globale de vos monitors sur la page [Manage Monitors][3].
+Les monitors déclenchés apparaissent dans le [flux d'événements][1], permettant la collaboration autour de problèmes actifs dans vos applications ou votre infrastructure. Datadog fournit une vue de haut niveau des problèmes en cours sur la page [Triggered Monitors][2]  ainsi que la gestion globale de vos monitors sur la page [Manage Monitors][3].
 
 Les monitors peuvent être gérés via script, reportez-vous à la [documentations de l'API][4] pour obtenir des informations détaillées sur la gestion des monitors via l'API en utilisant les [bibliothèques disponibles][5] ou cURL.
 
@@ -36,7 +36,7 @@ Voici un aperçu des termes utilisés:
 - **Monitor**: Envoie des notifications basées sur une séquence de status de check ou metrique
   qui traversent un seuil ou d'autres conditions d'alerte
 - **Type de monitor**: host, métrique, intégration, processus, réseau, événement et custom. Utilisez la navigation latérale pour en apprendre plus sur un type spécifique.
-- **Tags**: Des labels configurables qui peuvent être appliqués sur chaque metrique et chaque host. Consultez  la page dédiée au [Tagging][12] pour plus de détails.
+- **Tags**: Des labels configurables qui peuvent être appliqués sur chaque metrique et chaque host. Consultez  la page dédiée au [Tagging][1] pour plus de détails.
 
 ## Créer un monitor
 

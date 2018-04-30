@@ -11,14 +11,12 @@ kind: integration
 
 <!-- ## Overview
 
-
 Connect RabbitMQ to Datadog in order to:
 
 - Visualize RabbitMQ performance and utilization.
 - Correlate the performance of RabbitMQ with the rest of your applications. -->
 
 ## 概要
-
 
 次の目的の為に、RabbitMQのメトリクスをDatadogに送信します:
 
@@ -29,7 +27,6 @@ Datadog Agentの設定ファイルサンプルとメトリクス取得プログ�
 
 * [RabbitMQインテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/rabbitmq/conf.yaml.example)
 * [RabbitMQインテグレーション　checks.d](https://github.com/DataDog/integrations-core/blob/master/rabbitmq/check.py)
-
 
 <!-- The following metrics are collected by default with the RabbitMQ integration:
 
@@ -67,7 +64,6 @@ RabbitMQインテグレーションがデフォルトで取得しているメト
     rabbitmq.queue.messages_ready
     rabbitmq.queue.messages_unacknowledged
 
-
 <!-- By default, `queue` metrics are tagged by queue and `node` metrics are tagged by node.
 
 If you have a Datadog account you can see the integration installation instructions [here](https://app.datadoghq.com/account/settings#integrations/rabbitmq). -->
@@ -75,7 +71,6 @@ If you have a Datadog account you can see the integration installation instructi
 初期設定で、`queue`メトリクスは"queue"、`node`メトリクスは"node"とタグ付けされています。
 
 ## 設定
-
 
 *RabbitMQインテグレーションを利用する為には、Datadog Agent >= 3.5.0が必要です。*
 

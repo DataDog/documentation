@@ -9,8 +9,6 @@ title: Datadog Process and Container Monitoring
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-
-
 ## Introduction
 
 Datadog Process Monitoring allows for real-time visibility of the most granular elements in a deployment.  Taking inspiration from bedrock tools like `htop`, this centralized view, combined with existing tagging capabilities, allows you to understand what is going on at any level of your system and drill all the way down into the most fine details.
@@ -69,7 +67,6 @@ Refer to the standard [daemonset installation](/integrations/kubernetes/) and th
 Processes are by their nature extremely high cardinality objects.  Our fuzzy string search gives you a view into exactly what you want.  Below is our Demo environment, filtered with the string `postgres /9.`.  Note that `/9.` has matched in the command path, and that `postgres` matches the command itself.
 
 {{< img src="graphing/infrastructure/process/postgres.png" >}}
-
 
 ### Filtering and Pivoting
 

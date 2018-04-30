@@ -109,7 +109,7 @@ The host list and all its host information of the [Infrastructure List page][7] 
 You can programmatically access host information and get the insights you need, one example is this python script that prints the list of hosts:
 
 * for which Datadog receives AWS EC2 information from Cloudwatch, through our AWS integration.
-* but that don't have the agent installed.
+* but that don't have the Agent installed.
 
 {{< img src="graphing/infrastructure/index/ec2_instances_without_dd_agent.png" alt="ec2_instances_without_dd_agent" responsive="true" popup="true" style="width:90%;">}}
 
@@ -118,7 +118,6 @@ You can programmatically access host information and get the insights you need, 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /agent/faq/agent-commands/#agent-status-and-information
 [2]: https://github.com/DataDog/dd-agent/blob/5.14.1/utils/hostname.py#L104

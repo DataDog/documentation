@@ -3,7 +3,7 @@ title: How Can I Submit A Custom Status Check?
 kind: faq
 ---
 
-Custom status checks can be submitted either through the Datadog API, DogStatsD, or through a custom agent check. All status checks must have one of the following status codes:
+Custom status checks can be submitted either through the Datadog API, DogStatsD, or through a custom Agent check. All status checks must have one of the following status codes:
 
 * '0': 'OK'
 
@@ -39,9 +39,9 @@ When submitting a status check through DogStatsD, specify a check name and a che
 statsd.service_check('app.is_ok', 0, tags=['environment:production','role:webserver'], hostname='app1', message='App1 is up and running')
 ```
 
-## Submitting a check through a custom agent check
+## Submitting a check through a custom Agent check
 
-When submitting a status check through a custom agent check, the predefined service_check function in the AgentCheck class can be used to pass the agent check along to Datadog. A call to this function must include a check name and a check status with optional parameters including tags you wish to associate with the check, a timestamp for the check status, the host submitting the check, and a message describing the status. An example call to the service_check function within a custom agent check would look like:
+When submitting a status check through a custom Agent check, the predefined service_check function in the AgentCheck class can be used to pass the Agent check along to Datadog. A call to this function must include a check name and a check status with optional parameters including tags you wish to associate with the check, a timestamp for the check status, the host submitting the check, and a message describing the status. An example call to the service_check function within a custom Agent check would look like:
 
 ```
 self.service_check('app.is_ok', 0, tags=['environment:production','role:webserver'], hostname='app1', message='App1 is up and running')

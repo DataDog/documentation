@@ -18,17 +18,17 @@ further_reading:
 
 Vous pouvez parfois devoir fermer les systèmes ou les mettre hors ligne pour effectuer des opérations de maintenance ou des mises à niveau. La planification des downtimes vous permet de le faire sans déclencher de monitors.
 
-## Qu'arrive-t-il à un monitor quand il est coupé (ou a un downtime)?
+## Qu'arrive-t-il à un monitor quand il est coupé (ou a un downtime) ?
 
-Vous pouvez planifier des downtime et/ou mettre en sourdine vos monitors Datadog afin qu'ils ne vous alertent pas à des moments précis. Vous pouvez lire comment programmer les downtime ici:
+Vous pouvez planifier des downtime et/ou mettre en sourdine vos monitors Datadog afin qu'ils ne vous alertent pas à des moments précis.
 
 Les moniteurs se déclenchent et émettent des événements lorsqu'ils changent d'état entre ALERT, WARNING (si activé), RESOLVED et NO DATA (si activé). Mais si un moniteur a été mis au silence par un downtime ou une mise en sourdine, toute transition de RÉSOLU vers un autre état ne déclenchera pas le monitor (ni les canaux de notification que cet événement aurait déclenchés).
 
 {{< img src="monitors/downtimes/downtime_on_alert.png" alt="downtime on alert" responsive="true" popup="true" style="width:80%;">}}
 
-Par défaut, ceci n'est pas vrai pour les alertes NO DATA: si un monitor est passé de l'état RÉSOLU à NO DATA alors qu'il a été désactivé, et s'il reste dans un état NO DATA une fois le temps de silence expiré, il n'y a alors pas d'alerte NO DATA. Mais une fois les données renvoyées pour ce monitor, le monitor déclenche un événement de recovery.
+Si un moniteur passe d'un état à l'autre (par exemple, de OK à ALERT, WARNING ou NO DATA) et reste dans cet état une fois que le downtime programmé s'expire, il NE déclenchera PAS de notification. Néamoins, il déclenchera un évènement de récupération une fois que les données seront retournées pour cette étendue ou si le moniteur reviendra dans un état OK.
 
-Cela peut sembler contre intuitif, mais c'est le comportement attendu aujourd'hui, et il a été fait de cette façon pour se protéger des alertes potentiellement sans spam lors de l'utilisation de la fonction "Autoresolve". Si, dans ces circonstances, vous préférez que le moniteur déclenche un événement NO DATA au moment de l'expiration du downtime, il existe une fonctionnalité que vous pouvez activer pour votre compte afin d'activer ce comportement. Pour que cela soit activé, vous pouvez contacter l'équipe de support pour le demander.
+Cela peut sembler contre intuitif, mais c'est le comportement attendu aujourd'hui, et il a été fait de cette façon pour se protéger contre des alertes potentiellement « pourriel » lors de l'utilisation de la fonction « Autoresolve ». Si, dans ces circonstances, vous préférez que le monitor déclenche un événement NO DATA au moment de l'expiration du downtime, il existe une fonctionnalité que vous pouvez activer pour votre compte afin d'activer ce comportement. Pour que cela soit activé, vous pouvez contacter [l'équipe de support][5] pour le demander.
 
 ## Gérer les downtime
 
@@ -63,8 +63,8 @@ Pour planifier les downtimes, cliquez sur le bouton "Schedule Downtime" dans le 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: https://app.datadog.com/monitors#/downtime
 [2]: /graphing/miscellaneous/graphingjson/#scope
 [3]: http://daringfireball.net/projects/markdown/syntax
 [4]: https://app.datadoghq.com/account/settings#integrations
+[5]: /help

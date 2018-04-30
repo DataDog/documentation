@@ -40,6 +40,5 @@ Here is an example that uses the tags field together with the hosts: field in th
 
 {{< img src="graphing/faq/tv9.png" alt="tv9" responsive="true" popup="true">}}
 
-
 [1]: /graphing/event_stream
 [2]: /graphing/faq/how-do-i-overlay-events-onto-my-dashboards

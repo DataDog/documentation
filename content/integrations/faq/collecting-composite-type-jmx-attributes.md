@@ -5,7 +5,7 @@ kind: faq
 
 ## JMXFetch
 
-In the agent, the yaml files for the following integrations are all read by JMXFetch:
+In the Agent, the yaml files for the following integrations are all read by JMXFetch:
 
 * Active MQ
 * Cassandra

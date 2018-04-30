@@ -12,8 +12,6 @@ title: Datadog-WMI Integration
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-
-
 {{< img src="integrations/wmi/wmimetric.png" alt="WMI Metric" >}}
 
 ## Overview
@@ -22,8 +20,6 @@ Get metrics from your Windows applications/servers with Windows Management Instr
 
 * Visualize their performance.
 * Correlate their activity with the rest of your applications.
-
-
 
 ## Setup
 ### Installation
@@ -39,7 +35,6 @@ If you assign the new metric a category of My_New_Metric, the WMI path will be
 `\\<ComputerName>\ROOT\CIMV2:Win32_PerfFormattedData_My_New_Metric`
 
 If the metric isn't showing up in WMI, try running `winmgmt /resyncperf` to force the computer to reregister the performance libraries with WMI.
-
 
 ## Configuration
 

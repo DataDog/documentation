@@ -11,5 +11,4 @@ videos:
 
 Metrics change all the time, so how do you know if a change is anomalous? Datadog now offers 4 [anomaly detection algorithms][1] for different metrics and trends in your infrastructure.
 
-
 [1]: /monitors/monitor_types/anomaly

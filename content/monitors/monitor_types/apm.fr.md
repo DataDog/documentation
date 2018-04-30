@@ -28,7 +28,7 @@ Ils fonctionnent exactement comme les [monitors de métriques][1], mais avec des
 3. Définir les conditions d'alerte:
     {{< img src="monitors/monitor_types/apm/apm_set_alert_conditions.png" alt="APM set alert conditions" responsive="true" popup="true" style="width:75%;" >}}
 4. Configurez les **options de vos notifications**:
-    Reportez-vous à la page de documentation dédiée [Notifications](#monitor-notifications) pour plus d'informations.
+    Reportez-vous à la page de documentation dédiée [Notifications][4] pour plus d'informations.
 
 ## En apprendre plus
 {{< partial name="whats-next/whats-next.html" >}}
@@ -36,3 +36,4 @@ Ils fonctionnent exactement comme les [monitors de métriques][1], mais avec des
 [1]: /monitors/monitor_types/metric
 [2]: /tracing/setup/environment
 [3]: /tracing/visualization/service
+[4]: /monitors/notifications

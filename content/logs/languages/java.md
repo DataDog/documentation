@@ -11,6 +11,9 @@ further_reading:
 - link: "logs/explore"
   tag: "Documentation"
   text: Learn how to explore your logs
+- link: "logs/graph"
+  tag: "Documentation"
+  text: "Perform analytics with Log Graphs"
 - link: "logs/faq/log-collection-troubleshooting-guide"
   tag: "FAQ"
   text: Log Collection Troubleshooting Guide
@@ -32,7 +35,7 @@ By asking your logging library to log into JSON, you will:
 * Ensure that all the attributes of a log event are properly extracted (severity, logger name, thread name, etc...)
 * You'll have access to [MDC][1], which are attributes you can attach to any log events
 
-**To send your logs to Datadog, we recommend logging to a file and then tailing that file with your Datadog agent.**
+**To send your logs to Datadog, we recommend logging to a file and then tailing that file with your Datadog Agent.**
 
 We also strongly encourage you to setup your logging libraries to produce your logs in JSON format to avoid sustaning [custom parsing rules][2].
 
@@ -88,7 +91,7 @@ Edit your `logback.xml` file:
 </configuration>
 ```
 
-## Configure the Datadog agent
+## Configure the Datadog Agent
 
 Create a file `java.yaml` in the Agent's `conf.d/` directory with the following content:
 
@@ -172,7 +175,6 @@ logger.info("Emitted 1001 messages during the last 93 seconds");
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: http://logback.qos.ch/manual/mdc.html
 [2]: /logs/parsing

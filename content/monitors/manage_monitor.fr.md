@@ -58,11 +58,11 @@ Lorsque vous devez exécuter une recherche plus complexe que les cases à cocher
 
 La raison la plus courante pour écrire une requête est de rechercher un texte spécifique sur tous les titres de monitors et les corps des messages. Une simple recherche de `postgresql` renvoie tous les monitors avec` postgresql` n'importe où dans le titre ou le corps du message. Pour effectuer une recherche sur le titre ou le corps du message, mais pas sur les deux, qualifiez le terme de recherche avec le nom du champ, par ex. `title:postgresql`.
 
-Sinon, vous pouvez utiliser des opérateurs booléens (AND, OR et NOT) et des parenthèses pour écrire des requêtes complexes en utilisant des champs de contrôle. La syntaxe de recherche est très similaire à celle de [Elasticsearch] [2], il est donc plus facile de décrire comment la syntaxe n'est *pas* comme la syntaxe Elasticsearch:
+Sinon, vous pouvez utiliser des opérateurs booléens (AND, OR et NOT) et des parenthèses pour écrire des requêtes complexes en utilisant des champs de contrôle. La syntaxe de recherche est très similaire à celle de [Elasticsearch][2], il est donc plus facile de décrire comment la syntaxe n'est *pas* comme la syntaxe Elasticsearch:
 
 * Les expressions régulières ne sont pas prises en charge
 * Le caractère générique de caractère unique (`?`) N'est pas pris en charge, mais le caractère générique général (`*`) l'est
-* Les recherches de proximité ne sont pas supportées, mais l'opérateur [fuzzy][3] l'est
+* Les recherches de proximité ne sont pas supportées mais l'opérateur [fuzzy][3] l'est.
 * Les plages ne sont pas supportées
 * Boosting n'est pas supporté
 
@@ -101,6 +101,6 @@ Lorsque vous rédigez vos requêtes de recherche, vous pouvez utiliser tous les 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors/manage
-[2]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#query-string-syntax 
+[2]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#query-string-syntax
 [3]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_fuzziness
 [4]: https://app.datadoghq.com/monitors/triggered

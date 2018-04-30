@@ -32,5 +32,4 @@ external_redirect: /api/#update-a-timeboard
     * **`default`** [*optionnel*, *défaut*=**None**]:  
     La valeur par défaut de la Template variable lors du chargement du dasboard.
 
-
 [1]: /graphing/

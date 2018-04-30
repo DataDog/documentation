@@ -10,7 +10,9 @@ videos:
 summary: Datadog APM est incroyablement facile à installer. Cette vidéo montre comment démarrer en quelques minutes avec n'importe quelle application Ruby on Rails.
 
 ---
-[Datadog APM](/tracing) est incroyablement facile à installer. Cette vidéo montre comment démarrer en quelques minutes avec n'importe quelle application Ruby on Rails.
+[Datadog APM][1] is incredibly easy to setup. This video shows how to get up and running in just a few minutes with any Ruby on Rails application.
 
+Sign up for a trial account here: [https://app.datadoghq.com/signup][2]
 
-Connectez vous pour un compte d'essai ici: [https://app.datadoghq.com/signup](https://app.datadoghq.com/signup)
+[1]: /tracing
+[2]: https://app.datadoghq.com/signup

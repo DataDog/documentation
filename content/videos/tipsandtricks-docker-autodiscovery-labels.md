@@ -1,17 +1,19 @@
 ---
-title: Datadog Tips & Tricks - Datadog Autodiscovery on Docker with Labels
+title: Datadog Tips & Tricks - Datadog Autodiscovery on Docker with Labels using Agent v6
 kind: video
 language: en
-wistiaid: 5tms8vvod4
+wistiaid: mlxx0j6txw
 videos:
     - Datadog Tips & Tricks
     - Introduction
     - Docker
     - Autodiscovery
     
-summary: Orchestration platforms like Docker, Kubernetes, and Amazon ECS make running containerized services easier and more resilient by handling workload scheduling and request routing. But all of that makes monitoring more difficult. How can you reliably monitor a service which by design constantly changes the definition normal as it moves applications between hosts? The Datadog Agent can automatically track which services are running where, thanks to its Autodiscovery feature. This video shows you how easy it is to get started with Autodiscovery on Docker with Datadog using Docker Labels.
+summary: Orchestration platforms like Docker, Kubernetes, and Amazon ECS make running containerized services easier and more resilient by handling workload scheduling and request routing. But that makes monitoring more difficult. How can you reliably monitor a service which by design constantly changes the definition normal as it moves applications between hosts? The Datadog Agent can automatically track which services are running where, thanks to its Autodiscovery feature. This video shows you how easy it is to get started with Autodiscovery on Docker with Datadog using Docker Labels.
 ---
-Orchestration platforms like Docker, Kubernetes, and Amazon ECS make running containerized services easier and more resilient by handling workload scheduling and request routing. But all of that makes monitoring more difficult. How can you reliably monitor a service which by design constantly changes the definition normal as it moves applications between hosts? The Datadog Agent can automatically track which services are running where, thanks to its Autodiscovery feature. This video shows you how easy it is to get started with Autodiscovery on Docker with Datadog using Docker Labels.
+Orchestration platforms like Docker, Kubernetes, and Amazon ECS make running containerized services easier and more resilient by handling workload scheduling and request routing. But that makes monitoring more difficult. How can you reliably monitor a service which by design constantly changes the definition normal as it moves applications between hosts? The Datadog Agent can automatically track which services are running where, thanks to its Autodiscovery feature. This video shows you how easy it is to get started with Autodiscovery on Docker with Datadog using Docker Labels.
+
+Note: This video uses v6 of the Datadog agent. If you want to use the older agent, refer to [the video for Agent v5](/videos/tipsandtricks-docker-autodiscovery-labels-v5/). 
 
 * [Container Challenges](?wtime=5)
 * [Documentation](?wtime=41)
@@ -22,6 +24,4 @@ Orchestration platforms like Docker, Kubernetes, and Amazon ECS make running con
 * [Three Autodiscovery Scenarios](?wtime=162)
 * [Set Up Docker Labels](?wtime=199)
 * [Setting Up Multiple Configurations](?wtime=283)
-
-
 

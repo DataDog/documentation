@@ -12,7 +12,7 @@ By default, Cloudwatch metrics, including RDS metrics, are submitted with a dela
 
 If you're using enhanced RDS monitoring, metrics will be reported much more frequently and with lower latency, so a missing data timeframe of 5 minutes would be fine ([example monitor](https://cl.ly/1u3f0J1d1I3c)). Make sure to set up your monitor on an enhanced metric (e.g. `aws.rds.cpuutilization.total`) if enhanced monitoring is enabled.
 
-Finally, install the agent on an EC2 instance in the same security group as the RDS and use our agent's DB integrations to connect to your RDS DB, provided that we have an agent integration for the database you're monitoring. The agent submits metrics approximately every 15 seconds, and also submits status checks letting you know whether it is possible to connect to your DB.
+Finally, install the Agent on an EC2 instance in the same security group as the RDS and use our Agent's DB integrations to connect to your RDS DB, provided that we have an Agent integration for the database you're monitoring. The Agent submits metrics approximately every 15 seconds, and also submits status checks letting you know whether it is possible to connect to your DB.
 
 You can can set up an integration monitor to alert if the some number of health checks fail ([example monitor](https://cl.ly/3Z473p16232a)). Note that "to get the metrics from RDS and the ones from the native integration to match up, you will need to use the dbinstanceidentifier tag on the native integration based on the identifier you assign to the RDS instance".
 

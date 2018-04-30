@@ -20,11 +20,11 @@ L'Agent Datadog inclut DogStatsD, un puissant démon statsd avec des fonctionnal
 
 L'API et [DogStatsD][3] sont pratiques pour _push_  des metriques à Datadog depuis l'une de vos applications.
 Si vous souhaitez régulièrement _pull_ des métriques issues d'un système particulier, similaire à ce qui est fait par l'agent pour les systèmes que nous supportons, vous pouvez [ajouter votre propre intégration][5]. Nous avons fourni des étapes détaillées et des ressources pour [le développement][6] et [le testing][7] de nouvelles intégrations.
-Ces intégrations peuvent ensuite être facilement partagées avec la communauté Datadog, par exemple via notre repository github [Datadog / integrations-extras ][8]
+Ces intégrations peuvent ensuite être facilement partagées avec la communauté Datadog, par exemple via notre repository github [Datadog / integrations-extras][8].
 
 Lorsque vous envoyez des métriques via [DogStatsD][3] ou une via une intégration personnalisée, il est utile d'avoir une meilleure compréhension des métriques. Voici quelques ressources techniques concernant les métriques:
 
-* [En savoir plus sur le comportement de métriques][9]
+* [En savoir plus sur le comportement des métriques][9]
 
 * [En savoir plus sur les différents types de métriques][9]
 
@@ -33,8 +33,7 @@ Consultez nos [bibliothèque de tracing pour l'APM][10], afin de les utiliser ou
 
 ## Intégrations de la communauté
 De nombreux utilisateurs de notre communauté ont déjà créé [des intégrations][11] avec un grand nombre d'applications couramment utilisées.
-Ces ressources sont utiles comme références lors de la création d'une nouvelle intégration d'agent.
-
+Ces ressources sont utiles comme références lors de la création d'une nouvelle intégration d'Agent.
 
 [1]: /api
 [2]: /developers/libraries/#api-and-dogstatsd-client-libraries

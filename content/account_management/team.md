@@ -1,4 +1,3 @@
-
 ---
 title: Team
 kind: documentation

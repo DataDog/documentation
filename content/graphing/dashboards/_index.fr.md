@@ -36,13 +36,16 @@ Cela ouvre le panneau d'édition des templates variables.
 
 Une template variable est définie par un nom et des paramètres facultatifs pour 'Tag Group' et 'Default Tag'. Un Tag Group est un préfixe partagé entre plusieurs tag, comme `redis_port` pour les tags `redis_port:6379` et `redis_port:6380`. La définition d'un Tag Group élimine les tags non pertinents du sélecteur de la variable et supprime le préfixe des valeurs répertoriées pour plus de clarté - vous verrez donc `6379` et `6380` dans la liste déroulante Default Tag. L'option 'Default Tag' détermine la valeur initiale de la variable sur le dashboard.
 
-## Utilisation des template variables dans les éditeurs de graphiques
+## Utilisation des template variables dans les éditeurs de graphiques/widgets
 
 {{< img src="graphing/dashboards/redis-tpl-graph-editor.png" alt="Redis-tpl graph editor" responsive="true" style="width:70%;" >}}
 
 Une fois définies, les templates variables apparaissent à côté des options de tag et d'host dans les éditeurs de graphiques. Si vous définissez `6379` comme la valeur de `$redis`, tous les graphiques définis avec `$redis` ont désormais pour contexte  `redis_port:6379`.
 
 {{< img src="graphing/dashboards/redis-tpl-selected.png" alt="Redis tpl selected" responsive="true" popup="true" style="width:70%;">}}
+
+Vous pouvez aussi les utiliser dans les widgets tel que le flux d'événements avec une requête comme `tags:$redis`.
+
 
 ## Corrélation d'événements au moment du design
 La corrélation d'événements fait référence à la superposition d'événements au-dessus d'un graphique de dashboard et constitue une fonctionnalité importante de la plateforme Datadog. Vous pouvez configurer la corrélation à deux moments différents: soit lorsque vous construisez le dashboard ou adhoc au moment où vous affichez le dashboard.

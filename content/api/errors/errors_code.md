@@ -30,5 +30,3 @@ external_redirect: /api/#success-and-errors
 {{< code-snippets basename="api-error" static="true" >}}
 ##### Example Warning Response</h5>
 {{< code-snippets basename="api-warning" static="true" >}}
-
-

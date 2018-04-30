@@ -36,7 +36,7 @@ Alors qu'un environnement plus complexe peut se répartir en 6 services:
 * 3 services séparés: `webapp`, `admin`, and `query`.
 * 3 services externes séparés:  `master-db`,  `replica-db`, and `yelp-api`.
 
-l'APM attribue automatiquement des noms à vos services. Cependant, vous pouvez également les nommer explicitement. Consultez les instructions pour: [Go][1], [Java][2], [Python][3], [Ruby][4].
+L'APM attribue automatiquement des noms à vos services; Cependant, vous pouvez également les nommer explicitement. Consultez les instructions pour: [Go][1], [Java][2], [Python][3], [Ruby][4].
 
 Nom de Service:
 
@@ -77,7 +77,6 @@ Avoir une très grande cardinalité de ressources rend Datadog plus difficilemen
 * Les statistiques sont moins pertinentes (car elles sont trop fragmentées).
 
 En conséquence, nous avons une limite stricte sur la cardinalité des ressources pour un service donné.
-
 
 ### Trace
 

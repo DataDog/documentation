@@ -13,10 +13,8 @@ Prior to revoking your AWS Keys you'll want to configure AWS Role Delegation in 
 3. From the selection, choose Role for Cross-Account Access and click the Select button for Allows IAM users from a 3rd party AWS account to access this account.
     {{< img src="integrations/faq/A3.gif" alt="A3" responsive="true" popup="true">}}
 
-
 4. For Account ID, enter 464622532012 (Datadog’s account ID). This means that you will grant Datadog and Datadog only read access to your AWS data.
     {{< img src="integrations/faq/A4.png" alt="A4" responsive="true" popup="true">}}
-
 
 For External ID, enter the one generated in the Role Delegation tab of the [AWS Integration][1] configuration page. For more information about the External ID, refer to this document in the [IAM User Guide][2].
     {{< img src="integrations/faq/A5.png" alt="A5" responsive="true" popup="true">}}
@@ -42,7 +40,6 @@ Leave Require MFA disabled.
     {{< img src="integrations/faq/A11.png" alt="A11" responsive="true" popup="true">}}
 
 If you encounter any issues or have additional questions, [contact us][5]!
-
 
 [1]: /integrations/amazon_web_services
 [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html

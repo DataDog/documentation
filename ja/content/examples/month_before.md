@@ -19,7 +19,6 @@ Here is an example of aws.ec2.cpuutilization with the month_before value shown a
 
 For now, using functions like month_before is out of scope for the graphical editor so you have to use the JSON editor. Here is the JSON for this graph:
 
-
 {{< highlight json >}}
 {
   "requests": [

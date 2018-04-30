@@ -15,7 +15,6 @@ doclevel: basic
 
 ## 概要
 
-
 次の目的で、Campfireとの連携をします:
 
 * Datadogのイベントストリームへチームメンバーがホストした際、Campfireへ通知します。

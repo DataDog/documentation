@@ -22,7 +22,6 @@ JMX Checks have a limit of 350 metrics per instance which should be enough to sa
 
 ## 概要
 
-
 JMX Checks are agents checks that collect metrics from applications that expose them using [JMX](http://www.oracle.com/technetwork/java/javase/tech/javamanagement-140525.html).
 
 In order to collect these metrics, a lightweight Java plugin named JMXFetch is called by the Datadog Agent to connect to the MBean Server and to collect these metrics. This plugin sends metrics to the Datadog Agent using the DogStatsD server running with the Agent.
@@ -34,8 +33,6 @@ JMXチェックは、JMXを使用してそれらの公開アプリケーショ�
 これらのメトリックを取得するために、JMXFetchという名前の軽量のJavaプラグインを、MBeanサーバーに接続しDatadogエージェントによって呼び出されます。このプラグインは、エージェントで実行されるDogStatsDサーバーを使用してDatadogエージェントにメトリックを送信します。
 
 JMXのチェックでは、あなたが取得するメトリックをカスタマイズすることはとても簡単です、取得するメトリックスはインスタンスごとに350メトリックスまでとなっています。
-
-
 
 <!-- ### Enabling JMX checks
 The instructions to set up these integrations from within the Datadog Agent can be found here:
@@ -55,16 +52,13 @@ Datadog Agent内でJMXを使ったインテグレーションを設定する手�
 - [Solr](https://app.datadoghq.com/account/settings#integrations/solr)
 - [Tomcat](https://app.datadoghq.com/account/settings#integrations/tomcat)
 
-
 <!-- ## Customization
 
 JMX Checks have a default configuration that will collect some metrics from your JMX application. They also allow you to specify a configuration in the yaml file that will be read by JMXFetch to filter which metrics it should send back to the Agent. -->
 
 ### カスタマイズ
 
-
 JMX Checkには、JMXアプリケーションから基本的なメトリックを取得するように初期設定してあります。尚、JMXFetchによって読み込まれるYAMLファイルを設定することにより、Datadog Agentに渡されるJMXアプリケーションから取得したメトリクスを指定することができます。
-
 
 <!-- #### Commands to view the metrics that are available:
 
@@ -126,7 +120,6 @@ collected:
 - 設定に基づいてJMXからのメトリクスを取得し、コンソールに表示する:
 
       `sudo /etc/init.d/datadog-agent jmx collect`
-
 
 <!-- #### How to customize what metrics to collect:
 
@@ -190,7 +183,6 @@ For a given bean, metrics get tagged in the following manner:
 Your metric will be mydomain (or some variation depending on the attribute
 inside the bean) and have the tags `attr0:val0, attr1:val1, domain:mydomain`.
 
-
 <!-- ## Description of the filters
 
 These dictionaries have some specials keys:
@@ -224,7 +216,6 @@ Example: Let's say you want to collect metrics regarding the Cassandra
 cache. You could use the `type:` `- Caches` filter:
 
 {{< snippet-code-block file="jmx-cassandra-cache.yaml" >}}
-
 
 <!-- ### The `attribute` filter
 
@@ -298,9 +289,7 @@ Here is another filtering example:
                   - 95thPercentile
                   - 99thPercentile
 
-
 <!-- ### Note
-
 
 List of filters is only supported in Datadog Agent > 5.3.0. If you are using an older version, please use singletons and multiple `include` statements instead.
 
@@ -327,7 +316,6 @@ List of filters is only supported in Datadog Agent > 5.3.0. If you are using an 
 
 #### Note
 
-
 フィルターのリストは、Datadog Agent 5.3.0からサポートされました。もし、旧バージョンのDatadog Agentを使っている場合は、bean毎に別の`include`文を記述するようにしてください。
 
 - Datadog Agent > 5.3.0 を使用している場合
@@ -350,7 +338,6 @@ List of filters is only supported in Datadog Agent > 5.3.0. If you are using an 
                 domain: domain_name
                 bean: second_bean_name
         ...
-
 
 <!-- ## Troubleshooting
 

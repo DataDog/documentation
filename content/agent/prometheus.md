@@ -47,9 +47,20 @@ Example of Autodiscovery using pod annotations on a `linkerd` pod:
 
 ```yaml
 annotations:
-    ad.datadoghq.com/l5d.check_names: '["prometheus"]'
-    ad.datadoghq.com/l5d.init_configs: '[{}]'
-    ad.datadoghq.com/l5d.instances: '[{"prometheus_url": "http://%%host%%:9990/admin/metrics/prometheus", "namespace": "linkerd", "metrics": ["jvm:thread:daemon_count"], "type_overrides": {"jvm:thread:daemon_count": "gauge"}}]'
+    ad.datadoghq.com/l5d.check_names: |
+      ["prometheus"]
+    ad.datadoghq.com/l5d.init_configs: |
+      [{}]
+    ad.datadoghq.com/l5d.instances: |
+      [
+        {
+          "prometheus_url": "http://%%host%%:9990/admin/metrics/prometheus", "namespace": "linkerd", 
+          "metrics": ["jvm:thread:daemon_count"], 
+          "type_overrides": {
+            "jvm:thread:daemon_count": "gauge"
+          }
+        }
+      ]
 ```
 
 ### From custom to official integration
@@ -60,8 +71,7 @@ Official integrations have their own dedicated directories. There's a default in
 
 ## Advanced usage: Prometheus check interface
 
-If you have more advanced needs than the generic check (metrics preprocessing for example) you can write a custom `PrometheusCheck`. It's [the mother class][6] of the generic check and it provides a structure and some helpers to collect metrics, events, and service checks exposed via Prometheus. Minimal configuration for checks based on this class include:
-
+If you have more advanced needs than the generic check (metrics preprocessing for example) you can write a custom `PrometheusCheck`. It's [the base class][6] of the generic check and it provides a structure and some helpers to collect metrics, events, and service checks exposed via Prometheus. Minimal configuration for checks based on this class include:
 
 - Overriding `self.NAMESPACE`
 - Overriding `self.metrics_mapper`
@@ -235,7 +245,6 @@ class KubeDNSCheck(PrometheusCheck):
         self.process(endpoint, send_histograms_buckets=send_buckets, instance=instance)
 ```
 
-
 ## Going further
 
 You can improve your Prometheus check with the following methods:
@@ -254,13 +263,14 @@ If the `labels_mapper` dictionary is provided, the metrics labels in `labels_map
 
 ### `self.type_overrides`
 
-`type_overrides` is a dictionary where the keys are Prometheus metric names and the values are a metric type (name as string) to use instead of the one listed in the payload. It can be used to force a type on untyped metrics.
-Note: it is empty in the mother class but will need to be overloaded/hardcoded in the final check not to be counted as custom metric.
+`type_overrides` is a dictionary where the keys are Prometheus metric names and the values are a metric type (name as string) to use instead of the one listed in the payload. It can be used to force a type on untyped metrics.  
+Available types are: `counter`, `gauge`, `summary`, `untyped`, and `histogram`.
+
+**Note**: it is empty in the base class but needs to be overloaded/hardcoded in the final check not to be counted as custom metric.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/kube_dns.py
 [2]: https://github.com/DataDog/integrations-core/tree/master/prometheus

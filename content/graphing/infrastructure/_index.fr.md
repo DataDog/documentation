@@ -98,9 +98,7 @@ Un moyen facile d'accomplir ceci serait d'utiliser le script suivant qui utilise
 
 Ce script affiche tous les agents en cours d'exécution et leurs numéros de version dans un document distinct. De plus, vous pouvez modifier le script pour entrer un numéro de version si vous souhaitez également que tous les agents en cours d'exécution soient sous un numéro de version particulier. Il existe également un fichier séparé si vous souhaitez convertir la sortie JSON dans un fichier CSV pour des examens ulterieurs.
 
-Une fois que vous avez déterminé les hosts que vous souhaitiez mettre à jour, vous pouvez installer manuellement l'agent à partir de la [page d'installation][3].
-
-Ou vous pouvez utiliser l'une de nos intégrations d'automatisation comme [Chef][4], [Puppet][5], ou [Ansible][6].
+Une fois que vous avez déterminé les hosts que vous souhaitiez mettre à jour, vous pouvez installer manuellement l'agent à partir de la [page d'installation][3], ou alors  grâce à une intégration comme [Chef][4], [Puppet][5], ou [Ansible][6].
 
 ### Liste des instances ec2 sans l'agent de Datadog installé
 
@@ -113,7 +111,7 @@ Vous pouvez accéder grâce à un script aux informations de l'host et obtenir l
 
 {{< img src="graphing/infrastructure/index/ec2_instances_without_dd_agent.png" alt="ec2_instances_without_dd_agent" responsive="true" popup="true" style="width:90%;">}}
 
-[Consultez le script qui affiche la list des hosts][8].
+[Consultez le script pour afficher la liste des hosts][8].
 
 ## En apprendre plus
 

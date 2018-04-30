@@ -22,7 +22,7 @@ further_reading:
   text: Collect your Docker traces
 ---
 
-If you haven't installed the Agent yet, instructions can be found [in the Datadog agent integration page][1]. You can also consult our [Official Docker agent 6 image][2].
+If you haven't installed the Agent yet, instructions can be found [in the Datadog Agent integration page][1]. You can also consult our [Official Docker Agent 6 image][2].
 
 ## How to run it
 
@@ -40,7 +40,7 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
 
 ### Environment variables
 
-The agent is highly customizable, here are the most used environment variables:
+The Agent is highly customizable; here are the most used environment variables:
 
 #### Global options
 
@@ -48,19 +48,19 @@ The agent is highly customizable, here are the most used environment variables:
 - `DD_HOSTNAME`: hostname to use for metrics (if autodetection fails)
 - `DD_TAGS`: host tags, separated by spaces. For example: `simple-tag-0 tag-key-1:tag-value-1`
 
-#### Optional collection agents
+#### Optional collection Agents
 
 These features are disabled by default for security or performance reasons, you need to explicitly enable them:
 
-- `DD_APM_ENABLED`: run the trace-agent along with the infrastructure agent, allowing the container to accept traces on `8126/tcp`
-- `DD_LOGS_ENABLED`: run the [log-agent][3] along with the infrastructure agent.
+- `DD_APM_ENABLED`: run the trace-agent along with the infrastructure Agent, allowing the container to accept traces on `8126/tcp`
+- `DD_LOGS_ENABLED`: run the [log-agent][3] along with the infrastructure Agent.
 - `DD_PROCESS_AGENT_ENABLED`: enable live process collection in the [process-agent][4]. The Live Container View is already enabled by default if the Docker socket is available
 
-#### Dogstatsd (custom metrics)
+#### DogStatsD (custom metrics)
 
 Send custom metrics via [the statsd protocol][5]:
 
-- `DD_DOGSTATSD_NON_LOCAL_TRAFFIC`: listen to dogstatsd packets from other containers, required to send custom metrics
+- `DD_DOGSTATSD_NON_LOCAL_TRAFFIC`: listen to DogStatsD packets from other containers, required to send custom metrics
 - `DD_HISTOGRAM_PERCENTILES`: histogram percentiles to compute, separated by spaces. The default is "0.95"
 - `DD_HISTOGRAM_AGGREGATES`: histogram aggregates to compute, separated by spaces. The default is "max median avg count"
 - `DD_DOGSTATSD_SOCKET`: path to the unix socket to listen to. Must be in a `rw` mounted volume.
@@ -74,20 +74,21 @@ We automatically collect common tags from [Docker][6], [Kubernetes][7], [ECS][8]
 - `DD_DOCKER_ENV_AS_TAGS` : extract docker container environment variables
 - `DD_KUBERNETES_POD_LABELS_AS_TAGS` : extract pod labels
 
-Either define them in your custom `datadog.yaml`, or set them as JSON maps in these envvars. The map key is the source (`label/envvar`) name, and the map value the datadog tag name.
-
-#### Ignore containers
-
-Exclude containers from the metrics collection and Autodiscovery, if these are not useful for you. We already exclude Kubernetes and OpenShift `pause` containers by default. See the `datadog.yaml.example` file for more documentation, and examples.
-- `DD_AC_INCLUDE`: whitelist of containers to always include
-- `DD_AC_EXCLUDE`: blacklist of containers to exclude
-
-**Note**: The `docker.containers.running`, `.stopped`, `.running.total` and `.stopped.total` metrics are not affected by these settings and always count all containers. This does not affect your per-container billing.
-
 ```shell
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app","release":"helm_release"}'
 DD_DOCKER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 ```
+
+Either define them in your custom `datadog.yaml`, or set them as JSON maps in these envvars. The map key is the source (`label/envvar`) name, and the map value the datadog tag name.
+
+#### Ignore containers
+
+Exclude containers from the metrics collection and Autodiscovery, if these are not useful for you. We already exclude Kubernetes and OpenShift `pause` containers by default. See the `datadog.yaml.example` file for more documentation, and examples:
+
+* `DD_AC_INCLUDE`: Space-separated strings of the whitelist of containers to always include e.g `"image:image_name_1 image:image_name_2"`
+* `DD_AC_EXCLUDE`: Space-separated strings of the blacklist of containers to exclude e.g `"image:image_name_3 image:image_name_4"`
+
+**Note**: The `docker.containers.running`, `.stopped`, `.running.total` and `.stopped.total` metrics are not affected by these settings and always count all containers. This does not affect your per-container billing.
 
 ## Further Reading
 

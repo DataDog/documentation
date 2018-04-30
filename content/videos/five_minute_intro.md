@@ -10,4 +10,3 @@ summary: Have 5 minutes? That's enough to get a good overview of what Datadog ha
 
 Learn the basics of Datadog in about five minutes. This video covers all the basics of the platform.
 
-

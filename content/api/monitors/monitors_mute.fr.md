@@ -12,3 +12,4 @@ external_redirect: /api/#mute-a-monitor
     Le context auquel appliquer le silence, ex. **role:db**.
 * **`end`** [*optionnel*, *défaut*=**None**]:  
     Timestamp POSIX de la fin du mute.
+

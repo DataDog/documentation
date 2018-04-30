@@ -1,4 +1,3 @@
-
 ---
 title: Gestion des comptes à plusieurs organisations
 kind: documentation
@@ -20,7 +19,7 @@ La fonctionnalité Compte multi-organisations doit être activée par le support
 1. Une fois la fonctionnalité activée, accédez à la page [New Account][3].
 2. Entrez le nom de l'organisation enfant que vous souhaitez créer et cliquez sur le bouton **Create**. **Le nom de l'organisation enfant ne peut pas dépasser 32 caractères.**
 
-La nouvelle organisation enfant sera créée en tant que compte d'essai gratuit de 14 jours. Vous pouvez modifier le plan de facturation sur la page [Organization account settings du compte][4]. Si vous souhaitez ajouter la facturation de l'organisation-enfant au compte de facturation de votre organisation-mère, [contactez votre représentant commercial](mailto://success@datadoghq.com).
+La nouvelle organisation enfant sera créée en tant que compte d'essai gratuit de 14 jours. Vous pouvez modifier le plan de facturation sur la page [Organization account settings du compte][4]. Si vous souhaitez ajouter la facturation de l'organisation-enfant au compte de facturation de votre organisation-mère, [contactez votre représentant commercial][5].
 
 ## Domaines personnalisés pour chaque organisation enfant
 
@@ -28,7 +27,7 @@ La fonctionnalité de domaine personnalisé doit être activée par le support. 
 
 Si vous êtes membre de plusieurs organisations, les sous-domaines personnalisés vous aident à identifier rapidement la source d'une alerte ou d'une notification. Ils vous redirigeront immédiatement vers l'organisation associée au sous-domaine.
 
-Par exemple, l'URL `https: //app.datadoghq.com/event/event?Id =1` est associée à un événement de l'organisation A. Si un utilisateur est membre de l'organisation A et de l'organisation B, mais qu'il est actuellement sur une page Datadog dans le contexte de l'organisation B, cette URL renvoie une erreur 404 Not Found. L'utilisateur doit alors passer à l'organisation A en utilisant le [menu des paramètres du compte utilisateur][5], puis revisiter l'URL. Cependant, avec des sous-domaines personnalisés, l'utilisateur pourrait visiter `https://org-a.datadoghq.com/event/event?id=1`, ce qui basculerait automatiquement le contexte de l'utilisateur vers l'organisation A et afficherait la bonne page.
+Par exemple, l'URL `https: //app.datadoghq.com/event/event?Id =1` est associée à un événement de l'organisation A. Si un utilisateur est membre de l'organisation A et de l'organisation B, mais qu'il est actuellement sur une page Datadog dans le contexte de l'organisation B, cette URL renvoie une erreur 404 Not Found. L'utilisateur doit alors passer à l'organisation A en utilisant le [menu des paramètres du compte utilisateur](/account_management/#manage-your-organisations), puis revisiter l'URL. Cependant, avec des sous-domaines personnalisés, l'utilisateur pourrait visiter `https://org-a.datadoghq.com/event/event?id=1`, ce qui basculerait automatiquement le contexte de l'utilisateur vers l'organisation A et afficherait la bonne page.
 
 ## En apprendre plus
 
@@ -38,4 +37,4 @@ Par exemple, l'URL `https: //app.datadoghq.com/event/event?Id =1` est associée 
 [2]: /help
 [3]: https://app.datadoghq.com/account/new_org
 [4]: https://app.datadoghq.com/account/billing
-[5]: /account_management/#manage-your-organisations
+[5]: mailto://success@datadoghq.com

@@ -61,10 +61,12 @@ The Ruby APM tracer sends trace data through the Datadog Agent.
     end
     ```
 
+    You can also activate additional integrations here (see [Integration instrumentation](#integration-instrumentation))
+
 ### Quickstart for other Ruby applications
 
 1. Install the gem with `gem install ddtrace`
-2. Include the Ruby application with:
+2. Add a configuration block to your Ruby application:
 
     ```ruby
     require 'ddtrace'
@@ -75,7 +77,9 @@ The Ruby APM tracer sends trace data through the Datadog Agent.
     end
     ```
 
-3. Add manual instrumentation around your code (see [Manual instrumentation](#manual-instrumentation))
+3. Add or activate instrumentation by doing either of the following:
+    1. Activate integration instrumentation (see [Integration instrumentation](#integration-instrumentation))
+    2. Add manual instrumentation around your code (see [Manual instrumentation](#manual-instrumentation))
 
 ### Final steps for installation
 
@@ -92,41 +96,19 @@ If you aren't using supported library instrumentation (see [Library compatibilit
 **Example**
 
 ```ruby
-require 'ddtrace'
-require 'sinatra'
-require 'active_record'
-
-get '/home' do
-  # Wrap around the code you'd like to trace
-  # Provide a name for the trace (usually a generic kind of action) (required)
-  # Yields a Datadog::Span object which describes the action being traced
-  Datadog.tracer.trace('web.request') do |span|
-
-    # Name of the service the trace should be categorized under.
-    # Required.
-    span.service = 'my-web-site'
-
-    # Name of the application-specific action being traced (usually a path, or job)
-    # Required.
-    span.resource = '/home'
-
-    # Add any metadata tags to the span
-    # Optional.
-    span.set_tag('http.method', request.request_method)
-
-    # Trace a database request
-    # This span will be nested within the parent trace.
-    tracer.trace('posts.fetch') do |database_span|
-      span.service = 'my-database'
-      span.resource = 'Posts'
+get '/posts' do
+  Datadog.tracer.trace('web.request', service: 'my-blog', resource: 'GET /posts') do |span|
+    # Trace the activerecord call
+    Datadog.tracer.trace('posts.fetch') do
       @posts = Posts.order(created_at: :desc).limit(10)
     end
 
-    # Trace template rendering
-    # This span will be a sibling to the database span.
-    tracer.trace('template.render') do |template_span|
-      span.service = 'my-template'
-      span.resource = 'index'
+    # Add some APM tags
+    span.set_tag('http.method', request.request_method)
+    span.set_tag('posts.count', @posts.length)
+
+    # Trace the template rendering
+    Datadog.tracer.trace('template.render') do
       erb :index
     end
   end
@@ -274,7 +256,6 @@ ___
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /tracing/setup
 [2]: /tracing/setup/docker/

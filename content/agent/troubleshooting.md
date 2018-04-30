@@ -16,13 +16,13 @@ further_reading:
   text: Collect your traces
 ---
 
-If you ended up at this page and have not yet installed the Datadog Agent, go [to the dedicated agent integration page][1] for installation instructions. If you just installed the Agent, it might take a few moments before you start seeing metrics appear. The first place you should check for metrics is the [Metrics Explorer][2].
+If you ended up at this page and have not yet installed the Datadog Agent, go [to the dedicated Agent integration page][1] for installation instructions. If you just installed the Agent, it might take a few moments before you start seeing metrics appear. The first place you should check for metrics is the [Metrics Explorer][2].
 
 If you think you might be experiencing issues, the first thing to do is [run the info command][3] and check the [Agent logs][4].
 
-If you're still unsure about the issue, you may reach out to [Datadog support team][5] along with [a flare](#send-a-flare) of your agent.
+If you're still unsure about the issue, you may reach out to [Datadog support team][5] along with [a flare](#send-a-flare) of your Agent.
 
-## Get more logging from the agent
+## Get more logging from the Agent
 
 To enable the full debug mode:
 
@@ -34,11 +34,11 @@ To enable the full debug mode:
 
 4. Wait a few minutes to generate some logs. [Look here][4] to find the location of the logs.
 
-### Obtaining debug logs from the container agent
+### Obtaining debug logs from the container Agent
 
-This process covers agent v6 only, for agent v5 refer to [the dedicated documentation on how to collect more logs with the Datadog container agent v5][6]
+This process covers Agent v6 only, for Agent v5 refer to [the dedicated documentation on how to collect more logs with the Datadog container Agent v5][6]
 
-**Set the `DD_LOG_LEVEL=debug` environment variable when starting your agent.**
+**Set the `DD_LOG_LEVEL=debug` environment variable when starting your Agent.**
 
 If your container is already running:
 
@@ -46,13 +46,13 @@ If your container is already running:
     
     `rm /var/run/s6/services/agent/finish`
 
-2. Then stop the agent:
+2. Then stop the Agent:
     
     ```
     s6-svc -d /var/run/s6/services/agent/
     ```
 
-3. Restart then the agent with debug log level by running:
+3. Restart then the Agent with debug log level by running:
     
     ```
     DD_LOG_LEVEL=debug agent start
@@ -60,9 +60,9 @@ If your container is already running:
 
 ## Send a flare
 
-If you are running the 5.3 version (or higher) of the agent, you're able to send all necessary troubleshooting information to our Support Team, with one flare command!
+If you are running the 5.3 version (or higher) of the Agent, you're able to send all necessary troubleshooting information to our Support Team, with one flare command!
 
-`flare` gathers all of the agent's configuration files and logs into an archive file. It removes sensitive information including passwords, API keys, Proxy credentials, and SNMP community strings.  
+`flare` gathers all of the Agent's configuration files and logs into an archive file. It removes sensitive information including passwords, API keys, Proxy credentials, and SNMP community strings.  
 **Confirm the upload of the archive to immediately send it to Datadog support**.  
 Since the Datadog Agent is completely open source, you can [verify the code's behavior][7]. You can also review the archive prior to sending as the flare prompts a confirmation before uploading it.  
 
@@ -87,7 +87,7 @@ In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if
 
 * [Common Windows Agent Installation Error 1721][11]
 * [How to monitor SNMP devices?][12]
-* [I stopped my agent but I’m still seeing the host in my Datadog account.][13]
+* [I stopped my Agent but I’m still seeing the host in my Datadog account.][13]
 * [Network Time Protocol (NTP) Offset Issues][14]
 * [How to solve Permission denied errors?][15]
 * [Error Restarting Agent: Already Listening on a Configured Port][16]
@@ -95,12 +95,11 @@ In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if
 * [Starting Datadog Agent (using supervisord):Error: Cannot open an HTTP server: socket.error reported errno.EACCES (13)][18]
 * [Why don't I see the 'system.processes.open_file_descriptors' metric?][19]
 * [How is the 'system.mem.used' metric calculated?][20]
-* [How do I install the agent on a server with limited internet connectivity?][21]
+* [How do I install the Agent on a server with limited internet connectivity?][21]
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://app.datadoghq.com/metric/explorer

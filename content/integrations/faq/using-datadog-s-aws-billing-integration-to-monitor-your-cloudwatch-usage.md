@@ -26,8 +26,6 @@ After creating this monitor, Datadog will alert you when your CloudWatch spend b
 
 You can read more about our [AWS billing integration here][3].
 
-
-
 [1]: /integrations/amazon_web_services
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_billing
 [3]: /integrations/faq/how-do-i-monitor-my-aws-billing-details

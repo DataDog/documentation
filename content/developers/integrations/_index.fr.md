@@ -53,18 +53,18 @@ Get metrics from Docker in real time to:
 * Visualize your containers' performance.
 * Correlate the performance of containers with the applications running inside.
 
-There are three ways to setup the Docker integration: install the agent on the host, on a single priviledged container, and on each individual container.
+There are three ways to setup the Docker integration: install the Agent on the host, on a single priviledged container, and on each individual container.
 
 ## Setup
 ### Installation
 **Required with some exceptions**
 
-The installation section should cover anything that needs to be installed on the agent host. For instance, in the Docker installation section you learn about installing the agent into a container. If there is nothing to install on the agent host, this section can be left out. To be a complete integration, either an installation section or a configuration section must be included.
+The installation section should cover anything that needs to be installed on the Agent host. For instance, in the Docker installation section you learn about installing the Agent into a container. If there is nothing to install on the Agent host, this section can be left out. To be a complete integration, either an installation section or a configuration section must be included.
 
 ### Configuration
 **Required with some exceptions**
 
-The configuration section should cover anything that you can configure in the Datadog interface or the agent configuration files. In almost every case this section should be included since there is almost always something to configure. To be a complete integration, either an installation section or a configuration section must be included.
+The configuration section should cover anything that you can configure in the Datadog interface or the Agent configuration files. In almost every case this section should be included since there is almost always something to configure. To be a complete integration, either an installation section or a configuration section must be included.
 
 ### Configuration Options
 

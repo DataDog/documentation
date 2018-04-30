@@ -11,7 +11,6 @@ kind: integration
 
 <!-- ### Overview
 
-
 Connect Riak to Datadog in order to:
 
 - Visualize Riak performance and utilization.
@@ -19,12 +18,10 @@ Connect Riak to Datadog in order to:
 
 ## 概要
 
-
 次の目的の為に、RiakのメトリクスをDatadogに送信します:
 
 - Riakのパフォーマンスの可視化する
 - Riakのパフォーマンス情報と他のアプリケーションの情報を連携し状況を把握する
-
 
 Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 

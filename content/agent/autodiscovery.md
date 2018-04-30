@@ -17,7 +17,7 @@ further_reading:
   text: Collect your traces
 ---
 
-This page covers Autodiscovery with agent 6 only, [refer to the dedicated documentation to setup Autodiscovery with agent 5][1]
+This page covers Autodiscovery with Agent 6 only, [refer to the dedicated documentation to setup Autodiscovery with Agent 5][1]
 
 ## How it Works
 
@@ -45,7 +45,7 @@ The Agent watches for Docker events—container creation, destruction, starts, a
 
 ## How to set it up
 
-The Datadog Docker agent automatically auto-discovers other containers.
+The Datadog Docker Agent automatically auto-discovers other containers.
 
 ## Setting up Check Templates
 
@@ -55,7 +55,7 @@ Each **Template Source** section below shows a different way to configure check 
 
 Storing templates as local files is easy to understand and doesn't require an external service or a specific orchestration platform. The downside is that you have to restart your Agent containers each time you change, add, or remove templates.
 
-The Agent looks for Autodiscovery templates in its `conf.d/auto_conf` directory, which contains default templates for the following checks:
+The Agent looks for Autodiscovery templates in the `/etc/datadog-agent/conf.d` directory, which contains default templates for the following checks:
 
 - [Apache][3]
 - [Consul][4]
@@ -65,15 +65,24 @@ The Agent looks for Autodiscovery templates in its `conf.d/auto_conf` directory,
 - [Etcd][8]
 - [Kubernetes_state][9]
 - [Kube_dns][10]
+- [Kube_proxy][22]
 - [Kyototycoon][11]
 - [Memcached][12]
 - [Redis][13]
 - [Riak][14]
 
+Since 6.2.0 (and 5.24.0), the default templates use the default port for the monitored software, instead of auto-detecting it. If you need to use a different port, provide a custom Autodiscovery template either in [Docker container labels](#template-source-docker-label-annotations) or [Kubernetes pod annotations](#template-source-kubernetes-pod-annotations).
+
 These templates may suit you in basic cases, but if you need to use custom check configurations—say you want to enable extra check options, use different container identifiers, or use template variable indexing— you'll have to write your own auto-conf files. You can then provide those in a few ways:
 
 1. Add them to each host that runs docker-datadog-agent and [mount the directory that contains them][15] into the datadog-agent container when starting it
 2. On Kubernetes, add them [using ConfigMaps][16]
+
+The check name is extracted from the template file name. To run the `checkname` integration, the template file must either:
+
+  - be named `checkname.yaml` and be directly placed inside the `conf.d` folder
+  - be placed in the `conf.d/checkname.d/` folder, with any filename ending with `.yaml`
+
 
 ### Example: Apache check
 
@@ -294,7 +303,7 @@ LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%/nginx
 
 ### Supported Template Variables
 
-The following template variables are currently handled by the agent:
+The following template variables are currently handled by the Agent:
 
 - Container IP: `host`
   - `%%host%%`: autodetect the network (use `bridge` or, if only one network is attached, this one)
@@ -344,7 +353,6 @@ Auto-discovery IDs:
 * docker://81e66fd4c948a502b4428417d8cf2ebc58caaff55a6e5879a41887057342aec2
 ```
 
-
 **Note**: Use the `-v` option to see all templates that are loaded but couldn't be resolved:
 
 ```
@@ -372,7 +380,6 @@ instances:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /agent/faq/agent-5-autodiscovery
 [2]: https://github.com/DataDog/integrations-core/blob/master/go_expvar/conf.yaml.example
 [3]: https://github.com/DataDog/integrations-core/blob/master/apache/auto_conf.yaml
@@ -394,3 +401,4 @@ instances:
 [19]: /integrations/consul
 [20]: /agent/faq/agent-commands
 [21]: https://github.com/DataDog/integrations-core/blob/master/http_check/conf.yaml.example
+[22]: https://github.com/DataDog/integrations-core/blob/master/kube_proxy/auto_conf.yaml

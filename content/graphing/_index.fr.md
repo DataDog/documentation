@@ -33,8 +33,8 @@ La configuration d'un graphique est un processus en plusieurs étapes:
 
 1. [Choisissez la métrique à grapher][9]
 2. [Sélectionner la visualisation][10]
-3. [Filtrer][11] 
-4. [Agréger et cumuler][12] 
+3. [Filter][11] 
+4. [Agréger et cumuler][12]
 5. [Appliquer des fonctions suplémentaires][13]
 6. [Améliorer vos graphiques][14]
 7. [Titre du graphique][15]
@@ -69,7 +69,7 @@ Après la méthode d'agrégation, vous pouvez déterminer ce qui constitue une l
 
 Indépendamment des options choisies ci-dessus, il y a toujours une certaine agrégation de données due aux contraintes de taille physique de la fenêtre contenant le graphique. Si une métrique est mise à jour toutes les secondes et que vous consultez 4 heures de données, vous avez besoin de 14 400 points pour tout afficher. Chaque graphique que nous affichons a environ 300 points affichés à un moment donné.
 
-Dans l'exemple ci-dessus, chaque point affiché à l'écran représente 48 points de données. En pratique, les métriques sont collectées par l'agent toutes les 15-20 secondes. Donc, un jour de données représente 4.320 points. Vous pourriez envisager une fonction de rollup qui prend en compte 5 ou 10 minutes de données si vous souhaiteriez avoir plus de contrôle sur l'affichage de vos données pour un graphique qui affiche 1 jour entier.
+Dans l'exemple ci-dessus, chaque point affiché à l'écran représente 48 points de données. En pratique, les métriques sont collectées par l'Agent toutes les 15-20 secondes. Donc, un jour de données représente 4.320 points. Vous pourriez envisager une fonction de rollup qui prend en compte 5 ou 10 minutes de données si vous souhaiteriez avoir plus de contrôle sur l'affichage de vos données pour un graphique qui affiche 1 jour entier.
 
 Pour utiliser la fonction de rollup, cliquez sur le signe plus à droite du groupe d'agrégation et choisissez "rollup" dans la liste déroulante. Maintenant, choisissez comment vous voulez agréger les données et l'intervalle en secondes.
 
@@ -181,8 +181,8 @@ La dernière étape consiste à cliquer sur Save. Vous pourrez toujours revenir 
 [8]: /graphing/dashboards
 [9]: /graphing/#choose-the-metric-to-graph
 [10]: /graphing/#select-your-visualization
-[11]: /graphing/#Filtrer
-[12]: /graphing/#agreger-et-cumuler
+[11]: /graphing/#filter
+[12]: /graphing/#aggregate-and-rollup
 [13]: /graphing/#advanced-graphing
 [14]: /graphing/#graphs-enhancement
 [15]: /graphing/#create-a-title

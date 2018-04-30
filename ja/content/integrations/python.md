@@ -12,9 +12,7 @@ doclevel: basic
 
 ## 概要
 
-
 Pythonの統合は、数行のコードを記述することにより、任意のカスタムメトリクスを監視することが出来ます。たとえば、ページビュー数、または任意の関数呼び出しの時間を返すメトリックを持つことが出来ます。 Pythonの統合の詳細については、メトリクスのガイドを参照してください。高度な使用方法については、リポジトリ内のドキュメントを参照してください
-
 
 <!-- 1. To install from pip:
 
@@ -41,7 +39,6 @@ Pythonの統合は、数行のコードを記述することにより、任意�
 
         api.Event.create(title=title, text=text, tags=tags)
 
-
         # Use Statsd, a Python client for DogStatsd
         from datadog import statsd
 
@@ -58,7 +55,6 @@ Pythonの統合は、数行のコードを記述することにより、任意�
  -->
 
 ## 設定
-
 
 1. pipをインストールします:
 
@@ -84,7 +80,6 @@ Pythonの統合は、数行のコードを記述することにより、任意�
         tags = ['version:1', 'application:web']
 
         api.Event.create(title=title, text=text, tags=tags)
-
 
         # Use Statsd, a Python client for DogStatsd
         from datadog import statsd

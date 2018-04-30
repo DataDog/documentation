@@ -10,7 +10,6 @@ doclevel: full
 
 ## 概要
 
-
 <!-- ServiceNow is an IT service management platform for recording, tracking, and managing a company’s enterprise-level IT processes in a single location. This integration allows you to create tickets from triggered alarms in Datadog. Additionally, you can add Datadog-generated graphs and comments to ServiceNow tickets, as well as manage the resolution workflow from within Datadog -->
 
 ServiceNowは、エンタープライズレベルのプロセスを一箇所で記録、追跡、マネージするITサービス管理プラットフォームです。このインテグレーションを使うことにより、Datadogが検知したアラートをServiceNow上でチケットとして登録が出来るようになります。チケットには、Datadogでキャプチャしたグラフ画像やDatadogに設定したメッセージも追加出来ます。更に、Datadog側からメッセージを送信し、オープンしているチケットのクローズ処理をすることも出来ます。
@@ -21,19 +20,15 @@ To configure the ServiceNow integration, enter your ServiceNow instance name, an
 
 ![servicenow integration](/images/servicenow-configuration.png) -->
 
-
 ## 設定
-
 
 ServiceNowの統合を設定するには、ServiceNowインスタンス名、およびユーザ名とパスワードを入力します。Datadog統合のための新しいユーザーを作成することを推奨します。
 
 {{< img src="integrations/servicenow/servicenow-configuration.png" alt="ServiceNow configuration" >}}
 
-
 <!-- ### Auto-generate support tickets from Datadog alerts
 
 Now, you can set these alerts to automatically create support tickets and send them to the ServiceNow ticketing queue. From there, your support team will be notified of issues using the communication workflows that you have already established inside ServiceNow. All you have to do is mention @servicenow in the alert message or add @servicenow to the notification list for that monitor.
-
 
 {{< img src="integrations/servicenow/servicenow-02-monitor-page.png" alt="ServiceNow" >}}-->
 
@@ -42,7 +37,6 @@ Now, you can set these alerts to automatically create support tickets and send t
 自動的にサポートチケットを作成し、ServiceNowのチケットキューに送信するためにこれらのアラートを設定することができます。そこから、サポートチームには、すでにServiceNow内部に設置していた通信ワークフローを使用して問題が通知されます。しなければならないのは、警告メッセージに@servicenow言及か、そのモニターの通知リストに@servicenowの追加です。
 
 {{< img src="integrations/servicenow/servicenow-02-monitor-page.png" alt="ServiceNow" >}}
-
 
 <!-- ### Automate support resolution workflow
 
@@ -55,7 +49,6 @@ Once the monitor state returns to normal, the associated support ticket is autom
 モニターの状態が正常に戻った後は、関連するサポートチケットは、自動的に「解決」としてマークされています。
 
 {{< img src="integrations/servicenow/servicenow-03-servicenow-resolved.png" alt="ServiceNow Resolved" >}}
-
 
 <!-- ### Send Datadog graphs to ServiceNow
 

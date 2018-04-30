@@ -9,8 +9,6 @@ title: Tracing Ruby Applications
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-
-
 ### Installation
 
 To begin tracing applications written in Ruby, first [install and configure the Datadog Agent](/tracing).
@@ -36,7 +34,6 @@ end
 ~~~
 
 For more examples, see the [RubyDoc Gem documentation](http://www.rubydoc.info/gems/ddtrace/#Advanced_usage).
-
 
 ### Compatibility
 

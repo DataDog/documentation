@@ -14,8 +14,6 @@ git_integration_title: chef
 
 ## 概要
 
-
-
 <!-- Connect Chef to Datadog in order to:
 
 - Get real-time reports on Chef client runs.
