@@ -52,6 +52,9 @@ So let's imagine that the actual status of the log is contained in the attribute
 To make sure this attribute value is taken to override the log status, we would simply need to add it in the list of Status attributes.  
 The status remapper looks for each of the reserved attributes in the order in which they are configured in the reserved attribute mapping, so to be 100% sure that our `logger_severity` attribute is used to derive the status, we can place it first in the list.
 
+{{< img src="logs/faq/reserved_attribute.png" alt="reserved attribute" responsive="true" popup="true" style="width:50%;">}}
+
+
 **Note**: Any modification on the pipeline only impacts new logs as all the processing is done at ingestion.  
 There are specific status formats to respect for the remapping to work. The recognized status formats are explained in the [status remapper description][2].  
 
