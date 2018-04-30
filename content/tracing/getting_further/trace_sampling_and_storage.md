@@ -58,7 +58,7 @@ Signature Sampling ensures a sampling of a variety of [traces][2] (errors, succe
 Datadog computes a *signature* for every trace reported, based on its services, resources, errors, etc.. Traces of the same signature are considered similar. For example, a signature could be:
 
 * `env=prod`, `my_web_service`, `is_error=true`, `resource=/login`
-* `env=staging`, `my_database_service`, `is_error=false`, `query=SELECT…``
+* `env=staging`, `my_database_service`, `is_error=false`, `query=SELECT…`
 
 A proportion of traces with each signature is then kept, so you get full visibility into all the different kinds of transactions happening in your system. This method ensures traces for resources with low volumes are still kept.  
 
@@ -75,7 +75,7 @@ Because Signature Sampling decisions are made at the [Agent][4] level, it is not
 
 #### How it works
 
-Each trace has a `sampling_priority`, which is assigned at its inception and propagated along the entire trace:
+Each trace has a `sampling_priority` attribute, which is assigned at its inception and propagated along the entire trace:
 
 | Value      |  Type | Action|
 | :--------------------- | :---------------- | :----------|
@@ -90,7 +90,7 @@ Traces are automatically assigned a priority of **0** or **1**, with a proportio
 
 #### Using Priority Sampling
 
-Priority Sampling is recommended if your traces are distributed across multiple hosts or if you need finer control over the traces sampled. To use it, enable `distributed_sampling` in your client ([Ruby](http://www.rubydoc.info/gems/ddtrace/#Priority_sampling), [Python][5], [Go][6], [Java][7]) as it is disabled by default.
+Priority Sampling is recommended if your traces are distributed across multiple hosts or if you need finer control over the traces sampled. To use it, enable `distributed_sampling` in your client ([Ruby][8], [Python][5], [Go][6], [Java][7]) as it is disabled by default.
 
 ### Client rate sampling
 
@@ -127,6 +127,56 @@ Once a trace has been viewed, it continues to be available by using its trace ID
 
 {{< img src="tracing/trace_id.png" alt="Trace ID" responsive="true" popup="true">}}
 
+## Client implementation
+
+This section documents how the priority sampling is implemented in the clients directly.
+
+The `sampling_priority` is an attribute of the Context that has to be propagated over the wire next to the `trace_id` and `span_id` attributes. When propagated over HTTP, its header is `x-datadog-sampling-priority`. When creating remote spans from this propagated attribute, **the same sampling priority value has to be used for the remote trace**.
+
+The `sampling_priority` value must be the same across all the pieces of a trace (when spread across hosts or asynchronous tasks). So it should not be modified after any context propagation (remote call, fork, …).
+
+The initial `sampling_priority` value is computed at the root span creation. The initial value can either be **0** or **1**. This initial decision is taken by the client but the Agent provides a "rate" to decide if it should be a **0** or a **1**.
+The response of the Agent to any flush is a JSON containing a `rate_by_service` key which contains a mapping of services to a rate (between 0 and 1). This rate decides the probability to assign a priority of **1** to new traces:
+
+```json
+{
+  "rate_by_service": {
+    "webapp": 0.94,
+    "workers": 0.11
+  }
+}
+```
+
+With that example, if you create a new trace with a root span of service **webapp**, the Agent should pick between a sampling_priority of 1 (with a 94% chance) or a priority of 0 (with a 6% chance).
+This mechanism is meant to ensure that it sampled a good proportion of low QPS services (high QPS services have a lower rate) and that the total resulting volume sampled aligns with the `max_traces_per_second` parameter configured in the Agent.
+
+The client allows to update the sampling priority to **-1** (drop the trace fully) or **2** (force its sampling). This should be done only after any context propagation. If this happen after the propagation of a context, the system can't ensure that the entire trace is sampled properly.
+
+When serialized/flushed to the Agent, the `sampling_priority` is stored in the `_sampling_priority_v1` key of the `metrics` attribute. Example with JSON (similar with msgpack).
+
+```json
+[
+  [
+    {
+      "trace_id": 1234,
+      "span_id": 5678,
+      "parent_id": 0,
+      "service": "webapp", 
+      "name": "web.request", 
+      "resource": "GET /health",
+      "type": "web",
+      "start": 1525077627,
+      "duration": 8976534, 
+      "error": 0,
+      "meta": {}, 
+      "metrics": {
+        "_sampling_priority_v1": 1
+      }
+    }
+  ]
+]
+```
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -138,3 +188,4 @@ Once a trace has been viewed, it continues to be available by using its trace ID
 [5]: http://pypi.datadoghq.com/trace/docs/#priority-sampling
 [6]: https://godoc.org/github.com/DataDog/dd-trace-go/tracer#Span.SetSamplingPriority
 [7]: /tracing/setup/java/#sampling-distributed-tracing
+[8]: http://www.rubydoc.info/gems/ddtrace/#Priority_sampling
