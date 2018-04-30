@@ -21,9 +21,9 @@ However, this default `status` does not always reflect the actual value that mig
 ## Raw logs
 ### Extract the status value with a parser
 
-While writing a parsing rule for your logs, you need to extract the status in a specific attribute.  
+While writing a parsing rule for your logs, extract the `status` in a specific attribute.  
 
-For the above log, we would use the following rule with the `word()` [matcher][1] to extract the date and pass it into a custom `log_status` attribute:
+For the log above, use the following rule with the `word()` [matcher][1] to extract the date and pass it into a custom `log_status` attribute:
 
 {{< img src="logs/faq/processor.png" alt="Processor" responsive="true" popup="true" style="width:50%;">}}
     
@@ -33,11 +33,9 @@ The value is now stored in a `log_status` attribute. [Add a Log Status remapper]
 
 {{< img src="logs/faq/source_attribute.png" alt="Source attribute" responsive="true" popup="true" style="width:50%;">}}
 
-All new logs that are processed by that pipeline should now have the correct status.  
+All new logs processed by this pipeline should now have the correct status.  
 
-**Note**: Any modification on a pipeline only impacts new logs as all the processing is done at ingestion. 
-
-New logs now have the right status:
+**Note**: Any modification on a pipeline only impacts new logs as all the processing is done during the intake process. 
 
 {{< img src="logs/faq/log_post_processing.png" alt="log post processing" responsive="true" popup="true" style="width:50%;">}}
 
@@ -49,16 +47,16 @@ So let's imagine that the actual status of the log is contained in the attribute
 
 {{< img src="logs/faq/new_log.png" alt="new log" responsive="true" popup="true" style="width:50%;">}}
 
-To make sure this attribute value is taken to override the log status, we would simply need to add it in the list of Status attributes.  
-The status remapper looks for each of the reserved attributes in the order in which they are configured in the reserved attribute mapping, so to be 100% sure that our `logger_severity` attribute is used to derive the status, we can place it first in the list.
+To make sure this attribute value is taken to override the log status, add it in the list of Status attributes.  
+
+The status remapper looks for each of the reserved attributes in the order in which they are configured in the reserved attribute mapping, so to be 100% sure that our `logger_severity` attribute is used to derive the status, place it first in the list.
 
 {{< img src="logs/faq/reserved_attribute.png" alt="reserved attribute" responsive="true" popup="true" style="width:50%;">}}
 
 
 **Note**: Any modification on the pipeline only impacts new logs as all the processing is done at ingestion.  
-There are specific status formats to respect for the remapping to work. The recognized status formats are explained in the [status remapper description][2].  
 
-In this specific case, by adding some host and service remapping as well new logs are correctly configured:
+There are specific status formats to respect for the remapping to work. The recognized status formats are explained in the [status remapper description][2]. In this specific case, by adding some host and service remapping as well new logs are correctly configured:
 
 {{< img src="logs/faq/new_log_remapped.png" alt="New log remapped" responsive="true" popup="true" style="width:50%;">}}
 
