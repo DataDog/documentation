@@ -2,6 +2,7 @@
 categories:
 - os & system
 ddtype: check
+doc_link: https://docs.datadoghq.com/integrations/linux_proc_extras/
 git_integration_title: linux_proc_extras
 guid: 47f243d7-5df4-47b5-9f1a-923b4f7cefe7
 has_logo: true
@@ -32,33 +33,21 @@ Obtenir les métriques du service linux_proc_extras en temps réel pour:
 ## Implémentation
 ### Installation
 
-Le check Linux_proc_extras est packagé avec l'agent, il vous faut donc simplement [installer l'agent](https://app.datadoghq.com/account/settings#agent) sur vos serveurs.
+Le check Linux_proc_extras est inclus avec l'Agent, il vous faut donc simplement [installer l'agent][1] dans vos serveurs.
 
 ### Configuration
 
-Editez le fichier `linux_proc_extras.yaml` afin de pointer sur votre serveur et ses ports, configurez le master à monitorer . Consultez l'exemple du [canevas  linux_proc_extras.yaml](https://github.com/DataDog/integrations-core/blob/master/linux_proc_extras/conf.yaml.example) pour apprendre toutes les options de configuration disponibles:
+Créez un fichier `linux_proc_extras.yaml` dans le dossier ` conf.d` de l'Agent. Consultez [l'exemple du linux_proc_extras.yaml][2] afin d'apprendre toutes les options de configuration disponibles.
 
 ### Validation
 
-[Lancez la commande `status`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `linux_proc_extras` dans la section Checks:
-
-    Checks
-    ======
-
-        linux_proc_extras
-        -----------
-          - instance #0 [OK]
-          - Collected 39 metrics, 0 events & 7 service checks
-
-## Compatibilité
-
-Le check linux_proc_extras est compatible avec toutes les principales plateformes.
+[Exécutez le sous-commande `status` de l'Agent][3] et cherchez pour `linux_proc_extras` dans la section Checks.
 
 ## Données collectées
 ### Métriques
 L'intégration  Linux proc extras n'inclut aucune métrique pour le moment.
 
-### Evénements
+### Évènements
 Le check Linux proc extras n'inclut aucun événement pour le moment.
 
 ### Checks de Service
@@ -66,8 +55,15 @@ Le check Linux proc extras n'inclut aucun check de service pour le moment.
 
 ## Troubleshooting
 
-Besoin d'aide? Contactez  [l'équipe support de Datadog](http://docs.datadoghq.com/help/).
+Besoin d'aide ? Contactez  [l'équipe support de Datadog][4].
 
 ## En apprendre plus
-Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog](https://www.datadoghq.com/blog/)
+Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][5]
+
+
+[1]: https://app.datadoghq.com/account/settings#agent
+[2]: https://github.com/DataDog/integrations-core/blob/master/linux_proc_extras/conf.yaml.example
+[3]: https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information
+[4]: http://docs.datadoghq.com/help/
+[5]: https://www.datadoghq.com/blog/
 
