@@ -264,7 +264,7 @@ spec:
 The Agent detects if it's running on Docker and automatically searches all labels for check templates.
 
 Since version 6.2 of the Datadog Agent, it is also possible to configure docker log collection in container labels.
-Check our [Docker Log collection guide](https://docs.datadoghq.com/logs/docker/) for more information about the setup.
+Check our [Docker Log collection guide][23] for more information about the setup.
 
 Autodiscovery expects labels to look like these examples, depending on the file type:
 
@@ -408,3 +408,4 @@ instances:
 [20]: /agent/faq/agent-commands
 [21]: https://github.com/DataDog/integrations-core/blob/master/http_check/conf.yaml.example
 [22]: https://github.com/DataDog/integrations-core/blob/master/kube_proxy/auto_conf.yaml
+[23]: https://docs.datadoghq.com/logs/docker/

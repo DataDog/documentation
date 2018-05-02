@@ -40,7 +40,8 @@ logs:
     - type: docker
       service: docker
 ```
-**Important note**: Integration pipelines and processors will not be installed automatically as the source tag is not set. The setup with integrations is described below and it automatically installs integration pipelines that parse your logs and extract all the relevant information from them.
+
+**Important note**: Integration pipelines and processors will not be installed automatically as the source tag is not set. The integrations setup is described below and it automatically installs integration pipelines that parse your logs and extract all the relevant information from them.
 
 ### Option 2: Container installation
 
@@ -80,16 +81,15 @@ The command related to log collection are the following:
 
 #### Option 1: Configuration file
 
-To start using integrations, the attribute `source` needs to be set in order to identify the log source for each container.
+Set the `source` attribute to start using integrations. This allows Datadog to identify the log source for each container.
 
-For containerized installation, let's first create the configuration directory on the host:
+For containerized installation, begin by creating the configuration directory on the host directly:
 
-- ` /opt/datadog-agent/conf.d`: this is where you will provide your integration instructions. Any configuration file added there will automatically be picked up by the containerized Agent when restarted.
-For more information about this check [here][4]
+- ` /opt/datadog-agent/conf.d`: this is the folder in which integration instructions are provided. Any configuration file added there is automatically picked up by the containerized Agent when restarted. To learn more about this topic refer to the dedicated documentation on [how to enable integrations with the docker agent][4].
 
 Then mount the directory by adding `-v /opt/datadog-agent/conf.d:/conf.d:ro` in the run command of the containerized agent.
 
-To set the source for a given container filtered by image or label or name, you need to update the log section in an integration or custom .yaml file in your agent's `conf.d` directory or the directory we just created for containerized installation.
+To set the source for a given container filtered by image or label or name, update the log section in an integration or custom .yaml file in your agent's `conf.d` directory or the directory we just created for containerized installation.
 
 ```yaml
 #Log section
@@ -121,21 +121,24 @@ For more examples of configuration files or Agent capabilities (such as filterin
 
 #### Option 2: Autodiscovery
 
-Since version 6.2 of the Datadog Agent, you can configure log collection in the container labels.
+Since version 6.2 of the Datadog Agent, you can configure log collection directly in the container labels.
 
-Autodiscovery expects labels to look like these examples, depending on the file type:
+Autodiscovery expects labels to look like these format, depending on the file type:
 
-* - Dockerfile: `LABEL "com.datadoghq.ad.logs"='[<LOGS_CONFIG>]'`
-* - docker-compose.yaml: 
-```
-labels:
-  com.datadoghq.ad.logs: '[<LOGS_CONFIG>]'
-``` 
-* - run command: `-l com.datadoghq.ad.logs='[<LOGS_CONFIG>]'`
+* Dockerfile: `LABEL "com.datadoghq.ad.logs"='[<LOGS_CONFIG>]'`
+* docker-compose.yaml:
+
+  ```
+  labels: 
+    com.datadoghq.ad.logs: '[<LOGS_CONFIG>]'
+  ```
+
+* run command: `-l com.datadoghq.ad.logs='[<LOGS_CONFIG>]'`
 
 **Docker Example: NGINX Dockerfile**:
 
 The following Dockerfile launches an NGINX container with Autodiscovery enabled:
+
 ```
 FROM nginx
 
@@ -147,7 +150,7 @@ LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%/nginx
 LABEL "com.datadoghq.ad.logs"='[{"source": "nginx", "service": "webapp"}]'
 ```
 
-Check our [Autodiscovery Guide][8]for more information about autodiscovery setup and examples.
+Check our [Autodiscovery Guide][8]for more information about Autodiscovery setup and examples.
 
 ## Further Reading
 
