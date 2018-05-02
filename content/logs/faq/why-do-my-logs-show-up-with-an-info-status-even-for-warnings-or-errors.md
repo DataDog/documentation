@@ -23,7 +23,7 @@ However, this default `status` does not always reflect the actual value that mig
 
 While writing a parsing rule for your logs, extract the `status` in a specific attribute.
 
-For the log above, use the following rule with the `word()` [matcher][1] to extract the date and pass it into a custom `log_status` attribute:
+For the log above, use the following rule with the `word()` [matcher][1] to extract the status and pass it into a custom `log_status` attribute:
 
 {{< img src="logs/faq/processor.png" alt="Processor" responsive="true" popup="true" style="width:50%;">}}
 
