@@ -1,6 +1,5 @@
 $(document).ready(function () {
 
-
     function hideToc()
     {
         // hide toc
