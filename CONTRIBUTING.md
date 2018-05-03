@@ -10,7 +10,13 @@ The purpose of the Docs site is to clearly inform readers about how to use Datad
 * Make the reader feel nice. When you must choose between politeness and clarity, choose clarity.
 * Impress the reader with fancy words and drawn out sentences.
 
-The following Dos and Donts serve the main purpose: **to clearly inform readers.**
+The [Dos](#dos) and [Donts](#donts) serve the main purpose: **to clearly inform readers.**
+
+## Language
+
+For all main documentation files, code comments, [documentation pages around the doc][3], language used is American English, i.e **En_US**.  
+
+For all `*.fr.md` files language used is French French, i.e **Fr_FR**.
 
 ## Dos
 
@@ -93,24 +99,39 @@ The [Gobwords Style Guide][1] is an index of commonly mis-capitalized, mispunctu
 
 Otherwise, here are some words and phrases to avoid or use sparingly:
 
-* Currently
-  * (omit)
-* Refer to/visit
-  * When preceding a link; use “See” or “Read”.
-* A number of
-  * This is vague. Slightly less vague: “a few”, “several”, “many”.
-* [in the] Datadog app
-  * No need for the definite article; use "[in] Datadog".
-* Product
-  * When referencing Datadog (e.g. “the Datadog product”), omit it or use “service”.
-* Integration
-  * In the context of describing / discussing Agent checks, use “check”.
-* Please
-  * There’s no reason to plead with the reader; maybe they’ll read the docs, maybe they won’t.
+| Word to avoid        | Workaround                                                                                 |
+| :------------------- | :----------------------------------------------------------------------------------------- |
+| Currently            | just omit it                                                                               |
+| Refer to/visit       | When preceding a link; use “See” or “Read”                                                 |
+| A number of          | This is vague. Slightly less vague: “a few”, “several”, “many”.                            |
+| [in the] Datadog app | No need for the definite article; use "[in] Datadog".                                      |
+| Product              | When referencing Datadog (e.g. “the Datadog product”), omit it or use “service”            |
+| Integration          | In the context of describing / discussing Agent checks, use “check”.                       |
+| Please               | There’s no reason to plead with the reader; maybe they’ll read the docs, maybe they won’t. |
 
-## Link
 
-Links must be specified using the reference format (i.e. in the footnote) in order to aid [the translation process][2].
+## Formating
+
+### Text
+
+Use specific text formating to enhance your content readability.
+
+| Formating   | Rule                                                                                                                    | Example                                               |
+| :---        | :------                                                                                                                 | :----                                                 |
+| `Backquote` | Used every time there is code related content in some text                                                              | Use the `foo` parameter                               |
+| **Bold**    | Subjectively pointing the reader to something that he shouldn't miss.                                                   | **This is important**, not that.                      |
+| *Italic*    | Literal translated words, default values, functionality name, webpage name                                              | Go the the *setting* page in your Datadog application |
+| [Link]      | Links must be specified using the reference format (i.e. in the footnote) in order to aid [the translation process][2]. | `This is a [Link][1]`                                 |
+
+### Fixed-width
+
+By default images are displayed on the full width of a page, if your graphic example doesn't need that much space, use the `style="width:XX%;"` parameter within your Image partial in order to make them better fit your content. 
+
+**Note**: `XX` is the percentage of width taken by the image compare to the full width.
+
+Learn more on Images partial parameters [with the dedicated wiki page][4]
 
 [1]: https://github.com/DataDog/gobwords/tree/master/style-guide
 [2]: https://github.com/DataDog/documentation/wiki/Translations-Overview
+[3]: https://github.com/DataDog/documentation/wiki
+[4]: https://github.com/DataDog/documentation/wiki/Import-an-Image
