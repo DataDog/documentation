@@ -97,9 +97,9 @@ Edit your `logback.xml` file:
 
 #### Log4j
 
-It might not be very easy to log in JSON with log4j that's why we advise you to use a slf4j ship with a module called log4j-over-slf4j and then use logback for the json format.
+It can be difficult to log in JSON with log4j. Because of this, we advise you to use a slf4j ship with a module called log4j-over-slf4j and then use logback for the json format.
 
-To use log4j-over-slf4j in your own application, the first step is to locate and then to replace `log4j.jar` with `log4j-over-slf4j.jar`.
+To use log4j-over-slf4j in your own application, the first step is to locate and then replace `log4j.jar` with `log4j-over-slf4j.jar`.
 Note that you still need an slf4j binding and its dependencies for log4j-over-slf4j to work properly.
 
 In most situations, replacing a jar file is all it takes in order to migrate from log4j to SLF4J.
@@ -125,7 +125,7 @@ Edit your `pom.xml` file:
 </dependency>
 ```
 
-Once that done, just edit your `logback.xml` file such as described in the below `Slf4j` section.
+Once that done, edit your `logback.xml` file as described in the below `Slf4j` section.
 
 #### Log4j2
 
@@ -135,7 +135,7 @@ There is a default log4j2 JSON Layout that can be used as shown in this [example
 
 The JSON library we recommend for Logback is [logstash-logback-encoder](https://github.com/logstash/logstash-logback-encoder). One advantage is: it's inside the main Maven repository.
 
-To add it into your classpath, simply add the following dependency (version 4.5.1 on the example) in your `pom.xml` file: 
+To add it into your classpath, simply add the following dependency (version 4.5.1 on the example) in your `pom.xml` file:
 
 ```xml
 <dependency>
