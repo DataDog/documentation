@@ -96,8 +96,7 @@ The Agent 6.x installer can automatically convert your 5.x style Agent configura
  DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
 ```
 
-**Note:** the import process won't automatically move custom checks, this is by
-design since we cannot guarantee full backwards compatibility out of the box.
+**Note:** the import process won't automatically move custom Agent checks, this is by design since we cannot guarantee full backwards compatibility out of the box.
 
 ##### To Install Fresh
 

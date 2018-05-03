@@ -20,7 +20,7 @@ further_reading:
 
 This page first looks at the `AgentCheck` interface, and then proposes a simple Agent Check that collects timing metrics and status events from HTTP services.  
 
-Custom checks are included in the main check run loop, meaning they run every check interval, which defaults to 15 seconds.
+Custom Agent checks are included in the main check run loop, meaning they run every check interval, which defaults to 15 seconds.
 
 ### Should you write an Agent Check or an Integration?
 
@@ -36,11 +36,11 @@ First off, ensure you've properly installed the [Agent][3] on your machine. If y
 
 ## Agent Check Interface
 
-All custom checks inherit from the `AgentCheck` class found in `checks/__init__.py` and require a `check()` method that takes one argument, `instance` which is a `dict` having the configuration of a particular instance. The `check` method is run once per instance defined in the check configuration (discussed later).  
+All custom Agent checks inherit from the `AgentCheck` class found in `checks/__init__.py` and require a `check()` method that takes one argument, `instance` which is a `dict` having the configuration of a particular instance. The `check` method is run once per instance defined in the check configuration (discussed later).  
 
 **Note**: 
 
-* Custom Checks aren't able to import modules by default, all your code should be in one single file.
+* Custom Agent Checks aren't able to import modules by default, all your code should be in one single file.
 
 * The datadog Agent installation has it's own embedded copy of python. Custom scripts importing pip-installed libraries fail unless datadog's own embedded copy of pip is used to install these third party libraries.
 
@@ -139,7 +139,7 @@ At the end of your check, all events are collected and flushed with the rest of 
 
 ### Sending service checks
 
-Your custom check can also report the status of a service by calling the `self.service_check(...)` method.
+Your custom Agent check can also report the status of a service by calling the `self.service_check(...)` method.
 
 The service_check method accepts the following arguments:
 
@@ -432,7 +432,7 @@ To test this, run:
 
 If your issue continues, reach out to Support with the [help page][11] that lists the paths it installs.
 
-### Testing custom checks on Windows
+### Testing custom Agent checks on Windows
 
 * **For Agent version < 5.12**:
     The Agent install includes a file called shell.exe in your Program Files directory for the Datadog Agent which you can use to run python within the Agent environment. Once your check (called `<CHECK_NAME>`) is written and you have the .py and .yaml files in their correct places, you can run the following in shell.exe:
