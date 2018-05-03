@@ -46,7 +46,7 @@ Your README file should provide the following sections:
 - **Compatibility** (required): List the version(s) of the application or service that your integration has been tested and validated against.
 - **Metrics** (required): Include a list of the metrics your integration provides.
 - **Events**: Include a list of events if your integration provides any.
-- **Service Checks**: Include a list of service checks if your integration provides any.
+- **Service checks**: Include a list of service checks if your integration provides any.
 
 [Find more about the overall layout](/developers/integrations/#new-integration-documentation)
 
@@ -80,7 +80,7 @@ class MyIntegrationCheck(AgentCheck):
     })
 ```
 
-For more information about writing checks and how to send metrics to the Datadog Agent, reference our [Writing an Agent Check guide][2]
+For more information about writing checks and how to send metrics to the Datadog Agent, reference our [Writing an Agent check guide][2]
 
 If you need to import any third party libraries, you can add them to the `requirements.txt` file.
 
@@ -257,7 +257,7 @@ To run locally, first copy your `check.py` file into the Datadog Agent's `checks
 
 Next, copy your `conf.yaml.example` file into the Datadog Agent's `conf.d` directory and rename it to `my_integration.yaml` (again, using the actual name of your integration).
 
-See the Agent Check guide for more information about the [Datadog Agent directory structure][2].
+See the Agent check guide for more information about the [Datadog Agent directory structure][2].
 
 ### Teardown and cleanup
 
