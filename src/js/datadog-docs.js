@@ -401,6 +401,9 @@ $(document).ready(function () {
         var currentSt = $(document).scrollTop();
         if(htag.length) {
             newSt = htag.offset().top - offset;
+            if(window.scrollY < 64.5){
+                newSt += (64.5 - window.scrollY);
+            }
             if(currentSt !== newSt) {
                 if(animate) {
                     $("html, body").animate({scrollTop: newSt}, 300);
