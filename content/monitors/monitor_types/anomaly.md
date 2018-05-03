@@ -92,7 +92,7 @@ Finally, we see how each of the algorithms handle a new metric. _Robust_ and _ag
 If you are an enterprise-level customer, you can create an anomaly detection monitor via the API with the standard [create-monitor API endpoint][6] if you add the `anomalies` function to the monitor query. The query then follows this formula:
 
 ```
-time_aggr(eval_window_length):anomalies(space_aggr:metric{tags}, 'basic/agile/robust', deviation_number, direction='both/above/below', alert_window='alert_window_length', interval=seconds) >= threshold_value
+time_aggr(eval_window_length):anomalies(space_aggr:metric{tags}, 'basic/agile/robust', deviation_number, direction='both/above/below', alert_window='alert_window_length', interval=seconds, count_default_zero='true') >= threshold_value
 ```
 
 **Note**: that anomaly detection monitors may only be used by enterprise-level customer subscriptions. If you have a pro-level customer subscription and would like to use the anomaly detection monitoring feature, you can reach out to your customer success representative or [email our billing team][7] to discuss that further.
@@ -102,7 +102,7 @@ time_aggr(eval_window_length):anomalies(space_aggr:metric{tags}, 'basic/agile/ro
 If you wanted to create an anomaly detection monitor to notify you when your average Cassandra node's CPU was three standard deviations above the ordinary value for over the last 5 minutes, you could use the following query in your API call:
 
 ```
-avg(last_1h):anomalies(avg:system.cpu.system{name:cassandra}, 'basic', 3, direction='above', alert_window='last_5m', interval=20) >= 1
+avg(last_1h):anomalies(avg:system.cpu.system{name:cassandra}, 'basic', 3, direction='above', alert_window='last_5m', interval=20, count_default_zero='true') >= 1
 ```
 
 ## FAQ
