@@ -20,37 +20,9 @@ Si votre configuration réseau restreint le trafic sortant, proxy tout le trafic
 
 Quelques options sont disponibles pour envoyer du trafic vers Datadog via SSL/TLS pour des hosts qui ne sont pas directement connectés à Internet.
 
-1. Utilisation de l'agent comme proxy (pour **jusqu'à 16 agents** par proxy)
-2. Utilisation d'un proxy Web (par exemple, Squid, Microsoft Web Proxy) déjà déployé sur votre réseau
-3. En utilisant HAProxy (si vous voulez proxy **plus de 16-20 Agents** via le
-le même proxy)
-
-## Utiliser l'Agent comme un proxy
-
-**Cette fonctionnalité n'est pas encore disponible pour l'Agent v6**
-
-1. Désignez un noeud **exécutant l'agent datadog** comme proxy.
-   Dans cet exemple, supposons que le nom du proxy est `proxy-node`. Ce noeud **doit** pouvoir atteindre `https://app.datadoghq.com`.
-
-2. Vérifier la connectivité SSL sur `proxy-node`
-    ```
-    curl -v https://app.datadoghq.com/account/login 2>&1 | grep "200 OK"
-    ```
-
-3. Autorise le trafic non local sur `proxy-node` en changeant la ligne suivante dans` datadog.conf`.
-     `# non_local_traffic: no` devrait être  `non_local_traffic: yes`.
-
-4. Assurez-vous que `proxy-node` peut être atteint à partir des autres noeuds sur le port 17123. Démarrez l'Agent sur le  `proxy-node` et exécutez sur les autres noeuds:
-
-    `curl -v http://proxy-node:17123/status 2>&1 | grep "200 OK"`
-
-5. Mettez à jour les nœuds non-proxy pour transmettre à `proxy-node`. Changez la ligne suivante dans `datadog.conf` depuis:
-
-    `dd_url: https://app.datadoghq.com`
-to
-    `dd_url: http://proxy-node:17123`
-
-6. Vérifiez sur la [page Infrastructure][1] que tous les nœuds rapportent des données à Datadog.
+1. Utilisation d'un proxy Web (par exemple, Squid, Microsoft Web Proxy) déjà déployé sur votre réseau
+2. En utilisant HAProxy (si vous voulez proxy **plus de 16-20 Agents** via le même proxy)
+3. Utilisation de l'agent comme proxy (pour **jusqu'à 16 agents** par proxy, **uniquement sur l'Agent v5**)
 
 ## Utilisation d'un proxy Web en tant que proxy
 
@@ -219,6 +191,35 @@ skip_ssl_validation: yes
 [Redémarez votre Agent][4]
 
 Pour vérifier que tout fonctionne correctement, examinez les statistiques HAProxy à `http://haproxy.example.com:3835` ainsi que la [Présentation de l'infrastructure][5].
+
+## Utiliser l'Agent comme un proxy
+
+**Cette fonctionnalité est uniquement disponible sur l'Agent v5**
+
+Nous vous recommandons d'utiliser un proxy réel (un proxy Web ou HAProxy) pour transférer votre trafic vers Datadog. Cependant, si ces options ne sont pas disponibles, il est possible de configurer une instance de l'Agent v5 pour servir de proxy.
+
+1. Désignez un noeud **exécutant l'agent datadog** comme proxy.
+   Dans cet exemple, supposons que le nom du proxy est `proxy-node`. Ce noeud **doit** pouvoir atteindre `https://app.datadoghq.com`.
+
+2. Vérifier la connectivité SSL sur `proxy-node`
+    ```
+    curl -v https://app.datadoghq.com/account/login 2>&1 | grep "200 OK"
+    ```
+
+3. Autorise le trafic non local sur `proxy-node` en changeant la ligne suivante dans` datadog.conf`.
+     `# non_local_traffic: no` devrait être  `non_local_traffic: yes`.
+
+4. Assurez-vous que `proxy-node` peut être atteint à partir des autres noeuds sur le port 17123. Démarrez l'Agent sur le  `proxy-node` et exécutez sur les autres noeuds:
+
+    `curl -v http://proxy-node:17123/status 2>&1 | grep "200 OK"`
+
+5. Mettez à jour les nœuds non-proxy pour transmettre à `proxy-node`. Changez la ligne suivante dans `datadog.conf` depuis:
+
+    `dd_url: https://app.datadoghq.com`
+to
+    `dd_url: http://proxy-node:17123`
+
+6. Vérifiez sur la [page Infrastructure][1] que tous les nœuds rapportent des données à Datadog.
 
 ## En apprendre plus
 
