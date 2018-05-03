@@ -14,9 +14,8 @@ The [Dos](#dos) and [Donts](#donts) serve the main purpose: **to clearly inform 
 
 ## Language
 
-For all main documentation files, code comments, [documentation pages around the doc][3], language used is American English, i.e **En_US**.  
-
-For all `*.fr.md` files language used is French French, i.e **Fr_FR**.
+* Use the American English **en_US** dialect when writing documentation, code comments, [wiki entries][3], etc. in the English language. This is the default language for all `*.md` files.  
+* Use the Standard French **fr_FR** dialect when writing in the French language. This is the language in all `*.fr.md` files.
 
 ## Dos
 
@@ -114,22 +113,21 @@ Otherwise, here are some words and phrases to avoid or use sparingly:
 
 ### Text
 
-Use specific text formating to enhance your content readability.
+Use text formatting to clarify and enhance content.
 
 | Formating   | Rule                                                                                                                    | Example                                               |
 | :---        | :------                                                                                                                 | :----                                                 |
 | `Backquote` | Used every time there is code related content in some text                                                              | Use the `foo` parameter                               |
 | **Bold**    | Subjectively pointing the reader to something that he shouldn't miss.                                                   | **This is important**, not that.                      |
-| *Italic*    | Literal translated words, default values, functionality name, webpage name                                              | Go the the *setting* page in your Datadog application |
-| [Link]      | Links must be specified using the reference format (i.e. in the footnote) in order to aid [the translation process][2]. | `This is a [Link][1]`                                 |
+| *Italic*    | Literally translated words, default values, functions,  settings, and page names.                                       | Go the the *setting* page in your Datadog application |
+| [Link]      | Links must be specified using the reference format (i.e. in the footnote) in order to aid [the translation process][2]. | Text with [a link]                                    |
+
 
 ### Fixed-width
 
-By default images are displayed on the full width of a page, if your graphic example doesn't need that much space, use the `style="width:XX%;"` parameter within your Image partial in order to make them better fit your content. 
+Images are displayed on the full width of a page by default. If your image doesn't need to be that large, use the `style="width:XX%;"` parameter within the image partial in order to scale the image proportionally.
 
-**Note**: `XX` is the percentage of width taken by the image compare to the full width.
-
-Learn more on Images partial parameters [with the dedicated wiki page][4]
+Learn more about [image partials][4].
 
 [1]: https://github.com/DataDog/gobwords/tree/master/style-guide
 [2]: https://github.com/DataDog/documentation/wiki/Translations-Overview
