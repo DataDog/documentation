@@ -42,8 +42,10 @@ We also strongly encourage you to setup your logging libraries to produce your l
 Here are setup examples for the `log4j`, `slf4j` and `log4j2` logging libraries:
 
 ## Configure your logger
-### Log4j
 
+### Raw format
+
+#### Log4j
 Add a new file appender to `log4j.xml`:
 
 ```xml
@@ -56,8 +58,9 @@ Add a new file appender to `log4j.xml`:
 </appender>
 ```
 
-### Log4j2
+#### Log4j2
 Edit your `log4j2.xml` file:
+
 ```xml
  <File name="MyFile" fileName="logs/app.log" immediateFlush="true">
         <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
@@ -69,7 +72,7 @@ Edit your `log4j2.xml` file:
 </Loggers>
 ```
 
-### Slf4j
+#### Slf4j
 Edit your `logback.xml` file:
 
 ```xml
@@ -89,6 +92,74 @@ Edit your `logback.xml` file:
         <appender-ref ref="FILE" />
     </root>
 </configuration>
+```
+### JSON Format
+
+#### Log4j
+
+It might not be very easy to log in JSON with log4j that's why we advise you to use a slf4j ship with a module called log4j-over-slf4j and then use logback for the json format.
+
+To use log4j-over-slf4j in your own application, the first step is to locate and then to replace `log4j.jar` with `log4j-over-slf4j.jar`.
+Note that you still need an slf4j binding and its dependencies for log4j-over-slf4j to work properly.
+
+In most situations, replacing a jar file is all it takes in order to migrate from log4j to SLF4J.
+Edit your `pom.xml` file:
+
+```xml
+<dependency>
+	<groupId>org.slf4j</groupId>
+	<artifactId>log4j-over-slf4j</artifactId>
+	<version>1.7.13</version>
+</dependency>
+
+<dependency>
+  <groupId>net.logstash.logback</groupId>
+  <artifactId>logstash-logback-encoder</artifactId>
+  <version>4.5.1</version>
+</dependency>
+
+<dependency>
+	<groupId>ch.qos.logback</groupId>
+	<artifactId>logback-classic</artifactId>
+	<version>1.1.3</version>
+</dependency>
+```
+
+Once that done, just edit your `logback.xml` file such as described in the below `Slf4j` section.
+
+#### Log4j2
+
+There is a default log4j2 JSON Layout that can be used as shown in this [example](https://gist.github.com/NBParis/8bda7aea745987dd3261d475c613cf66).
+
+#### Slf4j
+
+The JSON library we recommend for Logback is [logstash-logback-encoder](https://github.com/logstash/logstash-logback-encoder). One advantage is: it's inside the main Maven repository.
+
+To add it into your classpath, simply add the following dependency (version 4.5.1 on the example) in your `pom.xml` file: 
+
+```xml
+<dependency>
+  <groupId>net.logstash.logback</groupId>
+  <artifactId>logstash-logback-encoder</artifactId>
+  <version>4.5.1</version>
+</dependency>
+
+<dependency>
+	<groupId>ch.qos.logback</groupId>
+	<artifactId>logback-classic</artifactId>
+	<version>1.1.3</version>
+</dependency>
+```
+
+Then edit your `logback.xml` file and update the encoder:
+
+```xml
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>logs/app.log</file>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <customFields>{"env":"prod"}</customFields>
+        </encoder>
+    </appender>
 ```
 
 ## Configure the Datadog Agent
