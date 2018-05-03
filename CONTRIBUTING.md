@@ -130,10 +130,6 @@ By default images are displayed on the full width of a page, if your graphic exa
 
 Learn more on Images partial parameters [with the dedicated wiki page][4]
 
-### Fixed-width with images
-
-
-
 [1]: https://github.com/DataDog/gobwords/tree/master/style-guide
 [2]: https://github.com/DataDog/documentation/wiki/Translations-Overview
 [3]: https://github.com/DataDog/documentation/wiki
