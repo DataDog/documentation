@@ -125,13 +125,15 @@ Replace `YOUR_API_KEY` with [your api key][5] or use [Kubernetes secrets][6] to 
 
 To enable [Log collection][10] with your DaemonSet:
 
-1. Set the `DD_LOGS_ENABLED` variable to true in your *env* section:
+1. Set the `DD_LOGS_ENABLED` and `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` variable to true in your *env* section:
 
     ```
     (...)
       env:
         (...)
         - name: DD_LOGS_ENABLED
+            value: "true"
+        - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
             value: "true"
     (...)
     ```
