@@ -320,7 +320,12 @@ Overlay a gray band showing the expected behavior of a series based on past.
 
 {{< img src="graphing/miscellaneous/functions/anomalies_graph.png" alt="anomalies graph" responsive="true" popup="true" style="width:80%;">}}
 
-The function has two parameters. The first parameter is for selecting which algorithm is used. The second parameter is labeled `bounds`, and you can tune this to change the width of the gray band. You may think of `bounds` like standard deviations; a value of 2 or 3 should be large enough to include most "normal" points. See our [Anomaly Monitor][2] page for more info.
+The function has two parameters:
+
+* The first parameter is for selecting which algorithm is used.
+* The second parameter is labeled `bounds`, tune it to change the width of the gray band. `bounds` can be interpreted as the standard deviations for your algorithm; a value of 2 or 3 should be large enough to include most "normal" points.
+
+See our [Anomaly Monitor][2] page for more info.
 
 ### outliers()
 Highlight outliers series; see our [Outlier Monitor][3] page for more info.
@@ -328,4 +333,3 @@ Highlight outliers series; see our [Outlier Monitor][3] page for more info.
 [1]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing/
 [2]: /monitors/monitor_types/anomaly
 [3]: /monitors/monitor_types/outlier
-[4]: /graphing/faq/as_count_validation
