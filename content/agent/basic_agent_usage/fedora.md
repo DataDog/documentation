@@ -97,8 +97,7 @@ The Agent 6.x installer can automatically convert your 5.x style Agent configura
  DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
 ```
 
-**Note:** the import process won't automatically move custom checks, this is by
-design since we cannot guarantee full backwards compatibility out of the box.
+**Note:** the import process won't automatically move custom Agent checks, this is by design since we cannot guarantee full backwards compatibility out of the box.
 
 ##### To Install Fresh
 
@@ -159,8 +158,8 @@ To install on a clean box (or have an existing Agent 5 install from which you do
 
     Note: please beware that if you have made any changes to your configurations to support new Agent v6-only options, these will not work anymore with Agent v5.
 
-4. Back-sync custom checks (optional)
-    If you made any changes or added any new custom checks while testing Agent 6 you might want to enable them back on Agent 5. Note: you only need to copy back checks you changed.
+4. Back-sync custom Agent checks (optional)
+    If you made any changes or added any new custom Agent checks while testing Agent 6 you might want to enable them back on Agent 5. Note: you only need to copy back checks you changed.
     
     ```shell
     sudo -u dd-agent -- cp /etc/datadog-agent/checks.d/<check>.py /etc/dd-agent/checks.d/
