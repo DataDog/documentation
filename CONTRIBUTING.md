@@ -14,9 +14,9 @@ The [Dos](#dos) and [Donts](#donts) serve the main purpose: **to clearly inform 
 
 ## Language
 
-For all main documentation files, code comments, [documentation pages around the doc][3], language used is American English, i.e **En_US**.  
+For all main documentation files, code comments, [documentation pages around the doc][3], language used is American English, i.e **en_US**.  
 
-For all `*.fr.md` files language used is French French, i.e **Fr_FR**.
+For all `*.fr.md` files language used is French French, i.e **fr_FR**.
 
 ## Dos
 
