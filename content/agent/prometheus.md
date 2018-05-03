@@ -101,7 +101,7 @@ instances:
 The names of the configuration and check files must match. If your check is called <code>mycheck.py</code> your configuration file <em>must</em> be named <code>mycheck.yaml</code>.
 </div>
 
-Configuration for a Prometheus check is almost the same as a regular [Agent Check][7]. The main difference is to include the variable `prometheus_endpoint` in your `check.yaml` file. This goes into `conf.d/kube_dns.yaml`:
+Configuration for a Prometheus check is almost the same as a regular [Agent check][7]. The main difference is to include the variable `prometheus_endpoint` in your `check.yaml` file. This goes into `conf.d/kube_dns.yaml`:
 
 ```yaml
 init_config:

@@ -29,15 +29,15 @@ class HTTPCheckTest(AgentCheckTest)`
 
 To test integrations, add your test code to the `test_[integration_name].py` file in your integration directory. [Creating New Integrations][1] for more details.
 
-### Datadog Agent Checks
+### Datadog Agent checks
 
-If you are submitting your Agent Check as a Pull Request to be included with the Datadog Agent, reference the [`README.md` in the `dd-agent` repository][2].
+If you are submitting your Agent check as a Pull Request to be included with the Datadog Agent, reference the [`README.md` in the `dd-agent` repository][2].
 
 ## The AgentCheckTest Class
 
 The following test methods are provided by the `AgentCheckTest` class. For more details about the class, reference the [source code][3].
 
-### Test and Check Status Methods
+### Test and check status methods
 
 #### `coverage_report()`
 
@@ -47,7 +47,7 @@ Prints the test coverage status of metrics, events, service checks and service m
 
 Prints a report of the metrics, events, service checks, service metadata and warnings provided by the integration.
 
-### Run Checks Methods
+### `run_check` methods
 
 #### `run_check(config, agent_config=None, mocks=None, force_reload=False)`
 
@@ -207,9 +207,9 @@ Parameters:
 
 For further examples of testing Datadog integrations, you can view the test files for [core integrations][4] such as the [`test_mysql.py` file][5] for the MySQL integration.
 
-### Datadog Agent Checks
+### Datadog Agent checks
 
-For examples of Agent Check tests, you can view the test files for Agent checks such as [`test_http_check.py` file][7].
+For examples of Agent check tests, you can view the test files for Agent checks such as [`test_http_check.py` file][7].
 
 [1]: /developers/integrations/integration_sdk/#testing-your-integration
 [2]: https://github.com/DataDog/dd-agent/blob/master/tests/README.md

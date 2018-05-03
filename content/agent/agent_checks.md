@@ -1,5 +1,5 @@
 ---
-title: Writing an Agent Check
+title: Writing an Agent check
 kind: documentation
 aliases:
   - /guides/agent_checks/
@@ -18,13 +18,13 @@ further_reading:
 
 ## Overview
 
-This page first looks at the `AgentCheck` interface, and then proposes a simple Agent Check that collects timing metrics and status events from HTTP services.  
+This page first looks at the `AgentCheck` interface, and then proposes a simple Agent check that collects timing metrics and status events from HTTP services.  
 
 Custom Agent checks are included in the main check run loop, meaning they run every check interval, which defaults to 15 seconds.
 
-### Should you write an Agent Check or an Integration?
+### Should you write an Agent check or an Integration?
 
-Agent Checks are a great way to collect metrics from custom applications or unique systems. However, if you are trying to collect metrics from a generally available application, public service or open source project, we recommend that you write [an Integration][5].
+Agent checks are a great way to collect metrics from custom applications or unique systems. However, if you are trying to collect metrics from a generally available application, public service or open source project, we recommend that you write [an Integration][5].
 
 Starting with version 5.9 of the Datadog Agent, a new method for creating integrations is available. This allows integrations to be released and updated independently from Datadog Agent updates, it also provides an easier way for you to share integrations and makes it easier for the wider Datadog community to use your integrations.
 
@@ -34,9 +34,9 @@ For more information about how to write an integration, see [Creating New Integr
 
 First off, ensure you've properly installed the [Agent][3] on your machine. If you run into any issues during the setup, [contact our support][4].
 
-## Agent Check Interface
+## `AgentCheck` interface
 
-All custom Agent checks inherit from the `AgentCheck` class found in `checks/__init__.py` and require a `check()` method that takes one argument, `instance` which is a `dict` having the configuration of a particular instance. The `check` method is run once per instance defined in the check configuration (discussed later).  
+All custom Agent checks inherit from the `AgentCheck` class found in `checks/__init__.py` and require a `check()` method that takes one argument, `instance` which is a `dict` having the configuration of a particular instance. The `check` method is run once per instance defined in the check configuration (discussed later).
 
 **Note**: 
 
@@ -217,12 +217,12 @@ The *instances* section is a list of instances that this check is run
 against. Your actual `check()` method is run once per instance. This means that
 every check supports multiple instances out of the box.
 
-## Directory Structure
+## Directory structure
 
 Before starting your first check it is worth understanding the checks directory
 structure. Add files for your check in the  `checks.d` folder, which lives in your Agent root.
 
-## Your First Check
+## Your first check
 
 <div class="alert alert-warning">
 The names of the configuration and check files must match. If your check
@@ -252,7 +252,7 @@ class HelloCheck(AgentCheck):
         self.gauge('hello.world', 1)
 ```
 
-## An HTTP Check
+## An HTTP check
 
 Let's write a basic check that checks the status of an HTTP endpoint. On each run of the check, a *GET* request is made to the HTTP endpoint. Based on the response, one of the following happens:
 
@@ -282,7 +282,7 @@ instances:
 
 ```
 
-### The Check
+### The check
 
 Now let's define our check method. The main part of the check makes
 a request to the URL and time the response time, handling error cases as it goes.
