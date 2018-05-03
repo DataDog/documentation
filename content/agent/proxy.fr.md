@@ -196,7 +196,7 @@ Pour vérifier que tout fonctionne correctement, examinez les statistiques HAPro
 
 **Cette fonctionnalité est uniquement disponible sur l'Agent v5**
 
-Nous vous recommandons d'utiliser un proxy réel (un proxy Web ou HAProxy) pour transférer votre trafic vers Datadog. Cependant, si ces options ne sont pas disponibles, il est possible de configurer une instance de l'Agent v5 pour servir de proxy.
+Nous vous recommandons d'utiliser un proxy HTTP (un proxy Web ou HAProxy/Nginx) pour transférer votre trafic vers Datadog. Cependant, si cette option n'est pas disponible, il est possible de configurer une instance de l'Agent v5 pour servir de proxy.
 
 1. Désignez un noeud **exécutant l'agent datadog** comme proxy.
    Dans cet exemple, supposons que le nom du proxy est `proxy-node`. Ce noeud **doit** pouvoir atteindre `https://app.datadoghq.com`.
