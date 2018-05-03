@@ -68,20 +68,20 @@ Since the Datadog Agent is completely open source, you can [verify the code's be
 
 In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if you don't specify a case ID, the command asks for an email address that is used to login in your organization and creates a new support case.
 
-|Platform|Agent v5 |Agent v6|
-|:--------|:-----|:--------|
-|Linux| `sudo /etc/init.d/datadog-agent flare <CASE_ID>` | `sudo -u dd-agent -- datadog-agent flare <CASE_ID>`|
-|Docker|`docker exec -it dd-agent /etc/init.d/datadog-agent flare <CASE_ID>`|`docker exec -it datadog-agent agent flare <CASE_ID>`|
-|Docker (Alpine)|`docker exec -it dd-agent /opt/datadog-agent/bin/agent flare <CASE_ID>`||
-|MacOS x|`datadog-agent flare <CASE_ID>`              | `datadog-agent flare <CASE_ID>` or web [web GUI][8]
-|CentOS| `sudo service datadog-agent flare <CASE_ID>`              | `sudo datadog-agent flare <CASE_ID>`              |
-|Debian| `sudo service datadog-agent flare <CASE_ID>`              | `sudo datadog-agent flare <CASE_ID>`              |
-|Kubernetes|`kubectl exec <pod-name> -it /etc/init.d/datadog-agent flare <CASE_ID>`|`kubectl exec <pod-name> -it agent flare <CASE_ID>`|
-|Fedora|`sudo service datadog-agent flare <CASE_ID>`              | `sudo datadog-agent flare <CASE_ID>`              |
-|Redhat|`sudo service datadog-agent flare <CASE_ID>`              | `sudo datadog-agent flare <CASE_ID>`              |
-|Suse|`sudo service datadog-agent flare <CASE_ID>`              | `sudo datadog-agent flare <CASE_ID>`              |
-|Source|`sudo ~/.datadog-agent/bin/agent flare <CASE_ID>`|`sudo datadog-agent flare <CASE_ID>`|
-|Windows|[Consult our dedicated windows doc][9]|[Consult our dedicated windows doc][10]|
+| Platform        | Agent v5                                                                | Agent v6                                              |
+| :--------       | :-----                                                                  | :--------                                             |
+| Linux           | `sudo /etc/init.d/datadog-agent flare <CASE_ID>`                        | `sudo -u dd-agent -- datadog-agent flare <CASE_ID>`   |
+| Docker          | `docker exec -it dd-agent /etc/init.d/datadog-agent flare <CASE_ID>`    | `docker exec -it datadog-agent agent flare <CASE_ID>` |
+| Docker (Alpine) | `docker exec -it dd-agent /opt/datadog-agent/bin/agent flare <CASE_ID>` |                                                       |
+| MacOS x         | `datadog-agent flare <CASE_ID>`                                         | `datadog-agent flare <CASE_ID>` or web [web GUI][8]   |
+| CentOS          | `sudo service datadog-agent flare <CASE_ID>`                            | `sudo datadog-agent flare <CASE_ID>`                  |
+| Debian          | `sudo service datadog-agent flare <CASE_ID>`                            | `sudo datadog-agent flare <CASE_ID>`                  |
+| Kubernetes      | `kubectl exec <pod-name> -it /etc/init.d/datadog-agent flare <CASE_ID>` | `kubectl exec <pod-name> -it agent flare <CASE_ID>`   |
+| Fedora          | `sudo service datadog-agent flare <CASE_ID>`                            | `sudo datadog-agent flare <CASE_ID>`                  |
+| Redhat          | `sudo service datadog-agent flare <CASE_ID>`                            | `sudo datadog-agent flare <CASE_ID>`                  |
+| Suse            | `sudo service datadog-agent flare <CASE_ID>`                            | `sudo datadog-agent flare <CASE_ID>`                  |
+| Source          | `sudo ~/.datadog-agent/bin/agent flare <CASE_ID>`                       | `sudo datadog-agent flare <CASE_ID>`                  |
+| Windows         | [Consult our dedicated windows doc][9]                                  | [Consult our dedicated windows doc][10]               |
 
 ## FAQ
 

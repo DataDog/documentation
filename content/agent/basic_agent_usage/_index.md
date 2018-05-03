@@ -40,15 +40,13 @@ Manage the Datadog Agent and [integrations][1] using configuration management to
 
 The configuration files and folders for the Agent are located at:
 
-{{% table responsive="true" %}}
-| OS                                                                       | Agent v5                                                                   |  Agent v6                       |
-| :-------                                                                 | :--------                                                                  | :--------                       |
-| [Mac OS X][9]                                 | `~/.datadog-agent/datadog.conf`                                            | `~/.datadog-agent/datadog.yaml` |
-| [Linux][10]                                 | `/etc/dd-agent/datadog.conf`                                               | `/etc/datadog-agent/datadog.yaml`                                |
-| [Source][11]                                | `~/.datadog-agent/agent/datadog.conf`                                      | `/etc/datadog-agent/datadog.yaml`                                |
+| OS                                         | Agent v5                                                                   | Agent v6                             |
+| :-------                                   | :--------                                                                  | :--------                            |
+| [Mac OS X][9]                              | `~/.datadog-agent/datadog.conf`                                            | `~/.datadog-agent/datadog.yaml`      |
+| [Linux][10]                                | `/etc/dd-agent/datadog.conf`                                               | `/etc/datadog-agent/datadog.yaml`    |
+| [Source][11]                               | `~/.datadog-agent/agent/datadog.conf`                                      | `/etc/datadog-agent/datadog.yaml`    |
 | [Windows Server 2008, Vista and newer][12] | `\\ProgramData\Datadog\datadog.conf`                                       | `\\ProgramData\Datadog\datadog.yaml` |
-| [Windows Server 2003, XP or older][12]     | `\\Documents and Settings\All Users\Application Data\Datadog\datadog.conf` | `n/a` _(unsupported OS)_        |
-{{% /table %}}
+| [Windows Server 2003, XP or older][12]     | `\\Documents and Settings\All Users\Application Data\Datadog\datadog.conf` | `n/a` _(unsupported OS)_             |
 
 ## Log location
 
