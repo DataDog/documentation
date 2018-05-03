@@ -74,7 +74,6 @@ Your application tracers must be configured to submit traces to this address. Se
 #### Python
 
 ```python
-import os
 from ddtrace import tracer
 
 tracer.configure(
