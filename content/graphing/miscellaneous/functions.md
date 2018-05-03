@@ -333,3 +333,4 @@ Highlight outliers series; see our [Outlier Monitor][3] page for more info.
 [1]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing/
 [2]: /monitors/monitor_types/anomaly
 [3]: /monitors/monitor_types/outlier
+[4]: /graphing/faq/as_count_validation

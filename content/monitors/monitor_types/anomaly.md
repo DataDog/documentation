@@ -30,7 +30,7 @@ Anomaly detection monitors provide both "Historical Context" so that you can see
 
 Keep in mind that `anomalies` uses the past to predict what is expected in the future, so using `anomalies` on a new metric, for which you have just started collecting data, may yield poor results.
 
-To create an anomaly detection monitor, navigate to the [New Monitor](https://app.datadoghq.com/monitors#/create) page and click **Anomaly Detection**. Then fill out the **Define the metric** section just as you would for any other monitor.
+To create an anomaly detection monitor, navigate to the [New Monitor][1] page and click **Anomaly Detection**. Then fill out the **Define the metric** section just as you would for any other monitor.
 
 {{< img src="monitors/monitor_types/anomaly/monitor_options.png" alt="monitor options" responsive="true" popup="true" style="width:80%;">}}
 
@@ -47,9 +47,9 @@ Datadog will automatically analyze the metric you have chosen for your monitor a
 Here you can specify:
 
 * The width of the gray band. "Deviations" is equivalent to the bounds parameter used in the anomalies function in dashboards.
-* The anomaly detection algorithm used. See the [next section below](/#anomaly-detetion-algorithms).
+* The anomaly detection algorithm used. See the [next section below][2].
 * If a seasonal algorithm is chosen, the seasonality.
-* The [rollup][1] interval.
+* The [rollup][3] interval.
 * The percentage of points that need to be anomalous for alerting/warning/recovery.
 
 ### Anomaly Detection Algorithms
@@ -60,10 +60,10 @@ There are three different anomaly detection algorithms:
 *Basic* uses a simple lagging rolling quantile computation to determine the range of expected values, but it uses very little data and adjusts quickly to changing conditions but has no knowledge of seasonal behavior or longer trends.
 
 * **Agile**: Use this algorithm for seasonal metrics when you want the algorithm to quickly adjust to level shifts in the metric.
-*Agile* is a robust version of the [SARIMA](https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average) algorithm. It incorporates the immediate past into its predictions, allowing it to update quickly to level shifts at the expense of being less robust to recent, long-lasting anomalies.
+*Agile* is a robust version of the [SARIMA][4] algorithm. It incorporates the immediate past into its predictions, allowing it to update quickly to level shifts at the expense of being less robust to recent, long-lasting anomalies.
 
 * **Robust**: Use this algorithm for seasonal metrics where you expect the metric to be stable and want to consider slow level shifts as anomalies.
-*Robust* is a [seasonal-trend decomposition](https://en.wikipedia.org/wiki/Decomposition_of_time_series) algorithm. It is very stable and its predictions remain constant even through long-lasting anomalies at the expense of taking longer to respond to intended level shifts (e.g., if the level of a metric shifts due to a code change.)
+*Robust* is a [seasonal-trend decomposition][5] algorithm. It is very stable and its predictions remain constant even through long-lasting anomalies at the expense of taking longer to respond to intended level shifts (e.g., if the level of a metric shifts due to a code change.)
 
 All of the seasonal algorithms may use up to a couple of months of historical data when calculating a metric's expected normal range of behavior. By using a significant amount of past data, the algorithms are able to avoid giving too much weight to abnormal behavior that might have occurred in the recent past.
 
@@ -89,19 +89,13 @@ Finally, we see how each of the algorithms handle a new metric. _Robust_ and _ag
 
 ## Anomaly Monitors via the API
 
-If you are an enterprise-level customer, you can create an anomaly detection monitor via the API with the standard [create-monitor API endpoint](/api/#monitor-create) if you add the `anomalies` function to the monitor query. The query then follows this formula:
+If you are an enterprise-level customer, you can create an anomaly detection monitor via the API with the standard [create-monitor API endpoint][6] if you add the `anomalies` function to the monitor query. The query then follows this formula:
 
 ```
 time_aggr(eval_window_length):anomalies(space_aggr:metric{tags}, 'basic/agile/robust', deviation_number, direction='both/above/below', alert_window='alert_window_length', interval=seconds) >= threshold_value
 ```
 
-<<<<<<< HEAD
-Acceptable algorithm values are _basic_, _agile_, or _robust_.
-
-**Note**: that anomaly detection monitors may only be used by enterprise-level customer subscriptions. If you have a pro-level customer subscription and would like to use the anomaly detection monitoring feature, you can reach out to your customer success representative or [email our billing team][6] to discuss that further.
-=======
-**Note**: that anomaly detection monitors may only be used by enterprise-level customer subscriptions. If you have a pro-level customer subscription and would like to use the anomaly detection monitoring feature, you can reach out to your customer success representative or [email our billing team](mailto:billing@datadoghq.com) to discuss that further.
->>>>>>> update api examples
+**Note**: that anomaly detection monitors may only be used by enterprise-level customer subscriptions. If you have a pro-level customer subscription and would like to use the anomaly detection monitoring feature, you can reach out to your customer success representative or [email our billing team][7] to discuss that further.
 
 ### Example
 
@@ -122,7 +116,7 @@ Also, anomaly detection requires historical data to make good predictions. If yo
 
 ### Why can't I use anomaly detection over groups in the dashboard?
 
-Looking at many separate timeseries in a single graph can lead to [spaghettification][7], and the problem gets only worse once the anomaly detection visualization is added in.
+Looking at many separate timeseries in a single graph can lead to [spaghettification][8], and the problem gets only worse once the anomaly detection visualization is added in.
 
 {{< img src="monitors/monitor_types/anomaly/spaghetti.png" alt="spaghetti" responsive="true" popup="true" style="width:80%;">}}
 
@@ -144,7 +138,7 @@ The second graph shows the same metric, a day later. Even though it uses the pre
 
 At different zoom levels, the same query can result in time series with very different characteristics. When looking at longer time periods, each point represents the aggregate of many more-granular points. Therefore, each of these aggregate points may hide noise observed in the more granular points. For example, charts that show one week often appear smoother (less noisy) than charts that show just 10 minutes.
 
-The width of the gray band that is drawn by our [anomaly detection algorithm][8] is, in part, based on the noisiness of the time series in the plot. The band must be wide enough that ordinary noise is mostly inside the band and doesn't appear as anomalous. Unfortunately, when the band is wide enough to include ordinary noise, it might also be wide enough to hide some anomalies, especially when viewing short time windows.
+The width of the gray band that is drawn by our [anomaly detection algorithm][9] is, in part, based on the noisiness of the time series in the plot. The band must be wide enough that ordinary noise is mostly inside the band and doesn't appear as anomalous. Unfortunately, when the band is wide enough to include ordinary noise, it might also be wide enough to hide some anomalies, especially when viewing short time windows.
 
 Here's a concrete example to illustrate. The `app.requests` metric is noisy but has a constant average value of 8. On one day, there is a 10-minute anomalous period, starting a 9:00, during which the metric has an average value of 10. The chart below shows this series in a graph with a one-day time window; each point in the graph summarizes 5 minutes.
 
@@ -180,4 +174,12 @@ If the rollup is set explicitly on the query, the rollup interval option for the
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: graphing/#aggregate-and-rollup
+[1]: https://app.datadoghq.com/monitors#/create
+[2]: /#anomaly-detetion-algorithms
+[3]: /graphing/#aggregate-and-rollup
+[4]: https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average
+[5]: https://en.wikipedia.org/wiki/Decomposition_of_time_series
+[6]: /api/#monitor-create
+[7]: mailto:billing@datadoghq.com
+[8]: https://www.datadoghq.com/blog/anti-patterns-metric-graphs-101/
+[9]: /monitors/monitor_types/anomaly
