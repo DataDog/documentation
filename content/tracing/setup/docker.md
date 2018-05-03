@@ -4,7 +4,7 @@ kind: Documentation
 aliases:
 - /tracing/docker/
 further_reading:
-- link: "https://github.com/DataDog/docker-dd-agent"
+- link: "https://github.com/DataDog/datadog-trace-agent"
   tag: "Github"
   text: Source code
 - link: "tracing/visualization/"
@@ -12,47 +12,64 @@ further_reading:
   text: "Explore your services, resources and traces"
 ---
 
-Enable the [datadog-trace-agent][1] in the `docker-dd-agent` container by passing `DD_APM_ENABLED=true` as an environment variable.
+Enable the [datadog-trace-agent][1] in the `datadog/agent` container by passing `DD_APM_ENABLED=true` as an environment variable.
 
 **Note: APM is NOT available on Alpine Images**
 
-For additional information, see the [Datadog docker Github repository][2].
+For additional information, see the [Agent 6 Docker documentation][2].
 
 ## Tracing from the host
 
-Tracing can be available on port `8126/tcp from _any host_ by adding the option `-p 8126:8126/tcp` to the `docker run` command.
+Tracing can be available on port `8126/tcp` from _any host_ by adding the option `-p 8126:8126/tcp` to the `docker run` command.
 
 To make it available from _your host only_, use `-p 127.0.0.1:8126:8126/tcp` instead.
 
 For example, the following command allows the Agent to receive traces from anywhere:
 
 ```bash
-docker run -d --name dd-agent \
-  -v /var/run/docker.sock:/var/run/docker.sock:ro \
-  -v /proc/:/host/proc/:ro \
-  -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-  -e API_KEY={your_api_key_here} \
-  -e DD_APM_ENABLED=true \
-  -p 8126:8126/tcp \
-  datadog/docker-dd-agent
+docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
+              -v /proc/:/host/proc/:ro \
+              -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+              -e DD_API_KEY=<YOUR_API_KEY> \
+              -e DD_APM_ENABLED=true \
+              datadog/agent:latest
 ```
 
 ## Tracing from other containers
 
-As with DogStatsD, traces can be submitted to the Agent from other containers either using Docker links or with the Docker host IP.
+As with DogStatsD, traces can be submitted to the Agent from other containers either using Docker networks or with the Docker host IP.
 
-### Using Docker links
+### Using Docker Network
+
+As a first step, you need to create a user-defined bridge network:
 
 ```bash
-docker run  --name my_container \
-            --all_your_flags \
-            --link dd-agent:dd-agent \
-            my_image
+docker network create <NETWORK_NAME>
 ```
 
-This exposes `DD_AGENT_PORT_8126_TCP_ADDR` and `DD_AGENT_PORT_8126_TCP_PORT` as environment variables. Your application tracer must be configured to submit traces to this address.
+Then you can start the Agent and the application container, connected to the network previously created:
 
-See examples for each supported language below:
+```bash
+# Datadog Agent
+docker run -d --name dd-agent \
+              --network <NETWORK_NAME> \
+              -v /var/run/docker.sock:/var/run/docker.sock:ro \
+              -v /proc/:/host/proc/:ro \
+              -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+              -e DD_API_KEY=<YOUR_API_KEY> \
+              -e DD_APM_ENABLED=true \
+              datadog/agent:latest
+
+# Application
+docker run -d --name app \
+              --network <NETWORK_NAME> \
+              company/app:latest
+```
+
+This exposes the hostname `dd-agent` in your `app` container. If you're using `docker-compose`, `<NETWORK_NAME>` parameters are the ones
+defined under the `networks` section of your `docker-compose.yml`.
+
+Your application tracers must be configured to submit traces to this address. See examples for each supported language below:
 
 #### Python
 
@@ -61,8 +78,8 @@ import os
 from ddtrace import tracer
 
 tracer.configure(
-    hostname=os.environ['DD_AGENT_PORT_8126_TCP_ADDR'],
-    port=os.environ['DD_AGENT_PORT_8126_TCP_PORT'],
+    hostname='dd-agent',
+    port=8126,
 )
 ```
 
@@ -70,24 +87,21 @@ tracer.configure(
 
 ```ruby
 Datadog.configure do |c|
-  c.tracer hostname: ENV['DD_AGENT_PORT_8126_TCP_ADDR'],
-           port: ENV['DD_AGENT_PORT_8126_TCP_PORT']
+  c.tracer hostname: 'dd-agent',
+           port: 8126
 end
 ```
 
 #### Go
 
 ```go
-import (
-    "os"
+import ddtrace "github.com/DataDog/dd-trace-go/opentracing"
 
-    ddtrace "github.com/DataDog/dd-trace-go/opentracing"
-)
 
 func main() {
     config := ddtrace.NewConfiguration()
-    config.AgentHostname = os.GetEnv("DD_AGENT_PORT_8126_TCP_ADDR")
-    config.AgentPort = os.GetEnv("DD_AGENT_PORT_8126_TCP_PORT")
+    config.AgentHostname = "dd-agent"
+    config.AgentPort = 8126
 
     tracer, closer, err := ddtrace.NewTracer(config)
     defer closer.Close()
@@ -99,8 +113,8 @@ func main() {
 You can update the Java Agent configuration via environment variables:
 
 ```bash
-DD_AGENT_HOST=$DD_AGENT_PORT_8126_TCP_ADDR \
-DD_AGENT_PORT=$DD_AGENT_PORT_8126_TCP_PORT \
+DD_AGENT_HOST=dd-agent \
+DD_AGENT_PORT=8126 \
 java -javaagent:/path/to/the/dd-java-agent.jar -jar /your/app.jar
 ```
 
@@ -108,8 +122,8 @@ or via system properties:
 
 ```bash
 java -javaagent:/path/to/the/dd-java-agent.jar \
-     -Ddd.agent.host=$DD_AGENT_PORT_8126_TCP_ADDR \
-     -Ddd.agent.port=$DD_AGENT_PORT_8126_TCP_PORT \
+     -Ddd.agent.host=dd-agent \
+     -Ddd.agent.port=8126 \
      -jar /your/app.jar
 ```
 
@@ -130,4 +144,4 @@ tracer.configure(hostname='172.17.0.1', port=8126)
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/datadog-trace-agent
-[2]: https://github.com/DataDog/docker-dd-agent
+[2]: {{< ref "agent/basic_agent_usage/docker.md" >}}
