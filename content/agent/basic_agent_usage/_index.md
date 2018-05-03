@@ -40,7 +40,6 @@ Manage the Datadog Agent and [integrations][1] using configuration management to
 
 The configuration files and folders for the Agent are located at:
 
-
 | OS                                         | Agent v5                                                                   | Agent v6                             |
 | :-------                                   | :--------                                                                  | :--------                            |
 | [Mac OS X][9]                              | `~/.datadog-agent/datadog.conf`                                            | `~/.datadog-agent/datadog.yaml`      |

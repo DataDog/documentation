@@ -77,12 +77,12 @@ Because Signature Sampling decisions are made at the [Agent][4] level, it is not
 
 Each trace has a `sampling_priority` attribute, which is assigned at its inception and propagated along the entire trace:
 
-| Value      |  Type | Action|
-| :--------------------- | :---------------- | :----------|
-|**-1**|User input| The Agent drops the trace. |
-|**0**|Automatic sampling decision| The Agent drops the trace. |
-|**1**|Automatic sampling decision| The Agent keeps the trace. |
-|**2**|User input| The Agent keeps the trace, and the backend will only apply sampling if above maximum volume allowed. |
+| Value                  | Type                        | Action                                                                                               |
+| :--------------------- | :----------------           | :----------                                                                                          |
+| **-1**                 | User input                  | The Agent drops the trace.                                                                           |
+| **0**                  | Automatic sampling decision | The Agent drops the trace.                                                                           |
+| **1**                  | Automatic sampling decision | The Agent keeps the trace.                                                                           |
+| **2**                  | User input                  | The Agent keeps the trace, and the backend will only apply sampling if above maximum volume allowed. |
 
 Traces are automatically assigned a priority of **0** or **1**, with a proportion ensuring that the Agent won't have to sample more than it is allowed.  Override it by assigning a value of **2** if it is a trace that should be kept (critical transaction, debug mode, etc.).
 
