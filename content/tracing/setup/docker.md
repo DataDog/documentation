@@ -20,9 +20,9 @@ For additional information, see the [Agent 6 Docker documentation][2].
 
 ## Tracing from the host
 
-Tracing can be available on port `8126/tcp` from _any host_ by adding the option `-p 8126:8126/tcp` to the `docker run` command.
+Tracing is available on port `8126/tcp` from *any host* by adding the option `-p 8126:8126/tcp` to the `docker run` command.
 
-To make it available from _your host only_, use `-p 127.0.0.1:8126:8126/tcp` instead.
+To make it available from *your host only*, use `-p 127.0.0.1:8126:8126/tcp` instead.
 
 For example, the following command allows the Agent to receive traces from anywhere:
 
@@ -37,17 +37,17 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
 
 ## Tracing from other containers
 
-As with DogStatsD, traces can be submitted to the Agent from other containers either using Docker networks or with the Docker host IP.
+As with DogStatsD, traces can be submitted to the Agent from other containers either using [Docker networks](#docker-network) or with the [Docker host IP](#host-ip).
 
-### Using Docker Network
+### Docker Network
 
-As a first step, you need to create a user-defined bridge network:
+As a first step, create a user-defined bridge network:
 
 ```bash
 docker network create <NETWORK_NAME>
 ```
 
-Then you can start the Agent and the application container, connected to the network previously created:
+Then start the Agent and the application container, connected to the network previously created:
 
 ```bash
 # Datadog Agent
@@ -66,10 +66,10 @@ docker run -d --name app \
               company/app:latest
 ```
 
-This exposes the hostname `dd-agent` in your `app` container. If you're using `docker-compose`, `<NETWORK_NAME>` parameters are the ones
-defined under the `networks` section of your `docker-compose.yml`.
+This exposes the hostname `dd-agent` in your `app` container.  
+If you're using `docker-compose`, `<NETWORK_NAME>` parameters are the ones defined under the `networks` section of your `docker-compose.yml`.
 
-Your application tracers must be configured to submit traces to this address. See examples for each supported language below:
+Your application tracers must be configured to submit traces to this address. See the examples below for each supported language:
 
 #### Python
 
@@ -109,7 +109,7 @@ func main() {
 
 #### Java
 
-You can update the Java Agent configuration via environment variables:
+Either update the Java Agent configuration via environment variables:
 
 ```bash
 DD_AGENT_HOST=dd-agent \
@@ -126,9 +126,10 @@ java -javaagent:/path/to/the/dd-java-agent.jar \
      -jar /your/app.jar
 ```
 
-### Using Docker host IP
+### Docker host IP
 
-Agent container port `8126` should be linked to the host directly. Configure your application tracer to report to the default route of this container (you can determine this using the `ip route` command).
+Agent container port `8126` should be linked to the host directly.  
+Configure your application tracer to report to the default route of this container (determine this using the `ip route` command).
 
 The following is an example for the Python Tracer, assuming `172.17.0.1` is the default route:
 
@@ -143,4 +144,4 @@ tracer.configure(hostname='172.17.0.1', port=8126)
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/datadog-trace-agent
-[2]: {{< ref "agent/basic_agent_usage/docker.md" >}}
+[2]: /agent/basic_agent_usage/docker
