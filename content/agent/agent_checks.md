@@ -40,9 +40,8 @@ All custom Agent checks inherit from the `AgentCheck` class found in `checks/__i
 
 **Note**: 
 
-* Custom Agent Checks aren't able to import modules by default, all your code should be in one single file.
-
-* The datadog Agent installation has it's own embedded copy of python. Custom scripts importing pip-installed libraries fail unless datadog's own embedded copy of pip is used to install these third party libraries.
+* Custom Agent checks aren't able to import modules by default, all your code should be in one single file.
+* The Datadog Agent installation has its own embedded copy of Python. Custom scripts importing pip-installed libraries will fail unless Datadog's own embedded copy of pip is used to install these third-party libraries.
 
 ### `AgentCheck` interface for Agent v6
 
