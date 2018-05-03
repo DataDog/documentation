@@ -100,7 +100,7 @@ import ddtrace "github.com/DataDog/dd-trace-go/opentracing"
 func main() {
     config := ddtrace.NewConfiguration()
     config.AgentHostname = "dd-agent"
-    config.AgentPort = 8126
+    config.AgentPort = "8126"
 
     tracer, closer, err := ddtrace.NewTracer(config)
     defer closer.Close()
