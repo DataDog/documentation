@@ -2,6 +2,7 @@
 categories:
 - web
 - network
+ddtype: check
 doc_link: https://docs.datadoghq.com/integrations/gitlab/
 git_integration_title: gitlab
 guid: 1cab328c-5560-4737-ad06-92ebc54af901
@@ -48,15 +49,7 @@ Le paramètre `allowed_metrics` de la section` init_config` permet de spécifier
 
 ### Validation
 
-[Lancez la commande `status`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `gitlab` dans la section Checks:
-
-    Checks
-    ======
-
-        gitlab
-        -----------
-          - instance #0 [OK]
-          - Collected 8 metrics, 0 events & 3 service checks
+[Lancez la commande `status`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `gitlab` dans la section Checks.
 
 ## Compatibilité
 
@@ -112,15 +105,7 @@ Le paramètre `allowed_metrics` de la section` init_config` permet de spécifier
 
 ### Validation
 
-[Lancez la commande `status`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `gitlab_runner` dans la section Checks:
-
-    Checks
-    ======
-
-        gitlab_runner
-        -----------
-          - instance #0 [OK]
-          - Collected 10 metrics, 0 events & 2 service checks
+[Lancez la commande `status`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `gitlab_runner` dans la section Checks.
 
 ## Compatibilité
 
@@ -131,7 +116,7 @@ Le check gitlab_runner est compatible avec toutes les principales plateformes.
 {{< get-metrics-from-git "gitlab_runner" >}}
 
 
-### Evénements
+### Évènements
 Le check Gitlab Runner n'inclut aucun événement pour le moment.
 
 ### Checks de Service

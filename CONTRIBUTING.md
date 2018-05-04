@@ -10,7 +10,12 @@ The purpose of the Docs site is to clearly inform readers about how to use Datad
 * Make the reader feel nice. When you must choose between politeness and clarity, choose clarity.
 * Impress the reader with fancy words and drawn out sentences.
 
-The following Dos and Donts serve the main purpose: **to clearly inform readers.**
+The [Dos](#dos) and [Donts](#donts) serve the main purpose: **to clearly inform readers.**
+
+## Language
+
+* Use the American English **en_US** dialect when writing documentation, code comments, [wiki entries][3], etc. in the English language. This is the default language for all `*.md` files.  
+* Use the Standard French **fr_FR** dialect when writing in the French language. This is the language in all `*.fr.md` files.
 
 ## Dos
 
@@ -78,7 +83,7 @@ This section sets the record straight (for the Docs site, not for all humankind)
     * **GOOD**: “Metrics, events, and service checks.”
 
 * **Use the em dash (—) with no spaces between adjacent words**: 
-    * **BAD**: “The rest—Ok, Skipped, Ignored, and No Data—are not alert-worthy”. 
+    * **BAD**: “The rest - Ok, Skipped, Ignored, and No Data - are not alert-worthy”. 
     * **GOOD**: “The rest—Ok, Skipped, Ignored, and No Data—are not alert-worthy.”
 
 * **Use the present tense**: Avoid future tense most of the time. 
@@ -93,24 +98,38 @@ The [Gobwords Style Guide][1] is an index of commonly mis-capitalized, mispunctu
 
 Otherwise, here are some words and phrases to avoid or use sparingly:
 
-* Currently
-  * (omit)
-* Refer to/visit
-  * When preceding a link; use “See” or “Read”.
-* A number of
-  * This is vague. Slightly less vague: “a few”, “several”, “many”.
-* [in the] Datadog app
-  * No need for the definite article; use "[in] Datadog".
-* Product
-  * When referencing Datadog (e.g. “the Datadog product”), omit it or use “service”.
-* Integration
-  * In the context of describing / discussing Agent checks, use “check”.
-* Please
-  * There’s no reason to plead with the reader; maybe they’ll read the docs, maybe they won’t.
+| Word to avoid        | Workaround                                                                                 |
+| :------------------- | :----------------------------------------------------------------------------------------- |
+| Currently            | just omit it                                                                               |
+| Refer to/visit       | When preceding a link; use “See” or “Read”                                                 |
+| A number of          | This is vague. Slightly less vague: “a few”, “several”, “many”.                            |
+| [in the] Datadog app | No need for the definite article; use "[in] Datadog".                                      |
+| Product              | When referencing Datadog (e.g. “the Datadog product”), omit it or use “service”            |
+| Integration          | In the context of describing / discussing Agent checks, use “check”.                       |
+| Please               | There’s no reason to plead with the reader; maybe they’ll read the docs, maybe they won’t. |
 
-## Link
 
-Links must be specified using the reference format (i.e. in the footnote) in order to aid [the translation process][2].
+## Formating
+
+### Text
+
+Use text formatting to clarify and enhance content.
+
+| Formating   | Rule                                                                                                                    | Example                                               |
+| :---        | :------                                                                                                                 | :----                                                 |
+| `Backquote` | Used every time there is code related content in some text                                                              | Use the `foo` parameter                               |
+| **Bold**    | Subjectively pointing the reader to something that he shouldn't miss.                                                   | **This is important**, not that.                      |
+| *Italic*    | Literally translated words, default values, functions, settings, and page names.                                       | Go the the *setting* page in your Datadog application |
+| [Link]      | Links must be specified using the reference format (i.e. in the footnote) in order to aid [the translation process][2]. | Text with [a link]                                    |
+
+
+### Fixed-width
+
+Images are displayed on the full width of a page by default. If your image doesn't need to be that large, use the `style="width:XX%;"` parameter within the image partial in order to scale the image proportionally.
+
+Learn more about [image partials][4].
 
 [1]: https://github.com/DataDog/gobwords/tree/master/style-guide
 [2]: https://github.com/DataDog/documentation/wiki/Translations-Overview
+[3]: https://github.com/DataDog/documentation/wiki
+[4]: https://github.com/DataDog/documentation/wiki/Import-an-Image

@@ -32,6 +32,7 @@ kind: faq
 |Amazon Kms|KMS|
 |Amazon Lambda|LAMBDA|
 |Amazon Machine Learning|MACHINELEARNING|
+|Amazon Mq|MQ|
 |Amazon Ops Works|OPSWORKS|
 |Amazon Polly|POLLY|
 |Amazon Rds|RDS|

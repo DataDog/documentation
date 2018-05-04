@@ -1,6 +1,7 @@
 ---
 title: Basic Agent Usage for Windows
 kind: documentation
+description: "Basic functionality of the Datadog Agent on the Windows platform."
 platform: Windows
 aliases:
     - /guides/basic_agent_usage/windows/
@@ -28,30 +29,30 @@ The execution of the Agent is controlled by a Windows service.
 
 There are a few major changes compare to older Datadog Windows Agent version:
 
-* the main executable name is now `agent.exe` (it was `ddagent.exe` previously)
+* The main executable name is now `agent.exe` (it was `ddagent.exe` previously)
 * Commands should be run with the command line `C:\program files\datadog\datadog agent\embedded\agent.exe <command>`
-* The configuration GUI is now a browser based configuration application.
+* The configuration GUI is now a browser based configuration application (for Windows 64-bit only)
 
 The Agent has a new set of command-line options:
 
-| Command         | Notes
+| Command         | Notes                                                                      |
 | --------------- | -------------------------------------------------------------------------- |
-| check           | Run the specified check |
-| diagnose        | Execute some connectivity diagnosis on your system |
-| flare           | Collect a flare and send it to Datadog |
-| help            | Help about any command |
-| hostname        | Print the hostname used by the Agent |
+| check           | Run the specified check                                                    |
+| diagnose        | Execute some connectivity diagnosis on your system                         |
+| flare           | Collect a flare and send it to Datadog                                     |
+| help            | Help about any command                                                     |
+| hostname        | Print the hostname used by the Agent                                       |
 | import          | Import and convert configuration files from previous versions of the Agent |
-| installservice  | Installs the Agent within the service control manager |
-| launch-gui      | Starts the Datadog Agent GUI |
-| regimport       | Import the registry settings into datadog.yaml |
-| remove-service  | Removes the Agent from the service control manager |
-| restart-service | Restarts the Agent within the service control manager |
-| start           | Start the Agent |
-| start-service   | Starts the Agent within the service control manager |
-| status          | Print the current status |
-| stopservice     | Stops the Agent within the service control manager |
-| version         | Print the version info |
+| installservice  | Installs the Agent within the service control manager                      |
+| launch-gui      | Starts the Datadog Agent GUI                                               |
+| regimport       | Import the registry settings into datadog.yaml                             |
+| remove-service  | Removes the Agent from the service control manager                         |
+| restart-service | Restarts the Agent within the service control manager                      |
+| start           | Start the Agent                                                            |
+| start-service   | Starts the Agent within the service control manager                        |
+| status          | Print the current status                                                   |
+| stopservice     | Stops the Agent within the service control manager                         |
+| version         | Print the version info                                                     |
 
 ### For version >= 3.9.1
 
@@ -251,14 +252,14 @@ For Services, Datadog doesn't track the metrics, only their availability. (For m
 
 The Datadog Agent collects a large number of system metrics out of the box. One of the more commonly used system metrics is system.load.*.
 
-|||
-|:----|:---|
-|system.load.1 (gauge)   |The average system load over one minute.|
-|system.load.15 (gauge)  |The average system load over fifteen minutes.|
-|system.load.5 (gauge)   |The average system load over five minutes.|
-|system.load.norm.1 (gauge)  |The average system load over one minute normalized by the number of CPUs.|
-|system.load.norm.15 (gauge) |The average system load over fifteen minutes normalized by the number of CPUs.|
-|system.load.norm.5 (gauge)  |The average system load over five minutes normalized by the number of CPUs.|
+|                             |                                                                                |
+| :----                       | :---                                                                           |
+| system.load.1 (gauge)       | The average system load over one minute.                                       |
+| system.load.15 (gauge)      | The average system load over fifteen minutes.                                  |
+| system.load.5 (gauge)       | The average system load over five minutes.                                     |
+| system.load.norm.1 (gauge)  | The average system load over one minute normalized by the number of CPUs.      |
+| system.load.norm.15 (gauge) | The average system load over fifteen minutes normalized by the number of CPUs. |
+| system.load.norm.5 (gauge)  | The average system load over five minutes normalized by the number of CPUs.    |
 
 The system.load.* metric is Unix specific, it conveys the average amount of resources either waiting to use or currently using the CPU. Each process waiting to use or using the CPU increases the load number by 1. The number at the end of the metric name indicates the average number of these processes in the previous X minutes. For system.load.5, this would be the average over the last 5 minutes. A value of 0 indicates a completely idle CPU, and a number equal to the number of CPU cores in the environment indicates that the CPU can handle every request coming in with no delay. Any number greater than this means that processes are waiting to use the CPU.
 

@@ -32,10 +32,6 @@ Classic:
       dogstatsd: true
       authors: Rodrigo Farias Rezino
   - Elixir:
-    - name: ExStatsD
-      link: https://github.com/CargoSense/ex_statsd
-      dogstatsd: true
-      authors: CargoSense
     - name: dogstatsd-elixir
       link: https://github.com/adamkittelson/dogstatsd-elixir
       dogstatsd: true
@@ -44,6 +40,10 @@ Classic:
       link: https://github.com/synrc/mtx
       dogstatsd: true
       authors: N2O Ecosystem
+    - name: statix
+      link: https://github.com/lexmag/statix
+      dogstatsd: true
+      authors: Aleksei Magusev
   - Go:
     - name: datadog-go
       link: https://github.com/DataDog/datadog-go

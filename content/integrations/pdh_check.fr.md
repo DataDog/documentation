@@ -10,8 +10,7 @@ integration_title: Pdh Check
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
-manifest_version: 0.1.1
-max_agent_version: 6.0.0
+manifest_version: 1.0.0
 min_agent_version: 5.21.0
 name: pdh_check
 public_title: Intégration Datadog-Pdh Check 
@@ -19,7 +18,6 @@ short_description: Collecter et grapher les métriques de Windows PDH
 support: core
 supported_os:
 - windows
-version: 1.2.0
 ---
 
 
@@ -59,7 +57,7 @@ Le check pdh_check est compatible avec Windows.
 ### Métriques
 Consultez [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/pdh_check/metadata.csv) pour avoir la liste complète des métriques fournies par cette intégration.
 
-### Evénements
+### Évènements
 Le check PDH n'inclut aucun événement pour le moment.
 
 ### Checks de Service

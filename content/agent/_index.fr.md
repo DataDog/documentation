@@ -14,6 +14,7 @@ further_reading:
     text: Collectez vos traces
 aliases:
   - /fr/agent/faq/agent-check-directory-structure
+  - /fr/agent/faq/install-core-extra/
 ---
 <div class="alert alert-info">
     Agent v6 est désormais disponible, <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md">mettez à jour votre Agent </a> afin de bénéficier de toutes les nouvelles fonctionnalités
@@ -64,7 +65,7 @@ La commande analyse un `datadog.conf` existant et convertit toutes les options d
 
 Pour l'environnement Mac et Windows, utilisez:
 
-`datadog-agent import <old_configuration_dir> <destination_dir>` 
+`datadog-agent import <old_configuration_dir> <destination_dir>`
 
 Avec:
 
@@ -81,8 +82,7 @@ Les versions antérieures de l'Agent Datadog stockaient les fichiers de configur
 
 ### Fichier de configuration du check
 
-Afin de fournir une manière plus flexible de définir la configuration pour un contrôle,
-à partir de la version 6.0.0, l'Agent chargera tout fichier YAML valide contenu dans le dossier:
+Afin de fournir une manière plus flexible de définir la configuration pour un check, à partir de la version 6.0.0, l'Agent chargera tout fichier YAML valide contenu dans le dossier:
 
 `/etc/datadog-agent/conf.d/<check_name>.d/`.
 
@@ -150,6 +150,8 @@ sur le port `5002` sur Windows et Mac, et est désactivé sur Linux.
 
 Une fois l'agent lancé, utilisez la commande `datadog-agent launch-gui` pour lancer
 l'interface graphique dans votre navigateur Web par défaut
+
+**Note**: L'interface visuelle de l'Agent ne fonctionne pas sur les plateformes Windows 32-bits.
 
 ### Exigences
 

@@ -21,37 +21,9 @@ If your network configuration restricted outbound traffic, proxy all Agent traff
 
 A few options are available to send traffic to Datadog over SSL/TLS for hosts that are not directly connected to the Internet.
 
-1. Using the Agent as a proxy (for **up to 16 Agents** per proxy)
-2. Using a web proxy (e.g. Squid, Microsoft Web Proxy) that is already deployed in your network
-3. Using HAProxy (if you want to proxy **more than 16-20 Agents** through the
-same proxy)
-
-## Using the Agent as a Proxy
-
-**This feature is not available for Agent v6 yet**
-
-1. Designate one node **running datadog-agent** as the proxy.  
-    In this example assume that the proxy name is `proxy-node`. This node **must** be able to reach `https://app.datadoghq.com`.
-
-2. Verify SSL connectivity on `proxy-node`  
-    ```
-    curl -v https://app.datadoghq.com/account/login 2>&1 | grep "200 OK"
-    ```
-
-3. Allow non-local traffic on `proxy-node` by changing the following line in `datadog.conf`.  
-     `# non_local_traffic: no` should read `non_local_traffic: yes`.
-
-4. Make sure `proxy-node` can be reached from the other nodes over port 17123. Start the Agent on the `proxy-node` and run on the other nodes:
-
-    `curl -v http://proxy-node:17123/status 2>&1 | grep "200 OK"`
-
-5. Update non-proxy nodes to forward to `proxy-node`. Change the following line in `datadog.conf` from:
-
-    `dd_url: https://app.datadoghq.com`
-to
-    `dd_url: http://proxy-node:17123`
-
-6. Verify on the [Infrastructure page][1] that all nodes report data to Datadog.
+1. Using a web proxy (e.g. Squid, Microsoft Web Proxy) that is already deployed in your network
+2. Using HAProxy (if you want to proxy **more than 16-20 Agents** through the same proxy)
+3. Using the Agent as a proxy (for **up to 16 Agents** per proxy, **only on Agent v5** )
 
 ## Using a Web Proxy as Proxy
 
@@ -59,7 +31,7 @@ Traditional web proxies are supported natively by the Agent. If you need to conn
 
 ### Agent v6
 
-Edit the `datadog.yaml` file with your proxy information. Use the `no_proxy` list to specify hosts that should bypass the proxy. 
+Edit the `datadog.yaml` file with your proxy information. Use the `no_proxy` list to specify hosts that should bypass the proxy.
 
 ```
 proxy:
@@ -220,6 +192,35 @@ skip_ssl_validation: yes
 Finally [restart the Agent][4].
 
 To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3835` as well as the [Infrastructure Overview][5]
+
+## Using the Agent as a Proxy
+
+**This feature is only available on Agent v5**
+
+We recommend using an actual proxy (a web proxy or HAProxy) to forward your traffic to Datadog, however if those options aren't available to you, it is possible to configure an instance of Agent v5 to serve as a proxy.
+
+1. Designate one node **running datadog-agent** as the proxy.  
+    In this example assume that the proxy name is `proxy-node`. This node **must** be able to reach `https://app.datadoghq.com`.
+
+2. Verify SSL connectivity on `proxy-node`  
+    ```
+    curl -v https://app.datadoghq.com/account/login 2>&1 | grep "200 OK"
+    ```
+
+3. Allow non-local traffic on `proxy-node` by changing the following line in `datadog.conf`.  
+     `# non_local_traffic: no` should read `non_local_traffic: yes`.
+
+4. Make sure `proxy-node` can be reached from the other nodes over port 17123. Start the Agent on the `proxy-node` and run on the other nodes:
+
+    `curl -v http://proxy-node:17123/status 2>&1 | grep "200 OK"`
+
+5. Update non-proxy nodes to forward to `proxy-node`. Change the following line in `datadog.conf` from:
+
+    `dd_url: https://app.datadoghq.com`
+to
+    `dd_url: http://proxy-node:17123`
+
+6. Verify on the [Infrastructure page][1] that all nodes report data to Datadog.
 
 ## Further Reading
 

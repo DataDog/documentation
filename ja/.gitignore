@@ -5,6 +5,7 @@ static/js/
 static/images/
 data/integrations/
 data/manifests/
+ja/package-lock.json
 
 # Logs
 logs

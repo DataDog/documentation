@@ -408,6 +408,11 @@ languages:
           url: "tracing/setup/docker/"
           weight: 120
           parent: customnav_tracingnav_setup
+        - identifier: customnav_tracingnav_kubernetes
+          name: "Kubernetes"
+          url: "tracing/setup/kubernetes/"
+          weight: 125
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_go
           name: "Go"
           url: "tracing/setup/go/"
@@ -645,11 +650,6 @@ languages:
           pre: "nav_developers"
           weight: 100
         # DEVELOPERS - Subnav start
-        - identifier: customnav_developersnav_api
-          name: "API"
-          url: "api/"
-          weight: 20
-          parent: menu_references_developers
         - identifier: customnav_developersnav_dogstatsd
           name: "DogStatsD"
           url: "developers/dogstatsd/"

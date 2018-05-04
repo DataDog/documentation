@@ -1,0 +1,7 @@
+{
+  "results": {
+    "metrics": [
+      "test.metric"
+    ]
+  }
+}

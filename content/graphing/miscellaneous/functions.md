@@ -1,7 +1,7 @@
 ---
 title: Graphing Functions
 kind: documentation
-aliases: 
+aliases:
   - /examples/
   - /examples/aws-metrics/
   - /examples/month_before/
@@ -194,7 +194,7 @@ The rate at which the metric changes per hour for a given metric.
 
 Time delta between points for a given metric.
 
-### diff() 
+### diff()
 
 Delta value between points for a given metric
 
@@ -205,48 +205,48 @@ Delta value between points for a given metric
 ## Smoothing
 ### ewma_3()
 
-Exponentially weighted moving average with a span of 3.  
+Exponentially weighted moving average with a span of 3.
 
 The span value is the number of data points. So `ewma_3()` uses the last 3 data points to calculate the average.
 
 ### ewma_5()
 
-Exponentially weighted moving average with a span of 5.  
+Exponentially weighted moving average with a span of 5.
 
 The span value is the number of data points. So `ewma_5()` uses the last 5 data points to calculate the average.
 
 ### ewma_10()
 
-Exponentially weighted moving average with a span of 10.  
+Exponentially weighted moving average with a span of 10.
 
 The span value is the number of data points. So `ewma_10()` uses the last 10 data points to calculate the average.
 
 ### ewma_20()
 
-Exponentially weighted moving average with a span of 20.  
+Exponentially weighted moving average with a span of 20.
 
 The span value is the number of data points. So `ewma_20()` uses the last 20 data points to calculate the average.
 
 ### median_3()
 
-Rolling median with a span of 3.  
+Rolling median with a span of 3.
 
 The span value is the number of data points. So `median_3()` uses the last 3 data points to calculate the median.
 
 ### median_5()
 
-Rolling median with a span of 5.  
+Rolling median with a span of 5.
 
 The span value is the number of data points. So `median_5()` uses the last 5 data points to calculate the median.
 ### median_7()
 
-Rolling median with a span of 7.  
+Rolling median with a span of 7.
 
 The span value is the number of data points. So `median_7()` uses the last 7 data points to calculate the median.
 
 ### median_9()
 
-Rolling median with a span of 9.  
+Rolling median with a span of 9.
 
 The span value is the number of data points. So `median_9()` uses the last 9 data points to calculate the median.
 
@@ -281,7 +281,8 @@ For example, `bottom10_min()` retrieves lowest-valued 10 series using the `min` 
 
 ### top_offset()
 
-Similar to `top()`, except with an additional offset parameter that controls where in the ordered sequence of series the graphing starts.  
+Similar to `top()`, except with an additional offset parameter, which controls where in the ordered sequence of series the graphing starts.
+
 For example, an offset of 2 would start graphing at the number 3 ranked series, according to the chosen ranking metric.
 
 ## Count
@@ -314,7 +315,18 @@ Approximate the metric with a piecewise function composed of constant-valued seg
 
 ## Algorithms
 ### anomalies()
-Overlay a gray band showing the expected behavior of a series based on past behavior; see our [anomaly Monitor][2] page for more info.
+
+Overlay a gray band showing the expected behavior of a series based on past.
+
+{{< img src="graphing/miscellaneous/functions/anomalies_graph.png" alt="anomalies graph" responsive="true" popup="true" style="width:80%;">}}
+
+The function has two parameters:
+
+* The first parameter is for selecting which algorithm is used.
+* The second parameter is labeled `bounds`, tune it to change the width of the gray band. `bounds` can be interpreted as the standard deviations for your algorithm; a value of 2 or 3 should be large enough to include most "normal" points.
+
+See our [Anomaly Monitor][2] page for more info.
+
 ### outliers()
 Highlight outliers series; see our [Outlier Monitor][3] page for more info.
 

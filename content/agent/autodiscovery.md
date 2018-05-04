@@ -55,7 +55,7 @@ Each **Template Source** section below shows a different way to configure check 
 
 Storing templates as local files is easy to understand and doesn't require an external service or a specific orchestration platform. The downside is that you have to restart your Agent containers each time you change, add, or remove templates.
 
-The Agent looks for Autodiscovery templates in its `conf.d/auto_conf` directory, which contains default templates for the following checks:
+The Agent looks for Autodiscovery templates in the `/etc/datadog-agent/conf.d` directory, which contains default templates for the following checks:
 
 - [Apache][3]
 - [Consul][4]
@@ -65,15 +65,24 @@ The Agent looks for Autodiscovery templates in its `conf.d/auto_conf` directory,
 - [Etcd][8]
 - [Kubernetes_state][9]
 - [Kube_dns][10]
+- [Kube_proxy][22]
 - [Kyototycoon][11]
 - [Memcached][12]
 - [Redis][13]
 - [Riak][14]
 
-These templates may suit you in basic cases, but if you need to use custom check configurations—say you want to enable extra check options, use different container identifiers, or use template variable indexing— you'll have to write your own auto-conf files. You can then provide those in a few ways:
+Since 6.2.0 (and 5.24.0), the default templates use the default port for the monitored software, instead of auto-detecting it. If you need to use a different port, provide a custom Autodiscovery template either in [Docker container labels](#template-source-docker-label-annotations) or [Kubernetes pod annotations](#template-source-kubernetes-pod-annotations).
+
+These templates may suit you in basic cases, but if you need to use custom Agent check configurations—say you want to enable extra check options, use different container identifiers, or use template variable indexing— you'll have to write your own auto-conf files. You can then provide those in a few ways:
 
 1. Add them to each host that runs docker-datadog-agent and [mount the directory that contains them][15] into the datadog-agent container when starting it
 2. On Kubernetes, add them [using ConfigMaps][16]
+
+The check name is extracted from the template file name. To run the `checkname` integration, the template file must either:
+
+  - be named `checkname.yaml` and be directly placed inside the `conf.d` folder
+  - be placed in the `conf.d/checkname.d/` folder, with any filename ending with `.yaml`
+
 
 ### Example: Apache check
 
@@ -392,3 +401,4 @@ instances:
 [19]: /integrations/consul
 [20]: /agent/faq/agent-commands
 [21]: https://github.com/DataDog/integrations-core/blob/master/http_check/conf.yaml.example
+[22]: https://github.com/DataDog/integrations-core/blob/master/kube_proxy/auto_conf.yaml

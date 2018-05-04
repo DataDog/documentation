@@ -1,3 +1,10 @@
+---
+integration_title: Hdfs
+is_public: true
+kind: integration
+short_description: Suivre l'utilisation des disques du cluster, les échecs de volume, les DataNodes morts et
+  more.
+---
 
 
 ## Intégration HDFS DataNode
@@ -42,20 +49,7 @@ instances:
 
 ### Validation
 
-[Lancez la commande `status`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `hdfs_datanode` dans la section Checks:
-
-```
-  Checks
-  ======
-    [...]
-
-    hdfs_datanode
-    -------
-      - instance #0 [OK]
-      - Collected 26 metrics, 0 events & 1 service check
-
-    [...]
-```
+[Lancez la commande `status`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `hdfs_datanode` dans la section Checks.
 
 ## Compatibilité
 
@@ -66,7 +60,7 @@ Le check hdfs_datanode est compatible avec toutes les principales plateformes.
 {{< get-metrics-from-git "hdfs_datanode" >}}
 
 
-### Evénements
+### Évènements
 Le check HDFS-datanode n'inclut aucun événement pour le moment.
 
 ### Checks de Service
@@ -129,20 +123,7 @@ instances:
 
 ### Validation
 
-[Lancez la commande `status`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `hdfs_namenode` dans la section Checks:
-
-```
-  Checks
-  ======
-    [...]
-
-    hdfs_namenode
-    -------
-      - instance #0 [OK]
-      - Collected 26 metrics, 0 events & 1 service check
-
-    [...]
-```
+[Lancez la commande `status`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `hdfs_namenode` dans la section Checks.
 
 ## Compatibilité
 
@@ -153,7 +134,7 @@ Le check hdfs_namenode est compatible avec toutes les principales plateformes.
 {{< get-metrics-from-git "hdfs_namenode" >}}
 
 
-### Evénements
+### Évènements
 Le check HDFS-namenode n'inclut aucun événement pour le moment.
 
 ### Checks de Service

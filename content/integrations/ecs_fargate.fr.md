@@ -9,14 +9,13 @@ git_integration_title: ecs_fargate
 guid: 7484e55c-99ec-45ad-92f8-28e798796411
 has_logo: true
 integration_title: ECS-Fargate
-is_public: false
+is_public: true
 kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 max_agent_version: 6.0.0
 min_agent_version: 5.6.3
 name: ecs_fargate
-private: true
 public_title: Intégration Datadog-ECS-Fargate
 short_description: Suivre les métriques pour les conteneurs fonctionnant avec ECS Fargate
 support: contrib
@@ -68,7 +67,7 @@ Le check ecs_fargate est compatible avec toutes les principales plateformes.
 {{< get-metrics-from-git "ecs_fargate" >}}
 
 
-### Evénements
+### Évènements
 
 Le check ECS Fargate n'inclut aucun événement pour le moment.
 

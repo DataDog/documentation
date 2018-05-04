@@ -50,6 +50,7 @@ aliases:
 |Linux|`sudo service datadog-agent status`|`sudo datadog-agent status`|
 |Docker (Debian)|`sudo docker exec -it <container_name> /etc/init.d/datadog-agent status`|`sudo docker exec -it <container_name> s6-svstat /var/run/s6/services/agent/`|
 |Docker (Alpine)|`sudo docker exec -it <container_name> supervisorctl -c /opt/datadog-agent/agent/supervisor.conf status`|`n/a`|
+|Kubernetes|`kubectl exec -it <pod-name> /etc/init.d/datadog-agent status`|`kubectl exec -it <pod-name> s6-svstat /var/run/s6/services/agent/`|
 |MacOS x|`datadog-agent status`             | `launchctl list com.datadoghq.agent` or systray app|
 |Source|`sudo ~/.datadog-agent/bin/agent status`|`sudo service datadog-agent status`|
 |Windows|[Consult our dedicated windows doc][2]|[Consult our dedicated windows doc][2]|
@@ -79,6 +80,7 @@ The `[OK]` in the Agent output implies that the check was configured/run correct
 |Linux|`sudo service datadog-agent info`|`sudo datadog-agent status`|
 |Docker|`sudo docker exec -it <container_name> /etc/init.d/datadog-agent info`|`sudo docker exec -it <container_name> agent status`|
 |Docker (Alpine)|`docker exec -it <container_name> /opt/datadog-agent/bin/agent info`|`n/a`|
+|Kubernetes|`kubectl exec -it <pod-name> /etc/init.d/datadog-agent info`|`kubectl exec -it <pod-name> agent status`|
 |MacOS x|`datadog-agent info`               | `datadog-agent status` or [web GUI][3]                    |
 |Source|`sudo ~/.datadog-agent/bin/info`|`sudo datadog-agent status`|
 |Windows|[Consult our dedicated windows doc][2]|[Consult our dedicated windows doc][2]|

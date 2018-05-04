@@ -54,20 +54,22 @@ A metric's type is stored as metrics metadata and is used to determine how a met
 #### How do submission types relate to Datadog in-app types?
 Datadog accepts metrics submitted from a variety of sources, and as a result the submission type does not always map exactly to the Datadog in-app type:
 
-| Submission Source | Submission Method (python) | Submission Type | Datadog In-App Type |
-|-------------------|-------------------|-----------------|--------------|
-| [API][3] | `api.Metric.send(...)` | gauge | gauge |
-| [DogStatsD][1] | `dog.gauge(...)` | gauge | gauge |
-| [DogStatsD][1] | `dog.increment(...)` | counter | rate |
-| [DogStatsD][1] | `dog.histogram(...)` | histogram | gauge, rate |
-| [DogStatsD][1] | `dog.set(...)` | set | gauge |
-| [Agent check][2] | `self.gauge(...)` | gauge | gauge |
-| [Agent check][2] | `self.increment(...)` | counter | rate |
-| [Agent check][2] | `self.rate(...)` | rate | gauge |
-| [Agent check][2] | `self.count(...)` | count | count |
-| [Agent check][2] | `self.monotonic_count(...)` | monotonic_count | count |
-| [Agent check][2] | `self.histogram(...)` | histogram | gauge, rate |
-| [Agent check][2] | `self.set(...)` | set | gauge |
+| Submission Source   | Submission Method (python)           | Submission Type   | Datadog In-App Type |
+| ------------------- | -------------------                  | ----------------- | --------------      |
+| [API][3]            | `api.Metric.send(type="gauge", ...)` | gauge             | gauge               |
+| [API][3]            | `api.Metric.send(type="count", ...)` | count             | count               |
+| [API][3]            | `api.Metric.send(type="rate", ...)`  | rate              | rate                |
+| [DogStatsD][1]      | `dog.gauge(...)`                     | gauge             | gauge               |
+| [DogStatsD][1]      | `dog.increment(...)`                 | counter           | rate                |
+| [DogStatsD][1]      | `dog.histogram(...)`                 | histogram         | gauge, rate         |
+| [DogStatsD][1]      | `dog.set(...)`                       | set               | gauge               |
+| [Agent check][2]    | `self.gauge(...)`                    | gauge             | gauge               |
+| [Agent check][2]    | `self.increment(...)`                | counter           | rate                |
+| [Agent check][2]    | `self.rate(...)`                     | rate              | gauge               |
+| [Agent check][2]    | `self.count(...)`                    | count             | count               |
+| [Agent check][2]    | `self.monotonic_count(...)`          | monotonic_count   | count               |
+| [Agent check][2]    | `self.histogram(...)`                | histogram         | gauge, rate         |
+| [Agent check][2]    | `self.set(...)`                      | set               | gauge               |
 
 #### What's a use case for changing a metric's type?
 
@@ -90,7 +92,7 @@ If you are not willing to lose the historical data submitted as a `gauge`, creat
 
 There are multiple ways to send metrics to Datadog:
 
-1. With your Datadog Agent directly (Learn more on how [to write an Agent Checks](/agent/agent_checks) && [Aggregator source][9])
+1. With your Datadog Agent directly (Learn more on how [to write an Agent check](/agent/agent_checks) && [Aggregator source][9])
 
 2. Using your StatsD server bundled with the Datadog Agent ([Find more about our available libraries][16])
   Note: Because DogStatsD flushes at a regular interval (**default 10s**) all metrics submitted via this method are stored with associated interval metadata.
@@ -141,7 +143,8 @@ This tutorial has examples for Python and Ruby, but check out the
 Counters are used to count things.
 
 ### Submission
-#### Agent Check Submission
+
+#### Agent check submission
 
 {{% table responsive="true" %}}
 |Method | Overview |
@@ -229,7 +232,8 @@ your series like cumulative sum or integral. [Read more about Datadog functions]
 Gauges measure the value of a particular thing over time:
 
 ### Submission methods
-#### Agent Check Submission
+
+#### Agent check submission
 
 {{% table responsive="true" %}}
 |Method | Overview |
@@ -291,7 +295,8 @@ It aggregates the values that are sent during the flush interval (usually defaul
 Each one of these becomes a value in their respective metric time series that are sent to Datadog. Then you can aggregate these time series the same way you aggregate any other metric time series.
 
 ### Submission methods
-#### Agent Check Submission
+
+#### Agent sheck submission
 
 {{% table responsive="true" %}}
 |Method | Overview |
@@ -361,7 +366,7 @@ distribution of any type of value, like the size of uploaded files or classroom
 test scores.
 </div>
 
-## Service Checks
+## Service checks
 
 Service checks are used to send information about the status of a service.
 
@@ -390,7 +395,7 @@ opts = {
 statsd.service_check(name, status, opts)
 ```
 
-After a service check has been reported, you can use it to trigger a [Custom Check monitor][18].
+After a service check has been reported, you can use it to trigger a [custom check monitor][18].
 
 ## Rates
 ### Overview
@@ -398,7 +403,8 @@ After a service check has been reported, you can use it to trigger a [Custom Che
 Rates represent the derivative of a metric, it's the value variation of a metric on a defined time interval.
 
 ### Submission methods
-#### Agent Check Submission
+
+#### Agent check submission
 
 {{% table responsive="true" %}}
 |Method | Overview |
@@ -412,7 +418,8 @@ Rates represent the derivative of a metric, it's the value variation of a metric
 Sets are used to count the number of unique elements in a group.
 
 ### Submission methods
-#### Agent Check Submission
+
+#### Agent check submission
 
 {{% table responsive="true" %}}
 |Method | Overview |

@@ -12,18 +12,16 @@ aliases:
 You can narrow down your search by filtering on certain event properties. See the list of filters below for more details. 
 Note that filters perform an exact match search and don't work with partial strings.
 
-{{% table responsive="true" %}}
-| Filter | Description |
-|--------|-------------|
-|user:pup@datadoghq.com|Find all events with comments by pup@datadoghq.com.|
-|sources:github,chef|Show events from Github OR Chef.|
-|tags:env-prod OR db|Show events tagged with #env-prod OR #db.|
-|tags:security-group:sg-123 AND role:common-node|Show events tagged with #security-group:sg-123 AND #role:common-node.|
-|hosts:i-0ade23e6,db.myapp.com|Show events from i-0ade23e6 OR db.myapp.com.|
-|status:error|Show events with error status. (supports: 'error', 'warning', 'success')|
-|priority:low|Show only low-priority events. (supports: 'low' or 'normal'. defaults to 'all')|
-|incident:claimed|Show only claimed incidents. (supports: 'open', 'claimed', 'resolved', or 'all')|
-{{% /table %}}
+| Filter                                          | Description                                                                      |
+| --------                                        | -------------                                                                    |
+| user:pup@datadoghq.com                          | Find all events with comments by pup@datadoghq.com.                              |
+| sources:github,chef                             | Show events from Github OR Chef.                                                 |
+| tags:env-prod OR db                             | Show events tagged with #env-prod OR #db.                                        |
+| tags:security-group:sg-123 AND role:common-node | Show events tagged with #security-group:sg-123 AND #role:common-node.            |
+| hosts:i-0ade23e6,db.myapp.com                   | Show events from i-0ade23e6 OR db.myapp.com.                                     |
+| status:error                                    | Show events with error status. (supports: 'error', 'warning', 'success')         |
+| priority:low                                    | Show only low-priority events. (supports: 'low' or 'normal'. defaults to 'all')  |
+| incident:claimed                                | Show only claimed incidents. (supports: 'open', 'claimed', 'resolved', or 'all') |
 
 Full text search works on all keywords provided in the search query after applying any filters. Full text search looks inside the event text, title, tags, users who commented on the event and host names and devices tied to the event for any related information.  
 
@@ -68,17 +66,10 @@ To remove the top level aggregate event from appearing, change `use_date_happene
 
 ## Events Email
 
-When you need to integrate an application or system with Datadog, you have a
-few choices. The first is using one of our many existing [integrations][integrations].  
-This gets you access to a wide variety of metrics and events with minimal
-configuration effort on your part. If your application isn't one of the
-integrated applications, then you can opt to create [a check using the Agent][agentcheck].  
-This requires much more effort and potentially more knowledge on how the
-application and how Datadog work.  
+When you need to integrate an application or system with Datadog, you have a few choices. The first is using one of our many existing [integrations][integrations].  
+This gets you access to a wide variety of metrics and events with minimal configuration effort on your part. If your application isn't one of the integrated applications, then you can opt to create [a check using the Agent][agentcheck].   This requires much more effort and potentially more knowledge on how the application and how Datadog work.  
 
-There is another option available if you aren't using an application that has
-an integration and you don't want to create an Agent check. You can rely on
-the application or system sending an email instead. There are two different ways to use Events via Email, depending mostly on whether the application offers you the ability to customize the format of the email body being sent.
+There is another option available if you aren't using an application that has an integration and you don't want to create an Agent check. You can rely on the application or system sending an email instead. There are two different ways to use Events via Email, depending mostly on whether the application offers you the ability to customize the format of the email body being sent.
 
 <div class="alert alert-info">
 <b>JSON-Formatted vs Plain Text:</b> <br>
@@ -90,8 +81,7 @@ stream. See below for examples of each.
 ### Plain Text Email
 #### Source Email
 
-In the source plain text email, you only have three fields you can control: sender
-email address (required), subject (required), and body (optional).
+In the source plain text email, you only have three fields you can control: sender email address (required), subject (required), and body (optional).
 
 {{< img src="graphing/events/plain-email.png" alt="plain email" responsive="true" popup="true">}}
 
@@ -99,17 +89,12 @@ email address (required), subject (required), and body (optional).
 
 {{< img src="graphing/events/plain-event.png" alt="plain event" responsive="true" popup="true">}}
 
-Note that the subject of the email becomes the title of the event and the body
-of the email becomes the body of the event. Although it looks like a tag appears
-at the end of the title and body of the event, neither instance are actually
-tags. The sender of the email also appears at the bottom of the event, so be sure
-to take advantage of that to help identify the sending application.
+Note that the subject of the email becomes the title of the event and the body of the email becomes the body of the event. Although it looks like a tag appears at the end of the title and body of the event, neither instance are actually tags. The sender of the email also appears at the bottom of the event, so be sure to take advantage of that to help identify the sending application.
 
 ### JSON Email
 #### Source Email
 
-In the source JSON-formatted email, you have 10 fields you can control: sender
-email address, and up to 9 JSON keys. Those keys are title, text, priority, tags, alert type,  date happened,  host, aggregation key, and source type name.  
+In the source JSON-formatted email, you have 10 fields you can control: sender email address, and up to 9 JSON keys. Those keys are title, text, priority, tags, alert type,  date happened,  host, aggregation key, and source type name.  
 **Note: If your JSON is not properly formatted or if your email is sent with a subject, the event won't appear on your Event Stream.**
 
 {{< img src="graphing/events/json-email.png" alt="json email" responsive="true" popup="true">}}
@@ -118,16 +103,14 @@ email address, and up to 9 JSON keys. Those keys are title, text, priority, tags
 
 {{< img src="graphing/events/json-event.png" alt="json event" responsive="true" popup="true">}}
 
-In a JSON-formatted email, the subject of the email message is irrelevant as it
-is replaced by the title in the JSON in the body of the email. All data that appears in the event is defined in the JSON in the body of the email. This JSON must be well-formed or the message is ignored. This means that not only should it look correct with commas separating key value pairs, it also must be pure JSON.  
+In a JSON-formatted email, the subject of the email message is irrelevant as it is replaced by the title in the JSON in the body of the email. All data that appears in the event is defined in the JSON in the body of the email. This JSON must be well-formed or the message is ignored. This means that not only should it look correct with commas separating key value pairs, it also must be pure JSON.  
 If you are testing the email with a standard email client, the body may be converted to HTML as a convenience to the user. This causes the JSON to no longer be JSON and the email is ignored by Datadog.
 
 The allowable JSON keys can be found in the [events API documentation][eventsapi].
 
 ### Setting Up The Email Address
 
-To set up the email, first log in to your Datadog account at
-[https://app.datadoghq.com][dd-app]. From the *Integrations* menu, choose *APIs*, then scroll down to *Events API Emails*. This section shows you all the emails available for your applications and who created them. Choose the format for your messages from the Format: dropdown, then click *Create API Email*.
+To set up the email, first log in to your Datadog account at [https://app.datadoghq.com][dd-app]. From the *Integrations* menu, choose *APIs*, then scroll down to *Events API Emails*. This section shows you all the emails available for your applications and who created them. Choose the format for your messages from the Format: dropdown, then click *Create API Email*.
 
 {{< img src="graphing/events/event-email-api.png" alt="JSON Event Email API" responsive="true" popup="true">}}
 

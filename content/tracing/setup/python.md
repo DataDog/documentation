@@ -52,7 +52,6 @@ The ddtrace library includes support for a number of web frameworks, including:
 
 ___
 
-{{% table responsive="true" %}}
 | Framework | Framework Documentation        | PyPi Datadog Documentation                    |
 |-----------|--------------------------------|-----------------------------------------------|
 | Bottle    | https://bottlepy.org/          | http://pypi.datadoghq.com/trace/docs/#bottle  |
@@ -61,7 +60,6 @@ ___
 | Flask     | http://flask.pocoo.org/        | http://pypi.datadoghq.com/trace/docs/#flask   |
 | Pylons    | http://pylonsproject.org/      | http://pypi.datadoghq.com/trace/docs/#pylons  |
 | Pyramid   | https://trypyramid.com/        | http://pypi.datadoghq.com/trace/docs/#pyramid |
-{{% /table %}}
 
 ### Library Compatibility
 
@@ -69,7 +67,6 @@ It also includes support for the following data stores and libraries:
 
 ___
 
-{{% table responsive="true" %}}
 | Library       | Library Documentation                         | PyPi Datadog Documentation                          |
 |---------------|-----------------------------------------------|-----------------------------------------------------|
 | Cassandra     | http://cassandra.apache.org/                  | http://pypi.datadoghq.com/trace/docs/#cassandra     |
@@ -82,7 +79,6 @@ ___
 | Redis         | https://redis.io/                             | http://pypi.datadoghq.com/trace/docs/#redis         |
 | SQLAlchemy    | http://www.sqlalchemy.org/                    | http://pypi.datadoghq.com/trace/docs/#sqlalchemy    |
 | SQLite        | https://www.sqlite.org/                       | http://pypi.datadoghq.com/trace/docs/#sqlite        |
-{{% /table %}}
 
 ## Example: Simple tracing
 

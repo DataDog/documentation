@@ -1,14 +1,19 @@
 ---
+ddtype: check
+doc_link: https://docs.datadoghq.com/integrations/aspdotnet/
 git_integration_title: aspdotnet
 guid: 475b0c6c-02e5-49ef-806b-9fab377f0839
-integration_title: ''
+has_logo: true
+integration_title: ASP.NET
+is_public: true
 kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 0.1.0
 max_agent_version: 6.1.0
 min_agent_version: 5.22.2
 name: aspdotnet
-short_description: aspdotnet description.
+public_title: Intégration Datadog-ASP.NET
+short_description: Visualiser et monitorer les états de ASP.NET
 support: contrib
 supported_os:
 - windows
@@ -19,14 +24,14 @@ version: 0.2.0
 
 ## Aperçu
 
-Obtenir les métriques du service aspdotnet en temps réel pour:
+Obtenir les métriques du service ASP.NET en temps réel pour:
 
-* Visualiser et monitorer les états de aspdotnet
-* Être informé des failovers et des événements aspdotnet.
+* Visualiser et surveiller les états de ASP.NET
+* Être informé des failovers et des évènements de ASP.NET.
 
 ## Installation
 
-Le check Aspdotnet est packagé avec l'agent, il vous faut donc simplement [installer l'agent](https://app.datadoghq.com/account/settings#agent).
+Le check ASP.NET est packagé avec l'agent, il vous faut donc simplement [installer l'agent](https://app.datadoghq.com/account/settings#agent) sur vos serveurs.
 
 ## Configuration
 
