@@ -4,7 +4,7 @@ kind: documentation
 ---
 
 Use widgets through the [Screenboard API][1]:
-For [create][2]/[read][3]/[update][4] endpoints, the body is one JSON payload describing the Screenboard widgets: 
+For [create][2]/[read][3]/[update][4] endpoints, the body is one JSON payload describing the Screenboard widgets:
 
 Base Payload :
 ```
@@ -27,8 +27,10 @@ Each type of widget is described below:
 ## Timeseries
 *Supported on Screenboards and Timeboards*
 
-The Timeseries visualization is great for showing one or more metrics over time. The time window depends on what is selected on the [Timeboard][5] or in the graph on a [Screenboard][6].  
+The Timeseries visualization is great for showing one or more metrics, Log events, or APM events over time. The time window depends on what is selected on the [Timeboard][5] or in the graph on a [Screenboard][6].
 Timeseries can be displayed as **lines**, **areas**, and **bars**.
+
+**Note**: Define log graph query (still in beta) exactly as in the [Log explorer][11].
 
 {{< img src="graphing/miscellaneous/visualization/references-graphing-timeseries-example.png" alt="Timeseries" responsive="true" popup="true" style="width:80%;">}}
 
@@ -72,8 +74,8 @@ Example of Timeseries widget for the [API][1]
 ## Query Value
 *Supported on Screenboards and Timeboards*
 
-Query values display the current value of a given metric query, with conditional formatting (such as a green/yellow/red background) to convey whether or not the value is in the expected range.  
-The value displayed by a query value need not represent an instantaneous measurement.  
+Query values display the current value of a given metric query, with conditional formatting (such as a green/yellow/red background) to convey whether or not the value is in the expected range.
+The value displayed by a query value need not represent an instantaneous measurement.
 The widget can display the latest value reported, or an aggregate computed from all query values across the time window. These visualizations provide a narrow but unambiguous window into your infrastructure.query
 
 {{< img src="graphing/miscellaneous/visualization/references-graphing-queryvalue-example.png" alt="Query value widget" responsive="true" popup="true" style="width:50%;">}}
@@ -121,9 +123,9 @@ Example of Query Value widget for the [API][1]
 
 {{< img src="graphing/miscellaneous/visualization/query_value_widget.png" alt="query_value_widget" responsive="true" popup="true" style="width:50%;">}}
 
-The Query Value Widget only displays one Value, unlike a timeseries for example, that displays several points. 
+The Query Value Widget only displays one Value, unlike a timeseries for example, that displays several points.
 
-Let's say you are on a Timeseries and you are currently displaying the past hour, this button allows you to either display the `avg` / `max` / `min` / `avg` / `sum` / `last value` of ALL points that are rendered during that 1 hour range timeframe - depending on the aggregation chosen above. 
+Let's say you are on a Timeseries and you are currently displaying the past hour, this button allows you to either display the `avg` / `max` / `min` / `avg` / `sum` / `last value` of ALL points that are rendered during that 1 hour range timeframe - depending on the aggregation chosen above.
 
 ## Heatmap
 *Supported on Screenboards and Timeboards*
@@ -135,7 +137,7 @@ The Heatmap visualization is great for showing metrics aggregated across many ta
 ## Distribution
 *Supported on Screenboards and Timeboards*
 
-The Distribution visualization is another way of showing metrics aggregated across many tags, such as *hosts*. Unlike the Heatmap, Distribution's x-axis is the quantity rather than time. 
+The Distribution visualization is another way of showing metrics aggregated across many tags, such as *hosts*. Unlike the Heatmap, Distribution's x-axis is the quantity rather than time.
 
 {{< img src="graphing/miscellaneous/visualization/references-graphing-distribution-example.png" alt="Distribution" responsive="true" popup="true" style="width:80%;">}}
 
@@ -156,14 +158,14 @@ The Change graph shows you the change in a value over the time period chosen.
 ## Hostmap
 *Supported on Screenboards and Timeboards*
 
-The Hostmap graphs any metric for any subset of hosts on the same hostmap visualization available from the main [Infrastructure Hostmap][7] menu. 
+The Hostmap graphs any metric for any subset of hosts on the same hostmap visualization available from the main [Infrastructure Hostmap][7] menu.
 
 {{< img src="graphing/miscellaneous/visualization/references-graphing-hostmap-example.png" alt="Hostmap" responsive="true" popup="true">}}
 
 ## Free Text
 *Supported on Screenboards only*
 
-Free text is a widget that allows you to add headings to your [Screenboard][8].  
+Free text is a widget that allows you to add headings to your [Screenboard][8].
 
 This is commonly used to state the overall purpose of the dashboard.
 
@@ -233,11 +235,11 @@ Example of Image widget for the [API][1]
 ## Note
 *Supported on Screenboards only*
 
-Note widget is similar to Free Text widget, but allows for more formatting options: 
+Note widget is similar to Free Text widget, but allows for more formatting options:
 
-* An arrow can be added to the text box that appears on the dashboard. This is commonly used to document the structure of the dashboard.  
+* An arrow can be added to the text box that appears on the dashboard. This is commonly used to document the structure of the dashboard.
 
-* Use `href` to create internal links in Datadog. 
+* Use `href` to create internal links in Datadog.
   {{< img src="graphing/dashboards/widgets/using_link_note_widget.gif" alt="Using links in note widget" responsive="true" popup="true">}}
 
 Example of Note widget for the [API][1]
@@ -332,3 +334,4 @@ Monitor summary is a summary view of all monitors on your system, or a subset ba
 [8]: /graphing/dashboards/screenboard
 [9]: https://app.datadoghq.com/event/stream
 [10]: /graphing/event_stream/
+[11]: /logs/graph/#log-graph-query
