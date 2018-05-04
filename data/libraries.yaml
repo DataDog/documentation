@@ -176,7 +176,7 @@ Classic:
       link: https://github.com/gphat/datadog-scala
       api: true
       authors: Cory Watson
-  - Swift
+  - Swift:
     - name: SwiftDog
       link: https://github.com/jaronoff97/SwiftDog
       api: true
