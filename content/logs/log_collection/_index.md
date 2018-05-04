@@ -197,14 +197,12 @@ logs:
 
 More examples:
 
-{{% table responsive="true" %}}
-|**Raw string** | **Pattern** |
-|:---|:----|
-|14:20:15| `\d{2}:\d{2}:\d{2}` |
-|11/10/2014| `\d{2}\/\d{2}\/\d{4}`|
-|Thu Jun 16 08:29:03 2016 | `\w{3}\s+\w{3}\s+\d{2}\s\d{2}:\d{2}:\d{2}` |
-|20180228 | `\d{8}` |
-{{% /table %}}
+| **Raw string**           | **Pattern**                                |
+| :---                     | :----                                      |
+| 14:20:15                 | `\d{2}:\d{2}:\d{2}`                        |
+| 11/10/2014               | `\d{2}\/\d{2}\/\d{4}`                      |
+| Thu Jun 16 08:29:03 2016 | `\w{3}\s+\w{3}\s+\d{2}\s\d{2}:\d{2}:\d{2}` |
+| 20180228                 | `\d{8}`                                    |
 
 ### Tail multiple directories or whole directories by using wildcards
 
@@ -298,11 +296,11 @@ Using the Datadog Agent or the RFC5424 format automatically set the service valu
 
 You can now control the global hostname, service, timestamp, and status main mapping that are applied before the processing pipelines. This is particularly helpful if logs are sent in JSON or from an external Agent.
 
-{{< img src="logs/index/reserved_attribute.png" alt="Reserved Attribute" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="logs/log_collection/reserved_attribute.png" alt="Reserved Attribute" responsive="true" popup="true" style="width:80%;">}}
 
 To change the default values for each of the reserved attributes, go to the pipeline page and edit the `Reserved Attribute mapping`:
 
-{{< img src="logs/index/reserved_attribute_tile.png" alt="Reserved Attribute Tile" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="logs/log_collection/reserved_attribute_tile.png" alt="Reserved Attribute Tile" responsive="true" popup="true" style="width:80%;">}}
 
 [1]: /agent
 [2]: /getting_started/custom_metrics/
