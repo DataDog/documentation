@@ -60,6 +60,24 @@ Configurez la corrélation d'événements au moment de la conception en modifian
 
 Configurez la corrélation d'événements au moment de l'affichage en ajoutant une requête dans la zone de recherche en haut à gauche de la fenêtre du dashboard. Cela remplace applique les événements à tous les graphiques de ce dashboard particulier.
 
+## Corrélation entre les Logs et les Métriques
+
+### Passer d'une métrique à ses logs
+
+Être capable de faire une corrélation simplement et rapidement est la clef pour analyser un problème. Utilisez le raccourci suivant depuis n'importe quel dashboard de graphes de timeseries pour afficher un menu contextuel avec les logs liés.
+
+{{< img src="graphing/dashboards/related_logs.png" alt="Related logs" responsive="true" popup="true" style="width:80%;">}}
+
+Selectionnez `Voir les logs liés` pour aller à l'explorateur de logs directement positionné sur l'intervalle de temps sélectionné avec le contexte du graphe courant.
+
+### Comment définir la requête de recherche ?
+
+Pour définir les logs liés, nous utilisons les paramètres suivants :
+
+* *Intervalle* : Centré sur le point sélectionné et utilise l'échelle du graphe pour afficher les données avant et après ce point. 
+* *Préfixe d'intégration* :  Si la métrique provient d'une intégration, Datadog filtre l'attribut `source` avec le nom de l'intégration.
+* *Tags* : Tous les tags utilisés dans le graphe (*variable de template*, *découper par*, *filtrer par*) sont automatiquement ajoutés à la requête de recherche. 
+
 [1]: /graphing/
 [2]: /graphing/event_stream/
 [3]: /graphing/dashboards/timeboard/
