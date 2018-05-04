@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var mobilefilters = null;
     var sorts = document.querySelectorAll('[data-ref="sort"]');
     var container = document.querySelector('[data-ref="container"]');
-    var search = document.querySelector('[data-ref="search"]')
+    var search = document.querySelector('[data-ref="search"]');
     var items = window.integrations;
 
     if(!container) return;
@@ -141,6 +141,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function handleButtonClick(button, filters) {
+        // clear the search input
+        search.value = "";
         // If button is already active, or an operation is in progress, ignore the click
         if (button.classList.contains('active') || !button.getAttribute('data-filter')) return;
 
