@@ -140,7 +140,7 @@ The date matcher transforms your timestamp in the EPOCH format.
 | **Raw string**                | **Parsing rule**                                          | **Result**              |
 | :---                          | :----                                                     | :----                   |
 | 14:20:15                      | `%{date("HH:mm:ss"):date}`                                | {"date": 51615000}      |
-| 11/10/2014                    | `%{date("dd/mm/yyyy"):date}`                              | {"date": 1412978400000} |
+| 11/10/2014                    | `%{date("dd/MM/yyyy"):date}`                              | {"date": 1412978400000} |
 | Thu Jun 16 08:29:03 2016      | `%{date("EEE MMM dd HH:mm:ss yyyy"):date}`                | {"date": 1466065743000} |
 | Tue Nov 1 08:29:03 2016       | `%{date("EEE MMM d HH:mm:ss yyyy"):date}`                 | {"date": 1466065743000} |
 | 06/Mar/2013:01:36:30 +0900    | `%{date("dd/MMM/yyyy:HH:mm:ss Z"):date}`                  | {"date": 1362501390000} |
@@ -207,7 +207,7 @@ john_1a2b3c4 connected on 11/08/2017
 **Rule**:
 Here we just look for the id to extract
 ```
-MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-Z0-9]*"):user.id} .*
+MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-zA-Z0-9]*"):user.id} .*
 ```
 
 {{< img src="logs/parsing/regex_parsing.png" alt="Parsing example 6" responsive="true" popup="true">}}
