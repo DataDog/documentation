@@ -18,7 +18,7 @@ further_reading:
 
 ## Log Collection
 
-Log collection is the beginning of your journey in the wonderful world of log-management. Use either the [Datadog Agent][6] if you want to forward logs directly [from your hosts](#from-your-hosts) or your [containerized environments](#from-a-docker-environment), or use our [AWS Lambda function](#from-aws-services) if you want to monitor directly your AWS services logs.
+Log collection is the beginning of your journey in the wonderful world of log-management. Use either the [Datadog Agent][6] if you want to forward logs directly from your hosts or your containerized environments, or use our [AWS Lambda function](#from-aws-services) if you want to monitor directly your AWS services logs.  
 If you are already using a log-shipper daemon, refer to our dedicated documentation for [Rsyslog][1], [Syslog-ng][2], [NXlog][3], [FluentD][4], and [Logstash][5].
 
 
@@ -29,7 +29,7 @@ The Agent can [tail log files][7] or [listen to socket][8] as well as [filter ou
 
 ### From a Docker environment
 
-The Datadog agent can [collect logs directly from container stdout/stderr][14] without using any logging driver.  Container and orchestrator metadata is automatically added as tags to your logs.
+The Datadog agent can [collect logs directly from container stdout/stderr][14] without using any logging driver.  Container and orchestrator metadata are automatically added as tags to your logs.
 
 It is possible to collect logs from all your container or a only a subset filtered by container image, label or name. Autodiscovery can also be used to configure log collection directly in the container labels.
 
@@ -53,8 +53,8 @@ Here are some key attributes you should pay attention to when setting up your pr
 | :-------    | :------                                                                                                                                                                                               |
 | **Host**    | The name of the originating host as defined in metrics. We automatically retrieve corresponding host tags from the matching host in Datadog. The agent set it automatically.                          |
 | **Source**  | This corresponds to the integration name: the technology or service that originated to log. When it matches ab integration name, Datadog automatically installs the corresponding parsers and facets. |
-| **Service** | This is the name of the application or service generating the log events. It is used to switch from Logs to APMso make sure you define the same value if you use both products.                       |
-| **Message** | By default, Datadog ingests the value of message as the body of the log entry. That value is then highlighted and displayed in the logstream, where it is indexed for full text search.               |
+| **Service** | This is the name of the application or service generating the log events. It is used to switch from Logs to APM so make sure you define the same value if you use both products.                       |
+| **Message** | By default, Datadog ingests the value of the `message` attribute as the body of the log entry. That value is then highlighted and displayed in the logstream, where it is indexed for full text search.               |
 
 Your logs are now collected and centralized into the [Log Explorer][17] view, but your journey doesn’t ends here. 
 
@@ -70,12 +70,12 @@ Follow our [guide to explore your logs][17] for a more detailed explanation of a
 
 ## Graph and Analytics
 
-Now that your logs are parsed and that you have facets and measure over the wanted attributes graph log queries and see maximum, averages, percentiles, unique counts and more.
+Now that your logs are parsed and that you have facets and Measure over the wanted attributes graph log queries and see maximum, averages, percentiles, unique counts and more.
 
 1. Choose a [Measure][21] or [Facet][18] to graph. [A Measure][21] lets you choose the aggregation function whereas a [Facet][18] displays the unique count.
 2. Select the aggregation function for the [Measure][21] you want to graph:
 3. Use Tag or [Facet][18] to split your graph.
-4. Choose to display either the X top or bottom values according to the selected [measure][21].
+4. Choose to display either the X top or bottom values according to the selected [Measure][21].
 
 {{< img src="logs/log_graph.png" alt="Log graph" responsive="true" popup="true" style="width:70%;">}}
 
@@ -86,7 +86,7 @@ Follow our [log graphing guide][23] to learn more about all the graphing option.
 ## Log Processing
 
 Datadog accept any log format: JSON, Syslog, raw, …. No one is blocked at the door.  
-If JSON or Syslog format are automatically processed, we have integration processors to automatically extract meaningful attributes from the raw log. Then integration add facets and measures to slice and dice easily your data in your log explorer or graph view. 
+If JSON or Syslog format are automatically processed, we have integration processors to automatically extract meaningful attributes from the raw log. Then integration add facets and Measures to slice and dice easily your data in your log explorer or graph view. 
 Therefore you can get a maximum value from your integration logs without any manual setup.
 
 That said for custom format not part of an integration you might need to slightly adjust our integration parser or to create new ones.

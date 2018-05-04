@@ -597,7 +597,7 @@ languages:
           weight: 50
           parent: menu_references_logs
         - identifier: customnav_lognav_languages
-          name: "Languages"
+          name: "Application log"
           url: "logs/languages/"
           weight: 80
           parent: menu_references_logs
