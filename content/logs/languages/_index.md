@@ -1,7 +1,7 @@
 ---
-title: Log Collection Languages
+title: Application Log 
 kind: Documentation
-description: "Configure your Datadog Agent to gather logs from your favorite languages."
+description: "Configure your loggers to gather logs from your application."
 ---
 
 ## How to get the most of your application logs
