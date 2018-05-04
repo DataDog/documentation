@@ -1,7 +1,7 @@
 ---
 title: Datadog Agent Log collection
 kind: Documentation
-description: "Configure your Datadog agent to gather logs from your host, containers & services."
+description: "Configure your Datadog agent to gather logs from your host, containers, and services."
 aliases:
   - /logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers
 ---
@@ -21,7 +21,7 @@ logs_enabled: true
 The Datadog Agent sends its logs to Datadog over TLS-encrypted TCP. This requires outbound communication over port `10516`.
 
 ## Enabling log collection from integrations
-To start collecting logs for a given integration, uncomment the logs section in that integration's yaml file, and configure it for your environment.
+To start collecting logs for a given integration, uncomment the logs section in that integration's yaml file and configure it for your environment.
 
 <div class="alert alert-warning">
 Not all integrations include out of the box log configurations.  <a href="https://docs.datadoghq.com/integrations/#cat-log-collection">Consult the current list of supported integrations available</a>.
@@ -66,7 +66,7 @@ logs:
 * [Restart your Agent][3]
 
 ## Stream logs through TCP/UDP
-Set `type` to **tcp** or **udp** depending of your protocol then specify the `port` of your incoming connection.
+Set `type` to **tcp** or **udp** depending on the protocol then specify the `port` of your incoming connection.
 
 Example:
 If your PHP application does not log to a file, but instead forwards its logs via TCP, create a configuration file that specifies the port to receive as in the example below:
@@ -86,7 +86,7 @@ logs:
 ```
 * [Restart your Agent][3]
 
-The Agent supports raw string, JSON and Syslog formated logs. If you are sending logs in batch, use break line characters to separate your logs.
+The Agent supports raw string, JSON, and Syslog formated logs. If you are sending logs in batch, use break line characters to separate your logs.
 
 ## Advanced log collection functions
 
@@ -167,7 +167,7 @@ If your logs are not sent in JSON and you want to aggregate several lines into o
 This is accomplished by using the `log_processing_rules` parameter in your configuration file with the **multi_line** `type`.
 
 This aggregates all lines into one single entry until the given pattern is detected again. This is especially useful for database logs and stack traces.
-Example: Every java log line starts with a timestamp with `YYYY-dd-mm` format. The below lines including a stack trace would be sent as two logs.
+Example: Every java log line starts with a timestamp with `yyyy-dd-mm` format. The below lines including a stack trace would be sent as two logs.
 
 ```
 2018-01-03T09:24:24.983Z UTC Exception in thread "main" java.lang.NullPointerException
@@ -230,11 +230,11 @@ logs:
    source: go
 ```
 
-**Note**: that the Agent requires the read and execute permission (5) on the directory to be able to list all the available files in it.
+**Note**: The Agent requires read and execute permissions (5) on the directory to be able to list all the available files in it.
 
 ### Using a Proxy for Logs
 
-The log Agent does not presently respect the the proxy setting in the datadog.yaml configuration file. This feature will be available in a future release.
+The log Agent does not presently respect the proxy setting in the datadog.yaml configuration file. This feature will be available in a future release.
 
 ### The Advantage of Collecting JSON-formatted logs
 
@@ -263,7 +263,7 @@ You can also specify alternate attributes to use as the source of a log's date b
 **Note**: Datadog rejects a log entry if its official date is older than 6 hours in the past.
 
 <div class="alert alert-info">
-The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (the milliseconds EPOCH format)</a>  and <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
+The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (the milliseconds EPOCH format)</a>, and <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
 </div>
 
 ### *message* attribute
@@ -282,13 +282,13 @@ If you would like to remap some status existing in the `status` attribute, you c
 
 ### *host* attribute
 
-Using the Datadog Agent or the RFC5424 format automatically set the host value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog interprets its value as the the log’s host:
+Using the Datadog Agent or the RFC5424 format automatically sets the host value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog interprets its value as the the log’s host:
 
 * `syslog.hostname`
 
 ### *service* attribute
 
-Using the Datadog Agent or the RFC5424 format automatically set the service value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog interprets its value as the the log’s service:
+Using the Datadog Agent or the RFC5424 format automatically sets the service value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog interprets its value as the the log’s service:
 
 * `syslog.appname`
 
