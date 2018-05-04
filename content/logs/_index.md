@@ -18,7 +18,7 @@ further_reading:
 
 ## Log Collection
 
-Log collection is the beginning of your journey in the wonderful world of log-management. Use either the Datadog Agent if you want to forward logs directly from your hosts or your containerized environments, or use our AWS Lambda function if you want to monitor directly your AWS services logs.
+Log collection is the beginning of your journey in the wonderful world of log-management. Use either the [Datadog Agent][6] if you want to forward logs directly [from your hosts](#from-your-hosts) or your [containerized environments](#from-a-docker-environment), or use our [AWS Lambda function](#from-aws-services) if you want to monitor directly your AWS services logs.
 If you are already using a log-shipper daemon, refer to our dedicated documentation for [Rsyslog][1], [Syslog-ng][2], [NXlog][3], [FluentD][4], and [Logstash][5].
 
 
@@ -27,12 +27,6 @@ If you are already using a log-shipper daemon, refer to our dedicated documentat
 Follow the [Datadog Agent installation instructions][6] to start forwarding logs alongside your metrics and traces.
 The Agent can [tail log files][7] or [listen to socket][8] as well as [filter out logs][9] or [scrub sensitive data][10] or  aggregating [multi line logs][11]. 
 
-### From AWS services
-
-The Datadog Agent can be used to collect logs directly from ECS or EC2 instances and applications running on them.
-
-However, AWS services logs are collected thanks to our [Lambda function][12]. Triggers are then defined ([manually or automatically][13]) to forward logs from any S3 bucket, Cloudwatch Log group or Cloudwatch events. 
-
 ### From a Docker environment
 
 The Datadog agent can [collect logs directly from container stdout/stderr][14] without using any logging driver.  Container and orchestrator metadata is automatically added as tags to your logs.
@@ -40,6 +34,12 @@ The Datadog agent can [collect logs directly from container stdout/stderr][14] w
 It is possible to collect logs from all your container or a only a subset filtered by container image, label or name. Autodiscovery can also be used to configure log collection directly in the container labels.
 
 In Kubernetes environment you can also leverage [the daemonset installation][15].
+
+### From AWS services
+
+The Datadog Agent can be used to collect logs directly from ECS or EC2 instances and applications running on them.
+
+However, AWS services logs are collected thanks to our [Lambda function][12]. Triggers are then defined ([manually or automatically][13]) to forward logs from any S3 bucket, Cloudwatch Log group or Cloudwatch events. 
 
 ### From a custom forwarder
 
