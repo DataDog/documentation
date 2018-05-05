@@ -110,26 +110,26 @@ Pour conserver la compatibilité avec les versions précédentes, l'agent récup
 
 La nouvelle interface de ligne de commande de l'Agent est basée sur une sous-commande:
 
-| Commandes         | Notes
+| Commandes         | Notes                                                                      |
 | --------------- | -------------------------------------------------------------------------- |
-| check           | Exécute le check spécifié |
-| configcheck     | Affiche toutes les configurations chargées et résolues d'un Agent en cours d'exécution |
-| diagnose        | Exécute un diagnostic de connectivité sur votre système |
-| flare           | Collecte et envoie un flare à Datadog |
-| health          | Affiche la santé de l'agent actuel |
-| help            | Aide pour toutes les commandes |
-| hostname        | Affiche l'hostname utilisé par l'Agent |
+| check           | Exécute le check spécifié                                                    |
+| configcheck     | Affiche toutes les configurations chargées et résolues d'un Agent en cours d'exécution              |
+| diagnose        | Exécute un diagnostic de connectivité sur votre système                         |
+| flare           | Collecte et envoie un flare à Datadog                                     |
+| health          | Affiche la santé de l'agent actuel                                             |
+| help            | Aide pour toutes les commandes                                                     |
+| hostname        | Affiche l'hostname utilisé par l'Agent                                       |
 | import          | Importe et converti des fichiers de configuration à partir des versions précédentes de l'agent |
-| installservice  | Installe l'Agent avec le manageur de controleur de services |
-| launch-gui      | Démarre la GUI de l'Agent Datadog |
-| regimport       | Importe les paramètres de registre dans datadog.yaml |
-| remove-service  | Supprime l'Agent du gestionnaire de contrôle de service |
-| restart-service | Redémarrez l'Agent dans le service control manager |
-| start           | Démarre l'Agent |
-| start-service   | Démarre l'Agent avec le manageur de contrôleur de services |
-| status          | Affiche le status courrant |
-| stopservice     | Stop l'Agent dans le manageur de controleur de services |
-| version         | Affiche des informations sur la version |
+| installservice  | Installe l'Agent avec le manageur de controleur de services                      |
+| launch-gui      | Démarre la GUI de l'Agent Datadog                                               |
+| regimport       | Importe les paramètres de registre dans datadog.yaml                             |
+| remove-service  | Supprime l'Agent du gestionnaire de contrôle de service                         |
+| restart-service | Redémarrez l'Agent dans le service control manager                      |
+| start           | Démarre l'Agent                                                            |
+| start-service   | Démarre l'Agent avec le manageur de contrôleur de services                        |
+| status          | Affiche le status courrant                                                   |
+| stopservice     | Stop l'Agent dans le manageur de controleur de services                         |
+| version         | Affiche des informations sur la version                                                     |
 
 Pour exécuter une sous-commande, le binaire Agent doit être appelé comme ceci:
 ```
@@ -165,30 +165,30 @@ les bonne permissions: Si vous êtes capable d'ouvrir `datadog.yaml`, vous pouve
 
 ## Versions d'OS supportées
 ### Agent v6
-|OS| Versions supportées|
-|:----|:----|
-|[Debian x86_64][7] | Debian 7 (wheezy) et plus (nous ne supportons pas SysVinit)|
-|[Ubuntu x86_64][8] | Ubuntu 14.04 et plus|
-|[RedHat/CentOS x86_64][9]| RedHat/CentOS 6 et plus |
-|[SUSE Enterprise Linux x86_64][10] | SUSE 11 SP4 et plus (nous ne supportons pas SysVinit)|
-|[Fedora x86_64][11] | Fedora 26 et plus |
-|[MacOS][12]| OSX 10.10 et plus|
-|[Windows server 64-bit][13]| Windows server 2008r2 et plus|
-|[Windows 64-bit][13]| Windows 7 et plus|
+| OS                                 | Versions supportées                                       |
+| :----                              | :----                                                    |
+| [Debian x86_64][7]                 | Debian 7 (wheezy) et plus (nous ne supportons pas SysVinit) |
+| [Ubuntu x86_64][8]                 | Ubuntu 14.04 et plus                                   |
+| [RedHat/CentOS x86_64][9]          | RedHat/CentOS 6 et plus                                |
+| [SUSE Enterprise Linux x86_64][10] | SUSE 11 SP4 et plus (nous ne supportons pas SysVinit)       |
+| [Fedora x86_64][11]                | Fedora 26 et plus                                      |
+| [MacOS][12]                        | OSX 10.10 et plus                                      |
+| [Windows server 64-bit][13]        | Windows server 2008r2 et plus                           |
+| [Windows 64-bit][13]               | Windows 7 et plus                                       |
 
 **Note**: L'installation depuis les sources peut fonctionner sur les systèmes d'exploitation non répertoriés ici.
 ### Agent v5
 
-|OS| Versions supportées|
-|:----|:----|
-|[Debian x86_64][7] | Debian 7 (wheezy) et plus |
-|[Ubuntu x86_64][8] | Ubuntu 12.04 et plus|
-|[RedHat/CentOS x86_64][9]| RedHat/CentOS 6 et plus |
-|[SUSE Enterprise Linux x86_64][10] | SUSE 11 SP4 et plus|
-|[Fedora x86_64][11]| Fedora 26 et plus |
-|[MacOS][12]| OSX 10.10 et plus|
-|[Windows server 64-bit][13]| Windows server 2008r2 et plus|
-|[Windows 64-bit][13]| Windows 7 et plus|
+| OS                                 | Versions supportées             |
+| :----                              | :----                          |
+| [Debian x86_64][7]                 | Debian 7 (wheezy) et plus    |
+| [Ubuntu x86_64][8]                 | Ubuntu 12.04 et plus         |
+| [RedHat/CentOS x86_64][9]          | RedHat/CentOS 6 et plus      |
+| [SUSE Enterprise Linux x86_64][10] | SUSE 11 SP4 et plus          |
+| [Fedora x86_64][11]                | Fedora 26 et plus            |
+| [MacOS][12]                        | OSX 10.10 et plus            |
+| [Windows server 64-bit][13]        | Windows server 2008r2 et plus |
+| [Windows 64-bit][13]               | Windows 7 et plus             |
 
 **Note**: L'installation depuis les sources peut fonctionner sur les systèmes d'exploitation non répertoriés ici.
 
