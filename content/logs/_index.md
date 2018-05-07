@@ -18,14 +18,14 @@ further_reading:
 
 ## Log Collection
 
-Log collection is the beginning of your journey in the wonderful world of log-management. Use either the [Datadog Agent][6] if you want to forward logs directly from your hosts or your containerized environments, or use our [AWS Lambda function](#from-aws-services) if you want to monitor directly your AWS services logs.  
+Log collection is the beginning of your journey in the wonderful world of log-management. Use either the [Datadog Agent][6] if you want to forward logs directly from your hosts or your containerized environments, or use our [AWS Lambda function](#from-aws-services) if you want to monitor directly your AWS services logs.
 If you are already using a log-shipper daemon, refer to our dedicated documentation for [Rsyslog][1], [Syslog-ng][2], [NXlog][3], [FluentD][4], and [Logstash][5].
 
 
 ### From your hosts
 
 Follow the [Datadog Agent installation instructions][6] to start forwarding logs alongside your metrics and traces.
-The Agent can [tail log files][7] or [listen to socket][8] as well as [filter out logs][9] or [scrub sensitive data][10] or  aggregating [multi line logs][11]. 
+The Agent can [tail log files][7] or [listen to socket][8] as well as [filter out logs][9] or [scrub sensitive data][10] or  aggregating [multi line logs][11].
 
 ### From a Docker environment
 
@@ -39,11 +39,11 @@ In Kubernetes environment you can also leverage [the daemonset installation][15]
 
 The Datadog Agent can be used to collect logs directly from ECS or EC2 instances and applications running on them.
 
-However, AWS services logs are collected thanks to our [Lambda function][12]. Triggers are then defined ([manually or automatically][13]) to forward logs from any S3 bucket, Cloudwatch Log group or Cloudwatch events. 
+However, AWS services logs are collected thanks to our [Lambda function][12]. Triggers are then defined ([manually or automatically][13]) to forward logs from any S3 bucket, Cloudwatch Log group or Cloudwatch events.
 
 ### From a custom forwarder
 
-Ultimately we have a TCP endpoint `intake.logs.datadoghq.com` that can be accessed either on port `10516` (for secured connection) or `10514`. Therefore any custom process or [logging library][16] able to forward logs through TCP can be used.
+Ultimately we have a TCP endpoint `intake.logs.datadoghq.com` that can be accessed either on port `10516` (for secured connection) or `10514`. Therefore any custom process or [logging library][16] is able to forward logs through TCP can be used.
 
 ### Reserved attributes
 
@@ -85,15 +85,15 @@ Follow our [log graphing guide][23] to learn more about all the graphing option.
 
 ## Log Processing
 
-Datadog accept any log format: JSON, Syslog, raw, …. No one is blocked at the door.  
-While JSON or Syslog format are automatically processed, we have integration processors to automatically extract meaningful attributes from the raw log. Then integration add facets and Measures to slice and dice easily your data in your log explorer or graph view. 
+Datadog accept any log format: JSON, Syslog, raw, …. No one is blocked at the door.
+While JSON or Syslog format are automatically processed, we have integration processors to automatically extract meaningful attributes from the raw log. Then integration add facets and Measures to slice and dice easily your data in your log explorer or graph view.
 Therefore you can get a maximum value from your integration logs without any manual setup.
 
 That said for custom format not part of an integration you might need to slightly adjust our integration parser or to create new ones.
 
 ### JSON logs
 
-As explained above, in Datadog we have [reserved attributes][24] such as timestamp, status, host, service or even the log message. 
+As explained above, in Datadog we have [reserved attributes][24] such as timestamp, status, host, service or even the log message.
 If you have different attribute names for those, no worries. We have [reserved attributes remappers][25] available in the pipeline.
 
 For example: A service generates the below logs:
@@ -133,7 +133,7 @@ So for instance with custom processing rules you can transform this log:
 
 {{< img src="logs/log_pre_processing.png" alt="Log pre processing" responsive="true" popup="true" style="width:50%;">}}
 
-Into this one: 
+Into this one:
 
 {{< img src="logs/log_post_processing.png" alt="Log post processing" responsive="true" popup="true" style="width:50%;">}}
 
@@ -151,10 +151,10 @@ In addition to parsing you can also do some remapping and much more. [Find here]
 [4]: /logs/log_collection/fluentd
 [5]: /logs/log_collection/logstash
 [6]: /logs/log_collection/#getting-started-with-the-agent
-[7]: /logs/log_collection/#tail-existing-files 
+[7]: /logs/log_collection/#tail-existing-files
 [8]: /logs/log_collection/#stream-logs-through-tcp-udp
 [9]: /logs/log_collection/#filter-logs
-[10]: /logs/log_collection/#scrub-sensitive-data-in-your-logs 
+[10]: /logs/log_collection/#scrub-sensitive-data-in-your-logs
 [11]: /logs/log_collection/#multi-line-aggregation
 [12]: /integrations/amazon_web_services/#log-collection
 [13]: /integrations/amazon_web_services/#enable-logging-for-your-aws-service
@@ -164,16 +164,16 @@ In addition to parsing you can also do some remapping and much more. [Find here]
 [17]: /logs/explore
 [18]: /logs/explore/#facets
 [19]: /logs/explore/#create-a-facet
-[20]: /logs/explore/#search-syntax 
-[21]: /logs/explore/#measures 
+[20]: /logs/explore/#search-syntax
+[21]: /logs/explore/#measures
 [22]: /logs/graph/#related-logs
 [23]: /logs/graph/
-[24]: /logs/log_collection/#reserved-attributes 
+[24]: /logs/log_collection/#reserved-attributes
 [25]: /logs/log_collection/#edit-reserved-attributes
-[26]: /logs/processing/#processing-pipelines 
-[27]: /logs/processing/#attribute-remapper 
-[28]: /logs/processing/#grok-parser 
-[29]: /logs/parsing/ 
+[26]: /logs/processing/#processing-pipelines
+[27]: /logs/processing/#attribute-remapper
+[28]: /logs/processing/#grok-parser
+[29]: /logs/parsing/
 [30]: /logs/faq/log-parsing-best-practice/
 [31]: /logs/faq/how-to-investigate-a-log-parsing-issue/
 [32]: /logs/processing/#processors
