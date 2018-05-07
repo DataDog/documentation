@@ -23,7 +23,7 @@ The Logs explorer is your home base for troubleshooting and exploration:
 In this view you can:
 
 * [Interact with the Time range](#time-range)
-* [Display lists of logs](#log-list)
+* [Display lists of logs](#logstream)
 * [Use facets to filter your Logstream](#facets)
 * [Enter search queries](#search-bar)
 

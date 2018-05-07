@@ -45,16 +45,16 @@ Service names:
 * **Cannot contain spaces** (spaces are replaced with underscores).
 * must adhere to [metric naming rules][5].
 
-**Note**: Service must have a type attached, APM automatically assigns services one of four types: web, database, cache, custom.
+**Note**: Services must have a type attached, APM automatically assigns services one of four types: web, database, cache, custom.
 
 You can also [alert][6] on any service level metric. Read more about monitoring services in APM on the [service list][7] and [service dashboard][8] pages.
 
 ## Resources
 
-**A Resource is particular action for a service**.  
+**A Resource is a particular action for a service**.  
 
 * **For a web application**: some examples might be a canonical URL, such as `/user/home` or a handler function like `web.user.home` (often referred to as “routes” in MVC frameworks).
-* **For a SQL database**: a resource is be the query itself, such as `SELECT * FROM users WHERE id = ?`.
+* **For a SQL database**: a resource is the query itself, such as `SELECT * FROM users WHERE id = ?`.
 
 Resources should be grouped together under a canonical name, like `/user/home` rather than have `/user/home?id=100` and `/user/home?id=200` as separate resources. APM automatically assigns names to your resources; however you can also name them explicitly. See instructions for: [Go][9], [Java][2], [Python][10], [Ruby][11].
 
