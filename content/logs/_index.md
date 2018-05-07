@@ -29,9 +29,9 @@ The Agent can [tail log files][7] or [listen to socket][8] as well as [filter ou
 
 ### From a Docker environment
 
-The Datadog agent can [collect logs directly from container stdout/stderr][14] without using any logging driver.  Container and orchestrator metadata are automatically added as tags to your logs.
+The Datadog agent can [collect logs directly from container stdout/stderr][14] without using any logging driver. Container and orchestrator metadata are automatically added as tags to your logs.
 
-It is possible to collect logs from all your container or a only a subset filtered by container image, label or name. Autodiscovery can also be used to configure log collection directly in the container labels.
+It is possible to collect logs from all your containers or a only a subset filtered by container image, label or name. Autodiscovery can also be used to configure log collection directly in the container labels.
 
 In Kubernetes environment you can also leverage [the daemonset installation][15].
 
@@ -43,7 +43,7 @@ However, AWS services logs are collected thanks to our [Lambda function][12]. Tr
 
 ### From a custom forwarder
 
-Ultimately we have a TCP endpoint `intake.logs.datadoghq.com` that can be accessed either on port `10516` (for secured connection) or `10514`. Therefore any custom process or [logging library][16] are able to forward logs through TCP can be used.
+Ultimately we have a TCP endpoint `intake.logs.datadoghq.com` that can be accessed either on port `10516` (for secured connection) or `10514`. Therefore any custom process or [logging library][16] able to forward logs through TCP can be used.
 
 ### Reserved attributes
 
@@ -51,12 +51,12 @@ Here are some key attributes you should pay attention to when setting up your pr
 
 | Attribute   | Description                                                                                                                                                                                           |
 | :-------    | :------                                                                                                                                                                                               |
-| **Host**    | The name of the originating host as defined in metrics. We automatically retrieve corresponding host tags from the matching host in Datadog. The agent set it automatically.                          |
-| **Source**  | This corresponds to the integration name: the technology or service that originated to log. When it matches ab integration name, Datadog automatically installs the corresponding parsers and facets. |
+| **Host**    | The name of the originating host as defined in metrics. We automatically retrieve corresponding host tags from the matching host in Datadog. The agent sets it automatically.                          |
+| **Source**  | This corresponds to the integration name: the technology or service from which the log originated. When it matches an integration name, Datadog automatically installs the corresponding parsers and facets. |
 | **Service** | This is the name of the application or service generating the log events. It is used to switch from Logs to APM so make sure you define the same value if you use both products.                       |
 | **Message** | By default, Datadog ingests the value of the `message` attribute as the body of the log entry. That value is then highlighted and displayed in the logstream, where it is indexed for full text search.               |
 
-Your logs are now collected and centralized into the [Log Explorer][17] view, but your journey doesn’t ends here. 
+Your logs are now collected and centralized into the [Log Explorer][17] view, but your journey doesn’t end here.
 
 {{< img src="logs/log_explorer_view.png" alt="Log explorer view" responsive="true" popup="true">}}
 
@@ -86,7 +86,7 @@ Follow our [log graphing guide][23] to learn more about all the graphing option.
 ## Log Processing
 
 Datadog accept any log format: JSON, Syslog, raw, …. No one is blocked at the door.  
-If JSON or Syslog format are automatically processed, we have integration processors to automatically extract meaningful attributes from the raw log. Then integration add facets and Measures to slice and dice easily your data in your log explorer or graph view. 
+While JSON or Syslog format are automatically processed, we have integration processors to automatically extract meaningful attributes from the raw log. Then integration add facets and Measures to slice and dice easily your data in your log explorer or graph view. 
 Therefore you can get a maximum value from your integration logs without any manual setup.
 
 That said for custom format not part of an integration you might need to slightly adjust our integration parser or to create new ones.
@@ -129,7 +129,7 @@ For integration logs, we automatically install a pipeline that takes care of par
 However we know that log format can be totally custom which is why custom processing rules can be defined.
 The idea is to extract all your attribute and remap them if necessary to the main status or timestamp.
 
-So for instance you with custom processing rules you can transform this log:
+So for instance with custom processing rules you can transform this log:
 
 {{< img src="logs/log_pre_processing.png" alt="Log pre processing" responsive="true" popup="true" style="width:50%;">}}
 
@@ -139,7 +139,7 @@ Into this one:
 
 Follow our [parsing training guide][29] to learn more about parsing.
 We also have a [parsing best practice][30] and a [parsing troubleshooting][31] guide that might be interesting for you.
-In addition of parsing you can also do some remapping and much more. [Find here][32] the full list of available processors and how to use them.
+In addition to parsing you can also do some remapping and much more. [Find here][32] the full list of available processors and how to use them.
 
 ## Further Reading
 
