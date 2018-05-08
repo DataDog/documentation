@@ -43,7 +43,7 @@ However, AWS services logs are collected thanks to our [Lambda function][12]. Tr
 
 ### From a custom forwarder
 
-We have a TCP endpoint `intake.logs.datadoghq.com` that can be accessed either on port `10516` (for secured connection) or `10514`. Therefore any custom process or [logging library][16] is able to forward logs through TCP can be used.
+We have a TCP endpoint `intake.logs.datadoghq.com` that can be accessed either on port `10516` (for secured connection) or `10514`. Therefore any custom process or [logging library][16] able to forward logs through TCP can be used.
 
 ### Reserved attributes
 
