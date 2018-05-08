@@ -186,7 +186,7 @@ permissions: if you are able to open `datadog.yaml`, you are able to use the GUI
 | :----                              | :----                          |
 | [Debian x86_64][7]                 | Debian 7 (wheezy) and above    |
 | [Ubuntu x86_64][8]                 | Ubuntu 12.04 and above         |
-| [RedHat/CentOS x86_64][9]          | RedHat/CentOS 6 and above      |
+| [RedHat/CentOS x86_64][9]          | RedHat/CentOS 5 and above      |
 | [SUSE Enterprise Linux x86_64][10] | SUSE 11 SP4 and above          |
 | [Fedora x86_64][11]                | Fedora 26 and above            |
 | [MacOS][12]                        | OSX 10.10 and above            |
