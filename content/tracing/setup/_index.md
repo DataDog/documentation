@@ -19,6 +19,9 @@ further_reading:
 - link: "tracing/setup/java"
   tag: "Documentation"
   text: Java language instrumentation
+- link: "tracing/setup/javascript"
+  tag: "Documentation"
+  text: JavaScript language instrumentation
 - link: "tracing/setup/python"
   tag: "Documentation"
   text: Python language instrumentation
