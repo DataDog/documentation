@@ -57,6 +57,8 @@ tracer
   })
 ```
 
+For more details about manual instrumentation, check out the [API documentation](https://datadog.github.io/dd-trace-js).
+
 ### Configuration Options
 
 Options can be configured as a parameter to the `init()` method or as environment variables.
