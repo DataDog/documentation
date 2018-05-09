@@ -38,7 +38,11 @@ npm install --save dd-trace
 
 Finally, import the tracer and instrument your code!
 
-### Example
+### Manual Instrumentation
+
+If you aren’t using supported library instrumentation (see [Compatibility](#compatibility)), you may want to manually instrument your code. Adding tracing to your code is easy using the tracing method, which you can wrap around your JavaScript code.
+
+The following example initializes a Datadog Tracer and creates a Span called `web.request`:
 
 ```js
 const tracer = require('dd-trace').init()
@@ -71,8 +75,7 @@ Options can be configured as a parameter to the `init()` method or as environmen
 
 ## OpenTracing
 
-This library is OpenTracing compliant. Once the tracer is initialized
-it can be used as a global tracer.
+This library is OpenTracing compliant. Use the [OpenTracing API](https://doc.esdoc.org/github.com/opentracing/opentracing-javascript/) and the Datadog Tracer (dd-trace) library to measure execution times for specific pieces of code. In the following example, a Datadog Tracer is initialized and used as a global tracer:
 
 ```js
 const tracer = require('dd-trace').init()
@@ -81,38 +84,27 @@ const opentracing = require('opentracing')
 opentracing.initGlobalTracer(tracer)
 ```
 
-The tracer will then be available with `opentracing.globalTracer()`.
-
-See the OpenTracing JavaScript [documentation](https://github.com/opentracing/opentracing-javascript)
-and [API](https://doc.esdoc.org/github.com/opentracing/opentracing-javascript/) for more details.
-
 **NOTE: The tracer returned by `opentracing.globalTracer()` only
 contains OpenTracing specific methods.**
 
 **NOTE: When using OpenTracing, context propagation is not handled
 automatically.**
 
-## Automatic Instrumentation
+## Integrations
 
-APM provides out-of-the-box support for many popular integrations
-by using a plugin system. By default all built-in plugins are
-enabled. This behavior can be changed by setting the `plugins` option to `false` in the [configuration options](#configuration-options).
+APM provides out-of-the-box instrumentation for many popular frameworks and libraries by using a plugin system. By default all built-in plugins are enabled. This behavior can be changed by setting the `plugins` option to `false` in the [configuration options](#configuration-options).
 
-Built-in plugins can be enabled by name:
+Built-in plugins can be enabled by name and configured individually:
 
 ```js
-const tracer = require('dd-trace').init()
+const tracer = require('dd-trace').init({ plugins: false })
 
+// enable express integration
 tracer.use('express')
-```
 
-It is also possible to configure plugins using the same method:
-
-```js
-const tracer = require('dd-trace').init()
-
+// enable and configure postgresql integration
 tracer.use('pg', {
-  service: 'my_db'
+  service: 'pg-cluster'
 })
 ```
 
