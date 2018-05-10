@@ -65,7 +65,7 @@ spec:
             protocol: TCP
         env:
           - name: DD_API_KEY
-            value: <YOUR_API_KEY>
+            value: "<YOUR_API_KEY>"
           - name: DD_COLLECT_KUBERNETES_EVENTS
             value: "true"
           - name: DD_LEADER_ELECTION
