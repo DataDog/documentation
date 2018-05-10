@@ -29,6 +29,10 @@ For details about contributing, check out the [development guide][development do
 [visualization docs]: https://docs.datadoghq.com/tracing/visualization/
 [development docs]: https://github.com/DataDog/dd-trace-js/blob/master/README.md#development
 
+### Requirements
+
+Node 4 is the minimum version supported by this library. However, it benefits significantly from the performance improvements introduced in Node 8.3+.
+
 ### Installation
 
 To begin tracing Node.js applications, first [install and configure the Datadog Agent](/tracing/setup/) (see additional documentation for [tracing Docker applications](/tracing/setup/docker/)).
@@ -39,28 +43,13 @@ Next, install the Datadog Tracing library using npm:
 npm install --save dd-trace
 ```
 
-Finally, import the tracer and instrument your code!
-
-### Manual Instrumentation
-
-If you aren’t using supported library instrumentation (see [Compatibility](#compatibility)), you may want to manually instrument your code. Adding tracing to your code is easy using the tracing method, which you can wrap around your JavaScript code.
-
-The following example initializes a Datadog Tracer and creates a Span called `web.request`:
+Finally, import and initialize the tracer:
 
 ```js
 const tracer = require('dd-trace').init()
-
-tracer
-  .trace('web.request', {
-    service: 'my_service'
-  })
-  .then(span => {
-    span.setTag('my_tag', 'my_value')
-    span.finish()
-  })
 ```
 
-For more details about manual instrumentation, check out the [API documentation](https://datadog.github.io/dd-trace-js).
+**NOTE: The tracer must be initialized before importing any other module.**
 
 ### Configuration Options
 
@@ -78,7 +67,32 @@ Options can be configured as a parameter to the `init()` method or as environmen
 | experimental  |                              | {}        | Experimental features can be enabled all at once using boolean `true` or individually using key/value pairs. Available experimental features: `asyncHooks`. |
 | plugins       |                              | true      | Whether or not to enable automatic instrumentation of external libraries using the built-in plugins. |
 
-## OpenTracing
+## Manual Instrumentation
+
+If you aren’t using supported library instrumentation (see [Compatibility](#compatibility)), you may want to manually instrument your code.
+
+This can be done using either the [Trace API](#trace-api) or [OpenTracing](#opentracing).
+
+### Trace API
+
+The following example initializes a Datadog Tracer and creates a Span called `web.request`:
+
+```js
+const tracer = require('dd-trace').init()
+
+tracer
+  .trace('web.request', {
+    service: 'my_service'
+  })
+  .then(span => {
+    span.setTag('my_tag', 'my_value')
+    span.finish()
+  })
+```
+
+For more details about manual instrumentation using the Trace API, check out the [API documentation](https://datadog.github.io/dd-trace-js).
+
+### OpenTracing
 
 This library is OpenTracing compliant. Use the [OpenTracing API](https://doc.esdoc.org/github.com/opentracing/opentracing-javascript/) and the Datadog Tracer (dd-trace) library to measure execution times for specific pieces of code. In the following example, a Datadog Tracer is initialized and used as a global tracer:
 
@@ -94,6 +108,12 @@ contains OpenTracing specific methods.**
 
 **NOTE: When using OpenTracing, context propagation is not handled
 automatically.**
+
+## Distributed tracing
+
+Distributed tracing allows you to propagate a single trace across multiple services, so you can see performance end-to-end.
+
+Distributed tracing is enabled by default for all supported integrations.
 
 ## Integrations
 
@@ -117,7 +137,7 @@ See [compatibility](#compatibility) for the list of supported integrations.
 
 ### Compatibility
 
-The `dd-trace` library includes support for a number of modules.
+The `dd-trace` library includes support for a number of modules. If you would like support for a module that is not listed, feel free to open a [GitHub issue](https://github.com/DataDog/dd-trace-js/issues).
 
 #### Web Frameworks
 
@@ -151,12 +171,6 @@ ___
 | [mysql](https://github.com/mysqljs/mysql)                          | 2.x      | Experimental |
 | [pg](https://node-postgres.com/)                                   | 6.x      | Experimental |
 | [redis](https://github.com/NodeRedis/node_redis)                   | >=2.6    | Experimental |
-
-### Distributed tracing
-
-Distributed tracing allows you to propagate a single trace across multiple services, so you can see performance end-to-end.
-
-Distributed tracing is enabled by default for all supported integrations.
 
 ## Further reading
 
