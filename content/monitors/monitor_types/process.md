@@ -39,7 +39,7 @@ Live Process Monitors are based on data collected by the [Process Agent](https:/
 
 ## Process Check
 
-{{< img src="monitors/monitor_types/process/process_check_select.png" alt="process check" style="float: left;" style="width:80%;">}}
+{{< img src="monitors/monitor_types/process/process_check_select.png" alt="process check" style="float:left;" style="width:45%;">}}
 
 A process check monitor watches the status produced by the `process.up` service
 check reported by the check in the Agent. At the Agent level you can configure
