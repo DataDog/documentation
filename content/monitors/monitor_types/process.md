@@ -23,13 +23,13 @@ Process monitors are configured to check the status of individual or groups of p
 
 {{< img src="monitors/monitor_types/process/live_process_monitor_select.png" alt="live process monitor" >}}
 
-Live Process Monitors are based on data collected by the [Process Agent](https://docs.datadoghq.com/graphing/infrastructure/process/) which will allow you to centrally create monitors that warn or alert based on the behavior of any process or group of procresses on any host or tag.
+Live Process Monitors are based on data collected by the [Process Agent](https://docs.datadoghq.com/graphing/infrastructure/process/) which will allow you to centrally create monitors that warn or alert based on the behavior of any group of processes across any hosts or tags.
 
 ### Configuration
 
 1. Search for the Process to monitor.  This can be a space seperated list of strings, and will perform a partial match, fuzzy search across all processes on your infrastructure.  In the table below you will see matching processes and counts -- make sure to refine your search to avoid false positives.  
 
-Above, you will see a graph of the number of processes in the scope of the monitor over time.  If you select "multi-alert" you will see one line per group.
+    Above, you will see a graph of the number of processes in the scope of the monitor over time.  If you select "multi-alert" you will see one line per group.
 
 2. Pick the monitor scope.  You only see hosts or tags that are reporting a status for the selected process.
 
