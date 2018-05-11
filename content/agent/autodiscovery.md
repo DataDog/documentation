@@ -263,6 +263,9 @@ spec:
 
 The Agent detects if it's running on Docker and automatically searches all labels for check templates.
 
+Since version 6.2 of the Datadog Agent, it is also possible to configure docker log collection in container labels.
+Check our [Docker Log collection guide][23] for more information about the setup.
+
 Autodiscovery expects labels to look like these examples, depending on the file type:
 
 **Dockerfile**
@@ -270,6 +273,7 @@ Autodiscovery expects labels to look like these examples, depending on the file 
 LABEL "com.datadoghq.ad.check_names"='[<CHECK_NAME>]'
 LABEL "com.datadoghq.ad.init_configs"='[<INIT_CONFIG>]'
 LABEL "com.datadoghq.ad.instances"='[<INSTANCE_CONFIG>]'
+LABEL "com.datadoghq.ad.logs"='[<LOGS_CONFIG>]'
 ```
 
 **docker-compose.yaml**
@@ -278,11 +282,12 @@ labels:
   com.datadoghq.ad.check_names: '[<CHECK_NAME>]'
   com.datadoghq.ad.init_configs: '[<INIT_CONFIG>]'
   com.datadoghq.ad.instances: '[<INSTANCE_CONFIG>]'
+  com.datadoghq.ad.logs: '[<LOGS_CONFIG>]'
 ```
 
 **docker run command**
 ```
--l com.datadoghq.ad.check_names='[<CHECK_NAME>]' -l com.datadoghq.ad.init_configs='[<INIT_CONFIG>]' -l com.datadoghq.ad.instances='[<INSTANCE_CONFIG>]'
+-l com.datadoghq.ad.check_names='[<CHECK_NAME>]' -l com.datadoghq.ad.init_configs='[<INIT_CONFIG>]' -l com.datadoghq.ad.instances='[<INSTANCE_CONFIG>]' -l com.datadoghq.ad.logs='[<LOGS_CONFIG>]'
 ```
 
 #### Docker Example: NGINX Dockerfile
@@ -297,6 +302,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 LABEL "com.datadoghq.ad.check_names"='["nginx"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%/nginx_status:%%port%%"}]'
+LABEL "com.datadoghq.ad.logs"='[{"source": "nginx", "service": "webapp"}]'
 ```
 
 ## Reference
@@ -402,3 +408,4 @@ instances:
 [20]: /agent/faq/agent-commands
 [21]: https://github.com/DataDog/integrations-core/blob/master/http_check/conf.yaml.example
 [22]: https://github.com/DataDog/integrations-core/blob/master/kube_proxy/auto_conf.yaml
+[23]: https://docs.datadoghq.com/logs/docker/
