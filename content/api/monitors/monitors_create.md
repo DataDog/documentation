@@ -13,6 +13,7 @@ external_redirect: /api/#create-a-monitor
     *   `metric alert`
     *   `service check`
     *   `event alert`
+    *   `process alert`
     *   `composite`
 
 *   **`query`** [*required*]:  
@@ -58,6 +59,16 @@ external_redirect: /api/#create-a-monitor
     *   **`excluded_tags`** exluded event tags (comma-separated).
     *   **`rollup`** the stats rollup method. `count` is the only supported method now.
     *   **`last`** the timeframe to roll up the counts. Examples: 60s, 4h. Supported timeframes: s, m, h and d.
+
+    ##### Process Alert Query
+
+    `processes(search).over(tags).rollup('count').last(timeframe) operator #`
+
+    *   **`search`** free text search string for querying processes. Matching processes match results on the [Live Processes](/graphing/infrastructure/process/) page
+    *   **`tags`** one or more tags (comma-separated)
+    *   **`timeframe`** the timeframe to roll up the counts. Examples: 60s, 4h. Supported timeframes: s, m, h and d
+    *   **`operator`** <, <=, >, >=, ==, or !=
+    *   **`#`** an integer or decimal number used to set the threshold
 
     ##### Composite Query
 
