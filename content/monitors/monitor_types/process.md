@@ -16,7 +16,32 @@ further_reading:
 
 ## Overview
 
-A process monitor watches the status produced by the `process.up` service
+Process monitors are configured to check the status of individual or groups of processes.  
+
+
+## Live Process Monitors
+
+{{< img src="monitors/monitor_types/process/live_process_monitor_select.png" alt="live process monitor" >}}
+
+Live Process Monitors are based on data collected by the [Process Agent](https://docs.datadoghq.com/graphing/infrastructure/process/) which will allow you to centrally create monitors that warn or alert based on the behavior of any process or group of procresses on any host or tag.
+
+### Configuration
+
+1. Search for the Process to monitor.  This can be a space seperated list of strings, and will perform a partial match, fuzzy search across all processes on your infrastructure.  In the table below you will see matching processes and counts -- make sure to refine your search to avoid false positives.  
+
+Above, you will see a graph of the number of processes in the scope of the monitor over time.  If you select "multi-alert" you will see one line per group.
+
+2. Pick the monitor scope.  You only see hosts or tags that are reporting a status for the selected process.
+
+3. Select alerting options.
+
+4. Configure your notification options.
+
+## Process Check
+
+{{< img src="monitors/monitor_types/process/process_check_select.png" alt="process check" >}}
+
+A process check monitor watches the status produced by the `process.up` service
 check reported by the check in the Agent. At the Agent level you can configure
 thresholds based on the number of matching processes.
 
@@ -26,7 +51,7 @@ page.
 For each process, a single service check status is produced. Through this creation interface, you can choose which of those checks to monitor and at what
 point they should notify.
 
-## Configuration
+### Configuration
 
 1. Pick the **process** to monitor. You see the names configured in any Agent with an active process check.
     {{< img src="monitors/monitor_types/process/process_monitor_pick.png" alt="process monitor pick" responsive="true" popup="true" style="width:80%;">}}
