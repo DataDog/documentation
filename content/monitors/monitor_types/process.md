@@ -21,7 +21,7 @@ Process monitors are configured to check the status of individual or groups of p
 
 ## Live Process Monitors
 
-{{< img src="monitors/monitor_types/process/live_process_monitor_select.png" alt="live process monitor"  style="display:-webkit-box;" style="width:35%;">}}
+{{< img src="monitors/monitor_types/process/live_process_monitor_select.png" alt="live process monitor" style="width:35%;">}}
 
 Live Process Monitors are based on data collected by the [Process Agent](https://docs.datadoghq.com/graphing/infrastructure/process/) which will allow you to centrally create monitors that warn or alert based on the behavior of any group of processes across any hosts or tags.
 
@@ -39,7 +39,7 @@ Live Process Monitors are based on data collected by the [Process Agent](https:/
 
 ## Process Check
 
-{{< img src="monitors/monitor_types/process/process_check_select.png" alt="process check" style="display:-webkit-box;" style="width:35%;">}}
+{{< img src="monitors/monitor_types/process/process_check_select.png" alt="process check" style="width:35%;">}}
 
 A process check monitor watches the status produced by the `process.up` service
 check reported by the check in the Agent. At the Agent level you can configure
