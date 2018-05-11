@@ -85,7 +85,7 @@ The Agent looks for Autodiscovery templates in its `conf.d/auto_conf` directory,
 - [Redis][21]
 - [Riak][22]
 
-These templates may suit you in basic cases, but if you need to use custom check configurations—say you want to enable extra check options, use different container identifiers, or use [template variable indexing](#template-variable-indexes))— you'll have to write your own auto-conf files. You can then provide those in a few ways:
+These templates may suit you in basic cases, but if you need to use custom Agent check configurations—say you want to enable extra check options, use different container identifiers, or use [template variable indexing](#template-variable-indexes))— you'll have to write your own auto-conf files. You can then provide those in a few ways:
 
 1. Add them to each host that runs docker-dd-agent and [mount the directory that contains them][6] into the docker-dd-agent container when starting it
 2. Build your own docker image based on docker-dd-agent, adding your custom templates to `/etc/dd-agent/conf.d/auto_conf`

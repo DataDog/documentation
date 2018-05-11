@@ -25,29 +25,27 @@ By default, your Agent is installed in its own sandbox at `~/.datadog-agent`. Yo
 
 Datadog Agent has some commands and only the _lifecycle commands_ (i.e. `start`/`stop`/`restart`/`status` on the Agent) should be run with `sudo`.
 
-{{% table responsive="true" %}}
-| Agent v5                                  |  Agent v6                          | Notes
+| Agent v5                                        | Agent v6                                | Notes                         |
 | ----------------------------------------------- | --------------------------------------- | ----------------------------- |
-| `sudo ~/.datadog-agent/bin/agent start`              | `sudo ./bin/agent/agent start`      | Start Agent|
-| `sudo ~/.datadog-agent/bin/agent stop`               | `sudo ./bin/agent/agent  stop`       | Stop Agent |
-| `sudo ~/.datadog-agent/bin/agent info`               | `sudo ./bin/agent/agent  info`             | Status page of running Agent |
-| `sudo ~/.datadog-agent/bin/agent flare`              | `sudo ./bin/agent/agent  flare`              | Send flare |
-| `sudo ~/.datadog-agent/bin/agent help`                    | `sudo ./bin/agent/agent  help`             | Display command usage |
-{{% /table %}}
+| `sudo ~/.datadog-agent/bin/agent start`         | `sudo ./bin/agent/agent start`          | Start Agent                   |
+| `sudo ~/.datadog-agent/bin/agent stop`          | `sudo ./bin/agent/agent  stop`          | Stop Agent                    |
+| `sudo ~/.datadog-agent/bin/agent info`          | `sudo ./bin/agent/agent  info`          | Status page of running Agent  |
+| `sudo ~/.datadog-agent/bin/agent flare`         | `sudo ./bin/agent/agent  flare`         | Send flare                    |
+| `sudo ~/.datadog-agent/bin/agent help`          | `sudo ./bin/agent/agent  help`          | Display command usage         |
 
 ## Configuration
 
 The configuration files and folders for the Agent are located at:
 
-| Agent v5                                  |  Agent v6                          |
-|:-----|:----|
-|`/etc/dd-agent/datadog.conf`| `/etc/datadog-agent/datadog.yaml` |
+| Agent v5                     | Agent v6                          |
+| :-----                       | :----                             |
+| `/etc/dd-agent/datadog.conf` | `/etc/datadog-agent/datadog.yaml` |
 
 Configuration files for [integrations][2]:
 
-| Agent v5                                  |  Agent v6                          |
-|:-----|:----|
-|`/etc/dd-agent/conf.d/`|`/etc/datadog-agent/conf.d/`|
+| Agent v5                | Agent v6                     |
+| :-----                  | :----                        |
+| `/etc/dd-agent/conf.d/` | `/etc/datadog-agent/conf.d/` |
 
 ## Troubleshooting
 

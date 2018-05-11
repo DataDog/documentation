@@ -494,7 +494,7 @@ or service checks.
 メトリクスやイベント、あるいはサービスチェックを送信する独自のCheckの作成方法については、[「Agent Checkの書き方」](/ja/guides/agent_checks/)を参照してください。
 
 <!--
-1. Select your **custom check**.
+1. Select your **custom Agent check**.
 
 2. Select **host or tags** that you would like to monitor. The check will run
    for every unique set of tags from all monitored hosts. For example, the

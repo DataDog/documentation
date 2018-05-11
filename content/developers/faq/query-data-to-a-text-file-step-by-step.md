@@ -5,7 +5,7 @@ kind: faq
 
 This article explains how to set up the environment to make the most of the API. At the end you should be able to understand how to pull or push events, metrics and monitors from [our public API's][1] to a local file.
 
-In addition of the explanations here, the file attached is commented so you have redundant pieces of information that may help to understand better.
+In addition to the explanations here, the file attached is commented so you have redundant pieces of information that may help to understand better.
 
 Prerequisite: Python and PIP installed on your localhost, if you're on Windows [get it on the python dedicated documentation page][2]:
 

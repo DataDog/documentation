@@ -17,7 +17,7 @@ Votre stack d'applications regorge de métadonnées inutilisées qui tentent de 
 
 Des exceptions qui apparaissent,  les requêtes de base de données qui ralentissent; les cache miss sont en augmentation; les logs d'erreurs commencent à remplir vos fichiers. Chacun de ces bavardages fait partie de l'histoire, mais ils sont difficiles à comprendre lorsqu'ils sont pris séparément des autres.
 
-Datadog collecte tous ces métriques, événements et états de services en un seul endroit sans que vous ayez à gérer vous-même l'infrastructure de stockage ou de surveillance. Vous pouvez alors vous concentrer pleinement sur la visualisation et la corrélation des données collectées avec de superbes graphiques, tout en  définissant des conditions de monitoring flexibles.
+Datadog collecte toutes ces métriques, événements et check de services en un seul endroit sans que vous ayez à gérer vous-même l'infrastructure de stockage ou de surveillance. Vous pouvez alors vous concentrer pleinement sur la visualisation et la corrélation des données collectées via des graphiques, tout en  définissant vos conditions de monitoring.
 
 ## Collecter tout
 

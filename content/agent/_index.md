@@ -113,26 +113,26 @@ To keep backwards compatibility, the Agent will still pick up configuration file
 
 The new command line interface for the Agent is sub-command based:
 
-| Command         | Notes
+| Command         | Notes                                                                      |
 | --------------- | -------------------------------------------------------------------------- |
-| check           | Run the specified check |
-| configcheck     | Print all configurations loaded & resolved of a running Agent |
-| diagnose        | Execute some connectivity diagnosis on your system |
-| flare           | Collect a flare and send it to Datadog |
-| health          | Print the current Agent health |
-| help            | Help about any command |
-| hostname        | Print the hostname used by the Agent |
+| check           | Run the specified check                                                    |
+| configcheck     | Print all configurations loaded & resolved of a running Agent              |
+| diagnose        | Execute some connectivity diagnosis on your system                         |
+| flare           | Collect a flare and send it to Datadog                                     |
+| health          | Print the current Agent health                                             |
+| help            | Help about any command                                                     |
+| hostname        | Print the hostname used by the Agent                                       |
 | import          | Import and convert configuration files from previous versions of the Agent |
-| installservice  | Installs the Agent within the service control manager |
-| launch-gui      | Starts the Datadog Agent GUI |
-| regimport       | Import the registry settings into datadog.yaml |
-| remove-service  | Removes the Agent from the service control manager |
-| restart-service | Restarts the Agent within the service control manager |
-| start           | Start the Agent |
-| start-service   | Starts the Agent within the service control manager |
-| status          | Print the current status |
-| stopservice     | Stops the Agent within the service control manager |
-| version         | Print the version info |
+| installservice  | Installs the Agent within the service control manager                      |
+| launch-gui      | Starts the Datadog Agent GUI                                               |
+| regimport       | Import the registry settings into datadog.yaml                             |
+| remove-service  | Removes the Agent from the service control manager                         |
+| restart-service | Restarts the Agent within the service control manager                      |
+| start           | Start the Agent                                                            |
+| start-service   | Starts the Agent within the service control manager                        |
+| status          | Print the current status                                                   |
+| stopservice     | Stops the Agent within the service control manager                         |
+| version         | Print the version info                                                     |
 
 To run a sub-command, the Agent binary must be invoked like this:
 ```
@@ -168,30 +168,30 @@ permissions: if you are able to open `datadog.yaml`, you are able to use the GUI
 
 ## Supported OSs versions
 ### Agent v6
-|OS| Supported versions|
-|:----|:----|
-|[Debian x86_64][7] | Debian 7 (wheezy) and above (we do not support SysVinit)|
-|[Ubuntu x86_64][8] | Ubuntu 14.04 and above|
-|[RedHat/CentOS x86_64][9]| RedHat/CentOS 6 and above |
-|[SUSE Enterprise Linux x86_64][10] | SUSE 11 SP4 and above (we do not support SysVinit)|
-|[Fedora x86_64][11] | Fedora 26 and above |
-|[MacOS][12]| OSX 10.10 and above|
-|[Windows server 64-bit][13]| Windows server 2008r2 or above|
-|[Windows 64-bit][13]| Windows 7 or above|
+| OS                                 | Supported versions                                       |
+| :----                              | :----                                                    |
+| [Debian x86_64][7]                 | Debian 7 (wheezy) and above (we do not support SysVinit) |
+| [Ubuntu x86_64][8]                 | Ubuntu 14.04 and above                                   |
+| [RedHat/CentOS x86_64][9]          | RedHat/CentOS 6 and above                                |
+| [SUSE Enterprise Linux x86_64][10] | SUSE 11 SP4 and above (we do not support SysVinit)       |
+| [Fedora x86_64][11]                | Fedora 26 and above                                      |
+| [MacOS][12]                        | OSX 10.10 and above                                      |
+| [Windows server 64-bit][13]        | Windows server 2008r2 or above                           |
+| [Windows 64-bit][13]               | Windows 7 or above                                       |
 
 **Note**: Source install may work on operating systems not listed here and is supported on a best effort basis.
 ### Agent v5
 
-|OS| Supported versions|
-|:----|:----|
-|[Debian x86_64][7] | Debian 7 (wheezy) and above |
-|[Ubuntu x86_64][8] | Ubuntu 12.04 and above|
-|[RedHat/CentOS x86_64][9]| RedHat/CentOS 6 and above |
-|[SUSE Enterprise Linux x86_64][10] | SUSE 11 SP4 and above|
-|[Fedora x86_64][11]| Fedora 26 and above |
-|[MacOS][12]| OSX 10.10 and above|
-|[Windows server 64-bit][13]| Windows server 2008r2 or above|
-|[Windows 64-bit][13]| Windows 7 or above|
+| OS                                 | Supported versions             |
+| :----                              | :----                          |
+| [Debian x86_64][7]                 | Debian 7 (wheezy) and above    |
+| [Ubuntu x86_64][8]                 | Ubuntu 12.04 and above         |
+| [RedHat/CentOS x86_64][9]          | RedHat/CentOS 5 and above      |
+| [SUSE Enterprise Linux x86_64][10] | SUSE 11 SP4 and above          |
+| [Fedora x86_64][11]                | Fedora 26 and above            |
+| [MacOS][12]                        | OSX 10.10 and above            |
+| [Windows server 64-bit][13]        | Windows server 2008r2 or above |
+| [Windows 64-bit][13]               | Windows 7 or above             |
 
 **Note**: Source install may work on operating systems not listed here and is
 

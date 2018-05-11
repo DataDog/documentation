@@ -13,7 +13,7 @@ Available endpoints can be found on [our dedicated API documentation page][1].
 In addition, [many libraries][2] are available to directly interact with the API.
 
 ## Submitting custom metrics
-While you can submit metrics directly through [our API][1], you can also submit metrics via the Datadog Agent using [DogStatsD][3] and custom checks.
+While you can submit metrics directly through [our API][1], you can also submit metrics via the Datadog Agent using [DogStatsD][3] and custom Agent checks.
 
 The Datadog Agent includes DogStatsD, a powerful statsd daemon with additional features, that provides better control over your metric metadata and aggregation.
 [Multiple libraries][4] are available to easily send metrics from your application to Datadog using [DogStatsD][3].

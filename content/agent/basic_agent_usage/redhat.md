@@ -20,18 +20,16 @@ further_reading:
 
 Datadog Agent has some commands and only the _lifecycle commands_ (i.e. `start`/`stop`/`restart`/`status` on the Agent service) should be run with `sudo service`/`sudo systemctl`, all other commands need to be run with the `datadog-agent` command.
 
-{{% table responsive="true" %}}
-| Agent v5                                  |  Agent v6                          | Notes
-| ----------------------------------------------- | --------------------------------------- | ----------------------------- |
-| `sudo service datadog-agent start`              | `sudo service datadog-agent start`      | Start Agent as a service |
-| `sudo service datadog-agent stop`               | `sudo service datadog-agent stop`       | Stop Agent running as a service |
-| `sudo service datadog-agent restart`            | `sudo service datadog-agent restart`    | Restart Agent running as a service |
-| `sudo service datadog-agent status`             | `sudo service datadog-agent status`     | Status of Agent service |
-| `sudo service datadog-agent info`               | `sudo datadog-agent status`             | Status page of running Agent |
-| `sudo service datadog-agent flare`              | `sudo datadog-agent flare`              | Send flare |
-| `sudo service datadog-agent`                    | `sudo datadog-agent --help`             | Display command usage |
-| `sudo -u dd-agent -- dd-agent check <check_name>` | `sudo -u dd-agent -- datadog-agent check <check_name>` | Run a check |
-{{% /table %}}
+| Agent v5                                          | Agent v6                                               | Notes                              |
+| -----------------------------------------------   | ---------------------------------------                | -----------------------------      |
+| `sudo service datadog-agent start`                | `sudo service datadog-agent start`                     | Start Agent as a service           |
+| `sudo service datadog-agent stop`                 | `sudo service datadog-agent stop`                      | Stop Agent running as a service    |
+| `sudo service datadog-agent restart`              | `sudo service datadog-agent restart`                   | Restart Agent running as a service |
+| `sudo service datadog-agent status`               | `sudo service datadog-agent status`                    | Status of Agent service            |
+| `sudo service datadog-agent info`                 | `sudo datadog-agent status`                            | Status page of running Agent       |
+| `sudo service datadog-agent flare`                | `sudo datadog-agent flare`                             | Send flare                         |
+| `sudo service datadog-agent`                      | `sudo datadog-agent --help`                            | Display command usage              |
+| `sudo -u dd-agent -- dd-agent check <check_name>` | `sudo -u dd-agent -- datadog-agent check <check_name>` | Run a check                        |
 
 More information about the metrics, events, and service checks for an [integrations][1] can be retrieved with the check command:
 ```shell
@@ -54,15 +52,15 @@ sudo service datadog-agent check [integration] check_rate
 
 The configuration files and folders for the Agent are located at:
 
-| Agent v5                                  |  Agent v6                          |
-|:-----|:----|
-|`/etc/dd-agent/datadog.conf`| `/etc/datadog-agent/datadog.yaml` |
+| Agent v5                     | Agent v6                          |
+| :-----                       | :----                             |
+| `/etc/dd-agent/datadog.conf` | `/etc/datadog-agent/datadog.yaml` |
 
 Configuration files for [integrations][1]:
 
-| Agent v5                                  |  Agent v6                          |
-|:-----|:----|
-|`/etc/dd-agent/conf.d/`|`/etc/datadog-agent/conf.d/`|
+| Agent v5                | Agent v6                     |
+| :-----                  | :----                        |
+| `/etc/dd-agent/conf.d/` | `/etc/datadog-agent/conf.d/` |
 
 ## Troubleshooting
 
@@ -92,8 +90,7 @@ The Agent 6.x installer can automatically convert your 5.x style Agent configura
  DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
 ```
 
-**Note:** the import process won't automatically move custom checks, this is by
-design since we cannot guarantee full backwards compatibility out of the box.
+**Note:** the import process won't automatically move custom Agent checks, this is by design since we cannot guarantee full backwards compatibility out of the box.
 
 ##### To Install Fresh
 
@@ -162,8 +159,8 @@ To install on a clean box (or have an existing Agent 5 install from which you do
 
     Note: please beware that if you have made any changes to your configurations to support new Agent v6-only options, these will not work anymore with Agent v5.
 
-4. Back-sync custom checks (optional)
-    If you made any changes or added any new custom checks while testing Agent 6 you might want to enable them back on Agent 5. Note: you only need to copy back checks you changed.
+4. Back-sync custom Agent checks (optional)
+    If you made any changes or added any new custom Agent checks while testing Agent 6 you might want to enable them back on Agent 5. Note: you only need to copy back checks you changed.
     
     ```shell
     sudo -u dd-agent -- cp /etc/datadog-agent/checks.d/<check>.py /etc/dd-agent/checks.d/

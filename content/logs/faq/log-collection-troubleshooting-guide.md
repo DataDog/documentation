@@ -2,13 +2,10 @@
 title: Log Collection Troubleshooting Guide
 kind: faq
 further_reading:
-- link: "logs/"
+- link: "/logs/log_collection"
   tag: "Documentation"
   text: Learn how to collect your logs
-- link: "logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers"
-  tag: "FAQ"
-  text: How to Send Logs to Datadog via External Log Shippers?
-- link: "logs/explore"
+- link: "/logs/explore"
   tag: "Documentation"
   text: Learn how to explore your logs
 ---

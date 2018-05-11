@@ -13,7 +13,6 @@ $ddpurple:    #774DA2;
     width: 100%;
   }
 
-
   .grayscale {
     //-webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
     //filter: grayscale(100%);
@@ -81,6 +80,16 @@ $ddpurple:    #774DA2;
     }
 }
 
+.integration-search {
+  width: 100%;
+  margin-right: 19px;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: .25rem;
+}
+
+.integration-search:focus {
+  border-color: $ddpurple;
+}
 
 .dropdown-menu {
   border:1px solid $ddpurple;

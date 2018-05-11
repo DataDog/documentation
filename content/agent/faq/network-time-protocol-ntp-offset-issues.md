@@ -38,7 +38,6 @@ Instructions for syncing the system clock with NTP vary based on the operating s
 ## Prevent and check NTP issues
 
 To prevent NTP issues, you can leverage our monitor for NTP offset to alert you when there is drift on a host.
-{{< img src="agent/faq/monitor_ntp.png" alt="monitor ntp" responsive="true" popup="true">}}
 
 Also, you can check over all the reporting hosts, the one that have offset issues.
 

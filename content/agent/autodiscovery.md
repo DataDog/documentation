@@ -73,7 +73,7 @@ The Agent looks for Autodiscovery templates in the `/etc/datadog-agent/conf.d` d
 
 Since 6.2.0 (and 5.24.0), the default templates use the default port for the monitored software, instead of auto-detecting it. If you need to use a different port, provide a custom Autodiscovery template either in [Docker container labels](#template-source-docker-label-annotations) or [Kubernetes pod annotations](#template-source-kubernetes-pod-annotations).
 
-These templates may suit you in basic cases, but if you need to use custom check configurations—say you want to enable extra check options, use different container identifiers, or use template variable indexing— you'll have to write your own auto-conf files. You can then provide those in a few ways:
+These templates may suit you in basic cases, but if you need to use custom Agent check configurations—say you want to enable extra check options, use different container identifiers, or use template variable indexing— you'll have to write your own auto-conf files. You can then provide those in a few ways:
 
 1. Add them to each host that runs docker-datadog-agent and [mount the directory that contains them][15] into the datadog-agent container when starting it
 2. On Kubernetes, add them [using ConfigMaps][16]

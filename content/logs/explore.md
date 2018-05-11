@@ -14,7 +14,7 @@ further_reading:
   text: Learn more about parsing
 ---
 
-## Overview 
+## Overview
 
 The Logs explorer is your home base for troubleshooting and exploration:
 
@@ -23,7 +23,7 @@ The Logs explorer is your home base for troubleshooting and exploration:
 In this view you can:
 
 * [Interact with the Time range](#time-range)
-* [Display lists of logs](#log-list)
+* [Display lists of logs](#logstream)
 * [Use facets to filter your Logstream](#facets)
 * [Enter search queries](#search-bar)
 
@@ -73,13 +73,13 @@ When enabled, your logstream display changes to better focus on your logs `messa
 * Without multi-line:
 {{< img src="logs/explore/before_multi_line.png" alt="Before Multi-line display" responsive="true" popup="true">}}
 
-* With multi-line enabled: 
+* With multi-line enabled:
 {{< img src="logs/explore/multi_line_log.png" alt="Log with Multi-line display" responsive="true" popup="true">}}
 
 **Note**:  If present, `error.stack` attribute is displayed in priority as it should be used for stack traces.
 Remap any stack-trace attribute to this specific attribute with [the attribute remapper processor][1].
 
-## Facets 
+## Facets
 
 A facet displays all the distinct members of an attribute or a tag as well as provides some basic analytics such as the amount of logs represented. This is also a switch to easily filter your data.
 
@@ -147,10 +147,10 @@ To combine multiple terms into a complex query, you can use any of the following
 | `-` | **Exclusion**: the following term is NOT in the event |authentication AND -password|
 {{% /table %}}
 
-### Facet search 
+### Facet search
 To search on a specific [facet](#facets) you need to [add it as a facet first](#create-a-facet) then add `@` to specify you are searching on a facet.
 
-For instance, if your facet name is **url** and you want to filter on the **url** value *www.datadoghq.com* just enter: 
+For instance, if your facet name is **url** and you want to filter on the **url** value *www.datadoghq.com* just enter:
 
 `@url:www.datadoghq.com`
 
@@ -162,7 +162,7 @@ To perform a multi-character wildcard search, use the `*` symbol as follows:
 * `*hello` matches all log messages that end with hello
 
 ### Numerical values
-Use `<`,`>`, `<=` or `>=` to perform a search on numerical attributes. For instance, retrieve all logs that have a response time over 100ms with:
+Use `<`,`>`, `<=`, or `>=` to perform a search on numerical attributes. For instance, retrieve all logs that have a response time over 100ms with:
 
 `@http.response_time:>100`
 
@@ -175,7 +175,7 @@ It is also possible to search for numerical attribute within a specific range. F
 Your logs inherit tags from [hosts][4] and [integrations][5] that generate them. They can be used in the search and as facets as well:
 
 * `test` is searching for the string "test".
-* `("env:prod" OR test)` matches all logs with the tag #env:prod or the tag #test 
+* `("env:prod" OR test)` matches all logs with the tag #env:prod or the tag #test
 * `(service:srvA OR service:srvB)` or `(service:(srvA OR srvB))` Matches all logs that contain tags #service:srvA or #service:srvB.
 * `("env:prod" AND -”version:beta”)` matches all logs that contain #env:prod and that do not contain #version:beta
 
@@ -195,7 +195,7 @@ To delete a saved search, click on the bin icon under the log search drop-down:
 {{< img src="logs/explore/delete_saved_search.png" alt="Delete Saved Search" responsive="true" popup="true" style="width:80%;">}}
 
 ### Escaping of special characters
-The following attributes are considered as special: `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/`, `\` and require escaping.
+The following attributes are considered as special: `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/`, and `\` require escaping.
 For instance, to search logs that contain `user=12345` the following search must be entered:
 
 `user\=12345`

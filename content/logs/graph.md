@@ -77,7 +77,13 @@ Export your Log Graph:
 * To create a new [log monitor][4]:  
     The query of your Log Graph is used to create the log monitor query.
 * To an existing [Timeboard][5]:  
-    This functionality is not released yet–stay tuned!
+    This functionality is in beta, [contact our support team][6] to activate it for your organization.
+
+## Dashboard 
+
+**This functionality is still in beta, [contact our support team][6] to activate it for your organization.**
+
+Use the [Timeseries widget][7] to display log graph directly in your [Dashboards][8].
 
 ## Further Reading
 
@@ -88,3 +94,6 @@ Export your Log Graph:
 [3]: /getting_started/tagging
 [4]: /monitors/monitor_types/log
 [5]: /graphing/dashboards/timeboard
+[6]: /help
+[7]: /graphing/dashboards/widgets/#timeseries
+[8]: /graphing/dashboards

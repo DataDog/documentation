@@ -23,7 +23,6 @@ The easiest method for assigning tags is to rely on the integration. Tags assign
 
 The following [integrations][1] sources create tags automatically in Datadog:
 
-{{% table responsive="true" %}}
 |                                                                       ||
 | :-------------------------------------                                | :------------------------------------------------------------------------------|
 | [Amazon CloudFront][2]                  | Distribution|
@@ -80,7 +79,6 @@ The following [integrations][1] sources create tags automatically in Datadog:
 | [VSphere][56]                                       | Host, Datacenter, Server, Instance|
 | [Win32 Events][57]                                     | Event ID|
 | [Windows Services][58]                         | Service Name|
-{{% /table %}}
 
 ### Assigning tags using the configuration files
 [The Datadog integrations][1] are all configured via the yaml configuration files located in the **conf.d** directory in your Agent install. For more about where to look for your configuration files, refer [to this article][59].

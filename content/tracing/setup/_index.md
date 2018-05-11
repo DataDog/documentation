@@ -10,6 +10,9 @@ further_reading:
 - link: "tracing/setup/docker"
   tag: "Documentation"
   text: Docker setup
+- link: "tracing/setup/kubernetes"
+  tag: "Documentation"
+  text: Kubernetes setup
 - link: "tracing/setup/go"
   tag: "Documentation"
   text: Go language instrumentation

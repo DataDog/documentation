@@ -14,6 +14,8 @@ further_reading:
 - link: "logs/parsing"
   tag: "Documentation"
   text: Learn more about parsing
+aliases:
+  - /logs/docker
 ---
 
 ## Overview

@@ -5,8 +5,8 @@ further_reading:
 - link: "logs/"
   tag: "Documentation"
   text: Learn how to collect your logs
-- link: "logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers"
-  tag: "FAQ"
+- link: "/logs/log_collection"
+  tag: "Documentation"
   text: How to Send Logs to Datadog via External Log Shippers?
 - link: "logs/explore"
   tag: "Documentation"
