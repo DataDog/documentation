@@ -21,7 +21,7 @@ Process monitors are configured to check the status of individual or groups of p
 
 ## Live Process Monitors
 
-{{< img src="monitors/monitor_types/process/live_process_monitor_select.png" alt="live process monitor"  style="float: left;" style="width:80%;">}}
+{{< img src="monitors/monitor_types/process/live_process_monitor_select.png" alt="live process monitor"  style="float:left;" style="width:45%;">}}
 
 Live Process Monitors are based on data collected by the [Process Agent](https://docs.datadoghq.com/graphing/infrastructure/process/) which will allow you to centrally create monitors that warn or alert based on the behavior of any group of processes across any hosts or tags.
 
