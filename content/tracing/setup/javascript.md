@@ -20,9 +20,11 @@ further_reading:
 JavaScript APM is currently in <strong>beta</strong>.
 </div>
 
-## Getting started
+## Getting Started
 
 For descriptions of terminology used in APM, take a look at the [official documentation][visualization docs].
+
+For details about configuration and using the API, check out our [API documentation](https://datadog.github.io/dd-trace-js/).
 
 For details about contributing, check out the [development guide][development docs].
 
@@ -49,67 +51,17 @@ Finally, import and initialize the tracer:
 const tracer = require('dd-trace').init()
 ```
 
-**NOTE: The tracer must be initialized before importing any other module.**
+See the [tracer settings](https://datadog.github.io/dd-trace-js/#tracer-settings) for the list of initialization options.
 
-### Configuration Options
-
-Options can be configured as a parameter to the `init()` method or as environment variables.
-
-| Config        | Environment Variable         | Default   | Description |
-| ------------- | ---------------------------- | --------- | ----------- |
-| debug         | DD_TRACE_DEBUG               | false     | Enable debug logging in the tracer. |
-| service       | DD_SERVICE_NAME              |           | The service name to be used for this program. |
-| hostname      | DD_TRACE_AGENT_HOSTNAME      | localhost | The address of the trace agent that the tracer will submit to. |
-| port          | DD_TRACE_AGENT_PORT          | 8126      | The port of the trace agent that the tracer will submit to. |
-| env           | DD_ENV                       |           | Set an application’s environment e.g. `prod`, `pre-prod`, `stage`. |
-| tags          |                              | {}        | Set global tags that should be applied to all spans. |
-| flushInterval |                              | 2000      | Interval in milliseconds at which the tracer will submit traces to the agent. |
-| experimental  |                              | {}        | Experimental features can be enabled all at once using boolean `true` or individually using key/value pairs. Available experimental features: `asyncHooks`. |
-| plugins       |                              | true      | Whether or not to enable automatic instrumentation of external libraries using the built-in plugins. |
+**NOTE: The tracer must be initialized before importing any instrumented module.**
 
 ## Manual Instrumentation
 
 If you aren’t using supported library instrumentation (see [Compatibility](#compatibility)), you may want to manually instrument your code.
 
-This can be done using either the [Trace API](#trace-api) or [OpenTracing](#opentracing).
+This can be done using either the [Trace API](https://datadog.github.io/dd-trace-js/#trace-api) or the [OpenTracing API](https://datadog.github.io/dd-trace-js/#opentracing-api).
 
-### Trace API
-
-The following example initializes a Datadog Tracer and creates a Span called `web.request`:
-
-```js
-const tracer = require('dd-trace').init()
-
-tracer
-  .trace('web.request', {
-    service: 'my_service'
-  })
-  .then(span => {
-    span.setTag('my_tag', 'my_value')
-    span.finish()
-  })
-```
-
-For more details about manual instrumentation using the Trace API, check out the [API documentation](https://datadog.github.io/dd-trace-js).
-
-### OpenTracing
-
-This library is OpenTracing compliant. Use the [OpenTracing API](https://doc.esdoc.org/github.com/opentracing/opentracing-javascript/) and the Datadog Tracer (dd-trace) library to measure execution times for specific pieces of code. In the following example, a Datadog Tracer is initialized and used as a global tracer:
-
-```js
-const tracer = require('dd-trace').init()
-const opentracing = require('opentracing')
-
-opentracing.initGlobalTracer(tracer)
-```
-
-**NOTE: The tracer returned by `opentracing.globalTracer()` only
-contains OpenTracing specific methods.**
-
-**NOTE: When using OpenTracing, context propagation is not handled
-automatically.**
-
-## Distributed tracing
+## Distributed Tracing
 
 Distributed tracing allows you to propagate a single trace across multiple services, so you can see performance end-to-end.
 
@@ -117,23 +69,9 @@ Distributed tracing is enabled by default for all supported integrations.
 
 ## Integrations
 
-APM provides out-of-the-box instrumentation for many popular frameworks and libraries by using a plugin system. By default all built-in plugins are enabled. This behavior can be changed by setting the `plugins` option to `false` in the [configuration options](#configuration-options).
+APM provides out-of-the-box instrumentation for many popular frameworks and libraries by using a plugin system.
 
-Built-in plugins can be enabled by name and configured individually:
-
-```js
-const tracer = require('dd-trace').init({ plugins: false })
-
-// enable express integration
-tracer.use('express')
-
-// enable and configure postgresql integration
-tracer.use('pg', {
-  service: 'pg-cluster'
-})
-```
-
-See [compatibility](#compatibility) for the list of supported integrations.
+For details about how to how to toggle and configure plugins, check out the [API documentation](https://datadog.github.io/dd-trace-js/#integrations).
 
 ### Compatibility
 
@@ -172,6 +110,6 @@ ___
 | [pg](https://node-postgres.com/)                                   | 6.x      | Experimental |
 | [redis](https://github.com/NodeRedis/node_redis)                   | >=2.6    | Experimental |
 
-## Further reading
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
