@@ -51,9 +51,9 @@ Classic:
       dogstatsd: true
       authors: Datadog
     - name: godspeed
-      link: https://github.com/PagerDuty/godspeed
+      link: https://github.com/theckman/godspeed
       dogstatsd: true
-      authors: PagerDuty
+      authors: Tim Heckman
     - name: xstats
       link: https://github.com/rs/xstats
       dogstatsd: true
