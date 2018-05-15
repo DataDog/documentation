@@ -126,7 +126,7 @@ In the `datadog.yaml` file, set the `sd_config_backend`, `sd_backend_host`, and 
 
 #   - name: consul
 #     polling: true
-#     template_dir: /datadog/check_configs
+#     template_dir: datadog/check_configs
 #     template_url: http://127.0.0.1
 #     ca_file:
 #     ca_path:
