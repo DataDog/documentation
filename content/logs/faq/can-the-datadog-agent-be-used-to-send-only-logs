@@ -1,0 +1,40 @@
+---
+title: Can the Datadog Agent be used to send only logs?
+kind: faq
+further_reading:
+- link: "logs/log_collection/#custom-log-collection"
+  tag: "Documentation"
+  text: Learn more about Log collection with the Agent
+- link: "logs/processing"
+  tag: "Documentation"
+  text: Learn how to process your logs
+- link: "logs/parsing"
+  tag: "Documentation"
+  text: Learn more about parsing
+---
+
+**Note**: it is not recommended to use the agent for log collection only. 
+Using metric collection ensure that your logs, metrics and traces from the same host share the same hostname and therefore the same tags.
+
+However if there is no official flag to disable metric collection for the agent, it is still possible to configure it to only collect logs.
+
+The Agent send metrics to a specific url that is specified in the `datadog.yaml` file.
+
+1. Open `datadog.yaml` (see this [page](https://docs.datadoghq.com/agent/basic_agent_usage/#configuration-file) to locate this configuration file on your instance)
+2. Edit the `dd_url` attribute to any custom value
+
+For example:
+
+```yaml
+dd_url: https://datadog-nometric.com/
+```
+
+3. Configure the agent to collect logs as explained here: https://docs.datadoghq.com/logs/log_collection/
+4. Restart the agent
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /logs/processing/
+[2]: /logs/parsing/
+[3]: /logs/faq/log-parsing-best-practice
+[4]: /help
