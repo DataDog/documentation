@@ -263,7 +263,10 @@ class PreBuild:
                         else:
                             content = re.sub(self.regex_h1_replace, r'##\2', content, count=0)
                         target_file.write(content)
-                    remove(input_file)
+                    try:
+                        remove(input_file)
+                    except:
+                        print('the file {} was not found and could not be removed during merge action'.format(input_file))
                 elif action == 'truncate':
                     if exists(output_file):
                         with open(output_file, 'r+') as target_file:
@@ -275,7 +278,10 @@ class PreBuild:
                     else:
                         open(output_file, 'w').close()
                 elif action == 'discard':
-                    remove(input_file)
+                    try:
+                        remove(input_file)
+                    except:
+                        print('the file {} was not found and could not be removed during discard action'.format(input_file))
                 elif action == 'create':
                     with open(output_file, 'w+') as f:
                         fm = yaml.dump(action_obj.get('fm'), default_flow_style=False).rstrip()
