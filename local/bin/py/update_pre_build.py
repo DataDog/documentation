@@ -145,7 +145,7 @@ class PreBuild:
             'activemq_xml': {'action': 'merge', 'target': 'activemq', 'remove_header': False},
             'cassandra_nodetool': {'action': 'merge', 'target': 'cassandra', 'remove_header': False},
             'datadog_checks_base': {'action': 'discard', 'target': 'none', 'remove_header': False},
-            'datadog-checks-tests-helper': {'action': 'discard', 'target': 'none', 'remove_header': False},
+            'datadog_checks_tests_helper': {'action': 'discard', 'target': 'none', 'remove_header': False},
             'gitlab_runner': {'action': 'merge', 'target': 'gitlab', 'remove_header': False},
             'hdfs_datanode': {'action': 'merge', 'target': 'hdfs', 'remove_header': False},
             'hdfs_namenode': {'action': 'merge', 'target': 'hdfs', 'remove_header': False},
@@ -263,7 +263,10 @@ class PreBuild:
                         else:
                             content = re.sub(self.regex_h1_replace, r'##\2', content, count=0)
                         target_file.write(content)
-                    remove(input_file)
+                    try:
+                        remove(input_file)
+                    except OSError:
+                        print('the file {} was not found and could not be removed during merge action'.format(input_file))
                 elif action == 'truncate':
                     if exists(output_file):
                         with open(output_file, 'r+') as target_file:
@@ -275,7 +278,10 @@ class PreBuild:
                     else:
                         open(output_file, 'w').close()
                 elif action == 'discard':
-                    remove(input_file)
+                    try:
+                        remove(input_file)
+                    except OSError:
+                        print('the file {} was not found and could not be removed during discard action'.format(input_file))
                 elif action == 'create':
                     with open(output_file, 'w+') as f:
                         fm = yaml.dump(action_obj.get('fm'), default_flow_style=False).rstrip()
