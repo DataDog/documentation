@@ -145,6 +145,7 @@ class PreBuild:
             'activemq_xml': {'action': 'merge', 'target': 'activemq', 'remove_header': False},
             'cassandra_nodetool': {'action': 'merge', 'target': 'cassandra', 'remove_header': False},
             'datadog_checks_base': {'action': 'discard', 'target': 'none', 'remove_header': False},
+            'datadog_checks_tests_helper': {'action': 'discard', 'target': 'none', 'remove_header': False},
             'gitlab_runner': {'action': 'merge', 'target': 'gitlab', 'remove_header': False},
             'hdfs_datanode': {'action': 'merge', 'target': 'hdfs', 'remove_header': False},
             'hdfs_namenode': {'action': 'merge', 'target': 'hdfs', 'remove_header': False},
