@@ -190,7 +190,7 @@ For more information, see the [kubernetes_state.yaml.example file][14]. If you h
 
 #### Host Installation
 
-Install the `dd-check-kubernetes_state` package manually or with your favorite configuration manager (On CentOS/AWS, [Find your rpm package here](https://yum.datadoghq.com/rpm/x86_64/), and information on installation on [this page][15].
+Install the `dd-check-kubernetes_state` package manually or with your favorite configuration manager (On CentOS/AWS, [Find your rpm package here][18], and information on installation on [this page][15].
 Then edit the `kubernetes_state.yaml` file to point to your server and port and set the masters to monitor. See the [example kubernetes_state.yaml][14] for all available configuration options.
 
 ### Validation
@@ -274,3 +274,4 @@ metadata:
 [15]: /agent/faq/how-do-i-install-the-agent-on-a-server-with-limited-internet-connectivity
 [16]: https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information
 [17]: https://github.com/DataDog/integrations-core/blob/master/kube_dns/conf.yaml.example
+[18]: https://yum.datadoghq.com/stable/6/x86_64/
