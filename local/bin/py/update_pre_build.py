@@ -265,7 +265,7 @@ class PreBuild:
                         target_file.write(content)
                     try:
                         remove(input_file)
-                    except:
+                    except OSError:
                         print('the file {} was not found and could not be removed during merge action'.format(input_file))
                 elif action == 'truncate':
                     if exists(output_file):
@@ -280,7 +280,7 @@ class PreBuild:
                 elif action == 'discard':
                     try:
                         remove(input_file)
-                    except:
+                    except OSError:
                         print('the file {} was not found and could not be removed during discard action'.format(input_file))
                 elif action == 'create':
                     with open(output_file, 'w+') as f:
