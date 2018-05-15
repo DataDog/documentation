@@ -59,7 +59,22 @@ See the [tracer settings](https://datadog.github.io/dd-trace-js/#tracer-settings
 
 If you aren’t using supported library instrumentation (see [Compatibility](#compatibility)), you may want to manually instrument your code.
 
-This can be done using either the [Trace API](https://datadog.github.io/dd-trace-js/#trace-api) or the [OpenTracing API](https://datadog.github.io/dd-trace-js/#opentracing-api).
+The following example initializes a Datadog Tracer and creates a Span called `web.request`:
+
+```javascript
+const tracer = require('dd-trace').init()
+
+tracer
+  .trace('web.request', {
+    service: 'my_service'
+  })
+  .then(span => {
+    span.setTag('my_tag', 'my_value')
+    span.finish()
+  })
+```
+
+For more information on manual instrumentation, check out the [API documentation](https://datadog.github.io/dd-trace-js/#manual-instrumentation).
 
 ## Distributed Tracing
 
