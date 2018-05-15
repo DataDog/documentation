@@ -24,14 +24,18 @@ Use the query to control what's displayed in your Log Graph:
     {{< img src="logs/graph/choose_measure_facet.png" alt="choose measure facet" responsive="true" popup="true" style="width:50%;">}}
 2. Select the aggregation function for the [Measure][1] you want to graph:
     
-    {{< img src="logs/graph/agg_function_log_graph.png" alt="aggregation function for Log Graph" responsive="true" popup="true" style="width:50%;">}}
+    https://cl.ly/1k2T0h1o002N
 3. Use [Tag][1] or [Facet][2] to split your graph.  
 
-    {{< img src="logs/graph/split_by_log_graph.png" alt="split by Log Graph" responsive="true" popup="true" style="width:50%;">}}
+    https://cl.ly/1t3l2X1S2y0g
 
 4. Choose to display either the *X* **top** or **bottom** values according to the selected [measure][1].
     
     {{< img src="logs/graph/top_bottom_button.png" alt="top bottom button" responsive="true" popup="true" style="width:20%;">}}
+    
+5. Choose the graph timesteps (the list of possible values is updated when you change the global timeframe):
+
+https://cl.ly/2W2l401l130q
 
 ## Visualizations 
 
