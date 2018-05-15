@@ -122,6 +122,7 @@ ___
 | [ioredis](https://github.com/luin/ioredis)                         |          | Coming Soon  |
 | [mongodb-core](http://mongodb.github.io/node-mongodb-native/core/) |          | Coming Soon  |
 | [mysql](https://github.com/mysqljs/mysql)                          | 2.x      | Experimental |
+| [mysql2](https://github.com/sidorares/node-mysql2)                 | ^1.5     | Experimental |
 | [pg](https://node-postgres.com/)                                   | 6.x      | Experimental |
 | [redis](https://github.com/NodeRedis/node_redis)                   | >=2.6    | Experimental |
 
