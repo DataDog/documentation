@@ -62,7 +62,7 @@ Since [Agent v6][4], Kubernetes DNS integration works automatically with the [Au
 
 The Datadog Agent can collect logs from containers starting at the version 6. Two installations are possible:
 
-- on the host where the agent is external to the Docker environment
+- on the node where the agent is external to the Docker environment
 - or by deploying its containerized version in the Docker environment
 
 If you are running Kubernetes >= 1.1.0. You can take advantage of DaemonSets to automatically deploy the Datadog Agent on all your nodes as shown [here][14].
