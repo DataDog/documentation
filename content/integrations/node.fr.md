@@ -36,9 +36,9 @@ Connecter vos applications Node.js à Datadog pour:
 
 L'intégration Node.js vous permet de surveiller toute métrique custom en instrumentant quelques lignes de code.
 Par exemple, vous pouvez avoir une métrique qui renvoie le nombre de pages vues ou temps mit par tout appel de fonction.
-L'instrumentation peut être implémentée en utilisant [hot-shots](https://github.com/brightcove/hot-shots),
+L'instrumentation peut être implémentée en utilisant [hot-shots][1],
 un client DogStatsD open source pour node.js.
-Pour plus d'informations sur l'intégration de Node.js, veuillez vous reporter à ce [guide sur la soumission des métriques](https://docs.datadoghq.com/developers/metrics/)
+Pour plus d'informations sur l'intégration de Node.js, veuillez vous reporter à ce [guide sur la soumission des métriques][2]
 
 1. Installez hot-shots avec npm:
 
@@ -71,7 +71,13 @@ L'intégration node n'inclut aucun événements pour le moment.
 L'intégration node n'inclut aucun check de service pour le moment.
 
 ## Troubleshooting
-Besoin d'aide? Contactez  [l'équipe support de Datadog](http://docs.datadoghq.com/help/).
+Besoin d'aide ? Contactez  [l'équipe support de Datadog][3].
 
 ## En apprendre plus
-Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog](https://www.datadoghq.com/blog/)
+Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][4].
+
+
+[1]: https://github.com/brightcove/hot-shots
+[2]: https://docs.datadoghq.com/developers/metrics/
+[3]: http://docs.datadoghq.com/help/
+[4]: https://www.datadoghq.com/blog/

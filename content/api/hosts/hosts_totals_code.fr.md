@@ -1,5 +1,5 @@
 ---
-title: Host totals
+title: Hôte total
 type: apicode
 order: 13.2
 external_redirect: /api/#host-totals

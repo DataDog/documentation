@@ -1,18 +1,22 @@
 ---
+categories:
+- languages
+ddtype: check
+doc_link: https://docs.datadoghq.com/integrations/dotnetclr/
 git_integration_title: dotnetclr
 guid: 3d21557e-65bd-4b66-99b9-5521f32b5957
-integration_title: ''
+has_logo: true
+integration_title: .NET CLR
+is_public: true
 kind: integration
 maintainer: help@datadoghq.com
-manifest_version: 0.1.0
-max_agent_version: 6.0.0
-min_agent_version: 5.22.2
+manifest_version: 1.0.0
 name: dotnetclr
+public_title: Intégration Datadog-.NET CLR 
 short_description: dotnetclr description.
-support: contrib
+support: core
 supported_os:
 - windows
-version: 1.0.0
 ---
 
 
@@ -26,25 +30,29 @@ Obtenir les métriques du service dotnetclr en temps réel pour:
 
 ## Installation
 
-Le check Dotnetclr est packagé avec l'agent, il vous faut donc simplement [installer l'agent](https://app.datadoghq.com/account/settings#agent).
+Le Check Dotnetclr est livré avec l'Agent, vous n'avez qu'à [installer l'Agent][1] sur vos serveurs.
 
 ## Configuration
 
-Edit the `dotnetclr.yaml` file to point to your server and port, set the masters to monitor:
+1. Modifiez le fichier `dotnetclr.d/conf.yaml` dans le dossier `conf.d/`, à la racine du répertoire de l'Agent pour commencer à collecter vos métriques dotnetclr.
+   Consultez le [fichier d'exemple dotnetclr.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
+
+2. [Restart the Agent][5]
 
 ## Validation
 
-[Lancez la commande `status`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `dotnetclr` dans la section Checks:
+[Exécutez le sous-commande `status` de l'Agent][2] et cherchez `dotnetclr` dans la section Checks.
 
-    Checks
-    ======
+## Troubleshooting
+Besoin d'aide ? Contactez  [l'équipe support de Datadog][3].
 
-        dotnetclr
-        -----------
-          - instance #0 [OK]
-          - Collected 39 metrics, 0 events & 7 service checks
+## En apprendre plus
+Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][4].
 
-## Compatibilité
 
-Le check dotnetclr est compatible avec toutes les principales plateformes.
+[1]: https://app.datadoghq.com/account/settings#agent
+[2]: https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information
+[3]: http://docs.datadoghq.com/help/
+[4]: https://www.datadoghq.com/blog/
+[5]: https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent
 

@@ -51,8 +51,7 @@ La bibliothèque ddtrace fonctionne avec plusieurs frameworks web, y inclus :
 
 ___
 
-{{% table responsive="true" %}}
-| Framework | Documentation du Framework  | Documentation PyPi Datadog                     |
+| Framework | Documentation des Framework        | Documentation PyPi de Datadog                    |
 |-----------|--------------------------------|-----------------------------------------------|
 | Bottle    | https://bottlepy.org/          | http://pypi.datadoghq.com/trace/docs/#bottle  |
 | Django    | https://www.djangoproject.com/ | http://pypi.datadoghq.com/trace/docs/#django  |
@@ -60,7 +59,6 @@ ___
 | Flask     | http://flask.pocoo.org/        | http://pypi.datadoghq.com/trace/docs/#flask   |
 | Pylons    | http://pylonsproject.org/      | http://pypi.datadoghq.com/trace/docs/#pylons  |
 | Pyramid   | https://trypyramid.com/        | http://pypi.datadoghq.com/trace/docs/#pyramid |
-{{% /table %}}
 
 ### Compatibilité des bilbliothèques
 
@@ -68,8 +66,7 @@ Il inclut également le support pour les bibliothèques et data stores suivants:
 
 ___
 
-{{% table responsive="true" %}}
-| Bibliothèque       | Documentation de la Bibliothèque   | Documentation PyPi Datadog                          |
+| Bibliothèque       | Documentation des bibliothèques                         | Documentation PyPi de Datadog                          |
 |---------------|-----------------------------------------------|-----------------------------------------------------|
 | Cassandra     | http://cassandra.apache.org/                  | http://pypi.datadoghq.com/trace/docs/#cassandra     |
 | Elasticsearch | https://www.elastic.co/products/elasticsearch | http://pypi.datadoghq.com/trace/docs/#elasticsearch |
@@ -81,7 +78,6 @@ ___
 | Redis         | https://redis.io/                             | http://pypi.datadoghq.com/trace/docs/#redis         |
 | SQLAlchemy    | http://www.sqlalchemy.org/                    | http://pypi.datadoghq.com/trace/docs/#sqlalchemy    |
 | SQLite        | https://www.sqlite.org/                       | http://pypi.datadoghq.com/trace/docs/#sqlite        |
-{{% /table %}}
 
 ## Exemple : la traçage simple
 

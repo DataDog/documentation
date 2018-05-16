@@ -38,53 +38,35 @@ Et plus encore.
 ## Implémentation
 ### Installation
 
-Le check YARN est packagé avec l'agent, il vous faut donc simplement [installer l'agent](https://app.datadoghq.com/account/settings#agent) sur vos Ressource Manager YARN.
-
+Le check YARN est fourni avec l'Agent; il vous suffit donc d'[installer l'Agent][1] sur vos YARN ResourceManager.
 
 ### Configuration
 
-Créez un fichier `yarn.yaml` dans le dossier ` conf.d` de l'Agent. Consultez l'exemple du [canevas yarn.yaml](https://github.com/DataDog/integrations-core/blob/master/yarn/conf.yaml.example) pour apprendre toutes les options de configuration disponibles:
+1. Modifiez le fichier `yarn.d/conf.yaml` dans le dossier `conf.d/`, à la racine du répertoire de l'Agent.
 
-```
-init_config:
+    ```yaml
+        init_config:
 
-instances:
-  - resourcemanager_uri: http://localhost:8088 # or whatever your resource manager listens
-    cluster_name: MyCluster # used to tag metrics, i.e. 'cluster_name:MyCluster'; default is 'default_cluster'
-    collect_app_metrics: true
-```
+        instances:
+          - resourcemanager_uri: http://localhost:8088 # or whatever your resource manager listens
+            cluster_name: MyCluster # used to tag metrics, i.e. 'cluster_name:MyCluster'; default is 'default_cluster'
+            collect_app_metrics: true
+    ```
 
-Consultez l'exemple du [canevas de configuration](https://github.com/DataDog/integrations-core/blob/master/yarn/conf.yaml.example) pour apprendre toutes les options de configuration disponibles:
+   Consultez l'exemple du [canevas de configuration][2] pour apprendre toutes les options de configuration disponibles:
 
-[Redémarrez l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent) pour commencer à envoyer vos métriques YARN à Datadog.
+2. [Redémarrez l'Agent][3] pour commencer à envoyer des métriques YARN à Datadog.
 
 ### Validation
 
-[Lancez la commande `status`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `yarn` dans la section Checks:
-
-```
-  Checks
-  ======
-    [...]
-
-    yarn
-    -------
-      - instance #0 [OK]
-      - Collected 26 metrics, 0 events & 1 service check
-
-    [...]
-```
-
-## Compatibilité
-
-Le check yarn est compatible avec toutes les principales plateformes.
+[Lancez la commande `status` de l'Agent][4] et cherchez `yarn` dans la section Checks.
 
 ## Données collectées
 ### Métriques
 {{< get-metrics-from-git "yarn" >}}
 
 
-### Evénements
+### Évènements
 Le check Yarn n'inclut aucun événement pour le moment.
 
 ### Checks de Service
@@ -93,12 +75,24 @@ Le check Yarn n'inclut aucun événement pour le moment.
 Renvoie CRITICAL si l'agent ne peut pas se connecter à l'URI ResourceManager pour collecter des métriques, sinon OK.
 
 ## Troubleshooting
-Besoin d'aide? Contactez  [l'équipe support de Datadog](http://docs.datadoghq.com/help/).
+Besoin d'aide ? Contactez  [l'équipe support de Datadog][6].
 
 ## En apprendre plus
 
-* [Vue d'ensemble de l'architecture Hadoop](https://www.datadoghq.com/blog/hadoop-architecture-overview/)
-* [Comment monitorer les métriques Hadoop](https://www.datadoghq.com/blog/monitor-hadoop-metrics/)
-* [Comment collecter les métriques de Hadoop](https://www.datadoghq.com/blog/collecting-hadoop-metrics/)
-* [Comment monitorer Hadoop avec Datadog](https://www.datadoghq.com/blog/monitor-hadoop-metrics-datadog/)
+* [Vue d'ensemble de l'architecture Hadoop][7]
+* [Comment monitorer les métriques Hadoop][8]
+* [Comment collecter les métriques de Hadoop][9]
+* [Comment monitorer Hadoop avec Datadog][10]
+
+
+[1]: https://app.datadoghq.com/account/settings#agent
+[2]: https://github.com/DataDog/integrations-core/blob/master/yarn/conf.yaml.example
+[3]: https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent
+[4]: https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information
+[5]: https://github.com/DataDog/integrations-core/blob/master/yarn/metadata.csv
+[6]: http://docs.datadoghq.com/help/
+[7]: https://www.datadoghq.com/blog/hadoop-architecture-overview/
+[8]: https://www.datadoghq.com/blog/monitor-hadoop-metrics/
+[9]: https://www.datadoghq.com/blog/collecting-hadoop-metrics/
+[10]: https://www.datadoghq.com/blog/monitor-hadoop-metrics-datadog/
 

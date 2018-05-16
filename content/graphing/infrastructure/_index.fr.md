@@ -7,7 +7,7 @@ aliases:
 further_reading:
   - link: graphing/infrastructure/hostmap
     tag: Graphiques
-    text: Observer tous vos host ensemble avec la hostmap
+    text: Observer tous vos hôte ensemble avec la hostmap
   - link: graphing/infrastructure/livecontainers
     tag: Graphiques
     text: >-
@@ -19,15 +19,15 @@ further_reading:
 ---
 ## Aperçu
 
-La page Infrastructure list affiche tous les hosts surveillés par votre application Datadog:
+La page Infrastructure list affiche tous les hôte surveillés par votre application Datadog:
 
 {{< img src="graphing/infrastructure/index/infrastructure_list.png" alt="Infrastructure list" responsive="true" popup="true" >}}
 
-Note: Un host qui n'a pas envoyé de données dans les dernières 24 heures disparaît de l'infrastructure list. Vous pouvez toujours lancer une requête dessus, mais il n'apparaîtra pas dans les listes déroulantes de vos widgets.
+Note: Un hôte qui n'a pas envoyé de données dans les dernières 24 heures disparaît de l'infrastructure list. Vous pouvez toujours lancer une requête dessus, mais il n'apparaîtra pas dans les listes déroulantes de vos widgets.
 
 ## Détails de l'host
 
-Si vous cliquez sur un host, vous pouvez voir ses tags associés:
+Si vous cliquez sur un hôte, vous pouvez voir ses tags associés:
 
 {{< img src="graphing/infrastructure/index/infrastructure_list_host_details.png" alt="Infrastructure list host details" responsive="true" popup="true" style="width:80%;">}}
 
@@ -51,7 +51,7 @@ L'agent Datadog collecte des noms d'host potentiels à partir de plusieurs sourc
 
     ...
 
-De ces noms, un nom canonique est choisi pour l'host. C'est le nom que  l'Agent utilise principalement pour s'identifier auprès de Datadog. Les autres noms sont
+De ces noms, un nom canonique est choisi pour l'hôte. C'est le nom que  l'Agent utilise principalement pour s'identifier auprès de Datadog. Les autres noms sont
 soumis également, mais seulement comme candidats pour les [alias](#aliases-d-host).
 
 Le nom d'hôte canonique est choisi en fonction des règles suivantes, La première
@@ -64,7 +64,7 @@ la correspondance qui est valide est sélectionnée.
 
 Si le nom est reconnu comme manifestement non unique (par exemple `localhost.localdomain`), la règle actuelle échoue et passe à la suivante.
 
-**Note**: Si une instance EC2 est un host ECS, Datadog utilise l'`instance-id` comme nom d'host, [même si le nom d'host depuis le DNS n'est pas celui un EC2 par défaut][2]. Si vous ne souhaitez pas utiliser l'`instance-id`, définissez le nom de l'host dans le fichier de configuration de l'agent.
+**Note**: Si une instance EC2 est un hôte ECS, Datadog utilise l'`instance-id` comme nom d'host, [même si le nom d'hôte depuis le DNS n'est pas celui un EC2 par défaut][2]. Si vous ne souhaitez pas utiliser l'`instance-id`, définissez le nom de l'hôte dans le fichier de configuration de l'agent.
 
 <div class="alert alert-warning">
 Les noms d'hosts doivent être uniques au sein d'un compte Datadog.<br> 
@@ -73,18 +73,18 @@ Sinon, vous risquez de rencontrer des incohérences sur les graphiques des métr
 
 ### Alias de host
 
-Un host unique fonctionnant dans EC2 peut avoir un ID d'instance (`i-abcd1234`), un nom d'host générique fourni par EC2 basé sur l'adresse IP de l'hôte (` ip-192-0-0-1`) et un nom d'host significatif fourni par un serveur DNS interne ou un fichier hosts géré par config (`myhost.mydomain`).
+Un hôte unique fonctionnant dans EC2 peut avoir un ID d'instance (`i-abcd1234`), un nom d'host générique fourni par EC2 basé sur l'adresse IP de l'hôte (` ip-192-0-0-1`) et un nom d'host significatif fourni par un serveur DNS interne ou un fichier hôtes géré par config (`myhost.mydomain`).
 
-Datadog crée des alias pour les noms d'hosts lorsqu'il existe plusieurs noms uniques identifiables pour un seul host. Les noms collectés par l'Agent (détaillé [au dessus](#agent-host-names)) sont ajoutés en tant qu'alias pour le nom canonique choisi.
+Datadog crée des alias pour les noms d'hôtes lorsqu'il existe plusieurs noms uniques identifiables pour un seul hôte. Les noms collectés par l'Agent (détaillé [au dessus](#agent-host-names)) sont ajoutés en tant qu'alias pour le nom canonique choisi.
 
-Vous pouvez voir la liste de tous les hosts de votre compte depuis l'onglet Infrastructure
-dans Datadog. Dans le panneau Inspect, vous pouvez voir (entre autres) la liste des alias associés à chaque host.
+Vous pouvez voir la liste de tous les hôtes de votre compte depuis l'onglet Infrastructure
+dans Datadog. Dans le panneau Inspect, vous pouvez voir (entre autres) la liste des alias associés à chaque hôte.
 
 {{< img src="graphing/infrastructure/index/host_aliases.png" alt="host aliases" responsive="true" popup="true" style="width:80%;">}}
 
 ### Exportez votre liste d'infrastructure et les versions de l'agent
 
-Si vous avez besoin d'imprimer ou d'exporter la liste des hosts rapportant à Datadog, utilisez le "JSON API permalink" au bas de la page Infrastructure List.
+Si vous avez besoin d'imprimer ou d'exporter la liste des hôtes rapportant à Datadog, utilisez le "JSON API permalink" au bas de la page Infrastructure List.
 
 {{< img src="graphing/infrastructure/index/infrastructure_list.png" alt="inf list" responsive="true" popup="true" style="width:80%;">}}
 
@@ -98,20 +98,20 @@ Un moyen facile d'accomplir ceci serait d'utiliser le script suivant qui utilise
 
 Ce script affiche tous les agents en cours d'exécution et leurs numéros de version dans un document distinct. De plus, vous pouvez modifier le script pour entrer un numéro de version si vous souhaitez également que tous les agents en cours d'exécution soient sous un numéro de version particulier. Il existe également un fichier séparé si vous souhaitez convertir la sortie JSON dans un fichier CSV pour des examens ulterieurs.
 
-Une fois que vous avez déterminé les hosts que vous souhaitiez mettre à jour, vous pouvez installer manuellement l'agent à partir de la [page d'installation][3], ou alors  grâce à une intégration comme [Chef][4], [Puppet][5], ou [Ansible][6].
+Une fois que vous avez déterminé les hôte que vous souhaitiez mettre à jour, vous pouvez installer manuellement l'agent à partir de la [page d'installation][3], ou alors  grâce à une intégration comme [Chef][4], [Puppet][5], ou [Ansible][6].
 
 ### Liste des instances ec2 sans l'agent de Datadog installé
 
-La liste des hosts et toutes leurs informations sur la page [Infrastructure List][7] de Datadog sont disponibles via le lien permanent "API JSON" en bas de la page.
+La liste des hôtes et toutes leurs informations sur la page [Infrastructure List][7] de Datadog sont disponibles via le lien permanent "API JSON" en bas de la page.
 
-Vous pouvez accéder grâce à un script aux informations de l'host et obtenir les informations dont vous avez besoin, par exemple ce script python imprime la liste des hosts:
+Vous pouvez accéder grâce à un script aux informations de l'hôte et obtenir les informations dont vous avez besoin, par exemple ce script python imprime la liste des hosts:
 
 * pour lequel Datadog reçoit des informations AWS EC2 de Cloudwatch, via notre intégration AWS.
 * mais qui n'ont pas l'Agent d'installé
 
 {{< img src="graphing/infrastructure/index/ec2_instances_without_dd_agent.png" alt="ec2_instances_without_dd_agent" responsive="true" popup="true" style="width:90%;">}}
 
-[Consultez le script pour afficher la liste des hosts][8].
+[Consultez le script pour afficher la liste des hôtes][8].
 
 ## En apprendre plus
 
