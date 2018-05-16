@@ -24,7 +24,7 @@ Use these Kubernetes RBAC entities to configure permissions for your Datadog Age
       - "pods"
       - "endpoints"   # kube_service tag
       - "componentstatuses"
-    verbs: ["get", "list"]
+    verbs: ["get", "watch", "list"]
   - apiGroups: [""]
     resources:
       - "configmaps"
