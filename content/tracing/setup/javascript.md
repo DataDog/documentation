@@ -24,12 +24,9 @@ JavaScript APM is currently in <strong>beta</strong>.
 
 For descriptions of terminology used in APM, take a look at the [official documentation][visualization docs].
 
-For details about configuration and using the API, check out our [API documentation](https://datadog.github.io/dd-trace-js/).
+For details about configuration and using the API, check out our [API documentation][2].
 
 For details about contributing, check out the [development guide][development docs].
-
-[visualization docs]: https://docs.datadoghq.com/tracing/visualization/
-[development docs]: https://github.com/DataDog/dd-trace-js/blob/master/README.md#development
 
 ### Requirements
 
@@ -37,7 +34,7 @@ Node 4 is the minimum version supported by this library. However, it benefits si
 
 ### Installation
 
-To begin tracing Node.js applications, first [install and configure the Datadog Agent](/tracing/setup/) (see additional documentation for [tracing Docker applications](/tracing/setup/docker/)).
+To begin tracing Node.js applications, first [install and configure the Datadog Agent][1] (see additional documentation for [tracing Docker applications][3]).
 
 Next, install the Datadog Tracing library using npm:
 
@@ -51,9 +48,9 @@ Finally, import and initialize the tracer:
 const tracer = require('dd-trace').init()
 ```
 
-See the [tracer settings](https://datadog.github.io/dd-trace-js/#tracer-settings) for the list of initialization options.
+See the [tracer settings][4] for the list of initialization options.
 
-**NOTE: The tracer must be initialized before importing any instrumented module.**
+**Note**: The tracer must be initialized before importing any instrumented module.
 
 ## Manual Instrumentation
 
@@ -74,7 +71,7 @@ tracer
   })
 ```
 
-For more information on manual instrumentation, check out the [API documentation](https://datadog.github.io/dd-trace-js/#manual-instrumentation).
+For more information on manual instrumentation, check out the [API documentation][5].
 
 ## Distributed Tracing
 
@@ -86,46 +83,63 @@ Distributed tracing is enabled by default for all supported integrations.
 
 APM provides out-of-the-box instrumentation for many popular frameworks and libraries by using a plugin system.
 
-For details about how to how to toggle and configure plugins, check out the [API documentation](https://datadog.github.io/dd-trace-js/#integrations).
+For details about how to how to toggle and configure plugins, check out the [API documentation][6].
 
 ### Compatibility
 
-The `dd-trace` library includes support for a number of modules. If you would like support for a module that is not listed, feel free to open a [GitHub issue](https://github.com/DataDog/dd-trace-js/issues).
+The `dd-trace` library includes support for a number of modules. If you would like support for a module that is not listed, feel free to open a [GitHub issue][7].
 
 #### Web Frameworks
 
-___
-
-| Module                                             | Versions | Support Type |
-|----------------------------------------------------|----------|--------------|
-| [express](https://expressjs.com/)                  | 4.x      | Experimental |
-| [hapi](https://hapijs.com/)                        |          | Coming Soon  |
-| [koa](https://koajs.com/)                          |          | Coming Soon  |
-| [restify](http://restify.com/)                     |          | Coming Soon  |
+| Module        | Versions    | Support Type    |
+| :----------   | :---------- | :-------------- |
+| [express][8]  | 4.x         | Experimental    |
+| [hapi][9]     |             | Coming Soon     |
+| [koa][10]     |             | Coming Soon     |
+| [restify][11] |             | Coming Soon     |
 
 #### Native Modules
 
-___
-
-| Module                                                        | Support Type |
-|---------------------------------------------------------------|--------------|
-| [http](https://nodejs.org/api/http.html)                      | Experimental |
-| [https](https://nodejs.org/api/https.html)                    | Experimental |
+| Module               | Support Type    |
+| :------------------- | :-------------- |
+| [http][12]           | Experimental    |
+| [https][13]          | Experimental    |
 
 #### Data Stores
 
-___
-
-| Module                                                             | Versions | Support Type |
-|--------------------------------------------------------------------|----------|--------------|
-| [elasticsearch](https://github.com/elastic/elasticsearch-js)       |          | Coming Soon  |
-| [ioredis](https://github.com/luin/ioredis)                         |          | Coming Soon  |
-| [mongodb-core](http://mongodb.github.io/node-mongodb-native/core/) |          | Coming Soon  |
-| [mysql](https://github.com/mysqljs/mysql)                          | 2.x      | Experimental |
-| [mysql2](https://github.com/sidorares/node-mysql2)                 | ^1.5     | Experimental |
-| [pg](https://node-postgres.com/)                                   | 6.x      | Experimental |
-| [redis](https://github.com/NodeRedis/node_redis)                   | >=2.6    | Experimental |
+| Module              | Versions    | Support Type |
+| :----------         | :---------- | :----------  |
+| [elasticsearch][14] |             | Coming Soon  |
+| [ioredis][15]       |             | Coming Soon  |
+| [mongodb-core][16]  |             | Coming Soon  |
+| [mysql][17]         | 2.x         | Experimental |
+| [mysql2][18]        | ^1.5        | Experimental |
+| [pg][19]            | 6.x         | Experimental |
+| [redis][20]         | >=2.6       | Experimental |
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[visualization docs]: https://docs.datadoghq.com/tracing/visualization/
+[development docs]: https://github.com/DataDog/dd-trace-js/blob/master/README.md#development
+[1]: /tracing/setup/
+[2]: https://datadog.github.io/dd-trace-js/
+[3]: /tracing/setup/docker/
+[4]: https://datadog.github.io/dd-trace-js/#tracer-settings
+[5]: https://datadog.github.io/dd-trace-js/#manual-instrumentation
+[6]: https://datadog.github.io/dd-trace-js/#integrations
+[7]: https://github.com/DataDog/dd-trace-js/issues
+[8]: https://expressjs.com/
+[9]: https://hapijs.com/
+[10]: https://koajs.com/
+[11]: http://restify.com/
+[12]: https://nodejs.org/api/http.html
+[13]: https://nodejs.org/api/https.html
+[14]: https://github.com/elastic/elasticsearch-js
+[15]: https://github.com/luin/ioredis
+[16]: http://mongodb.github.io/node-mongodb-native/core/
+[17]: https://github.com/mysqljs/mysql
+[18]: https://github.com/sidorares/node-mysql2
+[19]: https://node-postgres.com/
+[20]: https://github.com/NodeRedis/node_redis
