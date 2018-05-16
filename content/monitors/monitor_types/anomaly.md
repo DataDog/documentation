@@ -167,6 +167,10 @@ We used to expose an algorithm called `adaptive` which would try to figure out a
 
 Previously we were treating count metrics as gauges, and thus interpolating between reported points. This led to some very odd-looking metrics for sparsely reported counts. Anomalies are no longer interpolating between counts, but for legacy monitors, the old behavior is preserved using the `count_default_zero` argument.
 
+### But what if I prefer it if my count metric were treated as gauge?
+
+Not interpolating between counts makes sense if the thing you are counting is something like errors. However, if you have regularly scheduled jobs that happen every hour, it might make more sense if the metric is not reporting a value of 0.0 between runs. There are two different ways to accomplist this: 1) set the rollup to be one hour; or 2) explicitly set `count_default_zero='false'` using the API.
+
 ### How does setting the rollup interval in "Advanced Options" differ from setting it on the query using `.rollup()`?
 
 If the rollup is set explicitly on the query, the rollup interval option for the anomaly monitor will be ignored.
