@@ -32,19 +32,19 @@ Activez cette intégration pour voir dans Datadog tous vos événements AWS Heal
 ## Implémentation
 ### Installation
 
-Si vous ne l'avez pas déjà fait, configurez [l'Intégration Amazon Web Services en premier](https://docs.datadoghq.com/integrations/amazon_web_services/).
+Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon Web Services][1].
 
 ### Configuration
 
-1. Ajoutez ces permissions à votre [Police IAM Datadog](https://docs.datadoghq.com/integrations/amazon_web_services/#installation) afin de collecter vos métriques Amazon Health:
+1. Ajoutez ces autorisations à votre [stratégie IAM Datadog][2] afin de recueillir des métriques Amazon Health:
 
     * `health:DescribeEvents`: Utilisé pour lister tous les événements de santé
     * `health:DescribeEventDetails`: Obtient des informations détaillées sur les événements de santé
     * `health:DescribeAffectedEntities`: Obtient les entités AWS affectées pour les événements de santé
 
-    Pour plus d'information sur les polices Health, consultez [la documentation AWS dédiée](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_health.html).
+    Pour en savoir plus sur les stratégies Health, consultez [la documentation disponible sur le site d'AWS][3].
 
-3. Installez l'intégration [Datadog - AWS Health] (https://app.datadoghq.com/account/settings#integrations/amazon_health).
+3. Configurez l'[intégration Datadog - AWS Health][4].
 
 ## Données collectées
 ### Métriques
@@ -59,7 +59,15 @@ L'intégration AWS Health n'inclut aucune métrique pour le moment.
 L'intégration AWS Health n'inclut aucun check de service pour le moment.
 
 ## Troubleshooting
-Besoin d'aide? Contactez  [l'équipe support de Datadog](http://docs.datadoghq.com/help/).
+Besoin d'aide ? Contactez  [l'équipe support de Datadog][5].
 
 ## En apprendre plus
-Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog](https://www.datadoghq.com/blog/)
+Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog dans [notre blog][6]
+
+[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[2]: https://docs.datadoghq.com/integrations/amazon_web_services/#installation
+[3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_health.html
+[4]: https://app.datadoghq.com/account/settings#integrations/amazon_health
+[5]: http://docs.datadoghq.com/help/
+[6]: https://www.datadoghq.com/blog/
+

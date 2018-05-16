@@ -13,7 +13,7 @@ external_redirect: /api/#post-a-check-run
     Le texte du message
 
 * **`host_name`** *[obligatoire]*:  
-    Le nom de l'host qui soumet le check
+    Le nom de l'hôte qui soumet le check
 
 * **`status`** *[optionnel]*:   
     Entier pour l'état du check:

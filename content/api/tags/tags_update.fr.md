@@ -1,12 +1,12 @@
 ---
-title: Mettre à jour les tags d'un host
+title: Mettre à jour les tags d'un hôte
 type: apicontent
 order: 20.4
 external_redirect: /api/#update-host-tags
 ---
 
-## Mettre à jour les tags d'un host
-Cet endpoint vous permet de mettre à jour les tags d'un host donné.
+## Mettre à jour les tags d'un hôte
+Cet endpoint vous permet de mettre à jour les tags d'un hôte donné.
 
 ##### ARGUMENTS
 * **`tags`** [*obligatoire*]:  

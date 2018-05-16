@@ -35,8 +35,8 @@ Remplissez le formulaire comme indiqué, en laissant les deux derniers champs UR
 
 {{< img src="integrations/desk/desk_config.png" alt="desk config" responsive="true" popup="true">}}
 
-Ensuite, depuis votre compte Datadog, inscrivez les informations correspondantes dans le [carreau Desk](https://app.datadoghq.com/account/settings#integrations/desk). Vous devrez entrer également le nom de domaine Desk unique de votre société.
-Appuyez sur le bouton d'installation, puis vous êtes prêt ! Vous pourrez bientôt sélectionner des statistiques desk.* dans un tableau de bord personnalisé, ou les afficher dans la [tableau de bord Desk](https://app.datadoghq.com/screen/integration/desk) fourni. (Vous pouvez lire davantage dans [notre blog](https://www.datadoghq.com/blog/keep-support-team-page-salesforce-desk-integration/).)
+Ensuite, depuis votre compte Datadog, inscrivez les informations correspondantes dans le [carreau Desk][1]. Vous devrez entrer également le nom de domaine Desk unique de votre société.
+Appuyez sur le bouton d'installation, puis vous êtes prêt ! Vous pourrez bientôt sélectionner des statistiques desk.* dans un tableau de bord personnalisé, ou les afficher dans la [tableau de bord Desk][2] fourni. (Vous pouvez lire davantage dans [notre blog](https://www.datadoghq.com/blog/keep-support-team-page-salesforce-desk-integration/).)
 
 ## Données collectées
 ### Métriques
@@ -50,7 +50,14 @@ L'intégration Desk n'inclut aucun événements pour le moment.
 L'intégration Desk n'inclut aucun check de service pour le moment.
 
 ## Troubleshooting
-Besoin d'aide? Contactez  [l'équipe support de Datadog](http://docs.datadoghq.com/help/).
+Besoin d'aide ? Contactez  [l'équipe support de Datadog][4].
 
 ## En apprendre plus
-Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog](https://www.datadoghq.com/blog/)
+Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][5]
+
+[1]: https://app.datadoghq.com/account/settings#integrations/desk
+[2]: https://app.datadoghq.com/screen/integration/desk
+[3]: https://github.com/DataDog/dogweb/blob/prod/integration/desk/desk_metadata.csv
+[4]: http://docs.datadoghq.com/help/
+[5]: https://www.datadoghq.com/blog/
+

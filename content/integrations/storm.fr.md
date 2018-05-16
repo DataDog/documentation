@@ -41,34 +41,28 @@ Modifiez le fichier `storm.yaml` pour pointer vers votre serveur et votre port, 
 
 ### Validation
 
-[Lancez la commande `info`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) vous devriez observer la réponse suivante:
-
-    Checks
-    ======
-
-        storm
-        -----------
-          - instance #0 [OK]
-          - Collected 39 metrics, 0 events & 7 service checks
-
-## Compatibilité
-
-Le check storm est compatible avec toutes les principales plateformes, et les versions 1.x.x d'Apache Storm.
+[Exécutez le sous-commande `status` de l'Agent][1] et cherchez `storm` dans la section Checks.
 
 ## Données collectées
 ### Métriques
 {{< get-metrics-from-git "storm" >}}
 
 
-### Evénements
+### Évènements
 Le check Storm n'inclut aucun événement pour le moment.
 
 ### Checks de Service
 Le check Storm n'inclut aucun check de service pour le moment.
 
 ## Troubleshooting
-Besoin d'aide? Contactez  [l'équipe support de Datadog](http://docs.datadoghq.com/help/).
+Besoin d'aide ? Contactez  [l'équipe support de Datadog][3].
 
 ## En apprendre plus
 
-Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog](https://www.datadoghq.com/blog/)
+Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][4].
+
+[1]: https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information
+[2]: https://github.com/DataDog/integrations-extras/blob/master/storm/metadata.csv
+[3]: http://docs.datadoghq.com/help/
+[4]: https://www.datadoghq.com/blog/
+

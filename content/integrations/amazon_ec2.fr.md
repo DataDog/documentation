@@ -37,7 +37,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration d'Amazon W
 
 ### Configuration
 
-1. Dans le [carré d'intégration AWS][2], assurez-vous que l'option « EC2 » est cochée dans la section concernant la collecte des métriques.
+1. Dans le [carré d'intégration AWS][2], assurez-vous que l'option `EC2` est cochée dans la section concernant la collecte des métriques.
 
 2. Ajoutez ces autorisations à votre [stratégie IAM Datadog][3] afin de recueillir des métriques Amazon EC2 :
 
@@ -47,7 +47,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration d'Amazon W
 
     Pour en savoir plus sur les stratégies EC2, consultez [la documentation disponible sur le site d'AWS][4].
 
-3. Configurez l'[intégration Datadog - AWS EC2][5].
+3. Installez l'[intégration Datadog - AWS EC2][5].
 
 **Note**: Si vous souhaitez uniquement surveiller un sous-ensemble de vos instances EC2 sur AWS, taggez-les et spécifiez le tag dans la zone de texte **limit** de votre [onglet d'intégration AWS].(https://app.datadoghq.com/account/settings#integrations/amazon_web_services).
 
@@ -59,7 +59,7 @@ Utilisez l'[Agent de Datadog][6] ou un autre [outil d'envoi de logs][7] pour tra
 {{< get-metrics-from-git "amazon_ec2" >}}
 
 
-Chacune des métriques récupérées à partir d'AWS se verra attribuer les mêmes tags qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le nom de l'host, les groupes de sécurité et plus encore.
+Chacune des métriques récupérées à partir d'AWS se verra attribuer les mêmes tags qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le nom de l'hôte, les groupes de sécurité et plus encore.
 
 **Remarque** : par défaut, la métrique « aws.ec2.instance_age » n'est pas recueillie avec l'intégration Datadog - EC2. [Contactez-nous][9] pour activer la collecte de cette métrique.
 

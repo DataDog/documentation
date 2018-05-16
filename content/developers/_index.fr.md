@@ -13,7 +13,7 @@ Les endpoints disponibles peuvent être trouvés sur [notre page dédiée à la 
 De plus, [de nombreuses bibliothèques][2] sont disponibles pour interagir directement avec l'API.
 
 ## Envoie de métriques custom
-Bien que vous puissiez soumettre des métriques directement via [notre API][1], vous pouvez également soumettre des métriques via l'agent Datadog en utilisant [DogStatsD][3] et des checks custom.
+Bien que vous puissiez soumettre des métriques directement via [notre API][1], vous pouvez également soumettre des métriques via l'Agent Datadog en utilisant [DogStatsD][3] et des checks custom d'Agent.
 
 L'Agent Datadog inclut DogStatsD, un puissant démon statsd avec des fonctionnalités supplémentaires qui offrent un meilleur contrôle sur vos métadonnées et l'agrégation de métriques.
 [Plusieurs bibliothèques][4] sont disponibles pour envoyer facilement des métriques depuis votre application à Datadog en utilisant [DogStatsD][3].
