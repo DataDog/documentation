@@ -66,7 +66,7 @@ logs:
 * [Restart your Agent][3]
 
 
-**Note**: If you are using the Windows 6 agent and trailing files for logs - make sure that those files have a UTF8 encoding.
+**Note**: If you are using the Windows 6 Agent and trailing files for logs - make sure that those files have a UTF8 encoding.
 
 ## Stream logs through TCP/UDP
 Set `type` to **tcp** or **udp** depending on the protocol then specify the `port` of your incoming connection.
