@@ -17,6 +17,7 @@ categories:
 - configuration & deployment
 - containers
 - orchestration
+- log collection
 doc_link: https://docs.datadoghq.com/integrations/kubernetes/
 ddtype: check
 ---
