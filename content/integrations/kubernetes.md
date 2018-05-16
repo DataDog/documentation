@@ -17,6 +17,7 @@ categories:
 - configuration & deployment
 - containers
 - orchestration
+- log collection
 doc_link: https://docs.datadoghq.com/integrations/kubernetes/
 ddtype: check
 ---
@@ -25,7 +26,7 @@ ddtype: check
 
 ## Overview
 
-Get metrics from kubernetes service in real time to:
+Get metrics and logs from kubernetes service in real time to:
 
 * Visualize and monitor kubernetes states
 * Be notified about kubernetes failovers and events.
@@ -54,6 +55,17 @@ To gather your kube-state metrics:
 ### Configuration
 
 Since [Agent v6][4], Kubernetes DNS integration works automatically with the [Autodiscovery][5].
+
+## Collect container logs
+
+**Available for Agent >6.0**
+
+Two installations are possible:
+
+- On the node where the agent is external to the Docker environment
+- Deployed with its containerized version in the Docker environment
+
+Take advantage of DaemonSets to [automatically deploy the Datadog Agent on all your nodes][14]. Otherwise follow the [container log collection steps][15] to start collecting logs from all your containers.
 
 ## Data Collected
 ### Metrics
@@ -135,3 +147,5 @@ To get a better idea of how (or why) to integrate your Kubernetes service, check
 [11]: /integrations/faq/gathering-kubernetes-events
 [12]: /integrations/faq/using-rbac-permission-with-your-kubernetes-integration
 [13]: https://www.datadoghq.com/blog/monitoring-kubernetes-era/
+[14]: https://app.datadoghq.com/account/settings#agent/kubernetes
+[15]: https://docs.datadoghq.com/logs/log_collection/docker/#setup
