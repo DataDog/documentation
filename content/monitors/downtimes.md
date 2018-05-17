@@ -12,9 +12,6 @@ further_reading:
 - link: "monitors/manage_monitor"
   tag: "Documentation"
   text: Manage your monitors
-- link: "monitors/faq"
-  tag: "FAQ"
-  text: Monitors FAQ
 ---
 
 You may occasionally need to shut systems down or take them off-line to perform maintenance or upgrades. Scheduling downtime allows you to do this without triggering monitors.

@@ -9,9 +9,9 @@ further_reading:
 - link: "monitors/downtimes"
   tag: "Documentation"
   text: Schedule a dowtime to mute a monitor
-- link: "monitors/faq"
-  tag: "FAQ"
-  text: Monitors FAQ
+- link: "monitors/monitor_status"
+  tag: "Documentation"
+  text: Consult your monitor status
 ---
 
 ## Configuration

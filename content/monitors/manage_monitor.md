@@ -11,9 +11,6 @@ further_reading:
 - link: "monitors/downtimes"
   tag: "Documentation"
   text: Schedule a downtime to mute a monitor
-- link: "monitors/faq"
-  tag: "FAQ"
-  text: Monitors FAQ
 ---
 
 The [Manage Monitors][1] page lets you run an advanced search of all monitors so you can delete, mute, resolve, or edit service tags for selected monitors in bulk. You can also clone or fully edit any individual monitor in the search results.

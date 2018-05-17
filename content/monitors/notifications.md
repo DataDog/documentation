@@ -11,9 +11,9 @@ further_reading:
 - link: "monitors/downtimes"
   tag: "Documentation"
   text: Schedule a downtime to mute a monitor
-- link: "monitors/faq"
-  tag: "FAQ"
-  text: Monitors FAQ
+- link: "monitors/monitor_status"
+  tag: "Documentation"
+  text: Consult your monitor status
 ---
 
 ## Overview
@@ -32,6 +32,8 @@ right people get notified so the problem can be resolved as soon as possible.
   For example if you are monitoring a database then you might want to include steps for failing over to a standby node. All in all, you should attempt to give as much context to the monitor as possible.
 
 3. Optionally enable **monitor renotification**. This option is useful to remind your team that a problem is not solved until the monitor is marked as resolved. If enabled, you can configure an escalation message to be sent anytime the monitor renotifies. The original message is included as well.
+
+***Note:*** *To avoid notification storms we now group notifications with the same monitor ID and alert type in 20 second buckets. The first two notifications in the group within a 20 second bucket is sent as normal. All other notifications within that 20 seconds are sent as a single message listing all of them after the first two.*
 
 ## Say what's happening
 ### Message template variables

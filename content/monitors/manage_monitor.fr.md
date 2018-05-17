@@ -11,9 +11,6 @@ further_reading:
 - link: "monitors/downtimes"
   tag: "Documentation"
   text: Planifiez un downtime pour stopper les notifications d'un monitor
-- link: "monitors/faq"
-  tag: "FAQ"
-  text: FAQ monitors
 ---
 
 La page [Manage Monitors][1] vous permet d'exécuter une recherche avancée sur tous les monitors afin de pouvoir supprimer, mettre en sourdine, résoudre ou modifier les tags de service pour les monitor sélectionnés. Vous pouvez également cloner ou modifier entièrement un monitor depuis les résultats de la recherche.
