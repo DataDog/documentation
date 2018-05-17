@@ -15,7 +15,7 @@ further_reading:
 ---
 
 
-It is not recommended to use the Agent for log collection only. Using metric collection ensures that your logs, metrics, and traces from the same host share the same hostname and therefore the same [tags][].
+It is not recommended to use the Agent for log collection only. Using metric collection ensures that your logs, metrics, and traces from the same host share the same hostname and therefore the same [tags][1].
 
 However, it is still possible to configure the Agent to only collect logs.
 
