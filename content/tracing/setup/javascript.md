@@ -111,7 +111,7 @@ The `dd-trace` library includes support for a number of modules. If you would li
 | :----------         | :---------- | :----------  |
 | [elasticsearch][14] |             | Coming Soon  |
 | [ioredis][15]       |             | Coming Soon  |
-| [mongodb-core][16]  |             | Coming Soon  |
+| [mongodb-core][16]  | 3.x         | Experimental |
 | [mysql][17]         | 2.x         | Experimental |
 | [mysql2][18]        | ^1.5        | Experimental |
 | [pg][19]            | 6.x         | Experimental |
