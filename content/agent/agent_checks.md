@@ -40,7 +40,7 @@ All custom Agent checks inherit from the `AgentCheck` class found in `checks/__i
 
 **Note**: 
 
-* Custom Agent checks aren't able to import modules by default, all your code should be in one single file.
+* Custom Agent checks aren't able to import modules by default, all your code should be in one single file. ([Learn how to add custom python package to the agent][12])
 * The Datadog Agent installation has its own embedded copy of Python. Custom scripts importing pip-installed libraries will fail unless Datadog's own embedded copy of pip is used to install these third-party libraries.
 
 ### `AgentCheck` interface for Agent v6
@@ -287,7 +287,7 @@ instances:
 Now let's define our check method. The main part of the check makes
 a request to the URL and time the response time, handling error cases as it goes.
 
-In this snippet, we start a timer, make the GET request using the [requests library][9] and handle and errors that might arise.
+In this snippet, we start a timer, make the GET request using the [requests library][9] ([Learn how to add custom python package to the agent][12]) and handle and errors that might arise.
 
 ```python
 # Load values from the instance config
@@ -464,3 +464,4 @@ If your issue continues, reach out to Support with the [help page][11] that list
 [9]: http://docs.python-requests.org/en/latest/
 [10]: /agent/faq/agent-commands
 [11]: /help
+[12]: /agent/custom_python_package/#linux
