@@ -175,14 +175,29 @@ It is also possible to search for numerical attribute within a specific range. F
 Your logs inherit tags from [hosts][4] and [integrations][5] that generate them. They can be used in the search and as facets as well:
 
 * `test` is searching for the string "test".
-* `("env:prod" OR test)` matches all logs with the tag #env:prod or the tag #test
-* `(service:srvA OR service:srvB)` or `(service:(srvA OR srvB))` Matches all logs that contain tags #service:srvA or #service:srvB.
-* `("env:prod" AND -”version:beta”)` matches all logs that contain #env:prod and that do not contain #version:beta
+* `("env:prod" OR test)` matches all logs with the tag `#env:prod` or the tag `#test`
+* `(service:srvA OR service:srvB)` or `(service:(srvA OR srvB))` Matches all logs that contain tags `#service:srvA` or `#service:srvB`.
+* `("env:prod" AND -”version:beta”)` matches all logs that contain `#env:prod` and that do not contain `#version:beta`
+
+If your tags don't follow [tags best practices][6] and don't use the `key:value` syntax, use this search query:
+
+* `tags:<MY_TAG>`
 
 ### Autocomplete
 Typing a complex query can be cumbersome. Use the search bar's autocomplete feature to complete your query using existing values:
 
 {{< img src="logs/explore/search_bar_autocomplete.png" alt="search bar autocomplete " responsive="true" popup="true" style="width:80%;">}}
+
+### Escaping of special characters
+The following attributes are considered as special: `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/`, and `\` require escaping.
+For instance, to search logs that contain `user=12345` the following search must be entered:
+
+`user\=JaneDoe`
+
+The same logic must be applied to spaces within log attributes. It is not recommended to have spaces in log attributes but in such a case, spaces require escaping.
+If an attribute was called `user.first name`, perform a search on this attribute by escaping the space:
+
+`@user.first\ name:myvalue`
 
 ### Saved Searches
 
@@ -194,17 +209,6 @@ To delete a saved search, click on the bin icon under the log search drop-down:
 
 {{< img src="logs/explore/delete_saved_search.png" alt="Delete Saved Search" responsive="true" popup="true" style="width:80%;">}}
 
-### Escaping of special characters
-The following attributes are considered as special: `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/`, and `\` require escaping.
-For instance, to search logs that contain `user=12345` the following search must be entered:
-
-`user\=12345`
-
-The same logic must be applied to spaces within log attributes. It is not recommended to have spaces in log attributes but in such a case, spaces require escaping.
-If an attribute was called `user.first name`, perform a search on this attribute by escaping the space:
-
-`@user.first\ name:myvalue`
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -214,3 +218,4 @@ If an attribute was called `user.first name`, perform a search on this attribute
 [3]: http://lucene.apache.org/core/2_9_4/queryparsersyntax.html
 [4]: /graphing/infrastructure/
 [5]: /integrations/
+[6]: /getting_started/tagging/#tags-best-practices

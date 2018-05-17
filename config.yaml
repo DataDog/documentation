@@ -596,6 +596,11 @@ languages:
           url: "logs/parsing/"
           weight: 50
           parent: menu_references_logs
+        - identifier: customnav_lognav_dynamic_volume_control
+          name: "Dynamic volume control"
+          url: "logs/dynamic_volume_control/"
+          weight: 60
+          parent: menu_references_logs
         - identifier: customnav_lognav_languages
           name: "Application log"
           url: "logs/languages/"
