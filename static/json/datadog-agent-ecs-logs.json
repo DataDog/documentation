@@ -31,7 +31,7 @@
       "environment": [
         {
           "name": "DD_API_KEY",
-          "value": "INSERT_API_KEY"
+          "value": "<YOUR_API_KEY>"
         },
         {
           "name": "DD_LOGS_ENABLED",
