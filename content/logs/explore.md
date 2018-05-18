@@ -121,10 +121,6 @@ All measure have their own unit that is then used for display in the Log explore
 
 ## Search bar
 
-The search query language is based on the Lucene query syntax:
-
-[Apache Lucene - Query Parser Syntax][3]
-
 All search parameters are contained in the url, so it is very simple to share your view.
 
 ### Search syntax
@@ -215,7 +211,6 @@ To delete a saved search, click on the bin icon under the log search drop-down:
 
 [1]: /logs/processing/#attribute-remapper
 [2]: /logs/#log-graph
-[3]: http://lucene.apache.org/core/2_9_4/queryparsersyntax.html
 [4]: /graphing/infrastructure/
 [5]: /integrations/
 [6]: /getting_started/tagging/#tags-best-practices
