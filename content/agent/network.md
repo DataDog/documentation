@@ -43,7 +43,7 @@ The information is structured as JSON following this schema:
 {
     "version": 1,                       // <-- we increment this every time the information is changed
     "modified": "YYYY-MM-DD-HH-MM-SS",  // <-- the timestamp of the last modification
-    "agents": {                         // <-- in this section the IPs used for the Agent traffic intake
+    "agents": {                         // <-- in this section the IPs used by the agent to submit metrics to Datadog
         "prefixes_ipv4": [              // <-- a list of IPv4 CIDR blocks
             "a.b.c.d/x",
             ...
@@ -52,11 +52,19 @@ The information is structured as JSON following this schema:
             ...
         ]
     },
-    "webhooks": {                       // <-- same structure as "agents" but this section is not relevant
-        ...                             //     for Agent traffic (webhooks delivered by Datadog to the internet)
-    }
+    "apm": {...},                       // <-- same structure as "agents" but IPs used for the APM agent data
+    "logs": {...},                      // <-- same for the logs agent data
+    "process": {...},                   // <-- same for the process agent data
+    "api": {...},                       // <-- not relevant for agent traffic (submitting data via API)
+    "webhooks": {...}                   // <-- not relevant for agent traffic (Datadog source IPs delivering webhooks)
 }
 ```
+
+If you are interested by only one of the sections of this document, for each section there is also a dedicated endpoint at `https://ip-ranges.datadoghq.com/<section>.json`, for instance:
+
+* [https://ip-ranges.datadoghq.com/logs.json][10] for the IPs used to receive logs data
+* [https://ip-ranges.datadoghq.com/apm.json][11] for the IPs used to receive APM data
+
 
 ## Open Ports
 
@@ -114,3 +122,5 @@ For a detailed configuration guide on proxy setup, head over to [Proxy Configura
 [7]: /agent/#using-the-gui
 [8]: /agent/basic_agent_usage/kubernetes/
 [9]: /agent/proxy
+[10]: https://ip-ranges.datadoghq.com/logs.json
+[11]: https://ip-ranges.datadoghq.com/apm.json
