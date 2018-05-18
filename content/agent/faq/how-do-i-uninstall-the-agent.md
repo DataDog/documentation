@@ -24,6 +24,7 @@ sudo yum remove datadog-agent
 1. Stop and close the Datadog Agent: via the bone icon in the Tray.
 2. Drag the Datadog Application from the application folder to the Trash Bin.
 3. Run:
+
 ```
 sudo rm -rf /opt/datadog-agent
 sudo rm -rf /usr/local/bin/datadog-agent
@@ -52,6 +53,7 @@ Uninstall the Agent using Add/Remove Programs, alternatively, it's possible to t
 1. Stop and Close the Datadog Agent: via the bone icon in the Tray.
 2. Drag the Datadog Application from the application folder to the Trash Bin.
 3. Run:
+
 ```
 sudo rm -rf /opt/datadog-agent
 sudo rm -rf /usr/local/bin/datadog-agent
