@@ -17,8 +17,8 @@ further_reading:
 
 ## Overview
 
-Once you have [created your monitor][1], the Monitor Status page gives you a bird eyed view of your monitor status over time.
-This page is splited in 3 main sections:
+Once you have [created your monitor][1], the Monitor Status page gives you a bird-eyed view of your monitor status over time.
+This page is split in 3 main sections:
 
 * **[Properties](#properties)**
 * **[Status and History](#status-and-history)**
@@ -31,7 +31,7 @@ Some options are available in the upper right corner of the page:
 
 * **Mute a monitor**:  
     Choose to mute a monitor directly on its status page. Use the *Scope* field to narrow your downtime. 
-    Refer to the [dedicated downtime documentation][2] to learn how to mute mutliple scope or multiple monitor at the same time.  
+    Refer to the [dedicated downtime documentation][2] to learn how to mute multiple scope or multiple monitor at the same time.  
 
     {{< img src="monitors/monitor_status/status_mute_monitor.png" alt="status mute monitor" responsive="true" popup="true" style="width:30%;">}}
 
@@ -39,7 +39,7 @@ Some options are available in the upper right corner of the page:
     Resolve your monitor manually.
 
 * **Configuration options**:
-  Use the *cog* icon to diplay options available:
+  Use the *cog* icon to display options available:
     * [Edit][1]
     * Clone
     * [Export][3]
@@ -49,7 +49,7 @@ Some options are available in the upper right corner of the page:
 
 {{< img src="monitors/monitor_status/status_monitor_properties.png" alt="status monitor properties" responsive="true" popup="true" >}}
 
-The *Properties* section is the overview of your monitor, all high level information are here:
+The *Properties* section is the overview of your monitor, all high-level information is here:
 
 - The status of your monitor
 - The monitor creator 
@@ -62,7 +62,7 @@ Use the *cog* icon in the upper right corner of the page to [edit][1] your monit
 
 ## Status and History
 
-The *Status and History* section reflects the exact query behaviour and status of your monitor for all its scope with the **Evaluation Graph**. It has a fixed zoomed windows that correspond to your monitor evaluation timesteps. Slide this window over the timeline in order to consult previous monitor evalutation results: 
+The *Status and History* section reflects the exact query behavior and status of your monitor for all its scope with the **Evaluation Graph**. It has a fixed zoomed windows that corresponds to your monitor evaluation timesteps. Slide this window over the timeline in order to consult previous monitor evaluation results: 
 
 {{< img src="monitors/monitor_status/status_monitor_history.gif" alt="status monitor history" responsive="true" popup="true" >}}
 
