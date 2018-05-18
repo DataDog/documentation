@@ -18,8 +18,7 @@ further_reading:
 
 ## Overview
 
-Notifications are a key component of any [monitor][1]. You want to make sure the
-right people get notified so the problem can be resolved as soon as possible.
+Notifications are a key component of any [monitor][1]. You want to make sure the right people get notified so the problem can be resolved as soon as possible.
 
 {{< img src="monitors/notifications/notification.png" alt="notification" responsive="true" popup="true" >}}
 
@@ -38,12 +37,9 @@ right people get notified so the problem can be resolved as soon as possible.
 ## Say what's happening
 ### Message template variables
 
-Message template variables can be used to customize your monitor notifications.
-This feature is supported in all monitor types. There are two primary use cases
-for template variables: 
+Message template variables can be used to customize your monitor notifications. This feature is supported in all monitor types. There are two primary use cases for template variables: 
 
-1. Displaying a different message depending on the
-notification type (e.g. triggered, recovered, no data)
+1. Displaying a different message depending on the notification type (e.g. triggered, recovered, no data)
 2. Incorporating the triggering scope into the message of multi alerts.
 
 #### Tag variables
@@ -62,8 +58,7 @@ and the corresponding event notification:
 
 * The tag template variables available depend on the tag group selected in Step 1 of the monitor editor. The possible options automatically populate at the bottom of the "Use message template variables" help box in Step 3 of the editor.  
 
-* Template variable content is escaped by default. If your variable
-contains JSON or code that you would NOT like to be escaped, use triple braces instead of double braces (e.g. `{{{event.text}}}`).
+* Template variable content is escaped by default. If your variable contains JSON or code that you would NOT like to be escaped, use triple braces instead of double braces (e.g. `{{{event.text}}}`).
 
 * See a complete list of contextual template variables available to your monitor by clicking the **Use message template variables** link or in the list of suggestions that appears when you type `{{` to begin a template variable name. The variables available are different depending on the combination of metric, tags, and other features of the monitor you are working on.
 
@@ -78,10 +73,13 @@ The `{{comparator}}` template variable's value is always a relational operator. 
 {{< img src="monitors/notifications/comparator_alert.png" alt="comparator_alert" responsive="true" popup="true" style="width:80%;">}}
 
 For example, when an alert is set to trigger when a value rises "above" 50, the following syntax:
+
 ```
   {{value}} {{comparator}} {{threshold}}
 ```
+
 would yield a notification message like the following:
+
 ```
     51.47 > 50
 ```
@@ -139,10 +137,10 @@ The @ notification inside the template variables follows the same rules.
 The `{{is_match}}` conditional allows you to match the triggering context to some string to display a different message.  
 For example, you might want to notify your db team if a triggering host has `role:db` but notify your app team if the host has `role:app`.
 
-You can use any of the available tag variables in your condition. A match
-is made if the comparison string is anywhere in the resolved variable.
+You can use any of the available tag variables in your condition. A match is made if the comparison string is anywhere in the resolved variable.
 
 The variable uses the following format:
+
 ```
 {{#is_match "tag_variable" "comparison_string"}}
   This shows if comparison_string is in tag_variable.

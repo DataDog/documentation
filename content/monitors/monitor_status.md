@@ -13,11 +13,76 @@ further_reading:
   text: Schedule a downtime to mute a monitor
 ---
 
+{{< img src="monitors/monitor_status/monitor_status_page.png" alt="monitor status page" responsive="true" popup="true" >}}
+
 ## Overview
+
+Once you have [created your monitor][1], the Monitor Status page gives you a bird eyed view of your monitor status over time.
+This page is splited in 3 main sections:
+
+* **[Properties](#properties)**
+* **[Status and History](#status-and-history)**
+* **[Events](#events)**
+
+Those sections are open by default, close them using the little `>` icon on the left of the section name.
+
+### Monitor status options
+Some options are available in the upper right corner of the page:
+
+* **Mute a monitor**:  
+    Choose to mute a monitor directly on its status page. Use the *Scope* field to narrow your downtime. 
+    Refer to the [dedicated downtime documentation][2] to learn how to mute mutliple scope or multiple monitor at the same time.  
+
+    {{< img src="monitors/monitor_status/status_mute_monitor.png" alt="status mute monitor" responsive="true" popup="true" style="width:30%;">}}
+
+* **Resolve a monitor**:
+    Resolve your monitor manually.
+
+* **Configuration options**:
+  Use the *cog* icon to diplay options available:
+    * [Edit][1]
+    * Clone
+    * [Export][3]
+    * Delete
 
 ## Properties
 
+{{< img src="monitors/monitor_status/status_monitor_properties.png" alt="status monitor properties" responsive="true" popup="true" >}}
+
+The *Properties* section is the overview of your monitor, all high level information are here:
+
+- The status of your monitor
+- The monitor creator 
+- The monitor ID ([for the monitor API][4])
+- Tags attached to your monitor. *Edit the tag list by clicking on the pencil icon*.
+- The monitor [query][5]
+- The monitor message
+
+Use the *cog* icon in the upper right corner of the page to [edit][1] your monitor properties.
+
 ## Status and History
 
-## Event
+The *Status and History* section reflects the exact query behaviour and status of your monitor for all its scope with the **Evaluation Graph**. It has a fixed zoomed windows that correspond to your monitor evaluation timesteps. Slide this window over the timeline in order to consult previous monitor evalutation results: 
 
+{{< img src="monitors/monitor_status/status_monitor_history.gif" alt="status monitor history" responsive="true" popup="true" >}}
+
+To deep dive into your metrics evolution for further investigation, we advise you to use the [Metric Explorer page][7] or a dedicated [Notebook][8]
+
+## Events
+
+All events generated from your monitor are aggregated in this section. Those events are also displayed in your [event stream][6].
+
+{{< img src="monitors/monitor_status/status_monitor_event.png" alt="status monitor event" responsive="true" popup="true" >}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /monitors/monitor_types/
+[2]: /monitors/downtimes/
+[3]: /monitors/#export-your-monitor
+[4]: /api/?lang=python#monitors
+[5]: /getting_started/from_the_query_to_the_graph
+[6]: /graphing/event_stream/
+[7]: https://app.datadoghq.com/metric/explorer
+[8]: /graphing/notebooks/
