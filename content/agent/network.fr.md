@@ -28,13 +28,13 @@ further_reading:
   * **Agents < 5.2.0** `app.datadoghq.com`
   *  **Agents >= 5.2.0** `<version>-app.agent.datadoghq.com`
 
-Cette décision a été prise après le problème POODLE, les endpoints versionnés commencent avec l'agent 5.2.0, c'est-à-dire que chaque version de l'Agent à un endpoint différent basé sur la version du *forwarder* utilisé.
+Cette décision a été prise après la faille de sécurité POODLE, les endpoints versionnés commencent avec l'agent 5.2.0, c'est-à-dire que chaque version de l'Agent a un endpoint différent basé sur la version du *forwarder* utilisé.
 
 * i.e. Agent 5.2.0 envoie à  `5-2-0-app.agent.datadoghq.com`  
 
 En conséquence whitelistez `* .agent.datadoghq.com` dans vos firewalls.
 
-Ces domaines sont des **CNAME** pointant vers un ensemble d'adresses IP statiques, ces adresses peuvent être trouvées à:
+Ces domaines sont des **CNAME** pointant vers un ensemble d'adresses IP statiques, ces adresses peuvent être trouvées à l'adresse suivante:
 
 * **[https://ip-ranges.datadoghq.com][4]**
 
