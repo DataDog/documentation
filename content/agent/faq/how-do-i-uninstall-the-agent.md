@@ -8,12 +8,12 @@ further_reading:
 ---
 
 ## Agent v6
-### Amazon Linux/Debian/Fedora/Ubuntu
+### Debian/Ubuntu
 ```
 sudo apt-get --purge remove datadog-agent -y
 ```
 
-### CentOS
+### CentOS/RHEL/Fedora/Amazon Linux
 
 ```
 sudo yum remove datadog-agent
@@ -71,7 +71,7 @@ sudo rm /Library/LaunchDaemons/com.datadoghq.agent.plist
 sudo apt-get --purge remove datadog-agent -y
 ```
 
-### CentOS/RHEL/Amazon Linux
+### CentOS/RHEL/Fedora/Amazon Linux
 
 ```
 sudo yum remove datadog-agent
