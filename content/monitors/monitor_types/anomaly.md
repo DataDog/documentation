@@ -169,7 +169,7 @@ Previously we were treating count metrics as gauges, and thus interpolating betw
 
 ### But what if I prefer it if my count metric were treated as a gauge?
 
-Not interpolating between counts makes sense if the thing you are counting is something like errors. However, if you have regularly scheduled jobs that happen every hour, it might make more sense if the metric is not reporting a value of 0.0 between runs. There are two different ways to accomplish this: 1) set the rollup to be one hour; or 2) explicitly set `count_default_zero='false'` using the API.
+Not interpolating between counts makes sense if the thing you are counting is something like errors. However, if you have regularly scheduled jobs that happen every hour, it might make more sense if the metric is not reporting a value of 0.0 between runs. There are two different ways to accomplish this: 1) set the rollup (found in the advanced options section) to be one hour; or 2) explicitly set `count_default_zero='false'` using the API.
 
 ### How does setting the rollup interval in "Advanced Options" differ from setting it on the query using `.rollup()`?
 
