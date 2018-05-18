@@ -10,8 +10,6 @@ title: Datadog-Kubernetes state Integration
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-
-
 ## Overview
 
 Get metrics from kubernetes_state service in real time to:

@@ -78,5 +78,4 @@ Linear interpolation is a great fit for metrics reported on a steady basis from 
 Last makes sense for instance if you send datapoints only when the value of the thing you measure changes.
 Null prevents graphs from displaying interpolated values 5 min after the last real value, etc.
 
-
 [1]: /graphing/faq/i-see-unexpected-drops-to-zero-on-my-graph-why

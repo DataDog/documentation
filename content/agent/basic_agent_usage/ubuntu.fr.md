@@ -20,25 +20,22 @@ further_reading:
 Cette page présente les fonctionnalités de base de l'agent Datadog.
 Si vous n'avez pas encore installé l'Agent, les instructions d'installation peuvent être trouvées [sur la page d'intégration de l'agent Datadog][1].
 
-Le processus de mise à niveau à partir de la version précédente de l'agent consiste à réexécuter l'installation depuis le début.
-
+Le processus de mise à niveau à partir de la version précédente de l'Agent consiste à réexécuter l'installation depuis le début.
 
 ## Commandes
 
 L'Agent Datadog possède quelques commandes. Seules les commandes _lifecycle_ (ie `start`/`stop`/`restart` /`status` sur le service Agent) doivent être exécutées avec `sudo service` /` sudo initctl` / `sudo systemctl`, toutes les autres commandes doivent être exécutées avec la commande `datadog-agent`.
 
-{{% table responsive="true" %}}
-| Agent v5                                  |  Agent v6                          | Notes
-| ----------------------------------------------- | --------------------------------------- | ----------------------------- |
-| `sudo service datadog-agent start`              | `sudo service datadog-agent start`      | Start Agent as a service |
-| `sudo service datadog-agent stop`               | `sudo service datadog-agent stop`       | Stop Agent running as a service |
-| `sudo service datadog-agent restart`            | `sudo service datadog-agent restart`    | Restart Agent running as a service |
-| `sudo service datadog-agent status`             | `sudo service datadog-agent status`     | Status of Agent service |
-| `sudo service datadog-agent info`               | `sudo datadog-agent status`             | Status page of running Agent |
-| `sudo service datadog-agent flare`              | `sudo datadog-agent flare`              | Send flare |
-| `sudo service datadog-agent`                    | `sudo datadog-agent --help`             | Display command usage |
-| `sudo -u dd-agent -- dd-agent check <check_name>` | `sudo -u dd-agent -- datadog-agent check <check_name>` | Run a check |
-{{% /table %}}
+| Agent v5                                          | Agent v6                                               | Notes                              |
+| -----------------------------------------------   | ---------------------------------------                | -----------------------------      |
+| `sudo service datadog-agent start`                | `sudo service datadog-agent start`                     | Démarrer l'Agent comme un service           |
+| `sudo service datadog-agent stop`                 | `sudo service datadog-agent stop`                      | Arrêter l'Agent s'éxecutant comme un service    |
+| `sudo service datadog-agent restart`              | `sudo service datadog-agent restart`                   | Redémarrer l'Agent s'éxecutant comme un service |
+| `sudo service datadog-agent status`               | `sudo service datadog-agent status`                    | Statut du service de l'Agent            |
+| `sudo service datadog-agent info`                 | `sudo datadog-agent status`                            | Page de statut de l'Agent       |
+| `sudo service datadog-agent flare`                | `sudo datadog-agent flare`                             | Envoyer un flare                         |
+| `sudo service datadog-agent`                      | `sudo datadog-agent --help`                            | Affiche les commandes d'usage              |
+| `sudo -u dd-agent -- dd-agent check <check_name>` | `sudo -u dd-agent -- datadog-agent check <check_name>` | Execute un check                        |
 
 Plus d'informations sur les métriques, les événements et les checks de service pour une [intégrations][2] peuvent être récupérées avec la commande check:
 ```shell
@@ -56,19 +53,21 @@ sudo service datadog-agent check [integration] check_rate
 * pour les systèmes basés sur `systemd` : `sudo systemctl start/stop/restart datadog-agent`
 * pour les système basés sur `initctl`: `sudo initctl start/stop/restart datadog-agent`
 
+[En apprendre plus sur les commandes pour l'Agent][4]
+
 ## Configuration
 
 Les fichiers et dossiers de configuration de l'Agent se trouvent à:
 
-| Agent v5                                  |  Agent v6                          |
-|:-----|:----|
-|`/etc/dd-agent/datadog.conf`| `/etc/datadog-agent/datadog.yaml` |
+| Agent v5                     | Agent v6                          |
+| :-----                       | :----                             |
+| `/etc/dd-agent/datadog.conf` | `/etc/datadog-agent/datadog.yaml` |
 
 Fichiers de configuration pour [les intégrations][2]:
 
-| Agent v5                                  |  Agent v6                          |
-|:-----|:----|
-|`/etc/dd-agent/conf.d/`|`/etc/datadog-agent/conf.d/`|
+| Agent v5                | Agent v6                     |
+| :-----                  | :----                        |
+| `/etc/dd-agent/conf.d/` | `/etc/datadog-agent/conf.d/` |
 
 ## Troubleshooting
 
@@ -98,8 +97,7 @@ Le programme d'installation d'Agent 6.x peut convertir automatiquement votre con
  DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
 ```
 
-**Note:** le processus d'importation ne déplace pas automatiquement les check custom, 
-puisque nous ne pouvons pas garantir la compatibilité et la portabilité de ces derniers.
+**Note:** le processus d'importation ne déplace pas automatiquement les check custom de l'Agent puisque nous ne pouvons pas garantir la compatibilité et la portabilité de ces derniers.
 
 ##### Installer depuis le début
 
@@ -164,7 +162,7 @@ Pour installer (ou avoir une installation d'Agent v5 à partir de laquelle vous 
     sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 382E94DE
     ```
 
-3. Mettez à jour apt et rétrograder l'agent
+3. Mettez à jour apt et rétrograder l'Agent
 
     ```shell
     sudo apt-get update
@@ -174,7 +172,7 @@ Pour installer (ou avoir une installation d'Agent v5 à partir de laquelle vous 
 
 ## Désinstaller l'Agent
 
-Pour désinstaller l'agent, exécutez:
+Pour désinstaller l'Agent, exécutez:
 
 ```
 $ sudo apt-get --purge remove datadog-agent -y
@@ -187,3 +185,4 @@ $ sudo apt-get --purge remove datadog-agent -y
 [1]: https://app.datadoghq.com/account/settings#agent/ubuntu
 [2]: /integrations
 [3]: /help
+[4]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands

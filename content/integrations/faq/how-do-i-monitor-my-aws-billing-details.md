@@ -25,10 +25,6 @@ The following metrics are currently available using the Datadog-AWS Billing inte
 
 For more robust cost monitoring across a number of cloud services in addition to AWS, Datadog supports 3rd-party integration with [CloudHealth][3]. [This blog post][4] has a more in-depth look at how [CloudHealth][3] integrates with Datadog to enable visibility of cost across your hosted infrastructure.
 
-
-
-
-
 [1]: /integrations/amazon_web_services
 [2]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html#turning_on_billing_metrics
 [3]: https://www.cloudhealthtech.com/partners/technology-partners/datadog

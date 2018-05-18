@@ -155,7 +155,6 @@ Both algorithms are set up to identify outliers that differ from the majority of
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: https://app.datadoghq.com/monitors#create/outlier
 [2]: https://app.datadoghq.com/monitors#/create
 [3]: /monitors/monitor_types/#define-the-conditions

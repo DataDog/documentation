@@ -28,5 +28,4 @@ Override a Screenboard configuration in Datadog.
 * **`read_only`** [*optional*, *default*=**False**]:
     The read-only status of the screenboard.
 
-
 [1]: /graphing/dashboards/widgets

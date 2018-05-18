@@ -9,9 +9,6 @@ title: Tracing FAQ
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-
-
-
 ### What are the naming criteria for services, resources, etc?
 
 * Service names and resource names **must be lowercase, alphanumeric characters**.

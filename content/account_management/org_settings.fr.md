@@ -1,4 +1,3 @@
-
 ---
 title: Paramètres de l'organisation
 kind: documentation
@@ -15,7 +14,7 @@ Mettez à niveau ou rétrograder votre compte à partir de l'onglet Plan de la p
 
 Affichez l'utilisation horaire de votre compte pour tous les paramètres facturables, ainsi que les 500 principales métriques personnalisées soumises. Si votre organisation est l'organisation parente dans un [compte multi-org][4], vous pourrez également afficher l'utilisation des comptes d'organisation enfant. Les comptes individuels des organisations enfants sont isolés et ne peuvent afficher que leurs facture d'utilisation et compte de métriques personnalisées.
 
-D'autres rapports d'utilisation détaillés peuvent également être créés [sur demande](mailto://success@datadoghq.com) par votre représentant de compte.
+D'autres rapports d'utilisation détaillés peuvent également être créés [sur demande][3] par votre représentant de compte.
 
 ## Historique de facturation
 
@@ -30,8 +29,7 @@ Pour renommer votre organisation, entrez le nouveau nom, puis cliquez sur Enregi
 
 Pour plus d'informations sur la configuration SAML, reportez-vous à la section [Connexion unique avec documentation SAML][5].
 
-
-[1]: /account_management/team/#datadog-user-roles
+[1]: http://localhost:1313/account_management/team/#datadog-user-roles
 [2]: https://app.datadoghq.com/account/billing
 [3]: mailto://success@datadoghq.com
 [4]: /account_management/multi_organization/

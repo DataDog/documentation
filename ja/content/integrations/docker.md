@@ -13,7 +13,6 @@ kind: integration
 
 ## 概要 {#int-overview}
 
-
 <!-- Get metrics from Docker in real time to:
 <ul>
 <li> Vizualize your containers' performance.</li>
@@ -25,7 +24,6 @@ Dockerからリアルタイムにメトリクスを取得する目的は:
 
 - アプリケーションが稼働しているコンテナのパフォーマンスの取得。
 - コンテナパフォーマンスの可視化。
-
 
 <!-- We've written two in depth blog posts on Datadog and Docker::
 

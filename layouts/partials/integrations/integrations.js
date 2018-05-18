@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var mobilefilters = null;
     var sorts = document.querySelectorAll('[data-ref="sort"]');
     var container = document.querySelector('[data-ref="container"]');
+    var search = document.querySelector('[data-ref="search"]');
     var items = window.integrations;
 
     if(!container) return;
@@ -100,6 +101,19 @@ document.addEventListener('DOMContentLoaded', function () {
         pop.style.display = 'none';
         $(window).scrollTop(0);
     });
+    
+    var searchTimer;
+
+    search.addEventListener('input', function(e) {
+        var allBtn = controls.querySelector('[data-filter="all"]');
+
+        // search only executes after user is finished typing
+        clearTimeout(searchTimer);
+        searchTimer = setTimeout(function() {
+            activateButton(allBtn, filters);
+            updateData(e.target.value.toLowerCase(), true)
+        }, 400);
+    })
 
     // integrations dropdown select
     /*$('.integrations-select').on('change', function(e) {
@@ -127,27 +141,34 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function handleButtonClick(button, filters) {
+        // clear the search input
+        search.value = "";
         // If button is already active, or an operation is in progress, ignore the click
         if (button.classList.contains('active') || !button.getAttribute('data-filter')) return;
 
         var filter = button.getAttribute('data-filter');
         activateButton(button, filters);
-        updateData(filter);
+        updateData(filter, false);
     }
 
-    function updateData(filter) {
+    function updateData(filter, isSearch) {
         var show = [];
         var hide = [];
         for(var i = 0; i < window.integrations.length; i++) {
             var item = window.integrations[i];
             var domitem = document.getElementById('mixid_'+item.id);
-            if(filter === 'all' || filter === '#all') {
+            if(filter === 'all' || filter === '#all' || (isSearch && !filter)) {
                 if(!is_safari) {
                     domitem.classList.remove('grayscale');
                 }
                 show.push(item);
             } else {
-                if(filter && item.tags.indexOf(filter.substr(1)) !== -1) {
+                var name = item.name ? item.name.toLowerCase() : '';
+                var public_title = item.public_title ? item.public_title.toLowerCase() : '';
+
+                if (filter
+                    && (isSearch && (name.includes(filter) || public_title.includes(filter)))
+                    || (!isSearch && item.tags.indexOf(filter.substr(1)) !== -1)) {
                     if(!is_safari) {
                         domitem.classList.remove('grayscale');
                     }
@@ -166,11 +187,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 for(var i = 0; i < window.integrations.length; i++) {
                     var item = window.integrations[i];
                     var domitem = document.getElementById('mixid_'+item.id);
-                    if(filter === 'all' || filter === '#all') {
+                    if (filter === 'all' || filter === '#all' || (isSearch && !filter)) {
                         domitem.classList.remove('grayscale');
                         //show.push(item);
                     } else {
-                        if(filter && item.tags.indexOf(filter.substr(1)) !== -1) {
+                        var name = item.name ? item.name.toLowerCase() : '';
+                        var public_title = item.public_title ? item.public_title.toLowerCase() : '';
+
+                        if (filter
+                            && (isSearch && (name.includes(filter) || public_title.includes(filter)))
+                            || (!isSearch && item.tags.indexOf(filter.substr(1)) !== -1)) {
                             domitem.classList.remove('grayscale');
                             //show.push(item);
                         } else {
@@ -201,7 +227,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if(current_cat === "") {
             activateButton(controls.querySelector('[data-filter="all"]'), filters);
             activateButton(mobilecontrols.querySelector('[data-filter="all"]'), mobilefilters);
-            updateData("all");
+            updateData("all", false);
         }
     });
 

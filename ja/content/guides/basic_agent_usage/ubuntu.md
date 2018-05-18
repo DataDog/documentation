@@ -21,7 +21,6 @@ Overview
 
 ### 概要
 
-
 <!-- This guide will outline the basic functionality of the Datadog Agent.
 If you haven't installed the Agent yet, instructions can be found
 <a href='https://app.datadoghq.com/account/settings#agent'>here</a>. -->
@@ -30,9 +29,7 @@ If you haven't installed the Agent yet, instructions can be found
 まだDatadog Agent のインストールを済ませていない場合は、<a href='https://app.datadoghq.com'>Datadog</a> にloginした状態で、該当OSの
 <a href='https://app.datadoghq.com/account/settings#agent/ubuntu'>Agent</a> ページに移動し、インストールの手順を確認してください。
 
-
 {{< partial name="BasicAgentUsage-nix-ja" markdown="true" >}}
-
 
 <!-- If you're still having trouble, our support team will be glad to provide further assistance.
 You can contact them in one of the following ways: -->

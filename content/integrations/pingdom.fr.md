@@ -24,7 +24,7 @@ Suivre les métriques de performance centrées sur l'utilisateur Pingdom dans Da
 
 À ce stade, nous suivons la métrique response_time pour tous les sites que vous configurez sur le site Web de Pingdom.
 
-Des événements Pingdom peuvent être ajoutés en configurant le [Monitor de Status][1] pertinent .
+Des événements Pingdom peuvent être ajoutés en configurant le [Monitor de Status](https://app.datadoghq.com/monitors#create/integration) pertinent .
 
 <div class="alert alert-info">
 Les métriques peuvent uniquement être importées pour les clients Pingdom de niveau Starter ou supérieur.
@@ -59,9 +59,5 @@ Vous avez peut-être vu ce qui suit lors de l'enregistrement de vos informations
 Ajoutez l'adresse e-mail de votre propriétaire de compte pingdom dans le champ **(Optional) Account to query**, puis enregistrez-la.
 
 ## En apprendre plus
-Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][2]
+Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog](https://www.datadoghq.com/blog/)
 
-
-
-[1]: https://app.datadoghq.com/monitors#create/integration
-[2]: https://www.datadoghq.com/blog/

@@ -1,7 +1,7 @@
 ---
-title: Log Collection Languages
+title: Application Log 
 kind: Documentation
-description: "Configure your Datadog agent to gather logs from your favorite languages."
+description: "Configure your loggers to gather logs from your application."
 ---
 
 ## How to get the most of your application logs
@@ -18,7 +18,7 @@ To enable those functionalities use the following attribute names:
 * `error.message`: Error message contained in the stack trace
 * `error.kind`: The type or "kind" of an error (i.e "Exception", "OSError", ...)
 
-**Note**: By default, [integration pipelines][1] attempt to remap default logging library parameters to those specific attributes and parse stack traces or traceback to automatically extract the `error.msg` and `error.kind`.
+**Note**: By default, [integration pipelines][1] attempt to remap default logging library parameters to those specific attributes and parse stack traces or traceback to automatically extract the `error.message` and `error.kind`.
 
 ## Send your application logs in JSON
 
@@ -33,6 +33,5 @@ For integration frameworks, we provide guidelines on how to log in JSON into a f
     {{< nextlink href="/logs/languages/python" >}}Python{{< /nextlink >}}
     {{< nextlink href="/logs/languages/ruby" >}}Ruby{{< /nextlink >}}
 {{< /whatsnext >}}
-
 
 [1]: /logs/processing

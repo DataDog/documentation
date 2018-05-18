@@ -10,8 +10,6 @@ title: Datadog-AWS Elastic File System Integration
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-
-
 ## Overview
 
 Amazon EFS provides simple, scalable file storage for use with Amazon EC2 instances in the AWS Cloud.

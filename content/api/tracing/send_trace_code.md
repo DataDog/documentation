@@ -16,4 +16,3 @@ external_redirect: /api/#send-traces
 
 {{< code-snippets basename="result.send_trace" >}}
 
-

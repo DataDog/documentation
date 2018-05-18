@@ -34,7 +34,6 @@ This end point allows you to post events to the stream. Tag them, set priority a
     Options: **nagios**, **hudson**, **jenkins**, **my_apps**, **chef**, **puppet**, **git**, **bitbucket**...  
     [Complete list of source attribute values][3]
 
-
 [1]: https://github.com/DataDog/dogapi-rb
 [2]: /graphing/event_stream/#markdown-events\
 [3]: /integrations/faq/list-of-api-source-attribute-value

@@ -4,6 +4,7 @@ aliases:
 categories:
   - cloud
   - aws
+  - log collection
 ddtype: crawler
 description: >-
   Suivre les connexions ayant échoué, la latence de session, les espaces de
@@ -31,11 +32,11 @@ Activez cette intégration pour voir dans Datadog toutes vos métriques de Works
 ## Implémentation
 ### Installation
 
-Si vous ne l'avez pas déjà fait, configurez [l'Intégration Amazon Web Services en premier][1]. Aucune autre étape d'installation ne doit être effectuée.
+Si vous ne l'avez pas déjà fait, configurez [l'Intégration Amazon Web Services en premier](https://docs.datadoghq.com/integrations/amazon_web_services/). Aucune autre étape d'installation ne doit être effectuée.
 
 ### Configuration
 
-Dans la [vignette d'intégration AWS] [2], assurez-vous que `Workspaces` est coché dans la partie "metric collection".
+Dans la [vignette d'intégration AWS] (https://app.datadoghq.com/account/settings#integrations/amazon_web_services), assurez-vous que `Workspaces` est coché dans la partie "metric collection".
 
 ## Données collectées
 ### Métriques
@@ -51,12 +52,7 @@ L'intégration AWS WorkSpaces n'inclut aucun événements pour le moment.
 L'intégration AWS WorkSpaces n'inclut aucun check de service pour le moment.
 
 ## Troubleshooting
-Besoin d'aide? Contactez  [l'équipe support de Datadog][3].
+Besoin d'aide? Contactez  [l'équipe support de Datadog](http://docs.datadoghq.com/help/).
 
 ## En apprendre plus
-Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][4]
-
-[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[3]: http://docs.datadoghq.com/help/
-[4]: https://www.datadoghq.com/blog/
+Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog](https://www.datadoghq.com/blog/)

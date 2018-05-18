@@ -1,4 +1,3 @@
-
 ---
 title: Gestion du compte
 kind: documentation
@@ -20,13 +19,13 @@ Si vous vous connectez à Datadog à l'aide de l'authentification Google, votre 
 
 ## Gérer vos organisations
 
-La page des paramètres du compte répertorie également toutes les organisations auxquelles vous êtes associé. Basculez entre ces organisations à partir de cette page ou en survolant le menu du compte dans la navigation de gauche.
+La page *account settings* répertorie également toutes les organisations auxquelles vous êtes associé. Basculez entre ces organisations à partir de cette page ou en survolant le menu du compte dans la navigation de gauche.
 
 **Note**: Si vous quittez une organisation, vous ne pourrez pas la rejoindre à nouveau à moins d'être invité par un administrateur de cette organisation.
 
 Pour rejoindre une organisation existante, vous devez être invité par un administrateur. Pour demander une invitation:
 
-1. Déconnectez-vous de Datadog en cliquant sur le bouton sur la [page des paramètres du compte](https://app.datadoghq.com/account/profile).
+1. Déconnectez-vous de Datadog en cliquant sur le bouton sur la [page des paramètres du compte][12].
 2. Visitez la [page d'inscription des nouveaux utilisateurs][4] et cliquez sur le lien "Join an existing team".
 3. Entrez l'adresse e-mail associée à votre compte Datadog, votre nom et l'adresse e-mail d'un administrateur de l'organisation que vous souhaitez rejoindre.
 4. Cliquez sur "Request Invite" pour soumettre la requête. L'administrateur de l'organisation recevra alors une notification avec des instructions sur la façon de vous ajouter.
@@ -58,3 +57,4 @@ Vous pouvez définir votre fuseau horaire, vos notification de bureau et vos pr�
 [9]: /account_management/org_settings
 [10]: https://docs.datadoghq.com/integrations/github/
 [11]: https://app.datadoghq.com/account/preferences
+[12]: https://app.datadoghq.com/account/profile)

@@ -21,15 +21,15 @@ Datadog Process Monitoring allows for real-time visibility of the most granular 
 
 ## Installation
 
-The following installation processes are for [agent v6 only][6], if you are still using Agent v5, [follow this specific installation process][7]
+The following installation processes are for [Agent v6 only][6], if you are still using Agent v5, [follow this specific installation process][7]
 
-## Process agent
+## Process Agent
 
 **Note**: Live Processes beta for Windows requires Agent 6.
 
 ### Standard Agent Configuration
 
-The process agent is shipped by default with Agent 6 in Linux packages only. Refer to the instructions for standard [Agent installation][8] for platform-specific details.
+The process Agent is shipped by default with Agent 6 in Linux packages only. Refer to the instructions for standard [Agent installation][8] for platform-specific details.
 
 Once the Datadog Agent is installed, enable Live Processes collection by editing the [configuration file][9] at:
 
@@ -55,7 +55,7 @@ The `enabled` value is a string with the following options:
 * `"false"`: Only collect containers if available (the default).
 * `"disabled"`: Don't run the process-agent at all.
 
-Additionally, some configuration options may be set as environment variables. 
+Additionally, some configuration options may be set as environment variables.
 
 **Note**: options set as environment variables override the settings defined in the configuration file.
 
@@ -70,7 +70,7 @@ Follow the instructions for the [Docker Agent][11], passing in the following att
 -e DD_PROCESS_AGENT_ENABLED=true
 ```
 
-**Note**: To collect container information in the standard install, the dd-agent user needs to have permissions to access docker.sock.
+**Note**: To collect container information in the standard install, the `dd-agent` user needs to have permissions to access docker.sock.
 
 ### Kubernetes Daemonset
 
@@ -92,6 +92,41 @@ In the [dd-agent.yaml][12] manifest used to create the daemonset, add the follow
 
 Refer to the standard [daemonset installation][13] and the [Docker Agent][11] information pages for further documentation.
 
+### Process Arguments Scrubbing
+
+In order to hide sensitive data on the Live Processes page the Agent scrubs sensitive arguments from the process command line. This feature is enabled by default and any process argument that matches one of the following words has its value hidden.
+
+```
+"password", "passwd", "mysql_pwd", "access_token", "auth_token", "api_key", "apikey", "secret", "credentials", "stripetoken"
+```
+
+**Note**: The matching is **case insensitive**.  
+
+Define your own list to be merged with the default one, using the `custom_sensitive_words` field in `datadog.yaml` file under the `process_config` section. Use wildcards (`*`) to define your own matching scope. However, a single wildcard (`'*'`) is not supported as a sensitive word.
+
+```
+process_config:
+  scrub_args: true
+  custom_sensitive_words: ['personal_key', '*token', 'sql*', *pass*d*']
+```
+
+The  next image shows one process on the Live Processes page whose arguments have been hidden by using the configuration above.
+
+{{< img src="graphing/infrastructure/process/process_arg_scrubbing.png" alt="process arguments scrubbing" responsive="true" popup="true" style="width:100%;">}}
+
+Set `scrub_args` to `false` to completely disable the process arguments scrubbing.
+
+#### Agent 5
+
+The Agent 5 also supports the scrubbing feature. To manage its behavior, use the following fields on the `datadog.conf` file under the `[process.config]` section:
+
+```
+[process.config]
+scrub_args: true
+custom_sensitive_words: personal_key,*token,sql*,*pass*d*
+```
+
+
 ## Searching, Filtering, and Pivoting
 
 ### String Search
@@ -103,7 +138,7 @@ Processes and containers are by their nature extremely high cardinality objects.
 
 ### Filtering and Pivoting
 
-Making sense of hundreds of thousands or millions of processes can seem overwhelming!  Using tagging makes navigation easy.  In addition to all existing host-level tags, processes are tagged by `user`. 
+Making sense of hundreds of thousands or millions of processes can seem overwhelming! Using [tagging][15] makes navigation easy. In addition to all existing host-level tags, processes are tagged by `user`.
 
 First, we can filter down to role:McNulty-Query, which is our front end query service, in order to narrow our search.  Then we can search for our NGINX master processes, and pivot the table by Availability-Zone, to be confident about that service staying highly available.
 
@@ -144,7 +179,6 @@ While actively working with the Live Processes, metrics are collected at 2s reso
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: https://app.datadoghq.com/account/settings#agent
 [4]: /integrations/kubernetes/
 [5]: https://github.com/DataDog/docker-dd-agent
@@ -157,3 +191,4 @@ While actively working with the Live Processes, metrics are collected at 2s reso
 [12]: https://app.datadoghq.com/account/settings#agent/kubernetes
 [13]: /integrations/kubernetes/#installation-via-daemonsets-kubernetes-110
 [14]: https://docs.datadoghq.com/infrastructure/livecontainers/
+[15]: /getting_started/tagging/

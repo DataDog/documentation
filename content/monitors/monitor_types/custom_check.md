@@ -18,7 +18,7 @@ further_reading:
 
 Custom monitors encompass any service checks that are not reported by one of the out-of-the-box integrations included with the Agent.
 
-Refer to the [Guide to Agent Checks][1] for detailed information on writing your own checks that send metrics, events, or service checks.
+Refer to the [Agent checks guide][1] for detailed information on writing your own checks that send metrics, events, or service checks.
 
 ## Configuration
 
@@ -38,7 +38,6 @@ Refer to the [Guide to Agent Checks][1] for detailed information on writing your
 
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /agent/agent_checks/
 [2]: /monitors/notifications

@@ -16,7 +16,6 @@ sidebar:
 
 <!-- ### Overview
 
-
 Connect Varnish to Datadog in order to:
 
 - Visualize your cache performance in real-time.
@@ -24,12 +23,10 @@ Connect Varnish to Datadog in order to:
 
 ## 概要
 
-
 次の目的で、VarnishのメトリクスをDatadogに送信します:
 
 - キャッシュシステムのパフォーマンスを可視化します
 - Varnishのパフォーマンス情報と他のアプリケーションの情報を連携し状況を把握する
-
 
 Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
@@ -138,7 +135,6 @@ Datadog Agentの設定ファイルサンプルとメトリクス取得プログ�
     varnish.sms_nobj
     varnish.sms_nreq
     varnish.uptime -->
-
 
 Varnishインテグレーションがデフォルトで取得しているメトリクス:
 

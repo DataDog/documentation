@@ -11,6 +11,9 @@ further_reading:
 - link: "/logs/explore"
   tag: "Documentation"
   text: Learn how to explore your logs
+- link: "logs/graph"
+  tag: "Documentation"
+  text: "Perform analytics with Log Graphs"
 - link: /logs/faq/log-collection-troubleshooting-guide
   tag: "FAQ"
   text: Log Collection Troubleshooting Guide
@@ -48,7 +51,6 @@ Alternatively, install it manually:
     use Monolog\Formatter\JsonFormatter;    
     ```
 
-
 ### Setup - Log into a file with Monolog
 
 The following configuration enables the JSON formatting and writes the logs and events into the `application-json.log` file. Edit your code, right after the initialization of the Monolog instance and add a new handler:
@@ -80,7 +82,7 @@ $log->pushHandler($stream);
 $log->info('Adding a new user', array('username' => 'Seldaek'));
 ```
 
-### Configure your Datadog agent
+### Configure your Datadog Agent
 
 Create a `php.d/conf.yaml` file in your `conf.d/` folder with the following content:
 
@@ -173,7 +175,7 @@ $monolog->pushHandler($stream);
 return $r;
 ```
 
-### Configure your Datadog agent
+### Configure your Datadog Agent
 
 Create a `php.d/conf.yaml` file in your `conf.d/` folder with the following content:
 
@@ -361,7 +363,7 @@ This section is about:
                 formatter: monolog.json_formatter
     ```
 
-### Configure your Datadog agent
+### Configure your Datadog Agent
 
 Create a `php.d/conf.yaml` file in your `conf.d/` folder with the following content:
 
@@ -555,8 +557,6 @@ If you want to develop yours, [refer the Zend documentation][13].
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-
 
 [1]: /logs
 [2]: /logs/languages/php/#php-monolog

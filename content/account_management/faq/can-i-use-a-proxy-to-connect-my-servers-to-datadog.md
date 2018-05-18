@@ -1,16 +1,15 @@
-
 ---
 title: Can I use a proxy to connect my servers to Datadog?
 kind: faq
 ---
 
-If your network configuration restricts outbound traffic, [proxy all agent traffic][1] through one or several hosts that have more permissive outbound policies.
+If your network configuration restricts outbound traffic, [proxy all Agent traffic][1] through one or several hosts that have more permissive outbound policies.
 
 You have a few options to send traffic to Datadog over SSL/TLS for hosts that are not directly connected to the Internet: 
 
-* [Using the agent as a proxy][2] (for up to 16 agents per proxy)
+* [Using the Agent as a proxy][2] (for up to 16 Agents per proxy)
 * [Using a web proxy][3] (e.g. Squid, Microsoft Web Proxy) that is already deployed in your network
-* [Using HAProxy][4] (High volume solution. A single HAProxy instance can accommodate traffic from ~1000 Datadog agents)
+* [Using HAProxy][4] (High volume solution. A single HAProxy instance can accommodate traffic from ~1000 Datadog Agents)
 
 Here is a common scenario with an Amazon VPC:
 {{< img src="account_management/faq/Datadog_Amazon_VPC.jpg" alt="Datadog Amazon VPC" responsive="true" popup="true">}}

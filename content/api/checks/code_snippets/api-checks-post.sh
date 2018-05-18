@@ -1,7 +1,5 @@
 currenttime=$(date +%s)
 
-
-
 curl  -X POST -H "Content-type: application/json" \
 -d "{
       \"check\": \"app.is_ok\",

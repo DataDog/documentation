@@ -12,8 +12,6 @@ title: Datadog-Microsoft Azure Virtual Machine Scale Set Integration
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-
-
 {{< img src="integrations/azure_vm_scale_set/azure_vm_scale_set_dashboard.png" >}}
 
 ## Overview

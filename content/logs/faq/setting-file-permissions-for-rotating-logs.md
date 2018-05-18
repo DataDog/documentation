@@ -17,11 +17,11 @@ The Datadog Agent runs under the `dd-agent` user and `dd-agent` group. This prev
 
 ## Setting permissions using ACLs
 
-In order to allow read-only access for dd-agent only, [create ACLs and modify logrotate to persist the permissions changes][1].
+In order to allow read-only access for `datadog-agent` only, [create ACLs and modify logrotate to persist the permissions changes][1].
 
 ### Verifying ACLs are enabled on your system
 
-[ACLs needs to be enabled][2] on your file system to set permissions using the methods outlined in this article.  Verify ACLs are enabled by using the`getfacl` and `setfacl` commands to set permissions for the dd-agent user on a test directory, for example:
+[ACLs needs to be enabled][2] on your file system to set permissions using the methods outlined in this article.  Verify ACLs are enabled by using the`getfacl` and `setfacl` commands to set permissions for the `datadog-agent` user on a test directory, for example:
 
 ```
 mkdir /var/log/test-dir
@@ -30,13 +30,13 @@ setfacl -m u:dd-agent:rx /var/log/test-dir
 getfacl /var/log/test-dir/
 ```
 
-The permissions set for dd-agent appears in the output of getfacl if ACLs are enabled.
+The permissions set for `datadog-agent` appears in the output of getfacl if ACLs are enabled.
 
 {{< img src="logs/faq/setting_file_permission.png" alt="Setting file permission" responsive="true" popup="true">}}
 
 ### Granting dd-agent read and execute permissions on log directories
 
-Once you have verified ACLs are enabled, grant read and execute permissions for the dd-agent user on the appropriate directories for log collection. For example, to grant access to `/var/log/apache` , run:
+Once you have verified ACLs are enabled, grant read and execute permissions for the `datadog-agent` user on the appropriate directories for log collection. For example, to grant access to `/var/log/apache` , run:
 
 ```
 setfacl -m u:dd-agent:rx /var/log/apache
@@ -69,7 +69,6 @@ Check the ACL status of a file with:
 ```
 getfacl /var/log/<application-directory>
 ```
-
 
 ## Setting permissions when ACLs are not present
 
@@ -107,7 +106,6 @@ Each common off-the-shelf application will follow a similar nomenclature. The ad
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: https://help.ubuntu.com/community/FilePermissionsACLs
 [2]: https://www.tecmint.com/secure-files-using-acls-in-linux/

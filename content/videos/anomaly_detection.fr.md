@@ -9,6 +9,6 @@ videos:
     - Monitors
 ---
 
-Les métriques changent tout le temps, alors comment savoir si un changement est anormal? Datadog propose désormais 4 algorithmes de détection d'anomalies pour différentes métriques et tendances dans votre infrastructure.
+Les métriques changent tout le temps, alors comment savoir si un changement est anormal? Datadog propose désormais [4 algorithmes de détection d'anomalies][1] pour différentes métriques et tendances dans votre infrastructure.
 
-
+[1]: /monitors/monitor_types/anomaly

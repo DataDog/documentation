@@ -20,44 +20,46 @@ further_reading:
 
 This page outlines the basic functionality of the Datadog Agent for Amazon linux.  
 If you haven't installed the Agent yet, instructions can be found
-[in the Datadog agent integration page][1]
+[in the Datadog Agent integration page][1]
 
 ## Commands
 
 The service manager provided by the operating system is responsible for the Agent lifecycle: depending on which one is installed, `sudo service`, `sudo initctl` or `sudo systemctl` should be used to `start`, `stop` or `restart` the Agent.  
 Other functionalities are provided by the Agent binary itself, globally available through the command `datadog-agent`: it's the case for example of the `status` and `flare` commands.
 
-{{% table responsive="true" %}}
-| Agent v5                                  |  Agent v6                          | Notes
-| ----------------------------------------------- | --------------------------------------- | ----------------------------- |
-| `sudo service datadog-agent start`              | `sudo service datadog-agent start`      | Start Agent as a service |
-| `sudo service datadog-agent stop`               | `sudo service datadog-agent stop`       | Stop Agent running as a service |
-| `sudo service datadog-agent restart`            | `sudo service datadog-agent restart`    | Restart Agent running as a service |
-| `sudo service datadog-agent status`             | `sudo service datadog-agent status`     | Status of Agent service |
-| `sudo service datadog-agent info`               | `sudo datadog-agent status`             | Status page of running Agent |
-| `sudo service datadog-agent flare`              | `sudo datadog-agent flare`              | Send flare |
-| `sudo service datadog-agent`                    | `sudo datadog-agent --help`             | Display command usage |
-| `sudo -u dd-agent -- dd-agent check <check_name>` | `sudo -u dd-agent -- datadog-agent check <check_name>` | Run a check |
-{{% /table %}}
+
+| Agent v5                                          | Agent v6                                               | Notes                              |
+| -----------------------------------------------   | ---------------------------------------                | -----------------------------      |
+| `sudo service datadog-agent start`                | `sudo service datadog-agent start`                     | Start Agent as a service           |
+| `sudo service datadog-agent stop`                 | `sudo service datadog-agent stop`                      | Stop Agent running as a service    |
+| `sudo service datadog-agent restart`              | `sudo service datadog-agent restart`                   | Restart Agent running as a service |
+| `sudo service datadog-agent status`               | `sudo service datadog-agent status`                    | Status of Agent service            |
+| `sudo service datadog-agent info`                 | `sudo datadog-agent status`                            | Status page of running Agent       |
+| `sudo service datadog-agent flare`                | `sudo datadog-agent flare`                             | Send flare                         |
+| `sudo service datadog-agent`                      | `sudo datadog-agent --help`                            | Display command usage              |
+| `sudo -u dd-agent -- dd-agent check <check_name>` | `sudo -u dd-agent -- datadog-agent check <check_name>` | Run a check                        |
 
 **NB**: If `service` is not available on your system, use:
 
 * on `upstart`-based systems: `sudo initctl start/stop/restart datadog-agent`
 * on `systemd`-based systems: `sudo systemctl start/stop/restart datadog-agent`
 
+[Learn more about Service lifecycle commands][4]
+
 ## Configuration
 
 The configuration files and folders for for the Agent are located at:
 
-| Agent v5                                  |  Agent v6                          |
-|:-----|:----|
-|`/etc/dd-agent/datadog.conf`| `/etc/datadog-agent/datadog.yaml` |
+| Agent v5                     | Agent v6                          |
+| :-----                       | :----                             |
+| `/etc/dd-agent/datadog.conf` | `/etc/datadog-agent/datadog.yaml` |
 
 Configuration files for [integrations][2]:
 
-| Agent v5                                  |  Agent v6                          |
-|:-----|:----|
-|`/etc/dd-agent/conf.d/`|`/etc/datadog-agent/conf.d/`|
+| Agent v5                | Agent v6                     |
+| :-----                  | :----                        |
+| `/etc/dd-agent/conf.d/` | `/etc/datadog-agent/conf.d/` |
+
 
 ## Troubleshooting
 
@@ -74,11 +76,11 @@ The Agent logs are located in the `/var/log/datadog/` directory:
 
 If you're still having trouble, [our support team][3] will be glad to provide further assistance.
 
-## Adding a custom python package to the agent
+## Adding a custom python package to the Agent
 
 The Python interpreter embedded with the Agent is located here:  
 `/opt/datadog-agent/embedded/bin/python`.
-The agent also comes with pip, install python libraries using:
+The Agent also comes with pip; install python libraries using:
 ```
 sudo -u dd-agent -- /opt/datadog-agent/embedded/bin/pip install <package_name>
 ```
@@ -90,18 +92,17 @@ A script is available to automatically install or upgrade the new Agent. It sets
 #### One-step install
 ##### To Upgrade
 
-The Agent 6.x installer can automatically convert your 5.x style agent configuration at upgrade:
+The Agent 6.x installer can automatically convert your 5.x style Agent configuration at upgrade:
 
 ```shell
  DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
 ```
 
-**Note:** the import process won't automatically move custom checks, this is by
-design since we cannot guarantee full backwards compatibility out of the box.
+**Note:** the import process won't automatically move custom Agent checks, this is by design since we cannot guarantee full backwards compatibility out of the box.
 
 ##### To Install Fresh
 
-To install on a clean box (or have an existing agent 5 install from which you do not wish to import the configuration) provide an api key:
+To install on a clean box (or have an existing Agent 5 install from which you do not wish to import the configuration) provide an api key:
 
 ```shell
  DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
@@ -159,7 +160,7 @@ To install on a clean box (or have an existing agent 5 install from which you do
     sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 382E94DE
     ```
 
-3. Update apt and downgrade the agent
+3. Update apt and downgrade the Agent
 
     ```shell
     sudo apt-get update
@@ -167,9 +168,9 @@ To install on a clean box (or have an existing agent 5 install from which you do
     sudo apt-get install datadog-agent
     ```
 
-## Uninstall the agent
+## Uninstall the Agent
 
-To uninstall the agent run: 
+To uninstall the Agent, run: 
 
 ```
 $ sudo apt-get --purge remove datadog-agent -y
@@ -182,3 +183,4 @@ $ sudo apt-get --purge remove datadog-agent -y
 [1]: https://app.datadoghq.com/account/settings#agent/aws
 [2]: /integrations
 [3]: /help
+[4]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands

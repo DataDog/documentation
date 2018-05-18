@@ -61,7 +61,7 @@ When you are defining an entity (Screenboard, metric, tags, etc) or updating a p
 
 When using these types of API calls within Postman, you have to define the JSON payload within the Body section of Postman and define the contentType to JSON. You then paste or type in the JSON payload that you want to send on the API. There is built in notifications (red X) that indicates if you have improperly formatted JSON to make for quick and easy identification.
 
-In the below example, I am using the Setup New Screenboard API call to define a new Screenboard for my Amazon EC2 agents.
+In the below example, I am using the Setup New Screenboard API call to define a new Screenboard for my Amazon EC2 Agents.
 {{< img src="developers/faq/setup_new_screenboard.gif" alt="setup_new_screenboard" responsive="true" popup="true">}}
 
 After you have all of your JSON entered, you can SEND the request and you should get a Status of 200 signifying the call was successful.  You can reference [this page][4] to see a full list of possible HTTP status codes.

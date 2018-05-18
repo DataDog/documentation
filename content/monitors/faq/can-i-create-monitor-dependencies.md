@@ -62,7 +62,6 @@ That's alot of missing data - check first to see if there is an AWS outage?
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /monitors/monitor_types/composite
 [2]: /api/#downtimes
 [3]: /api/#cancel-downtime-by-scope

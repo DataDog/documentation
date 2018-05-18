@@ -14,10 +14,10 @@ apm_enabled: yes
 ```
 
 <div class="alert alert-info">
-APM is enabled by default after Datadog Agent 5.13 (on Linux and Docker), and can be disabled by adding the parameter: <code>apm_enabled: no</code> in your Datadog agent configuration file.
+APM is enabled by default after Datadog Agent 5.13 (on Linux and Docker), and can be disabled by adding the parameter: <code>apm_enabled: no</code> in your Datadog Agent configuration file.
 </div>
 
-### Installing the agent
+### Installing the Agent
 
 With our infrastructure monitoring, metrics are sent to the Datadog Agent, which then forwards them to Datadog. Similarly, tracing metrics are also sent to the Datadog Agent. To enable tracing:
 

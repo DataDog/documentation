@@ -44,21 +44,13 @@ https://app.datadoghq.com/intake/webhook/airbrake?api_key=<YOUR_DATADOG_API_KEY>
 
 4. Cliquez sur "Save"
 
-A chaque fois qu'une nouvelle erreur survient, elle apparaitra dans votre flux d'événements.
-
 ## Données collectées
-### Métriques
-{{< get-metrics-from-git "airbrake" >}}
 
-
-### Evénements
-Le check Airbrake n'inclut aucun événement pour le moment.
-
-### Checks de Service
-Le check Airbrake n'inclut aucun check de service pour le moment.
+A chaque fois qu'une nouvelle erreur survient, elle apparaitra dans votre [flux d'événements](https://docs.datadoghq.com/graphing/event_stream/).
 
 ## Troubleshooting
 Besoin d'aide? Contactez  [l'équipe support de Datadog](http://docs.datadoghq.com/help/).
 
 ## En apprendre plus
 Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog](https://www.datadoghq.com/blog/)
+

@@ -62,14 +62,14 @@ Une fois réclamé, un incident peut être résolu en cliquant sur le bouton **r
 
 ## Afficher les événements non agrégé
 
-Remplacez le paramètre "aggregate_up" dans l'URL par "false". Pour supprimer l'événement d'agrégat de plus haut niveau, configurez `use_date_happened` par true.
- [Voici un lien d'exemple][3]
+Remplacez le paramètre "aggregate_up" dans l'URL par "false".
+Pour supprimer l'événement d'agrégat de plus haut niveau, configurez `use_date_happened` par true. [Voici un lien d'exemple][3]
 
 ## Evénements par Email
 
 Lorsque vous avez besoin d'intégrer une application ou un système avec Datadog, vous avez peu de choix. Le premier utilise l'une de nos nombreuses [intégrations][integrations] existantes. Cela vous donne accès à une grande variété de métriques et d'événements avec un minimum d'effort de configuration de votre part. Si votre application n'est pas présente dans la liste d'intégrations, vous pouvez choisir de créer [check pour l'Agent][agentcheck]. Cela nécessite beaucoup plus d'efforts et potentiellement plus de connaissances sur la façon dont l'application et Datadog fonctionnent.
 
-Une autre option est disponible si vous n'utilisez pas une application via une intégration et que vous ne souhaitez pas créer de check d'agent. Vous pouvez vous appuyer sur l'application ou le système envoyant un email à la place. Il existe deux manières différentes d'utiliser les événements par e-mail, selon que l'application vous offre la possibilité de personnaliser le format du corps de l'e-mail envoyé ou non.
+Une autre option est disponible si vous n'utilisez pas une application via une intégration et que vous ne souhaitez pas créer de check d'Agent. Vous pouvez vous appuyer sur l'application ou le système envoyant un email à la place. Il existe deux manières différentes d'utiliser les événements par e-mail, selon que l'application vous offre la possibilité de personnaliser le format du corps de l'e-mail envoyé ou non.
 
 <div class="alert alert-info">
 <b>JSON-Formatted vs texte brute:</b> <br>

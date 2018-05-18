@@ -401,6 +401,9 @@ $(document).ready(function () {
         var currentSt = $(document).scrollTop();
         if(htag.length) {
             newSt = htag.offset().top - offset;
+            if(window.scrollY < 64.5){
+                newSt += (64.5 - window.scrollY);
+            }
             if(currentSt !== newSt) {
                 if(animate) {
                     $("html, body").animate({scrollTop: newSt}, 300);
@@ -491,5 +494,13 @@ $(document).ready(function () {
     // sticky polyfill trigger
     var elements = document.querySelectorAll('.sticky');
     Stickyfill.add(elements);
+
+    // add targer-blank to external links
+    var newLinks = document.getElementsByTagName("a");
+    for(i = 0; i < newLinks.length; i++) {
+        if(!newLinks[i].href.includes("datadoghq.com") && !newLinks[i].href.includes("localhost:1313")){
+            $("a[href='" + newLinks[i].href + "']").attr("target", "_blank");
+        }
+    }
 
 });

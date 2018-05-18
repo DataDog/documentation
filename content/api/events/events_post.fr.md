@@ -32,9 +32,8 @@ Ce endpoint vous permet de publier des événements dans le flux d'événement d
 * **`source_type_name`** [*optionnel*, *défaut*=**None**]:  
     Le type d'événement envoyé.
     Options: **nagios**, **hudson**, **jenkins**, **my_apps**, **chef**, **puppet**, **git**, **bitbucket**...  
-    [Liste complète des valeurs d'attribut source][3]
-
+    [Liste des valeurs de l'attribut source de l'API][3].
 
 [1]: https://github.com/DataDog/dogapi-rb
-[2]: /graphing/event_stream/#markdown-events
+[2]: /graphing/event_stream/#markdown-events\
 [3]: /integrations/faq/list-of-api-source-attribute-value

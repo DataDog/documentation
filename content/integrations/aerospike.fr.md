@@ -1,14 +1,19 @@
 ---
+ddtype: check
 description: L'intégration Aerospike aide à récupérer les performances et la disponibilité
   metrics from Aerospike cluster instances.
+doc_link: https://docs.datadoghq.com/integrations/aerospike/
 git_integration_title: aerospike
-integration_title: ''
+has_logo: true
+integration_title: Aerospike
+is_public: true
 kind: integration
 maintainer: r.guo@aerospike.com
 manifest_version: 0.1.0
 max_agent_version: 6.0.0
 min_agent_version: 5.6.3
 name: aerospike
+public_title: Intégration Datadog-Aérospike
 short_description: Collecter les statistiques de cluster et de namespaces
 support: contrib
 supported_os:
@@ -24,7 +29,7 @@ version: 0.1.0
 Obtenir des métriques de Aerospike Database en temps réel pour:
 
 * Visualiser et monitorer les états de Aerospike
-* Soyez informé des failovers et des événements d'aerospike.
+* Être informé des failovers et des événements d'aerospike.
 
 ## Installation
 
@@ -36,19 +41,6 @@ Modifiez le fichier `aerospike.yaml` pour pointer vers votre serveur et votre po
 
 ## Validation
 
-Lorsque vous exécutez `info datadog-agent`, vous devriez voir quelque chose comme ceci:
+[Exécutez le sous-commande `status` de l'Agent][1] et cherchez `aerospike` dans la section Checks.
 
-    Checks
-    ======
-
-        aerospike
-        -----------
-          - instance #0 [OK]
-          - Collected 269 metrics, 0 events & 1 service checks
-
-## Compatibilité
-
-Le check Aerospike est compatible avec toutes les principales plateformes et Aerospike Community Edition.
-
-
-
+[1]: https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information

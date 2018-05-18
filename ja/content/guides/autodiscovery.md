@@ -9,8 +9,6 @@ title: Using Autodiscovery with Docker
 
 <div class='alert alert-info'><strong>NOTICE:</strong>アクセスいただきありがとうございます。こちらのページは現在英語のみのご用意となっております。引き続き日本語化の範囲を広げてまいりますので、皆様のご理解のほどよろしくお願いいたします。</div>
 
-
-
 <div class="alert alert-info">
 Autodiscovery was previously called Service Discovery. It's still called Service Discovery throughout the Agent's code and in some configuration options.
 </div>
@@ -282,7 +280,6 @@ spec:
         - containerPort: 80
 ~~~
 
-
 ### Template Source: Docker Label Annotations
 
 Since version 5.17 of the Datadog Agent, you can store check templates in Docker labels. With Autodiscovery enabled, the Agent detects if it's running on Docker and automatically searches all labels for check templates; you don't need to configure a template source (i.e. via `SD_CONFIG_BACKEND`) as you do with key-value stores.
@@ -309,7 +306,6 @@ labels:
 -l com.datadoghq.ad.check_names='[<CHECK_NAME>]' -l com.datadoghq.ad.init_configs='[<INIT_CONFIG>]' -l com.datadoghq.ad.instances='[<INSTANCE_CONFIG>]'
 ~~~
 
-
 #### Docker Example: NGINX Dockerfile
 
 The following Dockerfile will launch an NGINX container with autodiscovery enabled:
@@ -324,9 +320,7 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%/nginx_status:%%port%%"}]'
 ~~~
 
-
 ## Reference
-
 
 ### Template Variable Indexes
 

@@ -1,8 +1,11 @@
 ---
-title: Search & Graph
+title: Search
 kind: documentation
 description: "The Logs Explorer is your Datadog home base for troubleshooting and exploration over your logs."
 further_reading:
+- link: "logs/graph"
+  tag: "Documentation"
+  text: "Perform analytics with Log Graphs"
 - link: "logs/processing"
   tag: "Documentation"
   text: Learn how to process your logs
@@ -11,7 +14,7 @@ further_reading:
   text: Learn more about parsing
 ---
 
-## Overview 
+## Overview
 
 The Logs explorer is your home base for troubleshooting and exploration:
 
@@ -20,10 +23,9 @@ The Logs explorer is your home base for troubleshooting and exploration:
 In this view you can:
 
 * [Interact with the Time range](#time-range)
-* [Display lists of logs](#log-list)
+* [Display lists of logs](#logstream)
 * [Use facets to filter your Logstream](#facets)
 * [Enter search queries](#search-bar)
-* [Perform analytics with Log Graphs](#log-graph)
 
 ## Time Range
 
@@ -53,7 +55,7 @@ You can click on any log line to see more details about it:
 
 ### View in context
 
-Click on its `host` or `service` and select `View in context` to see log lines dated just before and after a selected log - even if they don't match your filter -
+Click on its `host` or `service` and select `View in context` (also known as `Focus on Host & Service`) to see log lines dated just before and after a selected log - even if they don't match your filter -
 
 {{< img src="logs/explore/focus_host_service.png" style="width:50%;" alt="focus on host and service.png" responsive="true" popup="true" style="width:70%;">}}
 
@@ -71,13 +73,13 @@ When enabled, your logstream display changes to better focus on your logs `messa
 * Without multi-line:
 {{< img src="logs/explore/before_multi_line.png" alt="Before Multi-line display" responsive="true" popup="true">}}
 
-* With multi-line enabled: 
+* With multi-line enabled:
 {{< img src="logs/explore/multi_line_log.png" alt="Log with Multi-line display" responsive="true" popup="true">}}
 
 **Note**:  If present, `error.stack` attribute is displayed in priority as it should be used for stack traces.
 Remap any stack-trace attribute to this specific attribute with [the attribute remapper processor][1].
 
-## Facets 
+## Facets
 
 A facet displays all the distinct members of an attribute or a tag as well as provides some basic analytics such as the amount of logs represented. This is also a switch to easily filter your data.
 
@@ -145,10 +147,10 @@ To combine multiple terms into a complex query, you can use any of the following
 | `-` | **Exclusion**: the following term is NOT in the event |authentication AND -password|
 {{% /table %}}
 
-### Facet search 
+### Facet search
 To search on a specific [facet](#facets) you need to [add it as a facet first](#create-a-facet) then add `@` to specify you are searching on a facet.
 
-For instance, if your facet name is **url** and you want to filter on the **url** value *www.datadoghq.com* just enter: 
+For instance, if your facet name is **url** and you want to filter on the **url** value *www.datadoghq.com* just enter:
 
 `@url:www.datadoghq.com`
 
@@ -160,7 +162,7 @@ To perform a multi-character wildcard search, use the `*` symbol as follows:
 * `*hello` matches all log messages that end with hello
 
 ### Numerical values
-Use `<`,`>`, `<=` or `>=` to perform a search on numerical attributes. For instance, retrieve all logs that have a response time over 100ms with:
+Use `<`,`>`, `<=`, or `>=` to perform a search on numerical attributes. For instance, retrieve all logs that have a response time over 100ms with:
 
 `@http.response_time:>100`
 
@@ -173,14 +175,29 @@ It is also possible to search for numerical attribute within a specific range. F
 Your logs inherit tags from [hosts][4] and [integrations][5] that generate them. They can be used in the search and as facets as well:
 
 * `test` is searching for the string "test".
-* `("env:prod" OR test)` matches all logs with the tag #env:prod or the tag #test 
-* `(service:srvA OR service:srvB)` or `(service:(srvA OR srvB))` Matches all logs that contain tags #service:srvA or #service:srvB.
-* `("env:prod" AND -”version:beta”)` matches all logs that contain #env:prod and that do not contain #version:beta
+* `("env:prod" OR test)` matches all logs with the tag `#env:prod` or the tag `#test`
+* `(service:srvA OR service:srvB)` or `(service:(srvA OR srvB))` Matches all logs that contain tags `#service:srvA` or `#service:srvB`.
+* `("env:prod" AND -”version:beta”)` matches all logs that contain `#env:prod` and that do not contain `#version:beta`
+
+If your tags don't follow [tags best practices][6] and don't use the `key:value` syntax, use this search query:
+
+* `tags:<MY_TAG>`
 
 ### Autocomplete
 Typing a complex query can be cumbersome. Use the search bar's autocomplete feature to complete your query using existing values:
 
 {{< img src="logs/explore/search_bar_autocomplete.png" alt="search bar autocomplete " responsive="true" popup="true" style="width:80%;">}}
+
+### Escaping of special characters
+The following attributes are considered as special: `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/`, and `\` require escaping.
+For instance, to search logs that contain `user=12345` the following search must be entered:
+
+`user\=JaneDoe`
+
+The same logic must be applied to spaces within log attributes. It is not recommended to have spaces in log attributes but in such a case, spaces require escaping.
+If an attribute was called `user.first name`, perform a search on this attribute by escaping the space:
+
+`@user.first\ name:myvalue`
 
 ### Saved Searches
 
@@ -192,46 +209,13 @@ To delete a saved search, click on the bin icon under the log search drop-down:
 
 {{< img src="logs/explore/delete_saved_search.png" alt="Delete Saved Search" responsive="true" popup="true" style="width:80%;">}}
 
-### Escaping of special characters
-The following attributes are considered as special: `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/`, `\` and require escaping.
-For instance, to search logs that contain `user=12345` the following search must be entered:
-
-`user\=12345`
-
-The same logic must be applied to spaces within log attributes. It is not recommended to have spaces in log attributes but in such a case, spaces require escaping.
-If an attribute was called `user.first name`, perform a search on this attribute by escaping the space:
-
-`@user.first\ name:myvalue`
-
-## Log Graph
-
-Switch between the Log List and the Log Graph mode by clicking on this button:
-
-{{< img src="logs/explore/graph/log_graph_switch.png" alt="Log graph switch" responsive="true" popup="true" style="width:80%;">}}
-
-To start using it:
-
-1. Choose a [Measure](#measure) or [Facet](#facet) to graph. Choosing a Measure let you then choose the aggregation function whereas selecting a Facet display the unique count.
-    {{< img src="logs/explore/graph/choose_measure_facet.png" alt="choose measure facet" responsive="true" popup="true" style="width:50%;">}}
-2. Select the aggregation function for the Measure you want to graph
-    {{< img src="logs/explore/graph/agg_function_log_graph.png" alt="aggregation function for log graph" responsive="true" popup="true" style="width:50%;">}}
-3. Split by [Tag][6] or [Facet](#facets) to split your graph over the desired dimension.
-
-    {{< img src="logs/explore/graph/split_by_log_graph.png" alt="split by log graph" responsive="true" popup="true" style="width:50%;">}}
-
-4. See logs related to a section of the graph:  
-    Select or click on a section of the graph to either zoom in the graph or see the list of logs corresponding to your selection: 
-
-    {{< img src="logs/explore/graph/using_log_graph.gif" alt="using log graph" responsive="true" popup="true" style="width:80%;">}}
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /logs/processing/#attribute-remapper
 [2]: /logs/#log-graph
 [3]: http://lucene.apache.org/core/2_9_4/queryparsersyntax.html
 [4]: /graphing/infrastructure/
 [5]: /integrations/
-[6]: /getting_started/tagging
+[6]: /getting_started/tagging/#tags-best-practices

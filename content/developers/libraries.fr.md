@@ -23,8 +23,10 @@ Le tableau suivant répertorie les bibliothèques client Datadog-official et com
 En plus de l'intégration officielle d'Ansible, la [section de monitoring][46] du repository [ansible-modules-extras][47] contient des modules qui interagissent avec Datadog.
 
 ### Aptible
-Enclave peut livrer vos métriques à un compte Datadog. [Consultez le centre d'aide Aptible dédié pour savoir comment](https://www.aptible.com/documentation/enclave/reference/metrics/metric-drains/datadog.html).
+Enclave livre vos métriques à un compte Datadog. [Consultez le centre d'aide Aptible dédié pour savoir comment][111].
 
+### Auth0
+[Cette extension][110] prends vos logs Auth0 et les envoie à Datadog.
 ### Consul
 Publiez les comptes du service consul dans Datadog via [DogStatsD](/developers/dogstatsd) avec [cette bibliothèque][96].
 
@@ -188,3 +190,5 @@ Si vous avez écrit une bibliothèque pour Datadog et que vous souhaitez l'ajout
    [107]: https://github.com/byronwolfman/dd-openvpn
    [108]: https://github.com/denniswebb/datadog-openvpn
    [109]: https://github.com/StackStorm-Exchange/stackstorm-datadog
+   [110]: https://github.com/BetaProjectWave/auth0-logs-to-datadog
+   [111]: https://www.aptible.com/documentation/enclave/reference/metrics/metric-drains/datadog.html

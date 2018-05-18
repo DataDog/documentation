@@ -18,7 +18,6 @@ To get your Autoscaling events and metrics, you have to follow the next steps:
 3. Check the Autoscaling box on the AWS Tile 
     {{< img src="integrations/faq/autoscalling_checkbox.png" alt="autoscalling_checkbox" responsive="true" popup="true">}}
 
-
 4. Click on update the tile, you should see the Autoscaling Group tile showing up in your integration list.
 
 5. [Follow those 4 steps to get your ASG metrics][1].

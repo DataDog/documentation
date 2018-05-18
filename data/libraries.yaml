@@ -32,10 +32,6 @@ Classic:
       dogstatsd: true
       authors: Rodrigo Farias Rezino
   - Elixir:
-    - name: ExStatsD
-      link: https://github.com/CargoSense/ex_statsd
-      dogstatsd: true
-      authors: CargoSense
     - name: dogstatsd-elixir
       link: https://github.com/adamkittelson/dogstatsd-elixir
       dogstatsd: true
@@ -44,6 +40,10 @@ Classic:
       link: https://github.com/synrc/mtx
       dogstatsd: true
       authors: N2O Ecosystem
+    - name: statix
+      link: https://github.com/lexmag/statix
+      dogstatsd: true
+      authors: Aleksei Magusev
   - Go:
     - name: datadog-go
       link: https://github.com/DataDog/datadog-go
@@ -51,9 +51,9 @@ Classic:
       dogstatsd: true
       authors: Datadog
     - name: godspeed
-      link: https://github.com/PagerDuty/godspeed
+      link: https://github.com/theckman/godspeed
       dogstatsd: true
-      authors: PagerDuty
+      authors: Tim Heckman
     - name: xstats
       link: https://github.com/rs/xstats
       dogstatsd: true
@@ -176,6 +176,11 @@ Classic:
       link: https://github.com/gphat/datadog-scala
       api: true
       authors: Cory Watson
+  - Swift:
+    - name: SwiftDog
+      link: https://github.com/jaronoff97/SwiftDog
+      api: true
+      authors: Jacob Aronoff
 Tracing:
   - C#:
     - name: DatadogSharp

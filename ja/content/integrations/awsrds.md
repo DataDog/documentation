@@ -14,7 +14,6 @@ Database Service (RDS) with Datadog. -->
 
 このHOWTOでは、Datadogを使ってAWS Relational Database Service(RDS)を監視する方法を紹介します。 　
 
-
 <!-- ## How this works -->
 
 ## AWS RDSのメトリクを包括的に収集する仕組み
@@ -31,7 +30,6 @@ RDSは、データベースインスタンスとCloudWatch経由でインスタ�
 起動中のMySQLやPostgreSQLのRDSインスタンスからのリアルタイムのメトリクスを取得するには、これらのRDSインスタンスに接続することが出来るDatadog Agentが必要です。一般的にDatadog Agentは、Agentが動作しているインスタンスのメトリクスに紐付けられており外部の実RDSインスタンスには紐付けられていません。このような場合には、`dbinstanceidentifer`タグを設定し、取得したメトリクスの整合性をとる必要があります。
 
 監視対象となるRDSインスタンスのタグを、Datadog Agent上の`dbinstanceidentifer`タグに設定すれば、MySQL/PostgreSQLのメトリクスをRDSメトリクスとして取得することは簡単な作業になります。
-
 
 <!-- ## Step-by-step -->
 
@@ -59,7 +57,6 @@ RDSにアクセスするためのエンドポイントURL(例 **mysqlrds.blah.us
 
 更に`DB Instance identifier`(例: **mysqlrds**)の項目を記録しておきます。グラフやアラートを設定する際に必要になります。
 
-
 <!-- ### 2. Configure an agent and connect to your RDS instance -->
 
 ### 2. Datadog Agentを設定し、RDSインスタンスに接続します
@@ -79,7 +76,6 @@ MySQL/PostgreSQLインテグレーションは、個々のデータベースイ�
 {{< snippet-code-block file="rds-conf.yaml" >}}
 
 設定ファイルの変更が終わったら、Datadog Agentを再起動します。`sudo s/etc/init.d/datadog-agent info` (on linux)を実行し、MySQLのCheckが正しく動作しているかを確認します。
-
 
 <!-- ### 3. Visualize RDS and MySQL/PostgreSQL metrics together -->
 

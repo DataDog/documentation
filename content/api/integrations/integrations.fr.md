@@ -16,18 +16,19 @@ Configurez vos intégrations avec l'API Datadog. Les intégrations disponibles s
 
 Les endpoints disponibles sont:
 
-* Pour créer une intégration dans Datadog :
+* Pour **créer** ou **modifier** une intégration dans Datadog:
     **`POST /api/v1/integration/<source_type_name>`**
 
-* Pour remplacer une configuration d'intégration :
+* Pour **remplacer** une configuration d'intégration:
     **`PUT /api/v1/integration/<source_type_name>`**
 
-* Pour récupérer l'état d'une intégration :
+     ATTENTION: Utiliser `PUT` va remplacer votre configuration actuelle.
+
+* Pour récupérer la configuration d'une intégration:
     **`GET /api/v1/integration/<source_type_name>`**
 
 * Pour supprimer une intégration de Datadog :
     **`DELETE /api/v1/integration/<source_type_name>`**
-
 
 [1]: /api/#aws
 [2]: /api/#pagerduty

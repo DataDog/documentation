@@ -1,5 +1,5 @@
 ---
-title: Rate Limiting
+title: Rate limiting
 external_redirect: /api/
 ---
 

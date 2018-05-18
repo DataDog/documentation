@@ -58,11 +58,11 @@ Lorsque vous devez exécuter une recherche plus complexe que les cases à cocher
 
 La raison la plus courante pour écrire une requête est de rechercher un texte spécifique sur tous les titres de monitors et les corps des messages. Une simple recherche de `postgresql` renvoie tous les monitors avec` postgresql` n'importe où dans le titre ou le corps du message. Pour effectuer une recherche sur le titre ou le corps du message, mais pas sur les deux, qualifiez le terme de recherche avec le nom du champ, par ex. `title:postgresql`.
 
-Sinon, vous pouvez utiliser des opérateurs booléens (AND, OR et NOT) et des parenthèses pour écrire des requêtes complexes en utilisant des champs de contrôle. La syntaxe de recherche est très similaire à celle de [Elasticsearch] [2], il est donc plus facile de décrire comment la syntaxe n'est *pas* comme la syntaxe Elasticsearch:
+Sinon, vous pouvez utiliser des opérateurs booléens (AND, OR et NOT) et des parenthèses pour écrire des requêtes complexes en utilisant des champs de contrôle. La syntaxe de recherche est très similaire à celle de [Elasticsearch][2], il est donc plus facile de décrire comment la syntaxe n'est *pas* comme la syntaxe Elasticsearch:
 
 * Les expressions régulières ne sont pas prises en charge
 * Le caractère générique de caractère unique (`?`) N'est pas pris en charge, mais le caractère générique général (`*`) l'est
-* Les recherches de proximité ne sont pas supportées, mais l'opérateur [fuzzy][3] l'est
+* Les recherches de proximité ne sont pas supportées mais l'opérateur [fuzzy][3] l'est.
 * Les plages ne sont pas supportées
 * Boosting n'est pas supporté
 
@@ -87,7 +87,7 @@ Pour modifier un monitor, passez la souris dessus et utilisez les boutons à l'e
 
 Vous pouvez désactiver ou résoudre les monitors déclenchés en à l'aide de la page [Triggered Monitors][4]. Elle est similaire à la page [Manage Monitors](#managing-monitors): vous pouvez trouver des monitors en fonction de leurs attributs en utilisant les mêmes cases à cocher ou la même syntaxe de requête, mais il existe quelques différences. En plus de montrer uniquement les monitors avec un état déclenché (Alert, Warn, or No Data), la  principale différence est que la page Triggered Monitors affiche une ligne pour chaque groupe (c'est-à-dire chaque source rapportant des données) pour chaque monitor.
 
-Disons que vous avez un moniteur appelé "high latency" qui est groupé par host. S'il y a 20 hôtes rapportant des données et 14 ont un statut triggered, la page Triggered Monitor montrera ces 14 lignes si vous recherchez le monitor par titre dans la barre de recherche de requête (par exemple `high latency` ou` title:
+Disons que vous avez un moniteur appelé "high latency" qui est groupé par hôte. S'il y a 20 hôtes rapportant des données et 14 ont un statut triggered, la page Triggered Monitor montrera ces 14 lignes si vous recherchez le monitor par titre dans la barre de recherche de requête (par exemple `high latency` ou` title:
 "high latency"`). Cela vous permet de mettre en sourdine ou de résoudre un monitor pour certaines sources rapportant des données, mais pas toutes (bien sûr, vous pouvez également les désactiver ou les résoudre toutes d'un coup).
 
 Lorsque vous rédigez vos requêtes de recherche, vous pouvez utiliser tous les mêmes champs disponibles sur la page Manage Monitors, même si la plupart d'entre eux ne sont pas contrôlables via des cases à cocher sur la page Triggered Monitors. Quelques remarques sur les différences de champs sur la page Triggered Monitors:
@@ -101,6 +101,6 @@ Lorsque vous rédigez vos requêtes de recherche, vous pouvez utiliser tous les 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors/manage
-[2]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#query-string-syntax 
+[2]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#query-string-syntax
 [3]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_fuzziness
 [4]: https://app.datadoghq.com/monitors/triggered

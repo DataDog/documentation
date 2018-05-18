@@ -39,7 +39,5 @@ It's time to contact [us][2]!
 
 Send us your flare, and details about the language / library you're using, and a snippet of your code instrumentation.
 
-
-
 [1]: /tracing/setup
 [2]: /help

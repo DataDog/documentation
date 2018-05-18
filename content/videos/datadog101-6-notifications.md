@@ -29,4 +29,3 @@ Datadog 101 shows you everything you need to know about using the Datadog platfo
 * [Outlier monitor](?wtime=562)
 * [Managing your monitors](?wtime=574)
 
-

@@ -13,7 +13,6 @@ found below.
 
 There are three plans within Datadog:
 
-
 1. **Free** is only for 5 hosts or less. Free has a single day of data retention. The
     good news is that switching from the Free plan to Pro will not affect your
     setup, so anything you've begun monitoring would not be affected by that status
@@ -49,7 +48,6 @@ Datadogのモニタリングサービスには３種類の料金プランがあ�
    2. 運用環境下よりメトリクスを転送するホストの総数
    3. 支払い条件 (月払い、年払い、など)
 
-
 <!-- For all plans, custom metrics and events are supported but limited to 100
 metrics per host. Custom metrics refer to any metrics that are not part of our
 regular integration suite, for example using custom checks or API-level metrics
@@ -64,13 +62,11 @@ JMX / WMI / Nagios / Cacti).
 例えば、アプリケーションスタックで実施するカスタムチェックやAPIレベルのメトリクスが該当します。
 更に明確化が必要なポイントとして、JMX、 WMI、 Nagios、 Cactiなどの無限のメトリクスをDatadogバックエンドに送信する可能性のあるIntegration は、カスタムメトリクスに分類されます。
 
-
 <!-- Pro and Enterprise data retention is for one year at full resolution (maximum
 is one point per second). For greater data retention needs, please reach out to <a href="mailto:sales@datadoghq.com">
 sales@datadoghq.com</a>. -->
 
 Pro プランとEnterprise プランのデータ保管期間はフル解像度(1ポイント/秒）で、1年です。一般的なプランとして提供しているデータ保管期間の仕様より大きなデータの保管をご希望の場合は、サポートチームまでご連絡ください。[sales@datadoghq.com](mailto:sales@datadoghq.com)
-
 
 <!-- ##### Each invoice is determined by the high watermark of concurrently running hosts for that month.
 
@@ -79,7 +75,6 @@ This is per active host in Datadog, whether or not it's running the agent. -->
 ##### * 請求書は、その月に同時にデータを転送してきているホストの最大数によって算出されます。
 
 ホスト台数は、Datadog Agent を実行しているかどうかにかかわらず、Datadogでアクティブなホストとして登録されている台数となります。
-
 
 <!-- ####<u>Frequently Asked Questions</u> -->
 ---
@@ -119,7 +114,6 @@ $0.03/ホストの使用料を基に、時間課金で請求書を発行する�
 <!-- > If that number exceeds your monthly commit, we just charge overage
 for the excess hosts. -->
 
-
 <!-- ##### Do non-reporting or inactive hosts count?
 
 Non-reporting hosts (status '???') do not count towards billing. It might take
@@ -140,7 +134,6 @@ by its tags).
 </p> -->
 
 仮サーバ等、一時的なホストの監視にDatadogを使った場合、そのホストからデータを受信できなくなった後、およそ24時間後に`Infrastructure` ビューに表示されなくなります。有償プランでは、ダッシュボードにホスト名が表示されなくなった後も、Datadogに転送されてきたデータは保管されています。対象のホスト名やタグが分かれば、転送済みデータを基にダッシュボード上にグラフを表示することができます。
-
 
 <!-- ##### How will an AWS integration impact my monthly billing?
 
@@ -166,7 +159,6 @@ AWS IntegrationによってピックアップされたEC2インスタンスでDa
 
 もし、AWS Integrationが転送するメトリクスを制限したい場合は、ダッシュボードからIntegrationsタブを選択し、[AWS Integration タイル](https://app.datadoghq.com/account/settings#integrations/amazon_web_services)を選択した後、ホップアップ表示の'limit metric collection for all accounts'を選択して、カスタマイズの設定をしてください。
 
-
 <!-- ##### How will a VMware integration impact my monthly billing?
 
 The base pricing is $15 per virtual machine per month. See above for more general information. -->
@@ -175,7 +167,6 @@ The base pricing is $15 per virtual machine per month. See above for more genera
 
 VMwareの仮想マシンごとに月額$18で請求が発生します。詳細は、上記の基本プランの項目を参照してください。
 
-
 <!-- ##### How will Docker and other container integrations impact my monthly billing?
 
 The base pricing of $15 per host includes 10 containers. Additional containers cost $1 per container. -->
@@ -183,7 +174,6 @@ The base pricing of $15 per host includes 10 containers. Additional containers c
 #### Dockerや他のコンテナ技術を使った場合の請求書への影響は?
 
 基本価格の$18には、10コンテナまでの監視が含まれています。同一ホスト上の11台目以降のコンテナに関しては、$1/container/monthの費用が発生します。
-
 
 <!-- ##### How do I see what I'll get charged for this current month?
 
@@ -195,7 +185,6 @@ admin you can check out past invoices
 #### 今月の請求額を知る方法はありますか?
 
 ユーザの皆様が、今月末の請求書の金額を知る方法は準備できていません。しかしながら、Datadogの管理者権限が有れば、[過去の請求書の状況](https://app.datadoghq.com/account/billing_history)を見ることができます。
-
 
 <!-- ##### Can I set a specific email address to receive invoices at?
 

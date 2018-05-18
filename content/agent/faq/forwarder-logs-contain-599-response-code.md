@@ -13,7 +13,7 @@ further_reading:
 * The app is otherwise reachable from the browser.
 * The MTU on the main interface of the server is > 1500 (e.g. jumbo frames)
 
-If you're only seeing this failure intermittently - every couple of weeks and not continues - it's likely fine, the agent is designed to store and forward metrics and events in the case of transient issues so all of your data is still being routed to us.
+If you're only seeing this failure intermittently - every couple of weeks and not continues - it's likely fine, the Agent is designed to store and forward metrics and events in the case of transient issues so all of your data is still being routed to us.
 
 ## Cause
 
@@ -67,7 +67,7 @@ For disabling IPV6, reference the following article:
 
 http://linoxide.com/linux-how-to/disable-ipv6-centos-fedora-rhel/
 
-## Changing the agent's Tornado Client
+## Changing the Agent's Tornado Client
 
 Some customers experience these 599 tornado errors only when their Datadog Agent uses the default "Simple HTTP" tornado client. It can sometimes help to switch this to the curl client instead. This can be done from the `datadog.yaml` on [this line][1].
 
@@ -89,7 +89,6 @@ If you've done everything above and continue to have issues, send support@datado
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example#L93
 [2]: /agent/#send-a-flare

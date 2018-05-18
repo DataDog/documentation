@@ -1,5 +1,5 @@
 ---
-title: Metrics
+title: Métriques
 external_redirect: /api/
 ---
 

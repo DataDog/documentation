@@ -13,13 +13,13 @@ Available endpoints can be found on [our dedicated API documentation page][1].
 In addition, [many libraries][2] are available to directly interact with the API.
 
 ## Submitting custom metrics
-While you can submit metrics directly through [our API][1], you can also submit metrics via the Datadog Agent using [DogStatsD][3] and custom checks.
+While you can submit metrics directly through [our API][1], you can also submit metrics via the Datadog Agent using [DogStatsD][3] and custom Agent checks.
 
 The Datadog Agent includes DogStatsD, a powerful statsd daemon with additional features, that provides better control over your metric metadata and aggregation.
 [Multiple libraries][4] are available to easily send metrics from your application to Datadog using [DogStatsD][3].
 
 The API and [DogStatsD][3] are handy to _push_ metrics to Datadog from one of your application.
-If you would like to regularly _pull_ metrics from a particular setup, similar to what is done by the agent for the systems we directly support, you can [add your own integration][5]. We have provided detailed steps and resources for [developing][6] and [testing][7] new integrations.
+If you would like to regularly _pull_ metrics from a particular setup, similar to what is done by the Agent for the systems we directly support, you can [add your own integration][5]. We have provided detailed steps and resources for [developing][6] and [testing][7] new integrations.
 These integrations can then be easily shared with the Datadog community, for instance through our [Datadog/integrations-extras repository][8]
 
 When sending metrics via [DogStatsD][3] or a custom integration, it is helpful to have a deeper understanding of metrics. Here are some technical resources regarding metric internals:
@@ -33,8 +33,7 @@ You can also find our [APM tracing utilities][10], which you can use and contrib
 
 ## Community Integrations
 Many users from our community have already [shared integrations][11] with a large number of commonly used applications.
-These resources are also useful to reference when starting the work on a new agent integration.
-
+These resources are also useful to reference when starting the work on a new Agent integration.
 
 [1]: /api
 [2]: /developers/libraries/#api-and-dogstatsd-client-libraries

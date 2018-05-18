@@ -9,11 +9,9 @@ You can use the EC2 flavor of the [Amazon Web Services integration][1] to collec
 
 If at some point you decide to remove the AWS integration for one of your EC2s but continue to run a Datadog Agent on that host, the host in your Datadog account continues to have the old host-tags associated with it that were collected from AWS. This is intended behavior, and it does not indicate that the AWS EC2 integration is still enabled for that host. (To verify that, from your metric explorer you can make sure that your EC2 metrics are not being tagged with that hostname, or not being collected at all.)
 
-
-
 ## What can be done to remove these tags:
 
-Continuing to have these AWS host-tags associated with these hosts is often not considered problematic by our users, and is sometimes even preferred (some users even like to [collect AWS host tags](/integrations/faq/how-do-i-pull-my-ec2-tags-without-using-the-aws-integration) from Datadog agents while not running the AWS EC2 integration). But if you prefer to have these AWS host-tags removed from these hosts, you can do this by using our ["Tags" API endpoint][4].
+Continuing to have these AWS host-tags associated with these hosts is often not considered problematic by our users, and is sometimes even preferred (some users even like to [collect AWS host tags](/integrations/faq/how-do-i-pull-my-ec2-tags-without-using-the-aws-integration) from Datadog Agents while not running the AWS EC2 integration). But if you prefer to have these AWS host-tags removed from these hosts, you can do this by using our ["Tags" API endpoint][4].
 
 For added convenience, one of our engineers has made available a python script that can be easily used to remove all AWS host-tags from either some or all of the hosts in your account. You can find [this python script here][5]. (Do note that you have to edit certain variables in this script for it to work, such as api_key and application_key)
 

@@ -26,14 +26,11 @@ NGINXのメトリクスを、次の目的の為Datadogに送信します:
 * Webサーバのパフォーマンスの可視化する。
 * 関連するアプリケーションに合わせてNginxのパフォーマンスを調整する。
 
-
 <!-- The default agent checks require the [nginx stub status module](http://nginx.org/en/docs/http/ngx_http_stub_status_module.html), which is not compiled by default.  In debian/ubuntu, this module is enabled in the `nginx-extras` package.  To check if your version of nginx has the stub status module support compiled in, you can run: -->
-
 
 Datadog-agentのインテグレーションを使ってNginxのメトリクスを取得する為には、 [nginx stub status module](http://nginx.org/en/docs/http/ngx_http_stub_status_module.html)が、有効になっている必要があります。Nginxのデフォルト設定では、このモジュールは有効になっていません。(但しdebian/ubuntuでは、`nginx-extras`パッケージ内で同時にインストールされ、有効化されているはずです。)
 
 使用しているNginxのstub statusモジュールのサポートが有効になっているか確認する為には、次のコマンドを実行して下さい:
-
 
 ~~~
 nginx -V |& grep http_stub_status_module

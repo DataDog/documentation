@@ -14,6 +14,7 @@ further_reading:
   text: Collect your traces
 aliases:
   - /agent/faq/agent-check-directory-structure
+  - /agent/faq/install-core-extra/
 ---
 
 <div class="alert alert-info">
@@ -23,10 +24,9 @@ aliases:
 ## What is the Agent?
 
 The Datadog Agent is a piece of software that runs on your hosts. Its job is to faithfully collect events and metrics and bring them to Datadog on
-your behalf so that you can do something useful with your monitoring and performance data. The Datadog Agent is open source, view the source code on GitHub for [Agent v5][1] and [Agent v6][2]. To see all changes between Agent v5 and v6, [consult our dedicated changes documentation][3].
+your behalf so that you can do something useful with your monitoring and performance data. The Datadog Agent is open source, view the source code on GitHub for [Agent v5][1] and [Agent v6][2]. To see all changes between Agent v5 and v6,[consult our dedicated changes documentation][3].
 
 {{< partial name="platforms/platforms.html" >}}
-
 
 The Agent has three main parts: the collector, DogStatsD, and the forwarder:
 
@@ -37,7 +37,6 @@ The Agent has three main parts: the collector, DogStatsD, and the forwarder:
 * **The forwarder**: retrieves data from both DogStatsD and the collector and then queues it up to be sent to Datadog.
 
 This is all controlled by one supervisor process. We keep this separate so you don't have to have the overhead of each application if you don't want to run all parts, although we generally recommend you do.
-
 
 ## What is the Agent v6?
 
@@ -54,23 +53,23 @@ Agent 6 is the latest major version of the Datadog Agent. The big difference bet
 
 * [DogStatsD][6] can be used over a unix socket instead of over udp.
 
-* Custom build your agent v6 and [DogStatsD][6] much easier and with much more configuration options, to include or exclude almost anything. There is also a “puppy” agent, that’s a truly minimal installation.
+* Custom build your Agent v6 and [DogStatsD][6] much easier and with much more configuration options, to include or exclude almost anything. There is also a “puppy” Agent, that’s a truly minimal installation.
 
 * Agent 6 blocks port 5000 and 5001. If you use these ports, update the port for `expvar_port` and `cmd_port` in the `datadog.yaml` file.
 
 ## Agent configuration files migration
 
-To automatically transition between agent configuration paths and formats from Agent v5 to Agent v6, use the agent command:  
+To automatically transition between Agent configuration paths and formats from Agent v5 to Agent v6, use the Agent command:
 
 `sudo -u dd-agent -- datadog-agent import`
 
-The command parses an existing `datadog.conf` and converts all configuration options that the new Agent supports into the `datadog.yaml` configuration file. It also copies configuration files for checks that are currently enabled.  
+The command parses an existing `datadog.conf` and converts all configuration options that the new Agent supports into the `datadog.yaml` configuration file. It also copies configuration files for checks that are currently enabled.
 
-For Mac and Windows environment use:  
+For Mac and Windows environment use:
 
-`datadog-agent import <old_configuration_dir> <destination_dir>` 
+`datadog-agent import <old_configuration_dir> <destination_dir>`
 
-With: 
+With:
 
 * `<old_configuration_dir>` is the directory containing the `datadog.conf` file
 * `<destination_dir>` is the directory where the imported `datadog.yaml` is written (use the same directory as `<old_configuration_dir>` on both Mac & Windows environment).
@@ -86,7 +85,7 @@ Starting with the 6.0 release configuration files will now be stored in
 ### Checks configuration files
 
 In order to provide a more flexible way to define the configuration for a check,
-from version 6.0.0 the Agent will load any valid YAML file contained in the folder:  
+from version 6.0.0 the Agent will load any valid YAML file contained in the folder:
 
 `/etc/datadog-agent/conf.d/<check_name>.d/`.
 
@@ -114,26 +113,26 @@ To keep backwards compatibility, the Agent will still pick up configuration file
 
 The new command line interface for the Agent is sub-command based:
 
-| Command         | Notes
+| Command         | Notes                                                                      |
 | --------------- | -------------------------------------------------------------------------- |
-| check           | Run the specified check |
-| configcheck     | Print all configurations loaded & resolved of a running agent |
-| diagnose        | Execute some connectivity diagnosis on your system |
-| flare           | Collect a flare and send it to Datadog |
-| health          | Print the current agent health |
-| help            | Help about any command |
-| hostname        | Print the hostname used by the Agent |
+| check           | Run the specified check                                                    |
+| configcheck     | Print all configurations loaded & resolved of a running Agent              |
+| diagnose        | Execute some connectivity diagnosis on your system                         |
+| flare           | Collect a flare and send it to Datadog                                     |
+| health          | Print the current Agent health                                             |
+| help            | Help about any command                                                     |
+| hostname        | Print the hostname used by the Agent                                       |
 | import          | Import and convert configuration files from previous versions of the Agent |
-| installservice  | Installs the agent within the service control manager |
-| launch-gui      | starts the Datadog Agent GUI |
-| regimport       | Import the registry settings into datadog.yaml |
-| remove-service  | Removes the agent from the service control manager |
-| restart-service | restarts the agent within the service control manager |
-| start           | Start the Agent |
-| start-service   | starts the agent within the service control manager |
-| status          | Print the current status |
-| stopservice     | stops the agent within the service control manager |
-| version         | Print the version info |
+| installservice  | Installs the Agent within the service control manager                      |
+| launch-gui      | Starts the Datadog Agent GUI                                               |
+| regimport       | Import the registry settings into datadog.yaml                             |
+| remove-service  | Removes the Agent from the service control manager                         |
+| restart-service | Restarts the Agent within the service control manager                      |
+| start           | Start the Agent                                                            |
+| start-service   | Starts the Agent within the service control manager                        |
+| status          | Print the current status                                                   |
+| stopservice     | Stops the Agent within the service control manager                         |
+| version         | Print the version info                                                     |
 
 To run a sub-command, the Agent binary must be invoked like this:
 ```
@@ -155,6 +154,8 @@ on port `5002` on Windows and Mac, and is disabled on Linux.
 Once the Agent is running, use the `datadog-agent launch-gui` command to launch
 the GUI within your default web browser.
 
+**Note**: The agent GUI isn't supported on Windows 32-bit platforms.
+
 ### Requirements
 
 1. Cookies must be enabled in your browser. The GUI generates and saves a token
@@ -163,41 +164,40 @@ in your browser which is used for authenticating all communications with the GUI
 2. The GUI will only be launched if the user launching it has the correct user
 permissions: if you are able to open `datadog.yaml`, you are able to use the GUI.
 
-3. For security reasons, the GUI can **only** be accessed from the local network interface (```localhost```/```127.0.0.1```), so you must be on the same host that the agent is running to use it. In other words, you can't run the agent on a VM or a container and access it from the host machine.
+3. For security reasons, the GUI can **only** be accessed from the local network interface (```localhost```/```127.0.0.1```), so you must be on the same host that the Agent is running to use it. In other words, you can't run the Agent on a VM or a container and access it from the host machine.
 
 ## Supported OSs versions
 ### Agent v6
-|OS| Supported versions|
-|:----|:----|
-|[Debian x86_64][7] | Debian 7 (wheezy) and above (we do not support SysVinit)|
-|[Ubuntu x86_64][8] | Ubuntu 14.04 and above|
-|[RedHat/CentOS x86_64][9]| RedHat/CentOS 6 and above |
-|[SUSE Enterprise Linux x86_64][10] | SUSE 11 SP4 and above (we do not support SysVinit)|
-|[Fedora x86_64][11] | Fedora 26 and above |
-|[MacOS][12]| OSX 10.10 and above|
-|[Windows server 64-bit][13]| Windows server 2008r2 or above|
-|[Windows 64-bit][13]| Windows 7 or above|
+| OS                                 | Supported versions                                       |
+| :----                              | :----                                                    |
+| [Debian x86_64][7]                 | Debian 7 (wheezy) and above (we do not support SysVinit) |
+| [Ubuntu x86_64][8]                 | Ubuntu 14.04 and above                                   |
+| [RedHat/CentOS x86_64][9]          | RedHat/CentOS 6 and above                                |
+| [SUSE Enterprise Linux x86_64][10] | SUSE 11 SP4 and above (we do not support SysVinit)       |
+| [Fedora x86_64][11]                | Fedora 26 and above                                      |
+| [MacOS][12]                        | OSX 10.10 and above                                      |
+| [Windows server 64-bit][13]        | Windows server 2008r2 or above                           |
+| [Windows 64-bit][13]               | Windows 7 or above                                       |
 
 **Note**: Source install may work on operating systems not listed here and is supported on a best effort basis.
 ### Agent v5
 
-|OS| Supported versions|
-|:----|:----|
-|[Debian x86_64][7] | Debian 7 (wheezy) and above |
-|[Ubuntu x86_64][8] | Ubuntu 12.04 and above|
-|[RedHat/CentOS x86_64][9]| RedHat/CentOS 6 and above |
-|[SUSE Enterprise Linux x86_64][10] | SUSE 11 SP4 and above|
-|[Fedora x86_64][11]| Fedora 26 and above |
-|[MacOS][12]| OSX 10.10 and above|
-|[Windows server 64-bit][13]| Windows server 2008r2 or above|
-|[Windows 64-bit][13]| Windows 7 or above|
+| OS                                 | Supported versions             |
+| :----                              | :----                          |
+| [Debian x86_64][7]                 | Debian 7 (wheezy) and above    |
+| [Ubuntu x86_64][8]                 | Ubuntu 12.04 and above         |
+| [RedHat/CentOS x86_64][9]          | RedHat/CentOS 5 and above      |
+| [SUSE Enterprise Linux x86_64][10] | SUSE 11 SP4 and above          |
+| [Fedora x86_64][11]                | Fedora 26 and above            |
+| [MacOS][12]                        | OSX 10.10 and above            |
+| [Windows server 64-bit][13]        | Windows server 2008r2 or above |
+| [Windows 64-bit][13]               | Windows 7 or above             |
 
 **Note**: Source install may work on operating systems not listed here and is
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: https://github.com/DataDog/dd-agent
 [2]: https://github.com/DataDog/datadog-agent

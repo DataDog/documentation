@@ -20,26 +20,24 @@ further_reading:
 
 This page outlines the basic functionality of the Datadog Agent.
 If you haven't installed the Agent yet, instructions can be found
-[in the Datadog agent integration page][1].
+[in the Datadog Agent integration page][1].
 
-The process to upgrade from the previous version of the agent is to re-run the installation.
+The process to upgrade from the previous version of the Agent is to re-run the installation.
 
 ## Commands
 
-Datadog Agent has some commands and only the _lifecycle commands_ (i.e. `start`/`stop`/`restart`/`status` on the Agent service) should be run with `sudo service`/`sudo initctl`/`sudo systemctl`, all other commands need to be run with the `datadog-agent` command.
+Datadog Agent has some commands and only the _lifecycle commands_ (i.e. `start`/`stop`/`restart`/`status` on the Agent service) should be run with `sudo service`/`sudo systemctl`, all other commands need to be run with the `datadog-agent` command.
 
-{{% table responsive="true" %}}
-| Agent v5                                  |  Agent v6                          | Notes
-| ----------------------------------------------- | --------------------------------------- | ----------------------------- |
-| `sudo service datadog-agent start`              | `sudo service datadog-agent start`      | Start Agent as a service |
-| `sudo service datadog-agent stop`               | `sudo service datadog-agent stop`       | Stop Agent running as a service |
-| `sudo service datadog-agent restart`            | `sudo service datadog-agent restart`    | Restart Agent running as a service |
-| `sudo service datadog-agent status`             | `sudo service datadog-agent status`     | Status of Agent service |
-| `sudo service datadog-agent info`               | `sudo datadog-agent status`             | Status page of running Agent |
-| `sudo service datadog-agent flare`              | `sudo datadog-agent flare`              | Send flare |
-| `sudo service datadog-agent`                    | `sudo datadog-agent --help`             | Display command usage |
-| `sudo -u dd-agent -- dd-agent check <check_name>` | `sudo -u dd-agent -- datadog-agent check <check_name>` | Run a check |
-{{% /table %}}
+| Agent v5                                          | Agent v6                                               | Notes                              |
+| -----------------------------------------------   | ---------------------------------------                | -----------------------------      |
+| `sudo service datadog-agent start`                | `sudo service datadog-agent start`                     | Start Agent as a service           |
+| `sudo service datadog-agent stop`                 | `sudo service datadog-agent stop`                      | Stop Agent running as a service    |
+| `sudo service datadog-agent restart`              | `sudo service datadog-agent restart`                   | Restart Agent running as a service |
+| `sudo service datadog-agent status`               | `sudo service datadog-agent status`                    | Status of Agent service            |
+| `sudo service datadog-agent info`                 | `sudo datadog-agent status`                            | Status page of running Agent       |
+| `sudo service datadog-agent flare`                | `sudo datadog-agent flare`                             | Send flare                         |
+| `sudo service datadog-agent`                      | `sudo datadog-agent --help`                            | Display command usage              |
+| `sudo -u dd-agent -- dd-agent check <check_name>` | `sudo -u dd-agent -- datadog-agent check <check_name>` | Run a check                        |
 
 More information about the metrics, events, and service checks for an [integrations][2] can be retrieved with the check command:
 ```shell
@@ -55,7 +53,8 @@ sudo service datadog-agent check [integration] check_rate
 
 * on `upstart`-based systems: `sudo start/stop/restart datadog-agent`
 * on `systemd`-based systems: `sudo systemctl start/stop/restart datadog-agent`
-* on `initctl`-based systems: `sudo initctl start/stop/restart datadog-agent`
+
+[Learn more about Service lifecycle commands][4]
 
 ## Configuration
 
@@ -93,18 +92,17 @@ A script is available to automatically install or upgrade the new Agent. It sets
 #### One-step install
 ##### To Upgrade
 
-The Agent 6.x installer can automatically convert your 5.x style agent configuration at upgrade:  
+The Agent 6.x installer can automatically convert your 5.x style Agent configuration at upgrade:  
 
 ```shell
  DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
 ```
 
-**Note:** the import process won't automatically move custom checks, this is by
-design since we cannot guarantee full backwards compatibility out of the box.
+**Note:** the import process won't automatically move custom Agent checks, this is by design since we cannot guarantee full backwards compatibility out of the box.
 
 ##### To Install Fresh
 
-To install on a clean box (or have an existing agent 5 install from which you do not wish to import the configuration) provide an api key:
+To install on a clean box (or have an existing Agent 5 install from which you do not wish to import the configuration) provide an api key:
 
 ```shell
  DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
@@ -163,7 +161,7 @@ To install on a clean box (or have an existing agent 5 install from which you do
     sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 382E94DE
     ```
 
-3. Update apt and downgrade the agent
+3. Update apt and downgrade the Agent
 
     ```shell
     sudo apt-get update
@@ -171,9 +169,9 @@ To install on a clean box (or have an existing agent 5 install from which you do
     sudo apt-get install datadog-agent
     ```
 
-## Uninstall the agent
+## Uninstall the Agent
 
-To uninstall the agent run: 
+To uninstall the Agent, run: 
 
 * For CentOS 5:
 
@@ -194,3 +192,4 @@ To uninstall the agent run:
 [1]: https://app.datadoghq.com/account/settings#agent/centos
 [2]: /integrations
 [3]: /help
+[4]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands

@@ -30,15 +30,15 @@ Collectez les métriques relatives à l'utilisation du disque et aux IOs.
 ## Implémentation
 ### Installation
 
-Le check disk est packagé avec l'agent, il vous faut donc simplement [installer l'agent] [1] sur vos noeuds Cassandra.
+Le check disk est packagé avec l'agent, il vous faut donc simplement [installer l'agent](https://app.datadoghq.com/account/settings#agent) sur vos noeuds Cassandra.
 
 ### Configuration
 
-La check disk est activée par défaut et l'agent collecte des métriques pour toutes les partitions locales. Si vous voulez configurer le check avec des options personnalisées, créez un fichier `disk.yaml` dans le répertoire` conf.d` de l'Agent. Consultez le fichier [canevas disk.yaml][2] pour apprendre toutes les options de configuration disponibles.
+La check disk est activée par défaut et l'agent collecte des métriques pour toutes les partitions locales. Si vous voulez configurer le check avec des options personnalisées, créez un fichier `disk.yaml` dans le répertoire` conf.d` de l'Agent. Consultez le fichier [canevas disk.yaml](https://github.com/DataDog/integrations-core/blob/master/disk/conf.yaml.default) pour apprendre toutes les options de configuration disponibles.
 
 ### Validation
 
-[Lancez la commande `status`de l'Agent][3] et cherchez `disk` dans la section Checks:
+[Lancez la commande `status`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `disk` dans la section Checks:
 
 ```
   Checks
@@ -65,15 +65,8 @@ Le check Disk n'inclut aucun événement pour le moment.
 Le check Disk n'inclut aucun check de service pour le moment.
 
 ## Troubleshooting
-Besoin d'aide? Contactez  [l'équipe support de Datadog][4].
+Besoin d'aide? Contactez  [l'équipe support de Datadog](http://docs.datadoghq.com/help/).
 
 ## En apprendre plus
-Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][5]
+Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog](https://www.datadoghq.com/blog/)
 
-
-
-[1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://github.com/DataDog/integrations-core/blob/master/disk/conf.yaml.default
-[3]: https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information
-[4]: http://docs.datadoghq.com/help/
-[5]: https://www.datadoghq.com/blog/

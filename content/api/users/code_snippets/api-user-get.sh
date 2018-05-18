@@ -4,6 +4,3 @@ user_id=test@datadoghq.com
 
 curl -X GET "https://api.datadoghq.com/api/v1/user/${user_id}?api_key=${api_key}&application_key=${app_key}"
 
-
-
-

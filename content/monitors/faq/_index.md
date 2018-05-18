@@ -20,6 +20,7 @@ private: true
     {{< nextlink href="monitors/faq/sending-datadog-events-to-your-moogsoft-aiops-instance" >}}Sending Datadog Events to your Moogsoft AIOps instance.{{< /nextlink >}}
     {{< nextlink href="monitors/faq/how-can-i-setup-an-alert-for-when-a-specific-tag-stops-reporting" >}}How can I setup an alert for when a specific tag stops reporting?{{< /nextlink >}}
     {{< nextlink href="monitors/faq/can-i-create-monitor-dependencies" >}}Can I create monitor dependencies?{{< /nextlink >}}
+    {{< nextlink href="monitors/faq/as-count-monitor-evaluation" >}}as_count() monitor evaluation{{< /nextlink >}}
 
 {{< /whatsnext >}}
 

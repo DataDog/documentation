@@ -6,7 +6,7 @@ external_redirect: /api/#get-all-timeboards
 ---
 
 ## Récupérer tous les Timeboards
-Récupère toutes les spécifications de vos [Timeboards][1].
+Récupère toutes les spécifications de votre [Timeboard][1].
 
 ##### Arguments
 *Cet endpoint ne prend aucun argument JSON.*

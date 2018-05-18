@@ -14,10 +14,13 @@ further_reading:
   - link: developers/libraries
     tag: Documentation
     text: >-
-      Bibliothèques logicielles et clients pour l'API et DogStatsD, officielles
-      et contribué par la communauté
+      Bibliothèques pour l'API et DogStatsD officielles et maintenue par la
+      communauté
+  - link: 'https://github.com/DataDog/dd-agent/blob/master/dogstatsd.py'
+    tag: « Github »
+    text: Code source de DogStatsD
 ---
-Le moyen le plus simple d'importer vos métriques d'application personnalisées dans Datadog consiste à les envoyer vers DogStatsD, qui s'agit d'un service d'agrégation de métriques associé à l'Agent Datadog. DogStatsD implémente le protocole [StatsD](https://github.com/etsy/statsd) et ajoute quelques extensions spécifiques à Datadog :
+Le moyen le plus simple d'importer vos métriques d'application personnalisées dans Datadog consiste à les envoyer vers DogStatsD, qui s'agit d'un service d'agrégation de métriques associé à l'Agent Datadog. DogStatsD implémente le protocole [StatsD][5] et ajoute quelques extensions spécifiques à Datadog :
 
 * Type de métrique « histogramme »
 * Checks de service et événements
@@ -32,7 +35,7 @@ Le moyen le plus simple d'importer vos métriques d'application personnalisées 
 
 ## Comment ça marche
 
-DogStatsD accepte les [métriques personnalisées](/getting_started/custom_metrics/), les évènements et les checks de service par UDP, les agrègent et les transmets périodiquement vers Datadog.
+DogStatsD accepte les [métriques personnalisées][6], les évènements et les checks de service par UDP, les agrègent et les transmets périodiquement vers Datadog.
 Parce qu'il utilise UDP, votre application peut envoyer des métriques vers DogStatsD et reprendre son travail sans attendre de réponse. Si jamais DogStatsD devient indisponible, votre application ne sautera pas un temps.
 
 {{< img src="developers/dogstatsd/dogstatsd.png" alt="dogstatsd"  responsive="true" popup="true">}}
@@ -61,7 +64,7 @@ use_dogstatsd: yes
 dogstatsd_port: 8125
 ```
 
-Puis [redémarrez votre agent](/agent/faq/agent-commands).
+Puis [redémarrez votre Agent][7].
 
 Une fois cela fait, votre application peut communiquer de manière fiable avec la [bibliothèque client DogStatsD][2] pour votre langue d'application et vous serez prêt à commencer. Vous _pouvez_ utiliser n'importe quel client StatsD générique pour envoyer des métriques vers DogStatsD, par contre, dans ce cas vous ne pourrez pas utiliser les fonctionnalités spécifiques à Datadog mentionnées ci-dessus.
 
@@ -70,13 +73,13 @@ Par défaut, DogStatsD écoute sur port **8125** UDP. Si vous avez besoin de le 
 # Assurez-vous que le client se communique avec le bon port.
 dogstatsd_port: 8125
 
-[Redémarrez DogStatsD](/agent/faq/agent-commands) afin de prendre en compte les changements.
+[Redémarrez DogStatsD][7] afin de prendre en compte les changements.
 
 ## Types de données
 
 Alors que StatsD n'accepte que des métriques, DogStatsD accepte les trois types principaux des données prises en charge par Datadog : les métriques, les évènements et les checks de service. Cette section montre les cas d'utilisation pour chaque type.
 
-Chaque exemple est en Python en utilisant [datadogpy](http://datadogpy.readthedocs.io/en/latest/), mais chaque type de donnée est traité de manière similaire dans les [autres bibliothèques client de DogStatsD][2].
+Chaque exemple est en Python en utilisant [datadogpy][2], mais chaque type de donnée est traité de manière similaire dans les [autres bibliothèques client de DogStatsD][2].
 
 ### Métriques
 
@@ -211,7 +214,7 @@ Avant d'envoyer la métrique vers Datadog, DogStatsD utilise `sample_rate` pour 
 
 **Les taux d'échantillonnage fonctionnent uniquement avec les métriques de type counter, histogram et timer.**
 
-### Evénements
+### Évènements
 
 DogStatsD peut émettre des évènements dans votre flux d'évènements Datadog. Par exemple, vous souhaiterez peut-être voir les erreurs et les exceptions dans Datadog :
 
@@ -274,7 +277,7 @@ Cette section spécifie le format de datagramme brut pour chaque type de donnée
 - `sample rate` (facultatif) - un nombre de type virgule flottant entre 0 et 1, compris. Fonctionne uniquement avec les métriques de type counter, histrogram et timer. La valeur par défaut est 1 (c'est-à-dire prélever un échantillon 100% du temps).
 - `tags` (facultatif) - une liste de tags séparées par des virgules. Utilisez des deux-points pour les tags de type clé / valeur, ex. `env: prod`. La clé `device` est réservée; Datadog supprimera les tags ajoutées par l'utilisateur comme `device: foobar`.
 
-Voici quelques exemples de datagrams:
+Voici quelques exemples de datagrammes:
 
     # Increment the page.views counter
     page.views:1|c
@@ -336,13 +339,13 @@ Voici un exemple de datagrammes:
 
 ## Envoyer des statistiques et des évènements en utilisant DogStatsD et l'interface système
 
-Dans Linux et d'autres systèmes d'exploitation de type Unix, nous utilisons Bash. Dans Windows nous avons besoin de Powershell et [powershell-statsd](https://github.com/joehack3r/powershell-statsd/blob/master/send-statsd.ps1), ce dernier étant une fonction Poswershell qui prend soin des détails réseautique à notre part.
+Dans Linux et d'autres systèmes d'exploitation de type Unix, nous utilisons Bash. Dans Windows nous avons besoin de Powershell et [powershell-statsd][9], ce dernier étant une fonction Poswershell qui prend soin des détails réseautique à notre part.
 
 L'idée derrière DogStatsD est simple : créez un message qui contient des informations sur votre métrique / évènement, et envoyez-le vers un collecteur via UDP sur le port 8125. [En savoir plus sur le format du message](#datagram-format).
 
 ### Envoyer des métriques
 
-Le format d'envoi des métriques est `metric.name:value|type|@sample_rate|#tag1:value,tag2,`, alors allons-y et envoyons des points de données pour une métrique de type gauge nommé custom_metric avec le tag shell. Nous utilisons un agent installé localement en tant que collecteur, donc l'adresse IP de la destination et 127.0.0.1.
+Le format d'envoi des métriques est `metric.name:value|type|@sample_rate|#tag1:value,tag2,`, alors allons-y et envoyons des points de données pour une métrique de type gauge nommé custom_metric avec le tag shell. Nous utilisons un Agent installé localement en tant que collecteur, donc l'adresse IP de la destination et 127.0.0.1.
 
 Sur Linux:
 
@@ -362,7 +365,7 @@ PS C:\vagrant> .\send-statsd.ps1 "custom_metric:123|g|#shell"
 PS C:\vagrant>
 ```
 
-Dans n'importe quelle plate-forme ayant Python (dans Windows, l'interpréteur Python intégré dans l'agent peut être utilisé, situé dans `C:\Program Files\Datadog\Datadog Agent\embedded\python.exe`) :
+Dans n'importe quelle plate-forme ayant Python (dans Windows, l'interpréteur Python intégré dans l'Agent peut être utilisé, situé dans `C:\Program Files\Datadog\Datadog Agent\embedded\python.exe`) :
 
 ```python
 import socket
@@ -384,7 +387,7 @@ vagrant@vagrant-ubuntu-14-04:~$ title="Event from the shell"
 vagrant@vagrant-ubuntu-14-04:~$ text="This was sent from Bash!"
 vagrant@vagrant-ubuntu-14-04:~$ echo "_e{${#title},${#text}}:$title|$text|#shell,bash"  >/dev/udp/localhost/8125
 ```
-Sur Windows
+Sur Windows :
 
 ```
 PS C:\vagrant> $title = "Event from the shell"
@@ -394,12 +397,14 @@ PS C:\vagrant> .\send-statsd.ps1 "_e{$($title.length),$($text.Length)}:$title|$t
 
 ## En apprendre plus
 
-{{< whatsnext  >}}
-    {{< nextlink href="/developers/libraries/" tag="Documentation" >}}Trouver une bibliothèque client DogStatsD en fonction de vos besoins.{{< /nextlink >}}
-    {{< nextlink href="https://github.com/DataDog/dd-agent/blob/master/dogstatsd.py" tag="Github" >}}code source de DogStatsD {{< /nextlink >}}
-{{< /whatsnext >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-agent/pull/2104
 [2]: /libraries/
 [3]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
-[4]: /developers/metrics/#metric-names
+[4]: /developers/metrics/#metric-names 
+[5]: https://github.com/etsy/statsd
+[6]: /getting_started/custom_metrics/
+[7]: /agent/faq/agent-commands
+[8]: http://datadogpy.readthedocs.io/en/latest/
+[9]: https://github.com/joehack3r/powershell-statsd/blob/master/send-statsd.ps1

@@ -1,4 +1,3 @@
-
 ---
 title: Équipe
 kind: documentation

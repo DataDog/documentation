@@ -26,12 +26,11 @@ Les notifications sont un composant clé de tout [monitor][1]. Vous voulez vous 
    explication du monitor afin qu'un membre de l'équipe peut rapidement comprendre
    ce qu'il se passe.
 
-2. Entrez un **message** pour le monitor. Ce champ permet la mise en forme standard [markdown formatting][2] ainsi que la syntaxe @ -notification de Datadog.
+2. Entrez un **message** pour le monitor. Ce champ permet la mise en forme standard [markdown formatting][2] ainsi que la syntaxe @-notification de Datadog.
   Remarque: vous pouvez notifier les utilisateurs non-Datadog par e-mail en ajoutant `@ leur-email` au message. Un cas d'utilisation courant pour le message du moniteur consiste à inclure une procédure pas à pas pour résoudre le problème.
   Par exemple, si vous monitorez une base de données, vous pouvez inclure des étapes de basculement vers un nœud de secours. Dans l'ensemble, vous devriez essayer de donner le plus de contexte possible au monitor.
 
 3. Activez éventuellement **monitor renotification**. Cette option est utile pour rappeler à votre équipe qu'un problème n'est pas résolu tant que le moniteur n'est pas marqué comme résolu. Si cette option est activée, vous pouvez configurer un message d'escalade à envoyer à chaque fois que le moniteur se réactive. Le message original est également inclus.
-
 
 ## Say what's happening
 ### Template variables du message
@@ -164,7 +163,7 @@ Nous fournissons un certain nombre de types différents de monitor et toutes les
 *(Faites défiler vers la droite pour voir toutes les variables disponibles)*
 
 {{% table responsive="true" %}}
-||[host][3]| [métrique][4]| [intégration][5]| [processus][6]| [réseau][7]| [check custom][8]| [événement][9]|
+||[host][3]| [metric][4]| [integration][5]| [process][6]| [network][7]| [custom check][8]| [event][9]|
 | :-------|:-----|:-----|:-------|:-------|:---------|:-------|:------|
 | **Conditionals**      |
 | `is_alert`            | Y                 | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
@@ -279,7 +278,6 @@ Par exemple, si la variable rendue est configurée en tant que channel  dans l'i
 ## En apprendre plus
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /monitors
 [2]: http://daringfireball.net/projects/markdown/syntax

@@ -1,5 +1,5 @@
 ---
-title: Mettre à jour les tags d'un host
+title: Mettre à jour les tags d'un hôte
 type: apicode
 order: 20.4
 external_redirect: /api/#update-host-tags

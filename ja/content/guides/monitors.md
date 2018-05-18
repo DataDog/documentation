@@ -43,7 +43,6 @@ Hipchat）やwebhooksを使い、他のサービスと連携して通知を送�
 
 ## 用語集
 
-
 <!--
 Here is a quick overview of the different terms used in this guide.
 
@@ -68,7 +67,6 @@ Here is a quick overview of the different terms used in this guide.
 -->
 
 ## 新しいMonitorの作成
-
 
 <!--
 Navigate to the [Create Monitors](https://app.datadoghq.com/monitors#/create)
@@ -293,7 +291,6 @@ on the left. This page shows how to setup a metric Monitor, but see the [Monitor
 <!--
 ### Setup Notifications
 
-
 {{< img src="guides/monitor/notification.png" alt="notification" >}}
 
 1. Give your monitor a **title**. It is often useful to use a succinct
@@ -319,7 +316,6 @@ on the left. This page shows how to setup a metric Monitor, but see the [Monitor
 -->
 
 ### 通知先の設定
-
 
 {{< img src="guides/monitor/notification.png" alt="notification" >}}
 
@@ -355,17 +351,14 @@ Monitor 設定をプログラマティックに管理しデプロイする場合
 <!--
 ## Scheduling Downtime
 
-
 You may occasionally need to shut systems down or take them offline to perform maintenance or upgrades. Scheduling downtime allows you to do this without triggering monitors.
 -->
 ## ダウンタイムをスケジュールする
-
 
 メンテナンスやアップグレードなどによる計画停止のため、システムを停止したりオフラインにする必要が生じることもあるでしょう。ダウンタイムをスケジュールことで、設定済みのMonitorがアラートをトリガすることを防ぐことができます。
 
 <!--
 ### Manage Downtime
-
 
 Navigate to the [Manage Downtime](https://app.datadog.com/monitors#/downtime) page by highlighting the "Monitors" tab in the main menu and selecting the "Manage Downtime" link. You may also navigate to the "Manage Downtime" page from other Monitor related pages by clicking the link at the top of the page.
 
@@ -377,7 +370,6 @@ The Manage Downtime page will display a list of active and scheduled downtimes. 
 -->
 ### ダウンタイムの管理
 
-
 [Manage Downtime](https://app.datadog.com/monitors#/downtime) のページへ移動するには、メインメニューの **Monitors** にマウスオーバーし現れるサブメニューの **Manage Downtime** を選択します。 他のMonitor設定ページの上部にある **Manage Downtime** リンクを選択し移動することも可能です。
 
 {{< img src="guides/monitor/downtime-nav.png" alt="downtime-nav" >}}
@@ -388,7 +380,6 @@ Manage Downtime のページでは、アクティブなものとスケジュー�
 
 <!--
 ### Schedule Downtime
-
 
 To schedule downtime, click the "Schedule Downtime" button in the upper right.
 
@@ -415,7 +406,6 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
    Enter a message to notify your team about this downtime. The message field allows standard [markdown formatting](http://daringfireball.net/projects/markdown/syntax) as well as Datadog's @-notification syntax. The "Notify your team" field allows you to specify team members or send the message to a service [integration](https://app.datadoghq.com/account/settings#integrations).
 -->
 ### ダウンタイムのスケジュール設定
-
 
 ダウンタイムをスケジュールするには、画面上部右側の"Schedule Downtime"を選択します。
 

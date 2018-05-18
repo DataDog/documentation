@@ -19,7 +19,6 @@ Here is an example of system.load.1 with the hour_before value shown as a dotted
 
 For now, using functions like hour_before is out of scope for the graphical editor so you have to use the JSON editor. Here is the JSON for this graph:
 
-
 {{< highlight json >}}
 { "viz": "timeseries",
   "requests": [

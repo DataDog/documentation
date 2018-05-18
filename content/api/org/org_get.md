@@ -10,4 +10,3 @@ external_redirect: /api/#get-organization
 * **`public_id`** [*required*]:  
     The public id of the organization.
 
-

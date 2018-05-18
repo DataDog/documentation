@@ -11,7 +11,6 @@ downtime_id=$(curl -X POST -H "Content-type: application/json" \
   }" \
     "https://api.datadoghq.com/api/v1/downtime?api_key=${api_key}&application_key=${app_key}" | jq '.id')
 
-
 curl -X PUT -H "Content-type: application/json" \
 -d '{
       "scope": "env:staging",

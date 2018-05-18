@@ -12,5 +12,4 @@ external_redirect: /api/#send-services
 *   **`app`** - _obligatoire._ Le nom de l'application.
 *   **`app_type`** - _obligatoire._ Le type de l'application.
 
-
 [1]: /tracing/visualization/service

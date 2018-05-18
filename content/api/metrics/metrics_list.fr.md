@@ -12,5 +12,3 @@ Obtenez la liste des métriques de reporting actives d'un instant donné jusqu'�
 * **`from`** [*obligatoire*]:  
     Secondes depuis EPOCH unix
 
-
-
