@@ -123,3 +123,4 @@ Pour un guide de configuration détaillé sur la configuration du proxy, rendez-
 [8]: /agent/basic_agent_usage/kubernetes/
 [9]: /agent/proxy
 [10]: https://ip-ranges.datadoghq.com/logs.json
+[11]: https://ip-ranges.datadoghq.com/apm.json
