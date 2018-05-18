@@ -28,13 +28,13 @@ further_reading:
   * **Agents < 5.2.0** `app.datadoghq.com`
   *  **Agents >= 5.2.0** `<version>-app.agent.datadoghq.com`
 
-Cette décision a été prise après le problème POODLE, les endpoints versionnés commencent avec l'agent 5.2.0, c'est-à-dire que chaque version de l'Agent à un endpoint différent basé sur la version du *forwarder* utilisé.
+Cette décision a été prise après la faille de sécurité POODLE, les endpoints versionnés commencent avec l'agent 5.2.0, c'est-à-dire que chaque version de l'Agent a un endpoint différent basé sur la version du *forwarder* utilisé.
 
 * i.e. Agent 5.2.0 envoie à  `5-2-0-app.agent.datadoghq.com`  
 
 En conséquence whitelistez `* .agent.datadoghq.com` dans vos firewalls.
 
-Ces domaines sont des **CNAME** pointant vers un ensemble d'adresses IP statiques, ces adresses peuvent être trouvées à:
+Ces domaines sont des **CNAME** pointant vers un ensemble d'adresses IP statiques, ces adresses peuvent être trouvées à l'adresse suivante:
 
 * **[https://ip-ranges.datadoghq.com][4]**
 
@@ -42,24 +42,31 @@ Les informations sont structurées en JSON suivant ce schéma:
 
 ```
 {
-    "version": 1,                       // <-- we increment this every time the information is changed
-    "modified": "YYYY-MM-DD-HH-MM-SS",  // <-- the timestamp of the last modification
-    "agents": {                         // <-- in this section the IPs used for the Agent traffic intake
-        "prefixes_ipv4": [              // <-- a list of IPv4 CIDR blocks
+    "version": 1,                       // <-- la version est incrémentée lors de modifications
+    "modified": "YYYY-MM-DD-HH-MM-SS",  // <-- le timestamp de la dernière modification
+    "agents": {                         // <-- dans cette section, les IPs utilisées par l'agent pour envoyer des métriques
+        "prefixes_ipv4": [              // <-- une liste d'IPv4 CIDR blocks
             "a.b.c.d/x",
             ...
         ],
-        "prefixes_ipv6": [              // <-- a list of IPv6 CIDR blocks
+        "prefixes_ipv6": [              // <-- une liste d'IPv6 CIDR blocks
             ...
         ]
     },
-    "webhooks": {                       // <-- same structure as "agents" but this section is not relevant
-        ...                             //     for Agent traffic (webhooks delivered by Datadog to the internet)
-    }
+    "apm": {...},                       // <-- même structure que "agents" mais pour envoyer les données de l'agent APM
+    "logs": {...},                      // <-- idem, pour les logs
+    "process": {...},                   // <-- idem, pour les données des processus
+    "api": {...},                       // <-- ne s'applique pas à l'agent (envoi de données sur api.datadoghq.com)
+    "webhooks": {...}                   // <-- ne s'applique pas à l'agent (IPs source pour l'envoi sur des webhooks)
 }
 ```
 
-## Port ouverts
+Si une seule de ces sections vous intéresse, pour chacune des sections il existe une URL dédiée suivant le format `https://ip-ranges.datadoghq.com/<section>.json`. Par exemple:
+
+* [https://ip-ranges.datadoghq.com/logs.json][10] pour les IPs utilisées pour le traffic des logs
+* [https://ip-ranges.datadoghq.com/apm.json][11] pour les IPs utilisées pour le traffic APM
+
+## Ports ouverts
 
 **Tout le traffic sortant est envoyé en TCP SSL sur le port 443.**
 
@@ -115,3 +122,5 @@ Pour un guide de configuration détaillé sur la configuration du proxy, rendez-
 [7]: /agent/#using-the-gui
 [8]: /agent/basic_agent_usage/kubernetes/
 [9]: /agent/proxy
+[10]: https://ip-ranges.datadoghq.com/logs.json
+[11]: https://ip-ranges.datadoghq.com/apm.json
