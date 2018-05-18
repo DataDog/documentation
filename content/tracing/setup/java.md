@@ -43,14 +43,18 @@ Finally, add the following JVM argument when starting your application in your I
 
 The tracer is configured using System Properties and Environment Variables as follows:
 
-| Config              | System Property        | Environment Variable       | Default             | Description                                                                                                                                                                                            |
-| :------------------ | :--------------------- | :------------------------- | :------------------ | :-----                                                                                                                                                                                                 |
-| service.name        | dd.service.name        | DD_SERVICE_NAME            | `unnamed-java-app`  | The name of a set of processes that do the same job. Used for grouping stats for your application.                                                                                                     |
-| writer.type         | dd.writer.type         | DD_WRITER_TYPE             | `DDAgentWriter`     | Default value sends traces to the trace Agent. Configuring with `LoggingWriter` instead writes traces out to the console.                                                                              |
-| agent.host          | dd.agent.host          | DD_AGENT_HOST              | `localhost`         | Hostname for where to send traces to. If using a containerized environment, configure this to be the host ip.  See our [docker docs][4] for additional detail.                                         |
-| agent.port          | dd.agent.port          | DD_AGENT_PORT              | `8126`              | Port number the Agent is listening on for configured host.                                                                                                                                             |
-| priority.sampling   | dd.priority.sampling   | DD_PRIORITY_SAMPLING       | `false`             | Enable priority sampling to ensure distributed traces are complete or to require sampling of specific traces. See [Sampling / distributed tracing](#sampling-distributed-tracing) section for details. |
-| trace.span.tags     | dd.trace.span.tags     | DD_TRACE_SPAN_TAGS         | `null`              | (Example: `key1:value1,key2:value2`) A list of default tags to be added to every span. Tags of the same name added directly to a span will overwrite the defaults provided here.                       |
+| Config             | System Property       | Environment Variable      | Default            | Description |
+| :----------------- | :-------------------- | :------------------------ | :----------------- | :---------- |
+| service.name       | dd.service.name       | DD_SERVICE_NAME           | `unnamed-java-app` | The name of a set of processes that do the same job. Used for grouping stats for your application. |
+| service.mapping    | dd.service.mapping    | DD_SERVICE_MAPPING        | `null`             | (Example: `key1:value1,key2:value2`) Dynamically rename services via configuration. Useful for making databases have distinct names across different services. |
+| writer.type        | dd.writer.type        | DD_WRITER_TYPE            | `DDAgentWriter`    | Default value sends traces to the trace Agent. Configuring with `LoggingWriter` instead writes traces out to the console. |
+| agent.host         | dd.agent.host         | DD_AGENT_HOST             | `localhost`        | Hostname for where to send traces to. If using a containerized environment, configure this to be the host ip.  See our [docker docs][4] for additional detail. |
+| agent.port         | dd.agent.port         | DD_AGENT_PORT             | `8126`             | Port number the Agent is listening on for configured host. |
+| priority.sampling  | dd.priority.sampling  | DD_PRIORITY_SAMPLING      | `false`            | Enable priority sampling to ensure distributed traces are complete or to require sampling of specific traces. See [Sampling / distributed tracing](#sampling-distributed-tracing) section for details. |
+| trace.span.tags    | dd.trace.span.tags    | DD_TRACE_SPAN_TAGS        | `null`             | (Example: `key1:value1,key2:value2`) A list of default tags to be added to every span. Tags of the same name added directly to a span will overwrite the defaults provided here. |
+| trace.header.tags  | dd.trace.header.tags  | DD_TRACE_HEADER_TAGS      | `null`             | (Example: `CASE-insensitive-Header:my-tag-name,User-ID:userId`) A map of header keys to tag names.  Automatically apply header values as tags on traces. |
+| trace.annotations  | dd.trace.annotations  | DD_TRACE_ANNOTATIONS      | ([listed](https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37)) | (Example: `com.some.Trace;io.other.Trace`) A list of method annotations to treat as `@Trace`. |
+| trace.methods      | dd.trace.methods      | DD_TRACE_METHODS          | `null`              | (Example: `package.ClassName[method1,method2,...];AnonymousClass$1[call]`) List of class/interface and methods to trace.  Similar to adding `@Trace`, but without changing code. |
 
 **Note**:
 
@@ -265,11 +269,11 @@ Datadog's [JMX Integration][7] monitors additional metrics around: JVM heap memo
 
 `dd-java-agent` includes support for automatically tracing the following web frameworks.
 
-| Server                  | Versions       |
-| :-------------          | :------------- |
-| Java Servlet Compatible | 2.3+, 3.0+     |
-| Jax-RS Annotations      | JSR311-API     |
-| Spring-Web              | 4.0+           |
+| Server                  | Versions   |
+| :---------------------- | :--------- |
+| Java Servlet Compatible | 2.3+, 3.0+ |
+| Jax-RS Annotations      | JSR311-API |
+| Spring-Web              | 4.0+       |
 
 *Note:* Many application servers are Servlet compatible, such as Tomcat, Jetty, Websphere, Weblogic, etc.
 Also, frameworks like Spring Boot and Dropwizard inherently work because they use a Servlet compatible embedded application server.
@@ -280,14 +284,14 @@ Don't see your desired web frameworks? We're continually adding additional suppo
 
 `dd-java-agent` includes support for automatically tracing the following networking frameworks.
 
-| Framework               | Versions       |
-| :-------------          | :------------- |
-| [OkHTTP][8]             | 3.x            |
-| [Apache HTTP Client][9] | 4.3 +          |
-| [JMS 2][10]             | 2.x            |
-| AWS Java SDK            | 1.11.0+        |
-| Kafka-Clients           | 0.11+          |
-| Kafka-Streams           | 0.11+          |
+| Framework               | Versions |
+| :---------------------- | :------- |
+| [OkHTTP][8]             | 3.x      |
+| [Apache HTTP Client][9] | 4.3 +    |
+| [JMS 2][10]             | 2.x      |
+| AWS Java SDK            | 1.11.0+  |
+| Kafka-Clients           | 0.11+    |
+| Kafka-Streams           | 0.11+    |
 
 Don't see your desired networking framework? We're continually adding additional support, [check with our team][2] to see if we can help.
 
@@ -321,12 +325,13 @@ Don't see your desired datastores? We're continually adding additional support, 
 
 `dd-java-agent` ships with some newer instrumentation disabled by default.
 
-| Instrumentation | Versions       | JVM Arg to enable                                                                  |
-| :-------------  | :------------- | :-------------                                                                     |
-| Jax RS Client   | 1.11.0+        | `-Ddd.integration.jax-rs.enabled=true`                                             |
-| Play            | 2.4-2.6        | `-Ddd.integration.java_concurrent.enabled=true -Ddd.integration.play.enabled=true` |
-| Ratpack         | 1.4.0+         | `-Ddd.integration.ratpack.enabled=true`                                            |
-| Spark Java      | 2.4+           | `-Ddd.integration.sparkjava.enabled=true -Ddd.integration.jetty.enabled=true`      |
+| Instrumentation | Versions | JVM Arg to enable                                                                  |
+| :-------------- | :------- | :----------------                                                                  |
+| Jax RS Client   | 1.11.0+  | `-Ddd.integration.jax-rs.enabled=true`                                             |
+| Play            | 2.4-2.6  | `-Ddd.integration.java_concurrent.enabled=true -Ddd.integration.play.enabled=true` |
+| Ratpack         | 1.4.0+   | `-Ddd.integration.ratpack.enabled=true`                                            |
+| Spark Java      | 2.4+     | `-Ddd.integration.sparkjava.enabled=true -Ddd.integration.jetty.enabled=true`      |
+| Hystrix         | 1.4.0+   | `-Ddd.integration.hystrix.enabled=true`                                            |
 
 ## Further Reading
 
