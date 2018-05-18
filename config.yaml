@@ -678,7 +678,7 @@ languages:
 
         # Integrations core doc
         - identifier: customnav_integrationsnav_new_integration
-          name: "Integration"
+          name: "Integrations"
           url: "developers/integrations/"
           weight: 60
           parent: menu_references_developers

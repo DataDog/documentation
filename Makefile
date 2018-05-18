@@ -72,7 +72,6 @@ clean-integrations:  ## remove built integrations files.
 
 clean-auto-doc: ##remove all doc automatically created
 	@find ./content/developers/integrations -type f -maxdepth 1 \
-		-a -not -name '_index.md' \
 		-exec rm -rf {} \;
 
 clean-node:  ## remove node_modules.
