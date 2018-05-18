@@ -47,7 +47,7 @@ Some options are available in the upper right corner of the page:
 
 ## Properties
 
-{{< img src="monitors/monitor_status/status_monitor_properties.png" alt="status monitor properties" responsive="true" popup="true" >}}
+{{< img src="monitors/monitor_status/status_monitor_properties.png" alt="status monitor properties" responsive="true" popup="true" style="width:80%;" >}}
 
 The *Properties* section is the overview of your monitor, all high-level information is here:
 
@@ -64,7 +64,7 @@ Use the *cog* icon in the upper right corner of the page to [edit][1] your monit
 
 The *Status and History* section reflects the exact query behavior and status of your monitor for all its scope with the **Evaluation Graph**. It has a fixed zoomed windows that corresponds to your monitor evaluation timesteps. Slide this window over the timeline in order to consult previous monitor evaluation results: 
 
-{{< img src="monitors/monitor_status/status_monitor_history.gif" alt="status monitor history" responsive="true" popup="true" >}}
+{{< img src="monitors/monitor_status/status_monitor_history.gif" alt="status monitor history" responsive="true" popup="true" style="width:80%;" >}}
 
 To deep dive into your metrics evolution for further investigation, we advise you to use the [Metric Explorer page][7] or a dedicated [Notebook][8]
 
@@ -72,7 +72,7 @@ To deep dive into your metrics evolution for further investigation, we advise yo
 
 All events generated from your monitor are aggregated in this section. Those events are also displayed in your [event stream][6].
 
-{{< img src="monitors/monitor_status/status_monitor_event.png" alt="status monitor event" responsive="true" popup="true" >}}
+{{< img src="monitors/monitor_status/status_monitor_event.png" alt="status monitor event" responsive="true" popup="true" style="width:80%;" >}}
 
 ## Further Reading
 
