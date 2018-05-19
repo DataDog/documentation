@@ -60,7 +60,7 @@ sudo rm -rf /usr/local/bin/datadog-agent
 sudo rm -rf ~/.datadog-agent/ #to remove broken symlinks
 ```
 
-If you ran the optional install commands to have the agentent run at boot time, run the following to finish uninstalling:
+If you ran the optional install commands to have the Agent run at boot time, run the following to finish uninstalling:
 
 ```
 sudo launchctl unload -w /Library/LaunchDaemons/com.datadoghq.agent.plist
