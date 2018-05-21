@@ -29,9 +29,9 @@ These sections are open by default, and can be closed by using the little `>` ic
 ### Monitor status options
 Some options are available in the upper right corner of the page:
 
-* **Mute a monitor**:  
-    Choose to mute a monitor directly on its status page. Use the *Scope* field to narrow your downtime. 
-    Refer to the [dedicated downtime documentation][2] to learn how to mute multiple scope or multiple monitor at the same time.  
+* **Mute a monitor**:
+    Choose to mute a monitor directly on its status page. Use the *Scope* field to narrow your downtime.
+    Refer to the [dedicated downtime documentation][2] to learn how to mute multiple scopes or multiple monitors at the same time.
 
     {{< img src="monitors/monitor_status/status_mute_monitor.png" alt="status mute monitor" responsive="true" popup="true" style="width:30%;">}}
 
@@ -52,7 +52,7 @@ Some options are available in the upper right corner of the page:
 The *Properties* section is the overview of your monitor:
 
 - The status of your monitor
-- The monitor creator 
+- The monitor creator
 - The monitor ID ([for the monitor API][4])
 - Tags attached to your monitor. *Edit the tag list by clicking on the pencil icon*.
 - The monitor [query][5]
@@ -62,7 +62,7 @@ Use the *cog* icon in the upper right corner of the page to [edit][1] your monit
 
 ## Status and History
 
-The *Status and History* sections reflect the original query and historical state changes over time, while the **Evaluation Graph** represents the exact query behavior within the timeframe bracket *on the history graph*. The Evaluation Graph has a fixed zoomed window that corresponds to your monitor evaluation timesteps, to ensure the displayed points are not ([incorrectly aggregated] [https://docs.datadoghq.com/videos/datadog101-5-aggregation/?wtime=49s]). Slide this window over the timeline in order to view previous monitor evaluation results: 
+The *Status and History* section reflect the query and state changes over time, while the **Evaluation Graph** represents the exact query behavior within the timeframe bracket *on the history graph*. The Evaluation Graph has a fixed zoomed window that corresponds to your monitor evaluation timesteps, to ensure the displayed points are not ([incorrectly aggregated] [https://docs.datadoghq.com/videos/datadog101-5-aggregation/?wtime=49s]). Slide this bracket over the timeline in order to view previous monitor evaluation results:
 
 {{< img src="monitors/monitor_status/status_monitor_history.gif" alt="status monitor history" responsive="true" popup="true" style="width:80%;" >}}
 

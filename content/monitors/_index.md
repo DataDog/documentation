@@ -13,7 +13,7 @@ description: Create & manage your notifications
 
 Monitoring all of your infrastructure in one place wouldn't be complete without the ability to know when critical changes are occurring. Datadog gives you the ability to create monitors that actively check metrics, integration availability, network endpoints, and more.
 
-Once a monitor is created, you are notified when its conditions are met. You can also notify team members via email, 3rd party services (e.g. Pagerduty or Hipchat) or other custom endpoints via Webhooks.
+Once a monitor is created, you are notified when its conditions are met. You can also notify team members via email, 3rd party services (e.g. Pagerduty or Stride), or other custom endpoints via Webhooks.
 
 Triggered monitors appear in the [event stream][1], allowing collaboration around active issues in your applications or infrastructure. Datadog provides a high-level view of open issues on the [Triggered Monitors][2] page as well as general monitor management on the [Manage Monitors][3] page.
 
@@ -46,7 +46,7 @@ Navigate to the [Create Monitors][13] page by hovering over **Monitors** in the 
 
 ## Export your monitor
 
-Export the JSON configuration for a monitor right from the create screen, or on your [monitor status page][28] in the upper right corner. 
+Export the JSON configuration for a monitor right from the create screen, or on your [monitor status page][28] in the upper right corner.
 If you manage and deploy monitors programmatically, it's easier to define the monitor in the UI and export the JSON right away:
 
 {{< img src="monitors/index/export_monitor_json.jpg" alt="export monitor" responsive="true" popup="true" >}}
@@ -73,7 +73,7 @@ It only makes sense in a couple cases to manually resolve your monitor:
 * If the monitor is in a "no data" state then resolving it hides it from the triggered monitors page.
 * If the monitor is in the triggered state but has stopped reporting data then resolving it hides it from the triggered monitors page.
 
-Otherwise the monitor picks up the current state on the next evaluation. 
+Otherwise the monitor picks up the current state on the next evaluation.
 
 In other words, if the value is still above/below the configured threshold then the monitor may re-trigger upon the next evaluation (in about 60 seconds).
 
