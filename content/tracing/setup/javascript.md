@@ -93,7 +93,7 @@ The `dd-trace` library includes support for a number of modules. If you would li
 
 | Module        | Versions    | Support Type    |
 | :----------   | :---------- | :-------------- |
-| [express][8]  | 4.x         | Experimental    |
+| [express][8]  | 4.x         | Beta            |
 | [hapi][9]     |             | Coming Soon     |
 | [koa][10]     |             | Coming Soon     |
 | [restify][11] |             | Coming Soon     |
@@ -102,8 +102,8 @@ The `dd-trace` library includes support for a number of modules. If you would li
 
 | Module               | Support Type    |
 | :------------------- | :-------------- |
-| [http][12]           | Experimental    |
-| [https][13]          | Experimental    |
+| [http][12]           | Beta            |
+| [https][13]          | Beta            |
 
 #### Data Stores
 
@@ -111,11 +111,11 @@ The `dd-trace` library includes support for a number of modules. If you would li
 | :----------         | :---------- | :----------  |
 | [elasticsearch][14] |             | Coming Soon  |
 | [ioredis][15]       |             | Coming Soon  |
-| [mongodb-core][16]  | 3.x         | Experimental |
-| [mysql][17]         | 2.x         | Experimental |
-| [mysql2][18]        | ^1.5        | Experimental |
-| [pg][19]            | 6.x         | Experimental |
-| [redis][20]         | >=2.6       | Experimental |
+| [mongodb-core][16]  | 3.x         | Beta         |
+| [mysql][17]         | 2.x         | Beta         |
+| [mysql2][18]        | ^1.5        | Beta         |
+| [pg][19]            | 6.x         | Beta         |
+| [redis][20]         | >=2.6       | Beta         |
 
 ## Further Reading
 
