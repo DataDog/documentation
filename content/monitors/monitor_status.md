@@ -17,14 +17,14 @@ further_reading:
 
 ## Overview
 
-Once you have [created your monitor][1], the Monitor Status page gives you a bird-eyed view of your monitor status over time.
+Once you have [created your monitor][1], the Monitor Status page gives you a bird's eye view of your monitor status over time.
 This page is split in 3 main sections:
 
 * **[Properties](#properties)**
 * **[Status and History](#status-and-history)**
 * **[Events](#events)**
 
-Those sections are open by default, close them using the little `>` icon on the left of the section name.
+These sections are open by default, and can be closed by using the little `>` icon to the left of the section name.
 
 ### Monitor status options
 Some options are available in the upper right corner of the page:
@@ -49,7 +49,7 @@ Some options are available in the upper right corner of the page:
 
 {{< img src="monitors/monitor_status/status_monitor_properties.png" alt="status monitor properties" responsive="true" popup="true" style="width:80%;" >}}
 
-The *Properties* section is the overview of your monitor, all high-level information is here:
+The *Properties* section is the overview of your monitor:
 
 - The status of your monitor
 - The monitor creator 
@@ -62,7 +62,7 @@ Use the *cog* icon in the upper right corner of the page to [edit][1] your monit
 
 ## Status and History
 
-The *Status and History* section reflects the exact query behavior and status of your monitor for all its scope with the **Evaluation Graph**. It has a fixed zoomed windows that corresponds to your monitor evaluation timesteps. Slide this window over the timeline in order to consult previous monitor evaluation results: 
+The *Status and History* section reflects the exact query behavior and status of your monitor for all its scope with the **Evaluation Graph**. It has a fixed zoomed windows that corresponds to your monitor evaluation timesteps. Slide this window over the timeline in order to view previous monitor evaluation results: 
 
 {{< img src="monitors/monitor_status/status_monitor_history.gif" alt="status monitor history" responsive="true" popup="true" style="width:80%;" >}}
 
