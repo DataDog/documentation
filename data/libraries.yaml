@@ -216,10 +216,11 @@ Tracing:
       link: https://github.com/chonton/apm-client
       authors: Chas Honton
   - Javascript:
-    - name: datadog-tracer-js
-      link: https://github.com/rochdev/datadog-tracer-js
-      authors: Roch Devost
-      notes: OpenTracing API implementation in Javascript (both Node and browser)
+    - name: dd-trace-js
+      link: https://github.com/DataDog/dd-trace-js
+      official: true
+      authors: Datadog
+      notes: OpenTracing API implementation in JavaScript for Node.js
   - PHP:
     - name: dd-trace-php
       link: https://github.com/jcchavezs/dd-trace-php/
