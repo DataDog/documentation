@@ -87,7 +87,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 ### Compatibility
 
-The `dd-trace` library includes support for a number of modules. If you would like support for a module that is not listed, feel free to open a [GitHub issue][7].
+The `dd-trace` library includes support for a number of modules. If you would like support for a module that is not listed, [contact support][7] to share a request.
 
 #### Web Frameworks
 
@@ -129,7 +129,7 @@ The `dd-trace` library includes support for a number of modules. If you would li
 [4]: https://datadog.github.io/dd-trace-js/#tracer-settings
 [5]: https://datadog.github.io/dd-trace-js/#manual-instrumentation
 [6]: https://datadog.github.io/dd-trace-js/#integrations
-[7]: https://github.com/DataDog/dd-trace-js/issues
+[7]: https://docs.datadoghq.com/help
 [8]: https://expressjs.com/
 [9]: https://hapijs.com/
 [10]: https://koajs.com/
