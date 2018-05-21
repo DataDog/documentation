@@ -9,9 +9,9 @@ further_reading:
 - link: "monitors/downtimes"
   tag: "Documentation"
   text: Schedule a dowtime to mute a monitor
-- link: "monitors/faq"
-  tag: "FAQ"
-  text: Monitors FAQ
+- link: "monitors/monitor_status"
+  tag: "Documentation"
+  text: Consult your monitor status
 ---
 
 ## Configuration
@@ -24,17 +24,11 @@ further_reading:
     A **[Change alert][1]** compares the absolute or percentage change in value between now and some time ago against a given threshold. The compared data points aren't single points but are computed using the parameters in the *alert conditions* section.
 
     This type of alert is useful to track sudden spikes or drops as well as slow changes in a metric when you might not have an exact "unexpected" threshold.
-    *Note:* the calculated value is not the absolute value - meaning it is
-    negative for a downward change.
+    *Note:* the calculated value is not the absolute value - meaning it is negative for a downward change.
 
-    **[Anomaly Detection][2]** is an algorithmic feature that allows you to identify
-    when a metric is behaving differently than it has in the past, taking into
-    account trends, seasonal day-of-week and time-of-day patterns. It is well-
-    suited for metrics with strong trends and recurring patterns that are hard
-    or impossible to monitor with threshold-based alerting.
+    **[Anomaly Detection][2]** is an algorithmic feature that allows you to identify when a metric is behaving differently than it has in the past, taking into account trends, seasonal day-of-week and time-of-day patterns. It is well- suited for metrics with strong trends and recurring patterns that are hard or impossible to monitor with threshold-based alerting.
 
-    **[Outlier Detection][3]** is an algorithmic feature that allows you to detect when some members of a group are behaving strangely compared to the others.  
-    For example, you could detect that one web server in a pool is processing an unusual number of requests, and hence should be a target for replacement. Or, you could get an early warning that significantly more 500s are happening in one AWS Availability Zone (AZ) than the others, which might indicate an issue arising in that AZ.
+    **[Outlier Detection][3]** is an algorithmic feature that allows you to detect when some members of a group are behaving strangely compared to the others.   For example, you could detect that one web server in a pool is processing an unusual number of requests, and hence should be a target for replacement. Or, you could get an early warning that significantly more 500s are happening in one AWS Availability Zone (AZ) than the others, which might indicate an issue arising in that AZ.
 
     **[Forecast Detection][4]** is an algorithmic feature that allows you to predict where a metric is heading in the future. It is well-suited for metrics with strong trends or recurring patterns.
 
@@ -45,18 +39,13 @@ further_reading:
 3. Select the alert grouping.
     {{< img src="monitors/monitor_types/metric/alert_grouping.png" alt="alert grouping" responsive="true" popup="true">}}
 
-    A **simple alert** aggregates over all reporting sources. You get one
-    alert when the aggregated value meets the conditions set below. This works
-    best to monitor a metric from a single host, like `avg` of `system.cpu.iowait` over `host:bits`, or for an aggregate metric across many hosts like `sum` of `nginx.bytes.net` over `region:us-east`.
+    A **simple alert** aggregates over all reporting sources. You get one alert when the aggregated value meets the conditions set below. This works best to monitor a metric from a single host, like `avg` of `system.cpu.iowait` over `host:bits`, or for an aggregate metric across many hosts like `sum` of `nginx.bytes.net` over `region:us-east`.
 
-    A **multi alert** applies the alert to each source, according to your group
-    parameters. E.g. to alert on disk space you might group by host and device,
-    creating the query:
+    A **multi alert** applies the alert to each source, according to your group parameters. E.g. to alert on disk space you might group by host and device, creating the query:
 
         avg:system.disk.in_use{*} by {host,device}
 
-    This triggers a separate alert for each device on each host that is
-    running out of space.
+    This triggers a separate alert for each device on each host that is running out of space.
 
 4.  Select the alert conditions:
 

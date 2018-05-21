@@ -11,9 +11,9 @@ further_reading:
 - link: "monitors/downtimes"
   tag: "Documentation"
   text: Schedule a dowtime to mute a monitor
-- link: "monitors/faq"
-  tag: "FAQ"
-  text: Monitors FAQ
+- link: "monitors/monitor_status"
+  tag: "Documentation"
+  text: Consult your monitor status
 ---
 
 Composite monitors let you combine many individual monitors into one so that you can define more specific alert conditions. 

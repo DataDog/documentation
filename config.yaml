@@ -294,93 +294,98 @@ languages:
         - identifier: customnav_monitornav_monitor_types
           name: "Monitor Types"
           url: "monitors/monitor_types/"
-          weight: 30
+          weight: 10
           parent: menu_references_monitoring
 
         - identifier: customnav_monitortypenav_anomaly
           name: "Anomaly"
           url: "monitors/monitor_types/anomaly/"
-          weight: 310
+          weight: 110
           parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_apm
           name: "APM"
           url: "monitors/monitor_types/apm/"
-          weight: 320
+          weight: 120
           parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_composite
           name: "Composite"
           url: "monitors/monitor_types/composite/"
-          weight: 330
+          weight: 130
           parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_custom_check
           name: "Custom Check"
           url: "monitors/monitor_types/custom_check/"
-          weight: 340
+          weight: 140
           parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_event
           name: "Event"
           url: "monitors/monitor_types/event/"
-          weight: 350
+          weight: 150
           parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_forecasts
           name: "Forecasts"
           url: "monitors/monitor_types/forecasts/"
-          weight: 360
+          weight: 160
           parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_host
           name: "Host"
           url: "monitors/monitor_types/host/"
-          weight: 370
+          weight: 170
           parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_integration
           name: "Integration"
           url: "monitors/monitor_types/integration/"
-          weight: 380
+          weight: 180
           parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_monitor
           name: "Log"
           url: "monitors/monitor_types/log"
-          weight: 385
+          weight: 185
           parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_metric
           name: "Metric"
           url: "monitors/monitor_types/metric/"
-          weight: 390
+          weight: 190
           parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_network
           name: "Network"
           url: "monitors/monitor_types/network/"
-          weight: 400
+          weight: 200
           parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_outlier
           name: "Outlier"
           url: "monitors/monitor_types/outlier/"
-          weight: 410
+          weight: 210
           parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_process
           name: "Process"
           url: "monitors/monitor_types/process/"
-          weight: 420
+          weight: 220
           parent: customnav_monitornav_monitor_types
+        - identifier: customnav_monitornav_monitor_status
+          name: "Monitor Status"
+          url: "monitors/monitor_status/"
+          weight: 30
+          parent: menu_references_monitoring
         - identifier: customnav_monitornav_manage_monitor
           name: "Manage Monitor"
           url: "monitors/manage_monitor/"
-          weight: 130
+          weight: 40
           parent: menu_references_monitoring
         - identifier: customnav_monitornav_check_summary
           name: "Check Summary"
           url: "monitors/check_summary/"
-          weight: 140
+          weight: 50
           parent: menu_references_monitoring
         - identifier: customnav_monitornav_notifications
           name: "Notifications"
           url: "monitors/notifications/"
-          weight: 150
+          weight: 60
           parent: menu_references_monitoring
         - identifier: customnav_monitornav_downtimes
           name: "Downtimes"
           url: "monitors/downtimes/"
-          weight: 160
+          weight: 70
           parent: menu_references_monitoring
         #- identifier: customnav_monitornav_faq
         #  name: "FAQ"
