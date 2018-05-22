@@ -81,6 +81,7 @@ description: "Configure NXLog to gather logs from your host, containers & servic
 
     ```
     Exec        $ddsource = 'mysourcevalue';
+    Exec        $ddtags = 'env:test,key2:value2';
     ```
 
 ### NXLog TLS encryption
