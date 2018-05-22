@@ -106,6 +106,12 @@ description: "Configure Rsyslog to gather logs from your host, containers & serv
     $template DatadogFormat,"YOURAPIKEY <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - [metas ddsource=\"mysourcename\"] %msg%\n"
     ```
     Do not forge to replace mysourcename by the appropriate value.  
+    
+    You can also add custom tags thanks to the `ddtags` attribute:
+    
+    ```
+    $template DatadogFormat,"YOURAPIKEY <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - [metas ddsource=\"mysourcename\" ddtags=\"env:test,key2:value2\"] %msg%\n"
+    ```
 
 9. (Optional) Datadog cuts inactive connections after a period of inactivity.  
     Some Rsyslog versions that are not able to reconnect properly when necessary. To mitigate this issue, use time markers so the connection never stops. To achieve this, add the following 2 lines in your Rsyslog configuration:   
