@@ -77,15 +77,21 @@ apm_config:
 ```
 
 {{% table responsive="true" %}}
-| File setting            | Environment variable | Description                                                                                                                                                      |
-|------------------------------|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `apm_enabled`           | `DD_APM_ENABLED`     | The Datadog Agent accepts trace metrics when the value is set to `true`. The default value is `true`.                                                            |
-| `extra_sample_rate`     | -                    | Use this setting to adjust the trace sample rate. The value should be a float between `0` (no sampling) and `1` (normal sampling). The default value is `1`. |
-| `max_traces_per_second` | -                    | The maximum number of traces to sample per second. To disable the limit (*not recommended*), set to `0`. The default value is `10`.                              |
-| `receiver_port`         | `DD_RECEIVER_PORT`   | The port that the Datadog Agent's trace receiver should listen on. The default value is `8126`.                                                                  |
-| `connection_limit`      | -                    | The number of unique client connections to allow during one 30 second lease period. The default value is `2000`.                                                 |
-| `resource`              | `DD_IGNORE_RESOURCE` | A blacklist of regular expressions to filter out Traces by their resource name.                                                                                  |
-| `replace_tags`          |                      | A list of tag replacement rules. See the [Scrubbing sensitive information](#scrubbing-sensitive-information) section.                                            |
+| File setting            | Type      | Environment variable     | Description                                                                                                                                                      |
+|-------------------------|-----------|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `enabled`               | boolean   | DD_APM_ENABLED           | The Datadog Agent accepts trace metrics when the value is set to `true`. The default value is `true`.                                                            |
+| `apm_dd_url`            | string    | DD_APM_DD_URL            | The Datadog API endpoint where traces will be written too.                                                                                                       |
+| `env`                   | string    | -                        | The default environment that the traces should be registered under (e.g. staging, production, etc.).                                                             |
+| `extra_sample_rate`     | float     | -                        | Use this setting to adjust the trace sample rate. The value should be a float between `0` (no sampling) and `1` (normal sampling). The default value is `1`.     |
+| `max_traces_per_second` | float     | -                        | The maximum number of traces to sample per second. To disable the limit (*not recommended*), set to `0`. The default value is `10`.                              |
+| `ignore_resources`      | list      | DD_IGNORE_RESOURCE       | A list of resources that the agent should ignore. If using the environment variable, a comma-separated list.                                                     |
+| `log_file`              | string    | -                        | The location of the log file.                                                                                                                                    |
+| `replace_tags`          | list      |                          | A list of tag replacement rules. See the [Scrubbing sensitive information](#scrubbing-sensitive-information) section.                                            |
+| `receiver_port`         | number    | DD_RECEIVER_PORT         | The port that the Datadog Agent's trace receiver should listen on. The default value is `8126`.                                                                  |
+| `apm_non_local_traffic` | boolean   | DD_APM_NON_LOCAL_TRAFFIC | Allows the agent to receive outside connections. It will listen on all interfaces.                                                                               |
+| `max_memory`            | float     | -                        | The maximum memory that the agent is allowed to occupy. When this is exceeded the process will be killed.                                                        |
+| `max_cpu_percent`       | float     | -                        | The maximum CPU percentage that the agent should use. The agent automatically adjusts its pre-sampling rate to stay below this number.                           |
+| `max_connections`       | number    | -                        | The maximum number of network connections that the agent is allowed to use. When this is exceeded the process will be killed.                                    |
 {{% /table %}}
 
 For more information about the Datadog Agent, see the [dedicated doc page][18] or refer to the [`datadog.yaml` templates][19].
