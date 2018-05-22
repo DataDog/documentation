@@ -183,7 +183,7 @@ Create **A**: an anomaly monitor to alert on values above the bounds; and **B**:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#/create
-[2]: /#anomaly-detetion-algorithms
+[2]: #anomaly-detection-algorithms
 [3]: /graphing/#aggregate-and-rollup
 [4]: https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average
 [5]: https://en.wikipedia.org/wiki/Decomposition_of_time_series
