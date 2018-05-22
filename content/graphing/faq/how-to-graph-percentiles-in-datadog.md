@@ -21,7 +21,7 @@ Via the "histogram_percentiles" line of the configuration file of the Agent, get
 
 * histogram_percentiles: 0.95, 0.75
 
-[More about histogram](developers/metrics/#histograms)
+[More about histogram][5]
 
 ## Local Aggregations
 
@@ -46,3 +46,4 @@ Histograms are computed every 10 seconds on a host per host basis by the datadog
 [2]: https://github.com/DataDog/dd-agent/blob/master/aggregator.py
 [3]: /developers/libraries/
 [4]: /developers/faq/characteristics-of-datadog-histograms
+[5]: /developers/metrics/#histograms
