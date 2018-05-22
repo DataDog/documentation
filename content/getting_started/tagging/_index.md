@@ -62,13 +62,6 @@ Tags may be added using any (or all) of the following methods:
 * [Chef Roles][7] and [Puppet][8] Tags (Chef and Puppet use the API - this may obviously be extended to other configuration management tools by you or Datadog)
 * Manually adding tags using the [Infrastructure List][9] (hover over host->select "Inspect"->"Edit Tags")
 
-## Limitations
-
-We store one time series per host + metric + tag combination on our backend, thus we cannot support infinitely bounded tags.  
-Don't include endlessly growing tags in your metrics, like timestamps or user ids. **Limit each metric to 1000 tags**.
-
-[Read more about metrics limitations][10]
-
 ## Examples
 
 Here is an example of tags using the time-series chart editor. For the first screenshot, no tags have been applied, and we're observing average CPU across all hosts:
