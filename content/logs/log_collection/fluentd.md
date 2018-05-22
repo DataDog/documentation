@@ -8,24 +8,30 @@ As long as you can forward your FluentD logs over tcp/udp to a specific port, yo
 
 ## Add metadata to your logs
 
+In order to get the best use out of your logs in Datadog, it is important to have the proper metadata associated with your logs (including hostname and source). By default, the hostname and timestamp should be properly remapped thanks to our default [remapping for reserved attributes][2]. 
+
 ### Source
 
-In order to get the best use out of your logs in Datadog, it is important to have the proper metadata associated with your logs (including hostname and source). To set the source (Datadog integration name) on your logs in order to benefit from all the integration automatic setup in your platform, add the following attribute in your logs:
+Add the `ddsource` attribute in your logs in order to trigger the [integration automatic setup][3] in Datadog.
 
 ```
 {
-    "ddsource": "integrationname"
+    "ddsource": "<MY_SOURCE_VALUE>"
 }
 ```
 
 ### Custom tags
 
-Host tags are automatically set on your logs if there is a matching hostname in your infrastructure. That said custom tags can be added just for logs thanks to the `ddtags` attribute:
+[Host tags][5] are automatically set on your logs if there is a matching hostname in your [infrastructure list][4]. Use the `ddtags` attribute to add custom tags to your logs:
 
 ```
 {
-    "ddtags": "env:test,key2:value2"
+    "ddtags": "env:test,<KEY:VALUE>"
 }
 ```
 
 [1]: http://www.rubydoc.info/gems/fluent-plugin-datadog/0.9.6
+[2]: /logs/#edit-reserved-attributes
+[3]: /logs/processing/#integration-pipelines
+[4]: https://app.datadoghq.com/infrastructure
+[5]: /getting_started/tagging/assigning_tags/
