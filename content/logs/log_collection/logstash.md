@@ -26,17 +26,19 @@ In order to get the best use out of your logs in Datadog, it is important to hav
 
 ### Source
 
-To set the source (Datadog integration name) on your logs to benefit from all the integration automatic setup in your platform, you need to setup a Logstash filter:  
+Setup a Logstash filter to set the source (Datadog integration name) on your logs. 
 
 ```
 filter {
   mutate {
     add_field => {
- "ddsource" => "mysourcevalue"
+ "ddsource" => "<MY_SOURCE_VALUE>"
        }
     }
  }
 ```
+
+This triggers the [integration automatic setup][3] in Datadog.
 
 ### Custom tags
 
@@ -54,3 +56,4 @@ filter {
 
 [1]: https://github.com/DataDog/logstash-output-datadog_logs
 [2]: /logs/#edit-reserved-attributes
+[3]: /logs/processing/#integration-pipelines
