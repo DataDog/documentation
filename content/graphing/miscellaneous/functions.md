@@ -29,6 +29,10 @@ Base-10 logarithm for a given metric.
 ### cumsum()
 Cumulative sum over visible time window for a given metric.
 
+### exclude_null()
+
+Filter to remove `N/A` (Not Applicable) entries on a timeseries.
+
 ### integral()
 
 Cumulative sum of `\[time delta] x \[value delta]` over all consecutive pairs of points in the visible time window for a given metric.
