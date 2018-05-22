@@ -68,7 +68,7 @@ To start tracing your application:
 
 ## Agent configuration
 
-The APM Agent (also known as *trace Agent*) is shipped by default with the
+The APM Agent (also known as *Trace Agent*) is shipped by default with the
 Agent 6 in the Linux, MacOS, and Windows packages. The APM Agent is enabled by default on Linux. To enable the check on other platforms or disable it on Linux, update the `apm_config` key in your `datadog.yaml`:
 
 ```
