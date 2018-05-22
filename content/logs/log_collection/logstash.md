@@ -42,13 +42,13 @@ This triggers the [integration automatic setup][3] in Datadog.
 
 ### Custom tags
 
-Host tags are automatically set on your logs if there is a matching hostname in your infrastructure. That said custom tags can be added just for logs thanks to the `ddtags` attribute:
+[Host tags][5] are automatically set on your logs if there is a matching hostname in your [infrastructure list][4]. Use the `ddtags` attribute to add custom tags to your logs:
 
 ```
 filter {
   mutate {
     add_field => {
- "ddtags" => "env:test,key2:value2"
+        "ddtags" => "env:test,<KEY:VALUE>"
        }
     }
  }
@@ -57,3 +57,5 @@ filter {
 [1]: https://github.com/DataDog/logstash-output-datadog_logs
 [2]: /logs/#edit-reserved-attributes
 [3]: /logs/processing/#integration-pipelines
+[4]: https://app.datadoghq.com/infrastructure
+[5]: /getting_started/tagging/assigning_tags/
