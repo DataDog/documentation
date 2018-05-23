@@ -355,8 +355,10 @@ class PreBuild:
                 regex_github_link = re.compile(r'(https:\/\/github\.com\/DataDog\/integrations-core\/blob\/master\/docs\/dev\/)(\S+)\.md')
                 content = re.sub(regex_github_link, new_link, content, count=0)
 
-                # Writing the new content to the documentation file
-            with open('{}{}{}'.format(self.content_dir, doc_directory[1:], basename(file_name)), mode='w+', encoding='utf-8') as f:
+            # Writing the new content to the documentation file
+            dirp = '{}{}'.format(self.content_dir, doc_directory[1:])
+            makedirs(dirp, exist_ok=True)
+            with open('{}{}'.format(dirp, basename(file_name)), mode='w+', encoding='utf-8') as f:
                 f.write(content)
 
     def process_integration_manifest(self, file_name):
