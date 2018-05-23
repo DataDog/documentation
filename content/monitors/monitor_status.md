@@ -62,7 +62,7 @@ Use the *cog* icon in the upper right corner of the page to [edit][1] your monit
 
 ## Status and History
 
-The *Status and History* section reflect the query and state changes over time, while the **Evaluation Graph** represents the exact query behavior within the timeframe bracket *on the history graph*. The Evaluation Graph has a fixed zoomed window that corresponds to your monitor evaluation timesteps, to ensure the displayed points are not ([incorrectly aggregated] [https://docs.datadoghq.com/videos/datadog101-5-aggregation/?wtime=49s]). Slide this bracket over the timeline in order to view previous monitor evaluation results:
+The *Status and History* section reflect the query and state changes over time, while the **Evaluation Graph** represents the exact query behavior within the timeframe bracket *on the history graph*. The Evaluation Graph has a fixed zoomed window that corresponds to your monitor evaluation timesteps, to ensure the displayed points are not [incorrectly aggregated][9]. Slide this bracket over the timeline in order to view previous monitor evaluation results:
 
 {{< img src="monitors/monitor_status/status_monitor_history.gif" alt="status monitor history" responsive="true" popup="true" style="width:80%;" >}}
 
@@ -86,3 +86,4 @@ All events generated from your monitor are aggregated in this section. Those eve
 [6]: /graphing/event_stream/
 [7]: https://app.datadoghq.com/metric/explorer
 [8]: /graphing/notebooks/
+[9]: https://docs.datadoghq.com/videos/datadog101-5-aggregation/?wtime=49s
