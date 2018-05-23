@@ -102,7 +102,7 @@ Suppose you want to be alerted when the error rate is above 50% at all times dur
 
 To correctly rewrite it in the explicit format, the query can be rewritten like:
 
-`min(last_5m): ( default(sum:requests.error{*}.as_rate(),0) / sum:requests.total{*}.as_rate() )`
+`sum(last_5m): ( default(sum:requests.error{*}.as_rate(),0) / sum:requests.total{*}.as_rate() )`
 
 Please [reach out to us][1] if you have any questions regarding these changes.
 
