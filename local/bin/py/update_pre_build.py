@@ -343,14 +343,12 @@ class PreBuild:
 
         if (relative_path_on_github in file_name and file_name.endswith('.md')): 
             
-            # Replacing the master README.md by _index.md to follow Hugo logic
-            if file_name.endswith('README.md'):
-                doc_file_name = '_index.md'
-            else:
-                doc_file_name = basename(normpath(file_name))
-            
             with open(file_name, mode='r+') as f:
                 content = f.read()
+
+                # Replacing the master README.md by _index.md to follow Hugo logic
+                if file_name.endswith('README.md'):
+                    file_name = '_index.md'
 
                 #Replacing links that point to the Github folder by link that point to the doc.
                 new_link = doc_directory +'\\2'
@@ -358,10 +356,8 @@ class PreBuild:
                 content = re.sub(regex_github_link, new_link, content, count=0)
 
                 # Writing the new content to the documentation file
-                with open('{}{}'.format(self.options.source, '/content{}{}'.format(doc_directory,doc_file_name)), mode='w+', encoding='utf-8') as f_doc:
-                    f_doc.truncate(0)
-                    f_doc.seek(0)
-                    f_doc.write(content)
+                with open('{}{}'.format(self.options.source, '/content{}{}'.format(doc_directory,basename(normpath(file_name)))), mode='w+', encoding='utf-8') as f:
+                    f.write(content)
 
     def process_integration_manifest(self, file_name):
         """
