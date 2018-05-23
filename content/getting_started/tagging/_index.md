@@ -48,7 +48,10 @@ A few best practices on tags:
     * `role_database:mysql` is parsed as **key**:`role_database` , **value**:`mysql`  
 
     Examples of commonly used metric tag keys are `env`, `instance`, `name`, and `role`.  
-    **Note**: `device`, `host`, and `source` are **reserved tag keys** and cannot be specified in the standard way.
+
+5. `device`, `host`, and `source` are **reserved tag keys** and cannot be specified in the standard way.
+
+6. Tags shouldn’t be unbounded, like EPOCH timestamps or User ID. Otherwise it may impact your platform performances and billing.
 
 ## Applying Tags
 
