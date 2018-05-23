@@ -137,7 +137,6 @@ class PreBuild:
         self.regex_service_check = re.compile(r'(#{3} Service Checks\n)([\s\S]*does not include any service check at this time.)([\s\S]*)(#{2} Troubleshooting\n)', re.DOTALL)
         self.regex_fm = re.compile(r'(?:-{3})(.*?)(?:-{3})(.*)', re.DOTALL)
         self.regex_source = re.compile(r'(\S*FROM_DISPLAY_NAME\s*=\s*\{)(.*?)\}', re.DOTALL)
-        self.regex_github_link = re.compile(r'(https:\/\/github\.com\/DataDog\/integrations-core\/blob\/master\/docs\/dev\/)(\S+)\.md')
         self.datafile_json = []
         self.pool_size = 5
         self.integration_mutations = OrderedDict({
@@ -345,7 +344,6 @@ class PreBuild:
         if (relative_path_on_github in file_name and file_name.endswith('.md')): 
             
             # Replacing the master README.md by _index.md to follow Hugo logic
-            
             if file_name.endswith('README.md'):
                 doc_file_name = '_index.md'
             else:
@@ -353,13 +351,11 @@ class PreBuild:
             
             with open(file_name, mode='r+') as f:
                 content = f.read()
-                
-                # Replacing H1 title from Github with the front_matter style from the doc
-                content = re.sub(self.regex_h1_replace, r'---\ntitle:\2\ntype: documentation\n---\n', content, count=0)
 
                 #Replacing links that point to the Github folder by link that point to the doc.
                 new_link = doc_directory +'\\2'
-                content = re.sub(self.regex_github_link, new_link, content, count=0)
+                regex_github_link = re.compile(r'(https:\/\/github\.com\/DataDog\/integrations-core\/blob\/master\/docs\/dev\/)(\S+)\.md')
+                content = re.sub(regex_github_link, new_link, content, count=0)
 
                 # Writing the new content to the documentation file
                 with open('{}{}'.format(self.options.source, '/content{}{}'.format(doc_directory,doc_file_name)), mode='w+', encoding='utf-8') as f_doc:
