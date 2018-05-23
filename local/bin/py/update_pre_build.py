@@ -356,7 +356,7 @@ class PreBuild:
                 content = re.sub(regex_github_link, new_link, content, count=0)
 
                 # Writing the new content to the documentation file
-            with open('{}/content{}{}'.format(self.options.source, doc_directory,basename(normpath(file_name))), mode='w+', encoding='utf-8') as f:
+            with open('{}{}{}'.format(self.content_dir, doc_directory[1:], basename(file_name)), mode='w+', encoding='utf-8') as f:
                 f.write(content)
 
     def process_integration_manifest(self, file_name):
