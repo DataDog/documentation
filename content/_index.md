@@ -32,7 +32,7 @@ Some of your stack may be SaaS, not servers. Datadog can [poll many of these ser
 
 As soon as the data is captured, you'll see it immediately in the Datadog web application. Use the Metrics Explorer to search for a given metric and watch it ebb and flow. View and comment on events, such as an application deployment, as they pour into your [Event Stream][8]. Filter for a group of hosts in the [Infrastructure Map][9]. Get an overall picture of how a given service (say, MySQL) is running via its default dashboard.
 
-Before long, you'll create custom [Screenboards][10], that combine all the graphs, numbers, events, and service states you care about the most. You can customize the graphs in whatever way helps you discover problems: skewing their metric values using other metrics, applying [anomaly][11], [outlier][12], or [forecasts][13] detection, overlaying events onto them, and more.
+Before long, you'll create custom [Screenboards][10] that combine all the graphs, numbers, events, and service states you care about the most. You can customize the graphs in whatever way helps you discover problems: skewing their metric values using other metrics, applying [anomaly][11], [outlier][12], or [forecasts][13] detection, overlaying events onto them, and more.
 
 ## Monitor It
 
