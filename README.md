@@ -42,6 +42,7 @@ clean-build               remove build artifacts.
 clean-docker              remove image.
 clean-exe                 remove execs.
 clean-integrations        remove built integrations files.
+clean-auto-doc            remove all doc page created automatically
 clean-node                remove node_modules.
 clean-virt                remove python virtual env.
 clean                     clean all make installs.
