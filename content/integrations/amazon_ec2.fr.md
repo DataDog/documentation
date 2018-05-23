@@ -8,7 +8,7 @@ categories:
   - log collection
 ddtype: crawler
 description: >-
-  Suivre l'utilisation des ressources de l'instance, monitorer les checks de
+  Suivre l'utilisation des ressources de l'instance, surveiller les checks de
   status et plus...
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_ec2/'
 git_integration_title: amazon_ec2
