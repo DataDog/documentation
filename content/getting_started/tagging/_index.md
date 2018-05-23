@@ -34,24 +34,24 @@ A few best practices on tags:
     * Underscores
     * Minuses
     * Colons
-    * Periods 
-    * Slashes 
+    * Periods
+    * Slashes
 
-    Other special characters get converted to underscores.  
+    Other special characters get converted to underscores.
     **Note**: A tag cannot end with a colon (e.g., `tag:`)
-2. Tags can be **up to 200 characters** long and support unicode. 
+2. Tags can be **up to 200 characters** long and support unicode.
 3. Tags are converted to lowercase.
-4. A tag can have a `value` or a `key:value` syntax:  
+4. A tag can have a `value` or a `key:value` syntax:
     **For optimal functionality, we recommend constructing tags that use the `key:value` syntax.** The key is always what precedes the first colon of the global tag definition, e.g.:
 
     * `role:database:mysql` is parsed as **key**:`role` , **value**:`database:mysql`
-    * `role_database:mysql` is parsed as **key**:`role_database` , **value**:`mysql`  
+    * `role_database:mysql` is parsed as **key**:`role_database` , **value**:`mysql`
 
-    Examples of commonly used metric tag keys are `env`, `instance`, `name`, and `role`.  
+    Examples of commonly used metric tag keys are `env`, `instance`, `name`, and `role`.
 
 5. `device`, `host`, and `source` are **reserved tag keys** and cannot be specified in the standard way.
 
-6. Tags shouldn’t be unbounded, like EPOCH timestamps or User ID. Otherwise it may impact your platform performances and billing.
+6. Tags shouldn't originate from unbounded sources, such as EPOCH timestamps or user IDs. These tags may impact platform performance and billing.
 
 ## Applying Tags
 
