@@ -210,7 +210,7 @@ class PreBuild:
         dogweb_globs = ['integration/**/*_metadata.csv', 'integration/**/manifest.json',
                         'integration/**/service_checks.json', 'integration/**/README.md',
                         'dd/utils/context/source.py']
-        integrations_globs = ['**/metadata.csv', '**/manifest.json', '**/service_checks.json', '**/README.md']
+        integrations_globs = ['**/metadata.csv', '**/manifest.json', '**/service_checks.json', '**/README.md','docs/**']
         extras_globs = ['**/metadata.csv', '**/manifest.json', '**/service_checks.json', '**/README.md']
 
         # sync from dogweb, download if we don't have it (token required)
@@ -245,6 +245,7 @@ class PreBuild:
             self.process_integration_manifest(file_name)
             self.process_service_checks(file_name)
             self.process_integration_readme(file_name)
+            self.dev_doc_integrations_core(file_name)
 
         self.merge_integrations()
 
@@ -330,6 +331,33 @@ class PreBuild:
                 key_name = basename(file_name.replace('_metadata.csv', ''))
             new_file_name = '{}{}.yaml'.format(self.data_integrations_dir, key_name)
             self.csv_to_yaml(key_name, file_name, new_file_name)
+
+    def dev_doc_integrations_core(self, file_name):
+        """
+        Take the content from https://github.com/DataDog/integrations-core/tree/master/docs/dev 
+        and transform it to be displayed on the doc in the /developers/integrations section
+        :param file_name: path to a file
+        """
+        relative_path_on_github = '/integrations-core/docs/dev/'
+        doc_directory = '/developers/integrations/'
+
+        if (relative_path_on_github in file_name and file_name.endswith('.md')): 
+            
+            with open(file_name, mode='r+') as f:
+                content = f.read()
+
+                # Replacing the master README.md by _index.md to follow Hugo logic
+                if file_name.endswith('README.md'):
+                    file_name = '_index.md'
+
+                #Replacing links that point to the Github folder by link that point to the doc.
+                new_link = doc_directory +'\\2'
+                regex_github_link = re.compile(r'(https:\/\/github\.com\/DataDog\/integrations-core\/blob\/master\/docs\/dev\/)(\S+)\.md')
+                content = re.sub(regex_github_link, new_link, content, count=0)
+
+                # Writing the new content to the documentation file
+            with open('{}/content{}{}'.format(self.options.source, doc_directory,basename(normpath(file_name))), mode='w+', encoding='utf-8') as f:
+                f.write(content)
 
     def process_integration_manifest(self, file_name):
         """
