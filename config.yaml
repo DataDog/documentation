@@ -161,16 +161,6 @@ languages:
           url: "agent/network"
           weight: 40
           parent: menu_references_agent
-        - identifier: agent_checks
-          name: "Agent Checks"
-          url: "agent/agent_checks"
-          weight: 50
-          parent: menu_references_agent
-        - identifier: prometheus
-          name: "Prometheus Checks"
-          url: "agent/prometheus"
-          weight: 60
-          parent: menu_references_agent
         - identifier: custom_python_package
           name: "Adding Python packages"
           url: "agent/custom_python_package"
@@ -685,10 +675,20 @@ languages:
           url: "developers/metrics/"
           weight: 50
           parent: menu_references_developers
+        - identifier: customnav_developersnav_agent_checks
+          name: "Agent Checks"
+          url: "developers/agent_checks"
+          weight: 60
+          parent: menu_references_developers
+        - identifier: customnav_developersnav_prometheus_checks
+          name: "Prometheus Checks"
+          url: "developers/prometheus_checks"
+          weight: 70
+          parent: menu_references_developers
         - identifier: customnav_integrationsnav_new_integration
           name: "Create a new integration"
           url: "developers/integrations/"
-          weight: 60
+          weight: 80
           parent: menu_references_developers
         - identifier: customnav_integrationsnav_integration_sdk
           name: "Integration SDK"
