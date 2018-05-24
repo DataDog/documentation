@@ -1,6 +1,8 @@
 ---
 title: Writing a Prometheus Check
 kind: documentation
+aliases:
+  - /agent/prometheus
 further_reading:
 - link: "logs/"
   tag: "Documentation"
