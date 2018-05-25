@@ -53,6 +53,29 @@ rules:
   - nodes/proxy
   verbs:
   - get
+---
+# You need to use that account for your dd-agent DaemonSet
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: datadog-agent
+  namespace: default
+---
+# Your admin user needs the same permissions to be able to grant them
+# Easiest way is to bind your user to the cluster-admin role
+# See https://cloud.google.com/container-engine/docs/role-based-access-control#setting_up_role-based_access_control
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: datadog-agent
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: datadog-agent
+subjects:
+- kind: ServiceAccount
+  name: datadog-agent
+  namespace: default
 ```
 
 * Create the ClusterRole, ServiceAccount, and ClusterRoleBinding:
