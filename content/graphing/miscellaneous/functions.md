@@ -88,7 +88,7 @@ For now, using functions like `hour_before()` is out of scope for the graphical 
 
 ### day_before()
 
-The `day_before()` function shows data from 1 days prior.
+The `day_before()` function shows data from 1 day prior.
 Here is an example of `nginx.net.connections` with the `day_before()` value shown as a lighter, thinner line. In this example, you can see a week's worth of data which makes the day_before data easy to identify.
 
 {{< img src="graphing/miscellaneous/functions/simple_day_before_example.png" alt="simple day before example" responsive="true" popup="true" style="width:80%;">}}
@@ -119,7 +119,7 @@ For now, using functions like `day_before()` is out of scope for the graphical e
 
 ### week_before()
 
-The `week_before()` function shows data from 7 days (1 weeks) prior.
+The `week_before()` function shows data from 7 days (1 week) prior.
 
 Here is an example of `cassandra.db.read_count` with the `week_before()` value shown as a dotted line. In this example, you can see about three weeks' worth of data which makes the week_before data easy to identify.
 
