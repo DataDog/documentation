@@ -161,11 +161,6 @@ languages:
           url: "agent/network"
           weight: 40
           parent: menu_references_agent
-        - identifier: agent_checks
-          name: "Agent Checks"
-          url: "agent/agent_checks"
-          weight: 50
-          parent: menu_references_agent
         - identifier: prometheus
           name: "Prometheus Checks"
           url: "agent/prometheus"
@@ -685,10 +680,20 @@ languages:
           url: "developers/metrics/"
           weight: 50
           parent: menu_references_developers
+        - identifier: customnav_developersnav_agent_checks
+          name: "Write an Agent Check"
+          url: "developers/agent_checks"
+          weight: 60
+          parent: menu_references_developers
+        - identifier: customnav_developersnav_prometheus
+          name: "Write a Prometheus Check"
+          url: "developers/prometheus"
+          weight: 70
+          parent: menu_references_developers
         - identifier: customnav_integrationsnav_new_integration
           name: "Create a new integration"
           url: "developers/integrations/"
-          weight: 60
+          weight: 80
           parent: menu_references_developers
         - identifier: customnav_integrationsnav_integration_sdk
           name: "Integration SDK"
@@ -893,11 +898,6 @@ languages:
           name: "Réseaux"
           url: "agent/network"
           weight: 40
-          parent: menu_references_agent
-        - identifier: agent_checks
-          name: "Check de l'Agent"
-          url: "agent/agent_checks"
-          weight: 50
           parent: menu_references_agent
         - identifier: prometheus
           name: "Check Prometheus"
@@ -1343,11 +1343,6 @@ languages:
           pre: "nav_developers"
           weight: 100
         # DEVELOPERS - Subnav start
-        - identifier: customnav_developersnav_api
-          name: "API"
-          url: "api/"
-          weight: 20
-          parent: menu_references_developers
         - identifier: customnav_developersnav_dogstatsd
           name: "DogStatsD"
           url: "developers/dogstatsd/"
@@ -1363,10 +1358,20 @@ languages:
           url: "developers/metrics/"
           weight: 50
           parent: menu_references_developers
+        - identifier: customnav_integrationsnav_agent_checks
+          name: "Écrire un Check de l'Agent"
+          url: "developers/agent_checks"
+          weight: 60
+          parent: menu_references_developers
+        - identifier: customnav_integrationsnav_prometheus
+          name: "Écrire un Check Prometheus"
+          url: "developers/prometheus"
+          weight: 70
+          parent: menu_references_developers
         - identifier: customnav_integrationsnav_new_integration
           name: "Créer une nouvelle intégration"
           url: "developers/integrations/"
-          weight: 60
+          weight: 80
           parent: menu_references_developers
         - identifier: customnav_integrationsnav_integration_sdk
           name: "SDK pour les integrations"
