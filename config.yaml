@@ -692,7 +692,7 @@ languages:
           url: "developers/integrations/python"
           weight: 602
           parent: customnav_integrationsnav_new_integration
-          - identifier: customnav_integrationsnav_legacy
+        - identifier: customnav_integrationsnav_legacy
           name: "Legacy"
           url: "developers/integrations/legacy"
           weight: 603
