@@ -1,6 +1,7 @@
 ---
 title: Monitor Status
 kind: documentation
+description: "Get an overview of your monitor status over time"
 further_reading:
 - link: "monitors/monitor_types"
   tag: "Documentation"
