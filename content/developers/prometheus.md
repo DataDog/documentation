@@ -5,7 +5,7 @@ further_reading:
 - link: "agent/prometheus"
   tag: "Documentation"
   text: "Configuring a Prometheus Check"
-- link: "developers/agent"
+- link: "developers/agent_checks"
   tag: "Documentation"
   text: "Write a Custom Check"
 - link: "developers/integrations/"
