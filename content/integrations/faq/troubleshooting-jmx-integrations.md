@@ -23,7 +23,7 @@ If you're able to connect using the command above, run: `beans` and send us a co
 
 ### Agent >v6.2
 
-These commands are available since v6.2.0, for earlier v6 versions please refer to [dedicated agent 6.0 to 6.2 version](##agent-v6-0-to-v6-2):
+These commands are available since v6.2.0, for earlier v6 versions please refer to [dedicated agent 6.0 to 6.2 version](#agent-v6-0-to-v6-2):
 
 | Command                                                | Description                                                                                                                                                             |
 | :----------------------------------------              | :---                                                                                                                                                                    |
