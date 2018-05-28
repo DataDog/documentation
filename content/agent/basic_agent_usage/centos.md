@@ -51,7 +51,7 @@ sudo service datadog-agent check [integration] check_rate
 
 **NB**: If `service` is not available on your system, use:
 
-* on `upstart`-based systems: `sudo start/stop/restart datadog-agent`
+* on `upstart`-based systems: `sudo initctl start/stop/restart datadog-agent`
 * on `systemd`-based systems: `sudo systemctl start/stop/restart datadog-agent`
 
 [Learn more about Service lifecycle commands][4]
