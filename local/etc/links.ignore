@@ -10,6 +10,7 @@ localhost:
 url.to.snpashot.com
 app.datadoghq.com
 app.datadog.com
+https://yum.datadoghq.com/stable/6/x86_64/
 api.datadoghq.com
 some-account.atlassian.net
 bitbucket.org/groupname/reponame

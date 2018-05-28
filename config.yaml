@@ -161,11 +161,6 @@ languages:
           url: "agent/network"
           weight: 40
           parent: menu_references_agent
-        - identifier: agent_checks
-          name: "Agent Checks"
-          url: "agent/agent_checks"
-          weight: 50
-          parent: menu_references_agent
         - identifier: prometheus
           name: "Prometheus Checks"
           url: "agent/prometheus"
@@ -675,27 +670,36 @@ languages:
           url: "developers/metrics/"
           weight: 50
           parent: menu_references_developers
-
+        - identifier: customnav_developersnav_agent_checks
+          name: "Write an Agent Check"
+          url: "developers/agent_checks"
+          weight: 60
+          parent: menu_references_developers
+        - identifier: customnav_developersnav_prometheus
+          name: "Write a Prometheus Check"
+          url: "developers/prometheus"
+          weight: 70
+          parent: menu_references_developers
         # Integrations core doc
         - identifier: customnav_integrationsnav_new_integration
           name: "Integrations"
           url: "developers/integrations/"
-          weight: 60
+          weight: 80
           parent: menu_references_developers
         - identifier: customnav_integrationsnav_new_check_howto
           name: "Create a new Integration"
           url: "developers/integrations/new_check_howto"
-          weight: 601
+          weight: 801
           parent: customnav_integrationsnav_new_integration
         - identifier: customnav_integrationsnav_python
           name: "Python"
           url: "developers/integrations/python"
-          weight: 602
+          weight: 802
           parent: customnav_integrationsnav_new_integration
         - identifier: customnav_integrationsnav_legacy
           name: "Legacy"
           url: "developers/integrations/legacy"
-          weight: 603
+          weight: 803
           parent: customnav_integrationsnav_new_integration
         #- identifier: customnav_developersnav_faq
         #  name: "FAQ"
@@ -890,11 +894,6 @@ languages:
           name: "Réseaux"
           url: "agent/network"
           weight: 40
-          parent: menu_references_agent
-        - identifier: agent_checks
-          name: "Check de l'Agent"
-          url: "agent/agent_checks"
-          weight: 50
           parent: menu_references_agent
         - identifier: prometheus
           name: "Check Prometheus"
@@ -1340,11 +1339,6 @@ languages:
           pre: "nav_developers"
           weight: 100
         # DEVELOPERS - Subnav start
-        - identifier: customnav_developersnav_api
-          name: "API"
-          url: "api/"
-          weight: 20
-          parent: menu_references_developers
         - identifier: customnav_developersnav_dogstatsd
           name: "DogStatsD"
           url: "developers/dogstatsd/"
@@ -1360,20 +1354,36 @@ languages:
           url: "developers/metrics/"
           weight: 50
           parent: menu_references_developers
-        - identifier: customnav_integrationsnav_new_integration
-          name: "Créer une nouvelle intégration"
-          url: "developers/integrations/"
+        - identifier: customnav_integrationsnav_agent_checks
+          name: "Écrire un Check de l'Agent"
+          url: "developers/agent_checks"
           weight: 60
           parent: menu_references_developers
-        - identifier: customnav_integrationsnav_integration_sdk
-          name: "SDK pour les integrations"
-          url: "developers/integrations/integration_sdk/"
-          weight: 900
+        - identifier: customnav_integrationsnav_prometheus
+          name: "Écrire un Check Prometheus"
+          url: "developers/prometheus"
+          weight: 70
+          parent: menu_references_developers
+        # Integrations core doc
+        - identifier: customnav_integrationsnav_new_integration
+          name: "Intégrations"
+          url: "developers/integrations/"
+          weight: 80
+          parent: menu_references_developers
+        - identifier: customnav_integrationsnav_new_check_howto
+          name: "Créer une nouvelle intégration"
+          url: "developers/integrations/new_check_howto"
+          weight: 801
           parent: customnav_integrationsnav_new_integration
-        - identifier: customnav_developersnav_testing
-          name: "Tests"
-          url: "developers/integrations/testing/"
-          weight: 910
+        - identifier: customnav_integrationsnav_python
+          name: "Python"
+          url: "developers/integrations/python"
+          weight: 802
+          parent: customnav_integrationsnav_new_integration
+        - identifier: customnav_integrationsnav_legacy
+          name: "Legacy"
+          url: "developers/integrations/legacy"
+          weight: 803
           parent: customnav_integrationsnav_new_integration
         #- identifier: customnav_developersnav_faq
         #  name: "FAQ"

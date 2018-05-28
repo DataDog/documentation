@@ -1,11 +1,7 @@
 ---
 title: Datadog Docs
-kind: documentation
-aliases:
-  - /basic_agent_usage/
-  - /guides/
-  - /faq/
-disable_toc: true
+kind: Documentation
+draft: true
 ---
 
 # Welcome to Datadog Docs!

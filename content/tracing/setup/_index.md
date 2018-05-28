@@ -68,7 +68,7 @@ To start tracing your application:
 
 ## Agent configuration
 
-The APM Agent (also known as *trace Agent*) is shipped by default with the
+The APM Agent (also known as *Trace Agent*) is shipped by default with the
 Agent 6 in the Linux, MacOS, and Windows packages. The APM Agent is enabled by default on Linux. To enable the check on other platforms or disable it on Linux, update the `apm_config` key in your `datadog.yaml`:
 
 ```
@@ -78,7 +78,7 @@ apm_config:
 
 | File setting            | Type      | Environment variable     | Description                                                                                                                                                      |
 |-------------------------|-----------|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `enabled`               | boolean   | `DD_APM_ENABLED`           | When sets to `true`, the Datadog Agent accepts trace metrics. Default value is `true`.                                                            |
+| `enabled`               | boolean   | `DD_APM_ENABLED`           | When set to `true`, the Datadog Agent accepts trace metrics. Default value is `true`.                                                            |
 | `apm_dd_url`            | string    | `DD_APM_DD_URL`            | Datadog API endpoint where traces are sent.                                                                                                       |
 | `env`                   | string    | -                        | Default environment to which traces should be registered under (e.g. *staging*, *production*, etc..).                                                             |
 | `extra_sample_rate`     | float     | -                        | Use this setting to adjust the trace sample rate. The value should be a float between `0` (no sampling) and `1` (normal sampling). Default value is `1`.     |
