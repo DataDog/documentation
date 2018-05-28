@@ -142,14 +142,12 @@ The not (!) operator causes a status—individual or composite—to be either `O
 
 Consider a composite monitor that uses three individual monitors—A, B, and C—and a trigger condition `A && B && C`. The following table shows the resulting status of the composite monitor given different statuses for its individual monitors (alert-worthiness is indicated with T or F):
 
-{{% table responsive="true" %}}
 | monitor A   | monitor B  | monitor C  | composite status        | alert triggered? |
 |-------------|------------|------------|-------------------------|-------------------------|
 | Unknown (T) | Warn (T)   | Unknown (T)| Warn (T)                |<i class="fa fa-check" aria-hidden="true"></i>
 | Skipped (F) | Ok (F)     | Unknown (T)| Ok (F)                  |
 | Alert (T)   | Warn (T)   | Unknown (T)| Alert (T)               |<i class="fa fa-check" aria-hidden="true"></i>
 | Skipped (F) | No Data (F)| Unknown (T)| Skipped (F)             |
-{{% /table %}}
 
 Two of the four scenarios trigger an alert, even though not all of the individual monitors have the most severe status, `Alert` (and in row 1, none do). But how _many_ alerts might you potentially receive from the composite monitor? That depends on the individual monitors' alert types.
 
@@ -157,12 +155,10 @@ Two of the four scenarios trigger an alert, even though not all of the individua
 
 Rather than periodically sampling the current state of component monitors, composite monitors are evaluated by using a sliding window of monitor results for each component monitor (specifically, they use the most severe status from the past five minutes for each component monitor). For example, if you have a composite monitor defined as `A && B`, and the component results look like this (where the timestamps are one minute apart):
 
-{{% table responsive="true" %}}
 |   | T0    | T1    | T2    |
 |---|-------|-------|-------|
 | A | Alert | OK    | OK    |
 | B | OK    | Alert | Alert |
-{{% /table %}}
 
 The composite monitor would trigger at T1 even though `A` is technically in an `OK` state.
 
@@ -199,24 +195,22 @@ Now consider a scenario where monitor B is multi-alert, too, and is also grouped
 
 Here's an example cycle:
 
-{{% table responsive="true" %}}
 |source | monitor A | monitor B | monitor C  | composite status (A && B && C) |alert triggered?|
 |-------|-----------|-----------|------------|--------------------------------|----------------|
 | web04 | Unknown   | Warn      | Alert      | Alert                          |<i class="fa fa-check" aria-hidden="true"></i>
 | web05 | Ok        | Ok        | Alert      | Ok                             |
-{{% /table %}}
 
 In this cycle, you would receive one alert.
 
 ### How composite monitors select common reporting sources
 
-As explained above, composite monitors that use many multi-alert monitors only consider the individual monitors' _common reporting sources_. In the example, the common sources were `host:web04` and `host:web05`, but there's a subtle caveat: in identifying common reporting sources, composite monitors only look at tag _values_ (i.e. `web04`), not tag names (i.e. `host`). This technically makes it possible for a composite monitor to trigger on multi-alert monitors that group by different tags.
+As explained above, composite monitors that use many multi-alert monitors only consider the individual monitors *common reporting sources*. 
+In the example, the common sources were `host:web04` and `host:web05`, but there's a subtle caveat in identifying common reporting sources, composite monitors only look at tag *values* (i.e. `web04`), not tag *names* (i.e. `host`). 
+If the example above had included a multi-alert monitor `D` grouped by `environment`, and that monitor had a single reporting source, `environment:web04`, then the composite monitor would consider `web04` the single common reporting source between `A`, `B`, and `D`, and would compute its trigger condition. 
 
-If the example above had included a multi-alert monitor 'D' grouped by `environment`, and that monitor had a single reporting source, `environment:web04`, then the composite monitor would consider `web04` the single common reporting source between A, B, and D, and would compute its trigger condition.
+You can create a composite monitor using multi-alert monitors that have no tag values in common but are grouped by the same tag name because shared tag names are a potential common source of reporting. It’s possible that in the future their values will match. This is why, in the above example, we consider the common sources of reporting to be `host:web04` and `host:web05`.
 
-Often, two monitors grouped by different tags tend to have reporting sources whose tag values never overlap, e.g. `web04` and `web05` for monitor A, `dev` and `prod` for monitor D. But if and when they do overlap, a composite monitor that uses two such monitors becomes capable of triggering an alert.
-
-Furthermore, as with an individual multi-alert monitor, the number of common reporting sources for a composite monitor may change over time (e.g. when you provision or deprovision hosts). This is why it's possible for composite monitors to use multi-alert monitors that group by the same tag, but which initially have no reporting sources in common; they _might_ in the future.
+Two monitors grouped by different tags rarely have values that overlap, e.g. `web04` and `web05` for monitor `A`, `dev` and `prod` for monitor `D`. But if and when they do overlap, a composite monitor that comprises these monitors becomes capable of triggering an alert.
 
 Use your best judgment to choose multi-alert monitors that makes sense together.
 
