@@ -1,6 +1,7 @@
 ---
 title: Team
 kind: documentation
+description: "Add or remove team members for your organization. Modify team member roles."
 further_reading:
 - link: "account_management/saml"
   tag: "Documentation"
