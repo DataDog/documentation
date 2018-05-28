@@ -23,7 +23,7 @@ If you're able to connect using the command above, run: `beans` and send us a co
 
 ### Agent >v6.2
 
-These commands are available since v6.2.0, for earlier v6 versions please refer to [dedicated agent 6.0 to 6.2 version](#agent-v6-0-to-6-2):
+These commands are available since v6.2.0, for earlier v6 versions please refer to [dedicated agent 6.0 to 6.2 version](##agent-v6-0-to-v6-2):
 
 | Command                                                | Description                                                                                                                                                             |
 | :----------------------------------------              | :---                                                                                                                                                                    |
@@ -40,7 +40,7 @@ By default theses commands run on all the configured jmx checks. If you want to 
 
 ### Agent v6.0 to v6.2
 
-The Agent 6 ships JMXFetch and supports all of its features, except those listed below. The Agent 6 does not ship the `jmxterm` JAR. If you wish to download and use `jmxterm`, please refer to the [upstream project](https://github.com/jiaqi/jmxterm).
+The Agent 6 ships JMXFetch and supports all of its features, except those listed below. The Agent 6 does not ship the `jmxterm` JAR. If you wish to download and use `jmxterm`, please refer to the [upstream project][4].
 
 The agent doesn't have a full featured interface to JMXFetch, so you may have to run some commands manually to debug the list of beans collected, JVMs, etc. A typical manual call will take the following form:
 
@@ -89,3 +89,4 @@ Note: the location to the JRE tools.jar (`/usr/lib/jvm/java-8-oracle/lib/tools.j
 [1]: https://docs.oracle.com/javase/8/docs/technotes/guides/management/faq.html
 [2]: /agent/faq/send-logs-and-configs-to-datadog-via-flare-command
 [3]: /agent/faq/agent-status-and-information
+[4]: https://github.com/jiaqi/jmxterm
