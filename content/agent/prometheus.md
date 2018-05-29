@@ -42,13 +42,13 @@ Your metrics are collected in the form `namespace.metric_name`. By default, you 
 
 For a comprehensive list of settings refer to the [example configuration][3].
 
-### Auto-discovery
+#### Auto-discovery
 
 You can configure the Prometheus check using [Autodiscovery][4] to quickly collect Prometheus metrics exposed by a container or pod.
 
 Example of Autodiscovery using pod annotations on a `linkerd` pod:
 
-```yaml
+```
 annotations:
     ad.datadoghq.com/l5d.check_names: |
       ["prometheus"]
@@ -64,6 +64,19 @@ annotations:
           }
         }
       ]
+```
+
+#### Custom join
+
+In Prometheus it's common to have some placeholder metric holding all the labels because it's possible to do some label joins in the Prometheus query language. The Datadog agent allows you to [join some labels during processing][10], so the metric is sent with all labels/tags wanted.
+For instance, to add the `node` label on every metric with the `pod` label, use the following configuration lines:
+
+```
+   label_joins:
+     target_metric:
+       label_to_match: pod
+       labels_to_get:
+         - node
 ```
 
 ### From custom to official integration
@@ -85,3 +98,4 @@ Official integrations have their own dedicated directories. There's a default in
 [7]: /agent/agent_checks/#configuration
 [8]: /getting_started/custom_metrics
 [9]: /agent/faq/agent-commands/#agent-status-and-information
+[10]: https://github.com/DataDog/integrations-core/blob/master/prometheus/conf.yaml.example#L34
