@@ -16,7 +16,7 @@ further_reading:
   text: Consult your monitor status
 ---
 
-Composite monitors let you combine many individual monitors into one so that you can define more specific alert conditions. 
+Composite monitors let you combine many individual monitors into one so that you can define more specific alert conditions.
 
 You can choose up to 10 existing monitors—monitor A and monitor B, say—and then set a trigger condition using boolean operators (e.g. “A && B”). The composite monitor triggers when its individual monitors' statuses simultaneously have values that cause the composite's trigger condition to be true.
 
@@ -127,17 +127,17 @@ Datadog doesn't compute `A && B && C` any differently than you would expect, but
 
 Recall the seven statuses a monitor may have (in order of increasing severity):
 
-* `Ok`, 
+* `Ok`,
 * `Warn`,
 * `Alert`,
-* `Skipped`, 
+* `Skipped`,
 * `Ignored`,
-* `No Data`, 
-* `Unknown`.  
+* `No Data`,
+* `Unknown`.
 
 Composite monitors consider `Unknown`, `Warn` and `Alert` to be alert-worthy (i.e. true). The rest—`Ok`, `Skipped`, `Ignored`, and `No Data`—are not alert-worthy (i.e. false). However, you can configure `No Data` to be alert-worthy by setting `notify_no_data` to true.
 
-When a composite monitor evaluates as alert-worthy, it inherits the most severe status among its individual monitors and triggers an alert. When a composite monitor does not evaluate as alert-worthy, it inherits the _least_ severe status.  
+When a composite monitor evaluates as alert-worthy, it inherits the most severe status among its individual monitors and triggers an alert. When a composite monitor does not evaluate as alert-worthy, it inherits the _least_ severe status.
 The not (!) operator causes a status—individual or composite—to be either `Ok`, `Alert`, or `No Data`: if monitor A has any alert-worthy status, `!A` is `OK`; if monitor A has any alert-**un**worthy status, `!A` is `Alert`; if monitor A has a status of `No Data`, `!A` is also `No Data`.
 
 Consider a composite monitor that uses three individual monitors—A, B, and C—and a trigger condition `A && B && C`. The following table shows the resulting status of the composite monitor given different statuses for its individual monitors (alert-worthiness is indicated with T or F):
@@ -204,17 +204,17 @@ In this cycle, you would receive one alert.
 
 ### How composite monitors select common reporting sources
 
-As explained above, composite monitors that use many multi-alert monitors only consider the individual monitors *common reporting sources*. 
-In the example, the common sources were `host:web04` and `host:web05`, but there's a subtle caveat in identifying common reporting sources, composite monitors only look at tag *values* (i.e. `web04`), not tag *names* (i.e. `host`). 
-If the example above had included a multi-alert monitor `D` grouped by `environment`, and that monitor had a single reporting source, `environment:web04`, then the composite monitor would consider `web04` the single common reporting source between `A`, `B`, and `D`, and would compute its trigger condition. 
+As explained above, composite monitors that use many multi-alert monitors only consider the individual monitors *common reporting sources*.
+In the example, the common sources were `host:web04` and `host:web05`. Note that composite monitors only look at tag *values* (i.e. `web04`), not tag *names* (i.e. `host`).
+If the example above had included a multi-alert monitor `D` grouped by `environment`, and that monitor had a single reporting source, `environment:web04`, then the composite monitor would consider `web04` the single common reporting source between `A`, `B`, and `D`, and would compute its trigger condition.
 
 You can create a composite monitor using multi-alert monitors that have no tag values in common but are grouped by the same tag name because shared tag names are a potential common source of reporting. It’s possible that in the future their values will match. This is why, in the above example, we consider the common sources of reporting to be `host:web04` and `host:web05`.
 
-Two monitors grouped by different tags rarely have values that overlap, e.g. `web04` and `web05` for monitor `A`, `dev` and `prod` for monitor `D`. But if and when they do overlap, a composite monitor that comprises these monitors becomes capable of triggering an alert.
+Two monitors grouped by different tags rarely have values that overlap, e.g. `web04` and `web05` for monitor `A`, `dev` and `prod` for monitor `D`. If and when they do overlap, a composite monitor comprised of these monitors becomes capable of triggering an alert.
 
 Use your best judgment to choose multi-alert monitors that makes sense together.
 
-## Further Reading 
+## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create
