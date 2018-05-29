@@ -53,11 +53,12 @@ Here is a set of functions of the pattern &lt;timeperiod&gt;_before(). These fun
 
 ### hour_before()
 
-Here is an example of system.load.1 with the hour_before value shown as a dotted line. In this particular example, you can see the machine was started at 6:30am and the hour_before values show up at the 7:30 mark. Of course this example was created specifically so you can see the hour_before values match up with the actual values.
+The `hour_before()` function shows data from 1 hour prior.
+Here is an example of `system.load.1` with the `hour_before()` value shown as a dotted line. In this particular example, you can see the machine was started at 6:30am and the hour_before values show up at the 7:30 mark. Of course this example was created specifically so you can see the hour_before values match up with the actual values.
 
 {{< img src="graphing/miscellaneous/functions/simple_hour_before_example.png" alt="simple hour before example" responsive="true" popup="true" style="width:80%;">}}
 
-For now, using functions like hour_before is out of scope for the graphical editor so you have to use the JSON editor. Here is the JSON for this graph:
+For now, using functions like `hour_before()` is out of scope for the graphical editor so you have to use the JSON editor. Here is the JSON for this graph:
 
 ```json
 { "viz": "timeseries",
@@ -87,11 +88,12 @@ For now, using functions like hour_before is out of scope for the graphical edit
 
 ### day_before()
 
-Here is an example of nginx.net.connections with the day_before value shown as a lighter, thinner line. In this example, you can see a week's worth of data which makes the day_before data easy to identify.
+The `day_before()` function shows data from 1 day prior.
+Here is an example of `nginx.net.connections` with the `day_before()` value shown as a lighter, thinner line. In this example, you can see a week's worth of data which makes the day_before data easy to identify.
 
 {{< img src="graphing/miscellaneous/functions/simple_day_before_example.png" alt="simple day before example" responsive="true" popup="true" style="width:80%;">}}
 
-For now, using functions like day_before is out of scope for the graphical editor so you have to use the JSON editor. Here is the JSON for this graph:
+For now, using functions like `day_before()` is out of scope for the graphical editor so you have to use the JSON editor. Here is the JSON for this graph:
 
 ```json
 {
@@ -117,11 +119,13 @@ For now, using functions like day_before is out of scope for the graphical edito
 
 ### week_before()
 
-Here is an example of `cassandra.db.read_count` with the week_before value shown as a dotted line. In this example, you can see about three weeks' worth of data which makes the week_before data easy to identify.
+The `week_before()` function shows data from 7 days (1 week) prior.
+
+Here is an example of `cassandra.db.read_count` with the `week_before()` value shown as a dotted line. In this example, you can see about three weeks' worth of data which makes the week_before data easy to identify.
 
 {{< img src="graphing/miscellaneous/functions/simple_week_before_example.png" alt="simple week before example" responsive="true" popup="true" style="width:80%;">}}
 
-For now, using functions like week_before is out of scope for the graphical editor so you have to use the JSON editor. Here is the JSON for this graph:
+For now, using functions like `week_before()` is out of scope for the graphical editor so you have to use the JSON editor. Here is the JSON for this graph:
 
 ```json
 {
@@ -149,11 +153,13 @@ For now, using functions like week_before is out of scope for the graphical edit
 
 ### month_before()
 
-Here is an example of `aws.ec2.cpuutilization` with the month_before value shown as a thin, solid line.
+The `month_before()` function shows data from 28 days (4 weeks) prior.
+
+Here is an example of `aws.ec2.cpuutilization` with the `month_before()` value shown as a thin, solid line.
 
 {{< img src="graphing/miscellaneous/functions/simple_month_before_example.png" alt="simple month before example" responsive="true" popup="true" style="width:80%;">}}
 
-For now, using functions like month_before is out of scope for the graphical editor so you have to use the JSON editor. Here is the JSON for this graph:
+For now, using functions like `month_before()` is out of scope for the graphical editor so you have to use the JSON editor. Here is the JSON for this graph:
 
 ```json
 {
