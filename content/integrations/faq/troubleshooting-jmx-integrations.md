@@ -12,35 +12,29 @@ If you're able to connect using JConsole, run the following:
 java -jar /opt/datadog-agent/agent/checks/libs/jmxterm-1.0-DATADOG-uber.jar -l localhost:PORT -u USER -p PASSWORD
 ```
 
-## Agent v6
+If you're able to connect using the command above, run: `beans` and send us a copy of the results from above along with the following information:
 
-If you're able to connect using the command above, run: `beans` and send us a copy of the results from above along with the following information.
+For Agent v6:
 
 * Content of `/var/log/datadog/agent.log`
 * Output of the [info command][3]
 * Output of: `ps aux | grep jmxfetch`
 * A copy of the YAML integration (send the file)
 
-### Agent >v6.2
+For Agent v5:
 
-These commands are available since v6.2.0, for earlier v6 versions please refer to [dedicated agent 6.0 to 6.2 version](#agent-v6-0-to-v6-2):
+* [Agent logs][2]
+* Output of the [info command][3]
+* Output of: `ps aux | grep jmxfetch`
+* Content of `/var/log/datadog/jmxfetch.log`
+* Output of: `sudo /etc/init.d/datadog-agent jmx list_everything`
+* A copy of the YAML integration (send the file)
 
-| Command                                                | Description                                                                                                                                                             |
-| :----------------------------------------              | :---                                                                                                                                                                    |
-| `sudo -u dd-agent datadog-agent jmx list matching`     | List attributes that match at least one of your instances configuration.                                                                                                |
-| `sudo -u dd-agent datadog-agent jmx list limited`      | List attributes that do match one of your instances configuration but that are not being collected because it would exceed the number of metrics that can be collected. |
-| `sudo -u dd-agent datadog-agent jmx list collected`    | List attributes that are actually collected by your current instances configuration.                                                                                    |
-| `sudo -u dd-agent datadog-agent jmx list not-matching` | List attributes that don’t match any of your instances configuration.                                                                                                   |
-| `sudo -u dd-agent datadog-agent jmx list everything`   | List every attributes available that has a type supported by JMXFetch.                                                                                                  |
-| `sudo -u dd-agent datadog-agent jmx collect`           | Start the collection of metrics based on your current configuration and display them in the console.                                                                    |
+**Note**: if you're able to see some metrics (`jvm.heap_memory`, `jvm.non_heap_memory`, etc.) it is a sign that JMXFetch is properly running. If you're targeting another application and not seeing related metrics, the likely issue is a misconfiguration in your YAML.
 
-By default theses commands run on all the configured jmx checks. If you want to use them for specific checks, specify them using the `--checks` flag :
+## Agent v6 troubleshooting
 
-`sudo datadog-agent jmx list collected --checks tomcat`
-
-### Agent v6.0 to v6.2
-
-The Agent 6 ships JMXFetch and supports all of its features, except those listed below. The Agent 6 does not ship the `jmxterm` JAR. If you wish to download and use `jmxterm`, please refer to the [upstream project][4].
+The Agent 6 ships JMXFetch and supports all of its features, except those listed below. For agents version bellow v6.2 the `jmxterm` JAR is not shipped. If you wish to download and use `jmxterm`, please refer to the [upstream project][4].
 
 The agent doesn't have a full featured interface to JMXFetch, so you may have to run some commands manually to debug the list of beans collected, JVMs, etc. A typical manual call will take the following form:
 
@@ -74,17 +68,22 @@ Note: the location to the JRE tools.jar (`/usr/lib/jvm/java-8-oracle/lib/tools.j
 
 **Note**: you may wish to specify alternative JVM heap parameters `-Xmx`, `-Xms`, the values used in the example correspond to the JMXFetch defaults.
 
+### Agent >=v6.2
 
-## Agent < v6:
+These commands are available since v6.2.0:
 
-* [Agent logs][2]
-* Output of the [info command][3]
-* Output of: `ps aux | grep jmxfetch`
-* Content of `/var/log/datadog/jmxfetch.log`
-* Output of: `sudo /etc/init.d/datadog-agent jmx list_everything`
-* A copy of the YAML integration (send the file)
+| Command                                                | Description                                                                                                                                                             |
+| :----------------------------------------              | :---                                                                                                                                                                    |
+| `sudo -u dd-agent datadog-agent jmx list matching`     | List attributes that match at least one of your instances configuration.                                                                                                |
+| `sudo -u dd-agent datadog-agent jmx list limited`      | List attributes that do match one of your instances configuration but that are not being collected because it would exceed the number of metrics that can be collected. |
+| `sudo -u dd-agent datadog-agent jmx list collected`    | List attributes that are actually collected by your current instances configuration.                                                                                    |
+| `sudo -u dd-agent datadog-agent jmx list not-matching` | List attributes that don’t match any of your instances configuration.                                                                                                   |
+| `sudo -u dd-agent datadog-agent jmx list everything`   | List every attributes available that has a type supported by JMXFetch.                                                                                                  |
+| `sudo -u dd-agent datadog-agent jmx collect`           | Start the collection of metrics based on your current configuration and display them in the console.                                                                    |
 
-**Note**: if you're able to see some metrics (`jvm.heap_memory`, `jvm.non_heap_memory`, etc.) it is a sign that JMXFetch is properly running. If you're targeting another application and not seeing related metrics, the likely issue is a misconfiguration in your YAML.
+By default theses commands run on all the configured jmx checks. If you want to use them for specific checks, specify them using the `--checks` flag :
+
+`sudo datadog-agent jmx list collected --checks tomcat`
 
 [1]: https://docs.oracle.com/javase/8/docs/technotes/guides/management/faq.html
 [2]: /agent/faq/send-logs-and-configs-to-datadog-via-flare-command
