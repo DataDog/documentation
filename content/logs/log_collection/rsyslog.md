@@ -75,7 +75,9 @@ description: "Configure Rsyslog to gather logs from your host, containers & serv
     sudo apt-get install rsyslog-gnutls
     ```
 
-    Download the public key for TLS encryption of logs from [this link][1]. Save it to `/etc/ssl/certs/intake.logs.datadoghq.com.crt`.  Note that on some systems, the full certificate chain may be required.  If so, please download using [this link][2].
+    Download the public key for TLS encryption of logs from [this link][1]. Save it to `/etc/ssl/certs/intake.logs.datadoghq.com.crt`.  
+    
+    **Note**: On some systems, the full certificate chain may be required.  If so, please download using [this link][2].
 
     Modify your `/etc/rsyslog.d/datadog.conf` to end with the following content:
 
