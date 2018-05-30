@@ -24,20 +24,20 @@ description: "Configure Rsyslog to gather logs from your host, containers & serv
 3. (Optional) Set the files to monitor. Add the following in `/etc/rsyslog.d/datadog.conf`.  
     * **Rsyslog Version <8**.  
 
-    ```
-    # Input for FILE1
-    $InputFileName /<PATH_TO_FILE1>
-    $InputFileTag <APP_NAME_OF_FILE1>
-    $InputFileStateFile <UNIQUE_FILE_ID>
-    $InputFileSeverity info
-    $InputRunFileMonitor
-    ```
+        ```
+        # Input for FILE1
+        $InputFileName /<PATH_TO_FILE1>
+        $InputFileTag <APP_NAME_OF_FILE1>
+        $InputFileStateFile <UNIQUE_FILE_ID>
+        $InputFileSeverity info
+        $InputRunFileMonitor
+        ```
     * **Rsyslog Version >= 8**
 
-    ```
-    # For each file to send
-    input(type="imfile" ruleset="infiles" Tag="<APP_NAME_OF_FILE1>" File="<PATH_TO_FILE1>" StateFile="<UNIQUE_FILE_ID>")
-    ```
+        ```
+        # For each file to send
+        input(type="imfile" ruleset="infiles" Tag="<APP_NAME_OF_FILE1>" File="<PATH_TO_FILE1>" StateFile="<UNIQUE_FILE_ID>")
+        ```
 4. Send the logs to your Datadog platform
     To send logs directly to your Datadog account from Rsyslog over TCP, we firstly need to to define the format in `/etc/rsyslog.d/datadog.conf`:
 
@@ -67,26 +67,26 @@ description: "Configure Rsyslog to gather logs from your host, containers & serv
     ```
 
 5. (Optional) TLS Encryption
-    While sending your logs directly from Rsyslog to your Datadog account, if you want to add TLS encryption, you can take the following steps. 
+    While sending your logs directly from Rsyslog to your Datadog account, if you want to add TLS encryption, take the following steps. 
 
     * Install rsyslog-gnutls:
      
-    ```
-    sudo apt-get install rsyslog-gnutls
-    ```
+        ```
+        sudo apt-get install rsyslog-gnutls
+        ```
 
-    Download the public key for TLS encryption of logs from [this link][1]. Save it to `/etc/ssl/certs/intake.logs.datadoghq.com.crt`
+    * Download the [public key for TLS encryption][1] for logs and save it to `/etc/ssl/certs/intake.logs.datadoghq.com.crt`. On some systems, the full certificate chain may be required. If so, use [this public key][2] instead.
 
-    Modify your `/etc/rsyslog.d/datadog.conf` to end with the following content:
+    * Modify your `/etc/rsyslog.d/datadog.conf` to end with the following content:
 
-    ```
-    $DefaultNetstreamDriverCAFile /etc/ssl/certs/intake.logs.datadoghq.com.crt
-    $ActionSendStreamDriver gtls
-    $ActionSendStreamDriverMode 1
-    $ActionSendStreamDriverAuthMode x509/name
-    $ActionSendStreamDriverPermittedPeer *.logs.datadoghq.com
-    *.* @@intake.logs.datadoghq.com:10516;DatadogFormat
-    ```
+        ```
+        $DefaultNetstreamDriverCAFile /etc/ssl/certs/intake.logs.datadoghq.com.crt
+        $ActionSendStreamDriver gtls
+        $ActionSendStreamDriverMode 1
+        $ActionSendStreamDriverAuthMode x509/name
+        $ActionSendStreamDriverPermittedPeer *.logs.datadoghq.com
+        *.* @@intake.logs.datadoghq.com:10516;DatadogFormat
+        ```
 
 6. Restart Rsyslog and your new logs get forwarded directly to your Datadog account.
 
@@ -98,15 +98,14 @@ description: "Configure Rsyslog to gather logs from your host, containers & serv
 8. Enjoy Datadog Integrations
     In order to get the best use out of your logs in Datadog, you need to set the source on your logs. The source can be set directly in the agent if you forward your logs to the Datadog agent.
 
-    Otherwise you need a specific format per log source which means you need a specific configuration file per source in `/etc/rsyslog.d/`
+    Otherwise you need a specific format per log source which means you need a specific configuration file per source in `/etc/rsyslog.d/`
 
     To set the source, use the following format (if you have several sources, change the name of the format in each file):
 
     ```
     $template DatadogFormat,"YOURAPIKEY <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - [metas ddsource=\"<MY_SOURCE_NAME>\"] %msg%\n"
     ```
-    
-    You can also add custom tags thanks to the `ddtags` attribute:
+    You can also add custom tags thanks to the `ddtags` attribute:
     
     ```
     $template DatadogFormat,"YOURAPIKEY <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - [metas ddsource=\"<MY_SOURCE_NAME>\" ddtags=\"env:test,<KEY:VALUE>\"] %msg%\n"
@@ -124,3 +123,4 @@ description: "Configure Rsyslog to gather logs from your host, containers & serv
     ```
 
 [1]: https://gist.githubusercontent.com/estib/8762bc1a2a5bda781a6e55cca40235f2/raw/665b6b2906a728027f508ea067f01cdf3cf72b49/intake.logs.datadoghq.com.crt
+[2]: https://gist.githubusercontent.com/le-he-hoo/051b33e9de55ebe7e7cdfaedf0dc4a7a/raw/47ca6ebc5531ad330e1cd74defce3544b4194e4c/intake.logs.datadoghq.com.crt
