@@ -12,15 +12,12 @@ private: true
     {{< nextlink href="graphing/faq/why-isn-t-my-aws-trusted-advisor-dashboard-showing-any-data" >}}Why isn't my AWS Trusted Advisor Dashboard showing any data?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/how-do-i-see-the-number-of-hosts-i-m-monitoring" >}}How do I see the number of hosts I'm monitoring?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/treemap-graph-visualization-can-i-use-this-elsewhere" >}}Treemap graph/visualization - can I use this elsewhere?{{< /nextlink >}}
-    {{< nextlink href="graphing/faq/is-there-a-way-to-share-or-revoke-previously-shared-graphs" >}}Is there a way to share (or revoke previously shared) graphs?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/how-to-merge-screenboards" >}}How to Merge Screenboards ?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/how-is-data-aggregated-in-graphs" >}}How is data aggregated in graphs?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/troubleshooting-browser-issues" >}}Troubleshooting - Browser Issues{{< /nextlink >}}
-    {{< nextlink href="graphing/faq/is-there-a-way-to-share-graphs" >}}Is there a way to share graphs?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/how-do-i-do-arithmetic-with-grouped-metrics" >}}How do I do arithmetic with grouped metrics?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/what-s-the-syntax-to-sum-multiple-datapoints-into-a-single-line" >}}What's the syntax to sum multiple datapoints into a single line?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/how-do-i-track-cron-jobs" >}}How do I track cron jobs?{{< /nextlink >}}
-    {{< nextlink href="graphing/faq/correlate-metrics-and-events-using-dashboard-template-variables" >}}Correlate metrics and events using dashboard template variables{{< /nextlink >}}
     {{< nextlink href="graphing/faq/i-see-unexpected-drops-to-zero-on-my-graph-why" >}}I see unexpected drops to zero on my graph, why?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/interpolation-the-fill-modifier-explained" >}}Interpolation & the fill modifier explained{{< /nextlink >}}
     {{< nextlink href="graphing/faq/how-can-i-graph-the-percentage-change-between-an-earlier-value-and-a-current-value" >}}How can I graph the percentage change between an earlier value and a current value?{{< /nextlink >}}
@@ -34,7 +31,6 @@ private: true
     {{< nextlink href="graphing/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs" >}}Why does zooming out a timeframe also smooth out my graphs?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/why-is-a-counter-metric-being-displayed-as-a-decimal-value" >}}Why is a counter metric being displayed as a decimal value?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/the-same-color-is-used-twice-in-my-graph" >}}The same color is used twice in my graph!{{< /nextlink >}}
-    {{< nextlink href="graphing/faq/how-do-i-overlay-events-onto-my-dashboards" >}}How do I overlay events onto my dashboards?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/how-to-graph-percentiles-in-datadog" >}}How to graph percentiles in Datadog ?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/i-m-switching-between-the-sum-min-max-avg-aggregators-but-the-values-look-the-same" >}}I'm switching between the sum/min/max/avg aggregators but the values look the same?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/when-i-query-can-i-use-wildcards-in-metric-names-and-events" >}}When I query can I use wildcards in metric names and events?{{< /nextlink >}}

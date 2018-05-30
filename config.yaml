@@ -219,10 +219,20 @@ languages:
           url: "graphing/dashboards/timeboard/"
           weight: 110
           parent: customnav_graphingnav_dashboards
+        - identifier: customnav_graphingnav_template_variables
+          name: "Template Variables"
+          url: "graphing/dashboards/template_variables/"
+          weight: 120
+          parent: customnav_graphingnav_dashboards
+        - identifier: customnav_graphingnav_shared_graph
+          name: "Shared Graphs"
+          url: "graphing/dashboards/shared_graph/"
+          weight: 130
+          parent: customnav_graphingnav_dashboards
         - identifier: customnav_graphingnav_widgets
           name: "Widgets"
           url: "graphing/dashboards/widgets/"
-          weight: 120
+          weight: 140
           parent: customnav_graphingnav_dashboards
         - identifier: customnav_graphingnav_notebooks
           name: "Notebooks"
@@ -957,10 +967,20 @@ languages:
           url: "graphing/dashboards/timeboard/"
           weight: 110
           parent: customnav_graphingnav_dashboards
+        - identifier: customnav_graphingnav_template_variables
+          name: "Template Variables"
+          url: "graphing/dashboards/template_variables/"
+          weight: 120
+          parent: customnav_graphingnav_dashboards
+        - identifier: customnav_graphingnav_shared_graph
+          name: "Graphiques partagés"
+          url: "graphing/dashboards/shared_graph/"
+          weight: 130
+          parent: customnav_graphingnav_dashboards
         - identifier: customnav_graphingnav_widgets
           name: "Widgets"
           url: "graphing/dashboards/widgets/"
-          weight: 120
+          weight: 140
           parent: customnav_graphingnav_dashboards
         - identifier: customnav_graphingnav_notebooks
           name: "Notebooks"

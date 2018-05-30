@@ -7,7 +7,7 @@ The following two graph definitions will generate the graphs on the dashboard in
 
 ## Hosts with Lowest % of Uptime for Scope (Toplist)
 
-```json
+```
 {
   "viz": "toplist",
   "requests": [
@@ -24,7 +24,7 @@ The following two graph definitions will generate the graphs on the dashboard in
 
 ## Overall % of Uptime for Scope
 
-```json
+```
 {
   "viz": "timeseries",
   "requests": [
