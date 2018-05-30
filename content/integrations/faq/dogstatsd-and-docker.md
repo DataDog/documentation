@@ -1,5 +1,5 @@
 ---
-title: Compose and the Datadog Agent
+title: DogStatsD and Docker
 kind: faq
 ---
 
