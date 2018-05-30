@@ -6,6 +6,11 @@ aliases:
     - graphing/faq/is-there-a-way-to-share-or-revoke-previously-shared-graphs
 ---
 
+
+## Overview
+
+Shared Graphs and Screenboards allow you to display metrics, traces, and logs visualization outside of Datadog while being able to apply access restriction to your Embeds.
+
 ## Sharing a particular Graph
 
 To share a Graph from a [Timeboard][5] or a [Screenboard][6]:
@@ -61,7 +66,7 @@ To revoke a shared ScreenBoard:
 Datadog has a [dedicated API][7] allowing you to interact with your Embeds:
 
 | Endpoint                 | Description                                                           |
-|:---|:----|
+| :---                     | :----                                                                 |
 | [Get all embeds][8]      | Gets a list of previously created embeddable graphs.                  |
 | [Create embed][9]        | Creates a new embeddable graph.                                       |
 | [Get specific embed][10] | Get the HTML fragment for a previously generated embed with embed_id. |
