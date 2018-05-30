@@ -299,11 +299,11 @@ For example, an offset of 2 would start graphing at the number 3 ranked series, 
 
 ### count_nonzero()
 
-Count all the non-zero values for a given metric
+For a query grouped by some tag key, count the number of tag values with nonzero metric values at each point. E.g. for `count_nonzero(system.load.1{*} by {host})` return a time series representing the number of hosts with nonzero system load at each point.
 
 ### count_not_null()
 
-Count all the non-null values for a given metric
+Like `count_nonzero()`, but count tag values with _any_ finite metric value, rather than any nonzero value.
 
 ## Regression
 ### robust_trend()
