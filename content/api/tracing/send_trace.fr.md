@@ -29,7 +29,7 @@ et chaque span est une dictionnaire avec un `trace_id`, `spand_id`, `resource`�
 ##### Arguments
 
 *   **`trace_id`** - _Obligatoire_  Un identifiant unique en nombre entier (64-bits non signé) de la trace contenant cette span.
-*   **`span_id`** - _obligatoire._ L'ID entier de la span (64 bits signed).
+*   **`span_id`** - _obligatoire._ L'ID entier de la span (64 bits unsigned).
 *   **`name`** - _obligatoire._ Le nom de la span.
 *   **`resource`** - _obligatoire._ La ressource que vous êtes en train de tracer.
 *   **`service`** - _Obligatoire_ Le nom du service.
