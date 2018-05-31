@@ -40,26 +40,6 @@ Les préfixes peuvent facilement être combinés pour effectuer des recherches b
 
 Note: aucun espace après les deux points ou des virgules dans ces listes et tout ce qui n'est pas attaché à un préfixe va dans la recherche de texte intégral.
 
-## Acknowledge un événement
-
-Datadog récupère les événements générés à partir de monitors déclenchés en tant qu'incidents. Ils sont également connus sous le nom de [Monitor Alerts][1]. 
-
-La meilleure façon de les identifier dans le [flux d'événements][2] est de sélectionner le filtre correspondant dans la liste des filtres:
-
-{{< img src="graphing/events/filter_monitor_alert.png" alt="filter monitor alert" responsive="true" popup="true" style="width:50%;">}}
-
-Les incidents sont propres aux événements et annotations ordinaires, car ils peuvent être claimed/acknowledged en cliquant sur le bouton **claim** (indiqué ci-dessous) de l'événement parent ou en plaçant une `#claim` dans les commentaires:
-
-{{< img src="graphing/events/claim_incident.png" alt="claim incident" responsive="true" popup="true" style="width:75%;">}}
-
-En revendiquant un événement, un utilisateur l'attribue à lui-même et signale aux autres utilisateurs qu'il fait l'objet d'une enquête. Comme indicateur, Datadog épingle le nom et le portrait de l'utilisateur à l'événement:
-
-{{< img src="graphing/events/claimed_incident.png" style="width:75%;" alt="Claimed incident" responsive="true" popup="true" >}}
-
-Une fois réclamé, un incident peut être résolu en cliquant sur le bouton **resolve**  indiquant à l'équipe que le problème sous-jacent a été résolu:
-
-{{< img src="graphing/events/resolved_incident.png" alt="Resolved incident" responsive="true" popup="true" style="width:75%;">}}
-
 ## Afficher les événements non agrégé
 
 Remplacez le paramètre "aggregate_up" dans l'URL par "false".
