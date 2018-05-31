@@ -78,11 +78,11 @@ spec:
                 fieldPath: status.hostIP
         resources:
           requests:
-            memory: "128Mi"
-            cpu: "100m"
+            memory: "256Mi"
+            cpu: "200m"
           limits:
             memory: "256Mi"
-            cpu: "250m"
+            cpu: "200m"
         volumeMounts:
           - name: dockersocket
             mountPath: /var/run/docker.sock
