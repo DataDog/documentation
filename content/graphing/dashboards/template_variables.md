@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-Dashboard Template Variables allow you to apply quickly a new scope to one or more graphs on your dashboard, allowing you to dynamically explore metrics across different sets of tags by using variables instead of specific tags.
+Dashboard Template Variables allow you to apply a new scope quickly to one or more graphs on your dashboard, allowing you to dynamically explore metrics across different sets of tags by using variables instead of specific tags.
 
 ## Define a Template Variable
 
@@ -26,7 +26,7 @@ New dashboards start with a keyless template variable applied. Click on the penc
 
 {{< img src="graphing/dashboards/template_variables/edit_mode_template_variable.png" alt="Edit template variable" responsive="true" popup="true" style="width:40%;">}}
 
-Once in the edit mode, click on **Add Variable +** to create your first Template Variable, it is defined by:
+Once in the edit mode click on **Add Variable +** to create your first Template Variable, it is defined by:
 
 * A **Name** *-Mandatory-*:  
     Value of your Template Variable displayed in your graphs query. 
@@ -35,7 +35,7 @@ Once in the edit mode, click on **Add Variable +** to create your first Template
 * A **Default Tag** *-Optional-*:  
     Default value for your Template Variable Tag Group.
 
-Once created, notice that you have statistic upon your template variables usage in your graphs. In the picture below, the template variable is not used in both graph of the dashboard:
+Once created, notice that you have statistics upon your template variables usage in your graphs. In the picture below, the template variable is not used in both graph of the dashboard:
 
 {{< img src="graphing/dashboards/template_variables/stats_tv.png" alt="statistic TV" responsive="true" popup="true" style="width:40%;">}}
 

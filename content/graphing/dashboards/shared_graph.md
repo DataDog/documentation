@@ -4,8 +4,17 @@ kind: documentation
 aliases:
     - graphing/faq/is-there-a-way-to-share-graphs
     - graphing/faq/is-there-a-way-to-share-or-revoke-previously-shared-graphs
+further_reading:
+- link: "graphing/dashboards/"
+  tag: "Documentation"
+  text: Learn how to create Dashboards in Datadog
+- link: "graphing/dashboards/template_variables"
+  tag: "Documentation"
+  text: Enhance your Dashboards with Template Variables
+- link: "graphing/dashboards/widgets"
+  tag: "Documentation"
+  text: Discover all available widget for your Dashboard
 ---
-
 
 ## Overview
 
@@ -33,7 +42,7 @@ Share a Screenboard entirely with the following process:
 2. Click the *Generate public URL* option. 
 3. Use the created URL to have live and read-only access to just the contents of that Screenboard.
 
-**Note**: If you've enabled [Templating][13], the template variable drop-downs isn't present in the shared views.
+**Note**: If you've enabled [Templating][13], the template variable drop downs isn't present in the shared views.
 
 ### Applying restriction
 
@@ -46,9 +55,9 @@ These shared graphs can be embedded in external-facing tools using the provided 
 ### Revoking an embedded graphs
 To revoke the keys used to share your graphs:
 
-1. [Navigate to **Integrations -> Embeds**][3] to find a list of all the graphs that are shared
-2. Click on the **Revoke** button for the graph you want to stop sharing 
-3. The graph moves then to the **Revoked** list
+1. [Navigate to **Integrations -> Embeds**][3] to find a list of all the graphs that are shared.
+2. Click on the **Revoke** button for the graph you want to stop sharing.
+3. The graph moves then to the **Revoked** list.
 
 {{< img src="graphing/dashboards/shared_graph/embedded_graphs.png" alt="Embedded graph" responsive="true" popup="true" style="width:75%;">}}
 
@@ -56,10 +65,10 @@ To revoke the keys used to share your graphs:
 
 To revoke a shared ScreenBoard:
 
-1. Navigate to the Dashboard List
-2. Select the ScreenBoard you want to revoke access to
-3. Click on the cog to edit it 
-4. Click **Revoke public URL**
+1. Navigate to the Dashboard List.
+2. Select the ScreenBoard you want to revoke access to.
+3. Click on the cog to edit it .
+4. Click **Revoke public URL**.
 
 ## API
 
