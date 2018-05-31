@@ -101,4 +101,4 @@ description: "Configure NXLog to gather logs from your host, containers & servic
     </Output>
     ```
 
-[1]: https://gist.githubusercontent.com/estib/8762bc1a2a5bda781a6e55cca40235f2/raw/665b6b2906a728027f508ea067f01cdf3cf72b49/intake.logs.datadoghq.com.crt
+[1]: /crt/intake.logs.datadoghq.com.crt
