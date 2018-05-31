@@ -22,7 +22,7 @@ further_reading:
 * **Application Name**: Can be anything
 * **Description**: Can be anything
 * **ACS URL**: Use the url shown under "Assertion Consumer Service URL" on https://app.datadoghq.com/saml/saml_setup (the one containing `/id/`). If there is more than one value shown for Assertion Consumer Service URL, only enter one of them here.
-* **Entity ID**:  `` from ACS URL
+* **Entity ID**:  `https://app.datadoghq.com/account/saml/metadata.xml`
 * **Start URL**: Can be blank, or use the "Single Sign On Login URL" listed on https://app.datadoghq.com/saml/saml_setup and https://app.datadoghq.com/account/team
 * **Signed Response**: Leave unchecked
 * **Name ID**: "Basic Information" "Primary Email"
