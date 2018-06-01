@@ -18,26 +18,18 @@ further_reading:
 
 ## Getting started
 
-For configuration instructions and details about using the API, check out our [API documentation][api docs] for manual
-instrumentation, and our [integrations section][contrib docs] for libraries and frameworks supporting automatic instrumentation.
+For configuration instructions and details about using the API, check out our [API documentation][api docs] for manual instrumentation, and our [integrations section][contrib docs] for Go libraries and frameworks supporting automatic instrumentation.
 
-For descriptions of terminology used in APM, take a look at the [Getting started with APM][getting started] section.
+For a description of the terminology used in APM, take a look at the [Getting started with APM section][getting started]. For details about contributing, check the official repository [README.md file][repo readme]. 
 
-For details about contributing, check the official repository [README.md file][repo readme]. If you are migrating from an older
-version of the tracer (e.g. 0.6.x) you can find some more guidance in our [migration document][migrating].
-
-[api docs]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
-[contrib docs]: #automatic-instrumentation
-[getting started]: https://docs.datadoghq.com/tracing/visualization/
-[repo readme]: https://github.com/DataDog/dd-trace-go/tree/v1#contributing
-[migrating]: https://github.com/DataDog/dd-trace-go/tree/v1/MIGRATING.md
+Consult our [migration document][migrating] if you need to migrate from an older version of the tracer (e.g. v<0.6.x) to newest version.
 
 ### Requirements
 
-To begin tracing applications written in Go, your environment must first meet the following requirements:
+To begin tracing your Go applications, your environment must first meet the following requirements:
 
-* Run the Datadog Agent >= 5.21.1. See ["Install and configure the Datadog Agent"][1] (additional documentation for [tracing Docker applications](/tracing/setup/docker/)).
-* Go 1.9+
+* Runing the Datadog Agent >= 5.21.1. See ["Install and configure the Datadog Agent"][1] (additional documentation for [tracing Docker applications](/tracing/setup/docker/)).
+* Using Go 1.9+
 
 ### Installation
 
@@ -47,14 +39,13 @@ Next, install the Go tracer from its canonical import path:
 go get gopkg.in/DataDog/dd-trace-go.v1/...
 ```
 
-If you see errors related to the integrations folder (`contrib`), simply ignore them, they are there only due to our
-support for older versions of modern libraries (such as our gRPC integration).
+If you see errors related to the integrations folder (`contrib`), simply ignore them, they are there only due to our support for older versions of modern libraries (such as our gRPC integration).
 
 You are now ready to import the tracer and start instrumenting your code!
 
 ## Manual instrumentation
 
-To make use of manual instrumentation, use the `tracer` package whch is thoroughly documented on our [godoc page][tracer godoc]. One simplistic example would be:
+To make use of manual instrumentation, use the `tracer` package which is documented on our [godoc page][tracer godoc]. One simplistic example would be:
 
 ```go
 package main
@@ -75,17 +66,17 @@ func main() {
 }
 ```
 
-Full documentation regarding the options for starting the tracer or creating and finishing spans can be found in the official [API documentation][tracer godoc].
+Consult the official [API documentation][tracer godoc] to discover all options for starting the tracer or creating and finishing spans.
 
 ## Automatic instrumentation
 
-We have built a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries
-and frameworks. A table listing the currently supported integrations can be seen below. The [official documentation][contrib godoc]
-also provides a good overview of the supported packages, their APIs, along with usage examples.
+We have built a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. Find below the list of currently supported integrations. 
+
+**Note**: The [official documentation][contrib godoc] also provides a good overview of the supported packages, their APIs, along with usage examples.
 
 ### Frameworks
 
-The following list of web frameworks can be integrated with using one of our helper packages.
+Integrate the Go tracer with the following list of web frameworks using one of our helper packages.
 
 
 | Framework     | Framework Documentation                 | GoDoc Datadog Documentation                                                          |
@@ -97,7 +88,7 @@ The following list of web frameworks can be integrated with using one of our hel
 
 ### Library Compatibility
 
-It also includes support for the following data stores and libraries:
+The Go tracer includes support for the following data stores and libraries:
 
 
 | Library             | Library Documentation                                                 | GoDoc Datadog Documentation                                                                |
@@ -117,12 +108,11 @@ Make sure to take a look at our integrations package [godoc page][contrib godoc]
 
 ## OpenTracing Support
 
-The repository contains a package which can be used to expose the Datadog tracer as an [OpenTracing][3] compatible tracer. The usage is simple, straight-forward and
-can be accomplished by importing the [`opentracer` package][opentracing godoc].
+Import the [`opentracer` package][opentracing] to expose the Datadog tracer as an [OpenTracing][3] compatible tracer.
 
 ### Example
 
-A basic usage example can be seen below.
+A basic usage would be:
 
 ```go
 package main
@@ -149,12 +139,12 @@ func main() {
 }
 ```
 
-Note that using the [OpenTracing API][4] in parallel with the regular API or our integrations is fully supported. Under the hood, all of them
+**Note**: Using the [OpenTracing API][4] in parallel with the regular API or our integrations is fully supported. Under the hood, all of them
 make use of the same tracer. Make sure to check out the [API documentation][opentracing godoc] for more examples and details.
 
 ## Further Reading
 
-More information on topics such as distributed tracing and sampling priority can be found in the [package documentation][tracer godoc].
+Find more information in the [package documentation][tracer godoc] about distributed tracing and sampling priority.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -164,3 +154,8 @@ More information on topics such as distributed tracing and sampling priority can
 [tracer godoc]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
 [contrib godoc]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib
 [opentracing godoc]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer
+[api docs]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
+[contrib docs]: #automatic-instrumentation
+[getting started]: https://docs.datadoghq.com/tracing/visualization/
+[repo readme]: https://github.com/DataDog/dd-trace-go/tree/v1#contributing
+[migrating]: https://github.com/DataDog/dd-trace-go/tree/v1/MIGRATING.md
