@@ -12,7 +12,7 @@ further_reading:
   text: "Explore your services, resources and traces"
 ---
 
-Deploy the [datadog-trace-agent][1] pod in your Kubernetes Cluster using DaemonSets (recommended). The `datadog/agent` image must be configured to enable the Trace Agent, passing `DD_APM_ENABLED=true` as environment variable.
+In order to enable APM tracing, the `datadog/agent` image must be configured to enable the Trace Agent, passing `DD_APM_ENABLED=true` as environment variable.
 
 For additional information or different installation processes, see the [Agent 6 Kubernetes documentation][2].
 
@@ -39,9 +39,11 @@ spec:
         name: datadog-agent
         ports:
           - containerPort: 8125
+            hostPort: 8125
             name: dogstatsdport
             protocol: UDP
           - containerPort: 8126
+            hostPort: 8126
             name: traceport
             protocol: TCP
         env:
@@ -91,29 +93,29 @@ spec:
         - hostPath:
             path: /sys/fs/cgroup
           name: cgroups
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: dd-agent
-spec:
-  selector:
-    app: datadog-agent
-  ports:
-  - name: traceport
-    port: 8126
-    targetPort: 8126
 ```
 
-Then, deploy the DemonSet and the Service with the command:
+Then, deploy the DemonSet with the command:
 
 ```bash
 kubectl create -f datadog-agent.yaml
 ```
 
-This exposes the service `DD_AGENT_SERVICE_HOST` and `DD_AGENT_SERVICE_PORT` in your Kubernetes Cluster. If you prefer using the DNS discovery, check the [official documentation][3].  
+Because of the `hostPort` directive, you can then send traces to the `hostIP` of Nodes using the Downward API from your application containers.
 
-Your application tracers must be configured to submit traces to this address.
+Your application containers will need the Node IP and port set as environment variables:
+
+```yaml
+env:
+  - name: DD_AGENT_SERVICE_HOST
+    valueFrom:
+      fieldRef:
+        fieldPath: status.hostIP
+  - name: DD_AGENT_PORT:
+    value: 8126
+```
+
+Your application level tracers must then be configured to submit traces to this address.
 See the examples below for each supported language:
 
 #### Python
