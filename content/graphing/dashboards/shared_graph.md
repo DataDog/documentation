@@ -1,0 +1,101 @@
+---
+title: Shared Graphs
+kind: documentation
+aliases:
+    - graphing/faq/is-there-a-way-to-share-graphs
+    - graphing/faq/is-there-a-way-to-share-or-revoke-previously-shared-graphs
+further_reading:
+- link: "graphing/dashboards/"
+  tag: "Documentation"
+  text: Learn how to create Dashboards in Datadog
+- link: "graphing/dashboards/template_variables"
+  tag: "Documentation"
+  text: Enhance your Dashboards with Template Variables
+- link: "graphing/dashboards/widgets"
+  tag: "Documentation"
+  text: Discover all available widget for your Dashboard
+---
+
+## Overview
+
+Shared Graphs and Screenboards allow you to display metric, trace, and log visualizations outside of Datadog while being able to apply access restriction to your Embeds.
+
+## Sharing a particular Graph
+
+To share a Graph from a [Timeboard][5] or a [Screenboard][6]:
+
+1. Choose a graph.
+2. Click the pencil icon in the upper right corner to edit it.
+3. Under step 2: *Graph your data* select the **share** tab:
+4. Pick a fixed timeframe for your graph.
+5. Pick a graph size.
+6. Choose to include the legend or not.
+7. Get the embed code with the *Generate embed code* button.
+
+{{< img src="graphing/dashboards/shared_graph/share_graph.png" alt="Shared graph" responsive="true" popup="true" style="width:75%;">}}
+
+## Sharing a Screenboard
+
+Share a Screenboard entirely with the following process:
+
+1. Click the settings cog in the upper right of the screen.
+2. Click the *Generate public URL* option.
+3. Use the created URL to have live and read-only access to just the contents of that Screenboard.
+
+**Note**: If you've enabled [Templating][13], the template variable drop down isn't present in the shared views.
+
+### Applying restrictions
+
+You can restrict access on a per-IP address basis to your Embed. Email [the Datadog support team][1] to enable the IP address white listing feature that allows administrators to provide a list of IP addresses that have access to shared dashboards.
+
+These shared graphs can be embedded in external-facing tools using the provided iframe as well as shared directly using the source URL provided in the text box. This can be used externally without additional authorization required for access.
+
+## Revoking shared graphs/Screenboard
+
+### Revoking an embedded graphs
+To revoke the keys used to share your graphs:
+
+1. [Navigate to **Integrations -> Embeds**][3] to find a list of all the graphs that are shared.
+2. Click on the **Revoke** button for the graph you want to stop sharing.
+3. The graph moves then to the **Revoked** list.
+
+{{< img src="graphing/dashboards/shared_graph/embedded_graphs.png" alt="Embedded graph" responsive="true" popup="true" style="width:75%;">}}
+
+### Revoking a Screenboard
+
+To revoke a shared ScreenBoard:
+
+1. Navigate to the Dashboard List.
+2. Select the Screenboard you want to revoke access to.
+3. Click on the cog to edit it.
+4. Click **Revoke public URL**.
+
+## API
+
+Datadog has a [dedicated API][7] allowing you to interact with your Embeds:
+
+| Endpoint                 | Description                                                           |
+| :---                     | :----                                                                 |
+| [Get all embeds][8]      | Gets a list of previously created embeddable graphs.                  |
+| [Create embed][9]        | Creates a new embeddable graph.                                       |
+| [Get specific embed][10] | Get the HTML fragment for a previously generated embed with embed_id. |
+| [Enable embed][11]       | Enable a specified embed.                                             |
+| [Revoke embed][12]       | Revoke a specified embed.                                             |
+
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /help
+[3]: https://app.datadoghq.com/account/settings#embeds
+[4]: /api/#embeds
+[5]: /graphing/dashboards/timeboard
+[6]: /graphing/dashboards/screenboard
+[7]: /api/?lang=python#embeddable-graphs
+[8]: /api/?lang=python#get-all-embeds
+[9]: /api/?lang=python#create-embed
+[10]: /api/?lang=python#get-specific-embed
+[11]: /api/?lang=python#enable-embed
+[12]: /api/?lang=python#revoke-embed
+[13]: /graphing/dashboards/template_variables

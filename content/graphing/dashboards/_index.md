@@ -3,6 +3,16 @@ title: Dashboards
 kind: documentation
 aliases:
     - /guides/templating/
+further_reading:
+- link: "graphing/dashboards/template_variables"
+  tag: "Documentation"
+  text: Enhance your Dashboards with Template Variables
+- link: "graphing/dashboards/shared_graph"
+  tag: "Documentation"
+  text: Share your Graphs outside of Datadog
+- link: "graphing/dashboards/widgets"
+  tag: "Documentation"
+  text: Discover all available widget for your Dashboard
 ---
 
 To create a [TimeBoard][3] or a [ScreenBoard][4] Select which of these you would prefer to create after clicking 'New Dashboard' in the 'Dashboards' dropdown.
@@ -76,6 +86,10 @@ To define the most related logs, we use the following parameters:
 * *Timeframe*: Focused on the selected data point and uses the graph bucket size to display data before and after the selected point.
 * *Integration prefix*: If the metric is coming from an integration, Datadog filters on the `source` attribute with the same integration name.
 * *Tags*: All tags used in the graph (*template variable*, *split by*, *filter by*) are automatically added to the search query.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /graphing/
 [2]: /graphing/event_stream/
