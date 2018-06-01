@@ -28,11 +28,11 @@ New dashboards start with a keyless template variable applied. Click on the penc
 
 Once in the edit mode click on **Add Variable +** to create your first Template Variable, it is defined by:
 
-* A **Name** *-Mandatory-*:  
-    Value of your Template Variable displayed in your graphs query. 
-* A **Tag Group** *-Mandatory-*:  
-    If your tags follow [the tags best practice][3] with a `key:value` format, the Tag Group is the  `key` of your tags. 
-* A **Default Tag** *-Optional-*:  
+* A **Name** *-Mandatory-*:
+    Value of your Template Variable displayed in your graphs query.
+* A **Tag Group** *-Mandatory-*:
+    If your tags follow [the tags best practice][3] with a `key:value` format, the Tag Group is the  `key` of your tags.
+* A **Default Tag** *-Optional-*:
     Default value for your Template Variable Tag Group.
 
 Once created, notice that you have statistics upon your template variables usage in your graphs. In the picture below, the template variable is not used in both graph of the dashboard:
@@ -43,11 +43,11 @@ Decide if you want to remove/add this Template Variable to all of your graphs wi
 
 ## Template Variable in Graphs
 
-Once that you have defined a template variable, it appears in the options displayed in the `from`  field: 
+Once you have defined a template variable, it appears in the options displayed in the `from`  field:
 
 {{< img src="graphing/dashboards/template_variables/tv_in_graph.png" alt="Template variable in graphs" responsive="true" popup="true" style="width:50%;">}}
 
-Once the graph saved the value of this Template Variable will be the one selected on top of your Dashboard:
+After the graph is saved, the value of this Template Variable will be the one selected on top of your Dashboard:
 
 {{< img src="graphing/dashboards/template_variables/selecting_template_variables.png" alt="Selecting template variables" responsive="true" popup="true" style="width:75%;">}}
 
@@ -55,9 +55,9 @@ Once the graph saved the value of this Template Variable will be the one selecte
 
 [The event overlay][1] search is helpful to correlate metrics to events and you can use Template Variables to find events that share certain tags with the metrics on your dashboard. The event overlay search is [applied through an individual graph][2].
 
-Values from dashboard template variables can be directly captured by using the `$variable.value` syntax in the event search field. 
+Values from dashboard template variables can be directly captured by using the `$variable.value` syntax in the event search field.
 
-**Note**: Dashboard Template Variables must be metric tags, event-supplied tags cannot be used as dashboard template variables)
+**Note**: Dashboard Template Variables must be metric tags; event-supplied tags cannot be used as dashboard template variables)
 
 For example, to search for events in the event stream with the same region tag, use: `tags:region:$region.value`.
 
@@ -71,7 +71,7 @@ Use multiple template variables in the search field and the event overlay search
 
 {{< img src="graphing/dashboards/template_variables/tv8.png" alt="tv8" responsive="true" popup="true" style="width:85%;">}}
 
-Since the `$variable.value` syntax captures the resolved key value from the template variable, it can be used with other filters, such as `hosts:`.  
+Since the `$variable.value` syntax captures the resolved key value from the template variable, it can be used with other filters, such as `hosts:`.
 Here is an example that uses the tags field together with the hosts: field in the search term `tags:env:$env.value hosts:$host.value`
 
 {{< img src="graphing/dashboards/template_variables/tv9.png" alt="tv9" responsive="true" popup="true" style="width:85%;">}}

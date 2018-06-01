@@ -18,19 +18,19 @@ further_reading:
 
 ## Overview
 
-Shared Graphs and Screenboards allow you to display metrics, traces, and logs visualization outside of Datadog while being able to apply access restriction to your Embeds.
+Shared Graphs and Screenboards allow you to display metric, trace, and log visualizations outside of Datadog while being able to apply access restriction to your Embeds.
 
 ## Sharing a particular Graph
 
 To share a Graph from a [Timeboard][5] or a [Screenboard][6]:
 
-1. Choose a graph 
-2. Click in the upper-right corner of the graph on the pencil icon to edit it. 
+1. Choose a graph.
+2. Click the pencil icon in the upper right corner to edit it.
 3. Under step 2: *Graph your data* select the **share** tab:
 4. Pick a fixed timeframe for your graph.
 5. Pick a graph size.
-6. Choose to include the legend or not
-7. Get the embed code with the *Generate embed code* button. 
+6. Choose to include the legend or not.
+7. Get the embed code with the *Generate embed code* button.
 
 {{< img src="graphing/dashboards/shared_graph/share_graph.png" alt="Shared graph" responsive="true" popup="true" style="width:75%;">}}
 
@@ -38,15 +38,15 @@ To share a Graph from a [Timeboard][5] or a [Screenboard][6]:
 
 Share a Screenboard entirely with the following process:
 
-1. Click the settings cog in the upper right of the screen
-2. Click the *Generate public URL* option. 
+1. Click the settings cog in the upper right of the screen.
+2. Click the *Generate public URL* option.
 3. Use the created URL to have live and read-only access to just the contents of that Screenboard.
 
-**Note**: If you've enabled [Templating][13], the template variable drop downs isn't present in the shared views.
+**Note**: If you've enabled [Templating][13], the template variable drop down isn't present in the shared views.
 
-### Applying restriction
+### Applying restrictions
 
-Restrict access on a per-IP address basis to your Embed. Email [the Datadog support team][1] to enable the IP address white listing feature that allows administrators to provide a list of IP addresses that have access to shared dashboards. 
+You can restrict access on a per-IP address basis to your Embed. Email [the Datadog support team][1] to enable the IP address white listing feature that allows administrators to provide a list of IP addresses that have access to shared dashboards.
 
 These shared graphs can be embedded in external-facing tools using the provided iframe as well as shared directly using the source URL provided in the text box. This can be used externally without additional authorization required for access.
 
@@ -61,13 +61,13 @@ To revoke the keys used to share your graphs:
 
 {{< img src="graphing/dashboards/shared_graph/embedded_graphs.png" alt="Embedded graph" responsive="true" popup="true" style="width:75%;">}}
 
-### Revoking a Screenboard 
+### Revoking a Screenboard
 
 To revoke a shared ScreenBoard:
 
 1. Navigate to the Dashboard List.
-2. Select the ScreenBoard you want to revoke access to.
-3. Click on the cog to edit it .
+2. Select the Screenboard you want to revoke access to.
+3. Click on the cog to edit it.
 4. Click **Revoke public URL**.
 
 ## API
