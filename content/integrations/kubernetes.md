@@ -74,6 +74,9 @@ Take advantage of DaemonSets to [automatically deploy the Datadog Agent on all y
 #### Kubernetes
 {{< get-metrics-from-git "kubernetes" >}}
 
+#### Kubelet
+{{< get-metrics-from-git "kubelet" >}}
+
 #### Kubernetes State
 {{< get-metrics-from-git "kubernetes_state" >}}
 
