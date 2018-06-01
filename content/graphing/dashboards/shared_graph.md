@@ -48,7 +48,7 @@ Share a Screenboard entirely with the following process:
 
 You can restrict access on a per-IP address basis to your Embed. Email [the Datadog support team][1] to enable the IP address white listing feature that allows administrators to provide a list of IP addresses that have access to shared dashboards.
 
-These shared graphs can be embedded in external-facing tools using the provided iframe as well as shared directly using the source URL provided in the text box. This can be used externally without additional authorization required for access. Once we have enabled this feature, it can be managed on [your organisation security page][14].
+These shared graphs can be embedded in external-facing tools using the provided iframe as well as shared directly using the source URL provided in the text box. This can be used externally without additional authorization required for access. Once enabled, manage your restrictions on [your organisation security page][14].
 
 **Note**: If you have enabled [Dashboard Template Variables][13], the template variable drop-downs will not be present in the shared views. We advise to avoid using these if you intend on sharing the views outside of your organization.
 
