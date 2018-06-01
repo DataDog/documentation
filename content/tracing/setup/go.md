@@ -23,12 +23,14 @@ instrumentation, and our [integrations section][contrib docs] for libraries and 
 
 For descriptions of terminology used in APM, take a look at the [Getting started with APM][getting started] section.
 
-For details about contributing, check the official repository [README.md file][repo readme].
+For details about contributing, check the official repository [README.md file][repo readme]. If you are migrating from an older
+version of the tracer (e.g. 0.6.x) you can find some more guidance in our [migration document][migrating].
 
 [api docs]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
 [contrib docs]: #automatic-instrumentation
 [getting started]: https://docs.datadoghq.com/tracing/visualization/
 [repo readme]: https://github.com/DataDog/dd-trace-go/tree/v1#contributing
+[migrating]: https://github.com/DataDog/dd-trace-go/tree/v1/MIGRATING.md
 
 ### Requirements
 
@@ -60,16 +62,16 @@ package main
 import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 
 func main() {
-	// Start the tracer with zero or more options.
-	tracer.Start(tracer.WithServiceName("my-service"))
-	defer tracer.Stop()
+    // Start the tracer with zero or more options.
+    tracer.Start(tracer.WithServiceName("my-service"))
+    defer tracer.Stop()
 
-	// Create a span for a web request at the /posts URL.
-	span := tracer.StartSpan("web.request", tracer.ResourceName("/posts"))
-	defer span.Finish()
+    // Create a span for a web request at the /posts URL.
+    span := tracer.StartSpan("web.request", tracer.ResourceName("/posts"))
+    defer span.Finish()
 
-	// Set metadata
-	span.SetTag("my_tag", "my_value")
+    // Set metadata
+    span.SetTag("my_tag", "my_value")
 }
 ```
 
@@ -126,24 +128,24 @@ A basic usage example can be seen below.
 package main
 
 import (
-	"github.com/opentracing/opentracing-go"
+    "github.com/opentracing/opentracing-go"
 
-	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer"
-	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
 func main() {
-	// Start the regular tracer and return it as an opentracing.Tracer. You may use
-	// the same set of options as you normally would with the Datadog tracer.
-	t := opentracer.Start(tracer.WithServiceName("my-service"))
+    // Start the regular tracer and return it as an opentracing.Tracer. You may use
+    // the same set of options as you normally would with the Datadog tracer.
+    t := opentracer.Start(tracer.WithServiceName("my-service"))
 
-	// Stop it using the regular Stop call.
-	defer tracer.Stop()
-	
-	// Set the global OpenTracing tracer.
-	opentracing.SetGlobalTracer(t)
+    // Stop it using the regular Stop call.
+    defer tracer.Stop()
+    
+    // Set the global OpenTracing tracer.
+    opentracing.SetGlobalTracer(t)
 
-	// Use the OpenTracing API as usual.
+    // Use the OpenTracing API as usual.
 }
 ```
 
