@@ -108,7 +108,7 @@ Make sure to take a look at our integrations package [godoc page][contrib godoc]
 
 ## OpenTracing Support
 
-Import the [`opentracer` package][opentracing] to expose the Datadog tracer as an [OpenTracing][3] compatible tracer.
+Import the [`opentracer` package][opentracing godoc] to expose the Datadog tracer as an [OpenTracing][3] compatible tracer.
 
 ### Example
 
