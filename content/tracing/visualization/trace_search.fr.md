@@ -38,5 +38,5 @@ Filtrer vos traces en fonction de:
 * Leur durée
 
 [1]: https://app.datadoghq.com/apm/search
-[2]: /tracing/setup/environment
+[2]: /tracing/setup/first_class_dimensions#environment
 [3]: /tracing/visualization/services_list/

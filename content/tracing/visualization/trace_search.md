@@ -33,10 +33,12 @@ Select the trace time frame you want to display with the time selector in the up
 
 Filter your traces depending on:
 
-* Their [environment][2]
+* [Environment][2]
+* [Primary Tag][4]
 * Their [service name][3]
 * Their duration
 
 [1]: https://app.datadoghq.com/apm/search
-[2]: /tracing/setup/environment
+[2]: /tracing/setup/first_class_dimensions#environment
 [3]: /tracing/visualization/services_list/
+[4]: /tracing/setup/first_class_dimensions#primary-tag
