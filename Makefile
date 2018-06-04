@@ -62,6 +62,7 @@ clean-integrations:  ## remove built integrations files.
 	    -a -not -name 'cloudcheckr.md' \
 	    -a -not -name 'integration_sdk.md' \
 	    -a -not -name 'jenkins.md' \
+	    -a -not -name 'journald.md' \
 	    -a -not -name 'kubernetes.md' \
 	    -a -not -name 'new_integration.md' \
 	    -a -not -name 'rss.md' \
