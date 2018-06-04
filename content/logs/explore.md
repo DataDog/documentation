@@ -154,7 +154,7 @@ To add more log details to the list, click the **Columns** button and select any
 
 {{< img src="logs/explore/multi_line_display.png" alt="Multi-line display" responsive="true" popup="true" style="width:30%;">}}
 
-Choose to display one, three or ten lines from your logs `message` attributes in your logstream.
+Choose to display one, three, or ten lines from your logs `message` attributes in your logstream.
 
 * With one line displayed:
 {{< img src="logs/explore/1_multi_line.png" alt="1 line Multi-line display" responsive="true" popup="true" style="width:80%;">}}
