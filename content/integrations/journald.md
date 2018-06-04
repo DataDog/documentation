@@ -23,7 +23,7 @@ Systemd-journald is a system service that collects and stores logging data. It c
 
 ### Installation
 
-Journal files are, by default, owned and readable by the `systemd-journal` system group, to start collecting your journal logs, you need to:
+Journal files are, by default, owned and readable by the `systemd-journal` system group. To start collecting your journal logs, you need to:
 
 1. [Install the agent][1] on the instance running the journal
 2. Add the `dd-agent` user to the `systemd-journal` group by running:  
