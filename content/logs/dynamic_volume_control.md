@@ -1,5 +1,5 @@
 ---
-title: Handling large and fluctuating volumes
+title: Dynamic volume control
 kind: documentation
 description:
 further_reading:
@@ -12,8 +12,6 @@ further_reading:
 - link: "logs/parsing"
   tag: "Documentation"
   text: Learn more about parsing
-alias:
-  - /logs/dynamic_volume_control
 ---
 
 <div class="alert alert-warning">

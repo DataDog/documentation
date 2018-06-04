@@ -607,8 +607,8 @@ languages:
           weight: 50
           parent: menu_references_logs
         - identifier: customnav_lognav_dynamic_volume_control
-          name: "Large and fluctuating volumes"
-          url: "logs/large_and_fluctuating_volumes/"
+          name: "Dynamic volume control"
+          url: "logs/dynamic_volume_control/"
           weight: 60
           parent: menu_references_logs
         - identifier: customnav_lognav_languages
@@ -1335,8 +1335,8 @@ languages:
           weight: 50
           parent: menu_references_logs
         - identifier: customnav_lognav_dynamic_volume_control
-          name: "Large and fluctuating volumes"
-          url: "logs/large_and_fluctuating_volumes/"
+          name: "Dynamic volume control"
+          url: "logs/dynamic_volume_control/"
           weight: 60
           parent: menu_references_logs
         - identifier: customnav_lognav_languages
