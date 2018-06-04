@@ -32,6 +32,8 @@ For details about contributing, check out the [development guide][development do
 
 Node 4 is the minimum version supported by this library. However, it benefits significantly from the performance improvements introduced in Node 8.3+.
 
+**Note**: If you are using async/await natively, the `asyncHooks` experimental flag must be turned on in the [tracer settings][4] for context propagation to work properly.
+
 ### Installation
 
 To begin tracing Node.js applications, first [install and configure the Datadog Agent][1] (see additional documentation for [tracing Docker applications][3]).
