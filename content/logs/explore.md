@@ -27,98 +27,6 @@ In this view you can:
 * [Use facets to filter your Logstream](#facets)
 * [Enter search queries](#search-bar)
 
-## Time Range
-
-The time range allows you to display logs within a given time period. It appears directly under the search bar as a timeline. The timeline can be displayed or wrapped up with the **Show timeline** check box:
-
-{{< img src="logs/explore/timeline.png" alt="Timeline" responsive="true" popup="true" style="width:50%;">}}
-
-Quickly change the time range by selecting a preset range from the dropdown:
-
-{{< img src="logs/explore/timerange.png" style="width:50%;" alt="Timerange" responsive="true" popup="true" >}}
-
-## Logstream
-The Logstream is the list of logs that match the selected context. A context is defined by a [search bar](#search-bar) filter and a [time range](#time-range).
-You can sort the list by clicking the **date** column header.
-
-{{< img src="logs/explore/log_list.png" alt="Logstream" responsive="true" popup="true" style="width:80%;">}}
-
-### Filtering the Logstream
-If you enter a valid query into the [search bar](#search-bar), words that match your query are highlighted, and the logs displayed match your facet criteria:
-
-{{< img src="logs/explore/log_list_highlighted.png" alt="Logstream highlighted" responsive="true" popup="true" style="width:80%;">}}
-
-### Displaying a full log
-You can click on any log line to see more details about it:
-
-{{< img src="logs/explore/log_in_log_list.png" alt="Log in Logstream" responsive="true" popup="true" style="width:80%;">}}
-
-### View in context
-
-Click on its `host` or `service` and select `View in context` (also known as `Focus on Host & Service`) to see log lines dated just before and after a selected log - even if they don't match your filter -
-
-{{< img src="logs/explore/focus_host_service.png" style="width:50%;" alt="focus on host and service.png" responsive="true" popup="true" style="width:70%;">}}
-
-### Columns
-To add more log details to the list, click the **Columns** button and select any facets you want to see:
-
-{{< img src="logs/explore/log_list_with_columns.png" alt="Logstream with columns" responsive="true" popup="true" style="width:80%;">}}
-
-### Multi-line display
-
-{{< img src="logs/explore/multi_line_display.png" alt="Multi-line display" responsive="true" popup="true" style="width:30%;">}}
-
-When enabled, your logstream display changes to better focus on your logs `message` attributes. They are now displayed on four lines instead of one:
-
-* Without multi-line:
-{{< img src="logs/explore/before_multi_line.png" alt="Before Multi-line display" responsive="true" popup="true">}}
-
-* With multi-line enabled:
-{{< img src="logs/explore/multi_line_log.png" alt="Log with Multi-line display" responsive="true" popup="true">}}
-
-**Note**:  If present, `error.stack` attribute is displayed in priority as it should be used for stack traces.
-Remap any stack-trace attribute to this specific attribute with [the attribute remapper processor][1].
-
-## Facets
-
-A facet displays all the distinct members of an attribute or a tag as well as provides some basic analytics such as the amount of logs represented. This is also a switch to easily filter your data.
-
-Facets allow you to pivot or filter your datasets based on a given attribute. Examples facets may include users, services, etc...
-
-{{< img src="logs/explore/facets_demo.png" alt="Facets demo" responsive="true" popup="true" style="width:80%;">}}
-
-### Create a Facet
-
-To start using an attribute as a Facet or in the search, click on it and add it as a Facet:
-
-{{< img src="logs/explore/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" popup="true" style="width:50%;">}}
-
-Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the [Log graph query][2].
-
-### Facet Panel
-
-Use facets to easily filters on your logs. The search bar and url automatically reflect your selections.
-
-{{< img src="logs/explore/facet_panel.png" alt="Facet panel" responsive="true" popup="true" style="width:80%;">}}
-
-## Measures
-
-A Measure is a attribute with numerical value contained in your logs. Think of it as a "log metric".
-
-### Create a Measure
-
-To start using an attribute as a measure, click on a numerical attribute of your log:
-
-{{< img src="logs/explore/create_a_mesure.png" alt="Create a measure" responsive="true" popup="true" style="width:80%;">}}
-
-Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the [Log graph query][2].
-
-### Select the Measure Unit
-
-All measure have their own unit that is then used for display in the Log explorer columns, Log stream widgets in dashboards, and in the Log Graphs.
-
-{{< img src="logs/explore/edit_a_measure.png" alt="Edit a measure" responsive="true" popup="true" style="width:80%;">}}
-
 ## Search bar
 
 All search parameters are contained in the url, so it is very simple to share your view.
@@ -204,6 +112,101 @@ Don't lose time building the same views everyday. Saved searches contain your se
 To delete a saved search, click on the bin icon under the log search drop-down:
 
 {{< img src="logs/explore/delete_saved_search.png" alt="Delete Saved Search" responsive="true" popup="true" style="width:80%;">}}
+
+## Time Range
+
+The time range allows you to display logs within a given time period. It appears directly under the search bar as a timeline. The timeline can be displayed or wrapped up with the **Show timeline** check box:
+
+{{< img src="logs/explore/timeline.png" alt="Timeline" responsive="true" popup="true" style="width:50%;">}}
+
+Quickly change the time range by selecting a preset range from the dropdown:
+
+{{< img src="logs/explore/timerange.png" style="width:50%;" alt="Timerange" responsive="true" popup="true" >}}
+
+## Logstream
+The Logstream is the list of logs that match the selected context. A context is defined by a [search bar](#search-bar) filter and a [time range](#time-range).
+You can sort the list by clicking the **date** column header.
+
+{{< img src="logs/explore/log_list.png" alt="Logstream" responsive="true" popup="true" style="width:80%;">}}
+
+### Filtering the Logstream
+If you enter a valid query into the [search bar](#search-bar), words that match your query are highlighted, and the logs displayed match your facet criteria:
+
+{{< img src="logs/explore/log_list_highlighted.png" alt="Logstream highlighted" responsive="true" popup="true" style="width:80%;">}}
+
+### Displaying a full log
+You can click on any log line to see more details about it:
+
+{{< img src="logs/explore/log_in_log_list.png" alt="Log in Logstream" responsive="true" popup="true" style="width:80%;">}}
+
+### View in context
+
+Click on its `host` or `service` and select `View in context` (also known as `Focus on Host & Service`) to see log lines dated just before and after a selected log - even if they don't match your filter -
+
+{{< img src="logs/explore/focus_host_service.png" style="width:50%;" alt="focus on host and service.png" responsive="true" popup="true" style="width:70%;">}}
+
+### Columns
+To add more log details to the list, click the **Columns** button and select any facets you want to see:
+
+{{< img src="logs/explore/log_list_with_columns.png" alt="Logstream with columns" responsive="true" popup="true" style="width:80%;">}}
+
+### Multi-line display
+
+{{< img src="logs/explore/multi_line_display.png" alt="Multi-line display" responsive="true" popup="true" style="width:30%;">}}
+
+Choose to display one, three or ten lines from your logs `message` attributes in your logstream.
+
+* With one line displayed:
+{{< img src="logs/explore/1_multi_line.png" alt="1 line Multi-line display" responsive="true" popup="true" style="width:80%;">}}
+
+* With three lines displayed:
+{{< img src="logs/explore/3_multi_line.png" alt="2 lines with Multi-line display" responsive="true" popup="true" style="width:80%;">}}
+
+* With ten lines displayed:
+{{< img src="logs/explore/10_multi_line.png" alt="10 lines with Multi-line display" responsive="true" popup="true" style="width:80%;">}}
+
+**Note**:  If present, `error.stack` attribute is displayed in priority as it should be used for stack traces.
+Remap any stack-trace attribute to this specific attribute with [the attribute remapper processor][1].
+
+## Facets
+
+A facet displays all the distinct members of an attribute or a tag as well as provides some basic analytics such as the amount of logs represented. This is also a switch to easily filter your data.
+
+Facets allow you to pivot or filter your datasets based on a given attribute. Examples facets may include users, services, etc...
+
+{{< img src="logs/explore/facets_demo.png" alt="Facets demo" responsive="true" popup="true" style="width:80%;">}}
+
+### Create a Facet
+
+To start using an attribute as a Facet or in the search, click on it and add it as a Facet:
+
+{{< img src="logs/explore/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" popup="true" style="width:50%;">}}
+
+Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the [Log graph query][2].
+
+### Facet Panel
+
+Use facets to easily filters on your logs. The search bar and url automatically reflect your selections.
+
+{{< img src="logs/explore/facet_panel.png" alt="Facet panel" responsive="true" popup="true" style="width:80%;">}}
+
+## Measures
+
+A Measure is a attribute with numerical value contained in your logs. Think of it as a "log metric".
+
+### Create a Measure
+
+To start using an attribute as a measure, click on a numerical attribute of your log:
+
+{{< img src="logs/explore/create_a_mesure.png" alt="Create a measure" responsive="true" popup="true" style="width:80%;">}}
+
+Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the [Log graph query][2].
+
+### Select the Measure Unit
+
+All measure have their own unit that is then used for display in the Log explorer columns, Log stream widgets in dashboards, and in the Log Graphs.
+
+{{< img src="logs/explore/edit_a_measure.png" alt="Edit a measure" responsive="true" popup="true" style="width:80%;">}}
 
 ## Further Reading
 
