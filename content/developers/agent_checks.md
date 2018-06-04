@@ -311,11 +311,11 @@ if r.status_code != 200:
     self.status_code_event(url, r, aggregation_key)
 ```
 
-If the request passes, we want to submit the timing to Datadog as a metric. Let's call it `http.response_time` and tag it with the URL.
+If the request passes, we want to submit the timing to Datadog as a metric. Let’s call it `http.response_time` and tag it with the URL. 
 
 ```python
-timing = end_time - start_time
-self.gauge('http.response_time', timing, tags=['http_check'])
+timing = end_time - start_time 
+self.gauge('http.response_time', timing, tags=["url:"+url]
 ```
 
 Finally, define what happens in the error cases. We have already
