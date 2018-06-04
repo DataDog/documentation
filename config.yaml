@@ -299,98 +299,93 @@ languages:
         - identifier: customnav_monitornav_monitor_types
           name: "Monitor Types"
           url: "monitors/monitor_types/"
-          weight: 10
+          weight: 30
           parent: menu_references_monitoring
 
         - identifier: customnav_monitortypenav_anomaly
           name: "Anomaly"
           url: "monitors/monitor_types/anomaly/"
-          weight: 110
+          weight: 310
           parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_apm
           name: "APM"
           url: "monitors/monitor_types/apm/"
-          weight: 120
+          weight: 320
           parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_composite
           name: "Composite"
           url: "monitors/monitor_types/composite/"
-          weight: 130
+          weight: 330
           parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_custom_check
           name: "Custom Check"
           url: "monitors/monitor_types/custom_check/"
-          weight: 140
+          weight: 340
           parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_event
           name: "Event"
           url: "monitors/monitor_types/event/"
-          weight: 150
+          weight: 350
           parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_forecasts
           name: "Forecasts"
           url: "monitors/monitor_types/forecasts/"
-          weight: 160
+          weight: 360
           parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_host
           name: "Host"
           url: "monitors/monitor_types/host/"
-          weight: 170
+          weight: 370
           parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_integration
           name: "Integration"
           url: "monitors/monitor_types/integration/"
-          weight: 180
+          weight: 380
           parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_monitor
           name: "Log"
           url: "monitors/monitor_types/log"
-          weight: 185
+          weight: 385
           parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_metric
           name: "Metric"
           url: "monitors/monitor_types/metric/"
-          weight: 190
+          weight: 390
           parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_network
           name: "Network"
           url: "monitors/monitor_types/network/"
-          weight: 200
+          weight: 400
           parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_outlier
           name: "Outlier"
           url: "monitors/monitor_types/outlier/"
-          weight: 210
+          weight: 410
           parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitortypenav_process
           name: "Process"
           url: "monitors/monitor_types/process/"
-          weight: 220
+          weight: 420
           parent: customnav_monitornav_monitor_types
-        - identifier: customnav_monitornav_monitor_status
-          name: "Monitor Status"
-          url: "monitors/monitor_status/"
-          weight: 30
-          parent: menu_references_monitoring
         - identifier: customnav_monitornav_manage_monitor
           name: "Manage Monitor"
           url: "monitors/manage_monitor/"
-          weight: 40
+          weight: 130
           parent: menu_references_monitoring
         - identifier: customnav_monitornav_check_summary
           name: "Check Summary"
           url: "monitors/check_summary/"
-          weight: 50
+          weight: 140
           parent: menu_references_monitoring
         - identifier: customnav_monitornav_notifications
           name: "Notifications"
           url: "monitors/notifications/"
-          weight: 60
+          weight: 150
           parent: menu_references_monitoring
         - identifier: customnav_monitornav_downtimes
           name: "Downtimes"
           url: "monitors/downtimes/"
-          weight: 70
+          weight: 160
           parent: menu_references_monitoring
         #- identifier: customnav_monitornav_faq
         #  name: "FAQ"
@@ -437,11 +432,6 @@ languages:
           name: "Java"
           url: "tracing/setup/java/"
           weight: 140
-          parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_javascript
-          name: "JavaScript"
-          url: "tracing/setup/javascript/"
-          weight: 145
           parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_python
           name: "Python"
@@ -700,20 +690,26 @@ languages:
           url: "developers/prometheus"
           weight: 70
           parent: menu_references_developers
+        # Integrations core doc
         - identifier: customnav_integrationsnav_new_integration
-          name: "Create a new integration"
+          name: "Integrations"
           url: "developers/integrations/"
           weight: 80
           parent: menu_references_developers
-        - identifier: customnav_integrationsnav_integration_sdk
-          name: "Integration SDK"
-          url: "developers/integrations/integration_sdk/"
-          weight: 900
+        - identifier: customnav_integrationsnav_new_check_howto
+          name: "Create a new Integration"
+          url: "developers/integrations/new_check_howto"
+          weight: 801
           parent: customnav_integrationsnav_new_integration
-        - identifier: customnav_developersnav_testing
-          name: "Testing"
-          url: "developers/integrations/testing/"
-          weight: 910
+        - identifier: customnav_integrationsnav_python
+          name: "Python"
+          url: "developers/integrations/python"
+          weight: 802
+          parent: customnav_integrationsnav_new_integration
+        - identifier: customnav_integrationsnav_legacy
+          name: "Legacy"
+          url: "developers/integrations/legacy"
+          weight: 803
           parent: customnav_integrationsnav_new_integration
         #- identifier: customnav_developersnav_faq
         #  name: "FAQ"
@@ -1388,20 +1384,26 @@ languages:
           url: "developers/prometheus"
           weight: 70
           parent: menu_references_developers
+        # Integrations core doc
         - identifier: customnav_integrationsnav_new_integration
-          name: "Créer une nouvelle intégration"
+          name: "Intégrations"
           url: "developers/integrations/"
           weight: 80
           parent: menu_references_developers
-        - identifier: customnav_integrationsnav_integration_sdk
-          name: "SDK pour les integrations"
-          url: "developers/integrations/integration_sdk/"
-          weight: 900
+        - identifier: customnav_integrationsnav_new_check_howto
+          name: "Créer une nouvelle intégration"
+          url: "developers/integrations/new_check_howto"
+          weight: 801
           parent: customnav_integrationsnav_new_integration
-        - identifier: customnav_developersnav_testing
-          name: "Tests"
-          url: "developers/integrations/testing/"
-          weight: 910
+        - identifier: customnav_integrationsnav_python
+          name: "Python"
+          url: "developers/integrations/python"
+          weight: 802
+          parent: customnav_integrationsnav_new_integration
+        - identifier: customnav_integrationsnav_legacy
+          name: "Legacy"
+          url: "developers/integrations/legacy"
+          weight: 803
           parent: customnav_integrationsnav_new_integration
         #- identifier: customnav_developersnav_faq
         #  name: "FAQ"
