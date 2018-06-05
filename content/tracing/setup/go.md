@@ -36,10 +36,8 @@ To begin tracing your Go applications, your environment must first meet the foll
 Next, install the Go tracer from its canonical import path:
 
 ```go
-go get gopkg.in/DataDog/dd-trace-go.v1/...
+go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace
 ```
-
-If you see errors related to the integrations folder (`contrib`), simply ignore them, they are there only due to our support for older versions of modern libraries (such as our gRPC integration).
 
 You are now ready to import the tracer and start instrumenting your code!
 
