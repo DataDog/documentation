@@ -118,7 +118,7 @@ aside.sidenav {
       margin-top:5px;
     }
     ul li > ul {
-      /*display: none;*/
+      display: none;
     }
     ul li.open > ul {
       display:block;
@@ -195,7 +195,7 @@ aside.sidenav-api {
     overflow-y: auto;
     margin:0;
     ul li > ul {
-      //display: block;
+      display: block;
       list-style-type:none;
       padding-left:20px;
       li a {
