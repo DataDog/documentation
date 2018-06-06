@@ -28,8 +28,8 @@ and each span is a dictionary with a `trace_id`, `spand_id`, `resource`..
 
 ##### Arguments
 
-*   **`trace_id`** - _Required._ The unique integer (64-bit signed) ID of the trace containing this span.
-*   **`span_id`** - _Required._ The span integer (64-bit signed) ID.
+*   **`trace_id`** - _Required._ The unique integer (64-bit unsigned) ID of the trace containing this span.
+*   **`span_id`** - _Required._ The span integer (64-bit unsigned) ID.
 *   **`name`** - _Required._ The span name.
 *   **`resource`** - _Required._ The resource you are tracing.
 *   **`service`** - _Required._The service name.
