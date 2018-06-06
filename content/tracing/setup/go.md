@@ -151,6 +151,7 @@ Possible values for the sampling priority tag are:
 | ext.PriorityAutoKeep       | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side.  |
 | ext.PriorityUserReject     | The user asked to not keep the trace. The Agent will drop it.                                               |
 | ext.PriorityUserKeep       | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                      |
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
