@@ -337,12 +337,12 @@ Don't see your desired framework? We're continually adding additional support, [
 
 `dd-java-agent` ships with some newer instrumentation disabled by default.
 
-| Instrumentation | Versions | JVM Arg to enable                                                                  |
-| :-------------- | :------- | :----------------                                                                  |
-| Elasticsearch Rest Client   | 5.0+   | `-Ddd.integration.elasticsearch.enabled=true`                            |
-| Elasticsearch Transport Client   | 2.0+   | `-Ddd.integration.elasticsearch.enabled=true`                       |
-| Ratpack         | 1.4+     | `-Ddd.integration.ratpack.enabled=true`                                            |
-| Spark Java      | 2.4+     | `-Ddd.integration.sparkjava.enabled=true -Ddd.integration.jetty.enabled=true`      |
+| Instrumentation                | Versions | JVM Arg to enable                                                             |
+| :--------------                | :------- | :----------------                                                             |
+| Elasticsearch Rest Client      | 5.0+     | `-Ddd.integration.elasticsearch.enabled=true`                                 |
+| Elasticsearch Transport Client | 2.0+     | `-Ddd.integration.elasticsearch.enabled=true`                                 |
+| Ratpack                        | 1.4+     | `-Ddd.integration.ratpack.enabled=true`                                       |
+| Spark Java                     | 2.4+     | `-Ddd.integration.sparkjava.enabled=true -Ddd.integration.jetty.enabled=true` |
 
 ## Further Reading
 
