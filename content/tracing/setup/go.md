@@ -41,33 +41,6 @@ go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace
 
 You are now ready to import the tracer and start instrumenting your code!
 
-## Manual Instrumentation
-
-To make use of manual instrumentation, use the `tracer` package which is documented on our [godoc page][tracer godoc]. One simple example would be:
-
-```go
-package main
-
-import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-
-func main() {
-    // Start the tracer with zero or more options.
-    tracer.Start(tracer.WithServiceName("my-service"))
-    defer tracer.Stop()
-
-    // Create a span for a web request at the /posts URL.
-    span := tracer.StartSpan("web.request", tracer.ResourceName("/posts"))
-    defer span.Finish()
-
-    // Set metadata
-    span.SetTag("my_tag", "my_value")
-}
-```
-
-## OpenTracing Support
-
-Import the [`opentracer` package][opentracing godoc] to expose the Datadog tracer as an [OpenTracing][3] compatible tracer.
-
 ## Automatic Instrumentation
 
 We have built a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. Find below the list of currently supported integrations. 
@@ -101,7 +74,32 @@ The Go tracer includes support for the following data stores and libraries. Make
 | SQL                 | https://godoc.org/github.com/DataDog/dd-trace-go/contrib/database/sql | https://godoc.org/github.com/DataDog/dd-trace-go/contrib/database/sql                      |
 | SQLx                | https://github.com/jmoiron/sqlx                                       | https://godoc.org/github.com/DataDog/dd-trace-go/contrib/jmoiron/sqlx                      |
 
-___
+## Manual Instrumentation
+
+To make use of manual instrumentation, use the `tracer` package which is documented on our [godoc page][tracer godoc]. One simple example would be:
+
+```go
+package main
+
+import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+
+func main() {
+    // Start the tracer with zero or more options.
+    tracer.Start(tracer.WithServiceName("my-service"))
+    defer tracer.Stop()
+
+    // Create a span for a web request at the /posts URL.
+    span := tracer.StartSpan("web.request", tracer.ResourceName("/posts"))
+    defer span.Finish()
+
+    // Set metadata
+    span.SetTag("my_tag", "my_value")
+}
+```
+
+## OpenTracing Support
+
+Import the [`opentracer` package][opentracing godoc] to expose the Datadog tracer as an [OpenTracing][3] compatible tracer.
 
 ### Example
 
