@@ -16,7 +16,7 @@ further_reading:
   text: "Explore your services, resources and traces"
 ---
 
-## Getting started
+## Getting Started
 
 For configuration instructions and details about using the API, check out our [API documentation][api docs] for manual instrumentation, and our [integrations section][contrib docs] for Go libraries and frameworks supporting automatic instrumentation.
 
@@ -41,9 +41,9 @@ go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace
 
 You are now ready to import the tracer and start instrumenting your code!
 
-## Manual instrumentation
+## Manual Instrumentation
 
-To make use of manual instrumentation, use the `tracer` package which is documented on our [godoc page][tracer godoc]. One simplistic example would be:
+To make use of manual instrumentation, use the `tracer` package which is documented on our [godoc page][tracer godoc]. One simple example would be:
 
 ```go
 package main
@@ -64,13 +64,15 @@ func main() {
 }
 ```
 
-Consult the official [API documentation][tracer godoc] to discover all options for starting the tracer or creating and finishing spans.
+## OpenTracing Support
 
-## Automatic instrumentation
+Import the [`opentracer` package][opentracing godoc] to expose the Datadog tracer as an [OpenTracing][3] compatible tracer.
+
+## Automatic Instrumentation
 
 We have built a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. Find below the list of currently supported integrations. 
 
-**Note**: The [official documentation][contrib godoc] also provides a good overview of the supported packages, their APIs, along with usage examples.
+**Note**: The [official documentation][contrib godoc] also provides a detailed overview of the supported packages and their APIs, along with usage examples.
 
 ### Frameworks
 
@@ -86,8 +88,7 @@ Integrate the Go tracer with the following list of web frameworks using one of o
 
 ### Library Compatibility
 
-The Go tracer includes support for the following data stores and libraries:
-
+The Go tracer includes support for the following data stores and libraries. Make sure to visit our integrations package [godoc page][contrib godoc] for an in-depth look.
 
 | Library             | Library Documentation                                                 | GoDoc Datadog Documentation                                                                |
 | ------------------- | --------------------------------------------------                    | ------------------------------------------------------------------------------------------ |
@@ -101,12 +102,6 @@ The Go tracer includes support for the following data stores and libraries:
 | SQLx                | https://github.com/jmoiron/sqlx                                       | https://godoc.org/github.com/DataDog/dd-trace-go/contrib/jmoiron/sqlx                      |
 
 ___
-
-Make sure to take a look at our integrations package [godoc page][contrib godoc] for an in-depth look.
-
-## OpenTracing Support
-
-Import the [`opentracer` package][opentracing godoc] to expose the Datadog tracer as an [OpenTracing][3] compatible tracer.
 
 ### Example
 
@@ -123,8 +118,8 @@ import (
 )
 
 func main() {
-    // Start the regular tracer and return it as an opentracing.Tracer. You may use
-    // the same set of options as you normally would with the Datadog tracer.
+    // Start the regular tracer and return it as an opentracing.Tracer interface. You
+    // may use the same set of options as you normally would with the Datadog tracer.
     t := opentracer.Start(tracer.WithServiceName("my-service"))
 
     // Stop it using the regular Stop call.
@@ -140,9 +135,24 @@ func main() {
 **Note**: Using the [OpenTracing API][4] in parallel with the regular API or our integrations is fully supported. Under the hood, all of them
 make use of the same tracer. Make sure to check out the [API documentation][opentracing godoc] for more examples and details.
 
-## Further Reading
+## Sampling / Distributed Tracing
 
-Find more information in the [package documentation][tracer godoc] about distributed tracing and sampling priority.
+Distributed tracing allows you to propagate a single trace across multiple services, so you can see performance end-to-end. For more details about how to use and configure distributed tracing, check out the [package documentation][tracer godoc].
+
+Make use of priority sampling to ensure that distributed traces are complete. You may set the sampling priority of a trace by adding the `sampling.priority` tag to its root span. This will be propagated throughout the entire stack. For example:
+
+```go
+span.SetTag(ext.SamplingPriority, ext.PriorityUserKeep)
+```
+
+Possible values for the sampling priority tag are:
+
+| Sampling Value             | Effect                                                                                                      |
+| -------------------------- | :---------------------------------------------------------------------------------------------------------- |
+| ext.PriorityAutoReject     | The sampler automatically decided to not keep the trace. The Agent will drop it.                            |
+| ext.PriorityAutoKeep       | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side.  |
+| ext.PriorityUserReject     | The user asked to not keep the trace. The Agent will drop it.                                               |
+| ext.PriorityUserKeep       | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                      |
 
 {{< partial name="whats-next/whats-next.html" >}}
 
