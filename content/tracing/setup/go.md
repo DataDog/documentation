@@ -137,9 +137,9 @@ make use of the same tracer. Make sure to check out the [API documentation][open
 
 ## Sampling / Distributed Tracing
 
-Distributed tracing allows you to propagate a single trace across multiple services, so you can see performance end-to-end. For more details about how to use and configure distributed tracing, check out the [package documentation][tracer godoc].
+See your end-to-end performances by propagating a single trace across multiple services with distributed tracing. For more details about how to use and configure distributed tracing, check out the [package documentation][tracer godoc].
 
-Make use of priority sampling to ensure that distributed traces are complete. You may set the sampling priority of a trace by adding the `sampling.priority` tag to its root span. This will be propagated throughout the entire stack. For example:
+Make use of priority sampling to ensure that distributed traces are complete. Set the sampling priority of a trace by adding the `sampling.priority` tag to its root span. This is then propagated throughout the entire stack. For example:
 
 ```go
 span.SetTag(ext.SamplingPriority, ext.PriorityUserKeep)
