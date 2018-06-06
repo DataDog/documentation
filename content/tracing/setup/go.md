@@ -5,10 +5,10 @@ aliases:
 - /tracing/go/
 - /tracing/languages/go
 further_reading:
-- link: "https://github.com/DataDog/dd-trace-go"
+- link: "https://github.com/DataDog/dd-trace-go/tree/v1"
   tag: "Github"
   text: Source code
-- link: "https://godoc.org/github.com/DataDog/dd-trace-go/tracer"
+- link: "https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
   tag: "GoDoc"
   text: Package page
 - link: "tracing/visualization/"
@@ -16,45 +16,41 @@ further_reading:
   text: "Explore your services, resources and traces"
 ---
 
-## Installation
+## Getting Started
 
-To begin tracing applications written in Go, first [install and configure the Datadog Agent][1] (see additional documentation for [tracing Docker applications](/tracing/setup/docker/)).
+For configuration instructions and details about using the API, check out our [API documentation][api docs] for manual instrumentation, and our [integrations section][contrib docs] for Go libraries and frameworks supporting automatic instrumentation.
 
-Next, install the Go Tracer from the Github repository:
+For a description of the terminology used in APM, take a look at the [Getting started with APM section][getting started]. For details about contributing, check the official repository [README.md file][repo readme]. 
+
+Consult our [migration document][migrating] if you need to migrate from an older version of the tracer (e.g. v<0.6.x) to newest version.
+
+### Requirements
+
+To begin tracing your Go applications, your environment must first meet the following requirements:
+
+* Runing the Datadog Agent >= 5.21.1. See ["Install and configure the Datadog Agent"][1] (additional documentation for [tracing Docker applications](/tracing/setup/docker/)).
+* Using Go 1.9+
+
+### Installation
+
+Next, install the Go tracer from its canonical import path:
 
 ```go
-go get "github.com/DataDog/dd-trace-go/tracer"
+go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace
 ```
 
-Finally, import the tracer and instrument your code!
+You are now ready to import the tracer and start instrumenting your code!
 
-## Example
+## Automatic Instrumentation
 
-```go
-package main
+We have built a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. Find below the list of currently supported integrations. 
 
-import (
-  "github.com/DataDog/dd-trace-go/tracer"
-)
+**Note**: The [official documentation][contrib godoc] also provides a detailed overview of the supported packages and their APIs, along with usage examples.
 
-func main {
-  span := tracer.NewRootSpan("web.request", "my_service", "resource_name")
-  defer span.Finish()
-  span.SetMeta("my_tag", "my_value")
-}
-```
+### Frameworks
 
-For another example, see the [`example_test.go`][2] file in the Go Tracer package
+Integrate the Go tracer with the following list of web frameworks using one of our helper packages.
 
-## Compatibility
-
-Currently, only Go 1.7+ is supported.
-
-### Framework Compatibility
-
-The ddtrace library includes support for a number of web frameworks, including:
-
-___
 
 | Framework     | Framework Documentation                 | GoDoc Datadog Documentation                                                          |
 | ------------- | --------------------------------------- | ------------------------------------------------------------------------------------ |
@@ -65,9 +61,7 @@ ___
 
 ### Library Compatibility
 
-It also includes support for the following data stores and libraries:
-
-___
+The Go tracer includes support for the following data stores and libraries. Make sure to visit our integrations package [godoc page][contrib godoc] for an in-depth look.
 
 | Library             | Library Documentation                                                 | GoDoc Datadog Documentation                                                                |
 | ------------------- | --------------------------------------------------                    | ------------------------------------------------------------------------------------------ |
@@ -80,53 +74,95 @@ ___
 | SQL                 | https://godoc.org/github.com/DataDog/dd-trace-go/contrib/database/sql | https://godoc.org/github.com/DataDog/dd-trace-go/contrib/database/sql                      |
 | SQLx                | https://github.com/jmoiron/sqlx                                       | https://godoc.org/github.com/DataDog/dd-trace-go/contrib/jmoiron/sqlx                      |
 
-### OpenTracing API
+## Manual Instrumentation
 
-Datadog APM client that implements an [OpenTracing][3] Tracer.
-
-**Initialization**
-
-To start using the Datadog Tracer with the OpenTracing API, you should first initialize the tracer with a proper `Configuration` object:
+To make use of manual instrumentation, use the `tracer` package which is documented on our [godoc page][tracer godoc]. One simple example would be:
 
 ```go
-import (
-  // ddtrace namespace is suggested
-  ddtrace "github.com/DataDog/dd-trace-go/opentracing"
-  opentracing "github.com/opentracing/opentracing-go"
-)
+package main
+
+import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 
 func main() {
-  // create a Tracer configuration
-  config := ddtrace.NewConfiguration()
-  config.ServiceName = "api-intake"
-  config.AgentHostname = "ddagent.consul.local"
+    // Start the tracer with zero or more options.
+    tracer.Start(tracer.WithServiceName("my-service"))
+    defer tracer.Stop()
 
-  // initialize a Tracer and ensure a graceful shutdown
-  // using the `closer.Close()`
-  tracer, closer, err := ddtrace.NewTracer(config)
-  if err != nil {
-    // handle the configuration error
-  }
-  defer closer.Close()
+    // Create a span for a web request at the /posts URL.
+    span := tracer.StartSpan("web.request", tracer.ResourceName("/posts"))
+    defer span.Finish()
 
-  // set the Datadog tracer as a GlobalTracer
-  opentracing.SetGlobalTracer(tracer)
-  startWebServer()
+    // Set metadata
+    span.SetTag("my_tag", "my_value")
 }
 ```
 
-Function `NewTracer(config)` returns an `io.Closer` instance that can be used to gracefully shutdown the `tracer`. It's recommended to always call the `closer.Close(), otherwise internal buffers are not flushed and you may lose some traces.
+## OpenTracing Support
 
-**Usage**
+Import the [`opentracer` package][opentracing godoc] to expose the Datadog tracer as an [OpenTracing][3] compatible tracer.
 
-See [Opentracing documentation][4] for some usage patterns. Legacy documentation is available in [GoDoc format][5].
+### Example
 
+A basic usage would be:
+
+```go
+package main
+
+import (
+    "github.com/opentracing/opentracing-go"
+
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func main() {
+    // Start the regular tracer and return it as an opentracing.Tracer interface. You
+    // may use the same set of options as you normally would with the Datadog tracer.
+    t := opentracer.Start(tracer.WithServiceName("my-service"))
+
+    // Stop it using the regular Stop call.
+    defer tracer.Stop()
+    
+    // Set the global OpenTracing tracer.
+    opentracing.SetGlobalTracer(t)
+
+    // Use the OpenTracing API as usual.
+}
+```
+
+**Note**: Using the [OpenTracing API][4] in parallel with the regular API or our integrations is fully supported. Under the hood, all of them
+make use of the same tracer. Make sure to check out the [API documentation][opentracing godoc] for more examples and details.
+
+## Sampling / Distributed Tracing
+
+Propagate a single trace across multiple services with distributed tracing. For more details about how to use and configure distributed tracing, check out the [godoc page][tracer godoc].
+
+Make use of priority sampling to ensure that distributed traces are complete. Set the sampling priority of a trace by adding the `sampling.priority` tag to its root span. This is then propagated throughout the entire stack. For example:
+
+```go
+span.SetTag(ext.SamplingPriority, ext.PriorityUserKeep)
+```
+
+Possible values for the sampling priority tag are:
+
+| Sampling Value             | Effect                                                                                                      |
+| -------------------------- | :---------------------------------------------------------------------------------------------------------- |
+| ext.PriorityAutoReject     | The sampler automatically decided to not keep the trace. The Agent will drop it.                            |
+| ext.PriorityAutoKeep       | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side.  |
+| ext.PriorityUserReject     | The user asked to not keep the trace. The Agent will drop it.                                               |
+| ext.PriorityUserKeep       | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                      |
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/setup
-[2]: https://github.com/DataDog/dd-trace-go/blob/master/tracer/example_test.go
 [3]: http://opentracing.io
 [4]: https://github.com/opentracing/opentracing-go
-[5]: https://godoc.org/github.com/DataDog/dd-trace-go/tracer
+[tracer godoc]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
+[contrib godoc]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib
+[opentracing godoc]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer
+[api docs]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
+[contrib docs]: #automatic-instrumentation
+[getting started]: https://docs.datadoghq.com/tracing/visualization/
+[repo readme]: https://github.com/DataDog/dd-trace-go/tree/v1#contributing
+[migrating]: https://github.com/DataDog/dd-trace-go/tree/v1/MIGRATING.md
