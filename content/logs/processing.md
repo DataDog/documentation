@@ -157,6 +157,22 @@ These settings:
 Give the following results:
 {{< img src="logs/processing/useragent_processor.png" alt="Useragent processor" responsive="true" popup="true">}}
 
+### Category Processor
+
+Use the Category Processor to add a new attribute (withtout space or special characters in the new attribute name) to a log matching a provided search query.
+Categories are very useful to create meaningful groups which can be used in any analytical view (eg URL groups, Machine groups, environments, response time buckets, etc....).
+
+For example to categorise your web access logs depending on the status code range value (2xx for a response code between 200 and 299, 3xx for a response code between 300 and 399, ...) add this processor:
+
+https://cl.ly/3S110r3Y3g06
+
+It gives the following result:
+
+https://cl.ly/3c2B2c2I322s
+
+**Important Note**: The query can be done on any log attribute or tag no matter if it is a facet or not, wildcards can also be used.
+Once the log has matched one of the processor query, it stops. Make sure they are properly ordered in case a log could match several queries.
+
 ### Log Message Remapper
 
 The message is a key attribute in Datadog. It is displayed in the message column of the log explorer and you can do full string search on it. Use this processor to define some attributes as the official log message, just enter the attribute path in the processor tile as follows:
