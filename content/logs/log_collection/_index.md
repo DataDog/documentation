@@ -1,5 +1,5 @@
 ---
-title: Datadog Agent Log collection
+title: Log Collection & Integrations
 kind: Documentation
 description: "Configure your Datadog agent to gather logs from your host, containers, and services."
 aliases:

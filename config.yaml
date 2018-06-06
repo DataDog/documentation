@@ -546,7 +546,7 @@ languages:
           pre: "nav_logs"
           weight: 90
         - identifier: customnav_lognav_collection
-          name: "Log collection"
+          name: "Log Collection & Integrations"
           url: "logs/log_collection/"
           weight: 20
           parent: menu_references_logs
@@ -584,6 +584,11 @@ languages:
           name: "Syslog-ng"
           url: "logs/log_collection/syslog_ng"
           weight: 250
+          parent: customnav_lognav_collection
+        - identifier: customnav_lognav_other
+          name: "Other Integrations"
+          url: "integrations/#cat-log-collection"
+          weight: 260
           parent: customnav_lognav_collection
         # LOGS - Subnav start
         - identifier: customnav_lognav_explore
@@ -1289,11 +1294,61 @@ languages:
           url: "logs/"
           pre: "nav_logs"
           weight: 90
+        - identifier: customnav_lognav_collection
+          name: "Log Collection & Integrations"
+          url: "logs/log_collection/"
+          weight: 20
+          parent: menu_references_logs
+        - identifier: customnav_lognav_aws
+          name: "AWS"
+          url: "integrations/amazon_web_services/#log-collection"
+          weight: 205
+          parent: customnav_lognav_collection
+        - identifier: docker_log_collection
+          name: "Docker"
+          url: "logs/log_collection/docker"
+          weight: 208
+          parent: customnav_lognav_collection
+        - identifier: customnav_lognav_fluentd
+          name: "FluentD"
+          url: "logs/log_collection/fluentd"
+          weight: 210
+          parent: customnav_lognav_collection
+        - identifier: customnav_lognav_logstash
+          name: "Logstash"
+          url: "logs/log_collection/logstash"
+          weight: 220
+          parent: customnav_lognav_collection
+        - identifier: customnav_lognav_nxlog
+          name: "NxLog"
+          url: "logs/log_collection/nxlog"
+          weight: 230
+          parent: customnav_lognav_collection
+        - identifier: customnav_lognav_rsyslog
+          name: "Rsyslog"
+          url: "logs/log_collection/rsyslog"
+          weight: 240
+          parent: customnav_lognav_collection
+        - identifier: customnav_lognav_syslog_ng
+          name: "Syslog-ng"
+          url: "logs/log_collection/syslog_ng"
+          weight: 250
+          parent: customnav_lognav_collection
+        - identifier: customnav_lognav_other
+          name: "Autres Integrations"
+          url: "integrations/#cat-log-collection"
+          weight: 260
+          parent: customnav_lognav_collection
         # LOGS - Subnav start
         - identifier: customnav_lognav_explore
-          name: "Recherche et graphique"
+          name: "Search"
           url: "logs/explore/"
           weight: 30
+          parent: menu_references_logs
+        - identifier: customnav_lognav_graph
+          name: "Log Graph"
+          url: "logs/graph/"
+          weight: 35
           parent: menu_references_logs
         - identifier: customnav_lognav_processing
           name: "Processing"
@@ -1305,18 +1360,13 @@ languages:
           url: "logs/parsing/"
           weight: 50
           parent: menu_references_logs
-        - identifier: customnav_lognav_aws
-          name: "Collecte des logs AWS"
-          url: "integrations/amazon_web_services/#log-collection"
+        - identifier: customnav_lognav_dynamic_volume_control
+          name: "Dynamic volume control"
+          url: "logs/dynamic_volume_control/"
           weight: 60
           parent: menu_references_logs
-        - identifier: docker_log_collection
-          name: "Collecte des logs Docker"
-          url: "logs/docker"
-          weight: 70
-          parent: menu_references_logs
         - identifier: customnav_lognav_languages
-          name: "Languages"
+          name: "Application log"
           url: "logs/languages/"
           weight: 80
           parent: menu_references_logs
@@ -1340,6 +1390,11 @@ languages:
           url: "logs/languages/nodejs/"
           weight: 840
           parent: customnav_lognav_languages
+        - identifier: customnav_lognav_php
+          name: "PHP"
+          url: "logs/languages/php/"
+          weight: 850
+          parent: customnav_lognav_languages
         - identifier: customnav_lognav_python
           name: "Python"
           url: "logs/languages/python/"
@@ -1351,16 +1406,10 @@ languages:
           weight: 860
           parent: customnav_lognav_languages
         - identifier: customnav_lognav_monitor
-          name: "Monitor de Log"
+          name: "Log monitor"
           url: "monitors/monitor_types/log"
           weight: 90
           parent: menu_references_logs
-        #- identifier: customnav_lognav_faq
-        #  name: "FAQ"
-        #  url: "logs/faq/"
-        #  weight: 90
-        #  parent: menu_references_logs
-        # LOGS - Subnav end
 
         # DEVELOPERS
         - identifier: menu_references_developers
