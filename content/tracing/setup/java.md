@@ -190,7 +190,7 @@ class InstrumentedClass {
 
 In this case, you dont need to call `scope.close()`.
 
-If you’re not using `dd-trace-java.jar`, you must register a configured tracer with `GlobalTracer`. This can be easily done by calling `GlobalTracer.register(new DDTracer())` early on in your application startup (ie, main method).
+If you’re not using `dd-java-agent.jar`, you must register a configured tracer with `GlobalTracer`. This can be easily done by calling `GlobalTracer.register(new DDTracer())` early on in your application startup (ie, main method).
 
 ```java
 import datadog.opentracing.DDTracer;
@@ -272,6 +272,7 @@ Datadog's [JMX Integration][7] monitors additional metrics around: JVM heap memo
 | Server                  | Versions   |
 | :---------------------- | :--------- |
 | Java Servlet Compatible | 2.3+, 3.0+ |
+| Play                    | 2.4-2.6    |
 | Jax-RS Annotations      | JSR311-API |
 | Spring-Web              | 4.0+       |
 
@@ -284,14 +285,15 @@ Don't see your desired web frameworks? We're continually adding additional suppo
 
 `dd-java-agent` includes support for automatically tracing the following networking frameworks.
 
-| Framework               | Versions |
-| :---------------------- | :------- |
-| [OkHTTP][8]             | 3.x      |
-| [Apache HTTP Client][9] | 4.3 +    |
-| [JMS 2][10]             | 2.x      |
-| AWS Java SDK            | 1.11.0+  |
-| Kafka-Clients           | 0.11+    |
-| Kafka-Streams           | 0.11+    |
+| Framework           | Versions |
+| :------------------ | :------- |
+| Jax RS Client       | 1.11+    |
+| OkHTTP              | 3.0+     |
+| Apache HTTP Client  | 4.3+     |
+| JMS                 | 1 and 2  |
+| AWS Java SDK        | 1.11+    |
+| Kafka-Clients       | 0.11+    |
+| Kafka-Streams       | 0.11+    |
 
 Don't see your desired networking framework? We're continually adding additional support, [check with our team][2] to see if we can help.
 
@@ -301,10 +303,10 @@ Don't see your desired networking framework? We're continually adding additional
 
 | Database        | Versions       |
 | :-------------  | :------------- |
-| JDBC            | 4.x            |
-| [MongoDB][11]   | 3.x            |
-| [Cassandra][12] | 3.2.x          |
-| Jedis           | 1.4.0+         |
+| JDBC            | N/A            |
+| MongoDB         | 3.0+           |
+| Cassandra       | 3.2+           |
+| Jedis           | 1.4+           |
 
 `dd-java-agent` is also compatible with common JDBC drivers including:
 
@@ -321,17 +323,26 @@ Don't see your desired networking framework? We're continually adding additional
 
 Don't see your desired datastores? We're continually adding additional support, [check with our team][2] to see if we can help.
 
+### Other Frameworks
+
+`dd-java-agent` includes support for automatically tracing the following other frameworks.
+
+| Framework               | Versions |
+| :---------------------- | :------- |
+| Hystrix                 | 1.4+     |
+
+Don't see your desired framework? We're continually adding additional support, [check with our team][2] to see if we can help.
+
 ### Beta Instrumentation
 
 `dd-java-agent` ships with some newer instrumentation disabled by default.
 
 | Instrumentation | Versions | JVM Arg to enable                                                                  |
 | :-------------- | :------- | :----------------                                                                  |
-| Jax RS Client   | 1.11.0+  | `-Ddd.integration.jax-rs.enabled=true`                                             |
-| Play            | 2.4-2.6  | `-Ddd.integration.java_concurrent.enabled=true -Ddd.integration.play.enabled=true` |
-| Ratpack         | 1.4.0+   | `-Ddd.integration.ratpack.enabled=true`                                            |
+| Elasticsearch Rest Client   | 5.0+   | `-Ddd.integration.elasticsearch.enabled=true`                            |
+| Elasticsearch Transport Client   | 2.0+   | `-Ddd.integration.elasticsearch.enabled=true`                       |
+| Ratpack         | 1.4+     | `-Ddd.integration.ratpack.enabled=true`                                            |
 | Spark Java      | 2.4+     | `-Ddd.integration.sparkjava.enabled=true -Ddd.integration.jetty.enabled=true`      |
-| Hystrix         | 1.4.0+   | `-Ddd.integration.hystrix.enabled=true`                                            |
 
 ## Further Reading
 
@@ -344,8 +355,3 @@ Don't see your desired datastores? We're continually adding additional support, 
 [5]: /tracing/visualization/services_list/
 [6]: https://github.com/opentracing/opentracing-java
 [7]: https://docs.datadoghq.com/integrations/java/
-[8]: https://github.com/opentracing-contrib/java-okhttp
-[9]: https://github.com/opentracing-contrib/java-apache-httpclient
-[10]: https://github.com/opentracing-contrib/java-jms
-[11]: https://github.com/opentracing-contrib/java-mongo-driver
-[12]: https://github.com/opentracing-contrib/java-cassandra-driver
