@@ -143,6 +143,7 @@ class PreBuild:
             'hdfs': {'action': 'create', 'target': 'hdfs', 'remove_header': False, 'fm': {'is_public': True, 'kind': 'integration', 'integration_title': 'Hdfs', 'short_description': 'Track cluster disk usage, volume failures, dead DataNodes, and more.'}},
             'mesos': {'action': 'create', 'target': 'mesos', 'remove_header': False, 'fm': {'is_public': True, 'kind': 'integration', 'integration_title': 'Mesos', 'short_description': 'Track cluster resource usage, master and slave counts, tasks statuses, and more.'}},
             'activemq_xml': {'action': 'merge', 'target': 'activemq', 'remove_header': False},
+            'amazon_eks': {'action': 'discard', 'target': 'none', 'remove_header': False},
             'cassandra_nodetool': {'action': 'merge', 'target': 'cassandra', 'remove_header': False},
             'datadog_checks_base': {'action': 'discard', 'target': 'none', 'remove_header': False},
             'datadog_checks_tests_helper': {'action': 'discard', 'target': 'none', 'remove_header': False},
