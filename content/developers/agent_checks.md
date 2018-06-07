@@ -427,7 +427,16 @@ Custom Agent checks can't be directly called from python and instead need to be 
 
 To test this, run:
 
-    sudo -u dd-agent dd-agent check <CHECK_NAME>
+| Agent version | Command                                             |
+| :------       | :----                                               |
+| v5.x          | `sudo -u dd-agent dd-agent check <CHECK_NAME>`      |
+| v6.x          | `sudo -u dd-agent datadog-agent check <CHECK_NAME>` |
+
+If you want to include rate metrics, add `--check-rate` to your command, for instance for agent v6.x run:
+
+```
+sudo -u dd-agent datadog-agent check <CHECK_NAME> --check-rate
+```
 
 If your issue continues, reach out to Support with the [help page][11] that lists the paths it installs.
 
