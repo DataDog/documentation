@@ -23,14 +23,14 @@ The easiest way to get your custom application metrics into Datadog is to send t
 * Service checks and Events
 * Tagging
 
+Any compliant StatsD client will work, but using the Datadog DogStatsD client gives you a few extra features, such as tags.
+
 **Note**: DogStatsD does NOT implement the following from StatsD:
 
 * Gauge deltas (see [this issue][1])
 * Timers as a native metric type (though it [does support them via histograms](#timers))
 
-**Note**: Any StatsD client works just fine, but using the Datadog DogStatsD client gives you a few extra features.
-
-## How It Works
+## How it works
 
 DogStatsD accepts [custom metrics][6], events, and service checks over UDP and periodically aggregates and forwards them to Datadog.
 Because it uses UDP, your application can send metrics to DogStatsD and resume its work without waiting for a response. If DogStatsD ever becomes unavailable, your application won't skip a beat.
@@ -76,7 +76,7 @@ By default, DogStatsD listens on UDP port **8125**. If you need to change this, 
 
 [Restart DogStatsD][7] to effect the change.
 
-## Data Types
+## Data types
 
 While StatsD only accepts metrics, DogStatsD accepts all three major data types Datadog supports: metrics, events, and service checks. This section shows typical use cases for each type.
 
@@ -205,7 +205,7 @@ def handle_file(file, file_size):
 
 Since histograms are an extension to StatsD, use a [DogStatsD client library][2].
 
-#### Metric option: Sample Rates
+#### Metric option: sample rates
 
 Since the overhead of sending UDP packets can be too great for some performance
 intensive code paths, DogStatsD clients support sampling,
@@ -271,7 +271,7 @@ def algorithm_two():
 
 Since tagging is an extension to StatsD, use a [DogStatsD client library][2].
 
-## Datagram Format
+## Datagram format
 
 This section specifies the raw datagram format for each data type DogStatsD accepts. You don't need to know this if
 you're using any of the DogStatsD client libraries, but if you want to send data to DogStatsD without the libraries
@@ -406,7 +406,7 @@ PS C:\vagrant> $text = "This was sent from Powershell!"
 PS C:\vagrant> .\send-statsd.ps1 "_e{$($title.length),$($text.Length)}:$title|$text|#shell,powershell"
 ```
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
