@@ -680,6 +680,16 @@ languages:
           url: "developers/dogstatsd/"
           weight: 30
           parent: menu_references_developers
+        - identifier: customnav_developersnav_dogstatsd_data_types
+          name: "Data Types and Tags"
+          url: "developers/dogstatsd/data_types"
+          weight: 301
+          parent: customnav_developersnav_dogstatsd
+        - identifier: customnav_developersnav_dogstatsd_datagram_shell
+          name: "Datagram and Shell Usage"
+          url: "developers/dogstatsd/datagram_shell"
+          weight: 302
+          parent: customnav_developersnav_dogstatsd
         - identifier: customnav_developersnav_libraries
           name: "Libraries"
           url: "developers/libraries/"
@@ -1423,6 +1433,16 @@ languages:
           url: "developers/dogstatsd/"
           weight: 30
           parent: menu_references_developers
+        - identifier: customnav_developersnav_dogstatsd_data_types
+          name: "Types de Données et Tags"
+          url: "developers/dogstatsd/data_types"
+          weight: 301
+          parent: customnav_developersnav_dogstatsd
+        - identifier: customnav_developersnav_dogstatsd_datagram_shell
+          name: "Datagramme et l'Interface Système"
+          url: "developers/dogstatsd/datagram_shell"
+          weight: 302
+          parent: customnav_developersnav_dogstatsd
         - identifier: customnav_developersnav_libraries
           name: "Bibliothèques"
           url: "developers/libraries/"
