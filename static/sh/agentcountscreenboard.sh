@@ -17,7 +17,9 @@ curl -X POST -H "Content-type: application/json" \
                 "x": 24,
 
                 "query": "Datadog agent started",
-                "timeframe": "1w"
+                "time": {
+                    "live_span": "1w"
+                }
             },
             {"type": "timeseries",
 
@@ -32,7 +34,9 @@ curl -X POST -H "Content-type: application/json" \
                "y": 1,
                "x": 1,
 
-               "timeframe": "1w",
+               "time": {
+                    "live_span": "1w"
+                },
                  "tile_def": {
                    "viz": "timeseries",
                    "requests": [
@@ -59,7 +63,9 @@ curl -X POST -H "Content-type: application/json" \
                "y": 1,
                "x": 50,
 
-               "timeframe": "1w",
+               "time": {
+                    "live_span": "1w"
+                },
                  "tile_def": {
                    "viz": "timeseries",
                    "requests": [
