@@ -30,7 +30,7 @@ Suppose we wish to monitor an error rate, which we calculate as:
 
 Let’s take this query for the time frame between *11:00:00* and *11:05:00*:
 
-`min(last_5m): sum:requests.error{*}.as_count() / sum:requests.total{*}.as_count()`   
+`sum(last_5m): sum:requests.error{*}.as_count() / sum:requests.total{*}.as_count()`   
 
 For the 5 min timeframe there are 5 time series points (zeros excluded):
 
@@ -98,11 +98,11 @@ Since this special behavior is tied to the `as_count` modifier, we encourage rep
 *Example:* Suppose you wish to monitor the error rate of a service:
 
 Suppose you want to be alerted when the error rate is above 50% at all times during the past 5 min. You might have a query like:
-`min(last_5m):sum:requests.error{*}.as_count() / sum:requests.total{*}.as_count() > 0.5 ` 
+`sum(last_5m):sum:requests.error{*}.as_count() / sum:requests.total{*}.as_count() > 0.5 ` 
 
 To correctly rewrite it in the explicit format, the query can be rewritten like:
 
-`min(last_5m): ( default(sum:requests.error{*}.as_rate(),0) / sum:requests.total{*}.as_rate() )`
+`sum(last_5m): ( default(sum:requests.error{*}.as_rate(),0) / sum:requests.total{*}.as_rate() )`
 
 Please [reach out to us][1] if you have any questions regarding these changes.
 

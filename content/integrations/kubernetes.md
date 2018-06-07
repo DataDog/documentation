@@ -56,6 +56,8 @@ To gather your kube-state metrics:
 
 Since [Agent v6][4], Kubernetes DNS integration works automatically with the [Autodiscovery][5].
 
+- Please note that these metrics are unavailable for Azure Kubernetes Service (AKS) at this point in time.  
+
 ## Collect container logs
 
 **Available for Agent >6.0**
@@ -71,6 +73,9 @@ Take advantage of DaemonSets to [automatically deploy the Datadog Agent on all y
 ### Metrics
 #### Kubernetes
 {{< get-metrics-from-git "kubernetes" >}}
+
+#### Kubelet
+{{< get-metrics-from-git "kubelet" >}}
 
 #### Kubernetes State
 {{< get-metrics-from-git "kubernetes_state" >}}
@@ -148,4 +153,4 @@ To get a better idea of how (or why) to integrate your Kubernetes service, check
 [12]: /integrations/faq/using-rbac-permission-with-your-kubernetes-integration
 [13]: https://www.datadoghq.com/blog/monitoring-kubernetes-era/
 [14]: https://app.datadoghq.com/account/settings#agent/kubernetes
-[15]: https://docs.datadoghq.com/logs/log_collection/docker/#setup
+[15]: https://docs.datadoghq.com/agent/basic_agent_usage/kubernetes/#log-collection-setup

@@ -161,11 +161,6 @@ languages:
           url: "agent/network"
           weight: 40
           parent: menu_references_agent
-        - identifier: agent_checks
-          name: "Agent Checks"
-          url: "agent/agent_checks"
-          weight: 50
-          parent: menu_references_agent
         - identifier: prometheus
           name: "Prometheus Checks"
           url: "agent/prometheus"
@@ -224,10 +219,20 @@ languages:
           url: "graphing/dashboards/timeboard/"
           weight: 110
           parent: customnav_graphingnav_dashboards
+        - identifier: customnav_graphingnav_template_variables
+          name: "Template Variables"
+          url: "graphing/dashboards/template_variables/"
+          weight: 120
+          parent: customnav_graphingnav_dashboards
+        - identifier: customnav_graphingnav_shared_graph
+          name: "Shared Graphs"
+          url: "graphing/dashboards/shared_graph/"
+          weight: 130
+          parent: customnav_graphingnav_dashboards
         - identifier: customnav_graphingnav_widgets
           name: "Widgets"
           url: "graphing/dashboards/widgets/"
-          weight: 120
+          weight: 140
           parent: customnav_graphingnav_dashboards
         - identifier: customnav_graphingnav_notebooks
           name: "Notebooks"
@@ -428,6 +433,11 @@ languages:
           url: "tracing/setup/java/"
           weight: 140
           parent: customnav_tracingnav_setup
+        - identifier: customnav_tracingnav_javascript
+          name: "JavaScript"
+          url: "tracing/setup/javascript/"
+          weight: 145
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_python
           name: "Python"
           url: "tracing/setup/python/"
@@ -536,7 +546,7 @@ languages:
           pre: "nav_logs"
           weight: 90
         - identifier: customnav_lognav_collection
-          name: "Log collection"
+          name: "Log Collection & Integrations"
           url: "logs/log_collection/"
           weight: 20
           parent: menu_references_logs
@@ -574,6 +584,11 @@ languages:
           name: "Syslog-ng"
           url: "logs/log_collection/syslog_ng"
           weight: 250
+          parent: customnav_lognav_collection
+        - identifier: customnav_lognav_other
+          name: "Other Integrations"
+          url: "integrations/#cat-log-collection"
+          weight: 260
           parent: customnav_lognav_collection
         # LOGS - Subnav start
         - identifier: customnav_lognav_explore
@@ -675,20 +690,36 @@ languages:
           url: "developers/metrics/"
           weight: 50
           parent: menu_references_developers
-        - identifier: customnav_integrationsnav_new_integration
-          name: "Create a new integration"
-          url: "developers/integrations/"
+        - identifier: customnav_developersnav_agent_checks
+          name: "Write an Agent Check"
+          url: "developers/agent_checks"
           weight: 60
           parent: menu_references_developers
-        - identifier: customnav_integrationsnav_integration_sdk
-          name: "Integration SDK"
-          url: "developers/integrations/integration_sdk/"
-          weight: 900
+        - identifier: customnav_developersnav_prometheus
+          name: "Write a Prometheus Check"
+          url: "developers/prometheus"
+          weight: 70
+          parent: menu_references_developers
+        # Integrations core doc
+        - identifier: customnav_integrationsnav_new_integration
+          name: "Integrations"
+          url: "developers/integrations/"
+          weight: 80
+          parent: menu_references_developers
+        - identifier: customnav_integrationsnav_new_check_howto
+          name: "Create a new Integration"
+          url: "developers/integrations/new_check_howto"
+          weight: 801
           parent: customnav_integrationsnav_new_integration
-        - identifier: customnav_developersnav_testing
-          name: "Testing"
-          url: "developers/integrations/testing/"
-          weight: 910
+        - identifier: customnav_integrationsnav_python
+          name: "Python"
+          url: "developers/integrations/python"
+          weight: 802
+          parent: customnav_integrationsnav_new_integration
+        - identifier: customnav_integrationsnav_legacy
+          name: "Legacy"
+          url: "developers/integrations/legacy"
+          weight: 803
           parent: customnav_integrationsnav_new_integration
         #- identifier: customnav_developersnav_faq
         #  name: "FAQ"
@@ -884,11 +915,6 @@ languages:
           url: "agent/network"
           weight: 40
           parent: menu_references_agent
-        - identifier: agent_checks
-          name: "Check de l'Agent"
-          url: "agent/agent_checks"
-          weight: 50
-          parent: menu_references_agent
         - identifier: prometheus
           name: "Check Prometheus"
           url: "agent/prometheus"
@@ -947,10 +973,20 @@ languages:
           url: "graphing/dashboards/timeboard/"
           weight: 110
           parent: customnav_graphingnav_dashboards
+        - identifier: customnav_graphingnav_template_variables
+          name: "Template Variables"
+          url: "graphing/dashboards/template_variables/"
+          weight: 120
+          parent: customnav_graphingnav_dashboards
+        - identifier: customnav_graphingnav_shared_graph
+          name: "Graphiques partagés"
+          url: "graphing/dashboards/shared_graph/"
+          weight: 130
+          parent: customnav_graphingnav_dashboards
         - identifier: customnav_graphingnav_widgets
           name: "Widgets"
           url: "graphing/dashboards/widgets/"
-          weight: 120
+          weight: 140
           parent: customnav_graphingnav_dashboards
         - identifier: customnav_graphingnav_notebooks
           name: "Notebooks"
@@ -1146,6 +1182,11 @@ languages:
           url: "tracing/setup/java/"
           weight: 140
           parent: customnav_tracingnav_setup
+        - identifier: customnav_tracingnav_javascript
+          name: "JavaScript"
+          url: "tracing/setup/javascript/"
+          weight: 145
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_python
           name: "Python"
           url: "tracing/setup/python/"
@@ -1253,11 +1294,61 @@ languages:
           url: "logs/"
           pre: "nav_logs"
           weight: 90
+        - identifier: customnav_lognav_collection
+          name: "Log Collection & Integrations"
+          url: "logs/log_collection/"
+          weight: 20
+          parent: menu_references_logs
+        - identifier: customnav_lognav_aws
+          name: "AWS"
+          url: "integrations/amazon_web_services/#log-collection"
+          weight: 205
+          parent: customnav_lognav_collection
+        - identifier: docker_log_collection
+          name: "Docker"
+          url: "logs/log_collection/docker"
+          weight: 208
+          parent: customnav_lognav_collection
+        - identifier: customnav_lognav_fluentd
+          name: "FluentD"
+          url: "logs/log_collection/fluentd"
+          weight: 210
+          parent: customnav_lognav_collection
+        - identifier: customnav_lognav_logstash
+          name: "Logstash"
+          url: "logs/log_collection/logstash"
+          weight: 220
+          parent: customnav_lognav_collection
+        - identifier: customnav_lognav_nxlog
+          name: "NxLog"
+          url: "logs/log_collection/nxlog"
+          weight: 230
+          parent: customnav_lognav_collection
+        - identifier: customnav_lognav_rsyslog
+          name: "Rsyslog"
+          url: "logs/log_collection/rsyslog"
+          weight: 240
+          parent: customnav_lognav_collection
+        - identifier: customnav_lognav_syslog_ng
+          name: "Syslog-ng"
+          url: "logs/log_collection/syslog_ng"
+          weight: 250
+          parent: customnav_lognav_collection
+        - identifier: customnav_lognav_other
+          name: "Autres Integrations"
+          url: "integrations/#cat-log-collection"
+          weight: 260
+          parent: customnav_lognav_collection
         # LOGS - Subnav start
         - identifier: customnav_lognav_explore
-          name: "Recherche et graphique"
+          name: "Search"
           url: "logs/explore/"
           weight: 30
+          parent: menu_references_logs
+        - identifier: customnav_lognav_graph
+          name: "Log Graph"
+          url: "logs/graph/"
+          weight: 35
           parent: menu_references_logs
         - identifier: customnav_lognav_processing
           name: "Processing"
@@ -1269,18 +1360,13 @@ languages:
           url: "logs/parsing/"
           weight: 50
           parent: menu_references_logs
-        - identifier: customnav_lognav_aws
-          name: "Collecte des logs AWS"
-          url: "integrations/amazon_web_services/#log-collection"
+        - identifier: customnav_lognav_dynamic_volume_control
+          name: "Dynamic volume control"
+          url: "logs/dynamic_volume_control/"
           weight: 60
           parent: menu_references_logs
-        - identifier: docker_log_collection
-          name: "Collecte des logs Docker"
-          url: "logs/docker"
-          weight: 70
-          parent: menu_references_logs
         - identifier: customnav_lognav_languages
-          name: "Languages"
+          name: "Application log"
           url: "logs/languages/"
           weight: 80
           parent: menu_references_logs
@@ -1304,6 +1390,11 @@ languages:
           url: "logs/languages/nodejs/"
           weight: 840
           parent: customnav_lognav_languages
+        - identifier: customnav_lognav_php
+          name: "PHP"
+          url: "logs/languages/php/"
+          weight: 850
+          parent: customnav_lognav_languages
         - identifier: customnav_lognav_python
           name: "Python"
           url: "logs/languages/python/"
@@ -1315,16 +1406,10 @@ languages:
           weight: 860
           parent: customnav_lognav_languages
         - identifier: customnav_lognav_monitor
-          name: "Monitor de Log"
+          name: "Log monitor"
           url: "monitors/monitor_types/log"
           weight: 90
           parent: menu_references_logs
-        #- identifier: customnav_lognav_faq
-        #  name: "FAQ"
-        #  url: "logs/faq/"
-        #  weight: 90
-        #  parent: menu_references_logs
-        # LOGS - Subnav end
 
         # DEVELOPERS
         - identifier: menu_references_developers
@@ -1333,11 +1418,6 @@ languages:
           pre: "nav_developers"
           weight: 100
         # DEVELOPERS - Subnav start
-        - identifier: customnav_developersnav_api
-          name: "API"
-          url: "api/"
-          weight: 20
-          parent: menu_references_developers
         - identifier: customnav_developersnav_dogstatsd
           name: "DogStatsD"
           url: "developers/dogstatsd/"
@@ -1353,20 +1433,36 @@ languages:
           url: "developers/metrics/"
           weight: 50
           parent: menu_references_developers
-        - identifier: customnav_integrationsnav_new_integration
-          name: "Créer une nouvelle intégration"
-          url: "developers/integrations/"
+        - identifier: customnav_integrationsnav_agent_checks
+          name: "Écrire un Check de l'Agent"
+          url: "developers/agent_checks"
           weight: 60
           parent: menu_references_developers
-        - identifier: customnav_integrationsnav_integration_sdk
-          name: "SDK pour les integrations"
-          url: "developers/integrations/integration_sdk/"
-          weight: 900
+        - identifier: customnav_integrationsnav_prometheus
+          name: "Écrire un Check Prometheus"
+          url: "developers/prometheus"
+          weight: 70
+          parent: menu_references_developers
+        # Integrations core doc
+        - identifier: customnav_integrationsnav_new_integration
+          name: "Intégrations"
+          url: "developers/integrations/"
+          weight: 80
+          parent: menu_references_developers
+        - identifier: customnav_integrationsnav_new_check_howto
+          name: "Créer une nouvelle intégration"
+          url: "developers/integrations/new_check_howto"
+          weight: 801
           parent: customnav_integrationsnav_new_integration
-        - identifier: customnav_developersnav_testing
-          name: "Tests"
-          url: "developers/integrations/testing/"
-          weight: 910
+        - identifier: customnav_integrationsnav_python
+          name: "Python"
+          url: "developers/integrations/python"
+          weight: 802
+          parent: customnav_integrationsnav_new_integration
+        - identifier: customnav_integrationsnav_legacy
+          name: "Legacy"
+          url: "developers/integrations/legacy"
+          weight: 803
           parent: customnav_integrationsnav_new_integration
         #- identifier: customnav_developersnav_faq
         #  name: "FAQ"

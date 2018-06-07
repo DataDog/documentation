@@ -24,9 +24,9 @@ The Agent sends metrics to a specific url that is specified in the `datadog.yaml
 1. Open `datadog.yaml` ([locate this configuration file on your instance][3])
 2. Edit the `dd_url` attribute to any custom value, for example:
 
-```yaml
-dd_url: xyz
-```
+    ```
+    dd_url: xyz
+    ```
 
 3. Configure the Agent to collect logs as explained in our [log documentation page][2].
 4. [Restart the Agent][4]

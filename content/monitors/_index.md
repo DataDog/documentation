@@ -11,14 +11,9 @@ description: Create & manage your notifications
 
 ## Overview
 
-Monitoring all of your infrastructure in one place wouldn't be complete without
-the ability to know when critical changes are occurring. Datadog gives you the
-ability to create monitors that actively check metrics, integration
-availability, network endpoints, and more.
+Monitoring all of your infrastructure in one place wouldn't be complete without the ability to know when critical changes are occurring. Datadog gives you the ability to create monitors that actively check metrics, integration availability, network endpoints, and more.
 
-Once a monitor is created, you are notified when its conditions are met.
-You can notify team members via email, 3rd party services (e.g. Pagerduty or
-Hipchat) or other custom endpoints via Webhooks.
+Once a monitor is created, you are notified when its conditions are met. You can also notify team members via email, 3rd party services (e.g. Pagerduty or Stride), or other custom endpoints via Webhooks.
 
 Triggered monitors appear in the [event stream][1], allowing collaboration around active issues in your applications or infrastructure. Datadog provides a high-level view of open issues on the [Triggered Monitors][2] page as well as general monitor management on the [Manage Monitors][3] page.
 
@@ -31,7 +26,6 @@ In this section you can:
 * [Manage your monitors][8]
 * [Schedule a downtime to mute a monitor][9]
 * [See all your checks into one place][10]
-* [Consult our FAQ][11]
 
 ### Glossary
 
@@ -41,20 +35,18 @@ Here is a quick overview of the different terms used:
 - **Check**: Emits one or more statuses.
 - **Monitor**: Sends notifications based on a sequence of check statuses, metric
   threshold or other alerting conditions.
-- **Monitor type**: host-, metric-, integration-, process-, network-, event-based, and custom. See side navigation to drill into a specific type.
+- **Monitor type**: [Log][15], [Forecasts][27] [host][16], [metric][17], [integration][18], [process][19], [outlier][20], [anomaly][21], [apm][22], [composite][23], [network][24], [event][25] based, and [custom][26]. See side navigation to drill into a specific type.
 - **Tags**: Configurable labels that can be applied to each metric and host. See the [Tagging][12] page for more details.
 
 ## Creating a Monitor
 
-Navigate to the [Create Monitors][13]
-page by hovering over **Monitors** in the main menu and clicking **New Monitor** in the sub-menu (depending on your chosen theme and screen resolution, the main menu may be at the top or on the left). You are presented with a list of monitor types on the left. See the [Monitoring Reference][6] to learn more about all monitor types.
+Navigate to the [Create Monitors][13] page by hovering over **Monitors** in the main menu and clicking **New Monitor** in the sub-menu (depending on your chosen theme and screen resolution, the main menu may be at the top or on the left). You are presented with a list of monitor types on the left. See the [Monitoring Reference][6] to learn more about all monitor types.
 
 {{< img src="monitors/index/nav.png" alt="navigation" responsive="true" popup="true">}}
 
 ## Export your monitor
 
-You can export the configuration JSON for a monitor right from the create screen.
-
+Export the JSON configuration for a monitor right from the create screen, or on your [monitor status page][28] in the upper right corner.
 If you manage and deploy monitors programmatically, it's easier to define the monitor in the UI and export the JSON right away:
 
 {{< img src="monitors/index/export_monitor_json.jpg" alt="export monitor" responsive="true" popup="true" >}}
@@ -79,10 +71,9 @@ Setting the above to **Notify** send an email for the monitor audit events to al
 It only makes sense in a couple cases to manually resolve your monitor:
 
 * If the monitor is in a "no data" state then resolving it hides it from the triggered monitors page.
-* If the monitor is in the triggered state but has stopped reporting data then
-resolving it hides it from the triggered monitors page.
+* If the monitor is in the triggered state but has stopped reporting data then resolving it hides it from the triggered monitors page.
 
-Otherwise the monitor picks up the current state on the next evaluation. 
+Otherwise the monitor picks up the current state on the next evaluation.
 
 In other words, if the value is still above/below the configured threshold then the monitor may re-trigger upon the next evaluation (in about 60 seconds).
 
@@ -106,7 +97,20 @@ There are multiple community projects for maintaining or managing Monitors along
 [8]: /monitors/manage_monitor
 [9]: /monitors/downtimes
 [10]: /monitors/check_summary
-[11]: /monitors/faq
 [12]: /getting_started/tagging
 [13]: https://app.datadoghq.com/monitors#/create
 [14]: /graphing/event_stream
+[15]: /monitors/monitor_types/log
+[16]: /monitors/monitor_types/host
+[17]: /monitors/monitor_types/metric
+[18]: /monitors/monitor_types/integration
+[19]: /monitors/monitor_types/process
+[20]: /monitors/monitor_types/outlier
+[21]: /monitors/monitor_types/anomaly
+[22]: /monitors/monitor_types/apm
+[23]: /monitors/monitor_types/composite
+[24]: /monitors/monitor_types/network
+[25]: /monitors/monitor_types/event
+[26]: /monitors/monitor_types/custom_check
+[27]: /monitors/monitor_types/forecasts
+[28]: /monitors/monitor_status/

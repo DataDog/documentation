@@ -35,19 +35,5 @@ Configurer votre intégration Datadog-Slack directement via l'API Datadog.
     * **`account`** [*obligatoire*]:  
         Compte auquel appartient le canal.
 
-* **`run_check`** [*optionnel*, *défaut*=**false**]:  
-    Détermine si le check d'installation d'intégration est exécutée avant de renvoyer une réponse.
-
-    * si **vrai**:
-
-        - Le check d'installation est exécuté
-        - S'il y a une erreur dans la configuration, l'erreur est renvoyée
-        - S'il n'y a pas d'erreur, le code de réponse *204 No Content* est renvoyé
-
-    * Si **false**:
-
-        - On retourne *202 accepted*
-        - Le check d'installation est exécuté après avoir renvoyé une réponse
-
 [1]: /integrations/slack
 [2]: /monitors/notifications/#slack-integration
