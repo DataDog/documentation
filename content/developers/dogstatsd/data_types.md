@@ -20,57 +20,136 @@ Each example is in Python using the [official Datadog Python client][2], but eac
 
 ## Metrics
 
-The first four metrics types (gauges, counters, timers, and sets) are familiar to StatsD users; histograms is specific to DogStatsD.
-
-### Gauges
-
-Gauges track the ebb and flow of a particular metric value over time, like the number of active users on a website:
-
-```python
-
-from datadog import statsd
-
-statsd.gauge('mywebsite.users.active', get_active_users())
-```
+Counters, gauges, and sets are familiar to StatsD users. Histograms are specific to DogStatsD. Timers, which exist in StatsD, are a sub-set of histograms in DogStatsD.
 
 ### Counters
 
-Counters track how many times something happens _per second_, like page views:
+Counters track how many times something happens _per second_, such as page views. In this example, we increment a metric called `web.page_views` each time our `render_page` function is called.
+
+For Python:
+```python
+
+def render_page():
+    """ Render a web page. """
+    statsd.increment('web.page_views')
+    return 'Hello World!'
+```
+
+For Ruby:
+```ruby
+def render_page()
+  # Render a web page.
+  statsd.increment('web.page_views')
+  return 'Hello World!'
+end
+```
+
+With this one line of code we can start graphing the data. Here's an example:
+
+{{< img src="developers/metrics/graph-guides-metrics-page-views.png" alt="graph guides metrics page views" responsive="true" popup="true">}}
+
+Note that StatsD counters are normalized over the flush interval to report per-second units. In the graph above, the marker is reporting 35.33 web page views per second at ~15:24. In contrast, if one person visited the web page each second, the graph would be a flat line at y = 1. To increment or measure values over time, see [gauges](#gauges).
+
+We can also count by arbitrary numbers. Suppose we wanted to count the number of bytes processed by a file uploading service. We increment a metric called `file_service.bytes_uploaded` by the size of the file each time our `upload_file` function is called:
+
+For Python:
+```python
+
+def upload_file(file):
+    statsd.increment('file_service.bytes_uploaded', file.size())
+    save_file(file)
+    return 'File uploaded!'
+```
+
+Note that for counters coming from another source that are ever-increasing and never reset -- for example, the number of queries from MySQL over time -- we track the rate between flushed values. While there currently isn't an elegant solution to get raw counts within Datadog, you may want to apply a function to
+your series like cumulative sum or integral. [Read more about Datadog functions][17].
+
+
+### Gauges
+
+Suppose a developer wanted to track the amount of free memory on a machine, we can periodically sample that value as the metric `system.mem.free`:
+
+For Python:
+```python
+
+# Record the amount of free memory every ten seconds.
+while True:
+    statsd.gauge('system.mem.free', get_free_memory())
+    time.sleep(10)
+```
+
+For Ruby:
+```ruby
+# Record the amount of free memory every ten seconds.
+while true do
+    statsd.gauge('system.mem.free', get_free_memory())
+    sleep(10)
+end
+```
+
+### Histograms
+
+Histograms are specific to DogStatsD. They calculate the statistical distribution of any kind of value, such as the size of files uploaded to your site:
 
 ```python
 
 from datadog import statsd
 
-def render_page():
-  statsd.increment('mywebsite.page_views') # add 1
-  # Render the page...
+def handle_file(file, file_size):
+  # Handle the file...
+
+  statsd.histogram('mywebsite.user_uploads.file_size', file_size)
+  return
 ```
 
-With this one line of code we can start graphing the data:
+Histograms can also be used with timing data, for example, the duration of a metrics query:
 
-{{< img src="developers/dogstatsd/graph-guides-metrics-page-views.png" alt="graph guides metrics page views" responsive="true" popup="true">}}
-
-DogStatsD normalizes counters over the flush interval to report
-per-second units. In the graph above, the marker is reporting
-35.33 web page views per second at ~15:24. In contrast, if one person visited
-the webpage each second, the graph would be a flat line at y = 1.
-
-To increment or measure values over time rather than per second, use a gauge.
-
-### Sets
-
-Sets count the number of unique elements in a group. To track the number of unique visitors to your site, use a set:
-
+For Python:
 ```python
 
-def login(self, user_id):
-    statsd.set('users.uniques', user_id)
-    # Now log the user in ...
+# Track the run time of the database query.
+start_time = time.time()
+results = db.query()
+duration = time.time() - start_time
+statsd.histogram('database.query.time', duration)
+
+# We can also use the `timed` decorator as a short-hand for timing functions.
+@statsd.timed('database.query.time')
+def get_data():
+    return db.query()
 ```
+
+For Ruby:
+```ruby
+start_time = Time.now
+results = db.query()
+duration = Time.now - start_time
+statsd.histogram('database.query.time', duration)
+
+# We can also use the `time` helper as a short-hand for timing blocks
+# of code.
+statsd.time('database.query.time') do
+  return db.query()
+end
+```
+
+The above instrumentation produces the following metrics:
+
+- `database.query.time.count`: number of times this metric was sampled
+- `database.query.time.avg`: average time of the sampled values
+- `database.query.time.median`: median sampled value
+- `database.query.time.max`: maximum sampled value
+- `database.query.time.95percentile`: 95th percentile sampled value
+
+These metrics give insight into how different each query time is. We can see how long the query usually takes by graphing the `median`. We can see how long most queries take by graphing the `95percentile`.
+
+{{< img src="developers/metrics/graph-guides-metrics-query-times.png" alt="graph guides metrics query times" responsive="true" popup="true">}}
+
+For this toy example, let's say a query time of 1 second is acceptable. Our median query time (graphed in purple) is usually less than 100 milliseconds, which is great. But unfortunately, our 95th percentile (graphed in blue) has large spikes sometimes nearing three seconds, which is unacceptable. This means most of our queries are running just fine, but our worst ones are very bad. If the 95th percentile was close to the median, than we would know that almost all of our queries are performing just fine.
 
 ### Timers
 
-Timers measure the amount of time a section of code takes to execute, like the time it takes to render a web page. In Python, you can create timers with a decorator:
+Timers in DogStatsD are an implementation of Histograms (not to be confused with timers in the standard StatsD). They measure timing data _only_, such as the amount of time a section of code takes to execute, such as the time it takes to render a web page. In Python, you can create timers with a decorator:
 
 ```python
 
@@ -104,44 +183,29 @@ In either case, as DogStatsD receives the timer data, it calculates the statisti
 - `mywebsite.page_render.time.max` - the maximum render time
 - `mywebsite.page_render.time.95percentile` - the 95th percentile render time
 
-Under the hood, DogStatsD actually treats timers as histograms; Whether you send timer data using the methods above, or send it as a histogram (see below), you'll be sending the same data to Datadog.
+Under the hood, DogStatsD treats timers as histograms. Whether you timers or histograms, you'll be sending the same data to Datadog.
 
-### Histograms
+### Sets
 
-Histograms calculate the statistical distribution of any kind of value. Though it would be less convenient, you could measure the render times in the previous example using a histogram metric:
+Sets are used to count the number of unique elements in a group, for example, the number of unique visitors to your site:
 
+For Python:
 ```python
 
-from datadog import statsd
-
-...
-start_time = time.time()
-page = render_page()
-duration = time.time() - start_time
-statsd.histogram('mywebsite.page_render.time', duration)
-
-def render_page():
-  # Render the page...
+def login(self, user_id):
+    # Log the user in ...
+    statsd.set('users.uniques', user_id)
 ```
 
-This produces the same five metrics shown in the Timers section above: count, avg, median, max, and 95percentile.
-
-But histograms aren't just for measuring times. You can track distributions for anything, like the size of files users upload to your site:
-
-```python
-
-from datadog import statsd
-
-def handle_file(file, file_size):
-  # Handle the file...
-
-  statsd.histogram('mywebsite.user_uploads.file_size', file_size)
-  return
+For Ruby:
+```ruby
+def login(self, user_id)
+    # Log the user in ...
+    statsd.set('users.uniques', user_id)
+end
 ```
 
-Since histograms are an extension to StatsD, use a [DogStatsD client library][1].
-
-### Metric option: sample rates
+## Metric option: sample rates
 
 Since the overhead of sending UDP packets can be too great for some performance
 intensive code paths, DogStatsD clients support sampling,
@@ -176,19 +240,34 @@ def render_page():
 
 ## Service Checks
 
-Finally, DogStatsD can send service checks to Datadog. Use checks to track the status of services your application depends on:
+DogStatsD can send service checks to Datadog. Use checks to track the status of services your application depends on:
 
+For Python:
 ```python
 
-from datadog import statsd
+from datadog.api.constants import CheckStatus
 
-conn = get_redis_conn()
-if not conn:
-  statsd.service_check('mywebsite.can_connect_redis', statsd.CRITICAL)
-else:
-  statsd.service_check('mywebsite.can_connect_redis', statsd.OK)
-  # Do your redis thing...
+# Report the status of an app.
+name = 'web.app1'
+status = CheckStatus.OK
+message = 'Response: 200 OK'
+
+statsd.service_check(check_name=name, status=status, message=message)
 ```
+
+For Ruby:
+```ruby
+# Report the status of an app.
+name = 'web.app1'
+status = Datadog::Statsd::OK
+opts = {
+  'message' => 'Response: 200 OK'
+}
+
+statsd.service_check(name, status, opts)
+```
+
+After a service check has been reported, you can use it to trigger a [custom check monitor][18].
 
 ## Tagging
 
