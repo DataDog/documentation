@@ -1,5 +1,5 @@
 ---
-title: Pipelines
+title: Processing
 kind: documentation
 description: "Parse & Enrich your logs to create valuable facets & metrics in the Logs Explorer."
 further_reading:
@@ -20,7 +20,7 @@ To access the processing panel use the upper left menu:
 
 {{< img src="logs/processing/processing_panel.png" alt="Pipelines panel" responsive="true" popup="true" style="width:50%;" >}}
 
-## Processing Pipelines
+## Pipelines
 ### Pipelines Goal
 
 **A processing pipeline takes a filtered subset of incoming logs and applies over them a list of sequential processors.**
