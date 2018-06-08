@@ -52,6 +52,8 @@ Si cette fonction s'exécute cent fois pendant le flush interval (dix secondes, 
 
 ## Implémentation
 
+### Agent
+
 Commencez par éditer votre fichier `datadog.yaml` en décommentant les lignes suivantes:
 ```
 use_dogstatsd: yes
@@ -72,6 +74,35 @@ dogstatsd_port: 8125
 ```
 
 [Redémarrez DogStatsD][7] afin de prendre en compte les changements.
+
+### Code
+
+Installer le module.
+
+Python:
+```shell
+$ pip install datadog
+```
+
+Ruby:
+```shell
+$ gem install dogstatsd-ruby
+```
+
+Importer le module.
+
+Python:
+```python
+from datadog import statsd
+```
+
+Ruby:
+```ruby
+require 'datadog/statsd'
+
+# Créer un instance
+statsd = Datadog::Statsd.new
+```
 
 ## Plongez dans DogStatsD
 
