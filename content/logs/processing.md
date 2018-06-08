@@ -1,5 +1,5 @@
 ---
-title: Pipelines
+title: Processing
 kind: documentation
 description: "Parse & Enrich your logs to create valuable facets & metrics in the Logs Explorer."
 further_reading:
@@ -20,7 +20,7 @@ To access the processing panel use the upper left menu:
 
 {{< img src="logs/processing/processing_panel.png" alt="Pipelines panel" responsive="true" popup="true" style="width:50%;" >}}
 
-## Processing Pipelines
+## Pipelines
 ### Pipelines Goal
 
 **A processing pipeline takes a filtered subset of incoming logs and applies over them a list of sequential processors.**
@@ -136,6 +136,7 @@ It transforms this log:
 {{< img src="logs/processing/attribute_pre_remapping.png" alt="attribute pre remapping " responsive="true" popup="true" style="width:40%;">}}
 
 Into this log:
+
 {{< img src="logs/processing/attribute_post_remapping.png" alt="attribute post remapping " responsive="true" popup="true" style="width:40%;">}}
 
 ### URL Parser
@@ -156,6 +157,22 @@ These settings:
 
 Give the following results:
 {{< img src="logs/processing/useragent_processor.png" alt="Useragent processor" responsive="true" popup="true">}}
+
+### Category Processor
+
+Use the Category Processor to add a new attribute (without space or special characters in the new attribute name) to a log matching a provided search query.
+Categories are very useful to create meaningful groups which can be used in any analytical view (e.g. URL groups, Machine groups, environments, response time buckets, etc....).
+
+For example to categories your web access logs depending of the status code range value (2xx for a response code between 200 and 299, 3xx for a response code between 300 and 399, ...) add this processor:
+
+{{< img src="logs/processing/category_processor.png" alt="Category processor" responsive="true" popup="true">}}
+
+It produces the following result:
+
+{{< img src="logs/processing/category_processor_result.png" alt="Category processor result" responsive="true" popup="true">}}
+
+**Important Note**: The query can be done on any log attribute or tag no matter if it is a facet or not, wildcards can also be used inside your query.
+Once the log has matched one of the processor query, it stops. Make sure they are properly ordered in case a log could match several queries.
 
 ### Log Message Remapper
 
