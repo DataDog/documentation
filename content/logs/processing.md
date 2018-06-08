@@ -136,6 +136,7 @@ It transforms this log:
 {{< img src="logs/processing/attribute_pre_remapping.png" alt="attribute pre remapping " responsive="true" popup="true" style="width:40%;">}}
 
 Into this log:
+
 {{< img src="logs/processing/attribute_post_remapping.png" alt="attribute post remapping " responsive="true" popup="true" style="width:40%;">}}
 
 ### URL Parser
