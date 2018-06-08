@@ -159,18 +159,18 @@ Give the following results:
 
 ### Category Processor
 
-Use the Category Processor to add a new attribute (withtout space or special characters in the new attribute name) to a log matching a provided search query.
-Categories are very useful to create meaningful groups which can be used in any analytical view (eg URL groups, Machine groups, environments, response time buckets, etc....).
+Use the Category Processor to add a new attribute (without space or special characters in the new attribute name) to a log matching a provided search query.
+Categories are very useful to create meaningful groups which can be used in any analytical view (e.g. URL groups, Machine groups, environments, response time buckets, etc....).
 
-For example to categorise your web access logs depending on the status code range value (2xx for a response code between 200 and 299, 3xx for a response code between 300 and 399, ...) add this processor:
+For example to categories your web access logs depending of the status code range value (2xx for a response code between 200 and 299, 3xx for a response code between 300 and 399, ...) add this processor:
 
-https://cl.ly/3S110r3Y3g06
+{{< img src="logs/processing/category_processor.png" alt="Category processor" responsive="true" popup="true">}}
 
-It gives the following result:
+It produces the following result:
 
-https://cl.ly/3c2B2c2I322s
+{{< img src="logs/processing/category_processor_result.png" alt="Category processor result" responsive="true" popup="true">}}
 
-**Important Note**: The query can be done on any log attribute or tag no matter if it is a facet or not, wildcards can also be used.
+**Important Note**: The query can be done on any log attribute or tag no matter if it is a facet or not, wildcards can also be used inside your query.
 Once the log has matched one of the processor query, it stops. Make sure they are properly ordered in case a log could match several queries.
 
 ### Log Message Remapper
