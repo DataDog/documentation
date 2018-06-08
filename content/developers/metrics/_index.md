@@ -20,19 +20,7 @@ further_reading:
   text: Official and Community-contributed API and DogStatsD client libraries
 ---
 
-## Overview
-
-This page explains how to send your application's [custom metrics][4] to Datadog. Sending your application's [custom metrics][4] to Datadog lets you correlate what's happening with your application, your users and your system.
-
-Metrics are collected by sending them to DogStatsD, a small metrics aggregation server that is bundled with the Datadog Agent, [read about how it works][5]. If you want to dive int code right away, read on.
-
-This section covers some common instrumentation use cases, such as:
-
-- How to count web page views
-- How to time database queries
-- How to measure the amount of free memory
-
-Code examples are provided in both Python and Ruby; however, a large number of [libraries][16] are available for other languages.
+This section explains the nuts and bolts of metrics - what they are, and what they do. Whether you want to send [custom metrics][4], or just want to have a better understanding about how Datadog works, read on. If you're looking for information about the DogStatsD (which implements these metrics), please see the [DogStatsD documentation][5].
 
 ## Metric submission
 
@@ -59,18 +47,18 @@ Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. `
 
 The "Datadog in-app type" affects how a given metric is interpreted in query results and graph visualizations across the application. The metric type visible on the metric summary page is the Datadog in-app type. You should only change the type if you have started submitting this metric with a new type, and should be aware that changing the type may render historical data nonsensical.
 
-In the Datadog web application there are 3 metric types:
+In the Datadog web application there are four metric types (though one is deprecated):
 
-* [GAUGE][6]
-* [RATE][7]
-* [COUNT][8] 
-* COUNTER (now deprecated)
+* GAUGE
+* RATE
+* COUNT
+* COUNTER (deprecated)
 
 A metric's type is stored as metrics metadata and is used to determine how a metric is interpreted throughout the application by determining default time aggregation function and `as_rate()`/`as_count()` behavior. The `as_count()` and `as_rate()` modifiers behave differently for different Web Application metric types.
 
-### How do submission types relate to Datadog in-app types?
+### Submission types and Datadog in-app types
 
-Datadog accepts metrics submitted from a variety of sources, and as a result the submission type does not always map exactly to the Datadog in-app type:
+Datadog accepts metrics submitted from a variety of sources, and as a result the "submission type" (think "use-case") does not always map exactly to the Datadog in-app type:
 
 | Submission Source   | Submission Method (python)           | Submission Type   | Datadog In-App Type |
 | ------------------- | ------------------------------------ | ----------------- | ------------------- |
@@ -89,16 +77,16 @@ Datadog accepts metrics submitted from a variety of sources, and as a result the
 | [Agent check][2]    | `self.histogram(...)`                | histogram         | gauge, rate         |
 | [Agent check][2]    | `self.set(...)`                      | set               | gauge               |
 
-### Why change a metric's type?
+### Modify a metric's type
+
+While it is not normally required, it is possible to change a metric's _type_. Some examples:
 
 1. You have a metric `app.requests.served` that counts requests served, but accidentally submitted it via StatsD as a `gauge`. The metric's Datadog type is therefore `gauge`.
 
 2. You realize you should have submitted it as a StatsD `counter` metric, that way you can do time aggregation to answer questions like "How many total requests were served in the past day?" by querying `sum:app.requests.served{*}` (this would not make sense for a `gauge`-type  metric.)
 
 3. You like the name `app.requests.served` so rather than submitting a new metric name with the more appropriate `counter` type, you could change the type of `app.requests.served`.
-
   * By updating your submission code, calling `dogstatsd.increment('app.requests.served', N)` after N requests are served.
-
   * By updating the Datadog in-app type via the metric summary page to `rate`.
 
 This causes data submitted before the type change for `app.requests.served`to behave incorrectly because it was stored in a format to be interpreted as an in-app `gauge` not a `rate`. Data submitted after steps 3a and 3b
