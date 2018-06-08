@@ -52,6 +52,8 @@ If this function executes one hundred times during a flush interval (ten seconds
 
 ## Setup
 
+### Agent
+
 First, edit your `datadog.yaml` file to uncomment the following lines:
 ```
 use_dogstatsd: yes
@@ -71,6 +73,36 @@ By default, DogStatsD listens on UDP port **8125**. If you need to change this, 
     dogstatsd_port: 8125
 
 [Restart DogStatsD][5] to effect the change.
+
+### Code
+
+First, install the module:
+
+For Python:
+```shell
+$ pip install datadog
+```
+
+For Ruby:
+```shell
+$ gem install dogstatsd-ruby
+```
+
+And import it, so it's ready to use:
+
+For Python:
+```python
+from datadog import statsd
+```
+
+For Ruby:
+```ruby
+# Import the library
+require 'datadog/statsd'
+
+# Create a statsd client instance.
+statsd = Datadog::Statsd.new
+```
 
 ## Dive into DogStatsD
 
