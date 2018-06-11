@@ -56,7 +56,7 @@ DogStatsD setup is now complete. See [the documentation][6] for more information
 
 ## Monitoring your Cloud Foundry cluster
 
-There are three points of integration with Datadog, each of which achieves a different goal:
+There are two points of integration with Datadog, each of which achieves a different goal:
 
 * **Datadog Agent BOSH release** — Install the Datadog Agent on every node in your deployment to track system, network, and disk metrics. Enable any other Agent checks you wish.
 * **Datadog Firehose Nozzle** — Deploy one or more Datadog Firehose Nozzle jobs. The jobs tap into your deployment's Loggregator Firehose and send all non-container metrics to Datadog.
