@@ -28,18 +28,23 @@ After deploying the [Docker Agent][7], no other configuration is necessary.
 
 Note that for collecting Container information in the standard install rather than with the [Docker Agent][7], the `dd-agent` user needs to have permissions to access **docker.sock**.
 
-It is possible to exclude real-time collection for containers either via passing the environment variable DD_AC_EXCLUDE or adding `ac_exclude:` to the datadog.yaml as well as DD_AC_INCLUDE or `ac_include:`. The argument this key takes is a simple regexp based on **image** name. 
+### Include/Exclude containers
 
-For example, to exclude all debian images except containers with a name starting with 'frontend':
+It is possible to Include/Exclude real-time collection for containers:
+
+- Exclude containers either via passing the environment variable `DD_AC_EXCLUDE` or adding `ac_exclude:` in your `datadog.yaml` main configuration file.
+- Include containers either via passing the environment variable `DD_AC_INCLUDE` or adding `ac_include:` in your `datadog.yaml` main configuration file. 
+
+Both arguments take an **image name** as value, regexp are also supported.
+
+For example, to exclude all debian images except containers with a name starting with *frontend*, add those two configuration lines in your `datadog.yaml`file:
 
 ```
 ac_exclude: ["image:debian"]
 ac_include: ["name:frontend.*"]
 ```
 
-**Note:** For Agent 5, instead of including the above in the datadog.conf, it is necessary to explicitly add a `datadog.yaml` to `/etc/datadog-agent/datadog.yaml` as the Process Agent relies on configuration options set here. This config will only exclude containers from real-time collection _not_ from Autodiscovery. 
-
-
+**Note:** For Agent v5, instead of including the above in the `datadog.conf` main configuration file, You have to explicitly add a `datadog.yaml` file to `/etc/datadog-agent/datadog.yaml` as the Process Agent relies on configuration options set here. This configuration only excludes containers from real-time collection **not** from Autodiscovery. 
 
 ## Searching, Filtering, and Pivoting
 
