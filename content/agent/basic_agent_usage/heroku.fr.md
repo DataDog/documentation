@@ -41,7 +41,7 @@ En plus des variables d'environnement présentées ci-dessus, vous pouvez en dé
 | Paramètre | Description|
 | --- | --- |
 | `DD_API_KEY` | *Obligatoire* Votre clé API est disponible sur la page [Intégrations de l'API Datadog][2]. Notez qu'il s'agit de la clé *API* et non de la clé d'application. |
-| `DD_HOSTNAME` | *Obsolète* **AVERTISSEMENT**: La définition manuelle du nom d'host peut entraîner des erreurs de continuité des métriques. Il est recommandé de ne *pas* définir cette variable. Parce que les hosts dyno sont éphémères, il est recommandé de monitorer en fonction des tags `dynoname` ou` appname`. |
+| `DD_HOSTNAME` | *Obsolète* **AVERTISSEMENT**: La définition manuelle du nom d'hôte peut entraîner des erreurs de continuité des métriques. Il est recommandé de ne *pas* définir cette variable. Parce que les hôte dyno sont éphémères, il est recommandé de monitorer en fonction des tags `dynoname` ou` appname`. |
 | `DD_TAGS` | *Optionnel* Définit des tags supplémentaires fournis sous la forme d'une chaîne délimitée par des virgules. Par exemple, `heroku config:set DD_TAGS=simple-tag-0,tag-key-1:tag-value-1`.  Le Buildpack ajoute automatiquement les tags `dyno` et `dynohost` qui représentent respectivement le nom du Dyno (par exemple web.1) et l'ID host (par exemple 33f232db-7fa7-461e-b623-18e60944f44f). Voir le ["Guide to tagging"][3] pour plus d'informations. |
 | `DD_HISTOGRAM_PERCENTILES` | *Optionnel* Définissez éventuellement des percentiles supplémentaires pour vos métriques histogramme. Consultez [comment représenter les percentiles][4]. |
 | `DISABLE_DATADOG_AGENT` | *Optionnel* Lorsqu'il est défini, l'agent Datadog n'est pas exécuté. |

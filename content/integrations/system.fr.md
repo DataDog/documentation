@@ -45,7 +45,7 @@ Ce check collecte le nombre de cœurs de processeur sur un host et les temps de 
 ### Implémentation
 #### Installation
 
-Le check system_core est packagé avec l'agent, il vous faut donc simplement [installer l'agent][4] sur n'importe quel host.
+Le check system_core est packagé avec l'agent, il vous faut donc simplement [installer l'agent][4] sur n'importe quel hôte.
 
 #### Configuration
 
@@ -92,7 +92,7 @@ Selon la plate-forme, la vérification peut collecter d'autres métriques de tem
 
 ## Check de l'Agent: Swap
 
-Ce check monitor le nombre d'octets qu'un host a swap.
+Ce check monitor le nombre d'octets qu'un hôte a swap.
 
 ### Implémentation
 #### Installation

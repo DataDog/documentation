@@ -15,4 +15,5 @@ kind: faq
     {{< nextlink href="/logs/faq/setting-file-permissions-for-rotating-logs" >}}Setting file permissions for rotating logs (linux){{< /nextlink >}}
     {{< nextlink href="logs/faq/how-to-increase-the-number-of-log-files-tailed-by-the-agent" >}}How to increase the number of log files tailed by the Agent files?{{< /nextlink >}}
     {{< nextlink href="logs/faq/why-do-my-logs-show-up-with-an-info-status-even-for-warnings-or-errors" >}}Why do my logs show up with an Info status even for Warnings or Errors?{{< /nextlink >}}
+    {{< nextlink href="logs/faq/can-the-datadog-agent-be-used-to-send-only-logs" >}}Can the Datadog Agent be used to send logs only?{{< /nextlink >}}
 {{< /whatsnext >}}

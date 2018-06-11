@@ -7,6 +7,7 @@ kind: faq
 |:---|:---|
 |Activemq|ACTIVEMQ|
 |Airbrake|AIRBRAKE|
+|Akamai|AKAMAI|
 |Amazon Api Gateway|APIGATEWAY|
 |Amazon Auto Scaling|AUTOSCALING|
 |Amazon Billing|BILLING|

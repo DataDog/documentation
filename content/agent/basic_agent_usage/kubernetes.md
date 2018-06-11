@@ -78,11 +78,11 @@ spec:
                 fieldPath: status.hostIP
         resources:
           requests:
-            memory: "128Mi"
-            cpu: "100m"
+            memory: "256Mi"
+            cpu: "200m"
           limits:
-            memory: "512Mi"
-            cpu: "250m"
+            memory: "256Mi"
+            cpu: "200m"
         volumeMounts:
           - name: dockersocket
             mountPath: /var/run/docker.sock
@@ -156,6 +156,21 @@ To enable [Log collection][10] with your DaemonSet:
   ```
 
 Learn more about this in [the Docker log collection documentation][11].
+
+#### DogStastD
+
+To send custom metrics via DogStatsD, set the `DD_DOGSTATSD_NON_LOCAL_TRAFFIC`variable to true in your *env* section:
+
+```
+(...)
+      env:
+        (...)
+        - name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC
+          value: "true"
+(...)
+```
+
+Learn more about this in the [Docker DogStatsD documentation][19]
 
 ### RBAC
 
@@ -377,3 +392,4 @@ Our default configuration targets Kubernetes 1.7.6 and later, as the Datadog Age
 [16]: https://kubernetes.io/docs/admin/authorization/rbac/
 [17]: https://github.com/DataDog/integrations-core/tree/master/kubelet#compatibility
 [18]: https://kubernetes.io/docs/admin/authentication/#service-account-tokens
+[19]: /agent/basic_agent_usage/docker/#dogstatsd-custom-metrics

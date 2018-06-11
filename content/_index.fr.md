@@ -21,7 +21,7 @@ Datadog collecte toutes ces métriques, événements et check de services en un 
 
 ## Collecter tout
 
-Collectez une multitude de données déjà disponibles sans écrire de code. [Installez l'agent Datadog][1] partout: sur vos serveurs,  vos instances, machines virtuelles,  nœuds, [hosts conteneurisés][2] puis activez et configurez l'une de nos 200 [intégrations][3] prêtes à l'emploi pour commencer à envoyer vos métriques vers Datadog.
+Collectez une multitude de données déjà disponibles sans écrire de code. [Installez l'agent Datadog][1] partout: sur vos serveurs,  vos instances, machines virtuelles,  nœuds, [hôtes conteneurisés][2] puis activez et configurez l'une de nos 200 [intégrations][3] prêtes à l'emploi pour commencer à envoyer vos métriques vers Datadog.
 
 Envoyez des métriques d'application custom en écrivant un petit code. Mesurez vos propres gauges, counters, timers et histogrammes avec [DogStatsD][4] ou utilisez [l'APM][5] pour suivre le temps d'exécution de tout chemin de code afin de voir comment cela affecte les temps de réponse .
 Les [bibliothèques client][6] envoient vos [mesures personnalisées][7] et données de trace à l'agent Datadog, qui les expédie alors vers Datadog.
@@ -30,7 +30,7 @@ Certaines parties de votre stack peuvent être des outils SaaS et non des serveu
 
 ## Visualiser le
 
-Dès que vous capturez toutes ces données, consultez-les immédiatement dans l'application Web Datadog. Utilisez le Metrics Explorer pour trouver une métrique donnée et l'observer en temps réel. Visualisez et commentez des événements (par exemple, le déploiement d'une application) lorsqu'ils se déversent dans votre [flux d'événements][8]. Filtrez pour un groupe d'hosts dans [l'Infrastructure Map][9]. Obtenez une image globale de la façon dont certains services (par exemple, MySQL) fonctionnent via son dashboard par défaut.
+Dès que vous capturez toutes ces données, consultez-les immédiatement dans l'application Web Datadog. Utilisez le Metrics Explorer pour trouver une métrique donnée et l'observer en temps réel. Visualisez et commentez des événements (par exemple, le déploiement d'une application) lorsqu'ils se déversent dans votre [flux d'événements][8]. Filtrez pour un groupe d'hôtes dans [l'Infrastructure Map][9]. Obtenez une image globale de la façon dont certains services (par exemple, MySQL) fonctionnent via son dashboard par défaut.
 
 Créez des [Screenboards][10] personnalisés, où vous combinerez tous les graphiques, nombres, événements et états de services qui vous intéressent le plus. Personnalisez les graphiques selon vos besoins afin de résoudre au mieux vos problèmes: en modifiant leurs valeurs de mesure à l'aide d'autres métriques, en appliquant une détection [d'anomalie][11], [de singularité][12] ou de [prévisions][13], superposant de des événements sur eux, et plus encore.
 

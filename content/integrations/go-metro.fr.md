@@ -34,32 +34,33 @@ Ce check est uniquement fourni avec les packages 64 bits DEB et RPM Datadog Agen
 ## Implémentation
 ### Installation
 
-Le check TCP RTT, également appelée [go-metro](https://github.com/DataDog/go-metro), est fourni avec l'Agent, mais nécessite des bibliothèques système supplémentaires. Le check utilise les timestamps fournis par la bibliothèque PCAP pour calculer l'intervalle de temps entre tout paquet sortant et l'accusé de réception TCP correspondant. En tant que tel, PCAP doit être installé et configuré.
+Le check TCP RTT, également appelée [go-metro][1], est fourni avec l'Agent, mais nécessite des bibliothèques système supplémentaires. Le check utilise les timestamps fournis par la bibliothèque PCAP pour calculer l'intervalle de temps entre tout paquet sortant et l'accusé de réception TCP correspondant. En tant que tel, PCAP doit être installé et configuré.
 
 Les systèmes basés sur Debian devraient utiliser l'un des éléments suivants:
 
-```
+```bash
 $ sudo apt-get install libcap
 $ sudo apt-get install libcap2-bin
 ```
 
 Les systèmes basés sur Redhat devraient utiliser l'un de ceux-ci:
 
-```
+```bash
 $ sudo yum install libcap
 $ sudo yum install compat-libcap1
 ```
 
 Enfin, configurez PCAP:
 
-```
+```bash
 $ sudo setcap cap_net_raw+ep /opt/datadog-agent/bin/go-metro
 ```
 
 ### Configuration
 
-Editez le fichier ```go-metro.yaml``` dans le dossier ```conf.d``` . onsultez l'exemple du [sample go-metro.yaml](https://github.com/DataDog/integrations-core/blob/master/go-metro/conf.yaml.example)pour apprendre toutes les options de configuration disponibles. Voici un exemple de fichier qui affichera les temps TCP RTT pour app.datadoghq.com et 192.168.0.22:
+Editez le fichier ```go-metro.yaml``` dans le dossier ```conf.d``` . onsultez l'exemple du [sample go-metro.yaml][2] pour apprendre toutes les options de configuration disponibles. Voici un exemple de fichier qui affichera les temps TCP RTT pour app.datadoghq.com et 192.168.0.22:
 
+  ```yaml
     init_config:
       snaplen: 512
       idle_ttl: 300
@@ -68,7 +69,6 @@ Editez le fichier ```go-metro.yaml``` dans le dossier ```conf.d``` . onsultez l'
       statsd_port: 8125
       log_to_file: true
       log_level: info
-
     instances:
       - interface: eth0
         tags:
@@ -77,46 +77,53 @@ Editez le fichier ```go-metro.yaml``` dans le dossier ```conf.d``` . onsultez l'
           - 45.33.125.153
         hosts:
           - app.datadoghq.com
+  ```
 
 ### Validation
 
-Pour vérifier que le check fonctionne correctement, vous devriez voir les métriques `system.net.tcp.rtt` dans l'interface Datadog. En outre, si vous exécutez `sudo /etc/init.d/datadog-agent status`, vous devriez voir quelque chose de similaire à ce qui suit:
+Pour vérifier que le check fonctionne correctement, vous devriez voir les métriques `system.net.tcp.rtt` dans l'interface Datadog. En outre, si vous exécutez [la commande `status` de l'Agent][6], vous devriez voir quelque chose de similaire à ce qui suit:
 
-     datadog-agent.service - "Datadog Agent"
-       Loaded: loaded (/lib/...datadog-agent.service; enabled; vendor preset: enabled)
-       Active: active (running) since Thu 2016-03-31 20:35:27 UTC; 42min ago
-      Process: 10016 ExecStop=/opt/.../supervisorctl -c /etc/dd-....conf shutdown (code=exited, status=0/SUCCESS)
-      Process: 10021 ExecStart=/opt/.../start_agent.sh (code=exited, status=0/SUCCESS)
-     Main PID: 10025 (supervisord)
-       CGroup: /system.slice/datadog-agent.service
-               ├─10025 /opt/datadog-...python /opt/datadog-agent/bin/supervisord -c /etc/dd-agent/supervisor.conf
-               ├─10043 /opt/datadog-...python /opt/datadog-agent/agent/dogstatsd.py --use-local-forwarder
-               ├─10044 /opt/datadog-agent/bin/go-metro -cfg=/etc/dd-agent/conf.d/go-metro.yaml
-               ├─10046 /opt/datadog-.../python /opt/datadog-agent/agent/ddagent.py
-               └─10047 /opt/datadog-.../python /opt/datadog-agent/agent/agent.py foreground --use-local-forwarder
+```
+ datadog-agent.service - "Datadog Agent"
+    Loaded: loaded (/lib/...datadog-agent.service; enabled; vendor preset: enabled)
+    Active: active (running) since Thu 2016-03-31 20:35:27 UTC; 42min ago
+  Process: 10016 ExecStop=/opt/.../supervisorctl -c /etc/dd-....conf shutdown (code=exited, status=0/SUCCESS)
+  Process: 10021 ExecStart=/opt/.../start_agent.sh (code=exited, status=0/SUCCESS)
+  Main PID: 10025 (supervisord)
+    CGroup: /system.slice/datadog-agent.service
+            ├─10025 /opt/datadog-...python /opt/datadog-agent/bin/supervisord -c /etc/dd-agent/supervisor.conf
+            ├─10043 /opt/datadog-...python /opt/datadog-agent/agent/dogstatsd.py --use-local-forwarder
+            ├─10044 /opt/datadog-agent/bin/go-metro -cfg=/etc/dd-agent/conf.d/go-metro.yaml
+            ├─10046 /opt/datadog-.../python /opt/datadog-agent/agent/ddagent.py
+            └─10047 /opt/datadog-.../python /opt/datadog-agent/agent/agent.py foreground --use-local-forwarder
+```
 
 Si le check TCP RTT a démarré, vous devriez voir quelque chose de similaire à la ligne go-metro ci-dessus.
 
-C'est un check passive, donc à moins que des paquets ne soient envoyés activement aux hôtes mentionnés dans le fichier yaml, les métriques ne seront pas rapportées.
-
-## Compatibilité
-
-La vérification TCP RTT est compatible avec les plateformes Linux.
+C'est un check passive, donc à moins que des paquets ne soient envoyés activement aux hôtes mentionnés dans le fichier yaml, les métriques ne sont pas rapportées.
 
 ## Données collectées
 ### Métriques
 {{< get-metrics-from-git "go-metro" >}}
 
 
-### Evénements
+### Évènements
 Le check Go-metro n'inclut aucun événement pour le moment.
 
 ### Checks de Service
 Le check Go-metro n'inclut aucun check de service pour le moment.
 
 ## Troubleshooting
-Besoin d'aide? Contactez  [l'équipe support de Datadog](http://docs.datadoghq.com/help/).
+Besoin d'aide ? Contactez  [l'équipe support de Datadog][4].
 
 ## En apprendre plus
-Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog](https://www.datadoghq.com/blog/)
+Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][5]
+
+
+[1]: https://github.com/DataDog/go-metro
+[2]: https://github.com/DataDog/integrations-core/blob/master/go-metro/conf.yaml.example
+[3]: https://github.com/DataDog/integrations-core/blob/master/go-metro/metadata.csv
+[4]: http://docs.datadoghq.com/help/
+[5]: https://www.datadoghq.com/blog/
+[6]: https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information
 

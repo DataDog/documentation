@@ -31,13 +31,13 @@ Activez cette intégration pour voir dans Datadog toutes vos métriques de API G
 ## Implémentation
 ### Installation
 
-Si vous ne l'avez pas déjà fait, configurez [l'Intégration Amazon Web Services en premier](https://docs.datadoghq.com/integrations/amazon_web_services/).
+Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon Web Services][1].
 
 ### Collecte de métrique
 
-1. Dans la [vignette d'intégration AWS] (https://app.datadoghq.com/account/settings#integrations/amazon_web_services), assurez-vous que `API Gateway` est coché dans la partie "metric collection".
+1. Dans le [carré d'intégration AWS][2], assurez-vous que l'option `API Gateway` est cochée dans la section concernant la collecte des métriques.
 
-2. Installez l'intégration [Datadog - AWS API Gateway] (https://app.datadoghq.com/account/settings#integrations/amazon_api_gateway).
+2. Configurez l'[intégration Datadog - AWS API Gateway][3].
 
 ### Collecte de log
 
@@ -68,20 +68,20 @@ Activer le logging de API Gateway:
 
 #### Envoyer des logs à Datadog
 
-1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda pour collecte de log AWS](/integrations/amazon_web_services/#create-a-new-lambda-function).
+1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda pour collecte de log AWS][4].
 2. Une fois la fonction lambda installée, ajoutez manuellement un déclencheur dans la console AWS sur le groupe de log Cloudwatch qui contient vos logs API Gateway:
 {{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_1.png" alt="cloudwatch log group" responsive="true" popup="true" style="width:70%;">}}
    Sélectionnez le groupe de log CloudWatch correspondant, ajoutez un nom de filtre (mais n'hésitez pas à laisser le filtre vide) et ajoutez le déclencheur:
 {{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_2.png" alt="cloudwatch trigger" responsive="true" popup="true" style="width:70%;">}}
 
-Allez désormais dans la section [Log de Datadog](https://app.datadoghq.com/logs) pour commencer à explorer vos logs!
+Allez désormais dans la section [Log de Datadog][5] pour commencer à explorer vos logs!
 
 ## Données collectées
 ### Métriques
 {{< get-metrics-from-git "amazon_api_gateway" >}}
 
 
-Chacune des métriques récupérées à partir d'AWS se verra attribuer les mêmes tags qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le nom de l'host, les groupes de sécurité et plus encore.
+Chacune des métriques récupérées à partir d'AWS se verra attribuer les mêmes tags qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le nom de l'hôte, les groupes de sécurité et plus encore.
 
 ### Evénements
 L'intégration AWS API Gateway n'inclut aucun événements pour le moment.
@@ -90,7 +90,16 @@ L'intégration AWS API Gateway n'inclut aucun événements pour le moment.
 L'intégration AWS API Gateway n'inclut aucun check de service pour le moment.
 
 ## Troubleshooting
-Besoin d'aide? Contactez  [l'équipe support de Datadog](http://docs.datadoghq.com/help/).
+Besoin d'aide ? Contactez le [support Datadog][7].
 
 ## En apprendre plus
-Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog](https://www.datadoghq.com/blog/)
+Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][8]
+
+[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[3]: https://app.datadoghq.com/account/settings#integrations/amazon_api_gateway
+[4]: https://docs.datadoghq.com/integrations/amazon_web_services/#create-a-new-lambda-function
+[5]: https://app.datadoghq.com/logs
+[6]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_api_gateway/amazon_api_gateway_metadata.csv
+[7]: http://docs.datadoghq.com/help/
+[8]: https://www.datadoghq.com/blog/

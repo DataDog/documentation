@@ -96,7 +96,7 @@ Les Spans sont associées à un [service][8] et éventuellement une [ressource][
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://godoc.org/github.com/DataDog/dd-trace-go/tracer#service
+[1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer/#service
 [2]: /tracing/setup/java/#configuration
 [3]: http://pypi.datadoghq.com/trace/docs/#get-started
 [4]: http://www.rubydoc.info/gems/ddtrace/

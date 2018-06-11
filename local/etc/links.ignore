@@ -10,6 +10,7 @@ localhost:
 url.to.snpashot.com
 app.datadoghq.com
 app.datadog.com
+https://yum.datadoghq.com/stable/6/x86_64/
 api.datadoghq.com
 some-account.atlassian.net
 bitbucket.org/groupname/reponame
@@ -17,7 +18,6 @@ alert.victorops.com/integrations/datadog/20140523/alert
 manage.dynect.net/login/
 dtdg.co/101-tiles
 https://trello.com/app-key
-https://yum.datadoghq.com/rpm/x86_64/
 http://www.immun.io/
 http://catchpoint.com/session_id%3A123456"
 http://catchpoint.com/session_id:123456"
@@ -32,3 +32,4 @@ https://help.nopassword.com/portfolio-items/datadog/
 https://sidekiq.org/
 https://uptime.com/push-notifications/manage/
 https://manage.windowsazure.com
+http://ec2-54-85-23-10.compute-1.amazonaws.com

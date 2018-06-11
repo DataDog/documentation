@@ -53,7 +53,7 @@ Trouver la liste de toutes les visualisations [ici][4]
 
 ## Filter
 
-Maintenant que vous avez la métrique et une visualisation en place, vous pouvez filtrer les hosts à représenter graphiquement. A droite de la métrique se trouve une liste déroulante qui par défaut vaut *(everywhere) *. Cliquez dessus et choisissez le ou les tags que vous souhaitez utiliser pour filtrer le contexte de votre graphique. Pour en savoir plus sur les tags, reportez-vous à la [Documentation de tagging][5].
+Maintenant que vous avez la métrique et une visualisation en place, vous pouvez filtrer les hôtes à représenter graphiquement. A droite de la métrique se trouve une liste déroulante qui par défaut vaut *(everywhere) *. Cliquez dessus et choisissez le ou les tags que vous souhaitez utiliser pour filtrer le contexte de votre graphique. Pour en savoir plus sur les tags, reportez-vous à la [Documentation de tagging][5].
 
 ## Agréger et cumuler
 ### Méthode d'agrégation

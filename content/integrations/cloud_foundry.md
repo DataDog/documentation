@@ -60,15 +60,12 @@ There are three points of integration with Datadog, each of which achieves a dif
 
 * **Datadog Agent BOSH release** — Install the Datadog Agent on every node in your deployment to track system, network, and disk metrics. Enable any other Agent checks you wish.
 * **Datadog Firehose Nozzle** — Deploy one or more Datadog Firehose Nozzle jobs. The jobs tap into your deployment's Loggregator Firehose and send all non-container metrics to Datadog.
-* **Datadog plugin for BOSH Health Monitor** — Configure your BOSH Director's Health Monitor to send heartbeats (as metrics) and alerts (as events) from each node's BOSH Agent to Datadog.
 
 These integrations are meant for Cloud Foundry deployment administrators, not end users.
 
 ### Prerequisites
 
 You need to have a working Cloud Foundry deployment and access to the BOSH Director that manages it. You also need BOSH CLI to deploy each integration. You may use either major version of the CLI—[v1][8] or [v2][9].
-
-To configure the Datadog plugin for BOSH Health Monitor, you need access to the `state.json` (or similarly named) file that accurately reflects the current state of your BOSH Director. If you don't have such a file, you'll need to [create one][10].
 
 ### Install the Datadog Agent BOSH Release
 
@@ -272,59 +269,11 @@ On the [Metrics explorer][17] page in Datadog, search for metrics beginning `clo
 
 {{< img src="integrations/cloud_foundry/cloud-foundry-nozzle-metrics.png" alt="cloud-foundry-nozzle-metrics" responsive="true" popup="true">}}
 
-### Configure the Datadog plugin for BOSH Health Monitor
-
-The plugin is packaged with the BOSH Health Monitor, so if the Health Monitor is already installed and running on your BOSH Director, you just need to configure the plugin and redeploy the Director.
-
-#### Add the configuration
-
-In the manifest originally used to deploy the Director (e.g. bosh.yml), configure the Datadog plugin:
-
-```
-instance_groups:
-- instances: 1
-  properties:
-    hm:
-    # loglevel: info
-    # resurrector: enabled
-    #...other stuff
-      datadog_enabled: true
-      datadog:
-        api_key: <YOUR_DATADOG_API_KEY>
-        application_key: <YOUR_DATADOG_APP_KEY>
-        pagerduty_service_name: "your_service_name" # optional
-```
-
-#### Redeploy the Director
-
-BOSH cannot simply configure the plugin and restart the Health Monitor; it must destroy the Director and redeploy it as a new instance. To do this while retaining the Director's current disk and database, you MUST redeploy using a `state.json` (or similarly named) file that accurately reflects the current state of your Director. If you don't have such a file, follow the BOSH docs on [Deployment State][10] to create a basic `state.yml`.
-
-You may use [bosh-init][18] or BOSH CLI v2 to redeploy the Director. If you use bosh-init, your state file must be named similarly to your manifest; for a manifest named `bosh.yml`, `bosh-init` expects a state file named `bosh-state.yml`.
-
-```
-# bosh-init (legacy)
-bosh-init deploy bosh.yml
-
-# BOSH CLI v2 - if your state file is not named bosh-state.yml, provide its name via --state
-bosh create-env --state=your-state-file.json bosh.yml
-```
-
-#### Verify the plugin is working
-
-On the [Metrics explorer][17] page in Datadog, search for metrics beginning `bosh.healthmonitor`:
-
-{{< img src="integrations/cloud_foundry/cloud-foundry-bosh-hm-metrics.png" alt="cloud-foundry-bosh-hm-metrics" responsive="true" popup="true">}}
-
 ## Data Collected
-### Events
-
-The BOSH Health Monitor Datadog plugin emits an event to Datadog for any alert it receives from your deployment's BOSH Agents. Read the [BOSH Health Monitor docs][19] to see what kinds of alerts might show up in your Datadog event stream.
-
-The BOSH Agent sets a severity for each alert it generates, and the Datadog Health Monitor plugin uses that severity to prioritize the event it emits. Alerts with an Error, Critical, or Alert severity become Normal priority events in Datadog. Alerts with any other severity become Low priority events.
 
 ### Metrics
 
-The following metrics are sent by the Datadog Firehose Nozzle (`cloudfoundry.nozzle`) and the BOSH Health Monitor Datadog plugin (`bosh.healthmonitor`). The Datadog Agent release does not send any special metrics of its own, just the usual metrics from any Agent checks you configure in the Director runtime config (and, by default, [system](/integrations/system/#metrics), [network][20], [disk][21], and [ntp][22] metrics).
+The following metrics are sent by the Datadog Firehose Nozzle (`cloudfoundry.nozzle`). The Datadog Agent release does not send any special metrics of its own, just the usual metrics from any Agent checks you configure in the Director runtime config (and, by default, [system](/integrations/system/#metrics), [network][20], [disk][21], and [ntp][22] metrics).
 
 The Datadog Firehose Nozzle only collects CounterEvents (as metrics, not events) and ValueMetrics; it ignores LogMessages, Errors, and ContainerMetrics.
 
