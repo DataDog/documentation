@@ -8,7 +8,7 @@ further_reading:
   - link: 'https://github.com/DataDog/dd-trace-go'
     tag: « Github »
     text: Code source
-  - link: 'https://godoc.org/github.com/DataDog/dd-trace-go/tracer'
+  - link: 'https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer'
     tag: GoDoc
     text: Page des packages
   - link: tracing/visualization/
@@ -128,4 +128,4 @@ Consultez la [documentation Opentracing][4] pour des modèles d'utilisation. Doc
 [2]: https://github.com/DataDog/dd-trace-go/blob/master/tracer/example_test.go
 [3]: http://opentracing.io
 [4]: https://github.com/opentracing/opentracing-go
-[5]: https://godoc.org/github.com/DataDog/dd-trace-go/tracer
+[5]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
