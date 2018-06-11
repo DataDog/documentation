@@ -28,6 +28,19 @@ After deploying the [Docker Agent][7], no other configuration is necessary.
 
 Note that for collecting Container information in the standard install rather than with the [Docker Agent][7], the `dd-agent` user needs to have permissions to access **docker.sock**.
 
+It is possible to exclude real-time collection for containers either via passing the environment variable DD_AC_EXCLUDE or adding `ac_exclude:` to the datadog.yaml as well as DD_AC_INCLUDE or `ac_include:`. The argument this key takes is a simple regexp based on **image** name. 
+
+For example, to exclude all debian images except containers with a name starting with 'frontend':
+
+```
+ac_exclude: ["image:debian"]
+ac_include: ["name:frontend.*"]
+```
+
+**Note:** For Agent 5, instead of including the above in the datadog.conf, it is necessary to explicitly add a `datadog.yaml` to `/etc/datadog-agent/datadog.yaml` as the Process Agent relies on configuration options set here. This config will only exclude containers from real-time collection _not_ from Autodiscovery. 
+
+
+
 ## Searching, Filtering, and Pivoting
 
 ### String Search
