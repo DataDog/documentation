@@ -119,7 +119,7 @@ Ultimately, you’ll have 13 metrics using the following query: `count:service.r
 [3]: /integrations/
 [4]: /integrations/faq/what-standard-integrations-emit-custom-metrics
 [5]: /api/#rate-limiting
-[6]: https://app.datadoghq.com/account/billing_history
+[6]: https://app.datadoghq.com/account/usage/hourly
 [7]: https://app.datadoghq.com/metric/summary
 [8]: /graphing/faq/dashboard-loads-very-slowly
 [9]: /help
