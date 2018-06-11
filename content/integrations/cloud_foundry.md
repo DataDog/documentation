@@ -19,17 +19,21 @@ ddtype: check
 ## Overview
 
 Any Cloud Foundry deployment can send metrics and events to Datadog. The data helps you track the health and availability of all nodes in the deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more.  
-Use this page to learn how to monitor your [Cloud Foundry application](#monitor-your-cloud-foundry-application)) and your [Cloud Foundry cluster](#monitoring-your-cloud-foundry-cluster).
+Use this page to learn how to monitor your [application on Cloud Foundry](#monitor-your-applications-on-cloud-foundry) and your [Cloud Foundry cluster](#monitor-your-cloud-foundry-cluster).
 
-## Monitor your Cloud Foundry application
+For Pivotal Cloud Foundry, you have the option to install the Datadog integration tiles with Ops Manager:
+* [Datadog Cluster Monitoring for PCF](https://network.pivotal.io/products/datadog/)
+* [Datadog Application Monitoring for PCF](https://network.pivotal.io/products/datadog-application-monitoring/)
+
+## Monitor Your Applications on Cloud Foundry
+
+**Note:** For Pivotal Cloud Foundry versions 1.11 and below, you will need to install the Meta Buildpack first.
 
 Use **Datadog Cloud Foundry Buildpack** to monitor your Cloud Foundry application. This is a [decorator buildpack][1] for Cloud Foundry that installs a [Datadog DogStatsD binary][2] and [Datadog Trace Agent][3] in the container your app is running on.
 
 ### Setup
 
-1. **Install the [Meta Buildpack][4]** to enable apps to use decorator buildpacks.
-
-2. **Upload the Datadog Cloud Foundry Buildpack.**  
+**Upload the Datadog Cloud Foundry Buildpack.**  
   Download the latest Datadog [build pack release][5] and upload it to your Cloud Foundry environment.
 
   ```shell
@@ -54,7 +58,7 @@ To build this buildpack, edit the relevant files and run the `./build` script. I
 ### DogStatsD
 DogStatsD setup is now complete. See [the documentation][6] for more information. We maintain [a list of DogStatsD libraries][7] compatible with a wide range of applications.
 
-## Monitoring your Cloud Foundry cluster
+## Monitor Your Cloud Foundry Cluster
 
 There are two points of integration with Datadog, each of which achieves a different goal:
 
