@@ -17,10 +17,10 @@ further_reading:
 
 [Datadog Live Containers][3] enable real-time visibility into all containers across your environment.
 
-Taking inspiration from bedrock tools like *htop* and *ctop*, Live Containers give you complete coverage of your container infrastructure, in a continuously updated table with resource metrics at two-second resolution and faceted search.  
+Taking inspiration from bedrock tools like *htop* and *ctop*, Live Containers give you complete coverage of your container infrastructure, in a continuously updated table with resource metrics at two-second resolution and faceted search.
 Coupled with Datadog’s integrations with [Docker][4], [Kubernetes][5], [ECS][6], and other container technologies, plus our built-in tagging of dynamic components, this new Live Container view provides a detailed overview of your containers’ health, resource consumption, and deployment in real time:
 
-{{< img src="graphing/infrastructure/livecontainers/LiveContainersWithSummaries.png" alt="Live containers with summaries" responsive="true" popup="true">}} 
+{{< img src="graphing/infrastructure/livecontainers/LiveContainersWithSummaries.png" alt="Live containers with summaries" responsive="true" popup="true">}}
 
 ## Installation
 
@@ -30,21 +30,21 @@ Note that for collecting Container information in the standard install rather th
 
 ### Include/Exclude containers
 
-It is possible to Include/Exclude real-time collection for containers:
+It is possible to include and/or Exclude containers from real-time collection:
 
 - Exclude containers either via passing the environment variable `DD_AC_EXCLUDE` or adding `ac_exclude:` in your `datadog.yaml` main configuration file.
-- Include containers either via passing the environment variable `DD_AC_INCLUDE` or adding `ac_include:` in your `datadog.yaml` main configuration file. 
+- Include containers either via passing the environment variable `DD_AC_INCLUDE` or adding `ac_include:` in your `datadog.yaml` main configuration file.
 
-Both arguments take an **image name** as value, regexp are also supported.
+Both arguments take an **image name** as value; regexp are also supported.
 
-For example, to exclude all debian images except containers with a name starting with *frontend*, add those two configuration lines in your `datadog.yaml`file:
+For example, to exclude all debian images except containers with a name starting with *frontend*, add these two configuration lines in your `datadog.yaml`file:
 
 ```
 ac_exclude: ["image:debian"]
 ac_include: ["name:frontend.*"]
 ```
 
-**Note:** For Agent v5, instead of including the above in the `datadog.conf` main configuration file, You have to explicitly add a `datadog.yaml` file to `/etc/datadog-agent/datadog.yaml` as the Process Agent relies on configuration options set here. This configuration only excludes containers from real-time collection **not** from Autodiscovery. 
+**Note:** For Agent v5, instead of including the above in the `datadog.conf` main configuration file, You have to explicitly add a `datadog.yaml` file to `/etc/datadog-agent/datadog.yaml` as the Process Agent relies on configuration options set here. This configuration only excludes containers from real-time collection **not** from Autodiscovery.
 
 ## Searching, Filtering, and Pivoting
 
@@ -54,7 +54,7 @@ Containers are by their nature extremely high cardinality objects. Our flexible 
 
 ### Tagging
 
-Containers are [tagged][8] with all existing host-level tags.  We also tag with metadata associated with individual containers.  
+Containers are [tagged][8] with all existing host-level tags.  We also tag with metadata associated with individual containers.
 
 All containers are tagged by `image_name`, and additionally, we include integrations with popular orchestrators, such as [ECS][6] and [Kubernetes][5], which provide further container-level tags.  We also decorate each container with Docker, ECS, or Kubernetes icons so you can tell which are being orchestrated at a glance.
 
@@ -80,14 +80,14 @@ Kubernetes Containers are tagged by:
 
 Making sense of thousands or tens of thousands of containers can seem overwhelming!  Using tagging, described in the previous section, makes navigation easy.
 
-In the screenshot below, we have filtered down to a Kubernetes cluster of 9 nodes.  
-RSS and CPU utilization on containers is reported compared to the provisioned limits on the containers, when they exist.  
+In the screenshot below, we have filtered down to a Kubernetes cluster of 9 nodes.
+RSS and CPU utilization on containers is reported compared to the provisioned limits on the containers, when they exist.
 Here, we see that the containers in this cluster are way over provisioned, and that we could use tighter limits and bin packing to achieve better utilization of resources.
 
 {{< img src="graphing/infrastructure/livecontainers/overprovisioned.png" alt="Over Provisioned" responsive="true" popup="true" style="width:80%;">}}
 
-Container environments are dynamic and can be hard to follow.  
-Here, we pivot by `kube_service` and `host`, and to reduce system noise, filter to `kube_namespace:default`, and we can see what services are running where, and how saturated key metrics are:  
+Container environments are dynamic and can be hard to follow.
+Here, we pivot by `kube_service` and `host`, and to reduce system noise, filter to `kube_namespace:default`, and we can see what services are running where, and how saturated key metrics are:
 
 {{< img src="graphing/infrastructure/livecontainers/hostxservice.png" alt="Host x services" responsive="true" popup="true" style="width:80%;">}}
 
