@@ -8,6 +8,12 @@ further_reading:
 - link: "/logs/explore"
   tag: "Documentation"
   text: Learn how to explore your logs
+- link: "/logs/faq/why-do-my-logs-not-have-the-expected-timestamp/"
+  tag: "FAQ"
+  text: Why do my logs not have the expected timestamp?
+- link: "/logs/faq/why-do-my-logs-show-up-with-an-info-status-even-for-warnings-or-errors/"
+  tag: "FAQ"
+  text: Why do my logs show up with an Info status even for Warnings or Errors?
 ---
 
 There are a number of common issues that can get in the way when [sending new logs to Datadog][1] via the log collector in the dd-agent. If you experience issues sending new logs to Datadog, this list helps you troubleshoot. If you continue to have trouble, email [us][2] for further assistance.
@@ -26,8 +32,8 @@ The `datadog-agent` does not run as root (and we do not recommend that you make 
 
 If the `datadog-agent` user does not have read access to the files you configure it to tail, then a permissions error is captured in the `/var/log/datadog/agent.log`. The Agent requires to have an execute permission on the directory containing the files (this is the default permission required to be able to list the file contained in a directory).
 
-**note**: when you add the appropriate read permissions, you want also to make sure that these permissions are correctly set on your log rotation configuration. Otherwise, when the log rotates next, the `datadog-agent` may lose its read permissions.
-Set permissions as 644 in the log rotation configuration to make sure the agent has read access to the file.
+**Note**: When adding the appropriate read permissions, make sure that these permissions are correctly set in your log rotation configuration. Otherwise, on the next log rotate, the Datadog Agent may lose its read permissions.
+Set permissions as `644` in the log rotation configuration to make sure the agent has read access to the files.
 
 ## Outbound traffic on port 10516 is blocked
 
