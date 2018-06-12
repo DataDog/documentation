@@ -115,9 +115,9 @@ The following units may be associated with metrics submitted to Datadog.
 [3]: /api/#metrics
 [4]: /getting_started/custom_metrics/
 [5]: /developers/dogstatsd/
-[6]: /developers/metrics/#gauges
-[7]: /developers/metrics/#rates
-[8]: /developers/metrics/#count
+[6]: /developers/metrics/gauges
+[7]: /developers/metrics/rates
+[8]: /developers/metrics/count
 [9]: https://github.com/DataDog/dd-agent/blob/master/aggregator.py
 [10]: /api/
 [11]: https://github.com/dropwizard/metrics
