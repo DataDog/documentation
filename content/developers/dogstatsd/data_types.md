@@ -64,7 +64,6 @@ def upload_file(file):
 Note that for counters coming from another source that are ever-increasing and never reset -- for example, the number of queries from MySQL over time -- we track the rate between flushed values. While there currently isn't an elegant solution to get raw counts within Datadog, you may want to apply a function to
 your series like cumulative sum or integral. [Read more about Datadog functions][17].
 
-
 ### Gauges
 
 Suppose a developer wanted to track the amount of free memory on a machine, we can periodically sample that value as the metric `system.mem.free`:
