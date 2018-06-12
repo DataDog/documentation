@@ -62,7 +62,9 @@ def upload_file(file):
 ```
 
 Note that for counters coming from another source that are ever-increasing and never reset -- for example, the number of queries from MySQL over time -- we track the rate between flushed values. While there currently isn't an elegant solution to get raw counts within Datadog, you may want to apply a function to
-your series like cumulative sum or integral. [Read more about Datadog functions][17].
+your series like cumulative sum or integral. [Read more about Datadog functions][8].
+
+Learn more about the [Count type in the Metrics documentation][4].
 
 ### Gauges
 
@@ -85,6 +87,8 @@ while true do
     sleep(10)
 end
 ```
+
+Learn more about the [Gauge type in the Metrics documentation][5].
 
 ### Histograms
 
@@ -146,6 +150,8 @@ These metrics give insight into how different each query time is. We can see how
 
 For this toy example, let's say a query time of 1 second is acceptable. Our median query time (graphed in purple) is usually less than 100 milliseconds, which is great. But unfortunately, our 95th percentile (graphed in blue) has large spikes sometimes nearing three seconds, which is unacceptable. This means most of our queries are running just fine, but our worst ones are very bad. If the 95th percentile was close to the median, than we would know that almost all of our queries are performing just fine.
 
+Learn more about the [Histogram type in the Metrics documentation][6].
+
 ### Timers
 
 Timers in DogStatsD are an implementation of Histograms (not to be confused with timers in the standard StatsD). They measure timing data _only_, such as the amount of time a section of code takes to execute, such as the time it takes to render a web page. In Python, you can create timers with a decorator:
@@ -204,6 +210,8 @@ def login(self, user_id)
 end
 ```
 
+Learn more about the [Histogram type in the Metrics documentation][6].
+
 ## Metric option: sample rates
 
 Since the overhead of sending UDP packets can be too great for some performance
@@ -220,6 +228,8 @@ Before sending the metric to Datadog, DogStatsD uses the `sample_rate` to
 correct the metric value, i.e. to estimate what it would have been without sampling.
 
 **Sample rates only work with counter, histogram, and timer metrics.**
+
+Learn more about the [Rates in the Metrics documentation][7].
 
 ## Events
 
@@ -292,3 +302,8 @@ Since tagging is an extension to StatsD, use a [DogStatsD client library][1].
 [1]: /libraries/
 [2]: http://datadogpy.readthedocs.io/en/latest/
 [3]: /monitors/monitor_types/custom_check
+[4]: /developers/metrics/count
+[5]: /developers/metrics/gauges
+[6]: /developers/metrics/histograms
+[7]: /developers/metrics/rates
+[8]: /graphing/miscellaneous/functions
