@@ -34,6 +34,7 @@ Use **Datadog Cloud Foundry Buildpack** to monitor your Cloud Foundry applicatio
 If your application does not use any buildpack, the installation is straightforward :
 
 **Upload the Datadog Cloud Foundry Buildpack.**
+
   Download the latest Datadog [build pack release][5] and upload it to your Cloud Foundry environment.
 
   ```shell
@@ -52,6 +53,7 @@ For older version, Cloud Foundry provides a back-port of this feature in the for
 You will need to install and configure this backport in order to use our buildpack.
 
 **Upload the multi-buildpack back-port.**
+
   Download the latest [multi-build pack release](https://github.com/cloudfoundry/multi-buildpack/releases) and upload it to your Cloud Foundry environment.
 
   ```shell
@@ -74,6 +76,7 @@ You will need to install and configure this backport in order to use our buildpa
   [cloud foundry documentation](https://docs.cloudfoundry.org/buildpacks/understand-buildpacks.html) about buildpacks.
 
 **Push your application with the multi-buildpack**
+
 You need to ensure that the `multi-buildpack` is the buildpack selected by Cloud Foundry for your application :
 ```shell
 cf push YOUR-APP -b multi-buildpack
@@ -82,6 +85,7 @@ cf push YOUR-APP -b multi-buildpack
 #### Cloud Foundry >= 1.12
 
 **Upload the Datadog Cloud Foundry Buildpack.**
+
   Download the latest Datadog [build pack release][5] and upload it to your Cloud Foundry environment.
 
   ```shell
@@ -89,6 +93,7 @@ cf push YOUR-APP -b multi-buildpack
   ```
 
 **Push your application with the Datadog buildpack and your buildpacks.**
+
   The process to push your application with multiple buildpack is described in the [cloud foundry documentation](https://docs.cloudfoundry.org/buildpacks/use-multiple-buildpacks.html).
 
   This process is likely to change in the close future so please check the link above.
