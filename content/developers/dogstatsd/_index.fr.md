@@ -12,7 +12,7 @@ further_reading:
   - link: developers/libraries
     tag: Documentation
     text: Bibliothèques pour l'API et DogStatsD officielles et maintenue par la communauté
-  - link: "https://github.com/DataDog/dd-agent/blob/master/dogstatsd.py"
+  - link: "https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd"
     tag: "Github"
     text: Code source de DogStatsD
 ---

@@ -12,7 +12,7 @@ further_reading:
 - link: "developers/libraries"
   tag: "Documentation"
   text: Official and Community-contributed API and DogStatsD client libraries
-- link: "https://github.com/DataDog/dd-agent/blob/master/dogstatsd.py"
+- link: "https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd"
   tag: "Github"
   text: DogStatsD source code
 ---
@@ -23,11 +23,11 @@ The easiest way to get your custom application metrics into Datadog is to send t
 * Service Checks and Events
 * Tagging
 
-Any compliant StatsD client will work, but you won't be able to use the Datadog-specific extensions.
+Any compliant StatsD client will work, but you won't be able to use the [Datadog-specific extensions](#dive-into-dogstatsd).
 
 **Note**: DogStatsD does NOT implement the following from StatsD:
 
-* Gauge deltas (see [this issue][1])
+* Gauge deltas (see [this issue][9])
 * Timers as a native metric type (though it [does support them via histograms][6])
 
 ## How it works
@@ -37,9 +37,7 @@ Because it uses UDP, your application can send metrics to DogStatsD and resume i
 
 {{< img src="developers/dogstatsd/dogstatsd.png" alt="dogstatsd"  responsive="true" popup="true">}}
 
-As it receives data, DogStatsD aggregates multiple data points for each unique metric into a single data point over a period of time called the flush interval. Let's walk through an example to see how this works.
-
-Suppose you want to know how many times your Python application is calling a particular database query. Your application can tell DogStatsD to increment a counter each time the query is called:
+As it receives data, DogStatsD aggregates multiple data points for each unique metric into a single data point over a period of time called the flush interval. Consider the following example, wherein DogStatsD is instructed to increment a counter each time a given database query is called:
 
 ```python
 
@@ -65,18 +63,11 @@ dogstatsd_port: 8125
 
 Then [restart your Agent][5].
 
-Once done, your application can reliably reach the [DogStatsD client library][1] for your application language and you'll be ready to start hacking. You _can_ use any generic StatsD client to send metrics to DogStatsD, but you won't be able to use any of the Datadog-specific features mentioned above.
-
-By default, DogStatsD listens on UDP port **8125**. If you need to change this, configure the `dogstatsd_port` option in the main [Agent configuration file][2]:
-
-    # Make sure your client is sending to the same port.
-    dogstatsd_port: 8125
-
-[Restart DogStatsD][5] to effect the change.
+By default, DogStatsD listens on UDP port **8125**. If you need to change this, configure the `dogstatsd_port` option in the main [Agent configuration file][2], and restart the client.
 
 ### Code
 
-First, install the module:
+There are [DogStatsD client libraries][1] for many languages and environments. You _can_ use any generic StatsD client to send metrics to DogStatsD, but you won't be able to use any of the Datadog-specific features mentioned above.
 
 For Python:
 ```shell
@@ -122,3 +113,4 @@ If you're interested in learning more about the datagram format used by DogStats
 [6]: /developers/dogstatsd/data_types/#timers
 [7]: /developers/dogstatsd/data_types
 [8]: /developers/dogstatsd/datagram_shell
+[9]: https://github.com/DataDog/dd-agent/pull/2104

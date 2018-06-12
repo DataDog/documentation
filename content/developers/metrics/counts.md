@@ -1,5 +1,5 @@
 ---
-title: Count
+title: Counts
 kind: documentation
 further_reading:
 - link: "developers/metrics"

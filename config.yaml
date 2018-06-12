@@ -695,9 +695,9 @@ languages:
           url: "developers/metrics/"
           weight: 40
           parent: menu_references_developers
-        - identifier: customnav_developersnav_metrics_count
-          name: "Count"
-          url: "developers/metrics/count"
+        - identifier: customnav_developersnav_metrics_counts
+          name: "Counts"
+          url: "developers/metrics/counts"
           weight: 401
           parent: customnav_developersnav_metrics
         - identifier: customnav_developersnav_metrics_gauges
@@ -1473,9 +1473,9 @@ languages:
           url: "developers/metrics/"
           weight: 40
           parent: menu_references_developers
-        - identifier: customnav_developersnav_metrics_count
-          name: "Count"
-          url: "developers/metrics/count"
+        - identifier: customnav_developersnav_metrics_counts
+          name: "Counts"
+          url: "developers/metrics/counts"
           weight: 401
           parent: customnav_developersnav_metrics
         - identifier: customnav_developersnav_metrics_gauges

@@ -9,7 +9,7 @@ further_reading:
 - link: "developers/libraries"
   tag: "Documentation"
   text: Official and Community-contributed API and DogStatsD client libraries
-- link: "https://github.com/DataDog/dd-agent/blob/master/dogstatsd.py"
+- link: "https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd"
   tag: "Github"
   text: DogStatsD source code
 ---
@@ -61,14 +61,13 @@ def upload_file(file):
     return 'File uploaded!'
 ```
 
-Note that for counters coming from another source that are ever-increasing and never reset -- for example, the number of queries from MySQL over time -- we track the rate between flushed values. While there currently isn't an elegant solution to get raw counts within Datadog, you may want to apply a function to
-your series like cumulative sum or integral. [Read more about Datadog functions][8].
+Note that for counters coming from another source that are ever-increasing and never reset (for example, the number of queries from MySQL over time), we track the rate between flushed values. To get raw counts within Datadog, apply a function to your series such as _cumulative sum_ or _integral_. [Read more about Datadog functions][8].
 
 Learn more about the [Count type in the Metrics documentation][4].
 
 ### Gauges
 
-Suppose a developer wanted to track the amount of free memory on a machine, we can periodically sample that value as the metric `system.mem.free`:
+Gauges measure the value of a particular thing over time. For example, in order to track the amount of free memory on a machine, periodically sample that value as the metric `system.mem.free`:
 
 For Python:
 ```python
@@ -144,17 +143,15 @@ The above instrumentation produces the following metrics:
 - `database.query.time.max`: maximum sampled value
 - `database.query.time.95percentile`: 95th percentile sampled value
 
-These metrics give insight into how different each query time is. We can see how long the query usually takes by graphing the `median`. We can see how long most queries take by graphing the `95percentile`.
-
 {{< img src="developers/metrics/graph-guides-metrics-query-times.png" alt="graph guides metrics query times" responsive="true" popup="true">}}
 
-For this toy example, let's say a query time of 1 second is acceptable. Our median query time (graphed in purple) is usually less than 100 milliseconds, which is great. But unfortunately, our 95th percentile (graphed in blue) has large spikes sometimes nearing three seconds, which is unacceptable. This means most of our queries are running just fine, but our worst ones are very bad. If the 95th percentile was close to the median, than we would know that almost all of our queries are performing just fine.
+For this toy example, let's say a query time of 1 second is acceptable. Our median query time (graphed in purple) is usually less than 100 milliseconds, which is great. But unfortunately, our 95th percentile (graphed in blue) has large spikes sometimes nearing three seconds, which is unacceptable. This means most of our queries are running just fine, but our worst ones are very bad. If the 95th percentile was close to the median, then we would know that almost all of our queries are performing just fine.
 
 Learn more about the [Histogram type in the Metrics documentation][6].
 
 ### Timers
 
-Timers in DogStatsD are an implementation of Histograms (not to be confused with timers in the standard StatsD). They measure timing data _only_, such as the amount of time a section of code takes to execute, such as the time it takes to render a web page. In Python, you can create timers with a decorator:
+Timers in DogStatsD are an implementation of Histograms (not to be confused with timers in the standard StatsD). They measure timing data _only_, for example, the amount of time a section of code takes to execute, or how long it takes to fully render a page. In Python, timers are created with a decorator:
 
 ```python
 
@@ -188,7 +185,7 @@ In either case, as DogStatsD receives the timer data, it calculates the statisti
 - `mywebsite.page_render.time.max` - the maximum render time
 - `mywebsite.page_render.time.95percentile` - the 95th percentile render time
 
-Under the hood, DogStatsD treats timers as histograms. Whether you timers or histograms, you'll be sending the same data to Datadog.
+Remember: under the hood, DogStatsD treats timers as histograms. Whether you timers or histograms, you'll be sending the same data to Datadog.
 
 ### Sets
 
@@ -214,10 +211,7 @@ Learn more about the [Histogram type in the Metrics documentation][6].
 
 ## Metric option: sample rates
 
-Since the overhead of sending UDP packets can be too great for some performance
-intensive code paths, DogStatsD clients support sampling,
-i.e. only sending metrics a percentage of the time. The following code sends
-a histogram metric only about half of the time:
+Since the overhead of sending UDP packets can be too great for some performance intensive code paths, DogStatsD clients support sampling, i.e. only sending metrics a percentage of the time. The following code sends a histogram metric only about half of the time:
 
 ```python
 
@@ -233,7 +227,7 @@ Learn more about the [Rates in the Metrics documentation][7].
 
 ## Events
 
-DogStatsD can emit events to your Datadog event stream. For example, you may want to see errors and exceptions in Datadog:
+DogStatsD can emit events to your [Datadog event stream][9]. For example, you may want to see errors and exceptions in Datadog:
 
 ```python
 
@@ -293,7 +287,7 @@ def algorithm_two():
     # Do fancy things (maybe faster?) here ...
 ```
 
-Since tagging is an extension to StatsD, use a [DogStatsD client library][1].
+Note that tagging is a [Datadog-specific extension][1] to StatsD.
 
 ## Further reading
 
@@ -302,8 +296,9 @@ Since tagging is an extension to StatsD, use a [DogStatsD client library][1].
 [1]: /libraries/
 [2]: http://datadogpy.readthedocs.io/en/latest/
 [3]: /monitors/monitor_types/custom_check
-[4]: /developers/metrics/count
+[4]: /developers/metrics/counts
 [5]: /developers/metrics/gauges
 [6]: /developers/metrics/histograms
 [7]: /developers/metrics/rates
 [8]: /graphing/miscellaneous/functions
+[9]: /graphing/event_stream/

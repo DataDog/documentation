@@ -28,7 +28,7 @@ This section explains the nuts and bolts of metrics - what they are, and what th
 
 There are multiple ways to send metrics to Datadog:
 
-1. Via the Datadog Agent directly. Learn how [to write an Agent check](/agent/agent_checks), or examine the [Aggregator source code][9] directly.
+1. Via the Datadog Agent directly. Learn how [to write an Agent check][2], or examine the [Aggregator source code][9] directly.
 2. Via the DogStatsD server (bundled with the Datadog Agent) and a [client library][16].
 3. Directly via Datadog's [HTTP API][10].
 4. Via Dropwizard's Java [metrics][11] library with the [metrics-datadog][12] backend. Thanks to the good folks at [Vistar Media][19], [Coursera][13], and [Bazaarvoice][14] for their contributions.
@@ -47,7 +47,7 @@ Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. `
 
 ## Metric Types
 
-The "Datadog in-app type" affects how a given metric is interpreted in query results and graph visualizations across the application. The metric type visible on the metric summary page is the Datadog in-app type. You should only change the type if you have started submitting this metric with a new type, and should be aware that changing the type may render historical data nonsensical.
+The "Datadog in-app type" affects how a given metric is interpreted in query results and graph visualizations across the application. The metric type visible on the [metric summary page][20] is the Datadog in-app type. You should only change the type if you have started submitting this metric with a new type, and should be aware that changing the type may render historical data nonsensical.
 
 In the Datadog web application there are four metric types (though one is deprecated):
 
@@ -111,7 +111,7 @@ The following units may be associated with metrics submitted to Datadog.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /developers/dogstatsd
-[2]: /agent/agent_checks
+[2]: /developers/agent_checks
 [3]: /api/#metrics
 [4]: /getting_started/custom_metrics/
 [5]: /developers/dogstatsd/
@@ -129,3 +129,4 @@ The following units may be associated with metrics submitted to Datadog.
 [17]: /graphing/miscellaneous/functions
 [18]: /monitors/monitor_types/custom_check
 [19]: http://www.vistarmedia.com/
+[20]: https://app.datadoghq.com/metric/summary
