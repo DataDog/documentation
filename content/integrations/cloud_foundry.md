@@ -18,7 +18,7 @@ ddtype: check
 
 ## Overview
 
-Any Cloud Foundry deployment can send metrics and events to Datadog. The data helps you track the health and availability of all nodes in the deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more.  
+Any Cloud Foundry deployment can send metrics and events to Datadog. The data helps you track the health and availability of all nodes in the deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more.
 Use this page to learn how to monitor your [application on Cloud Foundry](#monitor-your-applications-on-cloud-foundry) and your [Cloud Foundry cluster](#monitor-your-cloud-foundry-cluster).
 
 For Pivotal Cloud Foundry, you have the option to install the Datadog integration tiles with Ops Manager:
@@ -27,36 +27,103 @@ For Pivotal Cloud Foundry, you have the option to install the Datadog integratio
 
 ## Monitor Your Applications on Cloud Foundry
 
-**Note:** For Pivotal Cloud Foundry versions 1.11 and below, you will need to install the Meta Buildpack first.
+Use **Datadog Cloud Foundry Buildpack** to monitor your Cloud Foundry application. This is a [supply buildpack][1] for Cloud Foundry that installs a [Datadog DogStatsD binary][2] and [Datadog Trace Agent][3] in the container your app is running on.
 
-Use **Datadog Cloud Foundry Buildpack** to monitor your Cloud Foundry application. This is a [decorator buildpack][1] for Cloud Foundry that installs a [Datadog DogStatsD binary][2] and [Datadog Trace Agent][3] in the container your app is running on.
+### Setup for applications without a buildpack
 
-### Setup
+If your application does not use any buildpack, the installation is straightforward :
 
-**Upload the Datadog Cloud Foundry Buildpack.**  
+**Upload the Datadog Cloud Foundry Buildpack.**
   Download the latest Datadog [build pack release][5] and upload it to your Cloud Foundry environment.
 
   ```shell
   cf create-buildpack datadog-cloudfoundry-buildpack ./datadog-cloudfoundry-buildpack-latest.zip 99 --enable
 
-  cf push
+  cf push YOUR-APP
   ```
+
+### Setup for applications with one or more buildpacks
+
+#### Cloud Foundry < 1.12
+
+Our buildpack uses Cloud Foundry [multi-buildpack][4] feature that was introduced in version `1.12`.
+
+For older version, Cloud Foundry provides a back-port of this feature in the form of a [buildpack](https://github.com/cloudfoundry/multi-buildpack).
+You will need to install and configure this backport in order to use our buildpack.
+
+**Upload the multi-buildpack back-port.**
+  Download the latest [multi-build pack release](https://github.com/cloudfoundry/multi-buildpack/releases) and upload it to your Cloud Foundry environment.
+
+  ```shell
+  cf create-buildpack multi-buildpack ./multi-buildpack-v-x.y.z.zip 99 --enable
+  ```
+
+**Add a multi-buildpack manifest to your application.**
+
+  As detailed [on the multi-buildpack back-port repo](https://github.com/cloudfoundry/multi-buildpack#usage), you need to create a `multi-buildpack.yml` file at the root of your application and configure it for your environment.
+
+  You will need to add a link to the Datadog Cloud Foundry Buildpack and to your regular buildpack :
+
+  ```yaml
+  buildpacks:
+    - "https://github.com/DataDog/datadog-cloudfoundry-buildpack/releases/download/3.1.0/datadog-cloudfoundry-buildpack.zip" # TODO: Discuss if it makes sense to put this on an s3 bucket
+    - "https://github.com/cloudfoundry/ruby-buildpack#v1.7.18" # Replace this with your regular buildpack
+  ```
+
+  **Important**: Your regular buildpack should probably be the last in the manifest to act as a final buildpack. To learn more refer to
+  [cloud foundry documentation](https://docs.cloudfoundry.org/buildpacks/understand-buildpacks.html) about buildpacks.
+
+**Push your application with the multi-buildpack**
+You need to ensure that the `multi-buildpack` is the buildpack selected by Cloud Foundry for your application :
+```shell
+cf push YOUR-APP -b multi-buildpack
+```
+
+#### Cloud Foundry >= 1.12
+
+**Upload the Datadog Cloud Foundry Buildpack.**
+  Download the latest Datadog [build pack release][5] and upload it to your Cloud Foundry environment.
+
+  ```shell
+  cf create-buildpack datadog-cloudfoundry-buildpack ./datadog-cloudfoundry-buildpack-latest.zip
+  ```
+
+**Push your application with the Datadog buildpack and your buildpacks.**
+  The process to push your application with multiple buildpack is described in the [cloud foundry documentation](https://docs.cloudfoundry.org/buildpacks/use-multiple-buildpacks.html).
+
+  This process is likely to change in the close future so please check the link above.
+  ```shell
+  cf push YOUR-APP --no-start -b binary_buildpack
+  cf v3-push YOUR-APP -b datadog-cloudfoundry-buildpack -b YOUR-BUILDPACK-1 -b YOUR-FINAL-BUILDPACK
+  ```
+
+  **Important**: If you were using a single buildpack before, it should probably be the last one to be loaded in order for it to act as a final buildpack.
+  To learn more refer to [cloud foundry documentation](https://docs.cloudfoundry.org/buildpacks/understand-buildpacks.html) about buildpacks.
+
+#### Meta-Buildpack **(deprecated)**
+
+If you are a [meta-buildpack](https://github.com/cf-platform-eng/meta-buildpack) user,
+our buildpack can be used as a decorator out of the box.
+
+Note that the [meta-buildpack](https://github.com/cf-platform-eng/meta-buildpack)
+has been deprecated by pivotal in favor of the [multi-buildpack](https://github.com/cloudfoundry/multi-buildpack)
+and that we might drop the support for it in a future release.
 
 ### Configuration
 **Set an API Key in your environment to enable the buildpack**:
 
 ```shell
 # set the environment variable
-cf set-env $YOUR_APP_NAME DD_API_KEY $YOUR_DATADOG_API_KEY
+cf set-env YOUR-APP DD_API_KEY $YOUR_DATADOG_API_KEY
 # restage the application to get it to pick up the new environment variable and use the buildpack
-cf restage $YOUR_APP_NAME
+cf restage YOUR-APP
 ```
 
 ### Build
 To build this buildpack, edit the relevant files and run the `./build` script. If you want to upload it, run `./upload`.
 
 ### DogStatsD
-DogStatsD setup is now complete. See [the documentation][6] for more information. We maintain [a list of DogStatsD libraries][7] compatible with a wide range of applications.
+See [the documentation][6] for more information. We maintain [a list of DogStatsD libraries][7] compatible with a wide range of applications.
 
 ## Monitor Your Cloud Foundry Cluster
 
@@ -283,10 +350,10 @@ The Datadog Firehose Nozzle only collects CounterEvents (as metrics, not events)
 
 {{< get-metrics-from-git "cloud_foundry">}}
 
-[1]: https://github.com/cf-platform-eng/meta-buildpack/blob/master/README.md#decorators
+[1]: https://docs.cloudfoundry.org/buildpacks/understand-buildpacks.html#supply-script
 [2]: https://docs.datadoghq.com/developers/dogstatsd/
 [3]: https://docs.datadoghq.com/tracing/
-[4]: https://github.com/cf-platform-eng/meta-buildpack#how-to-install-the-meta-buildpack
+[4]: https://docs.cloudfoundry.org/buildpacks/use-multiple-buildpacks.html
 [5]: https://cloudfoundry.datadoghq.com/datadog-cloudfoundry-buildpack/datadog-cloudfoundry-buildpack-latest.zip
 [6]: /developers/dogstatsd
 [7]: https://docs.datadoghq.com/libraries/
