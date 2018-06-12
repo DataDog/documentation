@@ -49,12 +49,14 @@ clean-exe:  ## remove execs.
 	@rm -rf ${EXE_LIST}
 
 clean-integrations:  ## remove built integrations files.
-	@find ./data/integrations -type f -maxdepth 1 \
+	@if [ -d data/integrations ]; then \
+		find ./data/integrations -type f -maxdepth 1 \
 	    -a -not -name '*.fr.yaml' \
-	    -exec rm -rf {} \;
-	@find ./data/service_checks -type f -maxdepth 1 \
+	    -exec rm -rf {} \; ;fi 
+	@if [ -d data/service_checks ]; then \
+		find ./data/service_checks -type f -maxdepth 1 \
 	    -a -not -name '*.fr.json' \
-	    -exec rm -rf {} \;
+	    -exec rm -rf {} \; ;fi
 	@find ./content/integrations -type f -maxdepth 1 \
 	    -a -not -name '_index.md' \
 	    -a -not -name 'amazon_guardduty.md' \
@@ -71,8 +73,8 @@ clean-integrations:  ## remove built integrations files.
 	    -exec rm -rf {} \;
 
 clean-auto-doc: ##remove all doc automatically created
-	@find ./content/developers/integrations -type f -maxdepth 1 \
-		-exec rm -rf {} \;
+	@if [ -d content/developers/integrations ]; then \
+	find ./content/developers/integrations -type f -maxdepth 1 -exec rm -rf {} \; ;fi
 
 clean-node:  ## remove node_modules.
 	@if [ -d node_modules ]; then rm -r node_modules; fi
