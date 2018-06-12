@@ -33,19 +33,17 @@ Each one of these becomes a value in their respective metric time series that ar
 
 ### Agent sheck
 
-{{% table responsive="true" %}}
-|Method | Overview |
-|:---|:---|
-|self.histogram(...)|used to track the statistical distribution of a set of values.|
-{{% /table %}}
+
+| Method              | Overview                                                       |
+| :---                | :---                                                           |
+| self.histogram(...) | used to track the statistical distribution of a set of values. |
 
 ### DogStatsD
 
-{{% table responsive="true" %}}
-|Method | Overview |
-|:---|:---|
-|dog.histogram(...)|Used to track the statistical distribution of a set of values over a statsd flush period.|
-{{% /table %}}
+| Method             | Overview                                                                                  |
+| :---               | :---                                                                                      |
+| dog.histogram(...) | Used to track the statistical distribution of a set of values over a statsd flush period. |
+
 
 #### Example
 

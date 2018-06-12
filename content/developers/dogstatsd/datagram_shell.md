@@ -113,6 +113,7 @@ vagrant@vagrant-ubuntu-14-04:~$ echo -n "custom_metric:60|g|#shell" | nc -4u -w0
 ```
 
 On Windows:
+
 ```
 PS C:\vagrant> .\send-statsd.ps1 "custom_metric:123|g|#shell"
 PS C:\vagrant>
@@ -129,17 +130,21 @@ sock.sendto("custom_metric:60|g|#shell", ("localhost", 8125))
 ### Sending events
 
 The format for sending events is:
+
 ```
 _e{title.length,text.length}:title|text|d:date_happened|h:hostname|p:priority|t:alert_type|#tag1,tag2.
 ```
+
 Here we need to calculate the size of the event's title and body.
 
 On Linux:
+
 ```
 vagrant@vagrant-ubuntu-14-04:~$ title="Event from the shell"
 vagrant@vagrant-ubuntu-14-04:~$ text="This was sent from Bash!"
 vagrant@vagrant-ubuntu-14-04:~$ echo "_e{${#title},${#text}}:$title|$text|#shell,bash"  >/dev/udp/localhost/8125
 ```
+
 On Windows:
 
 ```
@@ -152,5 +157,5 @@ PS C:\vagrant> .\send-statsd.ps1 "_e{$($title.length),$($text.Length)}:$title|$t
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/metrics/#metric-names 
+[1]: /developers/metrics/#naming-metrics
 [2]: https://github.com/joehack3r/powershell-statsd/blob/master/send-statsd.ps1
