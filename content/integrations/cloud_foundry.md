@@ -48,18 +48,18 @@ cf push <YOUR_APP>
 
 Our buildpack uses Cloud Foundry [multi-buildpack][4] feature that was introduced in version `1.12`.
 
-For older version, Cloud Foundry provides a back-port of this feature in the form of a [buildpack][25]. You must install and configure this backport in order to use our buildpack: 
+For older version, Cloud Foundry provides a back-port of this feature in the form of a [buildpack][25]. You must install and configure this backport in order to use our buildpack:
 
-1. **Upload the multi-buildpack back-port.**  
+1. **Upload the multi-buildpack back-port.**
   Download the latest [multi-build pack release][25] and upload it to your Cloud Foundry environment.
 
     ```shell
     cf create-buildpack multi-buildpack ./multi-buildpack-v-x.y.z.zip 99 --enable
     ```
 
-2. **Add a multi-buildpack manifest to your application.**  
-  As detailed [on the multi-buildpack back-port repo][26], create a `multi-buildpack.yml` file at the root of your application and configure it for your environment.  
-  Add a link to the Datadog Cloud Foundry Buildpack and to your regular buildpack:  
+2. **Add a multi-buildpack manifest to your application.**
+  As detailed [on the multi-buildpack back-port repo][26], create a `multi-buildpack.yml` file at the root of your application and configure it for your environment.
+  Add a link to the Datadog Cloud Foundry Buildpack and to your regular buildpack:
 
       ```yaml
       buildpacks:
@@ -69,29 +69,29 @@ For older version, Cloud Foundry provides a back-port of this feature in the for
 
     **Important**: Your regular buildpack should probably be the last in the manifest to act as a final buildpack. To learn more refer to [cloud foundry documentation][27] about buildpacks.
 
-3. **Push your application with the multi-buildpack**  
+3. **Push your application with the multi-buildpack**
   Ensure that the `multi-buildpack` is the buildpack selected by Cloud Foundry for your application :
 
     ```shell
-    cf push YOUR-APP -b multi-buildpack
+    cf push <YOUR_APP> -b multi-buildpack
     ```
 
 #### Cloud Foundry >= 1.12
 
-1. **Upload the Datadog Cloud Foundry Buildpack.**  
+1. **Upload the Datadog Cloud Foundry Buildpack.**
   Download the latest Datadog [build pack release][5] and upload it to your Cloud Foundry environment.
 
     ```shell
     cf create-buildpack datadog-cloudfoundry-buildpack ./datadog-cloudfoundry-buildpack-latest.zip
     ```
 
-2. **Push your application with the Datadog buildpack and your buildpacks.**  
+2. **Push your application with the Datadog buildpack and your buildpacks.**
   The process to push your application with multiple buildpack is described in the [cloud foundry documentation][27].
   This process is likely to change in the close future so please check the link above.
-  
+
     ```shell
-    cf push YOUR-APP --no-start -b binary_buildpack
-    cf v3-push YOUR-APP -b datadog-cloudfoundry-buildpack -b YOUR-BUILDPACK-1 -b YOUR-FINAL-BUILDPACK
+    cf push <YOUR_APP> --no-start -b binary_buildpack
+    cf v3-push <YOUR_APP> -b datadog-cloudfoundry-buildpack -b YOUR-BUILDPACK-1 -b YOUR-FINAL-BUILDPACK
     ```
 
   **Important**: If you were using a single buildpack before, it should probably be the last one to be loaded in order for it to act as a final buildpack. To learn more refer to [cloud foundry documentation][27] about buildpacks.
@@ -108,7 +108,7 @@ If you are a [meta-buildpack][28] user, our buildpack can be used as a decorator
 
 ```shell
 # set the environment variable
-cf set-env YOUR-APP DD_API_KEY <DD_API_KEY>
+cf set-env <YOUR_APP> DD_API_KEY <DD_API_KEY>
 # restage the application to get it to pick up the new environment variable and use the buildpack
 cf restage <YOUR_APP>
 ```
