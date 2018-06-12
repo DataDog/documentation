@@ -266,7 +266,7 @@ opts = {
 statsd.service_check(name, status, opts)
 ```
 
-After a service check has been reported, you can use it to trigger a [custom check monitor][18].
+After a service check has been reported, you can use it to trigger a [custom check monitor][3].
 
 ## Tagging
 
@@ -291,3 +291,4 @@ Since tagging is an extension to StatsD, use a [DogStatsD client library][1].
 
 [1]: /libraries/
 [2]: http://datadogpy.readthedocs.io/en/latest/
+[3]: /monitors/monitor_types/custom_check
