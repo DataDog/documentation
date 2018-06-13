@@ -44,7 +44,7 @@ ac_exclude: ["image:debian"]
 ac_include: ["name:frontend.*"]
 ```
 
-**Note:** For Agent v5, instead of including the above in the `datadog.conf` main configuration file, You have to explicitly add a `datadog.yaml` file to `/etc/datadog-agent/datadog.yaml` as the Process Agent relies on configuration options set here. This configuration only excludes containers from real-time collection **not** from Autodiscovery.
+**Note:** For Agent v5, instead of including the above in the `datadog.conf` main configuration file, you have to explicitly add a `datadog.yaml` file to `/etc/datadog-agent/`, as the Process Agent requires all configuration options here. This configuration only excludes containers from real-time collection **not** from Autodiscovery.
 
 ## Searching, Filtering, and Pivoting
 
