@@ -248,7 +248,7 @@ logs_config:
   dev_mode_no_ssl: true
  ```
 
-Then configure your proxy to forward logs to the endpoint `intake.logs.datadoghq.com` on port `10516` with SSL activated. 
+Then configure your proxy to forward logs to the endpoint `agent-intake.logs.datadoghq.com` on port `10516` with SSL activated. 
 
 ### The Advantage of Collecting JSON-formatted logs
 
