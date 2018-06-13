@@ -680,14 +680,49 @@ languages:
           url: "developers/dogstatsd/"
           weight: 30
           parent: menu_references_developers
-        - identifier: customnav_developersnav_libraries
-          name: "Libraries"
-          url: "developers/libraries/"
-          weight: 40
-          parent: menu_references_developers
+        - identifier: customnav_developersnav_dogstatsd_data_types
+          name: "Data Types and Tags"
+          url: "developers/dogstatsd/data_types"
+          weight: 301
+          parent: customnav_developersnav_dogstatsd
+        - identifier: customnav_developersnav_dogstatsd_datagram_shell
+          name: "Datagram and Shell Usage"
+          url: "developers/dogstatsd/datagram_shell"
+          weight: 302
+          parent: customnav_developersnav_dogstatsd
         - identifier: customnav_developersnav_metrics
           name: "Metrics"
           url: "developers/metrics/"
+          weight: 40
+          parent: menu_references_developers
+        - identifier: customnav_developersnav_metrics_counts
+          name: "Counts"
+          url: "developers/metrics/counts"
+          weight: 401
+          parent: customnav_developersnav_metrics
+        - identifier: customnav_developersnav_metrics_gauges
+          name: "Gauges"
+          url: "developers/metrics/gauges"
+          weight: 402
+          parent: customnav_developersnav_metrics
+        - identifier: customnav_developersnav_metrics_histograms
+          name: "Histograms"
+          url: "developers/metrics/histograms"
+          weight: 403
+          parent: customnav_developersnav_metrics
+        - identifier: customnav_developersnav_metrics_rates
+          name: "Rates"
+          url: "developers/metrics/rates"
+          weight: 404
+          parent: customnav_developersnav_metrics
+        - identifier: customnav_developersnav_metrics_sets
+          name: "Sets"
+          url: "developers/metrics/sets"
+          weight: 405
+          parent: customnav_developersnav_metrics
+        - identifier: customnav_developersnav_libraries
+          name: "Libraries"
+          url: "developers/libraries/"
           weight: 50
           parent: menu_references_developers
         - identifier: customnav_developersnav_agent_checks
@@ -1423,14 +1458,49 @@ languages:
           url: "developers/dogstatsd/"
           weight: 30
           parent: menu_references_developers
-        - identifier: customnav_developersnav_libraries
-          name: "Bibliothèques"
-          url: "developers/libraries/"
-          weight: 40
-          parent: menu_references_developers
+        - identifier: customnav_developersnav_dogstatsd_data_types
+          name: "Types de Données et Tags"
+          url: "developers/dogstatsd/data_types"
+          weight: 301
+          parent: customnav_developersnav_dogstatsd
+        - identifier: customnav_developersnav_dogstatsd_datagram_shell
+          name: "Datagramme et l'Interface Système"
+          url: "developers/dogstatsd/datagram_shell"
+          weight: 302
+          parent: customnav_developersnav_dogstatsd
         - identifier: customnav_developersnav_metrics
           name: "Métriques"
           url: "developers/metrics/"
+          weight: 40
+          parent: menu_references_developers
+        - identifier: customnav_developersnav_metrics_counts
+          name: "Counts"
+          url: "developers/metrics/counts"
+          weight: 401
+          parent: customnav_developersnav_metrics
+        - identifier: customnav_developersnav_metrics_gauges
+          name: "Gauges"
+          url: "developers/metrics/gauges"
+          weight: 402
+          parent: customnav_developersnav_metrics
+        - identifier: customnav_developersnav_metrics_histograms
+          name: "Histograms"
+          url: "developers/metrics/histograms"
+          weight: 403
+          parent: customnav_developersnav_metrics
+        - identifier: customnav_developersnav_metrics_rates
+          name: "Rates"
+          url: "developers/metrics/rates"
+          weight: 404
+          parent: customnav_developersnav_metrics
+        - identifier: customnav_developersnav_metrics_sets
+          name: "Sets"
+          url: "developers/metrics/sets"
+          weight: 405
+          parent: customnav_developersnav_metrics
+        - identifier: customnav_developersnav_libraries
+          name: "Bibliothèques"
+          url: "developers/libraries/"
           weight: 50
           parent: menu_references_developers
         - identifier: customnav_integrationsnav_agent_checks
