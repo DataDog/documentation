@@ -237,7 +237,18 @@ logs:
 
 ### Using a Proxy for Logs
 
-The log Agent does not presently respect the proxy setting in the datadog.yaml configuration file. This feature will be available in a future release.
+The log Agent does not presently respect the usual proxy setting in the `datadog.yaml` configuration file. It is **not yet** possible to use the agent as proxy (local agent -> proxy agent -> Datadog) but a third party proxy can be used.
+
+To use a third party proxy, configure the local agents to forward logs to this proxy by setting those parameters in the `datadog.yaml` file:
+
+```
+logs_config:
+  dd_url: <MY_PROXY_URL>
+  dd_port: <MY_PROXY_PORT>
+  dev_mode_no_ssl: true
+ ```
+
+Then configure your proxy to forward the logs to `intake.logs.datadoghq.com` on port `10516` with SSL activated. 
 
 ### The Advantage of Collecting JSON-formatted logs
 
