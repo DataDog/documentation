@@ -128,7 +128,7 @@ apm_config:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/faq/agent-5-tracing-setup
-[2]: https://github.com/DataDog/datadog-trace-agent/blob/master/config/agent.go#L170
+[2]: https://github.com/DataDog/datadog-trace-agent/blob/master/config/agent.go#L95
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://github.com/DataDog/datadog-trace-agent/tree/master/config#agent-configuration
 [5]: /tracing/setup/docker
