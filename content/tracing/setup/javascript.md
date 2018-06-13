@@ -75,6 +75,20 @@ tracer
 
 For more information on manual instrumentation, check out the [API documentation][5].
 
+## Tracer Settings
+
+### Debug Mode
+
+Debug mode is disabled by default. To enable:
+
+```javascript
+const tracer = require('dd-trace').init({
+  debug: true
+})
+```
+
+For more tracer settings, check out the [API documentation][4].
+
 ## Distributed Tracing
 
 Distributed tracing allows you to propagate a single trace across multiple services, so you can see performance end-to-end.
