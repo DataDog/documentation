@@ -30,9 +30,7 @@ For details about contributing, check out the [development guide][development do
 
 ### Requirements
 
-Node 4 is the minimum version supported by this library. However, it benefits significantly from the performance improvements introduced in Node 8.3+.
-
-**Note**: If you are using async/await natively, the `asyncHooks` experimental flag must be turned on in the [tracer settings][4] for context propagation to work properly.
+Node 4.7 is the minimum version supported by this library. However, it benefits significantly from the performance improvements introduced in Node 8.3+.
 
 ### Installation
 
