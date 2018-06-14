@@ -1,5 +1,5 @@
 ---
-title: How to remap custom severity values to the official log status
+title: How to remap custom severity values to the official log status?
 kind: faq
 disable_toc: true
 further_reading:
@@ -14,9 +14,11 @@ further_reading:
   text: Learn more about parsing
 ---
 
-By default, the Log Status Remapper[1] relies on [Syslog severity standards][2]. However there might be other systems having different severity values that you might want to remap on the official log status.
-This is possible thanks to the [Category Processor][3] that can define a mapping between your custom values and the expected ones.
-In this article we will see how to do this with 2 examples: Bunyan levels and web access logs.
+By default, the [Log Status Remapper][1] relies on the [Syslog severity standards][2].  
+However there might be other systems having different severity values that you might want to remap on the official log status.
+This is possible thanks to the [Category Processor][3] that defines a mapping between your custom values and the expected ones.
+
+In this article develop how to do this with 2 examples: Bunyan levels and web access logs.
 
 
 ## Web Access logs
@@ -29,17 +31,17 @@ The status code of the request can be used to determine the log status. Our inte
 * 5xx: Error
 
 Let's assume the status code of your log is stored in the `http.status_code` attribute.
-Add a Category Processor in your pipeline that will create a new attribute to reflect the above mapping:
+Add a Category Processor in your pipeline that creates a new attribute to reflect the above mapping:
 
-https://cl.ly/3Y2W1A151j2f
+{{< img src="logs/faq/category_processor.png" alt="Category processor" responsive="true" popup="true">}}
 
 Then add a status remapper that uses the newly created attribute:
 
-https://cl.ly/1K39213q200y
+{{< img src="logs/faq/log_status_remapper.png" alt="log status remapper" responsive="true" popup="true">}}
 
 ## Bunyan levels
 
-Bunyan levels are similar to the Syslog but with a value multiplied by 10.
+Bunyan levels are similar to the Syslog one but with a value multiplied by 10.
 
 * 10 = TRACE 
 * 20 = DEBUG 
@@ -49,13 +51,13 @@ Bunyan levels are similar to the Syslog but with a value multiplied by 10.
 * 60 = FATAL
 
 Let's assume the bunyan level is stored in the `bunyan_level` attribute.
-Add a Category Processor in your pipeline that will create a new attribute to reflect the above mapping:
+Add a Category Processor in your pipeline that creates a new attribute to reflect the above mapping:
 
-https://cl.ly/1f2R3U0z3V3d
+{{< img src="logs/faq/category_processor_bunyan.png" alt="category processor bunyan" responsive="true" popup="true">}}
 
 Then add a status remapper that uses the newly created attribute:
 
-https://cl.ly/0Q1v192v3a42
+{{< img src="logs/faq/status_remapper_bunyan.png" alt="log status remapper bunyan" responsive="true" popup="true">}}
 
 ## Further Reading
 
