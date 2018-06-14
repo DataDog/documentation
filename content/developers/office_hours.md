@@ -24,9 +24,9 @@ Office hours will be held in #integrations in the [Datadog Community Slack][1] (
 
 - Sometimes a given PR may be complex and require further offline review before we can provide feedback.  
 
-### List of open source project
+### List of open source projects
 
-[Discover the full list of Datadog open-source project on our Github][5]
+[Discover the full list of Datadog open-source projects in our Github][5]
 
 
 [1]: https://datadoghq.slack.com
