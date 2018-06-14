@@ -26,7 +26,7 @@ Office hours will be held in #integrations in the [Datadog Community Slack][1] (
 
 - Sometimes a given PR may be complex and require further offline review before we can provide feedback.  
 
-## List of open source project
+## List of open source projects
 
 ### Agent 
 
