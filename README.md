@@ -25,7 +25,7 @@ To run the site without Docker and perform administrative tasks (compile metrics
 
 `make start`
 
-Documentation is available at `https://localhost:1313`
+Documentation is available at `http://localhost:1313`
 
 To run the site with Docker (easier setup, slower server), install [Docker](https://docs.docker.com/engine/installation/#supported-platforms) then execute: 
 
