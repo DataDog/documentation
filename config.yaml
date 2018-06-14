@@ -725,36 +725,41 @@ languages:
           url: "developers/libraries/"
           weight: 50
           parent: menu_references_developers
+        - identifier: customnav_developersnav_office_hours
+          name: "Community Office Hours"
+          url: "developers/office_hours/"
+          weight: 60
+          parent: menu_references_developers
         - identifier: customnav_developersnav_agent_checks
           name: "Write an Agent Check"
           url: "developers/agent_checks"
-          weight: 60
+          weight: 70
           parent: menu_references_developers
         - identifier: customnav_developersnav_prometheus
           name: "Write a Prometheus Check"
           url: "developers/prometheus"
-          weight: 70
+          weight: 80
           parent: menu_references_developers
         # Integrations core doc
         - identifier: customnav_integrationsnav_new_integration
           name: "Integrations"
           url: "developers/integrations/"
-          weight: 80
+          weight: 90
           parent: menu_references_developers
         - identifier: customnav_integrationsnav_new_check_howto
           name: "Create a new Integration"
           url: "developers/integrations/new_check_howto"
-          weight: 801
+          weight: 901
           parent: customnav_integrationsnav_new_integration
         - identifier: customnav_integrationsnav_python
           name: "Python"
           url: "developers/integrations/python"
-          weight: 802
+          weight: 902
           parent: customnav_integrationsnav_new_integration
         - identifier: customnav_integrationsnav_legacy
           name: "Legacy"
           url: "developers/integrations/legacy"
-          weight: 803
+          weight: 903
           parent: customnav_integrationsnav_new_integration
         #- identifier: customnav_developersnav_faq
         #  name: "FAQ"
@@ -1503,36 +1508,41 @@ languages:
           url: "developers/libraries/"
           weight: 50
           parent: menu_references_developers
+        - identifier: customnav_developersnav_office_hours
+          name: "Community Office Hours"
+          url: "developers/office_hours/"
+          weight: 60
+          parent: menu_references_developers
         - identifier: customnav_integrationsnav_agent_checks
           name: "Écrire un Check de l'Agent"
           url: "developers/agent_checks"
-          weight: 60
+          weight: 70
           parent: menu_references_developers
         - identifier: customnav_integrationsnav_prometheus
           name: "Écrire un Check Prometheus"
           url: "developers/prometheus"
-          weight: 70
+          weight: 80
           parent: menu_references_developers
         # Integrations core doc
         - identifier: customnav_integrationsnav_new_integration
           name: "Intégrations"
           url: "developers/integrations/"
-          weight: 80
+          weight: 90
           parent: menu_references_developers
         - identifier: customnav_integrationsnav_new_check_howto
           name: "Créer une nouvelle intégration"
           url: "developers/integrations/new_check_howto"
-          weight: 801
+          weight: 901
           parent: customnav_integrationsnav_new_integration
         - identifier: customnav_integrationsnav_python
           name: "Python"
           url: "developers/integrations/python"
-          weight: 802
+          weight: 902
           parent: customnav_integrationsnav_new_integration
         - identifier: customnav_integrationsnav_legacy
           name: "Legacy"
           url: "developers/integrations/legacy"
-          weight: 803
+          weight: 903
           parent: customnav_integrationsnav_new_integration
         #- identifier: customnav_developersnav_faq
         #  name: "FAQ"
