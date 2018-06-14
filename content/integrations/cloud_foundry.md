@@ -57,10 +57,10 @@ For older version, Cloud Foundry provides a back-port of this feature in the for
 
     The URLs for the Datadog Buildpack are :
 
-    - https://cloudfoundry.datadoghq.com/datadog-cloudfoundry-buildpack/datadog-cloudfoundry-buildpack-latest.zip
-    - https://cloudfoundry.datadoghq.com/datadog-cloudfoundry-buildpack/datadog-cloudfoundry-buildpack-x.y.z.zip
+    - `https://cloudfoundry.datadoghq.com/datadog-cloudfoundry-buildpack/datadog-cloudfoundry-buildpack-latest.zip`
+    - `https://cloudfoundry.datadoghq.com/datadog-cloudfoundry-buildpack/datadog-cloudfoundry-buildpack-x.y.z.zip`
 
-    You should not use the `latest` here but instead pin it to a specific version.
+    You should not use the `latest` here but instead pin it to a specific version (replace `x.y.z` by the specific version you want to use).
 
     **Important**: Your regular buildpack should probably be the last in the manifest to act as a final buildpack. To learn more refer to [cloud foundry documentation][27] about buildpacks.
 
