@@ -38,7 +38,7 @@ Office hours will be held in #integrations in the [Datadog Community Slack][1] (
 | [dd-agent][7]                   | Datadog Agent Version 5                                                                | Outdated |
 | [datadog-trace-agent][8]        | Datadog APM agent                                                                      | Active   |
 | [datadog-process-agent][15]     | Datadog Process Agent                                                                  | Active   |
-| [docker-dd-agent][16]           | Datadog Agent Dockerfile for Trusted Builds                                            |          |
+| [docker-dd-agent][16]           | Datadog Agent Dockerfile for Trusted Builds                                            | Active   |
 | [agent-payload][22]             | Payload format description for communication between the agent and the Datadog backend | Active   |
 | [datadog-agent-boshrelease][26] | Datadog agent for BOSH                                                                 | Active   |
 | [dd-agent-builder][33]          | Windows agent build recipe                                                             | Active   |
