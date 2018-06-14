@@ -79,7 +79,7 @@ For more information on manual instrumentation, check out the [API documentation
 
 ### Debug Mode
 
-Debug mode is disabled by default. To enable:
+Debug mode is disabled by default, to enable it:
 
 ```javascript
 const tracer = require('dd-trace').init({
