@@ -23,7 +23,7 @@ curl -v -X POST -H "Content-type: application/json" \
       }
     ]
   }' \
-"https://api.datadoghq.com/api/v1/integration/slack?api_key=${api_key}&application_key=${app_key}&run_check=true"
+"https://api.datadoghq.com/api/v1/integration/slack?api_key=${api_key}&application_key=${app_key}"
 
 curl -v -X PUT -H "Content-type: application/json" \
 -d '{
@@ -50,7 +50,7 @@ curl -v -X PUT -H "Content-type: application/json" \
       }
     ]
 }' \
-"https://api.datadoghq.com/api/v1/integration/slack?api_key=${api_key}&application_key=${app_key}&run_check=true"
+"https://api.datadoghq.com/api/v1/integration/slack?api_key=${api_key}&application_key=${app_key}"
 
 curl -v "https://api.datadoghq.com/api/v1/integration/slack?api_key=${api_key}&application_key=${app_key}"
 

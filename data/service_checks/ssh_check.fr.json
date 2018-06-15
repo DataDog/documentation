@@ -15,6 +15,6 @@
         "statuses": ["ok", "critical"],
         "groups": ["host", "instance"],
         "name": "Peut se connecter",
-        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter au host SFTP. Sinon renvoie `OK`."
+        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter au hôte SFTP. Sinon renvoie `OK`."
     }
 ]

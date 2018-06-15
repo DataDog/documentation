@@ -1,5 +1,5 @@
 ---
-title: Retirer les tags d'un host
+title: Retirer les tags d'un hôte
 type: apicode
 order: 20.5
 external_redirect: /api/#remove-host-tags

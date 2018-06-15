@@ -72,6 +72,8 @@ The solution here would be to only specify the specific partition for your topic
 #my_topic [0, 1, 4, 12]
 ```
 
+5. Partition Context Limitation. Currently, the number of partition contexts collection is limited to 200. If you require more contexts, [please contact the support team][8].
+
 [1]: https://kafka.apache.org/
 [2]: https://sookocheff.com/post/kafka/kafka-in-a-nutshell/
 [3]: https://www.datadoghq.com/blog/monitoring-kafka-performance-metrics/
@@ -79,3 +81,4 @@ The solution here would be to only specify the specific partition for your topic
 [5]: https://github.com/DataDog/jmxfetch
 [6]: /integrations/kafka/#agent-check-kafka-consumer
 [7]: /agent
+[8]: /help

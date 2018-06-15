@@ -9,11 +9,10 @@ curl -X POST -H "Content-type: application/json" \
         "host_tags": ["account:customer1"],
         "role_name": "DatadogAWSIntegrationRole",
         "account_specific_namespace_rules": {
-        	"auto_scaling": False,
-        	"opsworks": False
+        	"auto_scaling": false,
+        	"opsworks": false
         }
-    }
-}' \
+    }'\
 "https://api.datadoghq.com/api/v1/integration/aws?api_key=${api_key}&application_key=${app_key}"
 
 # Delete an AWS Account in Datadog

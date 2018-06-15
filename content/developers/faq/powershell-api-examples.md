@@ -26,51 +26,55 @@ $http_request.responseText
 ## Add tags to a host
 
 1. Replace the api/app key with yours
-```
-$api_key = "<YOUR_API_KEY>" 
-$app_key = "<YOUR_APP_KEY>"
-```
+
+    ```
+    $api_key = "<YOUR_API_KEY>" 
+    $app_key = "<YOUR_APP_KEY>"
+    ```
 
 2. Set up your parameters according to [description in the host API][3], shell tab
-```
-$host_name = "test.host"
 
-$http_method = "POST"
+    ```
+    $host_name = "test.host"
 
-$url_signature = "api/v1/tags/hosts/$host_name"
+    $http_method = "POST"
 
-$parameters = "{ 
-`"tags`" : [`"environment:production`", `"role:webserver`"] 
-}"
-```
+    $url_signature = "api/v1/tags/hosts/$host_name"
+
+    $parameters = "{ 
+    `"tags`" : [`"environment:production`", `"role:webserver`"] 
+    }"
+    ```
 
 3. Execute the code presented in this [section](#the-code-that-makes-the-api call).
 
 ## Post a metric
 
 1. Replace the api/app key with yours
-```
-$api_key = "<YOUR_API_KEY>" 
-$app_key = "<YOUR_APP_KEY>"
-```
 
-3. Set up parameters according to [description in the metrics API][4], shell tab
-```
-$http_method = "POST"
+    ```
+    $api_key = "<YOUR_API_KEY>" 
+    $app_key = "<YOUR_APP_KEY>"
+    ```
 
-$url_signature = "api/v1/series"
+2. Set up parameters according to [description in the metrics API][4], shell tab
 
-$currenttime = (Get-Date -date ((get-date).ToUniversalTime()) -UFormat %s) -Replace("[,\.]\d*", "")
+    ```
+    $http_method = "POST"
 
-$parameters = "{ `"series`" :
-[{`"metric`":`"test.powershell`",
-`"points`":[[$currenttime, 20]],
-`"type`":`"gauge`",
-`"host`":`"test.example.com`",
-`"tags`":[`"environment:test`"]}
-]
-}"
-```
+    $url_signature = "api/v1/series"
+
+    $currenttime = (Get-Date -date ((get-date).ToUniversalTime()) -UFormat %s) -Replace("[,\.]\d*", "")
+
+    $parameters = "{ `"series`" :
+    [{`"metric`":`"test.powershell`",
+    `"points`":[[$currenttime, 20]],
+    `"type`":`"gauge`",
+    `"host`":`"test.example.com`",
+    `"tags`":[`"environment:test`"]}
+    ]
+    }"
+    ```
 
 3. Execute the code presented in this [section](#the-code-that-makes-the-api call).
 

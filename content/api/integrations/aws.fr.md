@@ -22,7 +22,7 @@ Configurer votre intégration Datadog-AWS directement via l'API Datadog.
 
 * **`filter_tags`** [*optionnel*, *défaut*=**None**]:  
     Un tableau de balises EC2 (sous la forme `key:value`) définit un filtre utilisé par Datadog lors de la collecte de métriques à partir de EC2. Les wildcards, tels que `?` (Pour les caractères uniques) et `*` (pour les caractères multiples) peuvent également être utilisés.
-    Seuls les hosts correspondant à l'un des tags définis seront importés dans Datadog. Le reste sera ignoré. L'host correspondant à un tag donné peut également être exclu en ajoutant `!` Avant le tag.
+    Seuls les hôtes correspondant à l'un des tags définis seront importés dans Datadog. Le reste sera ignoré. L'hôte correspondant à un tag donné peut également être exclu en ajoutant `!` Avant le tag.
     e.x. `env:production,instance-type:c1.*,!region:us-east-1`  
     [En savoir plus sur le tagging EC2 dans la documentation de taggin AWS][4].
 

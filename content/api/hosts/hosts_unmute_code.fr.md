@@ -1,5 +1,5 @@
 ---
-title: Activer un host
+title: Activer un hôte
 type: apicode
 order: 13.4
 external_redirect: /api/#unmute-a-host

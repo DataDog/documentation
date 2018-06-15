@@ -126,6 +126,15 @@ java -javaagent:/path/to/the/dd-java-agent.jar \
      -jar /your/app.jar
 ```
 
+#### JavaScript (beta)
+
+```javascript
+const tracer = require('dd-trace').init({
+  hostname: 'dd-agent',
+  port: 8126
+})
+```
+
 ### Docker host IP
 
 Agent container port `8126` should be linked to the host directly.  

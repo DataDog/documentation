@@ -75,7 +75,7 @@ Les Dashboards contiennent [des graphiques][11] avec des métriques de performan
 * Les barres verticales rouge sont des événements dans le contexte de la métrique.
 * Cliquez et glissez sur un graphique pour zoomer sur un intervalle de temps particulier.
 * Lorsque vous passez la souris sur le graphique, le flux d'événements se déplace avec vous.
-* Afficher par zone, host ou utilisation totale
+* Afficher par zone, hôte ou utilisation totale
 * Nous exposons l'éditeur JSON du graphique permettant [une arithmétique][12] de métrique et
 l'utilisation de [fonctions][13].
 * Partagez un snapshot de graphique qui apparaît dans le flux d'événements; en cliquer sur

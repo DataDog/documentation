@@ -1,5 +1,5 @@
 # make
-.PHONY: clean clean-all clean-build clean-docker clean-exe clean-integrations clean-node clean-virt docker-start docker-stop help start stop
+.PHONY: clean clean-all clean-build clean-docker clean-exe clean-integrations clean-auto-doc clean-node clean-virt docker-start docker-stop help start stop
 .DEFAULT_GOAL := help
 PY3=$(shell if [ `which pyenv` ]; then \
 				if [ `pyenv which python3` ]; then \
@@ -26,12 +26,14 @@ clean: stop  ## clean all make installs.
 	@echo "cleaning up..."
 	make clean-build
 	make clean-integrations
+	make clean-auto-doc
 	make clean-static
 
 clean-all: stop  ## clean everything.
 	make clean-build
 	make clean-exe
 	make clean-integrations
+	make clean-auto-doc
 	make clean-node
 	make clean-virt
 	make clean-docker
@@ -67,6 +69,10 @@ clean-integrations:  ## remove built integrations files.
 	    -a -not -name 'tcprtt.md' \
 	    -a -not -name '*.fr.md' \
 	    -exec rm -rf {} \;
+
+clean-auto-doc: ##remove all doc automatically created
+	@find ./content/developers/integrations -type f -maxdepth 1 \
+		-exec rm -rf {} \;
 
 clean-node:  ## remove node_modules.
 	@if [ -d node_modules ]; then rm -r node_modules; fi

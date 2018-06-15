@@ -11,9 +11,6 @@ further_reading:
 - link: "monitors/manage_monitor"
   tag: "Documentation"
   text: Managez vos monitors
-- link: "monitors/faq"
-  tag: "FAQ"
-  text: FAQ monitors
 ---
 
 Vous pouvez parfois devoir fermer les systèmes ou les mettre hors ligne pour effectuer des opérations de maintenance ou des mises à niveau. La planification des downtimes vous permet de le faire sans déclencher de monitors.

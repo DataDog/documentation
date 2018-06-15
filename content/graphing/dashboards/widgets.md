@@ -1,6 +1,16 @@
 ---
 title: Widgets
 kind: documentation
+further_reading:
+- link: "graphing/dashboards/"
+  tag: "Documentation"
+  text: Learn how to create Dashboards in Datadog
+- link: "graphing/dashboards/shared_graph"
+  tag: "Documentation"
+  text: Share your Graphs outside of Datadog
+- link: "graphing/dashboards/template_variables"
+  tag: "Documentation"
+  text: Enhance your Dashboards with Template Variables
 ---
 
 Use widgets through the [Screenboard API][1]:
@@ -54,7 +64,9 @@ Example of Timeseries widget for the [API][1]
   "x": 32,
 
   // Widget Parameters
-  "timeframe": "1h", // Choose from: [1h, 4h, 1d, 2d, 1w]
+  "time": {
+    "live_span": "1h" // Choose from: [1m, 5m, 10m, 15m, 30m, 1h, 4h, 1d, 2d, 1w, 1mo, 3mo, 6mo, 1y]
+  },
   "tile_def": {
     "viz": "timeseries",
     "requests": [
@@ -70,6 +82,29 @@ Example of Timeseries widget for the [API][1]
   }
 }
 ```
+
+### Overlay events on your graph
+
+You can correlate Events to Metrics on Dashboards thanks to the Event Overlay Feature.
+
+#### Via the UI Editor
+
+{{< img src="graphing/faq/event_overlay_ui.png" alt="event_overlay_ui" responsive="true" popup="true">}}
+
+#### Via the JSON tab
+{{< img src="graphing/faq/event_overlay_json.png" alt="event_overlay_json" responsive="true" popup="true">}}
+
+In addition to being able to overlay events within the UI dashboard editor through the search field, you can also modify the JSON to add any event from Datadog. The general format is:
+
+* `"events": "search query"`
+
+For instance, to indicate that you want events for host X and tag Y:
+
+* `"events": "host:X tags:Y"`
+
+or if you’re looking to display all errors:
+
+* `"events": "status:error"`
 
 ## Query Value
 *Supported on Screenboards and Timeboards*
@@ -113,7 +148,9 @@ Example of Query Value widget for the [API][1]
   ],
   "text_align": "left",
   "precision": 1,
-  "timeframe": "5m", // Choose from: [5m, 10m, 1h, 4h, 1d, 2d, 1w]
+  "time": {
+    "live_span": "1h" // Choose from: [1m, 5m, 10m, 15m, 30m, 1h, 4h, 1d, 2d, 1w, 1mo, 3mo, 6mo, 1y]
+  },
   "text_size": "auto",
   "unit": "/s" // Give a custom unit or use "auto"
 }
@@ -204,7 +241,9 @@ Example of Event Stream widget for the [API][1]
 
     // Widgets Parameters
     "query": "tags:release",
-    "timeframe": "1w" // Choose from: [1h, 4h, 1d, 2d, 1w]
+    "time": {
+      "live_span": "1h" // Choose from: [1m, 5m, 10m, 15m, 30m, 1h, 4h, 1d, 2d, 1w, 1mo, 3mo, 6mo, 1y]
+    }
 }
 ```
 
@@ -288,7 +327,9 @@ Example of Alert Graph widget for the [API][1]
    "height": 13,
    "width": 47,
    "alert_id": "<ENTER ID>",
-   "timeframe": "1mo",
+   "time": {
+    "live_span": "1h" // Choose from: [1m, 5m, 10m, 15m, 30m, 1h, 4h, 1d, 2d, 1w, 1mo, 3mo, 6mo, 1y, alert]
+   },
    "y": 2,
    "x": 6,
    "isShared": false,
@@ -323,6 +364,10 @@ The service summary displays the top portion of any APM trace in your Screenboar
 Monitor summary is a summary view of all monitors on your system, or a subset based on a query.
 
 {{< img src="graphing/miscellaneous/visualization/references-graphing-monitorsummary-example.png" alt="Timeseries" responsive="true" popup="true" style="width:80%;">}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /api/#screenboards
 [2]: /api/#create-a-screenboard

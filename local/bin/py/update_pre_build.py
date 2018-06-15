@@ -145,7 +145,9 @@ class PreBuild:
             'activemq_xml': {'action': 'merge', 'target': 'activemq', 'remove_header': False},
             'cassandra_nodetool': {'action': 'merge', 'target': 'cassandra', 'remove_header': False},
             'datadog_checks_base': {'action': 'discard', 'target': 'none', 'remove_header': False},
-            'datadog-checks-tests-helper': {'action': 'discard', 'target': 'none', 'remove_header': False},
+            'datadog_checks_tests_helper': {'action': 'discard', 'target': 'none', 'remove_header': False},
+            'dev': {'action': 'discard', 'target': 'none', 'remove_header': False},
+            'docs': {'action': 'discard', 'target': 'none', 'remove_header': False},
             'gitlab_runner': {'action': 'merge', 'target': 'gitlab', 'remove_header': False},
             'hdfs_datanode': {'action': 'merge', 'target': 'hdfs', 'remove_header': False},
             'hdfs_namenode': {'action': 'merge', 'target': 'hdfs', 'remove_header': False},
@@ -208,7 +210,7 @@ class PreBuild:
         dogweb_globs = ['integration/**/*_metadata.csv', 'integration/**/manifest.json',
                         'integration/**/service_checks.json', 'integration/**/README.md',
                         'dd/utils/context/source.py']
-        integrations_globs = ['**/metadata.csv', '**/manifest.json', '**/service_checks.json', '**/README.md']
+        integrations_globs = ['**/metadata.csv', '**/manifest.json', '**/service_checks.json', '**/README.md','docs/**']
         extras_globs = ['**/metadata.csv', '**/manifest.json', '**/service_checks.json', '**/README.md']
 
         # sync from dogweb, download if we don't have it (token required)
@@ -243,6 +245,7 @@ class PreBuild:
             self.process_integration_manifest(file_name)
             self.process_service_checks(file_name)
             self.process_integration_readme(file_name)
+            self.dev_doc_integrations_core(file_name)
 
         self.merge_integrations()
 
@@ -263,7 +266,10 @@ class PreBuild:
                         else:
                             content = re.sub(self.regex_h1_replace, r'##\2', content, count=0)
                         target_file.write(content)
-                    remove(input_file)
+                    try:
+                        remove(input_file)
+                    except OSError:
+                        print('the file {} was not found and could not be removed during merge action'.format(input_file))
                 elif action == 'truncate':
                     if exists(output_file):
                         with open(output_file, 'r+') as target_file:
@@ -275,7 +281,10 @@ class PreBuild:
                     else:
                         open(output_file, 'w').close()
                 elif action == 'discard':
-                    remove(input_file)
+                    try:
+                        remove(input_file)
+                    except OSError:
+                        print('the file {} was not found and could not be removed during discard action'.format(input_file))
                 elif action == 'create':
                     with open(output_file, 'w+') as f:
                         fm = yaml.dump(action_obj.get('fm'), default_flow_style=False).rstrip()
@@ -322,6 +331,35 @@ class PreBuild:
                 key_name = basename(file_name.replace('_metadata.csv', ''))
             new_file_name = '{}{}.yaml'.format(self.data_integrations_dir, key_name)
             self.csv_to_yaml(key_name, file_name, new_file_name)
+
+    def dev_doc_integrations_core(self, file_name):
+        """
+        Take the content from https://github.com/DataDog/integrations-core/tree/master/docs/dev 
+        and transform it to be displayed on the doc in the /developers/integrations section
+        :param file_name: path to a file
+        """
+        relative_path_on_github = '/integrations-core/docs/dev/'
+        doc_directory = '/developers/integrations/'
+
+        if (relative_path_on_github in file_name and file_name.endswith('.md')): 
+            
+            with open(file_name, mode='r+') as f:
+                content = f.read()
+
+                # Replacing the master README.md by _index.md to follow Hugo logic
+                if file_name.endswith('README.md'):
+                    file_name = '_index.md'
+
+                #Replacing links that point to the Github folder by link that point to the doc.
+                new_link = doc_directory +'\\2'
+                regex_github_link = re.compile(r'(https:\/\/github\.com\/DataDog\/integrations-core\/blob\/master\/docs\/dev\/)(\S+)\.md')
+                content = re.sub(regex_github_link, new_link, content, count=0)
+
+            # Writing the new content to the documentation file
+            dirp = '{}{}'.format(self.content_dir, doc_directory[1:])
+            makedirs(dirp, exist_ok=True)
+            with open('{}{}'.format(dirp, basename(file_name)), mode='w+', encoding='utf-8') as f:
+                f.write(content)
 
     def process_integration_manifest(self, file_name):
         """

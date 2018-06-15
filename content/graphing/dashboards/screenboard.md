@@ -1,6 +1,16 @@
 ---
 title: Screenboard
 kind: documentation
+further_reading:
+- link: "graphing/dashboards/template_variables"
+  tag: "Documentation"
+  text: Enhance your Dashboards with Template Variables
+- link: "graphing/dashboards/shared_graph"
+  tag: "Documentation"
+  text: Share your Graphs outside of Datadog
+- link: "graphing/dashboards/widgets"
+  tag: "Documentation"
+  text: Discover all available widget for your Dashboard
 ---
 
 ## Change Screenboard name 
@@ -63,6 +73,10 @@ Using our [APIs][3] it's possible to write a script to backup your Screenboard d
 * https://github.com/grosser/kennel
 
 Special thanks to [Brightcove][4], [Shopify][5], and [Zendesk][6] for sharing these projects!
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/team/#datadog-user-roles
 [2]: /graphing/event_stream/

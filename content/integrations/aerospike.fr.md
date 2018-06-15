@@ -41,17 +41,6 @@ Modifiez le fichier `aerospike.yaml` pour pointer vers votre serveur et votre po
 
 ## Validation
 
-Lorsque vous exécutez `info datadog-agent`, vous devriez voir quelque chose comme ceci:
+[Exécutez le sous-commande `status` de l'Agent][1] et cherchez `aerospike` dans la section Checks.
 
-    Checks
-    ======
-
-        aerospike
-        -----------
-          - instance #0 [OK]
-          - Collected 269 metrics, 0 events & 1 service checks
-
-## Compatibilité
-
-Le check Aerospike est compatible avec toutes les principales plateformes et Aerospike Community Edition.
-
+[1]: https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information

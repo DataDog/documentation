@@ -18,7 +18,7 @@ Utilisez ce check (hdfs_datanode) et son check complémentaire (hdfs_namenode), 
 ## Implémentation
 ### Installation
 
-Le check HDFS DataNode est packagé avec l'agent, il vous faut donc simplement [installer l'agent](https://app.datadoghq.com/account/settings#agent) sur vos DataNodes.
+Le check HDFS DataNode est fourni avec l'Agent; il vous suffit donc d'[installer l'Agent][101] sur vos DataNodes.
 
 ### Configuration
 #### Préparer le DataNode
@@ -36,7 +36,7 @@ Redémarrez le processus DataNode pour activer l'interface JMX.
 
 #### Connectez l'Agent
 
-Créez un fichier `hdfs_datanode.yaml` dans le dossier ` conf.d` de l'Agent. Consultez l'exemple du [canevas hdfs_datanode.yaml](https://github.com/DataDog/integrations-core/blob/master/hdfs_datanode/conf.yaml.example) pour apprendre toutes les options de configuration disponibles:
+Modifiez le fichier `hdfs_datanode.d/conf.yaml` dans le dossier `conf.d/`, à la racine du répertoire de l'Agent. Consultez le [fichier d'exemple hdfs_datanode.d/conf.yaml][102] pour découvrir toutes les options de configuration disponibles:
 
 ```
 init_config:
@@ -45,15 +45,11 @@ instances:
   - hdfs_datanode_jmx_uri: http://localhost:50075
 ```
 
-[Redémarrez l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent) pour commencer à envoyer vos métriques DataNode à Datadog
+[Redémarrez l'Agent][103] pour commencer à envoyer vos métriques DataNode à Datadog.
 
 ### Validation
 
-[Lancez la commande `status`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `hdfs_datanode` dans la section Checks.
-
-## Compatibilité
-
-Le check hdfs_datanode est compatible avec toutes les principales plateformes.
+[Exécutez le sous-commande `status` de l'Agent][104] et cherchez  `hdfs_datanode` dans la section Checks.
 
 ## Données collectées
 ### Métriques
@@ -70,14 +66,26 @@ Le check HDFS-datanode n'inclut aucun événement pour le moment.
 Renvoie `Critical` si l'agent ne peut pas se connecter à l'interface JMX de DataNode's pour une raison quelconque. Renvoie `OK` sinon.
 
 ## Troubleshooting
-Besoin d'aide? Contactez  [l'équipe support de Datadog](http://docs.datadoghq.com/help/).
+Besoin d'aide ? Contactez  [l'équipe support de Datadog][106].
 
 ## En apprendre plus
 
-* [Vue d'ensemble de l'architecture Hadoop](https://www.datadoghq.com/blog/hadoop-architecture-overview/)
-* [Comment monitorer les métriques Hadoop](https://www.datadoghq.com/blog/monitor-hadoop-metrics/)
-* [Comment collecter les métriques de Hadoop](https://www.datadoghq.com/blog/collecting-hadoop-metrics/)
-* [Comment monitorer Hadoop avec Datadog](https://www.datadoghq.com/blog/monitor-hadoop-metrics-datadog/)
+* [Vue d'ensemble de l'architecture Hadoop][107]
+* [Comment monitorer les métriques Hadoop][108]
+* [Comment collecter les métriques de Hadoop][109]
+* [Comment monitorer Hadoop avec Datadog][1010]
+
+
+[101]: https://app.datadoghq.com/account/settings#agent
+[102]: https://github.com/DataDog/integrations-core/blob/master/hdfs_datanode/conf.yaml.example
+[103]: https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent
+[104]: https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information
+[105]: https://github.com/DataDog/integrations-core/blob/master/hdfs_datanode/metadata.csv
+[106]: http://docs.datadoghq.com/help/
+[107]: https://www.datadoghq.com/blog/hadoop-architecture-overview/
+[108]: https://www.datadoghq.com/blog/monitor-hadoop-metrics/
+[109]: https://www.datadoghq.com/blog/collecting-hadoop-metrics/
+[1010]: https://www.datadoghq.com/blog/monitor-hadoop-metrics-datadog/
 
 
 
@@ -92,7 +100,7 @@ Utilisez ce check (hdfs_namenode) et son check complémentaire (hdfs_datanode), 
 ## Implémentation
 ### Installation
 
-Le check HDFS NameNode est packagé avec l'agent, il vous faut donc simplement [installer l'agent](https://app.datadoghq.com/account/settings#agent) sur vos NameNode.
+Le check HDFS NameNode est fourni avec l'Agent; il vous suffit donc d'[installer l'Agent][101] sur vos NameNode.
 
 ### Configuration
 #### Préparer le NameNode
@@ -110,7 +118,7 @@ Redémarrez le processus NameNode pour activer l'interface JMX.
 
 #### Connectez l'Agent
 
-Créez un fichier `hdfs_namenode.yaml` dans le dossier ` conf.d` de l'Agent. Consultez l'exemple du [canevas hdfs_namenode.yaml](https://github.com/DataDog/integrations-core/blob/master/hdfs_namenode/conf.yaml.example) pour apprendre toutes les options de configuration disponibles:
+Modifiez le fichier `hdfs_namenode.d/conf.yaml` dans le dossier `conf.d/`, à la racine du répertoire de l'Agent. Consultez le [fichier d'exemple hdfs_namenode.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles:
 
 ```
 init_config:
@@ -119,15 +127,11 @@ instances:
   - hdfs_namenode_jmx_uri: http://localhost:50070
 ```
 
-[Redémarrez l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent) pour commencer à envoyer vos métriques NameNode à Datadog.
+[Redémarrez l'Agent][3] pour commencer à envoyer vos métriques NameNode à Datadog.
 
 ### Validation
 
-[Lancez la commande `status`de l'Agent](https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information) et cherchez `hdfs_namenode` dans la section Checks.
-
-## Compatibilité
-
-Le check hdfs_namenode est compatible avec toutes les principales plateformes.
+[Exécutez le sous-commande `status` de l'Agent][4] et cherchez `hdfs_namenode` dans la section Checks.
 
 ## Données collectées
 ### Métriques
@@ -144,12 +148,24 @@ Le check HDFS-namenode n'inclut aucun événement pour le moment.
 Renvoie `Critical` si l'agent ne peut pas se connecter à l'interface JMX de NameNode pour une raison quelconque. Renvoie `OK` sinon.
 
 ## Troubleshooting
-Besoin d'aide? Contactez  [l'équipe support de Datadog](http://docs.datadoghq.com/help/).
+Besoin d'aide ? Contactez  [l'équipe support de Datadog][6].
 
 ## En apprendre plus
 
-* [Vue d'ensemble de l'architecture Hadoop](https://www.datadoghq.com/blog/hadoop-architecture-overview/)
-* [Comment monitorer les métriques Hadoop](https://www.datadoghq.com/blog/monitor-hadoop-metrics/)
-* [Comment collecter les métriques de Hadoop](https://www.datadoghq.com/blog/collecting-hadoop-metrics/)
-* [Comment monitorer Hadoop avec Datadog](https://www.datadoghq.com/blog/monitor-hadoop-metrics-datadog/)
+* [Vue d'ensemble de l'architecture Hadoop][7]
+* [Comment monitorer les métriques Hadoop][8]
+* [Comment collecter les métriques de Hadoop][9]
+* [Comment monitorer Hadoop avec Datadog][10]
+
+
+[1]: https://app.datadoghq.com/account/settings#agent
+[2]: https://github.com/DataDog/integrations-core/blob/master/hdfs_namenode/conf.yaml.example
+[3]: https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent
+[4]: https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information
+[5]: https://github.com/DataDog/integrations-core/blob/master/hdfs_namenode/metadata.csv
+[6]: http://docs.datadoghq.com/help/
+[7]: https://www.datadoghq.com/blog/hadoop-architecture-overview/
+[8]: https://www.datadoghq.com/blog/monitor-hadoop-metrics/
+[9]: https://www.datadoghq.com/blog/collecting-hadoop-metrics/
+[10]: https://www.datadoghq.com/blog/monitor-hadoop-metrics-datadog/
 
