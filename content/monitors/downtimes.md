@@ -20,7 +20,7 @@ You may occasionally need to shut systems down or take them off-line to perform 
 
 You can schedule downtimes and/or mute your Datadog monitors so that they do not alert at specific times when you do not want them to.
 
-Monitors trigger events when they change state between ALERT, WARNING (if enabled), RESOLVED, and NO DATA (if enabled). But if a monitor has been silenced either by a downtime or muting, then any transition from RESOLVED to another state won't trigger an event (nor the notification channels that the event would have set off).
+Monitors trigger events when they change state between ALERT, WARNING (if enabled), RESOLVED, and NO DATA (if enabled). But if a monitor has been silenced either by a downtime or muting, then any transition from RESOLVED to another state won't trigger an event (nor the notification channels that the event would have set off). Note that muting or unmuting a monitor via the UI deletes all scheduled downtimes associated with that monitor.
 
 {{< img src="monitors/downtimes/downtime_on_alert.png" alt="downtime on alert" responsive="true" popup="true" style="width:80%;">}}
 
