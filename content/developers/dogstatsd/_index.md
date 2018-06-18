@@ -63,7 +63,7 @@ dogstatsd_port: 8125
 
 Then [restart your Agent][5].
 
-By default, DogStatsD listens on UDP port **8125**. If you need to change this, configure the `dogstatsd_port` option in the main [Agent configuration file][2], and restart the client. You can also configure DogStatsD to use a [Unix Domain Socket][10]
+By default, DogStatsD listens on UDP port **8125**. If you need to change this, configure the `dogstatsd_port` option in the main [Agent configuration file][2], and restart the client. You can also configure DogStatsD to use a [Unix Domain Socket][10].
 
 ### Code
 
