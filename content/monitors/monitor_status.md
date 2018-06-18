@@ -34,7 +34,7 @@ Some options are available in the upper right corner of the page:
     Choose to mute a monitor directly on its status page. Use the *Scope* field to narrow your downtime.
     Refer to the [dedicated downtime documentation][2] to learn how to mute multiple scopes or multiple monitors at the same time.
 
-    NOTE: muting a monitor deletes all scheduled downtimes associated with that monitor.
+    NOTE: muting or unmuting a monitor via the UI deletes all scheduled downtimes associated with that monitor.
 
     {{< img src="monitors/monitor_status/status_mute_monitor.png" alt="status mute monitor" responsive="true" popup="true" style="width:30%;">}}
 
