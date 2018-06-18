@@ -21,11 +21,11 @@ Collect Windows Events as logs in Datadog in order to:
 
 * Track system and application events in Datadog.
 * Correlate Windows system and application events with the rest of your application.
-* Track Security events and troubleshoot potential breach.
+* Track security events and troubleshoot potential breaches.
 
 ## Setup
 ### Installation 
-The Windows event log check is included in the [Datadog Agent][4] package, so you don't need to install anything else on your server.
+The Windows Event log check is included in the [Datadog Agent][4] package, so you don't need to install anything else on your server.
 
 ### Configuration
 #### Log collection
