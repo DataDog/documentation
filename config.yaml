@@ -661,6 +661,12 @@ languages:
           url: "monitors/monitor_types/log"
           weight: 90
           parent: menu_references_logs
+        - identifier: customnav_lognav_archives
+          name: "Archives on AWS S3"
+          url: "logs/s3"
+          weight: 100
+          parent: menu_references_logs
+
         #- identifier: customnav_lognav_faq
         #  name: "FAQ"
         #  url: "logs/faq/"
