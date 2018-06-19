@@ -1,7 +1,7 @@
 ---
 title: DogStatsD over Unix Domain Socket
 kind: documentation
-description: Usage documentation for DogStatsD over Unix Domain Sockets.
+description: "Usage documentation for DogStatsD over Unix Domain Sockets".
 further_reading:
 - link: "developers/dogstatsd"
   tag: "Documentation"
@@ -18,9 +18,9 @@ Starting with version 6.0, the Datadog Agent is able to ingest metrics via a Uni
 
 While UDP works great on `localhost`, it can be a challenge to setup in containerized environments. Unix Domain Sockets allow you to easily establish the connection via a socket file, regardless of the IP of the Datadog Agent container. It also enables the following benefits:
 
-- bypassing the networking stack brings a significant performance improvement for high traffic
-- while UDP has no error handling, UDS allows the Agent to detect dropped packets and connection errors, while still allowing a non-blocking use
-- DogStatsD is able to detect the origin container of metrics and tag them accordingly
+* Bypassing the networking stack brings a significant performance improvement for high traffic
+* While UDP has no error handling, UDS allows the Agent to detect dropped packets and connection errors, while still allowing a non-blocking use
+* DogStatsD is able to detect the origin container of metrics and tag them accordingly
 
 ## How it works
 
@@ -46,10 +46,12 @@ Then [restart your Agent][1]. You can also set the socket path via the `DD_DOGST
 
 The following DogStatsD client libraries support UDS traffic:
 
-- Golang: [DataDog/datadog-go][3]
-- Java: [DataDog/java-dogstatsd-client][4]
-- Python: [DataDog/datadogpy][5]
-- Ruby: [DataDog/dogstatsd-ruby][6]
+| Language | Library                            |
+| :----    | :----                              |
+| Golang   | [DataDog/datadog-go][3]            |
+| Java     | [DataDog/java-dogstatsd-client][4] |
+| Python   | [DataDog/datadogpy][5]             |
+| Ruby     | [DataDog/dogstatsd-ruby][6]        |
 
 Refer to the library's documentation on how to enable UDS traffic.
 
@@ -63,8 +65,8 @@ Mounting the parent folder instead of the individual socket enables socket commu
 
 #### Docker: bind mount
 
-- Start the Agent container with `-v /var/run/datadog:/var/run/datadog`
-- Start your containers with `-v /var/run/datadog:/var/run/datadog:ro`
+* Start the Agent container with `-v /var/run/datadog:/var/run/datadog`
+* Start your containers with `-v /var/run/datadog:/var/run/datadog:ro`
 
 #### Kubernetes: `hostPath` volume
 

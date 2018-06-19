@@ -66,6 +66,8 @@ Send custom metrics via [the statsd protocol][5]:
 - `DD_DOGSTATSD_SOCKET`: path to the unix socket to listen to. Must be in a `rw` mounted volume.
 - `DD_DOGSTATSD_ORIGIN_DETECTION`: enable container detection and tagging for unix socket metrics.
 
+[Learn more about DogStatsD over Unix Domain Sockets with Docker][9].
+
 #### Tagging
 
 We automatically collect common tags from [Docker][6], [Kubernetes][7], [ECS][8], [Swarm, Mesos, Nomad and Rancher][6], and allow you to extract even more tags with the following options:
@@ -102,3 +104,4 @@ Exclude containers from the metrics collection and Autodiscovery, if these are n
 [6]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
 [7]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go
 [8]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go
+[9]: /developers/dogstatsd/unix_socket

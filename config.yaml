@@ -680,19 +680,19 @@ languages:
           url: "developers/dogstatsd/"
           weight: 30
           parent: menu_references_developers
-        - identifier: customnav_developersnav_dogstatsd_unix_socket
-          name: "Unix Domain Socket usage"
-          url: "developers/dogstatsd/unix_socket"
-          weight: 301
-          parent: customnav_developersnav_dogstatsd
         - identifier: customnav_developersnav_dogstatsd_data_types
           name: "Data Types and Tags"
           url: "developers/dogstatsd/data_types"
-          weight: 302
+          weight: 301
           parent: customnav_developersnav_dogstatsd
         - identifier: customnav_developersnav_dogstatsd_datagram_shell
           name: "Datagram and Shell Usage"
           url: "developers/dogstatsd/datagram_shell"
+          weight: 302
+          parent: customnav_developersnav_dogstatsd
+        - identifier: customnav_developersnav_dogstatsd_unix_socket
+          name: "Unix Domain Socket usage"
+          url: "developers/dogstatsd/unix_socket"
           weight: 303
           parent: customnav_developersnav_dogstatsd
         - identifier: customnav_developersnav_metrics
