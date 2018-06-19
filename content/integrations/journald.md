@@ -34,7 +34,7 @@ usermod -a -G systemd-journal dd-agent
 
 ### Configuration
 
-1. Create the `journald.d/conf.yaml` file in the in the Agent’s `conf.d/` folder at the root of your Agent's directory.
+Create the `journald.d/conf.yaml` file in the in the Agent’s `conf.d/` folder at the root of your Agent's directory.
 
 #### Log collection
 
@@ -61,8 +61,8 @@ Finally, [restart the agent][2].
 
 By default the agent looks for the journal at the following locations:
 
-- `/var/log/journal`
-- `/var/run/journal`
+* `/var/log/journal`
+* `/var/run/journal`
 
 If your journal is located elsewhere, add a `path` parameter with the corresponding journal path.
 
@@ -70,8 +70,8 @@ If your journal is located elsewhere, add a `path` parameter with the correspond
 
 It is possible to filter in/out specific units thanks to the following parameters:
 
-- `include_units: unit1,unit2` : Include all units specified.
-- `exclude_units: unit1, unit2`:  Exclude all units specified.
+* `include_units: unit1,unit2` : Includes all units specified.
+* `exclude_units: unit1, unit2`:  Excludes all units specified.
 
 Example:
 
@@ -83,9 +83,11 @@ logs:
 ```
 
 ## Troubleshooting
+
 Need help? Contact [Datadog Support][3].
 
 ## Further Reading
+
 Learn more about infrastructure monitoring and all our integrations on [our blog][4]
 
 [1]: https://app.datadoghq.com/account/settings#agent
