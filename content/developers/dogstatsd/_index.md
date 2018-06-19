@@ -63,7 +63,7 @@ dogstatsd_port: 8125
 
 Then [restart your Agent][5].
 
-By default, DogStatsD listens on UDP port **8125**. If you need to change this, configure the `dogstatsd_port` option in the main [Agent configuration file][2], and restart the client.
+By default, DogStatsD listens on UDP port **8125**. If you need to change this, configure the `dogstatsd_port` option in the main [Agent configuration file][2], and restart the client. You can also configure DogStatsD to use a [Unix Domain Socket][10].
 
 ### Code
 
@@ -114,3 +114,4 @@ If you're interested in learning more about the datagram format used by DogStats
 [7]: /developers/dogstatsd/data_types
 [8]: /developers/dogstatsd/datagram_shell
 [9]: https://github.com/DataDog/dd-agent/pull/2104
+[10]: /developers/dogstatsd/unix_socket

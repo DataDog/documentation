@@ -696,6 +696,11 @@ languages:
           url: "developers/dogstatsd/datagram_shell"
           weight: 302
           parent: customnav_developersnav_dogstatsd
+        - identifier: customnav_developersnav_dogstatsd_unix_socket
+          name: "Unix Domain Socket usage"
+          url: "developers/dogstatsd/unix_socket"
+          weight: 303
+          parent: customnav_developersnav_dogstatsd
         - identifier: customnav_developersnav_metrics
           name: "Metrics"
           url: "developers/metrics/"
