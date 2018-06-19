@@ -20,7 +20,7 @@ While UDP works great on `localhost`, it can be a challenge to setup in containe
 
 * Bypassing the networking stack brings a significant performance improvement for high traffic
 * While UDP has no error handling, UDS allows the Agent to detect dropped packets and connection errors, while still allowing a non-blocking use
-* DogStatsD is able to detect the origin container of metrics and tag them accordingly
+* DogStatsD is able to detect the container from which metrics originated, and tag those metrics accordingly
 
 ## How it works
 
@@ -28,7 +28,7 @@ Instead of using an `IP:port` pair to establish connections, Unix Domain Sockets
 
 When the Agent restarts, the existing socket is deleted and replaced by a new one. Client libraries detect this change and connect seamlessly to the new socket.
 
-**Note:** By design, UDS traffic is local to the host, which means the Datadog Agent must run on every host you will be sending metrics from. 
+**Note:** By design, UDS traffic is local to the host, which means the Datadog Agent must run on every host you will be sending metrics from.
 
 ## Setup
 
@@ -93,7 +93,7 @@ volumeMounts:
 ...
 volumes:
 - hostPath:
-    path: /var/run/datadog/    
+    path: /var/run/datadog/
   name: dsdsocket
 ```
 
@@ -107,7 +107,7 @@ When running inside a container, DogStatsd needs to run in the host PID namespac
 
 ## Client library implementation guidelines
 
-Adding UDS support to existing libraries can be achieved as the protocol is very close to UDP. Implementation guidelines and a testing checklist are available in the [datadog-agent wiki][7].
+Adding UDS support to existing libraries can be easily achieved as the protocol is very close to UDP. Implementation guidelines and a testing checklist are available in the [datadog-agent wiki][7].
 
 ## Further reading
 
