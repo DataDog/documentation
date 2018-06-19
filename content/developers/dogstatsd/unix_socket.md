@@ -1,7 +1,7 @@
 ---
 title: DogStatsD over Unix Domain Socket
 kind: documentation
-description: "Usage documentation for DogStatsD over Unix Domain Sockets".
+description: "Usage documentation for DogStatsD over Unix Domain Sockets"
 further_reading:
 - link: "developers/dogstatsd"
   tag: "Documentation"
@@ -26,7 +26,7 @@ While UDP works great on `localhost`, it can be a challenge to setup in containe
 
 Instead of using an `IP:port` pair to establish connections, Unix Domain Sockets use a placeholder socket file. Once the connection is open, data is transmitted in the same [datagram format][2] as UDP.
 
-When the Agent restarts, the existing socket is deleted and replaced by a new one. Client libraries detect this change and connect seamlessly to the new one.
+When the Agent restarts, the existing socket is deleted and replaced by a new one. Client libraries detect this change and connect seamlessly to the new socket.
 
 **Note:** By design, UDS traffic is local to the host, which means the Datadog Agent must run on every host you will be sending metrics from. 
 
@@ -97,11 +97,11 @@ volumes:
   name: dsdsocket
 ```
 
-## Using Origin Detection for container tagging
+## Using origin detection for container tagging
 
-Origin Detection allows DogStatsD to detect where the container metrics come from, and tag metrics automatically. When this mode is enabled, all metrics received via UDS will be tagged by the same container tags as Autodiscovery metrics. **Note:** `container_id`, `container_name` and `pod_name` tags will not be added, to avoid creating too many custom metric contexts.
+Origin detection allows DogStatsD to detect where the container metrics come from, and tag metrics automatically. When this mode is enabled, all metrics received via UDS will be tagged by the same container tags as Autodiscovery metrics. **Note:** `container_id`, `container_name` and `pod_name` tags will not be added, to avoid creating too many custom metric contexts.
 
-To enable this, enable the `dogstatsd_origin_detection` option in your `datadog.yaml`, or set the environment variable `DD_DOGSTATSD_ORIGIN_DETECTION=true`, and [restart your Agent][1].
+To use origin detection, enable the `dogstatsd_origin_detection` option in your `datadog.yaml`, or set the environment variable `DD_DOGSTATSD_ORIGIN_DETECTION=true`, and [restart your Agent][1].
 
 When running inside a container, DogStatsd needs to run in the host PID namespace for origin detection to work reliably. You can enable this via the docker `--pid=host` flag.
 
