@@ -50,7 +50,7 @@ Then add this configuration block to your `journald.d/conf.yaml` file to start c
 
 ```
 logs:
-  type: journald
+  - type: journald
 ```
 
 Finally, [restart the agent][2].
@@ -70,8 +70,8 @@ If your journal is located elsewhere, add a `path` parameter with the correspond
 
 It is possible to filter in/out specific units thanks to the following parameters:
 
-- `include_units: unit1,unit2` : Include all units specified, wildcards can be used.
-- `exclude_units: unit1, unit2`:  Exclude all units specified, wildcards can be used.
+- `include_units: unit1,unit2` : Include all units specified.
+- `exclude_units: unit1, unit2`:  Exclude all units specified.
 
 Example:
 
@@ -79,7 +79,7 @@ Example:
 logs:
   type: journald
   path: /var/log/journal/journal
-  include_units: kernel*, docker*
+  include_units: docker.service
 ```
 
 ## Troubleshooting
