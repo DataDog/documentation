@@ -107,7 +107,7 @@ When running inside a container, DogStatsd needs to run in the host PID namespac
 
 ## Client library implementation guidelines
 
-Adding UDS support to existing libraries is usually simple as the protocol is very close to UDP. Implementation guidelines and a testing checklist are available in the [datadog-agent wiki][7].
+Adding UDS support to existing libraries can be achieved as the protocol is very close to UDP. Implementation guidelines and a testing checklist are available in the [datadog-agent wiki][7].
 
 ## Further reading
 
@@ -120,4 +120,3 @@ Adding UDS support to existing libraries is usually simple as the protocol is ve
 [5]: https://github.com/DataDog/datadogpy
 [6]: https://github.com/DataDog/dogstatsd-ruby
 [7]: https://github.com/DataDog/datadog-agent/wiki/Unix-Domain-Sockets-support
-
