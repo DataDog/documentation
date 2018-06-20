@@ -1,6 +1,8 @@
 ---
-title: How do I configure Google as a SAML IdP?
-kind: faq
+title: Configuring Google as a SAML IdP
+kind: documentation
+aliases:
+  - /account_management/faq/how-do-i-configure-google-as-a-saml-idp/
 disable_toc: true
 further_reading:
 - link: "account_management/saml"
@@ -36,7 +38,7 @@ Also add:
 * "urn:oid:2.5.4.4" "Basic Information" "Last Name"
 * "urn:oid:2.5.4.42" "Basic Information" "First Name"
 
-{{< img src="account_management/faq/zAttributeMapping.png" alt="zAttributeMapping" responsive="true" popup="true" style="width:75%;">}}
+{{< img src="account_management/saml/zAttributeMapping.png" alt="zAttributeMapping" responsive="true" popup="true" style="width:75%;">}}
 
 ### Further Reading
 
