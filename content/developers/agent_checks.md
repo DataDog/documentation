@@ -45,9 +45,9 @@ All custom Agent checks inherit from the `AgentCheck` class found in `checks/__i
 
 ### `AgentCheck` interface for Agent v6
 
-There is some differences between Agent v5 and Agent v6:
+There are some differences between Agent v5 and Agent v6:
 
-* Each check instance is now its own instance of the class. So you cannot share state between them
+* Each check instance is now its own instance of the class, so state cannot be shared between them, respectively.
 * The following methods have been removed from `AgentCheck`:
 
     - `_roll_up_instance_metadata`
