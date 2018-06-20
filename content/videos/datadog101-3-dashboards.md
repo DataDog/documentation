@@ -41,7 +41,7 @@ Datadog 101 shows you everything you need to know about using the Datadog platfo
 For more information, be sure to check out these links talked about in the video:
 
 * [Graphing documentation][1]
-* [What is the difference between a ScreenBoard and a TimeBoard?][2]
+* [What is the difference between a Screenboard and a Timeboard?][2]
 * [Filter your Datadog Events Stream to pinpoint issues in your infrastructure][3]
 * [Correlating Events with Metrics][4]
 

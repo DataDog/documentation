@@ -877,7 +877,7 @@
 			"description": "You can view more detailed documentation on the Screenboard API at http://docs.datadoghq.com/api/screenboards/.",
 			"item": [
 				{
-					"name": "Setup New ScreenBoard",
+					"name": "Setup New Screenboard",
 					"request": {
 						"url": "https://api.datadoghq.com/api/v1/screen?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "POST",
@@ -897,7 +897,7 @@
 					"response": []
 				},
 				{
-					"name": "Update ScreenBoard",
+					"name": "Update Screenboard",
 					"request": {
 						"url": "https://api.datadoghq.com/api/v1/screen/177964?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "PUT",
@@ -917,7 +917,7 @@
 					"response": []
 				},
 				{
-					"name": "GET ScreenBoard Definition",
+					"name": "GET Screenboard Definition",
 					"request": {
 						"url": "https://api.datadoghq.com/api/v1/screen/177964?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "GET",
@@ -937,7 +937,7 @@
 					"response": []
 				},
 				{
-					"name": "DELETE ScreenBoard",
+					"name": "DELETE Screenboard",
 					"request": {
 						"url": "https://api.datadoghq.com/api/v1/screen/177964?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "DELETE",
@@ -1155,7 +1155,7 @@
 					"response": []
 				},
 				{
-					"name": "Get All TimeBoards",
+					"name": "Get All Timeboards",
 					"request": {
 						"url": "https://api.datadoghq.com/api/v1/dash?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "GET",
@@ -1175,7 +1175,7 @@
 					"response": []
 				},
 				{
-					"name": "Get A TimeBoard",
+					"name": "Get A Timeboard",
 					"request": {
 						"url": "https://api.datadoghq.com/api/v1/dash/281799?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
 						"method": "GET",
