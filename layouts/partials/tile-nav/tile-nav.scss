@@ -2,8 +2,8 @@ $ddpurple:    #774DA2;
 
 $tilecolors: (
     agent: #7758D3,
-    integrations: #00D2D2,
-    graphing: #14D071,
+    integrations: #00D3D2,
+    graphing: #19D678,
     alerting: #FFAA00,
     tracing: #FF635A,
     developers: #3D95FF
@@ -15,6 +15,8 @@ $tilecolors: (
     font-size:18px;
     line-height:22px;
     color:#4A4A4A;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   .desc {
     padding:0 6.5px;
@@ -27,14 +29,19 @@ $tilecolors: (
     .card-body {
       padding:0;
       img {
-        margin: 26px auto 0 auto;
+        margin: 20px auto 0 auto;
         width: 80px;
         display:block;
       }
       .title {
         font-weight: 600;
-        margin-bottom: 0;
+        margin-bottom: 6px;
         margin-top: 7px;
+        letter-spacing: 0.4px;
+        text-transform: uppercase;
+      }
+      .desc{
+        margin-bottom:26px;
       }
     }
   }
@@ -42,7 +49,8 @@ $tilecolors: (
   @each $tile, $color in $tilecolors {
     .#{$tile} {
       &:hover {
-        border-color: $color;
+        /*border-color: $color;*/
+        border-color: transparent;
       }
       .title {
         color: $color;

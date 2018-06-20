@@ -200,7 +200,7 @@ h2 {
   & > ol li a,
   & > ul li a {
     //text-decoration:underline;
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid $gray-300;
     &:hover {
       color: $ddpurple;
       border-color: $ddpurple;
@@ -273,7 +273,7 @@ h2 {
     }
     &:hover {
       border-color: $ddpurple;
-      box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, .2);
+      box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, .4);
       .hover {
         display: inline;
       }
