@@ -80,6 +80,7 @@ If **sn** and **givenName** are provided, they are used to update the user’s n
 For more information about configuring specific IdP's, refer to the following Knowledge Base articles:
 
 * [Google][6]
+* [Azure][11]
 * [Microsoft Active Directory Federation Services][7]
 * [NoPassword][8]
 * [Okta][9]
@@ -122,3 +123,4 @@ If you do not use the updated SP Metadata, Datadog will not be able to associate
 [8]: /account_management/faq/how-do-i-configure-nopassword-as-a-saml-idp
 [9]: /account_management/faq/how-do-i-configure-okta-as-a-saml-idp
 [10]: /help
+[11]: /account_management/faq/how-do-i-configure-azure-ad-as-a-saml-idp
