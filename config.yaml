@@ -1619,6 +1619,34 @@ languages:
           url: "account_management/saml/"
           weight: 50
           parent: menu_references_account_management
+
+        # SAML subnav
+        - identifier: saml_activedirectory
+          name: "Active Directory"
+          url: "account_management/saml/activedirectory"
+          weight: 510
+          parent: customnav_accountmanagementnav_saml
+        - identifier: saml_azure
+          name: "Azure"
+          url: "account_management/saml/azure"
+          weight: 520
+          parent: customnav_accountmanagementnav_saml
+        - identifier: saml_google
+          name: "Google"
+          url: "account_management/saml/google"
+          weight: 530
+          parent: customnav_accountmanagementnav_saml
+        - identifier: saml_nopassword
+          name: "NoPassword"
+          url: "account_management/saml/nopassword"
+          weight: 540
+          parent: customnav_accountmanagementnav_saml
+        - identifier: saml_okta
+          name: "Okta"
+          url: "account_management/saml/okta"
+          weight: 550
+          parent: customnav_accountmanagementnav_saml
+          
         - identifier: customnav_accountmanagementnav_multi_organization
           name: "Comptes multi-org"
           url: "account_management/multi_organization/"
