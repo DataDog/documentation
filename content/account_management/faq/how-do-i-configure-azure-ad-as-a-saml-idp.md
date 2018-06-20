@@ -19,25 +19,25 @@ Below is a step by step guide to configure Azure AD as a SAML IdP within Datadog
 
 2. When logged into Azure, go to the *Azure Active Directory* tab on the left hand menu.
 
-2. Select the **Enterprise applications** service.
+3. Select the **Enterprise applications** service.
 
-3. Click on the **New application** button.
+4. Click on the **New application** button.
 
-4. Select the **Non-gallery application**.
+5. Select the **Non-gallery application**.
 
     {{< img src="account_management/faq/non_gallery_application.png" alt="Non Gallery application" responsive="true" popup="true" style="width:20%;">}}
 
-5. Name it (e.g **DatadogSSO_test**).
+6. Name it (e.g **DatadogSSO_test**).
 
-6. Click on **Add**.
+7. Click on **Add**.
 
-7. Once your application is successfully added, go in **Configure single sign-on (required)**.
+8. Once your application is successfully added, go in **Configure single sign-on (required)**.
 
-8. Select the **SAML-based Sign-on** as Single Sign-on Mode.
+9. Select the **SAML-based Sign-on** as Single Sign-on Mode.
 
     {{< img src="account_management/faq/saml_based_sign_on.png" alt="Saml Based Sign on" responsive="true" popup="true" style="width:70%;">}}
 
-9. Navigate to the [Datadog SAML page][1], find the **Service Provider Entity ID** & **Assertion Consumer Service** URL on the right hand of the page.  Copy and paste those values in the **Identifier** and **Reply URL** text forms respectively:
+10. Navigate to the [Datadog SAML page][1], find the **Service Provider Entity ID** & **Assertion Consumer Service** URL on the right hand of the page.  Copy and paste those values in the **Identifier** and **Reply URL** text forms respectively:
     In Datadog:
 
     {{< img src="account_management/faq/Step10Redo.png" alt="Step10Redo" responsive="true" popup="true" style="width:70%;">}}
