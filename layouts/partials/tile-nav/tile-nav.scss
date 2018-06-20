@@ -11,6 +11,8 @@ $tilecolors: (
 
 .tile-nav {
   margin-top:30px;
+  padding-right: 0px;
+  padding-left: 0px;
   p {
     font-size:18px;
     line-height:22px;
@@ -24,6 +26,7 @@ $tilecolors: (
   div:nth-child(n+4) .card {
     margin-bottom:0px;
   }
+
   .card {
     margin-bottom: 30px;
     .card-body {
@@ -58,7 +61,6 @@ $tilecolors: (
     }
   }
 }
-
 
 //@include media-breakpoint-down(xs) {
 @media (max-width: 575px) {
