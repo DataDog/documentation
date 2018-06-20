@@ -65,7 +65,7 @@ To revoke the keys used to share your graphs:
 
 ### Revoking a Screenboard
 
-To revoke a shared ScreenBoard:
+To revoke a shared Screenboard:
 
 1. Navigate to the Dashboard List.
 2. Select the Screenboard you want to revoke access to.

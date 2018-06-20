@@ -3,11 +3,11 @@ title: How to Transform a Timeboard to a Screenboard or vice versa ?
 kind: faq
 ---
 
-To transform a TimeBoard to a ScreenBoard you can use the [script here][1].
+To transform a Timeboard to a Screenboard you can use the [script here][1].
 
 The usage is very simple, you provide the ID of the dashboard you want to convert, and the output is the URL of the converted dashboard.
 
-This relies on the API get and post methods for [TimeBoards][2] and [ScreenBoards][3]. 
+This relies on the API get and post methods for [Timeboards][2] and [Screenboards][3]. 
 
 First, retrieve the ID of the dashboard, you can find it in the URL of the dashboard
 
