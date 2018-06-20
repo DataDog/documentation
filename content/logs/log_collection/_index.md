@@ -1,7 +1,7 @@
 ---
 title: Log Collection & Integrations
 kind: Documentation
-description: "Configure your Datadog agent to gather logs from your host, containers, and services."
+description: "Configure your Datadog Agent to gather logs from your host, containers, and services."
 aliases:
   - /logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers
 ---
@@ -237,7 +237,20 @@ logs:
 
 ### Using a Proxy for Logs
 
-The log Agent does not presently respect the proxy setting in the datadog.yaml configuration file. This feature will be available in a future release.
+Logs make use of a different set of proxy settings than other data types forwarded by the Datadog Agent. This is due to logs presently being transported over TCP/SSL, while other features submit data via on HTTPS.
+
+To configure your Datadog Agent to forward logs through a proxy server, add these settings to the `datadog.yaml` configuration file:"
+
+```
+logs_config:
+  dd_url: <MY_PROXY_URL>
+  dd_port: <MY_PROXY_PORT>
+  dev_mode_no_ssl: true
+```
+
+Then configure your proxy to forward logs to the endpoint `agent-intake.logs.datadoghq.com` on port `10516` with SSL activated. 
+
+[Refer to our Agent proxy documentation page to learn how to forward your metrics with a proxy][8].
 
 ### The Advantage of Collecting JSON-formatted logs
 
@@ -312,3 +325,4 @@ To change the default values for each of the reserved attributes, go to the pipe
 [5]: /logs/explore/#logstream
 [6]: /logs/explore/#search-bar
 [7]: /logs/processing/#log-status-remapper
+[8]: /agent/proxy
