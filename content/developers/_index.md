@@ -8,7 +8,7 @@ This section includes technical details, code examples, and reference documentat
 
 #### Custom Checks
 
-Wondering how to report your own custom Checks? You've got options; start with the sections on [Agent Checks][1] and [Prometheus Checks][2], which contain tons of configuration and code examples. From there, move on to the [DogStatsD section][3] to learn how to use the metrics aggregation service built in to the Agent itself.
+Wondering how to report your own custom Checks? Start with the sections on [Agent Checks][1] and [Prometheus Checks][2], which contain tons of configuration and code examples. From there, move on to the [DogStatsD section][3] to learn how to use the metrics aggregation service built in to the Agent itself.
 
 #### Integrations
 
