@@ -3,6 +3,7 @@ title: Configuring Azure AD as a SAML IdP
 kind: documentation
 aliases:
   - /account_management/faq/how-do-i-configure-azure-ad-as-a-saml-idp/
+disable_toc: true
 further_reading:
 - link: "account_management/saml"
   tag: "Documentation"
