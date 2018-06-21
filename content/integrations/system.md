@@ -16,6 +16,10 @@ ddtype: check
 aliases:
 - /integrations/system_swap/
 - /integrations/system_core/
+supported_os:
+- linux
+- mac_os
+- windows
 ---
 
 ## Overview
@@ -28,7 +32,7 @@ Get metrics from your base system about the CPU, IO, load, memory, swap, and upt
 
 ## Setup
 
-No configuration is necessary for the system.
+The System check is included in the [Datadog Agent][4] package, so you don't need to install anything else on your server.
 
 ## Data Collected
 ### Metrics
@@ -42,43 +46,26 @@ This check collects the number of CPU cores on a host and CPU times (i.e. system
 ### Setup
 #### Installation
 
-The system_core check is packaged with the Agent, so [install the Agent][4] on any host.
+The system_core check is included in the [Datadog Agent][4] package, so you don't need to install anything else on your server.
 
 #### Configuration
 
-Create a file `system_core.yaml` in the Agent's `conf.d` directory. See the [sample system_core.yaml][5] for all available configuration options:
+1. Edit the `system_core.d/conf.yaml` file in the `conf.d/` folder at the root of your Agent's directory. See the [sample system_core.d/conf.yaml][5] for all available configuration options:  
 
-```
-init_config:
+    ```
+    init_config:
 
-instances:
-  - foo: bar
-```
+    instances:
+        - {}
+    ```
 
-The Agent just needs one item in `instances` in order to enable the check. The content of the item doesn't matter.
+    The Agent just needs one item in `instances` in order to enable the check. The content of the item doesn't matter.
 
-Restart the Agent to enable the check.
+2. [Restart the Agent][7] to enable the check.
 
-#### Validation
+### Validation
 
-[Run the Agent's `info` subcommand][6] and look for `system_core` under the Checks section:
-
-```
-  Checks
-  ======
-    [...]
-
-    system_core
-    -------
-      - instance #0 [OK]
-      - Collected 5 metrics, 0 events & 0 service checks
-
-    [...]
-```
-
-### Compatibility
-
-The system_core check is compatible with all major platforms.
+[Run the Agent's `status` subcommand][4] and look for `system_core` under the Checks section.
 
 ### Data Collected
 #### Metrics
@@ -91,44 +78,26 @@ Depending on the platform, the check may collect other CPU time metrics, e.g. `s
 
 This check monitors the number of bytes a host has swapped in and swapped out.
 
-### Setup
-#### Installation
+### Installation
 
-The system swap check is packaged with the Agent, so [install the Agent][4] on any host.
+The system swap check is included in the [Datadog Agent][4] package, so you don't need to install anything else on your server.
 
-#### Configuration
+### Configuration
 
-Create a blank Agent check configuration file called `system_swap.yaml` in the Agent's `conf.d` directory. See the [sample system_swap.yaml][7] for all available configuration options:
+1. Edit the `system_swap.d/conf.yaml` file in the `conf.d/` folder at the root of your Agent's directory. See the [sample system_swap.d/conf.yaml][6] for all available configuration options:
 
-```
-# This check takes no initial configuration
-init_config:
+    ```
+    # This check takes no initial configuration
+    init_config:
 
-instances: [{}]
-```
+    instances: [{}]
+    ```
 
-Restart the Agent to start collecting swap metrics.
+2. [Restart the Agent][7] to start collecting swap metrics.
 
-#### Validation
+### Validation
 
-[Run the Agent's `info` subcommand][6] and look for `system_swap` under the Checks section:
-
-```
-  Checks
-  ======
-    [...]
-
-    system_swap
-    -------
-      - instance #0 [OK]
-      - Collected 2 metrics, 0 events & 0 service checks
-
-    [...]
-```
-
-### Compatibility
-
-The system_swap check is compatible with all major platforms.
+[Run the Agent's `status` subcommand][4] and look for `system_swap` under the Checks section.
 
 ### Data Collected
 #### Metrics
@@ -139,6 +108,7 @@ The system_swap check is compatible with all major platforms.
 [2]: /integrations/disk
 [3]: /integrations/process/
 [4]: https://app.datadoghq.com/account/settings#agent
+[4]: https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information
 [5]: https://github.com/DataDog/integrations-core/blob/master/system_core/conf.yaml.example
-[6]: /agent/faq/agent-commands/#agent-information
-[7]: https://github.com/DataDog/integrations-core/blob/master/system_swap/conf.yaml.example
+[6]: https://github.com/DataDog/integrations-core/blob/master/system_swap/conf.yaml.example
+[7]: https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent
