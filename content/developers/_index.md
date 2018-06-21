@@ -1,48 +1,37 @@
 ---
 title: Developer Tools
 kind: documentation
-description: Collect custom metrics & create new integration
+description: Everything you need to know about developing for the Datadog platform, including config and code examples, and a ton of reference material.
 ---
 
-Monitoring tools should be flexible, so we provide multiple ways to interact with Datadog. This section gives you a quick overview of the various methods available
+This section includes technical details, code examples, and reference documentation to help get you up and running quickly.
 
-## API
-Datadog features a powerful API to programmatically access the service. You can submit custom metrics; manage dashboards and monitors; schedule downtimes; and perform administrative actions.
-Available endpoints can be found on [our dedicated API documentation page][1].
+#### Custom Checks
 
-In addition, [many libraries][2] are available to directly interact with the API.
+Wondering how to report your own custom Checks? Start with the sections on [Agent Checks][1] and [Prometheus Checks][2], which contain tons of configuration and code examples. From there, move on to the [DogStatsD section][3] to learn how to use the metrics aggregation service built in to the Agent itself.
 
-## Submitting custom metrics
-While you can submit metrics directly through [our API][1], you can also submit metrics via the Datadog Agent using [DogStatsD][3] and custom Agent checks.
+#### Integrations
 
-The Datadog Agent includes DogStatsD, a powerful statsd daemon with additional features, that provides better control over your metric metadata and aggregation.
-[Multiple libraries][4] are available to easily send metrics from your application to Datadog using [DogStatsD][3].
+When you are ready to take your data collection to the next level, head to the [Integrations section][4], which walks you through the nuts and bolts of building a fully-fledged Integration for your favorite application or service.
 
-The API and [DogStatsD][3] are handy to _push_ metrics to Datadog from one of your application.
-If you would like to regularly _pull_ metrics from a particular setup, similar to what is done by the Agent for the systems we directly support, you can [add your own integration][5]. We have provided detailed steps and resources for [developing][6] and [testing][7] new integrations.
-These integrations can then be easily shared with the Datadog community, for instance through our [Datadog/integrations-extras repository][8]
+#### Libraries
 
-When sending metrics via [DogStatsD][3] or a custom integration, it is helpful to have a deeper understanding of metrics. Here are some technical resources regarding metric internals:
+Looking to know more about Datadog resources for your favorite language or platform? The [Libraries section][5] contains a list of official and community-contributed API and DogStatsD client libraries, APM (Tracing) libraries, and externally-supported community Integrations for a wide variety of platforms.
 
-* [Learn more about metric behavior][9]
+#### Metrics
 
-* [Learn more about metric types][9]
+Our [Metrics section][6] is a deep-dive into the heart of Metrics at Datadog. This section explains the different types of Metrics, what they represent, and how they are used throughout the Datadog ecosystem.
 
-## APM
-You can also find our [APM tracing utilities][10], which you can use and contribute to. Support on new languages can be proposed by the community, along with community APM integrations.
+#### Office Hours
 
-## Community Integrations
-Many users from our community have already [shared integrations][11] with a large number of commonly used applications.
-These resources are also useful to reference when starting the work on a new Agent integration.
+Finally, don't miss out on the regular [Datadog Office Hours][7], which is your opportunity to chat directly with our engineers about developing for Datadog.
 
-[1]: /api
-[2]: /developers/libraries/#api-and-dogstatsd-client-libraries
+Thanks for stopping by—and welcome to the contributor community!
+
+[1]: /developers/agent_checks
+[2]: /developers/prometheus
 [3]: /developers/dogstatsd
-[4]: /developers/libraries
-[5]: /developers/integrations/
-[6]: /developers/integrations/integration_sdk
-[7]: /developers/integrations/testing/
-[8]: https://github.com/DataDog/integrations-extras
-[9]: /developers/metrics
-[10]: /developers/libraries/#apm-tracing-client-libraries
-[11]: /developers/libraries/#community-integrations
+[4]: /developers/integrations
+[5]: /developers/libraries
+[6]: /developers/metrics
+[7]: /developers/office_hours
