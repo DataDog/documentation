@@ -50,13 +50,13 @@ The system_core check is included in the [Datadog Agent][4] package, so you don'
 
 #### Configuration
 
-1. Edit the `system_core.d/conf.yaml` file in the `conf.d/` folder at the root of your Agent's directory. See the [sample system_core.d/conf.yaml][5] for all available configuration options:
+1. Edit the `system_core.d/conf.yaml` file in the `conf.d/` folder at the root of your Agent's directory. See the [sample system_core.d/conf.yaml][5] for all available configuration options:  
 
     ```
     init_config:
 
     instances:
-      - foo: bar
+        - foo: bar
     ```
 
     The Agent just needs one item in `instances` in order to enable the check. The content of the item doesn't matter.
