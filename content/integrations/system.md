@@ -56,7 +56,7 @@ The system_core check is included in the [Datadog Agent][4] package, so you don'
     init_config:
 
     instances:
-        - foo: bar
+        - {}
     ```
 
     The Agent just needs one item in `instances` in order to enable the check. The content of the item doesn't matter.
