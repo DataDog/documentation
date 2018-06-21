@@ -358,7 +358,7 @@ table, .table {
   border: 1px solid #ededed;
   font-size: 16px;
   a {
-    border-bottom: 1px solid #c8c8c8;
+    border-bottom: 1px solid $gray-300;
     &:hover {
       border-bottom: 1px solid $ddpurple;
     }
