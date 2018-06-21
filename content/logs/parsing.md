@@ -147,9 +147,9 @@ Rule
 rule %{data::keyvalue(": ")}
 ```
 
-https://cl.ly/0B3K2H3L3G01
+{{< img src="logs/parsing/key_value_parser.png" alt="Key value parser" responsive="true" popup="true">}}
 
-If logs contain specials characters in the value such as `/` in a url , add it to the whitelist in the parsing rule.
+If logs contain specials characters in an attribute value such as `/` in a url for instance, add it to the white-list in the parsing rule:
 
 log: 
 
@@ -157,25 +157,25 @@ log:
 url=https://app.datadoghq.com/event/stream user=john
 ```
 
-Rule
+Rule:
 
 ```
 rule %{data::keyvalue("=","/:")}
 ```
 
-https://cl.ly/1e1k290B1i1p
+{{< img src="logs/parsing/key_value_whitelist.png" alt="Key value whitelist" responsive="true" popup="true">}}
 
 Other examples:
 
-| **Raw string**                | **Parsing rule**                                        | **Result**              |
-| :---                          | :----                                                   | :----                   |
-| key=valueStr                  | `%{data::keyvalue}`                                     | {"key": "valueStr}      |
-| key=<valueStr>                | `%{data::keyvalue}`                                     | {"key": "valueStr"}     |
-| key:valueStr                  | `%{data::keyvalue(":")}`                                | {"key": "valueStr"}     |
-| key:"/valueStr"               | `%{data::keyvalue(":", "/")}`                           | {"key": "/valueStr"}    |
-| key:={valueStr}               | `%{data::keyvalue(":=", "", "{}")}`                     | {"key": "valueStr"}     |
-| key:=valueStr                 | `%{data::keyvalue(":=", "")}`                           | {"key": "valueStr"}     |
-| key1:=>val1,key2:=>val2       | `%{data::keyvalue(":=>", ",")}`                         | {"key1": "val1","key2":"val2"} |
+| **Raw string**          | **Parsing rule**                    | **Result**                     |
+| :---                    | :----                               | :----                          |
+| key=valueStr            | `%{data::keyvalue}`                 | {"key": "valueStr}             |
+| key=<valueStr>          | `%{data::keyvalue}`                 | {"key": "valueStr"}            |
+| key:valueStr            | `%{data::keyvalue(":")}`            | {"key": "valueStr"}            |
+| key:"/valueStr"         | `%{data::keyvalue(":", "/")}`       | {"key": "/valueStr"}           |
+| key:={valueStr}         | `%{data::keyvalue(":=", "", "{}")}` | {"key": "valueStr"}            |
+| key:=valueStr           | `%{data::keyvalue(":=", "")}`       | {"key": "valueStr"}            |
+| key1:=>val1,key2:=>val2 | `%{data::keyvalue(":=>", ",")}`     | {"key1": "val1","key2":"val2"} |
 
 
 ### Parsing dates
