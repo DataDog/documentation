@@ -44,4 +44,4 @@ Also add:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://support.google.com/a/answer/6087519?hl=en
+[1]: https://support.google.com/a/answer/7553768
