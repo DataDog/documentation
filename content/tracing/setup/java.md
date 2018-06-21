@@ -346,7 +346,7 @@ Don't see your desired framework? We're continually adding additional support, [
 
 ## Performance
 
-Typical CPU overhead with the Java tracer is between 2-3%.
+Typical CPU overhead with the Java tracer is up to 3%.
 
 ## Further Reading
 
