@@ -70,7 +70,7 @@ If your journal is located elsewhere, add a `path` parameter with the correspond
 
 It is possible to filter in/out specific units thanks to the following parameters:
 
-* `include_units`: Includes all units specified.
+* `include_units`: Includes all units specified, wildcards are supported on extension.
 * `exclude_units`: Excludes all units specified.
 
 Example:
