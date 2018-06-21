@@ -1,6 +1,9 @@
 ---
-title: How do I configure Okta as a SAML IdP?
-kind: faq
+title: Configuring Okta as a SAML IdP
+kind: documentation
+aliases:
+  - /account_management/faq/how-do-i-configure-okta-as-a-saml-idp/
+disable_toc: true
 further_reading:
 - link: "account_management/saml"
   tag: "Documentation"
