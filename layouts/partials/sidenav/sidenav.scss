@@ -112,7 +112,8 @@ aside.sidenav {
     overflow-x: hidden;
     overflow-y: auto;
     ul {
-      padding-bottom:6px;
+      margin-top:3px;
+      padding-bottom:3px;
     }
     & > ul {
       margin-top:5px;
@@ -129,7 +130,8 @@ aside.sidenav {
         padding-left:27px;
         a {
           padding:0;
-          padding-bottom: 3px;
+          padding-bottom: 0px;
+          margin-top:0px;
         }
       }
     }
@@ -145,22 +147,23 @@ aside.sidenav {
           display:block;
           border:1px solid transparent;
           &:hover {
-            background:#fff;
+            background:transparent;
             color: $ddpurple;
-            border-radius:4px;
-            border:1px solid $ddpurple;
+            border-radius:0px;
+            border:1px solid transparent;
           }
-          &.active {
-            background:#fff;
-            border-radius:4px;
+          &.active span, &.active a{
+            background:transparent;
+            border-radius:0px;
             color: $ddpurple;
-            border:1px solid $ddpurple;
+            border:1px solid transparent;
+            border-bottom: 1px solid $ddpurple;
           }
           .hover {
             display:none;
           }
           span {
-            padding-left: 5px;
+            margin-left: 5px;
           }
           span,
           img {

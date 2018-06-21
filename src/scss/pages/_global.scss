@@ -92,6 +92,7 @@ a:focus {
   width: 100%;
   background-color: #fff;
   color: $ddpurple;
+  /*border-color: $ddpurple;*/
   border-color: $ddpurple;
   font-weight: 600;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -158,7 +159,7 @@ p {
   // todo: can i set this with a bootstrap variable?
   font-size: 18px;
   color: #4a4a4a;
-  line-height: 24px;
+  line-height: 27px;
 }
 
 h1 {
@@ -243,7 +244,7 @@ h2 {
   ul, ol, p {
     font-size: 18px;
     color: #4a4a4a;
-    line-height: 24px;
+    line-height: 27px;
     -webkit-font-smoothing: subpixel-antialiased;
     -moz-osx-font-smoothing: auto;
   }
