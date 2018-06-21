@@ -26,6 +26,9 @@ platforms:
   - name: redhat
     link: "agent/basic_agent_usage/redhat/"
     image: "platform_redhat.png"
+  - name: suse
+    link: "agent/basic_agent_usage/suse/"
+    image: "platform_suse.png"
   - name: ubuntu
     link: "agent/basic_agent_usage/ubuntu/"
     image: "platform_ubuntu.png"
