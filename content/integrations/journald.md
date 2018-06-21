@@ -70,8 +70,8 @@ If your journal is located elsewhere, add a `path` parameter with the correspond
 
 It is possible to filter in/out specific units thanks to the following parameters:
 
-* `include_units: unit1,unit2` : Includes all units specified.
-* `exclude_units: unit1, unit2`:  Excludes all units specified.
+* `include_units`: Includes all units specified.
+* `exclude_units`: Excludes all units specified.
 
 Example:
 
@@ -79,7 +79,9 @@ Example:
 logs:
   - type: journald
     path: /var/log/journal/journal
-    include_units: docker.service
+    include_units: 
+      - docker.*
+      - sshd.service
 ```
 
 ## Troubleshooting
