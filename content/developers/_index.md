@@ -4,7 +4,7 @@ kind: documentation
 description: Everything you need to know about developing for the Datadog platform, including config and code examples, and a ton of reference material.
 ---
 
-Hello and welcome to the Developer Tools section! This section includes technical details, code examples, and reference documentation to help get you up and running quickly.
+This section includes technical details, code examples, and reference documentation to help get you up and running quickly.
 
 #### Custom Checks
 
@@ -24,7 +24,7 @@ Our [Metrics section][6] is a deep-dive into the heart of Metrics at Datadog. Th
 
 #### Office Hours
 
-Finally, don't miss out on the regular [Datadog Office Hours][7], which is your opportunity to chat directly with our engineers about developing for Datadog!
+Finally, don't miss out on the regular [Datadog Office Hours][7], which is your opportunity to chat directly with our engineers about developing for Datadog.
 
 Thanks for stopping by—and welcome to the contributor community!
 
