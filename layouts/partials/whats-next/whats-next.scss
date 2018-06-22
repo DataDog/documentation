@@ -9,6 +9,8 @@ $ddpurple:    #774DA2;
   .list-group-item {
     margin-bottom: 0;
     border-bottom:1px solid transparent;
+    padding: .65rem .75rem;
+
     &:first-child, &:last-child{
       border-top-left-radius: 2px;
       border-top-right-radius: 2px;
