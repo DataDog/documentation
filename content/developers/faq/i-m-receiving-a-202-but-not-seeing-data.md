@@ -13,7 +13,7 @@ Thus it is possible you could receive a 202 'success' response but not see your 
 
 To check your timestamp is correct run:
 ```
-date -u && curl -s --head https://app.datadoghq.com 2>&1 | grep Date
+date -u && curl -s --head https://app.datadoghq.com 2>&1 | grep date
 ```
 
 This outputs the current system’s date, and then make a request to our endpoint and grab the date on our end. If these are more than a few minutes apart, you may want to look at the time settings on your server.
