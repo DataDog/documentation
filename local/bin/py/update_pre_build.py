@@ -402,9 +402,7 @@ class PreBuild:
         """
         if file_name.endswith('.md'):
             dependencies = []
-            if file_name.startswith(self.options.dogweb):
-                dependencies.append(file_name.replace(self.options.dogweb, "https://github.com/DataDog/dogweb/blob/prod/"))
-            elif file_name.startswith(self.options.integrations):
+            if file_name.startswith(self.options.integrations):
                 dependencies.append(file_name.replace(self.options.integrations, "https://github.com/DataDog/integrations-core/blob/master/"))
             elif file_name.startswith(self.options.extras):
                 dependencies.append(file_name.replace(self.options.extras, "https://github.com/DataDog/integrations-extras/blob/master/"))
