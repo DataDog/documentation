@@ -74,6 +74,7 @@ kind: faq
 |Ceph|CEPH|
 |Chatwork|CHATWORK|
 |Chef|CHEF|
+|Cisco Aci|CISCOACI|
 |Cloud Foundry|CLOUDFOUNDRY|
 |Cloudhealth|CLOUDHEALTH|
 |Cloudnetworkhealth|CLOUDNETWORKHEALTH|
