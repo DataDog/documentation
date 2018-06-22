@@ -173,6 +173,9 @@ h1 {
 h2 {
   padding-bottom: 3px;
   line-height: 36px;
+/*  &~ p {
+    padding-top:100px;
+  }*/
 }
 
 .col-lg-7 {
@@ -237,8 +240,20 @@ h2 {
   p + h1,
   p + h2,
   p + h3,
-  p + h4 {
-    padding-top: 11px;
+  p + h4,
+  ol + h1,
+  ol + h2,
+  ol + h3,
+  ol + h4,
+  table + h1,
+  table + h2,
+  table + h3,
+  table + h4 {
+    padding-top: 14px;
+  }
+
+  h2 + h3 {
+    padding-top: 14px;
   }
 
   ul, ol, p {
@@ -355,7 +370,7 @@ h2 {
 table, .table {
   width: 100%;
   max-width: 100%;
-  margin-bottom: 31px;
+  margin-bottom: 20px;
   border: 1px solid #ededed;
   font-size: 16px;
   a {
