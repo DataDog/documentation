@@ -75,8 +75,6 @@ Example:
 If your PHP application does not log to a file, but instead forwards its logs via TCP, create a configuration file that specifies the port to receive as in the example below:
 
 ```yaml
-init_config:
-instances:
 
 ##Log section
 logs:
@@ -102,8 +100,6 @@ To achieve this use the `log_processing_rules` parameter in your configuration f
   Example: Filtering out logs that contain a Datadog email
 
 ```yaml
-init_config:
-instances:
 
 logs:
   - type: file
@@ -121,8 +117,6 @@ logs:
   Example: Sending only logs that contain a Datadog email
 
 ```yaml
-init_config:
-instances:
 
 logs:
   - type: file
@@ -147,8 +141,6 @@ This replaces all matched groups with `replace_placeholder` parameter value.
 Example: Redact credit card numbers
 
 ```yaml
-init_config:
-instances:
 
 logs:
  - type: file
@@ -184,8 +176,6 @@ Example: Every java log line starts with a timestamp with `yyyy-dd-mm` format. T
 To achieve this, you need to use the following `log_processing_rules`:
 
 ```yaml
-init_config:
-instances:
 
 logs:
  - type: file
@@ -223,8 +213,6 @@ If your log files are labeled by date or all stored in the same directory, confi
 Configuration example:
 
 ```yaml
-init_config:
-instances:
 
 logs:
  - type: file
