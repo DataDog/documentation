@@ -1,6 +1,6 @@
 {{ if isset $.Page.Params "dependencies" }}
     {{ $numDeps := (len $.Page.Params.dependencies) }}
     {{ if gt $numDeps 0 }}
-        <p style="padding-top:50px;">Mistake in the docs? <a href="{{ index $.Page.Params.dependencies 0 }}">Feel free to contribute!</a></p>
+        <p style="padding-top:20px;">Mistake in the docs? <a href="{{ index $.Page.Params.dependencies 0 }}">Feel free to contribute!</a></p>
     {{ end }}
 {{ end }}
