@@ -17,7 +17,7 @@ supported_os:
 
 ## Overview
 
-Systemd-journald is a system service that collects and stores logging data. It creates and maintains structured, indexed journals based on logging information that is received from a variety of sources. Note that the agent currently only supports Debian based linux. Support for other Linux flavors is coming soon.
+Systemd-journald is a system service that collects and stores logging data. It creates and maintains structured, indexed journals based on logging information that is received from a variety of sources. Note that the agent currently only supports Debian based linux. Support for other Linux distributions is coming soon.
 
 ## Setup
 
