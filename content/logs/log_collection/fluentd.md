@@ -10,24 +10,55 @@ As long as you can forward your FluentD logs over tcp/udp to a specific port, yo
 
 In order to get the best use out of your logs in Datadog, it is important to have the proper metadata associated with your logs (including hostname and source). By default, the hostname and timestamp should be properly remapped thanks to our default [remapping for reserved attributes][2]. 
 
-### Source
+### Source and Custom tags
 
-Add the `ddsource` attribute in your logs in order to trigger the [integration automatic setup][3] in Datadog.
-
-```
-{
-    "ddsource": "<MY_SOURCE_VALUE>"
-}
-```
-
-### Custom tags
-
+Add the `ddsource` attribute with [the name of the log integration][6] in your logs in order to trigger the [integration automatic setup][3] in Datadog.
 [Host tags][5] are automatically set on your logs if there is a matching hostname in your [infrastructure list][4]. Use the `ddtags` attribute to add custom tags to your logs:
 
+Setup Example:
+
 ```
-{
-    "ddtags": "env:test,<KEY:VALUE>"
-}
+# Match events tagged with "datadog.**" and
+# send them to Datadog
+<match datadog.**>
+
+  @type datadog
+  @id awesome_agent
+  api_key <your_api_key>
+
+  # Optional
+  include_tag_key true
+  tag_key 'tag'
+
+  # Optional tags
+  dd_source '<INTEGRATION_NAME>' 
+  dd_tags '<KEY1:VALUE1>,<KEY2:VALUE2>'
+  dd_sourcecategory '<SOURCE_CATEGORY>'
+
+</match>
+```
+
+### Kubernetes and Docker tags
+
+Tags in Datadog are critical to be able to jump from one part of the product to the other. Having the right metadata associated to your logs is therefore important to jump from the container view or any container metrics to the most related logs.
+
+If your logs contain any of the following attributes, it will automatically be added as Datadog tags on your logs:
+
+* kubernetes.container_image
+* kubernetes.container_name
+* kubernetes.namespace_name
+* kubernetes.pod_name
+* docker.container_id
+
+If the Datadog Agent collect them automatically, FluentD requires a plugin for this. We recommend using [fluent-plugin-kubernetes_metadata_filter](https://github.com/fabric8io/fluent-plugin-kubernetes_metadata_filter) to collect Docker and Kubernetes metadata.
+
+Configuration example:
+
+```
+# Collect metadata for logs tagged with "kubernetes.**"
+ <filter kubernetes.*>
+   type kubernetes_metadata
+ </filter>
 ```
 
 [1]: http://www.rubydoc.info/gems/fluent-plugin-datadog/
@@ -35,3 +66,4 @@ Add the `ddsource` attribute in your logs in order to trigger the [integration a
 [3]: /logs/processing/#integration-pipelines
 [4]: https://app.datadoghq.com/infrastructure
 [5]: /getting_started/tagging/assigning_tags/
+[6]: https://docs.datadoghq.com/integrations/#cat-log-collection
