@@ -90,9 +90,9 @@ Export your Log Graph:
 
 **This functionality is still in beta, [contact our support team][6] to activate it for your organization.**
 
-Export [Log graphs][7] from the Log explorer or build them directly on your [Dashboard][8] alongside metrics and traces.
+Export [Log graphs][7] from the Log explorer or build them directly in your [Dashboard][8] alongside metrics and traces.
 
-https://cl.ly/0D3K0k432n3t
+{{< img src="logs/graph/log_graph_in_dashboard.png" alt="Log graph in dashboard" responsive="true" popup="true" style="width:90%;">}}
 
 Similar to the log explorer, click on a any graph in your dashboards to jump to [the most related logs][9].
 
