@@ -30,7 +30,7 @@ Add the `ddsource` attribute in your logs in order to trigger the [integration a
 }
 ```
 
-[1]: http://www.rubydoc.info/gems/fluent-plugin-datadog/0.9.6
+[1]: http://www.rubydoc.info/gems/fluent-plugin-datadog/
 [2]: /logs/#edit-reserved-attributes
 [3]: /logs/processing/#integration-pipelines
 [4]: https://app.datadoghq.com/infrastructure
