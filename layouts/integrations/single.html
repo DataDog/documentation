@@ -1,7 +1,5 @@
 {{ define "main" }}
-    <div class="integrations-single">
-        <h1 id="pagetitle">{{ if .Params.integration_title }}{{ .Params.integration_title }}{{ else }}{{.Title}}{{ end }}</h1>
-        {{ partial "integration-labels/integration-labels.html" . }}
-        {{ .Content }}
-    </div>
+    <h1 id="pagetitle">{{ if .Params.integration_title }}{{ .Params.integration_title }}{{ else }}{{.Title}}{{ end }}</h1>
+    {{ partial "integration-labels/integration-labels.html" . }}
+    {{ .Content }}
 {{ end }}
