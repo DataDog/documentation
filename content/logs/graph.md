@@ -86,11 +86,15 @@ Export your Log Graph:
 * To an existing [Timeboard][5]:  
     This functionality is in beta, [contact our support team][6] to activate it for your organization.
 
-## Dashboard 
+## Logs in Dashboard 
 
 **This functionality is still in beta, [contact our support team][6] to activate it for your organization.**
 
-Use the [Timeseries widget][7] to display log graph directly in your [Dashboards][8].
+Export [Log graphs][7] from the Log explorer or build them directly on your [Dashboard][8] alongside metrics and traces.
+
+https://cl.ly/0D3K0k432n3t
+
+Similar to the log explorer, click on a any graph in your dashboards to jump to [the most related logs][9].
 
 ## Further Reading
 
@@ -104,3 +108,4 @@ Use the [Timeseries widget][7] to display log graph directly in your [Dashboards
 [6]: /help
 [7]: /graphing/dashboards/widgets/#timeseries
 [8]: /graphing/dashboards
+[9]: https://docs.datadoghq.com/graphing/dashboards/#correlation-between-logs-and-metrics
