@@ -68,11 +68,11 @@ For example, to filter on the following `filename` attribute there are two optio
 
 1. Click on the attribute and add it to the search: 
 
-{{< img src="logs/live_tail/live_tail_click_attribute.png" alt="Live tail click attribute" responsive="true" popup="true" style="width:50%;">}}
+    {{< img src="logs/live_tail/live_tail_click_attribute.png" alt="Live tail click attribute" responsive="true" popup="true" style="width:50%;">}}
 
 2. Use the following query  `@filename:runner.go`:
 
-{{< img src="logs/live_tail/live_tail_filtered.png" alt="Live tail filtered" responsive="true" popup="true" style="width:50%;">}}
+    {{< img src="logs/live_tail/live_tail_filtered.png" alt="Live tail filtered" responsive="true" popup="true" style="width:50%;">}}
 
 To filter on all logs with a line number above 150 use the following query: `@linenumber:>150`
 
