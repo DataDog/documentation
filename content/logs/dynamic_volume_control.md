@@ -51,6 +51,8 @@ Get notified at any moment if the volumes in any scope (`service`, `availibility
 4. Define the rate you would like to set as *warning* or *error*.
 5. Define an explicit notification: `The volume on this service just got too high. Please define an additional exclusion filter or increase the sampling rate to put it back under control.`
 
+https://cl.ly/0r1h2S0T2y0Z
+
 ## Exclusion Filters
 
 Index Filters give more control over what goes into your indexes.
