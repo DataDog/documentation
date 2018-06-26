@@ -51,4 +51,4 @@ Currently, only Go 1.7 is supported. The following Go libraries are supported:
 
 The Go integration [source code can be found on Github](https://github.com/DataDog/dd-trace-go).
 
-You can find additional documentation on [the GoDoc Package page](https://godoc.org/github.com/DataDog/dd-trace-go/tracer).
+You can find additional documentation on [the GoDoc Package page](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer).

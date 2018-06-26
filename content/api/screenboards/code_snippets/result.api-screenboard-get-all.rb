@@ -12,7 +12,7 @@
             "resource" => "/api/v1/screen/2",
             "id" => 2,
             "modified" => "2015-12-17T20:00:25.868752+00:00",
-            "title" => "Database Screen Board",
+            "title" => "Database Screenboard",
             "read_only" => false
         }]
     }

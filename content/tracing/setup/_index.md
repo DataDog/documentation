@@ -41,14 +41,15 @@ To start tracing your application:
 1. **Install the Datadog Agent**:
   Install and configure the latest [Datadog Agent][3]. For additional information, reference the [getting started guide][4].
 
-2. **Install the Trace Agent**:
+2. **Install the [Trace Agent][6]**:
 
-  * On **Linux**,**Windows**, and **[Docker][5]** the Trace Agent is pre-packaged with the standard Datadog Agent and no extra configuration is needed.
+  * On **Linux** and **Windows**, the Trace Agent is pre-packaged with the standard Datadog Agent and no extra configuration is needed. See the [Linux Trace Agent][20] and [Windows Trace Agent][8] documentation for more information.
 
-  * On **macOS** , install and run the [Trace Agent][6] in addition to the Datadog Agent.
-  See the [macOS Trace Agent][7] and [Windows Trace Agent][8] dedicated documentation.
+  * On **macOS**, install and run the Trace Agent in addition to the Datadog Agent. See the [macOS Trace Agent][7]  documentation for more information.
+  
+  * On **Docker**, enable the Trace Agent in the `datadog/agent` container by passing `DD_APM_ENABLED=true` as an environment variable. See the [APM and Docker][5] documentation for more information.
 
-  * On Heroku, Deploy the Datadog Trace Agent via the [Datadog Heroku Buildpack][9].
+  * On **Heroku**, Deploy the Trace Agent via the [Datadog Heroku Buildpack][9].
 
 3. **Configure your environment**:
   An environment is a first class dimension used to scope a whole Datadog APM application. A common use case is to disaggregate metrics from stage environments such as production, staging, and pre-production. [Learn how to configure environments][10].
@@ -127,7 +128,7 @@ apm_config:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/faq/agent-5-tracing-setup
-[2]: https://github.com/DataDog/datadog-trace-agent/blob/master/config/agent.go#L170
+[2]: https://github.com/DataDog/datadog-trace-agent/blob/master/config/agent.go#L95
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://github.com/DataDog/datadog-trace-agent/tree/master/config#agent-configuration
 [5]: /tracing/setup/docker
@@ -145,3 +146,4 @@ apm_config:
 [17]: /tracing/visualization
 [18]: /agent/
 [19]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
+[20]: https://github.com/DataDog/datadog-trace-agent/#run-on-linux

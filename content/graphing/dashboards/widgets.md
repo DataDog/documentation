@@ -64,7 +64,9 @@ Example of Timeseries widget for the [API][1]
   "x": 32,
 
   // Widget Parameters
-  "timeframe": "1h", // Choose from: [1h, 4h, 1d, 2d, 1w]
+  "time": {
+    "live_span": "1h" // Choose from: [1m, 5m, 10m, 15m, 30m, 1h, 4h, 1d, 2d, 1w, 1mo, 3mo, 6mo, 1y]
+  },
   "tile_def": {
     "viz": "timeseries",
     "requests": [
@@ -146,7 +148,9 @@ Example of Query Value widget for the [API][1]
   ],
   "text_align": "left",
   "precision": 1,
-  "timeframe": "5m", // Choose from: [5m, 10m, 1h, 4h, 1d, 2d, 1w]
+  "time": {
+    "live_span": "1h" // Choose from: [1m, 5m, 10m, 15m, 30m, 1h, 4h, 1d, 2d, 1w, 1mo, 3mo, 6mo, 1y]
+  },
   "text_size": "auto",
   "unit": "/s" // Give a custom unit or use "auto"
 }
@@ -237,7 +241,9 @@ Example of Event Stream widget for the [API][1]
 
     // Widgets Parameters
     "query": "tags:release",
-    "timeframe": "1w" // Choose from: [1h, 4h, 1d, 2d, 1w]
+    "time": {
+      "live_span": "1h" // Choose from: [1m, 5m, 10m, 15m, 30m, 1h, 4h, 1d, 2d, 1w, 1mo, 3mo, 6mo, 1y]
+    }
 }
 ```
 
@@ -321,7 +327,9 @@ Example of Alert Graph widget for the [API][1]
    "height": 13,
    "width": 47,
    "alert_id": "<ENTER ID>",
-   "timeframe": "1mo",
+   "time": {
+    "live_span": "1h" // Choose from: [1m, 5m, 10m, 15m, 30m, 1h, 4h, 1d, 2d, 1w, 1mo, 3mo, 6mo, 1y, alert]
+   },
    "y": 2,
    "x": 6,
    "isShared": false,

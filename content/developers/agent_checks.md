@@ -45,9 +45,9 @@ All custom Agent checks inherit from the `AgentCheck` class found in `checks/__i
 
 ### `AgentCheck` interface for Agent v6
 
-There is some differences between Agent v5 and Agent v6:
+There are some differences between Agent v5 and Agent v6:
 
-* Each check instance is now its own instance of the class. So you cannot share state between them
+* Each check instance is now its own instance of the class, so state cannot be shared between them, respectively.
 * The following methods have been removed from `AgentCheck`:
 
     - `_roll_up_instance_metadata`
@@ -311,11 +311,11 @@ if r.status_code != 200:
     self.status_code_event(url, r, aggregation_key)
 ```
 
-If the request passes, we want to submit the timing to Datadog as a metric. Let's call it `http.response_time` and tag it with the URL.
+If the request passes, we want to submit the timing to Datadog as a metric. Let’s call it `http.response_time` and tag it with the URL.
 
 ```python
 timing = end_time - start_time
-self.gauge('http.response_time', timing, tags=['http_check'])
+self.gauge('http.response_time', timing, tags=["url:"+url]
 ```
 
 Finally, define what happens in the error cases. We have already
@@ -427,7 +427,16 @@ Custom Agent checks can't be directly called from python and instead need to be 
 
 To test this, run:
 
-    sudo -u dd-agent dd-agent check <CHECK_NAME>
+| Agent version | Command                                             |
+| :------       | :----                                               |
+| v5.x          | `sudo -u dd-agent dd-agent check <CHECK_NAME>`      |
+| v6.x          | `sudo -u dd-agent datadog-agent check <CHECK_NAME>` |
+
+If you want to include rate metrics, add `--check-rate` to your command, for instance for agent v6.x run:
+
+```
+sudo -u dd-agent datadog-agent check <CHECK_NAME> --check-rate
+```
 
 If your issue continues, reach out to Support with the [help page][11] that lists the paths it installs.
 

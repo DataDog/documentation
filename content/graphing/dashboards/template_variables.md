@@ -76,6 +76,15 @@ Here is an example that uses the tags field together with the hosts: field in th
 
 {{< img src="graphing/dashboards/template_variables/tv9.png" alt="tv9" responsive="true" popup="true" style="width:85%;">}}
 
+## Template variables and Logs
+
+Template variables work by default on Log widgets, as Metrics and Logs share the same tags.
+Additionally, it is possible to define specific Log Template variables based on your [Log Facets][4]. Those template variables starts with `@`.
+
+{{< img src="graphing/dashboards/template_variables/log_template_variables.png" alt="log template variables" responsive="true" popup="true" style="width:85%;">}}
+
+Using the `Add to all` button adds this template variable to all log widgets. Wildcards can be used in the template variable value.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -83,3 +92,4 @@ Here is an example that uses the tags field together with the hosts: field in th
 [1]: /graphing/event_stream
 [2]: /graphing/dashboards/template_variables/how-do-i-overlay-events-onto-my-dashboards
 [3]: /getting_started/tagging/#tags-best-practices
+[4]: https://docs.datadoghq.com/logs/explore/#facets

@@ -34,8 +34,8 @@ Tracing data is sent to the Datadog Agent via an HTTP API. We provide some [offi
     <ul class="arguments">
       {{< argument name="traces" description="A list of traces. Traces are a list of spans as JSON objects containing the span information:" >}}
         <ul>
-          <li><code>trace_id</code> - <em>Required.</em> The unique integer (64-bit signed) ID of the trace containing this span.</li>
-          <li><code>span_id</code> - <em>Required.</em> The span integer (64-bit signed) ID.</li>
+          <li><code>trace_id</code> - <em>Required.</em> The unique integer (64-bit unsigned) ID of the trace containing this span.</li>
+          <li><code>span_id</code> - <em>Required.</em> The span integer (64-bit unsigned) ID.</li>
           <li><code>name</code> - <em>Required.</em> The span name.</li>
           <li><code>resource</code> - <em>Required.</em> The resource you are tracing.</li>
           <li><code>service</code> - <em>Required.</em>The service name.</li>

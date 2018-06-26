@@ -42,6 +42,8 @@ proxy:
 #     - host2
 ```
 
+[Refer to our log collection documentation page to learn how to forward your logs with a proxy][].
+
 ### Agent v5
 
 Edit the `datadog.conf` file with your proxy information:
@@ -195,7 +197,7 @@ To verify that everything is working properly, review the HAProxy statistics at 
 
 ## Using the Agent as a Proxy
 
-**This feature is only available on Agent v5**
+**This feature is only available for Agent v5**
 
 We recommend using an actual proxy (a web proxy or HAProxy) to forward your traffic to Datadog, however if those options aren't available to you, it is possible to configure an instance of Agent v5 to serve as a proxy.
 
@@ -232,3 +234,4 @@ to
 [4]: /agent/#start-stop-restart-the-agent/#windows
 [5]: https://app.datadoghq.com/infrastructure
 [6]: http://www.haproxy.org/#perf
+[7]: /logs/log_collection/#using_a_proxy_for_logs

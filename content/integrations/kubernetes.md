@@ -153,4 +153,4 @@ To get a better idea of how (or why) to integrate your Kubernetes service, check
 [12]: /integrations/faq/using-rbac-permission-with-your-kubernetes-integration
 [13]: https://www.datadoghq.com/blog/monitoring-kubernetes-era/
 [14]: https://app.datadoghq.com/account/settings#agent/kubernetes
-[15]: https://docs.datadoghq.com/logs/log_collection/docker/#setup
+[15]: https://docs.datadoghq.com/agent/basic_agent_usage/kubernetes/#log-collection-setup

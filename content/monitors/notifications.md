@@ -120,7 +120,7 @@ and the recovery notification:
 
 #### `{{is_recovery}}` or `{{is_alert_recovery}}`
 
-* `{{is_recovery}}` triggers and a monitor recovers indifferently either from a **WARNING** state or an **ALERT** state.
+* `{{is_recovery}}` triggers when a monitor recovers indifferently either from a **WARNING** state or an **ALERT** state.
 * `{{is_alert_recovery}}` triggers when a monitor recovers directly from an **ALERT** state to an **OK** state.
 * `{{is_warning_recovery}}` triggers when a monitor recovers from a **WARNING** state to an **OK** state
 

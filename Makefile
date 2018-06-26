@@ -1,5 +1,5 @@
 # make
-.PHONY: clean clean-all clean-build clean-docker clean-exe clean-integrations clean-node clean-virt docker-start docker-stop help start stop
+.PHONY: clean clean-all clean-build clean-docker clean-exe clean-integrations clean-auto-doc clean-node clean-virt docker-start docker-stop help start stop
 .DEFAULT_GOAL := help
 PY3=$(shell if [ `which pyenv` ]; then \
 				if [ `pyenv which python3` ]; then \
@@ -26,12 +26,14 @@ clean: stop  ## clean all make installs.
 	@echo "cleaning up..."
 	make clean-build
 	make clean-integrations
+	make clean-auto-doc
 	make clean-static
 
 clean-all: stop  ## clean everything.
 	make clean-build
 	make clean-exe
 	make clean-integrations
+	make clean-auto-doc
 	make clean-node
 	make clean-virt
 	make clean-docker
@@ -47,12 +49,14 @@ clean-exe:  ## remove execs.
 	@rm -rf ${EXE_LIST}
 
 clean-integrations:  ## remove built integrations files.
-	@find ./data/integrations -type f -maxdepth 1 \
+	@if [ -d data/integrations ]; then \
+		find ./data/integrations -type f -maxdepth 1 \
 	    -a -not -name '*.fr.yaml' \
-	    -exec rm -rf {} \;
-	@find ./data/service_checks -type f -maxdepth 1 \
+	    -exec rm -rf {} \; ;fi 
+	@if [ -d data/service_checks ]; then \
+		find ./data/service_checks -type f -maxdepth 1 \
 	    -a -not -name '*.fr.json' \
-	    -exec rm -rf {} \;
+	    -exec rm -rf {} \; ;fi
 	@find ./content/integrations -type f -maxdepth 1 \
 	    -a -not -name '_index.md' \
 	    -a -not -name 'amazon_guardduty.md' \
@@ -60,13 +64,19 @@ clean-integrations:  ## remove built integrations files.
 	    -a -not -name 'cloudcheckr.md' \
 	    -a -not -name 'integration_sdk.md' \
 	    -a -not -name 'jenkins.md' \
+	    -a -not -name 'journald.md' \
 	    -a -not -name 'kubernetes.md' \
 	    -a -not -name 'new_integration.md' \
 	    -a -not -name 'rss.md' \
 	    -a -not -name 'system.md' \
 	    -a -not -name 'tcprtt.md' \
+	    -a -not -name 'windows_event_log.md' \
 	    -a -not -name '*.fr.md' \
 	    -exec rm -rf {} \;
+
+clean-auto-doc: ##remove all doc automatically created
+	@if [ -d content/developers/integrations ]; then \
+	find ./content/developers/integrations -type f -maxdepth 1 -exec rm -rf {} \; ;fi
 
 clean-node:  ## remove node_modules.
 	@if [ -d node_modules ]; then rm -r node_modules; fi
