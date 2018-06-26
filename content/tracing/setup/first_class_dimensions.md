@@ -27,7 +27,7 @@ There are several dimensions that you can configure to scope an entire Datadog A
 ## Environment
 ### Definition
 
-An environment is a [first-class dimension](#primary-tags) that is used to scope an entire Datadog APM application. Some display settings can be shared across environments, but all the measurable data (traces/metrics/statistics) can not be re-aggregated across multiple environments. Use cases include:
+An environment is a first-class dimension that is used to scope an entire Datadog APM application. Some display settings are shared across environments, but all the measurable data (traces/metrics/statistics) can not be re-aggregated across multiple environments. Use cases include:
 
 * Stage environments such as production, staging, and pre-production...
 
@@ -101,23 +101,24 @@ Environments appear near the top of APM pages. Use the dropdown to scope the dat
 ## Primary Tags
 ### Definition
 
-A primary tag is a first-class dimension that you use to scope an entire Datadog APM application. Primary tags can be used in conjunction with environments to get an even finer view of your application’s behavior. Use cases for primary tags include:
+A primary tag is a first-class dimension that is used to scope an entire Datadog APM application. Primary tags are used in conjunction with environments to get an even finer view of your application’s behavior. Use cases for primary tags include:
 
 * Availability zone
 * Datacenter
 
-You can optionally set 1 primary tag. A primary tag must follow these rules:
+A primary tag must follow these rules:
 
 * It must start with a lowercase letter.
 * Other characters must be alphanumeric lowercase Unicode characters, underscores, minuses, colons, periods, or slashes.
 * It must not be more than 100 characters long.
 
 ### Setup
+
 APM primary tags must be set up in two ways: in the trace Agent and in the Datadog UI.
 
 #### Agent configuration
 
-Override the default tag used by the trace Agent in the [Agent configuration file][2]. This tags all traces coming through the Agent, overriding the host tag value. An APM primary tag is configured like any regular host tag. You can specify it as:
+Override the default tag used by the trace Agent in the [Agent configuration file][2]. This tags all traces coming through the Agent, overriding the host tag value. An APM primary tag is configured like any regular host tag, specify it as:
 
 ```
 tags:
@@ -126,9 +127,9 @@ tags:
 
 #### Datadog UI
 
-Visit the [APM Settings](https://app.datadoghq.com/apm/settings) page to define, change, or remove primary tags. Only organization admins have access to this page. 
+Visit the [APM Settings][3] page to define, change, or remove primary tags. Only organization Administrators have access to this page. 
 
-Changes will be reflected in the UI within several minutes.  Note:
+Changes are reflected in the UI within several minutes.  Note:
 
  If you change a previously set primary tag, please be aware of the following:
 
@@ -147,3 +148,4 @@ Primary tags appear near the top of APM pages, next to environments. Use these s
 
 [1]: /agent/tagging
 [2]: /agent/basic_agent_usage/#configuration-file
+[3]: https://app.datadoghq.com/apm/settings
