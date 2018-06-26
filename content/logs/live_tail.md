@@ -81,5 +81,5 @@ To filter on all logs with a line number above 150 use the following query: `@li
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/processing
-[2]: /logs/dynamic_colume_control
+[2]: /logs/dynamic_volume_control
 [3]: /logs/explore/#Search-bar
