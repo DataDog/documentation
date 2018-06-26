@@ -596,6 +596,11 @@ languages:
           url: "logs/explore/"
           weight: 30
           parent: menu_references_logs
+        - identifier: customnav_lognav_live_tail
+          name: "Live Tail"
+          url: "logs/live_tail/"
+          weight: 32
+          parent: menu_references_logs
         - identifier: customnav_lognav_graph
           name: "Log Graph"
           url: "logs/graph/"
@@ -1423,6 +1428,11 @@ languages:
           name: "Search"
           url: "logs/explore/"
           weight: 30
+          parent: menu_references_logs
+        - identifier: customnav_lognav_live_tail
+          name: "Live Tail"
+          url: "logs/live_tail/"
+          weight: 32
           parent: menu_references_logs
         - identifier: customnav_lognav_graph
           name: "Log Graph"
