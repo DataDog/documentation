@@ -34,7 +34,7 @@ Le check disk est packagé avec l'agent, il vous faut donc simplement [installer
 
 ### Configuration
 
-La check disk est activée par défaut et l'agent collecte des métriques pour toutes les partitions locales. Si vous voulez configurer le check avec des options personnalisées, créez un fichier `disk.yaml` dans le répertoire` conf.d` de l'Agent. Consultez le fichier [canevas disk.yaml](https://github.com/DataDog/integrations-core/blob/master/disk/conf.yaml.default) pour apprendre toutes les options de configuration disponibles.
+La check disk est activée par défaut et l'agent collecte des métriques pour toutes les partitions locales. Si vous voulez configurer le check avec des options personnalisées, créez un fichier `disk.yaml` dans le répertoire` conf.d` de l'Agent. Consultez le fichier [canevas disk.yaml](https://github.com/DataDog/integrations-core/blob/master/disk/datadog_checks/disk/data/conf.yaml.default) pour apprendre toutes les options de configuration disponibles.
 
 ### Validation
 
