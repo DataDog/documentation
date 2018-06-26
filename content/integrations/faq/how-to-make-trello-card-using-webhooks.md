@@ -77,6 +77,6 @@ A good workaround would be to create a specific trello user that is only joined 
 [3]: https://cl.ly/2A40141c0p2Z
 [4]: https://cl.ly/0F3u1U3H0q3c
 [5]: https://cl.ly/0R2n1A0V280s
-[6]: https://developers.trello.com/advanced-reference/card#put-1-cards-card-id-or-shortlink
+[6]: https://developers.trello.com/reference/#cards
 [7]: https://cl.ly/260U152G3h09
 [8]: https://cl.ly/380G120f0W0R
