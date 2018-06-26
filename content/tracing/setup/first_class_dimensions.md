@@ -27,11 +27,11 @@ There are several dimensions that you can configure to scope an entire Datadog A
 ## Environment
 ### Definition
 
-An environment is a first-class dimension that is used to scope an entire Datadog APM application. Some display settings are shared across environments, but all the measurable data (traces/metrics/statistics) can not be re-aggregated across multiple environments. Use cases include:
+An environment is a first-class dimension that is used to scope an entire Datadog APM application. Some display settings are shared across environments, but measurable data (traces/aggregate statistics) cannot be re-aggregated across multiple environments. Use cases include:
 
-* Stage environments such as production, staging, and pre-production...
+* Stage environments such as production, staging, and pre-production.
 
-Environments are [tags][1], therefore they must follow the following rules:
+Environments are [tags][1] which must follow these rules:
 
 * They must start with a lower case letter.
 * Other characters must be alphanumeric lower case Unicode characters, underscores, minuses, colons, periods or slashes.
@@ -106,11 +106,11 @@ A primary tag is a first-class dimension that is used to scope an entire Datadog
 * Availability zone
 * Datacenter
 
-A primary tag must follow these rules:
+Primary tags must follow a different set of rules from those of conventional tags:
 
-* It must start with a lowercase letter.
+* They must start with a lowercase letter.
 * Other characters must be alphanumeric lowercase Unicode characters, underscores, minuses, colons, periods, or slashes.
-* It must not be more than 100 characters long.
+* They must not be more than 100 characters long.
 
 ### Setup
 
@@ -118,7 +118,7 @@ APM primary tags must be set up in two ways: in the trace Agent and in the Datad
 
 #### Agent configuration
 
-Override the default tag used by the trace Agent in the [Agent configuration file][2]. This tags all traces coming through the Agent, overriding the host tag value. An APM primary tag is configured like any regular host tag, specify it as:
+Override the default tag used by the trace Agent in the [Agent configuration file][2]. This tags all traces coming through the Agent, overriding the host tag value. An APM primary tag is configured like any regular host tag. Specify it as:
 
 ```
 tags:
