@@ -112,6 +112,15 @@ external_redirect: /api/#create-a-monitor
         *   True: `[Triggered on {host:h1}] Monitor Title`
         *   False: `[Triggered] Monitor Title`
 
+    ##### Anomaly Options
+    _These options only apply to anomaly monitors and are ignored for other monitor types._
+
+    -   **`threshold_windows`** a dictionary containing `recovery_window` and `trigger_window`.
+        * `recovery_window` describes how long an anomalous metric must be normal before the alert recovers
+        * `trigger_window` describes how long a metric must be anomalous before an alert triggers
+
+            Example: `{'threshold_windows': {'recovery_window': 'last_15m', 'trigger_window': 'last_15m'}}`
+
     ##### Metric Alert Options
     _These options only apply to metric alerts._
 
