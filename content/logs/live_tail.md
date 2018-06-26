@@ -14,7 +14,6 @@ further_reading:
   text: Learn more about parsing
 ---
 
-
 {{< img src="logs/live_tail/live_tail_demo.gif" alt="Live tail" responsive="true" popup="true">}}
 
 ## Overview
@@ -34,7 +33,7 @@ Choose the `Live Tail` option in the time range selector to switch to the live t
 
 {{< img src="logs/live_tail/live_tail_time_selector.png" alt="Live tail time selector" responsive="true" popup="true">}}
 
-The number of received events per second is displayed at the top left as well as the sampling rate: since a stream of thousands of logs per seconds is not human readable, **any stream of more than tens of logs per second is sampled**. 
+The number of received events per second is displayed at the top left as well as the sampling rate (since a stream of thousands of logs per seconds is not human readable, high throughput log stream are sampled).
 
 Use the [live tail search bar filtering features](#filtering-the-log-stream) to filter the log stream and the **Pause/Play** button at the top right of the screen to pause or resume the stream.
 
