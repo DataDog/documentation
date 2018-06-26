@@ -34,7 +34,7 @@ An environment is a first-class dimension that is used to scope an entire Datado
 Environments are [tags][1] which must follow these rules:
 
 * They must start with a lower case letter.
-* Other characters must be alphanumeric lower case Unicode characters, underscores, minuses, colons, periods or slashes.
+* Other characters must be alphanumeric lower case Unicode characters, underscores, minuses, colons, periods, or slashes.
 * They must not be more than 100 characters long.
 
 Environments in traces and configuration files are normalized:
@@ -111,6 +111,7 @@ Primary tags must follow a different set of rules from those of conventional tag
 * They must start with a lowercase letter.
 * Other characters must be alphanumeric lowercase Unicode characters, underscores, minuses, colons, periods, or slashes.
 * They must not be more than 100 characters long.
+* Only one primary tag per host is supported.
 
 ### Setup
 
@@ -127,9 +128,10 @@ tags:
 
 #### Datadog UI
 
-Visit the [APM Settings][3] page to define, change, or remove primary tags. Only organization Administrators have access to this page. 
+Visit the [APM Settings][3] page to define, change, or remove primary tags. Note:
 
-Changes are reflected in the UI within several minutes.  Note:
+* Only organization Administrators have access to this page. 
+* Changes may take up to two hours to be reflected in the UI.
 
  If you change a previously set primary tag, please be aware of the following:
 
