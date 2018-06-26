@@ -1,5 +1,5 @@
 ---
-title: First Class Dimensions
+title: First-Class Dimensions
 kind: documentation
 aliases:
   - /tracing/environments/
@@ -27,7 +27,7 @@ There are several dimensions that you can configure to scope an entire Datadog A
 ## Environment
 ### Definition
 
-An environment is a [first class dimension](#primary-tags) that is used to scope an entire Datadog APM application. Some display settings can be shared across environments, but all the measurable data (traces/metrics/statistics) can not be re-aggregated across multiple environments. Use cases include:
+An environment is a [first-class dimension](#primary-tags) that is used to scope an entire Datadog APM application. Some display settings can be shared across environments, but all the measurable data (traces/metrics/statistics) can not be re-aggregated across multiple environments. Use cases include:
 
 * Stage environments such as production, staging, and pre-production...
 
