@@ -314,6 +314,8 @@ The following template variables are currently handled by the Agent:
 - Container IP: `host`
   - `%%host%%`: autodetect the network (use `bridge` or, if only one network is attached, this one)
   - `%%host_network%%`: specify the network name to use, when attached to several networks
+- Container hostname: `hostname` (added in Agent 6.4, docker listener only)
+  - `%%hostname%%`: retrieves the `hostname.domainname` value from the container configuration. Only use it if the `%%host%%` variable cannot fetch a reliable IP (example: [ECS awsvpc mode][24])
 - Container port: `port`
   - `%%port%%`: use the highest exposed port **sorted numerically and in ascending order** (eg. 8443 for a container that exposes ports 80, 443, and 8443)
   - `%%port_0%%`: use the first port **sorted numerically and in ascending order** (for the same container, `%%port_0%%` refers to port 80, `%%port_1%%` refers to 443
@@ -409,3 +411,4 @@ instances:
 [21]: https://github.com/DataDog/integrations-core/blob/master/http_check/conf.yaml.example
 [22]: https://github.com/DataDog/integrations-core/blob/master/kube_proxy/auto_conf.yaml
 [23]: https://docs.datadoghq.com/logs/docker/
+[24]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
