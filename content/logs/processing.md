@@ -127,7 +127,7 @@ However, beware that each incoming status value is mapped as follows:
 
 ### Remapper
 
-This processor remaps any source attribute(s) or tag to another target attribute or tag, for instance here it remaps “user” to “user.firstname”
+This processor remaps any source attribute(s) or tag to another target attribute or tag, for instance here it remaps `user` to `user.firstname`
 
 {{< img src="logs/processing/attribute_remapper_processor_tile.png" alt="Attribute Remapper processor tile" responsive="true" popup="true">}}
 
@@ -139,7 +139,7 @@ Into this log:
 
 {{< img src="logs/processing/attribute_post_remapping.png" alt="attribute post remapping " responsive="true" popup="true" style="width:40%;">}}
 
-Contraints on the tag and attribute name are explained in the [Tag Best Practice][6]. Some additional constraints are applied as `:`, `/` or `,` are not allowed in the target tag or attribute name.
+Constraints on the tag/attribute name are explained in the [Tag Best Practice documentation][6]. Some additional constraints are applied as `:`, `/` or `,` are not allowed in the target tag/attribute name.
 
 ### URL Parser
 
