@@ -204,6 +204,8 @@ aside.sidenav-api {
       padding-left:20px;
       li a {
         font-size: 16px;
+        margin-top: 0px;
+        padding: 0px;
       }
     }
   }
@@ -225,11 +227,12 @@ aside.sidenav-api {
     padding-left: 10px;
   }
   .toc_scrolled {
-    background:#fff !important;
+    background:transparent !important;
     color: $ddpurple !important;
-    font-weight:600 !important;
-    border:1px solid $ddpurple !important;
-    border-radius:4px !important;
+    border:1px solid transparent !important;
+    span{
+      border-bottom: 1px solid $ddpurple;
+    }
   }
   // open adjacent ul to open link
   .toc_open ~ ul {

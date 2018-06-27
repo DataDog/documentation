@@ -123,6 +123,9 @@ pre {
   font-family: $font-family-monospace;
   word-break: normal;
   word-wrap: normal;
+  .api &{
+    border: 1px solid transparent;
+  }
   code {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -228,7 +231,7 @@ h5{
     }
   }
 
-  ul {
+  ul{
     list-style-type: none;
     -webkit-padding-start: 12px;
     ul {
