@@ -25,7 +25,7 @@ The Live Tail feature gives you the ability to see all your log events in near r
 3. The stream can be paused.
 4. You can't go back in the past.
 
-This feature allows you for instance to check if a process has correctly started or if a new deployment went smoothly.
+This feature allows you, for instance, to check if a process has correctly started, or if a new deployment went smoothly.
 
 ## Live tail view
 
@@ -33,7 +33,7 @@ Choose the `Live Tail` option in the time range selector to switch to the live t
 
 {{< img src="logs/live_tail/live_tail_time_selector.png" alt="Live tail time selector" responsive="true" popup="true">}}
 
-The number of received events per second is displayed at the top left as well as the sampling rate (since a stream of thousands of logs per seconds is not human readable, high throughput log stream are sampled).
+The number of received events per second is displayed at the top left, as well as the sampling rate. Since a stream of thousands of logs per seconds is not human readable, high throughput log streams are sampled.
 
 Use the [live tail search bar filtering features](#filtering-the-log-stream) to filter the log stream and the **Pause/Play** button at the top right of the screen to pause or resume the stream.
 
@@ -48,18 +48,18 @@ Click on the gear at the top right of the page to activate one of the options be
 
 1. Choose to display one, three, or ten lines from your logs attributes in your logstream.
 2. Enable/Disable the Date and Message column.
-3. Add any log attribute as a column either in this panel or by clicking on them directly:
+3. Add any log attribute as a column either in this panel or by clicking on it directly:
 
 {{< img src="logs/live_tail/live_tail_add_as_column.png" alt="Live tail add as column" responsive="true" popup="true" style="width:50%;">}}
 
 ## Filtering the log Stream
 
 A valid query into the search bar displays logs that match your search criteria. 
-The search syntax is the same in the Live tail views as in the other Log views but here your query is matched against all of the ingested logs and not just the indexed one.
+The search syntax is the same in the Live Tail views as in the other Log views, but here, your query is matched against all of the ingested logs and not just the indexed one.
 
 ### JSON attributes
 
-Any query that works in other views works in the Live tail view but you can even go further and **filter on attributes that are not defined as facets**.
+Any query that works in other views works in the Live Tail view, but you can even go further and **filter on attributes that are not defined as facets**.
 
 For example, to filter on the following `filename` attribute there are two options:
 
