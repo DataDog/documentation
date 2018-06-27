@@ -9,13 +9,21 @@ external_redirect: /api/#create-a-monitor
 
 ##### ARGUMENTS
 *   **`type`** [*required*]:  
-    The type of the monitor, chosen from:  
-    *   `metric alert`
-    *   `service check`
-    *   `event alert`
-    *   `process alert`
+    The [type of the monitor][3], chosen from:  
+    *   `anomaly`
+    *   `apm`
     *   `composite`
-
+    *   `custom`
+    *   `event`
+    *   `forecast`
+    *   `host`
+    *   `integration`
+    *   `log`
+    *   `metric`
+    *   `network`
+    *   `outlier`
+    *   `process`
+    
 *   **`query`** [*required*]:  
     The query defines when the monitor triggers. Query syntax depends on what type of monitor you are creating:  
     ##### Metric Alert Query
@@ -140,3 +148,4 @@ external_redirect: /api/#create-a-monitor
 
 [1]: /monitors/monitor_types/#define-the-conditions
 [2]: /integrations/faq/list-of-api-source-attribute-value
+[3]: /monitors/monitor_types/
