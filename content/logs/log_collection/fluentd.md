@@ -40,17 +40,17 @@ Setup Example:
 
 ### Kubernetes and Docker tags
 
-Tags in Datadog are critical to be able to jump from one part of the product to the other. Having the right metadata associated to your logs is therefore important to jump from the container view or any container metrics to the most related logs.
+Datadog tags are critical to be able to jump from one part of the product to another. Having the right metadata associated with your logs is therefore important in jumping from a container view or any container metrics to the most related logs.
 
-If your logs contain any of the following attributes, it will automatically be added as Datadog tags on your logs:
+If your logs contain any of the following attributes, these attributes are automatically added as Datadog tags on your logs:
 
-* kubernetes.container_image
-* kubernetes.container_name
-* kubernetes.namespace_name
-* kubernetes.pod_name
-* docker.container_id
+* `kubernetes.container_image`
+* `kubernetes.container_name`
+* `kubernetes.namespace_name`
+* `kubernetes.pod_name`
+* `docker.container_id`
 
-If the Datadog Agent collect them automatically, FluentD requires a plugin for this. We recommend using [fluent-plugin-kubernetes_metadata_filter](https://github.com/fabric8io/fluent-plugin-kubernetes_metadata_filter) to collect Docker and Kubernetes metadata.
+While the Datadog Agent collects Docker and Kubernetes metadata automatically, FluentD requires a plugin for this. We recommend using [fluent-plugin-kubernetes_metadata_filter][7] to collect this metadata.
 
 Configuration example:
 
@@ -67,3 +67,4 @@ Configuration example:
 [4]: https://app.datadoghq.com/infrastructure
 [5]: /getting_started/tagging/assigning_tags/
 [6]: https://docs.datadoghq.com/integrations/#cat-log-collection
+[7]: https://github.com/fabric8io/fluent-plugin-kubernetes_metadata_filter
