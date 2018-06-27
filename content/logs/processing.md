@@ -16,9 +16,9 @@ further_reading:
 
 ## Overview
 
-To access the processing panel use the upper left menu:
+To access the processing panel use the left `Logs` menu:
 
-{{< img src="logs/processing/processing_panel.png" alt="Pipelines panel" responsive="true" popup="true" style="width:50%;" >}}
+https://cl.ly/0u0P232a1d3E
 
 ## Pipelines
 ### Pipelines Goal
@@ -41,7 +41,7 @@ into this log:
 
 With one single pipeline:
 
-{{< img src="logs/processing/pipeline_example.png" alt="Pipelines example" responsive="true" popup="true" style="width:75%;">}}
+https://cl.ly/1A352R272j3f
 
 Pipelines take logs from a wide variety of formats and translate them into a common format in Datadog.
 
@@ -63,7 +63,7 @@ The logstream shows which logs your pipeline applies to:
 
 These pipelines are read-only, but you can clone them and then edit the clone:
 
-{{< img src="logs/processing/cloning_pipeline.png" alt="Cloning pipeline" responsive="true" popup="true" style="width:80%;">}}
+https://cl.ly/3s070U2r3O1k
 
 ## Processors
 
@@ -125,11 +125,11 @@ However, beware that each incoming status value is mapped as follows:
 * Strings matching **OK** or **Sucess** (case unsensitive) map to **OK**
 * All others map to **info (6)**
 
-### Attribute Remapper
+### Remapper
 
-This processor remaps any attribute(s) to another one, for instance here it remaps “user” to “user.firstname”
+This processor remaps any source attribute(s) or tag to another target attribute or tag, for instance here it remaps “user” to “user.firstname”
 
-{{< img src="logs/processing/attribute_remapper_processor_tile.png" alt="Attribute Remapper processor tile" responsive="true" popup="true">}}
+https://cl.ly/142t380f4636
 
 It transforms this log:
 
@@ -138,6 +138,8 @@ It transforms this log:
 Into this log:
 
 {{< img src="logs/processing/attribute_post_remapping.png" alt="attribute post remapping " responsive="true" popup="true" style="width:40%;">}}
+
+Contraints on the tag and attribute name are explained in the [Tag Best Practice][6]. Some additional constraints are applied as `:`, `/` or `,` are not allowed in the target tag or attribute name.
 
 ### URL Parser
 
@@ -211,3 +213,4 @@ Contact support if you reach one of these limits as Datadog might be able to pro
 [3]: /logs/parsing
 [4]: /logs/processing/#log-date-remapper
 [5]: https://en.wikipedia.org/wiki/Syslog#Severity_level
+[6]: https://docs.datadoghq.com/getting_started/tagging/#tags-best-practices
