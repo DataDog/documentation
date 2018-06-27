@@ -7,6 +7,8 @@ external_redirect: /api/#create-a-monitor
 
 ## Create a monitor
 
+If you manage and deploy monitors programmatically, it’s easier to define the monitor in the Datadog UI and [export is valid JSON][4].
+
 ##### ARGUMENTS
 *   **`type`** [*required*]:  
     The [type of the monitor][3], chosen from:  
@@ -149,3 +151,4 @@ external_redirect: /api/#create-a-monitor
 [1]: /monitors/monitor_types/#define-the-conditions
 [2]: /integrations/faq/list-of-api-source-attribute-value
 [3]: /monitors/monitor_types/
+[4]: /monitors/#export-your-monitor
