@@ -26,7 +26,7 @@ Two installations are possible:
 - on the host where the Agent is external to the Docker environment
 - or by deploying its containerized version in the Docker environment
 
-You can then choose to collect all the logs from all your environment's containers or to filter by container image name or container label to cherry pick what logs should be collected.
+You can then choose to collect all the logs from all your environment's containers, or to filter by container image name or container label to cherry pick what logs should be collected.
 
 ## Setup
 ### Option 1: Host installation
@@ -35,7 +35,7 @@ Install the [latest version of the Agent 6][1] on your host.
 
 The Agent can collect logs from [files on the host][2] or from [container stdout/stderr](#configuration-file-example).
 
-To collect logs from all your containers without filtering by image or label add the following at the end of `docker.d/conf.yaml` in your agent's `conf.d` directory:
+To collect logs from all your containers without filtering by image or label, add the following at the end of docker.d/conf.yaml in your agent's conf.d directory:
 
 ```
 logs:
@@ -49,7 +49,7 @@ logs:
 
 As explained above, the Agent also has a [containerized][3] installation.
 
-First, let’s create one directories on the host that we will later mount on the containerized Agent:
+First, let’s create one directory on the host that we will later mount on the containerized Agent:
 
 - `/opt/datadog-agent/run`: to make sure we do not lose any logs from containers during restarts or network issues we store on the host the last line that was collected for each container in this directory
 
@@ -112,7 +112,7 @@ logs:
 ```
 
 When filtering on the container image, both exact container image name or short names are supported.
-If you have one container running `library/httpd:latest`, the following filtering match this image name:
+If you have one container running `library/httpd:latest`, the following filtering matches this image name:
 
 * - `image: httpd`
 * - `image: library/httpd`
@@ -125,7 +125,7 @@ For more examples of configuration files or Agent capabilities (such as filterin
 
 Since version 6.2 of the Datadog Agent, you can configure log collection directly in the container labels.
 
-Autodiscovery expects labels to look like this format, depending on the file type:
+Autodiscovery expects labels to follow this format, depending on the file type:
 
 * Dockerfile: `LABEL "com.datadoghq.ad.logs"='[<LOGS_CONFIG>]'`
 * docker-compose.yaml:
