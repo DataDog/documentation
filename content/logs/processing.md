@@ -18,7 +18,7 @@ further_reading:
 
 To access the processing panel use the left `Logs` menu:
 
-https://cl.ly/0u0P232a1d3E
+{{< img src="logs/processing/processing_panel.png" alt="Pipelines panel" responsive="true" popup="true" style="width:50%;" >}}
 
 ## Pipelines
 ### Pipelines Goal
@@ -41,7 +41,7 @@ into this log:
 
 With one single pipeline:
 
-https://cl.ly/1A352R272j3f
+{{< img src="logs/processing/pipeline_example.png" alt="Pipelines example" responsive="true" popup="true" style="width:75%;">}}
 
 Pipelines take logs from a wide variety of formats and translate them into a common format in Datadog.
 
@@ -63,7 +63,7 @@ The logstream shows which logs your pipeline applies to:
 
 These pipelines are read-only, but you can clone them and then edit the clone:
 
-https://cl.ly/3s070U2r3O1k
+{{< img src="logs/processing/cloning_pipeline.png" alt="Cloning pipeline" responsive="true" popup="true" style="width:80%;">}}
 
 ## Processors
 
@@ -129,7 +129,7 @@ However, beware that each incoming status value is mapped as follows:
 
 This processor remaps any source attribute(s) or tag to another target attribute or tag, for instance here it remaps “user” to “user.firstname”
 
-https://cl.ly/142t380f4636
+{{< img src="logs/processing/attribute_remapper_processor_tile.png" alt="Attribute Remapper processor tile" responsive="true" popup="true">}}
 
 It transforms this log:
 
