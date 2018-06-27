@@ -12,10 +12,14 @@ further_reading:
 - link: "logs/parsing"
   tag: "Documentation"
   text: Learn more about parsing
+- link: "logs/dynamic_volume_control"
+  tag: "Documentation"
+  text: Control the amount of log indexed by Datadog
 ---
 
 <div class="alert alert-warning">
-This feature is currently in Limited Beta. Ask your Sales representative or Customer Success Manager to have it enabled.
+This feature is currently in Limited Beta. <br> 
+Ask your Sales representative or Customer Success Manager to have it enabled.
 </div>
 
 {{< img src="logs/live_tail/live_tail_demo.gif" alt="Live tail" responsive="true" popup="true">}}
