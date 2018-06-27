@@ -23,12 +23,12 @@ APM .Net support is currently in alpha and provides limited automatic instrument
 
 | Framework         | Versions    | Support Type    |
 | :---------------  | :---------- | :-------------- |
-| ASP.NET MVC1      | 5.x         | Alpha           |
-| ASP.NET Web API1  | 2.x         | Coming soon     |
-| ASP.NET Core MVC2 | 2.0         | Alpha           |
+| ASP.NET MVC<sup>1</sup>      | 5.x         | Alpha           |
+| ASP.NET Web API<sup>1</sup>  | 2.x         | Coming soon     |
+| ASP.NET Core MVC<sup>2</sup> | 2.0         | Alpha           |
 
-1 Running on .NET Framework 4.5 or above
-2 Running on .NET Framework 4.6.1 or above, or on .NET Core 2.0 or above
+<sup>1</sup> Running on .NET Framework 4.5 or above  
+<sup>2</sup> Running on .NET Framework 4.6.1 or above, or on .NET Core 2.0 or above
 
 Don’t see what you're looking for? Please let us know more about your needs through [this survey][1].
 

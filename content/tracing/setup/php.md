@@ -32,12 +32,12 @@ Don’t see your desired web frameworks? Please let us know more about your need
 
 ### Data Stores
 
-| Module     | Versions    | Support Type |
-| :----------| :---------- | :----------- |
-| MYSQL      |             | Coming Soon  |
-| Redis      |             | Coming Soon  |
-| MongoDB    |             | Coming Soon  |
-| Postgres   |             | Coming Soon  |
+| Module      | Versions    | Support Type |
+| :---------- | :---------- | :----------- |
+| MYSQL       |             | Coming Soon  |
+| Redis       |             | Coming Soon  |
+| MongoDB     |             | Coming Soon  |
+| Postgres    |             | Coming Soon  |
 
 Don’t see your desired data stores? Please let us know more about your needs through [this survey][1].
 
