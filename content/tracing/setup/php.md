@@ -14,8 +14,8 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-The APM tracer for PHP applications is currently in <strong>alpha</strong> and not officially supported by Datadog. The officially supported beta will launch as early as September 2018. To be notified of the beta launch, <a href="https://goo.gl/forms/rKjH2J6nJ585KXri2">submit this form</a> <br>
-<strong>We do not recommend running the alpha tracer in production.</strong>
+The APM tracer for PHP applications is currently in alpha and not officially supported by Datadog. The officially supported beta will launch as early as September 2018. To be notified of the beta launch, <a href="https://goo.gl/forms/rKjH2J6nJ585KXri2">submit this form</a> <br>
+We do not recommend running the alpha tracer in production.
 </div>
 
 The unstable alpha tracer can be [accessed today on Github][2].
