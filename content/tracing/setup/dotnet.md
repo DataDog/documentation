@@ -14,13 +14,13 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-The APM tracer for .NET applications is currently in alpha and not officially supported by Datadog. The officially supported beta will launch as early as August 2018. To be notified of the beta launch, <a href="https://goo.gl/forms/SCKOOlHS7tNzyMt93">submit this form</a> <br>
+Tracing for .NET applications is coming soon from Datadog. The officially supported beta will launch as early as August 2018. To be notified of the beta launch, <a href="https://goo.gl/forms/SCKOOlHS7tNzyMt93">submit this form</a> <br>
 We do not recommend running the alpha tracer in production.
 </div>
 
 ## Planned Automatic Instrumentation for Beta (Coming Soon)
 
-APM .Net support is currently in alpha and provides limited automatic instrumentation. Planned beta support will provide automatic instrumentation for popular frameworks and libraries. See some of these listed below.
+Planned beta support will provide automatic instrumentation for popular frameworks and libraries. See some of these listed below.
 Don’t see your desired frameworks or libraries? Please let us know more about your needs through [this survey][1].
 
 ### Web Frameworks
