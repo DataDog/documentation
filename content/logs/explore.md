@@ -12,9 +12,6 @@ further_reading:
 - link: "logs/parsing"
   tag: "Documentation"
   text: Learn more about parsing
-- link: "logs/live_tail"
-  tag: "Documentation"
-  text: See all your logs in real time.
 ---
 
 ## Overview
