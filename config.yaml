@@ -413,11 +413,6 @@ languages:
           url: "tracing/setup/first_class_dimensions"
           weight: 110
           parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_dotnet
-          name: ".NET"
-          url: "tracing/setup/dotnet/"
-          weight: 115
-          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_docker
           name: "Docker"
           url: "tracing/setup/docker/"
@@ -427,6 +422,11 @@ languages:
           name: "Kubernetes"
           url: "tracing/setup/kubernetes/"
           weight: 125
+          parent: customnav_tracingnav_setup
+         - identifier: customnav_tracingnav_dotnet
+          name: ".NET (Coming soon)"
+          url: "tracing/setup/dotnet/"
+          weight: 127
           parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_go
           name: "Go"
@@ -1261,11 +1261,6 @@ languages:
           url: "tracing/setup/first_class_dimensions"
           weight: 110
           parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_dotnet
-          name: ".NET"
-          url: "tracing/setup/dotnet/"
-          weight: 115
-          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_docker
           name: "Docker"
           url: "tracing/setup/docker/"
@@ -1275,6 +1270,11 @@ languages:
           name: "Kubernetes"
           url: "tracing/setup/kubernetes/"
           weight: 125
+          parent: customnav_tracingnav_setup
+        - identifier: customnav_tracingnav_dotnet
+          name: ".NET (Coming soon)"
+          url: "tracing/setup/dotnet/"
+          weight: 127
           parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_go
           name: "Go"
