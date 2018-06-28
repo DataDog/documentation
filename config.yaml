@@ -423,7 +423,7 @@ languages:
           url: "tracing/setup/kubernetes/"
           weight: 125
           parent: customnav_tracingnav_setup
-         - identifier: customnav_tracingnav_dotnet
+        - identifier: customnav_tracingnav_dotnet
           name: ".NET (Coming soon)"
           url: "tracing/setup/dotnet/"
           weight: 127
