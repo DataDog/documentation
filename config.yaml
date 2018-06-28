@@ -423,6 +423,11 @@ languages:
           url: "tracing/setup/kubernetes/"
           weight: 125
           parent: customnav_tracingnav_setup
+        - identifier: customnav_tracingnav_dotnet
+          name: ".NET (Coming soon)"
+          url: "tracing/setup/dotnet/"
+          weight: 127
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_go
           name: "Go"
           url: "tracing/setup/go/"
@@ -438,10 +443,15 @@ languages:
           url: "tracing/setup/javascript/"
           weight: 145
           parent: customnav_tracingnav_setup
+        - identifier: customnav_tracingnav_php
+          name: "PHP (Coming soon)"
+          url: "tracing/setup/php/"
+          weight: 150
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_python
           name: "Python"
           url: "tracing/setup/python/"
-          weight: 150
+          weight: 155
           parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_ruby
           name: "Ruby"
@@ -1251,6 +1261,16 @@ languages:
           url: "tracing/setup/docker/"
           weight: 120
           parent: customnav_tracingnav_setup
+        - identifier: customnav_tracingnav_kubernetes
+          name: "Kubernetes"
+          url: "tracing/setup/kubernetes/"
+          weight: 125
+          parent: customnav_tracingnav_setup
+        - identifier: customnav_tracingnav_dotnet
+          name: ".NET (Coming soon)"
+          url: "tracing/setup/dotnet/"
+          weight: 127
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_go
           name: "Go"
           url: "tracing/setup/go/"
@@ -1266,10 +1286,15 @@ languages:
           url: "tracing/setup/javascript/"
           weight: 145
           parent: customnav_tracingnav_setup
+        - identifier: customnav_tracingnav_php
+          name: "PHP (Coming soon)"
+          url: "tracing/setup/php/"
+          weight: 150
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_python
           name: "Python"
           url: "tracing/setup/python/"
-          weight: 150
+          weight: 155
           parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_ruby
           name: "Ruby"
