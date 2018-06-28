@@ -1,7 +1,7 @@
 ---
 title: Dynamic volume control
 kind: documentation
-description: Control the amount of log indexed by Datadog
+description: Control the volume of logs indexed by Datadog
 further_reading:
 - link: "logs/graph"
   tag: "Documentation"
@@ -18,7 +18,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-This feature is currently in Beta. <br> 
+This feature is currently in beta. <br> 
 Ask your Sales representative or Customer Success Manager to have it enabled.
 </div>
 

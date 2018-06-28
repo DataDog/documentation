@@ -14,7 +14,7 @@ further_reading:
   text: Log Parsing - Best Practice
 - link: "logs/dynamic_volume_control"
   tag: "Documentation"
-  text: Control the amount of log indexed by Datadog
+  text: Control the volume of logs indexed by Datadog
 ---
 
 ## Overview

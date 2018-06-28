@@ -14,11 +14,11 @@ further_reading:
   text: Learn more about parsing
 - link: "logs/dynamic_volume_control"
   tag: "Documentation"
-  text: Control the amount of log indexed by Datadog
+  text: Control the volume of logs indexed by Datadog
 ---
 
 <div class="alert alert-warning">
-This feature is currently in Limited Beta. <br> 
+This feature is currently in limited beta. <br> 
 Ask your Sales representative or Customer Success Manager to have it enabled.
 </div>
 
