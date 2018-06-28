@@ -14,11 +14,9 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-The APM tracer for .NET applications is currently in <strong>alpha</strong> and not officially supported by Datadog. The officially supported beta will launch as early as August 2018. To be notified of the beta launch, <a href="https://goo.gl/forms/SCKOOlHS7tNzyMt93">submit this form</a> <br>
-<strong>We do not recommend running the alpha tracer in production.</strong>
+The APM tracer for .NET applications is currently in alpha and not officially supported by Datadog. The officially supported beta will launch as early as August 2018. To be notified of the beta launch, <a href="https://goo.gl/forms/SCKOOlHS7tNzyMt93">submit this form</a> <br>
+We do not recommend running the alpha tracer in production.
 </div>
-
-The unstable alpha tracer can be [accessed today on Github][2]. 
 
 ## Planned Automatic Instrumentation for Beta (Coming Soon)
 
@@ -29,9 +27,9 @@ Don’t see your desired frameworks or libraries? Please let us know more about 
 
 | Framework                    | Versions    | Support Type    |
 | :---------------             | :---------- | :-------------- |
-| ASP.NET MVC<sup>1</sup>      | 5.x         | Alpha           |
+| ASP.NET MVC<sup>1</sup>      | 5.x         | Coming soon     |
 | ASP.NET Web API<sup>1</sup>  | 2.x         | Coming soon     |
-| ASP.NET Core MVC<sup>2</sup> | 2.0         | Alpha           |
+| ASP.NET Core MVC<sup>2</sup> | 2.0         | Coming soon     |
 
 <sup>1</sup> Running on .NET Framework 4.5 or above  
 <sup>2</sup> Running on .NET Framework 4.6.1 or above, or on .NET Core 2.0 or above
@@ -42,7 +40,7 @@ Don’t see what you're looking for? Please let us know more about your needs th
 
 | Data Store                      | Versions    | Support Type    |
 | :------------------------------ | :---------- | :-------------- |
-| Ado.Net / System.Data.SqlClient |             | Alpha           |
+| Ado.Net / System.Data.SqlClient |             | Coming soon     |
 | Elasticsearch.net / NEST        |             | Coming Soon     |
 | MongoDB.Driver                  |             | Coming Soon     |
 | Postgres (Npgsql)               |             | Coming Soon     |
