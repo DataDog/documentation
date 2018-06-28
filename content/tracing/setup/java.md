@@ -344,6 +344,10 @@ Don't see your desired framework? We're continually adding additional support, [
 | Ratpack                        | 1.4+     | `-Ddd.integration.ratpack.enabled=true`                                       |
 | Spark Java                     | 2.4+     | `-Ddd.integration.sparkjava.enabled=true -Ddd.integration.jetty.enabled=true` |
 
+## Performance
+
+Typical CPU overhead with the Java tracer is up to 3%.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

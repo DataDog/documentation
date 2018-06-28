@@ -74,18 +74,23 @@ Storing templates as local files is easy to understand and doesn't require an ex
 
 The Agent looks for Autodiscovery templates in its `conf.d/auto_conf` directory, which contains default templates for the following checks:
 
-- [apache](https://github.com/DataDog/integrations-core/blob/master/apache/auto_conf.yaml)
-- [consul](https://github.com/DataDog/integrations-core/blob/master/consul/auto_conf.yaml)
-- [couchdb](https://github.com/DataDog/integrations-core/blob/master/couch/auto_conf.yaml)
-- [couchbase](https://github.com/DataDog/integrations-core/blob/master/couchbase/auto_conf.yaml)
-- [elasticsearch](https://github.com/DataDog/integrations-core/blob/master/elastic/auto_conf.yaml)
-- [etcd](https://github.com/DataDog/integrations-core/blob/master/etcd/auto_conf.yaml)
-- [kubernetes_state](https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/auto_conf.yaml)
-- [kube_dns](https://github.com/DataDog/integrations-core/blob/master/kube_dns/auto_conf.yaml)
-- [kyototycoon](https://github.com/DataDog/integrations-core/blob/master/kyototycoon/auto_conf.yaml)
-- [memcached](https://github.com/DataDog/integrations-core/blob/master/mcache/auto_conf.yaml)
-- [redis](https://github.com/DataDog/integrations-core/blob/master/redisdb/auto_conf.yaml)
-- [riak](https://github.com/DataDog/integrations-core/blob/master/riak/auto_conf.yaml)
+- [apache](https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/auto_conf.yaml)
+- [consul](https://github.com/DataDog/integrations-core/blob/master/consul/datadog_checks/consul/data/auto_conf.yaml)
+- [couchdb](https://github.com/DataDog/integrations-core/blob/master/couch/datadog_checks/couch/data/auto_conf.yaml)
+- [couchbase](https://github.com/DataDog/integrations-core/blob/master/couchbase/datadog_checks/couchbase/data/auto_conf.yaml)
+- [elasticsearch](
+https://github.com/DataDog/integrations-core/blob/master/elastic/datadog_checks/elastic/data/auto_conf.yaml)
+- [etcd](https://github.com/DataDog/integrations-core/blob/master/etcd/datadog_checks/etcd/data/auto_conf.yaml)
+- [kubernetes_state](
+https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/auto_conf.yaml)
+- [kube_dns](
+https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/data/auto_conf.yaml)
+- [kyototycoon](
+https://github.com/DataDog/integrations-core/blob/master/kyototycoon/datadog_checks/kyototycoon/data/auto_conf.yaml)
+- [memcached](https://github.com/DataDog/integrations-core/blob/master/mcache/datadog_checks/mcache/data/auto_conf.yaml)
+- [redis](
+https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/auto_conf.yaml)
+- [riak](https://github.com/DataDog/integrations-core/blob/master/riak/datadog_checks/riak/data/auto_conf.yaml)
 
 These templates may suit you in basic cases, but if you need to use custom check configurations—say you want to enable extra check options, use different container identifiers, or use [template variable indexing](#template-variable-indexes))—you'll have to write your own auto-conf files. You can then provide those in a few ways:
 

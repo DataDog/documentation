@@ -408,9 +408,9 @@ languages:
           weight: 10
           parent: menu_references_tracing
           # Setup -subnav
-        - identifier: customnav_tracingnav_apm_environment
-          name: "Environment"
-          url: "tracing/setup/environment"
+        - identifier: customnav_tracingnav_apm_first_class_dimensions
+          name: "First Class Dimensions"
+          url: "tracing/setup/first_class_dimensions"
           weight: 110
           parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_docker
@@ -595,6 +595,11 @@ languages:
           name: "Search"
           url: "logs/explore/"
           weight: 30
+          parent: menu_references_logs
+        - identifier: customnav_lognav_live_tail
+          name: "Live Tail"
+          url: "logs/live_tail/"
+          weight: 32
           parent: menu_references_logs
         - identifier: customnav_lognav_graph
           name: "Log Graph"
@@ -808,6 +813,34 @@ languages:
           url: "account_management/saml/"
           weight: 50
           parent: menu_references_account_management
+
+        # SAML subnav
+        - identifier: saml_activedirectory
+          name: "Active Directory"
+          url: "account_management/saml/activedirectory"
+          weight: 510
+          parent: customnav_accountmanagementnav_saml
+        - identifier: saml_azure
+          name: "Azure"
+          url: "account_management/saml/azure"
+          weight: 520
+          parent: customnav_accountmanagementnav_saml
+        - identifier: saml_google
+          name: "Google"
+          url: "account_management/saml/google"
+          weight: 530
+          parent: customnav_accountmanagementnav_saml
+        - identifier: saml_nopassword
+          name: "NoPassword"
+          url: "account_management/saml/nopassword"
+          weight: 540
+          parent: customnav_accountmanagementnav_saml
+        - identifier: saml_okta
+          name: "Okta"
+          url: "account_management/saml/okta"
+          weight: 550
+          parent: customnav_accountmanagementnav_saml
+        
         - identifier: customnav_accountmanagementnav_multi_organization
           name: "Multi-org accounts"
           url: "account_management/multi_organization/"
@@ -1213,9 +1246,9 @@ languages:
           weight: 10
           parent: menu_references_tracing
           # Setup -subnav
-        - identifier: customnav_tracingnav_apm_environment
-          name: "Environnement"
-          url: "tracing/setup/environment"
+        - identifier: customnav_tracingnav_apm_first_class_dimensions
+          name: "Dimensions de 1ère Classe"
+          url: "tracing/setup/first_class_dimensions"
           weight: 110
           parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_docker
@@ -1395,6 +1428,11 @@ languages:
           name: "Search"
           url: "logs/explore/"
           weight: 30
+          parent: menu_references_logs
+        - identifier: customnav_lognav_live_tail
+          name: "Live Tail"
+          url: "logs/live_tail/"
+          weight: 32
           parent: menu_references_logs
         - identifier: customnav_lognav_graph
           name: "Log Graph"
@@ -1591,6 +1629,34 @@ languages:
           url: "account_management/saml/"
           weight: 50
           parent: menu_references_account_management
+
+        # SAML subnav
+        - identifier: saml_activedirectory
+          name: "Active Directory"
+          url: "account_management/saml/activedirectory"
+          weight: 510
+          parent: customnav_accountmanagementnav_saml
+        - identifier: saml_azure
+          name: "Azure"
+          url: "account_management/saml/azure"
+          weight: 520
+          parent: customnav_accountmanagementnav_saml
+        - identifier: saml_google
+          name: "Google"
+          url: "account_management/saml/google"
+          weight: 530
+          parent: customnav_accountmanagementnav_saml
+        - identifier: saml_nopassword
+          name: "NoPassword"
+          url: "account_management/saml/nopassword"
+          weight: 540
+          parent: customnav_accountmanagementnav_saml
+        - identifier: saml_okta
+          name: "Okta"
+          url: "account_management/saml/okta"
+          weight: 550
+          parent: customnav_accountmanagementnav_saml
+          
         - identifier: customnav_accountmanagementnav_multi_organization
           name: "Comptes multi-org"
           url: "account_management/multi_organization/"

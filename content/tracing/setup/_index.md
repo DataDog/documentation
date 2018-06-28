@@ -136,7 +136,7 @@ apm_config:
 [7]: https://github.com/DataDog/datadog-trace-agent#run-on-osx
 [8]: https://github.com/DataDog/datadog-trace-agent/#run-on-windows
 [9]: https://github.com/DataDog/heroku-buildpack-datadog
-[10]: /tracing/setup/environment
+[10]: /tracing/setup/first_class_dimensions#environment
 [11]: /tracing/setup/go
 [12]: /tracing/setup/java
 [13]: /tracing/setup/python

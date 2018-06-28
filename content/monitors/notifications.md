@@ -132,7 +132,7 @@ This means that if the monitor switches from an **ALERT** to a **WARNING** to an
 
 The @ notification inside the template variables follows the same rules.
 
-#### `{{is_match}}`
+#### `{{is_match}}` or `{{is_exact_match}}`
 
 The `{{is_match}}` conditional allows you to match the triggering context to some string to display a different message.
 For example, you might want to notify your db team if a triggering host has `role:db` but notify your app team if the host has `role:app`.
@@ -150,6 +150,18 @@ The variable uses the following format:
 Here is an example of how you can give a different message depending on the triggering context:
 
 {{< img src="monitors/notifications/scope_match_editor.png" alt="scope match editor" responsive="true" popup="true" style="width:80%;">}}
+
+The `{{is_exact_match}}` conditional looks for the exact string in the tag variable, rather than using substring matching. For instance, if there are two hosts named `production` and `production-1`:
+
+  ```
+  {{#is_match "tag_variable" "production"}}
+    This shows if tag_variable is "production" or "production-1"
+  {{/is_match}}
+
+  {{#is_exact_match "tag_variable" "production"}}
+    This shows only if tag_variable is "production"
+  {{/is_exact_match}}
+  ```
 
 **Note**: To use the `{{is_match}}` conditional to check if a `tag_variable` is **NOT** empty, append `.name` after your tag name, for instance:
 
@@ -177,6 +189,7 @@ We provide a number of different types of monitors and not all variables are ava
 | `is_recovery`         | Y                 | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
 | `is_no_data`          | Y                 | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
 | `is_match`            | Y                 | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
+| `is_exact_match`            | Y                 | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
 | **Variables**         |
 | `{{value}}`           |                   | Y                             | Y                                     |                                   |                                                       |                           |                   |
 | `{{threshold}}`       | Y (cluster)       | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |

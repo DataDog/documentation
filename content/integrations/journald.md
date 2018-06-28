@@ -18,6 +18,7 @@ supported_os:
 ## Overview
 
 Systemd-journald is a system service that collects and stores logging data. It creates and maintains structured, indexed journals based on logging information that is received from a variety of sources.
+Note that this integration does not currently support RPM-based Linux distributions, including Red Hat and CentOS.
 
 ## Setup
 
@@ -26,7 +27,7 @@ Systemd-journald is a system service that collects and stores logging data. It c
 Journal files are, by default, owned and readable by the `systemd-journal` system group. To start collecting your journal logs, you need to:
 
 1. [Install the agent][1] on the instance running the journal
-2. Add the `dd-agent` user to the `systemd-journal` group by running:  
+2. Add the `dd-agent` user to the `systemd-journal` group by running:
 
 ```
 usermod -a -G systemd-journal dd-agent
@@ -70,8 +71,8 @@ If your journal is located elsewhere, add a `path` parameter with the correspond
 
 It is possible to filter in/out specific units thanks to the following parameters:
 
-* `include_units: unit1,unit2` : Includes all units specified.
-* `exclude_units: unit1, unit2`:  Excludes all units specified.
+* `include_units`: Includes all units specified.
+* `exclude_units`: Excludes all units specified.
 
 Example:
 
@@ -79,7 +80,9 @@ Example:
 logs:
   - type: journald
     path: /var/log/journal/journal
-    include_units: docker.service
+    include_units:
+      - docker.service
+      - sshd.service
 ```
 
 ## Troubleshooting

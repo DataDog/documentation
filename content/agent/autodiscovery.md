@@ -388,18 +388,23 @@ instances:
 
 [1]: /agent/faq/agent-5-autodiscovery
 [2]: https://github.com/DataDog/integrations-core/blob/master/go_expvar/conf.yaml.example
-[3]: https://github.com/DataDog/integrations-core/blob/master/apache/auto_conf.yaml
-[4]: https://github.com/DataDog/integrations-core/blob/master/consul/auto_conf.yaml
-[5]: https://github.com/DataDog/integrations-core/blob/master/couch/auto_conf.yaml
-[6]: https://github.com/DataDog/integrations-core/blob/master/couchbase/auto_conf.yaml
-[7]: https://github.com/DataDog/integrations-core/blob/master/elastic/auto_conf.yaml
-[8]: https://github.com/DataDog/integrations-core/blob/master/etcd/auto_conf.yaml
-[9]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/auto_conf.yaml
-[10]: https://github.com/DataDog/integrations-core/blob/master/kube_dns/auto_conf.yaml
-[11]: https://github.com/DataDog/integrations-core/blob/master/kyototycoon/auto_conf.yaml
-[12]: https://github.com/DataDog/integrations-core/blob/master/mcache/auto_conf.yaml
-[13]: https://github.com/DataDog/integrations-core/blob/master/redisdb/auto_conf.yaml
-[14]: https://github.com/DataDog/integrations-core/blob/master/riak/auto_conf.yaml
+[3]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/auto_conf.yaml
+[4]: https://github.com/DataDog/integrations-core/blob/master/consul/datadog_checks/consul/data/auto_conf.yaml
+[5]: https://github.com/DataDog/integrations-core/blob/master/couch/datadog_checks/couch/data/auto_conf.yaml
+[6]: https://github.com/DataDog/integrations-core/blob/master/couchbase/datadog_checks/couchbase/data/auto_conf.yaml
+[7]: 
+https://github.com/DataDog/integrations-core/blob/master/elastic/datadog_checks/elastic/data/auto_conf.yaml
+[8]: https://github.com/DataDog/integrations-core/blob/master/etcd/datadog_checks/etcd/data/auto_conf.yaml
+[9]: 
+https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/auto_conf.yaml
+[10]: 
+https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/data/auto_conf.yaml
+[11]: 
+https://github.com/DataDog/integrations-core/blob/master/kyototycoon/datadog_checks/kyototycoon/data/auto_conf.yaml
+[12]: https://github.com/DataDog/integrations-core/blob/master/mcache/datadog_checks/mcache/data/auto_conf.yaml
+[13]: 
+https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/auto_conf.yaml
+[14]: https://github.com/DataDog/integrations-core/blob/master/riak/datadog_checks/riak/data/auto_conf.yaml
 [15]: https://github.com/DataDog/datadog-agent
 [16]: /agent/basic_agent_usage/kubernetes/#configmap
 [17]: https://github.com/Datadog/integrations-core/blob/master/apache/conf.yaml.example
@@ -407,5 +412,5 @@ instances:
 [19]: /integrations/consul
 [20]: /agent/faq/agent-commands
 [21]: https://github.com/DataDog/integrations-core/blob/master/http_check/conf.yaml.example
-[22]: https://github.com/DataDog/integrations-core/blob/master/kube_proxy/auto_conf.yaml
+[22]: https://github.com/DataDog/integrations-core/blob/master/kube_proxy/datadog_checks/kube_proxy/data/auto_conf.yaml
 [23]: https://docs.datadoghq.com/logs/docker/
