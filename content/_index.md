@@ -10,7 +10,7 @@ disable_toc: true
 
 # Welcome to Datadog Docs!
 
-If you're new here, read below for the high-level view of Datadog.
+*If you're new here, read below for a high-level view of Datadog.*
 
 {{< partial name="tile-nav/tile-nav.html" >}}
 
