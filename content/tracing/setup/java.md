@@ -255,6 +255,56 @@ public class MyClass {
 }
 ```
 
+## Logging and MDC
+
+The Java tracer exposes two API calls to allow printing trace and span identifiers along with log statements, `CorrelationIdentifier#getTraceId()`, and `CorrelationIdentifier#getSpanId()`.
+
+log4j2:
+
+```java
+import org.apache.logging.log4j.ThreadContext;
+import datadog.trace.api.CorrelationIdentifier;
+
+// there must be spans started and active before this block.
+try {
+    ThreadContext.put("ddTraceID", "ddTraceID:" + String.valueOf(CorrelationIdentifier.getTraceId()));
+    ThreadContext.put("ddSpanID", "ddSpanID:" + String.valueOf(CorrelationIdentifier.getSpanId()));
+} finally {
+    ThreadContext.remove("ddTraceID");
+    ThreadContext.remove("ddSpanID");
+}
+```
+
+slf4j/logback:
+
+```java
+import org.slf4j.MDC;
+import datadog.trace.api.CorrelationIdentifier;
+
+// there must be spans started and active before this block.
+try {
+    MDC.put("ddTraceID", "ddTraceID:" + String.valueOf(CorrelationIdentifier.getTraceId()));
+    MDC.put("ddSpanID", "ddSpanID:" + String.valueOf(CorrelationIdentifier.getSpanId()));
+} finally {
+    MDC.remove("ddTraceID");
+    MDC.remove("ddSpanID");
+}
+```
+
+log4j2 XML Pattern:
+
+```
+<PatternLayout pattern="%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{${sys:PID}}{magenta} %clr{---}{faint} %X{ddTraceID} %X{ddSpanID} %m%n%xwEx" />
+```
+
+Logback XML Pattern:
+```
+<Pattern>
+    %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} %X{ddTraceID} %X{ddSpanID} - %msg%n
+</Pattern>
+```
+
+
 ## Debugging
 
 To return debug level application logs, enable debug mode with the flag `-Ddatadog.slf4j.simpleLogger.defaultLogLevel=debug` when starting the JVM.
@@ -339,8 +389,13 @@ Don't see your desired framework? We're continually adding additional support, [
 
 | Instrumentation                | Versions | JVM Arg to enable                                                             |
 | :--------------                | :------- | :----------------                                                             |
-| Elasticsearch Rest Client      | 5.0+     | `-Ddd.integration.elasticsearch.enabled=true`                                 |
-| Elasticsearch Transport Client | 2.0+     | `-Ddd.integration.elasticsearch.enabled=true`                                 |
+| Elasticsearch Client           | 5.0+     | `-Ddd.integration.elasticsearch.enabled=true`                                 |
+| Netty Http Server and Client   | 4.0+     | `-Ddd.integration.netty.enabled=true`                                         |
+| HttpURLConnection              | all      | `-Ddd.integration.httpurlconnection.enabled=true`                             |
+| JSP Rendering                  | 2.3+     | `-Ddd.integration.jsp.enabled=true`                                           |
+| Akka-Http Server               | 10.0+    | `-Ddd.integration.akka-http.enabled=true`                                     |
+| Lettuce                        | 5.0+     | `-Ddd.integration.lettuce.enabled=true`                                       |
+| SpyMemcached                   | 2.12+    | `-Ddd.integration.spymemcached.enabled=true`                                  |
 | Ratpack                        | 1.4+     | `-Ddd.integration.ratpack.enabled=true`                                       |
 | Spark Java                     | 2.4+     | `-Ddd.integration.sparkjava.enabled=true -Ddd.integration.jetty.enabled=true` |
 
