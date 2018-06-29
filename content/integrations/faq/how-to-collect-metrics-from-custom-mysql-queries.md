@@ -60,6 +60,6 @@ Then your Agent's MySQL check would run that query to collect a metric called "m
 
 {{< img src="integrations/faq/mysql_metric_query.png" alt="mysql_metric_query" responsive="true" popup="true">}}
 
-[1]: https://github.com/DataDog/dd-agent/blob/5.10.x/conf.d/mysql.yaml.example#L50-L66
+[1]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example#L54-L71
 [2]: /developers/dogstatsd
 [3]: /api
