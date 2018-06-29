@@ -2,9 +2,6 @@
 title: Tracing .NET Applications (Coming Soon)
 kind: Documentation
 further_reading:
-- link: "https://github.com/DataDog/dd-trace-csharp"
-  tag: "Github"
-  text: Source code
 - link: "tracing/visualization/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
@@ -14,8 +11,14 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-Tracing for .NET applications is coming soon from Datadog. The officially supported beta will launch as early as August 2018. To be notified of the beta launch, <a href="https://goo.gl/forms/SCKOOlHS7tNzyMt93">submit this form</a> <br>.
+The APM tracer for .NET applications is currently in alpha and not officially supported by Datadog. The officially supported beta will launch as early as August 2018. We do not recommend running the alpha tracer in production.
 </div>
+
+{{< whatsnext desc="To be notified of the beta launch, submit this form:">}}
+    {{< nextlink href="https://goo.gl/forms/SCKOOlHS7tNzyMt93" tag="Survey" >}}.NET beta survey{{< /nextlink >}}
+{{< /whatsnext >}}
+
+<br>
 
 ## Planned Automatic Instrumentation for Beta (Coming Soon)
 

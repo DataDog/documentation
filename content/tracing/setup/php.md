@@ -2,9 +2,6 @@
 title: Tracing PHP Applications (Coming Soon)
 kind: Documentation
 further_reading:
-- link: "https://github.com/DataDog/dd-trace-php"
-  tag: "Github"
-  text: Source code
 - link: "tracing/visualization/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
@@ -14,11 +11,14 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-The APM tracer for PHP applications is currently in alpha and not officially supported by Datadog. The officially supported beta will launch as early as September 2018. To be notified of the beta launch, <a href="https://goo.gl/forms/rKjH2J6nJ585KXri2">submit this form</a> <br>
-We do not recommend running the alpha tracer in production.
+The APM tracer for PHP applications is currently in alpha and not officially supported by Datadog. The officially supported beta will launch as early as September 2018. We do not recommend running the alpha tracer in production.
 </div>
 
-The unstable alpha tracer can be [accessed today on Github][2].
+{{< whatsnext desc="To be notified of the beta launch, submit this form:">}}
+    {{< nextlink href="https://goo.gl/forms/rKjH2J6nJ585KXri2" tag="Survey" >}}PHP beta survey{{< /nextlink >}}
+{{< /whatsnext >}}
+
+<br>
 
 ## Planned Automatic Instrumentation for Beta (Coming Soon)
 
