@@ -421,16 +421,6 @@ languages:
         - identifier: customnav_tracingnav_kubernetes
           name: "Kubernetes"
           url: "tracing/setup/kubernetes/"
-          weight: 125
-          parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_dotnet
-          name: ".NET (Coming soon)"
-          url: "tracing/setup/dotnet/"
-          weight: 127
-          parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_go
-          name: "Go"
-          url: "tracing/setup/go/"
           weight: 130
           parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_java
@@ -438,30 +428,40 @@ languages:
           url: "tracing/setup/java/"
           weight: 140
           parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_javascript
-          name: "JavaScript"
-          url: "tracing/setup/javascript/"
-          weight: 145
-          parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_php
-          name: "PHP (Coming soon)"
-          url: "tracing/setup/php/"
-          weight: 150
-          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_python
           name: "Python"
           url: "tracing/setup/python/"
-          weight: 155
+          weight: 150
           parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_ruby
           name: "Ruby"
           url: "tracing/setup/ruby/"
           weight: 160
           parent: customnav_tracingnav_setup
+        - identifier: customnav_tracingnav_go
+          name: "Go"
+          url: "tracing/setup/go/"
+          weight: 170
+          parent: customnav_tracingnav_setup
+        - identifier: customnav_tracingnav_javascript
+          name: "JavaScript"
+          url: "tracing/setup/javascript/"
+          weight: 180
+          parent: customnav_tracingnav_setup
+        - identifier: customnav_tracingnav_dotnet
+          name: ".NET (Coming soon)"
+          url: "tracing/setup/dotnet/"
+          weight: 190
+          parent: customnav_tracingnav_setup
+        - identifier: customnav_tracingnav_php
+          name: "PHP (Coming soon)"
+          url: "tracing/setup/php/"
+          weight: 195
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_libraries
           name: "Community Libraries"
-          url: "libraries/#apm-tracing-client-libraries"
-          weight: 170
+          url: "developers/libraries/#apm-tracing-client-libraries"
+          weight: 199
           parent: customnav_tracingnav_setup
 
         # Using the APM UI
@@ -1264,16 +1264,6 @@ languages:
         - identifier: customnav_tracingnav_kubernetes
           name: "Kubernetes"
           url: "tracing/setup/kubernetes/"
-          weight: 125
-          parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_dotnet
-          name: ".NET (Coming soon)"
-          url: "tracing/setup/dotnet/"
-          weight: 127
-          parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_go
-          name: "Go"
-          url: "tracing/setup/go/"
           weight: 130
           parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_java
@@ -1281,30 +1271,40 @@ languages:
           url: "tracing/setup/java/"
           weight: 140
           parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_javascript
-          name: "JavaScript"
-          url: "tracing/setup/javascript/"
-          weight: 145
-          parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_php
-          name: "PHP (Coming soon)"
-          url: "tracing/setup/php/"
-          weight: 150
-          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_python
           name: "Python"
           url: "tracing/setup/python/"
-          weight: 155
+          weight: 150
           parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_ruby
           name: "Ruby"
           url: "tracing/setup/ruby/"
           weight: 160
           parent: customnav_tracingnav_setup
+        - identifier: customnav_tracingnav_go
+          name: "Go"
+          url: "tracing/setup/go/"
+          weight: 170
+          parent: customnav_tracingnav_setup
+        - identifier: customnav_tracingnav_javascript
+          name: "JavaScript"
+          url: "tracing/setup/javascript/"
+          weight: 180
+          parent: customnav_tracingnav_setup
+        - identifier: customnav_tracingnav_dotnet
+          name: ".NET (Coming soon)"
+          url: "tracing/setup/dotnet/"
+          weight: 190
+          parent: customnav_tracingnav_setup
+        - identifier: customnav_tracingnav_php
+          name: "PHP (Coming soon)"
+          url: "tracing/setup/php/"
+          weight: 195
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_librairies
           name: "Bibliothèques de la communauté"
-          url: "libraries/#apm-tracing-client-libraries"
-          weight: 170
+          url: "developers/libraries/#apm-tracing-client-libraries"
+          weight: 199
           parent: customnav_tracingnav_setup
 
         # Using the APM UI

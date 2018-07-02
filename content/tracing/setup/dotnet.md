@@ -11,11 +11,11 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-The APM tracer for .NET applications is currently in alpha and not officially supported by Datadog. The officially supported beta will launch as early as August 2018. We do not recommend running the alpha tracer in production.
+Tracing for .NET applications is coming soon from Datadog. The officially supported beta will launch as early as August 2018. To be notified of the beta launch, fill out the survey below.
 </div>
 
 {{< whatsnext desc="To be notified of the beta launch, submit this form:">}}
-    {{< nextlink href="https://goo.gl/forms/SCKOOlHS7tNzyMt93" tag="Survey" >}}.NET beta survey{{< /nextlink >}}
+    {{< nextlink href="https://goo.gl/forms/SCKOOlHS7tNzyMt93" tag="Survey" >}}.NET Beta Access Survey{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <br>
@@ -41,11 +41,11 @@ Don’t see what you're looking for? Please let us know more about your needs th
 
 | Data Store                      | Versions    | Support Type    |
 | :------------------------------ | :---------- | :-------------- |
-| Ado.Net / System.Data.SqlClient |             | Coming soon     |
-| Elasticsearch.net / NEST        |             | Coming Soon     |
-| MongoDB.Driver                  |             | Coming Soon     |
-| Postgres (Npgsql)               |             | Coming Soon     |
-| ServiceStack.Redis              |             | Coming Soon     |
+| Ado.Net / System.Data.SqlClient | Coming soon | Coming soon     |
+| Elasticsearch.net / NEST        | Coming soon | Coming Soon     |
+| MongoDB.Driver                  | Coming soon | Coming Soon     |
+| Postgres (Npgsql)               | Coming soon | Coming Soon     |
+| ServiceStack.Redis              | Coming soon | Coming Soon     |
 
 Don’t see what you're looking for? Please let us know more about your needs through [this survey][1].
 

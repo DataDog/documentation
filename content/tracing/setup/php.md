@@ -2,6 +2,9 @@
 title: Tracing PHP Applications (Coming Soon)
 kind: Documentation
 further_reading:
+- link: "https://github.com/DataDog/dd-trace-php"
+  tag: "Github"    
+  text: Source code
 - link: "tracing/visualization/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
@@ -15,10 +18,12 @@ The APM tracer for PHP applications is currently in alpha and not officially sup
 </div>
 
 {{< whatsnext desc="To be notified of the beta launch, submit this form:">}}
-    {{< nextlink href="https://goo.gl/forms/rKjH2J6nJ585KXri2" tag="Survey" >}}PHP beta survey{{< /nextlink >}}
+    {{< nextlink href="https://goo.gl/forms/rKjH2J6nJ585KXri2" tag="Survey" >}}PHP Beta Access Survey{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <br>
+
+The unstable alpha tracer can be [accessed today on Github][2].
 
 ## Planned Automatic Instrumentation for Beta (Coming Soon)
 
@@ -29,9 +34,9 @@ Don’t see your desired frameworks or libraries? Please let us know more about 
 
 | Module         | Versions    | Support Type    |
 | :-----------   | :---------- | :-------------- |
-| Laravel        |             | Coming soon     |
-| Symfony        |             | Coming soon     |
-| Zend Framework |             | Coming soon     |
+| Laravel        | Coming soon | Coming soon     |
+| Symfony        | Coming soon | Coming soon     |
+| Zend Framework | Coming soon | Coming soon     |
 
 Don’t see your desired web frameworks? Please let us know more about your needs through [this survey][1].
 
@@ -39,10 +44,10 @@ Don’t see your desired web frameworks? Please let us know more about your need
 
 | Module      | Versions    | Support Type |
 | :---------- | :---------- | :----------- |
-| MYSQL       |             | Coming Soon  |
-| Redis       |             | Coming Soon  |
-| MongoDB     |             | Coming Soon  |
-| Postgres    |             | Coming Soon  |
+| MYSQL       | Coming soon | Coming Soon  |
+| Redis       | Coming soon | Coming Soon  |
+| MongoDB     | Coming soon | Coming Soon  |
+| Postgres    | Coming soon | Coming Soon  |
 
 Don’t see your desired data stores? Please let us know more about your needs through [this survey][1].
 
