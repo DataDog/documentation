@@ -19,7 +19,7 @@ The python version embedded with the Agent is located here: `/opt/datadog-agent/
 The Agent also comes with pip; install python libraries using:
 
 ```bash
-sudo /opt/datadog-agent/embedded/bin/pip install <package_name>
+sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install <package_name>
 ```
 
 ### Windows
