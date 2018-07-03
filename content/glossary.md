@@ -8,7 +8,7 @@ draft: true
 
 **API**
 
-Datadog provides an HTTP API in order to interact programmatically with the platform. Every feature, resource, mechanism, and bit of functionality can be accessed via the API. Interacting with the API manually is a great way to learn how Datadog works under the hood! In production however, you will use a purpose-built tool, library, or interface — such as the Datadog product itself — as an abstraction layer between you and the API.
+Datadog provides an HTTP API in order to interact programmatically with the platform. Every feature, resource, and mechanism is accessible via the API. Interacting with the API manually is a great way to learn how Datadog works under the hood. In production however, you will use a purpose-built tool, library, or interface — such as the Datadog product itself — as an abstraction layer between you and the API.
 
 See the [API documentation][1] for more information.
 
@@ -20,7 +20,7 @@ Note that the word “check” — when not capitalized — refers to the generi
 
 **Client Library**
 
-There are a number of libraries in a variety of languages in order to help you instrument your applications with Datadog directly. Datadog provides official libraries for C#, Golang, Java, PHP, Python, and Ruby. Libraries in other languages have been contributed by the community, and are supported on a best-effort basis.
+There are a number of libraries in a variety of languages that help you instrument your applications with Datadog directly. Datadog provides official libraries for C#, Golang, Java, PHP, Python, and Ruby. Libraries in other languages have been contributed by the community, and are supported on a best-effort basis.
 
 Libraries are designed to interact with either the API or DogStatsD, though a handful provide support for both.
 
