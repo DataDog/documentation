@@ -671,16 +671,16 @@ languages:
           url: "monitors/monitor_types/log"
           weight: 90
           parent: menu_references_logs
-        - identifier: customnav_lognav_archives
-          name: "Archives"
-          url: "logs/s3"
-          weight: 100
-          parent: menu_references_logs
-        - identifier: customnav_lognav_archives_s3
-          name: "AWS S3"
-          url: "logs/s3"
-          weight: 1010
-          parent: customnav_lognav_archives
+        #- identifier: customnav_lognav_archives
+        #  name: "Archives"
+        #  url: "logs/s3"
+        #  weight: 100
+        #  parent: menu_references_logs
+        #- identifier: customnav_lognav_archives_s3
+        #  name: "AWS S3"
+        #  url: "logs/s3"
+        #  weight: 1010
+        #  parent: customnav_lognav_archives
 
         #- identifier: customnav_lognav_faq
         #  name: "FAQ"
