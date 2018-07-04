@@ -89,7 +89,7 @@ To report a trace to Datadog the following happens:
   * Queue is size-bound and doesn't grow past a set limit of 7000 traces
   * Once the size limit is reached, traces are discarded
   * A count of the total traces is captured to ensure accurate throughput
-* In a separate reporting thread, the trace queue is flushed and traces are sent to the Datadog-agent via http
+* In a separate reporting thread, the trace queue is flushed and traces are are encoded via msgpack then sent to the Datadog Agent via http
 * Queue flushing happens on a schedule of once per second
 
 To see the actual code, documentation and usage examples for any of the 
