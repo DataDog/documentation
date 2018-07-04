@@ -1,6 +1,7 @@
 ---
 title: Glossary
 kind: Documentation
+disable_toc: true
 ---
 
 #### Agent
