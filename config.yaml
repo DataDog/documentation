@@ -868,11 +868,11 @@ languages:
           url: "videos/"
           pre: "nav_videos"
           weight: 130
-#        - identifier: menu_references_glossary
-#          name: "Glossary"
-#          url: "glossary/"
-#          pre: "nav_glossary"
-#          weight: 120
+        - identifier: menu_references_glossary
+          name: "Glossary"
+          url: "glossary/"
+          pre: "nav_glossary"
+          weight: 120
 
         - identifier: menu_references_help
           name: "Help"
@@ -1694,11 +1694,11 @@ languages:
           url: "videos/"
           pre: "nav_videos"
           weight: 130
-#        - identifier: menu_references_glossary
-#          name: "Glossary"
-#          url: "glossary/"
-#          pre: "nav_glossary"
-#          weight: 120
+        - identifier: menu_references_glossary
+          name: "Glossaire"
+          url: "glossary/"
+          pre: "nav_glossary"
+          weight: 120
 
         - identifier: menu_references_help
           name: "Help"
