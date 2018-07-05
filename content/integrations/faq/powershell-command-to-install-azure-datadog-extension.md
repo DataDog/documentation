@@ -10,14 +10,14 @@ Datadog provides an Azure extension to assist with Agent deployment on Azure ins
 * [Azure integration documentation][2]
 
 An alternative to the GUI install is via Powershell.
-To run the Datadog Agent in your azure instances as an extension, use the following syntax:
+To run the Datadog Agent in your Azure instances as an extension, use the following syntax:
 
 ```
 $Settings="{'api_key': '$(DatadogApiKey)'}"
 Set-AzureRmVMExtension -Publisher "Datadog.Agent" -ExtensionType "DatadogWindowsAgent" -Settings $Settings
 ```
 
-More information on the syntax to set Azure instances extensions can be found [in the Microsoft documentation][3].
+More information on the syntax to set Azure instance extensions can be found [in the Microsoft documentation][3].
 
 [1]: https://www.datadoghq.com/blog/introducing-azure-monitoring-with-one-click-datadog-deployment/
 [2]: https://docs.datadoghq.com/integrations/azure/#deploy-agents
