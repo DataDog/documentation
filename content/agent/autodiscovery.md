@@ -6,6 +6,9 @@ aliases:
   - /guides/autodiscovery/
   - /agent/autodiscovery
 further_reading:
+- link: "/videos/autodiscovery/"
+  tag: "Video"
+  text: Datadog Autodiscovery on Docker with Labels using Agent v6 & v5
 - link: "logs/"
   tag: "Documentation"
   text: Collect your logs
@@ -17,7 +20,11 @@ further_reading:
   text: Collect your traces
 ---
 
+## QuickStart
+
 This page covers Autodiscovery with Agent 6 only, [refer to the dedicated documentation to setup Autodiscovery with Agent 5][1]
+
+Watch our [Datadog Autodiscovery on Docker with Labels using Agent v6 video][24] for a bird's eye view of this functionally.
 
 ## How it Works
 
@@ -414,3 +421,4 @@ https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/
 [21]: https://github.com/DataDog/integrations-core/blob/master/http_check/conf.yaml.example
 [22]: https://github.com/DataDog/integrations-core/blob/master/kube_proxy/datadog_checks/kube_proxy/data/conf.yaml.example
 [23]: https://docs.datadoghq.com/logs/docker/
+[24]: /videos/autodiscovery/
