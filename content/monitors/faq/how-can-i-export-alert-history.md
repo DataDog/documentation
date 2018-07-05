@@ -17,6 +17,7 @@ You can also fetch this CSV using curl:
 
 ```shell
 api_key=<API_KEY>
+app_key = <APP_KEY>
 monitor_from=<TIME_IN_EPOCH>
 monitor_to=<TIME_IN_EPOCH>
 
