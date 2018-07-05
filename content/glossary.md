@@ -38,7 +38,7 @@ See the [DogStatsD documentation][4] for more information.
 
 #### Integration
 
-An Integration is a way to get data from your systems into Datadog. Integrations gather data from a given source, ensure that those data are classified correctly, and provide some other assets to assist with configuration and usage. Data sources can be pretty much anything from daemons on a server, to cloud services, to third-party APIs, and more.
+An Integration is a way to get data from your systems into Datadog. Integrations gather data from a given source, ensure that those data are classified correctly, and provide some other assets to assist with configuration and usage. Data sources can be anything from daemons on a server, to cloud services, to third-party APIs, and more.
 
 See the [Integrations documentation][5] for more information.
 
