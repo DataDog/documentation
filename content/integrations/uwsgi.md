@@ -3,8 +3,8 @@ categories:
   - log collection
   - web 
 doc_link: https://docs.datadoghq.com/integrations/uwsgi/
-description: Collect uWSGI logs in order tracks requests per second, bytes served, request status and more.
-short_description: Collect uWSGI logs in order tracks requests per second, bytes served, request status and more.
+description: Collect uWSGI logs in order to track requests per second, bytes served, request status, and more.
+short_description: Collect uWSGI logs in order to track requests per second, bytes served, request status, and more.
 ddtype: check
 git_integration_title: uwsgi
 has_logo: true
@@ -22,7 +22,7 @@ supported_os:
 
 ## Overview
 
-Collect uWSGI logs in order tracks requests per second, bytes served, request status (2xx, 3xx, 4xx, 5xx), service uptime, slowness, and more.
+Collect uWSGI logs in order to track requests per second, bytes served, request status (2xx, 3xx, 4xx, 5xx), service uptime, slowness, and more.
 
 ## Setup
 
