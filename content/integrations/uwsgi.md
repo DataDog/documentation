@@ -62,7 +62,7 @@ logs:
 
 Finally, [restart the agent][3].
 
-By default the Datadog-uWSGI integration supports the [default uWSGI log format][4] and the [apache-like format][5].
+By default the Datadog-uWSGI integration supports the [default uWSGI log format][4] and the [Apache-like combined format][5].
 
 ## Troubleshooting
 
