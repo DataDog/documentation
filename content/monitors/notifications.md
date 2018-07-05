@@ -279,6 +279,8 @@ Would produce this slack message:
 
 {{< img src="monitors/notifications/notification_slack_preview.png" alt="notification_slack_preview" responsive="true" popup="true" style="width:50%;" >}}
 
+You can also mention **@here** or **@channel** using `<!here>` or `<!channel>`, respectively. For user groups, use `<subteam^ID|handle>`.
+
 #### Using message template variables to dynamically create @-mentions
 
 Use message template variables within a monitor message to dynamically build **@-mentions**.
