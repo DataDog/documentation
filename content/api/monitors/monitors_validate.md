@@ -6,7 +6,7 @@ order: 16.11
 ## Validate a monitor
 ##### ARGUMENTS
 *   **`type`** [*required*]:  
-    The [type of the monitor][3], chosen from:  
+    The [type of the monitor][1], chosen from:  
     *   `anomaly`
     *   `apm`
     *   `composite`
@@ -22,4 +22,7 @@ order: 16.11
     *   `process`
     
 *   **`query`** [*required*]:  
-    The query defines when the monitor triggers.
+    The query defines when the monitor triggers. Query syntax depends on monitor type. See [Create a monitor][2] for details.
+
+[1]: /monitors/monitor_types/
+[2]: /monitors/#create-a-monitor
