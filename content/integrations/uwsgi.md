@@ -12,7 +12,7 @@ integration_title: uwsgi
 is_public: true
 kind: integration
 name: uwsgi
-public_title: Intégration Datadog-uWSGI
+public_title: Integration Datadog-uWSGI
 short_description: 
 supported_os:
 - linux
