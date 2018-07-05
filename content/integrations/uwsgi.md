@@ -38,7 +38,7 @@ By default uWSGI server logs to stdout. Run the following command to start loggi
 uwsgi --socket :3031 --logger file:logfile=/var/log/uwsgi/uwsgi.log,maxsize=2000000
 ```
 
-Create the `uwsgi.d/conf.yaml` file in the at the root of your Agent's configuration directory.
+Create the `uwsgi.d/conf.yaml` file in the root of your Agent's configuration directory.
 
 #### Log Collection
 
