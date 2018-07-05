@@ -17,7 +17,7 @@ $Settings="{'api_key': '$(DatadogApiKey)'}"
 Set-AzureRmVMExtension -Publisher "Datadog.Agent" -ExtensionType "DatadogWindowsAgent" -Settings $Settings
 ```
 
-More info on the syntax to set Azure instances extensions can be found [in the Microsoft documentation][3].
+More information on the syntax to set Azure instances extensions can be found [in the Microsoft documentation][3].
 
 [1]: https://www.datadoghq.com/blog/introducing-azure-monitoring-with-one-click-datadog-deployment/
 [2]: https://docs.datadoghq.com/integrations/azure/#deploy-agents
