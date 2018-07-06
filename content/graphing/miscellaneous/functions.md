@@ -223,6 +223,10 @@ Delta value between points for a given metric
 
 ## Smoothing
 
+### asap()
+
+The `asap()` function applies the [ASAP algorithm][5] with the same window size for all the metrics in a graph. 
+
 ### ewma_3()
 
 Exponentially weighted moving average with a span of 3.
@@ -361,3 +365,4 @@ Highlight outliers series; see our [Outlier Monitor][3] page for more info.
 [2]: /monitors/monitor_types/anomaly
 [3]: /monitors/monitor_types/outlier
 [4]: /graphing/faq/as_count_validation
+[5]: http://futuredata.stanford.edu/asap/
