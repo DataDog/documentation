@@ -68,11 +68,11 @@ Datadog accepts metrics submitted from a variety of sources, and as a result the
 | [API][3]            | `api.Metric.send(type="count", ...)` | count             | count               |
 | [API][3]            | `api.Metric.send(type="rate", ...)`  | rate              | rate                |
 | [DogStatsD][1]      | `dog.gauge(...)`                     | gauge             | gauge               |
-| [DogStatsD][1]      | `dog.increment(...)`                 | counter           | rate                |
+| [DogStatsD][1]      | `dog.increment(...)`                 | counter <sup>deprecated</sup> | rate    |
 | [DogStatsD][1]      | `dog.histogram(...)`                 | histogram         | gauge, rate         |
 | [DogStatsD][1]      | `dog.set(...)`                       | set               | gauge               |
 | [Agent check][2]    | `self.gauge(...)`                    | gauge             | gauge               |
-| [Agent check][2]    | `self.increment(...)`                | counter           | rate                |
+| [Agent check][2]    | `self.increment(...)`                | counter <sup>deprecated</sup> | rate    |
 | [Agent check][2]    | `self.rate(...)`                     | rate              | gauge               |
 | [Agent check][2]    | `self.count(...)`                    | count             | count               |
 | [Agent check][2]    | `self.monotonic_count(...)`          | monotonic_count   | count               |
