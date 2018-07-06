@@ -36,6 +36,8 @@ To create an anomaly detection monitor, navigate to the [New Monitor][1] page an
 
 You should now see the form above, with a handful of parameters that help determine when to alert on anomalous behavior. If you only care about unusually high or unusually low values, you can choose to only alert on values above or below the bounds. The next selection determines the length of the alert window, which specifies how long a metric needs to be anomalous before an alert triggers. Beware that if the alert window is too short, you might get false alarms due to spurious noise. Finally, the recovery period specifies for how long the metric must be normal before the alert recovers.
 
+Setting different windows for the alert and alert recovery periods might lead to an ambiguous state. The alert and alert recovery window sizes should be set such that both cannot be satisfied at the same time. For example, setting an alert threshold at 50% for a 2-hour window (i.e., 1 hour has to be anomalous to trigger the alert) and the recovery threshold at 50% for a 10-minute window (i.e., 5 minutes have to be non-anomalous to recover) might result in triggering the alert and the alert recovery states simultaneously. If the last 5 minutes are not anomalous but the 1 hour before that _was_ anomalous, both the alert and the alert recovery will be triggered.
+
 Complete the rest of the steps in the New Monitor form (**Say what's happening**, etc) and click **Save** to create the Anomaly monitor.
 
 ### Advanced Options
