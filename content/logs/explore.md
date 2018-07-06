@@ -145,7 +145,7 @@ Click on `View in context` to see log lines dated just before and after a select
 
 {{< img src="logs/explore/view-in-context.gif" alt="View in context" responsive="true" popup="true">}}
 
-The context is different according to the situation as we use `Hostname`, `Service`, `filename` or `container_id` attributes and tags to make sure we find the perfect context for your logs.
+The context is different according to the situation as we use the `Hostname`, `Service`, `filename` or `container_id` attributes, along with tags to make sure we find the perfect context for your logs.
 
 ### Columns
 To add more log details to the list, click the **Columns** button and select any facets you want to see:
