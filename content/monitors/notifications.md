@@ -295,7 +295,9 @@ For example, if the rendered variable is setup as a channel in the Slack integra
 
 ### Hipchat integration
 
-Use `@here` in the monitor message to notify everybody in a given Hipchat channel. Do not use `@all` as it will notify all members of your Datadog organization. N.b. Hipchat users must have room notifications set to _at least_ "Normal" to receive notifications this way.
+Use `@here` in the monitor message to notify everybody in a given Hipchat channel. Do not use `@all` as it notifies all members of your Datadog organization.
+
+**Note**: Hipchat users must have room notifications set to *at least* `Normal` to receive notifications this way.
 
 ## Further Reading
 
