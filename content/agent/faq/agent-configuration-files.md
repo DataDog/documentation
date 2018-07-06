@@ -5,7 +5,7 @@ kind: faq
 
 ## Agent main configuration file 
 
-The primary agent configuration file has been transitioned between Agent v5 and agent v6 respectively from **INI** format to **YAML** to better support complex configurations and for a more consistent experience across the Agent and Checks; as such `datadog.conf` is now retired in favor of `datadog.yaml`.
+The Agent v6 configuration file uses **YAML** to better support complex configurations, and to provide a consistent configuration experience, as Checks also use YAML configuration files. Therefore, `datadog.conf` (v5) is now retired in favor of `datadog.yaml` (v6).
 
 | Platform                             | Agent v5                                                                   | Agent v6                             |
 | :--------                            | :-----                                                                     | :--------                            |
@@ -23,8 +23,7 @@ The primary agent configuration file has been transitioned between Agent v5 and 
 
 ## Agent configuration directory
 
-Prior releases of Datadog Agent stored configuration files in `/dd-agent/conf.d/`. Starting with the 6.0 release configuration files are stored in
-`/datadog-agent/conf.d/<CHECK_NAME>`.
+Prior releases of Datadog Agent stored configuration files in `/dd-agent/conf.d/`. Starting with the 6.0 release, configuration files are stored in `/datadog-agent/conf.d/<CHECK_NAME>`.
 
 | Platform                             | Agent v5                                                             | Agent v6                       |
 | :--------                            | :-----                                                               | :--------                      |
@@ -42,11 +41,11 @@ Prior releases of Datadog Agent stored configuration files in `/dd-agent/conf.d/
 
 ### Checks configuration files for Agent 6
 
-In order to provide a more flexible way to define the configuration for a check, from version 6.0.0 the Agent loads any valid YAML file contained in the folder:
+In order to provide a more flexible way to define the configuration for a check, from version 6.0.0, the Agent loads any valid YAML file contained in the folder:
 
 `/datadog-agent/conf.d/<CHECK_NAME>.d/`.
 
-This way, complex configurations can be broken down into multiple files: for example, a configuration for the `http_check` might look like this:
+This way, complex configurations can be broken down into multiple files. For example, a configuration for the `http_check` might look like this:
 
 ```
 /datadog-agent/conf.d/http_check.d/
@@ -54,7 +53,7 @@ This way, complex configurations can be broken down into multiple files: for exa
 └── frontend.yaml
 ```
 
-Autodiscovery template files will be stored in the configuration folder as well, for example this is how the `redisdb` check configuration folder looks like:
+Autodiscovery template files will be stored in the configuration folder as well. For example, consider `redisdb`:
 
 ```
 /datadog-agent/conf.d/redisdb.d/
@@ -62,11 +61,11 @@ Autodiscovery template files will be stored in the configuration folder as well,
 └── conf.yaml.example
 ```
 
-To keep backwards compatibility, the Agent still picks up configuration files in the form `/datadog-agent/conf.d/<check_name>.yaml` but migrating to the new layout is strongly recommended.
+To preserve backwards compatibility, the Agent still picks up configuration files in the form `/datadog-agent/conf.d/<check_name>.yaml`, but migrating to the new layout is strongly recommended.
 
 ## JMX configuration file
 
-JMX Agent checks have an additional `metrics.yaml` file in their configuration folder. It is the list of all the beans that the Datadog Agent collects by default. It allows you not to list all the beans manually when you configure a check through [docker labels or k8s annotations][2].
+JMX Agent checks have an additional `metrics.yaml` file in their configuration folder. It is a list of all the beans that the Datadog Agent collects by default. This way, you do not need to list all of the beans manually when you configure a check through [Docker labels or k8s annotations][2].
 
 [1]: /agent/basic_agent_usage/windows/#configuration
 [2]: /agent/autodiscovery
