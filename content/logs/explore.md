@@ -141,9 +141,11 @@ You can click on any log line to see more details about it:
 
 ### View in context
 
-Click on its `host` or `service` and select `View in context` (also known as `Focus on Host & Service`) to see log lines dated just before and after a selected log - even if they don't match your filter -
+Click on `View in context` to see log lines dated just before and after a selected log - even if they don't match your filter.
 
-{{< img src="logs/explore/focus_host_service.png" style="width:50%;" alt="focus on host and service.png" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="logs/explore/view-in-context.gif" style="width:80%;" alt="View in context" responsive="true" popup="true">}}
+
+The context is different according to the situation as we use `Hostname`, `Service`, `filename` or `container_id` attributes and tags to make sure we find the perfect context for your logs.
 
 ### Columns
 To add more log details to the list, click the **Columns** button and select any facets you want to see:
