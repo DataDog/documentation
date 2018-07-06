@@ -11,6 +11,7 @@ private: true
 * [Dogstream][3]
 * [Install core extras][4]
 * [Agent commands][5]
+* [Agent configuration files][19]
 * [How does Datadog determine the Agent hostname?][6]
 
 ## Installation
@@ -49,3 +50,4 @@ private: true
 [16]: /agent/faq/cannot-open-an-http-server-socket-error-reported-errno-eacces-13
 [17]: /agent/faq/why-don-t-i-see-the-system-processes-open-file-descriptors-metric
 [18]: /agent/faq/how-is-the-system-mem-used-metric-calculated
+[19]: /agent/faq/agent-configuration-files

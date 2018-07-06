@@ -76,39 +76,6 @@ With:
 
 **Note**: On Windows, `datadog.conf` is automatically upgraded to `datadog.yaml` on upgrade.
 
-## Configuration Files
-
-Prior releases of Datadog Agent stored configuration files in `/etc/dd-agent`.
-Starting with the 6.0 release configuration files will now be stored in
-`/etc/datadog-agent`.
-
-### Checks configuration files
-
-In order to provide a more flexible way to define the configuration for a check,
-from version 6.0.0 the Agent will load any valid YAML file contained in the folder:
-
-`/etc/datadog-agent/conf.d/<check_name>.d/`.
-
-This way, complex configurations can be broken down into multiple files: for example,
-a configuration for the `http_check` might look like this:
-
-```
-/etc/datadog-agent/conf.d/http_check.d/
-├── backend.yaml
-└── frontend.yaml
-```
-
-Autodiscovery template files will be stored in the configuration folder as well,
-for example this is how the `redisdb` check configuration folder looks like:
-
-```
-/etc/datadog-agent/conf.d/redisdb.d/
-├── auto_conf.yaml
-└── conf.yaml.example
-```
-
-To keep backwards compatibility, the Agent will still pick up configuration files in the form `/etc/datadog-agent/conf.d/<check_name>.yaml` but migrating to the new layout is strongly recommended.
-
 ## CLI
 
 The new command line interface for the Agent is sub-command based:

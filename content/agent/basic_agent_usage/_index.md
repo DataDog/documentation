@@ -12,6 +12,9 @@ further_reading:
 - link: "agent/faq/agent-commands"
   tag: "FAQ"
   text: "List of all Agent commands"
+- link: "agent/faq/agent-configuration-files"
+  tag: "FAQ"
+  text: "Location of all Agent configuration files"
 ---
 
 {{< partial name="platforms/platforms.html" >}}
@@ -36,17 +39,9 @@ Manage the Datadog Agent and [integrations][1] using configuration management to
 
 * [Installing Datadog Agent with Saltstack][8]
 
-## Configuration file
+## Configuration files
 
-The configuration files and folders for the Agent are located at:
-
-| OS                                         | Agent v5                                                                   | Agent v6                             |
-| :-------                                   | :--------                                                                  | :--------                            |
-| [Mac OS X][9]                              | `~/.datadog-agent/datadog.conf`                                            | `~/.datadog-agent/datadog.yaml`      |
-| [Linux][10]                                | `/etc/dd-agent/datadog.conf`                                               | `/etc/datadog-agent/datadog.yaml`    |
-| [Source][11]                               | `~/.datadog-agent/agent/datadog.conf`                                      | `/etc/datadog-agent/datadog.yaml`    |
-| [Windows Server 2008, Vista and newer][12] | `\\ProgramData\Datadog\datadog.conf`                                       | `\\ProgramData\Datadog\datadog.yaml` |
-| [Windows Server 2003, XP or older][12]     | `\\Documents and Settings\All Users\Application Data\Datadog\datadog.conf` | `n/a` _(unsupported OS)_             |
+[Refer to the dedicated page for Agent configuration files][13].
 
 ## Log location
 
@@ -71,3 +66,4 @@ The Datadog logs do a rollover every 10MB. When a rollover occurs, one backup is
 [10]: /agent/basic_agent_usage/ubuntu
 [11]: /agent/basic_agent_usage/source
 [12]: /agent/basic_agent_usage/windows
+[13]: /agent/faq/agent-configuration-files
