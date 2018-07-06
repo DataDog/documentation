@@ -117,10 +117,10 @@ Use text formatting to clarify and enhance content.
 
 | Formating   | Rule                                                                                                                    | Example                                               |
 | :---        | :------                                                                                                                 | :----                                                 |
-| `Backquote` | Used every time there is code related content in some text                                                              | Use the `foo` parameter                               |
-| **Bold**    | Subjectively pointing the reader to something that he shouldn't miss.                                                   | **This is important**, not that.                      |
-| *Italic*    | Literally translated words, default values, functions, settings, and page names.                                       | Go the the *setting* page in your Datadog application |
-| [Link]      | Links must be specified using the reference format (i.e. in the footnote) in order to aid [the translation process][2]. | Text with [a link]                                    |
+| `` `backquote` `` | Used every time there is code related content in some text                                                              | Use the `foo` parameter                               |
+| `**Bold**`    | Subjectively pointing the reader to something that he shouldn't miss.                                                   | **This is important**, not that.                      |
+| `*Italic*`    | Literally translated words, default values, functions, settings, and page names.                                       | Go the the *setting* page in your Datadog application |
+| `[Link]`      | Links must be specified using the reference format (i.e. in the footnote) in order to aid [the translation process][2]. | Text with [a link]                                    |
 
 
 ### Fixed-width
