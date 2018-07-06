@@ -44,7 +44,7 @@ Prior releases of Datadog Agent stored configuration files in `/dd-agent/conf.d/
 
 In order to provide a more flexible way to define the configuration for a check, from version 6.0.0 the Agent loads any valid YAML file contained in the folder:
 
-`/datadog-agent/conf.d/<check_name>.d/`.
+`/datadog-agent/conf.d/<CHECK_NAME>.d/`.
 
 This way, complex configurations can be broken down into multiple files: for example, a configuration for the `http_check` might look like this:
 
@@ -64,4 +64,9 @@ Autodiscovery template files will be stored in the configuration folder as well,
 
 To keep backwards compatibility, the Agent still picks up configuration files in the form `/datadog-agent/conf.d/<check_name>.yaml` but migrating to the new layout is strongly recommended.
 
+## JMX configuration file
+
+JMX Agent checks have an additional `metrics.yaml` file in their configuration folder. It is the list of all the beans that the Datadog Agent collects by default. It allows you not to list all the beans manually when you configure a check through [docker labels or k8s annotations][2].
+
 [1]: /agent/basic_agent_usage/windows/#configuration
+[2]: /agent/autodiscovery
