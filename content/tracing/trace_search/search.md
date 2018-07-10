@@ -126,7 +126,6 @@ The time range allows you to display traces within a given time period. Quickly 
 
 {{< img src="tracing/trace_search/search/timerange.png" style="width:50%;" alt="Timerange" responsive="true" popup="true" >}}
 
-## Trace 
 ## Trace Stream
 The Trace Stream is the list of traces that match the selected context. A context is defined by a [search bar](#search-bar) filter and a [time range](#time-range).
 

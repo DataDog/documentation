@@ -503,7 +503,7 @@ languages:
           weight: 310
           parent: customnav_tracingnav_trace_search
         - identifier: customnav_tracingnav_graph
-          name: "Trace Graph"
+          name: "Trace Analytics"
           url: "tracing/trace_search/analytics"
           weight: 320
           parent: customnav_tracingnav_trace_search
@@ -1363,7 +1363,7 @@ languages:
           weight: 310
           parent: customnav_tracingnav_trace_search
         - identifier: customnav_tracingnav_graph
-          name: "Trace Graph"
+          name: "Trace Analytics"
           url: "tracing/trace_search/analytics"
           weight: 320
           parent: customnav_tracingnav_trace_search
