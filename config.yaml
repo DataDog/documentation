@@ -490,11 +490,23 @@ languages:
           url: "tracing/visualization/trace"
           weight: 230
           parent: customnav_tracingnav_visualization
-        - identifier: customnav_tracingnav_traces
-          name: "Traces list"
-          url: "tracing/visualization/trace_search/"
-          weight: 240
-          parent: customnav_tracingnav_visualization
+        
+        # Trace Search
+        - identifier: customnav_tracingnav_trace_search
+          name: "Trace Search"
+          url: "tracing/trace_search"
+          weight: 300
+          parent: menu_references_tracing
+        - identifier: customnav_tracingnav_search
+          name: "Trace Search"
+          url: "tracing/trace_search/search"
+          weight: 310
+          parent: customnav_tracingnav_trace_search
+        - identifier: customnav_tracingnav_graph
+          name: "Trace Graph"
+          url: "tracing/trace_search/analytics"
+          weight: 320
+          parent: customnav_tracingnav_trace_search
 
         # Trace API
         - identifier: customnav_tracingnav_api
@@ -1338,11 +1350,23 @@ languages:
           url: "tracing/visualization/trace"
           weight: 230
           parent: customnav_tracingnav_visualization
-        - identifier: customnav_tracingnav_traces
-          name: "Liste des Traces"
-          url: "tracing/visualization/trace_search/"
-          weight: 240
-          parent: customnav_tracingnav_visualization
+        
+        # Trace Search
+        - identifier: customnav_tracingnav_trace_search
+          name: "Trace Search"
+          url: "tracing/trace_search"
+          weight: 300
+          parent: menu_references_tracing
+        - identifier: customnav_tracingnav_search
+          name: "Trace Search"
+          url: "tracing/trace_search/search"
+          weight: 310
+          parent: customnav_tracingnav_trace_search
+        - identifier: customnav_tracingnav_graph
+          name: "Trace Graph"
+          url: "tracing/trace_search/analytics"
+          weight: 320
+          parent: customnav_tracingnav_trace_search
 
         # Trace API
         - identifier: customnav_tracingnav_api
@@ -1448,6 +1472,7 @@ languages:
           url: "integrations/#cat-log-collection"
           weight: 260
           parent: customnav_lognav_collection
+        
         # LOGS - Subnav start
         - identifier: customnav_lognav_explore
           name: "Search"
