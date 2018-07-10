@@ -1,9 +1,6 @@
 ---
 title: Categories of Data
 kind: documentation
-aliases:
-    # - /getting_started/categories_of_data/
-    - /security/
 further_reading:
 - link: "security/tracing"
   tag: "Documentation"
@@ -37,11 +34,11 @@ Infrastructure Metrics consist of timeseries for given metric names, associated 
 
 ## APM
 
-APM data consists of four levels of granularity: Services, Resources, Traces, and Spans. See [Getting Started with APM][7] for an explanation about each. Services and Resources should not contain personal data as part of the intended use of the service. Customers should leverage certain Agent features to restrict personal data before transmitting Traces and Spans to Datadog. See the [APM Security][12] page for more information.
+APM data consists of four levels of granularity: Services, Resources, Traces, and Spans. See [Getting Started with APM][7] for an explanation about each. Services and Resources should not contain personal data as part of the intended use of the service. If needed, customers should leverage certain Agent features to restrict personal data before transmitting Traces and Spans to Datadog. See the [APM Security][12] page for more information.
 
 ## Logs
 
-Logs consist of messages collected [by the Agent or by integrations][8], and associated with optional Metadata. Log files are immutable records of computer events about an operating system, application, or user activities, which form an audit trail. These records may be used to assist in detecting security violations, performance problems, and flaws in applications. Customers should leverage certain Agent features to restrict personal data before transmitting Logs to Datadog. See the [Logs Security][13] page for more information.
+Logs consist of messages collected [by the Agent or by integrations][8], and associated with optional Metadata. Log files are immutable records of computer events about an operating system, application, or user activities, which form an audit trail. These records may be used to assist in detecting security violations, performance problems, and flaws in applications. If needed, customers should leverage certain Agent features to restrict personal data before transmitting Logs to Datadog. See the [Logs Security][13] page for more information.
 
 ## Processes
 

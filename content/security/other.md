@@ -1,8 +1,6 @@
 ---
 title: Additional Security Considerations
 kind: documentation
-aliases:
-    - /security/other/
 further_reading:
 - link: "/security/"
   tag: "Documentation"

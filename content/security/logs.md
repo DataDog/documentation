@@ -3,7 +3,6 @@ title: Log Management Security
 kind: documentation
 aliases:
     - /logs/security/
-    - /security/logs/
 further_reading:
 - link: "/security/"
   tag: "Documentation"

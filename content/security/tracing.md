@@ -3,7 +3,6 @@ title: APM (Tracing) Security
 kind: documentation
 aliases:
     - /tracing/security/
-    - /security/tracing/
 further_reading:
 - link: "/security/"
   tag: "Documentation"
