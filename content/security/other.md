@@ -4,7 +4,7 @@ kind: documentation
 aliases:
     - /security/other/
 further_reading:
-- link: "getting_started/categories_of_data"
+- link: "/security/"
   tag: "Documentation"
   text: Review the main categories of data submitted to Datadog
 ---
