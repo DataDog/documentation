@@ -892,7 +892,7 @@ languages:
         - identifier: menu_references_security
           name: "Security"
           url: "security/"
-          pre: "nav_start" # TODO: need security icon (black and purple)
+          pre: "nav_security"
           weight: 120
         # SECURITY - Subnav start
         - identifier: customnav_security_agent
