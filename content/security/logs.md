@@ -19,11 +19,11 @@ The Datadog Agent submits Logs to Datadog over a TLS-encrypted TCP connection, r
 
 ## Logs Filtering
 
-For customers using release 6, the Agent can be configured to filter Logs sent by the Agent to the Datadog application. To prevent the submission of specific Logs, use the `log_processing_rules` [setting][2], with the **exclude_at_match** or **include_at_match** `type`. It is a list containing one or more regular expressions instructing the Agent to filter Logs based on a whitelist or blacklist.
+For customers using release 6, the Agent can be configured to filter Logs sent by the Agent to the Datadog application. To prevent the submission of specific Logs, use the `log_processing_rules` [setting][2], with the **exclude_at_match** or **include_at_match** `type`. This setting enables the creation of a list containing one or more regular expressions, which instructs the Agent to filter out Logs based on a whitelist or blacklist.
 
 ## Logs Obfuscation
 
-For customers using release 6, the Agent can be configured to obfuscate specific patterns within Logs sent by the Agent to the Datadog application. To mask sensitive sequences within your Logs, use the `log_processing_rules` [setting][3], with the  **mask_sequences** `type`. It is a list containing one or more groups of parameters that describe how to perform replacements of sensitive data within your Logs.
+For customers using release 6, the Agent can be configured to obfuscate specific patterns within Logs sent by the Agent to the Datadog application. To mask sensitive sequences within your Logs, use the `log_processing_rules` [setting][3], with the  **mask_sequences** `type`. This setting enables the creation of a list containing one or more regular expressions, which instructs the Agent to redact sensitive data within your Logs.
 
 ## Server-side Editing
 

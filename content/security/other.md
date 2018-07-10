@@ -9,7 +9,7 @@ further_reading:
 
 This article is part of a [series on data security][0].
 
-This article describes additional security considerations that customers might find relevant when using the Datadog product.
+This article describes additional security considerations that customers might find relevant when using the Datadog product and Agent.
 
 ## Process Arguments Obfuscation
 
@@ -23,7 +23,8 @@ Additionally, the following keywords are obfuscated as a baseline:
 
 ## Cloud Integrations Security
 
-Datadog enables customers to integrate with 3rd-party services. Some of Datadog’s [more than 200 built-in integrations][3] are configured directly in the Datadog application, and might require customers to provide credentials that allow Datadog to connect to the 3rd-party service on their behalf. Credentials provided by customers are encrypted and stored by Datadog in a secure credential datastore, with strict security guarantees enforced. All data is encrypted at-rest and in-transit. Access to the secure credential datastore is tightly controlled, highly audited, and specific services or actions within those services are limited to only what is necessary. Anomalous behavior detection continuously monitors for unauthorized access. Employee access for maintenance purposes is limited to a select subset of engineers.
+Datadog enables customers to integrate with 3rd-party services. Some of Datadog’s [more than 250 built-in integrations][3] are configured directly in the Datadog application, and might require customers to provide credentials that allow Datadog to connect to the 3rd-party service on their behalf. Credentials provided by customers are encrypted and stored by Datadog in a secure credential datastore, with strict security guarantees enforced. All data is encrypted at-rest and in-transit. Access to the secure credential datastore is tightly controlled and highly audited, and specific services or actions within those services are limited to only what is necessary.
+Anomalous behavior detection continuously monitors for unauthorized access. Employee access for maintenance purposes is limited to a select subset of engineers.
 
 Due to their sensitive nature, additional security guarantees are implemented where possible when integrating with cloud providers, including relying on Datadog-dedicated credentials with limited permissions. For example:
 

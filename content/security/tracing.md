@@ -42,11 +42,11 @@ In addition to this baseline, customers need to review and configure their APM d
 
 ## Tag Filtering
 
-For customers using release 6, the Agent can be configured to obfuscate Tags associated with Spans based on the Tag’s name and pattern, and replace it with a user-defined string. To prevent the submission of specific Tags, use the `replace_tags` [setting][2]. It is a list containing one or more groups of parameters that describe how to perform replacements of sensitive data within your Tags.
+For customers using release 6, the Agent can be configured to obfuscate Tags associated with Spans based on the Tag’s name and pattern, and replace it with a user-defined string. To prevent the submission of specific Tags, use the `replace_tags` [setting][2]. This setting enables the creation of a list containing one or more regular expressions, which instructs the Agent to redact sensitive data within your Tags.
 
 ## Resource Filtering
 
-For customers using release 6, the Agent can be configured to exclude a specific Resource from Traces sent by the Agent to the Datadog application. To prevent the submission of specific Resources, use the `ignore_resources` [setting][2]. It is a list containing one or more regular expressions instructing the Agent to filter out Traces by their Resource name.
+For customers using release 6, the Agent can be configured to exclude a specific Resource from Traces sent by the Agent to the Datadog application. To prevent the submission of specific Resources, use the `ignore_resources` [setting][2]. This setting enables the creation of a list containing one or more regular expressions, which instructs the Agent to filter out Traces based on their Resource name.
 
 ## Extending Tracers
 

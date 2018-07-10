@@ -33,13 +33,13 @@ Agent v6 comes bundled with a Graphical User Interface (GUI) by default, which l
 
 Datadog’s Vulnerability Management program includes regular assessments of supporting infrastructure and application components, including active scans of core supporting services. Datadog Security teams perform monthly scans to identify configuration and software vulnerabilities, and track remediation of findings according to Datadog’s Vulnerability Management policy.
 
-Regarding its Container Agent specifically, Datadog performs regular vulnerability static analysis using [clair by CoreOS][4] and [snyk.io][5]. Additionally, Datadog leverages security scanning as part of its releases of the Container Agent to the [Docker Trusted Registry][6], as well as [Red Hat Container Catalog][7]. In addition to Datadog’s internal Vulnerability Management program, Datadog also partners with container security vendors.
+Regarding its Container Agent specifically, Datadog performs regular vulnerability static analysis using [clair by CoreOS][4] and [snyk.io][5]. Additionally, Datadog leverages security scanning as part of its releases of the Container Agent to the [Docker Trusted Registry][6], as well as the [Red Hat Container Catalog][7]. In addition to Datadog’s internal Vulnerability Management program, Datadog also partners with container security vendors.
 
-If you believe you’ve discovered a bug in Datadog’s security, please get in touch at [security@datadoghq.com][8] and we will get back to you within 24 hours, and usually earlier. Our [PGP key][9] is available for download in case you need to encrypt communications with us. We request that you not publicly disclose the issue until we have had a chance to address it.
+If you believe you’ve discovered a bug in Datadog’s security, please get in touch at [security@datadoghq.com][8] and we will get back to you within 24 hours. Our [PGP key][9] is available for download in case you need to encrypt communications with us. We request that you not publicly disclose the issue until we have had a chance to address it.
 
 ## [BETA] Secrets Management
 
-Customers with a requirement to avoid storing secrets in plaintext in the Agent's configuration files can leverage its [secrets management][10] package. This package allows the Agent to call a user-provided executable to handle retrieval or decryption of secrets, which are then loaded in memory by the Agent. Users have the flexibility to design their executable according to their preferred key management service, authentication method, and continuous integration workflow.
+Customers with a requirement to avoid storing secrets in plaintext in the Agent's configuration files can leverage the [secrets management][10] package. This package allows the Agent to call a user-provided executable to handle retrieval or decryption of secrets, which are then loaded in memory by the Agent. Users have the flexibility to design their executable according to their preferred key management service, authentication method, and continuous integration workflow.
 
 ### Further Reading
 
