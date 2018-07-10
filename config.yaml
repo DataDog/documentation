@@ -494,28 +494,16 @@ languages:
         # Trace Search
         - identifier: customnav_tracingnav_trace_search
           name: "Trace Search"
-          url: "tracing/trace_search"
-          weight: 300
+          url: "tracing/search"
+          weight: 30
           parent: menu_references_tracing
-        - identifier: customnav_tracingnav_search
-          name: "Trace Search"
-          url: "tracing/trace_search/search"
-          weight: 310
-          parent: customnav_tracingnav_trace_search
+
+        # Trace Analytics
         - identifier: customnav_tracingnav_graph
           name: "Trace Analytics"
-          url: "tracing/trace_search/analytics"
-          weight: 320
-          parent: customnav_tracingnav_trace_search
-
-        # Trace API
-        - identifier: customnav_tracingnav_api
-          name: "Trace API"
-          url: "api/#tracing"
-          weight: 410
+          url: "tracing/analytics"
+          weight: 35
           parent: menu_references_tracing
-
-
 
         # Getting further
         - identifier: customnav_tracingnav_getting_further
@@ -553,6 +541,13 @@ languages:
           url: "tracing/getting_further/trace_sampling_and_storage"
           weight: 460
           parent: customnav_tracingnav_getting_further
+
+        # Trace API
+        - identifier: customnav_tracingnav_api
+          name: "Trace API"
+          url: "api/#tracing"
+          weight: 50
+          parent: menu_references_tracing
 
         #- identifier: customnav_tracingnav_faq
         #  name: "FAQ"
@@ -1354,28 +1349,16 @@ languages:
         # Trace Search
         - identifier: customnav_tracingnav_trace_search
           name: "Trace Search"
-          url: "tracing/trace_search"
-          weight: 300
+          url: "tracing/search"
+          weight: 30
           parent: menu_references_tracing
-        - identifier: customnav_tracingnav_search
-          name: "Trace Search"
-          url: "tracing/trace_search/search"
-          weight: 310
-          parent: customnav_tracingnav_trace_search
+
+        # Trace Analytics
         - identifier: customnav_tracingnav_graph
           name: "Trace Analytics"
-          url: "tracing/trace_search/analytics"
-          weight: 320
-          parent: customnav_tracingnav_trace_search
-
-        # Trace API
-        - identifier: customnav_tracingnav_api
-          name: "API des Traces"
-          url: "api/#tracing"
-          weight: 410
+          url: "tracing/analytics"
+          weight: 35
           parent: menu_references_tracing
-
-
 
         # Getting further
         - identifier: customnav_tracingnav_getting_further
@@ -1413,6 +1396,13 @@ languages:
           url: "tracing/getting_further/trace_sampling_and_storage"
           weight: 460
           parent: customnav_tracingnav_getting_further
+
+        # Trace API
+        - identifier: customnav_tracingnav_api
+          name: "API des Traces"
+          url: "api/#tracing"
+          weight: 50
+          parent: menu_references_tracing
 
         #- identifier: customnav_tracingnav_faq
         #  name: "FAQ"
