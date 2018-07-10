@@ -9,7 +9,7 @@ further_reading:
   text: Review the main categories of data submitted to Datadog
 ---
 
-This article is part of a **series on data security**.
+This article is part of a [series on data security][0].
 
 The Log Management product supports multiple [environments and formats][1], allowing customers the flexibility to submit to Datadog nearly any data they choose. This article describes the main security guarantees and filtering controls available to users when submitting Logs to Datadog.
 
@@ -33,6 +33,7 @@ In addition to Agent-side filtering, [Processing Pipelines][4] can be configured
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[0]: /security/
 [1]: /logs/log_collection/
 [2]: /logs/log_collection/#filter-logs
 [3]: /logs/log_collection/#scrub-sensitive-data-in-your-logs

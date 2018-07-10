@@ -9,7 +9,7 @@ further_reading:
   text: Review the main categories of data submitted to Datadog
 ---
 
-This article is part of a **series on data security**.
+This article is part of a [series on data security][0].
 
 The APM product supports multiple libraries and includes extensible tooling that allows customers the flexibility to submit nearly any data point they choose. This article describes the main filtering controls available for customers to control what APM data they submit to Datadog.
 
@@ -64,6 +64,7 @@ If a customer requires tailored instrumentation for a specific application, they
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[0]: /security/
 [1]: /tracing/languages/
 [2]: /tracing/setup/#agent-configuration
 [3]: https://github.com/DataDog/dd-trace-java/blob/master/dd-trace-api/src/main/java/datadog/trace/api/interceptor/TraceInterceptor.java

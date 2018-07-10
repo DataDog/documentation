@@ -7,7 +7,7 @@ further_reading:
   text: Review the main categories of data submitted to Datadog
 ---
 
-This article is part of a **series on data security**.
+This article is part of a [series on data security][0].
 
 This article describes additional security considerations that customers might find relevant when using the Datadog product.
 
@@ -35,6 +35,7 @@ Due to their sensitive nature, additional security guarantees are implemented wh
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[0]: /security/
 [1]: /graphing/infrastructure/process/
 [2]: /graphing/infrastructure/process/#process-arguments-scrubbing
 [3]: /integrations/

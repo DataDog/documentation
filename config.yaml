@@ -901,7 +901,7 @@ languages:
           weight: 20
           parent: menu_references_security
         - identifier: customnav_security_tracing
-          name: "Tracing (APM)"
+          name: "APM (Tracing)"
           url: "security/tracing"
           weight: 30
           parent: menu_references_security

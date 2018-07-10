@@ -16,8 +16,6 @@ further_reading:
   text: Additional Security Considerations
 ---
 
-This article is part of a **series on data security**.
-
 Datadog allows customers to submit data in multiple ways, including via the [Agent][1], the [public API][2], and [integrations][3]. This article describes the main categories of data which might be submitted by customers to Datadog as part of the intended use of its product, and highlights scenarios where submitted data may contain personal data.
 
 ## User Personal Data
