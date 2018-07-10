@@ -21,7 +21,7 @@ further_reading:
 
 This article is part of a **series on data security**.
 
-Datadog allows customers to submit data in multiple ways, including via the [agent][1], the [public API][2], and [integrations][3]. This article describes the main categories of data which might be submitted by customers to Datadog as part of the intended use of its product, and highlights scenarios where submitted data may contain personal data.
+Datadog allows customers to submit data in multiple ways, including via the [Agent][1], the [public API][2], and [integrations][3]. This article describes the main categories of data which might be submitted by customers to Datadog as part of the intended use of its product, and highlights scenarios where submitted data may contain personal data.
 
 ## User Personal Data
 
@@ -29,23 +29,23 @@ User Personal Data is required by Datadog to provide and support the service, e.
 
 ## Metadata
 
-Metadata consists primarily of [tags][5], which are typically formatted in the `key:value` (e.g. `env:prod`) format. Metadata enables customer data such as Infrastructure Metrics, APM and Logs to be filtered and grouped. Metadata should not contain personal data as part of the intended use of the service.
+Metadata consist primarily of [tags][5], which are typically formatted in the `key:value` (e.g. `env:prod`) format. Metadata enable customer data such as Infrastructure Metrics, APM and Logs to be filtered and grouped. Metadata should not contain personal data as part of the intended use of the service.
 
 ## Infrastructure Metrics
 
-Infrastructure Metrics consist of time series for given metric names, associated with Metadata, used to populate [graphs][6]. Metric names and time series should not contain personal data as part of the intended use of the service.
+Infrastructure Metrics consist of timeseries for given metric names, associated with Metadata, used to populate [graphs][6]. Metric names and timeseries should not contain personal data as part of the intended use of the service.
 
 ## APM
 
-APM data consists of four levels of granularity: Services, Resources, Traces, and Spans. See [Getting Started with APM][7] for an explanation about each. Services and Resources should not contain personal data as part of the intended use of the service. Customers can leverage certain agent features to restrict personal data before transmitting Traces and Spans to Datadog. See the [APM Security][12] page for more information.
+APM data consists of four levels of granularity: Services, Resources, Traces, and Spans. See [Getting Started with APM][7] for an explanation about each. Services and Resources should not contain personal data as part of the intended use of the service. Customers should leverage certain Agent features to restrict personal data before transmitting Traces and Spans to Datadog. See the [APM Security][12] page for more information.
 
 ## Logs
 
-Logs consist of messages collected [by the agent or by integrations][8], and associated with optional Metadata. Log files are immutable records of computer events about an operating system, application, or user activities, which form an audit trail. These records may be used to assist in detecting security violations, performance problems, and flaws in applications. Customers can leverage certain agent features to restrict personal data before transmitting Logs to Datadog. See the [Logs Security][13] page for more information.
+Logs consist of messages collected [by the Agent or by integrations][8], and associated with optional Metadata. Log files are immutable records of computer events about an operating system, application, or user activities, which form an audit trail. These records may be used to assist in detecting security violations, performance problems, and flaws in applications. Customers should leverage certain Agent features to restrict personal data before transmitting Logs to Datadog. See the [Logs Security][13] page for more information.
 
 ## Processes
 
-[Processes][9] consist of metrics and data from the `proc` filesystem, which acts as an interface to internal data structures in the kernel. Process data may contain the process command (including its path and arguments), the associated username, the ID of the process and its parent, the process state and working directory. Process data may also be associated with optional Metadata. Processes should not contain personal data as part of the intended use of the service. See the [Processes Security][14] section for more information.
+[Processes][9] consist of metrics and data from the `proc` filesystem, which acts as an interface to internal data structures in the kernel. Process data may contain the process command (including its path and arguments), the associated username, the ID of the process and its parent, the process state, and the working directory. Process data may also be associated with optional Metadata. Processes should not contain personal data as part of the intended use of the service. See the [Processes Security][14] section for more information.
 
 ## Monitors and Alerts
 

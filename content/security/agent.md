@@ -12,15 +12,15 @@ further_reading:
 
 This article is part of a **series on data security**.
 
-Customers can send data to the Datadog service by using a locally installed [agent][1] or through our [HTTP API][2]. While use of Datadog does not strictly require use of the Datadog agent, the vast majority of customers will leverage the agent. This article describes the main security capabilities and features available to customers to ensure their environment is secure.
+Customers can send data to the Datadog service by using a locally installed [Agent][1] or through our [HTTP API][2]. While use of Datadog does not strictly require use of the Datadog Agent, the vast majority of customers will leverage the Agent. This article describes the main security capabilities and features available to customers to ensure their environment is secure.
 
 ## Data Protection
 
-The Datadog Agent submits data to Datadog over a TLS-encrypted TCP connection by default. As of version 6, the agent can be configured to enforce TLS 1.2 when connecting to Datadog. Customers who require the use of "strong cryptography", for example, to meet PCI requirements, will need to use Agent v6 and set the `force_tls_12: yes` setting in the agent’s configuration file.
+The Datadog Agent submits data to Datadog over a TLS-encrypted TCP connection by default. As of version 6, the Agent can be configured to enforce TLS 1.2 when connecting to Datadog. Customers who require the use of "strong cryptography", for example, to meet PCI requirements, will need to use Agent v6 and set the `force_tls_12: yes` setting in the Agent’s configuration file.
 
 ## Agent Logs Obfuscation
 
-The Datadog agent generates local logs in order to support [agent troubleshooting][3] as required. As a safety precaution, these local logs are filtered for keywords that could indicate a potential credential (e.g. API key, password and token keywords, etc.), which are then obfuscated before being written to disk.
+The Datadog Agent generates local logs in order to support [Agent troubleshooting][3] as required. As a safety precaution, these local logs are filtered for keywords that could indicate a potential credential (e.g. API key, password and token keywords, etc.), which are then obfuscated before being written to disk.
 
 ## Local HTTP Server
 
@@ -28,7 +28,7 @@ Agent v6 exposes a local HTTP API to ease communication between a running Agent 
 
 ## Agent GUI
 
-Agent v6 comes bundled with a Graphical User Interface (GUI) by default, which launches in your default web browser. The GUI will only be launched if the user launching it has the correct user permissions, including the ability to open the agent’s configuration file. The GUI can only be accessed from the local network interface (`localhost/127.0.0.1`). Finally, the user’s cookies must be enabled, as the GUI generates and saves a token used for authenticating all communications with the GUI server. The GUI can also be disabled altogether if needed.
+Agent v6 comes bundled with a Graphical User Interface (GUI) by default, which launches in your default web browser. The GUI will only be launched if the user launching it has the correct user permissions, including the ability to open the Agent’s configuration file. The GUI can only be accessed from the local network interface (`localhost/127.0.0.1`). Finally, the user’s cookies must be enabled, as the GUI generates and saves a token used for authenticating all communications with the GUI server. The GUI can also be disabled altogether if needed.
 
 ## Agent Security Scans
 
@@ -40,7 +40,7 @@ If you believe you’ve discovered a bug in Datadog’s security, please get in 
 
 ## [BETA] Secrets Management
 
-Customers with a requirement to avoid storing secrets in plaintext in the agent's configuration files can leverage its [secrets management][10] package. This package allows the agent to call a user-provided executable to handle retrieval or decryption of secrets, which are then loaded in memory by the agent. Users have the flexibility to design their executable according to their preferred key management service, authentication method, and continuous integration workflow.
+Customers with a requirement to avoid storing secrets in plaintext in the Agent's configuration files can leverage its [secrets management][10] package. This package allows the Agent to call a user-provided executable to handle retrieval or decryption of secrets, which are then loaded in memory by the Agent. Users have the flexibility to design their executable according to their preferred key management service, authentication method, and continuous integration workflow.
 
 ### Further Reading
 

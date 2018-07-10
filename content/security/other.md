@@ -15,7 +15,7 @@ This article describes additional security considerations that customers might f
 
 ## Process Arguments Obfuscation
 
-For customers using release 6, the agent can be configured to obfuscate [Process][1] commands or arguments sent by the agent to the Datadog application. To mask sensitive sequences within your Process information, use the `custom_sensitive_words` [setting][2]. It is a list containing one or more regular expressions instructing the agent to filter Process information based on a blacklist.
+For customers using release 6, the Agent can be configured to obfuscate [Process][1] commands or arguments sent by the Agent to the Datadog application. To mask sensitive sequences within your Process information, use the `custom_sensitive_words` [setting][2]. It is a list containing one or more regular expressions instructing the Agent to filter Process information based on a blacklist.
 
 Additionally, the following keywords are obfuscated as a baseline:
 

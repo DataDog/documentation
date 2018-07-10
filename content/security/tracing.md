@@ -18,7 +18,7 @@ The APM product supports multiple libraries and includes extensible tooling that
 
 Several filtering mechanisms are enforced as a baseline in an effort to provide sound defaults. In particular:
 
-**Environment variables are not collected by the agent**
+**Environment variables are not collected by the Agent**
 
 **SQL variables are obfuscated by default, even when not using prepared statements**
 
@@ -43,11 +43,11 @@ In addition to this baseline, customers need to review and configure their APM d
 
 ## Tag Filtering
 
-For customers using release 6, the agent can be configured to obfuscate Tags associated with Spans based on the Tag’s name and pattern, and replace it with a user-defined string. To prevent the submission of specific Tags, use the `replace_tags` [setting][2]. It is a list containing one or more groups of parameters that describe how to perform replacements of sensitive data within your Tags.
+For customers using release 6, the Agent can be configured to obfuscate Tags associated with Spans based on the Tag’s name and pattern, and replace it with a user-defined string. To prevent the submission of specific Tags, use the `replace_tags` [setting][2]. It is a list containing one or more groups of parameters that describe how to perform replacements of sensitive data within your Tags.
 
 ## Resource Filtering
 
-For customers using release 6, the agent can be configured to exclude a specific Resource from Traces sent by the agent to the Datadog application. To prevent the submission of specific Resources, use the `ignore_resources` [setting][2]. It is a list containing one or more regular expressions instructing the agent to filter out Traces by their Resource name.
+For customers using release 6, the Agent can be configured to exclude a specific Resource from Traces sent by the Agent to the Datadog application. To prevent the submission of specific Resources, use the `ignore_resources` [setting][2]. It is a list containing one or more regular expressions instructing the Agent to filter out Traces by their Resource name.
 
 ## Extending Tracers
 
@@ -59,7 +59,7 @@ The tracing libraries are designed to be extensible. Customers may consider writ
 
 ## Tailored Instrumentation
 
-If a customer requires tailored instrumentation for a specific application, they should consider relying on the agent-side tracing API to select individual Spans to include in Traces submitted to Datadog. See the [API documentation][6] for additional information.
+If a customer requires tailored instrumentation for a specific application, they should consider relying on the Agent-side tracing API to select individual Spans to include in Traces submitted to Datadog. See the [API documentation][6] for additional information.
 
 ### Further Reading
 
