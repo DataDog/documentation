@@ -225,7 +225,7 @@ Delta value between points for a given metric
 
 ### asap()
 
-The `asap()` function applies the [ASAP algorithm][5] with the same window size for all the metrics in a graph. 
+The `asap()` function applies [ASAP algorithm][5] with the same window size for all the metrics in a graph. 
 
 ### ewma_3()
 
