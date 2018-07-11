@@ -5,7 +5,7 @@ kind: faq
 
 ## Answer
 
-By default, the SQL Server integration only collects [the metrics listed in the documentation page][1]. But you can collect additional metrics from your SQL Server integration by configuring your `sqlserver.yaml` following [the syntax in our example file][2] (these goes under "init_config").
+By default, the SQL Server integration only collects [the metrics listed in the documentation page][1]. But you can collect additional metrics from your SQL Server integration by configuring your `sqlserver.d/conf.yaml` following [the syntax in our example file][2] (these goes under "init_config").
 
 Note that, at this time, our sqlserver check only queries data from the [sys.dm_os_performance_counters][3] table (although you can [use WMI to expose metrics](/integrations/faq/can-i-collect-sql-server-performance-metrics-beyond-what-is-available-in-the-sys-dm-os-performance-counters-table-try-wmi) from other counter tables). So the trick to collecting specific is to find which counter_name and (if appropriate) instance_name correspond to the kind of metric you're interested in collecting. To get a list of what count_names are available in that table in your SQL Server, once you access your server from [powershell's sqlcmd][4], you can run the following or similar query (just know that it gives you a very long list indeed):
 ```
@@ -17,7 +17,7 @@ From there you can pick out the counter_names that are most interesting to you, 
 
 ## Example:
 
-An example of what your sqlserver.yaml might look like if you wanted to collect metrics for the CLR Execution, Queued requests, and Active requests properties is as follows:
+An example of what your `sqlserver.d/conf.yaml` might look like if you wanted to collect metrics for the CLR Execution, Queued requests, and Active requests properties is as follows:
 ```yaml
 init_config:
 
@@ -41,6 +41,6 @@ instances:
 ```
 
 [1]: /integrations/sqlserver/
-[2]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/conf.yaml.example
+[2]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
 [3]: https://msdn.microsoft.com/en-us/library/ms187743.aspx
 [4]: https://msdn.microsoft.com/en-us/library/ms188247.aspx
