@@ -496,14 +496,19 @@ languages:
           weight: 240
           parent: customnav_tracingnav_visualization
 
+        # Watchdog
+        - identifier: customnav_tracingnav_watchdog
+          name: "Watchdog"
+          url: "tracing/watchdog"
+          weight: 40
+          parent: menu_references_tracing
+
         # Trace API
         - identifier: customnav_tracingnav_api
           name: "Trace API"
           url: "api/#tracing"
-          weight: 410
+          weight: 50
           parent: menu_references_tracing
-
-
 
         # Getting further
         - identifier: customnav_tracingnav_getting_further
@@ -1349,14 +1354,20 @@ languages:
           weight: 240
           parent: customnav_tracingnav_visualization
 
+
+        # Watchdog
+        - identifier: customnav_tracingnav_watchdog
+          name: "Watchdog"
+          url: "tracing/watchdog"
+          weight: 40
+          parent: menu_references_tracing
+
         # Trace API
         - identifier: customnav_tracingnav_api
           name: "API des Traces"
           url: "api/#tracing"
-          weight: 410
+          weight: 50
           parent: menu_references_tracing
-
-
 
         # Getting further
         - identifier: customnav_tracingnav_getting_further
