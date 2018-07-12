@@ -206,7 +206,7 @@ languages:
         - identifier: customnav_graphingnav_dashboards
           name: "Dashboards"
           url: "graphing/dashboards/"
-          weight: 30
+          weight: 10
           parent: menu_references_graphing
         # Graphing dashboard subnav
         - identifier: customnav_graphingnav_screenboard
@@ -234,6 +234,19 @@ languages:
           url: "graphing/dashboards/widgets/"
           weight: 140
           parent: customnav_graphingnav_dashboards
+
+        # Metrics
+        - identifier: customnav_graphingnav_metrics
+          name: "Metrics"
+          url: "graphing/metrics/distributions"
+          weight: 20
+          parent: menu_references_graphing
+        - identifier: customnav_graphingnav_distribution
+          name: "Distributions"
+          url: "graphing/metrics/distributions"
+          weight: 210
+          parent: customnav_graphingnav_metrics
+
         - identifier: customnav_graphingnav_notebooks
           name: "Notebooks"
           url: "graphing/notebooks/"
@@ -244,7 +257,6 @@ languages:
           url: "graphing/event_stream/"
           weight: 50
           parent: menu_references_graphing
-
         - identifier: customnav_graphingnav_infrastructure
           name: "Infrastructure"
           url: "graphing/infrastructure/"
@@ -490,20 +502,33 @@ languages:
           url: "tracing/visualization/trace"
           weight: 230
           parent: customnav_tracingnav_visualization
-        - identifier: customnav_tracingnav_traces
-          name: "Traces list"
-          url: "tracing/visualization/trace_search/"
-          weight: 240
-          parent: customnav_tracingnav_visualization
+        
+        # Trace Search
+        - identifier: customnav_tracingnav_trace_search
+          name: "Trace Search"
+          url: "tracing/search"
+          weight: 30
+          parent: menu_references_tracing
+        # Trace analytics
+        - identifier: customnav_tracingnav_graph
+          name: "Trace Analytics"
+          url: "tracing/analytics"
+          weight: 35
+          parent: menu_references_tracing
+
+        # Watchdog
+        - identifier: customnav_tracingnav_watchdog
+          name: "Watchdog"
+          url: "tracing/watchdog"
+          weight: 40
+          parent: menu_references_tracing
 
         # Trace API
         - identifier: customnav_tracingnav_api
           name: "Trace API"
           url: "api/#tracing"
-          weight: 410
+          weight: 50
           parent: menu_references_tracing
-
-
 
         # Getting further
         - identifier: customnav_tracingnav_getting_further
@@ -541,6 +566,18 @@ languages:
           url: "tracing/getting_further/trace_sampling_and_storage"
           weight: 460
           parent: customnav_tracingnav_getting_further
+        - identifier: customnav_tracingnav_apm_event
+          name: "APM events"
+          url: "tracing/getting_further/apm_events"
+          weight: 470
+          parent: customnav_tracingnav_getting_further
+
+        # Trace API
+        - identifier: customnav_tracingnav_api
+          name: "Trace API"
+          url: "api/#tracing"
+          weight: 50
+          parent: menu_references_tracing
 
         #- identifier: customnav_tracingnav_faq
         #  name: "FAQ"
@@ -605,6 +642,11 @@ languages:
           name: "Search"
           url: "logs/explore/"
           weight: 30
+          parent: menu_references_logs
+        - identifier: customnav_lognav_live_tail
+          name: "Live Tail"
+          url: "logs/live_tail/"
+          weight: 32
           parent: menu_references_logs
         - identifier: customnav_lognav_graph
           name: "Log Graph"
@@ -671,16 +713,16 @@ languages:
           url: "monitors/monitor_types/log"
           weight: 90
           parent: menu_references_logs
-        #- identifier: customnav_lognav_archives
-        #  name: "Archives"
-        #  url: "logs/s3"
-        #  weight: 100
-        #  parent: menu_references_logs
-        #- identifier: customnav_lognav_archives_s3
-        #  name: "AWS S3"
-        #  url: "logs/s3"
-        #  weight: 1010
-        #  parent: customnav_lognav_archives
+        - identifier: customnav_lognav_archives
+          name: "Archives"
+          url: "logs/s3"
+          weight: 100
+          parent: menu_references_logs
+        - identifier: customnav_lognav_archives_s3
+          name: "AWS S3"
+          url: "logs/s3"
+          weight: 1010
+          parent: customnav_lognav_archives
 
         #- identifier: customnav_lognav_faq
         #  name: "FAQ"
@@ -1054,7 +1096,7 @@ languages:
         - identifier: customnav_graphingnav_dashboards
           name: "Dashboards"
           url: "graphing/dashboards/"
-          weight: 30
+          weight: 10
           parent: menu_references_graphing
         # Graphing dashboard subnav
         - identifier: customnav_graphingnav_screenboard
@@ -1082,6 +1124,19 @@ languages:
           url: "graphing/dashboards/widgets/"
           weight: 140
           parent: customnav_graphingnav_dashboards
+        
+        # Metrics
+        - identifier: customnav_graphingnav_metrics
+          name: "Metrics"
+          url: "graphing/metrics/distributions"
+          weight: 20
+          parent: menu_references_graphing
+        - identifier: customnav_graphingnav_distribution
+          name: "Distributions"
+          url: "graphing/metrics/distributions"
+          weight: 210
+          parent: customnav_graphingnav_metrics
+
         - identifier: customnav_graphingnav_notebooks
           name: "Notebooks"
           url: "graphing/notebooks/"
@@ -1338,20 +1393,33 @@ languages:
           url: "tracing/visualization/trace"
           weight: 230
           parent: customnav_tracingnav_visualization
-        - identifier: customnav_tracingnav_traces
-          name: "Liste des Traces"
-          url: "tracing/visualization/trace_search/"
-          weight: 240
-          parent: customnav_tracingnav_visualization
+        
+        # Trace Search
+        - identifier: customnav_tracingnav_trace_search
+          name: "Trace Search"
+          url: "tracing/search"
+          weight: 30
+          parent: menu_references_tracing
+        # Trace analytics
+        - identifier: customnav_tracingnav_graph
+          name: "Trace Analytics"
+          url: "tracing/analytics"
+          weight: 35
+          parent: menu_references_tracing
+          
+        # Watchdog
+        - identifier: customnav_tracingnav_watchdog
+          name: "Watchdog"
+          url: "tracing/watchdog"
+          weight: 40
+          parent: menu_references_tracing
 
         # Trace API
         - identifier: customnav_tracingnav_api
           name: "API des Traces"
           url: "api/#tracing"
-          weight: 410
+          weight: 50
           parent: menu_references_tracing
-
-
 
         # Getting further
         - identifier: customnav_tracingnav_getting_further
@@ -1389,6 +1457,18 @@ languages:
           url: "tracing/getting_further/trace_sampling_and_storage"
           weight: 460
           parent: customnav_tracingnav_getting_further
+        - identifier: customnav_tracingnav_apm_event
+          name: "Évenements APM"
+          url: "tracing/getting_further/apm_events"
+          weight: 470
+          parent: customnav_tracingnav_getting_further
+
+        # Trace API
+        - identifier: customnav_tracingnav_api
+          name: "API des Traces"
+          url: "api/#tracing"
+          weight: 50
+          parent: menu_references_tracing
 
         #- identifier: customnav_tracingnav_faq
         #  name: "FAQ"
@@ -1448,11 +1528,17 @@ languages:
           url: "integrations/#cat-log-collection"
           weight: 260
           parent: customnav_lognav_collection
+        
         # LOGS - Subnav start
         - identifier: customnav_lognav_explore
           name: "Search"
           url: "logs/explore/"
           weight: 30
+          parent: menu_references_logs
+        - identifier: customnav_lognav_live_tail
+          name: "Live Tail"
+          url: "logs/live_tail/"
+          weight: 32
           parent: menu_references_logs
         - identifier: customnav_lognav_graph
           name: "Log Graph"
