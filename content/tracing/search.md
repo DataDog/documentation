@@ -1,6 +1,9 @@
 ---
 title: Trace Search
 kind: Documentation
+description: "Global search of all your traces with tags"
+aliases:
+  - tracing/trace_search_analytics/analytics
 further_reading:
 - link: "tracing/setup/"
   tag: "Documentation"
@@ -17,22 +20,18 @@ further_reading:
 - link: "tracing/visualization/trace"
   tag: "Documentation"
   text: Understand how to read a Datadog Trace
+- link: "tracing/analytics"
+  tag: "Documentation"
+  text: Analytics on your APM data at infinite cardinality
 ---
 
 ## Overview
 
-[Trace Search][7] is your home base for troubleshooting and exploration of all or your Traces. Filter application performance metrics and traces by user-defined tags, allowing deep exploration of the web requests flowing through your service.
-Trace Search & Analytics can be enabled per APM service and per host. A service on which it’s enabled exposes all its APM Events to Datadog.
-
-##### What are APM Events?
-
-APM Events are generated from traces, and one event is logged per web request. 
-
-Any tagging and filtering performed on a trace via Datadog’s Client APIs  influences the event extracted by the Datadog Agent. This means APM Events can be enriched with custom metadata, like `customer`, `service`, `country`, `billing plan`, `request duration`, and `product` type. You then can [filter](#search) and query on this metadata in the [Trace Search & Analytics UI][7].
-
-##### Trace Search UI
-
 {{< img src="tracing/search/search_view.png" alt="Explore view with comments" responsive="true" popup="true">}}
+
+Use Trace Search & Analytics to filter application performance metrics and [APM events][8] by user-defined tags. It allows deep exploration of the web requests flowing through your service.
+
+Trace Search & Analytics can be enabled per APM service and per host. A service on which it is enabled exposes all its APM Events to Datadog.
 
 In this view you can:
 
@@ -142,6 +141,12 @@ Sort the list by clicking the **date** column header.
 
 {{< img src="tracing/search/trace_list.png" alt="Trace list" responsive="true" popup="true" style="width:80%;">}}
 
+### Complete traces
+
+{{< img src="tracing/search/complete_trace.png" alt="Trace list" responsive="true" popup="true" style="width:40%;">}}
+
+If checked, [APM Events][8] listed in the trace stream have a trace associated to it so you can display the full trace. 
+
 ### Displaying a full Trace
 
 Click on any trace to see more details about it:
@@ -217,4 +222,5 @@ All measure have their own unit that is then used for display in the Trace searc
 [4]: /graphing/infrastructure/
 [5]: /integrations/
 [6]: /getting_started/tagging/#tags-best-practices
-[7]: https://app.datadoghq.com/apm/new_search
+[7]: https://app.datadoghq.com/apm/search
+[8]: /tracing/apm_events

@@ -1,6 +1,9 @@
 ---
 title: Trace Analytics
 kind: Documentation
+description: "Analytics on your APM data at infinite cardinality"
+aliases:
+  - tracing/trace_search_analytics/analytics
 further_reading:
 - link: "tracing/setup/"
   tag: "Documentation"
@@ -17,6 +20,9 @@ further_reading:
 - link: "tracing/visualization/trace"
   tag: "Documentation"
   text: Understand how to read a Datadog Trace
+- link: "tracing/search"
+  tag: "Documentation"
+  text: Global search of all your traces with tags
 ---
 
 Switch between the Trace search and the Trace Analytics modes by clicking on the *Trace Mode* button:
@@ -81,7 +87,7 @@ The evolution of the **top 5 URL Paths** according to the number of **unique Cli
 
 Select or click on a section of the graph to either zoom in the graph or see the list of traces corresponding to your selection:
 
-{{< img src="tracing/analytics/view_traces.gif" alt="view Traces" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="tracing/analytics/view_traces.png" alt="view Traces" responsive="true" popup="true" style="width:40%;">}}
 
 ## Export
 
@@ -90,7 +96,7 @@ Select or click on a section of the graph to either zoom in the graph or see the
 Export your Trace analytic: 
 
 * To create a new [apm monitor][4]:  
-    The query of your Trace Analytic is used to create the apm monitor query.
+    This feature is not available yet.
 * To an existing [Timeboard][5]:  
     This functionality is in beta, [contact our support team][6] to activate it for your organization.
 
@@ -99,6 +105,8 @@ Export your Trace analytic:
 **This functionality is still in beta, [contact our support team][6] to activate it for your organization.**
 
 Export [Trace Analytics][7] from the Trace search or build them directly in your [Dashboard][8] alongside metrics and logs.
+
+[Learn more about the timeseries widget][]
 
 ## Further Reading
 
@@ -112,3 +120,4 @@ Export [Trace Analytics][7] from the Trace search or build them directly in your
 [6]: /help
 [7]: /graphing/dashboards/widgets/#timeseries
 [8]: /graphing/dashboards
+[9]: /graphing/dashboards/widgets/#timeseries
