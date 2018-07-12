@@ -4,6 +4,7 @@
   "description": "Corpweb built on HUGO",
   "private": true,
   "scripts": {
+    "preinstall": "bash src/build/preinstall.sh",
     "build": "gulp",
     "jshint": "gulp jshint",
     "jscs": "jscs gulpfile.js src/scripts/*.js"
