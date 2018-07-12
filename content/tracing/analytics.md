@@ -112,8 +112,8 @@ Export [Trace Analytics][7] from the Trace search or build them directly in your
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/analytics/search/#measures
-[2]: /tracing/analytics/search/#facets
+[1]: /tracing/search/#measures
+[2]: /tracing/search/#facets
 [3]: /getting_started/tagging
 [4]: /monitors/monitor_types/apm
 [5]: /graphing/dashboards/timeboard

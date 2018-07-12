@@ -4,6 +4,7 @@ kind: Documentation
 description: "Global search of all your traces with tags"
 aliases:
   - tracing/trace_search_analytics/analytics
+  - tracing/trace_search_analytics/
 further_reading:
 - link: "tracing/setup/"
   tag: "Documentation"
@@ -223,4 +224,4 @@ All measure have their own unit that is then used for display in the Trace searc
 [5]: /integrations/
 [6]: /getting_started/tagging/#tags-best-practices
 [7]: https://app.datadoghq.com/apm/search
-[8]: /tracing/apm_events
+[8]: /tracing/getting_further/apm_events
