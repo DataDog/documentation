@@ -502,6 +502,7 @@ languages:
           name: "Trace Analytics"
           url: "tracing/analytics"
           weight: 35
+          parent: menu_references_tracing
 
         # Watchdog
         - identifier: customnav_tracingnav_watchdog
@@ -1379,7 +1380,8 @@ languages:
           name: "Trace Analytics"
           url: "tracing/analytics"
           weight: 35
-
+          parent: menu_references_tracing
+          
         # Watchdog
         - identifier: customnav_tracingnav_watchdog
           name: "Watchdog"
