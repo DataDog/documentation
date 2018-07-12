@@ -206,7 +206,7 @@ languages:
         - identifier: customnav_graphingnav_dashboards
           name: "Dashboards"
           url: "graphing/dashboards/"
-          weight: 30
+          weight: 10
           parent: menu_references_graphing
         # Graphing dashboard subnav
         - identifier: customnav_graphingnav_screenboard
@@ -234,6 +234,19 @@ languages:
           url: "graphing/dashboards/widgets/"
           weight: 140
           parent: customnav_graphingnav_dashboards
+
+        # Metrics
+        - identifier: customnav_graphingnav_metrics
+          name: "Metrics"
+          url: "graphing/metrics/distributions"
+          weight: 20
+          parent: menu_references_graphing
+        - identifier: customnav_graphingnav_distribution
+          name: "Distributions"
+          url: "graphing/metrics/distributions"
+          weight: 210
+          parent: customnav_graphingnav_metrics
+
         - identifier: customnav_graphingnav_notebooks
           name: "Notebooks"
           url: "graphing/notebooks/"
@@ -244,7 +257,6 @@ languages:
           url: "graphing/event_stream/"
           weight: 50
           parent: menu_references_graphing
-
         - identifier: customnav_graphingnav_infrastructure
           name: "Infrastructure"
           url: "graphing/infrastructure/"
@@ -1064,7 +1076,7 @@ languages:
         - identifier: customnav_graphingnav_dashboards
           name: "Dashboards"
           url: "graphing/dashboards/"
-          weight: 30
+          weight: 10
           parent: menu_references_graphing
         # Graphing dashboard subnav
         - identifier: customnav_graphingnav_screenboard
@@ -1092,6 +1104,19 @@ languages:
           url: "graphing/dashboards/widgets/"
           weight: 140
           parent: customnav_graphingnav_dashboards
+        
+        # Metrics
+        - identifier: customnav_graphingnav_metrics
+          name: "Metrics"
+          url: "graphing/metrics/distributions"
+          weight: 20
+          parent: menu_references_graphing
+        - identifier: customnav_graphingnav_distribution
+          name: "Distributions"
+          url: "graphing/metrics/distributions"
+          weight: 210
+          parent: customnav_graphingnav_metrics
+
         - identifier: customnav_graphingnav_notebooks
           name: "Notebooks"
           url: "graphing/notebooks/"
