@@ -20,6 +20,8 @@ further_reading:
   text: Understand how to read a Datadog Trace
 ---
 
+{{< vimeo 278057125 >}}
+
 ## Overview
 
 Watchdog is an algorithmic feature that automatically detects potential application and infrastructure issues. Watchdog observes trends and patterns in application metrics — like error rate, request rate, and latency — and unexpected behavior. Watchdog evaluates all services and resources without the need to configure a monitor for each service.

@@ -26,9 +26,9 @@ further_reading:
   text: Analytics on your APM data at infinite cardinality
 ---
 
-## Overview
+{{< vimeo 278748711 >}}
 
-{{< img src="tracing/search/search_view.png" alt="Explore view with comments" responsive="true" popup="true">}}
+## Overview
 
 Use Trace Search & Analytics to filter application performance metrics and [APM events][8] by user-defined tags. It allows deep exploration of the web requests flowing through your service.
 
