@@ -219,7 +219,7 @@ All measure have their own unit that is then used for display in the Trace searc
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: /tracing/graph
+[2]: /tracing/analytics
 [4]: /graphing/infrastructure/
 [5]: /integrations/
 [6]: /getting_started/tagging/#tags-best-practices
