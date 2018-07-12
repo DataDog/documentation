@@ -502,11 +502,19 @@ languages:
           url: "tracing/visualization/trace"
           weight: 230
           parent: customnav_tracingnav_visualization
-        - identifier: customnav_tracingnav_traces
-          name: "Traces list"
-          url: "tracing/visualization/trace_search/"
-          weight: 240
-          parent: customnav_tracingnav_visualization
+        
+        # Trace Search
+        - identifier: customnav_tracingnav_trace_search
+          name: "Trace Search"
+          url: "tracing/search"
+          weight: 30
+          parent: menu_references_tracing
+        # Trace analytics
+        - identifier: customnav_tracingnav_graph
+          name: "Trace Analytics"
+          url: "tracing/analytics"
+          weight: 35
+          parent: menu_references_tracing
 
         # Watchdog
         - identifier: customnav_tracingnav_watchdog
@@ -558,6 +566,18 @@ languages:
           url: "tracing/getting_further/trace_sampling_and_storage"
           weight: 460
           parent: customnav_tracingnav_getting_further
+        - identifier: customnav_tracingnav_apm_event
+          name: "APM events"
+          url: "tracing/getting_further/apm_events"
+          weight: 470
+          parent: customnav_tracingnav_getting_further
+
+        # Trace API
+        - identifier: customnav_tracingnav_api
+          name: "Trace API"
+          url: "api/#tracing"
+          weight: 50
+          parent: menu_references_tracing
 
         #- identifier: customnav_tracingnav_faq
         #  name: "FAQ"
@@ -1373,13 +1393,20 @@ languages:
           url: "tracing/visualization/trace"
           weight: 230
           parent: customnav_tracingnav_visualization
-        - identifier: customnav_tracingnav_traces
-          name: "Liste des Traces"
-          url: "tracing/visualization/trace_search/"
-          weight: 240
-          parent: customnav_tracingnav_visualization
-
-
+        
+        # Trace Search
+        - identifier: customnav_tracingnav_trace_search
+          name: "Trace Search"
+          url: "tracing/search"
+          weight: 30
+          parent: menu_references_tracing
+        # Trace analytics
+        - identifier: customnav_tracingnav_graph
+          name: "Trace Analytics"
+          url: "tracing/analytics"
+          weight: 35
+          parent: menu_references_tracing
+          
         # Watchdog
         - identifier: customnav_tracingnav_watchdog
           name: "Watchdog"
@@ -1430,6 +1457,18 @@ languages:
           url: "tracing/getting_further/trace_sampling_and_storage"
           weight: 460
           parent: customnav_tracingnav_getting_further
+        - identifier: customnav_tracingnav_apm_event
+          name: "Évenements APM"
+          url: "tracing/getting_further/apm_events"
+          weight: 470
+          parent: customnav_tracingnav_getting_further
+
+        # Trace API
+        - identifier: customnav_tracingnav_api
+          name: "API des Traces"
+          url: "api/#tracing"
+          weight: 50
+          parent: menu_references_tracing
 
         #- identifier: customnav_tracingnav_faq
         #  name: "FAQ"
@@ -1489,6 +1528,7 @@ languages:
           url: "integrations/#cat-log-collection"
           weight: 260
           parent: customnav_lognav_collection
+        
         # LOGS - Subnav start
         - identifier: customnav_lognav_explore
           name: "Search"
