@@ -502,6 +502,19 @@ languages:
           name: "Trace Analytics"
           url: "tracing/analytics"
           weight: 35
+
+        # Watchdog
+        - identifier: customnav_tracingnav_watchdog
+          name: "Watchdog"
+          url: "tracing/watchdog"
+          weight: 40
+          parent: menu_references_tracing
+
+        # Trace API
+        - identifier: customnav_tracingnav_api
+          name: "Trace API"
+          url: "api/#tracing"
+          weight: 50
           parent: menu_references_tracing
 
         # Getting further
@@ -617,6 +630,11 @@ languages:
           url: "logs/explore/"
           weight: 30
           parent: menu_references_logs
+        - identifier: customnav_lognav_live_tail
+          name: "Live Tail"
+          url: "logs/live_tail/"
+          weight: 32
+          parent: menu_references_logs
         - identifier: customnav_lognav_graph
           name: "Log Graph"
           url: "logs/graph/"
@@ -682,16 +700,16 @@ languages:
           url: "monitors/monitor_types/log"
           weight: 90
           parent: menu_references_logs
-        #- identifier: customnav_lognav_archives
-        #  name: "Archives"
-        #  url: "logs/s3"
-        #  weight: 100
-        #  parent: menu_references_logs
-        #- identifier: customnav_lognav_archives_s3
-        #  name: "AWS S3"
-        #  url: "logs/s3"
-        #  weight: 1010
-        #  parent: customnav_lognav_archives
+        - identifier: customnav_lognav_archives
+          name: "Archives"
+          url: "logs/s3"
+          weight: 100
+          parent: menu_references_logs
+        - identifier: customnav_lognav_archives_s3
+          name: "AWS S3"
+          url: "logs/s3"
+          weight: 1010
+          parent: customnav_lognav_archives
 
         #- identifier: customnav_lognav_faq
         #  name: "FAQ"
@@ -1361,6 +1379,19 @@ languages:
           name: "Trace Analytics"
           url: "tracing/analytics"
           weight: 35
+
+        # Watchdog
+        - identifier: customnav_tracingnav_watchdog
+          name: "Watchdog"
+          url: "tracing/watchdog"
+          weight: 40
+          parent: menu_references_tracing
+
+        # Trace API
+        - identifier: customnav_tracingnav_api
+          name: "API des Traces"
+          url: "api/#tracing"
+          weight: 50
           parent: menu_references_tracing
 
         # Getting further
@@ -1476,6 +1507,11 @@ languages:
           name: "Search"
           url: "logs/explore/"
           weight: 30
+          parent: menu_references_logs
+        - identifier: customnav_lognav_live_tail
+          name: "Live Tail"
+          url: "logs/live_tail/"
+          weight: 32
           parent: menu_references_logs
         - identifier: customnav_lognav_graph
           name: "Log Graph"
