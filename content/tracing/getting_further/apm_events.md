@@ -12,15 +12,15 @@ further_reading:
 
 ## What are APM Events?
 
-An APM event is generated every time a trace is generated, it correspond to all the metadata of the trace plus the [top span][3] of the trace. 
+An APM event is generated every time a trace is generated. It corresponds to all the metadata of the trace, plus the [top span][3] of the trace.
 
-Why APM events are not just trace? because traces [get sampled][4] and APM event don't, and we only keep the top span information for the APM event, not the full trace.
+Why aren't APM events just traces? Because traces [get sampled][4] and APM events don't, and we only keep the top span information for the APM event, not the full trace.
 
 APM Events can be enriched with custom metadata, like `customer`, `service`, `country`, `billing plan`, `request duration`, and `product` type.  You can then [filter][1] and query on this metadata in the [Trace Search & Analytics UI][2].
 
 ## Enriching your APM events
 
-To add some tags to your APM events add tags in your HTTP middleware in order to attach them to the first span. For example, in a Rails middleware you would do:
+To add some tags to your APM events, add tags in your HTTP middleware in order to attach them to the first span. For example, in Rails you would do:
 
 ```ruby
 class Middleware

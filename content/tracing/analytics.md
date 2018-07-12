@@ -33,7 +33,7 @@ Switch between the Trace search and the Trace Analytics modes by clicking on the
 
 Use the query to control what's displayed in your Trace Analytic:
 
-1. Choose a [Measure][1] or [Facet][2] to Analytic. [Measure][1] lets you choose the aggregation function whereas [Facet][2] displays the unique count.
+1. Choose a [Measure][1] or [Facet][2] to analyze. [Measure][1] lets you choose the aggregation function whereas [Facet][2] displays the unique count.
     
     {{< img src="tracing/analytics/choose_measure_facet.png" alt="choose measure facet" responsive="true" popup="true" style="width:50%;">}}
 
@@ -45,7 +45,7 @@ Use the query to control what's displayed in your Trace Analytic:
 
     {{< img src="tracing/analytics/split_by.png" alt="split by" responsive="true" popup="true" style="width:50%;">}}
 
-4. Choose to display either the *X* **top** or **bottom** values according to the selected [measure][1].
+4. Choose to display either the *X* **top** or **bottom** values according to the selected [Measure][1].
     
     {{< img src="tracing/analytics/top_bottom_button.png" alt="top bottom button" responsive="true" popup="true" style="width:20%;">}}
     
@@ -67,7 +67,7 @@ Available visualizations:
 
 ### Timeseries
 
-Visualize the evolution of a single [measure][1] (or a [facet][2] unique count of values) over a selected time frame, and (optionally) split by an available [facet][2].
+Visualize the evolution of a single [Measure][1] (or a [Facet][2] unique count of values) over a selected time frame, and (optionally) split by an available [Facet][2].
 
 The following timeseries Trace Analytic shows:
 The evolution of the **pc99** **duration** by steps of **5min** for each **Service** 
@@ -76,7 +76,7 @@ The evolution of the **pc99** **duration** by steps of **5min** for each **Servi
 
 ### Top List 
 
-Visualize the top values from a [facet][2] according to the chosen [measure][1]:
+Visualize the top values from a [Facet][2] according to the chosen [Measure][1]:
 
 The following Top List Trace Analytic shows:
 The top **pc99** **duration** of **Service** 

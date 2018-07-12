@@ -38,7 +38,7 @@ In this view you can:
 
 * [Interact with the Time range](#time-range)
 * [Display lists of Traces](#trace-stream)
-* [Use facets to filter your Trace Stream](#facets)
+* [Use Facets to filter your Trace Stream](#facets)
 * [Enter search queries](#search-bar)
 
 ## Search bar
@@ -51,9 +51,9 @@ A query is composed of *terms* and *operators*.
 
 There are two types of *terms*:
 
-* A [**facet**](#facets)
+* A [**Facet**](#facets)
 
-* A [**tag**](#tags)
+* A [**Tag**](#tags)
 
 To combine multiple *terms* into a complex query, use any of the following boolean operators:
 
@@ -90,8 +90,8 @@ If your tags don't follow [tags best practices][6] and don't use the `key:value`
 
 To perform a multi-character wildcard search, use the `*` symbol as follows:
 
-*  `service:web*`  matches every traces that has a service starting by `web`.
-*  `@url:data*`  matches every traces that has a `url` starting by `data`.
+*  `service:web*`  matches every trace that has a services starting with `web`
+*  `@url:data*`  matches every trace that has a `url` starting by `data`.
 
 ### Numerical values
 
@@ -99,7 +99,7 @@ Use `<`,`>`, `<=`, or `>=` to perform a search on numerical attributes. For inst
 
 `@http.response_time:>100`
 
-It is also possible to search for numerical attribute within a specific range. For instance, retrieve all your 4xx errors with:
+It is also possible to search for numerical attributes within a specific range. For instance, retrieve all your 4xx errors with:
 
 `@http.status_code:[400 TO 499]`
 
@@ -116,14 +116,14 @@ For instance, to search traces that contain `user=12345` in their `url` the foll
 
 `@url:*user\=JaneDoe`
 
-The same logic must be applied to spaces within trace attributes. It is not recommended to have spaces in trace attributes but in such case, spaces require escaping.
-If an attribute was called `user.first name`, perform a search on this attribute by escaping the space:
+The same logic must be applied to spaces within trace attributes. It is not recommended to have spaces in trace attributes but in such cases, spaces require escaping.
+If an attribute is called `user.first name`, perform a search on this attribute by escaping the space:
 
 `@user.first\ name:myvalue`
 
 ### Saved Searches
 
-Don't lose time building the same views everyday. Saved searches contain your search query, columns and time horizon. They are then available in the search bar thanks to the auto-complete matching whether the search name or query.
+Don't lose time building the same views everyday. Saved searches contain your search query, columns, and time horizon. They are then available in the search bar thanks to the auto-complete matching whether the search name or query.
 
 {{< img src="tracing/search/saved_search.png" alt="Saved Search" responsive="true" popup="true" style="width:80%;">}}
 
@@ -146,7 +146,7 @@ Sort the list by clicking the **date** column header.
 
 {{< img src="tracing/search/complete_trace.png" alt="Trace list" responsive="true" popup="true" style="width:40%;">}}
 
-If checked, [APM Events][8] listed in the trace stream have a trace associated to it so you can display the full trace. 
+If checked, [APM Events][8] listed in the trace stream have a trace associated to them so you can display the full trace.
 
 ### Displaying a full Trace
 
@@ -156,7 +156,7 @@ Click on any trace to see more details about it:
 
 ### Columns
 
-To add more Trace details to the list, click the **Columns** button and select any facets you want to see:
+To add more Trace details to the list, click the **Columns** button and select any Facets you want to see:
 
 {{< img src="tracing/search/trace_list_with_column.png" alt="Trace list with columns" responsive="true" popup="true" style="width:80%;">}}
 
@@ -177,9 +177,9 @@ Choose to display one, three, or ten lines from your traces. 3 and 10 lines disp
 
 ## Facets
 
-A facet displays all the distinct values of an attribute or a tag as well as provides some basic analytics such as the amount of traces represented. This is also a switch to easily filter your data.
+A Facet displays all the distinct values of an attribute or a tag as well as provides some basic analytics such as the amount of traces represented. This is also a switch to easily filter your data.
 
-Facets allow you to pivot or filter your datasets based on a given attribute. Examples facets may include users, services, etc...
+Facets allow you to pivot or filter your datasets based on a given attribute. Examples Facets may include users, services, etc...
 
 {{< img src="tracing/search/facets_demo.png" alt="Facets demo" responsive="true" popup="true" style="width:80%;">}}
 
@@ -193,7 +193,7 @@ Once this is done, the value of this attribute is stored **for all new traces** 
 
 ### Facet Panel
 
-Use facets to easily filters on your Traces. The search bar and url automatically reflect your selections.
+Use Facets to easily filters on your Traces. The search bar and url automatically reflect your selections.
 
 {{< img src="tracing/search/facet_panel.png" alt="Facet panel" responsive="true" popup="true" style="width:80%;">}}
 
