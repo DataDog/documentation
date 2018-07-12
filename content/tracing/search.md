@@ -30,8 +30,6 @@ further_reading:
 
 ## Overview
 
-{{< img src="tracing/search/search_view.png" alt="Explore view with comments" responsive="true" popup="true">}}
-
 Use Trace Search & Analytics to filter application performance metrics and [APM events][8] by user-defined tags. It allows deep exploration of the web requests flowing through your service.
 
 Trace Search & Analytics can be enabled per APM service and per host. A service on which it is enabled exposes all its APM Events to Datadog.
