@@ -70,7 +70,7 @@ Available visualizations:
 Visualize the evolution of a single [measure][1] (or a [facet][2] unique count of values) over a selected time frame, and (optionally) split by an available [facet][2].
 
 The following timeseries Trace Analytic shows:
-The evolution of the **top 5 URL Paths** according to the number of **unique Client IPs** over the last month.
+The evolution of the **pc99** **duration** by steps of **5min** for each **Service** 
 
 {{< img src="tracing/analytics/timeserie_example.png" alt="timeserie example" responsive="true" popup="true" style="width:90%;">}}
 
@@ -79,7 +79,7 @@ The evolution of the **top 5 URL Paths** according to the number of **unique Cli
 Visualize the top values from a [facet][2] according to the chosen [measure][1]:
 
 The following Top List Trace Analytic shows:
-The evolution of the **top 5 URL Paths** according to the number of **unique Client IPs** over the last month.
+The top **pc99** **duration** of **Service** 
 
 {{< img src="tracing/analytics/top_list_example.png" alt="top list example" responsive="true" popup="true" style="width:90%;">}}
 
@@ -95,7 +95,7 @@ Select or click on a section of the graph to either zoom in the graph or see the
 
 Export your Trace analytic: 
 
-* To create a new [apm monitor][4]:  
+* To create a new [APM monitor][4]:  
     This feature is not available yet.
 * To an existing [Timeboard][5]:  
     This functionality is in beta, [contact our support team][6] to activate it for your organization.
@@ -106,7 +106,7 @@ Export your Trace analytic:
 
 Export [Trace Analytics][7] from the Trace search or build them directly in your [Dashboard][8] alongside metrics and logs.
 
-[Learn more about the timeseries widget][]
+[Learn more about the timeseries widget][9]
 
 ## Further Reading
 
