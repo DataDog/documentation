@@ -151,15 +151,15 @@ test_live_static:
   only:
     - master
 
-index_algolia:
-  <<: *base_template
-  stage: post-deploy
-  environment: "live"
-  script:
-    - pull_artifact_from_s3
-    - index_algolia
-  only:
-    - master
+#index_algolia:
+#  <<: *base_template
+#  stage: post-deploy
+#  environment: "live"
+#  script:
+#    - pull_artifact_from_s3
+#    - index_algolia
+#  only:
+#    - master
 
 manage_translations:on-schedule:
   <<: *base_template
