@@ -26,6 +26,8 @@ further_reading:
   text: Analytics on your APM data at infinite cardinality
 ---
 
+{{< vimeo 278748711 >}}
+
 ## Overview
 
 {{< img src="tracing/search/search_view.png" alt="Explore view with comments" responsive="true" popup="true">}}
