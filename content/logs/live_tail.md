@@ -31,15 +31,15 @@ The Live Tail feature gives you the ability to see all your log events in near r
 
 This feature allows you, for instance, to check if a process has correctly started, or if a new deployment went smoothly.
 
-## Live tail view
+## Live Tail view
 
-Choose the `Live Tail` option in the time range selector to switch to the live tail view:
+Choose the `Live Tail` option in the time range selector to switch to the Live Tail view:
 
-{{< img src="logs/live_tail/live_tail_time_selector.png" alt="Live tail time selector" responsive="true" popup="true">}}
+{{< img src="logs/live_tail/live_tail_time_selector.png" alt="Live Tail time selector" responsive="true" popup="true">}}
 
-The number of received events per second is displayed at the top left, as well as the sampling rate. Since a stream of thousands of logs per seconds is not human readable, high throughput log streams are sampled.
+The number of received events per second is displayed at the top left, as well as the sampling rate. Since a stream of thousands of logs per second is not human readable, high throughput log streams are sampled.
 
-Use the [live tail search bar filtering features](#filtering-the-log-stream) to filter the log stream and the **Pause/Play** button at the top right of the screen to pause or resume the stream.
+Use the [Live Tail search bar filtering features](#filtering-the-log-stream) to filter the log stream and the **Pause/Play** button at the top right of the screen to pause or resume the stream.
 
 **Note**: Selecting any log pauses the stream and displays more details about the selected log.
 
@@ -59,7 +59,7 @@ Click on the gear at the top right of the page to activate one of the options be
 ## Filtering the log Stream
 
 A valid query into the search bar displays logs that match your search criteria. 
-The search syntax is the same in the Live Tail views as in the other Log views, but here, your query is matched against all of the ingested logs and not just the indexed one.
+The search syntax is the same in the Live Tail views as in the other Log views, but here, your query is matched against all of the ingested logs and not just the indexed ones.
 
 ### JSON attributes
 
