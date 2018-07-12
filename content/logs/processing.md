@@ -117,15 +117,15 @@ Into this log:
 However, beware that each incoming status value is mapped as follows:
 
 * Integers from 0 to 7 map to the [Syslog severity standards][5]
-* Strings beginning with **emerg** or **f** (case unsensitive) map to **emerg (0)**
-* Strings beginning with **a** (case unsensitive) map to **alert (1)**
-* Strings beginning with **c** (case unsensitive) map to **critical (2)**
-* Strings beginning with **err** (case unsensitive) map to **error (3)**
-* Strings beginning with **w** (case unsensitive) map to **warning (4)**
-* Strings beginning with **n** (case unsensitive) map to **notice (5)**
-* Strings beginning with **i** (case unsensitive) map to **info (6)**
-* Strings beginning with **d**, **trace** or **verbose** (case unsensitive) map to **debug (7)**
-* Strings matching **OK** or **Sucess** (case unsensitive) map to **OK**
+* Strings beginning with **emerg** or **f** (case-insensitive) map to **emerg (0)**
+* Strings beginning with **a** (case-insensitive) map to **alert (1)**
+* Strings beginning with **c** (case-insensitive) map to **critical (2)**
+* Strings beginning with **err** (case-insensitive) map to **error (3)**
+* Strings beginning with **w** (case-insensitive) map to **warning (4)**
+* Strings beginning with **n** (case-insensitive) map to **notice (5)**
+* Strings beginning with **i** (case-insensitive) map to **info (6)**
+* Strings beginning with **d**, **trace** or **verbose** (case-insensitive) map to **debug (7)**
+* Strings matching **OK** or **Sucess** (case-insensitive) map to **OK**
 * All others map to **info (6)**
 
 ### Remapper
