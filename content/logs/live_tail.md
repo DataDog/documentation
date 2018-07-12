@@ -14,10 +14,6 @@ further_reading:
   text: Learn more about parsing
 ---
 
-<div class="alert alert-warning">
-This feature is currently in Limited Beta. Ask your Sales representative or Customer Success Manager to have it enabled.
-</div>
-
 {{< img src="logs/live_tail/live_tail_demo.gif" alt="Live tail" responsive="true" popup="true">}}
 
 ## Overview
