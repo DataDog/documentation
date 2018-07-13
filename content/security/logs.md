@@ -25,10 +25,6 @@ For customers using release 6, the Agent can be configured to filter Logs sent b
 
 For customers using release 6, the Agent can be configured to obfuscate specific patterns within Logs sent by the Agent to the Datadog application. To mask sensitive sequences within your Logs, use the `log_processing_rules` [setting][3], with the  **mask_sequences** `type`. This setting enables the creation of a list containing one or more regular expressions, which instructs the Agent to redact sensitive data within your Logs.
 
-## Server-side Editing
-
-In addition to Agent-side filtering, [Processing Pipelines][4] can be configured to edit or overwrite attributes server-side, as they are received by Datadog.
-
 ### Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -37,4 +33,3 @@ In addition to Agent-side filtering, [Processing Pipelines][4] can be configured
 [1]: /logs/log_collection/
 [2]: /logs/log_collection/#filter-logs
 [3]: /logs/log_collection/#scrub-sensitive-data-in-your-logs
-[4]: /logs/processing/
