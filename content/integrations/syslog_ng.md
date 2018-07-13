@@ -14,8 +14,12 @@ is_public: true
 public_title: Datadog-Syslog-ng Integration
 ---
 
-Configure Syslog-ng to gather logs from your host, containers & services:
+## Overview
 
+Configure Syslog-ng to gather logs from your host, containers & services.
+
+## Setup
+### Log collection
 1. Collect system logs and log files In `/etc/syslog-ng/syslog-ng.conf` make sure the source is correctly defined:
     ```
     source s_src {
@@ -78,5 +82,9 @@ Configure Syslog-ng to gather logs from your host, containers & services:
 
 5. Restart syslog-ng 
 
+## Troubleshooting
+Need help? Contact [Datadog Support][3].
+
 [1]: /crt/intake.logs.datadoghq.com.crt
 [2]: https://syslog-ng.com/documents/html/syslog-ng-ose-latest-guides/en/syslog-ng-ose-guide-admin/html/tlsoptions.html
+[3]: https://docs.datadoghq.com/help/

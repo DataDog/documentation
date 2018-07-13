@@ -14,7 +14,12 @@ is_public: true
 public_title: Datadog-Rsyslog Integration
 ---
 
-Configure Rsyslog to gather logs from your host, containers & services: 
+## Overview
+
+Configure Rsyslog to gather logs from your host, containers & services.
+
+## Setup
+### Log collection
 
 1. (Optional) Activate Rsyslog file monitoring module:  
     If you want to watch/monitor specific log files, then you have to activate the imfile module by adding this to  your `rsyslog.conf`:
@@ -134,5 +139,10 @@ Configure Rsyslog to gather logs from your host, containers & services:
     sudo service rsyslog restart
     ```
 
+## Troubleshooting
+
+Need help? Contact [Datadog Support][3].
+
 [1]: /crt/intake.logs.datadoghq.com.crt
 [2]: /crt/FULL_intake.logs.datadoghq.com.crt
+[3]: https://docs.datadoghq.com/help/
