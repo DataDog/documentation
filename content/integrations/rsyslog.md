@@ -10,6 +10,7 @@ aliases:
     - logs/log_collection/rsyslog
 has_logo: true
 integration_title: rsyslog 
+git_integration_title: rsyslog
 is_public: true
 public_title: Datadog-Rsyslog Integration
 supported_os:

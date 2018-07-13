@@ -10,6 +10,7 @@ aliases:
     - logs/log_collection/syslog_ng
 has_logo: true
 integration_title: syslog-ng 
+git_integration_title: syslog-ng
 is_public: true
 public_title: Datadog-Syslog-ng Integration
 supported_os:
