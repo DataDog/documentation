@@ -117,7 +117,7 @@ Autodiscovery can use [Consul][19], etcd, and Zookeeper as template sources. To 
 
 #### Configure in datadog.yaml
 
-In the `datadog.yaml` file, set the `sd_config_backend`, `sd_backend_host`, and `sd_backend_port` options to, respectively, the key-value store type—`etcd`, `consul`, or `zookeeper`—and the IP address and port of your key-value store:
+In the `datadog.yaml` file, set the `<KV_STORE_IP>` address and `<KV_STORE_PORT>` of your key-value store:
 
 ```
 # The providers the Agent should call to collect checks configurations.
@@ -127,14 +127,14 @@ In the `datadog.yaml` file, set the `sd_config_backend`, `sd_backend_host`, and 
 #   - name: etcd
 #     polling: true
 #     template_dir: /datadog/check_configs
-#     template_url: http://127.0.0.1
+#     template_url: <KV_STORE_IP>:<KV_STORE_PORT>
 #     username:
 #     password:
 
 #   - name: consul
 #     polling: true
 #     template_dir: datadog/check_configs
-#     template_url: http://127.0.0.1
+#     template_url: <KV_STORE_IP>:<KV_STORE_PORT>
 #     ca_file:
 #     ca_path:
 #     cert_file:
@@ -146,7 +146,7 @@ In the `datadog.yaml` file, set the `sd_config_backend`, `sd_backend_host`, and 
 #   - name: zookeeper
 #     polling: true
 #     template_dir: /datadog/check_configs
-#     template_url: 127.0.0.1
+#     template_url: <KV_STORE_IP>:<KV_STORE_PORT>
 #     username:
 #     password:
 ```
