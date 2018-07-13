@@ -8,18 +8,25 @@ $ddpurple:    #774DA2;
 .api {
 
   .api-content {
-    ul {
+    ul{
       list-style-type: none;
+      -webkit-padding-start: 12px;
+      ul {
+        -webkit-padding-start: 20px;
+      }
       li {
         &:before {
           content: "–";
           position: relative;
-          margin-right: 3px;
+          margin-right: 10px;
           margin-left: -12px;
-          float:left;
+          float: left;
         }
         p {
           margin-bottom: 0;
+          & + .highlight {
+            margin-top: 10px;
+          }
         }
       }
     }
@@ -31,7 +38,7 @@ $ddpurple:    #774DA2;
       }
     }
     a {
-      border-bottom: 1px solid #000;
+      border-bottom: 1px solid #dee2e6;
       &:hover {
         border-bottom: 1px solid $ddpurple;
       }

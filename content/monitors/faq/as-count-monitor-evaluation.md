@@ -97,7 +97,7 @@ Since this special behavior is tied to the `as_count` modifier, we encourage rep
 
 *Example:* Suppose you wish to monitor the error rate of a service:
 
-Suppose you want to be alerted when the error rate is above 50% at all times during the past 5 min. You might have a query like:
+Suppose you want to be alerted when the error rate is above 50% in total during the past 5 min. You might have a query like:
 `sum(last_5m):sum:requests.error{*}.as_count() / sum:requests.total{*}.as_count() > 0.5 ` 
 
 To correctly rewrite it in the explicit format, the query can be rewritten like:

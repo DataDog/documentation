@@ -16,11 +16,12 @@ If you'd like to increase this limit, email [us][8]!
 
 Other standard integrations that don’t have a default limit set and also emit custom metrics: 
 
-* [SNMP][9]
 * [agent_metrics][10]
 * [directory][11]
 * [linux_proc_extras][10]
 * [nagios][12]
+* [Prometheus][15]
+* [SNMP][9]
 * [win32_event_log][13]
 * [wmi][14]
 
@@ -38,3 +39,4 @@ Other standard integrations that don’t have a default limit set and also emit 
 [12]: /integrations/nagios
 [13]: /integrations/windows_service
 [14]: /integrations/wmi_check
+[15]: /integrations/prometheus

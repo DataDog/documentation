@@ -156,16 +156,16 @@ endpoint = https://haproxy.example.com:3835
 
 [process.api]
 url = https://haproxy.example.com:3836
- ```
+```
 
 For Agent v6, set up the following in `datadog.yaml`:
 
 ```
 apm_config:
-    endpoint: https://haproxy.example.com:3836
+    endpoint: https://haproxy.example.com:3835
 
 process_config:
-    url: https://haproxy.example.com:3835
+    url: https://haproxy.example.com:3836
 ```
 
 Before you [restart the Agent][2] Edit your supervisor configuration to disable SSL certificate verification. This is needed to prevent python from complaining about the discrepancy between the hostname on the SSL certificate (app.datadoghq.com) and your HAProxy hostname.

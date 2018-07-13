@@ -1,7 +1,7 @@
 ---
 title: Dynamic volume control
 kind: documentation
-description:
+description: Control the volume of logs indexed by Datadog
 further_reading:
 - link: "logs/graph"
   tag: "Documentation"
@@ -13,10 +13,6 @@ further_reading:
   tag: "Documentation"
   text: Learn more about parsing
 ---
-
-<div class="alert alert-warning">
-This feature is currently in Beta. Ask your Sales representative or Customer Success Manager to have it enabled.
-</div>
 
 ## Overview
 
@@ -50,6 +46,8 @@ Get notified at any moment if the volumes in any scope (`service`, `availibility
 3. Click on **Export to monitor**.
 4. Define the rate you would like to set as *warning* or *error*.
 5. Define an explicit notification: `The volume on this service just got too high. Please define an additional exclusion filter or increase the sampling rate to put it back under control.`
+
+{{< img src="logs/dynamic_volume_control/example_notification.png" alt="" responsive="true" popup="true" style="width:70%;">}}
 
 ## Exclusion Filters
 

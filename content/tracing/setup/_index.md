@@ -4,9 +4,12 @@ kind: Documentation
 aliases:
   - /tracing/languages/
 further_reading:
-- link: "tracing/setup/environment"
+- link: "tracing/setup/first_class_dimensions"
   tag: "Documentation"
-  text: "Learn more about environment configuration"
+  text: "Learn more about first class dimensions"
+- link: "tracing/setup/dotnet"
+  tag: "Documentation"
+  text: .NET language instrumentation
 - link: "tracing/setup/docker"
   tag: "Documentation"
   text: Docker setup
@@ -22,6 +25,9 @@ further_reading:
 - link: "tracing/setup/javascript"
   tag: "Documentation"
   text: JavaScript language instrumentation
+- link: "tracing/setup/php"
+  tag: "Documentation"
+  text: PHP language instrumentation
 - link: "tracing/setup/python"
   tag: "Documentation"
   text: Python language instrumentation
@@ -136,7 +142,7 @@ apm_config:
 [7]: https://github.com/DataDog/datadog-trace-agent#run-on-osx
 [8]: https://github.com/DataDog/datadog-trace-agent/#run-on-windows
 [9]: https://github.com/DataDog/heroku-buildpack-datadog
-[10]: /tracing/setup/environment
+[10]: /tracing/setup/first_class_dimensions#environment
 [11]: /tracing/setup/go
 [12]: /tracing/setup/java
 [13]: /tracing/setup/python

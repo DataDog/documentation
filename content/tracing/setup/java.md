@@ -61,11 +61,40 @@ The tracer is configured using System Properties and Environment Variables as fo
 * If the same key type is set for both, the system property configuration takes priority.
 * System properties can be used as JVM parameters.
 
+## Automatic Instrumentation
+
+Automatic instrumentation for Java utilizes the `java-agent` instrumentation capabilities [provided by the JVM][8]. When a `java-agent` is registered, it has the ability to modify class files at load time. 
+The Agent uses the popular [Byte Buddy framework][9] to find the classes defined for instrumentation and modify those class bytes accordingly.
+
+Instrumentation may come from auto-instrumentation, the OpenTracing api, or a mixture of both. Instrumentation generally captures the following info:
+
+* Method execution time
+* Timing duration is captured using the JVM's nanotime clock unless a timestamp is provided from the OpenTracing api
+* Key/value tag pairs
+* Errors and stacktraces which are unhanded by the application
+* A total count of traces (requests) flowing through the system
+
 ## Manual Instrumentation
 
 Before instrumenting your application, review Datadog’s [APM Terminology][5] and familiarize yourself with the core concepts of Datadog APM. If you aren't using a [supported framework instrumentation](#integrations), or you would like additional depth in your application’s traces, you may want to to manually instrument your code.
 
 Do this either using the [Trace annotation](#trace-annotation) for simple method call tracing or with the [OpenTracing API](#opentracing-api) for complex tracing.
+
+### Trace Reporting
+
+To report a trace to Datadog the following happens:
+
+* Trace completes
+* Trace is pushed to an asynchronous queue of traces
+  * Queue is size-bound and doesn't grow past a set limit of 7000 traces
+  * Once the size limit is reached, traces are discarded
+  * A count of the total traces is captured to ensure accurate throughput
+* In a separate reporting thread, the trace queue is flushed and traces are encoded via msgpack then sent to the Datadog Agent via http
+* Queue flushing happens on a schedule of once per second
+
+To see the actual code, documentation and usage examples for any of the 
+libraries and frameworks that Datadog supports, check the full list of auto-
+instrumented components for Java applications [in the integration section](#integrations).
 
 ### Trace Annotation
 
@@ -255,6 +284,56 @@ public class MyClass {
 }
 ```
 
+## Logging and MDC
+
+The Java tracer exposes two API calls to allow printing trace and span identifiers along with log statements, `CorrelationIdentifier#getTraceId()`, and `CorrelationIdentifier#getSpanId()`.
+
+log4j2:
+
+```java
+import org.apache.logging.log4j.ThreadContext;
+import datadog.trace.api.CorrelationIdentifier;
+
+// there must be spans started and active before this block.
+try {
+    ThreadContext.put("ddTraceID", "ddTraceID:" + String.valueOf(CorrelationIdentifier.getTraceId()));
+    ThreadContext.put("ddSpanID", "ddSpanID:" + String.valueOf(CorrelationIdentifier.getSpanId()));
+} finally {
+    ThreadContext.remove("ddTraceID");
+    ThreadContext.remove("ddSpanID");
+}
+```
+
+slf4j/logback:
+
+```java
+import org.slf4j.MDC;
+import datadog.trace.api.CorrelationIdentifier;
+
+// there must be spans started and active before this block.
+try {
+    MDC.put("ddTraceID", "ddTraceID:" + String.valueOf(CorrelationIdentifier.getTraceId()));
+    MDC.put("ddSpanID", "ddSpanID:" + String.valueOf(CorrelationIdentifier.getSpanId()));
+} finally {
+    MDC.remove("ddTraceID");
+    MDC.remove("ddSpanID");
+}
+```
+
+log4j2 XML Pattern:
+
+```
+<PatternLayout pattern="%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{${sys:PID}}{magenta} %clr{---}{faint} %X{ddTraceID} %X{ddSpanID} %m%n%xwEx" />
+```
+
+Logback XML Pattern:
+```
+<Pattern>
+    %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} %X{ddTraceID} %X{ddSpanID} - %msg%n
+</Pattern>
+```
+
+
 ## Debugging
 
 To return debug level application logs, enable debug mode with the flag `-Ddatadog.slf4j.simpleLogger.defaultLogLevel=debug` when starting the JVM.
@@ -339,14 +418,24 @@ Don't see your desired framework? We're continually adding additional support, [
 
 | Instrumentation                | Versions | JVM Arg to enable                                                             |
 | :--------------                | :------- | :----------------                                                             |
-| Elasticsearch Rest Client      | 5.0+     | `-Ddd.integration.elasticsearch.enabled=true`                                 |
-| Elasticsearch Transport Client | 2.0+     | `-Ddd.integration.elasticsearch.enabled=true`                                 |
+| Elasticsearch Client           | 5.0+     | `-Ddd.integration.elasticsearch.enabled=true`                                 |
+| Netty Http Server and Client   | 4.0+     | `-Ddd.integration.netty.enabled=true`                                         |
+| HttpURLConnection              | all      | `-Ddd.integration.httpurlconnection.enabled=true`                             |
+| JSP Rendering                  | 2.3+     | `-Ddd.integration.jsp.enabled=true`                                           |
+| Akka-Http Server               | 10.0+    | `-Ddd.integration.akka-http.enabled=true`                                     |
+| Lettuce                        | 5.0+     | `-Ddd.integration.lettuce.enabled=true`                                       |
+| SpyMemcached                   | 2.12+    | `-Ddd.integration.spymemcached.enabled=true`                                  |
 | Ratpack                        | 1.4+     | `-Ddd.integration.ratpack.enabled=true`                                       |
 | Spark Java                     | 2.4+     | `-Ddd.integration.sparkjava.enabled=true -Ddd.integration.jetty.enabled=true` |
 
 ## Performance
 
-Typical CPU overhead with the Java tracer is up to 3%.
+Java APM has minimal impact on the overhead of an application:
+
+* No collections maintained by Java APM grow unbounded in memory
+* Reporting traces does not block the application thread
+* Java APM typically adds no more than a 3% increase in CPU usage
+* Java APM typically adds no more than a 3% increase in JVM heap usage
 
 ## Further Reading
 
@@ -359,3 +448,5 @@ Typical CPU overhead with the Java tracer is up to 3%.
 [5]: /tracing/visualization/services_list/
 [6]: https://github.com/opentracing/opentracing-java
 [7]: https://docs.datadoghq.com/integrations/java/
+[8]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
+[9]: http://bytebuddy.net/

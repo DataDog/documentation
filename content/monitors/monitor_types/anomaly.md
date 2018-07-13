@@ -179,6 +179,10 @@ If the rollup is set explicitly on the query, the rollup interval option for the
 
 Create **A**: an anomaly monitor to alert on values above the bounds; and **B**: a separate [metric monitor][9] with a threshold alert to alert on values greater than X; and then finally a [composite monitor][10] on **A && B**.
 
+### Why am I prevented from saving a monitor with a message like ''alert and alert recovery criteria are such that the monitor can be simultaneously in alert and alert recovery states?"
+
+Setting different windows for the alert and alert recovery periods might lead to an ambiguous state. The alert and alert recovery window sizes should be set such that both cannot be satisfied at the same time. For example, setting an alert threshold at 50% for a 2-hour window (i.e., 1 hour has to be anomalous to trigger the alert) and the recovery threshold at 50% for a 10-minute window (i.e., 5 minutes have to be non-anomalous to recover) might result in triggering the alert and the alert recovery states simultaneously. If the last 5 minutes are not anomalous but the 1 hour before that _was_ anomalous, both the alert and the alert recovery will be triggered.
+
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 

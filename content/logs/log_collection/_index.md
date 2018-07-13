@@ -75,8 +75,6 @@ Example:
 If your PHP application does not log to a file, but instead forwards its logs via TCP, create a configuration file that specifies the port to receive as in the example below:
 
 ```yaml
-init_config:
-instances:
 
 ##Log section
 logs:
@@ -102,8 +100,6 @@ To achieve this use the `log_processing_rules` parameter in your configuration f
   Example: Filtering out logs that contain a Datadog email
 
 ```yaml
-init_config:
-instances:
 
 logs:
   - type: file
@@ -121,8 +117,6 @@ logs:
   Example: Sending only logs that contain a Datadog email
 
 ```yaml
-init_config:
-instances:
 
 logs:
   - type: file
@@ -147,8 +141,6 @@ This replaces all matched groups with `replace_placeholder` parameter value.
 Example: Redact credit card numbers
 
 ```yaml
-init_config:
-instances:
 
 logs:
  - type: file
@@ -184,8 +176,6 @@ Example: Every java log line starts with a timestamp with `yyyy-dd-mm` format. T
 To achieve this, you need to use the following `log_processing_rules`:
 
 ```yaml
-init_config:
-instances:
 
 logs:
  - type: file
@@ -223,8 +213,6 @@ If your log files are labeled by date or all stored in the same directory, confi
 Configuration example:
 
 ```yaml
-init_config:
-instances:
 
 logs:
  - type: file
@@ -290,6 +278,7 @@ By default, Datadog ingests the value of message as the body of the log entry. T
 
 Each log entry may specify a status level which is made available for faceted search within Datadog. However, if a JSON formatted log file includes one of the following attributes, Datadog interprets its value as the the log’s official status:
 
+* `status`
 * `severity`
 * `level`
 * `syslog.severity`
@@ -300,12 +289,15 @@ If you would like to remap some status existing in the `status` attribute, you c
 
 Using the Datadog Agent or the RFC5424 format automatically sets the host value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog interprets its value as the the log’s host:
 
+* `host`
+* `hostname`
 * `syslog.hostname`
 
 ### *service* attribute
 
 Using the Datadog Agent or the RFC5424 format automatically sets the service value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog interprets its value as the the log’s service:
 
+* `service`
 * `syslog.appname`
 
 ### Edit reserved attributes

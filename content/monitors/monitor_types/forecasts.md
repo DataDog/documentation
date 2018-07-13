@@ -90,6 +90,12 @@ The “default” model is what Goldilocks would choose, and adjusts to the most
 
 **Seasonal:** Use this algorithm for seasonal metrics. In monitors, Datadog auto-detects the seasonality of the metric and choose between weekly, daily, and hourly seasonality. This algorithm requires at least 2 seasons of history for it to start forecasting, and potentially uses up to 6.
 
+Examples of seasonality options:
+
+* **weekly**: the algorithm expects that this Monday will behave like past Mondays.
+* **daily**: the algorithm expects that 7pm today wlil be have like 7pm in past days.
+* **hourly**: the algorithm expects that 7:15 will behave like 6:15, 5:15, 4:15, etc.
+
 {{< img src="monitors/monitor_types/forecasts/seasonal.png" alt="seasonal" responsive="true" popup="true" style="width:80%;">}}
 
 ### Accessing Advanced Options

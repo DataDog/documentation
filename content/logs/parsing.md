@@ -12,6 +12,9 @@ further_reading:
 - link: "logs/faq/log-parsing-best-practice"
   tag: "FAQ"
   text: Log Parsing - Best Practice
+- link: "logs/dynamic_volume_control"
+  tag: "Documentation"
+  text: Control the volume of logs indexed by Datadog
 ---
 
 ## Overview 
@@ -132,6 +135,51 @@ You don't need to specify the name of your parameters as they were already conta
 If you add an **extract** parameter in your rule pattern you would have:
 
 {{< img src="logs/parsing/parsing_example_2_bis.png" alt="Parsing example 2 bis" responsive="true" popup="true">}}
+
+If `=` is not the default separator between your key and values, add a parameter in your parsing rule with the wanted splitter.
+
+log: 
+
+```
+user: john connect_date: 11/08/2017 id: 123 action: click
+```
+
+Rule
+
+```
+rule %{data::keyvalue(": ")}
+```
+
+{{< img src="logs/parsing/key_value_parser.png" alt="Key value parser" responsive="true" popup="true">}}
+
+If logs contain specials characters in an attribute value such as `/` in a url for instance, add it to the white-list in the parsing rule:
+
+log: 
+
+```
+url=https://app.datadoghq.com/event/stream user=john
+```
+
+Rule:
+
+```
+rule %{data::keyvalue("=","/:")}
+```
+
+{{< img src="logs/parsing/key_value_whitelist.png" alt="Key value whitelist" responsive="true" popup="true">}}
+
+Other examples:
+
+| **Raw string**          | **Parsing rule**                    | **Result**                     |
+| :---                    | :----                               | :----                          |
+| key=valueStr            | `%{data::keyvalue}`                 | {"key": "valueStr}             |
+| key=\<valueStr>         | `%{data::keyvalue}`                 | {"key": "valueStr"}            |
+| key:valueStr            | `%{data::keyvalue(":")}`            | {"key": "valueStr"}            |
+| key:"/valueStr"         | `%{data::keyvalue(":", "/")}`       | {"key": "/valueStr"}           |
+| key:={valueStr}         | `%{data::keyvalue(":=", "", "{}")}` | {"key": "valueStr"}            |
+| key:=valueStr           | `%{data::keyvalue(":=", "")}`       | {"key": "valueStr"}            |
+| key1:=>val1,key2:=>val2 | `%{data::keyvalue(":=>", ",")}`     | {"key1": "val1","key2":"val2"} |
+
 
 ### Parsing dates
 

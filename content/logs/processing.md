@@ -12,11 +12,14 @@ further_reading:
 - link: "logs/faq/log-parsing-best-practice"
   tag: "FAQ"
   text: Log Parsing - Best Practice
+- link: "logs/dynamic_volume_control"
+  tag: "Documentation"
+  text: Control the volume of logs indexed by Datadog
 ---
 
 ## Overview
 
-To access the processing panel use the upper left menu:
+To access the processing panel use the left `Logs` menu:
 
 {{< img src="logs/processing/processing_panel.png" alt="Pipelines panel" responsive="true" popup="true" style="width:50%;" >}}
 
@@ -114,20 +117,20 @@ Into this log:
 However, beware that each incoming status value is mapped as follows:
 
 * Integers from 0 to 7 map to the [Syslog severity standards][5]
-* Strings beginning with **emerg** or **f** (case unsensitive) map to **emerg (0)**
-* Strings beginning with **a** (case unsensitive) map to **alert (1)**
-* Strings beginning with **c** (case unsensitive) map to **critical (2)**
-* Strings beginning with **err** (case unsensitive) map to **error (3)**
-* Strings beginning with **w** (case unsensitive) map to **warning (4)**
-* Strings beginning with **n** (case unsensitive) map to **notice (5)**
-* Strings beginning with **i** (case unsensitive) map to **info (6)**
-* Strings beginning with **d**, **trace** or **verbose** (case unsensitive) map to **debug (7)**
-* Strings matching **OK** or **Sucess** (case unsensitive) map to **OK**
+* Strings beginning with **emerg** or **f** (case-insensitive) map to **emerg (0)**
+* Strings beginning with **a** (case-insensitive) map to **alert (1)**
+* Strings beginning with **c** (case-insensitive) map to **critical (2)**
+* Strings beginning with **err** (case-insensitive) map to **error (3)**
+* Strings beginning with **w** (case-insensitive) map to **warning (4)**
+* Strings beginning with **n** (case-insensitive) map to **notice (5)**
+* Strings beginning with **i** (case-insensitive) map to **info (6)**
+* Strings beginning with **d**, **trace** or **verbose** (case-insensitive) map to **debug (7)**
+* Strings matching **OK** or **Sucess** (case-insensitive) map to **OK**
 * All others map to **info (6)**
 
-### Attribute Remapper
+### Remapper
 
-This processor remaps any attribute(s) to another one, for instance here it remaps “user” to “user.firstname”
+This processor remaps any source attribute(s) or tag to another target attribute or tag, for instance here it remaps `user` to `user.firstname`
 
 {{< img src="logs/processing/attribute_remapper_processor_tile.png" alt="Attribute Remapper processor tile" responsive="true" popup="true">}}
 
@@ -138,6 +141,8 @@ It transforms this log:
 Into this log:
 
 {{< img src="logs/processing/attribute_post_remapping.png" alt="attribute post remapping " responsive="true" popup="true" style="width:40%;">}}
+
+Constraints on the tag/attribute name are explained in the [Tag Best Practice documentation][6]. Some additional constraints are applied as `:`, `/` or `,` are not allowed in the target tag/attribute name.
 
 ### URL Parser
 
@@ -211,3 +216,4 @@ Contact support if you reach one of these limits as Datadog might be able to pro
 [3]: /logs/parsing
 [4]: /logs/processing/#log-date-remapper
 [5]: https://en.wikipedia.org/wiki/Syslog#Severity_level
+[6]: https://docs.datadoghq.com/getting_started/tagging/#tags-best-practices
