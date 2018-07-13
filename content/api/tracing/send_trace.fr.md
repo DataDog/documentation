@@ -20,7 +20,7 @@ et chaque trace est un tableau de [spans][3]
 trace1 = [ span, span2, span3 ]
 ```
 
-et chaque span est une dictionnaire avec un `trace_id`, `spand_id`, `resource`…
+et chaque span est une dictionnaire avec un `trace_id`, `span_id`, `resource`…
 
 [En savoir plus sur la terminologie APM (tracing)][4]
 
