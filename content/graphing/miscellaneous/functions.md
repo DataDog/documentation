@@ -225,7 +225,7 @@ Delta value between points for a given metric
 
 ### asap()
 
-The `asap()` function applies a moving average to the time series, using the [ASAP algorithm][5] to choose the optimal span for the moving average. When applied to a group-by query, `asap()` will use the same span for all groups.
+The `asap()` function applies a moving average to the time series, using the [ASAP algorithm][5] to choose the optimal span for the moving average. When applied to a group-by query, `asap()` uses the same span for all groups.
 
 ### ewma_3()
 
