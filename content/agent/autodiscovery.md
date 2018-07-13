@@ -320,11 +320,13 @@ The following template variables are currently handled by the Agent:
 
 - Container IP: `host`
   - `%%host%%`: autodetect the network (use `bridge` or, if only one network is attached, this one)
-  - `%%host_network%%`: specify the network name to use, when attached to several networks
+  - `%%host_<NETWORK NAME>%%`: specify the network name to use, when attached to several networks (e.g `%%host_bridge%%`, `%%host_myredisnetwork%%`, ...)
+
 - Container port: `port`
   - `%%port%%`: use the highest exposed port **sorted numerically and in ascending order** (eg. 8443 for a container that exposes ports 80, 443, and 8443)
   - `%%port_0%%`: use the first port **sorted numerically and in ascending order** (for the same container, `%%port_0%%` refers to port 80, `%%port_1%%` refers to 443
   - If your target port is constant, we recommend you directly specify it, without using the `port` variable
+
 - Environment variable: `env` (added in Agent 6.1)
   - `%%env_MYENVVAR%%`: use the contents of the `$MYENVVAR` environment variable **as seen by the Agent process**
 
