@@ -12,6 +12,9 @@ has_logo: true
 integration_title: syslog-ng 
 is_public: true
 public_title: Datadog-Syslog-ng Integration
+supported_os:
+- linux
+- windows
 ---
 
 ## Overview

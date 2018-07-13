@@ -12,6 +12,8 @@ has_logo: true
 integration_title: rsyslog 
 is_public: true
 public_title: Datadog-Rsyslog Integration
+supported_os:
+- linux
 ---
 
 ## Overview

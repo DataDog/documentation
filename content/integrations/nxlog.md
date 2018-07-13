@@ -12,6 +12,8 @@ has_logo: true
 integration_title: nxlog
 is_public: true
 public_title: Datadog-NXlog Integration
+supported_os:
+- windows
 ---
 
 ## Overview
