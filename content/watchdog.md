@@ -2,22 +2,18 @@
 title: Watchdog
 kind: Documentation
 description: Automatically detect potential application and infrastructure issues
+aliases:
+  - /tracing/watchdog
 further_reading:
-- link: "tracing/setup/"
+- link: "logs/"
   tag: "Documentation"
-  text: Learn how to setup APM tracing with your application
-- link: "tracing/visualization/services_list/"
+  text: Collect your logs
+- link: "graphing/infrastructure/process"
   tag: "Documentation"
-  text: Discover the list of services reporting to Datadog
-- link: "tracing/visualization/service"
+  text: Collect your processes
+- link: "tracing"
   tag: "Documentation"
-  text: Learn more about services in Datadog
-- link: "tracing/visualization/resource"
-  tag: "Documentation"
-  text: Dive into your resource performance and traces
-- link: "tracing/visualization/trace"
-  tag: "Documentation"
-  text: Understand how to read a Datadog Trace
+  text: Collect your traces
 ---
 
 {{< vimeo 278057125 >}}
@@ -31,25 +27,25 @@ Watchdog looks for irregularities in metrics, like a sudden spike in hit rate. F
 Stories can be filtered by environment and availability zone, as well as by the type of service or resource. Typing in the “Filter stories” search box also allows user to filter stories by service or resource name.
 
 
-{{< img src="tracing/watchdog/watchdog_overview.png" alt="Watchdog overview" responsive="true" >}}
+{{< img src="watchdog/watchdog_overview.png" alt="Watchdog overview" responsive="true" >}}
 
 Clicking on the Story shows further details about requests, errors, and latency at the time of the detected irregularity. 
 
-{{< img src="tracing/watchdog/watchdog_story.png" alt="Watchdog story" responsive="true" >}}
+{{< img src="watchdog/watchdog_story.png" alt="Watchdog story" responsive="true" >}}
 
 Selecting *Show expected bounds* in the corner reveals upper and lower thresholds of expected behavior on the graph.
 
-{{< img src="tracing/watchdog/watchdog_expected_values.png" alt="Watchdog expected value" responsive="true" >}}
+{{< img src="watchdog/watchdog_expected_values.png" alt="Watchdog expected value" responsive="true" >}}
 
 ## Watchdog in the Services List
 
 When an irregularity in a metric is detected, the yellow Watchdog binoculars icon appears next to the affected service in the [APM Services List][2]. The number next to the binoculars indicates the number of issues Watchdog has noticed within that service.
 
-{{< img src="tracing/watchdog/service_list.png" alt="Watchdog service list" responsive="true" >}}
+{{< img src="watchdog/service_list.png" alt="Watchdog service list" responsive="true" >}}
 
 If Watchdog has discovered something out of the ordinary in a specific service, viewing the corresponding [Service page][2] reveals a dedicated Watchdog section in the middle of the page, between the application performance graphs and the latency distribution section. The Watchdog section displays any relevant Watchdog Stories.
 
-{{< img src="tracing/watchdog/watchdog_story_bis.png" alt="Watchdog story bis" responsive="true" >}}
+{{< img src="watchdog/watchdog_story_bis.png" alt="Watchdog story bis" responsive="true" >}}
 
 ## Further Reading
 
