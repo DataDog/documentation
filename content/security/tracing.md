@@ -24,7 +24,7 @@ Several filtering mechanisms are enforced as a baseline in an effort to provide 
 For example, the following `sql.query` attribute:
 `SELECT data FROM table WHERE key=123 LIMIT 10`
 would have its variables obfuscated, to become the following Resource name:
-`SELECT data FROM table WHERE ? LIMIT ?`
+`SELECT data FROM table WHERE key = ? LIMIT ?`
 
 **Numbers in Resource names (e.g. in request urls) are obfuscated by default**
 
