@@ -649,8 +649,8 @@ languages:
           weight: 32
           parent: menu_references_logs
         - identifier: customnav_lognav_graph
-          name: "Log Graph"
-          url: "logs/graph/"
+          name: "Log Analytics"
+          url: "logs/analytics/"
           weight: 35
           parent: menu_references_logs
         - identifier: customnav_lognav_processing
@@ -1541,8 +1541,8 @@ languages:
           weight: 32
           parent: menu_references_logs
         - identifier: customnav_lognav_graph
-          name: "Log Graph"
-          url: "logs/graph/"
+          name: "Log Analytics"
+          url: "logs/analytics/"
           weight: 35
           parent: menu_references_logs
         - identifier: customnav_lognav_processing

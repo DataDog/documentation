@@ -20,6 +20,6 @@ To get your Autoscaling events and metrics, you have to follow the next steps:
 
 4. Click on update the tile, you should see the Autoscaling Group tile showing up in your integration list.
 
-5. [Follow those 4 steps to get your ASG metrics][1].
+5. In order for the ASG metrics to start appearing in Datadog, you must first enable them in your AWS console. [See the AWS instructions on how to enable your ASG metrics][1]. Note that it may take a while for such metrics to appear, after they have been enabled.
 
 [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-monitoring.html#enable-detailed-instance-metrics
