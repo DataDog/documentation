@@ -1,8 +1,20 @@
 ---
-title: Syslog-ng Log collection
-kind: Documentation
+title: Syslog-ng
+kind: integration
 description: "Configure Syslog-ng to gather logs from your host, containers & services."
+short_description: "Configure Syslog-ng to gather logs from your host, containers & services."
+categories:
+- log collection
+doc_link: https://docs.datadoghq.com/integrations/syslog_ng/
+aliases:
+    - logs/log_collection/syslog_ng
+has_logo: true
+integration_title: syslog-ng 
+is_public: true
+public_title: Datadog-Syslog-ng Integration
 ---
+
+Configure Syslog-ng to gather logs from your host, containers & services:
 
 1. Collect system logs and log files In `/etc/syslog-ng/syslog-ng.conf` make sure the source is correctly defined:
     ```
@@ -65,7 +77,6 @@ description: "Configure Syslog-ng to gather logs from your host, containers & se
     More information about the TLS parameters and possibilities for syslog-ng available in their [official documentation][2].
 
 5. Restart syslog-ng 
-
 
 [1]: /crt/intake.logs.datadoghq.com.crt
 [2]: https://syslog-ng.com/documents/html/syslog-ng-ose-latest-guides/en/syslog-ng-ose-guide-admin/html/tlsoptions.html

@@ -151,11 +151,11 @@ There are many kinds of processors; find the full list and how to use them [here
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/log_collection/rsyslog
-[2]: /logs/log_collection/syslog_ng
-[3]: /logs/log_collection/nxlog
-[4]: /logs/log_collection/fluentd
-[5]: /logs/log_collection/logstash
+[1]: /integrations/rsyslog
+[2]: /integrations/syslog_ng
+[3]: /integrations/nxlog
+[4]: /integrations/fluentd/#log-collection
+[5]: /integrations/logstash/#log-collection
 [6]: /logs/log_collection/#getting-started-with-the-agent
 [7]: /logs/log_collection/#tail-existing-files
 [8]: /logs/log_collection/#stream-logs-through-tcp-udp
