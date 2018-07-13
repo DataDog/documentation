@@ -223,11 +223,11 @@ Since runtime configuration applies globally, BOSH will redeploy every node in y
 
 The easiest way to check that Agent installs were successful is to filter for them in the [Host map page][14] in Datadog. The Agent BOSH release tags each host with a generic `cloudfoundry` tag, so filter by that, and optionally group hosts by any tag you wish (e.g. `bosh_job`), as in the following screenshot:
 
-{{< img src="integrations/cloud_foundry/cloud-foundry-host-map.png" alt="cloud-foundry-host-map" responsive="true" popup="true">}}
+{{< img src="integrations/cloud_foundry/cloud-foundry-host-map.png" alt="cloud-foundry-host-map" responsive="true" >}}
 
 Click on any host to zoom in, then click **system** within its hexagon to make sure Datadog is receiving metrics for it:
 
-{{< img src="integrations/cloud_foundry/cloud-foundry-host-map-detail.png" alt="cloud-foundry-host-map-detail" responsive="true" popup="true">}}
+{{< img src="integrations/cloud_foundry/cloud-foundry-host-map-detail.png" alt="cloud-foundry-host-map-detail" responsive="true" >}}
 
 ### Deploy the Datadog Firehose Nozzle
 
@@ -329,7 +329,7 @@ bosh -n -d cf-manifest deploy cf-manifest.yml
 
 On the [Metrics explorer][17] page in Datadog, search for metrics beginning `cloudfoundry.nozzle`:
 
-{{< img src="integrations/cloud_foundry/cloud-foundry-nozzle-metrics.png" alt="cloud-foundry-nozzle-metrics" responsive="true" popup="true">}}
+{{< img src="integrations/cloud_foundry/cloud-foundry-nozzle-metrics.png" alt="cloud-foundry-nozzle-metrics" responsive="true" >}}
 
 ## Data Collected
 

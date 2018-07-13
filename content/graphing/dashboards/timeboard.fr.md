@@ -6,7 +6,7 @@ kind: documentation
 ## Changer le nom de votre Timeboard
 
 1. Cliquez sur l'icône d'information en haut à droite de votre Timeboard:
-    {{< img src="graphing/dashboards/timeboard/timeboard_name.png" alt="Timeboard name" responsive="true" popup="true" style="width:75%;">}}
+    {{< img src="graphing/dashboards/timeboard/timeboard_name.png" alt="Timeboard name" responsive="true" style="width:75%;">}}
 2. Cliquez sur l'icône pinceau et éditez le titre et la description
 3. Cliquez sur la checkmark pour enregistrer les modifications
 
@@ -14,7 +14,7 @@ kind: documentation
 
 [Un Administrateur][1] ou le créateur d'un Timeboard peut passer un Timeboard en lecture seule en cliquant sur l'icône engrenage (coin droit du Timeboard) puis sur le lien **Permissions**:
 
-{{< img src="graphing/dashboards/timeboard/read_only.png" alt="Read Only" responsive="true" popup="true" style="width:30%;">}}
+{{< img src="graphing/dashboards/timeboard/read_only.png" alt="Read Only" responsive="true" style="width:30%;">}}
 
 **Cliquer sur "Yes" dans la fenêtre de confirmation passe le Timeboard en lecture seule**
 
@@ -46,11 +46,11 @@ https://app.datadoghq.com/event/stream?per_page=30&query=tags:audit%20status:all
 Cette fonctionnalité peut être activée en suivant ces étapes simples:
 
 1. Dans l'angle supérieur droit d'un dashboard, cliquez sur l'icône représentant une roue dentée:
-    {{< img src="graphing/dashboards/faq/enable_notifications.png" alt="enable notifications" responsive="true" popup="true" style="width:30%;">}}
+    {{< img src="graphing/dashboards/faq/enable_notifications.png" alt="enable notifications" responsive="true" style="width:30%;">}}
 
 2. Sélectionnez l'option **Notifications** et activez les notifications:
 
-    {{< img src="graphing/dashboards/faq/notifications_pop_up.png" alt=" notifications pop up" responsive="true" popup="true" style="width:30%;">}}
+    {{< img src="graphing/dashboards/faq/notifications_pop_up.png" alt=" notifications pop up" responsive="true" style="width:30%;">}}
 
 ## Sauvegarder mon Timeboard
 

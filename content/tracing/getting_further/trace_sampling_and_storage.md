@@ -37,7 +37,7 @@ Datadog APM computes aggregate statistics over all the traces instrumented, rega
 * Breakdown of time spent by service/type
 * [Apdex score][1] (web services only)
 
-{{< img src="tracing/product_specs/trace_sampling_storage/sampling_stats.png" alt="Aggregate statistics are generated on un-sampled data." responsive="true" popup="true" style="width:90%;">}}
+{{< img src="tracing/product_specs/trace_sampling_storage/sampling_stats.png" alt="Aggregate statistics are generated on un-sampled data." responsive="true" style="width:90%;">}}
 
 ### Traces
 
@@ -49,7 +49,7 @@ To ensure keeping a representative sample set of traces, Datadog combines multip
 
 * **Client sampling**: Allows reduction of instrumentation overhead by only instrumenting a configurable percentage of the transactions. By default, it is disabled.
 
-{{< img src="tracing/product_specs/trace_sampling_storage/sampling_trace.png" alt="Individual traces are sampled at the Agent, server, and client level." responsive="true" popup="true" style="width:90%;">}}
+{{< img src="tracing/product_specs/trace_sampling_storage/sampling_trace.png" alt="Individual traces are sampled at the Agent, server, and client level." responsive="true" style="width:90%;">}}
 
 ### Signature Sampling
 
@@ -125,7 +125,7 @@ For example, at `9:00am UTC Wed, 12/20` you would see:
 
 Once a trace has been viewed, it continues to be available by using its trace ID in the URL: `https://app.datadoghq.com/apm/trace/<trace_id>` This is true even if it “expires” from the UI. This behavior is independent of the UI retention time buckets.
 
-{{< img src="tracing/trace_id.png" alt="Trace ID" responsive="true" popup="true">}}
+{{< img src="tracing/trace_id.png" alt="Trace ID" responsive="true" >}}
 
 ## Client implementation
 

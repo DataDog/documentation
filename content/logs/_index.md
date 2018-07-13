@@ -66,13 +66,13 @@ Here are some key attributes you should pay attention to when setting up your pr
 
 Your logs are now collected and centralized into the [Log Explorer][17] view, but this is just the beginning: now you can search, enrich, and alert on your logs.
 
-{{< img src="logs/log_explorer_view.png" alt="Log explorer view" responsive="true" popup="true">}}
+{{< img src="logs/log_explorer_view.png" alt="Log explorer view" responsive="true" >}}
 
 ## Search your Logs
 
 If your environment is relying on some integrations: processors, parsers, and facets are most likely pre-installed. Use integration [facets][18] or [add custom ones][19] to slice and dice in your logs. You can also use tags shared by logs, metrics, and traces to filter your data or even [free text search][20] on the log message:
 
-{{< img src="logs/search_your_logs.gif" alt="Search your logs" responsive="true" popup="true">}}
+{{< img src="logs/search_your_logs.gif" alt="Search your logs" responsive="true" >}}
 
 Follow our [guide to explore your logs][17] for a more detailed explanation of all the Log Explorer features including use of wildcards and queries of numerical values.
 
@@ -85,7 +85,7 @@ Now that your logs are parsed and you have facets and Measure over the important
 3. Use a Tag or [Facet][18] to split your graph.
 4. Choose to display either the X top or bottom values according to the selected [Measure][21].
 
-{{< img src="logs/log_graph.png" alt="Log Analytics" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="logs/log_graph.png" alt="Log Analytics" responsive="true" style="width:70%;">}}
 
 To see the logs that underlie a value or range of values in the graph, just click on the desired point and choose “[view logs][22]” to open a contextual panel with all the underlying logs:
 
@@ -116,17 +116,17 @@ For example: A service generates the below logs:
 
 Going to the pipeline and changing the default mapping to this one:
 
-{{< img src="logs/reserved_attribute_remapper.png" alt="Reserved attribute remapper" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="logs/reserved_attribute_remapper.png" alt="Reserved attribute remapper" responsive="true" style="width:70%;">}}
 
 Would then give the following log:
 
-{{< img src="logs/log_post_remapping.png" alt="Log post remapping" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="logs/log_post_remapping.png" alt="Log post remapping" responsive="true" style="width:70%;">}}
 
 ### Custom log processing rules
 
 For integration logs, we automatically install a pipeline that takes care of parsing your logs as on this example for ELB logs:
 
-{{< img src="logs/elb_log_post_processing.png" alt="ELB log post processing" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="logs/elb_log_post_processing.png" alt="ELB log post processing" responsive="true" style="width:70%;">}}
 
 * A [pipeline][26] takes a filtered subset of incoming logs and applies over them a list of sequential processors.
 * A processor executes within a [pipeline][26] a data-structuring action ([Remapping an attribute][27], [Grok parsing][28]…) on a log.
@@ -137,11 +137,11 @@ With any log syntax, you can extract all your attributes and, when necessary, re
 
 So for instance with custom processing rules you can transform this log:
 
-{{< img src="logs/log_pre_processing.png" alt="Log pre processing" responsive="true" popup="true" style="width:50%;">}}
+{{< img src="logs/log_pre_processing.png" alt="Log pre processing" responsive="true" style="width:50%;">}}
 
 Into this one:
 
-{{< img src="logs/log_post_processing.png" alt="Log post processing" responsive="true" popup="true" style="width:50%;">}}
+{{< img src="logs/log_post_processing.png" alt="Log post processing" responsive="true" style="width:50%;">}}
 
 Follow our [parsing training guide][29] to learn more about parsing.
 We also have a [parsing best practice][30] and a [parsing troubleshooting][31] guide that might be interesting for you.

@@ -248,7 +248,7 @@ Pour commencer à récupérer des journaux d'évènements à partir d'un de vos 
 ### Créez une nouvelle fonction Lambda
 
 1. Naviguez vers le [Console Lambda][50] et créez une nouvelle fonction :
-    {{< img src="logs/aws/create_lambda_function.png" alt="Create Lambda function" responsive="true" popup="true" style="width:80%;" >}}
+    {{< img src="logs/aws/create_lambda_function.png" alt="Create Lambda function" responsive="true" style="width:80%;" >}}
 
 2. Sélectionnez **Author from scratch** et inscrivez un nom unique pour la fonction.
 3. Modifiez le Runtime en tant que **Python 2.7**
@@ -266,7 +266,7 @@ Pour commencer à récupérer des journaux d'évènements à partir d'un de vos 
 
     * Configurez une variable d'environnement (préféré)
     * Éditez le code directement avec votre clé d'API de Datadog
-    {{< img src="logs/aws/dd_api_key_setup.png" alt="DD API key setup" responsive="true" popup="true" style="width:80%;" >}}
+    {{< img src="logs/aws/dd_api_key_setup.png" alt="DD API key setup" responsive="true" style="width:80%;" >}}
 4. Faites défiler en dépassant la champ de code en ligne pour retrouvez **Basic Settings**.
 5. Réglez la mémoire à **environ 1Go**.
 6. Réglez la limite de délai d'expiration. Nous recommandons **120 secondes**.
@@ -343,9 +343,9 @@ Si vous stockez des journaux d'évènements dans plusieurs compartiments S3, Dat
 
 3. Naviguez vers l'onglet *Collect Logs* dans le [carreau AWS Integration](https://app.datadoghq.com/account/settings#integrations/amazon_web_services)
 4. Sélectionnez le compte AWS depuis lequel vous désirez récupérer des journaux d'évènements et inscrivez l'ARN du Lambda créée dans la section précédente.
-{{< img src="logs/aws/AWSLogStep1.png" alt="Enter Lambda" responsive="true" popup="true" style="width:80%;" >}}
+{{< img src="logs/aws/AWSLogStep1.png" alt="Enter Lambda" responsive="true" style="width:80%;" >}}
 5. Cochez les services à partir desquels vous souhaitez récupérer les journaux d'évènements et cliquez sur enregistrer. Pour arrêter la collecte des journaux d'un service spécifique, décochez-le.
-{{< img src="logs/aws/AWSLogStep2.png" alt="Select services" responsive="true" popup="true" style="width:80%;" >}}
+{{< img src="logs/aws/AWSLogStep2.png" alt="Select services" responsive="true" style="width:80%;" >}}
 6. Si vous avez des journaux dans plusieurs régions, vous devez créer des fonctions Lambda supplémentaires dans ces régions et leur inscrivez dans ce carreau.
 7. Pour arrêter la collecte de tous les journaux AWS, appuyez sur le *x* à côté de chaque ARN Lambda. Tous les déclencheurs de cette fonction seront supprimés.
 8. Dans un délai de quelques minutes après cette configuration initiale, vous verrez vos journaux AWS apparaître dans notre [plate-forme de log][86] en temps quasi réel.
@@ -357,15 +357,15 @@ Si vous stockez des journaux d'évènements dans plusieurs compartiments S3, Dat
 #### Configurez les déclencheurs manuellement
 Dans votre Lambda, naviguez vers l'onglet des déclencheurs et sélectionnez `Add Trigger` :
 
-{{< img src="logs/aws/adding_trigger.png" alt="Adding trigger" responsive="true" popup="true"style="width:80%;">}}
+{{< img src="logs/aws/adding_trigger.png" alt="Adding trigger" responsive="true" style="width:80%;">}}
 
 Sélectionnez la source de journal d'évènements et ensuite suivez les instructions AWS :
 
-{{< img src="logs/aws/integration_lambda.png" alt="Integration Lambda" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="logs/aws/integration_lambda.png" alt="Integration Lambda" responsive="true" style="width:80%;">}}
 
 Par exemple, n'oubliez pas de définir le type d'évènement correct pour les compartiments S3 :
 
-{{< img src="logs/aws/object_created.png" alt="Object Created" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="logs/aws/object_created.png" alt="Object Created" responsive="true" style="width:80%;">}}
 
 ## Données collectées
 ### Métriques

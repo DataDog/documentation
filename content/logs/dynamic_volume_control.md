@@ -35,7 +35,7 @@ In a Nutshell:
 
 Indexes are located at the bottom of the [pipeline page][5]. Double click on them or click on the *edit* button to see more information about the number of logs that were indexed in the past 3 days, and the retention period for those logs:
 
-{{< img src="logs/dynamic_volume_control/index_details.png" alt="" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="logs/dynamic_volume_control/index_details.png" alt="" responsive="true" style="width:70%;">}}
 
 ## Setup Log Monitors on volumes
 
@@ -47,7 +47,7 @@ Get notified at any moment if the volumes in any scope (`service`, `availibility
 4. Define the rate you would like to set as *warning* or *error*.
 5. Define an explicit notification: `The volume on this service just got too high. Please define an additional exclusion filter or increase the sampling rate to put it back under control.`
 
-{{< img src="logs/dynamic_volume_control/example_notification.png" alt="" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="logs/dynamic_volume_control/example_notification.png" alt="" responsive="true" style="width:70%;">}}
 
 ## Exclusion Filters
 
@@ -57,7 +57,7 @@ For example, if some logs were captured only for troubleshooting purposes, you m
 
 To define a new Index Filter click on the “add” button:
 
-{{< img src="logs/dynamic_volume_control/index_filters.png" alt="" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="logs/dynamic_volume_control/index_filters.png" alt="" responsive="true" style="width:70%;">}}
 
 To configure an exclusion filter:
 
@@ -66,7 +66,7 @@ To configure an exclusion filter:
     **Note**: It is possible to use any attribute or tag in the Index filter query, even those that are not facets. If you are filtering by non-faceted attributes or tags, be sure to hit “enter/return” from the query bar
 3. Save the filter
 
-    {{< img src="logs/dynamic_volume_control/index_filter_details.png" alt="" responsive="true" popup="true" style="width:80%;">}}
+    {{< img src="logs/dynamic_volume_control/index_filter_details.png" alt="" responsive="true" style="width:80%;">}}
 
 ### Example
 
@@ -104,7 +104,7 @@ Instead of changing your application logging level or using a complex internal f
 
 Enable or disable them in one click in the pipeline page:
 
-{{< img src="logs/dynamic_volume_control/enable_index_filters.png" alt="" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="logs/dynamic_volume_control/enable_index_filters.png" alt="" responsive="true" style="width:80%;">}}
 
 ## Further Reading
 

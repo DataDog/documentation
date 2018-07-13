@@ -48,7 +48,7 @@ Activer le logging de API Gateway:
 3. Dans l'onglet Logs, activez le logging cloudwatch et le *Access logging* 
 4. Sélectionnez le niveau INFO afin d'être sur d'avoir toutes les requêtes.
 5. Assurez vous que "apigateway" est inclue dans le nom de votre groupe de log Cloudwatch.
-    {{< img src="integrations/amazon_api_gateway/aws_api_gateway_log_collection_1.png" alt="AWS api gateway log collection" responsive="true" responsive="true" popup="true" style="width:70%;">}}
+    {{< img src="integrations/amazon_api_gateway/aws_api_gateway_log_collection_1.png" alt="AWS api gateway log collection" responsive="true" responsive="true" style="width:70%;">}}
 6. Sélectionnez le format JSON (CLF et CSV sont aussi supportés) et nous recommandons d'ajouter dans le champ *format*:
 
     ```
@@ -70,9 +70,9 @@ Activer le logging de API Gateway:
 
 1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda pour collecte de log AWS][4].
 2. Une fois la fonction lambda installée, ajoutez manuellement un déclencheur dans la console AWS sur le groupe de log Cloudwatch qui contient vos logs API Gateway:
-{{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_1.png" alt="cloudwatch log group" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_1.png" alt="cloudwatch log group" responsive="true" style="width:70%;">}}
    Sélectionnez le groupe de log CloudWatch correspondant, ajoutez un nom de filtre (mais n'hésitez pas à laisser le filtre vide) et ajoutez le déclencheur:
-{{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_2.png" alt="cloudwatch trigger" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_2.png" alt="cloudwatch trigger" responsive="true" style="width:70%;">}}
 
 Allez désormais dans la section [Log de Datadog][5] pour commencer à explorer vos logs!
 

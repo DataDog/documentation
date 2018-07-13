@@ -21,7 +21,7 @@ Process monitors are configured to check the status of individual or groups of p
 
 ## Live Process Monitors
 
-{{< img src="monitors/monitor_types/process/live_process_monitor_select.png" alt="live process monitor" responsive="true" popup="true" style="width:35%;">}}
+{{< img src="monitors/monitor_types/process/live_process_monitor_select.png" alt="live process monitor" responsive="true" style="width:35%;">}}
 
 Live Process Monitors are based on data collected by the [Process Agent](https://docs.datadoghq.com/graphing/infrastructure/process/) which will allow you to centrally create monitors that warn or alert based on the behavior of any group of processes across any hosts or tags.
 
@@ -31,26 +31,26 @@ Live Process Monitors are based on data collected by the [Process Agent](https:/
   This can be a space separated list of strings. The search performs a partial match, fuzzy search across all processes on your infrastructure.
   Matching processes and counts are displayed in the table below:
 
-    {{< img src="monitors/monitor_types/process/search_process.png" alt="Search process" responsive="true" popup="true" style="width:80%;">}}
+    {{< img src="monitors/monitor_types/process/search_process.png" alt="Search process" responsive="true" style="width:80%;">}}
 
 2. **Use tags to refine your monitor to a specific scope.**  
   You only see hosts or tags that are reporting a status for the selected process.
 
-    {{< img src="monitors/monitor_types/process/selecting_scope.png" alt="Selecting scope" responsive="true" popup="true" style="width:80%;">}}
+    {{< img src="monitors/monitor_types/process/selecting_scope.png" alt="Selecting scope" responsive="true" style="width:80%;">}}
 
     **Note**: Above the *Select process* section is displayed the graph of the number of processes in the scope for the monitor over time.  
     Selecting `multi-alert` split this graph into one line per group.
 
 3. **Select alerting options.**
 
-    {{< img src="monitors/monitor_types/process/set_alert_conditions.png" alt="Set alert conditions" responsive="true" popup="true" style="width:80%;">}}
+    {{< img src="monitors/monitor_types/process/set_alert_conditions.png" alt="Set alert conditions" responsive="true" style="width:80%;">}}
 
 4. **Configure your notification options**.  
   Refer to the [Notifications][2] dedicated documentation page for a detailed options.
 
 ## Process Check
 
-{{< img src="monitors/monitor_types/process/process_check_select.png" alt="process check" responsive="true" popup="true" style="width:35%;">}}
+{{< img src="monitors/monitor_types/process/process_check_select.png" alt="process check" responsive="true" style="width:35%;">}}
 
 A process check monitor watches the status produced by the `process.up` service check reported by the check in the Agent. At the Agent level you can configure thresholds based on the number of matching processes.
 
@@ -62,14 +62,14 @@ For each process, a single service check status is produced. Through this creati
 
 1. **Pick the process to monitor.**  
   You see the names configured in any Agent with an active process check.
-    {{< img src="monitors/monitor_types/process/process_monitor_pick.png" alt="process monitor pick" responsive="true" popup="true" style="width:80%;">}}
+    {{< img src="monitors/monitor_types/process/process_monitor_pick.png" alt="process monitor pick" responsive="true" style="width:80%;">}}
 
 2. **Pick the monitor scope**.  
   You only see hosts or tags that are reporting a status for the selected process.
-    {{< img src="monitors/monitor_types/process/process_monitor_scope.png" alt="process monitor scope" responsive="true" popup="true" style="width:80%;">}}
+    {{< img src="monitors/monitor_types/process/process_monitor_scope.png" alt="process monitor scope" responsive="true" style="width:80%;">}}
 
 3. **Select alerting options**:
-    {{< img src="monitors/monitor_types/process/process_check_alert_conditions.png" alt="process monitor alert conditions" responsive="true" popup="true" style="width:80%;">}}
+    {{< img src="monitors/monitor_types/process/process_check_alert_conditions.png" alt="process monitor alert conditions" responsive="true" style="width:80%;">}}
 
 4. **Configure your notification options**:  
     Refer to the [Notifications](#monitor-notifications) dedicated documentation page for a detailed walkthrough of the common notification options.

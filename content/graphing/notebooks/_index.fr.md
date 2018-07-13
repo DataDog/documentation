@@ -48,7 +48,7 @@ Le texte dans un notebook est formaté en Markdown, ce qui signifie que les note
 
 Lorsqu'un notebook existant est ouvert, ses cellules sont dans un état fermé. Pour ouvrir une cellule afin de l'éditer, cliquez dessus ou naviguez jusqu'à celle-ci avec les touches fléchées et appuyez sur Entrée. Pour fermer une cellule, cliquez en dehors de celle-ci ou appuyez sur `⌘ + Entrée`. Une seule cellule peut être ouverte à la fois.
 
-{{< img src="graphing/notebooks/states.png" alt="states" responsive="true" popup="true">}}
+{{< img src="graphing/notebooks/states.png" alt="states" responsive="true" >}}
 
 Pour insérer, cloner ou supprimer des cellules, cliquez sur l'icône de roue dentée qui apparaît à gauche du numéro de cellule,  ou utilisez un raccourci clavier. Une liste de tous les raccourcis clavier est disponible en cliquant sur l'icône du clavier dans l'en-tête du notebook.
 Les cellules peuvent également être réorganisées en utilisant des raccourcis clavier.
@@ -59,7 +59,7 @@ Un indicateur de temps apparaît dans le coin supérieur droit de chaque cellule
 
 Pour déverrouiller une cellule de l'horizon temporel global, cliquez sur cet indicateur d'heure.
 
-{{< img src="graphing/notebooks/timerange.png" alt="timerange" responsive="true" popup="true" style="width:40%;">}}
+{{< img src="graphing/notebooks/timerange.png" alt="timerange" responsive="true" style="width:40%;">}}
 
 Notez que cliquer et glisser pour zoomer sur un graphique ne débloque pas cette cellule de l'horizon temporel global. Il change à la place l'horizon temporel global du notebook.
 
@@ -68,14 +68,14 @@ Notez que cliquer et glisser pour zoomer sur un graphique ne débloque pas cette
 Pour diviser un graphique par tag, modifier la taille d'un graphique ou basculer la visibilité d'une légende de graphique, cliquez sur l'icône sur le bord droit de la cellule.
 Les légendes sont automatiquement désactivées lorsque la taille du graphique a été définie sur XS ou S. La modification de ces paramètres n'affecte que la cellule cible. la disposition des autres cellules graphiques n'est pas affectée.
 
-{{< img src="graphing/notebooks/options.png" alt="options" responsive="true" popup="true" style="width:40%;">}}
+{{< img src="graphing/notebooks/options.png" alt="options" responsive="true" style="width:40%;">}}
 
 ### Liaison à des cellules individuelles
 
 Pour copier l'URL d'une cellule spécifique, cliquez sur l'icône de lien située sur le côté droit de la cellule. Un lien direct est disponible pour les cellules graphiques et Markdown.
 Lorsqu'un utilisateur visite l'URL d'une cellule spécifique, son notebook est ouvert pour afficher la cellule en question en haut de la fenêtre. Les liens sont absolus, ce qui signifie que l'URL d'une cellule reste la même si elle est déplacée vers une nouvelle position dans son notebook.
 
-{{< img src="graphing/notebooks/directlink.png" alt="directlink" responsive="true" popup="true" style="width:40%;">}}
+{{< img src="graphing/notebooks/directlink.png" alt="directlink" responsive="true" style="width:40%;">}}
 
 ### Sauvegarde, renommage et suppression d'un notebook
 

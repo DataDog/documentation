@@ -7,13 +7,13 @@ It is! There is the [multi-account feature][1]  to help creating new organizatio
 
 Once this feature has been enabled you'll be able to access [this organization creation page][2] to define new orgs:
 
-{{< img src="account_management/faq/createorg1.png" alt="createorg1" responsive="true" popup="true">}}
+{{< img src="account_management/faq/createorg1.png" alt="createorg1" responsive="true" >}}
 
 Please note that your new organization name must be 32 characters or fewer.
 
 Administrators users can access this organization creation page from the menu that appears when hovering over their avatar in the lower lefthand corner, and then clicking on "Create New Organization":
 
-{{< img src="account_management/faq/createorg2.png" alt="createorg2" responsive="true" popup="true">}}
+{{< img src="account_management/faq/createorg2.png" alt="createorg2" responsive="true" >}}
 
 After creating your organizations, you'll be able to switch between any Datadog accounts you're associated with from this same menu.
 

@@ -3,7 +3,7 @@ title: Agent v5 Kubernetes basic Agent usage
 kind: faq
 ---
 
-{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard" responsive="true" popup="true">}}
+{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard" responsive="true" >}}
 
 ## Overview
 

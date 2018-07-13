@@ -36,7 +36,7 @@ C:\Program Files (x86)\Datadog\Datadog Agent\files
 ```
 Puis [redémarrez votre Agent][1].
 
-{{< img src="agent/windows_python_package.png" alt="windows python package" responsive="true" popup="true">}}
+{{< img src="agent/windows_python_package.png" alt="windows python package" responsive="true" >}}
 
 ## En apprendre plus
 

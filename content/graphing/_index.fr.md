@@ -17,7 +17,7 @@ Il existe deux façons d'interagir avec l'éditeur de graphique: l'utilisation d
 
 Sur chaque graphique, il y a une icône en forme de crayon qui ouvre l'éditeur de graphique.
 
-{{< img src="graphing/index/references-graphing-overview.png" alt="Graphing Overview" responsive="true" popup="true" style="width:75%;" >}}
+{{< img src="graphing/index/references-graphing-overview.png" alt="Graphing Overview" responsive="true" style="width:75%;" >}}
 
 L'éditeur de graphique a trois onglets:
 
@@ -27,7 +27,7 @@ L'éditeur de graphique a trois onglets:
 
 Lorsque vous ouvrez la fenêtre de l'éditeur graphique pour la première fois, vous êtes sur l'onglet **Edit**. Ici vous pouvez utiliser l'interface utilisateur pour choisir la plupart des paramètres pour modifier vos graphiques. Voici un exemple de ce que vous pourriez voir. Cet exemple provient du premier graphique du dashboard par défaut de l'intégration Postgres:
 
-{{< img src="graphing/index/references-graphing-edit-window-with-y.png" alt="Graphing Edit Tab" responsive="true" popup="true" style="width:75%;" >}}
+{{< img src="graphing/index/references-graphing-edit-window-with-y.png" alt="Graphing Edit Tab" responsive="true" style="width:75%;" >}}
 
 La configuration d'un graphique est un processus en plusieurs étapes:
 
@@ -75,7 +75,7 @@ Pour utiliser la fonction de rollup, cliquez sur le signe plus à droite du grou
 
 Pour créer une seule ligne représentant l'espace disque total disponible en moyenne sur toutes les machines déployées dans des compartiments de 60 secondes, vous devez utiliser une requête comme celle-ci:
 
-{{< img src="graphing/index/references-graphing-rollup-example.png" alt="rollup example" responsive="true" popup="true" style="width:90%;">}}
+{{< img src="graphing/index/references-graphing-rollup-example.png" alt="rollup example" responsive="true" style="width:90%;">}}
 
 Lorsque vous passez à la vue JSON, la requête ressemble à ceci:
 
@@ -96,7 +96,7 @@ Vous pouvez modifier la façon dont une valeur de métrique est affichée sur un
 Par exemple, si vous souhaitez visualiser le double d'une métrique spécifique, disons `system.load.5`. Cela peut être fait à l'intérieur d'un éditeur de graphique en cliquant sur l'éditeur de graphes et en sélectionnant **Advanced...**.
 De là, entrez votre arithmétique dans la case `Formula`, dans ce cas: ` a * 2`.
 
-{{< img src="graphing/index/arithmetic_2.png" alt="Arithmetic 2" responsive="true" popup="true" style="width:75%;" >}}
+{{< img src="graphing/index/arithmetic_2.png" alt="Arithmetic 2" responsive="true" style="width:75%;" >}}
 
 ### Arithmétique entre deux métriques
 
@@ -112,11 +112,11 @@ Une fois que vous avez ajouté toutes les métriques que vous souhaitiez visuali
 
 Ensuite, dans la case `Formula`, entrez l'arithmétique que vous souhaitez, dans ce cas: `(a/b)`.
 
-{{< img src="graphing/index/arithmetic_3.png" alt="Arithmetic 3" responsive="true" popup="true" style="width:75%;" >}}
+{{< img src="graphing/index/arithmetic_3.png" alt="Arithmetic 3" responsive="true" style="width:75%;" >}}
 
 Pour afficher uniquement votre formule, désactivez vos métriques **a** et **b**:
 
-{{< img src="graphing/index/arithmetic_3_bis.png" alt="Arithmetic 3 bis" responsive="true" popup="true" style="width:75%;" >}}
+{{< img src="graphing/index/arithmetic_3_bis.png" alt="Arithmetic 3 bis" responsive="true" style="width:75%;" >}}
 
 **Note**: Les formules n'ont pas des lettres, vous ne pouvez pas faire d'arithmétique entre les formules.
 
@@ -127,7 +127,7 @@ Pour afficher uniquement votre formule, désactivez vos métriques **a** et **b*
 Chaque requête ou formule peut avoir un alias. L'alias remplace l'affichage sur le graphique et la légende, ce qui est particulièrement utile pour les noms de métriques longs ou pour clarifier une formule.
 À la fin de votre requête/formule, cliquez sur le bouton **as...**, puis entrez votre alias de métrique:
 
-{{< img src="graphing/index/metric_alias.png" alt="metric alias" responsive="true" popup="true" style="width:75%;" >}}
+{{< img src="graphing/index/metric_alias.png" alt="metric alias" responsive="true" style="width:75%;" >}}
 
 ### Définir l'échelle de l'axe des ordonnées
 
@@ -139,7 +139,7 @@ Les contrôles de l'axe des ordonnées de Datadog sont disponibles via l'interfa
 
 Changez l'échelle de l'axe des ordonnées avec le bouton **Show Y-Axis Controls**:
 
-{{< img src="graphing/index/y_axis_control.png" alt="y axis control" responsive="true" popup="true" style="width:75%;" >}}
+{{< img src="graphing/index/y_axis_control.png" alt="y axis control" responsive="true" style="width:75%;" >}}
 
 Il y a trois paramètres de configuration:
 
@@ -161,7 +161,7 @@ Note: comme la fonction log logarithmique n'accepte pas les valeurs négatives, 
 Ajoutez des événements du système associé pour ajouter encore plus de contexte à votre graphique. Un exemple consisterait à ajouter des validations Github, des déploiements Jenkins ou des événements de création Docker. Cliquez simplement sur le bouton Overlay Events et entrez une requête pour trouver et afficher vos événements.
 Pour montrer quelque chose d'une source telle que Github, utilisez `sources: github`. Pour tous les événements avec le tag `role:web`, utilisez `tag:role:web`.
 
-{{< img src="graphing/index/overlay_events.png" alt="Overlay Events" responsive="true" popup="true" style="width:75%;" >}}
+{{< img src="graphing/index/overlay_events.png" alt="Overlay Events" responsive="true" style="width:75%;" >}}
 
 ## Créez un titre
 

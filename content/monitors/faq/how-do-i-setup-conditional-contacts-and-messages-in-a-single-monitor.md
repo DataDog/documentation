@@ -16,7 +16,7 @@ further_reading:
 
 [Message template variables][2] provide this kind of conditional processing and are described within the help text in section 3 of the monitor edit page shown below:
 
-{{< img src="monitors/faq/conditional_notification.png" alt="conditional_notification" responsive="true" popup="true" >}}
+{{< img src="monitors/faq/conditional_notification.png" alt="conditional_notification" responsive="true" >}}
 
 These condition variables can be used within either the subject or body of the notification set in section 3 of the monitor definition.
 

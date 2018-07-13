@@ -35,7 +35,7 @@ Tout client StatsD fonctionne, mais vous n'aurez pas les fonctionnalités suppl�
 DogStatsD accepte les [métriques personnalisées][6], les évènements et les checks de service par UDP, les agrègent et les transmets périodiquement vers Datadog.
 Parce qu'il utilise UDP, votre application peut envoyer des métriques vers DogStatsD et reprendre son travail sans attendre de réponse. Si jamais DogStatsD devient indisponible, votre application ne sautera pas un temps.
 
-{{< img src="developers/dogstatsd/dogstatsd.png" alt="dogstatsd"  responsive="true" popup="true">}}
+{{< img src="developers/dogstatsd/dogstatsd.png" alt="dogstatsd"  responsive="true" >}}
 
 Lors de la réception des données, DogStatsD agrège plusieurs points de données pour chaque métrique unique en un seul point de donnée sur une période de temps appelé "flush interval". Voici un exemple de comment cela fonctionne:
 

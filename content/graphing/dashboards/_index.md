@@ -17,7 +17,7 @@ further_reading:
 
 To create a [Timeboard][3] or a [Screenboard][4] Select which of these you would prefer to create after clicking 'New Dashboard' in the 'Dashboards' dropdown.
 
-{{< img src="graphing/dashboards/board_selection.jpg" alt="Dashboard selection" responsive="true" popup="true">}}
+{{< img src="graphing/dashboards/board_selection.jpg" alt="Dashboard selection" responsive="true" >}}
 
 ## What is the difference between a Screenboard and a Timeboard?
 
@@ -37,11 +37,11 @@ Dashboard templating allows you to create dashboards that use variables like `$s
 
 To create, edit, and delete template variables click the gear icon at the upper right-hand side of the screen, then select 'Edit Template Variables' from the actions menu.
 
-{{< img src="graphing/dashboards/edit-template-variables.png" alt="edit template variable" responsive="true" popup="true" style="width:30%;">}}
+{{< img src="graphing/dashboards/edit-template-variables.png" alt="edit template variable" responsive="true" style="width:30%;">}}
 
 This open the template variable editing panel.
 
-{{< img src="graphing/dashboards/redis-template-var.png" alt="Redis template var" responsive="true" popup="true" style="width:50%;">}}
+{{< img src="graphing/dashboards/redis-template-var.png" alt="Redis template var" responsive="true" style="width:50%;">}}
 
 A template variable is defined by a name and optional parameters for 'Tag Group' and 'Default Tag.' A tag group is a prefix shared among several tags, like `redis_port` for the tags `redis_port:6379` and `redis_port:6380`. Setting a tag group eliminates irrelevant tags from the variable's scope selector, and removes the prefix from the listed values for clarity - so you'll see `6379` and `6380` in the 'Default Tag' dropdown instead. The 'Default Tag' option determines the initial value for the variable on dashboard load.
 
@@ -51,7 +51,7 @@ A template variable is defined by a name and optional parameters for 'Tag Group'
 
 Once defined, template variables appear alongside normal tag and host options in graph editors. If you set `6379` as the value of `$redis`, all graphs defined with `$redis` is scoped to `redis_port:6379`.
 
-{{< img src="graphing/dashboards/redis-tpl-selected.png" alt="Redis tpl selected" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="graphing/dashboards/redis-tpl-selected.png" alt="Redis tpl selected" responsive="true" style="width:70%;">}}
 
 You can also use them explicitly in widgets such as Event Stream, with a query of the form `tags:$redis`.
 
@@ -59,13 +59,13 @@ You can also use them explicitly in widgets such as Event Stream, with a query o
 ## Event Correlation at Design Time
 Event Correlation refers to overlaying events on top of a dashboard graph and is an important feature of the Datadog platform. You can setup correlation at two different times: either when you setup the dashboard or adhoc at the time you view the dashboard.
 
-{{< img src="graphing/dashboards/guides-eventcorrelation-screenboard.png" alt="guides-eventcorrelation-screenboard" responsive="true" popup="true" style="width:90%;">}}
+{{< img src="graphing/dashboards/guides-eventcorrelation-screenboard.png" alt="guides-eventcorrelation-screenboard" responsive="true" style="width:90%;">}}
 
 Setup event correlation at design time by editing any graph on both Timeboards and Screenboards and adding events to the graph. To learn more about this, visit the [Graphing Primer][1]. You can find details about adding events [using the UI][2] or via the JSON interface further down the page.
 
 ## Event Correlation at View Time
 
-{{< img src="graphing/dashboards/guides-eventcorrelation-searchbox.png" alt="guides event correlation" responsive="true" popup="true" style="width:90%;">}}
+{{< img src="graphing/dashboards/guides-eventcorrelation-searchbox.png" alt="guides event correlation" responsive="true" style="width:90%;">}}
 
 Setup event correlation at view time by adding a query in the Search box at the top left of any Timeboard dashboard window. This replaces any events added at design time, but applies the events to all graphs on that particular dashboard.
 
@@ -75,7 +75,7 @@ Setup event correlation at view time by adding a query in the Search box at the 
 
 Fast and easy correlation is key when troubleshooting an issue. Use the following shortcut from any dashboard timeseries graphs to open a contextual menu with the most related logs.
 
-{{< img src="graphing/dashboards/related_logs.png" alt="Related logs" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="graphing/dashboards/related_logs.png" alt="Related logs" responsive="true" style="width:80%;">}}
 
 Select `View related logs` to jump to the log explorer page zoomed on the selected timeframe with all the current context of your graph.
 

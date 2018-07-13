@@ -56,7 +56,7 @@ Once your monitors are set and alerting (they'll all need to alert at least once
 
 Here's an example of one such widget (although in this example, the check's name was "composite.status" and only one monitor in our group has yet triggered as "alert" and then "ok" again):
 
-{{< img src="developers/faq/check_status_editor.png" alt="check_status_editor" responsive="true" popup="true">}}
+{{< img src="developers/faq/check_status_editor.png" alt="check_status_editor" responsive="true" >}}
 
 [1]: /integrations/webhooks
 [2]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio

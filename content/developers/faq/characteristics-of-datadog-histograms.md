@@ -39,7 +39,7 @@ For instance, if you graph avg:response_time.avg{*}, our system lists all source
 * host:Z, env:live, request:A
 * host:Z, env:live, request:B
 
-{{< img src="developers/faq/metric_histogram.png" alt="metric_histogram"  responsive="true" popup="true">}}
+{{< img src="developers/faq/metric_histogram.png" alt="metric_histogram"  responsive="true" >}}
 
 Since the avg: aggregation has been chosen, the graph reports:
 (value(source1) + value(source2) + value(source3) + value(source4) )/ 4

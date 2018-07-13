@@ -6,7 +6,7 @@ kind: documentation
 ## Changer le nom d'un Screenboard
 
 1. Cliquez sur l'icône d'information en haut à droite de votre Screenboard:
-    {{< img src="graphing/dashboards/screenboard/screenboard_name.png" alt="Screenboard name" responsive="true" popup="true" style="width:75%;">}}
+    {{< img src="graphing/dashboards/screenboard/screenboard_name.png" alt="Screenboard name" responsive="true" style="width:75%;">}}
 2. Changez le nom pour correspondre à votre cas
 3. Cliquez sur "Save Changes"
 
@@ -14,7 +14,7 @@ kind: documentation
 
 [Un Administrateur][1] ou le créateur d'un Screenboard peut passer un Screenboard en lecture seule en cliquant sur l'icône engrenage (coin droit du Screenboard) puis sur le lien **Permissions**:
 
-{{< img src="graphing/dashboards/screenboard/read_only.png" alt="Read Only" responsive="true" popup="true" style="width:30%;">}}
+{{< img src="graphing/dashboards/screenboard/read_only.png" alt="Read Only" responsive="true" style="width:30%;">}}
 
 **Cliquer sur "Yes" dans la fenêtre de confirmation passe le Screenboard en lecture seule**
 
@@ -48,10 +48,10 @@ https://app.datadoghq.com/event/stream?per_page=30&query=tags:audit%20status:all
 Cette fonctionnalité peut être activée en suivant ces étapes:
 
 1. Dans l'angle supérieur droit d'un dashboard, cliquez sur l'icône représentant une roue dentée:
-    {{< img src="graphing/dashboards/faq/enable_notifications.png" alt="enable notifications" responsive="true" popup="true" style="width:30%;">}}
+    {{< img src="graphing/dashboards/faq/enable_notifications.png" alt="enable notifications" responsive="true" style="width:30%;">}}
 
 2. Sélectionnez l'option **Notifications** et activez les notifications:
-    {{< img src="graphing/dashboards/faq/notifications_pop_up.png" alt=" notifications pop up" responsive="true" popup="true" style="width:40%;">}}
+    {{< img src="graphing/dashboards/faq/notifications_pop_up.png" alt=" notifications pop up" responsive="true" style="width:40%;">}}
 
 ## Sauvegarder mon Screenboard
 

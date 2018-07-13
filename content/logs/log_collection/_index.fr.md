@@ -297,11 +297,11 @@ L'utilisation de l'agent Datadog ou du format RFC5424 définit automatiquement l
 
 Vous pouvez désormais contrôler le mappage global d'hôte, de service, de timestamp et de status qui sont appliqués avant les pipelines de traitement. Ceci est particulièrement utile si les logs sont envoyés en JSON ou à partir d'un Agent externe.
 
-{{< img src="logs/log_collection/reserved_attribute.png" alt="Reserved Attribute" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="logs/log_collection/reserved_attribute.png" alt="Reserved Attribute" responsive="true" style="width:80%;">}}
 
 Pour modifier les valeurs par défaut de chacun des attributs réservés, accédez à la page du pipeline et modifiez `Reserved Attribute mapping`:
 
-{{< img src="logs/log_collection/reserved_attribute_tile.png" alt="Reserved Attribute Tile" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="logs/log_collection/reserved_attribute_tile.png" alt="Reserved Attribute Tile" responsive="true" style="width:80%;">}}
 
 [1]: /agent
 [2]: /getting_started/custom_metrics/

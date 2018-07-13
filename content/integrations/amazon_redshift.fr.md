@@ -61,9 +61,9 @@ Activez d'abord le logging sur votre cluster Redshift pour collecter vos logs. L
 
 1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda pour collecte de log AWS](/integrations/amazon_web_services/#create-a-new-lambda-function).
 2. Une fois la fonction lambda installée, ajoutez manuellement un déclencheur sur le bucket S3 contenant vos logs Redshift dans la console AWS. Dans votre Lambda, cliquez sur S3 dans la liste des déclencheurs:
-{{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="S3 trigger configuration" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="S3 trigger configuration" responsive="true" style="width:70%;">}}
     Configurez votre déclencheur en choisissant le bucket S3 qui contient vos logs Redshift et changez le type d'événement en `Object Created (All)`, puis cliquez sur le bouton *add*.
-{{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="S3 Lambda trigger configuration" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="S3 Lambda trigger configuration" responsive="true" style="width:70%;">}}
 
 Allez désormais dans la section [Log de Datadog](https://app.datadoghq.com/logs) pour commencer à explorer vos logs!
 

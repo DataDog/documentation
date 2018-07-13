@@ -14,7 +14,7 @@ further_reading:
   text: Schedule a downtime to mute a monitor
 ---
 
-{{< img src="monitors/monitor_status/monitor_status_page.png" alt="monitor status page" responsive="true" popup="true" >}}
+{{< img src="monitors/monitor_status/monitor_status_page.png" alt="monitor status page" responsive="true" >}}
 
 ## Overview
 
@@ -36,7 +36,7 @@ Some options are available in the upper right corner of the page:
 
     NOTE: muting or unmuting a monitor via the UI deletes all scheduled downtimes associated with that monitor.
 
-    {{< img src="monitors/monitor_status/status_mute_monitor.png" alt="status mute monitor" responsive="true" popup="true" style="width:30%;">}}
+    {{< img src="monitors/monitor_status/status_mute_monitor.png" alt="status mute monitor" responsive="true" style="width:30%;">}}
 
 * **Resolve a monitor**:
     Resolve your monitor manually.
@@ -50,7 +50,7 @@ Some options are available in the upper right corner of the page:
 
 ## Properties
 
-{{< img src="monitors/monitor_status/status_monitor_properties.png" alt="status monitor properties" responsive="true" popup="true" style="width:80%;" >}}
+{{< img src="monitors/monitor_status/status_monitor_properties.png" alt="status monitor properties" responsive="true" style="width:80%;" >}}
 
 The *Properties* section is the overview of your monitor:
 
@@ -67,7 +67,7 @@ Use the *cog* icon in the upper right corner of the page to [edit][1] your monit
 
 The *Status and History* section reflect the query and state changes over time, while the **Evaluation Graph** represents the exact query behavior within the timeframe bracket *on the history graph*. The Evaluation Graph has a fixed zoomed window that corresponds to your monitor evaluation timesteps, to ensure the displayed points are not [incorrectly aggregated][9]. Slide this bracket over the timeline in order to view previous monitor evaluation results:
 
-{{< img src="monitors/monitor_status/status_monitor_history.gif" alt="status monitor history" responsive="true" popup="true" style="width:80%;" >}}
+{{< img src="monitors/monitor_status/status_monitor_history.gif" alt="status monitor history" responsive="true" style="width:80%;" >}}
 
 To deep dive into your metrics evolution for further investigation, we advise you to use the [Metric Explorer page][7] or a dedicated [Notebook][8]
 
@@ -75,7 +75,7 @@ To deep dive into your metrics evolution for further investigation, we advise yo
 
 All events generated from your monitor are aggregated in this section. Those events are also displayed in your [event stream][6].
 
-{{< img src="monitors/monitor_status/status_monitor_event.png" alt="status monitor event" responsive="true" popup="true" style="width:80%;" >}}
+{{< img src="monitors/monitor_status/status_monitor_event.png" alt="status monitor event" responsive="true" style="width:80%;" >}}
 
 ## Further Reading
 

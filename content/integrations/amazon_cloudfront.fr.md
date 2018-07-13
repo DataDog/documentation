@@ -46,9 +46,9 @@ Si vous ne l'avez pas déjà fait, configurez [l'Intégration Amazon Web Service
 
 Lorsque vous activez le logging pour une distribution, spécifiez le bucket Amazon S3 dans lequel vous souhaitez que CloudFront stocke les logs. Si vous utilisez Amazon S3 comme origine, nous vous recommandons de ne pas utiliser le même bucket pour vos logs, l'utilisation d'un bucket séparé simplifie la maintenance.
 
-{{< img src="integrations/amazon_cloudfront/cloudfront_logging_1.png" alt="Cloudfront logging 1" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_cloudfront/cloudfront_logging_1.png" alt="Cloudfront logging 1" responsive="true" style="width:70%;">}}
 
-{{< img src="integrations/amazon_cloudfront/cloudfront_logging_2.png" alt="Cloudfront logging 1" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_cloudfront/cloudfront_logging_2.png" alt="Cloudfront logging 1" responsive="true" style="width:70%;">}}
 
 Stockez les logs pour plusieurs distributions dans le même bucket. Lorsque vous activez le logging, spécifiez “cloudfront” comme préfixe pour les noms de fichiers, [pour garder trace des fichiers de logs associés aux distributions](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html#access-logs-choosing-s3-bucket).
 
@@ -56,9 +56,9 @@ Stockez les logs pour plusieurs distributions dans le même bucket. Lorsque vous
 
 1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda pour collecte de log AWS](/integrations/amazon_web_services/#create-a-new-lambda-function).
 2. Une fois la fonction lambda installée, ajoutez manuellement un déclencheur sur le bucket S3 contenant vos logs Cloudfront dans la console AWS. Dans votre Lambda, cliquez sur S3 dans la liste des déclencheurs:
-{{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="S3 trigger configuration" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="S3 trigger configuration" responsive="true" style="width:70%;">}}
     Configurez votre déclencheur en choisissant le bucket S3 qui contient vos logs ELB et changez le type d'événement en `Object Created (All)`, puis cliquez sur le bouton *add*.
-{{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="S3 Lambda trigger configuration" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="S3 Lambda trigger configuration" responsive="true" style="width:70%;">}}
 
 Allez désormais dans la section [Log de Datadog](https://app.datadoghq.com/logs) pour commencer à explorer vos logs!
 

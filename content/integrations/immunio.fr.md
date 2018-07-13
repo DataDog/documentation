@@ -16,7 +16,7 @@ short_description: Recueillir des données d'Immunio pour visualiser et monitore
 version: '1.0'
 ---
 
-{{< img src="integrations/immunio/immunio_dash.png" alt="Immunio Dashboard" responsive="true" popup="true">}}
+{{< img src="integrations/immunio/immunio_dash.png" alt="Immunio Dashboard" responsive="true" >}}
 
 ## Aperçu
 
@@ -34,9 +34,9 @@ IMMUNIO monitor vos applications pour détecter et vous défendre contre tout ce
 
 1.  Connectez vous à votre [compte  IMMUNIO](http://www.immun.io/).
 1.  Accédez à la [page d'implémentation des intégrations](https://dashboard.immun.io/#/settings/integrations).
-    {{< img src="integrations/immunio/immuniosetup1.png" alt="Integration Setup Page" responsive="true" popup="true">}}
+    {{< img src="integrations/immunio/immuniosetup1.png" alt="Integration Setup Page" responsive="true" >}}
 1.  Cliquez sur "Add an API Key".
-    {{< img src="integrations/immunio/immuniosetup2.png" alt="Add API Key" responsive="true" popup="true">}}
+    {{< img src="integrations/immunio/immuniosetup2.png" alt="Add API Key" responsive="true" >}}
 1.  Ajoutez votre clé API.
 
 ### Configuration

@@ -40,7 +40,7 @@ descriptors:
     - [address, localisation] #captures the content of "address" column as a tag and renames this tag "localisation"
 ```
 Result:
-{{< img src="integrations/faq/sql_metric_explorer.png" alt="sql_metric_explorer" responsive="true" popup="true">}}
+{{< img src="integrations/faq/sql_metric_explorer.png" alt="sql_metric_explorer" responsive="true" >}}
 
 ## Full postgres.yaml file with more queries
 
