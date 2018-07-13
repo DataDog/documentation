@@ -3,9 +3,9 @@ title: Search
 kind: documentation
 description: "The Logs Explorer is your Datadog home base for troubleshooting and exploration over your logs."
 further_reading:
-- link: "logs/graph"
+- link: "logs/analytics"
   tag: "Documentation"
-  text: "Perform analytics with Log Graphs"
+  text: "Perform Log Analytics"
 - link: "logs/processing"
   tag: "Documentation"
   text: Learn how to process your logs
@@ -184,7 +184,7 @@ To start using an attribute as a Facet or in the search, click on it and add it 
 
 {{< img src="logs/explore/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" popup="true" style="width:50%;">}}
 
-Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the [Log graph query][2].
+Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the [Log Analytics query][2].
 
 ### Facet Panel
 
@@ -202,11 +202,11 @@ To start using an attribute as a measure, click on a numerical attribute of your
 
 {{< img src="logs/explore/create_a_mesure.png" alt="Create a measure" responsive="true" popup="true" style="width:80%;">}}
 
-Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the [Log graph query][2].
+Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the [Log Analytics query][2].
 
 ### Select the Measure Unit
 
-All measure have their own unit that is then used for display in the Log explorer columns, Log stream widgets in dashboards, and in the Log Graphs.
+All measure have their own unit that is then used for display in the Log explorer columns, Log stream widgets in dashboards, and in the Log Analytics.
 
 {{< img src="logs/explore/edit_a_measure.png" alt="Edit a measure" responsive="true" popup="true" style="width:80%;">}}
 
@@ -215,7 +215,7 @@ All measure have their own unit that is then used for display in the Log explore
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/processing/#attribute-remapper
-[2]: /logs/graph
+[2]: /logs/analytics
 [4]: /graphing/infrastructure/
 [5]: /integrations/
 [6]: /getting_started/tagging/#tags-best-practices

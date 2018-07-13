@@ -3,9 +3,9 @@ title: Log Management
 kind: Documentation
 description: "Configure your Datadog Agent to gather logs from your host, containers & services."
 further_reading:
-- link: "logs/graph"
+- link: "logs/analytics"
   tag: "Documentation"
-  text: "Perform analytics with Log Graphs"
+  text: "Perform Log Analytics"
 - link: "logs/processing"
   tag: "Documentation"
   text: Learn how to process your logs
@@ -85,7 +85,7 @@ Now that your logs are parsed and you have facets and Measure over the important
 3. Use a Tag or [Facet][18] to split your graph.
 4. Choose to display either the X top or bottom values according to the selected [Measure][21].
 
-{{< img src="logs/log_graph.png" alt="Log graph" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="logs/log_graph.png" alt="Log Analytics" responsive="true" popup="true" style="width:70%;">}}
 
 To see the logs that underlie a value or range of values in the graph, just click on the desired point and choose “[view logs][22]” to open a contextual panel with all the underlying logs:
 
@@ -172,8 +172,8 @@ There are many kinds of processors; find the full list and how to use them [here
 [19]: /logs/explore/#create-a-facet
 [20]: /logs/explore/#search-syntax
 [21]: /logs/explore/#measures
-[22]: /logs/graph/#related-logs
-[23]: /logs/graph/
+[22]: /logs/analytics/#related-logs
+[23]: /logs/analytics/
 [24]: /logs/log_collection/#reserved-attributes
 [25]: /logs/log_collection/#edit-reserved-attributes
 [26]: /logs/processing/#processing-pipelines

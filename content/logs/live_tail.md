@@ -3,9 +3,9 @@ title: Live Tail
 kind: documentation
 description: "See all your logs in real time."
 further_reading:
-- link: "logs/graph"
+- link: "logs/analytics"
   tag: "Documentation"
-  text: "Perform analytics with Log Graphs"
+  text: "Perform Log Analytics"
 - link: "logs/processing"
   tag: "Documentation"
   text: Learn how to process your logs
