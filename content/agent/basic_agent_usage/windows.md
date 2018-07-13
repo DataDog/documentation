@@ -70,10 +70,30 @@ You can also use Windows Powershell if you are running on a modern version of Wi
 The Agent can be started, stopped, and restarted from the Services panel. To view the Services panel, execute the following in a `cmd.exe` shell: `services.msc`. Once you're in the console, find the "Datadog Agent" service. Right clicking on the service reveals options to start, stop, and restart the Agent.
 
 ## Status and Information
+##### Agent >= 6
 
-To check if the Agent is running, check if the service status in the Services panel is listed as "Started". A process called "ddagent.exe" should also exist in the Task Manager. To receive more information about the Agent's state, visit the _status page_ by going to **Settings -> Agent Status** in Agent version 5.2 and above and by going to `http://localhost:17125/status` in Agent version 3.9.1 to 5.1.
+To check if the Agent is running, check if the `DatadogAgent` service in the Services panel is listed as *Started*. A process called *Datadog Metrics Agent* (`agent.exe`) should also exist in the Task Manager.
 
-For 5.2 and later versions of the Agent go to the Datadog Agent Manager->Settings->Agent Status
+To receive more information about the Agent's state, start the Agent GUI by either:
+
+- Right clicking on the Datadog Agent system tray icon -> Configure
+- Or: running `& 'C:\program files\datadog\datadog agent\embedded\agent.exe' launch-gui` from an admin Powershell prompt
+
+Then, open the status page by going to *Status* -> *General*. Get more information on the checks that are running on the *Status* -> *Collector* page and the *Checks* -> *Summary* page.
+
+It's also possible to run the status command directly using Powershell:
+
+`& 'C:\program files\datadog\datadog agent\embedded\agent.exe' status`
+
+or `cmd.exe`:
+
+`C:\program files\datadog\datadog agent\embedded\agent.exe" status`
+
+##### Agent < v6
+
+To check if the Agent is running, check if the service status in the Services panel is listed as "Started". A process called `ddagent.exe` should also exist in the Task Manager. To receive more information about the Agent's state, visit the _status page_ by going to *Settings -> Agent Status* in Agent version 5.2 and above and by going to `http://localhost:17125/status` in Agent version 3.9.1 to 5.1.
+
+For 5.2 and later versions of the Agent go to the Datadog Agent *Manager->Settings->Agent Status*
 
 {{< img src="agent/faq/windows_status.png" alt="Windows Status" responsive="true" style="width:50%;" >}}
 
@@ -82,15 +102,14 @@ It's also possible to run the info command using Powershell:
 ```
 & 'C:\Program Files\Datadog\Datadog Agent\embedded\python.exe' 'C:\Program Files\Datadog\Datadog Agent\agent\agent.py' info
 ```
+
 or cmd.exe:
+
 ```
 C:\"Program Files"\Datadog\"Datadog Agent"\embedded\python.exe" "C:\Program Files\Datadog\Datadog Agent\agent\agent.py" info
 ```
 
-If you're running on a version older than 5.2 visit the status page in your web browser:
-
-http://localhost:17125/status
-The status page is supported in Agent version 3.9.1-5.1.1
+If you're running on a version older than 5.2 visit the status page in your web browser: `http://localhost:17125/status` The status page is supported in Agent version 3.9.1-5.1.1
 
 ## Configuration
 
