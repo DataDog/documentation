@@ -77,7 +77,7 @@ To check if the Agent is running, check if the `DatadogAgent` service in the Ser
 To receive more information about the Agent's state, start the Agent GUI by either:
 
 - Right clicking on the Datadog Agent system tray icon -> Configure
-- running `& 'C:\program files\datadog\datadog agent\embedded\agent.exe' launch-gui` from an admin Powershell prompt
+- Or: running `& 'C:\program files\datadog\datadog agent\embedded\agent.exe' launch-gui` from an admin Powershell prompt
 
 Then, open the status page by going to *Status* -> *General*. Get more information on the checks that are running on the *Status* -> *Collector* page and the *Checks* -> *Summary* page.
 
