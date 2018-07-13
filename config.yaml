@@ -195,6 +195,12 @@ languages:
         # INTEGRATIONS - Subnav start
         # INTEGRATIONS - Subnav end
 
+        # Watchdog
+        - identifier: customnav_watchdog
+          name: "Watchdog"
+          url: "watchdog/"
+          pre: "nav_watchdog"
+          weight: 55
 
         # GRAPHING
         - identifier: menu_references_graphing
@@ -514,13 +520,6 @@ languages:
           name: "Trace Analytics"
           url: "tracing/analytics"
           weight: 35
-          parent: menu_references_tracing
-
-        # Watchdog
-        - identifier: customnav_tracingnav_watchdog
-          name: "Watchdog"
-          url: "tracing/watchdog"
-          weight: 40
           parent: menu_references_tracing
 
         # Trace API
