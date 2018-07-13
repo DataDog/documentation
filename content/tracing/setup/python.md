@@ -114,7 +114,7 @@ def doc_resource():
 
 Each time its called, the following code produces this **trace**:
 
-{{< img src="tracing/simple_trace.png" alt="Simple Trace" responsive="true" popup="true">}}
+{{< img src="tracing/simple_trace.png" alt="Simple Trace" responsive="true" >}}
 
 ## Further Reading
 

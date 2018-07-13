@@ -16,7 +16,7 @@ further_reading:
   text: Understand how to read a Datadog Trace
 ---
 
-{{< img src="tracing/visualization/service/detailed_service_page.png" alt="Detailed service page" responsive="true" popup="true" style="width:90%;">}}
+{{< img src="tracing/visualization/service/detailed_service_page.png" alt="Detailed service page" responsive="true" style="width:90%;">}}
 
 ## Overview 
 
@@ -32,7 +32,7 @@ Consult on this page:
 
 Datadog propose list of monitor depending of your service type: 
 
-{{< img src="tracing/visualization/service/service_monitors.png" alt="Service Monitors" responsive="true" popup="true" style="width:90%;">}}
+{{< img src="tracing/visualization/service/service_monitors.png" alt="Service Monitors" responsive="true" style="width:90%;">}}
 
 Enable them directly or create your own [APM monitors][2].
 
@@ -54,7 +54,7 @@ Datadog provides out of the box graphs for any given Service:
     * The **% Error Rate** 
 * Sub-Services: When there are multiple services involved, a fourth graph is available that breaks down your **Total time spent**/**%of time spent**/**Avg time per request** of your service by *services* or *type*. For services like *Postgres* or *Redis*, which are "final" operations not calling other service underneath, there will be no Sub-services graph.
 
-{{< img src="tracing/visualization/service/out_of_the_box_service_graph.png" alt="Out of the bow service graphs" responsive="true" popup="true" style="width:90%;">}}
+{{< img src="tracing/visualization/service/out_of_the_box_service_graph.png" alt="Out of the bow service graphs" responsive="true" style="width:90%;">}}
 
 **Note**: Use the *cogs* icon to display all options available for any given graph.
 
@@ -62,30 +62,30 @@ Datadog provides out of the box graphs for any given Service:
 
 On the upper-right corner of each graph click on the arrow in order to export your graph into a pre-existing [Timeboard][4]:
 
-{{< img src="tracing/visualization/service/save_to_timeboard.png" alt="Save to timeboard" responsive="true" popup="true" style="width:40%;">}}
+{{< img src="tracing/visualization/service/save_to_timeboard.png" alt="Save to timeboard" responsive="true" style="width:40%;">}}
 
 ### Latency distribution
 
 In addition to all those graphs there is a service latency distribution graph:
 
-{{< img src="tracing/visualization/service/latency_distribution.png" alt="latency distribution" responsive="true" popup="true" style="width:90%;">}}
+{{< img src="tracing/visualization/service/latency_distribution.png" alt="latency distribution" responsive="true" style="width:90%;">}}
 
 Use the top right selector of this graph to zoom on a given percentile of latency distribution:
 
-{{< img src="tracing/visualization/service/latency_distribution_selector.png" alt="latency distribution selector" responsive="true" popup="true" style="width:20%;">}}
+{{< img src="tracing/visualization/service/latency_distribution_selector.png" alt="latency distribution selector" responsive="true" style="width:20%;">}}
 
 ## Resources
 
 See the list of resources associated with your service. Resources are particular actions for your services (typically individual endpoints or queries). Read more about resources in [Getting Started with APM][5]. Sort the resources for this service by requests, latency, errors, and time, to identify areas of high traffic or potential trouble. Note that the these metric columns are configurable (see image below).
 
-{{< img src="tracing/visualization/service/resources.png" alt="Resources" responsive="true" popup="true" style="width:90%;">}}
+{{< img src="tracing/visualization/service/resources.png" alt="Resources" responsive="true" style="width:90%;">}}
 
 [Refer to our dedicated resource documentation to learn more][1].
 
 ### Filtering the resources list
 Filter your resources list with a query for basic text filtering:
 
-{{< img src="tracing/visualization/service/resources_filtering.gif" alt="Resource filtering" responsive="true" popup="true" style="width:90%;">}}
+{{< img src="tracing/visualization/service/resources_filtering.gif" alt="Resource filtering" responsive="true" style="width:90%;">}}
 
 ### Columns 
 
@@ -97,7 +97,7 @@ Choose what to display in your resources list:
 * **Error**: Absolute amount of error for a given resource
 * **Error Rate**: Percent of error for a given resource
 
-{{< img src="tracing/visualization/service/resource_columns.png" alt="Resource columns" responsive="true" popup="true" style="width:50%;">}}
+{{< img src="tracing/visualization/service/resource_columns.png" alt="Resource columns" responsive="true" style="width:50%;">}}
 
 ## Further Reading
 

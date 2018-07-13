@@ -20,7 +20,7 @@ further_reading:
 
 The Infrastructure list page shows all hosts monitored by your Datadog application:
 
-{{< img src="graphing/infrastructure/index/infrastructure_list.png" alt="Infrastructure list" responsive="true" popup="true" >}}
+{{< img src="graphing/infrastructure/index/infrastructure_list.png" alt="Infrastructure list" responsive="true" >}}
 
 Note: A host that has not sent data in 24 hours disappears from the infrastructure list; you can still query against it, but it won't appear in drop downs.
 
@@ -28,7 +28,7 @@ Note: A host that has not sent data in 24 hours disappears from the infrastructu
 
 If you click on one host, You can see the tags applied to it:
 
-{{< img src="graphing/infrastructure/index/infrastructure_list_host_details.png" alt="Infrastructure list host details" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/index/infrastructure_list_host_details.png" alt="Infrastructure list host details" responsive="true" style="width:80%;">}}
 
 ### Agent Host Names
 
@@ -82,13 +82,13 @@ Datadog creates aliases for host names when there are multiple uniquely identifi
 You can see a list of all the hosts in your account from the Infrastructure tab
 in Datadog. From the Inspect panel, you can see (among other things) the list of aliases associated with each host.
 
-{{< img src="graphing/infrastructure/index/host_aliases.png" alt="host aliases" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/index/host_aliases.png" alt="host aliases" responsive="true" style="width:80%;">}}
 
 ### Export your infrastructure list and Agent versions
 
 If you need to print or export the list of hosts reporting to Datadog, use the "JSON API permalink" at the bottom of the Infrastructure List. 
 
-{{< img src="graphing/infrastructure/index/infrastructure_list.png" alt="inf list" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/index/infrastructure_list.png" alt="inf list" responsive="true" style="width:80%;">}}
 
 Clicking this link provides you with a JSON formatted list of all your hosts.  
 
@@ -111,7 +111,7 @@ You can programmatically access host information and get the insights you need, 
 * for which Datadog receives AWS EC2 information from Cloudwatch, through our AWS integration.
 * but that don't have the Agent installed.
 
-{{< img src="graphing/infrastructure/index/ec2_instances_without_dd_agent.png" alt="ec2_instances_without_dd_agent" responsive="true" popup="true" style="width:90%;">}}
+{{< img src="graphing/infrastructure/index/ec2_instances_without_dd_agent.png" alt="ec2_instances_without_dd_agent" responsive="true" style="width:90%;">}}
 
 [See the script to prints the list of hosts][8].
 

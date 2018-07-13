@@ -18,7 +18,7 @@ short_description: Suivre les métriques clés Azure Storage.
 version: '1.0'
 ---
 
-{{< img src="integrations/azure/storage_dash.png" alt="storage dash" responsive="true" popup="true">}}
+{{< img src="integrations/azure/storage_dash.png" alt="storage dash" responsive="true" >}}
 
 ## Aperçu
 

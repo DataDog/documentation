@@ -31,7 +31,7 @@ supported_os:
   - windows
 version: 2.4.0
 ---
-{{< img src="integrations/couchdb/couchdb_graph.png" alt="CouchDb Graph" responsive="true" popup="true">}}
+{{< img src="integrations/couchdb/couchdb_graph.png" alt="CouchDb Graph" responsive="true" >}}
 ## Aperçu
 
 Capturer vos données CouchDB dans Datadog pour:

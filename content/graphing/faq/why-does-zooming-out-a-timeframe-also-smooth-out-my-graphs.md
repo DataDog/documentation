@@ -8,11 +8,11 @@ You can append the.rollup() function to your query to adjust the method and gran
 
 Here is a bar graph displaying a week's worth of cpu usage for a host without using the .rollup() function:
 
-{{< img src="graphing/faq/smooth_1.png" alt="smooth_1" responsive="true" popup="true">}}
+{{< img src="graphing/faq/smooth_1.png" alt="smooth_1" responsive="true" >}}
 
 And here is the same metric, graphed using a day-long rollup with .rollup(86400):
 
-{{< img src="graphing/faq/smooth_2.png" alt="smooth_2" responsive="true" popup="true">}}
+{{< img src="graphing/faq/smooth_2.png" alt="smooth_2" responsive="true" >}}
 
 [See here][1] for more detailed information about the .rollup() function.
 

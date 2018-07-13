@@ -90,7 +90,7 @@ Par exemple, une trace peut être utilisée pour suivre tout le temps passé à 
 
 Les Spans sont associées à un [service][8] et éventuellement une [ressource][13]. Chaque span comprend une heure de début, une durée et des optionnellement des tags. Par exemple, une span peut décrire le temps passé sur un appel distribué sur une machine distante ou le temps passé dans un petit composant dans une opération plus importante. Les spans peuvent être imbriquées les unes dans les autres et, dans ce cas, auront une relation parent-enfant.
 
-{{< img src="getting_started/trace_span_image.png" alt="Trace span image" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="getting_started/trace_span_image.png" alt="Trace span image" responsive="true" style="width:80%;">}}
 
 ## En apprendre plus
 

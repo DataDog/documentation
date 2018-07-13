@@ -7,7 +7,7 @@ When submitting custom metrics to Datadog, it is possible to change the [unit of
 
 In the [Metric Summary][2] you can set up the unit of your choice. You do this by selecting your custom metric from the list and then selecting the unit of measurement you would like to use as depicted below:
 
-{{< img src="graphing/faq/MetricsMetadata.gif" alt="Metrics Metadata" responsive="true" popup="true">}}
+{{< img src="graphing/faq/MetricsMetadata.gif" alt="Metrics Metadata" responsive="true" >}}
 
 Learn more about this in our blog post: https://www.datadoghq.com/blog/metric-units-descriptions-metadata/
 

@@ -17,7 +17,7 @@ further_reading:
 ## Configuration
 
 1. Choose the detection method
-    {{< img src="monitors/monitor_types/metric/alert_type.png" alt="alert type" responsive="true" popup="true">}}
+    {{< img src="monitors/monitor_types/metric/alert_type.png" alt="alert type" responsive="true" >}}
 
     A **[Threshold alert][1]** compares the value in the selected timeframe against a given threshold. There are additional options available in the alerting conditions section. This is the standard alert case where you know what sort values are unexpected.
 
@@ -33,11 +33,11 @@ further_reading:
     **[Forecast Detection][4]** is an algorithmic feature that allows you to predict where a metric is heading in the future. It is well-suited for metrics with strong trends or recurring patterns.
 
 2. Select the metric and scope you want to monitor.
-  {{< img src="monitors/monitor_types/metric/metric_scope.png" alt="metric scope" responsive="true" popup="true">}}
+  {{< img src="monitors/monitor_types/metric/metric_scope.png" alt="metric scope" responsive="true" >}}
   You can create a monitor on any metrics that you are currently sending to Datadog. The standard [scoping rules][5] apply here.
 
 3. Select the alert grouping.
-    {{< img src="monitors/monitor_types/metric/alert_grouping.png" alt="alert grouping" responsive="true" popup="true">}}
+    {{< img src="monitors/monitor_types/metric/alert_grouping.png" alt="alert grouping" responsive="true" >}}
 
     A **simple alert** aggregates over all reporting sources. You get one alert when the aggregated value meets the conditions set below. This works best to monitor a metric from a single host, like `avg` of `system.cpu.iowait` over `host:bits`, or for an aggregate metric across many hosts like `sum` of `nginx.bytes.net` over `region:us-east`.
 
@@ -50,7 +50,7 @@ further_reading:
 4.  Select the alert conditions:
 
   * The **threshold** options vary slightly depending on what alert type you have chosen. For either case, you input a threshold and comparison type based on your metric. As you change your threshold, you can see the graph update with a marker showing the cutoff point.
-  {{< img src="monitors/monitor_types/metric/metric_threshold.png" alt="metric threshold" responsive="true" popup="true">}}
+  {{< img src="monitors/monitor_types/metric/metric_threshold.png" alt="metric threshold" responsive="true" >}}
   Note that you can use formatted values in this input based on the metric itself. For example, if you are monitoring `system.disk.used`, you can give a threshold of `20GB`.  
   For a **threshold alert** you are able to chose a *time aggregation* of the data. The alerting engine generates a single series and perform selected aggregation.  
   Let's look at the details of each option:

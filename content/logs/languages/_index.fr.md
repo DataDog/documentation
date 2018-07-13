@@ -8,7 +8,7 @@ description: "Configurez votre Agent Datadog pour rassembler les logs de vos lan
 
 Lors du logging des stack traces, il existe des attributs spécifiques dotés d'une interface utilisateur dédiée dans votre application Datadog, tels que le nom du logger, le thread en cours, le type d'erreur et bien sûr la stack trace.
 
-{{< img src="logs/languages/stack_trace.png" style="width:80%;" alt="Stack trace" responsive="true" popup="true" >}}
+{{< img src="logs/languages/stack_trace.png" style="width:80%;" alt="Stack trace" responsive="true" >}}
 
 Pour activer ces fonctionnalités, utilisez les noms d'attribut suivants:
 

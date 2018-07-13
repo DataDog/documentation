@@ -42,7 +42,7 @@ Voici un aperçu des termes utilisés:
 
 Accédez à la page  [Create Monitors][13] en survolant **Monitors** dans le menu principal et en cliquant sur **New Monitors** dans le sous-menu (selon le thème choisi et la résolution de l'écran, le menu principal peut être en haut ou à gauche). Vous pourrez alors choisir votre monitor parmis une liste de types de monitors. [En savoir plus sur tous les types de monitor.][6]
 
-{{< img src="monitors/index/nav.png" alt="navigation" responsive="true" popup="true">}}
+{{< img src="monitors/index/nav.png" alt="navigation" responsive="true" >}}
 
 ## Exporter un monitor
 
@@ -50,7 +50,7 @@ Vous pouvez exporter la configuration JSON pour un monitor directement à partir
 
 Si vous gérez et déployez vos monitors grâce à un script, il est plus facile de définir le monitor grâce à l'interface utilisateur et d'exporter le JSON directement:
 
-{{< img src="monitors/index/export_monitor_json.jpg" alt="export monitor" responsive="true" popup="true" >}}
+{{< img src="monitors/index/export_monitor_json.jpg" alt="export monitor" responsive="true" >}}
 
 ## Audit d'un monitor
 
@@ -63,7 +63,7 @@ https://app.datadoghq.com/event/stream?per_page=30&query=tags:audit%20status:all
 
 Nous vous offrons également la possibilité d'être informé des modifications apportées à un monitor que vous avez créé. Au bas de l'éditeur de monitor, il y a une option pour notifier les destinataires des alertes de toutes les modifications apportées au monitor:
 
-{{< img src="monitors/index/Monitor_Change_notifications.png" alt="Monitor_Change_notifications" responsive="true" popup="true">}}
+{{< img src="monitors/index/Monitor_Change_notifications.png" alt="Monitor_Change_notifications" responsive="true" >}}
 
 Définir ci-dessus sur **Notify** envoie un courriel pour les événements d'audit du monitor à toutes les personnes qui sont alertées sur ce monitor.
 

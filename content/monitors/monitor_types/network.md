@@ -20,11 +20,11 @@ the [HTTP check documentation][1] for details on Agent configuration.
 ## Network Status
 
 1. Choose a **network check**. You are able to choose from all `HTTP` and `TCP` checks being submitted by your Agents.  
-    {{< img src="monitors/monitor_types/network/network_check_pick.png" alt="network check pick" responsive="true" popup="true" style="width:80%;">}}
+    {{< img src="monitors/monitor_types/network/network_check_pick.png" alt="network check pick" responsive="true" style="width:80%;">}}
 2. Pick **monitor scope**. You only see hosts or tags reporting the check you have chosen.
-    {{< img src="monitors/monitor_types/network/network_check_monitor_scope.png" alt="network check monitor scope" responsive="true" popup="true" style="width:80%;">}}
+    {{< img src="monitors/monitor_types/network/network_check_monitor_scope.png" alt="network check monitor scope" responsive="true" style="width:80%;">}}
 3. Select **alerting options**:
-    {{< img src="monitors/monitor_types/network/network_check_alert_conditions.png" alt="network check alert conditions" responsive="true" popup="true" style="width:80%;">}}
+    {{< img src="monitors/monitor_types/network/network_check_alert_conditions.png" alt="network check alert conditions" responsive="true" style="width:80%;">}}
 
     **Note**: Contrary to [metric monitor][2] it's not possible to get alerted after the endpoint is unavailable for X min. Instead you can only be alert after 5 max consecutive bad statuses. Unless a high timeout value is used in the Agent configuration, if a site goes down this translates into 5 * ~15-20 seconds (agent collection period) i.e. 1min30 without data.
 

@@ -24,7 +24,7 @@ supported_os:
 ---
 
 
-{{< img src="integrations/nginx/nginx.jpg" alt="NGINX default dashboard" responsive="true" popup="true">}}
+{{< img src="integrations/nginx/nginx.jpg" alt="NGINX default dashboard" responsive="true" >}}
 
 ## Aperçu
 

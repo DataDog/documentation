@@ -16,7 +16,7 @@ further_reading:
 ## Change Timeboard name
 
 1. Click on the info icon on the top right corner of the Timeboard:
-    {{< img src="graphing/dashboards/timeboard/timeboard_name.png" alt="Timeboard name" responsive="true" popup="true" style="width:75%;">}}
+    {{< img src="graphing/dashboards/timeboard/timeboard_name.png" alt="Timeboard name" responsive="true" style="width:75%;">}}
 2. Click on the pencil icon to edit the title and description
 3. Click the checkmark to save changes
 
@@ -24,7 +24,7 @@ further_reading:
 
 [An Administrator][1] or Timeboard creator can make a Timeboard read-only by clicking the gear icon (upper right corner of a Timeboard) and clicking the **Permissions** link:
 
-{{< img src="graphing/dashboards/timeboard/read_only.png" alt="Read Only" responsive="true" popup="true" style="width:30%;">}}
+{{< img src="graphing/dashboards/timeboard/read_only.png" alt="Read Only" responsive="true" style="width:30%;">}}
 
 **Click "Yes" on the confirmation window to make the Timeboard read-only**
 
@@ -56,10 +56,10 @@ https://app.datadoghq.com/event/stream?per_page=30&query=tags:audit%20status:all
 This feature can be enabled by following these simple steps:
 
 1. At the top right corner of a dashboard, click on the gear icon:
-    {{< img src="graphing/dashboards/faq/enable_notifications.png" alt="enable notifications" responsive="true" popup="true" style="width:30%;">}}
+    {{< img src="graphing/dashboards/faq/enable_notifications.png" alt="enable notifications" responsive="true" style="width:30%;">}}
 
 2. Select **Notifications** option and enable the notifications:
-    {{< img src="graphing/dashboards/faq/notifications_pop_up.png" alt=" notifications pop up" responsive="true" popup="true" style="width:30%;">}}
+    {{< img src="graphing/dashboards/faq/notifications_pop_up.png" alt=" notifications pop up" responsive="true" style="width:30%;">}}
 
 ## Backup my Timeboard
 

@@ -20,7 +20,7 @@ further_reading:
 
 Les notifications sont un composant clé de tout [monitor][1]. Vous voulez vous assurer que les bonnes personnes sont averties afin que le problème puisse être résolu le plus rapidement possible.
 
-{{< img src="monitors/notifications/notification.png" alt="notification" responsive="true" popup="true" >}}
+{{< img src="monitors/notifications/notification.png" alt="notification" responsive="true" >}}
 
 1. Donnez à votre monitor un **titre**. Il est souvent utile d'utiliser un résumé de son action.
    explication du monitor afin qu'un membre de l'équipe peut rapidement comprendre
@@ -48,11 +48,11 @@ Lorsque votre monitor est une alerte multiple, au lieu d'avoir un message géné
 
 Voici un exemple de la façon dont vous pouvez utiliser des templates variables pour une alerte multiple:
 
-{{< img src="monitors/notifications/templatevareditor.png" alt="template var editor" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="monitors/notifications/templatevareditor.png" alt="template var editor" responsive="true" style="width:80%;">}}
 
 et la notification d'événement correspondante:
 
-{{< img src="monitors/notifications/templatevar.png" alt="template var" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="monitors/notifications/templatevar.png" alt="template var" responsive="true" style="width:80%;">}}
 
 **Note**:  
 
@@ -71,7 +71,7 @@ contient du code JSON ou un code que vous n'aimeriez PAS voir échapper, utilise
 
 La valeur de la template variable `{{comparator}}`  est toujours un opérateur relationnel. Il correspond à la valeur relationnelle sélectionnée dans la section "Set alert conditions" du monitor:
 
-{{< img src="monitors/notifications/comparator_alert.png" alt="comparator_alert" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="monitors/notifications/comparator_alert.png" alt="comparator_alert" responsive="true" style="width:80%;">}}
 
 Par exemple, lorsqu'une alerte est définie pour se déclencher lorsqu'une valeur augmente "au-dessus" de 50, la syntaxe suivante:
 ```
@@ -101,19 +101,19 @@ Vous pouvez également les voir dans la zone d'aide "Use message template variab
 
 Ces variables utilisent la logique simple «if-else» pour afficher un message différent en fonction du type d'événement (*warning*, *recovery*, *no data* ...)
 
-{{< img src="monitors/notifications/conditionalvars.png" alt="conditional vars" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="monitors/notifications/conditionalvars.png" alt="conditional vars" responsive="true" style="width:80%;">}}
 
 Voici un exemple de comment vous pouvez le configurer dans l'éditeur:
 
-{{< img src="monitors/notifications/templateconditionaleditor.png" alt="template conditional editor" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="monitors/notifications/templateconditionaleditor.png" alt="template conditional editor" responsive="true" style="width:80%;">}}
 
 La notification d'événement correspondante ressemble à ceci:
 
-{{< img src="monitors/notifications/templateconditionaltrigger.png" alt="template conditional trigger" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="monitors/notifications/templateconditionaltrigger.png" alt="template conditional trigger" responsive="true" style="width:80%;">}}
 
 et la notification de recovery:
 
-{{< img src="monitors/notifications/templateconditionalrecover.png" alt="template conditional recover" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="monitors/notifications/templateconditionalrecover.png" alt="template conditional recover" responsive="true" style="width:80%;">}}
 
 #### `{{is_recovery}}` or `{{is_alert_recovery}}` 
 
@@ -145,7 +145,7 @@ La variable utilise le format suivant:
 
 Voici un exemple de comment vous pouvez donner un message différent en fonction du contexte de déclenchement:
 
-{{< img src="monitors/notifications/scope_match_editor.png" alt="scope match editor" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="monitors/notifications/scope_match_editor.png" alt="scope match editor" responsive="true" style="width:80%;">}}
 
 **Note**: Pour utiliser la conditionnelle `{{is_match}}`  pour verifier si une `tag_variable` n'est **PAS** vide, rajoutez `.name` après le nom de votre tag, par exemple:
 
@@ -209,7 +209,7 @@ https://app.datadoghq.com/dash/integration/system_overview?tpl_var_scope=host:{{
 
 Comme vous pouvez le voir `{{host.name}}` est remplacé par l'host fautif du monitor en question.
 
-{{< img src="monitors/notifications/system_dashboard_url.png" alt="system_dashboard_url" responsive="true" popup="true" style="width:70%;" >}}
+{{< img src="monitors/notifications/system_dashboard_url.png" alt="system_dashboard_url" responsive="true" style="width:70%;" >}}
 
 Vous trouverez ci-dessous des exemples supplémentaires de liens qui pourraient être ajoutés aux monitors pour fournir aux utilisateurs de Datadog un accès rapide aux pages communes exploitées pendant le processus de réparation et de triage.
 
@@ -222,7 +222,7 @@ Vous trouverez ci-dessous des exemples supplémentaires de liens qui pourraient 
   * `fillby` est défini en ajoutant `fillby:avg:<MetricName>`.  
   * `sizeby` est défini en ajoutant `sizeby:avg:<SecondMetricName>`.
   * `filter` est utilisé pour spécifier une intégration spécifique (c'est-à-dire, Cassandra, mysql, apache, snmp, etc.) en ajoutant `filter=<integration_name>`
-  {{< img src="monitors/notifications/hostmap_url.png" alt="hostmap_url" responsive="true" popup="true" style="width:70%;">}}
+  {{< img src="monitors/notifications/hostmap_url.png" alt="hostmap_url" responsive="true" style="width:70%;">}}
   Les couleurs ci-dessus remplissent les hexagones par `system.cpu.system`, elles dimensionnent les hexagones par` system.cpu.stolen` et ajoutent un filtre pour n'inclure que les hosts Cassandra.
 
 
@@ -231,7 +231,7 @@ Vous trouverez ci-dessous des exemples supplémentaires de liens qui pourraient 
   ```
   https://app.datadoghq.com/dash/integration/<integration_name>?tpl_var_scope=host:{{host.name}}
   ```
-  {{< img src="monitors/notifications/integration_url.png" alt="integration_url" responsive="true" popup="true" style="width:70%;">}}
+  {{< img src="monitors/notifications/integration_url.png" alt="integration_url" responsive="true" style="width:70%;">}}
 
 * 
 **Manage Monitors Page** - Pour créer un lien vers une page Manage Monitors qui affiche tous les monitors de l'host en question, définissez un lien comme ci-dessous:
@@ -248,7 +248,7 @@ Vous trouverez ci-dessous des exemples supplémentaires de liens qui pourraient 
   https://app.datadoghq.com/monitors/manage?q=cassandra
   ```
 
-  {{< img src="monitors/notifications/monitor_url.png" alt="monitor_url" responsive="true" popup="true" style="width:70%;">}}
+  {{< img src="monitors/notifications/monitor_url.png" alt="monitor_url" responsive="true" style="width:70%;">}}
 
 ### Intégration Slack
 
@@ -257,11 +257,11 @@ Vous trouverez ci-dessous des exemples supplémentaires de liens qui pourraient 
 Entourez le `@ username` dans` <> `comme indiqué ci-dessous dans votre modèle de message du Monitor pour **notifier** l'utilisateur défini dans les notifications slack.
 Par exemple cette configuration:
 
-{{< img src="monitors/notifications/notification_template.png" alt="notification_template" responsive="true" popup="true" style="width:50%;" >}}
+{{< img src="monitors/notifications/notification_template.png" alt="notification_template" responsive="true" style="width:50%;" >}}
 
 Produirait ce message slack:
 
-{{< img src="monitors/notifications/notification_slack_preview.png" alt="notification_slack_preview" responsive="true" popup="true" style="width:50%;" >}}
+{{< img src="monitors/notifications/notification_slack_preview.png" alt="notification_slack_preview" responsive="true" style="width:50%;" >}}
 
 #### Utilisation de template variables de message pour créer dynamiquement des @ -mentions
 

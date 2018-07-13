@@ -22,7 +22,7 @@ DD_API_KEY=<YOUR-API-KEY> sh -c "$(curl -L https://raw.githubusercontent.com/Dat
 ```
 
 If installed correctly you should see an output that looks like:
-{{< img src="developers/faq/rasberypi_install.png" alt="rasberypi_install"  responsive="true" popup="true">}}
+{{< img src="developers/faq/rasberypi_install.png" alt="rasberypi_install"  responsive="true" >}}
 
 The Agent will run in the foreground. Some users may find benefit in creating an RC script for it or putting it into the /etc/rc.local like this:
 ```
@@ -30,7 +30,7 @@ nohup sh /root/.datadog-agent/bin/agent &
 ```
 
 You should now see metrics being ingested from your RasberryPI device:
-{{< img src="developers/faq/rasberry_dashboard.png" alt="rasberry_dashboard"  responsive="true" popup="true">}}
+{{< img src="developers/faq/rasberry_dashboard.png" alt="rasberry_dashboard"  responsive="true" >}}
 
 Thank you to Karim Vaes for the [excellent blog post][2]!
 

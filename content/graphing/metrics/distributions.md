@@ -26,7 +26,7 @@ With the [distribution UI][3], create additional aggregate timeseries by applyin
 
 **Sets of tags are limited to groups of four.**
 
-{{< img src="graphing/metrics/distributions/distribution_metric.png" alt="Distribution metric" responsive="true" popup="true">}}
+{{< img src="graphing/metrics/distributions/distribution_metric.png" alt="Distribution metric" responsive="true" >}}
 
 ## Case study
 
@@ -76,7 +76,7 @@ As you can see, aggregating by multiple sets of tags increases the number of tim
 
 The following gif demonstrates inspecting the aggregations created for a metric, `intake.batch_api_keys_for_org`. You would query `{availability-zone, role}` or `{instance-type, role}`, but not `{availability-zone, instance-type}`.
 
-{{< img src="graphing/metrics/distributions/Distros_Tagging.gif" alt="Distros_Tagging" responsive="true" popup="true">}}
+{{< img src="graphing/metrics/distributions/Distros_Tagging.gif" alt="Distros_Tagging" responsive="true" >}}
 
 ## Submission method
 ### DogStatsD
@@ -100,7 +100,7 @@ statsd.distribution('dist.dd.dogweb.latency', duration)
 The above instrumentation calculates the following data: `sum`, `count`, `average`, `minimum`, `maximum`, `50th percentile` (median), `75th percentile`, `90th percentile`, `95th percentile` and `99th percentile`. These metrics give insight into how different each request time is. 
 We can see how long the request usually takes by graphing the median. We can see how long most requests take by graphing the 95th percentile.
 
-{{< img src="graphing/metrics/distributions/dogweb_latency.png" alt="Dogweb latency" responsive="true" popup="true">}}
+{{< img src="graphing/metrics/distributions/dogweb_latency.png" alt="Dogweb latency" responsive="true" >}}
 
 For this toy example, let’s say a request time of *500ms* is acceptable. Our median query time (graphed in blue) is usually less than *100 milliseconds*, which is great. 
 Our 95th percentile (graphed in red) has spikes sometimes over one second, which is unacceptable. 
@@ -109,7 +109,7 @@ This means most of our queries are running just fine, but our worst ones are bad
 When creating your own graph, distribution metrics automatically have additional space aggregations available in the UI:
 
 
-{{< img src="graphing/metrics/distributions/dogweb_latency_bis.png" alt="Distribution metric bis" responsive="true" popup="true">}}
+{{< img src="graphing/metrics/distributions/dogweb_latency_bis.png" alt="Distribution metric bis" responsive="true" >}}
 
 Distributions are not only for measuring times. They can be used to measure the distribution of any type of value, like the size of uploaded files or classroom test scores.
 

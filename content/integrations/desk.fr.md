@@ -33,7 +33,7 @@ Connecter Desk à Datadog pour:
 Depuis votre compte Desk, ajoutez une application API sur la page Settings -> API -> My Applications (vous avez besoin de privilèges d'administrateur).
 Remplissez le formulaire comme indiqué, en laissant les deux derniers champs URL vides. Desk devrait ensuite générer une clé d'application, un secret d'application, un jeton d'accès à l'API et un secret de jeton d'accès à l'API.
 
-{{< img src="integrations/desk/desk_config.png" alt="desk config" responsive="true" popup="true">}}
+{{< img src="integrations/desk/desk_config.png" alt="desk config" responsive="true" >}}
 
 Ensuite, depuis votre compte Datadog, inscrivez les informations correspondantes dans le [carreau Desk][1]. Vous devrez entrer également le nom de domaine Desk unique de votre société.
 Appuyez sur le bouton d'installation, puis vous êtes prêt ! Vous pourrez bientôt sélectionner des statistiques desk.* dans un tableau de bord personnalisé, ou les afficher dans la [tableau de bord Desk][2] fourni. (Vous pouvez lire davantage dans [notre blog](https://www.datadoghq.com/blog/keep-support-team-page-salesforce-desk-integration/).)

@@ -10,13 +10,13 @@ Our autoscaling integration does two things:
 To get your Autoscaling events and metrics, you have to follow the next steps:
 
 1. Enable the AWS integration by referencing your account(s) on the tile.
-    {{< img src="integrations/faq/autoscalling_tile.png" alt="autoscalling_tile" responsive="true" popup="true">}}
+    {{< img src="integrations/faq/autoscalling_tile.png" alt="autoscalling_tile" responsive="true" >}}
 
 2. Make sure that you have the correct IAM policy and specifically the following rule:
     `"Action": [ "autoscaling:Describe*"]`
 
 3. Check the Autoscaling box on the AWS Tile 
-    {{< img src="integrations/faq/autoscalling_checkbox.png" alt="autoscalling_checkbox" responsive="true" popup="true">}}
+    {{< img src="integrations/faq/autoscalling_checkbox.png" alt="autoscalling_checkbox" responsive="true" >}}
 
 4. Click on update the tile, you should see the Autoscaling Group tile showing up in your integration list.
 

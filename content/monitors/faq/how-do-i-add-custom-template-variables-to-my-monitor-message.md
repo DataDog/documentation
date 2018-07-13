@@ -27,16 +27,16 @@ You can also use these template variables to [set conditional contacts and messa
 Here's an example of where a user had a number of hosts tagged by different `creator:` values, e.g, `creator:wes_anderson` and `creator:saint_exupéry`.  
 Here, the user was able to set up a multi-alert monitor to trigger a separate alert for each `creator:` tag, so they were able to include the `{{creator.name}}` in their monitor message. When this monitor triggers, the recipient of the alert notification sees whether the monitor was triggered by **wes_anderson**, **saint_exupéry**, or some other `creator:` value.
 
-{{< img src="monitors/faq/multi_alert_templating_notification.png" alt="multi_alert_templating_notification" responsive="true" popup="true" >}}
+{{< img src="monitors/faq/multi_alert_templating_notification.png" alt="multi_alert_templating_notification" responsive="true" >}}
 
 ### My tag key has dots in it
 
 A word of warning: the period (".") is a reserved character for monitor template variables syntax.  
 If your tag group's key has a period in it, you have to hardwire your template variables to include brackets around the full key. For example, if a user were to submit a metric tagged with dot.key.test:five and then set up a multi alert monitor triggered by the dot.ket.test group tag, this user would have to apply the following syntax in order to use the dot.key.test.name template variable:
-{{< img src="monitors/faq/template_with_dot.png" alt="template_with_dot" responsive="true" popup="true" >}}
+{{< img src="monitors/faq/template_with_dot.png" alt="template_with_dot" responsive="true" >}}
 
 This monitor resulted in the following event (tagged by dot.key.test:five):
-{{< img src="monitors/faq/dot_template_event.png" alt="dot_template_event" responsive="true" popup="true" >}}
+{{< img src="monitors/faq/dot_template_event.png" alt="dot_template_event" responsive="true" >}}
 
 ## API Example
 

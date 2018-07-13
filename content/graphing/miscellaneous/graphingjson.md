@@ -9,7 +9,7 @@ There are two ways to interact with the Graphing Editor: using the GUI (the defa
 
 ## Graphing with the JSON editor
 
-{{< img src="graphing/miscellaneous/graphingjson/references-graphing-jsoneditor.png" alt="references graphing jsoneditor" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="graphing/miscellaneous/graphingjson/references-graphing-jsoneditor.png" alt="references graphing jsoneditor" responsive="true" style="width:80%;">}}
 
 ### Grammar
 
@@ -179,7 +179,7 @@ The Time Series can be further broken down to:
 
 #### Line Charts
 
-{{< img src="graphing/miscellaneous/graphingjson/multi-lines.png" alt="multi lines" responsive="true" popup="true">}}
+{{< img src="graphing/miscellaneous/graphingjson/multi-lines.png" alt="multi lines" responsive="true" >}}
 
 The representation is automatically derived from having multiple `requests` values.
 
@@ -197,7 +197,7 @@ The representation is automatically derived from having multiple `requests` valu
 
 #### Stacked Series
 
-{{< img src="graphing/miscellaneous/graphingjson/slice-n-stack.png" alt="slice and stack" responsive="true" popup="true">}}
+{{< img src="graphing/miscellaneous/graphingjson/slice-n-stack.png" alt="slice and stack" responsive="true" >}}
 
 In the case of related Time Series, you can easily draw them as stacked areas by using the following syntax:
 

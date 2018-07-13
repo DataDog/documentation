@@ -19,7 +19,7 @@ short_description: Monitorer AWS service health.
 version: '1.0'
 ---
 
-{{< img src="integrations/amazon_health/awshealthevent.png" alt="AWS Health Event" responsive="true" popup="true">}}
+{{< img src="integrations/amazon_health/awshealthevent.png" alt="AWS Health Event" responsive="true" >}}
 
 ## Aperçu
 

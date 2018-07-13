@@ -18,7 +18,7 @@ short_description: Effectuer le suivi des tâches ayant échoué et consulter le
 version: '1.0'
 ---
 
-{{< img src="integrations/ansible/ansibledashboard.png" alt="ansible dashbaord" responsive="true" popup="true">}}
+{{< img src="integrations/ansible/ansibledashboard.png" alt="ansible dashbaord" responsive="true" >}}
 
 ## Aperçu
 

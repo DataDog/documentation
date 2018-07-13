@@ -20,7 +20,7 @@ further_reading:
 
 Notifications are a key component of any [monitor][1]. You want to make sure the right people get notified so the problem can be resolved as soon as possible.
 
-{{< img src="monitors/notifications/notification.png" alt="notification" responsive="true" popup="true" >}}
+{{< img src="monitors/notifications/notification.png" alt="notification" responsive="true" >}}
 
 1. Give your monitor a **title**. It is often useful to use a succinct
    explanation of the monitor so a notified team member can quickly understand
@@ -48,11 +48,11 @@ When your monitor is a multi alert, instead of having a generic message (and fin
 
 Here is an example of how you can use template variables for a multi alert:
 
-{{< img src="monitors/notifications/templatevareditor.png" alt="template var editor" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="monitors/notifications/templatevareditor.png" alt="template var editor" responsive="true" style="width:80%;">}}
 
 and the corresponding event notification:
 
-{{< img src="monitors/notifications/templatevar.png" alt="template var" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="monitors/notifications/templatevar.png" alt="template var" responsive="true" style="width:80%;">}}
 
 **Note**:
 
@@ -70,7 +70,7 @@ and the corresponding event notification:
 
 The `{{comparator}}` template variable's value is always a relational operator. It corresponds to the relational value selected in the monitor's "Set alert conditions" section:
 
-{{< img src="monitors/notifications/comparator_alert.png" alt="comparator_alert" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="monitors/notifications/comparator_alert.png" alt="comparator_alert" responsive="true" style="width:80%;">}}
 
 For example, when an alert is set to trigger when a value rises "above" 50, the following syntax:
 
@@ -104,19 +104,19 @@ Step 3 of the monitor editor.
 
 These variables use simple `if-else` logic to display a different message depending on the event type (*warning*, *recovery*, *no data*...)
 
-{{< img src="monitors/notifications/conditionalvars.png" alt="conditional vars" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="monitors/notifications/conditionalvars.png" alt="conditional vars" responsive="true" style="width:80%;">}}
 
 Here is an example of how you can set it up in the editor:
 
-{{< img src="monitors/notifications/templateconditionaleditor.png" alt="template conditional editor" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="monitors/notifications/templateconditionaleditor.png" alt="template conditional editor" responsive="true" style="width:80%;">}}
 
 The corresponding trigger event notification looks like this:
 
-{{< img src="monitors/notifications/templateconditionaltrigger.png" alt="template conditional trigger" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="monitors/notifications/templateconditionaltrigger.png" alt="template conditional trigger" responsive="true" style="width:80%;">}}
 
 and the recovery notification:
 
-{{< img src="monitors/notifications/templateconditionalrecover.png" alt="template conditional recover" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="monitors/notifications/templateconditionalrecover.png" alt="template conditional recover" responsive="true" style="width:80%;">}}
 
 #### `{{is_recovery}}` or `{{is_alert_recovery}}`
 
@@ -149,7 +149,7 @@ The variable uses the following format:
 
 Here is an example of how you can give a different message depending on the triggering context:
 
-{{< img src="monitors/notifications/scope_match_editor.png" alt="scope match editor" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="monitors/notifications/scope_match_editor.png" alt="scope match editor" responsive="true" style="width:80%;">}}
 
 The `{{is_exact_match}}` conditional looks for the exact string in the tag variable, rather than using substring matching. For instance, if there are two hosts named `production` and `production-1`:
 
@@ -226,7 +226,7 @@ https://app.datadoghq.com/dash/integration/system_overview?tpl_var_scope=host:{{
 
 As you can see, `{{host.name}}` is replaced with the offending host of the monitor in question.
 
-{{< img src="monitors/notifications/system_dashboard_url.png" alt="system_dashboard_url" responsive="true" popup="true" style="width:70%;" >}}
+{{< img src="monitors/notifications/system_dashboard_url.png" alt="system_dashboard_url" responsive="true" style="width:70%;" >}}
 
 Find below additional examples of links that could be added to Monitors to provide Datadog Users quick access to common pages leveraged during the break fix and triage process.
 
@@ -239,7 +239,7 @@ Find below additional examples of links that could be added to Monitors to provi
   * `fillby` is defined by adding `fillby:avg:<MetricName>`.
   * `sizeby` is defined by adding `sizeby:avg:<SecondMetricName>`.
   * `filter` is used to specify a specific integration (i.e. Cassandra, mysql, apache, snmp, etc) by adding `filter=<integration_name>`
-  {{< img src="monitors/notifications/hostmap_url.png" alt="hostmap_url" responsive="true" popup="true" style="width:70%;">}}
+  {{< img src="monitors/notifications/hostmap_url.png" alt="hostmap_url" responsive="true" style="width:70%;">}}
   The above colors fill the hexagons by `system.cpu.system`, it sizes the hexagons by `system.cpu.stolen` and add a filter to only include Cassandra hosts.
 
 
@@ -248,7 +248,7 @@ Find below additional examples of links that could be added to Monitors to provi
   ```
   https://app.datadoghq.com/dash/integration/<integration_name>?tpl_var_scope=host:{{host.name}}
   ```
-  {{< img src="monitors/notifications/integration_url.png" alt="integration_url" responsive="true" popup="true" style="width:70%;">}}
+  {{< img src="monitors/notifications/integration_url.png" alt="integration_url" responsive="true" style="width:70%;">}}
 
 * **Manage Monitors Page** – To link to a Manage monitors page that displays all of the monitors for the host in question, define a link like below:
   ```
@@ -264,7 +264,7 @@ Find below additional examples of links that could be added to Monitors to provi
   https://app.datadoghq.com/monitors/manage?q=cassandra
   ```
 
-  {{< img src="monitors/notifications/monitor_url.png" alt="monitor_url" responsive="true" popup="true" style="width:70%;">}}
+  {{< img src="monitors/notifications/monitor_url.png" alt="monitor_url" responsive="true" style="width:70%;">}}
 
 ### Slack integration
 
@@ -273,11 +273,11 @@ Find below additional examples of links that could be added to Monitors to provi
 Wrap the `@username` in `< >` as seen below in your monitors message template to **@ notify** the defined user within slack notifications.
 For example this configuration:
 
-{{< img src="monitors/notifications/notification_template.png" alt="notification_template" responsive="true" popup="true" style="width:50%;" >}}
+{{< img src="monitors/notifications/notification_template.png" alt="notification_template" responsive="true" style="width:50%;" >}}
 
 Would produce this slack message:
 
-{{< img src="monitors/notifications/notification_slack_preview.png" alt="notification_slack_preview" responsive="true" popup="true" style="width:50%;" >}}
+{{< img src="monitors/notifications/notification_slack_preview.png" alt="notification_slack_preview" responsive="true" style="width:50%;" >}}
 
 You can also mention **@here** or **@channel** using `<!here>` or `<!channel>`, respectively. For user groups, use `<subteam^ID|handle>`.
 

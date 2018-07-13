@@ -62,11 +62,11 @@ Cela vous permet de tout définir dans l'événement qui apparaît dans votre fl
 
 Dans le texte de l'e-mail source, vous ne devez controller que de trois champs: l'expéditeur: email address (obligatoire), subject (obligatoire), and body (obligatoire).
 
-{{< img src="graphing/events/plain-email.png" alt="plain email" responsive="true" popup="true">}}
+{{< img src="graphing/events/plain-email.png" alt="plain email" responsive="true" >}}
 
 #### Evénement Datadog
 
-{{< img src="graphing/events/plain-event.png" alt="plain event" responsive="true" popup="true">}}
+{{< img src="graphing/events/plain-event.png" alt="plain event" responsive="true" >}}
 
 Notez que le sujet de l'email devient le titre de l'événement et le corps de l'email devient le corps de l'événement .Bien qu'il semble qu'un tag apparaisse à la fin du titre et du corps de l'événement, aucune des deux instances ne sont en fait des tags. L'expéditeur de l'e-mail apparaît également en bas de l'événement. Vous pouvez donc en profiter pour identifier l'application d'envoi.
 
@@ -76,11 +76,11 @@ Notez que le sujet de l'email devient le titre de l'événement et le corps de l
 Dans l'e-mail au format JSON, vous avez 10 champs que vous pouvez contrôler: expéditeur adresse e-mail et jusqu'à 9 clés JSON. Ces clés sont le titre, le texte, la priorité, les balises, le type d'alerte, la date d'arrivée, l'hôte, la clé d'agrégation et le nom du type de source.
 **Note: Si votre fichier JSON n'est pas correctement formaté ou si votre e-mail est envoyé avec un sujet, l'événement n'apparaîtra pas dans votre flux d'événements.**
 
-{{< img src="graphing/events/json-email.png" alt="json email" responsive="true" popup="true">}}
+{{< img src="graphing/events/json-email.png" alt="json email" responsive="true" >}}
 
 #### Evénement Datadog
 
-{{< img src="graphing/events/json-event.png" alt="json event" responsive="true" popup="true">}}
+{{< img src="graphing/events/json-event.png" alt="json event" responsive="true" >}}
 
 Dans un e-mail au format JSON, l'objet de l'e-mail n'est pas pertinent car il est remplacé par le titre du JSON dans le corps de l'email. Toutes les données qui apparaissent dans l'événement sont définies dans le JSON du corps de l'e-mail. Ce JSON doit être bien formaté ou alors le message est ignoré.  
 Si vous testez un email avec un client de messagerie standard, le corps peut être converti en HTML pour améliorer la lecture du destinataire. Cela a pour conséquence une altération du format JSON et donc sera ignoré par Datadog.
@@ -91,7 +91,7 @@ Trouvez les clés JSON autorisées dans la documentation sur [l'API d'événemen
 
 Pour configurer l'e-mail, connectez-vous d'abord à votre compte Datadog à l'adresse [https://app.datadoghq.com][dd-app]. Dans le menu *Integrations*, choisissez *API*, puis descendez jusqu'à *Events API Emails*. Cette section vous montre tous les emails disponibles pour vos applications et qui les a créés. Choisissez le format de vos messages dans la liste déroulante "Format":, puis cliquez sur *Create API Email*.
 
-{{< img src="graphing/events/event-email-api.png" alt="JSON Event Email API" responsive="true" popup="true">}}
+{{< img src="graphing/events/event-email-api.png" alt="JSON Event Email API" responsive="true" >}}
 
 [integrations]: /integrations
 [agentcheck]: /agent/agent_checks

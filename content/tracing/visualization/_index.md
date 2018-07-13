@@ -90,7 +90,7 @@ For example, a trace can be used to track the entire time spent processing a com
 
 Spans are associated with a [service][8] and optionally a [resource][13]. Each span consists of a start time, a duration, and optional tags. For example, a span can describe the time spent on a distributed call on a separate machine, or the time spent in a small component within a larger operation. Spans can be nested within each other, and in those instances will have a parent-child relationship.
 
-{{< img src="getting_started/trace_span_image.png" alt="Trace span image" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="getting_started/trace_span_image.png" alt="Trace span image" responsive="true" style="width:80%;">}}
 
 ## Further Reading
 

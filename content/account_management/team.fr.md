@@ -14,7 +14,7 @@ further_reading:
 
 1. Pour ajouter des membres à une équipe, commencez par visiter la [Page d'équipe][1].
 2. Entrez l'adresse e-mail de l'utilisateur que vous souhaitez inviter à votre compte Datadog. Cliquez sur **Inviter**
-  {{< img src="account_management/team/guides-multacct-addtoteam.png" alt="Add Member To Team" responsive="true" popup="true" style="width:50%;">}}
+  {{< img src="account_management/team/guides-multacct-addtoteam.png" alt="Add Member To Team" responsive="true" style="width:50%;">}}
 
 Le nouvel utilisateur recevra un email avec un lien pour se connecter.
 
@@ -35,7 +35,7 @@ Datadog à 3 rôles d'utilisateur:
 1. Allez à la [page d'équipe][1].
 2. Passez la souris sur l'avatar pour l'utilisateur que vous souhaitez désactiver. Choisissez **Disable** dans le menu.
 
-    {{< img src="account_management/team/guides-multacct-disable.png" alt="Disable Member" responsive="true" popup="true" style="width:50%;" >}}
+    {{< img src="account_management/team/guides-multacct-disable.png" alt="Disable Member" responsive="true" style="width:50%;" >}}
 
 ## Promouvoir des membres existants en administrateur
 

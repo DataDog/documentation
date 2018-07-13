@@ -13,7 +13,7 @@ further_reading:
 
 Basculez entre la liste des logs et le Log Graph en cliquant sur le bouton *Log Mode* :
 
-{{< img src="logs/graph/log_graph_switch.png" alt="Log graph switch" responsive="true" popup="true" style="width:40%;">}}
+{{< img src="logs/graph/log_graph_switch.png" alt="Log graph switch" responsive="true" style="width:40%;">}}
 
 ## Requête Log Graph
 
@@ -21,23 +21,23 @@ Employez la requête afin de contrôler la visualisation dans le Log Graph :
 
 1. Choisissez une [Mesure][1] ou [Facette][2] afin de construire un graphique. [Mesure][1] vous permet de choisir la fonction d'agrégation tandis que [Facette][2] affiche le compte unique.
 
-    {{< img src="logs/graph/choose_measure_facet.png" alt="choose measure facet" responsive="true" popup="true" style="width:50%;">}}
+    {{< img src="logs/graph/choose_measure_facet.png" alt="choose measure facet" responsive="true" style="width:50%;">}}
 2. Sélectionnez la fonction d'agrégation pour la [mesure][1] que vous voulez grapher :
 
-    {{< img src="logs/graph/agg_function_log_graph.png" alt="aggregation function for Log Graph" responsive="true" popup="true" style="width:50%;">}}
+    {{< img src="logs/graph/agg_function_log_graph.png" alt="aggregation function for Log Graph" responsive="true" style="width:50%;">}}
 3. Utilisez [Tag][1] ou [Facette][2] afin de diviser votre graphique.
 
-    {{< img src="logs/graph/split_by_log_graph.png" alt="split by Log Graph" responsive="true" popup="true" style="width:50%;">}}
+    {{< img src="logs/graph/split_by_log_graph.png" alt="split by Log Graph" responsive="true" style="width:50%;">}}
 
 4. Choisissez d'afficher soit les valeurs *X* **haut** ou **bas** selon le [mesure][1] sélectionné.
 
-    {{< img src="logs/graph/top_bottom_button.png" alt="top bottom button" responsive="true" popup="true" style="width:20%;">}}
+    {{< img src="logs/graph/top_bottom_button.png" alt="top bottom button" responsive="true" style="width:20%;">}}
 
 ## Visualisations
 
 Choisissez un type de visualisation en utilisant le sélectionneur de graphique :
 
-{{< img src="logs/graph/graph_selector.png" alt="Log Graph selector" responsive="true" popup="true" style="width:30%;">}}
+{{< img src="logs/graph/graph_selector.png" alt="Log Graph selector" responsive="true" style="width:30%;">}}
 
 Visualisations disponibles :
 
@@ -51,7 +51,7 @@ Visualisez l'évolution d'un seule [mesure][1] (ou une [facette][2] comprises d'
 La série chronologique suivante montre :
 L'évolution des **top 5 chemins URL** selon le nombre des **IPs Client unique** pendant le mois dernier.
 
-{{< img src="logs/graph/timeserie_example.png" alt="timeserie example" responsive="true" popup="true" style="width:90%;">}}
+{{< img src="logs/graph/timeserie_example.png" alt="timeserie example" responsive="true" style="width:90%;">}}
 
 ### Top Liste
 
@@ -60,17 +60,17 @@ Visualisez les top valeurs d'une [facette][2] selon le [mesure][1] choisi :
 La série chronologique suivante montre :
 L'évolution des **top 5 chemins URL** selon le nombre des **IPs Client unique** pendant le mois dernier.
 
-{{< img src="logs/graph/top_list_example.png" alt="top list example" responsive="true" popup="true" style="width:90%;">}}
+{{< img src="logs/graph/top_list_example.png" alt="top list example" responsive="true" style="width:90%;">}}
 
 ## Logs associés :
 
 Sélectionnez ou cliquez sur une section du graphique pour zoomer dans le graphique ou voir la liste des logs correspondant à votre sélection :
 
-{{< img src="logs/graph/view_logs.gif" alt="view logs" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="logs/graph/view_logs.gif" alt="view logs" responsive="true" style="width:80%;">}}
 
 ## Exporter :
 
-{{< img src="logs/graph/export_button.png" alt="view logs button" responsive="true" popup="true" style="width:40%;">}}
+{{< img src="logs/graph/export_button.png" alt="view logs button" responsive="true" style="width:40%;">}}
 
 Exportez vortre Log Graph :
 
