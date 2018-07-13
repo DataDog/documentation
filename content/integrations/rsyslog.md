@@ -1,8 +1,9 @@
 ---
 title: Rsyslog
+name: rsyslog
 kind: integration
-description: "Configure Rsyslog to gather logs from your host, containers & services."
-short_description: "Configure Rsyslog to gather logs from your host, containers & services."
+description: "Configure Rsyslog to gather logs from your host, containers, & services."
+short_description: "Configure Rsyslog to gather logs from your host, containers, & services."
 categories:
 - log collection
 doc_link: https://docs.datadoghq.com/integrations/rsyslog/
@@ -19,7 +20,7 @@ supported_os:
 
 ## Overview
 
-Configure Rsyslog to gather logs from your host, containers & services.
+Configure Rsyslog to gather logs from your host, containers, & services.
 
 ## Setup
 ### Log collection

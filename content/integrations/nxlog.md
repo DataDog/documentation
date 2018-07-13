@@ -1,8 +1,9 @@
 ---
 title: NXLog
+name: nxlog
 kind: integration
-description: "Configure NXLog to gather logs from your host, containers & services."
-short_description: "Configure NXLog to gather logs from your host, containers & services."
+description: "Configure NXLog to gather logs from your host, containers, & services."
+short_description: "Configure NXLog to gather logs from your host, containers, & services."
 categories:
 - log collection
 doc_link: https://docs.datadoghq.com/integrations/nxlog/
@@ -19,7 +20,7 @@ supported_os:
 
 ## Overview
 
-Configure NXLog to gather logs from your host, containers & services.
+Configure NXLog to gather logs from your host, containers, & services.
 
 ## Setup
 ### Log collection

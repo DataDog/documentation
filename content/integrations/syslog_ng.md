@@ -1,8 +1,9 @@
 ---
 title: Syslog-ng
+name: syslog-ng
 kind: integration
-description: "Configure Syslog-ng to gather logs from your host, containers & services."
-short_description: "Configure Syslog-ng to gather logs from your host, containers & services."
+description: "Configure Syslog-ng to gather logs from your host, containers, & services."
+short_description: "Configure Syslog-ng to gather logs from your host, containers, & services."
 categories:
 - log collection
 doc_link: https://docs.datadoghq.com/integrations/syslog_ng/
@@ -20,7 +21,7 @@ supported_os:
 
 ## Overview
 
-Configure Syslog-ng to gather logs from your host, containers & services.
+Configure Syslog-ng to gather logs from your host, containers, & services.
 
 ## Setup
 ### Log collection
