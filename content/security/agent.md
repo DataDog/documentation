@@ -19,15 +19,15 @@ The Datadog Agent submits data to Datadog over a TLS-encrypted TCP connection by
 
 ## Agent Logs Obfuscation
 
-The Datadog Agent generates local logs in order to support [Agent troubleshooting][3] as required. As a safety precaution, these local logs are filtered for keywords that could indicate a potential credential (e.g. API key, password and token keywords, etc.), which are then obfuscated before being written to disk.
+The Datadog Agent generates local logs in order to support [Agent troubleshooting][3] as required. As a safety precaution, these local logs are filtered for some specific keywords that could indicate a potential credential (e.g. API key, password and token keywords, etc.), which are then obfuscated before being written to disk.
 
-## Local HTTP Server
+## Local HTTPS Server
 
-Agent v6 exposes a local HTTP API to ease communication between a running Agent and Agent tools (e.g. the `datadog-agent` commands). The API server can only be accessed from the local network interface (`localhost/127.0.0.1`), and authentication is enforced through a token that’s only readable by the user that the Agent runs as.
+Agent v6 exposes a local HTTPS API to ease communication between a running Agent and Agent tools (e.g. the `datadog-agent` commands). The API server can only be accessed from the local network interface (`localhost/127.0.0.1`), and authentication is enforced through a token that’s only readable by the user that the Agent runs as. Communication to the local HTTPS API is encrypted in transport to protect from eavesdropping on `localhost`.
 
 ## Agent GUI
 
-Agent v6 comes bundled with a Graphical User Interface (GUI) by default, which launches in your default web browser. The GUI is launched only if the user launching it has the correct user permissions, including the ability to open the Agent’s configuration file. The GUI can only be accessed from the local network interface (`localhost/127.0.0.1`). Finally, the user’s cookies must be enabled, as the GUI generates and saves a token used for authenticating all communications with the GUI server. The GUI can also be disabled altogether if needed.
+Agent v6 comes bundled with a Graphical User Interface (GUI) by default, which launches in your default web browser. The GUI is launched only if the user launching it has the correct user permissions, including the ability to open the Agent’s configuration file. The GUI can only be accessed from the local network interface (`localhost/127.0.0.1`). Finally, the user’s cookies must be enabled, as the GUI generates and saves a token used for authenticating all communications with the GUI server as well as protecting against Cross-Site Request Forgery (CSRF) attacks. The GUI can also be disabled altogether if needed.
 
 ## Agent Security Scans
 
