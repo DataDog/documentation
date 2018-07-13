@@ -10,8 +10,7 @@ doc_link: https://docs.datadoghq.com/integrations/rsyslog/
 aliases:
     - logs/log_collection/rsyslog
 has_logo: true
-integration_title: rsyslog 
-git_integration_title: rsyslog
+integration_title: rsyslog
 is_public: true
 public_title: Datadog-Rsyslog Integration
 supported_os:

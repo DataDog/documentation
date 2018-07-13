@@ -1,6 +1,6 @@
 ---
 title: Syslog-ng
-name: syslog-ng
+name: syslog_ng
 kind: integration
 description: "Configure Syslog-ng to gather logs from your host, containers, & services."
 short_description: "Configure Syslog-ng to gather logs from your host, containers, & services."
@@ -10,8 +10,7 @@ doc_link: https://docs.datadoghq.com/integrations/syslog_ng/
 aliases:
     - logs/log_collection/syslog_ng
 has_logo: true
-integration_title: syslog-ng 
-git_integration_title: syslog-ng
+integration_title: syslog_ng 
 is_public: true
 public_title: Datadog-Syslog-ng Integration
 supported_os:

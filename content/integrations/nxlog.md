@@ -11,7 +11,6 @@ aliases:
     - logs/log_collection/nxlog
 has_logo: true
 integration_title: nxlog
-git_integration_title: nxlog
 is_public: true
 public_title: Datadog-NXlog Integration
 supported_os:
