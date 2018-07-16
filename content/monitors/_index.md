@@ -68,7 +68,7 @@ Setting the above to **Notify** send an email for the monitor audit events to al
 
 ## Manually resolve your monitor
 
-The monitor *Resolve* function is artificially switching the monitor status to `OK` at the next evaluation. The following monitor evaluation will be performed normally on the data the monitor is based on.
+The monitor *Resolve* function is artificially switching the monitor status to `OK` for its next evaluation. The following monitor evaluation will be performed normally on the data the monitor is based on.
 
 If a monitor is alerting because its current data corresponds to its `ALERT` state, *Resolve* will have the monitor follow the state switch `ALERT -> OK -> ALERT`. Thus, it's not appropriate for acknowledging that you have seen the alert or telling Datadog to ignore the alert.
 
