@@ -49,7 +49,7 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
   {{< img src="monitors/downtimes/downtime-silence.png" alt="downtime-silence" responsive="true" style="width:80%;">}}
   You can select a specific monitor to silence, or leave this field empty to silence all monitors. You can also select a scope to constrain your downtime to a specific host, device or arbitrary tag.
   Refer to the [scope section][2] of the Graphing Primer using JSON for further information about scope.
-  If you choose to silence all monitors constrained by a scope, clicking the *Preview affected monitors* shows which monitors are currently affected. Any monitors within your scope that are created or edited after the downtime is schedule is also silenced.
+  If you choose to silence all monitors constrained by a scope, clicking the *Preview affected monitors* shows which monitors are currently affected. Any monitors within your scope that are created or edited after the downtime is scheduled are also silenced.
   Note that if a multi alert is included, it is only silenced for systems covered by the scope. 
   For example, if a downtime scope is set for `host:X` and a multi alert is triggered on both `host:X` and `host:Y`, Datadog generates a monitor notification for `host:Y`, but not `host:X`.
 
