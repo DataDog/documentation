@@ -29,7 +29,7 @@ A few options are available to send traffic to Datadog over SSL/TLS for hosts th
 
 Traditional web proxies are supported natively by the Agent. If you need to connect to the Internet through a proxy, edit your Agent configuration file.
 
-### Agent v6
+##### Agent v6
 
 Edit the `datadog.yaml` file with your proxy information. Use the `no_proxy` list to specify hosts that should bypass the proxy.
 
@@ -44,7 +44,7 @@ proxy:
 
 [Refer to our log collection documentation page to learn how to forward your logs with a proxy][].
 
-### Agent v5
+##### Agent v5
 
 Edit the `datadog.conf` file with your proxy information:
 
@@ -59,6 +59,8 @@ proxy_password: my_password
 Do not forget to [restart the Agent][2] for the new settings to take effect.
 
 ## Using HAProxy as a Proxy
+
+### HAProxy configuration
 
 [HAProxy][3] is a free, very fast and reliable solution offering proxying for TCP and HTTP applications. While HAProxy is usually used as a load balancer to distribute incoming requests to pools servers, you can also use it to proxy Agent traffic to Datadog from hosts that have no outside connectivity.
 
@@ -144,21 +146,15 @@ Once the HAProxy configuration is in place, you can reload it or restart HAProxy
 
 **We recommend having a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.com` fails over to another IP.
 
-Then edit each Agent to point to HAProxy by setting its `dd_url` to the address of HAProxy (e.g. haproxy.example.com). This `dd_url` setting can be found in `datadog.conf` for Agent v5 and `datadog.yaml` for Agent v6.
+### Datadog Agent configuration
+#### Agent v>6
+
+Edit each Agent to point to HAProxy by setting its `dd_url` to the address of HAProxy (e.g. `haproxy.example.com`). 
+This `dd_url` setting can be found in the `datadog.yaml` file. 
 
 `dd_url: https://haproxy.example.com:3834`
 
-If you want to send traces or processes through the proxy, you need to setup the following in `datadog.conf` for Agent v5:
-
-```
-[trace.api]
-endpoint = https://haproxy.example.com:3835
-
-[process.api]
-url = https://haproxy.example.com:3836
-```
-
-For Agent v6, set up the following in `datadog.yaml`:
+If you want to send traces or processes through the proxy, you must setup the following in the `datadog.yaml` file:
 
 ```
 apm_config:
@@ -168,10 +164,34 @@ process_config:
     url: https://haproxy.example.com:3836
 ```
 
-Before you [restart the Agent][2] Edit your supervisor configuration to disable SSL certificate verification. This is needed to prevent python from complaining about the discrepancy between the hostname on the SSL certificate (app.datadoghq.com) and your HAProxy hostname.
+Then edit the `datadog.yaml` Agent configuration file and set `skip_ssl_validation` to `true`. This is needed to prevent python from complaining about the discrepancy between the hostname on the SSL certificate (`app.datadoghq.com`) and your HAProxy hostname.:
 
-####  On GNU/Linux, Mac OS X, FreeBSD, SmartOS:
-You need to edit the supervisor configuration found at:
+```
+skip_ssl_validation: true
+```
+
+Finally [restart the Agent][4].
+
+To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3835` as well as the [Infrastructure Overview][5]
+
+#### Agent v<6
+
+Edit each Agent to point to HAProxy by setting its `dd_url` to the address of HAProxy (e.g. `haproxy.example.com`). 
+This `dd_url` setting can be found in the `datadog.conf` file. 
+
+`dd_url: https://haproxy.example.com:3834`
+
+If you want to send traces or processes through the proxy, you must setup the following in the `datadog.conf` file: 
+
+```
+[trace.api]
+endpoint = https://haproxy.example.com:3835
+
+[process.api]
+url = https://haproxy.example.com:3836
+```
+
+Edit your supervisor configuration to disable SSL certificate verification. This is needed to prevent python from complaining about the discrepancy between the hostname on the SSL certificate (`app.datadoghq.com`) and your HAProxy hostname. The supervisor configuration found at:
 
 * `/etc/dd-agent/supervisor_ddagent.conf` on debian-based systems
 * `/etc/dd-agent/supervisor.conf` on redhat-based systems
@@ -179,21 +199,21 @@ You need to edit the supervisor configuration found at:
 * `/usr/local/etc/datadog/supervisord/supervisord.conf` on FreeBSD
 * `~/.datadog-agent/supervisord/supervisord.conf` on Mac OS X
 
-Assuming that file is found at `SUP_FILE`
+Assuming that the supervisord file is found at `<SUP_FILE>`
+
 ```bash
-sed -i 's/ddagent.py/ddagent.py --sslcheck=0/' SUP_FILE
+sed -i 's/ddagent.py/ddagent.py --sslcheck=0/' <SUP_FILE>
 ```
 
-#### On Windows (Starting from Agent 3.9.2):
+For the Windows Agent (Starting from Agent version 3.9.2), edit your configuration file `datadog.conf` and add this option:
 
-Edit your configuration file `datadog.conf` and add this option:
 ```
 skip_ssl_validation: yes
 ```
 
 Finally [restart the Agent][4].
 
-To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3835` as well as the [Infrastructure Overview][5]
+To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3835` as well as the [Infrastructure Overview][5].
 
 ## Using the Agent as a Proxy
 
