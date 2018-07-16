@@ -423,40 +423,7 @@ class HTTPCheck(AgentCheck):
 
 ## Troubleshooting
 
-Custom Agent checks can't be directly called from python and instead need to be called by the Agent.
-
-To test this, run:
-
-| Agent version | Command                                             |
-| :------       | :----                                               |
-| v5.x          | `sudo -u dd-agent dd-agent check <CHECK_NAME>`      |
-| v6.x          | `sudo -u dd-agent datadog-agent check <CHECK_NAME>` |
-
-If you want to include rate metrics, add `--check-rate` to your command, for instance for agent v6.x run:
-
-```
-sudo -u dd-agent datadog-agent check <CHECK_NAME> --check-rate
-```
-
-If your issue continues, reach out to Support with the [help page][11] that lists the paths it installs.
-
-### Testing custom Agent checks on Windows
-
-* **For Agent version < 5.12**:
-    The Agent install includes a file called shell.exe in your Program Files directory for the Datadog Agent which you can use to run python within the Agent environment. Once your check (called `<CHECK_NAME>`) is written and you have the .py and .yaml files in their correct places, you can run the following in shell.exe:
-    ```
-    from checks import run_check
-    run_check('<CHECK_NAME>')
-    ```
-    This outputs any metrics or events that the check returns.
-
-* **For Agent version >= 5.12**:
-    Run the following script, with the proper `<CHECK_NAME>`:
-    `<INSTALL_DIR>/embedded/python.exe <INSTALL_DIR>agent/agent.py check <CHECK_NAME>`
-    For example, to run the disk check:
-    ```
-    C:\Program' 'Files\Datadog\Datadog' 'Agent\embedded\python.exe C:\Program' 'Files\Datadog\Datadog' 'Agent\agent\agent.py check disk
-    ```
+[Refer to the Agent dedicated troubleshooting documentation page][]
 
 ## Further Reading
 
@@ -474,3 +441,4 @@ If your issue continues, reach out to Support with the [help page][11] that list
 [10]: /agent/faq/agent-commands
 [11]: /help
 [12]: /agent/custom_python_package/
+[13]: /agent/troubleshooting/#status-of-an-agent-check
