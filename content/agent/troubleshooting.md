@@ -85,7 +85,7 @@ In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if
 
 ## Status of an Agent check
 
-Agent checks shouldn't be directly called from Python and instead must be called by the Agent.
+Agent checks can’t be directly called from python and instead need to be called by the Agent.
 
 To test an Agent check, run:
 
