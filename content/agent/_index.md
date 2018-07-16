@@ -140,6 +140,8 @@ permissions: if you are able to open `datadog.yaml`, you are able to use the GUI
 | [Debian x86_64][7]                 | Debian 7 (wheezy) and above (we do not support SysVinit) |
 | [Ubuntu x86_64][8]                 | Ubuntu 14.04 and above                                   |
 | [RedHat/CentOS x86_64][9]          | RedHat/CentOS 6 and above                                |
+| [Docker][14]                       | Version 1.12 and higher                                  |
+| [Kubernetes][15]                   | Version 1.3 and higher                                   |
 | [SUSE Enterprise Linux x86_64][10] | SUSE 11 SP4 and above (we do not support SysVinit)       |
 | [Fedora x86_64][11]                | Fedora 26 and above                                      |
 | [MacOS][12]                        | OSX 10.10 and above                                      |
@@ -147,6 +149,7 @@ permissions: if you are able to open `datadog.yaml`, you are able to use the GUI
 | [Windows 64-bit][13]               | Windows 7 or above                                       |
 
 **Note**: Source install may work on operating systems not listed here and is supported on a best effort basis.
+
 ### Agent v5
 
 | OS                                 | Supported versions             |
@@ -154,6 +157,8 @@ permissions: if you are able to open `datadog.yaml`, you are able to use the GUI
 | [Debian x86_64][7]                 | Debian 7 (wheezy) and above    |
 | [Ubuntu x86_64][8]                 | Ubuntu 12.04 and above         |
 | [RedHat/CentOS x86_64][9]          | RedHat/CentOS 5 and above      |
+| [Docker][14]                       | Version 1.12 and higher        |
+| [Kubernetes][15]                   | Version 1.3 and higher         |
 | [SUSE Enterprise Linux x86_64][10] | SUSE 11 SP4 and above          |
 | [Fedora x86_64][11]                | Fedora 26 and above            |
 | [MacOS][12]                        | OSX 10.10 and above            |
@@ -179,3 +184,5 @@ permissions: if you are able to open `datadog.yaml`, you are able to use the GUI
 [11]: /agent/basic_agent_usage/fedora
 [12]: /agent/basic_agent_usage/osx
 [13]: /agent/basic_agent_usage/windows
+[14]: /agent/basic_agent_usage/docker
+[15]: /agent/basic_agent_usage/kubernetes
