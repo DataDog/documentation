@@ -85,7 +85,7 @@ In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if
 
 ## Status of an Agent check
 
-Agent checks must be called by the Agent, to test an Agent check run:
+Agent checks must be called by the Agent. To test an Agent check, run:
 
 | Agent version | Command                                             |
 | :------       | :----                                               |
