@@ -154,7 +154,7 @@ This `dd_url` setting can be found in the `datadog.yaml` file.
 
 `dd_url: https://haproxy.example.com:3834`
 
-If you want to send traces or processes through the proxy, you must setup the following in the `datadog.yaml` file:
+To send traces or processes through the proxy, setup the following in the `datadog.yaml` file:
 
 ```
 apm_config:
@@ -164,7 +164,7 @@ process_config:
     url: https://haproxy.example.com:3836
 ```
 
-Then edit the `datadog.yaml` Agent configuration file and set `skip_ssl_validation` to `true`. This is needed to prevent python from complaining about the discrepancy between the hostname on the SSL certificate (`app.datadoghq.com`) and your HAProxy hostname.:
+Then edit the `datadog.yaml` Agent configuration file and set `skip_ssl_validation` to `true`. This is needed to prevent Python from complaining about the discrepancy between the hostname on the SSL certificate (`app.datadoghq.com`) and your HAProxy hostname.:
 
 ```
 skip_ssl_validation: true
@@ -172,7 +172,7 @@ skip_ssl_validation: true
 
 Finally [restart the Agent][4].
 
-To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3835` as well as the [Infrastructure Overview][5]
+To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3835` as well as the [Infrastructure Overview][5].
 
 #### Agent v<6
 
@@ -181,7 +181,7 @@ This `dd_url` setting can be found in the `datadog.conf` file.
 
 `dd_url: https://haproxy.example.com:3834`
 
-If you want to send traces or processes through the proxy, you must setup the following in the `datadog.conf` file: 
+To send traces or processes through the proxy, setup the following in the `datadog.conf` file:
 
 ```
 [trace.api]
@@ -191,15 +191,15 @@ endpoint = https://haproxy.example.com:3835
 url = https://haproxy.example.com:3836
 ```
 
-Edit your supervisor configuration to disable SSL certificate verification. This is needed to prevent python from complaining about the discrepancy between the hostname on the SSL certificate (`app.datadoghq.com`) and your HAProxy hostname. The supervisor configuration found at:
+Edit your supervisor configuration to disable SSL certificate verification. This is needed to prevent Python from complaining about the discrepancy between the hostname on the SSL certificate (`app.datadoghq.com`) and your HAProxy hostname. The supervisor configuration found at:
 
-* `/etc/dd-agent/supervisor_ddagent.conf` on debian-based systems
-* `/etc/dd-agent/supervisor.conf` on redhat-based systems
+* `/etc/dd-agent/supervisor_ddagent.conf` on Debian-based systems
+* `/etc/dd-agent/supervisor.conf` on Red Hat-based systems
 * `/opt/local/datadog/supervisord/supervisord.conf` on SmartOS
 * `/usr/local/etc/datadog/supervisord/supervisord.conf` on FreeBSD
 * `~/.datadog-agent/supervisord/supervisord.conf` on Mac OS X
 
-Assuming that the supervisord file is found at `<SUP_FILE>`
+Assuming that the supervisor file is found at `<SUP_FILE>`
 
 ```bash
 sed -i 's/ddagent.py/ddagent.py --sslcheck=0/' <SUP_FILE>
