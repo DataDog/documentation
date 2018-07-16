@@ -105,7 +105,7 @@ If your issue continues, [reach out to our Support team][5] with a [flare](#flar
 ### Windows
 
 * **For Agent version < 5.12**:
-    The Agent install includes a file called `shell.exe` in your `\Program Files\` directory for the Datadog Agent which you can use to run python within the Agent environment. Once your check (called `<CHECK_NAME>`) is written and you have the `.py` and `.yaml` files in their correct places, you can run the following in shell.exe:
+    The Agent install includes a file called `shell.exe` in your `\Program Files\` directory for the Datadog Agent which you can use to run Python within the Agent environment. Once your check (called `<CHECK_NAME>`) is written and you have the `.py` and `.yaml` files in their correct places, you can run the following in shell.exe:
     ```
     from checks import run_check
     run_check('<CHECK_NAME>')
