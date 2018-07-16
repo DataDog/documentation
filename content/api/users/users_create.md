@@ -12,7 +12,7 @@ external_redirect: /api/#create-user
     The user handle, must be a valid email.
 * **`name`** [*optional*, *default*=**None**]:  
     The name of the user.
-* **`access_role`** [*optional*, *default*=**st**]:  
+* **`role`** [*optional*, *default*=**st**]:  
     The access role of the user. Choose from:
     *  **st** (standard user), 
     *  **adm** (admin user),
