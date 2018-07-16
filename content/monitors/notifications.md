@@ -175,7 +175,6 @@ The `{{is_exact_match}}` conditional looks for the exact string in the tag varia
 
 We provide a number of different types of monitors and not all variables are available for each type of monitor. Integration monitor variables are largely dependent on the specific integration and monitor configuration.
 
-
 *(Scroll right to see all variable availability)*
 
 {{% table responsive="true" %}}
