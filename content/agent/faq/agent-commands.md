@@ -45,15 +45,16 @@ aliases:
 
 ### Service status
 
-| Platform        | Agent v5                                                                                                 | Agent v6                                                                      |
-| :--------       | :-----                                                                                                   | :--------                                                                     |
-| Linux           | `sudo service datadog-agent status`                                                                      | `sudo datadog-agent status`                                                   |
-| Docker (Debian) | `sudo docker exec -it <container_name> /etc/init.d/datadog-agent status`                                 | `sudo docker exec -it <container_name> s6-svstat /var/run/s6/services/agent/` |
-| Docker (Alpine) | `sudo docker exec -it <container_name> supervisorctl -c /opt/datadog-agent/agent/supervisor.conf status` | `n/a`                                                                         |
-| Kubernetes      | `kubectl exec -it <pod-name> /etc/init.d/datadog-agent status`                                           | `kubectl exec -it <pod-name> s6-svstat /var/run/s6/services/agent/`           |
-| MacOS x         | `datadog-agent status`                                                                                   | `launchctl list com.datadoghq.agent` or systray app                           |
-| Source          | `sudo ~/.datadog-agent/bin/agent status`                                                                 | `sudo service datadog-agent status`                                           |
-| Windows         | [Consult our dedicated windows doc][2]                                                                   | [Consult our dedicated windows doc][2]                                        |
+| Platform            | Agent v5                                                                                                 | Agent v6                                                                      |
+| :--------           | :-----                                                                                                   | :--------                                                                     |
+| Linux               | `sudo service datadog-agent status`                                                                      | `sudo datadog-agent status`                                                   |
+| Docker (Debian)     | `sudo docker exec -it <container_name> /etc/init.d/datadog-agent status`                                 | `sudo docker exec -it <container_name> s6-svstat /var/run/s6/services/agent/` |
+| Docker (Alpine)     | `sudo docker exec -it <container_name> supervisorctl -c /opt/datadog-agent/agent/supervisor.conf status` | `n/a`                                                                         |
+| Kubernetes          | `kubectl exec -it <pod-name> /etc/init.d/datadog-agent status`                                           | `kubectl exec -it <pod-name> s6-svstat /var/run/s6/services/agent/`           |
+| Kubernetes (Alpine) | `kubectl exec -it <pod-name> supervisorctl -c /opt/datadog-agent/agent/supervisor.conf status`           | `n/a`                                                                         |
+| MacOS x             | `datadog-agent status`                                                                                   | `launchctl list com.datadoghq.agent` or systray app                           |
+| Source              | `sudo ~/.datadog-agent/bin/agent status`                                                                 | `sudo service datadog-agent status`                                           |
+| Windows             | [Consult our dedicated windows doc][2]                                                                   | [Consult our dedicated windows doc][2]                                        |
 
 **Note**: If you are using a Linux based system and the `service` wrapper command is not available, [consult the list of alternatives][4]
 
