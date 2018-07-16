@@ -27,10 +27,10 @@ Monitors trigger events when they change state between `ALERT`, `WARNING` (if en
 {{< img src="monitors/downtimes/downtime_on_alert.png" alt="downtime on alert" responsive="true" style="width:80%;">}}
 
 If a monitor transitions states during downtime (such as from `OK` to `ALERT`, `WARNING`, or `NO DATA`) and remains in that state once a scheduled downtime expires, it will **NOT** trigger a notification. 
-However it WILL trigger a recovery event once data returns for that scope or the monitor returns to an `OK` state.
+**However it WILL trigger a recovery event once data returns for that scope or the monitor returns to an `OK` state.**
 
 This may seem unintuitive, but it is the expected behavior today, and it has been made this way to protect from potentially spammy `NO DATA` state alerts when using the *Autoresolve* feature. 
-If in these circumstances you would prefer that the monitor triggers a `NO DATA` state event at the time that the silencing expires, there is a feature you can have enabled for your account to enable that behavior. [Reach out to our support team][5] to request it. This will only affect instances when a monitor exits a downtime period in a NO DATA state.
+If in these circumstances you would prefer that the monitor triggers a `NO DATA` state event at the time that the silencing expires, there is a feature you can have enabled for your account to enable that behavior. [Reach out to our support team][5] to request it. This will only affect instances when a monitor exits a downtime period in a `NO DATA` state.
 
 ## Manage Downtime
 
@@ -50,8 +50,9 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
   {{< img src="monitors/downtimes/downtime-silence.png" alt="downtime-silence" responsive="true" style="width:80%;">}}
   You can select a specific monitor to silence, or leave this field empty to silence all monitors. You can also select a scope to constrain your downtime to a specific host, device or arbitrary tag.
   Refer to the [scope section][2] of the Graphing Primer using JSON for further information about scope.
-  If you choose to silence all monitors constrained by a scope, clicking the "Preview affected monitors" shows which monitors are currently affected. Any monitors within your scope that are created or edited after the downtime is schedule is also silenced.
-  Note that if a multi alert is included, it is only silenced for systems covered by the scope. For example, if a downtime scope is set for `host:X` and a multi alert is triggered on both `host:X` and `host:Y`, Datadog generates a monitor notification for `host:Y`, but not `host:X`.
+  If you choose to silence all monitors constrained by a scope, clicking the *Preview affected monitors* shows which monitors are currently affected. Any monitors within your scope that are created or edited after the downtime is schedule is also silenced.
+  Note that if a multi alert is included, it is only silenced for systems covered by the scope. 
+  For example, if a downtime scope is set for `host:X` and a multi alert is triggered on both `host:X` and `host:Y`, Datadog generates a monitor notification for `host:Y`, but not `host:X`.
 
 2. Set a schedule.
   {{< img src="monitors/downtimes/downtime-schedule.png" alt="downtime-schedule" responsive="true" style="width:80%;">}}
@@ -59,7 +60,7 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
 
 3. Add an optional message to notify your team
   {{< img src="monitors/downtimes/downtime-notify.png" alt="downtime-notify" responsive="true" style="width:80%;">}}
-  Enter a message to notify your team about this downtime. The message field allows standard [markdown formatting][3] as well as Datadog's @-notification syntax. The "Notify your team" field allows you to specify team members or send the message to a service [integration][4].
+  Enter a message to notify your team about this downtime. The message field allows standard [markdown formatting][3] as well as Datadog's @-notification syntax. The *Notify your team* field allows you to specify team members or send the message to a service [integration][4].
 
 ## Further Reading
 
