@@ -423,7 +423,7 @@ class HTTPCheck(AgentCheck):
 
 ## Troubleshooting
 
-[Refer to the Agent dedicated troubleshooting documentation page][]
+[Refer to the Agent dedicated troubleshooting documentation page][13]
 
 ## Further Reading
 
