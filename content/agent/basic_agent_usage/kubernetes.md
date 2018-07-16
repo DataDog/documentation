@@ -58,11 +58,9 @@ spec:
         name: datadog-agent
         ports:
           - containerPort: 8125
-            hostPort: 8125
             name: dogstatsdport
             protocol: UDP
           - containerPort: 8126
-            hostPort: 8126
             name: traceport
             protocol: TCP
         env:
