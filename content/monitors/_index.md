@@ -70,9 +70,9 @@ Setting the above to **Notify** send an email for the monitor audit events to al
 
 The monitor *Resolve* function is artificially switching the monitor status to `OK` at the next evaluation. The following monitor evaluation will be performed normally on the data the monitor is based on.
 
-If a monitor is currently alerting because the data corresponds to the alert state, *Resolve* will have the monitor to follow the following state switch `ALERT -> OK -> ALERT`. Thus it's not appropriate for acknowledging you have seen the alert or telling Datadog to ignore the alert.
+If a monitor is alerting because its current data corresponds to its `ALERT` state, *Resolve* will have the monitor follow the state switch `ALERT -> OK -> ALERT`. Thus, it's not appropriate for acknowledging that you have seen the alert or telling Datadog to ignore the alert.
 
-Manually *Resolve* a monitor is a good fit to cases where data is reported intermittently: after triggering an alert, the monitor doesn't receive further data so it cannot evaluate the alerting conditions anymore and recover to the `OK` state. In that case the *Resolve* function or the *Automatically resolve monitor after X hours* switch the monitor back to OK.
+Manually *Resolve*-ing a monitor is appropriate for cases where data is reported intermittently: after triggering an alert, the monitor doesn't receive further data so it can no longer evaluate alerting conditions and recover to the `OK` state. In that case the *Resolve* function or the *Automatically resolve monitor after X hours* switches the monitor back to `OK` state.
 
 Typical use case: monitor based on error metrics that are not generated when there are no errors (e.g. `aws.elb.httpcode_elb_5xx`, or any DogStatsD counter in your code reporting an error _only when there is an error_)
 
