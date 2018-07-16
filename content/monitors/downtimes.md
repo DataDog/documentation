@@ -20,7 +20,7 @@ You may occasionally need to shut systems down or take them off-line to perform 
 
 You can schedule downtimes and/or mute your Datadog monitors so that they do not alert at specific times when you do not want them to.
 
-Monitors trigger events when they change state between `ALERT`, `WARNING` (if enabled), `RESOLVED`, and `NO DATA` (if enabled). But if a monitor has been silenced either by a downtime or muting, then any transition from `RESOLVED` to another state **won't trigger an event** (nor the notification channels that the event would have set off). 
+Monitors trigger events when they change state between `ALERT`, `WARNING` (if enabled), `RESOLVED`, and `NO DATA` (if enabled). If a monitor has been silenced either by a downtime or muting, then any transition from `RESOLVED` to another state will **neither trigger an event**, nor activate any associated notification channels. 
 
 **Note**: Muting or un-muting a monitor via the UI deletes all scheduled downtimes associated with that monitor.
 
@@ -29,8 +29,7 @@ Monitors trigger events when they change state between `ALERT`, `WARNING` (if en
 If a monitor transitions states during downtime (such as from `OK` to `ALERT`, `WARNING`, or `NO DATA`) and remains in that state once a scheduled downtime expires, it will **NOT** trigger a notification. 
 **However it WILL trigger a recovery event once data returns for that scope or the monitor returns to an `OK` state.**
 
-This may seem unintuitive, but it is the expected behavior today, and it has been made this way to protect from potentially spammy `NO DATA` state alerts when using the *Autoresolve* feature. 
-If in these circumstances you would prefer that the monitor triggers a `NO DATA` state event at the time that the silencing expires, there is a feature you can have enabled for your account to enable that behavior. [Reach out to our support team][5] to request it. This will only affect instances when a monitor exits a downtime period in a `NO DATA` state.
+This behavour is designed to prevent spammy `NO DATA` state alerts when using the *Autoresolve* feature. If you would prefer that the monitor triggers a `NO DATA` state event at the time that the silencing expires, thisis  a feature that can be enabled for your account; [reach out to our support team][5] to request it. This will only affect instances when a monitor exits a downtime period in a `NO DATA` state.
 
 ## Manage Downtime
 
