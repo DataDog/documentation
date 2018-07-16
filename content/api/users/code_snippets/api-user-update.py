@@ -9,4 +9,4 @@ initialize(**options)
 
 # Update user
 api.User.update('test@datadoghq.com', name='alt name',
-                email='test+1@datadoghq.com', role='ro')
+                email='test+1@datadoghq.com', access_role='ro')
