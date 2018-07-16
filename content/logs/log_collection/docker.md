@@ -152,7 +152,7 @@ LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%:%%por
 LABEL "com.datadoghq.ad.logs"='[{"source": "nginx", "service": "webapp"}]'
 ```
 
-Pod Annotation is not yet supported for logs. Check our [Autodiscovery Guide][8] for more information about Autodiscovery setup and examples.
+If you are running in Kubernetes and do not use container labels, pod annotation will soon be supported. Check our [Autodiscovery Guide][8] for more information about Autodiscovery setup and examples.
 
 ## Further Reading
 
