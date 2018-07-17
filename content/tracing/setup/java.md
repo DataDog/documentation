@@ -440,6 +440,13 @@ Datadog's [JMX Integration][7] monitors additional metrics around: JVM heap memo
 
 ### Web Frameworks
 
+Web Framework tracing provides:
+* Timing http request to response
+* Tags for the http request (status code, method, etc)
+* Error and stacktrace capturing
+* Linking work created within a web request
+* Distributed Tracing
+
 `dd-java-agent` includes support for automatically tracing the following web frameworks.
 
 | Server                  | Versions   |
@@ -456,6 +463,12 @@ Don't see your desired web frameworks? We're continually adding additional suppo
 
 ### Networking Frameworks
 
+Networking tracing provides:
+* Timing request to response
+* Tags for the request (e.g. response code)
+* Error and stacktrace capturing
+* Distributed Tracing
+
 `dd-java-agent` includes support for automatically tracing the following networking frameworks.
 
 | Framework           | Versions |
@@ -471,6 +484,11 @@ Don't see your desired web frameworks? We're continually adding additional suppo
 Don't see your desired networking framework? We're continually adding additional support, [check with our team][2] to see if we can help.
 
 ### Datastores
+
+Datastore tracing provides:
+* Timing request to response
+* Query info (e.g. a sanitized query string)
+* Error and stacktrace capturing
 
 `dd-java-agent` includes support for automatically tracing the following database frameworks/drivers.
 
