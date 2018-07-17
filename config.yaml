@@ -767,25 +767,30 @@ languages:
           url: "developers/metrics/counts"
           weight: 401
           parent: customnav_developersnav_metrics
+        - identifier: customnav_developersnav_metrics_distributions
+          name: "Distributions"
+          url: "developers/metrics/distributions"
+          weight: 402
+          parent: customnav_developersnav_metrics
         - identifier: customnav_developersnav_metrics_gauges
           name: "Gauges"
           url: "developers/metrics/gauges"
-          weight: 402
+          weight: 403
           parent: customnav_developersnav_metrics
         - identifier: customnav_developersnav_metrics_histograms
           name: "Histograms"
           url: "developers/metrics/histograms"
-          weight: 403
+          weight: 404
           parent: customnav_developersnav_metrics
         - identifier: customnav_developersnav_metrics_rates
           name: "Rates"
           url: "developers/metrics/rates"
-          weight: 404
+          weight: 405
           parent: customnav_developersnav_metrics
         - identifier: customnav_developersnav_metrics_sets
           name: "Sets"
           url: "developers/metrics/sets"
-          weight: 405
+          weight: 406
           parent: customnav_developersnav_metrics
         - identifier: customnav_developersnav_libraries
           name: "Libraries"
@@ -1637,25 +1642,30 @@ languages:
           url: "developers/metrics/counts"
           weight: 401
           parent: customnav_developersnav_metrics
+        - identifier: customnav_developersnav_metrics_distributions
+          name: "Distributions"
+          url: "developers/metrics/distributions"
+          weight: 402
+          parent: customnav_developersnav_metrics
         - identifier: customnav_developersnav_metrics_gauges
           name: "Gauges"
           url: "developers/metrics/gauges"
-          weight: 402
+          weight: 403
           parent: customnav_developersnav_metrics
         - identifier: customnav_developersnav_metrics_histograms
           name: "Histograms"
           url: "developers/metrics/histograms"
-          weight: 403
+          weight: 404
           parent: customnav_developersnav_metrics
         - identifier: customnav_developersnav_metrics_rates
           name: "Rates"
           url: "developers/metrics/rates"
-          weight: 404
+          weight: 405
           parent: customnav_developersnav_metrics
         - identifier: customnav_developersnav_metrics_sets
           name: "Sets"
           url: "developers/metrics/sets"
-          weight: 405
+          weight: 406
           parent: customnav_developersnav_metrics
         - identifier: customnav_developersnav_libraries
           name: "Bibliothèques"

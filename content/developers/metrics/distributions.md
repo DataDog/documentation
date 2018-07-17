@@ -22,16 +22,6 @@ Because these aggregations are global in nature, by default, Datadog only applie
 
 ## Submission
 
-<!--
-### Agent check
-
-{{% table responsive="true" %}}
-| Method | Overview |
-| :----- | :----- |
-| self.distribution(...) | Track the statistical distribution of a set of values over one or more hosts. |
-{{% /table %}}
--->
-
 ### DogStatsD
 
 {{% table responsive="true" %}}

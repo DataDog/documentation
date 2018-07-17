@@ -67,7 +67,7 @@ Learn more about the [Count type in the Metrics documentation][4].
 
 ### Distributions
 
-Distributions are like a global version of Histrograms (see below). They calculate statistical distributions across multiple hosts, allowing you to compute global percentiles across your entire dataset. Global distributions are designed to instrument logical objects, such as services, independently from the underlying hosts.
+Distributions are like a global version of Histograms (see below). They calculate statistical distributions across multiple hosts, allowing you to compute global percentiles across your entire dataset. Global distributions are designed to instrument logical objects, such as services, independently from the underlying hosts.
 
 To measure the duration of an HTTP request, you could measure each request time with the metric `dist.dd.dogweb.latency`:
 
