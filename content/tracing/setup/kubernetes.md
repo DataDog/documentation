@@ -39,11 +39,11 @@ spec:
         name: datadog-agent
         ports:
           - containerPort: 8125
-            hostPort: 8125
+            # hostPort: 8125
             name: dogstatsdport
             protocol: UDP
           - containerPort: 8126
-            hostPort: 8126
+            # hostPort: 8126
             name: traceport
             protocol: TCP
         env:
@@ -94,6 +94,13 @@ spec:
             path: /sys/fs/cgroup
           name: cgroups
 ```
+
+To send custom metrics via dogstatsd from your application pods, uncomment the `# hostPort: 8125` line in your `datadog-agent.yaml` manifest. This exposes the DogStatsD port on each of your Kubernetes nodes. 
+
+To send Traces from your application pods, uncomment the `# hostPort: 8126` line in your `datadog-agent.yaml` manifest. This exposes the Datadog Agent tracing port on each of your Kubernetes nodes. 
+
+**Warning**: this opens a port on your host. Make sure your firewall covers that correctly. 
+Another word of caution: some network plugging don't support `hostPorts` yet, so this won't work. The workaround in this case is to add `hostNetwork: true` in your agent pod specifications. This shares the network namespace of your host with the Datadog agent. Again, make sure this logic is okay with your security policies.
 
 Then, deploy the DemonSet with the command:
 
