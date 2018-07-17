@@ -13,7 +13,7 @@ Further, the CloudWatch API only offers a metric-by-metric crawl to pull data. T
 
 On the Datadog side, we do have the ability to prioritize certain metrics within an account to pull them in faster, depending on the circumstances. Contact [us][1] for more info on this.
 
-To obtain metrics with virtually zero delay, we recommend installing the Datadog Agent on those hosts. We’ve written a bit about [if you should install the Datadog Agent on your AWS isntances][2], especially in relation to CloudWatch.
+To obtain metrics with virtually zero delay, we recommend installing the Datadog Agent on those hosts. We’ve written a bit about [if you should install the Datadog Agent on your AWS instances][2], especially in relation to CloudWatch.
 
 [1]: /help
 [2]: /agent/#why-should-i-install-the-agent-on-my-aws-instances
