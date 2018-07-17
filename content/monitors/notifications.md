@@ -135,39 +135,57 @@ The @ notification inside the template variables follows the same rules.
 #### `{{is_match}}` or `{{is_exact_match}}`
 
 The `{{is_match}}` conditional allows you to match the triggering context to some string to display a different message.
-For example, you might want to notify your db team if a triggering host has `role:db` but notify your app team if the host has `role:app`.
+
+For example, you might want to notify your db team if a triggering host has `role:db` but notify your web team if the host has `role:web`.
 
 You can use any of the available tag variables in your condition. A match is made if the comparison string is anywhere in the resolved variable.
 
 The variable uses the following format:
 
 ```
-{{#is_match "tag_variable" "comparison_string"}}
-  This shows if comparison_string is in tag_variable.
+{{#is_match "<TAG_VARIABLE>.name" "<COMPARISON_STRING>"}}
+  This shows if <COMPARISON_STRING> is in <TAG_VARIABLE>.
 {{/is_match}}
 ```
 
-Here is an example of how you can give a different message depending on the triggering context:
+Here is an example of how you can give a different message depending on the triggering context, let's say we have an alert that can be triggered by hosts with either `role:db` or `role:web` tags attached.
 
-{{< img src="monitors/notifications/scope_match_editor.png" alt="scope match editor" responsive="true" style="width:80%;">}}
+```
+{{#is_match "role.name" "web"}}
+  This is send only if the host that triggered the alert has the tag role:web attached.
+{{/is_match}}
 
-The `{{is_exact_match}}` conditional looks for the exact string in the tag variable, rather than using substring matching. For instance, if there are two hosts named `production` and `production-1`:
+{{#is_match "role.name" "db"}}
+  This is send only if the host that triggered the alert has the tag role:db attached
+{{/is_match}}
+
+```
+
+The `{{is_exact_match}}` conditional looks for the exact string in the tag variable, rather than using substring matching. The variable uses the following format:
+
+```
+{{#is_exact_match "<TAG_VARIABLE>.name" "<COMPARISON_STRING>"}}
+  This shows if <COMPARISON_STRING> is exactly <TAG_VARIABLE>.
+{{/is_exact_match}}
+```
+
+For instance, if an alert that can be triggered by two hosts tagged with `role:production` and `role:production-1`:
 
   ```
-  {{#is_match "tag_variable" "production"}}
-    This shows if tag_variable is "production" or "production-1"
+  {{#is_match "role.name" "production"}}
+    This is send only if the host that triggered has the tags role:production or the role:production attached.
   {{/is_match}}
 
-  {{#is_exact_match "tag_variable" "production"}}
-    This shows only if tag_variable is "production"
+  {{#is_exact_match "host.name" "production"}}
+    This is send only if the host that triggered has the tag role:production attached.
   {{/is_exact_match}}
   ```
 
-**Note**: To use the `{{is_match}}` conditional to check if a `tag_variable` is **NOT** empty, append `.name` after your tag name, for instance:
+**Note**: To use the `{{is_match}}` conditional to check if a `<TAG_VARIABLE>` is **NOT** empty, enter an empty string.
 
   ```
-  {{#is_match "tag_variable.name" ""}}
-    This shows if tag_variable is not empty.
+  {{#is_match "<TAG_VARIABLE>.name" ""}}
+    This shows if <TAG_VARIABLE> is not empty.
   {{/is_match}}
   ```
 
