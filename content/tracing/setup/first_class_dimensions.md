@@ -70,10 +70,10 @@ There are several ways to specify an environment when reporting data:
     ```
   For OpenTracing use the `tracer.WithGlobalTag` start option to set the environment globally.
 
-  * **Java**:  
-      Via sysprop: 
+  * **Java**:
+      Via sysprop:
       ```
-      -Ddd.trace.span.tags=”env:prod”
+      -Ddd.trace.span.tags=env:prod
       ```
       Via env var:
       ```
