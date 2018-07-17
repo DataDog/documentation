@@ -248,7 +248,9 @@ public class Application {
 }
 ```
 
-Trace asynchronous code using the OpenTracing api:
+##### Custom Async Instrumentation
+
+Create asynchronous traces in custom instrumentation using the OpenTracing api.
 
 ```java
 // Step 1: start the Scope/Span on the work submission thread
@@ -267,7 +269,18 @@ try (Scope scope = tracer.buildSpan("ServiceHandlerSpan").startActive(false)) {
 }
 ```
 
-Create a distributed tracing using the OpenTracing api:
+
+Notice the above examples only use the OpenTracing classes. Please reference the [OpenTracing API][6] for more details and information.
+
+## Distributed Tracing
+
+Distributed Tracing links traces across multiple hosts. Linking is implemented by injecting Datadog Metadata into the request headers.
+
+Distributed Tracing headers are language agnostic. A trace started in one language may propagate to another (for example, from Python to Java).
+
+### Custom Distributed Tracing
+
+Create a distributed trace in custom instrumentation using OpenTracing:
 
 ```java
 // Step 1: Inject the Datadog headers in the client code
@@ -330,13 +343,6 @@ public class MyHttpRequestExtractAdapter implements TextMap {
   }
 }
 ```
-
-
-Notice the above examples only use the OpenTracing classes. Please reference the [OpenTracing API][6] for more details and information.
-
-## Distributed Tracing
-
-Distributed Tracing links traces across multiple hosts. Linking is implemented by injecting Datadog Metadata into the request headers.
 
 ### Priority Sampling
 
