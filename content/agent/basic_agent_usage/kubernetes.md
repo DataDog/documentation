@@ -142,20 +142,20 @@ To enable [Log collection][10] with your DaemonSet:
 
 2. Mount the `pointdir` volume in *volumeMounts*:
 
-  ```
-    (...)
-      volumeMounts:
-        (...)
-        - name: pointerdir
-            mountPath: /opt/datadog-agent/run
-    (...)
-    volumes:
+    ```
       (...)
-      - hostPath:
-            path: /opt/datadog-agent/run
-          name: pointerdir
-    (...)
-  ```
+        volumeMounts:
+          (...)
+          - name: pointerdir
+              mountPath: /opt/datadog-agent/run
+      (...)
+      volumes:
+        (...)
+        - hostPath:
+              path: /opt/datadog-agent/run
+            name: pointerdir
+      (...)
+    ```
 
 Learn more about this in [the Docker log collection documentation][11].
 
@@ -177,8 +177,8 @@ To enable [Trace collection][20] with your DaemonSet:
 2. Uncomment the `# hostPort: 8126` line. 
   This exposes the Datadog Agent tracing port on each of your Kubernetes nodes. 
 
-  **Warning**: This opens a port on your host. Make sure your firewall covers that correctly. 
-  Another word of caution: some network plugging don't support `hostPorts` yet, so this won't work. The workaround in this case is to add `hostNetwork: true` in your agent pod specifications. This shares the network namespace of your host with the Datadog agent. Again, make sure this logic is okay with your security policies.
+    **Warning**: This opens a port on your host. Make sure your firewall covers that correctly. 
+    Another word of caution: some network plugging don't support `hostPorts` yet, so this won't work. The workaround in this case is to add `hostNetwork: true` in your agent pod specifications. This shares the network namespace of your host with the Datadog agent. Again, make sure this logic is okay with your security policies.
 
 #### DogStastD
 
