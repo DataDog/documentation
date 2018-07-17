@@ -378,6 +378,42 @@ public class MyClass {
 }
 ```
 
+## Tagging
+
+Tags are key-value pairs attached to spans. All tags share a single namespace.
+
+The Datadog UI uses specific tags to set UI properties, such as an application's service name. A full list of these tags can be found in the [Datadog](https://github.com/DataDog/dd-trace-java/blob/master/dd-trace-api/src/main/java/datadog/trace/api/DDTags.java) and [OpenTracing](https://github.com/opentracing/opentracing-java/blob/master/opentracing-api/src/main/java/io/opentracing/tag/Tags.java) APIs.
+
+### Custom Tags
+
+Custom tags are set using the OpenTracing api:
+
+```java
+import datadog.trace.api.DDTags;
+
+import io.opentracing.Scope;
+import io.opentracing.Tracer;
+import io.opentracing.util.GlobalTracer;
+
+class InstrumentedClass {
+
+    void method0() {
+        Tracer tracer = GlobalTracer.get();
+
+        Scope scope = tracer.buildSpan("myspan").startActive(true);
+        try {
+            scope.span().setTag(DDTags.SERVICE_NAME, "my-new-service");
+            scope.span().setTag("org-id", "12345");
+            scope.span().setTag("my-tag", "my-tag-value");
+
+            // method0 impl...
+        } finally {
+            scope.close();
+        }
+    }
+}
+```
+
 ## Logging and MDC
 
 The Java tracer exposes two API calls to allow printing trace and span identifiers along with log statements, `CorrelationIdentifier#getTraceId()`, and `CorrelationIdentifier#getSpanId()`.
