@@ -159,6 +159,27 @@ To enable [Log collection][10] with your DaemonSet:
 
 Learn more about this in [the Docker log collection documentation][11].
 
+#### Trace collection setup
+
+To enable [Trace collection][20] with your DaemonSet:
+
+1. Set the `DD_APM_ENABLED` variable to true in your *env* section:
+
+    ```
+    (...)
+      env:
+        (...)
+        - name: DD_APM_ENABLED
+            value: "true"
+    (...)
+    ```
+
+2. Uncomment the `# hostPort: 8126` line. 
+  This exposes the Datadog Agent tracing port on each of your Kubernetes nodes. 
+
+  **Warning**: This opens a port on your host. Make sure your firewall covers that correctly. 
+  Another word of caution: some network plugging don't support `hostPorts` yet, so this won't work. The workaround in this case is to add `hostNetwork: true` in your agent pod specifications. This shares the network namespace of your host with the Datadog agent. Again, make sure this logic is okay with your security policies.
+
 #### DogStastD
 
 To send custom metrics via DogStatsD, set the `DD_DOGSTATSD_NON_LOCAL_TRAFFIC`variable to true in your *env* section:
@@ -400,3 +421,4 @@ Our default configuration targets Kubernetes 1.7.6 and later, as the Datadog Age
 [17]: https://github.com/DataDog/integrations-core/tree/master/kubelet#compatibility
 [18]: https://kubernetes.io/docs/admin/authentication/#service-account-tokens
 [19]: /agent/basic_agent_usage/docker/#dogstatsd-custom-metrics
+[20]: /tracing/setup/kubernetes
