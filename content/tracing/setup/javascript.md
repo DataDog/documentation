@@ -30,7 +30,7 @@ For details about contributing, check out the [development guide][development do
 
 ### Requirements
 
-Node 4.7 is the minimum version supported by this library. However, it benefits significantly from the performance improvements introduced in Node 8.3+.
+Node `^4.7`, `^6.9` and `>=8` are supported by this library. However, it benefits significantly from the performance improvements introduced in Node `>=8.3`.
 
 ### Installation
 
@@ -61,15 +61,10 @@ The following example initializes a Datadog Tracer and creates a Span called `we
 
 ```javascript
 const tracer = require('dd-trace').init()
+const span = tracer.startSpan('web.request')
 
-tracer
-  .trace('web.request', {
-    service: 'my_service'
-  })
-  .then(span => {
-    span.setTag('my_tag', 'my_value')
-    span.finish()
-  })
+span.setTag('http.url', '/login')
+span.finish()
 ```
 
 For more information on manual instrumentation, check out the [API documentation][5].
@@ -123,21 +118,24 @@ The `dd-trace` library includes support for a number of modules. If you would li
 
 #### Data Stores
 
-| Module              | Versions    | Support Type |
-| :----------         | :---------- | :----------- |
-| [elasticsearch][14] | 15.x        | Beta         |
-| [ioredis][15]       |             | Coming Soon  |
-| [mongodb-core][16]  | 3.x         | Beta         |
-| [mysql][17]         | 2.x         | Beta         |
-| [mysql2][18]        | ^1.5        | Beta         |
-| [pg][19]            | 6.x         | Beta         |
-| [redis][20]         | ^2.6        | Beta         |
+| Module                 | Versions    | Support Type |
+| :----------            | :---------- | :----------- |
+| [cassandra-driver][25] |             | Coming Soon  |
+| [elasticsearch][14]    | 15.x        | Beta         |
+| [ioredis][15]          |             | Coming Soon  |
+| [memcached][24]        |             | Coming Soon  |
+| [mongodb-core][16]     | 3.x         | Beta         |
+| [mysql][17]            | 2.x         | Beta         |
+| [mysql2][18]           | ^1.5        | Beta         |
+| [pg][19]               | 6.x         | Beta         |
+| [redis][20]            | ^2.6        | Beta         |
 
 #### Workers
 
-| Module         | Versions    | Support Type | Notes                   |
-| :----------    | :---------- | :----------  | :---------------------- |
-| [amqplib][21]* | 0.5.x       | Beta         | [Known Limitations][23] |
+| Module           | Versions    | Support Type |
+| :----------      | :---------- | :----------  |
+| [amqplib][21]*   | 0.5.x       | Beta         |
+| [kafka-node][26] |             | Coming Soon  |
 
 **Note**: amqplib supports several message brokers including RabbitMQ and ActiveMQ.
 
@@ -170,3 +168,6 @@ The `dd-trace` library includes support for a number of modules. If you would li
 [21]: https://github.com/squaremo/amqp.node
 [22]: https://github.com/graphql/graphql-js
 [23]: https://datadog.github.io/dd-trace-js/#amqplib-limitations
+[24]: https://github.com/3rd-Eden/memcached
+[25]: https://github.com/datastax/nodejs-driver
+[26]: https://github.com/SOHU-Co/kafka-node
