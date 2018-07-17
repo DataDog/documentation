@@ -148,11 +148,11 @@ For example, if you want to notify your db team if a triggering host has the `ro
 
 ```
 {{#is_match "role.name" "web"}}
-  This is send only if the host that triggered the alert has the tag role:web attached.
+  This shows only if the host that triggered the alert has the tag role:web attached.
 {{/is_match}}
 
 {{#is_match "role.name" "db"}}
-  This is send only if the host that triggered the alert has the tag role:db attached
+  This shows only if the host that triggered the alert has the tag role:db attached
 {{/is_match}}
 
 ```
@@ -179,11 +179,11 @@ For instance, if an alert that can be triggered by two hosts tagged with `role:p
 
   ```
   {{#is_match "role.name" "production"}}
-    This is send only if the host that triggered has the tags role:production or the role:production attached.
+    This shows only if the host that triggered the alert has the tags role:production or the role:production attached.
   {{/is_match}}
 
   {{#is_exact_match "host.name" "production"}}
-    This is send only if the host that triggered has the tag role:production attached.
+    This shows only if the host that triggered has the tag role:production attached.
   {{/is_exact_match}}
   ```
 
