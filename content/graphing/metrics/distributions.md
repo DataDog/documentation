@@ -3,7 +3,11 @@ title: Distribution metrics
 kind: documentation
 description: Compute global percentiles across your entire dataset.
 aliases:
-    - /developers/faq/characteristics-of-datadog-histograms/
+- /developers/faq/characteristics-of-datadog-histograms/
+further_reading:
+- link: "developers/dogstatsd/data_types#distributions"
+  tag: "Documentation"
+  text: Using Distributions in DogStatsD
 ---
 
 ## Overview
@@ -29,6 +33,10 @@ With the [distribution UI][3], create additional aggregate timeseries by applyin
 **Sets of tags are limited to groups of four.**
 
 {{< img src="graphing/metrics/distributions/distribution_metric.png" alt="Distribution metric" responsive="true" >}}
+
+When creating your own graph, distribution metrics automatically have additional space aggregations available in the UI:
+
+{{< img src="graphing/metrics/distributions/dogweb_latency_bis.png" alt="Distribution metric bis" responsive="true" >}}
 
 ## Case study
 
@@ -80,40 +88,9 @@ The following gif demonstrates inspecting the aggregations created for a metric,
 
 {{< img src="graphing/metrics/distributions/Distros_Tagging.gif" alt="Distros_Tagging" responsive="true" >}}
 
-## Submission method
-### DogStatsD
+## Further reading
 
-```
-dog.distribution(String metric.name, double value, String... tags)  
-```
-
-### Python
-
-To measure the duration of an HTTP request, you could measure each request time with the metric `dist.dd.dogweb.latency`.
-
-```python
-# Track the run time of a request.
-start_time = time.time()
-results = requests.get('https://google.com')
-duration = time.time() - start_time
-statsd.distribution('dist.dd.dogweb.latency', duration)
-```
-
-The above instrumentation calculates the following data: `sum`, `count`, `average`, `minimum`, `maximum`, `50th percentile` (median), `75th percentile`, `90th percentile`, `95th percentile` and `99th percentile`. These metrics give insight into how different each request time is. 
-We can see how long the request usually takes by graphing the median. We can see how long most requests take by graphing the 95th percentile.
-
-{{< img src="graphing/metrics/distributions/dogweb_latency.png" alt="Dogweb latency" responsive="true" >}}
-
-For this toy example, let’s say a request time of *500ms* is acceptable. Our median query time (graphed in blue) is usually less than *100 milliseconds*, which is great. 
-Our 95th percentile (graphed in red) has spikes sometimes over one second, which is unacceptable. 
-This means most of our queries are running just fine, but our worst ones are bad. If the 95th percentile were close to the median, than we would know that almost all of our requests are performing just fine.
-
-When creating your own graph, distribution metrics automatically have additional space aggregations available in the UI:
-
-
-{{< img src="graphing/metrics/distributions/dogweb_latency_bis.png" alt="Distribution metric bis" responsive="true" >}}
-
-Distributions are not only for measuring times. They can be used to measure the distribution of any type of value, like the size of uploaded files or classroom test scores.
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /developers/metrics
 [2]: /developers/metrics/histograms
