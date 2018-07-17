@@ -148,7 +148,7 @@ Once the HAProxy configuration is in place, you can reload it or restart HAProxy
 **We recommend having a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.com` fails over to another IP.
 
 #### Datadog Agent configuration
-##### Agent v>6
+##### Agent v6
 
 Edit each Agent to point to HAProxy by setting its `dd_url` to the address of HAProxy (e.g. `haproxy.example.com`). 
 This `dd_url` setting can be found in the `datadog.yaml` file. 
@@ -165,7 +165,7 @@ process_config:
     url: https://haproxy.example.com:3836
 ```
 
-Then edit the `datadog.yaml` Agent configuration file and set `skip_ssl_validation` to `true`. This is needed to prevent Python from complaining about the discrepancy between the hostname on the SSL certificate (`app.datadoghq.com`) and your HAProxy hostname.:
+Then edit the `datadog.yaml` Agent configuration file and set `skip_ssl_validation` to `true`. This is needed to make the Agent ignore the  discrepancy between the hostname on the SSL certificate (`app.datadoghq.com`) and your HAProxy hostname:
 
 ```
 skip_ssl_validation: true
@@ -175,7 +175,7 @@ Finally [restart the Agent][4].
 
 To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3835` as well as the [Infrastructure Overview][5].
 
-##### Agent v<6
+##### Agent v5
 
 Edit each Agent to point to HAProxy by setting its `dd_url` to the address of HAProxy (e.g. `haproxy.example.com`). 
 This `dd_url` setting can be found in the `datadog.conf` file. 
