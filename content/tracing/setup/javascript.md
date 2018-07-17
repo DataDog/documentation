@@ -63,7 +63,7 @@ The following example initializes a Datadog Tracer and creates a Span called `we
 const tracer = require('dd-trace').init()
 const span = tracer.startSpan('web.request')
 
-span.setTag('my_tag', 'my_value')
+span.setTag('http.url', '/login')
 span.finish()
 ```
 
