@@ -39,8 +39,8 @@ Related to the data used in a network communication. All fields and metrics are 
 | `network.destination.ip` | `string` | The IP address the client connected to. |
 | `network.client.port` | `string` | The port of the client which initiated the connection. |
 | `network.destination.port` | `string` | The TCP port the client connected to. |
-| `network.bytes_read` | `string` | Total number of bytes transmitted from the client to the server when the log is emitted. |
-| `network.bytes_written` | `string` | Total number of bytes transmitted from the server to the client when the log is emitted. |
+| `network.bytes_read` | `number` | Total number of bytes transmitted from the client to the server when the log is emitted. |
+| `network.bytes_written` | `number` | Total number of bytes transmitted from the server to the client when the log is emitted. |
 
 Typical integrations relying on these: *Apache*, *Varnish*, *AWS ELB*, *Nginx*, *HAPROXY*, etc.
 
@@ -72,7 +72,6 @@ Details about the parsed parts of the HTTP url. Generally generated thanks to th
 | `http.url_details.host` | `string` | The HTTP host part of the url. |
 | `http.url_details.port` | `number` | The HTTP port part of the url. |
 | `http.url_details.path` | `string` | The HTTP path part of the url. |
-| `http.url_details.method` | `string` | The HTTP method part of the url. |
 | `http.url_details.queryString` | `object` | The HTTP query string parts of the url decomposed as query params key/value attributes. |
 | `http.url_details.scheme` | `string` | The protocol name of the URL (http or https)
 . |
@@ -98,9 +97,9 @@ Related to the data used when a log or an error is generated via a logger in a c
 | `logger.name` | `string` | The name of the logger. |
 | `logger.thread_name` | `string` | The name of the current thread when the log is fired. |
 | `logger.method_name` | `string` | The class method name.|
-| `error.name` | `string` | The error name. |
 | `error.kind` | `string` | The error type or kind (or code is some cases). |
-| `error.stack_trace` | `string` | The User-Agent as it is sent (raw format). See bellow for all details about it. |
+| `error.message` | `string` | A concise, human-readable, one-line message explaining the event |
+| `error.stack` | `string` | The stack trace or the complementary information about the error |
 
 Typical integrations relying on these attributes are: *Java*, *NodeJs*, *.NET*, *Golang*, *Python*, etc.
 
@@ -125,7 +124,7 @@ Performance metrics.
 |                                                 |                                     |                          |           
 | :---                                            | :---                                 | :----                    |         
 | **Fullname**                                     | **Type**                           | **Description**|
-| `duration` | `string` | A duration of any kind: HTTP response time, db query time, latency, etc. |
+| `duration` | `number` | A duration of any kind in nanoseconds: HTTP response time, db query time, latency, etc. |
 
 We advise you to rely or at least remap on thes attributes as Datadog displays and uses them in the best way possible.
 
@@ -150,6 +149,7 @@ Related to the data added by a syslog or a log-shipper agent. All fields and met
 | `syslog.hostname` | `string` | The hostname |
 | `syslog.appname` | `string` | The application name. Generally remapped to the `service` reserved attribute. |
 | `syslog.severity` | `string` | The log severity. Generally remapped to the `status` reserved attribute. |
+| `syslog.timestamp` | `string` | The log timestamp. Generally remapped to the `date` reserved attribute. |
 | `syslog.env` | `string` | The environment name where the source of logs come from. |
 
 Some integrations that rely on these are: *Rsyslog*, *NxLog*, *Syslog-ng*, *Infrastructure*, *Fluentd*, *Logstash*, etc.
