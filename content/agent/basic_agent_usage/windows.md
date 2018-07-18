@@ -24,7 +24,7 @@ This page outlines the basic functionality of the Windows Datadog Agent. If you 
 ### Starting and Stopping the Agent
 
 The execution of the Agent is controlled by a Windows service. 
-There are many items that can be configured on the command line. Each configuration item is added as an install property to the command line, for instance the following commands install the Agent, and configure the Agent configuration file with the `<DATADOG_API_KEY>`, as well as setting the `<HOSTNAME>` and tags.
+There are many items that can be configured on the command line. Each configuration item is added as an install property to the command line. For instance, the following commands install the Agent, configure the Agent configuration file with the <DATADOG_API_KEY>, and set the <HOSTNAME> and tags.
 
 * (cmd shell) `msiexec /qn /i datadog-agent-6-latest.amd64.msi APIKEY="<DATADOG_API_KEY>" HOSTNAME="<HOSTNAME>" TAGS="key_1:val_1,key_2:val_2"`
 * (powershell) `Start-Process msiexec -ArgumentList 'datadog-agent-6-latest.amd64.msi APIKEY="<DATADOG_API_KEY>" HOSTNAME="<HOSTNAME>" TAGS="key_1:val_1,key_2:val_2"'`
