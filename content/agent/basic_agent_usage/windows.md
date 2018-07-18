@@ -24,22 +24,22 @@ This page outlines the basic functionality of the Windows Datadog Agent. If you 
 ### Starting and Stopping the Agent
 
 The execution of the Agent is controlled by a Windows service. 
-There are many items that can be configured on the command line. Each configuration item is added as an install property to the command line, for instance the following commands install the agent, and configure the Agent configuration file with the `<DATADOG_API_KEY>`, as well as setting the `<HOSTNAME>` and tags.
+There are many items that can be configured on the command line. Each configuration item is added as an install property to the command line, for instance the following commands install the Agent, and configure the Agent configuration file with the `<DATADOG_API_KEY>`, as well as setting the `<HOSTNAME>` and tags.
 
 * (cmd shell) `msiexec /qn /i datadog-agent-6-latest.amd64.msi APIKEY="<DATADOG_API_KEY>" HOSTNAME="<HOSTNAME>" TAGS="key_1:val_1,key_2:val_2"`
 * (powershell) `Start-Process msiexec -ArgumentList 'datadog-agent-6-latest.amd64.msi APIKEY="<DATADOG_API_KEY>" HOSTNAME="<HOSTNAME>" TAGS="key_1:val_1,key_2:val_2"'`
 
-The following configuration command line options are available when installing the agent: 
+The following configuration command line options are available when installing the Agent: 
 
 | Variable          | Type   | Description                                                                                                                                                                                                   |
 | ----              | -----  | ----                                                                                                                                                                                                          |
 | `APIKEY`          | String | Assigns the Datadog API KEY to string in the configuration file.                                                                                                                                              |
 | `TAGS`            | String | Comma separated list of tags to assign in the configuration file.                                                                                                                                             |
-| `HOSTNAME`        | String | Configures the hostname reported by the Datadog agent to Datadog. Overrides any hostname calculated at runtime                                                                                                |
+| `HOSTNAME`        | String | Configures the hostname reported by the Datadog Agent to Datadog. Overrides any hostname calculated at runtime                                                                                                |
 | `LOGS_ENABLED`    | String | Enables (if set to `"true"`) or explicitly disables (if set to `"false"`) the log collection feature in the configuration file.  Logs is disabled by default.                                                 |
-| `APM_ENABLED`     | String | Explicitly enables (if set to `"true"`) or disables (if set to `"false"`) the APM agent in the configuration file.  APM is enabled by default                                                                 |
-| `PROCESS_ENABLED` | String | Enables (if set to `"true"`) or explicitly disables (if set to `"false"`) the process agent in the configuration file.  The process agent is disabled by default.                                             |
-| `CMD_PORT`        | Number | Number is a valid port number between 0 and 65534.  The datadog agent uses port 5001 by default for it's control API.  If that port is already in use by another program, the default may be overridden here. |
+| `APM_ENABLED`     | String | Explicitly enables (if set to `"true"`) or disables (if set to `"false"`) the APM Agent in the configuration file.  APM is enabled by default                                                                 |
+| `PROCESS_ENABLED` | String | Enables (if set to `"true"`) or explicitly disables (if set to `"false"`) the process Agent in the configuration file.  The process Agent is disabled by default.                                             |
+| `CMD_PORT`        | Number | Number is a valid port number between 0 and 65534.  The Datadog Agent uses port 5001 by default for it's control API.  If that port is already in use by another program, the default may be overridden here. |
 | `PROXY_HOST`      | String | If using a proxy, sets your proxy host. [Learn more on using a proxy with the Datadog Agent][8].                                                                                                              |
 | `PROXY_PORT`      | Number | If using a proxy, sets your proxy port. [Learn more on using a proxy with the Datadog Agent][8].                                                                                                              |
 | `PROXY_USER`      | String | If using a proxy, sets your proxy user. [Learn more on using a proxy with the Datadog Agent][8].                                                                                                              |
@@ -66,7 +66,7 @@ The Agent has a new set of command-line options:
 | import          | Import and convert configuration files from previous versions of the Agent |
 | installservice  | Installs the Agent within the service control manager                      |
 | launch-gui      | Starts the Datadog Agent GUI                                               |
-| regimport       | Import the registry settings into datadog.yaml                             |
+| regimport       | Import the registry settings into `datadog.yaml`                           |
 | remove-service  | Removes the Agent from the service control manager                         |
 | restart-service | Restarts the Agent within the service control manager                      |
 | start           | Start the Agent                                                            |
