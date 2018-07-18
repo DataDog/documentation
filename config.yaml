@@ -662,9 +662,9 @@ languages:
           url: "logs/parsing/"
           weight: 50
           parent: menu_references_logs
-        - identifier: customnav_lognav_dynamic_volume_control
-          name: "Dynamic volume control"
-          url: "logs/dynamic_volume_control/"
+        - identifier: customnav_lognav_logging_without_limits
+          name: "Logging without limits"
+          url: "logs/logging_without_limits/"
           weight: 60
           parent: menu_references_logs
         - identifier: customnav_lognav_languages
@@ -1554,9 +1554,9 @@ languages:
           url: "logs/parsing/"
           weight: 50
           parent: menu_references_logs
-        - identifier: customnav_lognav_dynamic_volume_control
-          name: "Dynamic volume control"
-          url: "logs/dynamic_volume_control/"
+        - identifier: customnav_lognav_logging_without_limits
+          name: "Logging sans limites"
+          url: "logs/logging_without_limits/"
           weight: 60
           parent: menu_references_logs
         - identifier: customnav_lognav_languages
