@@ -25,6 +25,11 @@
                     <span class="input-group-addon">{{ partial "img.html" (dict "root" . "src" "icons/nav_search.png" "alt" "search" "width" "21") }}</span>
                 </div>
             </form>
+
+            <form class="search">
+              <input id="search-input" type="search" placeholder="Search documentation...">
+            </form>
+
             <div class="sidenav-nav">
                 {{ partial "sidenav/recursive-nav.html" (dict "context" $dot "data" .Site.Menus.main) }}
             </div>
