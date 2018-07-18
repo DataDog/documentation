@@ -19,15 +19,36 @@ further_reading:
 
 ## Overview
 
-This page outlines the basic functionality of the Datadog Agent. If you haven't installed the Agent yet, instructions can be found [in the Datadog Agent integration page][1].
+This page outlines the basic functionality of the Windows Datadog Agent. If you haven't installed the Agent yet, instructions can be found [in the Datadog Agent integration page][1].
 
 ### Starting and Stopping the Agent
 
-The execution of the Agent is controlled by a Windows service.
+The execution of the Agent is controlled by a Windows service. 
+There are many items that can be configured on the command line. Each configuration item is added as an install property to the command line, for instance the following commands install the agent, and configure the Agent configuration file with the `<DATADOG_API_KEY>`, as well as setting the `<HOSTNAME>` and tags.
 
-### For version >= 6.0.0
+* (cmd shell) `msiexec /qn /i datadog-agent-6-latest.amd64.msi APIKEY="<DATADOG_API_KEY>" HOSTNAME="<HOSTNAME>" TAGS="key_1:val_1,key_2:val_2"`
+* (powershell) `Start-Process msiexec -ArgumentList 'datadog-agent-6-latest.amd64.msi APIKEY="<DATADOG_API_KEY>" HOSTNAME="<HOSTNAME>" TAGS="key_1:val_1,key_2:val_2"'`
 
-There are a few major changes compare to older Datadog Windows Agent version:
+The following configuration command line options are available when installing the agent: 
+
+| Variable          | Type   | Description                                                                                                                                                                                                   |
+| ----              | -----  | ----                                                                                                                                                                                                          |
+| `APIKEY`          | String | Assigns the Datadog API KEY to string in the configuration file.                                                                                                                                              |
+| `TAGS`            | String | Comma separated list of tags to assign in the configuration file.                                                                                                                                             |
+| `HOSTNAME`        | String | Configures the hostname reported by the Datadog agent to Datadog. Overrides any hostname calculated at runtime                                                                                                |
+| `LOGS_ENABLED`    | String | Enables (if set to `"true"`) or explicitly disables (if set to `"false"`) the log collection feature in the configuration file.  Logs is disabled by default.                                                 |
+| `APM_ENABLED`     | String | Explicitly enables (if set to `"true"`) or disables (if set to `"false"`) the APM agent in the configuration file.  APM is enabled by default                                                                 |
+| `PROCESS_ENABLED` | String | Enables (if set to `"true"`) or explicitly disables (if set to `"false"`) the process agent in the configuration file.  The process agent is disabled by default.                                             |
+| `CMD_PORT`        | Number | Number is a valid port number between 0 and 65534.  The datadog agent uses port 5001 by default for it's control API.  If that port is already in use by another program, the default may be overridden here. |
+| `PROXY_HOST`      | String | If using a proxy, sets your proxy host. [Learn more on using a proxy with the Datadog Agent][8].                                                                                                              |
+| `PROXY_PORT`      | Number | If using a proxy, sets your proxy port. [Learn more on using a proxy with the Datadog Agent][8].                                                                                                              |
+| `PROXY_USER`      | String | If using a proxy, sets your proxy user. [Learn more on using a proxy with the Datadog Agent][8].                                                                                                              |
+| `PROXY_PASSWORD`  | String | If using a proxy, sets your proxy password. [Learn more on using a proxy with the Datadog Agent][8].                                                                                                          |
+
+
+### Agent v6 commands
+
+There are a few major changes compare to older Datadog Windows Agent v5:
 
 * The main executable name is now `agent.exe` (it was `ddagent.exe` previously)
 * Commands should be run with the command line `C:\program files\datadog\datadog agent\embedded\agent.exe <command>`
@@ -54,9 +75,9 @@ The Agent has a new set of command-line options:
 | stopservice     | Stops the Agent within the service control manager                         |
 | version         | Print the version info                                                     |
 
-### For version >= 3.9.1
+### Agent v5 commands
 
-You can use the Datadog Agent Manager that you can find in the Start Menu.
+Use the Datadog Agent Manager that you can find in the Start Menu.
 
 {{< img src="agent/basic_agent_usage/windows/windows-start-menu.png" alt="windows Start Menu" responsive="true" style="width:40%;">}}
 
@@ -65,12 +86,8 @@ You can use the Datadog Agent Manager that you can find in the Start Menu.
 You can also use Windows Powershell if you are running on a modern version of Windows:
 `[start|stop|restart]-service datadogagent`
 
-### For version < 3.9.1
-
-The Agent can be started, stopped, and restarted from the Services panel. To view the Services panel, execute the following in a `cmd.exe` shell: `services.msc`. Once you're in the console, find the "Datadog Agent" service. Right clicking on the service reveals options to start, stop, and restart the Agent.
-
 ## Status and Information
-##### Agent >= 6
+### Agent v6
 
 To check if the Agent is running, check if the `DatadogAgent` service in the Services panel is listed as *Started*. A process called *Datadog Metrics Agent* (`agent.exe`) should also exist in the Task Manager.
 
@@ -89,7 +106,7 @@ or `cmd.exe`:
 
 `C:\program files\datadog\datadog agent\embedded\agent.exe" status`
 
-##### Agent < v6
+### Agent v5
 
 To check if the Agent is running, check if the service status in the Services panel is listed as "Started". A process called `ddagent.exe` should also exist in the Task Manager. To receive more information about the Agent's state, visit the _status page_ by going to *Settings -> Agent Status* in Agent version 5.2 and above and by going to `http://localhost:17125/status` in Agent version 3.9.1 to 5.1.
 
@@ -113,25 +130,7 @@ If you're running on a version older than 5.2 visit the status page in your web 
 
 ## Configuration
 
-### For version >= 3.9.1
-
-You can use the Datadog Agent Manager located in the start menu to enable, disable and configure checks. You have to restart the Agent in order for your changes to be applied.
-
-### For version < 3.9.1
-
-The configuration file location depends on the version of Windows on which the Agent is installed. For Windows Server 2003, XP or older:
-
-  * Agent configuration:
-`C:\Documents and Settings\All Users\Application Data\Datadog\datadog.conf`
-  * Integration configuration:
-`C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\`
-
-For Windows Server 2008, Vista and newer:
-
-  * Agent configuration:
-`C:\ProgramData\Datadog\datadog.conf`
-  * Integration configuration:
-`C:\ProgramData\Datadog\conf.d\`
+Use the Datadog Agent Manager located in the start menu to enable, disable and configure checks. You have to restart the Agent in order for your changes to be applied.
 
 ### Agent check directory structure
 
@@ -168,12 +167,12 @@ Uninstall the Agent using Add/Remove Programs, alternatively, it's possible to t
 ```
 
 ## Troubleshooting
-
+### Agent v6 
 The Agent logs are located in the `C:\programdata\Datadog\logs` directory and all logs are in the `agent.log` file.
 
 If you're still having trouble, [our support team][3] will be glad to provide further assistance.
 
-### For version >= 3.9.1 to < 6.0
+### Agent v5
 
 Logs are available at:
 
@@ -182,20 +181,13 @@ Logs are available at:
   * For Windows Server 2008, Vista and newer:
 `C:\ProgramData\datadog\logs\ddagent.log`
 
-### For version < 3.9.1
-
-Logs for the subsystems are available in Event Viewer, under Windows Logs -> Application.
-
-If you're still having trouble, [our support team][3] will be glad to provide further assistance.
-
 ## Adding a custom python package to the Agent
 The current way to do so is to add the package in the library zipped folder that can be found at `C:\Program Files (x86)\Datadog\Datadog Agent\files`, and [restart the Agent][4].
 
 {{< img src="agent/faq/add_package_windows.png" alt="Add Package Windows" responsive="true" style="width:75%;">}}
 
 ### Send a flare
-
-#### Agent v6
+### Agent v6
 
 1. Navigate to `localhost:5002` to [display the Agent GUI][5]
 2. Select flare tab
@@ -203,7 +195,7 @@ The current way to do so is to add the package in the library zipped folder that
 3. Enter your ticket number (if you have one) and email address
 4. Press Submit
 
-#### Agent v5
+### Agent v5
 
 To send Datadog support a copy of your Windows logs and configurations, do the following:
 
@@ -320,3 +312,4 @@ Again, due to the sensitivity of yaml, if you've tried the above and cannot get 
 [5]: /agent/#using-the-gui
 [6]: /integrations/wmi
 [7]: /integrations/process/
+[8]: /agent/proxy

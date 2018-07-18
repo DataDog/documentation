@@ -53,10 +53,7 @@ file in the following format:
     dogstreams: /var/log/web.log:parsers:parse_web
 
 The `parsers:parse_web` portion indicates that the custom Python function lives
-in a package called  parsers in the Agent's `PYTHONPATH`, and the parsers package
-has a function named `parse_web`. The Agent's `PYTHONPATH` is set in the Agent
-startup script, `/etc/init.d/datadog-agent` for Agent versions < 2.0, and in the
-supervisor config for Agent version >= 2.0.
+in a package called  parsers in the Agent's `PYTHONPATH`, and the parsers package has a function named `parse_web`. The Agent's `PYTHONPATH` is set in the Agent startup script, `/etc/init.d/datadog-agent` in the supervisor config for Agent version.
 
 If your parser does **not** live on the Agent's `PYTHONPATH`, you can use an
 alternative syntax to configure your line parser:
