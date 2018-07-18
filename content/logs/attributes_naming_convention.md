@@ -2,9 +2,9 @@
 
 *In a nutshell:*
 - Various technologies tends to use different attribute names for the same meaning
-- This tends to generate too many attributes leading to: user confusion and unability to correlate accross sources
+- This usually generates too many attributes which can lead to: user confusion and unability to correlate accross sources
 - Integrations rely on the following naming convention
-- And we advise you to use the following reference when you parse your custom formats & sources
+- We also advise you to use the following reference when you parse your custom formats & sources
 
 Centralizing logs from various technologies and applications tends to generate tens or hundreds of different attributes on the Log Management enviromnent. Especially when their are many users and usage working on it.
 
@@ -70,8 +70,9 @@ Details about the parsed parts of the HTTP url. Generally generated thanks to th
 | :---                                            | :---                                 | :----                    |         
 | **Fullname**                                     | **Type**                           | **Description**|
 | `http.url_details.host` | `string` | The HTTP host part of the url. |
-| `http.url_details.status_code` | `number` | The HTTP port part of the url. |
-| `http.url_details.method` | `string` | The HTTP path part of the url.|
+| `http.url_details.port` | `number` | The HTTP port part of the url. |
+| `http.url_details.path` | `string` | The HTTP path part of the url. |
+| `http.url_details.method` | `string` | The HTTP method part of the url. |
 | `http.url_details.queryString` | `Object` | The HTTP query string parts of the url decomposed as query params key/value attributes. |
 
 #### User-Agent attributes
