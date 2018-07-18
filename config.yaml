@@ -663,7 +663,7 @@ languages:
           weight: 50
           parent: menu_references_logs
         - identifier: customnav_lognav_logging_without_limits
-          name: "Logging without limits"
+          name: "Logging without Limits"
           url: "logs/logging_without_limits/"
           weight: 60
           parent: menu_references_logs
@@ -1555,7 +1555,7 @@ languages:
           weight: 50
           parent: menu_references_logs
         - identifier: customnav_lognav_logging_without_limits
-          name: "Logging sans limites"
+          name: "Logging sans Limites"
           url: "logs/logging_without_limits/"
           weight: 60
           parent: menu_references_logs
