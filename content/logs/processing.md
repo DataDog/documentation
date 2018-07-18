@@ -78,7 +78,7 @@ The different kinds of processors are explained below.
 
 Create custom grok rules to parse the full message or a specific attribute of your raw event:
 
-{{< img src="logs/processing/parser.png" alt="Parser" responsive="true" >}}
+{{< img src="logs/processing/parser.png" alt="Parser" responsive="true" style="width:80%;" >}}
 
 Read more about this in the [parsing section][3]
 
@@ -149,6 +149,7 @@ Constraints on the tag/attribute name are explained in the [Tag Best Practice do
 This processor extracts query parameters and other important parameters from a URL. To use it, just enter the source attribute of your url:
 
 These settings:
+
 {{< img src="logs/processing/url_processor_tile.png" alt="Url Processor Tile" responsive="true" style="width:80%;" >}}
 
 Give the following results:
@@ -163,9 +164,11 @@ It recognizes major bots like the Google Bot, Yahoo Slurp, Bing and others.
 If your logs contain encoded useragents (as, for example, IIS logs do), configure this processor to **decode the URL** before parsing it.
 
 These settings:
+
 {{< img src="logs/processing/useragent_processor_tile.png" alt="Useragent processor tile" responsive="true" style="width:80%;" >}}
 
 Give the following results:
+
 {{< img src="logs/processing/useragent_processor.png" alt="Useragent processor" responsive="true" style="width:80%;">}}
 
 ### Category Processor

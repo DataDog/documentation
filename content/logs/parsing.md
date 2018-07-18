@@ -45,7 +45,7 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):connect_date}
 
 You would have at the end this structured log:
 
-{{< img src="logs/parsing/parsing_example_1.png" alt="Parsing example 1" responsive="true" style="width:80%;" >}}
+{{< img src="logs/parsing/parsing_example_1.png" alt="Parsing example 1" responsive="true" style="width:80%;">}}
 
 ## Matcher
 
@@ -129,7 +129,7 @@ Rule
 rule %{data::keyvalue}
 ```
 
-{{< img src="logs/parsing/parsing_example_2.png" alt="Parsing example 2" responsive="true" >}}
+{{< img src="logs/parsing/parsing_example_2.png" alt="Parsing example 2" responsive="true" style="width:80%;">}}
 
 You don't need to specify the name of your parameters as they were already contained in the log.
 If you add an **extract** attribute `my_attribute` in your rule pattern you would have:
