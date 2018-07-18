@@ -34,7 +34,7 @@ You can now:
 * Get alerted when volumes grows unexpectedly over an index
 * Archive all enriched logs
 
-This flexibility is critical in some exceptional situations such as outages, when you can disable specific filters to send more data. The inverse is true as well; if you over consume because of a seasonal reason (Black Friday, Christmas, etc…) you can decide to selectively reduce some volume to avoid overages. 
+This flexibility is critical in some exceptional situations such as outages, when you can disable specific filters to send more data. The inverse is true as well; if you over-consume because of a seasonal reason (Black Friday, Christmas, etc…) you can decide to selectively reduce some volume to avoid overages. 
 
 ## Index details
 
