@@ -19,7 +19,7 @@ The Datadog Agent submits data to Datadog over a TLS-encrypted TCP connection by
 
 ## Agent Logs Obfuscation
 
-The Datadog Agent generates local logs in order to support [Agent troubleshooting][3] as required. As a safety precaution, these local logs are filtered for some specific keywords that could indicate a potential credential (e.g. API key, password and token keywords, etc.), which are then obfuscated before being written to disk.
+The Datadog Agent generates local logs in order to support [Agent troubleshooting][3] as required. As a safety precaution, these local logs are filtered for some specific keywords and patterns that could indicate a potential credential (e.g. API key, password and token keywords, etc.), which are then obfuscated before being written to disk.
 
 ## Local HTTPS Server
 
