@@ -1,8 +1,28 @@
 ---
-title: NXLog Log collection
-kind: Documentation
-description: "Configure NXLog to gather logs from your host, containers & services."
+title: NXLog
+name: nxlog
+kind: integration
+description: "Configure NXLog to gather logs from your host, containers, & services."
+short_description: "Configure NXLog to gather logs from your host, containers, & services."
+categories:
+- log collection
+doc_link: https://docs.datadoghq.com/integrations/nxlog/
+aliases:
+    - logs/log_collection/nxlog
+has_logo: true
+integration_title: nxlog
+is_public: true
+public_title: Datadog-NXlog Integration
+supported_os:
+- windows
 ---
+
+## Overview
+
+Configure NXLog to gather logs from your host, containers, & services.
+
+## Setup
+### Log collection
 
 1. Configure NXLog to send your logs to your Datadog platform
     Replace the whole file in `C:\Program Files\nxlog\conf` by the following: 
@@ -101,4 +121,9 @@ description: "Configure NXLog to gather logs from your host, containers & servic
     </Output>
     ```
 
+## Troubleshooting
+
+Need help? Contact [Datadog Support][2].
+
 [1]: /crt/intake.logs.datadoghq.com.crt
+[2]: https://docs.datadoghq.com/help/
