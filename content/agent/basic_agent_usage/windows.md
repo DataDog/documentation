@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-This page outlines the basic functionality of the Windows Datadog Agent. 
+This page outlines the basic functionalities of the Windows Datadog Agent. 
 
 If you haven't installed the Agent yet, basic installation instructions can be found [in the Datadog Agent integration page][1].
 
