@@ -148,6 +148,11 @@ Constraints on the tag/attribute name are explained in the [Tag Best Practice do
 
 This processor extracts query parameters and other important parameters from a URL. To use it, just enter the source attribute of your url:
 
+These settings:
+{{< img src="logs/processing/url_processor_tile.png" alt="Url Processor Tile" responsive="true" >}}
+
+Give the following results:
+
 {{< img src="logs/processing/url_processor.png" alt="Url Processor" responsive="true" >}}
 
 ### Useragent parser
