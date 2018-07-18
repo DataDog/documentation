@@ -2,9 +2,9 @@
 title: Distributions
 kind: documentation
 further_reading:
-- link: "developers/metrics"
+- link: "developers/graphing/metrics/distributions"
   tag: "Documentation"
-  text: Learn more about Metrics
+  text: Learn more about the dedicated UI for distribution metrics 
 - link: "developers/libraries"
   tag: "Documentation"
   text: Official and Community-contributed API and DogStatsD client libraries
