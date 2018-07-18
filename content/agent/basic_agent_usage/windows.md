@@ -90,49 +90,6 @@ Use the Datadog Agent Manager that you can find in the Start Menu.
 You can also use Windows Powershell if you are running on a modern version of Windows:
 `[start|stop|restart]-service datadogagent`
 
-## Agent Status and Information
-
-### Agent v6
-
-To check if the Agent is running, check if the `DatadogAgent` service in the Services panel is listed as *Started*. A process called *Datadog Metrics Agent* (`agent.exe`) should also exist in the Task Manager.
-
-To receive more information about the Agent's state, start the Agent GUI by either:
-
-- Right clicking on the Datadog Agent system tray icon -> Configure
-- Or: running `& 'C:\program files\datadog\datadog agent\embedded\agent.exe' launch-gui` from an admin Powershell prompt
-
-Then, open the status page by going to *Status* -> *General*. Get more information on the checks that are running on the *Status* -> *Collector* page and the *Checks* -> *Summary* page.
-
-It's also possible to run the status command directly using Powershell:
-
-`& 'C:\program files\datadog\datadog agent\embedded\agent.exe' status`
-
-or `cmd.exe`:
-
-`C:\program files\datadog\datadog agent\embedded\agent.exe" status`
-
-### Agent v5
-
-To check if the Agent is running, check if the service status in the Services panel is listed as "Started". A process called `ddagent.exe` should also exist in the Task Manager. To receive more information about the Agent's state, visit the _status page_ by going to *Settings -> Agent Status* in Agent version 5.2 and above and by going to `http://localhost:17125/status` in Agent version 3.9.1 to 5.1.
-
-For 5.2 and later versions of the Agent go to the Datadog Agent *Manager->Settings->Agent Status*
-
-{{< img src="agent/faq/windows_status.png" alt="Windows Status" responsive="true" style="width:50%;" >}}
-
-It's also possible to run the info command using Powershell:
-
-```
-& 'C:\Program Files\Datadog\Datadog Agent\embedded\python.exe' 'C:\Program Files\Datadog\Datadog Agent\agent\agent.py' info
-```
-
-or cmd.exe:
-
-```
-C:\"Program Files"\Datadog\"Datadog Agent"\embedded\python.exe" "C:\Program Files\Datadog\Datadog Agent\agent\agent.py" info
-```
-
-If you're running on a version older than 5.2 visit the status page in your web browser: `http://localhost:17125/status` The status page is supported in Agent version 3.9.1-5.1.1
-
 ## Agent Configuration
 
 Use the Datadog Agent Manager located in the start menu to enable, disable, and configure checks. 
@@ -152,6 +109,11 @@ Agent configuration root, find it at:
 OR
 
     C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\
+
+## Adding a custom python package to the Agent
+The current way to do so is to add the package in the library zipped folder that can be found at `C:\Program Files (x86)\Datadog\Datadog Agent\files`, and [restart the Agent][4].
+
+{{< img src="agent/faq/add_package_windows.png" alt="Add Package Windows" responsive="true" style="width:75%;">}}
 
 ## Switch between Agent v5 and v6
 ### Upgrade to Agent 6
@@ -173,12 +135,56 @@ Uninstall the Agent using Add/Remove Programs, alternatively, it's possible to t
 ```
 
 ## Troubleshooting
-### Agent v6 
+### Agent Status and Information
+
+#### Agent v6
+
+To check if the Agent is running, check if the `DatadogAgent` service in the Services panel is listed as *Started*. A process called *Datadog Metrics Agent* (`agent.exe`) should also exist in the Task Manager.
+
+To receive more information about the Agent's state, start the Agent GUI by either:
+
+- Right clicking on the Datadog Agent system tray icon -> Configure
+- Or: running `& 'C:\program files\datadog\datadog agent\embedded\agent.exe' launch-gui` from an admin Powershell prompt
+
+Then, open the status page by going to *Status* -> *General*. Get more information on the checks that are running on the *Status* -> *Collector* page and the *Checks* -> *Summary* page.
+
+It's also possible to run the status command directly using Powershell:
+
+`& 'C:\program files\datadog\datadog agent\embedded\agent.exe' status`
+
+or `cmd.exe`:
+
+`C:\program files\datadog\datadog agent\embedded\agent.exe" status`
+
+#### Agent v5
+
+To check if the Agent is running, check if the service status in the Services panel is listed as "Started". A process called `ddagent.exe` should also exist in the Task Manager. To receive more information about the Agent's state, visit the _status page_ by going to *Settings -> Agent Status* in Agent version 5.2 and above and by going to `http://localhost:17125/status` in Agent version 3.9.1 to 5.1.
+
+For 5.2 and later versions of the Agent go to the Datadog Agent *Manager->Settings->Agent Status*
+
+{{< img src="agent/faq/windows_status.png" alt="Windows Status" responsive="true" style="width:50%;" >}}
+
+It's also possible to run the info command using Powershell:
+
+```
+& 'C:\Program Files\Datadog\Datadog Agent\embedded\python.exe' 'C:\Program Files\Datadog\Datadog Agent\agent\agent.py' info
+```
+
+or cmd.exe:
+
+```
+C:\"Program Files"\Datadog\"Datadog Agent"\embedded\python.exe" "C:\Program Files\Datadog\Datadog Agent\agent\agent.py" info
+```
+
+If you're running on a version older than 5.2 visit the status page in your web browser: `http://localhost:17125/status` The status page is supported in Agent version 3.9.1-5.1.1
+
+### Logs location
+#### Agent v6 
 The Agent logs are located in the `C:\programdata\Datadog\logs` directory and all logs are in the `agent.log` file.
 
 If you're still having trouble, [our support team][3] will be glad to provide further assistance.
 
-### Agent v5
+#### Agent v5
 
 Logs are available at:
 
@@ -187,13 +193,8 @@ Logs are available at:
   * For Windows Server 2008, Vista and newer:
 `C:\ProgramData\datadog\logs\ddagent.log`
 
-## Adding a custom python package to the Agent
-The current way to do so is to add the package in the library zipped folder that can be found at `C:\Program Files (x86)\Datadog\Datadog Agent\files`, and [restart the Agent][4].
-
-{{< img src="agent/faq/add_package_windows.png" alt="Add Package Windows" responsive="true" style="width:75%;">}}
-
 ### Send a flare
-### Agent v6
+#### Agent v6
 
 1. Navigate to `localhost:5002` to [display the Agent GUI][5]
 2. Select flare tab
@@ -201,7 +202,7 @@ The current way to do so is to add the package in the library zipped folder that
 3. Enter your ticket number (if you have one) and email address
 4. Press Submit
 
-### Agent v5
+#### Agent v5
 
 To send Datadog support a copy of your Windows logs and configurations, do the following:
 
