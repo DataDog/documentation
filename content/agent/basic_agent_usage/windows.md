@@ -19,12 +19,13 @@ further_reading:
 
 ## Overview
 
-This page outlines the basic functionality of the Windows Datadog Agent. If you haven't installed the Agent yet, instructions can be found [in the Datadog Agent integration page][1].
+This page outlines the basic functionality of the Windows Datadog Agent. 
 
-### Starting and Stopping the Agent
+If you haven't installed the Agent yet, basic installation instructions can be found [in the Datadog Agent integration page][1].
 
-The execution of the Agent is controlled by a Windows service. 
-There are many items that can be configured on the command line. Each configuration item is added as an install property to the command line. For instance, the following commands install the Agent, configure the Agent configuration file with the <DATADOG_API_KEY>, and set the <HOSTNAME> and tags.
+## Agent installation
+
+While installing the Datadog Windows Agent many items can be configured on the command line. Each configuration item is added as an install property to the command line. For instance, the following commands install the Agent, configure the Agent configuration file with the `<DATADOG_API_KEY>`, and set the `<HOSTNAME>` and tags.
 
 * (cmd shell) `msiexec /qn /i datadog-agent-6-latest.amd64.msi APIKEY="<DATADOG_API_KEY>" HOSTNAME="<HOSTNAME>" TAGS="key_1:val_1,key_2:val_2"`
 * (powershell) `Start-Process msiexec -ArgumentList 'datadog-agent-6-latest.amd64.msi APIKEY="<DATADOG_API_KEY>" HOSTNAME="<HOSTNAME>" TAGS="key_1:val_1,key_2:val_2"'`
@@ -45,10 +46,13 @@ The following configuration command line options are available when installing t
 | `PROXY_USER`      | String | If using a proxy, sets your proxy user. [Learn more on using a proxy with the Datadog Agent][8].                                                                                                              |
 | `PROXY_PASSWORD`  | String | If using a proxy, sets your proxy password. [Learn more on using a proxy with the Datadog Agent][8].                                                                                                          |
 
+## Agent Commands
 
-### Agent v6 commands
+The execution of the Agent is controlled by a Windows service. 
 
-There are a few major changes compare to older Datadog Windows Agent v5:
+### Agent v6
+
+There are a few major changes compared to older Datadog Windows Agent v5:
 
 * The main executable name is now `agent.exe` (it was `ddagent.exe` previously)
 * Commands should be run with the command line `C:\program files\datadog\datadog agent\embedded\agent.exe <command>`
@@ -75,7 +79,7 @@ The Agent has a new set of command-line options:
 | stopservice     | Stops the Agent within the service control manager                         |
 | version         | Print the version info                                                     |
 
-### Agent v5 commands
+### Agent v5
 
 Use the Datadog Agent Manager that you can find in the Start Menu.
 
@@ -86,7 +90,8 @@ Use the Datadog Agent Manager that you can find in the Start Menu.
 You can also use Windows Powershell if you are running on a modern version of Windows:
 `[start|stop|restart]-service datadogagent`
 
-## Status and Information
+## Agent Status and Information
+
 ### Agent v6
 
 To check if the Agent is running, check if the `DatadogAgent` service in the Services panel is listed as *Started*. A process called *Datadog Metrics Agent* (`agent.exe`) should also exist in the Task Manager.
@@ -128,9 +133,10 @@ C:\"Program Files"\Datadog\"Datadog Agent"\embedded\python.exe" "C:\Program File
 
 If you're running on a version older than 5.2 visit the status page in your web browser: `http://localhost:17125/status` The status page is supported in Agent version 3.9.1-5.1.1
 
-## Configuration
+## Agent Configuration
 
-Use the Datadog Agent Manager located in the start menu to enable, disable and configure checks. You have to restart the Agent in order for your changes to be applied.
+Use the Datadog Agent Manager located in the start menu to enable, disable, and configure checks. 
+Restart the Agent in order for your changes to be applied.
 
 ### Agent check directory structure
 
