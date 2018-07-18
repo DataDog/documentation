@@ -35,8 +35,8 @@ Edit the `datadog.yaml` file with your proxy information. Use the `no_proxy` lis
 
 ```
 proxy:
-    http: http(s)://user:password@proxy_for_http:port
-    https: http(s)://user:password@proxy_for_https:port
+    http: http://user:password@proxy_for_http:port
+    https: http://user:password@proxy_for_https:port
 #   no_proxy:
 #     - host1
 #     - host2
