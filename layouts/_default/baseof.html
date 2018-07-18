@@ -17,7 +17,7 @@
     {{- end -}}
 
     <!-- ALGOLIA DOCSEARCH -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css"/> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css"/>
     <!--/ ALGOLIA DOCSEARCH -->
 </head>
 {{- $bodyClass := $.Scratch.Get "bodyClass" -}}
@@ -56,15 +56,24 @@
     {{ partial "preview_banner/preview_banner" . }}
 
     <!-- ALGOLIA DOCSEARCH -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script> 
-    <script type="text/javascript"> 
-    docsearch({ 
-         apiKey: '7998251572aee1b7d0c1c57198bec6d4', 
-         indexName: 'datadoghq', 
-         inputSelector: '#search-input', 
-         algoliaOptions: { 'facetFilters': ["language:en"] }, 
-         debug: false // Set debug to true if you want to inspect the dropdown 
-    }); 
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+    <script type="text/javascript">
+    docsearch({
+         apiKey: '7998251572aee1b7d0c1c57198bec6d4',
+         indexName: 'datadoghq',
+         inputSelector: '.docssearch-input',
+         algoliaOptions: { 'facetFilters': ["language:en"] },
+         debug: false // Set debug to true if you want to inspect the dropdown
+    });
+    </script>
+    <script type="text/javascript">
+    docsearch({
+         apiKey: '7998251572aee1b7d0c1c57198bec6d4',
+         indexName: 'datadoghq',
+         inputSelector: '.docssearch-input-m',
+         algoliaOptions: { 'facetFilters': ["language:en"] },
+         debug: false // Set debug to true if you want to inspect the dropdown
+    });
     </script>
     <!--/ ALGOLIA DOCSEARCH -->
 </body>
