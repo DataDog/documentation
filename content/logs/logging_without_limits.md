@@ -1,5 +1,5 @@
 ---
-title: Logging without limits
+title: Logging without Limits
 kind: documentation
 description: Control the volume of logs indexed by Datadog
 aliases:
@@ -29,9 +29,9 @@ You can now:
 
 * Ingest all your log events without server side filtering
 * Process and enrich all of them
-* Get alerted when volumes grows unexpectedly
 * Live Tail over the whole infrastructure
 * Dynamically decide what to include or exclude from your indexes to control your costs
+* Get alerted when volumes grows unexpectedly over an index
 * Archive all enriched logs
 
 This flexibility is critical in some exceptional situations such as outages, when you can disable specific filters to send more data. The inverse is true as well; if you over consume because of a seasonal reason (Black Friday, Christmas, etc…) you can decide to selectively reduce some volume to avoid overages. 
@@ -78,15 +78,15 @@ To configure an exclusion filter:
 ### Example
 
 The following filter removes all logs that have a fast response time.
-We use the `http.response_time attribute` and filter all logs that have a value below *100ms*.
+We use the `duration` attribute and filter all logs that have a value below *100ms*.
 
 ```json
 {
     "http": {
         "url": "https://app.datadoghq.com/logs",
-        "status_code": "200",
-        "response_time": 12
+        "status_code": "200"
     },
+    "duration":12,
     "metadata": {
         "version": 12,
         "release": "sept18"
@@ -94,7 +94,7 @@ We use the `http.response_time attribute` and filter all logs that have a value 
 }
 ```
 
-**Filter**: `@http.response_time:<100`
+**Filter**: `@duration:<100`
 
 ### Container example
 
