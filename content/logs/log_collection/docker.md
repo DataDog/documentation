@@ -76,7 +76,7 @@ Important notes:
 The commands related to log collection are the following:
 
 * `-e DD_LOGS_ENABLED=true`: this parameter enables log collection when set to true. The Agent now looks for log instructions in configuration files.
-* `-e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true`: this parameter adds a log configuration that enables log collection for all containers (see `Option 1` below) 
+* `-e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true`: this parameter adds a log configuration that enables log collection for all containers (see `Option 1` below)
 * `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw`: mount the directory we created to store pointers for each container's logs to make sure we do not lose any.
 
 ### Activate Log Collection
@@ -131,7 +131,7 @@ Autodiscovery expects labels to follow this format, depending on the file type:
 * docker-compose.yaml:
 
   ```
-  labels: 
+  labels:
     com.datadoghq.ad.logs: '[<LOGS_CONFIG>]'
   ```
 
@@ -152,7 +152,7 @@ LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%:%%por
 LABEL "com.datadoghq.ad.logs"='[{"source": "nginx", "service": "webapp"}]'
 ```
 
-Check our [Autodiscovery Guide][8] for more information about Autodiscovery setup and examples.
+If you are running in Kubernetes and do not use container labels, pod annotation will soon be supported. Check our [Autodiscovery Guide][8] for more information about Autodiscovery setup and examples.
 
 ## Further Reading
 
