@@ -49,12 +49,13 @@ Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. `
 
 The "Datadog in-app type" affects how a given metric is interpreted in query results and graph visualizations across the application. The metric type visible on the [metric summary page][20] is the Datadog in-app type. You should only change the type if you have started submitting this metric with a new type, and should be aware that changing the type may render historical data nonsensical.
 
-In the Datadog web application there are four metric types (though one is deprecated):
+In the Datadog web application there are five metric types (though one is deprecated):
 
-* GAUGE
-* RATE
 * COUNT
 * COUNTER (deprecated)
+* DISTRIBUTION
+* GAUGE
+* RATE
 
 A metric's type is stored as metrics metadata and is used to determine how a metric is interpreted throughout the application by determining default time aggregation function and `as_rate()`/`as_count()` behavior. The `as_count()` and `as_rate()` modifiers behave differently for different Web Application metric types.
 
@@ -64,19 +65,20 @@ Datadog accepts metrics submitted from a variety of sources, and as a result the
 
 | Submission Source   | Submission Method (python)           | Submission Type   | Datadog In-App Type |
 | ------------------- | ------------------------------------ | ----------------- | ------------------- |
-| [API][3]            | `api.Metric.send(type="gauge", ...)` | gauge             | gauge               |
 | [API][3]            | `api.Metric.send(type="count", ...)` | count             | count               |
+| [API][3]            | `api.Metric.send(type="gauge", ...)` | gauge             | gauge               |
 | [API][3]            | `api.Metric.send(type="rate", ...)`  | rate              | rate                |
 | [DogStatsD][1]      | `dog.gauge(...)`                     | gauge             | gauge               |
-| [DogStatsD][1]      | `dog.increment(...)`                 | counter <sup>deprecated</sup> | rate    |
+| [DogStatsD][1]      | `dog.distribution(...)`              | distribution      | distribution        |
 | [DogStatsD][1]      | `dog.histogram(...)`                 | histogram         | gauge, rate         |
+| [DogStatsD][1]      | `dog.increment(...)`                 | counter <sup>deprecated</sup> | rate    |
 | [DogStatsD][1]      | `dog.set(...)`                       | set               | gauge               |
-| [Agent check][2]    | `self.gauge(...)`                    | gauge             | gauge               |
-| [Agent check][2]    | `self.increment(...)`                | counter <sup>deprecated</sup> | rate    |
-| [Agent check][2]    | `self.rate(...)`                     | rate              | gauge               |
 | [Agent check][2]    | `self.count(...)`                    | count             | count               |
-| [Agent check][2]    | `self.monotonic_count(...)`          | monotonic_count   | count               |
+| [Agent check][2]    | `self.gauge(...)`                    | gauge             | gauge               |
 | [Agent check][2]    | `self.histogram(...)`                | histogram         | gauge, rate         |
+| [Agent check][2]    | `self.increment(...)`                | counter <sup>deprecated</sup> | rate    |
+| [Agent check][2]    | `self.monotonic_count(...)`          | monotonic_count   | count               |
+| [Agent check][2]    | `self.rate(...)`                     | rate              | gauge               |
 | [Agent check][2]    | `self.set(...)`                      | set               | gauge               |
 
 ### Modify a metric's type
