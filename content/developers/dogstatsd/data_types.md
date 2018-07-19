@@ -321,6 +321,10 @@ def algorithm_two():
 
 Note that tagging is a [Datadog-specific extension][1] to StatsD.
 
+### Distributions
+
+Becuase of the global nature of Distributions, extra tools for tagging are provided. See the [Distribution Metrics][10] page for more details.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -334,3 +338,4 @@ Note that tagging is a [Datadog-specific extension][1] to StatsD.
 [7]: /developers/metrics/rates
 [8]: /graphing/miscellaneous/functions
 [9]: /graphing/event_stream/
+[10]: /graphing/metrics/distributions
