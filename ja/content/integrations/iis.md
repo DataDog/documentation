@@ -25,7 +25,7 @@ Connect IIS to Datadog in order to:
 
 Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
-* [IISインテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/iis/conf.yaml.example)
+* [IISインテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/iis/datadog_checks/iis/data/conf.yaml.example)
 * [IISインテグレーション checks.d](https://github.com/DataDog/integrations-core/blob/master/iis/check.py)
 
 <!-- The following metrics are collected by default with the IIS integration:
