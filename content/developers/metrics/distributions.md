@@ -2,7 +2,7 @@
 title: Distributions
 kind: documentation
 further_reading:
-- link: "developers/graphing/metrics/distributions"
+- link: "graphing/metrics/distributions"
   tag: "Documentation"
   text: Learn more about the dedicated UI for distribution metrics 
 - link: "developers/libraries"
