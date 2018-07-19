@@ -31,7 +31,7 @@ Each one of these becomes a value in their respective metric time series that ar
 
 ## Submission
 
-### Agent sheck
+### Agent check
 
 
 | Method              | Overview                                                       |
