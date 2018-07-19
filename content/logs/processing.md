@@ -78,7 +78,7 @@ The different kinds of processors are explained below.
 
 Create custom grok rules to parse the full message or a specific attribute of your raw event:
 
-{{< img src="logs/processing/parser.png" alt="Parser" responsive="true" >}}
+{{< img src="logs/processing/parser.png" alt="Parser" responsive="true" style="width:80%;" >}}
 
 Read more about this in the [parsing section][3]
 
@@ -95,7 +95,7 @@ As Datadog receives logs, it timestamps them using the value(s) from any of thes
 
 If your logs put their dates in an attribute not in this list, use the log date Remapper processor to define their date attribute as the official log timestamp:
 
-{{< img src="logs/processing/log_date_remapper.png" alt="Log date Remapper" responsive="true" >}}
+{{< img src="logs/processing/log_date_remapper.png" alt="Log date Remapper" responsive="true" style="width:80%;" >}}
 
 If your logs don't contain any of the default attributes and you haven't defined your own date attribute, Datadog timestamps the logs with the date it received them.  
 If the log's official timestamp is from a custom attribute, use a [date remapper processor][4] to override the log's default timestamp.
@@ -104,7 +104,7 @@ If the log's official timestamp is from a custom attribute, use a [date remapper
 
 Use this processor if you want to assign some attributes as the official status, just enter the attribute path in the processor tile as follow:
 
-{{< img src="logs/processing/severity_remapper_processor_tile.png" alt="Severity Remapper processor tile" responsive="true" >}}
+{{< img src="logs/processing/severity_remapper_processor_tile.png" alt="Severity Remapper processor tile" responsive="true" style="width:80%;" >}}
 
 It transforms this log:
 
@@ -132,7 +132,7 @@ However, beware that each incoming status value is mapped as follows:
 
 This processor remaps any source attribute(s) or tag to another target attribute or tag, for instance here it remaps `user` to `user.firstname`
 
-{{< img src="logs/processing/attribute_remapper_processor_tile.png" alt="Attribute Remapper processor tile" responsive="true" >}}
+{{< img src="logs/processing/attribute_remapper_processor_tile.png" alt="Attribute Remapper processor tile" responsive="true" style="width:80%;" >}}
 
 It transforms this log:
 
@@ -148,7 +148,13 @@ Constraints on the tag/attribute name are explained in the [Tag Best Practice do
 
 This processor extracts query parameters and other important parameters from a URL. To use it, just enter the source attribute of your url:
 
-{{< img src="logs/processing/url_processor.png" alt="Url Processor" responsive="true" >}}
+These settings:
+
+{{< img src="logs/processing/url_processor_tile.png" alt="Url Processor Tile" responsive="true" style="width:80%;" >}}
+
+Give the following results:
+
+{{< img src="logs/processing/url_processor.png" alt="Url Processor" responsive="true" style="width:80%;" >}}
 
 ### Useragent parser
 
@@ -158,10 +164,12 @@ It recognizes major bots like the Google Bot, Yahoo Slurp, Bing and others.
 If your logs contain encoded useragents (as, for example, IIS logs do), configure this processor to **decode the URL** before parsing it.
 
 These settings:
-{{< img src="logs/processing/useragent_processor_tile.png" alt="Useragent processor tile" responsive="true" >}}
+
+{{< img src="logs/processing/useragent_processor_tile.png" alt="Useragent processor tile" responsive="true" style="width:80%;" >}}
 
 Give the following results:
-{{< img src="logs/processing/useragent_processor.png" alt="Useragent processor" responsive="true" >}}
+
+{{< img src="logs/processing/useragent_processor.png" alt="Useragent processor" responsive="true" style="width:80%;">}}
 
 ### Category Processor
 
@@ -170,11 +178,11 @@ Categories are very useful to create meaningful groups which can be used in any 
 
 For example to categories your web access logs depending of the status code range value (2xx for a response code between 200 and 299, 3xx for a response code between 300 and 399, ...) add this processor:
 
-{{< img src="logs/processing/category_processor.png" alt="Category processor" responsive="true" >}}
+{{< img src="logs/processing/category_processor.png" alt="Category processor" responsive="true" style="width:80%;" >}}
 
 It produces the following result:
 
-{{< img src="logs/processing/category_processor_result.png" alt="Category processor result" responsive="true" >}}
+{{< img src="logs/processing/category_processor_result.png" alt="Category processor result" responsive="true" style="width:80%;" >}}
 
 **Important Note**: The query can be done on any log attribute or tag no matter if it is a facet or not, wildcards can also be used inside your query.
 Once the log has matched one of the processor query, it stops. Make sure they are properly ordered in case a log could match several queries.
@@ -183,7 +191,7 @@ Once the log has matched one of the processor query, it stops. Make sure they ar
 
 The message is a key attribute in Datadog. It is displayed in the message column of the log explorer and you can do full string search on it. Use this processor to define some attributes as the official log message, just enter the attribute path in the processor tile as follows:
 
-{{< img src="logs/processing/message_processor.png" alt="Message processor" responsive="true" >}}
+{{< img src="logs/processing/message_processor.png" alt="Message processor" responsive="true" style="width:80%;">}}
 
 ## Technical limits
 
