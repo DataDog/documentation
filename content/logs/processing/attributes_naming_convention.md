@@ -59,7 +59,7 @@ Related to the data used in a network communication. All fields and metrics are 
 | `network.bytes_read`       | `number` | Total number of bytes transmitted from the client to the server when the log is emitted. |
 | `network.bytes_written`    | `number` | Total number of bytes transmitted from the server to the client when the log is emitted. |
 
-Typical integrations relying on these: [Apache][7], [Varnish][8], [AWS ELB][9], [Nginx][10], [HAproxy][11], etc...
+Typical integrations relying on these: [Apache][7], [Varnish][8], [AWS ELB][9], [Nginx][10], [HAProxy][11], etc...
 
 ## HTTP Requests
 
@@ -90,7 +90,6 @@ Details about the parsed parts of the HTTP url. Generally generated thanks to th
 | `http.url_details.path`        | `string` | The HTTP path part of the url.                                                          |
 | `http.url_details.queryString` | `object` | The HTTP query string parts of the url decomposed as query params key/value attributes. |
 | `http.url_details.scheme`      | `string` | The protocol name of the URL (http or https)                                            |
-. |
 
 ### User-Agent attributes
 
@@ -181,9 +180,9 @@ Some integrations that rely on these are: [Rsyslog][2], [NxLog][3], [Syslog-ng][
 [10]: /integrations/nginx
 [11]: /integrations/haproxy
 [12]: /integrations/amazon_elb
-[13]: https://docs.datadoghq.com/logs/processing/#url-parser
-[14]: https://docs.datadoghq.com/logs/processing/#useragent-parser
+[13]: /logs/processing/#url-parser
+[14]: /logs/processing/#useragent-parser
 [15]: /integrations/cassandra
 [16]: /integrations/mysql
 [17]: /integrations/amazon_rds
-[18]: /integrations/elastisearch
+[18]: /integrations/elastic
