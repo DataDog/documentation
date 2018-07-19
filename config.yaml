@@ -667,7 +667,7 @@ languages:
           weight: 410
           parent: customnav_lognav_processing
         - identifier: customnav_lognav_attributes_naming_convention
-          name: "Attributes Naming Convention"
+          name: "Naming Convention"
           url: "logs/processing/attributes_naming_convention/"
           weight: 420
           parent: customnav_lognav_processing
