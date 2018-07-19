@@ -48,6 +48,38 @@
   @if $type == 'full' {
     width: 100%;
   }
+  @if $type == 'datadog' {
+    max-width: 1000px;
+    min-width: 800px;
+    transform: translateX(-10px);
+  }
+  @media (max-width: 991px) {
+    @if $type == 'datadog' {
+      max-width: 660px;
+      min-width: 660px;
+    }
+  }
+  @media (max-width: 767px) {
+    @if $type == 'datadog' {
+      max-width: 508px;
+      min-width: 508px;
+      transform: translateX(-10px);
+    }
+  }
+  @media (max-width: 575px) {
+    @if $type == 'datadog' {
+      max-width: 95%;
+      min-width: 95%;
+      transform: translateX(-10px);
+    }
+  }
+  @media (max-width: 390px) {
+    @if $type == 'datadog' {
+      max-width: 95%;
+      min-width: 95%;
+      transform: translateX(-26px);
+    }
+  }
 }
 
 // Alignment type
@@ -74,6 +106,9 @@
   }
   @if $type == 'heavy' {
     box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  @if $type == 'datadog' {
+    box-shadow: 0 9px 22px 2px rgba(0,0,0,.4);
   }
 }
 
@@ -342,9 +377,10 @@ $responsive-breakpoint: 768px
 
       &--no-results{
         width: 100%;
-        padding: $padding/2 0;
+        padding: $padding 0;
         text-align: center;
-        font-size: 1.2em;
+        font-size: 1.25em;
+        font-weight: 200;
 
         &::before{
           display: none;
