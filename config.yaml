@@ -608,27 +608,27 @@ languages:
           parent: customnav_lognav_collection
         - identifier: customnav_lognav_fluentd
           name: "FluentD"
-          url: "logs/log_collection/fluentd"
+          url: "integrations/fluentd/#log-collection"
           weight: 210
           parent: customnav_lognav_collection
         - identifier: customnav_lognav_logstash
           name: "Logstash"
-          url: "logs/log_collection/logstash"
+          url: "integrations/logstash"
           weight: 220
           parent: customnav_lognav_collection
         - identifier: customnav_lognav_nxlog
           name: "NxLog"
-          url: "logs/log_collection/nxlog"
+          url: "integrations/nxlog"
           weight: 230
           parent: customnav_lognav_collection
         - identifier: customnav_lognav_rsyslog
           name: "Rsyslog"
-          url: "logs/log_collection/rsyslog"
+          url: "integrations/rsyslog"
           weight: 240
           parent: customnav_lognav_collection
         - identifier: customnav_lognav_syslog_ng
           name: "Syslog-ng"
-          url: "logs/log_collection/syslog_ng"
+          url: "integrations/syslog_ng"
           weight: 250
           parent: customnav_lognav_collection
         - identifier: customnav_lognav_other
@@ -662,9 +662,9 @@ languages:
           url: "logs/parsing/"
           weight: 50
           parent: menu_references_logs
-        - identifier: customnav_lognav_dynamic_volume_control
-          name: "Dynamic volume control"
-          url: "logs/dynamic_volume_control/"
+        - identifier: customnav_lognav_logging_without_limits
+          name: "Logging without Limits"
+          url: "logs/logging_without_limits/"
           weight: 60
           parent: menu_references_logs
         - identifier: customnav_lognav_languages
@@ -1499,27 +1499,27 @@ languages:
           parent: customnav_lognav_collection
         - identifier: customnav_lognav_fluentd
           name: "FluentD"
-          url: "logs/log_collection/fluentd"
+          url: "integrations/fluentd/#log-collection"
           weight: 210
           parent: customnav_lognav_collection
         - identifier: customnav_lognav_logstash
           name: "Logstash"
-          url: "logs/log_collection/logstash"
+          url: "integrations/logstash/#log-collection"
           weight: 220
           parent: customnav_lognav_collection
         - identifier: customnav_lognav_nxlog
           name: "NxLog"
-          url: "logs/log_collection/nxlog"
+          url: "integrations/nxlog"
           weight: 230
           parent: customnav_lognav_collection
         - identifier: customnav_lognav_rsyslog
           name: "Rsyslog"
-          url: "logs/log_collection/rsyslog"
+          url: "integrations/rsyslog"
           weight: 240
           parent: customnav_lognav_collection
         - identifier: customnav_lognav_syslog_ng
           name: "Syslog-ng"
-          url: "logs/log_collection/syslog_ng"
+          url: "integrations/syslog_ng"
           weight: 250
           parent: customnav_lognav_collection
         - identifier: customnav_lognav_other
@@ -1554,9 +1554,9 @@ languages:
           url: "logs/parsing/"
           weight: 50
           parent: menu_references_logs
-        - identifier: customnav_lognav_dynamic_volume_control
-          name: "Dynamic volume control"
-          url: "logs/dynamic_volume_control/"
+        - identifier: customnav_lognav_logging_without_limits
+          name: "Logging sans Limites"
+          url: "logs/logging_without_limits/"
           weight: 60
           parent: menu_references_logs
         - identifier: customnav_lognav_languages
