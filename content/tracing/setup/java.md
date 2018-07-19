@@ -92,7 +92,7 @@ To report a trace to Datadog the following happens:
 * In a separate reporting thread, the trace queue is flushed and traces are encoded via msgpack then sent to the Datadog Agent via http
 * Queue flushing happens on a schedule of once per second
 
-To see the actual code, documentation and usage examples for any of the 
+To see the actual code, documentation and usage examples for any of the
 libraries and frameworks that Datadog supports, check the full list of auto-
 instrumented components for Java applications [in the integration section](#integrations).
 
@@ -250,7 +250,7 @@ public class Application {
 
 ##### Custom Async Instrumentation
 
-Create asynchronous traces in custom instrumentation using the OpenTracing api.
+Create asynchronous traces in custom instrumentation using the OpenTracing API.
 
 ```java
 // Step 1: start the Scope/Span on the work submission thread
@@ -346,7 +346,7 @@ public class MyHttpRequestExtractAdapter implements TextMap {
 
 ### Priority Sampling
 
-Distributed Traces may sampling inconsistently when the linked traces run on different hosts. Enable priority sampling to ensure that distributed traces are complete. Priority sampling achieves this by automatically assigning and propagating a priority value along all traces, depending on their service and volume. Priorities can also be set manually to either drop non-interesting traces or to keep important ones.
+Distributed Traces may sample inconsistently when the linked traces run on different hosts. To ensure that distributed traces are complete, enable priority sampling. Priority sampling automatically assigns and propagates a priority value along all traces, depending on their service and volume. Priorities can also be set manually to drop non-interesting traces or keep important ones.
 
 Priority sampling is disabled by default. To enable it, configure the `priority.sampling` flag to `true` ([see how to configure the client above](#configuration)).
 
@@ -386,31 +386,27 @@ The Datadog UI uses specific tags to set UI properties, such as an application's
 
 ### Custom Tags
 
-Custom tags are set using the OpenTracing api:
+Custom tags are set using the OpenTracing API:
 
 ```java
-import datadog.trace.api.DDTags;
-
-import io.opentracing.Scope;
 import io.opentracing.Tracer;
 import io.opentracing.util.GlobalTracer;
 
-class InstrumentedClass {
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-    void method0() {
-        Tracer tracer = GlobalTracer.get();
-
-        Scope scope = tracer.buildSpan("myspan").startActive(true);
-        try {
-            scope.span().setTag(DDTags.SERVICE_NAME, "my-new-service");
-            scope.span().setTag("org-id", "12345");
-            scope.span().setTag("my-tag", "my-tag-value");
-
-            // method0 impl...
-        } finally {
-            scope.close();
-        }
+@WebServlet
+class ServletImpl extends AbstractHttpServlet {
+  @Override
+  void doGet(HttpServletRequest req, HttpServletResponse resp) {
+    Tracer tracer = GlobalTracer.get();
+    if (tracer != null && tracer.activeSpan() != null) {
+      tracer.activeSpan().setTag("org.id", 12345);
+      tracer.activeSpan().setTag("http.url", "/login");
     }
+    // servlet impl
+  }
 }
 ```
 
@@ -477,8 +473,8 @@ Datadog's [JMX Integration][7] monitors additional metrics around: JVM heap memo
 ### Web Frameworks
 
 Web Framework tracing provides:
-* Timing http request to response
-* Tags for the http request (status code, method, etc)
+* Timing HTTP request to response
+* Tags for the HTTP request (status code, method, etc)
 * Error and stacktrace capturing
 * Linking work created within a web request
 * Distributed Tracing
