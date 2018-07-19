@@ -16,17 +16,11 @@ Distributions are a [metric type][1] that can be thought of as a global version 
 
 Global distributions are designed to instrument logical objects, like services, independently from the underlying hosts and provide insight into metric behavior across your infrastructure .
 
-Because averages of percentile aggregations are not statistically valid, Distribution metrics work on the raw data across hosts. For each combination of tags, Datadog maintain a timeseries for `min`, `max`, `sum`, `average`, `count`, `p50`, `p75`, `p90`, `p95`, and `p99`.
-
-Under this model, the total number of timeseries created is based on the set of `tag:values` for tags applied to a metric.
-
-Because these aggregations are global in nature, Datadog only apply custom, metric-level tags to these metrics by default. This behavior can be modified if you need host-level tags as well.
+Check out the [Developer Tools section][5] for more information on the internals of this metric type. Otherwise, read on to learn how to manipulate and visualize Distributions in the interface.
 
 ## Aggregations 
 
-The new tagging workflow for Distributions allows you to define which aggregations are available in queries. 
-Initially, Datadog maintain a single timeseries, for `*` (all points), and otherwise ignore all tags. 
-Manually aggregate your metric based on sets of tags, chosen from the list of tags normally available. For convenience, Datadog also creates aggregations for every combination of the first four custom tags applied to each metric.
+The new tagging workflow for Distributions allows you to define which aggregations are available in queries. Initially, Datadog maintain a single timeseries, for `*` (all points), and otherwise ignore all tags.  Manually aggregate your metric based on sets of tags, chosen from the list of tags normally available. For convenience, Datadog also creates aggregations for every combination of the first four custom tags applied to each metric.
 
 With the [distribution UI][3], create additional aggregate timeseries by applying sets of tags to a metric, for which a timeseries is created for every combination of tag values within the set. 
 
@@ -34,7 +28,7 @@ With the [distribution UI][3], create additional aggregate timeseries by applyin
 
 {{< img src="graphing/metrics/distributions/distribution_metric.png" alt="Distribution metric" responsive="true" >}}
 
-When creating your own graph, distribution metrics automatically have additional space aggregations available in the UI:
+When creating your own graph, Distribution metrics automatically have additional space aggregations available in the UI:
 
 {{< img src="graphing/metrics/distributions/dogweb_latency_bis.png" alt="Distribution metric bis" responsive="true" >}}
 
@@ -96,3 +90,4 @@ The following gif demonstrates inspecting the aggregations created for a metric,
 [2]: /developers/metrics/histograms
 [3]: https://app.datadoghq.com/metric/distribution_metrics
 [4]: /getting_started/custom_metrics
+[5]: /developers/metrics/distributions
