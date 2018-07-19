@@ -20,7 +20,7 @@ further_reading:
 
 One may ask, why do we need a naming convention for Log attributes?
 
-* Various technologies tends to use different attribute names for the same meaning.
+* Various technologies tend to use different attribute names for the same meaning.
 * This usually generates too many attributes which can lead to: user confusion and un-ability to correlate logs across sources.
 * Datadog Integrations rely on the following attribute naming convention.
 * We advise you to use the following reference when you parse your custom formats & sources in order to leverage fully all functionalities of your Datadog application.
@@ -28,11 +28,11 @@ One may ask, why do we need a naming convention for Log attributes?
 ## Overview
 
 Centralizing logs from various technologies and applications tends to generate tens or hundreds of different attributes in a Log Management environment. Especially when many users - each one with its own personal usage- are working with it. 
-This tends to generate confusion among users. For instance, a client IP can have the following attributes within your logs: `clientIP`, `client_ip_address`, `remote_address`, `client.ip`, and many other combinations are possible...
-In this context, knowing which attribute corresponds to the logs your are trying to filter on or correlating this same proxy logs to the web application logs just behind it is a cumberstone. 
+This generates confusion among users. For instance, a client IP can have the following attributes within your logs: `clientIP`, `client_ip_address`, `remote_address`, `client.ip`, and many other combinations are possible...
+In this context, knowing which attribute corresponds to the logs you are trying to filter on or correlating this same proxy logs to the web application logs just behind it is a cumbersome. 
 
-Actually even if all technologies tends to name logs attributes differently, a URL, a client ip or a duration have the same meaning for everyone.
-This is why Datadog decided while implementing log integrations to rely on a subset of names for attributes that are commonly observe over log sources.
+Actually even if all technologies define their respective logs attributes differently, a URL, a client ip, or a duration have the same meaning for everyone.
+This is why Datadog decided while implementing log integrations to rely on a subset of names for attributes that are commonly observed over log sources.
 
 But as Datadog integrations are not covering your custom formats and sources, we decided to make this Attribute Naming Convention (or [Taxonomy][1]) public to help you decide how to name your attributes in your own parsers.
 
@@ -77,7 +77,7 @@ Typical integrations relying on these attributes are: [Apache][7], *Rails*, [AWS
 | `http.method`      | `string` | The HTTP verb of the request.                                                                             |
 | `http.referer`     | `string` | The HTTP referer.                                                                                         |
 | `http.request_id`  | `string` | The HTTP request id.                                                                                      |
-| `http.useragent`   | `string` | The User-Agent as it is sent (raw format). [See bellow for all details about it](#user-agent-attributes). |
+| `http.useragent`   | `string` | The User-Agent as it is sent (raw format). [See below for all details about it](#user-agent-attributes). |
 
 ### URL details attributes
 
