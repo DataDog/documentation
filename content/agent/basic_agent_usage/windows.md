@@ -48,7 +48,7 @@ The following configuration command line options are available when installing t
 
 ## Agent Commands
 
-The execution of the Agent is controlled by a Windows service. 
+The execution of the Agent is controlled by the Windows Service Control Manager.
 
 ### Agent v6
 
