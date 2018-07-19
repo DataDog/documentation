@@ -396,7 +396,7 @@ instances:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/faq/agent-5-autodiscovery
-[2]: https://github.com/DataDog/integrations-core/blob/master/go_expvar/conf.yaml.example
+[2]: https://github.com/DataDog/integrations-core/blob/master/go_expvar/datadog_checks/go_expvar/data/conf.yaml.example
 [3]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/auto_conf.yaml
 [4]: https://github.com/DataDog/integrations-core/blob/master/consul/datadog_checks/consul/data/auto_conf.yaml
 [5]: https://github.com/DataDog/integrations-core/blob/master/couch/datadog_checks/couch/data/auto_conf.yaml
@@ -416,11 +416,11 @@ https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/
 [14]: https://github.com/DataDog/integrations-core/blob/master/riak/datadog_checks/riak/data/auto_conf.yaml
 [15]: https://github.com/DataDog/datadog-agent
 [16]: /agent/basic_agent_usage/kubernetes/#configmap
-[17]: https://github.com/Datadog/integrations-core/blob/master/apache/conf.yaml.example
+[17]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
 [18]: /agent/autodiscovery/#template-source-kubernetes-pod-annotations
 [19]: /integrations/consul
 [20]: /agent/faq/agent-commands
-[21]: https://github.com/DataDog/integrations-core/blob/master/http_check/conf.yaml.example
+[21]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example
 [22]: https://github.com/DataDog/integrations-core/blob/master/kube_proxy/datadog_checks/kube_proxy/data/conf.yaml.example
 [23]: https://docs.datadoghq.com/logs/docker/
 [24]: /videos/autodiscovery/

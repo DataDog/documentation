@@ -27,7 +27,7 @@ Capture HAProxy activity in Datadog to:
 
 Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
-* [HAProxyインテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/haproxy/conf.yaml.example)
+* [HAProxyインテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/haproxy/datadog_checks/haproxy/data/conf.yaml.example)
 * [HAProxyインテグレーション checks.d](https://github.com/DataDog/integrations-core/blob/master/haproxy/datadog_checks/haproxy/haproxy.py)
 
 <!-- The following metrics are collected by default with the HAProxy integration:

@@ -59,5 +59,5 @@ For a more complete example, please see our [Docker Compose example project on G
 [1]: https://docs.docker.com/compose/overview/
 [2]: /integrations/docker_daemon
 [3]: https://hub.docker.com/r/datadog/docker-dd-agent/
-[4]: https://github.com/DataDog/integrations-core/blob/master/redisdb/conf.yaml.example
+[4]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/conf.yaml.example
 [5]: https://github.com/DataDog/docker-compose-example
