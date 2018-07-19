@@ -5,7 +5,7 @@ further_reading:
 - link: "logs/processing"
   tag: "Documentation"
   text: Learn how to process your logs
-- link: "logs/parsing"
+- link: "logs/processing/parsing"
   tag: "Documentation"
   text: Learn more about parsing
 - link: "logs/faq/how-to-investigate-a-log-parsing-issue"
@@ -61,5 +61,5 @@ In this article, we walk through parsing a log from the Datadog Agent's collecto
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/parsing/
-[2]: /logs/parsing/#key-value
+[1]: /logs/processing/parsing/
+[2]: /logs/processing/parsing/#key-value

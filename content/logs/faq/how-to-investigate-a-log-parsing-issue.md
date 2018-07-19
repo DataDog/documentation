@@ -8,7 +8,7 @@ further_reading:
 - link: "logs/processing"
   tag: "Documentation"
   text: Learn how to process your logs
-- link: "logs/parsing"
+- link: "logs/processing/parsing"
   tag: "Documentation"
   text: Learn more about parsing
 ---
@@ -86,6 +86,6 @@ Before you go ahead and troubleshoot your parser, it might be interesting for yo
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/processing/
-[2]: /logs/parsing/
+[2]: /logs/processing/parsing/
 [3]: /logs/faq/log-parsing-best-practice
 [4]: /help
