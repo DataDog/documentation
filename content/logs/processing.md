@@ -12,7 +12,7 @@ further_reading:
 - link: "logs/faq/log-parsing-best-practice"
   tag: "FAQ"
   text: Log Parsing - Best Practice
-- link: "logs/dynamic_volume_control"
+- link: "logs/logging_without_limits"
   tag: "Documentation"
   text: Control the volume of logs indexed by Datadog
 ---
