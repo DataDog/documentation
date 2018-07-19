@@ -317,8 +317,8 @@ $responsive-breakpoint: 768px
         position: relative;
         border-bottom: 1px solid #ddd;
         display: none;
-        margin-top: $padding/2;
-        padding: $padding/4 0;
+        margin-top: $padding/4;
+        padding: 0 0 $padding/4 0;
         font-size: $header-size;
         color: $header-color;
       }
@@ -332,10 +332,10 @@ $responsive-breakpoint: 768px
       &--subcategory-column {
         float: left;
         width: 30%;
-        padding-left: 0;
-        text-align: right;
+        text-align: left;
         position: relative;
         padding: $padding/3 $padding/1.5;
+        padding-left: 0;
         color: $subtitle-color;
         font-size: $subtitle-size;
         word-wrap: break-word;
