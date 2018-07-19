@@ -110,7 +110,7 @@ OR
 
     C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\
 
-## Adding a custom python package to the Agent
+### Adding a custom python package to the Agent
 The current way to do so is to add the package in the library zipped folder that can be found at `C:\Program Files (x86)\Datadog\Datadog Agent\files`, and [restart the Agent][4].
 
 {{< img src="agent/faq/add_package_windows.png" alt="Add Package Windows" responsive="true" style="width:75%;">}}
