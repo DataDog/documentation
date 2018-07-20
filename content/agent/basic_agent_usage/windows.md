@@ -314,7 +314,7 @@ Again, due to the sensitivity of yaml, if you've tried the above and cannot get 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent/windows
-[2]: https://github.com/DataDog/datadog-agent/releases
+[2]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-6-latest.amd64.msi
 [3]: /help
 [4]: /agent/faq/agent-commands
 [5]: /agent/#using-the-gui
