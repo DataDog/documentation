@@ -1,6 +1,8 @@
 ---
 title: Custom Metrics
 kind: documentation
+aliases:
+  - /getting_started/custom_metrics
 ---
 
 Datadog allows you to submit custom metrics in multiple ways in order to provide a comprehensive view of what is happening in your infrastructure

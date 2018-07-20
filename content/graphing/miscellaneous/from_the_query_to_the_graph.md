@@ -1,6 +1,8 @@
 ---
 title: From the query to the graph
 kind: documentation
+alias:
+- /getting_started/from_the_query_to_the_graph
 ---
 
 While setting up graphs is pretty simple in Datadog, this page aims at helping you leverage even more value from our graphing system.
