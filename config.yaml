@@ -60,11 +60,6 @@ languages:
           url: "getting_started/custom_metrics/"
           weight: 330
           parent: menu_references_getting_started
-        - identifier: customnav_getting_started_logs
-          name: "Log management"
-          url: "logs/"
-          weight: 400
-          parent: menu_references_getting_started
 
         # AGENT
         - identifier: menu_references_agent
