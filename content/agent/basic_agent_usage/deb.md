@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-This page outlines the basic functionalities of the Datadog Agent.
+This page outlines the basic features of the Datadog Agent.
 If you haven't installed the Agent yet, instructions can be found [in the Datadog Agent integration page][1].
 
 The process to upgrade from the previous version of the Agent is to re-run the installation.
