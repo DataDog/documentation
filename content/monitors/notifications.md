@@ -136,7 +136,7 @@ The @ notification inside the template variables follows the same rules.
 
 ##### {{is_match}} 
 
-The `{{is_match}}` conditional allows you to match the triggering context to some string to display a different message. You can use any of the available tag variables in your conditional statement. A match is made if the comparison string is anywhere in the resolved variable. Variables use the following format:
+The `{{is_match}}` conditional allows you to match the triggering context to any given string in order to display a different message in your notifications. Use any of the available tag variables in your conditional statement. A match is made if the comparison string is anywhere in the resolved variable. Variables use the following format:
 
 ```
 {{#is_match "<TAG_VARIABLE>.name" "<COMPARISON_STRING>"}}
