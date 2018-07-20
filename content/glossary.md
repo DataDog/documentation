@@ -30,6 +30,14 @@ Libraries are designed to interact with either the API or DogStatsD, though a ha
 
 See the [Libraries documentation][2] for more information.
 
+#### Dashboard
+
+Dashboards are one of the primary ways to visualize your data. There are two types of dashboards: Screen Boards and Time Boards.
+
+Screen Boards are free-form dashboards which can include a variety of objects such as images, graphs, logs, and more. They are commonly used as status boards or story-telling tableaus, and can either update in real-time, or represent one or more fixed points in the past.
+
+Time Boards have a more structured format, and represent a single point in time — either fixed or real-time — across the entire dashboard. They are commonly used for troubleshooting, correlation, and general data exploration.
+
 #### DogStatsD
 
 DogStatsD refers to two related things: a protocol based on [StatsD][3], and an application for reporting metrics which implements that protocol. The DogStatsD protocol is an extension of the StatsD protocol, with some modifications that are specific to the Datadog platform. The DogStatsD application is a service that is bundled with the Agent, and is used as a lightweight mechanism for reporting metrics.
