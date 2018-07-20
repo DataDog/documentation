@@ -8,6 +8,7 @@ kind: faq
 |Activemq|ACTIVEMQ|
 |Airbrake|AIRBRAKE|
 |Akamai|AKAMAI|
+|Alibaba Cloud|ALIBABACLOUD|
 |Amazon Api Gateway|APIGATEWAY|
 |Amazon Auto Scaling|AUTOSCALING|
 |Amazon Billing|BILLING|
@@ -74,6 +75,7 @@ kind: faq
 |Ceph|CEPH|
 |Chatwork|CHATWORK|
 |Chef|CHEF|
+|Cisco Aci|CISCOACI|
 |Cloud Foundry|CLOUDFOUNDRY|
 |Cloudhealth|CLOUDHEALTH|
 |Cloudnetworkhealth|CLOUDNETWORKHEALTH|
@@ -115,6 +117,7 @@ kind: faq
 |Google Cloudsql|GCPCLOUDSQL|
 |Google Compute Engine|GCPCOMPUTE|
 |Google Container Engine|GCPCONTAINER|
+|Google Hangouts Chat|HANGOUTS|
 |Gunicorn|GUNICORN|
 |Haproxy|HAPROXY|
 |Hdfs|HDFS|
@@ -151,6 +154,7 @@ kind: faq
 |New Relic|NEWRELIC|
 |Nginx|NGINX|
 |Node|NODE|
+|Office 365 Groups|OFFICE365GROUPS|
 |Openstack|OPENSTACK|
 |Opsgenie|OPSGENIE|
 |Opsmatic|OPSMATIC|
