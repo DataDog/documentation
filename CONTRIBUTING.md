@@ -17,6 +17,10 @@ The [Dos](#dos) and [Donts](#donts) serve the main purpose: **to clearly inform 
 * Use the American English **en_US** dialect when writing documentation, code comments, [wiki entries][3], etc. in the English language. This is the default language for all `*.md` files.  
 * Use the Standard French **fr_FR** dialect when writing in the French language. This is the language in all `*.fr.md` files.
 
+### RFC 2119
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED",  "MAY", and "OPTIONAL" in the documentation are to be interpreted as described in [RFC 2119][5]. When writing in languages other than English, a best-effort must be made to adhere to this RFC.
+
 ## Dos
 
 * **Be plain and direct**: Say exactly what you mean using plain speech. Don’t leave the reader guessing:
@@ -133,3 +137,4 @@ Learn more about [image partials][4].
 [2]: https://github.com/DataDog/documentation/wiki/Translations-Overview
 [3]: https://github.com/DataDog/documentation/wiki
 [4]: https://github.com/DataDog/documentation/wiki/Import-an-Image
+[5]: https://tools.ietf.org/html/rfc2119
