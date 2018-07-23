@@ -10,7 +10,7 @@ Examples:
 * `@support-datadog` – reaches Datadog support directly when posted in your stream.
 * `@all` – sends a notification to all members of your organization.
 * `@someonesname` – notifies the specific user named ‘someonesname’.
-* `@test@test.com` -sends an email to `test@test.com`.
+* `@test@example.com` -sends an email to `test@example.com`.
 
 Furthermore, if you have [HipChat][2], [Slack][3], [Webhooks][4], [Pagerduty][5], [VictorOps][6], or [Microsoft Teams][7] you can use:
 
