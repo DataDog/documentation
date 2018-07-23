@@ -5,7 +5,7 @@ further_reading:
 - link: "logs/processing"
   tag: "Documentation"
   text: Learn how to process your logs
-- link: "logs/parsing"
+- link: "logs/processing/parsing"
   tag: "Documentation"
   text: Learn more about parsing
 - link: "logs/faq/how-to-investigate-a-log-parsing-issue"
@@ -62,7 +62,7 @@ There are specific status formats that must be adhered to for the remapping to w
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/parsing/#matcher
+[1]: /logs/processing/parsing/#matcher
 [2]: /logs/processing/#log-status-remapper
 [3]: /logs/#reserved-attributes
 [4]: /logs/#edit-reserved-attributes

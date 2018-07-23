@@ -9,7 +9,7 @@ further_reading:
 - link: "logs/processing"
   tag: "Documentation"
   text: Learn how to process your logs
-- link: "logs/parsing"
+- link: "logs/processing/parsing"
   tag: "Documentation"
   text: Learn more about parsing
 ---

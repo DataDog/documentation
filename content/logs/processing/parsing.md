@@ -2,6 +2,8 @@
 title: Parsing
 kind: documentation
 description: "Parse your logs using the Grok Processor"
+aliases:
+    - logs/parsing/
 further_reading:
 - link: "logs/processing"
   tag: "Documentation"
@@ -45,7 +47,7 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):connect_date}
 
 You would have at the end this structured log:
 
-{{< img src="logs/parsing/parsing_example_1.png" alt="Parsing example 1" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/parsing/parsing_example_1.png" alt="Parsing example 1" responsive="true" style="width:80%;">}}
 
 ## Matcher
 
@@ -129,12 +131,12 @@ Rule
 rule %{data::keyvalue}
 ```
 
-{{< img src="logs/parsing/parsing_example_2.png" alt="Parsing example 2" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/parsing/parsing_example_2.png" alt="Parsing example 2" responsive="true" style="width:80%;">}}
 
 You don't need to specify the name of your parameters as they were already contained in the log.
 If you add an **extract** attribute `my_attribute` in your rule pattern you would have:
 
-{{< img src="logs/parsing/parsing_example_2_bis.png" alt="Parsing example 2 bis" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/parsing/parsing_example_2_bis.png" alt="Parsing example 2 bis" responsive="true" style="width:80%;">}}
 
 If `=` is not the default separator between your key and values, add a parameter in your parsing rule with the wanted splitter.
 
@@ -150,7 +152,7 @@ Rule
 rule %{data::keyvalue(": ")}
 ```
 
-{{< img src="logs/parsing/key_value_parser.png" alt="Key value parser" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/key_value_parser.png" alt="Key value parser" responsive="true" style="width:80%;" >}}
 
 If logs contain specials characters in an attribute value such as `/` in a url for instance, add it to the white-list in the parsing rule:
 
@@ -166,7 +168,7 @@ Rule:
 rule %{data::keyvalue("=","/:")}
 ```
 
-{{< img src="logs/parsing/key_value_whitelist.png" alt="Key value whitelist" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/key_value_whitelist.png" alt="Key value whitelist" responsive="true" style="width:80%;" >}}
 
 Other examples:
 
@@ -219,9 +221,9 @@ MyParsingRule (%{integer:user.id}|%{word:user.firstname}) connected on %{date("M
 
 **Results**:
 
-{{< img src="logs/parsing/parsing_example_4.png" alt="Parsing example 4" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/parsing_example_4.png" alt="Parsing example 4" responsive="true" style="width:80%;" >}}
 
-{{< img src="logs/parsing/parsing_example_4_bis.png" alt="Parsing example 4 bis" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/parsing_example_4_bis.png" alt="Parsing example 4 bis" responsive="true" style="width:80%;" >}}
 
 ### Optional attribute 
 
@@ -239,9 +241,9 @@ MyParsingRule %{word:user.firstname} (%{integer:user.id} )?connected on %{date("
 
 **Note**: you may usually need to include the space in the optional part otherwise you would end up with two spaces and the rule would not match anymore.
 
-{{< img src="logs/parsing/parsing_example_5.png" alt="Parsing example 5" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/parsing_example_5.png" alt="Parsing example 5" responsive="true" style="width:80%;" >}}
 
-{{< img src="logs/parsing/parsing_example_5_bis.png" alt="Parsing example 5 bis" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/parsing_example_5_bis.png" alt="Parsing example 5 bis" responsive="true" style="width:80%;" >}}
 
 ### Regex 
 Use the regex matcher to match any substring of your log message based on literal regex rules.
@@ -258,7 +260,7 @@ Here we just look for the id to extract
 MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-zA-Z0-9]*"):user.id} .*
 ```
 
-{{< img src="logs/parsing/regex_parsing.png" alt="Parsing example 6" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/regex_parsing.png" alt="Parsing example 6" responsive="true" style="width:80%;" >}}
 
 ## Further Reading
 

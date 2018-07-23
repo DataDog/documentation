@@ -5,7 +5,7 @@ further_reading:
 - link: "logs/processing"
   tag: "Documentation"
   text: Learn how to process your logs
-- link: "logs/parsing"
+- link: "logs/processing/parsing"
   tag: "Documentation"
   text: Learn more about parsing
 - link: "logs/explore"
@@ -275,5 +275,5 @@ That's it! Now, all your logs are going to be in proper JSON automatically under
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/parsing
+[1]: /logs/processing/parsing
 [2]: /logs/#tail-existing-files

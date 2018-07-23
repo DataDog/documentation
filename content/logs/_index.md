@@ -9,7 +9,7 @@ further_reading:
 - link: "logs/processing"
   tag: "Documentation"
   text: Learn how to process your logs
-- link: "logs/parsing"
+- link: "logs/processing/parsing"
   tag: "Documentation"
   text: Learn more about parsing
 ---
@@ -179,7 +179,7 @@ There are many kinds of processors; find the full list and how to use them [here
 [26]: /logs/processing/#processing-pipelines
 [27]: /logs/processing/#attribute-remapper
 [28]: /logs/processing/#grok-parser
-[29]: /logs/parsing/
+[29]: /logs/processing/parsing/
 [30]: /logs/faq/log-parsing-best-practice/
 [31]: /logs/faq/how-to-investigate-a-log-parsing-issue/
 [32]: /logs/processing/#processors

@@ -636,9 +636,10 @@ languages:
           url: "integrations/#cat-log-collection"
           weight: 260
           parent: customnav_lognav_collection
+
         # LOGS - Subnav start
         - identifier: customnav_lognav_explore
-          name: "Search"
+          name: "Explorer"
           url: "logs/explore/"
           weight: 30
           parent: menu_references_logs
@@ -652,16 +653,25 @@ languages:
           url: "logs/analytics/"
           weight: 35
           parent: menu_references_logs
+
+        # LOGS - Processing  
         - identifier: customnav_lognav_processing
           name: "Processing"
           url: "logs/processing/"
           weight: 40
           parent: menu_references_logs
+
         - identifier: customnav_lognav_parsing
           name: "Parsing"
-          url: "logs/parsing/"
-          weight: 50
-          parent: menu_references_logs
+          url: "logs/processing/parsing/"
+          weight: 410
+          parent: customnav_lognav_processing
+        - identifier: customnav_lognav_attributes_naming_convention
+          name: "Naming Convention"
+          url: "logs/processing/attributes_naming_convention/"
+          weight: 420
+          parent: customnav_lognav_processing
+
         - identifier: customnav_lognav_logging_without_limits
           name: "Logging without Limits"
           url: "logs/logging_without_limits/"
@@ -1535,7 +1545,7 @@ languages:
         
         # LOGS - Subnav start
         - identifier: customnav_lognav_explore
-          name: "Search"
+          name: "Explorer"
           url: "logs/explore/"
           weight: 30
           parent: menu_references_logs
@@ -1544,21 +1554,31 @@ languages:
           url: "logs/live_tail/"
           weight: 32
           parent: menu_references_logs
-        - identifier: customnav_lognav_graph
+        - identifier: customnav_lognav_analytics
           name: "Log Analytics"
           url: "logs/analytics/"
           weight: 35
           parent: menu_references_logs
+
+        # LOGS - Processing  
         - identifier: customnav_lognav_processing
           name: "Processing"
           url: "logs/processing/"
           weight: 40
           parent: menu_references_logs
+
         - identifier: customnav_lognav_parsing
           name: "Parsing"
-          url: "logs/parsing/"
-          weight: 50
-          parent: menu_references_logs
+          url: "logs/processing/parsing/"
+          weight: 410
+          parent: customnav_lognav_processing
+        - identifier: customnav_lognav_attributes_naming_convention
+          name: "Convention de Nommage"
+          url: "logs/processing/attributes_naming_convention/"
+          weight: 420
+          parent: customnav_lognav_processing
+
+        
         - identifier: customnav_lognav_logging_without_limits
           name: "Logging sans Limites"
           url: "logs/logging_without_limits/"
