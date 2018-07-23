@@ -13,7 +13,7 @@ This article is part of a [series on data security][0].
 
 The Log Management product supports multiple [environments and formats][1], allowing customers the flexibility to submit to Datadog nearly any data they choose. This article describes the main security guarantees and filtering controls available to users when submitting Logs to Datadog.
 
-## Data Protection
+## Information Security
 
 The Datadog Agent submits Logs to Datadog over a TLS-encrypted TCP connection, requiring an outbound communication over port `10516`. Datadog utilizes symmetric encryption at rest (AES-256) for indexed Logs. Indexed Logs are deleted from the Datadog platform once their retention period, as defined by the customer, expires.
 
