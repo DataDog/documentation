@@ -87,6 +87,19 @@ Note: the location to the JRE tools.jar (`/usr/lib/jvm/java-8-oracle/lib/tools.j
 
 **Note**: you may wish to specify alternative JVM heap parameters `-Xmx`, `-Xms`, the values used in the example correspond to the JMXFetch defaults.
 
+## Agent v5 troubleshooting
+
+
+| Command                                                           | Description                                                                                                                                                             |
+| :----------------------------------------                         | :---                                                                                                                                                                    |
+| `sudo /etc/init.d/datadog-agent jmx list_matching_attributes`     | List attributes that match at least one of your instances configuration.                                                                                                |
+| `sudo /etc/init.d/datadog-agent jmx list_limited_attributes`      | List attributes that do match one of your instances configuration but that are not being collected because it would exceed the number of metrics that can be collected. |
+| `sudo /etc/init.d/datadog-agent jmx list_collected_attributes`    | List attributes that will actually be collected by your current instances configuration.                                                                                |
+| `sudo /etc/init.d/datadog-agent jmx list_not_matching_attributes` | List attributes that don't match any of your instances configuration.                                                                                                   |
+| `sudo /etc/init.d/datadog-agent jmx list_everything`              | List every attributes available that has a type supported by JMXFetch.                                                                                                  |
+| `sudo /etc/init.d/datadog-agent jmx collect`                      | Start the collection of metrics based on your current configuration and display them in the console.                                                                    |
+
+
 [1]: https://docs.oracle.com/javase/8/docs/technotes/guides/management/faq.html
 [2]: /agent/faq/send-logs-and-configs-to-datadog-via-flare-command
 [3]: /agent/faq/agent-status-and-information
