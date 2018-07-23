@@ -16,7 +16,7 @@ further_reading:
   text: Control the volume of logs indexed by Datadog
 ---
 
-## Tl;Dr
+## Getting Started
 
 One may ask, Why do we need a naming convention for log attributes?
 
