@@ -18,20 +18,20 @@ further_reading:
 
 ## Tl;Dr
 
-One may ask, why do we need a naming convention for Log attributes?
+One may ask, Why do we need a naming convention for log attributes?
 
 * Various technologies tend to use different attribute names for the same meaning.
-* This usually generates too many attributes which can lead to: user confusion and un-ability to correlate logs across sources.
+* This usually generates too many attributes, which can lead to user confusion and the inability to correlate logs across sources.
 * Datadog Integrations rely on the following attribute naming convention.
-* We advise you to use the following reference when you parse your custom formats & sources in order to leverage fully all functionalities of your Datadog application.
+* Use the following reference when parsing custom formats and sources in order to fully leverage all of Datadog's functionalities.
 
 ## Overview
 
-Centralizing logs from various technologies and applications tends to generate tens or hundreds of different attributes in a Log Management environment. Especially when many users - each one with its own personal usage- are working with it. 
-This generates confusion among users. For instance, a client IP can have the following attributes within your logs: `clientIP`, `client_ip_address`, `remote_address`, `client.ip`, and many other combinations are possible...
-In this context, knowing which attribute corresponds to the logs you are trying to filter on or correlating this same proxy logs to the web application logs just behind it is a cumbersome. 
+Centralizing logs from various technologies and applications tends to generate tens or hundreds of different attributes in a Log Management environment— especially when many users, each one with their own personal usage patterns, are working within the same environment.
+This generates confusion. For instance, a client IP might have the following attributes within your logs: `clientIP`, `client_ip_address`, `remote_address`, `client.ip`, etc.
+In this context, it can be cumbersome to know which attributes correspond to the logs you are trying to filter on, or correlate proxy logs to web application logs.
 
-Actually even if all technologies define their respective logs attributes differently, a URL, a client ip, or a duration have the same meaning for everyone.
+Even if technologies define their respective logs attributes differently, a URL, client IP, or duration have universally consistent meanings.
 This is why Datadog decided while implementing log integrations to rely on a subset of names for attributes that are commonly observed over log sources.
 
 But as Datadog integrations are not covering your custom formats and sources, we decided to make this Attribute Naming Convention (or [Taxonomy][1]) public to help you decide how to name your attributes in your own parsers.
@@ -48,48 +48,48 @@ This attribute naming convention has been split into 7 functional domains:
 
 ## Network
 
-Related to the data used in a network communication. All fields and metrics are prefixed by `network`.
+Related to the data used in network communication. All fields and metrics are prefixed by `network`.
 
 | **Fullname**               | **Type** | **Description**                                                                          |
 | :---                       | :---     | :----                                                                                    |
-| `network.client.ip`        | `string` | The IP address of the client which initiated the TCP connection.                         |
+| `network.client.ip`        | `string` | The IP address of the client that initiated the TCP connection.                          |
 | `network.destination.ip`   | `string` | The IP address the client connected to.                                                  |
-| `network.client.port`      | `string` | The port of the client which initiated the connection.                                   |
+| `network.client.port`      | `string` | The port of the client that initiated the connection.                                    |
 | `network.destination.port` | `string` | The TCP port the client connected to.                                                    |
 | `network.bytes_read`       | `number` | Total number of bytes transmitted from the client to the server when the log is emitted. |
 | `network.bytes_written`    | `number` | Total number of bytes transmitted from the server to the client when the log is emitted. |
 
-Typical integrations relying on these: [Apache][7], [Varnish][8], [AWS ELB][9], [Nginx][10], [HAProxy][11], etc...
+Typical integrations relying on these attributes include [Apache][7], [Varnish][8], [AWS ELB][9], [Nginx][10], [HAProxy][11], etc.
 
 ## HTTP Requests
 
-Related to the data commonly used in HTTP requests & accesses. All attributes are prefixed by `http`.
+Related to the data commonly used in HTTP requests and accesses. All attributes are prefixed by `http`.
 
-Typical integrations relying on these attributes are: [Apache][7], *Rails*, [AWS CloudFront][12], web applications servers, etc...
+Typical integrations relying on these attributes include [Apache][7], Rails, [AWS CloudFront][12], web applications servers, etc.
 
 ### Common attributes
 
 
-| **Fullname**       | **Type** | **Description**                                                                                           |
-| :---               | :---     | :----                                                                                                     |
-| `http.url`         | `string` | The URL of the HTTP request.                                                                              |
-| `http.status_code` | `number` | The IP address the client connected to.                                                                   |
-| `http.method`      | `string` | The HTTP verb of the request.                                                                             |
-| `http.referer`     | `string` | The HTTP referer.                                                                                         |
-| `http.request_id`  | `string` | The HTTP request id.                                                                                      |
+| **Fullname**       | **Type** | **Description**                                                                                          |
+| :---               | :---     | :----                                                                                                    |
+| `http.url`         | `string` | The URL of the HTTP request.                                                                             |
+| `http.status_code` | `number` | The IP address the client connected to.                                                                  |
+| `http.method`      | `string` | The HTTP verb of the request.                                                                            |
+| `http.referer`     | `string` | The HTTP referer.                                                                                        |
+| `http.request_id`  | `string` | The HTTP request ID.                                                                                     |
 | `http.useragent`   | `string` | The User-Agent as it is sent (raw format). [See below for all details about it](#user-agent-attributes). |
 
 ### URL details attributes
 
-Details about the parsed parts of the HTTP url. Generally generated thanks to the [URL parser][13]. All attributes are prefixed by `http.url_details`.
+Details about the parsed parts of the HTTP URL. Generally generated thanks to the [URL parser][13]. All attributes are prefixed by `http.url_details`.
 
 | **Fullname**                   | **Type** | **Description**                                                                         |
 | :---                           | :---     | :----                                                                                   |
-| `http.url_details.host`        | `string` | The HTTP host part of the url.                                                          |
-| `http.url_details.port`        | `number` | The HTTP port part of the url.                                                          |
-| `http.url_details.path`        | `string` | The HTTP path part of the url.                                                          |
-| `http.url_details.queryString` | `object` | The HTTP query string parts of the url decomposed as query params key/value attributes. |
-| `http.url_details.scheme`      | `string` | The protocol name of the URL (http or https)                                            |
+| `http.url_details.host`        | `string` | The HTTP host part of the URL.                                                          |
+| `http.url_details.port`        | `number` | The HTTP port part of the URL.                                                          |
+| `http.url_details.path`        | `string` | The HTTP path part of the URL.                                                          |
+| `http.url_details.queryString` | `object` | The HTTP query string parts of the URL decomposed as query params key/value attributes. |
+| `http.url_details.scheme`      | `string` | The protocol name of the URL (HTTP or HTTPS)                                            |
 
 ### User-Agent attributes
 
@@ -97,9 +97,9 @@ Details about the meanings of user agents attributes. Generally generated thanks
 
 | **Fullname**                            | **Type** | **Description**                                |
 | :---                                    | :---     | :----                                          |
-| `http.useragent_details.os.family`      | `string` | The OS family reported by the user-agent.      |
-| `http.useragent_details.browser.family` | `string` | The Browser Family reported by the user-agent. |
-| `http.useragent_details.device.family`  | `string` | The Device family reported by the user-agent.  |
+| `http.useragent_details.os.family`      | `string` | The OS family reported by the User-Agent.      |
+| `http.useragent_details.browser.family` | `string` | The Browser Family reported by the User-Agent. |
+| `http.useragent_details.device.family`  | `string` | The Device family reported by the User-Agent.  |
 
 ## Source code
 
@@ -122,12 +122,12 @@ Database related attributes are prefixed by `db`.
 
 | **Fullname**   | **Type** | **Description**                                                                                                                       |
 | :---           | :---     | :----                                                                                                                                 |
-| `db.instance`  | `string` | Database instance name. E.g., In java, if the `jdbc.url="jdbc:mysql://127.0.0.1:3306/customers"`, the instance name is `customers`.   |
+| `db.instance`  | `string` | Database instance name. E.g., in Java, if `jdbc.url="jdbc:mysql://127.0.0.1:3306/customers"`, the instance name is `customers`.       |
 | `db.statement` | `string` | A database statement for the given database type. E.g., for mySQL: `"SELECT * FROM wuser_table";` for Redis: `"SET mykey 'WuValue'"`. |
 | `db.operation` | `string` | The operation that was performed (“query”, “update”, “delete”,...).                                                                   |
 | `db.user`      | `string` | User that performs the operation.                                                                                                     |
 
-Typical integrations relying on these attributes are: [Cassandra][15], [MySQL][16], [RDS][17], [Elasticsearch][18], etc...
+Typical integrations relying on these attributes are: [Cassandra][15], [MySQL][16], [RDS][17], [Elasticsearch][18], etc.
 
 ## Performance
 
@@ -138,7 +138,7 @@ Performance metrics.
 | `duration`   | `number` | A duration of any kind in **nanoseconds**: HTTP response time, database query time, latency, etc. |
 
 
-We advise you to rely or at least remap on this attribute as Datadog displays and uses it in the best way possible.
+We advise you to rely or at least remap on this attribute as Datadog displays and uses it as a default [Measure][19] for [trace Search][20]. 
 
 ## User related attributes
 
@@ -162,7 +162,7 @@ Related to the data added by a syslog or a log-shipper agent. All fields and met
 | `syslog.timestamp` | `string` | The log timestamp. Generally remapped to the `date` reserved attribute.       |
 | `syslog.env`       | `string` | The environment name where the source of logs come from.                      |
 
-Some integrations that rely on these are: [Rsyslog][2], [NxLog][3], [Syslog-ng][4], [Fluentd][5], [Logstash][6], etc...
+Some integrations that rely on these are: [Rsyslog][2], [NxLog][3], [Syslog-ng][4], [Fluentd][5], [Logstash][6], etc.
 
 ## Further Reading
 
@@ -186,3 +186,5 @@ Some integrations that rely on these are: [Rsyslog][2], [NxLog][3], [Syslog-ng][
 [16]: /integrations/mysql
 [17]: /integrations/amazon_rds
 [18]: /integrations/elastic
+[19]: /logs/explore/#measures
+[20]: /tracing/search
