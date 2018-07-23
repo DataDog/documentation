@@ -1,7 +1,7 @@
 ---
 title: Attributes Naming Convention
 kind: documentation
-description: "Parse your logs using the Grok Processor"
+description: "Datadog log attributes naming convention."
 aliases:
     - logs/parsing/
 further_reading:
