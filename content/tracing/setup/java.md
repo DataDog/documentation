@@ -63,8 +63,8 @@ The tracer is configured using System Properties and Environment Variables as fo
 
 ## Automatic Instrumentation
 
-Automatic instrumentation for Java utilizes the `java-agent` instrumentation capabilities [provided by the JVM][8]. When a `java-agent` is registered, it has the ability to modify class files at load time. 
-The Agent uses the popular [Byte Buddy framework][9] to find the classes defined for instrumentation and modify those class bytes accordingly.
+Automatic instrumentation for Java utilizes the `java-agent` instrumentation capabilities [provided by the JVM][8]. When a `java-agent` is registered, it has the ability to modify class files at load time.
+The `java-agent` uses the popular [Byte Buddy framework][9] to find the classes defined for instrumentation and modify those class bytes accordingly.
 
 Instrumentation may come from auto-instrumentation, the OpenTracing api, or a mixture of both. Instrumentation generally captures the following info:
 
@@ -74,11 +74,151 @@ Instrumentation may come from auto-instrumentation, the OpenTracing api, or a mi
 * Errors and stacktraces which are unhanded by the application
 * A total count of traces (requests) flowing through the system
 
+### Integrations
+
+#### Web Frameworks
+
+Web Framework tracing provides:
+* Timing HTTP request to response
+* Tags for the HTTP request (status code, method, etc)
+* Error and stacktrace capturing
+* Linking work created within a web request
+* Distributed Tracing
+
+`dd-java-agent` includes support for automatically tracing the following web frameworks.
+
+| Server                  | Versions   |
+| :---------------------- | :--------- |
+| Java Servlet Compatible | 2.3+, 3.0+ |
+| Play                    | 2.4-2.6    |
+| Jax-RS Annotations      | JSR311-API |
+| Spring-Web              | 4.0+       |
+
+*Note:* Many application servers are Servlet compatible, such as Tomcat, Jetty, Websphere, Weblogic, etc.
+Also, frameworks like Spring Boot and Dropwizard inherently work because they use a Servlet compatible embedded application server.
+
+Don't see your desired web frameworks? We're continually adding additional support, [check with our team][2] to see if we can help.
+
+#### Networking Frameworks
+
+Networking tracing provides:
+* Timing request to response
+* Tags for the request (e.g. response code)
+* Error and stacktrace capturing
+* Distributed Tracing
+
+`dd-java-agent` includes support for automatically tracing the following networking frameworks.
+
+| Framework           | Versions |
+| :------------------ | :------- |
+| Jax RS Client       | 1.11+    |
+| OkHTTP              | 3.0+     |
+| Apache HTTP Client  | 4.3+     |
+| JMS                 | 1 and 2  |
+| AWS Java SDK        | 1.11+    |
+| Kafka-Clients       | 0.11+    |
+| Kafka-Streams       | 0.11+    |
+
+Don't see your desired networking framework? We're continually adding additional support, [check with our team][2] to see if we can help.
+
+#### Datastores
+
+Datastore tracing provides:
+* Timing request to response
+* Query info (e.g. a sanitized query string)
+* Error and stacktrace capturing
+
+`dd-java-agent` includes support for automatically tracing the following database frameworks/drivers.
+
+| Database        | Versions       |
+| :-------------  | :------------- |
+| JDBC            | N/A            |
+| MongoDB         | 3.0+           |
+| Cassandra       | 3.2+           |
+| Jedis           | 1.4+           |
+
+`dd-java-agent` is also compatible with common JDBC drivers including:
+
+*  Apache Derby
+*  Firebird SQL
+*  H2 Database Engine
+*  HSQLDB
+*  IBM DB2
+*  MSSQL (Microsoft SQL Server)
+*  MySQL
+*  MariaDB
+*  Oracle
+*  Postgres SQL
+
+Don't see your desired datastores? We're continually adding additional support, [check with our team][2] to see if we can help.
+
+#### Other Frameworks
+
+`dd-java-agent` includes support for automatically tracing the following other frameworks.
+
+| Framework               | Versions |
+| :---------------------- | :------- |
+| Hystrix                 | 1.4+     |
+
+Don't see your desired framework? We're continually adding additional support, [check with our team][2] to see if we can help.
+
+#### Beta Instrumentation
+
+`dd-java-agent` ships with some newer instrumentation disabled by default.
+
+| Instrumentation                | Versions | JVM Arg to enable                                                             |
+| :--------------                | :------- | :----------------                                                             |
+| Elasticsearch Client           | 5.0+     | `-Ddd.integration.elasticsearch.enabled=true`                                 |
+| Netty Http Server and Client   | 4.0+     | `-Ddd.integration.netty.enabled=true`                                         |
+| HttpURLConnection              | all      | `-Ddd.integration.httpurlconnection.enabled=true`                             |
+| JSP Rendering                  | 2.3+     | `-Ddd.integration.jsp.enabled=true`                                           |
+| Akka-Http Server               | 10.0+    | `-Ddd.integration.akka-http.enabled=true`                                     |
+| Lettuce                        | 5.0+     | `-Ddd.integration.lettuce.enabled=true`                                       |
+| SpyMemcached                   | 2.12+    | `-Ddd.integration.spymemcached.enabled=true`                                  |
+| Ratpack                        | 1.4+     | `-Ddd.integration.ratpack.enabled=true`                                       |
+| Spark Java                     | 2.4+     | `-Ddd.integration.sparkjava.enabled=true -Ddd.integration.jetty.enabled=true` |
+
+
 ## Manual Instrumentation
 
 Before instrumenting your application, review Datadog’s [APM Terminology][5] and familiarize yourself with the core concepts of Datadog APM. If you aren't using a [supported framework instrumentation](#integrations), or you would like additional depth in your application’s traces, you may want to to manually instrument your code.
 
 Do this either using the [Trace annotation](#trace-annotation) for simple method call tracing or with the [OpenTracing API](#opentracing-api) for complex tracing.
+
+
+### Tagging
+
+Tags are key-value pairs attached to spans. All tags share a single namespace.
+
+The Datadog UI uses specific tags to set UI properties, such as an application's service name. A full list of these tags can be found in the [Datadog](https://github.com/DataDog/dd-trace-java/blob/master/dd-trace-api/src/main/java/datadog/trace/api/DDTags.java) and [OpenTracing](https://github.com/opentracing/opentracing-java/blob/master/opentracing-api/src/main/java/io/opentracing/tag/Tags.java) APIs.
+
+#### Custom Tags
+
+Custom tags are set using the OpenTracing API.
+
+Custom tags may be set for auto-instrumentation by grabbing the active span out of the global tracer.
+
+```java
+import io.opentracing.Tracer;
+import io.opentracing.util.GlobalTracer;
+
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet
+class ServletImpl extends AbstractHttpServlet {
+  @Override
+  void doGet(HttpServletRequest req, HttpServletResponse resp) {
+    final Tracer tracer = GlobalTracer.get();
+    if (tracer != null && tracer.activeSpan() != null) {
+      tracer.activeSpan().setTag("org.id", 12345);
+      tracer.activeSpan().setTag("http.url", "/login");
+    }
+    // servlet impl
+  }
+}
+```
 
 ### Trace Reporting
 
@@ -92,7 +232,7 @@ To report a trace to Datadog the following happens:
 * In a separate reporting thread, the trace queue is flushed and traces are encoded via msgpack then sent to the Datadog Agent via http
 * Queue flushing happens on a schedule of once per second
 
-To see the actual code, documentation and usage examples for any of the 
+To see the actual code, documentation, and usage examples for any of the
 libraries and frameworks that Datadog supports, check the full list of auto-
 instrumented components for Java applications [in the integration section](#integrations).
 
@@ -248,11 +388,105 @@ public class Application {
 }
 ```
 
+##### Custom Async Instrumentation
+
+Create asynchronous traces in custom instrumentation using the OpenTracing API.
+
+```java
+// Step 1: start the Scope/Span on the work submission thread
+try (Scope scope = tracer.buildSpan("ServiceHandlerSpan").startActive(false)) {
+    final Span span = scope.span();
+    doAsyncWork(new Runnable() {
+        @Override
+        public void run() {
+            // Step 2: reactivate the Span in the worker thread
+            try (Scope scope = tracer.scopeManager().activate(span, false)) {
+              // worker thread impl...
+            }
+        }
+    });
+    // submission thread impl...
+}
+```
+
+
 Notice the above examples only use the OpenTracing classes. Please reference the [OpenTracing API][6] for more details and information.
 
-## Sampling / Distributed Tracing
+## Distributed Tracing
 
-Enable priority sampling to ensure that distributed traces are complete.  Priority sampling achieves this by automatically assigning and propagating a priority value along all traces, depending on their service and volume.  Priorities can also be set manually to either drop non-interesting traces or to keep important ones.
+Distributed Tracing links traces across multiple hosts. Linking is implemented by injecting Datadog Metadata into the request headers.
+
+Distributed Tracing headers are language agnostic. A trace started in one language may propagate to another (for example, from Python to Java).
+
+### Custom Distributed Tracing
+
+Create a distributed trace in custom instrumentation using OpenTracing:
+
+```java
+// Step 1: Inject the Datadog headers in the client code
+try (Scope scope = tracer.buildSpan("httpClientSpan").startActive(true)) {
+    final Span span = scope.span();
+    HttpRequest request = /* your code here */;
+
+    tracer.inject(span.context(),
+                  Format.Builtin.HTTP_HEADERS,
+                  new MyHttpHeadersInjectAdapter(request));
+
+    // http request impl...
+}
+
+public static class MyHttpHeadersInjectAdapter implements TextMap {
+  private final HttpRequest httpRequest;
+
+  public HttpHeadersInjectAdapter(final HttpRequest httpRequest) {
+    this.httpRequest = httpRequest;
+  }
+
+  @Override
+  public void put(final String key, final String value) {
+    httpRequest.addHeader(key, value);
+  }
+
+  @Override
+  public Iterator<Map.Entry<String, String>> iterator() {
+    throw new UnsupportedOperationException("This class should be used only with tracer#inject()");
+  }
+}
+
+// Step 2: Extract the Datadog headers in the server code
+HttpRequest request = /* your code here */;
+
+final SpanContext extractedContext =
+  GlobalTracer.get().extract(Format.Builtin.HTTP_HEADERS,
+                             new MyHttpRequestExtractAdapter(request));
+
+try (Scope scope = tracer.buildSpan("httpServerSpan").asChildOf(extractedContext).startActive(true)) {
+    final Span span = scope.span(); // will be a child of http client span in step 1
+    // http server impl...
+}
+
+public class MyHttpRequestExtractAdapter implements TextMap {
+  private final HttpRequest request;
+
+  public HttpRequestExtractAdapter(final HttpRequest request) {
+    this.request = request;
+  }
+
+  @Override
+  public Iterator<Map.Entry<String, String>> iterator() {
+    return request.headers().iterator();
+  }
+
+  @Override
+  public void put(final String key, final String value) {
+    throw new UnsupportedOperationException("This class should be used only with Tracer.extract()!");
+  }
+}
+```
+
+### Priority Sampling
+
+Distributed Traces may sample inconsistently when the linked traces run on different hosts. To ensure that distributed traces are complete, enable priority sampling. Priority sampling automatically assigns and propagates a priority value along all traces, depending on their service and volume. Priorities can also be set manually to drop non-interesting traces or keep important ones.
 
 Priority sampling is disabled by default. To enable it, configure the `priority.sampling` flag to `true` ([see how to configure the client above](#configuration)).
 
@@ -341,92 +575,6 @@ To return debug level application logs, enable debug mode with the flag `-Ddatad
 ## JMX Metrics
 
 Datadog's [JMX Integration][7] monitors additional metrics around: JVM heap memory, thread count, and garbage collection. Use it in conjunction with APM for an even broader view into your Java app's performance.
-
-## Integrations
-
-### Web Frameworks
-
-`dd-java-agent` includes support for automatically tracing the following web frameworks.
-
-| Server                  | Versions   |
-| :---------------------- | :--------- |
-| Java Servlet Compatible | 2.3+, 3.0+ |
-| Play                    | 2.4-2.6    |
-| Jax-RS Annotations      | JSR311-API |
-| Spring-Web              | 4.0+       |
-
-*Note:* Many application servers are Servlet compatible, such as Tomcat, Jetty, Websphere, Weblogic, etc.
-Also, frameworks like Spring Boot and Dropwizard inherently work because they use a Servlet compatible embedded application server.
-
-Don't see your desired web frameworks? We're continually adding additional support, [check with our team][2] to see if we can help.
-
-### Networking Frameworks
-
-`dd-java-agent` includes support for automatically tracing the following networking frameworks.
-
-| Framework           | Versions |
-| :------------------ | :------- |
-| Jax RS Client       | 1.11+    |
-| OkHTTP              | 3.0+     |
-| Apache HTTP Client  | 4.3+     |
-| JMS                 | 1 and 2  |
-| AWS Java SDK        | 1.11+    |
-| Kafka-Clients       | 0.11+    |
-| Kafka-Streams       | 0.11+    |
-
-Don't see your desired networking framework? We're continually adding additional support, [check with our team][2] to see if we can help.
-
-### Datastores
-
-`dd-java-agent` includes support for automatically tracing the following database frameworks/drivers.
-
-| Database        | Versions       |
-| :-------------  | :------------- |
-| JDBC            | N/A            |
-| MongoDB         | 3.0+           |
-| Cassandra       | 3.2+           |
-| Jedis           | 1.4+           |
-
-`dd-java-agent` is also compatible with common JDBC drivers including:
-
-*  Apache Derby
-*  Firebird SQL
-*  H2 Database Engine
-*  HSQLDB
-*  IBM DB2
-*  MSSQL (Microsoft SQL Server)
-*  MySQL
-*  MariaDB
-*  Oracle
-*  Postgres SQL
-
-Don't see your desired datastores? We're continually adding additional support, [check with our team][2] to see if we can help.
-
-### Other Frameworks
-
-`dd-java-agent` includes support for automatically tracing the following other frameworks.
-
-| Framework               | Versions |
-| :---------------------- | :------- |
-| Hystrix                 | 1.4+     |
-
-Don't see your desired framework? We're continually adding additional support, [check with our team][2] to see if we can help.
-
-### Beta Instrumentation
-
-`dd-java-agent` ships with some newer instrumentation disabled by default.
-
-| Instrumentation                | Versions | JVM Arg to enable                                                             |
-| :--------------                | :------- | :----------------                                                             |
-| Elasticsearch Client           | 5.0+     | `-Ddd.integration.elasticsearch.enabled=true`                                 |
-| Netty Http Server and Client   | 4.0+     | `-Ddd.integration.netty.enabled=true`                                         |
-| HttpURLConnection              | all      | `-Ddd.integration.httpurlconnection.enabled=true`                             |
-| JSP Rendering                  | 2.3+     | `-Ddd.integration.jsp.enabled=true`                                           |
-| Akka-Http Server               | 10.0+    | `-Ddd.integration.akka-http.enabled=true`                                     |
-| Lettuce                        | 5.0+     | `-Ddd.integration.lettuce.enabled=true`                                       |
-| SpyMemcached                   | 2.12+    | `-Ddd.integration.spymemcached.enabled=true`                                  |
-| Ratpack                        | 1.4+     | `-Ddd.integration.ratpack.enabled=true`                                       |
-| Spark Java                     | 2.4+     | `-Ddd.integration.sparkjava.enabled=true -Ddd.integration.jetty.enabled=true` |
 
 ## Performance
 
