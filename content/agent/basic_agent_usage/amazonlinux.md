@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-This page outlines the basic functionality of the Datadog Agent for Amazon linux.  
+This page outlines the basic features of the Datadog Agent for Amazon linux.  
 If you haven't installed the Agent yet, instructions can be found
 [in the Datadog Agent integration page][1]
 
