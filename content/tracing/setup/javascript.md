@@ -16,10 +16,6 @@ further_reading:
   text: "Explore your services, resources and traces"
 ---
 
-<div class="alert alert-warning">
-JavaScript APM is currently in <strong>beta</strong>.
-</div>
-
 ## Getting Started
 
 For descriptions of terminology used in APM, take a look at the [official documentation][visualization docs].
