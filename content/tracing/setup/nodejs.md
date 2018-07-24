@@ -117,15 +117,15 @@ The `dd-trace` library includes support for a number of modules. If you would li
 
 | Module                 | Versions    | Support Type    |
 | :----------            | :---------- | :-------------- |
-| [cassandra-driver][25] |             | Coming Soon     |
 | [elasticsearch][14]    | 15.x        | Fully Supported |
-| [ioredis][15]          |             | Coming Soon     |
-| [memcached][24]        |             | Coming Soon     |
 | [mongodb-core][16]     | 3.x         | Fully Supported |
 | [mysql][17]            | 2.x         | Fully Supported |
 | [mysql2][18]           | ^1.5        | Fully Supported |
 | [pg][19]               | 6.x         | Fully Supported |
 | [redis][20]            | ^2.6        | Fully Supported |
+| [cassandra-driver][25] |             | Coming Soon     |
+| [ioredis][15]          |             | Coming Soon     |
+| [memcached][24]        |             | Coming Soon     |
 
 #### Workers
 
