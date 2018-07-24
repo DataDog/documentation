@@ -7,10 +7,10 @@ aliases:
     - /developers/tagging/
     - /getting_started/tagging
 further_reading:
-- link: "getting_started/tagging/assigning_tags"
+- link: "tagging/assigning_tags"
   tag: "Documentation"
   text: Learn how to assign tags
-- link: "getting_started/tagging/using_tags"
+- link: "tagging/using_tags"
   tag: "Documentation"
   text: Learn how to use tags in Datadog
 ---
@@ -86,7 +86,7 @@ We can also add additional tags to narrow down our scope even further - for exam
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/tagging/using_tags
+[1]: /tagging/using_tags
 [2]: /developers/dogstatsd
 [3]: /integrations/amazon_web_services
 [4]: /integrations/azure
@@ -95,4 +95,4 @@ We can also add additional tags to narrow down our scope even further - for exam
 [7]: /integrations/chef
 [8]: /integrations/puppet
 [9]: /graphing/infrastructure
-[10]: /getting_started/custom_metrics
+[10]: /developers/metrics/custom_metrics

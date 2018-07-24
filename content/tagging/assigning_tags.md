@@ -5,10 +5,10 @@ aliases:
     - /agent/tagging
     - /getting_started/tagging/assigning_tags
 further_reading:
-- link: "getting_started/tagging"
+- link: "tagging"
   tag: "Documentation"
   text: Getting started with tags
-- link: "getting_started/tagging/using_tags"
+- link: "tagging/using_tags"
   tag: "Documentation"
   text: Learn how to use tags in Datadog
 ---
@@ -182,4 +182,4 @@ You can also assign tags to hosts, but not to [integration][1] using the API. Th
 [58]: /integrations/winservices
 [59]: https://app.datadoghq.com/account/settings#agent
 [60]: /api#tags
-[61]: /getting_started/tagging/#tags-best-practices
+[61]: /tagging/#tags-best-practices

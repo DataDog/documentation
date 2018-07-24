@@ -4,10 +4,10 @@ kind: documentation
 aliases:
 - /getting_started/tagging/using_tags
 further_reading:
-- link: "getting_started/tagging"
+- link: "tagging"
   tag: "Documentation"
   text: Getting started with tags
-- link: "getting_started/tagging/assigning_tags"
+- link: "tagging/assigning_tags"
   tag: "Documentation"
   text: Learn how to assign tags
 ---
