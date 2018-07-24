@@ -294,7 +294,13 @@ Would produce this slack message:
 
 {{< img src="monitors/notifications/notification_slack_preview.png" alt="notification_slack_preview" responsive="true" style="width:50%;" >}}
 
-You can also mention **@here** or **@channel** using `<!here>` or `<!channel>`, respectively. For user groups, use `<subteam^ID|handle>`.
+You can also mention **@here** or **@channel** using `<!here>` or `<!channel>`, respectively. 
+
+For user groups, use `<!subteam^GROUP_ID|GROUP_NAME>`. To find the `GROUP_ID`, [query the `usergroups.list` API endpoint of Slack][10]. For example, for a user group named `testers` you would use the following syntax:
+
+```
+<!subteam^12345|testers>
+```
 
 #### Using message template variables to dynamically create @-mentions
 
@@ -306,7 +312,7 @@ For example, if the rendered variable is setup as a channel in the Slack integra
 
 * `@slack-{{host.name}}` post a slack message to the #host.name channel in Slack.
 
-[Learn more about how to setup conditional contacts and messages in a single monitor][10]
+[Learn more about how to setup conditional contacts and messages in a single monitor][11]
 
 ### Hipchat integration
 
@@ -327,4 +333,5 @@ Use `@here` in the monitor message to notify everybody in a given Hipchat channe
 [7]: /monitors/monitor_types/network
 [8]: /monitors/monitor_types/custom_check
 [9]: /monitors/monitor_types/event
-[10]: /monitors/faq/how-do-i-setup-conditional-contacts-and-messages-in-a-single-monitor
+[10]: https://api.slack.com/methods/usergroups.list
+[11]: /monitors/faq/how-do-i-setup-conditional-contacts-and-messages-in-a-single-monitor
