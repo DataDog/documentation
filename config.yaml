@@ -65,6 +65,11 @@ languages:
           url: "logs/"
           weight: 400
           parent: menu_references_getting_started
+        # - identifier: customnav_getting_started_categories_of_data
+        #   name: "Categories of data"
+        #   url: "getting_started/categories_of_data"
+        #   weight: 500
+        #   parent: menu_references_getting_started
 
         # AGENT
         - identifier: menu_references_agent
@@ -177,6 +182,12 @@ languages:
           name: "Troubleshooting"
           url: "agent/troubleshooting/"
           weight: 60
+          parent: menu_references_agent
+
+        - identifier: customnav_agentnav_security
+          name: "Security"
+          url: "agent/security"
+          weight: 80
           parent: menu_references_agent
 
         #- identifier: customnav_agentnav_faq
@@ -583,6 +594,13 @@ languages:
         #  url: "tracing/faq/"
         #  weight: 100
         #  parent: menu_references_tracing
+
+        - identifier: customnav_tracingnav_security
+          name: "Security"
+          url: "tracing/security"
+          weight: 60
+          parent: menu_references_tracing
+
         # TRACING/APM - Subnav end
 
         # LOGS
@@ -738,6 +756,13 @@ languages:
         #  url: "logs/faq/"
         #  weight: 90
         #  parent: menu_references_logs
+
+        - identifier: customnav_loggnav_security
+          name: "Security"
+          url: "logs/security"
+          weight: 100
+          parent: menu_references_logs
+
         # LOGS - Subnav end
 
         # DEVELOPERS
@@ -906,7 +931,7 @@ languages:
           url: "account_management/saml/okta"
           weight: 550
           parent: customnav_accountmanagementnav_saml
-        
+
         - identifier: customnav_accountmanagementnav_multi_organization
           name: "Multi-org accounts"
           url: "account_management/multi_organization/"
@@ -919,22 +944,50 @@ languages:
         #  parent: menu_references_account_management
         # ACCOUNT MANAGEMENT - Subnav end
 
+          # SECURITY
+        - identifier: menu_references_security
+          name: "Security"
+          url: "security/"
+          pre: "nav_security"
+          weight: 120
+        # SECURITY - Subnav start
+        - identifier: customnav_security_agent
+          name: "Agent"
+          url: "security/agent"
+          weight: 20
+          parent: menu_references_security
+        - identifier: customnav_security_tracing
+          name: "APM (Tracing)"
+          url: "security/tracing"
+          weight: 30
+          parent: menu_references_security
+        - identifier: customnav_security_logs
+          name: "Log Management"
+          url: "security/logs"
+          weight: 40
+          parent: menu_references_security
+        - identifier: customnav_security_other
+          name: "Other considerations"
+          url: "security/other"
+          weight: 50
+          parent: menu_references_security
+
         - identifier: menu_references_videos
           name: "Videos"
           url: "videos/"
           pre: "nav_videos"
-          weight: 130
+          weight: 140
         - identifier: menu_references_glossary
           name: "Glossary"
           url: "glossary/"
           pre: "nav_glossary"
-          weight: 120
+          weight: 130
 
         - identifier: menu_references_help
           name: "Help"
           url: "help/"
           pre: "nav_help"
-          weight: 140
+          weight: 150
   fr:
     disclaimer: "Cette page n'est pas encore disponible en Français, nous travaillons actuellement sur sa traduction.<br> Si vous avez des questions ou des retours sur ce projet de traduction, <a href=\"https://docs.datadoghq.com/fr/help/\">contactez-nous!</a>"
     weight: 0
@@ -1791,7 +1844,7 @@ languages:
           url: "account_management/saml/okta"
           weight: 550
           parent: customnav_accountmanagementnav_saml
-          
+
         - identifier: customnav_accountmanagementnav_multi_organization
           name: "Comptes multi-org"
           url: "account_management/multi_organization/"
