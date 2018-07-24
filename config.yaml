@@ -462,7 +462,7 @@ languages:
           weight: 170
           parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_javascript
-          name: "JavaScript"
+          name: "Node.js"
           url: "tracing/setup/javascript/"
           weight: 180
           parent: customnav_tracingnav_setup
@@ -1361,7 +1361,7 @@ languages:
           weight: 170
           parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_javascript
-          name: "JavaScript"
+          name: "Node.js"
           url: "tracing/setup/javascript/"
           weight: 180
           parent: customnav_tracingnav_setup

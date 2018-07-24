@@ -1,9 +1,9 @@
 ---
-title: Tracing JavaScript Applications
+title: Tracing Node.js Applications
 kind: Documentation
 aliases:
-- /tracing/javascript/
-- /tracing/languages/javascript/
+- /tracing/nodejs/
+- /tracing/languages/nodejs/
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-js"
   tag: "Github"
@@ -99,8 +99,8 @@ The `dd-trace` library includes support for a number of modules. If you would li
 
 | Module        | Versions    | Support Type    |
 | :----------   | :---------- | :-------------- |
-| [express][8]  | 4.x         | Beta            |
-| [graphql][22] | 0.13.x      | Beta            |
+| [express][8]  | 4.x         | Fully Supported |
+| [graphql][22] | 0.13.x      | Fully Supported |
 | [hapi][9]     |             | Coming Soon     |
 | [koa][10]     |             | Coming Soon     |
 | [restify][11] |             | Coming Soon     |
@@ -109,29 +109,29 @@ The `dd-trace` library includes support for a number of modules. If you would li
 
 | Module               | Support Type    |
 | :------------------- | :-------------- |
-| [http][12]           | Beta            |
-| [https][13]          | Beta            |
+| [http][12]           | Fully Supported |
+| [https][13]          | Fully Supported |
 
 #### Data Stores
 
-| Module                 | Versions    | Support Type |
-| :----------            | :---------- | :----------- |
-| [cassandra-driver][25] |             | Coming Soon  |
-| [elasticsearch][14]    | 15.x        | Beta         |
-| [ioredis][15]          |             | Coming Soon  |
-| [memcached][24]        |             | Coming Soon  |
-| [mongodb-core][16]     | 3.x         | Beta         |
-| [mysql][17]            | 2.x         | Beta         |
-| [mysql2][18]           | ^1.5        | Beta         |
-| [pg][19]               | 6.x         | Beta         |
-| [redis][20]            | ^2.6        | Beta         |
+| Module                 | Versions    | Support Type    |
+| :----------            | :---------- | :-------------- |
+| [cassandra-driver][25] |             | Coming Soon     |
+| [elasticsearch][14]    | 15.x        | Fully Supported |
+| [ioredis][15]          |             | Coming Soon     |
+| [memcached][24]        |             | Coming Soon     |
+| [mongodb-core][16]     | 3.x         | Fully Supported |
+| [mysql][17]            | 2.x         | Fully Supported |
+| [mysql2][18]           | ^1.5        | Fully Supported |
+| [pg][19]               | 6.x         | Fully Supported |
+| [redis][20]            | ^2.6        | Fully Supported |
 
 #### Workers
 
-| Module           | Versions    | Support Type |
-| :----------      | :---------- | :----------  |
-| [amqplib][21]*   | 0.5.x       | Beta         |
-| [kafka-node][26] |             | Coming Soon  |
+| Module           | Versions    | Support Type    |
+| :----------      | :---------- | :-------------- |
+| [amqplib][21]*   | 0.5.x       | Fully Supported |
+| [kafka-node][26] |             | Coming Soon     |
 
 **Note**: amqplib supports several message brokers including RabbitMQ and ActiveMQ.
 

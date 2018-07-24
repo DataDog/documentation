@@ -24,7 +24,7 @@ further_reading:
   text: Java language instrumentation
 - link: "tracing/setup/javascript"
   tag: "Documentation"
-  text: JavaScript language instrumentation
+  text: Node.js language instrumentation
 - link: "tracing/setup/php"
   tag: "Documentation"
   text: PHP language instrumentation

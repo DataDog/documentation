@@ -126,7 +126,7 @@ java -javaagent:/path/to/the/dd-java-agent.jar \
      -jar /your/app.jar
 ```
 
-#### JavaScript (beta)
+#### Node.js
 
 ```javascript
 const tracer = require('dd-trace').init({
