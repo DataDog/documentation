@@ -45,18 +45,18 @@ The tracer is configured using System Properties and Environment Variables as fo
 
 {{% table responsive="true" %}}
 
-| Config              | System Property        | Environment Variable      | Default            | Description                                                                                                                                                                                            |
-| :-----------------  | :--------------------  | :------------------------ | :----------------- | :----------                                                                                                                                                                                            |
-| ``service.name`     | `dd.service.name`      | `DD_SERVICE_NAME`         | `unnamed-java-app` | The name of a set of processes that do the same job. Used for grouping stats for your application.                                                                                                     |
-| `service.mapping`   | `dd.service.mapping`   | `DD_SERVICE_MAPPING`      | `null`             | (Example: `key1:value1,key2:value2`) Dynamically rename services via configuration. Useful for making databases have distinct names across different services.                                         |
-| `writer.type`       | `dd.writer.type`       | `DD_WRITER_TYPE`          | `DDAgentWriter`    | Default value sends traces to the trace Agent. Configuring with `LoggingWriter` instead writes traces out to the console.                                                                              |
-| `agent.host`        | `dd.agent.host`        | `DD_AGENT_HOST`           | `localhost`        | Hostname for where to send traces to. If using a containerized environment, configure this to be the host ip.  See our [docker docs][4] for additional detail.                                         |
-| `agent.port`        | `dd.agent.port`        | `DD_AGENT_PORT`           | `8126`             | Port number the Agent is listening on for configured host.                                                                                                                                             |
+| Config              | System Property        | Environment Variable      | Default            | Description                                                                                                                                                                        |
+| :-----------------  | :--------------------  | :------------------------ | :----------------- | :----------                                                                                                                                                                        |
+| ``service.name`     | `dd.service.name`      | `DD_SERVICE_NAME`         | `unnamed-java-app` | The name of a set of processes that do the same job. Used for grouping stats for your application.                                                                                 |
+| `service.mapping`   | `dd.service.mapping`   | `DD_SERVICE_MAPPING`      | `null`             | (Example: `key1:value1,key2:value2`) Dynamically rename services via configuration. Useful for making databases have distinct names across different services.                     |
+| `writer.type`       | `dd.writer.type`       | `DD_WRITER_TYPE`          | `DDAgentWriter`    | Default value sends traces to the trace Agent. Configuring with `LoggingWriter` instead writes traces out to the console.                                                          |
+| `agent.host`        | `dd.agent.host`        | `DD_AGENT_HOST`           | `localhost`        | Hostname for where to send traces to. If using a containerized environment, configure this to be the host ip.  See our [docker docs][4] for additional detail.                     |
+| `agent.port`        | `dd.agent.port`        | `DD_AGENT_PORT`           | `8126`             | Port number the Agent is listening on for configured host.                                                                                                                         |
 | `priority.sampling` | `dd.priority.sampling` | `DD_PRIORITY_SAMPLING`    | `false`            | Enable priority sampling to ensure distributed traces are complete or to require sampling of specific traces. See [Distributed tracing](#distributed-tracing) section for details. |
-| `trace.span.tags`   | `dd.trace.span.tags`   | `DD_TRACE_SPAN_TAGS`      | `null`             | (Example: `key1:value1,key2:value2`) A list of default tags to be added to every span. Tags of the same name added directly to a span will overwrite the defaults provided here.                       |
-| `trace.header.tags` | `dd.trace.header.tags` | `DD_TRACE_HEADER_TAGS`    | `null`             | (Example: `CASE-insensitive-Header:my-tag-name,User-ID:userId`) A map of header keys to tag names.  Automatically apply header values as tags on traces.                                               |
-| `trace.annotations` | `dd.trace.annotations` | `DD_TRACE_ANNOTATIONS`    | ([listed][10]      | (Example: `com.some.Trace;io.other.Trace`) A list of method annotations to treat as `@Trace`.                                                                                                          |
-| `trace.methods`     | `dd.trace.methods`     | `DD_TRACE_METHODS`        | `null`             | (Example: `package.ClassName[method1,method2,...];AnonymousClass$1[call]`) List of class/interface and methods to trace.  Similar to adding `@Trace`, but without changing code.                       |
+| `trace.span.tags`   | `dd.trace.span.tags`   | `DD_TRACE_SPAN_TAGS`      | `null`             | (Example: `key1:value1,key2:value2`) A list of default tags to be added to every span. Tags of the same name added directly to a span will overwrite the defaults provided here.   |
+| `trace.header.tags` | `dd.trace.header.tags` | `DD_TRACE_HEADER_TAGS`    | `null`             | (Example: `CASE-insensitive-Header:my-tag-name,User-ID:userId`) A map of header keys to tag names.  Automatically apply header values as tags on traces.                           |
+| `trace.annotations` | `dd.trace.annotations` | `DD_TRACE_ANNOTATIONS`    | ([listed][10]      | (Example: `com.some.Trace;io.other.Trace`) A list of method annotations to treat as `@Trace`.                                                                                      |
+| `trace.methods`     | `dd.trace.methods`     | `DD_TRACE_METHODS`        | `null`             | (Example: `package.ClassName[method1,method2,...];AnonymousClass$1[call]`) List of class/interface and methods to trace.  Similar to adding `@Trace`, but without changing code.   |
 {{% /table %}}
 
 **Note**:
@@ -136,12 +136,12 @@ Datastore tracing provides:
 
 `dd-java-agent` includes support for automatically tracing the following database frameworks/drivers.
 
-| Database        | Versions       |
-| :-------------  | :------------- |
-| JDBC            | N/A            |
-| MongoDB         | 3.0+           |
-| Cassandra       | 3.2+           |
-| Jedis           | 1.4+           |
+| Database       | Versions       |
+| :------------- | :------------- |
+| JDBC           | N/A            |
+| MongoDB        | 3.0+           |
+| Cassandra      | 3.2+           |
+| Jedis          | 1.4+           |
 
 `dd-java-agent` is also compatible with common JDBC drivers including:
 
@@ -162,9 +162,9 @@ Don't see your desired datastores? We're continually adding additional support, 
 
 `dd-java-agent` includes support for automatically tracing the following other frameworks.
 
-| Framework               | Versions |
-| :---------------------- | :------- |
-| Hystrix                 | 1.4+     |
+| Framework | Versions |
+| :------   | :-----   |
+| Hystrix   | 1.4+     |
 
 Don't see your desired framework? We're continually adding additional support, [check with our team][2] to see if we can help.
 
@@ -498,12 +498,12 @@ Priority sampling is disabled by default. To enable it, configure the `priority.
 
 Current Priority Values (more may be added in the future):
 
-| Sampling Value  | Effect                                                                                                      |
-| --------------- | :---------------------------------------------------------------------------------------------------------- |
-| `SAMPLER_DROP`  | The sampler automatically decided to not keep the trace. The Agent will drop it.                            |
-| `SAMPLER_KEEP`  | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side.  |
-| `USER_DROP`     | The user asked to not keep the trace. The Agent will drop it.                                               |
-| `USER_KEEP`     | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                      |
+| Sampling Value | Effect                                                                                                     |
+| --------       | :--------------------------------------------------                                                        |
+| `SAMPLER_DROP` | The sampler automatically decided to not keep the trace. The Agent will drop it.                           |
+| `SAMPLER_KEEP` | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side. |
+| `USER_DROP`    | The user asked to not keep the trace. The Agent will drop it.                                              |
+| `USER_KEEP`    | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                     |
 
 Manually set trace priority:
 ```java
