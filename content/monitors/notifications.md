@@ -296,7 +296,8 @@ Would produce this slack message:
 
 You can also mention **@here** or **@channel** using `<!here>` or `<!channel>`, respectively. 
 
-For user groups, use `<!subteam^GROUP_ID|GROUP_NAME>`. To find the `GROUP_ID`, [query the API for Slack with the method in Slack's documentation][10]. For example, for a user group named "testers" you would use the following syntax:
+For user groups, use `<!subteam^GROUP_ID|GROUP_NAME>`. To find the `GROUP_ID`, [query the `usergroups.list` API endpoint of Slack][10]. For example, for a user group named `testers` you would use the following syntax:
+
 ```
 <!subteam^12345|testers>
 ```
