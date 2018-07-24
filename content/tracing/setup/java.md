@@ -43,18 +43,21 @@ Finally, add the following JVM argument when starting your application in your I
 
 The tracer is configured using System Properties and Environment Variables as follows:
 
-| Config             | System Property       | Environment Variable      | Default            | Description |
-| :----------------- | :-------------------- | :------------------------ | :----------------- | :---------- |
-| service.name       | dd.service.name       | DD_SERVICE_NAME           | `unnamed-java-app` | The name of a set of processes that do the same job. Used for grouping stats for your application. |
-| service.mapping    | dd.service.mapping    | DD_SERVICE_MAPPING        | `null`             | (Example: `key1:value1,key2:value2`) Dynamically rename services via configuration. Useful for making databases have distinct names across different services. |
-| writer.type        | dd.writer.type        | DD_WRITER_TYPE            | `DDAgentWriter`    | Default value sends traces to the trace Agent. Configuring with `LoggingWriter` instead writes traces out to the console. |
-| agent.host         | dd.agent.host         | DD_AGENT_HOST             | `localhost`        | Hostname for where to send traces to. If using a containerized environment, configure this to be the host ip.  See our [docker docs][4] for additional detail. |
-| agent.port         | dd.agent.port         | DD_AGENT_PORT             | `8126`             | Port number the Agent is listening on for configured host. |
-| priority.sampling  | dd.priority.sampling  | DD_PRIORITY_SAMPLING      | `false`            | Enable priority sampling to ensure distributed traces are complete or to require sampling of specific traces. See [Sampling / distributed tracing](#sampling-distributed-tracing) section for details. |
-| trace.span.tags    | dd.trace.span.tags    | DD_TRACE_SPAN_TAGS        | `null`             | (Example: `key1:value1,key2:value2`) A list of default tags to be added to every span. Tags of the same name added directly to a span will overwrite the defaults provided here. |
-| trace.header.tags  | dd.trace.header.tags  | DD_TRACE_HEADER_TAGS      | `null`             | (Example: `CASE-insensitive-Header:my-tag-name,User-ID:userId`) A map of header keys to tag names.  Automatically apply header values as tags on traces. |
-| trace.annotations  | dd.trace.annotations  | DD_TRACE_ANNOTATIONS      | ([listed](https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37)) | (Example: `com.some.Trace;io.other.Trace`) A list of method annotations to treat as `@Trace`. |
-| trace.methods      | dd.trace.methods      | DD_TRACE_METHODS          | `null`              | (Example: `package.ClassName[method1,method2,...];AnonymousClass$1[call]`) List of class/interface and methods to trace.  Similar to adding `@Trace`, but without changing code. |
+{{% table responsive="true" %}}
+
+| Config              | System Property        | Environment Variable      | Default            | Description                                                                                                                                                                        |
+| :-----------------  | :--------------------  | :------------------------ | :----------------- | :----------                                                                                                                                                                        |
+| ``service.name`     | `dd.service.name`      | `DD_SERVICE_NAME`         | `unnamed-java-app` | The name of a set of processes that do the same job. Used for grouping stats for your application.                                                                                 |
+| `service.mapping`   | `dd.service.mapping`   | `DD_SERVICE_MAPPING`      | `null`             | (Example: `key1:value1,key2:value2`) Dynamically rename services via configuration. Useful for making databases have distinct names across different services.                     |
+| `writer.type`       | `dd.writer.type`       | `DD_WRITER_TYPE`          | `DDAgentWriter`    | Default value sends traces to the trace Agent. Configuring with `LoggingWriter` instead writes traces out to the console.                                                          |
+| `agent.host`        | `dd.agent.host`        | `DD_AGENT_HOST`           | `localhost`        | Hostname for where to send traces to. If using a containerized environment, configure this to be the host ip.  See our [docker docs][4] for additional detail.                     |
+| `agent.port`        | `dd.agent.port`        | `DD_AGENT_PORT`           | `8126`             | Port number the Agent is listening on for configured host.                                                                                                                         |
+| `priority.sampling` | `dd.priority.sampling` | `DD_PRIORITY_SAMPLING`    | `false`            | Enable priority sampling to ensure distributed traces are complete or to require sampling of specific traces. See [Distributed tracing](#distributed-tracing) section for details. |
+| `trace.span.tags`   | `dd.trace.span.tags`   | `DD_TRACE_SPAN_TAGS`      | `null`             | (Example: `key1:value1,key2:value2`) A list of default tags to be added to every span. Tags of the same name added directly to a span will overwrite the defaults provided here.   |
+| `trace.header.tags` | `dd.trace.header.tags` | `DD_TRACE_HEADER_TAGS`    | `null`             | (Example: `CASE-insensitive-Header:my-tag-name,User-ID:userId`) A map of header keys to tag names.  Automatically apply header values as tags on traces.                           |
+| `trace.annotations` | `dd.trace.annotations` | `DD_TRACE_ANNOTATIONS`    | ([listed][10]      | (Example: `com.some.Trace;io.other.Trace`) A list of method annotations to treat as `@Trace`.                                                                                      |
+| `trace.methods`     | `dd.trace.methods`     | `DD_TRACE_METHODS`        | `null`             | (Example: `package.ClassName[method1,method2,...];AnonymousClass$1[call]`) List of class/interface and methods to trace.  Similar to adding `@Trace`, but without changing code.   |
+{{% /table %}}
 
 **Note**:
 
@@ -79,6 +82,7 @@ Instrumentation may come from auto-instrumentation, the OpenTracing api, or a mi
 #### Web Frameworks
 
 Web Framework tracing provides:
+
 * Timing HTTP request to response
 * Tags for the HTTP request (status code, method, etc)
 * Error and stacktrace capturing
@@ -102,6 +106,7 @@ Don't see your desired web frameworks? We're continually adding additional suppo
 #### Networking Frameworks
 
 Networking tracing provides:
+
 * Timing request to response
 * Tags for the request (e.g. response code)
 * Error and stacktrace capturing
@@ -124,18 +129,19 @@ Don't see your desired networking framework? We're continually adding additional
 #### Datastores
 
 Datastore tracing provides:
+
 * Timing request to response
 * Query info (e.g. a sanitized query string)
 * Error and stacktrace capturing
 
 `dd-java-agent` includes support for automatically tracing the following database frameworks/drivers.
 
-| Database        | Versions       |
-| :-------------  | :------------- |
-| JDBC            | N/A            |
-| MongoDB         | 3.0+           |
-| Cassandra       | 3.2+           |
-| Jedis           | 1.4+           |
+| Database       | Versions       |
+| :------------- | :------------- |
+| JDBC           | N/A            |
+| MongoDB        | 3.0+           |
+| Cassandra      | 3.2+           |
+| Jedis          | 1.4+           |
 
 `dd-java-agent` is also compatible with common JDBC drivers including:
 
@@ -156,9 +162,9 @@ Don't see your desired datastores? We're continually adding additional support, 
 
 `dd-java-agent` includes support for automatically tracing the following other frameworks.
 
-| Framework               | Versions |
-| :---------------------- | :------- |
-| Hystrix                 | 1.4+     |
+| Framework | Versions |
+| :------   | :-----   |
+| Hystrix   | 1.4+     |
 
 Don't see your desired framework? We're continually adding additional support, [check with our team][2] to see if we can help.
 
@@ -166,17 +172,17 @@ Don't see your desired framework? We're continually adding additional support, [
 
 `dd-java-agent` ships with some newer instrumentation disabled by default.
 
-| Instrumentation                | Versions | JVM Arg to enable                                                             |
-| :--------------                | :------- | :----------------                                                             |
-| Elasticsearch Client           | 5.0+     | `-Ddd.integration.elasticsearch.enabled=true`                                 |
-| Netty Http Server and Client   | 4.0+     | `-Ddd.integration.netty.enabled=true`                                         |
-| HttpURLConnection              | all      | `-Ddd.integration.httpurlconnection.enabled=true`                             |
-| JSP Rendering                  | 2.3+     | `-Ddd.integration.jsp.enabled=true`                                           |
-| Akka-Http Server               | 10.0+    | `-Ddd.integration.akka-http.enabled=true`                                     |
-| Lettuce                        | 5.0+     | `-Ddd.integration.lettuce.enabled=true`                                       |
-| SpyMemcached                   | 2.12+    | `-Ddd.integration.spymemcached.enabled=true`                                  |
-| Ratpack                        | 1.4+     | `-Ddd.integration.ratpack.enabled=true`                                       |
-| Spark Java                     | 2.4+     | `-Ddd.integration.sparkjava.enabled=true -Ddd.integration.jetty.enabled=true` |
+| Instrumentation              | Versions | JVM Arg to enable                                                             |
+| :--------------              | :------- | :----------------                                                             |
+| Elasticsearch Client         | 5.0+     | `-Ddd.integration.elasticsearch.enabled=true`                                 |
+| Netty Http Server and Client | 4.0+     | `-Ddd.integration.netty.enabled=true`                                         |
+| HttpURLConnection            | all      | `-Ddd.integration.httpurlconnection.enabled=true`                             |
+| JSP Rendering                | 2.3+     | `-Ddd.integration.jsp.enabled=true`                                           |
+| Akka-Http Server             | 10.0+    | `-Ddd.integration.akka-http.enabled=true`                                     |
+| Lettuce                      | 5.0+     | `-Ddd.integration.lettuce.enabled=true`                                       |
+| SpyMemcached                 | 2.12+    | `-Ddd.integration.spymemcached.enabled=true`                                  |
+| Ratpack                      | 1.4+     | `-Ddd.integration.ratpack.enabled=true`                                       |
+| Spark Java                   | 2.4+     | `-Ddd.integration.sparkjava.enabled=true -Ddd.integration.jetty.enabled=true` |
 
 
 ## Manual Instrumentation
@@ -190,7 +196,7 @@ Do this either using the [Trace annotation](#trace-annotation) for simple method
 
 Tags are key-value pairs attached to spans. All tags share a single namespace.
 
-The Datadog UI uses specific tags to set UI properties, such as an application's service name. A full list of these tags can be found in the [Datadog](https://github.com/DataDog/dd-trace-java/blob/master/dd-trace-api/src/main/java/datadog/trace/api/DDTags.java) and [OpenTracing](https://github.com/opentracing/opentracing-java/blob/master/opentracing-api/src/main/java/io/opentracing/tag/Tags.java) APIs.
+The Datadog UI uses specific tags to set UI properties, such as an application's service name. A full list of these tags can be found in the [Datadog][11] and [OpenTracing][12] APIs.
 
 #### Custom Tags
 
@@ -359,7 +365,7 @@ class InstrumentedClass {
 
 In this case, you dont need to call `scope.close()`.
 
-If you’re not using `dd-java-agent.jar`, you must register a configured tracer with `GlobalTracer`. This can be easily done by calling `GlobalTracer.register(new DDTracer())` early on in your application startup (ie, main method).
+If you’re not using `dd-java-agent.jar`, you must register a configured tracer with `GlobalTracer`. For this call `GlobalTracer.register(new DDTracer())` early on in your application startup (ie, main method).
 
 ```java
 import datadog.opentracing.DDTracer;
@@ -492,12 +498,12 @@ Priority sampling is disabled by default. To enable it, configure the `priority.
 
 Current Priority Values (more may be added in the future):
 
-| Sampling Value  | Effect                                                                                                      |
-| --------------- | :---------------------------------------------------------------------------------------------------------- |
-| SAMPLER_DROP    | The sampler automatically decided to not keep the trace. The Agent will drop it.                            |
-| SAMPLER_KEEP    | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side.  |
-| USER_DROP       | The user asked to not keep the trace. The Agent will drop it.                                               |
-| USER_KEEP       | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                      |
+| Sampling Value | Effect                                                                                                     |
+| --------       | :--------------------------------------------------                                                        |
+| `SAMPLER_DROP` | The sampler automatically decided to not keep the trace. The Agent will drop it.                           |
+| `SAMPLER_KEEP` | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side. |
+| `USER_DROP`    | The user asked to not keep the trace. The Agent will drop it.                                              |
+| `USER_KEEP`    | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                     |
 
 Manually set trace priority:
 ```java
@@ -561,6 +567,7 @@ log4j2 XML Pattern:
 ```
 
 Logback XML Pattern:
+
 ```
 <Pattern>
     %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} %X{ddTraceID} %X{ddSpanID} - %msg%n
@@ -598,3 +605,6 @@ Java APM has minimal impact on the overhead of an application:
 [7]: https://docs.datadoghq.com/integrations/java/
 [8]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
 [9]: http://bytebuddy.net/
+[10]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
+[11]: https://github.com/DataDog/dd-trace-java/blob/master/dd-trace-api/src/main/java/datadog/trace/api/DDTags.java
+[12]: https://github.com/opentracing/opentracing-java/blob/master/opentracing-api/src/main/java/io/opentracing/tag/Tags.java
