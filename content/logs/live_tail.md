@@ -23,7 +23,7 @@ The Live Tail feature gives you the ability to see all your log events in near r
 1. All logs ingested by Datadog are displayed. ([It's logging without limits][2].)
 2. Displayed logs have been processed.
 3. The stream can be paused.
-4. You can't go back in the past.
+4. You can't go back in time.
 
 This feature allows you, for instance, to check if a process has correctly started, or if a new deployment went smoothly.
 
@@ -54,7 +54,7 @@ Click on the gear at the top right of the page to activate one of the options be
 
 ## Filtering the log Stream
 
-A valid query into the search bar displays logs that match your search criteria. 
+A valid query in the search bar displays logs that match your search criteria. 
 The search syntax is the same in the Live Tail views as in the other Log views, but here, your query is matched against all of the ingested logs and not just the indexed ones.
 
 ### JSON attributes

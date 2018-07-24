@@ -36,7 +36,7 @@ Use the query to control what's displayed in your Log Analytics:
     
     {{< img src="logs/analytics/top_bottom_button.png" alt="top bottom button" responsive="true" style="width:20%;">}}
     
-5. Choose the graph Timesteps.
+5. Choose the Timesteps graph.
   Changing the global timeframe changes the list of available Timesteps values.
 
     {{< img src="logs/analytics/timesteps.png" alt="Timestep" responsive="true" style="width:30%;">}}

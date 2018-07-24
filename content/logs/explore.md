@@ -29,9 +29,10 @@ In this view you can:
 
 ## Search bar
 
-All search parameters are contained in the url, so it is very simple to share your view.
+All of the search parameters are contained within the URL, so you can share your view simply sharing the URL.
 
 ### Search syntax
+
 A query is composed of terms and operators.
 
 There are two types of terms:
@@ -98,7 +99,7 @@ For instance, to search logs that contain `user=12345` the following search must
 
 `user\=JaneDoe`
 
-The same logic must be applied to spaces within log attributes. It is not recommended to have spaces in log attributes but in such a case, spaces require escaping.
+The same logic must be applied to spaces within log attributes. Log attributes should not contain spaces, but in such a case, spaces must be escape.
 If an attribute was called `user.first name`, perform a search on this attribute by escaping the space:
 
 `@user.first\ name:myvalue`
