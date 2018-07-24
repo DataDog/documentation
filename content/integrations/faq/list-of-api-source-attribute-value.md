@@ -197,6 +197,7 @@ kind: faq
 |Teamcity|TEAMCITY|
 |Tokumx|TOKUMX|
 |Tomcat|TOMCAT|
+|Travis Ci|TRAVISCI|
 |Upstart|UPSTART|
 |User|DOGWEBPUBLISHER|
 |Users|DOGWEBPUBLISHER|
