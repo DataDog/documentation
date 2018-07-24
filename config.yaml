@@ -463,7 +463,7 @@ languages:
           parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_javascript
           name: "Node.js"
-          url: "tracing/setup/javascript/"
+          url: "tracing/setup/nodejs/"
           weight: 180
           parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_dotnet
@@ -1362,7 +1362,7 @@ languages:
           parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_javascript
           name: "Node.js"
-          url: "tracing/setup/javascript/"
+          url: "tracing/setup/nodejs/"
           weight: 180
           parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_dotnet
