@@ -1,14 +1,15 @@
 {{ $.Scratch.Add "meta_image" "" }}
 {{ $meta_image := $.Scratch.Get "meta_image" }}
 
-{{ if $.Title }}
+<!-- {{ if $.Title }}
+    {{ $.Scratch.Add "meta_title" $.Title }}
     {{ $.Scratch.Add "meta_title" $.Title }}
 {{ else if $.Params.title }}
     {{ $.Scratch.Add "meta_title" $.Params.title }}
 {{ else }}
     {{ $.Scratch.Add "meta_title" .Site.Params.home.meta_title }}
 {{ end }}
-{{ $meta_title := $.Scratch.Get "meta_title" }}
+{{ $meta_title := $.Scratch.Get "meta_title" }} -->
 
 {{ if $.Description }}
     {{ $.Scratch.Add "meta_desc" $.Description }}
