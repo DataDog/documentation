@@ -3,7 +3,6 @@
 
 {{ if $.Title }}
     {{ $.Scratch.Add "meta_title" $.Title }}
-    {{ $.Scratch.Add "meta_title" $.Title }}
 {{ else if $.Params.title }}
     {{ $.Scratch.Add "meta_title" $.Params.title }}
 {{ else }}
@@ -36,7 +35,6 @@
 
 <!-- Open Graph data -->
 <meta property="og:title" content="{{ $meta_title }} | Datadog"/>
-<!-- <meta property="og:title" content="test og"/> -->
 <meta property="og:type" content="article"/>
 <meta property="og:url" content="{{ $.Permalink }}"/>
 {{ if $meta_image}}<meta property="og:image" content="{{.Site.Params.img_url}}images{{ $meta_image }}"/>{{ end }}
