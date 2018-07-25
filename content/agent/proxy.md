@@ -206,7 +206,7 @@ Assuming that the supervisor file is found at `<SUP_FILE>`
 sed -i 's/ddagent.py/ddagent.py --sslcheck=0/' <SUP_FILE>
 ```
 
-For the Windows Agent (Starting from Agent version 3.9.2), edit your configuration file `datadog.conf` and add this option:
+For the Windows Agent, edit your configuration file `datadog.conf` and add this option:
 
 ```
 skip_ssl_validation: yes

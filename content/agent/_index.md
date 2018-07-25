@@ -165,7 +165,7 @@ permissions: if you are able to open `datadog.yaml`, you are able to use the GUI
 | [Windows server 64-bit][13]        | Windows server 2008r2 or above |
 | [Windows 64-bit][13]               | Windows 7 or above             |
 
-**Note**: Source install may work on operating systems not listed here and is
+**Note**: Source install may work on operating systems not listed here and is supported on a best effort basis.
 
 ## Further Reading
 

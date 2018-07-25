@@ -5,7 +5,7 @@ further_reading:
 - link: "logs/processing"
   tag: "Documentation"
   text: Learn how to process your logs
-- link: "logs/parsing"
+- link: "logs/processing/parsing"
   tag: "Documentation"
   text: Learn more about parsing
 - link: "logs/faq/how-to-investigate-a-log-parsing-issue"
@@ -68,8 +68,8 @@ However, this default timestamp does not always reflect the actual value that mi
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/preferences
-[2]: /logs/parsing/#Parsingdates
-[3]: /logs/parsing/#matcher
+[2]: /logs/processing/parsing/#Parsingdates
+[3]: /logs/processing/parsing/#matcher
 [4]: /logs/processing/#log-date-remapper
 [5]: /logs/#reserved-attributes
 [6]: /logs/#edit-reserved-attributes
@@ -77,4 +77,4 @@ However, this default timestamp does not always reflect the actual value that mi
 [8]: https://en.wikipedia.org/wiki/Unix_time
 [9]: https://www.ietf.org/rfc/rfc3164.txt
 [10]: /logs/processing
-[11]: https://docs.datadoghq.com/logs/parsing/#parsing-dates
+[11]: https://docs.datadoghq.com/logs/processing/parsing/#parsing-dates

@@ -103,7 +103,7 @@ languages:
           url: logs/processing/
           weight: 40
         - identifier: customnav_lognav_parsing
-          url: logs/parsing/
+          url: logs/processing/parsing/
           weight: 50
 
 params:

@@ -3,7 +3,7 @@ title: Processing
 kind: documentation
 description: "Parse & Enrich your logs to create valuable facets & metrics in the Logs Explorer."
 further_reading:
-- link: "logs/parsing"
+- link: "logs/processing/parsing"
   tag: "Documentation"
   text: Learn more about parsing
 - link: "logs/faq/how-to-investigate-a-log-parsing-issue"
@@ -221,7 +221,7 @@ Contact support if you reach one of these limits as Datadog might be able to pro
 
 [1]: /logs/explore/#facets
 [2]: /logs/explore/#search-bar
-[3]: /logs/parsing
+[3]: /logs/processing/parsing
 [4]: /logs/processing/#log-date-remapper
 [5]: https://en.wikipedia.org/wiki/Syslog#Severity_level
 [6]: https://docs.datadoghq.com/getting_started/tagging/#tags-best-practices

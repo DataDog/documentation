@@ -118,7 +118,7 @@ env:
     valueFrom:
       fieldRef:
         fieldPath: status.hostIP
-  - name: DD_AGENT_PORT
+  - name: DD_AGENT_SERVICE_PORT
     value: 8126
 ```
 
