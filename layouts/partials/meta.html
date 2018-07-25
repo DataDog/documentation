@@ -34,7 +34,8 @@
 {{ if $meta_image}}<meta name="twitter:image:src" content="{{.Site.Params.img_url}}images{{ $meta_image }}">{{ end }}
 
 <!-- Open Graph data -->
-<meta property="og:title" content="{{ $meta_title }}"/>
+<!-- <meta property="og:title" content="{{ $meta_title }}"/> -->
+<meta property="og:title" content="test og"/>
 <meta property="og:type" content="article"/>
 <meta property="og:url" content="{{ $.Permalink }}"/>
 {{ if $meta_image}}<meta property="og:image" content="{{.Site.Params.img_url}}images{{ $meta_image }}"/>{{ end }}
