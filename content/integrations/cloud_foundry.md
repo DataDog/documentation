@@ -99,6 +99,8 @@ If you are a [meta-buildpack][28] user, our buildpack can be used as a decorator
 
 ### Configuration
 
+#### Metric Collection
+
 **Set an API Key in your environment to enable the buildpack**:
 
 ```shell
@@ -106,6 +108,28 @@ If you are a [meta-buildpack][28] user, our buildpack can be used as a decorator
 cf set-env <YOUR_APP> DD_API_KEY <DD_API_KEY>
 # restage the application to get it to pick up the new environment variable and use the buildpack
 cf restage <YOUR_APP>
+```
+
+#### Log Collection
+
+To start collecting logs from your application in CloudFoundry, the puppy-agent contained in the buildpack needs to be run and log collection enabled.
+
+```
+cf set-env $YOUR_APP_NAME RUN_PUPPY true
+cf set-env $YOUR_APP_NAME DD_LOGS_ENABLED true
+# restage the application to get it to pick up the new environment variable and use the buildpack
+cf restage $YOUR_APP_NAME
+```
+
+By default the agent collects logs from Stdout/Stderr and listen to the 10514 TCP port.
+It is possible to ask the agent to listen on a different TCP port if you are streaming logs from your application in TCP.
+And in this case you might want to disable the log collection from Stdout/Stderr by using the following configuration:
+
+```
+# override the TCP port
+cf set-env $YOUR_APP_NAME DD_LOGS_CONFIG_TCP_FORWARD_PORT 10514
+# disable log collection on stdout/stderr
+cf set-env $YOUR_APP_NAME DISABLE_STD_LOG_COLLECTION true
 ```
 
 ### Build
