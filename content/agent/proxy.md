@@ -42,7 +42,7 @@ proxy:
 #     - host2
 ```
 
-[Refer to our log collection documentation page to learn how to forward your logs with a proxy][].
+[Refer to our log collection documentation page to learn how to forward your logs with a proxy][7].
 
 ##### Agent v5
 
