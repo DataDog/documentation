@@ -12,6 +12,7 @@ short_description: "Track the health of your Cloud Foundry VMs and the jobs they
 categories:
 - provisioning
 - configuration & deployment
+- log collection
 doc_link: https://docs.datadoghq.com/integrations/cloud_foundry/
 ddtype: check
 ---
