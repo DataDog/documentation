@@ -215,7 +215,7 @@ Tracing:
     - name: apm-client
       link: https://github.com/chonton/apm-client
       authors: Chas Honton
-  - Javascript:
+  - Node.js:
     - name: dd-trace-js
       link: https://github.com/DataDog/dd-trace-js
       official: true
