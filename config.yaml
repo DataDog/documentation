@@ -90,7 +90,7 @@ languages:
           weight: 110
           parent: customnav_agentnav_basic_usage
         - identifier: centos
-          name: "CentOs"
+          name: "CentOS"
           url: "agent/basic_agent_usage/centos/"
           weight: 115
           parent: customnav_agentnav_basic_usage
@@ -1047,7 +1047,7 @@ languages:
           weight: 110
           parent: customnav_agentnav_basic_usage
         - identifier: centos
-          name: "CentOs"
+          name: "CentOS"
           url: "agent/basic_agent_usage/centos/"
           weight: 115
           parent: customnav_agentnav_basic_usage
