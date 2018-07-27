@@ -42,7 +42,7 @@ proxy:
 #     - host2
 ```
 
-[Refer to our log collection documentation page to learn how to forward your logs with a proxy][].
+[Refer to our log collection documentation page to learn how to forward your logs with a proxy][7].
 
 ##### Agent v5
 
@@ -319,4 +319,4 @@ to
 [4]: /agent/#start-stop-restart-the-agent/#windows
 [5]: https://app.datadoghq.com/infrastructure
 [6]: http://www.haproxy.org/#perf
-[7]: /logs/log_collection/#using_a_proxy_for_logs
+[7]: /logs/log_collection/#using-a-proxy-for-logs
