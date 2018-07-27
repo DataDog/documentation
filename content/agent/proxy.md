@@ -89,7 +89,7 @@ defaults
     timeout server 5s
     timeout connect 5s
 
-# This declares a view into HAProxy statistics, on port 3835
+# This declares a view into HAProxy statistics, on port 3833
 # You do not need credentials to view this page and you can
 # turn it off once you are done with setup.
 listen stats
@@ -173,7 +173,7 @@ skip_ssl_validation: true
 
 Finally [restart the Agent][4].
 
-To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3835` as well as the [Infrastructure Overview][5].
+To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3833` as well as the [Infrastructure Overview][5].
 
 ##### Agent v5
 
@@ -214,7 +214,7 @@ skip_ssl_validation: yes
 
 Finally [restart the Agent][4].
 
-To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3835` as well as the [Infrastructure Overview][5].
+To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3833` as well as the [Infrastructure Overview][5].
 
 ### Proxy log forwarding with HAProxy
 **This feature is only available for Agent v6**
@@ -241,7 +241,7 @@ defaults
     timeout server 5s
     timeout connect 5s
 
-# This declares a view into HAProxy statistics, on port 3835
+# This declares a view into HAProxy statistics, on port 3833
 # You do not need credentials to view this page and you can
 # turn it off once you are done with setup.
 listen stats
