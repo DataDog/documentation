@@ -113,11 +113,11 @@ The preceding queries were both grouped by the `key1` tag, just like the query f
 
 #### Multi-alert monitor
 
-The default function fills in empty intervals in the time series that it receives. It does not create time series for groups that are absent (how would it know which groups to create?). 
+The default function fills in empty intervals in the time series that it receives. It does not create time series for groups that are absent, since it does not know which groups to create.
 
 ##### Dogstatsd counters
 
-The agent automatically sends zeros for five minutes after the last value was reported for dogstatsd counters. It is sometimes possible to use this feature to automatically resolve monitors for such metrics. Note that agent version 6 allows you to configure the amount of time zeroes is sent.
+The agent automatically sends zeroes for five minutes after the last value was reported for DogStatsD counters. It is sometimes possible to use this feature to automatically resolve monitors for such metrics. Note that Agent version 6 allows you to configure the amount of time zeroes are sent.
 
 ## Timeshift
 
