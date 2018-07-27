@@ -18,15 +18,13 @@ further_reading:
 
 ## Overview
 
-This page outlines the basic features of the Datadog Agent.
-If you haven't installed the Agent yet, instructions can be found
-[in the Datadog Agent integration page][1].
+This page outlines the basic features of the Datadog Agent. If you haven't installed the Agent yet, instructions can be found in the [Datadog Agent integration page][1].
 
 The process to upgrade from the previous version of the Agent is to re-run the installation.
 
 ## Commands
 
-Datadog Agent has some commands and only the _lifecycle commands_ (i.e. `start`/`stop`/`restart`/`status` on the Agent service) should be run with `sudo service`/`sudo systemctl`, all other commands need to be run with the `datadog-agent` command.
+Only the _lifecycle commands_ (i.e. `start`/`stop`/`restart`/`status` on the Agent service) run via `sudo service`/`sudo systemctl`. All other commands must be run via the `datadog-agent` command.
 
 | Agent v5                                          | Agent v6                                               | Notes                              |
 | -----------------------------------------------   | ---------------------------------------                | -----------------------------      |
@@ -39,20 +37,20 @@ Datadog Agent has some commands and only the _lifecycle commands_ (i.e. `start`/
 | `sudo service datadog-agent`                      | `sudo datadog-agent --help`                            | Display command usage              |
 | `sudo -u dd-agent -- dd-agent check <check_name>` | `sudo -u dd-agent -- datadog-agent check <check_name>` | Run a check                        |
 
-More information about the metrics, events, and service checks for an [integrations][2] can be retrieved with the check command:
-```shell
+More information about the metrics, events, and service checks for an [integrations][2] can be retrieved with the `check` command:
+```
 sudo service datadog-agent check [integration]
 ```
 
-Add the check_rate argument to get the most recent values for rates:
-```shell
+Add the `check_rate` argument to get the most recent values for rates:
+```
 sudo service datadog-agent check [integration] check_rate
 ```
 
-**NB**: If `service` is not available on your system, use:
+**Note**: If `service` is not available on your system, use:
 
-* on `upstart`-based systems: `sudo initctl start/stop/restart datadog-agent`
-* on `systemd`-based systems: `sudo systemctl start/stop/restart datadog-agent`
+* `upstart`-based systems: `sudo initctl start/stop/restart datadog-agent`
+* `systemd`-based systems: `sudo systemctl start/stop/restart datadog-agent`
 
 [Learn more about Service lifecycle commands][4]
 
@@ -72,12 +70,10 @@ Configuration files for [integrations][2]:
 
 ## Troubleshooting
 
-Run the info or status command to see the state of the Agent.
-The Agent logs are located in the `/var/log/datadog/` directory:
+Run the info or status command to see the state of the Agent. Agent logs are located in the `/var/log/datadog/` directory:
 
-* For Agent v6 all logs are in the `agent.log` file
-* For Agent v5 logs are in:
-    
+* For Agent v6, all logs are consolidated in `agent.log`
+* For Agent v5, logs are split into:
     * `datadog-supervisord.log`
     * `collector.log`
     * `dogstatsd.log`
@@ -86,32 +82,36 @@ The Agent logs are located in the `/var/log/datadog/` directory:
 If you're still having trouble, [our support team][3] will be glad to provide further assistance.
 
 ## Switch between Agent v5 and v6
+
 ### Upgrade to Agent 6
 
 A script is available to automatically install or upgrade the new Agent. It sets up the repos and installs the package for you; in case of upgrade, the import tool also searches for an existing `datadog.conf` from a prior version and converts Agent and checks configurations according to the new file format and filesystem layout.
+
 #### One-step install
-##### To Upgrade
 
-The Agent 6.x installer can automatically convert your 5.x style Agent configuration at upgrade:  
+##### Upgrade
 
-```shell
- DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
+The Agent v6 installer can automatically convert v5 configurations during upgrade:
+
+```bash
+DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
 ```
 
-**Note:** the import process won't automatically move custom Agent checks, this is by design since we cannot guarantee full backwards compatibility out of the box.
+**Note**: The import process won’t automatically move custom Agent checks. This is by design as we cannot guarantee full backwards compatibility out of the box.
 
-##### To Install Fresh
+##### Fresh install
 
 To install on a clean box (or have an existing Agent 5 install from which you do not wish to import the configuration) provide an api key:
 
-```shell
- DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
+```bash
+DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
 ```
 
 #### Manual install
-1. Set up Datadog's Yum repo on your system by creating /etc/yum.repos.d/datadog.repo with the contents:
 
-    ```
+1. Set up Datadog's Yum repo on your system by creating `/etc/yum.repos.d/datadog.repo` with the contents:
+
+    ```ini
     [datadog]
     name = Datadog, Inc.
     baseurl = https://yum.datadoghq.com/stable/6/x86_64/
@@ -120,7 +120,7 @@ To install on a clean box (or have an existing Agent 5 install from which you do
     gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
     ```
 
-2. Update your local yum repo and install the Agent:
+2. Update your local Yum repo and install the Agent:
 
     ```
     sudo yum makecache
@@ -130,40 +130,41 @@ To install on a clean box (or have an existing Agent 5 install from which you do
 
 3. Copy the example config into place and plug in your API key:
 
-    ```
+    ```bash
     sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_API_KEY>/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
     ```
 
-4. Re-start the Agent on Centos 7 and above:
+4. Re-start the Agent.
 
+    * Centos 7 and above:
     ```
     sudo systemctl restart datadog-agent.service
     ```
 
-5. Re-start the Agent on Centos 6:
-
+    * Centos 6:
     ```
     sudo initctl start datadog-agent
     ```
 
 ### Downgrade to Agent v5
 
-1. Set up apt so it can download through https
-    ```shell
+1. Add HTTPS compatibility to `apt`:
+
+    ```
     sudo apt-get update
     sudo apt-get install apt-transport-https
     ```
 
-2. Remove Agent 6 Repo and Ensure the stable repo is present
+2. Remove the Agent v6 repository and ensure that the `stable` repo is present:
 
-    ```shell
+    ```bash
     sudo rm /etc/yum.repos.d/datadog.repo [ ! -f /etc/apt/sources.list.d/datadog.list ] &&  echo 'deb https://apt.datadoghq.com/ stable main' | sudo tee /etc/apt/sources.list.d/datadog.list
     sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 382E94DE
     ```
 
-3. Update apt and downgrade the Agent
+3. Update `apt` and downgrade the Agent:
 
-    ```shell
+    ```
     sudo apt-get update
     sudo apt-get remove datadog-agent
     sudo apt-get install datadog-agent
