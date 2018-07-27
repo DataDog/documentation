@@ -122,9 +122,9 @@ cf set-env $YOUR_APP_NAME DD_LOGS_ENABLED true
 cf restage $YOUR_APP_NAME
 ```
 
-By default the agent collects logs from Stdout/Stderr and listen to the 10514 TCP port.
-It is possible to ask the agent to listen on a different TCP port if you are streaming logs from your application in TCP.
-And in this case you might want to disable the log collection from Stdout/Stderr by using the following configuration:
+By default, the Agent collects logs from `stdout`/`stderr` and listens to TCP port 10514.
+It is possible to ask the Agent to listen on a different TCP port if you are streaming logs from your application in TCP.
+To disable log collection from `stdout`/`stderr, use the following configuration:
 
 ```
 # override the TCP port
