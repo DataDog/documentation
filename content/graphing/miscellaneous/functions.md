@@ -223,6 +223,10 @@ Delta value between points for a given metric
 
 ## Smoothing
 
+### asap()
+
+The `asap()` function applies a moving average to the time series, using the [ASAP algorithm][5] to choose the optimal span for the moving average. When applied to a group-by query, `asap()` uses the same span for all groups.
+
 ### ewma_3()
 
 Exponentially weighted moving average with a span of 3.
@@ -361,3 +365,4 @@ Highlight outliers series; see our [Outlier Monitor][3] page for more info.
 [2]: /monitors/monitor_types/anomaly
 [3]: /monitors/monitor_types/outlier
 [4]: /graphing/faq/as_count_validation
+[5]: http://futuredata.stanford.edu/asap/
