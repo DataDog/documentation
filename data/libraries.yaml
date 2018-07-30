@@ -36,6 +36,11 @@ Classic:
       link: https://github.com/adamkittelson/dogstatsd-elixir
       dogstatsd: true
       authors: Adam Kittelson
+    - name: ex-datadog-plug
+      link: https://github.com/Tubitv/ex-datadog-plug
+      api: true
+      authors: Tyr Chen, Tubi
+      notes: A plug for logging response times
     - name: mtx
       link: https://github.com/synrc/mtx
       dogstatsd: true
