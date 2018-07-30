@@ -40,7 +40,7 @@ Classic:
       link: https://github.com/Tubitv/ex-datadog-plug
       api: true
       authors: Tyr Chen, Tubi
-      notes: A plug for logging response times.
+      notes: A plug for logging response times
     - name: mtx
       link: https://github.com/synrc/mtx
       dogstatsd: true
