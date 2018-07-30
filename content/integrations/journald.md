@@ -85,6 +85,16 @@ logs:
       - sshd.service
 ```
 
+##### Collect Container tags
+
+Tags are critical for finding information in highly dynamic containerized environments. Which is why the agent is able to collect container tags on journald logs.
+
+This should work directly when the agent is running from the host. If you are using the containerized version of the Datadog Agent, simply mount the path of the journal and the following directory:
+
+- `/etc/machine-id`: this ensure that the agent can query the journal that is stored on the host.
+
+Finally, [restart the agent][2].
+
 ## Troubleshooting
 
 Need help? Contact [Datadog Support][3].
