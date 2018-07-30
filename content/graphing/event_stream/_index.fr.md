@@ -126,7 +126,7 @@ Devrait être codé en: `http://catchpoint.com/session_id%3A123456`
 * `@support-datadog` – Envoie un message au support Datadog directement depuis votre flux.
 * `@all` – Envoie une notification à tous les membres de votre organisation.
 * `@yourname` – Avertit l'utilisateur spécifique nommé 'yourname'.
-* `@test@test.com` Envoie un courriel à test@test.com.
+* `@test@example.com` Envoie un courriel à `test@example.com`.
 * Si vous avez HipChat, Slack, Webhooks, Pagerduty ou VictorOps vous pouvez utiliser:
     * `@hipchat-[room-name]` ou `@slack-[room-name]` – affiche l'événement ou le graphique dans cette room de conversation.
     * `@webhook` – Alertez ou déclenchez tout ce qui est attaché à ce webhook. Découvrez [notre article de blog sur les Webhooks][events-1]!

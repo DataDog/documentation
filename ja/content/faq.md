@@ -928,7 +928,7 @@ by default you'll get the average across all hosts. -->
 <li><code>@support-datadog</code> – this will reach Datadog support directly when posted in your stream.</li>
 <li><code>@all</code> – this will send a notification to all members of your organization.</li>
 <li><code>@yourname</code> – this will notify the specific user named ‘yourname’.</li>
-<li><code>@test@test.com</code> this will send an email to test@test.com.</li>
+<li><code>@test@example.com</code> this will send an email to test@example.com.</li>
 <li>If you have HipChat, Slack, Webhooks, Pagerduty or VictorOps you can use:
 <ul>
 <li><code>@hipchat-[room-name]</code> or <code>@slack-[room-name]</code> – posts the event or graph to that chat room.</li>
