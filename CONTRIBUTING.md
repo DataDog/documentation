@@ -102,8 +102,8 @@ This section sets the record straight (for the Docs site, not for all humankind)
     * **GOOD**: “Metrics, events, and service checks.”
 
 * **Use the em dash (—) with no spaces between adjacent words**: 
-    * **BAD**: “The rest - Ok, Skipped, Ignored, and No Data - are not alert-worthy”. 
-    * **GOOD**: “The rest—Ok, Skipped, Ignored, and No Data—are not alert-worthy.”
+    * **BAD**: “The rest - Ok, Skipped, and No Data - are not alert-worthy”. 
+    * **GOOD**: “The rest—Ok, Skipped, and No Data—are not alert-worthy.”
 
 * **Use the present tense**: Avoid future tense most of the time. 
     * **BAD**: “Once you enable the integration, the Agent will start sending metrics to Datadog.” 
