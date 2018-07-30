@@ -284,7 +284,7 @@ Filter configuration allows you to automatically change y-axis bounds based on a
 
 For y-axis filtering, there are two ways to set up the configuration.
 
-To begin, there is a simple configuration where you specify an absolute value or a percentage and all top values or all values that sit within the top `X%` are cutoff.
+To begin, there is a simple configuration where you specify an absolute value or a percentage. All top values or all values that sit within the top `X%` are cut off.
 
 Examples:
 
