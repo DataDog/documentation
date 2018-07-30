@@ -28,11 +28,12 @@ Enclave delivers your metrics to a Datadog account. [Consult the dedicated Aptib
 
 ### Auth0
 [This extension][30] takes your Auth0 logs and ships them to Datadog.
-### Consul
-Publish consul service counts into Datadog via [DogStatsD](/developers/dogstatsd) with [this library][17].
 
 ### CLI Management
 A [set of tools][34] to backup/restore dashboards and monitors, and configure users via a command line interface.
+
+### Consul
+Publish consul service counts into Datadog via [DogStatsD](/developers/dogstatsd) with [this library][17].
 
 ### Dogscaler
 Scale up auto-scale groups based on the results of a Datadog query with [Dogscaler][18].
