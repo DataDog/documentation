@@ -273,19 +273,18 @@ That's it! Now, all your logs are going to be in proper JSON automatically under
 
 ## Agentless logging
 
-It is possible to stream logs to Datadog directly (or to the Agent).
-This is not the recommended setup as handling connection issues should not be done directly in your code. But it might not be possible to log into a file when the code is running on a machine that cannot be accessed.
+It is possible to stream logs from your application to Datadog or to the Datadog Agent directly. This is not the recommended setup as handling connection issues should not be done directly in your application, but it might not be possible to log into a file when your application is running on a machine that cannot be accessed.
 
 ### SeriLog 
 
-Install our Serilog sink that send events and logs staight away to Datadog. By default the sink will use a TCP connection over SSL.
+Install Datadog Serilog sink that send events and logs to Datadog. By default the sink uses a TCP connection over SSL.
 Run the following command in the Package Manager Console: 
 
 ```
 PM> Install-Package Serilog.Sinks.Datadog.Logs
 ```
 
-Then, initialize the logger directly to your application. Do not forget to add your API Key.
+Then, initialize the logger directly in your application. Do not forget to [add your `<API_KEY>`][3].
 
 ```
 var log = new LoggerConfiguration()
@@ -293,7 +292,7 @@ var log = new LoggerConfiguration()
     .CreateLogger();
 ```
 
-You can override the default behavior by manually specifing the following properties (endpoint, port, useSSL):
+You can override the default behavior by manually specifing the following properties (`endpoint`, `port`, `useSSL`):
 
 ```
 var config = new DatadogConfiguration("intake.logs.datadoghq.com", 10516, true);
@@ -310,3 +309,4 @@ New logs are now directly sent to Datadog.
 
 [1]: /logs/processing/parsing
 [2]: /logs/#tail-existing-files
+[3]: https://app.datadoghq.com/account/settings#api
