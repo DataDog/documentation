@@ -30,7 +30,7 @@ A top level domain (TLD) in an example must reference a TLD permanently reserved
 * `.invalid`
 * `.localhost`
 
-Same goes for second level domain names three are reserved: 
+Same goes for second level domain names, three are reserved: 
 
 * `example.com`
 * `example.net`
