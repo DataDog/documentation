@@ -55,11 +55,10 @@ sudo touch /etc/logrotate.d/dd-agent_ACLs
 Example file:
 
 ```
-{
+/var/log/apache/*.log {
  postrotate
- /usr/bin/setfacl -m g:dd-agent:rx /var/log/apache
- /usr/bin/setfacl -m g:dd-agent:rx /var/log/nginx
- /usr/bin/setfacl -m g:dd-agent:rx /var/log/myapp
+ /usr/bin/setfacl -m g:dd-agent:rx /var/log/apache/access.log
+ /usr/bin/setfacl -m g:dd-agent:rx /var/log/apache/error.log
  endscript
 }
 ```
@@ -67,7 +66,7 @@ Example file:
 Check the ACL status of a file with:
 
 ```
-getfacl /var/log/<application-directory>
+getfacl /var/log/apache/access.log
 ```
 
 ## Setting permissions when ACLs are not present
