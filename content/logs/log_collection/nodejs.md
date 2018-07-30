@@ -1,6 +1,8 @@
 ---
 title: NodeJS log collection
 kind: documentation
+aliases:
+  - /logs/languages/nodejs
 further_reading:
 - link: "logs/processing"
   tag: "Documentation"

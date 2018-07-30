@@ -240,6 +240,37 @@ Then configure your proxy to forward logs to the endpoint `agent-intake.logs.dat
 
 [Refer to our Agent proxy documentation page to learn how to forward your metrics with a proxy][8].
 
+## How to get the most of your application logs
+
+When logging stack traces, there are specific attributes that have a dedicated UI display within your Datadog application such as the logger name, the current thread, the error type and of course the stack trace itself.
+
+{{< img src="logs/languages/stack_trace.png" style="width:80%;" alt="Stack trace" responsive="true" >}}
+
+To enable those functionalities use the following attribute names:
+
+* `logger.name`: Name of the logger
+* `logger.thread_name`: Name of the current thread
+* `error.stack`: Actual stack trace
+* `error.message`: Error message contained in the stack trace
+* `error.kind`: The type or "kind" of an error (i.e "Exception", "OSError", ...)
+
+**Note**: By default, integration pipelines attempt to remap default logging library parameters to those specific attributes and parse stack traces or traceback to automatically extract the `error.message` and `error.kind`.
+
+## Send your application logs in JSON
+
+For integration frameworks, we provide guidelines on how to log in JSON into a file. JSON-formatted logging helps handle multiline application logs, and is automatically parsed by Datadog.
+
+{{< whatsnext desc="Select your framework in the list below:" >}}
+    {{< nextlink href="/logs/log_collection/csharp" >}}Csharp{{< /nextlink >}}
+    {{< nextlink href="/logs/log_collection/go" >}}Go{{< /nextlink >}}
+    {{< nextlink href="/logs/log_collection/java" >}}Java{{< /nextlink >}}
+    {{< nextlink href="/logs/log_collection/nodejs" >}}Nodejs{{< /nextlink >}}
+    {{< nextlink href="/logs/log_collection/php" >}}PHP{{< /nextlink >}}
+    {{< nextlink href="/logs/log_collection/python" >}}Python{{< /nextlink >}}
+    {{< nextlink href="/logs/log_collection/ruby" >}}Ruby{{< /nextlink >}}
+{{< /whatsnext >}}
+
+
 ### The Advantage of Collecting JSON-formatted logs
 
 Datadog automatically parses JSON-formatted logs. For this reason, when you have control over the log format you send to Datadog, we encourage you to format them as JSON to avoid the need for custom parsing rules.

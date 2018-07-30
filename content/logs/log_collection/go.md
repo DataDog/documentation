@@ -1,6 +1,8 @@
 ---
 title: Go log Collection
 kind: documentation
+aliases:
+  - /logs/languages/go
 further_reading:
 - link: "logs/processing"
   tag: "Documentation"

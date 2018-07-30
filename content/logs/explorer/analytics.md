@@ -4,6 +4,7 @@ kind: documentation
 description: "Perform Log Analytics"
 aliases:
   - /logs/graph
+  - /logs/analytics
 further_reading:
 - link: "logs/processing"
   tag: "Documentation"

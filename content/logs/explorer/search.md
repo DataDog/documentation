@@ -1,7 +1,9 @@
 ---
 title: Search
 kind: documentation
-description: "The Logs Explorer is your Datadog home base for troubleshooting and exploration over your logs."
+description: "Search through all your logs."
+aliases:
+    - /logs/search
 further_reading:
 - link: "logs/analytics"
   tag: "Documentation"
@@ -13,19 +15,6 @@ further_reading:
   tag: "Documentation"
   text: Learn more about parsing
 ---
-
-## Overview
-
-The Logs explorer is your home base for troubleshooting and exploration:
-
-{{< img src="logs/explore/explore_view_with_comments.png" alt="Explore view with comments" responsive="true" >}}
-
-In this view you can:
-
-* [Interact with the Time range](#time-range)
-* [Display lists of logs](#logstream)
-* [Use facets to filter your Logstream](#facets)
-* [Enter search queries](#search-bar)
 
 ## Search bar
 
@@ -106,13 +95,7 @@ If an attribute was called `user.first name`, perform a search on this attribute
 
 ### Saved Searches
 
-Don't lose time building the same views everyday. Saved searches contain your search query, columns and time horizon. They are then available in the search bar thanks to the auto-complete matching whether the search name or query.
-
-{{< img src="logs/explore/saved_search.png" alt="Saved Search" responsive="true" style="width:80%;">}}
-
-To delete a saved search, click on the bin icon under the log search drop-down:
-
-{{< img src="logs/explore/delete_saved_search.png" alt="Delete Saved Search" responsive="true" style="width:80%;">}}
+Don't lose time building the same views everyday. Saved views contain your search query, columns,time horizon and facet.
 
 ## Time Range
 
