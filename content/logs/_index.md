@@ -91,62 +91,6 @@ To see the logs that underlie a value or range of values in the graph, just clic
 
 Follow our [log graphing guide][23] to learn more about all the graphing option.
 
-## Log Processing
-
-For logs that originate from an integration, you can skip this section since Datadog’s integration processing pipelines will be automatically enabled and parse out your logs in appropriate and useful ways. Even for custom logs, if they are in JSON or Syslog format, we have integration processors to automatically extract meaningful attributes from the raw logs. As a result, you can get maximum value from many logs without any manual setup.
-
-That said, if you have modified your integration logs, or if your custom logs are not in JSON or Syslog format, you still have full control over how your logs are processed from the Processing Pipeline page in your centralized Datadog app. Thanks to this, in order to change how your log management consumes your logs, you do not need to change how you log, and you don’t need to deploy changes to server-side processing rules.
-
-### JSON logs
-
-As explained above, in Datadog we have [reserved attributes][24] such as timestamp, status, host, service, and even the log message.
-If you have different attribute names for those, no worries: we have [reserved attributes remappers][25] available in the pipeline.
-
-For example: A service generates the below logs:
-
-```json
-{
-    "myhost": "host123",
-    "myapp": "test-web-2",
-    "logger_severity": "Error",
-    "log": "cannot establish connection with /api/v1/test",
-    "status_code": 500
-}
-```
-
-Going to the pipeline and changing the default mapping to this one:
-
-{{< img src="logs/reserved_attribute_remapper.png" alt="Reserved attribute remapper" responsive="true" style="width:70%;">}}
-
-Would then give the following log:
-
-{{< img src="logs/log_post_remapping.png" alt="Log post remapping" responsive="true" style="width:70%;">}}
-
-### Custom log processing rules
-
-For integration logs, we automatically install a pipeline that takes care of parsing your logs as on this example for ELB logs:
-
-{{< img src="logs/elb_log_post_processing.png" alt="ELB log post processing" responsive="true" style="width:70%;">}}
-
-* A [pipeline][26] takes a filtered subset of incoming logs and applies over them a list of sequential processors.
-* A processor executes within a [pipeline][26] a data-structuring action ([Remapping an attribute][27], [Grok parsing][28]…) on a log.
-
-
-However we know that log formats can be totally custom which is why you can define custom processing rules.
-With any log syntax, you can extract all your attributes and, when necessary, remap them to more global or canonical attributes.
-
-So for instance with custom processing rules you can transform this log:
-
-{{< img src="logs/log_pre_processing.png" alt="Log pre processing" responsive="true" style="width:50%;">}}
-
-Into this one:
-
-{{< img src="logs/log_post_processing.png" alt="Log post processing" responsive="true" style="width:50%;">}}
-
-Follow our [parsing training guide][29] to learn more about parsing.
-We also have a [parsing best practice][30] and a [parsing troubleshooting][31] guide that might be interesting for you.
-There are many kinds of processors; find the full list and how to use them [here][32].
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
