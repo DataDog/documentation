@@ -87,11 +87,11 @@ logs:
 
 ##### Collect Container tags
 
-Tags are critical for finding information in highly dynamic containerized environments. Which is why the agent is able to collect container tags on journald logs.
+Tags are critical for finding information in highly dynamic containerized environments. Which is why the agent is able to collect container tags in journald logs.
 
-This should work directly when the agent is running from the host. If you are using the containerized version of the Datadog Agent, simply mount the path of the journal and the following directory:
+This should work automatically when the Agent is running from the host. If you are using the containerized version of the Datadog Agent, mount your journald path and the following directory:
 
-- `/etc/machine-id`: this ensure that the agent can query the journal that is stored on the host.
+- `/etc/machine-id`: this ensure that the Agent can query the journald that is stored on the host.
 
 Finally, [restart the agent][2].
 
