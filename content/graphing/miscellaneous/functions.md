@@ -109,7 +109,7 @@ default(avg:custom_metric{*} by {key1}, 0)
 +---------------------+-----------+-----------+
 ```
 
-The preceding queries were both grouped by the `key1` tag, just like the query for a multi alert monitor. If no time series are returned for a grouped query, the default function returns a single value, `*`:
+The preceding queries were both grouped by the `key1` tag, just like the query for a multi alert monitor. If no time series are returned for a grouped query, the default function returns a single value, `*`.
 
 #### Multi-alert monitor
 
