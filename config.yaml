@@ -742,13 +742,13 @@ languages:
            
         - identifier: customnav_lognav_archives
           name: "Archives"
-          url: "logs/archives"
+          url: "logs/archives/s3"
           weight: 80
           parent: menu_references_logs
         
         - identifier: customnav_lognav_archives_s3
           name: "AWS S3"
-          url: "logs/archiveS/s3"
+          url: "logs/archives/s3"
           weight: 810
           parent: customnav_lognav_archives
 
