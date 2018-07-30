@@ -273,11 +273,11 @@ That's it! Now, all your logs are going to be in proper JSON automatically under
 
 ## Agentless logging
 
-It is possible to stream logs from your application to Datadog or to the Datadog Agent directly. This is not the recommended setup as handling connection issues should not be done directly in your application, but it might not be possible to log into a file when your application is running on a machine that cannot be accessed.
+It is possible to stream logs from your application to Datadog or to the Datadog Agent directly. This is not the recommended setup as handling connection issues should not be done directly in your application, but it might not be possible to log to a file when your application is running on a machine that cannot be accessed.
 
 ### SeriLog 
 
-Install Datadog Serilog sink that send events and logs to Datadog. By default the sink uses a TCP connection over SSL.
+Install the Datadog Serilog sink, which send events and logs to Datadog. By default the sink uses a TCP connection over SSL.
 Run the following command in the Package Manager Console: 
 
 ```
@@ -292,7 +292,7 @@ var log = new LoggerConfiguration()
     .CreateLogger();
 ```
 
-You can override the default behavior by manually specifing the following properties (`endpoint`, `port`, `useSSL`):
+You can override the default behavior by manually specifying the following properties (`endpoint`, `port`, `useSSL`):
 
 ```
 var config = new DatadogConfiguration("intake.logs.datadoghq.com", 10516, true);
