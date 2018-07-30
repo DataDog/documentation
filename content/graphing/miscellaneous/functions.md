@@ -68,6 +68,8 @@ default(<EXPRESSION>, <DEFAULT_VALUE>)
 Like other functions, the default function is evaluated **after** [time and space aggregation][5]. If interpolation is enabled, the `default()` function first fills all empty values within the interpolation time limit with interpolated values. 
 It then adds points with the specified default value to every interval in the query's span that doesn't already have a value.
 
+Note: You should avoid using the `default()` function with the `as_count()` function.
+
 #### Example
 
 To demonstrate how the default function works, we created two points for a custom metric, each with a single `key:value` tag, with different values for each point:
