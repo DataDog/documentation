@@ -70,7 +70,7 @@ Classic:
   - Haskell:
     - name: Haskell Datadog Client
       link: https://github.com/iand675/datadog
-      authors:Ian Duncan
+      authors: Ian Duncan
       api: true
       dogstatsd: true
   - Java:
