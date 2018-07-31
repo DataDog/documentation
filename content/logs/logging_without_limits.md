@@ -5,7 +5,7 @@ description: Control the volume of logs indexed by Datadog
 aliases:
   - logs/dynamic_volume_control
 further_reading:
-- link: "logs/analytics"
+- link: "logs/explorer/analytics"
   tag: "Documentation"
   text: "Perform Log Analytics"
 - link: "logs/processing"
@@ -118,8 +118,8 @@ Enable or disable them in one click in the pipeline page:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/explore/#facets
-[2]: /logs/analytics/
-[3]: /logs/analytics/#dashboard
+[2]: /logs/explorer/analytics/
+[3]: /logs/explorer/analytics/#dashboard
 [4]: /monitors/monitor_types/log/
 [5]: https://app.datadoghq.com/logs/pipelines
 [6]: https://app.datadoghq.com/logs

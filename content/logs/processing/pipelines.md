@@ -16,15 +16,15 @@ Each log that comes through the pipelines is tested against every pipeline filte
 
 So for instance a processing pipeline can transform this log:
 
-{{< img src="logs/processing/original_log.png" alt="original log" responsive="true" style="width:50%;">}}
+{{< img src="logs/processing/pipelines/original_log.png" alt="original log" responsive="true" style="width:50%;">}}
 
 into this log:
 
-{{< img src="logs/processing/log_post_severity.png" alt=" Log post severity " responsive="true" style="width:50%;">}}
+{{< img src="logs/processing/pipelines/log_post_severity.png" alt=" Log post severity " responsive="true" style="width:50%;">}}
 
 With one single pipeline:
 
-{{< img src="logs/processing/pipeline_example.png" alt="Pipelines example" responsive="true" style="width:75%;">}}
+{{< img src="logs/processing/pipelines/pipeline_example.png" alt="Pipelines example" responsive="true" style="width:75%;">}}
 
 Pipelines take logs from a wide variety of formats and translate them into a common format in Datadog.
 
@@ -40,13 +40,13 @@ The filter syntax is the same as the [search bar][2].
 
 The logstream shows which logs your pipeline applies to:
 
-{{< img src="logs/processing/pipeline_filters.png" alt="Pipelines filters" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/pipelines/pipeline_filters.png" alt="Pipelines filters" responsive="true" style="width:80%;">}}
 
 ## Integration Pipelines
 
 These pipelines are read-only, but you can clone them and then edit the clone:
 
-{{< img src="logs/processing/cloning_pipeline.png" alt="Cloning pipeline" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/pipelines/cloning_pipeline.png" alt="Cloning pipeline" responsive="true" style="width:80%;">}}
 
 ## Further Reading
 

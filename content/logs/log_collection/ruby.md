@@ -2,7 +2,7 @@
 title: Ruby on Rails log collection
 kind: documentation
 aliases:
-  - /logs/languages/ruby
+  - /logs/log_collection/ruby
 further_reading:
 - link: "logs/processing"
   tag: "Documentation"
@@ -13,7 +13,7 @@ further_reading:
 - link: "logs/explore"
   tag: "Documentation"
   text: Learn how to explore your logs
-- link: "logs/analytics"
+- link: "logs/explorer/analytics"
   tag: "Documentation"
   text: "Perform Log Analytics"
 - link: "/logs/faq/log-collection-troubleshooting-guide"

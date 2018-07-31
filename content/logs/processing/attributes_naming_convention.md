@@ -2,8 +2,6 @@
 title: Attributes Naming Convention
 kind: documentation
 description: "Datadog log attributes naming convention."
-aliases:
-    - logs/parsing/
 further_reading:
 - link: "logs/processing"
   tag: "Documentation"

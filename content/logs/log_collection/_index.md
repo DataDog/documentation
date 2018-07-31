@@ -244,7 +244,7 @@ Then configure your proxy to forward logs to the endpoint `agent-intake.logs.dat
 
 When logging stack traces, there are specific attributes that have a dedicated UI display within your Datadog application such as the logger name, the current thread, the error type and of course the stack trace itself.
 
-{{< img src="logs/languages/stack_trace.png" style="width:80%;" alt="Stack trace" responsive="true" >}}
+{{< img src="logs/log_collection/stack_trace.png" style="width:80%;" alt="Stack trace" responsive="true" >}}
 
 To enable those functionalities use the following attribute names:
 
@@ -260,6 +260,10 @@ To enable those functionalities use the following attribute names:
 
 For integration frameworks, we provide guidelines on how to log in JSON into a file. JSON-formatted logging helps handle multiline application logs, and is automatically parsed by Datadog.
 
+##### The Advantage of Collecting JSON-formatted logs
+
+Datadog automatically parses JSON-formatted logs. For this reason, when you have control over the log format you send to Datadog, we encourage you to format them as JSON to avoid the need for custom parsing rules.
+
 {{< whatsnext desc="Select your framework in the list below:" >}}
     {{< nextlink href="/logs/log_collection/csharp" >}}Csharp{{< /nextlink >}}
     {{< nextlink href="/logs/log_collection/go" >}}Go{{< /nextlink >}}
@@ -269,77 +273,6 @@ For integration frameworks, we provide guidelines on how to log in JSON into a f
     {{< nextlink href="/logs/log_collection/python" >}}Python{{< /nextlink >}}
     {{< nextlink href="/logs/log_collection/ruby" >}}Ruby{{< /nextlink >}}
 {{< /whatsnext >}}
-
-
-### The Advantage of Collecting JSON-formatted logs
-
-Datadog automatically parses JSON-formatted logs. For this reason, when you have control over the log format you send to Datadog, we encourage you to format them as JSON to avoid the need for custom parsing rules.
-
-## Reserved attributes
-
-If your logs are formatted as JSON, be aware that some attributes are reserved for use by Datadog:
-
-### *date* attribute
-
-By default Datadog generates a timestamp and appends it in a date attribute when logs are received.
-However, if a JSON formatted log file includes one of the following attributes, Datadog interprets its value as the the log’s official date:
-
-* `@timestamp`
-* `timestamp`
-* `_timestamp`
-* `Timestamp`
-* `eventTime`
-* `date`
-* `published_date`
-* `syslog.timestamp`
-
-You can also specify alternate attributes to use as the source of a log's date by setting a [log date remapper processor][4]
-
-**Note**: Datadog rejects a log entry if its official date is older than 6 hours in the past.
-
-<div class="alert alert-info">
-The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (the milliseconds EPOCH format)</a>, and <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
-</div>
-
-### *message* attribute
-
-By default, Datadog ingests the value of message as the body of the log entry. That value is then highlighted and displayed in the [logstream][5], where it is indexed for [full text search][6].
-
-### *status* attribute
-
-Each log entry may specify a status level which is made available for faceted search within Datadog. However, if a JSON formatted log file includes one of the following attributes, Datadog interprets its value as the the log’s official status:
-
-* `status`
-* `severity`
-* `level`
-* `syslog.severity`
-
-If you would like to remap some status existing in the `status` attribute, you can do so with the [log status remapper][7]
-
-### *host* attribute
-
-Using the Datadog Agent or the RFC5424 format automatically sets the host value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog interprets its value as the the log’s host:
-
-* `host`
-* `hostname`
-* `syslog.hostname`
-
-### *service* attribute
-
-Using the Datadog Agent or the RFC5424 format automatically sets the service value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog interprets its value as the the log’s service:
-
-* `service`
-* `syslog.appname`
-
-### Edit reserved attributes
-
-You can now control the global hostname, service, timestamp, and status main mapping that are applied before the processing pipelines. This is particularly helpful if logs are sent in JSON or from an external Agent.
-
-{{< img src="logs/log_collection/reserved_attribute.png" alt="Reserved Attribute" responsive="true" style="width:80%;">}}
-
-To change the default values for each of the reserved attributes, go to the pipeline page and edit the `Reserved Attribute mapping`:
-
-{{< img src="logs/log_collection/reserved_attribute_tile.png" alt="Reserved Attribute Tile" responsive="true" style="width:80%;">}}
 
 [1]: /agent
 [2]: /getting_started/custom_metrics/

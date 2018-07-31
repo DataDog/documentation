@@ -1,20 +1,18 @@
 ---
 title: Log Explorer
 kind: documentation
-description: "The Logs Explorer is your Datadog home base for troubleshooting and exploration over your logs."
+description: "Search through all your logs and perform Log Analytics"
 aliases:
     - /logs/explore
+disable_toc: true
 ---
-
-## Overview
 
 The Logs explorer is your home base for troubleshooting and exploration:
 
-{{< img src="logs/explore/explore_view_with_comments.png" alt="Explore view with comments" responsive="true" >}}
+{{< img src="logs/explorer/explore_view_with_comments.png" alt="Explore view with comments" responsive="true" >}}
 
-In this view you can:
-
-* [Interact with the Time range](#time-range)
-* [Display lists of logs](#logstream)
-* [Use facets to filter your Logstream](#facets)
-* [Enter search queries](#search-bar)
+{{< whatsnext desc="In this view you can:" >}}
+    {{< nextlink href="/logs/explorer/search" >}}Search through all your logs.{{< /nextlink >}}
+    {{< nextlink href="/logs/explorer/analytics" >}}Perform Log Analytics.{{< /nextlink >}}
+    {{< nextlink href="/logs/explorer/saved_views" >}}Use Saved Views to automatically configure your Log explorer.{{< /nextlink >}}
+{{< /whatsnext >}}

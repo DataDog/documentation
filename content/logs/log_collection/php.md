@@ -2,7 +2,7 @@
 title: PHP log collection
 kind: documentation
 aliases:
-  - /logs/languages/php
+  - /logs/log_collection/php
 further_reading:
 - link: "/logs/processing"
   tag: "Documentation"
@@ -13,7 +13,7 @@ further_reading:
 - link: "/logs/explore"
   tag: "Documentation"
   text: Learn how to explore your logs
-- link: "logs/analytics"
+- link: "logs/explorer/analytics"
   tag: "Documentation"
   text: "Perform Log Analytics"
 - link: /logs/faq/log-collection-troubleshooting-guide
@@ -561,15 +561,15 @@ If you want to develop yours, [refer the Zend documentation][13].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs
-[2]: /logs/languages/php/#php-monolog
-[3]: /logs/languages/php/#php-symfony
-[4]: /logs/languages/php/#php-zend-log
-[5]: /logs/languages/php/#symfony-v2-v3
-[6]: /logs/languages/php/#ppi
-[7]: /logs/languages/php/#laravel
-[8]: /logs/languages/php/#silex
-[9]: /logs/languages/php/#lumen
-[10]: /logs/languages/php/#cakephp
+[2]: /logs/log_collection/php/#php-monolog
+[3]: /logs/log_collection/php/#php-symfony
+[4]: /logs/log_collection/php/#php-zend-log
+[5]: /logs/log_collection/php/#symfony-v2-v3
+[6]: /logs/log_collection/php/#ppi
+[7]: /logs/log_collection/php/#laravel
+[8]: /logs/log_collection/php/#silex
+[9]: /logs/log_collection/php/#lumen
+[10]: /logs/log_collection/php/#cakephp
 [11]: /logs/#custom-log-collection
 [12]: https://getcomposer.org/
 [13]: https://docs.zendframework.com/zend-log/processors/

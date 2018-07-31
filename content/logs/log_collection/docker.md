@@ -1,11 +1,13 @@
 ---
 title: Docker Log collection
 kind: documentation
+aliases:
+  - /logs/docker
 further_reading:
 - link: "logs/explore"
   tag: "Documentation"
   text: Learn how to explore your logs
-- link: "logs/analytics"
+- link: "logs/explorer/analytics"
   tag: "Documentation"
   text: "Perform Log Analytics"
 - link: "logs/processing"
@@ -14,8 +16,6 @@ further_reading:
 - link: "logs/processing/parsing"
   tag: "Documentation"
   text: Learn more about parsing
-aliases:
-  - /logs/docker
 ---
 
 ## Overview

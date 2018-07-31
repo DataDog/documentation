@@ -379,4 +379,4 @@ Monitor summary is a summary view of all monitors on your system, or a subset ba
 [8]: /graphing/dashboards/screenboard
 [9]: https://app.datadoghq.com/event/stream
 [10]: /graphing/event_stream/
-[11]: /logs/analytics/#log-graph-query
+[11]: /logs/explorer/analytics/#log-graph-query
