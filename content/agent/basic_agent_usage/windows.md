@@ -46,6 +46,8 @@ The following configuration command line options are available when installing t
 | `PROXY_USER`      | String | If using a proxy, sets your proxy user. [Learn more on using a proxy with the Datadog Agent][8].                                                                                                              |
 | `PROXY_PASSWORD`  | String | If using a proxy, sets your proxy password. [Learn more on using a proxy with the Datadog Agent][8].                                                                                                          |
 
+Note: if a valid `datadog.yaml` is found, that file will take precedence over specified command-line options. In practice this means, most of these options will only typically apply to fresh installs. Of course you can always modify the relevant options in the `datadog.yaml`.
+
 ## Agent Commands
 
 The execution of the Agent is controlled by the Windows Service Control Manager.
