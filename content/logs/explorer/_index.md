@@ -7,7 +7,7 @@ aliases:
 disable_toc: true
 ---
 
-The Logs explorer is your home base for troubleshooting and exploration:
+The Logs Explorer is your home base for troubleshooting and exploration:
 
 {{< img src="logs/explorer/explore_view_with_comments.png" alt="Explore view with comments" responsive="true" >}}
 
