@@ -22,14 +22,14 @@ To access the processing panel use the left `Logs` menu:
 
 ## Log Processing
 
-For logs that originate from an integration, you can skip this section since Datadog’s integration processing pipelines will be automatically enabled and parse out your logs in appropriate and useful ways. Even for custom logs, if they are in JSON or Syslog format, we have integration processors to automatically extract meaningful attributes from the raw logs. As a result, you can get maximum value from many logs without any manual setup.
+For logs that originate from an integration, skip this section since Datadog’s integration processing pipelines are automatically enabled and parse out your logs in appropriate and useful ways. Even for custom logs, if they are in JSON or Syslog format, we have integration processors to automatically extract meaningful attributes from the raw logs. As a result, you can get maximum value from many logs without any manual setup.
 
-That said, if you have modified your integration logs, or if your custom logs are not in JSON or Syslog format, you still have full control over how your logs are processed from the Processing Pipeline page in your centralized Datadog app. Thanks to this, in order to change how your log management consumes your logs, you do not need to change how you log, and you don’t need to deploy changes to server-side processing rules.
+That said, if you have modified your integration logs, or if your custom logs are not in JSON or Syslog format, you still have full control over how your logs are processed from the Processing Pipeline page. Thanks to this, in order to change how your log management consumes your logs, you do not need to change how you log, and you don’t need to deploy changes to server-side processing rules.
 
 ### JSON logs
 
-In Datadog we have [reserved attributes][24] such as `timestamp`, `status`, `host`, `service`, and even the log `message`.
-If you have different attribute names for those, no worries: we have [reserved attributes remappers][25] available in the pipeline.
+Datadog has [reserved attributes](#reserved-attributes) such as `timestamp`, `status`, `host`, `service`, and even the log `message`.
+If you have different attribute names for those, no worries: we have [reserved attributes remappers](#reserved-attributes) available in the pipeline.
 
 For example: A service generates the below logs:
 
@@ -168,14 +168,11 @@ Log events which do not comply with these limits might be transformed or truncat
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/explore/#facets
-[2]: /logs/explore/#search-bar
+[1]: /logs/explorer/search/#facets
+[2]: /logs/explorer/search/
 [3]: /logs/processing/parsing
 [4]: /logs/processing/processors/#log-date-remapper
-[5]: https://en.wikipedia.org/wiki/Syslog#Severity_level
-[6]: https://docs.datadoghq.com/getting_started/tagging/#tags-best-practices
 [7]: /logs/processing/#processing-pipelines
-[8]: /logs/processing/#reserved-attributes
 [9]: /logs/processing/#attribute-remapper
 [10]: /logs/processing/processors/#grok-parser
 [11]: /logs/processing/parsing/
@@ -183,6 +180,6 @@ Log events which do not comply with these limits might be transformed or truncat
 [13]: /logs/faq/how-to-investigate-a-log-parsing-issue/
 [14]: /logs/processing/processors/
 [15]: /help
-[16]: /logs/explore/#logstream
-[17]: /logs/explore/#search-bar
+[16]: /logs/explorer/search/#logstream
+[17]: /logs/explorer/search/
 [18]: /logs/processing/processors/#log-status-remapper

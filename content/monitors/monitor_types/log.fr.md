@@ -37,5 +37,5 @@ Les monitor de logs alertent lorsqu'un type de log spécifié dépasse un seuil 
 ## En apprendre plus
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/explore/#search-bar
+[1]: /logs/explorer/search/
 [2]: /monitors/notifications

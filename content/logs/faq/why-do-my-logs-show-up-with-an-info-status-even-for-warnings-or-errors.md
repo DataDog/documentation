@@ -1,6 +1,7 @@
 ---
 title: Why do my logs show up with an Info status even for Warnings or Errors?
 kind: faq
+disable_toc: true
 further_reading:
 - link: "logs/processing"
   tag: "Documentation"

@@ -6,7 +6,7 @@ description: "Parse your logs using the Grok Processor"
 
 {{< img src="logs/processing/processors/processors_overview.png" alt="original log" responsive="true">}}
 
-A processor executes within a [pipeline](#processing-pipelines) a data-structuring action ([Remapping an attribute](#attribute-remapper), [Grok parsing](#grok-parser)...) on a log.
+A processor executes within a [pipeline][1] a data-structuring action ([Remapping an attribute](#remapper), [Grok parsing](#grok-parser)...) on a log.
 
 The different kinds of processors are explained below.
 
@@ -16,7 +16,7 @@ Create custom grok rules to parse the full message or a specific attribute of yo
 
 {{< img src="logs/processing/processors/parser.png" alt="Parser" responsive="true" style="width:80%;" >}}
 
-Read more about this in the [parsing section][3]
+Read more about this in the [parsing section][2]
 
 ## Log Date Remapper
 
@@ -34,7 +34,6 @@ If your logs put their dates in an attribute not in this list, use the log date 
 {{< img src="logs/processing/processors/log_date_remapper.png" alt="Log date Remapper" responsive="true" style="width:80%;" >}}
 
 If your logs don't contain any of the default attributes and you haven't defined your own date attribute, Datadog timestamps the logs with the date it received them.  
-If the log's official timestamp is from a custom attribute, use a [date remapper processor][4] to override the log's default timestamp.
 
 ## Log Status Remapper
 
@@ -52,7 +51,7 @@ Into this log:
 
 However, beware that each incoming status value is mapped as follows:
 
-* Integers from 0 to 7 map to the [Syslog severity standards][5]
+* Integers from 0 to 7 map to the [Syslog severity standards][3]
 * Strings beginning with **emerg** or **f** (case-insensitive) map to **emerg (0)**
 * Strings beginning with **a** (case-insensitive) map to **alert (1)**
 * Strings beginning with **c** (case-insensitive) map to **critical (2)**
@@ -78,7 +77,7 @@ Into this log:
 
 {{< img src="logs/processing/processors/attribute_post_remapping.png" alt="attribute post remapping " responsive="true" style="width:40%;">}}
 
-Constraints on the tag/attribute name are explained in the [Tag Best Practice documentation][6]. Some additional constraints are applied as `:`, `/` or `,` are not allowed in the target tag/attribute name.
+Constraints on the tag/attribute name are explained in the [Tag Best Practice documentation][4]. Some additional constraints are applied as `:`, `/` or `,` are not allowed in the target tag/attribute name.
 
 ## URL Parser
 
@@ -128,3 +127,12 @@ Once the log has matched one of the processor query, it stops. Make sure they ar
 The message is a key attribute in Datadog. It is displayed in the message column of the log explorer and you can do full string search on it. Use this processor to define some attributes as the official log message, just enter the attribute path in the processor tile as follows:
 
 {{< img src="logs/processing/processors/message_processor.png" alt="Message processor" responsive="true" style="width:80%;">}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /logs/processing/pipelines
+[2]: /logs/processing/parsing
+[3]: https://en.wikipedia.org/wiki/Syslog#Severity_level
+[4]: /getting_started/tagging/#tags-best-practices

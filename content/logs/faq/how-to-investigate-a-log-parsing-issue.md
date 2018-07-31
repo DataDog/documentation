@@ -1,6 +1,7 @@
 ---
 title: How to investigate a log parsing issue
 kind: faq
+disable_toc: true
 further_reading:
 - link: "logs/faq/log-parsing-best-practice"
   tag: "FAQ"

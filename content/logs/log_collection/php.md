@@ -10,7 +10,7 @@ further_reading:
 - link: "/logs/processing/parsing"
   tag: "Documentation"
   text: Learn more about parsing
-- link: "/logs/explore"
+- link: "/logs/explorer"
   tag: "Documentation"
   text: Learn how to explore your logs
 - link: "logs/explorer/analytics"

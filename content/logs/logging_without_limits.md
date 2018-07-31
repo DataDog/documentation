@@ -117,10 +117,10 @@ Enable or disable them in one click in the pipeline page:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/explore/#facets
+[1]: /logs/explorer/search/#facets
 [2]: /logs/explorer/analytics/
 [3]: /logs/explorer/analytics/#dashboard
 [4]: /monitors/monitor_types/log/
 [5]: https://app.datadoghq.com/logs/pipelines
 [6]: https://app.datadoghq.com/logs
-[7]: /logs/explore/
+[7]: /logs/explorer/search

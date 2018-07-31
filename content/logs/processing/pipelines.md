@@ -36,7 +36,7 @@ For instance, a first pipeline can be defined to extract application log prefix 
 
 Filters let you limit what kinds of logs a pipeline applies to.
 
-The filter syntax is the same as the [search bar][2].
+The filter syntax is the same as the [search bar][1].
 
 **Be aware that the pipeline filtering is applied before any of the pipeline's processors, hence you cannot filter on an attribute that is extracted in the pipeline itself** 
 
@@ -53,3 +53,5 @@ These pipelines are read-only, but you can clone them and then edit the clone:
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /logs/explorer/search

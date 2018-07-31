@@ -13,8 +13,6 @@ further_reading:
   text: Learn how to process your logs
 ---
 
-## Search bar
-
 All of the search parameters are contained within the URL, so you can share your view simply sharing the URL.
 
 ### Search syntax
@@ -194,8 +192,8 @@ All measure have their own unit that is then used for display in the Log explore
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/processing/#attribute-remapper
+[1]: /logs/processing/processors/#attribute-remapper
 [2]: /logs/explorer/analytics
 [4]: /graphing/infrastructure/
-[5]: /integrations/
+[5]: /integrations/#cat-log-collection
 [6]: /getting_started/tagging/#tags-best-practices

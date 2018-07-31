@@ -279,7 +279,7 @@ Datadog automatically parses JSON-formatted logs. For this reason, when you have
 [2]: /getting_started/custom_metrics/
 [3]: /agent/faq/agent-commands/#start-stop-restart-the-agent
 [4]: /logs/processing/#log-date-remapper
-[5]: /logs/explore/#logstream
-[6]: /logs/explore/#search-bar
+[5]: /logs/explorer/search/#logstream
+[6]: /logs/explorer/search/
 [7]: /logs/processing/#log-status-remapper
 [8]: /agent/proxy

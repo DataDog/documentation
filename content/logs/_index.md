@@ -112,10 +112,10 @@ Follow our [log graphing guide][23] to learn more about all the graphing option.
 [15]: /agent/basic_agent_usage/kubernetes/#log-collection-setup
 [16]: /logs/log_collection/
 [17]: /logs/explore
-[18]: /logs/explore/#facets
-[19]: /logs/explore/#create-a-facet
-[20]: /logs/explore/#search-syntax
-[21]: /logs/explore/#measures
+[18]: /logs/explorer/search/#facets
+[19]: /logs/explorer/search/#create-a-facet
+[20]: /logs/explorer/search/#search-syntax
+[21]: /logs/explorer/search/#measures
 [22]: /logs/explorer/analytics/#related-logs
 [23]: /logs/explorer/analytics/
 [24]: /logs/log_collection/#reserved-attributes

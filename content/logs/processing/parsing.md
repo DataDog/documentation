@@ -266,5 +266,5 @@ MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-zA-Z0-9]*"):user.id}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/processing/#url-parser
-[2]: /logs/processing/#log-date-remapper
+[1]: /logs/processing/processors/#url-parser
+[2]: /logs/processing/processors/#log-date-remapper

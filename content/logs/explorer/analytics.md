@@ -103,8 +103,8 @@ Similar to the log explorer, click on a any graph in your dashboards to jump to 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/explore/#measures
-[2]: /logs/explore/#facets
+[1]: /logs/explorer/search/#measures
+[2]: /logs/explorer/search/#facets
 [3]: /getting_started/tagging
 [4]: /monitors/monitor_types/log
 [5]: /graphing/dashboards/timeboard
