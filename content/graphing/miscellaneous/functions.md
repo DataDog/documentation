@@ -44,7 +44,7 @@ Cumulative sum of `\[time delta] x \[value delta]` over all consecutive pairs of
 
 ## Interpolation
 
-### .fill()
+### fill()
 
 Choose how to interpolate missing values for a given metric.
 
@@ -54,6 +54,72 @@ This allows you to tweak the interpolation settings. It accepts a function to us
 * **last**: fills the gap with the value of the beginning of the gap
 * **zero**: fills the gap with a zero value
 * **null**: deactivates the interpolation
+
+### default()
+
+This function is in beta, [contact our support team][6] to activate it for your organization.
+
+The default function function fills empty intervals with a default or interpolated (within the interpolation time limit) value. It has the following syntax:
+
+```
+default(<EXPRESSION>, <DEFAULT_VALUE>)
+```
+
+Like other functions, the default function is evaluated **after** [time and space aggregation][5]. If interpolation is enabled, the `default()` function first fills all empty values within the interpolation time limit with interpolated values. 
+It then adds points with the specified default value to every interval in the query's span that doesn't already have a value.
+
+Note: You should avoid using the `default()` function with the `as_count()` function.
+
+#### Example
+
+To demonstrate how the default function works, we created two points for a custom metric, each with a single `key:value` tag, with different values for each point:
+
+```
+$ echo -n "custom_metric:60|g|#key1:val1" | nc -4u -w0 127.0.0.1 8125
+$ echo -n "custom_metric:60|g|#key1:val2" | nc -4u -w0 127.0.0.1 8125
+```
+
+When this metric is queried over the last hour, there is a single timestamp, because only one of the query's rollup intervals has a point:
+
+```
+avg:custom_metric{*} by {key1}
+
++---------------------+-----------+-----------+
+| Timestamp           | key1:val1 | key1:val2 |
+| ---------           | --------- | --------- |
+| 2017-10-25 20:08:00 | 60        | 60        |
++---------------------+-----------+-----------+
+```
+
+The default function adds the value passed as the second argument (it doesn't need to be `0`) to any interval that doesn't have data:
+
+```
+default(avg:custom_metric{*} by {key1}, 0)
+
++---------------------+-----------+-----------+
+| Timestamp           | key1:val1 | key1:val2 |
+| ---------           | --------- | --------- |
+| 2017-10-25 19:25:00 | 0         | 0         |
+...
+| 2017-10-25 20:07:30 | 0         | 0         |
+| 2017-10-25 20:08:00 | 60        | 60        |
+| 2017-10-25 20:08:30 | 0         | 0         |
+...
+| 2017-10-25 20:24:00 | 0         | 0         |
+| 2017-10-25 20:24:30 | 0         | 0         |
+| 2017-10-25 20:25:00 | 0         | 0         |
++---------------------+-----------+-----------+
+```
+
+The preceding queries were both grouped by the `key1` tag, just like the query for a multi alert monitor. If no time series are returned for a grouped query, the default function returns a single value, `*`.
+
+#### Multi-alert monitor
+
+The default function fills in empty intervals in the time series that it receives. It does not create time series for groups that are absent, since it does not know which groups to create.
+
+##### Dogstatsd counters
+
+The agent automatically sends zeroes for five minutes after the last value was reported for DogStatsD counters. It is sometimes possible to use this feature to automatically resolve monitors for such metrics. Note that Agent version 6 allows you to configure the amount of time zeroes are sent.
 
 ## Timeshift
 
@@ -275,9 +341,13 @@ The span value is the number of data points. So `median_9()` uses the last 9 dat
 
 ### .rollup()
 
+{{< vimeo 264998150 >}}
+
 Recommended for expert users only. Appending this function to the end of a query allows you to control the number of raw points rolled up into a single point plotted on the graph. The function takes two parameters, method and time: `.rollup(method,time)`
 
 The method can be sum/min/max/count/avg and time is in seconds. You can use either one individually, or both together like `.rollup(sum,120)`. We impose a limit of 350 points per time range. For example, if you're requesting `.rollup(20)` for a month-long window, we return data at a rollup far greater than 20 seconds in order to prevent returning a gigantic number of points.
+
+Note that rollups should usually be avoided in [monitor][7] queries, because of the possibility of misalignment between the rollup interval and the evaluation window of the monitor. The start and end of rollup intervals are aligned to UNIX time, not to the start and end of monitor queries, which means that a monitor may evaluate (and trigger on) an incomplete rollup interval containing only a small sample of data. To avoid this issue, users should delay the evaluation of the monitor by (at least) the length of the rollup interval.
 
 ### .as_count() or as_rate()
 
@@ -361,3 +431,6 @@ Highlight outliers series; see our [Outlier Monitor][3] page for more info.
 [2]: /monitors/monitor_types/anomaly
 [3]: /monitors/monitor_types/outlier
 [4]: /graphing/faq/as_count_validation
+[5]: /getting_started/from_the_query_to_the_graph/#proceed-to-space-aggregation
+[6]: /help
+[7]: /monitors/monitor_types/metric/

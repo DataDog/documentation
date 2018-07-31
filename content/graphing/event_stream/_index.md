@@ -127,7 +127,7 @@ Should be encoded to: `http://catchpoint.com/session_id%3A123456`
 * `@support-datadog` – Reaches Datadog support directly when posted in your stream.
 * `@all` – Sends a notification to all members of your organization.
 * `@yourname` – Notifies the specific user named ‘yourname’.
-* `@test@test.com` Sends an email to test@test.com.
+* `@test@example.com` Sends an email to `test@example.com`.
 * If you have HipChat, Slack, Webhooks, Pagerduty or VictorOps you can use:
     * `@hipchat-[room-name]` or `@slack-[room-name]` – posts the event or graph to that chat room.
     * `@webhook` – Alerts or triggers whatever is attached to that webhook. Check out [our blogpost on Webhooks][events-1]!
