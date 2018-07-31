@@ -40,7 +40,7 @@ Each type of widget is described below:
 The Timeseries visualization is great for showing one or more metrics, Log events, or APM events over time. The time window depends on what is selected on the [Timeboard][5] or in the graph on a [Screenboard][6].
 Timeseries can be displayed as **lines**, **areas**, and **bars**.
 
-**Note**: Define log Analytics query (still in beta) exactly as in the [Log explorer][11].
+**Note**: Define log Analytics query (still in beta) exactly as in the [Log Explorer][11].
 
 {{< img src="graphing/miscellaneous/visualization/references-graphing-timeseries-example.png" alt="Timeseries" responsive="true" style="width:80%;">}}
 

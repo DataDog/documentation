@@ -1,7 +1,7 @@
 ---
 title: Search
 kind: documentation
-description: "Search through all your logs."
+description: "Search through all of your logs."
 aliases:
     - /logs/search
 further_reading:
@@ -184,7 +184,7 @@ Once this is done, the value of this attribute is stored **for all new logs** an
 
 ### Select the Measure Unit
 
-All measure have their own unit that is then used for display in the Log explorer columns, Log stream widgets in dashboards, and in the Log Analytics.
+All measure have their own unit that is then used for display in the Log Explorer columns, Log stream widgets in dashboards, and in the Log Analytics.
 
 {{< img src="logs/explorer/search/edit_a_measure.png" alt="Edit a measure" responsive="true" style="width:80%;">}}
 

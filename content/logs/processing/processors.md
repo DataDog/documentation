@@ -124,7 +124,7 @@ Once the log has matched one of the processor query, it stops. Make sure they ar
 
 ## Log Message Remapper
 
-The message is a key attribute in Datadog. It is displayed in the message column of the log explorer and you can do full string search on it. Use this processor to define some attributes as the official log message, just enter the attribute path in the processor tile as follows:
+The message is a key attribute in Datadog. It is displayed in the message column of the Log Explorer and you can do full string search on it. Use this processor to define some attributes as the official log message, just enter the attribute path in the processor tile as follows:
 
 {{< img src="logs/processing/processors/message_processor.png" alt="Message processor" responsive="true" style="width:80%;">}}
 

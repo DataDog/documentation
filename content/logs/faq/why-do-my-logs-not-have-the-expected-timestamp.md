@@ -21,7 +21,7 @@ However, this default timestamp does not always reflect the actual value that mi
 {{< img src="logs/faq/log_timestamp_1.png" alt="Example of log with timestamp" responsive="true" style="width:75%;">}}
 
 1. **Displayed timestamp**.  
-    The first thing to understand is how the log timestamp (visible from the log explorer and at the top section of the contextual panel) is generated.  
+    The first thing to understand is how the log timestamp (visible from the Log Explorer and at the top section of the contextual panel) is generated.  
 
     Timestamps are stored in UTC and displayed in the user local timezone.
     On the above screenshot my local profile is set to `UTC+1` therefore the reception time of my log was `11:06:16.807 UTC`.  

@@ -93,11 +93,11 @@ Export your Log Analytics:
 
 **This functionality is still in beta, [contact our support team][6] to activate it for your organization.**
 
-Export [Log Analytics][7] from the Log explorer or build them directly in your [Dashboard][8] alongside metrics and traces.
+Export [Log Analytics][7] from the Log Explorer or build them directly in your [Dashboard][8] alongside metrics and traces.
 
 {{< img src="logs/explorer/analytics/log_graph_in_dashboard.png" alt="Log Analytics in dashboard" responsive="true" style="width:90%;">}}
 
-Similar to the log explorer, click on a any graph in your dashboards to jump to [the most related logs][9].
+Similar to the Log Explorer, click on a any graph in your dashboards to jump to [the most related logs][9].
 
 ## Further Reading
 
