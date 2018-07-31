@@ -162,7 +162,7 @@ apm_config:
     endpoint: https://haproxy.example.com:3835
 
 process_config:
-    url: https://haproxy.example.com:3836
+    process_dd_url: https://haproxy.example.com:3836
 ```
 
 Then edit the `datadog.yaml` Agent configuration file and set `skip_ssl_validation` to `true`. This is needed to make the Agent ignore the  discrepancy between the hostname on the SSL certificate (`app.datadoghq.com`) and your HAProxy hostname:
