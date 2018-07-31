@@ -2,7 +2,7 @@
 title: PHP log collection
 kind: documentation
 aliases:
-  - /logs/log_collection/php
+  - /logs/languages/php
 further_reading:
 - link: "/logs/processing"
   tag: "Documentation"

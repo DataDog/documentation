@@ -4,7 +4,7 @@ kind: documentation
 description: "Parse your logs using the Grok Processor"
 ---
 
-## Overview
+{{< img src="logs/processing/processors/processors_overview.png" alt="original log" responsive="true">}}
 
 A processor executes within a [pipeline](#processing-pipelines) a data-structuring action ([Remapping an attribute](#attribute-remapper), [Grok parsing](#grok-parser)...) on a log.
 

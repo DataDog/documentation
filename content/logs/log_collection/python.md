@@ -2,7 +2,7 @@
 title: Python log collection
 kind: documentation
 aliases:
-  - /logs/log_collection/python
+  - /logs/languages/python
 further_reading:
 - link: "logs/processing"
   tag: "Documentation"

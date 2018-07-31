@@ -4,6 +4,8 @@ kind: documentation
 description: "Parse your logs using the Grok Processor"
 ---
 
+{{< img src="logs/processing/pipelines/pipelines_overview.png" alt="original log" responsive="true">}}
+
 ## Pipelines Goal
 
 **A processing pipeline takes a filtered subset of incoming logs and applies over them a list of sequential processors.**

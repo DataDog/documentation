@@ -2,7 +2,7 @@
 title: Java log collection
 kind: documentation
 aliases:
-  - /logs/log_collection/java
+  - /logs/languages/java
 further_reading:
 - link: "logs/processing"
   tag: "Documentation"

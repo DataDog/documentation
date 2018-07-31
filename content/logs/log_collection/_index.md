@@ -4,6 +4,7 @@ kind: Documentation
 description: "Configure your Datadog Agent to gather logs from your host, containers, and services."
 aliases:
   - /logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers
+  - /logs/languages
 ---
 
 ## Getting started with the Agent
