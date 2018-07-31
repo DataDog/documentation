@@ -31,8 +31,8 @@ Traditional web proxies are supported natively by the Agent. If you need to conn
 
 ### Agent v6
 
-With Agent v6 you can set different proxy servers for `https` and `http` requests in your `datadog.yaml` file. The Agent always uses `https` to send data to Datadog, but integrations might use `http` to collect metrics from different software.
-No matter the proxied queries, you can activate SSL or not on your proxy server. Find below some configuration examples for your `datadog.yaml` file:
+With Agent v6, you can set different proxy servers for `https` and `http` requests in `datadog.yaml`. The Agent uses `https` to send data to Datadog, but integrations might use `http`.
+No matter the proxied queries, you can activate SSL on your proxy server. Below are some configuration examples for your `datadog.yaml` file:
 
 Setting an HTTP proxy for all `https` queries:
 
@@ -70,21 +70,21 @@ proxy:
 
 #### Proxy with environment variables
 
-Starting with Agent v6.4, you can set you proxy settings through environment variables:
+Starting with Agent v6.4, you can set your proxy settings through environment variables:
 
-- `DD_PROXY_HTTPS`: Sets a proxy server for `https` queries.
-- `DD_PROXY_HTTP`: Sets a proxy server for `http` queries.
-- `DD_NO_PROXY`: Sets a list of host that should bypass the proxy (a space-separated list).
+* `DD_PROXY_HTTPS`: Sets a proxy server for `https` queries.
+* `DD_PROXY_HTTP`: Sets a proxy server for `http` queries.
+* `DD_NO_PROXY`: Sets a list of hosts that should bypass the proxy. The list is space-separated.
 
-Environment variables have precedence over values in the `datadog.yaml` file. If the environment variables are present with an empty value (e.g. ``DD_HTTP_PROXY=""``), the Agent uses those empty value instead of ignoring it and using lower-precedence options.
+Environment variables have precedence over values in the `datadog.yaml` file. If the environment variables are present with an empty value (e.g. ``DD_HTTP_PROXY=""``), the Agent uses those empty values instead of lower-precedence options.
 
-On Unix host, system-wide proxy might be specified using standard environment variables: `HTTPS_PROXY`, `HTTP_PROXY` and `NO_PROXY`. The agent uses those if present. Be careful, as such variables also impacts every request from integrations, including orchestrators (docker, ECS, Kubernetes, ...).
+On Unix hosts, a system-wide proxy might be specified using standard environment variables, such as `HTTPS_PROXY`, `HTTP_PROXY`, and `NO_PROXY`. The Agent uses these if present. Be careful, as such variables also impact every request from integrations, including orchestrators like docker, ECS, and Kubernetes.
 
-To wrap up, the Agent always uses in order:
+The Agent uses the following values in order of precedence:
 
- 1. `DD_PROXY_HTTPS`, `DD_PROXY_HTTP`, and `DD_NO_PROXY` first if present,
- 2. `HTTPS_PROXY`, `HTTP_PROXY`, and `NO_PROXY` second if present, 
- 3. Values inside the `datadog.yaml` file last.
+1. `DD_PROXY_HTTPS`, `DD_PROXY_HTTP`, and `DD_NO_PROXY` environment variables
+2. `HTTPS_PROXY`, `HTTP_PROXY`, and `NO_PROXY` environment variables
+3. Values inside `datadog.yaml`
 
 [Refer to our log collection documentation page to learn how to forward your logs with a proxy][7].
 
