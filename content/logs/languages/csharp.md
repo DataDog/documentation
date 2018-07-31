@@ -277,7 +277,7 @@ It is possible to stream logs from your application to Datadog or to the Datadog
 
 ### SeriLog 
 
-Install the Datadog Serilog sink, which send events and logs to Datadog. By default the sink uses a TCP connection over SSL.
+Install the Datadog [Serilog sink][4], which send events and logs to Datadog. By default the sink uses a TCP connection over SSL.
 Run the following command in the Package Manager Console: 
 
 ```
@@ -310,3 +310,4 @@ New logs are now directly sent to Datadog.
 [1]: /logs/processing/parsing
 [2]: /logs/#tail-existing-files
 [3]: https://app.datadoghq.com/account/settings#api
+[4]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs/
