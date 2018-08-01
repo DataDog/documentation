@@ -255,7 +255,7 @@ To enable those functionalities use the following attribute names:
 * `error.message`: Error message contained in the stack trace
 * `error.kind`: The type or "kind" of an error (i.e "Exception", "OSError", ...)
 
-**Note**: By default, integration pipelines attempt to remap default logging library parameters to those specific attributes and parse stack traces or traceback to automatically extract the `error.message` and `error.kind`.
+**Note**: By default, integration Pipelines attempt to remap default logging library parameters to those specific attributes and parse stack traces or traceback to automatically extract the `error.message` and `error.kind`.
 
 ## Send your application logs in JSON
 

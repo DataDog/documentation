@@ -44,7 +44,7 @@ logs:
       service: docker
 ```
 
-**Important note**: Integration pipelines and processors will not be installed automatically as the source tag is not set. The integration setup is described below and it automatically installs integration pipelines that parse your logs and extract all the relevant information from them.
+**Important note**: Integration Pipelines and Processors will not be installed automatically as the source tag is not set. The integration setup is described below and it automatically installs integration Pipelines that parse your logs and extract all the relevant information from them.
 
 ### Option 2: Container installation
 

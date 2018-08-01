@@ -146,7 +146,7 @@ Choose to display one, three, or ten lines from your logs `message` attributes i
 {{< img src="logs/explorer/search/10_multi_line.png" alt="10 lines with Multi-line display" responsive="true" style="width:80%;">}}
 
 **Note**:  If present, `error.stack` attribute is displayed in priority as it should be used for stack traces.
-Remap any stack-trace attribute to this specific attribute with [the attribute remapper processor][1].
+Remap any stack-trace attribute to this specific attribute with [the attribute remapper Processor][1].
 
 ## Facets
 

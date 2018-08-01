@@ -13,8 +13,8 @@ further_reading:
 
 ## Overview
 
-When multiple teams are sharing the same account or when there are a lot of different log sources, it is critical to be able to start investigating without being overwhelmed by the number of possibilities offered by the Datadog user interface. 
-Teams can now define and share Views so everyone starts troubleshooting with the same context.
+When multiple teams are sharing the same account or when there are a lot of different log sources, it is critical to be able to start investigating with the right content. 
+In Datadog, teams can now define and share Log Explorer Views so everyone starts troubleshooting with the same predefined context.
 
 Datadog Saved Views allow you to save search customizations in the Log Explorer, including:
 

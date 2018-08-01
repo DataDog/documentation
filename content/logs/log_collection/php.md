@@ -211,8 +211,8 @@ In your configuration directory `/path/to/config/directory/`, edit the `config_d
 # app/config/config.yml
 monolog:
 
-# Uncomment this section, if you want to use a processor
-#       processor: 
+# Uncomment this section, if you want to use a Processor 
+#       Processor : 
 #           session_processor:
 #               class: Acme\Bundle\MonologBundle\Log\SessionRequestProcessor
 #            arguments:  [ @session ]
@@ -391,10 +391,10 @@ logs:
     sourcecategory: sourcecode
 ```
 
-### Adding a session processor to add variable context in your logs
+### Adding a session Processor to add variable context in your logs
 
-1. Implement your session processor:  
-  This is an example of such processor. It knows the current session and it enriches the content of the log record with valuable information such as the `requestId`, `sessionId`, ...  
+1. Implement your session Processor:  
+  This is an example of such Processor. It knows the current session and it enriches the content of the log record with valuable information such as the `requestId`, `sessionId`, ...  
 
     ```php
     <?php
@@ -466,7 +466,7 @@ logs:
     }
     ```
 
-2. Wire the processor with Symfony:  
+2. Wire the Processor with Symfony:  
   ```yaml
    services:
       monolog.processor.session_request:
@@ -537,7 +537,7 @@ Much of the useful information comes from additional context data that you can a
 $logger->info('Adding a new user', array('username' => 'Seldaek'));
 ```
 
-But, most important, the library comes with a processor feature. Processors allow you to provide additional information to logs in an automated fashion. They are called from the logger before the event is passed to the writers; they receive the event array, and return an event array on completion.
+But, most important, the library comes with a Processor feature. Processors allow you to provide additional information to logs in an automated fashion. They are called from the logger before the event is passed to the writers; they receive the event array, and return an event array on completion.
 
 Use cases include:
 

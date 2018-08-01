@@ -109,7 +109,7 @@ Debug logs, for instance, are not always useful but during a complex troubleshoo
 
 Instead of changing your application logging level or using a complex internal filtering tool, it is now possible to change what is indexed directly with the Datadog index filters.
 
-Enable or disable them in one click in the pipeline page:
+Enable or disable them in one click in the Pipeline page:
 
 {{< img src="logs/logging_without_limits/enable_index_filters.png" alt="" responsive="true" style="width:80%;">}}
 

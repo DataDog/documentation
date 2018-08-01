@@ -14,13 +14,13 @@ further_reading:
   text: Learn more about parsing
 ---
 
-Integration pipelines support the default log format for a given technology. So if you have customized the log format or written a custom parser which is not working, your logs might not get properly parsed.
+Integration Pipelines support the default log format for a given technology. So if you have customized the log format or written a custom parser which is not working, your logs might not get properly parsed.
 Here are some guidelines on how to find the root cause of the issue and correct the parser.
 
 Before you go ahead and troubleshoot your parser, it might be interesting for you to read our documentation on Datadog [log processing][1] and [log parsing][2], as well as our [parsing best practice article][3].
 
 1. **Identify your log's pipeline**:
-    Thanks to the pipeline filters, you can easily find the processing pipeline your log went through. Integration pipeline take the source as filter, so check that your log source is correctly set.
+    Thanks to the Pipeline filters, you can easily find the processing Pipeline your log went through. Integration Pipeline take the source as filter, so check that your log source is correctly set.
 
     {{< img src="logs/faq/integrationpipeline.png" alt="integrationpipeline" responsive="true" >}}
 

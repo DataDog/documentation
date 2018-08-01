@@ -20,46 +20,27 @@ To access the processing panel use the left `Logs` menu:
 
 {{< img src="logs/processing/processing_panel.png" alt="Pipelines panel" responsive="true" style="width:50%;" >}}
 
+Log processing allows you to have full control over how your logs are processed with Datadog [Pipelines][7] and [Processors][14].
+
+* A [Pipeline][7] takes a filtered subset of incoming logs and applies over them a list of sequential Processors.
+* A [Processor][14] executes within a [Pipeline][7] a data-structuring action ([Remapping an attribute][9], [Grok parsing][10]…) on a log.
+
+[Pipelines][7] and [Processors][14] can be applied to any type of logs:
+
+* Integration logs
+* JSON logs
+* Custom text logs
+* Syslog logs
+
+Thanks to this, in order to change how your log management solution consumes your logs, you do not need to change how you log, and you don’t need to deploy changes to server-side processing rules, everything can be done directly in the [Datadog processing page][19].
+
+The other benefit to implement a log processing strategy is to implement an [attribute naming convention][20] for your organization.
+
 ## Log Processing
 
-For logs that originate from an integration, skip this section since Datadog’s integration processing pipelines are automatically enabled and parse out your logs in appropriate and useful ways. Even for custom logs, if they are in JSON or Syslog format, we have integration processors to automatically extract meaningful attributes from the raw logs. As a result, you can get maximum value from many logs without any manual setup.
-
-That said, if you have modified your integration logs, or if your custom logs are not in JSON or Syslog format, you still have full control over how your logs are processed from the Processing Pipeline page. Thanks to this, in order to change how your log management consumes your logs, you do not need to change how you log, and you don’t need to deploy changes to server-side processing rules.
-
-### JSON logs
-
-Datadog has [reserved attributes](#reserved-attributes) such as `timestamp`, `status`, `host`, `service`, and even the log `message`.
-If you have different attribute names for those, no worries: we have [reserved attributes remappers](#reserved-attributes) available in the pipeline.
-
-For example: A service generates the below logs:
-
-```json
-{
-    "myhost": "host123",
-    "myapp": "test-web-2",
-    "logger_severity": "Error",
-    "log": "cannot establish connection with /api/v1/test",
-    "status_code": 500
-}
-```
-
-Going to the pipeline and changing the default mapping to this one:
-
-{{< img src="logs/processing/reserved_attribute_remapper.png" alt="Reserved attribute remapper" responsive="true" style="width:70%;">}}
-
-Would then give the following log:
-
-{{< img src="logs/processing/log_post_remapping.png" alt="Log post remapping" responsive="true" style="width:70%;">}}
-
-### Custom log processing rules
-
-For integration logs, we automatically install a pipeline that takes care of parsing your logs as on this example for ELB logs:
+For integration logs, we automatically install a Pipeline that takes care of parsing your logs as on this example for ELB logs:
 
 {{< img src="logs/processing/elb_log_post_processing.png" alt="ELB log post processing" responsive="true" style="width:70%;">}}
-
-* A [pipeline][7] takes a filtered subset of incoming logs and applies over them a list of sequential processors.
-* A processor executes within a [pipeline][7] a data-structuring action ([Remapping an attribute][9], [Grok parsing][10]…) on a log.
-
 
 However we know that log formats can be totally custom which is why you can define custom processing rules.
 With any log syntax, you can extract all your attributes and, when necessary, remap them to more global or canonical attributes.
@@ -74,7 +55,7 @@ Into this one:
 
 Follow our [parsing training guide][11] to learn more about parsing.
 We also have a [parsing best practice][12] and a [parsing troubleshooting][13] guide that might be interesting for you.
-There are many kinds of processors; find the full list and how to use them [here][14].
+There are many kinds of Processors; find the full list and how to use them [here][14].
 
 ## Reserved attributes
 
@@ -94,7 +75,7 @@ However, if a JSON formatted log file includes one of the following attributes, 
 * `published_date`
 * `syslog.timestamp`
 
-You can also specify alternate attributes to use as the source of a log's date by setting a [log date remapper processor][4]
+You can also specify alternate attributes to use as the source of a log's date by setting a [log date remapper Processor][4]
 
 **Note**: Datadog rejects a log entry if its official date is older than 6 hours in the past.
 
@@ -134,35 +115,13 @@ Using the Datadog Agent or the RFC5424 format automatically sets the service val
 
 ### Edit reserved attributes
 
-You can now control the global hostname, service, timestamp, and status main mapping that are applied before the processing pipelines. This is particularly helpful if logs are sent in JSON or from an external Agent.
+You can now control the global hostname, service, timestamp, and status main mapping that are applied before the processing Pipelines. This is particularly helpful if logs are sent in JSON or from an external Agent.
 
 {{< img src="logs/processing/reserved_attribute.png" alt="Reserved Attribute" responsive="true" style="width:80%;">}}
 
-To change the default values for each of the reserved attributes, go to the pipeline page and edit the `Reserved Attribute mapping`:
+To change the default values for each of the reserved attributes, go to the Pipeline page and edit the `Reserved Attribute mapping`:
 
 {{< img src="logs/processing/reserved_attribute_tile.png" alt="Reserved Attribute Tile" responsive="true" style="width:80%;">}}
-
-## Technical limits
-
-To make sure the Log Management solution functions in an optimal way we set the following technical limits and rules to your log events as well as to some product features. These have been designed so you may never reach them.
-
-### Limits applied to ingested log events
-
-* The size of a log event should not exceed 25K bytes.
-* Log events can be submitted up to 6h in the past and 2h in the future.
-* A log event once converted to JSON format should contain less than 256 attributes, each of those attribute’s key should be less than 50 characters, be nested in less than 10 successive levels and their respective value be less than 1024 characters if promoted as a facet.
-* A log event should not have more than 100 tags and each tag should not exceed 256 characters for a maximum of 10 millions unique tag per day.
-
-Log events which do not comply with these limits might be transformed or truncated by the system. Or simply not indexed if outside of the provided time range. However, be sure that Datadog always tries to do its best to preserve as much as possible the provided user data.
-
-### Limits applied to provided features
-
-* The maximum number of facets is 100.
-* The maximum number of processing pipeline on a platform is 100.
-* The maximum number of processor per pipeline is 20.
-* The maximum number of parsing rule within a grok processor is 10. We reserve the right to disable underperforming parsing rules that might impact our service performance.
-
-[Contact support][15] if you reach one of these limits as Datadog might be able to provide you more.
 
 ## Further Reading
 
@@ -172,8 +131,8 @@ Log events which do not comply with these limits might be transformed or truncat
 [2]: /logs/explorer/search/
 [3]: /logs/processing/parsing
 [4]: /logs/processing/processors/#log-date-remapper
-[7]: /logs/processing/#processing-pipelines
-[9]: /logs/processing/#attribute-remapper
+[7]: /logs/processing/pipelines
+[9]: /logs/processing/processors/#attribute-remapper
 [10]: /logs/processing/processors/#grok-parser
 [11]: /logs/processing/parsing/
 [12]: /logs/faq/log-parsing-best-practice/
@@ -183,3 +142,5 @@ Log events which do not comply with these limits might be transformed or truncat
 [16]: /logs/explorer/search/#logstream
 [17]: /logs/explorer/search/
 [18]: /logs/processing/processors/#log-status-remapper
+[19]: https://app.datadoghq.com/logs/pipelines
+[20]: /logs/processing/attributes_naming_convention
