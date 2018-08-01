@@ -1,7 +1,7 @@
 ---
 title: Rate
 kind: documentation
---- 
+---
 
 ## Per second
 

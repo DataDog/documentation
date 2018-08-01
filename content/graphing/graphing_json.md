@@ -2,8 +2,8 @@
 title: Graphing Primer using JSON
 kind: documentation
 aliases:
-    - /graphingjson/
-    - /graphing/miscellaneous/graphingjson
+  - /graphingjson/
+  - /graphing/miscellaneous/graphingjson
 ---
 
 There are two ways to interact with the Graphing Editor: using the GUI (the default method) and writing JSON (the more complete method). This page covers using JSON. To learn more about the GUI editor, visit the main [Graphing Primer Page][1]

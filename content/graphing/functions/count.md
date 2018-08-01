@@ -1,7 +1,7 @@
 ---
 title: Count
 kind: documentation
---- 
+---
 
 ## Count non zero
 

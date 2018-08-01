@@ -1,7 +1,7 @@
 ---
 title: Timeshift
 kind: documentation
---- 
+---
 
 Here is a set of functions of the pattern `<TIMEPERIOD>_before()`. These functions display the values from the corresponding time period on the graph. On their own, they may not be of high value, but together with the current values they may provide useful insight into the performance of your application.
 

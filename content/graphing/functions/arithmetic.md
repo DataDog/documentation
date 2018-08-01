@@ -1,7 +1,7 @@
 ---
 title: Arithmetic
 kind: documentation
---- 
+---
 
 ## Absolute
 

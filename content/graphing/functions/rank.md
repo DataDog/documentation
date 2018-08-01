@@ -1,7 +1,7 @@
 ---
 title: Rank
 kind: documentation
---- 
+---
 
 ## Top
 
