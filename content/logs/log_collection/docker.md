@@ -152,9 +152,9 @@ LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%:%%por
 LABEL "com.datadoghq.ad.logs"='[{"source": "nginx", "service": "webapp"}]'
 ```
 
-**Java Multiline logs: Docker compose**
+**Java multi-line logs: Docker compose**
 
-For multiline logs like stack traces, the Agent has a [multiline processing rules][9] feature in order to properly aggregate them into a single log.
+For multi-line logs like stack traces, the Agent has a [multi-line processing rules][9] feature in order to properly aggregate them into a single log.
 
 Example log:
 
