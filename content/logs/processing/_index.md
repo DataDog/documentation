@@ -32,7 +32,7 @@ Log processing allows you to have full control over how your logs are processed 
 * [Integration logs](#integration-logs)
 * [Custom JSON/Syslog/full text logs](#custom-logs)
 
-Thanks to this, in order to change how your log management solution consumes your logs, you do not need to change how you log, and you don’t need to deploy changes to server-side processing rules, everything can be done directly in the [Datadog processing page][19].
+Thanks to this you do not need to change how you log, and you don’t need to deploy changes to any server-side processing rules, everything is happening and can be configured directly in the [Datadog processing page][19].
 
 The other benefit to implement a log processing strategy is to implement an [attribute naming convention][20] for your organization.
 
