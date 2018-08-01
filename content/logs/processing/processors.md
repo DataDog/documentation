@@ -6,7 +6,7 @@ further_reading:
 - link: "logs/processing/pipelines"
   tag: "Documentation"
   text: Discover Datadog Pipelines
-- link: "logs/logging_without_limit"
+- link: "logs/logging_without_limits"
   tag: "Documentation"
   text: Logging without limit
 - link: "logs/explorer"

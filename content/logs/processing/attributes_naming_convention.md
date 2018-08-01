@@ -9,7 +9,7 @@ further_reading:
 - link: "logs/processing/processors"
   tag: "Documentation"
   text: Consult the full list of available Processors
-- link: "logs/logging_without_limit"
+- link: "logs/logging_without_limits"
   tag: "Documentation"
   text: Logging without limit
 - link: "logs/explorer"

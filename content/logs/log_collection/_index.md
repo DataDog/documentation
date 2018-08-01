@@ -18,7 +18,7 @@ further_reading:
 - link: "logs/explorer"
   tag: "Documentation"
   text: See how to explore your logs
-- link: "logs/logging_without_limit"
+- link: "logs/logging_without_limits"
   tag: "Documentation"
   text: Logging without limit
 ---
