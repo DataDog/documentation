@@ -27,10 +27,8 @@ Log processing allows you to have full control over how your logs are processed 
 
 [Pipelines][7] and [Processors][14] can be applied to any type of logs:
 
-* Integration logs
-* JSON logs
-* Custom text logs
-* Syslog logs
+* [Integration logs](#integration-logs)
+* [Custom JSON/Syslog/full text logs](#custom-logs)
 
 Thanks to this, in order to change how your log management solution consumes your logs, you do not need to change how you log, and you don’t need to deploy changes to server-side processing rules, everything can be done directly in the [Datadog processing page][19].
 
@@ -38,9 +36,17 @@ The other benefit to implement a log processing strategy is to implement an [att
 
 ## Log Processing
 
-For integration logs, we automatically install a Pipeline that takes care of parsing your logs as on this example for ELB logs:
+### Integration logs
+
+For integration logs, we automatically install a [Integration Pipeline][21] that takes care of parsing your logs and adds the corresponding face in your Explorer view as on this example for ELB logs:
 
 {{< img src="logs/processing/elb_log_post_processing.png" alt="ELB log post processing" responsive="true" style="width:70%;">}}
+
+<div class="alert alert-warning">
+<a href="https://docs.datadoghq.com/integrations/#cat-log-collection">Consult the current list of available supported integrations</a>.
+</div>
+
+### Custom logs
 
 However we know that log formats can be totally custom which is why you can define custom processing rules.
 With any log syntax, you can extract all your attributes and, when necessary, remap them to more global or canonical attributes.
@@ -146,3 +152,4 @@ To change the default values for each of the reserved attributes, go to the Pipe
 [18]: /logs/processing/processors/#log-status-remapper
 [19]: https://app.datadoghq.com/logs/pipelines
 [20]: /logs/processing/attributes_naming_convention
+[21]: /logs/processing/pipelines/#integration-pipelines

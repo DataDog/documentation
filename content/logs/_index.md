@@ -25,7 +25,7 @@ Log collection is the beginning of your journey in the wonderful world of log-ma
 Integrations and Log Collection are intimately tied together, by collecting Logs the right way you make sure to auto-configure all the the subsequent components such as [processing][33], [parsing][29], and [facets][18] in the Explorer. **[Discover the log integrations currently supported by Datadog][37]**. You can also define custom log sources if there isn't an integration for your source yet.
 
 <div class="alert alert-warning">
-Not all integrations include out of the box log configurations.  <a href="https://docs.datadoghq.com/integrations/#cat-log-collection">Consult the current list of supported integrations available</a>.
+<a href="https://docs.datadoghq.com/integrations/#cat-log-collection">Consult the current list of available supported integrations</a>.
 </div>
 
 Find below the different ways and places to collect logs.
