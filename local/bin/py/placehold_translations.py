@@ -42,7 +42,7 @@ def diff_globs(base, compare):
 
 def create_placeholder_file(template, new_glob):
     new_dest = os.path.dirname(template) + '/' + ntpath.basename(template).replace('.md', '.%s.md' % new_glob['name'])
-
+    print("current file is :{}".format(template))
     with open(template) as o_file:
         content = o_file.read()
         boundary = re.compile(r'^-{3,}$', re.MULTILINE)
