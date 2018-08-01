@@ -67,6 +67,12 @@ Classic:
       link: https://github.com/zorkian/go-datadog-api
       api: true
       authors: Mark Smith from Dropbox
+  - Haskell:
+    - name: Haskell Datadog Client
+      link: https://github.com/iand675/datadog
+      authors: Ian Duncan
+      api: true
+      dogstatsd: true
   - Java:
     - name: java-dogstatsd-client
       link: https://github.com/DataDog/java-dogstatsd-client
