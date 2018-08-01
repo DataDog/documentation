@@ -99,11 +99,11 @@ aws ecs register-task-definition --cli-input-json file://path/to/dd-agent-ecs.js
 
 #### Run the Agent as a Daemon Service
 
-Ideally you want the Datadog Agent to load on one container on each EC2 instance. The easiest way to achieve this is to run the Datadog Agent as a [Daemon Service](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html#service_scheduler_daemon).
+Ideally you want the Datadog Agent to load on one container on each EC2 instance. The easiest way to achieve this is to run the Datadog Agent as a [Daemon Service][9].
 
 ##### Schedule a Daemon Service in AWS using Our ECS Task
 
-1. Log in to the AWS console and navigate to the ECS Clusters section. Click into your cluster you will run the Agent on.
+1. Log in to the AWS console and navigate to the ECS Clusters section. Click into the cluster you will run the Agent on.
 2. Create a new service by clicking the **Create** button under Services.
 3. For launch type, select EC2. Then select the Task Definition we created before.
 4. For service type, select `DAEMON`, and enter a Service name. Click **Next**.
@@ -124,3 +124,4 @@ Datadog's <a href="https://docs.datadoghq.com/agent/autodiscovery/">Autodiscover
 [6]: https://docs.datadoghq.com/integrations/amazon_web_services/#installation
 [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_ecs.html
 [8]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html
+[9]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html#service_scheduler_daemon
