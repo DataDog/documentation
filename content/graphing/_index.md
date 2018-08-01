@@ -171,7 +171,7 @@ If you don't enter a title, we automatically generate a title based on the selec
 
 The final step is to click Save. You can always come back in to the editor and tweak the graph further depending on your needs.
 
-[1]: /graphing/miscellaneous/graphingjson/
+[1]: /graphing/graphing_json/
 [2]: https://app.datadoghq.com/metric/explorer/
 [3]: https://app.datadoghq.com/metric/summary/
 [4]: /graphing/dashboards/widgets/
