@@ -113,7 +113,7 @@ cf restage <YOUR_APP>
 
 #### Log Collection
 
-To start collecting logs from your application in CloudFoundry, the agent contained in the buildpack needs to be activated and log collection enabled.
+To start collecting logs from your application in CloudFoundry, the Agent contained in the buildpack needs to be activated and log collection enabled.
 
 ```
 cf set-env $YOUR_APP_NAME RUN_PUPPY true
