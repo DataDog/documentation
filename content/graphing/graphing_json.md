@@ -2,14 +2,15 @@
 title: Graphing Primer using JSON
 kind: documentation
 aliases:
-    - /graphingjson/
+  - /graphingjson/
+  - /graphing/miscellaneous/graphingjson
 ---
 
 There are two ways to interact with the Graphing Editor: using the GUI (the default method) and writing JSON (the more complete method). This page covers using JSON. To learn more about the GUI editor, visit the main [Graphing Primer Page][1]
 
 ## Graphing with the JSON editor
 
-{{< img src="graphing/miscellaneous/graphingjson/references-graphing-jsoneditor.png" alt="references graphing jsoneditor" responsive="true" style="width:80%;">}}
+{{< img src="graphing/graphing_json/references-graphing-jsoneditor.png" alt="references graphing jsoneditor" responsive="true" style="width:80%;">}}
 
 ### Grammar
 
@@ -179,7 +180,7 @@ The Time Series can be further broken down to:
 
 #### Line Charts
 
-{{< img src="graphing/miscellaneous/graphingjson/multi-lines.png" alt="multi lines" responsive="true" >}}
+{{< img src="graphing/graphing_json/multi-lines.png" alt="multi lines" responsive="true" >}}
 
 The representation is automatically derived from having multiple `requests` values.
 
@@ -197,7 +198,7 @@ The representation is automatically derived from having multiple `requests` valu
 
 #### Stacked Series
 
-{{< img src="graphing/miscellaneous/graphingjson/slice-n-stack.png" alt="slice and stack" responsive="true" >}}
+{{< img src="graphing/graphing_json/slice-n-stack.png" alt="slice and stack" responsive="true" >}}
 
 In the case of related Time Series, you can easily draw them as stacked areas by using the following syntax:
 
