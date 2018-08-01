@@ -8,10 +8,13 @@ aliases:
 further_reading:
 - link: "logs/processing"
   tag: "Documentation"
-  text: Learn how to process your logs
+  text: Discover how to process your logs
 - link: "logs/processing/parsing"
   tag: "Documentation"
   text: Learn more about parsing
+- link: "logs/explorer"
+  tag: "Documentation"
+  text: See how to explore your logs
 ---
 
 Switch between the Log List and the Log Analytics modes by clicking on the *Log Mode* button:

@@ -5,6 +5,22 @@ description: "Configure your Datadog Agent to gather logs from your host, contai
 aliases:
   - /logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers
   - /logs/languages
+further_reading:
+- link: "logs/processing"
+  tag: "Documentation"
+  text: Discover how to process your logs
+- link: "logs/processing/parsing"
+  tag: "Documentation"
+  text: Learn more about parsing
+- link: "logs/live_tail"
+  tag: "Documentation"
+  text: Datadog live tail functionality
+- link: "logs/explorer"
+  tag: "Documentation"
+  text: See how to explore your logs
+- link: "logs/logging_without_limit"
+  tag: "Documentation"
+  text: Logging without limit
 ---
 
 ## Getting started with the Agent
@@ -265,15 +281,9 @@ For integration frameworks, we provide guidelines on how to log in JSON into a f
 
 Datadog automatically parses JSON-formatted logs. For this reason, when you have control over the log format you send to Datadog, we encourage you to format them as JSON to avoid the need for custom parsing rules.
 
-{{< whatsnext desc="Select your framework in the list below:" >}}
-    {{< nextlink href="/logs/log_collection/csharp" >}}Csharp{{< /nextlink >}}
-    {{< nextlink href="/logs/log_collection/go" >}}Go{{< /nextlink >}}
-    {{< nextlink href="/logs/log_collection/java" >}}Java{{< /nextlink >}}
-    {{< nextlink href="/logs/log_collection/nodejs" >}}Nodejs{{< /nextlink >}}
-    {{< nextlink href="/logs/log_collection/php" >}}PHP{{< /nextlink >}}
-    {{< nextlink href="/logs/log_collection/python" >}}Python{{< /nextlink >}}
-    {{< nextlink href="/logs/log_collection/ruby" >}}Ruby{{< /nextlink >}}
-{{< /whatsnext >}}
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent
 [2]: /getting_started/custom_metrics/

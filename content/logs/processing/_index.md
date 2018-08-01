@@ -3,15 +3,18 @@ title: Processing
 kind: documentation
 description: "Parse & Enrich your logs to create valuable facets & metrics in the Logs Explorer."
 further_reading:
-- link: "logs/processing/parsing"
+- link: "logs/processing/pipelines"
   tag: "Documentation"
-  text: Learn more about parsing.
+  text: Discover Datadog Pipelines
+- link: "logs/processing/processors"
+  tag: "Documentation"
+  text: Consult the full list of available Processors.
 - link: "logs/processing/attributes_naming_convention"
   tag: "Documentation"
-  text: Datadog log attributes naming convention.
-- link: "logs/logging_without_limits"
+  text: Datadog log attributes naming convention
+- link: "logs/explorer"
   tag: "Documentation"
-  text: Control the volume of logs indexed by Datadog.
+  text: Learn how to explore your logs
 ---
 
 {{< img src="logs/processing/processing.png" alt="Processing" responsive="true">}}
@@ -40,7 +43,7 @@ The other benefit to implement a log processing strategy is to implement an [att
 
 ### Integration logs
 
-For integration logs, we automatically install a [Integration Pipeline][21] that takes care of parsing your logs and adds the corresponding face in your Explorer view as on this example for ELB logs:
+For integration logs, we automatically install a [Integration Pipeline][21] that takes care of parsing your logs and adds the corresponding facet in your Explorer view as on this example for ELB logs:
 
 {{< img src="logs/processing/elb_log_post_processing.png" alt="ELB log post processing" responsive="true" style="width:70%;">}}
 

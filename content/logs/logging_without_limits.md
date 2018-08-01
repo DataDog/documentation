@@ -15,7 +15,7 @@ further_reading:
   tag: "Documentation"
   text: Learn more about parsing
 - link: "https://www.datadoghq.com/blog/logging-without-limits/"
-  tag: "blogpost"
+  tag: "Blog"
   text: "Logging without limits blogpost"
 ---
 

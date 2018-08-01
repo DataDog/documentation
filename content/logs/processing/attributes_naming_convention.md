@@ -3,15 +3,18 @@ title: Attributes Naming Convention
 kind: documentation
 description: "Datadog log attributes naming convention."
 further_reading:
-- link: "logs/processing"
+- link: "logs/processing/pipelines"
   tag: "Documentation"
-  text: Learn how to process your logs
-- link: "logs/faq/log-parsing-best-practice"
-  tag: "FAQ"
-  text: Log Parsing - Best Practice
-- link: "logs/logging_without_limits"
+  text: Discover Datadog Pipelines
+- link: "logs/processing/processors"
   tag: "Documentation"
-  text: Control the volume of logs indexed by Datadog
+  text: Consult the full list of available Processors
+- link: "logs/logging_without_limit"
+  tag: "Documentation"
+  text: Logging without limit
+- link: "logs/explorer"
+  tag: "Documentation"
+  text: Learn how to explore your logs
 ---
 
 ## Getting Started

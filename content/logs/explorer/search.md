@@ -11,6 +11,9 @@ further_reading:
 - link: "logs/processing"
   tag: "Documentation"
   text: Learn how to process your logs
+- link: "logs/explorer/saved_views"
+  tag: Documentation
+  text: Automatically configure your Log Explorer
 ---
 
 All of the search parameters are contained within the URL, so you can share your view simply sharing the URL.
