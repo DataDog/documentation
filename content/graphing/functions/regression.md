@@ -1,7 +1,7 @@
 ---
 title: Regression
 kind: documentation
---- 
+---
 
 ## Robust trend
 

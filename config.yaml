@@ -256,7 +256,7 @@ languages:
         # Metrics
         - identifier: customnav_graphingnav_metrics
           name: "Metrics"
-          url: "graphing/metrics/distributions"
+          url: "graphing/metrics/"
           weight: 20
           parent: menu_references_graphing
         - identifier: customnav_graphingnav_distribution
@@ -1245,7 +1245,7 @@ languages:
         # Metrics
         - identifier: customnav_graphingnav_metrics
           name: "Metrics"
-          url: "graphing/metrics/distributions"
+          url: "graphing/metrics/"
           weight: 20
           parent: menu_references_graphing
         - identifier: customnav_graphingnav_distribution

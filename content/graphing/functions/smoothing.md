@@ -1,7 +1,7 @@
 ---
 title: Smoothing
 kind: documentation
---- 
+---
 
 ## Exponentially weighted moving average
 
