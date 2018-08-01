@@ -189,7 +189,7 @@ To send traces or processes through the proxy, setup the following in the `datad
 endpoint = https://haproxy.example.com:3835
 
 [process.api]
-url = https://haproxy.example.com:3836
+endpoint = https://haproxy.example.com:3836
 ```
 
 Edit your supervisor configuration to disable SSL certificate verification. This is needed to prevent Python from complaining about the discrepancy between the hostname on the SSL certificate (`app.datadoghq.com`) and your HAProxy hostname. The supervisor configuration found at:
