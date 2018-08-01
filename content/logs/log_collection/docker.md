@@ -165,7 +165,7 @@ Example log:
         at com.example.myproject.Bootstrap.main(Bootstrap.java:14)
 ```
 
-Use the below label on your Java containers to make sure that the above log is properly collected:
+Use the `com.datadoghq.ad.logs` label as below on your Java containers to make sure that the above log is properly collected:
 
   ```
   labels:
