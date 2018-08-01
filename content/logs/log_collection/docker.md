@@ -152,6 +152,30 @@ LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%:%%por
 LABEL "com.datadoghq.ad.logs"='[{"source": "nginx", "service": "webapp"}]'
 ```
 
+**Java Multiline logs: Docker compose**
+
+For multiline logs like stack traces, the agent has a [multiline processing rules][9] in order to properly aggregate them into a single log.
+
+Example log:
+
+```
+2018-01-03T09:24:24.983Z UTC Exception in thread "main" java.lang.NullPointerException
+        at com.example.myproject.Book.getTitle(Book.java:16)
+        at com.example.myproject.Author.getBookTitles(Author.java:25)
+        at com.example.myproject.Bootstrap.main(Bootstrap.java:14)
+```
+
+Use the below label on your Java containers to make sure that the above log is properly collected:
+
+  ```
+  labels:
+    com.datadoghq.ad.logs: '[{"source": "java", "service": "myapp", "log_processing_rules": [{"type": "multi_line", "name": "log_start_with_date", "pattern" : "\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])"}]}]'
+  ```
+
+Check our [multi-line processing rule documentation][10] to get more pattern examples.
+
+**Kubernetes**
+
 If you are running in Kubernetes and do not use container labels, pod annotation will soon be supported. Check our [Autodiscovery Guide][8] for more information about Autodiscovery setup and examples.
 
 ## Further Reading
@@ -166,3 +190,5 @@ If you are running in Kubernetes and do not use container labels, pod annotation
 [6]: https://hub.docker.com/r/datadog/agent/tags/
 [7]: /logs/#filter-logs
 [8]: https://docs.datadoghq.com/agent/autodiscovery/#template-source-docker-label-annotations
+[9]: https://docs.datadoghq.com/logs/log_collection/#multi-line-aggregation
+[10]: https://docs.datadoghq.com/logs/log_collection/#multi-line-aggregation
