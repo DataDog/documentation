@@ -154,7 +154,7 @@ LABEL "com.datadoghq.ad.logs"='[{"source": "nginx", "service": "webapp"}]'
 
 **Java Multiline logs: Docker compose**
 
-For multiline logs like stack traces, the agent has a [multiline processing rules][9] in order to properly aggregate them into a single log.
+For multiline logs like stack traces, the Agent has a [multiline processing rules][9] feature in order to properly aggregate them into a single log.
 
 Example log:
 
@@ -172,7 +172,7 @@ Use the below label on your Java containers to make sure that the above log is p
     com.datadoghq.ad.logs: '[{"source": "java", "service": "myapp", "log_processing_rules": [{"type": "multi_line", "name": "log_start_with_date", "pattern" : "\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])"}]}]'
   ```
 
-Check our [multi-line processing rule documentation][10] to get more pattern examples.
+Check out the [multi-line processing rule documentation][10] to get more pattern examples.
 
 **Kubernetes**
 
