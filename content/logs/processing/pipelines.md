@@ -18,11 +18,11 @@ Each log that comes through the Pipelines is tested against every Pipeline filte
 
 So for instance a processing Pipeline can transform this log:
 
-{{< img src="logs/processing/pipelines/original_log.png" alt="original log" responsive="true" style="width:50%;">}}
+{{< img src="logs/processing/pipelines/log_pre_processing.png" alt="original log" responsive="true" style="width:50%;">}}
 
 into this log:
 
-{{< img src="logs/processing/pipelines/log_post_severity.png" alt=" Log post severity " responsive="true" style="width:50%;">}}
+{{< img src="logs/processing/pipelines/log_post_processing.png" alt=" Log post severity " responsive="true" style="width:50%;">}}
 
 With one single pipeline:
 
@@ -44,10 +44,12 @@ The logstream shows which logs your Pipeline applies to:
 
 {{< img src="logs/processing/pipelines/pipeline_filters.png" alt="Pipelines filters" responsive="true" style="width:80%;">}}
 
-## Reserved attribute pipeline
+## Special Pipelines
 
-Datadog has [reserved attributes](#reserved-attributes) such as `timestamp`, `status`, `host`, `service`, and even the log `message`.
-If you have different attribute names for those, no worries: we have [reserved attributes remappers][14] available in the pipeline.
+### Reserved attribute Pipeline
+
+Datadog has [a list of reserved attributes][3] such as `timestamp`, `status`, `host`, `service`, and even the log `message`, those attributes have a specific behavior within Datadog.
+If you have different attribute names for those in your JSON logs, use the reserved attribute pipeline to remap your logs attribute to one of the reserved attribute list.
 
 For example: A service that generates the below logs:
 
@@ -69,9 +71,12 @@ Would then produce the following log:
 
 {{< img src="logs/processing/pipelines/log_post_remapping.png" alt="Log post remapping" responsive="true" style="width:70%;">}}
 
-## Integration Pipelines
+If you want to remap an attribute to one of the reserved attribute in a custome pipeline, use the [Log Status Remapper][4] or the [Log Date Remapper][5].
 
-Datadog’s integration processing Pipelines are automatically enabled and parse out your logs in appropriate and useful ways. Even for custom logs, if they are in JSON or Syslog format, they contain integration Processors to automatically extract meaningful attributes from the raw logs. As a result, you can get maximum value from many logs without any manual setup.
+### Integration Pipelines
+
+Datadog’s integration processing Pipelines are automatically enabled and parse out your logs in appropriate and useful ways. 
+As a result, you can get maximum value from many logs without any manual setup.
 Note that these Pipelines are read-only, but you can clone them and then edit the clone:
 
 {{< img src="logs/processing/pipelines/cloning_pipeline.png" alt="Cloning pipeline" responsive="true" style="width:80%;">}}
@@ -104,3 +109,6 @@ Log events which do not comply with these limits might be transformed or truncat
 
 [1]: /logs/explorer/search
 [2]: /help
+[3]: /logs/processing/#reserved-attributes
+[4]: /logs/processing/processors/#log-status-remapper
+[5]: /logs/processing/processors/#log-date-remapper
