@@ -14,11 +14,13 @@ further_reading:
   text: Control the volume of logs indexed by Datadog.
 ---
 
+{{< img src="logs/processing/processing.png" alt="Processing" responsive="true">}}
+
 ## Overview
 
 To access the processing panel use the left `Logs` menu:
 
-{{< img src="logs/processing/processing_panel.png" alt="Pipelines panel" responsive="true" style="width:50%;" >}}
+{{< img src="logs/processing/processing_panel.png" alt="Pipelines panel" responsive="true" style="width:40%;" >}}
 
 Log processing allows you to have full control over how your logs are processed with Datadog [Pipelines][7] and [Processors][14].
 
