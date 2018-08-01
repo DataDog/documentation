@@ -61,7 +61,7 @@ Into this one:
 
 {{< img src="logs/processing/log_post_processing.png" alt="Log post processing" responsive="true" style="width:50%;">}}
 
-Consult the dedicated [Pipelines documentation pages][7] to learn more on how to perform actions only on some subset of your logs with the [Pipeline filters][].
+Consult the dedicated [Pipelines documentation pages][7] to learn more on how to perform actions only on some subset of your logs with the [Pipeline filters][22].
 
 To discover the full list of Processors currently available, refer to the dedicated [Processor documentation page][14].
 
@@ -155,3 +155,4 @@ To change the default values for each of the reserved attributes, go to the Pipe
 [19]: https://app.datadoghq.com/logs/pipelines
 [20]: /logs/processing/attributes_naming_convention
 [21]: /logs/processing/pipelines/#integration-pipelines
+[22]: /logs/processing/pipelines/#pipeline-filters
