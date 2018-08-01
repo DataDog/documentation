@@ -53,9 +53,11 @@ Into this one:
 
 {{< img src="logs/processing/log_post_processing.png" alt="Log post processing" responsive="true" style="width:50%;">}}
 
-Follow our [parsing training guide][11] to learn more about parsing.
-We also have a [parsing best practice][12] and a [parsing troubleshooting][13] guide that might be interesting for you.
-There are many kinds of Processors; find the full list and how to use them [here][14].
+Consult the dedicated [Pipelines documentation pages][7] to learn more on how to perform actions only on some subset of your logs with the [Pipeline filters][].
+
+To discover the full list of Processors currently available, refer to the dedicated [Processor documentation page][14].
+
+If you want to learn more about pure parsing possibilities of the Datadog application, follow our [parsing training guide][11]. We also have a [parsing best practice][12] and a [parsing troubleshooting][13] guide that might be interesting for you.
 
 ## Reserved attributes
 
