@@ -184,6 +184,15 @@ java -javaagent:/path/to/the/dd-java-agent.jar \
      -jar /your/app.jar
 ```
 
+#### Node.js
+
+```Node.js
+const tracer = require('dd-trace').init({ 
+  hostname: process.env.DD_AGENT_SERVICE_HOST, 
+  port: process.env.DD_AGENT_SERVICE_PORT
+}) 
+```
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
