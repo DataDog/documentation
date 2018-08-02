@@ -40,7 +40,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration d'Amazon W
 
 2. Configurez l'[intégration Datadog - AWS API Gateway][3].
 
-### Collecte de log
+### Collecte de logs
 
 Activer le logging de API Gateway:
 
@@ -69,7 +69,7 @@ Activer le logging de API Gateway:
 
 #### Envoyer des logs à Datadog
 
-1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda pour collecte de log AWS][4].
+1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda pour collecte de logs AWS][4].
 2. Une fois la fonction lambda installée, ajoutez manuellement un déclencheur dans la console AWS sur le groupe de log Cloudwatch qui contient vos logs API Gateway:
 {{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_1.png" alt="cloudwatch log group" responsive="true" popup="true" style="width:70%;">}}
    Sélectionnez le groupe de log CloudWatch correspondant, ajoutez un nom de filtre (mais n'hésitez pas à laisser le filtre vide) et ajoutez le déclencheur:

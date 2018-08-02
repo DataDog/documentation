@@ -1,5 +1,5 @@
 ---
-title: Collecte de log & Intégrations
+title: Collecte de logs & Intégrations
 kind: Documentation
 description: >-
   Configurez votre Agent Datadog pour rassembler les logs de votre hôte, de vos
@@ -21,7 +21,7 @@ logs_enabled: true
 
 L'Agent Datadog envoie ses logs à Datadog via TLS-encrypted TCP. Cela nécessite une communication sortante sur le port `10516`.
 
-## Activation de la collecte de log à partir d'intégrations
+## Activation de la collecte de logs à partir d'intégrations
 Pour commencer à collecter des logs pour une intégration donnée, supprimez la mise en commentaire de la section logs du fichier yaml de cette intégration et configurez-la pour votre environnement.
 
 <div class="alert alert-warning">
@@ -30,7 +30,7 @@ Toutes les intégrations n'incluent pas les configurations pour la collecte de l
 
 Si une intégration ne prend pas en charge les logs par défaut, utilisez la configuration de fichier personnalisée ci-dessous.
 
-## Collecte de log custom
+## Collecte de logs custom
 
 Datadog Agent v6 peut collecter des logs à partir de fichiers ou du réseau (TCP ou UDP) et les transférer vers Datadog. Pour le configurer, créez un nouveau répertoire et un fichier yaml nommé d'après votre source de log dans le répertoire **conf.d** de l'Agent (`conf.d/python.d/conf.yaml` pour les logs pythons, ...)  et définissez ces options:
 

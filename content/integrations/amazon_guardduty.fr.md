@@ -23,14 +23,14 @@ version: '1.0'
 Datadog s'intègre à AWS GuardDuty via une fonction Lambda qui expédie les résultats de GuardDuty à la solution de log management de Datadog.
 
 ## Implémentation
-### Collecte de log
+### Collecte de logs
 #### Activer le logging de GuardDuty:
 
 1. Créez une nouvelle règle dans Cloudwatch avec le type d'événement **GuardDuty Finding**:
 
     {{< img src="integrations/amazon_guardduty/aws_gd_1.png" alt="aws gd 1" responsive="true" style="width:75%;" >}}
 
-2. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda pour collecte de log AWS](/integrations/amazon_web_services/#create-a-new-lambda-function).
+2. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda pour collecte de logs AWS](/integrations/amazon_web_services/#create-a-new-lambda-function).
 
 3. Une fois la fonction Lambda créée, définissez la fonction Lambda  de Datadog comme cible:
 
@@ -40,7 +40,7 @@ Datadog s'intègre à AWS GuardDuty via une fonction Lambda qui expédie les ré
 
 #### Envoyer vos logs à Datadog
 
-1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda pour collecte de log AWS][1].
+1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda pour collecte de logs AWS][1].
 
 2. Après avoir configuré la fonction Lambda, ajoutez GuardDuty en tant que déclencheur en choisissant **CloudWatch Events** comme déclencheur et en créant une `GuardDutyRule`:
 

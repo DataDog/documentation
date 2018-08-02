@@ -25,7 +25,7 @@ La collecte de log est le début de votre voyage dans le monde merveilleux de la
 Les intégrations et la collecte de logs sont étroitement liées. En collectant les logs de façon adéquate, vous êtes en mesure d'assurer la configuration automatique de tous les composants associés tels que [le processing][33], [le parsing][29] et [les facettes][18] dans l'explorateur. **[Découvrir les intégrations de log actuellement prises en charge par Datadog][37]**. Vous pouvez également définir des sources de log personnalisées s'il n'existe pas encore d'intégration pour votre source.
 
 <div class="alert alert-warning">
-Toutes les intégrations n'incluent pas les configurations pour la collecte de logs.  <a href="https://docs.datadoghq.com/integrations/#cat-log-collection">Consultez la liste actuelle des intégrations prenant en charge la collecte de log.</a>.
+Toutes les intégrations n'incluent pas les configurations pour la collecte de logs.  <a href="https://docs.datadoghq.com/integrations/#cat-log-collection">Consultez la liste actuelle des intégrations prenant en charge la collecte de logs.</a>.
 </div>
 
 Vous trouverez ci-dessous les techniques et les emplacements pris en charge pour la collecte de logs.
