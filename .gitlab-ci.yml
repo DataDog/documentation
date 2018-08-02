@@ -37,7 +37,6 @@ build_preview:
     MESSAGE: ":gift_heart: Your preview site is available!\nNow running tests..."
     UNTRACKED_EXTRAS: "data,content/integrations"
   script:
-    - git diff HEAD^ master --name-only --diff-filter=MD
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - version_static_assets
     - sync_integration_descriptions
