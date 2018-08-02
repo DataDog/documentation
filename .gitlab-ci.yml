@@ -18,7 +18,7 @@ before_script:
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:master
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/david.jones_optimize
   tags:
     - "runner:main"
     - "size:large"
@@ -110,6 +110,7 @@ build_live:
     - minify_html
     - collect_static_assets
     - push_site_to_s3
+    - remove_static_from_repo
     - create_artifact
     - create_artifact_untracked
   only:
