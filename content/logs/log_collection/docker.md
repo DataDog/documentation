@@ -152,11 +152,11 @@ LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%:%%por
 LABEL "com.datadoghq.ad.logs"='[{"source": "nginx", "service": "webapp"}]'
 ```
 
-**Java multi-line logs: Docker compose**
+**Multi-line logs: Docker compose**
 
 For multi-line logs like stack traces, the Agent has a [multi-line processing rules][9] feature in order to properly aggregate them into a single log.
 
-Example log:
+Example log (Java Satck traces):
 
 ```
 2018-01-03T09:24:24.983Z UTC Exception in thread "main" java.lang.NullPointerException
@@ -165,7 +165,7 @@ Example log:
         at com.example.myproject.Bootstrap.main(Bootstrap.java:14)
 ```
 
-Use the `com.datadoghq.ad.logs` label as below on your Java containers to make sure that the above log is properly collected:
+Use the `com.datadoghq.ad.logs` label as below on your containers to make sure that the above log is properly collected:
 
   ```
   labels:
