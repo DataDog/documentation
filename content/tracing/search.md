@@ -35,7 +35,7 @@ Use Trace Search & Analytics to filter application performance metrics and [APM 
 
 Trace Search & Analytics can be enabled per APM service and per host. A service on which it is enabled exposes all its APM Events to Datadog. 
 
-Downstream services like databases and cache layers won't be in the list of available services (as they don't generate traces on their own), but their information will be picked up by the top level services that call them.
+Downstream services like databases and cache layers aren't in the list of available services (as they don't generate traces on their own), but their information is picked up by the top level services that call them.
 
 In the Trace Search view you can:
 
