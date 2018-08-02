@@ -24,7 +24,7 @@
     <div class="container-fluid h-100">
         <div class="row h-100">
             <div class="d-none d-lg-flex col-sm-3 side">
-                {{ partial "sidenav/sidenav-api.html" . }}
+                {{ partialCached "sidenav/sidenav-api.html" . .Page.Lang }}
             </div>
             <div class="col-12 col-lg-9 main-api">
                 {{ block "main" . }}{{ end }}
@@ -32,7 +32,7 @@
         </div>
     </div>
 
-    {{ partial "footer/footer.html" . }}
+    {{ partialCached "footer/footer.html" . .Page.Lang }}
 
     <script src="{{ .Site.BaseURL }}js/{{ (index .Site.Data.manifests.js "main-dd.js") }}"></script>
 

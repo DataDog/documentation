@@ -72,7 +72,7 @@
         </div>
         <div class="collapse navbar-collapse" id="navbar-sidenav">
             <div class="container">
-                {{ partial "sidenav/sidenav.html" . }}
+                {{ partialCached "sidenav/sidenav.html" . .Page.Lang }}
             </div>
         </div>
     </nav>
