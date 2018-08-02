@@ -11,7 +11,7 @@ Built with [hugo][1], a static website generation tool.
 
 3. [Install Python3][4] (you can also use [pyenv][5])
 
-4. Install gulp: ```npm install --global --production gulp-cli && npm install```
+4. Install gulp: ```npm install -g gulp```
 
 * Download the documentation repo ```git clone https://github.com/DataDog/documentation.git```
 
