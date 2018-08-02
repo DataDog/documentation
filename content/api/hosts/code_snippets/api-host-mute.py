@@ -8,6 +8,6 @@ options = {
 initialize(**options)
 
 # Find a host to mute
-hosts = api.Infrastructure.search(q='hosts:')
+hosts = api.Hosts.search(q='hosts:')
 # Mute a host
 api.Host.mute(hosts['results']['hosts'][0])
