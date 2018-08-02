@@ -10,7 +10,6 @@ further_reading:
   text: Process collection for Kubernetes
 ---
 
-
 ## Setup
 
 Take advantage of DaemonSets to deploy the Datadog Agent on all your nodes (or on specific nodes by [using nodeSelectors](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector)).
@@ -194,7 +193,7 @@ If the Agent is deployed, you will see output similar to the text below, where d
     NAME            DESIRED   CURRENT   READY     UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
     datadog-agent   2         2         2         2            2           <none>          16h
 
-## Enable things
+## Enable capabilities
 
 ### Log Collection
 
@@ -255,6 +254,8 @@ To enable [Trace collection][20] with your DaemonSet:
 
 ### Process Collection
 
+See [Process collection for Kubernetes][21].
+
 ### DogStatsD
 
 To send custom metrics via DogStatsD, set the `DD_DOGSTATSD_NON_LOCAL_TRAFFIC`variable to true in your *env* section:
@@ -270,7 +271,7 @@ To send custom metrics via DogStatsD, set the `DD_DOGSTATSD_NON_LOCAL_TRAFFIC`va
 
 Learn more about this in the [Docker DogStatsD documentation][19]
 
-To send custom metrics via dogstatsd from your application pods, uncomment the `# hostPort: 8125` line in your `datadog-agent.yaml` manifest. This exposes the DogStatsD port on each of your Kubernetes nodes. 
+To send custom metrics via DogStatsD from your application pods, uncomment the `# hostPort: 8125` line in your `datadog-agent.yaml` manifest. This exposes the DogStatsD port on each of your Kubernetes nodes. 
 
 **Warning**: This opens a port on your host. Make sure your firewall covers that correctly. 
 Another word of caution: some network plugging don't support `hostPorts` yet, so this won't work. The workaround in this case is to add `hostNetwork: true` in your agent pod specifications. This shares the network namespace of your host with the Datadog agent. Again, make sure this logic is okay with your security policies.
@@ -299,3 +300,4 @@ Another word of caution: some network plugging don't support `hostPorts` yet, so
 [18]: https://kubernetes.io/docs/admin/authentication/#service-account-tokens
 [19]: /agent/basic_agent_usage/docker/#dogstatsd-custom-metrics
 [20]: /tracing/setup/kubernetes
+[21]: /graphing/infrastructure/process
