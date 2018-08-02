@@ -131,11 +131,10 @@ Recall the seven statuses a monitor may have (in order of increasing severity):
 * `Warn`,
 * `Alert`,
 * `Skipped`,
-* `Ignored`,
 * `No Data`,
 * `Unknown`.
 
-Composite monitors consider `Unknown`, `Warn` and `Alert` to be alert-worthy (i.e. true). The rest—`Ok`, `Skipped`, `Ignored`, and `No Data`—are not alert-worthy (i.e. false). However, you can configure `No Data` to be alert-worthy by setting `notify_no_data` to true.
+Composite monitors consider `Unknown`, `Warn`, and `Alert` to be alert-worthy (i.e. true). The rest—`Ok`, `Skipped`, and `No Data`—are not alert-worthy (i.e. false). However, you can configure `No Data` to be alert-worthy by setting `notify_no_data` to true.
 
 When a composite monitor evaluates as alert-worthy, it inherits the most severe status among its individual monitors and triggers an alert. When a composite monitor does not evaluate as alert-worthy, it inherits the _least_ severe status.
 The not (!) operator causes a status—individual or composite—to be either `Ok`, `Alert`, or `No Data`: if monitor A has any alert-worthy status, `!A` is `OK`; if monitor A has any alert-**un**worthy status, `!A` is `Alert`; if monitor A has a status of `No Data`, `!A` is also `No Data`.

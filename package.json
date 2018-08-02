@@ -27,7 +27,7 @@
     "bootstrap": "4.0.0-beta.2",
     "browser-sync": "2.18.13",
     "del": "2.2.2",
-    "gulp": "3.9.1",
+    "gulp": "^3.9.1",
     "gulp-autoprefixer": "4.0.0",
     "gulp-changed": "3.1.1",
     "gulp-concat": "2.6.1",
@@ -53,7 +53,7 @@
     "popper.js": "1.13.0",
     "run-sequence": "1.1.4",
     "stickyfilljs": "2.0.3",
-    "translate": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/translate-latest.tgz",
+    "translate": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/translate-v1.0.2.tgz",
     "traverse": "0.6.6"
   }
 }

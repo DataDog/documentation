@@ -1,0 +1,11 @@
+[
+    {
+        "agent_version": "6.3.0",
+        "integration":"logstash",
+        "check": "logstash.can_connect",
+        "statuses": ["ok", "critical"],
+        "groups": ["host", "port"],
+        "name": "Peut se connecter",
+        "description": "Renvoie `Critical` si l'agent ne peut pas se connecter à Logstash pour collecter des métriques, sinon `OK`."
+    }
+]
