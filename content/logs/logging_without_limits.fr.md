@@ -20,9 +20,9 @@ further_reading:
 ---
 ## Présentation
 
-Le nombre d'événements de log générés par votre infrastructure est parfois trop élevé ou trop fluctuant, ce qui soulève un problème : quels logs faut-il envoyer vers votre solution Log Management et quels logs faut-il envoyer vers une archive ? Le filtrage de vos logs avant leur envoi empêche toutefois inévitablement d'assurer une couverture complète, et certaines données utiles sont souvent ignorées.
+Le nombre d'événements de log générés par votre infrastructure est parfois trop élevé ou trop fluctuant, ce qui soulève un problème : quels logs faut-il envoyer vers votre solution de Log Management et quels logs faut-il envoyer vers une archive ? Le filtrage de vos logs avant leur envoi empêche toutefois inévitablement d'assurer une couverture complète, et certaines données utiles sont souvent ignorées.
 
-La solution Log Management de Datalog supprime ces limitations en séparant le processus d'ingestion des logs du processus d'indexation, vous permettant ainsi de collecter, de traiter et d'archiver tous vos logs de façon rentable.
+La solution de Log Management de Datadog supprime ces limitations en séparant le processus d'ingestion des logs du processus d'indexation, vous permettant ainsi de collecter, de traiter et d'archiver tous vos logs de façon rentable.
 Grâce aux filtres d'index de Datadog, la configuration de l'Agent devient beaucoup plus simple et vous avez la possibilité de contrôler de façon dynamique les éléments indexés.
 Vous pouvez dorénavant :
 
