@@ -19,7 +19,7 @@ This documentation assume you already have a working EC2 Container Service clust
 
 #### Create an ECS Task
 
-This task launches the Datadog container. When you need to modify the configuration, update this Task Definition as described further down in this guide. If you're using APM or Logs, you'll need to set the appropriate flags in the Task Definition.
+This task launches the Datadog container. When you need to modify the configuration, update this Task Definition as described further down in this guide. If you're using APM or Logs, set the appropriate flags in the Task Definition.
 
 You may either configure the task using the [AWS CLI tools][2] or using the Amazon Web Console.
 
@@ -103,18 +103,18 @@ Ideally you want the Datadog Agent to load on one container on each EC2 instance
 
 ##### Schedule a Daemon Service in AWS using Our ECS Task
 
-1. Log in to the AWS console and navigate to the ECS Clusters section. Click into the cluster you will run the Agent on.
+1. Log in to the AWS console and navigate to the ECS Clusters section. Click into the cluster you want to run the Agent on.
 2. Create a new service by clicking the **Create** button under Services.
-3. For launch type, select EC2. Then select the Task Definition we created before.
+3. For launch type, select EC2. Then select the Task Definition created before.
 4. For service type, select `DAEMON`, and enter a Service name. Click **Next**.
 5. Since the Service will be running once on each instance, you won't need a load balancer. Select None. Click **Next**.
 6. Daemon services don't need Auto Scaling, so click **Next Step**, and then **Create Service**.
 
-If you're not using APM or Logs, you're finished. Otherwise, you'll need to point your application containers to the underlying IP address of the host they are running on, to ship information.
+If you're not using APM or Logs, you are finished. Otherwise, point your application containers to the underlying IP address of the host they are running on to ship information.
 
 ##### Dynamic detection and monitoring of running services
 
-Datadog's <a href="https://docs.datadoghq.com/agent/autodiscovery/">Autodiscovery</a> can be used in conjunction with ECS and Docker to automatically discover and monitor running tasks in your environment.
+Datadog's [Autodiscovery][10] can be used in conjunction with ECS and Docker to automatically discover and monitor running tasks in your environment.
 
 [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_GetStarted.html
 [2]: https://aws.amazon.com/cli/
@@ -125,3 +125,4 @@ Datadog's <a href="https://docs.datadoghq.com/agent/autodiscovery/">Autodiscover
 [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_ecs.html
 [8]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html
 [9]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html#service_scheduler_daemon
+[10]: https://docs.datadoghq.com/agent/autodiscovery/
