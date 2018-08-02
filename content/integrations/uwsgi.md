@@ -57,7 +57,7 @@ logs:
   - type: file
     path: /var/log/uwsgi/uwsgi.log
     service: <MY_APPLICATION>
-    source: uWSGI
+    source: uwsgi
 ```
 
 Finally, [restart the agent][3].
