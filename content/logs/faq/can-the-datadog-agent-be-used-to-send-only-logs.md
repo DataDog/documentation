@@ -19,14 +19,18 @@ It is not recommended to use the Agent for log collection only. Using metric col
 
 However, it is still possible to configure the Agent to only collect logs.
 
-The Agent sends metrics to a specific url that is specified in the `datadog.yaml` file.
+The Agent sends metrics and other payloads to Datadog. To make sure that the agent only sends logs, it is possible to disable the payloads sent by the agent since the version 6.4 thanks to the following steps:
 
 1. Open `datadog.yaml` ([locate this configuration file on your instance][3])
-2. Edit the `dd_url` attribute to any custom value, for example:
+2. Add the `enable_payloads` attribute as below:
 
-    ```
-    dd_url: xyz
-    ```
+```
+enable_payloads:
+  series: false
+  events: false
+  service_checks: false
+  sketches: false
+```
 
 3. Configure the Agent to collect logs as explained in our [log documentation page][2].
 4. [Restart the Agent][4]
