@@ -13,17 +13,17 @@ further_reading:
 
 ## Overview
 
-When multiple teams are sharing the same account or when there are a lot of different log sources, it is critical to be able to start investigating with the right content. 
-In Datadog, teams can now define and share Log Explorer Views so everyone starts troubleshooting with the same predefined context.
+When multiple teams share the same account, or when your logs have many different sources, it is critical to be able to start investigating with the right content right away.
+In Datadog, teams can now define and share Log Explorer Views so everyone can start troubleshooting with the same predefined context.
 
 Datadog Saved Views allow you to save search customizations in the Log Explorer, including:
 
-* A search query
-* A selected subset of facets
-* A set of columns
-* A customized default visualization
+* A [search query][1]
+* A [selected subset of facets][2]
+* A set of [columns][3]
+* A customized default visualization ([logstream][4] or [log analytic][5])
 
-Saved Views can then be selected directly in the left panel or in the search bar thanks to the auto-complete matching whether the search name or query.
+Saved Views can then be selected directly in the left panel or in the search bar thanks to the auto-complete, which matches on either search name or query.
 
 {{< img src="logs/explorer/saved_views/saved_views_selection.png" alt="Saved Views selection" responsive="true">}}
 
@@ -43,9 +43,9 @@ Once this has been done, every time the Log Explorer is opened the default list 
 
 To create a new Saved View:
 
-1. Enter a query in the search bar
-2. Select the columns to display 
-3. Select the list of facets to display
+1. Enter a query in the [search bar][1]
+2. Select the columns to display (from the cog icon at the top-right of the page, or from a log's contextual panel)
+3. Select the list of [facets][2] to display
 4. Click the *Save as* button at the top of the screen
 5. Name it and click on *Save*
 
@@ -55,22 +55,30 @@ To create a new Saved View:
 
 ### Remove a Saved View
 
-Saved Views can be removed directly from the Log Explorer. Hover on the name of the Saved View to remove in the Saved views list to access to the delete button.
+Saved Views can be removed directly form the Saved View list in the Logs Explorer. Hover over the name of the Saved View to reveal its **delete** button. Click on it and confirm.
 
 {{< img src="logs/explorer/saved_views/remove_saved_views.png" alt="remove Saved Views" responsive="true" style="width:50%;">}}
 
 ### Update a Saved View
 
-To update an existing Saved View, proceed exactly if you were to create a new one but instead of saving it, select an existing Saved View from the drop down, click on *replace*, and confirm.
+To update an existing Saved View, proceed exactly as if you were creating a new one but instead of saving it, select an existing Saved View from the drop down, click on *replace*, and confirm.
 
 {{< img src="logs/explorer/saved_views/update_saved_views.gif" alt="Saved Views selection" responsive="true" style="width:50%;">}}
 
-## Revert modification on a Saved View  
+## Revert a modification to a Saved View
 
-When using a Saved View, you can continue to refine and modify your search and keep on the troubleshooting. It is also possible to revert all modifications and come back to the original Saved View thanks to the *Revert* button. 
+After selecting a Saved View, you can continue to refine and modify your search as you need for your troubleshooting purposes. After changing the view, you can always revert to the most recent saved version of the Saved View by selecting the **Revert** button.
+
+**Note**: The Revert button does not undo changes after they have been saved.
 
 {{< img src="logs/explorer/saved_views/revert_saved_views.png" alt="revert Saved Views" responsive="true" style="width:50%;">}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /logs/explorer/search
+[2]: /logs/explorer/search/#facets
+[3]: /logs/explorer/search/#columns
+[4]: /logs/explorer/search/#logstream
+[5]: /logs/explorer/analytics
