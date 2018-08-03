@@ -162,7 +162,7 @@ apm_config:
     endpoint: https://haproxy.example.com:3835
 
 process_config:
-    url: https://haproxy.example.com:3836
+    process_dd_url: https://haproxy.example.com:3836
 ```
 
 Then edit the `datadog.yaml` Agent configuration file and set `skip_ssl_validation` to `true`. This is needed to make the Agent ignore the  discrepancy between the hostname on the SSL certificate (`app.datadoghq.com`) and your HAProxy hostname:
@@ -189,7 +189,7 @@ To send traces or processes through the proxy, setup the following in the `datad
 endpoint = https://haproxy.example.com:3835
 
 [process.api]
-url = https://haproxy.example.com:3836
+endpoint = https://haproxy.example.com:3836
 ```
 
 Edit your supervisor configuration to disable SSL certificate verification. This is needed to prevent Python from complaining about the discrepancy between the hostname on the SSL certificate (`app.datadoghq.com`) and your HAProxy hostname. The supervisor configuration found at:

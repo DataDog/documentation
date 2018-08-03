@@ -8,9 +8,9 @@ further_reading:
 - link: "monitors/downtimes"
   tag: "Documentation"
   text: Planifiez un downtime pour désactiver un monitor
-- link: "monitors/faq"
-  tag: "FAQ"
-  text: FAQ monitors
+- link: "monitors/monitor_status"
+  tag: "Documentation"
+  text: Consulter le statut de de votre monitor.
 ---
 
 {{< img src="monitors/monitor_types/log/log_monitor_overview.png" alt="Log monitor overview" responsive="true" >}}

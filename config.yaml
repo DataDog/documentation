@@ -1545,7 +1545,7 @@ languages:
         #  parent: menu_references_tracing
         # TRACING/APM - Subnav end
 
-        # LOGS
+        # LOGS 
         - identifier: menu_references_logs
           name: "Log Management"
           url: "logs/"
@@ -1554,7 +1554,7 @@ languages:
         
         # Log collection  
         - identifier: customnav_lognav_collection
-          name: "Collecte de log & Intégrations"
+          name: "Collecte de logs"
           url: "logs/log_collection/"
           weight: 20
           parent: menu_references_logs
@@ -1606,10 +1606,27 @@ languages:
 
 
         - identifier: customnav_lognav_other
-          name: "Autres Integrations"
+          name: "Autres Intégrations"
           url: "integrations/#cat-log-collection"
           weight: 299
           parent: customnav_lognav_collection
+       
+        # LOGS - Subnav start
+        - identifier: customnav_lognav_explore
+          name: "Explorer"
+          url: "logs/explore/"
+          weight: 30
+          parent: menu_references_logs
+        - identifier: customnav_lognav_live_tail
+          name: "Live Tail"
+          url: "logs/live_tail/"
+          weight: 32
+          parent: menu_references_logs
+        - identifier: customnav_lognav_analytics
+          name: "Analyses de logs"
+          url: "logs/analytics/"
+          weight: 35
+          parent: menu_references_logs
 
         # LOGS - Processing  
         - identifier: customnav_lognav_processing
@@ -1669,11 +1686,50 @@ languages:
           parent: customnav_lognav_explorer
 
         - identifier: customnav_lognav_logging_without_limits
-          name: "Logger sans limite"
+          name: "Collecter des logs sans limites"
           url: "logs/logging_without_limits/"
           weight: 60
           parent: menu_references_logs
-        
+        - identifier: customnav_lognav_languages
+          name: "Logs d'application"
+          url: "logs/languages/"
+          weight: 80
+          parent: menu_references_logs
+        - identifier: customnav_lognav_csharp
+          name: "Csharp"
+          url: "logs/languages/csharp/"
+          weight: 810
+          parent: customnav_lognav_languages
+        - identifier: customnav_lognav_go
+          name: "Go"
+          url: "logs/languages/go/"
+          weight: 820
+          parent: customnav_lognav_languages
+        - identifier: customnav_lognav_java
+          name: "Java"
+          url: "logs/languages/java/"
+          weight: 830
+          parent: customnav_lognav_languages
+        - identifier: customnav_lognav_nodejs
+          name: "Nodejs"
+          url: "logs/languages/nodejs/"
+          weight: 840
+          parent: customnav_lognav_languages
+        - identifier: customnav_lognav_php
+          name: "PHP"
+          url: "logs/languages/php/"
+          weight: 850
+          parent: customnav_lognav_languages
+        - identifier: customnav_lognav_python
+          name: "Python"
+          url: "logs/languages/python/"
+          weight: 850
+          parent: customnav_lognav_languages
+        - identifier: customnav_lognav_ruby
+          name: "Ruby"
+          url: "logs/languages/ruby/"
+          weight: 860
+          parent: customnav_lognav_languages
         - identifier: customnav_lognav_monitor
           name: "Log monitor"
           url: "monitors/monitor_types/log"

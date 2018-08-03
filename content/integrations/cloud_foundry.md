@@ -113,18 +113,20 @@ cf restage <YOUR_APP>
 
 #### Log Collection
 
-To start collecting logs from your application in CloudFoundry, the puppy-agent contained in the buildpack needs to be run and log collection enabled.
+To start collecting logs from your application in CloudFoundry, the Agent contained in the buildpack needs to be activated and log collection enabled.
 
 ```
-cf set-env $YOUR_APP_NAME RUN_PUPPY true
+cf set-env $YOUR_APP_NAME RUN_AGENT true
 cf set-env $YOUR_APP_NAME DD_LOGS_ENABLED true
+# Disable the Agent core checks to disable system metrics collection
+cf set-env $YOUR_APP_NAME DD_ENABLE_CHECKS false
 # restage the application to get it to pick up the new environment variable and use the buildpack
 cf restage $YOUR_APP_NAME
 ```
 
 By default, the Agent collects logs from `stdout`/`stderr` and listens to TCP port 10514.
 It is possible to ask the Agent to listen on a different TCP port if you are streaming logs from your application in TCP.
-To disable log collection from `stdout`/`stderr, use the following configuration:
+To disable log collection from `stdout`/`stderr`, use the following configuration:
 
 ```
 # override the TCP port

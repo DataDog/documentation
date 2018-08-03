@@ -1869,7 +1869,7 @@ gulp-util@^2.2.17:
     through2 "^0.5.0"
     vinyl "^0.2.1"
 
-gulp@3.9.1:
+gulp@^3.9.1:
   version "3.9.1"
   resolved "https://registry.yarnpkg.com/gulp/-/gulp-3.9.1.tgz#571ce45928dd40af6514fc4011866016c13845b4"
   dependencies:
@@ -4821,9 +4821,9 @@ tough-cookie@~2.3.0, tough-cookie@~2.3.3:
   dependencies:
     punycode "^1.4.1"
 
-"translate@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/translate-v1.0.1.tgz":
-  version "1.0.1"
-  resolved "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/translate-v1.0.1.tgz#abfd9cb46db933471246f88747be3b7fd5306159"
+"translate@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/translate-v1.0.2.tgz":
+  version "1.0.2"
+  resolved "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/translate-v1.0.2.tgz#bcf4ddcd0dd7f0734f2f9821f99a347529dc83b2"
   dependencies:
     "@octokit/rest" "14.0.9"
     babel-polyfill "6.26.0"

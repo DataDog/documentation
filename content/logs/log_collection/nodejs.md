@@ -50,7 +50,7 @@ npm install --save winston
 
 ## Setup - Log to file
 
-In your bootstrap fille or somewhere in your code, declare the logger as follow:
+In your bootstrap file or somewhere in your code, declare the logger as follow:
 
 ```js
 var winston = require('winston');
