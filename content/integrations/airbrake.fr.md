@@ -17,7 +17,7 @@ short_description: Affichez, recherchez et discutez des exceptions Airbrake dans
 version: '1.0'
 ---
 
-{{< img src="integrations/airbrake/airbrakeevent.png" alt="airbrake event" responsive="true" popup="true">}}
+{{< img src="integrations/airbrake/airbrakeevent.png" alt="airbrake event" responsive="true" >}}
 
 ## Aperçu
 

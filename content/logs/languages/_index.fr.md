@@ -1,14 +1,14 @@
 ---
-title: Collecte de log depuis vos languages
+title: Log d'application 
 kind: Documentation
-description: "Configurez votre Agent Datadog pour rassembler les logs de vos languages."
+description: "Configurer vos loggers pour collecter vos logs d'applications."
 ---
 
 ## Comment tirer le meilleur parti de vos logs
 
 Lors du logging des stack traces, il existe des attributs spécifiques dotés d'une interface utilisateur dédiée dans votre application Datadog, tels que le nom du logger, le thread en cours, le type d'erreur et bien sûr la stack trace.
 
-{{< img src="logs/languages/stack_trace.png" style="width:80%;" alt="Stack trace" responsive="true" popup="true" >}}
+{{< img src="logs/languages/stack_trace.png" style="width:80%;" alt="Stack trace" responsive="true" >}}
 
 Pour activer ces fonctionnalités, utilisez les noms d'attribut suivants:
 
@@ -18,7 +18,7 @@ Pour activer ces fonctionnalités, utilisez les noms d'attribut suivants:
 * `error.message`: Message d'erreur contenu dans la stack trace
 * `error.kind`: Le type ou "kind" d'une erreur (i.e "Exception", "OSError", ...)
 
-**Note**: Par défaut, [les pipelines d'intégration][1] tentent de remapper les paramètres par défaut de la bibliothèque de logging sur ces attributs spécifiques et analysent les traces ou traceback pour extraire automatiquement les erreurs `error.msg` et `error.kind`.
+**Note**: Par défaut, [les pipelines d'intégration][1] tentent de remapper les paramètres par défaut de la bibliothèque de logging sur ces attributs spécifiques et analysent les traces ou traceback pour extraire automatiquement les erreurs `error.message` et `error.kind`.
 
 ## Envoyez vos logs en JSON
 

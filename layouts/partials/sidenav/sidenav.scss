@@ -73,6 +73,7 @@ aside.sidenav {
     color:$ddpurple;
     font-size:24px;
     font-weight:200;
+    text-transform: capitalize !important;
   }
 
   .sidenav-search {
@@ -112,7 +113,8 @@ aside.sidenav {
     overflow-x: hidden;
     overflow-y: auto;
     ul {
-      padding-bottom:6px;
+      margin-top:0px;
+      padding-bottom:3px;
     }
     & > ul {
       margin-top:5px;
@@ -129,7 +131,8 @@ aside.sidenav {
         padding-left:27px;
         a {
           padding:0;
-          padding-bottom: 3px;
+          padding-bottom: 0px;
+          margin-top:0px;
         }
       }
     }
@@ -145,22 +148,23 @@ aside.sidenav {
           display:block;
           border:1px solid transparent;
           &:hover {
-            background:#fff;
+            background:transparent;
             color: $ddpurple;
-            border-radius:4px;
-            border:1px solid $ddpurple;
+            border-radius:0px;
+            border:1px solid transparent;
           }
-          &.active {
-            background:#fff;
-            border-radius:4px;
+          &.active span, &.active a{
+            background:transparent;
+            border-radius:0px;
             color: $ddpurple;
-            border:1px solid $ddpurple;
+            border:1px solid transparent;
+            border-bottom: 1px solid $ddpurple;
           }
           .hover {
             display:none;
           }
           span {
-            padding-left: 5px;
+            margin-left: 5px;
           }
           span,
           img {
@@ -200,6 +204,8 @@ aside.sidenav-api {
       padding-left:20px;
       li a {
         font-size: 16px;
+        margin-top: 0px;
+        padding: 0px;
       }
     }
   }
@@ -221,11 +227,12 @@ aside.sidenav-api {
     padding-left: 10px;
   }
   .toc_scrolled {
-    background:#fff !important;
+    background:transparent !important;
     color: $ddpurple !important;
-    font-weight:600 !important;
-    border:1px solid $ddpurple !important;
-    border-radius:4px !important;
+    border:1px solid transparent !important;
+    span{
+      border-bottom: 1px solid $ddpurple;
+    }
   }
   // open adjacent ul to open link
   .toc_open ~ ul {

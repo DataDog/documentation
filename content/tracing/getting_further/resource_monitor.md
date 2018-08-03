@@ -10,7 +10,7 @@ Datadog’s Application Performance Monitoring component consists of a few key c
 Each graph within the APM service and resource Dashboards consist of some `trace.*` metrics.
 Utilize [the download button at the top of the graph][3] to save those Metrics to an existing Timeboard. This can be done for both service level and resource level metrics:
 
-{{< img src="tracing/faq/apm_save_1.png" alt="APM save" responsive="true" popup="true">}}
+{{< img src="tracing/faq/apm_save_1.png" alt="APM save" responsive="true" >}}
 
 **Note**: To build Monitors over resources, utilize the resource tag that contains a hash of the resource Name. Find this by saving the metric to a Timeboard and utilizing the same query in a Metric Monitor:
 
@@ -28,14 +28,14 @@ The downside here is that see the resource hash in the field, as opposed to the 
 Since each service contains a single Top Level Name and we can setup a multi alert by [environment][5] and resource and service, we only need to obtain the top level name to create the URL.  
 This Top level name can be found by clicking on the service you are interested in. For example, for our Mcnulty-Web service, the top level name is `pylons.request`:
 
-{{< img src="tracing/faq/top_level_name.png" alt="Top level name" responsive="true" popup="true">}}
+{{< img src="tracing/faq/top_level_name.png" alt="Top level name" responsive="true" >}}
 
 Then our Monitor configuration would resemble the following:
 
-{{< img src="tracing/faq/top_level_monitor.png" alt="Top level monitor" responsive="true" popup="true">}}
+{{< img src="tracing/faq/top_level_monitor.png" alt="Top level monitor" responsive="true" >}}
 
 [1]: /tracing/visualization/service
 [2]: /tracing/visualization/resource
 [3]: /tracing/visualization/service/#export-to-timeboard
 [4]: /monitors/monitor_types/apm
-[5]: /tracing/setup/environment
+[5]: /tracing/setup/first_class_dimensions#environment

@@ -25,7 +25,8 @@ https://bottlepy.org/
 http://catchpoint.com/session_id
 https://github.com/DataDog/documentation/blob/master/content/
 https://github.com/DataDog/dogweb/
-https://docs-staging.datadoghq.com/gus/redesign/integrations/event_viewer/
+https://docs-staging.datadoghq.com/*
+http://docs-staging.datadoghq.com/*
 https://support.okta.com/help/Documentation/Knowledge_Article/23445146-Acquiring-the-IDPXML-metadata-file-for-a-SAML-Template-App
 https://help.nopassword.com/portfolio-items/datadog/
 *.jsonp

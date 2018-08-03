@@ -25,7 +25,7 @@ version: 1.2.0
 ---
 
 
-{{< img src="integrations/yarn/yarndashboard.png" alt="Hadoop Yarn" responsive="true" popup="true">}}
+{{< img src="integrations/yarn/yarndashboard.png" alt="Hadoop Yarn" responsive="true" >}}
 ## Aperçu
 
 Ce check collecte les métriques depuis YARN ResourceManager incluant:

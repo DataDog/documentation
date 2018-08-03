@@ -49,12 +49,13 @@ Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. `
 
 The "Datadog in-app type" affects how a given metric is interpreted in query results and graph visualizations across the application. The metric type visible on the [metric summary page][20] is the Datadog in-app type. You should only change the type if you have started submitting this metric with a new type, and should be aware that changing the type may render historical data nonsensical.
 
-In the Datadog web application there are four metric types (though one is deprecated):
+In the Datadog web application there are five metric types (though one is deprecated):
 
-* GAUGE
-* RATE
 * COUNT
 * COUNTER (deprecated)
+* DISTRIBUTION
+* GAUGE
+* RATE
 
 A metric's type is stored as metrics metadata and is used to determine how a metric is interpreted throughout the application by determining default time aggregation function and `as_rate()`/`as_count()` behavior. The `as_count()` and `as_rate()` modifiers behave differently for different Web Application metric types.
 
@@ -64,19 +65,20 @@ Datadog accepts metrics submitted from a variety of sources, and as a result the
 
 | Submission Source   | Submission Method (python)           | Submission Type   | Datadog In-App Type |
 | ------------------- | ------------------------------------ | ----------------- | ------------------- |
-| [API][3]            | `api.Metric.send(type="gauge", ...)` | gauge             | gauge               |
 | [API][3]            | `api.Metric.send(type="count", ...)` | count             | count               |
+| [API][3]            | `api.Metric.send(type="gauge", ...)` | gauge             | gauge               |
 | [API][3]            | `api.Metric.send(type="rate", ...)`  | rate              | rate                |
 | [DogStatsD][1]      | `dog.gauge(...)`                     | gauge             | gauge               |
-| [DogStatsD][1]      | `dog.increment(...)`                 | counter           | rate                |
+| [DogStatsD][1]      | `dog.distribution(...)`              | distribution      | distribution        |
 | [DogStatsD][1]      | `dog.histogram(...)`                 | histogram         | gauge, rate         |
+| [DogStatsD][1]      | `dog.increment(...)`                 | counter <sup>deprecated</sup> | rate    |
 | [DogStatsD][1]      | `dog.set(...)`                       | set               | gauge               |
-| [Agent check][2]    | `self.gauge(...)`                    | gauge             | gauge               |
-| [Agent check][2]    | `self.increment(...)`                | counter           | rate                |
-| [Agent check][2]    | `self.rate(...)`                     | rate              | gauge               |
 | [Agent check][2]    | `self.count(...)`                    | count             | count               |
-| [Agent check][2]    | `self.monotonic_count(...)`          | monotonic_count   | count               |
+| [Agent check][2]    | `self.gauge(...)`                    | gauge             | gauge               |
 | [Agent check][2]    | `self.histogram(...)`                | histogram         | gauge, rate         |
+| [Agent check][2]    | `self.increment(...)`                | counter <sup>deprecated</sup> | rate    |
+| [Agent check][2]    | `self.monotonic_count(...)`          | monotonic_count   | count               |
+| [Agent check][2]    | `self.rate(...)`                     | rate              | gauge               |
 | [Agent check][2]    | `self.set(...)`                      | set               | gauge               |
 
 ### Modify a metric's type
@@ -100,11 +102,27 @@ If you are not willing to lose the historical data submitted as a `gauge`, creat
 
 The following units may be associated with metrics submitted to Datadog.
 
-{{% table responsive="true" %}}
+<!-- {{% table responsive="true" %}}
 |Bytes|Time|Percentage|Network|System|Disk|General|DB|Cache|Money|Memory|Frequency|Logging|
 |:----|:----|:----|:----|:---|:---|:----|:---|:---|:---|:---|:---|:---|
 |<ul><li>bit</li><li>byte</li><li>kibibyte</li><li>mebibyte</li><li>gibibyte</li><li>tebibyte</li><li>pebibyte</li><li>exbibyte</li></ul>|<ul><li>microsecond</li><li>millisecond</li><li>second</li><li>minute</li><li>hour</li><li>day</li><li>week</li><li>nanosecond</li></ul>|<ul><li>fraction</li><li>percent</li><li>percent_nano</li><li>apdex</li></ul>|<ul><li>connection</li><li>request</li><li>packet</li><li>segment</li><li>response</li><li>message</li><li>payload</li><li>timeout</li><li>datagram</li><li>route</li><li>session</li></ul>|<ul><li>process</li><li>core</li><li>thread</li><li>host</li><li>node</li><li>fault</li><li>service</li><li>instance</li><li>cpu</li></ul>|<ul><li>file</li><li>inode</li><li>sector</li><li>block</li></ul>|<ul><li>buffer</li><li>error</li><li>read</li><li>write</li><li>occurrence</li><li>event</li><li>time</li><li>unit</li><li>operation</li><li>item</li><li>task</li><li>worker</li><li>resource</li><li>garbage collection</li><li>email</li><li>sample</li><li>stage</li><li>monitor</li><li>location</li><li>check</li><li>attempt</li><li>device</li><li>update</li><li>method</li><li>job</li><li>container</li></ul>|<ul><li>table</li><li>index</li><li>lock</li><li>transaction</li><li>query</li><li>row</li><li>key</li><li>command</li><li>offset</li><li>record</li><li>object</li><li>cursor</li><li>assertion</li><li>scan</li><li>document</li><li>shard</li><li>flush</li><li>merge</li><li>refresh</li><li>fetch</li><li>column</li><li>commit</li><li>wait</li><li>ticket</li><li>question</li></ul>|<ul><li>hit</li><li>miss</li><li>eviction</li><li>get</li><li>set</li></ul>|<ul><li>dollar</li><li>cent</li></ul>|<ul><li>page</li><li>split</li></ul>|<ul><li>hertz</li><li>kilohertz</li><li>megahertz</li><li>gigahertz</li></ul>|<ul><li>entry</li></ul>|
-{{% /table %}}
+{{% /table %}} -->
+
+| type         | unit(s)                                                                                                                                                                                                                                            |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| BIT          | bit / byte / kibibyte / mebibyte / gibibyte / tebibyte / pebibyte / exbibyte                                                                                                                                                                       |
+| TIME         | microsecond / millisecond / second / minute / hour / day / week / nanosecond                                                                                                                                                                       |
+| PERCENTAGE   | fraction / percent / percent_nano / apdex                                                                                                                                                                                                          |
+| NETWORK      | connection / request / packet / segment / response / message / payload / timeout / datagram / route / session                                                                                                                                      |
+| SYSTEM       | process / core / thread / host / node / fault / service / instance / cpu                                                                                                                                                                           |
+| DISK         | file / inode / sector / block                                                                                                                                                                                                                      |
+| GENERAL      | buffer / error / read / write / occurrence / event / time / unit / operation / item / task / worker / resource / garbage collection / email / sample / stage / monitor / location / check / attempt / device / update / method / job / container   |
+| DB           | table / index / lock / transaction / query / row / key / command / offset / record / object / cursor / assertion / scan / document / shard / flush / merge / refresh / fetch / column / commit / wait / ticket / question                          |
+| CACHE        | hit / miss / eviction / get / set                                                                                                                                                                                                                  |
+| MONEY        | dollar / cent                                                                                                                                                                                                                                      |
+| MEMORY       | page / split                                                                                                                                                                                                                                       |
+| FREQUENCY    | hertz / kilohertz / megahertz / gigahertz                                                                                                                                                                                                          |
+| LOGGING      | entry                                                                                                                                                                                                                                              |
 
 ## Further reading
 

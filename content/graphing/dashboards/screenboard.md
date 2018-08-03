@@ -16,7 +16,7 @@ further_reading:
 ## Change Screenboard name 
 
 1. Click on Edit Board at the top of the Screenboard
-    {{< img src="graphing/dashboards/screenboard/screenboard_name.png" alt="Screenboard name" responsive="true" popup="true" style="width:75%;">}}
+    {{< img src="graphing/dashboards/screenboard/screenboard_name.png" alt="Screenboard name" responsive="true" style="width:75%;">}}
 2. Change the name to whatever you like
 3. Click Save Changes
 
@@ -24,7 +24,7 @@ further_reading:
 
 [An Administrator][1] or Screenboard creator can make a Screenboard read-only by clicking the gear icon (upper right corner of a Screenboard) and clicking the **Permissions** link:
 
-{{< img src="graphing/dashboards/screenboard/read_only.png" alt="Read Only" responsive="true" popup="true" style="width:30%;">}}
+{{< img src="graphing/dashboards/screenboard/read_only.png" alt="Read Only" responsive="true" style="width:30%;">}}
 
 **Click "Yes" on the confirmation window to make the Screenboard read-only**
 
@@ -45,6 +45,24 @@ If a user decides to track changes for a Screenboard, the following Screenboard 
 In order to prevent the above listed changes, an administrator (account admins + Screenboard creator) can activate read-only view disabling all non-administrators user edits to any tiles or text in the Screenboard, as well as Screenboard deletion.  
 Even in read-only mode, non-administrator users can still clone the Screenboard, rearrange the tiles, snapshot each tile, and view the tile in full-screen. Any tile rearrangement by a non-administrator user do not persist if the Screenboard is set to read-only.
 
+## Global Time Selector
+
+Screenboards feature a global time option, which sets the same timeframe for all time-based widgets on the same screenboard. The global time selector can be set to a moving window in the past (“The Past Hour,” “The Past 3 Months,” etc.) or to a fixed period between two dates. If a moving window is chosen, all widgets update their timeframes every few milliseconds to move along with that window. 
+
+{{< img src="graphing/dashboards/screenboard/global_time_screenboard.png" alt="Global Time Selector" responsive="true" style="width:50%;">}}
+
+In order to use the global time selector, the screenboard must have at least one time-based widget that is linked to “Global Time.” When creating or editing a time-based widget, go to **Set display preferences** and select "Global Time" in the *Show* drop-down menu. Note: "Global Time" is the default setting.
+
+{{< img src="graphing/dashboards/screenboard/widget_selector.png" alt="Widget time selector" responsive="true" style="width:70%;">}}
+
+When the global time selector is in use, widgets that are linked to global time show data for that period. Widgets that are not linked to global time show the data for their local timeframe as applied to the global window. For instance, if the global time selector is set to the fixed period January 1st 2018 through January 2nd 2018, a widget set to the local timeframe “The Last Minute” shows the last minute of January 2nd, from 11:59pm.
+
+
+When sharing a public Screenboard, you can set a global timeframe ahead of sharing:
+
+{{< img src="graphing/dashboards/screenboard/public_sharing.png" alt="Widget time selector" responsive="true" style="width:70%;">}}
+
+
 ## Tracking Changes
 A user can find all events related to Screenboard changes to the Screenboard they are following by searching `tags:audit, <Screenboard_name>` in the main [event stream][2], as each notification event is tagged with those two tags.
 
@@ -59,10 +77,10 @@ https://app.datadoghq.com/event/stream?per_page=30&query=tags:audit%20status:all
 This feature can be enabled by following these simple steps:
 
 1. At the top right corner of a dashboard, click on the gear icon:
-    {{< img src="graphing/dashboards/faq/enable_notifications.png" alt="enable notifications" responsive="true" popup="true" style="width:30%;">}}
+    {{< img src="graphing/dashboards/faq/enable_notifications.png" alt="enable notifications" responsive="true" style="width:30%;">}}
 
 2. Select **Notifications** option and enable the notifications:
-    {{< img src="graphing/dashboards/faq/notifications_pop_up.png" alt=" notifications pop up" responsive="true" popup="true" style="width:40%;">}}
+    {{< img src="graphing/dashboards/faq/notifications_pop_up.png" alt=" notifications pop up" responsive="true" style="width:40%;">}}
 
 ## Backup my Screenboard
 

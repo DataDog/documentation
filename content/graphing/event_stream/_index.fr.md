@@ -11,18 +11,16 @@ aliases:
 Vous pouvez affiner votre recherche en filtrant certaines propriétés des événements. Voir la liste des filtres ci-dessous pour plus de détails.
 Notez cependant que les filtres effectuent une recherche de correspondance exacte et ne fonctionnent pas avec des chaines de caractères partielles.
 
-{{% table responsive="true" %}}
-| Filter | Description |
-|--------|-------------|
-|user:pup@datadoghq.com|Affiche tous les événements avec des commentaires de pup@datadoghq.com.|
-|sources:github,chef|Affiche les événements de Github OR Chef.|
-|tags:env-prod OR db|Affiche les événements de taggé avec #env-prod OR #db.|
-|tags:security-group:sg-123 AND role:common-node| Affiche les événements de taggé with #security-group:sg-123 AND #role:common-node.|
-|hosts:i-0ade23e6,db.myapp.com|Affiche les événements de i-0ade23e6 OR db.myapp.com.|
-|status:error|Affiche les événements avec le status d'erreur. (supports: 'error', 'warning', 'success')|
-|priority:low|Affiche seulement les événements avec une low-priority. (supports: 'low' or 'normal'. defaults to 'all')|
-|incident:claimed|Affiche seulement les événements de claimed incidents. (supports: 'open', 'claimed', 'resolved', or 'all')|
-{{% /table %}}
+| Filter                                          | Description                                                                      |
+| --------                                        | -------------                                                                    |
+| user:pup@datadoghq.com                          | Trouver tous les évènements avec des commentaires écrits par pup@datadoghq.com.                              |
+| sources:github,chef                             | Montrer les évènements Github OU Chef.                                                 |
+| tags:env-prod OR db                             | Montre les évènements taggués #env-prod OU #db.                                        |
+| tags:security-group:sg-123 AND role:common-node | Montre les évènements taggués #security-group:sg-123 ET #role:common-node.            |
+| hosts:i-0ade23e6,db.myapp.com                   | Montre les évènements en provenance de i-0ade23e6 OU db.myapp.com.                                     |
+| status:error                                    | Montre les évènements avec les statuts en erreur. (supporte : 'error', 'warning', 'success')         |
+| priority:low                                    | Montre les évènements basse-priorité. (supporte : 'low' et 'normal', par défaut: 'all')  |
+| incident:claimed                                | Montre seulement les incidents réclamés. (supporte : 'open', 'claimed', 'resolved', ou 'all') |
 
 La recherche en texte intégral fonctionne sur tous les mots-clés fournis dans la requête de recherche après l'application des filtres. La recherche en texte intégral examine le texte de l'événement, le titre, les tags, les utilisateurs qui ont commenté l'événement, les noms d'hosts et les périphériques liés à l'événement.
 
@@ -62,11 +60,11 @@ Cela vous permet de tout définir dans l'événement qui apparaît dans votre fl
 
 Dans le texte de l'e-mail source, vous ne devez controller que de trois champs: l'expéditeur: email address (obligatoire), subject (obligatoire), and body (obligatoire).
 
-{{< img src="graphing/events/plain-email.png" alt="plain email" responsive="true" popup="true">}}
+{{< img src="graphing/events/plain-email.png" alt="plain email" responsive="true" >}}
 
 #### Evénement Datadog
 
-{{< img src="graphing/events/plain-event.png" alt="plain event" responsive="true" popup="true">}}
+{{< img src="graphing/events/plain-event.png" alt="plain event" responsive="true" >}}
 
 Notez que le sujet de l'email devient le titre de l'événement et le corps de l'email devient le corps de l'événement .Bien qu'il semble qu'un tag apparaisse à la fin du titre et du corps de l'événement, aucune des deux instances ne sont en fait des tags. L'expéditeur de l'e-mail apparaît également en bas de l'événement. Vous pouvez donc en profiter pour identifier l'application d'envoi.
 
@@ -76,11 +74,11 @@ Notez que le sujet de l'email devient le titre de l'événement et le corps de l
 Dans l'e-mail au format JSON, vous avez 10 champs que vous pouvez contrôler: expéditeur adresse e-mail et jusqu'à 9 clés JSON. Ces clés sont le titre, le texte, la priorité, les balises, le type d'alerte, la date d'arrivée, l'hôte, la clé d'agrégation et le nom du type de source.
 **Note: Si votre fichier JSON n'est pas correctement formaté ou si votre e-mail est envoyé avec un sujet, l'événement n'apparaîtra pas dans votre flux d'événements.**
 
-{{< img src="graphing/events/json-email.png" alt="json email" responsive="true" popup="true">}}
+{{< img src="graphing/events/json-email.png" alt="json email" responsive="true" >}}
 
 #### Evénement Datadog
 
-{{< img src="graphing/events/json-event.png" alt="json event" responsive="true" popup="true">}}
+{{< img src="graphing/events/json-event.png" alt="json event" responsive="true" >}}
 
 Dans un e-mail au format JSON, l'objet de l'e-mail n'est pas pertinent car il est remplacé par le titre du JSON dans le corps de l'email. Toutes les données qui apparaissent dans l'événement sont définies dans le JSON du corps de l'e-mail. Ce JSON doit être bien formaté ou alors le message est ignoré.  
 Si vous testez un email avec un client de messagerie standard, le corps peut être converti en HTML pour améliorer la lecture du destinataire. Cela a pour conséquence une altération du format JSON et donc sera ignoré par Datadog.
@@ -91,7 +89,7 @@ Trouvez les clés JSON autorisées dans la documentation sur [l'API d'événemen
 
 Pour configurer l'e-mail, connectez-vous d'abord à votre compte Datadog à l'adresse [https://app.datadoghq.com][dd-app]. Dans le menu *Integrations*, choisissez *API*, puis descendez jusqu'à *Events API Emails*. Cette section vous montre tous les emails disponibles pour vos applications et qui les a créés. Choisissez le format de vos messages dans la liste déroulante "Format":, puis cliquez sur *Create API Email*.
 
-{{< img src="graphing/events/event-email-api.png" alt="JSON Event Email API" responsive="true" popup="true">}}
+{{< img src="graphing/events/event-email-api.png" alt="JSON Event Email API" responsive="true" >}}
 
 [integrations]: /integrations
 [agentcheck]: /agent/agent_checks
@@ -126,7 +124,7 @@ Devrait être codé en: `http://catchpoint.com/session_id%3A123456`
 * `@support-datadog` – Envoie un message au support Datadog directement depuis votre flux.
 * `@all` – Envoie une notification à tous les membres de votre organisation.
 * `@yourname` – Avertit l'utilisateur spécifique nommé 'yourname'.
-* `@test@test.com` Envoie un courriel à test@test.com.
+* `@test@example.com` Envoie un courriel à `test@example.com`.
 * Si vous avez HipChat, Slack, Webhooks, Pagerduty ou VictorOps vous pouvez utiliser:
     * `@hipchat-[room-name]` ou `@slack-[room-name]` – affiche l'événement ou le graphique dans cette room de conversation.
     * `@webhook` – Alertez ou déclenchez tout ce qui est attaché à ce webhook. Découvrez [notre article de blog sur les Webhooks][events-1]!

@@ -5,15 +5,15 @@ further_reading:
 - link: "logs/processing"
   tag: "Documentation"
   text: Learn how to process your logs
-- link: "logs/parsing"
+- link: "logs/processing/parsing"
   tag: "Documentation"
   text: Learn more about parsing
 - link: "logs/explore"
   tag: "Documentation"
   text: Learn how to explore your logs
-- link: "logs/graph"
+- link: "logs/analytics"
   tag: "Documentation"
-  text: "Perform analytics with Log Graphs"
+  text: "Perform Log Analytics"
 - link: "logs/faq/log-collection-troubleshooting-guide"
   tag: "FAQ"
   text: Log Collection Troubleshooting Guide
@@ -48,7 +48,7 @@ npm install --save winston
 
 ## Setup - Log to file
 
-In your bootstrap fille or somewhere in your code, declare the logger as follow:
+In your bootstrap file or somewhere in your code, declare the logger as follow:
 
 ```js
 var winston = require('winston');
@@ -128,5 +128,5 @@ Here are some little advices:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/winstonjs/winston
-[2]: /logs/parsing
+[2]: /logs/processing/parsing
 [3]: https://www.npmjs.com

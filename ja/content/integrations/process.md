@@ -20,8 +20,8 @@ kind: integration
 
 Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
-* [Process check インテグレーションのscript](https://github.com/DataDog/integrations-core/blob/master/process/conf.yaml.example)
-* [Process check インテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/process/conf.yaml.example)
+* [Process check インテグレーションのscript](https://github.com/DataDog/integrations-core/blob/master/process/datadog_checks/process/data/conf.yaml.example)
+* [Process check インテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/process/datadog_checks/process/data/conf.yaml.example)
 
 <!-- ## Configuration
 

@@ -8,7 +8,7 @@ description: "Configure your loggers to gather logs from your application."
 
 When logging stack traces, there are specific attributes that have a dedicated UI display within your Datadog application such as the logger name, the current thread, the error type and of course the stack trace itself.
 
-{{< img src="logs/languages/stack_trace.png" style="width:80%;" alt="Stack trace" responsive="true" popup="true" >}}
+{{< img src="logs/languages/stack_trace.png" style="width:80%;" alt="Stack trace" responsive="true" >}}
 
 To enable those functionalities use the following attribute names:
 

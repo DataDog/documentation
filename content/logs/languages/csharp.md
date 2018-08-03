@@ -5,15 +5,15 @@ further_reading:
 - link: "logs/processing"
   tag: "Documentation"
   text: Learn how to process your logs
-- link: "logs/parsing"
+- link: "logs/processing/parsing"
   tag: "Documentation"
   text: Learn more about parsing
 - link: "logs/explore"
   tag: "Documentation"
   text: Learn how to explore your logs
-- link: "logs/graph"
+- link: "logs/analytics"
   tag: "Documentation"
-  text: "Perform analytics with Log Graphs"
+  text: "Perform Log Analytics"
 - link: "logs/faq/log-collection-troubleshooting-guide"
   tag: "FAQ"
   text: Log Collection Troubleshooting Guide
@@ -235,7 +235,7 @@ If you have followed the instructions you should see in your file (for example `
 If despite the benefits of logging in JSON you wish to remain in a raw string format, we recommend to update the `log4net convertion pattern` to automatically parse your logs with the c# integration pipeline as follows:
 
 ```
-<param name="ConversionPattern" value="%date%d{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread] %logger %method:%line - %message%n" />
+<param name="ConversionPattern" value="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread] %logger %method:%line - %message%n" />
 ```
 
 ## Configure your Datadog Agent
@@ -271,9 +271,43 @@ logs:
 
 That's it! Now, all your logs are going to be in proper JSON automatically understood by your Datadog application.
 
+## Agentless logging
+
+It is possible to stream logs from your application to Datadog or to the Datadog Agent directly. This is not the recommended setup as handling connection issues should not be done directly in your application, but it might not be possible to log to a file when your application is running on a machine that cannot be accessed.
+
+### SeriLog 
+
+Install the Datadog [Serilog sink][4], which send events and logs to Datadog. By default the sink uses a TCP connection over SSL.
+Run the following command in the Package Manager Console: 
+
+```
+PM> Install-Package Serilog.Sinks.Datadog.Logs
+```
+
+Then, initialize the logger directly in your application. Do not forget to [add your `<API_KEY>`][3].
+
+```
+var log = new LoggerConfiguration()
+    .WriteTo.DatadogLogs("<API_KEY>")
+    .CreateLogger();
+```
+
+You can override the default behavior by manually specifying the following properties (`endpoint`, `port`, `useSSL`):
+
+```
+var config = new DatadogConfiguration("intake.logs.datadoghq.com", 10516, true);
+var log = new LoggerConfiguration()
+    .WriteTo.DatadogLogs("<API_KEY>", config)
+    .CreateLogger();
+```
+
+New logs are now directly sent to Datadog.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/parsing
+[1]: /logs/processing/parsing
 [2]: /logs/#tail-existing-files
+[3]: https://app.datadoghq.com/account/settings#api
+[4]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs/

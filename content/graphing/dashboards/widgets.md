@@ -40,9 +40,9 @@ Each type of widget is described below:
 The Timeseries visualization is great for showing one or more metrics, Log events, or APM events over time. The time window depends on what is selected on the [Timeboard][5] or in the graph on a [Screenboard][6].
 Timeseries can be displayed as **lines**, **areas**, and **bars**.
 
-**Note**: Define log graph query (still in beta) exactly as in the [Log explorer][11].
+**Note**: Define log Analytics query (still in beta) exactly as in the [Log explorer][11].
 
-{{< img src="graphing/miscellaneous/visualization/references-graphing-timeseries-example.png" alt="Timeseries" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="graphing/miscellaneous/visualization/references-graphing-timeseries-example.png" alt="Timeseries" responsive="true" style="width:80%;">}}
 
 Example of Timeseries widget for the [API][1]
 ```
@@ -89,10 +89,10 @@ You can correlate Events to Metrics on Dashboards thanks to the Event Overlay Fe
 
 #### Via the UI Editor
 
-{{< img src="graphing/faq/event_overlay_ui.png" alt="event_overlay_ui" responsive="true" popup="true">}}
+{{< img src="graphing/faq/event_overlay_ui.png" alt="event_overlay_ui" responsive="true" >}}
 
 #### Via the JSON tab
-{{< img src="graphing/faq/event_overlay_json.png" alt="event_overlay_json" responsive="true" popup="true">}}
+{{< img src="graphing/faq/event_overlay_json.png" alt="event_overlay_json" responsive="true" >}}
 
 In addition to being able to overlay events within the UI dashboard editor through the search field, you can also modify the JSON to add any event from Datadog. The general format is:
 
@@ -113,7 +113,7 @@ Query values display the current value of a given metric query, with conditional
 The value displayed by a query value need not represent an instantaneous measurement.
 The widget can display the latest value reported, or an aggregate computed from all query values across the time window. These visualizations provide a narrow but unambiguous window into your infrastructure.query
 
-{{< img src="graphing/miscellaneous/visualization/references-graphing-queryvalue-example.png" alt="Query value widget" responsive="true" popup="true" style="width:50%;">}}
+{{< img src="graphing/miscellaneous/visualization/references-graphing-queryvalue-example.png" alt="Query value widget" responsive="true" style="width:50%;">}}
 
 Example of Query Value widget for the [API][1]
 
@@ -158,7 +158,7 @@ Example of Query Value widget for the [API][1]
 
 ### What does "Take the X value from the displayed timeframe" mean?
 
-{{< img src="graphing/miscellaneous/visualization/query_value_widget.png" alt="query_value_widget" responsive="true" popup="true" style="width:50%;">}}
+{{< img src="graphing/miscellaneous/visualization/query_value_widget.png" alt="query_value_widget" responsive="true" style="width:50%;">}}
 
 The Query Value Widget only displays one Value, unlike a timeseries for example, that displays several points.
 
@@ -169,35 +169,35 @@ Let's say you are on a Timeseries and you are currently displaying the past hour
 
 The Heatmap visualization is great for showing metrics aggregated across many tags, such as *hosts*. The more hosts that have a particular value, the darker that square is.
 
-{{< img src="graphing/miscellaneous/visualization/references-graphing-heatmap-example.png" alt="Heatmap" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="graphing/miscellaneous/visualization/references-graphing-heatmap-example.png" alt="Heatmap" responsive="true" style="width:80%;">}}
 
 ## Distribution
 *Supported on Screenboards and Timeboards*
 
 The Distribution visualization is another way of showing metrics aggregated across many tags, such as *hosts*. Unlike the Heatmap, Distribution's x-axis is the quantity rather than time.
 
-{{< img src="graphing/miscellaneous/visualization/references-graphing-distribution-example.png" alt="Distribution" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="graphing/miscellaneous/visualization/references-graphing-distribution-example.png" alt="Distribution" responsive="true" style="width:80%;">}}
 
 ## Toplist
 *Supported on Screenboards and Timeboards*
 
 The Toplist visualization is perfect when you want to see the list of hosts with the most or least of any metric value, such as highest consumers of CPU, hosts with the least disk space, etc.
 
-{{< img src="graphing/miscellaneous/visualization/references-graphing-toplist-example.png" alt="TopList" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="graphing/miscellaneous/visualization/references-graphing-toplist-example.png" alt="TopList" responsive="true" style="width:80%;">}}
 
 ## Change
 *Supported on Screenboards and Timeboards*
 
 The Change graph shows you the change in a value over the time period chosen.
 
-{{< img src="graphing/miscellaneous/visualization/references-graphing-change-example.png" alt="Change graph" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="graphing/miscellaneous/visualization/references-graphing-change-example.png" alt="Change graph" responsive="true" style="width:80%;">}}
 
 ## Hostmap
 *Supported on Screenboards and Timeboards*
 
 The Hostmap graphs any metric for any subset of hosts on the same hostmap visualization available from the main [Infrastructure Hostmap][7] menu.
 
-{{< img src="graphing/miscellaneous/visualization/references-graphing-hostmap-example.png" alt="Hostmap" responsive="true" popup="true">}}
+{{< img src="graphing/miscellaneous/visualization/references-graphing-hostmap-example.png" alt="Hostmap" responsive="true" >}}
 
 ## Free Text
 *Supported on Screenboards only*
@@ -211,14 +211,14 @@ This is commonly used to state the overall purpose of the dashboard.
 
 The event timeline is a widget version of the timeline that appears at the top of the [Event Stream view][9].
 
-{{< img src="graphing/miscellaneous/visualization/references-graphing-eventtimeline-example.png" alt="Timeseries" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="graphing/miscellaneous/visualization/references-graphing-eventtimeline-example.png" alt="Timeseries" responsive="true" style="width:80%;">}}
 
 ## Event Stream
 *Supported on Screenboards only*
 
 The event stream is a widget version of the stream of events on the [Event Stream view][10].
 
-{{< img src="graphing/miscellaneous/visualization/references-graphing-eventstream-example.png" alt="Timeseries" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="graphing/miscellaneous/visualization/references-graphing-eventstream-example.png" alt="Timeseries" responsive="true" style="width:70%;">}}
 
 **This widgets displays only the 100 most recent events**
 
@@ -279,7 +279,7 @@ Note widget is similar to Free Text widget, but allows for more formatting optio
 * An arrow can be added to the text box that appears on the dashboard. This is commonly used to document the structure of the dashboard.
 
 * Use `href` to create internal links in Datadog.
-  {{< img src="graphing/dashboards/widgets/using_link_note_widget.gif" alt="Using links in note widget" responsive="true" popup="true">}}
+  {{< img src="graphing/dashboards/widgets/using_link_note_widget.gif" alt="Using links in note widget" responsive="true" >}}
 
 Example of Note widget for the [API][1]
 
@@ -356,14 +356,14 @@ Check status shows the current status or number of results for any check perform
 
 The service summary displays the top portion of any APM trace in your Screenboard.
 
-{{< img src="graphing/miscellaneous/visualization/references-graphing-servicesummary-example.png" alt="Timeseries" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="graphing/miscellaneous/visualization/references-graphing-servicesummary-example.png" alt="Timeseries" responsive="true" style="width:80%;">}}
 
 ## Monitor Summary
 *Supported on Screenboards only*
 
 Monitor summary is a summary view of all monitors on your system, or a subset based on a query.
 
-{{< img src="graphing/miscellaneous/visualization/references-graphing-monitorsummary-example.png" alt="Timeseries" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="graphing/miscellaneous/visualization/references-graphing-monitorsummary-example.png" alt="Timeseries" responsive="true" style="width:80%;">}}
 
 ## Further Reading
 
@@ -379,4 +379,4 @@ Monitor summary is a summary view of all monitors on your system, or a subset ba
 [8]: /graphing/dashboards/screenboard
 [9]: https://app.datadoghq.com/event/stream
 [10]: /graphing/event_stream/
-[11]: /logs/graph/#log-graph-query
+[11]: /logs/analytics/#log-graph-query

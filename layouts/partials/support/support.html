@@ -1,24 +1,46 @@
 {{ $dot := . }}
 <hr class="mt-40"/>
 <div class="support">
-    <div class="text-center mb-4">
+    <div class="text-left mb-4">
         <h2>{{ i18n "contact_us" }}</h2>
-        <h3>{{ i18n "help_sentence" }}</h3>
+        <p class="mt-3"><i>{{ i18n "help_sentence" }}</i></p>
     </div>
+
+    <div class="container cards-dd tile-nav">
+        <div class="card-deck">
+            <a class="card" href="mailto:support@datadoghq.com">
+                <div class="card-body text-center pb-4 pt-4">
+                    {{ partial "img.html" (dict "root" . "src" "icon-mail.png" "class" "" "alt" "Email" "width" "42.5") }}
+                    <p class="title">email our<br>support team</p>
+                </div>
+            </a>
+            <a class="card" href="http://chat.datadoghq.com/">
+                <div class="card-body text-center pb-4 pt-4">
+                    {{ partial "img.html" (dict "root" . "src" "icon-team.png" "class" "" "alt" "Email" "width" "42.5") }}
+                    <p class="title">live chat our<br>support team</p>
+                </div>
+            </a>
+            <a class="card" href="https://app.datadoghq.com/event/stream">
+                <div class="card-body text-center pb-4 pt-4">
+                    {{ partial "img.html" (dict "root" . "src" "icon-chat.png" "class" "" "alt" "Email" "width" "42.5") }}
+                    <p class="title">in-app event<br>stream messaging</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
     <div class="row">
-        <div class="col-12 col-md-4 mb-4 text-center">
-            <div class="support-item text-center">{{ partial "img.html" (dict "root" . "src" "envelope.png" "class" "" "alt" "Email" "height" "35") }}</div>
-            <p><strong>{{ i18n "email" }}</strong><br/>{{ i18n "email_support_sentence" | safeHTML }}.</p>
+        <div class="col-12 col-md-4 mb-4">
+            <p>{{ i18n "email_support_sentence" | safeHTML }}.</p>
         </div>
-        <div class="col-12 col-md-4 mb-4 text-center">
-            <div class="support-item text-center">{{ partial "img.html" (dict "root" . "src" "chat.png" "class" "" "alt" "live Chat" "height" "35") }}</div>
-            <p><strong>{{ i18n "live_chat" }}</strong><br/>{{ i18n "live_chat_support_sentence" | safeHTML}}.</p>
+        <div class="col-12 col-md-4 mb-4">
+            <p>{{ i18n "live_chat_support_sentence" | safeHTML}}.</p>
         </div>
-        <div class="col-12 col-md-4 mb-4 text-center">
-            <div class="support-item text-center">{{ partial "img.html" (dict "root" . "src" "stream.png" "class" "" "alt" "In-app Event Stream Messaging" "height" "35") }}</div>
-            <p><strong>{{ i18n "event_stream_messaging" }}</strong><br/>{{ i18n "event_stream_support_sentence" | safeHTML }}</p>
+        <div class="col-12 col-md-4 mb-4">
+            <p>{{ i18n "event_stream_support_sentence" | safeHTML }}</p>
         </div>
     </div>
+
     <hr/>
     <div class="row foot">
         <div class="col"></div>

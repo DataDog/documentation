@@ -92,6 +92,32 @@ Exclude containers from the metrics collection and Autodiscovery, if these are n
 
 **Note**: The `docker.containers.running`, `.stopped`, `.running.total` and `.stopped.total` metrics are not affected by these settings and always count all containers. This does not affect your per-container billing.
 
+### Configuration files
+
+You can also mount YAML configuration files in the `/conf.d` folder. They will automatically be copied to `/etc/datadog-agent/conf.d/` when the container starts. The same can be done for the `/checks.d` folder: any Python files in the `/checks.d` folder will automatically be copied to `/etc/datadog-agent/checks.d/` when the container starts.
+
+1. Create a configuration folder on the host and write your YAML files in it. The examples below can be used for the `/checks.d` folder as well.
+
+    ```
+    mkdir /opt/datadog-agent-conf.d
+    touch /opt/datadog-agent-conf.d/nginx.yaml
+    ```
+
+2. When creating the container, mount this new folder to `/conf.d`.
+    ```
+    docker run -d --name dd-agent \
+      -v /var/run/docker.sock:/var/run/docker.sock:ro \
+      -v /proc/:/host/proc/:ro \
+      -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+      -v /opt/datadog-agent-conf.d:/conf.d:ro \
+      -e API_KEY={your_api_key_here} \
+       datadog/agent:latest
+    ```
+
+    _The important part here is `-v /opt/datadog-agent-conf.d:/conf.d:ro`_
+
+Now when the container starts, all files in `/opt/datadog-agent-conf.d` with a `.yaml` extension will be copied to `/etc/datadog-agent/conf.d/`. Note that to add new files you will need to restart the container.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

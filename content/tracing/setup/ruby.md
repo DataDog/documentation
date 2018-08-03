@@ -275,7 +275,7 @@ Ruby APM includes support for the following libraries and frameworks:
 [20]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#faraday
 [21]: https://github.com/lostisland/faraday
 [22]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#grpc
-[23]: https://github.com/grpc/grpc/tree/master/src/rubyc
+[23]: https://github.com/grpc/grpc/tree/master/src/ruby
 [24]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#grape
 [25]: https://github.com/ruby-grape/grape
 [26]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#graphql

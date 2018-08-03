@@ -18,7 +18,7 @@ short_description: Envoyer des statistiques personnalisées à partir de vos app
 version: '1.0'
 ---
 
-{{< img src="integrations/php/phpgraph.png" alt="PHP Graph" responsive="true" popup="true">}}
+{{< img src="integrations/php/phpgraph.png" alt="PHP Graph" responsive="true" >}}
 
 ## Aperçu
 

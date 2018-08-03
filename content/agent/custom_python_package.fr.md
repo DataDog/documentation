@@ -19,7 +19,7 @@ La version python intégrée à l'Agent se trouve ici: `/opt/datadog-agent/embed
 L'Agent vient également avec pip, installer les bibliothèques python en utilisant:
 
 ```bash
-sudo /opt/datadog-agent/embedded/bin/pip install <package_name>
+sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install <package_name>
 ```
 
 ### Windows
@@ -36,7 +36,7 @@ C:\Program Files (x86)\Datadog\Datadog Agent\files
 ```
 Puis [redémarrez votre Agent][1].
 
-{{< img src="agent/windows_python_package.png" alt="windows python package" responsive="true" popup="true">}}
+{{< img src="agent/windows_python_package.png" alt="windows python package" responsive="true" >}}
 
 ## En apprendre plus
 

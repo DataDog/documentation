@@ -9,7 +9,7 @@ further_reading:
 - link: "logs/processing"
   tag: "Documentation"
   text: Learn how to process your logs
-- link: "logs/parsing"
+- link: "logs/processing/parsing"
   tag: "Documentation"
   text: Learn more about parsing
 ---
@@ -33,11 +33,11 @@ The status code of the request can be used to determine the log status. Our inte
 Let's assume the status code of your log is stored in the `http.status_code` attribute.
 Add a Category Processor in your pipeline that creates a new attribute to reflect the above mapping:
 
-{{< img src="logs/faq/category_processor.png" alt="Category processor" responsive="true" popup="true">}}
+{{< img src="logs/faq/category_processor.png" alt="Category processor" responsive="true" >}}
 
 Then add a status remapper that uses the newly created attribute:
 
-{{< img src="logs/faq/log_status_remapper.png" alt="log status remapper" responsive="true" popup="true">}}
+{{< img src="logs/faq/log_status_remapper.png" alt="log status remapper" responsive="true" >}}
 
 ## Bunyan levels
 
@@ -53,11 +53,11 @@ Bunyan levels are similar to those of Syslog, but their values are multiplied by
 Let's assume the bunyan level is stored in the `bunyan_level` attribute.
 Add a Category Processor in your pipeline that creates a new attribute to reflect the above mapping:
 
-{{< img src="logs/faq/category_processor_bunyan.png" alt="category processor bunyan" responsive="true" popup="true">}}
+{{< img src="logs/faq/category_processor_bunyan.png" alt="category processor bunyan" responsive="true" >}}
 
 Then add a status remapper that uses the newly created attribute:
 
-{{< img src="logs/faq/status_remapper_bunyan.png" alt="log status remapper bunyan" responsive="true" popup="true">}}
+{{< img src="logs/faq/status_remapper_bunyan.png" alt="log status remapper bunyan" responsive="true" >}}
 
 ## Further Reading
 

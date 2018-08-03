@@ -8,4 +8,4 @@ options = {
 initialize(**options)
 
 # Create user
-api.User.create(handle='test@datadoghq.com', name='test user')
+api.User.create(handle='test@datadoghq.com', name='test user', access_role='st')

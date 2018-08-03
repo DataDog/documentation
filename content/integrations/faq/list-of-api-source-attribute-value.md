@@ -8,6 +8,7 @@ kind: faq
 |Activemq|ACTIVEMQ|
 |Airbrake|AIRBRAKE|
 |Akamai|AKAMAI|
+|Alibaba Cloud|ALIBABACLOUD|
 |Amazon Api Gateway|APIGATEWAY|
 |Amazon Auto Scaling|AUTOSCALING|
 |Amazon Billing|BILLING|
@@ -74,6 +75,7 @@ kind: faq
 |Ceph|CEPH|
 |Chatwork|CHATWORK|
 |Chef|CHEF|
+|Circleci|CIRCLECI|
 |Cisco Aci|CISCOACI|
 |Cloud Foundry|CLOUDFOUNDRY|
 |Cloudhealth|CLOUDHEALTH|
@@ -196,6 +198,7 @@ kind: faq
 |Teamcity|TEAMCITY|
 |Tokumx|TOKUMX|
 |Tomcat|TOMCAT|
+|Travis Ci|TRAVISCI|
 |Upstart|UPSTART|
 |User|DOGWEBPUBLISHER|
 |Users|DOGWEBPUBLISHER|

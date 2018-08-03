@@ -26,7 +26,7 @@ class TestCheck(AgentCheck):
 ```
 
 Such an Agent check would create the following event in your event stream:
-{{< img src="graphing/faq/event_example.png" alt="event_example" responsive="true" popup="true">}}
+{{< img src="graphing/faq/event_example.png" alt="event_example" responsive="true" >}}
 
 In this example, the host tag would have been applied even without referencing `get_hostname(self.agentConfig)`, but that reference added the hostname to the event title and content.
 

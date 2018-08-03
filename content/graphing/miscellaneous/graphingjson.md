@@ -9,7 +9,7 @@ There are two ways to interact with the Graphing Editor: using the GUI (the defa
 
 ## Graphing with the JSON editor
 
-{{< img src="graphing/miscellaneous/graphingjson/references-graphing-jsoneditor.png" alt="references graphing jsoneditor" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="graphing/miscellaneous/graphingjson/references-graphing-jsoneditor.png" alt="references graphing jsoneditor" responsive="true" style="width:80%;">}}
 
 ### Grammar
 
@@ -179,7 +179,7 @@ The Time Series can be further broken down to:
 
 #### Line Charts
 
-{{< img src="graphing/miscellaneous/graphingjson/multi-lines.png" alt="multi lines" responsive="true" popup="true">}}
+{{< img src="graphing/miscellaneous/graphingjson/multi-lines.png" alt="multi lines" responsive="true" >}}
 
 The representation is automatically derived from having multiple `requests` values.
 
@@ -197,7 +197,7 @@ The representation is automatically derived from having multiple `requests` valu
 
 #### Stacked Series
 
-{{< img src="graphing/miscellaneous/graphingjson/slice-n-stack.png" alt="slice and stack" responsive="true" popup="true">}}
+{{< img src="graphing/miscellaneous/graphingjson/slice-n-stack.png" alt="slice and stack" responsive="true" >}}
 
 In the case of related Time Series, you can easily draw them as stacked areas by using the following syntax:
 
@@ -284,12 +284,12 @@ Filter configuration allows you to automatically change y-axis bounds based on a
 
 For y-axis filtering, there are two ways to set up the configuration.
 
-To begin, there is a simple configuration where you specify an absolute value or a percentage and all values above the value or all values that sit within the top ##% are cutoff.
+To begin, there is a simple configuration where you specify an absolute value or a percentage. All top values or all values that sit within the top `X%` are cut off.
 
 Examples:
 
     "yaxis": {
-        "filter": 30 // all values above 30 do not appear
+        "filter": 30 // all top 30 values do not appear
     }
 
     "yaxis": {
@@ -309,7 +309,7 @@ The following shows all data except those with values higher than 15:
 
     "yaxis": {
         "filter": {
-            "above": 15
+            "top": 15
         }
     }
 
@@ -317,7 +317,7 @@ The following hides data points below 2:
 
     "yaxis": {
         "filter": {
-            "below": 2
+            "bottom": 2
         }
     }
 
@@ -337,7 +337,7 @@ Here is a full JSON example:
     "scale": "log"
     "filter": {
          "top": "5%",
-         "below": 15
+         "bottom": 15
      }
   },
 }

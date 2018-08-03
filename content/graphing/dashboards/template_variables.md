@@ -24,7 +24,7 @@ Dashboard Template Variables allow you to apply a new scope quickly to one or mo
 
 New dashboards start with a keyless template variable applied. Click on the pencil icon to open the template variable edit mode:
 
-{{< img src="graphing/dashboards/template_variables/edit_mode_template_variable.png" alt="Edit template variable" responsive="true" popup="true" style="width:40%;">}}
+{{< img src="graphing/dashboards/template_variables/edit_mode_template_variable.png" alt="Edit template variable" responsive="true" style="width:40%;">}}
 
 Once in the edit mode click on **Add Variable +** to create your first Template Variable, it is defined by:
 
@@ -37,7 +37,7 @@ Once in the edit mode click on **Add Variable +** to create your first Template 
 
 Once created, notice that you have statistics upon your template variables usage in your graphs. In the picture below, the template variable is not used in both graph of the dashboard:
 
-{{< img src="graphing/dashboards/template_variables/stats_tv.png" alt="statistic TV" responsive="true" popup="true" style="width:40%;">}}
+{{< img src="graphing/dashboards/template_variables/stats_tv.png" alt="statistic TV" responsive="true" style="width:40%;">}}
 
 Decide if you want to remove/add this Template Variable to all of your graphs with the respective **Remove From All** and **Add to All** buttons.
 
@@ -45,11 +45,11 @@ Decide if you want to remove/add this Template Variable to all of your graphs wi
 
 Once you have defined a template variable, it appears in the options displayed in the `from`  field:
 
-{{< img src="graphing/dashboards/template_variables/tv_in_graph.png" alt="Template variable in graphs" responsive="true" popup="true" style="width:50%;">}}
+{{< img src="graphing/dashboards/template_variables/tv_in_graph.png" alt="Template variable in graphs" responsive="true" style="width:50%;">}}
 
 After the graph is saved, the value of this Template Variable will be the one selected on top of your Dashboard:
 
-{{< img src="graphing/dashboards/template_variables/selecting_template_variables.png" alt="Selecting template variables" responsive="true" popup="true" style="width:75%;">}}
+{{< img src="graphing/dashboards/template_variables/selecting_template_variables.png" alt="Selecting template variables" responsive="true" style="width:75%;">}}
 
 ## Template variables and events
 
@@ -61,27 +61,27 @@ Values from dashboard template variables can be directly captured by using the `
 
 For example, to search for events in the event stream with the same region tag, use: `tags:region:$region.value`.
 
-{{< img src="graphing/dashboards/template_variables/tv5.png" alt="tv5" responsive="true" popup="true" style="width:75%;">}}
+{{< img src="graphing/dashboards/template_variables/tv5.png" alt="tv5" responsive="true" style="width:75%;">}}
 
 In the following example, the template variable resolves to `tags:region:ap-south-1`. After those events are brought up in the event search overlay, the timing of the events are marked by pink bars in the graphs to show the timing of events:
 
-{{< img src="graphing/dashboards/template_variables/tv7.png" alt="tv7" responsive="true" popup="true" style="width:85%;">}}
+{{< img src="graphing/dashboards/template_variables/tv7.png" alt="tv7" responsive="true" style="width:85%;">}}
 
 Use multiple template variables in the search field and the event overlay search displays all events tagged with the same values from the template variables. The following example uses the query `tags:role:$role.value,env:$env.value`
 
-{{< img src="graphing/dashboards/template_variables/tv8.png" alt="tv8" responsive="true" popup="true" style="width:85%;">}}
+{{< img src="graphing/dashboards/template_variables/tv8.png" alt="tv8" responsive="true" style="width:85%;">}}
 
 Since the `$variable.value` syntax captures the resolved key value from the template variable, it can be used with other filters, such as `hosts:`.
 Here is an example that uses the tags field together with the hosts: field in the search term `tags:env:$env.value hosts:$host.value`
 
-{{< img src="graphing/dashboards/template_variables/tv9.png" alt="tv9" responsive="true" popup="true" style="width:85%;">}}
+{{< img src="graphing/dashboards/template_variables/tv9.png" alt="tv9" responsive="true" style="width:85%;">}}
 
 ## Template variables and Logs
 
 Template variables work by default on Log widgets, as Metrics and Logs share the same tags.
 Additionally, it is possible to define specific Log Template variables based on your [Log Facets][4]. Those template variables starts with `@`.
 
-{{< img src="graphing/dashboards/template_variables/log_template_variables.png" alt="log template variables" responsive="true" popup="true" style="width:85%;">}}
+{{< img src="graphing/dashboards/template_variables/log_template_variables.png" alt="log template variables" responsive="true" style="width:85%;">}}
 
 Using the `Add to all` button adds this template variable to all log widgets. Wildcards can be used in the template variable value.
 

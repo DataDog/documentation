@@ -18,7 +18,7 @@ further_reading:
 
 La page [Manage Monitors][1] vous permet d'exécuter une recherche avancée sur tous les monitors afin de pouvoir supprimer, mettre en sourdine, résoudre ou modifier les tags de service pour les monitor sélectionnés. Vous pouvez également cloner ou modifier entièrement un monitor depuis les résultats de la recherche.
 
-{{< img src="monitors/manage_monitor/manage_monitor_page.png" alt="manage monitor page" responsive="true" popup="true" >}}
+{{< img src="monitors/manage_monitor/manage_monitor_page.png" alt="manage monitor page" responsive="true" >}}
 
 ## Trouver les monitors
 
@@ -77,11 +77,11 @@ Il y a quelques mises en garde concernant les champs avec des guillemets:
 
 Lorsque vous avez trouvé les monitor que vous recherchiez, sélectionnez-en un ou plusieurs que vous souhaitez mettre à jour en cochant les cases à côté de chaque résultat. Vous pouvez sélectionner tous les résultats en cochant la case située en haut de l'en-tête de la colonne STATUS. Modifiez les monitors à l'aide des boutons en haut à droite des résultats de recherche: Mute, Resolve, Delete et Edit Service Tags.
 
-{{< img src="monitors/manage_monitor/manage-monitors-mute.png" alt="manage-monitors-mute" responsive="true" popup="true" style="width:80%;" >}}
+{{< img src="monitors/manage_monitor/manage-monitors-mute.png" alt="manage-monitors-mute" responsive="true" style="width:80%;" >}}
 
 Pour modifier un monitor, passez la souris dessus et utilisez les boutons à l'extrême droite de sa rangée: Edit, Clone, Mute, Delete Pour afficher plus de détails sur un monitor, cliquez sur son nom pour visiter sa page d'état.
 
-{{< img src="monitors/manage_monitor/manage-monitors-hover-clone.png" alt="manage-monitors-hover-clone" responsive="true" popup="true" style="width:80%;" >}}
+{{< img src="monitors/manage_monitor/manage-monitors-hover-clone.png" alt="manage-monitors-hover-clone" responsive="true" style="width:80%;" >}}
 
 ## Gérer les monitors déclenchés avec une granularité au niveau du groupe
 

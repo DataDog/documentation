@@ -18,7 +18,7 @@ doclevel: basic
 
 Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
-* [MySQLインテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/mysql/conf.yaml.example)
+* [MySQLインテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example)
 * [MySQLインテグレーション checks.d](https://github.com/DataDog/integrations-core/blob/master/mysql/check.py)
 
 MySQLインテグレーションがデフォルトで取得しているメトリクス:

@@ -87,7 +87,7 @@ subjects:
   ```
   ...
       spec:
-        serviceAccountName: datadog
+        serviceAccountName: datadog-agent
   ...
   ```
 

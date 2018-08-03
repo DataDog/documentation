@@ -51,7 +51,7 @@ Then start the Agent and the application container, connected to the network pre
 
 ```bash
 # Datadog Agent
-docker run -d --name dd-agent \
+docker run -d --name datadog-agent \
               --network <NETWORK_NAME> \
               -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
@@ -66,7 +66,7 @@ docker run -d --name app \
               company/app:latest
 ```
 
-This exposes the hostname `dd-agent` in your `app` container.  
+This exposes the hostname `datadog-agent` in your `app` container.  
 If you're using `docker-compose`, `<NETWORK_NAME>` parameters are the ones defined under the `networks` section of your `docker-compose.yml`.
 
 Your application tracers must be configured to submit traces to this address. See the examples below for each supported language:
@@ -77,7 +77,7 @@ Your application tracers must be configured to submit traces to this address. Se
 from ddtrace import tracer
 
 tracer.configure(
-    hostname='dd-agent',
+    hostname='datadog-agent',
     port=8126,
 )
 ```
@@ -86,7 +86,7 @@ tracer.configure(
 
 ```ruby
 Datadog.configure do |c|
-  c.tracer hostname: 'dd-agent',
+  c.tracer hostname: 'datadog-agent',
            port: 8126
 end
 ```
@@ -99,7 +99,7 @@ import ddtrace "github.com/DataDog/dd-trace-go/opentracing"
 
 func main() {
     config := ddtrace.NewConfiguration()
-    config.AgentHostname = "dd-agent"
+    config.AgentHostname = "datadog-agent"
     config.AgentPort = "8126"
 
     tracer, closer, err := ddtrace.NewTracer(config)
@@ -112,7 +112,7 @@ func main() {
 Either update the Java Agent configuration via environment variables:
 
 ```bash
-DD_AGENT_HOST=dd-agent \
+DD_AGENT_HOST=datadog-agent \
 DD_AGENT_PORT=8126 \
 java -javaagent:/path/to/the/dd-java-agent.jar -jar /your/app.jar
 ```
@@ -121,16 +121,16 @@ or via system properties:
 
 ```bash
 java -javaagent:/path/to/the/dd-java-agent.jar \
-     -Ddd.agent.host=dd-agent \
+     -Ddd.agent.host=datadog-agent \
      -Ddd.agent.port=8126 \
      -jar /your/app.jar
 ```
 
-#### JavaScript (beta)
+#### Node.js
 
 ```javascript
 const tracer = require('dd-trace').init({
-  hostname: 'dd-agent',
+  hostname: 'datadog-agent',
   port: 8126
 })
 ```

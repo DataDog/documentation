@@ -278,6 +278,7 @@ By default, Datadog ingests the value of message as the body of the log entry. T
 
 Each log entry may specify a status level which is made available for faceted search within Datadog. However, if a JSON formatted log file includes one of the following attributes, Datadog interprets its value as the the log’s official status:
 
+* `status`
 * `severity`
 * `level`
 * `syslog.severity`
@@ -288,23 +289,26 @@ If you would like to remap some status existing in the `status` attribute, you c
 
 Using the Datadog Agent or the RFC5424 format automatically sets the host value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog interprets its value as the the log’s host:
 
+* `host`
+* `hostname`
 * `syslog.hostname`
 
 ### *service* attribute
 
 Using the Datadog Agent or the RFC5424 format automatically sets the service value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog interprets its value as the the log’s service:
 
+* `service`
 * `syslog.appname`
 
 ### Edit reserved attributes
 
 You can now control the global hostname, service, timestamp, and status main mapping that are applied before the processing pipelines. This is particularly helpful if logs are sent in JSON or from an external Agent.
 
-{{< img src="logs/log_collection/reserved_attribute.png" alt="Reserved Attribute" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="logs/log_collection/reserved_attribute.png" alt="Reserved Attribute" responsive="true" style="width:80%;">}}
 
 To change the default values for each of the reserved attributes, go to the pipeline page and edit the `Reserved Attribute mapping`:
 
-{{< img src="logs/log_collection/reserved_attribute_tile.png" alt="Reserved Attribute Tile" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="logs/log_collection/reserved_attribute_tile.png" alt="Reserved Attribute Tile" responsive="true" style="width:80%;">}}
 
 [1]: /agent
 [2]: /getting_started/custom_metrics/

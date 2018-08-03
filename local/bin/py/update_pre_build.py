@@ -291,7 +291,6 @@ class PreBuild:
                         data = '---\n{0}\n---\n'.format(fm)
                         f.write(data)
 
-
     def process_source_attribute(self, file_name):
         """
         Take a single source.py file extracts the FROM_DISPLAY_NAME dict values
@@ -402,6 +401,11 @@ class PreBuild:
         :param file_name: path to a readme md file
         """
         if file_name.endswith('.md'):
+            dependencies = []
+            if file_name.startswith(self.options.integrations):
+                dependencies.append(file_name.replace(self.options.integrations, "https://github.com/DataDog/integrations-core/blob/master/"))
+            elif file_name.startswith(self.options.extras):
+                dependencies.append(file_name.replace(self.options.extras, "https://github.com/DataDog/integrations-extras/blob/master/"))
             metrics = glob.glob('{path}{sep}*metadata.csv'.format(path=dirname(file_name), sep=sep))
             metrics = metrics[0] if len(metrics) > 0 else None
             metrics_exist = metrics and exists(metrics) and linecache.getline(metrics, 2)
@@ -421,12 +425,13 @@ class PreBuild:
                     result = re.sub(self.regex_metrics, r'\1{{< get-metrics-from-git "%s" >}}\n\3\4'%format(title), result, 0)
                 if service_check_exist:
                     result = re.sub(self.regex_service_check, r'\1{{< get-service-checks-from-git "%s" >}}\n\3\4' % format(title), result, 0)
-                result = self.add_integration_frontmatter(new_file_name, result)
+                result = "{0}\n\n{1}".format(result, '{{< get-dependencies >}}')
+                result = self.add_integration_frontmatter(new_file_name, result, dependencies)
                 if not exist_already:
                     with open(self.content_integrations_dir + new_file_name, 'w') as out:
                         out.write(result)
 
-    def add_integration_frontmatter(self, file_name, content):
+    def add_integration_frontmatter(self, file_name, content, dependencies=[]):
         """
         Takes an integration README.md and injects front matter yaml based on manifest.json data of the same integration
         :param file_name: new integration markdown filename e.g airbrake.md
@@ -445,10 +450,12 @@ class PreBuild:
                 if item[0].get('type', None):
                     item[0]['ddtype'] = item[0].get('type')
                     del item[0]['type']
+                item[0]['dependencies'] = dependencies
                 fm = yaml.dump(item[0], default_flow_style=False).rstrip()
             else:
                 fm = {'kind': 'integration'}
         return template.format(front_matter=fm, content=content)
+
 
 if __name__ == '__main__':
     parser = OptionParser(usage="usage: %prog [options] link_type")

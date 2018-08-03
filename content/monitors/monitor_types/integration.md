@@ -14,7 +14,7 @@ further_reading:
   text: Consult your monitor status
 ---
 
-{{< img src="monitors/monitor_types/integration/es_status.png" alt="es status" responsive="true" popup="true">}}
+{{< img src="monitors/monitor_types/integration/es_status.png" alt="es status" responsive="true" >}}
 
 ## Overview
 

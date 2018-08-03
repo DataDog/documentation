@@ -34,7 +34,8 @@ Le check agent metric est packagé avec l'agent, il vous faut donc simplement [i
 
 ### Configuration
 
-Editez le fichier `agent_metrics.yaml` afin de pointer sur votre serveur et ses ports, configurez le master à monitorer . Consultez l'exemple du [canevas  agent_metrics.yaml](https://github.com/DataDog/integrations-core/blob/master/agent_metrics/conf.yaml.default) pour apprendre toutes les options de configuration disponibles:
+Editez le fichier `agent_metrics.yaml` afin de pointer sur votre serveur et ses ports, configurez le master à monitorer . Consultez l'exemple du [canevas  agent_metrics.yaml](
+https://github.com/DataDog/integrations-core/blob/master/agent_metrics/datadog_checks/agent_metrics/data/conf.yaml.default) pour apprendre toutes les options de configuration disponibles:
 
 ### Validation
 

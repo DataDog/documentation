@@ -92,6 +92,7 @@ a:focus {
   width: 100%;
   background-color: #fff;
   color: $ddpurple;
+  /*border-color: $ddpurple;*/
   border-color: $ddpurple;
   font-weight: 600;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -111,20 +112,27 @@ a:focus {
 // todo: do we want all code blocks like this or just ones on api, move this
 pre {
   display: block;
-  padding: 9.5px;
+  padding: 10.5px 9.5px;
   margin: 0 0 10px;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.428571429;
   color: #000000;
-  background-color: #F8F8F8;
-  border-radius: 4px;
+  background-color: #F2F2F2;
+  border-radius: 2px;
+  border: 1px solid #D6D6D6;
   font-family: $font-family-monospace;
   word-break: normal;
   word-wrap: normal;
+  .api &{
+    border: 1px solid transparent;
+  }
   code {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     padding: 0;
-    font-size: 12px;
-    color: #000000;
+    font-size: 14px;
+    line-height: 27px;
+    color: #555555;
     white-space: pre-wrap;
     background-color: transparent;
     border-radius: 0;
@@ -141,24 +149,25 @@ tbody {
 }
 
 code {
-  color: #555;
+  color: #555555;
   padding: 0;
   font-size: 14px;
-  background-color: #f8f8f8;
+  background-color: #F2F2F2;
   border-left: 5px solid #f8f8f8;
   border-right: 5px solid #f8f8f8;
   border-bottom: 2px solid #f8f8f8;
   border-radius: 4px;
   display: inline;
   white-space: normal;
-  font-family: 'Source Code Pro', monospace;
+  /*font-family: 'Source Code Pro', monospace;*/
+  font-family: $font-family-monospace;
 }
 
 p {
   // todo: can i set this with a bootstrap variable?
   font-size: 18px;
   color: #4a4a4a;
-  line-height: 24px;
+  line-height: 27px;
 }
 
 h1 {
@@ -172,6 +181,21 @@ h1 {
 h2 {
   padding-bottom: 3px;
   line-height: 36px;
+/*  &~ p {
+    padding-top:100px;
+  }*/
+}
+h4{
+  text-transform: uppercase;
+  padding-top: 14px;
+}
+
+h5{
+  color: $ddpurple;
+  > a{
+    color: $ddpurple !important;
+  }
+  padding-top: 14px;
 }
 
 .col-lg-7 {
@@ -200,20 +224,24 @@ h2 {
   & > ol li a,
   & > ul li a {
     //text-decoration:underline;
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid $gray-300;
     &:hover {
       color: $ddpurple;
       border-color: $ddpurple;
     }
   }
 
-  ul {
+  ul{
     list-style-type: none;
+    -webkit-padding-start: 12px;
+    ul {
+      -webkit-padding-start: 20px;
+    }
     li {
       &:before {
         content: "–";
         position: relative;
-        margin-right: 3px;
+        margin-right: 10px;
         margin-left: -12px;
         float: left;
       }
@@ -236,14 +264,34 @@ h2 {
   p + h1,
   p + h2,
   p + h3,
-  p + h4 {
-    padding-top: 11px;
+  p + h4,
+  ol + h1,
+  ol + h2,
+  ol + h3,
+  ol + h4,
+  ul + h1,
+  ul + h2,
+  ul + h3,
+  ul + h4,
+  span + h1,
+  span + h2,
+  span + h3,
+  span + h4,
+  table + h1,
+  table + h2,
+  table + h3,
+  table + h4 {
+    padding-top: 14px;
+  }
+
+  h2 + h3 {
+    padding-top: 14px;
   }
 
   ul, ol, p {
     font-size: 18px;
     color: #4a4a4a;
-    line-height: 24px;
+    line-height: 27px;
     -webkit-font-smoothing: subpixel-antialiased;
     -moz-osx-font-smoothing: auto;
   }
@@ -272,8 +320,8 @@ h2 {
 
     }
     &:hover {
-      border-color: $ddpurple;
-      box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, .2);
+      border-color: transparent;
+      box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, .4);
       .hover {
         display: inline;
       }
@@ -354,11 +402,11 @@ h2 {
 table, .table {
   width: 100%;
   max-width: 100%;
-  margin-bottom: 31px;
-  border: 1px solid #ededed;
+  margin-bottom: 20px;
+  border: 1px solid #D6D6D6;
   font-size: 16px;
   a {
-    border-bottom: 1px solid #c8c8c8;
+    border-bottom: 1px solid $gray-300;
     &:hover {
       border-bottom: 1px solid $ddpurple;
     }
@@ -388,10 +436,15 @@ table, .table {
 
   & > thead > tr > th {
     vertical-align: bottom;
-    background: #ededed;
+    background: #e8e8e8;
     border: none;
-    font-size: 18px;
-    color: #555;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #000000;
+  }
+  & > thead > tr > th, & > tbody > tr > td {
+    padding:.65rem;
+    border-left: 1px solid #D6D6D6 !important;
   }
   tr:first-child td {
     border: none;

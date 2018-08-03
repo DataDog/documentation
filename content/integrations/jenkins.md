@@ -12,7 +12,7 @@ categories:
 - configuration & deployment
 ---
 
-{{< img src="integrations/jenkins/integration-jenkins-overview.png" alt="Jenkins Plugin" responsive="true" popup="true">}}
+{{< img src="integrations/jenkins/integration-jenkins-overview.png" alt="Jenkins Plugin" responsive="true" >}}
 
 ## Overview
 

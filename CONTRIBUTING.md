@@ -17,6 +17,25 @@ The [Dos](#dos) and [Donts](#donts) serve the main purpose: **to clearly inform 
 * Use the American English **en_US** dialect when writing documentation, code comments, [wiki entries][3], etc. in the English language. This is the default language for all `*.md` files.  
 * Use the Standard French **fr_FR** dialect when writing in the French language. This is the language in all `*.fr.md` files.
 
+### RFC 2119
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED",  "MAY", and "OPTIONAL" in the documentation are to be interpreted as described in [RFC 2119][5]. When writing in languages other than English, a best-effort must be made to adhere to this RFC.
+
+### RFC 2606
+
+A top level domain (TLD) in an example must reference a TLD permanently reserved for such purposes. As described in [RFC 2606][6] four TLD names are reserved:
+
+* `.test`
+* `.example`
+* `.invalid`
+* `.localhost`
+
+Same goes for second level domain names, three are reserved: 
+
+* `example.com`
+* `example.net`
+* `example.org`
+
 ## Dos
 
 * **Be plain and direct**: Say exactly what you mean using plain speech. Don’t leave the reader guessing:
@@ -83,8 +102,8 @@ This section sets the record straight (for the Docs site, not for all humankind)
     * **GOOD**: “Metrics, events, and service checks.”
 
 * **Use the em dash (—) with no spaces between adjacent words**: 
-    * **BAD**: “The rest - Ok, Skipped, Ignored, and No Data - are not alert-worthy”. 
-    * **GOOD**: “The rest—Ok, Skipped, Ignored, and No Data—are not alert-worthy.”
+    * **BAD**: “The rest - Ok, Skipped, and No Data - are not alert-worthy”. 
+    * **GOOD**: “The rest—Ok, Skipped, and No Data—are not alert-worthy.”
 
 * **Use the present tense**: Avoid future tense most of the time. 
     * **BAD**: “Once you enable the integration, the Agent will start sending metrics to Datadog.” 
@@ -117,10 +136,10 @@ Use text formatting to clarify and enhance content.
 
 | Formating   | Rule                                                                                                                    | Example                                               |
 | :---        | :------                                                                                                                 | :----                                                 |
-| `Backquote` | Used every time there is code related content in some text                                                              | Use the `foo` parameter                               |
-| **Bold**    | Subjectively pointing the reader to something that he shouldn't miss.                                                   | **This is important**, not that.                      |
-| *Italic*    | Literally translated words, default values, functions, settings, and page names.                                       | Go the the *setting* page in your Datadog application |
-| [Link]      | Links must be specified using the reference format (i.e. in the footnote) in order to aid [the translation process][2]. | Text with [a link]                                    |
+| `` `backquote` `` | Used every time there is code related content in some text                                                              | Use the `foo` parameter                               |
+| `**Bold**`    | Subjectively pointing the reader to something that he shouldn't miss.                                                   | **This is important**, not that.                      |
+| `*Italic*`    | Literally translated words, default values, functions, settings, and page names.                                       | Go the the *setting* page in your Datadog application |
+| `[Link][3]`      | Links must be specified using the reference format (i.e. in the footnote) in order to aid [the translation process][2]. | Text with [a link][3]                                    |
 
 
 ### Fixed-width
@@ -133,3 +152,5 @@ Learn more about [image partials][4].
 [2]: https://github.com/DataDog/documentation/wiki/Translations-Overview
 [3]: https://github.com/DataDog/documentation/wiki
 [4]: https://github.com/DataDog/documentation/wiki/Import-an-Image
+[5]: https://tools.ietf.org/html/rfc2119
+[6]: https://tools.ietf.org/html/rfc2606

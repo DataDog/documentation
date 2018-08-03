@@ -3,6 +3,7 @@ categories:
 - Collaboration
 - issue tracking
 ddtype: crawler
+dependencies: []
 description: Consulter et discuter des cas nouveaux, ouverts, en attente et résolus dans votre flux d'événements.
   stream.
 doc_link: https://docs.datadoghq.com/integrations/desk/
@@ -19,7 +20,7 @@ short_description: Consulter et discuter des cas nouveaux, ouverts, en attente e
 version: '1.0'
 ---
 
-## Aperçu
+## Présentation
 
 Connecter Desk à Datadog pour:
 
@@ -43,21 +44,19 @@ Appuyez sur le bouton d'installation, puis vous êtes prêt ! Vous pourrez bient
 {{< get-metrics-from-git "desk" >}}
 
 
-### Evénements
+### Événements
 L'intégration Desk n'inclut aucun événements pour le moment.
 
-### Checks de Service
+### Checks de service
 L'intégration Desk n'inclut aucun check de service pour le moment.
 
-## Troubleshooting
+## Dépannage
 Besoin d'aide ? Contactez  [l'équipe support de Datadog][4].
-
-## En apprendre plus
-Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][5]
 
 [1]: https://app.datadoghq.com/account/settings#integrations/desk
 [2]: https://app.datadoghq.com/screen/integration/desk
 [3]: https://github.com/DataDog/dogweb/blob/prod/integration/desk/desk_metadata.csv
 [4]: http://docs.datadoghq.com/help/
-[5]: https://www.datadoghq.com/blog/
 
+
+{{< get-dependencies >}}

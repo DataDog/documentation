@@ -25,7 +25,7 @@ supported_os:
   - windows
 version: 1.0.0
 ---
-{{< img src="integrations/systemcore/syscoredash.png" alt="System Core" responsive="true" popup="true">}}
+{{< img src="integrations/systemcore/syscoredash.png" alt="System Core" responsive="true" >}}
 ## Aperçu
 
 Ce check collecte le nombre de cœurs de processeur sur un host et les temps de CPU (c'est-à-dire, système, utilisateur, inactif, etc.).

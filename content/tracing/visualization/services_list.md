@@ -16,7 +16,7 @@ further_reading:
   text: Understand how to read a Datadog Trace
 ---
 
-{{< img src="tracing/visualization/services_page.png" alt="Services page" responsive="true" popup="true">}}
+{{< img src="tracing/visualization/services_page.png" alt="Services page" responsive="true" >}}
 
 ## Overview
 
@@ -28,10 +28,11 @@ Select an individual service to view detailed performance insights, [read our de
 Filter the services list depending on: 
 
 * [Environment][4]
+* [Primary Tag][9]
 * [Service type](#services-types)
 * A query (basic text filtering)
 
-{{< img src="tracing/visualization/services_filtering.gif" alt="Services filtering" responsive="true" popup="true" style="width:75%;">}}
+{{< img src="tracing/visualization/services_filtering.gif" alt="Services filtering" responsive="true" style="width:75%;">}}
 
 ### Services types
 
@@ -52,7 +53,7 @@ We also have some aliases for Integrations such as Postgres, MySQL, and Cassandr
 
 Service color is used in [trace visualizations][6]. Select your service color to change it:
 
-{{< img src="tracing/visualization/service_color.png" alt="Services colors" responsive="true" popup="true" style="width:30%;">}}
+{{< img src="tracing/visualization/service_color.png" alt="Services colors" responsive="true" style="width:30%;">}}
 
 ## Selecting Columns
 
@@ -64,7 +65,7 @@ Choose what to display in your services list:
 * **Apdex**: Apdex score of the service, [learn more on Apdex][7]
 * **Monitor status**: [Status of monitors][8] attached to a service
 
-{{< img src="tracing/visualization/services_columns.png" alt="Services columns" responsive="true" popup="true" style="width:40%;">}}
+{{< img src="tracing/visualization/services_columns.png" alt="Services columns" responsive="true" style="width:40%;">}}
 
 ## Further Reading
 
@@ -73,8 +74,9 @@ Choose what to display in your services list:
 [1]: /tracing/setup
 [2]: https://app.datadoghq.com/apm/services
 [3]: /tracing/visualization/service
-[4]: /tracing/setup/environment
+[4]: /tracing/setup/first_class_dimensions#environment
 [5]: /tracing/visualization/trace/#spans
 [6]: /tracing/visualization/trace
 [7]: /tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm
 [8]: /tracing/visualization/service/#service-monitor
+[9]: /tracing/setup/first_class_dimensions#primary-tag

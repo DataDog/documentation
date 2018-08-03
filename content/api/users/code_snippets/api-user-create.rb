@@ -6,4 +6,4 @@ app_key = '<YOUR_APP_KEY>'
 
 dog = Dogapi::Client.new(api_key, app_key)
 
-dog.create_user(handle: 'test@datadoghq.com', name: 'test user')
+dog.create_user(handle: 'test@datadoghq.com', name: 'test user', access_role: 'st')

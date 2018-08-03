@@ -3,13 +3,13 @@ title: Search
 kind: documentation
 description: "The Logs Explorer is your Datadog home base for troubleshooting and exploration over your logs."
 further_reading:
-- link: "logs/graph"
+- link: "logs/analytics"
   tag: "Documentation"
-  text: "Perform analytics with Log Graphs"
+  text: "Perform Log Analytics"
 - link: "logs/processing"
   tag: "Documentation"
   text: Learn how to process your logs
-- link: "logs/parsing"
+- link: "logs/processing/parsing"
   tag: "Documentation"
   text: Learn more about parsing
 ---
@@ -18,7 +18,7 @@ further_reading:
 
 The Logs explorer is your home base for troubleshooting and exploration:
 
-{{< img src="logs/explore/explore_view_with_comments.png" alt="Explore view with comments" responsive="true" popup="true">}}
+{{< img src="logs/explore/explore_view_with_comments.png" alt="Explore view with comments" responsive="true" >}}
 
 In this view you can:
 
@@ -29,9 +29,10 @@ In this view you can:
 
 ## Search bar
 
-All search parameters are contained in the url, so it is very simple to share your view.
+All of the search parameters are contained within the URL, so you can share your view simply sharing the URL.
 
 ### Search syntax
+
 A query is composed of terms and operators.
 
 There are two types of terms:
@@ -90,7 +91,7 @@ If your tags don't follow [tags best practices][6] and don't use the `key:value`
 ### Autocomplete
 Typing a complex query can be cumbersome. Use the search bar's autocomplete feature to complete your query using existing values:
 
-{{< img src="logs/explore/search_bar_autocomplete.png" alt="search bar autocomplete " responsive="true" popup="true" style="width:80%;">}}
+{{< img src="logs/explore/search_bar_autocomplete.png" alt="search bar autocomplete " responsive="true" style="width:80%;">}}
 
 ### Escaping of special characters
 The following attributes are considered as special: `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/`, and `\` require escaping.
@@ -98,7 +99,7 @@ For instance, to search logs that contain `user=12345` the following search must
 
 `user\=JaneDoe`
 
-The same logic must be applied to spaces within log attributes. It is not recommended to have spaces in log attributes but in such a case, spaces require escaping.
+The same logic must be applied to spaces within log attributes. Log attributes should not contain spaces, but in such a case, spaces must be escape.
 If an attribute was called `user.first name`, perform a search on this attribute by escaping the space:
 
 `@user.first\ name:myvalue`
@@ -107,63 +108,65 @@ If an attribute was called `user.first name`, perform a search on this attribute
 
 Don't lose time building the same views everyday. Saved searches contain your search query, columns and time horizon. They are then available in the search bar thanks to the auto-complete matching whether the search name or query.
 
-{{< img src="logs/explore/saved_search.png" alt="Saved Search" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="logs/explore/saved_search.png" alt="Saved Search" responsive="true" style="width:80%;">}}
 
 To delete a saved search, click on the bin icon under the log search drop-down:
 
-{{< img src="logs/explore/delete_saved_search.png" alt="Delete Saved Search" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="logs/explore/delete_saved_search.png" alt="Delete Saved Search" responsive="true" style="width:80%;">}}
 
 ## Time Range
 
 The time range allows you to display logs within a given time period. It appears directly under the search bar as a timeline. The timeline can be displayed or wrapped up with the **Show timeline** check box:
 
-{{< img src="logs/explore/timeline.png" alt="Timeline" responsive="true" popup="true" style="width:50%;">}}
+{{< img src="logs/explore/timeline.png" alt="Timeline" responsive="true" style="width:50%;">}}
 
 Quickly change the time range by selecting a preset range from the dropdown:
 
-{{< img src="logs/explore/timerange.png" style="width:50%;" alt="Timerange" responsive="true" popup="true" >}}
+{{< img src="logs/explore/timerange.png" style="width:50%;" alt="Timerange" responsive="true" >}}
 
 ## Logstream
 The Logstream is the list of logs that match the selected context. A context is defined by a [search bar](#search-bar) filter and a [time range](#time-range).
 You can sort the list by clicking the **date** column header.
 
-{{< img src="logs/explore/log_list.png" alt="Logstream" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="logs/explore/log_list.png" alt="Logstream" responsive="true" style="width:80%;">}}
 
 ### Filtering the Logstream
 If you enter a valid query into the [search bar](#search-bar), words that match your query are highlighted, and the logs displayed match your facet criteria:
 
-{{< img src="logs/explore/log_list_highlighted.png" alt="Logstream highlighted" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="logs/explore/log_list_highlighted.png" alt="Logstream highlighted" responsive="true" style="width:80%;">}}
 
 ### Displaying a full log
 You can click on any log line to see more details about it:
 
-{{< img src="logs/explore/log_in_log_list.png" alt="Log in Logstream" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="logs/explore/log_in_log_list.png" alt="Log in Logstream" responsive="true" style="width:80%;">}}
 
 ### View in context
 
-Click on its `host` or `service` and select `View in context` (also known as `Focus on Host & Service`) to see log lines dated just before and after a selected log - even if they don't match your filter -
+Click on `View in context` to see log lines dated just before and after a selected log - even if they don't match your filter.
 
-{{< img src="logs/explore/focus_host_service.png" style="width:50%;" alt="focus on host and service.png" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="logs/explore/view-in-context.gif" alt="View in context" responsive="true" >}}
+
+The context is different according to the situation as we use the `Hostname`, `Service`, `filename` or `container_id` attributes, along with tags to make sure we find the perfect context for your logs.
 
 ### Columns
 To add more log details to the list, click the **Columns** button and select any facets you want to see:
 
-{{< img src="logs/explore/log_list_with_columns.png" alt="Logstream with columns" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="logs/explore/log_list_with_columns.png" alt="Logstream with columns" responsive="true" style="width:80%;">}}
 
 ### Multi-line display
 
-{{< img src="logs/explore/multi_line_display.png" alt="Multi-line display" responsive="true" popup="true" style="width:30%;">}}
+{{< img src="logs/explore/multi_line_display.png" alt="Multi-line display" responsive="true" style="width:30%;">}}
 
 Choose to display one, three, or ten lines from your logs `message` attributes in your logstream.
 
 * With one line displayed:
-{{< img src="logs/explore/1_multi_line.png" alt="1 line Multi-line display" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="logs/explore/1_multi_line.png" alt="1 line Multi-line display" responsive="true" style="width:80%;">}}
 
 * With three lines displayed:
-{{< img src="logs/explore/3_multi_line.png" alt="2 lines with Multi-line display" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="logs/explore/3_multi_line.png" alt="2 lines with Multi-line display" responsive="true" style="width:80%;">}}
 
 * With ten lines displayed:
-{{< img src="logs/explore/10_multi_line.png" alt="10 lines with Multi-line display" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="logs/explore/10_multi_line.png" alt="10 lines with Multi-line display" responsive="true" style="width:80%;">}}
 
 **Note**:  If present, `error.stack` attribute is displayed in priority as it should be used for stack traces.
 Remap any stack-trace attribute to this specific attribute with [the attribute remapper processor][1].
@@ -174,21 +177,21 @@ A facet displays all the distinct members of an attribute or a tag as well as pr
 
 Facets allow you to pivot or filter your datasets based on a given attribute. Examples facets may include users, services, etc...
 
-{{< img src="logs/explore/facets_demo.png" alt="Facets demo" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="logs/explore/facets_demo.png" alt="Facets demo" responsive="true" style="width:80%;">}}
 
 ### Create a Facet
 
 To start using an attribute as a Facet or in the search, click on it and add it as a Facet:
 
-{{< img src="logs/explore/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" popup="true" style="width:50%;">}}
+{{< img src="logs/explore/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" style="width:50%;">}}
 
-Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the [Log graph query][2].
+Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the [Log Analytics query][2].
 
 ### Facet Panel
 
 Use facets to easily filters on your logs. The search bar and url automatically reflect your selections.
 
-{{< img src="logs/explore/facet_panel.png" alt="Facet panel" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="logs/explore/facet_panel.png" alt="Facet panel" responsive="true" style="width:80%;">}}
 
 ## Measures
 
@@ -198,22 +201,22 @@ A Measure is a attribute with numerical value contained in your logs. Think of i
 
 To start using an attribute as a measure, click on a numerical attribute of your log:
 
-{{< img src="logs/explore/create_a_mesure.png" alt="Create a measure" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="logs/explore/create_a_mesure.png" alt="Create a measure" responsive="true" style="width:80%;">}}
 
-Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the [Log graph query][2].
+Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the [Log Analytics query][2].
 
 ### Select the Measure Unit
 
-All measure have their own unit that is then used for display in the Log explorer columns, Log stream widgets in dashboards, and in the Log Graphs.
+All measure have their own unit that is then used for display in the Log explorer columns, Log stream widgets in dashboards, and in the Log Analytics.
 
-{{< img src="logs/explore/edit_a_measure.png" alt="Edit a measure" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="logs/explore/edit_a_measure.png" alt="Edit a measure" responsive="true" style="width:80%;">}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/processing/#attribute-remapper
-[2]: /logs/#log-graph
+[2]: /logs/analytics
 [4]: /graphing/infrastructure/
 [5]: /integrations/
 [6]: /getting_started/tagging/#tags-best-practices

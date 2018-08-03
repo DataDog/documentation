@@ -91,11 +91,11 @@ Official integrations have their own dedicated directories. There's a default in
 
 [1]: /developers/prometheus
 [2]: https://github.com/DataDog/integrations-core/tree/master/prometheus
-[3]: https://github.com/DataDog/integrations-core/blob/master/prometheus/conf.yaml.example
+[3]: https://github.com/DataDog/integrations-core/blob/master/prometheus/datadog_checks/prometheus/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/agent/autodiscovery/
 [5]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
 [6]: https://github.com/DataDog/dd-agent/blob/master/checks/prometheus_check.py
 [7]: /agent/agent_checks/#configuration
 [8]: /getting_started/custom_metrics
 [9]: /agent/faq/agent-commands/#agent-status-and-information
-[10]: https://github.com/DataDog/integrations-core/blob/master/prometheus/conf.yaml.example#L34
+[10]: https://github.com/DataDog/integrations-core/blob/master/prometheus/datadog_checks/prometheus/data/conf.yaml.example#L34

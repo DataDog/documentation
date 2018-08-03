@@ -1,8 +1,8 @@
 ---
-title: Collecte de log avec l'agent Datadog
+title: Collecte de logs & Intégrations
 kind: Documentation
 description: >-
-  Configurez votre agent Datadog pour rassembler les logs de votre hôte, de vos
+  Configurez votre Agent Datadog pour rassembler les logs de votre hôte, de vos
   conteneurs et de vos services.
 aliases:
   - /fr/logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers
@@ -21,7 +21,7 @@ logs_enabled: true
 
 L'Agent Datadog envoie ses logs à Datadog via TLS-encrypted TCP. Cela nécessite une communication sortante sur le port `10516`.
 
-## Activation de la collecte de log à partir d'intégrations
+## Activation de la collecte de logs à partir d'intégrations
 Pour commencer à collecter des logs pour une intégration donnée, supprimez la mise en commentaire de la section logs du fichier yaml de cette intégration et configurez-la pour votre environnement.
 
 <div class="alert alert-warning">
@@ -30,7 +30,7 @@ Toutes les intégrations n'incluent pas les configurations pour la collecte de l
 
 Si une intégration ne prend pas en charge les logs par défaut, utilisez la configuration de fichier personnalisée ci-dessous.
 
-## Collecte de log custom
+## Collecte de logs custom
 
 Datadog Agent v6 peut collecter des logs à partir de fichiers ou du réseau (TCP ou UDP) et les transférer vers Datadog. Pour le configurer, créez un nouveau répertoire et un fichier yaml nommé d'après votre source de log dans le répertoire **conf.d** de l'Agent (`conf.d/python.d/conf.yaml` pour les logs pythons, ...)  et définissez ces options:
 
@@ -66,6 +66,9 @@ logs:
 ```
 * [Redémarrez votre Agent][3]
 
+
+**Note** : Si vous utilisez l'Agent Windows v6 et le suivi de fichiers de logs - assurez-vous que ces fichiers ont un encodage UTF8.
+
 ## Envoyer des logs via TCP/UDP
 Définissez `type` sur **tcp** ou **udp** en fonction de votre protocole, puis spécifiez le `port` de votre connexion entrante.
 
@@ -73,8 +76,6 @@ Exemple:
 Si votre application PHP ne se connecte pas à un fichier, mais transmet ses logs via TCP, créez un fichier de configuration qui spécifie le port à recevoir comme dans l'exemple ci-dessous:
 
 ```yaml
-init_config:
-instances:
 
 ##Log section
 logs:
@@ -100,8 +101,6 @@ Pour ce faire, utilisez le paramètre `log_processing_rules` dans votre fichier 
   Exemple: Filtrage des logs contenant un e-mail Datadog
 
 ```yaml
-init_config:
-instances:
 
 logs:
   - type: file
@@ -119,8 +118,6 @@ logs:
   Exemple: Envoie des logs contenant seulement un e-mail Datadog
 
 ```yaml
-init_config:
-instances:
 
 logs:
   - type: file
@@ -145,8 +142,6 @@ Cela remplace tous les groupes correspondants par la valeur du paramètre `repla
 Exemple: Remplacer des numéros de cartes de crédit
 
 ```yaml
-init_config:
-instances:
 
 logs:
  - type: file
@@ -182,8 +177,6 @@ Exemple: Chaque ligne de logs java commence par un timestamp avec le format `yyy
 Pour ce faire, vous devez utiliser les `log_processing_rules` suivantes:
 
 ```yaml
-init_config:
-instances:
 
 logs:
  - type: file
@@ -221,8 +214,6 @@ Si vos logs sont étiquetés par date ou tous stockés dans le même répertoire
 Exemple de configuration:
 
 ```yaml
-init_config:
-instances:
 
 logs:
  - type: file
@@ -235,7 +226,20 @@ logs:
 
 ### Utilisation d'un proxy pour les logs
 
-L'Agent de log ne respecte actuellement pas le paramètre proxy dans le fichier de configuration `datadog.yaml`. Cette fonctionnalité sera disponible dans une prochaine version.
+Les logs utilisent un ensemble de paramètres proxy différent des autres types de données transmises par l'Agent Datadog. Ceci est dû au fait que les logs sont actuellement envoyé via TCP/SSL, tandis que les autres fonctionnalités soumettent leurs données via HTTPS.
+
+Pour configurer votre Agent Datadog pour envoyer des logs via un serveur proxy, ajoutez ces paramètres au fichier de configuration `datadog.yaml` :"
+
+```
+logs_config:
+  dd_url: <MY_PROXY_URL>
+  dd_port: <MY_PROXY_PORT>
+  dev_mode_no_ssl: true
+```
+
+Configurez ensuite votre proxy pour transférer les logs à l'endpoint `agent-intake.logs.datadoghq.com` sur le port `10516` avec SSL activé. 
+
+[Reportez-vous à notre page de documentation sur les proxy avec l'Agent pour découvrir comment envoyer vos métriques avec un proxy][8].
 
 ### L'avantage de la collecte de logs au format JSON
 
@@ -275,6 +279,7 @@ Par défaut, Datadog ingère la valeur du message en tant que corps du log. Cett
 
 Chaque log peut avoir un niveau de statut qui est ensuite disponible pour la recherche à facettes dans Datadog. Toutefois, si un log au format JSON inclut l'un des attributs suivants, Datadog interprète sa valeur comme étant le statut officiel du log:
 
+* `status`
 * `severity`
 * `level`
 * `syslog.severity`
@@ -285,23 +290,26 @@ Si vous souhaitez remapper un statut existant dans l'attribut `status`, vous pou
 
 L'utilisation de l'agent Datadog ou du format RFC5424 définit automatiquement la valeur de l'attribut hosts sur vos logs. Toutefois, si un fichier de logs au format JSON inclut l'attribut suivant, Datadog interprète sa valeur en tant qu'hôte associé au log:
 
+* `host`
+* `hostname`
 * `syslog.hostname`
 
 ### Attribut  *service*
 
 L'utilisation de l'agent Datadog ou du format RFC5424 définit automatiquement la valeur de l'attribut service sur vos logs. Toutefois, si un fichier de logs au format JSON inclut l'attribut suivant, Datadog interprète sa valeur en tant que service associé au log:
 
+* `service`
 * `syslog.appname`
 
 ### Modifier les attributs réservés
 
 Vous pouvez désormais contrôler le mappage global d'hôte, de service, de timestamp et de status qui sont appliqués avant les pipelines de traitement. Ceci est particulièrement utile si les logs sont envoyés en JSON ou à partir d'un Agent externe.
 
-{{< img src="logs/log_collection/reserved_attribute.png" alt="Reserved Attribute" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="logs/log_collection/reserved_attribute.png" alt="Reserved Attribute" responsive="true" style="width:80%;">}}
 
 Pour modifier les valeurs par défaut de chacun des attributs réservés, accédez à la page du pipeline et modifiez `Reserved Attribute mapping`:
 
-{{< img src="logs/log_collection/reserved_attribute_tile.png" alt="Reserved Attribute Tile" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="logs/log_collection/reserved_attribute_tile.png" alt="Reserved Attribute Tile" responsive="true" style="width:80%;">}}
 
 [1]: /agent
 [2]: /getting_started/custom_metrics/
@@ -310,3 +318,4 @@ Pour modifier les valeurs par défaut de chacun des attributs réservés, accéd
 [5]: /logs/explore/#logstream
 [6]: /logs/explore/#search-bar
 [7]: /logs/processing/#log-status-remapper
+[8]: /agent/proxy

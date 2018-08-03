@@ -52,12 +52,16 @@ $btn-font-weight: 600;
 
 // Headers
 $h1-font-size: 42px;
-$h2-font-size: 32px;
+$h2-font-size: 36px;
 $h3-font-size: 24px;
-$h4-font-size: 20px;
-$h5-font-size: 14px;
+$h4-font-size: 18px;
+$h5-font-size: 16px;
 $h6-font-size: 1rem;
 $headings-font-weight:600;
+
+h2{
+  font-weight: 200 !important;
+}
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 

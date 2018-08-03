@@ -19,7 +19,7 @@ version: '1.0'
 ---
 
 
-{{< img src="integrations/honeybadger/honeybadgerevent.png" alt="Honeybadger Event" responsive="true" popup="true">}}
+{{< img src="integrations/honeybadger/honeybadgerevent.png" alt="Honeybadger Event" responsive="true" >}}
 
 ## Aperçu
 

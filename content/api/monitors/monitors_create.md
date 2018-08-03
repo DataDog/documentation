@@ -7,15 +7,29 @@ external_redirect: /api/#create-a-monitor
 
 ## Create a monitor
 
+If you manage and deploy monitors programmatically, it’s easier to define the monitor in the Datadog UI and [export its valid JSON][4].
+
 ##### ARGUMENTS
 *   **`type`** [*required*]:  
-    The type of the monitor, chosen from:  
-    *   `metric alert`
-    *   `service check`
-    *   `event alert`
-    *   `process alert`
-    *   `composite`
+    The [type of the monitor][3], chosen from:  
 
+| Monitor Type | type attribute value |
+| :--------    | :-------             |
+| anomaly      | `query alert`        |
+| apm          | `query alert`        |
+| composite    | `composite`          |
+| custom       | `service check`      |
+| event        | `event alert`        |
+| forecast     | `query alert`        |
+| host         | `service check`      |
+| integration  | `query alert`        |
+| live process | `process alert`      |
+| logs         | `log alert`          |
+| metric       | `query alert`        |
+| network      | `service check`      |
+| outlier      | `query alert`        |
+| process      | `service check`      |
+    
 *   **`query`** [*required*]:  
     The query defines when the monitor triggers. Query syntax depends on what type of monitor you are creating:  
     ##### Metric Alert Query
@@ -112,6 +126,15 @@ external_redirect: /api/#create-a-monitor
         *   True: `[Triggered on {host:h1}] Monitor Title`
         *   False: `[Triggered] Monitor Title`
 
+    ##### Anomaly Options
+    _These options only apply to anomaly monitors and are ignored for other monitor types._
+
+    -   **`threshold_windows`** a dictionary containing `recovery_window` and `trigger_window`.
+        * `recovery_window` describes how long an anomalous metric must be normal before the alert recovers
+        * `trigger_window` describes how long a metric must be anomalous before an alert triggers
+
+            Example: `{'threshold_windows': {'recovery_window': 'last_15m', 'trigger_window': 'last_15m'}}`
+
     ##### Metric Alert Options
     _These options only apply to metric alerts._
 
@@ -131,3 +154,5 @@ external_redirect: /api/#create-a-monitor
 
 [1]: /monitors/monitor_types/#define-the-conditions
 [2]: /integrations/faq/list-of-api-source-attribute-value
+[3]: /monitors/monitor_types/
+[4]: /monitors/#export-your-monitor

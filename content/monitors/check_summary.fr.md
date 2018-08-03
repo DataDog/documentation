@@ -14,20 +14,17 @@ further_reading:
 - link: "monitors/downtimes"
   tag: "Documentation"
   text: Planifiez un downtime pour désactiver un monitor
-- link: "monitors/faq"
-  tag: "FAQ"
-  text: FAQ monitors
 ---
 
 ## Aperçu
 
 Cette page vous permet de voir la liste de tous vos check rapportant à Datadog:
 
- {{< img src="monitors/check_summary/check_summary.png" alt="Check Summary" responsive="true" popup="true" style="width:80%;">}}
+ {{< img src="monitors/check_summary/check_summary.png" alt="Check Summary" responsive="true" style="width:80%;">}}
 
 Cliquez sur un check pour avoir plus de détails.
 
-{{< img src="monitors/check_summary/check_details.png" alt="Check details" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="monitors/check_summary/check_details.png" alt="Check details" responsive="true" style="width:70%;">}}
 
 ## En apprendre plus
 

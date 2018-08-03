@@ -5,15 +5,15 @@ further_reading:
 - link: "logs/processing"
   tag: "Documentation"
   text: Learn how to process your logs
-- link: "logs/parsing"
+- link: "logs/processing/parsing"
   tag: "Documentation"
   text: Learn more about parsing
 - link: "logs/explore"
   tag: "Documentation"
   text: Learn how to explore your logs
-- link: "logs/graph"
+- link: "logs/analytics"
   tag: "Documentation"
-  text: "Perform analytics with Log Graphs"
+  text: "Perform Log Analytics"
 - link: "logs/faq/log-collection-troubleshooting-guide"
   tag: "FAQ"
   text: Log Collection Troubleshooting Guide
@@ -248,5 +248,5 @@ logger.info("Emitted 1001 messages during the last 93 seconds");
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: http://logback.qos.ch/manual/mdc.html
-[2]: /logs/parsing
-[3]: /logs/parsing/#key-value
+[2]: /logs/processing/parsing
+[3]: /logs/processing/parsing/#key-value

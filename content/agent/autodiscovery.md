@@ -6,6 +6,9 @@ aliases:
   - /guides/autodiscovery/
   - /agent/autodiscovery
 further_reading:
+- link: "/videos/autodiscovery/"
+  tag: "Video"
+  text: Datadog Autodiscovery on Docker with Labels using Agent v6 & v5
 - link: "logs/"
   tag: "Documentation"
   text: Collect your logs
@@ -17,7 +20,11 @@ further_reading:
   text: Collect your traces
 ---
 
+## QuickStart
+
 This page covers Autodiscovery with Agent 6 only, [refer to the dedicated documentation to setup Autodiscovery with Agent 5][1]
+
+Watch our [Datadog Autodiscovery on Docker with Labels using Agent v6 video][24] for a bird's eye view of this functionality.
 
 ## How it Works
 
@@ -75,7 +82,7 @@ Since 6.2.0 (and 5.24.0), the default templates use the default port for the mon
 
 These templates may suit you in basic cases, but if you need to use custom Agent check configurations—say you want to enable extra check options, use different container identifiers, or use template variable indexing— you'll have to write your own auto-conf files. You can then provide those in a few ways:
 
-1. Add them to each host that runs docker-datadog-agent and [mount the directory that contains them][15] into the datadog-agent container when starting it
+1. Add them to each host that runs `docker-datadog-agent` and [mount the directory that contains them][15] into the datadog-agent container when starting it
 2. On Kubernetes, add them [using ConfigMaps][16]
 
 The check name is extracted from the template file name. To run the `checkname` integration, the template file must either:
@@ -110,7 +117,7 @@ Autodiscovery can use [Consul][19], etcd, and Zookeeper as template sources. To 
 
 #### Configure in datadog.yaml
 
-In the `datadog.yaml` file, set the `sd_config_backend`, `sd_backend_host`, and `sd_backend_port` options to, respectively, the key-value store type—`etcd`, `consul`, or `zookeeper`—and the IP address and port of your key-value store:
+In the `datadog.yaml` file, set the `<KV_STORE_IP>` address and `<KV_STORE_PORT>` of your key-value store:
 
 ```
 # The providers the Agent should call to collect checks configurations.
@@ -120,14 +127,14 @@ In the `datadog.yaml` file, set the `sd_config_backend`, `sd_backend_host`, and 
 #   - name: etcd
 #     polling: true
 #     template_dir: /datadog/check_configs
-#     template_url: http://127.0.0.1
+#     template_url: <KV_STORE_IP>:<KV_STORE_PORT>
 #     username:
 #     password:
 
 #   - name: consul
 #     polling: true
 #     template_dir: datadog/check_configs
-#     template_url: http://127.0.0.1
+#     template_url: <KV_STORE_IP>:<KV_STORE_PORT>
 #     ca_file:
 #     ca_path:
 #     cert_file:
@@ -139,7 +146,7 @@ In the `datadog.yaml` file, set the `sd_config_backend`, `sd_backend_host`, and 
 #   - name: zookeeper
 #     polling: true
 #     template_dir: /datadog/check_configs
-#     template_url: 127.0.0.1
+#     template_url: <KV_STORE_IP>:<KV_STORE_PORT>
 #     username:
 #     password:
 ```
@@ -263,7 +270,7 @@ spec:
 
 The Agent detects if it's running on Docker and automatically searches all labels for check templates.
 
-Since version 6.2 of the Datadog Agent, it is also possible to configure docker log collection in container labels.
+Since version 6.2 of the Datadog Agent, it is also possible to configure Docker log collection in container labels.
 Check our [Docker Log collection guide][23] for more information about the setup.
 
 Autodiscovery expects labels to look like these examples, depending on the file type:
@@ -313,13 +320,16 @@ The following template variables are currently handled by the Agent:
 
 - Container IP: `host`
   - `%%host%%`: autodetect the network (use `bridge` or, if only one network is attached, this one)
-  - `%%host_network%%`: specify the network name to use, when attached to several networks
+  - `%%host_<NETWORK NAME>%%`: specify the network name to use, when attached to several networks (e.g. `%%host_bridge%%`, `%%host_myredisnetwork%%`, ...)
+
 - Container hostname: `hostname` (added in Agent 6.4, docker listener only)
-  - `%%hostname%%`: retrieves the `hostname` value from the container configuration. Only use it if the `%%host%%` variable cannot fetch a reliable IP (example: [ECS awsvpc mode][24])
+  - `%%hostname%%`: retrieves the `hostname` value from the container configuration. Only use it if the `%%host%%` variable cannot fetch a reliable IP (example: [ECS awsvpc mode][25]
+
 - Container port: `port`
   - `%%port%%`: use the highest exposed port **sorted numerically and in ascending order** (eg. 8443 for a container that exposes ports 80, 443, and 8443)
   - `%%port_0%%`: use the first port **sorted numerically and in ascending order** (for the same container, `%%port_0%%` refers to port 80, `%%port_1%%` refers to 443
   - If your target port is constant, we recommend you directly specify it, without using the `port` variable
+
 - Environment variable: `env` (added in Agent 6.1)
   - `%%env_MYENVVAR%%`: use the contents of the `$MYENVVAR` environment variable **as seen by the Agent process**
 
@@ -338,7 +348,7 @@ If you provide a template for the same check type via multiple template sources,
 
 ## Troubleshooting
 
-When you're not sure if Autodiscovery is loading certain checks you've configured, use the Agent's `configcheck` init script command. For example, to confirm that your Redis template is being loaded from a docker label annotation—not the default `redisdb.d/auto_conf.yaml` file:
+When you're not sure if Autodiscovery is loading certain checks you've configured, use the Agent's `configcheck` init script command. For example, to confirm that your Redis template is being loaded from a Docker label annotation—not the default `redisdb.d/auto_conf.yaml` file:
 
 ```
 # docker exec -it <agent_container_name> agent configcheck
@@ -389,26 +399,32 @@ instances:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/faq/agent-5-autodiscovery
-[2]: https://github.com/DataDog/integrations-core/blob/master/go_expvar/conf.yaml.example
-[3]: https://github.com/DataDog/integrations-core/blob/master/apache/auto_conf.yaml
-[4]: https://github.com/DataDog/integrations-core/blob/master/consul/auto_conf.yaml
-[5]: https://github.com/DataDog/integrations-core/blob/master/couch/auto_conf.yaml
-[6]: https://github.com/DataDog/integrations-core/blob/master/couchbase/auto_conf.yaml
-[7]: https://github.com/DataDog/integrations-core/blob/master/elastic/auto_conf.yaml
-[8]: https://github.com/DataDog/integrations-core/blob/master/etcd/auto_conf.yaml
-[9]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/auto_conf.yaml
-[10]: https://github.com/DataDog/integrations-core/blob/master/kube_dns/auto_conf.yaml
-[11]: https://github.com/DataDog/integrations-core/blob/master/kyototycoon/auto_conf.yaml
-[12]: https://github.com/DataDog/integrations-core/blob/master/mcache/auto_conf.yaml
-[13]: https://github.com/DataDog/integrations-core/blob/master/redisdb/auto_conf.yaml
-[14]: https://github.com/DataDog/integrations-core/blob/master/riak/auto_conf.yaml
+[2]: https://github.com/DataDog/integrations-core/blob/master/go_expvar/datadog_checks/go_expvar/data/conf.yaml.example
+[3]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/auto_conf.yaml
+[4]: https://github.com/DataDog/integrations-core/blob/master/consul/datadog_checks/consul/data/auto_conf.yaml
+[5]: https://github.com/DataDog/integrations-core/blob/master/couch/datadog_checks/couch/data/auto_conf.yaml
+[6]: https://github.com/DataDog/integrations-core/blob/master/couchbase/datadog_checks/couchbase/data/auto_conf.yaml
+[7]: 
+https://github.com/DataDog/integrations-core/blob/master/elastic/datadog_checks/elastic/data/auto_conf.yaml
+[8]: https://github.com/DataDog/integrations-core/blob/master/etcd/datadog_checks/etcd/data/auto_conf.yaml
+[9]: 
+https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/auto_conf.yaml
+[10]: 
+https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/data/auto_conf.yaml
+[11]: 
+https://github.com/DataDog/integrations-core/blob/master/kyototycoon/datadog_checks/kyototycoon/data/auto_conf.yaml
+[12]: https://github.com/DataDog/integrations-core/blob/master/mcache/datadog_checks/mcache/data/auto_conf.yaml
+[13]: 
+https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/auto_conf.yaml
+[14]: https://github.com/DataDog/integrations-core/blob/master/riak/datadog_checks/riak/data/auto_conf.yaml
 [15]: https://github.com/DataDog/datadog-agent
 [16]: /agent/basic_agent_usage/kubernetes/#configmap
-[17]: https://github.com/Datadog/integrations-core/blob/master/apache/conf.yaml.example
+[17]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
 [18]: /agent/autodiscovery/#template-source-kubernetes-pod-annotations
 [19]: /integrations/consul
 [20]: /agent/faq/agent-commands
-[21]: https://github.com/DataDog/integrations-core/blob/master/http_check/conf.yaml.example
-[22]: https://github.com/DataDog/integrations-core/blob/master/kube_proxy/auto_conf.yaml
+[21]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example
+[22]: https://github.com/DataDog/integrations-core/blob/master/kube_proxy/datadog_checks/kube_proxy/data/conf.yaml.example
 [23]: https://docs.datadoghq.com/logs/docker/
-[24]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
+[24]: /videos/autodiscovery/
+[25]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
