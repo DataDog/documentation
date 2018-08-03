@@ -57,8 +57,6 @@ This allows you to tweak the interpolation settings. It accepts a function to us
 
 ### default()
 
-This function is in beta, [contact our support team][6] to activate it for your organization.
-
 The default function function fills empty intervals with a default or interpolated (within the interpolation time limit) value. It has the following syntax:
 
 ```
@@ -432,5 +430,4 @@ Highlight outliers series; see our [Outlier Monitor][3] page for more info.
 [3]: /monitors/monitor_types/outlier
 [4]: /graphing/faq/as_count_validation
 [5]: /getting_started/from_the_query_to_the_graph/#proceed-to-space-aggregation
-[6]: /help
 [7]: /monitors/monitor_types/metric/
