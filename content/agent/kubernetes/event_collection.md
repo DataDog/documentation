@@ -3,7 +3,7 @@ title: Kubernetes Event Collection
 kind: documentation
 ---
 
-Similarly to the Agent 5, the Agent 6 can collect events from the Kubernetes API server.
+Similarly to Agent 5, Agent 6 can collect events from the Kubernetes API server.
 First and foremost, you need to set the `collect_kubernetes_events` variable to `true` in the datadog.yaml, this can be achieved via the environment variable `DD_COLLECT_KUBERNETES_EVENTS` that is resolved at start time.
 You will need to give the Agent some rights to activate this feature. See the [RBAC][1]section.
 
@@ -15,10 +15,9 @@ This is in order to avoid duplicate the events collected, as well as putting les
 
 ## Leader Election
 
-The Datadog Agent6 supports built in leader election option for the Kubernetes event collector and the Kubernetes cluster related checks (i.e. Control Plane service check).
+Agent 6 supports a built-in leader election option for the Kubernetes event collector and the Kubernetes cluster-related checks (i.e. the Control Plane service check).
 
-This feature relies on Endpoints, you can enable it by setting the `DD_LEADER_ELECTION` environment variable to `true` the Datadog Agents will need to have a set of actions allowed prior to its deployment nevertheless.
-See the [RBAC][1] section for more details and keep in mind that these RBAC entities will need to be created before the option is set.
+This feature relies on Endpoints. You can enable it by setting the `DD_LEADER_ELECTION` environment variable to `true`. The Agent will need to have a set of actions allowed prior to its deployment; see the [RBAC][1] section for more details, and keep in mind that these RBAC entities will need to be created before the option is set.
 
 Agents coordinate by performing a leader election among members of the Datadog DaemonSet through Kubernetes to ensure only one leader Agent instance is gathering events at a given time.
 
