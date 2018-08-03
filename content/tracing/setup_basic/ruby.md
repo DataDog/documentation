@@ -89,34 +89,6 @@ After setting up, your services will appear on the [APM services page][3] within
 
 To activate more advanced features, change tracer behavior, or trace additional code, you must add additional configuration.
 
-### Manual instrumentation
-
-If you aren't using supported library instrumentation (see [Library compatibility](#library-compatibility)), you may want to to manually instrument your code. Adding tracing to your code is easy using the `Datadog.tracer.trace` method, which you can wrap around any Ruby code.
-
-**Example**
-
-```ruby
-get '/posts' do
-  Datadog.tracer.trace('web.request', service: 'my-blog', resource: 'GET /posts') do |span|
-    # Trace the activerecord call
-    Datadog.tracer.trace('posts.fetch') do
-      @posts = Posts.order(created_at: :desc).limit(10)
-    end
-
-    # Add some APM tags
-    span.set_tag('http.method', request.request_method)
-    span.set_tag('posts.count', @posts.length)
-
-    # Trace the template rendering
-    Datadog.tracer.trace('template.render') do
-      erb :index
-    end
-  end
-end
-```
-
-For more details about manual instrumentation, check out the [API documentation][5].
-
 ### Integration instrumentation
 
 APM provides out-of-the-box support for many popular integrations. Although none are active by default, you can easily activate them in `Datadog.configure`.
@@ -171,12 +143,6 @@ For more tracer settings, check out the [API documentation][6].
 Priority sampling allows you to configure which traces are most important and should be kept after sampling.
 
 Priority sampling is disabled by default. For more details about how to activate and configure priority sampling, check out the [API documentation][7].
-
-### Distributed tracing
-
-Distributed tracing allows you to propagate a single trace across multiple services, so you can see performance end-to-end.
-
-Distributed tracing is disabled by default. For more details about how to activate and configure distributed tracing, check out the [API documentation][8].
 
 ### Processing pipeline
 
@@ -257,10 +223,8 @@ Ruby APM includes support for the following libraries and frameworks:
 [2]: /tracing/setup/docker/
 [3]: https://app.datadoghq.com/apm/services
 [4]: https://docs.datadoghq.com/tracing/visualization/
-[5]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#manual-instrumentation
 [6]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#tracer-settings
 [7]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#priority-sampling
-[8]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#distributed-tracing
 [9]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#processing-pipeline
 [10]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#active-record
 [11]: https://github.com/rails/rails/tree/master/activerecord

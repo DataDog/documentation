@@ -4,6 +4,7 @@ kind: Documentation
 description: "Analytics on your APM data at infinite cardinality"
 aliases:
   - tracing/trace_search_analytics/analytics
+  - tracing/analytics
 further_reading:
 - link: "tracing/setup/"
   tag: "Documentation"

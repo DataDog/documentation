@@ -4,6 +4,7 @@ kind: documentation
 aliases:
   - /tracing/environments/
   - /tracing/setup/environment
+  - /tracing/setup/first_class_dimensions
 further_reading:
 - link: "tracing/setup/docker"
   tag: "Documentation"
