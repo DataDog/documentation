@@ -181,7 +181,7 @@ Deploy the DaemonSet with the command:
 kubectl create -f datadog-agent.yaml
 ```
 
-**Note**:  This manifest enables autodiscovery's auto configuration feature. To learn how to configure autodiscovery, please refer to [its documentation][9].
+**Note**:  This manifest enables Autodiscovery's auto configuration feature. To learn how to configure Autodiscovery, please refer to [its documentation][9].
 
 ### Verification
 
@@ -189,7 +189,7 @@ To verify the Datadog Agent is running in your environment as a DaemonSet, execu
 
     kubectl get daemonset
 
-If the Agent is deployed, you will see output similar to the text below, where desired and current are equal to the number of nodes running in your cluster.
+If the Agent is deployed, you will see output similar to the text below, where `DESIRED` and `CURRENT` are equal to the number of nodes running in your cluster.
 
     NAME            DESIRED   CURRENT   READY     UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
     datadog-agent   2         2         2         2            2           <none>          16h
