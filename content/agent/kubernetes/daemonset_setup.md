@@ -5,10 +5,10 @@ further_reading:
 - link: "agent/autodiscovery"
   tag: "Documentation"
   text: Docker Agent Autodiscovery
-- link: "agent/basic_agent_usage/kubernetes/host_setup"
+- link: "agent/kubernetes/host_setup"
   tag: "documentation"
   text: "Kubernetes Host Setup"
-- link: "agent/basic_agent_usage/kubernetes/integrations"
+- link: "agent/kubernetes/integrations"
   tag: "documentation"
   text: "Custom Integrations"
 ---

@@ -3,7 +3,7 @@ title: Custom Integrations
 kind: documentation
 ---
 
-##### ConfigMap
+## ConfigMap
 It is possible to leverage the ConfigMaps to configure or enable integrations.
 To do so, you only need to create a ConfigMap with the integration(s)'s configuration.
 Then, reference this ConfigMap among the volumes of your Agent's manifest.
@@ -60,7 +60,7 @@ data:
 
 Learn more about this in [the Docker log collection documentation][11].
 
-##### Annotations
+## Annotations
 
 It is also possible to enable integrations via the annotations in the manifest of your application.
 This can be done with the autodiscovery, for more details, see the [Autodiscovery][13] section.
