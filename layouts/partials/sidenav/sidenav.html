@@ -28,7 +28,7 @@
             <div class="sidenav-nav">
                 <ul class="list-unstyled">
                     {{ range $index, $element := .Site.Menus.main }}
-                        <li class="open">
+                        <li class="">
                             <a href="{{ $element.URL | absLangURL }}">
                                 {{ if $element.Pre }}{{- partial "img.html" (dict "root" $dot "src" (print "icons/" ($element.Pre) ".png") "class" "static" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21") -}}{{- partial "img.html" (dict "root" $dot "src" (print "icons/" ($element.Pre) "_p.png") "class" "hover" "alt" "icon" "width" "21" "img_param" "?ch=Width,DPR&fit=max&auto=format&w=21" "disable_lazy" "true") -}}{{ end }} <span>{{ $element.Name }}</span>
                             </a>
@@ -36,7 +36,7 @@
                             {{ if $element.Children }}
                                 <ul class="list-unstyled">
                                     {{ range $index2, $element2 := $element.Children }}
-                                        <li class="open">
+                                        <li class="">
                                             <a href="{{ $element2.URL | absLangURL }}">
                                                 <span>{{ $element2.Name }}</span>
                                             </a>
@@ -44,7 +44,7 @@
                                             {{ if $element2.Children }}
                                                 <ul class="list-unstyled">
                                                     {{ range $index3, $element3 := $element2.Children }}
-                                                        <li class="open">
+                                                        <li class="">
                                                             <a href="{{ $element3.URL | absLangURL }}">
                                                                 <span>{{ $element3.Name }}</span>
                                                             </a>
