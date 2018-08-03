@@ -119,6 +119,38 @@ languages:
           url: "agent/basic_agent_usage/kubernetes/"
           weight: 140
           parent: customnav_agentnav_basic_usage
+
+        - identifier: customnav_agentnav_kubernetes_daemonset
+          name: "DaemonSet Setup"
+          url: "agent/basic_agent_usage/kubernetes/daemonset_setup"
+          weight: 1410
+          parent: customnav_agentnav_kubernetes
+        - identifier: customnav_agentnav_kubernetes_host
+          name: "Host Setup"
+          url: "agent/basic_agent_usage/kubernetes/host_setup"
+          weight: 1415
+          parent: customnav_agentnav_kubernetes
+        - identifier: customnav_agentnav_kubernetes_event
+          name: "Event Collection"
+          url: "agent/basic_agent_usage/kubernetes/event_collection"
+          weight: 1420
+          parent: customnav_agentnav_kubernetes
+        - identifier: customnav_agentnav_kubernetes_integrations
+          name: "Custom Integrations"
+          url: "agent/basic_agent_usage/kubernetes/integrations"
+          weight: 1425
+          parent: customnav_agentnav_kubernetes
+        - identifier: customnav_agentnav_kubernetes_metrics
+          name: "Metrics"
+          url: "agent/basic_agent_usage/kubernetes/metrics"
+          weight: 1430
+          parent: customnav_agentnav_kubernetes
+        - identifier: customnav_agentnav_kubernetes_legacy
+          name: "Legacy Versions"
+          url: "agent/basic_agent_usage/kubernetes/legacy"
+          weight: 1435
+          parent: customnav_agentnav_kubernetes
+
         - identifier: osx
           name: "Mac OS X"
           url: "agent/basic_agent_usage/osx/"

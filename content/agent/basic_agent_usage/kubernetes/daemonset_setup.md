@@ -1,22 +1,23 @@
 ---
-title: Kubernetes Daemonset Installation
+title: Kubernetes DaemonSet Setup
 kind: documentation
 further_reading:
 - link: "agent/autodiscovery"
   tag: "Documentation"
   text: Docker Agent Autodiscovery
-- link: "graphing/infrastructure/process"
-  tag: "Documentation"
-  text: Process collection for Kubernetes
+- link: "agent/basic_agent_usage/kubernetes/host_setup"
+  tag: "documentation"
+  text: "Kubernetes Host Setup"
+- link: "agent/basic_agent_usage/kubernetes/integrations"
+  tag: "documentation"
+  text: "Custom Integrations"
 ---
-
-## Setup
 
 Take advantage of DaemonSets to deploy the Datadog Agent on all your nodes (or on specific nodes by [using nodeSelectors](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector)).
 
 *If DaemonSets are not an option for your Kubernetes cluster, [install the Datadog Agent][3] as a deployment on each Kubernetes node.*
 
-### Configure RBAC permissions
+## Configure RBAC permissions
 If your Kubernetes has role-based access control (RBAC) enabled, configure RBAC permissions for your Datadog Agent service account. Create the file `datadog-serviceaccount.yaml`:
 
 ```yaml
@@ -97,8 +98,8 @@ Create the appropriate ClusterRole, ServiceAccount, and ClusterRoleBinding:
 kubectl create -f datadog-serviceaccount.yaml
 ```
 
-### Create manifest
-* Create the following `datadog-agent.yaml` manifest:
+## Create manifest
+Create the following `datadog-agent.yaml` manifest:
 
 ```
 apiVersion: extensions/v1beta1
@@ -192,6 +193,7 @@ If the Agent is deployed, you will see output similar to the text below, where d
 
     NAME            DESIRED   CURRENT   READY     UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
     datadog-agent   2         2         2         2            2           <none>          16h
+
 
 ## Enable capabilities
 
