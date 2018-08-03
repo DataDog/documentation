@@ -31,8 +31,8 @@ Traditional web proxies are supported natively by the Agent. If you need to conn
 
 ### Agent v6
 
-With Agent v6, you can set different proxy servers for `https` and `http` requests in `datadog.yaml`. The Agent uses `https` to send data to Datadog, but integrations might use `http`.
-No matter the proxied queries, you can activate SSL on your proxy server. Below are some configuration examples for your `datadog.yaml` file:
+Set different proxy servers for `https` and `http` requests in your Agent `datadog.yaml` configuration file. 
+The Agent uses `https` to send data to Datadog, but integrations might use `http` to gather metrics. No matter the proxied queries, you can activate SSL on your proxy server. Below are some configuration examples for your `datadog.yaml` file:
 
 Setting an HTTP proxy for all `https` queries:
 
@@ -78,7 +78,7 @@ Starting with Agent v6.4, you can set your proxy settings through environment va
 
 Environment variables have precedence over values in the `datadog.yaml` file. If the environment variables are present with an empty value (e.g. ``DD_HTTP_PROXY=""``), the Agent uses those empty values instead of lower-precedence options.
 
-On Unix hosts, a system-wide proxy might be specified using standard environment variables, such as `HTTPS_PROXY`, `HTTP_PROXY`, and `NO_PROXY`. The Agent uses these if present. Be careful, as such variables also impact every request from integrations, including orchestrators like docker, ECS, and Kubernetes.
+On Unix hosts, a system-wide proxy might be specified using standard environment variables, such as `HTTPS_PROXY`, `HTTP_PROXY`, and `NO_PROXY`. The Agent uses these if present. Be careful, as such variables also impact every request from integrations, including orchestrators like Docker, ECS, and Kubernetes.
 
 The Agent uses the following values in order of precedence:
 
@@ -184,7 +184,7 @@ backend datadog-processes
     balance roundrobin
     mode tcp
     option tcplog
-    server mothership process.agent.datadoghq.com:443 check port 80
+    server mothership process.datadoghq.com:443 check port 80
 ```
 
 Once the HAProxy configuration is in place, you can reload it or restart HAProxy.
