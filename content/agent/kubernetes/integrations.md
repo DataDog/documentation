@@ -4,12 +4,12 @@ kind: documentation
 ---
 
 ## ConfigMap
-It is possible to leverage the ConfigMaps to configure or enable integrations.
+It is possible to leverage ConfigMaps to configure or enable integrations.
 To do so, you only need to create a ConfigMap with the integration(s)'s configuration.
 Then, reference this ConfigMap among the volumes of your Agent's manifest.
 
-For example, in the following case we customize the name, url and tags fields of the http check.
-To enable other integrations, just specify the correct yaml name and make sure it is properly formated.
+For example, in the following case we customize the name, url, and tags fields of the [HTTP check][22].
+To enable other integrations, just specify the correct YAML name and make sure it is properly formated.
 
 ```
 kind: ConfigMap
@@ -86,3 +86,4 @@ This can be done with the autodiscovery, for more details, see the [Autodiscover
 [19]: /agent/basic_agent_usage/docker/#dogstatsd-custom-metrics
 [20]: /tracing/setup/kubernetes
 [21]: /graphing/infrastructure/process
+[22]: /integrations/http_check/

@@ -23,7 +23,7 @@ Agents coordinate by performing a leader election among members of the Datadog D
 
 This functionality is disabled by default. Enabling the event collection will activate it to avoid duplicating collecting events and stressing the API server.
 
-The `leaderLeaseDuration` is the duration for which a leader stays elected. It is 60 seconds by default, and should be >30 seconds. The longer it is, the less frequently your Agents hit the API server with requests, but this also means that if the leader dies, events can be missed until the lease expires and a new leader takes over.
+The `leaderLeaseDuration` is the duration for which a leader stays elected. It is 60 seconds by default, and should be greater than 30 seconds. The longer it is, the less frequently your Agents hit the API server with requests, but this also means that if the leader dies, events can be missed until the lease expires and a new leader takes over.
 The `leaderLeaseDuration` can be configured with the environment variable `DD_LEADER_LEASE_DURATION`.
 
 [1]: /agent/kubernetes#rbac
