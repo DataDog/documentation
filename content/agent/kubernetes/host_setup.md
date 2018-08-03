@@ -1,5 +1,19 @@
-## Setup Kubernetes State
-### Installation
+---
+title: Kubernetes Host Setup
+kind: documentation
+further_reading:
+- link: "agent/autodiscovery"
+  tag: "Documentation"
+  text: Docker Agent Autodiscovery
+- link: "agent/kubernetes/host_setup"
+  tag: "documentation"
+  text: "Kubernetes Host Setup"
+- link: "agent/kubernetes/integrations"
+  tag: "documentation"
+  text: "Custom Integrations"
+---
+
+Installing the Agent directly on your host (rather than having the Agent run in a Pod) provides additional visibility into your ecosystem, independent of Kubernetes.
 
 To gather your kube-state metrics:
 
