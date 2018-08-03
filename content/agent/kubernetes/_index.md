@@ -3,16 +3,20 @@ title: Kubernetes
 kind: documentation
 aliases:
     - /guides/basic_agent_usage/kubernetes
+    - /agent/basic_agent_usage/kubernetes
 further_reading:
-- link: "agent/basic_agent_usage/kubernetes/daemonset_setup"
+- link: "agent/kubernetes/daemonset_setup"
   tag: "documentation"
   text: "Kubernetes DaemonSet Setup"
-- link: "agent/basic_agent_usage/kubernetes/host_setup"
+- link: "agent/kubernetes/host_setup"
   tag: "documentation"
   text: "Kubernetes Host Setup"
-- link: "agent/basic_agent_usage/kubernetes/metrics"
+- link: "agent/kubernetes/metrics"
   tag: "documentation"
   text: "Kubernetes Metrics"
+- link: "agent/kubernetes/legacy"
+  tag: "documentation"
+  text: "Kubernetes Legacy Versions"
 
 ---
 
@@ -50,10 +54,10 @@ You can find the templates in `manifests/rbac` [here][5]. This creates a Service
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/basic_agent_usage/kubernetes/legacy
-[2]: /agent/basic_agent_usage/kubernetes/daemonset_setup
-[3]: /agent/basic_agent_usage/kubernetes/host_setup
-[4]: /agent/basic_agent_usage/kubernetes/event_collection#leader-election
+[1]: /agent/kubernetes/legacy
+[2]: /agent/kubernetes/daemonset_setup
+[3]: /agent/kubernetes/host_setup
+[4]: /agent/kubernetes/event_collection#leader-election
 [5]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/manifests/rbac
 [7]: /integrations/faq/can-i-install-the-agent-on-my-kubernetes-master-node-s
 [8]: /integrations/faq/why-is-the-kubernetes-check-failing-with-a-connecttimeout-error-to-port-10250
