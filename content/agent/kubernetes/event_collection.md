@@ -4,14 +4,14 @@ kind: documentation
 ---
 
 Similarly to Agent 5, Agent 6 can collect events from the Kubernetes API server.
-First and foremost, you need to set the `collect_kubernetes_events` variable to `true` in the datadog.yaml, this can be achieved via the environment variable `DD_COLLECT_KUBERNETES_EVENTS` that is resolved at start time.
-You will need to give the Agent some rights to activate this feature. See the [RBAC][1]section.
+Set the `collect_kubernetes_events` variable to `true` in the datadog.yaml. This can be achieved via the environment variable `DD_COLLECT_KUBERNETES_EVENTS` that is resolved at start time.
+You will need to give the Agent some rights to activate this feature: see the [RBAC][1]section.
 
-A ConfigMap can be used to store the `event.tokenKey` and the `event.tokenTimestamp`. It has to be deployed in the `default` namespace and be named `datadogtoken`.
-One can simply run `kubectl create configmap datadogtoken --from-literal="event.tokenKey"="0"` . You can also use the example in manifests/datadog_configmap.yaml.
+A [ConfigMap][3] can be used to store the `event.tokenKey` and the `event.tokenTimestamp`. It has to be deployed in the `default` namespace and be named `datadogtoken`.
+You can run `kubectl create configmap datadogtoken --from-literal="event.tokenKey"="0"` . You can also use the example in `manifests/datadog_configmap.yaml`.
 
 When the ConfigMap is used, if the Agent in charge (via the [Leader election][2]) of collecting the events dies, the next leader elected will use the ConfigMap to identify the last events pulled.
-This is in order to avoid duplicate the events collected, as well as putting less stress on the API Server.
+This is in order to avoid duplicate the events collected, as well as to diminish stress on the API Server.
 
 ## Leader Election
 
@@ -21,10 +21,11 @@ This feature relies on Endpoints. You can enable it by setting the `DD_LEADER_EL
 
 Agents coordinate by performing a leader election among members of the Datadog DaemonSet through Kubernetes to ensure only one leader Agent instance is gathering events at a given time.
 
-This functionality is disabled by default, enabling the event collection will activate it to avoid duplicating collecting events and stress on the API server.
+This functionality is disabled by default. Enabling the event collection will activate it to avoid duplicating collecting events and stressing the API server.
 
-The leaderLeaseDuration is the duration for which a leader stays elected. It should be > 30 seconds and is 60 seconds by default. The longer it is, the less frequently your Agents hit the apiserver with requests, but it also means that if the leader dies (and under certain conditions), events can be missed until the lease expires and a new leader takes over.
-It can be configured with the environment variable `DD_LEADER_LEASE_DURATION`.
+The `leaderLeaseDuration` is the duration for which a leader stays elected. It is 60 seconds by default, and should be >30 seconds. The longer it is, the less frequently your Agents hit the API server with requests, but this also means that if the leader dies, events can be missed until the lease expires and a new leader takes over.
+The `leaderLeaseDuration` can be configured with the environment variable `DD_LEADER_LEASE_DURATION`.
 
 [1]: /agent/kubernetes#rbac
 [2]: /agent/kubernetes/event_collection#leader-election
+[3]: /agent/kubernetes/integrations#configmap
