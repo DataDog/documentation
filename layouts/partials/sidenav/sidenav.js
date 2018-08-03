@@ -95,7 +95,7 @@ $(document).ready(function () {
             function replacePathForPreview(input_path) {
                 var thisurl = window.location.protocol + "//" + window.location.host;
                 if(thisurl.indexOf("docs-staging") > -1) {
-                    var paths = window.location.pathname.split('/').filter(function(x) { return x !== ''; }).slice(2);
+                    var paths = input_path.split('/').filter(function(x) { return x !== ''; }).slice(2);
                     return (paths.length > 0) ? '/' + paths.join("/") + '/' : '/';
                 }
                 return input_path;
@@ -112,7 +112,7 @@ $(document).ready(function () {
                 var urlstring = $(this).attr('href');
                 (!urlstring.endsWith('/')) ? urlstring += '/' : '';
                 var u = new URL(urlstring);
-                if (u.pathname === currentPathName) {
+                if (replacePathForPreview(u.pathname) === currentPathName) {
                     var par = el.parents('li');
                     var sectionCount = par.length;
                     if(url_section_count === sectionCount) {
