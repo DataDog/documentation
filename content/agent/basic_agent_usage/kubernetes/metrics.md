@@ -3,8 +3,6 @@ title: Kubernetes Metrics
 kind: documentation
 ---
 
-## Data Collected
-### Metrics
 #### Kubernetes
 {{< get-metrics-from-git "kubernetes" >}}
 
