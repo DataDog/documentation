@@ -33,7 +33,7 @@ To gather metrics, traces, and logs from your Kubernetes clusters, there are two
 
 In the context of using the Kubernetes integration, and when deploying Agents in a Kubernetes cluster, a set of rights are required for the Agent to integrate seamlessly.
 
-You will need to allow the Agent to be allowed to perform a few actions:
+You will need to allow the Agent to perform a few actions:
 
 - `get` and `update` the `Configmaps` named `datadogtoken` to update and query the most up-to-date version token corresponding to the latest event stored in ETCD.
 - `list` and `watch` the `Events` to pull the events from the API Server, format, and submit them.
@@ -58,7 +58,7 @@ You can find the templates in `manifests/rbac` [here][5]. This creates a Service
 [2]: /agent/kubernetes/daemonset_setup
 [3]: /agent/kubernetes/host_setup
 [4]: /agent/kubernetes/event_collection#leader-election
-[5]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/manifests/rbac
+[5]: https://github.com/DataDog/datadog-agent/tree/0bef169d4e80e838ec6b303f5ad1da716b424b0f/Dockerfiles/manifests/rbac
 [7]: /integrations/faq/can-i-install-the-agent-on-my-kubernetes-master-node-s
 [8]: /integrations/faq/why-is-the-kubernetes-check-failing-with-a-connecttimeout-error-to-port-10250
 [9]: /agent/faq/getting-further-with-docker

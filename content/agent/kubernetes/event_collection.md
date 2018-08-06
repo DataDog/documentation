@@ -11,7 +11,7 @@ A [ConfigMap][3] can be used to store the `event.tokenKey` and the `event.tokenT
 You can run `kubectl create configmap datadogtoken --from-literal="event.tokenKey"="0"` . You can also use the example in `manifests/datadog_configmap.yaml`.
 
 When the ConfigMap is used, if the Agent in charge (via the [Leader election][2]) of collecting the events dies, the next leader elected will use the ConfigMap to identify the last events pulled.
-This is in order to avoid duplicate the events collected, as well as to diminish stress on the API Server.
+This is in order to avoid duplicating the events collected, as well as to diminish stress on the API Server.
 
 ## Leader Election
 

@@ -3,7 +3,7 @@ title: Kubernetes DaemonSet Setup
 kind: documentation
 further_reading:
 - link: "agent/autodiscovery"
-  tag: "Documentation"
+  tag: "documentation"
   text: Docker Agent Autodiscovery
 - link: "agent/kubernetes/host_setup"
   tag: "documentation"
@@ -101,7 +101,7 @@ kubectl create -f datadog-serviceaccount.yaml
 ## Create manifest
 Create the following `datadog-agent.yaml` manifest:
 
-```
+```yaml
 apiVersion: extensions/v1beta1
 kind: DaemonSet
 metadata:
@@ -260,7 +260,7 @@ See [Process collection for Kubernetes][21].
 
 ### DogStatsD
 
-To send custom metrics via DogStatsD, set the `DD_DOGSTATSD_NON_LOCAL_TRAFFIC`variable to true in your *env* section:
+To send custom metrics via DogStatsD, set the `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` variable to true in your *env* section:
 
 ```
 (...)
@@ -293,12 +293,12 @@ Another word of caution: some network plugging don't support `hostPorts` yet, so
 [9]: https://docs.datadoghq.com/agent/autodiscovery
 [10]: /logs
 [11]: /logs/docker/#configuration-file-example
-[12]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/manifests/rbac
+[12]: https://github.com/DataDog/datadog-agent/tree/0bef169d4e80e838ec6b303f5ad1da716b424b0f/Dockerfiles/manifests/rbac
 [13]: /agent/autodiscovery
 [14]: https://app.datadoghq.com/account/settings#agent
 [15]: /agent/faq/agent-commands/#agent-status-and-information
 [16]: https://kubernetes.io/docs/admin/authorization/rbac/
-[17]: https://github.com/DataDog/integrations-core/tree/master/kubelet#compatibility
+[17]: https://github.com/DataDog/integrations-core/tree/73b475d0762829a32c70b63da2564eaa15b1d942/kubelet#compatibility
 [18]: https://kubernetes.io/docs/admin/authentication/#service-account-tokens
 [19]: /agent/basic_agent_usage/docker/#dogstatsd-custom-metrics
 [20]: /tracing/setup/kubernetes
