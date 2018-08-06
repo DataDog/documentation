@@ -4,6 +4,7 @@ kind: documentation
 ---
 
 ## ConfigMap
+
 It is possible to leverage ConfigMaps to configure or enable integrations.
 To do so, you only need to create a ConfigMap with the integration(s)'s configuration.
 Then, reference this ConfigMap among the volumes of your Agent's manifest.
@@ -76,12 +77,12 @@ This can be done with the autodiscovery, for more details, see the [Autodiscover
 [9]: https://docs.datadoghq.com/agent/autodiscovery
 [10]: /logs
 [11]: /logs/docker/#configuration-file-example
-[12]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/manifests/rbac
+[12]: https://github.com/DataDog/datadog-agent/tree/0bef169d4e80e838ec6b303f5ad1da716b424b0f/Dockerfiles/manifests/rbac
 [13]: /agent/autodiscovery
 [14]: https://app.datadoghq.com/account/settings#agent
 [15]: /agent/faq/agent-commands/#agent-status-and-information
 [16]: https://kubernetes.io/docs/admin/authorization/rbac/
-[17]: https://github.com/DataDog/integrations-core/tree/master/kubelet#compatibility
+[17]: https://github.com/DataDog/integrations-core/tree/73b475d0762829a32c70b63da2564eaa15b1d942/kubelet#compatibility
 [18]: https://kubernetes.io/docs/admin/authentication/#service-account-tokens
 [19]: /agent/basic_agent_usage/docker/#dogstatsd-custom-metrics
 [20]: /tracing/setup/kubernetes

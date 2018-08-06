@@ -9,8 +9,8 @@ kind: documentation
 #### Kubelet
 {{< get-metrics-from-git "kubelet" >}}
 
-#### Kubernetes State
+#### kube-state-metrics
 {{< get-metrics-from-git "kubernetes_state" >}}
 
-#### Kubernetes DNS
+#### kube-dns
 {{< get-metrics-from-git "kube_dns" >}}

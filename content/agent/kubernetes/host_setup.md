@@ -3,7 +3,7 @@ title: Kubernetes Host Setup
 kind: documentation
 further_reading:
 - link: "agent/autodiscovery"
-  tag: "Documentation"
+  tag: "documentation"
   text: Docker Agent Autodiscovery
 - link: "agent/kubernetes/host_setup"
   tag: "documentation"
@@ -24,7 +24,7 @@ To gather your kube-state metrics:
   kubectl apply -f <NAME_OF_THE_KUBE_STATE_MANIFESTS_FOLDER>
   ```
 
-## Setup Kubernetes DNS
+## Setup the kube-dns integration
 ### Configuration
 
 Since [Agent v6][4], Kubernetes DNS integration works automatically with the [Autodiscovery][5].
