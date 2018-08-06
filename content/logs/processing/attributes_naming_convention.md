@@ -2,18 +2,19 @@
 title: Attributes Naming Convention
 kind: documentation
 description: "Datadog log attributes naming convention."
-aliases:
-    - logs/parsing/
 further_reading:
-- link: "logs/processing"
+- link: "logs/processing/pipelines"
   tag: "Documentation"
-  text: Learn how to process your logs
-- link: "logs/faq/log-parsing-best-practice"
-  tag: "FAQ"
-  text: Log Parsing - Best Practice
+  text: Discover Datadog Pipelines
+- link: "logs/processing/processors"
+  tag: "Documentation"
+  text: Consult the full list of available Processors
 - link: "logs/logging_without_limits"
   tag: "Documentation"
-  text: Control the volume of logs indexed by Datadog
+  text: Logging without limit
+- link: "logs/explorer"
+  tag: "Documentation"
+  text: Learn how to explore your logs
 ---
 
 ## Getting Started
@@ -186,5 +187,5 @@ Some integrations that rely on these are: [Rsyslog][2], [NxLog][3], [Syslog-ng][
 [16]: /integrations/mysql
 [17]: /integrations/amazon_rds
 [18]: /integrations/elastic
-[19]: /logs/explore/#measures
+[19]: /logs/explorer/search/#measures
 [20]: /tracing/search
