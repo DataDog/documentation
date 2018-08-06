@@ -43,7 +43,7 @@ All new logs processed by this Pipeline should now have the correct status.
 ## JSON logs
 
 **JSON logs are automatically parsed in Datadog.**
-The log `status` attribute is one of the [reserved attributes][3] in Datadog which means JSON logs that use those attributes have their values treated specially - in this case to derive the log's status. Change the default remapping for those attribute at the top of your Pipeline as explained [in the edit reserved attributes documentation][4].
+The log `status` attribute is one of the [reserved attributes][3] in Datadog which means JSON logs that use those attributes have their values treated specially - in this case to derive the log's status. Change the default remapping for those attributes at the top of your Pipeline as explained [in the edit reserved attributes documentation][4].
 So let's imagine that the actual status of the log is contained in the attribute `logger_severity`.
 
 {{< img src="logs/faq/new_log.png" alt="new log" responsive="true" style="width:50%;">}}

@@ -59,7 +59,7 @@ The logstream shows which logs your Pipeline applies to:
 ### Reserved attribute Pipeline
 
 Datadog has [a list of reserved attributes][3] such as `timestamp`, `status`, `host`, `service`, and even the log `message`, those attributes have a specific behavior within Datadog.
-If you have different attribute names for those in your JSON logs, use the reserved attribute pipeline to remap your logs attribute to one of the reserved attribute list.
+If you have different attribute names for those in your JSON logs, use the reserved attribute Pipeline to remap your logs attribute to one of the reserved attribute list.
 
 For example: A service that generates the below logs:
 
@@ -73,7 +73,7 @@ For example: A service that generates the below logs:
 }
 ```
 
-Going to into the reserved attribute Pipeline and changing the default mapping to this one:
+Going into the reserved attribute Pipeline and changing the default mapping to this one:
 
 {{< img src="logs/processing/pipelines/reserved_attribute_remapper.png" alt="Reserved attribute remapper" responsive="true" style="width:70%;">}}
 
@@ -81,7 +81,7 @@ Would then produce the following log:
 
 {{< img src="logs/processing/pipelines/log_post_remapping.png" alt="Log post remapping" responsive="true" style="width:70%;">}}
 
-If you want to remap an attribute to one of the reserved attribute in a custome pipeline, use the [Log Status Remapper][4] or the [Log Date Remapper][5].
+If you want to remap an attribute to one of the reserved attributes in a custom Pipeline, use the [Log Status Remapper][4] or the [Log Date Remapper][5].
 
 ### Integration Pipelines
 
@@ -93,16 +93,16 @@ Note that these Pipelines are read-only, but you can clone them and then edit th
 
 ## Pipelines limitations
 
-To make sure the Log Management solution functions in an optimal way we set the following technical limits and rules to your log events as well as to some product features. These have been designed so you may never reach them.
+To make sure the Log Management solution functions in an optimal way, we set the following technical limits and rules to your log events, as well as to some product features. These have been designed so that you may never reach them.
 
 ### Limits applied to ingested log events
 
 * The size of a log event should not exceed 25K bytes.
 * Log events can be submitted up to 6h in the past and 2h in the future.
-* A log event once converted to JSON format should contain less than 256 attributes, each of those attribute’s key should be less than 50 characters, be nested in less than 10 successive levels and their respective value be less than 1024 characters if promoted as a facet.
-* A log event should not have more than 100 tags and each tag should not exceed 256 characters for a maximum of 10 millions unique tag per day.
+* A log event once converted to JSON format should contain less than 256 attributes. Each of those attribute’s key should be less than 50 characters, be nested in less than 10 successive levels, and their respective value should be less than 1024 characters if promoted as a facet.
+* A log event should not have more than 100 tags and each tag should not exceed 256 characters for a maximum of 10 million unique tags per day.
 
-Log events which do not comply with these limits might be transformed or truncated by the system. Or simply not indexed if outside of the provided time range. However, be sure that Datadog always tries to do its best to preserve as much as possible the provided user data.
+Log events which do not comply with these limits might be transformed or truncated by the system—or simply not indexed if outside of the provided time range. However, Datadog always tries to do its best to preserve as much as possible to preserve provided user data.
 
 ### Limits applied to provided features
 

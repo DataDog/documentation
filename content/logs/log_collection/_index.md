@@ -259,7 +259,7 @@ Then configure your proxy to forward logs to the endpoint `agent-intake.logs.dat
 
 ## How to get the most of your application logs
 
-When logging stack traces, there are specific attributes that have a dedicated UI display within your Datadog application such as the logger name, the current thread, the error type and of course the stack trace itself.
+When logging stack traces, there are specific attributes that have a dedicated UI display within your Datadog application such as the logger name, the current thread, the error type, and of course the stack trace itself.
 
 {{< img src="logs/log_collection/stack_trace.png" style="width:80%;" alt="Stack trace" responsive="true" >}}
 
@@ -279,7 +279,7 @@ For integration frameworks, we provide guidelines on how to log in JSON into a f
 
 ##### The Advantage of Collecting JSON-formatted logs
 
-Datadog automatically parses JSON-formatted logs. For this reason, when you have control over the log format you send to Datadog, we encourage you to format them as JSON to avoid the need for custom parsing rules.
+Datadog automatically parses JSON-formatted logs. For this reason, if you have control over the log format you send to Datadog, we encourage you to format these logs as JSON to avoid the need for custom parsing rules.
 
 ## Further Reading
 

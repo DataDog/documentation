@@ -13,8 +13,8 @@ further_reading:
 
 ## Overview
 
-When multiple teams share the same account, or when your logs have many different sources, it is critical to be able to start investigating with the right content right away.
-In Datadog, teams can now define and share Log Explorer Views so everyone can start troubleshooting with the same predefined context.
+When multiple teams share the same account, or when your logs have many different sources, it is critical to be able to promptly start investigating the right content.
+With Datadog, teams can define and share Log Explorer Views so everyone can start troubleshooting with the same predefined context.
 
 Datadog Saved Views allow you to save search customizations in the Log Explorer, including:
 
@@ -23,7 +23,7 @@ Datadog Saved Views allow you to save search customizations in the Log Explorer,
 * A set of [columns][3]
 * A customized default visualization ([logstream][4] or [log analytic][5])
 
-Saved Views can then be selected directly in the left panel or in the search bar thanks to the auto-complete, which matches on either search name or query.
+Saved Views can then be selected directly in the left panel or in the search bar thanks to auto-completion, which matches on either search name or query.
 
 {{< img src="logs/explorer/saved_views/saved_views_selection.png" alt="Saved Views selection" responsive="true">}}
 
@@ -31,11 +31,11 @@ Saved Views can then be selected directly in the left panel or in the search bar
 
 By default, all facets are displayed for all users.
 
-Each user can define their own list of default Facets and Facet Groups to display by using the *manage facets* button and then selecting the desired one.
+Each user can define their own list of default facets and facet groups to display by using the *Manage Facets* button and then selecting the desired facets.
 
 {{< img src="logs/explorer/saved_views/default_saved_views.png" alt="Saved Views selection" responsive="true">}}
 
-Once this has been done, every time the Log Explorer is opened the default list of facets is used. This also works when clicking on *Log Explorer - Default view* from the list of Saved Views:
+Once this has been done, the Log Explorer uses the default list of facets whenever it is opened. This also works when clicking on *Log Explorer - Default view* from the list of Saved Views:
 
 {{< img src="logs/explorer/saved_views/default_views_selection.png" alt="Saved Views selection" responsive="true" style="width:50%;">}}
 
@@ -55,7 +55,7 @@ To create a new Saved View:
 
 ### Remove a Saved View
 
-Saved Views can be removed directly form the Saved View list in the Logs Explorer. Hover over the name of the Saved View to reveal its **delete** button. Click on it and confirm.
+Saved Views can be removed directly from the Saved View list in the Logs Explorer. Hover over the name of the Saved View to reveal its **delete** button. Click on it and confirm.
 
 {{< img src="logs/explorer/saved_views/remove_saved_views.png" alt="remove Saved Views" responsive="true" style="width:50%;">}}
 
@@ -67,7 +67,7 @@ To update an existing Saved View, proceed exactly as if you were creating a new 
 
 ## Revert a modification to a Saved View
 
-After selecting a Saved View, you can continue to refine and modify your search as you need for your troubleshooting purposes. After changing the view, you can always revert to the most recent saved version of the Saved View by selecting the **Revert** button.
+After selecting a Saved View, you can continue to refine and modify your search as needed for your troubleshooting purposes. After changing the view, you can always revert to the most recent saved version of the Saved View by selecting the **Revert** button.
 
 **Note**: The Revert button does not undo changes after they have been saved.
 

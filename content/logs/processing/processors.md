@@ -47,7 +47,7 @@ If your logs don't contain any of the default attributes and you haven't defined
 
 ## Log Status Remapper
 
-Use this Processor if you want to assign some attributes as the official status, just enter the attribute path in the Processor tile as follow:
+Use this Processor if you want to assign some attributes as the official status. Just enter the attribute path in the Processor tile as follows:
 
 {{< img src="logs/processing/processors/severity_remapper_processor_tile.png" alt="Severity Remapper Processor tile" responsive="true" style="width:80%;" >}}
 
@@ -59,7 +59,7 @@ Into this log:
 
 {{< img src="logs/processing/processors/log_post_severity_bis.png" alt=" Log post severity bis" responsive="true" style="width:40%;" >}}
 
-However, beware that each incoming status value is mapped as follows:
+However, be aware that each incoming status value is mapped as follows:
 
 * Integers from 0 to 7 map to the [Syslog severity standards][3]
 * Strings beginning with **emerg** or **f** (case-insensitive) map to **emerg (0)**
@@ -75,7 +75,7 @@ However, beware that each incoming status value is mapped as follows:
 
 ## Remapper
 
-This Processor remaps any source attribute(s) or tag to another target attribute or tag, for instance here it remaps `user` to `user.firstname`
+This Processor remaps any source attribute(s) or tag to another target attribute or tag. For instance, here, it remaps `user` to `user.firstname`
 
 {{< img src="logs/processing/processors/attribute_remapper_processor_tile.png" alt="Attribute Remapper Processor tile" responsive="true" style="width:80%;" >}}
 
@@ -87,7 +87,7 @@ Into this log:
 
 {{< img src="logs/processing/processors/attribute_post_remapping.png" alt="attribute post remapping " responsive="true" style="width:40%;">}}
 
-Constraints on the tag/attribute name are explained in the [Tag Best Practice documentation][4]. Some additional constraints are applied as `:`, `/` or `,` are not allowed in the target tag/attribute name.
+Constraints on the tag/attribute name are explained in the [Tag Best Practice documentation][4]. Some additional constraints are applied as `:`, `/`, or `,` are not allowed in the target tag/attribute name.
 
 ## URL Parser
 
@@ -101,12 +101,12 @@ Give the following results:
 
 {{< img src="logs/processing/processors/url_processor.png" alt="Url Processor" responsive="true" style="width:80%;" >}}
 
-## Useragent parser
+## User-Agent parser
 
-UserAgent parser takes a useragent attribute and does its best to extract the OS, browser, device, etc...
-It recognizes major bots like the Google Bot, Yahoo Slurp, Bing and others.
+The User-Agent parser takes a User-Agent attribute and does its best to extract the OS, browser, device, etc...
+It recognizes major bots like the Google Bot, Yahoo Slurp, Bing, and others.
 
-If your logs contain encoded useragents (as, for example, IIS logs do), configure this Processor to **decode the URL** before parsing it.
+If your logs contain encoded User-Agents (as, for example, IIS logs do), configure this Processor to **decode the URL** before parsing it.
 
 These settings:
 
@@ -118,7 +118,7 @@ Give the following results:
 
 ## Category Processor
 
-Use the Category Processor to add a new attribute (without space or special characters in the new attribute name) to a log matching a provided search query.
+Use the Category Processor to add a new attribute (without spaces or special characters in the new attribute name) to a log matching a provided search query.
 Categories are very useful to create meaningful groups which can be used in any analytical view (e.g. URL groups, Machine groups, environments, response time buckets, etc....).
 
 For example to categories your web access logs depending of the status code range value (2xx for a response code between 200 and 299, 3xx for a response code between 300 and 399, ...) add this Processor:
@@ -129,12 +129,12 @@ It produces the following result:
 
 {{< img src="logs/processing/processors/category_processor_result.png" alt="Category Processor result" responsive="true" style="width:80%;" >}}
 
-**Important Note**: The query can be done on any log attribute or tag no matter if it is a facet or not, wildcards can also be used inside your query.
-Once the log has matched one of the Processor query, it stops. Make sure they are properly ordered in case a log could match several queries.
+**Important Note**: The query can be done on any log attribute or tag, whether it is a facet or not. Wildcards can also be used inside your query.
+Once the log has matched one of the Processor queries, it stops. Make sure they are properly ordered in case a log could match several queries.
 
 ## Log Message Remapper
 
-The message is a key attribute in Datadog. It is displayed in the message column of the Log Explorer and you can do full string search on it. Use this Processor to define some attributes as the official log message, just enter the attribute path in the Processor tile as follows:
+The message is a key attribute in Datadog. It is displayed in the message column of the Log Explorer and you can do full string search on it. Use this Processor to define some attributes as the official log message: just enter the attribute path in the Processor tile as follows:
 
 {{< img src="logs/processing/processors/message_processor.png" alt="Message Processor" responsive="true" style="width:80%;">}}
 
