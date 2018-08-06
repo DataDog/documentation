@@ -341,9 +341,9 @@ The span value is the number of data points. So `median_9()` uses the last 9 dat
 
 {{< vimeo 264998150 >}}
 
-Recommended for expert users only. Appending this function to the end of a query allows you to control the number of raw points rolled up into a single point plotted on the graph. The function takes two parameters, method and time: `.rollup(method,time)`
+Recommended for expert users only. Datadog rolls up data points automatically, based on the [metric type][6]: `gauge` metrics are averaged by default, whereas `count` and `rate` metrics are summed. Appending this function to the end of a query allows you to override the default behavior to control the rollup method or the number of raw points rolled up into a single point plotted on the graph.
 
-The method can be sum/min/max/count/avg and time is in seconds. You can use either one individually, or both together like `.rollup(sum,120)`. We impose a limit of 350 points per time range. For example, if you're requesting `.rollup(20)` for a month-long window, we return data at a rollup far greater than 20 seconds in order to prevent returning a gigantic number of points.
+The function takes two parameters, method and time: `.rollup(method,time)`. The method can be sum/min/max/count/avg and time is in seconds. You can use either one individually, or both together like `.rollup(sum,120)`. We impose a limit of 350 points per time range. For example, if you're requesting `.rollup(20)` for a month-long window, we return data at a rollup far greater than 20 seconds in order to prevent returning a gigantic number of points. 
 
 Note that rollups should usually be avoided in [monitor][7] queries, because of the possibility of misalignment between the rollup interval and the evaluation window of the monitor. The start and end of rollup intervals are aligned to UNIX time, not to the start and end of monitor queries, which means that a monitor may evaluate (and trigger on) an incomplete rollup interval containing only a small sample of data. To avoid this issue, users should delay the evaluation of the monitor by (at least) the length of the rollup interval.
 
@@ -430,4 +430,5 @@ Highlight outliers series; see our [Outlier Monitor][3] page for more info.
 [3]: /monitors/monitor_types/outlier
 [4]: /graphing/faq/as_count_validation
 [5]: /getting_started/from_the_query_to_the_graph/#proceed-to-space-aggregation
+[6]: /developers/metrics/#metric-types
 [7]: /monitors/monitor_types/metric/
