@@ -68,7 +68,7 @@ If you are interested by only one of the sections of this document, for each sec
 
 ## Open Ports
 
-**All traffic is sent (outbound only) over SSL via 443 TCP.**
+**All traffic is sent (outbound only) over SSL via TCP.**
 
 Open the following ports in order to benefit from all the Agent functionalities: 
 
@@ -76,7 +76,8 @@ Open the following ports in order to benefit from all the Agent functionalities:
 
 * **Outbound**
 
-  * `123/UDP`: NTP - [More details on the importance of NTP here][5].
+  * `443/tcp`: port for most Agent data. (Metrics, APM, Live Processes/Containers) 
+  * `123/udp`: NTP - [More details on the importance of NTP here][5].
   * `10516/tcp`: port for the [Log collection][3]
   * `10255/tcp`: port for the [Kubernetes http kubelet][8]
   * `10250/tcp`: port for the [Kubernetes https kubelet][8]
@@ -99,7 +100,8 @@ Open the following ports in order to benefit from all the Agent functionalities:
 
 * **Outbound**
 
-  * `123/UDP`: NTP - [More details on the importance of NTP here][5].
+  * `443/tcp`: port for most Agent data. (Metrics, APM, Live Processes/Containers) 
+  * `123/udp`: NTP - [More details on the importance of NTP here][5].
 
 * **Inbound**
 
