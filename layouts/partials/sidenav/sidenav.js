@@ -124,6 +124,7 @@ $(document).ready(function () {
                     }
                 }
             });
+            $('body > .container .sidenav .col').animate({'opacity':1});
         }
     }
 
