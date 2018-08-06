@@ -31,12 +31,12 @@ For example:
 
 The given unique metrics **on a given host** are therefore:
 
-* auth.exceptionCount with tag `method:X`
-* auth.exceptionCount with tag `method:Y`
-* auth.exceptionCount with tags `method:X` and `exception:A` //unique because of new tag `exception:A`
-* auth.exceptionCount with tags `method:X` and `exception:B`
-* auth.exceptionCount with tags `method:Y` and `exception:A`
-* auth.exceptionCount with tags `method:Y` and `exception:B`
+* `auth.exceptionCount` with tag `method:X`
+* `auth.exceptionCount` with tag `method:Y`
+* `auth.exceptionCount` with tags `method:X` and `exception:A` //unique because of new tag `exception:A`
+* `auth.exceptionCount` with tags `method:X` and `exception:B`
+* `auth.exceptionCount` with tags `method:Y` and `exception:A`
+* `auth.exceptionCount` with tags `method:Y` and `exception:B`
 
 In this situation, you would end up with 6 different metrics.
 
@@ -80,9 +80,9 @@ From there, you can see that **on each host reporting this metric**, if all serv
 
 Let’s say you have 3 hosts:
 
-* host1 is reporting all possible configurations
-* host2 is reporting only successes across all services
-* host3 is reporting success and failures, but only for database and webserver services
+* `host1` is reporting all possible configurations
+* `host2` is reporting only successes across all services
+* `host3` is reporting success and failures, but only for database and webserver services
 
 Across your 3 hosts, you’d have 13 distinct metrics, here is why :
 

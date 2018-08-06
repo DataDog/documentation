@@ -35,7 +35,7 @@ The Agent sends metrics to a specific url that is specified in the `datadog.yaml
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/tagging
+[1]: /tagging
 [2]: https://docs.datadoghq.com/logs/log_collection/
 [3]: /agent/basic_agent_usage/#configuration-file
 [4]: /agent/faq/agent-commands/#restart-the-agent

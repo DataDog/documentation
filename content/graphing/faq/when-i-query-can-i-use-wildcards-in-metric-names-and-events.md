@@ -22,5 +22,5 @@ I can then have tags associated with different instances of the metric, like:
 
 **Note**: wildcards are supported in [Event Monitors][2].
 
-[1]: /getting_started/tagging
+[1]: /tagging
 [2]: /monitors/monitor_types/event

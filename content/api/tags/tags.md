@@ -14,4 +14,4 @@ The component of your infrastructure responsible for a tag is identified by a so
 [Read more about tags on the dedicated documentation page][2].
 
 [1]: /integrations/faq/list-of-api-source-attribute-value
-[2]: /getting_started/tagging
+[2]: /tagging

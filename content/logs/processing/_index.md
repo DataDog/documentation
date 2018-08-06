@@ -224,4 +224,4 @@ Contact support if you reach one of these limits as Datadog might be able to pro
 [3]: /logs/processing/parsing
 [4]: /logs/processing/#log-date-remapper
 [5]: https://en.wikipedia.org/wiki/Syslog#Severity_level
-[6]: https://docs.datadoghq.com/getting_started/tagging/#tags-best-practices
+[6]: https://docs.datadoghq.com/tagging/#tags-best-practices

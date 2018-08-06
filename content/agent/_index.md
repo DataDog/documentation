@@ -175,7 +175,7 @@ permissions: if you are able to open `datadog.yaml`, you are able to use the GUI
 [2]: https://github.com/DataDog/datadog-agent
 [3]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md
 [4]: /integrations
-[5]: /getting_started/custom_metrics/
+[5]: /developers/metrics/custom_metrics/
 [6]: /developers/dogstatsd
 [7]: /agent/basic_agent_usage/deb
 [8]: /agent/basic_agent_usage/ubuntu

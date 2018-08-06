@@ -96,7 +96,7 @@ There are multiple community projects for maintaining or managing Monitors along
 [8]: /monitors/manage_monitor
 [9]: /monitors/downtimes
 [10]: /monitors/check_summary
-[12]: /getting_started/tagging
+[12]: /tagging
 [13]: https://app.datadoghq.com/monitors#/create
 [14]: /graphing/event_stream
 [15]: /monitors/monitor_types/log

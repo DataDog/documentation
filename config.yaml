@@ -38,7 +38,7 @@ languages:
         - identifier: menu_references_tagging
           name: "Tagging"
           url: "tagging/"
-          pre: "nav_start"
+          pre: "nav_tagging"
           weight: 35
         - identifier: customnav_getting_started_assigning_tags
           name: "Assigning tags"

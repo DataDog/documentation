@@ -141,7 +141,7 @@ The logic is the same:
 
 #### Arithmetic
 
-Arithmetic is applied after time and space aggregation as well ([step 4: Apply function](/getting_started/from_the_query_to_the_graph/#apply-functions-optional)).
+Arithmetic is applied after time and space aggregation as well ([step 4: Apply function](/graphing/miscellaneous/from_the_query_to_the_graph/#apply-functions-optional)).
 
 {{< img src="getting_started/from_query_to_graph/metric_graph_8.png" alt="metric_graph_8" responsive="true" style="width:75%;">}}
 
@@ -156,8 +156,8 @@ Documentation about [statsd/DogStatsD][12].
 [1]: /graphing/faq/how-does-datadog-render-graphs-my-graph-doesn-t-show-the-values-i-m-expecting
 [2]: /graphing/dashboards/timeboard
 [3]: /graphing/dashboards/screenboard
-[4]: /getting_started/from_the_query_to_the_graph/#proceed-to-space-aggregation
-[5]: /getting_started/custom_metrics
+[4]: /graphing/miscellaneous/from_the_query_to_the_graph/#proceed-to-space-aggregation
+[5]: /developers/metrics/custom_metrics
 [6]: /graphing/faq/how-is-data-aggregated-in-graphs
 [7]: /graphing/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs
 [8]: /graphing/miscellaneous/functions/#rollup

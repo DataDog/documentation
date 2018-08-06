@@ -89,5 +89,5 @@ The following gif demonstrates inspecting the aggregations created for a metric,
 [1]: /developers/metrics
 [2]: /developers/metrics/histograms
 [3]: https://app.datadoghq.com/metric/distribution_metrics
-[4]: /getting_started/custom_metrics
+[4]: /developers/metrics/custom_metrics
 [5]: /developers/metrics/distributions

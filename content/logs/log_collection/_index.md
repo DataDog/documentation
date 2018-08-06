@@ -311,7 +311,7 @@ To change the default values for each of the reserved attributes, go to the pipe
 {{< img src="logs/log_collection/reserved_attribute_tile.png" alt="Reserved Attribute Tile" responsive="true" style="width:80%;">}}
 
 [1]: /agent
-[2]: /getting_started/custom_metrics/
+[2]: /developers/metrics/custom_metrics/
 [3]: /agent/faq/agent-commands/#start-stop-restart-the-agent
 [4]: /logs/processing/#log-date-remapper
 [5]: /logs/explore/#logstream
