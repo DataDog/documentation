@@ -92,7 +92,7 @@ If an attribute was called `user.first name`, perform a search on this attribute
 
 ### Saved Searches
 
-Don't lose time building the same views everyday. Saved Views contain your search query, columns,time horizon and facet.
+Don't lose time building the same views everyday. Saved Views contain your search query, columns, time horizon, and facet.
 
 ## Time Range
 

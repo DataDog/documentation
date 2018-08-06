@@ -394,7 +394,7 @@ logs:
 ### Adding a session Processor to add variable context in your logs
 
 1. Implement your session Processor:  
-  This is an example of such Processor. It knows the current session and it enriches the content of the log record with valuable information such as the `requestId`, `sessionId`, ...  
+  This is an example of such a Processor. It knows the current session and it enriches the content of the log record with valuable information such as the `requestId`, `sessionId`, ...  
 
     ```php
     <?php
@@ -537,7 +537,7 @@ Much of the useful information comes from additional context data that you can a
 $logger->info('Adding a new user', array('username' => 'Seldaek'));
 ```
 
-But, most important, the library comes with a Processor feature. Processors allow you to provide additional information to logs in an automated fashion. They are called from the logger before the event is passed to the writers; they receive the event array, and return an event array on completion.
+But, most importantly, the library comes with a Processor feature. Processors allow you to provide additional information to logs in an automated fashion. They are called from the logger before the event is passed to the writers; they receive the event array, and return an event array on completion.
 
 Use cases include:
 
