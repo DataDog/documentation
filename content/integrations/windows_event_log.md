@@ -65,7 +65,7 @@ The Windows Event log check is included in the [Datadog Agent][4] package, so yo
             service: myservice
             sourcecategory: windowsevent
     
-    Edit the `<CHANNEL_X>` parameters with the wanted channel to collect events from. Set the `source` to the channel name to benefit from the integration automatic processing pipeline setup.
+    Edit the `<CHANNEL_X>` parameters with the wanted channel to collect events from. Set the `source` to the channel name to benefit from the integration automatic processing Pipeline setup.
 
 3. [Restart the agent][1]
 

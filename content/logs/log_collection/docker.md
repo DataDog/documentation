@@ -1,11 +1,14 @@
 ---
 title: Docker Log collection
 kind: documentation
+aliases:
+  - /logs/docker
+  - /logs/languages/docker/
 further_reading:
-- link: "logs/explore"
+- link: "logs/explorer"
   tag: "Documentation"
   text: Learn how to explore your logs
-- link: "logs/analytics"
+- link: "logs/explorer/analytics"
   tag: "Documentation"
   text: "Perform Log Analytics"
 - link: "logs/processing"
@@ -14,8 +17,6 @@ further_reading:
 - link: "logs/processing/parsing"
   tag: "Documentation"
   text: Learn more about parsing
-aliases:
-  - /logs/docker
 ---
 
 ## Overview
@@ -43,7 +44,7 @@ logs:
       service: docker
 ```
 
-**Important note**: Integration pipelines and processors will not be installed automatically as the source tag is not set. The integration setup is described below and it automatically installs integration pipelines that parse your logs and extract all the relevant information from them.
+**Important note**: Integration Pipelines and Processors will not be installed automatically as the source tag is not set. The integration setup is described below and it automatically installs integration Pipelines that parse your logs and extract all the relevant information from them.
 
 ### Option 2: Container installation
 

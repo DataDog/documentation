@@ -24,13 +24,13 @@ The Agent sends metrics and other payloads to Datadog. To make sure that the Age
 1. Open the `datadog.yaml` file ([locate this configuration file for your platform][3]).
 2. Add the `enable_payloads` attribute as below:
 
-  ```
-  enable_payloads:
-    series: false
-    events: false
-    service_checks: false
-    sketches: false
-  ```
+    ```
+    enable_payloads:
+      series: false
+      events: false
+      service_checks: false
+      sketches: false
+    ```
 
 3. Configure the Agent to collect logs as explained in the [log documentation page][2].
 4. [Restart the Agent][4]

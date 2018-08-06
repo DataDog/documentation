@@ -77,7 +77,7 @@ Fast and easy correlation is key when troubleshooting an issue. Use the followin
 
 {{< img src="graphing/dashboards/related_logs.png" alt="Related logs" responsive="true" style="width:80%;">}}
 
-Select `View related logs` to jump to the log explorer page zoomed on the selected timeframe with all the current context of your graph.
+Select `View related logs` to jump to the Log Explorer page zoomed on the selected timeframe with all the current context of your graph.
 
 ### How do we define the search query ?
 
