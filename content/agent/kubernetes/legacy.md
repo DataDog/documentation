@@ -15,11 +15,11 @@ further_reading:
 
 Our default configuration targets Kubernetes 1.7.6 and later, as the Datadog Agent relies on features and endpoints introduced in this version. More installation steps are required for older versions:
 
-- [RBAC objects][1] (`ClusterRoles` and `ClusterRoleBindings`) are available since Kubernetes 1.6 and OpenShift 1.3, but are available under different `apiVersion` prefixes:
+- [RBAC objects][1] (`ClusterRoles` and `ClusterRoleBindings`) are available since Kubernetes 1.6 and OpenShift 3.3, but are available under different `apiVersion` prefixes:
 
   * `rbac.authorization.k8s.io/v1` in Kubernetes 1.8+ (and OpenShift 3.9+), the default apiVersion we target
   * `rbac.authorization.k8s.io/v1beta1` in Kubernetes 1.5 to 1.7 (and OpenShift 3.7)
-  * `v1` in Openshift 1.3 to 3.6
+  * `v1` in Openshift 3.3 to 3.6
 
     Apply our yaml manifests with the following `sed` invocations:
 
@@ -28,7 +28,7 @@ Our default configuration targets Kubernetes 1.7.6 and later, as the Datadog Age
     sed "s%authorization.k8s.io/v1%authorization.k8s.io/v1beta1%" clusterrolebinding.yaml | kubectl apply -f -
     ```
 
-    or for Openshift 1.3 to 3.6:
+    or for Openshift 3.3 to 3.6:
 
     ```
     sed "s%rbac.authorization.k8s.io/v1%v1%" clusterrole.yaml | oc apply -f -
