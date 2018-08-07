@@ -136,7 +136,6 @@ Once the Agent is running, use the `datadog-agent launch-gui` command to launch 
 
 3. For security reasons, the GUI can **only** be accessed from the local network interface (```localhost```/```127.0.0.1```), so you must be on the same host that the Agent is running to use it. In other words, you can't run the Agent on a VM or a container and access it from the host machine.
 
-
 ## Supported OSs versions
 
 ### Agent v6
