@@ -159,7 +159,7 @@ To send traces or processes through the proxy, setup the following in the `datad
 
 ```
 apm_config:
-    endpoint: https://haproxy.example.com:3835
+    apm_dd_url: https://haproxy.example.com:3835
 
 process_config:
     process_dd_url: https://haproxy.example.com:3836
