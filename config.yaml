@@ -280,9 +280,14 @@ languages:
           weight: 60
           parent: menu_references_graphing
         - identifier: customnav_infrastructurenav_hostmap
-          name: "Hostmap"
+          name: "Host map"
           url: "graphing/infrastructure/hostmap/"
           weight: 30
+          parent: customnav_graphingnav_infrastructure
+        - identifier: customnav_infrastructurenav_containermap
+          name: "Container map"
+          url: "graphing/infrastructure/containermap/"
+          weight: 35
           parent: customnav_graphingnav_infrastructure
         - identifier: customnav_infrastructurenav_livecontainers
           name: "Live Containers"
