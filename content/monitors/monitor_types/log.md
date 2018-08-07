@@ -37,5 +37,5 @@ Log monitors alert when a specified type of log exceeds a user-defined threshold
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/explore/#search-bar
+[1]: /logs/explorer/search/
 [2]: /monitors/notifications

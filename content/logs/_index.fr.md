@@ -3,15 +3,15 @@ title: Log Management
 kind: Documentation
 description: "Configurez votre Agent Datadog pour rassembler les logs de votre hôte, de vos conteneurs et de vos services."
 further_reading:
-- link: "logs/analytics"
+- link: "logs/log_collection"
   tag: "Documentation"
-  text: "Construire des analyses de log"
+  text: Configurez votre Agent Datadog pour rassembler les logs de votre hôte, de vos conteneurs et de vos services.
 - link: "logs/processing"
   tag: "Documentation"
   text: Apprenez à traiter vos logs
-- link: "logs/processing/parsing"
+- link: "logs/explorer/"
   tag: "Documentation"
-  text: En savoir plus sur le parsing
+  text: Rechercher vos logs et construire des Log Analytics. 
 ---
 
 La solution Log Management est une solution complète tout-en-un qui comprend [la collecte][34], [le processing][33], le live tailing, [l'exploration][17], [la création de graphiques][23], [la préparation de dashboards][36], [les alertes][35] et l'archivage de l'ensemble des logs générés par [votre application][16], ainsi que votre infrastructure.
@@ -25,7 +25,7 @@ La collecte de log est le début de votre voyage dans le monde merveilleux de la
 Les intégrations et la collecte de logs sont étroitement liées. En collectant les logs de façon adéquate, vous êtes en mesure d'assurer la configuration automatique de tous les composants associés tels que [le processing][33], [le parsing][29] et [les facettes][18] dans l'explorateur. **[Découvrir les intégrations de log actuellement prises en charge par Datadog][37]**. Vous pouvez également définir des sources de log personnalisées s'il n'existe pas encore d'intégration pour votre source.
 
 <div class="alert alert-warning">
-Toutes les intégrations n'incluent pas les configurations pour la collecte de logs.  <a href="https://docs.datadoghq.com/integrations/#cat-log-collection">Consultez la liste actuelle des intégrations prenant en charge la collecte de logs.</a>.
+<a href="https://docs.datadoghq.com/integrations/#cat-log-collection">Consultez la liste actuelle des intégrations prenant en charge la collecte de logs.</a>.
 </div>
 
 Vous trouverez ci-dessous les techniques et les emplacements pris en charge pour la collecte de logs.
@@ -66,7 +66,7 @@ Voici quelques attributs clés auxquels vous devez faire attention lors de la co
 
 Vos logs sont désormais collectés et centralisés dans la vue [Explorateur de logs][17], mais ce n'est que le commencement : vous pouvez maintenant rechercher, enrichir et créer des alertes sur vos logs.
 
-{{< img src="logs/log_explorer_view.png" alt="Log explorer view" responsive="true" >}}
+{{< img src="logs/log_explorer_view.png" alt="Log Explorer view" responsive="true" >}}
 
 ## Rechercher dans vos logs
 
@@ -85,67 +85,11 @@ Maintenant que vos logs sont parsés et que vous avez des facettes et une mesure
 3. Utilisez un tag ou une [facette][18] pour séparer le graphique.
 4. Choisissez d'afficher les X valeurs les plus élevées ou les plus faibles en fonction de la [mesure][21] sélectionnée.
 
-{{< img src="logs/log_graph.png" alt="Log Analytics" responsive="true" style="width:70%;">}}
+{{< img src="logs/log_analytics.png" alt="Log Analytics" responsive="true" style="width:70%;">}}
 
 Pour afficher les logs correspondant à une valeur ou à une plage de valeurs dans le graphique, cliquez simplement sur le point souhaité et choisissez « [afficher les logs][22] » pour ouvrir un volet contextuel contenant tous les logs associés :
 
 Suivez notre [guide sur la création de graphiques à partir de logs][23] pour en savoir plus sur l'option de création de graphiques.
-
-## Processing de logs
-
-Pour les logs en provenance d'une intégration, vous pouvez ignorer cette section, car les pipelines de processing d'intégration de Datadog seront automatiquement activés et parseront vos logs de manière adéquate et pratique. Pour les logs personnalisés au format JSON ou Syslog, nous proposons également des processors d'intégration qui extraient automatiquement les attributs importants des logs bruts. Vous pouvez ainsi tirer pleinement parti d'un très grand nombre de logs sans aucune configuration manuelle.
-
-Cela étant, si vous avez modifié vos logs d'intégration ou si vos logs personnalisés ne sont pas au format JSON ou Syslog, vous bénéficiez toujours d'un contrôle total sur la manière dont les logs sont traités à partir de la page Pipeline de processing dans votre application Datadog centralisée. De cette façon, si vous souhaitez modifier la manière dont votre solution Log Management consomme vos logs, vous n'avez pas à changer votre manière de logger et vous n'avez pas à déployer de modifications sur les règles de processing côté serveur.
-
-### Logs JSON
-
-Comme expliqué plus haut, Datadog propose des [attributs réservés][24] tels que timestamp, status, host, service et même le message de log.
-Si vous avez des noms d'attribut différents, pas d'inquiétude. Utilisez les [remappeurs d'attributs réservés][25] disponibles dans le pipeline.
-
-Par exemple, prenons un service qui génère les logs ci-dessous :
-
-```json
-{
-    "myhost": "host123",
-    "myapp": "test-web-2",
-    "logger_severity": "Error",
-    "log": "cannot establish connection with /api/v1/test",
-    "status_code": 500
-}
-```
-
-Accéder au pipeline et modifier le mappage par défaut par le suivant :
-
-{{< img src="logs/reserved_attribute_remapper.png" alt="Reserved attribute remapper" responsive="true" style="width:70%;">}}
-
-Donnerait alors le log suivant :
-
-{{< img src="logs/log_post_remapping.png" alt="Log post remapping" responsive="true" style="width:70%;">}}
-
-### Règles de processing de log personnalisées
-
-Pour les logs d'intégration, nous installons automatiquement un pipeline qui prend en charge le parsing de vos logs, comme dans l'exemple suivant pour les logs ELB :
-
-{{< img src="logs/elb_log_post_processing.png" alt="ELB log post processing" responsive="true" style="width:70%;">}}
-
-* Un [pipeline][26] prend un sous-ensemble filtré de logs entrants et leur applique une liste de processors séquentiels.
-* Un processor exécute au sein d'un [pipeline][26] une action de structuration des données ([remappage d'un attribut][27], [parsing Grok][28], etc.) sur un log.
-
-
-En revanche, nous savons que les formats de log peuvent être totalement personnalisés. C'est pourquoi vous pouvez définir des règles de processing personnalisées.
-En utilisant la syntaxe de log de votre choix, vous pouvez extraire tous vos attributs et, lorsque nécessaire, les remapper vers des attributs plus globaux ou canoniques.
-
-Par exemple, avec des règles de processing personnalisées, vous pouvez transformer ce log :
-
-{{< img src="logs/log_pre_processing.png" alt="Log pre processing" responsive="true" style="width:50%;">}}
-
-En celui ci :
-
-{{< img src="logs/log_post_processing.png" alt="Log post processing" responsive="true" style="width:50%;">}}
-
-Suivez notre [guide de formation au parsing][29] pour en savoir plus sur le parsing.
-Nous avons également un guide des [Meilleures pratiques de parsing][30] et un guide de [Troubleshooting de parsing][31] qui pourraient vous intéresser.
-Il existe de nombreuses sortes de processors. Pour obtenir la liste complète et découvrir comment les utiliser, [cliquez ici][32].
 
 ## Pour aller plus loin
 
@@ -166,14 +110,14 @@ Il existe de nombreuses sortes de processors. Pour obtenir la liste complète et
 [13]: /integrations/amazon_web_services/#enable-logging-for-your-aws-service
 [14]: /logs/log_collection/docker/
 [15]: /agent/basic_agent_usage/kubernetes/#log-collection-setup
-[16]: /logs/languages/
+[16]: /logs/log_collection/
 [17]: /logs/explore
-[18]: /logs/explore/#facets
-[19]: /logs/explore/#create-a-facet
-[20]: /logs/explore/#search-syntax
-[21]: /logs/explore/#measures
-[22]: /logs/analytics/#related-logs
-[23]: /logs/analytics/
+[18]: /logs/explorer/search/#facets
+[19]: /logs/explorer/search/#create-a-facet
+[20]: /logs/explorer/search/#search-syntax
+[21]: /logs/explorer/search/#measures
+[22]: /logs/explorer/analytics/#related-logs
+[23]: /logs/explorer/analytics/
 [24]: /logs/log_collection/#reserved-attributes
 [25]: /logs/log_collection/#edit-reserved-attributes
 [26]: /logs/processing/#processing-pipelines

@@ -6,6 +6,23 @@ description: >-
   conteneurs et de vos services.
 aliases:
   - /fr/logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers
+  - /fr/logs/languages
+further_reading:
+  - link: logs/processing
+    tag: Documentation
+    text: Découvrir comment traiter vos logs
+  - link: logs/processing/parsing
+    tag: Documentation
+    text: En savoir plus sur le parsing
+  - link: logs/live_tail
+    tag: Documentation
+    text: Fonctionnalité Live Tail de Datadog
+  - link: logs/explorer
+    tag: Documentation
+    text: Apprenez à explorer vos logs
+  - link: logs/logging_without_limits
+    tag: Documentation
+    text: Collecter des logs sans limites
 ---
 ## Commencer avec l'Agent
 
@@ -25,7 +42,7 @@ L'Agent Datadog envoie ses logs à Datadog via TLS-encrypted TCP. Cela nécessit
 Pour commencer à collecter des logs pour une intégration donnée, supprimez la mise en commentaire de la section logs du fichier yaml de cette intégration et configurez-la pour votre environnement.
 
 <div class="alert alert-warning">
-Toutes les intégrations n'incluent pas les configurations pour la collecte de logs.  <a href="https://docs.datadoghq.com/integrations/#cat-log-collection">Consultez la liste actuelle des intégrations supportant la collection de log.</a>.
+Toutes les intégrations n'incluent pas les configurations pour la collecte de logs.  <a href="https://docs.datadoghq.com/integrations/#cat-log-collection">Consultez la liste actuelle des intégrations prenant en charge la collecte de logs.</a>.
 </div>
 
 Si une intégration ne prend pas en charge les logs par défaut, utilisez la configuration de fichier personnalisée ci-dessous.
@@ -191,7 +208,7 @@ logs:
 
 Plus d'exemples:
 
-| **Raw string**           | **Pattern**                                |
+| **Chaîne brute**           | **Pattern**                                |
 | :---                     | :----                                      |
 | 14:20:15                 | `\d{2}:\d{2}:\d{2}`                        |
 | 11/10/2014               | `\d{2}\/\d{2}\/\d{4}`                      |
@@ -241,81 +258,39 @@ Configurez ensuite votre proxy pour transférer les logs à l'endpoint `agent-in
 
 [Reportez-vous à notre page de documentation sur les proxy avec l'Agent pour découvrir comment envoyer vos métriques avec un proxy][8].
 
-### L'avantage de la collecte de logs au format JSON
+## Comment tirer le meilleur parti de vos logs
+
+Lors du logging des stack traces, il existe des attributs spécifiques dotés d'une interface utilisateur dédiée dans votre application Datadog, tels que le nom du logger, le thread en cours, le type d'erreur et bien sûr la stack trace.
+
+{{< img src="logs/log_collection/stack_trace.png" style="width:80%;" alt="Stack trace" responsive="true" >}}
+
+Pour activer ces fonctionnalités, utilisez les noms d'attribut suivants:
+
+* `logger.name`: Nom du logger
+* `logger.thread_name`: Nom du thread courrant
+* `error.stack`: La stack trace
+* `error.message`: Message d'erreur contenu dans la stack trace
+* `error.kind`: Le type ou "kind" d'une erreur (i.e "Exception", "OSError", ...)
+
+**Note**: Par défaut, les pipelines d'intégration tentent de remapper les paramètres par défaut de la bibliothèque de logging sur ces attributs spécifiques et analysent les traces ou traceback pour extraire automatiquement les erreurs `error.message` et `error.kind`.
+
+## Envoyez vos logs en JSON
+
+Pour les frameworks d'intégration, nous fournissons des instructions sur la façon de logger en JSON dans un fichier. Les logs au format JSON permettent de mieux gérer les logs d'application multilignes et sont automatiquement analysés par Datadog.
+
+##### L'avantage de la collecte de logs au format JSON
 
 Datadog analyse automatiquement les logs au format JSON. Pour cette raison, lorsque vous contrôlez le format des logs que vous envoyez à Datadog, nous vous encourageons à les formater en JSON pour éviter d'avoir à utiliser des règles de parsing sur la plateforme.
 
-## Attributs réservés
+## Pour aller plus loin
 
-Si vos logs sont au format JSON, sachez que certains attributs sont réservés à Datadog:
-
-### Attribut *date* 
-
-Par défaut, Datadog génère un timestamp et l'ajoute dans un attribut date lors de la réception des logs.
-Toutefois, si un fichier de log au format JSON inclut l'un des attributs suivants, Datadog interprète sa valeur comme la date officielle du log:
-
-* `@timestamp`
-* `timestamp`
-* `_timestamp`
-* `Timestamp`
-* `eventTime`
-* `date`
-* `published_date`
-* `syslog.timestamp`
-
-Vous pouvez également spécifier d'autres attributs à utiliser comme source de la date d'un log en définissant un processor [log date remapper][4]
-
-**Note**: Datadog rejette un log si sa date officielle est antérieure à 6 heures.
-
-<div class="alert alert-info">
-Les formats de date reconnus sont: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (le format milliseconds EPOCH)</a>  and <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
-</div>
-
-### Attribut *message* 
-
-Par défaut, Datadog ingère la valeur du message en tant que corps du log. Cette valeur est ensuite mise en évidence et affichée dans le [logstream][5], où elle est indexée pour permettre [une recherche ultérieur][6].
-
-### Attribut *status* 
-
-Chaque log peut avoir un niveau de statut qui est ensuite disponible pour la recherche à facettes dans Datadog. Toutefois, si un log au format JSON inclut l'un des attributs suivants, Datadog interprète sa valeur comme étant le statut officiel du log:
-
-* `status`
-* `severity`
-* `level`
-* `syslog.severity`
-
-Si vous souhaitez remapper un statut existant dans l'attribut `status`, vous pouvez le faire avec le processor [log status remapper][7].
-
-### Attribut *host* 
-
-L'utilisation de l'agent Datadog ou du format RFC5424 définit automatiquement la valeur de l'attribut hosts sur vos logs. Toutefois, si un fichier de logs au format JSON inclut l'attribut suivant, Datadog interprète sa valeur en tant qu'hôte associé au log:
-
-* `host`
-* `hostname`
-* `syslog.hostname`
-
-### Attribut  *service*
-
-L'utilisation de l'agent Datadog ou du format RFC5424 définit automatiquement la valeur de l'attribut service sur vos logs. Toutefois, si un fichier de logs au format JSON inclut l'attribut suivant, Datadog interprète sa valeur en tant que service associé au log:
-
-* `service`
-* `syslog.appname`
-
-### Modifier les attributs réservés
-
-Vous pouvez désormais contrôler le mappage global d'hôte, de service, de timestamp et de status qui sont appliqués avant les pipelines de traitement. Ceci est particulièrement utile si les logs sont envoyés en JSON ou à partir d'un Agent externe.
-
-{{< img src="logs/log_collection/reserved_attribute.png" alt="Reserved Attribute" responsive="true" style="width:80%;">}}
-
-Pour modifier les valeurs par défaut de chacun des attributs réservés, accédez à la page du pipeline et modifiez `Reserved Attribute mapping`:
-
-{{< img src="logs/log_collection/reserved_attribute_tile.png" alt="Reserved Attribute Tile" responsive="true" style="width:80%;">}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent
 [2]: /getting_started/custom_metrics/
 [3]: /agent/faq/agent-commands/#start-stop-restart-the-agent
 [4]: /logs/processing/#log-date-remapper
-[5]: /logs/explore/#logstream
-[6]: /logs/explore/#search-bar
+[5]: /logs/explorer/search/#logstream
+[6]: /logs/explorer/search/
 [7]: /logs/processing/#log-status-remapper
 [8]: /agent/proxy

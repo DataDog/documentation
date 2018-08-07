@@ -1,6 +1,7 @@
 ---
 title: Log Parsing - Best Practice
 kind: faq
+disable_toc: true
 further_reading:
 - link: "logs/processing"
   tag: "Documentation"
