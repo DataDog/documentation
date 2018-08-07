@@ -1,6 +1,7 @@
 ---
 title: Gestion du compte
 kind: documentation
+description: Administrer votre compte Datadog
 aliases:
   - /fr/guides/billing
   - /fr/account_management/settings
@@ -57,4 +58,4 @@ Vous pouvez d√©finir votre fuseau horaire, vos notification de bureau et vos pr√
 [9]: /account_management/org_settings
 [10]: https://docs.datadoghq.com/integrations/github/
 [11]: https://app.datadoghq.com/account/preferences
-[12]: https://app.datadoghq.com/account/profile)
+[12]: https://app.datadoghq.com/account/profile

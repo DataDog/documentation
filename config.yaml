@@ -75,7 +75,7 @@ languages:
           weight: 110
           parent: customnav_agentnav_basic_usage
         - identifier: centos
-          name: "CentOs"
+          name: "CentOS"
           url: "agent/basic_agent_usage/centos/"
           weight: 115
           parent: customnav_agentnav_basic_usage
@@ -1042,7 +1042,7 @@ languages:
           weight: 110
           parent: customnav_agentnav_basic_usage
         - identifier: centos
-          name: "CentOs"
+          name: "CentOS"
           url: "agent/basic_agent_usage/centos/"
           weight: 115
           parent: customnav_agentnav_basic_usage
@@ -1544,14 +1544,14 @@ languages:
         #  parent: menu_references_tracing
         # TRACING/APM - Subnav end
 
-        # LOGS
+        # LOGS 
         - identifier: menu_references_logs
           name: "Log Management"
           url: "logs/"
           pre: "nav_logs"
           weight: 90
         - identifier: customnav_lognav_collection
-          name: "Log Collection & Integrations"
+          name: "Collecte de logs"
           url: "logs/log_collection/"
           weight: 20
           parent: menu_references_logs
@@ -1591,7 +1591,7 @@ languages:
           weight: 250
           parent: customnav_lognav_collection
         - identifier: customnav_lognav_other
-          name: "Autres Integrations"
+          name: "Autres Intégrations"
           url: "integrations/#cat-log-collection"
           weight: 260
           parent: customnav_lognav_collection
@@ -1608,7 +1608,7 @@ languages:
           weight: 32
           parent: menu_references_logs
         - identifier: customnav_lognav_analytics
-          name: "Log Analytics"
+          name: "Analyses de logs"
           url: "logs/analytics/"
           weight: 35
           parent: menu_references_logs
@@ -1633,12 +1633,12 @@ languages:
 
         
         - identifier: customnav_lognav_logging_without_limits
-          name: "Logging sans Limites"
+          name: "Collecter des logs sans limites"
           url: "logs/logging_without_limits/"
           weight: 60
           parent: menu_references_logs
         - identifier: customnav_lognav_languages
-          name: "Application log"
+          name: "Logs d'application"
           url: "logs/languages/"
           weight: 80
           parent: menu_references_logs

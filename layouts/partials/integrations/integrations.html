@@ -25,7 +25,8 @@
     {{ $src := (print "integrations_logos/" ($urlname | lower) ".png")}}
     {{ $indx := (index .Site.Data.manifests.images $src )}}
     {{ if $indx }}
-        {{ $.Scratch.Add "ints" (dict "id" $k "name" $v.Params.name "tags" ($.Scratch.Get "curr_categories") "item_class" "" "redirect" $v.Params.doc_link "blurb" $v.Params.short_description "public_title" $v.Params.public_title) }}
+        {{ $doc_link := (print "/integrations/" $v.Params.name "/") }}
+        {{ $.Scratch.Add "ints" (dict "id" $k "name" $v.Params.name "tags" ($.Scratch.Get "curr_categories") "item_class" "" "redirect" $doc_link "blurb" $v.Params.short_description "public_title" $v.Params.public_title) }}
     {{ end }}
 {{ end }}
 

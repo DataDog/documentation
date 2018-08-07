@@ -14,9 +14,6 @@ further_reading:
 - link: "monitors/downtimes"
   tag: "Documentation"
   text: Planifiez un downtime pour désactiver un monitor
-- link: "monitors/faq"
-  tag: "FAQ"
-  text: FAQ monitors
 ---
 
 ## Aperçu

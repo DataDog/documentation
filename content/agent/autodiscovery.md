@@ -82,7 +82,7 @@ Since 6.2.0 (and 5.24.0), the default templates use the default port for the mon
 
 These templates may suit you in basic cases, but if you need to use custom Agent check configurations—say you want to enable extra check options, use different container identifiers, or use template variable indexing— you'll have to write your own auto-conf files. You can then provide those in a few ways:
 
-1. Add them to each host that runs docker-datadog-agent and [mount the directory that contains them][15] into the datadog-agent container when starting it
+1. Add them to each host that runs `docker-datadog-agent` and [mount the directory that contains them][15] into the datadog-agent container when starting it
 2. On Kubernetes, add them [using ConfigMaps][16]
 
 The check name is extracted from the template file name. To run the `checkname` integration, the template file must either:
@@ -270,7 +270,7 @@ spec:
 
 The Agent detects if it's running on Docker and automatically searches all labels for check templates.
 
-Since version 6.2 of the Datadog Agent, it is also possible to configure docker log collection in container labels.
+Since version 6.2 of the Datadog Agent, it is also possible to configure Docker log collection in container labels.
 Check our [Docker Log collection guide][23] for more information about the setup.
 
 Autodiscovery expects labels to look like these examples, depending on the file type:
@@ -322,6 +322,9 @@ The following template variables are currently handled by the Agent:
   - `%%host%%`: autodetect the network (use `bridge` or, if only one network is attached, this one)
   - `%%host_<NETWORK NAME>%%`: specify the network name to use, when attached to several networks (e.g. `%%host_bridge%%`, `%%host_myredisnetwork%%`, ...)
 
+- Container hostname: `hostname` (added in Agent 6.4, Docker listener only)
+  - `%%hostname%%`: retrieves the `hostname` value from the container configuration. Only use it if the `%%host%%` variable cannot fetch a reliable IP (example: [ECS awsvpc mode][25]
+
 - Container port: `port`
   - `%%port%%`: use the highest exposed port **sorted numerically and in ascending order** (eg. 8443 for a container that exposes ports 80, 443, and 8443)
   - `%%port_0%%`: use the first port **sorted numerically and in ascending order** (for the same container, `%%port_0%%` refers to port 80, `%%port_1%%` refers to 443
@@ -345,7 +348,7 @@ If you provide a template for the same check type via multiple template sources,
 
 ## Troubleshooting
 
-When you're not sure if Autodiscovery is loading certain checks you've configured, use the Agent's `configcheck` init script command. For example, to confirm that your Redis template is being loaded from a docker label annotation—not the default `redisdb.d/auto_conf.yaml` file:
+When you're not sure if Autodiscovery is loading certain checks you've configured, use the Agent's `configcheck` init script command. For example, to confirm that your Redis template is being loaded from a Docker label annotation—not the default `redisdb.d/auto_conf.yaml` file:
 
 ```
 # docker exec -it <agent_container_name> agent configcheck
@@ -424,3 +427,4 @@ https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/
 [22]: https://github.com/DataDog/integrations-core/blob/master/kube_proxy/datadog_checks/kube_proxy/data/conf.yaml.example
 [23]: https://docs.datadoghq.com/logs/docker/
 [24]: /videos/autodiscovery/
+[25]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html

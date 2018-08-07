@@ -9,9 +9,9 @@ further_reading:
 - link: "monitors/downtimes"
   tag: "Documentation"
   text: Planifiez un downtime pour désactiver un monitor
-- link: "monitors/faq"
-  tag: "FAQ"
-  text: FAQ monitors
+- link: "monitors/monitor_status"
+  tag: "Documentation"
+  text: Consulter le statut de de votre monitor.
 ---
 
 ## Aperçu

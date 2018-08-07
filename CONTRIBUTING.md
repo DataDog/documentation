@@ -87,14 +87,29 @@ This section sets the record straight (for the Docs site, not for all humankind)
     * **GOOD**: “Metrics, events, and service checks.”
 
 * **Use the em dash (—) with no spaces between adjacent words**: 
-    * **BAD**: “The rest - Ok, Skipped, Ignored, and No Data - are not alert-worthy”. 
-    * **GOOD**: “The rest—Ok, Skipped, Ignored, and No Data—are not alert-worthy.”
+    * **BAD**: “The rest - Ok, Skipped, and No Data - are not alert-worthy”. 
+    * **GOOD**: “The rest—Ok, Skipped, and No Data—are not alert-worthy.”
 
 * **Use the present tense**: Avoid future tense most of the time. 
     * **BAD**: “Once you enable the integration, the Agent will start sending metrics to Datadog.” 
     * **GOOD**: “Once you enable the integration, the Agent starts sending metrics to Datadog.”
 
 * **Code substitution**: When adding something to a code block that isn’t meant literally, use the format `<DATADOG_API_KEY>`. *Don’t* use `$DATADOG_API_KEY`, `{DATADOG API KEY}`, and certainly not the naked `DATADOG_API_KEY`.
+
+### RFC 2606
+
+A top level domain (TLD) in an example must reference a TLD permanently reserved for such purposes. As described in [RFC 2606][6] four TLD names are reserved:
+
+* `.test`
+* `.example`
+* `.invalid`
+* `.localhost`
+
+Same goes for second level domain names, three are reserved: 
+
+* `example.com`
+* `example.net`
+* `example.org`
 
 ## Words and Phrases
 
@@ -138,3 +153,4 @@ Learn more about [image partials][4].
 [3]: https://github.com/DataDog/documentation/wiki
 [4]: https://github.com/DataDog/documentation/wiki/Import-an-Image
 [5]: https://tools.ietf.org/html/rfc2119
+[6]: https://tools.ietf.org/html/rfc2606

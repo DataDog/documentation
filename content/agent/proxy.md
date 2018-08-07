@@ -42,7 +42,7 @@ proxy:
 #     - host2
 ```
 
-[Refer to our log collection documentation page to learn how to forward your logs with a proxy][].
+[Refer to our log collection documentation page to learn how to forward your logs with a proxy][7].
 
 ##### Agent v5
 
@@ -89,7 +89,7 @@ defaults
     timeout server 5s
     timeout connect 5s
 
-# This declares a view into HAProxy statistics, on port 3835
+# This declares a view into HAProxy statistics, on port 3833
 # You do not need credentials to view this page and you can
 # turn it off once you are done with setup.
 listen stats
@@ -162,7 +162,7 @@ apm_config:
     endpoint: https://haproxy.example.com:3835
 
 process_config:
-    url: https://haproxy.example.com:3836
+    process_dd_url: https://haproxy.example.com:3836
 ```
 
 Then edit the `datadog.yaml` Agent configuration file and set `skip_ssl_validation` to `true`. This is needed to make the Agent ignore the  discrepancy between the hostname on the SSL certificate (`app.datadoghq.com`) and your HAProxy hostname:
@@ -173,7 +173,7 @@ skip_ssl_validation: true
 
 Finally [restart the Agent][4].
 
-To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3835` as well as the [Infrastructure Overview][5].
+To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3833` as well as the [Infrastructure Overview][5].
 
 ##### Agent v5
 
@@ -189,7 +189,7 @@ To send traces or processes through the proxy, setup the following in the `datad
 endpoint = https://haproxy.example.com:3835
 
 [process.api]
-url = https://haproxy.example.com:3836
+endpoint = https://haproxy.example.com:3836
 ```
 
 Edit your supervisor configuration to disable SSL certificate verification. This is needed to prevent Python from complaining about the discrepancy between the hostname on the SSL certificate (`app.datadoghq.com`) and your HAProxy hostname. The supervisor configuration found at:
@@ -214,7 +214,7 @@ skip_ssl_validation: yes
 
 Finally [restart the Agent][4].
 
-To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3835` as well as the [Infrastructure Overview][5].
+To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3833` as well as the [Infrastructure Overview][5].
 
 ### Proxy log forwarding with HAProxy
 **This feature is only available for Agent v6**
@@ -241,7 +241,7 @@ defaults
     timeout server 5s
     timeout connect 5s
 
-# This declares a view into HAProxy statistics, on port 3835
+# This declares a view into HAProxy statistics, on port 3833
 # You do not need credentials to view this page and you can
 # turn it off once you are done with setup.
 listen stats
@@ -319,4 +319,4 @@ to
 [4]: /agent/#start-stop-restart-the-agent/#windows
 [5]: https://app.datadoghq.com/infrastructure
 [6]: http://www.haproxy.org/#perf
-[7]: /logs/log_collection/#using_a_proxy_for_logs
+[7]: /logs/log_collection/#using-a-proxy-for-logs
