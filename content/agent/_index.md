@@ -72,6 +72,19 @@ With:
 
 **Note**: On Windows, `datadog.conf` is automatically upgraded to `datadog.yaml` on upgrade.
 
+## Resource overhead
+
+### Agent v6
+* CPU: \~ 0.12% of the CPU used on average
+* Memory: \~ 55Mo of RAM used
+* Network bandwidth: \~ 86 B/s &#9660; | 260 B/s &#9650;
+
+### Agent v5
+* CPU: \~ 0.35% of the CPU used on average
+* Memory: \~ 115Mo of RAM used
+* Network bandwidth: \~ 1900 B/s &#9660; | 800 B/s &#9650;
+* Disk: Linux 120MB | Windows 60MB
+
 ## CLI
 
 The new command line interface for the Agent is sub-command based:
@@ -122,6 +135,7 @@ Once the Agent is running, use the `datadog-agent launch-gui` command to launch 
 2. The GUI will only be launched if the user launching it has the correct user permissions. If you are able to open `datadog.yaml`, you are able to use the GUI.
 
 3. For security reasons, the GUI can **only** be accessed from the local network interface (```localhost```/```127.0.0.1```), so you must be on the same host that the Agent is running to use it. In other words, you can't run the Agent on a VM or a container and access it from the host machine.
+
 
 ## Supported OSs versions
 
