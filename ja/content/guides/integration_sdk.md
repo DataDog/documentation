@@ -273,5 +273,5 @@ Once you have completed the development of your integration, submit a [pull requ
 
 In our experience building integrations, we've also faced a number of challenges. As your write your tests, here are a few things to consider:
 
-* Test clusters. Testing single instances of your software is often easier, but tests are more useful when run against setups that are representative of real-world uses. For example, MongoDB is typically used with sharding and replica set features, so [our tests reflect that](https://github.com/DataDog/integrations-core/tree/master/mongo/test/ci).
+* Test clusters. Testing single instances of your software is often easier, but tests are more useful when run against setups that are representative of real-world uses. For example, MongoDB is typically used with sharding and replica set features.
 * Consider generating calculated metrics in addition to raw metrics. For example, many databases will have slow, but less frequently run queries. So it's often useful to look at percentiles. For example, our MySQL integration includes a calculated metric for the [95th percentile query execution time](https://github.com/DataDog/integrations-core/blob/master/mysql/check.py#L1169).
