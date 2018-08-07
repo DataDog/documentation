@@ -85,6 +85,12 @@ With:
 * Network bandwidth: \~ 1900 B/s &#9660; | 800 B/s &#9650;
 * Disk: Linux 120MB | Windows 60MB
 
+Caveats:
+
+* Enabling integrations may increase the Agent's resource consumption.
+* Enabling JVM checks forces the Agent to use more memory, depending on the number of beans exposed by the monitored JVMs.
+* Enabling the trace/process/logging Agents may increase resource consumption.
+
 ## CLI
 
 The new command line interface for the Agent is sub-command based:
