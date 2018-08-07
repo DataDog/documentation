@@ -32,16 +32,18 @@ Traditional web proxies are supported natively by the Agent. If you need to conn
 ### Agent v6
 
 Set different proxy servers for `https` and `http` requests in your Agent `datadog.yaml` configuration file. 
-The Agent uses `https` to send data to Datadog, but integrations might use `http` to gather metrics. No matter the proxied queries, you can activate SSL on your proxy server. Below are some configuration examples for your `datadog.yaml` file:
+The Agent uses `https` to send data to Datadog, but integrations might use `http` to gather metrics. No matter the proxied requests, you can activate SSL on your proxy server. Below are some configuration examples for your `datadog.yaml` file:
 
-Setting an HTTP proxy for all `https` queries:
+Setting an HTTP proxy for all `https` requests:
 
 ```
 proxy:
     https: http://<SSL_PROXY_SERVER_FOR_HTTPS>:<PORT>
 ```
 
-Setting an HTTPS proxy for both `https` and `http` queries:
+Note: When setting up an HTTP proxy for `https` requests, the actual communication between the Agent and Datadog is encrypted end-to-end with TLS and cannot be decrypted by the proxy. The only unencrypted communication is the `HTTP CONNECT` request that's made between the Agent and the proxy to establish the initial TCP connection between the Agent and Datadog. As such, when using a proxy for `https` requests, there is no need to use an HTTPS proxy in order to have encrypted communication between the Agent and Datadog.
+
+Setting an HTTPS proxy for both `https` and `http` requests:
 
 ```
 proxy:
@@ -49,7 +51,7 @@ proxy:
     http: https://<SSL_PROXY_SERVER_FOR_HTTP>:<PORT>
 ```
 
-Setting a `<USERNAME>` and `<PASSWORD>` to contact the proxy server for both `https` and `http` queries:
+Setting a `<USERNAME>` and `<PASSWORD>` to contact the proxy server for both `https` and `http` requests:
 
 ```
 proxy:
@@ -72,17 +74,17 @@ proxy:
 
 Starting with Agent v6.4, you can set your proxy settings through environment variables:
 
-* `DD_PROXY_HTTPS`: Sets a proxy server for `https` queries.
-* `DD_PROXY_HTTP`: Sets a proxy server for `http` queries.
-* `DD_NO_PROXY`: Sets a list of hosts that should bypass the proxy. The list is space-separated.
+* `DD_PROXY_HTTPS`: Sets a proxy server for `https` requests.
+* `DD_PROXY_HTTP`: Sets a proxy server for `http` requests.
+* `DD_PROXY_NO_PROXY`: Sets a list of hosts that should bypass the proxy. The list is space-separated.
 
-Environment variables have precedence over values in the `datadog.yaml` file. If the environment variables are present with an empty value (e.g. ``DD_HTTP_PROXY=""``), the Agent uses those empty values instead of lower-precedence options.
+Environment variables have precedence over values in the `datadog.yaml` file. If the environment variables are present with an empty value (e.g. ``DD_PROXY_HTTP=""``), the Agent uses those empty values instead of lower-precedence options.
 
-On Unix hosts, a system-wide proxy might be specified using standard environment variables, such as `HTTPS_PROXY`, `HTTP_PROXY`, and `NO_PROXY`. The Agent uses these if present. Be careful, as such variables also impact every request from integrations, including orchestrators like Docker, ECS, and Kubernetes.
+On Unix hosts, a system-wide proxy might be specified using standard environment variables, such as `HTTPS_PROXY`, `HTTP_PROXY`, and `NO_PROXY`. The Agent uses these if present. Be careful, as such variables also impact every requests from integrations, including orchestrators like Docker, ECS, and Kubernetes.
 
 The Agent uses the following values in order of precedence:
 
-1. `DD_PROXY_HTTPS`, `DD_PROXY_HTTP`, and `DD_NO_PROXY` environment variables
+1. `DD_PROXY_HTTPS`, `DD_PROXY_HTTP`, and `DD_PROXY_NO_PROXY` environment variables
 2. `HTTPS_PROXY`, `HTTP_PROXY`, and `NO_PROXY` environment variables
 3. Values inside `datadog.yaml`
 
