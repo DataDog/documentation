@@ -17,7 +17,7 @@ further_reading:
 
 Datadog Process Monitoring allows for real-time visibility of the most granular elements in a deployment.  Taking inspiration from bedrock tools like `htop`, this centralized view, combined with existing tagging capabilities, allows you to understand what is going on at any level of your system and drill all the way down into the most fine details.
 
-{{< img src="graphing/infrastructure/process/live_process_preview.png" alt="live process preview" responsive="true" popup="true">}}
+{{< img src="graphing/infrastructure/process/live_process_preview.png" alt="live process preview" responsive="true" >}}
 
 ## Installation
 
@@ -112,7 +112,7 @@ process_config:
 
 The  next image shows one process on the Live Processes page whose arguments have been hidden by using the configuration above.
 
-{{< img src="graphing/infrastructure/process/process_arg_scrubbing.png" alt="process arguments scrubbing" responsive="true" popup="true" style="width:100%;">}}
+{{< img src="graphing/infrastructure/process/process_arg_scrubbing.png" alt="process arguments scrubbing" responsive="true" style="width:100%;">}}
 
 Set `scrub_args` to `false` to completely disable the process arguments scrubbing.
 
@@ -134,7 +134,7 @@ custom_sensitive_words: personal_key,*token,sql*,*pass*d*
 Processes and containers are by their nature extremely high cardinality objects.  Our fuzzy string search gives you a view into exactly what you want.  Below is our Demo environment, filtered with the string `postgres /9.`.  
 **Note**: `/9.` has matched in the command path, and `postgres` matches the command itself.
 
-{{< img src="graphing/infrastructure/process/postgres.png" alt="Postgres" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/process/postgres.png" alt="Postgres" responsive="true" style="width:80%;">}}
 
 ### Filtering and Pivoting
 
@@ -142,15 +142,15 @@ Making sense of hundreds of thousands or millions of processes can seem overwhel
 
 First, we can filter down to role:McNulty-Query, which is our front end query service, in order to narrow our search.  Then we can search for our NGINX master processes, and pivot the table by Availability-Zone, to be confident about that service staying highly available.
 
-{{< img src="graphing/infrastructure/process/mcnultynginx.png" alt="mcnulty nginx" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/process/mcnultynginx.png" alt="mcnulty nginx" responsive="true" style="width:80%;">}}
 
 Here, I am checking the Elasticsearch processes for an individual feature team.  I've also added metrics for voluntary and involuntary context switches, available in the gear menu on the upper-right of the table.
 
-{{< img src="graphing/infrastructure/process/burritoelasticsearch.png" alt="burrito elasticsearch" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/process/burritoelasticsearch.png" alt="burrito elasticsearch" responsive="true" style="width:80%;">}}
 
 Below, we have searched for ssh processes and pivoted by `user` to understand who is logged into which hosts.
 
-{{< img src="graphing/infrastructure/process/sshusers.png" alt="ssh users" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/process/sshusers.png" alt="ssh users" responsive="true" style="width:80%;">}}
 
 Ok, so I guess that one is less exciting after redaction!
 
@@ -158,7 +158,7 @@ Ok, so I guess that one is less exciting after redaction!
 
 Live Processes adds extra visibility to your container deployments.  The [Live Containers][14] feature gives you a similarly comprehensive view of your container and orchestrator environment.  When Live Processes is enabled, the process tree for each container is included in the container inspection panel on that page.
 
-{{< img src="graphing/infrastructure/process/containerinspect.png" alt="container inspect" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/process/containerinspect.png" alt="container inspect" responsive="true" style="width:80%;">}}
 
 ## Real-time monitoring
 
@@ -191,4 +191,4 @@ While actively working with the Live Processes, metrics are collected at 2s reso
 [12]: https://app.datadoghq.com/account/settings#agent/kubernetes
 [13]: /integrations/kubernetes/#installation-via-daemonsets-kubernetes-110
 [14]: https://docs.datadoghq.com/infrastructure/livecontainers/
-[15]: /getting_started/tagging/
+[15]: /tagging/

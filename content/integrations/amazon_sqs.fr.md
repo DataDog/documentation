@@ -24,7 +24,7 @@ short_description: >-
   nombre de messages, et more.
 version: '1.0'
 ---
-{{< img src="integrations/amazon_sqs/sqsdashboard.png" alt="SQS Dashboard" responsive="true" popup="true">}}
+{{< img src="integrations/amazon_sqs/sqsdashboard.png" alt="SQS Dashboard" responsive="true" >}}
 
 ## Aperçu
 

@@ -16,13 +16,13 @@ For servers with no direct Internet access, the Agent can be configured to route
 
 For servers with limited outbound Internet connectivity, the Agent can be installed using the relevant package for the server's OS. The in application install instructions contain instructions for this approach which can be viewed by clicking the link shown on the instructions page.
 
-{{< img src="agent/faq/install_agent.gif" alt="Install Agent" responsive="true" popup="true">}}
+{{< img src="agent/faq/install_agent.gif" alt="Install Agent" responsive="true" >}}
 
 If the target system is blocked from accessing the package repository directly, download the package from the repository using another server then transfer it over to the target system for a local install.
 
 The example below shows a user copying the [URL to the rpm package][2] for the latest version of the Agent :
 
-{{< img src="agent/faq/rpm_package.gif" alt="RPM Package" responsive="true" popup="true">}}
+{{< img src="agent/faq/rpm_package.gif" alt="RPM Package" responsive="true" >}}
 
 **Note**: The package bundles all resources necessary to run our Agent and our checks (whether the integration is enabled or not). In terms of hard requirements, python 2.7+ and sysstat are required; other dependencies are mandatory depending on what checks are enabled.
 

@@ -9,9 +9,9 @@ further_reading:
 - link: "monitors/downtimes"
   tag: "Documentation"
   text: Planifiez un downtime pour désactiver un monitor
-- link: "monitors/faq"
-  tag: "FAQ"
-  text: FAQ monitors
+- link: "monitors/monitor_status"
+  tag: "Documentation"
+  text: Consulter le statut de de votre monitor.
 ---
 
 ## Aperçu
@@ -19,12 +19,12 @@ further_reading:
 Les monitors d'événements vous permettent d'être alerté lorsqu'un événement correspondant à votre requête se produit.
 
 1. Sélectionnez la requête et les paramètres (statut, priorité, sources et tags) que vous souhaitez surveiller:
-    {{< img src="monitors/monitor_types/event/event_monitor_selection.png" alt="event monitor selection" responsive="true" popup="true" style="width:80%;">}}
+    {{< img src="monitors/monitor_types/event/event_monitor_selection.png" alt="event monitor selection" responsive="true" style="width:80%;">}}
 2. Sélectionnez le groupe d'alertes:
-    {{< img src="monitors/monitor_types/event/event_alert_grouping.png" alt="event monitor alert grouping" responsive="true" popup="true" style="width:80%;">}}
+    {{< img src="monitors/monitor_types/event/event_alert_grouping.png" alt="event monitor alert grouping" responsive="true" style="width:80%;">}}
 
 3. Sélectionnez les **conditions d'alerte**. Les options **valeur de seuil** et **horizon temporel** vous permettent de définir le nombre d'occurrences d'un événement requis pendant une période de temps avant de déclencher le monitor.
-    {{< img src="monitors/monitor_types/event/event_monitor_alert_conditions.png" alt="event monitor alert conditions" responsive="true" popup="true" style="width:80%;">}}
+    {{< img src="monitors/monitor_types/event/event_monitor_alert_conditions.png" alt="event monitor alert conditions" responsive="true" style="width:80%;">}}
 
 4. Configurez les **options de vos notifications**:
     Reportez-vous à la page de documentation dédiée [Notifications] (#monitor-notifications) pour plus d'informations.
@@ -36,15 +36,15 @@ Mon exemple d'événement #exemple-tag
 
 Note: vous devrez peut-être échapper des caractères spéciaux en utilisant un slash lors de la recherche. Par exemple, si vous voulez rechercher la chaîne "my_tag_name", vous devrez utiliser "my/_tag/_name"
 
-{{< img src="monitors/monitor_types/event/define_event.png" alt="define_event" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/event/define_event.png" alt="define_event" responsive="true" style="width:80%;">}}
 
 Vous pouvez ensuite utiliser `event.tags` et `event.tags.tagname` pour récupérer les valeurs de vos tags dans le markdown. Par exemple:
 
-{{< img src="monitors/monitor_types/event/whats_happening.png" alt="whats_happening" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/event/whats_happening.png" alt="whats_happening" responsive="true" style="width:80%;">}}
 
 Vous devriez alors observer que votre alerte se déclenche lorsque des événements correspondants sont trouvés dans Datadog et que les tags apparaissent dans le message.
 
-{{< img src="monitors/monitor_types/event/triggered_event.png" alt="triggered_event" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/event/triggered_event.png" alt="triggered_event" responsive="true" style="width:80%;">}}
 
 ## Utilisation de variables de modèle d'événement dans les notifications
 
@@ -56,7 +56,7 @@ Incluez des informations spécifiques à l'événement dans les notifications de
 * `{{event.host.name}}`: Hostname qui a généré l'événement
 * `{{event.tags.tagname}}`: Les Tags attaché à votre événement, remplacez `tagname` par le nom de votre tag
 
-{{< img src="monitors/monitor_types/event/event_notification_template.png" alt="event_notification_template" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/event/event_notification_template.png" alt="event_notification_template" responsive="true" style="width:80%;">}}
 
 ## En apprendre plus
 {{< partial name="whats-next/whats-next.html" >}}

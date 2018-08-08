@@ -9,7 +9,7 @@ Donc, vous venez de terminer [l'installation][1] de l'Agent Datadog, ou peut-êt
 
 ## Intégrations
 
-{{< img src="getting_started/integrations.png" alt="integrations" responsive="true" popup="true">}}
+{{< img src="getting_started/integrations.png" alt="integrations" responsive="true" >}}
 
 * Plus de 200 intégrations [officiellement listées][3], et nous en ajoutons toujours plus.
 * Des intégrations personnalisées sont disponibles [via notre API][4], dont beaucoup sont documentées par notre communauté d'utilisateurs actifs.
@@ -19,7 +19,7 @@ dans un service en ligne sont traitées de la même façon sur Datadog.
 
 ## Infrastructure
 
-{{< img src="getting_started/infrastructure.png" alt="infrastructure" responsive="true" popup="true">}}
+{{< img src="getting_started/infrastructure.png" alt="infrastructure" responsive="true" >}}
 
 * Toutes les machines apparaissent dans la [liste d'infrastructures](/graphing/infrastructure).
 * Ici vous pouvez voir les tags appliqués à chaque machine; comme elles sont assignées à
@@ -29,11 +29,11 @@ un but précis.
 pour vous, ce qui contribue à créer une structure dans votre infrastructure avec le minimum
 de travail possible (contrairement à la création explicite de tous vos clusters).
 Ainsi, si une nouvelle machine est taggée, vous pouvez voir immédiatement les statistiques
-pour cette machine en fonction de ce qui a été précédemment configuré pour ce tag. [En savoir plus sur le tagging](/getting_started/tagging).
+pour cette machine en fonction de ce qui a été précédemment configuré pour ce tag. [En savoir plus sur le tagging][15].
 
 ## Map des hosts
 
-{{< img src="getting_started/hostmap-overview.png" alt="hostmap overview" responsive="true" popup="true">}}
+{{< img src="getting_started/hostmap-overview.png" alt="hostmap overview" responsive="true" >}}
 
 [La Host Map](/graphing/infrastructure/hostmap) se trouve dans le menu Infrastructure et offre la possibilité de:
 
@@ -46,7 +46,7 @@ Pour en apprendre plus sur la Host Map, consultez la [page de documentation déd
 
 ## Evénements
 
-{{< img src="getting_started/event_stream.png" alt="Event stream" responsive="true" popup="true">}}
+{{< img src="getting_started/event_stream.png" alt="Event stream" responsive="true" >}}
 
 [Le flux d'événements](/graphing/event_stream) est basé sur les mêmes conventions qu'un blog:
 
@@ -63,11 +63,11 @@ Pour chaque incident, les utilisateurs peuvent:
 * [@ notifier les membres de l'équipe](/graphing/event_stream/#@-notifications), qui reçoivent alors un courriel
 * `@support-datadog` pour demander [l'assistance](/help) d'un ingénieur Datadog
 
-{{< img src="getting_started/event_stream_event.png" alt="event stream event" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="getting_started/event_stream_event.png" alt="event stream event" responsive="true" style="width:70%;">}}
 
 ## Dashboards
 
-{{< img src="getting_started/dashboard.png" alt="dashboard" responsive="true" popup="true">}}
+{{< img src="getting_started/dashboard.png" alt="dashboard" responsive="true" >}}
 
 Les Dashboards contiennent [des graphiques][11] avec des métriques de performance en temps réel
 
@@ -85,7 +85,7 @@ sans qu'il puisse accéder à vos données ou toute autre information (via le cr
 
 ## Monitoring
 
-{{< img src="getting_started/monitor.png" alt="monitor" responsive="true" popup="true">}}
+{{< img src="getting_started/monitor.png" alt="monitor" responsive="true" >}}
 
 Le [Monitoring][14] vous donne la possibilité d'être informé si un agrégat ou si une métrique spécifique est supérieure ou inférieure à un certain seuil:
 
@@ -95,7 +95,7 @@ Le [Monitoring][14] vous donne la possibilité d'être informé si un agrégat o
 * Alertes multiples (par device, host, etc.)
 * Définir un message de notification d'alerte, avec les capacités @
 
-{{< img src="getting_started/alert_setup.png" alt="alert setup" responsive="true" popup="true">}}
+{{< img src="getting_started/alert_setup.png" alt="alert setup" responsive="true" >}}
 
 [1]: /agent/
 [2]: http://www.datadoghq.com/product/
@@ -108,3 +108,4 @@ Le [Monitoring][14] vous donne la possibilité d'être informé si un agrégat o
 [12]: /graphing/miscellaneous/functions/
 [13]: https://www.datadoghq.com/blog/rank-filter-performance-monitoring-metrics-top-function/
 [14]: /monitors/
+[15]: /tagging

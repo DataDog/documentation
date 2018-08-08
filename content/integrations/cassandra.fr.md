@@ -26,7 +26,7 @@ version: 1.2.1
 ---
 
 
-{{< img src="integrations/cassandra/cassandra.png" alt="Cassandra default dashboard" responsive="true" popup="true">}}
+{{< img src="integrations/cassandra/cassandra.png" alt="Cassandra default dashboard" responsive="true" >}}
 ## Aperçu
 
 Obtenez les métriques du service Cassandra en temps réel pour:

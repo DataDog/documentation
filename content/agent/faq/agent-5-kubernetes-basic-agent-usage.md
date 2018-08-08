@@ -3,7 +3,7 @@ title: Agent v5 Kubernetes basic Agent usage
 kind: faq
 ---
 
-{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard" responsive="true" popup="true">}}
+{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard" responsive="true" >}}
 
 ## Overview
 
@@ -266,12 +266,12 @@ metadata:
 [7]: https://kubernetes.io/docs/concepts/configuration/secret/
 [8]: https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-environment-variables
 [9]: https://docs.datadoghq.com/agent/autodiscovery
-[10]: https://github.com/DataDog/integrations-core/blob/master/kubernetes/conf.yaml.example
+[10]: https://github.com/DataDog/integrations-core/blob/master/kubernetes/datadog_checks/kubernetes/data/conf.yaml.example
 [11]: /agent/faq/agent-status-and-information
 [12]: https://github.com/kubernetes/kube-state-metrics
 [13]: https://quay.io/coreos/kube-state-metrics
-[14]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/conf.yaml.example
+[14]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example
 [15]: /agent/faq/how-do-i-install-the-agent-on-a-server-with-limited-internet-connectivity
 [16]: https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information
-[17]: https://github.com/DataDog/integrations-core/blob/master/kube_dns/conf.yaml.example
+[17]: https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/data/conf.yaml.example
 [18]: https://yum.datadoghq.com/stable/6/x86_64/

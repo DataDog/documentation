@@ -19,7 +19,7 @@ short_description: Envoyer les exceptions, erreurs et déploiements de code dans
 version: '1.0'
 ---
 
-{{< img src="integrations/rollbar/rollbar_error.png" alt="Rollbar error event" responsive="true" popup="true">}}
+{{< img src="integrations/rollbar/rollbar_error.png" alt="Rollbar error event" responsive="true" >}}
 
 ## Aperçu
 

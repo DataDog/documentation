@@ -35,7 +35,7 @@ Any compliant StatsD client will work, but you won't be able to use the [Datadog
 DogStatsD accepts [custom metrics][4], events, and service Checks over UDP and periodically aggregates and forwards them to Datadog.
 Because it uses UDP, your application can send metrics to DogStatsD and resume its work without waiting for a response. If DogStatsD ever becomes unavailable, your application won't skip a beat.
 
-{{< img src="developers/dogstatsd/dogstatsd.png" alt="dogstatsd"  responsive="true" popup="true">}}
+{{< img src="developers/dogstatsd/dogstatsd.png" alt="dogstatsd"  responsive="true" >}}
 
 As it receives data, DogStatsD aggregates multiple data points for each unique metric into a single data point over a period of time called the flush interval. Consider the following example, wherein DogStatsD is instructed to increment a counter each time a given database query is called:
 
@@ -108,7 +108,7 @@ If you're interested in learning more about the datagram format used by DogStats
 [1]: /libraries/
 [2]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
 [3]: https://github.com/etsy/statsd
-[4]: /getting_started/custom_metrics/
+[4]: /developers/metrics/custom_metrics/
 [5]: /agent/faq/agent-commands
 [6]: /developers/dogstatsd/data_types/#timers
 [7]: /developers/dogstatsd/data_types

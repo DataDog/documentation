@@ -26,13 +26,13 @@ If you are unsure how to set your SQL Server's authentication mode, you may find
 Do note that any of the above changes that you make to your SQL Server will require that you restart your SQL Server before the changes take effect.
 
 Here's an example of some SQL Server IP/TCP settings that have worked just fine on one of our testing environments (Windows 2012 R2, SQL Server 2014 Express):
-{{< img src="integrations/faq/sql_server_test_1.png" alt="sql_server_test_1" responsive="true" popup="true">}}
+{{< img src="integrations/faq/sql_server_test_1.png" alt="sql_server_test_1" responsive="true" >}}
 
-{{< img src="integrations/faq/sql_server_test_2.png" alt="sql_server_test_2" responsive="true" popup="true">}}
+{{< img src="integrations/faq/sql_server_test_2.png" alt="sql_server_test_2" responsive="true" >}}
 
 ## Empty Connection String?
 
-Our SQL Server check relies on the adodbapi Python library, which has some limitations in the characters that it is able to use in making a connection string to a SQL Server. If your Agent experiences trouble connecting to your SQL Server, and if you find errors similar to the following in your Agent's collector.logs, your `qlserver.yaml` probably includes some character that causes issues with adodbapi.
+Our SQL Server check relies on the adodbapi Python library, which has some limitations in the characters that it is able to use in making a connection string to a SQL Server. If your Agent experiences trouble connecting to your SQL Server, and if you find errors similar to the following in your Agent's collector.logs, your `sqlserver.yaml` probably includes some character that causes issues with adodbapi.
 ```
 OperationalError: (KeyError('Python string format error in connection string->',), 'Error opening connection to ""')
 ```

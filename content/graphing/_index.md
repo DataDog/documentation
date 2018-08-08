@@ -16,7 +16,7 @@ There are two ways to interact with the Graphing Editor: using the GUI (the defa
 
 On each graph there is a pencil icon that opens the graph editor.
 
-{{< img src="graphing/index/references-graphing-overview.png" alt="Graphing Overview" responsive="true" popup="true" style="width:75%;" >}}
+{{< img src="graphing/index/references-graphing-overview.png" alt="Graphing Overview" responsive="true" style="width:75%;" >}}
 
 The graphing editor has three tabs: 
 
@@ -26,7 +26,7 @@ The graphing editor has three tabs:
 
 When you first open the graphing editor window, you are on the **Edit** tab. Here you can use the UI to choose most settings to tweak your graphs. Here is an example of what you might see. This example comes from the first graph in the standard Postgres Integration dashboard:
 
-{{< img src="graphing/index/references-graphing-edit-window-with-y.png" alt="Graphing Edit Tab" responsive="true" popup="true" style="width:75%;" >}}
+{{< img src="graphing/index/references-graphing-edit-window-with-y.png" alt="Graphing Edit Tab" responsive="true" style="width:75%;" >}}
 
 Configuring a graph is a multi-step process: 
 
@@ -74,7 +74,7 @@ To use the rollup function, click the plus sign to the right of the aggregation 
 
 To create a single line that represents the total available disk space on average across all machines rolled up in 60 seconds buckets, you would use a query like this:
 
-{{< img src="graphing/index/references-graphing-rollup-example.png" alt="rollup example" responsive="true" popup="true" style="width:90%;">}}
+{{< img src="graphing/index/references-graphing-rollup-example.png" alt="rollup example" responsive="true" style="width:90%;">}}
 
 When switching to the JSON view, the query looks like this:
 
@@ -96,7 +96,7 @@ For example, if you would like to visualize the double of a specific metric, say
 This can be done inside a graph editor by clicking on the Graph Editor and selecting **Advanced...** .  
 From there, enter your arithmetic in the `Formula` box, in this case: `a * 2`. 
 
-{{< img src="graphing/index/arithmetic_2.png" alt="Arithmetic 2" responsive="true" popup="true" style="width:75%;" >}}
+{{< img src="graphing/index/arithmetic_2.png" alt="Arithmetic 2" responsive="true" style="width:75%;" >}}
 
 ### Arithmetic between two metrics
 
@@ -112,11 +112,11 @@ Once you have added all of the metrics you would like to visualize with their co
 
 Then in the `Formula` box, enter the arithmetic you would like, in this case: `( a / b )`: 
 
-{{< img src="graphing/index/arithmetic_3.png" alt="Arithmetic 3" responsive="true" popup="true" style="width:75%;" >}}
+{{< img src="graphing/index/arithmetic_3.png" alt="Arithmetic 3" responsive="true" style="width:75%;" >}}
 
 To display only your formula, un-check your metrics **a** and **b**:
 
-{{< img src="graphing/index/arithmetic_3_bis.png" alt="Arithmetic 3 bis" responsive="true" popup="true" style="width:75%;" >}}
+{{< img src="graphing/index/arithmetic_3_bis.png" alt="Arithmetic 3 bis" responsive="true" style="width:75%;" >}}
 
 **Note**: Formula are not lettered, you cannot do Arithmetic between formulas.
 
@@ -127,7 +127,7 @@ To display only your formula, un-check your metrics **a** and **b**:
 Each query or formula can be aliased. The alias overrides the display on the graph and legend, which is particularly helpful for long metric names or to clarify a formula.  
 At the end of your query/formula click on the **as...** button, then enter your metric alias:  
 
-{{< img src="graphing/index/metric_alias.png" alt="metric alias" responsive="true" popup="true" style="width:75%;" >}}
+{{< img src="graphing/index/metric_alias.png" alt="metric alias" responsive="true" style="width:75%;" >}}
 
 ### Set Y-axis scale
 
@@ -139,7 +139,7 @@ The Datadog y-axis controls are available via the UI and the JSON editor. They a
 
 Change the Y-axis scale with the **Show Y-Axis Controls** button:
 
-{{< img src="graphing/index/y_axis_control.png" alt="y axis control" responsive="true" popup="true" style="width:75%;" >}}
+{{< img src="graphing/index/y_axis_control.png" alt="y axis control" responsive="true" style="width:75%;" >}}
 
 There are three configuration settings:
 
@@ -161,7 +161,7 @@ Note: as the mathematical log function doesn't accept negative values, our log s
 Add events from related system to add even more context to your graph. An example would be to add Github commits, Jenkins deploys, or Docker creation events. Just click the Overlay Events button and enter a query to find and display your events.  
 To show anything from a source such as Github, use `sources:github`. For all the events with the tag role:web, use `tag:role:web`.
 
-{{< img src="graphing/index/overlay_events.png" alt="Overlay Events" responsive="true" popup="true" style="width:75%;" >}}
+{{< img src="graphing/index/overlay_events.png" alt="Overlay Events" responsive="true" style="width:75%;" >}}
 
 ## Create a title
 
@@ -175,7 +175,7 @@ The final step is to click Save. You can always come back in to the editor and t
 [2]: https://app.datadoghq.com/metric/explorer/
 [3]: https://app.datadoghq.com/metric/summary/
 [4]: /graphing/dashboards/widgets/
-[5]: /getting_started/tagging/
+[5]: /tagging/
 [6]: /graphing/miscellaneous/functions/
 [7]: https://app.datadoghq.com/notebook/list
 [8]: /graphing/dashboards

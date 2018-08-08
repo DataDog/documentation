@@ -30,17 +30,17 @@ If you want to reduce your AWS spend, a great place to start is by figuring out 
 
 Below is a subset of Datadog’s infrastructure. As you can see, **c3.2xlarge** instances are pretty heavily loaded.
 
-{{< img src="graphing/infrastructure/hostmap/hostmappart1image2.png" alt="host map part 1" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/hostmap/hostmappart1image2.png" alt="host map part 1" responsive="true" style="width:80%;">}}
 
 As seen below, by clicking on the c3.2xlarge group and then sub-grouping by role, we found that only some of the roles are loaded, while others are nearly idling. If we downgraded those 7 green nodes to a c3.xlarge, we would save almost $13K per year. That’s worth investigating! ( $0.21 saved per hour per host x 24 hr/day * 365 days/year * 7 hosts = $12,877.20 / year )
 
-{{< img src="graphing/infrastructure/hostmap/hostmappart1image3.png" alt="Datadog Host Maps Instance-Role Groups" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/hostmap/hostmappart1image3.png" alt="Datadog Host Maps Instance-Role Groups" responsive="true" style="width:80%;">}}
 
 ### Availability Zone Placement
 
 Host maps make it easy to see distributions of machines in each of your availability zones (AZ). Filter for the hosts you are interested in, group by AZ, and you can immediately see whether resources need rebalancing. As seen below, at Datadog we have an uneven distribution of hosts with role:daniels across availability zones. (Daniels is the name of one of our internal applications.)
 
-{{< img src="graphing/infrastructure/hostmap/hostmappart1image4.png" alt="Datadog Host Maps AZ Balance" responsive="true" popup="true" style="width:80%;" >}}
+{{< img src="graphing/infrastructure/hostmap/hostmappart1image4.png" alt="Datadog Host Maps AZ Balance" responsive="true" style="width:80%;" >}}
 
 ### Problem Investigation
 
@@ -49,9 +49,9 @@ For example, you can group by availability zone, region, instance type, image, o
 
 Below is a screenshot from a recent issue we had a Datadog. As you can see, some hosts had much less usable memory than others, despite being part of the same cluster. Why? We grouped by machine image in Host Maps, and the problem was immediately clear: there were in fact two different images in use, and one of them had become overloaded.
 
-{{< img src="graphing/infrastructure/hostmap/hostmappart1image5.png" alt="Datadog Host Maps Two Memory Usage Bands" responsive="true" popup="true" style="width:80%;" >}}
+{{< img src="graphing/infrastructure/hostmap/hostmappart1image5.png" alt="Datadog Host Maps Two Memory Usage Bands" responsive="true" style="width:80%;" >}}
 
-{{< img src="graphing/infrastructure/hostmap/hostmappart1image6.png" alt="Datadog Host Maps Two Image Groups" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/hostmap/hostmappart1image6.png" alt="Datadog Host Maps Two Image Groups" responsive="true" style="width:80%;">}}
 
 ## More Details
 
@@ -88,14 +88,14 @@ Filterable host attributes (automatically provided):
 `Group hosts by tags` spatially arranges your hosts into clusters, or groups. Any host in a group shares the tag or tags you group by.  
 A simple example is grouping your hosts by AWS availability zone. If you add a second grouping tag, such as instance type, then the hosts are further subdivided into groups, first by availability zone and then by instance type, as seen below.
 
-{{< img src="graphing/infrastructure/hostmap/hostmappart2image2.png" alt="Datadog Host Maps AZ Instance Groups" responsive="true" popup="true" >}}
+{{< img src="graphing/infrastructure/hostmap/hostmappart2image2.png" alt="Datadog Host Maps AZ Instance Groups" responsive="true" >}}
 
 ### Zoom in
 
 When you’ve identified a host that you want to investigate, click it for details. It zooms in and see up to six integrations reporting metrics from that host. (If there are more than six integrations, they are listed under the “Apps” header in the host’s detail pane, as in the screenshot below).  
 Click the name of an integration  to get a condensed dashboard of metrics for that integration. In the screenshot below, we have clicked “system” to get system metrics such as CPU usage, memory usage, disk latency, etc.
 
-{{< img src="graphing/infrastructure/hostmap/blog-host-maps-01.png" alt="Datadog Host Maps Zoom In" responsive="true" popup="true" style="width:75%;" >}}
+{{< img src="graphing/infrastructure/hostmap/blog-host-maps-01.png" alt="Datadog Host Maps Zoom In" responsive="true" style="width:75%;" >}}
 
 ### Shapes and colors
 
@@ -105,7 +105,7 @@ The Host Maps can also communicate an additional, optional metric with the size 
 
 In the screenshot below the size of the hexagons is the 15 minute average load, normalized so that machines’ workloads can be compared even if they have different numbers of cores.
 
-{{< img src="graphing/infrastructure/hostmap/hostmappart2image4.png" alt="Datadog Host Maps Using Color And Size" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/hostmap/hostmappart2image4.png" alt="Datadog Host Maps Using Color And Size" responsive="true" style="width:80%;">}}
 
 **Note**: The “% CPU utilized” metric uses the most reliable and up-to-date measurement of CPU utilization, whether it is being reported by the Datadog Agent, or directly by AWS, or vSphere.
 
@@ -115,7 +115,7 @@ By default, the Host Map only show hosts that are reporting certain metrics, whi
 
 Some hosts, like those coming in from Google App Engine, do not pull in these metrics without an Agent running. These hosts can still appear within the Host Map selecting the "gear" icon on the top-right of the map and enabling "Show hosts with no metrics" in the Host Map settings:
 
-{{< img src="graphing/infrastructure/hostmap/host_no_metrics.png" alt="host No Agent" responsive="true" popup="true" style="width:50%;">}}
+{{< img src="graphing/infrastructure/hostmap/host_no_metrics.png" alt="host No Agent" responsive="true" style="width:50%;">}}
 
 ### Data freshness and meaning
 
@@ -125,5 +125,5 @@ Data in the Host Maps is refreshed about once a minute—unless you are continuo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/tagging
+[1]: /tagging
 [2]: /integrations/

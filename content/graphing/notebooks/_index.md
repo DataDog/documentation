@@ -48,7 +48,7 @@ Text in a notebook is formatted with Markdown, which means notebooks can include
 
 When an existing notebook is opened, its cells are in a closed state. To open a cell for editing, click on it or navigate to it with the arrow keys and press Enter . To close a cell, click outside it or press `⌘+ Enter`. Only one cell may be open at any time.
 
-{{< img src="graphing/notebooks/states.png" alt="states" responsive="true" popup="true">}}
+{{< img src="graphing/notebooks/states.png" alt="states" responsive="true" >}}
 
 To insert, clone or delete cells, click the gear icon that appears to the left of the cell number — or use a keyboard shortcut. A list of all keyboard shortcuts is available by clicking the keyboard button in the notebook header.
 Cells also may be re-ordered by using keyboard shortcuts.
@@ -59,7 +59,7 @@ A time indicator appears in the top-right corner of each graph cell. If the cell
 
 To unlock a cell from global time, click this time indicator.
 
-{{< img src="graphing/notebooks/timerange.png" alt="timerange" responsive="true" popup="true" style="width:40%;">}}
+{{< img src="graphing/notebooks/timerange.png" alt="timerange" responsive="true" style="width:40%;">}}
 
 Note that clicking and dragging to zoom in on a graph does not unlock that cell from global time. It changes the notebook’s global time frame instead.
 
@@ -68,14 +68,14 @@ Note that clicking and dragging to zoom in on a graph does not unlock that cell 
 To split a graph by tag, change a graph’s size or toggle the visibility of a graph legend, click the  icon at the right edge of the cell.
 Legends are disabled automatically when the graph size has been set to XS or S. Changing these settings affects only the target cell; the layout of other graph cells is unaffected.
 
-{{< img src="graphing/notebooks/options.png" alt="options" responsive="true" popup="true" style="width:40%;">}}
+{{< img src="graphing/notebooks/options.png" alt="options" responsive="true" style="width:40%;">}}
 
 ### Linking to individual cells
 
 To copy the URL for a specific cell, click the link icon at the right edge of the cell. Direct linking is available for both graph and Markdown cells.
 When a user visits the URL for a specific cell, its notebook is opened to show the cell in question at the top of the viewport. Links are absolute, which means a cell’s URL remains the same if it’s moved to a new position within its notebook.
 
-{{< img src="graphing/notebooks/directlink.png" alt="directlink" responsive="true" popup="true" style="width:40%;">}}
+{{< img src="graphing/notebooks/directlink.png" alt="directlink" responsive="true" style="width:40%;">}}
 
 ### Saving, renaming, and deleting a notebook
 

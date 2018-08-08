@@ -2,6 +2,7 @@
 categories:
 - Collaboration
 ddtype: crawler
+dependencies: []
 description: Envoyer des alertes et des graphiques Datadog aux flux de votre équipe.
 doc_link: https://docs.datadoghq.com/integrations/flowdock/
 git_integration_title: flowdock
@@ -22,7 +23,7 @@ version: '1.0'
 
 Intégrer FlowDock pour:
 
-* être averti quand quelqu'un publie sur votre flux
+* être averti quand quelqu'un publie dans votre flux
 * obtenir des alertes de monitor, des changements d'état d'intégration (et bien plus encore) directement dans vos flux
 
 Datadog tire parti des threads de Flowdock pour éviter de polluer vos flux avec des notifications: pour un flux donné, chaque notification ira dans son propre thread, d'autres notifications connexes iront dans ce même thread (par exemple si une alerte de monitor donnée est déclenchée puis résolue, les notifications correspondantes seront regroupées dans Flowdock).
@@ -39,14 +40,16 @@ Les messages utilisateur et les snapshot iront dans le fil principal de votre fl
 
 L'intégration Flowdock n'inclut aucune métrique pour le moment.
 
-### Evénements
+### Événements
 L'intégration Flowdock n'inclut aucun événement pour le moment.
 
-### Checks de Service
+### Checks de service
 L'intégration Flowdock n'inclut aucun check de service pour le moment.
 
-## Troubleshooting
-Besoin d'aide? Contactez  [l'équipe support de Datadog](http://docs.datadoghq.com/help/).
+## Dépannage
+Besoin d'aide ? Contactez  [l'équipe support de Datadog][1].
 
-## En apprendre plus
-Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog](https://www.datadoghq.com/blog/)
+[1]: http://docs.datadoghq.com/help/
+
+
+{{< get-dependencies >}}

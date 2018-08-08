@@ -70,10 +70,10 @@ There are several ways to specify an environment when reporting data:
     ```
   For OpenTracing use the `tracer.WithGlobalTag` start option to set the environment globally.
 
-  * **Java**:  
-      Via sysprop: 
+  * **Java**:
+      Via sysprop:
       ```
-      -Ddd.trace.span.tags=”env:prod”
+      -Ddd.trace.span.tags=env:prod
       ```
       Via env var:
       ```
@@ -93,9 +93,9 @@ There are several ways to specify an environment when reporting data:
 
 ### Viewing Data by Environment
 
-Environments appear near the top of APM pages. Use the dropdown to scope the data displayed on the current page.
+Environments appear at the top of APM pages. Use the dropdown to scope the data displayed on the current page.
 
-{{< img src="tracing/setup/first_class_dimensions/envs_tracing_screen.png" alt="Envs tracing" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="tracing/setup/first_class_dimensions/envs_tracing_screen.png" alt="Envs tracing" responsive="true" style="width:80%;">}}
 
 
 ## Primary Tags
@@ -140,9 +140,9 @@ Visit the [APM Settings][3] page to define, change, or remove primary tags. Note
 
 ### Viewing Data by Primary Tag
 
-Primary tags appear near the top of APM pages, next to environments. Use these selectors to slice the data displayed on the current page. To view all data independent of a primary tag, choose `tag-name:*` from the dropdown (as in the image below).
+Primary tags appear at the top of APM pages, next to environments. Use these selectors to slice the data displayed on the current page. To view all data independent of a primary tag, choose `tag-name:*` from the dropdown (as in the image below).
 
-{{< img src="tracing/setup/first_class_dimensions/primary_tags_ui.png" alt="Primary tags UI" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="tracing/setup/first_class_dimensions/primary_tags_ui.png" alt="Primary tags UI" responsive="true" style="width:80%;">}}
 
 ## Further Reading
 

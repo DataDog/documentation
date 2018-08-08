@@ -50,7 +50,7 @@ Vous pouvez obtenir des données de Google Analytics dans Datadog en utilisant n
 Un Moogsoft [listener][102] qui ingère des notifications Datadog.
 
 ### NGINX LUA
-  * Emetter des [métriques customs](/getting_started/custom_metrics/) directement à partir des configurations NGINX en utilisant le module [nginx_lua_datadog][72] dans vos scripts LUA.
+  * Emetter des [métriques customs][112] directement à partir des configurations NGINX en utilisant le module [nginx_lua_datadog][72] dans vos scripts LUA.
   * [lua-resty-dogstatsd][79] est une extension développée par [mediba inc][80], qui permet l'émission de métriques, d'événements et de check de service au protocole [DogStatsD](/developers/dogstatsd) . lua-resty-dogstatsd est publié en tant que GPLv3 et repose sur l'API nginx cosocket.
 
 ### OpenVPN
@@ -192,3 +192,4 @@ Si vous avez écrit une bibliothèque pour Datadog et que vous souhaitez l'ajout
    [109]: https://github.com/StackStorm-Exchange/stackstorm-datadog
    [110]: https://github.com/BetaProjectWave/auth0-logs-to-datadog
    [111]: https://www.aptible.com/documentation/enclave/reference/metrics/metric-drains/datadog.html
+   [112]: /developers/metrics/custom_metrics 

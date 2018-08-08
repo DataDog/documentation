@@ -30,14 +30,14 @@ java.lang.NumberFormatException: For input string: "false"
 This means that your  Hadoop:service=HBase,name=Master,sub=Server - tag.isActiveMaster is returning string values.
 
 Check your `jmx.yaml` file, the following excerpt should show something similar:
-{{< img src="integrations/faq/jmx_conf.png" alt="jmx_conf" responsive="true" popup="true">}}
+{{< img src="integrations/faq/jmx_conf.png" alt="jmx_conf" responsive="true" >}}
 
 The java.lang.String metric_type confirms the issue you were seeing in the logs.
 
 To resolve this issue, use [this gist][5] that we created to update your file accordingly.
 
 That means you'll probably need to change the associated metric_type , and have your jmx.yaml look like this :
-{{< img src="integrations/faq/jmx_metric_type.png" alt="jmx_metric_type" responsive="true" popup="true">}}
+{{< img src="integrations/faq/jmx_metric_type.png" alt="jmx_metric_type" responsive="true" >}}
 
 Jmxfetch will know it's a string and will use this rule to transform that into a numeric metric.
 

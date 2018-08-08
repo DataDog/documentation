@@ -369,13 +369,13 @@ checks:
 ```
 
 [1]: https://www.datadoghq.com/docker-adoption/
-[2]: https://github.com/DataDog/integrations-core/blob/master/go_expvar/conf.yaml.example
+[2]: https://github.com/DataDog/integrations-core/blob/master/go_expvar/datadog_checks/go_expvar/data/conf.yaml.example
 [3]: /integrations/kubernetes/
 [4]: /integrations/amazon_ecs/#installation
 [5]: https://github.com/DataDog/docker-dd-agent#environment-variables
 [6]: https://github.com/DataDog/docker-dd-agent#configuration-files
-[7]: https://github.com/Datadog/integrations-core/blob/master/apache/conf.yaml.example
-[8]: https://github.com/DataDog/integrations-core/blob/master/http_check/conf.yaml.example
+[7]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
+[8]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example
 [9]: https://hub.docker.com/r/datadog/docker-dd-agent/
 [10]: https://github.com/DataDog/jmxfetch
 [11]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/auto_conf.yaml

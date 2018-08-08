@@ -44,7 +44,7 @@ Cumulative sum of `\[time delta] x \[value delta]` over all consecutive pairs of
 
 ## Interpolation
 
-### .fill()
+### fill()
 
 Choose how to interpolate missing values for a given metric.
 
@@ -55,6 +55,70 @@ This allows you to tweak the interpolation settings. It accepts a function to us
 * **zero**: fills the gap with a zero value
 * **null**: deactivates the interpolation
 
+### default()
+
+The default function function fills empty intervals with a default or interpolated (within the interpolation time limit) value. It has the following syntax:
+
+```
+default(<EXPRESSION>, <DEFAULT_VALUE>)
+```
+
+Like other functions, the default function is evaluated **after** [time and space aggregation][5]. If interpolation is enabled, the `default()` function first fills all empty values within the interpolation time limit with interpolated values. 
+It then adds points with the specified default value to every interval in the query's span that doesn't already have a value.
+
+Note: You should avoid using the `default()` function with the `as_count()` function.
+
+#### Example
+
+To demonstrate how the default function works, we created two points for a custom metric, each with a single `key:value` tag, with different values for each point:
+
+```
+$ echo -n "custom_metric:60|g|#key1:val1" | nc -4u -w0 127.0.0.1 8125
+$ echo -n "custom_metric:60|g|#key1:val2" | nc -4u -w0 127.0.0.1 8125
+```
+
+When this metric is queried over the last hour, there is a single timestamp, because only one of the query's rollup intervals has a point:
+
+```
+avg:custom_metric{*} by {key1}
+
++---------------------+-----------+-----------+
+| Timestamp           | key1:val1 | key1:val2 |
+| ---------           | --------- | --------- |
+| 2017-10-25 20:08:00 | 60        | 60        |
++---------------------+-----------+-----------+
+```
+
+The default function adds the value passed as the second argument (it doesn't need to be `0`) to any interval that doesn't have data:
+
+```
+default(avg:custom_metric{*} by {key1}, 0)
+
++---------------------+-----------+-----------+
+| Timestamp           | key1:val1 | key1:val2 |
+| ---------           | --------- | --------- |
+| 2017-10-25 19:25:00 | 0         | 0         |
+...
+| 2017-10-25 20:07:30 | 0         | 0         |
+| 2017-10-25 20:08:00 | 60        | 60        |
+| 2017-10-25 20:08:30 | 0         | 0         |
+...
+| 2017-10-25 20:24:00 | 0         | 0         |
+| 2017-10-25 20:24:30 | 0         | 0         |
+| 2017-10-25 20:25:00 | 0         | 0         |
++---------------------+-----------+-----------+
+```
+
+The preceding queries were both grouped by the `key1` tag, just like the query for a multi alert monitor. If no time series are returned for a grouped query, the default function returns a single value, `*`.
+
+#### Multi-alert monitor
+
+The default function fills in empty intervals in the time series that it receives. It does not create time series for groups that are absent, since it does not know which groups to create.
+
+##### Dogstatsd counters
+
+The agent automatically sends zeroes for five minutes after the last value was reported for DogStatsD counters. It is sometimes possible to use this feature to automatically resolve monitors for such metrics. Note that Agent version 6 allows you to configure the amount of time zeroes are sent.
+
 ## Timeshift
 
 Here is a set of functions of the pattern &lt;timeperiod&gt;_before(). These functions display the values from the corresponding time period on the graph. On their own, they may not be of high value, but together with the current values they may provide useful insight into the performance of your application.
@@ -64,7 +128,7 @@ Here is a set of functions of the pattern &lt;timeperiod&gt;_before(). These fun
 The `hour_before()` function shows data from 1 hour prior.
 Here is an example of `system.load.1` with the `hour_before()` value shown as a dotted line. In this particular example, you can see the machine was started at 6:30am and the hour_before values show up at the 7:30 mark. Of course this example was created specifically so you can see the hour_before values match up with the actual values.
 
-{{< img src="graphing/miscellaneous/functions/simple_hour_before_example.png" alt="simple hour before example" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="graphing/miscellaneous/functions/simple_hour_before_example.png" alt="simple hour before example" responsive="true" style="width:80%;">}}
 
 For now, using functions like `hour_before()` is out of scope for the graphical editor so you have to use the JSON editor. Here is the JSON for this graph:
 
@@ -99,7 +163,7 @@ For now, using functions like `hour_before()` is out of scope for the graphical 
 The `day_before()` function shows data from 1 day prior.
 Here is an example of `nginx.net.connections` with the `day_before()` value shown as a lighter, thinner line. In this example, you can see a week's worth of data which makes the day_before data easy to identify.
 
-{{< img src="graphing/miscellaneous/functions/simple_day_before_example.png" alt="simple day before example" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="graphing/miscellaneous/functions/simple_day_before_example.png" alt="simple day before example" responsive="true" style="width:80%;">}}
 
 For now, using functions like `day_before()` is out of scope for the graphical editor so you have to use the JSON editor. Here is the JSON for this graph:
 
@@ -131,7 +195,7 @@ The `week_before()` function shows data from 7 days (1 week) prior.
 
 Here is an example of `cassandra.db.read_count` with the `week_before()` value shown as a dotted line. In this example, you can see about three weeks' worth of data which makes the week_before data easy to identify.
 
-{{< img src="graphing/miscellaneous/functions/simple_week_before_example.png" alt="simple week before example" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="graphing/miscellaneous/functions/simple_week_before_example.png" alt="simple week before example" responsive="true" style="width:80%;">}}
 
 For now, using functions like `week_before()` is out of scope for the graphical editor so you have to use the JSON editor. Here is the JSON for this graph:
 
@@ -165,7 +229,7 @@ The `month_before()` function shows data from 28 days (4 weeks) prior.
 
 Here is an example of `aws.ec2.cpuutilization` with the `month_before()` value shown as a thin, solid line.
 
-{{< img src="graphing/miscellaneous/functions/simple_month_before_example.png" alt="simple month before example" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="graphing/miscellaneous/functions/simple_month_before_example.png" alt="simple month before example" responsive="true" style="width:80%;">}}
 
 For now, using functions like `month_before()` is out of scope for the graphical editor so you have to use the JSON editor. Here is the JSON for this graph:
 
@@ -225,7 +289,7 @@ Delta value between points for a given metric
 
 ### autosmooth()
 
-The `autosmooth()` function applies a moving average to the time series. The algorithm used to choose the optimal span for the moving average is inspired by the [ASAP algorithm][5]. When applied to a group-by query, `autosmooth()` will use the same span for all groups.
+The `autosmooth()` function applies a moving average to the time series. The algorithm used to choose the optimal span for the moving average is inspired by the [ASAP algorithm][8]. When applied to a group-by query, `autosmooth()` will use the same span for all groups.
 
 ### ewma_3()
 
@@ -279,9 +343,13 @@ The span value is the number of data points. So `median_9()` uses the last 9 dat
 
 ### .rollup()
 
-Recommended for expert users only. Appending this function to the end of a query allows you to control the number of raw points rolled up into a single point plotted on the graph. The function takes two parameters, method and time: `.rollup(method,time)`
+{{< vimeo 264998150 >}}
 
-The method can be sum/min/max/count/avg and time is in seconds. You can use either one individually, or both together like `.rollup(sum,120)`. We impose a limit of 350 points per time range. For example, if you're requesting `.rollup(20)` for a month-long window, we return data at a rollup far greater than 20 seconds in order to prevent returning a gigantic number of points.
+Recommended for expert users only. Datadog rolls up data points automatically, based on the [in-app metric type][6]: `gauge` metrics are averaged by default, whereas `count` and `rate` metrics are summed. Appending this function to the end of a query allows you to override the default behavior to control the rollup method or the number of raw points rolled up into a single point plotted on the graph.
+
+The function takes two parameters, method and time: `.rollup(method,time)`. The method can be sum/min/max/count/avg and time is in seconds. You can use either one individually, or both together like `.rollup(sum,120)`. We impose a limit of 350 points per time range. For example, if you're requesting `.rollup(20)` for a month-long window, we return data at a rollup far greater than 20 seconds in order to prevent returning a gigantic number of points. 
+
+Note that rollups should usually be avoided in [monitor][7] queries, because of the possibility of misalignment between the rollup interval and the evaluation window of the monitor. The start and end of rollup intervals are aligned to UNIX time, not to the start and end of monitor queries, which means that a monitor may evaluate (and trigger on) an incomplete rollup interval containing only a small sample of data. To avoid this issue, users should delay the evaluation of the monitor by (at least) the length of the rollup interval.
 
 ### .as_count() or as_rate()
 
@@ -330,7 +398,7 @@ Fit a robust regression trend line using Huber loss:
 
 The most common type of linear regression -- ordinary least squares (OLS) -- can be heavily influenced by a small number of points with extreme values. Robust regression is an alternative method for fitting a regression line; it is not influenced as strongly by a small number of extreme values. As an example, see the following plot.
 
-{{< img src="graphing/miscellaneous/functions/robust-trend.png" alt="robust trend" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="graphing/miscellaneous/functions/robust-trend.png" alt="robust trend" responsive="true" style="width:80%;">}}
 
 The original metric is shown as a solid blue line. The purple dashed line is an OLS regression line, and the yellow dashed line is a robust regression line. The one short-lived spike in the metric leads to the OLS regression line trending upward, but the robust regression line ignores the spike and does a better job fitting the overall trend in the metric.
 
@@ -348,7 +416,7 @@ Approximate the metric with a piecewise function composed of constant-valued seg
 
 Overlay a gray band showing the expected behavior of a series based on past.
 
-{{< img src="graphing/miscellaneous/functions/anomalies_graph.png" alt="anomalies graph" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="graphing/miscellaneous/functions/anomalies_graph.png" alt="anomalies graph" responsive="true" style="width:80%;">}}
 
 The function has two parameters:
 
@@ -365,4 +433,7 @@ Highlight outliers series; see our [Outlier Monitor][3] page for more info.
 [2]: /monitors/monitor_types/anomaly
 [3]: /monitors/monitor_types/outlier
 [4]: /graphing/faq/as_count_validation
-[5]: http://futuredata.stanford.edu/asap/
+[5]: /graphing/miscellaneous/from_the_query_to_the_graph
+[6]: /developers/metrics/#metric-types
+[7]: /monitors/monitor_types/metric/
+[8]: http://futuredata.stanford.edu/asap/

@@ -25,7 +25,7 @@ Connect Riak to Datadog in order to:
 
 Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
-* [Riakインテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/riak/conf.yaml.example)
+* [Riakインテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/riak/datadog_checks/riak/data/conf.yaml.example)
 * [Riakインテグレーション checks.d](https://github.com/DataDog/integrations-core/blob/master/riak/check.py)
 
 <!-- The following metrics are collected by default with the Riak integration:

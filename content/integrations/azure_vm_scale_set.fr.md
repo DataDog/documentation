@@ -19,7 +19,7 @@ short_description: 'Suivre les métriques de by-set: octets entrant sortant, op�
 version: '1.0'
 ---
 
-{{< img src="integrations/azure_vm_scale_set/azure_vm_scale_set_dashboard.png" alt="azure vm scale set dashboard" responsive="true" popup="true">}}
+{{< img src="integrations/azure_vm_scale_set/azure_vm_scale_set_dashboard.png" alt="azure vm scale set dashboard" responsive="true" >}}
 
 ## Aperçu
 Les « Virtual Machine Scale Sets » sont des ressources d'Azure Compute que vous pouvez utiliser pour déployer, gérer et mettre à l'échelle automatiquement un ensemble de machines virtuelles identiques. 

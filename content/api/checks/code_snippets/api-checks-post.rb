@@ -10,4 +10,4 @@ dog = Dogapi::Client.new(api_key, app_key)
 # don't bother setting it
 dog = Dogapi::Client.new(api_key)
 
-dog.service_check('app.is_ok', 'app1', 0, : message => 'Response: 200 OK')
+dog.service_check('app.is_ok', 'app1', 0, :message => 'Response: 200 OK')

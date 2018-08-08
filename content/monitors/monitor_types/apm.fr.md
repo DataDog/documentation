@@ -9,9 +9,9 @@ further_reading:
 - link: "monitors/downtimes"
   tag: "Documentation"
   text: Planifiez un downtime pour désactiver un monitor
-- link: "monitors/faq"
-  tag: "FAQ"
-  text: FAQ monitors
+- link: "monitors/monitor_status"
+  tag: "Documentation"
+  text: Consulter le statut de de votre monitor.
 ---
 
 ## Aperçu
@@ -21,12 +21,12 @@ Ils fonctionnent exactement comme les [monitors de métriques][1], mais avec des
 ## Implémentation
 
 1. Sélectionnez votre [environnement][2]: 
-    {{< img src="monitors/monitor_types/apm/apm_select_env.png" alt="APM select Environment" responsive="true" popup="true" style="width:75%;" >}}
+    {{< img src="monitors/monitor_types/apm/apm_select_env.png" alt="APM select Environment" responsive="true" style="width:75%;" >}}
 
 2. Sélectionnez votre [service][3]:
-    {{< img src="monitors/monitor_types/apm/apm_select_service.png" alt="APM select Service" responsive="true" popup="true" style="width:75%;" >}}
+    {{< img src="monitors/monitor_types/apm/apm_select_service.png" alt="APM select Service" responsive="true" style="width:75%;" >}}
 3. Définir les conditions d'alerte:
-    {{< img src="monitors/monitor_types/apm/apm_set_alert_conditions.png" alt="APM set alert conditions" responsive="true" popup="true" style="width:75%;" >}}
+    {{< img src="monitors/monitor_types/apm/apm_set_alert_conditions.png" alt="APM set alert conditions" responsive="true" style="width:75%;" >}}
 4. Configurez les **options de vos notifications**:
     Reportez-vous à la page de documentation dédiée [Notifications][4] pour plus d'informations.
 

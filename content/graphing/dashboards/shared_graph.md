@@ -32,7 +32,7 @@ To share a Graph from a [Timeboard][5] or a [Screenboard][6]:
 6. Choose to include the legend or not.
 7. Get the embed code with the *Generate embed code* button.
 
-{{< img src="graphing/dashboards/shared_graph/share_graph.png" alt="Shared graph" responsive="true" popup="true" style="width:75%;">}}
+{{< img src="graphing/dashboards/shared_graph/share_graph.png" alt="Shared graph" responsive="true" style="width:75%;">}}
 
 ## Sharing a Screenboard
 
@@ -61,7 +61,7 @@ To revoke the keys used to share your graphs:
 2. Click on the **Revoke** button for the graph you want to stop sharing.
 3. The graph moves then to the **Revoked** list.
 
-{{< img src="graphing/dashboards/shared_graph/embedded_graphs.png" alt="Embedded graph" responsive="true" popup="true" style="width:75%;">}}
+{{< img src="graphing/dashboards/shared_graph/embedded_graphs.png" alt="Embedded graph" responsive="true" style="width:75%;">}}
 
 ### Revoking a Screenboard
 

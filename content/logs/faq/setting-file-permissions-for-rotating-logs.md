@@ -8,7 +8,7 @@ further_reading:
 - link: "logs/processing"
   tag: "Documentation"
   text: Learn how to process your logs
-- link: "logs/parsing"
+- link: "logs/processing/parsing"
   tag: "Documentation"
   text: Learn more about parsing
 ---
@@ -32,7 +32,7 @@ getfacl /var/log/test-dir/
 
 The permissions set for `datadog-agent` appears in the output of getfacl if ACLs are enabled.
 
-{{< img src="logs/faq/setting_file_permission.png" alt="Setting file permission" responsive="true" popup="true">}}
+{{< img src="logs/faq/setting_file_permission.png" alt="Setting file permission" responsive="true" >}}
 
 ### Granting dd-agent read and execute permissions on log directories
 
@@ -55,11 +55,10 @@ sudo touch /etc/logrotate.d/dd-agent_ACLs
 Example file:
 
 ```
-{
+/var/log/apache/*.log {
  postrotate
- /usr/bin/setfacl -m g:dd-agent:rx /var/log/apache
- /usr/bin/setfacl -m g:dd-agent:rx /var/log/nginx
- /usr/bin/setfacl -m g:dd-agent:rx /var/log/myapp
+ /usr/bin/setfacl -m g:dd-agent:rx /var/log/apache/access.log
+ /usr/bin/setfacl -m g:dd-agent:rx /var/log/apache/error.log
  endscript
 }
 ```
@@ -67,7 +66,7 @@ Example file:
 Check the ACL status of a file with:
 
 ```
-getfacl /var/log/<application-directory>
+getfacl /var/log/apache/access.log
 ```
 
 ## Setting permissions when ACLs are not present

@@ -11,7 +11,7 @@ This relies on the API get and post methods for [Timeboards][2] and [Screenboard
 
 First, retrieve the ID of the dashboard, you can find it in the URL of the dashboard
 
-{{< img src="graphing/dashboards/faq/id_dashboard.png" alt="ID dashboard" responsive="true" popup="true">}}
+{{< img src="graphing/dashboards/faq/id_dashboard.png" alt="ID dashboard" responsive="true" >}}
 
 Here the ID is 66234.
 
@@ -35,23 +35,23 @@ You have to enter your API and APP keys in the script for it to work.
 
 A concrete use case for this is to transform this:
 
-{{< img src="graphing/dashboards/faq/screenboard_1.png" alt="screenboard 1" responsive="true" popup="true">}}
+{{< img src="graphing/dashboards/faq/screenboard_1.png" alt="screenboard 1" responsive="true" >}}
  
 To
 
-{{< img src="graphing/dashboards/faq/timeboard_1.gif" alt="timeboard 1" responsive="true" popup="true">}}
+{{< img src="graphing/dashboards/faq/timeboard_1.gif" alt="timeboard 1" responsive="true" >}}
 
 Or with the following:
 
-{{< img src="graphing/dashboards/faq/example_1.png" alt="example 1" responsive="true" popup="true">}}
+{{< img src="graphing/dashboards/faq/example_1.png" alt="example 1" responsive="true" >}}
 
 transform this :
 
-{{< img src="graphing/dashboards/faq/timeboard_2.gif" alt="timeboard 2" responsive="true" popup="true">}}
+{{< img src="graphing/dashboards/faq/timeboard_2.gif" alt="timeboard 2" responsive="true" >}}
 
 to this:
 
-{{< img src="graphing/dashboards/faq/screenboard_2.gif" alt="screenboard 2" responsive="true" popup="true">}}
+{{< img src="graphing/dashboards/faq/screenboard_2.gif" alt="screenboard 2" responsive="true" >}}
 
 Then, you will be given the option to delete the original dashboard.
 

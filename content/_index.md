@@ -48,7 +48,7 @@ When you're well aware of an ongoing problem, [silence its alerts][18]. When you
 [4]: /developers/dogstatsd
 [5]: /tracing
 [6]: /developers/libraries
-[7]: /getting_started/custom_metrics/
+[7]: /developers/metrics/custom_metrics/
 [8]: /graphing/event_stream/
 [9]: /graphing/infrastructure
 [10]: /graphing/dashboards/screenboard

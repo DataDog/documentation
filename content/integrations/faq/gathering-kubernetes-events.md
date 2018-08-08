@@ -49,7 +49,7 @@ To enable leader election you need to:
 
 Daemonset config errors can be viewed in the Kubernetes log.
 
-[1]: https://github.com/DataDog/integrations-core/blob/master/kubernetes/conf.yaml.example#L118
+[1]: https://github.com/DataDog/integrations-core/blob/master/kubernetes/datadog_checks/kubernetes/data/conf.yaml.example#L118
 [2]: https://kubernetes.io/docs/api-reference/v1.7/#configmap-v1-core
 [3]: /integrations/faq/using-rbac-permission-with-your-kubernetes-integration
 [4]: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/

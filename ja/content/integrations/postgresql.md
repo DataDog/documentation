@@ -27,7 +27,7 @@ doclevel:
 
 Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
-* [PostgreSQLインテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/postgres/conf.yaml.example)
+* [PostgreSQLインテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example)
 * [PostgreSQLインテグレーション checks.d](https://github.com/DataDog/integrations-core/blob/master/postgres/check.py)
 
 <!-- The following metrics are collected by default with the PostgreSQL integration:

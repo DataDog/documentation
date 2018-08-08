@@ -17,7 +17,7 @@ Use the Datadog Expvar Agent check to:
 
 * Get information and monitor into your application memory usage
 * Instrument your own metrics
-* An example configration file for GO Expvar can be found [here](https://github.com/DataDog/integrations-core/blob/master/go_expvar/conf.yaml.example)
+* An example configration file for GO Expvar can be found [here](https://github.com/DataDog/integrations-core/blob/master/go_expvar/datadog_checks/go_expvar/data/conf.yaml.example)
 
 ## Configuration 
 The Go Expvar integration requires the Datadog Agent.

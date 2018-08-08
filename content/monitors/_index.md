@@ -42,14 +42,14 @@ Here is a quick overview of the different terms used:
 
 Navigate to the [Create Monitors][13] page by hovering over **Monitors** in the main menu and clicking **New Monitor** in the sub-menu (depending on your chosen theme and screen resolution, the main menu may be at the top or on the left). You are presented with a list of monitor types on the left. See the [Monitoring Reference][6] to learn more about all monitor types.
 
-{{< img src="monitors/index/nav.png" alt="navigation" responsive="true" popup="true">}}
+{{< img src="monitors/index/nav.png" alt="navigation" responsive="true" >}}
 
 ## Export your monitor
 
 Export the JSON configuration for a monitor right from the create screen, or on your [monitor status page][28] in the upper right corner.
 If you manage and deploy monitors programmatically, it's easier to define the monitor in the UI and export the JSON right away:
 
-{{< img src="monitors/index/export_monitor_json.jpg" alt="export monitor" responsive="true" popup="true" >}}
+{{< img src="monitors/index/export_monitor_json.jpg" alt="export monitor" responsive="true" >}}
 
 ## Auditing Monitors
 
@@ -62,20 +62,19 @@ https://app.datadoghq.com/event/stream?per_page=30&query=tags:audit%20status:all
 
 We also provide you with the ability to be notified on changes to a monitor you create. At the bottom of the Monitor Editor there's an option to notify alert recipients for all changes to the monitor:
 
-{{< img src="monitors/index/Monitor_Change_notifications.png" alt="Monitor_Change_notifications" responsive="true" popup="true">}}
+{{< img src="monitors/index/Monitor_Change_notifications.png" alt="Monitor_Change_notifications" responsive="true" >}}
 
 Setting the above to **Notify** send an email for the monitor audit events to all people who are alerted in a specific monitor.
 
 ## Manually resolve your monitor
 
-It only makes sense in a couple cases to manually resolve your monitor:
+The monitor *Resolve* function is artificially switching the monitor status to `OK` for its next evaluation. The following monitor evaluation will be performed normally on the data the monitor is based on.
 
-* If the monitor is in a "no data" state then resolving it hides it from the triggered monitors page.
-* If the monitor is in the triggered state but has stopped reporting data then resolving it hides it from the triggered monitors page.
+If a monitor is alerting because its current data corresponds to its `ALERT` state, *Resolve* will have the monitor follow the state switch `ALERT -> OK -> ALERT`. Thus, it's not appropriate for acknowledging that you have seen the alert or telling Datadog to ignore the alert.
 
-Otherwise the monitor picks up the current state on the next evaluation.
+Manually *Resolve*-ing a monitor is appropriate for cases where data is reported intermittently: after triggering an alert, the monitor doesn't receive further data so it can no longer evaluate alerting conditions and recover to the `OK` state. In that case the *Resolve* function or the *Automatically resolve monitor after X hours* switches the monitor back to `OK` state.
 
-In other words, if the value is still above/below the configured threshold then the monitor may re-trigger upon the next evaluation (in about 60 seconds).
+Typical use case: monitor based on error metrics that are not generated when there are no errors (e.g. `aws.elb.httpcode_elb_5xx`, or any DogStatsD counter in your code reporting an error _only when there is an error_)
 
 ## Managing Monitors
 
@@ -97,7 +96,7 @@ There are multiple community projects for maintaining or managing Monitors along
 [8]: /monitors/manage_monitor
 [9]: /monitors/downtimes
 [10]: /monitors/check_summary
-[12]: /getting_started/tagging
+[12]: /tagging
 [13]: https://app.datadoghq.com/monitors#/create
 [14]: /graphing/event_stream
 [15]: /monitors/monitor_types/log

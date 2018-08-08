@@ -7,6 +7,7 @@ categories:
   - aws
   - log collection
 ddtype: crawler
+dependencies: []
 description: >-
   Suivre les erreurs de AWS gateway, les hits et misses de cache et la latence
   de requêtes.
@@ -22,7 +23,7 @@ public_title: Intégration Datadog-AWS API Gateway
 short_description: Suivre les erreurs Amazon API gateway.
 version: '1.0'
 ---
-## Aperçu
+## Présentation
 
 Amazon API Gateway est un service entièrement géré qui facilite la création, la publication, la maintenance, la surveillance et la sécurisation des API à n'importe quelle échelle.
 
@@ -31,7 +32,7 @@ Activez cette intégration pour voir dans Datadog toutes vos métriques de API G
 ## Implémentation
 ### Installation
 
-Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon Web Services][1].
+Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration d'Amazon Web Services][1].
 
 ### Collecte de métrique
 
@@ -39,7 +40,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon Web
 
 2. Configurez l'[intégration Datadog - AWS API Gateway][3].
 
-### Collecte de log
+### Collecte de logs
 
 Activer le logging de API Gateway:
 
@@ -68,7 +69,7 @@ Activer le logging de API Gateway:
 
 #### Envoyer des logs à Datadog
 
-1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda pour collecte de log AWS][4].
+1. Si vous ne l'avez pas déjà fait, configurez [la fonction Lambda pour collecte de logs AWS][4].
 2. Une fois la fonction lambda installée, ajoutez manuellement un déclencheur dans la console AWS sur le groupe de log Cloudwatch qui contient vos logs API Gateway:
 {{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_1.png" alt="cloudwatch log group" responsive="true" popup="true" style="width:70%;">}}
    Sélectionnez le groupe de log CloudWatch correspondant, ajoutez un nom de filtre (mais n'hésitez pas à laisser le filtre vide) et ajoutez le déclencheur:
@@ -83,17 +84,14 @@ Allez désormais dans la section [Log de Datadog][5] pour commencer à explorer 
 
 Chacune des métriques récupérées à partir d'AWS se verra attribuer les mêmes tags qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le nom de l'hôte, les groupes de sécurité et plus encore.
 
-### Evénements
+### Événements
 L'intégration AWS API Gateway n'inclut aucun événements pour le moment.
 
-### Checks de Service
+### Checks de service
 L'intégration AWS API Gateway n'inclut aucun check de service pour le moment.
 
-## Troubleshooting
+## Dépannage
 Besoin d'aide ? Contactez le [support Datadog][7].
-
-## En apprendre plus
-Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Datadog sur [notre blog][8]
 
 [1]: https://docs.datadoghq.com/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
@@ -102,4 +100,6 @@ Apprenez en plus sur l'infrastructure monitoring et toutes les intégrations Dat
 [5]: https://app.datadoghq.com/logs
 [6]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_api_gateway/amazon_api_gateway_metadata.csv
 [7]: http://docs.datadoghq.com/help/
-[8]: https://www.datadoghq.com/blog/
+
+
+{{< get-dependencies >}}

@@ -30,7 +30,7 @@ Connect Varnish to Datadog in order to:
 
 Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
-* [Varnishインテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/varnish/conf.yaml.example)
+* [Varnishインテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/varnish/datadog_checks/varnish/data/conf.yaml.example)
 * [Varnishインテグレーション  checks.d](https://github.com/DataDog/integrations-core/blob/master/varnish/check.py)
 *
 

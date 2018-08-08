@@ -5,7 +5,7 @@ aliases:
     - /agent/faq/how-can-i-change-the-hostname/
 ---
 
-{{< img src="agent/faq/agent_hostname.jpeg" alt="Agent hostname scheme" responsive="true" popup="true">}}
+{{< img src="agent/faq/agent_hostname.jpeg" alt="Agent hostname scheme" responsive="true" >}}
 
 The Datadog Agent collects potential hostnames from a number of different sources. To see all the names the Agent is detecting, [run the Agent info command][1], for example:
 ```
@@ -45,6 +45,6 @@ The names collected by the Agent (detailed above) are added as aliases for the c
 
 See a list of all the hosts in your account from the Infrastructure tab in Datadog. From the Inspect panel, which you get to by clicking the "Inspect" button while hovering over a host row, see (among other things) the list of aliases associated with each host.
 
-{{< img src="agent/faq/host_aliases.png" alt="Host aliases" responsive="true" popup="true">}}
+{{< img src="agent/faq/host_aliases.png" alt="Host aliases" responsive="true" >}}
 
 [1]: /agent/faq/agent-commands/#agent-status-and-information

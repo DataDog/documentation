@@ -53,10 +53,7 @@ file in the following format:
     dogstreams: /var/log/web.log:parsers:parse_web
 
 The `parsers:parse_web` portion indicates that the custom Python function lives
-in a package called  parsers in the Agent's `PYTHONPATH`, and the parsers package
-has a function named `parse_web`. The Agent's `PYTHONPATH` is set in the Agent
-startup script, `/etc/init.d/datadog-agent` for Agent versions < 2.0, and in the
-supervisor config for Agent version >= 2.0.
+in a package called `parsers` in the Agent's `PYTHONPATH`, and the `parsers` package has a function named `parse_web`. The Agent's `PYTHONPATH` is set in the Agent startup script, `/etc/init.d/datadog-agent`, in the supervisor config for Agent version.
 
 If your parser does **not** live on the Agent's `PYTHONPATH`, you can use an
 alternative syntax to configure your line parser:
@@ -203,7 +200,7 @@ dogstreams: /path/to/mylogfile.log:/path/to/mylogparser.py:my_log_parser
 
 This specific log-line parsed with this parser created the following event in Datadog:
 
-{{< img src="agent/faq/log_event_in_dd.jpg" alt="Log event in Datadog" responsive="true" popup="true" style="width:70%;">}}
+{{< img src="agent/faq/log_event_in_dd.jpg" alt="Log event in Datadog" responsive="true" style="width:70%;">}}
 
 ## Send extra parameters to your custom parsing function
 

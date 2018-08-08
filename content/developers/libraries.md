@@ -28,6 +28,10 @@ Enclave delivers your metrics to a Datadog account. [Consult the dedicated Aptib
 
 ### Auth0
 [This extension][30] takes your Auth0 logs and ships them to Datadog.
+
+### CLI Management
+A [set of tools][34] to backup/restore dashboards and monitors, and configure users via a command line interface.
+
 ### Consul
 Publish consul service counts into Datadog via [DogStatsD](/developers/dogstatsd) with [this library][17].
 
@@ -51,7 +55,7 @@ You can get data into Datadog from Google Analytics using our API with [this lib
 A Moogsoft [listener][22] that ingests Datadog notifications.
 
 ### NGINX LUA
-  * Emit [custom metrics](/getting_started/custom_metrics/) directly from NGINX configurations using the [nginx_lua_datadog][10] module in your LUA scripts.
+  * Emit [custom metrics](/developers/metrics/custom_metrics/) directly from NGINX configurations using the [nginx_lua_datadog][10] module in your LUA scripts.
   * [lua-resty-dogstatsd][14] is an extension developed by  [mediba inc][15], which enables emiting metrics, events, and service checks to [DogStatsD](/developers/dogstatsd) protocol. lua-resty-dogstatsd is released as GPLv3 and relies on the nginx cosocket API.
 
 ### OpenVPN
@@ -122,3 +126,4 @@ If you've written a Datadog library and would like to add it to this page, write
    [31]: https://www.aptible.com/documentation/enclave/reference/metrics/metric-drains/datadog.html
    [32]: mailto:code@datadoghq.com
    [33]: /tracing/
+   [34]: https://github.com/keirans/datadog-management

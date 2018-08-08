@@ -25,7 +25,7 @@ version: 1.1.0
 ---
 
 
-{{< img src="integrations/btrfs/btrfs_metric.png" alt="btrfs metric" responsive="true" popup="true">}}
+{{< img src="integrations/btrfs/btrfs_metric.png" alt="btrfs metric" responsive="true" >}}
 ## Aperçu
 
 Obtenir les métriques du service btrfs en temps réel pour:

@@ -26,7 +26,7 @@ doclevel: basic
 
 Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
-* [Memcachedインテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/mcache/conf.yaml.example)
+* [Memcachedインテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/mcache/datadog_checks/mcache/data/conf.yaml.example)
 * [Memcachedインテグレーション checks.d](https://github.com/DataDog/integrations-core/blob/master/mcache/check.py)
 
 <!-- The following metrics are collected by default with the Memcache integration:

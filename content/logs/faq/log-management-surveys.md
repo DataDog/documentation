@@ -1,6 +1,7 @@
 ---
 title: Log Management - Surveys
 kind: faq
+disable_toc: true
 aliases:
     - /logs/faq/log-management-surveys-and-beta-application
 ---

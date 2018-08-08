@@ -28,7 +28,7 @@ _Note: we refers variously to 'individual monitors', 'constituent monitors', and
 
 In the Datadog application, go to the [**New Monitor**][1] page and click **Composite** in the list of monitor types:
 
-{{< img src="monitors/monitor_types/composite/select-monitor-type.png" alt="select monitor type" responsive="true" popup="true">}}
+{{< img src="monitors/monitor_types/composite/select-monitor-type.png" alt="select monitor type" responsive="true" >}}
 
 ### Choose individual monitors
 
@@ -36,21 +36,21 @@ Choose up to 10 individual monitors to use in the new composite monitor. You can
 
 After you choose your first monitor, the UI shows its alert type and current status:
 
-{{< img src="monitors/monitor_types/composite/create-composite-2.png" alt="create composite 2" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/composite/create-composite-2.png" alt="create composite 2" responsive="true" style="width:80%;">}}
 
 If you choose a multi-alert monitor, the UI shows its group-by clause (e.g. `host`) and how many unique sources (i.e. how many hosts) are currently reporting. When you want to combine many multi-alert monitors, this information can help you choose monitors that pair naturally together: you should almost always choose monitors that have the same group-by. If you don't, the UI warns you that such a composite monitor may never trigger:
 
-{{< img src="monitors/monitor_types/composite/create-composite-4.png" alt="create composite 4" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/composite/create-composite-4.png" alt="create composite 4" responsive="true" style="width:80%;">}}
 
 Even if you choose multi-alert monitors with the same group-by, the UI may still warn you about the selection. In the following screenshot, both monitors are grouped by `host`:
 
-{{< img src="monitors/monitor_types/composite/create-composite-5.png" alt="create composite 5" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/composite/create-composite-5.png" alt="create composite 5" responsive="true" style="width:80%;">}}
 
 Since there's still a 'Group Matching Error' despite matching group-bys, we can assume that these monitors currently have no common reporting sources (also called common groupings). As long as there are no common reporting sources, Datadog cannot compute a status for the composite monitor, and it never triggers. However, you _can_ ignore the warning and create the monitor anyway. To understand why, [read more below](#how-composite-monitors-select-common-reporting-sources).
 
 When you select a second monitor that doesn't cause a warning in the UI, the UI populates the **Trigger when** field with the default trigger condition `a && b` and show the status of the proposed composite monitor:
 
-{{< img src="monitors/monitor_types/composite/create-composite-3.png" alt="create composite 3"  responsive="true" popup="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/composite/create-composite-3.png" alt="create composite 3"  responsive="true" style="width:80%;">}}
 
 ### Set a trigger condition
 
@@ -66,7 +66,7 @@ a || b && !c
 
 Outside of a composite monitor's New Monitor and Edit forms, its individual monitors are known by their numeric IDs:
 
-{{< img src="monitors/monitor_types/composite/composite-status.png" alt="composite status" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/composite/composite-status.png" alt="composite status" responsive="true" style="width:80%;">}}
 
 In the API, a composite monitor's trigger condition is called its query. While a non-composite monitor's query can encapsulate many things—a metric, tags, an aggregation function like `avg`, a group-by clause, etc—a composite monitor's query is its trigger condition defined in terms of its constituent monitors.
 
@@ -87,7 +87,7 @@ As with a non-composite monitor, you may configure whether or not a composite mo
 
 Write a notification message as you would with any other monitor, using the `@-syntax` (e.g. `@you@example.com`) to notify individuals or teams:
 
-{{< img src="monitors/monitor_types/composite/writing-notification.png" alt="writing notification" responsive="true" popup="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/composite/writing-notification.png" alt="writing notification" responsive="true" style="width:80%;">}}
 
 In addition to your own message, notifications (e.g. emails) for the composite monitor shows the status of the individual monitors:
 
@@ -131,11 +131,10 @@ Recall the seven statuses a monitor may have (in order of increasing severity):
 * `Warn`,
 * `Alert`,
 * `Skipped`,
-* `Ignored`,
 * `No Data`,
 * `Unknown`.
 
-Composite monitors consider `Unknown`, `Warn` and `Alert` to be alert-worthy (i.e. true). The rest—`Ok`, `Skipped`, `Ignored`, and `No Data`—are not alert-worthy (i.e. false). However, you can configure `No Data` to be alert-worthy by setting `notify_no_data` to true.
+Composite monitors consider `Unknown`, `Warn`, and `Alert` to be alert-worthy (i.e. true). The rest—`Ok`, `Skipped`, and `No Data`—are not alert-worthy (i.e. false). However, you can configure `No Data` to be alert-worthy by setting `notify_no_data` to true.
 
 When a composite monitor evaluates as alert-worthy, it inherits the most severe status among its individual monitors and triggers an alert. When a composite monitor does not evaluate as alert-worthy, it inherits the _least_ severe status.
 The not (!) operator causes a status—individual or composite—to be either `Ok`, `Alert`, or `No Data`: if monitor A has any alert-worthy status, `!A` is `OK`; if monitor A has any alert-**un**worthy status, `!A` is `Alert`; if monitor A has a status of `No Data`, `!A` is also `No Data`.
@@ -204,13 +203,21 @@ In this cycle, you would receive one alert.
 
 ### How composite monitors select common reporting sources
 
-As explained above, composite monitors that use many multi-alert monitors only consider the individual monitors *common reporting sources*.
+As explained above, composite monitors that use many multi-alert monitors only consider the individual monitors' *common reporting sources*.
 In the example, the common sources were `host:web04` and `host:web05`. Note that composite monitors only look at tag *values* (i.e. `web04`), not tag *names* (i.e. `host`).
 If the example above had included a multi-alert monitor `D` grouped by `environment`, and that monitor had a single reporting source, `environment:web04`, then the composite monitor would consider `web04` the single common reporting source between `A`, `B`, and `D`, and would compute its trigger condition.
 
 You can create a composite monitor using multi-alert monitors that have no tag values in common but are grouped by the same tag name because shared tag names are a potential common source of reporting. It’s possible that in the future their values will match. This is why, in the above example, we consider the common sources of reporting to be `host:web04` and `host:web05`.
 
 Two monitors grouped by different tags rarely have values that overlap, e.g. `web04` and `web05` for monitor `A`, `dev` and `prod` for monitor `D`. If and when they do overlap, a composite monitor comprised of these monitors becomes capable of triggering an alert.
+
+In the case of a multi-alert split by two or more tags (e.g. an alert per `host, instance, url`) a monitor group corresponds to the whole combination of tags. 
+
+For instance, if Monitor 1 is a multi-alert per `device,host`, and Monitor 2 is a multi-alert per `host`, a composite monitor can combine Monitor 1 and Monitor 2:
+{{< img src="monitors/monitor_types/composite/multi-alert-1.png" alt="writing notification" responsive="true" style="width:80%;">}}
+
+However, consider Monitor 3, a multi-alert per `host,url`. Monitor 1 and Monitor 3 may not lead to a composite result because the groupings are too different.
+{{< img src="monitors/monitor_types/composite/multi-alert-2.png" alt="writing notification" responsive="true" style="width:80%;">}}
 
 Use your best judgment to choose multi-alert monitors that makes sense together.
 

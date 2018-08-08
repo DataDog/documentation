@@ -12,6 +12,7 @@ short_description: "Track the health of your Cloud Foundry VMs and the jobs they
 categories:
 - provisioning
 - configuration & deployment
+- log collection
 doc_link: https://docs.datadoghq.com/integrations/cloud_foundry/
 ddtype: check
 ---
@@ -99,6 +100,8 @@ If you are a [meta-buildpack][28] user, our buildpack can be used as a decorator
 
 ### Configuration
 
+#### Metric Collection
+
 **Set an API Key in your environment to enable the buildpack**:
 
 ```shell
@@ -106,6 +109,30 @@ If you are a [meta-buildpack][28] user, our buildpack can be used as a decorator
 cf set-env <YOUR_APP> DD_API_KEY <DD_API_KEY>
 # restage the application to get it to pick up the new environment variable and use the buildpack
 cf restage <YOUR_APP>
+```
+
+#### Log Collection (closed beta)
+
+To start collecting logs from your application in CloudFoundry, the Agent contained in the buildpack needs to be activated and log collection enabled.
+
+```
+cf set-env $YOUR_APP_NAME RUN_AGENT true
+cf set-env $YOUR_APP_NAME DD_LOGS_ENABLED true
+# Disable the Agent core checks to disable system metrics collection
+cf set-env $YOUR_APP_NAME DD_ENABLE_CHECKS false
+# restage the application to get it to pick up the new environment variable and use the buildpack
+cf restage $YOUR_APP_NAME
+```
+
+By default, the Agent collects logs from `stdout`/`stderr` and listens to TCP port 10514.
+It is possible to ask the Agent to listen on a different TCP port if you are streaming logs from your application in TCP.
+To disable log collection from `stdout`/`stderr`, use the following configuration:
+
+```
+# override the TCP port
+cf set-env $YOUR_APP_NAME DD_LOGS_CONFIG_TCP_FORWARD_PORT 10514
+# disable log collection on stdout/stderr
+cf set-env $YOUR_APP_NAME DISABLE_STD_LOG_COLLECTION true
 ```
 
 ### Build
@@ -223,11 +250,11 @@ Since runtime configuration applies globally, BOSH will redeploy every node in y
 
 The easiest way to check that Agent installs were successful is to filter for them in the [Host map page][14] in Datadog. The Agent BOSH release tags each host with a generic `cloudfoundry` tag, so filter by that, and optionally group hosts by any tag you wish (e.g. `bosh_job`), as in the following screenshot:
 
-{{< img src="integrations/cloud_foundry/cloud-foundry-host-map.png" alt="cloud-foundry-host-map" responsive="true" popup="true">}}
+{{< img src="integrations/cloud_foundry/cloud-foundry-host-map.png" alt="cloud-foundry-host-map" responsive="true" >}}
 
 Click on any host to zoom in, then click **system** within its hexagon to make sure Datadog is receiving metrics for it:
 
-{{< img src="integrations/cloud_foundry/cloud-foundry-host-map-detail.png" alt="cloud-foundry-host-map-detail" responsive="true" popup="true">}}
+{{< img src="integrations/cloud_foundry/cloud-foundry-host-map-detail.png" alt="cloud-foundry-host-map-detail" responsive="true" >}}
 
 ### Deploy the Datadog Firehose Nozzle
 
@@ -329,7 +356,7 @@ bosh -n -d cf-manifest deploy cf-manifest.yml
 
 On the [Metrics explorer][17] page in Datadog, search for metrics beginning `cloudfoundry.nozzle`:
 
-{{< img src="integrations/cloud_foundry/cloud-foundry-nozzle-metrics.png" alt="cloud-foundry-nozzle-metrics" responsive="true" popup="true">}}
+{{< img src="integrations/cloud_foundry/cloud-foundry-nozzle-metrics.png" alt="cloud-foundry-nozzle-metrics" responsive="true" >}}
 
 ## Data Collected
 

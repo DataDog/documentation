@@ -1,6 +1,7 @@
 ---
 title: How to investigate a log parsing issue
 kind: faq
+disable_toc: true
 further_reading:
 - link: "logs/faq/log-parsing-best-practice"
   tag: "FAQ"
@@ -8,20 +9,20 @@ further_reading:
 - link: "logs/processing"
   tag: "Documentation"
   text: Learn how to process your logs
-- link: "logs/parsing"
+- link: "logs/processing/parsing"
   tag: "Documentation"
   text: Learn more about parsing
 ---
 
-Integration pipelines support the default log format for a given technology. So if you have customized the log format or written a custom parser which is not working, your logs might not get properly parsed.
+Integration Pipelines support the default log format for a given technology. So if you have customized the log format or written a custom parser which is not working, your logs might not get properly parsed.
 Here are some guidelines on how to find the root cause of the issue and correct the parser.
 
 Before you go ahead and troubleshoot your parser, it might be interesting for you to read our documentation on Datadog [log processing][1] and [log parsing][2], as well as our [parsing best practice article][3].
 
 1. **Identify your log's pipeline**:
-    Thanks to the pipeline filters, you can easily find the processing pipeline your log went through. Integration pipeline take the source as filter, so check that your log source is correctly set.
+    Thanks to the Pipeline filters, you can easily find the processing Pipeline your log went through. Integration Pipeline take the source as filter, so check that your log source is correctly set.
 
-    {{< img src="logs/faq/integrationpipeline.png" alt="integrationpipeline" responsive="true" popup="true">}}
+    {{< img src="logs/faq/integrationpipeline.png" alt="integrationpipeline" responsive="true" >}}
 
     For integration pipeline, clone them and troubleshoot on the clone.
 
@@ -55,12 +56,12 @@ Before you go ahead and troubleshoot your parser, it might be interesting for yo
     ```
 
     From the provided sample we can see that there are no obvious differences and that the parser works fine for the sample:
-    {{< img src="logs/faq/sampleparsing.png" alt="sampleparsing" responsive="true" popup="true">}}
+    {{< img src="logs/faq/sampleparsing.png" alt="sampleparsing" responsive="true" >}}
 
     But when we test with our log, it is not working. So let's start to remove attribute one by one from the end until we find the culprit. To do so, we add ```.*``` at the end of the rule and then we remove the attributes.
 
     On the below image, we can see that the rule starts working once we have remove everything up to the user Agent:
-    {{< img src="logs/faq/Troubleshootparsing.png" alt="Troubleshootparsing" responsive="true" popup="true">}}
+    {{< img src="logs/faq/Troubleshootparsing.png" alt="Troubleshootparsing" responsive="true" >}}
 
     This means that the issue is in the user Agent attribute.
 
@@ -86,6 +87,6 @@ Before you go ahead and troubleshoot your parser, it might be interesting for yo
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/processing/
-[2]: /logs/parsing/
+[2]: /logs/processing/parsing/
 [3]: /logs/faq/log-parsing-best-practice
 [4]: /help

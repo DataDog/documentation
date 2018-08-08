@@ -13,7 +13,7 @@ further_reading:
   text: Consult your monitor status
 ---
 
-{{< img src="monitors/monitor_types/log/log_monitor_overview.png" alt="Log monitor overview" responsive="true" popup="true" >}}
+{{< img src="monitors/monitor_types/log/log_monitor_overview.png" alt="Log monitor overview" responsive="true" >}}
 
 ## Overview
 
@@ -25,11 +25,11 @@ Log monitors alert when a specified type of log exceeds a user-defined threshold
 ## Setup
 
 1. Define the search query:
-    {{< img src="monitors/monitor_types/log/define_the_search_query.png" alt="Define the search query" responsive="true" popup="true" style="width:50%;" >}}
+    {{< img src="monitors/monitor_types/log/define_the_search_query.png" alt="Define the search query" responsive="true" style="width:50%;" >}}
     The search query has the same behavior as [the log explore search][1]
 
 2. Set alert conditions:
-    {{< img src="monitors/monitor_types/log/set_alert_conditions.png" alt="Set alert conditions" responsive="true" popup="true" style="width:50%;" >}}
+    {{< img src="monitors/monitor_types/log/set_alert_conditions.png" alt="Set alert conditions" responsive="true" style="width:50%;" >}}
 
 3. Configure your **notification options**:  
     Refer to the [Notifications][2] dedicated documentation page for a detailed options.
@@ -37,5 +37,5 @@ Log monitors alert when a specified type of log exceeds a user-defined threshold
 ## Further Reading 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/explore/#search-bar
+[1]: /logs/explorer/search/
 [2]: /monitors/notifications

@@ -12,19 +12,23 @@ If you manage and deploy monitors programmatically, it’s easier to define the 
 ##### ARGUMENTS
 *   **`type`** [*required*]:  
     The [type of the monitor][3], chosen from:  
-    *   `anomaly`
-    *   `apm`
-    *   `composite`
-    *   `custom`
-    *   `event`
-    *   `forecast`
-    *   `host`
-    *   `integration`
-    *   `log`
-    *   `metric`
-    *   `network`
-    *   `outlier`
-    *   `process`
+
+| Monitor Type | type attribute value |
+| :--------    | :-------             |
+| anomaly      | `query alert`        |
+| apm          | `query alert`        |
+| composite    | `composite`          |
+| custom       | `service check`      |
+| event        | `event alert`        |
+| forecast     | `query alert`        |
+| host         | `service check`      |
+| integration  | `query alert`        |
+| live process | `process alert`      |
+| logs         | `log alert`          |
+| metric       | `query alert`        |
+| network      | `service check`      |
+| outlier      | `query alert`        |
+| process      | `service check`      |
     
 *   **`query`** [*required*]:  
     The query defines when the monitor triggers. Query syntax depends on what type of monitor you are creating:  

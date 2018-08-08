@@ -1,3 +1,11 @@
+<!-- set popup to true by default -->
+{{ if eq (.Get "popup") "false" }}
+  {{ $.Scratch.Set "popup" "false" }}
+{{ else }}
+  {{ $.Scratch.Set "popup" "true" }}
+{{ end }}
+{{ $isPopup := $.Scratch.Get "popup" }}
+
 {{ $img_width := .Get "width" }}
 {{ $img_height := .Get "height" }}
 {{ $wide :=  .Get "wide" }}
@@ -80,7 +88,7 @@
 
 {{ else }}
 
-    {{- if (and (.Get "popup") (ne $image_ext "gif")) -}}
+    {{- if (and (eq $isPopup "true") (ne $image_ext "gif")) -}}
       <a href="{{ print $img $pop_param | relURL }}" class="pop" data-toggle="modal" data-target="#popupImageModal">
     {{- else if .Get "href" -}}
       <a href="{{- with .Get "href" -}}{{- . -}}{{- end -}}"
@@ -126,7 +134,7 @@
 
     {{ end }}
 
-    {{- if (and (.Get "popup") (ne $image_ext "gif")) -}}
+    {{- if (and (eq $isPopup "true") (ne $image_ext "gif")) -}}
       </a>
     {{- else if .Get "href" -}}
       </a>

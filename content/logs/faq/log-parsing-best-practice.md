@@ -1,11 +1,12 @@
 ---
 title: Log Parsing - Best Practice
 kind: faq
+disable_toc: true
 further_reading:
 - link: "logs/processing"
   tag: "Documentation"
   text: Learn how to process your logs
-- link: "logs/parsing"
+- link: "logs/processing/parsing"
   tag: "Documentation"
   text: Learn more about parsing
 - link: "logs/faq/how-to-investigate-a-log-parsing-issue"
@@ -23,16 +24,16 @@ In this article, we walk through parsing a log from the Datadog Agent's collecto
 ```
 
 1. **Always add the sample log you are working on as a comment in your rule**:  
-    {{< img src="logs/faq/parsing_best_practice_1.png" alt="parsing_best_practice_1" responsive="true" popup="true">}}
+    {{< img src="logs/faq/parsing_best_practice_1.png" alt="parsing_best_practice_1" responsive="true" >}}
     It is possible to test your parsing rule on a sample log. As it is very helpful when you first write the rule, it might be very important in the future when coming back to the parser to investigate an issue or support a new log format.
 
 2. **Parse one attribute at a time thanks to the star trick**:  
     We do not expect you to write a parsing rule for the full log on the first draft. To make sure you check your rule one attribute at a time use a `.*` at the end of the rule. This matches anything that would follow the end of your rule.
     For example here, we first want to parse the log date, no matter what is next so we create the rule:
-    {{< img src="logs/faq/parsing_best_practice_2.png" alt="parsing_best_practice_2" responsive="true" popup="true">}}
+    {{< img src="logs/faq/parsing_best_practice_2.png" alt="parsing_best_practice_2" responsive="true" >}}
     So we know the date is correctly parsed. We can now move on to the next attribute, the severity.
     We first need to escape the pipe (special characters need to be escaped) and then match the word:
-    {{< img src="logs/faq/parsing_best_practice_3.png" alt="parsing_best_practice_3" responsive="true" popup="true">}}
+    {{< img src="logs/faq/parsing_best_practice_3.png" alt="parsing_best_practice_3" responsive="true" >}}
     And then we can keep on until we extract all the desired attributes from this log.
     
 3. **Use the right matchers**:  
@@ -57,9 +58,9 @@ In this article, we walk through parsing a log from the Datadog Agent's collecto
     ```
     Let’s say that the information dd.collector is not of any value for me and I do not want to extract it as an attribute.
     To do that we need to remove the extract section of the rule:
-    {{< img src="logs/faq/parsing_best_practice_4.png" alt="parsing_best_practice_4" responsive="true" popup="true">}}
+    {{< img src="logs/faq/parsing_best_practice_4.png" alt="parsing_best_practice_4" responsive="true" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/parsing/
-[2]: /logs/parsing/#key-value
+[1]: /logs/processing/parsing/
+[2]: /logs/processing/parsing/#key-value

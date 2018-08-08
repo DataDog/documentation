@@ -22,7 +22,7 @@ doc_link: https://docs.datadoghq.com/integrations/kubernetes/
 ddtype: check
 ---
 
-{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard" responsive="true" popup="true">}}
+{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard" responsive="true" >}}
 
 ## Overview
 

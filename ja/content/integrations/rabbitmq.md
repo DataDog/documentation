@@ -25,7 +25,7 @@ Connect RabbitMQ to Datadog in order to:
 
 Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
-* [RabbitMQインテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/rabbitmq/conf.yaml.example)
+* [RabbitMQインテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/rabbitmq/datadog_checks/rabbitmq/data/conf.yaml.example)
 * [RabbitMQインテグレーション　checks.d](https://github.com/DataDog/integrations-core/blob/master/rabbitmq/check.py)
 
 <!-- The following metrics are collected by default with the RabbitMQ integration:

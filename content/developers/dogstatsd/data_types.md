@@ -46,7 +46,7 @@ end
 
 With this one line of code we can start graphing the data. Here's an example:
 
-{{< img src="developers/metrics/graph-guides-metrics-page-views.png" alt="graph guides metrics page views" responsive="true" popup="true">}}
+{{< img src="developers/metrics/graph-guides-metrics-page-views.png" alt="graph guides metrics page views" responsive="true" >}}
 
 Note that StatsD counters are normalized over the flush interval to report per-second units. In the graph above, the marker is reporting 35.33 web page views per second at ~15:24. In contrast, if one person visited the web page each second, the graph would be a flat line at y = 1. To increment or measure values over time, see [gauges](#gauges).
 
@@ -64,6 +64,38 @@ def upload_file(file):
 Note that for counters coming from another source that are ever-increasing and never reset (for example, the number of queries from MySQL over time), we track the rate between flushed values. To get raw counts within Datadog, apply a function to your series such as _cumulative sum_ or _integral_. [Read more about Datadog functions][8].
 
 Learn more about the [Count type in the Metrics documentation][4].
+
+### Distributions
+
+Distributions are like a global version of Histograms (see below). They calculate statistical distributions across multiple hosts, allowing you to compute global percentiles across your entire dataset. Global distributions are designed to instrument logical objects, such as services, independently from the underlying hosts.
+
+To measure the duration of an HTTP request, you could measure each request time with the metric `dist.dd.dogweb.latency`:
+
+For Python:
+```python
+# Track the run time of a request.
+start_time = time.time()
+results = requests.get('https://google.com')
+duration = time.time() - start_time
+statsd.distribution('dist.dd.website.latency', duration)
+```
+
+For Ruby:
+```ruby
+start_time = Time.now
+results = Net::HTTP.get('https://google.com')
+duration = Time.now - start_time
+statsd.histogram('dist.dd.website.latency', duration)
+```
+
+The above instrumentation calculates the following data: `sum`, `count`, `average`, `minimum`, `maximum`, `50th percentile` (median), `75th percentile`, `90th percentile`, `95th percentile` and `99th percentile`. These metrics give insight into how different each request time is. We can see how long the request usually takes by graphing the median. We can see how long most requests take by graphing the 95th percentile.
+
+{{< img src="graphing/metrics/distributions/dogweb_latency.png" alt="Dogweb latency" responsive="true" >}}
+
+For this toy example, let’s say a request time of *500ms* is acceptable. Our median query time (graphed in blue) is usually less than *100 milliseconds*, which is great. Our 95th percentile (graphed in red) has spikes sometimes over one second, which is unacceptable.
+This means most of our queries are running just fine, but our worst ones are bad. If the 95th percentile were close to the median, than we would know that almost all of our requests are performing just fine.
+
+Distributions are not only for measuring times. They can be used to measure the distribution of *any* type of value, such as the size of uploaded files, or classroom test scores, for example.
 
 ### Gauges
 
@@ -143,7 +175,7 @@ The above instrumentation produces the following metrics:
 - `database.query.time.max`: maximum sampled value
 - `database.query.time.95percentile`: 95th percentile sampled value
 
-{{< img src="developers/metrics/graph-guides-metrics-query-times.png" alt="graph guides metrics query times" responsive="true" popup="true">}}
+{{< img src="developers/metrics/graph-guides-metrics-query-times.png" alt="graph guides metrics query times" responsive="true" >}}
 
 For this toy example, let's say a query time of 1 second is acceptable. Our median query time (graphed in purple) is usually less than 100 milliseconds, which is great. But unfortunately, our 95th percentile (graphed in blue) has large spikes sometimes nearing three seconds, which is unacceptable. This means most of our queries are running just fine, but our worst ones are very bad. If the 95th percentile was close to the median, then we would know that almost all of our queries are performing just fine.
 
@@ -289,6 +321,10 @@ def algorithm_two():
 
 Note that tagging is a [Datadog-specific extension][1] to StatsD.
 
+### Distributions
+
+Becuase of the global nature of Distributions, extra tools for tagging are provided. See the [Distribution Metrics][10] page for more details.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -302,3 +338,4 @@ Note that tagging is a [Datadog-specific extension][1] to StatsD.
 [7]: /developers/metrics/rates
 [8]: /graphing/miscellaneous/functions
 [9]: /graphing/event_stream/
+[10]: /graphing/metrics/distributions

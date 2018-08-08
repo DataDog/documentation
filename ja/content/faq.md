@@ -928,7 +928,7 @@ by default you'll get the average across all hosts. -->
 <li><code>@support-datadog</code> – this will reach Datadog support directly when posted in your stream.</li>
 <li><code>@all</code> – this will send a notification to all members of your organization.</li>
 <li><code>@yourname</code> – this will notify the specific user named ‘yourname’.</li>
-<li><code>@test@test.com</code> this will send an email to test@test.com.</li>
+<li><code>@test@example.com</code> this will send an email to test@example.com.</li>
 <li>If you have HipChat, Slack, Webhooks, Pagerduty or VictorOps you can use:
 <ul>
 <li><code>@hipchat-[room-name]</code> or <code>@slack-[room-name]</code> – posts the event or graph to that chat room.</li>
@@ -949,7 +949,7 @@ by default you'll get the average across all hosts. -->
 -	`@support-datadog` - イベントストリームでこの表記を使った場合は、Datadogのサポートに通知します。
 -	`@All` - 組織のすべてのメンバに通知します。
 -	`@yourname` - 'yourname'という名前のユーザに通知します。
--	`@test@test.com` test@test.comに電子メールを送信します。
+-	`@test@example.com` test@example.comに電子メールを送信します。
 -	HipChat, Slack, Webhooks, Pagerduty, VictorOpsの使っている場合は、次のことができます。
 	-	`@hipchat-\[ルーム名\]`または`@slack-[ルーム名]` - \[ルーム名\]で指定したチャットルームに、イベントやグラフをポストすることができます。
 	-	`@webhook-[webhook名]` - アラートなどwebhookをつなげたものなら全て。例に関しては、[Send alerts by SMS with customizable WebHooks and Twilio](https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio/)のblogポストを参照してください。この機能を使うためのIntegarationの基本は、[Datadog-Webhooks Integration](/ja/integrations/webhooks/)のページと、ダッシュボードの[Integration](https://app.datadoghq.com/account/settings)タブからwebhooksのタイルを選択し`configuration`タブを参照してください。

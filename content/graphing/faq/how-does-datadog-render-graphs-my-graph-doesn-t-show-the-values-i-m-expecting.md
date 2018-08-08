@@ -26,7 +26,7 @@ Metric: the metric you want to graph
 
 You can also use arithmetic on queries.
 
-[1]: /getting_started/from_the_query_to_the_graph
+[1]: /graphing/miscellaneous/from_the_query_to_the_graph
 [2]: /graphing/faq/what-is-the-granularity-of-my-graphs-am-i-seeing-raw-data-or-aggregates-on-my-graph
 [3]: /graphing/miscellaneous/functions/#rollup
 [4]: /graphing/miscellaneous/functions/
