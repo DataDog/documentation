@@ -15,7 +15,7 @@ further_reading:
 
 ## Compatibility
 
-We officially support the Java JRE 1.7 and higher of both Oracle JDK and OpenJDK.  Other JVM compatible languages (Scala, Groovy, Kotlin, etc) should work, but may be missing the instrumentation needed to be useful.  To see what web frameworks, libraries, and datastores we support, see the [Integrations section](#integrations).
+We officially support the Java JRE 1.7 and higher of both Oracle JDK and OpenJDK. To see what web frameworks, libraries, and datastores we support, see the [Integrations section](#integrations).
 
 To improve visibility into applications using unsupported frameworks, consider:
 
@@ -47,7 +47,7 @@ The tracer is configured using System Properties and Environment Variables as fo
 
 | Config              | System Property        | Environment Variable      | Default            | Description                                                                                                                                                                        |
 | :-----------------  | :--------------------  | :------------------------ | :----------------- | :----------                                                                                                                                                                        |
-| ``service.name`     | `dd.service.name`      | `DD_SERVICE_NAME`         | `unnamed-java-app` | The name of a set of processes that do the same job. Used for grouping stats for your application.                                                                                 |
+| `service.name`     | `dd.service.name`      | `DD_SERVICE_NAME`         | `unnamed-java-app` | The name of a set of processes that do the same job. Used for grouping stats for your application.                                                                                 |
 | `service.mapping`   | `dd.service.mapping`   | `DD_SERVICE_MAPPING`      | `null`             | (Example: `key1:value1,key2:value2`) Dynamically rename services via configuration. Useful for making databases have distinct names across different services.                     |
 | `writer.type`       | `dd.writer.type`       | `DD_WRITER_TYPE`          | `DDAgentWriter`    | Default value sends traces to the trace Agent. Configuring with `LoggingWriter` instead writes traces out to the console.                                                          |
 | `agent.host`        | `dd.agent.host`        | `DD_AGENT_HOST`           | `localhost`        | Hostname for where to send traces to. If using a containerized environment, configure this to be the host ip.  See our [docker docs][4] for additional detail.                     |
@@ -81,14 +81,6 @@ Instrumentation may come from auto-instrumentation, the OpenTracing api, or a mi
 
 #### Web Frameworks
 
-Web Framework tracing provides:
-
-* Timing HTTP request to response
-* Tags for the HTTP request (status code, method, etc)
-* Error and stacktrace capturing
-* Linking work created within a web request
-* Distributed Tracing
-
 `dd-java-agent` includes support for automatically tracing the following web frameworks.
 
 | Server                  | Versions   |
@@ -98,19 +90,20 @@ Web Framework tracing provides:
 | Jax-RS Annotations      | JSR311-API |
 | Spring-Web              | 4.0+       |
 
+Web Framework tracing provides:
+
+* Timing HTTP request to response
+* Tags for the HTTP request (status code, method, etc)
+* Error and stacktrace capturing
+* Linking work created within a web request
+* Distributed Tracing
+
 *Note:* Many application servers are Servlet compatible, such as Tomcat, Jetty, Websphere, Weblogic, etc.
 Also, frameworks like Spring Boot and Dropwizard inherently work because they use a Servlet compatible embedded application server.
 
 Don't see your desired web frameworks? We're continually adding additional support, [check with our team][2] to see if we can help.
 
 #### Networking Frameworks
-
-Networking tracing provides:
-
-* Timing request to response
-* Tags for the request (e.g. response code)
-* Error and stacktrace capturing
-* Distributed Tracing
 
 `dd-java-agent` includes support for automatically tracing the following networking frameworks.
 
@@ -124,15 +117,17 @@ Networking tracing provides:
 | Kafka-Clients       | 0.11+    |
 | Kafka-Streams       | 0.11+    |
 
+Networking tracing provides:
+
+* Timing request to response
+* Tags for the request (e.g. response code)
+* Error and stacktrace capturing
+* Distributed Tracing
+
+
 Don't see your desired networking framework? We're continually adding additional support, [check with our team][2] to see if we can help.
 
 #### Datastores
-
-Datastore tracing provides:
-
-* Timing request to response
-* Query info (e.g. a sanitized query string)
-* Error and stacktrace capturing
 
 `dd-java-agent` includes support for automatically tracing the following database frameworks/drivers.
 
@@ -155,6 +150,12 @@ Datastore tracing provides:
 *  MariaDB
 *  Oracle
 *  Postgres SQL
+
+Datastore tracing provides:
+
+* Timing request to response
+* Query info (e.g. a sanitized query string)
+* Error and stacktrace capturing
 
 Don't see your desired datastores? We're continually adding additional support, [check with our team][2] to see if we can help.
 
