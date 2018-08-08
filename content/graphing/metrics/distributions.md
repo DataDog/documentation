@@ -11,7 +11,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">                                                                   
-This is documentation for a beta feature.  Please [contact support][6] to enable distribution metrics for your account.
+This is documentation for a beta feature.  Please <a href="https://docs.datadoghq.com/help/">contact support</a> to enable distribution metrics for your account.
 </div>                                                                                              
 
 ## Overview
@@ -95,4 +95,3 @@ The following gif demonstrates inspecting the aggregations created for a metric,
 [3]: https://app.datadoghq.com/metric/distribution_metrics
 [4]: /developers/metrics/custom_metrics
 [5]: /developers/metrics/distributions
-[6]: /help
