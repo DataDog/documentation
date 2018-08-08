@@ -38,4 +38,4 @@ For example, The URL `https://app.datadoghq.com/event/event?id=1` is associated 
 [2]: /help
 [3]: https://app.datadoghq.com/account/new_org
 [4]: https://app.datadoghq.com/account/billing
-[5]: mailto://success@datadoghq.com
+[5]: mailto:success@datadoghq.com
