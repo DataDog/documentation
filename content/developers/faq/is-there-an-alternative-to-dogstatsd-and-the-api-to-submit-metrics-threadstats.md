@@ -15,7 +15,7 @@ Threadstats comes with our Python [datadogpy library][1] that includes:
 ## Threadstats
 
 Threadstats is very good at monitoring your application code.
-It collects metrics with very little overhead and allows flushing metrics in process, in a thread or in a greenlet, depending on your application’s needs.
+It collects metrics with very little overhead and allows flushing metrics in process, in a thread or in a greenlet, depending on your application's needs.
 
 In a nutshell, threadstats doesn't slow down your code (contrary to direct api calls which wait for a response from the distant server before resuming the rest of the program) and provides some flexibility and doesn't require the Datadog Agent (contrary to DogStatsD).
 

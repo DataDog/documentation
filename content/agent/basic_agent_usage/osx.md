@@ -23,7 +23,7 @@ This page outlines the basic features of the Datadog Agent.
 If you haven't installed the Agent yet, instructions can be found
 [in the Datadog Agent integration page][1].  
 
-By default, your Agent is installed in its own sandbox located at `/opt/datadog-agent`. You’re free to move this folder wherever you like.
+By default, your Agent is installed in its own sandbox located at `/opt/datadog-agent`. You're free to move this folder wherever you like.
 However, we assume that the Agent is installed in its default location, so be sure to modify the instructions accordingly if you decide to move it to another location.
 
 ## Commands

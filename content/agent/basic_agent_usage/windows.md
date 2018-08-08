@@ -128,7 +128,7 @@ Run the Agent installer package for the latest 5.x version,  instructions can be
 
 ## Uninstall the Agent
 
-**It's important that the original account used to install the Agent is also used to remove it, otherwise it’s possible remnants are left behind and it won't be cleanly removed.**
+**It's important that the original account used to install the Agent is also used to remove it, otherwise it's possible remnants are left behind and it won't be cleanly removed.**
 
 Uninstall the Agent using Add/Remove Programs, alternatively, it's possible to to use Powershell as well. Here is a one liner:
 
@@ -264,9 +264,9 @@ When adding your own services, be sure to follow the formatting exactly as shown
 
 {{< img src="agent/faq/windows_DHCP_ service.png" alt="Windows DHCP Service" responsive="true" style="width:75%;">}}
 
-Also, any time you modify an Integration you’ll need to restart the Datadog Service. You can do this from services.msc or right from the UI via Actions.
+Also, any time you modify an Integration you'll need to restart the Datadog Service. You can do this from services.msc or right from the UI via Actions.
 
-For Services, Datadog doesn't track the metrics, only their availability. (For metrics you’ll want to use [Process](/#monitoring-windows-processes) or [WMI Integration][6]). To set up a Monitor, select the "Integration" then "Windows Service" monitor type. There you can "Pick Monitor Scope" and choose the service you would like to monitor.
+For Services, Datadog doesn't track the metrics, only their availability. (For metrics you'll want to use [Process](/#monitoring-windows-processes) or [WMI Integration][6]). To set up a Monitor, select the "Integration" then "Windows Service" monitor type. There you can "Pick Monitor Scope" and choose the service you would like to monitor.
 
 ### Monitoring system load for Windows
 
@@ -304,7 +304,7 @@ When adding your own processes, be sure to follow the formatting exactly as show
 
 When you're done editing the file, press "Save" to save it, then "Enable" to enable it.
 
-Any time you modify a Datadog integration you’ll need to restart the Datadog Agent service. You can do this by clicking the "Actions" button in the top left corner, then selecting "Restart", or you can restart "Datadog Agent" in your Services Management Snap-in Console (services.msc).
+Any time you modify a Datadog integration you'll need to restart the Datadog Agent service. You can do this by clicking the "Actions" button in the top left corner, then selecting "Restart", or you can restart "Datadog Agent" in your Services Management Snap-in Console (services.msc).
 
 To verify that your Process check is working, click on "Logs and Status", then "Agent Status". Scroll down to the "Checks" section and you should see "process" reporting on each process instance you have setup in your configuration file.
 

@@ -7,7 +7,7 @@ external_redirect: /api/#create-a-monitor
 
 ## Create a monitor
 
-If you manage and deploy monitors programmatically, it’s easier to define the monitor in the Datadog UI and [export its valid JSON][4].
+If you manage and deploy monitors programmatically, it's easier to define the monitor in the Datadog UI and [export its valid JSON][4].
 
 ##### ARGUMENTS
 *   **`type`** [*required*]:  

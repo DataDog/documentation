@@ -21,7 +21,7 @@ There are two kinds of JMX attributes that JMXFetch is able to collect:
 
 ### 'Simple attributes'
 
-These are integer, float, double, long, boolean etc …
+These are integer, float, double, long, boolean etc ...
 
 Note: Boolean values of true result in 1 and false in 0. [Check the list of supported types][2]
 

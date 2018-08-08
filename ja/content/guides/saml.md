@@ -11,11 +11,11 @@ This guide assumes that you already have a SAML Identity Provider up and running
 
 ## SAML
 
-Configuring [SAML (Security Assertion Markup Language)](http://en.wikipedia.org/wiki/Security_Assertion_Markup_Language) for your Datadog account will let you and all your teammates log in to Datadog using the credentials stored in your organization’s Active Directory, LDAP, or other identity store that has been configured with a SAML Identity Provider.
+Configuring [SAML (Security Assertion Markup Language)](http://en.wikipedia.org/wiki/Security_Assertion_Markup_Language) for your Datadog account will let you and all your teammates log in to Datadog using the credentials stored in your organization's Active Directory, LDAP, or other identity store that has been configured with a SAML Identity Provider.
 
 ## Configure SAML
 
-If you are a Datadog Admin, there is a “Configure SAML” option in the drop down menu that is accessed by clicking on your username in the upper right corner of the Datadog web page.
+If you are a Datadog Admin, there is a "Configure SAML" option in the drop down menu that is accessed by clicking on your username in the upper right corner of the Datadog web page.
 {{< img src="guides/saml/saml_configure.png" >}}
 
 That brings you to the "SAML Single Sign On Configuration" page where you can:
@@ -26,7 +26,7 @@ That brings you to the "SAML Single Sign On Configuration" page where you can:
 
     After you've chosen the file, click "Upload File".
 
-2. Datadog’s [Service Provider metadata can be found here](https://app.datadoghq.com/account/saml/metadata.xml). You can use this SP Metadata to configure your IdP to recognize Datadog as a Service Provider.
+2. Datadog's [Service Provider metadata can be found here](https://app.datadoghq.com/account/saml/metadata.xml). You can use this SP Metadata to configure your IdP to recognize Datadog as a Service Provider.
 3. After you upload the IdP Metadata and configure your IdP, you will need up enable SAML in Datadog by clicking the Enable button.
 {{< img src="guides/saml/saml_enable.png" >}}
 Once SAML is configured in Datadog and your IdP is set up to accept requests from Datadog, users can log in by using the Single Sign On URL that is shown in the Status box at the top of the SAML Configuration page.
@@ -42,16 +42,16 @@ The Single Sign On URL will also be displayed on the Team page. Loading this URL
 * Datadog will specify `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` for the Format of the **NameIDPolicy** in Assertion Requests.
 * Assertions must be signed.
 * Assertions can be encrypted, but unencrypted assertions will be accepted.
-* Datadog’s SP Metadata can be found at [https://app.datadoghq.com/account/saml/metadata.xml][7].
+* Datadog's SP Metadata can be found at [https://app.datadoghq.com/account/saml/metadata.xml][7].
 
    [7]: https://app.datadoghq.com/account/saml/metadata.xml
 
 ##  Setting Attributes
 
 * Attributes may be included with the Assertion. Datadog looks for 3 Attributes in the AttributeStatement:
-1. **eduPersonPrincipalName**: If specified, the eduPersonPrincipalName must correspond to the user’s Datadog username. The username is usually the user’s email address.
-2. **sn**: This is optional, and should be set to the user’s surname.
-3. **givenName**: This is optional, and should be set to the user’s first, or given name.
+1. **eduPersonPrincipalName**: If specified, the eduPersonPrincipalName must correspond to the user's Datadog username. The username is usually the user's email address.
+2. **sn**: This is optional, and should be set to the user's surname.
+3. **givenName**: This is optional, and should be set to the user's first, or given name.
 * Datadog expects that Attributes use the NameFormat
 `urn:oasis:names:tc:SAML:2.0:attrname-format:uri` or `urn:oasis:names:tc:SAML:2.0:attrname-format:basic`. The name used for each attribute will depend on the NameFormat that your IdP uses.
 * If your IdP is configured to use the NameFormat `urn:oasis:names:tc:SAML:2.0:attrname-format:uri`:
@@ -63,7 +63,7 @@ The Single Sign On URL will also be displayed on the Team page. Loading this URL
 2. **sn**: The IdP should set `urn:mace:dir:attribute-def:sn` as the Name of the Attribute
 3. **givenName**: The IdP should set `urn:mace:dir:attribute-def:givenName` as the Name of the Attribute
 * If **eduPersonPrincipalName** exists in the AttributeStatement, the value of this attribute will be used for the username. If **eduPersonPrincipalName** is not included in the AttributeStatement, the username will be taken from the NameID in the Subject. The NameID must use the Format `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress`.
-* If **sn** and **givenName** are provided, they will be used to update the user’s name in their Datadog profile.
+* If **sn** and **givenName** are provided, they will be used to update the user's name in their Datadog profile.
 
 ## Specific SAML IdP
 

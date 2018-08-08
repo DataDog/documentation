@@ -24,7 +24,7 @@ Configure Syslog-ng to gather logs from your host, containers, & services.
 
 ## Setup
 ### Log collection
-1. Collect system logs and log files In `/etc/syslog-ng/syslog-ng.conf` make sure the source is correctly defined:
+1. Collect system logs and log files In `/etc/syslog-ng/syslog-ng.conf` make sure the source is correctly defined:
     ```
     source s_src {
     system();
@@ -42,7 +42,7 @@ Configure Syslog-ng to gather logs from your host, containers, & services.
 
     source s_files {
     file("path/to/your/file1.log",flags(no-parse),follow_freq(1),program_override("<program_name_file1>"));
-     file("path/to/your/file2.log",flags(no-parse),follow_freq(1),program_override("<program_name_file2>"));
+     file("path/to/your/file2.log",flags(no-parse),follow_freq(1),program_override("<program_name_file2>"));
 
     };
     ```
@@ -79,12 +79,12 @@ Configure Syslog-ng to gather logs from your host, containers, & services.
     2. Change the definition of the destination to the following:
 
         ```
-        destination d_datadog { tcp("intake.logs.datadoghq.com" port(10516)     tls(peer-verify(required-untrusted) ca_dir('/opt/syslog-ng/certs.d/')) template(DatadogFormat)); };
+        destination d_datadog { tcp("intake.logs.datadoghq.com" port(10516)     tls(peer-verify(required-untrusted) ca_dir('/opt/syslog-ng/certs.d/')) template(DatadogFormat)); };
         ```
 
     More information about the TLS parameters and possibilities for syslog-ng available in their [official documentation][2].
 
-5. Restart syslog-ng 
+5. Restart syslog-ng 
 
 ## Troubleshooting
 Need help? Contact [Datadog Support][3].

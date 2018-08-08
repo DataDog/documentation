@@ -342,8 +342,8 @@ You can post events to your Datadog event stream. You can tag them, set priority
 
 Mandatory fields:
 
-  - `title` (String) — Event title.
-  - `text` (String) — Event text. Supports line breaks.
+  - `title` (String) - Event title.
+  - `text` (String) - Event text. Supports line breaks.
 
 Events are aggregated on the Event Stream based on: <br/>
 'hostname/event_type/source_type/aggregation_key'<br/>
@@ -364,12 +364,12 @@ statsd.event('SO MUCH SNOW', 'The city is paralyzed!', alert_type='error', tags=
 
 **必須フィールド**：
 
-  - `title` (String) — イベントのタイトル。
-  - `text` (String) — イベントテキスト。改行をサポートしています。
+  - `title` (String) - イベントのタイトル。
+  - `text` (String) - イベントテキスト。改行をサポートしています。
 
 イベントは、イベントストリーム上で次の分類によって集約されます：
 
-‘hostname/event_type/source_type/aggregation_key’
+'hostname/event_type/source_type/aggregation_key'
 
 `event_type`に情報がない場合、そのイベントは、他の`event_type`が空のイベントとグループ化されます。
 
@@ -387,26 +387,26 @@ statsd.event('SO MUCH SNOW', 'The city is paralyzed!', alert_type='error', tags=
   - Event title.
   - Event text. Supports line breaks.
 - Optional:
-  - `date_happened` (Time, None) — default: None — Assign a timestamp to the event. Default is now when none.
-  - `hostname` (String, None) — default: None — Assign a hostname to the event.
-  - `aggregation_key` (String, None) — default: None — Assign an aggregation key to the event, to group it with some others.
-  - `priority` (String, None) — default: 'normal' — Can be 'normal' or 'low'.
-  - `source_type_name` (String, None) — default: None — Assign a source type to the event.
-  - `alert_type` (String, None) — default: 'info' — Can be 'error', 'warning', 'info' or 'success'.
-  - `tags` - (Array[str], None) — default: None — An array of tags -->
+  - `date_happened` (Time, None) - default: None - Assign a timestamp to the event. Default is now when none.
+  - `hostname` (String, None) - default: None - Assign a hostname to the event.
+  - `aggregation_key` (String, None) - default: None - Assign an aggregation key to the event, to group it with some others.
+  - `priority` (String, None) - default: 'normal' - Can be 'normal' or 'low'.
+  - `source_type_name` (String, None) - default: None - Assign a source type to the event.
+  - `alert_type` (String, None) - default: 'info' - Can be 'error', 'warning', 'info' or 'success'.
+  - `tags` - (Array[str], None) - default: None - An array of tags -->
 
 #### 設定項目
 - 必須項目:
-  - `title` (String) — イベントのタイトル。
-  - `text` (String) — イベントテキスト。改行をサポートしています。
+  - `title` (String) - イベントのタイトル。
+  - `text` (String) - イベントテキスト。改行をサポートしています。
 - オプション項目:
-  - `date_happened` (Time, None) — default: None — イベントにタイムスタンプを付けます。
-  - `hostname` (String, None) — default: None — イベントにホスト名を付けます。
-  - `aggregation_key` (String, None) — default: None — 他のイベントとグループ分けするために集約用のキーを付けます。
-  - `priority` (String, None) — default: 'normal' — 'normal' または 'low'を指定します。
-  - `source_type_name` (String, None) — default: None — イベントにソースタイプを付けます。
-  - `alert_type` (String, None) — default: 'info' — 'error', 'warning', 'info', 'success'のどれかを指定します。
-  - `tags` - (Array\[str\], None) — default: None — タグのリストを付けます。
+  - `date_happened` (Time, None) - default: None - イベントにタイムスタンプを付けます。
+  - `hostname` (String, None) - default: None - イベントにホスト名を付けます。
+  - `aggregation_key` (String, None) - default: None - 他のイベントとグループ分けするために集約用のキーを付けます。
+  - `priority` (String, None) - default: 'normal' - 'normal' または 'low'を指定します。
+  - `source_type_name` (String, None) - default: None - イベントにソースタイプを付けます。
+  - `alert_type` (String, None) - default: 'info' - 'error', 'warning', 'info', 'success'のどれかを指定します。
+  - `tags` - (Array\[str\], None) - default: None - タグのリストを付けます。
 
 <!-- ## Configuration
 
@@ -527,30 +527,30 @@ the packets:
 
 <!-- #### Fields
 - Mandatory:
-  - `title` — Event title.
-  - `text` — Event text. Supports line breaks.
+  - `title` - Event title.
+  - `text` - Event text. Supports line breaks.
 - Optional: `|[key]:[value]`
-  - `|d:date_happened` — default: None — Assign a timestamp to the event. Default is the current Unix epoch timestamp when not supplied.
-  - `|h:hostname` — default: None — Assign a hostname to the event.
-  - `|k:aggregation_key` — default: None — Assign an aggregation key to the event, to group it with some others.
-  - `|p:priority` — default: 'normal' — Can be “normal” or “low”.
-  - `|s:source_type_name` — default: None — Assign a source type to the event.
-  - `|t:alert_type` — default: 'info' — Can be “error”, “warning”, “info” or “success”.
-  - `|#tag1:value1,tag2,tag3:value3` — default: None. <strong><em><br/>
+  - `|d:date_happened` - default: None - Assign a timestamp to the event. Default is the current Unix epoch timestamp when not supplied.
+  - `|h:hostname` - default: None - Assign a hostname to the event.
+  - `|k:aggregation_key` - default: None - Assign an aggregation key to the event, to group it with some others.
+  - `|p:priority` - default: 'normal' - Can be "normal" or "low".
+  - `|s:source_type_name` - default: None - Assign a source type to the event.
+  - `|t:alert_type` - default: 'info' - Can be "error", "warning", "info" or "success".
+  - `|#tag1:value1,tag2,tag3:value3` - default: None. <strong><em><br/>
   Note: The `:` in tags is part of the tag list string and has no parsing purpose like for the other parameters.</em></strong> -->
 
 #### 設定項目
 - 必須項目:
-  - `title` — イベントのタイトルを指定できます。
-  - `text` — イベントテキストを指定できます。改行をサポートしています。
+  - `title` - イベントのタイトルを指定できます。
+  - `text` - イベントテキストを指定できます。改行をサポートしています。
 - オプション項目: `|[key]:[value]`
-  - `|d:date_happened` — default: None — イベントにタイムスタンプを指定できます。オプションへの設定がない場合は、現在のUNIX時間が付けられます。
-  - `|h:hostname` — default: None — イベントにホスト名を指定できます。
-  - `|k:aggregation_key` — default: None — 他のイベントとグループ分けするために集約用のキーを指定できます。
-  - `|p:priority` — default: 'normal' — ‘normal’ または ‘low’を指定できます。
-  - `|s:source_type_name` — default: None — イベントにソースタイプを指定します。
-  - `|t:alert_type` — default: 'info' — ‘error’, ‘warning’, ‘info’, ‘success’が指定できます。
-  - `|#tag1:value1,tag2,tag3:value3` — default: None.
+  - `|d:date_happened` - default: None - イベントにタイムスタンプを指定できます。オプションへの設定がない場合は、現在のUNIX時間が付けられます。
+  - `|h:hostname` - default: None - イベントにホスト名を指定できます。
+  - `|k:aggregation_key` - default: None - 他のイベントとグループ分けするために集約用のキーを指定できます。
+  - `|p:priority` - default: 'normal' - 'normal' または 'low'を指定できます。
+  - `|s:source_type_name` - default: None - イベントにソースタイプを指定します。
+  - `|t:alert_type` - default: 'info' - 'error', 'warning', 'info', 'success'が指定できます。
+  - `|#tag1:value1,tag2,tag3:value3` - default: None.
   <strong><em><br/>注: それぞれのタグ文字列に含まれる`:`は、タグの一部です。</em></strong>
 
 <!-- ## Source

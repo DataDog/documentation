@@ -49,7 +49,7 @@ Agent 6 is the latest major version of the Datadog Agent. The big difference bet
 
 * [DogStatsD][6] can be used over a Unix socket instead of over udp.
 
-* Custom build your Agent v6 and [DogStatsD][6] much easier and with much more configuration options, to include or exclude almost anything. There is also a “puppy” Agent, which is a truly minimal installation.
+* Custom build your Agent v6 and [DogStatsD][6] much easier and with much more configuration options, to include or exclude almost anything. There is also a "puppy" Agent, which is a truly minimal installation.
 
 * Agent 6 uses ports `5000` and `5001` by default. You can specify different ports for `expvar_port` and `cmd_port` in the `datadog.yaml` file.
 

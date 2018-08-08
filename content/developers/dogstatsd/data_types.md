@@ -92,7 +92,7 @@ The above instrumentation calculates the following data: `sum`, `count`, `averag
 
 {{< img src="graphing/metrics/distributions/dogweb_latency.png" alt="Dogweb latency" responsive="true" >}}
 
-For this toy example, let’s say a request time of *500ms* is acceptable. Our median query time (graphed in blue) is usually less than *100 milliseconds*, which is great. Our 95th percentile (graphed in red) has spikes sometimes over one second, which is unacceptable.
+For this toy example, let's say a request time of *500ms* is acceptable. Our median query time (graphed in blue) is usually less than *100 milliseconds*, which is great. Our 95th percentile (graphed in red) has spikes sometimes over one second, which is unacceptable.
 This means most of our queries are running just fine, but our worst ones are bad. If the 95th percentile were close to the median, than we would know that almost all of our requests are performing just fine.
 
 Distributions are not only for measuring times. They can be used to measure the distribution of *any* type of value, such as the size of uploaded files, or classroom test scores, for example.

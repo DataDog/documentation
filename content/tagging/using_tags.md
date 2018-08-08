@@ -37,8 +37,8 @@ You are now looking at a chosen metric over all the hosts that have that particu
 
 To group using tags, enter the key part of the tag in the `avg by:` textbox.
 
-For instance, if you have a time series graph showing a metric tagged by the reporting hosts roles —`role:database`, `role:frontend`, or `role:loadbalancer`— enter role in the **avg_by** textbox.
-This causes the graph to show just one line for each tag value — `database`, `frontend`, and `loadbalancer`. Each line represents the average metric value across all hosts that share that role.
+For instance, if you have a time series graph showing a metric tagged by the reporting hosts roles -`role:database`, `role:frontend`, or `role:loadbalancer`- enter role in the **avg_by** textbox.
+This causes the graph to show just one line for each tag value - `database`, `frontend`, and `loadbalancer`. Each line represents the average metric value across all hosts that share that role.
 
 {{< img src="tagging/dashboardtags.png" alt="Tags in Dashboards avgby textbox" responsive="true" style="width:70%;">}}
 
@@ -78,7 +78,7 @@ Web server 1: api.metric('page.views', [(1317652676, 100), ...], host="example.c
 Web server 2: api.metric('page.views', [(1317652676, 500), ...], host="example.com")
 ```
 
-What we recommend doing is leaving off the hostname; it then defaults to the host that is sending that point, since they’re different hosts it's treated as different points:
+What we recommend doing is leaving off the hostname; it then defaults to the host that is sending that point, since they're different hosts it's treated as different points:
 
 ```
 Web server 1: api.metric('page.views', [(1317652676, 100), ...], tags=['domain:example.com'])

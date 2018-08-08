@@ -87,7 +87,7 @@ Now that your logs are parsed and you have facets and Measure over the important
 
 {{< img src="logs/log_analytics.png" alt="Log Analytics" responsive="true" style="width:70%;">}}
 
-To see the logs that underlie a value or range of values in the graph, just click on the desired point and choose “[view logs][22]” to open a contextual panel with all the underlying logs:
+To see the logs that underlie a value or range of values in the graph, just click on the desired point and choose "[view logs][22]" to open a contextual panel with all the underlying logs:
 
 Follow our [log graphing guide][23] to learn more about all the graphing option.
 

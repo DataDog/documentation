@@ -32,7 +32,7 @@ private: true
 * [Use our Webhook Integration to create a trello card][12]
 * [Using Postman With Datadog APIs][13]
 * [Calling on Datadog's API with the Webhooks Integration][14]
-* [Dogshell, Quickly Use Datadog’s API from Terminal/Shell][15]
+* [Dogshell, Quickly Use Datadog's API from Terminal/Shell][15]
 * [Query data to a text file, step by step][16]
 * [How to post AppDynamics events to Datadog][17]
 * [I'm receiving a 202 but not seeing data][18]

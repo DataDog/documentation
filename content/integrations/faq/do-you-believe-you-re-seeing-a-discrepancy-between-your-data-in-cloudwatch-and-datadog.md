@@ -1,5 +1,5 @@
 ---
-title: Do you believe you’re seeing a discrepancy between your data in CloudWatch and Datadog?
+title: Do you believe you're seeing a discrepancy between your data in CloudWatch and Datadog?
 kind: faq
 ---
 

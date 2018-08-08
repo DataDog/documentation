@@ -35,7 +35,7 @@ usermod -a -G systemd-journal dd-agent
 
 ### Configuration
 
-Create the `journald.d/conf.yaml` file in the in the Agent’s `conf.d/` folder at the root of your Agent's directory.
+Create the `journald.d/conf.yaml` file in the in the Agent's `conf.d/` folder at the root of your Agent's directory.
 
 #### Log collection
 

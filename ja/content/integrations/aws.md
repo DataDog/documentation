@@ -438,7 +438,7 @@ To begin, the CloudWatch API only offers a metric-by-metric crawl to pull data. 
 
 On the Datadog side, we do have the ability to prioritize certain metrics within an account to pull them in faster, depending on the circumstances. Please contact [support@datadoghq.com][6] for more info on this.
 
-To obtain metrics with virtually zero delay, we recommend installing the Datadog Agent on those hosts. We’ve
+To obtain metrics with virtually zero delay, we recommend installing the Datadog Agent on those hosts. We've
 written a bit about this [here][7],  especially in relation to CloudWatch.
 -->
 ### メトリクスが遅延している？という場合
@@ -449,7 +449,7 @@ To begin, the CloudWatch API only offers a metric-by-metric crawl to pull data. 
 
 On the Datadog side, we do have the ability to prioritize certain metrics within an account to pull them in faster, depending on the circumstances. Please contact [support@datadoghq.com][6] for more info on this.
 
-To obtain metrics with virtually zero delay, we recommend installing the Datadog Agent on those hosts. We’ve
+To obtain metrics with virtually zero delay, we recommend installing the Datadog Agent on those hosts. We've
 written a bit about this [here][7],  especially in relation to CloudWatch.
 
 <!--
@@ -464,13 +464,13 @@ CloudWatch's api returns only metrics with datapoints, so if for instance an ELB
 <!--
 ### Wrong count of aws.elb.healthy_host_count?
 
-When the cross-zone load balancing option is enabled on an ELB, all the instances attached to this ELB are considered part of all availability zones (on CloudWatch’s side), so if you have 2 instances in 1a and 3 in ab, the metric will display 5 instances per availability zone.
-As this can be counter intuitive, we’ve added new metrics, **aws.elb.healthy_host_count_deduped** and **aws.elb.un_healthy_host_count_deduped**, that display the count of healthy and unhealthy instances per availability zone, regardless of if this cross-zone load balancing option is enabled or not.
+When the cross-zone load balancing option is enabled on an ELB, all the instances attached to this ELB are considered part of all availability zones (on CloudWatch's side), so if you have 2 instances in 1a and 3 in ab, the metric will display 5 instances per availability zone.
+As this can be counter intuitive, we've added new metrics, **aws.elb.healthy_host_count_deduped** and **aws.elb.un_healthy_host_count_deduped**, that display the count of healthy and unhealthy instances per availability zone, regardless of if this cross-zone load balancing option is enabled or not.
 -->
 ### aws.elb.healthy_host_count のカウントが間違っているのでは？という場合
 
-When the cross-zone load balancing option is enabled on an ELB, all the instances attached to this ELB are considered part of all availability zones (on CloudWatch’s side), so if you have 2 instances in 1a and 3 in ab, the metric will display 5 instances per availability zone.
-As this can be counter intuitive, we’ve added new metrics, **aws.elb.healthy_host_count_deduped** and **aws.elb.un_healthy_host_count_deduped**, that display the count of healthy and unhealthy instances per availability zone, regardless of if this cross-zone load balancing option is enabled or not.
+When the cross-zone load balancing option is enabled on an ELB, all the instances attached to this ELB are considered part of all availability zones (on CloudWatch's side), so if you have 2 instances in 1a and 3 in ab, the metric will display 5 instances per availability zone.
+As this can be counter intuitive, we've added new metrics, **aws.elb.healthy_host_count_deduped** and **aws.elb.un_healthy_host_count_deduped**, that display the count of healthy and unhealthy instances per availability zone, regardless of if this cross-zone load balancing option is enabled or not.
 
 <!--
 ### Duplicated hosts when installing the agent?

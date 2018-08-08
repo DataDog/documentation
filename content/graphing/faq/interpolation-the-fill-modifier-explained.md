@@ -37,7 +37,7 @@ where X and Y are interpolated using data after and before the interval displaye
 
 Interpolation occurs when more than 1 source corresponds to your graph query i.e.:
 
-1. for space-aggregation: avg:system.cpu.user{env:prod}. If you have 2 or more hosts with the tag “env:prod”, our system computes the average over time and needs interpolation to do so.
+1. for space-aggregation: avg:system.cpu.user{env:prod}. If you have 2 or more hosts with the tag "env:prod", our system computes the average over time and needs interpolation to do so.
 2. for group queries: net.bytes_rcvd{*} by {host}. No computation across sources may be performed here, but providing aligned series makes graph line mouse over and comparisons easier.
 
 Interpolation is not needed:
@@ -57,11 +57,11 @@ The fill modifier controls interpolation parameters:
 * fill(linear, X) gives you a linear interpolation up to X seconds after real samples.
 * fill(last, X) just replicates the last sample value up to X secs.
 * fill(zero, X) inserts 0 where the interpolation is needed up to X secs.
-* fill(null, X) disables interpolation, the value of X doesn’t matter.
+* fill(null, X) disables interpolation, the value of X doesn't matter.
 
 ## FAQ
 
-**There’s a gap in my metric, fill(zero) doesn’t do anything, I still have a long straight line on my graph.**
+**There's a gap in my metric, fill(zero) doesn't do anything, I still have a long straight line on my graph.**
 
 Graphs in Datadog are just a series of datapoints joined by lines. If you have a long period without any data, this translates into a long straight line as interpolation is not meant to add values to your metric series.
 Rather, interpolation is about aligning series to make aggregation and multi-line graphs possible.
