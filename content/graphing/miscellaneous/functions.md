@@ -223,9 +223,9 @@ Delta value between points for a given metric
 
 ## Smoothing
 
-### asap()
+### autosmooth()
 
-The `asap()` function applies a moving average to the time series, using the [ASAP algorithm][5] to choose the optimal span for the moving average. When applied to a group-by query, `asap()` will use the same span for all groups.
+The `autosmooth()` function applies a moving average to the time series. The algorithm used to choose the optimal span for the moving average is inspired by the [ASAP algorithm][5]. When applied to a group-by query, `autosmooth()` will use the same span for all groups.
 
 ### ewma_3()
 
