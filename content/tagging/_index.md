@@ -70,15 +70,15 @@ Tags may be added using any (or all) of the following methods:
 
 Here is an example of tags using the time-series chart editor. For the first screenshot, no tags have been applied, and we're observing average CPU across all hosts:
 
-{{< img src="getting_started/tags/Tags_1.png" alt="Tags_1" responsive="true" style="width:75%;">}}
+{{< img src="tagging/Tags_1.png" alt="Tags_1" responsive="true" style="width:75%;">}}
 
 In this next example, we've applied a tag (region:eastus) that enables us to look at CPU across the US East Region. We've used region as an example, but you could use any arbitrary tag, including application, service, environment, etc.
 
-{{< img src="getting_started/tags/Tags_2.png" alt="Tags_2" responsive="true" style="width:75%;">}}
+{{< img src="tagging/Tags_2.png" alt="Tags_2" responsive="true" style="width:75%;">}}
 
 In this last example, we've used the second empty field labeled as "everything" by option to show an individual timeseries line for each host. Now we're seeing server CPU for individual hosts running in the US East Region.
 
-{{< img src="getting_started/tags/Tags_3.png" alt="Tags_3" responsive="true" style="width:75%;">}}
+{{< img src="tagging/Tags_3.png" alt="Tags_3" responsive="true" style="width:75%;">}}
 
 We can also add additional tags to narrow down our scope even further - for example, hosts in `region:eastus` and `env:production`. Tags are extremely powerful, and they are ubiquitous in Datadog. They can be applied to all core elements, including alerts and host maps.
 

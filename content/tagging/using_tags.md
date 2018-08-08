@@ -24,7 +24,7 @@ After you have assigned tags at the host and [integration][1] level, you can sta
 
 The [Events List][2] shows you all the events that have occurred in your environment over the time period specified. This can be overwhelming so you can use tags to filter down the list based on the tags you have assigned. You can enter any text you want in the search box above the Event List and a full text search is performed. You can also enter `tags:` followed by a tag to see all the events that come from a host or [integration][1] with that tag. The example in the image is the tag `role:cassandra`. So the search text is `tags:role:cassandra`.
 
-{{< img src="getting_started/tags/eventtags.png" alt="Events List and Tags" responsive="true" style="width:70%;">}}
+{{< img src="tagging/eventtags.png" alt="Events List and Tags" responsive="true" style="width:70%;">}}
 
 ## Using tags in Dashboards
 
@@ -33,14 +33,14 @@ To narrow down the metrics to display, enter the tag in the `from:` textbox.
 
 You are now looking at a chosen metric over all the hosts that have that particular tag assigned.
 
-{{< img src="getting_started/tags/dashboardtags_1.png" alt="Tags in Dashboards from textbox" responsive="true" style="width:70%;">}}
+{{< img src="tagging/dashboardtags_1.png" alt="Tags in Dashboards from textbox" responsive="true" style="width:70%;">}}
 
 To group using tags, enter the key part of the tag in the `avg by:` textbox.
 
 For instance, if you have a time series graph showing a metric tagged by the reporting hosts roles —`role:database`, `role:frontend`, or `role:loadbalancer`— enter role in the **avg_by** textbox.
 This causes the graph to show just one line for each tag value — `database`, `frontend`, and `loadbalancer`. Each line represents the average metric value across all hosts that share that role.
 
-{{< img src="getting_started/tags/dashboardtags.png" alt="Tags in Dashboards avgby textbox" responsive="true" style="width:70%;">}}
+{{< img src="tagging/dashboardtags.png" alt="Tags in Dashboards avgby textbox" responsive="true" style="width:70%;">}}
 
 You can also use tags to overlay events on the dashboard. This works in exactly the same way as in the [Events List][2].
 Enter `tags:` followed by the tag and you see the corresponding events overlaid as vertical bars on each graph.
@@ -49,20 +49,20 @@ Enter `tags:` followed by the tag and you see the corresponding events overlaid 
 
 To filter the list of hosts in the [Infrastructure list][4], enter a tag in the filter textbox at the top of the page. You can also group the hosts by entering the key portion of the tag in the group by textbox. So if you enter role in the group box, you see each role as a group heading followed by the hosts with that tag.  
 
-{{< img src="getting_started/tags/infrastructuretags.png" alt="Tags in the Infrastructure List" responsive="true" style="width:70%;">}}
+{{< img src="tagging/infrastructuretags.png" alt="Tags in the Infrastructure List" responsive="true" style="width:70%;">}}
 
 ## Using tags in Monitors
 
 When creating a [monitor][8]:
 
 * Use tags in the `from:` textbox to limit the monitor scope to only metrics that have those tags.
-{{< img src="getting_started/tags/monitortags.png" alt="from textbox tags in Monitors" responsive="true" style="width:70%;">}}
+{{< img src="tagging/monitortags.png" alt="from textbox tags in Monitors" responsive="true" style="width:70%;">}}
 
 * Use tags in the `excluding:` textbox to remove the corresponding metrics of the monitor scope.
-{{< img src="getting_started/tags/monitortags_1.png" alt="excluding textbox tags in Monitors" responsive="true" style="width:70%;">}}
+{{< img src="tagging/monitortags_1.png" alt="excluding textbox tags in Monitors" responsive="true" style="width:70%;">}}
 
 * Use tags in the `avg by` textbox transform your monitor into a multi-alert monitor on each value of this tags.
-{{< img src="getting_started/tags/monitortags_2.png" alt="excluding textbox tags in Monitors" responsive="true" style="width:70%;">}}
+{{< img src="tagging/monitortags_2.png" alt="excluding textbox tags in Monitors" responsive="true" style="width:70%;">}}
 Tags on these events are related to the `avg by:` value. In order to have host-related tags (such as AWS integration tags), use `avg by: host`
 
 ## Tell me about tagging!
