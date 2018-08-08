@@ -8,20 +8,50 @@ code_languages:
   - Ruby
 ---
 
-WIP
+{{< tabs >}}
+{{% tab "Text" %}}
+This is some simple text with **bold** *italic* and [inline link](/help) and [reference link][1].
+[1]: /help
+{{% /tab %}}
+{{% tab "Python" %}}
+```python
+This is some python code
+```
+{{% /tab %}}
+{{% tab "Ruby" %}}
+```ruby
+This is some ruby code
+```
+{{% /tab %}}
+{{% tab "Array" %}}
+This is some text: 
 
-## title 
+| Framework   | Framework Documentation         |
+| ---         | ---                             |
+| text        | test                            |
+| Gorilla Mux | [gorillatoolkit.org/pkg/mux][3] |
 
-This is some snazzy text
+[2]: /help
+[3]: http://www.gorillatoolkit.org/pkg/mux
+{{% /tab %}}
+{{% tab "Headers" %}}
+    
+## H2
+    
+text for h2
+    
+### H3
+    
+text for h3
+    
+#### H4
+    
+text for h4
+    
+##### H5
 
-{{< code-tabs section="setup" >}}
+text for h5
+{{% /tab %}}
+{{< /tabs >}}
 
-<div class="tab-content">
-  <div class="tab-pane active fade in" id="setup-python">
-    This is some python code
-  </div>
 
-  <div class="tab-pane fade in" id="setup-ruby">
-    This is some ruby text
-  </div>
-</div>
