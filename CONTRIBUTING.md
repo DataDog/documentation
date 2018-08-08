@@ -21,21 +21,6 @@ The [Dos](#dos) and [Donts](#donts) serve the main purpose: **to clearly inform 
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED",  "MAY", and "OPTIONAL" in the documentation are to be interpreted as described in [RFC 2119][5]. When writing in languages other than English, a best-effort must be made to adhere to this RFC.
 
-### RFC 2606
-
-A top level domain (TLD) in an example must reference a TLD permanently reserved for such purposes. As described in [RFC 2606][6] four TLD names are reserved:
-
-* `.test`
-* `.example`
-* `.invalid`
-* `.localhost`
-
-Same goes for second level domain names, three are reserved: 
-
-* `example.com`
-* `example.net`
-* `example.org`
-
 ## Dos
 
 * **Be plain and direct**: Say exactly what you mean using plain speech. Don’t leave the reader guessing:
@@ -110,6 +95,21 @@ This section sets the record straight (for the Docs site, not for all humankind)
     * **GOOD**: “Once you enable the integration, the Agent starts sending metrics to Datadog.”
 
 * **Code substitution**: When adding something to a code block that isn’t meant literally, use the format `<DATADOG_API_KEY>`. *Don’t* use `$DATADOG_API_KEY`, `{DATADOG API KEY}`, and certainly not the naked `DATADOG_API_KEY`.
+
+### RFC 2606
+
+A top level domain (TLD) in an example must reference a TLD permanently reserved for such purposes. As described in [RFC 2606][6] four TLD names are reserved:
+
+* `.test`
+* `.example`
+* `.invalid`
+* `.localhost`
+
+Same goes for second level domain names, three are reserved: 
+
+* `example.com`
+* `example.net`
+* `example.org`
 
 ## Words and Phrases
 

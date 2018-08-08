@@ -302,6 +302,9 @@ For user groups, use `<!subteam^GROUP_ID|GROUP_NAME>`. To find the `GROUP_ID`, [
 <!subteam^12345|testers>
 ```
 
+Note: Trailing special characters in a channel name are unsupported for the Slack @-notifications. 
+e.g. `@----critical_alerts` works, but `@--critical_alerts--` won't receive any notifications.
+
 #### Using message template variables to dynamically create @-mentions
 
 Use message template variables within a monitor message to dynamically build **@-mentions**.

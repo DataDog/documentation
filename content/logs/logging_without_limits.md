@@ -5,7 +5,7 @@ description: Control the volume of logs indexed by Datadog
 aliases:
   - logs/dynamic_volume_control
 further_reading:
-- link: "logs/analytics"
+- link: "logs/explorer/analytics"
   tag: "Documentation"
   text: "Perform Log Analytics"
 - link: "logs/processing"
@@ -15,7 +15,7 @@ further_reading:
   tag: "Documentation"
   text: Learn more about parsing
 - link: "https://www.datadoghq.com/blog/logging-without-limits/"
-  tag: "blogpost"
+  tag: "Blog"
   text: "Logging without limits blogpost"
 ---
 
@@ -109,7 +109,7 @@ Debug logs, for instance, are not always useful but during a complex troubleshoo
 
 Instead of changing your application logging level or using a complex internal filtering tool, it is now possible to change what is indexed directly with the Datadog index filters.
 
-Enable or disable them in one click in the pipeline page:
+Enable or disable them in one click in the Pipeline page:
 
 {{< img src="logs/logging_without_limits/enable_index_filters.png" alt="" responsive="true" style="width:80%;">}}
 
@@ -117,10 +117,10 @@ Enable or disable them in one click in the pipeline page:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/explore/#facets
-[2]: /logs/analytics/
-[3]: /logs/analytics/#dashboard
+[1]: /logs/explorer/search/#facets
+[2]: /logs/explorer/analytics/
+[3]: /logs/explorer/analytics/#dashboard
 [4]: /monitors/monitor_types/log/
 [5]: https://app.datadoghq.com/logs/pipelines
 [6]: https://app.datadoghq.com/logs
-[7]: /logs/explore/
+[7]: /logs/explorer/search

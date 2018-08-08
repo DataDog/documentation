@@ -1,6 +1,7 @@
 ---
 title: Why do my logs not have the expected timestamp?
 kind: faq
+disable_toc: true
 further_reading:
 - link: "logs/processing"
   tag: "Documentation"
@@ -20,7 +21,7 @@ However, this default timestamp does not always reflect the actual value that mi
 {{< img src="logs/faq/log_timestamp_1.png" alt="Example of log with timestamp" responsive="true" style="width:75%;">}}
 
 1. **Displayed timestamp**.  
-    The first thing to understand is how the log timestamp (visible from the log explorer and at the top section of the contextual panel) is generated.  
+    The first thing to understand is how the log timestamp (visible from the Log Explorer and at the top section of the contextual panel) is generated.  
 
     Timestamps are stored in UTC and displayed in the user local timezone.
     On the above screenshot my local profile is set to `UTC+1` therefore the reception time of my log was `11:06:16.807 UTC`.  
@@ -38,28 +39,28 @@ However, this default timestamp does not always reflect the actual value that mi
     2.2 **Define a Log Date Remapper**.  
         The value is now stored in a `date` attribute. [Add a Log Date remapper][4] to make sure the official log timestamp is overridden with the value in the `date` attribute.
         {{< img src="logs/faq/log_timestamp_4.png" alt="Log date remapper" responsive="true" style="width:75%;" >}} 
-        All new logs that are processed by that pipeline should now have the correct timestamp.  
-        **Note**: Any modification on a pipeline only impacts new logs as all the processing is done at ingestion.  
+        All new logs that are processed by that Pipeline should now have the correct timestamp.  
+        **Note**: Any modification on a Pipeline only impacts new logs as all the processing is done at ingestion.  
         The following log generated at `06:01:03 EST`, which correspond to `11:01:03 UTC`, is correctly displayed as 12:01:03 (display timezone is UTC+1 in my case).  
         {{< img src="logs/faq/log_timestamp_5.png" alt="Log post processing with new timestamp" responsive="true" style="width:70%;" >}} 
 
 3. **JSON logs**.  
     3.1 **Supported Date formats**.   
         JSON logs are automatically parsed in Datadog.  
-        The log `date` attribute is one of the [reserved attributes][5] in Datadog which means JSON logs that use those attributes have their values treated specially - in this case to derive the log's date. Change the default remapping for those attribute at the top of your pipeline as explained [in the edit reserved attributes documentation][6].
+        The log `date` attribute is one of the [reserved attributes][5] in Datadog which means JSON logs that use those attributes have their values treated specially - in this case to derive the log's date. Change the default remapping for those attribute at the top of your Pipeline as explained [in the edit reserved attributes documentation][6].
         So let's imagine that the actual timestamp of the log is contained in the attribute mytimestamp.
         {{< img src="logs/faq/log_timestamp_6.png" alt="log with mytimestamp attribute" responsive="true" style="width:75%;">}} 
         To make sure this attribute value is taken to override the log date, we would simply need to add it in the list of Date attributes.  
         The date remapper looks for each of the reserved attributes in the order in which they are configured in the reserved attribute mapping, so to be 100% sure that our `mytimestamp` attribute is used to derive the date, we can place it first in the list.
-        **Note**: Any modification on the pipeline only impacts new logs as all the processing is done at ingestion.  
+        **Note**: Any modification on the Pipeline only impacts new logs as all the processing is done at ingestion.  
         There are specific date formats to respect for the remapping to work. The recognized date formats are: [ISO8601][7], [UNIX (the milliseconds EPOCH format)][8] and [RFC3164][9].
         If the format is different from one of the above (so if your logs still do not have the right timestamp), there is a solution.
 
     3.2 **Custom Date format**.   
-        If the format is not supported by the remapper by default, parse this format and convert it to a supported format. To do this use a [parser processor][10] that applies only on our attribute.
-        If you do not have a pipeline filtered on those logs yet, create a new one and add a processor.  
-        **Note**: Set this processor only to apply to the custom `mytimestamp` attribute under the **advanced** settings.
-        {{< img src="logs/faq/log_timestamp_7.png" alt="Advanced settings date processor" responsive="true" style="width:75%;">}} 
+        If the format is not supported by the remapper by default, parse this format and convert it to a supported format. To do this use a [parser Processor][10] that applies only on our attribute.
+        If you do not have a Pipeline filtered on those logs yet, create a new one and add a Processor.  
+        **Note**: Set this Processor only to apply to the custom `mytimestamp` attribute under the **advanced** settings.
+        {{< img src="logs/faq/log_timestamp_7.png" alt="Advanced settings date Processor" responsive="true" style="width:75%;">}} 
         Then define the right parsing rule depending on your date format. Examples are available [here][11].  
         Add a Log Date Remapper and to have the correct timestamp on new logs.
         {{< img src="logs/faq/log_timestamp_8.png" alt="Pipeline example" responsive="true" style="width:75%;">}} 

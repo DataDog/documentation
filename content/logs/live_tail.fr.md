@@ -3,7 +3,7 @@ title: Live Tail
 kind: documentation
 description: Visualisez tous vos logs en temps réel.
 further_reading:
-- link: logs/analytics
+- link: logs/explorer/analytics
   tag: Documentation
   text: Construire des analyses de log
 - link: logs/processing
@@ -79,6 +79,6 @@ Pour rechercher tous les logs dont le nombre de lignes est supérieur à 150, ut
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/processing
+[1]: /logs/processing/pipelines
 [2]: /logs/logging_without_limits
-[3]: /logs/explore/#Search-bar
+[3]: /logs/explorer/search/#search-bar
