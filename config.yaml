@@ -460,13 +460,8 @@ languages:
           weight: 180
           parent: customnav_tracingnav_setup_basic
         - identifier: customnav_tracingnav_dotnet
-<<<<<<< HEAD
-          name: ".NET (Coming soon)"
-          url: "tracing/setup_basic/dotnet/"
-=======
           name: ".NET (Alpha)"
           url: "tracing/setup/dotnet/"
->>>>>>> master
           weight: 190
           parent: customnav_tracingnav_setup_basic
         - identifier: customnav_tracingnav_php
@@ -1440,13 +1435,8 @@ languages:
           weight: 180
           parent: customnav_tracingnav_setup_basic
         - identifier: customnav_tracingnav_dotnet
-<<<<<<< HEAD
-          name: ".NET (Coming soon)"
-          url: "tracing/setup_basic/dotnet/"
-=======
           name: ".NET (Alpha)"
           url: "tracing/setup/dotnet/"
->>>>>>> master
           weight: 190
           parent: customnav_tracingnav_setup_basic
         - identifier: customnav_tracingnav_php
