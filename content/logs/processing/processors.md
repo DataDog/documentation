@@ -145,4 +145,4 @@ The message is a key attribute in Datadog. It is displayed in the message column
 [1]: /logs/processing/pipelines
 [2]: /logs/processing/parsing
 [3]: https://en.wikipedia.org/wiki/Syslog#Severity_level
-[4]: /getting_started/tagging/#tags-best-practices
+[4]: /tagging/#tags-best-practices

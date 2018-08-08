@@ -5,7 +5,7 @@ further_reading:
 - link: "developers/metrics"
   tag: "Documentation"
   text: Learn more about Datadog metrics
-- link: "getting_started/getting_started_with_tags"
+- link: "/tagging"
   tag: "Documentation"
   text: Getting started with tags
 ---

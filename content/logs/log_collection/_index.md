@@ -293,7 +293,7 @@ Datadog automatically parses JSON-formatted logs. For this reason, if you have c
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent
-[2]: /getting_started/custom_metrics/
+[2]: /developers/metrics/custom_metrics/
 [3]: /agent/faq/agent-commands/#start-stop-restart-the-agent
 [4]: /logs/processing/#log-date-remapper
 [5]: /logs/explorer/search/#logstream

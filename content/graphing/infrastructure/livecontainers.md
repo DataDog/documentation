@@ -121,4 +121,4 @@ While actively working with the Containers page, metrics are collected at 2s res
 [5]: /integrations/kubernetes
 [6]: /integrations/amazon_ecs
 [7]: /agent/basic_agent_usage/docker/#run-the-docker-agent
-[8]: /getting_started/tagging
+[8]: /tagging

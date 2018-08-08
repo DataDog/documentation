@@ -5,11 +5,12 @@ aliases:
     - /getting_started/getting_started_with_tags
     - /guides/tagging/
     - /developers/tagging/
+    - /getting_started/tagging
 further_reading:
-- link: "getting_started/tagging/assigning_tags"
+- link: "tagging/assigning_tags"
   tag: "Documentation"
   text: Learn how to assign tags
-- link: "getting_started/tagging/using_tags"
+- link: "tagging/using_tags"
   tag: "Documentation"
   text: Learn how to use tags in Datadog
 ---
@@ -69,15 +70,15 @@ Tags may be added using any (or all) of the following methods:
 
 Here is an example of tags using the time-series chart editor. For the first screenshot, no tags have been applied, and we're observing average CPU across all hosts:
 
-{{< img src="getting_started/tags/Tags_1.png" alt="Tags_1" responsive="true" style="width:75%;">}}
+{{< img src="tagging/Tags_1.png" alt="Tags_1" responsive="true" style="width:75%;">}}
 
 In this next example, we've applied a tag (region:eastus) that enables us to look at CPU across the US East Region. We've used region as an example, but you could use any arbitrary tag, including application, service, environment, etc.
 
-{{< img src="getting_started/tags/Tags_2.png" alt="Tags_2" responsive="true" style="width:75%;">}}
+{{< img src="tagging/Tags_2.png" alt="Tags_2" responsive="true" style="width:75%;">}}
 
 In this last example, we've used the second empty field labeled as "everything" by option to show an individual timeseries line for each host. Now we're seeing server CPU for individual hosts running in the US East Region.
 
-{{< img src="getting_started/tags/Tags_3.png" alt="Tags_3" responsive="true" style="width:75%;">}}
+{{< img src="tagging/Tags_3.png" alt="Tags_3" responsive="true" style="width:75%;">}}
 
 We can also add additional tags to narrow down our scope even further - for example, hosts in `region:eastus` and `env:production`. Tags are extremely powerful, and they are ubiquitous in Datadog. They can be applied to all core elements, including alerts and host maps.
 
@@ -85,7 +86,7 @@ We can also add additional tags to narrow down our scope even further - for exam
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/tagging/using_tags
+[1]: /tagging/using_tags
 [2]: /developers/dogstatsd
 [3]: /integrations/amazon_web_services
 [4]: /integrations/azure
@@ -94,4 +95,4 @@ We can also add additional tags to narrow down our scope even further - for exam
 [7]: /integrations/chef
 [8]: /integrations/puppet
 [9]: /graphing/infrastructure
-[10]: /getting_started/custom_metrics
+[10]: /developers/metrics/custom_metrics
