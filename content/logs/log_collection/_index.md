@@ -225,7 +225,7 @@ logs:
 
 ### Using a Proxy for Logs
 
-Logs make use of a different set of proxy settings than other data types forwarded by the Datadog Agent. This is due to the fact that logs are currently transported over TCP/SSL, while other features submit data via on HTTPS.
+Logs make use of a different set of proxy settings than other data types forwarded by the Datadog Agent. This is due to the fact that logs are currently transported over TCP/SSL, while other features submit data via HTTPS.
 
 To configure your Datadog Agent to forward logs through a proxy server, add these settings to the `datadog.yaml` configuration file:
 
@@ -238,7 +238,7 @@ logs_config:
 
 Then configure your proxy to forward logs to the endpoint `agent-intake.logs.datadoghq.com` on port `10516` with SSL activated. 
 
-With the most recent version of the datadog agent, you can alternatively send your logs to your Datadog account via a SOCKS5 proxy server. To do so, use the following settings in your `datadog.yaml` configuration file:
+With the most recent version of the datadog Agent, you can alternatively send your logs to your Datadog account via a SOCKS5 proxy server. To do so, use the following settings in your `datadog.yaml` configuration file:
 
 ```
 logs_config:
