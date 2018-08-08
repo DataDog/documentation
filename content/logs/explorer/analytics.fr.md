@@ -107,7 +107,7 @@ Tout comme dans l'explorateur de logs, cliquez sur n'importe quel graphique dans
 
 [1]: /logs/explorer/search/#measures
 [2]: /logs/explorer/search/#facets
-[3]: /getting_started/tagging
+[3]: /tagging
 [4]: /monitors/monitor_types/log
 [5]: /graphing/dashboards/timeboard
 [6]: /help

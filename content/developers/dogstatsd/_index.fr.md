@@ -117,7 +117,7 @@ Si vous souhaitez en savoir plus sur le format de datagramme utilisé par DogSta
 [1]: /libraries/
 [2]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
 [3]: https://github.com/etsy/statsd
-[4]: /getting_started/custom_metrics/
+[4]: /developers/metrics/custom_metrics
 [5]: /agent/faq/agent-commands
 [6]: /developers/dogstatsd/data_types/#timers
 [7]: /developers/dogstatsd/data_types

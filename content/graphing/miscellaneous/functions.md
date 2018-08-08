@@ -429,5 +429,5 @@ Highlight outliers series; see our [Outlier Monitor][3] page for more info.
 [2]: /monitors/monitor_types/anomaly
 [3]: /monitors/monitor_types/outlier
 [4]: /graphing/faq/as_count_validation
-[5]: /getting_started/from_the_query_to_the_graph/#proceed-to-space-aggregation
+[5]: /graphing/miscellaneous/from_the_query_to_the_graph
 [7]: /monitors/monitor_types/metric/
