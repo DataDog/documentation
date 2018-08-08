@@ -503,7 +503,7 @@ $(document).ready(function () {
         }
     }
 
-    $('.tab-content').find('.tab-pane').each(function(idx, item) {
+    $('.code-tabs .tab-content').find('.tab-pane').each(function(idx, item) {
       var navTabs = $(this).closest('.code-tabs').find('.nav-tabs'),
           title = $(this).attr('title');
       navTabs.append('<li><a href="#">'+title+'</a></li');
@@ -517,7 +517,7 @@ $(document).ready(function () {
       $(this).find("div:first").addClass('active').addClass('show');
     });
 
-    $('.nav-tabs a').click(function(e){
+    $('.code-tabs .nav-tabs a').click(function(e){
       e.preventDefault();
       var tab = $(this).parent(),
           tabIndex = tab.index(),
