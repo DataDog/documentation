@@ -86,4 +86,23 @@ public class MyHttpRequestExtractAdapter implements TextMap {
 }
 ```
 
+## GO
+
+Propagate a single trace across multiple services with distributed tracing. For more details about how to use and configure distributed tracing, check out the [godoc page][tracer godoc].
+
+Make use of priority sampling to ensure that distributed traces are complete. Set the sampling priority of a trace by adding the `sampling.priority` tag to its root span. This is then propagated throughout the entire stack. For example:
+
+```go
+span.SetTag(ext.SamplingPriority, ext.PriorityUserKeep)
+```
+
+Possible values for the sampling priority tag are:
+
+| Sampling Value             | Effect                                                                                                      |
+| -------------------------- | :---------------------------------------------------------------------------------------------------------- |
+| ext.PriorityAutoReject     | The sampler automatically decided to not keep the trace. The Agent will drop it.                            |
+| ext.PriorityAutoKeep       | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side.  |
+| ext.PriorityUserReject     | The user asked to not keep the trace. The Agent will drop it.                                               |
+| ext.PriorityUserKeep       | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                      |
+
 [8]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#distributed-tracing

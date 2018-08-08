@@ -191,4 +191,4 @@ While actively working with the Live Processes, metrics are collected at 2s reso
 [12]: https://app.datadoghq.com/account/settings#agent/kubernetes
 [13]: /integrations/kubernetes/#installation-via-daemonsets-kubernetes-110
 [14]: https://docs.datadoghq.com/infrastructure/livecontainers/
-[15]: /getting_started/tagging/
+[15]: /tagging/

@@ -125,5 +125,5 @@ Data in the Host Maps is refreshed about once a minute—unless you are continuo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/tagging
+[1]: /tagging
 [2]: /integrations/

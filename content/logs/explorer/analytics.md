@@ -108,7 +108,7 @@ Similar to the Log Explorer, click on a any graph in your dashboards to jump to 
 
 [1]: /logs/explorer/search/#measures
 [2]: /logs/explorer/search/#facets
-[3]: /getting_started/tagging
+[3]: /tagging
 [4]: /monitors/monitor_types/log
 [5]: /graphing/dashboards/timeboard
 [6]: /help

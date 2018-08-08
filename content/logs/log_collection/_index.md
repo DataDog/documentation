@@ -242,9 +242,9 @@ logs:
 
 ### Using a Proxy for Logs
 
-Logs make use of a different set of proxy settings than other data types forwarded by the Datadog Agent. This is due to logs presently being transported over TCP/SSL, while other features submit data via on HTTPS.
+Logs make use of a different set of proxy settings than other data types forwarded by the Datadog Agent. This is due to the fact that logs are currently transported over TCP/SSL, while other features submit data via HTTPS.
 
-To configure your Datadog Agent to forward logs through a proxy server, add these settings to the `datadog.yaml` configuration file:"
+To configure your Datadog Agent to forward logs through a proxy server, add these settings to the `datadog.yaml` configuration file:
 
 ```
 logs_config:
@@ -254,6 +254,13 @@ logs_config:
 ```
 
 Then configure your proxy to forward logs to the endpoint `agent-intake.logs.datadoghq.com` on port `10516` with SSL activated. 
+
+With the most recent version of the datadog Agent, you can alternatively send your logs to your Datadog account via a SOCKS5 proxy server. To do so, use the following settings in your `datadog.yaml` configuration file:
+
+```
+logs_config:
+  socks5_proxy_address: <MY_SOCKS5_PROXY_URL>:<MY_SOCKS5_PROXY_PORT>
+```
 
 [Refer to our Agent proxy documentation page to learn how to forward your metrics with a proxy][8].
 
@@ -286,7 +293,7 @@ Datadog automatically parses JSON-formatted logs. For this reason, if you have c
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent
-[2]: /getting_started/custom_metrics/
+[2]: /developers/metrics/custom_metrics/
 [3]: /agent/faq/agent-commands/#start-stop-restart-the-agent
 [4]: /logs/processing/#log-date-remapper
 [5]: /logs/explorer/search/#logstream

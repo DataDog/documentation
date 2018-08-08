@@ -198,4 +198,4 @@ Toutes les mesures ont leur propre unité qui est ensuite utilisée pour l'affic
 [2]: /logs/explorer/analytics
 [4]: /graphing/infrastructure/
 [5]: /integrations/#cat-log-collection
-[6]: /getting_started/tagging/#tags-best-practices
+[6]: /tagging/#tags-best-practices

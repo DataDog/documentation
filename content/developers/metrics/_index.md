@@ -131,7 +131,7 @@ The following units may be associated with metrics submitted to Datadog.
 [1]: /developers/dogstatsd
 [2]: /developers/agent_checks
 [3]: /api/#metrics
-[4]: /getting_started/custom_metrics/
+[4]: /developers/metrics/custom_metrics/
 [5]: /developers/dogstatsd/
 [6]: /developers/metrics/gauges
 [7]: /developers/metrics/rates

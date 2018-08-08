@@ -25,11 +25,11 @@ Other standard integrations that don’t have a default limit set and also emit 
 * [win32_event_log][13]
 * [wmi][14]
 
-[1]: /getting_started/custom_metrics/
+[1]: /developers/metrics/custom_metrics/
 [2]: /developers/dogstatsd
 [3]: /api
 [4]: /agent/agent_checks
-[5]: /getting_started/custom_metrics
+[5]: /developers/metrics/custom_metrics
 [6]: /integrations/activemq
 [7]: /integrations/go_expvar
 [8]: /help
