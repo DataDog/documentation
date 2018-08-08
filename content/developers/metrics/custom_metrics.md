@@ -110,6 +110,17 @@ Ultimately, you’ll have 13 metrics using the following query: `count:service.r
 
 {{< img src="getting_started/custom_metrics/count_of_metrics.png" alt="count_of_metrics" responsive="true" style="width:70%;">}}
 
+## Overhead
+
+If you're submitting metrics directly to the Datadog API *without* using [DogStatsD][1], expect:
+
+* 64 bits for the timestamp
+* 64 bits for the value
+* 20 bytes for the metric names
+* 50 bytes for the timeseries
+
+The full payload is approximately \~ 100 bytes. However, with the DogStatsD API, compression is applied and the typical payload is very small.
+
 ## Custom metrics best practices
 
 * For querying purposes, we encourage you to limit the number of tags applied to 1,000 tags per metric. Going over this amount [slows down the graphs][8] in your dashboards due to the increase in cardinality.

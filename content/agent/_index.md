@@ -72,6 +72,25 @@ With:
 
 **Note**: On Windows, `datadog.conf` is automatically upgraded to `datadog.yaml` on upgrade.
 
+## Resource overhead
+
+### Agent v6
+* CPU: \~ 0.12% of the CPU used on average
+* Memory: \~ 55Mo of RAM used
+* Network bandwidth: \~ 86 B/s &#9660; | 260 B/s &#9650;
+
+### Agent v5
+* CPU: \~ 0.35% of the CPU used on average
+* Memory: \~ 115Mo of RAM used
+* Network bandwidth: \~ 1900 B/s &#9660; | 800 B/s &#9650;
+* Disk: Linux 120MB | Windows 60MB
+
+Caveats:
+
+* Enabling integrations may increase the Agent's resource consumption.
+* Enabling JVM checks forces the Agent to use more memory, depending on the number of beans exposed by the monitored JVMs.
+* Enabling the trace/process/logging Agents may increase resource consumption.
+
 ## CLI
 
 The new command line interface for the Agent is sub-command based:
