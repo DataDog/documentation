@@ -3,50 +3,22 @@ title: Manual Tracing
 kind: documentation
 ---
 
-## Go
+// ...
 
-To make use of manual instrumentation, use the `tracer` package which is documented on our [godoc page][tracer godoc]. One simple example would be:
+{{< tabs >}}
+{{% tab "Java" %}}
+## Java
 
-```go
-package main
+Before instrumenting your application, review Datadog’s [APM Terminology][apm terminology] and familiarize yourself with the core concepts of Datadog APM. If you aren't using a [supported framework instrumentation][java framework], or you would like additional depth in your application’s traces, you may want to to manually instrument your code.
 
-import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-
-func main() {
-    // Start the tracer with zero or more options.
-    tracer.Start(tracer.WithServiceName("my-service"))
-    defer tracer.Stop()
-
-    // Create a span for a web request at the /posts URL.
-    span := tracer.StartSpan("web.request", tracer.ResourceName("/posts"))
-    defer span.Finish()
-
-    // Set metadata
-    span.SetTag("my_tag", "my_value")
-}
-```
-
-## NodeJS
-
-If you aren’t using supported library instrumentation (see [Compatibility][nodejs compatibility]), you may want to manually instrument your code.
-
-The following example initializes a Datadog Tracer and creates a Span called `web.request`:
-
-```javascript
-const tracer = require('dd-trace').init()
-const span = tracer.startSpan('web.request')
-
-span.setTag('http.url', '/login')
-span.finish()
-```
-
-For more information on manual instrumentation, check out the [API documentation][nodejs api doc].
-
-### Ruby
+Do this either using the Trace annotation for simple method call tracing or with the [OpenTracing API][opentracing] for complex tracing.
+{{% /tab %}}
+{{% tab "Python" %}}
+{{% /tab %}}
+{{% tab "Ruby" %}}
+## Ruby
 
 If you aren't using supported library instrumentation (see [Library compatibility][ruby lib comptability], you may want to to manually instrument your code. Adding tracing to your code is easy using the `Datadog.tracer.trace` method, which you can wrap around any Ruby code.
-
-**Example**
 
 ```ruby
 get '/posts' do
@@ -69,12 +41,49 @@ end
 ```
 
 For more details about manual instrumentation, check out the [API documentation][ruby api doc].
+{{% /tab %}}
+{{% tab "Go" %}}
+## Go
 
-## Java
+To make use of manual instrumentation, use the `tracer` package which is documented on our [godoc page][tracer godoc]. One simple example would be:
 
-Before instrumenting your application, review Datadog’s [APM Terminology][apm terminology] and familiarize yourself with the core concepts of Datadog APM. If you aren't using a [supported framework instrumentation][java framework], or you would like additional depth in your application’s traces, you may want to to manually instrument your code.
+```go
+package main
 
-Do this either using the Trace annotation for simple method call tracing or with the [OpenTracing API][opentracing] for complex tracing.
+import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+
+func main() {
+    // Start the tracer with zero or more options.
+    tracer.Start(tracer.WithServiceName("my-service"))
+    defer tracer.Stop()
+
+    // Create a span for a web request at the /posts URL.
+    span := tracer.StartSpan("web.request", tracer.ResourceName("/posts"))
+    defer span.Finish()
+
+    // Set metadata
+    span.SetTag("my_tag", "my_value")
+}
+```
+{{% /tab %}}
+{{% tab "Node.js" %}}
+## NodeJS
+
+If you aren’t using supported library instrumentation (see [Compatibility][nodejs compatibility]), you may want to manually instrument your code.
+
+The following example initializes a Datadog Tracer and creates a Span called `web.request`:
+
+```javascript
+const tracer = require('dd-trace').init()
+const span = tracer.startSpan('web.request')
+
+span.setTag('http.url', '/login')
+span.finish()
+```
+
+For more information on manual instrumentation, check out the [API documentation][nodejs api doc].
+{{% /tab %}}
+{{< /tabs >}}
 
 [tracer godoc]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
 [nodejs compatibility]: /tracing/setup_basic/nodejs/#compatibility
