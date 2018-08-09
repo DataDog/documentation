@@ -29,7 +29,7 @@ un but précis.
 pour vous, ce qui contribue à créer une structure dans votre infrastructure avec le minimum
 de travail possible (contrairement à la création explicite de tous vos clusters).
 Ainsi, si une nouvelle machine est taggée, vous pouvez voir immédiatement les statistiques
-pour cette machine en fonction de ce qui a été précédemment configuré pour ce tag. [En savoir plus sur le tagging][15].
+pour cette machine en fonction de ce qui a été précédemment configuré pour ce tag. [En savoir plus sur le tagging](/getting_started/tagging).
 
 ## Map des hosts
 
@@ -108,4 +108,3 @@ Le [Monitoring][14] vous donne la possibilité d'être informé si un agrégat o
 [12]: /graphing/miscellaneous/functions/
 [13]: https://www.datadoghq.com/blog/rank-filter-performance-monitoring-metrics-top-function/
 [14]: /monitors/
-[15]: /tagging
