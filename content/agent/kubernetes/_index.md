@@ -33,7 +33,7 @@ To gather metrics, traces, and logs from your Kubernetes clusters, there are two
 
 In the context of using the Kubernetes integration, and when deploying Agents in a Kubernetes cluster, a set of rights are required for the Agent to integrate seamlessly.
 
-You will need to allow the Agent to perform a few actions:
+You must allow the Agent to perform a few actions:
 
 - `get` and `update` the `Configmaps` named `datadogtoken` to update and query the most up-to-date version token corresponding to the latest event stored in ETCD.
 - `list` and `watch` the `Events` to pull the events from the API Server, format, and submit them.

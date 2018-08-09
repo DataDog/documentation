@@ -13,7 +13,7 @@ further_reading:
   text: "Custom Integrations"
 ---
 
-Take advantage of DaemonSets to deploy the Datadog Agent on all your nodes (or on specific nodes by [using nodeSelectors](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector)).
+Take advantage of DaemonSets to deploy the Datadog Agent on all your nodes (or on specific nodes by [using nodeSelectors][22]).
 
 *If DaemonSets are not an option for your Kubernetes cluster, [install the Datadog Agent][3] as a deployment on each Kubernetes node.*
 
@@ -174,26 +174,29 @@ spec:
           name: cgroups
 ```
 
-Replace `YOUR_API_KEY` with [your API key][5] or use [Kubernetes secrets][6] to set your API key [as an environment variable][7]. [Consult our docker integration to discover all configuration options.][8]
+Replace `<YOUR_API_KEY>` with [your Datadog API key][5] or use [Kubernetes secrets][6] to set your API key [as an environment variable][7]. [Consult our docker integration to discover all configuration options.][8]
 
 Deploy the DaemonSet with the command:
 ```
 kubectl create -f datadog-agent.yaml
 ```
 
-**Note**:  This manifest enables Autodiscovery's auto configuration feature. To learn how to configure Autodiscovery, please refer to [its documentation][9].
+**Note**:  This manifest enables Autodiscovery's auto configuration feature. To learn how to configure Autodiscovery, please refer to the [dedicated Autodiscovery documentation][9].
 
 ### Verification
 
 To verify the Datadog Agent is running in your environment as a DaemonSet, execute:
 
-    kubectl get daemonset
+```
+kubectl get daemonset
+```
 
 If the Agent is deployed, you will see output similar to the text below, where `DESIRED` and `CURRENT` are equal to the number of nodes running in your cluster.
 
-    NAME            DESIRED   CURRENT   READY     UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
-    datadog-agent   2         2         2         2            2           <none>          16h
-
+```
+NAME            DESIRED   CURRENT   READY     UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+datadog-agent   2         2         2         2            2           <none>          16h
+```
 
 ## Enable capabilities
 
@@ -303,3 +306,4 @@ Another word of caution: some network plugging don't support `hostPorts` yet, so
 [19]: /agent/basic_agent_usage/docker/#dogstatsd-custom-metrics
 [20]: /tracing/setup/kubernetes
 [21]: /graphing/infrastructure/process
+[22]: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
