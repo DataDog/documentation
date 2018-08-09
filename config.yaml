@@ -114,11 +114,6 @@ languages:
           url: "agent/basic_agent_usage/heroku/"
           weight: 135
           parent: customnav_agentnav_basic_usage
-        - identifier: customnav_agentnav_kubernetes
-          name: "Kubernetes"
-          url: "agent/basic_agent_usage/kubernetes/"
-          weight: 140
-          parent: customnav_agentnav_basic_usage
         - identifier: osx
           name: "Mac OS X"
           url: "agent/basic_agent_usage/osx/"
