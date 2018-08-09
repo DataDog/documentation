@@ -289,7 +289,15 @@ Delta value between points for a given metric
 
 ### autosmooth()
 
-The `autosmooth()` function applies a moving average to the time series. The algorithm used to choose the optimal span for the moving average is inspired by the [ASAP algorithm][8]. When applied to a group-by query, `autosmooth()` will use the same span for all groups.
+Automatically removes noise while preserving the trend of the time series.
+
+The `autosmooth()` function applies a moving average with an automatically selected span, so to smooth the time series the most while preserving its trend. In this example, you can see how the function chooses the optimal span to smooth the time series :
+
+{{< img src="graphing/miscellaneous/functions/autosmooth_illustration.png" alt="autosmooth illustration" responsive="true" style="width:80%;">}}
+
+When used on a 'group by' query (e.g. 'avg by'), the same span will be applied on all the time series. If used on several metrics in the same graph, different spans could be selected to optimally smooth each of the metric time series.
+
+The algorithm is inspired by the [ASAP algorithm][8] - you can read more about it in this blog post. 
 
 ### ewma_3()
 
