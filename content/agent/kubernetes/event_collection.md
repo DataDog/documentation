@@ -17,7 +17,7 @@ This is in order to avoid duplicating the events collected, as well as to dimini
 
 Agent 6 supports a built-in leader election option for the Kubernetes event collector and the Kubernetes cluster-related checks (i.e. the Control Plane service check).
 
-This feature relies on Endpoints. You can enable it by setting the `DD_LEADER_ELECTION` environment variable to `true`. The Agent will need to have a set of actions allowed prior to its deployment; see the [RBAC][1] section for more details, and keep in mind that these RBAC entities will need to be created before the option is set.
+This feature relies on `Endpoints`. You can enable it by setting the `DD_LEADER_ELECTION` environment variable to `true`. The Agent must have a set of actions allowed prior to its deployment; see the [RBAC][1] section for more details, and keep in mind that these RBAC entities **must** be created before the option is set.
 
 Agents coordinate by performing a leader election among members of the Datadog DaemonSet through Kubernetes to ensure only one leader Agent instance is gathering events at a given time.
 
