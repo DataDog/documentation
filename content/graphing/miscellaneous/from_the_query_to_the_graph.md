@@ -1,7 +1,7 @@
 ---
 title: From the query to the graph
 kind: documentation
-alias:
+aliases:
 - /getting_started/from_the_query_to_the_graph
 ---
 
