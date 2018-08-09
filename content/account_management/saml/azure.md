@@ -69,7 +69,7 @@ Below is a step by step guide to configure Azure AD as a SAML IdP within Datadog
 
 17. Make sure to press the **Upload File** button after having chosen the XML file to upload.
 
-18. And that’s it! It should now say *SAML is ready* and that valid IdP metadata is installed.
+18. And that's it! It should now say *SAML is ready* and that valid IdP metadata is installed.
 
     {{< img src="account_management/saml/SAML_Configuration___Datadog11.png" alt="SAML_Configuration___Datadog11" responsive="true" style="width:70%;">}}
 

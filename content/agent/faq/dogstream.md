@@ -72,7 +72,7 @@ Agent collector logs:
 {function name} (requested {config option text})`.
 
 <div class="alert alert-warning">
-To test that dogstreams are working, append a line—don't edit an existing one—to any log file you've configured the Agent to watch. The Agent only tails the end of each log file, so it won't notice any changes you make elsewhere in the file.
+To test that dogstreams are working, append a line-don't edit an existing one-to any log file you've configured the Agent to watch. The Agent only tails the end of each log file, so it won't notice any changes you make elsewhere in the file.
 </div>
 
 ### Writing Parsing Functions

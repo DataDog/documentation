@@ -128,7 +128,7 @@ If your issue continues, [reach out to our Support team][5] with a [flare](#flar
 
 * [Common Windows Agent Installation Error 1721][11]
 * [How to monitor SNMP devices?][12]
-* [I stopped my Agent but I’m still seeing the host in my Datadog account.][13]
+* [I stopped my Agent but I'm still seeing the host in my Datadog account.][13]
 * [Network Time Protocol (NTP) Offset Issues][14]
 * [How to solve Permission denied errors?][15]
 * [Error Restarting Agent: Already Listening on a Configured Port][16]

@@ -46,7 +46,7 @@ Then find the lowest MTU on the way:
 
 ## Workarounds
 
-1. (Easy) reduce the MTU of the whole interface (sudo ip link set dev … mtu 1500)
+1. (Easy) reduce the MTU of the whole interface (sudo ip link set dev ... mtu 1500)
 2. (Easy) enable TCP MTU probing on linux (sudo sysctl net.ipv4.tcp_mtu_probing=1)
 3. (Medium) Use a working Agent as a proxy: https://github.com/DataDog/dd-agent/wiki/Proxy-Configuration#using-the-agent-as-a-proxy
 4. (Medium) reduce the MTU of all routes to EC2 as a whole (sudo ip route add ... via ... mtu 1500); first argument is ip range, second argument is gateway

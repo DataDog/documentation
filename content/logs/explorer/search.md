@@ -48,7 +48,7 @@ For instance, if your facet name is **url** and you want to filter on the **url*
 ### Wildcards
 To perform a multi-character wildcard search, use the `*` symbol as follows:
 
-* `service:web*`  matches every log message that has a service starting by “web”.
+* `service:web*`  matches every log message that has a service starting by "web".
 * `hello*` matches all log messages starting with hello
 * `*hello` matches all log messages that end with hello
 
@@ -68,7 +68,7 @@ Your logs inherit tags from [hosts][4] and [integrations][5] that generate them.
 * `test` is searching for the string "test".
 * `("env:prod" OR test)` matches all logs with the tag `#env:prod` or the tag `#test`
 * `(service:srvA OR service:srvB)` or `(service:(srvA OR srvB))` Matches all logs that contain tags `#service:srvA` or `#service:srvB`.
-* `("env:prod" AND -”version:beta”)` matches all logs that contain `#env:prod` and that do not contain `#version:beta`
+* `("env:prod" AND -"version:beta")` matches all logs that contain `#env:prod` and that do not contain `#version:beta`
 
 If your tags don't follow [tags best practices][6] and don't use the `key:value` syntax, use this search query:
 

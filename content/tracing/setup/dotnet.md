@@ -22,7 +22,7 @@ Tracing for .NET is coming soon. The officially supported Beta will launch as ea
 
 ## Planned Automatic Instrumentation for Beta (Coming Soon)
 
-Planned support will provide automatic instrumentation for popular frameworks and libraries. See some of these listed below. Don’t see your desired frameworks or libraries?
+Planned support will provide automatic instrumentation for popular frameworks and libraries. See some of these listed below. Don't see your desired frameworks or libraries?
 Please let us know more about your needs through [this survey][1].
 
 ### Web Frameworks
@@ -36,7 +36,7 @@ Please let us know more about your needs through [this survey][1].
 <sup>1</sup> Running on .NET Framework 4.5 or above
 <sup>2</sup> Running on .NET Framework 4.6.1 or above, or on .NET Core 2.0 or above
 
-Don’t see what you're looking for? Please let us know more about your needs through [this survey][1].
+Don't see what you're looking for? Please let us know more about your needs through [this survey][1].
 
 ### Data Stores
 
@@ -48,7 +48,7 @@ Don’t see what you're looking for? Please let us know more about your needs th
 | Postgres (Npgsql)               | Coming soon | Coming soon (est. September 2018 Beta) |
 | ServiceStack.Redis              | Coming soon | Coming soon (est. September 2018 Beta) |
 
-Don’t see what you're looking for? Please let us know more about your needs through [this survey][1].
+Don't see what you're looking for? Please let us know more about your needs through [this survey][1].
 
 ## Further Reading
 

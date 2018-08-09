@@ -25,7 +25,7 @@ Pingdomのダウンタイム·イベントやパフォーマンス·メトリッ
 
 **Q:** Does Datadog support transaction checks?
 
-**A:** Pingdom does not provide an API for transaction checks, so we’re not able to show them in Datadog. The transaction monitor feature was in beta until recently, so if it becomes available we will look to support it. -->
+**A:** Pingdom does not provide an API for transaction checks, so we're not able to show them in Datadog. The transaction monitor feature was in beta until recently, so if it becomes available we will look to support it. -->
 
 ## トラブルシュートと質問
 

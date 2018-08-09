@@ -22,7 +22,7 @@ further_reading:
   text: Understand how to read a Datadog Trace
 ---
 
-APM collects metrics on your app’s performance at four levels of granularity: _services_, _resources_, _traces_, and _spans_ level.
+APM collects metrics on your app's performance at four levels of granularity: _services_, _resources_, _traces_, and _spans_ level.
 
 ## Services
 
@@ -53,7 +53,7 @@ You can also [alert][6] on any service level metric. Read more about monitoring 
 
 **A Resource is a particular action for a service**.
 
-* **For a web application**: some examples might be a canonical URL, such as `/user/home` or a handler function like `web.user.home` (often referred to as “routes” in MVC frameworks).
+* **For a web application**: some examples might be a canonical URL, such as `/user/home` or a handler function like `web.user.home` (often referred to as "routes" in MVC frameworks).
 * **For a SQL database**: a resource is the query itself, such as `SELECT * FROM users WHERE id = ?`.
 
 Resources should be grouped together under a canonical name, like `/user/home` rather than have `/user/home?id=100` and `/user/home?id=200` as separate resources. APM automatically assigns names to your resources; however you can also name them explicitly. See instructions for: [Go][9], [Java][2], [Python][10], [Ruby][11].

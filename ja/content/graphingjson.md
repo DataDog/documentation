@@ -126,7 +126,7 @@ A few of these functions have been further explained in a series of examples. Vi
 それぞれのクエリの結果に対して関数を適用することができます。
 
 これらの関数のうち、いくつかについては具体的な設定例を用いた解説があります。こちらも併せて参照して下さい: <a href="https://docs.datadoghq.com/examples/graphing-functions/">Examples for Graphing Functions</a>
-本ドキュメントの最後にもいくつかの具体的な[”設定例”](#examples)があります。
+本ドキュメントの最後にもいくつかの具体的な["設定例"](#examples)があります。
 
 {{< include-markdown "layouts/partials/graphingfunctions.md" >}}
 

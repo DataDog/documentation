@@ -41,7 +41,7 @@ Note: no spaces after the colon or commas in these lists and anything not attach
 
 ## Show events unaggregated
 
-Change the “aggregate_up” parameter in the url to `false`.
+Change the "aggregate_up" parameter in the url to `false`.
 To remove the top level aggregate event from appearing, change `use_date_happened` to true. [Here is an example link][3]
 
 ## Events Email
@@ -126,7 +126,7 @@ Should be encoded to: `http://catchpoint.com/session_id%3A123456`
 
 * `@support-datadog` – Reaches Datadog support directly when posted in your stream.
 * `@all` – Sends a notification to all members of your organization.
-* `@yourname` – Notifies the specific user named ‘yourname’.
+* `@yourname` – Notifies the specific user named 'yourname'.
 * `@test@example.com` Sends an email to `test@example.com`.
 * If you have HipChat, Slack, Webhooks, Pagerduty or VictorOps you can use:
     * `@hipchat-[room-name]` or `@slack-[room-name]` – posts the event or graph to that chat room.

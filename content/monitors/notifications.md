@@ -233,7 +233,7 @@ Datadog makes message template variables available to each defined monitor. Usin
 
 Here are a few examples of providing links to items like System Dashboards, Integration Dashboards, HostMaps and Managed Monitors pages.
 
-First example to review is the most common. Let’s say you would like to provide a link to a System Dashboard when a monitor for a specific system metric has exceeded your defined threshold. The message template variable that can be leveraged in this instance would be {{host.name}}. Include the following URL as a part of your Monitor “Say What’s Happening” section:
+First example to review is the most common. Let's say you would like to provide a link to a System Dashboard when a monitor for a specific system metric has exceeded your defined threshold. The message template variable that can be leveraged in this instance would be {{host.name}}. Include the following URL as a part of your Monitor "Say What's Happening" section:
 
 ```
 https://app.datadoghq.com/dash/integration/system_overview?tpl_var_scope=host:{{host.name}}

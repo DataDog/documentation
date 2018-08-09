@@ -194,7 +194,7 @@ You can contact them in one of the following ways:
       `C:\ProgramData\datadog\logs\ddagent.log`
 
 #### Datadog Agent バージョン < 3.9.1:
-Datadog Agent の各要素のログは、”Event Viewer”で確認できます。Windows Logs &rarr; Application へとメニューを選択してください。
+Datadog Agent の各要素のログは、"Event Viewer"で確認できます。Windows Logs &rarr; Application へとメニューを選択してください。
 
 上記の方法を実行しても問題が解決しない場合は、 <a href="https://docs.datadoghq.com/ja/help/" target="_top">サポートチーム</a>にご連絡ください。
 

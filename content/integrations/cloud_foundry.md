@@ -147,14 +147,14 @@ See [the DogStatsD documentation][6] for more information. We maintain [a list o
 
 There are two points of integration with Datadog, each of which achieves a different goal:
 
-* **Datadog Agent BOSH release** — Install the Datadog Agent on every node in your deployment to track system, network, and disk metrics. Enable any other Agent checks you wish.
-* **Datadog Firehose Nozzle** — Deploy one or more Datadog Firehose Nozzle jobs. The jobs tap into your deployment's Loggregator Firehose and send all non-container metrics to Datadog.
+* **Datadog Agent BOSH release** - Install the Datadog Agent on every node in your deployment to track system, network, and disk metrics. Enable any other Agent checks you wish.
+* **Datadog Firehose Nozzle** - Deploy one or more Datadog Firehose Nozzle jobs. The jobs tap into your deployment's Loggregator Firehose and send all non-container metrics to Datadog.
 
 These integrations are meant for Cloud Foundry deployment administrators, not end users.
 
 ### Prerequisites
 
-You must have a working Cloud Foundry deployment and access to the BOSH Director that manages it. You also need BOSH CLI to deploy each integration. You may use either major version of the CLI—[v1][8] or [v2][9].
+You must have a working Cloud Foundry deployment and access to the BOSH Director that manages it. You also need BOSH CLI to deploy each integration. You may use either major version of the CLI-[v1][8] or [v2][9].
 
 ### Install the Datadog Agent BOSH Release
 
@@ -221,7 +221,7 @@ The configuration under each check name should look the same as if you were conf
 
 You shouldn't configure a check for a subset of nodes in your deployment; everything you configure in `runtime.yml` applies to every node.
 
-To customize configuration for the default checks—system, network, disk, and ntp—see the [full list of configuration options][13] for the Datadog Agent BOSH release.
+To customize configuration for the default checks-system, network, disk, and ntp-see the [full list of configuration options][13] for the Datadog Agent BOSH release.
 
 #### Sync the runtime configuration to the Director
 

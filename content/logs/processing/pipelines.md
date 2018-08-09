@@ -85,7 +85,7 @@ If you want to remap an attribute to one of the reserved attributes in a custom 
 
 ### Integration Pipelines
 
-Datadog’s integration processing Pipelines are automatically enabled and parse out your logs in appropriate and useful ways. 
+Datadog's integration processing Pipelines are automatically enabled and parse out your logs in appropriate and useful ways. 
 As a result, you can get maximum value from many logs without any manual setup.
 Note that these Pipelines are read-only, but you can clone them and then edit the clone:
 
@@ -99,10 +99,10 @@ To make sure the Log Management solution functions in an optimal way, we set the
 
 * The size of a log event should not exceed 25K bytes.
 * Log events can be submitted up to 6h in the past and 2h in the future.
-* A log event once converted to JSON format should contain less than 256 attributes. Each of those attribute’s key should be less than 50 characters, be nested in less than 10 successive levels, and their respective value should be less than 1024 characters if promoted as a facet.
+* A log event once converted to JSON format should contain less than 256 attributes. Each of those attribute's key should be less than 50 characters, be nested in less than 10 successive levels, and their respective value should be less than 1024 characters if promoted as a facet.
 * A log event should not have more than 100 tags and each tag should not exceed 256 characters for a maximum of 10 million unique tags per day.
 
-Log events which do not comply with these limits might be transformed or truncated by the system—or simply not indexed if outside of the provided time range. However, Datadog always tries to do its best to preserve as much as possible to preserve provided user data.
+Log events which do not comply with these limits might be transformed or truncated by the system-or simply not indexed if outside of the provided time range. However, Datadog always tries to do its best to preserve as much as possible to preserve provided user data.
 
 ### Limits applied to provided features
 

@@ -52,7 +52,7 @@ aliases:
 <!--
 <p><strong>Not sure where to look?</strong> Our documentation is split into guides and references. Guides explain how to
     accomplish a particular task with Datadog, while the references are more general (as you might expect).
-    It might be a good idea to start with the <a href="/overview/">Datadog Overview</a>, which explains Datadog’s
+    It might be a good idea to start with the <a href="/overview/">Datadog Overview</a>, which explains Datadog's
 capabilities at a high level.</p>
 -->
 
@@ -60,7 +60,7 @@ capabilities at a high level.</p>
 <br> Datadogのドキュメントは大きな分類としてガイドとリファレンスの二つに分かれています。<strong>ガイド</strong>では、Agentのインストールやアラートの設定など、Datadogにおける特定のタスクについて解説しています。<strong>レファレンス</strong>では、より一般的な情報を提供しています。まずは、<a href="guides/overview/">Datadog の概要</a> を一読されることをお勧めします。ここでは、Datadogに何ができるのかを俯瞰できるように説明しています。</p>
 
 <!--
-<p><strong>If you have questions, we’re here to help.</strong> You can get in touch with
+<p><strong>If you have questions, we're here to help.</strong> You can get in touch with
     our support team by mentioning @support-datadog in a comment on Datadog itself, or by
     <a href="/help/#email">email</a>, on <a href="/help/#slack">Slack</a>, or on our <a href="https://help.datadoghq.com/hc/en-us/requests/new">customer service site</a>.</p>
 -->
@@ -71,7 +71,7 @@ capabilities at a high level.</p>
 
 <!--
 <p><strong>Find a mistake in this documentation?</strong> <a href="https://github.com/DataDog/documentation/issues">Let us know on GitHub</a>
-and we’ll take care of it.</p>
+and we'll take care of it.</p>
 -->
 
 <p><strong>ドキュメントに不具合があった場合は?</strong>

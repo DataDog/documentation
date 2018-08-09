@@ -36,7 +36,7 @@ If "All projects" box is ticked and a project name is specified, all projects wi
 
 ## 設定
 
-Airbrakeの”account_name”ページから、アカウント名とトークンを取得し、インテグレーションタイル内のフォームにコピーします。
+Airbrakeの"account_name"ページから、アカウント名とトークンを取得し、インテグレーションタイル内のフォームにコピーします。
 
 {{< img src="integrations/airbrake/snapshot_airbrake_small.png" alt="airbrake snapshot" >}}
 

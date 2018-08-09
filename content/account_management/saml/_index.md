@@ -11,7 +11,7 @@ further_reading:
 
 **This documentation assumes that you already have a SAML Identity Provider up and running.**
 
-Configuring [SAML (Security Assertion Markup Language)][1] for your Datadog account lets you and all your teammates log in to Datadog using the credentials stored in your organization’s Active Directory, LDAP, or other identity store that has been configured with a SAML Identity Provider.
+Configuring [SAML (Security Assertion Markup Language)][1] for your Datadog account lets you and all your teammates log in to Datadog using the credentials stored in your organization's Active Directory, LDAP, or other identity store that has been configured with a SAML Identity Provider.
 
 **Note**: Created users must accept email verification in order for SAML to work.
 
@@ -29,7 +29,7 @@ That brings you to the **SAML Single Sign On Configuration** page:
 
     After you've chosen the file, click "Upload File".
 
-2. Download Datadog’s [Service Provider metadata][4] to configure your IdP to recognize Datadog as a Service Provider.
+2. Download Datadog's [Service Provider metadata][4] to configure your IdP to recognize Datadog as a Service Provider.
 
 3. After you upload the IdP Meta-data and configure your IdP, enable SAML in Datadog by clicking the Enable button.
 {{< img src="account_management/saml/saml_enable.png" alt="saml enable" responsive="true" >}}
@@ -47,15 +47,15 @@ Loading this URL initiates a SAML authentication against your IdP. Note that the
 * Datadog specifies  `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` for the Format of the **NameIDPolicy** in Assertion Requests.
 * Assertions must be signed.
 * Assertions can be encrypted, but unencrypted assertions are accepted.
-* [Datadog’s SP Metadata][4].
+* [Datadog's SP Metadata][4].
 
 ##  Setting Attributes
 
 Attributes may be included with the Assertion. Datadog looks for 3 Attributes in the AttributeStatement:
 
-  1. **eduPersonPrincipalName**: If specified, the eduPersonPrincipalName must correspond to the user’s Datadog username. The username is usually the user’s email address.
-  2. **sn**: This is optional, and should be set to the user’s surname.
-  3. **givenName**: This is optional, and should be set to the user’s first, or given name.
+  1. **eduPersonPrincipalName**: If specified, the eduPersonPrincipalName must correspond to the user's Datadog username. The username is usually the user's email address.
+  2. **sn**: This is optional, and should be set to the user's surname.
+  3. **givenName**: This is optional, and should be set to the user's first, or given name.
 
 Datadog expects that Attributes use the URI NameFormat `urn:oasis:names:tc:SAML:2.0:attrname-format:uri` or the Basic NameFormat `urn:oasis:names:tc:SAML:2.0:attrname-format:basic`. The name used for each attribute depends on the NameFormat that your IdP uses.
 
@@ -73,7 +73,7 @@ If your IdP is configured to use the Basic NameFormat `urn:oasis:names:tc:SAML:2
 
 If **eduPersonPrincipalName** exists in the AttributeStatement, the value of this attribute is used for the username. If **eduPersonPrincipalName** is not included in the AttributeStatement, the username is taken from the NameID in the Subject. The NameID must use the Format `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress`.
 
-If **sn** and **givenName** are provided, they are used to update the user’s name in their Datadog profile.
+If **sn** and **givenName** are provided, they are used to update the user's name in their Datadog profile.
 
 ## Specific SAML IdP
 

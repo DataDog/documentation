@@ -24,7 +24,7 @@ The example above shows how to set the message text based on the monitor state. 
 
 Users may also want to send alarms to additional or different contacts or channels based on the name of the system that the monitor was triggered from.
 
-The example below shows how to use the is_match variable to send the notification to specific contacts based on the value of a host tag named “customer”:
+The example below shows how to use the is_match variable to send the notification to specific contacts based on the value of a host tag named "customer":
 ```
 {{#is_match "host.customer" "customer1"}} alert for customer 1 on {{host.name}}  @slack-customer1  {{/is_match}}  
 

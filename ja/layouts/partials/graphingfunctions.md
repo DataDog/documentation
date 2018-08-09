@@ -57,7 +57,7 @@ The ```top()``` method also has convenience functions of the following form, all
 
 ```[top, bottom][5, 10, 15, 20]_[mean, min, max, last, area, l2norm]()```
 
-For example, ```bottom10_min()``` retrieves lowest-valued 10 series using the ‘min’ metric.
+For example, ```bottom10_min()``` retrieves lowest-valued 10 series using the 'min' metric.
 
 **Robust regression**
 

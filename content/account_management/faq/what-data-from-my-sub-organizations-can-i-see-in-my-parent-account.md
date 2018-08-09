@@ -18,7 +18,7 @@ Monitor alerts can also be forwarded to the Parent account through the configura
 
 *  `https://api.datadoghq.com/api/v1/events?api_key=` (the API_KEY associated with the parent account to which the event is posted)
 
-Access to multiple cloud accounts: Parent accounts can also access the AWS, Azure, and Google Cloud accounts for each of their child organizations through their respective cloud providers’ integrations.  
+Access to multiple cloud accounts: Parent accounts can also access the AWS, Azure, and Google Cloud accounts for each of their child organizations through their respective cloud providers' integrations.  
 Combined with the above Cross-Organization viewer this allows for a more federated setup across multiple teams, users, and groups within Datadog.
 
 {{< partial name="whats-next/whats-next.html" >}}

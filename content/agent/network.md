@@ -20,8 +20,8 @@ further_reading:
 **Traffic is always initiated by the Agent to Datadog. No sessions are ever initiated from Datadog back to the Agent**:
 
 * All traffic is sent over SSL
-* The destination for [APM][1] data is `trace.agent.datadoghq.com`
-* The destination for [Live Containers][2] data is `process.datadoghq.com`
+* The destination for [APM][1] data is `trace.agent.datadoghq.com`
+* The destination for [Live Containers][2] data is `process.datadoghq.com`
 * The destination for [Logs][3] data is `intake.logs.datadoghq.com `
 * The destination for all other Agent data is
   * **Agents < 5.2.0** `app.datadoghq.com`
@@ -76,8 +76,8 @@ Open the following ports in order to benefit from all the Agent functionalities:
 
 * **Outbound**:
 
-  * `443/tcp`: port for most Agent data. (Metrics, APM, Live Processes/Containers) 
-  * `123/udp`: NTP - [More details on the importance of NTP here][5].
+  * `443/tcp`: port for most Agent data. (Metrics, APM, Live Processes/Containers) 
+  * `123/udp`: NTP - [More details on the importance of NTP here][5].
   * `10516/tcp`: port for the [Log collection][3]
   * `10255/tcp`: port for the [Kubernetes http kubelet][8]
   * `10250/tcp`: port for the [Kubernetes https kubelet][8]
@@ -99,8 +99,8 @@ Open the following ports in order to benefit from all the Agent functionalities:
 
 * **Outbound**
 
-  * `443/tcp`: port for most Agent data. (Metrics, APM, Live Processes/Containers) 
-  * `123/udp`: NTP - [More details on the importance of NTP here][5].
+  * `443/tcp`: port for most Agent data. (Metrics, APM, Live Processes/Containers) 
+  * `123/udp`: NTP - [More details on the importance of NTP here][5].
 
 * **Inbound**
 

@@ -8,7 +8,7 @@ description: Instrument your code to improve performance
 
 ## What is APM?
 
-Datadog APM provides you with deep insight into your application's performance—from automatically generated dashboards monitoring key metrics, such as request volume and latency, to detailed traces of individual requests—side by side with your logs and infrastructure monitoring.
+Datadog APM provides you with deep insight into your application's performance-from automatically generated dashboards monitoring key metrics, such as request volume and latency, to detailed traces of individual requests-side by side with your logs and infrastructure monitoring.
 
 Datadog APM is offered as an upgrade to our Pro and Enterprise plans. A free 14-day trial is available. Registered users can visit the [APM page of the Datadog application][1] to get started.
 
