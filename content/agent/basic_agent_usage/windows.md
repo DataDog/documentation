@@ -190,8 +190,6 @@ If you're still having trouble, [our support team][3] will be glad to provide fu
 
 Logs are available at:
 
-  * For Windows Server 2003, XP or older:
-`C:\Documents and Settings\All Users\Application Data\Datadog\logs\ddagent.log`
   * For Windows Server 2008, Vista and newer:
 `C:\ProgramData\datadog\logs\ddagent.log`
 
