@@ -1,6 +1,7 @@
 ---
 title: What data from my sub-organizations can I see in my parent account?
 kind: faq
+draft: true
 further_reading:
 - link: "account_management/saml"
   tag: "Documentation"
