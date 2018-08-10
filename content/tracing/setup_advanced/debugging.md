@@ -3,7 +3,7 @@ title: Debugging
 kind: documentation
 ---
 
-// ...
+// Description of the debugging functionality.
 
 {{< tabs >}}
 {{% tab "Java" %}}

@@ -12,6 +12,11 @@ kind: documentation
 Before instrumenting your application, review Datadog’s [APM Terminology][apm terminology] and familiarize yourself with the core concepts of Datadog APM. If you aren't using a [supported framework instrumentation][java framework], or you would like additional depth in your application’s traces, you may want to to manually instrument your code.
 
 Do this either using the Trace annotation for simple method call tracing or with the [OpenTracing API][opentracing] for complex tracing.
+
+[opentracing]: /tracing/setup_advanced/open_tracing
+[java framework]: /tracing/setup_basic/java/#integrations
+[apm terminology]: /tracing/visualization/services_list/
+
 {{% /tab %}}
 {{% tab "Python" %}}
 {{% /tab %}}
@@ -41,6 +46,10 @@ end
 ```
 
 For more details about manual instrumentation, check out the [API documentation][ruby api doc].
+
+[ruby api doc]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#manual-instrumentation
+[ruby lib comptability]: /tracing/setup_basic/ruby/#library-compatibility
+
 {{% /tab %}}
 {{% tab "Go" %}}
 ## Go
@@ -65,6 +74,9 @@ func main() {
     span.SetTag("my_tag", "my_value")
 }
 ```
+
+[tracer godoc]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
+
 {{% /tab %}}
 {{% tab "Node.js" %}}
 ## NodeJS
@@ -82,14 +94,9 @@ span.finish()
 ```
 
 For more information on manual instrumentation, check out the [API documentation][nodejs api doc].
+
+[nodejs api doc]: https://datadog.github.io/dd-trace-js/#manual-instrumentation
+[nodejs compatibility]: /tracing/setup_basic/nodejs/#compatibility
+
 {{% /tab %}}
 {{< /tabs >}}
-
-[tracer godoc]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
-[nodejs compatibility]: /tracing/setup_basic/nodejs/#compatibility
-[ruby lib comptability]: /tracing/setup_basic/ruby/#library-compatibility
-[nodejs api doc]: https://datadog.github.io/dd-trace-js/#manual-instrumentation
-[ruby api doc]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#manual-instrumentation
-[apm terminology]: /tracing/visualization/services_list/
-[java framework]: /tracing/setup_basic/java/#integrations
-[opentracing]: /tracing/setup_advanced/open_tracing

@@ -74,6 +74,7 @@ public class MyHttpRequestExtractAdapter implements TextMap {
   }
 }
 ```
+
 {{% /tab %}}
 {{% tab "Python" %}}
 {{% /tab %}}
