@@ -2,18 +2,19 @@
 title: Attributes Naming Convention
 kind: documentation
 description: "Datadog log attributes naming convention."
-aliases:
-    - logs/parsing/
 further_reading:
-- link: "logs/processing"
+- link: "logs/processing/pipelines"
   tag: "Documentation"
-  text: Learn how to process your logs
-- link: "logs/faq/log-parsing-best-practice"
-  tag: "FAQ"
-  text: Log Parsing - Best Practice
+  text: Discover Datadog Pipelines
+- link: "logs/processing/processors"
+  tag: "Documentation"
+  text: Consult the full list of available Processors
 - link: "logs/logging_without_limits"
   tag: "Documentation"
-  text: Control the volume of logs indexed by Datadog
+  text: Logging without limit
+- link: "logs/explorer"
+  tag: "Documentation"
+  text: Learn how to explore your logs
 ---
 
 ## Getting Started
@@ -27,7 +28,7 @@ One may ask, Why do we need a naming convention for log attributes?
 
 ## Overview
 
-Centralizing logs from various technologies and applications tends to generate tens or hundreds of different attributes in a Log Management environment— especially when many users, each one with their own personal usage patterns, are working within the same environment.
+Centralizing logs from various technologies and applications tends to generate tens or hundreds of different attributes in a Log Management environment- especially when many users, each one with their own personal usage patterns, are working within the same environment.
 This generates confusion. For instance, a client IP might have the following attributes within your logs: `clientIP`, `client_ip_address`, `remote_address`, `client.ip`, etc.
 In this context, it can be cumbersome to know which attributes correspond to the logs you are trying to filter on, or correlate proxy logs to web application logs.
 
@@ -124,7 +125,7 @@ Database related attributes are prefixed by `db`.
 | :---           | :---     | :----                                                                                                                                 |
 | `db.instance`  | `string` | Database instance name. E.g., in Java, if `jdbc.url="jdbc:mysql://127.0.0.1:3306/customers"`, the instance name is `customers`.       |
 | `db.statement` | `string` | A database statement for the given database type. E.g., for mySQL: `"SELECT * FROM wuser_table";` for Redis: `"SET mykey 'WuValue'"`. |
-| `db.operation` | `string` | The operation that was performed (“query”, “update”, “delete”,...).                                                                   |
+| `db.operation` | `string` | The operation that was performed ("query", "update", "delete",...).                                                                   |
 | `db.user`      | `string` | User that performs the operation.                                                                                                     |
 
 Typical integrations relying on these attributes are: [Cassandra][15], [MySQL][16], [RDS][17], [Elasticsearch][18], etc.
@@ -186,5 +187,5 @@ Some integrations that rely on these are: [Rsyslog][2], [NxLog][3], [Syslog-ng][
 [16]: /integrations/mysql
 [17]: /integrations/amazon_rds
 [18]: /integrations/elastic
-[19]: /logs/explore/#measures
+[19]: /logs/explorer/search/#measures
 [20]: /tracing/search

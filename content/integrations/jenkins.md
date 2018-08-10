@@ -16,7 +16,7 @@ categories:
 
 ## Overview
 
-This Jenkins plugin sends your build and deployment events to Datadog. From there, you can overlay them onto graphs of your other metrics so you can identify which deployments really affect your application's performance and reliability—for better or worse.
+This Jenkins plugin sends your build and deployment events to Datadog. From there, you can overlay them onto graphs of your other metrics so you can identify which deployments really affect your application's performance and reliability-for better or worse.
 
 The plugin also tracks build times (as a metric) and statuses (as a service check), so you'll know when your builds aren't healthy.
 

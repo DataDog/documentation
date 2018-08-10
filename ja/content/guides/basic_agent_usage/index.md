@@ -99,7 +99,7 @@ To check for this, run:
 
 <code>date -u && curl -s -v https://app.datadoghq.com/intake 2>&1 | grep Date</code>
 <p>
-This will output the current system’s date, and then make a request to our endpoint and grab the date on our end.
+This will output the current system's date, and then make a request to our endpoint and grab the date on our end.
 If these are more than a few minutes apart, you may want to look at the time settings on your server.
 </p>
 

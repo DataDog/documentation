@@ -10,6 +10,10 @@ further_reading:
     text: Using Distributions in DogStatsD
 ---
 
+<div class="alert alert-warning">
+    This is documentation for a beta feature.  Please <a href="https://docs.datadoghq.com/help/">contact support</a> to enable distribution metrics for your account.
+</div>
+             
 ## Overview
 
 Distributions are a [metric type][1] that can be thought of as a global version of the [Histogram metric][2], which measures the statistical distribution of discrete values on a single host. Distributions observe the values that are sent from multiple hosts to measure statistical distributions across your entire infrastructure, allowing you to compute global percentiles across your entire dataset.
@@ -89,5 +93,5 @@ The following gif demonstrates inspecting the aggregations created for a metric,
 [1]: /developers/metrics
 [2]: /developers/metrics/histograms
 [3]: https://app.datadoghq.com/metric/distribution_metrics
-[4]: /getting_started/custom_metrics
+[4]: /developers/metrics/custom_metrics
 [5]: /developers/metrics/distributions

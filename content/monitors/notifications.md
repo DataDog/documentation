@@ -233,7 +233,7 @@ Datadog makes message template variables available to each defined monitor. Usin
 
 Here are a few examples of providing links to items like System Dashboards, Integration Dashboards, HostMaps and Managed Monitors pages.
 
-First example to review is the most common. Let’s say you would like to provide a link to a System Dashboard when a monitor for a specific system metric has exceeded your defined threshold. The message template variable that can be leveraged in this instance would be {{host.name}}. Include the following URL as a part of your Monitor “Say What’s Happening” section:
+First example to review is the most common. Let's say you would like to provide a link to a System Dashboard when a monitor for a specific system metric has exceeded your defined threshold. The message template variable that can be leveraged in this instance would be {{host.name}}. Include the following URL as a part of your Monitor "Say What's Happening" section:
 
 ```
 https://app.datadoghq.com/dash/integration/system_overview?tpl_var_scope=host:{{host.name}}
@@ -301,6 +301,9 @@ For user groups, use `<!subteam^GROUP_ID|GROUP_NAME>`. To find the `GROUP_ID`, [
 ```
 <!subteam^12345|testers>
 ```
+
+Note: Trailing special characters in a channel name are unsupported for the Slack @-notifications. 
+e.g. `@----critical_alerts` works, but `@--critical_alerts--` won't receive any notifications.
 
 #### Using message template variables to dynamically create @-mentions
 

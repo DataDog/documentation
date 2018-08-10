@@ -45,11 +45,11 @@ Agent 6 is the latest major version of the Datadog Agent. The big difference bet
   * It uses fewer file descriptors
   * It has an all around decreased footprint
 
-* Global percentiles can be performed on the server directly to calculate real, effective global percentiles. (NOTE: this feature is currently in BETA. Contact support for details on how to have it enabled for your account.)
+* [Distributions metrics][17] can be performed on the server directly to calculate real, effective global percentiles. (NOTE: this feature is currently in BETA. Contact support for details on how to have it enabled for your account.)
 
 * [DogStatsD][6] can be used over a Unix socket instead of over udp.
 
-* Custom build your Agent v6 and [DogStatsD][6] much easier and with much more configuration options, to include or exclude almost anything. There is also a “puppy” Agent, which is a truly minimal installation.
+* Custom build your Agent v6 and [DogStatsD][6] much easier and with much more configuration options, to include or exclude almost anything. There is also a "puppy" Agent, which is a truly minimal installation.
 
 * Agent 6 uses ports `5000` and `5001` by default. You can specify different ports for `expvar_port` and `cmd_port` in the `datadog.yaml` file.
 
@@ -71,6 +71,25 @@ With:
 * `<destination_dir>` is the directory where the imported `datadog.yaml` is written (use the same directory as `<old_configuration_dir>` on both Mac & Windows environment).
 
 **Note**: On Windows, `datadog.conf` is automatically upgraded to `datadog.yaml` on upgrade.
+
+## Resource overhead
+
+### Agent v6
+* CPU: \~ 0.12% of the CPU used on average
+* Memory: \~ 55Mo of RAM used
+* Network bandwidth: \~ 86 B/s &#9660; | 260 B/s &#9650;
+
+### Agent v5
+* CPU: \~ 0.35% of the CPU used on average
+* Memory: \~ 115Mo of RAM used
+* Network bandwidth: \~ 1900 B/s &#9660; | 800 B/s &#9650;
+* Disk: Linux 120MB | Windows 60MB
+
+Caveats:
+
+* Enabling integrations may increase the Agent's resource consumption.
+* Enabling JVM checks forces the Agent to use more memory, depending on the number of beans exposed by the monitored JVMs.
+* Enabling the trace/process/logging Agents may increase resource consumption.
 
 ## CLI
 
@@ -167,7 +186,7 @@ Once the Agent is running, use the `datadog-agent launch-gui` command to launch 
 [2]: https://github.com/DataDog/datadog-agent
 [3]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md
 [4]: /integrations
-[5]: /getting_started/custom_metrics/
+[5]: /developers/metrics/custom_metrics/
 [6]: /developers/dogstatsd
 [7]: /agent/basic_agent_usage/deb
 [8]: /agent/basic_agent_usage/ubuntu
@@ -179,3 +198,4 @@ Once the Agent is running, use the `datadog-agent launch-gui` command to launch 
 [14]: /agent/basic_agent_usage/docker
 [15]: /agent/basic_agent_usage/kubernetes
 [16]: /agent/basic_agent_usage/source
+[17]: /developers/metrics/distributions 

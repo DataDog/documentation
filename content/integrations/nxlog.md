@@ -25,7 +25,7 @@ Configure NXLog to gather logs from your host, containers, & services.
 ### Log collection
 
 1. Configure NXLog to send your logs to your Datadog platform
-    Replace the whole file in `C:\Program Files\nxlog\conf` by the following: 
+    Replace the whole file in `C:\Program Files\nxlog\conf` by the following: 
 
     ```
     ## Please set the ROOT to the folder your nxlog was installed into,
@@ -41,7 +41,7 @@ Configure NXLog to gather logs from your host, containers, & services.
     LogFile %ROOT%\data\nxlog.log
     ##Extension to format the message in JSON format
     <Extension json>
-        Module xm_json
+        Module xm_json
     </Extension>
     ##Extension to format the message in syslog format
     <Extension syslog>
@@ -50,45 +50,45 @@ Configure NXLog to gather logs from your host, containers, & services.
     ########## INPUTS ###########
     ##Input for windows event logs
     <Input syslogs>
-        Module      im_msvistalog
+        Module      im_msvistalog
     ##For windows 2003 and earlier use the following:
-    #    Module      im_mseventlog
+    #    Module      im_mseventlog
     </Input>
     ############ OUTPUTS ##############
     ##TCP output module
     <Output out>
-        Module      om_tcp
-        Host        intake.logs.datadoghq.com
-        Port        10514
-        Exec        to_syslog_ietf();
-        Exec        $raw_event="<YOUR_API_KEY> "+$raw_event;
+        Module      om_tcp
+        Host        intake.logs.datadoghq.com
+        Port        10514
+        Exec        to_syslog_ietf();
+        Exec        $raw_event="<YOUR_API_KEY> "+$raw_event;
     </Output>
     ############ ROUTES TO CHOOSE #####
     <Route 1>
-        Path        syslogs => out
+        Path        syslogs => out
     </Route>
     ```
-    Do not forget to replace <YOUR_API_KEY> in the format.
+    Do not forget to replace <YOUR_API_KEY> in the format.
 
 2. Activate NXLog watchfile module
     Foreach file you want to monitor add the following before the output section:
     ```
     ##Module to watch a file
     <Input FILE_WATCH_1>
-      Module im_file
-      File "PATH\\TO\\YOUR\\FILE1"
-      Exec   $SourceName = '<MY_APPLICATION_NAME>';
-      SavePos TRUE
+      Module im_file
+      File "PATH\\TO\\YOUR\\FILE1"
+      Exec   $SourceName = '<MY_APPLICATION_NAME>';
+      SavePos TRUE
 
-      ##include the message and add meta data
-      Exec $Message = $raw_event;
+      ##include the message and add meta data
+      Exec $Message = $raw_event;
     </Input>
     ```
 
 3. Make sure those files are plugged in the output section
     ```
     <Route file1>
-        Path    FILE_WATCH_1,FILE_WATCH_2,... => out
+        Path    FILE_WATCH_1,FILE_WATCH_2,... => out
     </Route>
     ```
 

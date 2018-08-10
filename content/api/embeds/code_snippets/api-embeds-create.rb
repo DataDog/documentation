@@ -22,7 +22,7 @@ legend = "no"
 title = "Embed created through API"
 
 # Create parameter hash
-description = {: timeframe => timeframe, : size => size, : legend => legend, : title => title
+description = {:timeframe => timeframe, :size => size, :legend => legend, :title => title
 }
 
 # Make API Call

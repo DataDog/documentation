@@ -20,13 +20,13 @@ Looking to know more about Datadog resources for your favorite language or platf
 
 #### Metrics
 
-Our [Metrics section][6] is a deep-dive into the heart of Metrics at Datadog. This section explains the different types of Metrics, what they represent, and how they are used throughout the Datadog ecosystem.
+Our [Metrics section][6] is a deep-dive into the heart of Metrics at Datadog. This section explains the different types of Metrics, what they represent, and how they are used throughout the Datadog ecosystem. You can also head directly to the [Custom Metrics][8] section to learn more about using your own tailor-made metrics.
 
 #### Office Hours
 
 Finally, don't miss out on the regular [Datadog Office Hours][7], which is your opportunity to chat directly with our engineers about developing for Datadog.
 
-Thanks for stopping by—and welcome to the contributor community!
+Thanks for stopping by-and welcome to the contributor community!
 
 [1]: /developers/agent_checks
 [2]: /developers/prometheus
@@ -35,3 +35,4 @@ Thanks for stopping by—and welcome to the contributor community!
 [5]: /developers/libraries
 [6]: /developers/metrics
 [7]: /developers/office_hours
+[8]: /developers/metrics/custom_metrics

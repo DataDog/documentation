@@ -5,7 +5,7 @@ description: Control the volume of logs indexed by Datadog
 aliases:
   - logs/dynamic_volume_control
 further_reading:
-- link: "logs/analytics"
+- link: "logs/explorer/analytics"
   tag: "Documentation"
   text: "Perform Log Analytics"
 - link: "logs/processing"
@@ -15,7 +15,7 @@ further_reading:
   tag: "Documentation"
   text: Learn more about parsing
 - link: "https://www.datadoghq.com/blog/logging-without-limits/"
-  tag: "blogpost"
+  tag: "Blog"
   text: "Logging without limits blogpost"
 ---
 
@@ -34,7 +34,7 @@ You can now:
 * Get alerted when volumes grows unexpectedly over an index
 * Archive all enriched logs
 
-This flexibility is critical in some exceptional situations such as outages, when you can disable specific filters to send more data. The inverse is true as well; if you over-consume because of a seasonal reason (Black Friday, Christmas, etc…) you can decide to selectively reduce some volume to avoid overages. 
+This flexibility is critical in some exceptional situations such as outages, when you can disable specific filters to send more data. The inverse is true as well; if you over-consume because of a seasonal reason (Black Friday, Christmas, etc...) you can decide to selectively reduce some volume to avoid overages. 
 
 ## Index details
 
@@ -46,7 +46,7 @@ Indexed logs can be used for [faceted searching][1], [Log Analytics][2], [dashbo
 
 ## Setup Log Monitors on volumes
 
-Get notified at any moment if the volumes in any scope (`service`, `availibility-zone`, etc…) of your infrastructure is growing unexpectedly:
+Get notified at any moment if the volumes in any scope (`service`, `availibility-zone`, etc...) of your infrastructure is growing unexpectedly:
 
 1. Go in the [Datadog Log Explorer][6] view 
 2. Build a [search query][7] that represents the volume to monitor. 
@@ -62,7 +62,7 @@ Index Filters give dynamic control over what goes into your indexes.
 
 For example, if some logs were captured only for troubleshooting purposes, you may only care to index those logs with errors and warnings. This can easily be achieved with exclusion filters.
 
-To define a new Index Filter click on the “add” button:
+To define a new Index Filter click on the "add" button:
 
 {{< img src="logs/logging_without_limits/index_filters.png" alt="" responsive="true" style="width:70%;">}}
 
@@ -70,7 +70,7 @@ To configure an exclusion filter:
 
 1. Define the name of your filter
 2. Define the query for logs to exclude from your index
-    **Note**: It is possible to use any attribute or tag in the Index filter query, even those that are not facets. If you are filtering by non-faceted attributes or tags, be sure to hit “enter/return” from the query bar
+    **Note**: It is possible to use any attribute or tag in the Index filter query, even those that are not facets. If you are filtering by non-faceted attributes or tags, be sure to hit "enter/return" from the query bar
 3. Save the filter
 
     {{< img src="logs/logging_without_limits/index_filter_details.png" alt="" responsive="true" style="width:80%;">}}
@@ -109,7 +109,7 @@ Debug logs, for instance, are not always useful but during a complex troubleshoo
 
 Instead of changing your application logging level or using a complex internal filtering tool, it is now possible to change what is indexed directly with the Datadog index filters.
 
-Enable or disable them in one click in the pipeline page:
+Enable or disable them in one click in the Pipeline page:
 
 {{< img src="logs/logging_without_limits/enable_index_filters.png" alt="" responsive="true" style="width:80%;">}}
 
@@ -117,10 +117,10 @@ Enable or disable them in one click in the pipeline page:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/explore/#facets
-[2]: /logs/analytics/
-[3]: /logs/analytics/#dashboard
+[1]: /logs/explorer/search/#facets
+[2]: /logs/explorer/analytics/
+[3]: /logs/explorer/analytics/#dashboard
 [4]: /monitors/monitor_types/log/
 [5]: https://app.datadoghq.com/logs/pipelines
 [6]: https://app.datadoghq.com/logs
-[7]: /logs/explore/
+[7]: /logs/explorer/search

@@ -2,7 +2,7 @@
   "org": {
     "public_id": "axd2s",
     "name": "My Org",
-           "billing": {},
+           "billing": {},
     "created": "2016-10-06 21:41:12",
     "settings": {
       "saml_can_be_enabled": true,

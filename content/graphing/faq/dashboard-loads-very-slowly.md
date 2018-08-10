@@ -29,7 +29,7 @@ The number of [custom metrics][2] (where a custom metric refers to a single, uni
 
 If you plan on continuing to submit more [custom metrics][2] than the billing limit in the future, or if you have any questions, reach out to [us directly][3]
 
-[1]: /getting_started/custom_metrics
-[2]: /getting_started/custom_metrics/
+[1]: /developers/metrics/custom_metrics
+[2]: /developers/metrics/custom_metrics/
 [3]: /help
 [4]: https://app.datadoghq.com/metric/summary

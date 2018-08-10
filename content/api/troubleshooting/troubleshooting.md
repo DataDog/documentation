@@ -19,7 +19,7 @@ To check your timestamp is correct run:
 
 `date -u && curl -s -v https://app.datadoghq.com 2>&1 | grep Date`
 
-This output the current system’s date, and then make a request to our endpoint and grab the date on our end. If these are more than a few minutes apart, you may want to look at the time settings on your server.
+This output the current system's date, and then make a request to our endpoint and grab the date on our end. If these are more than a few minutes apart, you may want to look at the time settings on your server.
 
 There are also certain fields which are not mandatory for submission, but do require a valid input. For example, in submitting an event the `priority` field must be one of the four given options.  
 

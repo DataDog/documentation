@@ -100,6 +100,6 @@ Il existe plusieurs projets de notre communauté qui permettent une maintenance 
 [9]: /monitors/downtimes
 [10]: /monitors/check_summary
 [11]: /monitors/faq
-[12]: /getting_started/tagging
+[12]: /tagging
 [13]: https://app.datadoghq.com/monitors#/create
 [14]: /graphing/event_stream

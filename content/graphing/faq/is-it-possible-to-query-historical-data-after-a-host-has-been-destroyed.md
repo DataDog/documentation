@@ -11,4 +11,4 @@ If you're planning to frequently churn hosts, add a tag [to the Agent][1] in the
 
 [1]: /agent
 [2]: /graphing/infrastructure
-[3]: /getting_started/tagging
+[3]: /tagging

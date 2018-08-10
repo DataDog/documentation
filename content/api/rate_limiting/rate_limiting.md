@@ -19,7 +19,7 @@ Here is some information regarding our API rate limit policy:
 * Rate limit for the [query_snapshot API][5] call is 60 per hour per organization, it can be extended on demand
 
 [1]: /help
-[2]: /getting_started/custom_metrics/
-[3]: /getting_started/custom_metrics
+[2]: /developers/metrics/custom_metrics/
+[3]: /developers/metrics/custom_metrics
 [4]: /api/#query-time-series-points
 [5]: /api/#graphs

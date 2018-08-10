@@ -31,9 +31,9 @@ The status code of the request can be used to determine the log status. Our inte
 * 5xx: Error
 
 Let's assume the status code of your log is stored in the `http.status_code` attribute.
-Add a Category Processor in your pipeline that creates a new attribute to reflect the above mapping:
+Add a Category Processor in your Pipeline that creates a new attribute to reflect the above mapping:
 
-{{< img src="logs/faq/category_processor.png" alt="Category processor" responsive="true" >}}
+{{< img src="logs/faq/category_processor.png" alt="Category Processor " responsive="true" >}}
 
 Then add a status remapper that uses the newly created attribute:
 
@@ -51,9 +51,9 @@ Bunyan levels are similar to those of Syslog, but their values are multiplied by
 * 60 = FATAL
 
 Let's assume the bunyan level is stored in the `bunyan_level` attribute.
-Add a Category Processor in your pipeline that creates a new attribute to reflect the above mapping:
+Add a Category Processor in your Pipeline that creates a new attribute to reflect the above mapping:
 
-{{< img src="logs/faq/category_processor_bunyan.png" alt="category processor bunyan" responsive="true" >}}
+{{< img src="logs/faq/category_processor_bunyan.png" alt="category Processor  bunyan" responsive="true" >}}
 
 Then add a status remapper that uses the newly created attribute:
 

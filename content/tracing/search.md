@@ -33,9 +33,11 @@ further_reading:
 
 Use Trace Search & Analytics to filter application performance metrics and [APM events][8] by user-defined tags. It allows deep exploration of the web requests flowing through your service.
 
-Trace Search & Analytics can be enabled per APM service and per host. A service on which it is enabled exposes all its APM Events to Datadog.
+Trace Search & Analytics can be enabled per APM service and per host. A service on which it is enabled exposes all its APM Events to Datadog. 
 
-In this view you can:
+Downstream services like databases and cache layers aren't in the list of available services (as they don't generate traces on their own), but their information is picked up by the top level services that call them.
+
+In the Trace Search view you can:
 
 * [Interact with the Time range](#time-range)
 * [Display lists of Traces](#trace-stream)
@@ -81,7 +83,7 @@ Your traces inherit tags from [hosts][4] and [integrations][5] that generate the
 | :----                                                          | :---                                                                        |
 | `("env:prod" OR test)`                                         | All traces with the tag `#env:prod` or the tag `#test`                      |
 | `(service:srvA OR service:srvB)` or `(service:(srvA OR srvB))` | All traces that contain tags `#service:srvA` or `#service:srvB`.            |
-| `("env:prod" AND -”version:beta”)`                             | All traces that contain `#env:prod` and that do not contain `#version:beta` |
+| `("env:prod" AND -"version:beta")`                             | All traces that contain `#env:prod` and that do not contain `#version:beta` |
 
 If your tags don't follow [tags best practices][6] and don't use the `key:value` syntax, use this search query:
 
@@ -223,6 +225,6 @@ All measure have their own unit that is then used for display in the Trace searc
 [2]: /tracing/analytics
 [4]: /graphing/infrastructure/
 [5]: /integrations/
-[6]: /getting_started/tagging/#tags-best-practices
+[6]: /tagging/#tags-best-practices
 [7]: https://app.datadoghq.com/apm/search
 [8]: /tracing/getting_further/apm_events

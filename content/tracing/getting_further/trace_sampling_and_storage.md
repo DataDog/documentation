@@ -58,7 +58,7 @@ Signature Sampling ensures a sampling of a variety of [traces][2] (errors, succe
 Datadog computes a *signature* for every trace reported, based on its services, resources, errors, etc.. Traces of the same signature are considered similar. For example, a signature could be:
 
 * `env=prod`, `my_web_service`, `is_error=true`, `resource=/login`
-* `env=staging`, `my_database_service`, `is_error=false`, `query=SELECT…`
+* `env=staging`, `my_database_service`, `is_error=false`, `query=SELECT...`
 
 A proportion of traces with each signature is then kept, so you get full visibility into all the different kinds of transactions happening in your system. This method ensures traces for resources with low volumes are still kept.
 
@@ -123,7 +123,7 @@ For example, at `9:00am UTC Wed, 12/20` you would see:
 * **1%** of traces sampled on `7/1 00:00` - `12/13 23:59`
 * **0%** of traces before `7/1 00:00`
 
-Once a trace has been viewed, it continues to be available by using its trace ID in the URL: `https://app.datadoghq.com/apm/trace/<trace_id>` This is true even if it “expires” from the UI. This behavior is independent of the UI retention time buckets.
+Once a trace has been viewed, it continues to be available by using its trace ID in the URL: `https://app.datadoghq.com/apm/trace/<trace_id>` This is true even if it "expires" from the UI. This behavior is independent of the UI retention time buckets.
 
 {{< img src="tracing/trace_id.png" alt="Trace ID" responsive="true" >}}
 
@@ -133,7 +133,7 @@ This section documents how the priority sampling is implemented in the clients d
 
 The `sampling_priority` is an attribute of the Context that has to be propagated over the wire next to the `trace_id` and `span_id` attributes. When propagated over HTTP, its header is `x-datadog-sampling-priority`. When creating remote spans from this propagated attribute, **the same sampling priority value has to be used for the remote trace**.
 
-The `sampling_priority` value must be the same across all the pieces of a trace (when spread across hosts or asynchronous tasks). So it should not be modified after any context propagation (remote call, fork, …).
+The `sampling_priority` value must be the same across all the pieces of a trace (when spread across hosts or asynchronous tasks). So it should not be modified after any context propagation (remote call, fork, ...).
 
 The initial `sampling_priority` value is computed at the root span creation. The initial value can either be **0** or **1**. This initial decision is made by the client but the Agent provides a "rate" to decide if it should be a **0** or a **1**.
 The response of the Agent to any flush is a JSON containing a `rate_by_service` key which contains a mapping of services to a rate (between 0 and 1). This rate decides the probability of priority **1** being assigned to new traces:

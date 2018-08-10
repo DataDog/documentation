@@ -21,7 +21,7 @@ Outlier Detectionはアルゴリズムベースの異常検出機能であり、
 
 The `outliers` query function, when applied to your query, will return the usual results but with outlier series marked.
 
-You can use this function to display and alert on outliers in your data. To try it out, you’ll first need a metric for which a group of hosts (or availability zones, partitions, etc) should exhibit uniform behavior. For the function to work, be sure that there are at least 3 or more members in the group. Given that, here are two ways to use outlier detection on that group.
+You can use this function to display and alert on outliers in your data. To try it out, you'll first need a metric for which a group of hosts (or availability zones, partitions, etc) should exhibit uniform behavior. For the function to work, be sure that there are at least 3 or more members in the group. Given that, here are two ways to use outlier detection on that group.
 -->
 
 ## Outlier Detectionの利用法
@@ -67,7 +67,7 @@ To enable outlier detection, click on the + icon on the right side of the metric
 
 {{< img src="outliers/outliers-algorithm-selector.png" >}}
 
-This will add the outliers function to your graph, and you’ll see any outliers in the group highlighted in bold, warm colors.
+This will add the outliers function to your graph, and you'll see any outliers in the group highlighted in bold, warm colors.
 
 {{< img src="outliers/outliers-algorithm-annotated-newer.png" >}}
 -->
@@ -118,7 +118,7 @@ In the alert conditions, select the grouping and timeframe. Then select an algor
 
 {{< img src="outliers/outliers-newer-monitor-set-conditions.png" >}}
 
-To ensure that your alert is properly calibrated, you can set the time window at the top of the screen and use the reverse (<<) button to look back in time for when outliers would have be found and alerted. This is also a good way to tune the parameters to the specific outliers algorithm you’re using.
+To ensure that your alert is properly calibrated, you can set the time window at the top of the screen and use the reverse (<<) button to look back in time for when outliers would have be found and alerted. This is also a good way to tune the parameters to the specific outliers algorithm you're using.
 
 {{< img src="outliers/outliers-new-monitor-graph-calibrate.png" >}}
 -->
@@ -146,7 +146,7 @@ Outlier Detection では、DBSCAN と Median Absolute Deviation (MAD)の2つの�
 
 A natural way to group together hosts that are behaving similarly is to use a clustering algorithm. We use [DBSCAN](https://en.wikipedia.org/wiki/DBSCAN), a popular density-based clustering algorithm, for this purpose. DBSCAN works by greedily agglomerating points that are close to each other. Clusters with few points in them are considered outliers.
 
-Traditionally, DBSCAN takes: 1) a parameter 𝜀 that specifies a distance threshold under which two points are considered to be close; and 2) the minimum number of points that have to be within a point’s 𝜀-radius before that point can start agglomerating. The image below shows an example of DBSCAN in action on points in the plane. There are two clusters. The large points had enough close neighbors to agglomerate those points, while the small colored points did no agglomerating themselves but are within the 𝜀-radius of a large point. The points in black are the outliers.
+Traditionally, DBSCAN takes: 1) a parameter 𝜀 that specifies a distance threshold under which two points are considered to be close; and 2) the minimum number of points that have to be within a point's 𝜀-radius before that point can start agglomerating. The image below shows an example of DBSCAN in action on points in the plane. There are two clusters. The large points had enough close neighbors to agglomerate those points, while the small colored points did no agglomerating themselves but are within the 𝜀-radius of a large point. The points in black are the outliers.
 
 {{< img src="outliers/outliers-dbscan-2d.png" >}}
 -->
@@ -176,11 +176,11 @@ Datadogでは外れ値(Outlier)を検出するために、DBSCANを簡略化し�
 距離の閾値の初期値については、以下のように設定しています。まず、各時刻における時系列データの中央値をとった、"中央値時系列データ" を新たに作成します。そして、 その"中央値時系列データ"と、各ホストとの(ユークリッド)距離を算出します。閾値は、この算出された距離の中央値を正規化した定数で乗じたものになります。
 
 <!--
-The only parameter we take is `tolerance`, the constant by which the initial threshold is multiplied to yield DBSCAN’s distance parameter 𝜀. Here is DBSCAN with a tolerance of 3.0 in action on a pool of Cassandra workers:
+The only parameter we take is `tolerance`, the constant by which the initial threshold is multiplied to yield DBSCAN's distance parameter 𝜀. Here is DBSCAN with a tolerance of 3.0 in action on a pool of Cassandra workers:
 
 {{< img src="outliers/outliers-dbscan-cassandra.png" >}}
 
-You should set the tolerance parameter depending on how similarly you expect your group of hosts to behave—larger values allow for more tolerance in how much a host can deviate from its peers.
+You should set the tolerance parameter depending on how similarly you expect your group of hosts to behave-larger values allow for more tolerance in how much a host can deviate from its peers.
 -->
 
 DatadogのDBSCANで使用するパラメータは`tolerance`のみであり、DBスキャンの距離のパラメータ 𝜀 (eps)を算出するために閾値の初期値はこの定数によって乗じられます。次は、CassandraワーカープールについてDBSCANをtolerance 値3.0で適用した例です:
@@ -194,7 +194,7 @@ DatadogのDBSCANで使用するパラメータは`tolerance`のみであり、DB
 
 The distance threshold of the DBSCAN algorithm is independent of the overall scale of the metrics. Consider a group of constant time series with values {1000, 1001, 1002, 1005, 1015}. The median series will be a constant series at 1002. DBSCAN with a tolerance of 3.0 will identify the series at 1015 to be an outlier, even though it may be almost indistinguishable from the other series visually on the graph when the origin of the y-axis is at 0.
 
-The ScaledDBSCAN algorithm scales the distance threshold according to the relative magnitudes of the median series and the hosts’ distances to the median series. In most situations, it will behave the same as regular DBSCAN does. However, when the median series is large compared to the distances to the median series, the distance threshold becomes proportional to the size of the median series. As a result, assessing whether two time series are close depends on the scale of the median series.
+The ScaledDBSCAN algorithm scales the distance threshold according to the relative magnitudes of the median series and the hosts' distances to the median series. In most situations, it will behave the same as regular DBSCAN does. However, when the median series is large compared to the distances to the median series, the distance threshold becomes proportional to the size of the median series. As a result, assessing whether two time series are close depends on the scale of the median series.
 
 Here is a comparison of DBSCAN and ScaledDBSCAN with tolerances of 3 on field data size in a group of Elasticsearch nodes:
 
@@ -204,7 +204,7 @@ Here is a comparison of DBSCAN and ScaledDBSCAN with tolerances of 3 on field da
 
 The distance threshold of the DBSCAN algorithm is independent of the overall scale of the metrics. Consider a group of constant time series with values {1000, 1001, 1002, 1005, 1015}. The median series will be a constant series at 1002. DBSCAN with a tolerance of 3.0 will identify the series at 1015 to be an outlier, even though it may be almost indistinguishable from the other series visually on the graph when the origin of the y-axis is at 0.
 
-The ScaledDBSCAN algorithm scales the distance threshold according to the relative magnitudes of the median series and the hosts’ distances to the median series. In most situations, it will behave the same as regular DBSCAN does. However, when the median series is large compared to the distances to the median series, the distance threshold becomes proportional to the size of the median series. As a result, assessing whether two time series are close depends on the scale of the median series.
+The ScaledDBSCAN algorithm scales the distance threshold according to the relative magnitudes of the median series and the hosts' distances to the median series. In most situations, it will behave the same as regular DBSCAN does. However, when the median series is large compared to the distances to the median series, the distance threshold becomes proportional to the size of the median series. As a result, assessing whether two time series are close depends on the scale of the median series.
 
 Here is a comparison of DBSCAN and ScaledDBSCAN with tolerances of 3 on field data size in a group of Elasticsearch nodes:
 
@@ -227,9 +227,9 @@ For a given set of data D = {d<sub>1</sub>, ..., d<sub>n</sub>}, the deviations 
 <!--
 #### Parameters
 
-In our case, the data set is the set of all points in every time series. We take the MAD of all the points then multiply it by a normalizing constant and our first parameter, `tolerance`. The constant normalizes MAD so that it is comparable to the standard deviation of the normal distribution. The tolerance parameter then specifies how many “deviations” a point has to be away from the median for it to be considered an outlier.
+In our case, the data set is the set of all points in every time series. We take the MAD of all the points then multiply it by a normalizing constant and our first parameter, `tolerance`. The constant normalizes MAD so that it is comparable to the standard deviation of the normal distribution. The tolerance parameter then specifies how many "deviations" a point has to be away from the median for it to be considered an outlier.
 
-Now to mark a time series as an outlier, we use the second parameter, `pct`. If more than pct% of a particular series’ points are considered outliers, then the whole series is marked to be an outlier. Here is MAD with a tolerance of 3 and pct of 20 in action when comparing the average system load by availability zone:
+Now to mark a time series as an outlier, we use the second parameter, `pct`. If more than pct% of a particular series' points are considered outliers, then the whole series is marked to be an outlier. Here is MAD with a tolerance of 3 and pct of 20 in action when comparing the average system load by availability zone:
 
 {{< img src="outliers/outliers-mad-az.png" >}}
 -->
@@ -274,7 +274,7 @@ Here is an example of MAD and ScaledMAD algorithms for comparing the usable memo
 
 So which algorithm should you use? For most outliers, both algorithms will perform well at the default settings. However, there are subtle cases where one algorithm is more appropriate than the other.
 
-In the following image, we see a group of hosts flushing their buffers together while one host is flushing its buffer slightly later. DBSCAN picks this up as an outlier whereas MAD does not. This is a case where we would prefer to use MAD, as we don’t care about when the buffers get flushed. The synchronicity of the group is just an artifact of the hosts being restarted at the same time. On the other hand, if instead of flushed buffers, the metrics below represented a scheduled job that actually should be synchronized across hosts, DBSCAN would be the right choice.
+In the following image, we see a group of hosts flushing their buffers together while one host is flushing its buffer slightly later. DBSCAN picks this up as an outlier whereas MAD does not. This is a case where we would prefer to use MAD, as we don't care about when the buffers get flushed. The synchronicity of the group is just an artifact of the hosts being restarted at the same time. On the other hand, if instead of flushed buffers, the metrics below represented a scheduled job that actually should be synchronized across hosts, DBSCAN would be the right choice.
 
 {{< img src="outliers/outliers-flushing.png" >}}
 -->
@@ -301,7 +301,7 @@ In most situations, the scaled algorithms will behave the same as their regular 
 
 When setting up an outlier alert, an important parameter is the size of the time window. If the window size is too large, by the time an outlier is detected, the bad behavior might have been going on for longer than one would like. If the window size is too short, the alerts will not be as resilient to unimportant, one-off spikes.
 
-Both algorithms are set up to identify outliers that differ from the majority of metrics that are behaving similarly. If your hosts exhibit “banding” behavior as shown below (perhaps because each band represents a different shard), we recommend tagging each band with an identifier, and setting up outlier detection alerts on each band separately.
+Both algorithms are set up to identify outliers that differ from the majority of metrics that are behaving similarly. If your hosts exhibit "banding" behavior as shown below (perhaps because each band represents a different shard), we recommend tagging each band with an identifier, and setting up outlier detection alerts on each band separately.
 
 {{< img src="outliers/outliers-banding.png" >}}
 -->

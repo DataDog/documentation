@@ -19,7 +19,7 @@ private: true
 * [Common Windows Agent Installation Error 1721][7]
 * [How do I install the Agent on a server with limited internet connectivity?][8]
 * [How to monitor SNMP devices?][9]
-* [I stopped my Agent but I’m still seeing the host in my Datadog account.][10]
+* [I stopped my Agent but I'm still seeing the host in my Datadog account.][10]
 * [How do I uninstall the Agent?][11]
 
 ## Troubleshooting

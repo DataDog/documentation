@@ -114,7 +114,7 @@ Export [Trace Analytics][7] from the Trace search or build them directly in your
 
 [1]: /tracing/search/#measures
 [2]: /tracing/search/#facets
-[3]: /getting_started/tagging
+[3]: /tagging
 [4]: /monitors/monitor_types/apm
 [5]: /graphing/dashboards/timeboard
 [6]: /help

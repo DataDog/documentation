@@ -6,7 +6,7 @@
         "type" : "pro"
       },
       "billing" : {
-        "type" : "bill-parent”
+        "type" : "bill-parent"
     }
   }]
 }

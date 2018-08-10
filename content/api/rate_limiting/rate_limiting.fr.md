@@ -19,7 +19,7 @@ Voici quelques informations concernant notre politique de limite de débit API :
 * La limite de débit pour l'appel [query_snapshot API][5] est de 60 par heure par organisation. La limite peut être agrandi sur demande.
 
 [1]: /help
-[2]: /getting_started/custom_metrics/
-[3]: /getting_started/custom_metrics
+[2]: /developers/metrics/custom_metrics/
+[3]: /developers/metrics/custom_metrics
 [4]: /api/#query-time-series-points
 [5]: /api/#graphs

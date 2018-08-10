@@ -52,7 +52,7 @@ See the [tracer settings][4] for the list of initialization options.
 
 ## Manual Instrumentation
 
-If you aren’t using supported library instrumentation (see [Compatibility](#compatibility)), you may want to manually instrument your code.
+If you aren't using supported library instrumentation (see [Compatibility](#compatibility)), you may want to manually instrument your code.
 
 The following example initializes a Datadog Tracer and creates a Span called `web.request`:
 

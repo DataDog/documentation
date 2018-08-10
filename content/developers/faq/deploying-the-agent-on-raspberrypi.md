@@ -10,12 +10,12 @@ kind: faq
 sudo apt-get update
 ```
 
-2. Then install “sysstat”.
+2. Then install "sysstat".
 ```
 sudo apt-get install sysstat
 ```
 
-3. [Navigate to the Agent Install Screen][1] in the Datadog Application and select “from source”
+3. [Navigate to the Agent Install Screen][1] in the Datadog Application and select "from source"
 4. Execute the installation command.
 ```
 DD_API_KEY=<YOUR-API-KEY> sh -c "$(curl -L https://raw.githubusercontent.com/DataDog/dd-agent/master/packaging/datadog-agent/source/setup_agent.sh)"

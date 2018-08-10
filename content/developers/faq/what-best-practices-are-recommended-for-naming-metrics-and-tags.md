@@ -5,7 +5,7 @@ further_reading:
 - link: "developers/metrics"
   tag: "Documentation"
   text: Learn more about Datadog metrics
-- link: "getting_started/getting_started_with_tags"
+- link: "/tagging"
   tag: "Documentation"
   text: Getting started with tags
 ---
@@ -22,7 +22,7 @@ We recommend certain best practices for naming metrics and tags.
 * Unicode is not supported
 * We recommend avoiding spaces
 
-Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. `http.nginx.response_time`). We say pseudo-hierarchical because we’re not actually enforcing a hierarchy or doing anything with it, but we have aspirations to use it to infer things about servers (e.g. “hey, I see hostA and hostB are reporting ‘http.nginx.*’, those must be web frontends”).
+Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. `http.nginx.response_time`). We say pseudo-hierarchical because we're not actually enforcing a hierarchy or doing anything with it, but we have aspirations to use it to infer things about servers (e.g. "hey, I see hostA and hostB are reporting 'http.nginx.*', those must be web frontends").
 
 **Best practices for naming tags**:
 
