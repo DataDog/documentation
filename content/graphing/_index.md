@@ -177,7 +177,7 @@ The final step is to click Save. You can always come back in to the editor and t
 [3]: https://app.datadoghq.com/metric/summary/
 [4]: /graphing/dashboards/widgets/
 [5]: /tagging/
-[6]: /graphing/miscellaneous/functions/
+[6]: /graphing/functions/
 [7]: https://app.datadoghq.com/notebook/list
 [8]: /graphing/dashboards
 [9]: /graphing/#choose-the-metric-to-graph

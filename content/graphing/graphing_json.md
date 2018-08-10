@@ -406,6 +406,6 @@ Here is an example using the ```week_before()``` function:
 ```
 
 [1]: /graphing/
-[2]: /graphing/miscellaneous/functions/
+[2]: /graphing/functions/
 [3]: https://app.datadoghq.com/metric/summary
 
