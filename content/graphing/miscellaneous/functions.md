@@ -291,11 +291,11 @@ Delta value between points for a given metric
 
 Automatically removes noise while preserving the trend of the time series.
 
-The `autosmooth()` function applies a moving average with an automatically selected span, so to smooth the time series the most while preserving its trend. In this example, you can see how the function chooses the optimal span to smooth the time series :
+The `autosmooth()` function applies a moving average with an automatically selected span. It smoothes a time series while preserving its trend. In this example, the function chooses the optimal span to smooth the time series:
 
 {{< img src="graphing/miscellaneous/functions/autosmooth_illustration.png" alt="autosmooth illustration" responsive="true" style="width:80%;">}}
 
-When used on a 'group by' query (e.g. 'avg by'), the same span will be applied on all the time series. If used on several metrics in the same graph, different spans could be selected to optimally smooth each of the metric time series.
+When used on a `group by` query (e.g. `avg by`), the same span is applied on all the time series. If used on several metrics in the same graph, different spans could be selected to optimally smooth each one of the metric time series.
 
 The algorithm is inspired by the [ASAP algorithm][8] - you can read more about it in this blog post. 
 
