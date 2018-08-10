@@ -7,19 +7,8 @@ Distributed Tracing links traces across multiple hosts. Linking is implemented b
 
 Distributed Tracing headers are language agnostic. A trace started in one language may propagate to another (for example, from Python to Java).
 
-
-## NodeJS
-
-Distributed tracing allows you to propagate a single trace across multiple services, so you can see performance end-to-end.
-
-Distributed tracing is enabled by default for all supported integrations.
-
-## Ruby 
-
-Distributed tracing allows you to propagate a single trace across multiple services, so you can see performance end-to-end.
-
-Distributed tracing is disabled by default. For more details about how to activate and configure distributed tracing, check out the [API documentation][8].
-
+{{< tabs >}}
+{{% tab "Java" %}}
 ## Java
 
 Create a distributed trace in custom instrumentation using OpenTracing:
@@ -85,24 +74,27 @@ public class MyHttpRequestExtractAdapter implements TextMap {
   }
 }
 ```
+{{% /tab %}}
+{{% tab "Python" %}}
+{{% /tab %}}
+{{% tab "Ruby" %}}
+## Ruby 
 
-## GO
+Distributed tracing allows you to propagate a single trace across multiple services, so you can see performance end-to-end.
 
-Propagate a single trace across multiple services with distributed tracing. For more details about how to use and configure distributed tracing, check out the [godoc page][tracer godoc].
+Distributed tracing is disabled by default. For more details about how to activate and configure distributed tracing, check out the [API documentation][distributed tracing ruby].
 
-Make use of priority sampling to ensure that distributed traces are complete. Set the sampling priority of a trace by adding the `sampling.priority` tag to its root span. This is then propagated throughout the entire stack. For example:
+[distributed tracing ruby]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#distributed-tracing
 
-```go
-span.SetTag(ext.SamplingPriority, ext.PriorityUserKeep)
-```
+{{% /tab %}}
+{{% tab "Go" %}}
+{{% /tab %}}
+{{% tab "Node.js" %}}
+## NodeJS
 
-Possible values for the sampling priority tag are:
+Distributed tracing allows you to propagate a single trace across multiple services, so you can see performance end-to-end.
 
-| Sampling Value             | Effect                                                                                                      |
-| -------------------------- | :---------------------------------------------------------------------------------------------------------- |
-| ext.PriorityAutoReject     | The sampler automatically decided to not keep the trace. The Agent will drop it.                            |
-| ext.PriorityAutoKeep       | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side.  |
-| ext.PriorityUserReject     | The user asked to not keep the trace. The Agent will drop it.                                               |
-| ext.PriorityUserKeep       | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                      |
+Distributed tracing is enabled by default for all supported integrations.
 
-[8]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#distributed-tracing
+{{% /tab %}}
+{{< /tabs >}}

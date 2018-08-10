@@ -3,6 +3,21 @@ title: Debugging
 kind: documentation
 ---
 
+// ...
+
+{{< tabs >}}
+{{% tab "Java" %}}
+## Java
+
+To return debug level application logs, enable debug mode with the flag `-Ddatadog.slf4j.simpleLogger.defaultLogLevel=debug` when starting the JVM.
+{{% /tab %}}
+{{% tab "Python" %}}
+{{% /tab %}}
+{{% tab "Ruby" %}}
+{{% /tab %}}
+{{% tab "Go" %}}
+{{% /tab %}}
+{{% tab "Node.js" %}}
 ## NodeJS
 
 Debug mode is disabled by default, to enable it:
@@ -14,10 +29,6 @@ const tracer = require('dd-trace').init({
 ```
 
 For more tracer settings, check out the [API documentation][nodejs api doc].
-
-
-## Java
-
-To return debug level application logs, enable debug mode with the flag `-Ddatadog.slf4j.simpleLogger.defaultLogLevel=debug` when starting the JVM.
-
 [nodejs api doc]: https://datadog.github.io/dd-trace-js/#tracer-settings
+{{% /tab %}}
+{{< /tabs >}}

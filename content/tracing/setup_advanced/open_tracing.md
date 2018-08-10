@@ -3,78 +3,13 @@ title: Open Tracing
 kind: documentation
 ---
 
+// ...
 
-## Go
-
-Import the [`opentracer` package][opentracing godoc] to expose the Datadog tracer as an [OpenTracing][3] compatible tracer.
-
-### Example
-
-A basic usage would be:
-
-```go
-package main
-
-import (
-    "github.com/opentracing/opentracing-go"
-
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-)
-
-func main() {
-    // Start the regular tracer and return it as an opentracing.Tracer interface. You
-    // may use the same set of options as you normally would with the Datadog tracer.
-    t := opentracer.Start(tracer.WithServiceName("my-service"))
-
-    // Stop it using the regular Stop call.
-    defer tracer.Stop()
-
-    // Set the global OpenTracing tracer.
-    opentracing.SetGlobalTracer(t)
-
-    // Use the OpenTracing API as usual.
-}
-```
-
-**Note**: Using the [OpenTracing API][4] in parallel with the regular API or our integrations is fully supported. Under the hood, all of them
-make use of the same tracer. Make sure to check out the [API documentation][opentracing godoc] for more examples and details.
-
-### Example
-
-A basic usage would be:
-
-```go
-package main
-
-import (
-    "github.com/opentracing/opentracing-go"
-
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-)
-
-func main() {
-    // Start the regular tracer and return it as an opentracing.Tracer interface. You
-    // may use the same set of options as you normally would with the Datadog tracer.
-    t := opentracer.Start(tracer.WithServiceName("my-service"))
-
-    // Stop it using the regular Stop call.
-    defer tracer.Stop()
-    
-    // Set the global OpenTracing tracer.
-    opentracing.SetGlobalTracer(t)
-
-    // Use the OpenTracing API as usual.
-}
-```
-
-**Note**: Using the [OpenTracing API][opentracing go] in parallel with the regular API or our integrations is fully supported. Under the hood, all of them
-make use of the same tracer. Make sure to check out the [API documentation][opentracing godoc] for more examples and details.
-
+{{< tabs >}}
+{{% tab "Java" %}}
 ## Java
 
-Use the [OpenTracing API][6] and the Datadog Tracer (dd-trace-ot) library to measure execution times for specific pieces of code. This lets you trace your application more precisely than you can with the Java Agent alone.
+Use the [OpenTracing API][opentracing-java] and the Datadog Tracer (dd-trace-ot) library to measure execution times for specific pieces of code. This lets you trace your application more precisely than you can with the Java Agent alone.
 
 ### Setup
 
@@ -111,7 +46,7 @@ compile group: 'io.opentracing', name: 'opentracing-util', version: "0.31.0"
 compile group: 'com.datadoghq', name: 'dd-trace-ot', version: "${dd-trace-java.version}"
 ```
 
-Configure your application using environment variables or system properties as discussed in the [configuration](#configuration) section.
+Configure your application using environment variables or system properties as discussed in the [configuration](/tracing/setup/java/#configuration) section.
 
 ### Custom Instrumentation Examples
 
@@ -224,11 +159,89 @@ try (Scope scope = tracer.buildSpan("ServiceHandlerSpan").startActive(false)) {
     // submission thread impl...
 }
 ```
+Notice the above examples only use the OpenTracing classes. Please reference the [OpenTracing API][opentracing-java] for more details and information.
 
+[opentracing-java]: https://github.com/opentracing/opentracing-java
 
-Notice the above examples only use the OpenTracing classes. Please reference the [OpenTracing API][6] for more details and information.
+{{% /tab %}}
+{{% tab "Python" %}}
+{{% /tab %}}
+{{% tab "Ruby" %}}
+{{% /tab %}}
+{{% tab "Go" %}}
+## Go
+
+Import the [`opentracer` package][opentracing godoc] to expose the Datadog tracer as an [OpenTracing][open tracing] compatible tracer.
+
+### Example
+
+A basic usage would be:
+
+```go
+package main
+
+import (
+    "github.com/opentracing/opentracing-go"
+
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func main() {
+    // Start the regular tracer and return it as an opentracing.Tracer interface. You
+    // may use the same set of options as you normally would with the Datadog tracer.
+    t := opentracer.Start(tracer.WithServiceName("my-service"))
+
+    // Stop it using the regular Stop call.
+    defer tracer.Stop()
+
+    // Set the global OpenTracing tracer.
+    opentracing.SetGlobalTracer(t)
+
+    // Use the OpenTracing API as usual.
+}
+```
+
+**Note**: Using the [OpenTracing API][opentracing go] in parallel with the regular API or our integrations is fully supported. Under the hood, all of them
+make use of the same tracer. Make sure to check out the [API documentation][opentracing godoc] for more examples and details.
+
+### Example
+
+A basic usage would be:
+
+```go
+package main
+
+import (
+    "github.com/opentracing/opentracing-go"
+
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func main() {
+    // Start the regular tracer and return it as an opentracing.Tracer interface. You
+    // may use the same set of options as you normally would with the Datadog tracer.
+    t := opentracer.Start(tracer.WithServiceName("my-service"))
+
+    // Stop it using the regular Stop call.
+    defer tracer.Stop()
+    
+    // Set the global OpenTracing tracer.
+    opentracing.SetGlobalTracer(t)
+
+    // Use the OpenTracing API as usual.
+}
+```
+
+**Note**: Using the [OpenTracing API][opentracing go] in parallel with the regular API or our integrations is fully supported. Under the hood, all of them
+make use of the same tracer. Make sure to check out the [API documentation][opentracing godoc] for more examples and details.
 
 [tracer godoc]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
 [opentracing godoc]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer
 [open tracing]: http://opentracing.io
 [opentracing go]: https://github.com/opentracing/opentracing-go
+{{% /tab %}}
+{{% tab "Node.js" %}}
+{{% /tab %}}
+{{< /tabs >}}

@@ -3,33 +3,15 @@ title: Sampling Tracing
 kind: documentation
 ---
 
+// ... 
 
-## Go
-
-Propagate a single trace across multiple services with distributed tracing. For more details about how to use and configure distributed tracing, check out the [godoc page][tracer godoc].
-
-Make use of priority sampling to ensure that distributed traces are complete. Set the sampling priority of a trace by adding the `sampling.priority` tag to its root span. This is then propagated throughout the entire stack. For example:
-
-```go
-span.SetTag(ext.SamplingPriority, ext.PriorityUserKeep)
-```
-
-Possible values for the sampling priority tag are:
-
-| Sampling Value             | Effect                                                                                                      |
-| -------------------------- | :---------------------------------------------------------------------------------------------------------- |
-| ext.PriorityAutoReject     | The sampler automatically decided to not keep the trace. The Agent will drop it.                            |
-| ext.PriorityAutoKeep       | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side.  |
-| ext.PriorityUserReject     | The user asked to not keep the trace. The Agent will drop it.                                               |
-| ext.PriorityUserKeep       | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                      |
-
-
-
+{{< tabs >}}
+{{% tab "Java" %}}
 ## Java
 
 Distributed Traces may sample inconsistently when the linked traces run on different hosts. To ensure that distributed traces are complete, enable priority sampling. Priority sampling automatically assigns and propagates a priority value along all traces, depending on their service and volume. Priorities can also be set manually to drop non-interesting traces or keep important ones.
 
-Priority sampling is disabled by default. To enable it, configure the `priority.sampling` flag to `true` ([see how to configure the client above](#configuration)).
+Priority sampling is disabled by default. To enable it, configure the `priority.sampling` flag to `true` ([see how to configure the client here](/tracing/setup/java/#configuration)).
 
 Current Priority Values (more may be added in the future):
 
@@ -58,3 +40,40 @@ public class MyClass {
     }
 }
 ```
+{{% /tab %}}
+{{% tab "Python" %}}
+```python
+This is some python code
+```
+{{% /tab %}}
+{{% tab "Ruby" %}}
+```ruby
+This is some ruby code
+```
+{{% /tab %}}
+{{% tab "Go" %}}
+## Go
+
+Propagate a single trace across multiple services with distributed tracing. For more details about how to use and configure distributed tracing, check out the [godoc page][tracer godoc].
+
+Make use of priority sampling to ensure that distributed traces are complete. Set the sampling priority of a trace by adding the `sampling.priority` tag to its root span. This is then propagated throughout the entire stack. For example:
+
+```go
+span.SetTag(ext.SamplingPriority, ext.PriorityUserKeep)
+```
+
+Possible values for the sampling priority tag are:
+
+| Sampling Value             | Effect                                                                                                      |
+| -------------------------- | :---------------------------------------------------------------------------------------------------------- |
+| ext.PriorityAutoReject     | The sampler automatically decided to not keep the trace. The Agent will drop it.                            |
+| ext.PriorityAutoKeep       | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side.  |
+| ext.PriorityUserReject     | The user asked to not keep the trace. The Agent will drop it.                                               |
+| ext.PriorityUserKeep       | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                      |
+{{% /tab %}}
+{{% tab "Node.js" %}}
+```javascript
+This is some ruby code
+```
+{{% /tab %}}
+{{< /tabs >}}
