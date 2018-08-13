@@ -49,6 +49,9 @@ You would have at the end this structured log:
 
 {{< img src="logs/processing/parsing/parsing_example_1.png" alt="Parsing example 1" responsive="true" style="width:80%;">}}
 
+
+**Note**: If you have multiple parsing rules in a single grok parser only one can match any given log.  The first one that matches from top to bottom is the one that does the parsing. 
+
 ## Matcher
 
 Here is the list of all the matchers natively implemented by Datadog:
