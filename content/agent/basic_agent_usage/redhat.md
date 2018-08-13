@@ -31,7 +31,7 @@ Datadog Agent has some commands and only the _lifecycle commands_ (i.e. `start`/
 | `sudo service datadog-agent`                      | `sudo datadog-agent --help`                            | Display command usage              |
 | `sudo -u dd-agent -- dd-agent check <check_name>` | `sudo -u dd-agent -- datadog-agent check <check_name>` | Run a check                        |
 
-More information about the metrics, events, and service checks for an [integrations][1] can be retrieved with the check command:
+More information about the metrics, events, and service checks for an [Integrations][1] can be retrieved with the check command:
 ```shell
 sudo service datadog-agent check [integration]
 ```
@@ -56,7 +56,7 @@ The configuration files and folders for the Agent are located at:
 | :-----                       | :----                             |
 | `/etc/dd-agent/datadog.conf` | `/etc/datadog-agent/datadog.yaml` |
 
-Configuration files for [integrations][1]:
+Configuration files for [Integrations][1]:
 
 | Agent v5                | Agent v6                     |
 | :-----                  | :----                        |
@@ -94,7 +94,7 @@ The Agent 6.x installer can automatically convert your 5.x style Agent configura
 
 ##### To Install Fresh
 
-To install on a clean box (or have an existing Agent 5 install from which you do not wish to import the configuration) provide an api key:
+To install on a clean box (or have an existing Agent 5 install from which you do not wish to import the configuration) provide an API key:
 
 ```shell
  DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"

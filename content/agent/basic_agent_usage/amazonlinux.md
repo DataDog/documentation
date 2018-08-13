@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-This page outlines the basic features of the Datadog Agent for Amazon Linux. If you haven't installed the Agent yet, instructions can be found in the [Datadog Agent integration][1] documentation.
+This page outlines the basic features of the Datadog Agent for Amazon Linux. If you haven't installed the Agent yet, instructions can be found in the [Datadog Agent Integration][1] documentation.
 
 ## Commands
 
@@ -52,7 +52,7 @@ The configuration files and folders for for the Agent are located in:
 | :-----                       | :----                             |
 | `/etc/dd-agent/datadog.conf` | `/etc/datadog-agent/datadog.yaml` |
 
-Configuration files for [integrations][2]:
+Configuration files for [Integrations][2]:
 
 | Agent v5                | Agent v6                     |
 | :-----                  | :----                        |
@@ -103,14 +103,15 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
 
 ##### Fresh install
 
-To install on a clean box (or have an existing Agent 5 install from which you do not wish to import the configuration) provide an api key:
+To install on a clean box (or have an existing Agent 5 install from which you do not wish to import the configuration) provide an API key:
 
 ```bash
 DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
 ```
 
 #### Manual install
-1. Set up Datadog's Yum repo on your system by creating /etc/yum.repos.d/datadog.repo with the contents:
+
+1. Set up Datadog's Yum repo on your system by creating `/etc/yum.repos.d/datadog.repo` with the contents:
 
     ```ini
     [datadog]
@@ -134,13 +135,13 @@ DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/Dat
     sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_API_KEY>/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
     ```
 
-4. Re-start the Agent for Amazon linux 2.0:
+4. Re-start the Agent for Amazon Linux 2.0:
 
     ```
     sudo systemctl restart datadog-agent.service
     ```
 
-5. Re-start the Agent for Amazon linux 1.0:
+5. Re-start the Agent for Amazon Linux 1.0:
 
     ```
     sudo initctl start datadog-agent
