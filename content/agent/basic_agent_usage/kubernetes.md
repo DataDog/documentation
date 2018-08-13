@@ -24,7 +24,7 @@ Installing the Agent on the host as opposed to in a pod as part of a Deployment 
 It could however help give visibility over the start of the Kubernetes ecosystem and health thereof.
 Similarly, one would not be restricted to monitoring applications belonging to the Kubernetes eco system.
 
-To discover all data collected automatically from the Kubernetes integration, refer to the dedicated [Kubernetes Integration Documentation][1].
+To discover all data collected automatically from the Kubernetes Integration, refer to the dedicated [Kubernetes Integration Documentation][1].
 
 This documentation is for Agent v6 only, if you are still using Agent v5, [follow this installation process][2]
 
@@ -35,7 +35,7 @@ Take advantage of DaemonSets to automatically deploy the Datadog Agent on all yo
 
 *If DaemonSets are not an option for your Kubernetes cluster, [install the Datadog Agent][3] as a sidecar container on each Kubernetes node.*
 
-If your Kubernetes has RBAC enabled, see the [documentation on how to configure RBAC permissions with your Datadog-Kubernetes integration][4].
+If your Kubernetes has RBAC enabled, see the documentation on how to [configure RBAC permissions][4] with your Datadog-Kubernetes Integration.
 
 * Create the following `datadog-agent.yaml` manifest:
 
@@ -114,7 +114,7 @@ spec:
 
 Replace `YOUR_API_KEY` with [your api key][5] or use [Kubernetes secrets][6] to set your API key [as an environment variable][7].
 
-[Consult our docker integration to discover all configuration options.][8]
+Consult our [Docker Integration documentation][8] to discover all configuration options.
 
 * Deploy the DaemonSet with the command:
   ```
@@ -202,7 +202,7 @@ Another word of caution: some network plugging don't support `hostPorts` yet, so
 
 ### RBAC
 
-In the context of using the Kubernetes integration, and when deploying Agents in a Kubernetes cluster, a set of rights are required for the Agent to integrate seamlessly.
+In the context of using the Kubernetes Integration, and when deploying Agents in a Kubernetes cluster, a set of rights are required for the Agent to integrate seamlessly.
 
 You will need to allow the Agent to be allowed to perform a few actions:
 
@@ -214,15 +214,12 @@ You will need to allow the Agent to be allowed to perform a few actions:
 You can find the templates in manifests/rbac [here][12].
 This will create the Service Account in the default namespace, a Cluster Role with the above rights and the Cluster Role Binding.
 
-#### Custom integrations
+#### Custom Integrations
 
 ##### ConfigMap
-It is possible to leverage the ConfigMaps to configure or enable integrations.
-To do so, you only need to create a ConfigMap with the integration(s)'s configuration.
-Then, reference this ConfigMap among the volumes of your Agent's manifest.
+It is possible to leverage the ConfigMaps to configure or enable Integrations. To do so, you only need to create a ConfigMap with the Integration(s)'s configuration. Then, reference this ConfigMap among the volumes of your Agent's manifest.
 
-For example, in the following case we customize the name, url and tags fields of the http check.
-To enable other integrations, just specify the correct yaml name and make sure it is properly formated.
+For example, in the following case we customize the name, url and tags fields of the http check. To enable other Integrations, just specify the correct yaml name and make sure it is properly formated.
 
 ```
 kind: ConfigMap
@@ -275,14 +272,14 @@ Learn more about this in [the Docker log collection documentation][11].
 
 ##### Annotations
 
-It is also possible to enable integrations via the annotations in the manifest of your application.
+It is also possible to enable Integrations via the annotations in the manifest of your application.
 This can be done with the autodiscovery, for more details, see the [Autodiscovery][13] section.
 
 ## Host installation
 
 ### Installation
 
-Install the latest version of the Datadog Agent from [the Datadog Agent integration page][14]
+Install the latest version of the Datadog Agent from [the Datadog Agent Integration page][14]
 
 #### Configuration
 

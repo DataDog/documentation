@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-This page outlines the basic features of the Datadog Agent for Amazon Linux. If you haven't installed the Agent yet, instructions can be found in the [Datadog Agent integration][1] documentation.
+This page outlines the basic features of the Datadog Agent for Amazon Linux. If you haven't installed the Agent yet, instructions can be found in the [Datadog Agent Integration][1] documentation.
 
 ## Commands
 
@@ -52,7 +52,7 @@ The configuration files and folders for for the Agent are located in:
 | :-----                       | :----                             |
 | `/etc/dd-agent/datadog.conf` | `/etc/datadog-agent/datadog.yaml` |
 
-Configuration files for [integrations][2]:
+Configuration files for [Integrations][2]:
 
 | Agent v5                | Agent v6                     |
 | :-----                  | :----                        |
