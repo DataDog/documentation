@@ -112,7 +112,7 @@ spec:
           name: cgroups
 ```
 
-Replace `YOUR_API_KEY` with [your api key][5] or use [Kubernetes secrets][6] to set your API key [as an environment variable][7].
+Replace `YOUR_API_KEY` with [your API key][5] or use [Kubernetes secrets][6] to set your API key [as an environment variable][7].
 
 Consult our [Docker Integration documentation][8] to discover all configuration options.
 

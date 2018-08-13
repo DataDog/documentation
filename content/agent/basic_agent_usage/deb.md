@@ -100,7 +100,7 @@ The Agent 6.x installer can automatically convert your 5.x style Agent configura
 
 ##### To Install Fresh
 
-To install on a clean box (or have an existing Agent 5 install from which you do not wish to import the configuration) provide an api key:
+To install on a clean box (or have an existing Agent 5 install from which you do not wish to import the configuration) provide an API key:
 
 ```shell
  DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"

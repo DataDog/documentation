@@ -79,7 +79,7 @@ You can either download the DMG package and install it manually, or use the one-
 
 1. Download the DMG package of the latest Agent version, use the latest macOS release listed on the [release page][4] of the repository
 2. Install the DMG package
-3. Add your api key to `/opt/datadog-agent/etc/datadog.yaml`
+3. Add your API key to `/opt/datadog-agent/etc/datadog.yaml`
 
 Then start the Datadog Agent app (once started, you should see it in the system tray), and manage the Agent from there. The Agent6 also ships a web-based GUI to edit the Agent configuration files and much more, refer to the [changes and deprecations document][changes] document for more information.
 ### Install script
