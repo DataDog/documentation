@@ -110,7 +110,8 @@ DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/Dat
 ```
 
 #### Manual install
-1. Set up Datadog's Yum repo on your system by creating /etc/yum.repos.d/datadog.repo with the contents:
+
+1. Set up Datadog's Yum repo on your system by creating `/etc/yum.repos.d/datadog.repo` with the contents:
 
     ```ini
     [datadog]
@@ -134,13 +135,13 @@ DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/Dat
     sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_API_KEY>/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
     ```
 
-4. Re-start the Agent for Amazon linux 2.0:
+4. Re-start the Agent for Amazon Linux 2.0:
 
     ```
     sudo systemctl restart datadog-agent.service
     ```
 
-5. Re-start the Agent for Amazon linux 1.0:
+5. Re-start the Agent for Amazon Linux 1.0:
 
     ```
     sudo initctl start datadog-agent
