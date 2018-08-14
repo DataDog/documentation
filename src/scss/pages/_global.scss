@@ -163,6 +163,30 @@ code {
   font-family: $font-family-monospace;
 }
 
+/* codetabs inside content */
+.code-tabs {
+  ul {
+    list-style-type: none;
+    background:$ddpurple;
+    color:#fff;
+    padding:5px;
+    li {
+      &:before {
+        content: "" !important;
+      }
+      &.active {
+        a {
+          color:#fff;
+        }
+      }
+      a {
+        color: rgba(255, 255, 255, 0.5);
+        padding: 0px 5px;
+      }
+    }
+  }
+}
+
 p {
   // todo: can i set this with a bootstrap variable?
   font-size: 18px;

@@ -11,6 +11,7 @@
         "node_modules/bootstrap/js/dist/collapse.js",
         "node_modules/bootstrap/js/dist/dropdown.js",
         "node_modules/bootstrap/js/dist/modal.js",
+        "node_modules/bootstrap/js/dist/tab.js",
         "node_modules/bootstrap/js/dist/util.js",
         "node_modules/mixitup/dist/mixitup.js",
         "node_modules/lazysizes/lazysizes.js",
