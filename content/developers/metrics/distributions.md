@@ -11,7 +11,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-    This is documentation for a beta feature.  Please <a href="https://docs.datadoghq.com/help/">contact support</a> to enable distribution metrics for your account.
+This is documentation for a beta feature. Please <a href="https://docs.datadoghq.com/help/">contact support</a> to enable distribution metrics for your account.
 </div>
 
 ## Overview
