@@ -1,6 +1,7 @@
 ---
 title: Basic Agent Usage for Debian
 kind: documentation
+platform: Debian
 aliases:
     - /guides/basic_agent_usage/deb/
     - /agent/basic_agent_usage/install_debian_5/
