@@ -142,32 +142,22 @@ DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/Dat
 
 ### Downgrade to Agent v5
 
+Note that v6-specific changes to your configuration will *not* work after downgrading. You will need to manually address any incompatible configuraton or implementation issues.
+
 1. Remove the Agent 6 Yum repo:
     ```shell
     rm /etc/yum.repos.d/datadog.repo [ ! -f /etc/yum.repos.d/datadog.repo ] && echo -e '[datadog]\nname = Datadog, Inc.\nbaseurl = https://yum.datadoghq.com/rpm/x86_64/\nenabled=1\ngpgcheck=1\npriority=1\ngpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public\n       https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public' | sudo tee /etc/yum.repos.d/datadog.repo
     ```
 
 2. Update your local Yum cache and downgrade the Agent:
-    ```shell
+    ```
     sudo yum clean expire-cache metadata
     sudo yum check-update
     sudo yum remove datadog-agent
     sudo yum install datadog-agent
     ```
 
-3. Back-sync configurations and AutoDiscovery templates (optional):
-
-    If you have made any changes to your configurations to support new Agent v6-only options, these will need to be reverted manually to something v5-compatible.
-
-4. Back-sync custom Agent checks (optional):
-
-    If you made any changes or added any new custom Agent checks while testing Agent 6 you might want to enable them back on Agent 5. You only need to back-sync checks which have been modified.
-
-    ```shell
-    sudo -u dd-agent -- cp /etc/datadog-agent/checks.d/<check>.py /etc/dd-agent/checks.d/
-    ```
-
-5. (Re-)start the Agent:
+3. (Re-)start the Agent:
 
     * Amazon Linux 2.0:
     ```
@@ -177,11 +167,6 @@ DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/Dat
     * Amazon Linux 1.0:
     ```
     sudo initctl start datadog-agent
-    ```
-
-6. Clean out /etc/datadog-agent (optional):
-    ```shell
-    sudo -u dd-agent -- rm -rf /etc/datadog-agent/
     ```
 
 ## Uninstall the Agent
