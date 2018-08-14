@@ -108,9 +108,7 @@ For more information about the Datadog Agent, see the [dedicated doc page][18] o
 
 ### Automatic scrubbing
 
-Automatic scrubbing is available for some services, such as: ElasticSearch, MongoDB,
-Redis, Memcached and HTTP server and client request URLs. Below is an example configuration
-snippet documenting all the available options.
+Automatic scrubbing is available for some services, such as ElasticSearch, MongoDB, Redis, Memcached, and HTTP server and client request URLs. Below is an example configuration snippet documenting all the available options.
 
 ```
 apm_config:
