@@ -10,6 +10,10 @@ further_reading:
   text: Official and Community-contributed API and DogStatsD client libraries
 ---
 
+<div class="alert alert-warning">
+    This is documentation for a beta feature.  Please <a href="https://docs.datadoghq.com/help/">contact support</a> to enable distribution metrics for your account.
+</div>
+
 ## Overview
 
 Distributions measure the statistical distribution of a set of values across one or more hosts. In this way, Distributions are like a "global" version of [Histograms][2].
