@@ -108,7 +108,6 @@ DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/Dat
 #### Manual install
 
 1. Set up Datadog's Yum repo on your system by creating `/etc/yum.repos.d/datadog.repo` with the contents:
-
     ```ini
     [datadog]
     name=Datadog, Inc.
@@ -118,7 +117,7 @@ DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/Dat
     gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
     ```
 
-2. Update your local yum repo and install the Agent:
+2. Update your local Yum repo and install the Agent:
     ```
     sudo yum makecache
     sudo yum install datadog-agent
@@ -129,43 +128,67 @@ DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/Dat
     sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_API_KEY>/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
     ```
 
-4. Re-start the Agent for Amazon Linux 2.0:
+4. (Re-)start the Agent:
+
+    * Amazon Linux 2.0:
     ```
     sudo systemctl restart datadog-agent.service
     ```
 
-5. Re-start the Agent for Amazon Linux 1.0:
+    * Amazon Linux 1.0:
     ```
     sudo initctl start datadog-agent
     ```
 
 ### Downgrade to Agent v5
 
-1. Add HTTPS compatibility to `apt`:
-    ```
-    sudo apt-get update
-    sudo apt-get install apt-transport-https
-    ```
-
-2. Remove the Agent v6 repository and ensure that the `stable` repository is present:
+1. Remove the Agent 6 Yum repo:
     ```shell
-    sudo rm /etc/yum.repos.d/datadog.repo [ ! -f /etc/apt/sources.list.d/datadog.list ] &&  echo 'deb https://apt.datadoghq.com/ stable main' | sudo tee /etc/apt/sources.list.d/datadog.list
-    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 382E94DE
+    rm /etc/yum.repos.d/datadog.repo [ ! -f /etc/yum.repos.d/datadog.repo ] && echo -e '[datadog]\nname = Datadog, Inc.\nbaseurl = https://yum.datadoghq.com/rpm/x86_64/\nenabled=1\ngpgcheck=1\npriority=1\ngpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public\n       https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public' | sudo tee /etc/yum.repos.d/datadog.repo
     ```
 
-3. Update `apt` and downgrade the Agent:
+2. Update your local Yum cache and downgrade the Agent:
+    ```shell
+    sudo yum clean expire-cache metadata
+    sudo yum check-update
+    sudo yum remove datadog-agent
+    sudo yum install datadog-agent
     ```
-    sudo apt-get update
-    sudo apt-get remove datadog-agent
-    sudo apt-get install datadog-agent
+
+3. Back-sync configurations and AutoDiscovery templates (optional):
+
+    If you have made any changes to your configurations to support new Agent v6-only options, these will need to be reverted manually to something v5-compatible.
+
+4. Back-sync custom Agent checks (optional):
+
+    If you made any changes or added any new custom Agent checks while testing Agent 6 you might want to enable them back on Agent 5. You only need to back-sync checks which have been modified.
+
+    ```shell
+    sudo -u dd-agent -- cp /etc/datadog-agent/checks.d/<check>.py /etc/dd-agent/checks.d/
+    ```
+
+5. (Re-)start the Agent:
+
+    * Amazon Linux 2.0:
+    ```
+    sudo systemctl restart datadog-agent.service
+    ```
+
+    * Amazon Linux 1.0:
+    ```
+    sudo initctl start datadog-agent
+    ```
+
+6. Clean out /etc/datadog-agent (optional):
+    ```shell
+    sudo -u dd-agent -- rm -rf /etc/datadog-agent/
     ```
 
 ## Uninstall the Agent
 
 To uninstall the Agent, run: 
-
 ```
-sudo apt-get --purge remove datadog-agent -y
+sudo yum remove datadog-agent
 ```
 
 ## Further Reading
