@@ -129,7 +129,7 @@ DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/Dat
     sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_API_KEY>/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
     ```
 
-4. Restart the Agent.
+4. Restart the Agent:
 
     * Centos 7 and above:
     ```
@@ -138,28 +138,34 @@ DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/Dat
 
     * Centos 6:
     ```
-    sudo initctl start datadog-agent
+    sudo initctl restart datadog-agent
     ```
 
 ### Downgrade to Agent v5
 
-1. Add HTTPS compatibility to `apt`:
-    ```
-    sudo apt-get update
-    sudo apt-get install apt-transport-https
-    ```
-
-2. Remove the Agent v6 repository and ensure that the `stable` repo is present:
+1. Remove the Agent v6 repository and ensure that the `stable` repo is present:
     ```shell
     sudo rm /etc/yum.repos.d/datadog.repo [ ! -f /etc/apt/sources.list.d/datadog.list ] &&  echo 'deb https://apt.datadoghq.com/ stable main' | sudo tee /etc/apt/sources.list.d/datadog.list
     sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 382E94DE
     ```
 
-3. Update `apt` and downgrade the Agent:
+2. Update your local Yum cache and downgrade the Agent:
     ```
-    sudo apt-get update
-    sudo apt-get remove datadog-agent
-    sudo apt-get install datadog-agent
+    sudo yum clean expire-cache metadata
+    sudo yum check-update
+    sudo yum remove datadog-agent
+    sudo yum install datadog-agent
+    ```
+3. Restart the Agent:
+
+    * Centos 7 and above:
+    ```
+    sudo systemctl restart datadog-agent.service
+    ```
+
+    * Centos 6:
+    ```
+    sudo initctl restart datadog-agent
     ```
 
 ## Uninstall the Agent
@@ -168,12 +174,12 @@ To uninstall the Agent, run:
 
 * For CentOS 5:
     ```
-    $ sudo yum remove datadog-agent-base
+    sudo yum remove datadog-agent-base
     ```
 
 * For CentOS 6:
     ```
-    $ sudo yum remove datadog-agent
+    sudo yum remove datadog-agent
     ```
 
 ## Further Reading
