@@ -65,6 +65,8 @@ The following screenshot shows a dashboard query for `service:fse-auto-process`.
 
 Using this tag on your Host Map or logs with the same key allows Datadog to join applications to logs, infrastructure, or custom business metrics. On the drilldown menu, discussed above, each option pivots to the appropriate view of the data collected by Datadog scoped to your `service`.
 
+{{< img src="tracing/servicemap/servicemaptags.png" alt="Service Map tags" responsive="true" style="width:80%;">}}
+
 In addition to infrastructure or logs, monitors can be tagged by service in the “Say what’s happening” section of a new monitor. This allows you to associate monitors for any metric, including custom business metrics with your services. The status of monitors is exposed directly on the Service Map.
 
 {{< img src="tracing/servicemap/servicemonitor.gif" alt="Service Map monitor" responsive="true" style="width:90%;">}}
