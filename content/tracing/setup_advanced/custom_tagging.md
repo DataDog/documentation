@@ -1,14 +1,17 @@
 ---
-title: Custom Tracing
+title: Custom Tagging
 kind: documentation
 ---
 
+// Description of custom tagging.
 
+{{< tabs >}}
+{{% tab "Java" %}}
 ## Java
 
 Tags are key-value pairs attached to spans. All tags share a single namespace.
 
-The Datadog UI uses specific tags to set UI properties, such as an application's service name. A full list of these tags can be found in the [Datadog][11] and [OpenTracing][12] APIs.
+The Datadog UI uses specific tags to set UI properties, such as an application's service name. A full list of these tags can be found in the [Datadog][java api doc] and [OpenTracing][opentracing java doc] APIs.
 
 ### Custom Tags
 
@@ -39,5 +42,15 @@ class ServletImpl extends AbstractHttpServlet {
 ```
 
 
-[11]: https://github.com/DataDog/dd-trace-java/blob/master/dd-trace-api/src/main/java/datadog/trace/api/DDTags.java
-[12]: https://github.com/opentracing/opentracing-java/blob/master/opentracing-api/src/main/java/io/opentracing/tag/Tags.java
+[java api doc]: https://github.com/DataDog/dd-trace-java/blob/master/dd-trace-api/src/main/java/datadog/trace/api/DDTags.java
+[opentracing java doc]: https://github.com/opentracing/opentracing-java/blob/master/opentracing-api/src/main/java/io/opentracing/tag/Tags.java
+{{% /tab %}}
+{{% tab "Python" %}}
+{{% /tab %}}
+{{% tab "Ruby" %}}
+{{% /tab %}}
+{{% tab "Go" %}}
+{{% /tab %}}
+{{% tab "Node.js" %}}
+{{% /tab %}}
+{{< /tabs >}}

@@ -419,7 +419,7 @@ languages:
         
         # TRACING/APM - Setup basic
         - identifier: customnav_tracingnav_setup_basic
-          name: "Setup - Basic"
+          name: "Getting Started"
           url: "tracing/setup_basic/"
           weight: 10
           parent: menu_references_tracing
@@ -473,7 +473,7 @@ languages:
         # TRACING/APM - Setup Advanced
 
         - identifier: customnav_tracingnav_setup_advanced
-          name: "Setup - Advanced"
+          name: "Advanced Usage"
           url: "tracing/setup_advanced/"
           weight: 20
           parent: menu_references_tracing
@@ -493,15 +493,15 @@ languages:
           url: "tracing/setup_advanced/distributed_tracing/"
           weight: 230
           parent: customnav_tracingnav_setup_advanced
-        - identifier: customnav_tracingnav_open_tracing
-          name: "Open Tracing"
-          url: "tracing/setup_advanced/open_tracing/"
-          weight: 240
-          parent: customnav_tracingnav_setup_advanced
         - identifier: customnav_tracingnav_sampling
           name: "Sampling"
           url: "tracing/setup_advanced/sampling/"
           weight: 250
+          parent: customnav_tracingnav_setup_advanced
+        - identifier: customnav_tracingnav_open_tracing
+          name: "OpenTracing"
+          url: "tracing/setup_advanced/open_tracing/"
+          weight: 240
           parent: customnav_tracingnav_setup_advanced
         - identifier: customnav_tracingnav_debugging
           name: "Debugging"
@@ -548,7 +548,7 @@ languages:
 
         # Getting further
         - identifier: customnav_tracingnav_getting_further
-          name: "Getting further"
+          name: "Getting Further"
           url: "tracing/getting_further/"
           weight: 40
           parent: menu_references_tracing

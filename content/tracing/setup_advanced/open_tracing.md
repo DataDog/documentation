@@ -1,9 +1,9 @@
 ---
-title: Open Tracing
+title: OpenTracing
 kind: documentation
 ---
 
-// ...
+// Description of OpenTracing
 
 {{< tabs >}}
 {{% tab "Java" %}}

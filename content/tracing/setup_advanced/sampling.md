@@ -1,9 +1,9 @@
 ---
-title: Sampling Tracing
+title: Sampling
 kind: documentation
 ---
 
-// ... 
+// Description of sampling.
 
 {{< tabs >}}
 {{% tab "Java" %}}
