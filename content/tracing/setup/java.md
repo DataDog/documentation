@@ -13,12 +13,117 @@ further_reading:
   text: "Explore your services, resources and traces"
 - link: "tracing/advanced_usage/"
   tag: "Advanced Usage"
-  text: ""
+  text: "Advanced Usage"
 ---
 
 ## Compatibility
 
-We officially support the Java JRE 1.7 and higher of both Oracle JDK and OpenJDK. To see what web frameworks, libraries, and datastores we support, see the [Integrations section](#integrations).
+We officially support the Java JRE 1.7 and higher of both Oracle JDK and OpenJDK.
+
+## Automatic Instrumentation
+
+Automatic instrumentation for Java utilizes the `java-agent` instrumentation capabilities [provided by the JVM][8]. When a `java-agent` is registered, it has the ability to modify class files at load time.
+The `java-agent` uses the popular [Byte Buddy framework][9] to find the classes defined for instrumentation and modify those class bytes accordingly.
+
+Instrumentation may come from auto-instrumentation, the OpenTracing api, or a mixture of both. Instrumentation generally captures the following info:
+
+* Method execution time
+* Timing duration is captured using the JVM's nanotime clock unless a timestamp is provided from the OpenTracing api
+* Key/value tag pairs
+* Errors and stacktraces which are unhanded by the application
+* A total count of traces (requests) flowing through the system
+
+## Integrations
+
+### Web Frameworks
+
+`dd-java-agent` includes support for automatically tracing the following web frameworks.
+
+| Server                  | Versions   | Support Type    |
+| :---------------------- | :--------- | :-------------- |
+| Java Servlet Compatible | 2.3+, 3.0+ | Fully Supported |
+| Play                    | 2.4-2.6    | Fully Supported |
+| Jax-RS Annotations      | JSR311-API | Fully Supported |
+| Spring-Web              | 4.0+       | Fully Supported |
+
+**Web Framework tracing provides:** timing HTTP request to response, tags for the HTTP request (status code, method, etc), error and stacktrace capturing, linking work created within a web request and Distributed Tracing.
+
+*Note:* Many application servers are Servlet compatible, such as Tomcat, Jetty, Websphere, Weblogic, etc.
+Also, frameworks like Spring Boot and Dropwizard inherently work because they use a Servlet compatible embedded application server.
+
+Don't see your desired web frameworks? We're continually adding additional support, [check with our team][2] to see if we can help.
+
+### Networking Frameworks
+
+`dd-java-agent` includes support for automatically tracing the following networking frameworks.
+
+| Framework           | Versions | Support Type    |
+| :------------------ | :------- | :-------------- |
+| Jax RS Client       | 1.11+    | Fully Supported |
+| OkHTTP              | 3.0+     | Fully Supported |
+| Apache HTTP Client  | 4.3+     | Fully Supported |
+| JMS                 | 1 and 2  | Fully Supported |
+| AWS Java SDK        | 1.11+    | Fully Supported |
+| Kafka-Clients       | 0.11+    | Fully Supported |
+| Kafka-Streams       | 0.11+    | Fully Supported |
+
+**Networking tracing provides:** timing request to response, tags for the request (e.g. response code), error and stacktrace capturing and Distributed Tracing.
+
+Don't see your desired networking framework? We're continually adding additional support, [check with our team][2] to see if we can help.
+
+### Datastores
+
+`dd-java-agent` includes support for automatically tracing the following database frameworks/drivers.
+
+| Database       | Versions       | Support Type    |
+| :------------- | :------------- | :-------------- |
+| JDBC           | N/A            | Fully Supported |
+| MongoDB        | 3.0+           | Fully Supported |
+| Cassandra      | 3.2+           | Fully Supported |
+| Jedis          | 1.4+           | Fully Supported |
+
+`dd-java-agent` is also compatible with common JDBC drivers including:
+
+*  Apache Derby
+*  Firebird SQL
+*  H2 Database Engine
+*  HSQLDB
+*  IBM DB2
+*  MSSQL (Microsoft SQL Server)
+*  MySQL
+*  MariaDB
+*  Oracle
+*  Postgres SQL
+
+**Datastore tracing provides:** timing request to response, query info (e.g. a sanitized query string) and error and stacktrace capturing.
+
+Don't see your desired datastores? We're continually adding additional support, [check with our team][2] to see if we can help.
+
+### Other Frameworks
+
+`dd-java-agent` includes support for automatically tracing the following other frameworks.
+
+| Framework | Versions | Support Type    |
+| :------   | :-----   | :-------------- |
+| Hystrix   | 1.4+     | Fully Supported |
+
+Don't see your desired framework? We're continually adding additional support, [check with our team][2] to see if we can help.
+
+### Beta Instrumentation
+
+`dd-java-agent` ships with some newer instrumentation disabled by default.
+
+| Instrumentation              | Versions | JVM Arg to enable                                                             |
+| :--------------              | :------- | :----------------                                                             |
+| Elasticsearch Client         | 5.0+     | `-Ddd.integration.elasticsearch.enabled=true`                                 |
+| Netty Http Server and Client | 4.0+     | `-Ddd.integration.netty.enabled=true`                                         |
+| HttpURLConnection            | all      | `-Ddd.integration.httpurlconnection.enabled=true`                             |
+| JSP Rendering                | 2.3+     | `-Ddd.integration.jsp.enabled=true`                                           |
+| Akka-Http Server             | 10.0+    | `-Ddd.integration.akka-http.enabled=true`                                     |
+| Lettuce                      | 5.0+     | `-Ddd.integration.lettuce.enabled=true`                                       |
+| SpyMemcached                 | 2.12+    | `-Ddd.integration.spymemcached.enabled=true`                                  |
+| Ratpack                      | 1.4+     | `-Ddd.integration.ratpack.enabled=true`                                       |
+| Spark Java                   | 2.4+     | `-Ddd.integration.sparkjava.enabled=true -Ddd.integration.jetty.enabled=true` |
 
 To improve visibility into applications using unsupported frameworks, consider:
 
@@ -67,128 +172,7 @@ The tracer is configured using System Properties and Environment Variables as fo
 * If the same key type is set for both, the system property configuration takes priority.
 * System properties can be used as JVM parameters.
 
-## Automatic Instrumentation
-
-Automatic instrumentation for Java utilizes the `java-agent` instrumentation capabilities [provided by the JVM][8]. When a `java-agent` is registered, it has the ability to modify class files at load time.
-The `java-agent` uses the popular [Byte Buddy framework][9] to find the classes defined for instrumentation and modify those class bytes accordingly.
-
-Instrumentation may come from auto-instrumentation, the OpenTracing api, or a mixture of both. Instrumentation generally captures the following info:
-
-* Method execution time
-* Timing duration is captured using the JVM's nanotime clock unless a timestamp is provided from the OpenTracing api
-* Key/value tag pairs
-* Errors and stacktraces which are unhanded by the application
-* A total count of traces (requests) flowing through the system
-
-### Integrations
-
-#### Web Frameworks
-
-`dd-java-agent` includes support for automatically tracing the following web frameworks.
-
-| Server                  | Versions   | Support Type    |
-| :---------------------- | :--------- | :-------------- |
-| Java Servlet Compatible | 2.3+, 3.0+ | Fully Supported |
-| Play                    | 2.4-2.6    | Fully Supported |
-| Jax-RS Annotations      | JSR311-API | Fully Supported |
-| Spring-Web              | 4.0+       | Fully Supported |
-
-Web Framework tracing provides:
-
-* Timing HTTP request to response
-* Tags for the HTTP request (status code, method, etc)
-* Error and stacktrace capturing
-* Linking work created within a web request
-* Distributed Tracing
-
-*Note:* Many application servers are Servlet compatible, such as Tomcat, Jetty, Websphere, Weblogic, etc.
-Also, frameworks like Spring Boot and Dropwizard inherently work because they use a Servlet compatible embedded application server.
-
-Don't see your desired web frameworks? We're continually adding additional support, [check with our team][2] to see if we can help.
-
-#### Networking Frameworks
-
-`dd-java-agent` includes support for automatically tracing the following networking frameworks.
-
-| Framework           | Versions | Support Type    |
-| :------------------ | :------- | :-------------- |
-| Jax RS Client       | 1.11+    | Fully Supported |
-| OkHTTP              | 3.0+     | Fully Supported |
-| Apache HTTP Client  | 4.3+     | Fully Supported |
-| JMS                 | 1 and 2  | Fully Supported |
-| AWS Java SDK        | 1.11+    | Fully Supported |
-| Kafka-Clients       | 0.11+    | Fully Supported |
-| Kafka-Streams       | 0.11+    | Fully Supported |
-
-Networking tracing provides:
-
-* Timing request to response
-* Tags for the request (e.g. response code)
-* Error and stacktrace capturing
-* Distributed Tracing
-
-
-Don't see your desired networking framework? We're continually adding additional support, [check with our team][2] to see if we can help.
-
-#### Datastores
-
-`dd-java-agent` includes support for automatically tracing the following database frameworks/drivers.
-
-| Database       | Versions       | Support Type    |
-| :------------- | :------------- | :-------------- |
-| JDBC           | N/A            | Fully Supported |
-| MongoDB        | 3.0+           | Fully Supported |
-| Cassandra      | 3.2+           | Fully Supported |
-| Jedis          | 1.4+           | Fully Supported |
-
-`dd-java-agent` is also compatible with common JDBC drivers including:
-
-*  Apache Derby
-*  Firebird SQL
-*  H2 Database Engine
-*  HSQLDB
-*  IBM DB2
-*  MSSQL (Microsoft SQL Server)
-*  MySQL
-*  MariaDB
-*  Oracle
-*  Postgres SQL
-
-Datastore tracing provides:
-
-* Timing request to response
-* Query info (e.g. a sanitized query string)
-* Error and stacktrace capturing
-
-Don't see your desired datastores? We're continually adding additional support, [check with our team][2] to see if we can help.
-
-#### Other Frameworks
-
-`dd-java-agent` includes support for automatically tracing the following other frameworks.
-
-| Framework | Versions | Support Type    |
-| :------   | :-----   | :-------------- |
-| Hystrix   | 1.4+     | Fully Supported |
-
-Don't see your desired framework? We're continually adding additional support, [check with our team][2] to see if we can help.
-
-#### Beta Instrumentation
-
-`dd-java-agent` ships with some newer instrumentation disabled by default.
-
-| Instrumentation              | Versions | JVM Arg to enable                                                             |
-| :--------------              | :------- | :----------------                                                             |
-| Elasticsearch Client         | 5.0+     | `-Ddd.integration.elasticsearch.enabled=true`                                 |
-| Netty Http Server and Client | 4.0+     | `-Ddd.integration.netty.enabled=true`                                         |
-| HttpURLConnection            | all      | `-Ddd.integration.httpurlconnection.enabled=true`                             |
-| JSP Rendering                | 2.3+     | `-Ddd.integration.jsp.enabled=true`                                           |
-| Akka-Http Server             | 10.0+    | `-Ddd.integration.akka-http.enabled=true`                                     |
-| Lettuce                      | 5.0+     | `-Ddd.integration.lettuce.enabled=true`                                       |
-| SpyMemcached                 | 2.12+    | `-Ddd.integration.spymemcached.enabled=true`                                  |
-| Ratpack                      | 1.4+     | `-Ddd.integration.ratpack.enabled=true`                                       |
-| Spark Java                   | 2.4+     | `-Ddd.integration.sparkjava.enabled=true -Ddd.integration.jetty.enabled=true` |
-
-### Trace Reporting
+## Trace Reporting
 
 To report a trace to Datadog the following happens:
 

@@ -423,57 +423,57 @@ languages:
           weight: 80
         
         # TRACING/APM - Setup basic
-        - identifier: customnav_tracingnav_setup_basic
-          name: "Getting Started"
-          url: "tracing/setup_basic/"
+        - identifier: customnav_tracingnav_setup
+          name: "Setup"
+          url: "tracing/setup/"
           weight: 10
           parent: menu_references_tracing
         
         - identifier: customnav_tracingnav_docker
           name: "Docker"
-          url: "tracing/setup_basic/docker/"
+          url: "tracing/setup/docker/"
           weight: 120
-          parent: customnav_tracingnav_setup_basic
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_kubernetes
           name: "Kubernetes"
-          url: "tracing/setup_basic/kubernetes/"
+          url: "tracing/setup/kubernetes/"
           weight: 130
-          parent: customnav_tracingnav_setup_basic
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_java
           name: "Java"
-          url: "tracing/setup_basic/java/"
+          url: "tracing/setup/java/"
           weight: 140
-          parent: customnav_tracingnav_setup_basic
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_python
           name: "Python"
-          url: "tracing/setup_basic/python/"
+          url: "tracing/setup/python/"
           weight: 150
-          parent: customnav_tracingnav_setup_basic
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_ruby
           name: "Ruby"
-          url: "tracing/setup_basic/ruby/"
+          url: "tracing/setup/ruby/"
           weight: 160
-          parent: customnav_tracingnav_setup_basic
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_go
           name: "Go"
-          url: "tracing/setup_basic/go/"
+          url: "tracing/setup/go/"
           weight: 170
-          parent: customnav_tracingnav_setup_basic
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_javascript
           name: "Node.js"
-          url: "tracing/setup_basic/nodejs/"
+          url: "tracing/setup/nodejs/"
           weight: 180
-          parent: customnav_tracingnav_setup_basic
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_dotnet
           name: ".NET (Coming soon)"
-          url: "tracing/setup_basic/dotnet/"
+          url: "tracing/setup/dotnet/"
           weight: 190
-          parent: customnav_tracingnav_setup_basic
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_php
           name: "PHP (Coming soon)"
-          url: "tracing/setup_basic/php/"
+          url: "tracing/setup/php/"
           weight: 195
-          parent: customnav_tracingnav_setup_basic
+          parent: customnav_tracingnav_setup
 
         # TRACING/APM - Setup Advanced
 
@@ -1400,57 +1400,57 @@ languages:
           weight: 80
         
         # TRACING/APM - Setup basic
-        - identifier: customnav_tracingnav_setup_basic
+        - identifier: customnav_tracingnav_setup
           name: "Getting Started"
-          url: "tracing/setup_basic/"
+          url: "tracing/setup/"
           weight: 10
           parent: menu_references_tracing
         
         - identifier: customnav_tracingnav_docker
           name: "Docker"
-          url: "tracing/setup_basic/docker/"
+          url: "tracing/setup/docker/"
           weight: 120
-          parent: customnav_tracingnav_setup_basic
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_kubernetes
           name: "Kubernetes"
-          url: "tracing/setup_basic/kubernetes/"
+          url: "tracing/setup/kubernetes/"
           weight: 130
-          parent: customnav_tracingnav_setup_basic
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_java
           name: "Java"
-          url: "tracing/setup_basic/java/"
+          url: "tracing/setup/java/"
           weight: 140
-          parent: customnav_tracingnav_setup_basic
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_python
           name: "Python"
-          url: "tracing/setup_basic/python/"
+          url: "tracing/setup/python/"
           weight: 150
-          parent: customnav_tracingnav_setup_basic
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_ruby
           name: "Ruby"
-          url: "tracing/setup_basic/ruby/"
+          url: "tracing/setup/ruby/"
           weight: 160
-          parent: customnav_tracingnav_setup_basic
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_go
           name: "Go"
-          url: "tracing/setup_basic/go/"
+          url: "tracing/setup/go/"
           weight: 170
-          parent: customnav_tracingnav_setup_basic
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_javascript
           name: "Node.js"
-          url: "tracing/setup_basic/nodejs/"
+          url: "tracing/setup/nodejs/"
           weight: 180
-          parent: customnav_tracingnav_setup_basic
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_dotnet
           name: ".NET (Coming soon)"
-          url: "tracing/setup_basic/dotnet/"
+          url: "tracing/setup/dotnet/"
           weight: 190
-          parent: customnav_tracingnav_setup_basic
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_php
           name: "PHP (Coming soon)"
-          url: "tracing/setup_basic/php/"
+          url: "tracing/setup/php/"
           weight: 195
-          parent: customnav_tracingnav_setup_basic
+          parent: customnav_tracingnav_setup
 
         # TRACING/APM - Setup Advanced
 

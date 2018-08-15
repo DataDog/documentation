@@ -14,7 +14,7 @@ Before instrumenting your application, review Datadog’s [APM Terminology][apm 
 Do this either using the Trace annotation for simple method call tracing or with the [OpenTracing API][opentracing] for complex tracing.
 
 [opentracing]: /tracing/setup_advanced/open_tracing
-[java framework]: /tracing/setup_basic/java/#integrations
+[java framework]: /tracing/setup/java/#integrations
 [apm terminology]: /tracing/visualization/services_list/
 
 {{% /tab %}}
@@ -48,7 +48,7 @@ end
 For more details about manual instrumentation, check out the [API documentation][ruby api doc].
 
 [ruby api doc]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#manual-instrumentation
-[ruby lib comptability]: /tracing/setup_basic/ruby/#library-compatibility
+[ruby lib comptability]: /tracing/setup/ruby/#library-compatibility
 
 {{% /tab %}}
 {{% tab "Go" %}}
@@ -96,7 +96,7 @@ span.finish()
 For more information on manual instrumentation, check out the [API documentation][nodejs api doc].
 
 [nodejs api doc]: https://datadog.github.io/dd-trace-js/#manual-instrumentation
-[nodejs compatibility]: /tracing/setup_basic/nodejs/#compatibility
+[nodejs compatibility]: /tracing/setup/nodejs/#compatibility
 
 {{% /tab %}}
 {{< /tabs >}}
