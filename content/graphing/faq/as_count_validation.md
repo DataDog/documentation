@@ -3,7 +3,7 @@ title: as_count in monitors
 kind: faq
 ---
 
-Datadog’s graphs utilize [time aggregation][1] to reduce the point count on a timeframe. This is done for performance reasons, because granularity higher than 350 data-points in a graph doesn't provide additional insight.
+Datadog's graphs utilize [time aggregation][1] to reduce the point count on a timeframe. This is done for performance reasons, because granularity higher than 350 data-points in a graph doesn't provide additional insight.
 
 #### What changed?
 Previously, we allowed the creation of monitors that use `average`/`min`/`max` monitor aggregation with the `as_count` [function][2].

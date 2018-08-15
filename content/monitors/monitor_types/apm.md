@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-These work just like regular [metric monitors][1] — but with controls tailored specifically to APM metrics. They allow you to alert at the service level on hits, errors, and a variety of latency measures.
+These work just like regular [metric monitors][1] - but with controls tailored specifically to APM metrics. They allow you to alert at the service level on hits, errors, and a variety of latency measures.
 
 ## Setup
 

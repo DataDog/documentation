@@ -18,13 +18,13 @@ If you're unfamiliar with the basics of Datadog Monitors, first read the <a href
 
 <!--
 Composite monitors let you combine many individual monitors into one so that you can define more specific alert conditions.
-You can choose up to 10 existing monitors—monitor A and monitor B, say—and then set a trigger condition using boolean operators (e.g. “A && B”). The composite monitor will trigger when its individual monitors' statuses simultaneously have values that cause the composite's trigger condition to be true.
+You can choose up to 10 existing monitors-monitor A and monitor B, say-and then set a trigger condition using boolean operators (e.g. "A && B"). The composite monitor will trigger when its individual monitors' statuses simultaneously have values that cause the composite's trigger condition to be true.
 
 With regard to configuration, a composite monitor is independent of its constituent monitors. You can modify the notification policy of a composite monitor without affecting the policies of its constituent monitors, and vice versa. Furthermore, deleting a composite monitor will not delete its constituent monitors; a composite monitor does not own other monitors, it only uses their results. Also, many composite monitors may reference the same individual monitor.
 
 _Note: this guide refers variously to 'individual monitors', 'constituent monitors', and 'non-composite monitors'. They all mean the same thing: the monitors that a composite monitor uses to calculate its status._
 -->
-コンポジットMonitorを使用すると、多数の個々のMonitorを1つの複合Monitorとしてまとめることができ、より具体的なアラート条件を定義することができます。最大で10までの作成済みのMonitorを使用して、例えば Monitor A と Monitor B があるとすると、boolean演算子を用いてアラートがトリガする条件を(“A && B”)のようにセットすることができます。コンポジットMonitorは、複合したトリガ条件が真となる値を個々のMonitorのステータスが同時に持つ場合にトリガされます。
+コンポジットMonitorを使用すると、多数の個々のMonitorを1つの複合Monitorとしてまとめることができ、より具体的なアラート条件を定義することができます。最大で10までの作成済みのMonitorを使用して、例えば Monitor A と Monitor B があるとすると、boolean演算子を用いてアラートがトリガする条件を("A && B")のようにセットすることができます。コンポジットMonitorは、複合したトリガ条件が真となる値を個々のMonitorのステータスが同時に持つ場合にトリガされます。
 
 With regard to configuration, a composite monitor is independent of its constituent monitors. You can modify the notification policy of a composite monitor without affecting the policies of its constituent monitors, and vice versa. Furthermore, deleting a composite monitor will not delete its constituent monitors; a composite monitor does not own other monitors, it only uses their results. Also, many composite monitors may reference the same individual monitor.
 
@@ -105,7 +105,7 @@ Outside of a composite monitor's New Monitor and Edit forms, its individual moni
 
 {{< img src="guides/composite_monitors/composite-status.png" >}}
 
-In the API, a composite monitor's trigger condition is called its query. While a non-composite monitor's query can encapsulate many things—a metric, tags, an aggregation function like `avg`, a group-by clause, etc—a composite monitor's query is simply its trigger condition defined in terms of its constituent monitors.
+In the API, a composite monitor's trigger condition is called its query. While a non-composite monitor's query can encapsulate many things-a metric, tags, an aggregation function like `avg`, a group-by clause, etc-a composite monitor's query is simply its trigger condition defined in terms of its constituent monitors.
 
 For two non-composite monitors with the following queries:
 
@@ -132,7 +132,7 @@ Outside of a composite monitor's New Monitor and Edit forms, its individual moni
 
 {{< img src="guides/composite_monitors/composite-status.png" >}}
 
-In the API, a composite monitor's trigger condition is called its query. While a non-composite monitor's query can encapsulate many things—a metric, tags, an aggregation function like `avg`, a group-by clause, etc—a composite monitor's query is simply its trigger condition defined in terms of its constituent monitors.
+In the API, a composite monitor's trigger condition is called its query. While a non-composite monitor's query can encapsulate many things-a metric, tags, an aggregation function like `avg`, a group-by clause, etc-a composite monitor's query is simply its trigger condition defined in terms of its constituent monitors.
 
 For two non-composite monitors with the following queries:
 
@@ -236,11 +236,11 @@ This section uses examples to show how trigger conditions are computed, and how 
 
 Datadog doesn't compute `A && B && C` any differently than you would expect, but which monitor statuses are considered true and which false?
 
-Recall the seven statuses a monitor may have (in order of increasing severity): `Ok`, `Skipped`, `Ignored`, `No Data`, `Unknown`, `Warn`, and `Alert`. Composite monitors consider `Unknown`, `Warn` and `Alert` to be alert-worthy (i.e. true). The rest—`Ok`, `Skipped`, `Ignored`, and `No Data`—are not alert-worthy (i.e. false). However, you can configure `No Data` to be alert-worthy by setting `notify_no_data` to true.
+Recall the seven statuses a monitor may have (in order of increasing severity): `Ok`, `Skipped`, `Ignored`, `No Data`, `Unknown`, `Warn`, and `Alert`. Composite monitors consider `Unknown`, `Warn` and `Alert` to be alert-worthy (i.e. true). The rest-`Ok`, `Skipped`, `Ignored`, and `No Data`-are not alert-worthy (i.e. false). However, you can configure `No Data` to be alert-worthy by setting `notify_no_data` to true.
 
-When a composite monitor evaluates as alert-worthy, it inherits the most severe status among its individual monitors and triggers an alert. When a composite monitor does not evaluate as alert-worthy, it inherits the _least_ severe status. The not (!) operator causes a status—individual or composite—to be either `Ok`, `Alert`, or `No Data`: if monitor A has any alert-worthy status, `!A` is `OK`; if monitor A has any alert-**un**worthy status, `!A` is `Alert`; if monitor A has a status of `No Data`, `!A` is also `No Data`.
+When a composite monitor evaluates as alert-worthy, it inherits the most severe status among its individual monitors and triggers an alert. When a composite monitor does not evaluate as alert-worthy, it inherits the _least_ severe status. The not (!) operator causes a status-individual or composite-to be either `Ok`, `Alert`, or `No Data`: if monitor A has any alert-worthy status, `!A` is `OK`; if monitor A has any alert-**un**worthy status, `!A` is `Alert`; if monitor A has a status of `No Data`, `!A` is also `No Data`.
 
-Consider a composite monitor that uses three individual monitors—A, B, and C—and a trigger condition `A && B && C`. The following table shows the resulting status of the composite monitor given different statuses for its individual monitors (alert-worthiness is indicated with T or F):
+Consider a composite monitor that uses three individual monitors-A, B, and C-and a trigger condition `A && B && C`. The following table shows the resulting status of the composite monitor given different statuses for its individual monitors (alert-worthiness is indicated with T or F):
 
 | monitor A   | monitor B  | monitor C  | composite status        | alert triggered? |
 |-------------|------------|------------|-------------------------|-------------------------|
@@ -255,11 +255,11 @@ Two of the four scenarios will trigger an alert, even though not all of the indi
 
 Datadog doesn't compute `A && B && C` any differently than you would expect, but which monitor statuses are considered true and which false?
 
-Recall the seven statuses a monitor may have (in order of increasing severity): `Ok`, `Skipped`, `Ignored`, `No Data`, `Unknown`, `Warn`, and `Alert`. Composite monitors consider `Unknown`, `Warn` and `Alert` to be alert-worthy (i.e. true). The rest—`Ok`, `Skipped`, `Ignored`, and `No Data`—are not alert-worthy (i.e. false). However, you can configure `No Data` to be alert-worthy by setting `notify_no_data` to true.
+Recall the seven statuses a monitor may have (in order of increasing severity): `Ok`, `Skipped`, `Ignored`, `No Data`, `Unknown`, `Warn`, and `Alert`. Composite monitors consider `Unknown`, `Warn` and `Alert` to be alert-worthy (i.e. true). The rest-`Ok`, `Skipped`, `Ignored`, and `No Data`-are not alert-worthy (i.e. false). However, you can configure `No Data` to be alert-worthy by setting `notify_no_data` to true.
 
-When a composite monitor evaluates as alert-worthy, it inherits the most severe status among its individual monitors and triggers an alert. When a composite monitor does not evaluate as alert-worthy, it inherits the _least_ severe status. The not (!) operator causes a status—individual or composite—to be either `Ok`, `Alert`, or `No Data`: if monitor A has any alert-worthy status, `!A` is `OK`; if monitor A has any alert-**un**worthy status, `!A` is `Alert`; if monitor A has a status of `No Data`, `!A` is also `No Data`.
+When a composite monitor evaluates as alert-worthy, it inherits the most severe status among its individual monitors and triggers an alert. When a composite monitor does not evaluate as alert-worthy, it inherits the _least_ severe status. The not (!) operator causes a status-individual or composite-to be either `Ok`, `Alert`, or `No Data`: if monitor A has any alert-worthy status, `!A` is `OK`; if monitor A has any alert-**un**worthy status, `!A` is `Alert`; if monitor A has a status of `No Data`, `!A` is also `No Data`.
 
-Consider a composite monitor that uses three individual monitors—A, B, and C—and a trigger condition `A && B && C`. The following table shows the resulting status of the composite monitor given different statuses for its individual monitors (alert-worthiness is indicated with T or F):
+Consider a composite monitor that uses three individual monitors-A, B, and C-and a trigger condition `A && B && C`. The following table shows the resulting status of the composite monitor given different statuses for its individual monitors (alert-worthiness is indicated with T or F):
 
 | monitor A   | monitor B  | monitor C  | composite status        | alert triggered? |
 |-------------|------------|------------|-------------------------|-------------------------|
@@ -286,7 +286,7 @@ If even one individual monitor is multi-alert, then the composite monitor is als
 <!--
 #### One multi-alert monitor
 
-Consider a scenario where monitor A is a multi-alert monitor grouped by `host`. If the monitor has four reporting sources—hosts web01 through web04—you may receive up to four alerts each time Datadog evaluates the composite monitor. In other words: for a given evaluation cycle, Datadog has 4 cases to consider. For each case, monitor A's status may vary across its sources, but the statuses of monitors B and C—which are simple alerts—are unchanging.
+Consider a scenario where monitor A is a multi-alert monitor grouped by `host`. If the monitor has four reporting sources-hosts web01 through web04-you may receive up to four alerts each time Datadog evaluates the composite monitor. In other words: for a given evaluation cycle, Datadog has 4 cases to consider. For each case, monitor A's status may vary across its sources, but the statuses of monitors B and C-which are simple alerts-are unchanging.
 
 The previous table showed the composite monitor status across four points in time, but in this example, the table shows the status of each multi-alert case, all at one point in time:
 
@@ -301,7 +301,7 @@ In this cycle, you would receive two alerts.
 -->
 #### multi-alert Monitor が1つだけ使用されるケース
 
-Consider a scenario where monitor A is a multi-alert monitor grouped by `host`. If the monitor has four reporting sources—hosts web01 through web04—you may receive up to four alerts each time Datadog evaluates the composite monitor. In other words: for a given evaluation cycle, Datadog has 4 cases to consider. For each case, monitor A's status may vary across its sources, but the statuses of monitors B and C—which are simple alerts—are unchanging.
+Consider a scenario where monitor A is a multi-alert monitor grouped by `host`. If the monitor has four reporting sources-hosts web01 through web04-you may receive up to four alerts each time Datadog evaluates the composite monitor. In other words: for a given evaluation cycle, Datadog has 4 cases to consider. For each case, monitor A's status may vary across its sources, but the statuses of monitors B and C-which are simple alerts-are unchanging.
 
 The previous table showed the composite monitor status across four points in time, but in this example, the table shows the status of each multi-alert case, all at one point in time:
 

@@ -78,12 +78,12 @@ There are several ways to specify an environment when reporting data:
       ```
       Via env var:
       ```
-      DD_TRACE_SPAN_TAGS=”env:prod”
+      DD_TRACE_SPAN_TAGS="env:prod"
       ```
 
   * **Ruby**:
   ```
-  Datadog.tracer.set_tags(‘env’ => ‘prod’)
+  Datadog.tracer.set_tags('env' => 'prod')
   ```
 
   * **Python**:
@@ -102,7 +102,7 @@ Environments appear at the top of APM pages. Use the dropdown to scope the data 
 ## Primary Tags
 ### Definition
 
-A primary tag is a first-class dimension that is used to scope an entire Datadog APM application. Primary tags are used in conjunction with environments to get an even finer view of your application’s behavior. Use cases for primary tags include:
+A primary tag is a first-class dimension that is used to scope an entire Datadog APM application. Primary tags are used in conjunction with environments to get an even finer view of your application's behavior. Use cases for primary tags include:
 
 * Availability zone
 * Datacenter

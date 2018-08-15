@@ -261,9 +261,14 @@ languages:
           weight: 60
           parent: menu_references_graphing
         - identifier: customnav_infrastructurenav_hostmap
-          name: "Hostmap"
+          name: "Host Map"
           url: "graphing/infrastructure/hostmap/"
           weight: 30
+          parent: customnav_graphingnav_infrastructure
+        - identifier: customnav_infrastructurenav_containermap
+          name: "Container Map"
+          url: "graphing/infrastructure/containermap/"
+          weight: 35
           parent: customnav_graphingnav_infrastructure
         - identifier: customnav_infrastructurenav_livecontainers
           name: "Live Containers"
@@ -460,8 +465,8 @@ languages:
           weight: 180
           parent: customnav_tracingnav_setup_basic
         - identifier: customnav_tracingnav_dotnet
-          name: ".NET (Alpha)"
-          url: "tracing/setup/dotnet/"
+          name: ".NET (Coming soon)"
+          url: "tracing/setup_basic/dotnet/"
           weight: 190
           parent: customnav_tracingnav_setup_basic
         - identifier: customnav_tracingnav_php
@@ -535,6 +540,8 @@ languages:
           url: "tracing/visualization/trace"
           weight: 340
           parent: customnav_tracingnav_visualization
+
+        # Trace Search
         - identifier: customnav_tracingnav_trace_search
           name: "Trace Search"
           url: "tracing/visualization/search"
@@ -1435,7 +1442,7 @@ languages:
           weight: 180
           parent: customnav_tracingnav_setup_basic
         - identifier: customnav_tracingnav_dotnet
-          name: ".NET (Alpha)"
+          name: ".NET (Coming soon)"
           url: "tracing/setup/dotnet/"
           weight: 190
           parent: customnav_tracingnav_setup_basic

@@ -42,7 +42,7 @@ In addition to this baseline, customers need to review and configure their APM d
 
 ## Tag Filtering
 
-For customers using release 6, the Agent can be configured to obfuscate Tags associated with Spans based on the Tag’s name and pattern, and replace it with a user-defined string. To prevent the submission of specific Tags, use the `replace_tags` [setting][2]. This setting enables the creation of a list containing one or more regular expressions, which instructs the Agent to redact sensitive data within your Tags.
+For customers using release 6, the Agent can be configured to obfuscate Tags associated with Spans based on the Tag's name and pattern, and replace it with a user-defined string. To prevent the submission of specific Tags, use the `replace_tags` [setting][2]. This setting enables the creation of a list containing one or more regular expressions, which instructs the Agent to redact sensitive data within your Tags.
 
 ## Resource Filtering
 

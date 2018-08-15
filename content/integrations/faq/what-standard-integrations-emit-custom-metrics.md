@@ -14,7 +14,7 @@ Standard integrations that are limited to 350 metrics by default and emit custom
 
 If you'd like to increase this limit, email [us][8]!
 
-Other standard integrations that don’t have a default limit set and also emit custom metrics: 
+Other standard integrations that don't have a default limit set and also emit custom metrics: 
 
 * [agent_metrics][10]
 * [directory][11]

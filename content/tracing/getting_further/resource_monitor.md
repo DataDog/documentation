@@ -5,7 +5,7 @@ aliases:
     - /tracing/faq/how-to-create-a-monitor-over-every-resource-apm
 ---
 
-Datadog’s Application Performance Monitoring component consists of a few key components: [services][1] and [resources][2] being the top most layers.  
+Datadog's Application Performance Monitoring component consists of a few key components: [services][1] and [resources][2] being the top most layers.  
 
 Each graph within the APM service and resource Dashboards consist of some `trace.*` metrics.
 Utilize [the download button at the top of the graph][3] to save those Metrics to an existing Timeboard. This can be done for both service level and resource level metrics:

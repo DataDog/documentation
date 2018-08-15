@@ -30,7 +30,7 @@ Python logs are quite complex to handle, mainly because of tracebacks. They are 
 To address this use case we strongly recommend you use a JSON formatter when logging in order to:
 
 * Ensure each stack_trace is properly wrapped into the correct log
-* Ensure that all the attributes of a log event are properly extracted (severity, logger name, thread name, etc…)
+* Ensure that all the attributes of a log event are properly extracted (severity, logger name, thread name, etc...)
  
 Here are setup examples for the two following logging libraries:
 

@@ -27,7 +27,7 @@ While this doesn't impact graphs where the `avg` or the `max` value across sourc
 
 ## Example
 
-Let’s consider metric `player.count` submitted with tag `map:1` up until time=t1, then with `map:2` starting from time=t2. Datadog stores separately data coming from these 2 different sources.
+Let's consider metric `player.count` submitted with tag `map:1` up until time=t1, then with `map:2` starting from time=t2. Datadog stores separately data coming from these 2 different sources.
 
 When querying `sum:player.count{*}`, Datadog detects all sources (i.e. all set of tags with which the metric has been submitted) and combine their data together (using `sum`) into a single line for your graph.
 
@@ -40,7 +40,7 @@ So what our system actually does is:
 
 More explanation about our graphing system in this [excellent article][2]:
 
-Back to our example, if you look at a few minutes of data, the graph is as expected. But when zooming out, the local aggregates for each source inevitably accounts for X minutes of data. As you zoom out, X grows, and at some point, data from t1 and t2 get aggregated together. Thus values from source `map:1` and from source `map:2`, that didn’t occur at the same time fall nonetheless in the same time-bucket, therefore, when summing sources together, these datapoints that didn't occur simultaneously are summed up together: the result may be twice the value as expected.
+Back to our example, if you look at a few minutes of data, the graph is as expected. But when zooming out, the local aggregates for each source inevitably accounts for X minutes of data. As you zoom out, X grows, and at some point, data from t1 and t2 get aggregated together. Thus values from source `map:1` and from source `map:2`, that didn't occur at the same time fall nonetheless in the same time-bucket, therefore, when summing sources together, these datapoints that didn't occur simultaneously are summed up together: the result may be twice the value as expected.
 
 ## Other workarounds
 
@@ -50,7 +50,7 @@ In addition to the feature we may apply to your account, here are 3 workarounds 
 
 * **Turn-off interpolation**: Our interpolation feature sometimes intensifies the impact of this issue. You may apply the fill(null,0) function with the graph visual editor to disable it and improve your graph display. Syntax for the json tab: sum:your_metric{scope}.fill(null,0) or sum:your_metric{scope} by {tag_key}.fill(null,0)
 
-* **Submit the metric without the changing tags**: The obvious drawback are the disparities between the levels of detail provided by this tag, but you’ll get accurate results on your graphs. Thus we would recommend continuing to send the metric as you do right now (to enjoy this level of detail) and in addition submit the same data under a slightly different name `<your.metric>.no_tag_<tag_name>` without this tag for graphing global queries without the spikes otherwise caused by `<tag_name>`.
+* **Submit the metric without the changing tags**: The obvious drawback are the disparities between the levels of detail provided by this tag, but you'll get accurate results on your graphs. Thus we would recommend continuing to send the metric as you do right now (to enjoy this level of detail) and in addition submit the same data under a slightly different name `<your.metric>.no_tag_<tag_name>` without this tag for graphing global queries without the spikes otherwise caused by `<tag_name>`.
 
 [1]: /help
 [2]: /graphing/miscellaneous/from_the_query_to_the_graph

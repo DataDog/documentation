@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-This page outlines the basic features of the Datadog Agent. If you haven't installed the Agent yet, instructions can be found in the [Datadog Agent integration page][1].
+This page outlines the basic features of the Datadog Agent. If you haven't installed the Agent yet, instructions can be found in the [Datadog Agent Integration page][1].
 
 The process to upgrade from the previous version of the Agent is to re-run the installation.
 
@@ -37,7 +37,7 @@ Only the _lifecycle commands_ (i.e. `start`/`stop`/`restart`/`status` on the Age
 | `sudo service datadog-agent`                      | `sudo datadog-agent --help`                            | Display command usage              |
 | `sudo -u dd-agent -- dd-agent check <check_name>` | `sudo -u dd-agent -- datadog-agent check <check_name>` | Run a check                        |
 
-More information about the metrics, events, and service checks for an [integrations][2] can be retrieved with the `check` command:
+More information about the metrics, events, and service checks for an [Integrations][2] can be retrieved with the `check` command:
 ```
 sudo service datadog-agent check [integration]
 ```
@@ -62,7 +62,7 @@ The configuration files and folders for the Agent are located at:
 |:-----|:----|
 |`/etc/dd-agent/datadog.conf`| `/etc/datadog-agent/datadog.yaml` |
 
-Configuration files for [integrations][2]:
+Configuration files for [Integrations][2]:
 
 | Agent v5                                  |  Agent v6                          |
 |:-----|:----|
@@ -97,11 +97,11 @@ The Agent v6 installer can automatically convert v5 configurations during upgrad
 DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
 ```
 
-**Note**: The import process won’t automatically move custom Agent checks. This is by design as we cannot guarantee full backwards compatibility out of the box.
+**Note**: The import process won't automatically move custom Agent checks. This is by design as we cannot guarantee full backwards compatibility out of the box.
 
 ##### Fresh install
 
-To install on a clean box (or have an existing Agent 5 install from which you do not wish to import the configuration) provide an api key:
+To install on a clean box (or have an existing Agent 5 install from which you do not wish to import the configuration) provide an API key:
 
 ```bash
 DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"

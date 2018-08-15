@@ -21,9 +21,9 @@ further_reading:
 
 This page outlines the basic features of the Datadog Agent.
 If you haven't installed the Agent yet, instructions can be found
-[in the Datadog Agent integration page][1].  
+[in the Datadog Agent Integration page][1].  
 
-By default, your Agent is installed in its own sandbox located at `/opt/datadog-agent`. You’re free to move this folder wherever you like.
+By default, your Agent is installed in its own sandbox located at `/opt/datadog-agent`. You're free to move this folder wherever you like.
 However, we assume that the Agent is installed in its default location, so be sure to modify the instructions accordingly if you decide to move it to another location.
 
 ## Commands
@@ -49,7 +49,7 @@ The configuration files and folders for the Agent are located at:
 | :-----                          | :----                           |
 | `~/.datadog-agent/datadog.conf` | `~/.datadog-agent/datadog.yaml` |
 
-Configuration files for [integrations][2]:
+Configuration files for [Integrations][2]:
 
 | Agent v5                   | Agent v6                   |
 | :-----                     | :----                      |
@@ -79,7 +79,7 @@ You can either download the DMG package and install it manually, or use the one-
 
 1. Download the DMG package of the latest Agent version, use the latest macOS release listed on the [release page][4] of the repository
 2. Install the DMG package
-3. Add your api key to `/opt/datadog-agent/etc/datadog.yaml`
+3. Add your API key to `/opt/datadog-agent/etc/datadog.yaml`
 
 Then start the Datadog Agent app (once started, you should see it in the system tray), and manage the Agent from there. The Agent6 also ships a web-based GUI to edit the Agent configuration files and much more, refer to the [changes and deprecations document][changes] document for more information.
 ### Install script

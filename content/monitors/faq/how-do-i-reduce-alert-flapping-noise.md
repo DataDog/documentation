@@ -13,23 +13,23 @@ further_reading:
   text: Schedule a downtime to mute a monitor
 ---
 
-We often discuss alerting with our clients and a frequent issue or pain point is alert fatigue, or when alerts ‘flap’ (rapidly switching from an ‘ok’ to an ‘alert’ status).  
+We often discuss alerting with our clients and a frequent issue or pain point is alert fatigue, or when alerts 'flap' (rapidly switching from an 'ok' to an 'alert' status).  
 
 Your individual Datadog alerts with groups will [have notification][1] rollups on by default, but there is functionality within Datadog that often leads to less noisy, more meaningful alerts.
 
 * Re-Evaluate the Alert Threshold Value
     * The easiest way to reduce flapping when the alert <-> ok or state changes are frequent could be to increase/decrease the threshold condition.
-* Utilize the ‘At all times’ threshold
+* Utilize the 'At all times' threshold
     * This triggers the alert only when all data points for the metric in the timeframe violate the threshold
 
 * Reframe the query using Functions- rates, moving averages, or time-shift differentials
-    * This means, you can compare the difference between a metric stream’s values with the values from a week ago and set alert conditions based off the difference
+    * This means, you can compare the difference between a metric stream's values with the values from a week ago and set alert conditions based off the difference
     * A time-shift differential allows you to combine functions and can give a historical view as well. For example:
  abs(system.cpu.system{*} - week_before(system.cpu.system{*}))
     * If your metric frequently spikes, and those spikes are not inherently indicative of issues, applying a rate or average to it will allow you to set a more meaningful threshold.
 
 * Consider the states of other monitors using Composite alerts
-    * The most recent addition to Datadog’s alerting capabilities, composite alerts will allow you to combine two or more previously created alerts.
+    * The most recent addition to Datadog's alerting capabilities, composite alerts will allow you to combine two or more previously created alerts.
     For example: if CPU is high AND disk is high on a host, trigger the alert.
 
 * Use some built-in analysis modules with Anomaly or Outlier

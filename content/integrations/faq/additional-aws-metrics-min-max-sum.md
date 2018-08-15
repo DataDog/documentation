@@ -7,7 +7,7 @@ Overall, min/max/avg have a different meaning within AWS than in Datadog.
 
 In AWS, average latency, minimum latency, and maximum latency are three distinct metrics that AWS collects. When Datadog pulls metrics from AWS Cloudwatch, we only get the average latency as a single time series per ELB.
 
-Within Datadog, when you are selecting ‘min’, ‘max’, or ‘avg’, you are controlling how multiple time series are combined. For example, requesting system.cpu.idle without any filter would return one series for each host that reports that metric and those series need to be combined to be graphed. On the other hand, if you requested system.cpu.idle from a single host, no aggregation would be necessary and switching between average and max would yield the same result.
+Within Datadog, when you are selecting 'min', 'max', or 'avg', you are controlling how multiple time series are combined. For example, requesting system.cpu.idle without any filter would return one series for each host that reports that metric and those series need to be combined to be graphed. On the other hand, if you requested system.cpu.idle from a single host, no aggregation would be necessary and switching between average and max would yield the same result.
 
 If you would like to collect the Min/Max/Sum/Avg from AWS (Component Specific - Ec2, ELB, Kinesis, etc.) reach out to support@datadoghq.com. Enabling this feature would provide additional metrics under the following namespace format:
 
@@ -21,7 +21,7 @@ Note, enabling this feature increases the number of API requests and information
 
 More information on this behavior and AWS billing can be found here:
 
-* [Do you believe you’re seeing a discrepancy between your data in CloudWatch and Datadog?][1]
+* [Do you believe you're seeing a discrepancy between your data in CloudWatch and Datadog?][1]
 
 * [How do I monitor my AWS billing details?][2]
 

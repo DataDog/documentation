@@ -39,7 +39,7 @@ Finally, import the tracer and instrument your code!
 from ddtrace import tracer
 
 with tracer.trace("web.request", service="my_service") as span:
-span.set_tag("my_tag", "my_value")
+  span.set_tag("my_tag", "my_value")
 ```
 
 For more examples, see the [Getting Started section of library documentation][2].
