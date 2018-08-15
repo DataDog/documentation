@@ -1,9 +1,9 @@
 ---
-title: Sampling
+title: Priority Sampling
 kind: documentation
 ---
 
-// Description of sampling.
+// Description of priority sampling.
 
 {{< tabs >}}
 {{% tab "Java" %}}

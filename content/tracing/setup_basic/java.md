@@ -11,6 +11,9 @@ further_reading:
 - link: "tracing/visualization/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
+- link: "tracing/advanced_usage/"
+  tag: "Advanced Usage"
+  text: ""
 ---
 
 ## Compatibility
@@ -83,12 +86,12 @@ Instrumentation may come from auto-instrumentation, the OpenTracing api, or a mi
 
 `dd-java-agent` includes support for automatically tracing the following web frameworks.
 
-| Server                  | Versions   |
-| :---------------------- | :--------- |
-| Java Servlet Compatible | 2.3+, 3.0+ |
-| Play                    | 2.4-2.6    |
-| Jax-RS Annotations      | JSR311-API |
-| Spring-Web              | 4.0+       |
+| Server                  | Versions   | Support Type    |
+| :---------------------- | :--------- | :-------------- |
+| Java Servlet Compatible | 2.3+, 3.0+ | Fully Supported |
+| Play                    | 2.4-2.6    | Fully Supported |
+| Jax-RS Annotations      | JSR311-API | Fully Supported |
+| Spring-Web              | 4.0+       | Fully Supported |
 
 Web Framework tracing provides:
 
@@ -107,15 +110,15 @@ Don't see your desired web frameworks? We're continually adding additional suppo
 
 `dd-java-agent` includes support for automatically tracing the following networking frameworks.
 
-| Framework           | Versions |
-| :------------------ | :------- |
-| Jax RS Client       | 1.11+    |
-| OkHTTP              | 3.0+     |
-| Apache HTTP Client  | 4.3+     |
-| JMS                 | 1 and 2  |
-| AWS Java SDK        | 1.11+    |
-| Kafka-Clients       | 0.11+    |
-| Kafka-Streams       | 0.11+    |
+| Framework           | Versions | Support Type    |
+| :------------------ | :------- | :-------------- |
+| Jax RS Client       | 1.11+    | Fully Supported |
+| OkHTTP              | 3.0+     | Fully Supported |
+| Apache HTTP Client  | 4.3+     | Fully Supported |
+| JMS                 | 1 and 2  | Fully Supported |
+| AWS Java SDK        | 1.11+    | Fully Supported |
+| Kafka-Clients       | 0.11+    | Fully Supported |
+| Kafka-Streams       | 0.11+    | Fully Supported |
 
 Networking tracing provides:
 
@@ -131,12 +134,12 @@ Don't see your desired networking framework? We're continually adding additional
 
 `dd-java-agent` includes support for automatically tracing the following database frameworks/drivers.
 
-| Database       | Versions       |
-| :------------- | :------------- |
-| JDBC           | N/A            |
-| MongoDB        | 3.0+           |
-| Cassandra      | 3.2+           |
-| Jedis          | 1.4+           |
+| Database       | Versions       | Support Type    |
+| :------------- | :------------- | :-------------- |
+| JDBC           | N/A            | Fully Supported |
+| MongoDB        | 3.0+           | Fully Supported |
+| Cassandra      | 3.2+           | Fully Supported |
+| Jedis          | 1.4+           | Fully Supported |
 
 `dd-java-agent` is also compatible with common JDBC drivers including:
 
@@ -163,9 +166,9 @@ Don't see your desired datastores? We're continually adding additional support, 
 
 `dd-java-agent` includes support for automatically tracing the following other frameworks.
 
-| Framework | Versions |
-| :------   | :-----   |
-| Hystrix   | 1.4+     |
+| Framework | Versions | Support Type    |
+| :------   | :-----   | :-------------- |
+| Hystrix   | 1.4+     | Fully Supported |
 
 Don't see your desired framework? We're continually adding additional support, [check with our team][2] to see if we can help.
 

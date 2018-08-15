@@ -477,42 +477,42 @@ languages:
 
         # TRACING/APM - Setup Advanced
 
-        - identifier: customnav_tracingnav_setup_advanced
+        - identifier: customnav_tracingnav_advanced_usage
           name: "Advanced Usage"
-          url: "tracing/setup_advanced/"
+          url: "tracing/advanced_usage/"
           weight: 20
           parent: menu_references_tracing
 
         - identifier: customnav_tracingnav_manual_tracing
           name: "Manual Tracing"
-          url: "tracing/setup_advanced/manual_tracing/"
+          url: "tracing/advanced_usage/manual_tracing/"
           weight: 210
-          parent: customnav_tracingnav_setup_advanced
+          parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_custom_tagging
           name: "Custom Tagging"
-          url: "tracing/setup_advanced/custom_tagging/"
+          url: "tracing/advanced_usage/custom_tagging/"
           weight: 220
-          parent: customnav_tracingnav_setup_advanced
+          parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_distributed_tracing
           name: "Distributed Tracing"
-          url: "tracing/setup_advanced/distributed_tracing/"
+          url: "tracing/advanced_usage/distributed_tracing/"
           weight: 230
-          parent: customnav_tracingnav_setup_advanced
+          parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_sampling
-          name: "Sampling"
-          url: "tracing/setup_advanced/sampling/"
+          name: "Priority Sampling"
+          url: "tracing/advanced_usage/priority_sampling/"
           weight: 250
-          parent: customnav_tracingnav_setup_advanced
+          parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_open_tracing
           name: "OpenTracing"
-          url: "tracing/setup_advanced/open_tracing/"
+          url: "tracing/advanced_usage/open_tracing/"
           weight: 240
-          parent: customnav_tracingnav_setup_advanced
+          parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_debugging
           name: "Debugging"
-          url: "tracing/setup_advanced/debugging/"
+          url: "tracing/advanced_usage/debugging/"
           weight: 260
-          parent: customnav_tracingnav_setup_advanced
+          parent: customnav_tracingnav_advanced_usage
 
         # Using the APM UI
         - identifier: customnav_tracingnav_visualization
@@ -1401,7 +1401,7 @@ languages:
         
         # TRACING/APM - Setup basic
         - identifier: customnav_tracingnav_setup_basic
-          name: "Setup - Basic"
+          name: "Getting Started"
           url: "tracing/setup_basic/"
           weight: 10
           parent: menu_references_tracing
@@ -1443,7 +1443,7 @@ languages:
           parent: customnav_tracingnav_setup_basic
         - identifier: customnav_tracingnav_dotnet
           name: ".NET (Coming soon)"
-          url: "tracing/setup/dotnet/"
+          url: "tracing/setup_basic/dotnet/"
           weight: 190
           parent: customnav_tracingnav_setup_basic
         - identifier: customnav_tracingnav_php
@@ -1454,42 +1454,42 @@ languages:
 
         # TRACING/APM - Setup Advanced
 
-        - identifier: customnav_tracingnav_setup_advanced
-          name: "Setup - Advanced"
-          url: "tracing/setup_advanced/"
+        - identifier: customnav_tracingnav_advanced_usage
+          name: "Advanced Usage"
+          url: "tracing/advanced_usage/"
           weight: 20
           parent: menu_references_tracing
 
         - identifier: customnav_tracingnav_manual_tracing
           name: "Manual Tracing"
-          url: "tracing/setup_advanced/manual_tracing/"
+          url: "tracing/advanced_usage/manual_tracing/"
           weight: 210
-          parent: customnav_tracingnav_setup_advanced
+          parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_custom_tagging
           name: "Custom Tagging"
-          url: "tracing/setup_advanced/custom_tagging/"
+          url: "tracing/advanced_usage/custom_tagging/"
           weight: 220
-          parent: customnav_tracingnav_setup_advanced
+          parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_distributed_tracing
           name: "Distributed Tracing"
-          url: "tracing/setup_advanced/distributed_tracing/"
+          url: "tracing/advanced_usage/distributed_tracing/"
           weight: 230
-          parent: customnav_tracingnav_setup_advanced
+          parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_open_tracing
-          name: "Open Tracing"
-          url: "tracing/setup_advanced/open_tracing/"
+          name: "OpenTracing"
+          url: "tracing/advanced_usage/open_tracing/"
           weight: 240
-          parent: customnav_tracingnav_setup_advanced
+          parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_sampling
-          name: "Sampling"
-          url: "tracing/setup_advanced/sampling/"
+          name: "Priority Sampling"
+          url: "tracing/advanced_usage/sampling/"
           weight: 250
-          parent: customnav_tracingnav_setup_advanced
+          parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_debugging
           name: "Debugging"
-          url: "tracing/setup_advanced/debugging/"
+          url: "tracing/advanced_usage/debugging/"
           weight: 260
-          parent: customnav_tracingnav_setup_advanced
+          parent: customnav_tracingnav_advanced_usage
 
         # Using the APM UI
         - identifier: customnav_tracingnav_visualization

@@ -3,7 +3,7 @@ title: Manual Tracing
 kind: documentation
 ---
 
-// Description of the debugging functionality.
+// Description of manual tracing.
 
 {{< tabs >}}
 {{% tab "Java" %}}
