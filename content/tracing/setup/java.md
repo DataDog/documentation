@@ -39,12 +39,16 @@ Instrumentation may come from auto-instrumentation, the OpenTracing api, or a mi
 
 `dd-java-agent` includes support for automatically tracing the following web frameworks.
 
-| Server                  | Versions   | Support Type    |
-| :---------------------- | :--------- | :-------------- |
-| Java Servlet Compatible | 2.3+, 3.0+ | Fully Supported |
-| Play                    | 2.4-2.6    | Fully Supported |
-| Jax-RS Annotations      | JSR311-API | Fully Supported |
-| Spring-Web              | 4.0+       | Fully Supported |
+| Server                       | Versions   | Support Type    | JVM Arg to enable                                                             |
+| :--------------------------- | :--------- | :-------------- | :----------------                                                             |
+| Java Servlet Compatible      | 2.3+, 3.0+ | Fully Supported | N/A                                                                           |
+| Jax-RS Annotations           | JSR311-API | Fully Supported | N/A                                                                           |
+| Play                         | 2.4-2.6    | Fully Supported | N/A                                                                           |
+| Spring-Web                   | 4.0+       | Fully Supported | N/A                                                                           |
+| Akka-Http Server             | 10.0+      | Beta            | `-Ddd.integration.akka-http.enabled=true`                                     |
+| Netty Http Server and Client | 4.0+       | Beta            | `-Ddd.integration.netty.enabled=true`                                         |
+| Ratpack                      | 1.4+       | Beta            | `-Ddd.integration.ratpack.enabled=true`                                       |
+| Spark Java                   | 2.4+       | Beta            | `-Ddd.integration.sparkjava.enabled=true -Ddd.integration.jetty.enabled=true` |
 
 **Web Framework tracing provides:** timing HTTP request to response, tags for the HTTP request (status code, method, etc), error and stacktrace capturing, linking work created within a web request and Distributed Tracing.
 
@@ -57,15 +61,19 @@ Don't see your desired web frameworks? We're continually adding additional suppo
 
 `dd-java-agent` includes support for automatically tracing the following networking frameworks.
 
-| Framework           | Versions | Support Type    |
-| :------------------ | :------- | :-------------- |
-| Jax RS Client       | 1.11+    | Fully Supported |
-| OkHTTP              | 3.0+     | Fully Supported |
-| Apache HTTP Client  | 4.3+     | Fully Supported |
-| JMS                 | 1 and 2  | Fully Supported |
-| AWS Java SDK        | 1.11+    | Fully Supported |
-| Kafka-Clients       | 0.11+    | Fully Supported |
-| Kafka-Streams       | 0.11+    | Fully Supported |
+| Framework                    | Versions | Support Type    | JVM Arg to enable                                                             |
+| :--------------------------- | :------- | :-------------- | :----------------                                                             |
+| Apache HTTP Client           | 4.3+     | Fully Supported | N/A                                                                           |
+| AWS Java SDK                 | 1.11+    | Fully Supported | N/A                                                                           |
+| Kafka-Clients                | 0.11+    | Fully Supported | N/A                                                                           |
+| Kafka-Streams                | 0.11+    | Fully Supported | N/A                                                                           |
+| Jax RS Client                | 1.11+    | Fully Supported | N/A                                                                           |
+| JMS                          | 1 and 2  | Fully Supported | N/A                                                                           |
+| OkHTTP                       | 3.0+     | Fully Supported | N/A                                                                           |
+| Elasticsearch Client         | 5.0+     | Beta            | `-Ddd.integration.elasticsearch.enabled=true`                                 |
+| HttpURLConnection            | all      | Beta            | `-Ddd.integration.httpurlconnection.enabled=true`                             |
+| Lettuce                      | 5.0+     | Beta            | `-Ddd.integration.lettuce.enabled=true`                                       |
+| SpyMemcached                 | 2.12+    | Beta            | `-Ddd.integration.spymemcached.enabled=true`                                  |
 
 **Networking tracing provides:** timing request to response, tags for the request (e.g. response code), error and stacktrace capturing and Distributed Tracing.
 
@@ -75,12 +83,12 @@ Don't see your desired networking framework? We're continually adding additional
 
 `dd-java-agent` includes support for automatically tracing the following database frameworks/drivers.
 
-| Database       | Versions       | Support Type    |
-| :------------- | :------------- | :-------------- |
-| JDBC           | N/A            | Fully Supported |
-| MongoDB        | 3.0+           | Fully Supported |
-| Cassandra      | 3.2+           | Fully Supported |
-| Jedis          | 1.4+           | Fully Supported |
+| Database       | Versions       | Support Type    | JVM Arg to enable                                                             |
+| :------------- | :------------- | :-------------- | :----------------                                                             |
+| Cassandra      | 3.2+           | Fully Supported | N/A                                                                           |
+| JDBC           | N/A            | Fully Supported | N/A                                                                           |
+| Jedis          | 1.4+           | Fully Supported | N/A                                                                           |
+| MongoDB        | 3.0+           | Fully Supported | N/A                                                                           |
 
 `dd-java-agent` is also compatible with common JDBC drivers including:
 
@@ -89,9 +97,9 @@ Don't see your desired networking framework? We're continually adding additional
 *  H2 Database Engine
 *  HSQLDB
 *  IBM DB2
+*  MariaDB
 *  MSSQL (Microsoft SQL Server)
 *  MySQL
-*  MariaDB
 *  Oracle
 *  Postgres SQL
 
@@ -103,27 +111,12 @@ Don't see your desired datastores? We're continually adding additional support, 
 
 `dd-java-agent` includes support for automatically tracing the following other frameworks.
 
-| Framework | Versions | Support Type    |
-| :------   | :-----   | :-------------- |
-| Hystrix   | 1.4+     | Fully Supported |
+| Framework     | Versions | Support Type    | JVM Arg to enable                                                             |
+| :------------ | :------- | :-------------- | :----------------                                                             |
+| Hystrix       | 1.4+     | Fully Supported | N/A                                                                           |
+| JSP Rendering | 2.3+     | Beta            | `-Ddd.integration.jsp.enabled=true`                                           |
 
 Don't see your desired framework? We're continually adding additional support, [check with our team][2] to see if we can help.
-
-### Beta Instrumentation
-
-`dd-java-agent` ships with some newer instrumentation disabled by default.
-
-| Instrumentation              | Versions | JVM Arg to enable                                                             |
-| :--------------              | :------- | :----------------                                                             |
-| Elasticsearch Client         | 5.0+     | `-Ddd.integration.elasticsearch.enabled=true`                                 |
-| Netty Http Server and Client | 4.0+     | `-Ddd.integration.netty.enabled=true`                                         |
-| HttpURLConnection            | all      | `-Ddd.integration.httpurlconnection.enabled=true`                             |
-| JSP Rendering                | 2.3+     | `-Ddd.integration.jsp.enabled=true`                                           |
-| Akka-Http Server             | 10.0+    | `-Ddd.integration.akka-http.enabled=true`                                     |
-| Lettuce                      | 5.0+     | `-Ddd.integration.lettuce.enabled=true`                                       |
-| SpyMemcached                 | 2.12+    | `-Ddd.integration.spymemcached.enabled=true`                                  |
-| Ratpack                      | 1.4+     | `-Ddd.integration.ratpack.enabled=true`                                       |
-| Spark Java                   | 2.4+     | `-Ddd.integration.sparkjava.enabled=true -Ddd.integration.jetty.enabled=true` |
 
 To improve visibility into applications using unsupported frameworks, consider:
 

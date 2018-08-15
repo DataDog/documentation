@@ -14,6 +14,9 @@ further_reading:
 - link: "tracing/visualization/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
+- link: "tracing/advanced_usage/"
+  tag: "Advanced Usage"
+  text: "Advanced Usage"
 ---
 
 <div class="alert alert-info">

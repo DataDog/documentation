@@ -17,6 +17,9 @@ further_reading:
 - link: "tracing/visualization/"
   tag: "Use the APM UI"
   text: "Explore your services, resources and traces"
+- link: "tracing/advanced_usage/"
+  tag: "Advanced Usage"
+  text: "Advanced Usage"
 ---
 
 ## Getting started

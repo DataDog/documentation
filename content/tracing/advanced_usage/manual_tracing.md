@@ -13,9 +13,25 @@ Before instrumenting your application, review Datadog’s [APM Terminology][apm 
 
 Do this either using the Trace annotation for simple method call tracing or with the [OpenTracing API][opentracing] for complex tracing.
 
+Datadog's Trace annotation is provided by the [dd-trace-api dependency][trace api maven docs].
+
+Example Trace usage:
+
+```java
+import datadog.trace.api.Trace;
+
+public class MyClass {
+  @Trace
+  public static void myMethod() {
+    // your method implementation here
+  }
+}
+```
+
 [opentracing]: /tracing/setup_advanced/open_tracing
 [java framework]: /tracing/setup/java/#integrations
 [apm terminology]: /tracing/visualization/services_list/
+[trace api maven docs]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
 
 {{% /tab %}}
 {{% tab "Python" %}}
@@ -23,7 +39,7 @@ Do this either using the Trace annotation for simple method call tracing or with
 {{% tab "Ruby" %}}
 ## Ruby
 
-If you aren't using supported library instrumentation (see [Library compatibility][ruby lib comptability], you may want to to manually instrument your code. Adding tracing to your code is easy using the `Datadog.tracer.trace` method, which you can wrap around any Ruby code.
+If you aren't using supported library instrumentation (see [Library compatibility][ruby lib compatibility], you may want to to manually instrument your code. Adding tracing to your code is easy using the `Datadog.tracer.trace` method, which you can wrap around any Ruby code.
 
 ```ruby
 get '/posts' do
@@ -48,7 +64,7 @@ end
 For more details about manual instrumentation, check out the [API documentation][ruby api doc].
 
 [ruby api doc]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#manual-instrumentation
-[ruby lib comptability]: /tracing/setup/ruby/#library-compatibility
+[ruby lib compatibility]: /tracing/setup/ruby/#library-compatibility
 
 {{% /tab %}}
 {{% tab "Go" %}}
