@@ -64,7 +64,7 @@ Learn more about this in [the Docker log collection documentation][11].
 ## Annotations
 
 It is also possible to enable integrations via the annotations in the manifest of your application.
-This can be done with the autodiscovery, for more details, see the [Autodiscovery][13] section.
+This can be done with Autodiscovery. For more details, see the [Autodiscovery][13] section.
 
 [1]: /integrations/kubernetes
 [2]: /agent/faq/agent-5-kubernetes-basic-agent-usage
