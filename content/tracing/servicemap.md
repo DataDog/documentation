@@ -23,15 +23,13 @@ further_reading:
   text: Global search of all your traces with tags
 ---
 
-# Introduction
-
 The Service Map decomposes your application into all its component services and draws the observed dependencies between these services in real time, so you can identify bottlenecks and understand how data flows through your architecture. 
 
 ## Setup
 
 The Service Map visualizes data that is being collected by Datadog APM. No setup is required.
 
-# Ways to use it
+## Ways to use it
 
 We built the Service Map not only to give you an overview of all your services and their health, but also to cut through noise and isolate problem areas. You can also access other telemetry collected by Datadog directly from this view.
 
@@ -53,7 +51,7 @@ On the inspection page, each node can itself be inspected, so you can pivot arou
 
 {{< img src="tracing/servicemap/servicemap.png" alt="Service Map" responsive="true" style="width:90%;">}}
 
-# The `service` tag
+## The "service" tag
 
 Clicking on a service reveals further drilldown options.
 
@@ -69,15 +67,15 @@ Using this tag on your Host Map or logs with the same key allows Datadog to join
 
 In addition to infrastructure or logs, monitors can be tagged by service in the “Say what’s happening” section of a new monitor. This allows you to associate monitors for any metric, including custom business metrics with your services. The status of monitors is exposed directly on the Service Map.
 
-# Data freshness and meaning
+## Data freshness and meaning
 
-## Nodes and edges
+### Nodes and edges
 
 Nodes represent services exactly as instrumented in APM and match those in your [Services][2] page. Edges represent aggregate calls from one service to another. You can see these interactions on the flame graph for each individual trace.
 
 {{< img src="tracing/servicemap/servicenodes.gif" alt="Service Map nodes" responsive="true" style="width:90%;">}}
 
-## Color
+### Color
 
 If a monitor is enabled for a service, the circumference has a weighted border colored with green, yellow, red, or grey, based on the status of that monitor.  If multiple monitors are defined, the status of the one in the most severe state is used.
 
@@ -85,5 +83,3 @@ Monitors are not constrained to APM monitors; the service tag, described above, 
 
 [1]: https://docs.datadoghq.com/tracing/setup/first_class_dimensions/
 [2]: https://app.datadoghq.com/apm/services
-
-
