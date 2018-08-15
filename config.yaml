@@ -556,6 +556,13 @@ languages:
           weight: 35
           parent: menu_references_tracing
 
+        # Service Map
+        - identifier: customnav_tracingnav_servicemap
+          name: "Service Map"
+          url: "tracing/servicemap"
+          weight: 38
+          parent: menu_references_tracing
+
         # Trace API
         - identifier: customnav_tracingnav_api
           name: "Trace API"
