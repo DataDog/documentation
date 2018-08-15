@@ -37,7 +37,7 @@ We built the Service Map not only to give you an overview of all your services a
 
 The Service Map can be filtered based on the type of service it is—a webserver, database, cache, etc.—or based on a fuzzy string match. This helps you find the service you need in a microservices environment of hundreds or thousands of nodes. 
 
-Services are also scoped by `env`, and, optionally, a [first-class dimension][1].  Using the dropdowns to select a different scope draws an entirely different map, consisting of those services within the scope. These services cannot call or be called by services in other environments or first class dimensions.
+Services are also scoped by `env`, and, optionally, a [first-class dimension][1].  Using the dropdowns to select a different scope draws an entirely different map, consisting of those services within the scope. These services cannot call or be called by services in other environments.
 
 ## Inspection
 
