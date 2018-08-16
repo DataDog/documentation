@@ -77,6 +77,8 @@ In addition to infrastructure or logs, monitors can be tagged by service in the 
 
 Nodes represent services exactly as instrumented in APM and match those in your [Services][2] page. Edges represent aggregate calls from one service to another. You can see these interactions on the flame graph for each individual trace.
 
+New services or connections will appear within moments of being instrumented and will age out if there are no corresponding traces seen for two weeks.  This takes into account services that do work infrequently, but are nonetheless an important part of a functioning system.
+
 {{< img src="tracing/servicemap/servicenodes.gif" alt="Service Map nodes" responsive="true" style="width:90%;">}}
 
 ### Color
