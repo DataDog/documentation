@@ -44,7 +44,9 @@ Then [restart your Agent][1]. You can also set the socket path via the `DD_DOGST
 
 ### Client
 
-The following DogStatsD client libraries support UDS traffic:
+#### Native support in client libraries
+
+The following DogStatsD client libraries natively support UDS traffic:
 
 | Language | Library                            |
 | :----    | :----                              |
@@ -56,6 +58,14 @@ The following DogStatsD client libraries support UDS traffic:
 Refer to the library's documentation on how to enable UDS traffic.
 
 **Note:** As with UDP, enabling client-side buffering is highly recommended to improve performance on heavy traffic. Refer to your client library's documentation for instructions.
+
+#### Using netcat
+
+To send metrics from shell scripts, or to test that DogStatsD is listening on the socket, you can use `netcat`. Most implementations of `netcat` (ex. `netcat-openbsd` on Debian or `nmap-ncat` on RHEL) support Unix Socket traffic via the `-U` flag:
+
+```bash
+echo -n "custom.metric.name:1|c" | nc -U -u -w1 /var/run/datadog/dsd.socket
+```
 
 ### Accessing the socket across containers
 
