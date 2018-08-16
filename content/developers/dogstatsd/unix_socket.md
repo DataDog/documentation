@@ -61,7 +61,7 @@ Refer to the library's documentation on how to enable UDS traffic.
 
 #### Using netcat
 
-To send metrics from shell scripts, or testing that DogStatsD is listening on the socket, you can use `netcat`. Most implementations of `netcat` (`netcat-openbsd` on Debian, `nmap-ncat` on RHEL) support Unix Socket traffic via the `-U` flag:
+To send metrics from shell scripts, or to test that DogStatsD is listening on the socket, you can use `netcat`. Most implementations of `netcat` (ex. `netcat-openbsd` on Debian or `nmap-ncat` on RHEL) support Unix Socket traffic via the `-U` flag:
 
 ```bash
 echo -n "custom.metric.name:1|c" | nc -U -u -w1 /var/run/datadog/dsd.socket
