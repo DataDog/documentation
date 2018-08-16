@@ -36,7 +36,7 @@ When the Agent restarts, the existing socket is deleted and replaced by a new on
 
 Edit your `datadog.yaml` file to set the `dogstatsd_socket` option to the path where DogStatsD should create its listening socket:
 
-```
+```yaml
 dogstatsd_socket: /var/run/datadog/dsd.socket
 ```
 
@@ -63,15 +63,15 @@ Refer to the library's documentation on how to enable UDS traffic.
 
 To send metrics from shell scripts, or to test that DogStatsD is listening on the socket, you can use `netcat`. Most implementations of `netcat` (ex. `netcat-openbsd` on Debian or `nmap-ncat` on RHEL) support Unix Socket traffic via the `-U` flag:
 
-```bash
+```shell
 echo -n "custom.metric.name:1|c" | nc -U -u -w1 /var/run/datadog/dsd.socket
 ```
 
 #### Using socat as a proxy
 
-If an application or a client library you use does not yet support UDS traffic, you can run `socat` to listen on UDP port 8125 and proxy the requests to the socket:
+If an application or a client library you use does not support UDS traffic, you can run `socat` to listen on UDP port `8125` and proxy the requests to the socket:
 
-```bash
+```shell
 socat -s -u UDP-RECV:8125 UNIX-SENDTO:/var/run/datadog/dsd.socket
 ```
 
