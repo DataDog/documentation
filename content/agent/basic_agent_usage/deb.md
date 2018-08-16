@@ -45,7 +45,7 @@ In Agent v6, the service manager provided by the operating system is responsible
 
 ## Configuration
 
-The configuration files and folders for for the Agent are located in:
+The configuration files and folders for the Agent are located in:
 
 | Agent v5                     | Agent v6                          |
 | :-----                       | :----                             |
@@ -69,7 +69,7 @@ Run the `status` (or `info` in v5) command to see the state of the Agent. The Ag
   * `dogstatsd.log`
   * `forwarder.log`
 
-If you're still having trouble, [our support team][3] will be glad to provide further assistance.
+If you're still having trouble, [our support team][3] is glad to provide further assistance.
 
 ## Adding a custom Python package to the Agent
 
@@ -128,7 +128,7 @@ DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/Dat
     sudo apt-get install datadog-agent
     ```
 
-4. Copy the example config into place and plug in your API key:
+4. Copy the example configuration into place and plug in your API key:
     ```shell
     sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_API_KEY>/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml" 
     ```

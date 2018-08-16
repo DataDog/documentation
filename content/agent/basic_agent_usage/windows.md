@@ -182,7 +182,7 @@ If you're running on a version older than 5.2 visit the status page in your web 
 #### Agent v6 
 The Agent logs are located in the `C:\programdata\Datadog\logs` directory and all logs are in the `agent.log` file.
 
-If you're still having trouble, [our support team][3] will be glad to provide further assistance.
+If you're still having trouble, [our support team][3] is glad to provide further assistance.
 
 #### Agent v5
 
