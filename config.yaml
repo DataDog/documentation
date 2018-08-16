@@ -501,17 +501,22 @@ languages:
         - identifier: customnav_tracingnav_sampling
           name: "Priority Sampling"
           url: "tracing/advanced_usage/priority_sampling/"
-          weight: 250
+          weight: 240
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_open_tracing
           name: "OpenTracing"
           url: "tracing/advanced_usage/open_tracing/"
-          weight: 240
+          weight: 250
+          parent: customnav_tracingnav_advanced_usage
+        - identifier: customnav_tracingnav_logging
+          name: "Logging"
+          url: "tracing/advanced_usage/logging/"
+          weight: 260
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_debugging
           name: "Debugging"
           url: "tracing/advanced_usage/debugging/"
-          weight: 260
+          weight: 270
           parent: customnav_tracingnav_advanced_usage
 
         # Using the APM UI
@@ -1485,10 +1490,15 @@ languages:
           url: "tracing/advanced_usage/sampling/"
           weight: 250
           parent: customnav_tracingnav_advanced_usage
+        - identifier: customnav_tracingnav_logging
+          name: "Logging"
+          url: "tracing/advanced_usage/logging/"
+          weight: 260
+          parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_debugging
           name: "Debugging"
           url: "tracing/advanced_usage/debugging/"
-          weight: 260
+          weight: 270
           parent: customnav_tracingnav_advanced_usage
 
         # Using the APM UI

@@ -18,7 +18,7 @@ To return debug level application logs, enable debug mode with the flag `-Ddatad
 {{% tab "Go" %}}
 {{% /tab %}}
 {{% tab "Node.js" %}}
-## NodeJS
+## Node.js
 
 Debug mode is disabled by default, to enable it:
 

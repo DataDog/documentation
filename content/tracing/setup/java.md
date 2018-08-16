@@ -33,6 +33,22 @@ Instrumentation may come from auto-instrumentation, the OpenTracing api, or a mi
 * Errors and stacktraces which are unhanded by the application
 * A total count of traces (requests) flowing through the system
 
+## Installation and Getting Started
+
+To begin tracing applications written in any language, first [install and configure the Datadog Agent][3] (see additional documentation for [tracing Docker applications](/tracing/setup/docker/)).
+
+Next, download `dd-java-agent.jar` that contains the Agent class files:
+
+```shell
+wget -O dd-java-agent.jar 'https://search.maven.org/classic/remote_content?g=com.datadoghq&a=dd-java-agent&v=LATEST'
+```
+
+Finally, add the following JVM argument when starting your application in your IDE, your Maven or Gradle application script, or your `java -jar` command:
+
+```
+-javaagent:/path/to/the/dd-java-agent.jar
+```
+
 ## Integrations
 
 ### Web Frameworks
@@ -124,22 +140,6 @@ To improve visibility into applications using unsupported frameworks, consider:
 * [Submitting a pull request][1] with instrumentation for inclusion in a future release.
 * [Contact support][2] and submit a feature request.
 
-## Installation and Getting Started
-
-To begin tracing applications written in any language, first [install and configure the Datadog Agent][3] (see additional documentation for [tracing Docker applications](/tracing/setup/docker/)).
-
-Next, download `dd-java-agent.jar` that contains the Agent class files:
-
-```shell
-wget -O dd-java-agent.jar 'https://search.maven.org/classic/remote_content?g=com.datadoghq&a=dd-java-agent&v=LATEST'
-```
-
-Finally, add the following JVM argument when starting your application in your IDE, your Maven or Gradle application script, or your `java -jar` command:
-
-```
--javaagent:/path/to/the/dd-java-agent.jar
-```
-
 ## Configuration
 
 The tracer is configured using System Properties and Environment Variables as follows:
@@ -200,56 +200,6 @@ compile group: 'com.datadoghq', name: 'dd-trace-api', version: {version}
 ```
 
 Now add `@Trace` to methods to have them be traced when running with `dd-java-agent.jar`.  If the Agent is not attached, this annotation will have no effect on your application.
-
-## Logging and MDC
-
-The Java tracer exposes two API calls to allow printing trace and span identifiers along with log statements, `CorrelationIdentifier#getTraceId()`, and `CorrelationIdentifier#getSpanId()`.
-
-log4j2:
-
-```java
-import org.apache.logging.log4j.ThreadContext;
-import datadog.trace.api.CorrelationIdentifier;
-
-// there must be spans started and active before this block.
-try {
-    ThreadContext.put("ddTraceID", "ddTraceID:" + String.valueOf(CorrelationIdentifier.getTraceId()));
-    ThreadContext.put("ddSpanID", "ddSpanID:" + String.valueOf(CorrelationIdentifier.getSpanId()));
-} finally {
-    ThreadContext.remove("ddTraceID");
-    ThreadContext.remove("ddSpanID");
-}
-```
-
-slf4j/logback:
-
-```java
-import org.slf4j.MDC;
-import datadog.trace.api.CorrelationIdentifier;
-
-// there must be spans started and active before this block.
-try {
-    MDC.put("ddTraceID", "ddTraceID:" + String.valueOf(CorrelationIdentifier.getTraceId()));
-    MDC.put("ddSpanID", "ddSpanID:" + String.valueOf(CorrelationIdentifier.getSpanId()));
-} finally {
-    MDC.remove("ddTraceID");
-    MDC.remove("ddSpanID");
-}
-```
-
-log4j2 XML Pattern:
-
-```
-<PatternLayout pattern="%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{${sys:PID}}{magenta} %clr{---}{faint} %X{ddTraceID} %X{ddSpanID} %m%n%xwEx" />
-```
-
-Logback XML Pattern:
-
-```
-<Pattern>
-    %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} %X{ddTraceID} %X{ddSpanID} - %msg%n
-</Pattern>
-```
 
 ## JMX Metrics
 

@@ -53,7 +53,6 @@ This is some ruby code
 {{% /tab %}}
 {{% tab "Go" %}}
 ## Go
-
 Propagate a single trace across multiple services with distributed tracing. For more details about how to use and configure distributed tracing, check out the [godoc page][tracer godoc].
 
 Make use of priority sampling to ensure that distributed traces are complete. Set the sampling priority of a trace by adding the `sampling.priority` tag to its root span. This is then propagated throughout the entire stack. For example:

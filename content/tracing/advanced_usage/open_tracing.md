@@ -170,7 +170,6 @@ Notice the above examples only use the OpenTracing classes. Please reference the
 {{% /tab %}}
 {{% tab "Go" %}}
 ## Go
-
 Import the [`opentracer` package][opentracing godoc] to expose the Datadog tracer as an [OpenTracing][open tracing] compatible tracer.
 
 ### Example
