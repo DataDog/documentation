@@ -67,6 +67,14 @@ To send metrics from shell scripts, or to test that DogStatsD is listening on th
 echo -n "custom.metric.name:1|c" | nc -U -u -w1 /var/run/datadog/dsd.socket
 ```
 
+#### Using socat as a proxy
+
+If an application or a client library you use does not yet support UDS traffic, you can run `socat` to listen on UDP port 8125 and proxy the requests to the socket:
+
+```bash
+socat -s -u UDP-RECV:8125 UNIX-SENDTO:/var/run/datadog/dsd.socket
+```
+
 ### Accessing the socket across containers
 
 When running in a containerized environment, the socket file needs to be accessible to the client containers. To achieve this, we recommend mounting a host directory on both sides (read-only in your client containers, read-write in the Agent container).
