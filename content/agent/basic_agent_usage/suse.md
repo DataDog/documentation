@@ -70,16 +70,11 @@ Run the `status` (or `info` in v5) command to see the state of the Agent. The Ag
 
 If you're still having trouble, [our support team][3] is glad to provide further assistance.
 
-## Adding a custom Python package to the Agent
+## Working with the embedded Agent
 
 The Agent contains an embedded Python environment at `/opt/datadog-agent/embedded/`. Common binaries such as `python` and `pip` are contained within `/opt/datadog-agent/embedded/bin/`.
 
-### Installing Python libraries
-
-Run the embedded `pip` via the Agent:
-```
-sudo -u dd-agent -- /opt/datadog-agent/embedded/bin/pip install <package_name>
-```
+See the instructions on how to [add packages to the embedded Agent][5] for more information.
 
 ## Upgrade to Agent 6
 
@@ -120,3 +115,4 @@ sudo -u dd-agent -- /opt/datadog-agent/embedded/bin/pip install <package_name>
 [2]: /integrations
 [3]: /help
 [4]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands
+[5]: /agent/custom_python_package
