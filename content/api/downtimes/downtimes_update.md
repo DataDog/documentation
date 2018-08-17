@@ -13,7 +13,7 @@ external_redirect: /api/#update-monitor-downtime
 * **`scope`** [*required*]:
     The scope to which the downtime applies, e.g. 'host:app2'. Provide multiple scopes as a comma-separated list, e.g. 'env:dev,env:prod'. The resulting downtime applies to sources that matches ALL provided scopes (i.e. env:dev AND env:prod), NOT any of them.
 * **`monitor_tags`** [*optional*, *default*=**no monitor tag filter**]:
-    A comma-separated list of monitor tags, i.e. tags that are applied directly to monitors, *not* tags that are used in monitor queries (which are filtered by the `scope` parameter), to which the downtime applies. The resulting downtime applies to monitors that match ALL provided monitor tags (i.e. service:postgres AND team:frontend), NOT any of them.
+    A comma-separated list of monitor tags, i.e. tags that are applied directly to monitors, *not* tags that are used in monitor queries (which are filtered by the `scope` parameter), to which the downtime applies. The resulting downtime applies to monitors that match ALL provided monitor tags (i.e. `service:postgres` **AND** `team:frontend`), NOT any of them.
 * **`monitor_id`** [*optional*, *default*=**None**]:
     A single monitor to which the downtime applies. If not provided, the downtime applies to all monitors.
 * **`start`** [*optional*, *default* = **original start**]:
