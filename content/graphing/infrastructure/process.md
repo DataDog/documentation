@@ -25,7 +25,7 @@ The following installation processes are for [Agent v6 only][6], if you are stil
 
 ## Process Agent
 
-**Note**: Live Processes beta for Windows requires Agent 6.
+**Note**: Live Processes for Windows requires Agent 6.
 
 ### Standard Agent Configuration
 
