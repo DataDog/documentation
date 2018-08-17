@@ -47,7 +47,7 @@ aliases:
 
 | Platform            | Agent v5                                                                                                 | Agent v6                                                                      |
 | :--------           | :-----                                                                                                   | :--------                                                                     |
-| Linux               | `sudo service datadog-agent status`                                                                      | `sudo datadog-agent status`                                                   |
+| Linux               | `sudo service datadog-agent status`                                                                      | `sudo service datadog-agent status`                                           |
 | Docker (Debian)     | `sudo docker exec -it <container_name> /etc/init.d/datadog-agent status`                                 | `sudo docker exec -it <container_name> s6-svstat /var/run/s6/services/agent/` |
 | Docker (Alpine)     | `sudo docker exec -it <container_name> supervisorctl -c /opt/datadog-agent/agent/supervisor.conf status` | `n/a`                                                                         |
 | Kubernetes          | `kubectl exec -it <pod-name> /etc/init.d/datadog-agent status`                                           | `kubectl exec -it <pod-name> s6-svstat /var/run/s6/services/agent/`           |
@@ -62,20 +62,6 @@ aliases:
 
 Running an info command displays the status of your Datadog Agent and enabled integrations.
 
-A properly configured integration will report "OK" as seen below:
-
-```
-  Checks
-  ======
-
-    network
-    -------
-      - instance #0 [OK]
-      - Collected 15 metrics, 0 events & 1 service check
-```
-
-The `[OK]` in the Agent output implies that the check was configured/run correctly but does not refer to the value being returned by your check.  
-
 | Platform            | Agent v5                                                               | Agent v6                                             |
 | :--------           | :-----                                                                 | :--------                                            |
 | Linux               | `sudo service datadog-agent info`                                      | `sudo datadog-agent status`                          |
@@ -86,6 +72,33 @@ The `[OK]` in the Agent output implies that the check was configured/run correct
 | MacOS x             | `datadog-agent info`                                                   | `datadog-agent status` or [web GUI][3]               |
 | Source              | `sudo ~/.datadog-agent/bin/info`                                       | `sudo datadog-agent status`                          |
 | Windows             | [Consult our dedicated windows doc][2]                                 | [Consult our dedicated windows doc][2]               |
+
+On Agent v6, a properly configured integration will be displayed under "Running Checks" with no warnings/errors, as seen below:
+
+```
+  Running Checks
+  ==============
+
+    network (1.6.0)
+    ---------------
+      Total Runs: 5
+      Metric Samples: 26, Total: 130
+      Events: 0, Total: 0
+      Service Checks: 0, Total: 0
+      Average Execution Time : 0ms
+```
+
+Equivalent output on Agent v5:
+
+```
+  Checks
+  ======
+
+   network
+   -------
+     - instance #0 [OK]
+     - Collected 15 metrics, 0 events & 1 service check
+```
 
 **Note**: If you are using a Linux based system and the `service` wrapper command is not available, [consult the list of alternatives][4]
 
