@@ -60,7 +60,7 @@ The Agent logs are located in the `/var/log/datadog/` directory:
     * `dogstatsd.log`
     * `forwarder.log`
 
-If you're still having trouble, [our support team][3] will be glad to provide further assistance.
+If you're still having trouble, [our support team][3] is glad to provide further assistance.
 
 ## Further Reading
 

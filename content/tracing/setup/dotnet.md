@@ -46,7 +46,7 @@ Don't see what you're looking for? Please let us know more about your needs thro
 | Elasticsearch.net / NEST        | Coming soon | Coming soon (est. September 2018 Beta) |
 | MongoDB.Driver                  | Coming soon | Coming soon (est. September 2018 Beta) |
 | Postgres (Npgsql)               | Coming soon | Coming soon (est. September 2018 Beta) |
-| ServiceStack.Redis              | Coming soon | Coming soon (est. September 2018 Beta) |
+| StackExchange.Redis             | Coming soon | Coming soon (est. September 2018 Beta) |
 
 Don't see what you're looking for? Please let us know more about your needs through [this survey][1].
 

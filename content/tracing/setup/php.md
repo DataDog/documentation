@@ -35,19 +35,19 @@ Don't see your desired frameworks or libraries? Please let us know more about yo
 | Module         | Versions    | Support Type    |
 | :-----------   | :---------- | :-------------- |
 | Laravel        | Coming soon | Coming soon     |
-| Symfony        | Coming soon | Coming soon     |
+| Magento        | Coming soon | Coming soon     |
+| Symfony 3      | Coming soon | Coming soon     |
 | Zend Framework | Coming soon | Coming soon     |
 
 Don't see your desired web frameworks? Please let us know more about your needs through [this survey][1].
 
 ### Data Stores
 
-| Module      | Versions    | Support Type |
-| :---------- | :---------- | :----------- |
-| MYSQL       | Coming soon | Coming Soon  |
-| Redis       | Coming soon | Coming Soon  |
-| MongoDB     | Coming soon | Coming Soon  |
-| Postgres    | Coming soon | Coming Soon  |
+| Module        | Versions    | Support Type |
+| :------------ | :---------- | :----------- |
+| MySQL         | Coming soon | Coming Soon  |
+| Redis         | Coming soon | Coming Soon  |
+| ElasticSearch | Coming soon | Coming Soon  |
 
 Don't see your desired data stores? Please let us know more about your needs through [this survey][1].
 

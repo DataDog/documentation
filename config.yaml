@@ -95,11 +95,6 @@ languages:
           url: "agent/basic_agent_usage/heroku/"
           weight: 135
           parent: customnav_agentnav_basic_usage
-        - identifier: customnav_agentnav_kubernetes
-          name: "Kubernetes"
-          url: "agent/basic_agent_usage/kubernetes/"
-          weight: 140
-          parent: customnav_agentnav_basic_usage
         - identifier: osx
           name: "Mac OS X"
           url: "agent/basic_agent_usage/osx/"
@@ -131,6 +126,43 @@ languages:
           weight: 170
           parent: customnav_agentnav_basic_usage
 
+
+        - identifier: kubernetes
+          name: "Kubernetes"
+          url: "agent/kubernetes/"
+          weight: 15
+          parent: menu_references_agent
+
+        - identifier: kubernetes_daemonset
+          name: "DaemonSet Setup"
+          url: "agent/kubernetes/daemonset_setup"
+          weight: 150
+          parent: kubernetes
+        - identifier: kubernetes_host
+          name: "Host Setup"
+          url: "agent/kubernetes/host_setup"
+          weight: 155
+          parent: kubernetes
+        - identifier: kubernetes_event
+          name: "Event Collection"
+          url: "agent/kubernetes/event_collection"
+          weight: 160
+          parent: kubernetes
+        - identifier: kubernetes_integrations
+          name: "Custom Integrations"
+          url: "agent/kubernetes/integrations"
+          weight: 165
+          parent: kubernetes
+        - identifier: kubernetes_metrics
+          name: "Metrics"
+          url: "agent/kubernetes/metrics"
+          weight: 170
+          parent: kubernetes
+        - identifier: kubernetes_legacy
+          name: "Legacy Versions"
+          url: "agent/kubernetes/legacy"
+          weight: 175
+          parent: kubernetes
 
         - identifier: autodiscovery
           name: "Autodiscovery"
@@ -554,9 +586,23 @@ languages:
           parent: customnav_tracingnav_visualization
         - identifier: customnav_tracingnav_graph
           name: "Trace Analytics"
-          url: "tracing/visualization/analytics"
-          weight: 360
-          parent: customnav_tracingnav_visualization
+          url: "tracing/analytics"
+          weight: 35
+          parent: menu_references_tracing
+
+        # Service Map
+        - identifier: customnav_tracingnav_servicemap
+          name: "Service Map"
+          url: "tracing/servicemap"
+          weight: 38
+          parent: menu_references_tracing
+
+        # Trace API
+        - identifier: customnav_tracingnav_api
+          name: "Trace API"
+          url: "api/#tracing"
+          weight: 50
+          parent: menu_references_tracing
 
         # Getting further
         - identifier: customnav_tracingnav_getting_further

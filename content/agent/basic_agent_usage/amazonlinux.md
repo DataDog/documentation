@@ -44,7 +44,7 @@ In Agent v6, the service manager provided by the operating system is responsible
 
 ## Configuration
 
-The configuration files and folders for for the Agent are located in:
+The configuration files and folders for the Agent are located in:
 
 | Agent v5                     | Agent v6                          |
 | :-----                       | :----                             |
@@ -68,18 +68,13 @@ Run the `status` (or `info` in v5) command to see the state of the Agent. The Ag
   * `dogstatsd.log`
   * `forwarder.log`
 
-If you're still having trouble, [our support team][3] will be glad to provide further assistance.
+If you're still having trouble, [our support team][3] is glad to provide further assistance.
 
-## Adding a custom Python package to the Agent
+## Working with the embedded Agent
 
 The Agent contains an embedded Python environment at `/opt/datadog-agent/embedded/`. Common binaries such as `python` and `pip` are contained within `/opt/datadog-agent/embedded/bin/`.
 
-### Installing Python libraries
-
-Run the embedded `pip` via the Agent:
-```
-sudo -u dd-agent -- /opt/datadog-agent/embedded/bin/pip install <package_name>
-```
+See the instructions on how to [add packages to the embedded Agent][5] for more information.
 
 ## Switch between Agent v5 and v6
 
@@ -108,7 +103,6 @@ DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/Dat
 #### Manual install
 
 1. Set up Datadog's Yum repo on your system by creating `/etc/yum.repos.d/datadog.repo` with the contents:
-
     ```ini
     [datadog]
     name=Datadog, Inc.
@@ -118,54 +112,63 @@ DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/Dat
     gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
     ```
 
-2. Update your local yum repo and install the Agent:
+2. Update your local Yum repo and install the Agent:
     ```
     sudo yum makecache
     sudo yum install datadog-agent
     ```
 
-3. Copy the example config into place and plug in your API key:
+3. Copy the example configuration into place and plug in your API key:
     ```shell
     sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_API_KEY>/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
     ```
 
-4. Re-start the Agent for Amazon Linux 2.0:
+4. (Re-)start the Agent:
+
+    * Amazon Linux 2.0:
     ```
     sudo systemctl restart datadog-agent.service
     ```
 
-5. Re-start the Agent for Amazon Linux 1.0:
+    * Amazon Linux 1.0:
     ```
     sudo initctl start datadog-agent
     ```
 
 ### Downgrade to Agent v5
 
-1. Add HTTPS compatibility to `apt`:
-    ```
-    sudo apt-get update
-    sudo apt-get install apt-transport-https
-    ```
+Note that v6-specific changes to your configuration will *not* work after downgrading. You will need to manually address any incompatible configuration or implementation issues.
 
-2. Remove the Agent v6 repository and ensure that the `stable` repository is present:
+1. Remove the Agent 6 Yum repo:
     ```shell
-    sudo rm /etc/yum.repos.d/datadog.repo [ ! -f /etc/apt/sources.list.d/datadog.list ] &&  echo 'deb https://apt.datadoghq.com/ stable main' | sudo tee /etc/apt/sources.list.d/datadog.list
-    sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 382E94DE
+    rm /etc/yum.repos.d/datadog.repo [ ! -f /etc/yum.repos.d/datadog.repo ] && echo -e '[datadog]\nname = Datadog, Inc.\nbaseurl = https://yum.datadoghq.com/rpm/x86_64/\nenabled=1\ngpgcheck=1\npriority=1\ngpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public\n       https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public' | sudo tee /etc/yum.repos.d/datadog.repo
     ```
 
-3. Update `apt` and downgrade the Agent:
+2. Update your local Yum cache and downgrade the Agent:
     ```
-    sudo apt-get update
-    sudo apt-get remove datadog-agent
-    sudo apt-get install datadog-agent
+    sudo yum clean expire-cache metadata
+    sudo yum check-update
+    sudo yum remove datadog-agent
+    sudo yum install datadog-agent
+    ```
+
+3. (Re-)start the Agent:
+
+    * Amazon Linux 2.0:
+    ```
+    sudo systemctl restart datadog-agent.service
+    ```
+
+    * Amazon Linux 1.0:
+    ```
+    sudo initctl start datadog-agent
     ```
 
 ## Uninstall the Agent
 
 To uninstall the Agent, run: 
-
 ```
-sudo apt-get --purge remove datadog-agent -y
+sudo yum remove datadog-agent
 ```
 
 ## Further Reading
@@ -176,3 +179,4 @@ sudo apt-get --purge remove datadog-agent -y
 [2]: /integrations
 [3]: /help
 [4]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands
+[5]: /agent/custom_python_package
