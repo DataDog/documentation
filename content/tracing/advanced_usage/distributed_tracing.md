@@ -9,8 +9,6 @@ Distributed Tracing headers are language agnostic. A trace started in one langua
 
 {{< tabs >}}
 {{% tab "Java" %}}
-## Java
-
 Create a distributed trace in custom instrumentation using OpenTracing:
 
 ```java
@@ -79,7 +77,6 @@ public class MyHttpRequestExtractAdapter implements TextMap {
 {{% tab "Python" %}}
 {{% /tab %}}
 {{% tab "Ruby" %}}
-## Ruby
 Distributed tracing allows you to propagate a single trace across multiple services, so you can see performance end-to-end.
 
 Distributed tracing is disabled by default. For more details about how to activate and configure distributed tracing, check out the [API documentation][distributed tracing ruby].
@@ -90,8 +87,6 @@ Distributed tracing is disabled by default. For more details about how to activa
 {{% tab "Go" %}}
 {{% /tab %}}
 {{% tab "Node.js" %}}
-## Node.js
-
 Distributed tracing allows you to propagate a single trace across multiple services, so you can see performance end-to-end.
 
 Distributed tracing is enabled by default for all supported integrations.

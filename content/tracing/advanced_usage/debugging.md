@@ -7,8 +7,6 @@ Datadog debug settings are used to diagnose issues or audit trace data.
 
 {{< tabs >}}
 {{% tab "Java" %}}
-## Java
-
 To return debug level application logs, enable debug mode with the flag `-Ddatadog.slf4j.simpleLogger.defaultLogLevel=debug` when starting the JVM.
 {{% /tab %}}
 {{% tab "Python" %}}
@@ -18,8 +16,6 @@ To return debug level application logs, enable debug mode with the flag `-Ddatad
 {{% tab "Go" %}}
 {{% /tab %}}
 {{% tab "Node.js" %}}
-## Node.js
-
 Debug mode is disabled by default, to enable it:
 
 ```javascript

@@ -7,10 +7,6 @@ Datadog's logging APIs allow accessing active tracing identifiers. These identif
 
 {{< tabs >}}
 {{% tab "Java" %}}
-## Java
-
-### Logging and MDC
-
 The Java tracer exposes two API calls to allow printing trace and span identifiers along with log statements, `CorrelationIdentifier#getTraceId()`, and `CorrelationIdentifier#getSpanId()`.
 
 log4j2:

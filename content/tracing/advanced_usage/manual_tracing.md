@@ -7,8 +7,6 @@ Manual Tracing allows programmatic creation of traces to send to Datadog. This i
 
 {{< tabs >}}
 {{% tab "Java" %}}
-## Java
-
 Before instrumenting your application, review Datadog’s [APM Terminology][apm terminology] and familiarize yourself with the core concepts of Datadog APM. If you aren't using a [supported framework instrumentation][java framework], or you would like additional depth in your application’s traces, you may want to to manually instrument your code.
 
 Do this either using the Trace annotation for simple method call tracing or with the [OpenTracing API][opentracing] for complex tracing.
@@ -37,8 +35,6 @@ public class MyClass {
 {{% tab "Python" %}}
 {{% /tab %}}
 {{% tab "Ruby" %}}
-## Ruby
-
 If you aren't using supported library instrumentation (see [Library compatibility][ruby lib compatibility], you may want to to manually instrument your code. Adding tracing to your code is easy using the `Datadog.tracer.trace` method, which you can wrap around any Ruby code.
 
 ```ruby
@@ -68,8 +64,6 @@ For more details about manual instrumentation, check out the [API documentation]
 
 {{% /tab %}}
 {{% tab "Go" %}}
-## Go
-
 To make use of manual instrumentation, use the `tracer` package which is documented on our [godoc page][tracer godoc]. One simple example would be:
 
 ```go
@@ -95,8 +89,6 @@ func main() {
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
-## NodeJS
-
 If you aren’t using supported library instrumentation (see [Compatibility][nodejs compatibility]), you may want to manually instrument your code.
 
 The following example initializes a Datadog Tracer and creates a Span called `web.request`:

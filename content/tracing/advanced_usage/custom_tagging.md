@@ -7,8 +7,6 @@ Custom Tagging allows adding key-value pairs to specific spans. These key-value 
 
 {{< tabs >}}
 {{% tab "Java" %}}
-## Java
-
 Tags are key-value pairs attached to spans. All tags share a single namespace.
 
 The Datadog UI uses specific tags to set UI properties, such as an application's service name. A full list of these tags can be found in the [Datadog][java api doc] and [OpenTracing][opentracing java doc] APIs.

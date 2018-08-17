@@ -9,8 +9,6 @@ OpenTracing is a vendor-neutral, cross-language standard for tracing application
 
 {{< tabs >}}
 {{% tab "Java" %}}
-## Java
-
 Use the [OpenTracing API][opentracing-java] and the Datadog Tracer (dd-trace-ot) library to measure execution times for specific pieces of code. This lets you trace your application more precisely than you can with the Java Agent alone.
 
 ### Setup
@@ -171,7 +169,6 @@ Notice the above examples only use the OpenTracing classes. Please reference the
 {{% tab "Ruby" %}}
 {{% /tab %}}
 {{% tab "Go" %}}
-## Go
 Import the [`opentracer` package][opentracing godoc] to expose the Datadog tracer as an [OpenTracing][open tracing] compatible tracer.
 
 ### Example

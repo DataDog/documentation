@@ -16,23 +16,6 @@ further_reading:
   text: "Advanced Usage"
 ---
 
-## Compatibility
-
-We officially support the Java JRE 1.7 and higher of both Oracle JDK and OpenJDK.
-
-## Automatic Instrumentation
-
-Automatic instrumentation for Java utilizes the `java-agent` instrumentation capabilities [provided by the JVM][8]. When a `java-agent` is registered, it has the ability to modify class files at load time.
-The `java-agent` uses the popular [Byte Buddy framework][9] to find the classes defined for instrumentation and modify those class bytes accordingly.
-
-Instrumentation may come from auto-instrumentation, the OpenTracing api, or a mixture of both. Instrumentation generally captures the following info:
-
-* Method execution time
-* Timing duration is captured using the JVM's nanotime clock unless a timestamp is provided from the OpenTracing api
-* Key/value tag pairs
-* Errors and stacktraces which are unhanded by the application
-* A total count of traces (requests) flowing through the system
-
 ## Installation and Getting Started
 
 To begin tracing applications written in any language, first [install and configure the Datadog Agent][3] (see additional documentation for [tracing Docker applications](/tracing/setup/docker/)).
@@ -48,6 +31,23 @@ Finally, add the following JVM argument when starting your application in your I
 ```
 -javaagent:/path/to/the/dd-java-agent.jar
 ```
+
+## Automatic Instrumentation
+
+Automatic instrumentation for Java utilizes the `java-agent` instrumentation capabilities [provided by the JVM][8]. When a `java-agent` is registered, it has the ability to modify class files at load time.
+The `java-agent` uses the popular [Byte Buddy framework][9] to find the classes defined for instrumentation and modify those class bytes accordingly.
+
+Instrumentation may come from auto-instrumentation, the OpenTracing api, or a mixture of both. Instrumentation generally captures the following info:
+
+* Method execution time
+* Timing duration is captured using the JVM's nanotime clock unless a timestamp is provided from the OpenTracing api
+* Key/value tag pairs
+* Errors and stacktraces which are unhanded by the application
+* A total count of traces (requests) flowing through the system
+
+## Compatibility
+
+We officially support the Java JRE 1.7 and higher of both Oracle JDK and OpenJDK.
 
 ## Integrations
 
