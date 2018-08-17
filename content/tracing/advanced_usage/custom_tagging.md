@@ -3,7 +3,7 @@ title: Custom Tagging
 kind: documentation
 ---
 
-// Description of custom tagging.
+Custom Tagging allows adding key-value pairs to specific spans. These key-value pairs (tags) are used to correlate traces with other Datadog products and to provide more details about specific spans.
 
 {{< tabs >}}
 {{% tab "Java" %}}

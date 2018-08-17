@@ -3,7 +3,7 @@ title: Priority Sampling
 kind: documentation
 ---
 
-// Description of priority sampling.
+Priority Sampling allows traces between two Datadog endpoints to be sampled together. This prevents trace sampling from removing segments of a distributed trace. Additionally, APM traces expose sampling flags to configure how specific traces are sampled.
 
 {{< tabs >}}
 {{% tab "Java" %}}

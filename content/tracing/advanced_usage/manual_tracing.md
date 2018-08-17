@@ -3,7 +3,7 @@ title: Manual Tracing
 kind: documentation
 ---
 
-// Description of manual tracing.
+Manual Tracing allows programmatic creation of traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation.
 
 {{< tabs >}}
 {{% tab "Java" %}}

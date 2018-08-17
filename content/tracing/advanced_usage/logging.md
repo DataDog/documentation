@@ -3,7 +3,7 @@ title: Logging
 kind: documentation
 ---
 
-// Description of capturing span/trace data in logs.
+Datadog's logging APIs allow accessing active tracing identifiers. These identifiers can be injected into application logs using MDC frameworks. This allows for correlating APM traces with specific log events.
 
 {{< tabs >}}
 {{% tab "Java" %}}

@@ -3,7 +3,7 @@ title: Debugging
 kind: documentation
 ---
 
-// Description of the debugging functionality.
+Datadog debug settings are used to diagnose issues or audit trace data.
 
 {{< tabs >}}
 {{% tab "Java" %}}

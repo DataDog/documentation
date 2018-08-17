@@ -3,7 +3,9 @@ title: OpenTracing
 kind: documentation
 ---
 
-// Description of OpenTracing
+OpenTracing is a vendor-neutral, cross-language standard for tracing applications. Datadog offers OpenTracing implementations for many APM tracers. For more details see [opentracing.io][opentracing website].
+
+[opentracing website]: http://opentracing.io
 
 {{< tabs >}}
 {{% tab "Java" %}}
