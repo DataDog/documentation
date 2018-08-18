@@ -5,7 +5,7 @@ description: "Global search of all your traces with tags"
 aliases:
   - tracing/trace_search_analytics/analytics
   - tracing/trace_search_analytics/
-  - tracing/visualization/trace_search/
+  - tracing/trace_search/
 further_reading:
 - link: "tracing/setup/"
   tag: "Documentation"

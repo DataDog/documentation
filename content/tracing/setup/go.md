@@ -14,6 +14,9 @@ further_reading:
 - link: "tracing/visualization/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
+- link: "tracing/advanced_usage/"
+  tag: "Advanced Usage"
+  text: "Advanced Usage"
 ---
 
 ## Getting Started
@@ -75,94 +78,12 @@ The Go tracer includes support for the following data stores and libraries. Make
 | SQL                 | [golang.org/pkg/database/sql](https://golang.org/pkg/database/sql)                 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql)                         |
 | SQLx                | [github.com/jmoiron/sqlx](https://github.com/jmoiron/sqlx)                         | [gopkg.in/DataDog/dd-trace-go.v1/contrib/jmoiron/sqlx](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/jmoiron/sqlx)                         |
 
-## Manual Instrumentation
-
-To make use of manual instrumentation, use the `tracer` package which is documented on our [godoc page][tracer godoc]. One simple example would be:
-
-```go
-package main
-
-import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-
-func main() {
-    // Start the tracer with zero or more options.
-    tracer.Start(tracer.WithServiceName("my-service"))
-    defer tracer.Stop()
-
-    // Create a span for a web request at the /posts URL.
-    span := tracer.StartSpan("web.request", tracer.ResourceName("/posts"))
-    defer span.Finish()
-
-    // Set metadata
-    span.SetTag("my_tag", "my_value")
-}
-```
-
-## OpenTracing Support
-
-Import the [`opentracer` package][opentracing godoc] to expose the Datadog tracer as an [OpenTracing][3] compatible tracer.
-
-### Example
-
-A basic usage would be:
-
-```go
-package main
-
-import (
-    "github.com/opentracing/opentracing-go"
-
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-)
-
-func main() {
-    // Start the regular tracer and return it as an opentracing.Tracer interface. You
-    // may use the same set of options as you normally would with the Datadog tracer.
-    t := opentracer.Start(tracer.WithServiceName("my-service"))
-
-    // Stop it using the regular Stop call.
-    defer tracer.Stop()
-
-    // Set the global OpenTracing tracer.
-    opentracing.SetGlobalTracer(t)
-
-    // Use the OpenTracing API as usual.
-}
-```
-
-**Note**: Using the [OpenTracing API][4] in parallel with the regular API or our integrations is fully supported. Under the hood, all of them
-make use of the same tracer. Make sure to check out the [API documentation][opentracing godoc] for more examples and details.
-
-## Sampling / Distributed Tracing
-
-Propagate a single trace across multiple services with distributed tracing. For more details about how to use and configure distributed tracing, check out the [godoc page][tracer godoc].
-
-Make use of priority sampling to ensure that distributed traces are complete. Set the sampling priority of a trace by adding the `sampling.priority` tag to its root span. This is then propagated throughout the entire stack. For example:
-
-```go
-span.SetTag(ext.SamplingPriority, ext.PriorityUserKeep)
-```
-
-Possible values for the sampling priority tag are:
-
-| Sampling Value             | Effect                                                                                                      |
-| -------------------------- | :---------------------------------------------------------------------------------------------------------- |
-| ext.PriorityAutoReject     | The sampler automatically decided to not keep the trace. The Agent will drop it.                            |
-| ext.PriorityAutoKeep       | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side.  |
-| ext.PriorityUserReject     | The user asked to not keep the trace. The Agent will drop it.                                               |
-| ext.PriorityUserKeep       | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                      |
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/setup
-[3]: http://opentracing.io
-[4]: https://github.com/opentracing/opentracing-go
-[tracer godoc]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
 [contrib godoc]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib
-[opentracing godoc]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer
 [api docs]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
 [contrib docs]: #automatic-instrumentation
 [getting started]: https://docs.datadoghq.com/tracing/visualization/

@@ -15,6 +15,9 @@ further_reading:
 - link: "tracing/visualization/"
   tag: "Use the APM UI"
   text: "Explore your services, resources and traces"
+- link: "tracing/advanced_usage/"
+  tag: "Advanced Usage"
+  text: "Advanced Usage"
 ---
 
 ## Getting Started
@@ -50,41 +53,7 @@ See the [tracer settings][4] for the list of initialization options.
 
 **Note**: The tracer must be initialized before importing any instrumented module.
 
-## Manual Instrumentation
-
-If you aren't using supported library instrumentation (see [Compatibility](#compatibility)), you may want to manually instrument your code.
-
-The following example initializes a Datadog Tracer and creates a Span called `web.request`:
-
-```javascript
-const tracer = require('dd-trace').init()
-const span = tracer.startSpan('web.request')
-
-span.setTag('http.url', '/login')
-span.finish()
-```
-
-For more information on manual instrumentation, check out the [API documentation][5].
-
 ## Tracer Settings
-
-### Debug Mode
-
-Debug mode is disabled by default, to enable it:
-
-```javascript
-const tracer = require('dd-trace').init({
-  debug: true
-})
-```
-
-For more tracer settings, check out the [API documentation][4].
-
-## Distributed Tracing
-
-Distributed tracing allows you to propagate a single trace across multiple services, so you can see performance end-to-end.
-
-Distributed tracing is enabled by default for all supported integrations.
 
 ## Integrations
 
@@ -146,7 +115,6 @@ The `dd-trace` library includes support for a number of modules. If you would li
 [2]: https://datadog.github.io/dd-trace-js/
 [3]: /tracing/setup/docker/
 [4]: https://datadog.github.io/dd-trace-js/#tracer-settings
-[5]: https://datadog.github.io/dd-trace-js/#manual-instrumentation
 [6]: https://datadog.github.io/dd-trace-js/#integrations
 [7]: https://docs.datadoghq.com/help
 [8]: https://expressjs.com/
