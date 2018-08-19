@@ -29,22 +29,68 @@ A few options are available to send traffic to Datadog over SSL/TLS for hosts th
 
 Traditional web proxies are supported natively by the Agent. If you need to connect to the Internet through a proxy, edit your Agent configuration file.
 
-##### Agent v6
+### Agent v6
 
-Edit the `datadog.yaml` file with your proxy information. Use the `no_proxy` list to specify hosts that should bypass the proxy.
+Set different proxy servers for `https` and `http` requests in your Agent `datadog.yaml` configuration file. 
+The Agent uses `https` to send data to Datadog, but integrations might use `http` to gather metrics. No matter the proxied requests, you can activate SSL on your proxy server. Below are some configuration examples for your `datadog.yaml` file:
+
+Setting an HTTP proxy for all `https` requests:
 
 ```
 proxy:
-    http: http://user:password@proxy_for_http:port
-    https: http://user:password@proxy_for_https:port
-#   no_proxy:
-#     - host1
-#     - host2
+    https: http://<SSL_PROXY_SERVER_FOR_HTTPS>:<PORT>
 ```
+
+Note: When setting up an HTTP proxy for `https` requests, the actual communication between the Agent and Datadog is encrypted end-to-end with TLS and cannot be decrypted by the proxy. The only unencrypted communication is the `HTTP CONNECT` request that's made between the Agent and the proxy to establish the initial TCP connection between the Agent and Datadog. As such, when using a proxy for `https` requests, there is no need to use an HTTPS proxy in order to have encrypted communication between the Agent and Datadog.
+
+Setting an HTTPS proxy for both `https` and `http` requests:
+
+```
+proxy:
+    https: https://<SSL_PROXY_SERVER_FOR_HTTPS>:<PORT>
+    http: https://<SSL_PROXY_SERVER_FOR_HTTP>:<PORT>
+```
+
+Setting a `<USERNAME>` and `<PASSWORD>` to contact the proxy server for both `https` and `http` requests:
+
+```
+proxy:
+    https: http://<USERNAME>:<PASSWORD>@<PROXY_SERVER_FOR_HTTPS>:<PORT>
+    http: http://<USERNAME>:<PASSWORD>@<PROXY_SERVER_FOR_HTTPS>:<PORT>
+```
+
+Using the `no_proxy` list to specify hosts that must bypass the proxy:
+
+```
+proxy:
+    https: http://<USERNAME>:<PASSWORD>@<PROXY_SERVER_FOR_HTTPS>:<PORT>
+    http: http://<USERNAME>:<PASSWORD>@<PROXY_SERVER_FOR_HTTPS>:<PORT>
+    no_proxy:
+      - host1
+      - host2
+```
+
+#### Proxy with environment variables
+
+Starting with Agent v6.4, you can set your proxy settings through environment variables:
+
+* `DD_PROXY_HTTPS`: Sets a proxy server for `https` requests.
+* `DD_PROXY_HTTP`: Sets a proxy server for `http` requests.
+* `DD_PROXY_NO_PROXY`: Sets a list of hosts that should bypass the proxy. The list is space-separated.
+
+Environment variables have precedence over values in the `datadog.yaml` file. If the environment variables are present with an empty value (e.g. ``DD_PROXY_HTTP=""``), the Agent uses those empty values instead of lower-precedence options.
+
+On Unix hosts, a system-wide proxy might be specified using standard environment variables, such as `HTTPS_PROXY`, `HTTP_PROXY`, and `NO_PROXY`. The Agent uses these if present. Be careful, as such variables also impact every requests from integrations, including orchestrators like Docker, ECS, and Kubernetes.
+
+The Agent uses the following values in order of precedence:
+
+1. `DD_PROXY_HTTPS`, `DD_PROXY_HTTP`, and `DD_PROXY_NO_PROXY` environment variables
+2. `HTTPS_PROXY`, `HTTP_PROXY`, and `NO_PROXY` environment variables
+3. Values inside `datadog.yaml`
 
 [Refer to our log collection documentation page to learn how to forward your logs with a proxy][7].
 
-##### Agent v5
+### Agent v5
 
 Edit the `datadog.conf` file with your proxy information:
 
@@ -62,7 +108,7 @@ Do not forget to [restart the Agent][2] for the new settings to take effect.
 
 [HAProxy][3] is a free, fast, and reliable solution offering proxying for TCP and HTTP applications. While HAProxy is usually used as a load balancer to distribute incoming requests to pools servers, you can also use it to proxy Agent traffic to Datadog from hosts that have no outside connectivity.
 
-This is the best option if you do not have a web proxy readily available in your network, and you wish to proxy a large number of Agents. In some cases, a single HAProxy instance is sufficient to handle local Agent traffic in your network—each proxy can accommodate upwards of 1000 Agents. (Be aware that this figure is a conservative estimate based on the performance of m3.xl instances specifically. Numerous network-related variables can influence load on proxies. As always, deploy under a watchful eye. Visit [HAProxy documentation][6] for additional information.)
+This is the best option if you do not have a web proxy readily available in your network, and you wish to proxy a large number of Agents. In some cases, a single HAProxy instance is sufficient to handle local Agent traffic in your network-each proxy can accommodate upwards of 1000 Agents. (Be aware that this figure is a conservative estimate based on the performance of m3.xl instances specifically. Numerous network-related variables can influence load on proxies. As always, deploy under a watchful eye. Visit [HAProxy documentation][6] for additional information.)
 
 `agent ---> haproxy ---> Datadog`
 
@@ -140,7 +186,7 @@ backend datadog-processes
     balance roundrobin
     mode tcp
     option tcplog
-    server mothership process.agent.datadoghq.com:443 check port 80
+    server mothership process.datadoghq.com:443 check port 80
 ```
 
 Once the HAProxy configuration is in place, you can reload it or restart HAProxy.
@@ -215,70 +261,6 @@ skip_ssl_validation: yes
 Finally [restart the Agent][4].
 
 To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3833` as well as the [Infrastructure Overview][5].
-
-### Proxy log forwarding with HAProxy
-**This feature is only available for Agent v6**
-
-If your network configuration restricts outbound traffic, you can use a proxy to send logs from the Datadog Agent or 3rd party log collectors to the Datadog logs intake.
-
-#### HAProxy configuration
-
-Unlike the metrics intake API, which listens on HTTPS `443`, the logs intake uses TCP (Layer 4) on port `10516` (for TLS and `10514` for plaintext). Here is a basic HAProxy configuration file used to proxy logs to the Datadog intake. In this example, HAProxy also uses TLS wrapping to ensure that internal plaintext logs are encrypted between your proxy and Datadog's log intake API endpoint:
-
-```
-global
-    log 127.0.0.1 local0
-    maxconn 4096
-    stats socket /tmp/haproxy 
-
-# Some sane defaults
-defaults
-    log global
-    option dontlognull
-    retries 3
-    option redispatch
-    timeout client 5s
-    timeout server 5s
-    timeout connect 5s
-
-# This declares a view into HAProxy statistics, on port 3833
-# You do not need credentials to view this page and you can
-# turn it off once you are done with setup.
-listen stats
-    bind *:3833
-    mode http
-    stats enable
-    stats uri /
-
-# Logs frontend
-frontend logs_frontend
-    bind *:10514
-    mode tcp
-    default_backend logs_backend
-
-# Logs backend
-# agent-intake.logs.datadoghq.com used specifically for agent logs
-# intake.logs.datadoghq.com is also available for logs submitted without an agent
-# ca-certificates.crt located in /etc/ssl/certs/ for Ubuntu 16.04
-backend logs_backend
-    balance roundrobin
-    mode tcp
-    option tcplog
-    server datadog agent-intake.logs.datadoghq.com:10516 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt
-```
-
-#### Datadog Agent configuration
-
-When using the Datadog Agent as the logs collector, the Agent itself also needs to be instructed to use the newly created proxy instead of establishing a connection directly with the logs intake. This is done with the following options in `datadog.yaml`:
-
-```
-logs_config:
-  dd_url: myProxyServer.myDomain
-  dd_port: 10514
-  dev_mode_no_ssl: true
-```
-
-Note: here, the `dev_mode_no_ssl: true` line is correct, because HAProxy establishes the SSL/TLS connection. Do not run with this option if you do not intend to use a proxy, which can encrypt the connection to the logs intake.
 
 ## Using the Agent as a Proxy
 

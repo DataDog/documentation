@@ -1,5 +1,5 @@
 ---
-title: Adding a custom python package to the Agent
+title: Adding a custom Python package to the Agent
 kind: documentation
 further_reading:
 - link: "logs/"
@@ -15,16 +15,17 @@ further_reading:
 
 ### Linux
 
-The python version embedded with the Agent is located here: `/opt/datadog-agent/embedded/bin/python`.
-The Agent also comes with pip; install python libraries using:
+The Agent contains an embedded Python environment at `/opt/datadog-agent/embedded/`. Common binaries such as `python` and `pip` are contained within `/opt/datadog-agent/embedded/bin/`.
 
-```bash
+Python packages can be installed via the embedded `pip`:
+
+```shell
 sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install <package_name>
 ```
 
 ### Windows
 
-Custom python packages can be installed using the Agent's embedded Python using the following command in Powershell:
+Custom Python packages can be installed using the Agent's embedded Python using the following command in Powershell:
 
 ```
 C:\"Program Files"\Datadog\"Datadog Agent"\embedded\python -m install <package_name>

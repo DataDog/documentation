@@ -96,7 +96,7 @@ Import into your Datadog Organization from the SAML configuration page as shown 
 
 That's it! Once SAML is configured, users can login by using the link provided in the SAML configuration page.
 
-Keep in mind that users still need to be invited and activated before they’re able to login. Be sure to invite new users by using the email address corresponding to their Active Directory user record otherwise they may be denied as shown below.
+Keep in mind that users still need to be invited and activated before they're able to login. Be sure to invite new users by using the email address corresponding to their Active Directory user record otherwise they may be denied as shown below.
 
 {{< img src="account_management/saml/6TsPUla.png" alt="6TsPUla" responsive="true" style="width:60%;">}}
 

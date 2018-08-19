@@ -28,10 +28,10 @@ kind: faq
 * [Wrong count of aws.elb.healthy_host_count?][17]
 * [Why is my AWS error count metric orders of magnitude lower in Datadog than Cloudwatch?][18]
 * [Are my AWS CloudWatch metrics delayed?][19]
-* [Do you believe you’re seeing a discrepancy between your data in CloudWatch and Datadog?][20]
+* [Do you believe you're seeing a discrepancy between your data in CloudWatch and Datadog?][20]
 * [I think I'm missing some of my CloudTrail events?][21]
 * [Why is there a delay in receiving my data?][22]
-* [I can’t filter out my ELB instances - will I be charged for them?][23]
+* [I can't filter out my ELB instances - will I be charged for them?][23]
 * [I just set up my AWS integration. Why am I seeing duplicate hosts?][24]
 * [Capturing EC2 tags at startup][25]
 

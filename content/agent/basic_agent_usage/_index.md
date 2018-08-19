@@ -21,7 +21,7 @@ further_reading:
 
 ## Configuration management tools
 
-Manage the Datadog Agent and [integrations][1] using configuration management tools:
+Manage the Datadog Agent and [Integrations][1] using configuration management tools:
 
 ### Chef Cookbook
 

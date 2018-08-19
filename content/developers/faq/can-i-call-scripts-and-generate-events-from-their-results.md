@@ -7,7 +7,7 @@ kind: faq
 
 This is accomplished via the dogwrap command line tool provided by the dogapi client library:
 
-For an example of dogwrap in action, let's use cron. You might have a cron’d script to vacuum a Postgres table every day:
+For an example of dogwrap in action, let's use cron. You might have a cron'd script to vacuum a Postgres table every day:
 
 ```
 0 0 * * * psql -c 'vacuum verbose my_table' >> /var/log/postgres_vacuums.log 2>&1

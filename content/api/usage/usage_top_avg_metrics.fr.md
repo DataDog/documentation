@@ -15,4 +15,4 @@ Obtenez le top des [métriques customisés][1] par moyenne horaire
 * **`names`** [*optionnel*, *défaut*=**None**]:  
   Liste des noms des métriques en format séparé par des virgules.
 
-[1]: /developers/metrics/custom_metrics
+[1]: /developers/metrics/custom_metrics/

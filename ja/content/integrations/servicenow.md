@@ -10,7 +10,7 @@ doclevel: full
 
 ## 概要
 
-<!-- ServiceNow is an IT service management platform for recording, tracking, and managing a company’s enterprise-level IT processes in a single location. This integration allows you to create tickets from triggered alarms in Datadog. Additionally, you can add Datadog-generated graphs and comments to ServiceNow tickets, as well as manage the resolution workflow from within Datadog -->
+<!-- ServiceNow is an IT service management platform for recording, tracking, and managing a company's enterprise-level IT processes in a single location. This integration allows you to create tickets from triggered alarms in Datadog. Additionally, you can add Datadog-generated graphs and comments to ServiceNow tickets, as well as manage the resolution workflow from within Datadog -->
 
 ServiceNowは、エンタープライズレベルのプロセスを一箇所で記録、追跡、マネージするITサービス管理プラットフォームです。このインテグレーションを使うことにより、Datadogが検知したアラートをServiceNow上でチケットとして登録が出来るようになります。チケットには、Datadogでキャプチャしたグラフ画像やDatadogに設定したメッセージも追加出来ます。更に、Datadog側からメッセージを送信し、オープンしているチケットのクローズ処理をすることも出来ます。
 
@@ -40,7 +40,7 @@ Now, you can set these alerts to automatically create support tickets and send t
 
 <!-- ### Automate support resolution workflow
 
-Once the monitor state returns to normal, the associated support ticket is automatically marked as “resolved”.
+Once the monitor state returns to normal, the associated support ticket is automatically marked as "resolved".
 
 {{< img src="integrations/servicenow/servicenow-03-servicenow-resolved.png" alt="ServiceNow Resolved" >}} -->
 
@@ -52,7 +52,7 @@ Once the monitor state returns to normal, the associated support ticket is autom
 
 <!-- ### Send Datadog graphs to ServiceNow
 
-In addition to automating ticket creation and resolution, you can also use Datadog to create ServiceNow tickets on an ad hoc basis whenever you see something in Datadog that needs your team’s attention. Just click the camera icon to share a snapshot of any Timeboard graph, add some context in the comment box to help your colleagues interpret the graph, and @mention ServiceNow to send the graph and your comments to ServiceNow.
+In addition to automating ticket creation and resolution, you can also use Datadog to create ServiceNow tickets on an ad hoc basis whenever you see something in Datadog that needs your team's attention. Just click the camera icon to share a snapshot of any Timeboard graph, add some context in the comment box to help your colleagues interpret the graph, and @mention ServiceNow to send the graph and your comments to ServiceNow.
 
 {{< img src="integrations/servicenow/servicenow-04-mention-servicenow.png" alt="annotation" >}} -->
 

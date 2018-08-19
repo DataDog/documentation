@@ -30,7 +30,7 @@ To begin tracing applications written in any language, first [install and config
 Next, download `dd-java-agent.jar` that contains the Agent class files:
 
 ```shell
-wget -O dd-java-agent.jar 'https://search.maven.org/remote_content?g=com.datadoghq&a=dd-java-agent&v=LATEST'
+wget -O dd-java-agent.jar 'https://search.maven.org/classic/remote_content?g=com.datadoghq&a=dd-java-agent&v=LATEST'
 ```
 
 Finally, add the following JVM argument when starting your application in your IDE, your Maven or Gradle application script, or your `java -jar` command:
@@ -187,7 +187,7 @@ Don't see your desired framework? We're continually adding additional support, [
 
 ## Manual Instrumentation
 
-Before instrumenting your application, review Datadog’s [APM Terminology][5] and familiarize yourself with the core concepts of Datadog APM. If you aren't using a [supported framework instrumentation](#integrations), or you would like additional depth in your application’s traces, you may want to to manually instrument your code.
+Before instrumenting your application, review Datadog's [APM Terminology][5] and familiarize yourself with the core concepts of Datadog APM. If you aren't using a [supported framework instrumentation](#integrations), or you would like additional depth in your application's traces, you may want to to manually instrument your code.
 
 Do this either using the [Trace annotation](#trace-annotation) for simple method call tracing or with the [OpenTracing API](#opentracing-api) for complex tracing.
 
@@ -305,7 +305,7 @@ Configure your application using environment variables or system properties as d
 
 #### Custom Instrumentation Examples
 
-Use a combination of these if the automatic instrumentation isn’t providing you enough depth or detail.
+Use a combination of these if the automatic instrumentation isn't providing you enough depth or detail.
 
 Using try-finally:
 
@@ -365,7 +365,7 @@ class InstrumentedClass {
 
 In this case, you dont need to call `scope.close()`.
 
-If you’re not using `dd-java-agent.jar`, you must register a configured tracer with `GlobalTracer`. For this call `GlobalTracer.register(new DDTracer())` early on in your application startup (ie, main method).
+If you're not using `dd-java-agent.jar`, you must register a configured tracer with `GlobalTracer`. For this call `GlobalTracer.register(new DDTracer())` early on in your application startup (ie, main method).
 
 ```java
 import datadog.opentracing.DDTracer;

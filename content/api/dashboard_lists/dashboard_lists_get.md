@@ -7,7 +7,7 @@ external_redirect: /api/#get-a-dashboard-list
 
 ## Get a Dashboard List
 
-Fetch an existing dashboard list’s definition.
+Fetch an existing dashboard list's definition.
 
 ##### ARGUMENTS
 

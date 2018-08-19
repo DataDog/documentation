@@ -38,7 +38,7 @@ The Windows Event log check is included in the [Datadog Agent][4] package, so yo
     logs_enabled: true
     ```
 
-2. Edit the file `win32_event_log.d/conf.yaml` in the Agent’s `conf.d/` directory (or in the Datadog Agent Manager) with the channels from which you want to send Windows Events as log. To see the channel list run the following command in a powershell:
+2. Edit the file `win32_event_log.d/conf.yaml` in the Agent's `conf.d/` directory (or in the Datadog Agent Manager) with the channels from which you want to send Windows Events as log. To see the channel list run the following command in a powershell:
 
     ```
     Get-WinEvent -ListLog *

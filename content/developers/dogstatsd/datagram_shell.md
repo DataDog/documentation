@@ -23,11 +23,11 @@ This section specifies the raw datagram format for each data type that DogStatsD
 
 `metric.name:value|type|@sample_rate|#tag1:value,tag2`
 
-- `metric.name` — a string with no colons, bars, or @ characters. See the [metric naming policy][1].
-- `value` — an integer or float.
-- `type` — `c` for counter, `g` for gauge, `ms` for timer, `h` for histogram, `s` for set.
-- `sample rate` (optional) — a float between 0 and 1, inclusive. Only works with counter, histogram, and timer metrics. Default is 1 (i.e. sample 100% of the time).
-- `tags` (optional) — a comma separated list of tags. Use colons for key/value tags, i.e. `env:prod`. The key `device` is reserved; Datadog drops a user-added tag like `device:foobar`.
+- `metric.name` - a string with no colons, bars, or @ characters. See the [metric naming policy][1].
+- `value` - an integer or float.
+- `type` - `c` for counter, `g` for gauge, `ms` for timer, `h` for histogram, `s` for set.
+- `sample rate` (optional) - a float between 0 and 1, inclusive. Only works with counter, histogram, and timer metrics. Default is 1 (i.e. sample 100% of the time).
+- `tags` (optional) - a comma separated list of tags. Use colons for key/value tags, i.e. `env:prod`. The key `device` is reserved; Datadog drops a user-added tag like `device:foobar`.
 
 Here are some example datagrams:
 
@@ -54,15 +54,15 @@ Here are some example datagrams:
 `_e{title.length,text.length}:title|text|d:timestamp|h:hostname|p:priority|t:alert_type|#tag1,tag2`
 
 - `_e` - The datagram must begin with `_e`
-- `title` — Event title.
-- `text` — Event text. Insert line breaks with an escaped slash (`\\n`)
-- `|d:timestamp` (optional) — Add a timestamp to the event. Default is the current Unix epoch timestamp.
+- `title` - Event title.
+- `text` - Event text. Insert line breaks with an escaped slash (`\\n`)
+- `|d:timestamp` (optional) - Add a timestamp to the event. Default is the current Unix epoch timestamp.
 - `|h:hostname` (optional) - Add a hostname to the event. No default.
-- `|k:aggregation_key` (optional) — Add an aggregation key to group the event with others that have the same key. No default.
-- `|p:priority` (optional) — Set to 'normal' or 'low'. Default 'normal'.
+- `|k:aggregation_key` (optional) - Add an aggregation key to group the event with others that have the same key. No default.
+- `|p:priority` (optional) - Set to 'normal' or 'low'. Default 'normal'.
 - `|s:source_type_name` (optional) - Add a source type to the event. No default.
-- `|t:alert_type` (optional) — Set to 'error', 'warning', 'info' or 'success'. Default 'info'.
-- `|#tag1:value1,tag2,tag3:value3...` (optional) — The colon in tags is part of the tag list string and has no parsing purpose like for the other parameters. No default.
+- `|t:alert_type` (optional) - Set to 'error', 'warning', 'info' or 'success'. Default 'info'.
+- `|#tag1:value1,tag2,tag3:value3...` (optional) - The colon in tags is part of the tag list string and has no parsing purpose like for the other parameters. No default.
 
 Here are some example datagrams:
 
@@ -76,13 +76,13 @@ Here are some example datagrams:
 
 `_sc|name|status|d:timestamp|h:hostname|#tag1:value1,tag2,tag3:value3,...|m:service_check_message`
 
-- `_sc` — the datagram must begin with `_sc`
-- `name` — Service check name.
-- `status` — Integer corresponding to the check status (OK = 0, WARNING = 1, CRITICAL = 2, UNKNOWN = 3).
-- `d:timestamp` (optional) — Add a timestamp to the check. Default is the current Unix epoch timestamp.
-- `h:hostname` (optional) — Add a hostname to the event. No default.
-- `#tag1:value1,tag2,tag3:value3,...` (optional) — The colon in tags is part of the tag list string and has no parsing purpose like for the other parameters. No default.
-- `m:service_check_message` (optional) — Add a message describing the current state of the service check. *This field MUST be positioned last among the metadata fields.* No default.
+- `_sc` - the datagram must begin with `_sc`
+- `name` - Service check name.
+- `status` - Integer corresponding to the check status (OK = 0, WARNING = 1, CRITICAL = 2, UNKNOWN = 3).
+- `d:timestamp` (optional) - Add a timestamp to the check. Default is the current Unix epoch timestamp.
+- `h:hostname` (optional) - Add a hostname to the event. No default.
+- `#tag1:value1,tag2,tag3:value3,...` (optional) - The colon in tags is part of the tag list string and has no parsing purpose like for the other parameters. No default.
+- `m:service_check_message` (optional) - Add a message describing the current state of the service check. *This field MUST be positioned last among the metadata fields.* No default.
 
 Here's an example datagram:
 

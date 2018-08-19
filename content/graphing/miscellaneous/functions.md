@@ -351,8 +351,6 @@ The span value is the number of data points. So `median_9()` uses the last 9 dat
 
 ### .rollup()
 
-{{< vimeo 264998150 >}}
-
 Recommended for expert users only. Datadog rolls up data points automatically, based on the [in-app metric type][6]: `gauge` metrics are averaged by default, whereas `count` and `rate` metrics are summed. Appending this function to the end of a query allows you to override the default behavior to control the rollup method or the number of raw points rolled up into a single point plotted on the graph.
 
 The function takes two parameters, method and time: `.rollup(method,time)`. The method can be sum/min/max/count/avg and time is in seconds. You can use either one individually, or both together like `.rollup(sum,120)`. We impose a limit of 350 points per time range. For example, if you're requesting `.rollup(20)` for a month-long window, we return data at a rollup far greater than 20 seconds in order to prevent returning a gigantic number of points. 

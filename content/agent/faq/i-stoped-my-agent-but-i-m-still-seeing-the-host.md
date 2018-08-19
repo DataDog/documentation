@@ -1,5 +1,5 @@
 ---
-title: I stopped my Agent but I’m still seeing the host in my Datadog account. 
+title: I stopped my Agent but I'm still seeing the host in my Datadog account. 
 kind: faq
 ---
 

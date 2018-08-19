@@ -67,6 +67,8 @@ Learn more about the [Count type in the Metrics documentation][4].
 
 ### Distributions
 
+**This feature is currently in BETA. [Contact support][11] for details on how to have it enabled for your account.**
+
 Distributions are like a global version of Histograms (see below). They calculate statistical distributions across multiple hosts, allowing you to compute global percentiles across your entire dataset. Global distributions are designed to instrument logical objects, such as services, independently from the underlying hosts.
 
 To measure the duration of an HTTP request, you could measure each request time with the metric `dist.dd.dogweb.latency`:
@@ -92,7 +94,7 @@ The above instrumentation calculates the following data: `sum`, `count`, `averag
 
 {{< img src="graphing/metrics/distributions/dogweb_latency.png" alt="Dogweb latency" responsive="true" >}}
 
-For this toy example, let’s say a request time of *500ms* is acceptable. Our median query time (graphed in blue) is usually less than *100 milliseconds*, which is great. Our 95th percentile (graphed in red) has spikes sometimes over one second, which is unacceptable.
+For this toy example, let's say a request time of *500ms* is acceptable. Our median query time (graphed in blue) is usually less than *100 milliseconds*, which is great. Our 95th percentile (graphed in red) has spikes sometimes over one second, which is unacceptable.
 This means most of our queries are running just fine, but our worst ones are bad. If the 95th percentile were close to the median, than we would know that almost all of our requests are performing just fine.
 
 Distributions are not only for measuring times. They can be used to measure the distribution of *any* type of value, such as the size of uploaded files, or classroom test scores, for example.
@@ -339,3 +341,4 @@ Becuase of the global nature of Distributions, extra tools for tagging are provi
 [8]: /graphing/miscellaneous/functions
 [9]: /graphing/event_stream/
 [10]: /graphing/metrics/distributions
+[11]: /help

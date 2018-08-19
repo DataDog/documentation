@@ -7,7 +7,7 @@ external_redirect: /api/#get-items-of-a-dashboard-list
 
 ## Get Items of a Dashboard List
 
-Fetch the dashboard list’s dashboard definitions.
+Fetch the dashboard list's dashboard definitions.
 
 ##### ARGUMENTS
 

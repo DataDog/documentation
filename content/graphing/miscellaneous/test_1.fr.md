@@ -44,7 +44,7 @@ Lorsque vous êtes au courant d'un problème, [mettez en sourdine les alertes le
 [4]: /developers/dogstatsd
 [5]: /tracing
 [6]: /developers/libraries
-[7]: /developers/metrics/custom_metrics
+[7]: /developers/metrics/custom_metrics/
 [8]: /graphing/event_stream/
 [9]: /graphing/infrastructure
 [10]: /graphing/dashboards/screenboard

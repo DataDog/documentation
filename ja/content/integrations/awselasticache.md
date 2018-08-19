@@ -30,7 +30,7 @@ The following diagram shows how Datadog collects metrics directly from CloudWatc
 
 #### How this works
 
-Because the agent metrics will be tied to the EC2 instance where the agent is running and not to the actual ElastiCache instance, you will need to use the `cacheclusterid` tag to connect all metrics together. Once the agent is configured with the same tags as the ElastiCache instance, combining Redis/Memcached metrics with ElastiCache metrics is straightforward.
+Because the agent metrics will be tied to the EC2 instance where the agent is running and not to the actual ElastiCache instance, you will need to use the `cacheclusterid` tag to connect all metrics together. Once the agent is configured with the same tags as the ElastiCache instance, combining Redis/Memcached metrics with ElastiCache metrics is straightforward.
 
 #### Step-by-step
 
@@ -42,11 +42,11 @@ First navigate to the AWS Console, open the ElastiCache section and then the Cac
 
 {{< img src="integrations/awselasticache/elasticache2.png" alt="ElastiCache Clusters in AWS console" >}}
 
-Then click on the “node” link to access its endpoint URL:
+Then click on the "node" link to access its endpoint URL:
 
 {{< img src="integrations/awselasticache/elasticache3.png" alt="Node link in AWS console" >}}
 
-Write down the endpoint URL (e.g. **replica-001.xxxx.use1.cache.amazonaws.com**) and the `cacheclusterid` (e.g. **replica-001**). You will need these values to configure the agent and to create graphs and dashboards.
+Write down the endpoint URL (e.g. **replica-001.xxxx.use1.cache.amazonaws.com**) and the `cacheclusterid` (e.g. **replica-001**). You will need these values to configure the agent and to create graphs and dashboards.
 
 ##### Configure the Agent
 

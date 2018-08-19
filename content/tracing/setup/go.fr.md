@@ -88,27 +88,20 @@ Client APM Datadog qui implémente un Tracer [OpenTracing][3].
 Afin d'utiliser le Datadog Tracer avec un API OpenTracing, vous devez initialiser le tracer avec un objet `Configuration` complet :
 
 ```go
+package main
+
 import (
-  // ddtrace namespace is suggested
-  ddtrace "github.com/DataDog/dd-trace-go/opentracing"
-  opentracing "github.com/opentracing/opentracing-go"
+    opentracing "github.com/opentracing/opentracing-go"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
 func main() {
-  // create a Tracer configuration
-  config := ddtrace.NewConfiguration()
-  config.ServiceName = "api-intake"
-  config.AgentHostname = "ddagent.consul.local"
+    // initialize a Tracer
+    tracer := opentracer.New(tracer.WithAgentAddr("ddagent.consul.local:8126"),
+        tracer.WithServiceName("api-intake"))
 
-  // initialize a Tracer and ensure a graceful shutdown
-  // using the `closer.Close()`
-  tracer, closer, err := ddtrace.NewTracer(config)
-  if err != nil {
-    // handle the configuration error
-  }
-  defer closer.Close()
-
-  // set the Datadog tracer as a GlobalTracer
+    // set the Datadog tracer as a GlobalTracer
   opentracing.SetGlobalTracer(tracer)
   startWebServer()
 }

@@ -60,7 +60,7 @@ OpenGineインテグレーションを使用すると、`@opengenie:`を使っ�
 
 #### Create, acknowledge and close  OpsGenie alerts from Datadog
 
-Create an OpsGenie alert by putting @opsgenie-service_name or @opsgenie in the **Say What’s Happening** field, section 5, in the Edit Metric Alert. When this alert is triggered in Datadog, an alert will be sent to the recipients in your OpsGenie service.
+Create an OpsGenie alert by putting @opsgenie-service_name or @opsgenie in the **Say What's Happening** field, section 5, in the Edit Metric Alert. When this alert is triggered in Datadog, an alert will be sent to the recipients in your OpsGenie service.
 
 {{< img src="integrations/opsgenie/og_metric_alert.png" >}}
 
@@ -108,7 +108,7 @@ Acknowledge and close OpsGenie alerts from OpsGenie. When you do this, the assoc
 
 ### DatadogからOpsGenieアラートを作成、承認、クローズする方法
 
-Datadog側のMonitor設定のセクション5 **Say What’s Happening** の部分に @opsgenie-service_name や @opsgenie とメッセージに送信先を書き、OpsGenieへのアラートを作成していきます。Datadog側でこのアラートが動作した際に、OpsGenie側の受診者に通知が送られます。
+Datadog側のMonitor設定のセクション5 **Say What's Happening** の部分に @opsgenie-service_name や @opsgenie とメッセージに送信先を書き、OpsGenieへのアラートを作成していきます。Datadog側でこのアラートが動作した際に、OpsGenie側の受診者に通知が送られます。
 
 {{< img src="integrations/opsgenie/og_metric_alert.png" >}}
 
