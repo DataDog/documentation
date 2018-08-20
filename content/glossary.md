@@ -6,7 +6,7 @@ disable_toc: true
 
 #### Agent
 
-The Agent is a small application that runs on hosts. It executes checks and manages the flow of information from the host to the Datadog platform. The Agent is open source and compiled binaries are made available for Windows, OS X, and many flavors of Linux.
+The Agent is a small application that runs on hosts. It executes checks and manages the flow of information from the host to the Datadog platform. The Agent is open source and compiled binaries are made available for Windows, macOS, and many flavors of Linux.
 
 See the [Agent documentation][8] for more information.
 

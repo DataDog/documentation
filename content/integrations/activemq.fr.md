@@ -128,7 +128,7 @@ else echo -e "\e[031mAgent is not running\e[0m"; fi
 
 ## Compatibilité
 
-Le check d'ActiveMQ ne fonctionne que sous Linux ou Mac (OS X ou macOS).
+Le check d'ActiveMQ ne fonctionne que sous Linux ou macOS. 
 
 ## Données collectées
 ### Métriques

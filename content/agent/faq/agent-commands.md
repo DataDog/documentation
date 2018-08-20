@@ -14,7 +14,7 @@ aliases:
 | Platform | Agent v5                                     | Agent v6                                                       |
 | :------- | :------------------------------------------- | :------------------------------------------------------------- |
 | Linux    | `sudo service datadog-agent start`           | `sudo service datadog-agent start`                             |
-| OS X     | `/usr/local/bin/datadog-agent start`         | `launchctl start com.datadoghq.agent` *or* via the systray app |
+| macOS    | `/usr/local/bin/datadog-agent start`         | `launchctl start com.datadoghq.agent` *or* via the systray app |
 | Source   | `sudo ~/.datadog-agent/bin/agent start`      | `sudo service datadog-agent start`                             |
 | Windows  | [See the dedicated Windows documentation][1] | [See the dedicated Windows documentation][1]                   |
 
@@ -25,7 +25,7 @@ aliases:
 | Platform | Agent v5                                     | Agent v6                                                      |
 | :------- | :------------------------------------------- | :------------------------------------------------------------ |
 | Linux    | `sudo service datadog-agent stop`            | `sudo service datadog-agent stop`                             |
-| OS X     | `/usr/local/bin/datadog-agent stop`          | `launchctl stop com.datadoghq.agent` *or* via the systray app |
+| macOS    | `/usr/local/bin/datadog-agent stop`          | `launchctl stop com.datadoghq.agent` *or* via the systray app |
 | Source   | `sudo ~/.datadog-agent/bin/agent stop`       | `sudo service datadog-agent stop`                             |
 | Windows  | [See the dedicated Windows documentation][1] | [See the dedicated Windows documentation][1]                  |
 
@@ -36,7 +36,7 @@ aliases:
 | Platform | Agent v5                                     | Agent v6                                          |
 | :------- | :------------------------------------------- | :------------------------------------------------ |
 | Linux    | `sudo service datadog-agent restart`         | `sudo service datadog-agent restart`              |
-| OS X     | `/usr/local/bin/datadog-agent restart`       | run `stop` then `start`, *or* via the systray app |
+| macOS    | `/usr/local/bin/datadog-agent restart`       | run `stop` then `start`, *or* via the systray app |
 | Source   | `sudo ~/.datadog-agent/bin/agent restart`    | n/a                                               |
 | Windows  | [See the dedicated Windows documentation][1] | [See the dedicated Windows documentation][1]      |
 
@@ -53,7 +53,7 @@ aliases:
 | Docker (Alpine)     | `sudo docker exec -it <container_name> supervisorctl -c /opt/datadog-agent/agent/supervisor.conf status` | n/a                                                                           |
 | Kubernetes          | `kubectl exec -it <pod-name> /etc/init.d/datadog-agent status`                                           | `kubectl exec -it <pod-name> s6-svstat /var/run/s6/services/agent/`           |
 | Kubernetes (Alpine) | `kubectl exec -it <pod-name> supervisorctl -c /opt/datadog-agent/agent/supervisor.conf status`           | n/a                                                                           |
-| OS X                | `datadog-agent status`                                                                                   | `launchctl list com.datadoghq.agent` *or* via the systray app                 |
+| macOS               | `datadog-agent status`                                                                                   | `launchctl list com.datadoghq.agent` *or* via the systray app                 |
 | Source              | `sudo ~/.datadog-agent/bin/agent status`                                                                 | `sudo service datadog-agent status`                                           |
 | Windows             | [See the dedicated Windows documentation][2]                                                             | [See the dedicated Windows documentation][2]                                  |
 
@@ -70,7 +70,7 @@ Running an info command displays the status of your Datadog Agent and enabled in
 | Docker (Alpine)     | `docker exec -it <container_name> /opt/datadog-agent/bin/agent info`   | n/a                                                  |
 | Kubernetes          | `kubectl exec -it <pod-name> /etc/init.d/datadog-agent info`           | `kubectl exec -it <pod-name> agent status`           |
 | Kubernetes (Alpine) | `kubectl exec -it <pod-name> /opt/datadog-agent/bin/agent info`        | n/a                                                  |
-| OS X                | `datadog-agent info`                                                   | `datadog-agent status` or via the [web GUI][3]       |
+| macOS               | `datadog-agent info`                                                   | `datadog-agent status` or via the [web GUI][3]       |
 | Source              | `sudo ~/.datadog-agent/bin/info`                                       | `sudo datadog-agent status`                          |
 | Windows             | [See the dedicated Windows documentation][2]                           | [See the dedicated Windows documentation][2]         |
 
