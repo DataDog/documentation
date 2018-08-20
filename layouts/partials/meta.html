@@ -37,7 +37,7 @@
 <meta property="og:title" content="{{ $meta_title }}"/>
 <meta property="og:type" content="article"/>
 <meta property="og:url" content="{{ $.Permalink }}"/>
-{{ if $meta_image}}<meta property="og:image" content="{{.Site.Params.img_url}}images{{ $meta_image }}"/>{{ end }}
+{{ if $meta_image}}<meta property="og:image" content="{{.Site.Params.img_url}}images{{ $meta_image }}"/>{{ else }}<meta property="og:image" content="{{.Site.Params.img_url}}images/dd_docs_logo.png"/>{{ end }}
 <meta property="og:description" content="{{ $meta_desc }}"/>
 <meta property="og:site_name" content="Datadog Infrastructure and Application Monitoring"/>
 <meta property="article:author" content="Datadog"/>
