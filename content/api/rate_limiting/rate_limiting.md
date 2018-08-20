@@ -16,7 +16,7 @@ Here is some information regarding our API rate limit policy:
 * We **do not rate limit** on datapoint/metric submission (see [metrics section](/api/#metrics) for more info on how metric submission rate is handled) - limits encounter would be the quantity of [custom metrics][2] based on [your agreement][3]
 * Rate limit for event submission is 1000 per aggregate per day per organization. An aggregate is a group of similar events.
 * Rate limit for the [query_batch API][4] call is 300 per hour per organization, it can be extended on demand
-* Rate limit for the [query_snapshot API][5] call is 60 per hour per organization, it can be extended on demand
+* Rate limit for the [graph_snapshot API][5] call is 60 per hour per organization, it can be extended on demand
 
 [1]: /help
 [2]: /developers/metrics/custom_metrics/
