@@ -20,12 +20,15 @@
     top: 0;
     width: 100%;
     z-index: 9999;
-    @include gradient(#3023AE, #C024B6, 1);
+    @include gradient(#39B1FD, #39B1FD, 1);
     a {
       display: block;
       color: #fff;
-      font-size: 22px;
+      font-size: 20px;
       margin-top: -2px;
+    }
+    strong {
+      font-size: 21px;
     }
     ~ nav { // Push nav down because it's fixed we need 30px above
       margin-top: 30px !important;
