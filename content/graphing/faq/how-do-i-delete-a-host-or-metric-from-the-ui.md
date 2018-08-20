@@ -5,7 +5,7 @@ kind: faq
 
 ### Metrics/Tags
 
-There no way to immediately delete a metric/tag. Unused metrics/tags "age out" of the UI naturally after 24 hours.
+There is no way to immediately delete a metric/tag. Unused metrics/tags "age out" of the UI naturally after 24 hours.
 
 With respect to monitors, the metric stream will stop being considered after that age-out period.
 
