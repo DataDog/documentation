@@ -5,22 +5,23 @@ kind: documentation
 
 ## Fill
 
-`fill()`
+| Function | Description                                       | Example                               |
+| :----    | :-------                                          | :---------                            |
+| `fill()` | Interpolate missing metric values for the metric. | `<METRIC_NAME>{*}.fill(<METHOD>, <LIMIT>)` |
 
-Choose how to interpolate missing values for a given metric.
+The `fill()` function has two parameters:
 
-This allows you to tweak the interpolation settings. It accepts a function to use for interpolation, and a time in seconds that represents the maximum size of a gap you want to interpolate. You can use one of four different functions for interpolation:
+* **`METHOD`**: The function to use as interpolation method, to choose between:
+    * **linear**: Gives you a linear interpolation between the beginning and the end of the gap.
+    * **last**: Fills the gap with the last value of the gap.
+    * **zero**: Fills the gap with a zero value.
+    * **null**: Deactivates the interpolation.
 
-* **linear**: gives you a linear interpolation between the beginning and the end of the gap
-* **last**: fills the gap with the value of the beginning of the gap
-* **zero**: fills the gap with a zero value
-* **null**: deactivates the interpolation
+* `LIMIT`: The interpolation limit in seconds that represents the maximum size of a gap you want to interpolate.
 
 ## Default
 
 `default()`
-
-This function is in beta, [contact our support team][6] to activate it for your organization.
 
 The default function function fills empty intervals with a default or interpolated (within the interpolation time limit) value. It has the following syntax:
 
@@ -83,6 +84,8 @@ The default function fills in empty intervals in the time series that it receive
 #### Dogstatsd counters
 
 The agent automatically sends zeroes for five minutes after the last value was reported for DogStatsD counters. It is sometimes possible to use this feature to automatically resolve monitors for such metrics. Note that Agent version 6 allows you to configure the amount of time zeroes are sent.
+
+## Other functions
 
 {{< whatsnext desc="Consult the other available functions:" >}}
     {{< nextlink href="/graphing/functions/algorithms" >}}Algorithmic: Implement Anomaly or Outlier detection on your metric.{{< /nextlink >}}

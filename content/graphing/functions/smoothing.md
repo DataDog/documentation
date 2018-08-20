@@ -7,69 +7,72 @@ kind: documentation
 
 ### Ewma 3
 
-`ewma_3()`
+| Function   | Description                                                         | Example                    |
+| :----      | :-------                                                            | :---------                 |
+| `ewma_3()` | Compute the exponentially weighted moving average over a span of 3. | `ewma_3(<METRIC_NAME>{*})` |
 
-Exponentially weighted moving average with a span of 3.
-
-The span value is the number of data points. So `ewma_3()` uses the last 3 data points to calculate the average.
+Note: The span value is the number of data points. So `ewma_3()` uses the last 3 data points to calculate the average.
 
 ### Ewma 5
 
-`ewma_5()`
+| Function   | Description                                                         | Example                    |
+| :----      | :-------                                                            | :---------                 |
+| `ewma_5()` | Compute the exponentially weighted moving average over a span of 5. | `ewma_5(<METRIC_NAME>{*})` |
 
-Exponentially weighted moving average with a span of 5.
 
-The span value is the number of data points. So `ewma_5()` uses the last 5 data points to calculate the average.
+Note: The span value is the number of data points. So `ewma_5()` uses the last 5 data points to calculate the average.
 
 ### Ewma 10
 
-`ewma_10()`
+| Function    | Description                                                          | Example                     |
+| :----       | :-------                                                             | :---------                  |
+| `ewma_10()` | Compute the exponentially weighted moving average over a span of 10. | `ewma_10(<METRIC_NAME>{*})` |
 
-Exponentially weighted moving average with a span of 10.
-
-The span value is the number of data points. So `ewma_10()` uses the last 10 data points to calculate the average.
+Note: The span value is the number of data points. So `ewma_10()` uses the last 10 data points to calculate the average.
 
 ### Ewma 20
 
-`ewma_20()`
+| Function    | Description                                                          | Example                     |
+| :----       | :-------                                                             | :---------                  |
+| `ewma_20()` | Compute the exponentially weighted moving average over a span of 20. | `ewma_20(<METRIC_NAME>{*})` |
 
-Exponentially weighted moving average with a span of 20.
-
-The span value is the number of data points. So `ewma_20()` uses the last 20 data points to calculate the average.
+Note: The span value is the number of data points. So `ewma_20()` uses the last 20 data points to calculate the average.
 
 ## Median 
 
 ### Median 3
 
-`median_3()`
+| Function     | Description                      | Example                      |
+| :----        | :-------                         | :---------                   |
+| `median_3()` | Rolling median with a span of 3. | `median_3(<METRIC_NAME>{*})` |
 
-Rolling median with a span of 3.
-
-The span value is the number of data points. So `median_3()` uses the last 3 data points to calculate the median.
+Note: The span value is the number of data points. So `median_3()` uses the last 3 data points to calculate the median.
 
 ### Median 5
 
-`median_5()`
+| Function     | Description                      | Example                      |
+| :----        | :-------                         | :---------                   |
+| `median_5()` | Rolling median with a span of 5. | `median_5(<METRIC_NAME>{*})` |
 
-Rolling median with a span of 5.
-
-The span value is the number of data points. So `median_5()` uses the last 5 data points to calculate the median.
+Note: The span value is the number of data points. So `median_5()` uses the last 5 data points to calculate the median.
 
 ### Median 7
 
-`median_7()`
+| Function     | Description                      | Example                      |
+| :----        | :-------                         | :---------                   |
+| `median_7()` | Rolling median with a span of 7. | `median_7(<METRIC_NAME>{*})` |
 
-Rolling median with a span of 7.
-
-The span value is the number of data points. So `median_7()` uses the last 7 data points to calculate the median.
+Note: The span value is the number of data points. So `median_7()` uses the last 7 data points to calculate the median.
 
 ### Median 9
 
-`median_9()`
+| Function     | Description                      | Example                      |
+| :----        | :-------                         | :---------                   |
+| `median_9()` | Rolling median with a span of 9. | `median_3(<METRIC_NAME>{*})` |
 
-Rolling median with a span of 9.
+Note: The span value is the number of data points. So `median_9()` uses the last 9 data points to calculate the median.
 
-The span value is the number of data points. So `median_9()` uses the last 9 data points to calculate the median.
+## Other functions
 
 {{< whatsnext desc="Consult the other available functions:" >}}
     {{< nextlink href="/graphing/functions/algorithms" >}}Algorithmic: Implement Anomaly or Outlier detection on your metric.{{< /nextlink >}}

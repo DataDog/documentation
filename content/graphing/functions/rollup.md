@@ -17,6 +17,8 @@ These functions are only intended for metrics submitted as rates or counters via
 
 Note: [The only available query with `as_count()` is `sum()`][4] (unless using a rollup summary), which is the only mathematical accurate function with such behavior.
 
+## Other functions
+
 {{< whatsnext desc="Consult the other available functions:" >}}
     {{< nextlink href="/graphing/functions/algorithms" >}}Algorithmic: Implement Anomaly or Outlier detection on your metric.{{< /nextlink >}}
     {{< nextlink href="/graphing/functions/arithmetic" >}}Arithmetic: Perform Arithmetic operation on your metric.  {{< /nextlink >}}

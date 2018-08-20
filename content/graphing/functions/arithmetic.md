@@ -5,40 +5,49 @@ kind: documentation
 
 ## Absolute
 
-`abs()`
+| Function | Description                            | Example                 |
+| :----    | :-------                               | :---------              |
+| `abs()`  | Graph the absolute value of the metric. | `abs(<METRIC_NAME>{*})` |
 
-Absolute value for a given metric.
+Transforms this sinus timeseries `sin{*}`: 
+
+{{< img src="graphing/functions/arithmetic/sinus_function.png" alt="Sinus function" responsive="true" style="width:80%;">}}
+
+into this one `abs(sin{*})`:
+
+{{< img src="graphing/functions/arithmetic/sinus_function_with_abs.png" alt="Sinus function with abs" responsive="true" style="width:80%;">}}
 
 ## Logarithm 
 
 ### log2
 
-`log2()`
-
-Base-2 logarithm for a given metric.
+| Function | Description                               | Example                  |
+| :----    | :-------                                  | :---------               |
+| `log2()` | Graph the Base-2 logarithm of the metric. | `log2(<METRIC_NAME>{*})` |
 
 ### log10
 
-`log10()`
-
-Base-10 logarithm for a given metric.
+| Function  | Description                                | Example                   |
+| :----     | :-------                                   | :---------                |
+| `log10()` | Graph the Base-10 logarithm of the metric. | `log10(<METRIC_NAME>{*})` |
 
 ## Cumulative Sum
 
-`cumsum()`
 
-Cumulative sum over visible time window for a given metric.
+| Function   | Description                                                          | Example                    |
+| :----      | :-------                                                             | :---------                 |
+| `cumsum()` | Graph the cumulative sum of the metric over the visible time window. | `cumsum(<METRIC_NAME>{*})` |
 
-## Exclude null
-
-`exclude_null()`
-Filter to remove `N/A` (Not Applicable) entries on a timeseries.
 
 ## Integral
 
-`integral()`
+| Function     | Description                       | Example                             |
+| :----        | :-------                          | :---------                          |
+| `integral()` | Graph the integral of the metric. | `Graph the integral of the metric.` |
 
-Cumulative sum of `\[time delta] x \[value delta]` over all consecutive pairs of points in the visible time window for a given metric.
+**Note**: Datadog `integral()` is the cumulative sum of `[time delta] x [value delta]` over all consecutive pairs of points in the visible time window for a given metric.
+
+## Other functions
 
 {{< whatsnext desc="Consult the other available functions:" >}}
     {{< nextlink href="/graphing/functions/algorithms" >}}Algorithmic: Implement Anomaly or Outlier detection on your metric.{{< /nextlink >}}

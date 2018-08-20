@@ -5,14 +5,30 @@ kind: documentation
 
 ## Top
 
-`top()`
+| Function | Description               | Example                                    |
+| :----    | :-------                  | :---------                                 |
+| `top()`  | Graph the top N elements. | `top(<METRIC_NAME>{*}, <LIMIT_TO>, '<BY>', '<DIR>')` |
 
-Select the top series responsive to a given query, according to some ranking method:
+The `top()` function has three parameters:
 
-* a metric query string with some grouping, e.g. `avg:system.cpu.idle{*} by {host}`
-* the number of series to be displayed, as an integer.
-* one of `max`, `min`, `last`, `l2norm`, or `area`.  `area` is the signed area under the curve being graphed, which can be negative.  `l2norm` uses the <a href="http://en.wikipedia.org/wiki/Norm_(mathematics)#p-norm">L2 Norm</a> of the time series, which is always positive, to rank the series.
-* either `desc` (rank the results in descending order) or `asc` (ascending order).
+* `LIMIT_TO`: The number of series to be displayed, to chose between:
+    - `5`
+    - `10`
+    - `25`
+    - `50`
+    - `100`
+* `BY`: Aggregation method, to chose between:
+    - `max`: Maximum of all metrics values.
+    - `mean`: Mean of all metrics values.
+    - `min`: Min of all metrics values.
+    - `sum`: Sum of all metrics values. 
+    - `last`: Last metrics values.
+    - `l2norm`: Uses the [Norm][1] of the time series, which is always positive, to rank the series.
+    - `area`: Signed area under the curve being graphed, which can be negative
+    
+* `DIR`: The direction of ranking, to chose between:
+    - `asc`: Rank the results in ascending order. 
+    - `desc`: Rank the results in descending order.
 
 The `top()` method also has convenience functions of the following form, all of which take a single series list as input:
 
@@ -20,13 +36,7 @@ The `top()` method also has convenience functions of the following form, all of 
 
 For example, `bottom10_min()` retrieves lowest-valued 10 series using the `min` metric.
 
-## Top offset
-
-`top_offset()`
-
-Similar to `top()`, except with an additional offset parameter, which controls where in the ordered sequence of series the graphing starts.
-
-For example, an offset of 2 would start graphing at the number 3 ranked series, according to the chosen ranking metric.
+## Other functions
 
 {{< whatsnext desc="Consult the other available functions:" >}}
     {{< nextlink href="/graphing/functions/algorithms" >}}Algorithmic: Implement Anomaly or Outlier detection on your metric.{{< /nextlink >}}
@@ -39,3 +49,5 @@ For example, an offset of 2 would start graphing at the number 3 ranked series, 
     {{< nextlink href="/graphing/functions/smoothing" >}}Soothing: Smooth your metric variations.{{< /nextlink >}}
     {{< nextlink href="/graphing/functions/timeshift" >}}Timeshift: Shift your metric data point along the timeline. {{< /nextlink >}}
 {{< /whatsnext >}}
+
+[1]: http://en.wikipedia.org/wiki/Norm_(mathematics)#p-normL2

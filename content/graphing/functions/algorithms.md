@@ -5,24 +5,35 @@ disable_toc: true
 ---
 
 ## Anomalies
-`anomalies()`
 
-Overlay a gray band showing the expected behavior of a series based on past.
+| Function      | Description                                                                                | Example                                        |
+| :----         | :-------                                                                                   | :---------                                     |
+| `anomalies()` | Overlay a gray band on the metric showing the expected behavior of a series based on past. | `anomalies(avg:<METRIC_NAME>{*}, '<ALGORITHM>', <BOUNDS>)` |
+
+The `anomalies()` function has two parameters:
+
+* `ALGORITHM`:  Methodology used to detect anomalies.
+* `BOUNDS`:  Width of the gray band. `bounds` can be interpreted as the standard deviations for your algorithm; a value of 2 or 3 should be large enough to include most "normal" points.
 
 {{< img src="graphing/functions/algorithms/anomalies_graph.png" alt="anomalies graph" responsive="true" style="width:80%;">}}
-
-The function has two parameters:
-
-* The first parameter is for selecting which algorithm is used.
-* The second parameter is labeled `bounds`, tune it to change the width of the gray band. `bounds` can be interpreted as the standard deviations for your algorithm; a value of 2 or 3 should be large enough to include most "normal" points.
 
 See our [Anomaly Monitor][1] page for more info.
 
 ## Outliers
 
-`outliers()`
+| Function     | Description                | Example                                       |
+| :----        | :-------                   | :---------                                    |
+| `outliers()` | Highlight outliers series. | `outliers(avg:<METRIC_NAME>{*}, '<ALGORITHM>', <TOLERANCE>, <PERCENTAGE>)` |
 
-Highlight outliers series; see our [Outlier Monitor][2] page for more info.
+The `outliers()` function has three parameters:
+
+* `ALGORITHM`: The outliers algorithm to use.
+* `TOLERANCE`: The tolerance of the outliers algorithm.
+* `PERCENTAGE`: The percentage of outlying points required to mark a series as an outlier (available only for MAD and scaledMAD algorithms)
+
+See our [Outlier Monitor][2] page for more info.
+
+## Other functions
 
 {{< whatsnext desc="Consult the other available functions:" >}}
     {{< nextlink href="/graphing/functions/arithmetic" >}}Arithmetic: Perform Arithmetic operation on your metric.  {{< /nextlink >}}
@@ -35,7 +46,6 @@ Highlight outliers series; see our [Outlier Monitor][2] page for more info.
     {{< nextlink href="/graphing/functions/smoothing" >}}Soothing: Smooth your metric variations.{{< /nextlink >}}
     {{< nextlink href="/graphing/functions/timeshift" >}}Timeshift: Shift your metric data point along the timeline. {{< /nextlink >}}
 {{< /whatsnext >}}
-
 
 [1]: /monitors/monitor_types/anomaly
 [2]: /monitors/monitor_types/outlier

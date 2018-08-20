@@ -5,39 +5,43 @@ kind: documentation
 
 ## Per second
 
-`per_second()`
+| Function       | Description                                                | Example                        |
+| :----          | :-------                                                   | :---------                     |
+| `per_second()` | Graph the rate at which the metric is changing per second. | `per_second(<METRIC_NAME>{*})` |
 
-The rate at which the metric changes per second for a given metric.
 
 ## Per minute
 
-`per_minute()`
-
-Same as ```per_second() * 60``` The rate at which the metric changes per minute for a given metric.
+| Function       | Description                                                | Example                        |
+| :----          | :-------                                                   | :---------                     |
+| `per_minute()` | Graph the rate at which the metric is changing per minute. | `per_minute(<METRIC_NAME>{*})` |
 
 ## Per hour
 
-`per_hour()`
-
-Same as ```per_second() * 3600``` The rate at which the metric changes per hour for a given metric.
+| Function     | Description                                              | Example                      |
+| :----        | :-------                                                 | :---------                   |
+| `per_hour()` | Graph the rate at which the metric is changing per hour. | `per_hour(<METRIC_NAME>{*})` |
 
 ## Delta time
 
-`dt()`
-
-Time delta between points for a given metric.
+| Function | Description                                         | Example                |
+| :----    | :-------                                            | :---------             |
+| `dt()`   | Graph the time difference between submitted points. | `dt(<METRIC_NAME>{*})` |
 
 ## Delta value
 
-`diff()`
+| Function | Description                    | Example                  |
+| :----    | :-------                       | :---------               |
+| `diff()` | Graph the delta of the metric. | `diff(<METRIC_NAME>{*})` |
 
-Delta value between points for a given metric
 
 ## Derivative
 
-`derivative()`
+| Function       | Description                                   | Example                        |
+| :----          | :-------                                      | :---------                     |
+| `derivative()` | Graph the derivative (dt/diff) of the metric. | `derivative(<METRIC_NAME>{*})` |
 
-1st order derivative, same as  ```diff() / dt()```
+## Other functions
 
 {{< whatsnext desc="Consult the other available functions:" >}}
     {{< nextlink href="/graphing/functions/algorithms" >}}Algorithmic: Implement Anomaly or Outlier detection on your metric.{{< /nextlink >}}
