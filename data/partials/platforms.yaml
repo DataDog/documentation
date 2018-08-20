@@ -18,7 +18,7 @@ platforms:
     link: "agent/basic_agent_usage/heroku/"
     image: "platform_heroku.png"
   - name: kubernetes
-    link: "agent/basic_agent_usage/kubernetes/"
+    link: "agent/kubernetes/"
     image: "platform_kubernetes.png"
   - name: osx
     link: "agent/basic_agent_usage/osx/"

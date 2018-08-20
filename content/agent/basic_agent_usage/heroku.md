@@ -41,7 +41,7 @@ In addition to the environment variables shown above, there are a number of othe
 
 | Setting | Description|
 | --- | --- |
-| `DD_API_KEY` | *Required.* Your API key is available from the [Datadog API integrations][2] page. Note that this is the *API* key, not the application key. |
+| `DD_API_KEY` | *Required.* Your API key is available from the [Datadog API Integrations][2] page. Note that this is the *API* key, not the application key. |
 | `DD_HOSTNAME` | *Deprecated.* **WARNING**: Setting the hostname manually may result in metrics continuity errors. It is recommended that you do *not* set this variable. Because dyno hosts are ephemeral it is recommended that you monitor based on the tags `dynoname` or `appname`. |
 | `DD_DYNO_HOST` | *Optional.* Set to `true` to use the dyno name (e.g. `web.1` or `run.1234`) as the hostname. See the [hostname section](#hostname) below for more information. Defaults to `false`. |
 | `DD_TAGS` | *Optional.* Sets additional tags provided as a comma-delimited string. For example, `heroku config:set DD_TAGS=simple-tag-0,tag-key-1:tag-value-1`. The buildpack automatically adds the tags `dyno` and `dynohost` which represent the Dyno name (e.g. web.1) and host ID (e.g. 33f232db-7fa7-461e-b623-18e60944f44f) respectively. See the ["Guide to tagging"][3] for more information. |

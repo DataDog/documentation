@@ -19,9 +19,7 @@ further_reading:
 
 ## Overview
 
-This page outlines the basic features of the Windows Datadog Agent. 
-
-If you haven't installed the Agent yet, basic installation instructions can be found [in the Datadog Agent integration page][1].
+This page outlines the basic features of the Windows Datadog Agent. If you haven't installed the Agent yet, basic installation instructions can be found [in the Datadog Agent Integration page][1].
 
 ## Agent installation
 
@@ -124,7 +122,7 @@ Download the latest version available [from here][2] and run the installation pa
 
 ### Downgrade to Agent v5
 
-Run the Agent installer package for the latest 5.x version,  instructions can be found [in the Datadog Agent integration page][1].
+Run the Agent installer package for the latest 5.x version,  instructions can be found [in the Datadog Agent Integration page][1].
 
 ## Uninstall the Agent
 
@@ -184,14 +182,12 @@ If you're running on a version older than 5.2 visit the status page in your web 
 #### Agent v6 
 The Agent logs are located in the `C:\programdata\Datadog\logs` directory and all logs are in the `agent.log` file.
 
-If you're still having trouble, [our support team][3] will be glad to provide further assistance.
+If you're still having trouble, [our support team][3] is glad to provide further assistance.
 
 #### Agent v5
 
 Logs are available at:
 
-  * For Windows Server 2003, XP or older:
-`C:\Documents and Settings\All Users\Application Data\Datadog\logs\ddagent.log`
   * For Windows Server 2008, Vista and newer:
 `C:\ProgramData\datadog\logs\ddagent.log`
 
@@ -252,7 +248,7 @@ Example :
 ## Use Cases
 ###  Monitoring a Windows Service
 
-On your target host, first launch the Datadog Agent Manager and select the "Windows Service" integration from the list (see below)
+On your target host, first launch the Datadog Agent Manager and select the "Windows Service" Integration from the list (see below)
 
 For the Windows Service Integration, there is an out-of-the-box example, however, this example uses DHCP.
 
@@ -289,7 +285,7 @@ While Windows does not offer this exact metric, there is an equivalent option th
 
 ### Monitoring Windows Processes
 
-You can monitor Windows processes via the [process integration][7]. To set this up on Windows, select the "Process" integration from the list of integrations in the Datadog Agent Manager and edit the configuration.
+You can monitor Windows processes via the [process Integration][7]. To set this up on Windows, select the "Process" Integration from the list of Integrations in the Datadog Agent Manager and edit the configuration.
 
 For example, to monitor Notepad, your configuration file would include:
 
@@ -300,11 +296,11 @@ instances:
   search_string: ['notepad.exe']
 ```
 
-When adding your own processes, be sure to follow the formatting exactly as shown - if formatting is not correct the integration fails.
+When adding your own processes, be sure to follow the formatting exactly as shown - if formatting is not correct the Integration fails.
 
 When you're done editing the file, press "Save" to save it, then "Enable" to enable it.
 
-Any time you modify a Datadog integration you'll need to restart the Datadog Agent service. You can do this by clicking the "Actions" button in the top left corner, then selecting "Restart", or you can restart "Datadog Agent" in your Services Management Snap-in Console (services.msc).
+Any time you modify a Datadog Integration you'll need to restart the Datadog Agent service. You can do this by clicking the "Actions" button in the top left corner, then selecting "Restart", or you can restart "Datadog Agent" in your Services Management Snap-in Console (services.msc).
 
 To verify that your Process check is working, click on "Logs and Status", then "Agent Status". Scroll down to the "Checks" section and you should see "process" reporting on each process instance you have setup in your configuration file.
 

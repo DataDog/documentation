@@ -99,11 +99,59 @@ apm_config:
 | `max_cpu_percent`       | float     | -                        | Maximum CPU percentage that the agent should use. The agent automatically adjusts its pre-sampling rate to stay below this number.                           |
 | `max_connections`       | number    | -                        | Maximum number of network connections that the agent is allowed to use. When this is exceeded the process is killed.                                    |
 
+To get a an overview of all the possible settings for APM, take a look at the Trace Agent's [`datadog.example.yaml`][21] configuration file.
 For more information about the Datadog Agent, see the [dedicated doc page][18] or refer to the [`datadog.yaml` templates][19].
 
 [Reference the dedicated documentation to setup tracing with Docker][5].
 
 ## Scrubbing sensitive information
+
+### Automatic scrubbing
+
+Automatic scrubbing is available for some services, such as ElasticSearch, MongoDB, Redis, Memcached, and HTTP server and client request URLs. Below is an example configuration snippet documenting all the available options.
+
+```
+apm_config:
+  # Defines obfuscation rules for sensitive data. Disabled by default.
+  obfuscation:
+    # ElasticSearch obfuscation rules. Applies to spans of type "elasticsearch".
+    # More specifically, to the "elasticsearch.body" tag.
+    elasticsearch:
+      enabled: true
+      # Values for the keys listed here will not be obfuscated.
+      keep_values:
+        - client_id
+        - product_id
+
+    # MongoDB obfuscation rules. Applies to spans of type "mongodb".
+    # More specifically, to the "mongodb.query" tag.
+    mongodb:
+      enabled: true
+      # Values for the keys listed here will not be obfuscated.
+      keep_values:
+        - document_id
+        - template_id
+
+    # HTTP obfuscation rules for "http.url" tags in spans of type "http".
+    http:
+      # If true, query strings in URLs will be obfuscated.
+      remove_query_string: true
+      # If true, path segments in URLs containing digits will be replaced by "?"
+      remove_paths_with_digits: true
+
+    # When enabled, stack traces will be removed (replaced by "?").
+    remove_stack_traces: true
+
+    # Obfuscation rules for spans of type "redis". Applies to the "redis.raw_command" tags.
+    redis:
+      enabled: true
+
+    # Obfuscation rules for spans of type "memcached". Applies to the "memcached.command" tag.
+    memcached:
+      enabled: true
+```
+
+### Replace rules
 
 To scrub sensitive data from your span's tags, use the `replace_tags` setting. It is a list containing one or more groups of parameters that describe how to perform replacements of sensitive data within your tags. These parameters are:
 
@@ -153,3 +201,4 @@ apm_config:
 [18]: /agent/
 [19]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [20]: https://github.com/DataDog/datadog-trace-agent/#run-on-linux
+[21]: https://github.com/DataDog/datadog-trace-agent/blob/6.4.1/datadog.example.yaml
