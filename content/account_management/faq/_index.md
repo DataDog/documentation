@@ -16,7 +16,6 @@ private: true
 * [How do I add new users to sub-organizations?][5]
 * [As a parent account admin, how do I create new sub-organizations?][6]
 * [Do you support custom domains for each of my sub-organizations?][7]
-* [What data from my sub-organizations can I see in my parent account?][8]
 
 ## Communication and Security
 
@@ -37,7 +36,6 @@ private: true
 [5]: /account_management/faq/how-do-i-add-new-users-to-sub-organizations
 [6]: /account_management/faq/as-a-parent-account-admin-how-do-i-create-new-sub-organizations
 [7]: /account_management/faq/do-you-support-custom-domains-for-each-of-my-sub-organizations
-[8]: /account_management/faq/what-data-from-my-sub-organizations-can-i-see-in-my-parent-account
 [9]: /account_management/faq/how-do-i-configure-azure-ad-as-a-saml-idp
 [10]: /account_management/faq/how-do-i-reset-my-application-keys
 [11]: /account_management/faq/why-are-users-being-added-as-none-none
