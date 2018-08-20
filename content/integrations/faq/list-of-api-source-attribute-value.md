@@ -8,14 +8,12 @@ kind: faq
 |Activemq|ACTIVEMQ|
 |Airbrake|AIRBRAKE|
 |Akamai|AKAMAI|
-|Alibaba Cloud|ALIBABACLOUD|
 |Amazon Api Gateway|APIGATEWAY|
 |Amazon Auto Scaling|AUTOSCALING|
 |Amazon Billing|BILLING|
 |Amazon Cloudfront|CLOUDFRONT|
 |Amazon Cloudsearch|CLOUDSEARCH|
 |Amazon Cloudtrail|CLOUDTRAIL|
-|Amazon Codebuild|CODEBUILD|
 |Amazon Codedeploy|CODEDEPLOY|
 |Amazon Directconnect|DIRECTCONNECT|
 |Amazon Dynamodb|DYNAMODB|
@@ -76,8 +74,6 @@ kind: faq
 |Ceph|CEPH|
 |Chatwork|CHATWORK|
 |Chef|CHEF|
-|Circleci|CIRCLECI|
-|Cisco Aci|CISCOACI|
 |Cloud Foundry|CLOUDFOUNDRY|
 |Cloudhealth|CLOUDHEALTH|
 |Cloudnetworkhealth|CLOUDNETWORKHEALTH|
@@ -119,7 +115,6 @@ kind: faq
 |Google Cloudsql|GCPCLOUDSQL|
 |Google Compute Engine|GCPCOMPUTE|
 |Google Container Engine|GCPCONTAINER|
-|Google Hangouts Chat|HANGOUTS|
 |Gunicorn|GUNICORN|
 |Haproxy|HAPROXY|
 |Hdfs|HDFS|
@@ -156,7 +151,6 @@ kind: faq
 |New Relic|NEWRELIC|
 |Nginx|NGINX|
 |Node|NODE|
-|Office 365 Groups|OFFICE365GROUPS|
 |Openstack|OPENSTACK|
 |Opsgenie|OPSGENIE|
 |Opsmatic|OPSMATIC|
@@ -199,7 +193,6 @@ kind: faq
 |Teamcity|TEAMCITY|
 |Tokumx|TOKUMX|
 |Tomcat|TOMCAT|
-|Travis Ci|TRAVISCI|
 |Upstart|UPSTART|
 |User|DOGWEBPUBLISHER|
 |Users|DOGWEBPUBLISHER|
@@ -217,4 +210,3 @@ kind: faq
 |Yarn|YARN|
 |Zendesk|ZENDESK|
 |Zookeeper|ZOOKEEPER|
-
