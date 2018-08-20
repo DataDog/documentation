@@ -62,7 +62,7 @@ addons:
     release: datadog-agent
   properties:
     dd:
-      use_dogstatsd: yes
+      use_dogstatsd: true
       dogstatsd_port: 18125               # Many CF deployments have a StatsD already on port 8125
       api_key: <YOUR_DATADOG_API_KEY>
       tags: ["cloudfoundry_deployment_1"] # any tags you wish

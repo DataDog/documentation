@@ -10,7 +10,7 @@ APM is available as part of the Datadog Agent with versions 5.11+ as part of the
 
 The Agent can be enabled by including the following in your [Datadog Agent configuration file][3]:
 ```
-apm_enabled: yes
+apm_enabled: true
 ```
 
 <div class="alert alert-info">

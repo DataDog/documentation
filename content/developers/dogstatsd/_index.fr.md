@@ -56,7 +56,7 @@ Si cette fonction s'exécute cent fois pendant le flush interval (dix secondes, 
 
 Commencez par éditer votre fichier `datadog.yaml` en décommentant les lignes suivantes:
 ```
-use_dogstatsd: yes
+use_dogstatsd: true
 
 ...
 
