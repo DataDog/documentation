@@ -47,15 +47,15 @@ Even in read-only mode, non-administrator users can still clone the Screenboard,
 
 ## Global Time Selector
 
-Screenboards feature a global time option, which sets the same timeframe for all time-based widgets on the same screenboard. The global time selector can be set to a moving window in the past (“The Past Hour,” “The Past 3 Months,” etc.) or to a fixed period between two dates. If a moving window is chosen, all widgets update their timeframes every few milliseconds to move along with that window. 
+Screenboards feature a global time option, which sets the same timeframe for all time-based widgets on the same screenboard. The global time selector can be set to a moving window in the past ("The Past Hour," "The Past 3 Months," etc.) or to a fixed period between two dates. If a moving window is chosen, all widgets update their timeframes every few milliseconds to move along with that window. 
 
 {{< img src="graphing/dashboards/screenboard/global_time_screenboard.png" alt="Global Time Selector" responsive="true" style="width:50%;">}}
 
-In order to use the global time selector, the screenboard must have at least one time-based widget that is linked to “Global Time.” When creating or editing a time-based widget, go to **Set display preferences** and select "Global Time" in the *Show* drop-down menu. Note: "Global Time" is the default setting.
+In order to use the global time selector, the screenboard must have at least one time-based widget that is linked to "Global Time." When creating or editing a time-based widget, go to **Set display preferences** and select "Global Time" in the *Show* drop-down menu. Note: "Global Time" is the default setting.
 
 {{< img src="graphing/dashboards/screenboard/widget_selector.png" alt="Widget time selector" responsive="true" style="width:70%;">}}
 
-When the global time selector is in use, widgets that are linked to global time show data for that period. Widgets that are not linked to global time show the data for their local timeframe as applied to the global window. For instance, if the global time selector is set to the fixed period January 1st 2018 through January 2nd 2018, a widget set to the local timeframe “The Last Minute” shows the last minute of January 2nd, from 11:59pm.
+When the global time selector is in use, widgets that are linked to global time show data for that period. Widgets that are not linked to global time show the data for their local timeframe as applied to the global window. For instance, if the global time selector is set to the fixed period January 1st 2018 through January 2nd 2018, a widget set to the local timeframe "The Last Minute" shows the last minute of January 2nd, from 11:59pm.
 
 
 When sharing a public Screenboard, you can set a global timeframe ahead of sharing:

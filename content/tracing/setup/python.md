@@ -14,6 +14,9 @@ further_reading:
 - link: "tracing/visualization/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
+- link: "tracing/advanced_usage/"
+  tag: "Advanced Usage"
+  text: "Advanced Usage"
 ---
 
 <div class="alert alert-info">
@@ -34,22 +37,13 @@ Finally, import the tracer and instrument your code!
 
 ## Example
 
-{{< tabs >}}
-    {{% tab "Python" %}}
 ```python
 
 from ddtrace import tracer
 
 with tracer.trace("web.request", service="my_service") as span:
-span.set_tag("my_tag", "my_value")
+  span.set_tag("my_tag", "my_value")
 ```
-    {{% /tab %}}
-    {{% tab "JavaScript" %}}
-```javascript
-console.log("hello tabs");
-```
-    {{% /tab %}}
-{{< /tabs >}}
 
 For more examples, see the [Getting Started section of library documentation][2].
 

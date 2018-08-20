@@ -20,11 +20,11 @@ further_reading:
 
 ## Overview
 
-Watchdog is an algorithmic feature that automatically detects potential application and infrastructure issues. Watchdog observes trends and patterns in application metrics — like error rate, request rate, and latency — and unexpected behavior. Watchdog evaluates all services and resources without the need to configure a monitor for each service.
+Watchdog is an algorithmic feature that automatically detects potential application and infrastructure issues. Watchdog observes trends and patterns in application metrics - like error rate, request rate, and latency - and unexpected behavior. Watchdog evaluates all services and resources without the need to configure a monitor for each service.
 
 Watchdog looks for irregularities in metrics, like a sudden spike in hit rate. For each irregularity, the [Watchdog page][1] displays a Watchdog story. Each story includes a graph of the detected metric irregularity and gives more information about the relevant timeframe and endpoint or endpoints. 
 
-Stories can be filtered by environment and availability zone, as well as by the type of service or resource. Typing in the “Filter stories” search box also allows user to filter stories by service or resource name.
+Stories can be filtered by environment and availability zone, as well as by the type of service or resource. Typing in the "Filter stories" search box also allows user to filter stories by service or resource name.
 
 
 {{< img src="watchdog/watchdog_overview.png" alt="Watchdog overview" responsive="true" >}}

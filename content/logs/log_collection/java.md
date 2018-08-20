@@ -161,7 +161,7 @@ Then edit your `logback.xml` file and update the encoder:
         <encoder class="net.logstash.logback.encoder.LogstashEncoder">
             <customFields>{"env":"prod"}</customFields>
         </encoder>
-    </appender>
+    </appender>
 ```
 
 ## Configure the Datadog Agent

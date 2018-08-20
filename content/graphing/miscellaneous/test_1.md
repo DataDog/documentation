@@ -12,17 +12,17 @@ If you're new here, read below for the high-level view of Datadog.
 
 Your application stack is teeming with unused metadata that's trying to tell a story: things aren't humming along as well as they should be.
 
-Exceptions thrown; database queries slowing; cache misses rising; upstream services flapping; error logs growing. Each of these tells a part of the story, but it's hard to make sense of—or act on meaningfully—when taken separately from the others.
+Exceptions thrown; database queries slowing; cache misses rising; upstream services flapping; error logs growing. Each of these tells a part of the story, but it's hard to make sense of-or act on meaningfully-when taken separately from the others.
 
-Datadog lets you collect all these metrics, events, and service states in one place. Then, visualize and correlate the data with beautiful graphs, and set flexible alerting conditions on it—all without running any storage or monitoring infrastructure yourself.
+Datadog lets you collect all these metrics, events, and service states in one place. Then, visualize and correlate the data with beautiful graphs, and set flexible alerting conditions on it-all without running any storage or monitoring infrastructure yourself.
 
 ## Collect Everything
 
-Collect a wealth of already-available data without writing any code. [Install the Datadog Agent][1] everywhere—every server, instance, VM, node, [container-running host][2]—and then enable and configure any of our 200+ out-of-the-box [integrations][3] to start the metrics flowing to Datadog's backend.
+Collect a wealth of already-available data without writing any code. [Install the Datadog Agent][1] everywhere-every server, instance, VM, node, [container-running host][2]-and then enable and configure any of our 200+ out-of-the-box [integrations][3] to start the metrics flowing to Datadog's backend.
 
 Submit custom application metrics by writing a little code. Instrument your own gauges, counters, timers, and histograms with [DogStatsD][4], or use [APM][5] to trace the execution time of any code path to see how it impacts overall request-response times. The [client libraries][6] send your [custom metrics][7] and trace data to the Datadog Agent, which then ships them off to Datadog.
 
-Some of your stack may be SaaS, not servers. Datadog can [poll many of these services](/integrations), and the integrations for them are the easiest of all to install—no Agent required.
+Some of your stack may be SaaS, not servers. Datadog can [poll many of these services](/integrations), and the integrations for them are the easiest of all to install-no Agent required.
 
 ## Visualize It
 

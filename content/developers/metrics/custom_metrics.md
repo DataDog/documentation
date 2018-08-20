@@ -20,7 +20,7 @@ A custom metric refers to a single, unique combination of a metric name, host, a
 
 Custom metrics generally refer to any metric that you send using statsd, [DogStatsD][1], or through extensions made to the [Datadog Agent][2]. Some [integrations][3] can potentially emit an unlimited number of metrics that can also count as custom, [further details on which standard integrations emit custom metrics][4].
 
-In order to fully leverage the capabilities of the Datadog product through scoping and alerting, you’ll probably be using tags. As a consequence, one submitted metric actually leads to **multiple unique tag combinations**- counting towards your custom metrics count.
+In order to fully leverage the capabilities of the Datadog product through scoping and alerting, you'll probably be using tags. As a consequence, one submitted metric actually leads to **multiple unique tag combinations**- counting towards your custom metrics count.
 
 For example:
 
@@ -78,19 +78,19 @@ The logic behind your metric is the following :
 
 From there, you can see that **on each host reporting this metric**, if all services report both successes and failures, you can have up to 1x2x3 = **6 custom metrics**.
 
-Let’s say you have 3 hosts:
+Let's say you have 3 hosts:
 
 * `host1` is reporting all possible configurations
 * `host2` is reporting only successes across all services
 * `host3` is reporting success and failures, but only for database and webserver services
 
-Across your 3 hosts, you’d have 13 distinct metrics, here is why :
+Across your 3 hosts, you'd have 13 distinct metrics, here is why :
 
 {{< img src="developers/metrics/custom_metrics/metric_count.png" alt="metric_count" responsive="true" style="width:75%;">}}
 
-If you are an administrator, you can see your total custom metrics per hour as well as the top 500 custom metrics by cardinality in your account in [the usage details page][6]. You can also see this metric count on your [metric summary page][7], where you’d see, clicking on the service.request.count metric, the exact number of unique tag combinations:
+If you are an administrator, you can see your total custom metrics per hour as well as the top 500 custom metrics by cardinality in your account in [the usage details page][6]. You can also see this metric count on your [metric summary page][7], where you'd see, clicking on the service.request.count metric, the exact number of unique tag combinations:
 
-So if you only had the first host from the example above reporting, you’d have this:
+So if you only had the first host from the example above reporting, you'd have this:
 
 {{< img src="developers/metrics/custom_metrics/metric_summary.png" alt="metric_summary" responsive="true" style="width:70%;">}}
 
@@ -106,7 +106,7 @@ Using the query editor, you can also find this using the count: aggregator
 
 {{< img src="developers/metrics/custom_metrics/metric_aggregator.png" alt="metric_aggregator" responsive="true" style="width:70%;">}}
 
-Ultimately, you’ll have 13 metrics using the following query: `count:service.request.count{*}`
+Ultimately, you'll have 13 metrics using the following query: `count:service.request.count{*}`
 
 {{< img src="developers/metrics/custom_metrics/count_of_metrics.png" alt="count_of_metrics" responsive="true" style="width:70%;">}}
 

@@ -30,7 +30,7 @@ Keep in mind that `anomalies` uses the past to predict what is expected in the f
 
 ## Anomaly Detectionの利用法
 
-Datadogは`anomalies`と呼ぶ新しいクエリ関数を追加しています。メトリクスの時系列データにこの関数を適用すると、”正常と期待される変動幅”を結果として返します。
+Datadogは`anomalies`と呼ぶ新しいクエリ関数を追加しています。メトリクスの時系列データにこの関数を適用すると、"正常と期待される変動幅"を結果として返します。
 
 `anomalies`は、将来に期待される変動を予測するために過去の時系列データを使用しますので、データを収集して間もないメトリクスについて`anomalies`を適用しても効果は得られないことに注意して下さい。
 
@@ -55,10 +55,10 @@ Anomaly Detectionの利用を開始するには、メトリクスの時系列グ
 {{< img src="anomalies/initial_editor.png" >}}
 
 <!--
-Now, click on the + icon (Add functions and modifiers) on the right side of your expression. In the “Modify your query” box, choose the “anomalies” function:
+Now, click on the + icon (Add functions and modifiers) on the right side of your expression. In the "Modify your query" box, choose the "anomalies" function:
 -->
 
-次に、メトリクスの各設定ボックスの右手、プラスマークをクリックします。“Modify your query”ボックスで "anomalies" 関数を選択します:
+次に、メトリクスの各設定ボックスの右手、プラスマークをクリックします。"Modify your query"ボックスで "anomalies" 関数を選択します:
 
 {{< img src="anomalies/function_menu.png" >}}
 
@@ -189,7 +189,7 @@ No. Anomaly detection is designed to assist with visualizing and monitoring metr
 
 Also, anomaly detection requires historical data to make good predictions. If you have only been collecting a metric for a few hours or a few days, anomaly detection probably won't be very useful.
 
-Take care when creating multi-alerts. A metric such as `service.requests_served{*}` could be a good candidate for anomaly detection, but `service.requests_served{*} by {host}`is probably not. If your hosts are load-balanced, then an [outlier monitor](https://docs.datadoghq.com/guides/outliers/) will be better for detecting hosts that are behaving abnormally. If your service scales up, each new host won’t be monitored at all until there is a minimum amount of history for anomaly detection to kick in, and even then alerts might be noisy due to instability in the number of requests handled by those hosts.
+Take care when creating multi-alerts. A metric such as `service.requests_served{*}` could be a good candidate for anomaly detection, but `service.requests_served{*} by {host}`is probably not. If your hosts are load-balanced, then an [outlier monitor](https://docs.datadoghq.com/guides/outliers/) will be better for detecting hosts that are behaving abnormally. If your service scales up, each new host won't be monitored at all until there is a minimum amount of history for anomaly detection to kick in, and even then alerts might be noisy due to instability in the number of requests handled by those hosts.
 -->
 
 ## よくあるご質問(FAQs)

@@ -1,14 +1,12 @@
 ---
-title: Sampling Tracing
+title: Priority Sampling
 kind: documentation
 ---
 
-// ... 
+Priority Sampling allows traces between two Datadog endpoints to be sampled together. This prevents trace sampling from removing segments of a distributed trace. Additionally, APM traces expose sampling flags to configure how specific traces are sampled.
 
 {{< tabs >}}
 {{% tab "Java" %}}
-## Java
-
 Distributed Traces may sample inconsistently when the linked traces run on different hosts. To ensure that distributed traces are complete, enable priority sampling. Priority sampling automatically assigns and propagates a priority value along all traces, depending on their service and volume. Priorities can also be set manually to drop non-interesting traces or keep important ones.
 
 Priority sampling is disabled by default. To enable it, configure the `priority.sampling` flag to `true` ([see how to configure the client here](/tracing/setup/java/#configuration)).
@@ -52,8 +50,6 @@ This is some ruby code
 ```
 {{% /tab %}}
 {{% tab "Go" %}}
-## Go
-
 Propagate a single trace across multiple services with distributed tracing. For more details about how to use and configure distributed tracing, check out the [godoc page][tracer godoc].
 
 Make use of priority sampling to ensure that distributed traces are complete. Set the sampling priority of a trace by adding the `sampling.priority` tag to its root span. This is then propagated throughout the entire stack. For example:
@@ -75,7 +71,7 @@ Possible values for the sampling priority tag are:
 {{% tab "Node.js" %}}
 
 ```javascript
-This is some ruby code
+This is some node code
 ```
 
 {{% /tab %}}

@@ -83,14 +83,14 @@ Select or click on a section of the graph to either zoom in the graph or see the
 
 ## Export
 
-{{< img src="logs/explorer/analytics/export_button.png" alt="view logs button" responsive="true" style="width:40%;">}}
+{{< img src="logs/explorer/analytics/export_monitor.png" alt="view logs button" responsive="true" style="width:40%;">}}
 
 Export your Log Analytics: 
 
 * To create a new [log monitor][4]:  
-    The query of your Log Analytics is used to create the log monitor query.
+    Go to the [Explorer view][10] (not Analytics) and click **Export**. The query of your Log Analytics is used to create the log monitor query. This feature is not available from the Analytics view.
 * To an existing [Timeboard][5]:  
-    This functionality is in beta, [contact our support team][6] to activate it for your organization.
+    This functionality is in beta. [Contact our support team][6] to activate it for your organization.
 
 ## Logs in Dashboard 
 
@@ -115,3 +115,4 @@ Similar to the Log Explorer, click on a any graph in your dashboards to jump to 
 [7]: /graphing/dashboards/widgets/#timeseries
 [8]: /graphing/dashboards
 [9]: https://docs.datadoghq.com/graphing/dashboards/#correlation-between-logs-and-metrics
+[10]: /logs/explorer/search/

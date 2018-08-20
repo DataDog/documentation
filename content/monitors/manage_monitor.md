@@ -21,18 +21,18 @@ The [Manage Monitors][1] page lets you run an advanced search of all monitors so
 
 Advanced search lets you query monitors by any combination of monitor attributes:
 
-* `title` and `message` — text search
-* `status` — Alert, Warn, No Data, Ok
-* `scope` — e.g. *, role:master-db
-* `type` — metric, integration, apm, etc
+* `title` and `message` - text search
+* `status` - Alert, Warn, No Data, Ok
+* `scope` - e.g. *, role:master-db
+* `type` - metric, integration, apm, etc
 * `muted`
 * `creator`
 * `id`
-* `service` — tags
-* `team` — tags
-* `env` — tags
-* `notification` — the monitor's notification target, e.g. you@example.com, slack-ops-oncall
-* `metric` — the metric _or_ service check monitored, e.g. system.cpu.user, http.can_connect
+* `service` - tags
+* `team` - tags
+* `env` - tags
+* `notification` - the monitor's notification target, e.g. you@example.com, slack-ops-oncall
+* `metric` - the metric _or_ service check monitored, e.g. system.cpu.user, http.can_connect
 
 To run a search, construct your query using the checkboxes on the left and/or the search bar along the top. When you check the boxes, the search bar updates with the equivalent query. Likewise, when you modify the search bar query (or write one from scratch), the checkboxes update to reflect the change. In any case, query results update in real-time as you edit the query; there's no 'Search' button to click.
 
@@ -47,7 +47,7 @@ When you don't need to search monitor titles and bodies for specific text, your 
 * The Muted checkbox appears under the Status field, but Muted is actually its own field; checking it adds `muted:true` to your query, not `status:muted`.
 * The Metric/Check field is always called `metric` in the query, e.g. selecting the check `http.can_connect` adds `metric:http.can_connect` to your query.
 
-For fields that have an arbitrary (i.e. large) number of values across all monitors—Service tag, Scope, Metric/Check, Notification—use the field-specific search bars to find the value you're looking for.
+For fields that have an arbitrary (i.e. large) number of values across all monitors-Service tag, Scope, Metric/Check, Notification-use the field-specific search bars to find the value you're looking for.
 
 When you need to run a more complex search than the checkboxes allow, use the search bar to edit your query or write a new one.
 
@@ -82,7 +82,7 @@ To edit an individual monitor, hover over it and use the buttons to the far righ
 
 ## Manage Triggered Monitors with group-level granularity
 
-You can mute or [resolve][5] triggered monitors in bulk using the [Triggered Monitors page][4]. It's similar to the [Manage Monitors page](#managing-monitors)—you can find monitors by their attributes using the same easy tickboxes or query syntax—but there are a few differences. Aside from only showing monitors with a triggered status (Alert, Warn, or No Data), the main difference is that the Triggered Monitors page shows a row for _each group_ (i.e. each reporting source) of each monitor.
+You can mute or [resolve][5] triggered monitors in bulk using the [Triggered Monitors page][4]. It's similar to the [Manage Monitors page](#managing-monitors)-you can find monitors by their attributes using the same easy tickboxes or query syntax-but there are a few differences. Aside from only showing monitors with a triggered status (Alert, Warn, or No Data), the main difference is that the Triggered Monitors page shows a row for _each group_ (i.e. each reporting source) of each monitor.
 
 Say you have a monitor called "high latency" that is grouped by host. If there are 20 hosts reporting and 14 have a triggered status, the Triggered Monitor page shows 14 rows if you search for the monitor by title in the query search bar (e.g. `high latency` or `title:
 "high latency"`). This lets you easily mute or [resolve][5] a monitor for some reporting sources, but not all (though of course you can mute or resolve all, too).

@@ -28,28 +28,28 @@ The unstable alpha tracer can be [accessed today on Github][2].
 ## Planned Automatic Instrumentation for Beta (Coming Soon)
 
 APM PHP support is currently in alpha and provides limited automatic instrumentation. Planned beta support will provide automatic instrumentation for popular frameworks and libraries. See some of these listed below.
-Don’t see your desired frameworks or libraries? Please let us know more about your needs through [this survey][1].
+Don't see your desired frameworks or libraries? Please let us know more about your needs through [this survey][1].
 
 ### Web Frameworks
 
 | Module         | Versions    | Support Type    |
 | :-----------   | :---------- | :-------------- |
 | Laravel        | Coming soon | Coming soon     |
-| Symfony        | Coming soon | Coming soon     |
+| Magento        | Coming soon | Coming soon     |
+| Symfony 3      | Coming soon | Coming soon     |
 | Zend Framework | Coming soon | Coming soon     |
 
-Don’t see your desired web frameworks? Please let us know more about your needs through [this survey][1].
+Don't see your desired web frameworks? Please let us know more about your needs through [this survey][1].
 
 ### Data Stores
 
-| Module      | Versions    | Support Type |
-| :---------- | :---------- | :----------- |
-| MYSQL       | Coming soon | Coming Soon  |
-| Redis       | Coming soon | Coming Soon  |
-| MongoDB     | Coming soon | Coming Soon  |
-| Postgres    | Coming soon | Coming Soon  |
+| Module        | Versions    | Support Type |
+| :------------ | :---------- | :----------- |
+| MySQL         | Coming soon | Coming Soon  |
+| Redis         | Coming soon | Coming Soon  |
+| ElasticSearch | Coming soon | Coming Soon  |
 
-Don’t see your desired data stores? Please let us know more about your needs through [this survey][1].
+Don't see your desired data stores? Please let us know more about your needs through [this survey][1].
 
 
 ## Further Reading

@@ -1,7 +1,7 @@
 ---
 title: From the query to the graph
 kind: documentation
-alias:
+aliases:
 - /getting_started/from_the_query_to_the_graph
 ---
 
@@ -37,7 +37,7 @@ In this example we consider `host:moby` as having 5 devices. Thus Datadog is sto
 * {host:moby, device:overlay}
 * {host:moby, device:shm}.
 
-Let’s now go over the successive steps followed by our backend for the query presented above.
+Let's now go over the successive steps followed by our backend for the query presented above.
 
 ## Find which timeseries are needed for the query
 
@@ -49,7 +49,7 @@ As you may have guessed, our backend finds 5 matching sources (see previous para
 
 The idea is then to aggregate data from these sources together to give you a metric representing the `system.disk.total` for your host. This is done at [step 3][4].
 
-**Note**: The tagging system adopted by Datadog is simple and powerful. You don’t have to know and specify the sources to combine, you just have to give a tag, i.e. an ID and Datadog combines all data with this ID and not the rest. For instance, you don’t need to know the number of hosts or devices you have, when you query `system.disk.total{*}`. Datadog aggregates data from all sources for you.
+**Note**: The tagging system adopted by Datadog is simple and powerful. You don't have to know and specify the sources to combine, you just have to give a tag, i.e. an ID and Datadog combines all data with this ID and not the rest. For instance, you don't need to know the number of hosts or devices you have, when you query `system.disk.total{*}`. Datadog aggregates data from all sources for you.
 
 [More information about timeseries and tag cardinality][5]
 

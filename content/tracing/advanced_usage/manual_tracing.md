@@ -3,27 +3,39 @@ title: Manual Tracing
 kind: documentation
 ---
 
-// ...
+Manual Tracing allows programmatic creation of traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation.
 
 {{< tabs >}}
 {{% tab "Java" %}}
-## Java
-
 Before instrumenting your application, review Datadog’s [APM Terminology][apm terminology] and familiarize yourself with the core concepts of Datadog APM. If you aren't using a [supported framework instrumentation][java framework], or you would like additional depth in your application’s traces, you may want to to manually instrument your code.
 
 Do this either using the Trace annotation for simple method call tracing or with the [OpenTracing API][opentracing] for complex tracing.
 
+Datadog's Trace annotation is provided by the [dd-trace-api dependency][trace api maven docs].
+
+Example Trace usage:
+
+```java
+import datadog.trace.api.Trace;
+
+public class MyClass {
+  @Trace
+  public static void myMethod() {
+    // your method implementation here
+  }
+}
+```
+
 [opentracing]: /tracing/setup_advanced/open_tracing
-[java framework]: /tracing/setup_basic/java/#integrations
+[java framework]: /tracing/setup/java/#integrations
 [apm terminology]: /tracing/visualization/services_list/
+[trace api maven docs]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
 
 {{% /tab %}}
 {{% tab "Python" %}}
 {{% /tab %}}
 {{% tab "Ruby" %}}
-## Ruby
-
-If you aren't using supported library instrumentation (see [Library compatibility][ruby lib comptability], you may want to to manually instrument your code. Adding tracing to your code is easy using the `Datadog.tracer.trace` method, which you can wrap around any Ruby code.
+If you aren't using supported library instrumentation (see [Library compatibility][ruby lib compatibility], you may want to to manually instrument your code. Adding tracing to your code is easy using the `Datadog.tracer.trace` method, which you can wrap around any Ruby code.
 
 ```ruby
 get '/posts' do
@@ -48,12 +60,10 @@ end
 For more details about manual instrumentation, check out the [API documentation][ruby api doc].
 
 [ruby api doc]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#manual-instrumentation
-[ruby lib comptability]: /tracing/setup_basic/ruby/#library-compatibility
+[ruby lib compatibility]: /tracing/setup/ruby/#library-compatibility
 
 {{% /tab %}}
 {{% tab "Go" %}}
-## Go
-
 To make use of manual instrumentation, use the `tracer` package which is documented on our [godoc page][tracer godoc]. One simple example would be:
 
 ```go
@@ -79,8 +89,6 @@ func main() {
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
-## NodeJS
-
 If you aren’t using supported library instrumentation (see [Compatibility][nodejs compatibility]), you may want to manually instrument your code.
 
 The following example initializes a Datadog Tracer and creates a Span called `web.request`:
@@ -96,7 +104,7 @@ span.finish()
 For more information on manual instrumentation, check out the [API documentation][nodejs api doc].
 
 [nodejs api doc]: https://datadog.github.io/dd-trace-js/#manual-instrumentation
-[nodejs compatibility]: /tracing/setup_basic/nodejs/#compatibility
+[nodejs compatibility]: /tracing/setup/nodejs/#compatibility
 
 {{% /tab %}}
 {{< /tabs >}}

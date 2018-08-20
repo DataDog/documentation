@@ -102,7 +102,7 @@ For instance, to indicate that you want events for host X and tag Y:
 
 * `"events": "host:X tags:Y"`
 
-or if you’re looking to display all errors:
+or if you're looking to display all errors:
 
 * `"events": "status:error"`
 

@@ -41,7 +41,7 @@ To collect logs from all your containers without filtering by image or label, ad
 ```
 logs:
     - type: docker
-      service: docker
+      service: docker
 ```
 
 **Important note**: Integration Pipelines and Processors will not be installed automatically as the source tag is not set. The integration setup is described below and it automatically installs integration Pipelines that parse your logs and extract all the relevant information from them.
@@ -50,7 +50,7 @@ logs:
 
 As explained above, the Agent also has a [containerized][3] installation.
 
-First, let’s create one directory on the host that we will later mount on the containerized Agent:
+First, let's create one directory on the host that we will later mount on the containerized Agent:
 
 - `/opt/datadog-agent/run`: to make sure we do not lose any logs from containers during restarts or network issues we store on the host the last line that was collected for each container in this directory
 
@@ -109,7 +109,7 @@ logs:
     image: <IMAGE_NAME>    #or label: <MY_LABEL> or name: <CONTAINER_NAME>
     source: <SOURCE>
     sourcecategory: <SOURCE_CATEGORY>
-    service: <SERVICE>
+    service: <SERVICE>
 ```
 
 When filtering on the container image, both exact container image name or short names are supported.
@@ -120,7 +120,7 @@ If you have one container running `library/httpd:latest`, the following filterin
 * - `image: httpd:latest`
 * - `image: library/httpd:latest`
 
-For more examples of configuration files or Agent capabilities (such as filtering, redacting, multiline, …) read [the advanced log collection functions][7].
+For more examples of configuration files or Agent capabilities (such as filtering, redacting, multiline, ...) read [the advanced log collection functions][7].
 
 #### Option 2: Autodiscovery
 

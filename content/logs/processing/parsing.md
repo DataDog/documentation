@@ -49,6 +49,8 @@ You would have at the end this structured log:
 
 {{< img src="logs/processing/parsing/parsing_example_1.png" alt="Parsing example 1" responsive="true" style="width:80%;">}}
 
+**Note**: If you have multiple parsing rules in a single Grok parser, only one can match any given log. The first one that matches from top to bottom is the one that does the parsing. 
+
 ## Matcher
 
 Here is the list of all the matchers natively implemented by Datadog:
@@ -196,7 +198,7 @@ The date matcher transforms your timestamp in the EPOCH format.
 | 06/Mar/2013:01:36:30 +0900    | `%{date("dd/MMM/yyyy:HH:mm:ss Z"):date}`                  | {"date": 1362501390000} |
 | 2016-11-29T16:21:36.431+0000  | `%{date("yyyy-MM-dd'T'HH:mm:ss.SSSZ"):date}`              | {"date": 1480436496431} |
 | 2016-11-29T16:21:36.431+00:00 | `%{date("yyyy-MM-dd'T'HH:mm:ss.SSSZZ"):date}`             | {"date": 1480436496431} |
-| 06/Feb/2009:12:14:14.655      | `%{date("dd/MMM/yyyy:HH:mm:ss.SSS"):date}`                | {“date”: 1233922454655} |
+| 06/Feb/2009:12:14:14.655      | `%{date("dd/MMM/yyyy:HH:mm:ss.SSS"):date}`                | {"date": 1233922454655} |
 | Thu Jun 16 08:29:03 2016      | `%{date("EEE MMM dd HH:mm:ss yyyy","Europe/Paris"):date}` | {"date": 1466058543000} |
 | 2007-08-31 19:22:22.427 ADT   | `%{date("yyyy-MM-dd HH:mm:ss.SSS z"):date}`               | {"date": 1188675889244} |
 
@@ -213,7 +215,7 @@ john connected on 11/08/2017
 ```
 
 **Rule**:
-Note that “id” is an integer and not a string thanks to the “integer” matcher in the rule.
+Note that "id" is an integer and not a string thanks to the "integer" matcher in the rule.
 
 ```
 MyParsingRule (%{integer:user.id}|%{word:user.firstname}) connected on %{date("MM/dd/yyyy"):connect_date}

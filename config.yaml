@@ -95,11 +95,6 @@ languages:
           url: "agent/basic_agent_usage/heroku/"
           weight: 135
           parent: customnav_agentnav_basic_usage
-        - identifier: customnav_agentnav_kubernetes
-          name: "Kubernetes"
-          url: "agent/basic_agent_usage/kubernetes/"
-          weight: 140
-          parent: customnav_agentnav_basic_usage
         - identifier: osx
           name: "Mac OS X"
           url: "agent/basic_agent_usage/osx/"
@@ -131,6 +126,43 @@ languages:
           weight: 170
           parent: customnav_agentnav_basic_usage
 
+
+        - identifier: kubernetes
+          name: "Kubernetes"
+          url: "agent/kubernetes/"
+          weight: 15
+          parent: menu_references_agent
+
+        - identifier: kubernetes_daemonset
+          name: "DaemonSet Setup"
+          url: "agent/kubernetes/daemonset_setup"
+          weight: 150
+          parent: kubernetes
+        - identifier: kubernetes_host
+          name: "Host Setup"
+          url: "agent/kubernetes/host_setup"
+          weight: 155
+          parent: kubernetes
+        - identifier: kubernetes_event
+          name: "Event Collection"
+          url: "agent/kubernetes/event_collection"
+          weight: 160
+          parent: kubernetes
+        - identifier: kubernetes_integrations
+          name: "Custom Integrations"
+          url: "agent/kubernetes/integrations"
+          weight: 165
+          parent: kubernetes
+        - identifier: kubernetes_metrics
+          name: "Metrics"
+          url: "agent/kubernetes/metrics"
+          weight: 170
+          parent: kubernetes
+        - identifier: kubernetes_legacy
+          name: "Legacy Versions"
+          url: "agent/kubernetes/legacy"
+          weight: 175
+          parent: kubernetes
 
         - identifier: autodiscovery
           name: "Autodiscovery"
@@ -261,9 +293,14 @@ languages:
           weight: 60
           parent: menu_references_graphing
         - identifier: customnav_infrastructurenav_hostmap
-          name: "Hostmap"
+          name: "Host Map"
           url: "graphing/infrastructure/hostmap/"
           weight: 30
+          parent: customnav_graphingnav_infrastructure
+        - identifier: customnav_infrastructurenav_containermap
+          name: "Container Map"
+          url: "graphing/infrastructure/containermap/"
+          weight: 35
           parent: customnav_graphingnav_infrastructure
         - identifier: customnav_infrastructurenav_livecontainers
           name: "Live Containers"
@@ -418,96 +455,101 @@ languages:
           weight: 80
         
         # TRACING/APM - Setup basic
-        - identifier: customnav_tracingnav_setup_basic
-          name: "Setup - Basic"
-          url: "tracing/setup_basic/"
+        - identifier: customnav_tracingnav_setup
+          name: "Setup"
+          url: "tracing/setup/"
           weight: 10
           parent: menu_references_tracing
         
         - identifier: customnav_tracingnav_docker
           name: "Docker"
-          url: "tracing/setup_basic/docker/"
+          url: "tracing/setup/docker/"
           weight: 120
-          parent: customnav_tracingnav_setup_basic
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_kubernetes
           name: "Kubernetes"
-          url: "tracing/setup_basic/kubernetes/"
+          url: "tracing/setup/kubernetes/"
           weight: 130
-          parent: customnav_tracingnav_setup_basic
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_java
           name: "Java"
-          url: "tracing/setup_basic/java/"
+          url: "tracing/setup/java/"
           weight: 140
-          parent: customnav_tracingnav_setup_basic
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_python
           name: "Python"
-          url: "tracing/setup_basic/python/"
+          url: "tracing/setup/python/"
           weight: 150
-          parent: customnav_tracingnav_setup_basic
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_ruby
           name: "Ruby"
-          url: "tracing/setup_basic/ruby/"
+          url: "tracing/setup/ruby/"
           weight: 160
-          parent: customnav_tracingnav_setup_basic
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_go
           name: "Go"
-          url: "tracing/setup_basic/go/"
+          url: "tracing/setup/go/"
           weight: 170
-          parent: customnav_tracingnav_setup_basic
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_javascript
           name: "Node.js"
-          url: "tracing/setup_basic/nodejs/"
+          url: "tracing/setup/nodejs/"
           weight: 180
-          parent: customnav_tracingnav_setup_basic
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_dotnet
-          name: ".NET (Alpha)"
+          name: ".NET (Coming soon)"
           url: "tracing/setup/dotnet/"
           weight: 190
-          parent: customnav_tracingnav_setup_basic
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_php
           name: "PHP (Coming soon)"
-          url: "tracing/setup_basic/php/"
+          url: "tracing/setup/php/"
           weight: 195
-          parent: customnav_tracingnav_setup_basic
+          parent: customnav_tracingnav_setup
 
         # TRACING/APM - Setup Advanced
 
-        - identifier: customnav_tracingnav_setup_advanced
-          name: "Setup - Advanced"
-          url: "tracing/setup_advanced/"
+        - identifier: customnav_tracingnav_advanced_usage
+          name: "Advanced Usage"
+          url: "tracing/advanced_usage/"
           weight: 20
           parent: menu_references_tracing
 
         - identifier: customnav_tracingnav_manual_tracing
           name: "Manual Tracing"
-          url: "tracing/setup_advanced/manual_tracing/"
+          url: "tracing/advanced_usage/manual_tracing/"
           weight: 210
-          parent: customnav_tracingnav_setup_advanced
+          parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_custom_tagging
           name: "Custom Tagging"
-          url: "tracing/setup_advanced/custom_tagging/"
+          url: "tracing/advanced_usage/custom_tagging/"
           weight: 220
-          parent: customnav_tracingnav_setup_advanced
+          parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_distributed_tracing
           name: "Distributed Tracing"
-          url: "tracing/setup_advanced/distributed_tracing/"
+          url: "tracing/advanced_usage/distributed_tracing/"
           weight: 230
-          parent: customnav_tracingnav_setup_advanced
-        - identifier: customnav_tracingnav_open_tracing
-          name: "Open Tracing"
-          url: "tracing/setup_advanced/open_tracing/"
-          weight: 240
-          parent: customnav_tracingnav_setup_advanced
+          parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_sampling
-          name: "Sampling"
-          url: "tracing/setup_advanced/sampling/"
+          name: "Priority Sampling"
+          url: "tracing/advanced_usage/priority_sampling/"
+          weight: 240
+          parent: customnav_tracingnav_advanced_usage
+        - identifier: customnav_tracingnav_open_tracing
+          name: "OpenTracing"
+          url: "tracing/advanced_usage/open_tracing/"
           weight: 250
-          parent: customnav_tracingnav_setup_advanced
+          parent: customnav_tracingnav_advanced_usage
+        - identifier: customnav_tracingnav_logging
+          name: "Logging"
+          url: "tracing/advanced_usage/logging/"
+          weight: 260
+          parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_debugging
           name: "Debugging"
-          url: "tracing/setup_advanced/debugging/"
-          weight: 260
-          parent: customnav_tracingnav_setup_advanced
+          url: "tracing/advanced_usage/debugging/"
+          weight: 270
+          parent: customnav_tracingnav_advanced_usage
 
         # Using the APM UI
         - identifier: customnav_tracingnav_visualization
@@ -535,6 +577,8 @@ languages:
           url: "tracing/visualization/trace"
           weight: 340
           parent: customnav_tracingnav_visualization
+
+        # Trace Search
         - identifier: customnav_tracingnav_trace_search
           name: "Trace Search"
           url: "tracing/visualization/search"
@@ -542,13 +586,27 @@ languages:
           parent: customnav_tracingnav_visualization
         - identifier: customnav_tracingnav_graph
           name: "Trace Analytics"
-          url: "tracing/visualization/analytics"
-          weight: 360
-          parent: customnav_tracingnav_visualization
+          url: "tracing/analytics"
+          weight: 35
+          parent: menu_references_tracing
+
+        # Service Map
+        - identifier: customnav_tracingnav_servicemap
+          name: "Service Map"
+          url: "tracing/servicemap"
+          weight: 38
+          parent: menu_references_tracing
+
+        # Trace API
+        - identifier: customnav_tracingnav_api
+          name: "Trace API"
+          url: "api/#tracing"
+          weight: 50
+          parent: menu_references_tracing
 
         # Getting further
         - identifier: customnav_tracingnav_getting_further
-          name: "Getting further"
+          name: "Getting Further"
           url: "tracing/getting_further/"
           weight: 40
           parent: menu_references_tracing
@@ -1393,96 +1451,101 @@ languages:
           weight: 80
         
         # TRACING/APM - Setup basic
-        - identifier: customnav_tracingnav_setup_basic
-          name: "Setup - Basic"
-          url: "tracing/setup_basic/"
+        - identifier: customnav_tracingnav_setup
+          name: "Getting Started"
+          url: "tracing/setup/"
           weight: 10
           parent: menu_references_tracing
         
         - identifier: customnav_tracingnav_docker
           name: "Docker"
-          url: "tracing/setup_basic/docker/"
+          url: "tracing/setup/docker/"
           weight: 120
-          parent: customnav_tracingnav_setup_basic
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_kubernetes
           name: "Kubernetes"
-          url: "tracing/setup_basic/kubernetes/"
+          url: "tracing/setup/kubernetes/"
           weight: 130
-          parent: customnav_tracingnav_setup_basic
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_java
           name: "Java"
-          url: "tracing/setup_basic/java/"
+          url: "tracing/setup/java/"
           weight: 140
-          parent: customnav_tracingnav_setup_basic
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_python
           name: "Python"
-          url: "tracing/setup_basic/python/"
+          url: "tracing/setup/python/"
           weight: 150
-          parent: customnav_tracingnav_setup_basic
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_ruby
           name: "Ruby"
-          url: "tracing/setup_basic/ruby/"
+          url: "tracing/setup/ruby/"
           weight: 160
-          parent: customnav_tracingnav_setup_basic
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_go
           name: "Go"
-          url: "tracing/setup_basic/go/"
+          url: "tracing/setup/go/"
           weight: 170
-          parent: customnav_tracingnav_setup_basic
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_javascript
           name: "Node.js"
-          url: "tracing/setup_basic/nodejs/"
+          url: "tracing/setup/nodejs/"
           weight: 180
-          parent: customnav_tracingnav_setup_basic
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_dotnet
-          name: ".NET (Alpha)"
+          name: ".NET (Coming soon)"
           url: "tracing/setup/dotnet/"
           weight: 190
-          parent: customnav_tracingnav_setup_basic
+          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_php
           name: "PHP (Coming soon)"
-          url: "tracing/setup_basic/php/"
+          url: "tracing/setup/php/"
           weight: 195
-          parent: customnav_tracingnav_setup_basic
+          parent: customnav_tracingnav_setup
 
         # TRACING/APM - Setup Advanced
 
-        - identifier: customnav_tracingnav_setup_advanced
-          name: "Setup - Advanced"
-          url: "tracing/setup_advanced/"
+        - identifier: customnav_tracingnav_advanced_usage
+          name: "Advanced Usage"
+          url: "tracing/advanced_usage/"
           weight: 20
           parent: menu_references_tracing
 
         - identifier: customnav_tracingnav_manual_tracing
           name: "Manual Tracing"
-          url: "tracing/setup_advanced/manual_tracing/"
+          url: "tracing/advanced_usage/manual_tracing/"
           weight: 210
-          parent: customnav_tracingnav_setup_advanced
+          parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_custom_tagging
           name: "Custom Tagging"
-          url: "tracing/setup_advanced/custom_tagging/"
+          url: "tracing/advanced_usage/custom_tagging/"
           weight: 220
-          parent: customnav_tracingnav_setup_advanced
+          parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_distributed_tracing
           name: "Distributed Tracing"
-          url: "tracing/setup_advanced/distributed_tracing/"
+          url: "tracing/advanced_usage/distributed_tracing/"
           weight: 230
-          parent: customnav_tracingnav_setup_advanced
+          parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_open_tracing
-          name: "Open Tracing"
-          url: "tracing/setup_advanced/open_tracing/"
+          name: "OpenTracing"
+          url: "tracing/advanced_usage/open_tracing/"
           weight: 240
-          parent: customnav_tracingnav_setup_advanced
+          parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_sampling
-          name: "Sampling"
-          url: "tracing/setup_advanced/sampling/"
+          name: "Priority Sampling"
+          url: "tracing/advanced_usage/sampling/"
           weight: 250
-          parent: customnav_tracingnav_setup_advanced
+          parent: customnav_tracingnav_advanced_usage
+        - identifier: customnav_tracingnav_logging
+          name: "Logging"
+          url: "tracing/advanced_usage/logging/"
+          weight: 260
+          parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_debugging
           name: "Debugging"
-          url: "tracing/setup_advanced/debugging/"
-          weight: 260
-          parent: customnav_tracingnav_setup_advanced
+          url: "tracing/advanced_usage/debugging/"
+          weight: 270
+          parent: customnav_tracingnav_advanced_usage
 
         # Using the APM UI
         - identifier: customnav_tracingnav_visualization

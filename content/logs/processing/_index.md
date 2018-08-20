@@ -28,14 +28,14 @@ To access the processing panel use the left `Logs` menu:
 Log processing allows you to have full control over how your logs are processed with Datadog [Pipelines][7] and [Processors][14].
 
 * A [Pipeline][7] takes a filtered subset of incoming logs and applies over them a list of sequential Processors.
-* A [Processor][14] executes within a [Pipeline][7] a data-structuring action ([Remapping an attribute][9], [Grok parsing][10]…) on a log.
+* A [Processor][14] executes within a [Pipeline][7] a data-structuring action ([Remapping an attribute][9], [Grok parsing][10]...) on a log.
 
 [Pipelines][7] and [Processors][14] can be applied to any type of logs:
 
 * [Integration logs](#integration-logs)
 * [Custom JSON/Syslog/full text logs](#custom-logs)
 
-Thanks to this you do not need to change how you log, and you don’t need to deploy changes to any server-side processing rules, everything is happening and can be configured directly in the [Datadog processing page][19].
+Thanks to this you do not need to change how you log, and you don't need to deploy changes to any server-side processing rules, everything is happening and can be configured directly in the [Datadog processing page][19].
 
 The other benefit to implement a log processing strategy is to implement an [attribute naming convention][20] for your organization.
 
@@ -77,7 +77,7 @@ If your logs are formatted as JSON, be aware that some attributes are reserved f
 ### *date* attribute
 
 By default Datadog generates a timestamp and appends it in a date attribute when logs are received.
-However, if a JSON formatted log file includes one of the following attributes, Datadog interprets its value as the the log’s official date:
+However, if a JSON formatted log file includes one of the following attributes, Datadog interprets its value as the the log's official date:
 
 * `@timestamp`
 * `timestamp`
@@ -102,7 +102,7 @@ By default, Datadog ingests the value of message as the body of the log entry. T
 
 ### *status* attribute
 
-Each log entry may specify a status level which is made available for faceted search within Datadog. However, if a JSON formatted log file includes one of the following attributes, Datadog interprets its value as the the log’s official status:
+Each log entry may specify a status level which is made available for faceted search within Datadog. However, if a JSON formatted log file includes one of the following attributes, Datadog interprets its value as the the log's official status:
 
 * `status`
 * `severity`
@@ -113,7 +113,7 @@ If you would like to remap some status existing in the `status` attribute, you c
 
 ### *host* attribute
 
-Using the Datadog Agent or the RFC5424 format automatically sets the host value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog interprets its value as the the log’s host:
+Using the Datadog Agent or the RFC5424 format automatically sets the host value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog interprets its value as the the log's host:
 
 * `host`
 * `hostname`
@@ -121,7 +121,7 @@ Using the Datadog Agent or the RFC5424 format automatically sets the host value 
 
 ### *service* attribute
 
-Using the Datadog Agent or the RFC5424 format automatically sets the service value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog interprets its value as the the log’s service:
+Using the Datadog Agent or the RFC5424 format automatically sets the service value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog interprets its value as the the log's service:
 
 * `service`
 * `syslog.appname`

@@ -83,7 +83,7 @@ Your traces inherit tags from [hosts][4] and [integrations][5] that generate the
 | :----                                                          | :---                                                                        |
 | `("env:prod" OR test)`                                         | All traces with the tag `#env:prod` or the tag `#test`                      |
 | `(service:srvA OR service:srvB)` or `(service:(srvA OR srvB))` | All traces that contain tags `#service:srvA` or `#service:srvB`.            |
-| `("env:prod" AND -”version:beta”)`                             | All traces that contain `#env:prod` and that do not contain `#version:beta` |
+| `("env:prod" AND -"version:beta")`                             | All traces that contain `#env:prod` and that do not contain `#version:beta` |
 
 If your tags don't follow [tags best practices][6] and don't use the `key:value` syntax, use this search query:
 

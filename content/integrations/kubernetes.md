@@ -31,7 +31,7 @@ Get metrics and logs from kubernetes service in real time to:
 * Visualize and monitor kubernetes states
 * Be notified about kubernetes failovers and events.
 
-For Kubernetes, it’s recommended to run the Agent in a DaemonSet. We have created a [Docker image][1] with both the Docker and the Kubernetes integrations enabled.
+For Kubernetes, it's recommended to run the Agent in a DaemonSet. We have created a [Docker image][1] with both the Docker and the Kubernetes integrations enabled.
 
 You can also just run the Datadog Agent on your host and configure it to gather your Kubernetes metrics.
 

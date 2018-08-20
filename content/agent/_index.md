@@ -45,11 +45,11 @@ Agent 6 is the latest major version of the Datadog Agent. The big difference bet
   * It uses fewer file descriptors
   * It has an all around decreased footprint
 
-* Global percentiles can be performed on the server directly to calculate real, effective global percentiles. (NOTE: this feature is currently in BETA. Contact support for details on how to have it enabled for your account.)
+* [Distributions metrics][17] can be performed on the server directly to calculate real, effective global percentiles. (NOTE: this feature is currently in BETA. Contact support for details on how to have it enabled for your account.)
 
 * [DogStatsD][6] can be used over a Unix socket instead of over udp.
 
-* Custom build your Agent v6 and [DogStatsD][6] much easier and with much more configuration options, to include or exclude almost anything. There is also a “puppy” Agent, which is a truly minimal installation.
+* Custom build your Agent v6 and [DogStatsD][6] much easier and with much more configuration options, to include or exclude almost anything. There is also a "puppy" Agent, which is a truly minimal installation.
 
 * Agent 6 uses ports `5000` and `5001` by default. You can specify different ports for `expvar_port` and `cmd_port` in the `datadog.yaml` file.
 
@@ -198,3 +198,4 @@ Once the Agent is running, use the `datadog-agent launch-gui` command to launch 
 [14]: /agent/basic_agent_usage/docker
 [15]: /agent/basic_agent_usage/kubernetes
 [16]: /agent/basic_agent_usage/source
+[17]: /developers/metrics/distributions 

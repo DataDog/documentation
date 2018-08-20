@@ -22,7 +22,7 @@ further_reading:
   text: Collect your Docker traces
 ---
 
-If you haven't installed the Agent yet, instructions can be found [in the Datadog Agent integration page][1]. You can also consult our [Official Docker Agent 6 image][2].
+If you haven't installed the Agent yet, instructions can be found [in the Datadog Agent Integration page][1]. You can also consult our [Official Docker Agent 6 image][2].
 
 ## How to run it
 

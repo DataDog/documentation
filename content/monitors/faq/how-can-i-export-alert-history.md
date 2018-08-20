@@ -11,7 +11,7 @@ Customers sometimes require an audit trail of all Monitor Alerts that have trigg
 
 If you need a more specific timeframe, adjust the URL to add in the from and to arguments represented in epoch time, for example: https://app.datadoghq.com/report/hourly_data/monitor?from=XXXX&to=YYYY
 
-You can generate the relevant epoch times by leveraging an online epoch converter like [epochconverter][1]—or you can navigate to our [Events stream][2], set the desired timeframes, and then note the values from the resulting URL's from_ts and to_ts arguments referencing this [example][3].
+You can generate the relevant epoch times by leveraging an online epoch converter like [epochconverter][1]-or you can navigate to our [Events stream][2], set the desired timeframes, and then note the values from the resulting URL's from_ts and to_ts arguments referencing this [example][3].
 
 You can also fetch this CSV using curl:
 

@@ -7,7 +7,7 @@ external_redirect: /api/#query-the-event-stream
 
 ## Query the event stream
 The [event stream][1] can be queried and filtered by time, priority, sources and tags.
-Note: if the event you’re querying contains markdown formatting of any kind, you may see characters such as %,\,n in your output
+Note: if the event you're querying contains markdown formatting of any kind, you may see characters such as %,\,n in your output
 
 ##### ARGUMENTS
 * **`start`** [*required*]:  
