@@ -13,7 +13,7 @@ The Agent v6 configuration file uses **YAML** to better support complex configur
 | CentOS                               | `/etc/dd-agent/datadog.conf`                                               | `/etc/datadog-agent/datadog.yaml`    |
 | Debian                               | `/etc/dd-agent/datadog.conf`                                               | `/etc/datadog-agent/datadog.yaml`    |
 | Fedora                               | `/etc/dd-agent/datadog.conf`                                               | `/etc/datadog-agent/datadog.yaml`    |
-| MacOS x                              | `~/.datadog-agent/datadog.conf`                                            | `~/.datadog-agent/datadog.yaml`      |
+| macOS                                | `~/.datadog-agent/datadog.conf`                                            | `~/.datadog-agent/datadog.yaml`      |
 | RedHat                               | `/etc/dd-agent/datadog.conf`                                               | `/etc/datadog-agent/datadog.yaml`    |
 | Source                               | `/etc/dd-agent/datadog.conf`                                               | `/etc/datadog-agent/datadog.yaml`    |
 | Suse                                 | `/etc/dd-agent/datadog.conf`                                               | `/etc/datadog-agent/datadog.yaml`    |
@@ -31,7 +31,7 @@ Prior releases of Datadog Agent stored configuration files in `/dd-agent/conf.d/
 | CentOS                               | `/etc/dd-agent/conf.d/`                                              | `/etc/datadog-agent/conf.d/`   |
 | Debian                               | `/etc/dd-agent/conf.d/`                                              | `/etc/datadog-agent/conf.d/`   |
 | Fedora                               | `/etc/dd-agent/conf.d/`                                              | `/etc/datadog-agent/conf.d/`   |
-| MacOS x                              | `~/.datadog-agent/conf.d/`                                           | `~/.datadog-agent/conf.d/`     |
+| macOS                                | `~/.datadog-agent/conf.d/`                                           | `~/.datadog-agent/conf.d/`     |
 | RedHat                               | `/etc/dd-agent/conf.d/`                                              | `/etc/datadog-agent/conf.d/`   |
 | Source                               | `/etc/dd-agent/conf.d/`                                              | `/etc/datadog-agent/conf.d/`   |
 | Suse                                 | `/etc/dd-agent/conf.d/`                                              | `/etc/datadog-agent/conf.d/`   |

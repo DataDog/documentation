@@ -48,7 +48,7 @@ Manage the Datadog Agent and [Integrations][1] using configuration management to
 
 ## Log location
 
-* For Linux and Mac OS X, Datadog Agent logs are located in the `/var/log/datadog/` directory
+* For Linux and macOS, Datadog Agent logs are located in the `/var/log/datadog/` directory
 * For Windows, Datadog Agent logs are located in  the `C:\ProgramData\Datadog\logs` directory
 
 The Datadog logs do a rollover every 10MB. When a rollover occurs, **one** backup is kept (e.g. `agent.log.1`). If a previous backup exists, it is overwritten during the rollover.

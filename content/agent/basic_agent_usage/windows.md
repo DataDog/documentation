@@ -226,7 +226,7 @@ C:\"Program Files"\Datadog\"Datadog Agent"\embedded\python.exe "C:\Program Files
 
 #### Flare Fails to Upload
 
-On Linux and Mac OSX, the output of the flare command tells you where the compressed flare archive is saved. In case the file fails to upload to Datadog, you can retrieve it from this directory and manually add as an attachment to an email.
+On Linux and macOS, the output of the flare command tells you where the compressed flare archive is saved. In case the file fails to upload to Datadog, you can retrieve it from this directory and manually add as an attachment to an email.
 
 For Windows, you can find the location of this file by running the following from the Agent's python command prompt:
 

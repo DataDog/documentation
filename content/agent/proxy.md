@@ -244,7 +244,7 @@ Edit your supervisor configuration to disable SSL certificate verification. This
 * `/etc/dd-agent/supervisor.conf` on Red Hat-based systems
 * `/opt/local/datadog/supervisord/supervisord.conf` on SmartOS
 * `/usr/local/etc/datadog/supervisord/supervisord.conf` on FreeBSD
-* `~/.datadog-agent/supervisord/supervisord.conf` on Mac OS X
+* `~/.datadog-agent/supervisord/supervisord.conf` on macOS
 
 Assuming that the supervisor file is found at `<SUP_FILE>`
 
