@@ -9,6 +9,6 @@ This section details Datadogs HTTP API. It makes it easy to get data in and out 
 
 The Datadog API uses resource-oriented URLs, uses status codes to indicate the success or failure of requests and returns JSON from all requests. Let's dive in and see how it works.
 
-**Note**: cURL code examples assume usage of BASH and GNU coreutils. On OSX you can install coreutils via the [Homebrew package manager][1]: `brew install coreutils`
+**Note**: cURL code examples assume usage of BASH and GNU coreutils. On macOS you can install coreutils via the [Homebrew package manager][1]: `brew install coreutils`
 
 [1]: https://brew.sh/

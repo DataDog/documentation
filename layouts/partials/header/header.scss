@@ -263,5 +263,10 @@ body > header {
 @media (max-width: 1199px) {
   body.fr > header .mainnav .nav-button .btn {
     font-size: 15px;
+    min-width: 0px;
+    white-space: normal;
+    width: 120px;
+    line-height: 19px;
+    transform: translateY(-5px);
   }
 }
