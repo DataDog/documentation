@@ -2018,5 +2018,4 @@ params:
   home:
       meta_image: datadog_logo_share_tt.png
       meta_title: Getting Started with Datadog
-      # meta_description: See metrics from all of your apps, tools &amp; services in one place with Datadog&#039;s cloud monitoring as a service solution. Try it for free.
       meta_description: The leading service for cloud-scale monitoring.
