@@ -21,6 +21,12 @@ Classic:
       dogstatsd: true
       notes: Also supports APM.
       authors: Yoshifumi Kawai
+  - Clojure:
+    - name: clojure-statsd-client
+      link: https://github.com/unbounce/clojure-dogstatsd-client
+      dogstatsd: true
+      notes: A DogStatsD client for Clojure.
+      authors: Unbounce
   - Crystal:
     - name: statsd.cr
       link: https://github.com/miketheman/statsd.cr
