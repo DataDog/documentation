@@ -210,7 +210,7 @@ class PreBuild:
         dogweb_globs = ['integration/**/*_metadata.csv', 'integration/**/manifest.json',
                         'integration/**/service_checks.json', 'integration/**/README.md',
                         'dd/utils/context/source.py']
-        integrations_globs = ['**/metadata.csv', '**/manifest.json', '**/service_checks.json', '**/README.md','docs/**']
+        integrations_globs = ['*[!}]/metadata.csv', '*[!}]/manifest.json', '*[!}]/service_checks.json', '*[!}]/README.md', 'docs/**']
         extras_globs = ['**/metadata.csv', '**/manifest.json', '**/service_checks.json', '**/README.md']
 
         # sync from dogweb, download if we don't have it (token required)
