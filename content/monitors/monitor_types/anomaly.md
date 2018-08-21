@@ -48,11 +48,9 @@ Here you can specify:
 
 * The width of the gray band. "Deviations" is equivalent to the bounds parameter used in the anomalies function in dashboards.
 * The anomaly detection algorithm used. See the [next section below][2].
-* If a seasonal algorithm is chosen, the seasonality\*.
+* If a seasonal algorithm is chosen, the seasonality. NOTE: Machine learning algorithms require 2 weeks of evaluation to leverage weekly seasonality.
 * The [rollup][3] interval.
 * The percentage of points that need to be anomalous for alerting/warning/recovery.
-
-\**Machine learning algorithms require 2 weeks of evaluation to leverage weekly seasonality.*
 
 ### Anomaly Detection Algorithms
 
