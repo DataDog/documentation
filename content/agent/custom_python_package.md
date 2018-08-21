@@ -23,6 +23,8 @@ Python packages can be installed via the embedded `pip`:
 sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install <package_name>
 ```
 
+**Note:** On macOS, remove `-u dd-agent` from this command.
+
 ### Windows
 
 Custom Python packages can be installed using the Agent's embedded Python using the following command in Powershell:

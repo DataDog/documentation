@@ -12,7 +12,7 @@ Examples:
 * `@someonesname` – notifies the specific user named 'someonesname'.
 * `@test@example.com` -sends an email to `test@example.com`.
 
-Furthermore, if you have [HipChat][2], [Slack][3], [Webhooks][4], [Pagerduty][5], [VictorOps][6], or [Microsoft Teams][7] you can use:
+Furthermore, if you have [HipChat][2], [Slack][3], [Webhooks][4], [Pagerduty][5], or [VictorOps][6] you can use:
 
 * `@hipchat-<ROOM_NAME>` or `@slack-<ROOM_NAME>` or `@microsoft_team-<TEAM_NAME>` – posts the event or graph to that chat room.
 * `@webhook` – alerts or triggers whatever is attached to that webhook. [Check out this blogpost on Webhooks][1]!
@@ -26,4 +26,4 @@ Furthermore, if you have [HipChat][2], [Slack][3], [Webhooks][4], [Pagerduty][5]
 [4]: /integrations/webhooks
 [5]: /integrations/pagerduty
 [6]: /integrations/victorops
-[7]: /integrations/microsoft_teams
+
