@@ -1,5 +1,5 @@
 ---
-title: Utilisation basique de l'Agent pour OS X
+title: Utilisation basique de l'Agent pour macOS
 kind: documentation
 platform: OS X
 os: osx

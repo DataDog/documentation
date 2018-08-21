@@ -41,7 +41,7 @@ Les fichiers et dossiers de configuration de l'Agent se trouvent à:
 
 | OS                                         | Agent v5                                                                   | Agent v6                             |
 | :-------                                   | :--------                                                                  | :--------                            |
-| [Mac OS X][9]                              | `~/.datadog-agent/datadog.conf`                                            | `~/.datadog-agent/datadog.yaml`      |
+| [macOS][9]                                 | `~/.datadog-agent/datadog.conf`                                            | `~/.datadog-agent/datadog.yaml`      |
 | [Linux][10]                                | `/etc/dd-agent/datadog.conf`                                               | `/etc/datadog-agent/datadog.yaml`    |
 | [Source][11]                               | `~/.datadog-agent/agent/datadog.conf`                                      | `/etc/datadog-agent/datadog.yaml`    |
 | [Windows Server 2008, Vista and newer][12] | `\\ProgramData\Datadog\datadog.conf`                                       | `\\ProgramData\Datadog\datadog.yaml` |
@@ -49,7 +49,7 @@ Les fichiers et dossiers de configuration de l'Agent se trouvent à:
 
 ## Emplacement des logs
 
-* Pour Linux et Mac OS X, les logs de l'Agent Datadog se trouvent dans le dossier `/var/log/datadog/`
+* Pour Linux et macOS, les logs de l'Agent Datadog se trouvent dans le dossier `/var/log/datadog/`
 * Pour Windows, les logs de l'Agent Datadog se trouvent dans le dossier `c:\programdata\Datadog\logs`
 
 Tous les 10MB les fichiers de logs de l'Agent Datadog sont archivés. Lors d'un archivage, un backup est gardé (par exemple: `agent.log.1`). Si un backup existe déjà, il est écrasé par un nouvel archivage.

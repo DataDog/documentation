@@ -22,6 +22,8 @@ L'Agent vient également avec pip, installer les bibliothèques python en utilis
 sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install <package_name>
 ```
 
+**Note:** Dans macOS, supprimez `-u dd-agent` de cette commande.
+
 ### Windows
 
 Les packages python custom peuvent être installés à l'aide de l'Agent avec la commande suivante dans Powershell:

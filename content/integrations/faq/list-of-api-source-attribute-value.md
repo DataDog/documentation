@@ -15,6 +15,7 @@ kind: faq
 |Amazon Cloudfront|CLOUDFRONT|
 |Amazon Cloudsearch|CLOUDSEARCH|
 |Amazon Cloudtrail|CLOUDTRAIL|
+|Amazon Codebuild|CODEBUILD|
 |Amazon Codedeploy|CODEDEPLOY|
 |Amazon Directconnect|DIRECTCONNECT|
 |Amazon Dynamodb|DYNAMODB|
