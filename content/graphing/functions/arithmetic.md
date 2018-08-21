@@ -11,11 +11,11 @@ kind: documentation
 
 Transforms this sinus timeseries `sin{*}`: 
 
-{{< img src="graphing/functions/arithmetic/sinus_function.png" alt="Sinus function" responsive="true" style="width:80%;">}}
+{{< img src="graphing/functions/arithmetic/sinus.png" alt="Sinus function" responsive="true" style="width:80%;">}}
 
 into this one `abs(sin{*})`:
 
-{{< img src="graphing/functions/arithmetic/sinus_function_with_abs.png" alt="Sinus function with abs" responsive="true" style="width:80%;">}}
+{{< img src="graphing/functions/arithmetic/sinus_abs.png" alt="Sinus function with abs" responsive="true" style="width:80%;">}}
 
 ## Logarithm 
 
@@ -25,19 +25,35 @@ into this one `abs(sin{*})`:
 | :----    | :-------                                  | :---------               |
 | `log2()` | Graph the Base-2 logarithm of the metric. | `log2(<METRIC_NAME>{*})` |
 
+Example: 
+
+If we have a metric `x{*}` that just increment itself by 1 for each data point, then `log2(x{*})` would have the following shape: 
+
+{{< img src="graphing/functions/arithmetic/log2.png" alt=" log2 function" responsive="true" style="width:80%;">}}
+
 ### log10
 
 | Function  | Description                                | Example                   |
 | :----     | :-------                                   | :---------                |
 | `log10()` | Graph the Base-10 logarithm of the metric. | `log10(<METRIC_NAME>{*})` |
 
-## Cumulative Sum
+Example: 
 
+If we have a metric `x{*}` that just increment itself by 1 for each data point, then `log10(x{*})` would have the following shape: 
+
+{{< img src="graphing/functions/arithmetic/log10.png" alt="log10 function" responsive="true" style="width:80%;">}}
+
+## Cumulative Sum
 
 | Function   | Description                                                          | Example                    |
 | :----      | :-------                                                             | :---------                 |
 | `cumsum()` | Graph the cumulative sum of the metric over the visible time window. | `cumsum(<METRIC_NAME>{*})` |
 
+Example: 
+
+If we have a metric `const_1{*}` that is a constant with the value of `1`. Then `cumsum(const_1{*})` would have the following shape: 
+
+{{< img src="graphing/functions/arithmetic/cumsum.png" alt="cum sum function with abs" responsive="true" style="width:80%;">}}
 
 ## Integral
 
@@ -46,6 +62,8 @@ into this one `abs(sin{*})`:
 | `integral()` | Graph the integral of the metric. | `Graph the integral of the metric.` |
 
 **Note**: Datadog `integral()` is the cumulative sum of `[time delta] x [value delta]` over all consecutive pairs of points in the visible time window for a given metric.
+
+{{< img src="graphing/functions/arithmetic/integral.png" alt="integral function with abs" responsive="true" style="width:80%;">}}
 
 ## Other functions
 

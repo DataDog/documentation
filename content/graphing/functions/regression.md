@@ -24,6 +24,8 @@ The original metric is shown as a solid blue line. The purple dashed line is an 
 
 Example: 
 
+If we draw the function `sin(x) * x/2 + x` then `trend_line(sin(x) * x/2 + x)` would have the following shape: 
+
 {{< img src="graphing/functions/regression/trend_line_function.png" alt="Trend line function" responsive="true" style="width:80%;">}}
 
 ## Piecewise constant
@@ -32,6 +34,11 @@ Example:
 | :----                  | :-------                                                                               | :---------                                 |
 | `piecewise_constant()` | Approximate the metric with a piecewise function composed of constant-valued segments. | `piecewise_constant(avg:<METRIC_NAME>{*})` |
 
+Example: 
+
+If we draw the function `x` then `piecewise_constant(x)` would have the following shape: 
+
+{{< img src="graphing/functions/regression/piecewise_constant.png" alt="piecewise constant" responsive="true" style="width:80%;">}}
 
 ## Other functions
 

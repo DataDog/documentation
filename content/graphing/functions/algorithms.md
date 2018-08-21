@@ -15,7 +15,9 @@ The `anomalies()` function has two parameters:
 * `ALGORITHM`:  Methodology used to detect anomalies.
 * `BOUNDS`:  Width of the gray band. `bounds` can be interpreted as the standard deviations for your algorithm; a value of 2 or 3 should be large enough to include most "normal" points.
 
-{{< img src="graphing/functions/algorithms/anomalies_graph.png" alt="anomalies graph" responsive="true" style="width:80%;">}}
+Here's a two-minute video walkthrough:
+
+{{< vimeo 188833506 >}}
 
 See our [Anomaly Monitor][1] page for more info.
 
@@ -30,6 +32,8 @@ The `outliers()` function has three parameters:
 * `ALGORITHM`: The outliers algorithm to use.
 * `TOLERANCE`: The tolerance of the outliers algorithm.
 * `PERCENTAGE`: The percentage of outlying points required to mark a series as an outlier (available only for MAD and scaledMAD algorithms)
+
+{{< img src="graphing/functions/algorithms/outlier.gif" alt="outlier detection" responsive="true" style="width:70%;">}}
 
 See our [Outlier Monitor][2] page for more info.
 
