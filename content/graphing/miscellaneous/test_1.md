@@ -1,5 +1,5 @@
 ---
-title: Datadog Docs
+title: Documentation
 kind: Documentation
 draft: true
 ---

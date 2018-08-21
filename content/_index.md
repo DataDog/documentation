@@ -1,5 +1,5 @@
 ---
-title: Datadog Docs
+title: Documentation
 kind: documentation
 aliases:
   - /basic_agent_usage/
