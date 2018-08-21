@@ -26,4 +26,3 @@ Furthermore, if you have [HipChat][2], [Slack][3], [Webhooks][4], [Pagerduty][5]
 [4]: /integrations/webhooks
 [5]: /integrations/pagerduty
 [6]: /integrations/victorops
-
