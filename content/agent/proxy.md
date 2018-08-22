@@ -31,7 +31,7 @@ Traditional web proxies are supported natively by the Agent. If you need to conn
 
 ### Agent v6
 
-Set different proxy servers for `https` and `http` requests in your Agent `datadog.yaml` configuration file. 
+Set different proxy servers for `https` and `http` requests in your Agent `datadog.yaml` configuration file.
 The Agent uses `https` to send data to Datadog, but integrations might use `http` to gather metrics. No matter the proxied requests, you can activate SSL on your proxy server. Below are some configuration examples for your `datadog.yaml` file:
 
 Setting an HTTP proxy for all `https` requests:
@@ -115,7 +115,7 @@ This is the best option if you do not have a web proxy readily available in your
 ### Proxy metric forwarding with HAProxy
 #### HAProxy configuration
 
-We assume that HAProxy is installed on a host that has connectivity to Datadog.  
+We assume that HAProxy is installed on a host that has connectivity to Datadog.
 Use the following configuration file if you do not already have it configured.
 
 ```
@@ -196,8 +196,8 @@ Once the HAProxy configuration is in place, you can reload it or restart HAProxy
 #### Datadog Agent configuration
 ##### Agent v6
 
-Edit each Agent to point to HAProxy by setting its `dd_url` to the address of HAProxy (e.g. `haproxy.example.com`). 
-This `dd_url` setting can be found in the `datadog.yaml` file. 
+Edit each Agent to point to HAProxy by setting its `dd_url` to the address of HAProxy (e.g. `haproxy.example.com`).
+This `dd_url` setting can be found in the `datadog.yaml` file.
 
 `dd_url: https://haproxy.example.com:3834`
 
@@ -223,8 +223,8 @@ To verify that everything is working properly, review the HAProxy statistics at 
 
 ##### Agent v5
 
-Edit each Agent to point to HAProxy by setting its `dd_url` to the address of HAProxy (e.g. `haproxy.example.com`). 
-This `dd_url` setting can be found in the `datadog.conf` file. 
+Edit each Agent to point to HAProxy by setting its `dd_url` to the address of HAProxy (e.g. `haproxy.example.com`).
+This `dd_url` setting can be found in the `datadog.conf` file.
 
 `dd_url: https://haproxy.example.com:3834`
 
@@ -268,15 +268,15 @@ To verify that everything is working properly, review the HAProxy statistics at 
 
 We recommend using an actual proxy (a web proxy or HAProxy) to forward your traffic to Datadog, however if those options aren't available to you, it is possible to configure an instance of Agent v5 to serve as a proxy.
 
-1. Designate one node **running datadog-agent** as the proxy.  
+1. Designate one node **running datadog-agent** as the proxy.
     In this example assume that the proxy name is `proxy-node`. This node **must** be able to reach `https://app.datadoghq.com`.
 
-2. Verify SSL connectivity on `proxy-node`  
+2. Verify SSL connectivity on `proxy-node`
     ```
     curl -v https://app.datadoghq.com/account/login 2>&1 | grep "200 OK"
     ```
 
-3. Allow non-local traffic on `proxy-node` by changing the following line in `datadog.conf`.  
+3. Allow non-local traffic on `proxy-node` by changing the following line in `datadog.conf`.
      `# non_local_traffic: no` should read `non_local_traffic: yes`.
 
 4. Make sure `proxy-node` can be reached from the other nodes over port 17123. Start the Agent on the `proxy-node` and run on the other nodes:
