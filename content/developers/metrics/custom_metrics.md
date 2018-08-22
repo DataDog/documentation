@@ -123,9 +123,8 @@ The full payload is approximately \~ 100 bytes. However, with the DogStatsD API,
 
 ## Custom metrics best practices
 
-* For querying purposes, we encourage you to limit the number of tags applied to 1,000 tags per metric. Going over this amount [slows down the graphs][8] in your dashboards due to the increase in cardinality.
-* You can check the number of "distinct metrics" in the metric summary page (click a metric name to see the number of distinct metrics associated). If you need a higher custom metric limit, [email us][9].
-* [Additional information about billing and custom metrics][10].
+* You can check the number of "distinct metrics" in the metric summary page (click a metric name to see the number of distinct metrics associated). If you need a higher custom metric limit, [email us][8].
+* [Additional information about billing and custom metrics][9].
 
 [1]: /developers/dogstatsd
 [2]: /agent
@@ -134,6 +133,5 @@ The full payload is approximately \~ 100 bytes. However, with the DogStatsD API,
 [5]: /api/#rate-limiting
 [6]: https://app.datadoghq.com/account/usage/hourly
 [7]: https://app.datadoghq.com/metric/summary
-[8]: /graphing/faq/dashboard-loads-very-slowly
-[9]: /help
-[10]: /account_management/faq/
+[8]: /help
+[9]: /account_management/faq/
