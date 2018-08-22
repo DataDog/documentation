@@ -503,30 +503,59 @@ $(document).ready(function () {
         }
     }
 
-    $('.code-tabs .tab-content').find('.tab-pane').each(function(idx, item) {
-      var navTabs = $(this).closest('.code-tabs').find('.nav-tabs'),
-          title = $(this).attr('title');
-      navTabs.append('<li><a href="#">'+title+'</a></li');
-    });
+    if($('.code-tabs').length > 0) {
+        // page load set code tab titles
+        $('.code-tabs .tab-content').find('.tab-pane').each(function(idx, item) {
+          var navTabs = $(this).closest('.code-tabs').find('.nav-tabs'),
+              title = $(this).attr('title');
+          var lang = title.toLowerCase();
+          navTabs.append('<li><a href="#" data-lang="'+lang+'">'+title+'</a></li');
+        });
 
-    $('.code-tabs ul.nav-tabs').each(function() {
-      $(this).find("li:first").addClass('active');
-    })
+        // page load if we have a lang in url activate those tabs, otherwise activate first
+        var sPageURL = decodeURIComponent(window.location.search.substring(1));
+        var sURLVariables = sPageURL.split('&');
+        var lang = sURLVariables.filter(function(item) {
+           return item.split('=')[0] === 'lang';
+        }).map(function(item) {
+            return item.split('=')[1];
+        }).toString();
 
-    $('.code-tabs .tab-content').each(function() {
-      $(this).find("div:first").addClass('active').addClass('show');
-    });
+        // clicking a tab open them all
+        $('.code-tabs .nav-tabs a').click(function(e){
+          e.preventDefault();
 
-    $('.code-tabs .nav-tabs a').click(function(e){
-      e.preventDefault();
-      var tab = $(this).parent(),
-          tabIndex = tab.index(),
-          tabPanel = $(this).closest('.code-tabs'),
-          tabPane = tabPanel.find('.tab-pane').eq(tabIndex);
-      tabPanel.find('.active').removeClass('active');
-      tab.addClass('active');
-      tabPane.addClass('active');
-      tabPane.addClass('show');
-    });
+          // find all
+          var lang = $(this).data('lang');
+          $('.code-tabs .nav-tabs a[data-lang="'+lang+'"]').each(function() {
+             var tab = $(this).parent(),
+                 tabIndex = tab.index(),
+                 tabPanel = $(this).closest('.code-tabs'),
+                 tabPane = tabPanel.find('.tab-pane').eq(tabIndex);
+             tabPanel.find('.active').removeClass('active');
+             tab.addClass('active');
+             tabPane.addClass('active');
+             tabPane.addClass('show');
+          });
+
+          if (history.pushState) {
+            var url = window.location.href.replace(window.location.hash, '').replace(window.location.search, '');
+            history.pushState(null, null, url + '?lang=' + lang + window.location.hash)
+          }
+        });
+
+        // activate language from url or first
+        if(lang === '') {
+            $('.code-tabs .nav-tabs li:first a').click();
+        } else {
+            var match = $('.code-tabs .nav-tabs a[data-lang="'+lang+'"]:first');
+            if(match.length) {
+                match.click();
+            } else {
+                $('.code-tabs .nav-tabs li:first a').click();
+            }
+        }
+    }
+
 
 });
