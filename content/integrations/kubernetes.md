@@ -118,14 +118,23 @@ As the 5.17.0 release, Datadog Agent now supports built in [leader election opti
 
 The Kubernetes check includes the following service checks:
 
-* `kubernetes.kubelet.check`:
-  If `CRITICAL`, either `kubernetes.kubelet.check.ping` or `kubernetes.kubelet.check.syncloop` is in `CRITICAL` or `NO DATA` state.
+* `kubernetes_state.node.ready`:
+  Returns `CRITICAL` if a cluster node is not ready. Returns `OK` otherwise.
 
-* `kubernetes.kubelet.check.ping`:
-  If `CRITICAL` or `NO DATA`, Kubelet's API isn't available
+* `kubernetes_state.node.out_of_disk`:
+  Returns `CRITICAL` if a cluster node is out of disk space. Returns `OK` otherwise.
 
-* `kubernetes.kubelet.check.syncloop`:
-  If `CRITICAL` or `NO DATA`, Kubelet's sync loop that updates containers isn't working.
+* `kubernetes_state.node.disk_pressure`:
+  Returns `CRITICAL` if a cluster node is in a disk pressure state. Returns `OK` otherwise.
+
+* `kubernetes_state.node.memory_pressure`:
+  Returns `CRITICAL` if a cluster node is in a memory pressure state. Returns `OK` otherwise.
+
+* `kubernetes_state.node.network_unavailable`:
+  Returns `CRITICAL` if a cluster node is in a network unavailable state. Returns `OK` otherwise.
+
+* `kubernetes_state.pod.phase`:
+  Returns `CRITICAL` if the pod is in phase `Failed`, `WARNING` if it is `Pending`, `UNKNOWN` if it is `Unknown` or `OK` otherwise.
 
 ## Troubleshooting
 
