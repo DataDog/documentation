@@ -5,8 +5,8 @@ kind: documentation
 
 ## Absolute
 
-| Function | Description                            | Example                 |
-| :----    | :-------                               | :---------              |
+| Function | Description                             | Example                 |
+| :----    | :-------                                | :---------              |
 | `abs()`  | Graph the absolute value of the metric. | `abs(<METRIC_NAME>{*})` |
 
 Transforms this sinus timeseries `sin{*}`: 

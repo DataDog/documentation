@@ -6,8 +6,8 @@ disable_toc: true
 
 ## Anomalies
 
-| Function      | Description                                                                                | Example                                        |
-| :----         | :-------                                                                                   | :---------                                     |
+| Function      | Description                                                                                | Example                                                    |
+| :----         | :-------                                                                                   | :---------                                                 |
 | `anomalies()` | Overlay a gray band on the metric showing the expected behavior of a series based on past. | `anomalies(avg:<METRIC_NAME>{*}, '<ALGORITHM>', <BOUNDS>)` |
 
 The `anomalies()` function has two parameters:
@@ -23,8 +23,8 @@ See our [Anomaly Monitor][1] page for more info.
 
 ## Outliers
 
-| Function     | Description                | Example                                       |
-| :----        | :-------                   | :---------                                    |
+| Function     | Description                | Example                                                                    |
+| :----        | :-------                   | :---------                                                                 |
 | `outliers()` | Highlight outliers series. | `outliers(avg:<METRIC_NAME>{*}, '<ALGORITHM>', <TOLERANCE>, <PERCENTAGE>)` |
 
 The `outliers()` function has three parameters:

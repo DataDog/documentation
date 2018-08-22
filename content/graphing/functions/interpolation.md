@@ -5,8 +5,8 @@ kind: documentation
 
 ## Fill
 
-| Function | Description                                       | Example                               |
-| :----    | :-------                                          | :---------                            |
+| Function | Description                                       | Example                                    |
+| :----    | :-------                                          | :---------                                 |
 | `fill()` | Interpolate missing metric values for the metric. | `<METRIC_NAME>{*}.fill(<METHOD>, <LIMIT>)` |
 
 The `fill()` function has two parameters:

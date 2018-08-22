@@ -5,8 +5,8 @@ kind: documentation
 
 ## Top
 
-| Function | Description               | Example                                    |
-| :----    | :-------                  | :---------                                 |
+| Function | Description               | Example                                              |
+| :----    | :-------                  | :---------                                           |
 | `top()`  | Graph the top N elements. | `top(<METRIC_NAME>{*}, <LIMIT_TO>, '<BY>', '<DIR>')` |
 
 The `top()` function has three parameters:
