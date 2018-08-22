@@ -27,7 +27,7 @@ into this one `abs(sin{*})`:
 
 Example: 
 
-If we have a metric `x{*}` that just increment itself by 1 for each data point, then `log2(x{*})` would have the following shape: 
+If we have a metric `x{*}` that just increments itself by 1 for each data point, then `log2(x{*})` has the following shape: 
 
 {{< img src="graphing/functions/arithmetic/log2.png" alt=" log2 function" responsive="true" style="width:80%;">}}
 
@@ -39,7 +39,7 @@ If we have a metric `x{*}` that just increment itself by 1 for each data point, 
 
 Example: 
 
-If we have a metric `x{*}` that just increment itself by 1 for each data point, then `log10(x{*})` would have the following shape: 
+If we have a metric `x{*}` that just increments itself by 1 for each data point, then `log10(x{*})` has the following shape: 
 
 {{< img src="graphing/functions/arithmetic/log10.png" alt="log10 function" responsive="true" style="width:80%;">}}
 
@@ -51,7 +51,7 @@ If we have a metric `x{*}` that just increment itself by 1 for each data point, 
 
 Example: 
 
-If we have a metric `const_1{*}` that is a constant with the value of `1`. Then `cumsum(const_1{*})` would have the following shape: 
+If we have a metric `const_1{*}` that is a constant with the value of `1`, then `cumsum(const_1{*})` has the following shape: 
 
 {{< img src="graphing/functions/arithmetic/cumsum.png" alt="cum sum function with abs" responsive="true" style="width:80%;">}}
 
@@ -61,7 +61,7 @@ If we have a metric `const_1{*}` that is a constant with the value of `1`. Then 
 | :----        | :-------                          | :---------                          |
 | `integral()` | Graph the integral of the metric. | `Graph the integral of the metric.` |
 
-**Note**: Datadog `integral()` is the cumulative sum of `[time delta] x [value delta]` over all consecutive pairs of points in the visible time window for a given metric.
+**Note**: Datadog's `integral()` is the cumulative sum of `[time delta] x [value delta]` over all consecutive pairs of points in the visible time window for a given metric.
 
 {{< img src="graphing/functions/arithmetic/integral.png" alt="integral function with abs" responsive="true" style="width:80%;">}}
 
