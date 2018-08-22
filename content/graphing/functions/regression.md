@@ -10,7 +10,7 @@ kind: documentation
 | `robust_trend()` | Fit a robust regression trend line using Huber loss. | `robust_trend(avg:<METRIC_NAME>{*})` |
 
 
-The most common type of linear regression -- ordinary least squares (OLS) -- can be heavily influenced by a small number of points with extreme values. Robust regression is an alternative method for fitting a regression line; it is not influenced as strongly by a small number of extreme values. As an example, see the following plot.
+The most common type of linear regression—ordinary least squares (OLS)—can be heavily influenced by a small number of points with extreme values. Robust regression is an alternative method for fitting a regression line; it is not influenced as strongly by a small number of extreme values. As an example, see the following plot.
 
 {{< img src="graphing/functions/regression/robust_trend.png" alt="robust trend" responsive="true" style="width:80%;">}}
 
