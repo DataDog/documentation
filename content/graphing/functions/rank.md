@@ -11,22 +11,22 @@ kind: documentation
 
 The `top()` function has three parameters:
 
-* `LIMIT_TO`: The number of series to be displayed, to chose between:
+* `LIMIT_TO`: The number of series to be displayed; choose from:
     - `5`
     - `10`
     - `25`
     - `50`
     - `100`
-* `BY`: Aggregation method, to chose between:
+* `BY`: Aggregation method; choose from:
     - `max`: Maximum of all metrics values.
     - `mean`: Mean of all metrics values.
     - `min`: Min of all metrics values.
     - `sum`: Sum of all metrics values. 
-    - `last`: Last metrics values.
-    - `l2norm`: Uses the [Norm][1] of the time series, which is always positive, to rank the series.
+    - `last`: Last metrics value.
+    - `l2norm`: Uses the [norm][1] of the timeseries, which is always positive, to rank the series.
     - `area`: Signed area under the curve being graphed, which can be negative
     
-* `DIR`: The direction of ranking, to chose between:
+* `DIR`: The direction of ranking; choose between:
     - `asc`: Rank the results in ascending order. 
     - `desc`: Rank the results in descending order.
 
@@ -34,7 +34,7 @@ The `top()` method also has convenience functions of the following form, all of 
 
 `[top, bottom][5, 10, 15, 20]_[mean, min, max, last, area, l2norm]()`
 
-For example, `bottom10_min()` retrieves lowest-valued 10 series using the `min` metric.
+For example, `bottom10_min()` retrieves the 10 lowest-valued series using the `min` metric.
 
 ## Other functions
 
