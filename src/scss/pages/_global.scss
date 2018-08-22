@@ -167,23 +167,29 @@ code {
 .code-tabs {
   ul {
     list-style-type: none;
-    background:$ddpurple;
-    color:#fff;
-    padding:5px;
+    padding:0;
     li {
       &:before {
         content: "" !important;
+        margin:0 !important;
+        float:none !important;
       }
       &.active {
         a {
-          color:#fff;
+          color:$ddpurple;
+          border-bottom:1px solid $ddpurple;
         }
       }
       a {
-        color: rgba(255, 255, 255, 0.5);
-        padding: 0px 5px;
+        color: #000;
+        padding: 10px 22px 10px 22px;
+        border-bottom:1px solid #D6D6D6;
+        display: inline-block;
       }
     }
+  }
+  .tab-content {
+    padding-top:26px;
   }
 }
 
