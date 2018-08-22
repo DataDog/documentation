@@ -15,7 +15,7 @@ Note: The span value is the number of data points. So `ewma_3()` uses the last 3
 
 Example: 
 
-If we have a metric `10 + x%10 {*}` that just increment itself by 1 starting from 10 until it drops back to 10 after 10 datapoints, then `ewma3(10 + x%10 {*})` would have the following shape: 
+If we have a metric `10 + x%10 {*}` that just increments itself by 1 starting from 10 until it drops back to 10 after 10 data points, then `ewma3(10 + x%10 {*})` has the following shape: 
 
 {{< img src="graphing/functions/smoothing/ewma3.png" alt="EWMA3" responsive="true" style="width:80%;">}}
 
@@ -29,7 +29,7 @@ Note: The span value is the number of data points. So `ewma_5()` uses the last 5
 
 Example: 
 
-If we have a metric `10 + x%10 {*}` that just increment itself by 1 starting from 10 until it drops back to 10 after 10 datapoints, then `ewma5(10 + x%10 {*})` would have the following shape: 
+If we have a metric `10 + x%10 {*}` that just increments itself by 1 starting from 10 until it drops back to 10 after 10 data points, then `ewma5(10 + x%10 {*})` has the following shape: 
 
 {{< img src="graphing/functions/smoothing/ewma5.png" alt="EWMA5" responsive="true" style="width:80%;">}}
 
@@ -43,7 +43,7 @@ Note: The span value is the number of data points. So `ewma_10()` uses the last 
 
 Example: 
 
-If we have a metric `10 + x%10 {*}` that just increment itself by 1 starting from 10 until it drops back to 10 after 10 datapoints, then `ewma10(10 + x%10 {*})` would have the following shape: 
+If we have a metric `10 + x%10 {*}` that just increments itself by 1 starting from 10 until it drops back to 10 after 10 data points, then `ewma10(10 + x%10 {*})` has the following shape: 
 
 {{< img src="graphing/functions/smoothing/ewma10.png" alt="EWMA10" responsive="true" style="width:80%;">}}
 
@@ -57,7 +57,7 @@ Note: The span value is the number of data points. So `ewma_20()` uses the last 
 
 Example: 
 
-If we have a metric `10 + x%10 {*}` that just increment itself by 1 starting from 10 until it drops back to 10 after 10 datapoints, then `ewma20(10 + x%10 {*})` would have the following shape: 
+If we have a metric `10 + x%10 {*}` that just increments itself by 1 starting from 10 until it drops back to 10 after 10 data points, then `ewma20(10 + x%10 {*})` has the following shape: 
 
 {{< img src="graphing/functions/smoothing/ewma20.png" alt="EWMA20" responsive="true" style="width:80%;">}}
 
