@@ -65,7 +65,8 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 The `dd-trace` library includes support for a number of modules. If you would like support for a module that is not listed, [contact support][7] to share a request.
 
-#### Web Frameworks
+{{< tabs >}}
+{{% tab "Web Frameworks" %}}
 
 | Module        | Versions    | Support Type    |
 | :----------   | :---------- | :-------------- |
@@ -75,14 +76,25 @@ The `dd-trace` library includes support for a number of modules. If you would li
 | [koa][10]     |             | Coming Soon     |
 | [restify][11] |             | Coming Soon     |
 
-#### Native Modules
+[8]: https://expressjs.com/
+[22]: https://github.com/graphql/graphql-js
+[9]: https://hapijs.com/
+[10]: https://koajs.com/
+[11]: http://restify.com/
+
+{{% /tab %}}
+{{% tab "Native Modules" %}}
 
 | Module               | Support Type    |
 | :------------------- | :-------------- |
 | [http][12]           | Fully Supported |
 | [https][13]          | Fully Supported |
 
-#### Data Stores
+[12]: https://nodejs.org/api/http.html
+[13]: https://nodejs.org/api/https.html
+
+{{% /tab %}}
+{{% tab "Data Stores" %}}
 
 | Module                 | Versions    | Support Type    |
 | :----------            | :---------- | :-------------- |
@@ -96,7 +108,18 @@ The `dd-trace` library includes support for a number of modules. If you would li
 | [ioredis][15]          |             | Coming Soon     |
 | [memcached][24]        |             | Coming Soon     |
 
-#### Workers
+[14]: https://github.com/elastic/elasticsearch-js
+[15]: https://github.com/luin/ioredis
+[16]: http://mongodb.github.io/node-mongodb-native/core/
+[17]: https://github.com/mysqljs/mysql
+[18]: https://github.com/sidorares/node-mysql2
+[19]: https://node-postgres.com/
+[20]: https://github.com/NodeRedis/node_redis
+[24]: https://github.com/3rd-Eden/memcached
+[25]: https://github.com/datastax/nodejs-driver
+
+{{% /tab %}}
+{{% tab "Workers" %}}
 
 | Module           | Versions    | Support Type    |
 | :----------      | :---------- | :-------------- |
@@ -104,6 +127,12 @@ The `dd-trace` library includes support for a number of modules. If you would li
 | [kafka-node][26] |             | Coming Soon     |
 
 **Note**: amqplib supports several message brokers including RabbitMQ and ActiveMQ.
+
+[21]: https://github.com/squaremo/amqp.node
+[26]: https://github.com/SOHU-Co/kafka-node
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 
@@ -117,22 +146,3 @@ The `dd-trace` library includes support for a number of modules. If you would li
 [4]: https://datadog.github.io/dd-trace-js/#tracer-settings
 [6]: https://datadog.github.io/dd-trace-js/#integrations
 [7]: https://docs.datadoghq.com/help
-[8]: https://expressjs.com/
-[9]: https://hapijs.com/
-[10]: https://koajs.com/
-[11]: http://restify.com/
-[12]: https://nodejs.org/api/http.html
-[13]: https://nodejs.org/api/https.html
-[14]: https://github.com/elastic/elasticsearch-js
-[15]: https://github.com/luin/ioredis
-[16]: http://mongodb.github.io/node-mongodb-native/core/
-[17]: https://github.com/mysqljs/mysql
-[18]: https://github.com/sidorares/node-mysql2
-[19]: https://node-postgres.com/
-[20]: https://github.com/NodeRedis/node_redis
-[21]: https://github.com/squaremo/amqp.node
-[22]: https://github.com/graphql/graphql-js
-[23]: https://datadog.github.io/dd-trace-js/#amqplib-limitations
-[24]: https://github.com/3rd-Eden/memcached
-[25]: https://github.com/datastax/nodejs-driver
-[26]: https://github.com/SOHU-Co/kafka-node

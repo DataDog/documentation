@@ -51,7 +51,8 @@ We officially support the Java JRE 1.7 and higher of both Oracle JDK and OpenJDK
 
 ## Integrations
 
-### Web Frameworks
+{{< tabs >}}
+{{% tab "Web Frameworks" %}}
 
 `dd-java-agent` includes support for automatically tracing the following web frameworks.
 
@@ -73,7 +74,10 @@ Also, frameworks like Spring Boot and Dropwizard inherently work because they us
 
 Don't see your desired web frameworks? We're continually adding additional support, [check with our team][2] to see if we can help.
 
-### Networking Frameworks
+[2]: /help
+
+{{% /tab %}}
+{{% tab "Networking Frameworks" %}}
 
 `dd-java-agent` includes support for automatically tracing the following networking frameworks.
 
@@ -95,7 +99,10 @@ Don't see your desired web frameworks? We're continually adding additional suppo
 
 Don't see your desired networking framework? We're continually adding additional support, [check with our team][2] to see if we can help.
 
-### Datastores
+[2]: /help
+
+{{% /tab %}}
+{{% tab "Datastores" %}}
 
 `dd-java-agent` includes support for automatically tracing the following database frameworks/drivers.
 
@@ -123,7 +130,9 @@ Don't see your desired networking framework? We're continually adding additional
 
 Don't see your desired datastores? We're continually adding additional support, [check with our team][2] to see if we can help.
 
-### Other Frameworks
+[2]: /help
+{{% /tab %}}
+{{% tab "Other Frameworks" %}}
 
 `dd-java-agent` includes support for automatically tracing the following other frameworks.
 
@@ -139,6 +148,12 @@ To improve visibility into applications using unsupported frameworks, consider:
 * Adding custom instrumentation (with OpenTracing or the `@Trace` annotation).
 * [Submitting a pull request][1] with instrumentation for inclusion in a future release.
 * [Contact support][2] and submit a feature request.
+
+[1]: https://github.com/DataDog/documentation#outside-contributors
+[2]: /help
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Configuration
 

@@ -49,11 +49,10 @@ For more examples, see the [Getting Started section of library documentation][2]
 
 ## Compatibility
 
-### Framework Compatibility
+{{< tabs >}}
+{{% tab "Framework Compatibility" %}}
 
 The ddtrace library includes support for a number of web frameworks, including:
-
-___
 
 | Framework | Framework Documentation        | PyPi Datadog Documentation                    |
 |-----------|--------------------------------|-----------------------------------------------|
@@ -64,11 +63,10 @@ ___
 | Pylons    | http://pylonsproject.org/      | http://pypi.datadoghq.com/trace/docs/#pylons  |
 | Pyramid   | https://trypyramid.com/        | http://pypi.datadoghq.com/trace/docs/#pyramid |
 
-### Library Compatibility
+{{% /tab %}}
+{{% tab "Library Compatibility" %}}
 
-It also includes support for the following data stores and libraries:
-
-___
+The ddtrace library includes support for the following data stores and libraries:
 
 | Library       | Library Documentation                         | PyPi Datadog Documentation                          |
 |---------------|-----------------------------------------------|-----------------------------------------------------|
@@ -82,6 +80,10 @@ ___
 | Redis         | https://redis.io/                             | http://pypi.datadoghq.com/trace/docs/#redis         |
 | SQLAlchemy    | http://www.sqlalchemy.org/                    | http://pypi.datadoghq.com/trace/docs/#sqlalchemy    |
 | SQLite        | https://www.sqlite.org/                       | http://pypi.datadoghq.com/trace/docs/#sqlite        |
+
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Example: Simple tracing
 

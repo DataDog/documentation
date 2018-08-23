@@ -125,7 +125,28 @@ env:
 Your application level tracers must then be configured to submit traces to this address.
 See the examples below for each supported language:
 
-#### Python
+{{< tabs >}}
+{{% tab "Java" %}}
+
+Update the Java Agent configuration via environment variables:
+
+```bash
+DD_AGENT_HOST=$DD_AGENT_SERVICE_HOST \
+DD_AGENT_PORT=$DD_AGENT_SERVICE_PORT \
+java -javaagent:/path/to/the/dd-java-agent.jar -jar /your/app.jar
+```
+
+or via system properties:
+
+```bash
+java -javaagent:/path/to/the/dd-java-agent.jar \
+     -Ddd.agent.host=$DD_AGENT_SERVICE_HOST \
+     -Ddd.agent.port=$DD_AGENT_SERVICE_PORT \
+     -jar /your/app.jar
+```
+
+{{% /tab %}}
+{{% tab "Python" %}}
 
 ```python
 import os
@@ -137,7 +158,8 @@ tracer.configure(
 )
 ```
 
-#### Ruby
+{{% /tab %}}
+{{% tab "Ruby" %}}
 
 ```ruby
 Datadog.configure do |c|
@@ -146,7 +168,8 @@ Datadog.configure do |c|
 end
 ```
 
-#### Go
+{{% /tab %}}
+{{% tab "Go" %}}
 
 ```go
 package main
@@ -169,33 +192,18 @@ func main() {
 
 ```
 
-#### Java
+{{% /tab %}}
+{{% tab "Node.js" %}}
 
-Update the Java Agent configuration via environment variables:
-
-```bash
-DD_AGENT_HOST=$DD_AGENT_SERVICE_HOST \
-DD_AGENT_PORT=$DD_AGENT_SERVICE_PORT \
-java -javaagent:/path/to/the/dd-java-agent.jar -jar /your/app.jar
-```
-
-or via system properties:
-
-```bash
-java -javaagent:/path/to/the/dd-java-agent.jar \
-     -Ddd.agent.host=$DD_AGENT_SERVICE_HOST \
-     -Ddd.agent.port=$DD_AGENT_SERVICE_PORT \
-     -jar /your/app.jar
-```
-
-#### Node.js
-
-```Node.js
+```js
 const tracer = require('dd-trace').init({
   hostname: process.env.DD_AGENT_SERVICE_HOST,
   port: process.env.DD_AGENT_SERVICE_PORT
 })
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 

@@ -30,7 +30,8 @@ The unstable alpha tracer can be [accessed today on Github][2].
 APM PHP support is currently in alpha and provides limited automatic instrumentation. Planned beta support will provide automatic instrumentation for popular frameworks and libraries. See some of these listed below.
 Don't see your desired frameworks or libraries? Please let us know more about your needs through [this survey][1].
 
-### Web Frameworks
+{{< tabs >}}
+{{% tab "Web Frameworks" %}}
 
 | Module         | Versions    | Support Type    |
 | :-----------   | :---------- | :-------------- |
@@ -41,7 +42,10 @@ Don't see your desired frameworks or libraries? Please let us know more about yo
 
 Don't see your desired web frameworks? Please let us know more about your needs through [this survey][1].
 
-### Data Stores
+[1]: https://goo.gl/forms/rKjH2J6nJ585KXri2
+
+{{% /tab %}}
+{{% tab "Data Stores" %}}
 
 | Module        | Versions    | Support Type |
 | :------------ | :---------- | :----------- |
@@ -51,6 +55,10 @@ Don't see your desired web frameworks? Please let us know more about your needs 
 
 Don't see your desired data stores? Please let us know more about your needs through [this survey][1].
 
+[1]: https://goo.gl/forms/rKjH2J6nJ585KXri2
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 

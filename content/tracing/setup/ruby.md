@@ -157,11 +157,11 @@ For more details about how to activate and configure the processing pipeline, ch
 
 ## Compatibility
 
-### Interpreter Compatibility
+{{< tabs >}}
+{{% tab "Interpreter Compatibility" %}}
 
 Ruby APM includes support for the following Ruby interpreters:
 
-___
 
 | Type  | Documentation              | Version | Support type |
 | ----- | -------------------------- | -----   | ------------ |
@@ -178,11 +178,11 @@ ___
 
 *Experimental* indicates most features should be available, but unverified.
 
-### Web server compatibility
+{{% /tab %}}
+{{% tab "Web server Compatibility" %}}
 
 Ruby APM includes support for the following web servers:
 
-___
 
 | Type      | Documentation                     | Version      | Support type |
 | --------- | --------------------------------- | ------------ | ------------ |
@@ -190,7 +190,8 @@ ___
 | Unicorn   | https://bogomips.org/unicorn/     | 4.8+ / 5.1+  | Full         |
 | Passenger | https://www.phusionpassenger.com/ | 5.0+         | Full         |
 
-### Library compatibility
+{{% /tab %}}
+{{% tab "Library compatibility" %}}
 
 Ruby APM includes support for the following libraries and frameworks:
 
@@ -218,17 +219,6 @@ Ruby APM includes support for the following libraries and frameworks:
 | Sinatra        | `sinatra`       | `>= 1.4.5`             | *[Link][48]*     | *[Link][49]* |
 | Sucker Punch   | `sucker_punch`  | `>= 2.0`               | *[Link][50]*     | *[Link][51]* |
 
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /tracing/setup
-[2]: /tracing/setup/docker/
-[3]: https://app.datadoghq.com/apm/services
-[4]: https://docs.datadoghq.com/tracing/visualization/
-[6]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#tracer-settings
-[7]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#priority-sampling
-[9]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#processing-pipeline
 [10]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#active-record
 [11]: https://github.com/rails/rails/tree/master/activerecord
 [12]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#aws
@@ -271,3 +261,18 @@ Ruby APM includes support for the following libraries and frameworks:
 [49]: https://github.com/sinatra/sinatra
 [50]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#sucker-punch
 [51]: https://github.com/brandonhilkert/sucker_punch
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /tracing/setup
+[2]: /tracing/setup/docker/
+[3]: https://app.datadoghq.com/apm/services
+[4]: https://docs.datadoghq.com/tracing/visualization/
+[6]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#tracer-settings
+[7]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#priority-sampling
+[9]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#processing-pipeline
