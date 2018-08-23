@@ -515,8 +515,8 @@ $(document).ready(function () {
         // page load if we have a lang in url activate those tabs, otherwise activate first
         var sPageURL = decodeURIComponent(window.location.search.substring(1));
         var sURLVariables = sPageURL.split('&');
-        var lang = sURLVariables.filter(function(item) {
-           return item.split('=')[0] === 'lang';
+        var tab = sURLVariables.filter(function(item) {
+           return item.split('=')[0] === 'tab';
         }).map(function(item) {
             return item.split('=')[1];
         }).toString();
@@ -540,15 +540,15 @@ $(document).ready(function () {
 
           if (history.pushState) {
             var url = window.location.href.replace(window.location.hash, '').replace(window.location.search, '');
-            history.pushState(null, null, url + '?lang=' + lang + window.location.hash)
+            history.pushState(null, null, url + '?tab=' + lang + window.location.hash)
           }
         });
 
         // activate language from url or first
-        if(lang === '') {
+        if(tab === '') {
             $('.code-tabs .nav-tabs li:first a').click();
         } else {
-            var match = $('.code-tabs .nav-tabs a[data-lang="'+lang+'"]:first');
+            var match = $('.code-tabs .nav-tabs a[data-lang="'+tab+'"]:first');
             if(match.length) {
                 match.click();
             } else {
