@@ -24,7 +24,9 @@ further_reading:
 
 This page covers Autodiscovery with Agent 6 only, [refer to the dedicated documentation to setup Autodiscovery with Agent 5][1]
 
-Watch our [Datadog Autodiscovery on Docker with Labels using Agent v6 video][24] for a bird's eye view of this functionality.
+Here's a 5-minute video for a bird's eye view of Datadog Agent v6 Autodiscovery functionality.
+
+{{< wistia mlxx0j6txw >}}
 
 ## How it Works
 
