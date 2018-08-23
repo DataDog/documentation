@@ -90,3 +90,29 @@ console.log("hello tabs");
 {{% /tab %}}
 {{< /tabs >}}
 
+
+## problematic tabs
+
+{{< tabs >}}
+{{% tab "Other Frameworks" %}}
+
+`dd-java-agent` includes support for automatically tracing the following other frameworks.
+
+| Framework     | Versions | Support Type    | JVM Arg to enable                   |
+| :------------ | :------- | :-------------- | :----------------                   |
+| Hystrix       | 1.4+     | Fully Supported | N/A                                 |
+| JSP Rendering | 2.3+     | Beta            | `-Ddd.integration.jsp.enabled=true` |
+
+Don't see your desired framework? We're continually adding additional support, [check with our team][2] to see if we can help.
+
+To improve visibility into applications using unsupported frameworks, consider:
+
+* Adding custom instrumentation (with OpenTracing or the `@Trace` annotation).
+* [Submitting a pull request][1] with instrumentation for inclusion in a future release.
+* [Contact support][2] and submit a feature request.
+
+[1]: https://github.com/DataDog/documentation#outside-contributors
+[2]: /help
+
+{{% /tab %}}
+{{< /tabs >}}
