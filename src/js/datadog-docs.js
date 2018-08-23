@@ -508,7 +508,7 @@ $(document).ready(function () {
         $('.code-tabs .tab-content').find('.tab-pane').each(function(idx, item) {
           var navTabs = $(this).closest('.code-tabs').find('.nav-tabs'),
               title = $(this).attr('title');
-          var lang = title.toLowerCase();
+          var lang = title.toLowerCase().replace(/\W/g, '');
           navTabs.append('<li><a href="#" data-lang="'+lang+'">'+title+'</a></li');
         });
 
@@ -556,6 +556,4 @@ $(document).ready(function () {
             }
         }
     }
-
-
 });
