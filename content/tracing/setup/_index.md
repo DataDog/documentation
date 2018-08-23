@@ -68,6 +68,9 @@ To start tracing your application:
   - [Java][12]
   - [Python][13]
   - [Ruby][14]
+  - [.NET][22]
+  - [PHP][23]
+  - [Node.js][24]
 
     To instrument an application written in a language that does not yet have official library support, visit our list of [community tracing libraries][15].
 
@@ -76,7 +79,8 @@ To start tracing your application:
 ## Agent configuration
 
 The APM Agent (also known as *Trace Agent*) is shipped by default with the
-Agent 6 in the Linux, MacOS, and Windows packages. The APM Agent is enabled by default on Linux. To enable the check on other platforms or disable it on Linux, update the `apm_config` key in your `datadog.yaml`:
+Agent 6 in the Linux, MacOS, and Windows packages. 
+The APM Agent is enabled by default on Linux. To enable the check on other platforms or disable it on Linux, update the `apm_config` key in your `datadog.yaml`:
 
 ```
 apm_config:
@@ -104,79 +108,6 @@ For more information about the Datadog Agent, see the [dedicated doc page][18] o
 
 [Reference the dedicated documentation to setup tracing with Docker][5].
 
-## Scrubbing sensitive information
-
-### Automatic scrubbing
-
-Automatic scrubbing is available for some services, such as ElasticSearch, MongoDB, Redis, Memcached, and HTTP server and client request URLs. Below is an example configuration snippet documenting all the available options.
-
-```
-apm_config:
-  # Defines obfuscation rules for sensitive data. Disabled by default.
-  obfuscation:
-    # ElasticSearch obfuscation rules. Applies to spans of type "elasticsearch".
-    # More specifically, to the "elasticsearch.body" tag.
-    elasticsearch:
-      enabled: true
-      # Values for the keys listed here will not be obfuscated.
-      keep_values:
-        - client_id
-        - product_id
-
-    # MongoDB obfuscation rules. Applies to spans of type "mongodb".
-    # More specifically, to the "mongodb.query" tag.
-    mongodb:
-      enabled: true
-      # Values for the keys listed here will not be obfuscated.
-      keep_values:
-        - document_id
-        - template_id
-
-    # HTTP obfuscation rules for "http.url" tags in spans of type "http".
-    http:
-      # If true, query strings in URLs will be obfuscated.
-      remove_query_string: true
-      # If true, path segments in URLs containing digits will be replaced by "?"
-      remove_paths_with_digits: true
-
-    # When enabled, stack traces will be removed (replaced by "?").
-    remove_stack_traces: true
-
-    # Obfuscation rules for spans of type "redis". Applies to the "redis.raw_command" tags.
-    redis:
-      enabled: true
-
-    # Obfuscation rules for spans of type "memcached". Applies to the "memcached.command" tag.
-    memcached:
-      enabled: true
-```
-
-### Replace rules
-
-To scrub sensitive data from your span's tags, use the `replace_tags` setting. It is a list containing one or more groups of parameters that describe how to perform replacements of sensitive data within your tags. These parameters are:
-
-* `name`: The key of the tag to replace. To match all tags, use `*`. To match the resource, use `resource.name`.
-* `pattern`: The regexp pattern to match against.
-* `repl`: The replacement string.
-
-For example:
-
-```
-apm_config:
-  replace_tags:
-    # Replace all numbers following the `token/` string in the tag "http.url" with "?":
-    - name: "http.url"
-      pattern: "token/(.*)"
-      repl: "?"
-    # Replace all the occurrences of "foo" in any tag with "bar":
-    - name: "*"
-      pattern: "foo"
-      repl: "bar"
-    # Remove all "error.stack" tag's value.
-    - name: "error.stack"
-      pattern: "(?s).*"
-```
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -202,3 +133,6 @@ apm_config:
 [19]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [20]: https://github.com/DataDog/datadog-trace-agent/#run-on-linux
 [21]: https://github.com/DataDog/datadog-trace-agent/blob/6.4.1/datadog.example.yaml
+[22]: /tracing/setup/dotnet
+[23]: /tracing/setup/php
+[24]: /tracing/setup/nodejs

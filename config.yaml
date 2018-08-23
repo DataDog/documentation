@@ -590,10 +590,15 @@ languages:
           url: "tracing/advanced_usage/logging/"
           weight: 260
           parent: customnav_tracingnav_advanced_usage
+        - identifier: customnav_tracingnav_scrubbing
+          name: "Scrubbing"
+          url: "tracing/advanced_usage/scrubbing/"
+          weight: 270
+          parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_debugging
           name: "Debugging"
           url: "tracing/advanced_usage/debugging/"
-          weight: 270
+          weight: 280
           parent: customnav_tracingnav_advanced_usage
 
         # Using the APM UI
@@ -1628,10 +1633,15 @@ languages:
           url: "tracing/advanced_usage/logging/"
           weight: 260
           parent: customnav_tracingnav_advanced_usage
+        - identifier: customnav_tracingnav_scrubbing
+          name: "Scrubbing"
+          url: "tracing/advanced_usage/scrubbing/"
+          weight: 270
+          parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_debugging
           name: "Debugging"
           url: "tracing/advanced_usage/debugging/"
-          weight: 270
+          weight: 280
           parent: customnav_tracingnav_advanced_usage
 
         # Using the APM UI
