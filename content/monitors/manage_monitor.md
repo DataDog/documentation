@@ -93,6 +93,12 @@ In writing your search queries, you can use all the same fields available on the
 * It adds the `triggered` field, which lets you filter monitors by how long they've been triggered.
 * It also adds the `group` field, which helps you narrow down search results for monitors grouped by more than one tag. Say you have a monitor grouped by `host` and `env`. You search for this monitor by title and get four rows, where the groups are `host:web01,env:dev`, `host:web02,env:dev`, `host:web01,env:prod`, and `host:web02,env:prod`. Use the `group` field to only show, for example, prod hosts (`group:"env:prod"`) or web02 hosts (`group:"host:web02"`).
 
+## Monitor Tags
+
+{{< img src="monitors/manage_monitor/monitor-tags.png" alt="Monitor tags" responsive="true" style="width:80%;" >}}
+
+You can choose to add tags directly to your monitors that you can use for filtering on the [triggered][4] or [manage monitor][1] pages, or for scheduling downtimes.
+
 ## Further Reading 
 
 {{< partial name="whats-next/whats-next.html" >}}

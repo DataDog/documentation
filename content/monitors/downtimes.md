@@ -46,11 +46,11 @@ The Manage Downtime page displays a list of active and scheduled downtimes. Sele
 To schedule downtime, click the "Schedule Downtime" button in the upper right.
 
 1. Choose what to silence.
-   {{< img src="monitors/downtimes/downtime-silence.png" alt="downtime-silence" responsive="true" style="width:80%;">}}
+   {{< img src="monitors/downtimes/choose-what-to-silence.png" alt="downtime-silence" responsive="true" style="width:80%;">}}
    **Silencing by monitor name**  
    You must select at least one monitor. If you choose to leave the selection field empty, all monitors are silenced by default. You can also select a scope to constrain your downtime to a specific host, device, or arbitrary tag. Refer to the [scope section][2] of the Graphing Primer using JSON for further information about scope.  
-   **Silencing by monitor logs**  
-   You can select one or more monitor tags to schedule downtimes on, but you must select at least one using this method. There is a limit of 32 tags. Only monitors that have all selected tags are silenced. You can also select scopes for additional constraints.  
+   **Silencing by monitor tags**  
+   You can select one or more [monitor tags][6] to schedule downtimes on, but you must select at least one using this method. There is a limit of 32 tags. Only monitors that have all selected tags are silenced. You can also select scopes for additional constraints.  
    For either method, if you choose to silence all monitors constrained by a scope, clicking *Preview affected monitors* shows which monitors are currently affected. Any monitors within your scope that are created or edited after the downtime is scheduled are also silenced. Note that if a multi-alert is included, it is only silenced for groups covered by the scope. For example, if a downtime is scoped for `host:X` and a multi-alert is triggered on both `host:X` and `host:Y`, Datadog will generate a monitor notification for `host:Y`, but not `host:X`.
 
 2. Set a schedule.
@@ -70,3 +70,4 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
 [3]: http://daringfireball.net/projects/markdown/syntax
 [4]: https://app.datadoghq.com/account/settings#integrations
 [5]: /help
+[6]: /monitors/manage_monitor/#monitor-tags
