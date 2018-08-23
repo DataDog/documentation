@@ -165,7 +165,7 @@ code {
 
 /* codetabs inside content */
 .code-tabs {
-  ul {
+  &> ul {
     list-style-type: none;
     padding:0;
     li {
