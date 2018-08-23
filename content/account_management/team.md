@@ -11,6 +11,8 @@ further_reading:
   text: Configuring Teams & Organizations with Multiple Accounts
 ---
 
+{{< wistia 3rrd63kxzu >}}
+
 ## Add new members
 
 1. To add members to a team, start by visiting the [Team Page][1].
