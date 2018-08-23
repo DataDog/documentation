@@ -3,6 +3,23 @@ title: Smoothing
 kind: documentation
 ---
 
+## Autosmooth
+
+| Function   | Description                                                         | Example                    |
+| :----      | :-------                                                            | :---------                 |
+| `autosmooth()` | Automatically removes noise while preserving the trend of the metric. | `autosmooth(<METRIC_NAME>{*})` |
+
+The `autosmooth()` function applies a moving average with an automatically selected span. It smooths a time series while preserving its trend. In this example, the function chooses the optimal span to smooth the time series:
+
+{{< img src="graphing/functions/smoothing/autosmooth_illustration.png" alt="autosmooth illustration" responsive="true" style="width:80%;">}}
+
+When used on a `group by` query (e.g. `avg by`), the same span is applied on all the time series. If used on several metrics in the same graph, different spans can be selected to optimally smooth each one of the metric time series.
+
+The algorithm is inspired by the [ASAP algorithm][1] - you can read more about it in this blog post.
+
+The `autosmooth()` function cannot be used in monitors. Being that the span is chosen dynamically, the result of applying the function could change from minute to minute, making threshold setting difficult and leading to alert flapping.
+
+
 ## Exponentially weighted moving average
 
 ### Ewma 3
@@ -108,3 +125,5 @@ Note: The span value is the number of data points. So `median_9()` uses the last
     {{< nextlink href="/graphing/functions/rollup" >}}Rollup: Control the number of raw points used in your metric. {{< /nextlink >}}
     {{< nextlink href="/graphing/functions/timeshift" >}}Timeshift: Shift your metric data point along the timeline. {{< /nextlink >}}
 {{< /whatsnext >}}
+
+[1]: http://futuredata.stanford.edu/asap/
