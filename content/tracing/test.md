@@ -15,8 +15,45 @@ To begin tracing applications written in Python, first install and configure the
 ```python
 pip install ddtrace
 ```
+
+this is a list:
+
+* item 1 
+* item 2 
+* item 3
+
+This is a list within a list:
+
+* item 1
+    - subitem1
+    - subitem2
+* item 2
+    - subitem1
+    - subitem2
+
 {{% /tab %}}
 {{% tab "JavaScript" %}}
+
+Datastore tracing provides:
+
+* Timing request to response
+* Query info (e.g. a sanitized query string)
+* Error and stacktrace capturing
+
+`dd-java-agent` includes support for automatically tracing the following database frameworks/drivers.
+
+| Database       | Versions       |
+| :------------- | :------------- |
+| JDBC           | N/A            |
+| MongoDB        | 3.0+           |
+| Cassandra      | 3.2+           |
+| Jedis          | 1.4+           |
+
+`dd-java-agent` is also compatible with common JDBC drivers including:
+
+*  Apache Derby
+*  Firebird SQL
+*  H2 Database Engine
 
 Lorem ipsum dolor sit amet, in sit illum pericula, alterum detracto salutandi at nam. Cum debet veritus ne, mei ne solet alterum veritus. Enim laoreet ad mea. Pro te ferri ridens graeci. Eligendi antiopam no eam, virtute alienum laboramus nam no.
 
