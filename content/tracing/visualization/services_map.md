@@ -27,7 +27,7 @@ further_reading:
 
 The Service Map decomposes your application into all its component services and draws the observed dependencies between these services in real time, so you can identify bottlenecks and understand how data flows through your architecture. 
 
-{{< img src="tracing/servicemap/service_map_overview.png" alt="Service Map Overview" responsive="true">}}
+{{< img src="tracing/visualization/services_map/service_map_overview.png" alt="Service Map Overview" responsive="true">}}
 
 ## Setup
 
