@@ -32,7 +32,7 @@ Let's take this query for the time frame between *11:00:00* and *11:05:00*:
 
 `sum(last_5m): sum:requests.error{*}.as_count() / sum:requests.total{*}.as_count()`
 
-For the 5 min timeframe there are 5 time series points (zeros excluded):
+For the 5 min timeframe there are 5 timeseries points (zeros excluded):
 
 **Numerator**, `sum:requests.error{*}.as_count()`:
 
