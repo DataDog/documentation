@@ -39,9 +39,9 @@ class ServletImpl extends AbstractHttpServlet {
 }
 ```
 
-
 [java api doc]: https://github.com/DataDog/dd-trace-java/blob/master/dd-trace-api/src/main/java/datadog/trace/api/DDTags.java
 [opentracing java doc]: https://github.com/opentracing/opentracing-java/blob/master/opentracing-api/src/main/java/io/opentracing/tag/Tags.java
+
 {{% /tab %}}
 {{% tab "Python" %}}
 {{% /tab %}}
