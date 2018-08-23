@@ -2,6 +2,8 @@
 title: Service Map
 kind: Documentation
 description: "The Service Map visualizes data that is being collected by Datadog APM."
+aliases:
+  - /tracing/servicemap
 further_reading:
 - link: "tracing/setup/"
   tag: "Documentation"
@@ -43,33 +45,33 @@ Services are also scoped by `env`, and, optionally, a [first-class dimension][1]
 
 Mousing over a service highlights it and shows its request traffic as animated lines to better emphasize directionality.
 
-{{< img src="tracing/servicemap/servicemap-anim.gif" alt="Service Map" responsive="true" style="width:90%;">}}
+{{< img src="tracing/visualization/services_map/servicemap-anim.gif" alt="Service Map" responsive="true" style="width:90%;">}}
 
 Clicking into a service offers you the option to inspect that service. This isolates the service and shows you which other services are the sources of requests, and which ones this service requests data from (and therefore depends on). Generally, the services on the left are closer to your customers, and the ones on the right are more likely root causes.
 
 On the inspection page, each node can itself be inspected, so you can pivot around the Service Map one dependency at a time.
 
-{{< img src="tracing/servicemap/servicemap.png" alt="Service Map" responsive="true" style="width:90%;">}}
+{{< img src="tracing/visualization/services_map/servicemap.png" alt="Service Map" responsive="true" style="width:90%;">}}
 
 ## The "service" tag
 
 Clicking on a service reveals further drilldown options.
 
-{{< img src="tracing/servicemap/servicetag.png" alt="Service Map tag" responsive="true" style="width:40%;">}}
+{{< img src="tracing/visualization/services_map/servicetag.png" alt="Service Map tag" responsive="true" style="width:40%;">}}
 
 The service tag has a special meaning in Datadog, and is used both to identify APM services and link them to other parts of the product.
 
 The following screenshot shows a dashboard query for `service:fse-auto-process`. This is tagged automatically by APM.
 
-{{< img src="tracing/servicemap/servicedash.png" alt="Service Map dashboard" responsive="true" style="width:90%;">}}
+{{< img src="tracing/visualization/services_map/servicedash.png" alt="Service Map dashboard" responsive="true" style="width:90%;">}}
 
 Using this tag on your Host Map or logs with the same key allows Datadog to join applications to logs, infrastructure, or custom business metrics. On the drilldown menu, discussed above, each option pivots to the appropriate view of the data collected by Datadog scoped to your `service`.
 
-{{< img src="tracing/servicemap/servicemaptags.png" alt="Service Map tags" responsive="true" style="width:80%;">}}
+{{< img src="tracing/visualization/services_map/servicemaptags.png" alt="Service Map tags" responsive="true" style="width:80%;">}}
 
 In addition to infrastructure or logs, monitors can be tagged by service in the “Say what’s happening” section of a new monitor. This allows you to associate monitors for any metric, including custom business metrics with your services. The status of monitors is exposed directly on the Service Map.
 
-{{< img src="tracing/servicemap/servicemon.png" alt="Service Map monitor" responsive="true" style="width:90%;">}}
+{{< img src="tracing/visualization/services_map/servicemon.png" alt="Service Map monitor" responsive="true" style="width:90%;">}}
 
 ## Data freshness and meaning
 
@@ -79,7 +81,7 @@ Nodes represent services exactly as instrumented in APM and match those in your 
 
 New services or connections will appear within moments of being instrumented and will age out if there are no corresponding traces seen for two weeks.  This takes into account services that do work infrequently, but are nonetheless an important part of a functioning system.
 
-{{< img src="tracing/servicemap/servicenodes.gif" alt="Service Map nodes" responsive="true" style="width:90%;">}}
+{{< img src="tracing/visualization/services_map/servicenodes.gif" alt="Service Map nodes" responsive="true" style="width:90%;">}}
 
 ### Color
 

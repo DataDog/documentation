@@ -586,16 +586,15 @@ languages:
           parent: customnav_tracingnav_visualization
         - identifier: customnav_tracingnav_graph
           name: "Trace Analytics"
-          url: "tracing/analytics"
-          weight: 35
-          parent: menu_references_tracing
+          url: "tracing/visualization/analytics"
+          weight: 360
+          parent: customnav_tracingnav_visualization
 
-        # Service Map
         - identifier: customnav_tracingnav_servicemap
           name: "Service Map"
-          url: "tracing/servicemap"
-          weight: 38
-          parent: menu_references_tracing
+          url: "tracing/visualization/services_map"
+          weight: 370
+          parent: customnav_tracingnav_visualization
 
         # Trace API
         - identifier: customnav_tracingnav_api
@@ -1582,6 +1581,11 @@ languages:
           name: "Trace Analytics"
           url: "tracing/visualization/analytics"
           weight: 360
+          parent: customnav_tracingnav_visualization
+        - identifier: customnav_tracingnav_servicemap
+          name: "Service Map"
+          url: "tracing/visualization/services_map"
+          weight: 370
           parent: customnav_tracingnav_visualization
 
         # Getting further
