@@ -171,7 +171,7 @@ Si vous ne saisissez pas de titre, nous générons automatiquement un titre en f
 
 La dernière étape consiste à cliquer sur Save. Vous pourrez toujours revenir à l'éditeur et modifier le graphique en fonction de vos besoins.
 
-[1]: /graphing/graphing_json/
+[1]: /graphing/miscellaneous/graphingjson/
 [2]: https://app.datadoghq.com/metric/explorer/
 [3]: https://app.datadoghq.com/metric/summary/
 [4]: /graphing/dashboards/widgets/
