@@ -251,7 +251,7 @@ submitted points every 15 seconds. Any metrics with fractions of a second timest
 will get rounded to the nearest second, and if any points have the same timestamp,
 the latest point will overwrite the previous ones.
 
-We have a soft limit of 100 time series per host, where a time series is
+We have a soft limit of 100 timeseries per host, where a timeseries is
 defined as a unique combination of metric name and tag.-->
 
 #### API経由でメトリクスデータを送信しようとしています。その際に注意することはありますか。 {#api-else}
@@ -902,7 +902,7 @@ When using the 'sum/min/max/avg' aggregator, we're looking across series, not at
 </p>
 <p>
 For example, let's say you break down used memory by host, you'll get one
-time series for each host. If you don't break down by host,
+timeseries for each host. If you don't break down by host,
 by default you'll get the average across all hosts.
 </p>-->
 
@@ -911,7 +911,7 @@ by default you'll get the average across all hosts.
 When using the 'sum/min/max/avg' aggregator, we're looking across series, not at points within a single series. So if it is scoped to it's most granular level, it's possible that switching between those aggregators will not change the values you're seeing.
 
 For example, let's say you break down used memory by host, you'll get one
-time series for each host. If you don't break down by host,
+timeseries for each host. If you don't break down by host,
 by default you'll get the average across all hosts. -->
 
 <!--
