@@ -1,8 +1,23 @@
 ---
-title: From the query to the graph
+title: From the query to the graph 
 kind: documentation
 aliases:
-- /getting_started/from_the_query_to_the_graph
+  - /examples/
+  - /examples/aws-metrics/
+  - /examples/month_before/
+  - /examples/graphing-functions/
+  - /examples/day_before/
+  - /examples/json-editing/
+  - /examples/nginx-metrics/
+  - /examples/dashboards/
+  - /examples/hour_before/
+  - /examples/os-metrics/
+  - /examples/week_before/
+  - /examples/cassandra-metrics/
+  - /graphing/miscellaneous/functions
+  - /graphing/miscellaneous/
+  - /getting_started/from_the_query_to_the_graph
+  - /graphing/miscellaneous/from_the_query_to_the_graph
 ---
 
 While setting up graphs is pretty simple in Datadog, this page aims at helping you leverage even more value from our graphing system.
@@ -31,11 +46,11 @@ Thus this metric is seen with different {host, device} tag combinations.
 For each source (defined by a host and a set of tags) we store data separately.
 In this example we consider `host:moby` as having 5 devices. Thus Datadog is storing 5 timeseries (all datapoints submitted over time for a source) for:
 
-* {host:moby, device:tmpfs}
-* {host:moby, device:cgroup_root}
-* {host:moby, device:/dev/vda1}
-* {host:moby, device:overlay}
-* {host:moby, device:shm}.
+* `{host:moby, device:tmpfs}`
+* `{host:moby, device:cgroup_root}`
+* `{host:moby, device:/dev/vda1}`
+* `{host:moby, device:overlay}`
+* `{host:moby, device:shm}`
 
 Let's now go over the successive steps followed by our backend for the query presented above.
 
@@ -119,7 +134,19 @@ Most of the functions apply at the last step. From the ~300 points obtained afte
 In this example the function abs makes sure that your results are positive numbers.
 
 **Parameter involved: function**
-[Consult the list of functions offered by Datadog][10].
+
+{{< whatsnext desc="Choose your type of functions" >}}
+    {{< nextlink href="/graphing/functions/algorithms" >}}Algorithmic: Implement Anomaly or Outlier detection on your metric.{{< /nextlink >}}
+    {{< nextlink href="/graphing/functions/arithmetic" >}}Arithmetic: Perform Arithmetic operation on your metric.  {{< /nextlink >}}
+    {{< nextlink href="/graphing/functions/count" >}}Count: Count non zero or non null value of your metric. {{< /nextlink >}}
+    {{< nextlink href="/graphing/functions/interpolation" >}}Interpolation: Fill or set default values for your metric.{{< /nextlink >}}
+    {{< nextlink href="/graphing/functions/rank" >}}Rank: Select only a subset of metrics. {{< /nextlink >}}
+    {{< nextlink href="/graphing/functions/rate" >}}Rate: Calculate custom derivative over your metric.{{< /nextlink >}}
+    {{< nextlink href="/graphing/functions/regression" >}}Regression: Apply some machine learning function to your metric.{{< /nextlink >}}
+    {{< nextlink href="/graphing/functions/rollup" >}}Rollup: Control the number of raw points used in your metric. {{< /nextlink >}}
+    {{< nextlink href="/graphing/functions/smoothing" >}}Soothing: Smooth your metric variations.{{< /nextlink >}}
+    {{< nextlink href="/graphing/functions/timeshift" >}}Timeshift: Shift your metric data point along the timeline. {{< /nextlink >}}
+{{< /whatsnext >}}
 
 ### Grouped queries, arithmetic, as_count/rate
  
@@ -141,7 +168,7 @@ The logic is the same:
 
 #### Arithmetic
 
-Arithmetic is applied after time and space aggregation as well ([step 4: Apply function](/graphing/miscellaneous/from_the_query_to_the_graph/#apply-functions-optional)).
+Arithmetic is applied after time and space aggregation as well ([step 4: Apply function](#apply-functions-optional)).
 
 {{< img src="graphing/miscellaneous/from_query_to_graph/metric_graph_8.png" alt="metric_graph_8" responsive="true" style="width:75%;">}}
 
@@ -156,12 +183,13 @@ Documentation about [statsd/DogStatsD][12].
 [1]: /graphing/faq/how-does-datadog-render-graphs-my-graph-doesn-t-show-the-values-i-m-expecting
 [2]: /graphing/dashboards/timeboard
 [3]: /graphing/dashboards/screenboard
-[4]: /graphing/miscellaneous/from_the_query_to_the_graph/#proceed-to-space-aggregation
+[4]: #proceed-to-space-aggregation
 [5]: /developers/metrics/custom_metrics
 [6]: /graphing/faq/how-is-data-aggregated-in-graphs
 [7]: /graphing/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs
-[8]: /graphing/miscellaneous/functions/#rollup
+[8]: /graphing/functions/rollup
 [9]: /graphing/faq/i-m-switching-between-the-sum-min-max-avg-aggregators-but-the-values-look-the-same
 [10]: /graphing/miscellaneous/
 [11]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing/
 [12]: /developers/dogstatsd
+

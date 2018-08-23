@@ -42,7 +42,7 @@ Timeseries can be displayed as **lines**, **areas**, and **bars**.
 
 **Note**: Define log Analytics query (still in beta) exactly as in the [Log Explorer][11].
 
-{{< img src="graphing/miscellaneous/visualization/references-graphing-timeseries-example.png" alt="Timeseries" responsive="true" style="width:80%;">}}
+{{< img src="graphing/dashboards/widgets/references-graphing-timeseries-example.png" alt="Timeseries" responsive="true" style="width:80%;">}}
 
 Example of Timeseries widget for the [API][1]
 ```
@@ -113,7 +113,7 @@ Query values display the current value of a given metric query, with conditional
 The value displayed by a query value need not represent an instantaneous measurement.
 The widget can display the latest value reported, or an aggregate computed from all query values across the time window. These visualizations provide a narrow but unambiguous window into your infrastructure.query
 
-{{< img src="graphing/miscellaneous/visualization/references-graphing-queryvalue-example.png" alt="Query value widget" responsive="true" style="width:50%;">}}
+{{< img src="graphing/dashboards/widgets/references-graphing-queryvalue-example.png" alt="Query value widget" responsive="true" style="width:50%;">}}
 
 Example of Query Value widget for the [API][1]
 
@@ -158,7 +158,7 @@ Example of Query Value widget for the [API][1]
 
 ### What does "Take the X value from the displayed timeframe" mean?
 
-{{< img src="graphing/miscellaneous/visualization/query_value_widget.png" alt="query_value_widget" responsive="true" style="width:50%;">}}
+{{< img src="graphing/dashboards/widgets/query_value_widget.png" alt="query_value_widget" responsive="true" style="width:50%;">}}
 
 The Query Value Widget only displays one Value, unlike a timeseries for example, that displays several points.
 
@@ -169,35 +169,35 @@ Let's say you are on a Timeseries and you are currently displaying the past hour
 
 The Heatmap visualization is great for showing metrics aggregated across many tags, such as *hosts*. The more hosts that have a particular value, the darker that square is.
 
-{{< img src="graphing/miscellaneous/visualization/references-graphing-heatmap-example.png" alt="Heatmap" responsive="true" style="width:80%;">}}
+{{< img src="graphing/dashboards/widgets/references-graphing-heatmap-example.png" alt="Heatmap" responsive="true" style="width:80%;">}}
 
 ## Distribution
 *Supported on Screenboards and Timeboards*
 
 The Distribution visualization is another way of showing metrics aggregated across many tags, such as *hosts*. Unlike the Heatmap, Distribution's x-axis is the quantity rather than time.
 
-{{< img src="graphing/miscellaneous/visualization/references-graphing-distribution-example.png" alt="Distribution" responsive="true" style="width:80%;">}}
+{{< img src="graphing/dashboards/widgets/references-graphing-distribution-example.png" alt="Distribution" responsive="true" style="width:80%;">}}
 
 ## Toplist
 *Supported on Screenboards and Timeboards*
 
 The Toplist visualization is perfect when you want to see the list of hosts with the most or least of any metric value, such as highest consumers of CPU, hosts with the least disk space, etc.
 
-{{< img src="graphing/miscellaneous/visualization/references-graphing-toplist-example.png" alt="TopList" responsive="true" style="width:80%;">}}
+{{< img src="graphing/dashboards/widgets/references-graphing-toplist-example.png" alt="TopList" responsive="true" style="width:80%;">}}
 
 ## Change
 *Supported on Screenboards and Timeboards*
 
 The Change graph shows you the change in a value over the time period chosen.
 
-{{< img src="graphing/miscellaneous/visualization/references-graphing-change-example.png" alt="Change graph" responsive="true" style="width:80%;">}}
+{{< img src="graphing/dashboards/widgets/references-graphing-change-example.png" alt="Change graph" responsive="true" style="width:80%;">}}
 
 ## Hostmap
 *Supported on Screenboards and Timeboards*
 
 The Hostmap graphs any metric for any subset of hosts on the same hostmap visualization available from the main [Infrastructure Hostmap][7] menu.
 
-{{< img src="graphing/miscellaneous/visualization/references-graphing-hostmap-example.png" alt="Hostmap" responsive="true" >}}
+{{< img src="graphing/dashboards/widgets/references-graphing-hostmap-example.png" alt="Hostmap" responsive="true" >}}
 
 ## Free Text
 *Supported on Screenboards only*
@@ -211,14 +211,14 @@ This is commonly used to state the overall purpose of the dashboard.
 
 The event timeline is a widget version of the timeline that appears at the top of the [Event Stream view][9].
 
-{{< img src="graphing/miscellaneous/visualization/references-graphing-eventtimeline-example.png" alt="Timeseries" responsive="true" style="width:80%;">}}
+{{< img src="graphing/dashboards/widgets/references-graphing-eventtimeline-example.png" alt="Timeseries" responsive="true" style="width:80%;">}}
 
 ## Event Stream
 *Supported on Screenboards only*
 
 The event stream is a widget version of the stream of events on the [Event Stream view][10].
 
-{{< img src="graphing/miscellaneous/visualization/references-graphing-eventstream-example.png" alt="Timeseries" responsive="true" style="width:70%;">}}
+{{< img src="graphing/dashboards/widgets/references-graphing-eventstream-example.png" alt="Timeseries" responsive="true" style="width:70%;">}}
 
 **This widgets displays only the 100 most recent events**
 
@@ -356,14 +356,14 @@ Check status shows the current status or number of results for any check perform
 
 The service summary displays the top portion of any APM trace in your Screenboard.
 
-{{< img src="graphing/miscellaneous/visualization/references-graphing-servicesummary-example.png" alt="Timeseries" responsive="true" style="width:80%;">}}
+{{< img src="graphing/dashboards/widgets/references-graphing-servicesummary-example.png" alt="Timeseries" responsive="true" style="width:80%;">}}
 
 ## Monitor Summary
 *Supported on Screenboards only*
 
 Monitor summary is a summary view of all monitors on your system, or a subset based on a query.
 
-{{< img src="graphing/miscellaneous/visualization/references-graphing-monitorsummary-example.png" alt="Timeseries" responsive="true" style="width:80%;">}}
+{{< img src="graphing/dashboards/widgets/references-graphing-monitorsummary-example.png" alt="Timeseries" responsive="true" style="width:80%;">}}
 
 ## Further Reading
 
