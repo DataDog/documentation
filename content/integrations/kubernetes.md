@@ -142,9 +142,6 @@ The Kubernetes check includes the following service checks:
 * `kubernetes_state.node.network_unavailable`:
   Returns `CRITICAL` if a cluster node is in a network unavailable state. Returns `OK` otherwise.
 
-* `kubernetes_state.pod.phase`:
-  Returns `CRITICAL` if the pod is in phase `Failed`, `WARNING` if it is `Pending`, `UNKNOWN` if it is `Unknown` or `OK` otherwise.
-
 ## Troubleshooting
 
 * [Can I install the Agent on my Kubernetes master node(s)][7]
