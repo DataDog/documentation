@@ -5,8 +5,8 @@ kind: documentation
 
 ## Autosmooth
 
-| Function   | Description                                                         | Example                    |
-| :----      | :-------                                                            | :---------                 |
+| Function       | Description                                                           | Example                        |
+| :----          | :-------                                                              | :---------                     |
 | `autosmooth()` | Automatically removes noise while preserving the trend of the metric. | `autosmooth(<METRIC_NAME>{*})` |
 
 The `autosmooth()` function applies a moving average with an automatically selected span. It smooths a time series while preserving its trend. In this example, the function chooses the optimal span to smooth the time series:
