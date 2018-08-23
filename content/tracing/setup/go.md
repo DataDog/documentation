@@ -50,7 +50,8 @@ We have built a series of pluggable packages which provide out-of-the-box suppor
 
 **Note**: The [official documentation][contrib godoc] also provides a detailed overview of the supported packages and their APIs, along with usage examples.
 
-### Frameworks
+{{< tabs >}}
+{{% tab "Frameworks" %}}
 
 Integrate the Go tracer with the following list of web frameworks using one of our helper packages.
 
@@ -61,7 +62,10 @@ Integrate the Go tracer with the following list of web frameworks using one of o
 | gRPC          | [github.com/grpc/grpc-go](https://github.com/grpc/grpc-go)          | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc)         |
 | gRPC v1.2     | [github.com/grpc/grpc-go](https://github.com/grpc/grpc-go)          | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc.v12](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc.v12) |
 
-### Library Compatibility
+[contrib docs]: #automatic-instrumentation
+
+{{% /tab %}}
+{{% tab "Library Compatibility" %}}
 
 The Go tracer includes support for the following data stores and libraries. Make sure to visit our integrations package [godoc page][contrib godoc] for an in-depth look.
 
@@ -77,6 +81,11 @@ The Go tracer includes support for the following data stores and libraries. Make
 | Redis (redigo)      | [github.com/garyburd/redigo](https://github.com/garyburd/redigo)                   | [gopkg.in/DataDog/dd-trace-go.v1/contrib/garyburd/redigo](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/garyburd/redigo)                   |
 | SQL                 | [golang.org/pkg/database/sql](https://golang.org/pkg/database/sql)                 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql)                         |
 | SQLx                | [github.com/jmoiron/sqlx](https://github.com/jmoiron/sqlx)                         | [gopkg.in/DataDog/dd-trace-go.v1/contrib/jmoiron/sqlx](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/jmoiron/sqlx)                         |
+
+[contrib godoc]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 

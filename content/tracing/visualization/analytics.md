@@ -28,7 +28,7 @@ further_reading:
 
 Switch between the Trace search and the Trace Analytics modes by clicking on the *Trace Mode* button:
 
-{{< img src="tracing/analytics/switch_analytics.png" alt="Switch analytics" responsive="true" style="width:40%;">}}
+{{< img src="tracing/visualization/analytics/switch_analytics.png" alt="Switch analytics" responsive="true" style="width:40%;">}}
 
 ## Trace Analytics query 
 
@@ -36,30 +36,30 @@ Use the query to control what's displayed in your Trace Analytic:
 
 1. Choose a [Measure][1] or [Facet][2] to analyze. [Measure][1] lets you choose the aggregation function whereas [Facet][2] displays the unique count.
     
-    {{< img src="tracing/analytics/choose_measure_facet.png" alt="choose measure facet" responsive="true" style="width:50%;">}}
+    {{< img src="tracing/visualization/analytics/choose_measure_facet.png" alt="choose measure facet" responsive="true" style="width:50%;">}}
 
 2. Select the aggregation function for the [Measure][1] you want to graph:
     
-    {{< img src="tracing/analytics/agg_function.png" alt="aggregation function" responsive="true" style="width:50%;">}}
+    {{< img src="tracing/visualization/analytics/agg_function.png" alt="aggregation function" responsive="true" style="width:50%;">}}
 
 3. Use [Tag][1] or [Facet][2] to split your Analytic.  
 
-    {{< img src="tracing/analytics/split_by.png" alt="split by" responsive="true" style="width:50%;">}}
+    {{< img src="tracing/visualization/analytics/split_by.png" alt="split by" responsive="true" style="width:50%;">}}
 
 4. Choose to display either the *X* **top** or **bottom** values according to the selected [Measure][1].
     
-    {{< img src="tracing/analytics/top_bottom_button.png" alt="top bottom button" responsive="true" style="width:20%;">}}
+    {{< img src="tracing/visualization/analytics/top_bottom_button.png" alt="top bottom button" responsive="true" style="width:20%;">}}
     
 5. Choose the Analytic Timesteps.
   Changing the global timeframe changes the list of available Timesteps values.
 
-    {{< img src="tracing/analytics/timesteps.png" alt="Timestep" responsive="true" style="width:30%;">}}
+    {{< img src="tracing/visualization/analytics/timesteps.png" alt="Timestep" responsive="true" style="width:30%;">}}
 
 ## Visualizations 
 
 Select a Trace Analytic visualization type using the Analytic selector:
 
-{{< img src="tracing/analytics/graph_selector.png" alt="Graph selector" responsive="true" style="width:30%;">}}
+{{< img src="tracing/visualization/analytics/graph_selector.png" alt="Graph selector" responsive="true" style="width:30%;">}}
 
 Available visualizations:
 
@@ -73,7 +73,7 @@ Visualize the evolution of a single [Measure][1] (or a [Facet][2] unique count o
 The following timeseries Trace Analytic shows:
 The evolution of the **pc99** **duration** by steps of **5min** for each **Service** 
 
-{{< img src="tracing/analytics/timeserie_example.png" alt="timeserie example" responsive="true" style="width:90%;">}}
+{{< img src="tracing/visualization/analytics/timeserie_example.png" alt="timeserie example" responsive="true" style="width:90%;">}}
 
 ### Top List 
 
@@ -82,17 +82,17 @@ Visualize the top values from a [Facet][2] according to the chosen [Measure][1]:
 The following Top List Trace Analytic shows:
 The top **pc99** **duration** of **Service** 
 
-{{< img src="tracing/analytics/top_list_example.png" alt="top list example" responsive="true" style="width:90%;">}}
+{{< img src="tracing/visualization/analytics/top_list_example.png" alt="top list example" responsive="true" style="width:90%;">}}
 
 ## Related Traces
 
 Select or click on a section of the graph to either zoom in the graph or see the list of traces corresponding to your selection:
 
-{{< img src="tracing/analytics/view_traces.png" alt="view Traces" responsive="true" style="width:40%;">}}
+{{< img src="tracing/visualization/analytics/view_traces.png" alt="view Traces" responsive="true" style="width:40%;">}}
 
 ## Export
 
-{{< img src="tracing/analytics/export_button.png" alt="Export your analytics button" responsive="true" style="width:40%;">}}
+{{< img src="tracing/visualization/analytics/export_button.png" alt="Export your analytics button" responsive="true" style="width:40%;">}}
 
 Export your Trace analytic: 
 
@@ -113,8 +113,8 @@ Export [Trace Analytics][7] from the Trace search or build them directly in your
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/search/#measures
-[2]: /tracing/search/#facets
+[1]: /tracing/visualization/search/#measures
+[2]: /tracing/visualization/search/#facets
 [3]: /tagging
 [4]: /monitors/monitor_types/apm
 [5]: /graphing/dashboards/timeboard

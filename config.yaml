@@ -1620,7 +1620,7 @@ languages:
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_sampling
           name: "Priority Sampling"
-          url: "tracing/advanced_usage/sampling/"
+          url: "tracing/advanced_usage/priority_sampling/"
           weight: 250
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_logging
