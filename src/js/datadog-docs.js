@@ -525,6 +525,9 @@ $(document).ready(function () {
         $('.code-tabs .nav-tabs a').click(function(e){
           e.preventDefault();
 
+          // prepare
+          var currentOffset = $(this).offset().top - $(document).scrollTop();
+
           // find all
           var lang = $(this).data('lang');
           $('.code-tabs .nav-tabs a[data-lang="'+lang+'"]').each(function() {
@@ -542,6 +545,9 @@ $(document).ready(function () {
             var url = window.location.href.replace(window.location.hash, '').replace(window.location.search, '');
             history.pushState(null, null, url + '?tab=' + lang + window.location.hash)
           }
+
+          // restore
+          $(document).scrollTop($(this).offset().top - currentOffset);
         });
 
         // activate language from url or first
