@@ -8,6 +8,7 @@ aliases:
     - /graphing/faq/is-it-possible-to-adjust-the-y-axis-for-my-graphs
 description: Visualize your data to gain insight
 ---
+
 Graphs are the window onto your monitored systems. Most of the times that you visit Datadog, you look at [dashboards][8] made up of graphs. Other times you see email notifications that include a graph of some fluctuation in the system. And yet other times you see graphs in your Slack, HipChat, and other chat clients documenting the changes in metrics over the course of time. Graphs are at the heart of monitoring and observability, so it is essential to understand how to define great graphs.
 
 ## The graphing editor
@@ -171,12 +172,12 @@ If you don't enter a title, we automatically generate a title based on the selec
 
 The final step is to click Save. You can always come back in to the editor and tweak the graph further depending on your needs.
 
-[1]: /graphing/miscellaneous/graphingjson/
+[1]: /graphing/graphing_json/
 [2]: https://app.datadoghq.com/metric/explorer/
 [3]: https://app.datadoghq.com/metric/summary/
 [4]: /graphing/dashboards/widgets/
 [5]: /tagging/
-[6]: /graphing/miscellaneous/functions/
+[6]: /graphing/functions/
 [7]: https://app.datadoghq.com/notebook/list
 [8]: /graphing/dashboards
 [9]: /graphing/#choose-the-metric-to-graph

@@ -238,6 +238,7 @@ languages:
           url: "graphing/dashboards/"
           weight: 10
           parent: menu_references_graphing
+
         # Graphing dashboard subnav
         - identifier: customnav_graphingnav_screenboard
           name: "Screenboard"
@@ -268,7 +269,7 @@ languages:
         # Metrics
         - identifier: customnav_graphingnav_metrics
           name: "Metrics"
-          url: "graphing/metrics/distributions"
+          url: "graphing/metrics/"
           weight: 20
           parent: menu_references_graphing
         - identifier: customnav_graphingnav_distribution
@@ -280,22 +281,22 @@ languages:
         - identifier: customnav_graphingnav_notebooks
           name: "Notebooks"
           url: "graphing/notebooks/"
-          weight: 40
+          weight: 30
           parent: menu_references_graphing
         - identifier: customnav_graphingnav_events
           name: "Event Stream"
           url: "graphing/event_stream/"
-          weight: 50
+          weight: 40
           parent: menu_references_graphing
         - identifier: customnav_graphingnav_infrastructure
           name: "Infrastructure"
           url: "graphing/infrastructure/"
-          weight: 60
+          weight: 50
           parent: menu_references_graphing
         - identifier: customnav_infrastructurenav_hostmap
           name: "Host Map"
           url: "graphing/infrastructure/hostmap/"
-          weight: 30
+          weight: 510
           parent: customnav_graphingnav_infrastructure
         - identifier: customnav_infrastructurenav_containermap
           name: "Container Map"
@@ -305,33 +306,77 @@ languages:
         - identifier: customnav_infrastructurenav_livecontainers
           name: "Live Containers"
           url: "graphing/infrastructure/livecontainers/"
-          weight: 40
+          weight: 520
           parent: customnav_graphingnav_infrastructure
         - identifier: customnav_infrastructurenav_process
           name: "Live Processes"
           url: "graphing/infrastructure/process/"
-          weight: 50
+          weight: 530
           parent: customnav_graphingnav_infrastructure
-        - identifier: customnav_graphingnav_miscellaneous
-          name: "Miscellaneous"
-          url: "graphing/miscellaneous/"
-          weight: 80
+
+        # GRAPHING - Functions  
+        - identifier: customnav_graphingnav_functions
+          name: "From the query to the graph "
+          url: "graphing/functions/"
+          weight: 60
           parent: menu_references_graphing
-        - identifier: customnav_graphingnav_misc_functions
-          name: "Functions"
-          url: "graphing/miscellaneous/functions/"
-          weight: 810
-          parent: customnav_graphingnav_miscellaneous
-        - identifier: customnav_graphingnav_misc_graphingjson
+        - identifier: customnav_graphingnav_algorithms
+          name: "Algorithms"
+          url: "graphing/functions/algorithms/"
+          weight: 610
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_arithmetic
+          name: "Arithmetic"
+          url: "graphing/functions/arithmetic/"
+          weight: 620
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_count
+          name: "Count"
+          url: "graphing/functions/count/"
+          weight: 630
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_interpolation
+          name: "Interpolation"
+          url: "graphing/functions/interpolation/"
+          weight: 640
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_rank
+          name: "Rank"
+          url: "graphing/functions/rank/"
+          weight: 650
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_rate
+          name: "Rate"
+          url: "graphing/functions/rate/"
+          weight: 660
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_regression
+          name: "Regression"
+          url: "graphing/functions/regression/"
+          weight: 670
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_rollup
+          name: "Rollup"
+          url: "graphing/functions/rollup/"
+          weight: 680
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_smoothing
+          name: "Smoothing"
+          url: "graphing/functions/smoothing/"
+          weight: 690
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_timeshift
+          name: "Timeshift"
+          url: "graphing/functions/timeshift/"
+          weight: 695
+          parent: customnav_graphingnav_functions
+
+        - identifier: customnav_graphingnav_graphingjson
           name: "Graphing JSON"
-          url: "graphing/miscellaneous/graphingjson/"
-          weight: 820
-          parent: customnav_graphingnav_miscellaneous
-        - identifier: customnav_graphingnav_misc_query_to_graph
-          name: "From the Query to the Graph"
-          url: "graphing/miscellaneous/from_the_query_to_the_graph/"
-          weight: 830
-          parent: customnav_graphingnav_miscellaneous
+          url: "graphing/graphing_json/"
+          weight: 70
+          parent: menu_references_graphing
+
        # - identifier: customnav_graphingnav_faq
        #   name: "FAQ"
        #   url: "graphing/faq/"
@@ -1221,7 +1266,7 @@ languages:
         # Metrics
         - identifier: customnav_graphingnav_metrics
           name: "Metrics"
-          url: "graphing/metrics/distributions"
+          url: "graphing/metrics/"
           weight: 20
           parent: menu_references_graphing
         - identifier: customnav_graphingnav_distribution
@@ -1261,26 +1306,69 @@ languages:
           url: "graphing/infrastructure/process/"
           weight: 50
           parent: customnav_graphingnav_infrastructure
-        - identifier: customnav_graphingnav_miscellaneous
-          name: "Divers"
-          url: "graphing/miscellaneous/"
-          weight: 80
+
+        # GRAPHING - Functions  
+        - identifier: customnav_graphingnav_functions
+          name: "De la query au graphique"
+          url: "graphing/functions/"
+          weight: 60
           parent: menu_references_graphing
-        - identifier: customnav_graphingnav_misc_functions
-          name: "Fonctions"
-          url: "graphing/miscellaneous/functions/"
-          weight: 810
-          parent: customnav_graphingnav_miscellaneous
-        - identifier: customnav_graphingnav_misc_graphingjson
-          name: "Graphiques JSON"
-          url: "graphing/miscellaneous/graphingjson/"
-          weight: 820
-          parent: customnav_graphingnav_miscellaneous
-        - identifier: customnav_graphingnav_misc_query_to_graph
-          name: "De la requête jusqu'au graphique"
-          url: "graphing/miscellaneous/from_the_query_to_the_graph/"
-          weight: 830
-          parent: customnav_graphingnav_miscellaneous
+        - identifier: customnav_graphingnav_algorithms
+          name: "Algorithms"
+          url: "graphing/functions/algorithms/"
+          weight: 610
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_arithmetic
+          name: "Arithmetic"
+          url: "graphing/functions/arithmetic/"
+          weight: 620
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_count
+          name: "Count"
+          url: "graphing/functions/count/"
+          weight: 630
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_interpolation
+          name: "Interpolation"
+          url: "graphing/functions/interpolation/"
+          weight: 640
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_rank
+          name: "Rank"
+          url: "graphing/functions/rank/"
+          weight: 650
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_rate
+          name: "Rate"
+          url: "graphing/functions/rate/"
+          weight: 660
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_regression
+          name: "Regression"
+          url: "graphing/functions/regression/"
+          weight: 670
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_rollup
+          name: "Rollup"
+          url: "graphing/functions/rollup/"
+          weight: 680
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_smoothing
+          name: "Smoothing"
+          url: "graphing/functions/smoothing/"
+          weight: 690
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_timeshift
+          name: "Timeshift"
+          url: "graphing/functions/timeshift/"
+          weight: 695
+          parent: customnav_graphingnav_functions
+
+        - identifier: customnav_graphingnav_graphingjson
+          name: "Graphing JSON"
+          url: "graphing/graphing_json/"
+          weight: 70
+          parent: menu_references_graphing
        # - identifier: customnav_graphingnav_faq
        #   name: "FAQ"
        #   url: "graphing/faq/"
@@ -2018,4 +2106,4 @@ params:
   home:
       meta_image: datadog_logo_share_tt.png
       meta_title: Getting Started with Datadog
-      meta_description: The leading service for cloud-scale monitoring.
+      meta_description: Datadog, the leading service for cloud-scale monitoring.

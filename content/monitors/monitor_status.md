@@ -85,7 +85,7 @@ All events generated from your monitor are aggregated in this section. Those eve
 [2]: /monitors/downtimes/
 [3]: /monitors/#export-your-monitor
 [4]: /api/?lang=python#monitors
-[5]: /graphing/miscellaneous/from_the_query_to_the_graph
+[5]: /graphing/functions/
 [6]: /graphing/event_stream/
 [7]: https://app.datadoghq.com/metric/explorer
 [8]: /graphing/notebooks/

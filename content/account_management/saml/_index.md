@@ -15,6 +15,10 @@ Configuring [SAML (Security Assertion Markup Language)][1] for your Datadog acco
 
 **Note**: Created users must accept email verification in order for SAML to work.
 
+Here's a two-minute video walkthrough:
+
+{{< wistia 2qe33x8h3v >}}
+
 ## Configure SAML
 
 If you are a [Datadog Administrator][2], there is a [Configure SAML][3] option in the drop down menu that is accessed by hover over your username in the left-side navigation menu.
