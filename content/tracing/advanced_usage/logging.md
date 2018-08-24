@@ -59,6 +59,25 @@ Logback XML Pattern:
 {{% tab "Python" %}}
 {{% /tab %}}
 {{% tab "Ruby" %}}
+By default, all logs are processed by the default Ruby logger. When using Rails, you should see the messages in your application log file.
+
+Datadog client log messages are marked with ``[ddtrace]`` so you should be able to isolate them from other messages.
+
+Additionally, it is possible to override the default logger and replace it by a custom one. This is done using the ``log`` attribute of the tracer.
+
+```ruby
+f = File.new("my-custom.log", "w+")           # Log messages should go there
+Datadog.configure do |c|
+  c.tracer log: Logger.new(f)                 # Overriding the default tracer
+end
+
+Datadog::Tracer.log.info { "this is typically called by tracing code" }
+```
+
+See [the API documentation][ruby logging docs] for more details.
+
+[ruby logging docs]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#custom-logging
+
 {{% /tab %}}
 {{% tab "Go" %}}
 {{% /tab %}}

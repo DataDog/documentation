@@ -167,6 +167,7 @@ Notice the above examples only use the OpenTracing classes. Please reference the
 {{% tab "Python" %}}
 {{% /tab %}}
 {{% tab "Ruby" %}}
+Support for OpenTracing with Ruby is coming soon.
 {{% /tab %}}
 {{% tab "Go" %}}
 Import the [`opentracer` package][opentracing godoc] to expose the Datadog tracer as an [OpenTracing][open tracing] compatible tracer.

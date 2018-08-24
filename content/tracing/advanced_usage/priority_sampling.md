@@ -45,9 +45,45 @@ This is some python code
 ```
 {{% /tab %}}
 {{% tab "Ruby" %}}
+Priority sampling is the process of deciding whether a trace will be kept, by using a priority value that is propagated across distributed traces. This value gives indication to Datadog how important the trace is.
+
+Possible values for the sampling priority tag are:
+
+| Sampling Value | Effect                                                                                                     |
+| --------       | :--------------------------------------------------                                                        |
+| `Datadog::Ext::Priority::AUTO_REJECT` | The sampler automatically decided to not keep the trace. The Agent will drop it.                           |
+| `Datadog::Ext::Priority::AUTO_KEEP`   | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side. |
+| `Datadog::Ext::Priority::USER_REJECT` | The user asked to not keep the trace. The Agent will drop it.                                              |
+| `Datadog::Ext::Priority::USER_KEEP`   | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                     |
+
+Priority sampling is disabled by default. Enabling it ensures that your sampled distributed traces will be complete. To enable the priority sampling:
+
 ```ruby
-This is some ruby code
+Datadog.configure do |c|
+  c.tracer priority_sampling: true
+end
 ```
+
+Once enabled, the sampler will automatically assign a value of `AUTO_REJECT` or `AUTO_KEEP` to traces, depending on their service and volume.
+
+You can also set this priority manually to either drop a non-interesting trace or to keep an important one. For that, set the `Context#sampling_priority` to:
+
+```ruby
+# To reject the trace
+span.context.sampling_priority = Datadog::Ext::Priority::USER_REJECT
+
+# To keep the trace
+span.context.sampling_priority = Datadog::Ext::Priority::USER_KEEP
+```
+
+When not using [distributed tracing](#distributed-tracing), you may change the priority at any time, as long as the trace is not finished yet. However, it must be done before any context propagation (fork, RPC calls) to be effective in a distributed context. Changing the priority after such context has been propagated causes different parts of a distributed trace to use different priorities. Some parts might be kept, some parts might be rejected, and consequently can cause the trace to be partially stored and remain incomplete.
+
+When changing the priority, it is recommended that it is done as soon as possible, when the root span has just been created.
+
+See the [API documentation][ruby api doc] for more details.
+
+[ruby api doc]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#priority-sampling
+
 {{% /tab %}}
 {{% tab "Go" %}}
 Propagate a single trace across multiple services with distributed tracing. For more details about how to use and configure distributed tracing, check out the [godoc page][tracer godoc].

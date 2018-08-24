@@ -46,6 +46,34 @@ class ServletImpl extends AbstractHttpServlet {
 {{% tab "Python" %}}
 {{% /tab %}}
 {{% tab "Ruby" %}}
+**Adding tags to a span**
+
+You can add tags directly `Datadog::Span` objects directly by calling `#set_tag`:
+
+```ruby
+# An example of a Sinatra endpoint,
+# with Datadog tracing around the request.
+get '/posts' do
+  Datadog.tracer.trace('web.request') do |span|
+    span.set_tag('http.url', request.path)
+  end
+end
+```
+
+**Adding tags globally to all spans**
+
+You can also add tags to all spans by configuring the tracer with the `tags` option:
+
+```ruby
+Datadog.configure do |c|
+  c.tracer tags: { 'env' => 'prod' }
+end
+```
+
+See the [API documentation][ruby api doc] for more details.
+
+[ruby api doc]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#environment-and-tags
+
 {{% /tab %}}
 {{% tab "Go" %}}
 {{% /tab %}}
