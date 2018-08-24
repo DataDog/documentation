@@ -66,7 +66,7 @@ docker run -d --name app \
               company/app:latest
 ```
 
-This exposes the hostname `datadog-agent` in your `app` container.  
+This exposes the hostname `datadog-agent` in your `app` container.
 If you're using `docker-compose`, `<NETWORK_NAME>` parameters are the ones defined under the `networks` section of your `docker-compose.yml`.
 
 Your application tracers must be configured to submit traces to this address. See the examples below for each supported language:
@@ -94,16 +94,13 @@ end
 #### Go
 
 ```go
-import ddtrace "github.com/DataDog/dd-trace-go/opentracing"
+package main
 
+import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 
 func main() {
-    config := ddtrace.NewConfiguration()
-    config.AgentHostname = "datadog-agent"
-    config.AgentPort = "8126"
-
-    tracer, closer, err := ddtrace.NewTracer(config)
-    defer closer.Close()
+    tracer.Start(tracer.WithAgentAddr("datadog-agent:8126"))
+    defer tracer.Stop()
 }
 ```
 
@@ -126,7 +123,7 @@ java -javaagent:/path/to/the/dd-java-agent.jar \
      -jar /your/app.jar
 ```
 
-#### JavaScript (beta)
+#### Node.js
 
 ```javascript
 const tracer = require('dd-trace').init({
@@ -137,7 +134,7 @@ const tracer = require('dd-trace').init({
 
 ### Docker host IP
 
-Agent container port `8126` should be linked to the host directly.  
+Agent container port `8126` should be linked to the host directly.
 Configure your application tracer to report to the default route of this container (determine this using the `ip route` command).
 
 The following is an example for the Python Tracer, assuming `172.17.0.1` is the default route:

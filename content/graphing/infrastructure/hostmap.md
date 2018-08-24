@@ -28,11 +28,11 @@ We built Host Maps for ultimate flexibility; with just a few clicks, you can ask
 If you are an AWS user, you probably use a variety of instance types. Some instances are optimized for memory, some for compute, some are small, some are big.  
 If you want to reduce your AWS spend, a great place to start is by figuring out what the expensive instances are used for. With Host Maps this is easy. First group by `instance-type` and then group by `role` or `name`. Take a look at your expensive instance types, such as **c3.8xlarge**. Are there any host roles whose CPU is underutilized? If so, you can zoom in to individual hosts and see whether all that computational horsepower has been needed in the last several months, or whether this group of hosts is a candidate for migrating to a cheaper instance type.  
 
-Below is a subset of Datadog’s infrastructure. As you can see, **c3.2xlarge** instances are pretty heavily loaded.
+Below is a subset of Datadog's infrastructure. As you can see, **c3.2xlarge** instances are pretty heavily loaded.
 
 {{< img src="graphing/infrastructure/hostmap/hostmappart1image2.png" alt="host map part 1" responsive="true" style="width:80%;">}}
 
-As seen below, by clicking on the c3.2xlarge group and then sub-grouping by role, we found that only some of the roles are loaded, while others are nearly idling. If we downgraded those 7 green nodes to a c3.xlarge, we would save almost $13K per year. That’s worth investigating! ( $0.21 saved per hour per host x 24 hr/day * 365 days/year * 7 hosts = $12,877.20 / year )
+As seen below, by clicking on the c3.2xlarge group and then sub-grouping by role, we found that only some of the roles are loaded, while others are nearly idling. If we downgraded those 7 green nodes to a c3.xlarge, we would save almost $13K per year. That's worth investigating! ( $0.21 saved per hour per host x 24 hr/day * 365 days/year * 7 hosts = $12,877.20 / year )
 
 {{< img src="graphing/infrastructure/hostmap/hostmappart1image3.png" alt="Datadog Host Maps Instance-Role Groups" responsive="true" style="width:80%;">}}
 
@@ -65,14 +65,14 @@ If some of your hosts are running on AWS, the following AWS-specific tags are av
 * image
 * instance-type
 * security-group
-* and any EC2 tags you might use, such as ‘name’
+* and any EC2 tags you might use, such as 'name'
 
 ### Filter by
 
 `Filter by` limits the Host Maps to a specific subset of your infrastructure. Located in the top-left of Host Maps, the filter input bar lets you filter your map by any of your tags, plus the Datadog-provided attributes below.  
 If your filter input bar is empty, then the map displays all hosts that are reporting metrics to Datadog. If you want to focus your attention on just a subset of your hosts, then add filters.  
 
-Example: if you tag your hosts by the environment they are in, you can filter by ‘production’ to remove hosts in your staging and other environments from the map. If you want to eliminate all but one host role in production, then add that role to the filter, too—the filters is ANDed together.
+Example: if you tag your hosts by the environment they are in, you can filter by 'production' to remove hosts in your staging and other environments from the map. If you want to eliminate all but one host role in production, then add that role to the filter, too-the filters is ANDed together.
 
 Filterable host attributes (automatically provided):
 
@@ -92,8 +92,8 @@ A simple example is grouping your hosts by AWS availability zone. If you add a s
 
 ### Zoom in
 
-When you’ve identified a host that you want to investigate, click it for details. It zooms in and see up to six integrations reporting metrics from that host. (If there are more than six integrations, they are listed under the “Apps” header in the host’s detail pane, as in the screenshot below).  
-Click the name of an integration  to get a condensed dashboard of metrics for that integration. In the screenshot below, we have clicked “system” to get system metrics such as CPU usage, memory usage, disk latency, etc.
+When you've identified a host that you want to investigate, click it for details. It zooms in and see up to six integrations reporting metrics from that host. (If there are more than six integrations, they are listed under the "Apps" header in the host's detail pane, as in the screenshot below).  
+Click the name of an integration  to get a condensed dashboard of metrics for that integration. In the screenshot below, we have clicked "system" to get system metrics such as CPU usage, memory usage, disk latency, etc.
 
 {{< img src="graphing/infrastructure/hostmap/blog-host-maps-01.png" alt="Datadog Host Maps Zoom In" responsive="true" style="width:75%;" >}}
 
@@ -103,11 +103,11 @@ By default the color of each host (hexagon) is set to represent the percentage o
 
 The Host Maps can also communicate an additional, optional metric with the size of the hexagon; use the `Size by` selector. 
 
-In the screenshot below the size of the hexagons is the 15 minute average load, normalized so that machines’ workloads can be compared even if they have different numbers of cores.
+In the screenshot below the size of the hexagons is the 15 minute average load, normalized so that machines' workloads can be compared even if they have different numbers of cores.
 
 {{< img src="graphing/infrastructure/hostmap/hostmappart2image4.png" alt="Datadog Host Maps Using Color And Size" responsive="true" style="width:80%;">}}
 
-**Note**: The “% CPU utilized” metric uses the most reliable and up-to-date measurement of CPU utilization, whether it is being reported by the Datadog Agent, or directly by AWS, or vSphere.
+**Note**: The "% CPU utilized" metric uses the most reliable and up-to-date measurement of CPU utilization, whether it is being reported by the Datadog Agent, or directly by AWS, or vSphere.
 
 ### Display hosts on the Host Map that don't have an Agent installed
 
@@ -119,11 +119,11 @@ Some hosts, like those coming in from Google App Engine, do not pull in these me
 
 ### Data freshness and meaning
 
-Data in the Host Maps is refreshed about once a minute—unless you are continuously interacting with the map. In that case it doesn't refresh because it can be disorienting to have colors and shapes spontaneously change while you are still investigating. The bottom right of your screen tells you when data was last updated.
+Data in the Host Maps is refreshed about once a minute-unless you are continuously interacting with the map. In that case it doesn't refresh because it can be disorienting to have colors and shapes spontaneously change while you are still investigating. The bottom right of your screen tells you when data was last updated.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/tagging
+[1]: /tagging
 [2]: /integrations/

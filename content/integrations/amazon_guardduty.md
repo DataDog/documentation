@@ -40,7 +40,7 @@ Datadog integrates with AWS GuardDuty via a Lambda function that ships GuardDuty
 
 #### Send your Logs to Datadog
 
-1. If you haven’t already, set up the [Datadog log collection AWS Lambda function][1].
+1. If you haven't already, set up the [Datadog log collection AWS Lambda function][1].
 
 2. After setting up the Lambda function, add GuardDuty as a trigger by choosing **CloudWatch Events** as a trigger and creating a `GuardDutyRule`:
 

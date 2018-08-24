@@ -103,7 +103,7 @@ if you are having difficulties!
   > echo -e "\e[0;32mredis python module - OK\e[0m"
   *Missing redis python module - Failure*
 
-A: For CentOS5 we will look for python2.6, use that if it’s available, otherwise
+A: For CentOS5 we will look for python2.6, use that if it's available, otherwise
 we will default to the system python (2.4, in this case). The easiest solution
 would be to remove Python 2.6 altogether and restart the Agent which should
 have it default to 2.4 and the redis checks should then work as expected.
@@ -126,9 +126,9 @@ A: Prebuilt dashboards only allow you to filter on a single tag
 clicking [Overview](https://app.datadoghq.com/account/overview)).  If you go to the Metrics Explorer
 ([Metrics](https://app.datadoghq.com/metric/explorer) tab
 → [Explorer](https://app.datadoghq.com/metric/explorer)), you can select which metrics you want
-to see and what you want to see it over.  In the ‘Over:’ section you
-can select multiple environments and then select “Save these tiles to:
-a new dashboard.”
+to see and what you want to see it over.  In the 'Over:' section you
+can select multiple environments and then select "Save these tiles to:
+a new dashboard."
 
 {{< img src="integrations/redis/metric-explorer-redis.png" >}} -->
 

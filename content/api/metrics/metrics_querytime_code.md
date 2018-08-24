@@ -1,5 +1,5 @@
 ---
-title: Query time series points
+title: Query timeseries points
 type: apicode
 order: 15.3
 external_redirect: /api/#query-time-series-points

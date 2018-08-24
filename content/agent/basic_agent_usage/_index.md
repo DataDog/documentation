@@ -21,17 +21,20 @@ further_reading:
 
 ## Configuration management tools
 
-Manage the Datadog Agent and [integrations][1] using configuration management tools:
+Manage the Datadog Agent and [Integrations][1] using configuration management tools:
 
 ### Chef Cookbook
+
 * [Chef Github project][2]
 * [Installing Datadog Agent with Chef][3]
 
 ### Puppet
+
 * [Puppet Github project][4]
 * [Installing Datadog Agent with Puppet][5]
 
 ### Ansible
+
 * [Ansible Github project][6]
 * [Installing Datadog Agent with Ansible][7]
 
@@ -45,10 +48,10 @@ Manage the Datadog Agent and [integrations][1] using configuration management to
 
 ## Log location
 
-* For Linux and Mac OS X, Datadog Agent logs are located in the `/var/log/datadog/` directory
-* For Windows, Datadog Agent logs are located in  the `c:\programdata\Datadog\logs` directory
+* For Linux and macOS, Datadog Agent logs are located in the `/var/log/datadog/` directory
+* For Windows, Datadog Agent logs are located in  the `C:\ProgramData\Datadog\logs` directory
 
-The Datadog logs do a rollover every 10MB. When a rollover occurs, one backup is kept (e.g. `agent.log.1`). If a previous backup exists, it is overwritten on the rollover.
+The Datadog logs do a rollover every 10MB. When a rollover occurs, **one** backup is kept (e.g. `agent.log.1`). If a previous backup exists, it is overwritten during the rollover.
 
 ## Further Reading
 

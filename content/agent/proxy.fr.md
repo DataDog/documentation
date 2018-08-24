@@ -195,14 +195,14 @@ process_config:
 
 Avant de [redémarrer l'agent][2], modifiez la configuration de votre supervisor pour désactiver la vérification du certificat SSL. Ceci est nécessaire pour empêcher python de se plaindre de l'écart entre le nom d'host sur le certificat SSL (app.datadoghq.com) et votre nom d'host HAProxy.
 
-####  Sur GNU/Linux, Mac OS X, FreeBSD, SmartOS:
+####  Sur GNU/Linux, macOS, FreeBSD, SmartOS:
 Vous devez modifier la configuration du supervisor trouvée sur:
 
 * `/etc/dd-agent/supervisor_ddagent.conf` on debian-based systems
 * `/etc/dd-agent/supervisor.conf` on redhat-based systems
 * `/opt/local/datadog/supervisord/supervisord.conf` on SmartOS
 * `/usr/local/etc/datadog/supervisord/supervisord.conf` on FreeBSD
-* `~/.datadog-agent/supervisord/supervisord.conf` on Mac OS X
+* `~/.datadog-agent/supervisord/supervisord.conf` on macOS
 
 En supposant que ce fichier est trouvé à `SUP_FILE`
 ```bash

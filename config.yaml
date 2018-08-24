@@ -33,38 +33,24 @@ languages:
           url: "getting_started/"
           pre: "nav_start"
           weight: 30
-        # Getting Started - Subnav start
-        - identifier: customnav_getting_started_tags
+
+        # TAGGING
+        - identifier: menu_references_tagging
           name: "Tagging"
-          url: "getting_started/tagging/"
-          weight: 310
-          parent: menu_references_getting_started
+          url: "tagging/"
+          pre: "nav_tagging"
+          weight: 35
         - identifier: customnav_getting_started_assigning_tags
           name: "Assigning tags"
-          url: "getting_started/tagging/assigning_tags"
-          weight: 311
-          parent: customnav_getting_started_tags
+          url: "tagging/assigning_tags"
+          weight: 350
+          parent: menu_references_tagging
         - identifier: customnav_getting_started_using_tags
           name: "Using tags"
-          url: "getting_started/tagging/using_tags"
-          weight: 312
-          parent: customnav_getting_started_tags
+          url: "tagging/using_tags"
+          weight: 351
+          parent: menu_references_tagging
 
-        - identifier: customnav_getting_started_from_the_query_to_the_graph
-          name: "From the query to the Graph"
-          url: "getting_started/from_the_query_to_the_graph/"
-          weight: 320
-          parent: menu_references_getting_started
-        - identifier: customnav_getting_started_custom_metrics
-          name: "Custom metrics"
-          url: "getting_started/custom_metrics/"
-          weight: 330
-          parent: menu_references_getting_started
-        - identifier: customnav_getting_started_logs
-          name: "Log management"
-          url: "logs/"
-          weight: 400
-          parent: menu_references_getting_started
 
         # AGENT
         - identifier: menu_references_agent
@@ -85,7 +71,7 @@ languages:
           weight: 110
           parent: customnav_agentnav_basic_usage
         - identifier: centos
-          name: "CentOs"
+          name: "CentOS"
           url: "agent/basic_agent_usage/centos/"
           weight: 115
           parent: customnav_agentnav_basic_usage
@@ -108,11 +94,6 @@ languages:
           name: "Heroku"
           url: "agent/basic_agent_usage/heroku/"
           weight: 135
-          parent: customnav_agentnav_basic_usage
-        - identifier: customnav_agentnav_kubernetes
-          name: "Kubernetes"
-          url: "agent/basic_agent_usage/kubernetes/"
-          weight: 140
           parent: customnav_agentnav_basic_usage
         - identifier: osx
           name: "Mac OS X"
@@ -146,6 +127,43 @@ languages:
           parent: customnav_agentnav_basic_usage
 
 
+        - identifier: kubernetes
+          name: "Kubernetes"
+          url: "agent/kubernetes/"
+          weight: 15
+          parent: menu_references_agent
+
+        - identifier: kubernetes_daemonset
+          name: "DaemonSet Setup"
+          url: "agent/kubernetes/daemonset_setup"
+          weight: 150
+          parent: kubernetes
+        - identifier: kubernetes_host
+          name: "Host Setup"
+          url: "agent/kubernetes/host_setup"
+          weight: 155
+          parent: kubernetes
+        - identifier: kubernetes_event
+          name: "Event Collection"
+          url: "agent/kubernetes/event_collection"
+          weight: 160
+          parent: kubernetes
+        - identifier: kubernetes_integrations
+          name: "Custom Integrations"
+          url: "agent/kubernetes/integrations"
+          weight: 165
+          parent: kubernetes
+        - identifier: kubernetes_metrics
+          name: "Metrics"
+          url: "agent/kubernetes/metrics"
+          weight: 170
+          parent: kubernetes
+        - identifier: kubernetes_legacy
+          name: "Legacy Versions"
+          url: "agent/kubernetes/legacy"
+          weight: 175
+          parent: kubernetes
+
         - identifier: autodiscovery
           name: "Autodiscovery"
           url: "agent/autodiscovery"
@@ -177,6 +195,12 @@ languages:
           name: "Troubleshooting"
           url: "agent/troubleshooting/"
           weight: 60
+          parent: menu_references_agent
+
+        - identifier: customnav_agentnav_security
+          name: "Security"
+          url: "agent/security"
+          weight: 80
           parent: menu_references_agent
 
         #- identifier: customnav_agentnav_faq
@@ -214,6 +238,7 @@ languages:
           url: "graphing/dashboards/"
           weight: 10
           parent: menu_references_graphing
+
         # Graphing dashboard subnav
         - identifier: customnav_graphingnav_screenboard
           name: "Screenboard"
@@ -244,7 +269,7 @@ languages:
         # Metrics
         - identifier: customnav_graphingnav_metrics
           name: "Metrics"
-          url: "graphing/metrics/distributions"
+          url: "graphing/metrics/"
           weight: 20
           parent: menu_references_graphing
         - identifier: customnav_graphingnav_distribution
@@ -256,48 +281,102 @@ languages:
         - identifier: customnav_graphingnav_notebooks
           name: "Notebooks"
           url: "graphing/notebooks/"
-          weight: 40
+          weight: 30
           parent: menu_references_graphing
         - identifier: customnav_graphingnav_events
           name: "Event Stream"
           url: "graphing/event_stream/"
-          weight: 50
+          weight: 40
           parent: menu_references_graphing
         - identifier: customnav_graphingnav_infrastructure
           name: "Infrastructure"
           url: "graphing/infrastructure/"
-          weight: 60
+          weight: 50
           parent: menu_references_graphing
         - identifier: customnav_infrastructurenav_hostmap
-          name: "Hostmap"
+          name: "Host Map"
           url: "graphing/infrastructure/hostmap/"
-          weight: 30
+          weight: 510
+          parent: customnav_graphingnav_infrastructure
+        - identifier: customnav_infrastructurenav_containermap
+          name: "Container Map"
+          url: "graphing/infrastructure/containermap/"
+          weight: 35
           parent: customnav_graphingnav_infrastructure
         - identifier: customnav_infrastructurenav_livecontainers
           name: "Live Containers"
           url: "graphing/infrastructure/livecontainers/"
-          weight: 40
+          weight: 520
           parent: customnav_graphingnav_infrastructure
         - identifier: customnav_infrastructurenav_process
           name: "Live Processes"
           url: "graphing/infrastructure/process/"
-          weight: 50
+          weight: 530
           parent: customnav_graphingnav_infrastructure
-        - identifier: customnav_graphingnav_miscellaneous
-          name: "Miscellaneous"
-          url: "graphing/miscellaneous/"
-          weight: 80
-          parent: menu_references_graphing
+
+        # GRAPHING - Functions  
         - identifier: customnav_graphingnav_functions
-          name: "Functions"
-          url: "graphing/miscellaneous/functions/"
-          weight: 810
-          parent: customnav_graphingnav_miscellaneous
+          name: "From the query to the graph "
+          url: "graphing/functions/"
+          weight: 60
+          parent: menu_references_graphing
+        - identifier: customnav_graphingnav_algorithms
+          name: "Algorithms"
+          url: "graphing/functions/algorithms/"
+          weight: 610
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_arithmetic
+          name: "Arithmetic"
+          url: "graphing/functions/arithmetic/"
+          weight: 620
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_count
+          name: "Count"
+          url: "graphing/functions/count/"
+          weight: 630
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_interpolation
+          name: "Interpolation"
+          url: "graphing/functions/interpolation/"
+          weight: 640
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_rank
+          name: "Rank"
+          url: "graphing/functions/rank/"
+          weight: 650
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_rate
+          name: "Rate"
+          url: "graphing/functions/rate/"
+          weight: 660
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_regression
+          name: "Regression"
+          url: "graphing/functions/regression/"
+          weight: 670
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_rollup
+          name: "Rollup"
+          url: "graphing/functions/rollup/"
+          weight: 680
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_smoothing
+          name: "Smoothing"
+          url: "graphing/functions/smoothing/"
+          weight: 690
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_timeshift
+          name: "Timeshift"
+          url: "graphing/functions/timeshift/"
+          weight: 695
+          parent: customnav_graphingnav_functions
+
         - identifier: customnav_graphingnav_graphingjson
           name: "Graphing JSON"
-          url: "graphing/miscellaneous/graphingjson/"
-          weight: 820
-          parent: customnav_graphingnav_miscellaneous
+          url: "graphing/graphing_json/"
+          weight: 70
+          parent: menu_references_graphing
+
        # - identifier: customnav_graphingnav_faq
        #   name: "FAQ"
        #   url: "graphing/faq/"
@@ -462,8 +541,8 @@ languages:
           weight: 170
           parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_javascript
-          name: "JavaScript"
-          url: "tracing/setup/javascript/"
+          name: "Node.js"
+          url: "tracing/setup/nodejs/"
           weight: 180
           parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_dotnet
@@ -508,7 +587,7 @@ languages:
           url: "tracing/visualization/trace"
           weight: 230
           parent: customnav_tracingnav_visualization
-        
+
         # Trace Search
         - identifier: customnav_tracingnav_trace_search
           name: "Trace Search"
@@ -520,6 +599,13 @@ languages:
           name: "Trace Analytics"
           url: "tracing/analytics"
           weight: 35
+          parent: menu_references_tracing
+
+        # Service Map
+        - identifier: customnav_tracingnav_servicemap
+          name: "Service Map"
+          url: "tracing/servicemap"
+          weight: 38
           parent: menu_references_tracing
 
         # Trace API
@@ -583,6 +669,13 @@ languages:
         #  url: "tracing/faq/"
         #  weight: 100
         #  parent: menu_references_tracing
+
+        - identifier: customnav_tracingnav_security
+          name: "Security"
+          url: "tracing/security"
+          weight: 60
+          parent: menu_references_tracing
+
         # TRACING/APM - Subnav end
 
         # LOGS
@@ -591,6 +684,8 @@ languages:
           url: "logs/"
           pre: "nav_logs"
           weight: 90
+        
+        # Log collection  
         - identifier: customnav_lognav_collection
           name: "Log Collection & Integrations"
           url: "logs/log_collection/"
@@ -599,128 +694,137 @@ languages:
         - identifier: customnav_lognav_aws
           name: "AWS"
           url: "integrations/amazon_web_services/#log-collection"
-          weight: 205
+          weight: 210
           parent: customnav_lognav_collection
         - identifier: docker_log_collection
           name: "Docker"
           url: "logs/log_collection/docker"
-          weight: 208
-          parent: customnav_lognav_collection
-        - identifier: customnav_lognav_fluentd
-          name: "FluentD"
-          url: "logs/log_collection/fluentd"
-          weight: 210
-          parent: customnav_lognav_collection
-        - identifier: customnav_lognav_logstash
-          name: "Logstash"
-          url: "logs/log_collection/logstash"
           weight: 220
           parent: customnav_lognav_collection
-        - identifier: customnav_lognav_nxlog
-          name: "NxLog"
-          url: "logs/log_collection/nxlog"
+        - identifier: customnav_lognav_csharp
+          name: "Csharp"
+          url: "logs/log_collection/csharp/"
           weight: 230
           parent: customnav_lognav_collection
-        - identifier: customnav_lognav_rsyslog
-          name: "Rsyslog"
-          url: "logs/log_collection/rsyslog"
+        - identifier: customnav_lognav_go
+          name: "Go"
+          url: "logs/log_collection/go/"
           weight: 240
           parent: customnav_lognav_collection
-        - identifier: customnav_lognav_syslog_ng
-          name: "Syslog-ng"
-          url: "logs/log_collection/syslog_ng"
+        - identifier: customnav_lognav_java
+          name: "Java"
+          url: "logs/log_collection/java/"
           weight: 250
           parent: customnav_lognav_collection
+        - identifier: customnav_lognav_nodejs
+          name: "Nodejs"
+          url: "logs/log_collection/nodejs/"
+          weight: 260
+          parent: customnav_lognav_collection
+        - identifier: customnav_lognav_php
+          name: "PHP"
+          url: "logs/log_collection/php/"
+          weight: 270
+          parent: customnav_lognav_collection
+        - identifier: customnav_lognav_python
+          name: "Python"
+          url: "logs/log_collection/python/"
+          weight: 280
+          parent: customnav_lognav_collection
+        - identifier: customnav_lognav_ruby
+          name: "Ruby"
+          url: "logs/log_collection/ruby/"
+          weight: 290
+          parent: customnav_lognav_collection
+
+
         - identifier: customnav_lognav_other
           name: "Other Integrations"
           url: "integrations/#cat-log-collection"
-          weight: 260
+          weight: 299
           parent: customnav_lognav_collection
-        # LOGS - Subnav start
-        - identifier: customnav_lognav_explore
-          name: "Search"
-          url: "logs/explore/"
-          weight: 30
-          parent: menu_references_logs
-        - identifier: customnav_lognav_live_tail
-          name: "Live Tail"
-          url: "logs/live_tail/"
-          weight: 32
-          parent: menu_references_logs
-        - identifier: customnav_lognav_graph
-          name: "Log Analytics"
-          url: "logs/analytics/"
-          weight: 35
-          parent: menu_references_logs
+
+        # LOGS - Processing  
         - identifier: customnav_lognav_processing
           name: "Processing"
           url: "logs/processing/"
-          weight: 40
+          weight: 30
           parent: menu_references_logs
+        
+        - identifier: customnav_lognav_pipelines
+          name: "Pipelines"
+          url: "logs/processing/pipelines/"
+          weight: 310
+          parent: customnav_lognav_processing
+        - identifier: customnav_lognav_processors
+          name: "Processors"
+          url: "logs/processing/processors/"
+          weight: 320
+          parent: customnav_lognav_processing
         - identifier: customnav_lognav_parsing
           name: "Parsing"
-          url: "logs/parsing/"
+          url: "logs/processing/parsing/"
+          weight: 330
+          parent: customnav_lognav_processing
+        - identifier: customnav_lognav_attributes_naming_convention
+          name: "Naming Convention"
+          url: "logs/processing/attributes_naming_convention/"
+          weight: 340
+          parent: customnav_lognav_processing
+
+        # LOGS - Live tail
+        - identifier: customnav_lognav_live_tail
+          name: "Live Tail"
+          url: "logs/live_tail/"
+          weight: 40
+          parent: menu_references_logs
+
+        # LOGS - Explorer
+        - identifier: customnav_lognav_explorer
+          name: "Explorer"
+          url: "logs/explorer/"
           weight: 50
           parent: menu_references_logs
-        - identifier: customnav_lognav_dynamic_volume_control
-          name: "Dynamic volume control"
-          url: "logs/dynamic_volume_control/"
+        - identifier: customnav_lognav_search
+          name: "Search"
+          url: "logs/explorer/search"
+          weight: 510
+          parent: customnav_lognav_explorer
+        - identifier: customnav_lognav_saved_views
+          name: "Saved Views"
+          url: "logs/explorer/saved_views"
+          weight: 520
+          parent: customnav_lognav_explorer
+        - identifier: customnav_lognav_analytics
+          name: "Log Analytics"
+          url: "logs/explorer/analytics"
+          weight: 530
+          parent: customnav_lognav_explorer
+
+        - identifier: customnav_lognav_logging_without_limits
+          name: "Logging without Limits"
+          url: "logs/logging_without_limits/"
           weight: 60
           parent: menu_references_logs
-        - identifier: customnav_lognav_languages
-          name: "Application log"
-          url: "logs/languages/"
-          weight: 80
-          parent: menu_references_logs
-        - identifier: customnav_lognav_csharp
-          name: "Csharp"
-          url: "logs/languages/csharp/"
-          weight: 810
-          parent: customnav_lognav_languages
-        - identifier: customnav_lognav_go
-          name: "Go"
-          url: "logs/languages/go/"
-          weight: 820
-          parent: customnav_lognav_languages
-        - identifier: customnav_lognav_java
-          name: "Java"
-          url: "logs/languages/java/"
-          weight: 830
-          parent: customnav_lognav_languages
-        - identifier: customnav_lognav_nodejs
-          name: "Nodejs"
-          url: "logs/languages/nodejs/"
-          weight: 840
-          parent: customnav_lognav_languages
-        - identifier: customnav_lognav_php
-          name: "PHP"
-          url: "logs/languages/php/"
-          weight: 850
-          parent: customnav_lognav_languages
-        - identifier: customnav_lognav_python
-          name: "Python"
-          url: "logs/languages/python/"
-          weight: 850
-          parent: customnav_lognav_languages
-        - identifier: customnav_lognav_ruby
-          name: "Ruby"
-          url: "logs/languages/ruby/"
-          weight: 860
-          parent: customnav_lognav_languages
+        
         - identifier: customnav_lognav_monitor
           name: "Log monitor"
           url: "monitors/monitor_types/log"
-          weight: 90
+          weight: 70
           parent: menu_references_logs
+        
+        # LOGS - Archives
+           
         - identifier: customnav_lognav_archives
           name: "Archives"
-          url: "logs/s3"
-          weight: 100
+          url: "logs/archives/s3"
+          weight: 80
           parent: menu_references_logs
+        
         - identifier: customnav_lognav_archives_s3
           name: "AWS S3"
-          url: "logs/s3"
-          weight: 1010
+          url: "logs/archives/s3"
+          weight: 810
           parent: customnav_lognav_archives
 
         #- identifier: customnav_lognav_faq
@@ -728,6 +832,13 @@ languages:
         #  url: "logs/faq/"
         #  weight: 90
         #  parent: menu_references_logs
+
+        - identifier: customnav_loggnav_security
+          name: "Security"
+          url: "logs/security"
+          weight: 100
+          parent: menu_references_logs
+
         # LOGS - Subnav end
 
         # DEVELOPERS
@@ -762,30 +873,40 @@ languages:
           url: "developers/metrics/"
           weight: 40
           parent: menu_references_developers
+        - identifier: customnav_developersnav_metrics_custom
+          name: "Custom Metrics"
+          url: "developers/metrics/custom_metrics/"
+          weight: 400
+          parent: customnav_developersnav_metrics
         - identifier: customnav_developersnav_metrics_counts
           name: "Counts"
           url: "developers/metrics/counts"
           weight: 401
           parent: customnav_developersnav_metrics
+        - identifier: customnav_developersnav_metrics_distributions
+          name: "Distributions"
+          url: "developers/metrics/distributions"
+          weight: 402
+          parent: customnav_developersnav_metrics
         - identifier: customnav_developersnav_metrics_gauges
           name: "Gauges"
           url: "developers/metrics/gauges"
-          weight: 402
+          weight: 403
           parent: customnav_developersnav_metrics
         - identifier: customnav_developersnav_metrics_histograms
           name: "Histograms"
           url: "developers/metrics/histograms"
-          weight: 403
+          weight: 404
           parent: customnav_developersnav_metrics
         - identifier: customnav_developersnav_metrics_rates
           name: "Rates"
           url: "developers/metrics/rates"
-          weight: 404
+          weight: 405
           parent: customnav_developersnav_metrics
         - identifier: customnav_developersnav_metrics_sets
           name: "Sets"
           url: "developers/metrics/sets"
-          weight: 405
+          weight: 406
           parent: customnav_developersnav_metrics
         - identifier: customnav_developersnav_libraries
           name: "Libraries"
@@ -891,7 +1012,7 @@ languages:
           url: "account_management/saml/okta"
           weight: 550
           parent: customnav_accountmanagementnav_saml
-        
+
         - identifier: customnav_accountmanagementnav_multi_organization
           name: "Multi-org accounts"
           url: "account_management/multi_organization/"
@@ -904,22 +1025,50 @@ languages:
         #  parent: menu_references_account_management
         # ACCOUNT MANAGEMENT - Subnav end
 
+          # SECURITY
+        - identifier: menu_references_security
+          name: "Security"
+          url: "security/"
+          pre: "nav_security"
+          weight: 120
+        # SECURITY - Subnav start
+        - identifier: customnav_security_agent
+          name: "Agent"
+          url: "security/agent"
+          weight: 20
+          parent: menu_references_security
+        - identifier: customnav_security_tracing
+          name: "APM (Tracing)"
+          url: "security/tracing"
+          weight: 30
+          parent: menu_references_security
+        - identifier: customnav_security_logs
+          name: "Log Management"
+          url: "security/logs"
+          weight: 40
+          parent: menu_references_security
+        - identifier: customnav_security_other
+          name: "Other considerations"
+          url: "security/other"
+          weight: 50
+          parent: menu_references_security
+
         - identifier: menu_references_videos
           name: "Videos"
           url: "videos/"
           pre: "nav_videos"
-          weight: 130
+          weight: 140
         - identifier: menu_references_glossary
           name: "Glossary"
           url: "glossary/"
           pre: "nav_glossary"
-          weight: 120
+          weight: 130
 
         - identifier: menu_references_help
           name: "Help"
           url: "help/"
           pre: "nav_help"
-          weight: 140
+          weight: 150
   fr:
     disclaimer: "Cette page n'est pas encore disponible en Français, nous travaillons actuellement sur sa traduction.<br> Si vous avez des questions ou des retours sur ce projet de traduction, <a href=\"https://docs.datadoghq.com/fr/help/\">contactez-nous!</a>"
     weight: 0
@@ -932,33 +1081,23 @@ languages:
           url: "getting_started/"
           pre: "nav_start"
           weight: 30
-        # Getting Started - Subnav start
-        - identifier: customnav_getting_started_tags
+
+        # TAGGING
+        - identifier: menu_references_tagging
           name: "Tagging"
-          url: "getting_started/tagging/"
-          weight: 310
-          parent: menu_references_getting_started
+          url: "tagging/"
+          pre: "nav_tagging"
+          weight: 35
         - identifier: customnav_getting_started_assigning_tags
           name: "Assigner des tags"
-          url: "getting_started/tagging/assigning_tags"
-          weight: 311
-          parent: customnav_getting_started_tags
+          url: "tagging/assigning_tags"
+          weight: 350
+          parent: menu_references_tagging
         - identifier: customnav_getting_started_using_tags
           name: "Utiliser des tags"
-          url: "getting_started/tagging/using_tags"
-          weight: 312
-          parent: customnav_getting_started_tags
-
-        - identifier: customnav_getting_started_from_the_query_to_the_graph
-          name: "De la requête au graphique"
-          url: "getting_started/from_the_query_to_the_graph/"
-          weight: 320
-          parent: menu_references_getting_started
-        - identifier: customnav_getting_started_custom_metrics
-          name: "Métrique custom"
-          url: "getting_started/custom_metrics/"
-          weight: 330
-          parent: menu_references_getting_started
+          url: "tagging/using_tags"
+          weight: 351
+          parent: menu_references_tagging
 
         # AGENT
         - identifier: menu_references_agent
@@ -979,7 +1118,7 @@ languages:
           weight: 110
           parent: customnav_agentnav_basic_usage
         - identifier: centos
-          name: "CentOs"
+          name: "CentOS"
           url: "agent/basic_agent_usage/centos/"
           weight: 115
           parent: customnav_agentnav_basic_usage
@@ -1127,7 +1266,7 @@ languages:
         # Metrics
         - identifier: customnav_graphingnav_metrics
           name: "Metrics"
-          url: "graphing/metrics/distributions"
+          url: "graphing/metrics/"
           weight: 20
           parent: menu_references_graphing
         - identifier: customnav_graphingnav_distribution
@@ -1167,21 +1306,69 @@ languages:
           url: "graphing/infrastructure/process/"
           weight: 50
           parent: customnav_graphingnav_infrastructure
-        - identifier: customnav_graphingnav_miscellaneous
-          name: "Divers"
-          url: "graphing/miscellaneous/"
-          weight: 80
-          parent: menu_references_graphing
+
+        # GRAPHING - Functions  
         - identifier: customnav_graphingnav_functions
-          name: "Fonctions"
-          url: "graphing/miscellaneous/functions/"
-          weight: 810
-          parent: customnav_graphingnav_miscellaneous
+          name: "De la query au graphique"
+          url: "graphing/functions/"
+          weight: 60
+          parent: menu_references_graphing
+        - identifier: customnav_graphingnav_algorithms
+          name: "Algorithms"
+          url: "graphing/functions/algorithms/"
+          weight: 610
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_arithmetic
+          name: "Arithmetic"
+          url: "graphing/functions/arithmetic/"
+          weight: 620
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_count
+          name: "Count"
+          url: "graphing/functions/count/"
+          weight: 630
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_interpolation
+          name: "Interpolation"
+          url: "graphing/functions/interpolation/"
+          weight: 640
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_rank
+          name: "Rank"
+          url: "graphing/functions/rank/"
+          weight: 650
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_rate
+          name: "Rate"
+          url: "graphing/functions/rate/"
+          weight: 660
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_regression
+          name: "Regression"
+          url: "graphing/functions/regression/"
+          weight: 670
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_rollup
+          name: "Rollup"
+          url: "graphing/functions/rollup/"
+          weight: 680
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_smoothing
+          name: "Smoothing"
+          url: "graphing/functions/smoothing/"
+          weight: 690
+          parent: customnav_graphingnav_functions
+        - identifier: customnav_graphingnav_timeshift
+          name: "Timeshift"
+          url: "graphing/functions/timeshift/"
+          weight: 695
+          parent: customnav_graphingnav_functions
+
         - identifier: customnav_graphingnav_graphingjson
-          name: "Graphiques JSON"
-          url: "graphing/miscellaneous/graphingjson/"
-          weight: 820
-          parent: customnav_graphingnav_miscellaneous
+          name: "Graphing JSON"
+          url: "graphing/graphing_json/"
+          weight: 70
+          parent: menu_references_graphing
        # - identifier: customnav_graphingnav_faq
        #   name: "FAQ"
        #   url: "graphing/faq/"
@@ -1346,8 +1533,8 @@ languages:
           weight: 170
           parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_javascript
-          name: "JavaScript"
-          url: "tracing/setup/javascript/"
+          name: "Node.js"
+          url: "tracing/setup/nodejs/"
           weight: 180
           parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_dotnet
@@ -1476,61 +1663,75 @@ languages:
         #  parent: menu_references_tracing
         # TRACING/APM - Subnav end
 
-        # LOGS
+        # LOGS 
         - identifier: menu_references_logs
           name: "Log Management"
           url: "logs/"
           pre: "nav_logs"
           weight: 90
+        
+        # Log collection  
         - identifier: customnav_lognav_collection
-          name: "Log Collection & Integrations"
+          name: "Collecte de logs"
           url: "logs/log_collection/"
           weight: 20
           parent: menu_references_logs
         - identifier: customnav_lognav_aws
           name: "AWS"
           url: "integrations/amazon_web_services/#log-collection"
-          weight: 205
+          weight: 210
           parent: customnav_lognav_collection
         - identifier: docker_log_collection
           name: "Docker"
           url: "logs/log_collection/docker"
-          weight: 208
-          parent: customnav_lognav_collection
-        - identifier: customnav_lognav_fluentd
-          name: "FluentD"
-          url: "logs/log_collection/fluentd"
-          weight: 210
-          parent: customnav_lognav_collection
-        - identifier: customnav_lognav_logstash
-          name: "Logstash"
-          url: "logs/log_collection/logstash"
           weight: 220
           parent: customnav_lognav_collection
-        - identifier: customnav_lognav_nxlog
-          name: "NxLog"
-          url: "logs/log_collection/nxlog"
+        - identifier: customnav_lognav_csharp
+          name: "Csharp"
+          url: "logs/log_collection/csharp/"
           weight: 230
           parent: customnav_lognav_collection
-        - identifier: customnav_lognav_rsyslog
-          name: "Rsyslog"
-          url: "logs/log_collection/rsyslog"
+        - identifier: customnav_lognav_go
+          name: "Go"
+          url: "logs/log_collection/go/"
           weight: 240
           parent: customnav_lognav_collection
-        - identifier: customnav_lognav_syslog_ng
-          name: "Syslog-ng"
-          url: "logs/log_collection/syslog_ng"
+        - identifier: customnav_lognav_java
+          name: "Java"
+          url: "logs/log_collection/java/"
           weight: 250
           parent: customnav_lognav_collection
-        - identifier: customnav_lognav_other
-          name: "Autres Integrations"
-          url: "integrations/#cat-log-collection"
+        - identifier: customnav_lognav_nodejs
+          name: "Nodejs"
+          url: "logs/log_collection/nodejs/"
           weight: 260
           parent: customnav_lognav_collection
-        
+        - identifier: customnav_lognav_php
+          name: "PHP"
+          url: "logs/log_collection/php/"
+          weight: 270
+          parent: customnav_lognav_collection
+        - identifier: customnav_lognav_python
+          name: "Python"
+          url: "logs/log_collection/python/"
+          weight: 280
+          parent: customnav_lognav_collection
+        - identifier: customnav_lognav_ruby
+          name: "Ruby"
+          url: "logs/log_collection/ruby/"
+          weight: 290
+          parent: customnav_lognav_collection
+
+
+        - identifier: customnav_lognav_other
+          name: "Autres Intégrations"
+          url: "integrations/#cat-log-collection"
+          weight: 299
+          parent: customnav_lognav_collection
+       
         # LOGS - Subnav start
         - identifier: customnav_lognav_explore
-          name: "Search"
+          name: "Explorer"
           url: "logs/explore/"
           weight: 30
           parent: menu_references_logs
@@ -1539,28 +1740,76 @@ languages:
           url: "logs/live_tail/"
           weight: 32
           parent: menu_references_logs
-        - identifier: customnav_lognav_graph
-          name: "Log Analytics"
+        - identifier: customnav_lognav_analytics
+          name: "Analyses de logs"
           url: "logs/analytics/"
           weight: 35
           parent: menu_references_logs
+
+        # LOGS - Processing  
         - identifier: customnav_lognav_processing
           name: "Processing"
           url: "logs/processing/"
-          weight: 40
+          weight: 30
           parent: menu_references_logs
+        
+        - identifier: customnav_lognav_pipelines
+          name: "Pipelines"
+          url: "logs/processing/pipelines/"
+          weight: 310
+          parent: customnav_lognav_processing
+        - identifier: customnav_lognav_processors
+          name: "Processors"
+          url: "logs/processing/processors/"
+          weight: 320
+          parent: customnav_lognav_processing
         - identifier: customnav_lognav_parsing
           name: "Parsing"
-          url: "logs/parsing/"
+          url: "logs/processing/parsing/"
+          weight: 330
+          parent: customnav_lognav_processing
+        - identifier: customnav_lognav_attributes_naming_convention
+          name: "Convention de nommage"
+          url: "logs/processing/attributes_naming_convention/"
+          weight: 340
+          parent: customnav_lognav_processing
+
+        # LOGS - Live tail
+        - identifier: customnav_lognav_live_tail
+          name: "Live Tail"
+          url: "logs/live_tail/"
+          weight: 40
+          parent: menu_references_logs
+
+        # LOGS - Explorer
+        - identifier: customnav_lognav_explorer
+          name: "Explorer"
+          url: "logs/explorer/"
           weight: 50
           parent: menu_references_logs
-        - identifier: customnav_lognav_dynamic_volume_control
-          name: "Dynamic volume control"
-          url: "logs/dynamic_volume_control/"
+        - identifier: customnav_lognav_search
+          name: "Recherche"
+          url: "logs/explorer/search"
+          weight: 510
+          parent: customnav_lognav_explorer
+        - identifier: customnav_lognav_saved_views
+          name: "Saved Views"
+          url: "logs/explorer/saved_views"
+          weight: 520
+          parent: customnav_lognav_explorer
+        - identifier: customnav_lognav_analytics
+          name: "Log Analytics"
+          url: "logs/explorer/analytics"
+          weight: 530
+          parent: customnav_lognav_explorer
+
+        - identifier: customnav_lognav_logging_without_limits
+          name: "Collecter des logs sans limites"
+          url: "logs/logging_without_limits/"
           weight: 60
           parent: menu_references_logs
         - identifier: customnav_lognav_languages
-          name: "Application log"
+          name: "Logs d'application"
           url: "logs/languages/"
           weight: 80
           parent: menu_references_logs
@@ -1602,7 +1851,33 @@ languages:
         - identifier: customnav_lognav_monitor
           name: "Log monitor"
           url: "monitors/monitor_types/log"
-          weight: 90
+          weight: 70
+          parent: menu_references_logs
+        
+        # LOGS - Archives
+           
+        - identifier: customnav_lognav_archives
+          name: "Archives"
+          url: "logs/archives/s3"
+          weight: 80
+          parent: menu_references_logs
+        
+        - identifier: customnav_lognav_archives_s3
+          name: "AWS S3"
+          url: "logs/archives/s3"
+          weight: 810
+          parent: customnav_lognav_archives
+
+        #- identifier: customnav_lognav_faq
+        #  name: "FAQ"
+        #  url: "logs/faq/"
+        #  weight: 90
+        #  parent: menu_references_logs
+
+        - identifier: customnav_loggnav_security
+          name: "Sécurité"
+          url: "logs/security"
+          weight: 100
           parent: menu_references_logs
 
         # DEVELOPERS
@@ -1632,30 +1907,40 @@ languages:
           url: "developers/metrics/"
           weight: 40
           parent: menu_references_developers
+        - identifier: customnav_developersnav_metrics_custom
+          name: "Métriques Customisés"
+          url: "developers/metrics/custom_metrics"
+          weight: 4000
+          parent: customnav_developersnav_metrics
         - identifier: customnav_developersnav_metrics_counts
           name: "Counts"
           url: "developers/metrics/counts"
           weight: 401
           parent: customnav_developersnav_metrics
+        - identifier: customnav_developersnav_metrics_distributions
+          name: "Distributions"
+          url: "developers/metrics/distributions"
+          weight: 402
+          parent: customnav_developersnav_metrics
         - identifier: customnav_developersnav_metrics_gauges
           name: "Gauges"
           url: "developers/metrics/gauges"
-          weight: 402
+          weight: 403
           parent: customnav_developersnav_metrics
         - identifier: customnav_developersnav_metrics_histograms
           name: "Histograms"
           url: "developers/metrics/histograms"
-          weight: 403
+          weight: 404
           parent: customnav_developersnav_metrics
         - identifier: customnav_developersnav_metrics_rates
           name: "Rates"
           url: "developers/metrics/rates"
-          weight: 404
+          weight: 405
           parent: customnav_developersnav_metrics
         - identifier: customnav_developersnav_metrics_sets
           name: "Sets"
           url: "developers/metrics/sets"
-          weight: 405
+          weight: 406
           parent: customnav_developersnav_metrics
         - identifier: customnav_developersnav_libraries
           name: "Bibliothèques"
@@ -1761,7 +2046,7 @@ languages:
           url: "account_management/saml/okta"
           weight: 550
           parent: customnav_accountmanagementnav_saml
-          
+
         - identifier: customnav_accountmanagementnav_multi_organization
           name: "Comptes multi-org"
           url: "account_management/multi_organization/"
@@ -1804,8 +2089,8 @@ params:
     gif: ""
   static_url: "http://localhost:1313/"
   announcement_banner:
-    text: "<strong>Logging</strong> is here!"
-    link: "blog/announcing-logs/"
+    text: "The <strong>Service Map</strong> for APM is here!"
+    link: "blog/service-map/"
     exclude: []
   code_languages:
     - display_name: Python
@@ -1821,4 +2106,4 @@ params:
   home:
       meta_image: datadog_logo_share_tt.png
       meta_title: Getting Started with Datadog
-      meta_description: See metrics from all of your apps, tools &amp; services in one place with Datadog&#039;s cloud monitoring as a service solution. Try it for free.
+      meta_description: Datadog, the leading service for cloud-scale monitoring.

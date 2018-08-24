@@ -4,12 +4,12 @@ Classic:
       link: https://github.com/BoardiesITSolutions/cpp-datadogstatsd
       dogstatsd: true
       authors: BoardiesITSolutions
-      notes: Send metrics from your C++ applications to your Datadog account
+      notes: Send metrics from your C++ applications to your Datadog account.
     - name: DogFood
       link: https://github.com/garrettsickles/DogFood
       dogstatsd: true
       authors: Garrett Sickles
-      notes: C++ header library to send metrics to your Datadog account
+      notes: C++ header library to send metrics to your Datadog account.
   - C#:
     - name: dogstatsd-csharp-client
       link: https://github.com/DataDog/dogstatsd-csharp-client
@@ -19,8 +19,14 @@ Classic:
     - name: DatadogSharp
       link: https://github.com/neuecc/DatadogSharp
       dogstatsd: true
-      notes: Also supports APM
+      notes: Also supports APM.
       authors: Yoshifumi Kawai
+  - Clojure:
+    - name: clojure-statsd-client
+      link: https://github.com/unbounce/clojure-dogstatsd-client
+      dogstatsd: true
+      notes: A DogStatsD client for Clojure.
+      authors: Unbounce
   - Crystal:
     - name: statsd.cr
       link: https://github.com/miketheman/statsd.cr
@@ -36,6 +42,11 @@ Classic:
       link: https://github.com/adamkittelson/dogstatsd-elixir
       dogstatsd: true
       authors: Adam Kittelson
+    - name: ex-datadog-plug
+      link: https://github.com/Tubitv/ex-datadog-plug
+      api: true
+      authors: Tyr Chen, Tubi
+      notes: A plug for logging response times.
     - name: mtx
       link: https://github.com/synrc/mtx
       dogstatsd: true
@@ -62,6 +73,12 @@ Classic:
       link: https://github.com/zorkian/go-datadog-api
       api: true
       authors: Mark Smith from Dropbox
+  - Haskell:
+    - name: Haskell Datadog Client
+      link: https://github.com/iand675/datadog
+      authors: Ian Duncan
+      api: true
+      dogstatsd: true
   - Java:
     - name: java-dogstatsd-client
       link: https://github.com/DataDog/java-dogstatsd-client
@@ -71,18 +88,18 @@ Classic:
     - name: Lassie
       link: https://github.com/bazaarvoice/lassie
       api: true
-      notes: Only for creating screenboards
+      notes: Only for creating screenboards.
       authors: Bazaarvoice
     - name: java-dogstatsd-client
       link: https://github.com/arnabk/java-dogstatsd-client
       dogstatsd: true
       authors: Arnab Karmakar
-      notes: A fork of Indeed's java-dogstatsd-client; supports events and blocking metrics
+      notes: A fork of Indeed's java-dogstatsd-client; supports events and blocking metrics.
     - name: metrics-datadog
       link: https://github.com/coursera/metrics-datadog
       api: true
       dogstatsd: true
-      notes: A reporting bridge between Dropwizard metrics and Datadog
+      notes: A reporting bridge between Dropwizard metrics and Datadog.
       authors: Coursera
     - name: dogstatd-client
       link: https://github.com/chonton/dogstatd-client
@@ -93,12 +110,12 @@ Classic:
       link: https://github.com/DanteInc/serverless-datadog-metrics
       api: true
       authors: Dante Consulting, Inc.
-      notes: This library logs useful metrics from AWS Lambda functions, so that they can be accumulated via Datadog's AWS Lambda integration
+      notes: This library logs useful metrics from AWS Lambda functions, so that they can be accumulated via Datadog's AWS Lambda integration.
   - NiFi:
     - name: DataDogReportingTask
       link: https://nifi.apache.org/docs/nifi-docs/components/org.apache.nifi/nifi-datadog-nar/1.5.0/org.apache.nifi.reporting.datadog.DataDogReportingTask/index.html
       authors: Apache
-      notes: Publishes metrics from NiFi to Datadog
+      notes: Publishes metrics from NiFi to Datadog.
   - Node.js:
     - name: hot-shots
       link: https://github.com/brightcove/hot-shots
@@ -134,7 +151,7 @@ Classic:
     - name: dog-statsd
       link: https://github.com/graze/dog-statsd
       dogstatsd: true
-      notes: A fork of thephpleague/statsd with additional Datadog features by Graze
+      notes: A fork of thephpleague/statsd with additional Datadog features by Graze.
       authors: graze.com
   - Python:
     - name: datadogpy
@@ -143,22 +160,22 @@ Classic:
       api: true
       dogstatsd: true
       authors: Datadog
-      notes: Also includes an API client CLI tool, 'dog'
+      notes: Also includes an API client CLI tool, 'dog'.
   - R:
     - name: datadogr
       link: https://cran.r-project.org/package=datadogr
       api: true
-      notes: A simple R package to query for metrics
+      notes: A simple R package to query for metrics.
     - name: rdog
       link: https://github.com/alq666/rdog
       api: true
-      notes: An R package to analyze Datadog metrics into R
+      notes: An R package to analyze Datadog metrics into R.
       authors: Alexis Lê-Quôc
   - Racket:
     - name: racket-dogstatsd
       link: https://github.com/DarrenN/racket-dogstatsd
       dogstatsd: true
-      notes: A DogStatsD client for Racket
+      notes: A DogStatsD client for Racket.
       authors: DarrenN
   - Ruby:
     - name: DogApi
@@ -186,7 +203,7 @@ Tracing:
     - name: DatadogSharp
       link: https://github.com/neuecc/DatadogSharp
       dogstatsd: true
-      notes: Also supports DogStatsD
+      notes: Also supports DogStatsD.
       authors: Yoshifumi Kawai
   - Elixir:
     - name: spandex
@@ -197,30 +214,30 @@ Tracing:
       link: https://github.com/DataDog/dd-trace-go
       official: true
       authors: Datadog
-      notes: Go package 'tracer'
+      notes: Go package 'tracer'.
     - name: dd-go-opentracing
       link: https://github.com/gchaincl/dd-go-opentracing
       authors: Gustavo Chaín
-      notes: OpenTracing Tracer implementation for Datadog in Go
+      notes: OpenTracing Tracer implementation for Datadog in Go.
     - name: datadog-go
       link: https://github.com/savaki/datadog
       authors: Matt Ho
-      notes: OpenTracing Tracer implementation for Datadog in Go
+      notes: OpenTracing Tracer implementation for Datadog in Go.
   - Java:
     - name: dd-trace-java
       link: https://github.com/DataDog/dd-trace-java
       official: true
       authors: Datadog
-      notes: Java package 'tracer'
+      notes: Java package 'tracer'.
     - name: apm-client
       link: https://github.com/chonton/apm-client
       authors: Chas Honton
-  - Javascript:
+  - Node.js:
     - name: dd-trace-js
       link: https://github.com/DataDog/dd-trace-js
       official: true
       authors: Datadog
-      notes: OpenTracing API implementation in JavaScript for Node.js
+      notes: OpenTracing API implementation in JavaScript for Node.js.
   - PHP:
     - name: dd-trace-php
       link: https://github.com/jcchavezs/dd-trace-php/
@@ -230,10 +247,10 @@ Tracing:
       link: https://github.com/DataDog/dd-trace-py
       official: true
       authors: Datadog
-      notes: pip package is called 'ddtrace'
+      notes: pip package is called 'ddtrace'.
   - Ruby:
     - name: dd-trace-rb
       link: https://github.com/DataDog/dd-trace-rb
       official: true
       authors: Datadog
-      notes: gem is called 'ddtrace'
+      notes: gem is called 'ddtrace'.

@@ -28,13 +28,13 @@ Apacheからリアルタイムでメトリクスを取得しグラフ化する�
 
 <!-- From the open-source Agent:
 
-* <a href="https://github.com/DataDog/integrations-core/blob/master/apache/conf.yaml.example">Apache YAML example</a>
+* <a href="https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example">Apache YAML example</a>
 * <a href="https://github.com/DataDog/integrations-core/blob/master/apache/check.py">Apache checks.d</a> -->
 
 ## Datadog Agentの関連ソールコードへのリンク
 
 * [Apache checks.d](https://github.com/DataDog/integrations-core/blob/master/apache/check.py)
-* [Apache YAML example](https://github.com/DataDog/integrations-core/blob/master/apache/conf.yaml.example)
+* [Apache YAML example](https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example)
 
 <!-- The following metrics are collected by default with the Apache integration:
 

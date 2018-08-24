@@ -1,11 +1,12 @@
 ---
 title: Why do my logs show up with an Info status even for Warnings or Errors?
 kind: faq
+disable_toc: true
 further_reading:
 - link: "logs/processing"
   tag: "Documentation"
   text: Learn how to process your logs
-- link: "logs/parsing"
+- link: "logs/processing/parsing"
   tag: "Documentation"
   text: Learn more about parsing
 - link: "logs/faq/how-to-investigate-a-log-parsing-issue"
@@ -33,16 +34,16 @@ The value is now stored in a `log_status` attribute. [Add a Log Status remapper]
 
 {{< img src="logs/faq/source_attribute.png" alt="Source attribute" responsive="true" style="width:50%;">}}
 
-All new logs processed by this pipeline should now have the correct status.
+All new logs processed by this Pipeline should now have the correct status.
 
-**Note**: Any modification on a pipeline only impacts new logs as all the processing is done during the intake process.
+**Note**: Any modification on a Pipeline only impacts new logs as all the processing is done during the intake process.
 
 {{< img src="logs/faq/log_post_processing.png" alt="log post processing" responsive="true" style="width:50%;">}}
 
 ## JSON logs
 
 **JSON logs are automatically parsed in Datadog.**
-The log `status` attribute is one of the [reserved attributes][3] in Datadog which means JSON logs that use those attributes have their values treated specially - in this case to derive the log's status. Change the default remapping for those attribute at the top of your pipeline as explained [in the edit reserved attributes documentation][4].
+The log `status` attribute is one of the [reserved attributes][3] in Datadog which means JSON logs that use those attributes have their values treated specially - in this case to derive the log's status. Change the default remapping for those attributes at the top of your Pipeline as explained [in the edit reserved attributes documentation][4].
 So let's imagine that the actual status of the log is contained in the attribute `logger_severity`.
 
 {{< img src="logs/faq/new_log.png" alt="new log" responsive="true" style="width:50%;">}}
@@ -54,7 +55,7 @@ The status remapper looks for each of the reserved attributes in the order in wh
 {{< img src="logs/faq/reserved_attribute.png" alt="reserved attribute" responsive="true" style="width:50%;">}}
 
 
-**Note**: Any modification on the pipeline only impacts new logs as all the processing is done at ingestion.
+**Note**: Any modification on the Pipeline only impacts new logs as all the processing is done at ingestion.
 
 There are specific status formats that must be adhered to for the remapping to work. The recognized status formats are explained in the [status remapper description][2]. In this specific case, by adding some host and service remapping new logs are correctly configured:
 
@@ -62,7 +63,7 @@ There are specific status formats that must be adhered to for the remapping to w
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/parsing/#matcher
+[1]: /logs/processing/parsing/#matcher
 [2]: /logs/processing/#log-status-remapper
 [3]: /logs/#reserved-attributes
 [4]: /logs/#edit-reserved-attributes

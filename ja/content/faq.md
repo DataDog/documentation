@@ -61,7 +61,7 @@ sidebar:
 <!-- this is not currently true
 <h4 id="dogstatsd-flush-interval">Is the DogStatsD flush interval configurable?</h4>
 <p>
-Yes, it is!  You can change the flush interval by updating your agent’s configuration file called datadog.conf and replacing the value for the “dogstatsd_interval” key.  Use the following link, select your OS in the left column, and go to the Configuration section to find the location of your agent’s configuration file: <a href="http://docs.datadoghq.com/guides/basic_agent_usage/">http://docs.datadoghq.com/guides/basic_agent_usage/</a>
+Yes, it is!  You can change the flush interval by updating your agent's configuration file called datadog.conf and replacing the value for the "dogstatsd_interval" key.  Use the following link, select your OS in the left column, and go to the Configuration section to find the location of your agent's configuration file: <a href="http://docs.datadoghq.com/guides/basic_agent_usage/">http://docs.datadoghq.com/guides/basic_agent_usage/</a>
 </p>
 -->
 
@@ -93,15 +93,15 @@ StatsDのクライアントならどれでも使えます。 しかし、Datadog
 
 <!--#### How can I change the hostname {#hostname-change}
 
-You can change the hostname by updating your agent’s configuration file called
-datadog.conf and replacing the value for the “hostname” key.  Use the following
+You can change the hostname by updating your agent's configuration file called
+datadog.conf and replacing the value for the "hostname" key.  Use the following
 link, select your OS in the left column, and go to
 the [Configuration section][basic_agent_usage] to find the location of your
-agent’s configuration file.-->
+agent's configuration file.-->
 
 #### hostnameはどのように変更すればいいですか。 {#hostname-change}
 
-datadog.confというDatadog Agentの設定ファイル内の“hostname”の値を変更し、ファイル更新することでホスト名を変更することができます。 設定ファイルの保存先は、[次のページ](/ja/guides/basic_agent_usage/)の左メニューから、Datadog AgnetをインストールしたOSを選択し、**設定ファイルの保存されているディレクトリ**のセクションにて確認してください。
+datadog.confというDatadog Agentの設定ファイル内の"hostname"の値を変更し、ファイル更新することでホスト名を変更することができます。 設定ファイルの保存先は、[次のページ](/ja/guides/basic_agent_usage/)の左メニューから、Datadog AgnetをインストールしたOSを選択し、**設定ファイルの保存されているディレクトリ**のセクションにて確認してください。
 
 <!--#### How do I uninstall the agent {#agent-uninstall}
 
@@ -133,7 +133,7 @@ datadog.confというDatadog Agentの設定ファイル内の“hostname”の�
 -	CentOS 5: `$ sudo yum remove datadog-agent-base`
 -	CentOS 6: `$ sudo yum remove datadog-agent`
 
-<!--#### I stopped my agent but I’m still seeing the host in my Datadog account. Why is that? {#agent-stopped}
+<!--#### I stopped my agent but I'm still seeing the host in my Datadog account. Why is that? {#agent-stopped}
 
 It can take up to 24h for the host to disappear from the infrastructure page,
 but it will only be part of the host count for billing purposes if we're
@@ -167,10 +167,10 @@ For the AWS No Data errors, the issue here has to do with how frequently we
 receive AWS metrics. Because our crawlers are rate-limited by the Cloudwatch
 APIs, data is often delayed by 10 or more minutes, so we generally recommend
 that an alert for an AWS metric be set to have a threshold window of at least
-30 minutes or an hour (you can see this in step 3 of alert creation, “during
-the last…”). Switching the time frame on this alert will resolve this issue, or
+30 minutes or an hour (you can see this in step 3 of alert creation, "during
+the last..."). Switching the time frame on this alert will resolve this issue, or
 you can install the agent on some AWS hosts to get more up-to-date data to
-alert on. Overall, we’re always working towards getting data more efficiently
+alert on. Overall, we're always working towards getting data more efficiently
 from AWS. -->
 
 ### アラートについて {#alerts}
@@ -215,9 +215,9 @@ Metric names must start with a letter, and after that may contain ascii alphanum
 Other characters will get converted to underscores. There is no max length. Unicode is not support.
 We recommend avoiding spaces.
 Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. http.nginx.response_time).
-We say pseudo-hierarchical because we’re not actually enforcing a hierarchy or doing anything with it,
-but we have aspirations to use it to infer things about servers (e.g. “hey, I see hostA and hostB are
-reporting ‘http.nginx.*’, those must be web frontends”). -->
+We say pseudo-hierarchical because we're not actually enforcing a hierarchy or doing anything with it,
+but we have aspirations to use it to infer things about servers (e.g. "hey, I see hostA and hostB are
+reporting 'http.nginx.*', those must be web frontends"). -->
 
 ### APIについて {#api}
 
@@ -228,7 +228,7 @@ reporting ‘http.nginx.*’, those must be web frontends”). -->
 -	Unicodeはサポートされていません。
 -	空白は使用しないでください。
 
-Datadog Agentによって送信されるメトリクス名は、疑似階層ドット形式（例：http.nginx.response_time）になります。この形式を採用しているのは、メトリクス名から各サーバの機能を推測し易くするためです。例えば、「hostAとhostBは、‘http.nginx.*’だから、多分これらはwebのフロントエンドのインスタンスだよね〜」という感じです。
+Datadog Agentによって送信されるメトリクス名は、疑似階層ドット形式（例：http.nginx.response_time）になります。この形式を採用しているのは、メトリクス名から各サーバの機能を推測し易くするためです。例えば、「hostAとhostBは、'http.nginx.*'だから、多分これらはwebのフロントエンドのインスタンスだよね〜」という感じです。
 
 <!--#### What are valid tags? {#api-tags}
 
@@ -246,12 +246,12 @@ unicode. Tags will be converted to lowercase as well.-->
 
 <!--#### I'm submitting points to the API- anything I should know? {#api-else}
 
-We store metric points at the 1 second resolution, but we’d prefer if you only
+We store metric points at the 1 second resolution, but we'd prefer if you only
 submitted points every 15 seconds. Any metrics with fractions of a second timestamps
 will get rounded to the nearest second, and if any points have the same timestamp,
 the latest point will overwrite the previous ones.
 
-We have a soft limit of 100 time series per host, where a time series is
+We have a soft limit of 100 timeseries per host, where a timeseries is
 defined as a unique combination of metric name and tag.-->
 
 #### API経由でメトリクスデータを送信しようとしています。その際に注意することはありますか。 {#api-else}
@@ -398,7 +398,7 @@ Web server 2: api.metric('page.views', [(1317652676, 500), ...], host="example.c
 ~~~
 
 What we recommend doing is leaving off the hostname; it will then default to the host
-that is sending that point, since they’re different hosts it will be treated as different points:
+that is sending that point, since they're different hosts it will be treated as different points:
 
 ~~~
 Web server 1: api.metric('page.views', [(1317652676, 100), ...], tags=['domain:example.com'])
@@ -433,7 +433,7 @@ Web server 1: api.metric('page.views', [(1317652676, 100), ...], host="example.c
 Web server 2: api.metric('page.views', [(1317652676, 500), ...], host="example.com")
 ~~~
 
-Datadogが推奨しているタグ付けの方法は、ホスト名の"example.com"を残し、`tags=['domain:example.com']`と記述する方法です。 it will then default to the host that is sending that point, since they’re different　hosts it will be treated as different points:
+Datadogが推奨しているタグ付けの方法は、ホスト名の"example.com"を残し、`tags=['domain:example.com']`と記述する方法です。 it will then default to the host that is sending that point, since they're different　hosts it will be treated as different points:
 
 ~~~
 Web server 1: api.metric('page.views', [(1317652676, 100), ...], tags=['domain:example.com'])
@@ -469,11 +469,11 @@ sum:page.views{domain:example.com} by {host}
 #### I just set up my AWS integration. Why am I seeing duplicate hosts? {#duplicate-hosts}
 
 A single host running in EC2 might have an instance ID (i-abcd1234), a generic
-hostname provided by EC2 based on the host’s IP address (ip-192-0-0-1), and a
+hostname provided by EC2 based on the host's IP address (ip-192-0-0-1), and a
 meaningful host name provided by an internal DNS server or a config-managed hosts
 file (myhost.mydomain). Datadog creates aliases for host names when there are multiple
 uniquely identifiable names for a single host.  It takes about 10-20 minutes for the
-single host’s duplicate names to be aliased. You can read more about
+single host's duplicate names to be aliased. You can read more about
 hostnames [here][hostnames].
 -->
 
@@ -493,9 +493,9 @@ EC2上で起動したインスタンス(ホスト)には、インスタンスID�
 -	CloudwatchのAPIを使用して収集できる情報は全て収集しています。
 -	AWS Integrationについては、[Datadog-AWS Cloudwatch Integration](/ja/integrations/aws/)のページを参照してください。
 
-<!--#### I can’t filter out my ELB instances - will I be charged for them? {#aws-elb}
+<!--#### I can't filter out my ELB instances - will I be charged for them? {#aws-elb}
 
-We do not charge for ELBs (as they can’t be filtered out).-->
+We do not charge for ELBs (as they can't be filtered out).-->
 
 #### ELBインスタンスを除去することができません。これらのインスタンスに対しても請求されますか。 {#aws-elb}
 
@@ -511,7 +511,7 @@ To check for this, run:
 date -u && curl -s -v https://app.datadoghq.com/intake 2>&1 | grep Date
 ~~~
 
-This will output the current system’s date, and then make a request to our
+This will output the current system's date, and then make a request to our
 endpoint and grab the date on our end. If these are more than a few minutes
 apart, you may want to look at the time settings on your server.-->
 
@@ -652,8 +652,8 @@ to:
 <!--#### How do I do graph smoothing? {#graph-smoothing}
 
 You can apply smoothing averages to your series by droping to the JSON editor and
-adding ‘ewma’, for example:
-add any of ewma_x(…) where x can be 5, 10, 20 around your series, e.g.
+adding 'ewma', for example:
+add any of ewma_x(...) where x can be 5, 10, 20 around your series, e.g.
 
 ~~~ewma_20(exception.invalid{*})~~~.
 ewma stands for exponentially-moving average and the full list of functions
@@ -665,7 +665,7 @@ you can apply is <a href="http://docs.datadoghq.com/graphing/#functions">here</a
 
 例: `ewma_20(exception.invalid{*})`
 
-ewmaは、指数関数の移動平均の略語で、ewma_x(…)のxの部分には、平滑度によって5、10、20の値を設定することができます。
+ewmaは、指数関数の移動平均の略語で、ewma_x(...)のxの部分には、平滑度によって5、10、20の値を設定することができます。
 
 グラフ表示時に適用可能な関数は、[Graphing Primer](/ja/graphing/#functions)を参照してください。
 
@@ -685,7 +685,7 @@ on the overview page by clicking any host <a href="https://app.datadoghq.com/inf
 There are two ways to share a graph or screenboard
 <ul>
 <li>In a time board, pick a graph on a dashboard,
-click on the pencil to edit it and you’ll find the “share” tab that will generate an IFRAME of just that graph.
+click on the pencil to edit it and you'll find the "share" tab that will generate an IFRAME of just that graph.
 </li>
 <li>
 In a custom screenboard, the middle button in the upper right will generate a URL which gives
@@ -774,7 +774,7 @@ There are several problems that could cause this.  Send a message to support (su
 -	Datadogのサービス側へのすべての通信は、HTTPSを介して行われます。
 -	Datadogのサービス利用規約は、[SERVICE TERMS AND AGREEMENT](https://app.datadoghq.com/policy/license)ページで確認することができます。
 
-<!-- <h4 id="integration-edit">I’d like to tweak an integration or write up a new one. Do you accept pull requests?</h4>
+<!-- <h4 id="integration-edit">I'd like to tweak an integration or write up a new one. Do you accept pull requests?</h4>
 <p>
 Yes! The agent is entirely open source and can be found <a href="https://github.com/DataDog/dd-agent/">here</a>.
 </p> -->
@@ -821,7 +821,7 @@ Yes there is!  We detail log parsing <a href="http://docs.datadoghq.com/guides/l
 
 はい、できます。 詳細に関しては、[Datadog Agent によるログの解析方法](/ja/guides/logs/)のページを参照してください。
 
-<!--<h4 id="past-data">I’d like to add past data to my account. Is there a way to do that?</h4>
+<!--<h4 id="past-data">I'd like to add past data to my account. Is there a way to do that?</h4>
 <p>
 Unfortunately, we do not allow adding past data at this time.
 </p>-->
@@ -852,9 +852,9 @@ This depends on the medium you use to send metrics.
 <p>
 We offer reporting in a variety of ways so far, which include:
 <ul>
-<li>The ability to embed any chart anywhere. Pick a graph on a dashboard, click on the pencil to edit it and you’ll find the “share” tab that will generate an IFRAME.</li>
-<li>For certain sources (e.g. pagerduty), you’ll get a report in your mailbox once a week to go over past alerts.</li>
-<li>Metric alerts provide a way to report changes that are outside of what you define as “normal”.</li>
+<li>The ability to embed any chart anywhere. Pick a graph on a dashboard, click on the pencil to edit it and you'll find the "share" tab that will generate an IFRAME.</li>
+<li>For certain sources (e.g. pagerduty), you'll get a report in your mailbox once a week to go over past alerts.</li>
+<li>Metric alerts provide a way to report changes that are outside of what you define as "normal".</li>
 </ul>
 </p>-->
 
@@ -902,7 +902,7 @@ When using the 'sum/min/max/avg' aggregator, we're looking across series, not at
 </p>
 <p>
 For example, let's say you break down used memory by host, you'll get one
-time series for each host. If you don't break down by host,
+timeseries for each host. If you don't break down by host,
 by default you'll get the average across all hosts.
 </p>-->
 
@@ -911,7 +911,7 @@ by default you'll get the average across all hosts.
 When using the 'sum/min/max/avg' aggregator, we're looking across series, not at points within a single series. So if it is scoped to it's most granular level, it's possible that switching between those aggregators will not change the values you're seeing.
 
 For example, let's say you break down used memory by host, you'll get one
-time series for each host. If you don't break down by host,
+timeseries for each host. If you don't break down by host,
 by default you'll get the average across all hosts. -->
 
 <!--
@@ -927,8 +927,8 @@ by default you'll get the average across all hosts. -->
 <ul>
 <li><code>@support-datadog</code> – this will reach Datadog support directly when posted in your stream.</li>
 <li><code>@all</code> – this will send a notification to all members of your organization.</li>
-<li><code>@yourname</code> – this will notify the specific user named ‘yourname’.</li>
-<li><code>@test@test.com</code> this will send an email to test@test.com.</li>
+<li><code>@yourname</code> – this will notify the specific user named 'yourname'.</li>
+<li><code>@test@example.com</code> this will send an email to test@example.com.</li>
 <li>If you have HipChat, Slack, Webhooks, Pagerduty or VictorOps you can use:
 <ul>
 <li><code>@hipchat-[room-name]</code> or <code>@slack-[room-name]</code> – posts the event or graph to that chat room.</li>
@@ -949,7 +949,7 @@ by default you'll get the average across all hosts. -->
 -	`@support-datadog` - イベントストリームでこの表記を使った場合は、Datadogのサポートに通知します。
 -	`@All` - 組織のすべてのメンバに通知します。
 -	`@yourname` - 'yourname'という名前のユーザに通知します。
--	`@test@test.com` test@test.comに電子メールを送信します。
+-	`@test@example.com` test@example.comに電子メールを送信します。
 -	HipChat, Slack, Webhooks, Pagerduty, VictorOpsの使っている場合は、次のことができます。
 	-	`@hipchat-\[ルーム名\]`または`@slack-[ルーム名]` - \[ルーム名\]で指定したチャットルームに、イベントやグラフをポストすることができます。
 	-	`@webhook-[webhook名]` - アラートなどwebhookをつなげたものなら全て。例に関しては、[Send alerts by SMS with customizable WebHooks and Twilio](https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio/)のblogポストを参照してください。この機能を使うためのIntegarationの基本は、[Datadog-Webhooks Integration](/ja/integrations/webhooks/)のページと、ダッシュボードの[Integration](https://app.datadoghq.com/account/settings)タブからwebhooksのタイルを選択し`configuration`タブを参照してください。
@@ -1043,8 +1043,8 @@ about on <a target="_blank" href="http://docs.datadoghq.com/api/">here</a>).
 <p>
 Here is an example:
 <pre><code>{
-"title": “Host CPU above 75% for 5 minutes",
-"text": "Host CPU has been above 75% for the last 5 minutes …etc",
+"title": "Host CPU above 75% for 5 minutes",
+"text": "Host CPU has been above 75% for the last 5 minutes ...etc",
 "priority": "normal",
 "tags": ["vsphere", "env:prod", "host:i-a4f761f0", "role:admin"],
 "alert_type": "error"
@@ -1060,8 +1060,8 @@ Here is an example:
 次に例を示します:
 
 <pre><code>{
-"title": “Host CPU above 75% for 5 minutes",
-"text": "Host CPU has been above 75% for the last 5 minutes …etc",
+"title": "Host CPU above 75% for 5 minutes",
+"text": "Host CPU has been above 75% for the last 5 minutes ...etc",
 "priority": "normal",
 "tags": ["vsphere", "env:prod", "host:i-a4f761f0", "role:admin"],
 "alert_type": "error"
@@ -1081,7 +1081,7 @@ The admin of the account should enter the email addresses of team members
 <a href="https://app.datadoghq.com/account/team">here</a>. Some team best practices are as follows:
 <ul>
 <li>When the team member receives the confirmation email, they will be provided
-with a link to log in directly. The user should not click ‘sign up’ during this process.</li>
+with a link to log in directly. The user should not click 'sign up' during this process.</li>
 <li>If multiple users from the same organization sign up separately, this will
 register as different organizations in Datadog. Please reach out to support to
 have these merged, but please note that all information contained in the
@@ -1089,11 +1089,11 @@ account getting merged will not be transferred over.</li>
 <li>The only access controls we have right now are around admin activities
 (adding/removing users, billing, etc.). As far as data goes (hosts, metrics, dashboards, etc.)
 all users have access to everything; more robust access controls are in our
-pipeline, but not something we’ve focused a lot of attention on yet.</li>
-<li>To remove a team member use the “disable” button on the same ‘team’ page (only available
+pipeline, but not something we've focused a lot of attention on yet.</li>
+<li>To remove a team member use the "disable" button on the same 'team' page (only available
 for admins). You cannot permanently remove users, just disable; disabled users will
-only be visible to admins on the team page and can’t log in and any session they have
-open is invalidated. We don’t fully delete them because they might own events,
+only be visible to admins on the team page and can't log in and any session they have
+open is invalidated. We don't fully delete them because they might own events,
 dashboards, etc. which are not supposed to be removed.</li>
 </ul>
 </p>-->
@@ -1106,7 +1106,7 @@ dashboards, etc. which are not supposed to be removed.</li>
 
 チーム管理のベストプラクティスは、次のとおりです:
 
--	チームメンバとしての確認メールには、Datadogへの直接ログインするためのリンクが提供されます。新メンバは、このリンクを使いDatadogに直接ログインし、パスワードを設定することができます。この確認プロセスの間に’サインアップ’をクリックしないようにしてください。
+-	チームメンバとしての確認メールには、Datadogへの直接ログインするためのリンクが提供されます。新メンバは、このリンクを使いDatadogに直接ログインし、パスワードを設定することができます。この確認プロセスの間に'サインアップ'をクリックしないようにしてください。
 -	同じ組織からの複数のユーザが個別にユーザ登録をした場合、Datadogではそれぞれ別の組織としてユーザ情報を登録します。同一チームに所属させる必要がある場合は、サポートにご連絡ください。ただし、すべてのユーザ情報が移行されるわけではないの注意してください。
 -	Datadogが提供しているアクセス制御は、管理者活動としてのユーザの追加/削除、請求書プランの変更などです。ホスト、メトリクス、ダッシュボードなどのデータという観点では、すべてのユーザがすべてのものにアクセスできます。Datadogでは、より堅牢なアクセス制御を実現するために鋭意開発を進めていますが、アクセス制御の開発が現在の最優先課題ではないことはご理解いただけると幸いです。
 

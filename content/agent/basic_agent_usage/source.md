@@ -17,7 +17,7 @@ further_reading:
 ---
 ## Overview
 
-This page outlines the basic functionality of the Datadog Agent. If you haven't installed the Agent yet, instructions can be found [in the Datadog Agent integration page][1]. 
+This page outlines the basic features of the Datadog Agent. If you haven't installed the Agent yet, instructions can be found [in the Datadog Agent Integration page][1]. 
 
 By default, your Agent is installed in its own sandbox at `~/.datadog-agent`. You're free to move this folder wherever you like. However, this article assumes that the Agent is installed in its default location, so be sure to modify the instructions accordingly if you decide to move them.
 
@@ -41,7 +41,7 @@ The configuration files and folders for the Agent are located at:
 | :-----                       | :----                             |
 | `/etc/dd-agent/datadog.conf` | `/etc/datadog-agent/datadog.yaml` |
 
-Configuration files for [integrations][2]:
+Configuration files for [Integrations][2]:
 
 | Agent v5                | Agent v6                     |
 | :-----                  | :----                        |
@@ -60,7 +60,7 @@ The Agent logs are located in the `/var/log/datadog/` directory:
     * `dogstatsd.log`
     * `forwarder.log`
 
-If you're still having trouble, [our support team][3] will be glad to provide further assistance.
+If you're still having trouble, [our support team][3] is glad to provide further assistance.
 
 ## Further Reading
 

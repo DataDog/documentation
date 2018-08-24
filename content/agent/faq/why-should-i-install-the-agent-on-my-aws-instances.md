@@ -11,7 +11,7 @@ If you use AWS CloudWatch or another cloud-based metrics provider, you may alrea
 
 * **Integrations** - These make it simple to extend our Agent beyond the native metrics so you easily monitor application health, process utilization, and more.
 
-* **Custom metrics with DogStatsD** - With the Datadog Agent on board, use the built-in StatsD client to send custom metrics from your application, making it easier to correlate what’s happening with your application, your users, and your system. {{< img src="agent/faq/Agent_VS_AWSA.jpg" alt="Agent vs AWSA" responsive="true" style="width:40%;">}}
+* **Custom metrics with DogStatsD** - With the Datadog Agent on board, use the built-in StatsD client to send custom metrics from your application, making it easier to correlate what's happening with your application, your users, and your system. {{< img src="agent/faq/Agent_VS_AWSA.jpg" alt="Agent vs AWSA" responsive="true" style="width:40%;">}}
 
 The Datadog Agent is lightweight and fully open source, so you can review the code and even contribute by making a pull request.
 

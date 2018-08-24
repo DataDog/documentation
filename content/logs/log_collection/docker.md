@@ -1,21 +1,22 @@
 ---
 title: Docker Log collection
 kind: documentation
+aliases:
+  - /logs/docker
+  - /logs/languages/docker/
 further_reading:
-- link: "logs/explore"
+- link: "logs/explorer"
   tag: "Documentation"
   text: Learn how to explore your logs
-- link: "logs/analytics"
+- link: "logs/explorer/analytics"
   tag: "Documentation"
   text: "Perform Log Analytics"
 - link: "logs/processing"
   tag: "Documentation"
   text: Learn how to process your logs
-- link: "logs/parsing"
+- link: "logs/processing/parsing"
   tag: "Documentation"
   text: Learn more about parsing
-aliases:
-  - /logs/docker
 ---
 
 ## Overview
@@ -40,16 +41,16 @@ To collect logs from all your containers without filtering by image or label, ad
 ```
 logs:
     - type: docker
-      service: docker
+      service: docker
 ```
 
-**Important note**: Integration pipelines and processors will not be installed automatically as the source tag is not set. The integration setup is described below and it automatically installs integration pipelines that parse your logs and extract all the relevant information from them.
+**Important note**: Integration Pipelines and Processors will not be installed automatically as the source tag is not set. The integration setup is described below and it automatically installs integration Pipelines that parse your logs and extract all the relevant information from them.
 
 ### Option 2: Container installation
 
 As explained above, the Agent also has a [containerized][3] installation.
 
-First, let’s create one directory on the host that we will later mount on the containerized Agent:
+First, let's create one directory on the host that we will later mount on the containerized Agent:
 
 - `/opt/datadog-agent/run`: to make sure we do not lose any logs from containers during restarts or network issues we store on the host the last line that was collected for each container in this directory
 
@@ -108,7 +109,7 @@ logs:
     image: <IMAGE_NAME>    #or label: <MY_LABEL> or name: <CONTAINER_NAME>
     source: <SOURCE>
     sourcecategory: <SOURCE_CATEGORY>
-    service: <SERVICE>
+    service: <SERVICE>
 ```
 
 When filtering on the container image, both exact container image name or short names are supported.
@@ -119,7 +120,7 @@ If you have one container running `library/httpd:latest`, the following filterin
 * - `image: httpd:latest`
 * - `image: library/httpd:latest`
 
-For more examples of configuration files or Agent capabilities (such as filtering, redacting, multiline, …) read [the advanced log collection functions][7].
+For more examples of configuration files or Agent capabilities (such as filtering, redacting, multiline, ...) read [the advanced log collection functions][7].
 
 #### Option 2: Autodiscovery
 
@@ -152,6 +153,30 @@ LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%:%%por
 LABEL "com.datadoghq.ad.logs"='[{"source": "nginx", "service": "webapp"}]'
 ```
 
+**Multi-line logs: Docker compose**
+
+For multi-line logs like stack traces, the Agent has a [multi-line processing rules][9] feature in order to properly aggregate them into a single log.
+
+Example log (Java Satck traces):
+
+```
+2018-01-03T09:24:24.983Z UTC Exception in thread "main" java.lang.NullPointerException
+        at com.example.myproject.Book.getTitle(Book.java:16)
+        at com.example.myproject.Author.getBookTitles(Author.java:25)
+        at com.example.myproject.Bootstrap.main(Bootstrap.java:14)
+```
+
+Use the `com.datadoghq.ad.logs` label as below on your containers to make sure that the above log is properly collected:
+
+  ```
+  labels:
+    com.datadoghq.ad.logs: '[{"source": "java", "service": "myapp", "log_processing_rules": [{"type": "multi_line", "name": "log_start_with_date", "pattern" : "\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])"}]}]'
+  ```
+
+Check out the [multi-line processing rule documentation][10] to get more pattern examples.
+
+**Kubernetes**
+
 If you are running in Kubernetes and do not use container labels, pod annotation will soon be supported. Check our [Autodiscovery Guide][8] for more information about Autodiscovery setup and examples.
 
 ## Further Reading
@@ -166,3 +191,5 @@ If you are running in Kubernetes and do not use container labels, pod annotation
 [6]: https://hub.docker.com/r/datadog/agent/tags/
 [7]: /logs/#filter-logs
 [8]: https://docs.datadoghq.com/agent/autodiscovery/#template-source-docker-label-annotations
+[9]: https://docs.datadoghq.com/logs/log_collection/#multi-line-aggregation
+[10]: https://docs.datadoghq.com/logs/log_collection/#multi-line-aggregation

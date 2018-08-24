@@ -4,6 +4,7 @@ kind: documentation
 aliases:
   - /guides/multiaccountorg
   - /account_management/mult_account
+  - /account_management/faq/what-data-from-my-sub-organizations-can-i-see-in-my-parent-account
 further_reading:
 - link: "account_management/saml"
   tag: "Documentation"
@@ -14,6 +15,10 @@ It is possible to manage multiple child-organizations from one parent-organizati
 This is typically used by Managed Service Providers that have customers which should not have access to each others' data. Users can be added to the parent-organization and/or multiple child-organizations and easily switch between them from the [user account settings menu][1].
 
 The Multi-organization Account feature must be enabled by support. If this is a feature you need, [contact us][2]!
+
+Here's a two-minute video walkthrough:
+
+{{<wistia tg9ufqbin9>}} 
 
 ## Create a new child-organization
 
@@ -38,4 +43,4 @@ For example, The URL `https://app.datadoghq.com/event/event?id=1` is associated 
 [2]: /help
 [3]: https://app.datadoghq.com/account/new_org
 [4]: https://app.datadoghq.com/account/billing
-[5]: mailto://success@datadoghq.com
+[5]: mailto:success@datadoghq.com

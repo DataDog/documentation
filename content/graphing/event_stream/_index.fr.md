@@ -11,18 +11,16 @@ aliases:
 Vous pouvez affiner votre recherche en filtrant certaines propriétés des événements. Voir la liste des filtres ci-dessous pour plus de détails.
 Notez cependant que les filtres effectuent une recherche de correspondance exacte et ne fonctionnent pas avec des chaines de caractères partielles.
 
-{{% table responsive="true" %}}
-| Filter | Description |
-|--------|-------------|
-|user:pup@datadoghq.com|Affiche tous les événements avec des commentaires de pup@datadoghq.com.|
-|sources:github,chef|Affiche les événements de Github OR Chef.|
-|tags:env-prod OR db|Affiche les événements de taggé avec #env-prod OR #db.|
-|tags:security-group:sg-123 AND role:common-node| Affiche les événements de taggé with #security-group:sg-123 AND #role:common-node.|
-|hosts:i-0ade23e6,db.myapp.com|Affiche les événements de i-0ade23e6 OR db.myapp.com.|
-|status:error|Affiche les événements avec le status d'erreur. (supports: 'error', 'warning', 'success')|
-|priority:low|Affiche seulement les événements avec une low-priority. (supports: 'low' or 'normal'. defaults to 'all')|
-|incident:claimed|Affiche seulement les événements de claimed incidents. (supports: 'open', 'claimed', 'resolved', or 'all')|
-{{% /table %}}
+| Filter                                          | Description                                                                      |
+| --------                                        | -------------                                                                    |
+| user:pup@datadoghq.com                          | Trouver tous les évènements avec des commentaires écrits par pup@datadoghq.com.                              |
+| sources:github,chef                             | Montrer les évènements Github OU Chef.                                                 |
+| tags:env-prod OR db                             | Montre les évènements taggués #env-prod OU #db.                                        |
+| tags:security-group:sg-123 AND role:common-node | Montre les évènements taggués #security-group:sg-123 ET #role:common-node.            |
+| hosts:i-0ade23e6,db.myapp.com                   | Montre les évènements en provenance de i-0ade23e6 OU db.myapp.com.                                     |
+| status:error                                    | Montre les évènements avec les statuts en erreur. (supporte : 'error', 'warning', 'success')         |
+| priority:low                                    | Montre les évènements basse-priorité. (supporte : 'low' et 'normal', par défaut: 'all')  |
+| incident:claimed                                | Montre seulement les incidents réclamés. (supporte : 'open', 'claimed', 'resolved', ou 'all') |
 
 La recherche en texte intégral fonctionne sur tous les mots-clés fournis dans la requête de recherche après l'application des filtres. La recherche en texte intégral examine le texte de l'événement, le titre, les tags, les utilisateurs qui ont commenté l'événement, les noms d'hosts et les périphériques liés à l'événement.
 
@@ -126,7 +124,7 @@ Devrait être codé en: `http://catchpoint.com/session_id%3A123456`
 * `@support-datadog` – Envoie un message au support Datadog directement depuis votre flux.
 * `@all` – Envoie une notification à tous les membres de votre organisation.
 * `@yourname` – Avertit l'utilisateur spécifique nommé 'yourname'.
-* `@test@test.com` Envoie un courriel à test@test.com.
+* `@test@example.com` Envoie un courriel à `test@example.com`.
 * Si vous avez HipChat, Slack, Webhooks, Pagerduty ou VictorOps vous pouvez utiliser:
     * `@hipchat-[room-name]` ou `@slack-[room-name]` – affiche l'événement ou le graphique dans cette room de conversation.
     * `@webhook` – Alertez ou déclenchez tout ce qui est attaché à ce webhook. Découvrez [notre article de blog sur les Webhooks][events-1]!

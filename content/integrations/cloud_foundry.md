@@ -12,6 +12,7 @@ short_description: "Track the health of your Cloud Foundry VMs and the jobs they
 categories:
 - provisioning
 - configuration & deployment
+- log collection
 doc_link: https://docs.datadoghq.com/integrations/cloud_foundry/
 ddtype: check
 ---
@@ -99,6 +100,8 @@ If you are a [meta-buildpack][28] user, our buildpack can be used as a decorator
 
 ### Configuration
 
+#### Metric Collection
+
 **Set an API Key in your environment to enable the buildpack**:
 
 ```shell
@@ -106,6 +109,30 @@ If you are a [meta-buildpack][28] user, our buildpack can be used as a decorator
 cf set-env <YOUR_APP> DD_API_KEY <DD_API_KEY>
 # restage the application to get it to pick up the new environment variable and use the buildpack
 cf restage <YOUR_APP>
+```
+
+#### Log Collection (closed beta)
+
+To start collecting logs from your application in CloudFoundry, the Agent contained in the buildpack needs to be activated and log collection enabled.
+
+```
+cf set-env $YOUR_APP_NAME RUN_AGENT true
+cf set-env $YOUR_APP_NAME DD_LOGS_ENABLED true
+# Disable the Agent core checks to disable system metrics collection
+cf set-env $YOUR_APP_NAME DD_ENABLE_CHECKS false
+# restage the application to get it to pick up the new environment variable and use the buildpack
+cf restage $YOUR_APP_NAME
+```
+
+By default, the Agent collects logs from `stdout`/`stderr` and listens to TCP port 10514.
+It is possible to ask the Agent to listen on a different TCP port if you are streaming logs from your application in TCP.
+To disable log collection from `stdout`/`stderr`, use the following configuration:
+
+```
+# override the TCP port
+cf set-env $YOUR_APP_NAME DD_LOGS_CONFIG_TCP_FORWARD_PORT 10514
+# disable log collection on stdout/stderr
+cf set-env $YOUR_APP_NAME DISABLE_STD_LOG_COLLECTION true
 ```
 
 ### Build
@@ -120,14 +147,14 @@ See [the DogStatsD documentation][6] for more information. We maintain [a list o
 
 There are two points of integration with Datadog, each of which achieves a different goal:
 
-* **Datadog Agent BOSH release** — Install the Datadog Agent on every node in your deployment to track system, network, and disk metrics. Enable any other Agent checks you wish.
-* **Datadog Firehose Nozzle** — Deploy one or more Datadog Firehose Nozzle jobs. The jobs tap into your deployment's Loggregator Firehose and send all non-container metrics to Datadog.
+* **Datadog Agent BOSH release** - Install the Datadog Agent on every node in your deployment to track system, network, and disk metrics. Enable any other Agent checks you wish.
+* **Datadog Firehose Nozzle** - Deploy one or more Datadog Firehose Nozzle jobs. The jobs tap into your deployment's Loggregator Firehose and send all non-container metrics to Datadog.
 
 These integrations are meant for Cloud Foundry deployment administrators, not end users.
 
 ### Prerequisites
 
-You must have a working Cloud Foundry deployment and access to the BOSH Director that manages it. You also need BOSH CLI to deploy each integration. You may use either major version of the CLI—[v1][8] or [v2][9].
+You must have a working Cloud Foundry deployment and access to the BOSH Director that manages it. You also need BOSH CLI to deploy each integration. You may use either major version of the CLI-[v1][8] or [v2][9].
 
 ### Install the Datadog Agent BOSH Release
 
@@ -162,7 +189,7 @@ addons:
     release: datadog-agent
   properties:
     dd:
-      use_dogstatsd: yes
+      use_dogstatsd: true
       dogstatsd_port: 18125               # Many CF deployments have a StatsD already on port 8125
       api_key: <DD_API_KEY>
       tags: ["cloudfoundry_deployment_1"] # any tags you wish
@@ -194,7 +221,7 @@ The configuration under each check name should look the same as if you were conf
 
 You shouldn't configure a check for a subset of nodes in your deployment; everything you configure in `runtime.yml` applies to every node.
 
-To customize configuration for the default checks—system, network, disk, and ntp—see the [full list of configuration options][13] for the Datadog Agent BOSH release.
+To customize configuration for the default checks-system, network, disk, and ntp-see the [full list of configuration options][13] for the Datadog Agent BOSH release.
 
 #### Sync the runtime configuration to the Director
 

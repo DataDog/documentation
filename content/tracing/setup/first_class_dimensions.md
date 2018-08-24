@@ -77,12 +77,12 @@ There are several ways to specify an environment when reporting data:
       ```
       Via env var:
       ```
-      DD_TRACE_SPAN_TAGS=”env:prod”
+      DD_TRACE_SPAN_TAGS="env:prod"
       ```
 
   * **Ruby**:
   ```
-  Datadog.tracer.set_tags(‘env’ => ‘prod’)
+  Datadog.tracer.set_tags('env' => 'prod')
   ```
 
   * **Python**:
@@ -93,7 +93,7 @@ There are several ways to specify an environment when reporting data:
 
 ### Viewing Data by Environment
 
-Environments appear near the top of APM pages. Use the dropdown to scope the data displayed on the current page.
+Environments appear at the top of APM pages. Use the dropdown to scope the data displayed on the current page.
 
 {{< img src="tracing/setup/first_class_dimensions/envs_tracing_screen.png" alt="Envs tracing" responsive="true" style="width:80%;">}}
 
@@ -101,7 +101,7 @@ Environments appear near the top of APM pages. Use the dropdown to scope the dat
 ## Primary Tags
 ### Definition
 
-A primary tag is a first-class dimension that is used to scope an entire Datadog APM application. Primary tags are used in conjunction with environments to get an even finer view of your application’s behavior. Use cases for primary tags include:
+A primary tag is a first-class dimension that is used to scope an entire Datadog APM application. Primary tags are used in conjunction with environments to get an even finer view of your application's behavior. Use cases for primary tags include:
 
 * Availability zone
 * Datacenter
@@ -140,7 +140,7 @@ Visit the [APM Settings][3] page to define, change, or remove primary tags. Note
 
 ### Viewing Data by Primary Tag
 
-Primary tags appear near the top of APM pages, next to environments. Use these selectors to slice the data displayed on the current page. To view all data independent of a primary tag, choose `tag-name:*` from the dropdown (as in the image below).
+Primary tags appear at the top of APM pages, next to environments. Use these selectors to slice the data displayed on the current page. To view all data independent of a primary tag, choose `tag-name:*` from the dropdown (as in the image below).
 
 {{< img src="tracing/setup/first_class_dimensions/primary_tags_ui.png" alt="Primary tags UI" responsive="true" style="width:80%;">}}
 

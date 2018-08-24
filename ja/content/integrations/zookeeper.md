@@ -25,5 +25,5 @@ Connect ZooKeeper to Datadog in order to:
 
 Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
-* [ZooKeeper MySQLインテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/zk/conf.yaml.example)
+* [ZooKeeper MySQLインテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/zk/datadog_checks/zk/data/conf.yaml.example)
 * [ZooKeeperインテグレーション checks.d](https://github.com/DataDog/integrations-core/blob/master/zk/check.py)

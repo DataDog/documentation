@@ -32,7 +32,7 @@ Here's an example of some SQL Server IP/TCP settings that have worked just fine 
 
 ## Empty Connection String?
 
-Our SQL Server check relies on the adodbapi Python library, which has some limitations in the characters that it is able to use in making a connection string to a SQL Server. If your Agent experiences trouble connecting to your SQL Server, and if you find errors similar to the following in your Agent's collector.logs, your `qlserver.yaml` probably includes some character that causes issues with adodbapi.
+Our SQL Server check relies on the adodbapi Python library, which has some limitations in the characters that it is able to use in making a connection string to a SQL Server. If your Agent experiences trouble connecting to your SQL Server, and if you find errors similar to the following in your Agent's collector.logs, your `sqlserver.yaml` probably includes some character that causes issues with adodbapi.
 ```
 OperationalError: (KeyError('Python string format error in connection string->',), 'Error opening connection to ""')
 ```
@@ -45,7 +45,7 @@ In order to connect to SQL Server (either hosted on Linux or Windows) from a Lin
 
 https://docs.microsoft.com/en-us/sql/connect/odbc/linux/installing-the-microsoft-odbc-driver-for-sql-server-on-linux
 
-Next, install the pyodbc module. This can be done by running pip install pyodbc within your Agent’s python environment. For example:
+Next, install the pyodbc module. This can be done by running pip install pyodbc within your Agent's python environment. For example:
 ```
 $ sudo /opt/datadog-agent/embedded/bin/pip install pyodbc
 ```

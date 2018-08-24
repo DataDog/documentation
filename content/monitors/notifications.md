@@ -134,41 +134,57 @@ The @ notification inside the template variables follows the same rules.
 
 #### `{{is_match}}` or `{{is_exact_match}}`
 
-The `{{is_match}}` conditional allows you to match the triggering context to some string to display a different message.
-For example, you might want to notify your db team if a triggering host has `role:db` but notify your app team if the host has `role:app`.
+##### {{is_match}} 
 
-You can use any of the available tag variables in your condition. A match is made if the comparison string is anywhere in the resolved variable.
-
-The variable uses the following format:
+The `{{is_match}}` conditional allows you to match the triggering context to any given string in order to display a different message in your notifications. Use any of the available tag variables in your conditional statement. A match is made if the comparison string is anywhere in the resolved variable. Variables use the following format:
 
 ```
-{{#is_match "tag_variable" "comparison_string"}}
-  This shows if comparison_string is in tag_variable.
+{{#is_match "<TAG_VARIABLE>.name" "<COMPARISON_STRING>"}}
+  This shows if <COMPARISON_STRING> is in <TAG_VARIABLE>.
 {{/is_match}}
 ```
 
-Here is an example of how you can give a different message depending on the triggering context:
+For example, if you want to notify your database team if a triggering host has the `role:db` tags, but notify your web team if the host has the `role:web` tags, use the following: 
 
-{{< img src="monitors/notifications/scope_match_editor.png" alt="scope match editor" responsive="true" style="width:80%;">}}
+```
+{{#is_match "role.name" "web"}}
+  This shows only if the host that triggered the alert has the tag role:web attached.
+{{/is_match}}
 
-The `{{is_exact_match}}` conditional looks for the exact string in the tag variable, rather than using substring matching. For instance, if there are two hosts named `production` and `production-1`:
+{{#is_match "role.name" "db"}}
+  This shows only if the host that triggered the alert has the tag role:db attached
+{{/is_match}}
+
+```
+
+**Note**: To check if a `<TAG_VARIABLE>` is **NOT** empty, use the `{{is_match}}` conditional with an empty string.
 
   ```
-  {{#is_match "tag_variable" "production"}}
-    This shows if tag_variable is "production" or "production-1"
+  {{#is_match "<TAG_VARIABLE>.name" ""}}
+    This shows if <TAG_VARIABLE> is not empty.
+  {{/is_match}}
+  ```
+
+##### {{is_exact_match}}
+
+The `{{is_exact_match}}` conditional looks for the exact string in the tag variable, rather than using substring matching. The variable uses the following format:
+
+```
+{{#is_exact_match "<TAG_VARIABLE>.name" "<COMPARISON_STRING>"}}
+  This shows if <COMPARISON_STRING> is exactly <TAG_VARIABLE>.
+{{/is_exact_match}}
+```
+
+For instance, if an alert that can be triggered by two hosts tagged with `role:production` and `role:production-1`:
+
+  ```
+  {{#is_match "role.name" "production"}}
+    This shows only if the host that triggered the alert has the tags role:production or the role:production attached.
   {{/is_match}}
 
-  {{#is_exact_match "tag_variable" "production"}}
-    This shows only if tag_variable is "production"
+  {{#is_exact_match "host.name" "production"}}
+    This shows only if the host that triggered has the tag role:production attached.
   {{/is_exact_match}}
-  ```
-
-**Note**: To use the `{{is_match}}` conditional to check if a `tag_variable` is **NOT** empty, append `.name` after your tag name, for instance:
-
-  ```
-  {{#is_match "tag_variable.name" ""}}
-    This shows if tag_variable is not empty.
-  {{/is_match}}
   ```
 
 ### Variable availability
@@ -217,7 +233,7 @@ Datadog makes message template variables available to each defined monitor. Usin
 
 Here are a few examples of providing links to items like System Dashboards, Integration Dashboards, HostMaps and Managed Monitors pages.
 
-First example to review is the most common. Let’s say you would like to provide a link to a System Dashboard when a monitor for a specific system metric has exceeded your defined threshold. The message template variable that can be leveraged in this instance would be {{host.name}}. Include the following URL as a part of your Monitor “Say What’s Happening” section:
+First example to review is the most common. Let's say you would like to provide a link to a System Dashboard when a monitor for a specific system metric has exceeded your defined threshold. The message template variable that can be leveraged in this instance would be {{host.name}}. Include the following URL as a part of your Monitor "Say What's Happening" section:
 
 ```
 https://app.datadoghq.com/dash/integration/system_overview?tpl_var_scope=host:{{host.name}}
@@ -278,7 +294,16 @@ Would produce this slack message:
 
 {{< img src="monitors/notifications/notification_slack_preview.png" alt="notification_slack_preview" responsive="true" style="width:50%;" >}}
 
-You can also mention **@here** or **@channel** using `<!here>` or `<!channel>`, respectively. For user groups, use `<subteam^ID|handle>`.
+You can also mention **@here** or **@channel** using `<!here>` or `<!channel>`, respectively. 
+
+For user groups, use `<!subteam^GROUP_ID|GROUP_NAME>`. To find the `GROUP_ID`, [query the `usergroups.list` API endpoint of Slack][10]. For example, for a user group named `testers` you would use the following syntax:
+
+```
+<!subteam^12345|testers>
+```
+
+Note: Trailing special characters in a channel name are unsupported for the Slack @-notifications. 
+e.g. `@----critical_alerts` works, but `@--critical_alerts--` won't receive any notifications.
 
 #### Using message template variables to dynamically create @-mentions
 
@@ -290,7 +315,7 @@ For example, if the rendered variable is setup as a channel in the Slack integra
 
 * `@slack-{{host.name}}` post a slack message to the #host.name channel in Slack.
 
-[Learn more about how to setup conditional contacts and messages in a single monitor][10]
+[Learn more about how to setup conditional contacts and messages in a single monitor][11]
 
 ### Hipchat integration
 
@@ -311,4 +336,5 @@ Use `@here` in the monitor message to notify everybody in a given Hipchat channe
 [7]: /monitors/monitor_types/network
 [8]: /monitors/monitor_types/custom_check
 [9]: /monitors/monitor_types/event
-[10]: /monitors/faq/how-do-i-setup-conditional-contacts-and-messages-in-a-single-monitor
+[10]: https://api.slack.com/methods/usergroups.list
+[11]: /monitors/faq/how-do-i-setup-conditional-contacts-and-messages-in-a-single-monitor

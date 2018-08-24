@@ -30,7 +30,7 @@ a certain purpose.
 for you, which helps create structure in your infrastructure with as little
 work as possible (unlike explicitly creating all your clusters).
 Thus if a new machine is tagged, you can immediately see the stats
-for that machine based on what was previously set up for that tag.[Read more on tagging](/getting_started/tagging).
+for that machine based on what was previously set up for that tag.[Read more on tagging][15].
 
 ## Host Map
 
@@ -107,6 +107,7 @@ metric is above or below a certain threshold:
 [8]: https://www.datadoghq.com/blog/filter-datadog-events-stream-pinpoint-events-infrastructure/
 [10]: /graphing/infrastructure/hostmap/
 [11]: /graphing/
-[12]: /graphing/miscellaneous/functions/
+[12]: /graphing/functions/
 [13]: https://www.datadoghq.com/blog/rank-filter-performance-monitoring-metrics-top-function/
 [14]: /monitors/
+[15]: /tagging

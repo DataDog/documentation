@@ -4,6 +4,8 @@ kind: documentation
 aliases:
   - /fr/guides/multiaccountorg
   - /fr/account_management/mult_account
+  - >-
+    /fr/account_management/faq/what-data-from-my-sub-organizations-can-i-see-in-my-parent-account
 further_reading:
   - link: account_management/saml
     tag: Documentation
@@ -37,4 +39,4 @@ Par exemple, l'URL `https: //app.datadoghq.com/event/event?Id =1` est associée 
 [2]: /help
 [3]: https://app.datadoghq.com/account/new_org
 [4]: https://app.datadoghq.com/account/billing
-[5]: mailto://success@datadoghq.com
+[5]: mailto:success@datadoghq.com

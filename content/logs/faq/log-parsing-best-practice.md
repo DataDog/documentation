@@ -1,11 +1,12 @@
 ---
 title: Log Parsing - Best Practice
 kind: faq
+disable_toc: true
 further_reading:
 - link: "logs/processing"
   tag: "Documentation"
   text: Learn how to process your logs
-- link: "logs/parsing"
+- link: "logs/processing/parsing"
   tag: "Documentation"
   text: Learn more about parsing
 - link: "logs/faq/how-to-investigate-a-log-parsing-issue"
@@ -51,15 +52,15 @@ In this article, we walk through parsing a log from the Datadog Agent's collecto
     Learn more about this with [our examples][2]
 
 5. **How to skip some part of your log message that should not be extracted as attribute**:  
-    Let’s use our example again:
+    Let's use our example again:
     ```
     2017-10-12 08:54:44 UTC | INFO | dd.collector | checks.collector(collector.py:530) | Finished run #1780. Collection time: 4.06s. Emit time: 0.01s
     ```
-    Let’s say that the information dd.collector is not of any value for me and I do not want to extract it as an attribute.
+    Let's say that the information dd.collector is not of any value for me and I do not want to extract it as an attribute.
     To do that we need to remove the extract section of the rule:
     {{< img src="logs/faq/parsing_best_practice_4.png" alt="parsing_best_practice_4" responsive="true" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/parsing/
-[2]: /logs/parsing/#key-value
+[1]: /logs/processing/parsing/
+[2]: /logs/processing/parsing/#key-value

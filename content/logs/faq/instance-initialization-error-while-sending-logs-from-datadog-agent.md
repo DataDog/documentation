@@ -1,11 +1,12 @@
 ---
 title: Instance Initialization Error while sending logs from Datadog Agent
 kind: faq
+disable_toc: true
 further_reading:
 - link: "/logs/log_collection"
   tag: "Documentation"
   text: Learn how to collect your logs
-- link: "/logs/explore"
+- link: "/logs/explorer"
   tag: "Documentation"
   text: Learn how to explore your logs
 ---
@@ -13,7 +14,7 @@ further_reading:
 If you are collecting logs into your Datadog account via the Datadog Agent, you may find this error in your `agent.log` log file or in your Agent's status output:
 
 ```
-Instance #initialization[ERROR]:{“Core Check Loader”:“Check <config_name> not found in Catalog”,“JMX Check Loader”:“check is not a jmx check, or unable to determine if it’s so”,“Python Check Loader”:“No module named <config_name>”}
+Instance #initialization[ERROR]:{"Core Check Loader":"Check <config_name> not found in Catalog","JMX Check Loader":"check is not a jmx check, or unable to determine if it's so","Python Check Loader":"No module named <config_name>"}
 ```
 
 or the similar message in your Agent's status output:

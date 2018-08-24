@@ -73,7 +73,7 @@ In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if
 | Linux           | `sudo /etc/init.d/datadog-agent flare <CASE_ID>`                        | `sudo -u dd-agent -- datadog-agent flare <CASE_ID>`   |
 | Docker          | `docker exec -it dd-agent /etc/init.d/datadog-agent flare <CASE_ID>`    | `docker exec -it datadog-agent agent flare <CASE_ID>` |
 | Docker (Alpine) | `docker exec -it dd-agent /opt/datadog-agent/bin/agent flare <CASE_ID>` |                                                       |
-| MacOS x         | `datadog-agent flare <CASE_ID>`                                         | `datadog-agent flare <CASE_ID>` or web [web GUI][8]   |
+| macOS           | `datadog-agent flare <CASE_ID>`                                         | `datadog-agent flare <CASE_ID>` or web [web GUI][8]   |
 | CentOS          | `sudo service datadog-agent flare <CASE_ID>`                            | `sudo datadog-agent flare <CASE_ID>`                  |
 | Debian          | `sudo service datadog-agent flare <CASE_ID>`                            | `sudo datadog-agent flare <CASE_ID>`                  |
 | Kubernetes      | `kubectl exec <pod-name> -it /etc/init.d/datadog-agent flare <CASE_ID>` | `kubectl exec <pod-name> -it agent flare <CASE_ID>`   |
@@ -128,7 +128,7 @@ If your issue continues, [reach out to our Support team][5] with a [flare](#flar
 
 * [Common Windows Agent Installation Error 1721][11]
 * [How to monitor SNMP devices?][12]
-* [I stopped my Agent but I’m still seeing the host in my Datadog account.][13]
+* [I stopped my Agent but I'm still seeing the host in my Datadog account.][13]
 * [Network Time Protocol (NTP) Offset Issues][14]
 * [How to solve Permission denied errors?][15]
 * [Error Restarting Agent: Already Listening on a Configured Port][16]

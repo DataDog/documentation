@@ -35,7 +35,7 @@ usermod -a -G systemd-journal dd-agent
 
 ### Configuration
 
-Create the `journald.d/conf.yaml` file in the in the Agent’s `conf.d/` folder at the root of your Agent's directory.
+Create the `journald.d/conf.yaml` file in the in the Agent's `conf.d/` folder at the root of your Agent's directory.
 
 #### Log collection
 
@@ -84,6 +84,16 @@ logs:
       - docker.service
       - sshd.service
 ```
+
+##### Collect Container tags
+
+Tags are critical for finding information in highly dynamic containerized environments, which is why the Agent can collect container tags in journald logs.
+
+This works automatically when the Agent is running from the host. If you are using the containerized version of the Datadog Agent, mount your journald path and the following directory:
+
+- `/etc/machine-id`: this ensure that the Agent can query the journald that is stored on the host.
+
+Finally, [restart the agent][2].
 
 ## Troubleshooting
 

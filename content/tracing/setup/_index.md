@@ -22,9 +22,9 @@ further_reading:
 - link: "tracing/setup/java"
   tag: "Documentation"
   text: Java language instrumentation
-- link: "tracing/setup/javascript"
+- link: "tracing/setup/nodejs"
   tag: "Documentation"
-  text: JavaScript language instrumentation
+  text: Node.js language instrumentation
 - link: "tracing/setup/php"
   tag: "Documentation"
   text: PHP language instrumentation
@@ -37,6 +37,8 @@ further_reading:
 ---
 
 This documentation covers Agent v6 only, to know how to set up APM tracing with Agent v5, [refer to the dedicated APM with Agent v5 doc][1].
+
+{{< wistia ps2vn2rask >}}
 
 ## Setup process
 
@@ -85,25 +87,73 @@ apm_config:
 
 | File setting            | Type      | Environment variable     | Description                                                                                                                                                      |
 |-------------------------|-----------|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `enabled`               | boolean   | `DD_APM_ENABLED`           | When set to `true`, the Datadog Agent accepts trace metrics. Default value is `true`.                                                            |
-| `apm_dd_url`            | string    | `DD_APM_DD_URL`            | Datadog API endpoint where traces are sent.                                                                                                       |
+| `enabled`               | boolean   | `DD_APM_ENABLED`           | When set to `true`, the Datadog Agent accepts trace metrics. Default value is `true`.                                                            |
+| `apm_dd_url`            | string    | `DD_APM_DD_URL`            | Datadog API endpoint where traces are sent.                                                                                                       |
 | `env`                   | string    | -                        | Default environment to which traces should be registered under (e.g. *staging*, *production*, etc..).                                                             |
 | `extra_sample_rate`     | float     | -                        | Use this setting to adjust the trace sample rate. The value should be a float between `0` (no sampling) and `1` (normal sampling). Default value is `1`.     |
 | `max_traces_per_second` | float     | -                        | Maximum number of traces to sample per second. Set to `0` to disable the limit (*not recommended*). The default value is `10`.                              |
-| `ignore_resources`      | list      | `DD_IGNORE_RESOURCE`       | A list of resources that the agent should ignore. If using the environment variable, this should be a comma-separated list.                                                     |
+| `ignore_resources`      | list      | `DD_IGNORE_RESOURCE`       | A list of resources that the agent should ignore. If using the environment variable, this should be a comma-separated list.                                                     |
 | `log_file`              | string    | -                        | Location of the log file.                                                                                                                                    |
 | `replace_tags`          | list      |                          | A list of tag replacement rules. See the [Scrubbing sensitive information](#scrubbing-sensitive-information) section.                                            |
-| `receiver_port`         | number    | `DD_RECEIVER_PORT`         | Port that the Datadog Agent's trace receiver listen on. Default value is `8126`.                                                                  |
-| `apm_non_local_traffic` | boolean   | `DD_APM_NON_LOCAL_TRAFFIC` | Allows the agent to receive outside connections. It then listen on all interfaces.                                                                               |
+| `receiver_port`         | number    | `DD_RECEIVER_PORT`         | Port that the Datadog Agent's trace receiver listen on. Default value is `8126`.                                                                  |
+| `apm_non_local_traffic` | boolean   | `DD_APM_NON_LOCAL_TRAFFIC` | Allows the agent to receive outside connections. It then listen on all interfaces.                                                                               |
 | `max_memory`            | float     | -                        | Maximum memory that the agent is allowed to occupy. When this is exceeded the process is killed.                                                        |
 | `max_cpu_percent`       | float     | -                        | Maximum CPU percentage that the agent should use. The agent automatically adjusts its pre-sampling rate to stay below this number.                           |
 | `max_connections`       | number    | -                        | Maximum number of network connections that the agent is allowed to use. When this is exceeded the process is killed.                                    |
 
+To get a an overview of all the possible settings for APM, take a look at the Trace Agent's [`datadog.example.yaml`][21] configuration file.
 For more information about the Datadog Agent, see the [dedicated doc page][18] or refer to the [`datadog.yaml` templates][19].
 
 [Reference the dedicated documentation to setup tracing with Docker][5].
 
 ## Scrubbing sensitive information
+
+### Automatic scrubbing
+
+Automatic scrubbing is available for some services, such as ElasticSearch, MongoDB, Redis, Memcached, and HTTP server and client request URLs. Below is an example configuration snippet documenting all the available options.
+
+```
+apm_config:
+  # Defines obfuscation rules for sensitive data. Disabled by default.
+  obfuscation:
+    # ElasticSearch obfuscation rules. Applies to spans of type "elasticsearch".
+    # More specifically, to the "elasticsearch.body" tag.
+    elasticsearch:
+      enabled: true
+      # Values for the keys listed here will not be obfuscated.
+      keep_values:
+        - client_id
+        - product_id
+
+    # MongoDB obfuscation rules. Applies to spans of type "mongodb".
+    # More specifically, to the "mongodb.query" tag.
+    mongodb:
+      enabled: true
+      # Values for the keys listed here will not be obfuscated.
+      keep_values:
+        - document_id
+        - template_id
+
+    # HTTP obfuscation rules for "http.url" tags in spans of type "http".
+    http:
+      # If true, query strings in URLs will be obfuscated.
+      remove_query_string: true
+      # If true, path segments in URLs containing digits will be replaced by "?"
+      remove_paths_with_digits: true
+
+    # When enabled, stack traces will be removed (replaced by "?").
+    remove_stack_traces: true
+
+    # Obfuscation rules for spans of type "redis". Applies to the "redis.raw_command" tags.
+    redis:
+      enabled: true
+
+    # Obfuscation rules for spans of type "memcached". Applies to the "memcached.command" tag.
+    memcached:
+      enabled: true
+```
+
+### Replace rules
 
 To scrub sensitive data from your span's tags, use the `replace_tags` setting. It is a list containing one or more groups of parameters that describe how to perform replacements of sensitive data within your tags. These parameters are:
 
@@ -153,3 +203,4 @@ apm_config:
 [18]: /agent/
 [19]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [20]: https://github.com/DataDog/datadog-trace-agent/#run-on-linux
+[21]: https://github.com/DataDog/datadog-trace-agent/blob/6.4.1/datadog.example.yaml

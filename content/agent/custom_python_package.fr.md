@@ -19,8 +19,10 @@ La version python intégrée à l'Agent se trouve ici: `/opt/datadog-agent/embed
 L'Agent vient également avec pip, installer les bibliothèques python en utilisant:
 
 ```bash
-sudo /opt/datadog-agent/embedded/bin/pip install <package_name>
+sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install <package_name>
 ```
+
+**Note:** Dans macOS, supprimez `-u dd-agent` de cette commande.
 
 ### Windows
 

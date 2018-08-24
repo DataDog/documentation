@@ -27,11 +27,11 @@ It aggregates the values that are sent during the flush interval (usually defaul
 * `my_metric.max`: gives you the max value sent during the flush interval
 * `my_metric.min`: gives you the min value sent during the flush interval
 
-Each one of these becomes a value in their respective metric time series that are sent to Datadog. Then you can aggregate these time series the same way you aggregate any other metric time series.
+Each one of these becomes a value in their respective metric timeseries that are sent to Datadog. Then you can aggregate these timeseries the same way you aggregate any other metric timeseries.
 
 ## Submission
 
-### Agent sheck
+### Agent check
 
 
 | Method              | Overview                                                       |

@@ -48,7 +48,7 @@ Here you can specify:
 
 * The width of the gray band. "Deviations" is equivalent to the bounds parameter used in the anomalies function in dashboards.
 * The anomaly detection algorithm used. See the [next section below][2].
-* If a seasonal algorithm is chosen, the seasonality.
+* If a seasonal algorithm is chosen, the seasonality. NOTE: Machine learning algorithms require 2 weeks of evaluation to leverage weekly seasonality.
 * The [rollup][3] interval.
 * The percentage of points that need to be anomalous for alerting/warning/recovery.
 
@@ -136,15 +136,15 @@ The second graph shows the same metric, a day later. Even though it uses the pre
 
 ### Why does an anomaly "disappear" when I zoom in?
 
-At different zoom levels, the same query can result in time series with very different characteristics. When looking at longer time periods, each point represents the aggregate of many more-granular points. Therefore, each of these aggregate points may hide noise observed in the more granular points. For example, charts that show one week often appear smoother (less noisy) than charts that show just 10 minutes.
+At different zoom levels, the same query can result in timeseries with very different characteristics. When looking at longer time periods, each point represents the aggregate of many more-granular points. Therefore, each of these aggregate points may hide noise observed in the more granular points. For example, charts that show one week often appear smoother (less noisy) than charts that show just 10 minutes.
 
-The width of the gray band that is drawn by our anomaly detection algorithm is, in part, based on the noisiness of the time series in the plot. The band must be wide enough that ordinary noise is mostly inside the band and doesn't appear as anomalous. Unfortunately, when the band is wide enough to include ordinary noise, it might also be wide enough to hide some anomalies, especially when viewing short time windows.
+The width of the gray band that is drawn by our anomaly detection algorithm is, in part, based on the noisiness of the timeseries in the plot. The band must be wide enough that ordinary noise is mostly inside the band and doesn't appear as anomalous. Unfortunately, when the band is wide enough to include ordinary noise, it might also be wide enough to hide some anomalies, especially when viewing short time windows.
 
 Here's a concrete example to illustrate. The `app.requests` metric is noisy but has a constant average value of 8. On one day, there is a 10-minute anomalous period, starting a 9:00, during which the metric has an average value of 10. The chart below shows this series in a graph with a one-day time window; each point in the graph summarizes 5 minutes.
 
 {{< img src="monitors/monitor_types/anomaly/disappearing_day.png" alt="disappearing day" responsive="true" style="width:70%;" >}}
 
-The gray band here makes sense; it is wide enough to capture the noise in the time series. Yet, it is narrow enough that the anomaly at 9:00 stands out clearly. This next chart shows a zoomed-in view of a half-hour time window that includes the 10-minute anomaly; each point in the graph summarizes 10 seconds.
+The gray band here makes sense; it is wide enough to capture the noise in the timeseries. Yet, it is narrow enough that the anomaly at 9:00 stands out clearly. This next chart shows a zoomed-in view of a half-hour time window that includes the 10-minute anomaly; each point in the graph summarizes 10 seconds.
 
 {{< img src="monitors/monitor_types/anomaly/disappearing_half_hour.png" alt="disappearing half hour" responsive="true" style="width:70%;" >}}
 

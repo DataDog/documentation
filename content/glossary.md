@@ -6,13 +6,13 @@ disable_toc: true
 
 #### Agent
 
-The Agent is a small application that runs on hosts. It executes checks and manages the flow of information from the host to the Datadog platform. The Agent is open source and compiled binaries are made available for Windows, OS X, and many flavors of Linux.
+The Agent is a small application that runs on hosts. It executes checks and manages the flow of information from the host to the Datadog platform. The Agent is open source and compiled binaries are made available for Windows, macOS, and many flavors of Linux.
 
 See the [Agent documentation][8] for more information.
 
 #### API
 
-Datadog provides an HTTP API in order to interact programmatically with the platform. Every feature, resource, and mechanism is accessible via the API. Interacting with the API manually is a great way to learn how Datadog works under the hood. In production however, you will use a purpose-built tool, library, or interface — such as the Datadog product itself — as an abstraction layer between you and the API.
+Datadog provides an HTTP API in order to interact programmatically with the platform. Every feature, resource, and mechanism is accessible via the API. Interacting with the API manually is a great way to learn how Datadog works under the hood. In production however, you will use a purpose-built tool, library, or interface - such as the Datadog product itself - as an abstraction layer between you and the API.
 
 See the [API documentation][1] for more information.
 
@@ -20,7 +20,7 @@ See the [API documentation][1] for more information.
 
 Checks are small Python programs run periodically by the Agent. A Check performs an action and then gathers the result, which the Agent then stores and reports to the Datadog platform. These programs are freeform and are generally used to collect metrics from custom environments or applications.
 
-Note that the word “check” — when not capitalized — refers to the generic act of taking a measurement.
+Note that the word "check" - when not capitalized - refers to the generic act of taking a measurement.
 
 #### Client Library
 
@@ -29,6 +29,14 @@ There are a number of libraries in a variety of languages that help you instrume
 Libraries are designed to interact with either the API or DogStatsD, though a handful provide support for both.
 
 See the [Libraries documentation][2] for more information.
+
+#### Dashboard
+
+Dashboards are one of the primary ways to visualize your data. There are two types of dashboards: Screen Boards and Time Boards.
+
+Screen Boards are free-form dashboards which can include a variety of objects such as images, graphs, logs, and more. They are commonly used as status boards or story-telling tableaus, and can either update in real-time, or represent one or more fixed points in the past.
+
+Time Boards have a more structured format, and represent a single point in time - either fixed or real-time - across the entire dashboard. They are commonly used for troubleshooting, correlation, and general data exploration.
 
 #### DogStatsD
 

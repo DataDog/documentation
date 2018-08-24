@@ -28,7 +28,7 @@ Bring Gearman metrics to Datadog to:
 
 Datadog Agentの設定ファイルサンプルとメトリクス取得プログラム:
 
-* [Gearmanインテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/gearmand/conf.yaml.example)
+* [Gearmanインテグレーションの設定ファイルサンプル](https://github.com/DataDog/integrations-core/blob/master/gearmand/datadog_checks/gearmand/data/conf.yaml.example)
 * [Gearmanインテグレーション checks.d](https://github.com/DataDog/integrations-core/blob/master/gearmand/check.py
 
 <!-- The following metrics are collected by default with the Gearman integration:

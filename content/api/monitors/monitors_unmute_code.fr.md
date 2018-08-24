@@ -1,7 +1,7 @@
 ---
 title: Activer un monitor
 type: apicode
-order: 16.10
+order: 16.91
 external_redirect: /api/#unmute-a-monitor
 ---
 

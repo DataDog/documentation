@@ -1,11 +1,12 @@
 ---
 title: How to increase the number of log files tailed by the Agent
 kind: faq
+disable_toc: true
 further_reading:
 - link: "/logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers"
   tag: "FAQ"
   text: How to Send Logs to Datadog via External Log Shippers?
-- link: "/logs/parsing"
+- link: "/logs/processing/parsing"
   tag: "Documentation"
   text: Learn more about parsing
 - link: "/logs/faq/how-to-investigate-a-log-parsing-issue"

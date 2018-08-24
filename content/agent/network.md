@@ -20,8 +20,8 @@ further_reading:
 **Traffic is always initiated by the Agent to Datadog. No sessions are ever initiated from Datadog back to the Agent**:
 
 * All traffic is sent over SSL
-* The destination for [APM][1] data is `trace.agent.datadoghq.com`
-* The destination for [Live Containers][2] data is `process.datadoghq.com`
+* The destination for [APM][1] data is `trace.agent.datadoghq.com`
+* The destination for [Live Containers][2] data is `process.datadoghq.com`
 * The destination for [Logs][3] data is `intake.logs.datadoghq.com `
 * The destination for all other Agent data is
   * **Agents < 5.2.0** `app.datadoghq.com`
@@ -68,42 +68,51 @@ If you are interested by only one of the sections of this document, for each sec
 
 ## Open Ports
 
-**All traffic is sent (outbound only) over SSL via 443 TCP.**
+**All traffic is sent (outbound only) over SSL via TCP.**
 
 Open the following ports in order to benefit from all the Agent functionalities: 
 
 ### Agent v6
 
-* `123/UDP`: NTP - [More details on the importance of NTP here][5].
-* `5000/tcp`: port for the [go_expvar server][6]
-* `5001/tcp`: port on which the IPC api listens
-* `5002/tcp`: port for [the Agent browser GUI to be served][7]
-* `8125/udp`: dogstatsd
-    
-    Unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost: 
+* **Outbound**:
 
-    * `127.0.0.1`
-    * `::1` 
-    * `fe80::1`
-* `8126/tcp`: port for the [APM Receiver][1]
-* `10516/tcp`: port for the [Log collection][3]
-* `10255/tcp`: port for the [Kubernetes http kubelet][8]
-* `10250/tcp`: port for the [Kubernetes https kubelet][8]
+  * `443/tcp`: port for most Agent data. (Metrics, APM, Live Processes/Containers) 
+  * `123/udp`: NTP - [More details on the importance of NTP here][5].
+  * `10516/tcp`: port for the [Log collection][3]
+  * `10255/tcp`: port for the [Kubernetes http kubelet][8]
+  * `10250/tcp`: port for the [Kubernetes https kubelet][8]
+
+* **Inbound**:
+
+  * `5000/tcp`: port for the [go_expvar server][6]
+  * `5001/tcp`: port on which the IPC api listens
+  * `5002/tcp`: port for [the Agent browser GUI to be served][7]
+  * `8125/udp`: dogstatsd. Unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost: 
+
+      * `127.0.0.1`
+      * `::1` 
+      * `fe80::1`
+  
+  * `8126/tcp`: port for the [APM Receiver][1]
 
 ### Agent v4 and v5 
 
-* `123/UDP`: NTP - [More details on the importance of NTP here][5].
-* **`8125/udp`**: dogstatsd
+* **Outbound**
 
-  Unless `non_local_traffic` is set to true. Those port are available on localhost: 
+  * `443/tcp`: port for most Agent data. (Metrics, APM, Live Processes/Containers) 
+  * `123/udp`: NTP - [More details on the importance of NTP here][5].
 
-  * `127.0.0.1`
-  * `::1` 
-  * `fe80::1`
+* **Inbound**
 
-* `8126/tcp`: port for the [APM Receiver][1]
-* `17123/tcp`: Agent forwarder, used to buffer traffic in case of network splits between the Agent and Datadog
-* `17124/tcp`: optional graphite adapter
+  * `8125/udp`: dogstatsd. Unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost: 
+
+      * `127.0.0.1`
+      * `::1` 
+      * `fe80::1`
+
+  * `8126/tcp`: port for the [APM Receiver][1]
+  * `17123/tcp`: Agent forwarder, used to buffer traffic in case of network splits between the Agent and Datadog
+  * `17124/tcp`: optional graphite adapter
 
 ## Using Proxies
 

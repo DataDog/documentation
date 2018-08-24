@@ -15,6 +15,7 @@ kind: faq
 |Amazon Cloudfront|CLOUDFRONT|
 |Amazon Cloudsearch|CLOUDSEARCH|
 |Amazon Cloudtrail|CLOUDTRAIL|
+|Amazon Codebuild|CODEBUILD|
 |Amazon Codedeploy|CODEDEPLOY|
 |Amazon Directconnect|DIRECTCONNECT|
 |Amazon Dynamodb|DYNAMODB|
@@ -75,6 +76,7 @@ kind: faq
 |Ceph|CEPH|
 |Chatwork|CHATWORK|
 |Chef|CHEF|
+|Circleci|CIRCLECI|
 |Cisco Aci|CISCOACI|
 |Cloud Foundry|CLOUDFOUNDRY|
 |Cloudhealth|CLOUDHEALTH|
@@ -197,6 +199,7 @@ kind: faq
 |Teamcity|TEAMCITY|
 |Tokumx|TOKUMX|
 |Tomcat|TOMCAT|
+|Travis Ci|TRAVISCI|
 |Upstart|UPSTART|
 |User|DOGWEBPUBLISHER|
 |Users|DOGWEBPUBLISHER|

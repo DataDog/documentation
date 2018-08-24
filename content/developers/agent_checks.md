@@ -180,6 +180,12 @@ module).
 
 Each check has a [YAML][8] configuration file that is placed in the `conf.d` directory. The file name should match the name of the check module (e.g.: `haproxy.py` and `haproxy.yaml`).  
 
+Due to the way Agent checks are packaged and distributed, custom checks cannot have the same name as a existing check or library within the Agent's embedded environment. Use `pip` to display a list of effectively unusable names:
+
+```
+$ sudo /opt/datadog-agent/embedded/bin/pip freeze
+```
+
 **Note**: YAML files must use spaces instead of tabs.
 
 The configuration file has the following structure:
@@ -311,7 +317,7 @@ if r.status_code != 200:
     self.status_code_event(url, r, aggregation_key)
 ```
 
-If the request passes, we want to submit the timing to Datadog as a metric. Let’s call it `http.response_time` and tag it with the URL.
+If the request passes, we want to submit the timing to Datadog as a metric. Let's call it `http.response_time` and tag it with the URL.
 
 ```python
 timing = end_time - start_time

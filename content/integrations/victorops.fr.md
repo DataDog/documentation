@@ -3,6 +3,7 @@ categories:
 - notification
 - monitoring
 ddtype: crawler
+dependencies: []
 description: Utiliser VictorOps comme canal de notification pour les alertes et les événements Datadog.
 doc_link: https://docs.datadoghq.com/integrations/victorops/
 git_integration_title: victorops
@@ -18,7 +19,7 @@ version: '1.0'
 ---
 
 
-## Aperçu
+## Présentation
 Envoyez les alertes Datadog à VictorOps et bénéficiez d'un contrôle précis du routage et des processus d'escalation.
 Obtenez plus rapidement l'information de l'apparition d'un problème et réduisez son temps de résolution.
 Créer des alertes en utilisant **@victorops**
@@ -39,16 +40,16 @@ Créer des alertes en utilisant **@victorops**
 
 L'intégration VictorOps n'inclut aucune métrique pour le moment.
 
-### Evénements
+### Événements
 L'intégration VictorOps n'inclut aucun événement pour le moment.
 
-### Checks de Service
+### Checks de service
 L'intégration VictorOps n'inclut aucun check de service pour le moment.
 
-## Troubleshooting
+## Dépannage
 Besoin d'aide ? Contactez  [l'équipe support de Datadog][1].
 
-## En apprendre plus
+## Pour aller plus loin
 ### Base de connaissances
 #### Clés de routage VictorOps
 
@@ -66,3 +67,5 @@ Si ce champ est vide, l'endpoint par défaut sera 'https://alert.victorops.com/i
 
 [1]: http://docs.datadoghq.com/help/
 
+
+{{< get-dependencies >}}

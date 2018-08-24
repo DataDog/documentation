@@ -56,7 +56,7 @@ spec:
           - name: DD_LEADER_ELECTION
             value: "true"
           - name: KUBERNETES
-            value: "yes"
+            value: "true"
           - name: DD_KUBERNETES_KUBELET_HOST
             valueFrom:
               fieldRef:
@@ -95,11 +95,11 @@ spec:
           name: cgroups
 ```
 
-To send custom metrics via dogstatsd from your application pods, uncomment the `# hostPort: 8125` line in your `datadog-agent.yaml` manifest. This exposes the DogStatsD port on each of your Kubernetes nodes. 
+To send custom metrics via dogstatsd from your application pods, uncomment the `# hostPort: 8125` line in your `datadog-agent.yaml` manifest. This exposes the DogStatsD port on each of your Kubernetes nodes.
 
-To send Traces from your application pods, uncomment the `# hostPort: 8126` line in your `datadog-agent.yaml` manifest. This exposes the Datadog Agent tracing port on each of your Kubernetes nodes. 
+To send Traces from your application pods, uncomment the `# hostPort: 8126` line in your `datadog-agent.yaml` manifest. This exposes the Datadog Agent tracing port on each of your Kubernetes nodes.
 
-**Warning**: This opens a port on your host. Make sure your firewall covers that correctly. 
+**Warning**: This opens a port on your host. Make sure your firewall covers that correctly.
 Another word of caution: some network plugging don't support `hostPorts` yet, so this won't work. The workaround in this case is to add `hostNetwork: true` in your agent pod specifications. This shares the network namespace of your host with the Datadog agent. Again, make sure this logic is okay with your security policies.
 
 Then, deploy the DemonSet with the command:
@@ -118,7 +118,7 @@ env:
     valueFrom:
       fieldRef:
         fieldPath: status.hostIP
-  - name: DD_AGENT_PORT
+  - name: DD_AGENT_SERVICE_PORT
     value: 8126
 ```
 
@@ -149,20 +149,24 @@ end
 #### Go
 
 ```go
+package main
+
 import (
+    "net"
     "os"
-    ddtrace "github.com/DataDog/dd-trace-go/opentracing"
+
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
-
 func main() {
-    config := ddtrace.NewConfiguration()
-    config.AgentHostname = os.GetEnv("DD_AGENT_SERVICE_HOST")
-    config.AgentPort = os.GetEnv("DD_AGENT_SERVICE_PORT")
-
-    tracer, closer, err := ddtrace.NewTracer(config)
-    defer closer.Close()
+    addr := net.JoinHostPort(
+        os.Getenv("DD_AGENT_SERVICE_HOST"),
+        os.Getenv("DD_AGENT_SERVICE_PORT"),
+    )
+    tracer.Start(tracer.WithAgentAddr(addr))
+    defer tracer.Stop()
 }
+
 ```
 
 #### Java
@@ -182,6 +186,15 @@ java -javaagent:/path/to/the/dd-java-agent.jar \
      -Ddd.agent.host=$DD_AGENT_SERVICE_HOST \
      -Ddd.agent.port=$DD_AGENT_SERVICE_PORT \
      -jar /your/app.jar
+```
+
+#### Node.js
+
+```Node.js
+const tracer = require('dd-trace').init({
+  hostname: process.env.DD_AGENT_SERVICE_HOST,
+  port: process.env.DD_AGENT_SERVICE_PORT
+})
 ```
 
 ## Further Reading
