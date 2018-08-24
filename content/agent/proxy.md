@@ -29,7 +29,8 @@ A few options are available to send traffic to Datadog over SSL/TLS for hosts th
 
 Traditional web proxies are supported natively by the Agent. If you need to connect to the Internet through a proxy, edit your Agent configuration file.
 
-### Agent v6
+{{< tabs >}}
+{{% tab "Agent v6" %}}
 
 Set different proxy servers for `https` and `http` requests in your Agent `datadog.yaml` configuration file.
 The Agent uses `https` to send data to Datadog, but integrations might use `http` to gather metrics. No matter the proxied requests, you can activate SSL on your proxy server. Below are some configuration examples for your `datadog.yaml` file:
@@ -90,7 +91,10 @@ The Agent uses the following values in order of precedence:
 
 [Refer to our log collection documentation page to learn how to forward your logs with a proxy][7].
 
-### Agent v5
+[7]: /logs/log_collection/#using-a-proxy-for-logs
+
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
 Edit the `datadog.conf` file with your proxy information:
 
@@ -103,6 +107,11 @@ proxy_password: my_password
 ```
 
 Do not forget to [restart the Agent][2] for the new settings to take effect.
+
+[2]: /agent/faq/agent-commands
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Using HAProxy as a Proxy
 
@@ -194,7 +203,9 @@ Once the HAProxy configuration is in place, you can reload it or restart HAProxy
 **We recommend having a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.com` fails over to another IP.
 
 #### Datadog Agent configuration
-##### Agent v6
+
+{{< tabs >}}
+{{% tab "Agent v6" %}}
 
 Edit each Agent to point to HAProxy by setting its `dd_url` to the address of HAProxy (e.g. `haproxy.example.com`).
 This `dd_url` setting can be found in the `datadog.yaml` file.
@@ -221,7 +232,11 @@ Finally [restart the Agent][4].
 
 To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3833` as well as the [Infrastructure Overview][5].
 
-##### Agent v5
+[4]: /agent/#start-stop-restart-the-agent/#windows
+[5]: https://app.datadoghq.com/infrastructure
+
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
 Edit each Agent to point to HAProxy by setting its `dd_url` to the address of HAProxy (e.g. `haproxy.example.com`).
 This `dd_url` setting can be found in the `datadog.conf` file.
@@ -261,6 +276,12 @@ skip_ssl_validation: yes
 Finally [restart the Agent][4].
 
 To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3833` as well as the [Infrastructure Overview][5].
+
+[4]: /agent/#start-stop-restart-the-agent/#windows
+[5]: https://app.datadoghq.com/infrastructure
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Using the Agent as a Proxy
 
