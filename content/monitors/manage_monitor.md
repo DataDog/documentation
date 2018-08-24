@@ -97,7 +97,7 @@ In writing your search queries, you can use all the same fields available on the
 
 {{< img src="monitors/manage_monitor/monitor-tags.png" alt="Monitor tags" responsive="true" style="width:80%;" >}}
 
-You can choose to add tags directly to your monitors that you can use for filtering on the [triggered][4] or [manage monitor][1] pages, or for scheduling downtimes.
+You can choose to add tags directly to your monitors that you can use for filtering on the [triggered][4] or [manage monitor][1] pages, or for [scheduling downtimes][6].
 
 ## Further Reading 
 
@@ -108,3 +108,4 @@ You can choose to add tags directly to your monitors that you can use for filter
 [3]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_fuzziness
 [4]: https://app.datadoghq.com/monitors/triggered
 [5]: /monitors/#manually-resolve-your-monitor
+[6]: /monitors/downtimes
