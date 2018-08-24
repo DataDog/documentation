@@ -94,7 +94,7 @@
       <a href="{{- with .Get "href" -}}{{- . -}}{{- end -}}"
          {{- if .Get "target" -}}target="{{- with .Get "target" -}}{{- . -}}{{- end -}}"{{- end -}} >
     {{- end -}}
-    {{ if $wide }}
+    {{- if $wide -}}
 
       {{ $e := (print $img "?auto=format" | relURL | safeURL) }}
       {{ if eq $image_ext "gif" }}
@@ -113,26 +113,26 @@
         </picture>
       {{ end }}
 
-    {{ else }}
+    {{- else -}}
         {{ $e := (print $img "?auto=format" | relURL | safeURL) }}
-        {{ if eq $image_ext "gif" }}
+        {{- if eq $image_ext "gif" -}}
             <img class="img-fluid" src="{{ (print $img "?fm=gif" | relURL | safeURL) }}"
-              {{ if .Get "style" }}style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}"{{ end }}
-              alt="{{ with .Get "alt"}}{{.}}{{end}}" />
-        {{ else }}
-              <picture {{ if .Get "style" }}
-                style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}"
-             {{ end }}>
+              {{- if .Get "style" -}}style="{{- with .Get "style" -}}{{ . | safeCSS }}{{- end -}}"{{- end -}}
+              alt="{{- with .Get "alt" -}}{{.}}{{- end -}}" />
+        {{- else -}}
+              <picture {{- if .Get "style" -}}
+                style="{{- with .Get "style" -}}{{ . | safeCSS }}{{- end -}}"
+             {{- end -}}>
               <img class="lazyload img-fluid" srcset="{{ $e }}"
-              {{ if .Get "style" }}
-                    style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}"
+              {{- if .Get "style" -}}
+                    style="{{- with .Get "style" -}}{{ . | safeCSS }}{{- end -}}"
                   {{ end }}
-                  alt="{{ with .Get "alt"}}{{.}}{{end}}" />
+                  alt="{{- with .Get "alt" -}}{{.}}{{- end -}}" />
             </picture>
-        {{ end }}
+        {{- end -}}
 
 
-    {{ end }}
+    {{- end -}}
 
     {{- if (and (eq $isPopup "true") (ne $image_ext "gif")) -}}
       </a>
@@ -140,16 +140,16 @@
       </a>
     {{- end -}}
 
-{{ end }}
+{{- end -}}
 
 
 
 
 
-    {{ if .Get "caption" }}
-      {{ with .Get "caption" }}
+    {{- if .Get "caption" -}}
+      {{- with .Get "caption" -}}
           <figcaption>{{.}}</figcaption>
-      {{ end }}
-    {{ end }}
+      {{- end -}}
+    {{- end -}}
   </figure>
 </span>
