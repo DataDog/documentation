@@ -521,6 +521,17 @@ $(document).ready(function () {
             return item.split('=')[1];
         }).toString();
 
+        function activateTab(el) {
+            var tab = el.parent(),
+                 tabIndex = tab.index(),
+                 tabPanel = el.closest('.code-tabs'),
+                 tabPane = tabPanel.find('.tab-pane').eq(tabIndex);
+             tabPanel.find('.active').removeClass('active');
+             tab.addClass('active');
+             tabPane.addClass('active');
+             tabPane.addClass('show');
+        }
+
         // clicking a tab open them all
         $('.code-tabs .nav-tabs a').click(function(e){
           e.preventDefault();
@@ -530,15 +541,19 @@ $(document).ready(function () {
 
           // find all
           var lang = $(this).data('lang');
-          $('.code-tabs .nav-tabs a[data-lang="'+lang+'"]').each(function() {
-             var tab = $(this).parent(),
-                 tabIndex = tab.index(),
-                 tabPanel = $(this).closest('.code-tabs'),
-                 tabPane = tabPanel.find('.tab-pane').eq(tabIndex);
-             tabPanel.find('.active').removeClass('active');
-             tab.addClass('active');
-             tabPane.addClass('active');
-             tabPane.addClass('show');
+          $('.code-tabs .nav-tabs').each(function() {
+             var links = $(this).find('a:first');
+             var langLinks = $(this).find('a[data-lang="'+lang+'"]');
+             if(langLinks.length) {
+                 langLinks.each(function() {
+                     activateTab($(this));
+                 });
+             } else {
+                 // set first lang selected
+                 links.each(function() {
+                     activateTab($(this));
+                 });
+             }
           });
 
           if (history.pushState) {
