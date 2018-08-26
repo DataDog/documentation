@@ -61,7 +61,7 @@ When creating a [monitor][8]:
 * Use tags in the `excluding:` textbox to remove the corresponding metrics of the monitor scope.
 {{< img src="tagging/monitortags_1.png" alt="excluding textbox tags in Monitors" responsive="true" style="width:70%;">}}
 
-* Use tags in the `avg by` textbox transform your monitor into a multi-alert monitor on each value of this tags.
+* Use tags in the `avg by` textbox to transform your monitor into a multi-alert monitor on each value of this tags.
 {{< img src="tagging/monitortags_2.png" alt="excluding textbox tags in Monitors" responsive="true" style="width:70%;">}}
 Tags on these events are related to the `avg by:` value. In order to have host-related tags (such as AWS integration tags), use `avg by: host`
 
