@@ -54,10 +54,8 @@ Select a Log Analytics visualization type using the graph selector:
 
 Available visualizations:
 
-* [Timeseries](#timeseries)
-* [Top List](#top-list)
-
-### Timeseries
+{{< tabs >}}
+{{% tab "Timeseries" %}}
 
 Visualize the evolution of a single [measure][1] (or a [facet][2] unique count of values) over a selected time frame, and (optionally) split by an available [facet][2].
 
@@ -66,7 +64,11 @@ The evolution of the **top 5 URL Paths** according to the number of **unique Cli
 
 {{< img src="logs/explorer/analytics/timeserie_example.png" alt="timeserie example" responsive="true" style="width:90%;">}}
 
-### Top List 
+[1]: /logs/explorer/search/#measures
+[2]: /logs/explorer/search/#facets
+
+{{% /tab %}}
+{{% tab "Top List" %}}
 
 Visualize the top values from a [facet][2] according to the chosen [measure][1]:
 
@@ -74,6 +76,12 @@ The following Top List Log Analytics shows:
 The evolution of the **top 5 URL Paths** according to the number of **unique Client IPs** over the last month.
 
 {{< img src="logs/explorer/analytics/top_list_example.png" alt="top list example" responsive="true" style="width:90%;">}}
+
+[1]: /logs/explorer/search/#measures
+[2]: /logs/explorer/search/#facets
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Related logs
 

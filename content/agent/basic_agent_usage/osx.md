@@ -27,45 +27,94 @@ By default, the Agent is installed in a sandbox located at `/opt/datadog-agent`.
 
 In Agent v6, the `launchctl` service manager provided by the operating system is responsible for the Agent lifecycle, while other commands must be run via the Agent binary directly. Alternatively, lifecycle commands can also be managed via the systray app, and other commands can be executed via the web GUI.
 
-In Agent v5, everything is done via the binary directly. 
+{{< tabs >}}
+{{% tab "Agent v6" %}}
 
-| Agent v5                           | Agent v6                                             | Notes                              |
-| ---------------------------------- | ---------------------------------------------------- | ---------------------------------- |
-| `datadog-agent start`              | `launchctl start com.datadoghq.agent` or systray app | Start Agent as a service           |
-| `datadog-agent stop`               | `launchctl stop com.datadoghq.agent` or systray app  | Stop Agent running as a service    |
-| `datadog-agent restart`            | _run `stop` then `start`_ or systray app             | Restart Agent running as a service |
-| `datadog-agent status`             | `launchctl list com.datadoghq.agent` or systray app  | Status of Agent service            |
-| `datadog-agent info`               | `datadog-agent status` or web GUI                    | Status page of running Agent       |
-| `datadog-agent flare`              | `datadog-agent flare` or web GUI                     | Send flare                         |
-| _not implemented_                  | `datadog-agent --help`                               | Display command usage              |
-| `datadog-agent check <check_name>` | `datadog-agent check <check_name>`                   | Run a check                        |
+| Description                        | Command                                              |
+| ---------------------------------- | --------------------------------------               |
+| Start Agent as a service           | `launchctl start com.datadoghq.agent` or systray app |
+| Stop Agent running as a service    | `launchctl stop com.datadoghq.agent` or systray app  |
+| Restart Agent running as a service | _run `stop` then `start`_ or systray app             |
+| Status of Agent service            | `launchctl list com.datadoghq.agent` or systray app  |
+| Status page of running Agent       | `datadog-agent status` or web GUI                    |
+| Send flare                         | `datadog-agent flare` or web GUI                     |
+| Display command usage              | `datadog-agent --help`                               |
+| Run a check                        | `datadog-agent check <check_name>`                   |
+
+
+{{% /tab %}}
+{{% tab "Agent v5" %}}
+
+| Description                        | Command                            |
+| ---------------------------------- | ---------------------------------- |
+| Start Agent as a service           | `datadog-agent start`              |
+| Stop Agent running as a service    | `datadog-agent stop`               |
+| Restart Agent running as a service | `datadog-agent restart`            |
+| Status of Agent service            | `datadog-agent status`             |
+| Status page of running Agent       | `datadog-agent info`               |
+| Send flare                         | `datadog-agent flare`              |
+| Display command usage              | _not implemented_                  |
+| Run a check                        | `datadog-agent check <check_name>` |
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Configuration
 
-The configuration files and folders for the Agent are located at:
+{{< tabs >}}
+{{% tab "Agent v6" %}}
+The configuration files and folders for the Agent are located in:
 
-| Agent v5                        | Agent v6                        |
-| :-----                          | :----                           |
-| `~/.datadog-agent/datadog.conf` | `~/.datadog-agent/datadog.yaml` |
+* `~/.datadog-agent/datadog.yaml`
 
 Configuration files for [Integrations][2]:
 
-| Agent v5                   | Agent v6                   |
-| :-----                     | :----                      |
-| `~/.datadog-agent/conf.d/` | `~/.datadog-agent/conf.d/` |
+* `~/.datadog-agent/conf.d/`
+
+[2]: /integrations
+
+{{% /tab %}}
+{{% tab "Agent v5" %}}
+
+The configuration files and folders for the Agent are located in:
+
+* `~/.datadog-agent/datadog.conf`  
+
+Configuration files for [Integrations][2]:
+
+* `~/.datadog-agent/conf.d/`
+
+[2]: /integrations
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Troubleshooting
+{{< tabs >}}
+{{% tab "Agent v6" %}}
 
-Run the `status` (or `info` in v5) command to see the state of the Agent. The Agent logs are located in the `/var/log/datadog/` directory:
+Run the `status` command to see the state of the Agent. The Agent logs are located in the `/var/log/datadog/` directory and are consolidated in the `agent.log` file.
 
-* For Agent v6, all logs are consolidated in `agent.log`
-* For Agent v5, logs are split into:
+If you're still having trouble, [our support team][3] is glad to provide further assistance.
+
+[3]: /help
+
+{{% /tab %}}
+{{% tab "Agent v5" %}}
+
+Run the `info` command to see the state of the Agent. The Agent logs are located in the `/var/log/datadog/` directory and are split into:
+
   * `datadog-supervisord.log`
   * `collector.log`
   * `dogstatsd.log`
   * `forwarder.log`
 
 If you're still having trouble, [our support team][3] is glad to provide further assistance.
+
+[3]: /help
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Working with the embedded Agent
 

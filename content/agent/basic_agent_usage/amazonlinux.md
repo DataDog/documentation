@@ -27,7 +27,7 @@ In Agent v6, the service manager provided by the operating system is responsible
 {{< tabs >}}
 {{% tab "Agent v6" %}}
 
-| Commands                           | Notes                                                  |
+| Description                        | Command                                                |
 | --------------------               | --------------------                                   |
 | Start Agent as a service           | `sudo service datadog-agent start`                     |
 | Stop Agent running as a service    | `sudo service datadog-agent stop`                      |
@@ -41,7 +41,7 @@ In Agent v6, the service manager provided by the operating system is responsible
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-| Commands                           | Notes                                             |
+| Description                        | Command                                           |
 | --------------------               | --------------------                              |
 | Start Agent as a service           | `sudo service datadog-agent start`                |
 | Stop Agent running as a service    | `sudo service datadog-agent stop`                 |
@@ -94,16 +94,31 @@ Configuration files for [Integrations][2]:
 
 ## Troubleshooting
 
-Run the `status` (or `info` in v5) command to see the state of the Agent. The Agent logs are located in the `/var/log/datadog/` directory:
+{{< tabs >}}
+{{% tab "Agent v6" %}}
 
-* For Agent v6, all logs are consolidated in `agent.log`
-* For Agent v5, logs are split into:
+Run the `status` command to see the state of the Agent. The Agent logs are located in the `/var/log/datadog/` directory and are consolidated in the `agent.log` file.
+
+If you're still having trouble, [our support team][3] is glad to provide further assistance.
+
+[3]: /help
+
+{{% /tab %}}
+{{% tab "Agent v5" %}}
+
+Run the `info` command to see the state of the Agent. The Agent logs are located in the `/var/log/datadog/` directory and are split into:
+
   * `datadog-supervisord.log`
   * `collector.log`
   * `dogstatsd.log`
   * `forwarder.log`
 
 If you're still having trouble, [our support team][3] is glad to provide further assistance.
+
+[3]: /help
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Working with the embedded Agent
 

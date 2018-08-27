@@ -184,6 +184,15 @@ Once the Agent is running, use the `datadog-agent launch-gui` command to launch 
 
 **Note**: [Source][16] install may work on operating systems not listed here and is supported on a best effort basis.
 
+[7]: /agent/basic_agent_usage/deb
+[8]: /agent/basic_agent_usage/ubuntu
+[9]: /agent/basic_agent_usage/redhat
+[10]: /agent/basic_agent_usage/suse
+[11]: /agent/basic_agent_usage/fedora
+[12]: /agent/basic_agent_usage/osx
+[13]: /agent/basic_agent_usage/windows
+[14]: /agent/basic_agent_usage/docker
+[15]: /agent/basic_agent_usage/kubernetes
 [16]: /agent/basic_agent_usage/source
 
 {{% /tab %}}
@@ -204,6 +213,15 @@ Once the Agent is running, use the `datadog-agent launch-gui` command to launch 
 
 **Note**: [Source][16] install may work on operating systems not listed here and is supported on a best effort basis.
 
+[7]: /agent/basic_agent_usage/deb
+[8]: /agent/basic_agent_usage/ubuntu
+[9]: /agent/basic_agent_usage/redhat
+[10]: /agent/basic_agent_usage/suse
+[11]: /agent/basic_agent_usage/fedora
+[12]: /agent/basic_agent_usage/osx
+[13]: /agent/basic_agent_usage/windows
+[14]: /agent/basic_agent_usage/docker
+[15]: /agent/basic_agent_usage/kubernetes
 [16]: /agent/basic_agent_usage/source
 
 {{% /tab %}}
@@ -219,14 +237,4 @@ Once the Agent is running, use the `datadog-agent launch-gui` command to launch 
 [4]: /integrations
 [5]: /developers/metrics/custom_metrics/
 [6]: /developers/dogstatsd
-[7]: /agent/basic_agent_usage/deb
-[8]: /agent/basic_agent_usage/ubuntu
-[9]: /agent/basic_agent_usage/redhat
-[10]: /agent/basic_agent_usage/suse
-[11]: /agent/basic_agent_usage/fedora
-[12]: /agent/basic_agent_usage/osx
-[13]: /agent/basic_agent_usage/windows
-[14]: /agent/basic_agent_usage/docker
-[15]: /agent/basic_agent_usage/kubernetes
-[16]: /agent/basic_agent_usage/source
 [17]: /developers/metrics/distributions 

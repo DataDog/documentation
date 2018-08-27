@@ -50,7 +50,8 @@ Note: If a valid `datadog.yaml` is found and has an `API_KEY` configured, that f
 
 The execution of the Agent is controlled by the Windows Service Control Manager.
 
-### Agent v6
+{{< tabs >}}
+{{% tab "Agent v6" %}}
 
 There are a few major changes compared to older Datadog Windows Agent v5:
 
@@ -79,16 +80,21 @@ The Agent has a new set of command-line options:
 | stopservice     | Stops the Agent within the service control manager                         |
 | version         | Print the version info                                                     |
 
-### Agent v5
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
 Use the Datadog Agent Manager that you can find in the Start Menu.
 
-{{< img src="agent/basic_agent_usage/windows/windows-start-menu.png" alt="windows Start Menu" responsive="true" style="width:40%;">}}
+{{< img src="agent/basic_agent_usage/windows/windows-start-menu.png" alt="windows Start Menu" responsive="true" style="width:75%;">}}
 
-{{< img src="agent/basic_agent_usage/windows/manager-snapshot.png" alt="Manager snapshot" responsive="true" style="width:40%;">}}
+To run `start`, `stop`, and `restart` commands:
 
-You can also use Windows Powershell if you are running on a modern version of Windows:
-`[start|stop|restart]-service datadogagent`
+{{< img src="agent/basic_agent_usage/windows/manager-snapshot.png" alt="Manager snapshot" responsive="true" style="width:75%;">}}
+
+You can also use Windows Powershell if you are running on a modern version of Windows: `[start|stop|restart]-service datadogagent`
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Agent Configuration
 
@@ -137,7 +143,8 @@ Uninstall the Agent using Add/Remove Programs, alternatively, it's possible to t
 ## Troubleshooting
 ### Agent Status and Information
 
-#### Agent v6
+{{< tabs >}}
+{{% tab "Agent v6" %}}
 
 To check if the Agent is running, check if the `DatadogAgent` service in the Services panel is listed as *Started*. A process called *Datadog Metrics Agent* (`agent.exe`) should also exist in the Task Manager.
 
@@ -156,7 +163,9 @@ or `cmd.exe`:
 
 `C:\program files\datadog\datadog agent\embedded\agent.exe" status`
 
-#### Agent v5
+
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
 To check if the Agent is running, check if the service status in the Services panel is listed as "Started". A process called `ddagent.exe` should also exist in the Task Manager. To receive more information about the Agent's state, visit the _status page_ by going to *Settings -> Agent Status* in Agent version 5.2 and above and by going to `http://localhost:17125/status` in Agent version 3.9.1 to 5.1.
 
@@ -178,21 +187,29 @@ C:\"Program Files"\Datadog\"Datadog Agent"\embedded\python.exe" "C:\Program File
 
 If you're running on a version older than 5.2 visit the status page in your web browser: `http://localhost:17125/status` The status page is supported in Agent version 3.9.1-5.1.1
 
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Logs location
-#### Agent v6 
+
+{{< tabs >}}
+{{% tab "Agent v6" %}}
+
 The Agent logs are located in the `C:\programdata\Datadog\logs` directory and all logs are in the `agent.log` file.
 
 If you're still having trouble, [our support team][3] is glad to provide further assistance.
 
-#### Agent v5
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
-Logs are available at:
+For Windows Server 2008, Vista and newer, logs are available at `C:\ProgramData\datadog\logs\ddagent.log` 
 
-  * For Windows Server 2008, Vista and newer:
-`C:\ProgramData\datadog\logs\ddagent.log`
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Send a flare
-#### Agent v6
+{{< tabs >}}
+{{% tab "Agent v6" %}}
 
 1. Navigate to `localhost:5002` to [display the Agent GUI][5]
 2. Select flare tab
@@ -200,7 +217,8 @@ Logs are available at:
 3. Enter your ticket number (if you have one) and email address
 4. Press Submit
 
-#### Agent v5
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
 To send Datadog support a copy of your Windows logs and configurations, do the following:
 
@@ -244,6 +262,9 @@ print tempfile.gettempdir()
 Example :
 
 {{< img src="agent/faq/flare_fail.png" alt="Flare Fail" responsive="true" style="width:70%;">}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Use Cases
 ###  Monitoring a Windows Service
