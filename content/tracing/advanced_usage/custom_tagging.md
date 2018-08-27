@@ -62,7 +62,7 @@ end
 
 **Adding tags to a current active span**
 
-You can also access the current active span from any method within your code. Note however that if the method is called and there is no span currently active `active_span` will be nil.
+You can also access the current active span from any method within your code. Note, however, that if the method is called and there is no span currently active, `active_span` will be nil.
 
 ```ruby
 # e.g. adding tag to active span
