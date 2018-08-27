@@ -133,7 +133,7 @@ You will now be looking at a chosen metric over all the hosts that have that par
 
 To group using tags, enter the key part of the tag in the ```avg by:``` textbox. 
 
-For instance, if you have a time series graph showing a metric tagged by the reporting hosts' roles -`role:database`, `role:frontend`, or `role:loadbalancer`- enter role in the **avg_by** textbox. This causes the graph to show just one line for each tag value - `database`, `frontend`, and `loadbalancer`. Each line represents the average metric value across all hosts that share that role.
+For instance, if you have a timeseries graph showing a metric tagged by the reporting hosts' roles -`role:database`, `role:frontend`, or `role:loadbalancer`- enter role in the **avg_by** textbox. This causes the graph to show just one line for each tag value - `database`, `frontend`, and `loadbalancer`. Each line represents the average metric value across all hosts that share that role.
 
 {{< img src="guides/tagging/dashboardtags.png" alt="Tags in Dashboards avgby textbox" >}}
 

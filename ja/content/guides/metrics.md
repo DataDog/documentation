@@ -635,7 +635,7 @@ In this query, all instances of this metric (e.g. across all hosts, indicated by
 (`avg`) and broken down by the tag key `algorithm`.
 
 <p class="alert alert-warning">
-We store one time series per host + metric + tag combination on our backend,
+We store one timeseries per host + metric + tag combination on our backend,
 thus we cannot support infinitely bounded tags. Please don't include endlessly
 growing tags in your metrics, like timestamps or user ids. Please limit each
 metric to 1000 tags.

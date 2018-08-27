@@ -37,7 +37,7 @@ You are now looking at a chosen metric over all the hosts that have that particu
 
 To group using tags, enter the key part of the tag in the `avg by:` textbox.
 
-For instance, if you have a time series graph showing a metric tagged by the reporting hosts roles -`role:database`, `role:frontend`, or `role:loadbalancer`- enter role in the **avg_by** textbox.
+For instance, if you have a timeseries graph showing a metric tagged by the reporting hosts roles -`role:database`, `role:frontend`, or `role:loadbalancer`- enter role in the **avg_by** textbox.
 This causes the graph to show just one line for each tag value - `database`, `frontend`, and `loadbalancer`. Each line represents the average metric value across all hosts that share that role.
 
 {{< img src="tagging/dashboardtags.png" alt="Tags in Dashboards avgby textbox" responsive="true" style="width:70%;">}}
@@ -61,7 +61,7 @@ When creating a [monitor][8]:
 * Use tags in the `excluding:` textbox to remove the corresponding metrics of the monitor scope.
 {{< img src="tagging/monitortags_1.png" alt="excluding textbox tags in Monitors" responsive="true" style="width:70%;">}}
 
-* Use tags in the `avg by` textbox transform your monitor into a multi-alert monitor on each value of this tags.
+* Use tags in the `avg by` textbox to transform your monitor into a multi-alert monitor on each value of this tags.
 {{< img src="tagging/monitortags_2.png" alt="excluding textbox tags in Monitors" responsive="true" style="width:70%;">}}
 Tags on these events are related to the `avg by:` value. In order to have host-related tags (such as AWS integration tags), use `avg by: host`
 

@@ -17,6 +17,6 @@ Thus, if you are querying for larger timeframes of data, the points returned is 
 We store metric points at the 1 second resolution, but we'd prefer if you only
 submitted points every 15 seconds. Any metrics with fractions of a second timestamps gets rounded to the nearest second, and if any points have the same timestamp, the latest point overwrites the previous ones.
 
-We have a soft limit of 100 time series per host, where a time series is
+We have a soft limit of 100 timeseries per host, where a timeseries is
 defined as a unique combination of metric name and tag.
 

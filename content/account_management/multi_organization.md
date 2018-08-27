@@ -16,6 +16,10 @@ This is typically used by Managed Service Providers that have customers which sh
 
 The Multi-organization Account feature must be enabled by support. If this is a feature you need, [contact us][2]!
 
+Here's a two-minute video walkthrough:
+
+{{<wistia tg9ufqbin9>}} 
+
 ## Create a new child-organization
 
 1. After the feature has been enabled, visit the [New Account Page][3].

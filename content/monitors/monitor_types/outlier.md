@@ -84,9 +84,9 @@ Traditionally, DBSCAN takes: 1) a parameter 𝜀 that specifies a distance thres
 
 #### Parameters
 
-We use a simplified form of DBSCAN to detect outliers on time series. We consider each host to be a point in d-dimensions, where d is the number of elements in the time series. Any point can agglomerate, and any point that is not in the largest cluster is considered an outlier.
+We use a simplified form of DBSCAN to detect outliers on timeseries. We consider each host to be a point in d-dimensions, where d is the number of elements in the timeseries. Any point can agglomerate, and any point that is not in the largest cluster is considered an outlier.
 
-We set the initial distance threshold as follows. We create a new median time series by taking the median of the values from the existing time series at every time point. Then we calculate the Euclidean distance between each host and the median series. The threshold is the median of those distances, multiplied by a normalizing constant.
+We set the initial distance threshold as follows. We create a new median timeseries by taking the median of the values from the existing timeseries at every time point. Then we calculate the Euclidean distance between each host and the median series. The threshold is the median of those distances, multiplied by a normalizing constant.
 
 The only parameter we take is `tolerance`, the constant by which the initial threshold is multiplied to yield DBSCAN's distance parameter 𝜀. Here is DBSCAN with a tolerance of 3.0 in action on a pool of Cassandra workers:
 
@@ -96,9 +96,9 @@ You should set the tolerance parameter depending on how similarly you expect you
 
 #### ScaledDBSCAN
 
-The distance threshold of the DBSCAN algorithm is independent of the overall scale of the metrics. Consider a group of constant time series with values {1000, 1001, 1002, 1005, 1015}. The median series is a constant series at 1002. DBSCAN with a tolerance of 3.0 identifies the series at 1015 to be an outlier, even though it may be almost indistinguishable from the other series visually on the graph when the origin of the y-axis is at 0.
+The distance threshold of the DBSCAN algorithm is independent of the overall scale of the metrics. Consider a group of constant timeseries with values {1000, 1001, 1002, 1005, 1015}. The median series is a constant series at 1002. DBSCAN with a tolerance of 3.0 identifies the series at 1015 to be an outlier, even though it may be almost indistinguishable from the other series visually on the graph when the origin of the y-axis is at 0.
 
-The ScaledDBSCAN algorithm scales the distance threshold according to the relative magnitudes of the median series and the hosts' distances to the median series. In most situations, it behaves the same as regular DBSCAN does. However, when the median series is large compared to the distances to the median series, the distance threshold becomes proportional to the size of the median series. As a result, assessing whether two time series are close depends on the scale of the median series.
+The ScaledDBSCAN algorithm scales the distance threshold according to the relative magnitudes of the median series and the hosts' distances to the median series. In most situations, it behaves the same as regular DBSCAN does. However, when the median series is large compared to the distances to the median series, the distance threshold becomes proportional to the size of the median series. As a result, assessing whether two timeseries are close depends on the scale of the median series.
 
 Here is a comparison of DBSCAN and ScaledDBSCAN with tolerances of 3 on field data size in a group of Elasticsearch nodes:
 
@@ -112,9 +112,9 @@ For a given set of data D = {d<sub>1</sub>, ..., d<sub>n</sub>}, the deviations 
 
 #### Parameters
 
-In our case, the data set is the set of all points in every time series. We take the MAD of all the points then multiply it by a normalizing constant and our first parameter, `tolerance`. The constant normalizes MAD so that it is comparable to the standard deviation of the normal distribution. The tolerance parameter then specifies how many "deviations" a point has to be away from the median for it to be considered an outlier.
+In our case, the data set is the set of all points in every timeseries. We take the MAD of all the points then multiply it by a normalizing constant and our first parameter, `tolerance`. The constant normalizes MAD so that it is comparable to the standard deviation of the normal distribution. The tolerance parameter then specifies how many "deviations" a point has to be away from the median for it to be considered an outlier.
 
-Now to mark a time series as an outlier, we use the second parameter, `pct`. If more than pct% of a particular series' points are considered outliers, then the whole series is marked to be an outlier. Here is MAD with a tolerance of 3 and pct of 20 in action when comparing the average system load by availability zone:
+Now to mark a timeseries as an outlier, we use the second parameter, `pct`. If more than pct% of a particular series' points are considered outliers, then the whole series is marked to be an outlier. Here is MAD with a tolerance of 3 and pct of 20 in action when comparing the average system load by availability zone:
 
 {{< img src="monitors/monitor_types/outliers/outliers-mad-az.png" alt="outliers mad az" responsive="true" style="width:80%;">}}
 

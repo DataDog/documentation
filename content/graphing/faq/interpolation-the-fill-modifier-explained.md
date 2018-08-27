@@ -46,7 +46,7 @@ Interpolation is not needed:
 
 Interpolation is not performed for multi part queries (e.g. "avg:system.cpu.user{env:prod},avg:system.cpu.user{env:dev}").
 
-The type of interpolation described in this article is also not performed for arithmetic. When evaluating queries, our backend rolls data up into intervals (one for each point in a time series graph, see [this article][2] for more details). If a query involves arithmetic, and one of these intervals is missing data for part of a query, the query system substitutes 0 for that interval. This behavior cannot currently be controlled with the fill modifier.
+The type of interpolation described in this article is also not performed for arithmetic. When evaluating queries, our backend rolls data up into intervals (one for each point in a timeseries graph, see [this article][2] for more details). If a query involves arithmetic, and one of these intervals is missing data for part of a query, the query system substitutes 0 for that interval. This behavior cannot currently be controlled with the fill modifier.
 
 ## How to control interpolation?
 

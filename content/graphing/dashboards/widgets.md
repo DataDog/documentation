@@ -313,7 +313,7 @@ Example of Note widget for the [API][1]
 ## Alert Graph
 *Supported on Screenboards only*
 
-Alert graphs are time series graphs showing the current status of any monitor defined on your system.
+Alert graphs are timeseries graphs showing the current status of any monitor defined on your system.
 
 Example of Alert Graph widget for the [API][1]
 

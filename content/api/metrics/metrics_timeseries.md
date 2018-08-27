@@ -1,11 +1,11 @@
 ---
-title: Post time series points
+title: Post timeseries points
 type: apicontent
 order: 15.2
 external_redirect: /api/#post-time-series-points
 ---
 
-## Post time series points
+## Post timeseries points
 The metrics end-point allows you to post time-series data that can be graphed on Datadog's dashboards.
 
 #### ARGUMENTS
@@ -14,7 +14,7 @@ The metrics end-point allows you to post time-series data that can be graphed on
     Pass a JSON array where each item in the array contains the following arguments:
     
     * **`metric`** [*required*]:  
-        The name of the time series
+        The name of the timeseries
     * **`type`** [*optional*, *default*=**gauge**]:  
         [Type](/developers/metrics/#metric-types) of your metric either: `gauge`, `rate`, or `count`
     * **`interval`** [*optional*, *default*=**None**]:  
