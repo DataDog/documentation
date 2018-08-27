@@ -48,7 +48,7 @@ class ServletImpl extends AbstractHttpServlet {
 {{% tab "Ruby" %}}
 **Adding tags to a span**
 
-You can add tags directly to `Datadog::Span` objects directly by calling `#set_tag`:
+You can add tags directly to `Datadog::Span` objects by calling `#set_tag`:
 
 ```ruby
 # An example of a Sinatra endpoint,

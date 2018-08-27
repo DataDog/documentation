@@ -3,7 +3,7 @@ title: Distributed Tracing
 kind: documentation
 ---
 
-Distributed Tracing links traces across multiple hosts. Linking is implemented by injecting Datadog Metadata into the request headers.
+Distributed tracing allows you to propagate a single trace across multiple services and hosts, so you can see performance end-to-end. Linking is implemented by injecting Datadog Metadata into the request headers. 
 
 Distributed Tracing headers are language agnostic. A trace started in one language may propagate to another (for example, from Python to Java).
 
@@ -85,8 +85,6 @@ Distributed tracing is disabled by default. For more details about how to activa
 {{% tab "Go" %}}
 {{% /tab %}}
 {{% tab "Node.js" %}}
-Distributed tracing allows you to propagate a single trace across multiple services, so you can see performance end-to-end.
-
 Distributed tracing is enabled by default for all supported integrations.
 
 {{% /tab %}}

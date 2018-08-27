@@ -108,7 +108,7 @@ Ruby APM includes support for the following Ruby interpreters:
 *Experimental* indicates most features should be available, but unverified.
 
 {{% /tab %}}
-{{% tab "Web server Compatibility" %}}
+{{% tab "Web Server Compatibility" %}}
 
 Ruby APM includes support for the following web servers:
 
@@ -124,7 +124,7 @@ Ruby APM includes support for the following web servers:
 *Experimental* indicates most features should be available, but unverified.
 
 {{% /tab %}}
-{{% tab "Library compatibility" %}}
+{{% tab "Library Compatibility" %}}
 
 Ruby APM includes support for the following libraries and frameworks:
 
