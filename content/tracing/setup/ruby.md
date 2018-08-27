@@ -256,7 +256,7 @@ For more tracer settings, check out the [API documentation][6].
 
 ### Processing pipeline
 
-The processing Pipeline allows you to modify traces before they are sent to the agent. This can be useful for customizing trace content or removing unwanted traces.
+The processing pipeline allows you to modify traces before they are sent to the agent. This can be useful for customizing trace content or removing unwanted traces.
 
 It provides **filtering** for removing spans that match certain criteria, and **processing** for modifying spans.
 
