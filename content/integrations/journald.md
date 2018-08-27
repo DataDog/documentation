@@ -79,7 +79,7 @@ Example:
 ```
 logs:
   - type: journald
-    path: /var/log/journal/journal
+    path: /var/log/journal/
     include_units:
       - docker.service
       - sshd.service
