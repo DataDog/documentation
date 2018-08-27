@@ -9,13 +9,13 @@ kind: documentation
 | :----          | :-------                                                              | :---------                     |
 | `autosmooth()` | Automatically removes noise while preserving the trend of the metric. | `autosmooth(<METRIC_NAME>{*})` |
 
-The `autosmooth()` function applies a moving average with an automatically selected span. It smooths a time series while preserving its trend. In this example, the function chooses the optimal span to smooth the time series:
+The `autosmooth()` function applies a moving average with an automatically selected span. It smooths a timeseries while preserving its trend. In this example, the function chooses the optimal span to smooth the timeseries:
 
 {{< img src="graphing/functions/smoothing/autosmooth_illustration.png" alt="autosmooth illustration" responsive="true" style="width:80%;">}}
 
-When used on a `group by` query (e.g. `avg by`), the same span is applied on all the time series. If used on several metrics in the same graph, different spans can be selected to optimally smooth each one of the metric time series.
+When used on a `group by` query (e.g. `avg by`), the same span is applied on all the timeseries. If used on several metrics in the same graph, different spans can be selected to optimally smooth each one of the metric timeseries.
 
-The algorithm is inspired by the [ASAP algorithm][1] - you can read more about it in this blog post.
+The algorithm is inspired by the [ASAP algorithm][1]-you can read more about it in this [blog post][2].
 
 The `autosmooth()` function cannot be used in monitors. Being that the span is chosen dynamically, the result of applying the function could change from minute to minute, making threshold setting difficult and leading to alert flapping.
 
@@ -127,3 +127,4 @@ Note: The span value is the number of data points. So `median_9()` uses the last
 {{< /whatsnext >}}
 
 [1]: http://futuredata.stanford.edu/asap/
+[2]: https://www.datadoghq.com/blog/auto-smoother-asap/
