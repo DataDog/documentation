@@ -38,6 +38,9 @@ public class MyClass {
 If you aren't using supported library instrumentation (see [Library compatibility][ruby lib compatibility], you may want to to manually instrument your code. Adding tracing to your code is easy using the `Datadog.tracer.trace` method, which you can wrap around any Ruby code.
 
 ```ruby
+# An example of a Sinatra endpoint,
+# with Datadog tracing around the request,
+# database query, and rendering steps.
 get '/posts' do
   Datadog.tracer.trace('web.request', service: 'my-blog', resource: 'GET /posts') do |span|
     # Trace the activerecord call

@@ -12,6 +12,14 @@ To return debug level application logs, enable debug mode with the flag `-Ddatad
 {{% tab "Python" %}}
 {{% /tab %}}
 {{% tab "Ruby" %}}
+Debug mode is disabled by default. To enable:
+
+```ruby
+Datadog.configure do |c|
+  c.tracer debug: true
+end
+```
+
 {{% /tab %}}
 {{% tab "Go" %}}
 {{% /tab %}}
