@@ -26,6 +26,7 @@ To send your go logs to Datadog, we recommend logging to a file and then tailing
 We strongly encourage setting up your logging library to produce your logs in JSON format to avoid the need for [custom parsing rules][2].
 
 ## Configure your logger
+
 For a classic Go configuration, open a `main.go` file and paste the following code:
 
 ```go
