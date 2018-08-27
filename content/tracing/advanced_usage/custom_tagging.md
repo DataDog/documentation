@@ -48,7 +48,7 @@ class ServletImpl extends AbstractHttpServlet {
 {{% tab "Ruby" %}}
 **Adding tags to a span**
 
-You can add tags directly `Datadog::Span` objects directly by calling `#set_tag`:
+You can add tags directly to `Datadog::Span` objects directly by calling `#set_tag`:
 
 ```ruby
 # An example of a Sinatra endpoint,
@@ -58,6 +58,17 @@ get '/posts' do
     span.set_tag('http.url', request.path)
   end
 end
+```
+
+**Adding tags to a current active span**
+
+You can also access the current active span from any method within your code. Note however that if the method is called and there is no span currently active `active_span` will be nil.
+
+```ruby
+# e.g. adding tag to active span
+
+current_span = Datadog.tracer.active_span
+current_span.set_tag('my_tag', 'my_value') unless current_span.nil?
 ```
 
 **Adding tags globally to all spans**
