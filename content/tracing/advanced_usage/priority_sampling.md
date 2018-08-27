@@ -69,10 +69,6 @@ Possible values for the sampling priority tag are:
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
-
-```javascript
-This is some node code
-```
-
+Coming Soon.
 {{% /tab %}}
 {{< /tabs >}}
