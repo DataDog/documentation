@@ -63,5 +63,26 @@ Logback XML Pattern:
 {{% tab "Go" %}}
 {{% /tab %}}
 {{% tab "Node.js" %}}
+By default, logging from this library is disabled. In order to get debbuging information and errors sent to logs, the `debug` options should be set to `true` in the [init()](https://datadog.github.io/dd-trace-js/Tracer.html#init) method.
+
+The tracer will then log debug information to `console.log()` and errors to `console.error()`. This behavior can be changed by passing a custom logger to the tracer. The logger should contain a `debug()` and `error()` methods that can handle messages and errors, respectively.
+
+For example:
+
+```javascript
+const bunyan = require('bunyan')
+const logger = bunyan.createLogger({
+  name: 'dd-trace',
+  level: 'trace'
+})
+
+const tracer = require('dd-trace').init({
+  logger: {
+    debug: message => logger.trace(message),
+    error: err => logger.error(err)
+  },
+  debug: true
+})
+```
 {{% /tab %}}
 {{< /tabs >}}
