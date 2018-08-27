@@ -50,5 +50,50 @@ class ServletImpl extends AbstractHttpServlet {
 {{% tab "Go" %}}
 {{% /tab %}}
 {{% tab "Node.js" %}}
+**Adding tags to a span**
+
+You can add tags directly to the span objects directly by calling `setTag` or `addTags`:
+
+```javascript
+// An example of an Express endpoint,
+// with Datadog tracing around the request.
+app.get('/posts', (req, res) => {
+  const span = tracer.startSpan('web.request')
+
+  span.setTag('http.url', req.url)
+  span.addTags({
+    'http.method': req.method
+  })
+})
+```
+
+**Adding tags to a current active span**
+
+You can also access the current active span from any method within your code. Note however that if the method is called and there is no span currently active `tracer.scopeManager().active()` will return `null`.
+
+```javascript
+// e.g. adding tag to active span
+
+const scope = tracer.scopeManager().active()
+const span = scope.span()
+
+span.setTag('my_tag', 'my_value')
+```
+
+**Adding tags globally to all spans**
+
+You can also add tags to all spans by configuring the tracer with the `tags` option:
+
+```javascript
+tracer.init({
+  tags: {
+    env: 'prod'
+  }
+})
+```
+
+See the [API documentation][nodejs api doc] for more details.
+
+[nodejs api doc]: https://datadog.github.io/dd-trace-js/
 {{% /tab %}}
 {{< /tabs >}}
