@@ -80,7 +80,7 @@ Datadog Agent logs are located in the `/var/log/datadog/` directory
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-Datadog Agent logs are located in  the `C:\ProgramData\Datadog\logs` directory
+Datadog Agent logs are located in the `C:\ProgramData\Datadog\logs` directory
 
 {{% /tab %}}
 {{< /tabs >}} 
