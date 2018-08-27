@@ -40,9 +40,31 @@ public class MyClass {
 ```
 {{% /tab %}}
 {{% tab "Python" %}}
+To enable sampling priority in the tracer:
 ```python
-This is some python code
+tracer.configure(priority_sampling=True)
 ```
+
+To set a custom priority to a trace:
+
+```python
+from ddtrace.ext.priority import USER_REJECT, USER_KEEP
+
+context = tracer.context_provider.active()
+
+# indicate to not keep the trace
+context.sampling_priority = USER_REJECT
+```
+
+The following priorities can be used.
+
+|                   Sampling Value                   |                                                   Effect                                                   |
+| -------------------------------------------------- | :--------------------------------------------------------------------------------------------------------- |
+| ddtrace.span.context.sampling_priority.AUTO_REJECT | The sampler automatically decided to not keep the trace. The Agent will drop it.                           |
+| ddtrace.span.context.sampling_priority.AUTO_KEEP   | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side. |
+| ddtrace.span.context.sampling_priority.USER_REJECT | The user asked to not keep the trace. The Agent will drop it.                                              |
+| ddtrace.span.context.sampling_priority.USER_KEEP   | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                     |
+
 {{% /tab %}}
 {{% tab "Ruby" %}}
 ```ruby

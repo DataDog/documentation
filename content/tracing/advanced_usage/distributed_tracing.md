@@ -75,6 +75,7 @@ public class MyHttpRequestExtractAdapter implements TextMap {
 
 {{% /tab %}}
 {{% tab "Python" %}}
+Distributed tracing is disabled by default. To enable it, refer to the instructions for the integrations that support distributed tracing.
 {{% /tab %}}
 {{% tab "Ruby" %}}
 Distributed tracing allows you to propagate a single trace across multiple services, so you can see performance end-to-end.

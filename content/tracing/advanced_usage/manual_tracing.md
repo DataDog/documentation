@@ -33,6 +33,41 @@ public class MyClass {
 
 {{% /tab %}}
 {{% tab "Python" %}}
+
+We have a Flask Python application that when called on `/doc` returns **42**.
+We instrumented our python code in order to generate traces from it:
+
+```python
+import time
+import blinker as _
+
+from flask import Flask, Response
+
+from ddtrace import tracer
+from ddtrace.contrib.flask import TraceMiddleware
+
+# Tracer configuration
+tracer.configure(hostname='datadog')
+app = Flask('API')
+traced_app = TraceMiddleware(app, tracer, service='doc_service')
+
+@tracer.wrap(name='doc_work')
+def work():
+    time.sleep(0.5)
+    return 42
+
+@app.route('/doc/')
+def doc_resource():
+    time.sleep(0.3)
+    res = work()
+    time.sleep(0.3)
+    return Response(str(res), mimetype='application/json')
+```
+
+Each time its called, the following code produces this **trace**:
+
+{{< img src="tracing/simple_trace.png" alt="Simple Trace" responsive="true" >}}
+
 {{% /tab %}}
 {{% tab "Ruby" %}}
 If you aren't using supported library instrumentation (see [Library compatibility][ruby lib compatibility], you may want to to manually instrument your code. Adding tracing to your code is easy using the `Datadog.tracer.trace` method, which you can wrap around any Ruby code.
