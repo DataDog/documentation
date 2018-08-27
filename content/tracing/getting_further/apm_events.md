@@ -24,20 +24,21 @@ To add some tags to your APM events, add tags in your HTTP middleware in order t
 
 ```ruby
 class Middleware
-def initialize(app)
-@app = app
-end
+  def initialize(app)
+    @app = app
+  end
 
-def call(env)
-# retrieve the current active Span
-tracer = Datadog.configuration[:rack][:tracer]
-span = tracer.active_span
-# set your tags
-span.set_tag("customer_id", 42)
-span.set_tag("customer_name", "AcmeCorp")
+  def call(env)
+    # retrieve the current active Span
+    tracer = Datadog.configuration[:rack][:tracer]
+    span = tracer.active_span
+    
+    # set your tags
+    span.set_tag("customer_id", 42)
+    span.set_tag("customer_name", "AcmeCorp")
 
-@app.call(env)
-end
+    @app.call(env)
+  end
 End
 ```
 
@@ -45,9 +46,9 @@ Alternatively, use a Tracer Processor before traces are flushed to the Datadog A
 
 ```ruby
 Datadog::Pipeline.before_flush(
-# alter the Span updating tags only for 'rack.request'
-Datadog::Pipeline::SpanProcessor.new do |span|
-span.set_tag("customer_id", 42) if span.name == 'rack.request'
+  # alter the Span updating tags only for 'rack.request'
+  Datadog::Pipeline::SpanProcessor.new do |span|
+  span.set_tag("customer_id", 42) if span.name == 'rack.request'
 end
 )
 ```
