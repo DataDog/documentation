@@ -48,8 +48,8 @@ Alternatively, use a Tracer Processor before traces are flushed to the Datadog A
 Datadog::Pipeline.before_flush(
   # alter the Span updating tags only for 'rack.request'
   Datadog::Pipeline::SpanProcessor.new do |span|
-  span.set_tag("customer_id", 42) if span.name == 'rack.request'
-end
+    span.set_tag("customer_id", 42) if span.name == 'rack.request'
+  end
 )
 ```
 
