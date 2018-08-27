@@ -28,13 +28,9 @@ For details about configuration and using the API, check out our [API documentat
 
 For details about contributing, check out the [development guide][development docs].
 
-
-
-### Setup the Datadog Agent
+### Quickstart
 
 To begin tracing Node.js applications, first [install and configure the Datadog Agent][1] (see additional documentation for [tracing Docker applications][3]).
-
-### Quickstart
 
 Next, install the Datadog Tracing library using npm:
 

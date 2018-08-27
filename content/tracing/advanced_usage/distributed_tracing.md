@@ -5,7 +5,11 @@ kind: documentation
 
 Distributed tracing allows you to propagate a single trace across multiple services and hosts, so you can see performance end-to-end. Linking is implemented by injecting Datadog Metadata into the request headers. 
 
-Distributed Tracing headers are language agnostic. A trace started in one language may propagate to another (for example, from Python to Java).
+Distributed Tracing headers are language agnostic. A trace started in one language may propagate to another (for example, from Python to Java). 
+
+Distributed Traces may sample inconsistently when the linked traces run on different hosts. To ensure that distributed traces are complete, enable [priority sampling][priority sampling].
+
+[priority sampling]: /tracing/setup_advanced/priority_sampling
 
 {{< tabs >}}
 {{% tab "Java" %}}

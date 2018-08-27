@@ -3,11 +3,11 @@ title: Manual Tracing
 kind: documentation
 ---
 
-Manual Tracing allows programmatic creation of traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation.
+Manual Tracing allows programmatic creation of traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation. Before instrumenting your application, review Datadog’s [APM Terminology][apm terminology] and familiarize yourself with the core concepts of Datadog APM. 
 
 {{< tabs >}}
 {{% tab "Java" %}}
-Before instrumenting your application, review Datadog’s [APM Terminology][apm terminology] and familiarize yourself with the core concepts of Datadog APM. If you aren't using a [supported framework instrumentation][java framework], or you would like additional depth in your application’s traces, you may want to to manually instrument your code.
+If you aren't using a [supported framework instrumentation][java framework], or you would like additional depth in your application’s traces, you may want to to manually instrument your code.
 
 Do this either using the Trace annotation for simple method call tracing or with the [OpenTracing API][opentracing] for complex tracing.
 

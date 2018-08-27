@@ -86,8 +86,7 @@ After setting up, your services will appear on the [APM services page][3] within
 
 ## Compatibility
 
-{{< tabs >}}
-{{% tab "Interpreter Compatibility" %}}
+Interpreter Compatibility
 
 Ruby APM includes support for the following Ruby interpreters:
 
@@ -106,8 +105,9 @@ Ruby APM includes support for the following Ruby interpreters:
 *Fully supported* support indicates all tracer features are available.
 
 *Experimental* indicates most features should be available, but unverified.
+### Integrations
 
-{{% /tab %}}
+{{< tabs >}}
 {{% tab "Web Server Compatibility" %}}
 
 Ruby APM includes support for the following web servers:
