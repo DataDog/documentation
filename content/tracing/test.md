@@ -8,6 +8,46 @@ kind: Documentation
 Custom Tagging allows adding key-value pairs to specific spans. These key-value pairs (tags) are used to correlate traces with other Datadog products and to provide more details about specific spans.
 
 {{< tabs >}}
+{{% tab "link" %}}
+
+## H2
+foo
+### H3
+foo
+#### H4
+foo
+##### H5
+foo
+
+## H2-bis
+foo
+### H3-bis
+foo
+#### H4
+foo
+##### H5
+foo
+{{% /tab %}}
+{{% tab "link-bis" %}}
+
+## H2
+foo
+### H3
+foo
+#### H4
+foo
+##### H5
+foo
+
+## H2-bis
+foo
+### H3-bis
+foo
+#### H4
+foo
+##### H5
+foo
+{{% /tab %}}
 {{% tab "Python" %}}
 
 To begin tracing applications written in Python, first install and configure the Datadog Agent (see additional documentation for tracing Docker applications).
