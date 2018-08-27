@@ -32,7 +32,7 @@
     <div class="container h-100">
         <div class="row h-100">
             <div class="d-none d-lg-flex col-12 col-sm-3 side">
-                {{ partial "sidenav/sidenav.html" . }}
+                {{ partialCached "sidenav/sidenav.html" . .Page.Lang }}
             </div>
             <div class="col-12 col-lg-9 main">
                 {{ block "main" . }}{{ end }}
@@ -40,7 +40,7 @@
         </div>
     </div>
 
-    {{ partial "footer/footer.html" . }}
+    {{ partialCached "footer/footer.html" . .Page.Lang }}
 
     <script src="{{ .Site.BaseURL }}js/{{ (index .Site.Data.manifests.js "main-dd.js") }}"></script>
 

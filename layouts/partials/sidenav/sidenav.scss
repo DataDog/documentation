@@ -9,6 +9,10 @@ body > header.scrolled ~ .container aside.sidenav .sticky {
   top:96px;
 }
 
+body > .container .sidenav .col {
+  opacity: 0;
+}
+
 .mobilequicknav {
   display:none;
 }
