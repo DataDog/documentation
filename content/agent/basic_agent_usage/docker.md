@@ -74,10 +74,10 @@ We automatically collect common tags from [Docker][6], [Kubernetes][7], [ECS][8]
 
 - `DD_DOCKER_LABELS_AS_TAGS` : extract docker container labels
 - `DD_DOCKER_ENV_AS_TAGS` : extract docker container environment variables
-- `DD_KUBERNETES_POD_LABELS_AS_TAGS` : extract pod labels
+- `DD_KUBERNETES_NODE_LABELS_AS_TAGS` : extract pod labels
 
 ```shell
-DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app","release":"helm_release"}'
+DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"app":"kube_app","release":"helm_release"}'
 DD_DOCKER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 ```
 
