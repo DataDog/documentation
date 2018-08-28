@@ -167,6 +167,7 @@ Notice the above examples only use the OpenTracing classes. Please reference the
 {{% tab "Python" %}}
 {{% /tab %}}
 {{% tab "Ruby" %}}
+Support for OpenTracing with Ruby is coming soon.
 {{% /tab %}}
 {{% tab "Go" %}}
 Import the [`opentracer` package][opentracing godoc] to expose the Datadog tracer as an [OpenTracing][open tracing] compatible tracer.
@@ -241,5 +242,30 @@ make use of the same tracer. Make sure to check out the [API documentation][open
 [opentracing go]: https://github.com/opentracing/opentracing-go
 {{% /tab %}}
 {{% tab "Node.js" %}}
+This library is OpenTracing compliant. Use the OpenTracing API and the Datadog Tracer (dd-trace) library to measure execution times for specific pieces of code. In the following example, a Datadog Tracer is initialized and used as a global tracer:
+
+aboutraw—
+This library is OpenTracing compliant. Use the [OpenTracing API](https://doc.esdoc.org/github.com/opentracing/opentracing-javascript/) and the Datadog Tracer (dd-trace) library to measure execution times for specific pieces of code. In the following example, a Datadog Tracer is initialized and used as a global tracer:
+
+```javascript
+// server.js
+
+const tracer = require('dd-trace').init()
+const opentracing = require('opentracing')
+
+opentracing.initGlobalTracer(tracer)
+
+const app = require('./app.js')
+
+// app.js
+
+const tracer = opentracing.globalTracer()
+```
+
+The following tags are available to override Datadog specific options:
+
+* `service.name`: The service name to be used for this span. The service name from the tracer will be used if this is not provided.
+* `resource.name`: The resource name to be used for this span. The operation name will be used if this is not provided.
+* `span.type`: The span type to be used for this span. Will fallback to `custom` if not provided.
 {{% /tab %}}
 {{< /tabs >}}

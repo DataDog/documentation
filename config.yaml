@@ -590,9 +590,9 @@ languages:
           url: "tracing/advanced_usage/logging/"
           weight: 260
           parent: customnav_tracingnav_advanced_usage
-        - identifier: customnav_tracingnav_scrubbing
-          name: "Scrubbing"
-          url: "tracing/advanced_usage/scrubbing/"
+        - identifier: customnav_tracingnav_security
+          name: "Security"
+          url: "tracing/advanced_usage/security/"
           weight: 270
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_debugging
@@ -1633,9 +1633,9 @@ languages:
           url: "tracing/advanced_usage/logging/"
           weight: 260
           parent: customnav_tracingnav_advanced_usage
-        - identifier: customnav_tracingnav_scrubbing
-          name: "Scrubbing"
-          url: "tracing/advanced_usage/scrubbing/"
+        - identifier: customnav_tracingnav_security
+          name: "Security"
+          url: "tracing/advanced_usage/security/"
           weight: 270
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_debugging

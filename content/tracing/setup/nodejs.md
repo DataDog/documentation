@@ -20,7 +20,7 @@ further_reading:
   text: "Advanced Usage"
 ---
 
-## Getting Started
+## Installation And Getting Started
 
 For descriptions of terminology used in APM, take a look at the [official documentation][visualization docs].
 
@@ -28,11 +28,7 @@ For details about configuration and using the API, check out our [API documentat
 
 For details about contributing, check out the [development guide][development docs].
 
-### Requirements
-
-Node `^4.7`, `^6.9` and `>=8` are supported by this library. However, it benefits significantly from the performance improvements introduced in Node `>=8.3`.
-
-### Installation
+### Quickstart
 
 To begin tracing Node.js applications, first [install and configure the Datadog Agent][1] (see additional documentation for [tracing Docker applications][3]).
 
@@ -53,17 +49,17 @@ See the [tracer settings][4] for the list of initialization options.
 
 **Note**: The tracer must be initialized before importing any instrumented module.
 
-## Tracer Settings
 
-## Integrations
+## Compatibility
 
-APM provides out-of-the-box instrumentation for many popular frameworks and libraries by using a plugin system.
+Node `^4.7`, `^6.9` and `>=8` are supported by this library. However, it benefits significantly from the performance improvements introduced in Node `>=8.3`.
+
+
+### Integrations
+
+APM provides out-of-the-box instrumentation for many popular frameworks and libraries by using a plugin system. If you would like support for a module that is not listed, [contact support][7] to share a request.
 
 For details about how to how to toggle and configure plugins, check out the [API documentation][6].
-
-### Compatibility
-
-The `dd-trace` library includes support for a number of modules. If you would like support for a module that is not listed, [contact support][7] to share a request.
 
 {{< tabs >}}
 {{% tab "Web Frameworks" %}}
