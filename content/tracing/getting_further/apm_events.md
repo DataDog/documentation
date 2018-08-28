@@ -2,7 +2,7 @@
 title: APM Events
 kind: Documentation
 further_reading:
-- link: "tracing/search"
+- link: "tracing/visualization/search"
   tag: "Documentation"
   text: Global search of all your traces with tags
 - link: "tracing/visualization/analytics"

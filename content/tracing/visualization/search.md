@@ -6,6 +6,7 @@ aliases:
   - tracing/trace_search_analytics/analytics
   - tracing/trace_search_analytics/
   - tracing/trace_search/
+  - tracing/search
 further_reading:
 - link: "tracing/setup/"
   tag: "Documentation"

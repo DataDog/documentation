@@ -20,7 +20,7 @@ further_reading:
 - link: "tracing/visualization/trace"
   tag: "Documentation"
   text: Understand how to read a Datadog Trace
-- link: "tracing/search"
+- link: "tracing/visualization/search"
   tag: "Documentation"
   text: Global search of all your traces with tags
 ---

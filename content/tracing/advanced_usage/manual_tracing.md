@@ -26,7 +26,7 @@ public class MyClass {
 }
 ```
 
-[opentracing]: /tracing/setup_advanced/open_tracing
+[opentracing]: /tracing/advanced_usage/open_tracing
 [java framework]: /tracing/setup/java/#integrations
 [apm terminology]: /tracing/visualization/services_list/
 [trace api maven docs]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api

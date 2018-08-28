@@ -188,4 +188,4 @@ Some integrations that rely on these are: [Rsyslog][2], [NxLog][3], [Syslog-ng][
 [17]: /integrations/amazon_rds
 [18]: /integrations/elastic
 [19]: /logs/explorer/search/#measures
-[20]: /tracing/search
+[20]: /tracing/visualization/search
