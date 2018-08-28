@@ -3,9 +3,9 @@ title: Distributed Tracing
 kind: documentation
 ---
 
-Distributed tracing allows you to propagate a single trace across multiple services and hosts, so you can see performance end-to-end. Linking is implemented by injecting Datadog Metadata into the request headers. 
+Distributed tracing allows you to propagate a single trace across multiple services and hosts, so you can see performance end-to-end. Linking is implemented by injecting Datadog Metadata into the request headers.
 
-Distributed Tracing headers are language agnostic. A trace started in one language may propagate to another (for example, from Python to Java). 
+Distributed Tracing headers are language agnostic. A trace started in one language may propagate to another (for example, from Python to Java).
 
 Distributed Traces may sample inconsistently when the linked traces run on different hosts. To ensure that distributed traces are complete, enable [priority sampling][priority sampling].
 
@@ -87,6 +87,54 @@ Distributed tracing is disabled by default. For more details about how to activa
 
 {{% /tab %}}
 {{% tab "Go" %}}
+Create a distributed trace propagating manually the tracing context:
+
+```go
+package main
+
+import (
+	"net/http"
+
+	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func handler(w http.ResponseWriter, r *http.Request) {
+	span, ctx := tracer.StartSpanFromContext(r.Context(), "post.process")
+	req, err := http.NewRequest("GET", "http://example.com", nil)
+	req = req.WithContext(ctx)
+	// Inject the span Context in the Request headers
+	err = tracer.Inject(span.Context(), tracer.HTTPHeadersCarrier(r.Header))
+	if err != nil {
+		// Handle or log injection error
+	}
+	http.DefaultClient.Do(req)
+}
+```
+
+Then, on the server side, to continue the trace you can start a new Span from the
+extracted `Context`:
+
+```go
+package main
+
+import (
+    "net/http"
+
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func handler(w http.ResponseWriter, r *http.Request) {
+    // Extract the span Context and continue the trace in this service
+    sctx, err := tracer.Extract(tracer.HTTPHeadersCarrier(r.Header))
+    if err != nil {
+        // Handle or log extraction error
+    }
+
+    span := tracer.StartSpan("post.filter", tracer.ChildOf(sctx))
+    defer span.Finish()
+}
+```
+
 {{% /tab %}}
 {{% tab "Node.js" %}}
 Distributed tracing is enabled by default for all supported integrations.

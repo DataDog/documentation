@@ -180,56 +180,24 @@ A basic usage would be:
 package main
 
 import (
-    "github.com/opentracing/opentracing-go"
+	"github.com/opentracing/opentracing-go"
 
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer"
+	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
 func main() {
-    // Start the regular tracer and return it as an opentracing.Tracer interface. You
-    // may use the same set of options as you normally would with the Datadog tracer.
-    t := opentracer.Start(tracer.WithServiceName("my-service"))
+	// Start the regular tracer and return it as an opentracing.Tracer interface. You
+	// may use the same set of options as you normally would with the Datadog tracer.
+	t := opentracer.New(tracer.WithServiceName("my-service"))
 
-    // Stop it using the regular Stop call.
-    defer tracer.Stop()
+	// Stop it using the regular Stop call for the tracer package.
+	defer tracer.Stop()
 
-    // Set the global OpenTracing tracer.
-    opentracing.SetGlobalTracer(t)
+	// Set the global OpenTracing tracer.
+	opentracing.SetGlobalTracer(t)
 
-    // Use the OpenTracing API as usual.
-}
-```
-
-**Note**: Using the [OpenTracing API][opentracing go] in parallel with the regular API or our integrations is fully supported. Under the hood, all of them
-make use of the same tracer. Make sure to check out the [API documentation][opentracing godoc] for more examples and details.
-
-### Example
-
-A basic usage would be:
-
-```go
-package main
-
-import (
-    "github.com/opentracing/opentracing-go"
-
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-)
-
-func main() {
-    // Start the regular tracer and return it as an opentracing.Tracer interface. You
-    // may use the same set of options as you normally would with the Datadog tracer.
-    t := opentracer.Start(tracer.WithServiceName("my-service"))
-
-    // Stop it using the regular Stop call.
-    defer tracer.Stop()
-    
-    // Set the global OpenTracing tracer.
-    opentracing.SetGlobalTracer(t)
-
-    // Use the OpenTracing API as usual.
+	// Use the OpenTracing API as usual.
 }
 ```
 
