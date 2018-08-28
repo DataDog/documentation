@@ -165,6 +165,7 @@ Notice the above examples only use the OpenTracing classes. Please reference the
 
 {{% /tab %}}
 {{% tab "Python" %}}
+Support for OpenTracing with Python is coming soon.
 {{% /tab %}}
 {{% tab "Ruby" %}}
 Support for OpenTracing with Ruby is coming soon.
