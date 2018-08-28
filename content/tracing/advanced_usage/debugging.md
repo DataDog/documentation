@@ -22,6 +22,19 @@ end
 
 {{% /tab %}}
 {{% tab "Go" %}}
+Debug mode on the tracer can be enabled as a `Start` config, resulting in more verbose logging:
+
+```go
+package main
+
+import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+
+func main() {
+    tracer.Start(tracer.WithDebugMode(true))
+    defer tracer.Stop()
+}
+```
+
 {{% /tab %}}
 {{% tab "Node.js" %}}
 Debug mode is disabled by default, to enable it:
