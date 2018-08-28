@@ -195,7 +195,7 @@ logs:
 
 | Parameter          | Description                                                            |
 | --------           | ---------                                                              |
-| `include_at_match` | Only log with a message that includes the specified pattern are sent to Datadog. |
+| `include_at_match` | Only logs with a message that includes the specified pattern are sent to Datadog. |
 
 Example: Sending only logs that contain a Datadog email
 
