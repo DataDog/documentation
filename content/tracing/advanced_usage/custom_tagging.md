@@ -58,6 +58,21 @@ def handle_post(post_id):
     span.set_tag('post.id', post_id)
 ```
 
+**Adding tags to a current active span**
+
+The current span can be retrieved from the context in order to set tags. This way, if a span was started by our instrumentation, you can retrieve the span and add custom tags. Note that if a span does not exist, `None` will be returned:
+
+```python
+from ddtrace import tracer
+
+@app.route('/post/<int:post_id>')
+@tracer.wrap()
+def handle_post(post_id):
+  # get the active span in the context
+  current_span = tracer.get_span()
+  if current_span:
+    current_span.set_tag('post.id', post_id)
+```
 
 **Adding tags globally to all spans**
 

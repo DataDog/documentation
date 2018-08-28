@@ -75,7 +75,24 @@ public class MyHttpRequestExtractAdapter implements TextMap {
 
 {{% /tab %}}
 {{% tab "Python" %}}
-Distributed tracing is disabled by default. To enable it, refer to the instructions for the integrations that support distributed tracing.
+Distributed tracing is supported in the following frameworks. Please refer to
+the configuration documentation for each to enable it.
+
+| Framework/Library | Default  |                          API Documentation                          |
+| ----------------- | :------- | :------------------------------------------------------------------ |
+| aiohttp           | Disabled | http://pypi.datadoghq.com/trace/docs/web_integrations.html#aiohttp  |
+| bottle            | Enabled  | http://pypi.datadoghq.com/trace/docs/web_integrations.html#bottle   |
+| django            | Disabled | http://pypi.datadoghq.com/trace/docs/web_integrations.html#django   |
+| falcon            | Disabled | http://pypi.datadoghq.com/trace/docs/web_integrations.html#falcon   |
+| flask             | Disabled | http://pypi.datadoghq.com/trace/docs/web_integrations.html#flask    |
+| pylons            | Disabled | http://pypi.datadoghq.com/trace/docs/web_integrations.html#pylons   |
+| pyramid           | Disabled | http://pypi.datadoghq.com/trace/docs/web_integrations.html#pyramid  |
+| requests          | Enabled  | http://pypi.datadoghq.com/trace/docs/web_integrations.html#requests |
+| tornado           | Disabled | http://pypi.datadoghq.com/trace/docs/web_integrations.html#tornado  |
+
+To add your own distributed tracing refer to our [API documentation][py_dist_tracing].
+
+[py_dist_tracing]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#http-client
 {{% /tab %}}
 {{% tab "Ruby" %}}
 Distributed tracing allows you to propagate a single trace across multiple services, so you can see performance end-to-end.

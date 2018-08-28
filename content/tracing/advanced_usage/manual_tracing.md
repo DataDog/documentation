@@ -34,39 +34,74 @@ public class MyClass {
 {{% /tab %}}
 {{% tab "Python" %}}
 
-We have a Flask Python application that when called on `/doc` returns **42**.
-We instrumented our python code in order to generate traces from it:
+If you would like to extend the functionality of the ``ddtrace`` library or gain
+finer control over instrumenting your application, several techniques are
+provided by the library.
+
+The following examples use the global tracer object which can be imported via:
 
 ```python
-import time
-import blinker as _
-
-from flask import Flask, Response
-
-from ddtrace import tracer
-from ddtrace.contrib.flask import TraceMiddleware
-
-# Tracer configuration
-tracer.configure(hostname='datadog')
-app = Flask('API')
-traced_app = TraceMiddleware(app, tracer, service='doc_service')
-
-@tracer.wrap(name='doc_work')
-def work():
-    time.sleep(0.5)
-    return 42
-
-@app.route('/doc/')
-def doc_resource():
-    time.sleep(0.3)
-    res = work()
-    time.sleep(0.3)
-    return Response(str(res), mimetype='application/json')
+  from ddtrace import tracer
 ```
 
-Each time its called, the following code produces this **trace**:
+**Decorator**
 
-{{< img src="tracing/simple_trace.png" alt="Simple Trace" responsive="true" >}}
+``ddtrace`` provides a decorator that can be used to trace a particular method
+in your application:
+
+```python
+  @tracer.wrap()
+  def business_logic():
+    """A method that would be of interest to trace"""
+    # ...
+    # ...
+```
+
+API details for the decorator can be found at [`ddtrace.Tracer.wrap()`][py_wrap]
+
+**Context Manager**
+
+To trace an arbitrary block of code, you can use the [`ddtrace.Span`][py_span]
+context manager:
+
+```python
+  import time
+
+  # trace some sleeping
+  with tracer.trace('time.sleep'):
+    # do interesting stuff besides sleeping for a second
+    time.sleep(1)
+```
+
+Further API details can be found at [`ddtrace.Tracer()`][py_tracer]
+
+**By Hand**
+
+If the above methods are still not enough to satisfy your tracing needs, a
+manual API is provided which will allow you to start and finish spans however
+you may require:
+
+```python
+  span = tracer.trace('interesting.stuff')
+
+  # do interesting stuff in between
+
+  # make sure to call span.finish() or the span will not be sent to Datadog
+  span.finish()
+```
+
+
+API details of the decorator can be found here:
+
+- [`ddtrace.Tracer.trace`][py_trace]
+- [`ddtrace.Span.finish`][py_span_fin]
+
+
+[py_wrap]:     http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Tracer.wrap
+[py_tracer]:   http://pypi.datadoghq.com/trace/docs/advanced_usage.html#tracer
+[py_trace]:    http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Tracer.trace
+[py_span]:     http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Span
+[py_span_fin]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Span.finish
 
 {{% /tab %}}
 {{% tab "Ruby" %}}

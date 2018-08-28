@@ -58,12 +58,12 @@ context.sampling_priority = USER_REJECT
 
 The following priorities can be used.
 
-|                   Sampling Value                   |                                                   Effect                                                   |
-| -------------------------------------------------- | :--------------------------------------------------------------------------------------------------------- |
-| ddtrace.span.context.sampling_priority.AUTO_REJECT | The sampler automatically decided to not keep the trace. The Agent will drop it.                           |
-| ddtrace.span.context.sampling_priority.AUTO_KEEP   | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side. |
-| ddtrace.span.context.sampling_priority.USER_REJECT | The user asked to not keep the trace. The Agent will drop it.                                              |
-| ddtrace.span.context.sampling_priority.USER_KEEP   | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                     |
+| Sampling Value |                                                   Effect                                                   |
+| -------------- | :--------------------------------------------------------------------------------------------------------- |
+| AUTO_REJECT    | The sampler automatically decided to not keep the trace. The Agent will drop it.                           |
+| AUTO_KEEP      | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side. |
+| USER_REJECT    | The user asked to not keep the trace. The Agent will drop it.                                              |
+| USER_KEEP      | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                     |
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
