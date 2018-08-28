@@ -78,7 +78,7 @@ Set `type` to **file** then specify the absolute `path` to the log file you want
 
 Example:
 
-To gather logs from your python applications stored in **/var/log/myapp1.log** and **/var/log/python.log** create a `python.d/conf.yaml` file at the root of your [Agent's configuration directory][9] with the following content:
+To gather logs from your Python applications stored in **/var/log/myapp1.log** and **/var/log/python.log** create a `python.d/conf.yaml` file at the root of your [Agent's configuration directory][9] with the following content:
 
 ```yaml
 ##Log section
@@ -97,7 +97,7 @@ logs:
     source: python
     sourcecategory: sourcecode
 ```
-**Note**: If you are using the Windows 6 Agent and trailing files for logs - make sure that those files have a UTF8 encoding.
+**Note**: If you are using the Windows 6 Agent and trailing files for logs, make sure that those files have UTF8 encoding.
 
 [9]: /agent/faq/agent-configuration-files/
 
@@ -109,7 +109,7 @@ Set `type` to **tcp** or **udp** depending on the protocol then specify the `por
 
 Example:
 
-To gather logs from PHP application that does not log to a file, but instead forwards its logs via TCP over port **10518**, create a `php.d/conf.yaml` file at the root of your [Agent's configuration directory][9] with the following content:
+To gather logs from a PHP application that does not log to a file, but instead forwards its logs via TCP over port **10518**, create a `php.d/conf.yaml` file at the root of your [Agent's configuration directory][9] with the following content:
 
 ```yaml
 
@@ -123,7 +123,7 @@ logs:
 
 ```
 
-**Note**: The Agent supports raw string, JSON, and Syslog formated logs. If you are sending logs in batch, use break line characters to separate your logs.
+**Note**: The Agent supports raw string, JSON, and Syslog formatted logs. If you are sending logs in batch, use linebreak characters to separate your logs.
 
 [9]: /agent/faq/agent-configuration-files/
 
@@ -134,7 +134,7 @@ Set `type` to **journald** then specify the `path` of your journal.
 
 Example:
 
-To gather logs from your JournalD, create a `journald.d/conf.yaml` file at the root of your [Agent's configuration directory][9] with the following content:
+To gather logs from JournalD, create a `journald.d/conf.yaml` file at the root of your [Agent's configuration directory][9] with the following content:
 
 ```
 logs:
@@ -150,7 +150,7 @@ logs:
 {{% /tab %}}
 {{% tab "Windows Events" %}}
 
-Set `type` to **windows_event** then specify the `channel_path` of your windows channel.
+Set `type` to **windows_event** then specify the `channel_path` of your Windows channel.
 
 Example: 
 
