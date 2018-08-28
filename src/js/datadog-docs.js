@@ -542,6 +542,7 @@ $(document).ready(function () {
           // find all
           var lang = $(this).data('lang');
           $('.code-tabs .nav-tabs').each(function() {
+             var navtabs = $(this);
              var links = $(this).find('a:first');
              var langLinks = $(this).find('a[data-lang="'+lang+'"]');
              if(langLinks.length) {
@@ -549,10 +550,12 @@ $(document).ready(function () {
                      activateTab($(this));
                  });
              } else {
-                 // set first lang selected
-                 links.each(function() {
-                     activateTab($(this));
-                 });
+                 // set first lang selected if nothing selected
+                 if(navtabs.find('.active').length === 0) {
+                     links.each(function() {
+                         activateTab($(this));
+                     });
+                 }
              }
           });
 

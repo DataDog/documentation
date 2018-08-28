@@ -127,6 +127,21 @@ The Kubernetes check includes the following service checks:
 * `kubernetes.kubelet.check.syncloop`:
   If `CRITICAL` or `NO DATA`, Kubelet's sync loop that updates containers isn't working.
 
+* `kubernetes_state.node.ready`:
+  Returns `CRITICAL` if a cluster node is not ready. Returns `OK` otherwise.
+
+* `kubernetes_state.node.out_of_disk`:
+  Returns `CRITICAL` if a cluster node is out of disk space. Returns `OK` otherwise.
+
+* `kubernetes_state.node.disk_pressure`:
+  Returns `CRITICAL` if a cluster node is in a disk pressure state. Returns `OK` otherwise.
+
+* `kubernetes_state.node.memory_pressure`:
+  Returns `CRITICAL` if a cluster node is in a memory pressure state. Returns `OK` otherwise.
+
+* `kubernetes_state.node.network_unavailable`:
+  Returns `CRITICAL` if a cluster node is in a network unavailable state. Returns `OK` otherwise.
+
 ## Troubleshooting
 
 * [Can I install the Agent on my Kubernetes master node(s)][7]
