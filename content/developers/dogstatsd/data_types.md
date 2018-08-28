@@ -87,7 +87,7 @@ For Ruby:
 start_time = Time.now
 results = Net::HTTP.get('https://google.com')
 duration = Time.now - start_time
-statsd.histogram('dist.dd.website.latency', duration)
+statsd.distribution('dist.dd.website.latency', duration)
 ```
 
 The above instrumentation calculates the following data: `sum`, `count`, `average`, `minimum`, `maximum`, `50th percentile` (median), `75th percentile`, `90th percentile`, `95th percentile` and `99th percentile`. These metrics give insight into how different each request time is. We can see how long the request usually takes by graphing the median. We can see how long most requests take by graphing the 95th percentile.
