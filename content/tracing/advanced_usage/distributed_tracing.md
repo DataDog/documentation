@@ -93,21 +93,21 @@ Create a distributed trace propagating manually the tracing context:
 package main
 
 import (
-    "net/http"
+	"net/http"
 
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
-    span, ctx := tracer.StartSpanFromContext(r.Context(), "post.process")
-    req, err := http.NewRequest("GET", "http://example.com", nil)
-
-    // Inject the span Context in the Request headers
-    err := tracer.Inject(span.Context(), tracer.HTTPHeadersCarrier(r.Header))
-    if err != nil {
-        // Handle or log injection error
-    }
-    http.DefaultClient.Do(req)
+	span, ctx := tracer.StartSpanFromContext(r.Context(), "post.process")
+	req, err := http.NewRequest("GET", "http://example.com", nil)
+	req = req.WithContext(ctx)
+	// Inject the span Context in the Request headers
+	err = tracer.Inject(span.Context(), tracer.HTTPHeadersCarrier(r.Header))
+	if err != nil {
+		// Handle or log injection error
+	}
+	http.DefaultClient.Do(req)
 }
 ```
 

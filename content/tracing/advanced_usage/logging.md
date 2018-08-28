@@ -86,20 +86,19 @@ The Go tracer exposes two API calls to allow printing trace and span identifiers
 package main
 
 import (
-    "log"
-    "net/http"
+	"net/http"
 
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
-    // Create a span for a web request at the /posts URL.
-    span := tracer.StartSpan("web.request", tracer.ResourceName("/posts"))
-    defer span.Finish()
+	// Create a span for a web request at the /posts URL.
+	span := tracer.StartSpan("web.request", tracer.ResourceName("/posts"))
+	defer span.Finish()
 
-    // Retrieve Trace ID and Span ID
-    traceID = span.Context().TraceID()
-    spanID = span.Context().SpanID()
+	// Retrieve Trace ID and Span ID
+	traceID := span.Context().TraceID()
+	spanID := span.Context().SpanID()
 }
 ```
 
