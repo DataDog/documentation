@@ -40,7 +40,9 @@ public class MyClass {
 ```
 {{% /tab %}}
 {{% tab "Python" %}}
-To enable sampling priority in the tracer:
+Priority sampling is disabled by default. To enable it, configure the
+`priority_sampling` flag using the `tracer.configure` method:
+
 ```python
 tracer.configure(priority_sampling=True)
 ```
@@ -50,10 +52,10 @@ To set a custom priority to a trace:
 ```python
 from ddtrace.ext.priority import USER_REJECT, USER_KEEP
 
-context = tracer.context_provider.active()
+span = tracer.current_span()
 
 # indicate to not keep the trace
-context.sampling_priority = USER_REJECT
+span.context.sampling_priority = USER_REJECT
 ```
 
 The following priorities can be used.

@@ -57,9 +57,13 @@ Logback XML Pattern:
 
 {{% /tab %}}
 {{% tab "Python" %}}
+Getting the required information needed for logging is easy:
+
+```python
 from ddtrace import helpers
 
 trace_id, span_id = helpers.get_correlation_ids()
+```
 {{% /tab %}}
 {{% tab "Ruby" %}}
 {{% /tab %}}

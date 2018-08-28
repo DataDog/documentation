@@ -78,17 +78,17 @@ public class MyHttpRequestExtractAdapter implements TextMap {
 Distributed tracing is supported in the following frameworks. Please refer to
 the configuration documentation for each to enable it.
 
-| Framework/Library | Default  |                          API Documentation                          |
-| ----------------- | :------- | :------------------------------------------------------------------ |
-| aiohttp           | Disabled | http://pypi.datadoghq.com/trace/docs/web_integrations.html#aiohttp  |
-| bottle            | Enabled  | http://pypi.datadoghq.com/trace/docs/web_integrations.html#bottle   |
-| django            | Disabled | http://pypi.datadoghq.com/trace/docs/web_integrations.html#django   |
-| falcon            | Disabled | http://pypi.datadoghq.com/trace/docs/web_integrations.html#falcon   |
-| flask             | Disabled | http://pypi.datadoghq.com/trace/docs/web_integrations.html#flask    |
-| pylons            | Disabled | http://pypi.datadoghq.com/trace/docs/web_integrations.html#pylons   |
-| pyramid           | Disabled | http://pypi.datadoghq.com/trace/docs/web_integrations.html#pyramid  |
-| requests          | Enabled  | http://pypi.datadoghq.com/trace/docs/web_integrations.html#requests |
-| tornado           | Disabled | http://pypi.datadoghq.com/trace/docs/web_integrations.html#tornado  |
+| Framework/Library |                          API Documentation                          |
+| ----------------- | :------------------------------------------------------------------ |
+| aiohttp           | http://pypi.datadoghq.com/trace/docs/web_integrations.html#aiohttp  |
+| bottle            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#bottle   |
+| django            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#django   |
+| falcon            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#falcon   |
+| flask             | http://pypi.datadoghq.com/trace/docs/web_integrations.html#flask    |
+| pylons            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#pylons   |
+| pyramid           | http://pypi.datadoghq.com/trace/docs/web_integrations.html#pyramid  |
+| requests          | http://pypi.datadoghq.com/trace/docs/web_integrations.html#requests |
+| tornado           | http://pypi.datadoghq.com/trace/docs/web_integrations.html#tornado  |
 
 To add your own distributed tracing refer to our [API documentation][py_dist_tracing].
 

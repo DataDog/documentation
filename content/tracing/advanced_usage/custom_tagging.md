@@ -47,7 +47,8 @@ class ServletImpl extends AbstractHttpServlet {
 
 **Adding tags to a span**
 
-You can add tags directly to a span by calling `set_tag`. For example with the following Flask route handler:
+You can add tags directly to a span by calling `set_tag`. For example with
+the following route handler:
 
 ```python
 from ddtrace import tracer
@@ -60,7 +61,10 @@ def handle_post(post_id):
 
 **Adding tags to a current active span**
 
-The current span can be retrieved from the context in order to set tags. This way, if a span was started by our instrumentation, you can retrieve the span and add custom tags. Note that if a span does not exist, `None` will be returned:
+The current span can be retrieved from the context in order to set tags. This
+way, if a span was started by our instrumentation, you can retrieve the span
+and add custom tags. Note that if a span does not exist, `None` will be
+returned:
 
 ```python
 from ddtrace import tracer
@@ -68,8 +72,8 @@ from ddtrace import tracer
 @app.route('/post/<int:post_id>')
 @tracer.wrap()
 def handle_post(post_id):
-  # get the active span in the context
-  current_span = tracer.get_span()
+  # get the active span in the context, put there by tracer.wrap()
+  current_span = tracer.current_span()
   if current_span:
     current_span.set_tag('post.id', post_id)
 ```
