@@ -3,37 +3,6 @@ title: APM Setup
 kind: Documentation
 aliases:
   - /tracing/languages/
-further_reading:
-- link: "tracing/setup/first_class_dimensions"
-  tag: "Documentation"
-  text: "Learn more about first class dimensions"
-- link: "tracing/setup/dotnet"
-  tag: "Documentation"
-  text: .NET language instrumentation
-- link: "tracing/setup/docker"
-  tag: "Documentation"
-  text: Docker setup
-- link: "tracing/setup/kubernetes"
-  tag: "Documentation"
-  text: Kubernetes setup
-- link: "tracing/setup/go"
-  tag: "Documentation"
-  text: Go language instrumentation
-- link: "tracing/setup/java"
-  tag: "Documentation"
-  text: Java language instrumentation
-- link: "tracing/setup/nodejs"
-  tag: "Documentation"
-  text: Node.js language instrumentation
-- link: "tracing/setup/php"
-  tag: "Documentation"
-  text: PHP language instrumentation
-- link: "tracing/setup/python"
-  tag: "Documentation"
-  text: Python language instrumentation
-- link: "tracing/setup/ruby"
-  tag: "Documentation"
-  text: Ruby language instrumentation
 ---
 
 This documentation covers Agent v6 only, to know how to set up APM tracing with Agent v5, [refer to the dedicated APM with Agent v5 doc][1].
@@ -64,19 +33,24 @@ To start tracing your application:
   **Note**: if you do not configure your own environments, all data will default to `env:none`.
 
 4. **Instrument your application**:
-  Select one of the following supported languages:
 
-  - [Go][11]
-  - [Java][12]
-  - [Python][13]
-  - [Ruby][14]
-  - [.NET][22]
-  - [PHP][23]
-  - [Node.js][24]
+  {{< whatsnext desc="Select one of the following supported languages:">}}
+      {{< nextlink href="tracing/setup/dotnet" tag=".NET" >}}.NET language instrumentation.{{< /nextlink >}}
+      {{< nextlink href="tracing/setup/docker" tag="Docker" >}}Docker setup.{{< /nextlink >}}
+      {{< nextlink href="tracing/setup/kubernetes" tag="Kubernetes" >}}Kubernetes setup.{{< /nextlink >}}
+      {{< nextlink href="tracing/setup/go" tag="Go" >}}Go language instrumentation.{{< /nextlink >}}
+      {{< nextlink href="tracing/setup/java" tag="Java" >}}Java language instrumentation.{{< /nextlink >}}
+      {{< nextlink href="tracing/setup/nodejs" tag="Nodejs" >}}Node.js language instrumentation.{{< /nextlink >}}
+      {{< nextlink href="tracing/setup/php" tag="PHP" >}}PHP language instrumentation.{{< /nextlink >}}
+      {{< nextlink href="tracing/setup/python" tag="Python" >}}Python language instrumentation.{{< /nextlink >}}
+      {{< nextlink href="tracing/setup/ruby" tag="Ruby" >}}Ruby language instrumentation{{< /nextlink >}}
+  {{< /whatsnext >}}
 
-    To instrument an application written in a language that does not yet have official library support, visit our list of [community tracing libraries][15].
 
-5. Start monitoring your app's performance: Within a few minutes of running APM, you will start to see your services appear in [the APM home page][16]. See [Using the APM UI][17] to learn more.
+
+To instrument an application written in a language that does not yet have official library support, visit our list of [community tracing libraries][15].
+
+Finally, start monitoring your app's performance: Within a few minutes of running APM, you will start to see your services appear in [the APM home page][16]. See [Using the APM UI][17] to learn more.
 
 ## Agent configuration
 
@@ -109,10 +83,6 @@ To get a an overview of all the possible settings for APM, take a look at the Tr
 For more information about the Datadog Agent, see the [dedicated doc page][18] or refer to the [`datadog.yaml` templates][19].
 
 [Reference the dedicated documentation to setup tracing with Docker][5].
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/faq/agent-5-tracing-setup
 [2]: https://github.com/DataDog/datadog-trace-agent/blob/master/config/agent.go#L95
