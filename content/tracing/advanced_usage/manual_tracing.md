@@ -5,6 +5,8 @@ kind: documentation
 
 Manual Tracing allows programmatic creation of traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation. Before instrumenting your application, review Datadog’s [APM Terminology][apm terminology] and familiarize yourself with the core concepts of Datadog APM. 
 
+[apm terminology]: /tracing/visualization/services_list/
+
 {{< tabs >}}
 {{% tab "Java" %}}
 If you aren't using a [supported framework instrumentation][java framework], or you would like additional depth in your application’s traces, you may want to to manually instrument your code.
@@ -13,7 +15,7 @@ Do this either using the Trace annotation for simple method call tracing or with
 
 Datadog's Trace annotation is provided by the [dd-trace-api dependency][trace api maven docs].
 
-Example Trace usage:
+**Example Usage**
 
 ```java
 import datadog.trace.api.Trace;
@@ -104,7 +106,9 @@ API details of the decorator can be found here:
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
-If you aren't using supported library instrumentation (see [Library compatibility][ruby lib compatibility], you may want to to manually instrument your code. Adding tracing to your code is easy using the `Datadog.tracer.trace` method, which you can wrap around any Ruby code.
+If you aren't using supported library instrumentation (see [Library compatibility][ruby lib compatibility]), you may want to to manually instrument your code. Adding tracing to your code is easy using the `Datadog.tracer.trace` method, which you can wrap around any Ruby code.
+
+**Example Usage**
 
 ```ruby
 # An example of a Sinatra endpoint,
@@ -136,7 +140,9 @@ For more details about manual instrumentation, check out the [API documentation]
 
 {{% /tab %}}
 {{% tab "Go" %}}
-To make use of manual instrumentation, use the `tracer` package which is documented on our [godoc page][tracer godoc]. One simple example would be:
+To make use of manual instrumentation, use the `tracer` package which is documented on our [godoc page][tracer godoc]. 
+
+**Example Usage**
 
 ```go
 package main

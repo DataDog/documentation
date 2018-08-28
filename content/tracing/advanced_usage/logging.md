@@ -3,11 +3,13 @@ title: Logging
 kind: documentation
 ---
 
-Datadog's logging APIs allow accessing active tracing identifiers. These identifiers can be injected into application logs using MDC frameworks. This allows for correlating APM traces with specific log events.
+Datadog's logging APIs allows for accessing active tracing identifiers which can be used to correlate APM traces with specific log events.
 
 {{< tabs >}}
 {{% tab "Java" %}}
 The Java tracer exposes two API calls to allow printing trace and span identifiers along with log statements, `CorrelationIdentifier#getTraceId()`, and `CorrelationIdentifier#getSpanId()`.
+
+These identifiers can be injected into application logs using MDC frameworks.
 
 log4j2:
 
@@ -66,24 +68,7 @@ trace_id, span_id = helpers.get_correlation_ids()
 ```
 {{% /tab %}}
 {{% tab "Ruby" %}}
-By default, all logs are processed by the default Ruby logger. When using Rails, you should see the messages in your application log file.
-
-Datadog client log messages are marked with ``[ddtrace]``, so you can isolate them from other messages.
-
-Additionally, it is possible to override the default logger and replace it with a custom one. This is done using the ``log`` attribute of the tracer.
-
-```ruby
-f = File.new("my-custom.log", "w+")           # Log messages should go there
-Datadog.configure do |c|
-  c.tracer log: Logger.new(f)                 # Overriding the default tracer
-end
-
-Datadog::Tracer.log.info { "this is typically called by tracing code" }
-```
-
-See [the API documentation][ruby logging docs] for more details.
-
-[ruby logging docs]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#custom-logging
+Coming Soon.
 
 {{% /tab %}}
 {{% tab "Go" %}}
@@ -111,26 +96,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
-By default, logging from this library is disabled. In order to get debbuging information and errors sent to logs, the `debug` options should be set to `true` in the [init()](https://datadog.github.io/dd-trace-js/Tracer.html#init) method.
-
-The tracer will then log debug information to `console.log()` and errors to `console.error()`. This behavior can be changed by passing a custom logger to the tracer. The logger should contain a `debug()` and `error()` methods that can handle messages and errors, respectively.
-
-For example:
-
-```javascript
-const bunyan = require('bunyan')
-const logger = bunyan.createLogger({
-  name: 'dd-trace',
-  level: 'trace'
-})
-
-const tracer = require('dd-trace').init({
-  logger: {
-    debug: message => logger.trace(message),
-    error: err => logger.error(err)
-  },
-  debug: true
-})
-```
+Coming Soon.
 {{% /tab %}}
 {{< /tabs >}}

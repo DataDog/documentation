@@ -79,7 +79,9 @@ public class MyHttpRequestExtractAdapter implements TextMap {
 
 {{% /tab %}}
 {{% tab "Python" %}}
-Distributed tracing is supported in the following frameworks. Please refer to
+Distributed tracing is supported in the following frameworks. 
+
+Distributed tracing is disabled by default. Please refer to
 the configuration documentation for each to enable it.
 
 | Framework/Library |                          API Documentation                          |
@@ -99,13 +101,28 @@ To add your own distributed tracing refer to our [API documentation][py_dist_tra
 [py_dist_tracing]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#http-client
 {{% /tab %}}
 {{% tab "Ruby" %}}
-Distributed tracing is disabled by default. For more details about how to activate and configure distributed tracing, check out the [API documentation][distributed tracing ruby].
+Distributed tracing is supported in the following frameworks. 
+
+Distributed tracing is disabled by default. Please refer to
+the configuration documentation for each to enable it.
+
+| Framework/Library |                                 API Documentation                                     |
+| ----------------- | :------------------------------------------------------------------------------------ |
+| Excon             | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#excon       |
+| Faraday           | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#faraday     |
+| Net/HTTP          | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#nethttp     |
+| Rack              | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#rack        |
+| Rails             | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#rails       |
+| Rest Client       | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#restclient  |
+| Sinatra           | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#sinatra     |
+
+For more details about how to activate and configure distributed tracing, check out the [API documentation][distributed tracing ruby].
 
 [distributed tracing ruby]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#distributed-tracing
 
 {{% /tab %}}
 {{% tab "Go" %}}
-Create a distributed trace propagating manually the tracing context:
+Create a distributed trace by manually propagating the tracing context:
 
 ```go
 package main
@@ -155,7 +172,9 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
-Distributed tracing is enabled by default for all supported integrations.
+Distributed tracing is enabled by default for all supported integrations (see [Compatibility][nodejs compatibility]).
+
+[nodejs compatibility]: /tracing/setup/nodejs/#compatibility
 
 {{% /tab %}}
 {{< /tabs >}}

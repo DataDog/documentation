@@ -69,15 +69,6 @@ The following priorities can be used.
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
-Possible values for the sampling priority tag are:
-
-| Sampling Value | Effect                                                                                                     |
-| --------       | :--------------------------------------------------                                                        |
-| `Datadog::Ext::Priority::AUTO_REJECT` | The sampler automatically decided to not keep the trace. The Agent will drop it.                           |
-| `Datadog::Ext::Priority::AUTO_KEEP`   | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side. |
-| `Datadog::Ext::Priority::USER_REJECT` | The user asked to not keep the trace. The Agent will drop it.                                              |
-| `Datadog::Ext::Priority::USER_KEEP`   | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                     |
-
 Priority sampling is disabled by default. Enabling it ensures that your sampled distributed traces will be complete. To enable the priority sampling:
 
 ```ruby
@@ -97,6 +88,15 @@ span.context.sampling_priority = Datadog::Ext::Priority::USER_REJECT
 # To keep the trace
 span.context.sampling_priority = Datadog::Ext::Priority::USER_KEEP
 ```
+
+Possible values for the sampling priority tag are:
+
+| Sampling Value | Effect                                                                                                     |
+| --------       | :--------------------------------------------------                                                        |
+| `Datadog::Ext::Priority::AUTO_REJECT` | The sampler automatically decided to not keep the trace. The Agent will drop it.                           |
+| `Datadog::Ext::Priority::AUTO_KEEP`   | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side. |
+| `Datadog::Ext::Priority::USER_REJECT` | The user asked to not keep the trace. The Agent will drop it.                                              |
+| `Datadog::Ext::Priority::USER_KEEP`   | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                     |
 
 When not using [distributed tracing](#distributed-tracing), you may change the priority at any time, as long as the trace is not finished yet. However, it must be done before any context propagation (fork, RPC calls) to be effective in a distributed context. Changing the priority after such context has been propagated causes different parts of a distributed trace to use different priorities. Some parts might be kept, some parts might be rejected, and consequently can cause the trace to be partially stored and remain incomplete.
 
