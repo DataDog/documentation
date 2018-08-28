@@ -9,7 +9,7 @@ Distributed Tracing headers are language agnostic. A trace started in one langua
 
 Distributed Traces may sample inconsistently when the linked traces run on different hosts. To ensure that distributed traces are complete, enable [priority sampling][priority sampling].
 
-[priority sampling]: /tracing/setup_advanced/priority_sampling
+[priority sampling]: /tracing/advanced_usage/priority_sampling
 
 {{< tabs >}}
 {{% tab "Java" %}}
