@@ -50,9 +50,9 @@ If an integration does not support logs by default, use the custom file configur
 
 The Datadog Agent v6 can collect logs from files or the network (TCP or UDP) and forward them to Datadog: 
 
-1. Create a new folder in the `conf.d/` folder at the root of your [Agent's configuration directory][9]  named after your log source.
+1. Create a new folder in the `conf.d/` folder at the root of your [Agent's configuration directory][9] named after your log source.
 2. Create a new `conf.yaml` file in this new repository.
-3. Add a custom log collection configuration with the following parameter:
+3. Add a custom log collection configuration with the following parameters:
 
 | Parameter        | Presence  | Description                                                                                                                                                                                                                                                                                                                |
 | ------           | -------   | ------                                                                                                                                                                                                                                                                                                                     |
@@ -67,7 +67,7 @@ The Datadog Agent v6 can collect logs from files or the network (TCP or UDP) and
 | `sourcecategory` | optional  | Multiple value attribute. Can be used to refine the source attribtue. Example: `source:mongodb, sourcecategory:db_slow_logs`                                                                                                                                                                                               |
 | `tags`           | optional  | Add tags to each log collected, [learn more about tagging][13].                                                                                                                                                                                                                                                            |
 
-Finally [restart your Agent][10] to take into account this new configuration. You can then [run the Agent's `status` subcommand][11] to check if your custom configuration is correct
+Finally [restart your Agent][10] to take into account this new configuration. You can then [run the Agent's `status` subcommand][11] to check if your custom configuration is correct.
 
 Below are some example of custom log collection setup:
 
