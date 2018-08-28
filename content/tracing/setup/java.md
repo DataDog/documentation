@@ -49,10 +49,9 @@ Instrumentation may come from auto-instrumentation, the OpenTracing api, or a mi
 
 We officially support the Java JRE 1.7 and higher of both Oracle JDK and OpenJDK.
 
-## Integrations
+### Integrations
 
-{{< tabs >}}
-{{% tab "Web Frameworks" %}}
+#### Web Framework Compatibility
 
 `dd-java-agent` includes support for automatically tracing the following web frameworks.
 
@@ -76,8 +75,7 @@ Don't see your desired web frameworks? We're continually adding additional suppo
 
 [2]: /help
 
-{{% /tab %}}
-{{% tab "Networking Frameworks" %}}
+#### Networking Framework Compatibility
 
 `dd-java-agent` includes support for automatically tracing the following networking frameworks.
 
@@ -101,8 +99,7 @@ Don't see your desired networking framework? We're continually adding additional
 
 [2]: /help
 
-{{% /tab %}}
-{{% tab "Datastores" %}}
+#### Data Store Compatibility
 
 `dd-java-agent` includes support for automatically tracing the following database frameworks/drivers.
 
@@ -131,8 +128,8 @@ Don't see your desired networking framework? We're continually adding additional
 Don't see your desired datastores? We're continually adding additional support, [check with our team][2] to see if we can help.
 
 [2]: /help
-{{% /tab %}}
-{{% tab "Other Frameworks" %}}
+
+#### Other Framework Compatibility
 
 `dd-java-agent` includes support for automatically tracing the following other frameworks.
 
@@ -151,9 +148,6 @@ To improve visibility into applications using unsupported frameworks, consider:
 
 [1]: https://github.com/DataDog/documentation#outside-contributors
 [2]: /help
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Configuration
 

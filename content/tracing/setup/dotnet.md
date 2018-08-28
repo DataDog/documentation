@@ -25,8 +25,8 @@ Tracing for .NET is coming soon. The officially supported Beta will launch as ea
 Planned support will provide automatic instrumentation for popular frameworks and libraries. See some of these listed below. Don't see your desired frameworks or libraries?
 Please let us know more about your needs through [this survey][1].
 
-{{< tabs >}}
-{{% tab "Web Frameworks" %}}
+#### Web Framework Compatibility
+
 | Framework                    | Versions    | Support Type                           |
 | :---------------             | :---------- | :------------------------------------- |
 | ASP.NET Core MVC<sup>2</sup> | 2.0         | Coming soon (est. September 2018 Beta) |
@@ -39,8 +39,8 @@ Please let us know more about your needs through [this survey][1].
 Don't see what you're looking for? Please let us know more about your needs through [this survey][1].
 
 [1]: https://goo.gl/forms/SCKOOlHS7tNzyMt93
-{{% /tab %}}
-{{% tab "Data Stores" %}}
+
+#### Data Store Compatibility
 
 | Data Store                      | Versions    | Support Type                           |
 | :------------------------------ | :---------- | :------------------------------------- |
@@ -53,8 +53,6 @@ Don't see what you're looking for? Please let us know more about your needs thro
 Don't see what you're looking for? Please let us know more about your needs through [this survey][1].
 
 [1]: https://goo.gl/forms/SCKOOlHS7tNzyMt93
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Further Reading
 

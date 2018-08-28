@@ -49,10 +49,11 @@ For more advanced usage, configuration and fine-grained control check out our
 
 ## Compatibility
 
-Python versions 2.7 and 3.4 and onwards are supported.
+Python versions `2.7` and `3.4` and onwards are supported.
 
-{{< tabs >}}
-{{% tab "Web Framework" %}}
+### Integrations
+
+#### Web Framework Compatibility
 
 The ddtrace library includes support for a number of web frameworks, including:
 
@@ -65,8 +66,7 @@ The ddtrace library includes support for a number of web frameworks, including:
 | [Pylons](http://pylonsproject.org/)      | Fully Supported | http://pypi.datadoghq.com/trace/docs/#pylons  |
 | [Pyramid](https://trypyramid.com/)       | Fully Supported | http://pypi.datadoghq.com/trace/docs/#pyramid |
 
-{{% /tab %}}
-{{% tab "Library Compatibility" %}}
+#### Library Compatibility
 
 The ddtrace library includes support for the following data stores and libraries:
 
@@ -82,10 +82,6 @@ The ddtrace library includes support for the following data stores and libraries
 | [Redis](https://redis.io/)                                     | Fully Supported | http://pypi.datadoghq.com/trace/docs/#redis         |
 | [SQLAlchemy](https://www.sqlalchemy.org/)                      | Fully Supported | http://pypi.datadoghq.com/trace/docs/#sqlalchemy    |
 | [SQLite](https://www.sqlite.org/)                              | Fully Supported | http://pypi.datadoghq.com/trace/docs/#sqlite        |
-
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Further Reading
 

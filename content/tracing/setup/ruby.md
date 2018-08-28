@@ -86,7 +86,9 @@ After setting up, your services will appear on the [APM services page][3] within
 
 ## Compatibility
 
-Interpreter Compatibility
+### Integrations
+
+#### Interpreter Compatibility
 
 Ruby APM includes support for the following Ruby interpreters:
 
@@ -94,68 +96,56 @@ Ruby APM includes support for the following Ruby interpreters:
 | Type                               | Version | Support type    |
 | ---------------------------------- | -----   | --------------- |
 | [MRI](https://www.ruby-lang.org/)  | 1.9.1   | Experimental    |
-|                                    | 1.9.3   | Fully supported |
-|                                    | 2.0     | Fully supported |
-|                                    | 2.1     | Fully supported |
-|                                    | 2.2     | Fully supported |
-|                                    | 2.3     | Fully supported |
-|                                    | 2.4     | Fully supported |
+|                                    | 1.9.3   | Fully Supported |
+|                                    | 2.0     | Fully Supported |
+|                                    | 2.1     | Fully Supported |
+|                                    | 2.2     | Fully Supported |
+|                                    | 2.3     | Fully Supported |
+|                                    | 2.4     | Fully Supported |
 | [JRuby](http://jruby.org/)         | 9.1.5   | Experimental    |
 
-*Fully supported* support indicates all tracer features are available.
-
-*Experimental* indicates most features should be available, but unverified.
-### Integrations
-
-{{< tabs >}}
-{{% tab "Web Server Compatibility" %}}
+#### Web Server Compatibility
 
 Ruby APM includes support for the following web servers:
 
-
 | Type                                           | Version      | Support type    |
 | ---------------------------------------------- | ------------ | --------------- |
-| [Puma](http://puma.io/)                        | 2.16+ / 3.6+ | Fully supported |
-| [Unicorn](https://bogomips.org/unicorn/)       | 4.8+ / 5.1+  | Fully supported |
-| [Passenger](https://www.phusionpassenger.com/) | 5.0+         | Fully supported |
+| [Puma](http://puma.io/)                        | 2.16+ / 3.6+ | Fully Supported |
+| [Unicorn](https://bogomips.org/unicorn/)       | 4.8+ / 5.1+  | Fully Supported |
+| [Passenger](https://www.phusionpassenger.com/) | 5.0+         | Fully Supported |
 
-*Fully supported* support indicates all tracer features are available.
-
-*Experimental* indicates most features should be available, but unverified.
-
-{{% /tab %}}
-{{% tab "Library Compatibility" %}}
+#### Library Compatibility
 
 Ruby APM includes support for the following libraries and frameworks:
 
 | Name                 | Versions Supported     | Support type    | How to configure |
 | -------------------- | ---------------------- | --------------- | ---------------- |
-| [Active Record][11]  | `>= 3.2, < 5.2`        | Fully supported | *[Link][10]*     |
-| [AWS][13]            | `>= 2.0`               | Fully supported | *[Link][12]*     |
-| [Dalli][15]          | `>= 2.7`               | Fully supported | *[Link][14]*     |
-| [DelayedJob][53]     | `>= 4.1`               | Fully supported | *[Link][52]*     |
-| [Elastic Search][17] | `>= 6.0`               | Fully supported | *[Link][16]*     |
-| [Excon][19]          | `>= 0.62`              | Fully supported | *[Link][18]*     |
-| [Faraday][21]        | `>= 0.14`              | Fully supported | *[Link][20]*     |
-| [gRPC][23]           | `>= 1.10`              | Fully supported | *[Link][22]*     |
-| [Grape][25]          | `>= 1.0`               | Fully supported | *[Link][24]*     |
-| [GraphQL][27]        | `>= 1.7.9`             | Fully supported | *[Link][26]*     |
-| [MongoDB][29]        | `>= 2.0, < 2.5`        | Fully supported | *[Link][28]*     |
-| [MySQL2][55]         | `>= 0.5`               | Fully supported | *[Link][54]*     |
-| [Net/HTTP][31]       | *(Any supported Ruby)* | Fully supported | *[Link][30]*     |
-| [Racecar][33]        | `>= 0.3.5`             | Fully supported | *[Link][32]*     |
-| [Rack][35]           | `>= 1.4.7`             | Fully supported | *[Link][34]*     |
-| [Rails][37]          | `>= 3.2, < 5.2`        | Fully supported | *[Link][36]*     |
-| [Rake][39]           | `>= 12.0`              | Fully supported | *[Link][38]*     |
-| [Redis][41]          | `>= 3.2, < 4.0`        | Fully supported | *[Link][40]*     |
-| [Resque][43]         | `>= 1.0, < 2.0`        | Fully supported | *[Link][42]*     |
-| [RestClient][57]     | `>= 1.8`               | Fully supported | *[Link][56]*     |
-| [Sequel][45]         | `>= 3.41`              | Fully supported | *[Link][44]*     |
-| [Sidekiq][47]        | `>= 4.0`               | Fully supported | *[Link][46]*     |
-| [Sinatra][49]        | `>= 1.4.5`             | Fully supported | *[Link][48]*     |
-| [Sucker Punch][51]   | `>= 2.0`               | Fully supported | *[Link][50]*     |
+| [Active Record][11]  | `>= 3.2, < 5.2`        | Fully Supported | *[Link][10]*     |
+| [AWS][13]            | `>= 2.0`               | Fully Supported | *[Link][12]*     |
+| [Dalli][15]          | `>= 2.7`               | Fully Supported | *[Link][14]*     |
+| [DelayedJob][53]     | `>= 4.1`               | Fully Supported | *[Link][52]*     |
+| [Elastic Search][17] | `>= 6.0`               | Fully Supported | *[Link][16]*     |
+| [Excon][19]          | `>= 0.62`              | Fully Supported | *[Link][18]*     |
+| [Faraday][21]        | `>= 0.14`              | Fully Supported | *[Link][20]*     |
+| [gRPC][23]           | `>= 1.10`              | Fully Supported | *[Link][22]*     |
+| [Grape][25]          | `>= 1.0`               | Fully Supported | *[Link][24]*     |
+| [GraphQL][27]        | `>= 1.7.9`             | Fully Supported | *[Link][26]*     |
+| [MongoDB][29]        | `>= 2.0, < 2.5`        | Fully Supported | *[Link][28]*     |
+| [MySQL2][55]         | `>= 0.5`               | Fully Supported | *[Link][54]*     |
+| [Net/HTTP][31]       | *(Any Supported Ruby)* | Fully Supported | *[Link][30]*     |
+| [Racecar][33]        | `>= 0.3.5`             | Fully Supported | *[Link][32]*     |
+| [Rack][35]           | `>= 1.4.7`             | Fully Supported | *[Link][34]*     |
+| [Rails][37]          | `>= 3.2, < 5.2`        | Fully Supported | *[Link][36]*     |
+| [Rake][39]           | `>= 12.0`              | Fully Supported | *[Link][38]*     |
+| [Redis][41]          | `>= 3.2, < 4.0`        | Fully Supported | *[Link][40]*     |
+| [Resque][43]         | `>= 1.0, < 2.0`        | Fully Supported | *[Link][42]*     |
+| [RestClient][57]     | `>= 1.8`               | Fully Supported | *[Link][56]*     |
+| [Sequel][45]         | `>= 3.41`              | Fully Supported | *[Link][44]*     |
+| [Sidekiq][47]        | `>= 4.0`               | Fully Supported | *[Link][46]*     |
+| [Sinatra][49]        | `>= 1.4.5`             | Fully Supported | *[Link][48]*     |
+| [Sucker Punch][51]   | `>= 2.0`               | Fully Supported | *[Link][50]*     |
 
-*Fully supported* support indicates all tracer features are available.
+*Fully Supported* support indicates all tracer features are available.
 
 *Experimental* indicates most features should be available, but unverified.
 
@@ -207,9 +197,6 @@ Ruby APM includes support for the following libraries and frameworks:
 [55]: https://github.com/brianmario/mysql2
 [56]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#restclient
 [57]: https://github.com/rest-client/rest-client
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Configuration
 

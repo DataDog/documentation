@@ -19,7 +19,7 @@ further_reading:
   text: "Advanced Usage"
 ---
 
-## Getting Started
+## Installation and Getting Started
 
 For configuration instructions and details about using the API, check out our [API documentation][api docs] for manual instrumentation, and our [integrations section][contrib docs] for Go libraries and frameworks supporting automatic instrumentation.
 
@@ -27,14 +27,8 @@ For a description of the terminology used in APM, take a look at the [Getting st
 
 Consult our [migration document][migrating] if you need to migrate from an older version of the tracer (e.g. v<0.6.x) to newest version.
 
-### Requirements
-
-To begin tracing your Go applications, your environment must first meet the following requirements:
-
-* Runing the Datadog Agent >= 5.21.1. See ["Install and configure the Datadog Agent"][1] (additional documentation for [tracing Docker applications](/tracing/setup/docker/)).
-* Using Go 1.9+
-
 ### Installation
+First [install and configure the Datadog Agent][1] (see additional documentation for [tracing Docker applications](/tracing/setup/docker/)).
 
 Next, install the Go tracer from its canonical import path:
 
@@ -46,12 +40,20 @@ You are now ready to import the tracer and start instrumenting your code!
 
 ## Automatic Instrumentation
 
-We have built a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. Find below the list of currently supported integrations.
+We have built a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. Find below the list of currently supported [integrations][ootb integrations].
 
-**Note**: The [integrations documentation][contrib godoc] also provides a detailed overview of the supported packages and their APIs, along with usage examples.
+[ootb integrations]: #integrations
 
-{{< tabs >}}
-{{% tab "Frameworks" %}}
+## Compatibility
+To begin tracing your Go applications, your environment must first meet the following requirements:
+
+* Runing the Datadog Agent `>= 5.21.1`.
+* Using Go `1.9+`
+
+
+### Integrations
+
+#### Framework Compatibility
 
 Integrate the Go tracer with the following list of web frameworks using one of our helper packages.
 
@@ -62,8 +64,7 @@ Integrate the Go tracer with the following list of web frameworks using one of o
 | [gRPC](https://github.com/grpc/grpc-go)              | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc)         |
 | [gRPC v1.2](https://github.com/grpc/grpc-go)         | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc.v12](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc.v12) |
 
-{{% /tab %}}
-{{% tab "Library Compatibility" %}}
+#### Library Compatibility
 
 The Go tracer includes support for the following data stores and libraries.
 
@@ -80,8 +81,7 @@ The Go tracer includes support for the following data stores and libraries.
 | [SQL](https://golang.org/pkg/database/sql)                 | Fully Supported  | [gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql)                         |
 | [SQLx](https://github.com/jmoiron/sqlx)                    | Fully Supported  | [gopkg.in/DataDog/dd-trace-go.v1/contrib/jmoiron/sqlx](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/jmoiron/sqlx)                         |
 
-{{% /tab %}}
-{{< /tabs >}}
+**Note**: The [integrations documentation][contrib godoc] also provides a detailed overview of the supported packages and their APIs, along with usage examples.
 
 ## Configuration
 

@@ -61,8 +61,7 @@ APM provides out-of-the-box instrumentation for many popular frameworks and libr
 
 For details about how to how to toggle and configure plugins, check out the [API documentation][6].
 
-{{< tabs >}}
-{{% tab "Web Frameworks" %}}
+#### Web Framework Compatibility
 
 | Module        | Versions    | Support Type    |
 | :----------   | :---------- | :-------------- |
@@ -78,8 +77,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 [10]: https://koajs.com/
 [11]: http://restify.com/
 
-{{% /tab %}}
-{{% tab "Native Modules" %}}
+#### Native Module Compatibility
 
 | Module               | Support Type    |
 | :------------------- | :-------------- |
@@ -89,8 +87,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 [12]: https://nodejs.org/api/http.html
 [13]: https://nodejs.org/api/https.html
 
-{{% /tab %}}
-{{% tab "Data Stores" %}}
+#### Data Store Compatibility
 
 | Module                 | Versions    | Support Type    |
 | :----------            | :---------- | :-------------- |
@@ -114,8 +111,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 [24]: https://github.com/3rd-Eden/memcached
 [25]: https://github.com/datastax/nodejs-driver
 
-{{% /tab %}}
-{{% tab "Workers" %}}
+#### Worker Compatibility
 
 | Module           | Versions    | Support Type    |
 | :----------      | :---------- | :-------------- |
@@ -126,9 +122,6 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 [21]: https://github.com/squaremo/amqp.node
 [26]: https://github.com/SOHU-Co/kafka-node
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Further Reading
 
