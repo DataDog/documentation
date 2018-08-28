@@ -219,7 +219,7 @@ In either case, as DogStatsD receives the timer data, it calculates the statisti
 - `mywebsite.page_render.time.max` - the maximum render time
 - `mywebsite.page_render.time.95percentile` - the 95th percentile render time
 
-Remember: under the hood, DogStatsD treats timers as histograms. Whether you timers or histograms, you'll be sending the same data to Datadog.
+Remember: under the hood, DogStatsD treats timers as histograms. Whether you use timers or histograms, you'll be sending the same data to Datadog.
 
 ### Sets
 
