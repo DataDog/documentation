@@ -48,20 +48,34 @@ If an integration does not support logs by default, use the custom file configur
 
 ## Custom log collection
 
-The Datadog Agent v6 can collect logs from files or the network (TCP or UDP) and forward them to Datadog. To configure this, create a new repository and yaml file named after your log source  in the Agent's **conf.d** directory ( `conf.d/python.d/conf.yaml` for python logs, ...) and set these options:
+The Datadog Agent v6 can collect logs from files or the network (TCP or UDP) and forward them to Datadog: 
 
-* `type` : (mandatory) type of log input source (**tcp** / **udp** / **file**)
-* `port` / `path` : (mandatory) Set `port` if `type` is **tcp** or **udp**. Set `path` if `type` is **file**.
-* `service` : (mandatory) name of the service owning the log
-* `source` : (mandatory) attribute that defines which integration is sending the logs. "If the logs do not come from an existing integration then this field may include a custom source name. But we recommend matching this value to the namespace of any related [custom metrics][2] you are collecting, e.g, `myapp` from `myapp.request.count`)"
-* `sourcecategory` : (optional) Multiple value attribute. Can be used to refine the source attribtue. Example: source:mongodb, sourcecategory:db_slow_logs
-* `tags`: (optional) add tags to each log collected.
+1. Create a new folder in the `conf.d/` folder at the root of your [Agent's configuration directory][9]  named after your log source.
+2. Create a new `conf.yaml` file in this new repository.
+3. Add a custom log collection configuration with the following parameter:
 
-## Tail existing files
+| Parameter        | Presence  | Description                                                                                                                                                                                                                                                                                                                |
+| ------           | -------   | ------                                                                                                                                                                                                                                                                                                                     |
+| `type`           | mandatory | type of log input source (**tcp** / **udp** / **file**)                                                                                                                                                                                                                                                                    |
+| `port`           | mandatory | Set the port to listen log from if `type` is **tcp** or **udp**.                                                                                                                                                                                                                                                           |
+| `path`           | mandatory | Set the path of the file to tail log from if `type` is **file**.                                                                                                                                                                                                                                                           |
+| `service`        | mandatory | Name of the service owning the log. If you instrumented your service with [Datadog APM][12], this should be the same service name.                                                                                                                                                                                         |
+| `source`         | mandatory | Attribute that defines which integration is sending the logs. If the logs do not come from an existing integration then this field may include a custom source name. But we recommend matching this value to the namespace of any related [custom metrics][2] you are collecting, e.g, `myapp` from `myapp.request.count`) |
+| `sourcecategory` | optional  | Multiple value attribute. Can be used to refine the source attribtue. Example: `source:mongodb, sourcecategory:db_slow_logs`                                                                                                                                                                                               |
+| `tags`           | optional  | Add tags to each log collected, [learn more about tagging][13].                                                                                                                                                                                                                                                            |
+
+Finally [restart your Agent][10] to take into account this new configuration. You can then [run the Agent's `status` subcommand][11] to check if your custom configuration is correct
+
+Below are some example of custom log collection setup:
+
+{{< tabs >}}
+{{% tab "Tail existing files" %}}
+
 Set `type` to **file** then specify the absolute `path` to the log file you want to tail.
 
 Example:
-To gather python applications stored in **/var/log/myapp1.log** and **/var/log/python.log** create a `python.d/conf.yaml` file as follows:
+
+To gather python applications stored in **/var/log/myapp1.log** and **/var/log/python.log** create a `python.d/conf.yaml` file at the root of your [Agent's configuration directory][9] with the following content:
 
 ```yaml
 ##Log section
@@ -80,16 +94,17 @@ logs:
     source: python
     sourcecategory: sourcecode
 ```
-* [Restart your Agent][3]
-
-
 **Note**: If you are using the Windows 6 Agent and trailing files for logs - make sure that those files have a UTF8 encoding.
 
-## Stream logs through TCP/UDP
+{{% /tab %}}
+
+{{% tab "Stream logs through TCP/UDP" %}}
+
 Set `type` to **tcp** or **udp** depending on the protocol then specify the `port` of your incoming connection.
 
 Example:
-If your PHP application does not log to a file, but instead forwards its logs via TCP, create a configuration file that specifies the port to receive as in the example below:
+
+If your PHP application does not log to a file, but instead forwards its logs via TCP over port **10518**, create a `php.d/conf.yaml` file at the root of your [Agent's configuration directory][9] with the following content:
 
 ```yaml
 
@@ -102,22 +117,28 @@ logs:
     sourcecategory: front
 
 ```
-* [Restart your Agent][3]
 
-The Agent supports raw string, JSON, and Syslog formated logs. If you are sending logs in batch, use break line characters to separate your logs.
+**Note**: The Agent supports raw string, JSON, and Syslog formated logs. If you are sending logs in batch, use break line characters to separate your logs.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Advanced log collection functions
-
 ### Filter logs
 
 All logs are not equal and you may want to send only a specific subset of logs to Datadog.
 To achieve this use the `log_processing_rules` parameter in your configuration file with the **exclude_at_match** or **include_at_match** `type`.
 
-* **exclude_at_match**: If the pattern is contained in the message the log is excluded, and not sent to Datadog.
-  Example: Filtering out logs that contain a Datadog email
+{{< tabs >}}
+{{% tab "exclude_at_match" %}}
+
+| Parameter          | Description                                                                             |
+| --------           | ---------                                                                               |
+| `exclude_at_match` | If the specified pattern is contained in the message the log is excluded and not sent to Datadog |
+
+Example: Filtering out logs that contain a Datadog email
 
 ```yaml
-
 logs:
   - type: file
     path: /my/test/file.log
@@ -130,11 +151,16 @@ logs:
       pattern: \w+@datadoghq.com
 ```
 
-* **include_at_match**: Only log with a message that includes the pattern are sent to Datadog.
-  Example: Sending only logs that contain a Datadog email
+{{% /tab %}}
+{{% tab "include_at_match" %}}
+
+| Parameter          | Description                                                            |
+| --------           | ---------                                                              |
+| `include_at_match` | Only log with a message that includes the specified pattern are sent to Datadog. |
+
+Example: Sending only logs that contain a Datadog email
 
 ```yaml
-
 logs:
   - type: file
     path: /my/test/file.log
@@ -147,8 +173,10 @@ logs:
       pattern: \w+@datadoghq.com
 ```
 
-**Note**: If you set up multiple processing rules, they will be applied sequentially.
-Each rule will be applied on the result of the previous one.
+{{% /tab %}}
+{{< /tabs >}}
+
+**Note**: If you set up multiple processing rules, they will be applied sequentially. Each rule will be applied on the result of the previous one.
 
 ### Scrub sensitive data in your logs
 
@@ -158,7 +186,6 @@ This replaces all matched groups with `replace_placeholder` parameter value.
 Example: Redact credit card numbers
 
 ```yaml
-
 logs:
  - type: file
    path: /my/test/file.log
@@ -193,7 +220,6 @@ Example: Every java log line starts with a timestamp with `yyyy-dd-mm` format. T
 To achieve this, you need to use the following `log_processing_rules`:
 
 ```yaml
-
 logs:
  - type: file
    path: /var/log/pg_log.log
@@ -230,7 +256,6 @@ If your log files are labeled by date or all stored in the same directory, confi
 Configuration example:
 
 ```yaml
-
 logs:
  - type: file
    path: /var/log/myapp/*.log
@@ -289,3 +314,8 @@ Datadog automatically parses JSON-formatted logs. For this reason, if you have c
 [6]: /logs/explorer/search/
 [7]: /logs/processing/#log-status-remapper
 [8]: /agent/proxy
+[9]: /agent/faq/agent-configuration-files/
+[10]: /agent/faq/agent-commands/#start-stop-and-restart-the-agent
+[11]: /agent/faq/agent-commands/#agent-status-and-information
+[12]: /tracing
+[13]: /tagging
