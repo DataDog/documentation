@@ -80,6 +80,28 @@ See [the API documentation][ruby logging docs] for more details.
 
 {{% /tab %}}
 {{% tab "Go" %}}
+The Go tracer exposes two API calls to allow printing trace and span identifiers along with log statements using exported methods from `SpanContext` type:
+
+```go
+package main
+
+import (
+	"net/http"
+
+	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func handler(w http.ResponseWriter, r *http.Request) {
+	// Create a span for a web request at the /posts URL.
+	span := tracer.StartSpan("web.request", tracer.ResourceName("/posts"))
+	defer span.Finish()
+
+	// Retrieve Trace ID and Span ID
+	traceID := span.Context().TraceID()
+	spanID := span.Context().SpanID()
+}
+```
+
 {{% /tab %}}
 {{% tab "Node.js" %}}
 By default, logging from this library is disabled. In order to get debbuging information and errors sent to logs, the `debug` options should be set to `true` in the [init()](https://datadog.github.io/dd-trace-js/Tracer.html#init) method.

@@ -5,7 +5,7 @@ kind: documentation
 
 Priority sampling allows traces between two Datadog endpoints to be sampled together. This prevents trace sampling from removing segments of a distributed trace (i.e. ensures completeness). Additionally, APM traces expose sampling flags to configure how specific traces are sampled.
 
-Priority sampling automatically assigns and propagates a priority value along all traces, depending on their service and volume. Priorities can also be set manually to drop non-interesting traces or keep important ones. 
+Priority sampling automatically assigns and propagates a priority value along all traces, depending on their service and volume. Priorities can also be set manually to drop non-interesting traces or keep important ones.
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -89,7 +89,24 @@ For more details about how to use and configure distributed tracing, check out t
 Set the sampling priority of a trace by adding the `sampling.priority` tag to its root span. This is then propagated throughout the entire stack. For example:
 
 ```go
-span.SetTag(ext.SamplingPriority, ext.PriorityUserKeep)
+package main
+
+import (
+    "log"
+    "net/http"
+
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func handler(w http.ResponseWriter, r *http.Request) {
+    // Create a span for a web request at the /posts URL.
+    span := tracer.StartSpan("web.request", tracer.ResourceName("/posts"))
+    defer span.Finish()
+
+    // Set priority sampling as a regular tag
+    span.SetTag(ext.SamplingPriority, ext.PriorityUserKeep)
+}
 ```
 
 Possible values for the sampling priority tag are:

@@ -87,6 +87,79 @@ See the [API documentation][ruby api doc] for more details.
 
 {{% /tab %}}
 {{% tab "Go" %}}
+**Adding tags to a span**
+
+You can add tags directly to a `Span` interface by calling `SetTag`:
+
+```go
+package main
+
+import (
+    "log"
+    "net/http"
+
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func handler(w http.ResponseWriter, r *http.Request) {
+    // Create a span for a web request at the /posts URL.
+    span := tracer.StartSpan("web.request", tracer.ResourceName("/posts"))
+    defer span.Finish()
+
+    // Set tag
+    span.SetTag("http.url", r.URL.Path)
+}
+
+func main() {
+    tracer.Start(tracer.WithServiceName("my-blog"))
+    defer tracer.Stop()
+    http.HandleFunc("/posts", handler)
+    log.Fatal(http.ListenAndServe(":8080", nil))
+}
+```
+
+**Adding tags to a Span attached to a Context**
+
+Our integrations make use of `Context` type to propagate the current active span. If you want to add
+a tag to a span attached to a `Context` via automatic instrumentation, you can call the `SpanFromContext`
+function:
+
+```go
+package main
+
+import (
+    "net/http"
+
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func handler(w http.ResponseWriter, r *http.Request) {
+    // Retrieve a span for a web request attached to a Go Context.
+    if span, ok := tracer.SpanFromContext(r.Context()); ok {
+        // Set tag
+        span.SetTag("http.url", r.URL.Path)
+    }
+}
+```
+
+**Adding tags globally to all spans**
+
+You can also add tags to all spans by configuring the tracer with the `tags` option:
+
+```go
+package main
+
+import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+
+func main() {
+    tracer.Start(
+        tracer.WithGlobalTag("datacenter", "us-1"),
+        tracer.WithGlobalTag("env", "prod"),
+    )
+    defer tracer.Stop()
+}
+```
+
 {{% /tab %}}
 {{% tab "Node.js" %}}
 **Adding tags to a span**

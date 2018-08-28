@@ -48,44 +48,58 @@ You are now ready to import the tracer and start instrumenting your code!
 
 We have built a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. Find below the list of currently supported integrations.
 
-**Note**: The [official documentation][contrib godoc] also provides a detailed overview of the supported packages and their APIs, along with usage examples.
+**Note**: The [integrations documentation][contrib godoc] also provides a detailed overview of the supported packages and their APIs, along with usage examples.
 
 {{< tabs >}}
 {{% tab "Frameworks" %}}
 
 Integrate the Go tracer with the following list of web frameworks using one of our helper packages.
 
-| Framework     | Framework Documentation                                             | GoDoc Datadog Documentation                                                                                                                                |
-| ------------- | ------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Gin           | [gin-gonic.github.io/gin](https://gin-gonic.github.io/gin/)         | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gin-gonic/gin](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/gin-gonic/gin)                           |
-| Gorilla Mux   | [gorillatoolkit.org/pkg/mux](http://www.gorillatoolkit.org/pkg/mux) | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux)                               |
-| gRPC          | [github.com/grpc/grpc-go](https://github.com/grpc/grpc-go)          | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc)         |
-| gRPC v1.2     | [github.com/grpc/grpc-go](https://github.com/grpc/grpc-go)          | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc.v12](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc.v12) |
-
-[contrib docs]: #automatic-instrumentation
+| Framework                                            | Support Type    | GoDoc Datadog Documentation                                                                                                                                |
+| ---------------------------------------------------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Gin](https://gin-gonic.github.io/gin/)              | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gin-gonic/gin](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/gin-gonic/gin)                           |
+| [Gorilla Mux](http://www.gorillatoolkit.org/pkg/mux) | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux)                               |
+| [gRPC](https://github.com/grpc/grpc-go)              | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc)         |
+| [gRPC v1.2](https://github.com/grpc/grpc-go)         | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc.v12](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc.v12) |
 
 {{% /tab %}}
 {{% tab "Library Compatibility" %}}
 
-The Go tracer includes support for the following data stores and libraries. Make sure to visit our integrations package [godoc page][contrib godoc] for an in-depth look.
+The Go tracer includes support for the following data stores and libraries.
 
-| Library             | Library Documentation                                                              | GoDoc Datadog Documentation                                                                                                                            |
-| ------------------- | ---------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------|
-| AWS SDK             | [github.com/aws/aws-sdk-go](https://aws.amazon.com/sdk-for-go/)                    | [gopkg.in/DataDog/dd-trace-go.v1/contrib/aws/aws-sdk-go/aws](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/aws/aws-sdk-go/aws)             |
-| Elasticsearch       | [github.com/olivere/elastic](https://github.com/olivere/elastic)                   | [gopkg.in/DataDog/dd-trace-go.v1/contrib/olivere/elastic](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/olivere/elastic)                   |
-| Cassandra           | [github.com/gocql/gocql](https://github.com/gocql/gocql)                           | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gocql/gocql](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/gocql/gocql)                           |
-| GraphQL             | [github.com/graph-gophers/graphql-go](https://github.com/graph-gophers/graphql-go) | [gopkg.in/DataDog/dd-trace-go.v1/contrib/graph-gophers/graphql-go](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/graph-gophers/graphql-go) |
-| HTTP                | [golang.org/pkg/net/http](https://golang.org/pkg/net/http/)                        | [gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http)                                 |
-| HTTP router         | [github.com/julienschmidt/httprouter](https://github.com/julienschmidt/httprouter) | [gopkg.in/DataDog/dd-trace-go.v1/contrib/julienschmidt/httprouter](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/julienschmidt/httprouter) |
-| Redis (go-redis)    | [github.com/go-redis/redis](https://github.com/go-redis/redis)                     | [gopkg.in/DataDog/dd-trace-go.v1/contrib/go-redis/redis](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/go-redis/redis)                     |
-| Redis (redigo)      | [github.com/garyburd/redigo](https://github.com/garyburd/redigo)                   | [gopkg.in/DataDog/dd-trace-go.v1/contrib/garyburd/redigo](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/garyburd/redigo)                   |
-| SQL                 | [golang.org/pkg/database/sql](https://golang.org/pkg/database/sql)                 | [gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql)                         |
-| SQLx                | [github.com/jmoiron/sqlx](https://github.com/jmoiron/sqlx)                         | [gopkg.in/DataDog/dd-trace-go.v1/contrib/jmoiron/sqlx](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/jmoiron/sqlx)                         |
-
-[contrib godoc]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib
+| Library                                                    | Support Type     | GoDoc Datadog Documentation                                                                                                                            |
+| ---------------------------------------------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [AWS SDK](https://aws.amazon.com/sdk-for-go/)              | Fully Supported  | [gopkg.in/DataDog/dd-trace-go.v1/contrib/aws/aws-sdk-go/aws](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/aws/aws-sdk-go/aws)             |
+| [Elasticsearch](https://github.com/olivere/elastic)        | Fully Supported  | [gopkg.in/DataDog/dd-trace-go.v1/contrib/olivere/elastic](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/olivere/elastic)                   |
+| [Cassandra](https://github.com/gocql/gocql)                | Fully Supported  | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gocql/gocql](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/gocql/gocql)                           |
+| [GraphQL](https://github.com/graph-gophers/graphql-go)     | Fully Supported  | [gopkg.in/DataDog/dd-trace-go.v1/contrib/graph-gophers/graphql-go](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/graph-gophers/graphql-go) |
+| [HTTP](https://golang.org/pkg/net/http/)                   | Fully Supported  | [gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http)                                 |
+| [HTTP router](https://github.com/julienschmidt/httprouter) | Fully Supported  | [gopkg.in/DataDog/dd-trace-go.v1/contrib/julienschmidt/httprouter](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/julienschmidt/httprouter) |
+| [Redis (go-redis)](https://github.com/go-redis/redis)      | Fully Supported  | [gopkg.in/DataDog/dd-trace-go.v1/contrib/go-redis/redis](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/go-redis/redis)                     |
+| [Redis (redigo)](https://github.com/garyburd/redigo)       | Fully Supported  | [gopkg.in/DataDog/dd-trace-go.v1/contrib/garyburd/redigo](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/garyburd/redigo)                   |
+| [SQL](https://golang.org/pkg/database/sql)                 | Fully Supported  | [gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql)                         |
+| [SQLx](https://github.com/jmoiron/sqlx)                    | Fully Supported  | [gopkg.in/DataDog/dd-trace-go.v1/contrib/jmoiron/sqlx](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/jmoiron/sqlx)                         |
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Configuration
+
+The tracer is configured with options parameters when the `Start` function is called. A list of available options are:
+
+```go
+package main
+
+import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+
+func main() {
+    // Start the tracer with zero or more options.
+    tracer.Start(tracer.WithServiceName("my-service"))
+    defer tracer.Stop()
+}
+```
+
+For more tracer settings, check out available options in our [config documentation][config docs].
 
 ## Further Reading
 
@@ -94,6 +108,7 @@ The Go tracer includes support for the following data stores and libraries. Make
 [1]: /tracing/setup
 [contrib godoc]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib
 [api docs]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
+[config docs]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
 [contrib docs]: #automatic-instrumentation
 [getting started]: https://docs.datadoghq.com/tracing/visualization/
 [repo readme]: https://github.com/DataDog/dd-trace-go/tree/v1#contributing
