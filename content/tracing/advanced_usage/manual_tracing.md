@@ -33,6 +33,75 @@ public class MyClass {
 
 {{% /tab %}}
 {{% tab "Python" %}}
+
+If you would like to extend the functionality of the ``ddtrace`` library or gain
+finer control over instrumenting your application, several techniques are
+provided by the library.
+
+The following examples use the global tracer object which can be imported via:
+
+```python
+  from ddtrace import tracer
+```
+
+**Decorator**
+
+``ddtrace`` provides a decorator that can be used to trace a particular method
+in your application:
+
+```python
+  @tracer.wrap()
+  def business_logic():
+    """A method that would be of interest to trace."""
+    # ...
+    # ...
+```
+
+API details for the decorator can be found at [`ddtrace.Tracer.wrap()`][py_wrap]
+
+**Context Manager**
+
+To trace an arbitrary block of code, you can use the [`ddtrace.Span`][py_span]
+context manager:
+
+```python
+  # trace some interesting operation
+  with tracer.trace('interesting.operations'):
+    # do some interesting operation(s)
+    # ...
+    # ...
+```
+
+Further API details can be found at [`ddtrace.Tracer()`][py_tracer]
+
+**Using the API**
+
+If the above methods are still not enough to satisfy your tracing needs, a
+manual API is provided which will allow you to start and finish spans however
+you may require:
+
+```python
+  span = tracer.trace('operations.of.interest')
+
+  # do some operation(s) of interest in between
+
+  # NOTE: make sure to call span.finish() or the entire trace will not be sent
+  # to Datadog
+  span.finish()
+```
+
+API details of the decorator can be found here:
+
+- [`ddtrace.Tracer.trace`][py_trace]
+- [`ddtrace.Span.finish`][py_span_fin]
+
+
+[py_wrap]:     http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Tracer.wrap
+[py_tracer]:   http://pypi.datadoghq.com/trace/docs/advanced_usage.html#tracer
+[py_trace]:    http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Tracer.trace
+[py_span]:     http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Span
+[py_span_fin]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Span.finish
+
 {{% /tab %}}
 {{% tab "Ruby" %}}
 If you aren't using supported library instrumentation (see [Library compatibility][ruby lib compatibility], you may want to to manually instrument your code. Adding tracing to your code is easy using the `Datadog.tracer.trace` method, which you can wrap around any Ruby code.

@@ -10,6 +10,9 @@ Datadog debug settings are used to diagnose issues or audit trace data.
 To return debug level application logs, enable debug mode with the flag `-Ddatadog.slf4j.simpleLogger.defaultLogLevel=debug` when starting the JVM.
 {{% /tab %}}
 {{% tab "Python" %}}
+Debugging is disabled by default. To enable it set the environment variable
+`DATADOG_TRACE_DEBUG=true` when using `ddtrace-run`. Note that this will
+log a large amount of information. Use sparingly for debugging purposes only.
 {{% /tab %}}
 {{% tab "Ruby" %}}
 Debug mode is disabled by default. To enable:
