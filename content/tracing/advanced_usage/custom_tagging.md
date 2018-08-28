@@ -121,7 +121,7 @@ func main() {
 **Adding tags to a Span attached to a Context**
 
 Our integrations make use of `Context` type to propagate the current active span. If you want to add
-a tag to a span attached to a `Context` via automatic instrumentation, you can call `SpanFromContext`
+a tag to a span attached to a `Context` via automatic instrumentation, you can call the `SpanFromContext`
 function:
 
 ```go
