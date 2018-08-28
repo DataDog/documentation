@@ -56,11 +56,14 @@ The Datadog Agent v6 can collect logs from files or the network (TCP or UDP) and
 
 | Parameter        | Presence  | Description                                                                                                                                                                                                                                                                                                                |
 | ------           | -------   | ------                                                                                                                                                                                                                                                                                                                     |
-| `type`           | mandatory | type of log input source (**tcp** / **udp** / **file**)                                                                                                                                                                                                                                                                    |
-| `port`           | mandatory | Set the port to listen log from if `type` is **tcp** or **udp**.                                                                                                                                                                                                                                                           |
-| `path`           | mandatory | Set the path of the file to tail log from if `type` is **file**.                                                                                                                                                                                                                                                           |
+| `type`           | mandatory | Type of the log input source, it can be **tcp**, **udp**, **file**, **windows_event**, **docker**, or **journald**                                                                                                                                                                                                         |
+| `port`           | mandatory | If `type` is **tcp** or **udp**, port to listen log from.                                                                                                                                                                                                                                                                  |
+| `path`           | mandatory | If `type` is **file** or **journald**, path of the file to tail log from.                                                                                                                                                                                                                                                                  |
+| `channel_path`   | mandatory | If `type` is **windows_event**, list of windows event channel to collect.                                                                                                                                                                                                                                                  |
 | `service`        | mandatory | Name of the service owning the log. If you instrumented your service with [Datadog APM][12], this should be the same service name.                                                                                                                                                                                         |
 | `source`         | mandatory | Attribute that defines which integration is sending the logs. If the logs do not come from an existing integration then this field may include a custom source name. But we recommend matching this value to the namespace of any related [custom metrics][2] you are collecting, e.g, `myapp` from `myapp.request.count`) |
+| `include_units`  | optional  | If `type` is **journald**, list of specific journald units to includes.                                                                                                                                                                                                                                                    |
+| `exclude_units`  | optional  | If `type` is **journald**, list of specific journald units to exclude.                                                                                                                                                                                                                                                     |
 | `sourcecategory` | optional  | Multiple value attribute. Can be used to refine the source attribtue. Example: `source:mongodb, sourcecategory:db_slow_logs`                                                                                                                                                                                               |
 | `tags`           | optional  | Add tags to each log collected, [learn more about tagging][13].                                                                                                                                                                                                                                                            |
 
@@ -75,7 +78,7 @@ Set `type` to **file** then specify the absolute `path` to the log file you want
 
 Example:
 
-To gather python applications stored in **/var/log/myapp1.log** and **/var/log/python.log** create a `python.d/conf.yaml` file at the root of your [Agent's configuration directory][9] with the following content:
+To gather logs from your python applications stored in **/var/log/myapp1.log** and **/var/log/python.log** create a `python.d/conf.yaml` file at the root of your [Agent's configuration directory][9] with the following content:
 
 ```yaml
 ##Log section
@@ -96,15 +99,17 @@ logs:
 ```
 **Note**: If you are using the Windows 6 Agent and trailing files for logs - make sure that those files have a UTF8 encoding.
 
+[9]: /agent/faq/agent-configuration-files/
+
 {{% /tab %}}
 
-{{% tab "Stream logs through TCP/UDP" %}}
+{{% tab "Stream logs from TCP/UDP" %}}
 
 Set `type` to **tcp** or **udp** depending on the protocol then specify the `port` of your incoming connection.
 
 Example:
 
-If your PHP application does not log to a file, but instead forwards its logs via TCP over port **10518**, create a `php.d/conf.yaml` file at the root of your [Agent's configuration directory][9] with the following content:
+To gather logs from PHP application that does not log to a file, but instead forwards its logs via TCP over port **10518**, create a `php.d/conf.yaml` file at the root of your [Agent's configuration directory][9] with the following content:
 
 ```yaml
 
@@ -120,7 +125,41 @@ logs:
 
 **Note**: The Agent supports raw string, JSON, and Syslog formated logs. If you are sending logs in batch, use break line characters to separate your logs.
 
+[9]: /agent/faq/agent-configuration-files/
+
 {{% /tab %}}
+{{% tab "Stream logs from JournalD" %}}
+
+Set `type` to **journald** then specify the `path` of your journal.
+
+Example:
+
+To gather logs from your JournalD, create a `journald.d/conf.yaml` file at the root of your [Agent's configuration directory][9] with the following content:
+
+```
+logs:
+  - type: journald
+    path: /var/log/journal/
+    include_units:
+      - docker.service
+      - sshd.service
+```
+
+[9]: /agent/faq/agent-configuration-files/
+
+{{% /tab %}}
+{{% tab "Windows Events" %}}
+
+Set `type` to **windows_event** then specify the `channel_path` of your windows channel.
+
+Example: 
+
+[Refer to the dedicated widows event documentation page][15].
+
+[15]: https://docs.datadoghq.com/integrations/windows_event_log/#log-collection
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Advanced log collection functions
