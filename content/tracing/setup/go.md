@@ -48,7 +48,7 @@ You are now ready to import the tracer and start instrumenting your code!
 
 We have built a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. Find below the list of currently supported integrations.
 
-**Note**: The [official documentation][contrib godoc] also provides a detailed overview of the supported packages and their APIs, along with usage examples.
+**Note**: The [integrations documentation][contrib godoc] also provides a detailed overview of the supported packages and their APIs, along with usage examples.
 
 {{< tabs >}}
 {{% tab "Frameworks" %}}
@@ -83,6 +83,24 @@ The Go tracer includes support for the following data stores and libraries.
 {{% /tab %}}
 {{< /tabs >}}
 
+## Configuration
+
+The tracer is configured with options parameters when the `Start` function is called. A list of available options are:
+
+```go
+package main
+
+import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+
+func main() {
+    // Start the tracer with zero or more options.
+    tracer.Start(tracer.WithServiceName("my-service"))
+    defer tracer.Stop()
+}
+```
+
+For more tracer settings, check out available options in our [config documentation][config docs].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -90,6 +108,7 @@ The Go tracer includes support for the following data stores and libraries.
 [1]: /tracing/setup
 [contrib godoc]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib
 [api docs]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
+[config docs]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
 [contrib docs]: #automatic-instrumentation
 [getting started]: https://docs.datadoghq.com/tracing/visualization/
 [repo readme]: https://github.com/DataDog/dd-trace-go/tree/v1#contributing
