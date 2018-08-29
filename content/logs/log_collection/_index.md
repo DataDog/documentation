@@ -38,6 +38,7 @@ logs_enabled: true
 The Datadog Agent sends its logs to Datadog over TLS-encrypted TCP. This requires outbound communication over port `10516`.
 
 ## Enabling log collection from integrations
+
 To start collecting logs for a given integration, uncomment the logs section in that integration's yaml file and configure it for your environment.
 
 <div class="alert alert-warning">
@@ -50,8 +51,8 @@ If an integration does not support logs by default, use the custom file configur
 
 The Datadog Agent v6 can collect logs from files or the network (TCP or UDP) and forward them to Datadog: 
 
-1. Create a new folder in the `conf.d/` folder at the root of your [Agent's configuration directory][9] named after your log source.
-2. Create a new `conf.yaml` file in this new repository.
+1. Create a new folder in the `conf.d/` directory at the root of your [Agent's configuration directory][9] named after your log source.
+2. Create a new `conf.yaml` file in this new folder.
 3. Add a custom log collection configuration with the following parameters:
 
 | Parameter        | Presence  | Description                                                                                                                                                                                                                                                                                                                |
