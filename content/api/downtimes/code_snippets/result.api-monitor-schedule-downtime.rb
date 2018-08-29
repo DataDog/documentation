@@ -8,6 +8,7 @@
         "end" => 1445978819,
         "parent_id" => nil,
         "monitor_id" => nil,
+        "monitor_tags": ["*"],
         "recurrence" => {
             "until_date" => 1448387219,
             "until_occurrences" => nil,
