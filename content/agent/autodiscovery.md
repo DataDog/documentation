@@ -56,7 +56,7 @@ The Agent watches for Docker events-container creation, destruction, starts, and
 
 The Datadog Docker Agent automatically auto-discovers other containers.
 
-To utilize Autodiscovery on the Datadog **Host** Agent, you will need to add these settings to `datadog.yaml`:
+To utilize Autodiscovery on the Datadog **Host** Agent, add these settings to your `datadog.yaml` configuration file:
 
 ```
 # Autodiscovery settings for Datadog Host Agent
