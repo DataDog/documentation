@@ -561,42 +561,42 @@ languages:
           parent: menu_references_tracing
         - identifier: customnav_tracingnav_custom_tagging
           name: "Custom Tagging"
-          url: "tracing/advanced_usage/#custom_tagging"
+          url: "tracing/advanced_usage/?tab=java#custom_tagging"
           weight: 210
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_manual_tracing
           name: "Manual Tracing"
-          url: "tracing/advanced_usage/#manual_tracing"
+          url: "tracing/advanced_usage/?tab=java#manual_tracing"
           weight: 220
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_open_tracing
           name: "OpenTracing"
-          url: "tracing/advanced_usage/#open_tracing/"
+          url: "tracing/advanced_usage/?tab=java#open_tracing"
           weight: 230
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_distributed_tracing
           name: "Distributed Tracing"
-          url: "tracing/advanced_usage/#distributed_tracing"
+          url: "tracing/advanced_usage/?tab=java#distributed_tracing"
           weight: 240
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_sampling
           name: "Priority Sampling"
-          url: "tracing/advanced_usage/#priority_sampling"
+          url: "tracing/advanced_usage/?tab=java#priority_sampling"
           weight: 250
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_logging
           name: "Logging"
-          url: "tracing/advanced_usage/#logging"
+          url: "tracing/advanced_usage/?tab=java#logging"
           weight: 260
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_debugging
           name: "Debugging"
-          url: "tracing/advanced_usage/#debugging"
+          url: "tracing/advanced_usage/?tab=java#debugging"
           weight: 270
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_security
           name: "Security"
-          url: "tracing/advanced_usage/#security"
+          url: "tracing/advanced_usage/?tab=java#security"
           weight: 280
           parent: customnav_tracingnav_advanced_usage
 
