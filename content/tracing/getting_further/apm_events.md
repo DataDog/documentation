@@ -2,10 +2,10 @@
 title: APM Events
 kind: Documentation
 further_reading:
-- link: "tracing/search"
+- link: "tracing/visualization/search"
   tag: "Documentation"
   text: Global search of all your traces with tags
-- link: "tracing/analytics"
+- link: "tracing/visualization/analytics"
   tag: "Documentation"
   text: Analytics on your APM data at infinite cardinality
 ---
@@ -59,7 +59,7 @@ Each unique request generates an APM Event. These are sent to Datadog un-sampled
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/search/#search
-[2]: /tracing/search/#overview
+[1]: /tracing/visualization/search/#search
+[2]: /tracing/visualization/search/#overview
 [3]: /tracing/visualization/#spans
 [4]: /tracing/getting_further/trace_sampling_and_storage

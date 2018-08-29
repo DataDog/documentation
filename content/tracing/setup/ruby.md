@@ -17,9 +17,12 @@ further_reading:
 - link: "tracing/visualization/"
   tag: "Use the APM UI"
   text: "Explore your services, resources and traces"
+- link: "tracing/advanced_usage/"
+  tag: "Advanced Usage"
+  text: "Advanced Usage"
 ---
 
-## Getting started
+## Installation and Getting Started
 
 For configuration instructions, and details about using the API, check out our [API documentation][api docs] and [gem documentation][gem docs].
 
@@ -31,10 +34,6 @@ For details about contributing, check out the [development guide][development do
 [gem docs]: http://gems.datadoghq.com/trace/docs/
 [visualization docs]: https://docs.datadoghq.com/tracing/visualization/
 [development docs]: https://github.com/DataDog/dd-trace-rb/blob/master/README.md#development
-
-## Installation
-
-The following steps will help you quickly start tracing your Ruby application.
 
 ### Setup the Datadog Agent
 
@@ -85,183 +84,71 @@ The Ruby APM tracer sends trace data through the Datadog Agent.
 
 After setting up, your services will appear on the [APM services page][3] within a few minutes. Learn more about [using the APM UI][4].
 
-## Configuration
-
-To activate more advanced features, change tracer behavior, or trace additional code, you must add additional configuration.
-
-### Manual instrumentation
-
-If you aren't using supported library instrumentation (see [Library compatibility](#library-compatibility)), you may want to to manually instrument your code. Adding tracing to your code is easy using the `Datadog.tracer.trace` method, which you can wrap around any Ruby code.
-
-**Example**
-
-```ruby
-get '/posts' do
-  Datadog.tracer.trace('web.request', service: 'my-blog', resource: 'GET /posts') do |span|
-    # Trace the activerecord call
-    Datadog.tracer.trace('posts.fetch') do
-      @posts = Posts.order(created_at: :desc).limit(10)
-    end
-
-    # Add some APM tags
-    span.set_tag('http.method', request.request_method)
-    span.set_tag('posts.count', @posts.length)
-
-    # Trace the template rendering
-    Datadog.tracer.trace('template.render') do
-      erb :index
-    end
-  end
-end
-```
-
-For more details about manual instrumentation, check out the [API documentation][5].
-
-### Integration instrumentation
-
-APM provides out-of-the-box support for many popular integrations. Although none are active by default, you can easily activate them in `Datadog.configure`.
-
-**Example**
-
-```ruby
-require 'ddtrace'
-require 'sinatra'
-require 'active_record'
-
-Datadog.configure do |c|
-  c.use :sinatra
-  c.use :active_record
-end
-
-# Now write your code naturally, it's traced automatically.
-get '/home' do
-  @posts = Posts.order(created_at: :desc).limit(10)
-  erb :index
-end
-```
-
-For list of available integrations, see [Library compatibility](#library-compatibility).
-
-### Tracer settings
-
-**Enabling/disabling**
-
-Tracing is enabled by default. To disable it (i.e. in a test environment):
-
-```ruby
-Datadog.configure do |c|
-  c.tracer enabled: false
-end
-```
-
-**Debug mode**
-
-Debug mode is disabled by default. To enable:
-
-```ruby
-Datadog.configure do |c|
-  c.tracer debug: true
-end
-```
-
-For more tracer settings, check out the [API documentation][6].
-
-### Priority sampling
-
-Priority sampling allows you to configure which traces are most important and should be kept after sampling.
-
-Priority sampling is disabled by default. For more details about how to activate and configure priority sampling, check out the [API documentation][7].
-
-### Distributed tracing
-
-Distributed tracing allows you to propagate a single trace across multiple services, so you can see performance end-to-end.
-
-Distributed tracing is disabled by default. For more details about how to activate and configure distributed tracing, check out the [API documentation][8].
-
-### Processing pipeline
-
-The processing Pipeline allows you to modify traces before they are sent to the agent. This can be useful for customizing trace content or removing unwanted traces.
-
-It provides **filtering** for removing spans that match certain criteria, and **processing** for modifying spans.
-
-For more details about how to activate and configure the processing pipeline, check out the [API documentation][9].
-
 ## Compatibility
 
-### Interpreter Compatibility
+### Integrations
+
+#### Interpreter Compatibility
 
 Ruby APM includes support for the following Ruby interpreters:
 
-___
 
-| Type  | Documentation              | Version | Support type |
-| ----- | -------------------------- | -----   | ------------ |
-| MRI   | https://www.ruby-lang.org/ | 1.9.1   | Experimental |
-|       |                            | 1.9.3   | Full         |
-|       |                            | 2.0     | Full         |
-|       |                            | 2.1     | Full         |
-|       |                            | 2.2     | Full         |
-|       |                            | 2.3     | Full         |
-|       |                            | 2.4     | Full         |
-| JRuby | http://jruby.org/          | 9.1.5   | Experimental |
+| Type                               | Version | Support type    |
+| ---------------------------------- | -----   | --------------- |
+| [MRI](https://www.ruby-lang.org/)  | 1.9.1   | Experimental    |
+|                                    | 1.9.3   | Fully Supported |
+|                                    | 2.0     | Fully Supported |
+|                                    | 2.1     | Fully Supported |
+|                                    | 2.2     | Fully Supported |
+|                                    | 2.3     | Fully Supported |
+|                                    | 2.4     | Fully Supported |
+| [JRuby](http://jruby.org/)         | 9.1.5   | Experimental    |
 
-*Full* support indicates all tracer features are available.
-
-*Experimental* indicates most features should be available, but unverified.
-
-### Web server compatibility
+#### Web Server Compatibility
 
 Ruby APM includes support for the following web servers:
 
-___
+| Type                                           | Version      | Support type    |
+| ---------------------------------------------- | ------------ | --------------- |
+| [Puma](http://puma.io/)                        | 2.16+ / 3.6+ | Fully Supported |
+| [Unicorn](https://bogomips.org/unicorn/)       | 4.8+ / 5.1+  | Fully Supported |
+| [Passenger](https://www.phusionpassenger.com/) | 5.0+         | Fully Supported |
 
-| Type      | Documentation                     | Version      | Support type |
-| --------- | --------------------------------- | ------------ | ------------ |
-| Puma      | http://puma.io/                   | 2.16+ / 3.6+ | Full         |
-| Unicorn   | https://bogomips.org/unicorn/     | 4.8+ / 5.1+  | Full         |
-| Passenger | https://www.phusionpassenger.com/ | 5.0+         | Full         |
-
-### Library compatibility
+#### Library Compatibility
 
 Ruby APM includes support for the following libraries and frameworks:
 
-| Name           | Key             | Versions Supported     | How to configure | Gem source   |
-| ------         | ----            | -----                  | -------          | ---------    |
-| Active Record  | `active_record` | `>= 3.2, < 5.2`        | *[Link][10]*     | *[Link][11]* |
-| AWS            | `aws`           | `>= 2.0`               | *[Link][12]*     | *[Link][13]* |
-| Dalli          | `dalli`         | `>= 2.7`               | *[Link][14]*     | *[Link][15]* |
-| Elastic Search | `elasticsearch` | `>= 6.0`               | *[Link][16]*     | *[Link][17]* |
-| Excon          | `excon`         | `>= 0.62`              | *[Link][18]*     | *[Link][19]* |
-| Faraday        | `faraday`       | `>= 0.14`              | *[Link][20]*     | *[Link][21]* |
-| gRPC           | `grpc`          | `>= 1.10`              | *[Link][22]*     | *[Link][23]* |
-| Grape          | `grape`         | `>= 1.0`               | *[Link][24]*     | *[Link][25]* |
-| GraphQL        | `graphql`       | `>= 1.7.9`             | *[Link][26]*     | *[Link][27]* |
-| MongoDB        | `mongo`         | `>= 2.0, < 2.5`        | *[Link][28]*     | *[Link][29]* |
-| Net/HTTP       | `http`          | *(Any supported Ruby)* | *[Link][30]*     | *[Link][31]* |
-| Racecar        | `racecar`       | `>= 0.3.5`             | *[Link][32]*     | *[Link][33]* |
-| Rack           | `rack`          | `>= 1.4.7`             | *[Link][34]*     | *[Link][35]* |
-| Rails          | `rails`         | `>= 3.2, < 5.2`        | *[Link][36]*     | *[Link][37]* |
-| Rake           | `rake`          | `>= 12.0`              | *[Link][38]*     | *[Link][39]* |
-| Redis          | `redis`         | `>= 3.2, < 4.0`        | *[Link][40]*     | *[Link][41]* |
-| Resque         | `resque`        | `>= 1.0, < 2.0`        | *[Link][42]*     | *[Link][43]* |
-| Sequel         | `sequel`        | `>= 3.41`              | *[Link][44]*     | *[Link][45]* |
-| Sidekiq        | `sidekiq`       | `>= 4.0`               | *[Link][46]*     | *[Link][47]* |
-| Sinatra        | `sinatra`       | `>= 1.4.5`             | *[Link][48]*     | *[Link][49]* |
-| Sucker Punch   | `sucker_punch`  | `>= 2.0`               | *[Link][50]*     | *[Link][51]* |
+| Name                 | Versions Supported     | Support type    | How to configure |
+| -------------------- | ---------------------- | --------------- | ---------------- |
+| [Active Record][11]  | `>= 3.2, < 5.2`        | Fully Supported | *[Link][10]*     |
+| [AWS][13]            | `>= 2.0`               | Fully Supported | *[Link][12]*     |
+| [Dalli][15]          | `>= 2.7`               | Fully Supported | *[Link][14]*     |
+| [DelayedJob][53]     | `>= 4.1`               | Fully Supported | *[Link][52]*     |
+| [Elastic Search][17] | `>= 6.0`               | Fully Supported | *[Link][16]*     |
+| [Excon][19]          | `>= 0.62`              | Fully Supported | *[Link][18]*     |
+| [Faraday][21]        | `>= 0.14`              | Fully Supported | *[Link][20]*     |
+| [gRPC][23]           | `>= 1.10`              | Fully Supported | *[Link][22]*     |
+| [Grape][25]          | `>= 1.0`               | Fully Supported | *[Link][24]*     |
+| [GraphQL][27]        | `>= 1.7.9`             | Fully Supported | *[Link][26]*     |
+| [MongoDB][29]        | `>= 2.0, < 2.5`        | Fully Supported | *[Link][28]*     |
+| [MySQL2][55]         | `>= 0.5`               | Fully Supported | *[Link][54]*     |
+| [Net/HTTP][31]       | *(Any Supported Ruby)* | Fully Supported | *[Link][30]*     |
+| [Racecar][33]        | `>= 0.3.5`             | Fully Supported | *[Link][32]*     |
+| [Rack][35]           | `>= 1.4.7`             | Fully Supported | *[Link][34]*     |
+| [Rails][37]          | `>= 3.2, < 5.2`        | Fully Supported | *[Link][36]*     |
+| [Rake][39]           | `>= 12.0`              | Fully Supported | *[Link][38]*     |
+| [Redis][41]          | `>= 3.2, < 4.0`        | Fully Supported | *[Link][40]*     |
+| [Resque][43]         | `>= 1.0, < 2.0`        | Fully Supported | *[Link][42]*     |
+| [RestClient][57]     | `>= 1.8`               | Fully Supported | *[Link][56]*     |
+| [Sequel][45]         | `>= 3.41`              | Fully Supported | *[Link][44]*     |
+| [Sidekiq][47]        | `>= 4.0`               | Fully Supported | *[Link][46]*     |
+| [Sinatra][49]        | `>= 1.4.5`             | Fully Supported | *[Link][48]*     |
+| [Sucker Punch][51]   | `>= 2.0`               | Fully Supported | *[Link][50]*     |
 
-## Further reading
+*Fully Supported* support indicates all tracer features are available.
 
-{{< partial name="whats-next/whats-next.html" >}}
+*Experimental* indicates most features should be available, but unverified.
 
-[1]: /tracing/setup
-[2]: /tracing/setup/docker/
-[3]: https://app.datadoghq.com/apm/services
-[4]: https://docs.datadoghq.com/tracing/visualization/
-[5]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#manual-instrumentation
-[6]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#tracer-settings
-[7]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#priority-sampling
-[8]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#distributed-tracing
-[9]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#processing-pipeline
 [10]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#active-record
 [11]: https://github.com/rails/rails/tree/master/activerecord
 [12]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#aws
@@ -304,3 +191,72 @@ Ruby APM includes support for the following libraries and frameworks:
 [49]: https://github.com/sinatra/sinatra
 [50]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#sucker-punch
 [51]: https://github.com/brandonhilkert/sucker_punch
+[52]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#delayedjob
+[53]: https://github.com/collectiveidea/delayed_job
+[54]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#mysql2
+[55]: https://github.com/brianmario/mysql2
+[56]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#restclient
+[57]: https://github.com/rest-client/rest-client
+
+## Configuration
+
+To activate more advanced features, change tracer behavior, or trace additional code, you must add additional configuration.
+
+### Integration instrumentation
+
+APM provides out-of-the-box support for many popular integrations. Although none are active by default, you can easily activate them in `Datadog.configure`.
+
+**Example**
+
+```ruby
+require 'ddtrace'
+require 'sinatra'
+require 'active_record'
+
+Datadog.configure do |c|
+  c.use :sinatra
+  c.use :active_record
+end
+
+# Now write your code naturally, it's traced automatically.
+get '/home' do
+  @posts = Posts.order(created_at: :desc).limit(10)
+  erb :index
+end
+```
+
+For list of available integrations, see [Library compatibility](#library-compatibility).
+
+### Tracer settings
+
+**Enabling/disabling**
+
+Tracing is enabled by default. To disable it (i.e. in a test environment):
+
+```ruby
+Datadog.configure do |c|
+  c.tracer enabled: false
+end
+```
+
+For more tracer settings, check out the [API documentation][6].
+
+### Processing pipeline
+
+The processing pipeline allows you to modify traces before they are sent to the agent. This can be useful for customizing trace content or removing unwanted traces.
+
+It provides **filtering** for removing spans that match certain criteria, and **processing** for modifying spans.
+
+For more details about how to activate and configure the processing pipeline, check out the [API documentation][9].
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /tracing/setup
+[2]: /tracing/setup/docker/
+[3]: https://app.datadoghq.com/apm/services
+[4]: https://docs.datadoghq.com/tracing/visualization/
+[6]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#tracer-settings
+[7]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#priority-sampling
+[9]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#processing-pipeline
