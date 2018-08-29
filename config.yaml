@@ -561,27 +561,27 @@ languages:
           parent: menu_references_tracing
         - identifier: customnav_tracingnav_custom_tagging
           name: "Custom Tagging"
-          url: "tracing/advanced_usage/?tab=java#custom_tagging"
+          url: "tracing/advanced_usage/?tab=java#custom-tagging"
           weight: 210
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_manual_tracing
           name: "Manual Tracing"
-          url: "tracing/advanced_usage/?tab=java#manual_tracing"
+          url: "tracing/advanced_usage/?tab=java#manual-tracing"
           weight: 220
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_open_tracing
           name: "OpenTracing"
-          url: "tracing/advanced_usage/?tab=java#open_tracing"
+          url: "tracing/advanced_usage/?tab=java#opentracing"
           weight: 230
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_distributed_tracing
           name: "Distributed Tracing"
-          url: "tracing/advanced_usage/?tab=java#distributed_tracing"
+          url: "tracing/advanced_usage/?tab=java#distributed-tracing"
           weight: 240
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_sampling
           name: "Priority Sampling"
-          url: "tracing/advanced_usage/?tab=java#priority_sampling"
+          url: "tracing/advanced_usage/?tab=java#priority-sampling"
           weight: 250
           parent: customnav_tracingnav_advanced_usage
         - identifier: customnav_tracingnav_logging
