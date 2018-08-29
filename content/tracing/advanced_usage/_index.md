@@ -33,7 +33,7 @@ class ServletImpl extends AbstractHttpServlet {
   void doGet(HttpServletRequest req, HttpServletResponse resp) {
     final Tracer tracer = GlobalTracer.get();
     if (tracer != null && tracer.activeSpan() != null) {
-      tracer.activeSpan().setTag("org.id", 12345);
+      tracer.activeSpan().setTag("customer.id", 12345);
       tracer.activeSpan().setTag("http.url", "/login");
     }
     // servlet impl
@@ -55,10 +55,10 @@ the following route handler:
 ```python
 from ddtrace import tracer
 
-@app.route('/post/<int:post_id>')
-def handle_post(post_id):
+@app.route('/customer/<int:customer_id>')
+def handle_customer(customer_id):
   with tracer.trace('web.request') as span:
-    span.set_tag('post.id', post_id)
+    span.set_tag('customer.id', customer_id)
 ```
 
 **Adding tags to a current active span**
@@ -71,13 +71,13 @@ returned:
 ```python
 from ddtrace import tracer
 
-@app.route('/post/<int:post_id>')
+@app.route('/customer/<int:customer_id>')
 @tracer.wrap()
-def handle_post(post_id):
+def handle_customer(customer_id):
   # get the active span in the context, put there by tracer.wrap()
   current_span = tracer.current_span()
   if current_span:
-    current_span.set_tag('post.id', post_id)
+    current_span.set_tag('customer.id', customer_id)
 ```
 
 **Adding tags globally to all spans**
@@ -257,9 +257,9 @@ See the [API documentation][nodejs api doc] for more details.
 {{< /tabs >}}
 
 
-## Manual Tracing
+## Manual Instrumentation
 
-Manual Tracing allows programmatic creation of traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation. Before instrumenting your application, review Datadog’s [APM Terminology][apm terminology] and familiarize yourself with the core concepts of Datadog APM. 
+Manual Instrumentation allows programmatic creation of traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation. Before instrumenting your application, review Datadog’s [APM Terminology][apm terminology] and familiarize yourself with the core concepts of Datadog APM. 
 
 [apm terminology]: /tracing/visualization/services_list/
 
@@ -284,17 +284,20 @@ public class MyClass {
 }
 ```
 
-[opentracing]: /tracing/advanced_usage/open_tracing
-[java framework]: /tracing/setup/java/#integrations
+[opentracing]: #opentracing
+[java framework]: /tracing/setup/java/#compatibility
 [apm terminology]: /tracing/visualization/services_list/
 [trace api maven docs]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
 
 {{% /tab %}}
 {{% tab "Python" %}}
 
-If you would like to extend the functionality of the ``ddtrace`` library or gain
-finer control over instrumenting your application, several techniques are
-provided by the library.
+If you aren't using supported library instrumentation (see [Library compatibility][python lib compatibility]), 
+you may want to to manually instrument your code.
+
+You may also want to extend the functionality of the ``ddtrace`` library or gain
+finer control over instrumenting your application. Several techniques are
+provided by the library to accomplish this.
 
 The following examples use the global tracer object which can be imported via:
 
@@ -359,6 +362,8 @@ API details of the decorator can be found here:
 [py_trace]:    http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Tracer.trace
 [py_span]:     http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Span
 [py_span_fin]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Span.finish
+[python lib compatibility]: /tracing/setup/python/#compatibility
+
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
@@ -392,10 +397,12 @@ end
 For more details about manual instrumentation, check out the [API documentation][ruby api doc].
 
 [ruby api doc]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#manual-instrumentation
-[ruby lib compatibility]: /tracing/setup/ruby/#library-compatibility
+[ruby lib compatibility]: /tracing/setup/ruby/#compatibility
 
 {{% /tab %}}
 {{% tab "Go" %}}
+If you aren't using supported library instrumentation (see [Library compatibility][go lib compatibility]), you may want to to manually instrument your code.
+
 To make use of manual instrumentation, use the `tracer` package which is documented on our [godoc page][tracer godoc]. 
 
 **Example Usage**
@@ -420,10 +427,11 @@ func main() {
 ```
 
 [tracer godoc]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
+[go lib compatibility]: /tracing/setup/go/#compatibility
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
-If you aren’t using supported library instrumentation (see [Compatibility][nodejs compatibility]), you may want to manually instrument your code.
+If you aren’t using supported library instrumentation (see [Library compatibility][nodejs compatibility]), you may want to manually instrument your code.
 
 The following example initializes a Datadog Tracer and creates a Span called `web.request`:
 
@@ -490,7 +498,7 @@ compile group: 'com.datadoghq', name: 'dd-trace-ot', version: "${dd-trace-java.v
 
 Configure your application using environment variables or system properties as discussed in the [configuration](/tracing/setup/java/#configuration) section.
 
-### Custom Instrumentation Examples
+### Manual Instrumentation with OpenTracing
 
 Use a combination of these if the automatic instrumentation isn’t providing you enough depth or detail.
 
@@ -581,9 +589,9 @@ public class Application {
 }
 ```
 
-#### Custom Async Instrumentation
+#### Manual Instrumentation for Async Traces
 
-Create asynchronous traces in custom instrumentation using the OpenTracing API.
+Create asynchronous traces with manual instrumentation using the OpenTracing API.
 
 ```java
 // Step 1: start the Scope/Span on the work submission thread
@@ -607,10 +615,10 @@ Notice the above examples only use the OpenTracing classes. Please reference the
 
 {{% /tab %}}
 {{% tab "Python" %}}
-Support for OpenTracing with Python is coming soon.
+Support for OpenTracing with Python is coming soon. Reach out to our [support team][contact support] to be part of the beta.
 {{% /tab %}}
 {{% tab "Ruby" %}}
-Support for OpenTracing with Ruby is coming soon.
+Support for OpenTracing with Ruby is coming soon. Reach out to our [support team][contact support] to be part of the beta.
 {{% /tab %}}
 {{% tab "Go" %}}
 Import the [`opentracer` package][opentracing godoc] to expose the Datadog tracer as an [OpenTracing][open tracing] compatible tracer.
@@ -689,11 +697,11 @@ Distributed Tracing headers are language agnostic. A trace started in one langua
 
 Distributed Traces may sample inconsistently when the linked traces run on different hosts. To ensure that distributed traces are complete, enable [priority sampling][priority sampling].
 
-[priority sampling]: /tracing/advanced_usage/priority_sampling
+[priority sampling]: #priority-sampling
 
 {{< tabs >}}
 {{% tab "Java" %}}
-Create a distributed trace in custom instrumentation using OpenTracing:
+Create a distributed trace using manual instrumentation with OpenTracing:
 
 ```java
 // Step 1: Inject the Datadog headers in the client code
@@ -864,6 +872,10 @@ Priority sampling allows traces between two Datadog endpoints to be sampled toge
 
 Priority sampling automatically assigns and propagates a priority value along all traces, depending on their service and volume. Priorities can also be set manually to drop non-interesting traces or keep important ones.
 
+For a more detailed explaination of sampling and priority sampling, please reference our [sampling and storage][sampling and storage] documentation. 
+
+[sampling and storage]: https://docs.datadoghq.com/tracing/getting_further/trace_sampling_and_storage/
+
 {{< tabs >}}
 {{% tab "Java" %}}
 Priority sampling is disabled by default. To enable it, configure the `priority.sampling` flag to `true` ([see how to configure the client here](/tracing/setup/java/#configuration)).
@@ -1003,7 +1015,7 @@ Possible values for the sampling priority tag are:
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
-Coming Soon.
+Coming Soon. Reach out to our [support team][contact support] to be part of the beta.
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -1074,7 +1086,7 @@ trace_id, span_id = helpers.get_correlation_ids()
 ```
 {{% /tab %}}
 {{% tab "Ruby" %}}
-Coming Soon.
+Coming Soon. Reach out to our [support team][contact support] to be part of the beta.
 
 {{% /tab %}}
 {{% tab "Go" %}}
@@ -1102,7 +1114,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
-Coming Soon.
+Coming Soon. Reach out to our [support team][contact support] to be part of the beta.
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -1286,3 +1298,5 @@ apm_config:
     - name: "error.stack"
       pattern: "(?s).*"
 ```
+
+[contact support]: https://docs.datadoghq.com/help

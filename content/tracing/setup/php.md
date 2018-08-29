@@ -14,7 +14,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-The APM tracer for PHP applications is currently in alpha and not officially supported by Datadog. The officially supported beta will launch as early as September 2018. We do not recommend running the alpha tracer in production.
+The APM tracer for PHP applications is currently in alpha and not officially supported by Datadog. The officially supported beta will launch as early as October 2018. We do not recommend running the alpha tracer in production.
 </div>
 
 {{< whatsnext desc="To be notified of the beta launch, submit this form:">}}
