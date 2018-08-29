@@ -119,13 +119,14 @@ Otherwise, here are some words and phrases to avoid or use sparingly:
 
 | Word to avoid        | Workaround                                                                                 |
 | :------------------- | :----------------------------------------------------------------------------------------- |
-| Currently            | just omit it                                                                               |
+| Currently            | Just omit it                                                                               |
 | Refer to/visit       | When preceding a link; use "See" or "Read"                                                 |
 | A number of          | This is vague. Slightly less vague: "a few", "several", "many".                            |
 | [in the] Datadog app | No need for the definite article; use "[in] Datadog".                                      |
 | Product              | When referencing Datadog (e.g. "the Datadog product"), omit it or use "service"            |
 | Integration          | In the context of describing / discussing Agent checks, use "check".                       |
 | Please               | There's no reason to plead with the reader; maybe they'll read the docs, maybe they won't. |
+| Utilize              | Don't utilize utilize when you can use use.                                                |
 
 
 ## Formating
@@ -148,7 +149,7 @@ Images are displayed on the full width of a page by default. If your image doesn
 
 Learn more about [image partials][4].
 
-[1]: https://github.com/DataDog/gobwords/tree/master/style-guide
+[1]: https://github.com/DataDog/gobwords/wiki/Style-guide
 [2]: https://github.com/DataDog/documentation/wiki/Translations-Overview
 [3]: https://github.com/DataDog/documentation/wiki
 [4]: https://github.com/DataDog/documentation/wiki/Import-an-Image
