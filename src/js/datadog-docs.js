@@ -27,58 +27,6 @@ $(document).ready(function () {
         }
     });
 
-    // API page
-    if($('.api').length) {
-        // When language buttons are clicked, show all the code snippets
-        // from that language.
-        var code_blocks = $('.code-block');
-        var lang_blocks = $('.lang-specific');
-        var hs = $('h2[id]');
-        $('.lang-btn').on('click', function (e) {
-            var el = $(this);
-
-            // Find the element currently in the view port
-            var scrollElement;
-            hs.each(function () {
-                if ($(this).offset().top >= window.scrollY) {
-                    scrollElement = $(this);
-                    return false;
-                }
-            });
-
-            // Show this language's code blocks and language-specific elements
-            var lang = el.data('lang');
-            code_blocks.hide();
-            //$('.code-block-' + lang).fadeIn();
-            $('.code-block-' + lang).show();
-            lang_blocks.hide();
-            //$('.lang-specific-' + lang).fadeIn();
-            $('.lang-specific-' + lang).show();
-
-            // Highlight the active button.
-            $('.lang-btn').removeClass('active');
-            el.addClass('active');
-
-            // Scroll to the element that was in the viewport (ie retain location).
-            if(scrollElement) {
-                var id = scrollElement.attr('id');
-                moveToAnchor(id, false);
-            }
-
-            // Add the language selection to the current URL.
-            if (history.pushState) {
-                var url = window.location.href.replace(window.location.hash, '').replace(window.location.search, '');
-                history.pushState(null, null, url + '?lang=' + lang + window.location.hash)
-            }
-
-            return false;
-        });
-    } else {
-        if(window.location.hash) {
-            moveToAnchor(window.location.hash.substr(1), false);
-        }
-    }
-
     // algolia
     if (window.location.href.indexOf('/search/') > -1) {
 
@@ -369,53 +317,6 @@ $(document).ready(function () {
         });
     }
 
-
-    // slide to anchors
-    function moveToAnchor(id, animate, amount) {
-        if (animate === undefined) {
-            animate = true;
-        }
-        if (amount === undefined) {
-            // calc from objects instead
-            if($(window).width() <= 991) {
-                // at mobile
-                amount = $('body > header').height();
-                if($('.announcement_banner.open').length) {
-                    amount += $('.announcement_banner.open').height();
-                }
-                $('.api-nav > div').each(function() { amount += $(this).height(); });
-            } else {
-                // at desktop
-                amount = $('body > header').height();
-                if($('.announcement_banner.open').length) {
-                    amount += $('.announcement_banner.open').height();
-                }
-            }
-        }
-        var href = '#'+id;
-        var htag = $(href);
-        var customPadding = 10; // how much till it looks good with eye
-        var offset = amount + customPadding;
-        var url = window.location.href.replace(window.location.hash, '');
-        var newSt = 0 - offset;
-        var currentSt = $(document).scrollTop();
-        if(htag.length) {
-            newSt = htag.offset().top - offset;
-            if(window.scrollY < 64.5){
-                newSt += (64.5 - window.scrollY);
-            }
-            if(currentSt !== newSt) {
-                if(animate) {
-                    $("html, body").animate({scrollTop: newSt}, 300);
-                } else {
-                    $(document).scrollTop(newSt);
-                }
-                $(document).trigger( "moveToAnchor" );
-                window.history.pushState(null, null, url + href);
-            }
-        }
-    }
-
     // docs on mobile dropdown trigger move to anchor
     $('.api-nav .dropdown-menu .dropdown-item').on('click', function(e) {
         var href = $(this).attr('href');
@@ -580,4 +481,103 @@ $(document).ready(function () {
             }
         }
     }
+
+    // slide to anchors
+    function moveToAnchor(id, animate, amount) {
+        if (animate === undefined) {
+            animate = true;
+        }
+        if (amount === undefined) {
+            // calc from objects instead
+            if($(window).width() <= 991) {
+                // at mobile
+                amount = $('body > header').height();
+                if($('.announcement_banner.open').length) {
+                    amount += $('.announcement_banner.open').height();
+                }
+                $('.api-nav > div').each(function() { amount += $(this).height(); });
+            } else {
+                // at desktop
+                amount = $('body > header').height();
+                if($('.announcement_banner.open').length) {
+                    amount += $('.announcement_banner.open').height();
+                }
+            }
+        }
+        var href = '#'+id;
+        var htag = $(href);
+        var customPadding = 10; // how much till it looks good with eye
+        var offset = amount + customPadding;
+        var url = window.location.href.replace(window.location.hash, '');
+        var newSt = 0 - offset;
+        var currentSt = $(document).scrollTop();
+        if(htag.length) {
+            newSt = htag.offset().top - offset;
+            if(window.scrollY < 64.5){
+                newSt += (64.5 - window.scrollY);
+            }
+            if(currentSt !== newSt) {
+                if(animate) {
+                    $("html, body").animate({scrollTop: newSt}, 300);
+                } else {
+                    $("body, html").scrollTop(newSt);
+                }
+                $(document).trigger( "moveToAnchor" );
+                window.history.pushState(null, null, url + href);
+            }
+        }
+    }
+
+    // API page
+    if($('.api').length) {
+        // When language buttons are clicked, show all the code snippets
+        // from that language.
+        var code_blocks = $('.code-block');
+        var lang_blocks = $('.lang-specific');
+        var hs = $('h2[id]');
+        $('.lang-btn').on('click', function (e) {
+            var el = $(this);
+
+            // Find the element currently in the view port
+            var scrollElement;
+            hs.each(function () {
+                if ($(this).offset().top >= window.scrollY) {
+                    scrollElement = $(this);
+                    return false;
+                }
+            });
+
+            // Show this language's code blocks and language-specific elements
+            var lang = el.data('lang');
+            code_blocks.hide();
+            //$('.code-block-' + lang).fadeIn();
+            $('.code-block-' + lang).show();
+            lang_blocks.hide();
+            //$('.lang-specific-' + lang).fadeIn();
+            $('.lang-specific-' + lang).show();
+
+            // Highlight the active button.
+            $('.lang-btn').removeClass('active');
+            el.addClass('active');
+
+            // Scroll to the element that was in the viewport (ie retain location).
+            if(scrollElement) {
+                var id = scrollElement.attr('id');
+                moveToAnchor(id, false);
+            }
+
+            // Add the language selection to the current URL.
+            if (history.pushState) {
+                var url = window.location.href.replace(window.location.hash, '').replace(window.location.search, '');
+                history.pushState(null, null, url + '?lang=' + lang + window.location.hash)
+            }
+
+            return false;
+        });
+    } else {
+        if(window.location.hash) {
+            moveToAnchor(window.location.hash.substr(1), false);
+        }
+    }
+
 });

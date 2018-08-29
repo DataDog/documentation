@@ -33,8 +33,8 @@ Your individual Datadog alerts with groups will [have notification][1] rollups o
     For example: if CPU is high AND disk is high on a host, trigger the alert.
 
 * Use some built-in analysis modules with Anomaly or Outlier
-    * Anomaly Detection utilizes some seasonality analysis to issue an alert when a data stream behaves in a historically inconsistent way.
-    * Outlier Detection utilizes other data streams of the same context to issue an alert when a stream behaves in a way different compared with its peers
+    * Anomaly Detection uses some seasonality analysis to issue an alert when a data stream behaves in a historically inconsistent way.
+    * Outlier Detection uses other data streams of the same context to issue an alert when a stream behaves in a way different compared with its peers
     * Both can also be used in conjunction with Composite alerts.
     * If you would like a visual introduction to anomaly and outlier detection, this gist is a [screenboard][2] post to the Datadog API with examples and documentation links for both.
 

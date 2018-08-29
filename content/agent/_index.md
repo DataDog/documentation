@@ -55,35 +55,57 @@ Agent 6 is the latest major version of the Datadog Agent. The big difference bet
 
 ## Agent configuration files migration
 
-To automatically transition Agent configuration paths and formats from Agent v5 to Agent v6, use the `import` command:
+To automatically transition Agent configuration paths and formats from Agent v5 to Agent v6, use the `import` command. The command parses an existing v5 `datadog.conf` and converts the configuration options to the new v6 `datadog.yaml` format. It also copies configuration files for checks that are currently enabled.
+
+{{< tabs >}}
+{{% tab "Linux" %}}
 
 `sudo -u dd-agent -- datadog-agent import`
 
-The command parses an existing v5 `datadog.conf` and converts the configuration options to the new v6 `datadog.yaml` format. It also copies configuration files for checks that are currently enabled.
-
-For Mac and Windows environments, use:
+{{% /tab %}}
+{{% tab "macOS" %}}
 
 `datadog-agent import <old_configuration_dir> <destination_dir>`
 
 With:
 
 * `<old_configuration_dir>` is the directory containing the `datadog.conf` file
-* `<destination_dir>` is the directory where the imported `datadog.yaml` is written (use the same directory as `<old_configuration_dir>` on both Mac & Windows environment).
+* `<destination_dir>` is the directory where the imported `datadog.yaml` is written (you can use the same directory as `<old_configuration_dir>`).
 
-**Note**: On Windows, `datadog.conf` is automatically upgraded to `datadog.yaml` on upgrade.
+{{% /tab %}}
+{{% tab "Windows" %}}
+
+`datadog-agent import <old_configuration_dir> <destination_dir>`
+
+With:
+
+* `<old_configuration_dir>` is the directory containing the `datadog.conf` file
+* `<destination_dir>` is the directory where the imported `datadog.yaml` is written (you can use the same directory as `<old_configuration_dir>`).
+
+**Note**: `datadog.conf` is automatically upgraded to `datadog.yaml` on upgrade.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Resource overhead
 
-### Agent v6
+{{< tabs >}}
+{{% tab "Agent v6" %}}
+
 * CPU: \~ 0.12% of the CPU used on average
 * Memory: \~ 55Mo of RAM used
 * Network bandwidth: \~ 86 B/s &#9660; | 260 B/s &#9650;
 
-### Agent v5
+{{% /tab %}}
+{{% tab "Agent v5" %}}
+
 * CPU: \~ 0.35% of the CPU used on average
 * Memory: \~ 115Mo of RAM used
 * Network bandwidth: \~ 1900 B/s &#9660; | 800 B/s &#9650;
 * Disk: Linux 120MB | Windows 60MB
+
+{{% /tab %}}
+{{< /tabs >}}
 
 Caveats:
 
@@ -144,7 +166,8 @@ Once the Agent is running, use the `datadog-agent launch-gui` command to launch 
 
 ## Supported OSs versions
 
-### Agent v6
+{{< tabs >}}
+{{% tab "Agent v6" %}}
 
 | OS                                 | Supported versions                                       |
 | :----                              | :----                                                    |
@@ -161,7 +184,19 @@ Once the Agent is running, use the `datadog-agent launch-gui` command to launch 
 
 **Note**: [Source][16] install may work on operating systems not listed here and is supported on a best effort basis.
 
-### Agent v5
+[7]: /agent/basic_agent_usage/deb
+[8]: /agent/basic_agent_usage/ubuntu
+[9]: /agent/basic_agent_usage/redhat
+[10]: /agent/basic_agent_usage/suse
+[11]: /agent/basic_agent_usage/fedora
+[12]: /agent/basic_agent_usage/osx
+[13]: /agent/basic_agent_usage/windows
+[14]: /agent/basic_agent_usage/docker
+[15]: /agent/basic_agent_usage/kubernetes
+[16]: /agent/basic_agent_usage/source
+
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
 | OS                                 | Supported versions             |
 | :----                              | :----                          |
@@ -178,16 +213,6 @@ Once the Agent is running, use the `datadog-agent launch-gui` command to launch 
 
 **Note**: [Source][16] install may work on operating systems not listed here and is supported on a best effort basis.
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
-[1]: https://github.com/DataDog/dd-agent
-[2]: https://github.com/DataDog/datadog-agent
-[3]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md
-[4]: /integrations
-[5]: /developers/metrics/custom_metrics/
-[6]: /developers/dogstatsd
 [7]: /agent/basic_agent_usage/deb
 [8]: /agent/basic_agent_usage/ubuntu
 [9]: /agent/basic_agent_usage/redhat
@@ -198,4 +223,18 @@ Once the Agent is running, use the `datadog-agent launch-gui` command to launch 
 [14]: /agent/basic_agent_usage/docker
 [15]: /agent/basic_agent_usage/kubernetes
 [16]: /agent/basic_agent_usage/source
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://github.com/DataDog/dd-agent
+[2]: https://github.com/DataDog/datadog-agent
+[3]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md
+[4]: /integrations
+[5]: /developers/metrics/custom_metrics/
+[6]: /developers/dogstatsd
 [17]: /developers/metrics/distributions 
