@@ -75,7 +75,7 @@ The events below will be available per integration:
 
 [Learn more about Datadog-Kubernetes integration][6]
 
-To access and utilize these events in Datadog, use the following three methods:
+To access and use these events in Datadog, use the following three methods:
 
 * [Events stream][1]
 * [Monitors][2]
