@@ -149,7 +149,7 @@ Images are displayed on the full width of a page by default. If your image doesn
 
 Learn more about [image partials][4].
 
-[1]: https://github.com/DataDog/gobwords/tree/master/style-guide
+[1]: https://github.com/DataDog/gobwords/wiki/Style-guide
 [2]: https://github.com/DataDog/documentation/wiki/Translations-Overview
 [3]: https://github.com/DataDog/documentation/wiki
 [4]: https://github.com/DataDog/documentation/wiki/Import-an-Image
