@@ -580,4 +580,9 @@ $(document).ready(function () {
         }
     }
 
+    // Hash menu item
+    $(".sidenav-nav a").click(function(){
+        moveToAnchor(window.location.hash.substr(1), true);
+    });
+
 });
