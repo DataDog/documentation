@@ -72,12 +72,13 @@ If you are interested by only one of the sections of this document, for each sec
 
 Open the following ports in order to benefit from all the Agent functionalities: 
 
-### Agent v6
+{{< tabs >}}
+{{% tab "Agent v6" %}}
 
 * **Outbound**:
 
   * `443/tcp`: port for most Agent data. (Metrics, APM, Live Processes/Containers) 
-  * `123/udp`: NTP - [More details on the importance of NTP here][5].
+  * `123/udp`: NTP - [More details on the importance of NTP][5].
   * `10516/tcp`: port for the [Log collection][3]
   * `10255/tcp`: port for the [Kubernetes http kubelet][8]
   * `10250/tcp`: port for the [Kubernetes https kubelet][8]
@@ -95,14 +96,22 @@ Open the following ports in order to benefit from all the Agent functionalities:
   
   * `8126/tcp`: port for the [APM Receiver][1]
 
-### Agent v4 and v5 
+[1]: /tracing
+[3]: /logs
+[5]: /agent/faq/network-time-protocol-ntp-offset-issues/
+[6]: /integrations/go_expvar/
+[7]: /agent/#using-the-gui
+[8]: /agent/basic_agent_usage/kubernetes/
 
-* **Outbound**
+{{% /tab %}}
+{{% tab "Agent v5 & v4" %}}
+
+* **Outbound**:
 
   * `443/tcp`: port for most Agent data. (Metrics, APM, Live Processes/Containers) 
-  * `123/udp`: NTP - [More details on the importance of NTP here][5].
+  * `123/udp`: NTP - [More details on the importance of NTP][5].
 
-* **Inbound**
+* **Inbound**:
 
   * `8125/udp`: dogstatsd. Unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost: 
 
@@ -113,6 +122,13 @@ Open the following ports in order to benefit from all the Agent functionalities:
   * `8126/tcp`: port for the [APM Receiver][1]
   * `17123/tcp`: Agent forwarder, used to buffer traffic in case of network splits between the Agent and Datadog
   * `17124/tcp`: optional graphite adapter
+
+[1]: /tracing
+[5]: /agent/faq/network-time-protocol-ntp-offset-issues/
+
+{{% /tab %}}
+{{< /tabs >}}
+
 
 ## Using Proxies
 

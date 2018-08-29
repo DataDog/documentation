@@ -26,16 +26,36 @@ This page outlines the basic features of the Datadog Agent for Amazon Linux. If 
 
 In Agent v6, the service manager provided by the operating system is responsible for the Agent lifecycle, while other commands must be run via the Agent binary directly. In Agent v5, almost everything is done via the service manager.
 
-| Agent v5                                          | Agent v6                                               | Notes                              |
-| ------------------------------------------------- | ------------------------------------------------------ | ---------------------------------- |
-| `sudo service datadog-agent start`                | `sudo service datadog-agent start`                     | Start Agent as a service           |
-| `sudo service datadog-agent stop`                 | `sudo service datadog-agent stop`                      | Stop Agent running as a service    |
-| `sudo service datadog-agent restart`              | `sudo service datadog-agent restart`                   | Restart Agent running as a service |
-| `sudo service datadog-agent status`               | `sudo service datadog-agent status`                    | Status of Agent service            |
-| `sudo service datadog-agent info`                 | `sudo datadog-agent status`                            | Status page of running Agent       |
-| `sudo service datadog-agent flare`                | `sudo datadog-agent flare`                             | Send flare                         |
-| `sudo service datadog-agent`                      | `sudo datadog-agent --help`                            | Display command usage              |
-| `sudo -u dd-agent -- dd-agent check <check_name>` | `sudo -u dd-agent -- datadog-agent check <check_name>` | Run a check                        |
+{{< tabs >}}
+{{% tab "Agent v6" %}}
+
+| Description                        | Command                                                |
+| --------------------               | --------------------                                   |
+| Start Agent as a service           | `sudo service datadog-agent start`                     |
+| Stop Agent running as a service    | `sudo service datadog-agent stop`                      |
+| Restart Agent running as a service | `sudo service datadog-agent restart`                   |
+| Status of Agent service            | `sudo service datadog-agent status`                    |
+| Status page of running Agent       | `sudo datadog-agent status`                            |
+| Send flare                         | `sudo datadog-agent flare`                             |
+| Display command usage              | `sudo datadog-agent --help`                            |
+| Run a check                        | `sudo -u dd-agent -- datadog-agent check <check_name>` |
+
+{{% /tab %}}
+{{% tab "Agent v5" %}}
+
+| Description                        | Command                                           |
+| --------------------               | --------------------                              |
+| Start Agent as a service           | `sudo service datadog-agent start`                |
+| Stop Agent running as a service    | `sudo service datadog-agent stop`                 |
+| Restart Agent running as a service | `sudo service datadog-agent restart`              |
+| Status of Agent service            | `sudo service datadog-agent status`               |
+| Status page of running Agent       | `sudo service datadog-agent info`                 |
+| Send flare                         | `sudo service datadog-agent flare`                |
+| Display command usage              | `sudo service datadog-agent`                      |
+| Run a check                        | `sudo -u dd-agent -- dd-agent check <check_name>` |
+
+{{% /tab %}}
+{{< /tabs >}}
 
 **Note**: If `service` is not available on your system, use:
 
@@ -46,31 +66,60 @@ In Agent v6, the service manager provided by the operating system is responsible
 
 ## Configuration
 
+{{< tabs >}}
+{{% tab "Agent v6" %}}
 The configuration files and folders for the Agent are located in:
 
-| Agent v5                     | Agent v6                          |
-| :-----                       | :----                             |
-| `/etc/dd-agent/datadog.conf` | `/etc/datadog-agent/datadog.yaml` |
+* `/etc/datadog-agent/datadog.yaml` 
 
 Configuration files for [Integrations][2]:
 
-| Agent v5                | Agent v6                     |
-| :-----                  | :----                        |
-| `/etc/dd-agent/conf.d/` | `/etc/datadog-agent/conf.d/` |
+* `/etc/datadog-agent/conf.d/` 
 
+[2]: /integrations
+
+{{% /tab %}}
+{{% tab "Agent v5" %}}
+
+The configuration files and folders for the Agent are located in:
+
+* `/etc/dd-agent/datadog.conf`  
+
+Configuration files for [Integrations][2]:
+
+* `/etc/dd-agent/conf.d/` 
+
+[2]: /integrations
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Troubleshooting
+{{< tabs >}}
+{{% tab "Agent v6" %}}
 
-Run the `status` (or `info` in v5) command to see the state of the Agent. The Agent logs are located in the `/var/log/datadog/` directory:
+Run the `status` command to see the state of the Agent. The Agent logs are located in the `/var/log/datadog/` directory and are consolidated in the `agent.log` file.
 
-* For Agent v6, all logs are consolidated in `agent.log`
-* For Agent v5, logs are split into:
+If you're still having trouble, [our support team][3] is glad to provide further assistance.
+
+[3]: /help
+
+{{% /tab %}}
+{{% tab "Agent v5" %}}
+
+Run the `info` command to see the state of the Agent. The Agent logs are located in the `/var/log/datadog/` directory and are split into:
+
   * `datadog-supervisord.log`
   * `collector.log`
   * `dogstatsd.log`
   * `forwarder.log`
 
 If you're still having trouble, [our support team][3] is glad to provide further assistance.
+
+[3]: /help
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Working with the embedded Agent
 

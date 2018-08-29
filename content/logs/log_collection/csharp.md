@@ -26,7 +26,9 @@ To send your C# logs to Datadog, we recommend logging to a file and then tailing
 We strongly encourage setting up your logging library to produce your logs in JSON format to avoid the need for [custom parsing rules][1].
 
 ## Configure your logger
-### SeriLog
+{{< tabs >}}
+{{% tab "SeriLog" %}}
+
 Like many other libraries for .NET, Serilog provides diagnostic logging into files, console, and elsewhere. It is easy to set up, has a clean API, and is portable between recent .NET platforms.
 
 Unlike other logging libraries, Serilog is built with powerful structured event data in mind.
@@ -77,7 +79,10 @@ Then check the `log.json` file to see the following event:
 
 [Monitor now your log file with your Agent][2] to send your logs to your Datadog application
 
-### NLog
+[2]: /logs/#tail-existing-files
+
+{{% /tab %}}
+{{% tab "NLog" %}}
 
 NLog is a logging platform for .NET with rich log routing and management capabilities. It can help you produce and manage high-quality logs for your application regardless of its size or complexity.
 
@@ -146,8 +151,10 @@ namespace Datadog
 
 [Monitor now your log file with your Agent][2] to send your logs to your Datadog application.
 
-### Log4Net
+[2]: /logs/#tail-existing-files
 
+{{% /tab %}}
+{{% tab "Log4Net" %}}
 Log4Net is a logging platform for .NET inspired from Log4j with rich log routing and management capabilities. It can help you produce and manage high-quality logs for your application regardless of its size or complexity.
 
 To install it, run the following command in the Package Manager Console
@@ -240,6 +247,9 @@ If, despite the benefits of logging in JSON, you wish to log in raw string forma
 <param name="ConversionPattern" value="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread] %logger %method:%line - %message%n" />
 ```
 
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Configure your Datadog Agent
 
 Create a `csharp.d/conf.yaml` file in your `conf.d/` folder with the following content:
@@ -276,8 +286,8 @@ That's it! Now, all your logs are going to be in proper JSON automatically under
 ## Agentless logging
 
 It is possible to stream logs from your application to Datadog or to the Datadog Agent directly. This is not the recommended setup as handling connection issues should not be done directly in your application, but it might not be possible to log to a file when your application is running on a machine that cannot be accessed.
-
-### SeriLog 
+{{< tabs >}}
+{{% tab "SeriLog" %}}
 
 Install the Datadog [Serilog sink][4], which send events and logs to Datadog. By default the sink uses a TCP connection over SSL.
 Run the following command in the Package Manager Console: 
@@ -305,11 +315,14 @@ var log = new LoggerConfiguration()
 
 New logs are now directly sent to Datadog.
 
+[3]: https://app.datadoghq.com/account/settings#api
+[4]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs/
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/processing/parsing
-[2]: /logs/#tail-existing-files
-[3]: https://app.datadoghq.com/account/settings#api
-[4]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs/
