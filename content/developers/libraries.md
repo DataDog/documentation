@@ -112,7 +112,7 @@ If you've written a Datadog library and would like to add it to this page, write
    [17]: https://github.com/zendesk/consul2dogstats
    [18]: https://github.com/cvent/dogscaler
    [19]: https://github.com/urosgruber/dd-agent-FreeBSD
-   [20]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/tools/networking/dd-agent/default.nix
+   [20]: https://github.com/NixOS/nixpkgs/tree/master/pkgs/tools/networking/dd-agent
    [21]: https://github.com/Dynatrace/Dynatrace-AppMon-Datadog-Plugin
    [22]: https://docs.moogsoft.com/display/060102/Datadog+Solution+Pak
    [23]: https://github.com/sensu-plugins/sensu-plugins-datadog
