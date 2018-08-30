@@ -99,7 +99,7 @@ func main() {
 }
 ```
 
-For more tracer settings, check out available options in our [config documentation][config docs].
+For more tracer settings, see available options in our [config documentation][config docs].
 
 ## Further Reading
 
