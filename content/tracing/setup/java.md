@@ -123,7 +123,7 @@ Don't see your desired networking framework? We're continually adding additional
 *  Oracle
 *  Postgres SQL
 
-**Datastore tracing provides:** timing request to response, query info (e.g. a sanitized query string) and error and stacktrace capturing.
+**Datastore tracing provides:** timing request to response, query info (e.g. a sanitized query string), and error and stacktrace capturing.
 
 Don't see your desired datastores? We're continually adding additional support, [check with our team][2] to see if we can help.
 
