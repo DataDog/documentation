@@ -93,7 +93,7 @@ Don't see your desired web frameworks? We're continually adding additional suppo
 | Lettuce                      | 5.0+     | Beta            | `-Ddd.integration.lettuce.enabled=true`                                       |
 | SpyMemcached                 | 2.12+    | Beta            | `-Ddd.integration.spymemcached.enabled=true`                                  |
 
-**Networking tracing provides:** timing request to response, tags for the request (e.g. response code), error and stacktrace capturing and Distributed Tracing.
+**Networking tracing provides:** timing request to response, tags for the request (e.g. response code), error and stacktrace capturing, and distributed tracing.
 
 Don't see your desired networking framework? We're continually adding additional support, [check with our team][2] to see if we can help.
 
