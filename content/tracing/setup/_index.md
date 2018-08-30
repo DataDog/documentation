@@ -40,8 +40,8 @@ To start tracing your application:
       {{< nextlink href="tracing/setup/ruby" tag="Ruby" >}}Ruby language instrumentation{{< /nextlink >}}
       {{< nextlink href="tracing/setup/go" tag="Go" >}}Go language instrumentation.{{< /nextlink >}}
       {{< nextlink href="tracing/setup/nodejs" tag="Nodejs" >}}Node.js language instrumentation.{{< /nextlink >}}
-      {{< nextlink href="tracing/setup/dotnet" tag=".NET" >}}.NET language instrumentation.{{< /nextlink >}}
-      {{< nextlink href="tracing/setup/php" tag="PHP" >}}PHP language instrumentation.{{< /nextlink >}}
+      {{< nextlink href="tracing/setup/dotnet" tag=".NET" >}}.NET language instrumentation. (Coming Soon){{< /nextlink >}}
+      {{< nextlink href="tracing/setup/php" tag="PHP" >}}PHP language instrumentation. (Coming Soon){{< /nextlink >}}
   {{< /whatsnext >}}
 
 
