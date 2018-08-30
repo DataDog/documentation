@@ -576,7 +576,7 @@ public class Application {
         // Initialize the tracer from environment variables or system properties
         Tracer tracer = new DDTracer();
         GlobalTracer.register(tracer);
-        // register the same tracer with the Datadog api
+        // register the same tracer with the Datadog API
         datadog.trace.api.GlobalTracer.registerIfAbsent(tracer);
 
         // OR from the API
@@ -584,7 +584,7 @@ public class Application {
         Sampler sampler = new AllSampler();
         Tracer tracer = new DDTracer(writer, sampler);
         GlobalTracer.register(tracer);
-        // register the same tracer with the Datadog api
+        // register the same tracer with the Datadog API
         datadog.trace.api.GlobalTracer.registerIfAbsent(tracer);
 
         // ...
