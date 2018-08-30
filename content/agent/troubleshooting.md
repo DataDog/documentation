@@ -68,61 +68,115 @@ Since the Datadog Agent is completely open source, you can [verify the code's be
 
 In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if you don't specify a case ID, the command asks for an email address that is used to login in your organization and creates a new support case.
 
-| Platform        | Agent v5                                                                | Agent v6                                              |
-| :--------       | :-----                                                                  | :--------                                             |
-| Linux           | `sudo /etc/init.d/datadog-agent flare <CASE_ID>`                        | `sudo -u dd-agent -- datadog-agent flare <CASE_ID>`   |
-| Docker          | `docker exec -it dd-agent /etc/init.d/datadog-agent flare <CASE_ID>`    | `docker exec -it datadog-agent agent flare <CASE_ID>` |
-| Docker (Alpine) | `docker exec -it dd-agent /opt/datadog-agent/bin/agent flare <CASE_ID>` |                                                       |
-| macOS           | `datadog-agent flare <CASE_ID>`                                         | `datadog-agent flare <CASE_ID>` or web [web GUI][8]   |
-| CentOS          | `sudo service datadog-agent flare <CASE_ID>`                            | `sudo datadog-agent flare <CASE_ID>`                  |
-| Debian          | `sudo service datadog-agent flare <CASE_ID>`                            | `sudo datadog-agent flare <CASE_ID>`                  |
-| Kubernetes      | `kubectl exec <pod-name> -it /etc/init.d/datadog-agent flare <CASE_ID>` | `kubectl exec <pod-name> -it agent flare <CASE_ID>`   |
-| Fedora          | `sudo service datadog-agent flare <CASE_ID>`                            | `sudo datadog-agent flare <CASE_ID>`                  |
-| Redhat          | `sudo service datadog-agent flare <CASE_ID>`                            | `sudo datadog-agent flare <CASE_ID>`                  |
-| Suse            | `sudo service datadog-agent flare <CASE_ID>`                            | `sudo datadog-agent flare <CASE_ID>`                  |
-| Source          | `sudo ~/.datadog-agent/bin/agent flare <CASE_ID>`                       | `sudo datadog-agent flare <CASE_ID>`                  |
-| Windows         | [Consult our dedicated windows doc][9]                                  | [Consult our dedicated windows doc][10]               |
+{{< tabs >}}
+{{% tab "Agent v6" %}}
+
+| Platform   | Command                                               |
+| :--------  | :--------                                             |
+| Linux      | `sudo -u dd-agent -- datadog-agent flare <CASE_ID>`   |
+| Docker     | `docker exec -it datadog-agent agent flare <CASE_ID>` |
+| macOS      | `datadog-agent flare <CASE_ID>` or web [web GUI][8]   |
+| CentOS     | `sudo datadog-agent flare <CASE_ID>`                  |
+| Debian     | `sudo datadog-agent flare <CASE_ID>`                  |
+| Kubernetes | `kubectl exec <pod-name> -it agent flare <CASE_ID>`   |
+| Fedora     | `sudo datadog-agent flare <CASE_ID>`                  |
+| Redhat     | `sudo datadog-agent flare <CASE_ID>`                  |
+| Suse       | `sudo datadog-agent flare <CASE_ID>`                  |
+| Source     | `sudo datadog-agent flare <CASE_ID>`                  |
+| Windows    | [Consult our dedicated windows doc][10]               |
+
+[10]: /agent/basic_agent_usage/windows/#agent-v6
+
+{{% /tab %}}
+{{% tab "Agent v5" %}}
+
+| Platform        | Command                                                                 |
+| :--------       | :-----                                                                  |
+| Linux           | `sudo /etc/init.d/datadog-agent flare <CASE_ID>`                        |
+| Docker          | `docker exec -it dd-agent /etc/init.d/datadog-agent flare <CASE_ID>`    |
+| Docker (Alpine) | `docker exec -it dd-agent /opt/datadog-agent/bin/agent flare <CASE_ID>` |
+| macOS           | `datadog-agent flare <CASE_ID>`                                         |
+| CentOS          | `sudo service datadog-agent flare <CASE_ID>`                            |
+| Debian          | `sudo service datadog-agent flare <CASE_ID>`                            |
+| Kubernetes      | `kubectl exec <pod-name> -it /etc/init.d/datadog-agent flare <CASE_ID>` |
+| Fedora          | `sudo service datadog-agent flare <CASE_ID>`                            |
+| Redhat          | `sudo service datadog-agent flare <CASE_ID>`                            |
+| Suse            | `sudo service datadog-agent flare <CASE_ID>`                            |
+| Source          | `sudo ~/.datadog-agent/bin/agent flare <CASE_ID>`                       |
+| Windows         | [Consult our dedicated windows doc][9]                                  |
+
+**Note**: If you are using a Linux based system and the `service` wrapper command is not available, [consult the list of alternatives][4].
+
+[9]: /agent/basic_agent_usage/windows/#agent-v5
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Status of an Agent check
 
 Agent checks must be called by the Agent. To test an Agent check, run:
 
-| Agent version | Command                                             |
-| :------       | :----                                               |
-| v5.x          | `sudo -u dd-agent dd-agent check <CHECK_NAME>`      |
-| v6.x          | `sudo -u dd-agent datadog-agent check <CHECK_NAME>` |
+{{< tabs >}}
+{{% tab "Agent v6" %}}
+
+* `sudo -u dd-agent datadog-agent check <CHECK_NAME>`
 
 If you want to include rate metrics, add `--check-rate` to your command, for instance for Agent v6.x run:
 
-```
-sudo -u dd-agent datadog-agent check <CHECK_NAME> --check-rate
-```
+* `sudo -u dd-agent datadog-agent check <CHECK_NAME> --check-rate`
+ 
+{{% /tab %}}
+{{% tab "Agent v5" %}}
+
+* `sudo -u dd-agent dd-agent check <CHECK_NAME>`
+
+If you want to include rate metrics, add `--check-rate` to your command, for instance for Agent v6.x run:
+
+* `sudo -u dd-agent dd-agent check <CHECK_NAME> --check-rate`
+
+{{% /tab %}}
+{{< /tabs >}}
 
 If your issue continues, [reach out to our Support team][5] with a [flare](#flare).
 
 ### Windows
 
-* **For Agent version < 5.12**:
-    The Agent install includes a file called `shell.exe` in your `\Program Files\` directory for the Datadog Agent which you can use to run Python within the Agent environment. Once your check (called `<CHECK_NAME>`) is written and you have the `.py` and `.yaml` files in their correct places, you can run the following in shell.exe:
-    ```
-    from checks import run_check
-    run_check('<CHECK_NAME>')
-    ```
-    This outputs any metrics or events that the check returns.
+{{< tabs >}}
+{{% tab "Agent v6" %}}
 
-* **For Agent version >= 5.12**:
-    Run the following script, with the proper `<CHECK_NAME>`:
-    `<INSTALL_DIR>/embedded/python.exe <INSTALL_DIR>agent/agent.py check <CHECK_NAME>`
-    For example, to run the disk check:
-    ```
-    C:\Program' 'Files\Datadog\Datadog' 'Agent\embedded\python.exe C:\Program' 'Files\Datadog\Datadog' 'Agent\agent\agent.py check disk
-    ```
+Run the following script, with the proper `<CHECK_NAME>`:
 
-* **For Agent version > 6.0**:
-    Run the following script, with the proper `<CHECK_NAME>`:
-    ```
-    C:\Program Files\Datadog\Datadog agent\embedded\agent.exe check <CHECK_NAME>
-    ```
+```
+C:\Program Files\Datadog\Datadog agent\embedded\agent.exe check <CHECK_NAME>
+```
+
+{{% /tab %}}
+{{% tab "Agent v<=5.11" %}}
+
+The Agent install includes a file called `shell.exe` in your `\Program Files\` directory for the Datadog Agent which you can use to run Python within the Agent environment. Once your check (called `<CHECK_NAME>`) is written and you have the `.py` and `.yaml` files in their correct places, you can run the following in shell.exe:
+
+```
+from checks import run_check
+run_check('<CHECK_NAME>')
+```
+
+This outputs any metrics or events that the check returns.
+
+{{% /tab %}}
+{{% tab "Agent v>=5.12" %}}
+
+Run the following script, with the proper `<CHECK_NAME>`:
+
+`<INSTALL_DIR>/embedded/python.exe <INSTALL_DIR>agent/agent.py check <CHECK_NAME>`
+
+For example, to run the disk check:
+
+```
+C:\Program' 'Files\Datadog\Datadog' 'Agent\embedded\python.exe C:\Program' 'Files\Datadog\Datadog' 'Agent\agent\agent.py check disk
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## FAQ
 
@@ -150,8 +204,6 @@ If your issue continues, [reach out to our Support team][5] with a [flare](#flar
 [6]: /agent/faq/agent-5-container-more-log
 [7]: https://github.com/DataDog/dd-agent/blob/master/utils/flare.py
 [8]: /agent/#using-the-gui
-[9]: /agent/basic_agent_usage/windows/#agent-v5
-[10]: /agent/basic_agent_usage/windows/#agent-v6
 [11]: /agent/faq/common-windows-agent-installation-error-1721
 [12]: /agent/faq/how-to-monitor-snmp-devices
 [13]: /agent/faq/i-stoped-my-agent-but-i-m-still-seeing-the-host
