@@ -33,9 +33,7 @@ Next, install the Datadog Tracing library using pip:
 pip install ddtrace
 ```
 
-Then to instrument your Python application use the included `ddtrace-run`
-command. To use it, prefix your Python entry-point command with
-`ddtrace-run`.
+Then to instrument your Python application use the included `ddtrace-run` command. To use it, prefix your Python entry-point command with `ddtrace-run`.
 
 For example, if your application is started with `python app.py` then:
 
@@ -43,8 +41,7 @@ For example, if your application is started with `python app.py` then:
 $ ddtrace-run python app.py
 ```
 
-For more advanced usage, configuration and fine-grained control check out our
-[API documentation](http://pypi.datadoghq.com/trace/docs/).
+For more advanced usage, configuration, and fine-grain control, see our [API documentation](http://pypi.datadoghq.com/trace/docs/).
 
 
 ## Compatibility
