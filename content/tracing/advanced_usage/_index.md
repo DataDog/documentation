@@ -703,9 +703,9 @@ The following tags are available to override Datadog specific options:
 
 Distributed tracing allows you to propagate a single trace across multiple services and hosts, so you can see performance end-to-end. Linking is implemented by injecting Datadog Metadata into the request headers.
 
-Distributed Tracing headers are language agnostic. A trace started in one language may propagate to another (for example, from Python to Java).
+Distributed tracing headers are language agnostic. A trace started in one language may propagate to another (for example, from Python to Java).
 
-Distributed Traces may sample inconsistently when the linked traces run on different hosts. To ensure that distributed traces are complete, enable [priority sampling][priority sampling].
+Distributed traces may sample inconsistently when the linked traces run on different hosts. To ensure that distributed traces are complete, enable [priority sampling][priority sampling].
 
 [priority sampling]: #priority-sampling
 
@@ -779,7 +779,7 @@ public class MyHttpRequestExtractAdapter implements TextMap {
 {{% /tab %}}
 {{% tab "Python" %}}
 
-Distributed tracing is disabled by default. Please refer to the configuration documentation for each framework to enable it.
+Distributed tracing is disabled by default. Refer to the configuration documentation for each framework to enable it.
 
 Distributed tracing is supported in the following frameworks: 
 
@@ -802,7 +802,7 @@ To add your own distributed tracing refer to our [API documentation][py_dist_tra
 {{% /tab %}}
 {{% tab "Ruby" %}} 
 
-Distributed tracing is disabled by default. Please refer to the configuration documentation for each framework to enable it.
+Distributed tracing is disabled by default. Refer to the configuration documentation for each framework to enable it.
 
 Distributed tracing is supported in the following frameworks:
 
@@ -816,7 +816,7 @@ Distributed tracing is supported in the following frameworks:
 | Rest Client       | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#restclient  |
 | Sinatra           | https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#sinatra     |
 
-For more details about how to activate and configure distributed tracing, check out the [API documentation][distributed tracing ruby].
+For more details about how to activate and configure distributed tracing, see the [API documentation][distributed tracing ruby].
 
 [distributed tracing ruby]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#distributed-tracing
 
@@ -886,7 +886,7 @@ Priority sampling allows traces between two Datadog endpoints to be sampled toge
 
 Priority sampling automatically assigns and propagates a priority value along all traces, depending on their service and volume. Priorities can also be set manually to drop non-interesting traces or keep important ones.
 
-For a more detailed explaination of sampling and priority sampling, please reference our [sampling and storage][sampling and storage] documentation. 
+For a more detailed explaination of sampling and priority sampling, see our [sampling and storage][sampling and storage] documentation. 
 
 [sampling and storage]: https://docs.datadoghq.com/tracing/getting_further/trace_sampling_and_storage/
 
@@ -966,7 +966,7 @@ Datadog.configure do |c|
 end
 ```
 
-Once enabled, the sampler automatically assignes a value of `AUTO_REJECT` or `AUTO_KEEP` to traces, depending on their service and volume.
+Once enabled, the sampler automatically assigns a value of `AUTO_REJECT` or `AUTO_KEEP` to traces, depending on their service and volume.
 
 You can also set this priority manually to either drop a non-interesting trace or to keep an important one. For that, set the `Context#sampling_priority` to:
 
@@ -987,9 +987,9 @@ Possible values for the sampling priority tag are:
 | `Datadog::Ext::Priority::USER_REJECT` | The user asked to not keep the trace. The Agent will drop it.                                              |
 | `Datadog::Ext::Priority::USER_KEEP`   | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                     |
 
-When not using [distributed tracing](#distributed-tracing), you may change the priority at any time, as long as the trace is not finished yet. However, it must be done before any context propagation (fork, RPC calls) to be effective in a distributed context. Changing the priority after such context has been propagated causes different parts of a distributed trace to use different priorities. Some parts might be kept, some parts might be rejected, and consequently can cause the trace to be partially stored and remain incomplete.
+When not using [distributed tracing](#distributed-tracing), you may change the priority at any time, as long as the trace is not finished yet. However, it must be done before any context propagation (e.g. fork, RPC calls) to be effective in a distributed context. Changing the priority after such context has been propagated causes different parts of a distributed trace to use different priorities. Some parts might be kept, some parts might be rejected, and consequently this can cause the trace to be partially stored and remain incomplete.
 
-When changing the priority, it is recommended that it is done as soon as possible, when the root span has just been created.
+It is recommended that changing priority be done as soon as possible, when the root span has just been created.
 
 See the [API documentation][ruby api doc] for more details.
 
@@ -1046,7 +1046,7 @@ Coming Soon. Reach out to our [support team][contact support] to be part of the 
 
 ## Logging
 
-Datadog's logging APIs allows for accessing active tracing identifiers which can be used to correlate APM traces with specific log events.
+Datadog's logging APIs allow for accessing active tracing identifiers, which can be used to correlate APM traces with specific log events.
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -1164,7 +1164,6 @@ We discourage enabling debug mode on your production systems as it increases the
 To return debug level application logs, enable debug mode with the flag `-Ddatadog.slf4j.simpleLogger.defaultLogLevel=debug` when starting the JVM.
 
 {{% /tab %}}
-
 {{% tab "Python" %}}
 
 ### Enabling Debug Mode
@@ -1240,7 +1239,7 @@ By default, logging from this library is disabled. In order to get debbuging inf
 
 [init method]: https://datadog.github.io/dd-trace-js/Tracer.html#init
 
-The tracer will then log debug information to `console.log()` and errors to `console.error()`. This behavior can be changed by passing a custom logger to the tracer. The logger should contain a `debug()` and `error()` methods that can handle messages and errors, respectively.
+The tracer will then log debug information to `console.log()` and errors to `console.error()`. This behavior can be changed by passing a custom logger to the tracer. The logger should contain `debug()` and `error()` methods that can handle messages and errors, respectively.
 
 For example:
 
