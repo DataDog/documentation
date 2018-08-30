@@ -5,7 +5,7 @@ kind: documentation
 
 ## Custom Tagging
 
-Custom Tagging allows adding tags in a form of key-value pairs to specific spans. These tags are used to correlate traces with other Datadog products and to provide more details about specific spans.
+Custom tagging allows adding tags in the form of key-value pairs to specific spans. These tags are used to correlate traces with other Datadog products to provide more details about specific spans.
 
 [Read more about tagging][tagging]
 
@@ -51,7 +51,7 @@ class ServletImpl extends AbstractHttpServlet {
 
 **Adding tags to a span**
 
-Add tags directly to a span by calling `set_tag`. For example with the following route handler:
+Add tags directly to a span by calling `set_tag`. For example, with the following route handler:
 
 ```python
 from ddtrace import tracer
@@ -64,7 +64,7 @@ def handle_customer(customer_id):
 
 **Adding tags to a current active span**
 
-The current span can be retrieved from the context in order to set tags. This way, if a span was started by our instrumentation, you can retrieve the span and add custom tags. Note that if a span does not exist, `None` will be returned:
+The current span can be retrieved from the context in order to set tags. This way, if a span was started by our instrumentation, you can retrieve the span and add custom tags. Note that if a span does not exist, `None` is returned:
 
 ```python
 from ddtrace import tracer
@@ -166,7 +166,7 @@ func main() {
 
 **Adding tags to a Span attached to a Context**
 
-Our integrations make use of `Context` type to propagate the current active span. If you want to add a tag to a span attached to a `Context` via automatic instrumentation, call the `SpanFromContext` function:
+Our integrations make use of the `Context` type to propagate the current active span. If you want to add a tag to a span attached to a `Context` via automatic instrumentation, call the `SpanFromContext` function:
 
 ```go
 package main
@@ -209,7 +209,7 @@ func main() {
 
 **Adding tags to a span**
 
-Add tags directly to the span objects directly by calling `setTag` or `addTags`:
+Add tags directly to span objects by calling `setTag` or `addTags`:
 
 ```javascript
 // An example of an Express endpoint,
@@ -226,7 +226,7 @@ app.get('/posts', (req, res) => {
 
 **Adding tags to a current active span**
 
-Access the current active span from any method within your code. Note however that if the method is called and there is no span currently active `tracer.scopeManager().active()` will return `null`.
+Access the current active span from any method within your code. Note, however, that if the method is called and there is no span currently active, `tracer.scopeManager().active()` returns `null`.
 
 ```javascript
 // e.g. adding tag to active span
@@ -259,16 +259,16 @@ See the [API documentation][nodejs api doc] for more details.
 
 ## Manual Instrumentation
 
-Manual Instrumentation allows programmatic creation of traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation. Before instrumenting your application, review Datadog’s [APM Terminology][apm terminology] and familiarize yourself with the core concepts of Datadog APM. 
+Manual instrumentation allows programmatic creation of traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation. Before instrumenting your application, review Datadog’s [APM Terminology][apm terminology] and familiarize yourself with the core concepts of Datadog APM. 
 
 [apm terminology]: /tracing/visualization/services_list/
 
 {{< tabs >}}
 {{% tab "Java" %}}
 
-If you aren't using a [supported framework instrumentation][java framework], or you would like additional depth in your application’s traces, you may want to to manually instrument your code.
+If you aren't using a [supported framework instrumentation][java framework], or you would like additional depth in your application’s traces, you may want to manually instrument your code.
 
-Do this either using the Trace annotation for simple method call tracing or with the [OpenTracing API][opentracing] for complex tracing.
+Do this either using the Trace annotation for simple method call tracing, or with the [OpenTracing API][opentracing] for complex tracing.
 
 Datadog's Trace annotation is provided by the [dd-trace-api dependency][trace api maven docs].
 
@@ -293,7 +293,7 @@ public class MyClass {
 {{% /tab %}}
 {{% tab "Python" %}}
 
-If you aren't using supported library instrumentation (see [Library compatibility][python lib compatibility]), you may want to to manually instrument your code.
+If you aren't using supported library instrumentation (see [library compatibility][python lib compatibility]), you may want to manually instrument your code.
 
 You may also want to extend the functionality of the ``ddtrace`` library or gain finer control over instrumenting your application. Several techniques are provided by the library to accomplish this.
 
@@ -305,8 +305,7 @@ The following examples use the global tracer object which can be imported via:
 
 **Decorator**
 
-``ddtrace`` provides a decorator that can be used to trace a particular method
-in your application:
+``ddtrace`` provides a decorator that can be used to trace a particular method in your application:
 
 ```python
   @tracer.wrap()
@@ -362,7 +361,7 @@ API details of the decorator can be found here:
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-If you aren't using supported library instrumentation (see [Library compatibility][ruby lib compatibility]), you may want to to manually instrument your code. Adding tracing to your code is easy using the `Datadog.tracer.trace` method, which you can wrap around any Ruby code.
+If you aren't using supported library instrumentation (see [library compatibility][ruby lib compatibility]), you may want to to manually instrument your code. Adding tracing to your code is easy using the `Datadog.tracer.trace` method, which you can wrap around any Ruby code.
 
 **Example Usage**
 
@@ -430,7 +429,7 @@ func main() {
 
 If you aren’t using supported library instrumentation (see [Library compatibility][nodejs compatibility]), you may want to manually instrument your code.
 
-The following example initializes a Datadog Tracer and creates a Span called `web.request`:
+The following example initializes a Datadog Tracer and creates a span called `web.request`:
 
 ```javascript
 const tracer = require('dd-trace').init()
@@ -440,7 +439,7 @@ span.setTag('http.url', '/login')
 span.finish()
 ```
 
-For more information on manual instrumentation, check out the [API documentation][nodejs api doc].
+For more information on manual instrumentation, see the [API documentation][nodejs api doc].
 
 [nodejs api doc]: https://datadog.github.io/dd-trace-js/#manual-instrumentation
 [nodejs compatibility]: /tracing/setup/nodejs/#compatibility
@@ -558,9 +557,9 @@ class InstrumentedClass {
 }
 ```
 
-In this case, you dont need to call `scope.close()`.
+In this case, you don't need to call `scope.close()`.
 
-If you’re not using `dd-java-agent.jar`, you must register a configured tracer with `GlobalTracer`. For this call `GlobalTracer.register(new DDTracer())` early on in your application startup (ie, main method).
+If you’re not using `dd-java-agent.jar`, you must register a configured tracer with `GlobalTracer`. For this, call `GlobalTracer.register(new DDTracer())` early on in your application startup (e.g., main method).
 
 ```java
 import datadog.opentracing.DDTracer;
@@ -634,7 +633,7 @@ Import the [`opentracer` package][opentracing godoc] to expose the Datadog trace
 
 ### Example
 
-A basic usage would be:
+A basic usage example:
 
 ```go
 package main
@@ -661,7 +660,7 @@ func main() {
 }
 ```
 
-**Note**: Using the [OpenTracing API][opentracing go] in parallel with the regular API or our integrations is fully supported. Under the hood, all of them make use of the same tracer. Make sure to check out the [API documentation][opentracing godoc] for more examples and details.
+**Note**: Using the [OpenTracing API][opentracing go] in parallel with the regular API or our integrations is fully supported. Under the hood, all of them make use of the same tracer. See the [API documentation][opentracing godoc] for more examples and details.
 
 [tracer godoc]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
 [opentracing godoc]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer
@@ -696,7 +695,7 @@ The following tags are available to override Datadog specific options:
 * `service.name`: The service name to be used for this span. The service name from the tracer will be used if this is not provided.
 * `resource.name`: The resource name to be used for this span. The operation name will be used if this is not provided.
 * `span.type`: The span type to be used for this span. Will fallback to `custom` if not provided.
-* 
+
 {{% /tab %}}
 {{< /tabs >}}
 
