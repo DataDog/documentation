@@ -175,4 +175,4 @@ Datadogのライブラリーを開発した場合は、是非 [code@datadoghq.co
    [97]: https://github.com/cvent/dogscaler
    [98]: https://cran.r-project.org/package=datadogr
    [99]: https://github.com/urosgruber/dd-agent-FreeBSD
-   [100]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/tools/networking/dd-agent/default.nix
+   [100]: https://github.com/NixOS/nixpkgs/tree/master/pkgs/tools/networking/dd-agent
