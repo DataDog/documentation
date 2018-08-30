@@ -71,41 +71,8 @@ If you're using `docker-compose`, `<NETWORK_NAME>` parameters are the ones defin
 
 Your application tracers must be configured to submit traces to this address. See the examples below for each supported language:
 
-#### Python
-
-```python
-from ddtrace import tracer
-
-tracer.configure(
-    hostname='datadog-agent',
-    port=8126,
-)
-```
-
-#### Ruby
-
-```ruby
-Datadog.configure do |c|
-  c.tracer hostname: 'datadog-agent',
-           port: 8126
-end
-```
-
-#### Go
-
-```go
-package main
-
-import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-
-func main() {
-    tracer.Start(tracer.WithAgentAddr("datadog-agent:8126"))
-    defer tracer.Stop()
-}
-```
-
-#### Java
-
+{{< tabs >}}
+{{% tab "Java" %}}
 Either update the Java Agent configuration via environment variables:
 
 ```bash
@@ -122,15 +89,46 @@ java -javaagent:/path/to/the/dd-java-agent.jar \
      -Ddd.agent.port=8126 \
      -jar /your/app.jar
 ```
+{{% /tab %}}
+{{% tab "Python" %}}
+```python
+from ddtrace import tracer
 
-#### Node.js
+tracer.configure(
+    hostname='datadog-agent',
+    port=8126,
+)
+```
+{{% /tab %}}
+{{% tab "Ruby" %}}
+```ruby
+Datadog.configure do |c|
+  c.tracer hostname: 'datadog-agent',
+           port: 8126
+end
+```
+{{% /tab %}}
+{{% tab "Go" %}}
+```go
+package main
 
+import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+
+func main() {
+    tracer.Start(tracer.WithAgentAddr("datadog-agent:8126"))
+    defer tracer.Stop()
+}
+```
+{{% /tab %}}
+{{% tab "Node.js" %}}
 ```javascript
 const tracer = require('dd-trace').init({
   hostname: 'datadog-agent',
   port: 8126
 })
 ```
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Docker host IP
 
