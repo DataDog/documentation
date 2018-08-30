@@ -95,7 +95,7 @@ In writing your search queries, you can use all the same fields available on the
 
 ## Monitor Tags
 
-{{< img src="monitors/manage_monitor/monitor-tags.png" alt="Monitor tags" responsive="true" style="width:80%;" >}}
+{{< img src="monitors/manage_monitor/monitor-tags.png" alt="Monitor tags" responsive="true" style="width:30%;" >}}
 
 You can choose to add tags directly to your monitors that you can use for filtering on the [triggered][4] or [manage monitor][1] pages, or for [scheduling downtimes][6].
 
