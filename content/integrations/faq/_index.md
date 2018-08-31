@@ -79,6 +79,7 @@ kind: faq
 * [Troubleshooting JMX Integrations][45]
 * [View jmx data in jConsole and set up your jmx.yaml to collect them][46]
 * [Both my JMX and AWS integrations use "name" tags. What do I do?][47]
+* [JBoss EAP 7 & Datadog monitoring via JMX][78]
 
 ## Kafka
 
@@ -215,3 +216,4 @@ kind: faq
 [75]: /integrations/faq/windows-status-based-check
 [76]: /integrations/faq/how-to-monitor-events-from-the-windows-event-logs
 [77]: /integrations/faq/how-to-retrieve-wmi-metrics
+[78]: /integrations/faq/jboss-eap-7-datadog-monitoring-via-jmx
