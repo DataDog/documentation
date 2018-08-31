@@ -22,6 +22,7 @@ Note that filters perform an exact match search and don't work with partial stri
 | status:error                                    | Show events with error status. (supports: 'error', 'warning', 'success')         |
 | priority:low                                    | Show only low-priority events. (supports: 'low' or 'normal'. defaults to 'all')  |
 | incident:claimed                                | Show only claimed incidents. (supports: 'open', 'claimed', 'resolved', or 'all') |
+|cloud_provider:* NOT "azure" | Show only cloud providers not tagged with "azure"|
 
 Full text search works on all keywords provided in the search query after applying any filters. Full text search looks inside the event text, title, tags, users who commented on the event and host names and devices tied to the event for any related information.
 
