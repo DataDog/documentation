@@ -21,7 +21,7 @@ Inside `documentation/` folder, create a `Makefile.config` file from the [Makefi
 
 If you are a Datadog employee, add your [Github personal token][7]
 
-To run the site without Docker and perform administrative tasks (compile metrics, create i18n placeholders, etc), just execute:
+To run the site and perform administrative tasks (compile metrics, create i18n placeholders, etc), just execute:
 
 `make start`
 
@@ -35,15 +35,11 @@ After you have a config file you can run `make help` to see options:
 
 ```
 clean-build               remove build artifacts.
-clean-docker              remove image.
 clean-exe                 remove execs.
 clean-integrations        remove built integrations files.
 clean-node                remove node_modules.
 clean-virt                remove python virtual env.
 clean                     clean all make installs.
-docker-start              start container and run default commands to start hugo site.
-docker-stop               kill the site and stop the running container.
-docker-tests              run the tests through the docker container.
 hugpython                 build virtualenv used for tests.
 source-helpers            source the helper functions used in build, test, deploy.
 start                     start the gulp/hugo server.
