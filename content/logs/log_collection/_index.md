@@ -50,7 +50,7 @@ If an integration does not support logs by default, use the custom file configur
 
 ## Custom log collection
 
-Datadog Agent v6 can collect logs from files or the network (TCP or UDP) and forward them to Datadog: 
+Datadog Agent v6 can collect logs and forward them to Datadog from files, the network (TCP or UDP), journald, and Windows channels:
 
 1. Create a new folder in the `conf.d/` directory at the root of your [Agent's configuration directory][9] named after your log source.
 2. Create a new `conf.yaml` file in this new folder.
