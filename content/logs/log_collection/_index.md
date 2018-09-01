@@ -107,7 +107,7 @@ logs:
 [9]: /agent/faq/agent-configuration-files/
 
 {{% /tab %}}
-{{% tab "Stream logs from JournalD" %}}
+{{% tab "Stream logs from journald" %}}
 
 To gather logs from JournalD, create a `journald.d/conf.yaml` file at the root of your [Agent's configuration directory][9] with the following content:
 
@@ -140,7 +140,7 @@ Get-WinEvent -ListLog * | sort RecordCount -Descending
 
 Then add the channels in your `win32_event_log.d/conf.yaml` configuration file:
 
-```yaml
+```
 logs:
   - type: windows_event
     channel_path: <CHANNEL_1>
