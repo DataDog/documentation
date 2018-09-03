@@ -2,12 +2,6 @@
 title: How do I reduce alert flapping / noise?
 kind: faq
 further_reading:
-- link: "monitors/faq/how-do-i-setup-conditional-contacts-and-messages-in-a-single-monitor"
-  tag: "FAQ"
-  text: How do I setup conditional contacts and messages in a single monitor?
-- link: "monitors/faq/how-do-i-add-custom-template-variables-to-my-monitor-message"
-  tag: "FAQ"
-  text: How do I add custom template variables to my monitor message?
 - link: "monitors/downtimes"
   tag: "Documentation"
   text: Schedule a downtime to mute a monitor

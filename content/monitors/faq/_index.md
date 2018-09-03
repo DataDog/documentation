@@ -10,8 +10,6 @@ private: true
     {{< nextlink href="monitors/faq/i-have-a-downtime-scheduled-on-my-monitor-why-did-it-still-alert" >}}I have a downtime scheduled on my monitor, why did it still alert?!{{< /nextlink >}}
     {{< nextlink href="monitors/faq/what-is-the-do-not-require-a-full-window-of-data-for-evaluation-monitor-parameter" >}}What is the "Do (not) require a full window of data for evaluation" monitor parameter?{{< /nextlink >}}
     {{< nextlink href="monitors/faq/how-do-i-monitor-ephemeral-servers-for-reboots" >}}How do I monitor ephemeral servers for reboots?{{< /nextlink >}}
-    {{< nextlink href="monitors/faq/how-do-i-setup-conditional-contacts-and-messages-in-a-single-monitor" >}}How do I setup conditional contacts and messages in a single monitor?{{< /nextlink >}}
-    {{< nextlink href="monitors/faq/how-do-i-add-custom-template-variables-to-my-monitor-message" >}}How do I add custom template variables to my monitor message?{{< /nextlink >}}
     {{< nextlink href="monitors/faq/can-i-send-sms-notifications-in-datadog" >}}Can I send SMS notifications in Datadog?{{< /nextlink >}}
     {{< nextlink href="monitors/faq/how-can-i-export-alert-history" >}}How can I export Monitor Alert History?{{< /nextlink >}}
     {{< nextlink href="monitors/faq/can-i-set-up-a-monitor-for-a-metric-that-hasn-t-been-reported-to-datadog-yet" >}}Can I set up a monitor for a metric that hasn't been reported to Datadog yet?{{< /nextlink >}}
