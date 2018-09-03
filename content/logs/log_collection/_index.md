@@ -63,7 +63,7 @@ Below are some example of custom log collection setup:
 {{< tabs >}}
 {{% tab "Tail existing files" %}}
 
-To gather logs from your `<APP_NAME>` applications stored in `<PATH_LOG_FILE>/<LOG_FILE_NAME>.log` create a `<APP_NAME>.d/conf.yaml` file at the root of your [Agent's configuration directory][9] with the following content:
+To gather logs from your `<APP_NAME>` application stored in `<PATH_LOG_FILE>/<LOG_FILE_NAME>.log` create a `<APP_NAME>.d/conf.yaml` file at the root of your [Agent's configuration directory][9] with the following content:
 
 ```
 logs:
@@ -72,6 +72,7 @@ logs:
     service: <APP_NAME>
     source: custom
 ```
+
 **Note**: If you are using the Windows 6 Agent and trailing files for logs, make sure that those files have UTF8 encoding.
 
 [9]: /agent/faq/agent-configuration-files/
@@ -80,7 +81,7 @@ logs:
 
 {{% tab "Stream logs from TCP/UDP" %}}
 
-To gather logs from a `<APP_NAME>` application that does not log to a file, but instead forwards its logs via TCP over port **10518**, create a ``<APP_NAME>.d/conf.yaml` file at the root of your [Agent's configuration directory][9] with the following content:
+To gather logs from your `<APP_NAME>` application that does not log to a file, but instead forwards its logs via TCP over port **10518**, create a ``<APP_NAME>.d/conf.yaml` file at the root of your [Agent's configuration directory][9] with the following content:
 
 ```
 logs:
@@ -97,16 +98,14 @@ logs:
 {{% /tab %}}
 {{% tab "Stream logs from journald" %}}
 
-To gather logs from JournalD, create a `journald.d/conf.yaml` file at the root of your [Agent's configuration directory][9] with the following content:
+To gather logs from journald, create a `journald.d/conf.yaml` file at the root of your [Agent's configuration directory][9] with the following content:
 
 ```yaml
 logs:
   - type: journald
     path: /var/log/journal/
-    include_units:
-      - docker.service
-      - sshd.service
 ```
+
 [9]: /agent/faq/agent-configuration-files/
 
 {{% /tab %}}
