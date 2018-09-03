@@ -159,8 +159,15 @@ Note: as the mathematical log function doesn't accept negative values, our log s
 
 ### Overlay events for additional context
 
-Add events from related system to add even more context to your graph. An example would be to add Github commits, Jenkins deploys, or Docker creation events. Just click the Overlay Events button and enter a query to find and display your events.  
-To show anything from a source such as Github, use `sources:github`. For all the events with the tag role:web, use `tag:role:web`.
+Add events from related system to add even more context to your graph. An example would be to add Github commits, Jenkins deploys, or Docker creation events. Just click the Overlay Events button and enter a query to find and display your events. Use the same query format as for [the event stream][17], for example: 
+
+| Query                  | Description                                               |
+| -----                  | ----                                                      |
+| `sources:jenkins`      | Shows all events from the Jenkins source                  |
+| `tag:role:web`         | Shows all events with the tag `role:web`                  |
+| `tags:$<TEMPLATE_VAR>` | Shows all events from the [selected `<TEMPLATE_VAR>`][18] |
+
+
 
 {{< img src="graphing/index/overlay_events.png" alt="Overlay Events" responsive="true" style="width:75%;" >}}
 
@@ -188,3 +195,5 @@ The final step is to click Save. You can always come back in to the editor and t
 [14]: /graphing/#graphs-enhancement
 [15]: /graphing/#create-a-title
 [16]: /graphing/dashboards
+[17]: /graphing/event_stream
+[18]: /graphing/dashboards/#editing-template-variables
