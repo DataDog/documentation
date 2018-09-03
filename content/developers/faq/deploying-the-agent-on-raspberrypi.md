@@ -21,6 +21,8 @@ sudo apt-get install sysstat
 DD_API_KEY=<YOUR-API-KEY> sh -c "$(curl -L https://raw.githubusercontent.com/DataDog/dd-agent/master/packaging/datadog-agent/source/setup_agent.sh)"
 ```
 
+Note: The installation process may take up to 30 minutes on some models of Raspberry PI.
+
 If installed correctly you should see an output that looks like:
 {{< img src="developers/faq/rasberypi_install.png" alt="rasberypi_install"  responsive="true" >}}
 
