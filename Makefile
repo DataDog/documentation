@@ -71,6 +71,7 @@ clean-integrations:  ## remove built integrations files.
 	    -a -not -name 'nxlog.md' \
 	    -a -not -name 'rss.md' \
 	    -a -not -name 'rsyslog.md' \
+	    -a -not -name 'stunnel.md' \
 	    -a -not -name 'syslog_ng.md' \
 	    -a -not -name 'system.md' \
 	    -a -not -name 'tcprtt.md' \
