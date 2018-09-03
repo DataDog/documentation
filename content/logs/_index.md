@@ -51,10 +51,9 @@ However, AWS services logs are collected thanks to our [Lambda function][12]. Tr
 
 ### From a custom forwarder
 
-Datadog Log management has a TCP endpoint `intake.logs.datadoghq.com` that can be accessed either on port `10516` (secured connection) or `10514`. 
-Therefore any custom process or [logging library][16] able to forward logs through TCP can be used.
+Any custom process or [logging library][16] able to forward logs through **TCP** can be used in conjuntion with Datadog Logs. The secure TCP endpoint is `intake.logs.datadoghq.com:10516` (or port `10514` for insecure connections). 
 
-In order for your logs to be ingested, you must prefix you log with your [Datadog API Key][38], e.g:
+You must prefix the log entry with your [Datadog API Key][38], e.g.:
 
 ```
 <DATADOG_API_KEY> this is my log
@@ -67,7 +66,7 @@ telnet intake.logs.datadoghq.com 10514
 <DATADOG_API_KEY> Log sent directly via TCP
 ```
 
-This should produce the following result in your [live tail page][39]: 
+This will produce the following result in your [live tail page][39]: 
 
 {{< img src="logs/custom_log_telnet.png" alt="Custom telnet" responsive="true" style="width:70%;">}}
 
