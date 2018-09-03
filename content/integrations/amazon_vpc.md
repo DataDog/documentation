@@ -3,9 +3,7 @@ categories:
 - cloud
 - aws
 - log collection
-ddtype: crawler
 description: Gather your AWS VPC logs.
-doc_link: https://docs.datadoghq.com/integrations/amazon_vpc/
 has_logo: false
 integration_title: AWS VPC
 is_public: true
