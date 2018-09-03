@@ -63,24 +63,14 @@ Below are some example of custom log collection setup:
 {{< tabs >}}
 {{% tab "Tail existing files" %}}
 
-To gather logs from your Python applications stored in **/var/log/myapp1.log** and **/var/log/python.log** create a `python.d/conf.yaml` file at the root of your [Agent's configuration directory][9] with the following content:
+To gather logs from your `<APP_NAME>` applications stored in `<PATH_LOG_FILE>/<LOG_FILE_NAME>.log` create a `<APP_NAME>.d/conf.yaml` file at the root of your [Agent's configuration directory][9] with the following content:
 
-```yaml
-##Log section
+```
 logs:
-
   - type: file
-    path: /var/log/myapp1.log
-    service: myapp1
-    source: python
-    sourcecategory: sourcecode
-    tags: env:prod
-
-  - type: file
-    path: /var/log/python.log
-    service: myapplication
-    source: python
-    sourcecategory: sourcecode
+    path: <PATH_LOG_FILE>/<LOG_FILE_NAME>.log
+    service: <APP_NAME>
+    source: custom
 ```
 **Note**: If you are using the Windows 6 Agent and trailing files for logs, make sure that those files have UTF8 encoding.
 
@@ -90,16 +80,14 @@ logs:
 
 {{% tab "Stream logs from TCP/UDP" %}}
 
-To gather logs from a PHP application that does not log to a file, but instead forwards its logs via TCP over port **10518**, create a `php.d/conf.yaml` file at the root of your [Agent's configuration directory][9] with the following content:
+To gather logs from a `<APP_NAME>` application that does not log to a file, but instead forwards its logs via TCP over port **10518**, create a ``<APP_NAME>.d/conf.yaml` file at the root of your [Agent's configuration directory][9] with the following content:
 
-```yaml
+```
 logs:
   - type: tcp
     port: 10518
-    service: webapp
-    source: php
-    sourcecategory: front
-
+    service: <APP_NAME>
+    source: custom
 ```
 
 **Note**: The Agent supports raw string, JSON, and Syslog formatted logs. If you are sending logs in batch, use linebreak characters to separate your logs.
