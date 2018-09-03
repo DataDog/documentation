@@ -16,13 +16,13 @@ short_description: Gather your logs from your Stunnel proxy and send them to Dat
 
 Stunnel is a proxy designed to add TLS encryption functionality to existing clients and servers without any changes in the programs' code.
 
-Use the Datadog - Stunnel proxy integration to monitor potential network issue or DDos attacks.
+Use the Datadog - Stunnel proxy integration to monitor potential network issues or DDoS attacks.
 
 ## Setup
 
 ### Installation
 
-To start gathering logs from your Stunnel Proxy you must [install the Datadog Agent][1] on the server running it.
+You must [install the Datadog Agent][1] on the server running Stunnel.
 
 ### Configuration
 
@@ -30,15 +30,15 @@ Create a `stunnel.d/conf.yaml` file in the `conf.d/` folder at the root of your 
 
 #### Log Collection
 
-*Available for Agent >6.0*
+*Available for Agent v6 only*
 
-1. Collecting logs is disabled by default in the Datadog Agent, you must enable it in the `datadog.yaml` file:
+1. Collecting logs is disabled by default in the Datadog Agent. You must enable it in the `datadog.yaml` file:
 
     ```
     logs_enabled: true
     ```
 
-2.Add this configuration block to your `stunnel.d/conf.yaml` file to start collecting your Stunnel Logs:
+2. Add this configuration block to your `stunnel.d/conf.yaml` file to start collecting Stunnel Logs:
 
     ```
     logs:
@@ -49,9 +49,9 @@ Create a `stunnel.d/conf.yaml` file in the `conf.d/` folder at the root of your 
         sourcecategory: proxy
     ```
 
-    Change the `path` and `service` parameter values and configure them for your environment
+    Change the `path` and `service` parameter values and configure them for your environment.
 
-3. [Restart the Agent.][3]
+3. [Restart the Agent][3]
 
 ### Validation
 
