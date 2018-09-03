@@ -93,14 +93,14 @@ With:
 {{% tab "Agent v6" %}}
 
 * CPU: \~ 0.12% of the CPU used on average
-* Memory: \~ 55Mo of RAM used
+* Memory: \~ 55MB of RAM used
 * Network bandwidth: \~ 86 B/s &#9660; | 260 B/s &#9650;
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
 * CPU: \~ 0.35% of the CPU used on average
-* Memory: \~ 115Mo of RAM used
+* Memory: \~ 115MB of RAM used
 * Network bandwidth: \~ 1900 B/s &#9660; | 800 B/s &#9650;
 * Disk: Linux 120MB | Windows 60MB
 
