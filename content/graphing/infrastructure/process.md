@@ -23,26 +23,12 @@ Datadog Process Monitoring allows for real-time visibility of the most granular 
 
 The following installation processes are for [Agent v6 only][6], if you are still using Agent v5, [follow this specific installation process][7]
 
-## Process Agent
-
-**Note**: Live Processes for Windows requires Agent 6.
-
-### Standard Agent Configuration
+{{< tabs >}}
+{{% tab "Linux/Windows" %}}
 
 The process Agent is shipped by default with Agent 6 in Linux packages only. Refer to the instructions for standard [Agent installation][8] for platform-specific details.
 
-Once the Datadog Agent is installed, enable Live Processes collection by editing the [configuration file][9] at:
-
-* Linux
-  ```
-  /etc/datadog-agent/datadog.yaml
-  ```
-* Windows:
-  ```
-  \\ProgramData\Datadog\datadog.yaml
-  ```
-
-by adding the following:
+Once the Datadog Agent is installed, enable Live Processes collection by editing the [Agent main configuration file][9] by setting the following parameter to true:
 
 ```
 process_config:
@@ -61,7 +47,12 @@ Additionally, some configuration options may be set as environment variables.
 
 After configuration is complete, [restart the Agent][10].  
 
-### Docker Process collection
+[8]: https://app.datadoghq.com/account/settings#agent
+[9]: /agent/faq/agent-configuration-files/?tab=agentv6
+[10]: /agent/faq/agent-commands/?tab=agentv6#restart-the-agent
+
+{{% /tab %}}
+{{% tab "Docker" %}}
 
 Follow the instructions for the [Docker Agent][11], passing in the following attributes, in addition to any other custom settings as appropriate:
 
@@ -70,9 +61,15 @@ Follow the instructions for the [Docker Agent][11], passing in the following att
 -e DD_PROCESS_AGENT_ENABLED=true
 ```
 
-**Note**: To collect container information in the standard install, the `dd-agent` user needs to have permissions to access docker.sock.
+**Note**: 
 
-### Kubernetes Daemonset
+* To collect container information in the standard install, the `dd-agent` user needs to have permissions to access docker.sock.
+* Running the Agent as container still allows you to collect host processes.
+
+[11]: /agent/basic_agent_usage/docker/#run-the-docker-agent
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 In the [dd-agent.yaml][12] manifest used to create the daemonset, add the following environmental variables, volume mount, and volume:
 
@@ -91,6 +88,15 @@ In the [dd-agent.yaml][12] manifest used to create the daemonset, add the follow
 ```
 
 Refer to the standard [daemonset installation][13] and the [Docker Agent][11] information pages for further documentation.
+
+**Note**: Running the Agent as container still allows you to collect host processes.
+
+[11]: /agent/basic_agent_usage/docker/#run-the-docker-agent
+[12]: https://app.datadoghq.com/account/settings#agent/kubernetes
+[13]: /integrations/kubernetes/#installation-via-daemonsets-kubernetes-110
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Process Arguments Scrubbing
 
@@ -115,17 +121,6 @@ The  next image shows one process on the Live Processes page whose arguments hav
 {{< img src="graphing/infrastructure/process/process_arg_scrubbing.png" alt="process arguments scrubbing" responsive="true" style="width:100%;">}}
 
 Set `scrub_args` to `false` to completely disable the process arguments scrubbing.
-
-#### Agent 5
-
-The Agent 5 also supports the scrubbing feature. To manage its behavior, use the following fields on the `datadog.conf` file under the `[process.config]` section:
-
-```
-[process.config]
-scrub_args: true
-custom_sensitive_words: personal_key,*token,sql*,*pass*d*
-```
-
 
 ## Searching, Filtering, and Pivoting
 
@@ -184,11 +179,6 @@ While actively working with the Live Processes, metrics are collected at 2s reso
 [5]: https://github.com/DataDog/docker-dd-agent
 [6]: /agent
 [7]: /agent/faq/agent-5-process-collection
-[8]: https://app.datadoghq.com/account/settings#agent
-[9]: /agent/basic_agent_usage/#configuration-file
-[10]: /agent/faq/agent-commands
-[11]: /agent/basic_agent_usage/docker/#run-the-docker-agent
 [12]: https://app.datadoghq.com/account/settings#agent/kubernetes
-[13]: /integrations/kubernetes/#installation-via-daemonsets-kubernetes-110
 [14]: https://docs.datadoghq.com/infrastructure/livecontainers/
 [15]: /tagging/
