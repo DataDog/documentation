@@ -122,7 +122,7 @@ At the bottom of your grok processor tiles there is an advanced Setting section:
 
 * Use the **Extract from** field to apply your grok processor on a given attribute instead of the default `message` attribute.
 
-* Use the **Helper Rules** field to define tokens for your parsing rules. Helper rules helps you factorize grok patterns across your parsing rules.
+* Use the **Helper Rules** field to define tokens for your parsing rules. Helper rules helps you factorize grok patterns across your parsing rules which is useful when you have several rules in the same grok parser that uses the same tokens.
 
 Example for this classic unstructured log:  
 
