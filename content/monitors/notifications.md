@@ -29,8 +29,8 @@ Notifications are a key component of any [monitor][1]. You want to make sure the
    explanation of the monitor so a notified team member can quickly understand
    what is going on.
 
-2. Enter a **message** for the monitor. This field allows standard [markdown formatting][2] as well as in-lining [variables](#variables) and tag variables
-  Use [conditional variable](#conditional-variables) to modulate the notification text and sent them different contacts with the [Datadog's @-notification syntax](#notification).
+2. Enter a **message** for the monitor. This field allows standard [Markdown formatting][2] as well as in-line [variables](#variables) and tag variables.
+  Use [conditional variables](#conditional-variables) to modulate the notification text and send them to different contacts with the [Datadog's @-notification syntax](#notification).
   A common use-case for the monitor message is to include a step-by-step way to resolve the problem.
 
 3. Optionally enable **monitor renotification**. This option is useful to remind your team that a problem is not solved until the monitor is marked as [resolved][5]. If enabled, you can configure an escalation message to be sent anytime the monitor renotifies. The original message is included as well.
