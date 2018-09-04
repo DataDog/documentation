@@ -62,10 +62,10 @@ The commands related to log collection are the following:
 
 * `-e DD_LOGS_ENABLED=true`: this parameter enables log collection when set to true. The Agent now looks for log instructions in configuration files.
 * `-e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true`: this parameter adds a log configuration that enables log collection for all containers (see `Option 1` below)
-* `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw`: to make sure we do not lose any logs from containers during restarts or network issues we store on the host the last line that was collected for each container in this directory
+* `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw`: to make sure we do not lose any logs from containers during restarts or network issues, we store on the host the last line that was collected for each container in this directory.
 
 **Important note**: Integration Pipelines and Processors will not be installed automatically as the source and service are set to the `docker` generic value.
-The source and service values can be overriden thanks to the autodiscovery as described below and it automatically installs integration Pipelines that parse your logs and extract all the relevant information from them.
+The source and service values can be overriden thanks to Autodiscovery as described below; it automatically installs integration Pipelines that parse your logs and extract all the relevant information from them.
 
 {{% /tab %}}
 {{% tab "Host Installation" %}}
