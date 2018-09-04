@@ -67,7 +67,7 @@ If you are interested by only one of the sections of this document, for each sec
 
 ### Note
 
-We highly recommend customers to whitelist *all* of these IPs for identifying Datadog traffic and never use a subset of them. All these IPs are not all active at some point in time and their state might change without notice (maintenance from Datadog or our different cloud providers).
+You should whitelist *all* of these IPs for identifying Datadog servers and never use a subset of them. All these IPs are not all active at some point in time and their state might change without notice (maintenance from Datadog or our different cloud providers).
 
 ## Open Ports
 

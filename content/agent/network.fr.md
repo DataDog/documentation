@@ -68,7 +68,7 @@ Si une seule de ces sections vous intéresse, pour chacune des sections il exist
 
 ### Note
 
-Nous recommandons à nos clients d'autoriser *toutes* ces IPs pour identifier le trafic provenant de Datadog. Toutes ces IPs ne sont pas toujours actives, à tout moment leur état peut changer entre actif/inactif sans avertissement (pour une opération de maintenance de Datadog ou de nos fournisseurs d'hébergement).
+Vous devriez autoriser *toutes* ces IPs pour identifier le trafic provenant de Datadog. Ces IPs ne sont pas toujours toutes actives, à tout moment leur état peut changer entre actif/inactif sans avertissement (pour une opération de maintenance de Datadog ou de nos fournisseurs d'hébergement).
 
 ## Ports ouverts
 
