@@ -35,13 +35,13 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
     ##### Metric Alert Query
     `time_aggr(time_window):space_aggr:metric{tags} [by {key}] operator #`
 
-    -   `time_aggr` avg, sum, max, min, change, or pct_change
-    -   `time_window` last_#m (5, 10, 15, or 30), last_#h (1, 2, or 4), or last_1d
-    -   `space_aggr` avg, sum, min, or max
-    -   `tags` one or more tags (comma-separated), or *
-    -   `key` a 'key' in key:value tag syntax; defines a separate alert for each tag in the group (multi-alert)
-    -   `operator` <, <=, >, >=, ==, or !=
-    -   `#` an integer or decimal number used to set the threshold
+    -   `time_aggr`: avg, sum, max, min, change, or pct_change
+    -   `time_window`: `last_#m` (with `#` being 5, 10, 15, or 30) or `last_#h`(with `#` being 1, 2, or 4), or `last_1d`
+    -   `space_aggr`: avg, sum, min, or max
+    -   `tags`: one or more tags (comma-separated), or *
+    -   `key`: a 'key' in key:value tag syntax; defines a separate alert for each tag in the group (multi-alert)
+    -   `operator`: <, <=, >, >=, ==, or !=
+    -   `#`: an integer or decimal number used to set the threshold
 
     If you are using the `_change_` or `_pct_change_` time aggregator, instead use `change_aggr(time_aggr(time_window), timeshift):space_aggr:metric{tags} [by {key}] operator #` with:
 
