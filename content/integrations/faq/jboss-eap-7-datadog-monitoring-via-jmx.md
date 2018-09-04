@@ -96,7 +96,7 @@ instances:
 
 Then [`Start/restart` the Datadog Agent][2].
 
-Finally run the [Datadog Agent status command][3] to ensure datadog can connect to the Jboss jvm via jmx, you should get the following output:
+Finally, run the [Datadog Agent status command][3] to ensure Datadog can connect to the JBoss JVM via JMX. You should get the following output:
 
 ```
 ========
