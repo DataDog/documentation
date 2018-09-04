@@ -57,7 +57,7 @@ For example, if you trigger by each **host** tag, then a number of tag variables
 
 This also works for custom tags as well. If you've added a custom tag that follows the `key:value` syntax, then you can group data by those tag keys.  
 
-This means you are able to apply the tag's **key** to the list of tags that a multi alert has a separate trigger for. Which in turn means you can use that tag's `.name` variable in your monitor message.
+This means you are able to apply the tag's **key** to the list of tags that a multi-alert has a separate trigger for—which in turn means you can use that tag's `.name` variable in your monitor message.
 
 Note: 
 
