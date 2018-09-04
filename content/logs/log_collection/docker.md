@@ -35,7 +35,7 @@ In this documentation, we present how to collect logs from all running container
 
 ## One-step install to collect all the container logs
 
-The first step is to install the agent (containerised version or directly on the host) and to enable log collection for all the containers.
+The first step is to install the Agent (containerized version or directly on the host) and to enable log collection for all the containers.
 
 {{< tabs >}}
 {{% tab "Container Installation" %}}
