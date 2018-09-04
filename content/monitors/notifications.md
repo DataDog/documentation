@@ -278,13 +278,13 @@ Use `@here` in the monitor message to notify everybody in a given Hipchat channe
 ## Advanced notification configuration
 ### Include links to appropriate dashboards
 
-Many organizations today would like to include additional context to their Alerts. Quick links to relevant dashboards as a part of the Alert has proven to reduce the overall time it takes during the break fix process to reduce time to resolution.
+Many organizations like to include additional context to their Alerts. Quick links to relevant dashboards as a part of the Alert have proven to reduce the overall time it takes during the break fix process to reduce time to resolution.
 
-Datadog makes message template variables available to each defined monitor. Using these variables, you can dynamically build a URL that links Datadog Users to an appropriate dashboard using the scope of the monitor.
+Datadog makes message template variables available to each defined monitor. Using these variables, you can dynamically build a URL that links Datadog users to an appropriate dashboard using the scope of the monitor.
 
-Here are a few examples of providing links to items like System Dashboards, Integration Dashboards, HostMaps and Managed Monitors pages.
+Here are a few examples of providing links to items like System Dashboards, Integration Dashboards, HostMaps, and Managed Monitors pages.
 
-First example to review is the most common. Let's say you would like to provide a link to a System Dashboard when a monitor for a specific system metric has exceeded your defined threshold. The message template variable that can be leveraged in this instance would be `{{host.name}}`. Include the following URL as a part of your Monitor "Say What's Happening" section:
+The first example to review is the most common. Let's say you would like to provide a link to a System Dashboard when a monitor for a specific system metric has exceeded your defined threshold. The message template variable that can be leveraged in this instance is `{{host.name}}`. Include the following URL as a part of your Monitor "Say What's Happening" section:
 
 ```
 https://app.datadoghq.com/dash/integration/system_overview?tpl_var_scope=host:{{host.name}}
@@ -294,7 +294,7 @@ As you can see, `{{host.name}}` is replaced with the offending host of the monit
 
 {{< img src="monitors/notifications/system_dashboard_url.png" alt="system_dashboard_url" responsive="true" style="width:70%;" >}}
 
-Find below additional examples of links that could be added to Monitors to provide Datadog Users quick access to common pages leveraged during the break fix and triage process:
+Find below additional examples of links that could be added to Monitors to provide Datadog users quick access to common pages leveraged during the break, fix, and triage process:
 
 {{< tabs >}}
 {{% tab "hostmap" %}}
@@ -311,20 +311,20 @@ The above link has more customizable options than your standard System Dashboard
 * `sizeby` is defined by adding `sizeby:avg:<SecondMetricName>`.
 * `filter` is used to specify a specific integration (i.e. Cassandra, mysql, apache, snmp, etc) by adding `filter=<integration_name>`.
 
-The example below colors fill the Hostmap hexagons by `system.cpu.system`, it sizes the hexagons by `system.cpu.stolen` and add a filter to only include Cassandra hosts.
+In the example below, colors fill the Hostmap hexagons by `system.cpu.system`. The hexagons are sized by `system.cpu.stolen`, and they are filtered to only include Cassandra hosts.
 
 {{< img src="monitors/notifications/hostmap_url.png" alt="hostmap_url" responsive="true" style="width:70%;">}}
 
 {{% /tab %}}
 {{% tab "Manage Monitors Page" %}}
 
-To link to a Manage monitors page that displays all of the monitors for the host in question, define a link like below:
+To link to a "Manage Monitors" page that displays all of the monitors for the host in question, define a link like below:
 
 ```
 https://app.datadoghq.com/monitors/manage?q=scope:host:{{host.name}}
 ```
 
-The above link links to all monitors for this host. You have other options available to further refine the link.
+The above URL links to all monitors for this host. You have other options available to further refine the link.
 
 For example, if you would only like monitors that are in an Alert State, you can add the following `status:Alert` (other statuses that can be leveraged are `WARN`, `NO%20DATA`, `OK` and `MUTED`). Below is an example link:
 
@@ -332,7 +332,7 @@ For example, if you would only like monitors that are in an Alert State, you can
 https://app.datadoghq.com/monitors/manage?q=scope:host:{{host.name}}&status:Alert
 ```
 
-If you would like all monitors for a specific application or integration,  add the following query to the URL `q=<integration_name> `:
+If you would like all monitors for a specific application or integration, add the following query to the URL `q=<integration_name> `:
 
 ```
 https://app.datadoghq.com/monitors/manage?q=cassandra
@@ -343,9 +343,9 @@ https://app.datadoghq.com/monitors/manage?q=cassandra
 {{% /tab %}}
 {{% tab "Integration Dashboards" %}}
 
-If you are building Application or Integration specific Monitors, link to that specific Integration Dashboard as well as adding a scope for the host that triggered the monitor.
+If you are building application- or integration-specific monitors, link to that specific Integration Dashboard as well as adding a scope for the host that triggered the monitor.
 
-In the example below all that is necessary to populate is the `<integration_name>` section for something like Cassandra, apache, SNMP, etc as well as providing the scope for the offending host:
+In the example below, all that is necessary to populate is the `<integration_name>` section for something like Cassandra, Apache, SNMP, etc., as well as providing the scope for the offending host:
 
 ```
 https://app.datadoghq.com/dash/integration/<integration_name>?tpl_var_scope=host:{{host.name}}
