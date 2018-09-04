@@ -92,7 +92,7 @@ logs:
 [Restart the Agent](https://docs.datadoghq.com/agent/faq/agent-commands/?tab=agentv6#restart-the-agent) to see all your container logs in your platform.
 
 **Important note**: Integration Pipelines and Processors are not installed automatically as the source and service are set to the `docker` generic value.
-The source and service values can be overriden thanks to the autodiscovery as described below and it automatically installs integration Pipelines that parse your logs and extract all the relevant information from them.
+The source and service values can be overriden thanks to Autodiscovery as described below; it automatically installs integration Pipelines that parse your logs and extract all the relevant information from them.
 
 {{% /tab %}}
 {{< /tabs >}}
