@@ -4,6 +4,7 @@ kind: documentation
 aliases:
     - /agent/faq/send-logs-and-configs-to-datadog-via-flare-command
     - /agent/faq/how-to-get-more-logging-from-the-agent
+    - /agent/faq/agent-5-container-more-log
 further_reading:
 - link: "logs/"
   tag: "Documentation"
@@ -36,7 +37,8 @@ To enable the full debug mode:
 
 ### Obtaining debug logs from the container Agent
 
-This process covers Agent v6 only, for Agent v5 refer to [the dedicated documentation on how to collect more logs with the Datadog container Agent v5][6]
+{{< tabs >}}
+{{% tab "Agent v6" %}}
 
 **Set the `DD_LOG_LEVEL=debug` environment variable when starting your Agent.**
 
@@ -57,6 +59,36 @@ If your container is already running:
     ```
     DD_LOG_LEVEL=debug agent start
     ```
+
+{{% /tab %}}
+{{% tab "Docker Agent v5" %}}
+
+It isn't possible to restart the container Agent with service datadog-agent restart or similar, because those commands cause the container to be killed by Docker. Thus, in order to restart the container Agent, one must use supervisor:
+
+```
+/opt/datadog-agent/bin/supervisorctl -c /etc/dd-agent/supervisor.conf restart all
+```
+
+The following commands enables debug logging, restart the Agent, wait 60 seconds, then send a flare:
+
+```
+sed -i '/\[Main\]/a LOG_LEVEL=DEBUG' /etc/dd-agent/datadog.conf
+/opt/datadog-agent/bin/supervisorctl -c /etc/dd-agent/supervisor.conf restart all
+sleep 60
+/etc/init.d/datadog-agent flare <CASE_ID>
+```
+
+Debug logs can be disabled with:
+
+```
+sed -i '/LOG_LEVEL=DEBUG/d' /etc/dd-agent/datadog.conf
+/opt/datadog-agent/bin/supervisorctl -c /etc/dd-agent/supervisor.conf restart all
+```
+
+Or the container can be restarted.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Send a flare
 
@@ -201,7 +233,6 @@ C:\Program' 'Files\Datadog\Datadog' 'Agent\embedded\python.exe C:\Program' 'File
 [3]: /agent/faq/agent-commands/#agent-status-and-information
 [4]: /agent/basic_agent_usage/#log-location
 [5]: /help
-[6]: /agent/faq/agent-5-container-more-log
 [7]: https://github.com/DataDog/dd-agent/blob/master/utils/flare.py
 [8]: /agent/#using-the-gui
 [11]: /agent/faq/common-windows-agent-installation-error-1721
