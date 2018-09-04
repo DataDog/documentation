@@ -27,7 +27,7 @@ Two installations are possible:
 - on the host where the Agent is external to the Docker environment
 - or by deploying its containerized version in the Docker environment
 
-You can then choose to collect all the logs from all your environment's containers, or to filter by container image, name or container label to cherry pick what logs should be collected.
+You can then choose to collect all the logs from all your environment's containers, or to filter by container image, name, or container label to cherry pick what logs should be collected.
 
 In this documentation, we present how to collect logs from all running containers and how to leverage the Autodiscovery feature to activate Log Integrations.
 
