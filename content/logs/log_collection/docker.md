@@ -80,7 +80,7 @@ Collecting logs is *disabled* by default in the Datadog Agent. Add the following
 logs_enabled: true
 ```
 
-To collect logs from all your containers without any filtering, add the following at the end of `docker.d/conf.yaml` in your agent's conf.d directory:
+To collect logs from all your containers without any filtering, add the following at the end of `docker.d/conf.yaml` in your agent's `conf.d` directory:
 
 ```
 logs:
