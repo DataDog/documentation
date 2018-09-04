@@ -203,8 +203,8 @@ Check our [Autodiscovery Guide](https://docs.datadoghq.com/agent/autodiscovery/#
 
 #### Short lived containers
 
-Thanks to Autodiscovery, short lived container are detected as soon as they are started to ensure their logs are properly collected.
-If you are using the host installation of the agent, add this in your `datadog.yaml` file (it is automatically added for containerised version):
+Thanks to Autodiscovery, short lived containers are detected as soon as they are started to ensure their logs are properly collected.
+If you are using the host installation of the agent, add this in your `datadog.yaml` file (it is automatically added for the containerized version):
 
 ```
 listeners:
@@ -216,13 +216,13 @@ config_providers:
 
 ### Filter containers
 
-You can exclude containers from the log and metric collection and autodiscovery, if these are not useful for you.
+You can exclude containers from the log and metric collection and Autodiscovery if these are not useful for you.
 This can be useful to prevent the collection of the Datadog Agent logs.
 
 {{< tabs >}}
 {{% tab "Environment variable" %}}
 
-Two environment variables are available to include or exclude list of containers filtered by image or container name:
+Two environment variables are available to include or exclude a list of containers filtered by image or container name:
 
 * `DD_AC_INCLUDE`: whitelist of containers to always include
 * `DD_AC_EXCLUDE`: blacklist of containers to exclude
@@ -244,7 +244,7 @@ DD_AC_EXCLUDE` = "name:dd-agent"
 
 {{% tab "Configuration File" %}}
 
-Two parameters are available in `datadog.yaml` to include or exclude list of containers filtered by image or container name:
+Two parameters are available in `datadog.yaml` to include or exclude a list of containers filtered by image or container name:
 
 * ac_exclude: whitelist of containers to always include
 * ac_include: blacklist of containers to exclude
