@@ -116,7 +116,7 @@ Here is the list of all the matchers and filters natively implemented by Datadog
 
 ## Advanced Settings
 
-At the bottom of your grok processor tiles there is an advanced Setting section:
+At the bottom of your grok processor tiles there is an Advanced Settings section:
 
 {{< img src="logs/processing/parsing/advanced_settings.png" alt="Advanced Settings" responsive="true" style="width:80%;">}}
 
