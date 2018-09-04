@@ -56,7 +56,7 @@ The information is structured as JSON following this schema:
 }
 ```
 
-Each section ash a dedicated endpoint at `https://ip-ranges.datadoghq.com/<section>.json`, for example:
+Each section has a dedicated endpoint at `https://ip-ranges.datadoghq.com/<section>.json`, for example:
 
 * [https://ip-ranges.datadoghq.com/logs.json][10] for the IPs used to receive logs data
 * [https://ip-ranges.datadoghq.com/apm.json][11] for the IPs used to receive APM data
