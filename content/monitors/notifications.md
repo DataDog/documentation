@@ -76,7 +76,7 @@ Here's an example of where a user had a number of hosts tagged by different `cre
 
 Here, the user was able to set up a multi-alert monitor to trigger a separate alert for each `creator:` tag, so they were able to include the `{{creator.name}}` in their monitor message. When this monitor triggers, the recipient of the alert notification sees whether the monitor was triggered by **wes_anderson**, **saint_exupéry**, or some other `creator:` value.
 
-{{< img src="monitors/faq/multi_alert_templating_notification.png" alt="multi_alert_templating_notification" responsive="true" >}}
+{{< img src="monitors/faq/multi_alert_templating_notification.png" alt="multi_alert_templating_notification" responsive="true" style="width:80%;">}}
 
 Here is an example of how you can use template variables for a multi alert:
 
@@ -91,7 +91,7 @@ and the corresponding event notification:
 If your tag group's key has a period in it, you have to hardwire your template variables to include brackets around the full key. 
 For example, if you submit a metric tagged with `dot.key.test:five` and then set up a multi alert monitor triggered by the `dot.ket.test` group tag, you have to apply the following syntax in order to use `the dot.key.test.name` tag variable:
 
-{{< img src="monitors/faq/template_with_dot.png" alt="template_with_dot" responsive="true" >}}
+{{< img src="monitors/faq/template_with_dot.png" alt="template_with_dot" responsive="true" style="width:80%;">}}
 
 ## Conditional variables
 
@@ -284,7 +284,7 @@ Datadog makes message template variables available to each defined monitor. Usin
 
 Here are a few examples of providing links to items like System Dashboards, Integration Dashboards, HostMaps and Managed Monitors pages.
 
-First example to review is the most common. Let's say you would like to provide a link to a System Dashboard when a monitor for a specific system metric has exceeded your defined threshold. The message template variable that can be leveraged in this instance would be {{host.name}}. Include the following URL as a part of your Monitor "Say What's Happening" section:
+First example to review is the most common. Let's say you would like to provide a link to a System Dashboard when a monitor for a specific system metric has exceeded your defined threshold. The message template variable that can be leveraged in this instance would be `{{host.name}}`. Include the following URL as a part of your Monitor "Say What's Happening" section:
 
 ```
 https://app.datadoghq.com/dash/integration/system_overview?tpl_var_scope=host:{{host.name}}
@@ -294,43 +294,67 @@ As you can see, `{{host.name}}` is replaced with the offending host of the monit
 
 {{< img src="monitors/notifications/system_dashboard_url.png" alt="system_dashboard_url" responsive="true" style="width:70%;" >}}
 
-Find below additional examples of links that could be added to Monitors to provide Datadog Users quick access to common pages leveraged during the break fix and triage process.
+Find below additional examples of links that could be added to Monitors to provide Datadog Users quick access to common pages leveraged during the break fix and triage process:
 
-* **Hostmaps** - If you would like to include a HostMap to compare metrics with other similar hosts, you can use a link like below to be included in your Monitor:
-  ```
-  https://app.datadoghq.com/infrastructure/map?fillby=avg%3Acpuutilization&sizeby=avg%3Anometric&filter=cassandra
-  ```
-  The above link has more customizable options than your standard System Dashboard. Here you have additional variables to define. Most common variables passed into this URL are the following **fillby, sizeby, filter**:
+{{< tabs >}}
+{{% tab "hostmap" %}}
 
-  * `fillby` is defined by adding `fillby:avg:<MetricName>`.
-  * `sizeby` is defined by adding `sizeby:avg:<SecondMetricName>`.
-  * `filter` is used to specify a specific integration (i.e. Cassandra, mysql, apache, snmp, etc) by adding `filter=<integration_name>`
-  {{< img src="monitors/notifications/hostmap_url.png" alt="hostmap_url" responsive="true" style="width:70%;">}}
-  The above colors fill the hexagons by `system.cpu.system`, it sizes the hexagons by `system.cpu.stolen` and add a filter to only include Cassandra hosts.
+To include a link to the HostMap to compare metrics with other similar hosts, use a link like below to be included in your Monitor:
 
+```
+https://app.datadoghq.com/infrastructure/map?fillby=avg%3Acpuutilization&sizeby=avg%3Anometric&filter=cassandra
+```
 
-*  **Integration Dashboards**- If you are building Application or Integration specific Monitors, link to that specific Integration Dashboard as well as adding a scope for the host that triggered the monitor.
-  In the example below all that is necessary to populate is the `<integration_name>` section for something like Cassandra, apache, SNMP, etc as well as providing the scope for the offending host:
-  ```
-  https://app.datadoghq.com/dash/integration/<integration_name>?tpl_var_scope=host:{{host.name}}
-  ```
-  {{< img src="monitors/notifications/integration_url.png" alt="integration_url" responsive="true" style="width:70%;">}}
+The above link has more customizable options than your standard System Dashboard. Here you have additional variables to define. Most common variables passed into this URL are the following **fillby, sizeby, filter**:
 
-* **Manage Monitors Page** – To link to a Manage monitors page that displays all of the monitors for the host in question, define a link like below:
-  ```
-  https://app.datadoghq.com/monitors/manage?q=scope:host:{{host.name}}
-  ```
-  The above link links to all monitors for this host. You have other options available to further refine the link.
-  For example, if you would only like monitors that are in an Alert State, you can add the following `status:Alert` (other statuses that can be leveraged are WARN, NO%20DATA, OK and MUTED). Below is an example link:
-  ```
-  https://app.datadoghq.com/monitors/manage?q=scope:host:{{host.name}}&status:Alert
-  ```
-  If you would like all monitors for a specific application or integration,  add the following query to the URL `q=<integration_name> `:
-  ```
-  https://app.datadoghq.com/monitors/manage?q=cassandra
-  ```
+* `fillby` is defined by adding `fillby:avg:<MetricName>`.
+* `sizeby` is defined by adding `sizeby:avg:<SecondMetricName>`.
+* `filter` is used to specify a specific integration (i.e. Cassandra, mysql, apache, snmp, etc) by adding `filter=<integration_name>`.
 
-  {{< img src="monitors/notifications/monitor_url.png" alt="monitor_url" responsive="true" style="width:70%;">}}
+The example below colors fill the Hostmap hexagons by `system.cpu.system`, it sizes the hexagons by `system.cpu.stolen` and add a filter to only include Cassandra hosts.
+
+{{< img src="monitors/notifications/hostmap_url.png" alt="hostmap_url" responsive="true" style="width:70%;">}}
+
+{{% /tab %}}
+{{% tab "Manage Monitors Page" %}}
+
+To link to a Manage monitors page that displays all of the monitors for the host in question, define a link like below:
+
+```
+https://app.datadoghq.com/monitors/manage?q=scope:host:{{host.name}}
+```
+
+The above link links to all monitors for this host. You have other options available to further refine the link.
+
+For example, if you would only like monitors that are in an Alert State, you can add the following `status:Alert` (other statuses that can be leveraged are `WARN`, `NO%20DATA`, `OK` and `MUTED`). Below is an example link:
+
+```
+https://app.datadoghq.com/monitors/manage?q=scope:host:{{host.name}}&status:Alert
+```
+
+If you would like all monitors for a specific application or integration,  add the following query to the URL `q=<integration_name> `:
+
+```
+https://app.datadoghq.com/monitors/manage?q=cassandra
+```
+
+{{< img src="monitors/notifications/monitor_url.png" alt="monitor_url" responsive="true" style="width:70%;">}}
+
+{{% /tab %}}
+{{% tab "Integration Dashboards" %}}
+
+If you are building Application or Integration specific Monitors, link to that specific Integration Dashboard as well as adding a scope for the host that triggered the monitor.
+
+In the example below all that is necessary to populate is the `<integration_name>` section for something like Cassandra, apache, SNMP, etc as well as providing the scope for the offending host:
+
+```
+https://app.datadoghq.com/dash/integration/<integration_name>?tpl_var_scope=host:{{host.name}}
+```
+
+{{< img src="monitors/notifications/integration_url.png" alt="integration_url" responsive="true" style="width:70%;">}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 
