@@ -65,6 +65,9 @@ If you are interested by only one of the sections of this document, for each sec
 * [https://ip-ranges.datadoghq.com/logs.json][10] for the IPs used to receive logs data
 * [https://ip-ranges.datadoghq.com/apm.json][11] for the IPs used to receive APM data
 
+### Note
+
+We highly recommend customers to whitelist *all* of these IPs for identifying Datadog traffic and never use a subset of them. All these IPs are not all active at some point in time and their state might change without notice (maintenance from Datadog or our different cloud providers).
 
 ## Open Ports
 
