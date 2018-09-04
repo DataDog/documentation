@@ -78,7 +78,7 @@ Here, the user was able to set up a multi-alert monitor to trigger a separate al
 
 {{< img src="monitors/faq/multi_alert_templating_notification.png" alt="multi_alert_templating_notification" responsive="true" style="width:80%;">}}
 
-Here is an example of how you can use template variables for a multi alert:
+Here is an example of how you can use template variables for a multi-alert:
 
 {{< img src="monitors/notifications/templatevareditor.png" alt="template var editor" responsive="true" style="width:80%;">}}
 
