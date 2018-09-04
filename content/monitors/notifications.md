@@ -89,7 +89,7 @@ and the corresponding event notification:
 #### Tag key with period
 
 If your tag group's key has a period in it, you have to hardwire your template variables to include brackets around the full key. 
-For example, if you submit a metric tagged with `dot.key.test:five` and then set up a multi alert monitor triggered by the `dot.ket.test` group tag, you have to apply the following syntax in order to use `the dot.key.test.name` tag variable:
+For example, if you submit a metric tagged with `dot.key.test:five` and then set up a multi-alert monitor triggered by the `dot.ket.test` group tag, you have to apply the following syntax in order to use `the dot.key.test.name` tag variable:
 
 {{< img src="monitors/faq/template_with_dot.png" alt="template_with_dot" responsive="true" style="width:80%;">}}
 
