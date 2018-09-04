@@ -17,7 +17,7 @@ further_reading:
   text: Collect your traces
 ---
 
-If you ended up at this page and have not yet installed the Datadog Agent, go [to the dedicated Agent integration page][1] for installation instructions. If you just installed the Agent, it might take a few moments before you start seeing metrics appear. The first place you should check for metrics is the [Metrics Explorer][2].
+If you have not yet installed the Datadog Agent, go [to the dedicated Agent integration page][1] for installation instructions. If you just installed the Agent, it may take a few moments before you start seeing metrics appear. The first place you should check for metrics is the [Metrics Explorer][2].
 
 If you think you might be experiencing issues, the first thing to do is [run the info command][3] and check the [Agent logs][4].
 
@@ -27,13 +27,13 @@ If you're still unsure about the issue, you may reach out to [Datadog support te
 
 To enable the full debug mode:
 
-1. Modify your local `datadog.yaml` file (see [this page](/agent/basic_agent_usage/#configuration-files) to locate this configuration file on your instance)
+1. Modify your local `datadog.yaml` file (see [this page](/agent/basic_agent_usage/#configuration-files) to locate the configuration file on your instance).
 
-2. Replace `# log_level: INFO` with `log_level: DEBUG` (make sure to get rid of # to uncomment the line)
+2. Replace `# log_level: INFO` with `log_level: DEBUG` (remove `#` to uncomment the line).
 
-3. Restart your Datadog Agent (see [that page](/agent/faq/agent-commands) to find the restart command depending on your OS)
+3. Restart the Datadog Agent. See the [Agent Commands][6] page for OS-specific details.
 
-4. Wait a few minutes to generate some logs. [Look here][4] to find the location of the logs.
+4. Wait a few minutes to generate some logs. [See the Agent][4] docuementation for the location of the logs.
 
 ### Obtaining debug logs from the container Agent
 
@@ -63,13 +63,13 @@ If your container is already running:
 {{% /tab %}}
 {{% tab "Docker Agent v5" %}}
 
-It isn't possible to restart the container Agent with service datadog-agent restart or similar, because those commands cause the container to be killed by Docker. Thus, in order to restart the container Agent, one must use supervisor:
+When run in a container, the Agent cannot be restarted via `service datadog-agent restart` (or similar) as this will cause the container to be killed by Docker. Use supervisor to restart a containerised Agent:
 
 ```
 /opt/datadog-agent/bin/supervisorctl -c /etc/dd-agent/supervisor.conf restart all
 ```
 
-The following commands enables debug logging, restart the Agent, wait 60 seconds, then send a flare:
+The following commands enable debug logging, restart the Agent, wait 60 seconds, then send a flare, in that order:
 
 ```
 sed -i '/\[Main\]/a LOG_LEVEL=DEBUG' /etc/dd-agent/datadog.conf
@@ -233,6 +233,7 @@ C:\Program' 'Files\Datadog\Datadog' 'Agent\embedded\python.exe C:\Program' 'File
 [3]: /agent/faq/agent-commands/#agent-status-and-information
 [4]: /agent/basic_agent_usage/#log-location
 [5]: /help
+[6]: /agent/faq/agent-commands/
 [7]: https://github.com/DataDog/dd-agent/blob/master/utils/flare.py
 [8]: /agent/#using-the-gui
 [11]: /agent/faq/common-windows-agent-installation-error-1721
