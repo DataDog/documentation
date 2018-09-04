@@ -91,7 +91,7 @@ logs:
 
 [Restart the Agent](https://docs.datadoghq.com/agent/faq/agent-commands/?tab=agentv6#restart-the-agent) to see all your container logs in your platform.
 
-**Important note**: Integration Pipelines and Processors will not be installed automatically as the source and service are set to the `docker` generic value.
+**Important note**: Integration Pipelines and Processors are not installed automatically as the source and service are set to the `docker` generic value.
 The source and service values can be overriden thanks to the autodiscovery as described below and it automatically installs integration Pipelines that parse your logs and extract all the relevant information from them.
 
 {{% /tab %}}
@@ -108,22 +108,26 @@ Autodiscovery expects labels to follow this format, depending on the file type:
 {{< tabs >}}
 {{% tab "Dockerfile" %}}
 
-`LABEL "com.datadoghq.ad.logs"='[<LOGS_CONFIG>]'`
+Add the following LABEL to your Dockerfile:
+
+- `LABEL "com.datadoghq.ad.logs"='[<LOGS_CONFIG>]'`
 
 {{% /tab %}}
 {{% tab "Docker-Compose" %}}
 
-* docker-compose.yaml:
+Add the following label in your `docker-compose.yaml` file:
 
-  ```
-  labels:
-    com.datadoghq.ad.logs: '[<LOGS_CONFIG>]'
-  ```
+```
+labels:
+  com.datadoghq.ad.logs: '[<LOGS_CONFIG>]'
+```
   
 {{% /tab %}}
 {{% tab "Run Command" %}}
 
-* run command: `-l com.datadoghq.ad.logs='[<LOGS_CONFIG>]'`
+Add the following label as a run command:
+
+- `-l com.datadoghq.ad.logs='[<LOGS_CONFIG>]'`
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -258,6 +262,7 @@ Or to exclude the Datadog Agent:
 ac_exclude` = ["name:dd-agent"]
 ```
 
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Further Reading
