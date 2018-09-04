@@ -74,7 +74,7 @@ Install the [latest version of the Agent 6](https://docs.datadoghq.com/logs/#get
 
 The Agent can collect logs from [files on the host](https://docs.datadoghq.com/logs/#custom-log-collection) or from [container stdout/stderr](#configuration-file-example).
 
-Collecting logs is *disabled* by default in the Datadog Agent. Add the following to it in datadog.yaml: 
+Collecting logs is *disabled* by default in the Datadog Agent. Add the following to it in `datadog.yaml`: 
 
 ```
 logs_enabled: true
