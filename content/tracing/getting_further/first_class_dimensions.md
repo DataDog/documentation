@@ -82,7 +82,7 @@ Via sysprop:
 -Ddd.trace.span.tags=env:prod
 ```
 
-Via env var:
+Via environment variables:
 
 ```
 DD_TRACE_SPAN_TAGS="env:prod"
