@@ -24,7 +24,7 @@ further_reading:
 
 ## Installation and Getting Started
 
-For configuration instructions, and details about using the API, check out Datadog [API documentation][api docs] and [gem documentation][gem docs].
+For configuration instructions, and details about using the API, check out Datadog's [API documentation][api docs] and [gem documentation][gem docs].
 
 For descriptions of terminology used in APM, take a look at the [official documentation][visualization docs].
 
