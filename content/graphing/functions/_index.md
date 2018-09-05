@@ -156,8 +156,8 @@ In this example the function abs makes sure that your results are positive numbe
 
 The logic is the same:
 
-1. Datadog backend finds all different devices associated to the source selected.
-2. For each device, Datadog backend performs the query `system.disk.total{host:example, device:<device>}` as explained in this article.
+1. The Datadog backend finds all different devices associated to the source selected.
+2. For each device, the backend performs the query `system.disk.total{host:example, device:<device>}` as explained in this article.
 3. All final results are graphed on the same graph.
 
 {{< img src="graphing/miscellaneous/from_query_to_graph/metric_graph_7.png" alt="metric_graph_2" responsive="true" style="width:75%;">}}

@@ -19,7 +19,7 @@ Here's a two-minute video walkthrough:
 
 {{< vimeo 188833506 >}}
 
-See Datadog [Anomaly Monitor][1] page for more info.
+See the [Anomaly Monitor][1] page for more info.
 
 ## Outliers
 
@@ -35,7 +35,7 @@ The `outliers()` function has three parameters:
 
 {{< img src="graphing/functions/algorithms/outlier.gif" alt="outlier detection" responsive="true" style="width:70%;">}}
 
-See Datadog [Outlier Monitor][2] page for more info.
+See [Outlier Monitor][2] page for more info.
 
 ## Other functions
 
