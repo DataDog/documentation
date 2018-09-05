@@ -619,14 +619,14 @@ Notice the above examples only use the OpenTracing classes. Check the [OpenTraci
 {{% /tab %}}
 {{% tab "Python" %}}
 
-Support for OpenTracing with Python is coming soon. Reach out to [Datadog support team][contact support] to be part of the beta.
+Support for OpenTracing with Python is coming soon. Reach out to [the Datadog support team][contact support] to be part of the beta.
 
 [contact support]: https://docs.datadoghq.com/help
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-Support for OpenTracing with Ruby is coming soon. Reach out to [Datadog support team][contact support] to be part of the beta.
+Support for OpenTracing with Ruby is coming soon. Reach out to [the Datadog support team][contact support] to be part of the beta.
 
 [contact support]: https://docs.datadoghq.com/help
 
@@ -1041,7 +1041,7 @@ Possible values for the sampling priority tag are:
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-Coming Soon. Reach out to [Datadog support team][contact support] to be part of the beta.
+Coming Soon. Reach out to [the Datadog support team][contact support] to be part of the beta.
 
 [contact support]: https://docs.datadoghq.com/help
 
@@ -1118,7 +1118,7 @@ trace_id, span_id = helpers.get_correlation_ids()
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-Coming Soon. Reach out to [Datadog support team][contact support] to be part of the beta.
+Coming Soon. Reach out to [the Datadog support team][contact support] to be part of the beta.
 
 [contact support]: https://docs.datadoghq.com/help
 
@@ -1149,7 +1149,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-Coming Soon. Reach out to [Datadog support team][contact support] to be part of the beta.
+Coming Soon. Reach out to [the Datadog support team][contact support] to be part of the beta.
 
 [contact support]: https://docs.datadoghq.com/help
 {{% /tab %}}
