@@ -32,8 +32,7 @@ The [Kafka_Consumer Integration][6] collects metrics like our standard Python ba
 
 There are a few common issues you may face when it comes to the Kafka Integration. Here is a common list of issues that could be affecting users.
 
-1. This first troubleshooting issue only applies if you are running version *<5.20* of the [Datadog Agent][7]. In older versions of Kafka, consumer offsets were stored in Zookeper exclusively. The initial Kafka_consumer check was written when this limitation was in place. Due to this, you cannot get the `kafka.consumer_lag` metric if your offsets are stored in Kafka and you are using an older version of the Agent.  
-With version 5.20+ of the [Datadog Agent][7], we are able to support pulling consumer lag from the consumer offsets that are stored within Kafka itself. Please upgrade the Agent to the latest version to see these metrics.
+1. This first troubleshooting issue only applies if you are running version *<5.20* of the [Datadog Agent][7]. In older versions of Kafka, consumer offsets were stored in Zookeper exclusively. The initial Kafka_consumer check was written when this limitation was in place. Due to this, you cannot get the `kafka.consumer_lag` metric if your offsets are stored in Kafka and you are using an older version of the Agent. Upgrade the Agent to the latest version to see these metrics.
 
 2. The second most common issue is the following error for the Kafka Integration:
 ```
@@ -72,7 +71,7 @@ The solution here would be to only specify the specific partition for your topic
 #my_topic [0, 1, 4, 12]
 ```
 
-5. Partition Context Limitation. Currently, the number of partition contexts collection is limited to 200. If you require more contexts, [please contact the support team][8].
+5. Partition Context Limitation. Currently, the number of partition contexts collection is limited to 200. If you require more contexts, [contact the Datadog support team][8].
 
 [1]: https://kafka.apache.org/
 [2]: https://sookocheff.com/post/kafka/kafka-in-a-nutshell/

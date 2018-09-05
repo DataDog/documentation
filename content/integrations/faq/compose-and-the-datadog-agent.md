@@ -54,7 +54,7 @@ Finally our `redisdb.yaml` is patterned after the [redisdb.yaml.example file][4]
       - host: redis
         port: 6379
 
-For a more complete example, please see our [Docker Compose example project on Github][5].
+For a more complete example, see our [Docker Compose example project on Github][5].
 
 [1]: https://docs.docker.com/compose/overview/
 [2]: /integrations/docker_daemon

@@ -134,7 +134,7 @@ In the `datadog.yaml` file, set the `<KV_STORE_IP>` address and `<KV_STORE_PORT>
 
 ```
 # The providers the Agent should call to collect checks configurations.
-# Please note the File Configuration Provider is enabled by default and cannot
+# Note that the File Configuration Provider is enabled by default and cannot
 # be configured.
 # config_providers:
 #   - name: etcd

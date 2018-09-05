@@ -612,7 +612,7 @@ try (Scope scope = tracer.buildSpan("ServiceHandlerSpan").startActive(false)) {
     // submission thread impl...
 }
 ```
-Notice the above examples only use the OpenTracing classes. Please reference the [OpenTracing API][opentracing-java] for more details and information.
+Notice the above examples only use the OpenTracing classes. Check the [OpenTracing API][opentracing-java] for more details and information.
 
 [opentracing-java]: https://github.com/opentracing/opentracing-java
 

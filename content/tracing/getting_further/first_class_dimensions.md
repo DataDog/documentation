@@ -147,7 +147,7 @@ Visit the [APM Settings][3] page to define, change, or remove primary tags. Note
 * Only organization Administrators have access to this page. 
 * Changes may take up to two hours to be reflected in the UI.
 
- If you change a previously set primary tag, please be aware of the following:
+If you change a previously set primary tag, be aware of the following:
 
 * Historical APM data aggregated by the previously set tag will no longer be accessible.
 * Any APM monitors scoped to the previous tag will display a status of _No Data_.

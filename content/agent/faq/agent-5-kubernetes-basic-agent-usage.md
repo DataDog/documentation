@@ -82,7 +82,7 @@ Replace `YOUR_API_KEY` with [your api key][6] or use [Kubernetes secrets][7] to 
   kubectl create -f dd-agent.yaml
   ```
 
-**Note**:  This manifest enables autodiscovery's auto configuration feature. To disable it, remove the `SD_BACKEND` environment variable definition. To learn how to configure autodiscovery, please refer to [its documentation][9].
+**Note**:  This manifest enables autodiscovery's auto configuration feature. To disable it, remove the `SD_BACKEND` environment variable definition. To learn how to configure autodiscovery, see the [dedicated autodiscovery documentation][9].
 
 #### Host Installation
 

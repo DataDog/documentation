@@ -123,7 +123,7 @@ We have two modules:
         return web.json_response(response)
     ```
 
-The code above is already instrumented. Please [refer to the dedicated setup documentation][2] to learn how to instrument your application and configure the Datadog Agent.
+The code above is already instrumented. [See the dedicated setup documentation][2] to learn how to instrument your application and configure the Datadog Agent.
 
 ### Datadog APM
 

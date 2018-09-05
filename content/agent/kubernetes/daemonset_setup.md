@@ -181,7 +181,7 @@ Deploy the DaemonSet with the command:
 kubectl create -f datadog-agent.yaml
 ```
 
-**Note**:  This manifest enables Autodiscovery's auto configuration feature. To learn how to configure Autodiscovery, please refer to the [dedicated Autodiscovery documentation][9].
+**Note**:  This manifest enables Autodiscovery's auto configuration feature. To learn how to configure Autodiscovery, see the [dedicated Autodiscovery documentation][9].
 
 ### Verification
 

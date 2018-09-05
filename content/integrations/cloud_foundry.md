@@ -83,7 +83,6 @@ For older version, Cloud Foundry provides a back-port of this feature in the for
 
 2. **Push your application with the Datadog buildpack and your buildpacks.**
   The process to push your application with multiple buildpack is described in the [cloud foundry documentation][27].
-  This process is likely to change in the close future so please check the link above.
 
     ```shell
     cf push <YOUR_APP> --no-start -b binary_buildpack

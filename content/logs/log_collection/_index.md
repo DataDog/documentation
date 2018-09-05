@@ -28,7 +28,7 @@ further_reading:
 
 Log collection requires an Agent version >= 6.0. Older versions of the Agent do not include the `Log collection` interface that is used for log collection.
 
-If you are not using it already, please follow [the Agent installation instruction][1].
+If you are not using the Agent already, follow [the Agent installation instructions][1] to install it.
 
 Collecting logs is **disabled** by default in the Datadog Agent, you need to enable it in `datadog.yaml`:
 
