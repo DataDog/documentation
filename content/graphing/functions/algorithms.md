@@ -35,7 +35,7 @@ The `outliers()` function has three parameters:
 
 {{< img src="graphing/functions/algorithms/outlier.gif" alt="outlier detection" responsive="true" style="width:70%;">}}
 
-See [Outlier Monitor][2] page for more info.
+See the [Outlier Monitor][2] page for more info.
 
 ## Other functions
 
