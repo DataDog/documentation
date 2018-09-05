@@ -24,7 +24,7 @@ Counters, gauges, and sets are familiar to StatsD users. Histograms are specific
 
 ### Counters
 
-Counters track how many times something happens _per second_, such as page views. In this example, we increment a metric called `web.page_views` each time the `render_page` function is called.
+Counters track how many times something happens _per second_, such as page views. In this example, a metric called `web.page_views` is incremented each time the `render_page` function is called.
 
 For Python:
 ```python
@@ -44,13 +44,13 @@ def render_page()
 end
 ```
 
-With this one line of code we can start graphing the data. Here's an example:
+With this one line of code, you can start graphing the data. Here's an example:
 
 {{< img src="developers/metrics/graph-guides-metrics-page-views.png" alt="graph guides metrics page views" responsive="true" >}}
 
 Note that StatsD counters are normalized over the flush interval to report per-second units. In the graph above, the marker is reporting 35.33 web page views per second at ~15:24. In contrast, if one person visited the web page each second, the graph would be a flat line at y = 1. To increment or measure values over time, see [gauges](#gauges).
 
-We can also count by arbitrary numbers. Suppose we wanted to count the number of bytes processed by a file uploading service. We increment a metric called `file_service.bytes_uploaded` by the size of the file each time the  `upload_file` function is called:
+You can also count by arbitrary numbers. Suppose you wanted to count the number of bytes processed by a file uploading service. Increment a metric called `file_service.bytes_uploaded` by the size of the file each time the  `upload_file` function is called:
 
 For Python:
 ```python
@@ -61,7 +61,7 @@ def upload_file(file):
     return 'File uploaded!'
 ```
 
-Note that for counters coming from another source that are ever-increasing and never reset (for example, the number of queries from MySQL over time), we track the rate between flushed values. To get raw counts within Datadog, apply a function to your series such as _cumulative sum_ or _integral_. [Read more about Datadog functions][8].
+Note that for counters coming from another source that are ever-increasing and never reset (for example, the number of queries from MySQL over time), Datadog tracks the rate between flushed values. To get raw counts within Datadog, apply a function to your series such as _cumulative sum_ or _integral_. [Read more about Datadog functions][8].
 
 Learn more about the [Count type in the Metrics documentation][4].
 
@@ -90,12 +90,12 @@ duration = Time.now - start_time
 statsd.distribution('dist.dd.website.latency', duration)
 ```
 
-The above instrumentation calculates the following data: `sum`, `count`, `average`, `minimum`, `maximum`, `50th percentile` (median), `75th percentile`, `90th percentile`, `95th percentile` and `99th percentile`. These metrics give insight into how different each request time is. We can see how long the request usually takes by graphing the median. We can see how long most requests take by graphing the 95th percentile.
+The above instrumentation calculates the following data: `sum`, `count`, `average`, `minimum`, `maximum`, `50th percentile` (median), `75th percentile`, `90th percentile`, `95th percentile` and `99th percentile`. These metrics give insight into how different each request time is. You can see how long the request usually takes by graphing the median. You can see how long most requests take by graphing the 95th percentile.
 
 {{< img src="graphing/metrics/distributions/dogweb_latency.png" alt="Dogweb latency" responsive="true" >}}
 
-For this toy example, let's say a request time of *500ms* is acceptable. The median query time (graphed in blue) is usually less than *100 milliseconds*, which is great. The 95th percentile (graphed in red) has spikes sometimes over one second, which is unacceptable.
-This means most of queries are running just fine, but the worst ones are bad. If the 95th percentile were close to the median, than we would know that almost all of the requests are performing just fine.
+For this toy example, assume a request time of *500ms* is acceptable. The median query time (graphed in blue) is usually less than *100 milliseconds*, which is great. The 95th percentile (graphed in red) has spikes sometimes over one second, which is unacceptable.
+This means most of queries are running just fine, but the worst ones are bad. If the 95th percentile were close to the median, than you would know that almost all of the requests are performing just fine.
 
 Distributions are not only for measuring times. They can be used to measure the distribution of *any* type of value, such as the size of uploaded files, or classroom test scores, for example.
 
@@ -149,7 +149,7 @@ results = db.query()
 duration = time.time() - start_time
 statsd.histogram('database.query.time', duration)
 
-# We can also use the `timed` decorator as a short-hand for timing functions.
+# You can also use the `timed` decorator as a short-hand for timing functions.
 @statsd.timed('database.query.time')
 def get_data():
     return db.query()
@@ -162,7 +162,7 @@ results = db.query()
 duration = Time.now - start_time
 statsd.histogram('database.query.time', duration)
 
-# We can also use the `time` helper as a short-hand for timing blocks
+# You can also use the `time` helper as a short-hand for timing blocks
 # of code.
 statsd.time('database.query.time') do
   return db.query()
@@ -179,13 +179,13 @@ The above instrumentation produces the following metrics:
 
 {{< img src="developers/metrics/graph-guides-metrics-query-times.png" alt="graph guides metrics query times" responsive="true" >}}
 
-For this toy example, let's say a query time of 1 second is acceptable. The median query time (graphed in purple) is usually less than 100 milliseconds, which is great. But unfortunately, the 95th percentile (graphed in blue) has large spikes sometimes nearing three seconds, which is unacceptable. This means that most of queries are running just fine, but the worst ones are very bad. If the 95th percentile was close to the median, then we would know that almost all of the queries are performing just fine.
+For this toy example, say a query time of 1 second is acceptable. The median query time (graphed in purple) is usually less than 100 milliseconds, which is great. But unfortunately, the 95th percentile (graphed in blue) has large spikes sometimes nearing three seconds, which is unacceptable. This means that most of queries are running just fine, but the worst ones are very bad. If the 95th percentile was close to the median, then you would know that almost all of the queries are performing just fine.
 
 Learn more about the [Histogram type in the Metrics documentation][6].
 
 ### Timers
 
-Timers in DogStatsD are an implementation of Histograms (not to be confused with timers in the standard StatsD). They measure timing data _only_, for example, the amount of time a section of code takes to execute, or how long it takes to fully render a page. In Python, timers are created with a decorator:
+Timers in DogStatsD are an implementation of Histograms (not to be confused with timers in the standard StatsD). They measure timing data _only_: for example, the amount of time a section of code takes to execute, or how long it takes to fully render a page. In Python, timers are created with a decorator:
 
 ```python
 
@@ -203,7 +203,7 @@ or with a context manager:
 from datadog import statsd
 
 def render_page():
-  # First some stuff we don't want to time
+  # First some stuff you don't want to time
   boilerplate_setup()
 
   # Now start the timer
