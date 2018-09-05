@@ -47,7 +47,7 @@ In Kubernetes environments you can also leverage [the daemonset installation][15
 
 The Datadog Agent can be used to collect logs directly from ECS or EC2 instances and applications running on them.
 
-However, AWS services logs are collected thanks to Datadog [Lambda function][12]. Triggers are then defined ([manually or automatically][13]) to forward logs from any S3 bucket, Cloudwatch Log group, or Cloudwatch events.
+However, AWS services logs are collected thanks to Datadog's [Lambda function][12]. Triggers are then defined ([manually or automatically][13]) to forward logs from any S3 bucket, Cloudwatch Log group, or Cloudwatch events.
 
 ### From a custom forwarder
 
