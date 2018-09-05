@@ -98,11 +98,11 @@ Export your Log Analytics:
 * To create a new [log monitor][4]:  
     Go to the [Explorer view][10] (not Analytics) and click **Export**. The query of your Log Analytics is used to create the log monitor query. This feature is not available from the Analytics view.
 * To an existing [Timeboard][5]:  
-    This functionality is in beta. [Contact our support team][6] to activate it for your organization.
+    This functionality is in beta. [Contact the Datadog support team][6] to activate it for your organization.
 
 ## Logs in Dashboard 
 
-**This functionality is still in beta, [contact our support team][6] to activate it for your organization.**
+**This functionality is still in beta, [contact the Datadog support team][6] to activate it for your organization.**
 
 Export [Log Analytics][7] from the Log Explorer or build them directly in your [Dashboard][8] alongside metrics and traces.
 

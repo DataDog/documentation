@@ -9,7 +9,7 @@ Once this feature has been enabled you'll be able to access [this organization c
 
 {{< img src="account_management/faq/createorg1.png" alt="createorg1" responsive="true" >}}
 
-Please note that your new organization name must be 32 characters or fewer.
+Note: your new organization name must be **32 characters or fewer**.
 
 Administrators users can access this organization creation page from the menu that appears when hovering over their avatar in the lower lefthand corner, and then clicking on "Create New Organization":
 

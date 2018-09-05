@@ -5,7 +5,7 @@ kind: faq
 
 ## Overview
 
-Currently, monitors that have the `as_count` modifier use a separate evaluation path than other monitors. In certain use cases this can result in unexpected behavior. We intend to migrate all monitors with `as_count` to the same evaluation path as other monitors, but this doc explains the underlying issue and will guide you through the migration process.
+Monitors that have the `as_count` modifier use a separate evaluation path than other monitors. In certain use cases this can result in unexpected behavior. We intend to migrate all monitors with `as_count` to the same evaluation path as other monitors, but this doc explains the underlying issue and will guide you through the migration process.
 
 Let's call the current evaluation path for `as_count` monitors `current_eval_path` and the new one `new_eval_path`.
 
@@ -104,6 +104,6 @@ To correctly rewrite it in the explicit format, the query can be rewritten like:
 
 `sum(last_5m): ( default(sum:requests.error{*}.as_rate(),0) / sum:requests.total{*}.as_rate() )`
 
-Please [reach out to us][1] if you have any questions regarding these changes.
+[Reach out to the Datadog support team][1] if you have any questions regarding these changes.
 
 [1]: /help

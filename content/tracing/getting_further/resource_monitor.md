@@ -26,11 +26,11 @@ The downside here is that see the resource hash in the field, as opposed to the 
 ```
 
 Since each service contains a single Top Level Name and we can setup a multi alert by [environment][5] and resource and service, we only need to obtain the top level name to create the URL.  
-This Top level name can be found by clicking on the service you are interested in. For example, for our Mcnulty-Web service, the top level name is `pylons.request`:
+This Top Level Name can be found by clicking on the service you are interested in. For example, for Datadog's Mcnulty-Web service, the Top Level Name is `pylons.request`:
 
 {{< img src="tracing/faq/top_level_name.png" alt="Top level name" responsive="true" >}}
 
-Then our Monitor configuration would resemble the following:
+Then the Monitor configuration would resemble the following:
 
 {{< img src="tracing/faq/top_level_monitor.png" alt="Top level monitor" responsive="true" >}}
 

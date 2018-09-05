@@ -70,7 +70,7 @@ docker run -d --name datadog-agent \
 
 Important notes:
 
-- The Docker integration is enabled by default, as well as [autodiscovery][5] in auto configuration mode (remove the listeners: -docker section in `datadog.yaml` to disable it).
+- The Docker integration is enabled by default, as well as [Autodiscovery][5] in auto configuration mode (remove the listeners: -docker section in `datadog.yaml` to disable it).
 
 - We recommend always picking the latest version of Datadog Agent 6. [Consult the full list of available images for Agent 6][6].
 
@@ -177,7 +177,7 @@ Check out the [multi-line processing rule documentation][10] to get more pattern
 
 **Kubernetes**
 
-If you are running in Kubernetes and do not use container labels, pod annotation will soon be supported. Check our [Autodiscovery Guide][8] for more information about Autodiscovery setup and examples.
+If you are running in Kubernetes and do not use container labels, pod annotation will soon be supported. Check Datadog's [Autodiscovery Guide][8] for more information about Autodiscovery setup and examples.
 
 ## Further Reading
 

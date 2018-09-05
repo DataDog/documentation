@@ -24,7 +24,7 @@ further_reading:
 
 For descriptions of terminology used in APM, take a look at the [official documentation][visualization docs].
 
-For details about configuration and using the API, check out our [API documentation][2].
+For details about configuration and using the API, see Datadog's [API documentation][2].
 
 For details about contributing, check out the [development guide][development docs].
 

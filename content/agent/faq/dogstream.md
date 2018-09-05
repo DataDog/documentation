@@ -96,7 +96,7 @@ Let's imagine that you're collecting metrics from logs that are not canonically 
 user.crashes|2016-05-28 20:24:43.463930|24|LotusNotes,Outlook,Explorer
 ```
 
-We could set up a log-parser like the following to collect a metric from this logged data in our Datadog account:
+You could set up a log-parser like the following to collect a metric from this logged data in your Datadog account:
 
 ```python
 
@@ -117,7 +117,7 @@ def my_log_parser(logger, test):
     return (metric_name, date, metric_value, metric_attributes)
 ```
 
-And then we would configure our `datadog.conf` to include the dogstream option as follows:
+And then you would configure your `datadog.conf` to include the dogstream option as follows:
 ```
 dogstreams: /path/to/mylogfile.log:/path/to/mylogparser.py:my_log_parser
 # (N.B., Windows users should replace each "/" with the escaped "\\")

@@ -18,7 +18,7 @@ further_reading:
 [Datadog Live Containers][3] enable real-time visibility into all containers across your environment.
 
 Taking inspiration from bedrock tools like *htop* and *ctop*, Live Containers give you complete coverage of your container infrastructure, in a continuously updated table with resource metrics at two-second resolution and faceted search.
-Coupled with Datadog's integrations with [Docker][4], [Kubernetes][5], [ECS][6], and other container technologies, plus our built-in tagging of dynamic components, this new Live Container view provides a detailed overview of your containers' health, resource consumption, and deployment in real time:
+Coupled with Integrations for [Docker][4], [Kubernetes][5], [ECS][6], and other container technologies, plus built-in tagging of dynamic components, this new Live Container view provides a detailed overview of your containers' health, resource consumption, and deployment in real time:
 
 {{< img src="graphing/infrastructure/livecontainers/LiveContainersWithSummaries.png" alt="Live containers with summaries" responsive="true" >}}
 
@@ -50,7 +50,7 @@ ac_include: ["name:frontend.*"]
 
 ### String Search
 
-Containers are by their nature extremely high cardinality objects. Our flexible string search matches substrings in the container name, ID, or image fields.
+Containers are, by their nature, extremely high cardinality objects. Datadog's flexible string search matches substrings in the container name, ID, or image fields.
 
 ### Tagging
 

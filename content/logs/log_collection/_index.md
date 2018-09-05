@@ -28,7 +28,7 @@ further_reading:
 
 Log collection requires an Agent version >= 6.0. Older versions of the Agent do not include the `Log collection` interface that is used for log collection.
 
-If you are not using it already, please follow [the Agent installation instruction][1].
+If you are not using the Agent already, follow [the Agent installation instructions][1] to install it.
 
 Collecting logs is **disabled** by default in the Datadog Agent, you need to enable it in `datadog.yaml`:
 
@@ -312,7 +312,7 @@ logs:
 
 ### Using a Proxy for Logs
 
-Logs make use of a different set of proxy settings than other data types forwarded by the Datadog Agent. This is due to the fact that logs are currently transported over TCP/SSL, while other features submit data via HTTPS.
+Logs make use of a different set of proxy settings than other data types forwarded by the Datadog Agent. This is due to the fact that logs are transported over TCP/SSL, while other features submit data via HTTPS.
 
 With Datadog Agent >= 6.4.1, send your logs to your Datadog account via a SOCKS5 proxy server. To do so, use the following settings in your `datadog.yaml` configuration file:
 
@@ -321,7 +321,7 @@ logs_config:
   socks5_proxy_address: <MY_SOCKS5_PROXY_URL>:<MY_SOCKS5_PROXY_PORT>
 ```
 
-[Refer to our Agent proxy documentation page to learn how to forward your metrics with a proxy][8].
+[Refer to the Agent proxy documentation page to learn how to forward your metrics with a proxy][8].
 
 ## How to get the most of your application logs
 

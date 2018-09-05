@@ -5,7 +5,7 @@ kind: faq
 
 Datadog has a huge number of [integrations with common applications][1], but it can also be used to instrument your custom applications. This is typically using one of the many [Datadog libraries][2].
 
-Libraries that communicate over HTTP using the [Datadog API][3] don't require any special configuration with regard to Docker. However, applications using libraries that integrate with DogStatsD or StatsD will need to configure the library to connect to the Agent. Note that each library will handle this configuration differently, so please refer to the individual library's documentation for more details.
+Libraries that communicate over HTTP using the [Datadog API][3] don't require any special configuration with regard to Docker. However, applications using libraries that integrate with DogStatsD or StatsD will need to configure the library to connect to the Agent. Note that each library will handle this configuration differently, so refer to the individual library's documentation for more details.
 
 After your code is configured you can run your custom application container using [the `--link` option][4] to create a network connection between your application container and the Datadog Agent container.
 

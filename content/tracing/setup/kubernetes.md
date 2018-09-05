@@ -12,7 +12,7 @@ further_reading:
   text: "Explore your services, resources and traces"
 ---
 
-In order to enable APM tracing, the `datadog/agent` image must be configured to enable the Trace Agent, passing `DD_APM_ENABLED=true` as environment variable.
+In order to enable APM tracing, the `datadog/agent` image must be configured to enable the trace collection by passing `DD_APM_ENABLED=true` as environment variable.
 
 For additional information or different installation processes, see the [Agent 6 Kubernetes documentation][2].
 
@@ -100,7 +100,7 @@ To send custom metrics via dogstatsd from your application pods, uncomment the `
 To send Traces from your application pods, uncomment the `# hostPort: 8126` line in your `datadog-agent.yaml` manifest. This exposes the Datadog Agent tracing port on each of your Kubernetes nodes.
 
 **Warning**: This opens a port on your host. Make sure your firewall covers that correctly.
-Another word of caution: some network plugging don't support `hostPorts` yet, so this won't work. The workaround in this case is to add `hostNetwork: true` in your agent pod specifications. This shares the network namespace of your host with the Datadog agent. Again, make sure this logic is okay with your security policies.
+Another word of caution: some network plugging don't support `hostPorts` yet, so this won't work. The workaround in this case is to add `hostNetwork: true` in your Agent pod specifications. This shares the network namespace of your host with the Datadog agent. Again, make sure this logic is okay with your security policies.
 
 Then, deploy the DemonSet with the command:
 

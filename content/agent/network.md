@@ -39,7 +39,7 @@ The information is structured as JSON following this schema:
 {
     "version": 1,                       // <-- incremented every time this information is changed
     "modified": "YYYY-MM-DD-HH-MM-SS",  // <-- timestamp of the last modification
-    "agents": {                         // <-- the IPs used by the agent to submit metrics to Datadog
+    "agents": {                         // <-- the IPs used by the Agent to submit metrics to Datadog
         "prefixes_ipv4": [              // <-- list of IPv4 CIDR blocks
             "a.b.c.d/x",
             ...
