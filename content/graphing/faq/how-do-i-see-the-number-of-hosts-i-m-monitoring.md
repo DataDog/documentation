@@ -11,13 +11,14 @@ kind: faq
 
 For setup:
 
-1. Put in your API and application keys in lines 1,2 and 79
-2. Datadog API/app keys can be found in your account here
+1. Put in your API and application keys in lines 1, 2, and 79
+2. Datadog API and application keys can be found [in your account][2]
 
-**Note**: this Screenboard does not include hosts from GCE, Azure, docker, vSphere or other integrations - only the Datadog Agent and EC2. Adjust as needed for your environment.
+**Note**: This Screenboard does not include hosts from GCE, Azure, Docker, vSphere, or other integrations—only the Datadog Agent and EC2. Adjust as needed for your environment.
 
-**Disclaimer**: This should not be used for billing purposes, this is only a convenient option to count active instances and is not necessarily reflective of your invoice.
+**Disclaimer**: This should not be used for billing purposes. This is only a convenient option to count active instances and is not necessarily reflective of your invoice.
 
 If you're a customer and need detailed billing information, reach directly to your Customer Success Manager or email `success@datadog.com`.
 
 [1]: /sh/agentcountscreenboard.sh
+[2]: https://app.datadoghq.com/account/settings#api
