@@ -21,7 +21,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/validate?api_key=INSERT_API_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/validate?api_key=<INSERT_API_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -36,7 +36,7 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								}
 							]
 						},
@@ -67,7 +67,7 @@
 							"raw": "{\n      \"check\": \"app.is_ok\",\n      \"host_name\": \"my_hostname\",\n      \"status\": 0\n  }"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/check_run?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/check_run?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -82,11 +82,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -117,7 +117,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/comments/3843084207937032193?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/comments/3843084207937032193?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -133,11 +133,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -161,7 +161,7 @@
 							"raw": "{\n      \"message\" : \"There is a problem with the database2.\",\n      \"handle\":\"email@domain.com\"\n  }"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/comments?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/comments?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -176,11 +176,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -204,7 +204,7 @@
 							"raw": "{\n      \"message\" : \"Try embedded comment to previous post\",\n      \"handle\":\"email@domain.com\",\n      \"related_event_id\":\"4315245270133755906\"\n  }"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/comments?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/comments?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -219,11 +219,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -247,7 +247,7 @@
 							"raw": "{\n      \"message\" : \"Try Changing the Wording\"\n  }"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/comments/3843084207937032193?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/comments/3843084207937032193?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -263,11 +263,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -298,7 +298,7 @@
 							"raw": "{\"scope\":\"region:midwest\"}"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/downtime/cancel/by_scope?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/downtime/cancel/by_scope?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -315,11 +315,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -338,7 +338,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/downtime?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/downtime?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -353,11 +353,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -376,7 +376,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/downtime?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&start=1493343426&end=1556415426&type=weeks&period=1&week_days=Mon,Tue,Wed,Thu,Fri&until_date=1491026399&scope=region:midwest",
+							"raw": "https://app.datadoghq.com/api/v1/downtime?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>&start=1493343426&end=1556415426&type=weeks&period=1&week_days=Mon,Tue,Wed,Thu,Fri&until_date=1491026399&scope=region:midwest",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -391,11 +391,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								},
 								{
 									"key": "start",
@@ -442,7 +442,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/downtime/223886958?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&start=1493343426&end=1556415426&type=weeks&period=1&week_days=Mon,Tue,Wed,Thu,Fri,Sat&until_date=1491026399&scope=region:midwest",
+							"raw": "https://app.datadoghq.com/api/v1/downtime/223886958?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>&start=1493343426&end=1556415426&type=weeks&period=1&week_days=Mon,Tue,Wed,Thu,Fri,Sat&until_date=1491026399&scope=region:midwest",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -458,11 +458,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								},
 								{
 									"key": "start",
@@ -509,7 +509,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/downtime/223886958?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/downtime/223886958?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -525,11 +525,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -548,7 +548,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/downtime/223886958?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/downtime/223886958?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -564,11 +564,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -594,7 +594,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/graph/embed/45d8cf2d01e0673beadeb88f4368db271376eefd11d76e4eaf3cfae18f47e0f5?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/graph/embed/45d8cf2d01e0673beadeb88f4368db271376eefd11d76e4eaf3cfae18f47e0f5?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -611,11 +611,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -634,7 +634,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/graph/embed/9405f66beea59813e322e236da9dd31006267c4fc970442c5547f9fd7a676678/enable?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/graph/embed/9405f66beea59813e322e236da9dd31006267c4fc970442c5547f9fd7a676678/enable?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -652,11 +652,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -675,7 +675,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/graph/embed/9405f66beea59813e322e236da9dd31006267c4fc970442c5547f9fd7a676678/revoke?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/graph/embed/9405f66beea59813e322e236da9dd31006267c4fc970442c5547f9fd7a676678/revoke?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -693,11 +693,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -742,7 +742,7 @@
 							]
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/graph/embed?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/graph/embed?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -758,11 +758,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -781,7 +781,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/graph/embed?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/graph/embed?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -797,11 +797,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -832,7 +832,7 @@
 							"raw": "{\n\t\"title\":\"Something big happened!\",\n\"text\":\"And let me tell you all about it here!\",\n\"tags\":\"environment:prod\"\n}"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/events/1044739812528776191?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/events/1044739812528776191?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -848,11 +848,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -876,7 +876,7 @@
 							"raw": "{\n\t\"title\":\"Something big happened!\",\n\"text\":\"And let me tell you all about it here!\",\n\"tags\":\"environment:prod\"\n}"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/events/1044739812528776191?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/events/1044739812528776191?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -892,11 +892,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -920,7 +920,7 @@
 							"raw": "{\n\t\"title\":\"Something big happened!\",\n\"text\":\"And let me tell you all about it here!\",\n\"tags\":\"environment:prod\"\n}"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/events?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&start=1493127756&end=1493386969",
+							"raw": "https://app.datadoghq.com/api/v1/events?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>&start=1493127756&end=1493386969",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -935,11 +935,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								},
 								{
 									"key": "start",
@@ -971,7 +971,7 @@
 							"raw": "{\n        \"alert_type\": \"success\",\n        \"title\": \"prod auth build #3991 succeeded on PROD\",\n       \n        \"text\": \"Jenkins Build #3991 completed (16.48 secs) \\n without error.\",\n        \"tags\": [\n           \n            \"result:success\"\n        ],\n        \"device_name\": null,\n        \"priority\": \"low\",\n        \"source_type_name\":\"jenkins\"\n    \n}"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/events?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/events?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -986,11 +986,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -1016,7 +1016,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/graph/snapshot?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&metric_query=system.load.1{*}&start=1493127756&end=1493387140",
+							"raw": "https://app.datadoghq.com/api/v1/graph/snapshot?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>&metric_query=system.load.1{*}&start=1493127756&end=1493387140",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -1032,11 +1032,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								},
 								{
 									"key": "metric_query",
@@ -1079,7 +1079,7 @@
 							"raw": "{\n      \"message\": \"Un-Muting this host for a test!\"\n  }"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/host/my_hostname/unmute?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/host/my_hostname/unmute?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -1096,11 +1096,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -1124,7 +1124,7 @@
 							"raw": "{\n      \"message\": \"Muting this host for a test!\"\n  }"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/host/my_hostname/mute?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/host/my_hostname/mute?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -1141,11 +1141,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -1169,7 +1169,7 @@
 							"raw": "{ \"series\" :\n         [{\"metric\":\"test.metric\",\n          \"points\":[1493127756,20],\n          \"type\":\"gauge\",\n          \"host\":\"test.example.com\",\n          \"tags\":[\"environment:test\"]}\n        ]\n    }"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/reports/v2/overview?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&tags=os:windows",
+							"raw": "https://app.datadoghq.com/reports/v2/overview?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>&tags=os:windows",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -1184,11 +1184,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								},
 								{
 									"key": "tags",
@@ -1216,7 +1216,7 @@
 							"raw": "{ \"series\" :\n         [{\"metric\":\"test.metric\",\n          \"points\":[1493127756,20],\n          \"type\":\"gauge\",\n          \"host\":\"test.example.com\",\n          \"tags\":[\"environment:test\"]}\n        ]\n    }"
 						},
 						"url": {
-							"raw": "https://api.datadoghq.com/api/v1/hosts?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://api.datadoghq.com/api/v1/hosts?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -1231,11 +1231,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								},
 								{
 									"key": "tags",
@@ -1274,7 +1274,7 @@
 									"raw": "{\n       \"services\": [\n        {\n          \"service_name\": \"test_00\",\n          \"service_key\": \"<PAGERDUTY_SERVICE_KEY>\"\n        },\n        {\n          \"service_name\": \"test_01\",\n          \"service_key\": \"<PAGERDUTY_SERVICE_KEY>\"\n        }\n      ],\n      \"subdomain\": \"my-pd\",\n      \"schedules\": [\"https://my-pd.pagerduty.com/schedules#PCPYT4M\", \"https://my-pd.pagerduty.com/schedules#PKTPB7P\"],\n      \"api_token\": \"<PAGERDUTY_TOKEN>\"\n    }\n"
 								},
 								"url": {
-									"raw": "https://app.datadoghq.com/api/v1/integration/pagerduty?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+									"raw": "https://app.datadoghq.com/api/v1/integration/pagerduty?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 									"protocol": "https",
 									"host": [
 										"app",
@@ -1290,11 +1290,11 @@
 									"query": [
 										{
 											"key": "api_key",
-											"value": "INSERT_API_KEY_HERE"
+											"value": "<INSERT_API_KEY_HERE>"
 										},
 										{
 											"key": "application_key",
-											"value": "INSERT_APP_KEY_HERE"
+											"value": "<INSERT_APP_KEY_HERE>"
 										}
 									]
 								},
@@ -1326,7 +1326,7 @@
 									"raw": "{\n        \"account_id\": \"YOUR_AWS_ACCOUNT_ID\",\n        \"role_name\": \"DatadogAWSIntegrationRole\"\n    }\n"
 								},
 								"url": {
-									"raw": "https://app.datadoghq.com/api/v1/integration/aws?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+									"raw": "https://app.datadoghq.com/api/v1/integration/aws?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 									"protocol": "https",
 									"host": [
 										"app",
@@ -1342,11 +1342,11 @@
 									"query": [
 										{
 											"key": "api_key",
-											"value": "INSERT_API_KEY_HERE"
+											"value": "<INSERT_API_KEY_HERE>"
 										},
 										{
 											"key": "application_key",
-											"value": "INSERT_APP_KEY_HERE"
+											"value": "<INSERT_APP_KEY_HERE>"
 										}
 									]
 								},
@@ -1370,7 +1370,7 @@
 									"raw": "{\n        \"account_id\": \"YOUR_AWS_ACCOUNT_ID\",\n        \"filter_tags\": [\"env:staging\"],\n        \"host_tags\": [\"account:staging\",\"account:customer1\"],\n        \"role_name\": \"DatadogAWSIntegrationRole\"\n    }\n"
 								},
 								"url": {
-									"raw": "https://app.datadoghq.com/api/v1/integration/aws?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+									"raw": "https://app.datadoghq.com/api/v1/integration/aws?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 									"protocol": "https",
 									"host": [
 										"app",
@@ -1386,11 +1386,11 @@
 									"query": [
 										{
 											"key": "api_key",
-											"value": "INSERT_API_KEY_HERE"
+											"value": "<INSERT_API_KEY_HERE>"
 										},
 										{
 											"key": "application_key",
-											"value": "INSERT_APP_KEY_HERE"
+											"value": "<INSERT_APP_KEY_HERE>"
 										}
 									]
 								},
@@ -1409,7 +1409,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "https://app.datadoghq.com/api/v1/integration/aws?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+									"raw": "https://app.datadoghq.com/api/v1/integration/aws?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 									"protocol": "https",
 									"host": [
 										"app",
@@ -1425,11 +1425,11 @@
 									"query": [
 										{
 											"key": "api_key",
-											"value": "INSERT_API_KEY_HERE"
+											"value": "<INSERT_API_KEY_HERE>"
 										},
 										{
 											"key": "application_key",
-											"value": "INSERT_APP_KEY_HERE"
+											"value": "<INSERT_APP_KEY_HERE>"
 										}
 									]
 								},
@@ -1461,7 +1461,7 @@
 									"raw": "{\n    \"hooks\": [\n      {\n        \"name\": \"somehook\",\n        \"url\": \"http://requestb.in/v1srg7v1\",\n        \"use_custom_payload\": \"false\",\n        \"custom_payload\": \"\",\n        \"encode_as_form\": \"false\",\n        \"headers\": \"\"\n    \t}\n]}"
 								},
 								"url": {
-									"raw": "https://app.datadoghq.com/api/v1/integration/webhooks?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+									"raw": "https://app.datadoghq.com/api/v1/integration/webhooks?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 									"protocol": "https",
 									"host": [
 										"app",
@@ -1477,11 +1477,11 @@
 									"query": [
 										{
 											"key": "api_key",
-											"value": "INSERT_API_KEY_HERE"
+											"value": "<INSERT_API_KEY_HERE>"
 										},
 										{
 											"key": "application_key",
-											"value": "INSERT_APP_KEY_HERE"
+											"value": "<INSERT_APP_KEY_HERE>"
 										}
 									]
 								},
@@ -1505,7 +1505,7 @@
 									"raw": "{\n    \"hooks\": [\n      {\n        \"name\": \"anotherone\",\n        \"url\": \"http://requestb.in/v1srg7v1\"\n      }\n    ]\n}"
 								},
 								"url": {
-									"raw": "https://app.datadoghq.com/api/v1/integration/webhooks?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+									"raw": "https://app.datadoghq.com/api/v1/integration/webhooks?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 									"protocol": "https",
 									"host": [
 										"app",
@@ -1521,11 +1521,11 @@
 									"query": [
 										{
 											"key": "api_key",
-											"value": "INSERT_API_KEY_HERE"
+											"value": "<INSERT_API_KEY_HERE>"
 										},
 										{
 											"key": "application_key",
-											"value": "INSERT_APP_KEY_HERE"
+											"value": "<INSERT_APP_KEY_HERE>"
 										}
 									]
 								},
@@ -1557,7 +1557,7 @@
 									"raw": "{\"service_hooks\": [\n      {\n        \"account\": \"Main_Account\",\n        \"url\": \"https://hooks.slack.com/services/1/1\"\n      },\n      {\n        \"account\": \"doghouse\",\n        \"url\": \"https://hooks.slack.com/services/2/2\"\n      }\n    ],\n    \"channels\": [\n      {\n        \"channel_name\": \"#private\",\n        \"transfer_all_user_comments\": \"false\",\n        \"account\": \"Main_Account\"\n      },\n      {\n        \"channel_name\": \"#heresachannel\",\n        \"transfer_all_user_comments\": \"false\",\n        \"account\": \"doghouse\"\n      }\n    ]\n}"
 								},
 								"url": {
-									"raw": "https://app.datadoghq.com/api/v1/integration/slack?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+									"raw": "https://app.datadoghq.com/api/v1/integration/slack?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 									"protocol": "https",
 									"host": [
 										"app",
@@ -1573,11 +1573,11 @@
 									"query": [
 										{
 											"key": "api_key",
-											"value": "INSERT_API_KEY_HERE"
+											"value": "<INSERT_API_KEY_HERE>"
 										},
 										{
 											"key": "application_key",
-											"value": "INSERT_APP_KEY_HERE"
+											"value": "<INSERT_APP_KEY_HERE>"
 										}
 									]
 								},
@@ -1601,7 +1601,7 @@
 									"raw": "{\"service_hooks\": [\n      {\n        \"account\": \"Main_Account\",\n        \"url\": \"https://hooks.slack.com/services/1/1\"\n      },\n      {\n        \"account\": \"doghouse\",\n        \"url\": \"https://hooks.slack.com/services/2/2\"\n      }\n    ],\n    \"channels\": [\n      {\n        \"channel_name\": \"#private\",\n        \"transfer_all_user_comments\": \"false\",\n        \"account\": \"Main_Account\"\n      },\n      {\n        \"channel_name\": \"#heresachannel\",\n        \"transfer_all_user_comments\": \"false\",\n        \"account\": \"doghouse\"\n      }\n    ]\n}"
 								},
 								"url": {
-									"raw": "https://app.datadoghq.com/api/v1/integration/slack?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+									"raw": "https://app.datadoghq.com/api/v1/integration/slack?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 									"protocol": "https",
 									"host": [
 										"app",
@@ -1617,11 +1617,11 @@
 									"query": [
 										{
 											"key": "api_key",
-											"value": "INSERT_API_KEY_HERE"
+											"value": "<INSERT_API_KEY_HERE>"
 										},
 										{
 											"key": "application_key",
-											"value": "INSERT_APP_KEY_HERE"
+											"value": "<INSERT_APP_KEY_HERE>"
 										}
 									]
 								},
@@ -1690,7 +1690,7 @@
 							"raw": "{ \"series\" :\n         [{\"metric\":\"test.metric2\",\n          \"points\":[[\"{{$timestamp}}\", \"{{$randomInt}}\"]],\n          \"type\":\"gauge\",\n          \"tags\":\"source:Postman,test\",\n          \"host\":\"macbookPro\"\n         }\n        ]\n    }"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/series?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/series?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -1705,11 +1705,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -1733,7 +1733,7 @@
 							"raw": "{ \"series\" :\n         [{\"metric\":\"test.metric\",\n          \"points\":[1493127756,20],\n          \"type\":\"gauge\",\n          \"host\":\"test.example.com\",\n          \"tags\":[\"environment:test\"]}\n        ]\n    }"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/query?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&from=1493127756&to=1493388187&query=system.cpu.idle{*}by{host}",
+							"raw": "https://app.datadoghq.com/api/v1/query?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>&from=1493127756&to=1493388187&query=system.cpu.idle{*}by{host}",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -1748,11 +1748,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								},
 								{
 									"key": "from",
@@ -1783,7 +1783,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/metrics/system.cpu.system?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/metrics/system.cpu.system?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -1799,11 +1799,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -1827,7 +1827,7 @@
 							"raw": "{\n    \"description\": \"The percent of time the CPU spent running the kernel 2.\",\n    \"short_name\": \"cpu system\",\n    \"integration\": \"system\",\n    \"statsd_interval\": null,\n    \"per_unit\": null,\n    \"type\": \"gauge\",\n    \"unit\": \"percent\"\n}"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/metrics/system.cpu.system?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/metrics/system.cpu.system?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -1843,11 +1843,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -1866,7 +1866,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/metrics?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&from=1488386651",
+							"raw": "https://app.datadoghq.com/api/v1/metrics?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>&from=1488386651",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -1881,11 +1881,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								},
 								{
 									"key": "from",
@@ -1920,7 +1920,7 @@
 							"raw": "{\n      \"type\": \"metric alert\",\n      \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100\",\n      \"name\": \"Bytes received on host0\",\n      \"message\": \"We may need to add web hosts if this is consistently high.\",\n      \"tags\": [\"app:webserver\", \"frontend\"],\n      \"options\": {\n      \t\"notify_no_data\": true,\n      \t\"no_data_timeframe\": 20\n      }\n    }"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/monitor?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/monitor?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -1935,11 +1935,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -1963,7 +1963,7 @@
 							"raw": "{\n      \"type\": \"metric alert\",\n      \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100\",\n      \"name\": \"Bytes received on host0\",\n      \"message\": \"We may need to add web hosts if this is consistently high.\",\n      \"tags\": [\"app:webserver\", \"frontend\"],\n      \"options\": {\n      \t\"notify_no_data\": true,\n      \t\"no_data_timeframe\": 20\n      }\n    }"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/monitor/1959920/mute?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/monitor/1959920/mute?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -1980,11 +1980,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -2008,7 +2008,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/monitor?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/monitor?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -2023,11 +2023,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -2051,7 +2051,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/monitor/unmute_all?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/monitor/unmute_all?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -2067,11 +2067,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -2095,7 +2095,7 @@
 							"raw": "{\n      \"type\": \"metric alert\",\n      \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100\",\n      \"name\": \"Bytes received on host0\",\n      \"message\": \"We may need to add web hosts if this is consistently high.\",\n      \"tags\": [\"app:webserver\", \"frontend\"],\n      \"options\": {\n      \t\"notify_no_data\": true,\n      \t\"no_data_timeframe\": 20\n      }\n    }"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/monitor/1959920/unmute?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/monitor/1959920/unmute?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -2112,11 +2112,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -2140,7 +2140,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/monitor/mute_all?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/monitor/mute_all?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -2156,11 +2156,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -2184,7 +2184,7 @@
 							"raw": "{\n        \"tags\": [],\n        \"deleted\": null,\n        \"query\": \"\\\"windows_service.state\\\".over(\\\"host:GamingPC\\\",\\\"service:termservice\\\").by(\\\"host\\\",\\\"service\\\").last(4).count_by_status()\",\n        \"message\": \"Example Windows Service Check for {{service.name}} on {{host.name}}\",\n        \"matching_downtimes\": [],\n        \"id\": 4769031,\n        \"multi\": true,\n        \"name\": \"Windows Service Check\",\n        \"created\": \"2018-04-25T16:06:10.564735+00:00\",\n        \"created_at\": 1524672370000,\n        \"creator\": {\n            \"id\": 580920,\n            \"handle\": \"brendan.roche@datadoghq.com\",\n            \"name\": \"Brendan Roche\",\n            \"email\": \"brendan.roche@datadoghq.com\"\n        },\n        \"org_id\": 104001,\n        \"modified\": \"2018-04-25T16:06:10.564735+00:00\",\n        \"overall_state_modified\": null,\n        \"overall_state\": \"No Data\",\n        \"type\": \"service check\",\n        \"options\": {\n            \"notify_audit\": false,\n            \"locked\": false,\n            \"timeout_h\": 0,\n            \"silenced\": {},\n            \"thresholds\": {\n                \"warning\": 3,\n                \"ok\": 3,\n                \"critical\": 3\n            },\n            \"new_host_delay\": 300,\n            \"notify_no_data\": false,\n            \"renotify_interval\": 0,\n            \"no_data_timeframe\": 2\n        }\n    }"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/monitor/4769031?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/monitor/4769031?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -2200,11 +2200,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -2228,7 +2228,7 @@
 							"raw": "{\n      \"type\": \"metric alert\",\n      \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100\",\n      \"name\": \"Bytes received on host0\",\n      \"message\": \"We may need to add web hosts if this is consistently high.\",\n      \"tags\": [\"app:webserver\", \"frontend\"],\n      \"options\": {\n      \t\"notify_no_data\": true,\n      \t\"no_data_timeframe\": 20\n      }\n    }"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/monitor/1959920?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/monitor/1959920?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -2244,11 +2244,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -2272,7 +2272,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/monitor/1959920?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/monitor/1959920?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -2288,11 +2288,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -2323,7 +2323,7 @@
 							"raw": "{ \"series\" :\n         [{\"metric\":\"symantec.job.duration\",\n          \"points\":[[1500326997,20]],\n          \"type\":\"gauge\",\n          \"host\":\"test.example.com\",\n          \"tags\":[\"jobId:12345,datacenter:dc1,app:app1\"]}\n        ]\n    }"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/org?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/org?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -2338,11 +2338,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						}
@@ -2433,7 +2433,7 @@
 							"raw": "{\n    \"name\" : \"Setup Child Org Via API\",\n    \"subscription\" : {\n        \"type\" : \"trial\"\n    },\n    \"billing\" : {\n        \"type\" : \"parent_billing\"\n    }\n}"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/org?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/org?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -2448,11 +2448,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -2505,7 +2505,7 @@
 							"raw": "{\n    \"board_title\": \"Number of Agents or EC2 reporting\",\n    \"read_only\": false,\n    \"created\": \"2017-04-25T22:12:54.909853+00:00\",\n    \"modified\": \"2017-04-25T22:15:01.403148+00:00\",\n    \"height\": 768,\n    \"width\": 1024,\n    \"widgets\": [\n        {\n            \"x\": 24,\n            \"title\": \"New Agents reporting, past week\",\n            \"height\": 57,\n            \"width\": 59,\n            \"timeframe\": \"1w\",\n            \"y\": 30,\n            \"query\": \"Datadog agent started\",\n            \"type\": \"event_stream\"\n        },\n        {\n            \"title_size\": 16,\n            \"title\": true,\n            \"title_align\": \"left\",\n            \"title_text\": \"Agent host count reporting (system.cpu.user)\",\n            \"height\": 26,\n            \"tile_def\": {\n                \"viz\": \"timeseries\",\n                \"requests\": [\n                    {\n                        \"q\": \"count:system.cpu.user{*}.rollup(max,3600)\",\n                        \"aggregator\": \"avg\",\n                        \"conditional_formats\": [],\n                        \"type\": \"line\"\n                    }\n                ]\n            },\n            \"width\": 47,\n            \"timeframe\": \"1w\",\n            \"y\": 1,\n            \"x\": 1,\n            \"type\": \"timeseries\"\n        },\n        {\n            \"title_size\": 16,\n            \"title\": true,\n            \"title_align\": \"left\",\n            \"title_text\": \"AWS host count reporting (ec2.host_ok)\",\n            \"height\": 26,\n            \"tile_def\": {\n                \"viz\": \"timeseries\",\n                \"requests\": [\n                    {\n                        \"q\": \"count:aws.ec2.host_ok{*}.rollup(max,3600)\",\n                        \"aggregator\": \"avg\",\n                        \"conditional_formats\": [],\n                        \"type\": \"line\"\n                    }\n                ]\n            },\n            \"width\": 47,\n            \"timeframe\": \"1w\",\n            \"y\": 1,\n            \"x\": 50,\n            \"type\": \"timeseries\"\n        }\n    ],\n    \"id\": 177964\n}"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/screen/177964?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/screen/177964?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -2521,11 +2521,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -2549,7 +2549,7 @@
 							"raw": "{\n        \"width\": 1024,\n        \"height\": 768,\n        \"board_title\": \"Number of Agents or EC2 reporting\",\n        \"widgets\": [\n            {\n                \"type\": \"event_stream\",\n                \"title\": \"New Agents reporting, past week\",\n                \"height\": 57,\n                \"width\": 59,\n\n                \"y\": 30,\n                \"x\": 24,\n\n                \"query\": \"Datadog agent started\",\n                \"timeframe\": \"1w\"\n            },\n            {\"type\": \"timeseries\",\n\n               \"title\": true,\n               \"title_size\": 16,\n               \"title_align\": \"left\",\n               \"title_text\": \"Agent host count reporting (system.cpu.user)\",\n\n               \"height\": 26,\n               \"width\": 47,\n\n               \"y\": 1,\n               \"x\": 1,\n\n               \"timeframe\": \"1w\",\n                 \"tile_def\": {\n                   \"viz\": \"timeseries\",\n                   \"requests\": [\n                      {\n                           \"q\": \"count:system.cpu.user{*}.rollup(max,3600)\",\n                           \"aggregator\": \"avg\",\n                           \"conditional_formats\": [],\n                           \"type\": \"line\"\n\n                      }\n                      ]\n                 }\n            },\n    {\"type\": \"timeseries\",\n\n               \"title\": true,\n               \"title_size\": 16,\n               \"title_align\": \"left\",\n               \"title_text\": \"AWS host count reporting (ec2.host_ok)\",\n\n               \"height\": 26,\n               \"width\": 47,\n\n               \"y\": 1,\n               \"x\": 50,\n\n               \"timeframe\": \"1w\",\n                 \"tile_def\": {\n                   \"viz\": \"timeseries\",\n                   \"requests\": [\n                      {\n                           \"q\": \"count:aws.ec2.host_ok{*}.rollup(max,3600)\",\n                           \"aggregator\": \"avg\",\n                           \"conditional_formats\": [],\n                           \"type\": \"line\"\n\n                      }\n                      ]\n                     }\n\n                 }\n        ]\n    }"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/screen/share/178837?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/screen/share/178837?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -2566,11 +2566,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -2594,7 +2594,7 @@
 							"raw": "{\n        \"width\": 1024,\n        \"height\": 768,\n        \"board_title\": \"Number of Agents or EC2 reporting\",\n        \"widgets\": [\n            {\n                \"type\": \"event_stream\",\n                \"title\": \"New Agents reporting, past week\",\n                \"height\": 57,\n                \"width\": 59,\n\n                \"y\": 30,\n                \"x\": 24,\n\n                \"query\": \"Datadog agent started\",\n                \"timeframe\": \"1w\"\n            },\n            {\"type\": \"timeseries\",\n\n               \"title\": true,\n               \"title_size\": 16,\n               \"title_align\": \"left\",\n               \"title_text\": \"Agent host count reporting (system.cpu.user)\",\n\n               \"height\": 26,\n               \"width\": 47,\n\n               \"y\": 1,\n               \"x\": 1,\n\n               \"timeframe\": \"1w\",\n                 \"tile_def\": {\n                   \"viz\": \"timeseries\",\n                   \"requests\": [\n                      {\n                           \"q\": \"count:system.cpu.user{*}.rollup(max,3600)\",\n                           \"aggregator\": \"avg\",\n                           \"conditional_formats\": [],\n                           \"type\": \"line\"\n\n                      }\n                      ]\n                 }\n            },\n    {\"type\": \"timeseries\",\n\n               \"title\": true,\n               \"title_size\": 16,\n               \"title_align\": \"left\",\n               \"title_text\": \"AWS host count reporting (ec2.host_ok)\",\n\n               \"height\": 26,\n               \"width\": 47,\n\n               \"y\": 1,\n               \"x\": 50,\n\n               \"timeframe\": \"1w\",\n                 \"tile_def\": {\n                   \"viz\": \"timeseries\",\n                   \"requests\": [\n                      {\n                           \"q\": \"count:aws.ec2.host_ok{*}.rollup(max,3600)\",\n                           \"aggregator\": \"avg\",\n                           \"conditional_formats\": [],\n                           \"type\": \"line\"\n\n                      }\n                      ]\n                     }\n\n                 }\n        ]\n    }"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/screen?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/screen?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -2609,11 +2609,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -2637,7 +2637,7 @@
 							"raw": "{\n    \"board_title\": \"Number of Agents or EC2 reporting\",\n    \"read_only\": false,\n    \"created\": \"2017-04-25T22:12:54.909853+00:00\",\n    \"modified\": \"2017-04-25T22:15:01.403148+00:00\",\n    \"height\": 768,\n    \"width\": 1024,\n    \"widgets\": [\n        {\n            \"x\": 24,\n            \"title\": \"New Agents reporting, past week\",\n            \"height\": 57,\n            \"width\": 59,\n            \"timeframe\": \"1w\",\n            \"y\": 30,\n            \"query\": \"Datadog agent started\",\n            \"type\": \"event_stream\"\n        },\n        {\n            \"title_size\": 16,\n            \"title\": true,\n            \"title_align\": \"left\",\n            \"title_text\": \"Agent host count reporting (system.cpu.user)\",\n            \"height\": 26,\n            \"tile_def\": {\n                \"viz\": \"timeseries\",\n                \"requests\": [\n                    {\n                        \"q\": \"count:system.cpu.user{*}.rollup(max,3600)\",\n                        \"aggregator\": \"avg\",\n                        \"conditional_formats\": [],\n                        \"type\": \"line\"\n                    }\n                ]\n            },\n            \"width\": 47,\n            \"timeframe\": \"1w\",\n            \"y\": 1,\n            \"x\": 1,\n            \"type\": \"timeseries\"\n        },\n        {\n            \"title_size\": 16,\n            \"title\": true,\n            \"title_align\": \"left\",\n            \"title_text\": \"AWS host count reporting (ec2.host_ok)\",\n            \"height\": 26,\n            \"tile_def\": {\n                \"viz\": \"timeseries\",\n                \"requests\": [\n                    {\n                        \"q\": \"count:aws.ec2.host_ok{*}.rollup(max,3600)\",\n                        \"aggregator\": \"avg\",\n                        \"conditional_formats\": [],\n                        \"type\": \"line\"\n                    }\n                ]\n            },\n            \"width\": 47,\n            \"timeframe\": \"1w\",\n            \"y\": 1,\n            \"x\": 50,\n            \"type\": \"timeseries\"\n        }\n    ],\n    \"id\": 177964\n}"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/screen/177964?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/screen/177964?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -2653,11 +2653,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -2681,7 +2681,7 @@
 							"raw": "{\n        \"width\": 1024,\n        \"height\": 768,\n        \"board_title\": \"Number of Agents or EC2 reporting\",\n        \"widgets\": [\n            {\n                \"type\": \"event_stream\",\n                \"title\": \"New Agents reporting, past week\",\n                \"height\": 57,\n                \"width\": 59,\n\n                \"y\": 30,\n                \"x\": 24,\n\n                \"query\": \"Datadog agent started\",\n                \"timeframe\": \"1w\"\n            },\n            {\"type\": \"timeseries\",\n\n               \"title\": true,\n               \"title_size\": 16,\n               \"title_align\": \"left\",\n               \"title_text\": \"Agent host count reporting (system.cpu.user)\",\n\n               \"height\": 26,\n               \"width\": 47,\n\n               \"y\": 1,\n               \"x\": 1,\n\n               \"timeframe\": \"1w\",\n                 \"tile_def\": {\n                   \"viz\": \"timeseries\",\n                   \"requests\": [\n                      {\n                           \"q\": \"count:system.cpu.user{*}.rollup(max,3600)\",\n                           \"aggregator\": \"avg\",\n                           \"conditional_formats\": [],\n                           \"type\": \"line\"\n\n                      }\n                      ]\n                 }\n            },\n    {\"type\": \"timeseries\",\n\n               \"title\": true,\n               \"title_size\": 16,\n               \"title_align\": \"left\",\n               \"title_text\": \"AWS host count reporting (ec2.host_ok)\",\n\n               \"height\": 26,\n               \"width\": 47,\n\n               \"y\": 1,\n               \"x\": 50,\n\n               \"timeframe\": \"1w\",\n                 \"tile_def\": {\n                   \"viz\": \"timeseries\",\n                   \"requests\": [\n                      {\n                           \"q\": \"count:aws.ec2.host_ok{*}.rollup(max,3600)\",\n                           \"aggregator\": \"avg\",\n                           \"conditional_formats\": [],\n                           \"type\": \"line\"\n\n                      }\n                      ]\n                     }\n\n                 }\n        ]\n    }"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/screen?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/screen?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -2696,11 +2696,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -2724,7 +2724,7 @@
 							"raw": "{\n        \"width\": 1024,\n        \"height\": 768,\n        \"board_title\": \"Number of Agents or EC2 reporting\",\n        \"widgets\": [\n            {\n                \"type\": \"event_stream\",\n                \"title\": \"New Agents reporting, past week\",\n                \"height\": 57,\n                \"width\": 59,\n\n                \"y\": 30,\n                \"x\": 24,\n\n                \"query\": \"Datadog agent started\",\n                \"timeframe\": \"1w\"\n            },\n            {\"type\": \"timeseries\",\n\n               \"title\": true,\n               \"title_size\": 16,\n               \"title_align\": \"left\",\n               \"title_text\": \"Agent host count reporting (system.cpu.user)\",\n\n               \"height\": 26,\n               \"width\": 47,\n\n               \"y\": 1,\n               \"x\": 1,\n\n               \"timeframe\": \"1w\",\n                 \"tile_def\": {\n                   \"viz\": \"timeseries\",\n                   \"requests\": [\n                      {\n                           \"q\": \"count:system.cpu.user{*}.rollup(max,3600)\",\n                           \"aggregator\": \"avg\",\n                           \"conditional_formats\": [],\n                           \"type\": \"line\"\n\n                      }\n                      ]\n                 }\n            },\n    {\"type\": \"timeseries\",\n\n               \"title\": true,\n               \"title_size\": 16,\n               \"title_align\": \"left\",\n               \"title_text\": \"AWS host count reporting (ec2.host_ok)\",\n\n               \"height\": 26,\n               \"width\": 47,\n\n               \"y\": 1,\n               \"x\": 50,\n\n               \"timeframe\": \"1w\",\n                 \"tile_def\": {\n                   \"viz\": \"timeseries\",\n                   \"requests\": [\n                      {\n                           \"q\": \"count:aws.ec2.host_ok{*}.rollup(max,3600)\",\n                           \"aggregator\": \"avg\",\n                           \"conditional_formats\": [],\n                           \"type\": \"line\"\n\n                      }\n                      ]\n                     }\n\n                 }\n        ]\n    }"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/screen/share/178837?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/screen/share/178837?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -2741,11 +2741,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -2769,7 +2769,7 @@
 							"raw": "{\n        \"width\": 1024,\n        \"height\": 768,\n        \"board_title\": \"Number of Agents or EC2 reporting\",\n        \"widgets\": [\n            {\n                \"type\": \"event_stream\",\n                \"title\": \"New Agents reporting, past week\",\n                \"height\": 57,\n                \"width\": 59,\n\n                \"y\": 30,\n                \"x\": 24,\n\n                \"query\": \"Datadog agent started\",\n                \"timeframe\": \"1w\"\n            },\n            {\"type\": \"timeseries\",\n\n               \"title\": true,\n               \"title_size\": 16,\n               \"title_align\": \"left\",\n               \"title_text\": \"Agent host count reporting (system.cpu.user)\",\n\n               \"height\": 26,\n               \"width\": 47,\n\n               \"y\": 1,\n               \"x\": 1,\n\n               \"timeframe\": \"1w\",\n                 \"tile_def\": {\n                   \"viz\": \"timeseries\",\n                   \"requests\": [\n                      {\n                           \"q\": \"count:system.cpu.user{*}.rollup(max,3600)\",\n                           \"aggregator\": \"avg\",\n                           \"conditional_formats\": [],\n                           \"type\": \"line\"\n\n                      }\n                      ]\n                 }\n            },\n    {\"type\": \"timeseries\",\n\n               \"title\": true,\n               \"title_size\": 16,\n               \"title_align\": \"left\",\n               \"title_text\": \"AWS host count reporting (ec2.host_ok)\",\n\n               \"height\": 26,\n               \"width\": 47,\n\n               \"y\": 1,\n               \"x\": 50,\n\n               \"timeframe\": \"1w\",\n                 \"tile_def\": {\n                   \"viz\": \"timeseries\",\n                   \"requests\": [\n                      {\n                           \"q\": \"count:aws.ec2.host_ok{*}.rollup(max,3600)\",\n                           \"aggregator\": \"avg\",\n                           \"conditional_formats\": [],\n                           \"type\": \"line\"\n\n                      }\n                      ]\n                     }\n\n                 }\n        ]\n    }"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/screen/177964?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/screen/177964?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -2785,11 +2785,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -2820,7 +2820,7 @@
 							"raw": "{\n        \"width\": 1024,\n        \"height\": 768,\n        \"board_title\": \"Number of Agents or EC2 reporting\",\n        \"widgets\": [\n            {\n                \"type\": \"event_stream\",\n                \"title\": \"New Agents reporting, past week\",\n                \"height\": 57,\n                \"width\": 59,\n\n                \"y\": 30,\n                \"x\": 24,\n\n                \"query\": \"Datadog agent started\",\n                \"timeframe\": \"1w\"\n            },\n            {\"type\": \"timeseries\",\n\n               \"title\": true,\n               \"title_size\": 16,\n               \"title_align\": \"left\",\n               \"title_text\": \"Agent host count reporting (system.cpu.user)\",\n\n               \"height\": 26,\n               \"width\": 47,\n\n               \"y\": 1,\n               \"x\": 1,\n\n               \"timeframe\": \"1w\",\n                 \"tile_def\": {\n                   \"viz\": \"timeseries\",\n                   \"requests\": [\n                      {\n                           \"q\": \"count:system.cpu.user{*}.rollup(max,3600)\",\n                           \"aggregator\": \"avg\",\n                           \"conditional_formats\": [],\n                           \"type\": \"line\"\n\n                      }\n                      ]\n                 }\n            },\n    {\"type\": \"timeseries\",\n\n               \"title\": true,\n               \"title_size\": 16,\n               \"title_align\": \"left\",\n               \"title_text\": \"AWS host count reporting (ec2.host_ok)\",\n\n               \"height\": 26,\n               \"width\": 47,\n\n               \"y\": 1,\n               \"x\": 50,\n\n               \"timeframe\": \"1w\",\n                 \"tile_def\": {\n                   \"viz\": \"timeseries\",\n                   \"requests\": [\n                      {\n                           \"q\": \"count:aws.ec2.host_ok{*}.rollup(max,3600)\",\n                           \"aggregator\": \"avg\",\n                           \"conditional_formats\": [],\n                           \"type\": \"line\"\n\n                      }\n                      ]\n                     }\n\n                 }\n        ]\n    }"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/search?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&q=cpu",
+							"raw": "https://app.datadoghq.com/api/v1/search?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>&q=cpu",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -2835,11 +2835,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								},
 								{
 									"key": "q",
@@ -2874,7 +2874,7 @@
 							"raw": "{\n  \"tags\": [\n    \"aws:cloudformation:stack-name:myfirstinstance\",\n    \"name:myfirstinstance\",\n    \"demo\",\n    \"image:ami-80861296\",\n    \"region:us-east-1\",\n    \"instance-type:t2.micro\",\n    \"aws:cloudformation:logical-id:webserverinstance\",\n    \"security-group:sg-658ba51a\",\n    \"availability-zone:us-east-1c\",\n    \"kernel:none\",\n    \"aws:cloudformation:stack-id:arn:aws:cloudformation:us-east-1:989648780687:stack/myfirstinstance/7f4b9880-250e-11e7-94ec-500c20fefad2\"\n  ]\n}"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/tags/hosts/i-0f125915827da9af1?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&hostname=i-0f125915827da9af1",
+							"raw": "https://app.datadoghq.com/api/v1/tags/hosts/i-0f125915827da9af1?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>&hostname=i-0f125915827da9af1",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -2891,11 +2891,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								},
 								{
 									"key": "hostname",
@@ -2923,7 +2923,7 @@
 							"raw": "{\n  \"tags\": [\n    \"blank:test2\"\n  ]\n}"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/tags/hosts/i-0f125915827da9af1?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&hostname=i-0f125915827da9af1",
+							"raw": "https://app.datadoghq.com/api/v1/tags/hosts/i-0f125915827da9af1?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>&hostname=i-0f125915827da9af1",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -2940,11 +2940,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								},
 								{
 									"key": "hostname",
@@ -2971,7 +2971,7 @@
 							"raw": "{\n  \"tags\": [\n    \"aws:cloudformation:stack-name:myfirstinstance\",\n    \"name:myfirstinstance\",\n    \"demo\",\n    \"image:ami-80861296\",\n    \"region:us-east-1\",\n    \"instance-type:t2.micro\",\n    \"aws:cloudformation:logical-id:webserverinstance\",\n    \"security-group:sg-658ba51a\",\n    \"availability-zone:us-east-1c\",\n    \"kernel:none\",\n    \"aws:cloudformation:stack-id:arn:aws:cloudformation:us-east-1:989648780687:stack/myfirstinstance/7f4b9880-250e-11e7-94ec-500c20fefad2\",\n  ]\n}"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/tags/hosts/i-0f125915827da9af1?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&hostname=i-0f125915827da9af1",
+							"raw": "https://app.datadoghq.com/api/v1/tags/hosts/i-0f125915827da9af1?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>&hostname=i-0f125915827da9af1",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -2988,11 +2988,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								},
 								{
 									"key": "hostname",
@@ -3027,7 +3027,7 @@
 							"raw": "{\n      \"graphs\" : [{\n          \"title\": \"Average Memory Free\",\n          \"definition\": {\n              \"events\": [],\n              \"requests\": [\n                  {\"q\": \"avg:system.mem.free{*}\"}\n              ]\n          },\n          \"viz\": \"timeseries\"\n      }],\n      \"title\" : \"Average Memory Free Shell\",\n      \"description\" : \"A dashboard with memory info.\",\n      \"template_variables\": [{\n          \"name\": \"host1\",\n          \"prefix\": \"host\",\n          \"default\": \"host:my-host\"\n      }],\n      \"read_only\": \"True\"\n    }"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/dash?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/dash?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -3042,11 +3042,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -3070,7 +3070,7 @@
 							"raw": "{\n      \"graphs\" : [{\n          \"title\": \"Average Memory Free\",\n          \"definition\": {\n              \"events\": [],\n              \"requests\": [\n                  {\"q\": \"avg:system.mem.free{*}\"}\n              ]\n          },\n          \"viz\": \"timeseries\"\n      }],\n      \"title\" : \"Average Memory Free Shell 2\",\n      \"description\" : \"A dashboard with memory info.\",\n      \"template_variables\": [{\n          \"name\": \"host1\",\n          \"prefix\": \"host\",\n          \"default\": \"host:my-host\"\n      }],\n      \"read_only\": \"True\"\n    }"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/dash/306185?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/dash/306185?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -3086,11 +3086,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -3114,7 +3114,7 @@
 							"raw": "{\n      \"graphs\" : [{\n          \"title\": \"Average Memory Free\",\n          \"definition\": {\n              \"events\": [],\n              \"requests\": [\n                  {\"q\": \"avg:system.mem.free{*}\"}\n              ]\n          },\n          \"viz\": \"timeseries\"\n      }],\n      \"title\" : \"Average Memory Free Shell 2\",\n      \"description\" : \"A dashboard with memory info.\",\n      \"template_variables\": [{\n          \"name\": \"host1\",\n          \"prefix\": \"host\",\n          \"default\": \"host:my-host\"\n      }],\n      \"read_only\": \"True\"\n    }"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/dash?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/dash?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -3129,11 +3129,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -3157,7 +3157,7 @@
 							"raw": "{\n    \"description\": \"created by brendan.roche@datadoghq.com\",\n    \"graphs\": [\n        {\n            \"definition\": {\n                \"autoscale\": false,\n                \"custom_unit\": \"\\u00b0F\",\n                \"precision\": \"0\",\n                \"requests\": [\n                    {\n                        \"aggregator\": \"last\",\n                        \"conditional_formats\": [],\n                        \"q\": \"avg:weather.temp_f_broomfield{*}\"\n                    }\n                ],\n                \"status\": \"done\",\n                \"viz\": \"query_value\"\n            },\n            \"title\": \"Broomfield Current Temp\"\n        },\n        {\n            \"definition\": {\n                \"autoscale\": false,\n                \"custom_unit\": \"MPH\",\n                \"precision\": \"0\",\n                \"requests\": [\n                    {\n                        \"aggregator\": \"last\",\n                        \"conditional_formats\": [],\n                        \"q\": \"avg:weather.wind_mph_broomfield{*}\",\n                        \"type\": \"line\"\n                    }\n                ],\n                \"status\": \"done\",\n                \"viz\": \"query_value\"\n            },\n            \"title\": \"Broomfield Wind Strength\"\n        },\n        {\n            \"definition\": {\n                \"autoscale\": false,\n                \"custom_unit\": \"%\",\n                \"precision\": \"0\",\n                \"requests\": [\n                    {\n                        \"aggregator\": \"last\",\n                        \"conditional_formats\": [],\n                        \"q\": \"avg:weather.humidity_broomfield{*}\"\n                    }\n                ],\n                \"status\": \"done\",\n                \"viz\": \"query_value\"\n            },\n            \"title\": \"Broomfield Humidity\"\n        },\n        {\n            \"definition\": {\n                \"autoscale\": true,\n                \"requests\": [\n                    {\n                        \"aggregator\": \"avg\",\n                        \"conditional_formats\": [],\n                        \"q\": \"avg:weather.temp_f_broomfield{*}\",\n                        \"style\": {\n                            \"palette\": \"orange\"\n                        },\n                        \"type\": \"line\"\n                    }\n                ],\n                \"status\": \"done\",\n                \"viz\": \"timeseries\"\n            },\n            \"title\": \"Broomfield Temp\"\n        },\n        {\n            \"definition\": {\n                \"autoscale\": true,\n                \"requests\": [\n                    {\n                        \"aggregator\": \"avg\",\n                        \"conditional_formats\": [],\n                        \"q\": \"avg:weather.wind_mph_broomfield{*}\",\n                        \"style\": {\n                            \"palette\": \"orange\"\n                        },\n                        \"type\": \"area\"\n                    }\n                ],\n                \"status\": \"done\",\n                \"viz\": \"timeseries\"\n            },\n            \"title\": \"Broomfield Wind\"\n        }\n    ],\n    \"read_only\": false,\n    \"template_variables\": [\n        {\n            \"default\": \"*\",\n            \"name\": \"source\",\n            \"prefix\": \"source\"\n        }\n    ],\n    \"title\": \"Broomfield CO Weather\"\n}"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/dash/346679?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/dash/346679?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -3173,11 +3173,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -3203,7 +3203,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/usage/top_avg_metrics?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&month=2018-02&names=aws.ec2.spot_history,system.processes.number",
+							"raw": "https://app.datadoghq.com/api/v1/usage/top_avg_metrics?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>&month=2018-02&names=aws.ec2.spot_history,system.processes.number",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -3219,11 +3219,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								},
 								{
 									"key": "month",
@@ -3252,7 +3252,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/usage/hosts?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&start_hr=2018-03-16T00&end_hr=2018-03-17T00",
+							"raw": "https://app.datadoghq.com/api/v1/usage/hosts?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>&start_hr=2018-03-16T00&end_hr=2018-03-17T00",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -3268,11 +3268,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								},
 								{
 									"key": "start_hr",
@@ -3301,7 +3301,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/usage/timeseries?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&start_hr=2018-03-01T14&end_hr=2018-03-02T14",
+							"raw": "https://app.datadoghq.com/api/v1/usage/timeseries?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>&start_hr=2018-03-01T14&end_hr=2018-03-02T14",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -3317,11 +3317,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								},
 								{
 									"key": "start_hr",
@@ -3350,7 +3350,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/usage/summary?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE&start_month=2018-03",
+							"raw": "https://app.datadoghq.com/api/v1/usage/summary?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>&start_month=2018-03",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -3366,11 +3366,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								},
 								{
 									"key": "start_month",
@@ -3413,7 +3413,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/user?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/user?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -3428,11 +3428,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -3451,7 +3451,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/user/test@gmail.com?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/user/test@gmail.com?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -3467,11 +3467,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -3495,7 +3495,7 @@
 							"raw": "{\n  \"user\": {\n    \"disabled\": false,\n    \"handle\": \"email@domain.com\",\n    \"name\": \"Brendan Michael Roche 2\",\n    \"is_admin\": true,\n    \"role\": null,\n    \"access_role\": \"adm\",\n    \"verified\": true,\n    \"email\": \"email@domain.com\",\n    \"icon\": \"https://secure.gravatar.com/avatar/df46ee85ff1cbb518b20c8cab742b9ea?s=48&d=retro\"\n  }\n}"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/user/email@domain.com?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/user/email@domain.com?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -3511,11 +3511,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -3534,7 +3534,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/user/email@domain.com?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/user/email@domain.com?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -3550,11 +3550,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
@@ -3578,7 +3578,7 @@
 							"raw": "{\n    \"disabled\": false,\n    \"handle\": \"test@gmail.com\",\n    \"name\": \"Testy McTestingson\",\n    \"is_admin\": true,\n    \"role\": null,\n    \"access_role\": \"adm\",\n    \"verified\": true,\n    \"email\": \"test@gmail.com\",\n    \"icon\": \"https://secure.gravatar.com/avatar/df46ee85ff1cbb518b20c8cab742b9ea?s=48&d=retro\"\n  }\n"
 						},
 						"url": {
-							"raw": "https://app.datadoghq.com/api/v1/user?api_key=INSERT_API_KEY_HERE&application_key=INSERT_APP_KEY_HERE",
+							"raw": "https://app.datadoghq.com/api/v1/user?api_key=<INSERT_API_KEY_HERE>&application_key=<INSERT_APP_KEY_HERE>",
 							"protocol": "https",
 							"host": [
 								"app",
@@ -3593,11 +3593,11 @@
 							"query": [
 								{
 									"key": "api_key",
-									"value": "INSERT_API_KEY_HERE"
+									"value": "<INSERT_API_KEY_HERE>"
 								},
 								{
 									"key": "application_key",
-									"value": "INSERT_APP_KEY_HERE"
+									"value": "<INSERT_APP_KEY_HERE>"
 								}
 							]
 						},
