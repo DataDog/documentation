@@ -53,7 +53,7 @@ By default theses commands run on all the configured jmx checks. If you want to 
 
 ### Agent versions [6.0;6.2[
 
-The Agent 6 ships JMXFetch and supports all of its features, except those listed below. For agents version bellow v6.2 the `jmxterm` JAR is not shipped. If you wish to download and use `jmxterm`, see the [upstream project][4].
+The Agent 6 ships JMXFetch and supports all of its features, except those listed below. For Agent versions below v6.2, the `jmxterm` JAR is not shipped. If you wish to download and use `jmxterm`, see the [upstream project][4].
 
 The Agent doesn't have a full featured interface to JMXFetch, so you may have to run some commands manually to debug the list of beans collected, JVMs, etc. A typical manual call will take the following form:
 
