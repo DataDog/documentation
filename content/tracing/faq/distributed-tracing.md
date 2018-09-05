@@ -165,7 +165,7 @@ In our code we added:
 tracer.current_span().set_tag('subject', subject)
 ```
 
-Which allows to get more context every time `think()` is called and traced:
+Which allows you to get more context every time `think()` is called and traced:
 
 * The first time `think` is executed, the *subject* is **technology** and everything goes well:
     {{< img src="tracing/product_specs/distributed_tracing/traces_thinker_mircroservice_GS_1.png" alt="Thinker microservice getting started 1" responsive="true" style="width:80%;">}}
