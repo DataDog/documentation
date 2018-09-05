@@ -55,7 +55,7 @@ By default theses commands run on all the configured jmx checks. If you want to 
 
 The Agent 6 ships JMXFetch and supports all of its features, except those listed below. For agents version bellow v6.2 the `jmxterm` JAR is not shipped. If you wish to download and use `jmxterm`, see the [upstream project][4].
 
-The agent doesn't have a full featured interface to JMXFetch, so you may have to run some commands manually to debug the list of beans collected, JVMs, etc. A typical manual call will take the following form:
+The Agent doesn't have a full featured interface to JMXFetch, so you may have to run some commands manually to debug the list of beans collected, JVMs, etc. A typical manual call will take the following form:
 
 ```shell
 /usr/bin/java -Xmx200m -Xms50m -classpath /usr/lib/jvm/java-8-oracle/lib/tools.jar:/opt/datadog-agent/bin/agent/dist/jmx/jmxfetch-0.18.2-jar-with-dependencies.jar org.datadog.jmxfetch.App --check <CHECK_LIST> --conf_directory /etc/datadog-agent/conf.d --log_level INFO --log_location /var/log/datadog/jmxfetch.log --reporter console <COMMAND>

@@ -68,7 +68,7 @@ annotations:
 
 #### Custom join
 
-In Prometheus it's common to have some placeholder metric holding all the labels because it's possible to do some label joins in the Prometheus query language. The Datadog agent allows you to [join some labels during processing][10], so the metric is sent with all labels/tags wanted.
+In Prometheus it's common to have some placeholder metric holding all the labels because it's possible to do some label joins in the Prometheus query language. The Datadog Agent allows you to [join some labels during processing][10], so the metric is sent with all labels/tags wanted.
 For instance, to add the `node` label on every metric with the `pod` label, use the following configuration lines:
 
 ```

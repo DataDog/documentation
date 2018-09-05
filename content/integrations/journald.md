@@ -60,7 +60,7 @@ Finally, [restart the agent][2].
 
 ##### Change journal location
 
-By default the agent looks for the journal at the following locations:
+By default the Agent looks for the journal at the following locations:
 
 * `/var/log/journal`
 * `/var/run/journal`

@@ -64,7 +64,7 @@ Note: these metrics are unavailable for Azure Kubernetes Service (AKS) at this p
 
 Two installations are possible:
 
-- On the node where the agent is external to the Docker environment
+- On the node where the Agent is external to the Docker environment
 - Deployed with its containerized version in the Docker environment
 
 Take advantage of DaemonSets to [automatically deploy the Datadog Agent on all your nodes][14]. Otherwise follow the [container log collection steps][15] to start collecting logs from all your containers.

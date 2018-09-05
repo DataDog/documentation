@@ -29,7 +29,7 @@ For Pivotal Cloud Foundry, you have the option to install the Datadog integratio
 
 ## Monitor Your Applications on Cloud Foundry
 
-Use **Datadog Cloud Foundry Buildpack** to monitor your Cloud Foundry application. This is a [supply buildpack][1] for Cloud Foundry that installs a [Datadog DogStatsD binary][2] and [Datadog Trace Agent][3] in the container your app is running on.
+Use **Datadog Cloud Foundry Buildpack** to monitor your Cloud Foundry application. This is a [supply buildpack][1] for Cloud Foundry that installs a [Datadog DogStatsD binary][2] and [Datadog Agent][3] in the container your app is running on.
 
 ### Setup
 

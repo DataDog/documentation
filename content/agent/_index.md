@@ -154,7 +154,7 @@ The port which the GUI runs on can be configured in your `datadog.yaml` file. Se
 
 Once the Agent is running, use the `datadog-agent launch-gui` command to launch the GUI within your default web browser.
 
-**Note**: The agent GUI isn't supported on 32-bit Windows platforms.
+**Note**: The Agent GUI isn't supported on 32-bit Windows platforms.
 
 ### Requirements
 
