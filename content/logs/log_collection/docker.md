@@ -70,7 +70,7 @@ docker run -d --name datadog-agent \
 
 Important notes:
 
-- The Docker integration is enabled by default, as well as [autodiscovery][5] in auto configuration mode (remove the listeners: -docker section in `datadog.yaml` to disable it).
+- The Docker integration is enabled by default, as well as [Autodiscovery][5] in auto configuration mode (remove the listeners: -docker section in `datadog.yaml` to disable it).
 
 - We recommend always picking the latest version of Datadog Agent 6. [Consult the full list of available images for Agent 6][6].
 

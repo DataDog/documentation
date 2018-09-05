@@ -61,7 +61,7 @@ xx.xx.xx.xx:4447
 ```
 
 Assuming a domain configuration, be sure the
-`JBoss_EAP_INSTALL_DIR/domain/configuration/application.keystore` has read access by the datadog id (perms of 644 or higher)
+`JBoss_EAP_INSTALL_DIR/domain/configuration/application.keystore` has read access by the Datadog id (perms of 644 or higher)
 
 ###Datadog Edits
 
