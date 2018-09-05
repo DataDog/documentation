@@ -93,7 +93,7 @@ For older versions, Cloud Foundry provides a back-port of this feature in the fo
 
 #### Meta-Buildpack **(deprecated)**
 
-If you are a [meta-buildpack][28] user, Datadog buildpack can be used as a decorator out of the box.
+If you are a [meta-buildpack][28] user, Datadog's buildpack can be used as a decorator out of the box.
 
 **Note**: The [meta-buildpack][28] has been deprecated by pivotal in favor of the [multi-buildpack][25] and that we might drop the support for it in a future release.
 
