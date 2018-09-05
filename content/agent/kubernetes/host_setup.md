@@ -43,7 +43,7 @@ Two installations are possible:
 Take advantage of DaemonSets to [automatically deploy the Datadog Agent on all your nodes][14]. Otherwise follow the [container log collection steps][15] to start collecting logs from all your containers.
 
 ## Further Reading
-To get a better idea of how (or why) to integrate your Kubernetes service, check out the related series of [Datadog blog posts][13].
+To get a better idea of how (or why) to integrate your Kubernetes service, see the related series of [Datadog blog posts][13].
 
 [1]: https://hub.docker.com/r/datadog/agent/
 [2]: /agent/basic_agent_usage/kubernetes
