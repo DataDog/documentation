@@ -5,6 +5,18 @@ kind: documentation
 
 Here is a set of functions of the pattern `<TIMEPERIOD>_before()`. These functions display the values from the corresponding time period on the graph. On their own, they may not be of high value, but together with the current values they may provide useful insight into the performance of your application.
 
+## Timeshift
+
+| Function        | Description                                                            | Example                         |
+| :----           | :-------                                                               | :---------                      |
+| `timeshift()` | Graph values from an arbitrary `<TIME_IN_SECOND>` before the current timestamp for the metric. | `timeshift(<METRIC_NAME>{*}, -<TIME_IN_SECOND>)` |
+
+For example, if you wanted to use this to compare current system load with load from 2 weeks ago (60*60*24*14 = 1209600), your query would be:
+
+```
+timeshift(avg:system.load.1{*}, -1209600)
+```
+
 ## Hour before
 
 | Function        | Description                                                            | Example                         |

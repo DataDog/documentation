@@ -8,6 +8,7 @@
     'id': 169267576,
     'message': None,
     'monitor_id': None,
+    'monitor_tags': ['*'],
     'parent_id': None,
     'recurrence': {
         'period': 1,

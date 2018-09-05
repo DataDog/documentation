@@ -45,9 +45,6 @@ kind: faq
 * [Azure VMs are showing up in the App but not reporting metrics][29]
 * [Azure VM status is not reporting][30]
 
-## Dyn
-* [Why is my dyn.qps metric delayed?][31]
-
 ## Docker
 
 * [Compose and the Datadog Agent][32]
@@ -82,7 +79,7 @@ kind: faq
 * [Troubleshooting JMX Integrations][45]
 * [View jmx data in jConsole and set up your jmx.yaml to collect them][46]
 * [Both my JMX and AWS integrations use "name" tags. What do I do?][47]
-* [Metric limits in JMX integrations][48]
+* [JBoss EAP 7 & Datadog monitoring via JMX][78]
 
 ## Kafka
 
@@ -174,7 +171,6 @@ kind: faq
 [28]: /integrations/faq/my-azure-vm-is-powered-down-why-is-it-still-listed-in-my-infrastructure-list
 [29]: /integrations/faq/azure-vms-are-showing-up-in-the-app-but-not-reporting-metrics
 [30]: /integrations/faq/azure-vm-status-is-not-reporting
-[31]: /integrations/faq/why-is-my-dyn-qps-metric-delayed
 [32]: /integrations/faq/compose-and-the-datadog-agent
 [33]: /integrations/faq/dogstatsd-and-docker
 [34]: /integrations/faq/docker-ecs-kubernetes-events
@@ -191,7 +187,6 @@ kind: faq
 [45]: /integrations/faq/troubleshooting-jmx-integrations
 [46]: /integrations/faq/view-jmx-data-in-jconsole-and-set-up-your-jmx-yaml-to-collect-them
 [47]: /integrations/faq/both-my-jmx-and-aws-integrations-use-name-tags-what-do-i-do
-[48]: /integrations/faq/metric-limits-in-jmw-integrations
 [49]: /integrations/faq/troubleshooting-and-deep-dive-for-kafka
 [50]: /integrations/faq/agent-failed-to-retrieve-rmierver-stub
 [51]: /integrations/faq/producer-and-consumer-metrics-don-t-appear-in-my-datadog-application
@@ -221,3 +216,4 @@ kind: faq
 [75]: /integrations/faq/windows-status-based-check
 [76]: /integrations/faq/how-to-monitor-events-from-the-windows-event-logs
 [77]: /integrations/faq/how-to-retrieve-wmi-metrics
+[78]: /integrations/faq/jboss-eap-7-datadog-monitoring-via-jmx

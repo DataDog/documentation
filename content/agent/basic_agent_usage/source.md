@@ -25,42 +25,87 @@ By default, your Agent is installed in its own sandbox at `~/.datadog-agent`. Yo
 
 Datadog Agent has some commands and only the _lifecycle commands_ (i.e. `start`/`stop`/`restart`/`status` on the Agent) should be run with `sudo`.
 
-| Agent v5                                        | Agent v6                                | Notes                         |
-| ----------------------------------------------- | --------------------------------------- | ----------------------------- |
-| `sudo ~/.datadog-agent/bin/agent start`         | `sudo ./bin/agent/agent start`          | Start Agent                   |
-| `sudo ~/.datadog-agent/bin/agent stop`          | `sudo ./bin/agent/agent  stop`          | Stop Agent                    |
-| `sudo ~/.datadog-agent/bin/agent info`          | `sudo ./bin/agent/agent  info`          | Status page of running Agent  |
-| `sudo ~/.datadog-agent/bin/agent flare`         | `sudo ./bin/agent/agent  flare`         | Send flare                    |
-| `sudo ~/.datadog-agent/bin/agent help`          | `sudo ./bin/agent/agent  help`          | Display command usage         |
+{{< tabs >}}
+{{% tab "Agent v6" %}}
+
+| Description                   | Command                                 |
+| ----------------------------- | --------------------------------------- |
+| Start Agent                   | `sudo ./bin/agent/agent start`          |
+| Stop Agent                    | `sudo ./bin/agent/agent  stop`          |
+| Status page of running Agent  | `sudo ./bin/agent/agent  info`          |
+| Send flare                    | `sudo ./bin/agent/agent  flare`         |
+| Display command usage         | `sudo ./bin/agent/agent  help`          |
+
+{{% /tab %}}
+{{% tab "Agent v5" %}}
+
+| Description                   | Command                                 |
+| ----------------------------- | --------------------------------------- |
+| Start Agent                   | `sudo ~/.datadog-agent/bin/agent start` |
+| Stop Agent                    | `sudo ~/.datadog-agent/bin/agent stop`  |
+| Status page of running Agent  | `sudo ~/.datadog-agent/bin/agent info`  |
+| Send flare                    | `sudo ~/.datadog-agent/bin/agent flare` |
+| Display command usage         | `sudo ~/.datadog-agent/bin/agent help`  |
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Configuration
 
-The configuration files and folders for the Agent are located at:
+{{< tabs >}}
+{{% tab "Agent v6" %}}
+The configuration files and folders for the Agent are located in:
 
-| Agent v5                     | Agent v6                          |
-| :-----                       | :----                             |
-| `/etc/dd-agent/datadog.conf` | `/etc/datadog-agent/datadog.yaml` |
+* `/etc/datadog-agent/datadog.yaml` 
 
 Configuration files for [Integrations][2]:
 
-| Agent v5                | Agent v6                     |
-| :-----                  | :----                        |
-| `/etc/dd-agent/conf.d/` | `/etc/datadog-agent/conf.d/` |
+* `/etc/datadog-agent/conf.d/` 
+
+[2]: /integrations
+
+{{% /tab %}}
+{{% tab "Agent v5" %}}
+
+The configuration files and folders for the Agent are located in:
+
+* `/etc/dd-agent/datadog.conf`  
+
+Configuration files for [Integrations][2]:
+
+* `/etc/dd-agent/conf.d/` 
+
+[2]: /integrations
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Troubleshooting
+{{< tabs >}}
+{{% tab "Agent v6" %}}
 
-Run the info or status command to see the state of the Agent.
-The Agent logs are located in the `/var/log/datadog/` directory:
-
-* For Agent v6 all logs are in the `agent.log` file
-* For Agent v5 logs are in:
-    
-    * `datadog-supervisord.log`
-    * `collector.log`
-    * `dogstatsd.log`
-    * `forwarder.log`
+Run the `status` command to see the state of the Agent. The Agent logs are located in the `/var/log/datadog/` directory and are consolidated in the `agent.log` file.
 
 If you're still having trouble, [our support team][3] is glad to provide further assistance.
+
+[3]: /help
+
+{{% /tab %}}
+{{% tab "Agent v5" %}}
+
+Run the `info` command to see the state of the Agent. The Agent logs are located in the `/var/log/datadog/` directory and are split into:
+
+  * `datadog-supervisord.log`
+  * `collector.log`
+  * `dogstatsd.log`
+  * `forwarder.log`
+
+If you're still having trouble, [our support team][3] is glad to provide further assistance.
+
+[3]: /help
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 

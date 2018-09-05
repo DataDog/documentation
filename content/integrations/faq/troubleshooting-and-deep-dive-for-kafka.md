@@ -24,9 +24,9 @@ There are four main components to Kafka:
 
 It is important to note that we currently have two distinct Kafka Integrations. The first is named [Kafka][4] while the second is [Kafka_Consumer][4].
 
-The [Kafka Integration][4] utilizes [Datadog's JMXFetch][5] application to pull metrics, just like our other Java based applications such as Cassandra, JMX, Tomcat, etc. This pulls metrics through the use of mBeans, where the engineering team has included a list of commonly used mBeans in the Kafka.yaml file. This can be extended with any other beans the user would like, or if your version of Kafka supports additional metrics.
+The [Kafka Integration][4] uses [Datadog's JMXFetch][5] application to pull metrics, just like our other Java based applications such as Cassandra, JMX, Tomcat, etc. This pulls metrics through the use of mBeans, where the engineering team has included a list of commonly used mBeans in the Kafka.yaml file. This can be extended with any other beans the user would like, or if your version of Kafka supports additional metrics.
 
-The [Kafka_Consumer Integration][6] collects metrics like our standard Python based checks. This utilizes an internal Zookeeper API. Zookeeper is an Apache application that is responsible for managing the configuration for the cluster of nodes known as the Kafka broker. (In version 0.9 of Kafka things are a bit different, Zookeeper is no longer required, see the Troubleshooting section for more information). This check picks up only three metrics, and these do not come from JMXFetch.
+The [Kafka_Consumer Integration][6] collects metrics like our standard Python based checks. This uses an internal Zookeeper API. Zookeeper is an Apache application that is responsible for managing the configuration for the cluster of nodes known as the Kafka broker. (In version 0.9 of Kafka things are a bit different, Zookeeper is no longer required, see the Troubleshooting section for more information). This check picks up only three metrics, and these do not come from JMXFetch.
 
 ## Troubleshooting:
 

@@ -3,7 +3,7 @@ title: Service checks is deprecated in favor of monitors
 kind: faq
 ---
 
-Iy your are seeing this message:
+If you are seeing this message:
 ```
 Instance #0[WARNING]: Using events for service checks is deprecated in favor of monitors and will be removed in future versions of the Datadog Agent.
 ```

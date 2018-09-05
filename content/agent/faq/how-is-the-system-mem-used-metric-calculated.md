@@ -11,10 +11,10 @@ The manner in which Datadog calculates the system.mem.used metric produces a val
 
 For example, running 'free -m' on an Ubuntu machine may produce the following memory breakdown (values represent Megabytes):
 
-|||||||
-|:---|:---|:---|:---|:---|:---|
-|total|   used|    free|    shared|  cached|  available|
-|128831|  1203|    71975|  4089|   55653|     122380|
+|        |      |       |        |        |           |
+| :---   | :--- | :---  | :---   | :---   | :---      |
+| total  | used | free  | shared | cached | available |
+| 128831 | 1203 | 71975 | 4089   | 55653  | 122380    |
 
 A Datadog Agent running on this same machine reports a `system.mem.used` metric with a value of 56856 MB - clearly different from the 'free -m' used memory value of 1203 MB.
 

@@ -12,7 +12,7 @@ Utilize [the download button at the top of the graph][3] to save those Metrics t
 
 {{< img src="tracing/faq/apm_save_1.png" alt="APM save" responsive="true" >}}
 
-**Note**: To build Monitors over resources, utilize the resource tag that contains a hash of the resource Name. Find this by saving the metric to a Timeboard and utilizing the same query in a Metric Monitor:
+**Note**: To build Monitors over resources, use the resource tag that contains a hash of the resource Name. Find this by saving the metric to a Timeboard and utilizing the same query in a Metric Monitor:
 
 ## Creating a Monitor from this
 

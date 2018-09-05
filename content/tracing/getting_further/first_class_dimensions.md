@@ -4,6 +4,7 @@ kind: documentation
 aliases:
   - /tracing/environments/
   - /tracing/setup/environment
+  - /tracing/setup/first_class_dimensions
 further_reading:
 - link: "tracing/setup/docker"
   tag: "Documentation"
@@ -64,32 +65,45 @@ There are several ways to specify an environment when reporting data:
 3. Per trace:  
   When submitting a single trace, specify an environment by tagging one of its spans with the metadata key `env`. This overrides the Agent configuration and the host tags value (if any).  
 
-  * **Go**:
-    ```
-    tracer.SetTag("env", "prod")
-    ```
-  For OpenTracing use the `tracer.WithGlobalTag` start option to set the environment globally.
+{{< tabs >}}
+{{% tab "Go" %}}
 
-  * **Java**:
-      Via sysprop:
-      ```
-      -Ddd.trace.span.tags=env:prod
-      ```
-      Via env var:
-      ```
-      DD_TRACE_SPAN_TAGS="env:prod"
-      ```
+```go
+tracer.SetTag("env", "prod")
+```
 
-  * **Ruby**:
-  ```
-  Datadog.tracer.set_tags('env' => 'prod')
-  ```
+For OpenTracing use the `tracer.WithGlobalTag` start option to set the environment globally.
 
-  * **Python**:
-    ```
-    from ddtrace import tracer
-    tracer.set_tags('env', 'prod')
-    ```
+{{% /tab %}}
+{{% tab "Java" %}}
+Via sysprop:
+
+```
+-Ddd.trace.span.tags=env:prod
+```
+
+Via environment variables:
+
+```
+DD_TRACE_SPAN_TAGS="env:prod"
+```
+
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+```ruby
+Datadog.tracer.set_tags('env' => 'prod')
+```
+
+{{% /tab %}}
+{{% tab "Python" %}}
+
+```python
+from ddtrace import tracer
+tracer.set_tags('env', 'prod')
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Viewing Data by Environment
 
@@ -149,5 +163,5 @@ Primary tags appear at the top of APM pages, next to environments. Use these sel
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/tagging
-[2]: /agent/basic_agent_usage/#configuration-file
+[2]: /agent/faq/agent-configuration-files/?tab=agentv6
 [3]: https://app.datadoghq.com/apm/settings

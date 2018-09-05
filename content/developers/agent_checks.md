@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-This page first looks at the `AgentCheck` interface, and then proposes a simple Agent check that collects timing metrics and status events from HTTP services.  
+This page first looks at the `AgentCheck` interface, and then proposes a simple Agent check that collects timing metrics and status events from HTTP services.
 
 Custom Agent checks are included in the main check run loop, meaning they run every check interval, which defaults to 15 seconds.
 
@@ -38,7 +38,7 @@ First off, ensure you've properly installed the [Agent][3] on your machine. If y
 
 All custom Agent checks inherit from the `AgentCheck` class found in `checks/__init__.py` and require a `check()` method that takes one argument, `instance` which is a `dict` having the configuration of a particular instance. The `check` method is run once per instance defined in the check configuration (discussed later).
 
-**Note**: 
+**Note**:
 
 * Custom Agent checks aren't able to import modules by default, all your code should be in one single file. [Learn how to add custom python package to the Agent][12])
 * The Datadog Agent installation has its own embedded copy of Python. Custom scripts importing pip-installed libraries will fail unless Datadog's own embedded copy of pip is used to install these third-party libraries.
@@ -178,7 +178,7 @@ module).
 
 ## Configuration
 
-Each check has a [YAML][8] configuration file that is placed in the `conf.d` directory. The file name should match the name of the check module (e.g.: `haproxy.py` and `haproxy.yaml`).  
+Each check has a [YAML][8] configuration file that is placed in the `conf.d` directory. The file name should match the name of the check module (e.g.: `haproxy.py` and `haproxy.yaml`).
 
 Due to the way Agent checks are packaged and distributed, custom checks cannot have the same name as a existing check or library within the Agent's embedded environment. Use `pip` to display a list of effectively unusable names:
 
@@ -204,7 +204,7 @@ instances:
       min_collection_interval: 20
 ```
 
-For Agent 5, `min_collection_interval` can be added to the `init_config` section to help define how often the check should be run globally, or defined at the instance level. For Agent 6, `min_collection_interval` must be added at an instance level, and can be configured individually for each instance. 
+For Agent 5, `min_collection_interval` can be added to the `init_config` section to help define how often the check should be run globally, or defined at the instance level. For Agent 6, `min_collection_interval` must be added at an instance level, and can be configured individually for each instance.
 
 If it is greater than the interval time for the Agent collector, a line is added to the log stating that collection for this script was skipped. The default is `0` which means it's collected at the same interval as the rest of the integrations on that Agent.
 If the value is set to `30`, it does not mean that the metric is collected every 30 seconds, but rather that it could be collected as often as every 30 seconds.
@@ -357,7 +357,7 @@ def status_code_event(self, url, r, aggregation_key):
 
 ### Putting It All Together
 
-The entire check would be placed into the `checks.d` folder as `http.py`. The corresponding configuration would be placed into the `conf.d` folder as `http.yaml`.
+The entire check would be placed into the `checks.d` folder as `check_http.py`. The corresponding configuration would be placed into the `conf.d` folder as `check_http.yaml`.
 
 Once the check is in `checks.d`, test it by running it as a python script. [Restart the Agent][10] for the changes to be enabled. **Make sure to change the conf.d path in the test method**. From your Agent root, run:
 

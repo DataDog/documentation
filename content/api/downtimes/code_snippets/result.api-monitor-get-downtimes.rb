@@ -4,6 +4,7 @@
         "disabled" => true,
         "start" => 1412792983,
         "active" => false,
+        "monitor_tags" => ["*"],
         "scope" => ["env:staging"],
         "id" => 1625
     }, {
@@ -11,6 +12,7 @@
         "disabled" => true,
         "start" => 1412792985,
         "active" => false,
+        "monitor_tags" => ["*"],
         "scope" => ["*"],
         "id" => 1626
     }]

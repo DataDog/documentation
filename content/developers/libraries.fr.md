@@ -180,7 +180,7 @@ Si vous avez écrit une bibliothèque pour Datadog et que vous souhaitez l'ajout
    [97]: https://github.com/cvent/dogscaler
    [98]: https://cran.r-project.org/package=datadogr
    [99]: https://github.com/urosgruber/dd-agent-FreeBSD
-   [100]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/tools/networking/dd-agent/default.nix
+   [100]: https://github.com/NixOS/nixpkgs/tree/master/pkgs/tools/networking/dd-agent
    [101]: https://github.com/Dynatrace/Dynatrace-AppMon-Datadog-Plugin
    [102]: https://docs.moogsoft.com/display/060102/Datadog+Solution+Pak
    [103]: https://github.com/sensu-plugins/sensu-plugins-datadog

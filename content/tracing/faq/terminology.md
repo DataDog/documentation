@@ -19,5 +19,5 @@ kind: faq
 [7]: /tracing/visualization/trace
 [8]: /tracing/setup
 [9]: /tracing/visualization/resource/#traces
-[10]: /tracing/search
+[10]: /tracing/visualization/search
 [11]: /tracing/visualization/trace/#spans

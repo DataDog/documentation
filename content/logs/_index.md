@@ -51,7 +51,24 @@ However, AWS services logs are collected thanks to our [Lambda function][12]. Tr
 
 ### From a custom forwarder
 
-We have a TCP endpoint `intake.logs.datadoghq.com` that can be accessed either on port `10516` (secured connection) or `10514`. Therefore any custom process or [logging library][16] able to forward logs through TCP can be used.
+Any custom process or [logging library][16] able to forward logs through **TCP** can be used in conjuntion with Datadog Logs. The secure TCP endpoint is `intake.logs.datadoghq.com:10516` (or port `10514` for insecure connections). 
+
+You must prefix the log entry with your [Datadog API Key][38], e.g.:
+
+```
+<DATADOG_API_KEY> this is my log
+```
+
+Test it manually with telnet:
+
+```
+telnet intake.logs.datadoghq.com 10514 
+<DATADOG_API_KEY> Log sent directly via TCP
+```
+
+This will produce the following result in your [live tail page][39]: 
+
+{{< img src="logs/custom_log_telnet.png" alt="Custom telnet" responsive="true" style="width:70%;">}}
 
 ### Reserved attributes
 
@@ -132,3 +149,5 @@ Follow our [log graphing guide][23] to learn more about all the graphing option.
 [35]: /monitors/monitor_types/log
 [36]: /graphing/dashboards/widgets/#timeseries
 [37]: /integrations/#cat-log-collection
+[38]: https://app.datadoghq.com/account/settings#api
+[39]: https://app.datadoghq.com/logs/livetail

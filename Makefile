@@ -60,6 +60,7 @@ clean-integrations:  ## remove built integrations files.
 	@find ./content/integrations -type f -maxdepth 1 \
 	    -a -not -name '_index.md' \
 	    -a -not -name 'amazon_guardduty.md' \
+	    -a -not -name 'amazon_vpc.md' \
 	    -a -not -name 'cloud_foundry.md' \
 	    -a -not -name 'cloudcheckr.md' \
 	    -a -not -name 'integration_sdk.md' \
@@ -70,11 +71,11 @@ clean-integrations:  ## remove built integrations files.
 	    -a -not -name 'nxlog.md' \
 	    -a -not -name 'rss.md' \
 	    -a -not -name 'rsyslog.md' \
+	    -a -not -name 'stunnel.md' \
 	    -a -not -name 'syslog_ng.md' \
 	    -a -not -name 'system.md' \
 	    -a -not -name 'tcprtt.md' \
 	    -a -not -name 'uwsgi.md' \
-	    -a -not -name 'windows_event_log.md' \
 	    -a -not -name '*.fr.md' \
 	    -exec rm -rf {} \;
 

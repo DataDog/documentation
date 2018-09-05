@@ -2,10 +2,10 @@
 title: APM Events
 kind: Documentation
 further_reading:
-- link: "tracing/search"
+- link: "tracing/visualization/search"
   tag: "Documentation"
   text: Global search of all your traces with tags
-- link: "tracing/analytics"
+- link: "tracing/visualization/analytics"
   tag: "Documentation"
   text: Analytics on your APM data at infinite cardinality
 ---
@@ -24,20 +24,21 @@ To add some tags to your APM events, add tags in your HTTP middleware in order t
 
 ```ruby
 class Middleware
-def initialize(app)
-@app = app
-end
+  def initialize(app)
+    @app = app
+  end
 
-def call(env)
-# retrieve the current active Span
-tracer = Datadog.configuration[:rack][:tracer]
-span = tracer.active_span
-# set your tags
-span.set_tag("customer_id", 42)
-span.set_tag("customer_name", "AcmeCorp")
+  def call(env)
+    # retrieve the current active Span
+    tracer = Datadog.configuration[:rack][:tracer]
+    span = tracer.active_span
+    
+    # set your tags
+    span.set_tag("customer_id", 42)
+    span.set_tag("customer_name", "AcmeCorp")
 
-@app.call(env)
-end
+    @app.call(env)
+  end
 End
 ```
 
@@ -45,10 +46,10 @@ Alternatively, use a Tracer Processor before traces are flushed to the Datadog A
 
 ```ruby
 Datadog::Pipeline.before_flush(
-# alter the Span updating tags only for 'rack.request'
-Datadog::Pipeline::SpanProcessor.new do |span|
-span.set_tag("customer_id", 42) if span.name == 'rack.request'
-end
+  # alter the Span updating tags only for 'rack.request'
+  Datadog::Pipeline::SpanProcessor.new do |span|
+    span.set_tag("customer_id", 42) if span.name == 'rack.request'
+  end
 )
 ```
 
@@ -58,7 +59,7 @@ Each unique request generates an APM Event. These are sent to Datadog un-sampled
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/search/#search
-[2]: /tracing/search/#overview
+[1]: /tracing/visualization/search/#search
+[2]: /tracing/visualization/search/#overview
 [3]: /tracing/visualization/#spans
 [4]: /tracing/getting_further/trace_sampling_and_storage

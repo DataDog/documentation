@@ -27,13 +27,9 @@ further_reading:
   * **Agents < 5.2.0** `app.datadoghq.com`
   *  **Agents >= 5.2.0** `<version>-app.agent.datadoghq.com`
 
-This decision was taken after the POODLE problem, now versioned endpoints start with Agent 5.2.0, i.e. each version of the Agent hits a different endpoint based on the version of the *Forwarder*.  
+This decision was taken after the POODLE problem. Versioned endpoints start with Agent v5.2.0, where each version of the Agent calls a different endpoint based on the version of the *Forwarder*. For example, Agent v5.2.0 calls `5-2-0-app.agent.datadoghq.com`. Therefore you must whitelist `*.agent.datadoghq.com` in your firewall(s).
 
-* i.e. Agent 5.2.0 hits `5-2-0-app.agent.datadoghq.com`  
-
-As a consequence whitelist `*.agent.datadoghq.com` in your firewalls.
-
-These domains are **CNAME** records pointing to a set of static IP addresses, these addresses can be found at:  
+These domains are **CNAME** records pointing to a set of static IP addresses. These addresses can be found at:  
 
 * **[https://ip-ranges.datadoghq.com][4]**
 
@@ -41,30 +37,33 @@ The information is structured as JSON following this schema:
 
 ```
 {
-    "version": 1,                       // <-- we increment this every time the information is changed
-    "modified": "YYYY-MM-DD-HH-MM-SS",  // <-- the timestamp of the last modification
-    "agents": {                         // <-- in this section the IPs used by the agent to submit metrics to Datadog
-        "prefixes_ipv4": [              // <-- a list of IPv4 CIDR blocks
+    "version": 1,                       // <-- incremented every time this information is changed
+    "modified": "YYYY-MM-DD-HH-MM-SS",  // <-- timestamp of the last modification
+    "agents": {                         // <-- the IPs used by the agent to submit metrics to Datadog
+        "prefixes_ipv4": [              // <-- list of IPv4 CIDR blocks
             "a.b.c.d/x",
             ...
         ],
-        "prefixes_ipv6": [              // <-- a list of IPv6 CIDR blocks
+        "prefixes_ipv6": [              // <-- list of IPv6 CIDR blocks
             ...
         ]
     },
-    "apm": {...},                       // <-- same structure as "agents" but IPs used for the APM agent data
-    "logs": {...},                      // <-- same for the logs agent data
-    "process": {...},                   // <-- same for the process agent data
-    "api": {...},                       // <-- not relevant for agent traffic (submitting data via API)
-    "webhooks": {...}                   // <-- not relevant for agent traffic (Datadog source IPs delivering webhooks)
+    "apm": {...},                       // <-- same structure as "agents" but IPs used for the APM Agent data
+    "logs": {...},                      // <-- same for the logs Agent data
+    "process": {...},                   // <-- same for the process Agent data
+    "api": {...},                       // <-- not used for Agent traffic (submitting data via API)
+    "webhooks": {...}                   // <-- not used for Agent traffic (Datadog source IPs delivering webhooks)
 }
 ```
 
-If you are interested by only one of the sections of this document, for each section there is also a dedicated endpoint at `https://ip-ranges.datadoghq.com/<section>.json`, for instance:
+Each section has a dedicated endpoint at `https://ip-ranges.datadoghq.com/<section>.json`, for example:
 
 * [https://ip-ranges.datadoghq.com/logs.json][10] for the IPs used to receive logs data
 * [https://ip-ranges.datadoghq.com/apm.json][11] for the IPs used to receive APM data
 
+### Note
+
+You should whitelist all of these IPs; while only a subset are active at any given moment, there are variations over time within the entire set due to regular network operation and maintenance.
 
 ## Open Ports
 
@@ -72,12 +71,13 @@ If you are interested by only one of the sections of this document, for each sec
 
 Open the following ports in order to benefit from all the Agent functionalities: 
 
-### Agent v6
+{{< tabs >}}
+{{% tab "Agent v6" %}}
 
 * **Outbound**:
 
   * `443/tcp`: port for most Agent data. (Metrics, APM, Live Processes/Containers) 
-  * `123/udp`: NTP - [More details on the importance of NTP here][5].
+  * `123/udp`: NTP - [More details on the importance of NTP][5].
   * `10516/tcp`: port for the [Log collection][3]
   * `10255/tcp`: port for the [Kubernetes http kubelet][8]
   * `10250/tcp`: port for the [Kubernetes https kubelet][8]
@@ -95,14 +95,22 @@ Open the following ports in order to benefit from all the Agent functionalities:
   
   * `8126/tcp`: port for the [APM Receiver][1]
 
-### Agent v4 and v5 
+[1]: /tracing
+[3]: /logs
+[5]: /agent/faq/network-time-protocol-ntp-offset-issues/
+[6]: /integrations/go_expvar/
+[7]: /agent/#using-the-gui
+[8]: /agent/basic_agent_usage/kubernetes/
 
-* **Outbound**
+{{% /tab %}}
+{{% tab "Agent v5 & v4" %}}
+
+* **Outbound**:
 
   * `443/tcp`: port for most Agent data. (Metrics, APM, Live Processes/Containers) 
-  * `123/udp`: NTP - [More details on the importance of NTP here][5].
+  * `123/udp`: NTP - [More details on the importance of NTP][5].
 
-* **Inbound**
+* **Inbound**:
 
   * `8125/udp`: dogstatsd. Unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost: 
 
@@ -113,6 +121,13 @@ Open the following ports in order to benefit from all the Agent functionalities:
   * `8126/tcp`: port for the [APM Receiver][1]
   * `17123/tcp`: Agent forwarder, used to buffer traffic in case of network splits between the Agent and Datadog
   * `17124/tcp`: optional graphite adapter
+
+[1]: /tracing
+[5]: /agent/faq/network-time-protocol-ntp-offset-issues/
+
+{{% /tab %}}
+{{< /tabs >}}
+
 
 ## Using Proxies
 

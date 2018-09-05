@@ -7,6 +7,7 @@
   "id": 169267786,
   "message": null,
   "monitor_id": null,
+  "monitor_tags": ["*"],
   "parent_id": null,
   "recurrence": {
     "period": 1,
