@@ -398,7 +398,7 @@ For more details about manual instrumentation, check out the [API documentation]
 
 If you aren't using supported library instrumentation (see [Library compatibility][go lib compatibility]), you may want to to manually instrument your code.
 
-To make use of manual instrumentation, use the `tracer` package which is documented on Datadog [godoc page][tracer godoc]. 
+To make use of manual instrumentation, use the `tracer` package which is documented on Datadog's [godoc page][tracer godoc]. 
 
 **Example Usage**
 
