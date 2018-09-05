@@ -109,7 +109,7 @@ Log events which do not comply with these limits might be transformed or truncat
 * The maximum number of facets is 100.
 * The maximum number of processing Pipeline on a platform is 100.
 * The maximum number of Processor per Pipeline is 20.
-* The maximum number of parsing rule within a grok Processor is 10. We reserve the right to disable underperforming parsing rules that might impact Datadog service performance.
+* The maximum number of parsing rule within a grok Processor is 10. We reserve the right to disable underperforming parsing rules that might impact Datadog's service performance.
 
 [Contact support][2] if you reach one of these limits as Datadog might be able to provide you more.
 
