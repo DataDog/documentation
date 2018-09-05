@@ -89,6 +89,16 @@ test_preview_links:
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
+# move this to live master deploys when we are happy
+index_algolia:
+  <<: *base_template
+  stage: post-deploy
+  environment: "preview"
+  script:
+    - index_docsearch_algolia
+  only:
+    - /.+?\/[a-zA-Z0-9_-]+/
+
 # ================== live ================== #
 build_live:
   <<: *base_template
