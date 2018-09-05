@@ -14,7 +14,7 @@ For setup:
 1. Put in your API and application keys in lines 1,2 and 79
 2. Datadog API/app keys can be found in your account here
 
-**Note**: as currently set up, this Screenboard does not include hosts from GCE, Azure, docker, vSphere or other integrations - only the Datadog Agent and EC2. Adjust as needed for your environment.
+**Note**: this Screenboard does not include hosts from GCE, Azure, docker, vSphere or other integrations - only the Datadog Agent and EC2. Adjust as needed for your environment.
 
 **Disclaimer**: This should not be used for billing purposes, this is only a convenient option to count active instances and is not necessarily reflective of your invoice.
 

@@ -22,7 +22,7 @@ There are four main components to Kafka:
 
 ## Datadog Kafka Integrations:
 
-It is important to note that we currently have two distinct Kafka Integrations. The first is named [Kafka][4] while the second is [Kafka_Consumer][4].
+It is important to note that Datadog has two distinct Kafka Integrations. The first is named [Kafka][4] while the second is [Kafka_Consumer][4].
 
 The [Kafka Integration][4] uses [Datadog's JMXFetch][5] application to pull metrics, just like our other Java based applications such as Cassandra, JMX, Tomcat, etc. This pulls metrics through the use of mBeans, where the engineering team has included a list of commonly used mBeans in the Kafka.yaml file. This can be extended with any other beans the user would like, or if your version of Kafka supports additional metrics.
 
@@ -71,7 +71,7 @@ The solution here would be to only specify the specific partition for your topic
 #my_topic [0, 1, 4, 12]
 ```
 
-5. Partition Context Limitation. Currently, the number of partition contexts collection is limited to 200. If you require more contexts, [contact the Datadog support team][8].
+5. Partition Context Limitation: the number of partition contexts collection is limited to 200. If you require more contexts, [contact the Datadog support team][8].
 
 [1]: https://kafka.apache.org/
 [2]: https://sookocheff.com/post/kafka/kafka-in-a-nutshell/

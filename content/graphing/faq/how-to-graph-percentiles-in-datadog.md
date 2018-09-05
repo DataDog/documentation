@@ -7,7 +7,7 @@ kind: faq
 
 It's possible to get percentiles in Datadog by submitting data as a histogram metric through DogStatsD. The datadog-agent embeds a [DogStatsD][1] server that receives [DogStatsD][1] packets, [perform data aggregation][2], and send final percentile metrics to Datadog.
 
-Since this aggregation is taken care of on the collection side, this isn't currently available as a graphing function in the GUI.
+Since this aggregation is taken care of on the collection side, this isn't available as a graphing function in the GUI.
 
 Out of your histogram data you'll get: 95th percentile, 50th percentile, avg, max, count.
 

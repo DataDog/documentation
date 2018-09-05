@@ -14,15 +14,15 @@ Note that filters perform an exact match search and don't work with partial stri
 
 | Filter                                          | Description                                                                      |
 | --------                                        | -------------                                                                    |
-| user:pup@datadoghq.com                          | Find all events with comments by pup@datadoghq.com.                              |
-| sources:github,chef                             | Show events from Github OR Chef.                                                 |
-| tags:env-prod OR db                             | Show events tagged with #env-prod OR #db.                                        |
-| tags:security-group:sg-123 AND role:common-node | Show events tagged with #security-group:sg-123 AND #role:common-node.            |
-| hosts:i-0ade23e6,db.myapp.com                   | Show events from i-0ade23e6 OR db.myapp.com.                                     |
-| status:error                                    | Show events with error status. (supports: 'error', 'warning', 'success')         |
-| priority:low                                    | Show only low-priority events. (supports: 'low' or 'normal'. defaults to 'all')  |
-| incident:claimed                                | Show only claimed incidents. (supports: 'open', 'claimed', 'resolved', or 'all') |
-| cloud_provider:* NOT "azure"                    | Show all cloud providers except the ones tagged with "azure"                     |
+| `user:pup@datadoghq.com`                          | Find all events with comments by pup@datadoghq.com.                              |
+| `sources:github,chef`                             | Show events from Github OR Chef.                                                 |
+| `tags:env-prod OR db`                             | Show events tagged with #env-prod OR #db.                                        |
+| `tags:security-group:sg-123 AND role:common-node` | Show events tagged with #security-group:sg-123 AND #role:common-node.            |
+| `hosts:i-0ade23e6,db.myapp.com`                   | Show events from i-0ade23e6 OR db.myapp.com.                                     |
+| `status:error`                                    | Show events with error status. (supports: **error**, **warning**, **success**)         |
+| `priority:low`                                    | Show only low-priority events. (supports: **low** or **normal**. defaults to **all**)  |
+| `incident:claimed`                                | Show only claimed incidents. (supports: **open**, **claimed**, **resolved**, or **all**) |
+| `cloud_provider:* NOT "azure"`                    | Show all cloud providers except the ones tagged with "azure"                     |
 
 Full text search works on all keywords provided in the search query after applying any filters. Full text search looks inside the event text, title, tags, users who commented on the event and host names and devices tied to the event for any related information.
 

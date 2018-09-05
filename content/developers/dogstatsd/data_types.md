@@ -67,7 +67,7 @@ Learn more about the [Count type in the Metrics documentation][4].
 
 ### Distributions
 
-**This feature is currently in BETA. [Contact support][11] for details on how to have it enabled for your account.**
+**This feature is in BETA. [Contact Datadog support][11] for details on how to have it enabled for your account.**
 
 Distributions are like a global version of Histograms (see below). They calculate statistical distributions across multiple hosts, allowing you to compute global percentiles across your entire dataset. Global distributions are designed to instrument logical objects, such as services, independently from the underlying hosts.
 

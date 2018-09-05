@@ -7,7 +7,7 @@ external_redirect: /api/#revoke-a-shared-a-screenboard
 
 ## Revoke a shared a Screenboard
 
-Revoke a currently shared Screenboard's.
+Revoke a shared Screenboard's.
 
 ##### ARGUMENTS
 

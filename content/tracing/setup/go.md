@@ -40,7 +40,7 @@ You are now ready to import the tracer and start instrumenting your code!
 
 ## Automatic Instrumentation
 
-We have built a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. Find below the list of currently supported [integrations][ootb integrations].
+We have built a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. Find below the list of supported [integrations][ootb integrations].
 
 [ootb integrations]: #integrations
 
