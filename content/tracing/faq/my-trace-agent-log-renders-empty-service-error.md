@@ -35,7 +35,7 @@ If the Child span isn't associated directly to the Root span, you could end up w
 
 ### Nope, my code is properly instrumented
 
-It's time to contact [Datadog support team][2]!
+It's time to contact [the Datadog support team][2]!
 
 Send your flare, and details about the language/library you're using, and a snippet of your code instrumentation.
 
