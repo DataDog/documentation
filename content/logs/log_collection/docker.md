@@ -33,7 +33,7 @@ In this documentation, we present how to collect logs from all running container
 
 ## Setup
 
-## One-step install to collect all the container logs
+### One-step install to collect all the container logs
 
 The first step is to install the Agent (containerized version or directly on the host) and to enable log collection for all the containers.
 
@@ -48,6 +48,7 @@ docker run -d --name datadog-agent \
            -e DD_API_KEY=<YOUR_API_KEY> \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
+           -e DD_AC_EXCLUDE = "name:dd-agent" \
            -v /var/run/docker.sock:/var/run/docker.sock:ro \
            -v /proc/:/host/proc/:ro \
            -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw \
@@ -63,6 +64,7 @@ The commands related to log collection are the following:
 * `-e DD_LOGS_ENABLED=true`: this parameter enables log collection when set to true. The Agent now looks for log instructions in configuration files.
 * `-e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true`: this parameter adds a log configuration that enables log collection for all containers (see `Option 1` below)
 * `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw`: to make sure we do not lose any logs from containers during restarts or network issues, we store on the host the last line that was collected for each container in this directory.
+* `-e DD_AC_EXCLUDE = "name:dd-agent"` : to prevent the Datadog Agent from collecting and sending its own logs. Remove this parameter if you want to collect the Datadog Agent logs.
 
 **Important note**: Integration Pipelines and Processors will not be installed automatically as the source and service are set to the `docker` generic value.
 The source and service values can be overriden thanks to Autodiscovery as described below; it automatically installs integration Pipelines that parse your logs and extract all the relevant information from them.
@@ -101,7 +103,8 @@ The source and service values can be overriden thanks to Autodiscovery as descri
 
 The second step is to use Autodiscovery to customize the `source` and `service` value. This allows Datadog to identify the log source for each container.
 
-Since version 6.2 of the Datadog Agent, you can configure log collection directly in the container labels.
+Since version 6.2 of the Datadog Agent, you can configure log collection directly in the container labels. 
+Pod annotations are also supported for Kubernetes environment (more information for Kubernetes available [here](https://docs.datadoghq.com/agent/autodiscovery/#template-source-kubernetes-pod-annotations)).
 
 Autodiscovery expects labels to follow this format, depending on the file type:
 
@@ -110,7 +113,9 @@ Autodiscovery expects labels to follow this format, depending on the file type:
 
 Add the following LABEL to your Dockerfile:
 
-- `LABEL "com.datadoghq.ad.logs"='[<LOGS_CONFIG>]'`
+```
+LABEL "com.datadoghq.ad.logs"='[<LOGS_CONFIG>]'
+```
 
 {{% /tab %}}
 {{% tab "Docker-Compose" %}}
@@ -127,7 +132,9 @@ labels:
 
 Add the following label as a run command:
 
-- `-l com.datadoghq.ad.logs='[<LOGS_CONFIG>]'`
+```
+-l com.datadoghq.ad.logs='[<LOGS_CONFIG>]'
+```
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -196,11 +203,14 @@ spec:
         name: nginx
 ```
 
-Check our [Autodiscovery Guide](https://docs.datadoghq.com/agent/autodiscovery/#template-source-docker-label-annotations) for more information about Autodiscovery setup and examples.
+Check our [Autodiscovery Guide](https://docs.datadoghq.com/agent/autodiscovery/#template-source-kubernetes-pod-annotations) for more information about Autodiscovery setup and examples.
 
 {{% /tab %}}
 {{< /tabs >}}
 
+It is also important to note that Autodiscovery features can be used with or without the `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` environment variable.
+You can therefore use container labels or pod annotations to cherry pick the containers you want to collect logs from. Or use the environment variable to ensure you collect logs from all containers and then override the default `source` and `service` value or add processing rules for the wanted subset of containers.
+ 
 #### Short lived containers
 
 Thanks to Autodiscovery, short lived containers are detected as soon as they are started to ensure their logs are properly collected.
@@ -230,14 +240,14 @@ Two environment variables are available to include or exclude a list of containe
 The format for these option is space-separated strings. For example, if you only want to monitor two images, and exclude the rest, specify:
 
 ```
-DD_AC_EXCLUDE` = "image:.*"
+DD_AC_EXCLUDE = "image:.*"
 DD_AC_INCLUDE = "image:cp-kafka image:k8szk"
 ```
 
 Or to exclude a specific container name:
 
 ```
-DD_AC_EXCLUDE` = "name:dd-agent"
+DD_AC_EXCLUDE = "name:dd-agent"
 ```
 
 {{% /tab %}}
@@ -246,8 +256,8 @@ DD_AC_EXCLUDE` = "name:dd-agent"
 
 Two parameters are available in `datadog.yaml` to include or exclude a list of containers filtered by image or container name:
 
-* ac_exclude: whitelist of containers to always include
-* ac_include: blacklist of containers to exclude
+* `ac_exclude`: whitelist of containers to always include
+* `ac_include`: blacklist of containers to exclude
 
 For example, if you only want to monitor two images, and exclude the rest, specify:
 
@@ -259,7 +269,7 @@ ac_include: ["image:cp-kafka", "image:k8szk"]
 Or to exclude the Datadog Agent:
 
 ```
-ac_exclude` = ["name:dd-agent"]
+ac_exclude = ["name:dd-agent"]
 ```
 
 {{% /tab %}}
