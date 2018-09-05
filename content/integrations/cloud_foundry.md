@@ -37,7 +37,7 @@ Use **Datadog Cloud Foundry Buildpack** to monitor your Cloud Foundry applicatio
 
 Our buildpack uses Cloud Foundry [multi-buildpack][4] feature that was introduced in version `1.12`.
 
-For older version, Cloud Foundry provides a back-port of this feature in the form of a [buildpack][25]. You must install and configure this backport in order to use Datadog buildpack:
+For older versions, Cloud Foundry provides a back-port of this feature in the form of a [buildpack][25]. You must install and configure this backport in order to use Datadog's buildpack:
 
 1. **Upload the multi-buildpack back-port.**
   Download the latest [multi-build pack release][25] and upload it to your Cloud Foundry environment.
