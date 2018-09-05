@@ -150,5 +150,5 @@ Primary tags appear at the top of APM pages, next to environments. Use these sel
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/tagging
-[2]: /agent/basic_agent_usage/#configuration-file
+[2]: /agent/faq/agent-configuration-files/?tab=agentv6
 [3]: https://app.datadoghq.com/apm/settings
