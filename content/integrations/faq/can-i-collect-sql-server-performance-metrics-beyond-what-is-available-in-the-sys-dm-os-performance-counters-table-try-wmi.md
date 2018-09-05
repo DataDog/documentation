@@ -3,7 +3,7 @@ title: Can I collect SQL Server performance metrics beyond what is available in 
 kind: faq
 ---
 
-Our [SQL Server check][1] is limited to collecting metrics from the [sys.dm_os_performance_counters table][2], and by default it only collects what metrics we think are the most likely to be relevant. True, with some simple configuration, you can [extend what metrics are collected from that table][3], but there may be cases where you're interested in collecting more than what is available in that table at all.
+Our [SQL Server check][1] is limited to collecting metrics from the [sys.dm_os_performance_counters table][2], and by default it only collects the metrics that Datadog believes are most likely to be relevant. With some simple configurations, you can [extend what metrics are collected from that table][3], but there may be cases where you're interested in collecting more than what is available in that table at all.
 
 In these cases, you might consider our [WMI check][4] as an additional source of SQL Server metrics (and if you're not familiar with the WMI check yet, [here is a great guide for implementing that](/integrations/faq/how-to-retrieve-wmi-metrics)). Some WMI classes may be available that can contain additional performance data about your SQL Server (such as [Win32_PerfFormattedData_SQLSERVERAGENT_SQLAgentJobs](http://wutils.com/wmi/root/cimv2/win32_perfformatteddata_sqlserveragent_sqlagentjobs/)), and you may be able to use our WMI check to query them for additional metric collection.
 
