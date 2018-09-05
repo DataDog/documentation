@@ -10,7 +10,7 @@ kind: faq
 * [The Agent is entirely open source][2].
 * Some installations (for example, installing the Agent on CentOS 5), requests your password. The password is needed because it's installing packages - Datadog does not retain it in any way. You can also use the step-by-step directions if you prefer to see exactly what the script is doing.
 
-[Found the list of IP's and ports used for communication to Datadog in this article][3].
+See the [list of IPs and ports used by Datadog][3] for more information.
 
 [1]: https://app.datadoghq.com/policy/license
 [2]: https://github.com/DataDog/dd-agent/

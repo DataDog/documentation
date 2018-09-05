@@ -11,9 +11,9 @@ These attributes, which are configured for the user's respective assertion withi
 
 ## How do I fix this?
 
-Confirm that you have correctly configured these assertion attributes within your IdP. Directions are detailed in Datadog [SAML documentation][1] - see the **setting attributes** section.
+Confirm that you have correctly configured these assertion attributes within your IdP. Directions are detailed the [SAML documentation][1] (see the **setting attributes** section).
 
-If you've confirmed these are set but continue to experience trouble, reach out to [us][2]!
+If you've confirmed these are set but continue to experience trouble, [contact Support][2]!
 
 [1]: /account_management/saml
 [2]: /help

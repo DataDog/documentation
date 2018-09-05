@@ -7,7 +7,7 @@ external_redirect: /api/#troubleshooting
 
 ## Troubleshooting
 
-We do very minimal error checking on the API front-end, as we queue all data for asynchronous processing (the goal being to always, always accept your data in production situations and decouple Datadog systems from yours).
+We do very minimal error checking on the API front-end, as we queue all data for asynchronous processing (the goal being to always, always accept your data in production situations and decouple the Datadog systems from yours).
 
 Thus it is possible you could receive a 202 'success' response but not see your data in Datadog. The cause of this is most likely:
 
@@ -19,7 +19,7 @@ To check your timestamp is correct run:
 
 `date -u && curl -s -v https://app.datadoghq.com 2>&1 | grep Date`
 
-This output the current system's date, and then make a request to Datadog endpoint and grab the date on Datadog end. If these are more than a few minutes apart, you may want to look at the time settings on your server.
+This outputs the current system's date, then makes a request to an API endpoint to grab the date on the Datadog end. If these are more than a few minutes apart, you may want to look at the time settings on your server.
 
 There are also certain fields which are not mandatory for submission, but do require a valid input. For example, in submitting an event the `priority` field must be one of the four given options.  
 

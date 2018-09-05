@@ -115,7 +115,7 @@ In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if
 | Redhat     | `sudo datadog-agent flare <CASE_ID>`                  |
 | Suse       | `sudo datadog-agent flare <CASE_ID>`                  |
 | Source     | `sudo datadog-agent flare <CASE_ID>`                  |
-| Windows    | [Consult the dedicated windows documentation][10]     |
+| Windows    | Consult the dedicated [Windows documentation][10]     |
 
 [10]: /agent/basic_agent_usage/windows/#agent-v6
 
@@ -135,7 +135,7 @@ In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if
 | Redhat          | `sudo service datadog-agent flare <CASE_ID>`                            |
 | Suse            | `sudo service datadog-agent flare <CASE_ID>`                            |
 | Source          | `sudo ~/.datadog-agent/bin/agent flare <CASE_ID>`                       |
-| Windows         | [Consult the dedicated windows documentation][9]                        |
+| Windows         | Consult the dedicated [Windows documentation][9]                        |
 
 
 **Note**: If you are using a Linux based system and the `service` wrapper command is not available, [consult the list of alternatives][4].
