@@ -41,7 +41,7 @@ For example, if your application is started with `python app.py` then:
 $ ddtrace-run python app.py
 ```
 
-For more advanced usage, configuration, and fine-grain control, see Datadog [API documentation](http://pypi.datadoghq.com/trace/docs/).
+For more advanced usage, configuration, and fine-grain control, see Datadog's [API documentation](http://pypi.datadoghq.com/trace/docs/).
 
 
 ## Compatibility
