@@ -22,7 +22,7 @@ aliases:
 
 While setting up graphs is pretty simple in Datadog, this page aims at helping you leverage even more value from the Datadog graphing system.
 
-This article focuses on describing the steps performed by Datadog graphing system from the query to the graph, so that you get a good idea how to choose your graph settings.
+This article focuses on describing the steps performed by Datadog's graphing system from the query to the graph, so that you get a good idea how to choose your graph settings.
 
 Tl;Dr ? [there is a short version of this article][1].
 
