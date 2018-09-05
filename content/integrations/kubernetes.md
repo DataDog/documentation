@@ -153,7 +153,7 @@ The Kubernetes check includes the following service checks:
 
 ## Further Reading
 
-To get a better idea of how (or why) to integrate your Kubernetes service, check out Datadog [series of blog posts][13] about it.
+To get a better idea of how (or why) to integrate your Kubernetes service, check out Datadog's [series of blog posts][13] about it.
 
 [1]: https://hub.docker.com/r/datadog/agent/
 [2]: /agent/basic_agent_usage/kubernetes
