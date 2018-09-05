@@ -50,7 +50,7 @@ ac_include: ["name:frontend.*"]
 
 ### String Search
 
-Containers are by their nature extremely high cardinality objects. Datadog flexible string search matches substrings in the container name, ID, or image fields.
+Containers are, by their nature, extremely high cardinality objects. Datadog's flexible string search matches substrings in the container name, ID, or image fields.
 
 ### Tagging
 
