@@ -114,6 +114,39 @@ Here is the list of all the matchers and filters natively implemented by Datadog
 {{% /tab %}}
 {{< /tabs >}}
 
+## Advanced Settings
+
+At the bottom of your grok processor tiles there is an Advanced Settings section:
+
+{{< img src="logs/processing/parsing/advanced_settings.png" alt="Advanced Settings" responsive="true" style="width:80%;">}}
+
+* Use the **Extract from** field to apply your grok processor on a given attribute instead of the default `message` attribute.
+
+* Use the **Helper Rules** field to define tokens for your parsing rules. Helper rules helps you factorize grok patterns across your parsing rules which is useful when you have several rules in the same grok parser that uses the same tokens.
+
+Example for this classic unstructured log:  
+
+```
+john id:12345 connected on 11/08/2017 on server XYZ in production
+```
+
+You could use the following parsing rule:
+
+```
+MyParsingRule %{user} %{connection} %{server}
+```
+
+with the following helpers:
+
+```
+user %{word:user.name} id:%{integer:user.id}
+connection connected on %{date("MM/dd/yyyy"):connect_date}
+server on server %{notSpace:server.name} in %{notSpace:server.env}
+```
+
+
+{{< img src="logs/processing/parsing/helper_rules.png" alt="helper rules" responsive="true" style="width:80%;">}}
+
 ## Examples
 Find below some examples demonstrating how to use parsers:
 
