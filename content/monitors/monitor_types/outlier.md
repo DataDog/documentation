@@ -112,7 +112,7 @@ For a given set of data D = {d<sub>1</sub>, ..., d<sub>n</sub>}, the deviations 
 
 #### Parameters
 
-In our case, the data set is the set of all points in every timeseries. We take the MAD of all the points then multiply it by a normalizing constant and our first parameter, `tolerance`. The constant normalizes MAD so that it is comparable to the standard deviation of the normal distribution. The tolerance parameter then specifies how many "deviations" a point has to be away from the median for it to be considered an outlier.
+The data set is the set of all points in every timeseries. We take the MAD of all the points then multiply it by a normalizing constant and the first parameter, `tolerance`. The constant normalizes MAD so that it is comparable to the standard deviation of the normal distribution. The tolerance parameter then specifies how many "deviations" a point has to be away from the median for it to be considered an outlier.
 
 Now to mark a timeseries as an outlier, we use the second parameter, `pct`. If more than pct% of a particular series' points are considered outliers, then the whole series is marked to be an outlier. Here is MAD with a tolerance of 3 and pct of 20 in action when comparing the average system load by availability zone:
 

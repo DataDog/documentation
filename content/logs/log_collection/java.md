@@ -254,7 +254,7 @@ So you can exploit *scope* as a field, and *durationInMs* & *quantity* as metric
 
 Another option to enrich your logs is to use Java's [MDC (Mapped Diagnostic Contexts)][1].
 
-If you use the logback technologie. It would give us the following Java code:
+If you use the logback technology. Use the following Java code:
 
 ```java
 ...

@@ -12,17 +12,17 @@ aliases:
 You can narrow down your search by filtering on certain event properties. See the list of filters below for more details.
 Note that filters perform an exact match search and don't work with partial strings.
 
-| Filter                                          | Description                                                                      |
-| --------                                        | -------------                                                                    |
-| `user:pup@datadoghq.com`                          | Find all events with comments by pup@datadoghq.com.                              |
-| `sources:github,chef`                             | Show events from Github OR Chef.                                                 |
-| `tags:env-prod OR db`                             | Show events tagged with #env-prod OR #db.                                        |
-| `tags:security-group:sg-123 AND role:common-node` | Show events tagged with #security-group:sg-123 AND #role:common-node.            |
-| `hosts:i-0ade23e6,db.myapp.com`                   | Show events from i-0ade23e6 OR db.myapp.com.                                     |
-| `status:error`                                    | Show events with error status. (supports: **error**, **warning**, **success**)         |
-| `priority:low`                                    | Show only low-priority events. (supports: **low** or **normal**. defaults to **all**)  |
+| Filter                                            | Description                                                                              |
+| --------                                          | -------------                                                                            |
+| `user:pup@datadoghq.com`                          | Find all events with comments by pup@datadoghq.com.                                      |
+| `sources:github,chef`                             | Show events from Github OR Chef.                                                         |
+| `tags:env-prod OR db`                             | Show events tagged with #env-prod OR #db.                                                |
+| `tags:security-group:sg-123 AND role:common-node` | Show events tagged with #security-group:sg-123 AND #role:common-node.                    |
+| `hosts:i-0ade23e6,db.myapp.com`                   | Show events from i-0ade23e6 OR db.myapp.com.                                             |
+| `status:error`                                    | Show events with error status. (supports: **error**, **warning**, **success**)           |
+| `priority:low`                                    | Show only low-priority events. (supports: **low** or **normal**. defaults to **all**)    |
 | `incident:claimed`                                | Show only claimed incidents. (supports: **open**, **claimed**, **resolved**, or **all**) |
-| `cloud_provider:* NOT "azure"`                    | Show all cloud providers except the ones tagged with "azure"                     |
+| `cloud_provider:* NOT "azure"`                    | Show all cloud providers except the ones tagged with "azure"                             |
 
 Full text search works on all keywords provided in the search query after applying any filters. Full text search looks inside the event text, title, tags, users who commented on the event and host names and devices tied to the event for any related information.
 
@@ -47,7 +47,7 @@ To remove the top level aggregate event from appearing, change `use_date_happene
 
 ## Events Email
 
-When you need to integrate an application or system with Datadog, you have a few choices. The first is using one of our many existing [integrations][integrations].
+When you need to integrate an application or system with Datadog, you have a few choices. The first is using one of Datadog existing [integrations][integrations].
 This gets you access to a wide variety of metrics and events with minimal configuration effort on your part. If your application isn't one of the integrated applications, then you can opt to create [a check using the Agent][agentcheck].   This requires much more effort and potentially more knowledge on how the application and how Datadog work.
 
 There is another option available if you aren't using an application that has an integration and you don't want to create an Agent check. You can rely on the application or system sending an email instead. There are two different ways to use Events via Email, depending mostly on whether the application offers you the ability to customize the format of the email body being sent.

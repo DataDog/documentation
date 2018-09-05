@@ -155,7 +155,7 @@ There are three configuration settings:
 
 * `Always include zero` (optional):  Specifies whether or not to always include zero or fit the axis to the data range. Default is to always include zero.
 
-Note: as the mathematical log function doesn't accept negative values, our log scale only works if values are of the same sign (everything > 0 or everything < 0). Otherwise an empty graph is returned.
+Note: as the mathematical log function doesn't accept negative values, Datadog log scale only works if values are of the same sign (everything > 0 or everything < 0). Otherwise an empty graph is returned.
 
 ### Overlay events for additional context
 

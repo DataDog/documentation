@@ -68,7 +68,7 @@ Consult the dedicated [Pipelines documentation pages][7] to learn more on how to
 
 To discover the full list of Processors available, refer to the dedicated [Processor documentation page][14].
 
-If you want to learn more about pure parsing possibilities of the Datadog application, follow our [parsing training guide][11]. We also have a [parsing best practice][12] and a [parsing troubleshooting][13] guide that might be interesting for you.
+If you want to learn more about pure parsing possibilities of the Datadog application, follow the [parsing training guide][11]. We also have a [parsing best practice][12] and a [parsing troubleshooting][13] guide that might be interesting for you.
 
 ## Reserved attributes
 

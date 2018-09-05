@@ -20,7 +20,7 @@ The Log Management solution is an all-in-one comprehensive solution that compris
 
 ## Log Collection
 
-Log collection is the beginning of your journey in the wonderful world of log-management. Use the [Datadog Agent][6] to collect logs directly from your hosts or your containerized environments. You can collect AWS service logs with our [AWS Lambda function](#from-aws-services).If you are already using a log-shipper daemon, refer to our dedicated documentation for [Rsyslog][1], [Syslog-ng][2], [NXlog][3], [FluentD][4], and [Logstash][5].
+Log collection is the beginning of your journey in the wonderful world of log-management. Use the [Datadog Agent][6] to collect logs directly from your hosts or your containerized environments. You can collect AWS service logs with Datadog [AWS Lambda function](#from-aws-services).If you are already using a log-shipper daemon, refer to the dedicated documentation for [Rsyslog][1], [Syslog-ng][2], [NXlog][3], [FluentD][4], and [Logstash][5].
 
 Integrations and Log Collection are intimately tied together, by collecting Logs the right way you make sure to auto-configure all the the subsequent components such as [processing][33], [parsing][29], and [facets][18] in the Explorer. **[Discover the log integrations supported by Datadog][37]**. You can also define custom log sources if there isn't an integration for your source yet.
 
@@ -47,7 +47,7 @@ In Kubernetes environments you can also leverage [the daemonset installation][15
 
 The Datadog Agent can be used to collect logs directly from ECS or EC2 instances and applications running on them.
 
-However, AWS services logs are collected thanks to our [Lambda function][12]. Triggers are then defined ([manually or automatically][13]) to forward logs from any S3 bucket, Cloudwatch Log group, or Cloudwatch events.
+However, AWS services logs are collected thanks to Datadog [Lambda function][12]. Triggers are then defined ([manually or automatically][13]) to forward logs from any S3 bucket, Cloudwatch Log group, or Cloudwatch events.
 
 ### From a custom forwarder
 
@@ -91,7 +91,7 @@ If your environment relies on any integrations, then processors, parsers, and fa
 
 {{< img src="logs/search_your_logs.gif" alt="Search your logs" responsive="true" >}}
 
-Follow our [guide to explore your logs][17] for a more detailed explanation of all the Log Explorer features including use of wildcards and queries of numerical values.
+Follow the [guide to explore your logs][17] for a more detailed explanation of all the Log Explorer features including use of wildcards and queries of numerical values.
 
 ## Graph and Analytics
 
@@ -106,7 +106,7 @@ Now that your logs are parsed and you have facets and Measure over the important
 
 To see the logs that underlie a value or range of values in the graph, just click on the desired point and choose "[view logs][22]" to open a contextual panel with all the underlying logs:
 
-Follow our [log graphing guide][23] to learn more about all the graphing option.
+Follow the [log graphing guide][23] to learn more about all the graphing option.
 
 ## Further Reading
 

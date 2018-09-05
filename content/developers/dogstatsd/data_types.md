@@ -24,7 +24,7 @@ Counters, gauges, and sets are familiar to StatsD users. Histograms are specific
 
 ### Counters
 
-Counters track how many times something happens _per second_, such as page views. In this example, we increment a metric called `web.page_views` each time our `render_page` function is called.
+Counters track how many times something happens _per second_, such as page views. In this example, we increment a metric called `web.page_views` each time the `render_page` function is called.
 
 For Python:
 ```python
@@ -50,7 +50,7 @@ With this one line of code we can start graphing the data. Here's an example:
 
 Note that StatsD counters are normalized over the flush interval to report per-second units. In the graph above, the marker is reporting 35.33 web page views per second at ~15:24. In contrast, if one person visited the web page each second, the graph would be a flat line at y = 1. To increment or measure values over time, see [gauges](#gauges).
 
-We can also count by arbitrary numbers. Suppose we wanted to count the number of bytes processed by a file uploading service. We increment a metric called `file_service.bytes_uploaded` by the size of the file each time our `upload_file` function is called:
+We can also count by arbitrary numbers. Suppose we wanted to count the number of bytes processed by a file uploading service. We increment a metric called `file_service.bytes_uploaded` by the size of the file each time the  `upload_file` function is called:
 
 For Python:
 ```python
@@ -94,8 +94,8 @@ The above instrumentation calculates the following data: `sum`, `count`, `averag
 
 {{< img src="graphing/metrics/distributions/dogweb_latency.png" alt="Dogweb latency" responsive="true" >}}
 
-For this toy example, let's say a request time of *500ms* is acceptable. Our median query time (graphed in blue) is usually less than *100 milliseconds*, which is great. Our 95th percentile (graphed in red) has spikes sometimes over one second, which is unacceptable.
-This means most of our queries are running just fine, but our worst ones are bad. If the 95th percentile were close to the median, than we would know that almost all of our requests are performing just fine.
+For this toy example, let's say a request time of *500ms* is acceptable. The median query time (graphed in blue) is usually less than *100 milliseconds*, which is great. The 95th percentile (graphed in red) has spikes sometimes over one second, which is unacceptable.
+This means most of queries are running just fine, but the worst ones are bad. If the 95th percentile were close to the median, than we would know that almost all of the requests are performing just fine.
 
 Distributions are not only for measuring times. They can be used to measure the distribution of *any* type of value, such as the size of uploaded files, or classroom test scores, for example.
 
@@ -179,7 +179,7 @@ The above instrumentation produces the following metrics:
 
 {{< img src="developers/metrics/graph-guides-metrics-query-times.png" alt="graph guides metrics query times" responsive="true" >}}
 
-For this toy example, let's say a query time of 1 second is acceptable. Our median query time (graphed in purple) is usually less than 100 milliseconds, which is great. But unfortunately, our 95th percentile (graphed in blue) has large spikes sometimes nearing three seconds, which is unacceptable. This means most of our queries are running just fine, but our worst ones are very bad. If the 95th percentile was close to the median, then we would know that almost all of our queries are performing just fine.
+For this toy example, let's say a query time of 1 second is acceptable. The median query time (graphed in purple) is usually less than 100 milliseconds, which is great. But unfortunately, the 95th percentile (graphed in blue) has large spikes sometimes nearing three seconds, which is unacceptable. This means that most of queries are running just fine, but the worst ones are very bad. If the 95th percentile was close to the median, then we would know that almost all of the queries are performing just fine.
 
 Learn more about the [Histogram type in the Metrics documentation][6].
 

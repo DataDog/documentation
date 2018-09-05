@@ -273,7 +273,7 @@ On your target host, first launch the Datadog Agent Manager and select the "Wind
 
 For the Windows Service Integration, there is an out-of-the-box example, however, this example uses DHCP.
 
-First, to get the name of the service, open services.msc and locate your target service. Using DHCP as our target, you can see the service name at the top of the service properties window:
+First, to get the name of the service, open services.msc and locate your target service. Using DHCP as target, you can see the service name at the top of the service properties window:
 
 {{< img src="agent/faq/DHCP.png" alt="DHCP" responsive="true" style="width:75%;">}}
 

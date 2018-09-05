@@ -28,7 +28,7 @@ The unstable alpha tracer can be [accessed today on Github][2].
 ## Planned Automatic Instrumentation for Beta (Coming Soon)
 
 APM PHP support is in alpha and provides limited automatic instrumentation. Planned beta support will provide automatic instrumentation for popular frameworks and libraries. See some of these listed below.
-Don't see your desired frameworks or libraries? Let us know more about your needs through [this survey][1].
+Don't see your desired frameworks or libraries? Let Datadog know more about your needs through [this survey][1].
 
 #### Web Frameworks Compatibility
 
@@ -39,7 +39,7 @@ Don't see your desired frameworks or libraries? Let us know more about your need
 | Symfony 3      | Coming soon | Coming soon     |
 | Zend Framework | Coming soon | Coming soon     |
 
-Don't see your desired web frameworks? Let us know more about your needs through [this survey][1].
+Don't see your desired web frameworks? Let Datadog know more about your needs through [this survey][1].
 
 [1]: https://goo.gl/forms/rKjH2J6nJ585KXri2
 
@@ -51,7 +51,7 @@ Don't see your desired web frameworks? Let us know more about your needs through
 | Redis         | Coming soon | Coming Soon  |
 | ElasticSearch | Coming soon | Coming Soon  |
 
-Don't see your desired data stores? Let us know more about your needs through [this survey][1].
+Don't see your desired data stores? Let Datadog know more about your needs through [this survey][1].
 
 [1]: https://goo.gl/forms/rKjH2J6nJ585KXri2
 

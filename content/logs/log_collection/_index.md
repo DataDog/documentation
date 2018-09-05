@@ -321,7 +321,7 @@ logs_config:
   socks5_proxy_address: <MY_SOCKS5_PROXY_URL>:<MY_SOCKS5_PROXY_PORT>
 ```
 
-[Refer to our Agent proxy documentation page to learn how to forward your metrics with a proxy][8].
+[Refer to the Agent proxy documentation page to learn how to forward your metrics with a proxy][8].
 
 ## How to get the most of your application logs
 

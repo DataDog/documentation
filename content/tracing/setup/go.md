@@ -21,11 +21,11 @@ further_reading:
 
 ## Installation and Getting Started
 
-For configuration instructions and details about using the API, check out our [API documentation][api docs] for manual instrumentation, and our [integrations section][contrib docs] for Go libraries and frameworks supporting automatic instrumentation.
+For configuration instructions and details about using the API, check out the Datadog [API documentation][api docs] for manual instrumentation, and the [integrations section][contrib docs] for Go libraries and frameworks supporting automatic instrumentation.
 
 For a description of the terminology used in APM, take a look at the [Getting started with APM section][getting started]. For details about contributing, check the official repository [README.md file][repo readme].
 
-Consult our [migration document][migrating] if you need to migrate from an older version of the tracer (e.g. v<0.6.x) to newest version.
+Consult the [migration document][migrating] if you need to migrate from an older version of the tracer (e.g. v<0.6.x) to newest version.
 
 ### Installation
 First [install and configure the Datadog Agent][1] (see additional documentation for [tracing Docker applications](/tracing/setup/docker/)).
@@ -55,7 +55,7 @@ To begin tracing your Go applications, your environment must first meet the foll
 
 #### Framework Compatibility
 
-Integrate the Go tracer with the following list of web frameworks using one of our helper packages.
+Integrate the Go tracer with the following list of web frameworks using one of the following helper packages.
 
 | Framework                                            | Support Type    | GoDoc Datadog Documentation                                                                                                                                |
 | ---------------------------------------------------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -99,7 +99,7 @@ func main() {
 }
 ```
 
-For more tracer settings, see available options in our [config documentation][config docs].
+For more tracer settings, see available options in the [configuration documentation][config docs].
 
 ## Further Reading
 

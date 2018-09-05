@@ -89,7 +89,7 @@ The Agent uses the following values in order of precedence:
 2. `HTTPS_PROXY`, `HTTP_PROXY`, and `NO_PROXY` environment variables
 3. Values inside `datadog.yaml`
 
-[Refer to our log collection documentation page to learn how to forward your logs with a proxy][7].
+[Check the log collection documentation page to learn how to forward your logs with a proxy][7].
 
 [7]: /logs/log_collection/#using-a-proxy-for-logs
 

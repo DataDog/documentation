@@ -96,7 +96,7 @@ Let's imagine that you're collecting metrics from logs that are not canonically 
 user.crashes|2016-05-28 20:24:43.463930|24|LotusNotes,Outlook,Explorer
 ```
 
-We could set up a log-parser like the following to collect a metric from this logged data in our Datadog account:
+We could set up a log-parser like the following to collect a metric from this logged data in the Datadog account:
 
 ```python
 

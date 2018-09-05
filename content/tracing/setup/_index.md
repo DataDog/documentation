@@ -9,7 +9,7 @@ This documentation covers Agent v6 only, to know how to set up APM tracing with 
 
 ## Setup process
 
-With our infrastructure monitoring, metrics are sent to the Agent, which then forwards them to Datadog. Similarly, tracing metrics are also sent to the Agent: the application code instrumentation flushes to the Agent every 1 s ([see here for the Python client](https://github.com/DataDog/dd-trace-py/blob/69693dc7cdaed3a2b6a855325109fa100e42e254/ddtrace/writer.py#L159) for instance) and the Agent flushes to the [Datadog API every 10s][2].
+With Datadog infrastructure monitoring, metrics are sent to the Agent, which then forwards them to Datadog. Similarly, tracing metrics are also sent to the Agent: the application code instrumentation flushes to the Agent every 1 s ([see here for the Python client](https://github.com/DataDog/dd-trace-py/blob/69693dc7cdaed3a2b6a855325109fa100e42e254/ddtrace/writer.py#L159) for instance) and the Agent flushes to the [Datadog API every 10s][2].
 
 To start tracing your application:
 
@@ -45,8 +45,7 @@ To start tracing your application:
   {{< /whatsnext >}}
 
 
-
-To instrument an application written in a language that does not yet have official library support, visit our list of [community tracing libraries][15].
+To instrument an application written in a language that does not yet have official library support, visit the list of [community tracing libraries][15].
 
 Finally, start monitoring your app's performance: Within a few minutes of running APM, you will start to see your services appear in [the APM home page][16]. See [Using the APM UI][17] to learn more.
 

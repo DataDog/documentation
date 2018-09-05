@@ -41,7 +41,7 @@ When creating your own graph, Distribution metrics automatically have additional
 
 `my.service.latency` is a metric that is being submitted on 500 hosts.  
 
-Each host is tagged with one of 3 `Availability Zones` (as tagged by the AWS integration) and 20 `Roles` by Chef, our provisioning system.  
+Each host is tagged with one of 3 `Availability Zones` (as tagged by the AWS integration) and 20 `Roles` by Chef, Datadog provisioning system.  
 
 Additionally, this metric has been tagged with `Status`, which has 2 values: `Status:Success` or `Status:Fail`, and `Result`, which also has 2 values: `Result:Open` or `Result:Close`.
 

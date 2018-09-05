@@ -82,7 +82,7 @@ https://blogs.technet.microsoft.com/askpfeplat/2014/12/01/psa-incorrect-mtu-size
 If you've done everything above and continue to have issues, send support@datadoghq.com the following information:
 
 1. [Send a flare][2]
-2. Let us know if you're seeing this across all instances or only a subset - if unique help us understand what's different.
+2. Let the [Datadog support team][3] know if you're seeing this across all instances or only a subset - if unique help the support team understand what's different.
 3. Where is this instances hosted physically? We've seen network issues with service providers upstream from our customers that have resulted in 599's
 4. Include the information listed in the "Diagnosis" section above.
 
@@ -92,3 +92,4 @@ If you've done everything above and continue to have issues, send support@datado
 
 [1]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example#L106
 [2]: /agent/#send-a-flare
+[3]: /help

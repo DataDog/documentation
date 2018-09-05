@@ -126,7 +126,7 @@ Set `scrub_args` to `false` to completely disable the process arguments scrubbin
 
 ### String Search
 
-Processes and containers are by their nature extremely high cardinality objects.  Our fuzzy string search gives you a view into exactly what you want.  Below is our Demo environment, filtered with the string `postgres /9.`.  
+Processes and containers are by their nature extremely high cardinality objects. The fuzzy string search gives you a view into exactly what you want.  Below is Datadog Demo environment, filtered with the string `postgres /9.`.  
 **Note**: `/9.` has matched in the command path, and `postgres` matches the command itself.
 
 {{< img src="graphing/infrastructure/process/postgres.png" alt="Postgres" responsive="true" style="width:80%;">}}
@@ -135,7 +135,7 @@ Processes and containers are by their nature extremely high cardinality objects.
 
 Making sense of hundreds of thousands or millions of processes can seem overwhelming! Using [tagging][15] makes navigation easy. In addition to all existing host-level tags, processes are tagged by `user`.
 
-First, we can filter down to role:McNulty-Query, which is our front end query service, in order to narrow our search.  Then we can search for our NGINX master processes, and pivot the table by Availability-Zone, to be confident about that service staying highly available.
+First, we can filter down to `role:McNulty-Query`, which is Datadog front end query service, in order to narrow the search.  Then we can search for the NGINX master processes, and pivot the table by Availability-Zone, to be confident about that service staying highly available.
 
 {{< img src="graphing/infrastructure/process/mcnultynginx.png" alt="mcnulty nginx" responsive="true" style="width:80%;">}}
 

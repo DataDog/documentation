@@ -174,7 +174,7 @@ spec:
           name: cgroups
 ```
 
-Replace `<YOUR_API_KEY>` with [your Datadog API key][5] or use [Kubernetes secrets][6] to set your API key [as an environment variable][7]. [Consult our docker integration to discover all configuration options.][8]
+Replace `<YOUR_API_KEY>` with [your Datadog API key][5] or use [Kubernetes secrets][6] to set your API key [as an environment variable][7]. [Consult the docker integration to discover all configuration options.][8]
 
 Deploy the DaemonSet with the command:
 ```

@@ -55,7 +55,7 @@ Using the aforementioned example, below shows three scenarios which would all be
 
 {{< img src="developers/metrics/custom_metrics/custom-metrics-1.jpg" alt="custom-metrics-1" responsive="true" style="width:75%;">}}
 
-We do not enforce [any fixed rate limit][5] on custom metric submission, if you're exceeding your default allotment, our teams will reach out to you.
+We do not enforce [any fixed rate limit][5] on custom metric submission, if you're exceeding your default allotment, Datadog teams will reach out to you.
 
 ## How do I check my custom metrics count?
 

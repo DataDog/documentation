@@ -20,9 +20,9 @@ aliases:
   - /graphing/miscellaneous/from_the_query_to_the_graph
 ---
 
-While setting up graphs is pretty simple in Datadog, this page aims at helping you leverage even more value from our graphing system.
+While setting up graphs is pretty simple in Datadog, this page aims at helping you leverage even more value from Datadog graphing system.
 
-This article focuses on describing the steps performed by our graphing system from the query to the graph, so that you get a good idea how to choose your graph settings.
+This article focuses on describing the steps performed by Datadog graphing system from the query to the graph, so that you get a good idea how to choose your graph settings.
 
 Tl;Dr ? [there is a short version of this article][1].
 
@@ -32,7 +32,7 @@ When setting up a new graph in a [Timeboard][2]/[Screenboard][3] you can use the
 
 {{< img src="graphing/miscellaneous/from_query_to_graph/graph_metric.png" alt="graph_metric" responsive="true" style="width:75%;">}}
 
-Let's now follow each step executed by our backend to perform the query and render a graph line on your dashboard.
+Let's now follow each step executed by Datadog backend to perform the query and render a graph line on your dashboard.
 
 At each step we comment on the effect of each parameter of the query.
 **Before the query, storage: data is stored separately depending on the tags**
@@ -52,13 +52,13 @@ In this example we consider `host:moby` as having 5 devices. Thus Datadog is sto
 * `{host:moby, device:overlay}`
 * `{host:moby, device:shm}`
 
-Let's now go over the successive steps followed by our backend for the query presented above.
+Let's now go over the successive steps followed by Datadog backend for the query presented above.
 
 ## Find which timeseries are needed for the query
 
-In this query we only asked for data associated to `host:moby`. So the first step for our backend is to scan all sources (in this case all {host, device} combination with which metric system.disk.total is submitted) and only retain those corresponding to the scope of the query.
+In this query we only asked for data associated to `host:moby`. So the first step for Datadog backend is to scan all sources (in this case all {host, device} combination with which metric system.disk.total is submitted) and only retain those corresponding to the scope of the query.
 
-As you may have guessed, our backend finds 5 matching sources (see previous paragraph).
+As you may have guessed, Datadog backend finds 5 matching sources (see previous paragraph).
 
 {{< img src="graphing/miscellaneous/from_query_to_graph/metrics_graph_2.png" alt="metrics_graph_2" responsive="true" style="width:70%;">}}
 
@@ -85,11 +85,11 @@ For a graph on a 1-week time window, it would require sending hundreds of thousa
 
 ### Which granularity?
 
-For instance, on a one-day view with the 'lines' display you'll have one datapoint every 5 min. So our backend slices the 1-day interval into 288 buckets of 5 minutes. For each bucket our backend rolls up all data into a single value. For instance the datapoint rendered on your graph with timestamp 07:00 is actually an aggregate of all real datapoints submitted between 07:00:00 and 07:05:00 that day.
+For instance, on a one-day view with the 'lines' display you'll have one datapoint every 5 min. So Datadog backend slices the 1-day interval into 288 buckets of 5 minutes. For each bucket Datadog backend rolls up all data into a single value. For instance the datapoint rendered on your graph with timestamp 07:00 is actually an aggregate of all real datapoints submitted between 07:00:00 and 07:05:00 that day.
 
 ### How?
 
-By default our backend computes the rollup aggregate by averaging all real values, which tends to smooth out graphs as you zoom out. [See more information about why does zooming out a timeframe also smooth out your graphs][7].
+By default Datadog backend computes the rollup aggregate by averaging all real values, which tends to smooth out graphs as you zoom out. [See more information about why does zooming out a timeframe also smooth out your graphs][7].
 Data aggregation needs to occur whether you have 1 or 1000 sources as long as you look at a large time window. So what you generally see on graph are not the real values submitted but local aggregates.
 
 {{< img src="graphing/miscellaneous/from_query_to_graph/metrics_graph_3.png" alt="metrics_graph_3" responsive="true" style="width:75%;">}}
@@ -101,9 +101,9 @@ However, you can control how this aggregation is performed.
 **Parameter involved: rollup (optional)**
 How to use the ['rollup' function][8]?.
 
-In our example rollup(avg,60) defines an aggregate period of 60 seconds. So our X minutes interval is sliced into Y intervals of 1 minute each. Data within a given minute is aggregated into a single point that shows up on your graph (after step 3, the space-aggregation).
+In this example rollup(avg,60) defines an aggregate period of 60 seconds. So the X minutes interval is sliced into Y intervals of 1 minute each. Data within a given minute is aggregated into a single point that shows up on your graph (after step 3, the space-aggregation).
 
-Note that our backend tries to keep the number of interval to a number below ~300. So if you do rollup(60) over a 2-month time window, you won't get the one-minute granularity requested.
+Note that Datadog backend tries to keep the number of interval to a number below ~300. So if you do rollup(60) over a 2-month time window, you won't get the one-minute granularity requested.
 
 ## Proceed to space-aggregation
 
@@ -156,8 +156,8 @@ In this example the function abs makes sure that your results are positive numbe
 
 The logic is the same:
 
-1. Our backend finds all different devices associated to the source selected.
-2. For each device, our backend performs the query `system.disk.total{host:example, device:<device>}` as explained in this article.
+1. Datadog backend finds all different devices associated to the source selected.
+2. For each device, Datadog backend performs the query `system.disk.total{host:example, device:<device>}` as explained in this article.
 3. All final results are graphed on the same graph.
 
 {{< img src="graphing/miscellaneous/from_query_to_graph/metric_graph_7.png" alt="metric_graph_2" responsive="true" style="width:75%;">}}

@@ -21,7 +21,7 @@ further_reading:
   text: Log Collection Troubleshooting Guide
 ---
 
-We are going to use `lograge` here as it'll help us bringing some sanity in logs that are noisy and hardly parseable. 
+It's recommended to use `lograge` here as it helps bringing some sanity in logs that are noisy and hardly parseable. 
 
 Instead of having a Rail logging output like this:
 

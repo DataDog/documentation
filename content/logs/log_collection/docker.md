@@ -177,7 +177,7 @@ Check out the [multi-line processing rule documentation][10] to get more pattern
 
 **Kubernetes**
 
-If you are running in Kubernetes and do not use container labels, pod annotation will soon be supported. Check our [Autodiscovery Guide][8] for more information about Autodiscovery setup and examples.
+If you are running in Kubernetes and do not use container labels, pod annotation will soon be supported. Check Datadog [Autodiscovery Guide][8] for more information about Autodiscovery setup and examples.
 
 ## Further Reading
 

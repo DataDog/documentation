@@ -12,7 +12,7 @@ If you're able to connect using JConsole, run the following:
 java -jar /opt/datadog-agent/agent/checks/libs/jmxterm-1.0-DATADOG-uber.jar -l localhost:PORT -u USER -p PASSWORD
 ```
 
-If you're able to connect using the command above, run: `beans` and send us a copy of the results from above along with the following information:
+If you're able to connect using the command above, run: `beans` and send to the [Datadog support team][5] a copy of the results from above along with the following information:
 
 For Agent v6:
 
@@ -105,3 +105,4 @@ Note: the location to the JRE tools.jar (`/usr/lib/jvm/java-8-oracle/lib/tools.j
 [2]: /agent/faq/send-logs-and-configs-to-datadog-via-flare-command
 [3]: /agent/faq/agent-status-and-information
 [4]: https://github.com/jiaqi/jmxterm
+[5]: /help

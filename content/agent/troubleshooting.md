@@ -92,7 +92,7 @@ Or the container can be restarted.
 
 ## Send a flare
 
-If you are running the 5.3 version (or higher) of the Agent, you're able to send all necessary troubleshooting information to our Support Team, with one flare command!
+If you are running the 5.3 version (or higher) of the Agent, you're able to send all necessary troubleshooting information to the Datadog Support Team, with one flare command!
 
 `flare` gathers all of the Agent's configuration files and logs into an archive file. It removes sensitive information including passwords, API keys, Proxy credentials, and SNMP community strings.  
 **Confirm the upload of the archive to immediately send it to Datadog support**.  
@@ -115,7 +115,7 @@ In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if
 | Redhat     | `sudo datadog-agent flare <CASE_ID>`                  |
 | Suse       | `sudo datadog-agent flare <CASE_ID>`                  |
 | Source     | `sudo datadog-agent flare <CASE_ID>`                  |
-| Windows    | [Consult our dedicated windows doc][10]               |
+| Windows    | [Consult the dedicated windows documentation][10]     |
 
 [10]: /agent/basic_agent_usage/windows/#agent-v6
 
@@ -135,7 +135,8 @@ In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if
 | Redhat          | `sudo service datadog-agent flare <CASE_ID>`                            |
 | Suse            | `sudo service datadog-agent flare <CASE_ID>`                            |
 | Source          | `sudo ~/.datadog-agent/bin/agent flare <CASE_ID>`                       |
-| Windows         | [Consult our dedicated windows doc][9]                                  |
+| Windows         | [Consult the dedicated windows documentation][9]                        |
+
 
 **Note**: If you are using a Linux based system and the `service` wrapper command is not available, [consult the list of alternatives][4].
 
@@ -169,7 +170,7 @@ If you want to include rate metrics, add `--check-rate` to your command, for ins
 {{% /tab %}}
 {{< /tabs >}}
 
-If your issue continues, [reach out to our Support team][5] with a [flare](#flare).
+If your issue continues, [reach out to the Datadog Support team][5] with a [flare](#flare).
 
 ### Windows
 

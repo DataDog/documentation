@@ -74,7 +74,7 @@ Configure Syslog-ng to gather logs from your host, containers, & services.
 4. (Optional) TLS Encryption 
     To activate TLS encryption:
     
-    1. Download our [certificate][1] and save it to `/etc/syslog-ng/certs.d/datadoghq.crt`. 
+    1. Download Datadog [certificate][1] and save it to `/etc/syslog-ng/certs.d/datadoghq.crt`. 
 
     2. Change the definition of the destination to the following:
 

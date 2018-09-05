@@ -5,13 +5,13 @@ order: 4
 external_redirect: /api/#rate-limiting
 ---
 ## Rate limiting
-Some of our API endpoints are rate limited. Once you exceed a certain number of requests in a certain time period we return an error.
+Some of Datadog API endpoints are rate limited. Once you exceed a certain number of requests in a certain time period we return an error.
 
 For rate limited API endpoints we return headers so you can know how close you are to your limit. If you exceed your limit, review these headers to determine when you are able to try again.
 
 Rate limits can be increased from defaults by [contacting the Datadog Support team][1].
 
-Here is some information regarding our API rate limit policy:
+Here is some information regarding Datadog API rate limit policy:
 
 * We **do not rate limit** on datapoint/metric submission (see [metrics section](/api/#metrics) for more info on how metric submission rate is handled) - limits encounter would be the quantity of [custom metrics][2] based on [your agreement][3]
 * Rate limit for event submission is 1000 per aggregate per day per organization. An aggregate is a group of similar events.

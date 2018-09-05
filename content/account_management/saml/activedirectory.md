@@ -104,7 +104,7 @@ While in most setups the user's user@domain is his  Microsoft login does not enf
 
 {{< img src="account_management/saml/0R81SaK.png" alt="0R81SaK" responsive="true" style="width:60%;">}}
 
-For any questions or help with this, reach out to us using any one of our [many help options][3]!
+For any questions or help with this, reach out to [the Datadog support team][3]!
 
 {{< partial name="whats-next/whats-next.html" >}}
 

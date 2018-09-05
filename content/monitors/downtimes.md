@@ -29,7 +29,7 @@ Monitors trigger events when they change state between `ALERT`, `WARNING` (if en
 If a monitor transitions states during downtime (such as from `OK` to `ALERT`, `WARNING`, or `NO DATA`) and remains in that state once a scheduled downtime expires, it will **NOT** trigger a notification. 
 **However it WILL trigger a recovery event once data returns for that scope or the monitor returns to an `OK` state.**
 
-This behavior is designed to prevent spammy `NO DATA` state alerts when using the *Autoresolve* feature. If you would prefer that the monitor trigger a `NO DATA` state event at the time that the silencing expires, [reach out to our support team][5] to request that this feature is enabled for your account. This will only affect instances when a monitor exits a downtime period in a `NO DATA` state.
+This behavior is designed to prevent spammy `NO DATA` state alerts when using the *Autoresolve* feature. If you would prefer that the monitor trigger a `NO DATA` state event at the time that the silencing expires, [reach out to Datadog support team][5] to request that this feature is enabled for your account. This will only affect instances when a monitor exits a downtime period in a `NO DATA` state.
 
 ## Manage Downtime
 

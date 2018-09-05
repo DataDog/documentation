@@ -29,7 +29,7 @@ The new child-organization will be created as a 14-day free trial account. You c
 
 ## Custom domains for each child-organization
 
-The custom domain feature must be enabled by support. [Contact us to enable it](/help).
+The custom domain feature must be enabled by support. [Contact The Datadog support team to enable it][2].
 
 If you are a member of multiple organizations, custom sub-domains help you quickly identify the source of an alert or notification. They will also immediately switch you to the organization associated with the sub-domain.
 
