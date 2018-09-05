@@ -23,7 +23,7 @@ Agent v6 is now available, <a href="https://github.com/DataDog/datadog-agent/blo
 
 ## What is the Agent?
 
-The Datadog Agent is a piece of software that runs on your hosts. Its job is to faithfully collect events and metrics and bring them to Datadog on your behalf so that you can do something useful with your monitoring and performance data. The Datadog Agent is open source, view the source code on GitHub for [Agent v5][1] and [Agent v6][2]. To see all changes between Agent v5 and v6, consult the [Datadog Agent dedicated changes][3] documentation.
+The Datadog Agent is a piece of software that runs on your hosts. Its job is to faithfully collect events and metrics and bring them to Datadog on your behalf so that you can do something useful with your monitoring and performance data. The Datadog Agent is open source: view the source code on GitHub for [Agent v5][1] and [Agent v6][2]. To see all changes between Agent v5 and v6, consult the [Datadog Agent dedicated changes][3] documentation.
 
 {{< partial name="platforms/platforms.html" >}}
 
