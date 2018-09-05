@@ -66,6 +66,10 @@ Si une seule de ces sections vous intéresse, pour chacune des sections il exist
 * [https://ip-ranges.datadoghq.com/logs.json][10] pour les IPs utilisées pour le traffic des logs
 * [https://ip-ranges.datadoghq.com/apm.json][11] pour les IPs utilisées pour le traffic APM
 
+### Note
+
+Vous devriez autoriser *toutes* ces IPs pour identifier le trafic provenant/à destination de Datadog. Ces IPs ne sont pas toujours toutes actives, à tout moment leur état peut changer entre actif/inactif sans avertissement (pour une opération de maintenance de Datadog ou de nos fournisseurs d'hébergement).
+
 ## Ports ouverts
 
 **Tout le traffic sortant est envoyé en TCP SSL sur le port 443.**

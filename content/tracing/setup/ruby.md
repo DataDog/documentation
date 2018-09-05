@@ -102,6 +102,7 @@ Ruby APM includes support for the following Ruby interpreters:
 |                                    | 2.2     | Fully Supported |
 |                                    | 2.3     | Fully Supported |
 |                                    | 2.4     | Fully Supported |
+|                                    | 2.5     | Fully Supported |
 | [JRuby](http://jruby.org/)         | 9.1.5   | Experimental    |
 
 #### Web Server Compatibility
