@@ -116,7 +116,7 @@ The conditional variables available are:
 | `{{#is_exact_match}}`      | Show when the context matches a string exactly        |
 | `{{^is_alert_recovery}}`   | Show unless monitor recovers from an alert            |
 | `{{#is_alert_to_warning}}` | Show when monitor transitions from alert to warning   |
-| `{{#Is_no_data_recovery}}` | Show when monitor recovers from a no data             |
+| `{{#is_no_data_recovery}}` | Show when monitor recovers from a no data             |
 | `{{#is_warning_recovery}}` | Show when monitor recovers from a warning             |
 | `{{^is_alert_to_warning}}` | Show unless monitor transitions from alert to warning |
 | `{{^is_no_data_recovery}}` | Show unless monitor recovers from a no data           |
