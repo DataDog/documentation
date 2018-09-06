@@ -7,6 +7,7 @@ videos:
     - Datadog 101
     - Notifications
 summary: Using notifications to get alerted to problems without being woken up for false positives
+private: true
 ---
 
 Datadog 101 shows you everything you need to know about using the Datadog platform. In this sixth video we show you how to use notifications. We cover the following topics:

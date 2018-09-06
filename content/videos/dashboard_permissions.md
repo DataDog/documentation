@@ -9,6 +9,7 @@ videos:
     - Permissions
     - Matts Quick Tips
 summary: Learn how to lock down your favorite dashboard.
+private: true
 ---
 
 Our customers love the ability to [create dashboards][1] that make the most sense for them.  

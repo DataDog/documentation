@@ -1,6 +1,7 @@
 ---
 title: FAQ Integrations
 kind: faq
+private: true
 ---
 
 ## General
