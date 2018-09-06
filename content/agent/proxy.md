@@ -87,9 +87,43 @@ The Agent uses the following values in order of precedence:
 2. `HTTPS_PROXY`, `HTTP_PROXY`, and `NO_PROXY` environment variables
 3. Values inside `datadog.yaml`
 
-See the [log collection documentation][9] to learn how to forward your logs with a proxy.
+#### Proxy for Logs
 
-[7]: /logs/log_collection/#using-a-proxy-for-logs
+Logs make use of a different set of proxy settings than other data types forwarded by the Datadog Agent. This is due to the fact that logs are transported over TCP/SSL, while other features submit data via HTTPS.
+
+##### TCP 
+
+If you use a proxy for TCP transmission, configure the Datadog Agent to send logs to your proxy through TCP thanks to the following parameters in `datadog.yaml`:
+
+```
+logs_config:
+  logs_dd_url: <PROXY_ENDPOINT>:<PROXY_PORT>
+  logs_no_ssl: true
+```
+
+Those are also available as environment variables:
+
+* `DD_LOGS_CONFIG_LOGS_DD_URL`
+* `DD_LOGS_CONFIG_LOGS_NO_SSL`
+
+**Important Note**: The parameter `logs_no_ssl` is needed to make the Agent ignore the discrepancy between the hostname on the SSL certificate (`agent-intake.logs.datadoghq.com`) and your proxy hostname. We however strongly advise to use a SSL encrypted connection between your proxy and our intake.
+
+* Then configure your proxy to listen on `<PROXY_PORT>` and forward the received logs to `agent-intake.logs.datadoghq.com` on port 10516 and activate SSL encryption.
+
+* Use the [public key for TLS encryption](https://docs.datadoghq.com/crt/intake.logs.datadoghq.com.crt) for the SSL encryption. On some systems, the full certificate chain may be required. If so, use [this public key](https://docs.datadoghq.com/crt/FULL_intake.logs.datadoghq.com.crt) instead.
+
+##### SOCK5
+
+To send your logs to your Datadog account via a SOCKS5 proxy server use the following settings in your `datadog.yaml` configuration file:
+
+```
+logs_config:
+  socks5_proxy_address: <MY_SOCKS5_PROXY_URL>:<MY_SOCKS5_PROXY_PORT>
+```
+
+It is also available through environement variable:
+
+* `DD_LOGS_CONFIG_SOCK5_PROXY_ADDRESS`
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
