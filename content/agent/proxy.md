@@ -1,8 +1,6 @@
 ---
 title: Agent proxy configuration
 kind: documentation
-aliases:
-    - /agent/proxy
 further_reading:
 - link: "logs/"
   tag: "Documentation"
