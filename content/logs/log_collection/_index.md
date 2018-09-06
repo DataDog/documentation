@@ -5,6 +5,7 @@ description: "Configure your Datadog Agent to gather logs from your host, contai
 aliases:
   - /logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers
   - /logs/languages
+  - /integrations/windows_event_log/
 further_reading:
 - link: "logs/processing"
   tag: "Documentation"
@@ -27,7 +28,7 @@ further_reading:
 
 Log collection requires an Agent version >= 6.0. Older versions of the Agent do not include the `Log collection` interface that is used for log collection.
 
-If you are not using it already, please follow [the Agent installation instruction][1].
+If you are not using the Agent already, follow [the Agent installation instructions][1] to install it.
 
 Collecting logs is **disabled** by default in the Datadog Agent, you need to enable it in `datadog.yaml`:
 
@@ -49,55 +50,29 @@ If an integration does not support logs by default, use the custom file configur
 
 ## Custom log collection
 
-Datadog Agent v6 can collect logs from files or the network (TCP or UDP) and forward them to Datadog: 
+Datadog Agent v6 can collect logs and forward them to Datadog from files, the network (TCP or UDP), journald, and Windows channels:
 
 1. Create a new folder in the `conf.d/` directory at the root of your [Agent's configuration directory][9] named after your log source.
 2. Create a new `conf.yaml` file in this new folder.
-3. Add a custom log collection configuration with the following parameters:
-
-| Parameter        | Presence  | Description                                                                                                                                                                                                                                                                                                                |
-| ------           | -------   | ------                                                                                                                                                                                                                                                                                                                     |
-| `type`           | mandatory | Type of the log input source, it can be **tcp**, **udp**, **file**, **windows_event**, **docker**, or **journald**                                                                                                                                                                                                         |
-| `port`           | mandatory | If `type` is **tcp** or **udp**, port to listen log from.                                                                                                                                                                                                                                                                  |
-| `path`           | mandatory | If `type` is **file** or **journald**, path of the file to tail log from.                                                                                                                                                                                                                                                                  |
-| `channel_path`   | mandatory | If `type` is **windows_event**, list of windows event channel to collect.                                                                                                                                                                                                                                                  |
-| `service`        | mandatory | Name of the service owning the log. If you instrumented your service with [Datadog APM][12], this should be the same service name.                                                                                                                                                                                         |
-| `source`         | mandatory | Attribute that defines which integration is sending the logs. If the logs do not come from an existing integration then this field may include a custom source name. But we recommend matching this value to the namespace of any related [custom metrics][2] you are collecting, e.g, `myapp` from `myapp.request.count`) |
-| `include_units`  | optional  | If `type` is **journald**, list of specific journald units to includes.                                                                                                                                                                                                                                                    |
-| `exclude_units`  | optional  | If `type` is **journald**, list of specific journald units to exclude.                                                                                                                                                                                                                                                     |
-| `sourcecategory` | optional  | Multiple value attribute. Can be used to refine the source attribtue. Example: `source:mongodb, sourcecategory:db_slow_logs`                                                                                                                                                                                               |
-| `tags`           | optional  | Add tags to each log collected, [learn more about tagging][13].                                                                                                                                                                                                                                                            |
-
-Finally [restart your Agent][10] to take into account this new configuration. You can then [run the Agent's `status` subcommand][11] to check if your custom configuration is correct.
+3. Add a custom log collection configuration group with the parameters below.
+4. [Restart your Agent][10] to take into account this new configuration. 
+5. [Run the Agent's `status` subcommand][11] to check if your custom configuration is correct.
 
 Below are some example of custom log collection setup:
 
 {{< tabs >}}
 {{% tab "Tail existing files" %}}
 
-Set `type` to **file** then specify the absolute `path` to the log file you want to tail.
+To gather logs from your `<APP_NAME>` application stored in `<PATH_LOG_FILE>/<LOG_FILE_NAME>.log` create a `<APP_NAME>.d/conf.yaml` file at the root of your [Agent's configuration directory][9] with the following content:
 
-Example:
-
-To gather logs from your Python applications stored in **/var/log/myapp1.log** and **/var/log/python.log** create a `python.d/conf.yaml` file at the root of your [Agent's configuration directory][9] with the following content:
-
-```yaml
-##Log section
-logs:
-
-  - type: file
-    path: /var/log/myapp1.log
-    service: myapp1
-    source: python
-    sourcecategory: sourcecode
-    tags: env:prod
-
-  - type: file
-    path: /var/log/python.log
-    service: myapplication
-    source: python
-    sourcecategory: sourcecode
 ```
+logs:
+  - type: file
+    path: <PATH_LOG_FILE>/<LOG_FILE_NAME>.log
+    service: <APP_NAME>
+    source: custom
+```
+
 **Note**: If you are using the Windows 6 Agent and trailing files for logs, make sure that those files have UTF8 encoding.
 
 [9]: /agent/faq/agent-configuration-files/
@@ -106,22 +81,14 @@ logs:
 
 {{% tab "Stream logs from TCP/UDP" %}}
 
-Set `type` to **tcp** or **udp** depending on the protocol then specify the `port` of your incoming connection.
+To gather logs from your `<APP_NAME>` application that does not log to a file, but instead forwards its logs via TCP over port **10518**, create a ``<APP_NAME>.d/conf.yaml` file at the root of your [Agent's configuration directory][9] with the following content:
 
-Example:
-
-To gather logs from a PHP application that does not log to a file, but instead forwards its logs via TCP over port **10518**, create a `php.d/conf.yaml` file at the root of your [Agent's configuration directory][9] with the following content:
-
-```yaml
-
-##Log section
+```
 logs:
   - type: tcp
     port: 10518
-    service: webapp
-    source: php
-    sourcecategory: front
-
+    service: <APP_NAME>
+    source: custom
 ```
 
 **Note**: The Agent supports raw string, JSON, and Syslog formatted logs. If you are sending logs in batch, use linebreak characters to separate your logs.
@@ -129,21 +96,14 @@ logs:
 [9]: /agent/faq/agent-configuration-files/
 
 {{% /tab %}}
-{{% tab "Stream logs from JournalD" %}}
+{{% tab "Stream logs from journald" %}}
 
-Set `type` to **journald** then specify the `path` of your journal.
+To gather logs from journald, create a `journald.d/conf.yaml` file at the root of your [Agent's configuration directory][9] with the following content:
 
-Example:
-
-To gather logs from JournalD, create a `journald.d/conf.yaml` file at the root of your [Agent's configuration directory][9] with the following content:
-
-```
+```yaml
 logs:
   - type: journald
     path: /var/log/journal/
-    include_units:
-      - docker.service
-      - sshd.service
 ```
 
 [9]: /agent/faq/agent-configuration-files/
@@ -151,17 +111,62 @@ logs:
 {{% /tab %}}
 {{% tab "Windows Events" %}}
 
-Set `type` to **windows_event** then specify the `channel_path` of your Windows channel.
+Add the channels (from which you want to send Windows Events as log to Datadog) to the `conf.d/win32_event_log.d/conf.yaml` file manually, or via the Datadog Agent Manager. 
 
-Example: 
+To see the channel list run the following command in a PowerShell:
 
-[Refer to the dedicated widows event documentation page][15].
+```
+Get-WinEvent -ListLog *
+```
 
-[15]: https://docs.datadoghq.com/integrations/windows_event_log/#log-collection
+To see the most active channels run the following command in a PowerShell:
+
+```
+Get-WinEvent -ListLog * | sort RecordCount -Descending
+```
+
+Then add the channels in your `win32_event_log.d/conf.yaml` configuration file:
+
+```
+logs:
+  - type: windows_event
+    channel_path: <CHANNEL_1>
+    source: <CHANNEL_1>
+    service: myservice
+    sourcecategory: windowsevent
+
+  - type: windows_event
+    channel_path: <CHANNEL_2>
+    source: <CHANNEL_2>
+    service: myservice
+    sourcecategory: windowsevent
+```
+
+Edit the `<CHANNEL_X>` parameters with the Windows Channel name you want to collect events from. 
+Set the corresponding `source` parameter to the same channel name to benefit from the [integration automatic processing Pipeline setup][2].
+
+Finally, [Restart the agent][1]
+
+[1]: /agent/basic_agent_usage/windows/
+[2]: /logs/processing/pipelines/#integration-pipelines
 
 {{% /tab %}}
-
 {{< /tabs >}}
+
+List of all available parameters for log collection: 
+
+| Parameter        | Presence  | Description                                                                                                                                                                                                                                                                                                                   |
+| ------           | -------   | ------                                                                                                                                                                                                                                                                                                                        |
+| `type`           | mandatory | Type of log input source. Valid values are: **tcp**, **udp**, **file**, **windows_event**, **docker**, or **journald**                                                                                                                                                                                                        |
+| `port`           | mandatory | If `type` is **tcp** or **udp**, port to listen log from.                                                                                                                                                                                                                                                                     |
+| `path`           | mandatory | If `type` is **file** or **journald**, path of the file to gather log from.                                                                                                                                                                                                                                                   |
+| `channel_path`   | mandatory | If `type` is **windows_event**, list of windows event channels to collect log from.                                                                                                                                                                                                                                           |
+| `service`        | mandatory | Name of the service owning the log. If you instrumented your service with [Datadog APM][12], this must be the same service name.                                                                                                                                                                                              |
+| `source`         | mandatory | Attribute that defines which integration is sending the logs. If the logs do not come from an existing integration, then this field may include a custom source name. However, it is recommend that you match this value to the namespace of any related [custom metrics][2] you are collecting, e.g, `myapp` from `myapp.request.count`) |
+| `include_units`  | optional  | If `type` is **journald**, list of specific journald units to include.                                                                                                                                                                                                                                                        |
+| `exclude_units`  | optional  | If `type` is **journald**, list of specific journald units to exclude.                                                                                                                                                                                                                                                        |
+| `sourcecategory` | optional  | Multiple value attribute. Can be used to refine the source attribute. Example: `source:mongodb, sourcecategory:db_slow_logs`                                                                                                                                                                                                  |
+| `tags`           | optional  | Add tags to each log collected. [learn more about tagging][13].                                                                                                                                                                                                                                                               |
 
 ## Advanced log collection functions
 ### Filter logs
@@ -307,7 +312,7 @@ logs:
 
 ### Using a Proxy for Logs
 
-Logs make use of a different set of proxy settings than other data types forwarded by the Datadog Agent. This is due to the fact that logs are currently transported over TCP/SSL, while other features submit data via HTTPS.
+Logs make use of a different set of proxy settings than other data types forwarded by the Datadog Agent. This is due to the fact that logs are transported over TCP/SSL, while other features submit data via HTTPS.
 
 With Datadog Agent >= 6.4.1, send your logs to your Datadog account via a SOCKS5 proxy server. To do so, use the following settings in your `datadog.yaml` configuration file:
 
@@ -316,7 +321,7 @@ logs_config:
   socks5_proxy_address: <MY_SOCKS5_PROXY_URL>:<MY_SOCKS5_PROXY_PORT>
 ```
 
-[Refer to our Agent proxy documentation page to learn how to forward your metrics with a proxy][8].
+[Refer to the Agent proxy documentation page to learn how to forward your metrics with a proxy][8].
 
 ## How to get the most of your application logs
 

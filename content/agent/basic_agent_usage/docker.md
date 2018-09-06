@@ -21,7 +21,7 @@ further_reading:
   text: Collect your Docker traces
 ---
 
-If you haven't installed the Agent yet, instructions can be found [in the Datadog Agent Integration page][1]. You can also consult our [Official Docker Agent 6 image][2].
+If you haven't installed the Agent yet, instructions can be found [in the Datadog Agent Integration page][1]. You can also consult the [official Docker Agent 6 image][2].
 
 ## How to run it
 
@@ -80,7 +80,7 @@ DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app","release":"helm_release"}'
 DD_DOCKER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 ```
 
-Either define them in your custom `datadog.yaml`, or set them as JSON maps in these envvars. The map key is the source (`label/envvar`) name, and the map value the datadog tag name.
+Either define them in your custom `datadog.yaml`, or set them as JSON maps in these envvars. The map key is the source (`label/envvar`) name, and the map value the Datadog tag name.
 
 #### Ignore containers
 
@@ -90,6 +90,10 @@ Exclude containers from the metrics collection and Autodiscovery, if these are n
 * `DD_AC_EXCLUDE`: Space-separated strings of the blacklist of containers to exclude e.g `"image:image_name_3 image:image_name_4"`
 
 **Note**: The `docker.containers.running`, `.stopped`, `.running.total` and `.stopped.total` metrics are not affected by these settings and always count all containers. This does not affect your per-container billing.
+
+#### Misc
+
+- `DD_PROCESS_AGENT_CONTAINER_SOURCE`: Overrides container source auto-detection to force a single source. e.g `"docker"`, `"ecs_fargate"`, `"kubelet"`
 
 ### Configuration files
 

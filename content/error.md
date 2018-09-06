@@ -1,6 +1,7 @@
 ---
 title: Uh oh, Something Went Wrong
 kind: documentation
+private: true
 ---
 
 {{< img src="sad_bits.png" alt="Sad Bits" responsive="true" >}}

@@ -236,7 +236,7 @@ to get traffic for all the tagged hosts, split by host and network device.
 
 ### Y-Axis Controls
 
-The Datadog y-axis controls (currently just via the JSON editor) allow you to:
+The Datadog y-axis controls allow you to:
 
 *   Clip y-axis to specific ranges
 *   Filter series either by specifying a percentage or an absolute value

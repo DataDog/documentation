@@ -2,7 +2,6 @@
 title: Network Traffic
 kind: documentation
 aliases:
-    - /agent/proxy
     - /account_management/faq/what-are-the-required-ip-s-and-ports-i-need-open-to-connect-to-the-datadog-service
     - /account_management/faq/can-i-whitelist-the-ip-addresses-for-data-coming-from-datadog-via-webhook-and-integrations
 further_reading:
@@ -27,13 +26,9 @@ further_reading:
   * **Agents < 5.2.0** `app.datadoghq.com`
   *  **Agents >= 5.2.0** `<version>-app.agent.datadoghq.com`
 
-This decision was taken after the POODLE problem, now versioned endpoints start with Agent 5.2.0, i.e. each version of the Agent hits a different endpoint based on the version of the *Forwarder*.  
+This decision was taken after the POODLE problem. Versioned endpoints start with Agent v5.2.0, where each version of the Agent calls a different endpoint based on the version of the *Forwarder*. For example, Agent v5.2.0 calls `5-2-0-app.agent.datadoghq.com`. Therefore you must whitelist `*.agent.datadoghq.com` in your firewall(s).
 
-* i.e. Agent 5.2.0 hits `5-2-0-app.agent.datadoghq.com`  
-
-As a consequence whitelist `*.agent.datadoghq.com` in your firewalls.
-
-These domains are **CNAME** records pointing to a set of static IP addresses, these addresses can be found at:  
+These domains are **CNAME** records pointing to a set of static IP addresses. These addresses can be found at:  
 
 * **[https://ip-ranges.datadoghq.com][4]**
 
@@ -41,30 +36,33 @@ The information is structured as JSON following this schema:
 
 ```
 {
-    "version": 1,                       // <-- we increment this every time the information is changed
-    "modified": "YYYY-MM-DD-HH-MM-SS",  // <-- the timestamp of the last modification
-    "agents": {                         // <-- in this section the IPs used by the agent to submit metrics to Datadog
-        "prefixes_ipv4": [              // <-- a list of IPv4 CIDR blocks
+    "version": 1,                       // <-- incremented every time this information is changed
+    "modified": "YYYY-MM-DD-HH-MM-SS",  // <-- timestamp of the last modification
+    "agents": {                         // <-- the IPs used by the Agent to submit metrics to Datadog
+        "prefixes_ipv4": [              // <-- list of IPv4 CIDR blocks
             "a.b.c.d/x",
             ...
         ],
-        "prefixes_ipv6": [              // <-- a list of IPv6 CIDR blocks
+        "prefixes_ipv6": [              // <-- list of IPv6 CIDR blocks
             ...
         ]
     },
-    "apm": {...},                       // <-- same structure as "agents" but IPs used for the APM agent data
-    "logs": {...},                      // <-- same for the logs agent data
-    "process": {...},                   // <-- same for the process agent data
-    "api": {...},                       // <-- not relevant for agent traffic (submitting data via API)
-    "webhooks": {...}                   // <-- not relevant for agent traffic (Datadog source IPs delivering webhooks)
+    "apm": {...},                       // <-- same structure as "agents" but IPs used for the APM Agent data
+    "logs": {...},                      // <-- same for the logs Agent data
+    "process": {...},                   // <-- same for the process Agent data
+    "api": {...},                       // <-- not used for Agent traffic (submitting data via API)
+    "webhooks": {...}                   // <-- not used for Agent traffic (Datadog source IPs delivering webhooks)
 }
 ```
 
-If you are interested by only one of the sections of this document, for each section there is also a dedicated endpoint at `https://ip-ranges.datadoghq.com/<section>.json`, for instance:
+Each section has a dedicated endpoint at `https://ip-ranges.datadoghq.com/<section>.json`, for example:
 
 * [https://ip-ranges.datadoghq.com/logs.json][10] for the IPs used to receive logs data
 * [https://ip-ranges.datadoghq.com/apm.json][11] for the IPs used to receive APM data
 
+### Note
+
+You should whitelist all of these IPs; while only a subset are active at any given moment, there are variations over time within the entire set due to regular network operation and maintenance.
 
 ## Open Ports
 

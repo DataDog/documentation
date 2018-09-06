@@ -80,7 +80,7 @@ See the list of resources associated with your service. Resources are particular
 
 {{< img src="tracing/visualization/service/resources.png" alt="Resources" responsive="true" style="width:90%;">}}
 
-[Refer to our dedicated resource documentation to learn more][1].
+[Refer to the dedicated resource documentation to learn more][1].
 
 ### Filtering the resources list
 Filter your resources list with a query for basic text filtering:

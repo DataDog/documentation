@@ -123,7 +123,7 @@ We have two modules:
         return web.json_response(response)
     ```
 
-The code above is already instrumented. Please [refer to the dedicated setup documentation][2] to learn how to instrument your application and configure the Datadog Agent.
+The code above is already instrumented. [See the dedicated setup documentation][2] to learn how to instrument your application and configure the Datadog Agent.
 
 ### Datadog APM
 
@@ -160,11 +160,12 @@ Selecting a trace opens the _trace panel_ containing information such as:
 From the above image, we can see how the request is first received by the **thinker-api** service with the `flask.request` [span][10], which transmits the processed request to the **thinker-microservice** service, which executes the function `think()` twice.
 
 In our code we added:
+
 ```
 tracer.current_span().set_tag('subject', subject)
 ```
 
-Which allows us to get more context every time `think()` is called and traced:
+Which allows you to get more context every time `think()` is called and traced:
 
 * The first time `think` is executed, the *subject* is **technology** and everything goes well:
     {{< img src="tracing/product_specs/distributed_tracing/traces_thinker_mircroservice_GS_1.png" alt="Thinker microservice getting started 1" responsive="true" style="width:80%;">}}

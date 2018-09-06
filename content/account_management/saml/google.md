@@ -15,7 +15,7 @@ further_reading:
 
 ### Setting up Google as a SAML IdP
 
-[Please read the dedicated Google instructions][1]
+[See the dedicated Google instructions][1]
 
 ### For the "Service Provider Details"
 

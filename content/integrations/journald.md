@@ -18,7 +18,7 @@ supported_os:
 ## Overview
 
 Systemd-journald is a system service that collects and stores logging data. It creates and maintains structured, indexed journals based on logging information that is received from a variety of sources.
-Note that this integration does not currently support RPM-based Linux distributions, including Red Hat and CentOS.
+Note that this integration does not support RPM-based Linux distributions, including Red Hat and CentOS.
 
 ## Setup
 
@@ -60,7 +60,7 @@ Finally, [restart the agent][2].
 
 ##### Change journal location
 
-By default the agent looks for the journal at the following locations:
+By default the Agent looks for the journal at the following locations:
 
 * `/var/log/journal`
 * `/var/run/journal`
@@ -101,7 +101,7 @@ Need help? Contact [Datadog Support][3].
 
 ## Further Reading
 
-Learn more about infrastructure monitoring and all our integrations on [our blog][4]
+Learn more about infrastructure monitoring and all Datadog integrations on [our blog][4]
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent

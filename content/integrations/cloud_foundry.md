@@ -29,7 +29,7 @@ For Pivotal Cloud Foundry, you have the option to install the Datadog integratio
 
 ## Monitor Your Applications on Cloud Foundry
 
-Use **Datadog Cloud Foundry Buildpack** to monitor your Cloud Foundry application. This is a [supply buildpack][1] for Cloud Foundry that installs a [Datadog DogStatsD binary][2] and [Datadog Trace Agent][3] in the container your app is running on.
+Use **Datadog Cloud Foundry Buildpack** to monitor your Cloud Foundry application. This is a [supply buildpack][1] for Cloud Foundry that installs a [Datadog DogStatsD binary][2] and [Datadog Agent][3] in the container your app is running on.
 
 ### Setup
 
@@ -37,7 +37,7 @@ Use **Datadog Cloud Foundry Buildpack** to monitor your Cloud Foundry applicatio
 
 Our buildpack uses Cloud Foundry [multi-buildpack][4] feature that was introduced in version `1.12`.
 
-For older version, Cloud Foundry provides a back-port of this feature in the form of a [buildpack][25]. You must install and configure this backport in order to use our buildpack:
+For older versions, Cloud Foundry provides a back-port of this feature in the form of a [buildpack][25]. You must install and configure this backport in order to use Datadog's buildpack:
 
 1. **Upload the multi-buildpack back-port.**
   Download the latest [multi-build pack release][25] and upload it to your Cloud Foundry environment.
@@ -83,7 +83,6 @@ For older version, Cloud Foundry provides a back-port of this feature in the for
 
 2. **Push your application with the Datadog buildpack and your buildpacks.**
   The process to push your application with multiple buildpack is described in the [cloud foundry documentation][27].
-  This process is likely to change in the close future so please check the link above.
 
     ```shell
     cf push <YOUR_APP> --no-start -b binary_buildpack
@@ -94,7 +93,7 @@ For older version, Cloud Foundry provides a back-port of this feature in the for
 
 #### Meta-Buildpack **(deprecated)**
 
-If you are a [meta-buildpack][28] user, our buildpack can be used as a decorator out of the box.
+If you are a [meta-buildpack][28] user, Datadog's buildpack can be used as a decorator out of the box.
 
 **Note**: The [meta-buildpack][28] has been deprecated by pivotal in favor of the [multi-buildpack][25] and that we might drop the support for it in a future release.
 

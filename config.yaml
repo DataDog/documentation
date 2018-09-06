@@ -59,7 +59,7 @@ languages:
           pre: "nav_agent"
           weight: 40
 
-        ## Basic agent usage
+        ## Basic Agent usage
         - identifier: customnav_agentnav_basic_usage
           name: "Basic Agent Usage"
           url: "agent/basic_agent_usage/"
@@ -1156,7 +1156,7 @@ languages:
           pre: "nav_agent"
           weight: 40
 
-        ## Basic agent usage
+        ## Basic Agent usage
         - identifier: customnav_agentnav_basic_usage
           name: "Utilisation de base de l'Agent"
           url: "agent/basic_agent_usage/"

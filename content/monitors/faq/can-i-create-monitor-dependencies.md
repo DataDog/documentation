@@ -13,7 +13,7 @@ further_reading:
   text: Schedule a downtime to mute a monitor
 ---
 
-While Datadog does fully support [composite monitors][1], there is not currently an official way to create alerting trees.
+While Datadog does fully support [composite monitors][1], there is not an official way to create alerting trees.
 
 Some Datadog users have combined webhook notifications with downtime scoping via the Datadog API to achieve a similar result.
 

@@ -55,7 +55,7 @@ There are several ways to specify an environment when reporting data:
   Use a host tag with the format `env:XXXX` to tag all traces from that Agent accordingly.
 
 2. Agent configuration:  
-  Override the default tag used by the trace Agent in [the Agent configuration file][2]. This tags all traces coming through the Agent, overriding the host tag value.
+  Override the default tag used by the Agent in [the Agent configuration file][2]. This tags all traces coming through the Agent, overriding the host tag value.
 
     ```
     apm_config:
@@ -65,32 +65,45 @@ There are several ways to specify an environment when reporting data:
 3. Per trace:  
   When submitting a single trace, specify an environment by tagging one of its spans with the metadata key `env`. This overrides the Agent configuration and the host tags value (if any).  
 
-  * **Go**:
-    ```
-    tracer.SetTag("env", "prod")
-    ```
-  For OpenTracing use the `tracer.WithGlobalTag` start option to set the environment globally.
+{{< tabs >}}
+{{% tab "Go" %}}
 
-  * **Java**:
-      Via sysprop:
-      ```
-      -Ddd.trace.span.tags=env:prod
-      ```
-      Via env var:
-      ```
-      DD_TRACE_SPAN_TAGS="env:prod"
-      ```
+```go
+tracer.SetTag("env", "prod")
+```
 
-  * **Ruby**:
-  ```
-  Datadog.tracer.set_tags('env' => 'prod')
-  ```
+For OpenTracing use the `tracer.WithGlobalTag` start option to set the environment globally.
 
-  * **Python**:
-    ```
-    from ddtrace import tracer
-    tracer.set_tags('env', 'prod')
-    ```
+{{% /tab %}}
+{{% tab "Java" %}}
+Via sysprop:
+
+```
+-Ddd.trace.span.tags=env:prod
+```
+
+Via environment variables:
+
+```
+DD_TRACE_SPAN_TAGS="env:prod"
+```
+
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+```ruby
+Datadog.tracer.set_tags('env' => 'prod')
+```
+
+{{% /tab %}}
+{{% tab "Python" %}}
+
+```python
+from ddtrace import tracer
+tracer.set_tags('env', 'prod')
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Viewing Data by Environment
 
@@ -116,11 +129,11 @@ Primary tags must follow a different set of rules from those of conventional tag
 
 ### Setup
 
-APM primary tags must be set up in two ways: in the trace Agent and in the Datadog UI.
+APM primary tags must be set up in two ways: in the Agent and in the Datadog UI.
 
 #### Agent configuration
 
-Override the default tag used by the trace Agent in the [Agent configuration file][2]. This tags all traces coming through the Agent, overriding the host tag value. An APM primary tag is configured like any regular host tag. Specify it as:
+Override the default tag used by the Agent in the [Agent configuration file][2]. This tags all traces coming through the Agent, overriding the host tag value. An APM primary tag is configured like any regular host tag. Specify it as:
 
 ```
 tags:
@@ -134,7 +147,7 @@ Visit the [APM Settings][3] page to define, change, or remove primary tags. Note
 * Only organization Administrators have access to this page. 
 * Changes may take up to two hours to be reflected in the UI.
 
- If you change a previously set primary tag, please be aware of the following:
+If you change a previously set primary tag, be aware of the following:
 
 * Historical APM data aggregated by the previously set tag will no longer be accessible.
 * Any APM monitors scoped to the previous tag will display a status of _No Data_.
@@ -150,5 +163,5 @@ Primary tags appear at the top of APM pages, next to environments. Use these sel
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/tagging
-[2]: /agent/basic_agent_usage/#configuration-file
+[2]: /agent/faq/agent-configuration-files/?tab=agentv6
 [3]: https://app.datadoghq.com/apm/settings

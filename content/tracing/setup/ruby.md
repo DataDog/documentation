@@ -24,7 +24,7 @@ further_reading:
 
 ## Installation and Getting Started
 
-For configuration instructions, and details about using the API, check out our [API documentation][api docs] and [gem documentation][gem docs].
+For configuration instructions, and details about using the API, check out Datadog's [API documentation][api docs] and [gem documentation][gem docs].
 
 For descriptions of terminology used in APM, take a look at the [official documentation][visualization docs].
 
@@ -102,6 +102,7 @@ Ruby APM includes support for the following Ruby interpreters:
 |                                    | 2.2     | Fully Supported |
 |                                    | 2.3     | Fully Supported |
 |                                    | 2.4     | Fully Supported |
+|                                    | 2.5     | Fully Supported |
 | [JRuby](http://jruby.org/)         | 9.1.5   | Experimental    |
 
 #### Web Server Compatibility

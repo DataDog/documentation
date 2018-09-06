@@ -58,6 +58,7 @@ docker run -d --name datadog-agent \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
               -e DD_API_KEY=<YOUR_API_KEY> \
               -e DD_APM_ENABLED=true \
+              -e DD_APM_NON_LOCAL_TRAFFIC=true \
               datadog/agent:latest
 
 # Application

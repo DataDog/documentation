@@ -116,7 +116,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
     If you did specify a custom Hostname for your metric, make sure to replace the **%HOSTNAME%** value in the format to match the same custom name.
 
 8. Enjoy Datadog Integrations
-    In order to get the best use out of your logs in Datadog, you need to set the source on your logs. The source can be set directly in the agent if you forward your logs to the Datadog agent.
+    In order to get the best use out of your logs in Datadog, you need to set the source on your logs. The source can be set directly in the Agent if you forward your logs to the Datadog agent.
 
     Otherwise you need a specific format per log source which means you need a specific configuration file per source in `/etc/rsyslog.d/`
 

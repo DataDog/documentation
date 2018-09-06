@@ -4,6 +4,7 @@ kind: documentation
 aliases:
     - /agent/faq/send-logs-and-configs-to-datadog-via-flare-command
     - /agent/faq/how-to-get-more-logging-from-the-agent
+    - /agent/faq/agent-5-container-more-log
 further_reading:
 - link: "logs/"
   tag: "Documentation"
@@ -16,7 +17,7 @@ further_reading:
   text: Collect your traces
 ---
 
-If you ended up at this page and have not yet installed the Datadog Agent, go [to the dedicated Agent integration page][1] for installation instructions. If you just installed the Agent, it might take a few moments before you start seeing metrics appear. The first place you should check for metrics is the [Metrics Explorer][2].
+If you have not yet installed the Datadog Agent, go [to the dedicated Agent integration page][1] for installation instructions. If you just installed the Agent, it may take a few moments before you start seeing metrics appear. The first place you should check for metrics is the [Metrics Explorer][2].
 
 If you think you might be experiencing issues, the first thing to do is [run the info command][3] and check the [Agent logs][4].
 
@@ -26,17 +27,18 @@ If you're still unsure about the issue, you may reach out to [Datadog support te
 
 To enable the full debug mode:
 
-1. Modify your local `datadog.yaml` file (see [this page](/agent/basic_agent_usage/#configuration-files) to locate this configuration file on your instance)
+1. Modify your local `datadog.yaml` file (see [this page][22] to locate this configuration file on your instance)
 
-2. Replace `# log_level: INFO` with `log_level: DEBUG` (make sure to get rid of # to uncomment the line)
+2. Replace `# log_level: INFO` with `log_level: DEBUG` (remove `#` to uncomment the line).
 
-3. Restart your Datadog Agent (see [that page](/agent/faq/agent-commands) to find the restart command depending on your OS)
+3. Restart the Datadog Agent. See the [Agent Commands][6] page for OS-specific details.
 
-4. Wait a few minutes to generate some logs. [Look here][4] to find the location of the logs.
+4. Wait a few minutes to generate some logs. [See the Agent][4] docuementation for the location of the logs.
 
 ### Obtaining debug logs from the container Agent
 
-This process covers Agent v6 only, for Agent v5 refer to [the dedicated documentation on how to collect more logs with the Datadog container Agent v5][6]
+{{< tabs >}}
+{{% tab "Agent v6" %}}
 
 **Set the `DD_LOG_LEVEL=debug` environment variable when starting your Agent.**
 
@@ -58,9 +60,39 @@ If your container is already running:
     DD_LOG_LEVEL=debug agent start
     ```
 
+{{% /tab %}}
+{{% tab "Docker Agent v5" %}}
+
+When run in a container, the Agent cannot be restarted via `service datadog-agent restart` (or similar) as this will cause the container to be killed by Docker. Use supervisor to restart a containerised Agent:
+
+```
+/opt/datadog-agent/bin/supervisorctl -c /etc/dd-agent/supervisor.conf restart all
+```
+
+The following commands enable debug logging, restart the Agent, wait 60 seconds, then send a flare, in that order:
+
+```
+sed -i '/\[Main\]/a LOG_LEVEL=DEBUG' /etc/dd-agent/datadog.conf
+/opt/datadog-agent/bin/supervisorctl -c /etc/dd-agent/supervisor.conf restart all
+sleep 60
+/etc/init.d/datadog-agent flare <CASE_ID>
+```
+
+Debug logs can be disabled with:
+
+```
+sed -i '/LOG_LEVEL=DEBUG/d' /etc/dd-agent/datadog.conf
+/opt/datadog-agent/bin/supervisorctl -c /etc/dd-agent/supervisor.conf restart all
+```
+
+Or the container can be restarted.
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Send a flare
 
-If you are running the 5.3 version (or higher) of the Agent, you're able to send all necessary troubleshooting information to our Support Team, with one flare command!
+If you are running the 5.3 version (or higher) of the Agent, you're able to send all necessary troubleshooting information to the Datadog Support Team, with one flare command!
 
 `flare` gathers all of the Agent's configuration files and logs into an archive file. It removes sensitive information including passwords, API keys, Proxy credentials, and SNMP community strings.  
 **Confirm the upload of the archive to immediately send it to Datadog support**.  
@@ -83,7 +115,7 @@ In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if
 | Redhat     | `sudo datadog-agent flare <CASE_ID>`                  |
 | Suse       | `sudo datadog-agent flare <CASE_ID>`                  |
 | Source     | `sudo datadog-agent flare <CASE_ID>`                  |
-| Windows    | [Consult our dedicated windows doc][10]               |
+| Windows    | Consult the dedicated [Windows documentation][10]     |
 
 [10]: /agent/basic_agent_usage/windows/#agent-v6
 
@@ -103,7 +135,8 @@ In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if
 | Redhat          | `sudo service datadog-agent flare <CASE_ID>`                            |
 | Suse            | `sudo service datadog-agent flare <CASE_ID>`                            |
 | Source          | `sudo ~/.datadog-agent/bin/agent flare <CASE_ID>`                       |
-| Windows         | [Consult our dedicated windows doc][9]                                  |
+| Windows         | Consult the dedicated [Windows documentation][9]                        |
+
 
 **Note**: If you are using a Linux based system and the `service` wrapper command is not available, [consult the list of alternatives][4].
 
@@ -137,7 +170,7 @@ If you want to include rate metrics, add `--check-rate` to your command, for ins
 {{% /tab %}}
 {{< /tabs >}}
 
-If your issue continues, [reach out to our Support team][5] with a [flare](#flare).
+If your issue continues, [reach out to the Datadog Support team][5] with a [flare](#flare).
 
 ### Windows
 
@@ -201,7 +234,7 @@ C:\Program' 'Files\Datadog\Datadog' 'Agent\embedded\python.exe C:\Program' 'File
 [3]: /agent/faq/agent-commands/#agent-status-and-information
 [4]: /agent/basic_agent_usage/#log-location
 [5]: /help
-[6]: /agent/faq/agent-5-container-more-log
+[6]: /agent/faq/agent-commands/
 [7]: https://github.com/DataDog/dd-agent/blob/master/utils/flare.py
 [8]: /agent/#using-the-gui
 [11]: /agent/faq/common-windows-agent-installation-error-1721
@@ -215,3 +248,4 @@ C:\Program' 'Files\Datadog\Datadog' 'Agent\embedded\python.exe C:\Program' 'File
 [19]: /agent/faq/why-don-t-i-see-the-system-processes-open-file-descriptors-metric
 [20]: /agent/faq/how-is-the-system-mem-used-metric-calculated
 [21]: /agent/faq/how-do-i-install-the-agent-on-a-server-with-limited-internet-connectivity
+[22]: /agent/faq/agent-configuration-files/?tab=agentv6

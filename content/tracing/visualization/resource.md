@@ -65,7 +65,7 @@ Zoom on this graph to filter corresponding traces.
 
 Consult the list of traces associated with this resource. Filter/sort this list to see fast/slow and error/non-error traces:  
 
-[Refer to our dedicated trace documentation to learn more][3].
+[Refer to the dedicated trace documentation to learn more][3].
 
 {{< img src="tracing/visualization/resource/traces_list.png" alt="Traces list" responsive="true" style="width:90%;">}}
 

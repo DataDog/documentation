@@ -7,5 +7,6 @@ videos:
     - Introduction
     - Host Map
 summary: Learn the basics of the host map.
+private: true
 ---
 

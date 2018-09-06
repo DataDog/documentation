@@ -41,5 +41,5 @@ The Agent sends metrics and other payloads to Datadog. To make sure that the Age
 
 [1]: /tagging
 [2]: https://docs.datadoghq.com/logs/log_collection/
-[3]: /agent/basic_agent_usage/#configuration-file
+[3]: /agent/faq/agent-configuration-files/?tab=agentv6
 [4]: /agent/faq/agent-commands/#restart-the-agent

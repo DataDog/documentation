@@ -6,7 +6,7 @@ private: true
 
 ## Getting started
 
-APM is available as part of the Datadog Agent with versions 5.11+ as part of the one line install for the Linux and Docker Agents. Currently, [Mac][1] and [Windows][2] users must perform a manual install of the APM Agent (aka Trace Agent) via a separate install process.
+APM is available as part of the Datadog Agent with versions 5.11+ as part of the one line install for the Linux and Docker Agents. [Mac][1] and [Windows][2] users must perform a manual install of the APM Agent (aka Trace Agent) via a separate install process.
 
 The Agent can be enabled by including the following in your [Datadog Agent configuration file][3]:
 ```

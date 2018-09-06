@@ -1,6 +1,9 @@
 ---
 title: Notifications
 kind: documentation
+aliases:
+  - /monitors/faq/how-do-i-add-custom-template-variables-to-my-monitor-message
+  - /monitors/faq/how-do-i-setup-conditional-contacts-and-messages-in-a-single-monitor
 further_reading:
 - link: "monitors/monitor_types"
   tag: "Documentation"
@@ -26,37 +29,37 @@ Notifications are a key component of any [monitor][1]. You want to make sure the
    explanation of the monitor so a notified team member can quickly understand
    what is going on.
 
-2. Enter a **message** for the monitor. This field allows standard [markdown formatting][2] as well as Datadog's @-notification syntax.
-  Note: you can notify any non-Datadog users via email by adding `@their-email` to the message. A common use-case for the monitor message is to include a step-by-step way to resolve the problem.
-  For example if you are monitoring a database then you might want to include steps for failing over to a standby node. All in all, you should attempt to give as much context to the monitor as possible.
+2. Enter a **message** for the monitor. This field allows standard [Markdown formatting][2] as well as in-line [variables](#variables) and tag variables.
+  Use [conditional variables](#conditional-variables) to modulate the notification text and send them to different contacts with the [Datadog's @-notification syntax](#notification).
+  A common use-case for the monitor message is to include a step-by-step way to resolve the problem.
 
 3. Optionally enable **monitor renotification**. This option is useful to remind your team that a problem is not solved until the monitor is marked as [resolved][5]. If enabled, you can configure an escalation message to be sent anytime the monitor renotifies. The original message is included as well.
 
 ***Note:*** *To avoid notification storms we now group notifications with the same monitor ID and alert type in 20 second buckets. The first two notifications in the group within a 20 second bucket are sent as normal. All additional notifications within that 20 second window are sent as a single message.*
 
-## Say what's happening
-### Message template variables
+## Variables
 
-Message template variables can be used to customize your monitor notifications. This feature is supported in all monitor types. There are two primary use cases for template variables:
+Use variables to customize your monitor notifications, the available variables are: 
 
-1. Displaying a different message depending on the notification type (e.g. triggered, recovered, no data)
-2. Incorporating the triggering scope into the message of multi alerts.
+| Variable             | Description                                                                                    |
+| -------              | ------                                                                                         |
+| `{{value}}`          | Display the value that breached the alert.                                                     |
+| `{{threshold}}`      | Display the alert threshold selected in the monitor's *Set alert conditions* section.          |
+| `{{warn_threshold}}` | Display the warning threshold selected in the monitor's *Set alert conditions* section if any. |
+| `{{ok_threshold}}`   | Display the value that recovered the monitor.                                                  |
+| `{{comparator}}`     | Display the relational value selected in the monitor's *Set alert conditions* section.         |
 
-#### Tag variables
+### Tag variables
 
-When your monitor is a multi alert, instead of having a generic message (and finding the triggering tag scope in the alert query definition), a variable can be used in the message for explicitly identifying the triggering scope.
+For multi-alert monitors, add tag variables to include information in your alert message that's specific to the tag scope that triggered the alert. This is dependent on the tags you used in the *trigger a separate alert for each* field in Section 1 of your monitor.
 
-Here is an example of how you can use template variables for a multi alert:
+For example, if you trigger by each **host** tag, then a number of tag variables related to **host** are available to you in your Section 3: **Say what's happening**, such as `{{host.name}}`, `{{host.ip}}`, etc..
 
-{{< img src="monitors/notifications/templatevareditor.png" alt="template var editor" responsive="true" style="width:80%;">}}
+This also works for custom tags as well. If you've added a custom tag that follows the `key:value` syntax, then you can group data by those tag keys.  
 
-and the corresponding event notification:
+This means you are able to apply the tag's **key** to the list of tags that a multi-alert has a separate trigger for—which in turn means you can use that tag's `.name` variable in your monitor message.
 
-{{< img src="monitors/notifications/templatevar.png" alt="template var" responsive="true" style="width:80%;">}}
-
-**Note**:
-
-* The tag template variables available depend on the tag group selected in Step 1 of the monitor editor. The possible options automatically populate at the bottom of the "Use message template variables" help box in Step 3 of the editor.
+Note: 
 
 * Template variable content is escaped by default. If your variable contains JSON or code that you would NOT like to be escaped, use triple braces instead of double braces (e.g. `{{{event.text}}}`).
 
@@ -64,43 +67,68 @@ and the corresponding event notification:
 
 * The tag template variables can also be used in the monitor titles (names), but the variables are only populated in the text of Datadog child events (not the parent, which displays an aggregation summary).
 
-* Some tags identifying your triggering scope are automatically inserted into the title of your multi alert. If your scope is defined by a lot of tags, your alert title may end up being undesirably long.
 
-#### {{comparator}} template variables
+* Some tags identifying your triggering scope are automatically inserted into the title of your multi alert.
 
-The `{{comparator}}` template variable's value is always a relational operator. It corresponds to the relational value selected in the monitor's "Set alert conditions" section:
+#### Examples
 
-{{< img src="monitors/notifications/comparator_alert.png" alt="comparator_alert" responsive="true" style="width:80%;">}}
+Here's an example of where a user had a number of hosts tagged by different `creator:` values, e.g, `creator:wes_anderson` and `creator:saint_exupéry`.  
 
-For example, when an alert is set to trigger when a value rises "above" 50, the following syntax:
+Here, the user was able to set up a multi-alert monitor to trigger a separate alert for each `creator:` tag, so they were able to include the `{{creator.name}}` in their monitor message. When this monitor triggers, the recipient of the alert notification sees whether the monitor was triggered by **wes_anderson**, **saint_exupéry**, or some other `creator:` value.
 
-```
-  {{value}} {{comparator}} {{threshold}}
-```
+{{< img src="monitors/faq/multi_alert_templating_notification.png" alt="multi_alert_templating_notification" responsive="true" style="width:80%;">}}
 
-would yield a notification message like the following:
+Here is an example of how you can use template variables for a multi-alert:
 
-```
-    51.47 > 50
-```
+{{< img src="monitors/notifications/templatevareditor.png" alt="template var editor" responsive="true" style="width:80%;">}}
 
-### Conditional variables
-Use conditional variables to display a different notification content depending of the context of your notification.
+and the corresponding event notification:
+
+{{< img src="monitors/notifications/templatevar.png" alt="template var" responsive="true" style="width:80%;">}}
+
+#### Tag key with period
+
+If your tag group's key has a period in it, you have to hardwire your template variables to include brackets around the full key. 
+For example, if you submit a metric tagged with `dot.key.test:five` and then set up a multi-alert monitor triggered by the `dot.ket.test` group tag, you have to apply the following syntax in order to use `the dot.key.test.name` tag variable:
+
+{{< img src="monitors/faq/template_with_dot.png" alt="template_with_dot" responsive="true" style="width:80%;">}}
+
+## Conditional variables
+
+Conditional variables allow for different text to be [sent to different contacts](#toto) based on the state of the monitor and the details of how it was triggered. These condition variables can be used within either the subject or body of the notification set in section 3 of the monitor definition.
+
+Keep in mind when using conditional tags that they must have an open (example: `{{#is_alert}}`) and closing (example: `{{/is_alert}}`) pair with the desired text and @ mentions in between.
 
 The conditional variables available are:
 
-* `{{is_alert}}`,
-* `{{is_alert_recovery}}`,
-* `{{is_warning}}`,
-* `{{is_warning_recovery}}`,
-* `{{is_recovery}}`,
-* `{{is_no_data}}`,
-* `{{is_match}}`.
+| Conditional Variable       | Description                                           |
+| ------                     | -------                                               |
+| `{{is_alert}}`             | Show when monitor alerts                              |
+| `{{is_match}}`             | Show when the context matches a string                |
+| `{{^is_alert}}`            | Show unless monitor alerts                            |
+| `{{^is_match}}`            | Show unless the context matches a string              |
+| `{{#is_no_data}}`          | Show when monitor notifies on missing data            |
+| `{{#is_warning}}`          | Show when monitor warns                               |
+| `{{^is_no_data}}`          | Show unless monitor notifies on missing data          |
+| `{{^is_warning}}`          | Show unless monitor warns                             |
+| `{{#is_recovery}}`         | Show when monitor recovers                            |
+| `{{^is_recovery}}`         | Show unless monitor recovers                          |
+| `{{#is_exact_match}}`      | Show when the context matches a string exactly        |
+| `{{^is_alert_recovery}}`   | Show unless monitor recovers from an alert            |
+| `{{#is_alert_to_warning}}` | Show when monitor transitions from alert to warning   |
+| `{{#is_no_data_recovery}}` | Show when monitor recovers from a no data             |
+| `{{#is_warning_recovery}}` | Show when monitor recovers from a warning             |
+| `{{^is_alert_to_warning}}` | Show unless monitor transitions from alert to warning |
+| `{{^is_no_data_recovery}}` | Show unless monitor recovers from a no data           |
+| `{{^is_warning_recovery}}` | Show unless monitor recovers from a warning           |
 
 These can also be seen in the "Use message template variables" help box in
 Step 3 of the monitor editor.
 
-#### `{{is_alert}}` & `{{is_warning}}`
+Here are some examples of their usage:
+
+{{< tabs >}}
+{{% tab "is_alert / is_warning" %}}
 
 These variables use simple `if-else` logic to display a different message depending on the event type (*warning*, *recovery*, *no data*...)
 
@@ -118,7 +146,8 @@ and the recovery notification:
 
 {{< img src="monitors/notifications/templateconditionalrecover.png" alt="template conditional recover" responsive="true" style="width:80%;">}}
 
-#### `{{is_recovery}}` or `{{is_alert_recovery}}`
+{{% /tab %}}
+{{% tab "is_recovery / is_alert_recovery " %}}
 
 * `{{is_recovery}}` triggers when a monitor recovers indifferently either from a **WARNING** state or an **ALERT** state.
 * `{{is_alert_recovery}}` triggers when a monitor recovers directly from an **ALERT** state to an **OK** state.
@@ -130,11 +159,8 @@ This means that if the monitor switches from an **ALERT** to a **WARNING** to an
 * the `{{is_alert_recovery}}` wouldn't trigger
 * the `{{is_warning_recovery}}` would trigger.
 
-The @ notification inside the template variables follows the same rules.
-
-#### `{{is_match}}` or `{{is_exact_match}}`
-
-##### {{is_match}} 
+{{% /tab %}}
+{{% tab "is_match / is_exact_match" %}}
 
 The `{{is_match}}` conditional allows you to match the triggering context to any given string in order to display a different message in your notifications. Use any of the available tag variables in your conditional statement. A match is made if the comparison string is anywhere in the resolved variable. Variables use the following format:
 
@@ -187,101 +213,21 @@ For instance, if an alert that can be triggered by two hosts tagged with `role:p
   {{/is_exact_match}}
   ```
 
-### Variable availability
+{{% /tab %}}
+{{< /tabs >}}
 
-We provide a number of different types of monitors and not all variables are available for each type of monitor. Integration monitor variables are largely dependent on the specific integration and monitor configuration.
+## @-notification 
 
-*(Scroll right to see all variable availability)*
+Send the monitor notification to the appropriate endpoint:
 
-{{% table responsive="true" %}}
-||[host][3]| [metric][4]| [integration][5]| [process][6]| [network][7]| [custom check][8]| [event][9]|
-| :-------|:-----|:-----|:-------|:-------|:---------|:-------|:------|
-| **Conditionals**      |
-| `is_alert`            | Y                 | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
-| `is_alert_recovery`   |                   | Y                             | Y                                     | Y                                 | Y                                                     | Y                         |                   |
-| `is_warning`          |                   | Y                             | Y                                     | Y                                 | Y                                                     | Y                         |                   |
-| `is_warning_recovery` |                   | Y                             | Y                                     | Y                                 | Y                                                     | Y                         |                   |
-| `is_recovery`         | Y                 | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
-| `is_no_data`          | Y                 | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
-| `is_match`            | Y                 | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
-| `is_exact_match`            | Y                 | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
-| **Variables**         |
-| `{{value}}`           |                   | Y                             | Y                                     |                                   |                                                       |                           |                   |
-| `{{threshold}}`       | Y (cluster)       | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
-| `{{warn_threshold}}`  | Y (cluster)       | Y                             | Y                                     | Y                                 | Y                                                     | Y                         |                   |
-| `{{ok_threshold}}`    |                   |                               | Y                                     | Y                                 | Y                                                     | Y                         |                   |
-| `{{comparator}}`      | Y                 | Y                             | Y                                     | Y                                 | Y                                                     | Y                         | Y                 |
-| Additional variables  | Contextual        |                               | Contextual<br/>`{{check_message}}`    | Contextual<br/>`{{process.name}}` | Contextual<br/>`{{url.name}}`<br/>`{{instance.name}}` | `{{check_message}}`       |                   |
-{{% /table %}}
-<style>
-  .tpl-var-table tr td {
-    text-align: center;
-    border: 1px #9d6ebf solid;
-    padding: 5px;
-  }
-  .tpl-var-table tr td:first-child {
-    text-align: right;
-  }
-</style>
+* Notify a Datadog user via email by adding `@<DD_USER_EMAIL>` in your notification message.
+* Notify any non-Datadog users via email by adding `@<EMAIL>` to the notification message.
+* Install Slack or Hipchat integration to send your notifications directly in the appropriate channel.
 
-## Advanced notification configuration
-### Include links to appropriate dashboards
+{{< tabs >}}
+{{% tab "Slack Integration" %}}
 
-Many organizations today would like to include additional context to their Alerts. Quick links to relevant dashboards as a part of the Alert has proven to reduce the overall time it takes during the break fix process to reduce time to resolution.
-
-Datadog makes message template variables available to each defined monitor. Using these variables, you can dynamically build a URL that links Datadog Users to an appropriate dashboard using the scope of the monitor.
-
-Here are a few examples of providing links to items like System Dashboards, Integration Dashboards, HostMaps and Managed Monitors pages.
-
-First example to review is the most common. Let's say you would like to provide a link to a System Dashboard when a monitor for a specific system metric has exceeded your defined threshold. The message template variable that can be leveraged in this instance would be {{host.name}}. Include the following URL as a part of your Monitor "Say What's Happening" section:
-
-```
-https://app.datadoghq.com/dash/integration/system_overview?tpl_var_scope=host:{{host.name}}
-```
-
-As you can see, `{{host.name}}` is replaced with the offending host of the monitor in question.
-
-{{< img src="monitors/notifications/system_dashboard_url.png" alt="system_dashboard_url" responsive="true" style="width:70%;" >}}
-
-Find below additional examples of links that could be added to Monitors to provide Datadog Users quick access to common pages leveraged during the break fix and triage process.
-
-* **Hostmaps** - If you would like to include a HostMap to compare metrics with other similar hosts, you can use a link like below to be included in your Monitor:
-  ```
-  https://app.datadoghq.com/infrastructure/map?fillby=avg%3Acpuutilization&sizeby=avg%3Anometric&filter=cassandra
-  ```
-  The above link has more customizable options than your standard System Dashboard. Here you have additional variables to define. Most common variables passed into this URL are the following **fillby, sizeby, filter**:
-
-  * `fillby` is defined by adding `fillby:avg:<MetricName>`.
-  * `sizeby` is defined by adding `sizeby:avg:<SecondMetricName>`.
-  * `filter` is used to specify a specific integration (i.e. Cassandra, mysql, apache, snmp, etc) by adding `filter=<integration_name>`
-  {{< img src="monitors/notifications/hostmap_url.png" alt="hostmap_url" responsive="true" style="width:70%;">}}
-  The above colors fill the hexagons by `system.cpu.system`, it sizes the hexagons by `system.cpu.stolen` and add a filter to only include Cassandra hosts.
-
-
-*  **Integration Dashboards**- If you are building Application or Integration specific Monitors, link to that specific Integration Dashboard as well as adding a scope for the host that triggered the monitor.
-  In the example below all that is necessary to populate is the `<integration_name>` section for something like Cassandra, apache, SNMP, etc as well as providing the scope for the offending host:
-  ```
-  https://app.datadoghq.com/dash/integration/<integration_name>?tpl_var_scope=host:{{host.name}}
-  ```
-  {{< img src="monitors/notifications/integration_url.png" alt="integration_url" responsive="true" style="width:70%;">}}
-
-* **Manage Monitors Page** – To link to a Manage monitors page that displays all of the monitors for the host in question, define a link like below:
-  ```
-  https://app.datadoghq.com/monitors/manage?q=scope:host:{{host.name}}
-  ```
-  The above link links to all monitors for this host. You have other options available to further refine the link.
-  For example, if you would only like monitors that are in an Alert State, you can add the following `status:Alert` (other statuses that can be leveraged are WARN, NO%20DATA, OK and MUTED). Below is an example link:
-  ```
-  https://app.datadoghq.com/monitors/manage?q=scope:host:{{host.name}}&status:Alert
-  ```
-  If you would like all monitors for a specific application or integration,  add the following query to the URL `q=<integration_name> `:
-  ```
-  https://app.datadoghq.com/monitors/manage?q=cassandra
-  ```
-
-  {{< img src="monitors/notifications/monitor_url.png" alt="monitor_url" responsive="true" style="width:70%;">}}
-
-### Slack integration
+After having installed the Slack integration, type `@slack` in your notification message to see the available list of channels to send your notification to.
 
 #### @-mentions in Slack from monitor alert
 
@@ -315,13 +261,100 @@ For example, if the rendered variable is setup as a channel in the Slack integra
 
 * `@slack-{{host.name}}` post a slack message to the #host.name channel in Slack.
 
-[Learn more about how to setup conditional contacts and messages in a single monitor][11]
+[10]: https://api.slack.com/methods/usergroups.list
 
-### Hipchat integration
+{{% /tab %}}
+{{% tab "Hipchat Integration" %}}
+
+After having installed the Hipchat integration, type `@hipchat` in your notification message to see the available list of channels to send your notification to.
 
 Use `@here` in the monitor message to notify everybody in a given Hipchat channel. Do not use `@all` as it notifies all members of your Datadog organization.
 
 **Note**: Hipchat users must have room notifications set to *at least* `Normal` to receive notifications this way.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Advanced notification configuration
+### Include links to appropriate dashboards
+
+Many organizations like to include additional context to their Alerts. Quick links to relevant dashboards as a part of the Alert have proven to reduce the overall time it takes during the break fix process to reduce time to resolution.
+
+Datadog makes message template variables available to each defined monitor. Using these variables, you can dynamically build a URL that links Datadog users to an appropriate dashboard using the scope of the monitor.
+
+Here are a few examples of providing links to items like System Dashboards, Integration Dashboards, HostMaps, and Managed Monitors pages.
+
+The first example to review is the most common. Let's say you would like to provide a link to a System Dashboard when a monitor for a specific system metric has exceeded your defined threshold. The message template variable that can be leveraged in this instance is `{{host.name}}`. Include the following URL as a part of your Monitor "Say What's Happening" section:
+
+```
+https://app.datadoghq.com/dash/integration/system_overview?tpl_var_scope=host:{{host.name}}
+```
+
+As you can see, `{{host.name}}` is replaced with the offending host of the monitor in question.
+
+{{< img src="monitors/notifications/system_dashboard_url.png" alt="system_dashboard_url" responsive="true" style="width:70%;" >}}
+
+Find below additional examples of links that could be added to Monitors to provide Datadog users quick access to common pages leveraged during the break, fix, and triage process:
+
+{{< tabs >}}
+{{% tab "hostmap" %}}
+
+To include a link to the HostMap to compare metrics with other similar hosts, use a link like below to be included in your Monitor:
+
+```
+https://app.datadoghq.com/infrastructure/map?fillby=avg%3Acpuutilization&sizeby=avg%3Anometric&filter=cassandra
+```
+
+The above link has more customizable options than your standard System Dashboard. Here you have additional variables to define. Most common variables passed into this URL are the following **fillby, sizeby, filter**:
+
+* `fillby` is defined by adding `fillby:avg:<MetricName>`.
+* `sizeby` is defined by adding `sizeby:avg:<SecondMetricName>`.
+* `filter` is used to specify a specific integration (i.e. Cassandra, mysql, apache, snmp, etc) by adding `filter=<integration_name>`.
+
+In the example below, colors fill the Hostmap hexagons by `system.cpu.system`. The hexagons are sized by `system.cpu.stolen`, and they are filtered to only include Cassandra hosts.
+
+{{< img src="monitors/notifications/hostmap_url.png" alt="hostmap_url" responsive="true" style="width:70%;">}}
+
+{{% /tab %}}
+{{% tab "Manage Monitors Page" %}}
+
+To link to a "Manage Monitors" page that displays all of the monitors for the host in question, define a link like below:
+
+```
+https://app.datadoghq.com/monitors/manage?q=scope:host:{{host.name}}
+```
+
+The above URL links to all monitors for this host. You have other options available to further refine the link.
+
+For example, if you would only like monitors that are in an Alert State, you can add the following `status:Alert` (other statuses that can be leveraged are `WARN`, `NO%20DATA`, `OK` and `MUTED`). Below is an example link:
+
+```
+https://app.datadoghq.com/monitors/manage?q=scope:host:{{host.name}}&status:Alert
+```
+
+If you would like all monitors for a specific application or integration, add the following query to the URL `q=<integration_name> `:
+
+```
+https://app.datadoghq.com/monitors/manage?q=cassandra
+```
+
+{{< img src="monitors/notifications/monitor_url.png" alt="monitor_url" responsive="true" style="width:70%;">}}
+
+{{% /tab %}}
+{{% tab "Integration Dashboards" %}}
+
+If you are building application- or integration-specific monitors, link to that specific Integration Dashboard as well as adding a scope for the host that triggered the monitor.
+
+In the example below, all that is necessary to populate is the `<integration_name>` section for something like Cassandra, Apache, SNMP, etc., as well as providing the scope for the offending host:
+
+```
+https://app.datadoghq.com/dash/integration/<integration_name>?tpl_var_scope=host:{{host.name}}
+```
+
+{{< img src="monitors/notifications/integration_url.png" alt="integration_url" responsive="true" style="width:70%;">}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 
@@ -336,5 +369,3 @@ Use `@here` in the monitor message to notify everybody in a given Hipchat channe
 [7]: /monitors/monitor_types/network
 [8]: /monitors/monitor_types/custom_check
 [9]: /monitors/monitor_types/event
-[10]: https://api.slack.com/methods/usergroups.list
-[11]: /monitors/faq/how-do-i-setup-conditional-contacts-and-messages-in-a-single-monitor

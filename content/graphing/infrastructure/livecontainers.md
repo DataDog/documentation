@@ -18,7 +18,7 @@ further_reading:
 [Datadog Live Containers][3] enable real-time visibility into all containers across your environment.
 
 Taking inspiration from bedrock tools like *htop* and *ctop*, Live Containers give you complete coverage of your container infrastructure, in a continuously updated table with resource metrics at two-second resolution and faceted search.
-Coupled with Datadog's integrations with [Docker][4], [Kubernetes][5], [ECS][6], and other container technologies, plus our built-in tagging of dynamic components, this new Live Container view provides a detailed overview of your containers' health, resource consumption, and deployment in real time:
+Coupled with Integrations for [Docker][4], [Kubernetes][5], [ECS][6], and other container technologies, plus built-in tagging of dynamic components, this new Live Container view provides a detailed overview of your containers' health, resource consumption, and deployment in real time:
 
 {{< img src="graphing/infrastructure/livecontainers/LiveContainersWithSummaries.png" alt="Live containers with summaries" responsive="true" >}}
 
@@ -50,7 +50,7 @@ ac_include: ["name:frontend.*"]
 
 ### String Search
 
-Containers are by their nature extremely high cardinality objects. Our flexible string search matches substrings in the container name, ID, or image fields.
+Containers are, by their nature, extremely high cardinality objects. Datadog's flexible string search matches substrings in the container name, ID, or image fields.
 
 ### Tagging
 
@@ -108,6 +108,8 @@ While actively working with the Containers page, metrics are collected at 2s res
 - Live Containers is available for the default Debian docker-dd-agent image only.  It is not included in the Alpine image.
 
 - RBAC settings can restrict Kubernetes metadata collection. Refer to the [RBAC entites for the Datadog Agent][2].
+
+- In Kubernetes the `health` value is the containers' readiness probe, not it's liveness probe. 
 
 [1]: https://github.com/DataDog/docker-dd-agent
 [2]: https://gist.github.com/hkaj/404385619e5908f16ea3134218648237

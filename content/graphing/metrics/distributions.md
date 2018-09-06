@@ -12,9 +12,9 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-This is documentation for a beta feature. Please <a href="https://docs.datadoghq.com/help/">contact support</a> to enable distribution metrics for your account.
+This feature is in beta. <a href="https://docs.datadoghq.com/help/">Contact Datadog support</a> to enable distribution metrics for your account.
 </div>
-             
+
 ## Overview
 
 Distributions are a [metric type][1] that can be thought of as a global version of the [Histogram metric][2], which measures the statistical distribution of discrete values on a single host. Distributions observe the values that are sent from multiple hosts to measure statistical distributions across your entire infrastructure, allowing you to compute global percentiles across your entire dataset.
@@ -41,7 +41,7 @@ When creating your own graph, Distribution metrics automatically have additional
 
 `my.service.latency` is a metric that is being submitted on 500 hosts.  
 
-Each host is tagged with one of 3 `Availability Zones` (as tagged by the AWS integration) and 20 `Roles` by Chef, our provisioning system.  
+Each host is tagged with one of 3 `Availability Zones` (as tagged by the AWS integration) and 20 `Roles` by Chef, Datadog provisioning system.  
 
 Additionally, this metric has been tagged with `Status`, which has 2 values: `Status:Success` or `Status:Fail`, and `Result`, which also has 2 values: `Result:Open` or `Result:Close`.
 

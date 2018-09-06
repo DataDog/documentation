@@ -21,7 +21,7 @@ further_reading:
 ## Overview
 
 After you have [instrumented your application][1], your reporting services appear on [the APM services page][2]. The services list is a bird's eye view of all [services][3] reporting from your infrastructure.  
-Select an individual service to view detailed performance insights, [read our dedicated service documentation to learn more][3].
+Select an individual service to view detailed performance insights. [Read the dedicated service documentation to learn more][3].
 
 ## Filtering the service list
 

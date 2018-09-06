@@ -38,7 +38,7 @@ As seen below, by clicking on the c3.2xlarge group and then sub-grouping by role
 
 ### Availability Zone Placement
 
-Host maps make it easy to see distributions of machines in each of your availability zones (AZ). Filter for the hosts you are interested in, group by AZ, and you can immediately see whether resources need rebalancing. As seen below, at Datadog we have an uneven distribution of hosts with role:daniels across availability zones. (Daniels is the name of one of our internal applications.)
+Host maps make it easy to see distributions of machines in each of your availability zones (AZ). Filter for the hosts you are interested in, group by AZ, and you can immediately see whether resources need rebalancing. As seen below, there is an uneven distribution of hosts with `role:daniels` across availability zones. (Daniels is the name of an internal application.)
 
 {{< img src="graphing/infrastructure/hostmap/hostmappart1image4.png" alt="Datadog Host Maps AZ Balance" responsive="true" style="width:80%;" >}}
 

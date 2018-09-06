@@ -9,9 +9,10 @@ videos:
     - Dashboards
     - Screenboards
     - Navigation
-summary: Get started with Datadog with our Datadog 101 series. This first video introduces you to the product and all of its features.
+summary: Get started with Datadog with the Datadog 101 series. This first video introduces you to the product and all of its features.
+private: true
 ---
-Get started with Datadog with our Datadog 101 series. This first video introduces you to the product and all of its features. This includes:
+Get started with Datadog with the Datadog 101 series. This first video introduces you to the product and all of its features. This includes:
 
 * [Navigation](?wtime=20)
 * [Event Stream](?wtime=36)

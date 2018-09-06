@@ -64,7 +64,7 @@ def handle_customer(customer_id):
 
 **Adding tags to a current active span**
 
-The current span can be retrieved from the context in order to set tags. This way, if a span was started by our instrumentation, you can retrieve the span and add custom tags. Note that if a span does not exist, `None` is returned:
+The current span can be retrieved from the context in order to set tags. This way, if a span was started by the instrumentation, you can retrieve the span and add custom tags. Note that if a span does not exist, `None` is returned:
 
 ```python
 from ddtrace import tracer
@@ -398,7 +398,7 @@ For more details about manual instrumentation, check out the [API documentation]
 
 If you aren't using supported library instrumentation (see [Library compatibility][go lib compatibility]), you may want to to manually instrument your code.
 
-To make use of manual instrumentation, use the `tracer` package which is documented on our [godoc page][tracer godoc]. 
+To make use of manual instrumentation, use the `tracer` package which is documented on Datadog's [godoc page][tracer godoc]. 
 
 **Example Usage**
 
@@ -612,21 +612,21 @@ try (Scope scope = tracer.buildSpan("ServiceHandlerSpan").startActive(false)) {
     // submission thread impl...
 }
 ```
-Notice the above examples only use the OpenTracing classes. Please reference the [OpenTracing API][opentracing-java] for more details and information.
+Notice the above examples only use the OpenTracing classes. Check the [OpenTracing API][opentracing-java] for more details and information.
 
 [opentracing-java]: https://github.com/opentracing/opentracing-java
 
 {{% /tab %}}
 {{% tab "Python" %}}
 
-Support for OpenTracing with Python is coming soon. Reach out to our [support team][contact support] to be part of the beta.
+Support for OpenTracing with Python is coming soon. Reach out to [the Datadog support team][contact support] to be part of the beta.
 
 [contact support]: https://docs.datadoghq.com/help
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-Support for OpenTracing with Ruby is coming soon. Reach out to our [support team][contact support] to be part of the beta.
+Support for OpenTracing with Ruby is coming soon. Reach out to [the Datadog support team][contact support] to be part of the beta.
 
 [contact support]: https://docs.datadoghq.com/help
 
@@ -664,7 +664,7 @@ func main() {
 }
 ```
 
-**Note**: Using the [OpenTracing API][opentracing go] in parallel with the regular API or our integrations is fully supported. Under the hood, all of them make use of the same tracer. See the [API documentation][opentracing godoc] for more examples and details.
+**Note**: Using the [OpenTracing API][opentracing go] in parallel with the regular API or Datadog integrations is fully supported. Under the hood, all of them make use of the same tracer. See the [API documentation][opentracing godoc] for more examples and details.
 
 [tracer godoc]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
 [opentracing godoc]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer
@@ -799,7 +799,7 @@ Distributed tracing is supported in the following frameworks:
 | requests          | http://pypi.datadoghq.com/trace/docs/web_integrations.html#requests |
 | tornado           | http://pypi.datadoghq.com/trace/docs/web_integrations.html#tornado  |
 
-To add your own distributed tracing refer to our [API documentation][py_dist_tracing].
+To add your own distributed tracing check the [Datadog API documentation][py_dist_tracing].
 
 [py_dist_tracing]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#http-client
 
@@ -890,7 +890,7 @@ Priority sampling allows traces between two Datadog endpoints to be sampled toge
 
 Priority sampling automatically assigns and propagates a priority value along all traces, depending on their service and volume. Priorities can also be set manually to drop non-interesting traces or keep important ones.
 
-For a more detailed explaination of sampling and priority sampling, see our [sampling and storage][sampling and storage] documentation. 
+For a more detailed explanations of sampling and priority sampling, check the [sampling and storage][sampling and storage] documentation. 
 
 [sampling and storage]: https://docs.datadoghq.com/tracing/getting_further/trace_sampling_and_storage/
 
@@ -1041,7 +1041,7 @@ Possible values for the sampling priority tag are:
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-Coming Soon. Reach out to our [support team][contact support] to be part of the beta.
+Coming Soon. Reach out to [the Datadog support team][contact support] to be part of the beta.
 
 [contact support]: https://docs.datadoghq.com/help
 
@@ -1118,7 +1118,7 @@ trace_id, span_id = helpers.get_correlation_ids()
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-Coming Soon. Reach out to our [support team][contact support] to be part of the beta.
+Coming Soon. Reach out to [the Datadog support team][contact support] to be part of the beta.
 
 [contact support]: https://docs.datadoghq.com/help
 
@@ -1149,7 +1149,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-Coming Soon. Reach out to our [support team][contact support] to be part of the beta.
+Coming Soon. Reach out to [the Datadog support team][contact support] to be part of the beta.
 
 [contact support]: https://docs.datadoghq.com/help
 {{% /tab %}}
