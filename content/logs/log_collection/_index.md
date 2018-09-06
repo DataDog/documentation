@@ -334,7 +334,7 @@ Those are also available as environment variables:
 
 * Then configure your proxy to listen on `<PROXY_PORT>` and forward the received logs to `agent-intake.logs.datadoghq.com` on port 10516 and activate SSL encryption.
 
-* Use the [public key for TLS encryption][14] for the SSL encryption. On some systems, the full certificate chain may be required. If so, use [this public key][15] instead.
+* Use the [public key for TLS encryption](https://docs.datadoghq.com/crt/intake.logs.datadoghq.com.crt) for the SSL encryption. On some systems, the full certificate chain may be required. If so, use [this public key]((https://docs.datadoghq.com/crt/FULL_intake.logs.datadoghq.com.crt) instead.
 
 {{% /tab %}}
 {{% tab "SOCK5 Proxy" %}}
@@ -393,5 +393,4 @@ Datadog automatically parses JSON-formatted logs. For this reason, if you have c
 [11]: /agent/faq/agent-commands/#agent-status-and-information
 [12]: /tracing
 [13]: /tagging
-[14]: /crt/intake.logs.datadoghq.com.crt
-[25]: /crt/FULL_intake.logs.datadoghq.com.crt
+
