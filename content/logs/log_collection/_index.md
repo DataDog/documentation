@@ -312,45 +312,7 @@ logs:
 
 ### Using a Proxy for Logs
 
-Logs make use of a different set of proxy settings than other data types forwarded by the Datadog Agent. This is due to the fact that logs are transported over TCP/SSL, while other features submit data via HTTPS.
-
-{{< tabs >}}
-{{% tab "TCP Proxy" %}}
-
-If you use a proxy for TCP transmission, configure the Datadog Agent to send logs to your proxy through TCP thanks to the following parameters in `datadog.yaml`:
-
-```
-logs_config:
-  logs_dd_url: <PROXY_ENDPOINT>:<PROXY_PORT>
-  logs_no_ssl: true
-```
-
-Those are also available as environment variables:
-
-* `DD_LOGS_CONFIG_LOGS_DD_URL`
-* `DD_LOGS_CONFIG_LOGS_NO_SSL`
-
-**Important Note**: The parameter `logs_no_ssl` is needed to make the Agent ignore the discrepancy between the hostname on the SSL certificate (`agent-intake.logs.datadoghq.com`) and your proxy hostname. We however strongly advise to use a SSL encrypted connection between your proxy and our intake.
-
-* Then configure your proxy to listen on `<PROXY_PORT>` and forward the received logs to `agent-intake.logs.datadoghq.com` on port 10516 and activate SSL encryption.
-
-* Use the [public key for TLS encryption](https://docs.datadoghq.com/crt/intake.logs.datadoghq.com.crt) for the SSL encryption. On some systems, the full certificate chain may be required. If so, use [this public key]((https://docs.datadoghq.com/crt/FULL_intake.logs.datadoghq.com.crt) instead.
-
-{{% /tab %}}
-{{% tab "SOCK5 Proxy" %}}
-
-With Datadog Agent >= 6.4.1, send your logs to your Datadog account via a SOCKS5 proxy server. To do so, use the following settings in your `datadog.yaml` configuration file:
-
-```
-logs_config:
-  socks5_proxy_address: <MY_SOCKS5_PROXY_URL>:<MY_SOCKS5_PROXY_PORT>
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-
-[Refer to the Agent proxy documentation page to learn how to forward your metrics with a proxy][8].
+[Refer to the Agent proxy documentation page][8] to learn how to forward your Logs with a proxy.
 
 ## How to get the most of your application logs
 
@@ -387,7 +349,7 @@ Datadog automatically parses JSON-formatted logs. For this reason, if you have c
 [5]: /logs/explorer/search/#logstream
 [6]: /logs/explorer/search/
 [7]: /logs/processing/#log-status-remapper
-[8]: /agent/proxy
+[8]: /agent/proxy/#proxy-for-logs
 [9]: /agent/faq/agent-configuration-files/
 [10]: /agent/faq/agent-commands/#start-stop-and-restart-the-agent
 [11]: /agent/faq/agent-commands/#agent-status-and-information

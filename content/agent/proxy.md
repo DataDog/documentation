@@ -87,11 +87,34 @@ The Agent uses the following values in order of precedence:
 2. `HTTPS_PROXY`, `HTTP_PROXY`, and `NO_PROXY` environment variables
 3. Values inside `datadog.yaml`
 
-#### Proxy for Logs
+{{% /tab %}}
+{{% tab "Agent v5" %}}
+
+Edit the `datadog.conf` file with your proxy information:
+
+```
+# If you need a proxy to connect to the Internet, provide the settings here
+proxy_host: my-proxy.example.com
+proxy_port: 3128
+proxy_user: my_user
+proxy_password: my_password
+```
+
+Do not forget to [restart the Agent][2] for the new settings to take effect.
+
+[2]: /agent/faq/agent-commands
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Proxy for Logs
+
+Log collection requires an Agent version >= 6.0. Older versions of the Agent do not include the `Log collection` interface that is used for log collection.
 
 Logs make use of a different set of proxy settings than other data types forwarded by the Datadog Agent. This is due to the fact that logs are transported over TCP/SSL, while other features submit data via HTTPS.
 
-##### TCP 
+{{< tabs >}}
+{{% tab "TCP" %}}
 
 If you use a proxy for TCP transmission, configure the Datadog Agent to send logs to your proxy through TCP thanks to the following parameters in `datadog.yaml`:
 
@@ -112,7 +135,8 @@ Those are also available as environment variables:
 
 * Use the [public key for TLS encryption](https://docs.datadoghq.com/crt/intake.logs.datadoghq.com.crt) for the SSL encryption. On some systems, the full certificate chain may be required. If so, use [this public key](https://docs.datadoghq.com/crt/FULL_intake.logs.datadoghq.com.crt) instead.
 
-##### SOCK5
+{{% /tab %}}
+{{% tab "SOCK5" %}}
 
 To send your logs to your Datadog account via a SOCKS5 proxy server use the following settings in your `datadog.yaml` configuration file:
 
@@ -124,23 +148,6 @@ logs_config:
 It is also available through environement variable:
 
 * `DD_LOGS_CONFIG_SOCK5_PROXY_ADDRESS`
-
-{{% /tab %}}
-{{% tab "Agent v5" %}}
-
-Edit the `datadog.conf` file with your proxy information:
-
-```
-# If you need a proxy to connect to the Internet, provide the settings here
-proxy_host: my-proxy.example.com
-proxy_port: 3128
-proxy_user: my_user
-proxy_password: my_password
-```
-
-Do not forget to [restart the Agent][2] for the new settings to take effect.
-
-[2]: /agent/faq/agent-commands
 
 {{% /tab %}}
 {{< /tabs >}}
