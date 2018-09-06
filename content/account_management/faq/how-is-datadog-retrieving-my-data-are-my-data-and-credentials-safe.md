@@ -14,4 +14,4 @@ See the [list of IPs and ports used by Datadog][3] for more information.
 
 [1]: https://app.datadoghq.com/policy/license
 [2]: https://github.com/DataDog/dd-agent/
-[3]: /account_management/faq/what-are-the-required-ip-s-and-ports-i-need-open-to-connect-to-the-datadog-service
+[3]: /agent/network

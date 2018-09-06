@@ -33,5 +33,5 @@ If you continue to see this issue despite having taken these steps, contact [us]
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/faq/error-restarting-agent-already-listening-on-a-configured-port
-[2]: /account_management/faq/what-are-the-required-ip-s-and-ports-i-need-open-to-connect-to-the-datadog-service
+[2]: /agent/network
 [3]: /help
