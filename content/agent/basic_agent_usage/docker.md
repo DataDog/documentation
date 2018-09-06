@@ -91,6 +91,10 @@ Exclude containers from the metrics collection and Autodiscovery, if these are n
 
 **Note**: The `docker.containers.running`, `.stopped`, `.running.total` and `.stopped.total` metrics are not affected by these settings and always count all containers. This does not affect your per-container billing.
 
+#### Misc
+
+- `DD_PROCESS_AGENT_CONTAINER_SOURCE`: Overrides container source auto-detection to force a single source. e.g `"docker"`, `"ecs_fargate"`, `"kubelet"`
+
 ### Configuration files
 
 You can also mount YAML configuration files in the `/conf.d` folder. They will automatically be copied to `/etc/datadog-agent/conf.d/` when the container starts. The same can be done for the `/checks.d` folder: any Python files in the `/checks.d` folder will automatically be copied to `/etc/datadog-agent/checks.d/` when the container starts.
