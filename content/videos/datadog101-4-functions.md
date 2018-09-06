@@ -7,6 +7,7 @@ videos:
     - Datadog 101
     - Dashboards
 summary: "Make your graphs more effective by using functions in interesting ways"
+private: true
 ---
 
 Datadog 101 shows you everything you need to know about using the Datadog platform. In this fourth video we show you how to use the functions available in graphs and monitors. We cover the following topics:

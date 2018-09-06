@@ -8,7 +8,7 @@ videos:
     - Rails
 
 summary: Datadog APM is incredibly easy to setup. This video shows how to get up and running in just a few minutes with any Ruby on Rails application.
-
+private: true
 ---
 [Datadog APM][1] is incredibly easy to setup. This video shows how to get up and running in just a few minutes with any Ruby on Rails application.
 
