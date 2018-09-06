@@ -29,19 +29,19 @@ Two installations are possible:
 
 You can then choose to collect all the logs from all your environment's containers, or to filter by container image, name, or container label to cherry pick what logs should be collected.
 
-In this documentation, we present how to collect logs from all running containers and how to leverage the Autodiscovery feature to activate Log Integrations.
+This documentation discusses how to collect logs from all running containers, as well as how to leverage the Autodiscovery feature to activate Log Integrations.
 
 ## Setup
 
 ### One-step install to collect all the container logs
 
-The first step is to install the Agent (containerized version or directly on the host) and to enable log collection for all the containers.
+The first step is to install the Agent (whether the containerized version or directly on the host) and to enable log collection for all the containers.
 
 {{< tabs >}}
 {{% tab "Container Installation" %}}
 
 The Agent has a [containerized](https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent) installation.
-To run a Docker container which embeds the Datadog Agent to monitor your host use the following command:
+To run a Docker container that embeds the Datadog Agent to monitor your host use the following command:
 
 ```
 docker run -d --name datadog-agent \
@@ -57,16 +57,16 @@ docker run -d --name datadog-agent \
 ```
 
 
-We recommend always picking the latest version of Datadog Agent 6. [Consult the full list of available images for Agent 6](https://hub.docker.com/r/datadog/agent/tags/).
+It is recommended to pick the latest version of Datadog Agent 6. [Consult the full list of available images for Agent 6](https://hub.docker.com/r/datadog/agent/tags/).
 
 The commands related to log collection are the following:
 
-* `-e DD_LOGS_ENABLED=true`: this parameter enables log collection when set to true. The Agent now looks for log instructions in configuration files.
+* `-e DD_LOGS_ENABLED=true`: this parameter enables log collection when set to `true`. The Agent looks for log instructions in configuration files.
 * `-e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true`: this parameter adds a log configuration that enables log collection for all containers (see `Option 1` below)
-* `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw`: to make sure we do not lose any logs from containers during restarts or network issues, we store on the host the last line that was collected for each container in this directory.
-* `-e DD_AC_EXCLUDE = "name:dd-agent"` : to prevent the Datadog Agent from collecting and sending its own logs. Remove this parameter if you want to collect the Datadog Agent logs.
+* `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw`: to make sure you do not lose any logs from containers during restarts or network issues, the last line that was collected for each container in this directory is stored on the host.
+* `-e DD_AC_EXCLUDE = "name:dd-agent"`: to prevent the Datadog Agent from collecting and sending its own logs. Remove this parameter if you want to collect the Datadog Agent logs.
 
-**Important note**: Integration Pipelines and Processors will not be installed automatically as the source and service are set to the `docker` generic value.
+**Important note**: Integration Pipelines and Processors will not be installed automatically, as the source and service are set to the `docker` generic value.
 The source and service values can be overriden thanks to Autodiscovery as described below; it automatically installs integration Pipelines that parse your logs and extract all the relevant information from them.
 
 {{% /tab %}}
@@ -111,7 +111,7 @@ Autodiscovery expects labels to follow this format, depending on the file type:
 {{< tabs >}}
 {{% tab "Dockerfile" %}}
 
-Add the following LABEL to your Dockerfile:
+Add the following `LABEL` to your Dockerfile:
 
 ```
 LABEL "com.datadoghq.ad.logs"='[<LOGS_CONFIG>]'
@@ -177,8 +177,7 @@ Use the `com.datadoghq.ad.logs` label as below on your containers to make sure t
   labels:
     com.datadoghq.ad.logs: '[{"source": "java", "service": "myapp", "log_processing_rules": [{"type": "multi_line", "name": "log_start_with_date", "pattern" : "\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])"}]}]'
   ```
-
-Check out the [multi-line processing rule documentation](https://docs.datadoghq.com/logs/log_collection/#multi-line-aggregation) to get more pattern examples.
+See the [multi-line processing rule documentation](https://docs.datadoghq.com/logs/log_collection/#multi-line-aggregation) to get more pattern examples.
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -203,13 +202,13 @@ spec:
         name: nginx
 ```
 
-Check our [Autodiscovery Guide](https://docs.datadoghq.com/agent/autodiscovery/#template-source-kubernetes-pod-annotations) for more information about Autodiscovery setup and examples.
+Check our [Autodiscovery Guide](https://docs.datadoghq.com/agent/autodiscovery/#template-source-kubernetes-pod-annotations) for setup, examples, and more information about Autodiscovery.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-It is also important to note that Autodiscovery features can be used with or without the `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` environment variable.
-You can therefore use container labels or pod annotations to cherry pick the containers you want to collect logs from. Or use the environment variable to ensure you collect logs from all containers and then override the default `source` and `service` value or add processing rules for the wanted subset of containers.
+Note that Autodiscovery features can be used with or without the `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` environment variable.
+You can therefore use container labels or pod annotations to cherry pick the containers from which you want to collect logs . Or, use the environment variable to ensure you collect logs from all containers and then override the default `source` and `service` value or add processing rules for the wanted subset of containers.
  
 #### Short lived containers
 
@@ -237,7 +236,7 @@ Two environment variables are available to include or exclude a list of containe
 * `DD_AC_INCLUDE`: whitelist of containers to always include
 * `DD_AC_EXCLUDE`: blacklist of containers to exclude
 
-The format for these option is space-separated strings. For example, if you only want to monitor two images, and exclude the rest, specify:
+The format for these options is space-separated strings. For example, if you only want to monitor two images, and exclude the rest, specify:
 
 ```
 DD_AC_EXCLUDE = "image:.*"
