@@ -134,7 +134,7 @@ In the `datadog.yaml` file, set the `<KV_STORE_IP>` address and `<KV_STORE_PORT>
 
 ```
 # The providers the Agent should call to collect checks configurations.
-# Note that the File Configuration Provider is enabled by default and cannot
+# Please note the File Configuration Provider is enabled by default and cannot
 # be configured.
 # config_providers:
 #   - name: etcd
@@ -220,6 +220,7 @@ annotations:
   ad.datadoghq.com/<container identifier>.check_names: '[<CHECK_NAME>]'
   ad.datadoghq.com/<container identifier>.init_configs: '[<INIT_CONFIG>]'
   ad.datadoghq.com/<container identifier>.instances: '[<INSTANCE_CONFIG>]'
+  ad.datadoghq.com/<container identifier>.logs: '[<LOG_CONFIG>]'
 ```
 
 The format is similar to that for key-value stores. The differences are:
@@ -242,6 +243,7 @@ metadata:
     ad.datadoghq.com/apache.check_names: '["apache","http_check"]'
     ad.datadoghq.com/apache.init_configs: '[{},{}]'
     ad.datadoghq.com/apache.instances: '[{"apache_status_url": "http://%%host%%/server-status?auto"},{"name": "My service", "url": "http://%%host%%", timeout: 1}]'
+    ad.datadoghq.com/apache.logs: '[{"source":"apache","service":"webapp"}]'
   labels:
     name: apache
 spec:
@@ -271,6 +273,7 @@ spec:
         ad.datadoghq.com/apache.check_names: '["apache","http_check"]'
         ad.datadoghq.com/apache.init_configs: '[{},{}]'
         ad.datadoghq.com/apache.instances: '[{"apache_status_url": "http://%%host%%/server-status?auto"},{"name": "My service", "url": "http://%%host%%", timeout: 1}]'
+        ad.datadoghq.com/apache.logs: '[{"source":"apache","service":"webapp"}]'
     spec:
       containers:
       - name: apache # use this as the container identifier in your annotations
@@ -284,7 +287,7 @@ spec:
 The Agent detects if it's running on Docker and automatically searches all labels for check templates.
 
 Since version 6.2 of the Datadog Agent, it is also possible to configure Docker log collection in container labels.
-Check the [Docker Log collection guide][23] for more information about the setup.
+Check our [Docker Log collection guide][23] for more information about the setup.
 
 Autodiscovery expects labels to look like these examples, depending on the file type:
 
@@ -358,6 +361,26 @@ If you provide a template for the same check type via multiple template sources,
 
 * Kubernetes annotations
 * Files
+
+### Include or Exclude containers
+
+Two environment variables are available to include or exclude from Autodiscovery a list of containers filtered by image or container name:
+
+* `DD_AC_INCLUDE`: whitelist of containers to always include
+* `DD_AC_EXCLUDE`: blacklist of containers to exclude
+
+The format for these options is space-separated strings. For example, if you only want to monitor two images, and exclude the rest, specify:
+
+```
+DD_AC_EXCLUDE = "image:.*"
+DD_AC_INCLUDE = "image:cp-kafka image:k8szk"
+```
+
+Or to exclude a specific container name:
+
+```
+DD_AC_EXCLUDE = "name:dd-agent"
+```
 
 ## Troubleshooting
 
