@@ -109,7 +109,7 @@ While actively working with the Containers page, metrics are collected at 2s res
 
 - RBAC settings can restrict Kubernetes metadata collection. Refer to the [RBAC entites for the Datadog Agent][2].
 
-- The `health` value is the containers' readiness probe, not it's liveness probe. 
+- In Kubernetes the `health` value is the containers' readiness probe, not it's liveness probe. 
 
 [1]: https://github.com/DataDog/docker-dd-agent
 [2]: https://gist.github.com/hkaj/404385619e5908f16ea3134218648237
