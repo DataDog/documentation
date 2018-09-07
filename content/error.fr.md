@@ -1,7 +1,6 @@
 ---
 title: Oups, ça a loupé...
 kind: documentation
-private: true
 ---
 
 {{< img src="sad_bits.png" alt="Sad Bits" responsive="true" >}}

@@ -7,7 +7,6 @@ videos:
     - Datadog 101
 
 summary: How to get metrics and events from your hôtes up to Datadog
-private: true
 ---
 
 This series shows you everything you need to know to get started with Datadog. This video covers Collection: How to get the metrics and events from your hosts up to Datadog. We cover the following topics:
