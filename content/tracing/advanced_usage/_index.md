@@ -619,9 +619,49 @@ Notice the above examples only use the OpenTracing classes. Check the [OpenTraci
 {{% /tab %}}
 {{% tab "Python" %}}
 
-Support for OpenTracing with Python is coming soon. Reach out to [the Datadog support team][contact support] to be part of the beta.
+**Setup**:
 
-[contact support]: https://docs.datadoghq.com/help
+With `pip`:
+
+```sh
+$ pip install ddtrace[opentracing]
+```
+
+**Usage**:
+
+The OpenTracing convention for initializing a tracer is to define an
+initialization method that will configure and instantiate a new tracer and
+overwrite the global `opentracing.tracer` reference:
+
+```python
+    import time
+    import opentracing
+    from ddtrace.opentracer import Tracer, set_global_tracer
+
+    def init_tracer(service_name):
+        config = {
+          'agent_hostname': 'localhost',
+          'agent_port': 8126,
+        }
+        tracer = Tracer(service_name, config=config)
+        set_global_tracer(tracer)
+        return tracer
+
+    def my_operation():
+      span = opentracing.tracer.start_span('my_operation_name')
+      span.set_tag('my_tag', 'myvalue')
+      time.sleep(0.05)
+      span.finish()
+
+    init_tracer('my_service_name')
+    my_operation()
+```
+
+For more advanced usage and configuration information see our [API
+docs][dd-opentracing-python] and the [Python OpenTracing repo][opentracing-python].
+
+[dd-opentracing-python]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#opentracing
+[opentracing-python]: https://github.com/opentracing/opentracing-python
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
