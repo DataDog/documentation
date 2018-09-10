@@ -229,7 +229,7 @@ Send the monitor notification to the appropriate endpoint:
 
 After having installed the Slack integration, type `@slack` in your notification message to see the available list of channels to send your notification to.
 
-#### @-mentions in Slack from monitor alert
+**@-mentions in Slack from monitor alert**:
 
 Wrap the `@username` in `< >` as seen below in your monitors message template to **@ notify** the defined user within slack notifications.
 For example this configuration:
@@ -251,7 +251,7 @@ For user groups, use `<!subteam^GROUP_ID|GROUP_NAME>`. To find the `GROUP_ID`, [
 Note: Trailing special characters in a channel name are unsupported for the Slack @-notifications. 
 e.g. `@----critical_alerts` works, but `@--critical_alerts--` won't receive any notifications.
 
-#### Using message template variables to dynamically create @-mentions
+**Using message template variables to dynamically create @-mentions**:
 
 Use message template variables within a monitor message to dynamically build **@-mentions**.
 

@@ -15,7 +15,7 @@ Tags are key-value pairs attached to spans. All tags share a single namespace.
 
 The Datadog UI uses specific tags to set UI properties, such as an application's service name. A full list of these tags can be found in the [Datadog][java api doc] and [OpenTracing][opentracing java doc] APIs.
 
-### Custom Tags
+**Custom Tags**:
 
 Custom tags are set using the OpenTracing API.
 
@@ -458,7 +458,7 @@ OpenTracing is a vendor-neutral, cross-language standard for tracing application
 
 Use the [OpenTracing API][opentracing-java] and the Datadog Tracer (dd-trace-ot) library to measure execution times for specific pieces of code. This lets you trace your application more precisely than you can with the Java Agent alone.
 
-### Setup
+**Setup**:
 
 For Maven, add this to `pom.xml`:
 
@@ -497,7 +497,7 @@ Configure your application using environment variables or system properties as d
 
 [configuration]: /tracing/setup/java/#configuration
 
-### Manual Instrumentation with OpenTracing
+**Manual Instrumentation with OpenTracing**:
 
 Use a combination of these if the automatic instrumentation isn’t providing you enough depth or detail.
 
@@ -592,7 +592,7 @@ public class Application {
 }
 ```
 
-#### Manual Instrumentation for Async Traces
+**Manual Instrumentation for Async Traces**:
 
 Create asynchronous traces with manual instrumentation using the OpenTracing API.
 
@@ -635,7 +635,7 @@ Support for OpenTracing with Ruby is coming soon. Reach out to [the Datadog supp
 
 Import the [`opentracer` package][opentracing godoc] to expose the Datadog tracer as an [OpenTracing][open tracing] compatible tracer.
 
-### Example
+**Example**:
 
 A basic usage example:
 
@@ -1059,7 +1059,7 @@ The Java tracer exposes two API calls to allow printing trace and span identifie
 
 These identifiers can be injected into application logs using MDC frameworks.
 
-##### log4j2
+**log4j2**:
 
 ```java
 import org.apache.logging.log4j.ThreadContext;
@@ -1075,7 +1075,7 @@ try {
 }
 ```
 
-##### slf4j/logback
+**slf4j/logback**:
 
 ```java
 import org.slf4j.MDC;
@@ -1091,13 +1091,13 @@ try {
 }
 ```
 
-##### log4j2 XML Pattern
+**log4j2 XML Pattern**:
 
 ```xml
 <PatternLayout pattern="%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{${sys:PID}}{magenta} %clr{---}{faint} %X{ddTraceID} %X{ddSpanID} %m%n%xwEx" />
 ```
 
-##### Logback XML Pattern
+**Logback XML Pattern**:
 
 ```xml
 <Pattern>
@@ -1164,20 +1164,17 @@ We discourage enabling debug mode on your production systems as it increases the
 {{< tabs >}}
 {{% tab "Java" %}}
 
-### Enabling Debug Mode
 To return debug level application logs, enable debug mode with the flag `-Ddatadog.slf4j.simpleLogger.defaultLogLevel=debug` when starting the JVM.
 
 {{% /tab %}}
 {{% tab "Python" %}}
 
-### Enabling Debug Mode
 Debugging is disabled by default. 
 
 To enable it set the environment variable `DATADOG_TRACE_DEBUG=true` when using `ddtrace-run`.
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-### Enabling Debug Mode
 Debug mode is disabled by default. To enable:
 
 ```ruby
@@ -1186,7 +1183,7 @@ Datadog.configure do |c|
 end
 ```
 
-### Application Logs
+**Application Logs**:
 
 By default, all logs are processed by the default Ruby logger. When using Rails, you should see the messages in your application log file.
 
@@ -1210,7 +1207,6 @@ See [the API documentation][ruby logging docs] for more details.
 {{% /tab %}}
 {{% tab "Go" %}}
 
-### Enabling Debug Mode
 Debug mode on the tracer can be enabled as a `Start` config, resulting in more verbose logging:
 
 ```go
@@ -1228,7 +1224,6 @@ func main() {
 
 {{% tab "Node.js" %}}
 
-### Enabling Debug Mode
 Debug mode is disabled by default, to enable it:
 
 ```javascript
@@ -1237,7 +1232,7 @@ const tracer = require('dd-trace').init({
 })
 ```
 
-### Application Logs
+**Application Logs**
 
 By default, logging from this library is disabled. In order to get debbuging information and errors sent to logs, the `debug` options should be set to `true` in the [init()][init method] method.
 
