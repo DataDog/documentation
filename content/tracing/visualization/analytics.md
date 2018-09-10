@@ -103,8 +103,6 @@ Export your Trace analytic:
 
 ## Traces in Dashboard 
 
-**This functionality is still in beta, [contact the Datadog support team][6] to activate it for your organization.**
-
 Export [Trace Analytics][7] from the Trace search or build them directly in your [Dashboard][8] alongside metrics and logs.
 
 [Learn more about the timeseries widget][9]
