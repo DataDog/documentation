@@ -134,7 +134,7 @@ In the `datadog.yaml` file, set the `<KV_STORE_IP>` address and `<KV_STORE_PORT>
 
 ```
 # The providers the Agent should call to collect checks configurations.
-# Please note the File Configuration Provider is enabled by default and cannot
+# Note that the File Configuration Provider is enabled by default and cannot
 # be configured.
 # config_providers:
 #   - name: etcd
@@ -287,7 +287,7 @@ spec:
 The Agent detects if it's running on Docker and automatically searches all labels for check templates.
 
 Since version 6.2 of the Datadog Agent, it is also possible to configure Docker log collection in container labels.
-Check our [Docker Log collection guide][23] for more information about the setup.
+Check the [Docker Log collection guide][23] for more information about the setup.
 
 Autodiscovery expects labels to look like these examples, depending on the file type:
 
@@ -362,14 +362,14 @@ If you provide a template for the same check type via multiple template sources,
 * Kubernetes annotations
 * Files
 
-### Include or Exclude containers
+### Include or Exclude Containers
 
-Two environment variables are available to include or exclude from Autodiscovery a list of containers filtered by image or container name:
+Containers can be included or excluded from Autodiscovery via environment variables:
 
 * `DD_AC_INCLUDE`: whitelist of containers to always include
 * `DD_AC_EXCLUDE`: blacklist of containers to exclude
 
-The format for these options is space-separated strings. For example, if you only want to monitor two images, and exclude the rest, specify:
+The lists are formatted as space-separated strings. For example, if you only want to monitor two images, and exclude the rest, specify:
 
 ```
 DD_AC_EXCLUDE = "image:.*"
