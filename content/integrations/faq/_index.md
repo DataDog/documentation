@@ -34,7 +34,6 @@ private: true
 * [Why is there a delay in receiving my data?][22]
 * [I can't filter out my ELB instances - will I be charged for them?][23]
 * [I just set up my AWS integration. Why am I seeing duplicate hosts?][24]
-* [Capturing EC2 tags at startup][25]
 
 ## Apache
 
@@ -166,7 +165,6 @@ private: true
 [22]: /integrations/faq/why-is-there-a-delay-in-receiving-my-data
 [23]: /integrations/faq/i-can-t-filter-out-my-elb-instances-will-i-be-charged-for-them
 [24]: /integrations/faq/i-just-set-up-my-aws-integration-why-am-i-seeing-duplicate-hosts
-[25]: /integrations/faq/capturing-ec2-tags-at-startup
 [26]: /integrations/faq/issues-with-apache-integration
 [27]: /integrations/faq/apache-ssl-certificate-issues
 [28]: /integrations/faq/my-azure-vm-is-powered-down-why-is-it-still-listed-in-my-infrastructure-list
