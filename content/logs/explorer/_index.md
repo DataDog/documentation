@@ -22,7 +22,7 @@ The Logs Explorer is your home base for troubleshooting and exploration:
 
 In this view you can: 
 
-* [Build a context to explore your logs](context).
+* [Build a context to explore your logs](#context).
 * [Visualize your logs as a filtered logstream or a log analytic](#visualization).
 * [Setup your log explorer view by creating facets and measure from your logs](#setup).
 * [Export the content of your Log explorer view to a monitor, a dashboard, or into a CSV file.](#export)
