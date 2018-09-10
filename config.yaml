@@ -840,20 +840,15 @@ languages:
           url: "logs/explorer/search"
           weight: 510
           parent: customnav_lognav_explorer
-        - identifier: customnav_lognav_logstream
-          name: "Logstream"
-          url: "logs/explorer/logstream"
-          weight: 520
-          parent: customnav_lognav_explorer
         - identifier: customnav_lognav_analytics
           name: "Log Analytics"
           url: "logs/explorer/analytics"
-          weight: 530
+          weight: 520
           parent: customnav_lognav_explorer
         - identifier: customnav_lognav_saved_views
           name: "Saved Views"
           url: "logs/explorer/saved_views"
-          weight: 540
+          weight: 530
           parent: customnav_lognav_explorer
 
         - identifier: customnav_lognav_logging_without_limits
@@ -1893,20 +1888,15 @@ languages:
           url: "logs/explorer/search"
           weight: 510
           parent: customnav_lognav_explorer
-        - identifier: customnav_lognav_logstream
-          name: "Logstream"
-          url: "logs/explorer/logstream"
-          weight: 520
-          parent: customnav_lognav_explorer
         - identifier: customnav_lognav_analytics
           name: "Log Analytics"
           url: "logs/explorer/analytics"
-          weight: 530
+          weight: 520
           parent: customnav_lognav_explorer
         - identifier: customnav_lognav_saved_views
           name: "Saved Views"
           url: "logs/explorer/saved_views"
-          weight: 540
+          weight: 530
           parent: customnav_lognav_explorer
 
         - identifier: customnav_lognav_logging_without_limits
