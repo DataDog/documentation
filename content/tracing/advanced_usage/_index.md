@@ -1232,7 +1232,7 @@ const tracer = require('dd-trace').init({
 })
 ```
 
-**Application Logs**
+**Application Logs**:
 
 By default, logging from this library is disabled. In order to get debbuging information and errors sent to logs, the `debug` options should be set to `true` in the [init()][init method] method.
 
