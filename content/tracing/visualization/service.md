@@ -30,7 +30,7 @@ Consult on this page:
 
 ## Service Monitor
 
-Datadog propose list of monitor depending of your service type: 
+Datadog proposes a list of monitors depending on your service type: 
 
 {{< img src="tracing/visualization/service/service_monitors.png" alt="Service Monitors" responsive="true" style="width:90%;">}}
 
