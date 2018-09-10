@@ -30,10 +30,10 @@ List of all environment variables available:
 | `DD_DOGSTATSD_PORT`        | Set the DogStatsD port.                                                                       |
 | `DD_APM_NON_LOCAL_TRAFFIC` | Allow non-local traffic when [tracing from other containers](#tracing-from-other-containers). |
 | `DD_IGNORE_RESOURCE`       | A comma-separated list of resources that the Agent should ignore.                             |
-| `DD_LOG_LEVEL`             | Set the logging level.                                                                        |
+| `DD_LOG_LEVEL`             | Set the logging level. (`trace`/`debug`/`info`/`warn`/`error`/`critical`/`off`)               |
 | `DD_APM_ANALYZED_SPANS`    | Configure the spans to analyze for transactions.                                              |
-| `DD_CONNECTION_LIMIT`      | Set the Limit of unique connections .                                                         |
-
+| `DD_CONNECTION_LIMIT`      | Set the limit of unique connections.                                                          |
+  
 
 
 ## Tracing from the host
