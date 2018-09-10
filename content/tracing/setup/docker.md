@@ -16,23 +16,24 @@ Enable the [datadog-trace-agent][1] in the `datadog/agent` container by passing 
 
 **Note: APM is NOT available on Alpine Images**
 
-List of all environment variable available:
+List of all environment variables available:
 
-| Environment variable       | Description                                                                                  |
-| ------                     | ------                                                                                       |
-| `DD_API_KEY`               | [Datadog API Key][3]                                                                         |
-| `DD_APM_ENABLED`           | When set to `true`, the Datadog Agent accepts trace metrics.                                 |
-| `DD_APM_DD_URL`            | Datadog API endpoint where traces are sent.                                                  |
-| `DD_PROXY_HTTPS`           | Set up the URL for the proxy to use                                                          |
-| `DD_HOSTNAME`              | Set manually the Agent hostname                                                              |
-| `DD_BIND_HOST`             | Set the StatsD & receiver hostname                                                           |
-| `DD_RECEIVER_PORT`         | Port that the Datadog Agent's trace receiver listen on. Default value is `8126`.             |
-| `DD_DOGSTATSD_PORT`        | Set the DogStatsD port                                                                       |
-| `DD_APM_NON_LOCAL_TRAFFIC` | Allow non-local traffic when [tracing from other containers](#tracing-from-other-containers) |
-| `DD_IGNORE_RESOURCE`       | A comma-separated list of resources that the Agent should ignore.                            |
-| `DD_LOG_LEVEL`             | Set the logging level                                                                        |
-| `DD_APM_ANALYZED_SPANS`    | Configure the spans to analyze for transactions                                              |
-| `DD_CONNECTION_LIMIT`      | Set the Limit of unique connections                                                          |
+| Environment variable       | Description                                                                                   |
+| ------                     | ------                                                                                        |
+| `DD_API_KEY`               | [Datadog API Key][3]                                                                          |
+| `DD_APM_ENABLED`           | When set to `true`, the Datadog Agent accepts trace metrics.                                  |
+| `DD_APM_DD_URL`            | Datadog API endpoint where traces are sent.                                                   |
+| `DD_PROXY_HTTPS`           | Set up the URL for the proxy to use.                                                          |
+| `DD_HOSTNAME`              | Set manually the Agent hostname.                                                              |
+| `DD_BIND_HOST`             | Set the StatsD & receiver hostname.                                                           |
+| `DD_RECEIVER_PORT`         | Port that the Datadog Agent's trace receiver listen on. Default value is `8126`.              |
+| `DD_DOGSTATSD_PORT`        | Set the DogStatsD port.                                                                       |
+| `DD_APM_NON_LOCAL_TRAFFIC` | Allow non-local traffic when [tracing from other containers](#tracing-from-other-containers). |
+| `DD_IGNORE_RESOURCE`       | A comma-separated list of resources that the Agent should ignore.                             |
+| `DD_LOG_LEVEL`             | Set the logging level.                                                                        |
+| `DD_APM_ANALYZED_SPANS`    | Configure the spans to analyze for transactions.                                              |
+| `DD_CONNECTION_LIMIT`      | Set the Limit of unique connections .                                                         |
+
 
 
 ## Tracing from the host
