@@ -672,12 +672,10 @@ func main() {
 [opentracing go]: https://github.com/opentracing/opentracing-go
 {{% /tab %}}
 {{% tab "Node.js" %}}
-This library is OpenTracing compliant. Use the OpenTracing API and the Datadog Tracer (dd-trace) library to measure execution times for specific pieces of code. In the following example, a Datadog Tracer is initialized and used as a global tracer:
-
-aboutraw—
-This library is OpenTracing compliant. Use the [OpenTracing API]([opentracing api] and the Datadog Tracer (dd-trace) library to measure execution times for specific pieces of code. In the following example, a Datadog Tracer is initialized and used as a global tracer:
+This library is OpenTracing compliant. Use the ([OpenTracing API][opentracing api] and the Datadog Tracer ([dd-trace][nodejs api doc]) library to measure execution times for specific pieces of code. In the following example, a Datadog Tracer is initialized and used as a global tracer:
 
 [opentracing api]: https://doc.esdoc.org/github.com/opentracing/opentracing-javascript/
+[nodejs api doc]: https://datadog.github.io/dd-trace-js/
 
 ```javascript
 // server.js
