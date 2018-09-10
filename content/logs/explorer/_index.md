@@ -33,7 +33,7 @@ Build up a context to explore your logs in your log explorer view first by selec
 
 ### Time Range
 
-The time range allows you to display logs in the logstream or a log analytic within a given time period. 
+The Time Range allows you to display logs in the logstream or a log analytic within a given time period. 
 It appears directly under the search bar as a timeline. The timeline can be displayed or wrapped up with the **Show timeline** check box in the logstream option panel.
 
 Quickly change the time range by selecting a preset range from the dropdown:
@@ -113,11 +113,12 @@ Follow the [log graphing guide][5] to learn more about all the graphing option.
 
 ## Setup
 
-After being processed with the help of pipelines and processors, your logs attributes can be indexed in order to be accesible for your context creation and log analytics.
+After being processed with the help of pipelines and processors, your logs attributes can be indexed as a Facet or a Measure in order to be accessible for your [context](#context) creation and [log analytics][2].
 
 Note: To leverage the most out of your Log explorer view make sure your logs attribute follow [Datadog attribute naming convention][5].
 
-### Facets
+{{< tabs >}}
+{{% tab "Facets" %}}
 
 A facet displays all the distinct members of an attribute or a tag as well as provides some basic analytics such as the amount of logs represented. This is also a switch to easily filter your data.
 
@@ -125,7 +126,7 @@ Facets allow you to pivot or filter your datasets based on a given attribute. Ex
 
 {{< img src="logs/explorer/facets_demo.png" alt="Facets demo" responsive="true" style="width:80%;">}}
 
-#### Create a Facet
+**Create a Facet**:
 
 To start using an attribute as a Facet or in the search, click on it and add it as a Facet:
 
@@ -133,11 +134,14 @@ To start using an attribute as a Facet or in the search, click on it and add it 
 
 Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar][1], [the Facet Panel](#facet-panel), and in the [Log Analytics query][2].
 
-### Measures
+{{% /tab %}}
+
+
+{{% tab "Measures" %}}
 
 A Measure is a attribute with numerical value contained in your logs. Think of it as a "log metric".
 
-#### Create a Measure
+**Create a Measure**:
 
 To start using an attribute as a measure, click on a numerical attribute of your log:
 
@@ -145,11 +149,14 @@ To start using an attribute as a measure, click on a numerical attribute of your
 
 Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar][1], the Facet Panel, and in the [Log Analytics query][2].
 
-#### Select the Measure Unit
+**Select the Measure Unit**:
 
 All measure have their own unit that is then used for display in the Log Explorer columns, Log stream widgets in dashboards, and in the Log Analytics.
 
 {{< img src="logs/explorer/edit_a_measure.png" alt="Edit a measure" responsive="true" style="width:50%;">}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Export
 
@@ -162,7 +169,7 @@ Export your current Log Visualization with the *Export* functionality:
 
 | Button                | Description                                                                                                          |
 | ----                  | -----                                                                                                                |
-| Export to Monitor     | Export the query applied to your Logstream in order to create the log monitor query for a new[log monitor][7]        |
+| Export to Monitor     | Export the query applied to your Logstream in order to create the log monitor query for a new [log monitor][7]       |
 | Export to Screenboard | Export your logstream as a widget to a [Screenboard][9]. *This functionality is not available yet.*                  |
 | Export to CSV         | Export your current logstream view with its selected column into a CSV file. You can export up to 5000 logs at once. |
 
@@ -177,9 +184,10 @@ Export your current Log Visualization with the *Export* functionality:
 
 | Button              | Description                                                                                                                                                                  |
 | ----                | -----                                                                                                                                                                        |
-| Export to Monitor   | Export the query applied to your Log Analytics in order to create the log monitor query for a new[log monitor][7] *This functionality is not available yet.*                 |
+| Export to Monitor   | Export the query applied to your Log Analytics in order to create the log monitor query for a new [log monitor][7] *This functionality is not available yet.*                |
 | Export to Timeboard | Export your logstream as a widget to a [Timeboard][9]. **This functionality is still in beta, [contact the Datadog support team][10] to activate it for your organization.** |
 
+[7]: /monitors/monitor_types/log
 [9]: /graphing/dashboards/timeboard/
 [10]: /help
 [11]: /logs/explorer/analytics
