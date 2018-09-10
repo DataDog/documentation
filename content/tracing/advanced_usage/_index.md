@@ -237,21 +237,41 @@ const span = scope.span()
 span.setTag('my_tag', 'my_value')
 ```
 
-**Adding tags globally to all spans**
+{{% /tab %}}
+{{% tab ".NET" %}}
 
-Add tags to all spans by configuring the tracer with the `tags` option:
+**Adding tags to a span**
 
-```javascript
-tracer.init({
-  tags: {
-    env: 'prod'
-  }
-})
+Add tags directly to a span by calling `SetTag()`. For example, with the following ASP.NET MVC action method:
+
+```csharp
+// An example of an ASP.NET MVC action,
+// with Datadog tracing around the request.
+public class HomeController
+{
+    public ActionResult Index()
+    {
+        using (var scope = Tracer.Instance.StartActive("web.request"))
+        {
+            scope.Span.SetTag("http.url", HttpContext.Request.RawUrl);
+            scope.Span.SetTag("http.method", HttpContext.Request.HttpMethod);
+
+            // do work...
+            return View();
+        }
+    }
+}
 ```
 
-See the [API documentation][nodejs api doc] for more details.
+**Adding tags to a current active span**
 
-[nodejs api doc]: https://datadog.github.io/dd-trace-js/
+Access the current active span from any method within your code. Note, however, that if the method is called and there is no span currently active, `Tracer.Instance.Active` returns `null`.
+
+```csharp
+// e.g. adding tag to active span
+var span = Tracer.Instance.ActiveScope.Span;
+span.SetTag("my_tag", "my_value");
+```
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -443,6 +463,28 @@ For more information on manual instrumentation, see the [API documentation][node
 
 [nodejs api doc]: https://datadog.github.io/dd-trace-js/#manual-instrumentation
 [nodejs compatibility]: /tracing/setup/nodejs/#compatibility
+
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+If you aren’t using supported library instrumentation (see [Library compatibility][dotnet compatibility]), you may want to manually instrument your code.
+
+The following example initializes a Datadog Tracer and creates a span called `web.request`:
+
+```csharp
+using Datadog.Trace;
+
+var scope = Tracer.Instance.StartActive('web.request');
+var span = scope.Span;
+
+span.SetTag('http.url', '/login');
+span.Finish();
+```
+
+For more information on manual instrumentation, see the [API documentation][dotnet api doc].
+
+[dotnet api doc]: https://datadog.github.io/dd-trace-csharp/#manual-instrumentation
+[dotnet compatibility]: /tracing/setup/dotnet/#compatibility
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -736,6 +778,26 @@ The following tags are available to override Datadog specific options:
 * `service.name`: The service name to be used for this span. The service name from the tracer will be used if this is not provided.
 * `resource.name`: The resource name to be used for this span. The operation name will be used if this is not provided.
 * `span.type`: The span type to be used for this span. Will fallback to `custom` if not provided.
+
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+For OpenTracing support, add the [`Datadog.Trace.OpenTracing`][dotnet opentracing] NuGet package to your application. During application start up, initialize the OpenTracing library:
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    // create an OpenTracing ITracer with default setting
+    ITracer tracer = OpenTracingTracerFactory.CreateTracer();
+    
+    // to use tracer with ASP.NET Core dependency injection
+    services.AddSingleton<ITracer>(tracer);
+
+    // use use tracer with GlobalTracer.Instance
+    GlobalTracer.Register(tracer);
+}
+```
+
+[dotnet opentracing]: https://www.nuget.org/packages/Datadog.Trace.OpenTracing/
 
 {{% /tab %}}
 {{< /tabs >}}
