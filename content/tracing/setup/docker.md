@@ -16,7 +16,24 @@ Enable the [datadog-trace-agent][1] in the `datadog/agent` container by passing 
 
 **Note: APM is NOT available on Alpine Images**
 
-For additional information, see the [Agent 6 Docker documentation][2].
+List of all environment variable available:
+
+| Environment variable       | Description                                                                                  |
+| ------                     | ------                                                                                       |
+| `DD_API_KEY`               | [Datadog API Key][3]                                                                         |
+| `DD_APM_ENABLED`           | Set to `true` to enable APM for your Agent                                                   |
+| `DD_APM_DD_URL`            | Configure the APM URL to send your traces to                                                 |
+| `DD_PROXY_HTTPS`           | Set up the URL for the proxy to use                                                          |
+| `DD_HOSTNAME`              | Set manually the Agent hostname                                                              |
+| `DD_BIND_HOST`             | Set the StatsD & receiver hostname                                                           |
+| `DD_RECEIVER_PORT`         | Set the receiver port                                                                        |
+| `DD_DOGSTATSD_PORT`        | Set the DogStatsD port                                                                       |
+| `DD_APM_NON_LOCAL_TRAFFIC` | Allow non-local traffic when [tracing from other containers](#tracing-from-other-containers) |
+| `DD_IGNORE_RESOURCE`       | Configure the list of ignored resources                                                      |
+| `DD_LOG_LEVEL`             | Set the logging level                                                                        |
+| `DD_APM_ANALYZED_SPANS`    | Configure the spans to analyze for transactions                                              |
+| `DD_CONNECTION_LIMIT`      | Set the Limit of unique connections                                                          |
+
 
 ## Tracing from the host
 
@@ -150,3 +167,4 @@ tracer.configure(hostname='172.17.0.1', port=8126)
 
 [1]: https://github.com/DataDog/datadog-trace-agent
 [2]: /agent/basic_agent_usage/docker
+[3]: https://app.datadoghq.com/account/settings#api
