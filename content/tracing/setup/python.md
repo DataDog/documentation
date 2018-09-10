@@ -94,11 +94,6 @@ The `ddtrace` library includes support for the following libraries:
 | [httplib](https://docs.python.org/2/library/httplib.html)            | Fully Supported | http://pypi.datadoghq.com/trace/docs/other_integrations.html#httplib  |
 | [Requests](http://docs.python-requests.org/en/master/)               | Fully Supported | http://pypi.datadoghq.com/trace/docs/other_integrations.html#requests |
 
-## OpenTracing
-
-OpenTracing support for `ddtrace` is in beta. See our [API docs][3] for set-up and
-usage information
-
 
 ## Further Reading
 

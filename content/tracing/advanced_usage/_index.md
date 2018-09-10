@@ -634,27 +634,27 @@ initialization method that will configure and instantiate a new tracer and
 overwrite the global `opentracing.tracer` reference:
 
 ```python
-    import time
-    import opentracing
-    from ddtrace.opentracer import Tracer, set_global_tracer
+import time
+import opentracing
+from ddtrace.opentracer import Tracer, set_global_tracer
 
-    def init_tracer(service_name):
-        config = {
-          'agent_hostname': 'localhost',
-          'agent_port': 8126,
-        }
-        tracer = Tracer(service_name, config=config)
-        set_global_tracer(tracer)
-        return tracer
+def init_tracer(service_name):
+    config = {
+      'agent_hostname': 'localhost',
+      'agent_port': 8126,
+    }
+    tracer = Tracer(service_name, config=config)
+    set_global_tracer(tracer)
+    return tracer
 
-    def my_operation():
-      span = opentracing.tracer.start_span('my_operation_name')
-      span.set_tag('my_tag', 'myvalue')
-      time.sleep(0.05)
-      span.finish()
+def my_operation():
+  span = opentracing.tracer.start_span('my_operation_name')
+  span.set_tag('my_tag', 'myvalue')
+  time.sleep(0.05)
+  span.finish()
 
-    init_tracer('my_service_name')
-    my_operation()
+init_tracer('my_service_name')
+my_operation()
 ```
 
 For more advanced usage and configuration information see our [API
