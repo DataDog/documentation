@@ -61,7 +61,7 @@ Find below the list of all available parameters for your `datadog.yaml` configur
 | `env`                     | string      | Default environment to which traces should be registered under (e.g. *staging*, *production*, etc..).                                                              |
 | `extra_sample_rate`       | float       | Use this setting to adjust the trace sample rate. The value should be a float between `0` (no sampling) and `1` (normal sampling). Default value is `1`.           |
 | `max_traces_per_second`   | float       | Maximum number of traces to sample per second. Set to `0` to disable the limit (*not recommended*). The default value is `10`.                                     |
-| `ignore_resources`        | list        | A list of resources that the Agent should ignore. If using the environment variable, this should be a comma-separated list.                                        |
+| `ignore_resources`        | list        | A list of resources that the Agent should ignore.                                                                                                                  |
 | `log_file`                | string      | Location of the log file.                                                                                                                                          |
 | `replace_tags`            | list        | A list of tag replacement rules. See the [Scrubbing sensitive information](#scrubbing-sensitive-information) section.                                              |
 | `receiver_port`           | number      | Port that the Datadog Agent's trace receiver listen on. Default value is `8126`.                                                                                   |
