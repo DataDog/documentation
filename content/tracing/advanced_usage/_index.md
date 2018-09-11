@@ -623,8 +623,7 @@ Support for OpenTracing in the Python tracer is currently in beta.
 
 **Setup**:
 
-OpenTracing support is included in the `ddtrace` package. To install the
-required `opentracing` package as well use `pip`:
+OpenTracing support is included in the `ddtrace` package. Use `pip` to install the required `opentracing` package :
 
 ```sh
 $ pip install ddtrace[opentracing]
@@ -632,9 +631,7 @@ $ pip install ddtrace[opentracing]
 
 **Usage**:
 
-The OpenTracing convention for initializing a tracer is to define an
-initialization method that will configure and instantiate a new tracer and
-overwrite the global `opentracing.tracer` reference:
+The OpenTracing convention for initializing a tracer is to define an initialization method that configures and instantiates a new tracer and overwrites the global `opentracing.tracer` reference:
 
 ```python
 import time
@@ -660,8 +657,7 @@ init_tracer('my_service_name')
 my_operation()
 ```
 
-For more advanced usage and configuration information see our [API
-docs][dd-opentracing-python] and the [Python OpenTracing repo][opentracing-python].
+For more advanced usage and configuration information see [Datadog Python Opentracing API docs][dd-opentracing-python] and the [Python OpenTracing repo][opentracing-python].
 
 [dd-opentracing-python]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#opentracing
 [opentracing-python]: https://github.com/opentracing/opentracing-python
