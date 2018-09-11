@@ -32,8 +32,6 @@ List of all environment variables available:
 | `DD_IGNORE_RESOURCE`       | A comma-separated list of resources that the Agent should ignore.                             |
 | `DD_LOG_LEVEL`             | Set the logging level. (`trace`/`debug`/`info`/`warn`/`error`/`critical`/`off`)               |
 | `DD_APM_ANALYZED_SPANS`    | Configure the spans to analyze for transactions.                                              |
-| `DD_CONNECTION_LIMIT`      | Set the limit of unique connections.                                                          |
-  
 
 
 ## Tracing from the host

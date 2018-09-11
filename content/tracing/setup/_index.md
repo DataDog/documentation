@@ -68,7 +68,6 @@ Find below the list of all available parameters for your `datadog.yaml` configur
 | `apm_non_local_traffic`   | boolean     | Allows the Agent to receive outside connections. It then listen on all interfaces.                                                                                 |
 | `max_memory`              | float       | Maximum memory that the Agent is allowed to occupy. When this is exceeded the process is killed.                                                                   |
 | `max_cpu_percent`         | float       | Maximum CPU percentage that the Agent should use. The Agent automatically adjusts its pre-sampling rate to stay below this number.                                 |
-| `max_connections`         | number      | Maximum number of network connections that the Agent is allowed to use. When this is exceeded the process is killed.                                               |
   
 
 To get a an overview of all the possible settings for APM, take a look at the Agent's [`datadog.example.yaml`][21] configuration file.
