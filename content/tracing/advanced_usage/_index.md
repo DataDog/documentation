@@ -467,7 +467,7 @@ For more information on manual instrumentation, see the [API documentation][node
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-If you aren’t using supported library instrumentation (see [Library compatibility][dotnet compatibility]), you may want to manually instrument your code.
+If you aren’t using libraries supported by automatic instrumentation (see [Library compatibility][dotnet compatibility]), you may want to manually instrument your code.
 
 The following example initializes a Datadog Tracer and creates a span called `web.request`:
 
@@ -981,6 +981,13 @@ Distributed tracing is enabled by default for all supported integrations (see [C
 [nodejs compatibility]: /tracing/setup/nodejs/#compatibility
 
 {{% /tab %}}
+{{% tab ".NET" %}}
+
+Coming Soon. Reach out to [the Datadog support team][contact support] to be part of the beta.
+
+[contact support]: https://docs.datadoghq.com/help
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Priority Sampling
@@ -1145,6 +1152,13 @@ Coming Soon. Reach out to [the Datadog support team][contact support] to be part
 [contact support]: https://docs.datadoghq.com/help
 
 {{% /tab %}}
+{{% tab ".NET" %}}
+
+Coming Soon. Reach out to [the Datadog support team][contact support] to be part of the beta.
+
+[contact support]: https://docs.datadoghq.com/help
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Logging
@@ -1251,6 +1265,13 @@ func handler(w http.ResponseWriter, r *http.Request) {
 Coming Soon. Reach out to [the Datadog support team][contact support] to be part of the beta.
 
 [contact support]: https://docs.datadoghq.com/help
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+Coming Soon. Reach out to [the Datadog support team][contact support] to be part of the beta.
+
+[contact support]: https://docs.datadoghq.com/help
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -1360,6 +1381,15 @@ const tracer = require('dd-trace').init({
 For more tracer settings, check out the [API documentation][nodejs api doc].
 
 [nodejs api doc]: https://datadog.github.io/dd-trace-js/#tracer-settings
+
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+Debug mode is disabled by default. To enable, set the `isDebugEnabled` argument to `true` when creating a new tracer instance:
+
+```csharp
+var tracer = Datadog.Trace.Tracer.Create(isDebugEnabled: true);
+```
 
 {{% /tab %}}
 {{< /tabs >}}
