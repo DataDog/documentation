@@ -10,7 +10,8 @@ This end point allows you to query for metrics from any time period.
 
 *Note:* In Python, `from` is a reserved word. So instead, the Python API uses the `start` and `end` parameters in the function call.
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 * **`from`** [*required except in Python*]:  
     Seconds from the unix epoch 
 * **`to`** [*required except in Python*]:  

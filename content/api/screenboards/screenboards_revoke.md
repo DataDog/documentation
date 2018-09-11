@@ -9,6 +9,6 @@ external_redirect: /api/#revoke-a-shared-a-screenboard
 
 Revoke a shared Screenboard.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 This end point takes no JSON arguments.

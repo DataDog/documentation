@@ -5,11 +5,15 @@ order: 6.1
 external_redirect: /api/#post-a-check-run
 ---
 
-##### Signature
+**Signature**:
+
 `POST https://api.datadoghq.com/api/v1/check_run`
-##### Exemple de requête
+
+**Exemple de requête**:
+
 {{< code-snippets basename="api-checks-post" >}}
 
-##### Exemple de réponse
+**Exemple de réponse**:
+
 {{< code-snippets basename="result.api-checks-post" >}}
 

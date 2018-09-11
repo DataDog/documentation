@@ -5,10 +5,15 @@ order: 18.1
 external_redirect: /api/#create-a-screenboard
 ---
 
-##### Signature
+**Signature**:
+
 `POST https://api.datadoghq.com/api/v1/screen`
-##### Exemple de requête
+
+**Exemple de requête**:
+
 {{< code-snippets basename="api-screenboard-create" >}}
-##### Exemple de réponse
+
+**Exemple de réponse**:
+
 {{< code-snippets basename="result.api-screenboard-create" >}}
 

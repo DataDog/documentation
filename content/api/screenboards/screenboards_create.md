@@ -6,7 +6,9 @@ external_redirect: /api/#create-a-screenboard
 ---
 
 ## Create a Screenboard
-##### Arguments
+
+**ARGUMENTS**:
+
 * **`board_title`** [*required*]:  
     The name of the dashboard.    
 * **`description`** [*optional*, *default*=**None**]:  

@@ -7,7 +7,8 @@ external_redirect: /api/#resolve-monitor
 
 ## Résoudre un monitor
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 * **`resolve`** [*obligatoire*]:  
     Tableau de groupe(s) à résoudre pour un monitor_id donné, par ex.
     `{"monitor_id": "group_to_resolve"}`  

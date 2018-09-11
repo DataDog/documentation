@@ -8,7 +8,7 @@ external_redirect: /api/#post-time-series-points
 ## Post timeseries points
 The metrics end-point allows you to post time-series data that can be graphed on Datadog's dashboards.
 
-#### ARGUMENTS
+**ARGUMENTS**:
 
 * **`series`** [*required*]:  
     Pass a JSON array where each item in the array contains the following arguments:

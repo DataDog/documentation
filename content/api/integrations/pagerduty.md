@@ -10,7 +10,7 @@ external_redirect: /api/#pagerduty
 Configure your Datadog-PagerDuty integration directly through Datadog API.  
 [Read more about Datadog-PagerDuty integration][1]
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`services`** [*required*]:    
     Array of PagerDuty service objects. [Learn how to configure you Datadog service with PagerDuty documentation][2]. A PagerDuty service object is composed by:  

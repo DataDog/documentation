@@ -5,12 +5,15 @@ order: 14.1
 external_redirect: /api/#aws
 ---
 
-##### Signature
+**Signature**:
+
 `https://api.datadoghq.com/api/v1/integration/aws`
 
-##### Exemple de requête
+**Exemple de requête**:
+
 {{< code-snippets basename="api-integrations-aws" >}}
 
-##### Exemple de réponse
+**Exemple de réponse**:
+
 {{< code-snippets basename="result.api-integrations-aws" >}}
 

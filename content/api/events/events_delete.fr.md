@@ -7,7 +7,7 @@ external_redirect: /api/#delete-an-event
 ## Supprimer un événement
 Cet endpoint vous permet de supprimer un événement.
 
-#### ARGUMENTS
+**ARGUMENTS**:
 
 Cet endpoint ne prend aucun argument JSON.
 

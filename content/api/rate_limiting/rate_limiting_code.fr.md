@@ -4,7 +4,7 @@ type: apicode
 order: 4
 external_redirect: /api/#rate-limiting
 ---
-##### Headers de Rate Limit 
+**Headers de Rate Limit**:
 
 * `X-RateLimit-Limit` Nombre de requêtes autorisées sur une période donnée
 * `X-RateLimit-Period` durée en secondes pour les réinitialisations (alignées sur le calendrier)

@@ -5,10 +5,15 @@ order: 15.3
 external_redirect: /api/#query-time-series-points
 ---
 
-##### Signature
+**Signature**:
+
 `GET https://api.datadoghq.com/api/v1/query`
-##### Exemple de requête
+
+**Exemple de requête**:
+
 {{< code-snippets basename="api-metrics-query" >}}
-##### Exemple de réponse
+
+**Exemple de réponse**:
+
 {{< code-snippets basename="result.api-metrics-query" >}}
 

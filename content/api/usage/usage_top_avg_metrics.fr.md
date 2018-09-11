@@ -9,7 +9,8 @@ external_redirect: /api/#get-top-500-custom-metrics-by-hourly-average
 
 Obtenez le top des [métriques customisés][1] par moyenne horaire
 
-##### Arguments
+**ARGUMENTS**:
+
 * **`month`** [*obligatoire*]:  
     datetime dans le format ISO-8601 , UTC, précis au mois: [YYYY-MM] Pour l'usage depuis le début de cette heure
 * **`names`** [*optionnel*, *défaut*=**None**]:  

@@ -6,7 +6,9 @@ external_redirect: /api/#cancel-monitor-downtime
 ---
 
 ## Cancel Monitor Downtime
-##### ARGUMENTS
+
+**ARGUMENTS**:
+
 * **`id`** [*required*]:  
     The integer id of the downtime to be canceled
 

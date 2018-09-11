@@ -9,7 +9,7 @@ external_redirect: /api/#get-all-screenboards
 
 Récupère toutes les spécifications de vos Screenboards.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 Cet endpoint ne prend aucun argument JSON.
 

@@ -9,7 +9,7 @@ external_redirect: /api/#add-items-to-a-dashboard-list
 
 Add dashboards to an existing dashboard list.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 *   **`dashboards`** [*required*]:
     A list of dashboards to add to the list.

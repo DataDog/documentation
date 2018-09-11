@@ -5,10 +5,15 @@ order: 21.4
 external_redirect: /api/#get-all-timeboards
 ---
 
-##### Signature
+**Signature**:
+
 `GET https://api.datadoghq.com/api/v1/dash`
-##### Example Request
+
+**Example Request**:
+
 {{< code-snippets basename="api-dashboard-get-all" >}}
-##### Example Response
+
+**Example Response**:
+
 {{< code-snippets basename="result.api-dashboard-get-all" >}}
 

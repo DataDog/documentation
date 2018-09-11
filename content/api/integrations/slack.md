@@ -10,7 +10,7 @@ external_redirect: /api/#slack
 Configure your Datadog-Slack integration directly through Datadog API.  
 [Read more about Datadog-Slack integration][1]
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`service_hooks`** [*required*]:  
     Array of service hook objects (the service hook is generated for your slack account in your Slack account administration page). A service hook object is composed by:

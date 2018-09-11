@@ -6,7 +6,8 @@ external_redirect: /api/#mute-a-host
 ---
 
 ## Mettre en sourdine un serveur
-##### ARGUMENTS
+
+**ARGUMENTS**:
 
 * **`end`** [*optionnel*, *défaut*=**None**]:  
     Timestamp POSIX lorsque l'hôte est désactivé. S'il est omis, l'hôte reste muet jusqu'à ce qu'il soit explicitement désactivé.

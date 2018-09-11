@@ -5,8 +5,11 @@ order: 15.2
 external_redirect: /api/#post-time-series-points
 ---
 
-##### Signature
+**Signature**:
+
 `POST https://api.datadoghq.com/api/v1/series`
-##### Example Request
+
+**Example Request**:
+
 {{< code-snippets basename="api-metrics-post" >}}
 

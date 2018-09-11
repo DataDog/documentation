@@ -5,10 +5,15 @@ order: 16.4
 external_redirect: /api/#delete-a-monitor
 ---
 
-##### Signature
-`DELETE https://api.datadoghq.com/api/v1/monitor/:monitor_id`
-##### Example Request
+**Signature**:
+
+`DELETE https://api.datadoghq.com/api/v1/monitor/<MONITOR_ID>`
+
+**Example Request**:
+
 {{< code-snippets basename="api-monitor-delete" >}}
-##### Example Response
+
+**Example Response**:
+
 {{< code-snippets basename="result.api-monitor-delete" >}}
 

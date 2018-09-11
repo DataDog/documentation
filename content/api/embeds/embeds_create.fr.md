@@ -9,11 +9,12 @@ external_redirect: /api/#create-embed
 
 Crée un nouveau graphe intégrable.
 
-Retourne: Un JSON composé des mêmes éléments retournés par GET api/v1/graph/embed/:embed_id. En cas d'échec, la valeur de retour est un JSON contenant un message d'erreur {errors: [messages]}.
+Retourne: Un JSON composé des mêmes éléments retournés par GET api/v1/graph/embed/<EMBED_ID>. En cas d'échec, la valeur de retour est un JSON contenant un message d'erreur {errors: [messages]}.
 
 Note: Si un embed existe déjà pour la même requête dans une organisation donnée, l'embed le plus ancien est renvoyé au lieu de créer un nouvel embed.
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 * **`graph_json`** [*obligatoire*]:  
     La définition du graphique en JSON. Même format que celui disponible dans l'onglet JSON de l'éditeur de graphique dans Datadog.
 * **`timeframe`** [*optionnel*, *défaut*=**1_hour**]:  

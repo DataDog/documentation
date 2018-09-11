@@ -5,9 +5,14 @@ order: 15.6
 external_redirect: /api/#search-metrics
 ---
 
-##### Signature
+**Signature**:
+
 `GET https://api.datadoghq.com/api/v1/search`
-##### Exemple de requête
+
+**Exemple de requête**:
+
 {{< code-snippets basename="api-metrics-search" >}}
-##### Exemple de réponse
+
+**Exemple de réponse**:
+
 {{< code-snippets basename="result.api-metrics-search" >}}

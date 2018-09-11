@@ -9,7 +9,7 @@ external_redirect: /api/#edit-metric-metadata
 L'endpoint des métadonnées des métriques vous permet de modifier les métadonnées sur une métrique spécifique.
 [En apprendre plus sur les différents types supportés][1]
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`type`** [*obligatoire*]:  
     [Type de la métrique][1] tel **gauge** ou **rate**

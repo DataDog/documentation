@@ -7,7 +7,8 @@ external_redirect: /api/#edit-a-comment
 
 ## Edit A Comment
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 * **`message`** [*optional*, *default* = **original message**]:  
     The comment text.
 

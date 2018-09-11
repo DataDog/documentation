@@ -5,10 +5,15 @@ order: 9.4
 external_redirect: /api/#cancel-monitor-downtime-by-scope
 ---
 
-##### Signature
+**Signature**:
+
 `POST https://api.datadoghq.com/api/v1/downtime/cancel/by_scope`
-##### Example Request
+
+**Example Request**:
+
 {{< code-snippets basename="api-monitor-cancel-downtime-by-scope" >}}
-##### Example Response
+
+**Example Response**:
+
 {{< code-snippets basename="result.api-monitor-cancel-downtime-by-scope" >}}
 

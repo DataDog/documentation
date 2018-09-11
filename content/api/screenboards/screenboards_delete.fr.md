@@ -7,6 +7,8 @@ external_redirect: /api/#delete-a-screenboard
 
 ## Supprimer un Screenboard
 Supprime un Screenboard existant.
-##### ARGUMENTS
+
+**ARGUMENTS**:
+
 Cet endpoint ne prend aucun argument JSON.
 

@@ -5,12 +5,15 @@ order: 14.4
 external_redirect: /api/#webhooks
 ---
 
-##### Signature
+**Signature**:
+
 `https://api.datadoghq.com/api/v1/integration/webhooks`
 
-##### Example Request
+**Example Request**:
+
 {{< code-snippets basename="api-integrations-webhooks" >}}
 
-##### Example Response
+**Example Response**:
+
 {{< code-snippets basename="result.api-integrations-webhooks" >}}
 

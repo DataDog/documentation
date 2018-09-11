@@ -5,10 +5,15 @@ order: 18.2
 external_redirect: /api/#update-a-screenboard
 ---
 
-##### Signature
-`PUT https://api.datadoghq.com/api/v1/screen/:board_id`
-##### Example Request
+**Signature**:
+
+`PUT https://api.datadoghq.com/api/v1/screen/<SCREEENBOARD_ID>`
+
+**Example Request**:
+
 {{< code-snippets basename="api-screenboard-update" >}}
-##### Example Response
+
+**Example Response**:
+
 {{< code-snippets basename="result.api-screenboard-update" >}}
 

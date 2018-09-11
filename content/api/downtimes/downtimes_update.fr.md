@@ -6,7 +6,8 @@ external_redirect: /api/#update-monitor-downtime
 ---
 
 ## Mettre à jour le temps d'arrêt d'un monitor
-##### ARGUMENTS
+
+**ARGUMENTS**:
 
 * **`id`** [*obligatoire*]:  
     L'id entier du downtime à mettre à jour

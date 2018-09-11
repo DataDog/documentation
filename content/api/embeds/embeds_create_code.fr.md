@@ -5,9 +5,14 @@ order: 10.2
 external_redirect: /api/#create-embed
 ---
 
-##### Signature
+**Signature**:
+
 `POST https://api.datadoghq.com/api/v1/graph/embed`
-##### Exemple de requête
+
+**Exemple de requête**:
+
 {{< code-snippets basename="api-embeds-create" >}}
-##### Exemple de réponse
+
+**Exemple de réponse**:
+
 {{< code-snippets basename="result.api-embeds-create" >}}

@@ -5,10 +5,15 @@ order: 11.4
 external_redirect: /api/#query-the-event-stream
 ---
 
-##### Signature
+**Signature**:
+
 `GET https://api.datadoghq.com/api/v1/events`
-##### Example Request
+
+**Example Request**:
+
 {{< code-snippets basename="api-events-stream" >}}
-##### Example Response
+
+**Example Response**:
+
 {{< code-snippets basename="result.api-events-stream" >}}
 

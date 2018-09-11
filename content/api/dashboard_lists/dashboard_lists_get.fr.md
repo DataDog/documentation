@@ -9,6 +9,6 @@ external_redirect: /api/#get-a-dashboard-list
 
 Récupère toutes les spécifications d'une Dashboard List.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 Cet endpoint ne prend aucun argument JSON.

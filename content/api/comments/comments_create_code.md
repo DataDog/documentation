@@ -5,10 +5,15 @@ order: 7.1
 external_redirect: /api/#create-a-comment
 ---
 
-##### Signature
+**Signature**:
+
 `POST https://api.datadoghq.com/api/v1/comments`
-##### Example Request
+
+**Example Request**:
+
 {{< code-snippets basename="api-comment-create" >}}
-##### Example Response
+
+**Example Response**:
+
 {{< code-snippets basename="result.api-comment-create" >}}
 

@@ -5,10 +5,15 @@ order: 16.2
 external_redirect: /api/#get-a-monitor-s-details
 ---
 
-##### Signature
-`GET https://api.datadoghq.com/api/v1/monitor/:monitor_id`
-##### Example Request
+**Signature**:
+
+`GET https://api.datadoghq.com/api/v1/monitor/<MONITOR_ID>`
+
+**Example Request**:
+
 {{< code-snippets basename="api-monitor-show" >}}
-##### Example Response
+
+**Example Response**:
+
 {{< code-snippets basename="result.api-monitor-show" >}}
 

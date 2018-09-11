@@ -4,7 +4,9 @@ type: apicontent
 order: 16.11
 ---
 ## Validate a monitor
-##### ARGUMENTS
+
+**ARGUMENTS**:
+
 *   **`type`** [*required*]:  
     The [type of the monitor][1], chosen from:  
 

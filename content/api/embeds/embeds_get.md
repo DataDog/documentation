@@ -20,7 +20,8 @@ Returns: A JSON object with 8 elements:
 
 On failure, the return value is a JSON containing an error message {errors: [messages]}.
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 * **`size`** [*optional*, *default*=**medium**]:  
     The size of the graph. Must be one:
     * **small**, 

@@ -5,10 +5,15 @@ order: 21.1
 external_redirect: /api/#create-a-timeboard
 ---
 
-##### Signature
+**Signature**:
+
 `POST https://api.datadoghq.com/api/v1/dash`
-##### Example Request
+
+**Example Request**:
+
 {{< code-snippets basename="api-dashboard-create" >}}
-##### Example Response
+
+**Example Response**:
+
 {{< code-snippets basename="result.api-dashboard-create" >}}
 

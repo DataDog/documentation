@@ -6,7 +6,8 @@ external_redirect: /api/#get-all-users
 ---
 
 ## Récupérer tous les utilisateurs
-##### ARGUMENTS
+
+**ARGUMENTS**:
 
 Cet endpoint ne prend aucun argument JSON.
 

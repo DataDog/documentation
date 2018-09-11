@@ -5,14 +5,14 @@ order: 8.6
 external_redirect: /api/#get-items-of-a-dashboard-list
 ---
 
-##### Signature
+**Signature**:
 
-`GET https://api.datadoghq.com/api/v1/dashboard/lists/manual/:list_id/dashboards`
+`GET https://api.datadoghq.com/api/v1/dashboard/lists/manual/<LIST_ID>/dashboards`
 
-##### Example Request
+**Example Request**:
 
 {{< code-snippets basename="api-dashboard-list-get-items" >}}
 
-##### Example Response
+**Example Response**:
 
 {{< code-snippets basename="result.api-dashboard-list-get-items" >}}

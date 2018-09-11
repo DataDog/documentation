@@ -5,14 +5,14 @@ order: 8.7
 external_redirect: /api/#add-items-to-a-dashboard-list
 ---
 
-##### Signature
+**Signature**:
 
-`POST https://api.datadoghq.com/api/v1/dashboard/lists/manual/:list_id/dashboards`
+`POST https://api.datadoghq.com/api/v1/dashboard/lists/manual/<LIST_ID>/dashboards`
 
-##### Example Request
+**Example Request**:
 
 {{< code-snippets basename="api-dashboard-list-add-items" >}}
 
-##### Example Response
+**Example Response**:
 
 {{< code-snippets basename="result.api-dashboard-list-add-items" >}}

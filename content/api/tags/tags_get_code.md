@@ -5,10 +5,15 @@ order: 20.1
 external_redirect: /api/#get-tags
 ---
 
-##### Signature
+**Signature**:
+
 `GET https://api.datadoghq.com/api/v1/tags/hosts`
-##### Example Request
+
+**Example Request**:
+
 {{< code-snippets basename="api-tags-get" >}}
-##### Example Response
+
+**Example Response**:
+
 {{< code-snippets basename="result.api-tags-get" >}}
 

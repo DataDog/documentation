@@ -5,10 +5,15 @@ order: 16.91
 external_redirect: /api/#unmute-a-monitor
 ---
 
-##### Signature
-`POST https://api.datadoghq.com/api/v1/monitor/:monitor_id/unmute`
-##### Example Request
+**Signature**:
+
+`POST https://api.datadoghq.com/api/v1/monitor/<MONITOR_ID>/unmute`
+
+**Example Request**:
+
 {{< code-snippets basename="api-monitor-unmute" >}}
-##### Example Response
+
+**Example Response**:
+
 {{< code-snippets basename="result.api-monitor-unmute" >}}
 

@@ -5,10 +5,15 @@ order: 23.4
 external_redirect: /api/#get-usage-across-your-multi-org-account
 ---
 
-##### Signature
+**Signature**:
+
 `GET https://api.datadoghq.com/api/v1/usage/summary`
-##### Example Request
+
+**Example Request**:
+
 {{< code-snippets basename="api-billing-usage-summary" >}}
-##### Example Response
+
+**Example Response**:
+
 {{< code-snippets basename="result.api-billing-usage-summary" >}}
 
