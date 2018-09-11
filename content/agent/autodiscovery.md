@@ -67,6 +67,32 @@ config_providers:
     polling: true
 ```
 
+## Tag extraction
+
+You can extract container and pod labels, as well as environment variables and annotations, as metric tags. If you prefix your tag name with `+`, the tag will only be added to high cardinality metrics.
+
+### Docker tag extraction
+
+```
+docker_labels_as_tags:
+  label_name:                  tag_name
+  high_cardinality_label_name: +tag_name
+docker_env_as_tags:
+  ENVVAR_NAME: tag_name
+```
+
+### Kubernetes tag extraction
+
+```
+kubernetes_pod_labels_as_tags:
+  app:               kube_app
+  pod-template-hash: +kube_pod-template-hash
+
+kubernetes_pod_annotations_as_tags:
+  app:               kube_app
+  pod-template-hash: +kube_pod-template-hash
+```
+
 ## Setting up Check Templates
 
 Each **Template Source** section below shows a different way to configure check templates and their container identifiers.
