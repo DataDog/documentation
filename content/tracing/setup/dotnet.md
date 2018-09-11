@@ -1,61 +1,87 @@
 ---
-title: Tracing .NET Applications (Coming Soon)
+title: Tracing .NET Applications (Beta)
 kind: Documentation
+aliases:
+- /tracing/dotnet
+- /tracing/languages/dotnet
 further_reading:
+- link: "https://github.com/DataDog/dd-trace-csharp"
+  tag: "Github"
+  text: Source code
 - link: "tracing/visualization/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
-- link: "https://goo.gl/forms/SCKOOlHS7tNzyMt93"
-  tag: "Survey"
-  text: Request Beta Access
+- link: "tracing/advanced_usage/"
+  tag: "Advanced Usage"
+  text: "Advanced Usage"
 ---
 
-<div class="alert alert-warning">
-Tracing for .NET is coming soon. The officially supported Beta will launch as early as September 2018. To be notified of the beta launch, fill out the survey below.
-</div>
+## Installation and Getting Started
 
-{{< whatsnext desc="To be notified of the Beta launch, submit this form:">}}
-    {{< nextlink href="https://goo.gl/forms/SCKOOlHS7tNzyMt93" tag="Survey" >}}.NET Beta Access Survey{{< /nextlink >}}
-{{< /whatsnext >}}
+To begin tracing applications written in any language, first [install and configure the Datadog Agent][1].
 
-<br>
+## Automatic Instrumentation
 
-## Planned Automatic Instrumentation for Beta (Coming Soon)
+Automatic instrumentation uses the [Profiling API][2] provided by .NET Framework and .NET Core to modify IL instructions at run time and inject instrumentation code. With zero code changes or configuration, the .NET tracer will automatically instrument all supported libraries out of the box.
 
-Planned support will provide automatic instrumentation for popular frameworks and libraries. See some of these listed below. Don't see your desired frameworks or libraries?
-Let Datadog know more about your needs through [this survey][1].
+To use automatic instrumentation on Windows, download the latest Windows installer from the public [GitHub repository][3]. For Windows services (including web applications running on IIS), rebooting is necessary for these services to pick up the environment variables required by the Profiling API.
+
+Automatic instrumentation will capture:
+* Method execution time
+* Relevant trace data such as URL and status response codes for web requests or SQL query for database access
+* Unhandled exceptions, including stacktrace if available
+* A total count of traces (requests) flowing through the system
+
+## Compatibility
+
+The .NET tracer supports automatic instrumentation on the following .NET runtimes:
+
+| .NET Runtime   | Versions | OS      | Support Type      |
+| :------------- | :------- | :------ | :---------------- |
+| .NET Framework | 4.5+     | Windows |  Fully supported  |
+| .NET Core      | 2.0.x    | Windows |  Fully supported  |
+| .NET Core      | 2.0.x    | Linux   |  Coming soon      |
+| .NET Core      | 2.1.3+   |         |  Coming soon      |
+
+### Integrations
+
+*Note:* Libraries that target .NET Standard 2.0 are fully supported when running on either .NET Framework 4.6.1+ or .NET Core 2.0.x.
 
 #### Web Framework Compatibility
 
-| Framework                    | Versions    | Support Type                           |
-| :---------------             | :---------- | :------------------------------------- |
-| ASP.NET Core MVC<sup>2</sup> | 2.0         | Coming soon (est. September 2018 Beta) |
-| ASP.NET MVC<sup>1</sup>      | 5.x         | Coming soon (est. September 2018 Beta) |
-| ASP.NET Web API<sup>1</sup>  | 2.x         | Coming soon (est. September 2018 Beta) |
+The .NET tracer can instrument the following web frameworks automatically:
 
-<sup>1</sup> Running on .NET Framework 4.5 or above
-<sup>2</sup> Running on .NET Framework 4.6.1 or above, or on .NET Core 2.0 or above
+| Web framework    | Versions | Runtime        | OS      | Support Type      |
+| :--------------- | :------- | :------------- | :------ | :---------------- |
+| ASP.NET MVC      | 5.2.3+   | .NET Framework | Windows | Fully supported   |
+| ASP.NET Core MVC | 2.0.x    | .NET Framework | Windows | Fully supported   |
+| ASP.NET Core MVC | 2.0.x    | .NET Core      | Windows | Fully supported   |
+| ASP.NET Core MVC | 2.0.x    | .NET Core      | Linux   | Coming soon       |
+| ASP.NET Core MVC | 2.1.3+   |                |         | Coming soon       |
 
-Don't see what you're looking for? Let Datadog know more about your needs through [this survey][1].
-
-[1]: https://goo.gl/forms/SCKOOlHS7tNzyMt93
+Don't see your desired web frameworks? We're continually adding additional support, [check with the Datadog team][5] to see if we can help.
 
 #### Data Store Compatibility
 
-| Data Store                      | Versions    | Support Type                           |
-| :------------------------------ | :---------- | :------------------------------------- |
-| Ado.Net / System.Data.SqlClient | Coming soon | Coming soon (est. September 2018 Beta) |
-| Elasticsearch.net / NEST        | Coming soon | Coming soon (est. September 2018 Beta) |
-| MongoDB.Driver                  | Coming soon | Coming soon (est. September 2018 Beta) |
-| Postgres (Npgsql)               | Coming soon | Coming soon (est. September 2018 Beta) |
-| StackExchange.Redis             | Coming soon | Coming soon (est. September 2018 Beta) |
+The .NET tracer's ability to automatically instrument data store access depends on the client libraries used:
 
-Don't see what you're looking for? Let Datadog know more about your needs through [this survey][1].
+| Data store    | Client library or NuGet package     | Versions | Support type    |
+| :---------    | :---------------------------------- | :------- | :-------------- |
+| MS SQL Server | Built-in .NET Framework `SqlClient` |          | Fully supported |
+| MS SQL Server | `System.Data.SqlClient`             | 4.1+     | Fully supported |
+| Redis         | `StackExchange.Redis`               |          | Coming soon     |
+| Elasticsearch | `NEST` / `Elasticsearch.Net`        |          | Coming soon     |
+| MongoDB       | `MongoDB.Driver`                    |          | Coming soon     |
+| PostgreSQL    | `Npgsql`                            |          | Coming soon     |
 
-[1]: https://goo.gl/forms/SCKOOlHS7tNzyMt93
+Don't see your desired datastores? We're continually adding additional support, [check with the Datadog team][5] to see if we can help.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://goo.gl/forms/SCKOOlHS7tNzyMt93
+[1]: https://docs.datadoghq.com/tracing/setup
+[2]: https://docs.microsoft.com/en-us/dotnet/framework/unmanaged-api/profiling/
+[3]: https://github.com/DataDog/dd-trace-csharp/releases
+[4]: https://www.nuget.org/packages/Datadog.Trace/
+[5]: /help
