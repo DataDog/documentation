@@ -6,7 +6,7 @@ external_redirect: /api/#unmute-a-host
 ---
 
 ##### Signature
-`POST https://api.datadoghq.com/api/v1/host/:hostname/unmute`
+`POST https://api.datadoghq.com/api/v1/host/<HOSTNAME>/unmute`
 ##### Example Request
 {{< code-snippets basename="api-host-unmute" >}}
 ##### Example Response

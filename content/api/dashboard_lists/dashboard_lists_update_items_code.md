@@ -7,7 +7,7 @@ external_redirect: /api/#update-items-of-a-dashboard-list
 
 ##### Signature
 
-`PUT https://api.datadoghq.com/api/v1/dashboard/lists/manual/:list_id/dashboards`
+`PUT https://api.datadoghq.com/api/v1/dashboard/lists/manual/<LIST_ID>/dashboards`
 
 ##### Example Request
 
