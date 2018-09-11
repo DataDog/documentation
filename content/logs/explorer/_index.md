@@ -23,18 +23,18 @@ The Logs Explorer is your home base for troubleshooting and exploration:
 In this view you can: 
 
 * [Build a context to explore your logs](#context).
-* [Visualize your logs as a filtered logstream or a log analytic](#visualization).
+* [Visualize your logs as a filtered Logstream or Log Analytics](#visualization).
 * [Setup your log explorer view by creating facets and measure from your logs](#setup).
 * [Export the content of your Log explorer view to a monitor, a dashboard, or into a CSV file.](#export)
 
 ## Context
 
-Build up a context to explore your logs in your log explorer view first by selecting the proper Timerange then by using the search bar to filter your logstream and log analytic.
+Build up a context to explore your logs in your log explorer view first by selecting the proper time range then by using the search bar to filter your Logstream and Log Analytics.
 
 ### Time Range
 
-The Time Range allows you to display logs in the logstream or a log analytic within a given time period. 
-It appears directly under the search bar as a timeline. The timeline can be displayed or wrapped up with the **Show timeline** check box in the logstream option panel.
+The time range feature allows you to display logs in the Logstream or Log Analytics within a given time period. 
+It appears directly under the search bar as a timeline. The timeline can be displayed or wrapped up with the **Show timeline** check box in the Logstream option panel.
 
 Quickly change the time range by selecting a preset range from the dropdown:
 
@@ -42,15 +42,15 @@ Quickly change the time range by selecting a preset range from the dropdown:
 
 ### Search 
 
-Use facets, measures, tags, or even [free text search][1] to filter your log stream and log analytics with a dedicated context. The search bar and url automatically reflect your selections.
+Use facets, measures, tags, or even [free text search][1] to filter your Logstream and Log Analytics with dedicated context. The search bar and url automatically reflect your selections.
 
-Follow the [guide to search your logs][1] for a detailed explanation of all the Log Explorer search features including use of wildcards and queries of numerical values.
+Follow the [guide to search your logs][1] for a detailed explanation of all the Log Explorer search features, including use of wildcards and queries of numerical values.
 
 {{< img src="logs/explorer/search_your_logs.gif" alt="Search your logs" responsive="true" >}}
 
 ### Saved views
 
-Use Saved Views to automatically configure your Log Explorer with a preselected set of facets, measures, search, Timerange, and visualization.
+Use Saved Views to automatically configure your Log Explorer with a preselected set of facets, measures, searches, time ranges, and visualizations.
 
 Check the dedicated [saved views documentation][4] to learn more.
 
@@ -75,22 +75,21 @@ Click on any log line to see more details about it:
 
 {{< img src="logs/explorer/log_in_log_list.png" alt="Log in Logstream" responsive="true" style="width:80%;">}}
 
-Click on `View in context` to see log lines dated just before and after a selected log - even if they don't match your filter.
+Click on `View in context` to see log lines dated just before and after a selected log—even if they don't match your filter.
 
 {{< img src="logs/explorer/view-in-context.gif" alt="View in context" responsive="true" >}}
 
-The context is different according to the situation as we use the `Hostname`, `Service`, `filename` or `container_id` attributes, along with tags to make sure we find the perfect context for your logs.
+The context is different according to the situation as we use the `Hostname`, `Service`, `filename`, or `container_id` attributes, along with tags, to make sure we find the perfect context for your logs.
 
-
-Click the **Columns** button and select any facets you want to see to add more log details to your logstream: 
+Click the **Columns** button and select any facets you want to see to add more log details to your Logstream: 
 
 {{< img src="logs/explorer/log_list_with_columns.png" alt="Logstream with columns" responsive="true" style="width:80%;">}}
 
-Choose to display one, three, or ten lines from your logs `message` attributes in your logstream:
+Choose to display one, three, or ten lines from your logs `message` attributes in your Logstream:
 
 {{< img src="logs/explorer/multi_line_display.png" alt="Multi-line display" responsive="true" style="width:30%;">}}
 
-**Note**:  If present, `error.stack` attribute is displayed in priority as it should be used for stack traces.
+**Note**:  If present, the `error.stack` attribute is displayed in priority as it should be used for stack traces.
 Remap any stack-trace attribute to this specific attribute with [the attribute remapper Processor][1].
 
 [1]: /logs/explorer/search
@@ -99,9 +98,9 @@ Remap any stack-trace attribute to this specific attribute with [the attribute r
 {{% /tab %}}
 {{% tab "Log Analytics" %}}
 
-After having gone through [Datadog processing][3] your logs are parsed and you have [facets](#facets) and [Measure](#measures) over the important attributes, you can graph log queries and see maximums, averages, percentiles, unique counts, and more.
+After having gone through [Datadog processing][3], log parsing, having [facets](#facets) and [measures](#measures) over the important attributes, you can graph log queries and see maximums, averages, percentiles, unique counts, and more.
 
-Follow the [log graphing guide][5] to learn more about all the graphing option.
+Follow the [log graphing guide][5] to learn more about all the graphing options.
 
 {{< img src="logs/explorer/log_analytics.png" alt="Log Analytics" responsive="true" style="width:70%;">}}
 
@@ -113,14 +112,14 @@ Follow the [log graphing guide][5] to learn more about all the graphing option.
 
 ## Setup
 
-After being processed with the help of pipelines and processors, your logs attributes can be indexed as a Facet or a Measure in order to be accessible for your [context](#context) creation and [log analytics][2].
+After being processed with the help of pipelines and processors, your logs attributes can be indexed as facets or measures in order to be accessible for your [context](#context) creation and [Log Analytics][2].
 
-Note: To leverage the most out of your Log explorer view make sure your logs attribute follow [Datadog attribute naming convention][5].
+Note: To leverage the most out of your Log explorer view, make sure your logs attributes follow [Datadog attribute naming convention][5].
 
 {{< tabs >}}
 {{% tab "Facets" %}}
 
-A facet displays all the distinct members of an attribute or a tag as well as provides some basic analytics such as the amount of logs represented. This is also a switch to easily filter your data.
+A facet displays all the distinct members of an attribute or a tag as well as provides some basic analytics, such as the number of logs represented. This is also a switch to easily filter your data.
 
 Facets allow you to pivot or filter your datasets based on a given attribute. Examples facets may include users, services, etc...
 
@@ -128,7 +127,7 @@ Facets allow you to pivot or filter your datasets based on a given attribute. Ex
 
 **Create a Facet**:
 
-To start using an attribute as a Facet or in the search, click on it and add it as a Facet:
+To start using an attribute as a facet or in the search, click on it and add it as a facet:
 
 {{< img src="logs/explorer/create_facet.png" style="width:50%;" alt="Create Facet" responsive="true" style="width:30%;">}}
 
@@ -142,7 +141,7 @@ Once this is done, the value of this attribute is stored **for all new logs** an
 
 {{% tab "Measures" %}}
 
-A Measure is a attribute with numerical value contained in your logs. Think of it as a "log metric".
+A measure is a attribute with a numerical value contained in your logs. Think of it as a "log metric".
 
 **Create a Measure**:
 
@@ -154,7 +153,7 @@ Once this is done, the value of this attribute is stored **for all new logs** an
 
 **Select the Measure Unit**:
 
-All measure have their own unit that is then used for display in the Log Explorer columns, Log stream widgets in dashboards, and in the Log Analytics.
+Each measure has its own unit that is then used for display in the Log Explorer columns, Log stream widgets in dashboards, and Log Analytics.
 
 {{< img src="logs/explorer/edit_a_measure.png" alt="Edit a measure" responsive="true" style="width:50%;">}}
 
@@ -176,8 +175,8 @@ Export your current Log Visualization with the *Export* functionality:
 | Button                | Description                                                                                                          |
 | ----                  | -----                                                                                                                |
 | Export to Monitor     | Export the query applied to your Logstream in order to create the log monitor query for a new [log monitor][7]       |
-| Export to Screenboard | Export your logstream as a widget to a [Screenboard][9]. *This functionality is not available yet.*                  |
-| Export to CSV         | Export your current logstream view with its selected column into a CSV file. You can export up to 5000 logs at once. |
+| Export to Screenboard | Export your Logstream as a widget to a [Screenboard][9]. *This functionality is not available yet.*                  |
+| Export to CSV         | Export your current Logstream view with its selected column into a CSV file. You can export up to 5000 logs at once. |
 
 [7]: /monitors/monitor_types/log
 [8]: https://app.datadoghq.com/logs
@@ -191,7 +190,7 @@ Export your current Log Visualization with the *Export* functionality:
 | Button              | Description                                                                                                                                                                  |
 | ----                | -----                                                                                                                                                                        |
 | Export to Monitor   | Export the query applied to your Log Analytics in order to create the log monitor query for a new [log monitor][7] *This functionality is not available yet.*                |
-| Export to Timeboard | Export your logstream as a widget to a [Timeboard][9]. **This functionality is still in beta, [contact the Datadog support team][10] to activate it for your organization.** |
+| Export to Timeboard | Export your Logstream as a widget to a [Timeboard][9]. **This functionality is still in beta, [contact the Datadog support team][10] to activate it for your organization.** |
 
 [7]: /monitors/monitor_types/log
 [9]: /graphing/dashboards/timeboard/
