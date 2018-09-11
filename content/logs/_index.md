@@ -78,10 +78,10 @@ Here are some key attributes you should pay attention to when setting up your pr
 | :-------    | :------                                                                                                                                                                                               |
 | `host`    | The name of the originating host as defined in metrics. We automatically retrieve corresponding host tags from the matching host in Datadog and apply them to your logs. The Agent sets this value automatically.                          |
 | `source`  | This corresponds to the integration name: the technology from which the log originated. When it matches an integration name, Datadog automatically installs the corresponding parsers and facets. For example: nginx, postgresql, etc.|
-| `service` | This is the name of the application or service generating the log events. It is used to switch from Logs to APM so make sure you define the same value when you use both products.                       |
-| `message` | By default, Datadog ingests the value of the `message` attribute as the body of the log entry. That value is then highlighted and displayed in the logstream, where it is indexed for full text search.               |
+| `service` | The name of the application or service generating the log events. It is used to switch from Logs to APM, so make sure you define the same value when you use both products.                       |
+| `message` | By default, Datadog ingests the value of the `message` attribute as the body of the log entry. That value is then highlighted and displayed in the Logstream, where it is indexed for full text search.               |
 
-Your logs are now collected and centralized into the [Log Explorer][17] view, but this is just the beginning: now you can search, enrich, and alert on your logs.
+Your logs are collected and centralized into the [Log Explorer][17] view. You can also search, enrich, and alert on your logs.
 
 {{< img src="logs/log_explorer_view.png" alt="Log Explorer view" responsive="true" >}}
 
