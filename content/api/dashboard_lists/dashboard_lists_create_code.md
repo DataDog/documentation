@@ -5,14 +5,14 @@ order: 8.3
 external_redirect: /api/#create-a-dashboard-list
 ---
 
-##### Signature
+**Signature**:
 
 `POST https://api.datadoghq.com/api/v1/dashboard/lists/manual`
 
-##### Example Request
+**Example Request**:
 
 {{< code-snippets basename="api-dashboard-list-create" >}}
 
-##### Example Response
+**Example Response**:
 
 {{< code-snippets basename="result.api-dashboard-list-create" >}}

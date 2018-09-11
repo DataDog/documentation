@@ -5,10 +5,15 @@ order: 17.4
 external_redirect: /api/#upload-idp-metadata
 ---
 
-##### Signature
+**Signature**:
+
 `POST https://api.datadoghq.com/api/v1/org/:public_id/idp_metadata`
-##### Example Request
+
+**Example Request**:
+
 {{< code-snippets basename="api-org-update" >}}
-##### Example Response
+
+**Example Response**:
+
 {{< code-snippets basename="result.api-org-update" >}}
 

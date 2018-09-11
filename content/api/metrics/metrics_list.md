@@ -8,7 +8,8 @@ external_redirect: /api/#get-list-of-active-metrics
 ## Get list of active metrics
 Get the list of actively reporting metrics from a given time until now. This endpoint is not available in the Python and Ruby libraries.
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 * **`from`** [*required*]:  
     Seconds since the unix epoch
 

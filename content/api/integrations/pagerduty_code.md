@@ -5,11 +5,15 @@ order: 14.2
 external_redirect: /api/#pagerduty
 ---
 
-##### Signature
+**Signature**:
+
 `https://api.datadoghq.com/api/v1/integration/pagerduty`
 
-##### Example Request
+**Example Request**:
+
 {{< code-snippets basename="api-integrations-pagerduty" >}}
-##### Example Response
+
+**Example Response**:
+
 {{< code-snippets basename="result.api-integrations-pagerduty" >}}
 

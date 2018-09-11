@@ -6,7 +6,8 @@ external_redirect: /api/#send-services
 ---
 
 ## Send services
-##### Arguments
+
+**ARGUMENTS**:
 
 *   **`service`** - _Required._ The service name as a dictionary key, [Learn more][1].
 *   **`app`** - _Required._ The name of the application.

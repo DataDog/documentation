@@ -5,10 +5,15 @@ order: 12.1
 external_redirect: /api/#graph-snapshot
 ---
 
-##### Signature
+**Signature**:
+
 `GET https://api.datadoghq.com/api/v1/graph/snapshot`
-##### Exemple de requête
+
+**Exemple de requête**:
+
 {{< code-snippets basename="api-graph-snapshot" >}}
-##### Exemple de réponse
+
+**Exemple de réponse**:
+
 {{< code-snippets basename="result.api-graph-snapshot" >}}
 

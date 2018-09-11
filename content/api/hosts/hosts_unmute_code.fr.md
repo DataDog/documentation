@@ -5,9 +5,14 @@ order: 13.4
 external_redirect: /api/#unmute-a-host
 ---
 
-##### Signature
+**Signature**:
+
 `POST https://api.datadoghq.com/api/v1/host/:hostname/unmute`
-##### Exemple de requête
+
+**Exemple de requête**:
+
 {{< code-snippets basename="api-host-unmute" >}}
-##### Exemple de réponse
+
+**Exemple de réponse**:
+
 {{< code-snippets basename="result.api-host-unmute" >}}

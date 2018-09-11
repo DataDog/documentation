@@ -8,7 +8,8 @@ external_redirect: /api/#post-an-event
 ## Envoyer un événement
 Ce endpoint vous permet de publier des événements dans le flux d'événement dans Datadog. Taggez-les, définissez la priorité et comment les regrouper avec d'autres événements.
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 * **`title`** [*obligatoire*]:  
     Le titre de l'événement *Limité à 100 caractères.*
     Utilisez `msg_title` avec [La bibliothèque Datadog Ruby][1].

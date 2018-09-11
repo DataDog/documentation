@@ -5,11 +5,15 @@ order: 14.3
 external_redirect: /api/#slack
 ---
 
-##### Signature
+**Signature**:
+
 `https://api.datadoghq.com/api/v1/integration/slack`
 
-##### Example Request
+**Example Request**:
+
 {{< code-snippets basename="api-integrations-slack" >}}
-##### Example Response
+
+**Example Response**:
+
 {{< code-snippets basename="result.api-integrations-slack" >}}
 

@@ -5,10 +5,15 @@ order: 7.3
 external_redirect: /api/#delete-a-comment
 ---
 
-##### Signature
+**Signature**:
+
 `DELETE https://api.datadoghq.com/api/v1/comments/:comment_id`
-##### Exemple de requête
+
+**Exemple de requête**:
+
 {{< code-snippets basename="api-comment-delete" >}}
-##### Exemple de réponse
+
+**Exemple de réponse**:
+
 *Cet endpoint ne renvoie aucun objet JSON en cas de requête réussie.*
 

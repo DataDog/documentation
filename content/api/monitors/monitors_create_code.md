@@ -5,10 +5,15 @@ order: 16.1
 external_redirect: /api/#create-a-monitor
 ---
 
-##### Signature
+**Signature**:
+
 `POST https://api.datadoghq.com/api/v1/monitor`
-##### Example Request
+
+**Example Request**:
+
 {{< code-snippets basename="api-monitor-create" >}}
-##### Example Response
+
+**Example Response**:
+
 {{< code-snippets basename="result.api-monitor-create" >}}
 

@@ -11,7 +11,7 @@ Override a Screenboard configuration in Datadog.
 
 **Note**: You must send the entire original Screenboard configuration along with your updates otherwise the original widgets are erased.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`board_title`** [*required*]:
     The name of the dashboard.

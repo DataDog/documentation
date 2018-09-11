@@ -8,7 +8,8 @@ external_redirect: /api/#get-host-tags
 ## Récupérer les tags d'un hôte
 Renvoie la liste des tags qui s'appliquent à un hôte donné.
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 * **`source`** [*optionnel*, *défaut*=**None**]:  
     Affiche uniquement les tags d'une source particulière Sinon, montre tous les tags.
     [Liste des valeurs de l'attribut source de l'API][1].

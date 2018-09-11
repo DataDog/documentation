@@ -7,7 +7,7 @@ external_redirect: /api/#update-a-timeboard
 
 ## Mettre à jour un Timeboard
 
-##### Arguments
+**ARGUMENTS**:
 
 * **`title`** [*obligatoire*]:  
     Le nom du dashboard.

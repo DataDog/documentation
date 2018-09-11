@@ -5,10 +5,15 @@ order: 16.6
 external_redirect: /api/#resolve-monitor
 ---
 
-##### Signature
+**Signature**:
+
 `POST https://app.datadoghq.com/monitor/bulk_resolve`
-##### Example Request
+
+**Example Request**:
+
 {{< code-snippets basename="api-monitor-bulk-resolve" >}}
-##### Example Response
+
+**Example Response**:
+
 {{< code-snippets basename="result.api-monitor-bulk-resolve" >}}
 

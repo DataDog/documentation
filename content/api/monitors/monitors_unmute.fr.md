@@ -7,7 +7,8 @@ external_redirect: /api/#unmute-a-monitor
 
 ## Activer un monitor
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 * **`scope`** [*optionnel*, *défaut*=**None**]:  
     Le context auquel appliquer le silence:
     Par exemple, si votre alerte est groupée par {host}, vous pouvez ignorer 'host:app1'

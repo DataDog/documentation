@@ -10,7 +10,7 @@ external_redirect: /api/#slack
 Configurer votre intégration Datadog-Slack directement via l'API Datadog.  
 [En apprendre plus sur l'intégration Datadog-Slack][1]
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`service_hooks`** [*obligatoire*]:  
     Tableau d'objets de hook de service (le hook de service est généré pour votre compte dans votre page d'administration Slack). Un objet de hook de service est composé de :
@@ -20,8 +20,6 @@ Configurer votre intégration Datadog-Slack directement via l'API Datadog.
 
     * **`url`** [*obligatoire*]:  
         Votre URL Slack Service Hook.
-
-
 
 * **`channels`** [*obligatoire*]:  
     Tableau d'objets des canaux Slack à publier dedans. Un objet de canal Slack est composé de :

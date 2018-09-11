@@ -6,7 +6,8 @@ external_redirect: /api/#create-a-timeboard
 ---
 
 ## Create a Timeboard
-##### Arguments
+
+**ARGUMENTS**:
 
 * **`title`** [*required*]:  
     The name of the dashboard.

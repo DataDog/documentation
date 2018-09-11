@@ -8,7 +8,8 @@ external_redirect: /api/#query-time-series-points
 ## Requêter les points de séries temporelles
 Cet endpoint vous permet de requêter des métriques de n'importe quelle période.
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 * **`from`** [*obligatoire*]:  
     Secondes depuis EPOCH unix
 * **`to`** [*obligatoire*]:  

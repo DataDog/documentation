@@ -5,10 +5,15 @@ order: 21.2
 external_redirect: /api/#update-a-timeboard
 ---
 
-##### Signature
+**Signature**:
+
 `PUT https://api.datadoghq.com/api/v1/dash/:dash_id`
-##### Example Request
+
+**Example Request**:
+
 {{< code-snippets basename="api-dashboard-update" >}}
-##### Example Response
+
+**Example Response**:
+
 {{< code-snippets basename="result.api-dashboard-update" >}}
 

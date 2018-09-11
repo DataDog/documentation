@@ -8,7 +8,8 @@ external_redirect: /api/#disable-user
 ## Désactiver un utilisateur
 Ne peut être utilisé qu'avec des clés d'application disponibles pour les administrateurs.
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 * **`id`** [*obligatoire*]:  
     Le handle de l'utilisateur.
 

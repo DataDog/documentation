@@ -6,7 +6,9 @@ external_redirect: /api/#cancel-monitor-downtime-by-scope
 ---
 
 ## Cancel Monitor Downtimes By Scope
-##### ARGUMENTS
+
+**ARGUMENTS**:
+
 * **`scope`** [*required*]:  
     Cancel all downtimes with the given scope(s), e.g.:
 

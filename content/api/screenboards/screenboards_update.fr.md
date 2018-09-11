@@ -11,7 +11,7 @@ Remplacer une configuration de Screenboard dans Datadog.
 
 **Note**: Vous devez envoyer la configuration originale de Screenboard avec vos mises à jour sinon les widgets originaux sont effacés.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`board_title`** [*obligatoire*]:  
     Le nom du dashboard.

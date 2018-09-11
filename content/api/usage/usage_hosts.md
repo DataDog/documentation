@@ -9,13 +9,14 @@ external_redirect: /api/#get-hourly-usage-for-hosts-and-containers
 
 Get Hourly Usage For Hosts and Containers.
 
-##### Arguments
+**ARGUMENTS**:
+
 * **`start_hr`** [*required*]:  
     datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour
 * **`end_hr`** [*optional*, *default*=**1d+start_hr**]:  
     datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour
 
-##### Response
+**Response**:
 
 * **`container_count`**:  
     Shows the total number of containers reporting via the Docker integration during the hour.

@@ -8,7 +8,8 @@ external_redirect: /api/#create-a-comment
 ## Créer un commentaire
 Les commentaires sont essentiellement des cas spéciaux d'évènements qui s'apparaissent dans le [flux d'évènements][1]. Ils peuvent entamer un nouveau fil de discussion ou, facultativement, répondre dans un autre fil.
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 * **`message`** [*obligatoire*]:  
   Le texte du commentaire
 

@@ -7,7 +7,8 @@ external_redirect: /api/#mute-a-monitor
 
 ## Désactiver un monitor
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 * **`scope`** [*optionnel*, *défaut*=**None**]:  
     Le context auquel appliquer le silence, ex. **role:db**.
 * **`end`** [*optionnel*, *défaut*=**None**]:  

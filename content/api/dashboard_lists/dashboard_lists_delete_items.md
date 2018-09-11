@@ -9,7 +9,7 @@ external_redirect: /api/#delete-items-from-a-dashboard-list
 
 Delete dashboards from an existing dashboard list.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 *   **`dashboards`** [*required*]:
     A list of dashboards to remove from the list.

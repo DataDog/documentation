@@ -9,6 +9,6 @@ external_redirect: /api/#get-items-of-a-dashboard-list
 
 Fetch the dashboard list's dashboard definitions.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 This end point takes no JSON arguments.

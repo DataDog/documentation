@@ -8,7 +8,7 @@ external_redirect: /api/#search-hosts
 ## Search hosts
 Cet endpoit permet de rechercher les hôtes par nom, alias ou tag. Les hôtes actifs au cours des 3 dernières heures sont inclus. Les résultats sont paginés avec un maximum de 100 résultats à chaque fois.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`filter`** [*optionnel*, *défaut*=**None**]:  
     Texte de requête pour filtrer les résultats de la recherche.

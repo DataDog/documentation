@@ -26,7 +26,7 @@ et chaque span est une dictionnaire avec un `trace_id`, `span_id`, `resource`…
 
 **n.b.** : Chaque span dans une trace devrait utiliser les mêmes trace_id.
 
-##### Arguments
+**ARGUMENTS**:
 
 *   **`trace_id`** - _Obligatoire_  Un identifiant unique en nombre entier (64-bits non signé) de la trace contenant cette span.
 *   **`span_id`** - _obligatoire._ L'ID entier de la span (64 bits non signé).

@@ -6,7 +6,9 @@ external_redirect: /api/#edit-a-monitor
 ---
 
 ## Modifier un monitor
-##### ARGUMENTS
+
+**ARGUMENTS**:
+
 * **`query`** [*obligatoire*]:  
   La requête de la métrique que l'on veut monitorer.
 * **`name`** [*obligatoire*]:

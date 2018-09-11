@@ -9,7 +9,7 @@ external_redirect: /api/#share-a-screenboard
 
 Partage un Screenboard existant avec un URL public.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 Cet endpoint ne prend aucun argument JSON.
 

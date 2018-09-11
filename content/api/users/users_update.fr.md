@@ -8,7 +8,8 @@ external_redirect: /api/#update-user
 ## Mettre à jour un utilisateur
 Ne peut être utilisé qu'avec des clés d'application disponibles pour les administrateurs.
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 * **`id`** [*obligatoire*]:  
     Le handle de l'utilisateur.
 * **`name`** [*optionnel*, *défaut*=**None**]:  

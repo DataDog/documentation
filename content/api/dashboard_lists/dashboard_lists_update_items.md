@@ -9,7 +9,7 @@ external_redirect: /api/#update-items-of-a-dashboard-list
 
 Update dashboards of an existing dashboard list.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 *   **`dashboards`** [*required*]:
     The new list of dashboards for the dashboard list.

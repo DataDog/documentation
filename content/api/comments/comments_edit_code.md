@@ -5,10 +5,15 @@ order: 7.2
 external_redirect: /api/#edit-a-comment
 ---
 
-##### Signature
+**Signature**:
+
 `PUT https://api.datadoghq.com/api/v1/comments/:comment_id`
-##### Example Request
+
+**Example Request**:
+
 {{< code-snippets basename="api-comment-edit" >}}
-##### Example Response
+
+**Example Response**:
+
 {{< code-snippets basename="result.api-comment-edit" >}}
 

@@ -5,9 +5,14 @@ order: 13.2
 external_redirect: /api/#host-totals
 ---
 
-##### Signature
+**Signature**:
+
 `GET https://api.datadoghq.com/api/v1/hosts/totals`
-##### Exemple de requête
+
+**Exemple de requête**:
+
 {{< code-snippets basename="api-hosts-totals" >}}
-##### Exemple de réponse
+
+**Exemple de réponse**:
+
 {{< code-snippets basename="result.api-hosts-totals" >}}

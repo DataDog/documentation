@@ -9,7 +9,7 @@ external_redirect: /api/#get-all-screenboards
 
 Fetch all of your Screenboards' definitions.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 This end point takes no JSON arguments.
 

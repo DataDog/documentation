@@ -5,10 +5,15 @@ order: 23.2
 external_redirect: /api/#get-hourly-usage-for-custom-metrics
 ---
 
-##### Signature
+**Signature**:
+
 `GET https://api.datadoghq.com/api/v1/usage/timeseries`
-##### Example Request
+
+**Example Request**:
+
 {{< code-snippets basename="api-billing-usage-timeseries" >}}
-##### Example Response
+
+**Example Response**:
+
 {{< code-snippets basename="result.api-billing-usage-timeseries" >}}
 

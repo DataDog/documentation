@@ -10,7 +10,7 @@ external_redirect: /api/#aws
 Configurer votre intégration Datadog-AWS directement via l'API Datadog.  
 [En apprendre plus sur l'intégration Datadog-AWS][1]
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`account_id`** [*obligatoire*]:  
     Votre identifiant de compte AWS sans tirets.

@@ -5,10 +5,15 @@ order: 11.1
 external_redirect: /api/#post-an-event
 ---
 
-##### Signature
+**Signature**:
+
 `POST https://api.datadoghq.com/api/v1/events`
-##### Example Request
+
+**Example Request**:
+
 {{< code-snippets basename="api-events-post" >}}
-##### Example Response
+
+**Example Response**:
+
 {{< code-snippets basename="result.api-events-post" >}}
 

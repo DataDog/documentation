@@ -5,10 +5,15 @@ order: 18.5
 external_redirect: /api/#get-all-screenboards
 ---
 
-##### Signature
+**Signature**:
+
 `GET https://api.datadoghq.com/api/v1/screen`
-##### Example Request
+
+**Example Request**:
+
 {{< code-snippets basename="api-screenboard-get-all" >}}
-##### Example Response
+
+**Example Response**:
+
 {{< code-snippets basename="result.api-screenboard-get-all" >}}
 

@@ -4,10 +4,15 @@ type: apicode
 order: 16.11
 ---
 
-##### Signature
+**Signature**:
+
 `POST https://api.datadoghq.com/api/v1/monitor`
-##### Example Request
+
+**Example Request**:
+
 {{< code-snippets basename="api-monitor-validate" >}}
-##### Example Response
+
+**Example Response**:
+
 {{< code-snippets basename="result.api-monitor-validate" >}}
 

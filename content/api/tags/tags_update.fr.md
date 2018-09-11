@@ -8,7 +8,8 @@ external_redirect: /api/#update-host-tags
 ## Mettre à jour les tags d'un hôte
 Cet endpoint vous permet de mettre à jour les tags d'un hôte donné.
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 * **`tags`** [*obligatoire*]:  
     Une liste de tags
 * **`source`** [*optionnel*, *défaut*=**users**]:  

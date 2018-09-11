@@ -9,7 +9,7 @@ external_redirect: /api/#revoke-a-shared-a-screenboard
 
 Révoque un Screenboard qui est actuellement partagé.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 Cet endpoint ne prend aucun argument JSON.
 

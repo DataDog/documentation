@@ -5,10 +5,15 @@ order: 24.1
 external_redirect: /api/#create-user
 ---
 
-##### Signature
+**Signature**:
+
 `POST https://api.datadoghq.com/api/v1/user`
-##### Example Request
+
+**Example Request**:
+
 {{< code-snippets basename="api-user-create" >}}
-##### Example Response
+
+**Example Response**:
+
 {{< code-snippets basename="result.api-user-create" >}}
 

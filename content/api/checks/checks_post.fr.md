@@ -7,7 +7,7 @@ external_redirect: /api/#post-a-check-run
 
 ## Envoyer le résultat d'un check
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`check`** *[obligatoire]*:  
     Le texte du message
@@ -21,7 +21,6 @@ external_redirect: /api/#post-a-check-run
     * 1 : Warning
     * 2 : CRITICAL
     * 3 : UNKNOWN
-
 
 * **`timestamp`** *[optionnel]*:  
     Timestamp POSIX de l'événement.

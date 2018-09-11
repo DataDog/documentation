@@ -5,10 +5,15 @@ order: 17.3
 external_redirect: /api/#update-organization
 ---
 
-##### Signature
+**Signature**:
+
 `PUT https://api.datadoghq.com/api/v1/org/:public_id`
-##### Exemple de requête
+
+**Exemple de requête**:
+
 {{< code-snippets basename="api-org-update" >}}
-##### Exemple de réponse
+
+**Exemple de réponse**:
+
 {{< code-snippets basename="result.api-org-update" >}}
 

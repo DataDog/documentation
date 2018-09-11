@@ -5,9 +5,14 @@ order: 13.3
 external_redirect: /api/#mute-a-host
 ---
 
-##### Signature
+**Signature**:
+
 `POST https://api.datadoghq.com/api/v1/host/:hostname/mute`
-##### Exemple de requête
+
+**Exemple de requête**:
+
 {{< code-snippets basename="api-host-mute" >}}
-##### Exemple de réponse
+
+**Exemple de réponse**:
+
 {{< code-snippets basename="result.api-host-mute" >}}

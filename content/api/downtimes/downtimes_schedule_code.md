@@ -5,10 +5,15 @@ order: 9.1
 external_redirect: /api/#schedule-monitor-downtime
 ---
 
-##### Signature
+**Signature**:
+
 `POST https://api.datadoghq.com/api/v1/downtime`
-##### Example Request
+
+**Example Request**:
+
 {{< code-snippets basename="api-monitor-schedule-downtime" >}}
-##### Example Response
+
+**Example Response**:
+
 {{< code-snippets basename="result.api-monitor-schedule-downtime" >}}
 

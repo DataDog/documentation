@@ -10,7 +10,7 @@ external_redirect: /api/#webhooks
 Configure your Datadog-Webhooks integration directly through Datadog API.  
 [Read more about Datadog-Webhooks integration][1]
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`hooks`** [*required*]:  
     Array of Webhook objects. A Webhook object is composed by:

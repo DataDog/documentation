@@ -6,7 +6,9 @@ external_redirect: /api/#cancel-monitor-downtime
 ---
 
 ## Annuler le downtime d'un monitor
-##### ARGUMENTS
+
+**ARGUMENTS**:
+
 * **`id`** [*obligatoire*]:  
     L'id entier du downtime à annuler
 

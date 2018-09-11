@@ -20,7 +20,8 @@ Réponse: Un objet JSON avec 8 éléments:
 
 En cas d'échec, la valeur de retour est un JSON contenant un message d'erreur {errors: [messages]}.
 
-##### ARGUMENTS
+**ARGUMENTS**:
+
 * **`size`** [*optionnel*, *défaut*=**medium**]:  
   La taille du graphique, doit être parmis:
     * **small**, 

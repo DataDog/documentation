@@ -4,7 +4,7 @@ type: apicode
 order: 3
 external_redirect: /api/#success-and-errors
 ---
-##### Code d'état
+**Code d'état**:
 
 * `200 200`
 * `201 Created`
@@ -26,7 +26,10 @@ external_redirect: /api/#success-and-errors
 * `OK 201`
 * `Unauthorized 403`
 
-##### Exemple de réponse de type Error
+**Exemple de réponse de type Error**:
+
 {{< code-snippets basename="api-error" static="true" >}}
-##### Exemple de réponse de type Warning</h5>
+
+**Exemple de réponse de type Warning**:
+
 {{< code-snippets basename="api-warning" static="true" >}}

@@ -5,9 +5,14 @@ order: 10.1
 external_redirect: /api/#get-all-embeds
 ---
 
-##### Signature
+**Signature**:
+
 `GET https://api.datadoghq.com/api/v1/graph/embed`
-##### Exemple de requête
+
+**Exemple de requête**:
+
 {{< code-snippets basename="api-embeds-get-all" >}}
-##### Exemple de réponse
+
+**Exemple de réponse**:
+
 {{< code-snippets basename="result.api-embeds-get-all" >}}

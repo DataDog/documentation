@@ -9,7 +9,7 @@ external_redirect: /api/#add-items-to-a-dashboard-list
 
 Rajoute un ou plusieurs dashboards à une dashboard list.
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 *   **`dashboards`** [*obligatoire*]:
     Une liste de dashboards à ajouter à la dashboard list.

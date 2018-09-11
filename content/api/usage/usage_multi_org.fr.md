@@ -9,7 +9,8 @@ external_redirect: /api/#get-usage-across-your-multi-org-account
 
 Récupérer l'utilisation de votre compte multi-org
 
-##### Arguments
+**ARGUMENTS**:
+
 * **`start_month`** [*obligatoire*]:  
     Datetime dans le format ISO-8601 , UTC, précis au mois: [YYYY-MM] Pour l'usage depuis le début de ce mois. Maximum de 15 mois dans le passé.
 * **`end_month`** [*optionnel*, *défaut*=**current_month-3d**]:

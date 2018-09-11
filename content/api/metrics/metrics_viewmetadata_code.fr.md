@@ -5,10 +5,15 @@ order: 15.4
 external_redirect: /api/#view-metric-metadata
 ---
 
-##### Signature
+**Signature**:
+
 `GET https://api.datadoghq.com/api/v1/metrics/:metric_name`
-##### Exemple de requête
+
+**Exemple de requête**:
+
 {{< code-snippets basename="api-metric-metadata-get" >}}
-##### Exemple de réponse
+
+**Exemple de réponse**:
+
 {{< code-snippets basename="result.api-metric-metadata-get" >}}
 

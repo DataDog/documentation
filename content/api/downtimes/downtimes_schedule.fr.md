@@ -7,7 +7,7 @@ external_redirect: /api/#schedule-monitor-downtime
 
 ## Planifier le downtime d'un monitor
 
-##### ARGUMENTS
+**ARGUMENTS**:
 
 * **`scope`** [*obligatoire*]:  
     Le(s) contexte(s) auquel (auxquels) s'applique le downtime, ex. `host:app2`. Fournissez plusieurs contextes sous la forme d'une liste séparée par des virgules, par ex. `env:dev, env:prod`. Le downtime qui en résulte s'applique aux sources qui correspondent à TOUS les contextes fournies (c'est-à-dire `env: dev` **ET**` env: prod`), PAS à certaines d'entre elles.
