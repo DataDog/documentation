@@ -8,7 +8,7 @@ external_redirect: /api/#send-services
 ## Send services
 ##### Arguments
 
-*   **`service`** - _Required._ The service name as a dictionary key, [Learn more][1]. The service name mustn't have more than 100 characters.
+*   **`service`** - _Required._ The service name as a dictionary key, [Learn more][1]. The service must not be longer than 100 characters.
 *   **`app`** - _Required._ The name of the application.
 *   **`app_type`** - _Required._ The type of application.
 
