@@ -314,7 +314,7 @@ languages:
           weight: 530
           parent: customnav_graphingnav_infrastructure
 
-        # GRAPHING - Functions  
+        # GRAPHING - Functions
         - identifier: customnav_graphingnav_functions
           name: "From the query to the graph "
           url: "graphing/functions/"
@@ -498,14 +498,14 @@ languages:
           url: "tracing/"
           pre: "nav_tracing"
           weight: 80
-        
+
         # TRACING/APM - Setup basic
         - identifier: customnav_tracingnav_setup
           name: "Setup"
           url: "tracing/setup/"
           weight: 10
           parent: menu_references_tracing
-        
+
         - identifier: customnav_tracingnav_docker
           name: "Docker"
           url: "tracing/setup/docker/"
@@ -734,8 +734,8 @@ languages:
           url: "logs/"
           pre: "nav_logs"
           weight: 90
-        
-        # Log collection  
+
+        # Log collection
         - identifier: customnav_lognav_collection
           name: "Log Collection & Integrations"
           url: "logs/log_collection/"
@@ -794,13 +794,13 @@ languages:
           weight: 299
           parent: customnav_lognav_collection
 
-        # LOGS - Processing  
+        # LOGS - Processing
         - identifier: customnav_lognav_processing
           name: "Processing"
           url: "logs/processing/"
           weight: 30
           parent: menu_references_logs
-        
+
         - identifier: customnav_lognav_pipelines
           name: "Pipelines"
           url: "logs/processing/pipelines/"
@@ -850,27 +850,32 @@ languages:
           url: "logs/explorer/saved_views"
           weight: 530
           parent: customnav_lognav_explorer
+        - identifier: customnav_lognav_patterns
+          name: "Log Patterns"
+          url: "logs/explorer/patterns"
+          weight: 540
+          parent: customnav_lognav_explorer
 
         - identifier: customnav_lognav_logging_without_limits
           name: "Logging without Limits"
           url: "logs/logging_without_limits/"
           weight: 60
           parent: menu_references_logs
-        
+
         - identifier: customnav_lognav_monitor
           name: "Log monitor"
           url: "monitors/monitor_types/log"
           weight: 70
           parent: menu_references_logs
-        
+
         # LOGS - Archives
-           
+
         - identifier: customnav_lognav_archives
           name: "Archives"
           url: "logs/archives/s3"
           weight: 80
           parent: menu_references_logs
-        
+
         - identifier: customnav_lognav_archives_s3
           name: "AWS S3"
           url: "logs/archives/s3"
@@ -1312,7 +1317,7 @@ languages:
           url: "graphing/dashboards/widgets/"
           weight: 140
           parent: customnav_graphingnav_dashboards
-        
+
         # Metrics
         - identifier: customnav_graphingnav_metrics
           name: "Metrics"
@@ -1357,7 +1362,7 @@ languages:
           weight: 50
           parent: customnav_graphingnav_infrastructure
 
-        # GRAPHING - Functions  
+        # GRAPHING - Functions
         - identifier: customnav_graphingnav_functions
           name: "De la query au graphique"
           url: "graphing/functions/"
@@ -1540,14 +1545,14 @@ languages:
           url: "tracing/"
           pre: "nav_tracing"
           weight: 80
-        
+
         # TRACING/APM - Setup basic
         - identifier: customnav_tracingnav_setup
           name: "Getting Started"
           url: "tracing/setup/"
           weight: 10
           parent: menu_references_tracing
-        
+
         - identifier: customnav_tracingnav_docker
           name: "Docker"
           url: "tracing/setup/docker/"
@@ -1759,14 +1764,14 @@ languages:
         #  parent: menu_references_tracing
         # TRACING/APM - Subnav end
 
-        # LOGS 
+        # LOGS
         - identifier: menu_references_logs
           name: "Log Management"
           url: "logs/"
           pre: "nav_logs"
           weight: 90
-        
-        # Log collection  
+
+        # Log collection
         - identifier: customnav_lognav_collection
           name: "Collecte de logs"
           url: "logs/log_collection/"
@@ -1824,7 +1829,7 @@ languages:
           url: "integrations/#cat-log-collection"
           weight: 299
           parent: customnav_lognav_collection
-       
+
         # LOGS - Subnav start
         - identifier: customnav_lognav_explore
           name: "Explorer"
@@ -1842,13 +1847,13 @@ languages:
           weight: 35
           parent: menu_references_logs
 
-        # LOGS - Processing  
+        # LOGS - Processing
         - identifier: customnav_lognav_processing
           name: "Processing"
           url: "logs/processing/"
           weight: 30
           parent: menu_references_logs
-        
+
         - identifier: customnav_lognav_pipelines
           name: "Pipelines"
           url: "logs/processing/pipelines/"
@@ -1897,6 +1902,11 @@ languages:
           name: "Saved Views"
           url: "logs/explorer/saved_views"
           weight: 530
+          parent: customnav_lognav_explorer
+        - identifier: customnav_lognav_patterns
+          name: "Log Patterns"
+          url: "logs/explorer/patterns"
+          weight: 540
           parent: customnav_lognav_explorer
 
         - identifier: customnav_lognav_logging_without_limits
@@ -1949,15 +1959,15 @@ languages:
           url: "monitors/monitor_types/log"
           weight: 70
           parent: menu_references_logs
-        
+
         # LOGS - Archives
-           
+
         - identifier: customnav_lognav_archives
           name: "Archives"
           url: "logs/archives/s3"
           weight: 80
           parent: menu_references_logs
-        
+
         - identifier: customnav_lognav_archives_s3
           name: "AWS S3"
           url: "logs/archives/s3"
