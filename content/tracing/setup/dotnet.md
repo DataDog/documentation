@@ -27,6 +27,7 @@ Automatic instrumentation uses the [Profiling API][2] provided by .NET Framework
 To use automatic instrumentation on Windows, download the latest Windows installer from the public [GitHub repository][3]. For Windows services (including web applications running on IIS), rebooting is necessary for these services to pick up the environment variables required by the Profiling API.
 
 Automatic instrumentation will capture:
+
 * Method execution time
 * Relevant trace data such as URL and status response codes for web requests or SQL query for database access
 * Unhandled exceptions, including stacktrace if available
@@ -43,9 +44,9 @@ The .NET tracer supports automatic instrumentation on the following .NET runtime
 | .NET Core      | 2.0.x    | Linux   |  Coming soon      |
 | .NET Core      | 2.1.3+   |         |  Coming soon      |
 
-### Integrations
-
 *Note:* Libraries that target .NET Standard 2.0 are fully supported when running on either .NET Framework 4.6.1+ or .NET Core 2.0.x.
+
+### Integrations
 
 #### Web Framework Compatibility
 
@@ -65,7 +66,7 @@ Don't see your desired web frameworks? We're continually adding additional suppo
 
 The .NET tracer's ability to automatically instrument data store access depends on the client libraries used:
 
-| Data store    | Client library or NuGet package     | Versions | Support type    |
+| Data store    | Library or NuGet package     | Versions | Support type    |
 | :---------    | :---------------------------------- | :------- | :-------------- |
 | MS SQL Server | Built-in .NET Framework `SqlClient` |          | Fully supported |
 | MS SQL Server | `System.Data.SqlClient`             | 4.1+     | Fully supported |

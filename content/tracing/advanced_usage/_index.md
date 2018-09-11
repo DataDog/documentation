@@ -242,7 +242,7 @@ span.setTag('my_tag', 'my_value')
 
 **Adding tags to a span**
 
-Add tags directly to a span by calling `SetTag()`. For example, with the following ASP.NET MVC action method:
+Add tags directly to a span by calling `SetTag()`. For example:
 
 ```csharp
 // An example of an ASP.NET MVC action,
@@ -256,7 +256,8 @@ public class HomeController
             scope.Span.SetTag("http.url", HttpContext.Request.RawUrl);
             scope.Span.SetTag("http.method", HttpContext.Request.HttpMethod);
 
-            // do work...
+            // do some work...
+
             return View();
         }
     }
@@ -268,7 +269,7 @@ public class HomeController
 Access the current active span from any method within your code. Note, however, that if the method is called and there is no span currently active, `Tracer.Instance.Active` returns `null`.
 
 ```csharp
-// e.g. adding tag to active span
+// add tag to active span
 var span = Tracer.Instance.ActiveScope.Span;
 span.SetTag("my_tag", "my_value");
 ```
@@ -474,16 +475,13 @@ The following example initializes a Datadog Tracer and creates a span called `we
 ```csharp
 using Datadog.Trace;
 
-var scope = Tracer.Instance.StartActive('web.request');
+var scope = Tracer.Instance.StartActive("web.request");
 var span = scope.Span;
 
-span.SetTag('http.url', '/login');
+span.SetTag("http.url", "/login");
 span.Finish();
 ```
 
-For more information on manual instrumentation, see the [API documentation][dotnet api doc].
-
-[dotnet api doc]: https://datadog.github.io/dd-trace-csharp/#manual-instrumentation
 [dotnet compatibility]: /tracing/setup/dotnet/#compatibility
 
 {{% /tab %}}
@@ -782,17 +780,17 @@ The following tags are available to override Datadog specific options:
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-For OpenTracing support, add the [`Datadog.Trace.OpenTracing`][dotnet opentracing] NuGet package to your application. During application start up, initialize the OpenTracing library:
+For OpenTracing support, add the [`Datadog.Trace.OpenTracing`][dotnet opentracing] NuGet package to your application. During application start-up, initialize the OpenTracing library:
 ```csharp
 public void ConfigureServices(IServiceCollection services)
 {
     // create an OpenTracing ITracer with default setting
-    ITracer tracer = OpenTracingTracerFactory.CreateTracer();
+    OpenTracing.ITracer tracer = Datadog.Trace.OpenTracing.OpenTracingTracerFactory.CreateTracer();
     
     // to use tracer with ASP.NET Core dependency injection
     services.AddSingleton<ITracer>(tracer);
 
-    // use use tracer with GlobalTracer.Instance
+    // to use tracer with OpenTracing.GlobalTracer.Instance
     GlobalTracer.Register(tracer);
 }
 ```
