@@ -100,7 +100,7 @@ Datadog.tracer.set_tags('env' => 'prod')
 
 ```python
 from ddtrace import tracer
-tracer.set_tags({'env', 'prod'})
+tracer.set_tags({'env': 'prod'})
 ```
 {{% /tab %}}
 {{< /tabs >}}
