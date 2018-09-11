@@ -27,7 +27,7 @@ For Python applications, note that tracing is disabled when your application is 
 
 To begin tracing applications written in Python, first [install and configure the Datadog Agent][1] (see additional documentation for [tracing Docker applications](/tracing/setup/docker/)).
 
-Next, install the Datadog Tracing library using pip:
+Next, install the Datadog Tracing library, `ddtrace`, using pip:
 
 ```python
 pip install ddtrace
@@ -52,7 +52,7 @@ Python versions `2.7` and `3.4` and onwards are supported.
 
 #### Web Framework Compatibility
 
-The ddtrace library includes support for a number of web frameworks, including:
+The `ddtrace` library includes support for a number of web frameworks, including:
 
 |                Framework                 |  Support Type   |                     PyPi Datadog Documentation                     |
 | ---------------------------------------- | --------------- | ------------------------------------------------------------------ |
@@ -65,7 +65,7 @@ The ddtrace library includes support for a number of web frameworks, including:
 
 #### Datastore Compatibility
 
-The ddtrace library includes support for the following data stores:
+The `ddtrace` library includes support for the following data stores:
 
 |                           Datastore                            |  Support Type   |                       PyPi Datadog Documentation                        |
 | -------------------------------------------------------------- | --------------- | ----------------------------------------------------------------------- |
@@ -83,7 +83,7 @@ The ddtrace library includes support for the following data stores:
 
 #### Library Compatibility
 
-The ddtrace library includes support for the following libraries:
+The `ddtrace` library includes support for the following libraries:
 
 |                               Library                                |  Support Type   |                      PyPi Datadog Documentation                       |
 | -------------------------------------------------------------------- | --------------- | --------------------------------------------------------------------- |
@@ -100,4 +100,5 @@ The ddtrace library includes support for the following libraries:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/setup
-[2]: http://pypi.datadoghq.com/trace/docs/#get-started
+[2]: http://pypi.datadoghq.com/trace/docs/index.html#getting-started
+[3]: http://pypi.datadoghq.com/trace/docs/installation_quickstart.html#opentracing
