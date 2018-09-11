@@ -7,7 +7,7 @@ external_redirect: /api/#get-user
 
 **Signature**:
 
-`GET https://api.datadoghq.com/api/v1/user/:id`
+`GET https://api.datadoghq.com/api/v1/user/<USER_ID>`
 
 **Exemple de requête**:
 

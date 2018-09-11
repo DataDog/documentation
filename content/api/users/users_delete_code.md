@@ -7,7 +7,7 @@ external_redirect: /api/#disable-user
 
 **Signature**:
 
-`DELETE https://api.datadoghq.com/api/v1/user/:id`
+`DELETE https://api.datadoghq.com/api/v1/user/<USER_ID>`
 
 **Example Request**:
 

@@ -9,7 +9,7 @@ external_redirect: /api/#create-embed
 
 Creates a new embeddable graph.
 
-Returns: A JSON consisting of the same elements returned by GET api/v1/graph/embed/:embed_id. On failure, the return value is a JSON containing an error message {errors: [messages]}.
+Returns: A JSON consisting of the same elements returned by GET api/v1/graph/embed/<EMBED_ID>. On failure, the return value is a JSON containing an error message {errors: [messages]}.
 
 Note: If an embed already exists for the exact same query in a given organization, the older embed is returned instead of creating a new embed.
 

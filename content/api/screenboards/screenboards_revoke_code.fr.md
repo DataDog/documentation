@@ -7,7 +7,7 @@ external_redirect: /api/#revoke-a-shared-a-screenboard
 
 **Signature**:
 
-`DELETE https://api.datadoghq.com/api/v1/screen/share/:board_id`
+`DELETE https://api.datadoghq.com/api/v1/screen/share/<SCREEENBOARD_ID>`
 
 **Exemple de requête**:
 

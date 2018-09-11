@@ -7,7 +7,7 @@ external_redirect: /api/#edit-a-comment
 
 **Signature**:
 
-`PUT https://api.datadoghq.com/api/v1/comments/:comment_id`
+`PUT https://api.datadoghq.com/api/v1/comments/<COMMENT_ID>`
 
 **Exemple de requête**:
 

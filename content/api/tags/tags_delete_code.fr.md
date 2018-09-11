@@ -7,7 +7,7 @@ external_redirect: /api/#remove-host-tags
 
 **Signature**:
 
-`DELETE https://api.datadoghq.com/api/v1/tags/hosts/:host_name`
+`DELETE https://api.datadoghq.com/api/v1/tags/hosts/<HOSTNAME>`
 
 **Exemple de requête**:
 

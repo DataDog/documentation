@@ -7,7 +7,7 @@ external_redirect: /api/#delete-a-screenboard
 
 **Signature**:
 
-`DELETE https://api.datadoghq.com/api/v1/screen/:board_id`
+`DELETE https://api.datadoghq.com/api/v1/screen/<SCREEENBOARD_ID>`
 
 **Example Request**:
 

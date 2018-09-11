@@ -7,7 +7,7 @@ external_redirect: /api/#get-an-event
 
 **Signature**:
 
-`GET https://api.datadoghq.com/api/v1/events/:event_id`
+`GET https://api.datadoghq.com/api/v1/events/<EVENT_ID>`
 
 **Exemple de requête**:
 

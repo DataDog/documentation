@@ -7,7 +7,7 @@ external_redirect: /api/#revoke-embed
 
 **Signature**:
 
-`GET https://api.datadoghq.com/api/v1/graph/embed/:embed_id/revoke`
+`GET https://api.datadoghq.com/api/v1/graph/embed/<EMBED_ID>/revoke`
 
 **Exemple de requête**:
 

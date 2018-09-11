@@ -7,7 +7,7 @@ external_redirect: /api/#add-tags-to-a-host
 
 **Signature**:
 
-`POST https://api.datadoghq.com/api/v1/tags/hosts/:host_name`
+`POST https://api.datadoghq.com/api/v1/tags/hosts/<HOSTNAME>`
 
 **Example Request**:
 

@@ -6,7 +6,7 @@ external_redirect: /api/#edit-metric-metadata
 ---
 **Signature**:
 
-`PUT https://api.datadoghq.com/api/v1/metrics/:metric_name`
+`PUT https://api.datadoghq.com/api/v1/metrics/<METRIC_NAME>`
 
 **Exemple de requête**:
 

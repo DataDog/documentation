@@ -7,7 +7,7 @@ external_redirect: /api/#delete-a-comment
 
 **Signature**:
 
-`DELETE https://api.datadoghq.com/api/v1/comments/:comment_id`
+`DELETE https://api.datadoghq.com/api/v1/comments/<COMMENT_ID>`
 
 **Exemple de requête**:
 

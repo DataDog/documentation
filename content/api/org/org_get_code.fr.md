@@ -7,7 +7,7 @@ external_redirect: /api/#get-organization
 
 **Signature**:
 
-`GET https://api.datadoghq.com/api/v1/org/:public_id`
+`GET https://api.datadoghq.com/api/v1/org/<PUBLIC_ID>`
 
 **Exemple de requête**:
 

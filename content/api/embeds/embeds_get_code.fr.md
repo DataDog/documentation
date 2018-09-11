@@ -7,7 +7,7 @@ external_redirect: /api/#get-specific-embed
 
 **Signature**:
 
-`GET https://api.datadoghq.com/api/v1/graph/embed/:embed_id`
+`GET https://api.datadoghq.com/api/v1/graph/embed/<EMBED_ID>`
 
 **Exemple de requête**:
 

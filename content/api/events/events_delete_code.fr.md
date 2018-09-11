@@ -6,7 +6,7 @@ external_redirect: /api/#delete-an-event
 ---
 **Signature**:
 
-`DELETE https://api.datadoghq.com/api/v1/events/:event_id`
+`DELETE https://api.datadoghq.com/api/v1/events/<EVENT_ID>`
 
 **Exemple de requête**:
 

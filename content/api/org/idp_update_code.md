@@ -7,7 +7,7 @@ external_redirect: /api/#upload-idp-metadata
 
 **Signature**:
 
-`POST https://api.datadoghq.com/api/v1/org/:public_id/idp_metadata`
+`POST https://api.datadoghq.com/api/v1/org/<PUBLIC_ID>/idp_metadata`
 
 **Example Request**:
 
