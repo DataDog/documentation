@@ -134,6 +134,9 @@ To start using an attribute as a Facet or in the search, click on it and add it 
 
 Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar][1], [the Facet Panel](#facet-panel), and in the [Log Analytics query][2].
 
+[1]: /logs/explorer/search
+[2]: /logs/explorer/analytics
+
 {{% /tab %}}
 
 
@@ -154,6 +157,9 @@ Once this is done, the value of this attribute is stored **for all new logs** an
 All measure have their own unit that is then used for display in the Log Explorer columns, Log stream widgets in dashboards, and in the Log Analytics.
 
 {{< img src="logs/explorer/edit_a_measure.png" alt="Edit a measure" responsive="true" style="width:50%;">}}
+
+[1]: /logs/explorer/search
+[2]: /logs/explorer/analytics
 
 {{% /tab %}}
 {{< /tabs >}}
