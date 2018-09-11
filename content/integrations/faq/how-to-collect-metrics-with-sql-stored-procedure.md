@@ -61,9 +61,10 @@ The stored procedure outputs the following custom metrics:
 - `sql.test.histogram.max`
 - `sql.test.histogram.median`
 
-### Update the SQL settings file
+### Update the SQL Server integration configuration
 
-Configure the Datadog agent to run the stored procedure by updating the [sql yaml file](https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example):
+Configure the Datadog Agent to run the stored procedure by updating the [SQL YAML file](https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example).<br/>
+**Note**: The stored procedure must be defined in its own instance as seen below:
 
 ```
 # ...
