@@ -7,7 +7,7 @@ external_redirect: /api/#add-items-to-a-dashboard-list
 
 ##### Signature
 
-`POST https://api.datadoghq.com/api/v1/dashboard/lists/manual/:list_id/dashboards`
+`POST https://api.datadoghq.com/api/v1/dashboard/lists/manual/<LIST_ID>/dashboards`
 
 ##### Example Request
 

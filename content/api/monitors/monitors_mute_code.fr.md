@@ -6,7 +6,7 @@ external_redirect: /api/#mute-a-monitor
 ---
 
 ##### Signature
-`POST https://api.datadoghq.com/api/v1/monitor/:monitor_id/mute`
+`POST https://api.datadoghq.com/api/v1/monitor/<MONITOR_ID>/mute`
 ##### Exemple de requête
 {{< code-snippets basename="api-monitor-mute" >}}
 ##### Exemple de réponse
