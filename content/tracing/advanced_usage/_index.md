@@ -274,7 +274,7 @@ var span = Tracer.Instance.ActiveScope.Span;
 span.SetTag("my_tag", "my_value");
 ```
 
-**Note**: If the method is called and there is no span currently active, `Tracer.Instance.Active` returns `null`.
+**Note**: If the method is called and there is no span currently active, `Tracer.Instance.ActiveScope` returns `null`.
 
 {{% /tab %}}
 {{< /tabs >}}
