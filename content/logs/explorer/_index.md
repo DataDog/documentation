@@ -113,9 +113,9 @@ Follow the [log graphing guide][5] to learn more about all the graphing options.
 {{% /tab %}}
 {{% tab "Log Patterns" %}}
 
-Investigating into large volumes of logs is time consuming, you can spend hours in it and still understand a fraction of it. However, applicative logs often look the same with some fraction of it varying; these what we call patterns.
+Investigating large volumes of log data can be time consuming, you can spend hours in it and still understand a fraction of it. However, applicative logs often look the same with some fraction of it varying; these what we call patterns.
 
-In the Log Explorer, Patterns can be surfaced automatically to bring structure to the problem and help you to quickly see what matters or exclude what's pollute the general understanding.
+In the Log Explorer, Patterns can be surfaced automatically to bring structure to the problem and help you to quickly see what matters or exclude what's is irrelevant.
 
 Find out more in the [Log Patterns section][6]
 
