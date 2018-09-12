@@ -105,8 +105,6 @@ While actively working with the Containers page, metrics are collected at 2s res
 
 - Real-time (2s) data collection is turned off after 30 minutes. To resume real-time collection, refresh the page.
 
-- Live Containers is available for the default Debian docker-dd-agent image only.  It is not included in the Alpine image.
-
 - RBAC settings can restrict Kubernetes metadata collection. Refer to the [RBAC entites for the Datadog Agent][2].
 
 - In Kubernetes the `health` value is the containers' readiness probe, not it's liveness probe. 

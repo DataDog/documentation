@@ -126,7 +126,6 @@ In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if
 | :--------       | :-----                                                                  |
 | Linux           | `sudo /etc/init.d/datadog-agent flare <CASE_ID>`                        |
 | Docker          | `docker exec -it dd-agent /etc/init.d/datadog-agent flare <CASE_ID>`    |
-| Docker (Alpine) | `docker exec -it dd-agent /opt/datadog-agent/bin/agent flare <CASE_ID>` |
 | macOS           | `datadog-agent flare <CASE_ID>`                                         |
 | CentOS          | `sudo service datadog-agent flare <CASE_ID>`                            |
 | Debian          | `sudo service datadog-agent flare <CASE_ID>`                            |
