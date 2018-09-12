@@ -35,7 +35,7 @@ Automatic instrumentation captures:
 * Unhandled exceptions, including stacktrace if available
 * A total count of traces (requests) flowing through the system
 
-## Compatibility
+### Runtime Compatibility
 
 The .NET tracer supports automatic instrumentation on the following .NET runtimes:
 
@@ -48,9 +48,8 @@ The .NET tracer supports automatic instrumentation on the following .NET runtime
 
 **Note**: Libraries that target .NET Standard 2.0 are fully supported when running on either .NET Framework 4.6.1+ or .NET Core 2.0.x.
 
-### Integrations
 
-#### Web Framework Compatibility
+### Web Framework Integrations
 
 The .NET tracer can instrument the following web frameworks automatically:
 
@@ -64,7 +63,7 @@ The .NET tracer can instrument the following web frameworks automatically:
 
 Don't see your desired web frameworks? [Check with the Datadog Support team][5] to see if we can help.
 
-#### Data Store Compatibility
+### Data Store Integrations
 
 The .NET tracer's ability to automatically instrument data store access depends on the client libraries used:
 
@@ -79,12 +78,16 @@ The .NET tracer's ability to automatically instrument data store access depends 
 
 Don't see your desired data store? [Check with the Datadog Support team][5] to see if we can help.
 
+## Manual Instrumentation
+
+To manually instrument your code, see [Advanced Usage][2].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/tracing/setup
-[2]: https://docs.microsoft.com/en-us/dotnet/framework/unmanaged-api/profiling/
+[2]: /tracing/advanced_usage/?tab=net
 [3]: https://github.com/DataDog/dd-trace-csharp/releases
 [4]: https://www.nuget.org/packages/Datadog.Trace/
 [5]: /help
