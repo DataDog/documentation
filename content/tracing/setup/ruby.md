@@ -121,7 +121,7 @@ Ruby APM includes support for the following libraries and frameworks:
 
 | Name                 | Versions Supported     | Support type    | How to configure |
 | -------------------- | ---------------------- | --------------- | ---------------- |
-| [Active Record][11]  | `>= 3.2, < 5.2`        | Fully Supported | *[Link][10]*     |
+| [Active Record][11]  | `>= 3.2, < 6.0`        | Fully Supported | *[Link][10]*     |
 | [AWS][13]            | `>= 2.0`               | Fully Supported | *[Link][12]*     |
 | [Dalli][15]          | `>= 2.7`               | Fully Supported | *[Link][14]*     |
 | [DelayedJob][53]     | `>= 4.1`               | Fully Supported | *[Link][52]*     |
@@ -136,7 +136,7 @@ Ruby APM includes support for the following libraries and frameworks:
 | [Net/HTTP][31]       | *(Any Supported Ruby)* | Fully Supported | *[Link][30]*     |
 | [Racecar][33]        | `>= 0.3.5`             | Fully Supported | *[Link][32]*     |
 | [Rack][35]           | `>= 1.4.7`             | Fully Supported | *[Link][34]*     |
-| [Rails][37]          | `>= 3.2, < 5.2`        | Fully Supported | *[Link][36]*     |
+| [Rails][37]          | `>= 3.2, < 6.0`        | Fully Supported | *[Link][36]*     |
 | [Rake][39]           | `>= 12.0`              | Fully Supported | *[Link][38]*     |
 | [Redis][41]          | `>= 3.2, < 4.0`        | Fully Supported | *[Link][40]*     |
 | [Resque][43]         | `>= 1.0, < 2.0`        | Fully Supported | *[Link][42]*     |
