@@ -1,15 +1,25 @@
 ---
-title: How to collect metrics with a SQL Stored Procedure
+title: How to collect metrics with a SQL Stored Procedure?
 kind: faq
+further_reading:
+- link: "https://www.datadoghq.com/blog/sql-server-metrics/#create-a-stored-procedure-to-generate-and-collect-metrics"
+  tag: "Blog"
+  text: Create a stored procedure to generate and collect metrics
+- link: "integration/mysql"
+  tag: "Documentation"
+  text: Datadog-MySQL integration
 ---
 
-### Setup a Stored Procedure
+## Setup a Stored Procedure
+
 A temporary table must be setup to collect the custom metrics for reporting to Datadog. The table needs following columns:
 
-- metric: the name of the metric as it appears in Datadog
-- type: the [metric type](/developers/metrics/#metric-types) (gauge, rate, count, or [histogram](/developers/metrics/histograms/))
-- value: the value of the metric (must be convertible to a float)
-- tags: the tags that will appear in Datadog separated by a comma
+| Column | Description                                                                                                                 |
+| -----  | ----                                                                                                                        |
+| metric | The name of the metric as it appears in Datadog.                                                                            |
+| type   | The [metric type][1] (gauge, rate, count, or [histogram][2]. |
+| value  | The value of the metric (must be convertible to a float).                                                                   |
+| tags   | The tags that will appear in Datadog separated by a comma.                                                                  |
 
 The following stored procedure is created within the master database:
 
@@ -61,20 +71,26 @@ The stored procedure outputs the following custom metrics:
 - `sql.test.histogram.max`
 - `sql.test.histogram.median`
 
-### Update the SQL settings file
+## Update the SQL Server integration configuration
 
-Configure the Datadog agent to run the stored procedure by updating the [sql yaml file](https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example):
+Configure the Datadog Agent to run the stored procedure by updating the [SQL YAML file][3].
+
+**Note**: The stored procedure must be defined in its own instance as seen below:
 
 ```
 # ...
   - host: 127.0.0.1,1433
     username: datadog
-    password: <password>
+    password: <PASSWORD>
     stored_procedure: TestProc1
     database: master
 # ...
 ```
 
 ## Further Reading
--------------------
-- [Create a stored procedure to generate and collect metrics](https://www.datadoghq.com/blog/sql-server-metrics/#create-a-stored-procedure-to-generate-and-collect-metrics)
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /developers/metrics/#metric-types
+[2]: /developers/metrics/histograms/
+[3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example

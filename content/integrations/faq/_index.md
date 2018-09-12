@@ -105,7 +105,7 @@ private: true
 * [Can I collect SQL Server performance metrics beyond what is available in the sys.dm_os_performance_counters table? Try WMI][62]
 * [How can I collect more metrics from my SQL Server integration?][63]
 * [Database user lacks privileges][64]
-* [How to collect metrics with a SQL Stored Procedure][79]
+* [How to collect metrics with a SQL Stored Procedure?][79]
 
 ## Network
 * [How to send TCP/UDP host metrics via the Datadog API ?][65]
