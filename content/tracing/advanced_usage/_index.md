@@ -788,7 +788,8 @@ For OpenTracing support, add the [`Datadog.Trace.OpenTracing`][dotnet opentracin
 public void ConfigureServices(IServiceCollection services)
 {
     // create an OpenTracing ITracer with default setting
-    OpenTracing.ITracer tracer = Datadog.Trace.OpenTracing.OpenTracingTracerFactory.CreateTracer();
+    OpenTracing.ITracer tracer =
+        Datadog.Trace.OpenTracing.OpenTracingTracerFactory.CreateTracer();
     
     // to use tracer with ASP.NET Core dependency injection
     services.AddSingleton<ITracer>(tracer);
