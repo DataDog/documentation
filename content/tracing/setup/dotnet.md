@@ -20,11 +20,13 @@ further_reading:
 
 To begin tracing applications written in any language, first [install and configure the Datadog Agent][1].
 
+To use automatic instrumentation on Windows, download the latest Windows installer from the public [GitHub repository][3]. To instrument Windows services (including web applications running on IIS), reboot the host after running the installer so these services can pick up the required environment variables added by the installer.
+
+[Download Windows installer][3]
+
 ## Automatic Instrumentation
 
-Automatic instrumentation uses the [Profiling API][2] provided by .NET Framework and .NET Core to modify IL instructions at run time and inject instrumentation code. With zero code changes or configuration, the .NET tracer automatically instruments all supported libraries out of the box.
-
-To use automatic instrumentation on Windows, download the latest Windows installer from the public [GitHub repository][3]. For Windows services (including web applications running on IIS), rebooting is necessary for these services to pick up the environment variables required by the Profiling API.
+Automatic instrumentation uses the Profiling API provided by .NET Framework and .NET Core to modify IL instructions at run time and inject instrumentation code. With zero code changes or configuration, the .NET tracer automatically instruments all supported libraries out of the box.
 
 Automatic instrumentation captures:
 
