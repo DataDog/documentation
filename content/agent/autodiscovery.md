@@ -69,29 +69,68 @@ config_providers:
 
 ## Tag extraction
 
-You can extract container and pod labels, as well as environment variables and annotations, as metric tags. If you prefix your tag name with `+`, the tag will only be added to high cardinality metrics.
+{{< tabs >}}
+{{% tab "Docker" %}}
 
-### Docker tag extraction
+The Datadog Agent can extract container labels and environment variables as metric tags with the following configuration in your `datadog.yaml` file:
 
 ```
 docker_labels_as_tags:
-  label_name:                  tag_name
-  high_cardinality_label_name: +tag_name
+  <LABEL_NAME>: <TAG_NAME>
+
 docker_env_as_tags:
-  ENVVAR_NAME: tag_name
+  <ENVVAR_NAME>: <TAG_NAME>
 ```
 
-### Kubernetes tag extraction
+If you prefix your tag name with `+`, the tag is only added to high cardinality metrics.
+
+```
+docker_labels_as_tags:
+  <HIGH_CARDINALITY_LABEL_NAME>: +<TAG_NAME>
+```
+
+For example you could set up:
+
+```
+docker_labels_as_tags:
+  com.docker.compose.service: service_name
+  com.docker.compose.project: +project_name
+```
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+The Datadog Agent can extract pod labels and annotations as metric tags with the following configuration in your `datadog.yaml` file:
 
 ```
 kubernetes_pod_labels_as_tags:
-  app:               kube_app
+  <POD_LABEL>: <TAG_NAME>
+
+kubernetes_pod_annotations_as_tags:
+  <POD_ANNOTATIONS>: <TAG_NAME>
+```
+
+If you prefix your tag name with `+`, the tag is only added to high cardinality metrics.
+
+```
+kubernetes_pod_labels_as_tags:
+  <HIGH_CARDINALITY_POD_LABEL>: +<TAG_NAME>
+```
+
+For example you could set up:
+
+```
+kubernetes_pod_labels_as_tags:
+  app: kube_app
   pod-template-hash: +kube_pod-template-hash
 
 kubernetes_pod_annotations_as_tags:
-  app:               kube_app
+  app: kube_app
   pod-template-hash: +kube_pod-template-hash
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Setting up Check Templates
 
