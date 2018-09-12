@@ -20,9 +20,9 @@ further_reading:
 
 To begin tracing applications written in any language, first [install and configure the Datadog Agent][1].
 
-To use automatic instrumentation on Windows, download the latest Windows installer from the public [GitHub repository][3]. To instrument Windows services (including web applications running on IIS), reboot the host after running the installer so these services can pick up the required environment variables added by the installer.
+To use automatic instrumentation on Windows, download the latest MSI installer for Windows from the public [GitHub repository][3]. To instrument Windows services (including web applications running on IIS), reboot the host after running the installer so these services can pick up the required environment variables added by the installer.
 
-[Download Windows installer][3]
+[Download MSI installer for Windows][3]
 
 ## Automatic Instrumentation
 
