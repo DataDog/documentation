@@ -8,6 +8,9 @@ further_reading:
 - link: "logs/explorer/analytics"
   tag: "Documentation"
   text: "Perform Log Analytics"
+- link: "logs/explorer/patterns"
+  tag: Documentation
+  text: Detect patterns inside your logs
 - link: "logs/processing"
   tag: "Documentation"
   text: Learn how to process your logs

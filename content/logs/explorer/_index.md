@@ -14,6 +14,9 @@ further_reading:
 - link: "logs/explorer/saved_views"
   tag: Documentation
   text: Automatically configure your Log Explorer
+- link: "logs/explorer/patterns"
+  tag: Documentation
+  text: Detect patterns inside your logs
 ---
 
 The Logs Explorer is your home base for troubleshooting and exploration:
@@ -110,13 +113,15 @@ Follow the [log graphing guide][5] to learn more about all the graphing options.
 {{% /tab %}}
 {{% tab "Log Patterns" %}}
 
-Investigating into large volume of logs is really time consuming, you can spend hours in it and still understand a fraction of it. Quite luckily, applicative logs are repetitive and pattern can be detected to automatically bring structure to the problem and help you to quickly see what matters or exclude what's pollute the general understanding.
+Investigating into large volumes of logs is time consuming, you can spend hours in it and still understand a fraction of it. However, applicative logs often look the same with some fraction of it varying; these what we call patterns.
+
+In the Log Explorer, Patterns can be surfaced automatically to bring structure to the problem and help you to quickly see what matters or exclude what's pollute the general understanding.
 
 Find out more in the [Log Patterns section][6]
 
 {{< img src="logs/explorer/log_patterns.png" alt="Log Patterns" responsive="true" style="width:70%;">}}
 
-[6]: /logs/patterns
+[6]: /logs/explorer/patterns
 
 {{% /tab %}}
 {{< /tabs >}}
