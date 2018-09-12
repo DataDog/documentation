@@ -35,7 +35,7 @@ Switch to the Pattern view to automatically see your log patterns for the select
 
 {{< img src="logs/explorer/log_patterns.png" alt="Log Patterns" responsive="true" style="width:90%;">}}
 
-Sections of the logs that vary within the pattern are highlighted to quickly identify the variation across logs within a pattern.
+Sections of the logs that vary within the pattern are highlighted to help you quickly identify differences across log lines.
 
 ## Sample logs related to a pattern
 
