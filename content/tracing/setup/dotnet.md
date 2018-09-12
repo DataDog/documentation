@@ -52,13 +52,12 @@ The .NET tracer supports automatic instrumentation on the following .NET runtime
 
 The .NET tracer can instrument the following web frameworks automatically:
 
-| Web framework    | Versions | Runtime        | OS      | Support Type      |
-| :--------------- | :------- | :------------- | :------ | :---------------- |
-| ASP.NET MVC      | 5.2.3+   | .NET Framework | Windows | Fully supported   |
-| ASP.NET Core MVC | 2.0.x    | .NET Framework | Windows | Fully supported   |
-| ASP.NET Core MVC | 2.0.x    | .NET Core      | Windows | Fully supported   |
-| ASP.NET Core MVC | 2.0.x    | .NET Core      | Linux   | Coming soon       |
-| ASP.NET Core MVC | 2.1.3+   |                |         | Coming soon       |
+| Web framework    | Versions | Runtime             | OS      | Support Type      |
+| :--------------- | :------- | :------------------ | :------ | :---------------- |
+| ASP.NET MVC      | 5.2+     | .NET Framework 4.5+ | Windows | Fully supported   |
+| ASP.NET Core MVC | 2.0+     | .NET Framework 4.5+ | Windows | Fully supported   |
+| ASP.NET Core MVC | 2.0+     | .NET Core 2.0.x     | Windows | Fully supported   |
+| ASP.NET Core MVC | 2.0+     | .NET Core 2.0.x     | Linux   | Coming soon       |
 
 Don't see your desired web frameworks? [Check with the Datadog Support team][5] to see if we can help.
 
