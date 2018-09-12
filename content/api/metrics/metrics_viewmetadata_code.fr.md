@@ -6,7 +6,7 @@ external_redirect: /api/#view-metric-metadata
 ---
 
 ##### Signature
-`GET https://api.datadoghq.com/api/v1/metrics/<METRIC_NAME>`
+`GET https://api.datadoghq.com/api/v1/metrics/:metric_name`
 ##### Exemple de requête
 {{< code-snippets basename="api-metric-metadata-get" >}}
 ##### Exemple de réponse

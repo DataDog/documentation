@@ -6,7 +6,7 @@ external_redirect: /api/#get-a-screenboard
 ---
 
 ##### Signature
-`GET https://api.datadoghq.com/api/v1/screen/<SCREEENBOARD_ID>`
+`GET https://api.datadoghq.com/api/v1/screen/:board_id`
 ##### Exemple de requête
 {{< code-snippets basename="api-screenboard-get" >}}
 ##### Exemple de réponse

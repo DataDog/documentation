@@ -6,7 +6,7 @@ external_redirect: /api/#update-a-screenboard
 ---
 
 ##### Signature
-`PUT https://api.datadoghq.com/api/v1/screen/<SCREEENBOARD_ID>`
+`PUT https://api.datadoghq.com/api/v1/screen/:board_id`
 ##### Exemple de requête
 {{< code-snippets basename="api-screenboard-update" >}}
 ##### Exemple de réponse

@@ -6,7 +6,7 @@ external_redirect: /api/#update-organization
 ---
 
 ##### Signature
-`PUT https://api.datadoghq.com/api/v1/org/<PUBLIC_ID>`
+`PUT https://api.datadoghq.com/api/v1/org/:public_id`
 ##### Exemple de requête
 {{< code-snippets basename="api-org-update" >}}
 ##### Exemple de réponse
