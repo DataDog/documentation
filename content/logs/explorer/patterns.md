@@ -18,18 +18,17 @@ further_reading:
 
 ## Overview
 
-Investigating large volumes of log data can be time consuming, you can spend hours in it and still understand a fraction of it. However, applicative logs often look the same with some fraction of it varying; these what we call patterns.
+Investigating large volumes of log data can be time consuming: you can spend hours on them and still understand only a fraction of them. However, applicative logs often look the same with some fraction of them varying. These what we call *patterns*.
 
-In the Log Explorer, Patterns can be surfaced automatically to bring structure to the problem and help you to quickly see what matters or exclude what's is irrelevant.
-
+In the Log Explorer, patterns can be surfaced automatically to bring structure to the problem and help you quickly see what matters—exclude what's irrelevant.
 
 {{< img src="logs/explorer/patterns/log_patterns_nav.png" alt="Navigate to Log Patterns" responsive="true" style="width:50%;">}}
 
-The Patterns view is helpful for detecting and filtering noisy error patterns that might cause you to miss other issues, it shows the number of logs matching a pattern splitted by service and status.
+The patterns view is helpful for detecting and filtering noisy error patterns that might cause you to miss other issues. It shows the number of logs matching a pattern, split by service and status.
 
 ## See log trends and newcomers over time
 
-Switch to the Pattern view to automatically see your log patterns for the selected context. A [context][1] is composed by a Time Range and a search query.
+Switch to the patterns view to automatically see your log patterns for the selected context. A [context][1] is composed of a time range and a search query.
 
 **Note**: The pattern detection is based on 10,000 log samples. Refine the search to see patterns limited to a specific subset of logs:
 
