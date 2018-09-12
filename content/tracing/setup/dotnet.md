@@ -45,12 +45,12 @@ The .NET tracer supports automatic instrumentation on the following .NET runtime
 
 | .NET Runtime   | Versions | OS      | Support Type      |
 | :------------- | :------- | :------ | :---------------- |
-| .NET Framework | 4.5+     | Windows | Fully supported   |
-| .NET Core      | 2.0.x    | Windows | Fully supported   |
+| .NET Framework | 4.5+     | Windows | Public Beta       |
+| .NET Core      | 2.0.x    | Windows | Public Beta       |
 | .NET Core      | 2.0.x    | Linux   | Coming soon       |
 | .NET Core      | 2.1.3+   |         | Coming soon       |
 
-**Note**: Libraries that target .NET Standard 2.0 are fully supported when running on either .NET Framework 4.6.1+ or .NET Core 2.0.x.
+**Note**: Libraries that target .NET Standard 2.0 are supported when running on either .NET Framework 4.6.1+ or .NET Core 2.0.x.
 
 
 ### Web Framework Integrations
@@ -59,10 +59,10 @@ The .NET tracer can instrument the following web frameworks automatically:
 
 | Web framework    | Versions | Runtime             | OS      | Support Type      |
 | :--------------- | :------- | :------------------ | :------ | :---------------- |
-| ASP.NET MVC      | 5.2.x    | .NET Framework 4.5+ | Windows | Fully supported   |
-| ASP.NET Web API  | 2.2.x    | .NET Framework 4.5+ | Windows | Fully supported   |
-| ASP.NET Core MVC | 2.0+     | .NET Framework 4.5+ | Windows | Fully supported   |
-| ASP.NET Core MVC | 2.0+     | .NET Core 2.0.x     | Windows | Fully supported   |
+| ASP.NET MVC      | 5.2.x    | .NET Framework 4.5+ | Windows | Public Beta       |
+| ASP.NET Web API  | 2.2.x    | .NET Framework 4.5+ | Windows | Public Beta       |
+| ASP.NET Core MVC | 2.0+     | .NET Framework 4.5+ | Windows | Public Beta       |
+| ASP.NET Core MVC | 2.0+     | .NET Core 2.0.x     | Windows | Public Beta       |
 | ASP.NET Core MVC | 2.0+     | .NET Core 2.0.x     | Linux   | Coming soon       |
 
 Don't see your desired web frameworks? [Check with the Datadog Support team][5] to see if we can help.
@@ -73,8 +73,8 @@ The .NET tracer's ability to automatically instrument data store access depends 
 
 | Data store    | Library or NuGet package            | Versions | Support type    |
 | :---------    | :---------------------------------- | :------- | :-------------- |
-| MS SQL Server | Built-in .NET Framework `SqlClient` |          | Fully supported |
-| MS SQL Server | `System.Data.SqlClient`             | 4.1+     | Fully supported |
+| MS SQL Server | Built-in .NET Framework `SqlClient` |          | Public Beta     |
+| MS SQL Server | `System.Data.SqlClient`             | 4.1+     | Public Beta     |
 | Redis         | `StackExchange.Redis`               |          | Coming soon     |
 | Elasticsearch | `NEST` / `Elasticsearch.Net`        |          | Coming soon     |
 | MongoDB       | `MongoDB.Driver`                    |          | Coming soon     |
