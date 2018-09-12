@@ -54,7 +54,8 @@ The .NET tracer can instrument the following web frameworks automatically:
 
 | Web framework    | Versions | Runtime             | OS      | Support Type      |
 | :--------------- | :------- | :------------------ | :------ | :---------------- |
-| ASP.NET MVC      | 5.2+     | .NET Framework 4.5+ | Windows | Fully supported   |
+| ASP.NET MVC      | 5.2.x    | .NET Framework 4.5+ | Windows | Fully supported   |
+| ASP.NET Web API  | 2.2.x    | .NET Framework 4.5+ | Windows | Fully supported   |
 | ASP.NET Core MVC | 2.0+     | .NET Framework 4.5+ | Windows | Fully supported   |
 | ASP.NET Core MVC | 2.0+     | .NET Core 2.0.x     | Windows | Fully supported   |
 | ASP.NET Core MVC | 2.0+     | .NET Core 2.0.x     | Linux   | Coming soon       |
