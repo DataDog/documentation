@@ -266,13 +266,15 @@ public class HomeController
 
 **Adding tags to a current active span**
 
-Access the current active span from any method within your code. Note, however, that if the method is called and there is no span currently active, `Tracer.Instance.Active` returns `null`.
+Access the current active span from any method within your code. 
 
 ```csharp
 // add tag to active span
 var span = Tracer.Instance.ActiveScope.Span;
 span.SetTag("my_tag", "my_value");
 ```
+
+**Note**: If the method is called and there is no span currently active, `Tracer.Instance.Active` returns `null`.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -781,6 +783,7 @@ The following tags are available to override Datadog specific options:
 {{% tab ".NET" %}}
 
 For OpenTracing support, add the [`Datadog.Trace.OpenTracing`][dotnet opentracing] NuGet package to your application. During application start-up, initialize the OpenTracing library:
+
 ```csharp
 public void ConfigureServices(IServiceCollection services)
 {
@@ -1383,7 +1386,7 @@ For more tracer settings, check out the [API documentation][nodejs api doc].
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-Debug mode is disabled by default. To enable, set the `isDebugEnabled` argument to `true` when creating a new tracer instance:
+Debug mode is disabled by default. To enable it, set the `isDebugEnabled` argument to `true` when creating a new tracer instance:
 
 ```csharp
 var tracer = Datadog.Trace.Tracer.Create(isDebugEnabled: true);
