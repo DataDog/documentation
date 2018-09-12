@@ -11,6 +11,7 @@ dd-agent ALL=NOPASSWD: /bin/ls /proc/*/fd/
 ```
 This allows the process check to use `sudo` to execute the `ls` command but only to the list of contents of the path `/proc/*/fd/`.
 
+If users see this line in the Datadog error.log: `sudo: sorry, you must have a tty to run sudo`, users should visudo and comment out the line `Default requiretty`.
 
 See the following Github issues for more info on this matter as well as other potential methods of capturing this metric on Linux machines.
 
