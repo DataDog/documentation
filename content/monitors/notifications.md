@@ -165,7 +165,7 @@ This means that if the monitor switches from an **ALERT** to a **WARNING** to an
 The `{{is_match}}` conditional allows you to match the triggering context to any given string in order to display a different message in your notifications. 
 Use any of the available tag variables in your conditional statement. **A match is made if the comparison string is anywhere in the resolved variable**. 
 
-Tag Variables use the following format:
+Tag variables use the following format:
 
 ```
 {{#is_match "<TAG_VARIABLE>.name" "<COMPARISON_STRING>"}}
@@ -178,7 +178,7 @@ For example, if you want to notify your DB team if a triggering host has the `ro
 ```
 {{#is_match "role.name" "db"}}
   This shows only if the host that triggered the alert has `role` tag variable with `db` in it. 
-  So it would trigger for role:db_cassandra and role:db_postgres
+  It would trigger for role:db_cassandra and role:db_postgres
 {{/is_match}}
 ```
 
