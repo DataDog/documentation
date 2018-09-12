@@ -6,7 +6,7 @@ external_redirect: /api/#get-host-tags
 ---
 
 ##### Signature
-`GET https://api.datadoghq.com/api/v1/tags/hosts/<HOSTNAME>`
+`GET https://api.datadoghq.com/api/v1/tags/hosts/:host_name`
 ##### Exemple de requête
 {{< code-snippets basename="api-tags-get-host" >}}
 ##### Exemple de réponse
