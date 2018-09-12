@@ -1,5 +1,5 @@
 ---
-title: Tracing .NET Applications (Beta)
+title: Tracing .NET Applications
 kind: Documentation
 aliases:
 - /tracing/dotnet
@@ -15,6 +15,10 @@ further_reading:
   tag: "Advanced Usage"
   text: "Advanced Usage"
 ---
+
+<div class="alert alert-warning">
+.NET Tracing is currently in an open Public Beta and will be Generally Available in October 2018.
+</div>
 
 ## Installation and Getting Started
 
