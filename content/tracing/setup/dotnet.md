@@ -51,7 +51,7 @@ The .NET tracer supports automatic instrumentation on the following .NET runtime
 | .NET Core      | 2.1.3+   |         | Coming soon       |
 
 **Note**: Libraries that target .NET Standard 2.0 are supported when running on either .NET Framework 4.6.1+ or .NET Core 2.0.x.
-
+Don’t see your desired frameworks? We’re continually adding additional support. [Check with the Datadog team][5] to see if we can help.
 
 ### Web Framework Integrations
 
@@ -65,7 +65,7 @@ The .NET tracer can instrument the following web frameworks automatically:
 | ASP.NET Core MVC | 2.0+     | .NET Core 2.0.x     | Windows | Public Beta       |
 | ASP.NET Core MVC | 2.0+     | .NET Core 2.0.x     | Linux   | Coming soon       |
 
-Don't see your desired web frameworks? [Check with the Datadog Support team][5] to see if we can help.
+Don’t see your desired web frameworks? We’re continually adding additional support. [Check with the Datadog team][5] to see if we can help.
 
 ### Data Store Integrations
 
@@ -80,7 +80,7 @@ The .NET tracer's ability to automatically instrument data store access depends 
 | MongoDB       | `MongoDB.Driver`                    |          | Coming soon     |
 | PostgreSQL    | `Npgsql`                            |          | Coming soon     |
 
-Don't see your desired data store? [Check with the Datadog Support team][5] to see if we can help.
+Don’t see your desired data store libraries? We’re continually adding additional support. [Check with the Datadog team][5] to see if we can help.
 
 ## Manual Instrumentation
 
