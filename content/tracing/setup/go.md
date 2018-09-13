@@ -14,11 +14,10 @@ further_reading:
 - link: "tracing/visualization/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
-- link: "tracing/advanced_usage/"
+- link: "tracing/advanced_usage/?tab=go"
   tag: "Advanced Usage"
   text: "Advanced Usage"
 ---
-
 ## Installation and Getting Started
 
 For configuration instructions and details about using the API, check out the Datadog [API documentation][api docs] for manual instrumentation, and the [integrations section][contrib docs] for Go libraries and frameworks supporting automatic instrumentation.
