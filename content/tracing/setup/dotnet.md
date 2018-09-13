@@ -20,19 +20,9 @@ further_reading:
 .NET Tracing is in an open Public Beta and will be Generally Available in October 2018.
 </div>
 
-## Installation and Getting Started
+## Getting Started
 
 To begin tracing applications written in any language, first [install and configure the Datadog Agent][1].
-
-### Windows
-
-To use automatic instrumentation on Windows, download the latest MSI installer for Windows from the public [GitHub repository][3]. To instrument Windows services (including web applications running on IIS), reboot the host after running the installer so these services can pick up the required environment variables added by the installer.
-
-[Download MSI installer for Windows][3]
-
-### Linux
-
-Automatic instrumention for .NET Core on Linux is coming soon.
 
 ## Automatic Instrumentation
 
@@ -43,7 +33,17 @@ Automatic instrumentation captures:
 * Method execution time
 * Relevant trace data such as URL and status response codes for web requests or SQL query for database access
 * Unhandled exceptions, including stacktrace if available
-* A total count of traces (requests) flowing through the system
+* A total count of traces (e.g. web requests) flowing through the system
+
+### Windows
+
+To use automatic instrumentation on Windows, download the latest MSI installer for Windows from the public [GitHub repository][3]. To instrument Windows services (including web applications running on IIS), reboot the host after running the installer so these services can pick up the required environment variables added by the installer.
+
+[Download MSI installer for Windows][3]
+
+### Linux
+
+Automatic instrumention for .NET Core on Linux is coming soon.
 
 ### Runtime Compatibility
 
