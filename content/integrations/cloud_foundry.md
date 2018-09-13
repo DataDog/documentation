@@ -199,7 +199,7 @@ To see which `datadog-agent` release version you uploaded earlier, run `bosh rel
 
 #### Load the runtime.yml
 
-See if you have a previously configured runtime-config by running:
+Check if you have a previously configured runtime-config by running:
 
 ```
 # BOSH CLI v1
@@ -209,7 +209,7 @@ See if you have a previously configured runtime-config by running:
 bosh -e <bosh_env> runtime-config
 ```
 
-In Bosh v2, if the runtime.yml is empty, you will see response "No runtime config".
+In Bosh v2, if the `runtime.yml` file is empty, you should see the response: `No runtime config`.
 
 #### Enable extra Agent checks
 
