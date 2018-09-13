@@ -104,23 +104,23 @@ The conditional variables available are:
 | Conditional Variable       | Description                                           |
 | ------                     | -------                                               |
 | `{{is_alert}}`             | Show when monitor alerts                              |
-| `{{is_match}}`             | Show when the context matches a string                |
 | `{{^is_alert}}`            | Show unless monitor alerts                            |
+| `{{is_match}}`             | Show when the context matches a string                |
 | `{{^is_match}}`            | Show unless the context matches a string              |
+| `{{#is_exact_match}}`      | Show when the context matches a string exactly        |
 | `{{#is_no_data}}`          | Show when monitor notifies on missing data            |
-| `{{#is_warning}}`          | Show when monitor warns                               |
 | `{{^is_no_data}}`          | Show unless monitor notifies on missing data          |
+| `{{#is_warning}}`          | Show when monitor warns                               |
 | `{{^is_warning}}`          | Show unless monitor warns                             |
 | `{{#is_recovery}}`         | Show when monitor recovers                            |
 | `{{^is_recovery}}`         | Show unless monitor recovers                          |
-| `{{#is_exact_match}}`      | Show when the context matches a string exactly        |
+| `{{#is_warning_recovery}}` | Show when monitor recovers from a warning             |
+| `{{^is_warning_recovery}}` | Show unless monitor recovers from a warning           |
 | `{{^is_alert_recovery}}`   | Show unless monitor recovers from an alert            |
 | `{{#is_alert_to_warning}}` | Show when monitor transitions from alert to warning   |
-| `{{#is_no_data_recovery}}` | Show when monitor recovers from a no data             |
-| `{{#is_warning_recovery}}` | Show when monitor recovers from a warning             |
 | `{{^is_alert_to_warning}}` | Show unless monitor transitions from alert to warning |
+| `{{#is_no_data_recovery}}` | Show when monitor recovers from a no data             |
 | `{{^is_no_data_recovery}}` | Show unless monitor recovers from a no data           |
-| `{{^is_warning_recovery}}` | Show unless monitor recovers from a warning           |
 
 These can also be seen in the "Use message template variables" help box in
 Step 3 of the monitor editor.
@@ -162,34 +162,33 @@ This means that if the monitor switches from an **ALERT** to a **WARNING** to an
 {{% /tab %}}
 {{% tab "is_match / is_exact_match" %}}
 
-The `{{is_match}}` conditional allows you to match the triggering context to any given string in order to display a different message in your notifications. Use any of the available tag variables in your conditional statement. A match is made if the comparison string is anywhere in the resolved variable. Variables use the following format:
+The `{{is_match}}` conditional allows you to match the triggering context to any given string in order to display a different message in your notifications. 
+Use any of the available tag variables in your conditional statement. **A match is made if the comparison string is anywhere in the resolved variable**. 
+
+Tag variables use the following format:
 
 ```
 {{#is_match "<TAG_VARIABLE>.name" "<COMPARISON_STRING>"}}
-  This shows if <COMPARISON_STRING> is in <TAG_VARIABLE>.
+  This shows if <COMPARISON_STRING> is included in <TAG_VARIABLE>
 {{/is_match}}
 ```
 
-For example, if you want to notify your database team if a triggering host has the `role:db` tags, but notify your web team if the host has the `role:web` tags, use the following: 
+For example, if you want to notify your DB team if a triggering host has the `role:db_cassandra` tag or the `role:db_postgres` tag, use the following: 
 
 ```
-{{#is_match "role.name" "web"}}
-  This shows only if the host that triggered the alert has the tag role:web attached.
-{{/is_match}}
-
 {{#is_match "role.name" "db"}}
-  This shows only if the host that triggered the alert has the tag role:db attached
+  This shows only if the host that triggered the alert has `role` tag variable with `db` in it. 
+  It would trigger for role:db_cassandra and role:db_postgres
 {{/is_match}}
-
 ```
 
 **Note**: To check if a `<TAG_VARIABLE>` is **NOT** empty, use the `{{is_match}}` conditional with an empty string.
 
-  ```
-  {{#is_match "<TAG_VARIABLE>.name" ""}}
-    This shows if <TAG_VARIABLE> is not empty.
-  {{/is_match}}
-  ```
+```
+{{#is_match "<TAG_VARIABLE>.name" ""}}
+  This shows if <TAG_VARIABLE> is not empty.
+{{/is_match}}
+```
 
 ##### {{is_exact_match}}
 
