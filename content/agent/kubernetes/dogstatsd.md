@@ -10,11 +10,11 @@ further_reading:
   text: DogStatsD
 ---
 
-To emit custom metrics from your Kubernetes application, use [DogStatsD][1], a metrics aggregation service bundled with the Datadog Agent. DogStatsD implements the [StatsD][2] protocol with some differences. Check out more on the [DogStatsD documentation][1].
-
-**Note**: You can use [DogStatsD over Unix Domain Socket][9].
+To emit custom metrics from your Kubernetes application, use [DogStatsD][1], a metrics aggregation service bundled with the Datadog Agent. DogStatsD implements the [StatsD][2] protocol with some differences. See more on the [DogStatsD documentation][1].
 
 ## Bind the DogStatsD port to a host port
+
+You can use [DogStatsD over Unix Domain Socket][9].
 
 Add a `hostPort` to your `datadog-agent.yaml` file:
 
@@ -30,7 +30,7 @@ This enables your applications to send metrics via DogStatsD on port `8125` on w
 
 **Note**: `hostPort` functionality requires a networking provider that adheres to the [CNI specification][3], such as Calico, Canal, or Flannel. For more information, including a workaround for non-CNI network providers, consult the [Kubernetes documentation][4].
 
-To deploy the service, apply the change:
+To apply the change:
 
 ```bash
 kubectl apply -f datadog-agent.yaml
