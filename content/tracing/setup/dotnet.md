@@ -17,7 +17,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-.NET Tracing is currently in an open Public Beta and will be Generally Available in October 2018.
+.NET Tracing is in an open Public Beta and will be Generally Available in October 2018.
 </div>
 
 ## Installation and Getting Started
