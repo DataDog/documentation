@@ -60,7 +60,7 @@ Here is the list of all the matchers and filters natively implemented by Datadog
 | :---                                            | :---                                                                                                                        |
 | **Pattern**                                     | **Usage**                                                                                                                   |
 | `date("pattern"[, "timezoneId"[, "localeId"]])` | matches a date with the specified pattern and parses to produce a unix timestamp [More info](#parsing-dates)                |
-| `regex("pattern")`                              | matches a regex                                                                                                             |
+| `regex("pattern")`                              | matches a regex [More info](#regex)                                                                                         |
 | `data`                                          | matches any string including spaces and newlines. Equivalent to `.*`                                                        |
 | `notSpace`                                      | matches any string until the next space                                                                                     |
 | `boolean("truePattern", "falsePattern")`        | matches and parses a boolean optionally defining the true and false patterns (defaults to 'true' and 'false' ignoring case) |
@@ -99,7 +99,7 @@ Here is the list of all the matchers and filters natively implemented by Datadog
 | `json`                                                         | parses properly formatted JSON                                                                                                                      |
 | `rubyhash`                                                     | parses properly formatted Ruby Hash (eg {name => "John" "job" => {"company" => "Big Company", "title" => "CTO"}})                                   |
 | `geoip`                                                        | parses an IP or a host and returns a JSON object that contains the continent, country, city and location of the IP address.                         |
-| `useragent([decodeuricomponent:true/false])`                   | parses a user-agent and returns a JSON object that contains the device, os and the browser represented by the Agent. [More info](#useragent-parser) |
+| `useragent([decodeuricomponent:true/false])`                   | parses a user-agent and returns a JSON object that contains the device, os and the browser represented by the Agent. [More info][3] |
 | `querystring`                                                  | extracts all the key-value pairs in a matching URL query string (eg. "productId=superproduct&promotionCode=superpromo")                             |
 | `decodeuricomponent`                                           | this core filter decodes uri components.                                                                                                            |
 | `lowercase`                                                    | returns the lower cased string.                                                                                                                     |
@@ -110,6 +110,7 @@ Here is the list of all the matchers and filters natively implemented by Datadog
 | `url`                                                          | parses a url and returns all the tokenized members (domain, query params, port, etc) in a JSON object. [More info][1]                               |
 
 [1]: /logs/processing/processors/#url-parser
+[3]: /logs/processing/processors/#user-agent-parser
 
 {{% /tab %}}
 {{< /tabs >}}
