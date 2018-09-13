@@ -95,20 +95,20 @@ Here is the list of all the matchers and filters natively implemented by Datadog
 | `number`                                                       | Parses a match as double precision number.                                                                                                                |
 | `integer`                                                      | Parses a match as an integer number.                                                                                                                      |
 | `boolean`                                                      | Parses 'true' and 'false' strings as booleans ignoring case.                                                                                              |
-| `date("pattern"[, "timezoneId"[, "localeId"]])`                | Parses a date with the specified pattern to produce a unix timestamp. [See date Filter examples](#parsing-dates).                                         |
+| `date("pattern"[, "timezoneId"[, "localeId"]])`                | Parses a date with the specified pattern to produce a Unix timestamp. [See date Filter examples](#parsing-dates).                                         |
 | `nullIf("value")`                                              | Returns null if the match is equal to the provided value.                                                                                                 |
 | `json`                                                         | Parses properly formatted JSON.                                                                                                                           |
-| `rubyhash`                                                     | Parses properly formatted Ruby Hash (e.g. `{name => "John" "job" => {"company" => "Big Company", "title" => "CTO"}}`).                                    |
-| `geoip`                                                        | Parses an IP or a host and returns a JSON object that contains the continent, country, city and location of the IP address.                               |
-| `useragent([decodeuricomponent:true/false])`                   | Parses a user-agent and returns a JSON object that contains the device, os and the browser represented by the Agent. [Check the User Agent processor][3]. |
+| `rubyhash`                                                     | Parses properly formatted Ruby hash (e.g. `{name => "John" "job" => {"company" => "Big Company", "title" => "CTO"}}`).                                    |
+| `geoip`                                                        | Parses an IP or a host and returns a JSON object that contains the continent, country, city, and location of the IP address.                               |
+| `useragent([decodeuricomponent:true/false])`                   | Parses a user-agent and returns a JSON object that contains the device, OS, and the browser represented by the Agent. [Check the User Agent processor][3]. |
 | `querystring`                                                  | Extracts all the key-value pairs in a matching URL query string (e.g. `?productId=superproduct&promotionCode=superpromo`).                                |
-| `decodeuricomponent`                                           | This core filter decodes uri components.                                                                                                                  |
-| `lowercase`                                                    | Returns the lower cased string.                                                                                                                           |
-| `uppercase`                                                    | Returns the upper cased string.                                                                                                                           |
+| `decodeuricomponent`                                           | This core filter decodes URI components.                                                                                                                  |
+| `lowercase`                                                    | Returns the lower-cased string.                                                                                                                           |
+| `uppercase`                                                    | Returns the upper-cased string.                                                                                                                           |
 | `keyvalue([separatorStr[, characterWhiteList [, quotingStr]])` | Extracts key value pattern and returns a JSON object. [See key-value Filter examples](#key-value).                                                        |
 | `scale(factor)`                                                | Multiplies the expected numerical value by the provided factor.                                                                                           |
 | `array([[openCloseStr, ] separator][, subRuleOrFilter)`        | Parses a string sequence of tokens and returns it as an array.                                                                                            |
-| `url`                                                          | Parses a url and returns all the tokenized members (domain, query params, port, etc) in a JSON object. [More info on how to parse URL][1].                |
+| `url`                                                          | Parses a UFL and returns all the tokenized members (domain, query params, port, etc.) in a JSON object. [More info on how to parse URLs][1].                |
 
 
 
