@@ -67,6 +67,54 @@ config_providers:
     polling: true
 ```
 
+### Tag extraction
+
+{{< tabs >}}
+{{% tab "Docker" %}}
+
+The Datadog Agent can extract container labels and environment variables as metric tags with the following configuration in your `datadog.yaml` file:
+
+```
+docker_labels_as_tags:
+  <LABEL_NAME>: <TAG_NAME>
+
+docker_env_as_tags:
+  <ENVVAR_NAME>: <TAG_NAME>
+```
+
+For example you could set up:
+
+```
+docker_labels_as_tags:
+  com.docker.compose.service: service_name
+```
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+The Datadog Agent can extract pod labels and annotations as metric tags with the following configuration in your `datadog.yaml` file:
+
+```
+kubernetes_pod_labels_as_tags:
+  <POD_LABEL>: <TAG_NAME>
+
+kubernetes_pod_annotations_as_tags:
+  <POD_ANNOTATIONS>: <TAG_NAME>
+```
+
+For example you could set up:
+
+```
+kubernetes_pod_labels_as_tags:
+  app: kube_app
+
+kubernetes_pod_annotations_as_tags:
+  app: kube_app
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Setting up Check Templates
 
 Each **Template Source** section below shows a different way to configure check templates and their container identifiers.
