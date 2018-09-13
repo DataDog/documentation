@@ -9,17 +9,18 @@ This guide outlines the workflow for creating a status based check on Windows.
 2. [Restart the Agent][1] using the Agent Manager (or restart the service)
 
 3. Check the info page in the Agent Manager and verify that the integration check has passed. It should display a section similar to the following:
-```
-Checks
-======
 
-  [...]
+    ```
+    Checks
+    ======
 
-  windows_service
-  ---------------
-      - instance #0 [OK]
-      - Collected 0 metrics 0 events & 1 service check
-```
+    [...]
+
+    windows_service
+    ---------------
+        - instance #0 [OK]
+        - Collected 0 metrics 0 events & 1 service check
+    ```
 
 4. Install the integration by clicking "Install" [on your Datadog application dedicated page][2]:
 
