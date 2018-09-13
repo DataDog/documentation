@@ -93,7 +93,7 @@ Don’t see your desired data store libraries? We’re continually adding additi
 
 Manual instrumentation is supported on .NET Framework 4.5+ on Windows and on any platform that implements .NET Standard 2.0, including .NET Core 2.0+ on Windows, Linux, and macOS, Xamarin on iOS and Android, and Mono. See the [.NET Standard documentation][6] for more details on supported platforms.
 
-To manually instrument your code, add the [`Datadog.Trace`][4] NuGet package to your application. In your code, access the global tracer through `Datadog.Trace.Tracer.Instance` to create new spans.
+To manually instrument your code, add the `Datadog.Trace` package from [NuGet][4] to your application. In your code, access the global tracer through `Datadog.Trace.Tracer.Instance` to create new spans.
 
 For more details on manual instrumentation and custom tagging, see [Advanced Usage][2].
 
