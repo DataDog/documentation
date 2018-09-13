@@ -242,39 +242,22 @@ span.setTag('<TAG_KEY>', '<TAG_VALUE>')
 
 **Adding tags to a span**
 
-Add tags directly to a span by calling `SetTag()`. For example:
+Add tags directly to a `Datadog.Trace.Span` object by calling `Span.SetTag()`. For example:
 
 ```csharp
-// An example of an ASP.NET MVC action,
-// with Datadog tracing around the request.
-public class HomeController
-{
-    public ActionResult Index()
-    {
-        using (var scope = Tracer.Instance.StartActive("web.request"))
-        {
-            scope.Span.SetTag("http.url", HttpContext.Request.RawUrl);
-            scope.Span.SetTag("http.method", HttpContext.Request.HttpMethod);
+using Datadog.Trace;
 
-            // do some work...
+// get the global tracer
+var tracer = Tracer.Instance;
 
-            return View();
-        }
-    }
-}
+// get the currently active span (can be null)
+var span = tracer.ActiveScope?.Span;
+
+// add a tag to the span
+span?.SetTag("<TAG_KEY>", "<TAG_VALUE>");
 ```
 
-**Adding tags to a current active span**
-
-Access the current active span from any method within your code. 
-
-```csharp
-// add tag to active span
-var span = Tracer.Instance.ActiveScope.Span;
-span.SetTag("<TAG_KEY>", "<TAG_VALUE>");
-```
-
-**Note**: If the method is called and there is no span currently active, `Tracer.Instance.ActiveScope` returns `null`.
+**Note**: `Datadog.Trace.Tracer.Instance.ActiveScope` returns `null` if there is no active span.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -471,16 +454,20 @@ For more information on manual instrumentation, see the [API documentation][node
 
 If you aren’t using libraries supported by automatic instrumentation (see [Library compatibility][dotnet compatibility]), you should manually instrument your code.
 
-The following example initializes a Datadog Tracer and creates a span called `web.request`:
+The following example uses the global Datadog Tracer and creates a span to trace a web request:
 
 ```csharp
 using Datadog.Trace;
 
-var scope = Tracer.Instance.StartActive("web.request");
-var span = scope.Span;
+using(var scope = Tracer.Instance.StartActive("web.request"))
+{
+    var span = scope.Span;
+    span.Type = SpanTypes.Web;
+    span.ResourceName = request.Url;
+    span.SetTag(Tags.HttpMethod, request.Method);
 
-span.SetTag("http.url", "/login");
-span.Finish();
+    // do some work...
+}
 ```
 
 [dotnet compatibility]: /tracing/setup/dotnet/#compatibility
