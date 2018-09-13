@@ -22,7 +22,7 @@ further_reading:
 
 ## Introduction
 
-This section explains the nuts and bolts of metrics - what they are, and what they do. Whether you want to send [custom metrics][4], or just want to have a better understanding about how Datadog works, read on. If you're looking for information about the DogStatsD (which implements these metrics), please see the [DogStatsD documentation][5].
+This section explains the nuts and bolts of metrics—what they are, and what they do. Whether you want to send [custom metrics][4], or just want to have a better understanding about how Datadog works, read on. If you're looking for information about the DogStatsD (which implements these metrics), see the [DogStatsD documentation][5].
 
 ### Submitting metrics
 

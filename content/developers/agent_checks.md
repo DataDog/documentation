@@ -32,7 +32,7 @@ For more information about how to write an integration, see [Creating New Integr
 
 ## Setup
 
-First off, ensure you've properly installed the [Agent][3] on your machine. If you run into any issues during the setup, [contact our support][4].
+First off, ensure you've properly installed the [Agent][3] on your machine. If you run into any issues during the setup, [contact Datadog support][4].
 
 ## `AgentCheck` interface
 
@@ -272,7 +272,7 @@ First let's define how the configuration should look so that we know how to hand
 
 Besides just defining a URL per call, it'd be nice to allow you to set a timeout for each URL. We'd also want to be able to configure a default timeout if no timeout value is given for a particular URL.
 
-So our final configuration looks something like this:
+The final configuration looks something like this:
 
 ```yaml
 init_config:
@@ -290,8 +290,7 @@ instances:
 
 ### The check
 
-Now let's define our check method. The main part of the check makes
-a request to the URL and time the response time, handling error cases as it goes.
+Now let's define the check method. The main part of the check makes a request to the URL and measures the response time, handling error cases as it goes.
 
 In this snippet, we start a timer, make the GET request using the [requests library][9] ([Learn how to add custom python package to the Agent][12]) and handle and errors that might arise.
 

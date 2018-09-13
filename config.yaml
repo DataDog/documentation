@@ -59,7 +59,7 @@ languages:
           pre: "nav_agent"
           weight: 40
 
-        ## Basic agent usage
+        ## Basic Agent usage
         - identifier: customnav_agentnav_basic_usage
           name: "Basic Agent Usage"
           url: "agent/basic_agent_usage/"
@@ -542,7 +542,7 @@ languages:
           weight: 180
           parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_dotnet
-          name: ".NET (Coming soon)"
+          name: ".NET"
           url: "tracing/setup/dotnet/"
           weight: 190
           parent: customnav_tracingnav_setup
@@ -840,14 +840,14 @@ languages:
           url: "logs/explorer/search"
           weight: 510
           parent: customnav_lognav_explorer
-        - identifier: customnav_lognav_saved_views
-          name: "Saved Views"
-          url: "logs/explorer/saved_views"
-          weight: 520
-          parent: customnav_lognav_explorer
         - identifier: customnav_lognav_analytics
           name: "Log Analytics"
           url: "logs/explorer/analytics"
+          weight: 520
+          parent: customnav_lognav_explorer
+        - identifier: customnav_lognav_saved_views
+          name: "Saved Views"
+          url: "logs/explorer/saved_views"
           weight: 530
           parent: customnav_lognav_explorer
 
@@ -1156,7 +1156,7 @@ languages:
           pre: "nav_agent"
           weight: 40
 
-        ## Basic agent usage
+        ## Basic Agent usage
         - identifier: customnav_agentnav_basic_usage
           name: "Utilisation de base de l'Agent"
           url: "agent/basic_agent_usage/"
@@ -1584,7 +1584,7 @@ languages:
           weight: 180
           parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_dotnet
-          name: ".NET (Coming soon)"
+          name: ".NET"
           url: "tracing/setup/dotnet/"
           weight: 190
           parent: customnav_tracingnav_setup
@@ -1888,14 +1888,14 @@ languages:
           url: "logs/explorer/search"
           weight: 510
           parent: customnav_lognav_explorer
-        - identifier: customnav_lognav_saved_views
-          name: "Saved Views"
-          url: "logs/explorer/saved_views"
-          weight: 520
-          parent: customnav_lognav_explorer
         - identifier: customnav_lognav_analytics
           name: "Log Analytics"
           url: "logs/explorer/analytics"
+          weight: 520
+          parent: customnav_lognav_explorer
+        - identifier: customnav_lognav_saved_views
+          name: "Saved Views"
+          url: "logs/explorer/saved_views"
           weight: 530
           parent: customnav_lognav_explorer
 

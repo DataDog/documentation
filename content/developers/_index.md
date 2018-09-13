@@ -24,7 +24,7 @@ Our [Metrics section][6] is a deep-dive into the heart of Metrics at Datadog. Th
 
 #### Office Hours
 
-Finally, don't miss out on the regular [Datadog Office Hours][7], which is your opportunity to chat directly with our engineers about developing for Datadog.
+Finally, don't miss out on the regular [Datadog Office Hours][7], which is your opportunity to chat directly with in-house engineers about developing for Datadog.
 
 Thanks for stopping by-and welcome to the contributor community!
 

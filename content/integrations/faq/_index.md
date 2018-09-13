@@ -1,6 +1,7 @@
 ---
 title: FAQ Integrations
 kind: faq
+private: true
 ---
 
 ## General
@@ -33,7 +34,6 @@ kind: faq
 * [Why is there a delay in receiving my data?][22]
 * [I can't filter out my ELB instances - will I be charged for them?][23]
 * [I just set up my AWS integration. Why am I seeing duplicate hosts?][24]
-* [Capturing EC2 tags at startup][25]
 
 ## Apache
 
@@ -51,7 +51,7 @@ kind: faq
 * [DogStatsD and Docker][33]
 * [Docker, ECS, & Kubernetes Events][34]
 
-## Elasticsearch 
+## Elasticsearch
 
 * [Why isn't Elasticsearch sending all my metrics?][35]
 * [Agent can't connect][36]
@@ -87,8 +87,8 @@ kind: faq
 
 * [Agent failed to retrieve RMIServer stub][50]
 * [Producer and Consumer metrics don't appear in my Datadog application][51]
- 
-## Kubernetes 
+
+## Kubernetes
 
 * [Can I install the Agent on my Kubernetes master node(s)][52]
 * [Client Authentication against the apiserver and kubelet][53]
@@ -96,7 +96,7 @@ kind: faq
 * [Why is the Kubernetes check failing with a ConnectTimeout error to port 10250?][55]
 * [Using RBAC permission with your Kubernetes integration][56]
 
-## MySQL & SQL 
+## MySQL & SQL
 * [Connection Issues with the SQL Server Integration][57]
 * [MySQL Localhost Error - Localhost VS 127.0.0.1][58]
 * [Can I use a named instance in the SQL Server integration?][59]
@@ -105,6 +105,7 @@ kind: faq
 * [Can I collect SQL Server performance metrics beyond what is available in the sys.dm_os_performance_counters table? Try WMI][62]
 * [How can I collect more metrics from my SQL Server integration?][63]
 * [Database user lacks privileges][64]
+* [How to collect metrics with a SQL Stored Procedure?][79]
 
 ## Network
 * [How to send TCP/UDP host metrics via the Datadog API ?][65]
@@ -165,7 +166,6 @@ kind: faq
 [22]: /integrations/faq/why-is-there-a-delay-in-receiving-my-data
 [23]: /integrations/faq/i-can-t-filter-out-my-elb-instances-will-i-be-charged-for-them
 [24]: /integrations/faq/i-just-set-up-my-aws-integration-why-am-i-seeing-duplicate-hosts
-[25]: /integrations/faq/capturing-ec2-tags-at-startup
 [26]: /integrations/faq/issues-with-apache-integration
 [27]: /integrations/faq/apache-ssl-certificate-issues
 [28]: /integrations/faq/my-azure-vm-is-powered-down-why-is-it-still-listed-in-my-infrastructure-list
@@ -217,3 +217,4 @@ kind: faq
 [76]: /integrations/faq/how-to-monitor-events-from-the-windows-event-logs
 [77]: /integrations/faq/how-to-retrieve-wmi-metrics
 [78]: /integrations/faq/jboss-eap-7-datadog-monitoring-via-jmx
+[79]: /integrations/faq/how-to-collect-metrics-with-sql-stored-procedure

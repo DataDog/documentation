@@ -14,11 +14,11 @@ Configure your Datadog-AWS integration directly through Datadog API.
 
 * **`account_id`** [*required*]:  
     Your AWS Account ID without dashes.  
-    [Consult our Datadog AWS integration to learn more][2] about your AWS account ID.
+    [Consult the Datadog AWS integration to learn more][2] about your AWS account ID.
 
 * **`role_name`** [*required*]:  
     Your Datadog role delegation name.  
-    [Consult our Datadog AWS integration to learn more][3] about your AWS account Role name.
+    [Consult the Datadog AWS integration to learn more][3] about your AWS account Role name.
 
 * **`filter_tags`** [*optional*, *default*=**None**]:  
     Array of EC2 tags (in the form `key:value`) defines a filter that Datadog use when collecting metrics from EC2. Wildcards, such as `?` (for single characters) and `*` (for multiple characters) can also be used.  

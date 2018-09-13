@@ -84,7 +84,7 @@ This feature can be enabled by following these simple steps:
 
 ## Backup my Screenboard
 
-Using our [APIs][3] it's possible to write a script to backup your Screenboard definitions as code. See the following projects as examples of how these backups can be accomplished:
+Using Datadog [APIs][3] it's possible to write a script to backup your Screenboard definitions as code. See the following projects as examples of how these backups can be accomplished:
 
 * https://github.com/brightcove/dog-watcher
 * https://github.com/Shopify/doggy

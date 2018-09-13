@@ -3,7 +3,7 @@ title: How can I graph the percentage change between an earlier value and a curr
 kind: faq
 ---
 
-If you want to visualize how a metric's values have changed in comparison to an earlier time period, do so by leveraging the timeshift functions [detailed here][1]. Currently, you can capture a metric's value from an hour, day, week, or month before.
+If you want to visualize how a metric's values have changed in comparison to an earlier time period, do so by leveraging the Timeshift functions [detailed in the Timeshift function documentation][1]. You can capture a metric's value from an hour, day, week, or month before.
 
 To calculate this, you can create a query such as this:
 ```

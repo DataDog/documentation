@@ -37,7 +37,7 @@ In this sense, notebooks function like both types of Datadog dashboards: timeboa
 
 ### Types of content
 
-Metrics in a notebook are graphed using the standard query editor that appears throughout Datadog. Notebooks currently support three types of visualizations: timeseries, heatmaps, and distributions.
+Metrics in a notebook are graphed using the standard query editor that appears throughout Datadog. Notebooks support three types of visualizations: timeseries, heatmaps, and distributions.
 
 Like in the Metrics Explorer, a metric can be compared across different groups in your infrastructure. For example, if a metric is reporting across multiple hosts, a notebook lets you generate separate graphs that show the metric's behavior on each host.
 

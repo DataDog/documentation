@@ -20,9 +20,9 @@ The Log Management solution is an all-in-one comprehensive solution that compris
 
 ## Log Collection
 
-Log collection is the beginning of your journey in the wonderful world of log-management. Use the [Datadog Agent][6] to collect logs directly from your hosts or your containerized environments. You can collect AWS service logs with our [AWS Lambda function](#from-aws-services).If you are already using a log-shipper daemon, refer to our dedicated documentation for [Rsyslog][1], [Syslog-ng][2], [NXlog][3], [FluentD][4], and [Logstash][5].
+Log collection is the beginning of your journey in the wonderful world of log-management. Use the [Datadog Agent][6] to collect logs directly from your hosts or your containerized environments. You can collect AWS service logs with Datadog's [AWS Lambda function](#from-aws-services).If you are already using a log-shipper daemon, refer to the dedicated documentation for [Rsyslog][1], [Syslog-ng][2], [NXlog][3], [FluentD][4], and [Logstash][5].
 
-Integrations and Log Collection are intimately tied together, by collecting Logs the right way you make sure to auto-configure all the the subsequent components such as [processing][33], [parsing][29], and [facets][18] in the Explorer. **[Discover the log integrations currently supported by Datadog][37]**. You can also define custom log sources if there isn't an integration for your source yet.
+Integrations and Log Collection are intimately tied together, by collecting Logs the right way you make sure to auto-configure all the the subsequent components such as [processing][33], [parsing][29], and [facets][18] in the Explorer. **[Discover the log integrations supported by Datadog][37]**. You can also define custom log sources if there isn't an integration for your source yet.
 
 <div class="alert alert-warning">
 <a href="https://docs.datadoghq.com/integrations/#cat-log-collection">Consult the current list of available supported integrations</a>.
@@ -47,7 +47,7 @@ In Kubernetes environments you can also leverage [the daemonset installation][15
 
 The Datadog Agent can be used to collect logs directly from ECS or EC2 instances and applications running on them.
 
-However, AWS services logs are collected thanks to our [Lambda function][12]. Triggers are then defined ([manually or automatically][13]) to forward logs from any S3 bucket, Cloudwatch Log group, or Cloudwatch events.
+However, AWS services logs are collected thanks to Datadog's [Lambda function][12]. Triggers are then defined ([manually or automatically][13]) to forward logs from any S3 bucket, Cloudwatch Log group, or Cloudwatch events.
 
 ### From a custom forwarder
 
@@ -76,37 +76,14 @@ Here are some key attributes you should pay attention to when setting up your pr
 
 | Attribute   | Description                                                                                                                                                                                           |
 | :-------    | :------                                                                                                                                                                                               |
-| **Host**    | The name of the originating host as defined in metrics. We automatically retrieve corresponding host tags from the matching host in Datadog and apply them to your logs. The Agent sets this value automatically.                          |
-| **Source**  | This corresponds to the integration name: the technology from which the log originated. When it matches an integration name, Datadog automatically installs the corresponding parsers and facets. For example: nginx, postgresql, etc.|
-| **Service** | This is the name of the application or service generating the log events. It is used to switch from Logs to APM so make sure you define the same value when you use both products.                       |
-| **Message** | By default, Datadog ingests the value of the `message` attribute as the body of the log entry. That value is then highlighted and displayed in the logstream, where it is indexed for full text search.               |
+| `host`    | The name of the originating host as defined in metrics. We automatically retrieve corresponding host tags from the matching host in Datadog and apply them to your logs. The Agent sets this value automatically.                          |
+| `source`  | This corresponds to the integration name: the technology from which the log originated. When it matches an integration name, Datadog automatically installs the corresponding parsers and facets. For example: nginx, postgresql, etc.|
+| `service` | The name of the application or service generating the log events. It is used to switch from Logs to APM, so make sure you define the same value when you use both products.                       |
+| `message` | By default, Datadog ingests the value of the `message` attribute as the body of the log entry. That value is then highlighted and displayed in the Logstream, where it is indexed for full text search.               |
 
-Your logs are now collected and centralized into the [Log Explorer][17] view, but this is just the beginning: now you can search, enrich, and alert on your logs.
+Your logs are collected and centralized into the [Log Explorer][17] view. You can also search, enrich, and alert on your logs.
 
 {{< img src="logs/log_explorer_view.png" alt="Log Explorer view" responsive="true" >}}
-
-## Search your Logs
-
-If your environment relies on any integrations, then processors, parsers, and facets are most likely pre-installed. Use integration [facets][18] or [add custom ones][19] to slice and dice in your logs. You can also use tags shared by logs, metrics, and traces to filter your data or even [free text search][20] on the log message:
-
-{{< img src="logs/search_your_logs.gif" alt="Search your logs" responsive="true" >}}
-
-Follow our [guide to explore your logs][17] for a more detailed explanation of all the Log Explorer features including use of wildcards and queries of numerical values.
-
-## Graph and Analytics
-
-Now that your logs are parsed and you have facets and Measure over the important attributes, you can graph log queries and see maximums, averages, percentiles, unique counts, and more.
-
-1. Choose a [Measure][21] or [Facet][18] to graph. [A Measure][21] lets you choose an aggregation function whereas a [Facet][18] displays the count of unique values.
-2. Select the aggregation function for the [Measure][21] you want to graph:
-3. Use a Tag or [Facet][18] to split your graph.
-4. Choose to display either the X top or bottom values according to the selected [Measure][21].
-
-{{< img src="logs/log_analytics.png" alt="Log Analytics" responsive="true" style="width:70%;">}}
-
-To see the logs that underlie a value or range of values in the graph, just click on the desired point and choose "[view logs][22]" to open a contextual panel with all the underlying logs:
-
-Follow our [log graphing guide][23] to learn more about all the graphing option.
 
 ## Further Reading
 

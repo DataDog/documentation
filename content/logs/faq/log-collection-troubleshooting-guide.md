@@ -33,7 +33,7 @@ The `datadog-agent` does not run as root (and we do not recommend that you make 
 If the `datadog-agent` user does not have read access to the files you configure it to tail, then a permissions error is captured in the `/var/log/datadog/agent.log`. The Agent requires to have an execute permission on the directory containing the files (this is the default permission required to be able to list the file contained in a directory).
 
 **Note**: When adding the appropriate read permissions, make sure that these permissions are correctly set in your log rotation configuration. Otherwise, on the next log rotate, the Datadog Agent may lose its read permissions.
-Set permissions as `644` in the log rotation configuration to make sure the agent has read access to the files.
+Set permissions as `644` in the log rotation configuration to make sure the Agent has read access to the files.
 
 ## Outbound traffic on port 10516 is blocked
 

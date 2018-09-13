@@ -28,7 +28,7 @@ Configure NXLog to gather logs from your host, containers, & services.
     Replace the whole file in `C:\Program Files\nxlog\conf` by the following: 
 
     ```
-    ## Please set the ROOT to the folder your nxlog was installed into,
+    ## Set the ROOT to the folder your nxlog was installed into,
     ## otherwise it won't start.
     #To change for your own system if necessary
     define ROOT C:\Program Files\nxlog

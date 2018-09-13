@@ -55,7 +55,7 @@ There are several ways to specify an environment when reporting data:
   Use a host tag with the format `env:XXXX` to tag all traces from that Agent accordingly.
 
 2. Agent configuration:  
-  Override the default tag used by the trace Agent in [the Agent configuration file][2]. This tags all traces coming through the Agent, overriding the host tag value.
+  Override the default tag used by the Agent in [the Agent configuration file][2]. This tags all traces coming through the Agent, overriding the host tag value.
 
     ```
     apm_config:
@@ -100,7 +100,7 @@ Datadog.tracer.set_tags('env' => 'prod')
 
 ```python
 from ddtrace import tracer
-tracer.set_tags('env', 'prod')
+tracer.set_tags({'env': 'prod'})
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -129,11 +129,11 @@ Primary tags must follow a different set of rules from those of conventional tag
 
 ### Setup
 
-APM primary tags must be set up in two ways: in the trace Agent and in the Datadog UI.
+APM primary tags must be set up in two ways: in the Agent and in the Datadog UI.
 
 #### Agent configuration
 
-Override the default tag used by the trace Agent in the [Agent configuration file][2]. This tags all traces coming through the Agent, overriding the host tag value. An APM primary tag is configured like any regular host tag. Specify it as:
+Override the default tag used by the Agent in the [Agent configuration file][2]. This tags all traces coming through the Agent, overriding the host tag value. An APM primary tag is configured like any regular host tag. Specify it as:
 
 ```
 tags:
@@ -147,7 +147,7 @@ Visit the [APM Settings][3] page to define, change, or remove primary tags. Note
 * Only organization Administrators have access to this page. 
 * Changes may take up to two hours to be reflected in the UI.
 
- If you change a previously set primary tag, please be aware of the following:
+If you change a previously set primary tag, be aware of the following:
 
 * Historical APM data aggregated by the previously set tag will no longer be accessible.
 * Any APM monitors scoped to the previous tag will display a status of _No Data_.

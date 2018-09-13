@@ -11,7 +11,7 @@ As your containerized environment grows, containers and orchestrators start emit
 
 To ensure that you don't have to worry about the eventual noise, events provided by default are limited to only severe and important events listed below.  
 
-If further access is needed to any other events in a specific integration, please [reach out to us][3] to have these events enabled for your organization.
+If further access is needed to any other events in a specific integration, [reach out to Datadog support team][3] to have these events enabled for your organization.
 
 ## Docker, ECS, and Kubernetes Integration Details
 

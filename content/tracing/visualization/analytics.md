@@ -99,11 +99,9 @@ Export your Trace analytic:
 * To create a new [APM monitor][4]:  
     This feature is not available yet.
 * To an existing [Timeboard][5]:  
-    This functionality is in beta, [contact our support team][6] to activate it for your organization.
+    This functionality is in beta, [contact the Datadog support team][6] to activate it for your organization.
 
 ## Traces in Dashboard 
-
-**This functionality is still in beta, [contact our support team][6] to activate it for your organization.**
 
 Export [Trace Analytics][7] from the Trace search or build them directly in your [Dashboard][8] alongside metrics and logs.
 

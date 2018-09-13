@@ -15,7 +15,7 @@ further_reading:
 - link: "tracing/visualization/"
   tag: "Use the APM UI"
   text: "Explore your services, resources and traces"
-- link: "tracing/advanced_usage/"
+- link: "tracing/advanced_usage/?tab=nodejs"
   tag: "Advanced Usage"
   text: "Advanced Usage"
 ---
@@ -24,7 +24,7 @@ further_reading:
 
 For descriptions of terminology used in APM, take a look at the [official documentation][visualization docs].
 
-For details about configuration and using the API, check out our [API documentation][2].
+For details about configuration and using the API, see Datadog's [API documentation][2].
 
 For details about contributing, check out the [development guide][development docs].
 

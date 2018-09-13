@@ -17,10 +17,6 @@ further_reading:
   text: See how to explore your logs
 ---
 
-Switch between the Log List and the Log Analytics modes by clicking on the *Log Mode* button:
-
-{{< img src="logs/explorer/analytics/log_graph_switch.png" alt="Log Analytics switch" responsive="true" style="width:40%;">}}
-
 ## Log Analytics query 
 
 Use the query to control what's displayed in your Log Analytics:
@@ -88,27 +84,6 @@ The evolution of the **top 5 URL Paths** according to the number of **unique Cli
 Select or click on a section of the graph to either zoom in the graph or see the list of logs corresponding to your selection:
 
 {{< img src="logs/explorer/analytics/view_logs.gif" alt="view logs" responsive="true" style="width:80%;">}}
-
-## Export
-
-{{< img src="logs/explorer/analytics/export_monitor.png" alt="view logs button" responsive="true" style="width:40%;">}}
-
-Export your Log Analytics: 
-
-* To create a new [log monitor][4]:  
-    Go to the [Explorer view][10] (not Analytics) and click **Export**. The query of your Log Analytics is used to create the log monitor query. This feature is not available from the Analytics view.
-* To an existing [Timeboard][5]:  
-    This functionality is in beta. [Contact our support team][6] to activate it for your organization.
-
-## Logs in Dashboard 
-
-**This functionality is still in beta, [contact our support team][6] to activate it for your organization.**
-
-Export [Log Analytics][7] from the Log Explorer or build them directly in your [Dashboard][8] alongside metrics and traces.
-
-{{< img src="logs/explorer/analytics/log_graph_in_dashboard.png" alt="Log Analytics in dashboard" responsive="true" style="width:90%;">}}
-
-Similar to the Log Explorer, click on a any graph in your dashboards to jump to [the most related logs][9].
 
 ## Further Reading
 

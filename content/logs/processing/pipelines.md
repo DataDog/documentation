@@ -54,6 +54,12 @@ The logstream shows which logs your Pipeline applies to:
 
 {{< img src="logs/processing/pipelines/pipeline_filters.png" alt="Pipelines filters" responsive="true" style="width:80%;">}}
 
+## Restrict Pipelines access to Admin users
+
+By default, all users can edit pipeline. Administrators can activate read-only mode, which disables all non-admin edits to your pipelines. You can change these preferences at anytime by clicking on the below lock:
+
+{{< img src="logs/processing/pipelines/pipeline_lock.png" alt="Pipeline Lock" responsive="true" style="width:70%;">}}
+
 ## Special Pipelines
 
 ### Reserved attribute Pipeline
@@ -109,7 +115,7 @@ Log events which do not comply with these limits might be transformed or truncat
 * The maximum number of facets is 100.
 * The maximum number of processing Pipeline on a platform is 100.
 * The maximum number of Processor per Pipeline is 20.
-* The maximum number of parsing rule within a grok Processor is 10. We reserve the right to disable underperforming parsing rules that might impact our service performance.
+* The maximum number of parsing rule within a grok Processor is 10. We reserve the right to disable underperforming parsing rules that might impact Datadog's service performance.
 
 [Contact support][2] if you reach one of these limits as Datadog might be able to provide you more.
 

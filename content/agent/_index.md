@@ -23,7 +23,7 @@ Agent v6 is now available, <a href="https://github.com/DataDog/datadog-agent/blo
 
 ## What is the Agent?
 
-The Datadog Agent is a piece of software that runs on your hosts. Its job is to faithfully collect events and metrics and bring them to Datadog on your behalf so that you can do something useful with your monitoring and performance data. The Datadog Agent is open source, view the source code on GitHub for [Agent v5][1] and [Agent v6][2]. To see all changes between Agent v5 and v6, [consult our dedicated changes documentation][3].
+The Datadog Agent is a piece of software that runs on your hosts. Its job is to faithfully collect events and metrics and bring them to Datadog on your behalf so that you can do something useful with your monitoring and performance data. The Datadog Agent is open source: view the source code on GitHub for [Agent v5][1] and [Agent v6][2]. To see all changes between Agent v5 and v6, consult the [Datadog Agent dedicated changes][3] documentation.
 
 {{< partial name="platforms/platforms.html" >}}
 
@@ -37,7 +37,7 @@ This is all controlled by one supervisor process. We keep this separate so you d
 
 ## What is the Agent v6?
 
-Agent 6 is the latest major version of the Datadog Agent. The big difference between Agent 5 and Agent 6 is that Agent 6 is a complete rewrite of the core Agent in Golang. Golang has allowed us to take advantage of concurrency. In place of the three processes the Agent v5 used to run --*the Forwarder*, *the Collector*, and *DogStatsD*-- there is now only one process: the Agent. It also comes with a number of other core improvements:
+Agent 6 is the latest major version of the Datadog Agent. The big difference between Agent 5 and Agent 6 is that Agent 6 is a complete rewrite of the core Agent in Golang. Golang has allowed the Agent to take advantage of concurrency. In place of the three processes the Agent v5 used to run—*the Forwarder*, *the Collector*, and *DogStatsD*—there is now only one process: the Agent. It also comes with a number of other core improvements:
 
 * Agent v6 has significantly improved resource usage over Agent v5:
   * It has decreased CPU usage
@@ -45,7 +45,7 @@ Agent 6 is the latest major version of the Datadog Agent. The big difference bet
   * It uses fewer file descriptors
   * It has an all around decreased footprint
 
-* [Distributions metrics][17] can be performed on the server directly to calculate real, effective global percentiles. (NOTE: this feature is currently in BETA. Contact support for details on how to have it enabled for your account.)
+* [Distributions metrics][17] can be performed on the server directly to calculate real, effective global percentiles. (NOTE: this feature is in BETA. Contact support for details on how to have it enabled for your account.)
 
 * [DogStatsD][6] can be used over a Unix socket instead of over udp.
 
@@ -154,7 +154,7 @@ The port which the GUI runs on can be configured in your `datadog.yaml` file. Se
 
 Once the Agent is running, use the `datadog-agent launch-gui` command to launch the GUI within your default web browser.
 
-**Note**: The agent GUI isn't supported on 32-bit Windows platforms.
+**Note**: The Agent GUI isn't supported on 32-bit Windows platforms.
 
 ### Requirements
 

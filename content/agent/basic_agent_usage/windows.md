@@ -273,7 +273,7 @@ On your target host, first launch the Datadog Agent Manager and select the "Wind
 
 For the Windows Service Integration, there is an out-of-the-box example, however, this example uses DHCP.
 
-First, to get the name of the service, open services.msc and locate your target service. Using DHCP as our target, you can see the service name at the top of the service properties window:
+First, to get the name of the service, open `services.msc` and locate your target service. Using DHCP as the target, you can see the service name at the top of the service properties window:
 
 {{< img src="agent/faq/DHCP.png" alt="DHCP" responsive="true" style="width:75%;">}}
 
@@ -298,7 +298,7 @@ The Datadog Agent collects a large number of system metrics out of the box. One 
 | system.load.norm.15 (gauge) | The average system load over fifteen minutes normalized by the number of CPUs. |
 | system.load.norm.5 (gauge)  | The average system load over five minutes normalized by the number of CPUs.    |
 
-The system.load.* metric is Unix specific, it conveys the average amount of resources either waiting to use or currently using the CPU. Each process waiting to use or using the CPU increases the load number by 1. The number at the end of the metric name indicates the average number of these processes in the previous X minutes. For system.load.5, this would be the average over the last 5 minutes. A value of 0 indicates a completely idle CPU, and a number equal to the number of CPU cores in the environment indicates that the CPU can handle every request coming in with no delay. Any number greater than this means that processes are waiting to use the CPU.
+The `system.load.*` metric is Unix-specific: it conveys the average amount of resources either waiting to use or currently using the CPU. Each process waiting to use or using the CPU increases the load number by 1. The number at the end of the metric name indicates the average number of these processes in the previous X minutes. For example, `system.load.5` is the average over the last 5 minutes. A value of 0 indicates a completely idle CPU, and a number equal to the number of CPU cores in the environment indicates that the CPU can handle every request coming in with no delay. Any number greater than this means that processes are waiting to use the CPU.
 
 #### Where is System Load for Windows?
 

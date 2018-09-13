@@ -78,6 +78,7 @@ kind: faq
 |Chef|CHEF|
 |Circleci|CIRCLECI|
 |Cisco Aci|CISCOACI|
+|Cloudflare|CLOUDFLARE|
 |Cloud Foundry|CLOUDFOUNDRY|
 |Cloudhealth|CLOUDHEALTH|
 |Cloudnetworkhealth|CLOUDNETWORKHEALTH|

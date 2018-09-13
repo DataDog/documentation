@@ -112,9 +112,7 @@ aliases:
 | :--------           | :--------                                                                     |
 | Linux               | `sudo service datadog-agent status`                                           |
 | Docker (Debian)     | `sudo docker exec -it <container_name> s6-svstat /var/run/s6/services/agent/` |
-| Docker (Alpine)     | *unsupported Platform*                                                      |
 | Kubernetes          | `kubectl exec -it <pod-name> s6-svstat /var/run/s6/services/agent/`           |
-| Kubernetes (Alpine) | *unsupported Platform*                                                      |
 | macOS               | `launchctl list com.datadoghq.agent` *or* via the systray app                 |
 | Source              | `sudo service datadog-agent status`                                           |
 
@@ -128,9 +126,7 @@ aliases:
 | :--------           | :-----                                                                                                   |
 | Linux               | `sudo service datadog-agent status`                                                                      |
 | Docker (Debian)     | `sudo docker exec -it <container_name> /etc/init.d/datadog-agent status`                                 |
-| Docker (Alpine)     | `sudo docker exec -it <container_name> supervisorctl -c /opt/datadog-agent/agent/supervisor.conf status` |
 | Kubernetes          | `kubectl exec -it <pod-name> /etc/init.d/datadog-agent status`                                           |
-| Kubernetes (Alpine) | `kubectl exec -it <pod-name> supervisorctl -c /opt/datadog-agent/agent/supervisor.conf status`           |
 | macOS               | `datadog-agent status`                                                                                   |
 | Source              | `sudo ~/.datadog-agent/bin/agent status`                                                                 |
 | Windows             | [See the dedicated Windows documentation][2]                                                             |
@@ -153,9 +149,7 @@ Running an info command displays the status of your Datadog Agent and enabled in
 | :--------           | :--------                                            |
 | Linux               | `sudo datadog-agent status`                          |
 | Docker              | `sudo docker exec -it <container_name> agent status` |
-| Docker (Alpine)     | *unsupported Platform*                             |
 | Kubernetes          | `kubectl exec -it <pod-name> agent status`           |
-| Kubernetes (Alpine) | *unsupported Platform*                             |
 | macOS               | `datadog-agent status` or via the [web GUI][3]       |
 | Source              | `sudo datadog-agent status`                          |
 | Windows             | [See the dedicated Windows documentation][2]         |
@@ -188,9 +182,7 @@ A properly configured integration will be displayed under **Running Checks** wit
 | :--------           | :-----                                                                 |
 | Linux               | `sudo service datadog-agent info`                                      |
 | Docker              | `sudo docker exec -it <container_name> /etc/init.d/datadog-agent info` |
-| Docker (Alpine)     | `docker exec -it <container_name> /opt/datadog-agent/bin/agent info`   |
 | Kubernetes          | `kubectl exec -it <pod-name> /etc/init.d/datadog-agent info`           |
-| Kubernetes (Alpine) | `kubectl exec -it <pod-name> /opt/datadog-agent/bin/agent info`        |
 | macOS               | `datadog-agent info`                                                   |
 | Source              | `sudo ~/.datadog-agent/bin/info`                                       |
 | Windows             | [See the dedicated Windows documentation][2]                           |

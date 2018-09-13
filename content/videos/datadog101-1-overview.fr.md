@@ -10,6 +10,7 @@ videos:
     - Screenboards
     - Navigation
 summary: Get started with Datadog with our Datadog 101 series. This first video introduces you to the product and all of its features.
+private: true
 ---
 Get started with Datadog with our Datadog 101 series. This first video introduces you to the product and all of its features. This includes:
 

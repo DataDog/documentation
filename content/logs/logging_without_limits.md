@@ -52,7 +52,7 @@ Get notified at any moment if the volumes in any scope (`service`, `availibility
 2. Build a [search query][7] that represents the volume to monitor. 
 3. Click on **Export to monitor**.
 4. Define the rate you would like to set as *warning* or *error*.
-5. Define an explicit notification: `The volume on this service just got too high. Please define an additional exclusion filter or increase the sampling rate to put it back under control.`
+5. Define an explicit notification: `The volume on this service just got too high. Define an additional exclusion filter or increase the sampling rate to put it back under control.`
 
 {{< img src="logs/logging_without_limits/example_notification.png" alt="" responsive="true" style="width:70%;">}}
 

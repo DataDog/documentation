@@ -47,7 +47,7 @@ Timeseries can be displayed as **lines**, **areas**, and **bars**.
 Example of Timeseries widget for the [API][1]
 ```
 {
-  "type": "timeseries",
+  "viz": "timeseries",
 
   // Title
   "title": true,
@@ -119,7 +119,7 @@ Example of Query Value widget for the [API][1]
 
 ```
 {
-  "type": "query_value",
+  "viz": "query_value",
 
   // Title
   "title": true,
@@ -226,7 +226,7 @@ Example of Event Stream widget for the [API][1]
 
 ```
 {
-    "type": "event_stream"
+    "viz": "event_stream"
 
     // Title
     "title": false,
@@ -256,7 +256,7 @@ Example of Image widget for the [API][1]
 
 ```
 {
-  "type": "image",
+  "viz": "image",
 
   // Sizing
   "height": 20,
@@ -285,7 +285,7 @@ Example of Note widget for the [API][1]
 
 ```
 {
-    "type": "note",
+    "viz": "note",
 
     // Title
     "title": false,
@@ -333,7 +333,7 @@ Example of Alert Graph widget for the [API][1]
    "y": 2,
    "x": 6,
    "isShared": false,
-   "type": "alert_graph",
+   "viz": "alert_graph",
    "add_timeframe": false
 }
 ```
