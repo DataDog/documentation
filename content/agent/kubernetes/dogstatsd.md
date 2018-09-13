@@ -10,7 +10,9 @@ further_reading:
   text: DogStatsD
 ---
 
-To monitor custom metrics from your Kubernetes application, use [DogStatsD][1], a metrics aggregation service bundled with the Datadog Agent. DogStatsD implements the [StatsD][2] protocol.
+To emit custom metrics from your Kubernetes application, use [DogStatsD][1], a metrics aggregation service bundled with the Datadog Agent. DogStatsD implements the [StatsD][2] protocol with some differences. Check out more on the [DogStatsD documentation][1].
+
+**Note**: You can use [DogStatsD over Unix Domain Socket][9].
 
 ## Bind the DogStatsD port to a host port
 
@@ -24,7 +26,7 @@ ports:
     protocol: UDP
 ```
 
-This enables your applications to send metrics via DogStatsD on port 8125 on whichever node they happen to be running.
+This enables your applications to send metrics via DogStatsD on port `8125` on whichever node they happen to be running.
 
 **Note**: `hostPort` functionality requires a networking provider that adheres to the [CNI specification][3], such as Calico, Canal, or Flannel. For more information, including a workaround for non-CNI network providers, consult the [Kubernetes documentation][4].
 
@@ -34,7 +36,7 @@ To deploy the service, apply the change:
 kubectl apply -f datadog-agent.yaml
 ```
 
-## Pass the node's IP address to your app
+## Pass the node's IP address to your application
 
 Your application needs a reliable way to determine the IP address of its host. This is made simple in Kubernetes 1.7, which expands the set of attributes you can [pass to your pods as environment variables][5]. In versions 1.7 and above, you can pass the host IP to any pod by adding an environment variable to the PodSpec. For instance, your application manifest might look like this:
 
@@ -46,11 +48,15 @@ env:
         fieldPath: status.hostIP
 ```
 
-With this, any pod running your application is able to send DogStatsD metrics via port 8125 on `$DOGSTATSD_HOST_IP`.
+With this, any pod running your application is able to send DogStatsD metrics via port `8125` on `$DOGSTATSD_HOST_IP`.
 
 ## Instrument your code to send metrics to DogStatsD
 
-Once your application can send metrics via DogStatsD on each node, you can instrument your application code to submit custom metrics. For instance, if your application is written in Go, import Datadog's [Go library][6], which provides a DogStatsD client library:
+Once your application can send metrics via DogStatsD on each node, you can instrument your application code to submit custom metrics. 
+
+**[See the full list of Datadog DogStatsD Client Libraries][8]**
+
+For instance, if your application is written in Go, import Datadog's [Go library][6], which provides a DogStatsD client library:
 
 ```
 import "github.com/DataDog/datadog-go/statsd"
@@ -102,3 +108,5 @@ func InfoHandler(rw http.ResponseWriter, req *http.Request) {
 [5]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/
 [6]: https://github.com/DataDog/datadog-go
 [7]: https://gist.github.com/johnaxel/fe50c6c73442219c48bf2bebb1154f91
+[8]: /developers/libraries/#api-and-dogstatsd-client-libraries
+[9]: /developers/dogstatsd/unix_socket/
