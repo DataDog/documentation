@@ -116,7 +116,7 @@ Logs make use of a different set of proxy settings than other data types forward
 {{< tabs >}}
 {{% tab "TCP" %}}
 
-If you use a proxy for TCP transmission, configure the Datadog Agent to send logs to your proxy through TCP thanks to the following parameters in `datadog.yaml`:
+If you use a proxy for TCP transmission, configure the Datadog Agent to send logs to your proxy through TCP thanks to the following parameters in the `datadog.yaml` configuration file:
 
 ```
 logs_config:
@@ -124,16 +124,16 @@ logs_config:
   logs_no_ssl: true
 ```
 
-Those are also available as environment variables:
+Those parameters can also be set with the following environment variables:
 
 * `DD_LOGS_CONFIG_LOGS_DD_URL`
 * `DD_LOGS_CONFIG_LOGS_NO_SSL`
 
-**Important Note**: The parameter `logs_no_ssl` is needed to make the Agent ignore the discrepancy between the hostname on the SSL certificate (`agent-intake.logs.datadoghq.com`) and your proxy hostname. We however strongly advise to use a SSL encrypted connection between your proxy and our intake.
+**Important Note**: The parameter `logs_no_ssl` is required to make the Agent ignore the discrepancy between the hostname on the SSL certificate (`agent-intake.logs.datadoghq.com`) and your proxy hostname. You should use a SSL encrypted connection between your proxy and Datadog intake endpoint though.
 
-* Then configure your proxy to listen on `<PROXY_PORT>` and forward the received logs to `agent-intake.logs.datadoghq.com` on port 10516 and activate SSL encryption.
+* Then configure your proxy to listen on `<PROXY_PORT>` and forward the received logs to `agent-intake.logs.datadoghq.com` on port `10516` and activate SSL encryption.
 
-* Use the [public key for TLS encryption](https://docs.datadoghq.com/crt/intake.logs.datadoghq.com.crt) for the SSL encryption. On some systems, the full certificate chain may be required. If so, use [this public key](https://docs.datadoghq.com/crt/FULL_intake.logs.datadoghq.com.crt) instead.
+* Use the [public key for TLS encryption][8] for the SSL encryption. On some systems, the full certificate chain may be required. If so, use [this public key][9] instead.
 
 {{% /tab %}}
 {{% tab "SOCK5" %}}
@@ -145,7 +145,7 @@ logs_config:
   socks5_proxy_address: <MY_SOCKS5_PROXY_URL>:<MY_SOCKS5_PROXY_PORT>
 ```
 
-It is also available through environement variable:
+This parameter can also be set with the following environement variable:
 
 * `DD_LOGS_CONFIG_SOCK5_PROXY_ADDRESS`
 
@@ -362,3 +362,5 @@ to
 [5]: https://app.datadoghq.com/infrastructure
 [6]: http://www.haproxy.org/#perf
 [7]: /logs/log_collection/#using-a-proxy-for-logs
+[8]: /crt/intake.logs.datadoghq.com.crt
+[9]: /crt/FULL_intake.logs.datadoghq.com.crt
