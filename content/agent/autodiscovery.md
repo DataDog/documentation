@@ -268,6 +268,7 @@ annotations:
   ad.datadoghq.com/<container identifier>.check_names: '[<CHECK_NAME>]'
   ad.datadoghq.com/<container identifier>.init_configs: '[<INIT_CONFIG>]'
   ad.datadoghq.com/<container identifier>.instances: '[<INSTANCE_CONFIG>]'
+  ad.datadoghq.com/<container identifier>.logs: '[<LOG_CONFIG>]'
 ```
 
 The format is similar to that for key-value stores. The differences are:
@@ -290,6 +291,7 @@ metadata:
     ad.datadoghq.com/apache.check_names: '["apache","http_check"]'
     ad.datadoghq.com/apache.init_configs: '[{},{}]'
     ad.datadoghq.com/apache.instances: '[{"apache_status_url": "http://%%host%%/server-status?auto"},{"name": "My service", "url": "http://%%host%%", timeout: 1}]'
+    ad.datadoghq.com/apache.logs: '[{"source":"apache","service":"webapp"}]'
   labels:
     name: apache
 spec:
@@ -319,6 +321,7 @@ spec:
         ad.datadoghq.com/apache.check_names: '["apache","http_check"]'
         ad.datadoghq.com/apache.init_configs: '[{},{}]'
         ad.datadoghq.com/apache.instances: '[{"apache_status_url": "http://%%host%%/server-status?auto"},{"name": "My service", "url": "http://%%host%%", timeout: 1}]'
+        ad.datadoghq.com/apache.logs: '[{"source":"apache","service":"webapp"}]'
     spec:
       containers:
       - name: apache # use this as the container identifier in your annotations
@@ -406,6 +409,26 @@ If you provide a template for the same check type via multiple template sources,
 
 * Kubernetes annotations
 * Files
+
+### Include or Exclude Containers
+
+Containers can be included or excluded from Autodiscovery via environment variables:
+
+* `DD_AC_INCLUDE`: whitelist of containers to always include
+* `DD_AC_EXCLUDE`: blacklist of containers to exclude
+
+The lists are formatted as space-separated strings. For example, if you only want to monitor two images, and exclude the rest, specify:
+
+```
+DD_AC_EXCLUDE = "image:.*"
+DD_AC_INCLUDE = "image:cp-kafka image:k8szk"
+```
+
+Or to exclude a specific container name:
+
+```
+DD_AC_EXCLUDE = "name:dd-agent"
+```
 
 ## Troubleshooting
 
