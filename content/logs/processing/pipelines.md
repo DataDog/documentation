@@ -56,7 +56,7 @@ The logstream shows which logs your Pipeline applies to:
 
 ## Restrict Pipelines access to Admin users
 
-By default pipelines can be edited by all users. As an administrator, you can activate Read-Only mode, disabling all non-admin edits to your pipelines. You can change these preferences at anytime by clicking on the below lock:
+By default, all users can edit pipeline. Administrators can activate read-only mode, which disables all non-admin edits to your pipelines. You can change these preferences at anytime by clicking on the below lock:
 
 {{< img src="logs/processing/pipelines/pipeline_lock.png" alt="Pipeline Lock" responsive="true" style="width:70%;">}}
 
