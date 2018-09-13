@@ -67,7 +67,7 @@ config_providers:
     polling: true
 ```
 
-## Tag extraction
+### Tag extraction
 
 {{< tabs >}}
 {{% tab "Docker" %}}
