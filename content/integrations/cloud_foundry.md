@@ -166,7 +166,7 @@ Datadog provides tarballs of the Datadog Agent packaged as a BOSH release. Uploa
 bosh upload release https://cloudfoundry.datadoghq.com/datadog-agent/datadog-agent-boshrelease-latest.tgz
 
 # BOSH CLI v2
-bosh upload-release -e pcf https://cloudfoundry.datadoghq.com/datadog-agent/datadog-agent-boshrelease-latest.tgz
+bosh upload-release -e <bosh_env> https://cloudfoundry.datadoghq.com/datadog-agent/datadog-agent-boshrelease-latest.tgz
 ```
 
 If you'd like to create your own release, see the [Datadog Agent BOSH Release repository][12].
@@ -206,7 +206,7 @@ See if you have a previously configured runtime-config by running:
 `bosh runtime-config`
 
 # BOSH CLI v2
-bosh -e pcf runtime-config
+bosh -e <bosh_env> runtime-config
 ```
 
 In Bosh v2, if the runtime.yml is empty, you will see response "No runtime config".
@@ -241,7 +241,7 @@ To customize configuration for the default checks-system, network, disk, and ntp
 bosh update runtime-config runtime.yml
 
 # BOSH CLI v2
-bosh update-runtime-config -e pcf runtime.yml
+bosh update-runtime-config -e <bosh_env> runtime.yml
 ```
 
 #### Redeploy your Cloud Foundry deployment
@@ -252,7 +252,7 @@ bosh deployment yourDeploymentManifest.yml
 bosh -n deploy --recreate
 
 # BOSH CLI v2
-bosh -n -d yourDeployment -e pcf deploy --recreate yourDeploymentManifest.yml
+bosh -n -d yourDeployment -e <bosh_env> deploy --recreate yourDeploymentManifest.yml
 ```
 
 Since runtime configuration applies globally, BOSH will redeploy every node in your deployment. If you have more than one deployment, redeploy those, too, to install the Datadog Agent everywhere.
@@ -278,7 +278,7 @@ As with the Datadog Agent, Datadog provides a BOSH release of the Datadog Fireho
 bosh upload release http://cloudfoundry.datadoghq.com/datadog-firehose-nozzle/datadog-firehose-nozzle-release-latest.tgz
 
 # BOSH CLI v2
-bosh upload-release -e pcf http://cloudfoundry.datadoghq.com/datadog-firehose-nozzle/datadog-firehose-nozzle-release-latest.tgz
+bosh upload-release -e <bosh_env> http://cloudfoundry.datadoghq.com/datadog-firehose-nozzle/datadog-firehose-nozzle-release-latest.tgz
 ```
 
 If you'd like to create your own release, see the [Datadog Firehose Nozzle release repository][15].
@@ -360,7 +360,7 @@ bosh deployment cf-manifest.yml
 bosh -n deploy --recreate
 
 # BOSH CLI v2
-bosh -n -d cf-manifest -e pcf deploy --recreate cf-manifest.yml
+bosh -n -d cf-manifest -e <bosh_env> deploy --recreate cf-manifest.yml
 ```
 
 #### Verify the Nozzle is collecting
