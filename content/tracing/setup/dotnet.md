@@ -91,9 +91,11 @@ Don’t see your desired data store libraries? We’re continually adding additi
 
 ## Manual Instrumentation
 
-To manually instrument your code, add the [`Datadog.Tracing`][6] NuGet package to your application. Access the global tracer in `Datadog.Trace.Tracer.Instance` to create new spans.
+Manual instrumentation is supported on .NET Framework 4.5+ on Windows and on any platform that implements .NET Standard 2.0, including .NET Core 2.0+ on Windows, Linux, and macOS, Xamarin on iOS and Android, and Mono. See the [.NET Standard documentation][6] for more details on supported platforms.
 
-For more details, see [Advanced Usage][2].
+To manually instrument your code, add the [`Datadog.Trace`][4] NuGet package to your application. In your code, access the global tracer through `Datadog.Trace.Tracer.Instance` to create new spans.
+
+For more details on manual instrumentation and custom tagging, see [Advanced Usage][2].
 
 ## Further Reading
 
@@ -104,4 +106,4 @@ For more details, see [Advanced Usage][2].
 [3]: https://github.com/DataDog/dd-trace-csharp/releases
 [4]: https://www.nuget.org/packages/Datadog.Trace/
 [5]: /help
-[6]: https://www.nuget.org/packages/Datadog.Trace/
+[6]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support
