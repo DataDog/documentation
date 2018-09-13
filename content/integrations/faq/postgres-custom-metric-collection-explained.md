@@ -79,3 +79,6 @@ instances:
       relation: false
 ```
 
+Find below an image to visualize a what's happening:
+
+{{< img src="integrations/faq/postgres_custom_metric_collection.png" alt="postgres_custom_metric_collection" responsive="true" >}}
