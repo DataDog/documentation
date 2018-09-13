@@ -69,5 +69,5 @@ If a customer requires tailored instrumentation for a specific application, they
 [2]: /tracing/setup/#agent-configuration
 [3]: https://github.com/DataDog/dd-trace-java/blob/master/dd-trace-api/src/main/java/datadog/trace/api/interceptor/TraceInterceptor.java
 [4]: http://gems.datadoghq.com/trace/docs/#Processing_Pipeline
-[5]: http://pypi.datadoghq.com/trace/docs/#trace-filtering
+[5]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#trace-filtering
 [6]: /api/?lang=python#tracing

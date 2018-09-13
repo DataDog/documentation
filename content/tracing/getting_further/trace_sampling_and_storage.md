@@ -94,7 +94,7 @@ Priority Sampling is recommended if your traces are distributed across multiple 
 
 ### Client rate sampling
 
-It is possible to disable the instrumentation for a percentage of transactions. Datadog Tracers are performant and can run with a minimal cost with thousands of requests per second, however client rate sampling can be used to further reduce the instrumentation footprint. In this case, no trace will be generated at all, and Datadog estimates aggregate statistics (requests per second, error rate, etc.). An example of this in Python can be found here: http://pypi.datadoghq.com/trace/docs/#pre-sampling.
+It is possible to disable the instrumentation for a percentage of transactions. Datadog Tracers are performant and can run with a minimal cost with thousands of requests per second, however client rate sampling can be used to further reduce the instrumentation footprint. In this case, no trace will be generated at all, and Datadog estimates aggregate statistics (requests per second, error rate, etc.). An example of this in Python can be found here: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#client-sampling.
 
 ## Trace storage
 
@@ -185,7 +185,7 @@ When serialized/flushed to the Agent, the `sampling_priority` is stored in the `
 [2]: /tracing/visualization/trace
 [3]: /tracing/visualization/resource
 [4]: /agent
-[5]: http://pypi.datadoghq.com/trace/docs/#priority-sampling
+[5]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#priority-sampling
 [6]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer/#Span.SetSamplingPriority
 [7]: /tracing/setup/java/#sampling-distributed-tracing
 [8]: http://www.rubydoc.info/gems/ddtrace/#Priority_sampling
