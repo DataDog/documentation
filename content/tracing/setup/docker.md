@@ -14,8 +14,6 @@ further_reading:
 
 Enable the [datadog-trace-agent][1] in the `datadog/agent` container by passing `DD_APM_ENABLED=true` as an environment variable.
 
-**Note: APM is NOT available on Alpine Images**
-
 List of all environment variables available:
 
 | Environment variable       | Description                                                                                   |
