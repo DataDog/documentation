@@ -57,18 +57,20 @@ We officially support the Java JRE 1.7 and higher of both Oracle JDK and OpenJDK
 
 | Server                       | Versions   | Support Type    | JVM Arg to enable                                                             |
 | :--------------------------- | :--------- | :-------------- | :----------------                                                             |
+| Akka-Http Server             | 10.0+      | Fully Supported | N/A                                                                           |
 | Java Servlet Compatible      | 2.3+, 3.0+ | Fully Supported | N/A                                                                           |
 | Jax-RS Annotations           | JSR311-API | Fully Supported | N/A                                                                           |
+| Jetty (non-Servlet)          | 8+         | Beta            | `-Ddd.integration.jetty.enabled=true`                                         |
+| Netty Http Server and Client | 4.0+       | Fully Supported | N/A                                                                           |
 | Play                         | 2.4-2.6    | Fully Supported | N/A                                                                           |
-| Spring-Web                   | 4.0+       | Fully Supported | N/A                                                                           |
-| Akka-Http Server             | 10.0+      | Beta            | `-Ddd.integration.akka-http.enabled=true`                                     |
-| Netty Http Server and Client | 4.0+       | Beta            | `-Ddd.integration.netty.enabled=true`                                         |
 | Ratpack                      | 1.4+       | Beta            | `-Ddd.integration.ratpack.enabled=true`                                       |
 | Spark Java                   | 2.4+       | Beta            | `-Ddd.integration.sparkjava.enabled=true -Ddd.integration.jetty.enabled=true` |
+| Spring Web (MVC)             | 4.0+       | Fully Supported | N/A                                                                           |
+| Spring WebFlux               | 5.0+       | Fully Supported | N/A                                                                           |
 
 **Web Framework tracing provides:** timing HTTP request to response, tags for the HTTP request (status code, method, etc), error and stacktrace capturing, linking work created within a web request and Distributed Tracing.
 
-*Note:* Many application servers are Servlet compatible, such as Tomcat, Jetty, Websphere, Weblogic, etc.
+*Note:* Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Tomcat, Jetty, Websphere, Weblogic, etc.
 Also, frameworks like Spring Boot and Dropwizard inherently work because they use a Servlet compatible embedded application server.
 
 Don't see your desired web frameworks? We're continually adding additional support, [check with the Datadog team][2] to see if we can help.
@@ -79,19 +81,17 @@ Don't see your desired web frameworks? We're continually adding additional suppo
 
 `dd-java-agent` includes support for automatically tracing the following networking frameworks.
 
-| Framework                    | Versions | Support Type    | JVM Arg to enable                                                             |
-| :--------------------------- | :------- | :-------------- | :----------------                                                             |
-| Apache HTTP Client           | 4.3+     | Fully Supported | N/A                                                                           |
-| AWS Java SDK                 | 1.11+    | Fully Supported | N/A                                                                           |
-| Kafka-Clients                | 0.11+    | Fully Supported | N/A                                                                           |
-| Kafka-Streams                | 0.11+    | Fully Supported | N/A                                                                           |
-| Jax RS Client                | 1.11+    | Fully Supported | N/A                                                                           |
-| JMS                          | 1 and 2  | Fully Supported | N/A                                                                           |
-| OkHTTP                       | 3.0+     | Fully Supported | N/A                                                                           |
-| Elasticsearch Client         | 5.0+     | Beta            | `-Ddd.integration.elasticsearch.enabled=true`                                 |
-| HttpURLConnection            | all      | Beta            | `-Ddd.integration.httpurlconnection.enabled=true`                             |
-| Lettuce                      | 5.0+     | Beta            | `-Ddd.integration.lettuce.enabled=true`                                       |
-| SpyMemcached                 | 2.12+    | Beta            | `-Ddd.integration.spymemcached.enabled=true`                                  |
+| Framework                    | Versions | Support Type    | JVM Arg to enable                                 |
+| :--------------------------- | :------- | :-------------- | :----------------                                 |
+| Apache HTTP Client           | 4.3+     | Fully Supported | N/A                                               |
+| AWS Java SDK                 | 1.11+    | Fully Supported | N/A                                               |
+| gRPC                         | 1.5+     | Beta            | `-Ddd.integration.grpc.enabled=true`              |
+| HttpURLConnection            | all      | Beta            | `-Ddd.integration.httpurlconnection.enabled=true` |
+| Kafka-Clients                | 0.11+    | Fully Supported | N/A                                               |
+| Kafka-Streams                | 0.11+    | Fully Supported | N/A                                               |
+| Jax RS Clients               | 1.11+    | Fully Supported | N/A                                               |
+| JMS                          | 1 and 2  | Fully Supported | N/A                                               |
+| OkHTTP                       | 3.0+     | Fully Supported | N/A                                               |
 
 **Networking tracing provides:** timing request to response, tags for the request (e.g. response code), error and stacktrace capturing, and distributed tracing.
 
@@ -103,12 +103,16 @@ Don't see your desired networking framework? We're continually adding additional
 
 `dd-java-agent` includes support for automatically tracing the following database frameworks/drivers.
 
-| Database       | Versions       | Support Type    | JVM Arg to enable                                                             |
-| :------------- | :------------- | :-------------- | :----------------                                                             |
-| Cassandra      | 3.2+           | Fully Supported | N/A                                                                           |
-| JDBC           | N/A            | Fully Supported | N/A                                                                           |
-| Jedis          | 1.4+           | Fully Supported | N/A                                                                           |
-| MongoDB        | 3.0+           | Fully Supported | N/A                                                                           |
+| Database       | Versions       | Support Type    | JVM Arg to enable                            |
+| :------------- | :------------- | :-------------- | :----------------                            |
+| Couchbase      | 2.0+           | Fully Supported | N/A                                          |
+| Cassandra      | 3.2+           | Fully Supported | N/A                                          |
+| Elasticsearch  | 2.0+           | Fully Supported | N/A                                          |
+| JDBC           | N/A            | Fully Supported | N/A                                          |
+| Jedis          | 1.4+           | Fully Supported | N/A                                          |
+| Lettuce        | 5.0+           | Fully Supported | N/A                                          |
+| MongoDB        | 3.0+           | Fully Supported | N/A                                          |
+| SpyMemcached   | 2.12+          | Beta            | `-Ddd.integration.spymemcached.enabled=true` |
 
 `dd-java-agent` is also compatible with common JDBC drivers including:
 
@@ -133,10 +137,10 @@ Don't see your desired datastores? We're continually adding additional support, 
 
 `dd-java-agent` includes support for automatically tracing the following other frameworks.
 
-| Framework     | Versions | Support Type    | JVM Arg to enable                                                             |
-| :------------ | :------- | :-------------- | :----------------                                                             |
-| Hystrix       | 1.4+     | Fully Supported | N/A                                                                           |
-| JSP Rendering | 2.3+     | Beta            | `-Ddd.integration.jsp.enabled=true`                                           |
+| Framework     | Versions | Support Type    | JVM Arg to enable |
+| :------------ | :------- | :-------------- | :---------------- |
+| Hystrix       | 1.4+     | Fully Supported | N/A               |
+| JSP Rendering | 2.3+     | Fully Supported | N/A               |
 
 Don't see your desired framework? We're continually adding additional support, [check with the Datadog team][2] to see if we can help.
 
