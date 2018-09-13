@@ -59,7 +59,7 @@ Here is the list of all the matchers and filters natively implemented by Datadog
 |                                                 |                                                                                                                                    |
 | :---                                            | :---                                                                                                                               |
 | **Pattern**                                     | **Usage**                                                                                                                          |
-| `date("pattern"[, "timezoneId"[, "localeId"]])` | Matches a date with the specified pattern and parses to produce a unix timestamp. [See the date Matcher examples](#parsing-dates). |
+| `date("pattern"[, "timezoneId"[, "localeId"]])` | Matches a date with the specified pattern and parses to produce a Unix timestamp. [See the date Matcher examples](#parsing-dates). |
 | `regex("pattern")`                              | Matches a regex. [Check the regex Matcher examples](#regex).                                                                       |
 | `data`                                          | Matches any string including spaces and newlines. Equivalent to `.*`.                                                              |
 | `notSpace`                                      | Matches any string until the next space.                                                                                           |
@@ -72,17 +72,17 @@ Here is the list of all the matchers and filters natively implemented by Datadog
 | `integer`                                       | Matches a decimal integer number and parses it as an integer number.                                                               |
 | `integerExtStr`                                 | Matches an integer number (with scientific notation support).                                                                      |
 | `integerExt`                                    | Matches an integer number (with scientific notation support) and parses it as an integer number.                                   |
-| `word`                                          | Matches alpha-numberic words.                                                                                                      |
+| `word`                                          | Matches alphanumeric words.                                                                                                      |
 | `doubleQuotedString`                            | Matches a double-quoted string.                                                                                                    |
 | `singleQuotedString`                            | Matches a single-quoted string.                                                                                                    |
 | `quotedString`                                  | Matches a double-quoted or single-quoted string.                                                                                   |
-| `uuid`                                          | Matches a uuid.                                                                                                                    |
-| `mac`                                           | Matches a mac address.                                                                                                             |
-| `ipv4`                                          | Matches an ipv4.                                                                                                                   |
-| `ipv6`                                          | Matches an ipv6.                                                                                                                   |
-| `ip`                                            | Matches an ip (v4 or v6).                                                                                                          |
+| `uuid`                                          | Matches a UUID.                                                                                                                    |
+| `mac`                                           | Matches a MAC address.                                                                                                             |
+| `ipv4`                                          | Matches an IPV4.                                                                                                                   |
+| `ipv6`                                          | Matches an IPV6.                                                                                                                   |
+| `ip`                                            | Matches an IP (v4 or v6).                                                                                                          |
 | `hostname`                                      | Matches a hostname.                                                                                                                |
-| `ipOrHost`                                      | Matches a hostname or ip.                                                                                                          |
+| `ipOrHost`                                      | Matches a hostname or IP.                                                                                                          |
 | `port`                                          | Matches a port number.                                                                                                             |
 
 
