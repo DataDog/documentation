@@ -18,7 +18,7 @@ before_script:
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:david.jones_search-config-updates
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:master
   tags:
     - "runner:main"
     - "size:large"
@@ -89,16 +89,6 @@ test_preview_links:
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
-# move this to live master deploys when we are happy
-index_algolia:
-  <<: *base_template
-  stage: post-deploy
-  environment: "preview"
-  script:
-    - index_docsearch_algolia
-  only:
-    - /.+?\/[a-zA-Z0-9_-]+/
-
 # ================== live ================== #
 build_live:
   <<: *base_template
@@ -162,14 +152,14 @@ test_live_static:
     - master
 
 #index_algolia:
-#  <<: *base_template
-#  stage: post-deploy
-#  environment: "live"
-#  script:
-#    - pull_artifact_from_s3
-#    - index_algolia
-#  only:
-#    - master
+index_algolia:
+  <<: *base_template
+  stage: post-deploy
+  environment: "live"
+  script:
+    - index_docsearch_algolia
+  only:
+    - master
 
 manage_translations:on-schedule:
   <<: *base_template
