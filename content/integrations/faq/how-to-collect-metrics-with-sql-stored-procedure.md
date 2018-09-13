@@ -5,7 +5,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/sql-server-metrics/#create-a-stored-procedure-to-generate-and-collect-metrics"
   tag: "Blog"
   text: Create a stored procedure to generate and collect metrics
-- link: "integration/mysql"
+- link: "integrations/mysql/"
   tag: "Documentation"
   text: Datadog-MySQL integration
 ---
