@@ -22,7 +22,7 @@ pip install ddtrace
 Finally, import the tracer and instrument your code!
 
 <div class="alert alert-info">
-For Python applications, please note that tracing is disabled when your application is launched in <b>DEBUG</b> mode. Find more <a href="http://pypi.datadoghq.com/trace/docs/web_integrations.html#django">here</a> </div>
+For Python applications, note that tracing is disabled when your application is launched in <b>DEBUG</b> mode. Find more <a href="http://pypi.datadoghq.com/trace/docs/web_integrations.html#django">here</a> </div>
 
 ### Example
 
@@ -46,7 +46,7 @@ The ddtrace library includes support for a number of web frameworks, including:
 - [Pylons](http://pylonsproject.org/)
 - [Pyramid](https://trypyramid.com/)
 
-To learn how to instrument these frameworks, please reference [the library documentation](http://pypi.datadoghq.com/trace/docs/web_integrations.html)
+To learn how to instrument these frameworks, reference [the library documentation](http://pypi.datadoghq.com/trace/docs/web_integrations.html)
 
 It also includes support for the following data stores and libraries:
 
@@ -61,7 +61,7 @@ It also includes support for the following data stores and libraries:
 - [SQLAlchemy](http://www.sqlalchemy.org/)
 - [SQLite](https://www.sqlite.org/)
 
-To instrument these libraries, please see [the library documentation](http://pypi.datadoghq.com/trace/docs/index.html)
+To instrument these libraries, see [the library documentation](http://pypi.datadoghq.com/trace/docs/index.html)
 
 ## Additional Information
 
