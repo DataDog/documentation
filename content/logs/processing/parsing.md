@@ -56,59 +56,59 @@ Here is the list of all the matchers and filters natively implemented by Datadog
 {{< tabs >}}
 {{% tab "Matcher" %}}
 
-|                                                 |                                                                                                                                      |
-| :---                                            | :---                                                                                                                                 |
-| **Pattern**                                     | **Usage**                                                                                                                            |
-| `date("pattern"[, "timezoneId"[, "localeId"]])` | Matches a date with the specified pattern and parses to produce a unix timestamp. [More info on how to parse dates](#parsing-dates). |
-| `regex("pattern")`                              | Matches a regex. [More info on how to use the regex Matcher](#regex).                                                                |
-| `data`                                          | Matches any string including spaces and newlines. Equivalent to `.*`.                                                                |
-| `notSpace`                                      | Matches any string until the next space.                                                                                             |
-| `boolean("truePattern", "falsePattern")`        | Matches and parses a boolean optionally defining the true and false patterns (defaults to 'true' and 'false' ignoring case).         |
-| `numberStr`                                     | Matches a decimal floating point number and parses it as a string.                                                                   |
-| `number`                                        | Matches a decimal floating point number and parses it as a double precision number.                                                  |
-| `numberExtStr`                                  | Matches a floating point number (with scientific notation support).                                                                  |
-| `numberExt`                                     | Matches a floating point number (with scientific notation support) and parses it as a double precision number.                       |
-| `integerStr`                                    | Matches a decimal integer number and parses it as a string.                                                                          |
-| `integer`                                       | Matches a decimal integer number and parses it as an integer number.                                                                 |
-| `integerExtStr`                                 | Matches an integer number (with scientific notation support).                                                                        |
-| `integerExt`                                    | Matches an integer number (with scientific notation support) and parses it as an integer number.                                     |
-| `word`                                          | Matches alpha-numberic words.                                                                                                        |
-| `doubleQuotedString`                            | Matches a double-quoted string.                                                                                                      |
-| `singleQuotedString`                            | Matches a single-quoted string.                                                                                                      |
-| `quotedString`                                  | Matches a double-quoted or single-quoted string.                                                                                     |
-| `uuid`                                          | Matches a uuid.                                                                                                                      |
-| `mac`                                           | Matches a mac address.                                                                                                               |
-| `ipv4`                                          | Matches an ipv4.                                                                                                                     |
-| `ipv6`                                          | Matches an ipv6.                                                                                                                     |
-| `ip`                                            | Matches an ip (v4 or v6).                                                                                                            |
-| `hostname`                                      | Matches a hostname.                                                                                                                  |
-| `ipOrHost`                                      | Matches a hostname or ip.                                                                                                            |
-| `port`                                          | Matches a port number.                                                                                                               |
+|                                                 |                                                                                                                                    |
+| :---                                            | :---                                                                                                                               |
+| **Pattern**                                     | **Usage**                                                                                                                          |
+| `date("pattern"[, "timezoneId"[, "localeId"]])` | Matches a date with the specified pattern and parses to produce a unix timestamp. [See the date Matcher examples](#parsing-dates). |
+| `regex("pattern")`                              | Matches a regex. [Check the regex Matcher examples](#regex).                                                                       |
+| `data`                                          | Matches any string including spaces and newlines. Equivalent to `.*`.                                                              |
+| `notSpace`                                      | Matches any string until the next space.                                                                                           |
+| `boolean("truePattern", "falsePattern")`        | Matches and parses a boolean optionally defining the true and false patterns (defaults to 'true' and 'false' ignoring case).       |
+| `numberStr`                                     | Matches a decimal floating point number and parses it as a string.                                                                 |
+| `number`                                        | Matches a decimal floating point number and parses it as a double precision number.                                                |
+| `numberExtStr`                                  | Matches a floating point number (with scientific notation support).                                                                |
+| `numberExt`                                     | Matches a floating point number (with scientific notation support) and parses it as a double precision number.                     |
+| `integerStr`                                    | Matches a decimal integer number and parses it as a string.                                                                        |
+| `integer`                                       | Matches a decimal integer number and parses it as an integer number.                                                               |
+| `integerExtStr`                                 | Matches an integer number (with scientific notation support).                                                                      |
+| `integerExt`                                    | Matches an integer number (with scientific notation support) and parses it as an integer number.                                   |
+| `word`                                          | Matches alpha-numberic words.                                                                                                      |
+| `doubleQuotedString`                            | Matches a double-quoted string.                                                                                                    |
+| `singleQuotedString`                            | Matches a single-quoted string.                                                                                                    |
+| `quotedString`                                  | Matches a double-quoted or single-quoted string.                                                                                   |
+| `uuid`                                          | Matches a uuid.                                                                                                                    |
+| `mac`                                           | Matches a mac address.                                                                                                             |
+| `ipv4`                                          | Matches an ipv4.                                                                                                                   |
+| `ipv6`                                          | Matches an ipv6.                                                                                                                   |
+| `ip`                                            | Matches an ip (v4 or v6).                                                                                                          |
+| `hostname`                                      | Matches a hostname.                                                                                                                |
+| `ipOrHost`                                      | Matches a hostname or ip.                                                                                                          |
+| `port`                                          | Matches a port number.                                                                                                             |
 
 
 {{% /tab %}}
 {{% tab "Filter" %}}
 
-|                                                                |                                                                                                                                                                 |
-| :---                                                           | :---                                                                                                                                                            |
-| **Pattern**                                                    | **Usage**                                                                                                                                                       |
-| `number`                                                       | Parses a match as double precision number.                                                                                                                      |
-| `integer`                                                      | Parses a match as an integer number.                                                                                                                            |
-| `boolean`                                                      | Parses 'true' and 'false' strings as booleans ignoring case.                                                                                                    |
-| `date("pattern"[, "timezoneId"[, "localeId"]])`                | Parses a date with the specified pattern to produce a unix timestamp. [More info on how to parse dates](#parsing-dates).                                        |
-| `nullIf("value")`                                              | Returns null if the match is equal to the provided value.                                                                                                       |
-| `json`                                                         | Parses properly formatted JSON.                                                                                                                                 |
-| `rubyhash`                                                     | Parses properly formatted Ruby Hash (e.g. `{name => "John" "job" => {"company" => "Big Company", "title" => "CTO"}}`).                                          |
-| `geoip`                                                        | Parses an IP or a host and returns a JSON object that contains the continent, country, city and location of the IP address.                                     |
-| `useragent([decodeuricomponent:true/false])`                   | Parses a user-agent and returns a JSON object that contains the device, os and the browser represented by the Agent. [More info on how to parse User Agent][3]. |
-| `querystring`                                                  | Extracts all the key-value pairs in a matching URL query string (e.g. `?productId=superproduct&promotionCode=superpromo`).                                      |
-| `decodeuricomponent`                                           | This core filter decodes uri components.                                                                                                                        |
-| `lowercase`                                                    | Returns the lower cased string.                                                                                                                                 |
-| `uppercase`                                                    | Returns the upper cased string.                                                                                                                                 |
-| `keyvalue([separatorStr[, characterWhiteList [, quotingStr]])` | Extracts key value pattern and returns a JSON object. [More info on how to parse key value pattern](#key-value).                                                |
-| `scale(factor)`                                                | Multiplies the expected numerical value by the provided factor.                                                                                                 |
-| `array([[openCloseStr, ] separator][, subRuleOrFilter)`        | Parses a string sequence of tokens and returns it as an array.                                                                                                  |
-| `url`                                                          | Parses a url and returns all the tokenized members (domain, query params, port, etc) in a JSON object. [More info on how to parse URL][1].                      |
+|                                                                |                                                                                                                                                           |
+| :---                                                           | :---                                                                                                                                                      |
+| **Pattern**                                                    | **Usage**                                                                                                                                                 |
+| `number`                                                       | Parses a match as double precision number.                                                                                                                |
+| `integer`                                                      | Parses a match as an integer number.                                                                                                                      |
+| `boolean`                                                      | Parses 'true' and 'false' strings as booleans ignoring case.                                                                                              |
+| `date("pattern"[, "timezoneId"[, "localeId"]])`                | Parses a date with the specified pattern to produce a unix timestamp. [See date Filter examples](#parsing-dates).                                         |
+| `nullIf("value")`                                              | Returns null if the match is equal to the provided value.                                                                                                 |
+| `json`                                                         | Parses properly formatted JSON.                                                                                                                           |
+| `rubyhash`                                                     | Parses properly formatted Ruby Hash (e.g. `{name => "John" "job" => {"company" => "Big Company", "title" => "CTO"}}`).                                    |
+| `geoip`                                                        | Parses an IP or a host and returns a JSON object that contains the continent, country, city and location of the IP address.                               |
+| `useragent([decodeuricomponent:true/false])`                   | Parses a user-agent and returns a JSON object that contains the device, os and the browser represented by the Agent. [Check the User Agent processor][3]. |
+| `querystring`                                                  | Extracts all the key-value pairs in a matching URL query string (e.g. `?productId=superproduct&promotionCode=superpromo`).                                |
+| `decodeuricomponent`                                           | This core filter decodes uri components.                                                                                                                  |
+| `lowercase`                                                    | Returns the lower cased string.                                                                                                                           |
+| `uppercase`                                                    | Returns the upper cased string.                                                                                                                           |
+| `keyvalue([separatorStr[, characterWhiteList [, quotingStr]])` | Extracts key value pattern and returns a JSON object. [See key-value Filter examples](#key-value).                                                        |
+| `scale(factor)`                                                | Multiplies the expected numerical value by the provided factor.                                                                                           |
+| `array([[openCloseStr, ] separator][, subRuleOrFilter)`        | Parses a string sequence of tokens and returns it as an array.                                                                                            |
+| `url`                                                          | Parses a url and returns all the tokenized members (domain, query params, port, etc) in a JSON object. [More info on how to parse URL][1].                |
 
 
 
