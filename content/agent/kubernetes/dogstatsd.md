@@ -12,9 +12,50 @@ further_reading:
 
 To emit custom metrics from your Kubernetes application, use [DogStatsD][1], a metrics aggregation service bundled with the Datadog Agent. DogStatsD implements the [StatsD][2] protocol with some differences. See more on the [DogStatsD documentation][1].
 
-## Bind the DogStatsD port to a host port
+## Use DogStatsD over a Unix Domain Socket
 
-You can use [DogStatsD over Unix Domain Socket][9].
+You can use [DogStatsD over a Unix Domain Socket][9]. Edit your `datadog.yaml` file to set the `dogstatsd_socket` option to the path where DogStatsD should create its listening socket:
+
+```
+dogstatsd_socket: /var/run/datadog/dsd.socket
+```
+
+And [restart your Agent][10]. You can also set the socket path via the `DD_DOGSTATSD_SOCKET` environment variable.
+
+The socket file needs to be accessible to the client containers. Mount a host directory on both sides: read-only in client containers, and read-write in the Agent container.
+
+In your Agent container:
+
+```yaml
+volumeMounts:
+  - name: dsdsocket
+    mountPath: /var/run/datadog
+...
+volumes:
+- hostPath:
+    path: /var/run/datadog/
+  name: dsdsocket
+```
+
+In your client containers:
+
+```yaml
+volumeMounts:
+  - name: dsdsocket
+    mountPath: /var/run/datadog
+    readOnly: true
+...
+volumes:
+- hostPath:
+    path: /var/run/datadog/
+  name: dsdsocket
+```
+
+For more details, see the [DogStatsD over a Unix Domain Socket documentation][9].
+
+## Alternatively, use hostPort
+
+### Bind the DogStatsD port to a host port
 
 Add a `hostPort` to your `datadog-agent.yaml` file:
 
@@ -36,7 +77,7 @@ To apply the change:
 kubectl apply -f datadog-agent.yaml
 ```
 
-## Pass the node's IP address to your application
+### Pass the node's IP address to your application
 
 Your application needs a reliable way to determine the IP address of its host. This is made simple in Kubernetes 1.7, which expands the set of attributes you can [pass to your pods as environment variables][5]. In versions 1.7 and above, you can pass the host IP to any pod by adding an environment variable to the PodSpec. For instance, your application manifest might look like this:
 
@@ -50,7 +91,7 @@ env:
 
 With this, any pod running your application is able to send DogStatsD metrics via port `8125` on `$DOGSTATSD_HOST_IP`.
 
-## Instrument your code to send metrics to DogStatsD
+### Instrument your code to send metrics to DogStatsD
 
 Once your application can send metrics via DogStatsD on each node, you can instrument your application code to submit custom metrics. 
 
@@ -110,3 +151,4 @@ func InfoHandler(rw http.ResponseWriter, req *http.Request) {
 [7]: https://gist.github.com/johnaxel/fe50c6c73442219c48bf2bebb1154f91
 [8]: /developers/libraries/#api-and-dogstatsd-client-libraries
 [9]: /developers/dogstatsd/unix_socket/
+[10]: /agent/faq/agent-commands
