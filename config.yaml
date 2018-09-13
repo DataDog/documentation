@@ -542,7 +542,7 @@ languages:
           weight: 180
           parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_dotnet
-          name: ".NET (Coming soon)"
+          name: ".NET"
           url: "tracing/setup/dotnet/"
           weight: 190
           parent: customnav_tracingnav_setup
@@ -1584,7 +1584,7 @@ languages:
           weight: 180
           parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_dotnet
-          name: ".NET (Coming soon)"
+          name: ".NET"
           url: "tracing/setup/dotnet/"
           weight: 190
           parent: customnav_tracingnav_setup
