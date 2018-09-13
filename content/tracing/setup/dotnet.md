@@ -78,14 +78,14 @@ Don’t see your desired web frameworks? We’re continually adding additional s
 
 The .NET tracer's ability to automatically instrument data store access depends on the client libraries used:
 
-| Data store    | Library or NuGet package                          | Versions | Support type    |
-| :---------    | :------------------------------------------------ | :------- | :-------------- |
-| MS SQL Server | `System.Data.SqlClient` (.NET Framework built-in) |          | Public Beta     |
-| MS SQL Server | `System.Data.SqlClient` (NuGet)                   | 4.1+     | Public Beta     |
-| Redis         | `StackExchange.Redis`                             |          | Coming soon     |
-| Elasticsearch | `NEST` / `Elasticsearch.Net`                      |          | Coming soon     |
-| MongoDB       | `MongoDB.Driver`                                  |          | Coming soon     |
-| PostgreSQL    | `Npgsql`                                          |          | Coming soon     |
+| Data store    | Library or NuGet package                          | Versions   | Support type    |
+| :---------    | :------------------------------------------------ | :-------   | :-------------- |
+| MS SQL Server | `System.Data.SqlClient` (.NET Framework)          | (built-in) | Public Beta     |
+| MS SQL Server | `System.Data.SqlClient` (NuGet)                   | 4.1+       | Public Beta     |
+| Redis         | `StackExchange.Redis`                             |            | Coming soon     |
+| Elasticsearch | `NEST` / `Elasticsearch.Net`                      |            | Coming soon     |
+| MongoDB       | `MongoDB.Driver`                                  |            | Coming soon     |
+| PostgreSQL    | `Npgsql`                                          |            | Coming soon     |
 
 Don’t see your desired data store libraries? We’re continually adding additional support. [Check with the Datadog team][5] to see if we can help.
 
