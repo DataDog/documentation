@@ -272,10 +272,20 @@ languages:
           url: "graphing/metrics/"
           weight: 20
           parent: menu_references_graphing
+        - identifier: customnav_graphingnav_explorer
+          name: "Explorer"
+          url: "graphing/metrics/explorer"
+          weight: 210
+          parent: customnav_graphingnav_metrics
+        - identifier: customnav_graphingnav_summary
+          name: "Summary"
+          url: "graphing/metrics/summary"
+          weight: 230
+          parent: customnav_graphingnav_metrics
         - identifier: customnav_graphingnav_distribution
           name: "Distributions"
           url: "graphing/metrics/distributions"
-          weight: 210
+          weight: 240
           parent: customnav_graphingnav_metrics
 
         - identifier: customnav_graphingnav_notebooks
