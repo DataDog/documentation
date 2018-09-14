@@ -103,7 +103,7 @@ The source and service values can be overriden thanks to Autodiscovery as descri
 The second step is to use Autodiscovery to customize the `source` and `service` value. This allows Datadog to identify the log source for each container.
 
 Since version 6.2 of the Datadog Agent, you can configure log collection directly in the container labels. 
-Pod annotations are also supported for Kubernetes environment (more information for Kubernetes available [here](https://docs.datadoghq.com/agent/autodiscovery/#template-source-kubernetes-pod-annotations)).
+Pod annotations are also supported for Kubernetes environment, [see the Kubernetes Autodiscovery documentation][12].
 
 Autodiscovery expects labels to follow this format, depending on the file type:
 
@@ -159,7 +159,7 @@ LABEL "com.datadoghq.ad.logs"='[{"source": "nginx", "service": "webapp"}]'
 {{% /tab %}}
 {{% tab "Java Multiline logs" %}}
 
-For multi-line logs like stack traces, the Agent has a [multi-line processing rules](https://docs.datadoghq.com/logs/log_collection/#multi-line-aggregation) feature in order to properly aggregate them into a single log.
+For multi-line logs like stack traces, the Agent has a [multi-line processing rules][13] feature in order to properly aggregate them into a single log.
 
 Example log (Java Stack traces):
 
@@ -176,7 +176,9 @@ Use the `com.datadoghq.ad.logs` label as below on your containers to make sure t
   labels:
     com.datadoghq.ad.logs: '[{"source": "java", "service": "myapp", "log_processing_rules": [{"type": "multi_line", "name": "log_start_with_date", "pattern" : "\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])"}]}]'
   ```
-See the [multi-line processing rule documentation](https://docs.datadoghq.com/logs/log_collection/#multi-line-aggregation) to get more pattern examples.
+See the [multi-line processing rule documentation][13] to get more pattern examples.
+
+[13]: https://docs.datadoghq.com/logs/log_collection/#multi-line-aggregation
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -201,7 +203,9 @@ spec:
         name: nginx
 ```
 
-Check our [Autodiscovery Guide](https://docs.datadoghq.com/agent/autodiscovery/#template-source-kubernetes-pod-annotations) for setup, examples, and more information about Autodiscovery.
+Check our [Autodiscovery Guide][12] for setup, examples, and more information about Autodiscovery.
+
+[12]: https://docs.datadoghq.com/agent/autodiscovery/#template-source-kubernetes-pod-annotations
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -287,3 +291,4 @@ ac_exclude = ["name:dd-agent"]
 [8]: https://docs.datadoghq.com/agent/autodiscovery/#template-source-docker-label-annotations
 [9]: https://docs.datadoghq.com/logs/log_collection/#multi-line-aggregation
 [11]: https://docs.datadoghq.com/agent/faq/agent-commands/?tab=agentv6#restart-the-agent
+[12]: https://docs.datadoghq.com/agent/autodiscovery/#template-source-kubernetes-pod-annotations

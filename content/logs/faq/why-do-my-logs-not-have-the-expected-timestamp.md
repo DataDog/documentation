@@ -61,7 +61,7 @@ However, this default timestamp does not always reflect the actual value that mi
         If you do not have a Pipeline filtered on those logs yet, create a new one and add a Processor.  
         **Note**: Set this Processor only to apply to the custom `mytimestamp` attribute under the **advanced** settings.
         {{< img src="logs/faq/log_timestamp_7.png" alt="Advanced settings date Processor" responsive="true" style="width:75%;">}} 
-        Then define the right parsing rule depending on your date format. Examples are available [here][11].  
+        Then define the right parsing rule depending on your date format. [See the parsing dates examples][11].  
         Add a Log Date Remapper and to have the correct timestamp on new logs.
         {{< img src="logs/faq/log_timestamp_8.png" alt="Pipeline example" responsive="true" style="width:75%;">}} 
         {{< img src="logs/faq/log_timestamp_9.png" alt="Log post processing after previous pipeline" responsive="true" style="width:75%;">}} 
