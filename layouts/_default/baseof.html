@@ -50,5 +50,35 @@
     {{ partial "footer-scripts.html" . }}
     {{ partial "footer-js-dd-docs-methods" . }}
     {{ partial "preview_banner/preview_banner" . }}
+
+    <!-- ALGOLIA DOCSEARCH -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+    <script type="text/javascript">
+    docsearch({
+         appId: 'EOIG7V0A2O',
+         apiKey: 'c7ec32b3838892b10610af30d06a4e42',
+         indexName: 'docsearch_docs_prod',
+         inputSelector: '.docssearch-input',
+         algoliaOptions: {
+            'facetFilters': ['language:en'],
+            'filters': '(tags:docs OR tags:api)'
+         },
+         debug: false // Set debug to true if you want to inspect the dropdown
+    });
+    </script>
+    <script type="text/javascript">
+    docsearch({
+         appId: 'EOIG7V0A2O',
+         apiKey: 'c7ec32b3838892b10610af30d06a4e42',
+         indexName: 'docsearch_docs_prod',
+         inputSelector: '.docssearch-input-m',
+         algoliaOptions: {
+            'facetFilters': ['language:en'],
+            'filters': '(tags:docs OR tags:api)'
+         },
+         debug: false // Set debug to true if you want to inspect the dropdown
+    });
+    </script>
+    <!--/ ALGOLIA DOCSEARCH -->
 </body>
 </html>
