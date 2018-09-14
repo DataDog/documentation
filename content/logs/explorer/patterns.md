@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-Investigating large volumes of log data can be time consuming: you can spend hours on them and still understand only a fraction of them. However, applicative logs often look the same with some fraction of them varying. These what we call *patterns*.
+Investigating large volumes of log data can be time consuming: you can spend hours on them and still understand only a fraction of them. However, application logs often look the same with some fraction of them varying. These are what we call *patterns*.
 
 In the Log Explorer, patterns can be surfaced automatically to bring structure to the problem and help you quickly see what matters—exclude what's irrelevant.
 
