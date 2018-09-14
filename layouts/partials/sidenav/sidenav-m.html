@@ -19,12 +19,6 @@
     <div class="row sticky">
         <div class="col">
             <a href="{{ "" | absLangURL }}"><h4>{{ i18n "datadog_docs" }}</h4></a>
-<!--             <form class="sidenav-search" action="{{ absLangURL "search/" }}">
-                <div class="input-group">
-                    <input type="text" class="form-control" name="s" placeholder="{{ i18n "search" }}" aria-label="Search"/>
-                    <span class="input-group-addon">{{ partial "img.html" (dict "root" . "src" "icons/nav_search.png" "alt" "search" "width" "21") }}</span>
-                </div>
-            </form> -->
             <form class="docssearch">
                 <div id="docssearchWrapper">
                     <input class="docssearch-input-m" type="docssearch" placeholder="Search documentation...">
