@@ -103,6 +103,14 @@ from ddtrace import tracer
 tracer.set_tags({'env': 'prod'})
 ```
 {{% /tab %}}
+{{% tab ".NET" %}}
+
+```csharp
+using Datadog.Tracing;
+Tracer.Instance.ActiveScope.Span.SetTag("env", "prod");
+```
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Viewing Data by Environment
