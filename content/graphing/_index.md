@@ -47,9 +47,7 @@ The Metrics Explorer allows you to play around with different graph settings in 
 
 ## Select your visualization
 
-Once you have a metric in mind to display in your graph, select your visualization.
-
-Find the list of all visualizations [here][4]
+Once you have a metric in mind to display in your graph, select your visualization. Check the [list of all visualizations][4].
 
 ## Filter
 
