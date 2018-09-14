@@ -98,7 +98,7 @@ Spans are associated with a [service][8] and optionally a [resource][13]. Each s
 
 [1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer/#service
 [2]: /tracing/setup/java/#configuration
-[3]: http://pypi.datadoghq.com/trace/docs/#get-started
+[3]: http://pypi.datadoghq.com/trace/docs/index.html#getting-started
 [4]: http://www.rubydoc.info/gems/ddtrace/
 [5]: /developers/metrics/
 [6]: /monitors/monitor_types/apm/
