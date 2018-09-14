@@ -15,6 +15,9 @@ further_reading:
 - link: "logs/explorer"
   tag: "Documentation"
   text: See how to explore your logs
+- link: "logs/explorer/patterns"
+  tag: Documentation
+  text: Detect patterns inside your logs
 ---
 
 ## Log Analytics query 

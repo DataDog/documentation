@@ -14,13 +14,16 @@ further_reading:
 - link: "logs/explorer/saved_views"
   tag: Documentation
   text: Automatically configure your Log Explorer
+- link: "logs/explorer/patterns"
+  tag: Documentation
+  text: Detect patterns inside your logs
 ---
 
 The Logs Explorer is your home base for troubleshooting and exploration:
 
 {{< img src="logs/explorer/explore_view_with_comments.png" alt="Explore view with comments" responsive="true" >}}
 
-In this view you can: 
+In this view you can:
 
 * [Build a context to explore your logs](#context).
 * [Visualize your logs as a filtered Logstream or Log Analytics](#visualization).
@@ -33,14 +36,14 @@ Build up a context to explore your logs in your log explorer view first by selec
 
 ### Time Range
 
-The time range feature allows you to display logs in the Logstream or Log Analytics within a given time period. 
+The time range feature allows you to display logs in the Logstream or Log Analytics within a given time period.
 It appears directly under the search bar as a timeline. The timeline can be displayed or wrapped up with the **Show timeline** check box in the Logstream option panel.
 
 Quickly change the time range by selecting a preset range from the dropdown:
 
 {{< img src="logs/explorer/timerange.png" style="width:50%;" alt="Timerange" responsive="true" >}}
 
-### Search 
+### Search
 
 Use facets, measures, tags, or even [free text search][1] to filter your Logstream and Log Analytics with dedicated context. The search bar and url automatically reflect your selections.
 
@@ -54,7 +57,7 @@ Use Saved Views to automatically configure your Log Explorer with a preselected 
 
 Check the dedicated [saved views documentation][4] to learn more.
 
-## Visualization 
+## Visualization
 
 Switch between the Logstream and the Log Analytics modes by clicking on the *Log Mode* button:
 
@@ -81,7 +84,7 @@ Click on `View in context` to see log lines dated just before and after a select
 
 The context is different according to the situation as we use the `Hostname`, `Service`, `filename`, or `container_id` attributes, along with tags, to make sure we find the perfect context for your logs.
 
-Click the **Columns** button and select any facets you want to see to add more log details to your Logstream: 
+Click the **Columns** button and select any facets you want to see to add more log details to your Logstream:
 
 {{< img src="logs/explorer/log_list_with_columns.png" alt="Logstream with columns" responsive="true" style="width:80%;">}}
 
@@ -106,6 +109,19 @@ Follow the [log graphing guide][5] to learn more about all the graphing options.
 
 [3]: /logs/processing
 [5]: /logs/explorer/analytics
+
+{{% /tab %}}
+{{% tab "Log Patterns" %}}
+
+Investigating large volumes of log data can be time consuming: you can spend hours on them and still understand only a fraction of them. However, applicative logs often look the same with some fraction of them varying. These what we call *patterns*.
+
+In the Log Explorer, patterns can be surfaced automatically to bring structure to the problem and help you quickly see what matters—exclude what's irrelevant.
+
+Find out more in the [Log Patterns section][6]
+
+{{< img src="logs/explorer/log_patterns.png" alt="Log Patterns" responsive="true" style="width:70%;">}}
+
+[6]: /logs/explorer/patterns
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -165,7 +181,7 @@ Each measure has its own unit that is then used for display in the Log Explorer 
 
 ## Export
 
-Export your current Log Visualization with the *Export* functionality: 
+Export your current Log Visualization with the *Export* functionality:
 
 {{< tabs >}}
 {{% tab "Logstream" %}}
