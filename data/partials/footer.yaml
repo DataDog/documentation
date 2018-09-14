@@ -5,6 +5,9 @@ col1:
   - name: apm
     link: "https://www.datadoghq.com/apm/"
     title: "APM"
+  - name: logs
+    link: "https://www.datadoghq.com/log-management/"
+    title: "Log Management"
   - name: integrations
     link: "https://www.datadoghq.com/product/integrations/"
     title: "Integrations"
