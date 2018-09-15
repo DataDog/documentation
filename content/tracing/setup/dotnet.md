@@ -41,15 +41,15 @@ Automatic instrumention is available on Windows if your web application meets th
 
 * Hosted on IIS
 * Runs on .NET Framework 4.5+ or .NET Core 2.0.x
-* Build on ASP.NET MVC 5, ASP.NET Web API 2, or ASP.NET Core MVC 2
+* Built on ASP.NET MVC 5, ASP.NET Web API 2, or ASP.NET Core MVC 2
 
 If your application meets the above requirements, follow these steps to enable automatic instrumentation:
 
 * [install and configure Datadog Agent][1]
-* [install the .NET Tracer][3] using the MSI installer for Windows
-* reboot the host (this step is required for IIS to pick up the required environment variables)
-* use your app (click around to generate a few web requests and database queries)
-* see your traces on [Datadog APM][7]
+* install the .NET Tracer using the [MSI installer for Windows][3]
+* reboot the host (required for IIS to pick up new environment variables)
+
+After rebooting the host and using your web application, see your traces on [Datadog APM][7].
 
 ### Linux
 
