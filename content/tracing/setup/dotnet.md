@@ -37,13 +37,13 @@ Automatic instrumentation captures:
 
 ### Windows
 
-Automatic instrumention is available on Windows if your web application meets the following requirements:
+Automatic instrumentation is available on Windows if your web application meets the following requirements:
 
 * Hosted on IIS
 * Runs on .NET Framework 4.5+ or .NET Core 2.0.x
 * Built on ASP.NET MVC 5, ASP.NET Web API 2, or ASP.NET Core MVC 2
 
-If your application meets the above requirements, follow these steps to enable automatic instrumentation:
+Follow these steps to enable automatic instrumentation:
 
 * [install and configure Datadog Agent][1]
 * install the .NET Tracer using the [MSI installer for Windows][3]
