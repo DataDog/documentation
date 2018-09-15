@@ -57,9 +57,9 @@ Automatic instrumention for .NET Core on Linux is coming soon. To instrument you
 
 ### Runtime Compatibility
 
-The .NET tracer supports automatic instrumentation on the following .NET runtimes:
+The .NET tracer supports automatic instrumentation on the following runtimes:
 
-| .NET Runtime   | Versions | OS                | Support Type      |
+| Runtime        | Versions | OS                | Support Type      |
 | :------------- | :------- | :---------------- | :---------------- |
 | .NET Framework | 4.5+     | Windows           | Public Beta       |
 | .NET Core      | 2.0.x    | Windows           | Public Beta       |
@@ -109,7 +109,7 @@ For more details on manual instrumentation and custom tagging, see [Advanced Usa
 
 Manual instrumentation is supported on .NET Framework 4.5+ on Windows and on any platform that implements .NET Standard 2.0 or above:
 
-| Framework      | Versions | OS                    |
+| Runtime        | Versions | OS                    |
 | :------------- | :------- | :-------------------- |
 | .NET Framework | 4.5+     | Windows               |
 | .NET Core      | 2.0+     | Windows, Linux, macOS |
