@@ -109,11 +109,11 @@ For more details on manual instrumentation and custom tagging, see [Advanced Usa
 
 Manual instrumentation is supported on .NET Framework 4.5+ on Windows and on any platform that implements .NET Standard 2.0 or above:
 
-| Runtime        | Versions | OS                    |
-| :------------- | :------- | :-------------------- |
-| .NET Framework | 4.5+     | Windows               |
-| .NET Core      | 2.0+     | Windows, Linux, macOS |
-| Mono           | 5.4+     | Windows, Linux, macOS |
+| Runtime        | Versions | OS                    | Support type |
+| :------------- | :------- | :-------------------- | :----------- |
+| .NET Framework | 4.5+     | Windows               | Public Beta  |
+| .NET Core      | 2.0+     | Windows, Linux, macOS | Public Beta  |
+| Mono           | 5.4+     | Windows, Linux, macOS | Public Beta  |
 
 For more details on supported platforms, see the [.NET Standard documentation][6].
 
