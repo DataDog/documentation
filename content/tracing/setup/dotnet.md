@@ -101,11 +101,21 @@ Don’t see your desired data store libraries? We’re continually adding additi
 
 ## Manual Instrumentation
 
-Manual instrumentation is supported on .NET Framework 4.5+ on Windows and on any platform that implements .NET Standard 2.0, including .NET Core 2.0+ on Windows, Linux, and macOS, Xamarin on iOS and Android, and Mono. See the [.NET Standard documentation][6] for more details on supported platforms.
-
 To manually instrument your code, add the `Datadog.Trace` package from [NuGet][4] to your application. In your code, access the global tracer through `Datadog.Trace.Tracer.Instance` to create new spans.
 
 For more details on manual instrumentation and custom tagging, see [Advanced Usage][2].
+
+### Runtime Compatibility
+
+Manual instrumentation is supported on .NET Framework 4.5+ on Windows and on any platform that implements .NET Standard 2.0 or above:
+
+| Framework      | Versions | OS                    |
+| :------------- | :------- | :-------------------- |
+| .NET Framework | 4.5+     | Windows               |
+| .NET Core      | 2.0+     | Windows, Linux, macOS |
+| Mono           | 5.4+     | Windows, Linux, macOS |
+
+For more details on supported platforms, see the [.NET Standard documentation][6].
 
 ## Further Reading
 
@@ -117,3 +127,5 @@ For more details on manual instrumentation and custom tagging, see [Advanced Usa
 [4]: https://www.nuget.org/packages/Datadog.Trace/
 [5]: /help
 [6]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support
+[7]: https://app.datadoghq.com/apm
+[8]: #manual-instrumentation
