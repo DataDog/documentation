@@ -1,9 +1,6 @@
 ---
 title: Dogstream
 kind: documentation
-aliases:
-    - /guides/logs/
-    - /agent/logs/
 ---
 
 <div class="alert alert-info">
