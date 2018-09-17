@@ -39,7 +39,6 @@ The `java-agent` uses the popular [Byte Buddy framework][9] to find the classes 
 
 Instrumentation may come from auto-instrumentation, the OpenTracing api, or a mixture of both. Instrumentation generally captures the following info:
 
-* Method execution time
 * Timing duration is captured using the JVM's nanotime clock unless a timestamp is provided from the OpenTracing api
 * Key/value tag pairs
 * Errors and stacktraces which are unhanded by the application
