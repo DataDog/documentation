@@ -14,13 +14,19 @@ To emit custom metrics from your Kubernetes application, use [DogStatsD][1], a m
 
 ## Use DogStatsD over a Unix Domain Socket
 
-You can use [DogStatsD over a Unix Domain Socket][9]. Edit your `datadog.yaml` file to set the `dogstatsd_socket` option to the path where DogStatsD should create its listening socket:
+You can use [DogStatsD over a Unix Domain Socket][9]. 
+
+### Create a listening socket
+
+Edit your `datadog.yaml` file to set the `dogstatsd_socket` option to the path where DogStatsD should create its listening socket:
 
 ```
 dogstatsd_socket: /var/run/datadog/dsd.socket
 ```
 
 And [restart your Agent][10]. You can also set the socket path via the `DD_DOGSTATSD_SOCKET` environment variable.
+
+### Pass the host IP address to your application
 
 The socket file needs to be accessible to the client containers. Mount a host directory on both sides: read-only in client containers, and read-write in the Agent container.
 
@@ -50,6 +56,44 @@ volumes:
     path: /var/run/datadog/
   name: dsdsocket
 ```
+
+### Instrument your code to send metrics
+
+Once your application can send metrics via DogStatsD on each node, you can instrument your application code to submit custom metrics. 
+
+**[See the full list of Datadog DogStatsD Client Libraries][8]**
+
+For instance, if your application is written in Go, import Datadog's [Go library][6], which provides a DogStatsD client library:
+
+```
+import "github.com/DataDog/datadog-go/statsd"
+```
+
+Before you can add custom counters, gauges, etc., [initialize the StatsD client][7] with the location of the DogStatsD service: `$DD_DOGSTATSD_SOCKET`.
+
+```go
+func main(){
+
+  // other main() code omitted for brevity
+
+  var err error
+  // use host IP and port to define endpoint
+  dogstatsd, err = statsd.New(os.Getenv("DD_DOGSTATSD_SOCKET") + ":8125")
+  if err != nil{
+    log.Printf("Cannot get a DogStatsD client.")
+  } else {
+    // prefix every metric and event with the app name
+    dogstatsd.Namespace = "My Application"
+
+    // post an event to Datadog at app startup
+    dogstatsd.Event(*statsd.Event{
+      Title: "My application started.",
+      Text: "My application started.",
+      })
+  }
+}
+```
+
 
 For more details, see the [DogStatsD over a Unix Domain Socket documentation][9].
 
