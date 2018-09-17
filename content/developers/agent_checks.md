@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-This page first looks at the `AgentCheck` interface, and then proposes a simple Agent check that collects timing metrics and status events from HTTP services.
+This page first looks at the `AgentCheck` interface, and then proposes a simple Agent check that collects timing metrics and status events from HTTP services. Then, it covers some considerations to keep in mind when writing checks that run command line subprocesses.
 
 Custom Agent checks are included in the main check run loop, meaning they run every check interval, which defaults to 15 seconds.
 
@@ -441,6 +441,37 @@ class HTTPCheck(AgentCheck):
             'aggregation_key': aggregation_key
         })
 ```
+
+##Writing checks that run command line subprocesses
+
+In some cases it may be necessary to create a custom check that runs a command line subprocess, for example, a check that runs the `vgs` command to report information about volume groups. Since the Python code that runs the checks is embedded in the multi-threaded go runtime, using the Python `subprocess` or `multithreading` modules from the standard library can cause problems, including crashing the Agent or causing processes to get stuck in a zombie state.
+
+To run a subprocess within a check, use the `get_subprocess_output()` function provided in `datadog_checks.utils.subprocess_output`:
+
+```python
+from datadog_checks.utils.subprocess_output import get_subprocess_output
+
+class MyCheck(AgentCheck):
+    def check(self, instance):
+    # [...]
+    out, err, retcode = get_subprocess_output(cmd, self.log, raise_on_empty_output=True)
+```
+
+The command line commands are passed to `get_subprocess_output`in the form of a list, with the command and each of its arguments as a string in the list. For instance, a command that is entered at the terminal prompt like this:
+
+```
+$ vgs -o vg_free
+
+```
+should be passed to the function like this:
+
+```python
+["vgs", "-o", "vg_free"]
+
+```
+
+When the command line program is run, it will return the same output as it would if it were run on the command line. It is important to do string processing on the output so the result of the check is an integer.
+
 
 ## Troubleshooting
 
