@@ -14,14 +14,18 @@ java -jar /opt/datadog-agent/agent/checks/libs/jmxterm-1.0-DATADOG-uber.jar -l l
 
 If you're able to connect using the command above, run: `beans` and send to the [Datadog support team][5] a copy of the results from above along with the following information:
 
-For Agent v6:
+{{< tabs >}}
+{{% tab "Agent v6" %}}
 
 * Content of `/var/log/datadog/agent.log`
 * Output of the [info command][3]
 * Output of: `ps aux | grep jmxfetch`
 * A copy of the YAML integration (send the file)
 
-For Agent v5:
+[3]: /agent/faq/agent-status-and-information
+
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
 * [Agent logs][2]
 * Output of the [info command][3]
@@ -32,9 +36,16 @@ For Agent v5:
 
 **Note**: if you're able to see some metrics (`jvm.heap_memory`, `jvm.non_heap_memory`, etc.) it is a sign that JMXFetch is properly running. If you're targeting another application and not seeing related metrics, the likely issue is a misconfiguration in your YAML.
 
-## Agent v6 troubleshooting
+[2]: /agent/faq/send-logs-and-configs-to-datadog-via-flare-command
+[3]: /agent/faq/agent-status-and-information
 
-### Agent versions >=6.2
+{{% /tab %}}
+{{< /tabs >}}
+
+## Agent troubleshooting
+
+{{< tabs >}}
+{{% tab "Agent >= v6.2" %}}
 
 These commands are available since v6.2.0:
 
@@ -51,7 +62,8 @@ By default theses commands run on all the configured jmx checks. If you want to 
 
 `sudo datadog-agent jmx list collected --checks tomcat`
 
-### Agent versions [6.0;6.2[
+{{% /tab %}}
+{{% tab "Agent v6.0 and v6.1" %}}
 
 The Agent 6 ships JMXFetch and supports all of its features, except those listed below. For Agent versions below v6.2, the `jmxterm` JAR is not shipped. If you wish to download and use `jmxterm`, see the [upstream project][4].
 
@@ -87,8 +99,10 @@ Note: the location to the JRE tools.jar (`/usr/lib/jvm/java-8-oracle/lib/tools.j
 
 **Note**: you may wish to specify alternative JVM heap parameters `-Xmx`, `-Xms`, the values used in the example correspond to the JMXFetch defaults.
 
-## Agent v5 troubleshooting
+[4]: https://github.com/jiaqi/jmxterm
 
+{{% /tab %}}
+{{% tab "Agent v5" %}}
 
 | Command                                                           | Description                                                                                                                                                             |
 | :----------------------------------------                         | :---                                                                                                                                                                    |
@@ -99,10 +113,8 @@ Note: the location to the JRE tools.jar (`/usr/lib/jvm/java-8-oracle/lib/tools.j
 | `sudo /etc/init.d/datadog-agent jmx list_everything`              | List every attributes available that has a type supported by JMXFetch.                                                                                                  |
 | `sudo /etc/init.d/datadog-agent jmx collect`                      | Start the collection of metrics based on your current configuration and display them in the console.                                                                    |
 
-
+{{% /tab %}}
+{{< /tabs >}}
 
 [1]: https://docs.oracle.com/javase/8/docs/technotes/guides/management/faq.html
-[2]: /agent/faq/send-logs-and-configs-to-datadog-via-flare-command
-[3]: /agent/faq/agent-status-and-information
-[4]: https://github.com/jiaqi/jmxterm
 [5]: /help
