@@ -1,7 +1,7 @@
 ---
 title: Metrics Explorer
 kind: documentation
-description: Compute global percentiles across your entire dataset.
+description: "Explore all of your metrics and perform Analytics."
 further_reading:
   - link: "graphing/metrics/summary"
     tag: "Documentation"

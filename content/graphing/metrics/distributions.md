@@ -4,7 +4,6 @@ kind: documentation
 description: Compute global percentiles across your entire dataset.
 aliases:
   - /developers/faq/characteristics-of-datadog-histograms/
-  - /graphing/metrics/
 further_reading:
   - link: "developers/dogstatsd/data_types#distributions"
     tag: "Documentation"
