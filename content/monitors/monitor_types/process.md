@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-Process monitors are configured to check the status of individual or groups of processes. Process monitor are evaluated every minute.
+Process monitors are configured to check the status of individual or groups of processes. Process monitors are evaluated every minute.
 
 ## Live Process Monitors
 
@@ -69,7 +69,7 @@ For each process, a single service check status is produced. Through this creati
 
 3. **Select alerting options**:
 
-    The monitor is evaluated every minute, setting a threshold to `X consecutive failures` means that the process was down for `X consecutive minutes`.
+    The monitor is evaluated every minute, therefore setting a threshold to `X consecutive failures` means that the process was down for `X consecutive minutes`.
     {{< img src="monitors/monitor_types/process/process_check_alert_conditions.png" alt="process monitor alert conditions" responsive="true" style="width:80%;">}}
 
 4. **Configure your notification options**:  
