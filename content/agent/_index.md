@@ -37,7 +37,7 @@ This is all controlled by one supervisor process. We keep this separate so you d
 
 ## What is the Agent v6?
 
-Agent 6 is the latest major version of the Datadog Agent. The big difference between Agent 5 and Agent 6 is that Agent 6 is a complete rewrite of the core Agent in Golang. Golang has allowed the Agent to take advantage of concurrency. In place of the three processes the Agent v5 used to run—*the Forwarder*, *the Collector*, and *DogStatsD*—there is now only one process: the Agent. It also comes with a number of other core improvements:
+Agent 6 is the latest major version of the Datadog Agent. The big difference between Agent 5 and Agent 6 is that Agent 6 is a complete rewrite of the core Agent in Golang. Golang has allowed the Agent to take advantage of concurrency. In place of the three processes the Agent v5 used to run—*the Forwarder*, *the Collector*, and *DogStatsD*—there is now only one process: *the Agent*. It also comes with a number of other core improvements:
 
 * Agent v6 has significantly improved resource usage over Agent v5:
   * It has decreased CPU usage
@@ -45,15 +45,26 @@ Agent 6 is the latest major version of the Datadog Agent. The big difference bet
   * It uses fewer file descriptors
   * It has an all around decreased footprint
 
-* [Distributions metrics][17] can be performed on the server directly to calculate real, effective global percentiles. (NOTE: this feature is in BETA. Contact support for details on how to have it enabled for your account.)
-
-* [DogStatsD][6] can be used over a Unix socket instead of over udp.
+* Agent 6 uses ports `5000` and `5001` by default. You can specify different ports for `expvar_port` and `cmd_port` in the `datadog.yaml` file.
 
 * Custom build your Agent v6 and [DogStatsD][6] much easier and with much more configuration options, to include or exclude almost anything. There is also a "puppy" Agent, which is a truly minimal installation.
 
-* Agent 6 uses ports `5000` and `5001` by default. You can specify different ports for `expvar_port` and `cmd_port` in the `datadog.yaml` file.
+**Agent v6 new functionalities**: 
+
+* [Distributions metrics][17] can be performed on the server directly to calculate real, effective global percentiles. (NOTE: this feature is in BETA. Contact support for details on how to have it enabled for your account.)
+
+* [DogStatsD][6] can be used over a Unix socket instead of over UDP.
+
+* [Live Process monitoring is available for Windows][19].
+
+* [Prometheus OpenMetrics is supported natively][20].
+
+* [All your logs can be sent to Datadog for alerting, analysis, and correlation with metrics][21].
+ 
 
 ## Agent configuration files migration
+
+[If you haven't done it already, upgrade your Agent v5 to Agent v6][18]
 
 To automatically transition Agent configuration paths and formats from Agent v5 to Agent v6, use the `import` command. The command parses an existing v5 `datadog.conf` and converts the configuration options to the new v6 `datadog.yaml` format. It also copies configuration files for checks that are currently enabled.
 
@@ -236,5 +247,9 @@ Once the Agent is running, use the `datadog-agent launch-gui` command to launch 
 [3]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md
 [4]: /integrations
 [5]: /developers/metrics/custom_metrics/
-[6]: /developers/dogstatsd
+[6]: /developers/dogstatsd/unix_socket/
 [17]: /developers/metrics/distributions 
+[18]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md
+[19]: /graphing/infrastructure/process/
+[20]: https://www.datadoghq.com/blog/monitor-prometheus-metrics/
+[21]: /logs/
