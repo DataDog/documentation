@@ -122,7 +122,7 @@ The next image shows one process on the Live Processes page whose arguments have
 
 Set `scrub_args` to `false` to completely disable the process arguments scrubbing.
 
-You can also scrub _all_ arguments from processes by enabling the `strip_proc_arguments` flag.
+You can also scrub **all** arguments from processes by enabling the `strip_proc_arguments` flag in your `datadog.yaml` configuration file:
 
 ```
 process_config:
