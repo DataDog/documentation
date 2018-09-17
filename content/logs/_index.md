@@ -2,6 +2,9 @@
 title: Log Management
 kind: Documentation
 description: "Configure your Datadog Agent to gather logs from your host, containers & services."
+aliases:
+    - /guides/logs/
+    - /agent/logs/
 further_reading:
 - link: "logs/log_collection"
   tag: "Documentation"
