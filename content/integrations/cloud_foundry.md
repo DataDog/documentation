@@ -199,7 +199,7 @@ To see which `datadog-agent` release version you uploaded earlier, run `bosh rel
 
 #### Load the runtime.yml
 
-Check if you have a previously configured runtime-config by running:
+Check if you have a previously configured `runtime-config` by running:
 
 ```
 # BOSH CLI v1
