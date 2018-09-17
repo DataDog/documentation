@@ -24,7 +24,6 @@ private: true
     {{< nextlink href="graphing/faq/there-are-too-many-lines-on-my-graph-can-i-only-display-the-most-important-ones" >}}There are too many lines on my graph, can I only display the most important ones?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/how-does-datadog-render-graphs-my-graph-doesn-t-show-the-values-i-m-expecting" >}}How does Datadog render graphs? My graph doesn't show the values I'm expecting.{{< /nextlink >}}
     {{< nextlink href="graphing/faq/what-is-the-granularity-of-my-graphs-am-i-seeing-raw-data-or-aggregates-on-my-graph" >}}What is the granularity of my graphs? Am I seeing raw data or aggregates on my graph?{{< /nextlink >}}
-    {{< nextlink href="graphing/faq/how-can-i-set-up-custom-units-for-custom-metrics" >}}How can I set up custom units for custom metrics?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/how-can-i-graph-host-uptime-percentage" >}}How can I graph host uptime percentage?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/inconsistent-sum-aggregation-between-different-time-windows-on-graph" >}}Inconsistent sum aggregation between different time windows on graph{{< /nextlink >}}
     {{< nextlink href="graphing/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs" >}}Why does zooming out a timeframe also smooth out my graphs?{{< /nextlink >}}
