@@ -442,9 +442,9 @@ class HTTPCheck(AgentCheck):
         })
 ```
 
-##Writing checks that run command line subprocesses
+## Writing checks that run command line programs
 
-In some cases it may be necessary to create a custom check that runs a command line subprocess, for example, a check that runs the `vgs` command to report information about volume groups. Since the Python code that runs the checks is embedded in the multi-threaded go runtime, using the Python `subprocess` or `multithreading` modules from the standard library can cause problems, including crashing the Agent or causing processes to get stuck in a zombie state.
+It's possible to create a custom check that runs a command line program and captures its output as a custom metric. For example, a check can run the `vgs` command to report information about volume groups. Since the Python code that runs the checks is embedded in the multi-threaded go runtime, using the Python `subprocess` or `multithreading` modules from the standard library can cause the Agent to crash or processes to get stuck in a zombie state.
 
 To run a subprocess within a check, use the `get_subprocess_output()` function provided in `datadog_checks.utils.subprocess_output`:
 
@@ -457,20 +457,35 @@ class MyCheck(AgentCheck):
     out, err, retcode = get_subprocess_output(cmd, self.log, raise_on_empty_output=True)
 ```
 
-The command line commands are passed to `get_subprocess_output`in the form of a list, with the command and each of its arguments as a string in the list. For instance, a command that is entered at the terminal prompt like this:
+The command and its arguments are passed to `get_subprocess_output()` in the form of a list, with the command and each of its arguments as a string within the list. For instance, a command that is entered at the command prompt like this:
 
 ```
 $ vgs -o vg_free
 
 ```
-should be passed to the function like this:
+should be passed to `get_subprocess_output()` like this:
 
 ```python
 ["vgs", "-o", "vg_free"]
 
 ```
 
-When the command line program is run, it will return the same output as it would if it were run on the command line. It is important to do string processing on the output so the result of the check is an integer.
+When the command line program is run, the check will capture the same output as if it were run on the command line in the terminal. It is important to do string processing on the output and call `int()` or `float()` on the result, so that it returns a numerical type.
+
+If you do not do string processing on the output of the subprocess, or if it does not return an integer or a float, the check will appear to run without errors, but will not report any data.
+
+Here is an example of a check that returns the results of a command line program:
+
+```python
+from checks import AgentCheck
+from datadog_checks.utils.subprocess_output import get_subprocess_output
+
+class LSCheck(AgentCheck):
+    def check(self, instance):
+        files, err, retcode = get_subprocess_output(["ls", "."], self.log, raise_on_empty_output=True)
+        file_count = len(files) #len() returns an int by default
+        self.gauge("file.count", file_count)
+```
 
 
 ## Troubleshooting
