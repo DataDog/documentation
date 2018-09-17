@@ -25,11 +25,11 @@ The metric panel displays an overview for a given metric:
 
 Key information about your metric can be seen:
 
-* **Metric name**: the name of your metric to be used in the [metric explorer][4] or in [dashboard widgets][5].
+* **Metric name**: The name of your metric to be used in the [metric explorer][4] or in [dashboard widgets][5].
 * **Number of distinct metrics**: A metric name can correspond to multiple distinct metrics depending of its associated tags, Consult the [custom metrics documentation][3] to learn more.
-* **Number of host**: the total number of hosts reporting this metric.
-* **Number of tags**: the total number of tags attached to this metric. Read more about [Tagging][6] and [how to assign tags][7].
-* **Metrics metadata**: all metadata attached to your metric:
+* **Number of host**: The total number of hosts reporting this metric.
+* **Number of tags**: The total number of tags attached to this metric. Read more about [tagging][6] and [how to assign tags][7].
+* **Metrics metadata**: All metadata attached to your metric:
     * the metric description 
     * the [metric unit][10]
     * the [metric type][8] 
@@ -38,13 +38,13 @@ Key information about your metric can be seen:
 
 ### Metric metadata 
 
-Every metric metadata can be manually edited: 
+Every piece of metric metadata can be manually edited: 
 
-* Edit the metric description to help understanding what a metric does.
+* Edit the metric description to help understand what a metric does.
 
-    If a metric is coming from an integration and you notice a wrong description, [open an issue in Datadog documentation Github repository][11] for a fix.
+    If a metric is coming from an integration and you notice a wrong description, [open an issue in the Datadog documentation Github repository][11] for a fix.
 
-* Edit the metric unit or add a custom unit for a custom metrics
+* Edit the metric unit or add a custom unit for a custom metrics.
 
     When submitting custom metrics to Datadog, it is possible to change the [unit of measurement][1] which shows up when hovering over a certain metric in your graph. Do this by selecting your custom metric from the list and then selecting the unit of measurement you would like to use as depicted below:
 
@@ -53,7 +53,7 @@ Every metric metadata can be manually edited:
     Note: This does not change the way that a metric graph is displayed (only the units of measurement when hovering over a metric)
 
 * Edit the metric type to match the real metric type send. 
-    Warning: this changes your metric behavior in **ALL** your analytics and monitor, do this at your own risk.
+    Warning: this changes your metric behavior in **ALL** your analytics and monitors; do this at your own risk.
 
 ## Further reading
 
