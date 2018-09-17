@@ -16,14 +16,13 @@ further_reading:
 
 ## Overview
 
-Process monitors are configured to check the status of individual or groups of processes.  
-
+Process monitors are configured to check the status of individual or groups of processes. Process monitor are evaluated every minute.
 
 ## Live Process Monitors
 
 {{< img src="monitors/monitor_types/process/live_process_monitor_select.png" alt="live process monitor" responsive="true" style="width:35%;">}}
 
-Live Process Monitors are based on data collected by the [Process Agent](https://docs.datadoghq.com/graphing/infrastructure/process/) which will allow you to centrally create monitors that warn or alert based on the behavior of any group of processes across any hosts or tags.
+Live Process Monitors are based on data collected by the [Process Agent](https://docs.datadoghq.com/graphing/infrastructure/process/) which allows you to centrally create monitors that warn or alert based on the behavior of any group of processes across any hosts or tags.
 
 ### Configuration
 
@@ -69,6 +68,8 @@ For each process, a single service check status is produced. Through this creati
     {{< img src="monitors/monitor_types/process/process_monitor_scope.png" alt="process monitor scope" responsive="true" style="width:80%;">}}
 
 3. **Select alerting options**:
+
+    The monitor is evaluated every minute, setting a threshold to `X consecutive failures` means that the process was down for `X consecutive minutes`.
     {{< img src="monitors/monitor_types/process/process_check_alert_conditions.png" alt="process monitor alert conditions" responsive="true" style="width:80%;">}}
 
 4. **Configure your notification options**:  
