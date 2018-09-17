@@ -37,19 +37,29 @@ Automatic instrumentation captures:
 
 ### Windows
 
-To use automatic instrumentation on Windows, download the latest MSI installer for Windows from the public [GitHub repository][3]. To instrument Windows services (including web applications running on IIS), reboot the host after running the installer so these services can pick up the required environment variables added by the installer.
+Automatic instrumentation is available on Windows if your web application meets the following requirements:
 
-[Download MSI installer for Windows][3]
+* Hosted on IIS
+* Runs on .NET Framework 4.5+ or .NET Core 2.0.x
+* Built on ASP.NET MVC 5, ASP.NET Web API 2, or ASP.NET Core MVC 2
+
+Follow these steps to enable automatic instrumentation:
+
+* [install and configure Datadog Agent][1]
+* install the .NET Tracer using the [MSI installer for Windows][3]
+* reboot the host (required for IIS to pick up new environment variables)
+
+After rebooting the host and using your web application, see your traces in [Datadog APM][7].
 
 ### Linux
 
-Automatic instrumention for .NET Core on Linux is coming soon.
+Automatic instrumention for .NET Core on Linux is coming soon. To instrument your .NET Core applications on Linux today, use [manual instrumentation][8].
 
 ### Runtime Compatibility
 
-The .NET tracer supports automatic instrumentation on the following .NET runtimes:
+The .NET tracer supports automatic instrumentation on the following runtimes:
 
-| .NET Runtime   | Versions | OS                | Support Type      |
+| Runtime        | Versions | OS                | Support Type      |
 | :------------- | :------- | :---------------- | :---------------- |
 | .NET Framework | 4.5+     | Windows           | Public Beta       |
 | .NET Core      | 2.0.x    | Windows           | Public Beta       |
@@ -91,11 +101,21 @@ Don’t see your desired data store libraries? We’re continually adding additi
 
 ## Manual Instrumentation
 
-Manual instrumentation is supported on .NET Framework 4.5+ on Windows and on any platform that implements .NET Standard 2.0, including .NET Core 2.0+ on Windows, Linux, and macOS, Xamarin on iOS and Android, and Mono. See the [.NET Standard documentation][6] for more details on supported platforms.
-
 To manually instrument your code, add the `Datadog.Trace` package from [NuGet][4] to your application. In your code, access the global tracer through `Datadog.Trace.Tracer.Instance` to create new spans.
 
 For more details on manual instrumentation and custom tagging, see [Advanced Usage][2].
+
+### Runtime Compatibility
+
+Manual instrumentation is supported on .NET Framework 4.5+ on Windows and on any platform that implements .NET Standard 2.0 or above:
+
+| Runtime        | Versions | OS                    | Support type |
+| :------------- | :------- | :-------------------- | :----------- |
+| .NET Framework | 4.5+     | Windows               | Public Beta  |
+| .NET Core      | 2.0+     | Windows, Linux, macOS | Public Beta  |
+| Mono           | 5.4+     | Windows, Linux, macOS | Public Beta  |
+
+For more details on supported platforms, see the [.NET Standard documentation][6].
 
 ## Further Reading
 
@@ -107,3 +127,5 @@ For more details on manual instrumentation and custom tagging, see [Advanced Usa
 [4]: https://www.nuget.org/packages/Datadog.Trace/
 [5]: /help
 [6]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support
+[7]: https://app.datadoghq.com/apm
+[8]: #manual-instrumentation
