@@ -159,7 +159,7 @@ languages:
           weight: 170
           parent: kubernetes
         - identifier: kubernetes_dogstatsd
-          name: "Custom Metrics with DogStatsD"
+          name: "Custom Metrics & DogStatsD"
           url: "agent/kubernetes/dogstatsd"
           weight: 175
           parent: kubernetes
