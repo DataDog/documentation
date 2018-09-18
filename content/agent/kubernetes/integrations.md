@@ -1,6 +1,13 @@
 ---
 title: Custom Integrations
 kind: documentation
+further_reading:
+- link: "agent/kubernetes/daemonset_setup"
+  tag: "documentation"
+  text: "Kubernetes DaemonSet Setup"
+- link: "agent/kubernetes/host_setup"
+  tag: "documentation"
+  text: "Kubernetes Host Setup"
 ---
 
 ## ConfigMap
@@ -92,7 +99,7 @@ volumes:
  ```
 
  And in your ConfigMap:
- 
+
  ```yaml
  kind: ConfigMap
 apiVersion: v1
@@ -117,6 +124,10 @@ data:
 
 It is also possible to enable integrations via the annotations in the manifest of your application.
 This can be done with Autodiscovery. For more details, see the [Autodiscovery][13] section.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/kubernetes
 [2]: /agent/faq/agent-5-kubernetes-basic-agent-usage
