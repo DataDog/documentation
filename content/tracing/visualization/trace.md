@@ -35,21 +35,25 @@ If you are analyzing an error trace, the error has a specific display if you fol
 
 {{< img src="tracing/visualization/trace/trace_error.png" alt="Trace Error" responsive="true" style="width:90%;">}}
 
+Want to look closer at the flame graph? Zoom in by scrolling:
+
+{{< img src="tracing/visualization/trace/trace_zoom.gif" alt="Trace Error" responsive="true" style="width:90%;">}}
+
 ### Traces special meaning tags
 
-When [submitting your traces][1] you may add attributes in the `meta` parameter.  
+When [submitting your traces][1] you may add attributes in the `meta` parameter.
 Some of them have a special meaning which lead to a dedicated display and behavior in Datadog:
 
-* **`sql.query`**:  
+* **`sql.query`**:
     Allows specific SQL query formating and display in Datadog UI.
 
-* **`error.msg`**:  
+* **`error.msg`**:
     Allows dedicated display for error message.
 
-* **`error.type`**:  
+* **`error.type`**:
     Allows dedicated display for error types. Types available are for instance for python `ValueError` or `Exception` and for Java `ClassNotFoundException` or `NullPointerException`.
 
-* **`error.stack`**:  
+* **`error.stack`**:
     Allows a better display of the Stacktrace of an exception in Datadog UI (red boxes etc...)
 
 {{< img src="tracing/visualization/trace/trace_error_formating.png" alt="Error Formating" responsive="true" >}}
