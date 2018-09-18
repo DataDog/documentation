@@ -25,7 +25,7 @@ Typically, it's helpful to look at containers, VMs and cloud infrastructure at t
 
 Containers and cloud environments regularly churn through hosts, so it is critical to tag these to allow for aggregation of the metrics you're getting.
 
-## Tags best practices
+## How To Use
 
 A few best practices on tags:
 
@@ -54,9 +54,9 @@ A few best practices on tags:
 
 6. Tags shouldn't originate from unbounded sources, such as EPOCH timestamps or user IDs. These tags may impact platform performance and billing.
 
-## Applying Tags
+## Assigning Tags
 
-Tags may be added using any (or all) of the following methods:
+Tags may be assigned using any (or all) of the following methods:
 
 * Agent Tags (`datadog.yaml`)
 * [DogStatsD][2] Tags
@@ -66,21 +66,18 @@ Tags may be added using any (or all) of the following methods:
 * [Chef Roles][7] and [Puppet][8] Tags (Chef and Puppet use the API - this may obviously be extended to other configuration management tools by you or Datadog)
 * Manually adding tags using the [Infrastructure List][9] (hover over host->select "Inspect"->"Edit Tags")
 
-## Examples
+## Using Tags
 
-Here is an example of tags using the time-series chart editor. For the first screenshot, no tags have been applied, and we're observing average CPU across all hosts:
+After you have assigned tags at the host and [integration][11] level, you can start using them to filter and group in interesting ways. There are several places you can use tags. Explore the various areas in the UI:
 
-{{< img src="tagging/Tags_1.png" alt="Tags_1" responsive="true" style="width:75%;">}}
-
-In this next example, we've applied a tag (`region:eastus`) that enables Datadog to look at CPU across the US East Region. We've used region as an example, but you could use any arbitrary tag, including application, service, environment, etc.
-
-{{< img src="tagging/Tags_2.png" alt="Tags_2" responsive="true" style="width:75%;">}}
-
-In this last example, we've used the second empty field labeled as "everything" by option to show an individual timeseries line for each host. Now we're seeing server CPU for individual hosts running in the US East Region.
-
-{{< img src="tagging/Tags_3.png" alt="Tags_3" responsive="true" style="width:75%;">}}
-
-We can also add additional tags to narrow down the scope even further - for example, hosts in `region:eastus` and `env:production`. Tags are extremely powerful, and they are ubiquitous in Datadog. They can be applied to all core elements, including alerts and host maps.
+* [Events][12]
+* [Dashboards][13]
+* [Infrastructure][14]
+* [Monitors][15]
+* [Metrics][16]
+* [APM][17]
+* [Notebooks][18]
+* [Logs][19]
 
 ### Further Reading
 
@@ -96,3 +93,8 @@ We can also add additional tags to narrow down the scope even further - for exam
 [8]: /integrations/puppet
 [9]: /graphing/infrastructure
 [10]: /developers/metrics/custom_metrics
+[11]: /integrations
+[12]: /tagging/using_tags/#events
+[13]: /tagging/using_tags/#dashboards
+[14]: /tagging/using_tags/#infrastructure
+[15]: /tagging/using_tags/#monitors
