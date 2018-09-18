@@ -22,7 +22,7 @@ You can also just [run the Datadog Agent on your host][3] and configure it to ga
 
 Thanks to Kubernetes, you can take advantage of DaemonSets to automatically deploy the Datadog Agent on all your nodes (or on specific nodes by using nodeSelectors).
 
-*If DaemonSets are not an option for your Kubernetes cluster, [install the Datadog Agent][4] as a sidecar container on each Kubernetes node.*
+*If DaemonSets are not an option for your Kubernetes cluster, [install the Datadog Agent][4] as a deployment on each Kubernetes node.*
 
 If your Kubernetes has RBAC enabled, see the [documentation on how to configure RBAC permissions with your Datadog-Kubernetes integration][5].
 
