@@ -74,7 +74,7 @@ Typical integrations relying on these attributes include [Apache][7], Rails, [AW
 | **Fullname**       | **Type** | **Description**                                                                                          |
 | :---               | :---     | :----                                                                                                    |
 | `http.url`         | `string` | The URL of the HTTP request.                                                                             |
-| `http.status_code` | `number` | The IP address the client connected to.                                                                  |
+| `http.status_code` | `number` | The HTTP response status code.                                                                  |
 | `http.method`      | `string` | The HTTP verb of the request.                                                                            |
 | `http.referer`     | `string` | The HTTP referer.                                                                                        |
 | `http.request_id`  | `string` | The HTTP request ID.                                                                                     |
