@@ -11,7 +11,7 @@ external_redirect: /api/#update-a-timeboard
 
 * **`title`** [*obligatoire*]:  
     Le nom du dashboard.
-* **`description`** [*optionnel*]:  
+* **`description`** [*obligatoire*]:  
     Une description du contenu du dashboard.
 * **`graphs`** [*obligatoire*]:  
     Une liste de définitions de graphique. Les définitions de graphique suivent cette forme:
