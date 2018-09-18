@@ -13,6 +13,7 @@ Configure your Datadog integrations via Datadog API, current configurable integr
 * [PagerDuty][2]
 * [Slack][3]
 * [Webhooks][4]
+* [Google Cloud Platform][5]
 
 Available endpoints are:
 
@@ -34,3 +35,4 @@ Available endpoints are:
 [2]: /api/#pagerduty
 [3]: /api/#slack
 [4]: /api/#webhooks
+[5]: /api/#google-cloud-platform
