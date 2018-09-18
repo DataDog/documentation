@@ -158,10 +158,15 @@ languages:
           url: "agent/kubernetes/metrics"
           weight: 170
           parent: kubernetes
+        - identifier: kubernetes_dogstatsd
+          name: "Custom Metrics with DogStatsD"
+          url: "agent/kubernetes/dogstatsd"
+          weight: 175
+          parent: kubernetes
         - identifier: kubernetes_legacy
           name: "Legacy Versions"
           url: "agent/kubernetes/legacy"
-          weight: 175
+          weight: 180
           parent: kubernetes
 
         - identifier: autodiscovery
