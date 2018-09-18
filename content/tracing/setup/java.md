@@ -217,6 +217,9 @@ Now add `@Trace` to methods to have them be traced when running with `dd-java-ag
 
 Datadog's [JMX Integration][7] monitors additional metrics around: JVM heap memory, thread count, and garbage collection. Use it in conjunction with APM for an even broader view into your Java app's performance.
 
+## Debugging
+To return debug level application logs, enable debug mode with the flag `-Ddatadog.slf4j.simpleLogger.defaultLogLevel=debug` when starting the JVM.
+
 ## Performance
 
 Java APM has minimal impact on the overhead of an application:
