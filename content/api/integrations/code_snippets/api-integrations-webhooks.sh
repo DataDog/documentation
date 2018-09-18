@@ -9,8 +9,8 @@ curl -v -X POST -H "Content-type: application/json" \
 -d '{
     "hooks": [
       {
-        "name": "somehook",
-        "url": "http://requestb.in/v1srg7v1",
+        "name": "<WEBHOOK_NAME>",
+        "url": "<WEBHOOK_URL>",
         "use_custom_payload": "false",
         "custom_payload": "",
         "encode_as_form": "false",
@@ -24,8 +24,8 @@ curl -v -X PUT -H "Content-type: application/json" \
 -d '{
     "hooks": [
       {
-        "name": "anotherone",
-        "url": "http://requestb.in/v1srg7v1"
+        "name": "<WEBHOOK_NAME>",
+        "url": "<WEBHOOK_URL>"
       }
     ]
 }' \

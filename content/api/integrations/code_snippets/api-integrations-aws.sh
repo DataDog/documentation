@@ -11,9 +11,9 @@ curl -X GET "https://api.datadoghq.com/api/v1/integration/aws?api_key=${api_key}
 # Create an AWS Account in Datadog
 curl -X POST -H "Content-type: application/json" \
 -d '{
-        "account_id": "YOUR_AWS_ACCOUNT_ID",
-        "filter_tags": ["env:staging"],
-        "host_tags": ["account:customer1"],
+        "account_id": "<AWS_ACCOUNT_ID>",
+        "filter_tags": ["<KEY>:<VALUE>"],
+        "host_tags": ["<KEY>:<VALUE>"],
         "role_name": "DatadogAWSIntegrationRole",
         "account_specific_namespace_rules": {
         	"auto_scaling": false,
@@ -25,7 +25,7 @@ curl -X POST -H "Content-type: application/json" \
 # Delete an AWS Account in Datadog
 curl -X DELETE -H "Content-type: application/json" \
 -d '{
-        "account_id": "YOUR_AWS_ACCOUNT_ID",
+        "account_id": "<AWS_ACCOUNT_ID>",
         "role_name": "DatadogAWSIntegrationRole"
 }' \
 "https://api.datadoghq.com/api/v1/integration/aws?api_key=${api_key}&application_key=${app_key}"

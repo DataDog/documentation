@@ -1,5 +1,5 @@
 ---
-title: Google Could Platform
+title: Google Cloud Platform
 type: apicode
 order: 14.2
 external_redirect: /api/#google-cloud-platform
