@@ -41,20 +41,14 @@ Want to look closer at the flame graph? Zoom in by scrolling:
 
 ### Traces special meaning tags
 
-When [submitting your traces][1] you may add attributes in the `meta` parameter.
-Some of them have a special meaning which lead to a dedicated display and behavior in Datadog:
+When [submitting your traces][1] you can add attributes in the `meta` parameter. Some attributes have special meanings that lead to a dedicated display or specific behavior in Datadog:
 
-* **`sql.query`**:
-    Allows specific SQL query formating and display in Datadog UI.
-
-* **`error.msg`**:
-    Allows dedicated display for error message.
-
-* **`error.type`**:
-    Allows dedicated display for error types. Types available are for instance for python `ValueError` or `Exception` and for Java `ClassNotFoundException` or `NullPointerException`.
-
-* **`error.stack`**:
-    Allows a better display of the Stacktrace of an exception in Datadog UI (red boxes etc...)
+| Attribute     | Description                                                                                                                                                                        |
+| ----          | ------                                                                                                                                                                             |
+| `sql.query`   | Allows specific SQL query formatting and display in Datadog's UI.                                                                                                                     |
+| `error.msg`   | Allows dedicated display for error message.                                                                                                                                        |
+| `error.type`  | Allows dedicated display for error types. Available types include, for instance, in Python `ValueError` or `Exception` and in Java `ClassNotFoundException` or `NullPointerException`. |
+| `error.stack` | Allows a better display of the stack trace of an exception in Datadog's UI (red boxes, etc...)                                                                                         |
 
 {{< img src="tracing/visualization/trace/trace_error_formating.png" alt="Error Formating" responsive="true" >}}
 
