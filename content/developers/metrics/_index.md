@@ -71,7 +71,7 @@ Datadog accepts metrics submitted from a variety of sources, and as a result the
 | [DogStatsD][1]      | `dog.gauge(...)`                     | gauge             | gauge               |
 | [DogStatsD][1]      | `dog.distribution(...)`              | distribution      | distribution        |
 | [DogStatsD][1]      | `dog.histogram(...)`                 | histogram         | gauge, rate         |
-| [DogStatsD][1]      | `dog.increment(...)`                 | counter <sup>deprecated</sup> | rate    |
+| [DogStatsD][1]      | `dog.increment(...)`                 | counter           | rate                |
 | [DogStatsD][1]      | `dog.set(...)`                       | set               | gauge               |
 | [Agent check][2]    | `self.count(...)`                    | count             | count               |
 | [Agent check][2]    | `self.gauge(...)`                    | gauge             | gauge               |
