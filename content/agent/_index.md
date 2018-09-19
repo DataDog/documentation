@@ -98,32 +98,6 @@ With:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Resource overhead
-
-{{< tabs >}}
-{{% tab "Agent v6" %}}
-
-* CPU: \~ 0.12% of the CPU used on average
-* Memory: \~ 55MB of RAM used
-* Network bandwidth: \~ 86 B/s &#9660; | 260 B/s &#9650;
-
-{{% /tab %}}
-{{% tab "Agent v5" %}}
-
-* CPU: \~ 0.35% of the CPU used on average
-* Memory: \~ 115MB of RAM used
-* Network bandwidth: \~ 1900 B/s &#9660; | 800 B/s &#9650;
-* Disk: Linux 120MB | Windows 60MB
-
-{{% /tab %}}
-{{< /tabs >}}
-
-Caveats:
-
-* Enabling integrations may increase the Agent's resource consumption.
-* Enabling JVM checks forces the Agent to use more memory, depending on the number of beans exposed by the monitored JVMs.
-* Enabling the trace/process/logging Agents may increase resource consumption.
-
 ## CLI
 
 The new command line interface for the Agent is sub-command based:
