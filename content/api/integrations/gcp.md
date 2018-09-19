@@ -7,11 +7,11 @@ external_redirect: /api/#google-cloud-platform
 
 ## Google Cloud Platform
 
-Configure your Datadog-Google Cloud Platform integration directly through Datadog API. [Read more about Datadog-Google Cloud Platform integration][1]
+Configure your Datadog-Google Cloud Platform integration directly through the Datadog API. [Read more about Datadog-Google Cloud Platform integration][1]
 
 ##### ARGUMENTS
 
-All following fields values are provided by the json file created in the [GCP Console for service accounts][2], [consult the Google Cloud service account documentation][3].
+All of the following fields' values are provided by the JSON file created in the [GCP Console for service accounts][2]; [consult the Google Cloud service account documentation][3].
 
 * `type` [*required*]: Should be `service_account`.
 
