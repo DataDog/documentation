@@ -1,25 +1,32 @@
+#!/bin/sh
+# Make sure you replace the <DD_API_KEY> and <DD_APP_KEY> key below
+# with the ones for your account
+
+api_key=<DD_API_KEY>
+app_key=<DD_APP_KEY>
+
 curl -v -X POST -H "Content-type: application/json" \
 -d '{
     "service_hooks": [
       {
-        "account": "Main_Account",
+        "account": "<SLACK_ACCOUNT_1>",
         "url": "https://hooks.slack.com/services/1/1"
       },
       {
-        "account": "doghouse",
+        "account": "<SLACK_ACCOUNT_2>",
         "url": "https://hooks.slack.com/services/2/2"
       }
     ],
     "channels": [
       {
-        "channel_name": "#private",
+        "channel_name": "<CHANNEL_NAME_1>",
         "transfer_all_user_comments": "false",
-        "account": "Main_Account"
+        "account": "<SLACK_ACCOUNT_1>"
       },
       {
-        "channel_name": "#heresachannel",
+        "channel_name": "<CHANNEL_NAME_2>",
         "transfer_all_user_comments": "false",
-        "account": "doghouse"
+        "account": "<SLACK_ACCOUNT_2>"
       }
     ]
   }' \
@@ -29,24 +36,24 @@ curl -v -X PUT -H "Content-type: application/json" \
 -d '{
     "service_hooks": [
       {
-        "account": "Main_Account",
+        "account": "<SLACK_ACCOUNT_1>",
         "url": "https://hooks.slack.com/services/1/1"
       },
       {
-        "account": "doghouse",
+        "account": "<SLACK_ACCOUNT_2>",
         "url": "https://hooks.slack.com/services/2/2"
       }
     ],
     "channels": [
       {
-        "channel_name": "#private",
+        "channel_name": "<CHANNEL_NAME_1>",
         "transfer_all_user_comments": "false",
-        "account": "Main_Account"
+        "account": "<SLACK_ACCOUNT_1>"
       },
       {
-        "channel_name": "#heresachannel",
+        "channel_name": "<CHANNEL_NAME_2>",
         "transfer_all_user_comments": "false",
-        "account": "doghouse"
+        "account": "<SLACK_ACCOUNT_2>"
       }
     ]
 }' \
