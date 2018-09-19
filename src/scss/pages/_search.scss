@@ -1,7 +1,7 @@
 // search
 .tipue_search_content_title,
 .tipue_search_content_title a {
-  margin-top: 23px;
+  margin-top: 10px;
   font-size: 27px;
   color:#000;
   font-weight: 600;
@@ -9,6 +9,11 @@
 .tipue_search_content_url,
 .tipue_search_content_url a {
   color:#06c;
+}
+
+.hit .brdr {
+  border-right:1px solid #ccc;
+  margin-top:10px;
 }
 
 // pagination

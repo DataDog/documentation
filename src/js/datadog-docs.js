@@ -46,18 +46,20 @@ $(document).ready(function () {
 
         function getTitle(hit) {
             var title = '';
-            var match = false;
-            for(var i = 0; i < 10; i++) {
-                if(!match) {
-                   if(hit['hierarchy'].hasOwnProperty("lvl"+i)) {
-                        if(hit['hierarchy']["lvl"+i] !== undefined && hit['hierarchy']["lvl"+i] !== null) {
-                            title = hit['hierarchy']["lvl"+i];
-                            match = true;
-                        }
-                    }
+            title = hit['hierarchy']['lvl2'];
+            if(hit['hierarchy'].hasOwnProperty("lvl3")) {
+                if(hit['hierarchy']['lvl3'] !== null) {
+                    title += ' &raquo; ' + hit['hierarchy']['lvl3'];
                 }
             }
+            if(title == null) {
+                title = hit['hierarchy']['lvl1'];
+            }
             return title;
+        }
+
+        function getLeftTitle(hit) {
+            return hit['hierarchy']['lvl1'] || hit['hierarchy']['lvl2'];
         }
 
         // get results from algolia
@@ -288,14 +290,21 @@ $(document).ready(function () {
                         // output our slice of formatted results
                         for (var i = (page-1) * items_per_page; i < (page * items_per_page) && i < hits.length; i++) {
                             var formatted_results = '';
-                            formatted_results += '<div class="hit">';
+                            formatted_results += '<div class="hit row">';
+                            formatted_results += '<div class="col-4 brdr">';
+                            formatted_results += getLeftTitle(hits[i]);
+                            formatted_results += '</div>';
+                            formatted_results += '<div class="col-8">';
+
                             formatted_results += '<div class="tipue_search_content_title">' +
                                 '<a href="' + hits[i]["url"] + '">' + getTitle(hits[i]) + '</a></div>';
-                            formatted_results += '<div class="tipue_search_content_url">' +
-                                '<a href="' + hits[i]["url"] + '">' + hits[i]["url"].replace('https://docs.datadoghq.com', '') + '</a></div>';
+                            //formatted_results += '<div class="tipue_search_content_url">' +
+                            //    '<a href="' + hits[i]["url"] + '">' + hits[i]["url"].replace('https://docs.datadoghq.com', '') + '</a></div>';
                             var text = hits[i]._snippetResult.content.value;
                             formatted_results += '<div class="tipue_search_content_text">' +
                                 text + '</div>';
+
+                            formatted_results += '</div>';
                             formatted_results += '</div>';
                             listing_table.innerHTML += formatted_results;
                         }
