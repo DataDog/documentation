@@ -32,8 +32,8 @@ Counters are used to count things.
 {{% table responsive="true" %}}
 | Method | Overview |
 | :----- | :------- |
-| dog.increment(...)<br/><sup>deprecated</sup> | Used to increment a counter of events: <ul><li>Stored as a RATE type in the Datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter's value over that statsd flush period.</li></ul> |
-| dog.decrement(...)<br/><sup>deprecated</sup> | Used to decrement a counter of events: <ul><li>Stored as a RATE type in the Datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter's value over that statsd flush period.</li></ul> |
+| dog.increment(...) | Used to increment a counter of events: <ul><li>Stored as a RATE type in the Datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter's value over that statsd flush period.</li></ul> |
+| dog.decrement(...) | Used to decrement a counter of events: <ul><li>Stored as a RATE type in the Datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter's value over that statsd flush period.</li></ul> |
 {{% /table %}}
 
 #### Example
