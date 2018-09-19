@@ -42,6 +42,10 @@ You must allow the Agent to perform a few actions:
 
 You can find the templates in `manifests/rbac` in the [datadog-agent GitHub repository][5]. This creates a Service Account in the default namespace, a Cluster Role with the above rights, and a Cluster Role Binding.
 
+## Custom Integrations
+
+For details on the usage of ConfigMaps in Kubernetes, consult [Datadog's Kubernetes Custom Integrations documentation][13].
+
 ## Troubleshooting
 
 * [Can I install the Agent on my Kubernetes master node(s)][7]
@@ -64,3 +68,4 @@ You can find the templates in `manifests/rbac` in the [datadog-agent GitHub repo
 [9]: /agent/faq/getting-further-with-docker
 [10]: /integrations/faq/client-authentication-against-the-apiserver-and-kubelet
 [12]: /integrations/faq/using-rbac-permission-with-your-kubernetes-integration
+[13]: /agent/kubernetes/integrations
