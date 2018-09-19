@@ -30,16 +30,34 @@ $(document).ready(function () {
     // algolia
     if (window.location.href.indexOf('/search/') > -1) {
 
-        var client = algoliasearch("EOIG7V0A2O", 'bf60de88836cb62a73509ef075542065');
+        var client = algoliasearch("EOIG7V0A2O", 'c7ec32b3838892b10610af30d06a4e42');
         var results = new RegExp('[\?&]' + "s" + '=([^&#]*)').exec(window.location.href);
         var $pagination = $('#tipue_search_content');
         var query = "";
         try {query = results[1];} catch (e) {}
 
         // get indexname by language
-        var indexName = "docs_english";
+        var indexName = "docsearch_docs_prod";
+
+        var lang = 'en';
         if(window.location.pathname.indexOf("/fr/") > -1) {
-            indexName = "docs_french";
+            lang = "fr";
+        }
+
+        function getTitle(hit) {
+            var title = '';
+            var match = false;
+            for(var i = 0; i < 10; i++) {
+                if(!match) {
+                   if(hit['hierarchy'].hasOwnProperty("lvl"+i)) {
+                        if(hit['hierarchy']["lvl"+i] !== undefined && hit['hierarchy']["lvl"+i] !== null) {
+                            title = hit['hierarchy']["lvl"+i];
+                            match = true;
+                        }
+                    }
+                }
+            }
+            return title;
         }
 
         // get results from algolia
@@ -48,7 +66,9 @@ $(document).ready(function () {
             query: decodeURIComponent(query),
             params: {
                 hitsPerPage: 200,
-                attributesToRetrieve: "*"
+                attributesToRetrieve: "*",
+                facetFilters: ['language:'+lang],
+                filters: '(tags:docs OR tags:api)'
             }
         }], function (err, results) {
             if (!err) {
@@ -63,10 +83,10 @@ $(document).ready(function () {
                         var hit = hits[i];
                         formatted_results += '<div class="hit">';
                         formatted_results += '<div class="tipue_search_content_title">' +
-                            '<a href="' + hit["URL"] + '">' + hit["title"] + '</a></div>';
+                            '<a href="' + hit["url"] + '">' + getTitle(hit) + '</a></div>';
                         formatted_results += '<div class="tipue_search_content_url">' +
-                            '<a href="' + hit["URL"] + '">' + hit["URL"].replace('https://docs.datadoghq.com', '') + '</a></div>';
-                        var text = hit.page_description;
+                            '<a href="' + hit["url"] + '">' + hit["url"].replace('https://docs.datadoghq.com', '') + '</a></div>';
+                        var text = hit._snippetResult.content.value;
                         formatted_results += '<div class="tipue_search_content_text">' +
                             text + '</div>';
                         formatted_results += '</div>';
@@ -270,10 +290,10 @@ $(document).ready(function () {
                             var formatted_results = '';
                             formatted_results += '<div class="hit">';
                             formatted_results += '<div class="tipue_search_content_title">' +
-                                '<a href="' + hits[i]["URL"] + '">' + hits[i]["title"] + '</a></div>';
+                                '<a href="' + hits[i]["url"] + '">' + getTitle(hits[i]) + '</a></div>';
                             formatted_results += '<div class="tipue_search_content_url">' +
-                                '<a href="' + hits[i]["URL"] + '">' + hits[i]["URL"].replace('https://docs.datadoghq.com', '') + '</a></div>';
-                            var text = hits[i].page_description;
+                                '<a href="' + hits[i]["url"] + '">' + hits[i]["url"].replace('https://docs.datadoghq.com', '') + '</a></div>';
+                            var text = hits[i]._snippetResult.content.value;
                             formatted_results += '<div class="tipue_search_content_text">' +
                                 text + '</div>';
                             formatted_results += '</div>';
