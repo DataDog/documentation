@@ -22,19 +22,6 @@ There are a number of common issues that can get in the way when [sending new lo
 
 After you've made any configuration changes to the `datadog-agent`, the changes only take effect after you restart the dd-agent.
 
-## No new logs have been written
-
-The `datadog-agent` only collects logs that have been written after it has started trying to collect them (whether it be tailing or listening for them). In order to confirm whether log collection has been successfully set up, make sure that new logs have been written.
-
-## Permission Issues While Tailing Log Files
-
-The `datadog-agent` does not run as root (and we do not recommend that you make it run as root, as a general best-practice). For this reason, when you configure your `datadog-agent` to tail log files (for custom logs or for integrations) you need to take special care to ensure the `datadog-agent` user has read access to tail the log files you want to collect from.
-
-If the `datadog-agent` user does not have read access to the files you configure it to tail, then a permissions error is captured in the `/var/log/datadog/agent.log`. The Agent requires to have an execute permission on the directory containing the files (this is the default permission required to be able to list the file contained in a directory).
-
-**Note**: When adding the appropriate read permissions, make sure that these permissions are correctly set in your log rotation configuration. Otherwise, on the next log rotate, the Datadog Agent may lose its read permissions.
-Set permissions as `644` in the log rotation configuration to make sure the Agent has read access to the files.
-
 ## Outbound traffic on port 10516 is blocked
 
 The log-agent within the `datadog-agent` sends its logs to Datadog over tcp via port 10516. If that connection is not available, logs fail to be sent and an error is recorded in the `agent.log` file to that effect.
@@ -49,6 +36,19 @@ And then by sending a log like the following:
 ```
 <API_KEY> this is a test message
 ```
+
+## No new logs have been written
+
+The `datadog-agent` only collects logs that have been written after it has started trying to collect them (whether it be tailing or listening for them). In order to confirm whether log collection has been successfully set up, make sure that new logs have been written.
+
+## Permission Issues While Tailing Log Files
+
+The `datadog-agent` does not run as root (and we do not recommend that you make it run as root, as a general best-practice). For this reason, when you configure your `datadog-agent` to tail log files (for custom logs or for integrations) you need to take special care to ensure the `datadog-agent` user has read access to tail the log files you want to collect from.
+
+If the `datadog-agent` user does not have read access to the files you configure it to tail, then a permissions error is captured in the `/var/log/datadog/agent.log`. The Agent requires to have an execute permission on the directory containing the files (this is the default permission required to be able to list the file contained in a directory).
+
+**Note**: When adding the appropriate read permissions, make sure that these permissions are correctly set in your log rotation configuration. Otherwise, on the next log rotate, the Datadog Agent may lose its read permissions.
+Set permissions as `644` in the log rotation configuration to make sure the Agent has read access to the files.
 
 ## Configuration issues
 
