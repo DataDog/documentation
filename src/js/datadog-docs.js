@@ -46,14 +46,18 @@ $(document).ready(function () {
 
         function getTitle(hit) {
             var title = '';
-            title = hit['hierarchy']['lvl2'];
-            if(hit['hierarchy'].hasOwnProperty("lvl3")) {
-                if(hit['hierarchy']['lvl3'] !== null) {
-                    title += ' &raquo; ' + hit['hierarchy']['lvl3'];
-                }
+            title = hit['hierarchy']['lvl0'];
+            if(hit['hierarchy'].hasOwnProperty("lvl1")) {
+                if(hit['hierarchy']['lvl1'] !== null)
+                    title += ' &raquo; ' + hit['hierarchy']['lvl1'];
             }
-            if(title == null) {
-                title = hit['hierarchy']['lvl1'];
+            if(hit['hierarchy'].hasOwnProperty("lvl2")) {
+                if(hit['hierarchy']['lvl2'] !== null)
+                    title += ' &raquo; ' + hit['hierarchy']['lvl2'];
+            }
+            if(hit['hierarchy'].hasOwnProperty("lvl3")) {
+                if(hit['hierarchy']['lvl3'] !== null)
+                    title += ' &raquo; ' + hit['hierarchy']['lvl3'];
             }
             return title;
         }
@@ -291,10 +295,7 @@ $(document).ready(function () {
                         for (var i = (page-1) * items_per_page; i < (page * items_per_page) && i < hits.length; i++) {
                             var formatted_results = '';
                             formatted_results += '<div class="hit row">';
-                            formatted_results += '<div class="col-4 brdr">';
-                            formatted_results += getLeftTitle(hits[i]);
-                            formatted_results += '</div>';
-                            formatted_results += '<div class="col-8">';
+                            formatted_results += '<div class="col-12">';
 
                             formatted_results += '<div class="tipue_search_content_title">' +
                                 '<a href="' + hits[i]["url"] + '">' + getTitle(hits[i]) + '</a></div>';
