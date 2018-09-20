@@ -51,7 +51,7 @@ DD_ENABLE_PAYLOADS_SERVICE_CHECKS
 DD_ENABLE_PAYLOADS_SKETCHES
 ```
 
-Then [Restart the Agent][4].
+Then [restart the Agent][4].
 
 {{% /tab %}}
 {{< /tabs >}}
