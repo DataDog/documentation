@@ -30,16 +30,36 @@ $(document).ready(function () {
     // algolia
     if (window.location.href.indexOf('/search/') > -1) {
 
-        var client = algoliasearch("EOIG7V0A2O", 'bf60de88836cb62a73509ef075542065');
+        var client = algoliasearch("EOIG7V0A2O", 'c7ec32b3838892b10610af30d06a4e42');
         var results = new RegExp('[\?&]' + "s" + '=([^&#]*)').exec(window.location.href);
         var $pagination = $('#tipue_search_content');
         var query = "";
         try {query = results[1];} catch (e) {}
 
         // get indexname by language
-        var indexName = "docs_english";
+        var indexName = "docsearch_docs_prod";
+
+        var lang = 'en';
         if(window.location.pathname.indexOf("/fr/") > -1) {
-            indexName = "docs_french";
+            lang = "fr";
+        }
+
+        function getTitle(hit) {
+            var title = '';
+            title = hit['hierarchy']['lvl0'];
+            if(hit['hierarchy'].hasOwnProperty("lvl1")) {
+                if(hit['hierarchy']['lvl1'] !== null)
+                    title += ' &raquo; ' + hit['hierarchy']['lvl1'];
+            }
+            if(hit['hierarchy'].hasOwnProperty("lvl2")) {
+                if(hit['hierarchy']['lvl2'] !== null)
+                    title += ' &raquo; ' + hit['hierarchy']['lvl2'];
+            }
+            if(hit['hierarchy'].hasOwnProperty("lvl3")) {
+                if(hit['hierarchy']['lvl3'] !== null)
+                    title += ' &raquo; ' + hit['hierarchy']['lvl3'];
+            }
+            return title;
         }
 
         // get results from algolia
@@ -48,7 +68,9 @@ $(document).ready(function () {
             query: decodeURIComponent(query),
             params: {
                 hitsPerPage: 200,
-                attributesToRetrieve: "*"
+                attributesToRetrieve: "*",
+                facetFilters: ['language:'+lang],
+                filters: '(tags:docs OR tags:api)'
             }
         }], function (err, results) {
             if (!err) {
@@ -63,10 +85,10 @@ $(document).ready(function () {
                         var hit = hits[i];
                         formatted_results += '<div class="hit">';
                         formatted_results += '<div class="tipue_search_content_title">' +
-                            '<a href="' + hit["URL"] + '">' + hit["title"] + '</a></div>';
+                            '<a href="' + hit["url"] + '">' + getTitle(hit) + '</a></div>';
                         formatted_results += '<div class="tipue_search_content_url">' +
-                            '<a href="' + hit["URL"] + '">' + hit["URL"].replace('https://docs.datadoghq.com', '') + '</a></div>';
-                        var text = hit.page_description;
+                            '<a href="' + hit["url"] + '">' + hit["url"].replace('https://docs.datadoghq.com', '') + '</a></div>';
+                        var text = hit._snippetResult.content.value;
                         formatted_results += '<div class="tipue_search_content_text">' +
                             text + '</div>';
                         formatted_results += '</div>';
@@ -268,14 +290,16 @@ $(document).ready(function () {
                         // output our slice of formatted results
                         for (var i = (page-1) * items_per_page; i < (page * items_per_page) && i < hits.length; i++) {
                             var formatted_results = '';
-                            formatted_results += '<div class="hit">';
+                            formatted_results += '<div class="hit row">';
+                            formatted_results += '<div class="col-12">';
+
                             formatted_results += '<div class="tipue_search_content_title">' +
-                                '<a href="' + hits[i]["URL"] + '">' + hits[i]["title"] + '</a></div>';
-                            formatted_results += '<div class="tipue_search_content_url">' +
-                                '<a href="' + hits[i]["URL"] + '">' + hits[i]["URL"].replace('https://docs.datadoghq.com', '') + '</a></div>';
-                            var text = hits[i].page_description;
+                                '<a href="' + hits[i]["url"] + '">' + getTitle(hits[i]) + '</a></div>';
+                            var text = hits[i]._snippetResult.content.value;
                             formatted_results += '<div class="tipue_search_content_text">' +
                                 text + '</div>';
+
+                            formatted_results += '</div>';
                             formatted_results += '</div>';
                             listing_table.innerHTML += formatted_results;
                         }
