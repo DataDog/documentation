@@ -62,10 +62,6 @@ $(document).ready(function () {
             return title;
         }
 
-        function getLeftTitle(hit) {
-            return hit['hierarchy']['lvl1'] || hit['hierarchy']['lvl2'];
-        }
-
         // get results from algolia
         client.search([{
             indexName: indexName,
@@ -299,8 +295,6 @@ $(document).ready(function () {
 
                             formatted_results += '<div class="tipue_search_content_title">' +
                                 '<a href="' + hits[i]["url"] + '">' + getTitle(hits[i]) + '</a></div>';
-                            //formatted_results += '<div class="tipue_search_content_url">' +
-                            //    '<a href="' + hits[i]["url"] + '">' + hits[i]["url"].replace('https://docs.datadoghq.com', '') + '</a></div>';
                             var text = hits[i]._snippetResult.content.value;
                             formatted_results += '<div class="tipue_search_content_text">' +
                                 text + '</div>';
