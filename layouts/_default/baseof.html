@@ -54,7 +54,7 @@
     <!-- ALGOLIA DOCSEARCH -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
     <script type="text/javascript">
-    docsearch({
+    var search_desktop = docsearch({
          appId: 'EOIG7V0A2O',
          apiKey: 'c7ec32b3838892b10610af30d06a4e42',
          indexName: 'docsearch_docs_prod',
@@ -63,11 +63,20 @@
             'facetFilters': ['language:en'],
             'filters': '(tags:docs OR tags:api)'
          },
-         debug: false // Set debug to true if you want to inspect the dropdown
+         autocompleteOptions: {
+            autoselect: false,
+            hint: true
+         },
+         debug: false // Set debug to true if you want to inspect the dropdown
+    });
+    search_desktop.autocomplete.on('keyup', function(e) {
+       if(e.keyCode === 13) {
+           window.location = '/search/?s='+$(this).val();
+       }
     });
     </script>
     <script type="text/javascript">
-    docsearch({
+    var search_mobile = docsearch({
          appId: 'EOIG7V0A2O',
          apiKey: 'c7ec32b3838892b10610af30d06a4e42',
          indexName: 'docsearch_docs_prod',
@@ -76,7 +85,16 @@
             'facetFilters': ['language:en'],
             'filters': '(tags:docs OR tags:api)'
          },
-         debug: false // Set debug to true if you want to inspect the dropdown
+         autocompleteOptions: {
+            autoselect: false,
+            hint: true
+         },
+         debug: false // Set debug to true if you want to inspect the dropdown
+    });
+    search_mobile.autocomplete.on('keyup', function(e) {
+       if(e.keyCode === 13) {
+           window.location = '/search/?s='+$(this).val();
+       }
     });
     </script>
     <!--/ ALGOLIA DOCSEARCH -->

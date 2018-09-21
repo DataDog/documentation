@@ -28,6 +28,7 @@ $(document).ready(function () {
     });
 
     // algolia
+    $('.ds-hint').css('background', 'transparent');
     if (window.location.href.indexOf('/search/') > -1) {
 
         var client = algoliasearch("EOIG7V0A2O", 'c7ec32b3838892b10610af30d06a4e42');
