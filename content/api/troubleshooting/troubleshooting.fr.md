@@ -23,6 +23,6 @@ Cela affiche la date du système actuel, puis fait une requête à notre endpoin
 
 Certains champs ne sont pas obligatoires pour la requête, mais nécessitent une entrée valide. Par exemple, en soumettant un événement, le champ `priority` doit être l'une des quatre options données.
 
-Tout autre texte entraîne un succès 202, mais aucun événement n'apparaît. Avoir un 'source_type_name` invalide n'empêche pas l'événement d'apparaître, mais ce champ est supprimé lors de la soumission.
+Tout autre texte entraîne un succès 202, mais aucun événement n'apparaît. Avoir un `source_type_name` invalide n'empêche pas l'événement d'apparaître, mais ce champ est supprimé lors de la soumission.
 
 **Note**: Nos clés API sont sensibles aux majuscules. Tous vos attributs JSON pour les endpoint POST doivent être en minuscules.

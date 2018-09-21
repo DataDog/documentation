@@ -81,7 +81,7 @@ logs:
 
 {{% tab "Stream logs from TCP/UDP" %}}
 
-To gather logs from your `<APP_NAME>` application that does not log to a file, but instead forwards its logs via TCP over port **10518**, create a ``<APP_NAME>.d/conf.yaml` file at the root of your [Agent's configuration directory][9] with the following content:
+To gather logs from your `<APP_NAME>` application that does not log to a file, but instead forwards its logs via TCP over port **10518**, create a `<APP_NAME>.d/conf.yaml` file at the root of your [Agent's configuration directory][9] with the following content:
 
 ```
 logs:

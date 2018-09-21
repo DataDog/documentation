@@ -85,7 +85,7 @@ Si vous déployez dans ces régions, veuillez passer la séction  <a href="#conf
 
 1.  Créez un nouveau rôle dans la [console IAM d'AWS][45].
 2.  Sélectionnez `Un autre compte AWS` pour le Role Type.
-3.  Pour Account ID, entrez 464622532012` (identifiant de compte Datadog). Cela signifie que vous accordez à Datadog un accès en lecture seule à vos données AWS.
+3.  Pour Account ID, entrez `464622532012` (identifiant de compte Datadog). Cela signifie que vous accordez à Datadog un accès en lecture seule à vos données AWS.
 4.  Cochez la case `Require external ID` et entrez celle générée [dans l'application Datadog][46]. Assurez-vous de laisser **Require MFA** désactivé. *Pour plus d'informations sur External ID, reportez-vous à [ce document dans le Guide de l'utilisateur IAM][47]*.
 5.  Cliquez sur `Next: Permissions`.
 6.  Cliquez sur `Create Policy`. Notez que si vous avez déjà créé la politique, recherchez-la sur cette page et utilisez-la avec "select it". Sinon, complétez ce qui suit pour en créer une nouvelle.
