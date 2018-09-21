@@ -71,7 +71,7 @@
     var desktop_enable_enter = true;
     search_desktop.autocomplete.on('keyup', function(e) {
        if(e.keyCode === 13 && desktop_enable_enter) {
-           window.location = '{{ .Site.BaseURL }}/search/?s='+$(this).val();
+           window.location = '{{ .Site.BaseURL }}search/?s='+$(this).val();
        }
     });
     search_desktop.autocomplete.on('autocomplete:cursorchanged', function(e) {
@@ -99,7 +99,7 @@
     var mobile_enable_enter = true;
     search_mobile.autocomplete.on('keyup', function(e) {
        if(e.keyCode === 13 && mobile_enable_enter) {
-           window.location = '{{ .Site.BaseURL }}/search/?s='+$(this).val();
+           window.location = '{{ .Site.BaseURL }}search/?s='+$(this).val();
        }
     });
     search_mobile.autocomplete.on('autocomplete:cursorchanged', function(e) {
