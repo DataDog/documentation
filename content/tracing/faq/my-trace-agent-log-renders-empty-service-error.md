@@ -3,7 +3,7 @@ title: My trace-agent.log renders "empty `service`" error
 kind: faq
 ---
 
-If your Agent is not rendering your traces on the UI, the first place to look for errors is the `trace-agent.log.
+If your Agent is not rendering your traces on the UI, the first place to look for errors is the `trace-agent.log`.
 
 You may see the following errors :
 

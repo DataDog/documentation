@@ -32,7 +32,7 @@ dd-agent reports disk metrics and rates for every partition that is accessible (
 
 * Expose their whole host filesystem to the container: `-v /:/host/rootfs:ro` : this can be useful if mount points are unpredictable or rapidly changing. The Agent reports every partition mounted on the system, but might probably throw "permission denied" warning on some virtual mount points (shm, netns...)
 
-If your Agent container runs with `--privileged`, it has full access to the `/dev` folder and its block devices. You can mount the desired block devices into the container so that they are reported by the Agent. To monitor `loop0, one could add to `entrypoint.sh`:
+If your Agent container runs with `--privileged`, it has full access to the `/dev` folder and its block devices. You can mount the desired block devices into the container so that they are reported by the Agent. To monitor `loop0`, one could add to `entrypoint.sh`:
 
 ```
 mkdir -p /tmp/mnt/loop0 && mount /dev/loop0 /tmp/mnt/loop0

@@ -300,7 +300,7 @@ public class MyClass {
 
 If you aren't using supported library instrumentation (see [library compatibility][python lib compatibility]), you may want to manually instrument your code.
 
-You may also want to extend the functionality of the ``ddtrace`` library or gain finer control over instrumenting your application. Several techniques are provided by the library to accomplish this.
+You may also want to extend the functionality of the `ddtrace` library or gain finer control over instrumenting your application. Several techniques are provided by the library to accomplish this.
 
 The following examples use the global tracer object which can be imported via:
 
@@ -310,7 +310,7 @@ The following examples use the global tracer object which can be imported via:
 
 **Decorator**
 
-``ddtrace`` provides a decorator that can be used to trace a particular method in your application:
+`ddtrace` provides a decorator that can be used to trace a particular method in your application:
 
 ```python
   @tracer.wrap()
@@ -1295,7 +1295,7 @@ end
 
 By default, all logs are processed by the default Ruby logger. When using Rails, you should see the messages in your application log file.
 
-Datadog client log messages are marked with ``[ddtrace]``, so you can isolate them from other messages.
+Datadog client log messages are marked with `[ddtrace]`, so you can isolate them from other messages.
 
 Additionally, it is possible to override the default logger and replace it with a custom one. This is done using the ``log`` attribute of the tracer.
 
