@@ -148,7 +148,6 @@ The Kubernetes check includes the following service checks:
 * [Why is the Kubernetes check failing with a ConnectTimeout error to port 10250?][8]
 * [How to report host disk metrics when dd-agent runs in a docker container?][9]
 * [Client Authentication against the apiserver and kubelet][10]
-* [Gathering Kubernetes events][11]
 * [Using RBAC permission with your Kubernetes integration][12]
 
 ## Further Reading
@@ -165,7 +164,6 @@ To get a better idea of how (or why) to integrate your Kubernetes service, check
 [8]: /integrations/faq/why-is-the-kubernetes-check-failing-with-a-connecttimeout-error-to-port-10250
 [9]: /agent/faq/getting-further-with-docker
 [10]: /integrations/faq/client-authentication-against-the-apiserver-and-kubelet
-[11]: /integrations/faq/gathering-kubernetes-events
 [12]: /integrations/faq/using-rbac-permission-with-your-kubernetes-integration
 [13]: https://www.datadoghq.com/blog/monitoring-kubernetes-era/
 [14]: https://app.datadoghq.com/account/settings#agent/kubernetes
