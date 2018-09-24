@@ -47,7 +47,7 @@ Follow these steps to enable automatic instrumentation:
 
 * [install and configure Datadog Agent][1]
 * install the .NET Tracer using the [MSI installer for Windows][3]
-* restart IIS:
+* restart IIS so it picks up new environment variables:
 ```
 C:\> net stop was
 C:\> net start was
