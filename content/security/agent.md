@@ -1,7 +1,7 @@
 ---
 title: Agent Security
 kind: documentation
-description: "This article describes how the Datadog Agent secures the information it sends and generates."
+description: "Datadog Agent Security measures"
 aliases:
     - /agent/security/
 further_reading:
