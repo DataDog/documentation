@@ -93,7 +93,7 @@ Choose to display one, three, or ten lines from your logs `message` attributes i
 {{< img src="logs/explorer/multi_line_display.png" alt="Multi-line display" responsive="true" style="width:30%;">}}
 
 **Note**:  If present, the `error.stack` attribute is displayed in priority as it should be used for stack traces.
-Remap any stack-trace attribute to this specific attribute with [the attribute remapper Processor][1].
+Remap any stack trace attribute to this specific attribute with [the attribute remapper Processor][2].
 
 [1]: /logs/explorer/search
 [2]: /logs/processing/processors/#remapper
