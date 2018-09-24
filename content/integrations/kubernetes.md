@@ -163,7 +163,7 @@ To get a better idea of how (or why) to integrate your Kubernetes service, check
 [7]: /integrations/faq/can-i-install-the-agent-on-my-kubernetes-master-node-s
 [8]: /integrations/faq/why-is-the-kubernetes-check-failing-with-a-connecttimeout-error-to-port-10250
 [9]: /agent/faq/getting-further-with-docker
-[10]: /integrations/faq/client-authentication-against-the-apiserver-and-kubelet[]
+[10]: /integrations/faq/client-authentication-against-the-apiserver-and-kubelet
 [12]: /integrations/faq/using-rbac-permission-with-your-kubernetes-integration
 [13]: https://www.datadoghq.com/blog/monitoring-kubernetes-era/
 [14]: https://app.datadoghq.com/account/settings#agent/kubernetes
