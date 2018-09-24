@@ -16,58 +16,60 @@ After you have assigned tags at the host and [integration][1] level, you can sta
 
 ## Events
 
-The [Events Stream][2] shows you all the events that have occurred in your environment over the time period specified. This can be overwhelming so you can use tags to filter down the list based on the tags you have assigned. You can enter any text you want in the search box above the Event List and a full text search is performed. You can also enter `tags:` followed by a tag to see all the events that come from a host or [integration][1] with that tag. The example in the image is the tag `role:cassandra`. So the search text is `tags:role:cassandra`.
+The [Events Stream][2] shows you all the events that have occurred in your environment over the time period specified. This can be overwhelming so you can use tags to filter down the list based on the tags you have assigned. You can enter any text you want in the search box above the Event List and a full text search is performed. You can also enter `tags:` followed by a tag to see all the events that come from a host or [integration][1] with that tag. The example in the image is the tag `service:coffee-house`. So the search text is `tags:service:coffee-house`. To search multiple tags, separate each tag by a comma - `tags:service:coffee-house,host:coffeehouseprod`
 
-{{< img src="tagging/eventtags.png" alt="Events List and Tags" responsive="true" style="width:70%;">}}
+{{< img src="tagging/eventtags.png" alt="Events List and Tags" responsive="true" style="width:80%;">}}
 
 ## Dashboards
 
 You can use tags to narrow down the metrics to display on a [dashboard graph][3], or to create groups of metrics to display.
-To narrow down the metrics to display, enter the tag in the `from:` textbox.
-
-You are now looking at a chosen metric over all the hosts that have that particular tag assigned.
+To narrow down the metrics to display, enter the tag in the **from** textbox. You are now looking at a chosen metric over all the hosts that have that particular tag assigned.
 
 {{< img src="tagging/dashboardtags_1.png" alt="Tags in Dashboards from textbox" responsive="true" style="width:70%;">}}
 
-To group using tags, enter the key part of the tag in the `avg by:` textbox.
+To group using tags, enter the key part of the tag in the **avg by** textbox. For example, if you have a timeseries graph showing a metric tagged by the reporting host services, such as `service:coffee-house`, enter service in the **avg by** textbox.
+This causes the graph to show one line for each tag value. Each line represents the average metric value across all hosts that share that service.
 
-For instance, if you have a timeseries graph showing a metric tagged by the reporting hosts roles -`role:database`, `role:frontend`, or `role:loadbalancer`- enter role in the **avg_by** textbox.
-This causes the graph to show just one line for each tag value - `database`, `frontend`, and `loadbalancer`. Each line represents the average metric value across all hosts that share that role.
+{{< img src="tagging/dashboardtags.png" alt="Tags in Dashboards avg by textbox" responsive="true" style="width:70%;">}}
 
-{{< img src="tagging/dashboardtags.png" alt="Tags in Dashboards avgby textbox" responsive="true" style="width:70%;">}}
+You can also use tags to overlay events on the dashboard. This works the same way as in the [Events Stream][2].
+Enter `tags:` followed by the tag. The matching events are overlaid as vertical bars on the graph.
 
-You can also use tags to overlay events on the dashboard. This works in exactly the same way as in the [Events List][2].
-Enter `tags:` followed by the tag and you see the corresponding events overlaid as vertical bars on each graph.
+{{< img src="tagging/dashboardeventtags.png" alt="Event Overlays in Dashboards" responsive="true" style="width:70%;">}}
+
+Use [template variables][4] to save time switching the **from** tag on graphs in your dashboard. In the example below, `service` is used to represent the `service` tag group. To use, replace any tag listed in the **from** textbox with `$service`.
+
+{{< img src="tagging/dashboardtemplatevariables.png" alt="Dashboard Template Variables" responsive="true" style="width:80%;">}}
 
 ## Infrastructure
+
+To filter the [Host Map][5], [Infrastructure List][6], [Containers][7], and [Processes][8] enter a tag in the **Filter by** textbox at the top of the page. You can also group hosts / containers by entering the key portion of the tag in the **Group by** textbox. So, if you enter `service` in the group box, you see each service as a group heading. 
 
 {{< tabs >}}
 {{% tab "Host Map" %}}
 
-Host Map
+Under this section, use tags to filter or group Hosts:
 
+{{< img src="tagging/hostmaptags.png" alt="Host Map Tags" responsive="true" style="width:80%;">}}
+
+Or Containers:
+
+{{< img src="tagging/containermaptags.png" alt="Container Map Tags" responsive="true" style="width:80%;">}}
 {{% /tab %}}
 
-{{% tab "Infrastructure List" %}}
+{{% tab "Infrastructure List" %}} 
 
-To filter the list of hosts in the [Infrastructure list][1], enter a tag in the filter textbox at the top of the page. You can also group the hosts by entering the key portion of the tag in the group by textbox. So if you enter role in the group box, you see each role as a group heading followed by the hosts with that tag.  
-
-{{< img src="tagging/infrastructuretags.png" alt="Tags in the Infrastructure List" responsive="true" style="width:70%;">}}
-
-[1]: /graphing/infrastructure/
-
+{{< img src="tagging/infrastructuretags.png" alt="Tags in the Infrastructure List" responsive="true" style="width:80%;">}}
 {{% /tab %}}
 
 {{% tab "Containers" %}}
 
-Containers
-
+{{< img src="tagging/livecontainertags.png" alt="Live Container Tags" responsive="true" style="width:80%;">}}
 {{% /tab %}}
 
 {{% tab "Processes" %}}
 
-Processes
-
+{{< img src="tagging/liveprocessestags.png" alt="Live Process Tags" responsive="true" style="width:80%;">}}
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -76,64 +78,95 @@ Processes
 {{< tabs >}}
 {{% tab "Manage Monitors" %}}
 
-Manage Monitors
+To filter monitors by [assigned tags][99], use the search bar or facet checkboxes. The search bar format is `tag:key:value`, for example `tag:service:coffee-house`.
+
+{{< img src="tagging/managemonitorstags.png" alt="Manage Monitors Tags" responsive="true" style="width:80%;">}}
 
 {{% /tab %}}
 
-{{% tab "Create Monitors" %}}
+{{% tab "New Monitor" %}}
 
-When creating a [monitor][1]:
+When creating a [monitor][1], using tags in the:
 
-Use tags in the `from:` textbox to limit the monitor scope to only metrics that have those tags.
-{{< img src="tagging/monitortags.png" alt="from textbox tags in Monitors" responsive="true" style="width:70%;">}}
+* **from** textbox limits the monitor scope to only metrics that have those tags.
 
-Use tags in the `excluding:` textbox to remove the corresponding metrics of the monitor scope.
-{{< img src="tagging/monitortags_1.png" alt="excluding textbox tags in Monitors" responsive="true" style="width:70%;">}}
+* **excluding** textbox removes the corresponding metrics from the monitor scope.
 
-Use tags in the `avg by` textbox to transform your monitor into a multi-alert monitor on each value of this tags.
-{{< img src="tagging/monitortags_2.png" alt="excluding textbox tags in Monitors" responsive="true" style="width:70%;">}}
-Tags on these events are related to the `avg by:` value. In order to have host-related tags (such as AWS integration tags), use `avg by: host`
+* **avg by** textbox transforms the monitor into a multi-alert monitor on each tag value.
+
+{{< img src="tagging/newmonitortags.png" alt="New Monitor Tags" responsive="true" style="width:80%;">}}
 
 [1]: /monitors/monitor_types/
+
+{{% /tab %}}
+{{% tab "Manage Downtime" %}}
+
+To filter downtimes by tag, type the tag name in the search bar, for example `service:coffee-house`.
+
+{{< img src="tagging/managedowntimetags.png" alt="Manage Monitors Tags" responsive="true" style="width:80%;">}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Metrics
 
-{{< tabs >}}
-{{% tab "Explorer" %}}
+Use tags in the [Metrics Explorer][9] to filter metrics over tags or display multiple graphs by tag key. The example below graphs a metric over `service:coffee-house` and displays one graph per `host`.
 
-Explorer
+{{< img src="tagging/metricsexplorertags.png" alt="Manage Monitors Tags" responsive="true" style="width:80%;">}}
 
-{{% /tab %}}
+## Integrations
 
-{{% tab "Summary" %}}
+Some integrations such as [AWS][10], [Google Cloud][11], and [Azure][12] allow you to optionally limit metrics using tags. In the specific integration tile, use a comma separated list of tags in the form `key:value`.
 
-Summary
+{{< img src="tagging/integrationtags.png" alt="Optionally limit metrics collection" responsive="true" style="width:80%;">}}
 
-{{% /tab %}}
+This defines a filter used while collecting metrics. Wildcards, such as `?` (for single characters) and `*` (for multiple characters) can also be used. Only hosts that match one of the defined tags are imported into Datadog. The rest are ignored. Hosts matching a given tag can also be excluded by adding `!` before the tag.
 
-{{% tab "Distribution Metrics" %}}
-
-Distribution Metrics
-
-{{% /tab %}}
-{{< /tabs >}}
+Example list - `datadog:monitored,env:production,instance-type:c1.*,!region:us-east-1`
 
 ## APM
 
-APM
+{{< tabs >}}
+{{% tab "Trace Search & Analytics" %}}
+
+For [Trace Search][1] filter traces by tags using the search bar or facet checkboxes. The search bar format is `key:value`, for example `service:coffee-house`. For advanced search, see the [trace search][2] page.
+
+{{< img src="tagging/tracesearchtags.png" alt="Trace Search Tags" responsive="true" style="width:80%;">}}
+
+[1]: /tracing/visualization/search/
+[2]: /tracing/visualization/search/#search-bar
+
+{{% /tab %}}
+{{% tab "Service Map" %}}
+
+Service Map - Use tags to jump to host map, logs, services?, ....
+
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ## Notebooks
 
-Notebooks
+Use tags in graphs (same as Dashboards)
 
 ## Logs
 
-Logs
+Logs Search, Analytics, Patterns, Live Tail, Pipelines - Use tags to filter logs
+
+Pipelines:
+https://docs.datadoghq.com/logs/processing/pipelines/#pipeline-filters
 
 ## Tell me about tagging!
+
+{{< tabs >}}
+
+{{% tab "X" %}}
+
+X
+
+{{% /tab %}}
+
+{{< /tabs >}}
 
 Tagging within Datadog is a powerful way to easily gather your metrics
 and makes scaling your infrastructure a breeze.
@@ -167,7 +200,7 @@ To get a breakdown by host, you can do:
 sum:page.views{domain:example.com} by {host}
 ```
 
-For information on AWS tagging, see [this tagging doc page][9].
+For information on AWS tagging, see [this tagging doc page][10].
 
 ## Examples from Index
 
@@ -192,6 +225,12 @@ We can also add additional tags to narrow down the scope even further - for exam
 [1]: /integrations
 [2]: /graphing/event_stream/
 [3]: /graphing/dashboards/
+[4]: /graphing/dashboards/template_variables/
 [5]: /graphing/infrastructure/hostmap
-[6]: /monitors/
-[9]: /integrations/amazon_web_services/
+[6]: /graphing/infrastructure/
+[7]: /graphing/infrastructure/livecontainers/
+[8]: /graphing/infrastructure/process/
+[9]: /graphing/metrics/explorer/
+[10]: /integrations/amazon_web_services/
+[11]: /integrations/google_cloud_platform/
+[12]: /integrations/azure/

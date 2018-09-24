@@ -75,9 +75,10 @@ After you have assigned tags at the host and [integration][11] level, you can st
 * [Infrastructure][14]
 * [Monitors][15]
 * [Metrics][16]
-* [APM][17]
-* [Notebooks][18]
-* [Logs][19]
+* [Integrations][17]
+* [APM][18]
+* [Notebooks][19]
+* [Logs][20]
 
 ### Further Reading
 
@@ -98,3 +99,8 @@ After you have assigned tags at the host and [integration][11] level, you can st
 [13]: /tagging/using_tags/#dashboards
 [14]: /tagging/using_tags/#infrastructure
 [15]: /tagging/using_tags/#monitors
+[16]: /tagging/using_tags/#metrics
+[17]: /tagging/using_tags/#integrations
+[18]: /tagging/using_tags/#apm
+[19]: /tagging/using_tags/#notebooks
+[20]: /tagging/using_tags/#logs
