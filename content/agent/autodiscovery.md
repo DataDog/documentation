@@ -123,7 +123,7 @@ Each **Template Source** section below shows a different way to configure check 
 
 Storing templates as local files is easy to understand and doesn't require an external service or a specific orchestration platform. The downside is that you have to restart your Agent containers each time you change, add, or remove templates.
 
-The Agent looks for Autodiscovery templates in the `/etc/datadog-agent/conf.d` directory, which contains default templates for the following checks:
+The Agent looks for Autodiscovery templates in the `/conf.d` directory, which contains default templates for the following checks:
 
 - [Apache][3]
 - [Consul][4]
