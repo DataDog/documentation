@@ -11,6 +11,8 @@ further_reading:
 - link: "developers/integrations/"
   tag: "Documentation"
   text: "Create a new Integration"
+aliases:
+  - /developers/openmetrics/'
 ---
 
 ## Overview

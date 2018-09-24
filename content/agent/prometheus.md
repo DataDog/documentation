@@ -14,6 +14,8 @@ further_reading:
 - link: developers/prometheus
   tag: "Documentation"
   text: "Write your own custom Prometheus Check"
+aliases:
+  - /agent/openmetrics/
 ---
 
 ## Overview
