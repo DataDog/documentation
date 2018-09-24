@@ -1,9 +1,9 @@
 ---
 title: Agent Security
 kind: documentation
+description: "This article describes how the Datadog Agent secures the information it sends and generates."
 aliases:
     - /agent/security/
-description: "This article describes how the Datadog Agent secures the information it sends and generates"
 further_reading:
 - link: "/security/"
   tag: "Documentation"
