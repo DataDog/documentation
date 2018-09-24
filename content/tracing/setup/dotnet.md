@@ -47,9 +47,9 @@ Follow these steps to enable automatic instrumentation:
 
 * [install and configure Datadog Agent][1]
 * install the .NET Tracer using the [MSI installer for Windows][3]
-* reboot the host (required for IIS to pick up new environment variables)
+* restarting IIS is required for it to pick up new environment variables. e.g. from an administrator command prompt: `iisreset.exe`
 
-After rebooting the host and using your web application, see your traces in [Datadog APM][7].
+After restarting IIS and using your web application, see your traces in [Datadog APM][7].
 
 ### Linux
 
