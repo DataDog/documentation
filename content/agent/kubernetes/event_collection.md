@@ -1,6 +1,8 @@
 ---
 title: Kubernetes Event Collection
 kind: documentation
+aliases:
+    - /integraitons/faq/gathering-kubernetes-events
 ---
 
 Similarly to Agent 5, Agent 6 can collect events from the Kubernetes API server.

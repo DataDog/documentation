@@ -92,7 +92,6 @@ private: true
 
 * [Can I install the Agent on my Kubernetes master node(s)][52]
 * [Client Authentication against the apiserver and kubelet][53]
-* [Gathering Kubernetes events][54]
 * [Why is the Kubernetes check failing with a ConnectTimeout error to port 10250?][55]
 * [Using RBAC permission with your Kubernetes integration][56]
 
@@ -192,7 +191,6 @@ private: true
 [51]: /integrations/faq/producer-and-consumer-metrics-don-t-appear-in-my-datadog-application
 [52]: /integrations/faq/can-i-install-the-agent-on-my-kubernetes-master-node-s
 [53]: /integrations/faq/client-authentication-against-the-apiserver-and-kubelet
-[54]: /integrations/faq/gathering-kubernetes-events
 [55]: /integrations/faq/why-is-the-kubernetes-check-failing-with-a-connecttimeout-error-to-port-10250
 [56]: /integrations/faq/using-rbac-permission-with-your-kubernetes-integration
 [57]: /integrations/faq/connection-issues-with-the-sql-server-integration
