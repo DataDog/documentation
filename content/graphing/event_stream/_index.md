@@ -26,17 +26,16 @@ Note that filters perform an exact match search and don't work with partial stri
 
 Full text search works on all keywords provided in the search query after applying any filters. Full text search looks inside the event text, title, tags, users who commented on the event and host names and devices tied to the event for any related information.
 
-You can use full text search to find all events with the same key tag with the following query: `tags:<KEY>:<VALUE>`. `tags:<VALUE>` also work but `tags:<KEY>` and `<KEY>:<VALUE>` don't work.
+You can use full text search to find all events with the same key tag with the following query: `tags:<KEY>:<VALUE>`. `tags:<VALUE>` also works, but `tags:<KEY>` and `<KEY>:<VALUE>` don't work.
 
-To combine multiple terms into a complex query, you can use any of the following boolean operators:
-
+To combine multiple terms into a complex query, you can use any of the following Boolean operators:
 
 |              |                                                                                                                                    |                                     |
 | :----        | :----                                                                                                                              | :----                               |
 | **Operator** | **Description **                                                                                                                   | **Example **                        |
 | `AND`        | **Intersection**: both terms are in the selected events (if nothing is added, `AND` is taken by default)                           | `redis_* AND down`                  |
-| `OR`         | **Union**: either terms is contained in the selected events                                                                        | `sources:nagios OR sources:chef`    |
-| `NOT`        | **Exclusion**: the following term is NOT in the event. This operator works for strings only - this does not work for tags searches | `tags:<KEY>:<VALUE> NOT "<STRING>"` |
+| `OR`         | **Union**: either term is contained in the selected events                                                                        | `sources:nagios OR sources:chef`    |
+| `NOT`        | **Exclusion**: the following term is NOT in the event. This operator works for strings only—this does not work for tag searches | `tags:<KEY>:<VALUE> NOT "<STRING>"` |
 
 In the example below, a full text search is performed to find all open chef or Nagios errors that mention one or more Redis instances that are currently down.
 
