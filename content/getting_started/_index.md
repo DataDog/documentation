@@ -57,7 +57,6 @@ To learn more about the Host Map, visit the [Host Map dedicated documentation pa
 
 For each incident users can:
 
-* Claim it
 * Increase/decrease priority
 * Comment
 * See similar incidents
