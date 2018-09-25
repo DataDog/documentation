@@ -12,11 +12,11 @@ further_reading:
   text: Learn how to assign tags
 ---
 
-After you have assigned tags at the host and [integration][1] level, you can start using them to filter and group in interesting ways.
+After [assigning tags][14], you can start using them to filter and group in interesting ways.
 
 ## Events
 
-The [Events Stream][2] shows you all the events that have occurred in your environment over the time period specified. This can be overwhelming so you can use tags to filter down the list based on the tags you have assigned. You can enter any text you want in the search box above the Event List and a full text search is performed. You can also enter `tags:` followed by a tag to see all the events that come from a host or [integration][1] with that tag. The example in the image is the tag `service:coffee-house`. So the search text is `tags:service:coffee-house`. To search multiple tags, separate each tag by a comma - `tags:service:coffee-house,host:coffeehouseprod`
+The [Events Stream][2] shows all the events that have occurred in your environment over the time period specified. This can be overwhelming so you can use tags to filter down the list. Enter `tags:` followed by a tag to see all the events that come from a host or [integration][1] with that tag. The example below is used to search for the tag `service:coffee-house` using `tags:service:coffee-house`. To search multiple tags, separate each tag by a comma - `tags:service:coffee-house,host:coffeehouseprod`.
 
 {{< img src="tagging/eventtags.png" alt="Events List and Tags" responsive="true" style="width:80%;">}}
 
@@ -25,17 +25,17 @@ The [Events Stream][2] shows you all the events that have occurred in your envir
 You can use tags to narrow down the metrics to display on a [dashboard graph][3], or to create groups of metrics to display.
 To narrow down the metrics to display, enter the tag in the **from** textbox. You are now looking at a chosen metric over all the hosts that have that particular tag assigned.
 
-{{< img src="tagging/dashboardtags_1.png" alt="Tags in Dashboards from textbox" responsive="true" style="width:70%;">}}
+{{< img src="tagging/dashboardtags_1.png" alt="Tags in Dashboards from textbox" responsive="true" style="width:80%;">}}
 
 To group using tags, enter the key part of the tag in the **avg by** textbox. For example, if you have a timeseries graph showing a metric tagged by the reporting host services, such as `service:coffee-house`, enter service in the **avg by** textbox.
 This causes the graph to show one line for each tag value. Each line represents the average metric value across all hosts that share that service.
 
-{{< img src="tagging/dashboardtags.png" alt="Tags in Dashboards avg by textbox" responsive="true" style="width:70%;">}}
+{{< img src="tagging/dashboardtags.png" alt="Tags in Dashboards avg by textbox" responsive="true" style="width:80%;">}}
 
 You can also use tags to overlay events on the dashboard. This works the same way as in the [Events Stream][2].
 Enter `tags:` followed by the tag. The matching events are overlaid as vertical bars on the graph.
 
-{{< img src="tagging/dashboardeventtags.png" alt="Event Overlays in Dashboards" responsive="true" style="width:70%;">}}
+{{< img src="tagging/dashboardeventtags.png" alt="Event Overlays in Dashboards" responsive="true" style="width:80%;">}}
 
 Use [template variables][4] to save time switching the **from** tag on graphs in your dashboard. In the example below, `service` is used to represent the `service` tag group. To use, replace any tag listed in the **from** textbox with `$service`.
 
@@ -122,7 +122,7 @@ Some integrations such as [AWS][10], [Google Cloud][11], and [Azure][12] allow y
 
 This defines a filter used while collecting metrics. Wildcards, such as `?` (for single characters) and `*` (for multiple characters) can also be used. Only hosts that match one of the defined tags are imported into Datadog. The rest are ignored. Hosts matching a given tag can also be excluded by adding `!` before the tag.
 
-Example list - `datadog:monitored,env:production,instance-type:c1.*,!region:us-east-1`
+Example - `datadog:monitored,env:production,instance-type:c1.*,!region:us-east-1`
 
 ## APM
 
@@ -139,7 +139,11 @@ For [Trace Search][1] filter traces by tags using the search bar or facet checkb
 {{% /tab %}}
 {{% tab "Service Map" %}}
 
-Service Map - Use tags to jump to host map, logs, services?, ....
+After [assigning tags][1], you can use the Service Map to jump to different areas of the application by clicking on a particular service. In the example below, you can view Trace Search & Analytics, Monitors, Logs, and the Host Map.
+
+{{< img src="tagging/servicemaptags.png" alt="Service Map Tags" responsive="true" style="width:80%;">}}
+
+[1]: /tagging/assigning_tags/
 
 {{% /tab %}}
 
@@ -147,7 +151,13 @@ Service Map - Use tags to jump to host map, logs, services?, ....
 
 ## Notebooks
 
-Use tags in graphs (same as Dashboards)
+When creating a [Notebook][13] graph, limit metrics by using tags in the **from** textbox. Additionally, you can group metrics by using tags in the **avg by** textbox. In the example below, metrics are limited to `service:coffee-house` and grouped by `host`.
+
+{{< img src="tagging/notebooktags.png" alt="Notebook Tags" responsive="true" style="width:80%;">}}
+
+To exclude tags, use `</>` to edit the text then add the tag in the form `!key:value`. In the example below, `service:coffeehouse` is excluded using `!service:coffeehouse`.
+
+{{< img src="tagging/notebooktagsexclude.gif" alt="Notebook Exclude Tags" responsive="true" style="width:80%;">}}
 
 ## Logs
 
@@ -234,3 +244,5 @@ We can also add additional tags to narrow down the scope even further - for exam
 [10]: /integrations/amazon_web_services/
 [11]: /integrations/google_cloud_platform/
 [12]: /integrations/azure/
+[13]: /graphing/notebooks/
+[14]: /tagging/assigning_tags/
