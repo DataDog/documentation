@@ -1135,9 +1135,30 @@ Possible values for the sampling priority tag are:
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-Coming Soon. Reach out to [the Datadog support team][contact support] to be part of the beta.
+Priority sampling is enabled by default. The sampler automatically assigns a value of `AUTO_REJECT` or `AUTO_KEEP` to traces, depending on their service and volume.
 
-[contact support]: https://docs.datadoghq.com/help
+You can also set this priority manually to either drop a non-interesting trace or to keep an important one. For that, set the `sampling.priority` tag to:
+
+```javascript
+const priority = require('dd-trace/ext/priority')
+
+// To reject the trace
+span.setTag('sampling.priority', priority.USER_REJECT)
+
+// To keep the trace
+span.setTag('sampling.priority', priority.USER_KEEP)
+```
+
+Possible values for the sampling priority tag are:
+
+| Sampling Value | Effect                                                                                                     |
+| --------       | :--------------------------------------------------                                                        |
+| `AUTO_REJECT`  | The sampler automatically decided to not keep the trace. The Agent will drop it.                           |
+| `AUTO_KEEP`    | The sampler automatically decided to keep the trace. The Agent will keep it. Might be sampled server-side. |
+| `USER_REJECT`  | The user asked to not keep the trace. The Agent will drop it.                                              |
+| `USER_KEEP`    | The user asked to keep the trace. The Agent will keep it. The server will keep it too.                     |
+
+Once the sampling priority has been set, it cannot be changed. This is done automatically whenever a span is finished or the trace is propagated. Setting it manually should thus be done before either occur.
 
 {{% /tab %}}
 {{% tab ".NET" %}}
