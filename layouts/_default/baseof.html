@@ -70,6 +70,10 @@
          apiKey: 'c7ec32b3838892b10610af30d06a4e42',
          indexName: 'docsearch_docs_prod',
          inputSelector: '.docssearch-input',
+         algoliaOptions: {
+            'facetFilters': ['language:en'],
+            'filters': '(tags:docs OR tags:api)'
+         },
          autocompleteOptions: {
             autoselect: false
          },
@@ -94,6 +98,10 @@
          apiKey: 'c7ec32b3838892b10610af30d06a4e42',
          indexName: 'docsearch_docs_prod',
          inputSelector: '.docssearch-input-m',
+         algoliaOptions: {
+            'facetFilters': ['language:en'],
+            'filters': '(tags:docs OR tags:api)'
+         },
          autocompleteOptions: {
             autoselect: false
          },
