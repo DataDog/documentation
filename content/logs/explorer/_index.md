@@ -191,12 +191,10 @@ Export your current Log Visualization with the *Export* functionality:
 | Button                | Description                                                                                                          |
 | ----                  | -----                                                                                                                |
 | Export to Monitor     | Export the query applied to your Logstream in order to create the log monitor query for a new [log monitor][7]       |
-| Export to Screenboard | Export your Logstream as a widget to a [Screenboard][9]. *This functionality is not available yet.*                  |
 | Export to CSV         | Export your current Logstream view with its selected column into a CSV file. You can export up to 5000 logs at once. |
 
 [7]: /monitors/monitor_types/log
 [8]: https://app.datadoghq.com/logs
-[9]: /graphing/dashboards/screenboard/
 
 {{% /tab %}}
 {{% tab "Log Analytics" %}}
