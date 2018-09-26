@@ -21,6 +21,9 @@ However, it is still possible to configure the Agent to only collect logs.
 
 The Agent sends metrics and other payloads to Datadog. To make sure that the Agent only sends logs, it is possible to disable payloads sent by the Agent since the Agent version 6.4 with the following steps:
 
+{{< tabs >}}
+{{% tab "Configuration file" %}}
+
 1. Open the `datadog.yaml` file ([locate this configuration file for your platform][3]).
 2. Add the `enable_payloads` attribute as below:
 
@@ -34,6 +37,24 @@ The Agent sends metrics and other payloads to Datadog. To make sure that the Age
 
 3. Configure the Agent to collect logs as explained in the [log documentation page][2].
 4. [Restart the Agent][4]
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
+
+Set the following environment variables to `false`:
+
+```
+DD_ENABLE_PAYLOADS_EVENTS
+DD_ENABLE_PAYLOADS_SERIES
+DD_ENABLE_PAYLOADS_SERVICE_CHECKS
+DD_ENABLE_PAYLOADS_SKETCHES
+```
+
+Then [restart the Agent][4].
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 
