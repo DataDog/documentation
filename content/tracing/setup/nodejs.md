@@ -121,6 +121,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 | [rhea][28]*      |             | Coming Soon     |
 
 **Note**: amqplib supports several message brokers including RabbitMQ and Apache Qpid.
+
 **Note**: amqp10 supports several message brokers including ActiveMQ and Apache Qpid.
 
 [21]: https://github.com/squaremo/amqp.node
