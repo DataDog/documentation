@@ -18,7 +18,7 @@ before_script:
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:master
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:peter_link-checker
   tags:
     - "runner:main"
     - "size:large"
@@ -52,6 +52,18 @@ build_preview:
     - create_artifact_untracked
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
+
+test_preview_link_checks:
+  <<: *build_template
+  stage: post-deploy
+  environment: "preview"
+  variables:
+    URL: ${PREVIEW_DOMAIN}
+    DISALLOW_BOTS: "1"
+  script:
+  - node /etc/node_modules/link-checker/dd-link-checker.js -e preview -u https://docs.datadoghq.com/ -c ${CI_PROJECT_DIR}/link-check-config.js
+  only:
+  - /.+?\/[a-zA-Z0-9_-]+/
 
 test_preview_images:
   <<: *base_template
