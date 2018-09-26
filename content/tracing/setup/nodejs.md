@@ -115,8 +115,8 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 | Module           | Versions    | Support Type    |
 | :----------      | :---------- | :-------------- |
-| [amqp10][27]*    | 3.x         | Fully Supported |
-| [amqplib][21]*   | 0.5.x       | Fully Supported |
+| [amqp10][27]*    | 3           | Fully Supported |
+| [amqplib][21]*   | 0.5         | Fully Supported |
 | [kafka-node][26] |             | Coming Soon     |
 | [rhea][28]*      |             | Coming Soon     |
 
