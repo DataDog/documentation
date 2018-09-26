@@ -67,9 +67,9 @@ For details about how to how to toggle and configure plugins, check out the [API
 | :----------   | :---------- | :-------------- |
 | [express][8]  | 4.x         | Fully Supported |
 | [graphql][22] | 0.13.x      | Fully Supported |
-| [hapi][9]     |             | Coming Soon     |
-| [koa][10]     |             | Coming Soon     |
-| [restify][11] |             | Coming Soon     |
+| [hapi][9]     | ^17.1       | Fully Supported |
+| [koa][10]     | 2.x         | Fully Supported |
+| [restify][11] | 7.x         | Fully Supported |
 
 [8]: https://expressjs.com/
 [22]: https://github.com/graphql/graphql-js
@@ -91,15 +91,15 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 | Module                 | Versions    | Support Type    |
 | :----------            | :---------- | :-------------- |
+| [cassandra-driver][25] |             | Coming Soon     |
 | [elasticsearch][14]    | 15.x        | Fully Supported |
+| [ioredis][15]          | 4.x         | Fully Supported |
+| [memcached][24]        | ^2.2        | Fully Supported |
 | [mongodb-core][16]     | 3.x         | Fully Supported |
 | [mysql][17]            | 2.x         | Fully Supported |
 | [mysql2][18]           | ^1.5        | Fully Supported |
 | [pg][19]               | 6.x         | Fully Supported |
 | [redis][20]            | ^2.6        | Fully Supported |
-| [cassandra-driver][25] |             | Coming Soon     |
-| [ioredis][15]          |             | Coming Soon     |
-| [memcached][24]        |             | Coming Soon     |
 
 [14]: https://github.com/elastic/elasticsearch-js
 [15]: https://github.com/luin/ioredis
@@ -115,13 +115,18 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 | Module           | Versions    | Support Type    |
 | :----------      | :---------- | :-------------- |
+| [amqp10][27]*    | 3.x         | Fully Supported |
 | [amqplib][21]*   | 0.5.x       | Fully Supported |
 | [kafka-node][26] |             | Coming Soon     |
+| [rhea][28]*      |             | Coming Soon     |
 
-**Note**: amqplib supports several message brokers including RabbitMQ and ActiveMQ.
+**Note**: amqplib supports several message brokers including RabbitMQ and Apache Qpid.
+**Note**: amqp10 supports several message brokers including ActiveMQ and Apache Qpid.
 
 [21]: https://github.com/squaremo/amqp.node
 [26]: https://github.com/SOHU-Co/kafka-node
+[27]: https://github.com/noodlefrenzy/node-amqp10
+[28]: https://github.com/amqp/rhea
 
 ## Further Reading
 
