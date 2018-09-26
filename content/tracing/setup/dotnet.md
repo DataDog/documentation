@@ -41,7 +41,6 @@ Automatic instrumentation is available on Windows if your web application meets 
 
 * Hosted on IIS
 * Runs on .NET Framework 4.5+ or .NET Core 2.0.x
-* Built on ASP.NET MVC 5, ASP.NET Web API 2, or ASP.NET Core MVC 2
 
 Follow these steps to enable automatic instrumentation:
 
