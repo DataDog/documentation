@@ -27,13 +27,12 @@ To narrow down the metrics to display, enter the tag in the **from** textbox. Yo
 
 {{< img src="tagging/using_tags/dashboardtags_1.png" alt="Tags in Dashboards from textbox" responsive="true" style="width:80%;">}}
 
-To group using tags, enter the key part of the tag in the **avg by** textbox. For example, if you have a timeseries graph showing a metric tagged by the reporting host services, such as `service:coffee-house`, enter service in the **avg by** textbox.
-This causes the graph to show one line for each tag value. Each line represents the average metric value across all hosts that share that service.
+To group using tags, enter the key part of the tag in the **avg by** textbox. For example, if you have a timeseries graph showing a metric tagged with the key value `service`, such as `service:coffee-house`, enter `service` in the **avg by** textbox to show one line for each `service`. Each line represents the average metric value across all hosts that share that `service`.
 
 {{< img src="tagging/using_tags/dashboardtags.png" alt="Tags in Dashboards avg by textbox" responsive="true" style="width:80%;">}}
 
 You can also use tags to overlay events on the dashboard. This works the same way as in the [Events Stream][2].
-Enter `tags:` followed by the tag. The matching events are overlaid as vertical bars on the graph.
+Enter `tags:` followed by the tag. The matching events are overlaid as vertical bars on the graph. The example below uses `tags:service:coffee-house`.
 
 {{< img src="tagging/using_tags/dashboardeventtags.png" alt="Event Overlays in Dashboards" responsive="true" style="width:80%;">}}
 
@@ -78,21 +77,23 @@ Or Containers:
 {{< tabs >}}
 {{% tab "Manage Monitors" %}}
 
-To filter monitors by [assigned tags][99], use the search bar or facet checkboxes. The search bar format is `tag:key:value`, for example `tag:service:coffee-house`.
+To filter monitors by [assigned tags][1], use the search bar or facet checkboxes. The search bar format is `tag:key:value`, for example `tag:service:coffee-house`.
 
 {{< img src="tagging/using_tags/managemonitorstags.png" alt="Manage Monitors Tags" responsive="true" style="width:80%;">}}
+
+[1]: /tagging/assigning_tags/
 
 {{% /tab %}}
 
 {{% tab "New Monitor" %}}
 
-When creating a [monitor][1], using tags in the:
+When creating a [monitor][1], use tags in the:
 
-* **from** textbox limits the monitor scope to only metrics that have those tags.
+* **from** textbox to limit the monitor scope to only metrics that have those tags.
 
-* **excluding** textbox removes the corresponding metrics from the monitor scope.
+* **excluding** textbox to remove the corresponding metrics from the monitor scope.
 
-* **avg by** textbox transforms the monitor into a multi-alert monitor on each tag value.
+* **avg by** textbox to transform the monitor into a multi-alert monitor on each tag value.
 
 {{< img src="tagging/using_tags/newmonitortags.png" alt="New Monitor Tags" responsive="true" style="width:80%;">}}
 
@@ -129,7 +130,7 @@ Example - `datadog:monitored,env:production,instance-type:c1.*,!region:us-east-1
 {{< tabs >}}
 {{% tab "Trace Search & Analytics" %}}
 
-For [Trace Search][1] filter traces with tags using the search bar or facet checkboxes. The search bar format is `key:value`, for example `service:coffee-house`. For advanced search, see the [trace search][2] page.
+For [Trace Search][1], filter traces with tags using the search bar or facet checkboxes. The search bar format is `key:value`, for example `service:coffee-house`. For advanced search, see the [trace search][2] page.
 
 {{< img src="tagging/using_tags/tracesearchtags.png" alt="Trace Search Tags" responsive="true" style="width:80%;">}}
 
@@ -139,11 +140,15 @@ For [Trace Search][1] filter traces with tags using the search bar or facet chec
 {{% /tab %}}
 {{% tab "Service Map" %}}
 
-After [assigning tags][1], you can use the Service Map to jump to different areas of the application by clicking on a particular service. In the example below, you can view Trace Search & Analytics, Monitors, Logs, and the Host Map.
+After [assigning tags][1], you can use the Service Map to jump to different areas of the application by clicking on a particular service. In the example below, you can view [Trace Search & Analytics][2], [Monitors][3], [Logs][4], and the [Host Map][5] filtered by the tag `service:coffee-house`.
 
 {{< img src="tagging/using_tags/servicemaptags.png" alt="Service Map Tags" responsive="true" style="width:80%;">}}
 
 [1]: /tagging/using_tags/assigning_tags/
+[2]: /tracing/visualization/search/
+[3]: /monitors/manage_monitor/
+[4]: /logs/explorer/search/
+[5]: /graphing/infrastructure/hostmap/
 
 {{% /tab %}}
 
@@ -190,67 +195,33 @@ Additionally, tags are used to filter logs a [Pipeline][19] applies to. In the e
 
 {{< img src="tagging/using_tags/logpipelinetags.png" alt="Pipeline Tags" responsive="true" style="width:80%;">}}
 
-## Tell me about tagging!
+## Developers
 
-{{< tabs >}}
+Tags can be used in various ways with the [API][20]. See the list below for links to those sections:
 
-{{% tab "X" %}}
+- [Query the event stream][21]
+- [Search hosts][22]
+- [Querying timeseries points][23]
+- [Get all monitor details][24]
+- [Mute a monitor][25]
+- [Create a Screenboard][26]
+- [Create a Timeboard][27]
 
-X
-
-{{% /tab %}}
-
-{{< /tabs >}}
-
-Tagging within Datadog is a powerful way to easily gather your metrics
-and makes scaling your infrastructure a breeze.
-
-For a quick example to demonstrate the power of tagging, perhaps you're
-looking for a sum of two metrics, which you might normally define as follows:
-
-```
-Web server 1: api.metric('page.views', [(1317652676, 100), ...], host="example.com")
-Web server 2: api.metric('page.views', [(1317652676, 500), ...], host="example.com")
-```
-
-What we recommend doing is leaving off the hostname; it then defaults to the host that is sending that point, since they're different hosts it's treated as different points:
-
-```
-Web server 1: api.metric('page.views', [(1317652676, 100), ...], tags=['domain:example.com'])
-Web server 2: api.metric('page.views', [(1317652676, 500), ...], tags=['domain:example.com'])
-```
-
-With these tags you can then do:
-
-```
-sum:page.views{domain:example.com}
-```
-
-which should give the desired result.
-
-To get a breakdown by host, you can do:
-
-```
-sum:page.views{domain:example.com} by {host}
-```
-
-For information on AWS tagging, see [this tagging doc page][10].
-
-## Examples from Index
+## Examples
 
 Here is an example of tags using the time-series chart editor. For the first screenshot, no tags have been applied, and we're observing average CPU across all hosts:
 
 {{< img src="tagging/using_tags/Tags_1.png" alt="Tags_1" responsive="true" style="width:75%;">}}
 
-In this next example, we've applied a tag (`region:eastus`) that enables Datadog to look at CPU across the US East Region. We've used region as an example, but you could use any arbitrary tag, including application, service, environment, etc.
+Next, we've updated the editor to include a tag (`region:eastus`) in the **from** textbox that enables Datadog to look at CPU across the US East Region. We've used region as an example, but you could use any arbitrary tag, including application, service, environment, etc.
 
 {{< img src="tagging/using_tags/Tags_2.png" alt="Tags_2" responsive="true" style="width:75%;">}}
 
-In this last example, we've used the second empty field labeled as "everything" by option to show an individual timeseries line for each host. Now we're seeing server CPU for individual hosts running in the US East Region.
+Finally, we've used the second empty field (the **avg by** textbox) to show an individual timeseries line for each `host`. Now we're seeing server CPU for individual hosts running in the US East Region.
 
 {{< img src="tagging/using_tags/Tags_3.png" alt="Tags_3" responsive="true" style="width:75%;">}}
 
-We can also add additional tags to narrow down the scope even further - for example, hosts in `region:eastus` and `env:production`. Tags are extremely powerful, and they are ubiquitous in Datadog. They can be applied to all core elements, including alerts and host maps.
+If needed, you can add additional tags to narrow down the scope even further - for example, hosts in `region:eastus` and `env:production`. Tags are extremely powerful, and they are used throughout Datadog. They can be applied to all core elements.
 
 ## Further Reading
 
@@ -275,3 +246,12 @@ We can also add additional tags to narrow down the scope even further - for exam
 [17]: /logs/explorer/patterns/
 [18]: /logs/live_tail/
 [19]: /logs/processing/pipelines/
+[20]: /api/
+[21]: /api/?lang=python#query-the-event-stream
+[22]: /api/?lang=python#search-hosts
+[23]: /api/?lang=python#query-timeseries-points
+[24]: /api/?lang=python#get-all-monitor-details
+[25]: /api/?lang=python#mute-a-monitor
+[26]: /api/?lang=python#create-a-screenboard
+[27]: /api/?lang=python#create-a-timeboard
+

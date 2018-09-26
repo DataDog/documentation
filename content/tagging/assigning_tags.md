@@ -118,6 +118,44 @@ You can also assign tags to hosts, but not to [integration][1] in the UI. To ass
 
 You can also assign tags to hosts, but not to [integration][1] using the API. The endpoints you want to work with are /tags/hosts and depending on whether you PUT, POST, or DELETE you update, add, or delete tags for the chosen host. For more details on using the Tags endpoints in the API, [review this document][60]
 
+## Developers
+
+x
+
+### Developer Example Use Case
+
+Tagging within Datadog is a powerful way to easily gather your metrics
+and makes scaling your infrastructure a breeze.
+
+For a quick example to demonstrate the power of tagging, perhaps you're
+looking for a sum of two metrics, which you might normally define as follows:
+
+```
+Web server 1: api.metric('page.views', [(1317652676, 100), ...], host="example.com")
+Web server 2: api.metric('page.views', [(1317652676, 500), ...], host="example.com")
+```
+
+What we recommend doing is leaving off the hostname; it then defaults to the host that is sending that point, since they're different hosts it's treated as different points:
+
+```
+Web server 1: api.metric('page.views', [(1317652676, 100), ...], tags=['domain:example.com'])
+Web server 2: api.metric('page.views', [(1317652676, 500), ...], tags=['domain:example.com'])
+```
+
+With these tags you can then do:
+
+```
+sum:page.views{domain:example.com}
+```
+
+which should give the desired result.
+
+To get a breakdown by host, you can do:
+
+```
+sum:page.views{domain:example.com} by {host}
+```
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
