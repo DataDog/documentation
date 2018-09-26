@@ -42,7 +42,7 @@ The Agent sends metrics and other payloads to Datadog. To make sure that the Age
 
 {{% tab "Environment Variables" %}}
 
-Set the following environment variables to false:
+Set the following environment variables to `false`:
 
 ```
 DD_ENABLE_PAYLOADS_EVENTS
