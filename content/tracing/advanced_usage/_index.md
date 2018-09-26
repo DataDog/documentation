@@ -1137,7 +1137,7 @@ Possible values for the sampling priority tag are:
 
 Priority sampling is enabled by default. The sampler automatically assigns a value of `AUTO_REJECT` or `AUTO_KEEP` to traces, depending on their service and volume.
 
-You can also set this priority manually to either drop a non-interesting trace or to keep an important one. For that, set the `sampling.priority` tag to:
+Set this priority manually to either drop a non-interesting trace or to keep an important one with the `sampling.priority` tag:
 
 ```javascript
 const priority = require('dd-trace/ext/priority')
