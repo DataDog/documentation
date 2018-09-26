@@ -65,11 +65,11 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 | Module        | Versions    | Support Type    |
 | :----------   | :---------- | :-------------- |
-| [express][8]  | 4.x         | Fully Supported |
-| [graphql][22] | 0.13.x      | Fully Supported |
+| [express][8]  | 4           | Fully Supported |
+| [graphql][22] | 0.13        | Fully Supported |
 | [hapi][9]     | ^17.1       | Fully Supported |
-| [koa][10]     | 2.x         | Fully Supported |
-| [restify][11] | 7.x         | Fully Supported |
+| [koa][10]     | 2           | Fully Supported |
+| [restify][11] | 7           | Fully Supported |
 
 [8]: https://expressjs.com/
 [22]: https://github.com/graphql/graphql-js
@@ -92,13 +92,13 @@ For details about how to how to toggle and configure plugins, check out the [API
 | Module                 | Versions    | Support Type    |
 | :----------            | :---------- | :-------------- |
 | [cassandra-driver][25] |             | Coming Soon     |
-| [elasticsearch][14]    | 15.x        | Fully Supported |
-| [ioredis][15]          | 4.x         | Fully Supported |
+| [elasticsearch][14]    | 15          | Fully Supported |
+| [ioredis][15]          | 4           | Fully Supported |
 | [memcached][24]        | ^2.2        | Fully Supported |
-| [mongodb-core][16]     | 3.x         | Fully Supported |
-| [mysql][17]            | 2.x         | Fully Supported |
+| [mongodb-core][16]     | 3           | Fully Supported |
+| [mysql][17]            | 2           | Fully Supported |
 | [mysql2][18]           | ^1.5        | Fully Supported |
-| [pg][19]               | 6.x         | Fully Supported |
+| [pg][19]               | 6 - 7       | Fully Supported |
 | [redis][20]            | ^2.6        | Fully Supported |
 
 [14]: https://github.com/elastic/elasticsearch-js
