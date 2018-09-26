@@ -46,13 +46,7 @@ Follow these steps to enable automatic instrumentation:
 
 * [install and configure Datadog Agent][1]
 * install the .NET Tracer using the [MSI installer for Windows][3]
-* restart IIS so it picks up new environment variables:
-```
-C:\> net stop was
-C:\> net start was
-C:\> net start w3svc
-C:\> net start <short name for any other services that are listed when you stop IIS, e.g. msftpsvc, smtpsvc>
-```
+* restart IIS so it re-reads the registry
 
 After restarting IIS and using your web application, see your traces in [Datadog APM][7].
 
