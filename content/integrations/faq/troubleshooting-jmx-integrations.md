@@ -6,6 +6,10 @@ disable_toc: true
 
 To verify you have access to JMX, test using JConsole or equivalent if possible. If you're unable to connect using JConsole [this article][1] may help to get you sorted. Also, if the metrics listed in your YAML aren't 1:1 with those listed in JConsole you'll need to correct this.
 
+<div class="alert alert-warning">
+For all versions of <strong>Agent v6</strong>, the <code>jmxterm</code> JAR is not shipped with the agent. To download and use <code>jmxterm</code>, see the <a href="https://github.com/jiaqi/jmxterm">upstream project</a>.
+</div>
+
 If you're able to connect using JConsole, run the following:
 
 ```
@@ -65,7 +69,7 @@ By default theses commands run on all the configured jmx checks. If you want to 
 {{% /tab %}}
 {{% tab "Agent v6.0 and v6.1" %}}
 
-The Agent 6 ships JMXFetch and supports all of its features, except those listed below. For Agent versions below v6.2, the `jmxterm` JAR is not shipped. If you wish to download and use `jmxterm`, see the [upstream project][4].
+The Agent 6 ships JMXFetch and supports all of its features, except those listed below.
 
 The Agent doesn't have a full featured interface to JMXFetch, so you may have to run some commands manually to debug the list of beans collected, JVMs, etc. A typical manual call will take the following form:
 
@@ -99,8 +103,6 @@ Note: the location to the JRE tools.jar (`/usr/lib/jvm/java-8-oracle/lib/tools.j
 
 **Note**: you may wish to specify alternative JVM heap parameters `-Xmx`, `-Xms`, the values used in the example correspond to the JMXFetch defaults.
 
-[4]: https://github.com/jiaqi/jmxterm
-
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -117,4 +119,3 @@ Note: the location to the JRE tools.jar (`/usr/lib/jvm/java-8-oracle/lib/tools.j
 {{< /tabs >}}
 
 [1]: https://docs.oracle.com/javase/8/docs/technotes/guides/management/faq.html
-[5]: /help
