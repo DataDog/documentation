@@ -98,7 +98,7 @@ The .NET tracer's ability to automatically instrument data store access depends 
 | :---------    | :------------------------------------------------ | :-------   | :-------------- |
 | MS SQL Server | `System.Data.SqlClient` (.NET Framework)          | (built-in) | Public Beta     |
 | MS SQL Server | `System.Data.SqlClient` (NuGet)                   | 4.1+       | Public Beta     |
-| Redis         | `StackExchange.Redis`                             | 1.2.x      | Public Beta     |
+| Redis         | `StackExchange.Redis`                             | 1.0-1.2.x  | Public Beta     |
 | Redis         | `ServiceStack.Redis`                              | 5.2.x      | Public Beta     |
 | Elasticsearch | `NEST` / `Elasticsearch.Net`                      |            | Coming soon     |
 | MongoDB       | `MongoDB.Driver`                                  |            | Coming soon     |
