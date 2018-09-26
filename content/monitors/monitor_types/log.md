@@ -36,8 +36,8 @@ Log monitors alert when a specified type of log exceeds a user-defined threshold
 
 ## Notifications and log samples
 
- It is possible to add up to 10 samples of log that triggered the monitor in the notification message.
-For now this is available for Slack and Emails notifications.
+ It is possible to add up to 10 samples of logs that triggered the monitor in the notification message.
+For now, this is available for Slack and email notifications.
 
  **Enable log samples in notification message**
     
