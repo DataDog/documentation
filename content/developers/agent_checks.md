@@ -100,13 +100,13 @@ You have the [following methods][6] available to you:
 
 All of these methods take the following arguments:
 
-| Argument        | Constraint                                                                           | Description                                                             |
-| --------------- | ------------------------------------------------------------------------------------ |                                                                         |
-| `metric`        | Required                                                                             | The name of the metric.                                                 |
-| `value`         | Required                                                                             | The value for the metric (defaults to 1 on increment, -1 on decrement). |
-| `tags`          | Optional                                                                             | A list of tags to associate with this metric.                           |
-| `hostname`      | Optional                                                                             | A hostname to associate with this metric. Defaults to the current host. |
-| `device_name`   | Optional                                                                             | A device name to associate with this metric.                            |
+| Argument        | Constraint | Description                                                             |
+| --------------- | ----       | ---                                                                     |
+| `metric`        | Required   | The name of the metric.                                                 |
+| `value`         | Required   | The value for the metric (defaults to 1 on increment, -1 on decrement). |
+| `tags`          | Optional   | A list of tags to associate with this metric.                           |
+| `hostname`      | Optional   | A hostname to associate with this metric. Defaults to the current host. |
+| `device_name`   | Optional   | A device name to associate with this metric.                            |
 
 These methods may be called from anywhere within your check logic. At the end of your `check` function, all metrics that were submitted are collected and
 flushed out with the other Agent metrics.
