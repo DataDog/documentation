@@ -18,6 +18,8 @@ java -jar /opt/datadog-agent/agent/checks/libs/jmxterm-1.0-DATADOG-uber.jar -l l
 
 If you're able to connect using the command above, run: `beans` and send to the [Datadog support team][5] a copy of the results from above along with the following information:
 
+[5]: /help
+
 {{< tabs >}}
 {{% tab "Agent v6" %}}
 
