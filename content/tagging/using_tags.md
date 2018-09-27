@@ -2,12 +2,12 @@
 title: Using tags
 kind: documentation
 aliases:
-- /getting_started/tagging/using_tags/using_tags
+- /getting_started/tagging/using_tags/
 further_reading:
 - link: "tagging"
   tag: "Documentation"
   text: Getting started with tags
-- link: "tagging/using_tags/assigning_tags"
+- link: "tagging/assigning_tags"
   tag: "Documentation"
   text: Learn how to assign tags
 ---

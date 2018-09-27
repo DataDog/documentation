@@ -13,10 +13,39 @@ further_reading:
   text: Learn how to use tags in Datadog
 ---
 
-Tagging is used throughout the Datadog product to make it easier to subset and query the machines and metrics that you have to monitor. Without the ability to assign and filter based on tags, finding the problems that exist in your environment and narrowing them down enough to discover the true causes would be extremely difficult. [Discover Datadog's tagging best practices before going further][61].
+Tagging is used throughout the Datadog product to make it easier to subset and query the machines and metrics that you have to monitor. Without the ability to assign and filter based on tags, finding the problems that exist in your environment and narrowing them down enough to discover the true causes would be extremely difficult. Discover [how to use][61] tagging in Datadog before going further.
 
 ## How to assign tags
-There are four primary ways to assign tags: inherited from the [integration][1], in the configuration, in the UI, and using the API, though the UI and API only allow you to assign tags at the host level. The recommended method is to rely on the [integrations][1] or via the configuration files.
+There are four primary ways to assign tags: in the configuration files, inherited from the [integrations][1], in the UI, and using the API. It is recommended to rely on the configuration files and [integrations][1].
+
+### Assigning tags using the configuration files
+The Datadog [integrations][1] installed with the Agent are configured via the yaml files located in the **conf.d** directory of the Agent install. For more about where to look for your configuration files, refer [to this page][59].
+
+Define tags in the configuration file for the overall Agent as well as for each integration.
+In YAML files, there is a tag dictionary with a list of tags you want assigned at that level. Any tag you assign to the Agent is applied to every integration on that Agent's host.
+
+Dictionaries with lists of values have two different yet functionally equivalent forms:
+
+    tags: key_first_tag:value_1, key_second_tag:value_2, key_third_tag:value_3
+
+or
+
+    tags:
+      - key_first_tag:value_1
+      - key_second_tag:value_2
+      - key_third_tag:value_3
+
+You see both forms in the yaml configuration files, but for the `datadog.yaml` init file only the first form is valid.
+
+Each tag can be anything you like but you have the best success with tagging if your tags are `key:value` pairs. Keys could represent the role, or function, or region, or application and the value is the instance of that role, function, region, or application. Here are some examples of good tags:
+
+    region:east
+    region:nw
+    application:database
+    database:primary
+    role:sobotka
+
+The reason why you should use key value pairs instead of values becomes apparent when you start using the tags to filter and group metrics and machines. That said, you are not required to use key value pairs and simple values are valid.
 
 ### Inheriting tags from an integration
 
@@ -24,14 +53,14 @@ The easiest method for assigning tags is to rely on the integration. Tags assign
 
 The following [integrations][1] sources create tags automatically in Datadog:
 
-|                                         |                                                                                                                                                                                                                                                                                                                                               |
-| :-------------------------------------  | :------------------------------------------------------------------------------                                                                                                                                                                                                                                                               |
+| Integration                             | Tags                                                                                                                                                                                                                                                                                                                                          |
+|-----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [Amazon CloudFront][2]                  | Distribution                                                                                                                                                                                                                                                                                                                                  |
 | [Amazon EC2][3]                         | AMI, Customer Gateway, DHCP Option, EBS Volume, Instance, Internet Gateway, Network ACL, Network Interface, Reserved Instance, Reserved Instance Listing, Route Table , Security Group - EC2 Classic, Security Group - VPC, Snapshot, Spot Batch, Spot Instance Request, Spot Instances, Subnet, Virtual Private Gateway, VPC, VPN Connection |
 | [Amazon Elastic File System][4]         | Filesystem                                                                                                                                                                                                                                                                                                                                    |
 | [Amazon Kinesis][5]                     | Stream State                                                                                                                                                                                                                                                                                                                                  |
 | [Amazon Machine Learning][6]            | BatchPrediction, DataSource, Evaluation  , MLModel                                                                                                                                                                                                                                                                                            |
-| [Amazon Route 53][7]                    | Domains, Healthchecks  , HostedZone                                                                                                                                                                                                                                                                                                           |
+| [Amazon Route 53][7]                    | Domains, Healthchecks, HostedZone                                                                                                                                                                                                                                                                                                             |
 | [Amazon WorkSpaces][8]                  | WorkSpaces                                                                                                                                                                                                                                                                                                                                    |
 | [AWS CloudTrail][9]                     | CloudTrail                                                                                                                                                                                                                                                                                                                                    |
 | [AWS Elastic Load Balancing][10]        | Loadbalancer, TargetGroups                                                                                                                                                                                                                                                                                                                    |
@@ -80,35 +109,6 @@ The following [integrations][1] sources create tags automatically in Datadog:
 | [VSphere][56]                           | Host, Datacenter, Server, Instance                                                                                                                                                                                                                                                                                                            |
 | [Win32 Events][57]                      | Event ID                                                                                                                                                                                                                                                                                                                                      |
 | [Windows Services][58]                  | Service Name                                                                                                                                                                                                                                                                                                                                  |
-
-### Assigning tags using the configuration files
-[The Datadog integrations][1] are all configured via the yaml configuration files located in the **conf.d** directory in your Agent install. For more about where to look for your configuration files, refer [to this article][59].
-
-Define tags in the configuration file for the overall Agent as well as for each integration.
-In YAML files, there is a tag dictionary with a list of tags you want assigned at that level. Any tag you assign to the Agent is applied to every integration on that Agent's host.
-
-Dictionaries with lists of values have two different yet functionally equivalent forms:
-
-    tags: key_first_tag:value_1, key_second_tag:value_2, key_third_tag:value_3
-
-or
-
-    tags:
-      - key_first_tag:value_1
-      - key_second_tag:value_2
-      - key_third_tag:value_3
-
-You see both forms in the yaml configuration files, but for the `datadog.yaml` init file only the first form is valid.
-
-Each tag can be anything you like but you have the best success with tagging if your tags are `key:value` pairs. Keys could represent the role, or function, or region, or application and the value is the instance of that role, function, region, or application. Here are some examples of good tags:
-
-    region:east
-    region:nw
-    application:database
-    database:primary
-    role:sobotka
-
-The reason why you should use key value pairs instead of values becomes apparent when you start using the tags to filter and group metrics and machines. That said, you are not required to use key value pairs and simple values are valid.
 
 ### Assigning host tags in the UI
 
@@ -218,6 +218,6 @@ sum:page.views{domain:example.com} by {host}
 [56]: /integrations/vmware
 [57]: /integrations/wmi
 [58]: /integrations/winservices
-[59]: https://app.datadoghq.com/account/settings#agent
+[59]: /agent/faq/agent-configuration-files/
 [60]: /api#tags
-[61]: /tagging/#tags-best-practices
+[61]: /tagging/#how-to-use

@@ -27,9 +27,9 @@ Containers and cloud environments regularly churn through hosts, so it is critic
 
 ## How To Use
 
-A few best practices on tags:
+Tagging restrictions, requirements, and suggestions:
 
-1. Tags must **start with a letter**, and after that may contain:
+1. Tags must **start with a letter** and after that may contain the characters listed below. Other special characters are converted to underscores. **Note**: A tag cannot end with a colon, for example `tag:`
 
     * Alphanumerics
     * Underscores
@@ -38,19 +38,16 @@ A few best practices on tags:
     * Periods
     * Slashes
 
-    Other special characters get converted to underscores.
-    **Note**: A tag cannot end with a colon (e.g., `tag:`)
 2. Tags can be **up to 200 characters** long and support unicode.
 3. Tags are converted to lowercase.
-4. A tag can have a `value` or a `key:value` syntax:
-    **For optimal functionality, we recommend constructing tags that use the `key:value` syntax.** The key is always what precedes the first colon of the global tag definition, e.g.:
+4. A tag can be in the format `value` or `key:value`. For optimal functionality, **we recommend constructing tags in the `key:value` format.** Commonly used metric tag keys are `env`, `instance`, `name`, and `service`. The key is always what precedes the first colon of the global tag definition, for example:
+    
+    | Tag                      | Key                | Value            |
+    |--------------------------|--------------------|------------------|
+    | `service:database:mysql` | `service`          | `database:mysql` |
+    | `service_database:mysql` | `service_database` | `mysql`          |
 
-    * `role:database:mysql` is parsed as **key**:`role` , **value**:`database:mysql`
-    * `role_database:mysql` is parsed as **key**:`role_database` , **value**:`mysql`
-
-    Examples of commonly used metric tag keys are `env`, `instance`, `name`, and `role`.
-
-5. `device`, `host`, and `source` are **reserved tag keys** and cannot be specified in the standard way.
+5.  **Reserved tag keys** `device`, `host`, and `source` cannot be used in the standard way.
 
 6. Tags shouldn't originate from unbounded sources, such as EPOCH timestamps or user IDs. These tags may impact platform performance and billing.
 
