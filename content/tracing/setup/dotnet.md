@@ -41,15 +41,14 @@ Automatic instrumentation is available on Windows if your web application meets 
 
 * Hosted on IIS
 * Runs on .NET Framework 4.5+ or .NET Core 2.0.x
-* Built on ASP.NET MVC 5, ASP.NET Web API 2, or ASP.NET Core MVC 2
 
 Follow these steps to enable automatic instrumentation:
 
 * [install and configure Datadog Agent][1]
 * install the .NET Tracer using the [MSI installer for Windows][3]
-* reboot the host (required for IIS to pick up new environment variables)
+* restart IIS so it re-reads the registry
 
-After rebooting the host and using your web application, see your traces in [Datadog APM][7].
+After restarting IIS and using your web application, see your traces in [Datadog APM][7].
 
 ### Linux
 
@@ -92,7 +91,8 @@ The .NET tracer's ability to automatically instrument data store access depends 
 | :---------    | :------------------------------------------------ | :-------   | :-------------- |
 | MS SQL Server | `System.Data.SqlClient` (.NET Framework)          | (built-in) | Public Beta     |
 | MS SQL Server | `System.Data.SqlClient` (NuGet)                   | 4.1+       | Public Beta     |
-| Redis         | `StackExchange.Redis`                             |            | Coming soon     |
+| Redis         | `StackExchange.Redis`                             | 1.0-1.2.x  | Public Beta     |
+| Redis         | `ServiceStack.Redis`                              | 5.2.x      | Public Beta     |
 | Elasticsearch | `NEST` / `Elasticsearch.Net`                      |            | Coming soon     |
 | MongoDB       | `MongoDB.Driver`                                  |            | Coming soon     |
 | PostgreSQL    | `Npgsql`                                          |            | Coming soon     |
