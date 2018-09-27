@@ -16,7 +16,7 @@ Use the monitor Uptime widget to track your monitor’s uptime via a widget in y
 To configure the widget from a [Screenboard][1].
 
 1. Select the monitor to display uptime from.
-    Optionally - Select the monitor group ordering between the worst performing 5 groups, best performing 5 groups, or custom (select up to 5 custom groups). The total percentage when selected by group can be calculated: Based on the total uptime of the monitor or the average uptime for the selected groups 
+    Optionally - Select the monitor group ordering between the worst performing 5 groups, best performing 5 groups, or custom (select up to 5 custom groups). The total percentage when selected by group can be calculated: Based on the total uptime of the monitor or the average uptime for the selected groups.
 
 2. If the widget is configured to report by groups, only one commune duration can be selected otherwise select up to 3 uptime durations for your widget between:
     * 7 days 
@@ -31,7 +31,6 @@ To configure the widget from a [Screenboard][1].
 3. Select the conditional formatting based on the uptime percentage, choose between: Red (down) / Green (up) / Yellow (warn). 
 
 4. To finish the configuration, give a title to your widget and save it to your [Screenboard][1]. 
-
 
 ## Widget behavior
 
