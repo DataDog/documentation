@@ -25,33 +25,46 @@ The APM tracer for PHP applications is in alpha and not officially supported by 
 
 The unstable alpha tracer can be [accessed today on Github][2].
 
-## Planned Automatic Instrumentation for Beta (Coming Soon)
+## Compatibility
+
+PHP APM includes support for the following PHP versions:
+
+| Version | Support type    |
+| -----   | --------------- |
+| 5.6.x   | Experimental    |
+| 7.0.x   | Experimental    |
+| 7.1.x   | Experimental    |
+| 7.2.x   | Experimental    |
+
+### Integrations
 
 APM PHP support is in alpha and provides limited automatic instrumentation. Planned beta support will provide automatic instrumentation for popular frameworks and libraries. See some of these listed below.
 Don't see your desired frameworks or libraries? Let Datadog know more about your needs through [this survey][1].
 
-#### Web Frameworks Compatibility
+#### Framework Compatibility
 
 | Module         | Versions    | Support Type    |
 | :-----------   | :---------- | :-------------- |
-| Laravel        | Coming soon | Coming soon     |
-| Magento        | Coming soon | Coming soon     |
-| Symfony 3      | Coming soon | Coming soon     |
-| Zend Framework | Coming soon | Coming soon     |
+| Laravel        | 5.x         | Experimental    |
+| Magento        | 2.x         | Experimental    |
+| Symfony        | 3.x         | Experimental    |
+| Zend Framework | 3.x         | Experimental    |
 
 Don't see your desired web frameworks? Let Datadog know more about your needs through [this survey][1].
 
 [1]: https://goo.gl/forms/rKjH2J6nJ585KXri2
 
-#### Data Store Compatibility
+#### Library Compatibility
 
-| Module        | Versions    | Support Type |
-| :------------ | :---------- | :----------- |
-| MySQL         | Coming soon | Coming Soon  |
-| Redis         | Coming soon | Coming Soon  |
-| ElasticSearch | Coming soon | Coming Soon  |
+| Module        | Versions              | Support Type    |
+| :------------ | :-------------------- | :-------------- |
+| Docterine     | 2.6                   | Experimental    |
+| Memcached     | *(Any Supported PHP)* | Experimental    |
+| Mysqli        | *(Any Supported PHP)* | Experimental    |
+| PDO           | *(Any Supported PHP)* | Experimental    |
+| Predis        | 1.1                   | Experimental    |
 
-Don't see your desired data stores? Let Datadog know more about your needs through [this survey][1].
+Don't see your desired libraries? Let Datadog know more about your needs through [this survey][1].
 
 [1]: https://goo.gl/forms/rKjH2J6nJ585KXri2
 
