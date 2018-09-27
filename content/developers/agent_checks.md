@@ -88,27 +88,25 @@ methods available in [DogStatsD][6], then the transition is very simple.
 
 You have the [following methods][6] available to you:
 
-    self.gauge( ... ) # Sample a gauge metric
-
-    self.increment( ... ) # Increment a counter metric
-
-    self.decrement( ... ) # Decrement a counter metric
-
-    self.histogram( ... ) # Sample a histogram metric
-
-    self.rate( ... ) # Sample a point, with the rate calculated at the end of the check
-
-    self.count( ... ) # Sample a raw count metric
-
-    self.monotonic_count( ... ) # Sample an increasing counter metric
+| Method                        | Description                                                       |
+| ---                           | ---                                                               |
+| `self.gauge( ... )`           | Sample a gauge metric.                                            |
+| `self.increment( ... )`       | Increment a counter metric.                                       |
+| `self.decrement( ... )`       | Decrement a counter metric.                                       |
+| `self.histogram( ... )`       | Sample a histogram metric.                                        |
+| `self.rate( ... )`            | Sample a point, with the rate calculated at the end of the check. |
+| `self.count( ... )`           | Sample a raw count metric.                                        |
+| `self.monotonic_count( ... )` | Sample an increasing counter metric.                              |
 
 All of these methods take the following arguments:
 
-- `metric`: The name of the metric
-- `value`: The value for the metric (defaults to 1 on increment, -1 on decrement)
-- `tags`: (optional) A list of tags to associate with this metric.
-- `hostname`: (optional) A hostname to associate with this metric. Defaults to the current host.
-- `device_name`: (optional) A device name to associate with this metric.
+| Argument        | Constraint                                                                           | Description                                                             |
+| --------------- | ------------------------------------------------------------------------------------ |                                                                         |
+| `metric`        | Required                                                                             | The name of the metric.                                                 |
+| `value`         | Required                                                                             | The value for the metric (defaults to 1 on increment, -1 on decrement). |
+| `tags`          | Optional                                                                             | A list of tags to associate with this metric.                           |
+| `hostname`      | Optional                                                                             | A hostname to associate with this metric. Defaults to the current host. |
+| `device_name`   | Optional                                                                             | A device name to associate with this metric.                            |
 
 These methods may be called from anywhere within your check logic. At the end of your `check` function, all metrics that were submitted are collected and
 flushed out with the other Agent metrics.
@@ -142,17 +140,23 @@ Your custom Agent check can also report the status of a service by calling the `
 
 The service_check method accepts the following arguments:
 
-- `check_name`: The name of the service check.
-- `status`: An integer describing the service status. You may also use the class status definitions:
-  - `AgentCheck.OK` or `0` for success
-  - `AgentCheck.WARNING` or `1` for warning
-  - `AgentCheck.CRITICAL` or `2` for failure
-  - `AgentCheck.UNKNOWN` or `3` for indeterminate status
-- `tags`: (optional) A list of key:val tags for this check.
-- `timestamp`: (optional) The POSIX timestamp when the check occurred.
-- `hostname`: (optional) The name of the host submitting the check. Defaults to the host_name of the Agent.
-- `check_run_id`: (optional) An integer ID used for logging and tracing purposes. The ID doesn't need to be unique. If an ID is not provided, one is automatically generated.
-- `message`: (optional) Additional information or a description of why this status occurred.
+| Argument         | Constraint | Description                                                                                                                                                                                                                                                                   |
+| ---------------- | ----       | ---                                                                                                                                                                                                                                                                           |
+| `check_name`     | Requried   | The name of the service check.                                                                                                                                                                                                                                                |
+| `status`         | Required   | An integer describing the service status. You may also use the class status definitions:<br>`AgentCheck.OK` or `0` for success<br>`AgentCheck.WARNING` or `1` for warning<br>`AgentCheck.CRITICAL` or `2` for failure<br>`AgentCheck.UNKNOWN` or `3` for indeterminate status |
+| `tags`           | Optional   | A list of key:val tags for this check.                                                                                                                                                                                                                                        |
+| `timestamp`      | Optional   | The POSIX timestamp when the check occurred.                                                                                                                                                                                                                                  |
+| `hostname`       | Optional   | The name of the host submitting the check. Defaults to the host_name of the Agent.                                                                                                                                                                                            |
+| `check_run_id`   | Optional   | An integer ID used for logging and tracing purposes. The ID doesn't need to be unique. If an ID is not provided, one is automatically generated.                                                                                                                              |
+| `message`        | Optional   | Additional information or a description of why this status occurred.                                                                                                                                                                                                          |
+
+### Versioning
+
+Optionally, you can version your custom check by adding the following to the top of the python file:
+
+```python
+__version__ = "<VERSION_NUMBER>"
+```
 
 ### Exceptions
 
@@ -164,8 +168,8 @@ because it could not collect any metrics, it should raise a meaningful exception
       Checks
       ======
 
-        my_custom_check
-        ---------------
+        my_custom_check (1.0.0)
+        -----------------------
           - instance #0 [ERROR]: ConnectionError('Connection refused.',)
           - Collected 0 metrics & 0 events
 
@@ -360,17 +364,29 @@ The entire check would be placed into the `checks.d` folder as `check_http.py`. 
 
 Once the check is in `checks.d`, test it by running it as a python script. [Restart the Agent][10] for the changes to be enabled. **Make sure to change the conf.d path in the test method**. From your Agent root, run:
 
-* For Agent v5:
-  `sudo -u dd-agent -- dd-agent check <check_name>`
+{{< tabs >}}
+{{% tab "Agent v6" %}}
 
-* For Agent v6:
-  `sudo -u dd-agent -- datadog-agent check <check_name>`
+```
+sudo -u dd-agent -- datadog-agent check <check_name>
+```
+
+{{% /tab %}}
+{{% tab "Agent v5" %}}
+
+```
+sudo -u dd-agent -- dd-agent check <check_name>
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 And confirm what metrics and events are being generated for each instance.
 
 Here's the full source of the check:
 
 ```python
+__version__ = "1.0.0"
 import time
 import requests
 
