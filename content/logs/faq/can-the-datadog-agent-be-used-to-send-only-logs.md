@@ -24,7 +24,7 @@ The Agent sends metrics and other payloads to Datadog. To make sure that the Age
 {{< tabs >}}
 {{% tab "Configuration file" %}}
 
-1. Open the `datadog.yaml` file ([locate this configuration file for your platform][3]).
+1. Open the `datadog.yaml` file ([locate this configuration file for your platform][1]).
 2. Add the `enable_payloads` attribute as below:
 
     ```
@@ -36,7 +36,11 @@ The Agent sends metrics and other payloads to Datadog. To make sure that the Age
     ```
 
 3. Configure the Agent to collect logs as explained in the [log documentation page][2].
-4. [Restart the Agent][4]
+4. [Restart the Agent][3]
+
+[1]: /agent/faq/agent-configuration-files/?tab=agentv6
+[2]: https://docs.datadoghq.com/logs/log_collection/
+[3]: /agent/faq/agent-commands/#restart-the-agent
 
 {{% /tab %}}
 
@@ -51,7 +55,9 @@ DD_ENABLE_PAYLOADS_SERVICE_CHECKS
 DD_ENABLE_PAYLOADS_SKETCHES
 ```
 
-Then [restart the Agent][4].
+Then [restart the Agent][1].
+
+[1]: /agent/faq/agent-commands/#restart-the-agent
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -60,7 +66,3 @@ Then [restart the Agent][4].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tagging
-[2]: https://docs.datadoghq.com/logs/log_collection/
-[3]: /agent/faq/agent-configuration-files/?tab=agentv6
-[4]: /agent/faq/agent-commands/#restart-the-agent

@@ -1,6 +1,5 @@
 api_key=<YOUR_API_KEY>
 app_key=<YOUR_APP_KEY>
-monitor_id=62628
 
 # Create a monitor to mute
 monitor_id=$(curl -X POST -H "Content-type: application/json" \

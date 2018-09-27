@@ -1,3 +1,7 @@
+#!/bin/sh
+# Replace the API and/or APP key below
+# with the ones for your account
+
 api_key=<YOUR_API_KEY>
 app_key=<YOUR_APP_KEY>
 
