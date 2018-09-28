@@ -24,7 +24,7 @@ To configure the widget from a [Screenboard][1].
     
     *Optionally* - Select the monitor group ordering between the worst performing 5 groups, best performing 5 groups, or custom (select up to 5 custom groups).
 
-    The total percentage when selected by group can be calculated based on the total uptime of the monitor or based on the average uptime for the selected groups.
+    The total percentage is based on the worst state of any group, when selected by group can be calculated based on the entire monitor or scoped by the selected groups.
 
 2. If the widget is configured to report by groups, only one duration can be selected; otherwise select up to 3 uptime durations for your widget between:
     * 7 days 
