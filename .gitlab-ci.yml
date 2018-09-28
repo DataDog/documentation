@@ -152,14 +152,13 @@ test_live_static:
     - master
 
 #index_algolia:
-index_algolia:
-  <<: *base_template
-  stage: post-deploy
-  environment: "live"
-  script:
-    - index_docsearch_algolia
-  only:
-    - master
+#  <<: *base_template
+#  stage: post-deploy
+#  environment: "live"
+#  script:
+#    - index_docsearch_algolia
+#  only:
+#    - master
 
 manage_translations:on-schedule:
   <<: *base_template
