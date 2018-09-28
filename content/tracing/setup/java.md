@@ -63,7 +63,7 @@ We officially support the Java JRE 1.7 and higher of both Oracle JDK and OpenJDK
 | Netty Http Server and Client | 4.0+       | Fully Supported | N/A                                                                           |
 | Play                         | 2.4-2.6    | Fully Supported | N/A                                                                           |
 | Ratpack                      | 1.4+       | Beta            | `-Ddd.integration.ratpack.enabled=true`                                       |
-| Spark Java                   | 2.4+       | Beta            | `-Ddd.integration.sparkjava.enabled=true -Ddd.integration.jetty.enabled=true` |
+| Spark Java                   | 2.3+       | Beta            | `-Ddd.integration.sparkjava.enabled=true -Ddd.integration.jetty.enabled=true` |
 | Spring Web (MVC)             | 4.0+       | Fully Supported | N/A                                                                           |
 | Spring WebFlux               | 5.0+       | Fully Supported | N/A                                                                           |
 
@@ -105,7 +105,7 @@ Don't see your desired networking framework? We're continually adding additional
 | Database       | Versions       | Support Type    | JVM Arg to enable                            |
 | :------------- | :------------- | :-------------- | :----------------                            |
 | Couchbase      | 2.0+           | Fully Supported | N/A                                          |
-| Cassandra      | 3.2+           | Fully Supported | N/A                                          |
+| Cassandra      | 2.3+           | Fully Supported | N/A                                          |
 | Elasticsearch  | 2.0+           | Fully Supported | N/A                                          |
 | JDBC           | N/A            | Fully Supported | N/A                                          |
 | Jedis          | 1.4+           | Fully Supported | N/A                                          |
