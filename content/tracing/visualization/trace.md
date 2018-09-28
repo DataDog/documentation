@@ -23,25 +23,28 @@ View an individual trace to see all of its spans and associated metadata. Each t
 
 {{< img src="tracing/visualization/trace/trace.png" alt="Trace" responsive="true" style="width:90%;">}}
 
-Calculate breakdown of execution time and adjust the color scheme by either **service** or **host**.
+Calculate the breakdown of execution time and adjust the color scheme by either **service** or **host**.
 
 {{< img src="tracing/visualization/trace/service_host_display.png" alt="Service host display" responsive="true" style="width:40%;">}}
-
-List sorts resources by service, not chronologically. Here it's easy to see all resources at a glance and sort by count of spans, average duration, and others:
-
-{{< img src="tracing/visualization/trace/trace_list.png" alt="Trace list" responsive="true" style="width:90%;">}}
-
-If you are analyzing an error trace, the error has a specific display if you followed the [special meaning tags rules](#traces-special-meaning-tags):
-
-{{< img src="tracing/visualization/trace/trace_error.png" alt="Trace Error" responsive="true" style="width:90%;">}}
 
 Want to look closer at the flame graph? Zoom in by scrolling:
 
 {{< img src="tracing/visualization/trace/trace_zoom.gif" alt="Trace Error" responsive="true" style="width:90%;">}}
 
-### Traces special meaning tags
+The List view sorts resources by service, not chronologically. Here it's easy to see all resources at a glance and sort by count of spans, average duration, and others:
 
-When [submitting your traces][1] you can add attributes in the `meta` parameter. Some attributes have special meanings that lead to a dedicated display or specific behavior in Datadog:
+{{< img src="tracing/visualization/trace/trace_list.png" alt="Trace list" responsive="true" style="width:90%;">}}
+
+### More Information
+
+{{< tabs >}}
+{{% tab "Span Metadata" %}}
+
+Click on a span in the flame graph to show the metadata below the graph. If there's an error, the stack trace is provided:
+
+{{< img src="tracing/visualization/trace/trace_error.png" alt="Trace Error" responsive="true" style="width:90%;">}}
+
+If you are analyzing an error trace, the error has a specific display if you follow the special meaning tags rules. When submitting your traces you can add attributes to the `meta` parameter. Some attributes have special meanings that lead to a dedicated display or specific behavior in Datadog:
 
 | Attribute     | Description                                                                                                                                                                        |
 | ----          | ------                                                                                                                                                                             |
@@ -52,8 +55,25 @@ When [submitting your traces][1] you can add attributes in the `meta` parameter.
 
 {{< img src="tracing/visualization/trace/trace_error_formating.png" alt="Error Formating" responsive="true" >}}
 
+{{% /tab %}}
+{{% tab "Host Info" %}}
+
+View the host information related to the trace including host tags and graphs marking the time of the trace.
+
+{{< img src="tracing/visualization/trace/trace_host_info.png" alt="Trace Host Info" responsive="true" style="width:90%;">}}
+
+{{% /tab %}}
+{{% tab "Logs" %}}
+
+See logs related to your service at the time of the trace. When you hover over a log, a line will display on the flame graph at the time of the log. If you click on the log, it links you to the [log explorer search][1].
+
+{{< img src="tracing/visualization/trace/trace_logs.png" alt="Trace Logs" responsive="true" style="width:90%;">}}
+
+[1]: /logs/explorer/search/
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /api/#tracing
