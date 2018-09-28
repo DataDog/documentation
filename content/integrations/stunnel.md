@@ -41,14 +41,14 @@ Create a `stunnel.d/conf.yaml` file in the `conf.d/` folder at the root of your 
 2. Add this configuration block to your `stunnel.d/conf.yaml` file to start collecting Stunnel Logs:
 
     ```
-    logs:
-      - type: file
-        path: /var/log/stunnel.log
-        source: stunnel
-        service: <MY_SERVICE>
-        sourcecategory: proxy
+       logs:
+         - type: file
+           path: /var/log/stunnel.log
+           source: stunnel
+           service: <MY_SERVICE>
+           sourcecategory: proxy
     ```
-
+    
     Change the `path` and `service` parameter values and configure them for your environment.
 
 3. [Restart the Agent][3]
