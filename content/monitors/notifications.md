@@ -256,7 +256,7 @@ Use message template variables within a monitor message to dynamically build **@
 
 For example, if the rendered variable is setup as a channel in the Slack integration:
 
-* `@slack-{{owner.name}}` post a slack DM message directly the owner of this monitor.
+* `@slack-{{owner.name}}` post a message on the owner's channel for this monitor.
 
 * `@slack-{{host.name}}` post a slack message to the #host.name channel in Slack.
 
