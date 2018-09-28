@@ -7,7 +7,7 @@ disable_toc: true
 ---
 
 <div class="alert alert-warning">
-The Monitor Uptime Widget is currently in private beta. Interested in trying it out? <a href="https://goo.gl/forms/KmWpQebCeeOdpPAq1">Request private beta access</a>.
+The monitor Uptime widget is in private beta. Interested in trying it out? <a href="https://goo.gl/forms/KmWpQebCeeOdpPAq1">Request private beta access</a>.
 </div>
 
 {{< img src="monitors/monitor_uptime_widget.png" alt="monitor uptime widget" responsive="true" >}}
@@ -26,7 +26,7 @@ To configure the widget from a [Screenboard][1].
 
     The total percentage when selected by group can be calculated based on the total uptime of the monitor or based on the average uptime for the selected groups.
 
-2. If the widget is configured to report by groups, only one duration can be selected otherwise select up to 3 uptime durations for your widget between:
+2. If the widget is configured to report by groups, only one duration can be selected; otherwise select up to 3 uptime durations for your widget between:
     * 7 days 
     * 30 days
     * Month to date
@@ -36,7 +36,7 @@ To configure the widget from a [Screenboard][1].
 
     For 7 days the widget is restricted to 1 decimal place of accuracy. For 30 days and up the widget is restricted to 2 decimal places of accuracy. 
 
-3. Select the conditional formatting based on the uptime percentage, choose between: Red (down) / Green (up) / Yellow (warn). 
+3. Select the conditional formatting based on the uptime percentage: Red (down) / Green (up) / Yellow (warn).
 
 4. To finish the configuration, give a title to your widget and save it to your [Screenboard][1]. 
 
