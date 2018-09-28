@@ -13,47 +13,150 @@ further_reading:
   text: Learn how to use tags in Datadog
 ---
 
-Tagging is used throughout the Datadog product to make it easier to subset and query the machines and metrics that you have to monitor. Without the ability to assign and filter based on tags, finding the problems that exist in your environment and narrowing them down enough to discover the true causes would be extremely difficult. Discover [how to use][61] tagging in Datadog before going further.
+Tagging is used throughout Datadog to make it easier to subset and query the machines and metrics you monitor. Without the ability to assign and filter based on tags, finding the problems that exist in your environment and narrowing them down enough to discover the true causes would be extremely difficult. Discover [how to use][61] tagging in Datadog before going further.
 
-## How to assign tags
-There are four primary ways to assign tags: in the configuration files, inherited from the [integrations][1], in the UI, and using the API. It is recommended to rely on the configuration files and [integrations][1].
+## Where to assign tags
+There are four primary places to assign tags: in the configuration files, the UI, using the API, and inheriting from the [integrations][1]. It is recommended to rely on the configuration files and integration inheritance for most of your tagging needs.
 
-### Assigning tags using the configuration files
-The Datadog [integrations][1] installed with the Agent are configured via the yaml files located in the **conf.d** directory of the Agent install. For more about where to look for your configuration files, refer [to this page][59].
+### Configuration Files
 
-Define tags in the configuration file for the overall Agent as well as for each integration.
+You can configure the host tags submitted by the Agent inside `datadog.yaml`. The tags for the [integrations][1] installed with the Agent are configured via yaml files located in the **conf.d** directory of the Agent install. To locate the configuration files, refer to [this page][59].
+
 In YAML files, there is a tag dictionary with a list of tags you want assigned at that level. Any tag you assign to the Agent is applied to every integration on that Agent's host.
 
 Dictionaries with lists of values have two different yet functionally equivalent forms:
 
-    tags: key_first_tag:value_1, key_second_tag:value_2, key_third_tag:value_3
+```
+tags: key_first_tag:value_1, key_second_tag:value_2, key_third_tag:value_3
+```
 
 or
 
-    tags:
-      - key_first_tag:value_1
-      - key_second_tag:value_2
-      - key_third_tag:value_3
+```
+tags:
+    - key_first_tag:value_1
+    - key_second_tag:value_2
+    - key_third_tag:value_3
+```
 
-You see both forms in the yaml configuration files, but for the `datadog.yaml` init file only the first form is valid.
+It is recommended you assign tags as `key:value` pairs but simple tags are also accepted. See [how to use][61] tagging for more details.
 
-Each tag can be anything you like but you have the best success with tagging if your tags are `key:value` pairs. Keys could represent the role, or function, or region, or application and the value is the instance of that role, function, region, or application. Here are some examples of good tags:
+### UI
 
-    region:east
-    region:nw
-    application:database
-    database:primary
-    role:sobotka
+{{< tabs >}}
+{{% tab "Infrastructure List" %}}
 
-The reason why you should use key value pairs instead of values becomes apparent when you start using the tags to filter and group metrics and machines. That said, you are not required to use key value pairs and simple values are valid.
+You can assign host tags in the UI via the [Infrastructure List][62]. Click on any host to show the host overlay on the right. Then under the *User* section, click the **Edit Tags** button. Enter the tags as a comma separated list then click **Save Tags**.
 
-### Inheriting tags from an integration
+{{< img src="tagging/assigning_tags/hostuitags.png" alt="Infrastructure List Tags" responsive="true" style="width:80%;">}}
+
+[62]: /graphing/infrastructure/
+
+{{% /tab %}}
+{{% tab "Monitors" %}}
+
+From the [Manage Monitors][63] page, select the checkbox next to the monitor(s) you wish to add tags to. You can select one or multiple monitors. Click the **Edit Tags** button. Enter a tag or select one used previously. Then click *Add Tag `tag:name`* or *Apply Changes*. If you previously added tags, you can assign multiples at once using the checkboxes.
+
+{{< img src="tagging/assigning_tags/monitortags.png" alt="Manage Monitors Tags" responsive="true" style="width:80%;">}}
+
+When creating a monitor, assign monitor tags under step 4 *Say what's happening*:
+
+{{< img src="tagging/assigning_tags/monitorindivdualtags.png" alt="Create Monitor Tags" responsive="true" style="width:80%;">}}
+
+[63]: /monitors/manage_monitor/
+
+{{% /tab %}}
+{{% tab "Distribution Metrics" %}}
+
+Assign tag keys within [Distribution Metrics][64] (Beta) to create aggregate timeseries by applying sets of tags to a metric, for which a timeseries is created for every combination of tag values within the set.
+
+**Sets of tags are limited to groups of four**:
+
+{{< img src="tagging/assigning_tags/distributionmetricstags.png" alt="Distribution Metrics Tags" responsive="true" style="width:80%;">}}
+
+[64]: /graphing/metrics/distributions/
+
+{{% /tab %}}
+{{% tab "Integrations" %}}
+
+The [AWS][60] integration tile allows you to assign additional tags to all metrics at the account level. Use a comma separated list of tags in the form `key:value`.
+
+{{< img src="tagging/assigning_tags/integrationtags.png" alt="AWS Tags" responsive="true" style="width:80%;">}}
+
+[60]: /integrations/amazon_web_services/
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### API
+
+{{< tabs >}}
+{{% tab "Assignment" %}}
+
+Tags can be assigned in various ways with the [API][65]. See the list below for links to those sections:
+
+- [Post a check run][66]
+- [AWS Integration][67]
+- [Post timeseries point][68]
+- [Create][69] or [Edit][70] a monitor
+- [Add][71] or [Update][72] host tags
+- [Send traces][73]
+
+[65]: /api/
+[66]: /api/?lang=python#post-a-check-run
+[67]: /api/?lang=python#aws
+[68]: /api/?lang=python#post-timeseries-points
+[69]: /api/?lang=python#create-a-monitor
+[70]: /api/?lang=python#edit-a-monitor
+[71]: /api/?lang=python#add-tags-to-a-host
+[72]: /api/?lang=python#update-host-tags
+[73]: /api/?lang=python#send-traces
+
+{{% /tab %}}
+{{% tab "Use Case" %}}
+
+Tagging within Datadog is a powerful way to easily gather your metrics
+and makes scaling your infrastructure a breeze.
+
+For a quick example to demonstrate the power of tagging, perhaps you're
+looking for a sum of two metrics, which you might normally define as follows:
+
+```
+Web server 1: api.metric('page.views', [(1317652676, 100), ...], host="example.com")
+Web server 2: api.metric('page.views', [(1317652676, 500), ...], host="example.com")
+```
+
+What we recommend doing is leaving off the hostname; it then defaults to the host that is sending that point, since they're different hosts it's treated as different points:
+
+```
+Web server 1: api.metric('page.views', [(1317652676, 100), ...], tags=['domain:example.com'])
+Web server 2: api.metric('page.views', [(1317652676, 500), ...], tags=['domain:example.com'])
+```
+
+With these tags you can then do:
+
+```
+sum:page.views{domain:example.com}
+```
+
+which should give the desired result.
+
+To get a breakdown by host, you can do:
+
+```
+sum:page.views{domain:example.com} by {host}
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Integration Inheritance
 
 The easiest method for assigning tags is to rely on the integration. Tags assigned to your Amazon Web Services instances, Chef recipes, and more are all automatically assigned to the hosts and metrics when they are brought in to Datadog.
 
-The following [integrations][1] sources create tags automatically in Datadog:
+The following [integration][1] sources create tags automatically in Datadog:
 
-| Integration                             | Tags                                                                                                                                                                                                                                                                                                                                          |
+| Integration                             | Source                                                                                                                                                                                                                                                                                                                                        |
 |-----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [Amazon CloudFront][2]                  | Distribution                                                                                                                                                                                                                                                                                                                                  |
 | [Amazon EC2][3]                         | AMI, Customer Gateway, DHCP Option, EBS Volume, Instance, Internet Gateway, Network ACL, Network Interface, Reserved Instance, Reserved Instance Listing, Route Table , Security Group - EC2 Classic, Security Group - VPC, Snapshot, Spot Batch, Spot Instance Request, Spot Instances, Subnet, Virtual Private Gateway, VPC, VPN Connection |
@@ -109,52 +212,6 @@ The following [integrations][1] sources create tags automatically in Datadog:
 | [VSphere][56]                           | Host, Datacenter, Server, Instance                                                                                                                                                                                                                                                                                                            |
 | [Win32 Events][57]                      | Event ID                                                                                                                                                                                                                                                                                                                                      |
 | [Windows Services][58]                  | Service Name                                                                                                                                                                                                                                                                                                                                  |
-
-### Assigning host tags in the UI
-
-You can also assign tags to hosts, but not to [integration][1] in the UI. To assign tags in the UI, start by going to the Infrastructure List page. Click on any host and then click the Update Host Tags button. In the host overlay that appears, click Edit Tags and make the changes you wish.
-
-### Assigning host tags using the API
-
-You can also assign tags to hosts, but not to [integration][1] using the API. The endpoints you want to work with are /tags/hosts and depending on whether you PUT, POST, or DELETE you update, add, or delete tags for the chosen host. For more details on using the Tags endpoints in the API, [review this document][60]
-
-## Developers
-
-x
-
-### Developer Example Use Case
-
-Tagging within Datadog is a powerful way to easily gather your metrics
-and makes scaling your infrastructure a breeze.
-
-For a quick example to demonstrate the power of tagging, perhaps you're
-looking for a sum of two metrics, which you might normally define as follows:
-
-```
-Web server 1: api.metric('page.views', [(1317652676, 100), ...], host="example.com")
-Web server 2: api.metric('page.views', [(1317652676, 500), ...], host="example.com")
-```
-
-What we recommend doing is leaving off the hostname; it then defaults to the host that is sending that point, since they're different hosts it's treated as different points:
-
-```
-Web server 1: api.metric('page.views', [(1317652676, 100), ...], tags=['domain:example.com'])
-Web server 2: api.metric('page.views', [(1317652676, 500), ...], tags=['domain:example.com'])
-```
-
-With these tags you can then do:
-
-```
-sum:page.views{domain:example.com}
-```
-
-which should give the desired result.
-
-To get a breakdown by host, you can do:
-
-```
-sum:page.views{domain:example.com} by {host}
-```
 
 ## Further Reading
 
@@ -219,5 +276,17 @@ sum:page.views{domain:example.com} by {host}
 [57]: /integrations/wmi
 [58]: /integrations/winservices
 [59]: /agent/faq/agent-configuration-files/
-[60]: /api#tags
+[60]: /integrations/amazon_web_services/
 [61]: /tagging/#how-to-use
+[62]: /graphing/infrastructure/
+[63]: /monitors/manage_monitor/
+[64]: /graphing/metrics/distributions/
+[65]: /api/
+[66]: /api/?lang=python#post-a-check-run
+[67]: /api/?lang=python#aws
+[68]: /api/?lang=python#post-timeseries-points
+[69]: /api/?lang=python#create-a-monitor
+[70]: /api/?lang=python#edit-a-monitor
+[71]: /api/?lang=python#add-tags-to-a-host
+[72]: /api/?lang=python#update-host-tags
+[73]: /api/?lang=python#send-traces

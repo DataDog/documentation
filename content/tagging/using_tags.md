@@ -199,13 +199,15 @@ Additionally, tags are used to filter logs a [Pipeline][19] applies to. In the e
 
 Tags can be used in various ways with the [API][20]. See the list below for links to those sections:
 
-- [Query the event stream][21]
-- [Search hosts][22]
-- [Querying timeseries points][23]
-- [Get all monitor details][24]
-- [Mute a monitor][25]
-- [Create a Screenboard][26]
-- [Create a Timeboard][27]
+- [Schedule monitor downtime][21]
+- [Query the event stream][22]
+- [Search hosts][23]
+- [Integrations][24] for [AWS][25] and [Google Cloud][26]
+- [Querying timeseries points][27]
+- [Get all monitor details][28]
+- [Mute a monitor][29]
+- [Create a Screenboard][30]
+- [Create a Timeboard][31]
 
 ## Examples
 
@@ -247,11 +249,14 @@ If needed, you can add additional tags to narrow down the scope even further - f
 [18]: /logs/live_tail/
 [19]: /logs/processing/pipelines/
 [20]: /api/
-[21]: /api/?lang=python#query-the-event-stream
-[22]: /api/?lang=python#search-hosts
-[23]: /api/?lang=python#query-timeseries-points
-[24]: /api/?lang=python#get-all-monitor-details
-[25]: /api/?lang=python#mute-a-monitor
-[26]: /api/?lang=python#create-a-screenboard
-[27]: /api/?lang=python#create-a-timeboard
-
+[21]: /api/?lang=python#schedule-monitor-downtime
+[22]: /api/?lang=python#query-the-event-stream
+[23]: /api/?lang=python#search-hosts
+[24]: /api/?lang=python#integrations
+[25]: /api/?lang=python#aws
+[26]: /api/?lang=python#google-cloud-platform
+[27]: /api/?lang=python#query-timeseries-points
+[28]: /api/?lang=python#get-all-monitor-details
+[29]: /api/?lang=python#mute-a-monitor
+[30]: /api/?lang=python#create-a-screenboard
+[31]: /api/?lang=python#create-a-timeboard
