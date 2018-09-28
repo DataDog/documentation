@@ -7,13 +7,13 @@ external_redirect: /api/#monitors-group-search
 
 ## Monitors group search
 
-Search and filter your monitor groups via the API.
+Search and filter your monitor groups details.
 
 ##### ARGUMENTS
 
 * **`query`** [*optional*]: 
     
-    Search query as you would enter it in the manage monitor page. [Consult the dedicated documentation to learn more][1]
+    After entering a search query in your [Manage Monitor page][2] use the query parameter value in the URL of the page as value for this parameter. Consult the dedicated [manage monitor documentation][1] page to learn more.
 
 * **`page`** [*optional*, *default* = **0**]: 
     
@@ -32,3 +32,4 @@ Search and filter your monitor groups via the API.
     * `tags`
 
 [1]: /monitors/manage_monitor/#find-the-monitors
+[2]: https://app.datadoghq.com/monitors/manage
