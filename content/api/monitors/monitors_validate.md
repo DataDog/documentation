@@ -2,6 +2,7 @@
 title: Validate a monitor
 type: apicontent
 order: 16.11
+external_redirect: /api/#validate-a-monitor
 ---
 ## Validate a monitor
 ##### ARGUMENTS

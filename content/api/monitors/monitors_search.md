@@ -1,11 +1,11 @@
 ---
 title: Monitors search
 type: apicontent
-order: 16.11
-external_redirect: /api/#monitor-search
+order: 16.12
+external_redirect: /api/#monitors-search
 ---
 
-## Monitor search
+## Monitors search
 
 Search and filter your monitors via the API.
 
@@ -27,8 +27,8 @@ Search and filter your monitors via the API.
 
     Comma separated string for sort order (e.g. name,asc) supported fields: 
 
-        * `name`
-        * `status`
-        * `tags`
+    * `name`
+    * `status`
+    * `tags`
 
 [1]: /monitors/manage_monitor/#find-the-monitors

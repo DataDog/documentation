@@ -1,7 +1,7 @@
 ---
 title: Create a monitor
 type: apicode
-order: 16.1
+order: 16.01
 external_redirect: /api/#create-a-monitor
 ---
 

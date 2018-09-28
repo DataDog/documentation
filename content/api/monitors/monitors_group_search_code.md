@@ -1,8 +1,8 @@
 ---
-title: Monitor Group Search
+title: Monitors Group Search
 type: apicode
-order: 16.12
-external_redirect: /api/#monitor-group-search
+order: 16.13
+external_redirect: /api/#monitors-group-search
 ---
 
 ##### Signature

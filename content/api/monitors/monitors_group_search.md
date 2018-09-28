@@ -1,11 +1,11 @@
 ---
 title: Monitors group search
 type: apicontent
-order: 16.12
-external_redirect: /api/#monitor-group-search
+order: 16.13
+external_redirect: /api/#monitors-group-search
 ---
 
-## Monitor group search
+## Monitors group search
 
 Search and filter your monitor groups via the API.
 
@@ -27,8 +27,8 @@ Search and filter your monitor groups via the API.
 
     Comma separated string for sort order (e.g. `name,asc`) supported fields: 
 
-        * `name`
-        * `status`
-        * `tags`
+    * `name`
+    * `status`
+    * `tags`
 
 [1]: /monitors/manage_monitor/#find-the-monitors
