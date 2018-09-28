@@ -69,9 +69,7 @@ $(document).ready(function () {
             query: decodeURIComponent(query),
             params: {
                 hitsPerPage: 200,
-                attributesToRetrieve: "*",
-                facetFilters: ['language:'+lang],
-                filters: '(tags:docs OR tags:api)'
+                attributesToRetrieve: "*"
             }
         }], function (err, results) {
             if (!err) {
@@ -89,7 +87,7 @@ $(document).ready(function () {
                             '<a href="' + hit["url"] + '">' + getTitle(hit) + '</a></div>';
                         formatted_results += '<div class="tipue_search_content_url">' +
                             '<a href="' + hit["url"] + '">' + hit["url"].replace('https://docs.datadoghq.com', '') + '</a></div>';
-                        var text = hit._snippetResult.content.value;
+                        var text = hit._highlightResult.content.value;
                         formatted_results += '<div class="tipue_search_content_text">' +
                             text + '</div>';
                         formatted_results += '</div>';
@@ -296,7 +294,7 @@ $(document).ready(function () {
 
                             formatted_results += '<div class="tipue_search_content_title">' +
                                 '<a href="' + hits[i]["url"] + '">' + getTitle(hits[i]) + '</a></div>';
-                            var text = hits[i]._snippetResult.content.value;
+                            var text = hits[i]._highlightResult.content.value;
                             formatted_results += '<div class="tipue_search_content_text">' +
                                 text + '</div>';
 
