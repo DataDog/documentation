@@ -48,5 +48,5 @@ Downtimes and muted periods are disregarded: if your monitor triggers during an 
 
 Whilst the widget is in private beta. Datadog engineering teams are working through the final implementation. **Thus, until the end of the beta phase, you mustn't rely on the uptime percentage**. Should you see any discrepancies or unexpected behaviors, reach out to [the Datadog support team][2]. 
 
-[1]: /graphing/dashboard/screenboard
+[1]: /graphing/dashboards/screenboard/
 [2]: /help
