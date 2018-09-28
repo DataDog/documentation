@@ -7,7 +7,7 @@ disable_toc: true
 ---
 
 <div class="alert alert-warning">
-The Monitor Uptime Widget is currently in private beta. Interested in trying it out?  <a href="https://goo.gl/forms/KmWpQebCeeOdpPAq1">Request private beta access</a>.
+The Monitor Uptime Widget is currently in private beta. Interested in trying it out? <a href="https://goo.gl/forms/KmWpQebCeeOdpPAq1">Request private beta access</a>.
 </div>
 
 {{< img src="monitors/monitor_uptime_widget.png" alt="monitor uptime widget" responsive="true" >}}
@@ -42,13 +42,11 @@ To configure the widget from a [Screenboard][1].
 
 ## Widget behavior
 
-Find below a list of behavior description for the monitor uptime widget:
+If the chosen monitor for the widget is configured to alert on *WARN* or *NO DATA*, those states are rendered as down (red) inside the uptime widget.
 
-* If the chosen monitor for the widget is configured to alert on warn or alert on no data, those states translates to down (red) inside the widget.
+Downtimes and muted periods are disregarded: if your monitor triggers during an scheduled downtime, that period is removed from the calculated uptime.  
 
-* Downtimes and muted periods are disregarded: if your monitor triggers during an applied downtime, that periods is removed from the calculated uptime.  
-
-While the widget is in private beta, Datadog engineering teams are still working through the final implementation for calculating the monitor uptime percentage. **Thus, until the end of the beta phase you mustn't rely on this percentage for reporting to your customers**. Should you see any discrepancies or unexpected behaviors, reach out to [Datadog support team][2]. 
+Whilst the widget is in private beta. Datadog engineering teams are working through the final implementation. **Thus, until the end of the beta phase, you mustn't rely on the uptime percentage**. Should you see any discrepancies or unexpected behaviors, reach out to [the Datadog support team][2]. 
 
 [1]: /graphing/dashboard/screenboard
 [2]: /help
