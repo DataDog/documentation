@@ -17,7 +17,7 @@
           "sourceVolume": "cgroup",
           "readOnly": true
         },
-	{
+        {
           "containerPath": "/opt/datadog-agent/run",
           "sourceVolume": "pointdir",
           "readOnly": false
