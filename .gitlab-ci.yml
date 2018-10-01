@@ -18,7 +18,7 @@ before_script:
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:master
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:david.jones_config-facets
   tags:
     - "runner:main"
     - "size:large"
@@ -86,6 +86,15 @@ test_preview_links:
   script:
     - pull_artifact_from_s3
     - test_site_links "links" "${URL}" "True" "False" "True"
+  only:
+    - /.+?\/[a-zA-Z0-9_-]+/
+
+index_algolia:
+  <<: *base_template
+  stage: post-deploy
+  environment: "preview"
+  script:
+    - index_docsearch_algolia
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
