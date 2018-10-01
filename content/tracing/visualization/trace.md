@@ -27,7 +27,7 @@ Calculate the breakdown of execution time and adjust the color scheme by either 
 
 {{< img src="tracing/visualization/trace/service_host_display.png" alt="Service host display" responsive="true" style="width:40%;">}}
 
-Want to look closer at the flame graph? Zoom in by scrolling:
+To get a closer look at the flame graph, zoom in by scrolling:
 
 {{< img src="tracing/visualization/trace/trace_zoom.gif" alt="Trace Error" responsive="true" style="width:90%;">}}
 
