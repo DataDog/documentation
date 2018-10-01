@@ -63,9 +63,9 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 #### Web Framework Compatibility
 
-| Module        | Versions    | Support Type    |
-| :----------   | :---------- | :-------------- |
-| [express][8]  | 4           | Fully Supported |
+| Module        | Versions    | Support Type    | Notes                        |
+| :----------   | :---------- | :-------------- | :--------------------------- |
+| [express][8]  | 4           | Fully Supported | Supports Sails, Loopback, and [more][29] |
 | [graphql][22] | 0.13        | Fully Supported |
 | [hapi][9]     | ^17.1       | Fully Supported |
 | [koa][10]     | 2           | Fully Supported |
@@ -76,6 +76,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 [9]: https://hapijs.com/
 [10]: https://koajs.com/
 [11]: http://restify.com/
+[29]: https://expressjs.com/en/resources/frameworks.html
 
 #### Native Module Compatibility
 
@@ -113,16 +114,12 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 #### Worker Compatibility
 
-| Module           | Versions    | Support Type    |
-| :----------      | :---------- | :-------------- |
-| [amqp10][27]*    | 3           | Fully Supported |
-| [amqplib][21]*   | 0.5         | Fully Supported |
+| Module           | Versions    | Support Type    | Notes                     |
+| :----------      | :---------- | :-------------- | :------------------------ |
+| [amqp10][27]     | 3           | Fully Supported | Supports AMQP 1.0 brokers (i.e. ActiveMQ, Apache Qpid) | 
+| [amqplib][21]    | 0.5         | Fully Supported | Supports AMQP 0.9 brokers (i.e. RabbitMQ, Apache Qpid) |
 | [kafka-node][26] |             | Coming Soon     |
-| [rhea][28]*      |             | Coming Soon     |
-
-**Note**: amqplib supports several message brokers including RabbitMQ and Apache Qpid.
-
-**Note**: amqp10 supports several message brokers including ActiveMQ and Apache Qpid.
+| [rhea][28]       |             | Coming Soon     |
 
 [21]: https://github.com/squaremo/amqp.node
 [26]: https://github.com/SOHU-Co/kafka-node
