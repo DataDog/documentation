@@ -13,18 +13,18 @@ further_reading:
   text: Learn how to use tags in Datadog
 ---
 
-Tagging is used throughout Datadog to make it easier to subset and query the machines and metrics you monitor. Without the ability to assign and filter based on tags, finding the problems that exist in your environment and narrowing them down enough to discover the true causes would be extremely difficult. Discover [how to use][61] tagging in Datadog before going further.
+Tagging is used throughout Datadog to query the machines and metrics you monitor. Without the ability to assign and filter based on tags, finding problems in your environment and narrowing them down enough to discover the true causes would be extremely difficult. Discover [how to use][61] tagging in Datadog before going further.
 
 ## Where to assign tags
-There are four primary places to assign tags: in the configuration files, the UI, using the API, and inheriting from the [integrations][1]. It is recommended to rely on the configuration files and integration inheritance for most of your tagging needs.
+There are several places you can assign tags: using configuration files, [environment variables][80], the UI, [API][65], [DogStatsD][75], and inheriting from the [integrations][1]. It is recommended to rely on the configuration files and integration inheritance for most of your tagging needs.
 
 ### Configuration Files
 
 You can configure the host tags submitted by the Agent inside `datadog.yaml`. The tags for the [integrations][1] installed with the Agent are configured via yaml files located in the **conf.d** directory of the Agent install. To locate the configuration files, refer to [this page][59].
 
-In YAML files, there is a tag dictionary with a list of tags you want assigned at that level. Any tag you assign to the Agent is applied to every integration on that Agent's host.
+In YAML files, use a tag dictionary with a list of tags you want assigned at that level. Any tag you assign to the Agent is applied to every integration on that Agent's host.
 
-Dictionaries with lists of values have two different yet functionally equivalent forms:
+Tag dictionaries have two different yet functionally equivalent forms:
 
 ```
 tags: key_first_tag:value_1, key_second_tag:value_2, key_third_tag:value_3
@@ -41,6 +41,25 @@ tags:
 
 It is recommended you assign tags as `key:value` pairs but simple tags are also accepted. See [how to use][61] tagging for more details.
 
+### Environment Variables
+
+When installing the containerized Datadog Agent, host tags can be set using the environment variable `DD_TAGS`. We automatically collect common tags from [Docker][77], [Kubernetes][78], [ECS][79], [Swarm, Mesos, Nomad and Rancher][77]. To extract even more tags, use the following options:
+
+| Environment Variable               | Description                                    |
+|------------------------------------|------------------------------------------------|
+| `DD_DOCKER_LABELS_AS_TAGS`         | extract docker container labels                |
+| `DD_DOCKER_ENV_AS_TAGS`            | extract docker container environment variables |
+| `DD_KUBERNETES_POD_LABELS_AS_TAGS` | extract pod labels                             |
+
+**Examples:**
+
+```shell
+DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app","release":"helm_release"}'
+DD_DOCKER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
+```
+
+Either define the variables in your custom `datadog.yaml`, or set them as JSON maps in these envvars. The map key is the source (`label/envvar`) name, and the map value is the Datadog tag name.
+
 ### UI
 
 {{< tabs >}}
@@ -55,7 +74,7 @@ You can assign host tags in the UI via the [Infrastructure List][62]. Click on a
 {{% /tab %}}
 {{% tab "Monitors" %}}
 
-From the [Manage Monitors][63] page, select the checkbox next to the monitor(s) you wish to add tags to. You can select one or multiple monitors. Click the **Edit Tags** button. Enter a tag or select one used previously. Then click *Add Tag `tag:name`* or *Apply Changes*. If you previously added tags, you can assign multiples at once using the checkboxes.
+From the [Manage Monitors][63] page, select the checkbox next to each monitor to add tags (you can select one or multiple monitors). Click the **Edit Tags** button. Enter a tag or select one used previously. Then click *Add Tag `tag:name`* or *Apply Changes*. If tags were added previously, you can assign multiples at once using the tag checkboxes.
 
 {{< img src="tagging/assigning_tags/monitortags.png" alt="Manage Monitors Tags" responsive="true" style="width:80%;">}}
 
@@ -117,7 +136,7 @@ Tags can be assigned in various ways with the [API][65]. See the list below for 
 {{% /tab %}}
 {{% tab "Example" %}}
 
-Tagging within Datadog is a powerful way to easily gather your metrics
+Tagging within Datadog is a powerful way to gather your metrics
 and makes scaling your infrastructure a breeze.
 
 For a quick example to demonstrate the power of tagging, perhaps you're
@@ -152,9 +171,26 @@ sum:page.views{domain:example.com} by {host}
 {{% /tab %}}
 {{< /tabs >}}
 
+### DogStatsD
+
+You can add tags to any metric, event, or service check you send to [DogStatsD][75]. For example, you can compare the performance of two algorithms by tagging a timer metric with the algorithm version:
+
+```python
+
+@statsd.timed('algorithm.run_time', tags=['algorithm:one'])
+def algorithm_one():
+    # Do fancy things here ...
+
+@statsd.timed('algorithm.run_time', tags=['algorithm:two'])
+def algorithm_two():
+    # Do fancy things (maybe faster?) here ...
+```
+
+Note that tagging is a [Datadog-specific extension][76] to StatsD.
+
 ### Integration Inheritance
 
-The easiest method for assigning tags is to rely on the integration. Tags assigned to your Amazon Web Services instances, Chef recipes, and more are all automatically assigned to the hosts and metrics when they are brought in to Datadog.
+The most efficient method for assigning tags is to rely on the integration. Tags assigned to your Amazon Web Services instances, Chef recipes, and more are all automatically assigned to the hosts and metrics when they are brought into Datadog.
 
 The following [integration][1] sources create tags automatically in Datadog:
 
@@ -293,3 +329,9 @@ The following [integration][1] sources create tags automatically in Datadog:
 [72]: /api/?lang=python#add-tags-to-a-host
 [73]: /api/?lang=python#update-host-tags
 [74]: /api/?lang=python#send-traces
+[75]: /developers/dogstatsd/
+[76]: /libraries/
+[77]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
+[78]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go
+[79]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go
+[80]: /agent/basic_agent_usage/docker/#environment-variables
