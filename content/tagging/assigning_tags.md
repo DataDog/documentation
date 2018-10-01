@@ -96,24 +96,26 @@ The [AWS][60] integration tile allows you to assign additional tags to all metri
 Tags can be assigned in various ways with the [API][65]. See the list below for links to those sections:
 
 - [Post a check run][66]
-- [AWS Integration][67]
-- [Post timeseries point][68]
-- [Create][69] or [Edit][70] a monitor
-- [Add][71] or [Update][72] host tags
-- [Send traces][73]
+- [Post an event][67]
+- [AWS Integration][68]
+- [Post timeseries point][69]
+- [Create][70] or [Edit][71] a monitor
+- [Add][72] or [Update][73] host tags
+- [Send traces][74]
 
 [65]: /api/
 [66]: /api/?lang=python#post-a-check-run
-[67]: /api/?lang=python#aws
-[68]: /api/?lang=python#post-timeseries-points
-[69]: /api/?lang=python#create-a-monitor
-[70]: /api/?lang=python#edit-a-monitor
-[71]: /api/?lang=python#add-tags-to-a-host
-[72]: /api/?lang=python#update-host-tags
-[73]: /api/?lang=python#send-traces
+[67]: /api/?lang=python#post-an-event
+[68]: /api/?lang=python#aws
+[69]: /api/?lang=python#post-timeseries-points
+[70]: /api/?lang=python#create-a-monitor
+[71]: /api/?lang=python#edit-a-monitor
+[72]: /api/?lang=python#add-tags-to-a-host
+[73]: /api/?lang=python#update-host-tags
+[74]: /api/?lang=python#send-traces
 
 {{% /tab %}}
-{{% tab "Use Case" %}}
+{{% tab "Example" %}}
 
 Tagging within Datadog is a powerful way to easily gather your metrics
 and makes scaling your infrastructure a breeze.
@@ -283,10 +285,11 @@ The following [integration][1] sources create tags automatically in Datadog:
 [64]: /graphing/metrics/distributions/
 [65]: /api/
 [66]: /api/?lang=python#post-a-check-run
-[67]: /api/?lang=python#aws
-[68]: /api/?lang=python#post-timeseries-points
-[69]: /api/?lang=python#create-a-monitor
-[70]: /api/?lang=python#edit-a-monitor
-[71]: /api/?lang=python#add-tags-to-a-host
-[72]: /api/?lang=python#update-host-tags
-[73]: /api/?lang=python#send-traces
+[67]: /api/?lang=python#post-an-event
+[68]: /api/?lang=python#aws
+[69]: /api/?lang=python#post-timeseries-points
+[70]: /api/?lang=python#create-a-monitor
+[71]: /api/?lang=python#edit-a-monitor
+[72]: /api/?lang=python#add-tags-to-a-host
+[73]: /api/?lang=python#update-host-tags
+[74]: /api/?lang=python#send-traces
