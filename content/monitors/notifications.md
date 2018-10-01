@@ -112,12 +112,12 @@ The conditional variables available are:
 | `{{^is_no_data}}`          | Show unless monitor notifies on missing data          |
 | `{{#is_warning}}`          | Show when monitor warns                               |
 | `{{^is_warning}}`          | Show unless monitor warns                             |
-| `{{#is_recovery}}`         | Show when monitor recovers                            |
-| `{{^is_recovery}}`         | Show unless monitor recovers                          |
-| `{{#is_warning_recovery}}` | Show when monitor recovers from a warning             |
-| `{{^is_warning_recovery}}` | Show unless monitor recovers from a warning           |
-| `{{#is_alert_recovery}}`   | Show when monitor recovers from an alert              |
-| `{{^is_alert_recovery}}`   | Show unless monitor recovers from an alert            |
+| `{{#is_recovery}}`         | Show when monitor recovers from either WARNING or ALERT    |
+| `{{^is_recovery}}`         | Show unless monitor recovers from either WARNING or ALERT  |
+| `{{#is_warning_recovery}}` | Show when monitor recovers from a warning to OK       |
+| `{{^is_warning_recovery}}` | Show unless monitor recovers from a warning to OK     |
+| `{{#is_alert_recovery}}`   | Show when monitor recovers from an alert to OK        |
+| `{{^is_alert_recovery}}`   | Show unless monitor recovers from an alert to OK      |
 | `{{#is_alert_to_warning}}` | Show when monitor transitions from alert to warning   |
 | `{{^is_alert_to_warning}}` | Show unless monitor transitions from alert to warning |
 | `{{#is_no_data_recovery}}` | Show when monitor recovers from a no data             |
@@ -150,15 +150,15 @@ and the recovery notification:
 {{% /tab %}}
 {{% tab "is_recovery / is_alert_recovery " %}}
 
-* `{{is_recovery}}` triggers when a monitor recovers indifferently either from a **WARNING** state or an **ALERT** state.
-* `{{is_alert_recovery}}` triggers when a monitor recovers directly from an **ALERT** state to an **OK** state.
-* `{{is_warning_recovery}}` triggers when a monitor recovers from a **WARNING** state to an **OK** state
+* `{{#is_recovery}}` triggers when a monitor recovers indifferently either from a **WARNING** state or an **ALERT** state.
+* `{{#is_alert_recovery}}` triggers when a monitor recovers directly from an **ALERT** state to an **OK** state.
+* `{{#is_warning_recovery}}` triggers when a monitor recovers from a **WARNING** state to an **OK** state
 
 This means that if the monitor switches from an **ALERT** to a **WARNING** to an **OK** state:
 
-* the `{{is_recovery}}` would trigger
-* the `{{is_alert_recovery}}` wouldn't trigger
-* the `{{is_warning_recovery}}` would trigger.
+* the `{{#is_recovery}}` would trigger
+* the `{{#is_alert_recovery}}` wouldn't trigger
+* the `{{#is_warning_recovery}}` would trigger.
 
 {{% /tab %}}
 {{% tab "is_match / is_exact_match" %}}
