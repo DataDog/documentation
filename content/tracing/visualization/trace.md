@@ -65,7 +65,7 @@ View the host information related to the trace including host tags and graphs ar
 {{% /tab %}}
 {{% tab "Logs" %}}
 
-See logs related to your service at the time of the trace. When you hover over a log, a line showing its timestamp is displayed on the trace flame graph. If you click on the log, it links you to the [log explorer search][1].
+See logs related to your service at the time of the trace. When you hover over a log, a line showing its timestamp is displayed on the trace flame graph. Clicking on the log brings you to the [log explorer search][1].
 
 {{< img src="tracing/visualization/trace/trace_logs.png" alt="Trace Logs" responsive="true" style="width:90%;">}}
 
