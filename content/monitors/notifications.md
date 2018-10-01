@@ -39,7 +39,7 @@ Notifications are a key component of any [monitor][1]. You want to make sure the
 
 ## Variables
 
-Use variables to customize your monitor notifications, the available variables are: 
+Use variables to customize your monitor notifications, the available variables are:
 
 | Variable             | Description                                                                                    |
 | -------              | ------                                                                                         |
@@ -55,11 +55,11 @@ For multi-alert monitors, add tag variables to include information in your alert
 
 For example, if you trigger by each **host** tag, then a number of tag variables related to **host** are available to you in your Section 3: **Say what's happening**, such as `{{host.name}}`, `{{host.ip}}`, etc..
 
-This also works for custom tags as well. If you've added a custom tag that follows the `key:value` syntax, then you can group data by those tag keys.  
+This also works for custom tags as well. If you've added a custom tag that follows the `key:value` syntax, then you can group data by those tag keys.
 
 This means you are able to apply the tag's **key** to the list of tags that a multi-alert has a separate trigger for—which in turn means you can use that tag's `.name` variable in your monitor message.
 
-Note: 
+Note:
 
 * Template variable content is escaped by default. If your variable contains JSON or code that you would NOT like to be escaped, use triple braces instead of double braces (e.g. `{{{event.text}}}`).
 
@@ -72,7 +72,7 @@ Note:
 
 #### Examples
 
-Here's an example of where a user had a number of hosts tagged by different `creator:` values, e.g, `creator:wes_anderson` and `creator:saint_exupéry`.  
+Here's an example of where a user had a number of hosts tagged by different `creator:` values, e.g, `creator:wes_anderson` and `creator:saint_exupéry`.
 
 Here, the user was able to set up a multi-alert monitor to trigger a separate alert for each `creator:` tag, so they were able to include the `{{creator.name}}` in their monitor message. When this monitor triggers, the recipient of the alert notification sees whether the monitor was triggered by **wes_anderson**, **saint_exupéry**, or some other `creator:` value.
 
@@ -88,7 +88,7 @@ and the corresponding event notification:
 
 #### Tag key with period
 
-If your tag group's key has a period in it, you have to hardwire your template variables to include brackets around the full key. 
+If your tag group's key has a period in it, you have to hardwire your template variables to include brackets around the full key.
 For example, if you submit a metric tagged with `dot.key.test:five` and then set up a multi-alert monitor triggered by the `dot.ket.test` group tag, you have to apply the following syntax in order to use `the dot.key.test.name` tag variable:
 
 {{< img src="monitors/faq/template_with_dot.png" alt="template_with_dot" responsive="true" style="width:80%;">}}
@@ -103,9 +103,9 @@ The conditional variables available are:
 
 | Conditional Variable       | Description                                           |
 | ------                     | -------                                               |
-| `{{is_alert}}`             | Show when monitor alerts                              |
+| `{{#is_alert}}`            | Show when monitor alerts                              |
 | `{{^is_alert}}`            | Show unless monitor alerts                            |
-| `{{is_match}}`             | Show when the context matches a string                |
+| `{{#is_match}}`            | Show when the context matches a string                |
 | `{{^is_match}}`            | Show unless the context matches a string              |
 | `{{#is_exact_match}}`      | Show when the context matches a string exactly        |
 | `{{#is_no_data}}`          | Show when monitor notifies on missing data            |
@@ -116,6 +116,7 @@ The conditional variables available are:
 | `{{^is_recovery}}`         | Show unless monitor recovers                          |
 | `{{#is_warning_recovery}}` | Show when monitor recovers from a warning             |
 | `{{^is_warning_recovery}}` | Show unless monitor recovers from a warning           |
+| `{{#is_alert_recovery}}`   | Show when monitor recovers from an alert              |
 | `{{^is_alert_recovery}}`   | Show unless monitor recovers from an alert            |
 | `{{#is_alert_to_warning}}` | Show when monitor transitions from alert to warning   |
 | `{{^is_alert_to_warning}}` | Show unless monitor transitions from alert to warning |
@@ -162,8 +163,8 @@ This means that if the monitor switches from an **ALERT** to a **WARNING** to an
 {{% /tab %}}
 {{% tab "is_match / is_exact_match" %}}
 
-The `{{is_match}}` conditional allows you to match the triggering context to any given string in order to display a different message in your notifications. 
-Use any of the available tag variables in your conditional statement. **A match is made if the comparison string is anywhere in the resolved variable**. 
+The `{{is_match}}` conditional allows you to match the triggering context to any given string in order to display a different message in your notifications.
+Use any of the available tag variables in your conditional statement. **A match is made if the comparison string is anywhere in the resolved variable**.
 
 Tag variables use the following format:
 
@@ -173,11 +174,11 @@ Tag variables use the following format:
 {{/is_match}}
 ```
 
-For example, if you want to notify your DB team if a triggering host has the `role:db_cassandra` tag or the `role:db_postgres` tag, use the following: 
+For example, if you want to notify your DB team if a triggering host has the `role:db_cassandra` tag or the `role:db_postgres` tag, use the following:
 
 ```
 {{#is_match "role.name" "db"}}
-  This shows only if the host that triggered the alert has `role` tag variable with `db` in it. 
+  This shows only if the host that triggered the alert has `role` tag variable with `db` in it.
   It would trigger for role:db_cassandra and role:db_postgres
 {{/is_match}}
 ```
@@ -215,7 +216,7 @@ For instance, if an alert that can be triggered by two hosts tagged with `role:p
 {{% /tab %}}
 {{< /tabs >}}
 
-## @-notification 
+## @-notification
 
 Send the monitor notification to the appropriate endpoint:
 
@@ -239,7 +240,7 @@ Would produce this slack message:
 
 {{< img src="monitors/notifications/notification_slack_preview.png" alt="notification_slack_preview" responsive="true" style="width:50%;" >}}
 
-You can also mention **@here** or **@channel** using `<!here>` or `<!channel>`, respectively. 
+You can also mention **@here** or **@channel** using `<!here>` or `<!channel>`, respectively.
 
 For user groups, use `<!subteam^GROUP_ID|GROUP_NAME>`. To find the `GROUP_ID`, [query the `usergroups.list` API endpoint of Slack][10]. For example, for a user group named `testers` you would use the following syntax:
 
@@ -247,7 +248,7 @@ For user groups, use `<!subteam^GROUP_ID|GROUP_NAME>`. To find the `GROUP_ID`, [
 <!subteam^12345|testers>
 ```
 
-Note: Trailing special characters in a channel name are unsupported for the Slack @-notifications. 
+Note: Trailing special characters in a channel name are unsupported for the Slack @-notifications.
 e.g. `@----critical_alerts` works, but `@--critical_alerts--` won't receive any notifications.
 
 **Using message template variables to dynamically create @-mentions**:
