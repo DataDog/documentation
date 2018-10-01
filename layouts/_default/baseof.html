@@ -71,8 +71,7 @@
          indexName: 'docsearch_docs_prod',
          inputSelector: '.docssearch-input',
          algoliaOptions: {
-            'facetFilters': ['language:en'],
-            'filters': '(tags:docs OR tags:api)'
+            'facetFilters': ['language:{{ .Site.Language.Lang }}']
          },
          autocompleteOptions: {
             autoselect: false
@@ -99,8 +98,7 @@
          indexName: 'docsearch_docs_prod',
          inputSelector: '.docssearch-input-m',
          algoliaOptions: {
-            'facetFilters': ['language:en'],
-            'filters': '(tags:docs OR tags:api)'
+            'facetFilters': ['language:{{ .Site.Language.Lang }}']
          },
          autocompleteOptions: {
             autoselect: false

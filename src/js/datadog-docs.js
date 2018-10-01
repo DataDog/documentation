@@ -70,8 +70,7 @@ $(document).ready(function () {
             params: {
                 hitsPerPage: 200,
                 attributesToRetrieve: "*",
-                facetFilters: ['language:'+lang],
-                filters: '(tags:docs OR tags:api)'
+                facetFilters: ['language:'+lang]
             }
         }], function (err, results) {
             if (!err) {
