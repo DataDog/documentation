@@ -92,4 +92,4 @@ Using the `Add to all` button adds this template variable to all log widgets. Wi
 [1]: /graphing/event_stream
 [2]: /graphing/dashboards/template_variables/how-do-i-overlay-events-onto-my-dashboards
 [3]: /tagging/#tags-best-practices
-[4]: /logs/explorer/search/#facets
+[4]: /logs/explorer/?tab=facets#setup

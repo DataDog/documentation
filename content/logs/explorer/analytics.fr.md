@@ -105,8 +105,8 @@ Tout comme dans l'explorateur de logs, cliquez sur n'importe quel graphique dans
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/explorer/search/#measures
-[2]: /logs/explorer/search/#facets
+[1]: /logs/explorer/?tab=measures#setup
+[2]: /logs/explorer/?tab=facets#setup
 [3]: /tagging
 [4]: /monitors/monitor_types/log
 [5]: /graphing/dashboards/timeboard

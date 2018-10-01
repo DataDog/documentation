@@ -109,10 +109,10 @@ Your logs are collected and centralized into the [Log Explorer][17] view. You ca
 [15]: /agent/basic_agent_usage/kubernetes/#log-collection-setup
 [16]: /logs/log_collection/
 [17]: /logs/explore
-[18]: /logs/explorer/search/#facets
+[18]: /logs/explorer/?tab=facets#setup
 [19]: /logs/explorer/search/#create-a-facet
 [20]: /logs/explorer/search/#search-syntax
-[21]: /logs/explorer/search/#measures
+[21]: /logs/explorer/?tab=measures#setup
 [22]: /logs/explorer/analytics/#related-logs
 [23]: /logs/explorer/analytics/
 [24]: /logs/log_collection/#reserved-attributes

@@ -78,7 +78,7 @@ After selecting a Saved View, you can continue to refine and modify your search 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/explorer/search
-[2]: /logs/explorer/search/#facets
-[3]: /logs/explorer/search/#columns
-[4]: /logs/explorer/search/#logstream
+[2]: /logs/explorer/?tab=facets#setup
+[3]: /logs/explorer/?tab=logstream#visualization
+[4]: /logs/explorer/?tab=logstream#visualization
 [5]: /logs/explorer/analytics

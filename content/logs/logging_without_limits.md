@@ -117,7 +117,7 @@ Enable or disable them in one click in the Pipeline page:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/explorer/search/#facets
+[1]: /logs/explorer/?tab=facets#setup
 [2]: /logs/explorer/analytics/
 [3]: /logs/explorer/analytics/#dashboard
 [4]: /monitors/monitor_types/log/

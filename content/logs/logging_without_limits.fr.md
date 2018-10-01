@@ -116,7 +116,7 @@ Vous pouvez les activer ou les désactiver en un clic depuis la page des Pipelin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/explorer/search/#facets
+[1]: /logs/explorer/?tab=facets#setup
 [2]: /logs/explorer/analytics/
 [3]: /logs/explorer/analytics/#dashboard
 [4]: /monitors/monitor_types/log/
