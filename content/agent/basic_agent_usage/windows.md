@@ -199,6 +199,8 @@ The Agent logs are located in the `C:\programdata\Datadog\logs` directory and al
 
 If you're still having trouble, [our support team][3] is glad to provide further assistance.
 
+[3]: /help
+
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -211,24 +213,35 @@ For Windows Server 2008, Vista and newer, logs are available at `C:\ProgramData\
 {{< tabs >}}
 {{% tab "Agent v6" %}}
 
-1. Navigate to `localhost:5002` to [display the Agent GUI][5]
-2. Select flare tab
-  {{< img src="agent/basic_agent_usage/windows/windows_flare_agent_6.png" alt="Windows flare with Agent 6" responsive="true" style="width:75%;">}}
-3. Enter your ticket number (if you have one) and email address
-4. Press Submit
+* Navigate to [http://127.0.0.1:5002][9] to [display the Agent GUI][5]
+
+* Select flare tab
+
+* Enter your ticket number (if you have one)
+
+* Enter the email address you use to log in to Datadog
+
+* Press Submit
+
+{{< img src="agent/basic_agent_usage/windows/windows_flare_agent_6.png" alt="Windows flare with Agent 6" responsive="true" style="width:75%;">}}
+
+[5]: /agent/#using-the-gui
+[9]: http://127.0.0.1:5002
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
 To send Datadog support a copy of your Windows logs and configurations, do the following:
 
-1. Open the Datadog Agent Manager
-2. Select Actions
-3. Select Flare
-4. Enter your ticket number (`<CASE_ID>`)- if you don't have one leave the value as zero
-5. Lastly, enter the email address you use to log into Datadog
+* Open the Datadog Agent Manager
 
-That's it, you're done!
+* Select Actions
+
+* Select Flare
+
+* Enter your ticket number (`<CASE_ID>`)—if you don't have one, leave the value as zero
+
+* Lastly, enter the email address you use to log in to Datadog
 
 {{< img src="agent/faq/windows_flare.jpg" alt="Windows Flare" responsive="true" style="width:70%;">}}
 
@@ -246,7 +259,7 @@ C:\"Program Files"\Datadog\"Datadog Agent"\embedded\python.exe "C:\Program Files
 
 On Linux and macOS, the output of the flare command tells you where the compressed flare archive is saved. In case the file fails to upload to Datadog, you can retrieve it from this directory and manually add as an attachment to an email.
 
-For Windows, you can find the location of this file by running the following from the Agent's python command prompt:
+For Windows, you can find the location of this file by running the following from the Agent's Python command prompt:
 
 * Since Agent v5.12:
     `C:\Program Files\Datadog\Datadog Agent\dist\shell.exe since`
@@ -339,3 +352,4 @@ Again, due to the sensitivity of yaml, if you've tried the above and cannot get 
 [6]: /integrations/wmi
 [7]: /integrations/process/
 [8]: /agent/proxy
+[9]: http://127.0.0.1:5002
