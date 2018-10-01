@@ -63,8 +63,8 @@ The evolution of the **top 5 URL Paths** according to the number of **unique Cli
 
 {{< img src="logs/explorer/analytics/timeserie_example.png" alt="timeserie example" responsive="true" style="width:90%;">}}
 
-[1]: /logs/explorer/search/#measures
-[2]: /logs/explorer/search/#facets
+[1]: /logs/explorer/?tab=measures#setup
+[2]: /logs/explorer/?tab=facets#setup
 
 {{% /tab %}}
 {{% tab "Top List" %}}
@@ -76,8 +76,8 @@ The evolution of the **top 5 URL Paths** according to the number of **unique Cli
 
 {{< img src="logs/explorer/analytics/top_list_example.png" alt="top list example" responsive="true" style="width:90%;">}}
 
-[1]: /logs/explorer/search/#measures
-[2]: /logs/explorer/search/#facets
+[1]: /logs/explorer/?tab=measures#setup
+[2]: /logs/explorer/?tab=facets#setup
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -92,13 +92,13 @@ Select or click on a section of the graph to either zoom in the graph or see the
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/explorer/search/#measures
-[2]: /logs/explorer/search/#facets
+[1]: /logs/explorer/?tab=measures#setup
+[2]: /logs/explorer/?tab=facets#setup
 [3]: /tagging
 [4]: /monitors/monitor_types/log
 [5]: /graphing/dashboards/timeboard
 [6]: /help
 [7]: /graphing/dashboards/widgets/#timeseries
 [8]: /graphing/dashboards
-[9]: https://docs.datadoghq.com/graphing/dashboards/#correlation-between-logs-and-metrics
+[9]: /graphing/dashboards/#correlation-between-logs-and-metrics
 [10]: /logs/explorer/search/

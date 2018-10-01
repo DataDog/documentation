@@ -140,7 +140,7 @@ To change the default values for each of the reserved attributes, go to the Pipe
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/explorer/search/#facets
+[1]: /logs/explorer/?tab=facets#setup
 [2]: /logs/explorer/search/
 [3]: /logs/processing/parsing
 [4]: /logs/processing/processors/#log-date-remapper
@@ -152,7 +152,7 @@ To change the default values for each of the reserved attributes, go to the Pipe
 [13]: /logs/faq/how-to-investigate-a-log-parsing-issue/
 [14]: /logs/processing/processors/
 [15]: /help
-[16]: /logs/explorer/search/#logstream
+[16]: /logs/explorer/?tab=logstream#visualization
 [17]: /logs/explorer/search/
 [18]: /logs/processing/processors/#log-status-remapper
 [19]: https://app.datadoghq.com/logs/pipelines

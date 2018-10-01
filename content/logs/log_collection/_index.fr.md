@@ -290,7 +290,7 @@ Datadog analyse automatiquement les logs au format JSON. Pour cette raison, lors
 [2]: /developers/metrics/custom_metrics
 [3]: /agent/faq/agent-commands/#start-stop-restart-the-agent
 [4]: /logs/processing/#log-date-remapper
-[5]: /logs/explorer/search/#logstream
+[5]: /logs/explorer/?tab=logstream#visualization
 [6]: /logs/explorer/search/
 [7]: /logs/processing/#log-status-remapper
 [8]: /agent/proxy
