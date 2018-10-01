@@ -66,10 +66,10 @@ For details about how to how to toggle and configure plugins, check out the [API
 | Module        | Versions    | Support Type    | Notes                        |
 | :----------   | :---------- | :-------------- | :--------------------------- |
 | [express][8]  | 4           | Fully Supported | Supports Sails, Loopback, and [more][29] |
-| [graphql][22] | 0.13        | Fully Supported |
-| [hapi][9]     | ^17.1       | Fully Supported |
-| [koa][10]     | 2           | Fully Supported |
-| [restify][11] | 7           | Fully Supported |
+| [graphql][22] | 0.13        | Fully Supported |                              |
+| [hapi][9]     | ^17.1       | Fully Supported |                              |
+| [koa][10]     | 2           | Fully Supported |                              |
+| [restify][11] | 7           | Fully Supported |                              |
 
 [8]: https://expressjs.com/
 [22]: https://github.com/graphql/graphql-js
@@ -90,17 +90,17 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 #### Data Store Compatibility
 
-| Module                 | Versions    | Support Type    |
-| :----------            | :---------- | :-------------- |
-| [cassandra-driver][25] |             | Coming Soon     |
-| [elasticsearch][14]    | 15          | Fully Supported |
-| [ioredis][15]          | 4           | Fully Supported |
-| [memcached][24]        | ^2.2        | Fully Supported |
-| [mongodb-core][16]     | 3           | Fully Supported |
-| [mysql][17]            | 2           | Fully Supported |
-| [mysql2][18]           | ^1.5        | Fully Supported |
-| [pg][19]               | 6 - 7       | Fully Supported |
-| [redis][20]            | ^2.6        | Fully Supported |
+| Module                 | Versions    | Support Type    |  Notes              |
+| :----------            | :---------- | :-------------- | :------------------ |
+| [cassandra-driver][25] |             | Coming Soon     |                     |
+| [elasticsearch][14]    | 15          | Fully Supported |                     |
+| [ioredis][15]          | 4           | Fully Supported |                     |
+| [memcached][24]        | ^2.2        | Fully Supported |                     |
+| [mongodb-core][16]     | 3           | Fully Supported | Supports Mongoose   |
+| [mysql][17]            | 2           | Fully Supported |                     |
+| [mysql2][18]           | ^1.5        | Fully Supported |                     |
+| [pg][19]               | 6 - 7       | Fully Supported |                     |
+| [redis][20]            | ^2.6        | Fully Supported |                     |
 
 [14]: https://github.com/elastic/elasticsearch-js
 [15]: https://github.com/luin/ioredis
@@ -118,8 +118,8 @@ For details about how to how to toggle and configure plugins, check out the [API
 | :----------      | :---------- | :-------------- | :------------------------ |
 | [amqp10][27]     | 3           | Fully Supported | Supports AMQP 1.0 brokers (i.e. ActiveMQ, Apache Qpid) | 
 | [amqplib][21]    | 0.5         | Fully Supported | Supports AMQP 0.9 brokers (i.e. RabbitMQ, Apache Qpid) |
-| [kafka-node][26] |             | Coming Soon     |
-| [rhea][28]       |             | Coming Soon     |
+| [kafka-node][26] |             | Coming Soon     |                           |
+| [rhea][28]       |             | Coming Soon     |                           |
 
 [21]: https://github.com/squaremo/amqp.node
 [26]: https://github.com/SOHU-Co/kafka-node
