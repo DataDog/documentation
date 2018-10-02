@@ -56,7 +56,7 @@ We officially support the Java JRE 1.7 and higher of both Oracle JDK and OpenJDK
 
 | Server                       | Versions   | Support Type    | JVM Arg to enable                                                             |
 | :--------------------------- | :--------- | :-------------- | :----------------                                                             |
-| Akka-Http Server             | 10.0+      | Fully Supported | N/A                                                                           |
+| Akka-Http Server             | 10.0+      | Fully Supported | `-Ddd.integration.akka-http.enabled=true`                                     |
 | Java Servlet Compatible      | 2.3+, 3.0+ | Fully Supported | N/A                                                                           |
 | Jax-RS Annotations           | JSR311-API | Fully Supported | N/A                                                                           |
 | Jetty (non-Servlet)          | 8+         | Beta            | `-Ddd.integration.jetty.enabled=true`                                         |
