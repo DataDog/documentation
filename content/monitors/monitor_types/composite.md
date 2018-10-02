@@ -89,7 +89,7 @@ Write a notification message as you would with any other monitor, using the `@-s
 
 {{< img src="monitors/monitor_types/composite/writing-notification.png" alt="writing notification" responsive="true" style="width:80%;">}}
 
-You can use template variables like `{{monitor1.value}}`, `{{monitor2.value}}`, etc.
+You can use template variables like `{{a.value}}`, `{{b.value}}` (for monitor use cases), etc.
 
 In addition to your own message, notifications (e.g. emails) for the composite monitor shows the status of the individual monitors:
 
