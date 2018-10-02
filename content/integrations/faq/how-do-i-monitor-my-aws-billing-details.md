@@ -16,8 +16,9 @@ To begin collecting billing metrics:
 
 The following metrics are available using the Datadog-AWS Billing integration:
 
-|                                 |         |                                                                                                                                                    |
+
 | Name                            | Units   | Description                                                                                                                                        |
+| -----                           | ------  | ------                                                                                                                                             |
 | `aws.billing.actual_spend`      | dollars | The actual spending costs for your budget period                                                                                                   |
 | `aws.billing.budget_limit`      | dollars | The spending limit for your budget period                                                                                                          |
 | `aws.billing.estimated_charges` | dollars | The estimated charges for your AWS usage. This can either be estimated charges for one service or a roll-up of estimated charges for all services. |
