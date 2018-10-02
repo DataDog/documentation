@@ -444,7 +444,7 @@ class HTTPCheck(AgentCheck):
 
 ## Writing checks that run command line programs
 
-It's possible to create a custom check that runs a command line program and captures its output as a custom metric. For example, a check can run the `vgs` command to report information about volume groups. Since the Python code that runs the checks is embedded in the multi-threaded go runtime, using the Python `subprocess` or `multithreading` modules from the standard library can cause the Agent to crash or processes to get stuck in a zombie state.
+It's possible to create a custom check that runs a command line program and captures its output as a custom metric. For example, a check can run the `vgs` command to report information about volume groups. Since the Python code that runs the checks is embedded in the multi-threaded Go runtime, using the Python `subprocess` or `multithreading` modules from the standard library can cause the Agent to crash or processes to get stuck in a zombie state.
 
 To run a subprocess within a check, use the `get_subprocess_output()` function provided in `datadog_checks.utils.subprocess_output`:
 
