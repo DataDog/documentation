@@ -52,7 +52,7 @@ clean-integrations:  ## remove built integrations files.
 	@if [ -d data/integrations ]; then \
 		find ./data/integrations -type f -maxdepth 1 \
 	    -a -not -name '*.fr.yaml' \
-	    -exec rm -rf {} \; ;fi 
+	    -exec rm -rf {} \; ;fi
 	@if [ -d data/service_checks ]; then \
 		find ./data/service_checks -type f -maxdepth 1 \
 	    -a -not -name '*.fr.json' \
