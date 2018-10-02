@@ -1,6 +1,9 @@
+#!/bin/sh
+# Replace the API and APP keys below
+# with the ones for your account
+
 api_key=<YOUR_API_KEY>
 app_key=<YOUR_APP_KEY>
-monitor_id=59409
 
 # Create a monitor to delete
 monitor_id=$(curl -X POST -H "Content-type: application/json" \

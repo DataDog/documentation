@@ -1,7 +1,7 @@
 ---
 title: Mute all monitors
 type: apicode
-order: 16.7
+order: 16.07
 external_redirect: /api/#mute-all-monitors
 ---
 
