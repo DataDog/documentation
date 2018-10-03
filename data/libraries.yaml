@@ -240,8 +240,8 @@ Tracing:
       notes: OpenTracing API implementation in JavaScript for Node.js.
   - PHP:
     - name: dd-trace-php
-      link: https://github.com/jcchavezs/dd-trace-php/
-      authors: José Carlos Chávez
+      link: https://github.com/DataDog/dd-trace-php/
+      authors: Datadog
   - Python:
     - name: dd-trace-py
       link: https://github.com/DataDog/dd-trace-py
