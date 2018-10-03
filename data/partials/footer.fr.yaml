@@ -19,7 +19,7 @@ col1:
     title: Prix
 col2:
   - name: documentation
-    link: /
+    link: "https://docs.datadoghq.com/"
     title: Documentation
   - name: support
     link: 'https://www.datadoghq.com/support/'
