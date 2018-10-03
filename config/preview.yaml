@@ -5,4 +5,4 @@ builddrafts: true
 params:
   environment: preview
   img_url: "https://datadog-docs.imgix.net/"
-  static_url: "https://docs-staging.datadoghq.com/"
+  static_url: "https://docs.datadoghq.com/"
