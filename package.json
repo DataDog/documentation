@@ -48,6 +48,7 @@
     "minimist": "1.1.0",
     "mixitup": "3.2.2",
     "mousetrap": "1.6.1",
+    "node-sass": "4.7.2",
     "picturefill": "3.0.2",
     "popper.js": "1.13.0",
     "run-sequence": "1.1.4",
