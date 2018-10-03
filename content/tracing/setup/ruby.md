@@ -119,32 +119,34 @@ Ruby APM includes support for the following web servers:
 
 Ruby APM includes support for the following libraries and frameworks:
 
-| Name                 | Versions Supported     | Support type    | How to configure |
-| -------------------- | ---------------------- | --------------- | ---------------- |
-| [Active Record][11]  | `>= 3.2, < 6.0`        | Fully Supported | *[Link][10]*     |
-| [AWS][13]            | `>= 2.0`               | Fully Supported | *[Link][12]*     |
-| [Dalli][15]          | `>= 2.7`               | Fully Supported | *[Link][14]*     |
-| [DelayedJob][53]     | `>= 4.1`               | Fully Supported | *[Link][52]*     |
-| [Elastic Search][17] | `>= 6.0`               | Fully Supported | *[Link][16]*     |
-| [Excon][19]          | `>= 0.62`              | Fully Supported | *[Link][18]*     |
-| [Faraday][21]        | `>= 0.14`              | Fully Supported | *[Link][20]*     |
-| [gRPC][23]           | `>= 1.10`              | Fully Supported | *[Link][22]*     |
-| [Grape][25]          | `>= 1.0`               | Fully Supported | *[Link][24]*     |
-| [GraphQL][27]        | `>= 1.7.9`             | Fully Supported | *[Link][26]*     |
-| [MongoDB][29]        | `>= 2.0, < 2.5`        | Fully Supported | *[Link][28]*     |
-| [MySQL2][55]         | `>= 0.5`               | Fully Supported | *[Link][54]*     |
-| [Net/HTTP][31]       | *(Any Supported Ruby)* | Fully Supported | *[Link][30]*     |
-| [Racecar][33]        | `>= 0.3.5`             | Fully Supported | *[Link][32]*     |
-| [Rack][35]           | `>= 1.4.7`             | Fully Supported | *[Link][34]*     |
-| [Rails][37]          | `>= 3.2, < 6.0`        | Fully Supported | *[Link][36]*     |
-| [Rake][39]           | `>= 12.0`              | Fully Supported | *[Link][38]*     |
-| [Redis][41]          | `>= 3.2, < 4.0`        | Fully Supported | *[Link][40]*     |
-| [Resque][43]         | `>= 1.0, < 2.0`        | Fully Supported | *[Link][42]*     |
-| [RestClient][57]     | `>= 1.8`               | Fully Supported | *[Link][56]*     |
-| [Sequel][45]         | `>= 3.41`              | Fully Supported | *[Link][44]*     |
-| [Sidekiq][47]        | `>= 4.0`               | Fully Supported | *[Link][46]*     |
-| [Sinatra][49]        | `>= 1.4.5`             | Fully Supported | *[Link][48]*     |
-| [Sucker Punch][51]   | `>= 2.0`               | Fully Supported | *[Link][50]*     |
+| Name                           | Versions Supported     | Support type    | How to configure |
+| ------------------------------ | ---------------------- | --------------- | ---------------- |
+| [Active Model Serializers][59] | `>= 0.9`               | Fully Supported | *[Link][58]*     |
+| [Active Record][11]            | `>= 3.2, < 6.0`        | Fully Supported | *[Link][10]*     |
+| [AWS][13]                      | `>= 2.0`               | Fully Supported | *[Link][12]*     |
+| [Concurrent Ruby][61]          | `>= 0.9`               | Fully Supported | *[Link][60]*     |
+| [Dalli][15]                    | `>= 2.7`               | Fully Supported | *[Link][14]*     |
+| [DelayedJob][53]               | `>= 4.1`               | Fully Supported | *[Link][52]*     |
+| [Elastic Search][17]           | `>= 6.0`               | Fully Supported | *[Link][16]*     |
+| [Excon][19]                    | `>= 0.62`              | Fully Supported | *[Link][18]*     |
+| [Faraday][21]                  | `>= 0.14`              | Fully Supported | *[Link][20]*     |
+| [Grape][25]                    | `>= 1.0`               | Fully Supported | *[Link][24]*     |
+| [GraphQL][27]                  | `>= 1.7.9`             | Fully Supported | *[Link][26]*     |
+| [gRPC][23]                     | `>= 1.10`              | Fully Supported | *[Link][22]*     |
+| [MongoDB][29]                  | `>= 2.0, < 2.5`        | Fully Supported | *[Link][28]*     |
+| [MySQL2][55]                   | `>= 0.3.10`            | Fully Supported | *[Link][54]*     |
+| [Net/HTTP][31]                 | *(Any Supported Ruby)* | Fully Supported | *[Link][30]*     |
+| [Racecar][33]                  | `>= 0.3.5`             | Fully Supported | *[Link][32]*     |
+| [Rack][35]                     | `>= 1.4.7`             | Fully Supported | *[Link][34]*     |
+| [Rails][37]                    | `>= 3.2, < 6.0`        | Fully Supported | *[Link][36]*     |
+| [Rake][39]                     | `>= 12.0`              | Fully Supported | *[Link][38]*     |
+| [Redis][41]                    | `>= 3.2, < 4.0`        | Fully Supported | *[Link][40]*     |
+| [Resque][43]                   | `>= 1.0, < 2.0`        | Fully Supported | *[Link][42]*     |
+| [RestClient][57]               | `>= 1.8`               | Fully Supported | *[Link][56]*     |
+| [Sequel][45]                   | `>= 3.41`              | Fully Supported | *[Link][44]*     |
+| [Sidekiq][47]                  | `>= 4.0`               | Fully Supported | *[Link][46]*     |
+| [Sinatra][49]                  | `>= 1.4.5`             | Fully Supported | *[Link][48]*     |
+| [Sucker Punch][51]             | `>= 2.0`               | Fully Supported | *[Link][50]*     |
 
 *Fully Supported* support indicates all tracer features are available.
 
@@ -196,8 +198,12 @@ Ruby APM includes support for the following libraries and frameworks:
 [53]: https://github.com/collectiveidea/delayed_job
 [54]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#mysql2
 [55]: https://github.com/brianmario/mysql2
-[56]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#restclient
+[56]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#rest-client
 [57]: https://github.com/rest-client/rest-client
+[58]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#active-model-serializers
+[59]: https://github.com/rails-api/active_model_serializers
+[60]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#concurrent-ruby
+[61]: https://github.com/ruby-concurrency/concurrent-ruby
 
 ## Configuration
 
