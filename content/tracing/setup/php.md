@@ -43,12 +43,12 @@ Don't see your desired frameworks or libraries? Let Datadog know more about your
 
 #### Framework Compatibility
 
-| Module         | Versions    | Support Type    |
-| :-----------   | :---------- | :-------------- |
-| Laravel        | 5.x         | Experimental    |
-| Magento        | 2.x         | Experimental    |
-| Symfony        | 3.x         | Experimental    |
-| Zend Framework | 3.x         | Experimental    |
+| Module         | Versions    | Support Type       |
+| :-----------   | :---------- | :----------------- |
+| Laravel        | 5.x         | Alpha              |
+| Symfony        | 3.x         | Alpha              |
+| Magento        | 2.x         | Coming Soon [beta] |
+| Zend Framework | 3.x         | Coming Soon [beta] |
 
 Don't see your desired web frameworks? Let Datadog know more about your needs through [this survey][1].
 
@@ -56,13 +56,13 @@ Don't see your desired web frameworks? Let Datadog know more about your needs th
 
 #### Library Compatibility
 
-| Module        | Versions              | Support Type    |
-| :------------ | :-------------------- | :-------------- |
-| Docterine     | 2.6                   | Experimental    |
-| Memcached     | *(Any Supported PHP)* | Experimental    |
-| Mysqli        | *(Any Supported PHP)* | Experimental    |
-| PDO           | *(Any Supported PHP)* | Experimental    |
-| Predis        | 1.1                   | Experimental    |
+| Module        | Versions              | Support Type       |
+| :------------ | :-------------------- | :----------------- |
+| Memcached     | *(Any Supported PHP)* | Alpha              |
+| Mysqli        | *(Any Supported PHP)* | Alpha              |
+| PDO           | *(Any Supported PHP)* | Alpha              |
+| Predis        | 1.1                   | Alpha              |
+| Doctrine      | 2.6                   | Coming Soon [beta] |
 
 Don't see your desired libraries? Let Datadog know more about your needs through [this survey][1].
 
