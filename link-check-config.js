@@ -1,9 +1,10 @@
 module.exports = {
     "production": {
+        serverUrl: "https://docs.datadoghq.com/",
         branches: ["master"],
     },
     "preview": {
-        serverUrl: "http://docs-staging.datadoghq.com/",
+        serverUrl: "https://docs-staging.datadoghq.com/",
     },
     "linkCheckOptions": {
         filterLevel: 3,
