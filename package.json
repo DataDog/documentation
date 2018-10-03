@@ -48,12 +48,12 @@
     "minimist": "1.1.0",
     "mixitup": "3.2.2",
     "mousetrap": "1.6.1",
-    "node-sass": "4.7.2",
     "picturefill": "3.0.2",
     "popper.js": "1.13.0",
     "run-sequence": "1.1.4",
     "stickyfilljs": "2.0.3",
     "translate": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/translate-v1.0.2.tgz",
+    "link-checker": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/peter/moveOptions/link-checker-v1.0.12.tgz",
     "traverse": "0.6.6"
   }
 }

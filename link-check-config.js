@@ -3,6 +3,7 @@ module.exports = {
         branches: ["master"],
     },
     "preview": {
+        serverUrl: "http://docs-staging.datadoghq.com/",
     },
     "linkCheckOptions": {
         filterLevel: 3,
