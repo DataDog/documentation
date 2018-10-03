@@ -249,7 +249,7 @@ DD_AC_INCLUDE = "image:cp-kafka image:k8szk"
 Or to exclude a specific container name:
 
 ```
-DD_AC_EXCLUDE = "name:dd-agent"
+DD_AC_EXCLUDE = "name:datadog-agent"
 ```
 
 {{% /tab %}}
@@ -271,7 +271,7 @@ ac_include: ["image:cp-kafka", "image:k8szk"]
 Or to exclude the Datadog Agent:
 
 ```
-ac_exclude = ["name:dd-agent"]
+ac_exclude = ["name:datadog-agent"]
 ```
 
 {{% /tab %}}
