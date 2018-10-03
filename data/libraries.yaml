@@ -207,7 +207,6 @@ Tracing:
       authors: Datadog
     - name: DatadogSharp
       link: https://github.com/neuecc/DatadogSharp
-      dogstatsd: true
       notes: Also supports DogStatsD.
       authors: Yoshifumi Kawai
   - Elixir:
