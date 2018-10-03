@@ -3,9 +3,16 @@ title: How does Datadog determine the Agent hostname?
 kind: faq
 aliases:
     - /agent/faq/how-can-i-change-the-hostname/
+comments: <!–– Original flowchart is in lucidchart. Search Trello for link or ask Grant. ––>
 ---
 
+{{< tabs >}}
+{{% tab "Agent v5" %}}
+
 {{< img src="agent/faq/agent_hostname.jpeg" alt="Agent hostname scheme" responsive="true" >}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 The Datadog Agent collects potential hostnames from a number of different sources. To see all the names the Agent is detecting, [run the Agent info command][1], for example:
 ```
