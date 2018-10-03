@@ -10,7 +10,7 @@ Classic:
       dogstatsd: true
       authors: Garrett Sickles
       notes: C++ header library to send metrics to your Datadog account.
-  - C#:
+  - C# / .NET:
     - name: dogstatsd-csharp-client
       link: https://github.com/DataDog/dogstatsd-csharp-client
       official: true
@@ -199,7 +199,12 @@ Classic:
       api: true
       authors: Jacob Aronoff
 Tracing:
-  - C#:
+  - C# / .NET:
+    - name: dd-trace-csharp
+      link: https://github.com/DataDog/dd-trace-csharp
+      official: true
+      notes: NuGet package is `Datadog.Trace`.
+      authors: Datadog
     - name: DatadogSharp
       link: https://github.com/neuecc/DatadogSharp
       dogstatsd: true
