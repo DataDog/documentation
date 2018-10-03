@@ -241,7 +241,9 @@ Tracing:
   - PHP:
     - name: dd-trace-php
       link: https://github.com/DataDog/dd-trace-php/
+      official: true
       authors: Datadog
+      notes: composer package is 'datadog/dd-trace'
   - Python:
     - name: dd-trace-py
       link: https://github.com/DataDog/dd-trace-py
