@@ -58,5 +58,63 @@
     {{ partial "footer-scripts.html" . }}
     {{ partial "footer-js-dd-docs-methods" . }}
     {{ partial "preview_banner/preview_banner" . }}
+
+    <!-- ALGOLIA DOCSEARCH -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+    <script type="text/javascript">
+    var search_desktop = docsearch({
+         appId: 'EOIG7V0A2O',
+         apiKey: 'c7ec32b3838892b10610af30d06a4e42',
+         indexName: 'docsearch_docs_prod',
+         inputSelector: '.docssearch-input',
+         algoliaOptions: {
+            'facetFilters': ['language:{{ .Site.Language.Lang }}']
+         },
+         autocompleteOptions: {
+            autoselect: false
+         },
+         debug: false // Set debug to true if you want to inspect the dropdown
+    });
+    var desktop_enable_enter = true;
+    search_desktop.autocomplete.on('keyup', function(e) {
+       if(e.keyCode === 13 && desktop_enable_enter) {
+           window.location = '{{ .Site.BaseURL }}search/?s='+$(this).val();
+       }
+    });
+    search_desktop.autocomplete.on('autocomplete:cursorchanged', function(e) {
+       desktop_enable_enter = false;
+    });
+    search_desktop.autocomplete.on('autocomplete:cursorremoved', function(e) {
+       desktop_enable_enter = true;
+    });
+    </script>
+    <script type="text/javascript">
+    var search_mobile = docsearch({
+         appId: 'EOIG7V0A2O',
+         apiKey: 'c7ec32b3838892b10610af30d06a4e42',
+         indexName: 'docsearch_docs_prod',
+         inputSelector: '.docssearch-input-m',
+         algoliaOptions: {
+            'facetFilters': ['language:{{ .Site.Language.Lang }}']
+         },
+         autocompleteOptions: {
+            autoselect: false
+         },
+         debug: false // Set debug to true if you want to inspect the dropdown
+    });
+    var mobile_enable_enter = true;
+    search_mobile.autocomplete.on('keyup', function(e) {
+       if(e.keyCode === 13 && mobile_enable_enter) {
+           window.location = '{{ .Site.BaseURL }}search/?s='+$(this).val();
+       }
+    });
+    search_mobile.autocomplete.on('autocomplete:cursorchanged', function(e) {
+       mobile_enable_enter = false;
+    });
+    search_mobile.autocomplete.on('autocomplete:cursorremoved', function(e) {
+       mobile_enable_enter = true;
+    });
+    </script>
+    <!--/ ALGOLIA DOCSEARCH -->
 </body>
 </html>

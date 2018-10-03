@@ -158,7 +158,7 @@ index_algolia:
   script:
     - index_docsearch_algolia
   only:
-    - master
+    - schedules
 
 manage_translations:on-schedule:
   <<: *base_template
