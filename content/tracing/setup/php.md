@@ -29,12 +29,12 @@ The unstable alpha tracer can be [accessed today on Github][2].
 
 PHP APM includes support for the following PHP versions:
 
-| Version | Support type    |
-| -----   | --------------- |
-| 5.6.x   | Experimental    |
-| 7.0.x   | Experimental    |
-| 7.1.x   | Experimental    |
-| 7.2.x   | Experimental    |
+| Version | Support type |
+| -----   | ------------ |
+| 5.6.x   | Alpha        |
+| 7.0.x   | Alpha        |
+| 7.1.x   | Alpha        |
+| 7.2.x   | Alpha        |
 
 ### Integrations
 
