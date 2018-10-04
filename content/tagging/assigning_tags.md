@@ -33,7 +33,7 @@ tags: <KEY_1>:<VALUE_1>, <KEY_2>:<VALUE_2>, <KEY_3>:<VALUE_3>
 or
 
 ```
-tags: 
+tags:
     - <KEY_1>:<VALUE_1>
     - <KEY_2>:<VALUE_2>
     - <KEY_3>:<VALUE_3>

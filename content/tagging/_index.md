@@ -48,7 +48,7 @@ Below are Datadog's tagging restrictions, requirements, and suggestions:
 
 2. Tags can be **up to 200 characters** long and support unicode.
 3. Tags are converted to lowercase.
-4. A tag can be in the format `value` or `<KEY>:<VALUE>`. For optimal functionality, **we recommend constructing tags in the `<KEY>:<VALUE>` format.** Commonly used tag keys are `env`, `instance`, and `name`, and `service`. The key is always what precedes the first colon of the global tag definition, for example:
+4. A tag can be in the format `value` or `<KEY>:<VALUE>`. For optimal functionality, **we recommend constructing tags in the `<KEY>:<VALUE>` format.** Commonly used tag keys are `env`, `instance`, `name`, and `service`. The key is always what precedes the first colon of the global tag definition, for example:
     
     | Tag                      | Key                | Value            |
     |--------------------------|--------------------|------------------|
