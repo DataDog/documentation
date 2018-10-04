@@ -3,7 +3,7 @@ title: Tracing PHP Applications (Coming Soon)
 kind: Documentation
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-php"
-  tag: "Github"    
+  tag: "Github"
   text: Source code
 - link: "tracing/visualization/"
   tag: "Documentation"
@@ -49,6 +49,10 @@ Don't see your desired frameworks or libraries? Let Datadog know more about your
 | Symfony        | 3.x         | Alpha              |
 | Magento        | 2.x         | Coming Soon [beta] |
 | Zend Framework | 3.x         | Coming Soon [beta] |
+| CakePHP        | 3.x         | Coming Soon [beta] |
+| Drupal         | 7.x         | Coming Soon [beta] |
+| Wordpress      | 4.x         | Coming Soon [beta] |
+| Slim           | 3.x         | Coming Soon [beta] |
 
 Don't see your desired web frameworks? Let Datadog know more about your needs through [this survey][1].
 
