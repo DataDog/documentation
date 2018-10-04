@@ -86,6 +86,7 @@ The Go tracer includes support for the following data stores and libraries.
 | [Kafka (confluent)](https://github.com/confluentinc/confluent-kafka-go)  | Fully Supported  | [gopkg.in/DataDog/dd-trace-go.v1/contrib/confluentinc/confluent-kafka-go](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/confluentinc/confluent-kafka-go) |
 | [Kafka (sarama)](https://github.com/Shopify/sarama)                      | Fully Supported  | [gopkg.in/DataDog/dd-trace-go.v1/contrib/Shopify/sarama](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/Shopify/sarama)                                   |
 | [Google API](https://github.com/googleapis/google-api-go-client)         | Fully Supported  | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/api](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/api)                     |
+| [go-restful](https://github.com/emicklei/go-restful)                     | Fully Supported  | [gopkg.in/DataDog/dd-trace-go.v1/contrib/emicklei/go-restful](https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/emicklei/go-restful)                         |
 
 **Note**: The [integrations documentation][contrib godoc] also provides a detailed overview of the supported packages and their APIs, along with usage examples.
 
