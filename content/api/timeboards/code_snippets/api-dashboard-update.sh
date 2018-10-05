@@ -28,11 +28,11 @@ dash_id=$(curl  -X POST -H "Content-type: application/json" \
 curl  -X PUT -H "Content-type: application/json" \
 -d '{
       "graphs" : [{
-          "title": "Average Memory Free",
+          "title": "Sum of Memory Free",
           "definition": {
               "events": [],
               "requests": [
-                  {"q": "avg:system.mem.free{*}"}
+                  {"q": "sum:system.mem.free{*}"}
               ],
               "viz": "timeseries"
           }
