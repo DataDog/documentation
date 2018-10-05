@@ -28,14 +28,14 @@ dash_id=$(curl  -X POST -H "Content-type: application/json" \
 curl  -X PUT -H "Content-type: application/json" \
 -d '{
       "graphs" : [{
-          "title": "Sum of Memory Free",
+          "title": "Average Memory Free",
           "definition": {
               "events": [],
               "requests": [
-                  {"q": "sum:system.mem.free{*}"}
-              ]
-          },
-          "viz": "timeseries"
+                  {"q": "avg:system.mem.free{*}"}
+              ],
+              "viz": "timeseries"
+          }
       }],
       "title" : "Sum Memory Free Shell",
       "description" : "An updated dashboard with memory info.",
