@@ -95,6 +95,25 @@ It would be easy to pivot by ECS `ecs_task_name` and `ecs_task_version` and unde
 
 {{< img src="graphing/infrastructure/livecontainers/tasksxversion.png" alt="Tasks x version" responsive="true" style="width:80%;">}}
 
+## ScatterPlot
+
+Use the ScatterPlot analytic to compare two metrics with one another in order to better understand the performance of your containers.
+
+To access the ScatterPlot analytic [in the Containers page][3] click on the *Show Summary graph* button the select the ScatterPlot tab:
+
+{{< img src="graphing/infrastructure/livecontainers/scatterplot_selection.png" alt="scatterplot selection" responsive="true" style="width:60%;">}}
+
+By default, the graph groups by the `short_image` tag key. The size of each dot represents the number of containers in that group, and clicking on a dot drills in it, to display the individual containers and hosts that contribute to the group. 
+
+The query at the top of the ScatterPlot analytic allows you to control your ScatterPlot analytic:
+
+* Selection of metrics to display.
+* Selection of the aggregation method for both metrics.
+* Selection of the scale of both X and Y axis (*Linear*/*Log*).
+
+{{< img src="graphing/infrastructure/livecontainers/scatterplot.png" alt="scatterplot" responsive="true" style="width:80%;">}}
+
+
 ## Real-time monitoring
 
 While actively working with the Containers page, metrics are collected at 2s resolution.  This is very important for highly volatile metrics such as CPU.  In the background, for historical context, metrics are collected at 10s resolution.
@@ -107,7 +126,7 @@ While actively working with the Containers page, metrics are collected at 2s res
 
 - RBAC settings can restrict Kubernetes metadata collection. Refer to the [RBAC entites for the Datadog Agent][2].
 
-- In Kubernetes the `health` value is the containers' readiness probe, not it's liveness probe. 
+- In Kubernetes the `health` value is the containers' readiness probe, not it's liveness probe.
 
 [1]: https://github.com/DataDog/docker-dd-agent
 [2]: https://gist.github.com/hkaj/404385619e5908f16ea3134218648237

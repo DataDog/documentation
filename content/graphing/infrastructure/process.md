@@ -61,7 +61,7 @@ Follow the instructions for the [Docker Agent][11], passing in the following att
 -e DD_PROCESS_AGENT_ENABLED=true
 ```
 
-**Note**: 
+**Note**:
 
 * To collect container information in the standard install, the `dd-agent` user needs to have permissions to access `docker.sock`.
 * Running the Agent as container still allows you to collect host processes.
@@ -138,9 +138,29 @@ Processes and containers are, by their nature, extremely high cardinality object
 
 {{< img src="graphing/infrastructure/process/postgres.png" alt="Postgres" responsive="true" style="width:80%;">}}
 
-### Filtering and Pivoting
+### Tagging
 
 [Tagging][15] makes navigation easy. In addition to all existing host-level tags, processes are tagged by `user`.
+
+Furthermore, processes in ECS containers are also tagged by:
+
+* `task_name`
+* `task_version`
+* `ecs_cluster`
+
+Processeses in Kubernetes containers are tagged by:
+
+* `pod_name`
+* `kube_pod_ip`
+* `kube_service`
+* `kube_namespace`
+* `kube_replica_set`
+* `kube_daemon_set`
+* `kube_job`
+* `kube_deployment`
+* `Kube_cluster`
+
+### Filtering and Pivoting
 
 First, you can filter down to `role:McNulty-Query`, Datadog's front-end query service, in order to narrow the search. Then you can search for the NGINX master processes, and pivot the table by Availability-Zone, to be confident about that service staying highly available.
 
@@ -155,6 +175,24 @@ Below, you have searched for SSH processes and pivoted by `user` to understand w
 {{< img src="graphing/infrastructure/process/sshusers.png" alt="ssh users" responsive="true" style="width:80%;">}}
 
 Perhaps this one is less exciting after redaction.
+
+## ScatterPlot
+
+Use the ScatterPlot analytic to compare two metrics with one another in order to better understand the performance of your containers.
+
+To access the ScatterPlot analytic [in the Processes page][16] click on the *Show Summary graph* button the select the ScatterPlot tab:
+
+{{< img src="graphing/infrastructure/process/scatterplot_selection.png" alt="scatterplot selection" responsive="true" style="width:60%;">}}
+
+By default, the graph groups by the `command` tag key. The size of each dot represents the number of processes in that group, and clicking on a dot drills in it to display the individual pids and containers that contribute to the group. 
+
+The query at the top of the Scatterplot analytic allows you to control your ScatterPlot analytic:
+
+* Selection of metrics to display.
+* Selection of the aggregation method for both metrics.
+* Selection of the scale of both X and Y axis (*Linear*/*Log*).
+
+{{< img src="graphing/infrastructure/process/scatterplot.png" alt="container inspect" responsive="true" style="width:80%;">}}
 
 ## Enriched Live Containers view
 
@@ -187,3 +225,4 @@ While actively working with the Live Processes, metrics are collected at 2s reso
 [12]: https://app.datadoghq.com/account/settings#agent/kubernetes
 [14]: https://docs.datadoghq.com/infrastructure/livecontainers/
 [15]: /tagging/
+[16]: https://app.datadoghq.com/process
