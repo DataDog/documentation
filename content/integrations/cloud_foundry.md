@@ -19,8 +19,9 @@ ddtype: check
 
 ## Overview
 
-Any Cloud Foundry deployment can send metrics and events to Datadog. The data helps you track the health and availability of all nodes in the deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more.
-Use this page to learn how to monitor your [application on Cloud Foundry](#monitor-your-applications-on-cloud-foundry) and your [Cloud Foundry cluster](#monitor-your-cloud-foundry-cluster).
+Any Cloud Foundry deployment can send metrics and events to Datadog. The data helps you track the health and availability of all nodes in the deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more. Use this page to learn how to monitor your [application on Cloud Foundry](#monitor-your-applications-on-cloud-foundry) and your [Cloud Foundry cluster](#monitor-your-cloud-foundry-cluster).
+
+There are three main components for the Cloud Foundry integration with Datadog. First, use the Buildback to collect custom metrics from your applications. Then, use the BOSH Release to collect metrics from the platform. Finally, use the Loggregator Firehose Nozzle to collect all of the other metrics from your infrastructure.
 
 For Pivotal Cloud Foundry, you have the option to install the Datadog integration tiles with Ops Manager:
 
