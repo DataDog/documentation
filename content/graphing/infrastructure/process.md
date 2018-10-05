@@ -142,13 +142,13 @@ Processes and containers are, by their nature, extremely high cardinality object
 
 [Tagging][15] makes navigation easy. In addition to all existing host-level tags, processes are tagged by `user`.
 
-Furthermore, Process in ECS containers are also tagged by:
+Furthermore, processes in ECS containers are also tagged by:
 
 * `task_name`
 * `task_version`
 * `ecs_cluster`
 
-Processes in Kubernetes containers are tagged by:
+Processeses in Kubernetes containers are tagged by:
 
 * `pod_name`
 * `kube_pod_ip`
