@@ -66,6 +66,8 @@ Don't see your desired web frameworks? Let Datadog know more about your needs th
 | Mysqli        | *(Any Supported PHP)* | Alpha              |
 | PDO           | *(Any Supported PHP)* | Alpha              |
 | Predis        | 1.1                   | Alpha              |
+| pgsql         | *(Any Supported PHP)* | Coming Soon [beta] |
+| MongoDB       | 1.x                   | Coming Soon [beta] |
 | Doctrine      | 2.6                   | Coming Soon [beta] |
 
 Don't see your desired libraries? Let Datadog know more about your needs through [this survey][1].
