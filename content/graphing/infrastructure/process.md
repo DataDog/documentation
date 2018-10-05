@@ -176,16 +176,23 @@ Below, you have searched for SSH processes and pivoted by `user` to understand w
 
 Perhaps this one is less exciting after redaction.
 
-## Scatterplot for Live Processes
+## ScatterPlot
 
-The scatterplot is designed for high volume data analysis and, with intelligent grouping, can help you explore all of the processes across your entire environment. With this new visualization, you are able to compare these metrics with one another to better understand the performance of your processes.
+Use the ScatterPlot analytic to compare two metrics with one another in order to better understand the performance of your containers.
 
-In order to access the scatterplot graph in the Processes page, click on the ‘Show Summary graph’ button next to the ‘Group by tag’ text field. Finally, click on the Scatterplot tab to switch from the Timeseries graph view.
+To access the ScatterPlot analytic [in the Processes page][16] click on the *Show Summary graph* button the select the ScatterPlot tab:
 
-By default, the graph will group by the `command` tag. The size of each dot represents the number of processes in that group, and clicking on a dot will drill in, so you can see the individual pids and containers that contribute to the group. The query at the top of the page allows you to group by any arbitrary tag. Lastly, you can change both X and Y axis to logarithmic scale with the dropdown next to the plotted metrics.
+{{< img src="graphing/infrastructure/process/scatterplot_selection.png" alt="scatterplot selection" responsive="true" style="width:60%;">}}
+
+By default, the graph groups by the `command` tag key. The size of each dot represents the number of processes in that group, and clicking on a dot drills in it to display the individual pids and containers that contribute to the group. 
+
+The query at the top of the Scatterplot analytic allows you to control your ScatterPlot analytic:
+
+* Selection of metrics to display.
+* Selection of the aggregation method for both metrics.
+* Selection of the scale of both X and Y axis (*Linear*/*Log*).
 
 {{< img src="graphing/infrastructure/process/scatterplot.png" alt="container inspect" responsive="true" style="width:80%;">}}
-
 
 ## Enriched Live Containers view
 
@@ -218,3 +225,4 @@ While actively working with the Live Processes, metrics are collected at 2s reso
 [12]: https://app.datadoghq.com/account/settings#agent/kubernetes
 [14]: https://docs.datadoghq.com/infrastructure/livecontainers/
 [15]: /tagging/
+[16]: https://app.datadoghq.com/process
