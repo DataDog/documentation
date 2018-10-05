@@ -95,6 +95,16 @@ It would be easy to pivot by ECS `ecs_task_name` and `ecs_task_version` and unde
 
 {{< img src="graphing/infrastructure/livecontainers/tasksxversion.png" alt="Tasks x version" responsive="true" style="width:80%;">}}
 
+## Scatterplot for Live Containers
+
+The scatterplot is designed for high volume data analysis and, with intelligent grouping, can help you explore all of the containers across your entire environment. With this new visualization, you are able to compare these metrics with one another to better understand the performance of your containers.
+
+In order to access the scatterplot graph in the Containers page, click on the ‘Show Summary graph’ button next to the ‘Group by tag’ text field. Finally, click on the Scatterplot tab to switch from the Timeseries graph view.
+
+By default, the graph will group by the `short_image` tag. The size of each dot represents the number of containers in that group, and clicking on a dot will drill in, so you can see the individual containers and hosts that contribute to the group. The query at the top of the page allows you to group by any arbitrary tag. Lastly, you can change both X and Y axis to logarithmic scale with the dropdown next to the plotted metrics.
+
+{{< img src="graphing/infrastructure/livecontainers/scatterplot.png" alt="scatterplot" responsive="true" style="width:80%;">}}
+
 ## Real-time monitoring
 
 While actively working with the Containers page, metrics are collected at 2s resolution.  This is very important for highly volatile metrics such as CPU.  In the background, for historical context, metrics are collected at 10s resolution.
@@ -107,7 +117,7 @@ While actively working with the Containers page, metrics are collected at 2s res
 
 - RBAC settings can restrict Kubernetes metadata collection. Refer to the [RBAC entites for the Datadog Agent][2].
 
-- In Kubernetes the `health` value is the containers' readiness probe, not it's liveness probe. 
+- In Kubernetes the `health` value is the containers' readiness probe, not it's liveness probe.
 
 [1]: https://github.com/DataDog/docker-dd-agent
 [2]: https://gist.github.com/hkaj/404385619e5908f16ea3134218648237

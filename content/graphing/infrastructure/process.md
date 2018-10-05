@@ -61,7 +61,7 @@ Follow the instructions for the [Docker Agent][11], passing in the following att
 -e DD_PROCESS_AGENT_ENABLED=true
 ```
 
-**Note**: 
+**Note**:
 
 * To collect container information in the standard install, the `dd-agent` user needs to have permissions to access `docker.sock`.
 * Running the Agent as container still allows you to collect host processes.
@@ -138,9 +138,29 @@ Processes and containers are, by their nature, extremely high cardinality object
 
 {{< img src="graphing/infrastructure/process/postgres.png" alt="Postgres" responsive="true" style="width:80%;">}}
 
-### Filtering and Pivoting
+### Tagging
 
 [Tagging][15] makes navigation easy. In addition to all existing host-level tags, processes are tagged by `user`.
+
+Furthermore, Process in ECS containers are also tagged by:
+
+* `task_name`
+* `task_version`
+* `ecs_cluster`
+
+Processes in Kubernetes containers are tagged by:
+
+* `pod_name`
+* `kube_pod_ip`
+* `kube_service`
+* `kube_namespace`
+* `kube_replica_set`
+* `kube_daemon_set`
+* `kube_job`
+* `kube_deployment`
+* `Kube_cluster`
+
+### Filtering and Pivoting
 
 First, you can filter down to `role:McNulty-Query`, Datadog's front-end query service, in order to narrow the search. Then you can search for the NGINX master processes, and pivot the table by Availability-Zone, to be confident about that service staying highly available.
 
@@ -155,6 +175,17 @@ Below, you have searched for SSH processes and pivoted by `user` to understand w
 {{< img src="graphing/infrastructure/process/sshusers.png" alt="ssh users" responsive="true" style="width:80%;">}}
 
 Perhaps this one is less exciting after redaction.
+
+## Scatterplot for Live Processes
+
+The scatterplot is designed for high volume data analysis and, with intelligent grouping, can help you explore all of the processes across your entire environment. With this new visualization, you are able to compare these metrics with one another to better understand the performance of your processes.
+
+In order to access the scatterplot graph in the Processes page, click on the ‘Show Summary graph’ button next to the ‘Group by tag’ text field. Finally, click on the Scatterplot tab to switch from the Timeseries graph view.
+
+By default, the graph will group by the `command` tag. The size of each dot represents the number of processes in that group, and clicking on a dot will drill in, so you can see the individual pids and containers that contribute to the group. The query at the top of the page allows you to group by any arbitrary tag. Lastly, you can change both X and Y axis to logarithmic scale with the dropdown next to the plotted metrics.
+
+{{< img src="graphing/infrastructure/process/scatterplot.png" alt="container inspect" responsive="true" style="width:80%;">}}
+
 
 ## Enriched Live Containers view
 
