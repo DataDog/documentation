@@ -79,7 +79,7 @@ Take advantage of DaemonSets to [automatically deploy the Datadog Agent on all y
 
 #### Kubernetes State
 
-Note that `kubernetes_state.*` metrics are gathered from the kube-state-metrics API.
+Note that `kubernetes_state.*` metrics are gathered from the `kube-state-metrics` API.
 
 {{< get-metrics-from-git "kubernetes_state" >}}
 
