@@ -10,6 +10,9 @@ kind: documentation
 {{< get-metrics-from-git "kubelet" >}}
 
 #### kube-state-metrics
+
+Note that `kubernetes_state.*` metrics are gathered from the kube-state-metrics API.
+
 {{< get-metrics-from-git "kubernetes_state" >}}
 
 #### kube-dns
