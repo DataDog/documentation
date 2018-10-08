@@ -23,6 +23,8 @@ This page outlines the basic features of the Datadog Agent for macOS. If you hav
 
 By default, the Agent is installed in a sandbox located at `/opt/datadog-agent`. You're free to move this folder wherever you like; however, his documentation assumes a default installation location.
 
+**Note**: macOS 10.10 and above are supported.
+
 ## Commands
 
 In Agent v6, the `launchctl` service manager provided by the operating system is responsible for the Agent lifecycle, while other commands must be run via the Agent binary directly. Alternatively, lifecycle commands can also be managed via the systray app, and other commands can be executed via the web GUI.

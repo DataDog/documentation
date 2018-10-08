@@ -18,7 +18,9 @@ further_reading:
 
 ## Overview
 
-This page outlines the basic features of the Datadog Agent for Amazon Linux. If you haven't installed the Agent yet, instructions can be found in the [Datadog Agent Integration][1] documentation.
+This page outlines the basic features of the Datadog Agent for Ubuntu. If you haven't installed the Agent yet, instructions can be found in the [Datadog Agent Integration][1] documentation.
+
+**Note**: Ubuntu 14.04 and above are supported.
 
 ## Commands
 
