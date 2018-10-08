@@ -11,9 +11,9 @@ dash_id=$(curl  -X POST -H "Content-type: application/json" \
               "events": [],
               "requests": [
                   {"q": "avg:system.mem.free{*}"}
-              ]
-          },
-          "viz": "timeseries"
+              ],
+              "viz": "timeseries"
+          }
       }],
       "title" : "Average Memory Free Shell",
       "description" : "A dashboard with memory info.",
@@ -33,9 +33,9 @@ curl  -X PUT -H "Content-type: application/json" \
               "events": [],
               "requests": [
                   {"q": "sum:system.mem.free{*}"}
-              ]
-          },
-          "viz": "timeseries"
+              ],
+              "viz": "timeseries"
+          }
       }],
       "title" : "Sum Memory Free Shell",
       "description" : "An updated dashboard with memory info.",
