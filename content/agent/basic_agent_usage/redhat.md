@@ -18,7 +18,9 @@ further_reading:
 
 ## Overview
 
-This page outlines the basic features of the Datadog Agent for Amazon Linux. If you haven't installed the Agent yet, instructions can be found in the [Datadog Agent Integration][1] documentation.
+This page outlines the basic features of the Datadog Agent for Red Hat. If you haven't installed the Agent yet, instructions can be found in the [Datadog Agent Integration][1] documentation.
+
+**Note**: Supported OS version are RedHat 6 and above.
 
 ## Commands
 

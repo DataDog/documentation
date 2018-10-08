@@ -23,6 +23,8 @@ further_reading:
 
 If you haven't installed the Agent yet, instructions can be found [in the Datadog Agent Integration page][1]. You can also consult the [official Docker Agent 6 image][2].
 
+**Note**: Supported Docker version are 1.12 and higher.
+
 ## How to run it
 
 Head over to [datadoghq.com][1] to get the official installation guide.
