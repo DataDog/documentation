@@ -14,7 +14,7 @@ further_reading:
   text: Learn how to explore your logs
 ---
 
-Datadog’s integration processing Pipelines are available for the sources below when they are setup to collect logs. For integrations with a Datadog `conf.yaml` file, the logs `source: <ID>` **must match** the value listed next to the integration to enable the integration Pipeline:
+Datadog’s integration processing Pipelines are available for the `source` tag value below when they are setup to collect logs. For integrations with a Datadog `conf.yaml` file, the logs configuration parameter `source: <ID>` **must match** the value listed next to the integration in the table below to automatically enable the integration Pipeline:
 
 | Source                           | Setup Location                                   | Source ID       |
 |----------------------------------|--------------------------------------------------|-----------------|
@@ -34,6 +34,8 @@ Datadog’s integration processing Pipelines are available for the sources below
 | [Gunicorn][24]                   | [Datadog integration YAML file][25]              | `gunicorn`      |
 | [HAProxy][26]                    | [Datadog integration YAML file][27]              | `haproxy`       |
 | [IIS][28]                        | [Datadog integration YAML file][29]              | `iis`           |
+
+**Note**: Integration Pipelines implement [Datadog Attribute Naming Convention][30].
 
 ## Further Reading
 
@@ -68,3 +70,4 @@ Datadog’s integration processing Pipelines are available for the sources below
 [27]: https://github.com/DataDog/integrations-core/blob/master/haproxy/datadog_checks/haproxy/data/conf.yaml.example
 [28]: /integrations/iis/#log-collection
 [29]: https://github.com/DataDog/integrations-core/blob/master/iis/datadog_checks/iis/data/conf.yaml.example
+[30]: /logs/processing/attributes_naming_convention/
