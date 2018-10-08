@@ -20,7 +20,7 @@ further_reading:
 
 This page outlines the basic features of the Datadog Agent for Fedora. If you haven't installed the Agent yet, instructions can be found in the [Datadog Agent Integration][1] documentation.
 
-**Note**: Supported OS version are Fedora 26 and above.
+**Note**: Fedora 26 and above are supported.
 
 ## Commands
 

@@ -21,7 +21,7 @@ further_reading:
 
 This page outlines the basic features of the Windows Datadog Agent. If you haven't installed the Agent yet, basic installation instructions can be found [in the Datadog Agent Integration page][1].
 
-**Note**: Supported OS version are Windows 7 or above.
+**Note**: Windows 7 and above are supported.
 
 ## Agent installation
 
