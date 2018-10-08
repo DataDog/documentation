@@ -47,13 +47,13 @@ const tracer = require('dd-trace').init()
 
 See the [tracer settings][4] for the list of initialization options.
 
-**Note**: The tracer must be initialized before importing any instrumented module.
-
+<div class="alert alert-info">
+You must import and initialize the tracer library in an external file and then import that file as a whole when building your application with a transpilers. This prevents hoisting and ensures that the trace library gets imported and initialized before importing any other instrumented module.
+</div>
 
 ## Compatibility
 
 Node `^4.7`, `^6.9` and `>=8` are supported by this library. However, it benefits significantly from the performance improvements introduced in Node `>=8.3`.
-
 
 ### Integrations
 
