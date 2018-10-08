@@ -35,7 +35,7 @@ Datadog’s integration processing Pipelines are available for the `source` tag 
 | [HAProxy][26]                    | [Datadog integration YAML file][27]              | `haproxy`       |
 | [IIS][28]                        | [Datadog integration YAML file][29]              | `iis`           |
 
-**Note**: Integration Pipelines implement [Datadog Attribute Naming Convention][30].
+**Note**: Integration Pipelines implement the [Datadog Attribute Naming Convention][30].
 
 ## Further Reading
 
