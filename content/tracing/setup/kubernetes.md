@@ -116,16 +116,16 @@ apiVersion: apps/v1
 kind: Deployment
 ...
     spec:
-    containers:
-    - name: container-name
+        containers:
+        - name: container-name
         image: container-image/tag
         env:
-        - name: DD_AGENT_SERVICE_HOST
-            valueFrom:
-            fieldRef:
-                fieldPath: status.hostIP
-        - name: DD_AGENT_SERVICE_PORT
-          value: "8126"
+            - name: DD_AGENT_SERVICE_HOST
+                valueFrom:
+                fieldRef:
+                    fieldPath: status.hostIP
+            - name: DD_AGENT_SERVICE_PORT
+            value: "8126"
 ```
 
 Your application level tracers must then be configured to submit traces to this address.
