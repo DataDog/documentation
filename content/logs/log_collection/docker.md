@@ -148,13 +148,15 @@ Add the following label as a run command:
 {{< tabs >}}
 {{% tab "NGINX Dockerfile" %}}
 
-The following Dockerfile launches an NGINX container with Autodiscovery enabled:
+The following Dockerfile enable the Nginx log integration on the corresponding container (`service` value can be changed): 
 
 ```
-FROM nginx
+LABEL "com.datadoghq.ad.logs"='[{"source": "nginx", "service": "webapp"}]'
+```
 
-EXPOSE 8080
-COPY nginx.conf /etc/nginx/nginx.conf
+And to enable both the metric and logs Nginx integrations:
+
+```
 LABEL "com.datadoghq.ad.check_names"='["nginx"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%:%%port%%/nginx_status"}]'
