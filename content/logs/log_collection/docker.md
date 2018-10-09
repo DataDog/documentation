@@ -148,13 +148,13 @@ Add the following label as a run command:
 {{< tabs >}}
 {{% tab "NGINX Dockerfile" %}}
 
-The following Dockerfile enable the Nginx log integration on the corresponding container (`service` value can be changed): 
+The following Dockerfile enables the NGINX log integration on the corresponding container (`service` value can be changed): 
 
 ```
 LABEL "com.datadoghq.ad.logs"='[{"source": "nginx", "service": "webapp"}]'
 ```
 
-And to enable both the metric and logs Nginx integrations:
+And to enable both the metric and logs NGINX integrations:
 
 ```
 LABEL "com.datadoghq.ad.check_names"='["nginx"]'
