@@ -141,21 +141,21 @@ The message is a key attribute in Datadog. It is displayed in the message column
 ## Arithmetic processor
 
 Use the Arithmetic Processor to add a new attribute (without spaces or special characters in the new attribute name) to a log with the result of the provided formula.
-This can be very useful to remap different time attributes with different units into a single attribute. Or to compute operations on attributes within the same log.
+This enables you to remap different time attributes with different units into a single attribute, or to compute operations on attributes within the same log.
 
-The formula can use parenthesis and the basic arithmetic operators: `-`, `+`, `*`, `/`. 
+The formula can use parentheses and the basic arithmetic operators: `-`, `+`, `*`, `/`. 
 
 Example:
 
 {{< img src="logs/processing/processors/arithmetic_processor.png" alt="Arithmetic Processor" responsive="true" style="width:80%;">}}
 
-By default the calculation is skipped if an attribute is missing but it is possible to replace the missing attribute value by 0 to ensure that the calculation is done.
-An attribute is missing if not found in the log attributes or if it cannot be converted as a number.
+By default, the calculation is skipped if an attribute is missing. Select "Replace missing attribute by 0" to automatically populate missing attribute values with 0 to ensure that the calculation is done.
+An attribute is missing if it is not found in the log attributes, or if it cannot be converted to a number.
 
 **Notes**: 
 
-* The operator `-` needs to be space splitted from the rest in the formula as it can also be contained in attribute names.
-* If the target attribute already exists, it is overwritten by the result of the formula
+* The operator `-` needs to be space split in the formula as it can also be contained in attribute names.
+* If the target attribute already exists, it is overwritten by the result of the formula.
 
 ## Further Reading
 
