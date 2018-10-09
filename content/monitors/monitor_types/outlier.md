@@ -72,69 +72,46 @@ To ensure that your alert is properly calibrated, you can set the time window at
 
 ## Reference: Outlier Algorithms and Parameters
 
-There are two different types of outlier detection algorithms you can use on your data: DBSCAN/ScaledDBSCAN and MAD/ScaledMAD. We recommend starting with the default algorithm, DBSCAN. If you have trouble detecting the right outliers, you can adjust the parameters to DBSCAN or try the alternate algorithm, MAD. If you have metrics on a larger scale that look to be closely clustered but the DBSCAN/MAD algorithms are identifying some as outliers, try the scaled algorithms. Explanation of each algorithm and its parameters follows.
+There are two different types of outlier detection algorithms you can use on your data: DBSCAN/ScaledDBSCAN and MAD/ScaledMAD. Datadog recommends starting with the default algorithm, DBSCAN. If you have trouble detecting the right outliers, you can adjust the parameters to DBSCAN or try the alternate algorithm, MAD. If you have metrics on a larger scale that look to be closely clustered but the DBSCAN/MAD algorithms are identifying some as outliers, try the scaled algorithms. Our [blog post on outlier detection][6] has more detailed information.
 
-### DBSCAN/ScaledDBSCAN
+### DBSCAN
 
-A natural way to group together hosts that are behaving similarly is to use a clustering algorithm. We use [DBSCAN][4], a popular density-based clustering algorithm, for this purpose. DBSCAN works by greedily agglomerating points that are close to each other. Clusters with few points in them are considered outliers.
+[DBSCAN][4] (density-based spatial clustering of applications with noise) is a popular clustering algorithm. Traditionally, DBSCAN takes: 1) a parameter 𝜀 that specifies a distance threshold under which two points are considered to be close; and 2) the minimum number of points that have to be within a point's 𝜀-radius before that point can start agglomerating. 
 
-Traditionally, DBSCAN takes: 1) a parameter 𝜀 that specifies a distance threshold under which two points are considered to be close; and 2) the minimum number of points that have to be within a point's 𝜀-radius before that point can start agglomerating. The image below shows an example of DBSCAN in action on points in the plane. There are two clusters. The large points had enough close neighbors to agglomerate those points, while the small colored points did no agglomerating themselves but are within the 𝜀-radius of a large point. The points in black are the outliers.
+Datadog uses a simplified form of DBSCAN to detect outliers on timeseries. Datadog considers each host to be a point in *d*-dimensions, where *d* is the number of elements in the timeseries. Any point can agglomerate, and any point not in the largest cluster is considered an outlier. The initial distance threshold is set by creating a new median timeseries by taking the median of the values from the existing timeseries at every time point. The Euclidean distance between each host and the median series is calculated. The threshold is set as the median of these distances, multiplied by a normalizing constant.
 
-{{< img src="monitors/monitor_types/outliers/outliers-dbscan-2d.png" alt="outlier dbscan 2d" responsive="true" style="width:60%;">}}
+This implementation of DBSCAN takes one parameter, `tolerance`, the constant by which the initial threshold is multiplied to yield DBSCAN's distance parameter 𝜀.
 
-#### Parameters
+{{< img src="monitors/monitor_types/outliers/outliers-dbscan-config.png" alt="outliers dbscan configuration" responsive="true" style="width:80%;">}}
 
-We use a simplified form of DBSCAN to detect outliers on timeseries. We consider each host to be a point in d-dimensions, where d is the number of elements in the timeseries. Any point can agglomerate, and any point that is not in the largest cluster is considered an outlier.
-
-We set the initial distance threshold as follows. We create a new median timeseries by taking the median of the values from the existing timeseries at every time point. Then we calculate the Euclidean distance between each host and the median series. The threshold is the median of those distances, multiplied by a normalizing constant.
-
-The only parameter we take is `tolerance`, the constant by which the initial threshold is multiplied to yield DBSCAN's distance parameter 𝜀. Here is DBSCAN with a tolerance of 3.0 in action on a pool of Cassandra workers:
+Here is DBSCAN with a tolerance of 3.0 in action on a pool of Cassandra workers:
 
 {{< img src="monitors/monitor_types/outliers/outliers-dbscan-cassandra.png" alt="outliers dbscan cassandra" responsive="true" style="width:80%;">}}
 
-You should set the tolerance parameter depending on how similarly you expect your group of hosts to behave-larger values allow for more tolerance in how much a host can deviate from its peers.
+Set the tolerance parameter according to how similarly you expect your hosts to behave—larger values allow for more tolerance in how much a host can deviate from its peers.
 
-#### ScaledDBSCAN
+### MAD
 
-The distance threshold of the DBSCAN algorithm is independent of the overall scale of the metrics. Consider a group of constant timeseries with values {1000, 1001, 1002, 1005, 1015}. The median series is a constant series at 1002. DBSCAN with a tolerance of 3.0 identifies the series at 1015 to be an outlier, even though it may be almost indistinguishable from the other series visually on the graph when the origin of the y-axis is at 0.
+The [Median Absolute Deviation][5](MAD) is a robust measure of variability, and can be viewed as the robust analog for standard deviation. Robust statistics describe data in such a way that they are not unduly influenced by outliers.
 
-The ScaledDBSCAN algorithm scales the distance threshold according to the relative magnitudes of the median series and the hosts' distances to the median series. In most situations, it behaves the same as regular DBSCAN does. However, when the median series is large compared to the distances to the median series, the distance threshold becomes proportional to the size of the median series. As a result, assessing whether two timeseries are close depends on the scale of the median series.
+To use MAD for your outlier monitor, configure two parameters: 
 
-Here is a comparison of DBSCAN and ScaledDBSCAN with tolerances of 3 on field data size in a group of Elasticsearch nodes:
+- `tolerance`: which specifies how many "deviations" a point has to be away from the median for it to be considered an outlier
+- `pct`: if more than this percentage of a particular series' points are considered outliers, then the whole series is marked to be an outlier.
 
-{{< img src="monitors/monitor_types/outliers/outliers-scaled-dbscan-es.png" alt="outliers scaled dbscan es" responsive="true" style="width:80%;">}}
+{{< img src="monitors/monitor_types/outliers/outliers-mad-config.png" alt="outliers mad configuration" responsive="true" style="width:80%;">}}
 
-### MAD/ScaledMAD
-
-The  [Median Absolute Deviation][5] is a robust measure of variability, and can be viewed as the robust analog for standard deviation. Robust statistics describe data in such a way that they are not unduly influenced by outliers.
-
-For a given set of data D = {d<sub>1</sub>, ..., d<sub>n</sub>}, the deviations are the difference between each d<sub>i</sub> and median(D). The MAD is then the median of the absolute values of all the deviations. For example if D = {1, 2, 3, 4, 5, 6, 100}, then the median is 4, the deviations are {-3, -2, -1, 0, 1, 2, 96}, and the MAD is 2. (Note that the standard deviation by contrast is 33.8.)
-
-#### Parameters
-
-The data set is the set of all points in every timeseries. Take the MAD of all the points then multiply it by a normalizing constant and the first parameter, `tolerance`. The constant normalizes MAD so that it is comparable to the standard deviation of the normal distribution. The tolerance parameter then specifies how many "deviations" a point has to be away from the median for it to be considered an outlier.
-
-Now to mark a timeseries as an outlier, use the second parameter, `pct`. If more than pct% of a particular series' points are considered outliers, then the whole series is marked to be an outlier. Here is MAD with a tolerance of 3 and pct of 20 in action when comparing the average system load by availability zone:
+Here is MAD with a tolerance of 3 and pct of 20 in action when comparing the average system load by availability zone:
 
 {{< img src="monitors/monitor_types/outliers/outliers-mad-az.png" alt="outliers mad az" responsive="true" style="width:80%;">}}
 
 The tolerance parameter should be tuned depending on the expected variability of the data. For example, if the data is generally within a small range of values, then this should be small. On the other hand, if points can vary greatly, then you want a higher scale so these variabilities do not trigger a false positive.
 
-#### ScaledMAD
-
-Like for DBSCAN, the MAD algorithm is designed to be independent of the overall magnitude of the metrics. If D = {1000, 1001, 1002, 1005, 1010}, the median is 1002, and the MAD is 2. Even though the point at 1010 seems close to the median in terms of their relative scales, it is still an outlier point for a tolerance of 3.
-
-The ScaledMAD algorithm, like ScaledDBSCAN, considers the relative scales of the MAD and the median. In most cases, it behaves the same as the MAD algorithm does. However, when the MAD of the data set becomes small compared to the median, the measure of deviation becomes proportional to the median. Therefore, determining whether a point is an outlier depends on the overall scale of the metrics.
-
-Here is an example of MAD and ScaledMAD algorithms for comparing the usable memory in Cassandra hosts. Both have tolerances of 3 and pct of 20:
-
-{{< img src="monitors/monitor_types/outliers/outliers-scaled-mad-cassandra.png" alt="outliers scaled mad Cassandra" responsive="true" style="width:80%;">}}
-
 ### DBSCAN vs. MAD
 
-So which algorithm should you use? For most outliers, any algorithm performs well at the default settings. However, there are subtle cases where one algorithm is more appropriate than the other.
+So which algorithm should you use? For most outliers, any algorithm performs well at the default settings. However, there are subtle cases where one algorithm is more appropriate.
 
-In the following image, we see a group of hosts flushing their buffers together while one host is flushing its buffer slightly later. DBSCAN picks this up as an outlier whereas MAD does not. This is a case where we would prefer to use MAD, as we don't care about when the buffers get flushed.  
+In the following image, a group of hosts is flushing their buffers together, while one host is flushing its buffer slightly later. DBSCAN picks this up as an outlier whereas MAD does not. This is a case where you might prefer to use MAD, as you don't care about when the buffers get flushed.  
 
 The synchronization of the group is just an artifact of the hosts being restarted at the same time. On the other hand, if instead of flushed buffers, the metrics below represented a scheduled job that actually should be synchronized across hosts, DBSCAN would be the right choice.
 
@@ -142,7 +119,15 @@ The synchronization of the group is just an artifact of the hosts being restarte
 
 #### Scaled vs. Regular Algorithms
 
-In most situations, the scaled algorithms behaves the same as their regular counterparts. However, if DBSCAN/MAD algorithms are identifying outliers within a closely clustered group of metrics, and you would like the outlier detection algorithm to scale with the overall magnitude of the metrics, try the scaled algorithms.
+DBSCAN and MAD have scaled versions, called ScaledDBSCAN and ScaledMAD, respectively. In most situations, the scaled algorithms behaves the same as their regular counterparts. However, if DBSCAN/MAD algorithms are identifying outliers within a closely clustered group of metrics, and you would like the outlier detection algorithm to scale with the overall magnitude of the metrics, try the scaled algorithms.
+
+Here is a comparison of DBSCAN and ScaledDBSCAN with tolerances of 3 on field data size in a group of Elasticsearch nodes:
+
+{{< img src="monitors/monitor_types/outliers/outliers-scaled-dbscan-es.png" alt="outliers scaled dbscan es" responsive="true" style="width:80%;">}}
+
+Here is an example of MAD and ScaledMAD algorithms for comparing the usable memory in Cassandra hosts. Both have tolerances of 3 and pct of 20:
+
+{{< img src="monitors/monitor_types/outliers/outliers-scaled-mad-cassandra.png" alt="outliers scaled mad Cassandra" responsive="true" style="width:80%;">}}
 
 ### Setting up alerts
 
@@ -160,3 +145,4 @@ Both algorithms are set up to identify outliers that differ from the majority of
 [3]: /monitors/monitor_types/#define-the-conditions
 [4]: https://en.wikipedia.org/wiki/DBSCAN
 [5]: https://en.wikipedia.org/wiki/Median_absolute_deviation
+[6]: https://www.datadoghq.com/blog/outlier-detection-algorithms-at-datadog
