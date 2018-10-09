@@ -21,11 +21,12 @@ Tags are a way of adding dimensions to metrics, so they can be filtered, aggrega
 
 Tagging binds different data types in Datadog, allowing for correlation and call to action between metrics, traces, and logs. This is accomplished with **reserved** tag keys. Here are some examples:
 
-| Tag Key  | Allows for                                                          |
-|----------|---------------------------------------------------------------------|
-| `host`   | Correlation between metrics, traces, processes, and logs            |
-| `device` | Segregation of metrics, traces, process, and logs by device or disk |
-| `source` | Event filtering and automated pipeline creation for log-management  |
+| Tag Key   | Allows for                                                          |
+|-----------|---------------------------------------------------------------------|
+| `host`    | Correlation between metrics, traces, processes, and logs            |
+| `device`  | Segregation of metrics, traces, process, and logs by device or disk |
+| `source`  | Event filtering and automated pipeline creation for log-management  |
+| `service` | Correlation between traces and logs                                 |
 
 ## Why It Matters
 
@@ -48,14 +49,14 @@ Below are Datadog's tagging restrictions, requirements, and suggestions:
 
 2. Tags can be **up to 200 characters** long and support unicode.
 3. Tags are converted to lowercase.
-4. A tag can be in the format `value` or `<KEY>:<VALUE>`. For optimal functionality, **we recommend constructing tags in the `<KEY>:<VALUE>` format.** Commonly used tag keys are `env`, `instance`, `name`, and `service`. The key is always what precedes the first colon of the global tag definition, for example:
+4. A tag can be in the format `value` or `<KEY>:<VALUE>`. For optimal functionality, **we recommend constructing tags in the `<KEY>:<VALUE>` format.** Commonly used tag keys are `env`, `instance`, and `name`. The key is always what precedes the first colon of the global tag definition, for example:
     
-    | Tag                      | Key                | Value            |
-    |--------------------------|--------------------|------------------|
-    | `service:database:mysql` | `service`          | `database:mysql` |
-    | `service_database:mysql` | `service_database` | `mysql`          |
+    | Tag                | Key           | Value          |
+    |--------------------|---------------|----------------|
+    | `env:staging:east` | `env`         | `staging:east` |
+    | `env_staging:east` | `env_staging` | `east`         |
 
-5.  **Reserved tag keys** `host`, `device`, and `source` cannot be used in the standard way.
+5.  **Reserved tag keys** `host`, `device`, `source`, and `service` cannot be used in the standard way.
 
 6. Tags shouldn't originate from unbounded sources, such as EPOCH timestamps, user IDs, or request IDs. Otherwise, it may infinitely [increase the number of metrics][29] for your organization and impact your billing.
 
