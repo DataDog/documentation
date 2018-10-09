@@ -463,16 +463,17 @@ The command and its arguments are passed to `get_subprocess_output()` in the for
 $ vgs -o vg_free
 
 ```
-should be passed to `get_subprocess_output()` like this:
+
+must be passed to `get_subprocess_output()` like this:
 
 ```python
 ["vgs", "-o", "vg_free"]
 
 ```
 
-When the command line program is run, the check will capture the same output as if it were run on the command line in the terminal. It is important to do string processing on the output and call `int()` or `float()` on the result, so that it returns a numerical type.
+When the command line program is run, the check captures the same output as if it were run on the command line in the terminal. It is important to do string processing on the output and call `int()` or `float()` on the result, so that it returns a numerical type.
 
-If you do not do string processing on the output of the subprocess, or if it does not return an integer or a float, the check will appear to run without errors, but will not report any data.
+If you do not do string processing on the output of the subprocess, or if it does not return an integer or a float, the check appears to run without errors, but doesn't report any data.
 
 Here is an example of a check that returns the results of a command line program:
 
