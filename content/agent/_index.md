@@ -17,6 +17,9 @@ aliases:
   - /agent/faq/install-core-extra/
 ---
 <a href="https://docs-staging.datadoghq.com/peter/link-checker/api/404444">broken link</a>
+<img class="img-fluid mx-auto" srcset="https://datadog-docs.imgix.net/images/icons/BROKENagent-9fe380f1.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=80" alt="agent">
+
+
 <div class="alert alert-info">
 Agent v6 is now available, <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md">upgrade to the newest version</a> to benefit from all new functionality.
 </div>
