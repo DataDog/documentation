@@ -305,5 +305,5 @@ Another word of caution: some network plugins don't support `hostPorts` yet, so 
 [18]: https://kubernetes.io/docs/admin/authentication/#service-account-tokens
 [19]: /agent/basic_agent_usage/docker/#dogstatsd-custom-metrics
 [20]: /tracing/setup/kubernetes
-[21]: /graphing/infrastructure/process
+[21]: /graphing/infrastructure/process/?tab=kubernetes#installation
 [22]: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
