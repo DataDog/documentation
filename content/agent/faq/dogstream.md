@@ -3,9 +3,9 @@ title: Dogstream
 kind: documentation
 ---
 
-<div class="alert alert-info">
-This documentation covers Agent <strong>versions prior to 6.0.0</strong><br>
-Agent v6 is now available, <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md">upgrade to the newest version </a> to benefit from all new functionality. 
+<div class="alert alert-danger">
+This is a deprecated feature on Agent 5 and 6. New feature releases are also discontinued.</strong><br>
+Agent v6 is now available, <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md">upgrade to the newest version </a> to benefit from all new functionality.
 </div>
 
 Log files contain tons of valuable application and business data.
@@ -61,9 +61,9 @@ In this format, the Agent attempts to import a function called
 `custom_parser` from `/path/to/my/parsers_module.py`.
 
 If your custom log parser is not working, the first place to check is the
-Agent collector logs: 
+Agent collector logs:
 
-* If the Agent is unable to import your function, there is a line with `Could not load Dogstream line parser`. 
+* If the Agent is unable to import your function, there is a line with `Could not load Dogstream line parser`.
 
 * If all goes well you should see `dogstream: parsing {filename} with
 {function name} (requested {config option text})`.
@@ -175,7 +175,7 @@ def my_log_parser(logger, line):
     # Convert the iso8601 date into a unix timestamp, assuming the timestamp
     # string is in the same timezone as the machine that's parsing it.
     date = datetime.strptime(date, "%Y-%m-%d %H:%M:%S.%f")
-    date = time.mktime(date.timetuple()) 
+    date = time.mktime(date.timetuple())
     logged_event = {
         'msg_title': title,
         'timestamp': date,
@@ -258,4 +258,3 @@ If you suspect there is some error occurring beyond the scope of your custom log
 [9]: /agent/faq/agent-commands
 [10]: /help
 [11]: /agent/#send-a-flare
-
