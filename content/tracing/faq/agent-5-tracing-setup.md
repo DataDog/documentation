@@ -67,7 +67,7 @@ For more information about the Datadog Agent, see the [dedicated doc page][12] o
 
 For additional help from Datadog staff and other Datadog community members, join the [*apm* channel][14] in our Datadog Slack. Visit [http://chat.datadoghq.com][15] to join the Slack. We maintain a list of [community tracing libraries][16].
 
-You can also reach our APM team via email at [tracehelp@datadoghq.com][17].
+You can also reach our APM team via email at [support@datadohq.com][17].
 
 [1]: https://github.com/DataDog/datadog-trace-agent#run-on-osx
 [2]: https://github.com/DataDog/datadog-trace-agent#run-on-windows
@@ -85,4 +85,4 @@ You can also reach our APM team via email at [tracehelp@datadoghq.com][17].
 [14]: https://datadoghq.slack.com/messages/apm
 [15]: http://chat.datadoghq.com
 [16]: /developers/libraries/#community-tracing-apm-libraries
-[17]: mailto:tracehelp@datadoghq.com
+[17]: mailto:support@datadohq.com
