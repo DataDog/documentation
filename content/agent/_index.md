@@ -17,9 +17,6 @@ aliases:
   - /agent/faq/install-core-extra/
 ---
 
-
-
-
 <div class="alert alert-info">
 Agent v6 is now available, <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md">upgrade to the newest version</a> to benefit from all new functionality.
 </div>
