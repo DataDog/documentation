@@ -94,7 +94,7 @@ build_live:
 test_live_link_checks:
   <<: *base_template
   stage: post-deploy
-  environment: "preview"
+  environment: "live"
   variables:
     URL: ${PREVIEW_DOMAIN}
     DISALLOW_BOTS: "1"
