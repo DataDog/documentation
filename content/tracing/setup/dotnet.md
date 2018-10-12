@@ -73,13 +73,14 @@ Don’t see your desired frameworks? We’re continually adding additional suppo
 
 The .NET tracer can instrument the following web frameworks automatically:
 
-| Web framework    | Versions | Runtime             | OS      | Support Type      |
-| :--------------- | :------- | :------------------ | :------ | :---------------- |
-| ASP.NET MVC      | 5.2.x    | .NET Framework 4.5+ | Windows | Public Beta       |
-| ASP.NET Web API  | 2.2.x    | .NET Framework 4.5+ | Windows | Public Beta       |
-| ASP.NET Core MVC | 2.0+     | .NET Framework 4.5+ | Windows | Public Beta       |
-| ASP.NET Core MVC | 2.0+     | .NET Core 2.0.x     | Windows | Public Beta       |
-| ASP.NET Core MVC | 2.0+     | .NET Core 2.0.x     | Linux   | Coming soon       |
+| Web framework     | Versions  | Runtime             | OS      | Support Type      |
+| :---------------- | :-------- | :------------------ | :------ | :---------------- |
+| ASP.NET MVC 5     | 5.2+      | .NET Framework 4.5+ | Windows | Public Beta       |
+| ASP.NET MVC 4     | 4.0.40804 | .NET Framework 4.5+ | Windows | Public Beta       |
+| ASP.NET Web API 2 | 2.2+      | .NET Framework 4.5+ | Windows | Public Beta       |
+| ASP.NET Core MVC  | 2.0+      | .NET Framework 4.5+ | Windows | Public Beta       |
+| ASP.NET Core MVC  | 2.0+      | .NET Core 2.0.x     | Windows | Public Beta       |
+| ASP.NET Core MVC  | 2.0+      | .NET Core 2.0.x     | Linux   | Coming soon       |
 
 Don’t see your desired web frameworks? We’re continually adding additional support. [Check with the Datadog team][5] to see if we can help.
 
@@ -93,7 +94,7 @@ The .NET tracer's ability to automatically instrument data store access depends 
 | MS SQL Server | `System.Data.SqlClient` (NuGet)                   | 4.1+       | Public Beta     |
 | Redis         | `StackExchange.Redis`                             | 1.0-1.2.x  | Public Beta     |
 | Redis         | `ServiceStack.Redis`                              | 5.2.x      | Public Beta     |
-| Elasticsearch | `NEST` / `Elasticsearch.Net`                      |            | Coming soon     |
+| Elasticsearch | `NEST` / `Elasticsearch.Net`                      | 6.1.0      | Public Beta     |
 | MongoDB       | `MongoDB.Driver`                                  |            | Coming soon     |
 | PostgreSQL    | `Npgsql`                                          |            | Coming soon     |
 
