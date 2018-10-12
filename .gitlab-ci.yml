@@ -96,8 +96,7 @@ test_live_link_checks:
   stage: post-deploy
   environment: "live"
   variables:
-    URL: ${PREVIEW_DOMAIN}
-    DISALLOW_BOTS: "1"
+    URL: ${LIVE_DOMAIN}
   script:
     - node /etc/node_modules/link-checker/dd-link-checker.js -e live -c ${CI_PROJECT_DIR}/link-check-config.js
   only:
