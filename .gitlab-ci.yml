@@ -65,42 +65,6 @@ test_preview_link_checks:
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
-test_preview_images:
-  <<: *base_template
-  stage: post-deploy
-  environment: "preview"
-  variables:
-    URL: ${PREVIEW_DOMAIN}
-  script:
-    - pull_artifact_from_s3
-    - test_site_links "images" "${URL}" "True" "False" "True"
-  only:
-    - /.+?\/[a-zA-Z0-9_-]+/
-
-test_preview_static:
-  <<: *base_template
-  stage: post-deploy
-  environment: "preview"
-  variables:
-    URL: ${PREVIEW_DOMAIN}
-  script:
-    - pull_artifact_from_s3
-    - test_site_links "static" "${URL}" "True" "False" "True"
-  only:
-    - /.+?\/[a-zA-Z0-9_-]+/
-
-test_preview_links:
-  <<: *base_template
-  stage: post-deploy
-  environment: "preview"
-  variables:
-    URL: ${PREVIEW_DOMAIN}
-  script:
-    - pull_artifact_from_s3
-    - test_site_links "links" "${URL}" "True" "False" "True"
-  only:
-    - /.+?\/[a-zA-Z0-9_-]+/
-
 # ================== live ================== #
 build_live:
   <<: *base_template
