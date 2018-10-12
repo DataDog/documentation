@@ -32,7 +32,6 @@ spec:
         app: datadog-agent
       name: datadog-agent
     spec:
-      serviceAccountName: datadog-agent
       containers:
       - image: datadog/agent:latest
         imagePullPolicy: Always
@@ -113,13 +112,20 @@ Because of the `hostPort` directive, you can then send traces to the `hostIP` of
 Your application containers will need the Node IP and port set as environment variables:
 
 ```yaml
-env:
-  - name: DD_AGENT_SERVICE_HOST
-    valueFrom:
-      fieldRef:
-        fieldPath: status.hostIP
-  - name: DD_AGENT_SERVICE_PORT
-    value: 8126
+apiVersion: apps/v1
+kind: Deployment
+...
+    spec:
+        containers:
+        - name: container-name
+        image: container-image/tag
+        env:
+            - name: DD_AGENT_SERVICE_HOST
+                valueFrom:
+                fieldRef:
+                    fieldPath: status.hostIP
+            - name: DD_AGENT_SERVICE_PORT
+            value: "8126"
 ```
 
 Your application level tracers must then be configured to submit traces to this address.
