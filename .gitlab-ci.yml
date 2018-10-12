@@ -53,6 +53,18 @@ build_preview:
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
+test_preview_link_checks:
+  <<: *base_template
+  stage: post-deploy
+  environment: "preview"
+  variables:
+    URL: ${PREVIEW_DOMAIN}
+    DISALLOW_BOTS: "1"
+  script:
+    - node /etc/node_modules/link-checker/dd-link-checker.js -e preview -c ${CI_PROJECT_DIR}/link-check-config.js
+  only:
+    - /.+?\/[a-zA-Z0-9_-]+/
+
 test_preview_images:
   <<: *base_template
   stage: post-deploy
