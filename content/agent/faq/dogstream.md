@@ -4,7 +4,7 @@ kind: documentation
 ---
 
 <div class="alert alert-danger">
-This is a deprecated feature on Agent 5 and 6. New feature releases are also discontinued.
+This is a deprecated feature of Agent 5. New feature releases are discontinued.
 <br>
 Agent v6 is now available, <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md">upgrade to the newest version </a> to benefit from all new functionality. 
 </div>
