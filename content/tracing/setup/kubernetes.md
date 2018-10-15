@@ -109,7 +109,7 @@ kubectl create -f datadog-agent.yaml
 
 Because of the `hostPort` directive, you can then send traces to the `hostIP` of Nodes using the Downward API from your application containers.
 
-Your application containers will need the Node IP and port set as environment variables:
+Your application containers then needs the Node IP and port to be set as environment variables:
 
 ```yaml
 apiVersion: apps/v1
@@ -117,8 +117,8 @@ kind: Deployment
 ...
     spec:
         containers:
-        - name: container-name
-        image: container-image/tag
+        - name: <CONTAINER_NAME>
+        image: <CONTAINER_IMAGE>/<TAG>
         env:
             - name: DD_AGENT_SERVICE_HOST
                 valueFrom:
