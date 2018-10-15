@@ -116,15 +116,15 @@ apiVersion: apps/v1
 kind: Deployment
 ...
     spec:
-        containers:
-        - name: <CONTAINER_NAME>
+      containers:
+      - name: <CONTAINER_NAME>
         image: <CONTAINER_IMAGE>/<TAG>
         env:
-            - name: DD_AGENT_SERVICE_HOST
-                valueFrom:
-                fieldRef:
-                    fieldPath: status.hostIP
-            - name: DD_AGENT_SERVICE_PORT
+          - name: DD_AGENT_SERVICE_HOST
+            valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
+          - name: DD_AGENT_SERVICE_PORT
             value: "8126"
 ```
 
