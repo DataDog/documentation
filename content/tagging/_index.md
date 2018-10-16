@@ -17,19 +17,28 @@ further_reading:
 
 ## Introduction
 
-Tags are a way of adding dimensions to metrics, so they can be sliced, diced, aggregated, and compared on the front end. [Using tags][1] enables you to observe aggregate performance across a number of hosts and (optionally) narrow the set further based on specific elements. In a nutshell, tagging is a method to scope aggregated data.
+Tags are a way of adding dimensions to metrics, so they can be filtered, aggregated, and compared in Datadog visualizations. [Using tags][1] enables you to observe aggregate performance across a number of hosts and (optionally) narrow the set further based on specific elements. In summary, tagging is a method to observe aggregate data points.
+
+Tagging binds different data types in Datadog, allowing for correlation and call to action between metrics, traces, and logs. This is accomplished with **reserved** tag keys. Here are some examples:
+
+| Tag Key   | Allows for                                                          |
+|-----------|---------------------------------------------------------------------|
+| `host`    | Correlation between metrics, traces, processes, and logs            |
+| `device`  | Segregation of metrics, traces, process, and logs by device or disk |
+| `source`  | Event filtering and automated pipeline creation for log management  |
+| `service` | Correlation between traces and logs                                 |
 
 ## Why It Matters
 
-Typically, it's helpful to look at containers, VMs and cloud infrastructure at the "service" level in aggregate. For example, it's more helpful to look at CPU across a collection of hosts that represents a service, rather than CPU for server A or server B separately.
+Typically, it's helpful to look at containers, VMs, and cloud infrastructure at the "service" level in aggregate. For example, it's more helpful to look at CPU usage across a collection of hosts that represents a service, rather than CPU usage for server A or server B separately.
 
 Containers and cloud environments regularly churn through hosts, so it is critical to tag these to allow for aggregation of the metrics you're getting.
 
-## Tags best practices
+## Defining Tags
 
-A few best practices on tags:
+Below are Datadog's tagging restrictions, requirements, and suggestions:
 
-1. Tags must **start with a letter**, and after that may contain:
+1. Tags must **start with a letter** and after that may contain the characters listed below. Other special characters are converted to underscores. **Note**: A tag cannot end with a colon, for example `tag:`
 
     * Alphanumerics
     * Underscores
@@ -38,49 +47,47 @@ A few best practices on tags:
     * Periods
     * Slashes
 
-    Other special characters get converted to underscores.
-    **Note**: A tag cannot end with a colon (e.g., `tag:`)
-2. Tags can be **up to 200 characters** long and support unicode.
+2. Tags can be **up to 200 characters** long and support Unicode.
 3. Tags are converted to lowercase.
-4. A tag can have a `value` or a `key:value` syntax:
-    **For optimal functionality, we recommend constructing tags that use the `key:value` syntax.** The key is always what precedes the first colon of the global tag definition, e.g.:
+4. A tag can be in the format `value` or `<KEY>:<VALUE>`. For optimal functionality, **we recommend constructing tags in the `<KEY>:<VALUE>` format.** Commonly used tag keys are `env`, `instance`, and `name`. The key always precedes the first colon of the global tag definition, for example:
+    
+    | Tag                | Key           | Value          |
+    |--------------------|---------------|----------------|
+    | `env:staging:east` | `env`         | `staging:east` |
+    | `env_staging:east` | `env_staging` | `east`         |
 
-    * `role:database:mysql` is parsed as **key**:`role` , **value**:`database:mysql`
-    * `role_database:mysql` is parsed as **key**:`role_database` , **value**:`mysql`
+5.  **Reserved tag keys** `host`, `device`, `source`, and `service` cannot be used in the standard way.
 
-    Examples of commonly used metric tag keys are `env`, `instance`, `name`, and `role`.
+6. Tags shouldn't originate from unbounded sources, such as EPOCH timestamps, user IDs, or request IDs. Doing so may infinitely [increase the number of metrics][29] for your organization and impact your billing.
 
-5. `device`, `host`, and `source` are **reserved tag keys** and cannot be specified in the standard way.
+## Assigning Tags
+Tags may be assigned using any (or all) of the following methods. Refer to the dedicated [Assigning Tags documentation][21] to learn more:
 
-6. Tags shouldn't originate from unbounded sources, such as EPOCH timestamps or user IDs. These tags may impact platform performance and billing.
+| Method                        | Assign tags                                                                                  |
+|-------------------------------|----------------------------------------------------------------------------------------------|
+| [Configuration Files][22]     | Manually in your main agent configuration files, or in your integrations configuration file. |
+| [Environment Variables][23]   | Using environment variables for the containerized Agent                                      |
+| [UI][24]                      | In your Datadog platform                                                                     |
+| [API][25]                     | Using Datadog's API                                                                          |
+| [DogStatsD][26]               | When submitting metrics via DogStatsD                                                        |
+| [Integration Inheritance][27] | Automatically with supported integrations after setup                                        |
 
-## Applying Tags
+## Using Tags
 
-Tags may be added using any (or all) of the following methods:
+After you have [assigned tags][21] at the host and [integration][11] level, start using them to filter and group your metrics, traces, and logs. Tags are used in the following areas of your Datadog platform. Refer to the dedicated [Using Tags documentation][1] to learn more:
 
-* Agent Tags (`datadog.yaml`)
-* [DogStatsD][2] Tags
-* Integration/Check Tags (each check on the local host supports tags by editing the yaml)
-* Tags generated by other services such as [AWS][3], [Azure][4], [GCE][5], etc.
-* Tags in the [API][6] - note other endpoints support tags as well such as Events and Metrics
-* [Chef Roles][7] and [Puppet][8] Tags (Chef and Puppet use the API - this may obviously be extended to other configuration management tools by you or Datadog)
-* Manually adding tags using the [Infrastructure List][9] (hover over host->select "Inspect"->"Edit Tags")
-
-## Examples
-
-Here is an example of tags using the time-series chart editor. For the first screenshot, no tags have been applied, and we're observing average CPU across all hosts:
-
-{{< img src="tagging/Tags_1.png" alt="Tags_1" responsive="true" style="width:75%;">}}
-
-In this next example, we've applied a tag (`region:eastus`) that enables Datadog to look at CPU across the US East Region. We've used region as an example, but you could use any arbitrary tag, including application, service, environment, etc.
-
-{{< img src="tagging/Tags_2.png" alt="Tags_2" responsive="true" style="width:75%;">}}
-
-In this last example, we've used the second empty field labeled as "everything" by option to show an individual timeseries line for each host. Now we're seeing server CPU for individual hosts running in the US East Region.
-
-{{< img src="tagging/Tags_3.png" alt="Tags_3" responsive="true" style="width:75%;">}}
-
-We can also add additional tags to narrow down the scope even further - for example, hosts in `region:eastus` and `env:production`. Tags are extremely powerful, and they are ubiquitous in Datadog. They can be applied to all core elements, including alerts and host maps.
+| Area                 | Use Tags to                                                                                      |
+|----------------------|--------------------------------------------------------------------------------------------------|
+| [Events][12]         | Filter the event stream                                                                          |
+| [Dashboards][13]     | Filter and group metrics on graphs                                                               |
+| [Infrastructure][14] | Filter and group on the host map, infrastructure list, live containers, and live processes views |
+| [Monitors][15]       | Manage monitors, create monitors, or manage downtime                                             |
+| [Metrics][16]        | Filter and group with the metric explorer                                                        |
+| [Integrations][17]   | Optionally limit metrics for AWS, Google Cloud, and Azure                                        |
+| [APM][18]            | Filter trace search and analytics or jump to other areas with the service map                    |
+| [Notebooks][19]      | Filter and group metrics on graphs                                                               |
+| [Logs][20]           | Filter logs search, analytics, patterns, live tail, and pipelines                                |
+| [Developers][28]     | Pull information or setup different areas in the UI with the API                                 |
 
 ### Further Reading
 
@@ -96,3 +103,22 @@ We can also add additional tags to narrow down the scope even further - for exam
 [8]: /integrations/puppet
 [9]: /graphing/infrastructure
 [10]: /developers/metrics/custom_metrics
+[11]: /integrations
+[12]: /tagging/using_tags/#events
+[13]: /tagging/using_tags/#dashboards
+[14]: /tagging/using_tags/#infrastructure
+[15]: /tagging/using_tags/#monitors
+[16]: /tagging/using_tags/#metrics
+[17]: /tagging/using_tags/#integrations
+[18]: /tagging/using_tags/#apm
+[19]: /tagging/using_tags/#notebooks
+[20]: /tagging/using_tags/#logs
+[21]: /tagging/assigning_tags/
+[22]: /tagging/assigning_tags/#configuration-files
+[23]: /tagging/assigning_tags/#environment-variables
+[24]: /tagging/assigning_tags/#ui
+[25]: /tagging/assigning_tags/#api
+[26]: /tagging/assigning_tags/#dogstatsd
+[27]: /tagging/assigning_tags/#integration-inheritance
+[28]: /tagging/using_tags/#developers
+[29]: /developers/metrics/custom_metrics/#how-is-a-custom-metric-defined

@@ -13,25 +13,198 @@ further_reading:
   text: Learn how to use tags in Datadog
 ---
 
-Tagging is used throughout the Datadog product to make it easier to subset and query the machines and metrics that you have to monitor. Without the ability to assign and filter based on tags, finding the problems that exist in your environment and narrowing them down enough to discover the true causes would be extremely difficult. [Discover Datadog's tagging best practices before going further][61].
+Tagging is used throughout Datadog to query the machines and metrics you monitor. Without the ability to assign and filter based on tags, finding problems in your environment and narrowing them down enough to discover the true causes could be difficult. Learn how to [define tags][61] in Datadog before going further.
 
-## How to assign tags
-There are four primary ways to assign tags: inherited from the [integration][1], in the configuration, in the UI, and using the API, though the UI and API only allow you to assign tags at the host level. The recommended method is to rely on the [integrations][1] or via the configuration files.
+## Where to assign tags
+There are several places tags can be assigned: configuration files, [environment variables][80], the UI, [API][65], [DogStatsD][75], and inheriting from the [integrations][1]. It is recommended that you use configuration files and integration inheritance for most of your tagging needs.
 
-### Inheriting tags from an integration
+### Configuration Files
 
-The easiest method for assigning tags is to rely on the integration. Tags assigned to your Amazon Web Services instances, Chef recipes, and more are all automatically assigned to the hosts and metrics when they are brought in to Datadog.
+Configure the host tags submitted by the Agent inside `datadog.yaml`. The tags for the [integrations][1] installed with the Agent are configured via YAML files located in the **conf.d** directory of the Agent install. To locate the configuration files, refer to [the Agent configuration files FAQ][59].
 
-The following [integrations][1] sources create tags automatically in Datadog:
+In YAML files, use a tag dictionary with a list of tags you want assigned at that level. Any tag you assign to the Agent is applied to every integration on that Agent's host, as well as to all its corresponding metrics, traces, and logs.
 
-|                                         |                                                                                                                                                                                                                                                                                                                                               |
-| :-------------------------------------  | :------------------------------------------------------------------------------                                                                                                                                                                                                                                                               |
+Tag dictionaries have two different yet functionally equivalent forms:
+
+```
+tags: <KEY_1>:<VALUE_1>, <KEY_2>:<VALUE_2>, <KEY_3>:<VALUE_3>
+```
+
+or
+
+```
+tags:
+    - <KEY_1>:<VALUE_1>
+    - <KEY_2>:<VALUE_2>
+    - <KEY_3>:<VALUE_3>
+```
+
+It is recommended you assign tags as `<KEY>:<VALUE>` pairs, but simple tags are also accepted. See [defining tags][61] for more details.
+
+### Environment Variables
+
+When installing the containerized Datadog Agent, host tags can be set using the environment variable `DD_TAGS`. We automatically collect common tags from [Docker][77], [Kubernetes][78], [ECS][79], [Swarm, Mesos, Nomad, and Rancher][77]. To extract even more tags, use the following options:
+
+| Environment Variable               | Description                                    |
+|------------------------------------|------------------------------------------------|
+| `DD_DOCKER_LABELS_AS_TAGS`         | Extract docker container labels                |
+| `DD_DOCKER_ENV_AS_TAGS`            | Extract docker container environment variables |
+| `DD_KUBERNETES_POD_LABELS_AS_TAGS` | Extract pod labels                             |
+
+**Examples:**
+
+```shell
+DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app","release":"helm_release"}'
+DD_DOCKER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
+```
+
+Either define the variables in your custom `datadog.yaml`, or set them as JSON maps in these environment variables. The map key is the source (`label/envvar`) name, and the map value is the Datadog tag name.
+
+### UI
+
+{{< tabs >}}
+{{% tab "Host Map" %}}
+
+Assign host tags in the UI via the [Host Map page][81]. Click on any hexagon (host) to show the host overlay on the bottom of the page. Then, under the *User* section, click the **Edit Tags** button. Enter the tags as a comma separated list, then click **Save Tags**.
+
+{{< img src="tagging/assigning_tags/hostmapuitags.png" alt="Host Map Tags" responsive="true" style="width:80%;">}}
+
+[81]: /graphing/infrastructure/hostmap/
+
+{{% /tab %}}
+{{% tab "Infrastructure List" %}}
+
+Assign host tags in the UI via the [Infrastructure List page][62]. Click on any host to show the host overlay on the right of the page. Then, under the *User* section, click the **Edit Tags** button. Enter the tags as a comma separated list, then click **Save Tags**.
+
+{{< img src="tagging/assigning_tags/hostuitags.png" alt="Infrastructure List Tags" responsive="true" style="width:80%;">}}
+
+[62]: /graphing/infrastructure/
+
+{{% /tab %}}
+{{% tab "Monitors" %}}
+
+From the [Manage Monitors][63] page, select the checkbox next to each monitor to add tags (select one or multiple monitors). Click the **Edit Tags** button. Enter a tag or select one used previously. Then click **Add Tag `tag:name`** or **Apply Changes**. If tags were added previously, multiple tags can be assigned at once using the tag checkboxes.
+
+{{< img src="tagging/assigning_tags/monitortags.png" alt="Manage Monitors Tags" responsive="true" style="width:80%;">}}
+
+When creating a monitor, assign monitor tags under step 4 *Say what's happening*:
+
+{{< img src="tagging/assigning_tags/monitorindivdualtags.png" alt="Create Monitor Tags" responsive="true" style="width:80%;">}}
+
+[63]: /monitors/manage_monitor/
+
+{{% /tab %}}
+{{% tab "Distribution Metrics" %}}
+
+Assign tag keys within [Distribution Metrics][64] (Beta) to create aggregate timeseries by applying sets of tags to a metric, for which a timeseries is created for every combination of tag values within the set.
+
+**Sets of tags are limited to groups of four**:
+
+{{< img src="tagging/assigning_tags/distributionmetricstags.png" alt="Distribution Metrics Tags" responsive="true" style="width:80%;">}}
+
+[64]: /graphing/metrics/distributions/
+
+{{% /tab %}}
+{{% tab "Integrations" %}}
+
+The [AWS][60] integration tile allows you to assign additional tags to all metrics at the account level. Use a comma separated list of tags in the form `<KEY>:<VALUE>`.
+
+{{< img src="tagging/assigning_tags/integrationtags.png" alt="AWS Tags" responsive="true" style="width:80%;">}}
+
+[60]: /integrations/amazon_web_services/
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### API
+
+{{< tabs >}}
+{{% tab "Assignment" %}}
+
+Tags can be assigned in various ways with the [Datadog API][65]. See the list below for links to those sections:
+
+- [Post a check run][66]
+- [Post an event][67]
+- [AWS Integration][68]
+- [Post timeseries point][69]
+- [Create][70] or [Edit][71] a monitor
+- [Add][72] or [Update][73] host tags
+- [Send traces][74]
+
+[65]: /api/
+[66]: /api/?lang=python#post-a-check-run
+[67]: /api/?lang=python#post-an-event
+[68]: /api/?lang=python#aws
+[69]: /api/?lang=python#post-timeseries-points
+[70]: /api/?lang=python#create-a-monitor
+[71]: /api/?lang=python#edit-a-monitor
+[72]: /api/?lang=python#add-tags-to-a-host
+[73]: /api/?lang=python#update-host-tags
+[74]: /api/?lang=python#send-traces
+
+{{% /tab %}}
+{{% tab "Example" %}}
+
+Tagging within Datadog is a powerful way to gather your metrics. For a quick example, perhaps you're looking for a sum of the following metrics coming from your website (example.com):
+
+```
+Web server 1: api.metric('page.views', [(1317652676, 100), ...], host="example_prod_1")
+Web server 2: api.metric('page.views', [(1317652676, 500), ...], host="example_prod_2")
+```
+
+Datadog recommends adding the tag `domain:example.com` and leaving off the hostname (the Datadog API will determine the hostname automatically):
+
+```
+Web server 1: api.metric('page.views', [(1317652676, 100), ...], tags=['domain:example.com'])
+Web server 2: api.metric('page.views', [(1317652676, 500), ...], tags=['domain:example.com'])
+```
+
+With the `domain:example.com` tag, the page views can be summed across hosts:
+
+```
+sum:page.views{domain:example.com}
+```
+
+To get a breakdown by host, use:
+
+```
+sum:page.views{domain:example.com} by {host}
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### DogStatsD
+
+Add tags to any metric, event, or service check you send to [DogStatsD][75]. For example, compare the performance of two algorithms by tagging a timer metric with the algorithm version:
+
+```python
+
+@statsd.timed('algorithm.run_time', tags=['algorithm:one'])
+def algorithm_one():
+    # Do fancy things here ...
+
+@statsd.timed('algorithm.run_time', tags=['algorithm:two'])
+def algorithm_two():
+    # Do fancy things (maybe faster?) here ...
+```
+
+Note that tagging is a [Datadog-specific extension][76] to StatsD.
+
+### Integration Inheritance
+
+The most efficient method for assigning tags is to rely on your integrations. Tags assigned to your Amazon Web Services instances, Chef recipes, and more are all automatically assigned to the hosts and metrics when they are brought into Datadog.
+
+The following [integration][1] sources create tags automatically in Datadog:
+
+| Integration                             | Source                                                                                                                                                                                                                                                                                                                                        |
+|-----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [Amazon CloudFront][2]                  | Distribution                                                                                                                                                                                                                                                                                                                                  |
 | [Amazon EC2][3]                         | AMI, Customer Gateway, DHCP Option, EBS Volume, Instance, Internet Gateway, Network ACL, Network Interface, Reserved Instance, Reserved Instance Listing, Route Table , Security Group - EC2 Classic, Security Group - VPC, Snapshot, Spot Batch, Spot Instance Request, Spot Instances, Subnet, Virtual Private Gateway, VPC, VPN Connection |
 | [Amazon Elastic File System][4]         | Filesystem                                                                                                                                                                                                                                                                                                                                    |
 | [Amazon Kinesis][5]                     | Stream State                                                                                                                                                                                                                                                                                                                                  |
-| [Amazon Machine Learning][6]            | BatchPrediction, DataSource, Evaluation  , MLModel                                                                                                                                                                                                                                                                                            |
-| [Amazon Route 53][7]                    | Domains, Healthchecks  , HostedZone                                                                                                                                                                                                                                                                                                           |
+| [Amazon Machine Learning][6]            | BatchPrediction, DataSource, Evaluation, MLModel                                                                                                                                                                                                                                                                                              |
+| [Amazon Route 53][7]                    | Domains, Healthchecks, HostedZone                                                                                                                                                                                                                                                                                                             |
 | [Amazon WorkSpaces][8]                  | WorkSpaces                                                                                                                                                                                                                                                                                                                                    |
 | [AWS CloudTrail][9]                     | CloudTrail                                                                                                                                                                                                                                                                                                                                    |
 | [AWS Elastic Load Balancing][10]        | Loadbalancer, TargetGroups                                                                                                                                                                                                                                                                                                                    |
@@ -39,14 +212,14 @@ The following [integrations][1] sources create tags automatically in Datadog:
 | [AWS SQS][11]                           | Queue Name                                                                                                                                                                                                                                                                                                                                    |
 | [Apache][12]                            | Apache Host and Port                                                                                                                                                                                                                                                                                                                          |
 | [Azure][13]                             | Tenant Name, Status, Tags, Subscription ID and Name, Availability Zone in common with AWS tag after contacting Datadog support                                                                                                                                                                                                                |
-| [BTRFS][14]                             | Usage & Replication Type                                                                                                                                                                                                                                                                                                                      |
+| [BTRFS][14]                             | Usage and Replication Type                                                                                                                                                                                                                                                                                                                    |
 | [Chef][15]                              | Chef Roles                                                                                                                                                                                                                                                                                                                                    |
-| [Consul][16]                            | Previous and Current Consul Leaders and Followers, Consul Datacenter,  Service Name, Service ID                                                                                                                                                                                                                                               |
+| [Consul][16]                            | Previous and Current Consul Leaders and Followers, Consul Datacenter, Service  Name, Service ID                                                                                                                                                                                                                                               |
 | [CouchDB][17]                           | Database Name,  Instance Name                                                                                                                                                                                                                                                                                                                 |
 | [CouchBase][18]                         | CouchBase Tags,  Instance Name                                                                                                                                                                                                                                                                                                                |
 | [Docker][19]                            | [Docker][20], [Kubernetes][21], [ECS][22], [Swarm, Mesos, Nomad and Rancher][20], collect more tag with [the Docker Agent tags collection options][23]                                                                                                                                                                                        |
 | [Dyn][24]                               | Zone, Record Type                                                                                                                                                                                                                                                                                                                             |
-| [Elasticsearch][25]                     | Cluster Name,  Host Name, Port Number                                                                                                                                                                                                                                                                                                         |
+| [Elasticsearch][25]                     | Cluster Name, Host Name, Port Number                                                                                                                                                                                                                                                                                                          |
 | [Etcd][26]                              | State Leader or Follower                                                                                                                                                                                                                                                                                                                      |
 | [Fluentd][27]                           | Host Name, Port Number                                                                                                                                                                                                                                                                                                                        |
 | [Google App Engine][28]                 | Project Name, Version ID, Task Queue                                                                                                                                                                                                                                                                                                          |
@@ -61,16 +234,16 @@ The following [integrations][1] sources create tags automatically in Datadog:
 | [Kafka][37]                             | Topic                                                                                                                                                                                                                                                                                                                                         |
 | [Kubernetes][38]                        | Minion Name, Namespace, Replication Controller, Labels, Container Alias                                                                                                                                                                                                                                                                       |
 | [Marathon][39]                          | URL                                                                                                                                                                                                                                                                                                                                           |
-| [Memcached][40]                         | Host, Port,  Request, Cache Hit or Miss                                                                                                                                                                                                                                                                                                       |
+| [Memcached][40]                         | Host, Port, Request, Cache Hit or Miss                                                                                                                                                                                                                                                                                                        |
 | [Mesos][41]                             | Role, URL, PID, Slave or Master Role, Node, Cluster,                                                                                                                                                                                                                                                                                          |
 | [Mongo][42]                             | Server Name                                                                                                                                                                                                                                                                                                                                   |
-| [OpenStack][43]                         | Network ID, Network Name, Hypervisor Name, ID, and Type, Tenant ID,  Availability Zone                                                                                                                                                                                                                                                        |
+| [OpenStack][43]                         | Network ID, Network Name, Hypervisor Name, ID, and Type, Tenant ID, Availability Zone                                                                                                                                                                                                                                                         |
 | [PHP FPM][44]                           | Pool Name                                                                                                                                                                                                                                                                                                                                     |
 | [Pivotal][45]                           | Current State, Owner, Labels, Requester, Story Type                                                                                                                                                                                                                                                                                           |
 | [Postfix ][46]                          | Queue, Instance                                                                                                                                                                                                                                                                                                                               |
 | [Puppet][47]                            | Puppet Tags                                                                                                                                                                                                                                                                                                                                   |
 | [RabbitMQ][48]                          | Node, Queue Name, Vhost, Policy, Host                                                                                                                                                                                                                                                                                                         |
-| [Redis][49]                             | Host, Port,  Slave or Master                                                                                                                                                                                                                                                                                                                  |
+| [Redis][49]                             | Host, Port, Slave or Master                                                                                                                                                                                                                                                                                                                   |
 | [RiakCS][50]                            | Aggregation Key                                                                                                                                                                                                                                                                                                                               |
 | [SNMP][51]                              | Device IP Address                                                                                                                                                                                                                                                                                                                             |
 | [Supervisord][52]                       | Server Name, Process Name                                                                                                                                                                                                                                                                                                                     |
@@ -80,43 +253,6 @@ The following [integrations][1] sources create tags automatically in Datadog:
 | [VSphere][56]                           | Host, Datacenter, Server, Instance                                                                                                                                                                                                                                                                                                            |
 | [Win32 Events][57]                      | Event ID                                                                                                                                                                                                                                                                                                                                      |
 | [Windows Services][58]                  | Service Name                                                                                                                                                                                                                                                                                                                                  |
-
-### Assigning tags using the configuration files
-[The Datadog integrations][1] are all configured via the yaml configuration files located in the **conf.d** directory in your Agent install. For more about where to look for your configuration files, refer [to this article][59].
-
-Define tags in the configuration file for the overall Agent as well as for each integration.
-In YAML files, there is a tag dictionary with a list of tags you want assigned at that level. Any tag you assign to the Agent is applied to every integration on that Agent's host.
-
-Dictionaries with lists of values have two different yet functionally equivalent forms:
-
-    tags: key_first_tag:value_1, key_second_tag:value_2, key_third_tag:value_3
-
-or
-
-    tags:
-      - key_first_tag:value_1
-      - key_second_tag:value_2
-      - key_third_tag:value_3
-
-You see both forms in the yaml configuration files, but for the `datadog.yaml` init file only the first form is valid.
-
-Each tag can be anything you like but you have the best success with tagging if your tags are `key:value` pairs. Keys could represent the role, or function, or region, or application and the value is the instance of that role, function, region, or application. Here are some examples of good tags:
-
-    region:east
-    region:nw
-    application:database
-    database:primary
-    role:sobotka
-
-The reason why you should use key value pairs instead of values becomes apparent when you start using the tags to filter and group metrics and machines. That said, you are not required to use key value pairs and simple values are valid.
-
-### Assigning host tags in the UI
-
-You can also assign tags to hosts, but not to [integration][1] in the UI. To assign tags in the UI, start by going to the Infrastructure List page. Click on any host and then click the Update Host Tags button. In the host overlay that appears, click Edit Tags and make the changes you wish.
-
-### Assigning host tags using the API
-
-You can also assign tags to hosts, but not to [integration][1] using the API. The endpoints you want to work with are /tags/hosts and depending on whether you PUT, POST, or DELETE you update, add, or delete tags for the chosen host. For more details on using the Tags endpoints in the API, [review this document][60]
 
 ## Further Reading
 
@@ -180,6 +316,26 @@ You can also assign tags to hosts, but not to [integration][1] using the API. Th
 [56]: /integrations/vmware
 [57]: /integrations/wmi
 [58]: /integrations/winservices
-[59]: https://app.datadoghq.com/account/settings#agent
-[60]: /api#tags
-[61]: /tagging/#tags-best-practices
+[59]: /agent/faq/agent-configuration-files/
+[60]: /integrations/amazon_web_services/
+[61]: /tagging/#defining-tags
+[62]: /graphing/infrastructure/
+[63]: /monitors/manage_monitor/
+[64]: /graphing/metrics/distributions/
+[65]: /api/
+[66]: /api/?lang=python#post-a-check-run
+[67]: /api/?lang=python#post-an-event
+[68]: /api/?lang=python#aws
+[69]: /api/?lang=python#post-timeseries-points
+[70]: /api/?lang=python#create-a-monitor
+[71]: /api/?lang=python#edit-a-monitor
+[72]: /api/?lang=python#add-tags-to-a-host
+[73]: /api/?lang=python#update-host-tags
+[74]: /api/?lang=python#send-traces
+[75]: /developers/dogstatsd/
+[76]: /libraries/
+[77]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
+[78]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go
+[79]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go
+[80]: /agent/basic_agent_usage/docker/#environment-variables
+[81]: /graphing/infrastructure/hostmap/
