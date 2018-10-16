@@ -47,9 +47,17 @@ Datadog’s integration processing Pipelines are available for the `source` tag 
 | [Redis][47]                      | [Datadog integration YAML file][48]              | `redis`         |
 | [AWS Redshift][49]               | [AWS Management Console][4]                      | `redshift`      |
 | [Ruby][50]                       | [Custom Datadog YAML file][51]                   | `ruby`          |
+| [AWS S3][52]                     | [AWS Management Console][4]                      | `s3`            |
+| [AWS SNS][53]                    | [AWS Management Console][4]                      | `sns`           |
+| [Stunnel][54]                    | [Custom Datadog YAML file][55]                   | `stunnel`       |
+| [Tomcat][56]                     | [Datadog integration YAML file][57]              | `tomcat`        |
+| [uwsgi][58]                      | [Custom Datadog YAML file][59]                   | `uwsgi`         |
+| [Varnish][60]                    | [Custom Datadog YAML file][61]                   | `varnish`       |
+| [AWS VPC][62]                    | [AWS Management Console][4]                      | `vpc`           |
+| [ZooKeeper][63]                  | [Datadog integration YAML file][64]              | `zookeeper`     |
 
 
-**Note**: Integration Pipelines implement the [Datadog Attribute Naming Convention][99].
+**Note**: Integration Pipelines implement the [Datadog Attribute Naming Convention][65].
 
 ## Further Reading
 
@@ -106,5 +114,17 @@ Datadog’s integration processing Pipelines are available for the `source` tag 
 [49]: /integrations/amazon_redshift/#log-collection
 [50]: /logs/log_collection/ruby/
 [51]: /logs/log_collection/ruby/#configure-your-datadog-agent
-
-[99]: /logs/processing/attributes_naming_convention/
+[52]: /integrations/amazon_s3/#log-collection
+[53]: /integrations/amazon_sns/#log-collection
+[54]: /integrations/stunnel/#log-collection
+[55]: /integrations/stunnel/#configuration
+[56]: /integrations/tomcat/#log-collection
+[57]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/conf.yaml.example
+[58]: /integrations/uwsgi/#log-collection
+[59]: /integrations/uwsgi/#configuration
+[60]: /integrations/varnish/#log-collection
+[61]: https://github.com/DataDog/integrations-core/blob/master/varnish/datadog_checks/varnish/data/conf.yaml.example
+[62]: /integrations/amazon_vpc/#log-collection
+[63]: /integrations/zk/#log-collection
+[64]: https://github.com/DataDog/integrations-core/blob/master/zk/datadog_checks/zk/data/conf.yaml.example
+[65]: /logs/processing/attributes_naming_convention/
