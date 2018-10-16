@@ -47,9 +47,9 @@ Below are Datadog's tagging restrictions, requirements, and suggestions:
     * Periods
     * Slashes
 
-2. Tags can be **up to 200 characters** long and support unicode.
+2. Tags can be **up to 200 characters** long and support Unicode.
 3. Tags are converted to lowercase.
-4. A tag can be in the format `value` or `<KEY>:<VALUE>`. For optimal functionality, **we recommend constructing tags in the `<KEY>:<VALUE>` format.** Commonly used tag keys are `env`, `instance`, and `name`. The key is always what precedes the first colon of the global tag definition, for example:
+4. A tag can be in the format `value` or `<KEY>:<VALUE>`. For optimal functionality, **we recommend constructing tags in the `<KEY>:<VALUE>` format.** Commonly used tag keys are `env`, `instance`, and `name`. The key always precedes the first colon of the global tag definition, for example:
     
     | Tag                | Key           | Value          |
     |--------------------|---------------|----------------|
@@ -58,7 +58,7 @@ Below are Datadog's tagging restrictions, requirements, and suggestions:
 
 5.  **Reserved tag keys** `host`, `device`, `source`, and `service` cannot be used in the standard way.
 
-6. Tags shouldn't originate from unbounded sources, such as EPOCH timestamps, user IDs, or request IDs. Otherwise, it may infinitely [increase the number of metrics][29] for your organization and impact your billing.
+6. Tags shouldn't originate from unbounded sources, such as EPOCH timestamps, user IDs, or request IDs. Doing so may infinitely [increase the number of metrics][29] for your organization and impact your billing.
 
 ## Assigning Tags
 
@@ -75,7 +75,7 @@ Tags may be [assigned][21] using any (or all) of the following methods:
 
 ## Using Tags
 
-After you have [assigned tags][21] at the host and [integration][11] level, start using them to filter and group your metrics, traces, and logs. Tags are used in the following areas of your Datadog platform, refer to the dedicated [Using Tags documentation][1] to learn more:
+After you have [assigned tags][21] at the host and [integration][11] level, start using them to filter and group your metrics, traces, and logs. Tags are used in the following areas of your Datadog platform; refer to the dedicated [Using Tags documentation][1] to learn more:
 
 | Area                 | Use Tags to                                                                                      |
 |----------------------|--------------------------------------------------------------------------------------------------|
@@ -85,7 +85,7 @@ After you have [assigned tags][21] at the host and [integration][11] level, star
 | [Monitors][15]       | Manage monitors, create monitors, or manage downtime                                             |
 | [Metrics][16]        | Filter and group with the metric explorer                                                        |
 | [Integrations][17]   | Optionally limit metrics for AWS, Google Cloud, and Azure                                        |
-| [APM][18]            | Filter trace search & analytics or jump to other areas with the service map                      |
+| [APM][18]            | Filter trace search and analytics or jump to other areas with the service map                    |
 | [Notebooks][19]      | Filter and group metrics on graphs                                                               |
 | [Logs][20]           | Filter logs search, analytics, patterns, live tail, and pipelines                                |
 | [Developers][28]     | Pull information or setup different areas in the UI with the API                                 |
