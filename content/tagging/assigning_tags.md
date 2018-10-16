@@ -13,16 +13,16 @@ further_reading:
   text: Learn how to use tags in Datadog
 ---
 
-Tagging is used throughout Datadog to query the machines and metrics you monitor. Without the ability to assign and filter based on tags, finding problems in your environment and narrowing them down enough to discover the true causes would be extremely difficult. Learn how to [define tags][61] in Datadog before going further.
+Tagging is used throughout Datadog to query the machines and metrics you monitor. Without the ability to assign and filter based on tags, finding problems in your environment and narrowing them down enough to discover the true causes could be difficult. Learn how to [define tags][61] in Datadog before going further.
 
 ## Where to assign tags
-There are several places tags can be assigned: using configuration files, [environment variables][80], the UI, [API][65], [DogStatsD][75], and inheriting from the [integrations][1]. It is recommended to rely on the configuration files and integration inheritance for most of your tagging needs.
+There are several places tags can be assigned: configuration files, [environment variables][80], the UI, [API][65], [DogStatsD][75], and inheriting from the [integrations][1]. It is recommended that you use configuration files and integration inheritance for most of your tagging needs.
 
 ### Configuration Files
 
 Configure the host tags submitted by the Agent inside `datadog.yaml`. The tags for the [integrations][1] installed with the Agent are configured via YAML files located in the **conf.d** directory of the Agent install. To locate the configuration files, refer to [the Agent configuration files FAQ][59].
 
-In YAML files, use a tag dictionary with a list of tags you want assigned at that level. Any tag you assign to the Agent is applied to every integration on that Agent's host and so to all their corresponding metrics, traces, and logs.
+In YAML files, use a tag dictionary with a list of tags you want assigned at that level. Any tag you assign to the Agent is applied to every integration on that Agent's host, as well as to all its corresponding metrics, traces, and logs.
 
 Tag dictionaries have two different yet functionally equivalent forms:
 
@@ -39,11 +39,11 @@ tags:
     - <KEY_3>:<VALUE_3>
 ```
 
-It is recommended you assign tags as `<KEY>:<VALUE>` pairs but simple tags are also accepted. See [defining tags][61] for more details.
+It is recommended you assign tags as `<KEY>:<VALUE>` pairs, but simple tags are also accepted. See [defining tags][61] for more details.
 
 ### Environment Variables
 
-When installing the containerized Datadog Agent, host tags can be set using the environment variable `DD_TAGS`. We automatically collect common tags from [Docker][77], [Kubernetes][78], [ECS][79], [Swarm, Mesos, Nomad and Rancher][77]. To extract even more tags, use the following options:
+When installing the containerized Datadog Agent, host tags can be set using the environment variable `DD_TAGS`. We automatically collect common tags from [Docker][77], [Kubernetes][78], [ECS][79], [Swarm, Mesos, Nomad, and Rancher][77]. To extract even more tags, use the following options:
 
 | Environment Variable               | Description                                    |
 |------------------------------------|------------------------------------------------|
@@ -58,14 +58,14 @@ DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app","release":"helm_release"}'
 DD_DOCKER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 ```
 
-Either define the variables in your custom `datadog.yaml`, or set them as JSON maps in these envvars. The map key is the source (`label/envvar`) name, and the map value is the Datadog tag name.
+Either define the variables in your custom `datadog.yaml`, or set them as JSON maps in these environment variables. The map key is the source (`label/envvar`) name, and the map value is the Datadog tag name.
 
 ### UI
 
 {{< tabs >}}
 {{% tab "Host Map" %}}
 
-Assign host tags in the UI via the [Host Map page][81]. Click on any hexagon (host) to show the host overlay on the bottom of the page. Then under the *User* section, click the **Edit Tags** button. Enter the tags as a comma separated list then click **Save Tags**.
+Assign host tags in the UI via the [Host Map page][81]. Click on any hexagon (host) to show the host overlay on the bottom of the page. Then, under the *User* section, click the **Edit Tags** button. Enter the tags as a comma separated list, then click **Save Tags**.
 
 {{< img src="tagging/assigning_tags/hostmapuitags.png" alt="Host Map Tags" responsive="true" style="width:80%;">}}
 
@@ -74,7 +74,7 @@ Assign host tags in the UI via the [Host Map page][81]. Click on any hexagon (ho
 {{% /tab %}}
 {{% tab "Infrastructure List" %}}
 
-Assign host tags in the UI via the [Infrastructure List page][62]. Click on any host to show the host overlay on the right of the page. Then under the *User* section, click the **Edit Tags** button. Enter the tags as a comma separated list then click **Save Tags**.
+Assign host tags in the UI via the [Infrastructure List page][62]. Click on any host to show the host overlay on the right of the page. Then, under the *User* section, click the **Edit Tags** button. Enter the tags as a comma separated list, then click **Save Tags**.
 
 {{< img src="tagging/assigning_tags/hostuitags.png" alt="Infrastructure List Tags" responsive="true" style="width:80%;">}}
 
@@ -152,7 +152,7 @@ Web server 1: api.metric('page.views', [(1317652676, 100), ...], host="example_p
 Web server 2: api.metric('page.views', [(1317652676, 500), ...], host="example_prod_2")
 ```
 
-We recommend adding the tag `domain:example.com` and leaving off the hostname (the Datadog API will determine the hostname automatically):
+Datadog recommends adding the tag `domain:example.com` and leaving off the hostname (the Datadog API will determine the hostname automatically):
 
 ```
 Web server 1: api.metric('page.views', [(1317652676, 100), ...], tags=['domain:example.com'])
@@ -203,7 +203,7 @@ The following [integration][1] sources create tags automatically in Datadog:
 | [Amazon EC2][3]                         | AMI, Customer Gateway, DHCP Option, EBS Volume, Instance, Internet Gateway, Network ACL, Network Interface, Reserved Instance, Reserved Instance Listing, Route Table , Security Group - EC2 Classic, Security Group - VPC, Snapshot, Spot Batch, Spot Instance Request, Spot Instances, Subnet, Virtual Private Gateway, VPC, VPN Connection |
 | [Amazon Elastic File System][4]         | Filesystem                                                                                                                                                                                                                                                                                                                                    |
 | [Amazon Kinesis][5]                     | Stream State                                                                                                                                                                                                                                                                                                                                  |
-| [Amazon Machine Learning][6]            | BatchPrediction, DataSource, Evaluation  , MLModel                                                                                                                                                                                                                                                                                            |
+| [Amazon Machine Learning][6]            | BatchPrediction, DataSource, Evaluation, MLModel                                                                                                                                                                                                                                                                                              |
 | [Amazon Route 53][7]                    | Domains, Healthchecks, HostedZone                                                                                                                                                                                                                                                                                                             |
 | [Amazon WorkSpaces][8]                  | WorkSpaces                                                                                                                                                                                                                                                                                                                                    |
 | [AWS CloudTrail][9]                     | CloudTrail                                                                                                                                                                                                                                                                                                                                    |
@@ -212,9 +212,9 @@ The following [integration][1] sources create tags automatically in Datadog:
 | [AWS SQS][11]                           | Queue Name                                                                                                                                                                                                                                                                                                                                    |
 | [Apache][12]                            | Apache Host and Port                                                                                                                                                                                                                                                                                                                          |
 | [Azure][13]                             | Tenant Name, Status, Tags, Subscription ID and Name, Availability Zone in common with AWS tag after contacting Datadog support                                                                                                                                                                                                                |
-| [BTRFS][14]                             | Usage & Replication Type                                                                                                                                                                                                                                                                                                                      |
+| [BTRFS][14]                             | Usage and Replication Type                                                                                                                                                                                                                                                                                                                    |
 | [Chef][15]                              | Chef Roles                                                                                                                                                                                                                                                                                                                                    |
-| [Consul][16]                            | Previous and Current Consul Leaders and Followers, Consul Datacenter,  Service Name, Service ID                                                                                                                                                                                                                                               |
+| [Consul][16]                            | Previous and Current Consul Leaders and Followers, Consul Datacenter, Service  Name, Service ID                                                                                                                                                                                                                                               |
 | [CouchDB][17]                           | Database Name,  Instance Name                                                                                                                                                                                                                                                                                                                 |
 | [CouchBase][18]                         | CouchBase Tags,  Instance Name                                                                                                                                                                                                                                                                                                                |
 | [Docker][19]                            | [Docker][20], [Kubernetes][21], [ECS][22], [Swarm, Mesos, Nomad and Rancher][20], collect more tag with [the Docker Agent tags collection options][23]                                                                                                                                                                                        |
