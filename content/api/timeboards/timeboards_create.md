@@ -17,8 +17,12 @@ external_redirect: /api/#create-a-timeboard
     * **`title`** [*required*]:  
         The name of the graph.
     * **`definition`** [*optional*, *default*=**None**]:  
-        The graph definition. Example:  
-        `{"requests": [{"q": "system.cpu.idle{*} by {host}"}`
+        * `events` [*optional*]:  
+          The query for event overlay
+        * `requests` [*optional*]:  
+          The metric query, line type, style, conditional formats, and aggregator
+        * `viz` [*optional*, *default*=**timeseries**]:  
+          The type of visualization
 
 * **`template_variables`** [*optional*, *default*=**None**]:  
     A list of template variables for using Dashboard templating. Template variable definitions follow this form:
