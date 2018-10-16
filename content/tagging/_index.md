@@ -61,8 +61,7 @@ Below are Datadog's tagging restrictions, requirements, and suggestions:
 6. Tags shouldn't originate from unbounded sources, such as EPOCH timestamps, user IDs, or request IDs. Doing so may infinitely [increase the number of metrics][29] for your organization and impact your billing.
 
 ## Assigning Tags
-
-Tags may be [assigned][21] using any (or all) of the following methods:
+Tags may be assigned using any (or all) of the following methods. Refer to the dedicated [Assigning Tags documentation][21] to learn more:
 
 | Method                        | Assign tags                                                                                  |
 |-------------------------------|----------------------------------------------------------------------------------------------|
@@ -75,7 +74,7 @@ Tags may be [assigned][21] using any (or all) of the following methods:
 
 ## Using Tags
 
-After you have [assigned tags][21] at the host and [integration][11] level, start using them to filter and group your metrics, traces, and logs. Tags are used in the following areas of your Datadog platform; refer to the dedicated [Using Tags documentation][1] to learn more:
+After you have [assigned tags][21] at the host and [integration][11] level, start using them to filter and group your metrics, traces, and logs. Tags are used in the following areas of your Datadog platform. Refer to the dedicated [Using Tags documentation][1] to learn more:
 
 | Area                 | Use Tags to                                                                                      |
 |----------------------|--------------------------------------------------------------------------------------------------|
