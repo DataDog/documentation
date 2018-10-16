@@ -16,7 +16,7 @@ After [assigning tags][1], start using them to filter and group your data in you
 
 ## Events
 
-The [Events Stream][2] shows all the events that have occurred in your environment over the time period specified. Use tags to filter down the event list and focus on sub-set of events. Enter `tags:` followed by a tag to see all the events that come from a host or an [integration][3] with that tag. The example below is used to search for the tag `service:coffee-house` using `tags:service:coffee-house`. To search multiple tags, separate each tag by a comma - `tags:service:coffee-house,host:coffeehouseprod`.
+The [Events Stream][2] shows all the events that have occurred in your environment over the time period specified. Use tags to filter down the event list and focus on a subset of events. Enter `tags:` followed by a tag to see all the events that come from a host or an [integration][3] with that tag. The example below is used to search for the tag `service:coffee-house` using `tags:service:coffee-house`. To search multiple tags, separate each tag by a comma: `tags:service:coffee-house,host:coffeehouseprod`.
 
 {{< img src="tagging/using_tags/eventtags.png" alt="Events List and Tags" responsive="true" style="width:80%;">}}
 
@@ -33,7 +33,7 @@ To create an aggregated group using tags, enter the key part of the tag in the *
 
 {{< img src="tagging/using_tags/dashboardtags.png" alt="Tags in Dashboards avg by textbox" responsive="true" style="width:80%;">}}
 
-Also tags can be used to overlay events on the dashboard. This works the same way as in the [Events Stream][2].
+Tags can also be used to overlay events on the dashboard. This works the same way as in the [Events Stream][2].
 Enter `tags:` followed by the tag. The matching events are overlaid as vertical bars on the graph. The example below uses `tags:service:coffee-house`.
 
 {{< img src="tagging/using_tags/dashboardeventtags.png" alt="Event Overlays in Dashboards" responsive="true" style="width:80%;">}}
@@ -49,26 +49,26 @@ Use [template variables][5] to save time switching the **from** tag on graphs in
 {{% /tab %}}
 {{% tab "Examples" %}}
 
-Here is an example of tags using the time-series chart editor. For the first screenshot, no tags have been applied, and the average CPU across all hosts is displayed:
+Here is an example of tags using the timeseries chart editor. For the first screenshot, no tags have been applied, and the average CPU usage across all hosts is displayed:
 
 {{< img src="tagging/using_tags/Tags_1.png" alt="Tags_1" responsive="true" style="width:75%;">}}
 
-Next, the editor is updated to include a tag (`region:eastus`) in the **from** textbox that enables Datadog to look at CPU across the US East Region. The `region` tag is used as an example here, but you could use any arbitrary tag sent to your Datadog Platform, including `application`, `service`, `environment`, etc.
+Next, the editor is updated to include a tag (`region:eastus`) in the **from** textbox that enables Datadog to look at CPU usage across the US East region. The `region` tag is used as an example here, but you could use any arbitrary tag sent to your Datadog platform, including `application`, `service`, `environment`, etc.
 
 {{< img src="tagging/using_tags/Tags_2.png" alt="Tags_2" responsive="true" style="width:75%;">}}
 
-Finally, the second empty field (the **avg by** textbox) is used to show an individual timeseries line for each `host`. Now server CPU is displayed for individual hosts running in the US East Region.
+Finally, the second empty field (the **avg by** textbox) is used to show an individual timeseries line for each `host`. Server CPU is displayed for individual hosts running in the US East region.
 
 {{< img src="tagging/using_tags/Tags_3.png" alt="Tags_3" responsive="true" style="width:75%;">}}
 
-If needed, add additional tags to narrow down the scope even further - for example, hosts in `region:eastus` and `env:production`. Tags can be used throughout Datadog and be applied to all core elements (metrics, traces, and logs).
+If needed, add additional tags to narrow down the scope even further—for example, hosts in `region:eastus` and `env:production`. Tags can be used throughout Datadog and be applied to all core elements (metrics, traces, and logs).
 
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Infrastructure
 
-To filter the [Host Map][6], [Infrastructure List][7], [Containers][8], and [Processes][9] enter a tag in the **Filter by** textbox at the top of the page. Also, hosts or containers can be grouped by tag key using the **Group by** textbox. So, if you enter `service` in the group box, you see each service as a group heading. 
+To filter the [Host Map][6], [Infrastructure List][7], [Containers][8], and [Processes][9], enter a tag in the **Filter by** textbox at the top of the page. Hosts and containers can be grouped by tag key using the **Group by** textbox. If you enter `service` in the group box, you see each service as a group heading. 
 
 {{< tabs >}}
 {{% tab "Host Map" %}}
@@ -109,7 +109,7 @@ Here are the filter and group by textboxes on the Live Processes page:
 {{< tabs >}}
 {{% tab "Manage Monitors" %}}
 
-To filter monitors by [assigned tags][1], use the search bar or facet checkboxes. The search bar format is `tag:<KEY>:<VALUE>`, for example `tag:service:coffee-house`. **Note** monitor tags are different and separate from metric tags.
+To filter monitors by [assigned tags][1], use the search bar or facet checkboxes. The search bar format is `tag:<KEY>:<VALUE>`, for example `tag:service:coffee-house`. **Note**: monitor tags are different and separate from metric tags.
 
 {{< img src="tagging/using_tags/managemonitorstags.png" alt="Manage Monitors Tags" responsive="true" style="width:80%;">}}
 
@@ -157,7 +157,7 @@ Some integrations such as [AWS][13], [Google Cloud][14], and [Azure][15] allow y
 
 This defines a filter used while collecting metrics. Wildcards such as `?` (for single characters) and `*` (for multiple characters) can also be used. Only hosts that match one of the defined tags are imported into Datadog. The rest are ignored. Hosts matching a given tag can also be excluded by adding `!` before the tag.
 
-Example - `datadog:monitored,env:production,instance-type:c1.*,!region:us-east-1`
+Example: `datadog:monitored,env:production,instance-type:c1.*,!region:us-east-1`
 
 ## APM
 
