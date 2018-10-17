@@ -23,7 +23,7 @@ further_reading:
 
 ## Overview 
 
-To log from your NodeJS application, we recommends to use [Winston][1] - as you'll get all the features you need to build up your logging strategy. 
+To log from your NodeJS application, we recommend using [Winston][1] - as you'll get all the features you need to build up your logging strategy. 
 
 We also strongly encourage you to setup your logging libraries to produce your logs in JSON format to avoid sustaning [custom parsing rules][2].
 
