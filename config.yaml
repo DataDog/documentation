@@ -479,6 +479,11 @@ languages:
           url: "monitors/monitor_types/process/"
           weight: 420
           parent: customnav_monitornav_monitor_types
+        - identifier: customnav_monitortypenav_watchdog
+          name: "Watchdog"
+          url: "monitors/monitor_types/watchdog/"
+          weight: 430
+          parent: customnav_monitornav_monitor_types
         - identifier: customnav_monitornav_manage_monitor
           name: "Manage Monitor"
           url: "monitors/manage_monitor/"
