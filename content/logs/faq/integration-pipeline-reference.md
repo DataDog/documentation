@@ -14,7 +14,7 @@ further_reading:
   text: Learn how to explore your logs
 ---
 
-Datadog’s integration processing Pipelines are available for the `source` tag value (see the table below) when an integration is setup to collect logs. For integrations with a Datadog `conf.yaml` file, the logs configuration parameter `source: <ID>` **must match** the value listed next to the integration to automatically enable the integration Pipeline:
+Datadog’s integration processing Pipelines are available for the `source` tag value (see the table below) when an integration is setup to collect logs. For integrations with a Datadog `conf.yaml` file, the logs configuration parameter `source: <ID>` **must match** the value listed next to the integration to automatically enable the corresponding [integration Pipeline][66]:
 
 | Source                           | Setup Location                                   | Source ID       |
 |----------------------------------|--------------------------------------------------|-----------------|
@@ -128,3 +128,4 @@ Datadog’s integration processing Pipelines are available for the `source` tag 
 [63]: /integrations/zk/#log-collection
 [64]: https://github.com/DataDog/integrations-core/blob/master/zk/datadog_checks/zk/data/conf.yaml.example
 [65]: /logs/processing/attributes_naming_convention/
+[66]: /logs/processing/pipelines/#integration-pipelines
