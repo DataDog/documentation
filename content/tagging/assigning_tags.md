@@ -65,7 +65,7 @@ Either define the variables in your custom `datadog.yaml`, or set them as JSON m
 {{< tabs >}}
 {{% tab "Host Map" %}}
 
-Assign host tags in the UI via the [Host Map page][81]. Click on any hexagon (host) to show the host overlay on the bottom of the page. Then, under the *User* section, click the **Edit Tags** button. Enter the tags as a comma separated list, then click **Save Tags**.
+Assign host tags in the UI via the [Host Map page][81]. Click on any hexagon (host) to show the host overlay on the bottom of the page. Then, under the *User* section, click the **Edit Tags** button. Enter the tags as a comma separated list, then click **Save Tags**. Note: Changes to metric tags made via the UI may take up to 30 minutes to apply.
 
 {{< img src="tagging/assigning_tags/hostmapuitags.png" alt="Host Map Tags" responsive="true" style="width:80%;">}}
 
@@ -74,7 +74,7 @@ Assign host tags in the UI via the [Host Map page][81]. Click on any hexagon (ho
 {{% /tab %}}
 {{% tab "Infrastructure List" %}}
 
-Assign host tags in the UI via the [Infrastructure List page][62]. Click on any host to show the host overlay on the right of the page. Then, under the *User* section, click the **Edit Tags** button. Enter the tags as a comma separated list, then click **Save Tags**.
+Assign host tags in the UI via the [Infrastructure List page][62]. Click on any host to show the host overlay on the right of the page. Then, under the *User* section, click the **Edit Tags** button. Enter the tags as a comma separated list, then click **Save Tags**. Note: Changes to metric tags made via the UI may take up to 30 minutes to apply.
 
 {{< img src="tagging/assigning_tags/hostuitags.png" alt="Infrastructure List Tags" responsive="true" style="width:80%;">}}
 
