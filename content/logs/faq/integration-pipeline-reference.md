@@ -14,7 +14,9 @@ further_reading:
   text: Learn how to explore your logs
 ---
 
-Datadog’s integration processing Pipelines are available for the `source` tag value (see the table below) when an integration is setup to collect logs. For integrations with a Datadog `conf.yaml` file, the logs configuration parameter `source: <ID>` **must match** the value listed next to the integration to automatically enable the corresponding [integration Pipeline][66]:
+Datadog’s integration processing Pipelines are available for the `source` tag value (see the table below) when an integration is setup to collect logs. For integrations with a Datadog `conf.yaml` file, the logs configuration parameter `source: <ID>` **must match** the value listed next to the integration to automatically enable the corresponding [integration Pipeline][66].
+
+**Note**: Integration Pipelines implement the [Datadog Attribute Naming Convention][65].
 
 | Source                           | Setup Location                                   | Source ID       |
 |----------------------------------|--------------------------------------------------|-----------------|
@@ -56,8 +58,6 @@ Datadog’s integration processing Pipelines are available for the `source` tag 
 | [AWS VPC][62]                    | [AWS Management Console][4]                      | `vpc`           |
 | [ZooKeeper][63]                  | [Datadog integration YAML file][64]              | `zookeeper`     |
 
-
-**Note**: Integration Pipelines implement the [Datadog Attribute Naming Convention][65].
 
 ## Further Reading
 
