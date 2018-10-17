@@ -19,9 +19,9 @@ Configure your Datadog-Slack integration directly through Datadog API.
         Your Slack account name.
 
     * **`url`** [*required*]:  
-        Your Slack Service Hook URL. 
-  
-  
+        Your Slack Service Hook URL.
+
+**Note**: **`service_hooks`** are not required in the payload when adding (POST) or updating (PUT) an existing Slack configuration.
 
 * **`channels`** [*required*]:  
     Array of slack channel objects to post to. A slack channel object is composed by:
