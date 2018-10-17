@@ -288,10 +288,34 @@ kind: Pod
 metadata:
   name: apache
   annotations:
-    ad.datadoghq.com/apache.check_names: '["apache","http_check"]'
-    ad.datadoghq.com/apache.init_configs: '[{},{}]'
-    ad.datadoghq.com/apache.instances: '[{"apache_status_url": "http://%%host%%/server-status?auto"},{"name": "My service", "url": "http://%%host%%", timeout: 1}]'
-    ad.datadoghq.com/apache.logs: '[{"source":"apache","service":"webapp"}]'
+    ad.datadoghq.com/apache.check_names: |
+      [
+        "apache",
+        "http_check"
+      ]
+    ad.datadoghq.com/apache.init_configs: |
+      [
+        {},
+        {}
+      ]
+    ad.datadoghq.com/apache.instances: |
+      [
+        {
+          "apache_status_url": "http://%%host%%/server-status?auto"
+        },
+        {
+          "name": "My service",
+          "url": "http://%%host%%",
+          timeout: 1
+        }
+      ]
+    ad.datadoghq.com/apache.logs: |
+      [
+        {
+          "source":"apache",
+          "service":"webapp"
+        }
+      ]
   labels:
     name: apache
 spec:
@@ -318,10 +342,34 @@ spec:
       labels:
         name: apache
       annotations:
-        ad.datadoghq.com/apache.check_names: '["apache","http_check"]'
-        ad.datadoghq.com/apache.init_configs: '[{},{}]'
-        ad.datadoghq.com/apache.instances: '[{"apache_status_url": "http://%%host%%/server-status?auto"},{"name": "My service", "url": "http://%%host%%", timeout: 1}]'
-        ad.datadoghq.com/apache.logs: '[{"source":"apache","service":"webapp"}]'
+        ad.datadoghq.com/apache.check_names: |
+          [
+            "apache",
+            "http_check"
+          ]
+        ad.datadoghq.com/apache.init_configs: |
+          [
+            {},
+            {}
+          ]
+        ad.datadoghq.com/apache.instances: |
+          [
+            {
+              "apache_status_url": "http://%%host%%/server-status?auto"
+            },
+            {
+              "name": "My service",
+              "url": "http://%%host%%",
+              timeout: 1
+            }
+          ]
+        ad.datadoghq.com/apache.logs: |
+          [
+            {
+              "source":"apache",
+              "service":"webapp"
+            }
+          ]
     spec:
       containers:
       - name: apache # use this as the container identifier in your annotations
