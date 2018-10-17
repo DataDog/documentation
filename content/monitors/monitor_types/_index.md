@@ -19,4 +19,5 @@ aliases:
     {{< nextlink href="/monitors/monitor_types/network" >}}Network{{< /nextlink >}}
     {{< nextlink href="/monitors/monitor_types/outlier" >}}Outlier{{< /nextlink >}}
     {{< nextlink href="/monitors/monitor_types/process" >}}Process{{< /nextlink >}}
+    {{< nextlink href="/monitors/monitor_types/watchdog" >}}Watchdog{{< /nextlink >}}
 {{< /whatsnext >}}
