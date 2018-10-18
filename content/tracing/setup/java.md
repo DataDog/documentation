@@ -72,9 +72,7 @@ We officially support the Java JRE 1.7 and higher of both Oracle JDK and OpenJDK
 *Note:* Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Tomcat, Jetty, Websphere, Weblogic, etc.
 Also, frameworks like Spring Boot and Dropwizard inherently work because they use a Servlet compatible embedded application server.
 
-Don't see your desired web frameworks? We're continually adding additional support, [check with the Datadog team][2] to see if we can help.
-
-[2]: /help
+Don't see your desired web frameworks? We're continually adding additional support. [Check with the Datadog team][2] to see if we can help.
 
 #### Networking Framework Compatibility
 
@@ -94,9 +92,7 @@ Don't see your desired web frameworks? We're continually adding additional suppo
 
 **Networking tracing provides:** timing request to response, tags for the request (e.g. response code), error and stacktrace capturing, and distributed tracing.
 
-Don't see your desired networking framework? We're continually adding additional support, [check with the Datadog team][2] to see if we can help.
-
-[2]: /help
+Don't see your desired networking framework? We're continually adding additional support. [Check with the Datadog team][2] to see if we can help.
 
 #### Data Store Compatibility
 
@@ -128,9 +124,7 @@ Don't see your desired networking framework? We're continually adding additional
 
 **Datastore tracing provides:** timing request to response, query info (e.g. a sanitized query string), and error and stacktrace capturing.
 
-Don't see your desired datastores? We're continually adding additional support, [check with the Datadog team][2] to see if we can help.
-
-[2]: /help
+Don't see your desired datastores? We're continually adding additional support. [Check with the Datadog team][2] to see if we can help.
 
 #### Other Framework Compatibility
 
@@ -141,7 +135,7 @@ Don't see your desired datastores? We're continually adding additional support, 
 | Hystrix       | 1.4+     | Fully Supported | N/A               |
 | JSP Rendering | 2.3+     | Fully Supported | N/A               |
 
-Don't see your desired framework? We're continually adding additional support, [check with the Datadog team][2] to see if we can help.
+Don't see your desired framework? We're continually adding additional support. [Check with the Datadog team][2] to see if we can help.
 
 To improve visibility into applications using unsupported frameworks, consider:
 
@@ -149,27 +143,28 @@ To improve visibility into applications using unsupported frameworks, consider:
 * [Submitting a pull request][1] with instrumentation for inclusion in a future release.
 * [Contacting support][2] and submitting a feature request.
 
-[1]: https://github.com/DataDog/documentation#outside-contributors
-[2]: /help
-
 ## Configuration
 
 The tracer is configured using System Properties and Environment Variables as follows:
 
 {{% table responsive="true" %}}
 
-| Config              | System Property        | Environment Variable      | Default            | Description                                                                                                                                                                        |
-| :-----------------  | :--------------------  | :------------------------ | :----------------- | :----------                                                                                                                                                                        |
-| `service.name`      | `dd.service.name`      | `DD_SERVICE_NAME`         | `unnamed-java-app` | The name of a set of processes that do the same job. Used for grouping stats for your application.                                                                                 |
-| `service.mapping`   | `dd.service.mapping`   | `DD_SERVICE_MAPPING`      | `null`             | (Example: `key1:value1,key2:value2`) Dynamically rename services via configuration. Useful for making databases have distinct names across different services.                     |
-| `writer.type`       | `dd.writer.type`       | `DD_WRITER_TYPE`          | `DDAgentWriter`    | Default value sends traces to the Agent. Configuring with `LoggingWriter` instead writes traces out to the console.                                                          |
-| `agent.host`        | `dd.agent.host`        | `DD_AGENT_HOST`           | `localhost`        | Hostname for where to send traces to. If using a containerized environment, configure this to be the host ip.  See the [docker documentation][4] for additional detail.                     |
-| `agent.port`        | `dd.agent.port`        | `DD_AGENT_PORT`           | `8126`             | Port number the Agent is listening on for configured host.                                                                                                                         |
-| `priority.sampling` | `dd.priority.sampling` | `DD_PRIORITY_SAMPLING`    | `false`            | Enable priority sampling to ensure distributed traces are complete or to require sampling of specific traces. See [Distributed tracing](#distributed-tracing) section for details. |
-| `trace.span.tags`   | `dd.trace.span.tags`   | `DD_TRACE_SPAN_TAGS`      | `null`             | (Example: `key1:value1,key2:value2`) A list of default tags to be added to every span. Tags of the same name added directly to a span will overwrite the defaults provided here.   |
-| `trace.header.tags` | `dd.trace.header.tags` | `DD_TRACE_HEADER_TAGS`    | `null`             | (Example: `CASE-insensitive-Header:my-tag-name,User-ID:userId`) A map of header keys to tag names.  Automatically apply header values as tags on traces.                           |
-| `trace.annotations` | `dd.trace.annotations` | `DD_TRACE_ANNOTATIONS`    | ([listed][10]      | (Example: `com.some.Trace;io.other.Trace`) A list of method annotations to treat as `@Trace`.                                                                                      |
-| `trace.methods`     | `dd.trace.methods`     | `DD_TRACE_METHODS`        | `null`             | (Example: `package.ClassName[method1,method2,...];AnonymousClass$1[call]`) List of class/interface and methods to trace.  Similar to adding `@Trace`, but without changing code.   |
+| Config              | System Property        | Environment Variable      | Default            | Description                                                                                                                                                                      |
+| :-----------------  | :--------------------  | :------------------------ | :----------------- | :----------                                                                                                                                                                      |
+| `service.name`      | `dd.service.name`      | `DD_SERVICE_NAME`         | `unnamed-java-app` | The name of a set of processes that do the same job. Used for grouping stats for your application.                                                                               |
+| `service.mapping`   | `dd.service.mapping`   | `DD_SERVICE_MAPPING`      | `null`             | (Example: `key1:value1,key2:value2`) Dynamically rename services via configuration. Useful for making databases have distinct names across different services.                   |
+| `writer.type`       | `dd.writer.type`       | `DD_WRITER_TYPE`          | `DDAgentWriter`    | Default value sends traces to the Agent. Configuring with `LoggingWriter` instead writes traces out to the console.                                                              |
+| `agent.host`        | `dd.agent.host`        | `DD_AGENT_HOST`           | `localhost`        | Hostname for where to send traces to. If using a containerized environment, configure this to be the host IP.  See [Tracing Docker Applications][1] for more details.            |
+| `agent.port`        | `dd.agent.port`        | `DD_AGENT_PORT`           | `8126`             | Port number the Agent is listening on for configured host.                                                                                                                       |
+| `priority.sampling` | `dd.priority.sampling` | `DD_PRIORITY_SAMPLING`    | `false`            | Enable priority sampling to ensure distributed traces are complete or to require sampling of specific traces. See [Distributed Tracing][2] for more details.                     |
+| `trace.span.tags`   | `dd.trace.span.tags`   | `DD_TRACE_SPAN_TAGS`      | `null`             | (Example: `key1:value1,key2:value2`) A list of default tags to be added to every span. Tags of the same name added directly to a span will overwrite the defaults provided here. |
+| `trace.header.tags` | `dd.trace.header.tags` | `DD_TRACE_HEADER_TAGS`    | `null`             | (Example: `CASE-insensitive-Header:my-tag-name,User-ID:userId`) A map of header keys to tag names.  Automatically apply header values as tags on traces.                         |
+| `trace.annotations` | `dd.trace.annotations` | `DD_TRACE_ANNOTATIONS`    | ([listed here][3]) | (Example: `com.some.Trace;io.other.Trace`) A list of method annotations to treat as `@Trace`.                                                                                    |
+| `trace.methods`     | `dd.trace.methods`     | `DD_TRACE_METHODS`        | `null`             | (Example: `package.ClassName[method1,method2,...];AnonymousClass$1[call]`) List of class/interface and methods to trace.  Similar to adding `@Trace`, but without changing code. |
+
+[1]: https://docs.datadoghq.com/tracing/setup/docker/
+[2]: http://localhost:1313/tracing/advanced_usage/?tab=java#distributed-tracing
+[3]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
 {{% /table %}}
 
 **Note**:
@@ -191,7 +186,7 @@ To report a trace to Datadog the following happens:
 
 To see the actual code, documentation, and usage examples for any of the
 libraries and frameworks that Datadog supports, check the full list of auto-
-instrumented components for Java applications [in the integration section](#integrations).
+instrumented components for Java applications in the [Integrations](#integrations) section.
 
 ### Trace Annotation
 
@@ -233,9 +228,7 @@ Java APM has minimal impact on the overhead of an application:
 [1]: https://github.com/DataDog/documentation#outside-contributors
 [2]: /help
 [3]: https://docs.datadoghq.com/tracing/setup
-[4]: https://docs.datadoghq.com/tracing/setup/docker/
 [6]: https://github.com/opentracing/opentracing-java
 [7]: https://docs.datadoghq.com/integrations/java/
 [8]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
 [9]: http://bytebuddy.net/
-[10]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
