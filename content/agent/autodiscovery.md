@@ -432,7 +432,7 @@ LABEL "com.datadoghq.ad.logs"='[{"source": "nginx", "service": "webapp"}]'
 
 ### Supported Template Variables
 
-The following template variables are currently handled by the Agent:
+The following template variables are handled by the Agent:
 
 - Container IP: `host`
   - `%%host%%`: autodetect the network (use `bridge` or, if only one network is attached, this one)

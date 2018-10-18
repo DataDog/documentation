@@ -20,7 +20,7 @@ A custom metric refers to a single, unique combination of a metric name, host, a
 
 Custom metrics generally refer to any metric that you send using statsd, [DogStatsD][1], or through extensions made to the [Datadog Agent][2]. Some [integrations][3] can potentially emit an unlimited number of metrics that can also count as custom, [further details on which standard integrations emit custom metrics][4].
 
-In order to fully leverage the capabilities of the Datadog product through scoping and alerting, you'll probably be using tags. As a consequence, one submitted metric actually leads to **multiple unique tag combinations**- counting towards your custom metrics count.
+In order to fully leverage the capabilities of Datadog through scoping and alerting, you'll probably be using tags. As a consequence, one submitted metric actually leads to **multiple unique tag combinations**- counting towards your custom metrics count.
 
 For example:
 

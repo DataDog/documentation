@@ -85,7 +85,7 @@ For more about using the JSON view, visit the [JSON Graphing Primer page][1].
 
 Depending on your analysis needs, you may choose to apply other mathematical functions to the query. Examples include rates and derivatives, smoothing, and more. For a list of available functions [click here][6]
 
-The Datadog UI also supports the ability to graph your metrics with various arithmetic options. Utilize any of: `+`, `-`, `/`, `*` to modify the values that are displayed on your graphs.  
+The Datadog UI also supports the ability to graph your metrics with various arithmetic options. Use any of: `+`, `-`, `/`, `*` to modify the values that are displayed on your graphs.
 This syntax allows for both integer values as well as arithmetic using multiple metrics.
 
 ### Metric arithmetic using an Integer

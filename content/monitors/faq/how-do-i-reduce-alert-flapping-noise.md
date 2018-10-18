@@ -13,7 +13,7 @@ Your individual Datadog alerts with groups will [have notification][1] rollups o
 
 * Re-Evaluate the Alert Threshold Value
     * The easiest way to reduce flapping when the alert <-> ok or state changes are frequent could be to increase/decrease the threshold condition.
-* Utilize the 'At all times' threshold
+* Use the 'At all times' threshold
     * This triggers the alert only when all data points for the metric in the timeframe violate the threshold
 
 * Reframe the query using Functions- rates, moving averages, or time-shift differentials
