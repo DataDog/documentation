@@ -2,7 +2,6 @@
 title: Log Patterns (Beta)
 kind: documentation
 description: "Spot Log Patterns"
-private: true
 aliases:
   - /logs/patterns
 further_reading:
