@@ -3,6 +3,10 @@ title: Monitor Uptime Widget
 kind: documentation
 description: "Track your monitor’s uptime via a widget in your Screenboard"
 disable_toc: true
+further_reading:
+- link: "https://www.datadoghq.com/blog/slo-monitoring-widget/"
+  tag: "Blog"
+  text: "Track the status of your SLOs with the new monitor uptime widget"
 ---
 
 <div class="alert alert-warning">
@@ -45,7 +49,11 @@ If the chosen monitor for the widget is configured to alert on *WARN* or *NO DAT
 
 Downtimes and muted periods are disregarded: if your monitor triggers during an scheduled downtime, that period is removed from the calculated uptime.  
 
-Whilst the widget is in private beta. Datadog engineering teams are working through the final implementation. **Thus, until the end of the beta phase, you mustn't rely on the uptime percentage**. Should you see any discrepancies or unexpected behaviors, reach out to [the Datadog support team][2]. 
+Whilst the widget is in private beta. Datadog engineering teams are working through the final implementation. **Thus, until the end of the beta phase, you mustn't rely on the uptime percentage**. Should you see any discrepancies or unexpected behaviors, reach out to [the Datadog support team][2].
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /graphing/dashboards/screenboard/
 [2]: /help
