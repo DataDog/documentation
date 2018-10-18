@@ -191,6 +191,8 @@ def algorithm_two():
 
 Note that tagging is a [Datadog-specific extension][76] to StatsD.
 
+Special consideration is necessary when assigning the `host` tag to DogStatsD metrics. See information on the host tag key in the [DogStatsD section][82].
+
 ### Integration Inheritance
 
 The most efficient method for assigning tags is to rely on your integrations. Tags assigned to your Amazon Web Services instances, Chef recipes, and more are all automatically assigned to the hosts and metrics when they are brought into Datadog.
@@ -339,3 +341,4 @@ The following [integration][1] sources create tags automatically in Datadog:
 [79]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go
 [80]: /agent/basic_agent_usage/docker/#environment-variables
 [81]: /graphing/infrastructure/hostmap/
+[82]: /developers/dogstatsd/data_types/#host-tag-key
