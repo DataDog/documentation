@@ -13,10 +13,6 @@ further_reading:
   text: Troubleshooting the Datadog Cluster Agent
 ---
 
-<div class="alert alert-warning">
-The Datadog Cluster Agent is a beta feature, if you are facing any issues please reach out to <a href="https://docs.datadoghq.com/help/">our support team</a>.
-</div>
-
 The Datadog Cluster Agent provides a streamlined, centralized approach to collecting cluster-level monitoring data. By acting as a proxy between the API server and node-based Agents, the Cluster Agent helps to alleviate server load. It also relays cluster-level metadata to node-based Agents, allowing them to enrich the metadata of locally collected metrics. 
 
 Using the Datadog Cluster Agent helps you to:
