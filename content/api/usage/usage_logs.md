@@ -17,10 +17,10 @@ Get Hourly Usage For Logs.
 
 ##### Response
 
-* **`hour`**:
-    The hour for the usage.
-* **`indexed_events_count`**:
-    Contains the number of log events indexed.
 * **`ingested_events_bytes`**:
     Contains the number of log bytes ingested.
+* **`indexed_events_count`**:
+    Contains the number of log events indexed.
+* **`hour`**:
+    The hour for the usage.
 
