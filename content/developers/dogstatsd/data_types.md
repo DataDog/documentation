@@ -44,13 +44,13 @@ def render_page()
 end
 ```
 
-With this one line of code, you can start graphing the data. Here's an example:
+With this one line of code, the data is available to graph in Datadog. Here's an example:
 
 {{< img src="developers/metrics/graph-guides-metrics-page-views.png" alt="graph guides metrics page views" responsive="true" >}}
 
 Note that StatsD counters are normalized over the flush interval to report per-second units. In the graph above, the marker is reporting 35.33 web page views per second at ~15:24. In contrast, if one person visited the web page each second, the graph would be a flat line at y = 1. To increment or measure values over time, see [gauges](#gauges).
 
-You can also count by arbitrary numbers. Suppose you wanted to count the number of bytes processed by a file uploading service. Increment a metric called `file_service.bytes_uploaded` by the size of the file each time the  `upload_file` function is called:
+Arbitrary numbers can also be counted. Suppose you wanted to count the number of bytes processed by a file uploading service. Increment a metric called `file_service.bytes_uploaded` by the size of the file each time the  `upload_file` function is called:
 
 For Python:
 ```python
@@ -90,7 +90,7 @@ duration = Time.now - start_time
 statsd.distribution('dist.dd.website.latency', duration)
 ```
 
-The above instrumentation calculates the following data: `sum`, `count`, `average`, `minimum`, `maximum`, `50th percentile` (median), `75th percentile`, `90th percentile`, `95th percentile` and `99th percentile`. These metrics give insight into how different each request time is. You can see how long the request usually takes by graphing the median. You can see how long most requests take by graphing the 95th percentile.
+The above instrumentation calculates the following data: `sum`, `count`, `average`, `minimum`, `maximum`, `50th percentile` (median), `75th percentile`, `90th percentile`, `95th percentile` and `99th percentile`. These metrics give insight into how different each request time is. Graph the median to see how long the request usually takes. Graph the 95th percentile to see how long most requests take.
 
 {{< img src="graphing/metrics/distributions/dogweb_latency.png" alt="Dogweb latency" responsive="true" >}}
 
@@ -149,7 +149,7 @@ results = db.query()
 duration = time.time() - start_time
 statsd.histogram('database.query.time', duration)
 
-# You can also use the `timed` decorator as a short-hand for timing functions.
+# The `timed` decorator is a short-hand for timing functions.
 @statsd.timed('database.query.time')
 def get_data():
     return db.query()
@@ -162,8 +162,7 @@ results = db.query()
 duration = Time.now - start_time
 statsd.histogram('database.query.time', duration)
 
-# You can also use the `time` helper as a short-hand for timing blocks
-# of code.
+# The `time` helper is a short-hand for timing blocks of code.
 statsd.time('database.query.time') do
   return db.query()
 end
@@ -171,11 +170,13 @@ end
 
 The above instrumentation produces the following metrics:
 
-- `database.query.time.count`: number of times this metric was sampled
-- `database.query.time.avg`: average time of the sampled values
-- `database.query.time.median`: median sampled value
-- `database.query.time.max`: maximum sampled value
-- `database.query.time.95percentile`: 95th percentile sampled value
+| Metric                             | Description                             |
+|------------------------------------|-----------------------------------------|
+| `database.query.time.count`        | number of times this metric was sampled |
+| `database.query.time.avg`          | average time of the sampled values      |
+| `database.query.time.median`       | median sampled value                    |
+| `database.query.time.max`          | maximum sampled value                   |
+| `database.query.time.95percentile` | 95th percentile sampled value           |
 
 {{< img src="developers/metrics/graph-guides-metrics-query-times.png" alt="graph guides metrics query times" responsive="true" >}}
 
@@ -304,11 +305,11 @@ opts = {
 statsd.service_check(name, status, opts)
 ```
 
-After a service check has been reported, you can use it to trigger a [custom check monitor][3].
+After a service check is reported, use it to trigger a [custom check monitor][3].
 
 ## Tagging
 
-You can add tags to any metric, event, or service check you send to DogStatsD. For example, you could compare the performance of two algorithms by tagging a timer metric with the algorithm version:
+Add tags to any metric, event, or service check you send to DogStatsD. For example, compare the performance of two algorithms by tagging a timer metric with the algorithm version:
 
 ```python
 
@@ -323,9 +324,13 @@ def algorithm_two():
 
 Note that tagging is a [Datadog-specific extension][1] to StatsD.
 
+### Host tag key
+
+The host tag is assigned automatically by the Datadog Agent aggregating the metrics. Metrics submitted with a host tag not matching the Agent hostname lose reference to the original host. The host tag submitted overrides any hostname collected by or configured in the Agent. If you need to remove the host tag from DogStatsD metrics, reference [How to remove the host tag when submitting metrics via DogStatsD][12].
+
 ### Distributions
 
-Becuase of the global nature of Distributions, extra tools for tagging are provided. See the [Distribution Metrics][10] page for more details.
+Because of the global nature of Distributions, extra tools for tagging are provided. See the [Distribution Metrics][10] page for more details.
 
 ## Further reading
 
@@ -342,3 +347,4 @@ Becuase of the global nature of Distributions, extra tools for tagging are provi
 [9]: /graphing/event_stream/
 [10]: /graphing/metrics/distributions
 [11]: /help
+[12]: /developers/faq/how-to-remove-the-host-tag-when-submitting-metrics-via-dogstatsd/
