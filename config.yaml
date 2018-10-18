@@ -143,6 +143,11 @@ languages:
           url: "agent/kubernetes/host_setup"
           weight: 155
           parent: kubernetes
+        - identifier: kubernetes_dca
+          name: "Cluster Agent"
+          url: "agent/kubernetes/cluster"
+          weight: 157
+          parent: kubernetes
         - identifier: kubernetes_event
           name: "Event Collection"
           url: "agent/kubernetes/event_collection"
