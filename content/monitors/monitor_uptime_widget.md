@@ -2,7 +2,6 @@
 title: Monitor Uptime Widget
 kind: documentation
 description: "Track your monitor’s uptime via a widget in your Screenboard"
-private: true
 disable_toc: true
 ---
 
