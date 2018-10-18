@@ -50,7 +50,7 @@ With this one line of code, the data is available to graph in Datadog. Here's an
 
 Note that StatsD counters are normalized over the flush interval to report per-second units. In the graph above, the marker is reporting 35.33 web page views per second at ~15:24. In contrast, if one person visited the web page each second, the graph would be a flat line at y = 1. To increment or measure values over time, see [gauges](#gauges).
 
-Also arbitrary numbers can be counted. Suppose you wanted to count the number of bytes processed by a file uploading service. Increment a metric called `file_service.bytes_uploaded` by the size of the file each time the  `upload_file` function is called:
+Arbitrary numbers can also be counted. Suppose you wanted to count the number of bytes processed by a file uploading service. Increment a metric called `file_service.bytes_uploaded` by the size of the file each time the  `upload_file` function is called:
 
 For Python:
 ```python
