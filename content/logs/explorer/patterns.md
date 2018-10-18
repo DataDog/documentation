@@ -5,15 +5,18 @@ description: "Spot Log Patterns"
 aliases:
   - /logs/patterns
 further_reading:
+- link: "https://www.datadoghq.com/blog/log-patterns/"
+  tag: "Blog"
+  text: "Log Patterns: Automatically cluster your logs for faster investigation"
 - link: "logs/explorer/analytics"
   tag: "Documentation"
   text: "Perform Log Analytics"
 - link: "logs/processing"
   tag: "Documentation"
-  text: Learn how to process your logs
+  text: "Learn how to process your logs"
 - link: "logs/explorer/saved_views"
-  tag: Documentation
-  text: Automatically configure your Log Explorer
+  tag: "Documentation"
+  text: "Automatically configure your Log Explorer"
 ---
 
 ## Overview

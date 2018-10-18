@@ -2,15 +2,21 @@
 title: Datadog Cluster Agent for Kubernetes
 kind: documentation
 further_reading:
+- link: "https://www.datadoghq.com/blog/datadog-cluster-agent/"
+  tag: "Blog"
+  text: "Introducing the Datadog Cluster Agent"
+- link: "https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/"
+  tag: "Blog"
+  text: "Autoscale your Kubernetes workloads with any Datadog metric"
 - link: "agent/kubernetes/daemonset_setup"
-  tag: documentation
-  text: Kubernetes DaemonSet Setup
+  tag: "Documentation"
+  text: "Kubernetes DaemonSet Setup"
 - link: "agent/kubernetes/integrations"
-  tag: "documentation"
+  tag: "Documentation"
   text: "Custom Integrations"
 - link: "https://github.com/DataDog/datadog-agent/blob/master/docs/cluster-agent/GETTING_STARTED.md#troubleshooting"
   tag: "Github"
-  text: Troubleshooting the Datadog Cluster Agent
+  text: "Troubleshooting the Datadog Cluster Agent"
 ---
 
 The Datadog Cluster Agent provides a streamlined, centralized approach to collecting cluster-level monitoring data. By acting as a proxy between the API server and node-based Agents, the Cluster Agent helps to alleviate server load. It also relays cluster-level metadata to node-based Agents, allowing them to enrich the metadata of locally collected metrics. 
