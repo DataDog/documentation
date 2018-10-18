@@ -1,7 +1,7 @@
 ---
 title: Get usage across your multi-org account
 type: apicontent
-order: 23.4
+order: 23.5
 external_redirect: /api/#get-usage-across-your-multi-org-account
 ---
 

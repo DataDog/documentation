@@ -12,6 +12,7 @@ This API is available to all customers. Python and Ruby clients are not yet supp
 The usage metering end-point allows you to:
 
 * Get Hourly Usage For Hosts and Containers
+* Get Hourly Usage For Logs
 * Get Hourly Usage For Custom Metrics
 * Get Top Custom Metrics By Hourly Average
 

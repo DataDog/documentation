@@ -1,13 +1,13 @@
 ---
-title: Get hourly usage for hosts, containers, and logs
+title: Get hourly usage for hosts and containers
 type: apicontent
 order: 23.1
-external_redirect: /api/#get-hourly-usage-for-hosts-containers-and-logs
+external_redirect: /api/#get-hourly-usage-for-hosts-and-containers
 ---
 
-## Get hourly usage for hosts, containers, and logs
+## Get hourly usage for hosts and containers
 
-Get Hourly Usage For Hosts, Containers, and Logs.
+Get Hourly Usage For Hosts and Containers.
 
 ##### Arguments
 * **`start_hr`** [*required*]:  
@@ -33,8 +33,4 @@ Get Hourly Usage For Hosts, Containers, and Logs.
 * **`aws_host_count`**:  
     Contains the total number of hosts that reported via the AWS integration (and were NOT running the Datadog Agent).
     When AWS or GCP hosts are also running the Datadog Agent, they are counted as Agent hosts, NOT as AWS or GCP.
-* **`indexed_events_count`**:
-    Contains the number of log events indexed.
-* **`ingested_events_bytes`**:
-    Contains the number of log bytes ingested.
 
