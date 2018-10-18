@@ -9,7 +9,7 @@ further_reading:
 
 This article is part of a [series on data security][0].
 
-This article describes additional security considerations that customers might find relevant when using the Datadog product and Agent.
+This article describes additional security considerations that customers might find relevant when using Datadog and the Agent.
 
 ## Process Arguments Obfuscation
 
