@@ -504,6 +504,11 @@ languages:
           url: "monitors/downtimes/"
           weight: 160
           parent: menu_references_monitoring
+        - identifiet: customnav_monitornav_uptime_widget
+          name: "Uptime Widget"
+          url: "monitors/monitor_uptime_widget/"
+          weight: 170
+          parent: menu_references_monitoring
         #- identifier: customnav_monitornav_faq
         #  name: "FAQ"
         #  url: "monitors/faq/"
@@ -1560,6 +1565,11 @@ languages:
           name: "Downtimes"
           url: "monitors/downtimes/"
           weight: 160
+          parent: menu_references_monitoring
+        - identifiet: customnav_monitornav_uptime_widget
+          name: "Uptime Widget"
+          url: "monitors/monitor_uptime_widget/"
+          weight: 170
           parent: menu_references_monitoring
         #- identifier: customnav_monitornav_faq
         #  name: "FAQ"
