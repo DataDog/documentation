@@ -89,6 +89,8 @@ docker_labels_as_tags:
   com.docker.compose.service: service_name
 ```
 
+Note: Tags are only set when a container starts.
+
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -111,6 +113,8 @@ kubernetes_pod_labels_as_tags:
 kubernetes_pod_annotations_as_tags:
   app: kube_app
 ```
+
+Note: Tags are only set when a pod starts.
 
 {{% /tab %}}
 {{< /tabs >}}
