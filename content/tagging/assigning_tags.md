@@ -191,7 +191,7 @@ def algorithm_two():
 
 Note that tagging is a [Datadog-specific extension][76] to StatsD.
 
-Special consideration is necessary when assigning the `host` tag to DogStatsD metrics. See information on the host tag key in the [DogStatsD section][82].
+Special consideration is necessary when assigning the `host` tag to DogStatsD metrics. For more information on the host tag key, see the [DogStatsD section][82].
 
 ### Integration Inheritance
 
