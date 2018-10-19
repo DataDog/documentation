@@ -6,7 +6,6 @@ private: true
 
 {{< whatsnext desc="List of Frequently Asked Questions:" >}}
     {{< nextlink href="graphing/faq/how-do-i-add-hostname-to-event-titles-and-messages-submitted-by-my-custom-agent-checks" >}}How do I add hostname to event titles and messages submitted by my custom Agent checks?{{< /nextlink >}}
-    {{< nextlink href="graphing/faq/how-to-transform-a-timeboard-to-a-screenboard-or-vice-versa" >}}How to Transform a Timeboard to a Screenboard or vice versa ?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/why-am-i-unable-to-iframe-certain-https-urls" >}}Why am I unable to iFrame certain https:// URLs?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/why-isn-t-my-aws-trusted-advisor-dashboard-showing-any-data" >}}Why isn't my AWS Trusted Advisor Dashboard showing any data?{{< /nextlink >}}
     {{< nextlink href="graphing/faq/how-do-i-see-the-number-of-hosts-i-m-monitoring" >}}How do I see the number of hosts I'm monitoring?{{< /nextlink >}}
