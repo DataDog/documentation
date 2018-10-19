@@ -135,6 +135,9 @@ Those parameters can also be set with the following environment variables:
 
 * Use the [public key for TLS encryption][8] for the SSL encryption. On some systems, the full certificate chain may be required. If so, use [this public key][9] instead.
 
+[8]: /crt/intake.logs.datadoghq.com.crt
+[9]: /crt/FULL_intake.logs.datadoghq.com.crt
+
 {{% /tab %}}
 {{% tab "SOCK5" %}}
 
