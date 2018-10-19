@@ -15,7 +15,7 @@ further_reading:
 
 In Datadog Agent 5, Docker and Kubernetes support relies on Python integrations: see the [Docker integration][1] and the [Kubernetes integration][2], respectively. Configuration happens partially in `datadog.conf`, and partially in the integration YAMLs.
 
-In Agent 6, however, there are a few changes. For Docker the configuration is found in `docker.d/conf.yaml`. For Kubernetes, configuration is partly in `datadog.yaml` and partly in `kubelet.d/conf.yaml`.
+In Agent 6, however, there are a few changes. For Docker, the configuration is found in `docker.d/conf.yaml`. For Kubernetes, configuration is partly in `datadog.yaml` and partly in `kubelet.d/conf.yaml`.
 
 Both Agent 5 and Agent 6 have the following Python checks:
 
