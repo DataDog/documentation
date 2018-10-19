@@ -256,13 +256,13 @@ For [systems using systemd][12], use `journalctl` to assist with debugging.
 
 {{< tabs >}}
 {{% tab "Agent v6" %}}
-If the following command shows the Datadog Agent failed to start and doesn't provide additional information.
+The following command shows the status of the Datadog Agent. 
 
 ```
 sudo systemctl status datadog-agent
 ```
 
-Use the following command to display all logs for the Datadog Agent service. If needed, use `-r` to print logs in reverse order.
+If the Agent failed to start, and no further information is provided, use the following command to display all logs for the Datadog Agent service. If needed, use `-r` to print logs in reverse order.
 
 ```
 sudo journalctl -u datadog-agent.service
@@ -270,13 +270,13 @@ sudo journalctl -u datadog-agent.service
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
-If the following command shows the Datadog Agent failed to start and doesn't provide additional information.
+The following command shows the status of the Datadog Agent. 
 
 ```
 sudo systemctl status dd-agent
 ```
 
-Use the following command to display all logs for the Datadog Agent service. If needed, use `-r` to print logs in reverse order.
+If the Agent failed to start, and no further information is provided, use the following command to display all logs for the Datadog Agent service. If needed, use `-r` to print logs in reverse order.
 
 ```
 sudo journalctl -u dd-agent.service
