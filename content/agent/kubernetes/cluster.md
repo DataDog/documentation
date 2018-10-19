@@ -185,18 +185,18 @@ Kubernetes events are beginning to flow into your Datadog account, and relevant 
 
 The available commands for the Datadog Cluster Agents are:
 
-| Command                                     | Description                                                                                                                                                                                                                         |
-| ---                                         | ---                                                                                                                                                                                                                                 |
-| `datadog-cluster-agent status`              | Gives an overview of the components of the agent and their health.                                                                                                                                                                  |
-| `datadog-cluster-agent metamap [NODE_NAME]` | Queries the local cache of the mapping between the pods living on `NODE_NAME`  and the cluster level metadata it's associated with (endpoints ...). Not specifying the `NODE_NAME` runs the mapper on all the nodes of the cluster. |
-| `datadog-cluster-agent flare [CASE_ID]`     | Similarly to the node agent, the cluster agent can aggregate the logs and the configurations used and forward an archive to the support team or be deflated and used locally.                                                       |
+| Command                                     | Description                                                                                                                                                                                                                                   |
+|---------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `datadog-cluster-agent status`              | Gives an overview of the components of the agent and their health.                                                                                                                                                                            |
+| `datadog-cluster-agent metamap <NODE_NAME>` | Queries the local cache of the mapping between the pods living on `NODE_NAME`  and the cluster level metadata it's associated with (endpoints ...). Not specifying the `NODE_NAME` runs the mapper on all the nodes of the cluster.           |
+| `datadog-cluster-agent flare <CASE_ID>`     | Similarly to the node agent, the cluster agent can aggregate the logs and the configurations used and forward an archive to the support team or be deflated and used locally. **Note** this command is run from within the Cluster Agent pod. |
 
 ## Custer Agent Options
 
 The following environment variables are supported:
 
 | Variable                                      | Description                                                                                                                                                                   |
-| ----                                          | ---                                                                                                                                                                           |
+|-----------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_API_KEY`                                  | Your [Datadog API key][3].                                                                                                                                                    |
 | `DD_HOSTNAME`                                 | Hostname to use for the Datadog Cluster Agent.                                                                                                                                |
 | `DD_CLUSTER_AGENT_CMD_PORT`                   | Port for the Datadog Cluster Agent to serve, default is `5005`.                                                                                                               |
