@@ -55,8 +55,8 @@ Datadog’s integration processing Pipelines are available for the `source` tag 
 | [Redis][47]                        | [Datadog integration YAML file][48]                | `redis`           |
 | [Ruby][50]                         | [Custom Datadog YAML file][51]                     | `ruby`            |
 | SSHD                               | [Custom Datadog YAML file][67]                     | `sshd`            |
-| Sudo                               | [Custom Datadog YAML file][67]                     | `sudo`            |
 | [Stunnel][54]                      | [Custom Datadog YAML file][55]                     | `stunnel`         |
+| Sudo                               | [Custom Datadog YAML file][67]                     | `sudo`            |
 | [Tomcat][56]                       | [Datadog integration YAML file][57]                | `tomcat`          |
 | UFW                                | [Custom Datadog YAML file][67]                     | `UFW`             |
 | [uwsgi][58]                        | [Custom Datadog YAML file][59]                     | `uwsgi`           |
