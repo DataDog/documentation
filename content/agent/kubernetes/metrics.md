@@ -17,3 +17,6 @@ Note that `kubernetes_state.*` metrics are gathered from the `kube-state-metrics
 
 #### kube-dns
 {{< get-metrics-from-git "kube_dns" >}}
+
+#### Kubernetes Proxy
+{{< get-metrics-from-git "kube_proxy" >}}
