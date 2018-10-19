@@ -91,11 +91,11 @@ If you want to remap an attribute to one of the reserved attributes in a custom 
 
 ### Integration Pipelines
 
-Datadog’s integration processing Pipelines are available for the certain sources when they are setup to collect logs. These pipelines are **read-only** and parse out your logs in ways appropriate for the particular source. To edit an integration Pipeline clone it then edit the clone:
+Datadog’s integration processing Pipelines are available for the certain sources when they are set up to collect logs. These pipelines are **read-only** and parse out your logs in ways appropriate for the particular source. To edit an integration Pipeline, clone it and then edit the clone:
 
 {{< img src="logs/processing/pipelines/cloning_pipeline.png" alt="Cloning pipeline" responsive="true" style="width:80%;">}}
 
-To see the full list of integration Pipelines refer to the [Integration Pipelines Reference][6] page.
+To see the full list of integration Pipelines, refer to the [Integration Pipelines Reference][6] page.
 
 ## Pipelines limitations
 
