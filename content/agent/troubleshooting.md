@@ -6,15 +6,39 @@ aliases:
     - /agent/faq/how-to-get-more-logging-from-the-agent
     - /agent/faq/agent-5-container-more-log
 further_reading:
-- link: "logs/"
-  tag: "Documentation"
-  text: Collect your logs
-- link: "graphing/infrastructure/process"
-  tag: "Documentation"
-  text: Collect your processes
-- link: "tracing"
-  tag: "Documentation"
-  text: Collect your traces
+- link: "/agent/faq/common-windows-agent-installation-error-1721"
+  tag: "FAQ"
+  text: "Common Windows Agent Installation Error 1721"
+- link: "/agent/faq/how-to-monitor-snmp-devices"
+  tag: "FAQ"
+  text: "How to monitor SNMP devices?"
+- link: "/agent/faq/i-stoped-my-agent-but-i-m-still-seeing-the-host"
+  tag: "FAQ"
+  text: "I stopped my Agent but I'm still seeing the host in my Datadog account."
+- link: "/agent/faq/network-time-protocol-ntp-offset-issues"
+  tag: "FAQ"
+  text: "Network Time Protocol (NTP) Offset Issues"
+- link: "/agent/faq/how-to-solve-permission-denied-errors"
+  tag: "FAQ"
+  text: "How to solve Permission denied errors?"
+- link: "/agent/faq/error-restarting-agent-already-listening-on-a-configured-port"
+  tag: "FAQ"
+  text: "Error Restarting Agent: Already Listening on a Configured Port"
+- link: "/agent/faq/forwarder-logs-contain-599-response-code"
+  tag: "FAQ"
+  text: "Forwarder logs contain 599 response code"
+- link: "/agent/faq/cannot-open-an-http-server-socket-error-reported-errno-eacces-13"
+  tag: "FAQ"
+  text: "Starting Datadog Agent (using supervisord):Error: Cannot open an HTTP server: socket.error reported errno.EACCES (13)"
+- link: "/agent/faq/why-don-t-i-see-the-system-processes-open-file-descriptors-metric"
+  tag: "FAQ"
+  text: "Why don't I see the 'system.processes.open_file_descriptors' metric?"
+- link: "/agent/faq/how-is-the-system-mem-used-metric-calculated"
+  tag: "FAQ"
+  text: "How is the 'system.mem.used' metric calculated?"
+- link: "/agent/faq/how-do-i-install-the-agent-on-a-server-with-limited-internet-connectivity"
+  tag: "FAQ"
+  text: "How do I install the Agent on a server with limited internet connectivity?"
 ---
 
 If you have not yet installed the Datadog Agent, go [to the dedicated Agent integration page][1] for installation instructions. If you just installed the Agent, it may take a few moments before you start seeing metrics appear. The first place you should check for metrics is the [Metrics Explorer][2].
@@ -27,7 +51,7 @@ If you're still unsure about the issue, you may reach out to [Datadog support te
 
 To enable the full debug mode:
 
-1. Modify your local `datadog.yaml` file (see [this page][22] to locate this configuration file on your instance)
+1. Modify your local `datadog.yaml` file (see [this page][11] to locate this configuration file on your instance)
 
 2. Replace `# log_level: INFO` with `log_level: DEBUG` (remove `#` to uncomment the line).
 
@@ -137,10 +161,10 @@ In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if
 | Windows    | Consult the dedicated [Windows documentation][9]                        |
 
 
-**Note**: If you are using a Linux based system and the `service` wrapper command is not available, [consult the list of alternatives][23].
+**Note**: If you are using a Linux based system and the `service` wrapper command is not available, [consult the list of alternatives][12].
 
 [9]: /agent/basic_agent_usage/windows/#agent-v5
-[23]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands
+[12]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands
 
 {{% /tab %}}
 {{% tab "Cluster Agent" %}}
@@ -226,19 +250,42 @@ C:\Program' 'Files\Datadog\Datadog' 'Agent\embedded\python.exe C:\Program' 'File
 {{% /tab %}}
 {{< /tabs >}}
 
-## FAQ
+## Systemd
 
-* [Common Windows Agent Installation Error 1721][11]
-* [How to monitor SNMP devices?][12]
-* [I stopped my Agent but I'm still seeing the host in my Datadog account.][13]
-* [Network Time Protocol (NTP) Offset Issues][14]
-* [How to solve Permission denied errors?][15]
-* [Error Restarting Agent: Already Listening on a Configured Port][16]
-* [Forwarder logs contain 599 response code][17]
-* [Starting Datadog Agent (using supervisord):Error: Cannot open an HTTP server: socket.error reported errno.EACCES (13)][18]
-* [Why don't I see the 'system.processes.open_file_descriptors' metric?][19]
-* [How is the 'system.mem.used' metric calculated?][20]
-* [How do I install the Agent on a server with limited internet connectivity?][21]
+For [systems using systemd][12], use `journalctl` to assist with debugging.
+
+{{< tabs >}}
+{{% tab "Agent v6" %}}
+If the following command shows the Datadog Agent failed to start and doesn't provide additional information.
+
+```
+sudo systemctl status datadog-agent
+```
+
+Use the following command to display all logs for the Datadog Agent service. If needed, use `-r` to print logs in reverse order.
+
+```
+sudo journalctl -u datadog-agent.service
+```
+
+{{% /tab %}}
+{{% tab "Agent v5" %}}
+If the following command shows the Datadog Agent failed to start and doesn't provide additional information.
+
+```
+sudo systemctl status dd-agent
+```
+
+Use the following command to display all logs for the Datadog Agent service. If needed, use `-r` to print logs in reverse order.
+
+```
+sudo journalctl -u dd-agent.service
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
 
 ## Further Reading
 
@@ -254,16 +301,5 @@ C:\Program' 'Files\Datadog\Datadog' 'Agent\embedded\python.exe C:\Program' 'File
 [8]: /agent/#using-the-gui
 [9]: /agent/basic_agent_usage/windows/#agent-v5
 [10]: /agent/basic_agent_usage/windows/#agent-v6
-[11]: /agent/faq/common-windows-agent-installation-error-1721
-[12]: /agent/faq/how-to-monitor-snmp-devices
-[13]: /agent/faq/i-stoped-my-agent-but-i-m-still-seeing-the-host
-[14]: /agent/faq/network-time-protocol-ntp-offset-issues
-[15]: /agent/faq/how-to-solve-permission-denied-errors
-[16]: /agent/faq/error-restarting-agent-already-listening-on-a-configured-port
-[17]: /agent/faq/forwarder-logs-contain-599-response-code
-[18]: /agent/faq/cannot-open-an-http-server-socket-error-reported-errno-eacces-13
-[19]: /agent/faq/why-don-t-i-see-the-system-processes-open-file-descriptors-metric
-[20]: /agent/faq/how-is-the-system-mem-used-metric-calculated
-[21]: /agent/faq/how-do-i-install-the-agent-on-a-server-with-limited-internet-connectivity
-[22]: /agent/faq/agent-configuration-files/?tab=agentv6
-[23]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands
+[11]: /agent/faq/agent-configuration-files/?tab=agentv6
+[12]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands
