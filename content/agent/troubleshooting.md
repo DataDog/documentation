@@ -145,9 +145,9 @@ In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if
 {{% /tab %}}
 {{% tab "Cluster Agent" %}}
 
-| Platform   | Command                                 |
-|------------|-----------------------------------------|
-| Kubernetes | `datadog-cluster-agent flare <CASE_ID>` |
+| Platform   | Command                                                             |
+|------------|---------------------------------------------------------------------|
+| Kubernetes | `kubectl exec <pod-name> -it datadog-cluster-agent flare <CASE_ID>` |
 
 {{% /tab %}}
 {{< /tabs >}}
