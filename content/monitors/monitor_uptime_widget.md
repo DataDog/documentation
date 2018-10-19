@@ -49,7 +49,7 @@ To configure the widget from a [Screenboard][1].
 
 If the chosen monitor for the widget is configured to alert on *WARN* or *NO DATA*, those states are rendered as down (red) inside the uptime widget.
 
-Downtimes and muted periods are disregarded: if your monitor triggers during an scheduled downtime, that period is removed from the calculated uptime.  
+Downtimes and muted periods are disregarded: if your monitor triggers during a scheduled downtime, that period is removed from the calculated uptime.  
 
 For a most accurate calculation, new monitors aren't calculated until the end of the first UTC day, until the first UTC day is over, a warning message is display instead `Calculating Uptime`.
 
