@@ -17,6 +17,8 @@ The monitor Uptime widget is in private beta. Interested in trying it out? <a hr
 
 Use the monitor Uptime widget to track your monitor’s uptime via a widget in your [Screenboards][1]. Monitor Uptime is defined as the amount of time a monitor was in an up state (OK) compared to down state (non-OK). Similar to the monitor status page visualization, the status is represented in bars as green (up) and red (down).
 
+Note: The widget is currently not compatible with service checks monitors.
+
 ## Widget configuration
 
 {{< img src="monitors/monitor_uptime_widget_configuration.png" alt="monitor uptime widget configuration" responsive="true" >}}
@@ -49,8 +51,9 @@ If the chosen monitor for the widget is configured to alert on *WARN* or *NO DAT
 
 Downtimes and muted periods are disregarded: if your monitor triggers during an scheduled downtime, that period is removed from the calculated uptime.  
 
-While the widget is in private beta, Datadog engineering teams are working through the final implementation. **Thus, until the end of the beta phase, do not rely on the uptime percentage**. Should you see any discrepancies or unexpected behaviors, reach out to [the Datadog support team][2].
+For a most accurate calculation, new monitors aren't calculated until the end of the first UTC day, until the first UTC day is over, a warning message is display instead `Calculating Uptime`.
 
+While the widget is in private beta, Datadog engineering teams are working through the final implementation. **Thus, until the end of the beta phase, do not rely on the uptime percentage**. Should you see any discrepancies or unexpected behaviors, reach out to [the Datadog support team][2].
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
