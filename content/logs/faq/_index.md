@@ -18,5 +18,5 @@ private: true
     {{< nextlink href="logs/faq/why-do-my-logs-show-up-with-an-info-status-even-for-warnings-or-errors" >}}Why do my logs show up with an Info status even for Warnings or Errors?{{< /nextlink >}}
     {{< nextlink href="logs/faq/can-the-datadog-agent-be-used-to-send-only-logs" >}}Can the Datadog Agent be used to send logs only?{{< /nextlink >}}
     {{< nextlink href="/logs/faq/how-to-remap-custom-severity-values-to-the-official-log-status" >}}How to remap custom severity values to the official log status{{< /nextlink >}}
+    {{< nextlink href="/logs/faq/integration-pipeline-reference" >}}Integration Pipeline Reference{{< /nextlink >}}
 {{< /whatsnext >}}
-
