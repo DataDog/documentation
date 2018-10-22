@@ -89,31 +89,8 @@ Write a notification message as you would with any other monitor, using the `@-s
 
 {{< img src="monitors/monitor_types/composite/writing-notification.png" alt="writing notification" responsive="true" style="width:80%;">}}
 
-You can use template variables like `{{a.value}}`, `{{b.value}}` (for monitor use cases), etc.
+Adding template variables like `{{a.value}}` and `{{b.value}}` to the monitor message shows the individual monitor values.
 
-In addition to your own message, notifications (e.g. emails) for the composite monitor shows the status of the individual monitors:
-
-```
-[Triggered] CPU + Memory composite monitor
-
-Database servers are high on CPU usage AND low on memory. @kent@datadoghq.com
-
-Query: 1896131 && 1896130
-
-1 Alert | 4 OK
-
-* CPU monitor for database servers
-  ID: 1896131
-  5 host groups
-  1 Alert | 4 OK
-
-* Memory monitor for database servers
-  ID: 1896130
-  5 host groups
-  1 Alert | 4 OK
-
-The monitor was last triggered at Mon Apr 17 2017 11:31:47 EDT (28 secs ago)
-```
 
 ### Save the monitor
 
