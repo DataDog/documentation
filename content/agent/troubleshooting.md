@@ -6,6 +6,12 @@ aliases:
     - /agent/faq/how-to-get-more-logging-from-the-agent
     - /agent/faq/agent-5-container-more-log
 further_reading:
+- link: "/agent/faq/agent-commands/?tab=agentv6"
+  tag: "FAQ"
+  text: "List of all Agent commands"
+- link: "/agent/faq/agent-configuration-files/?tab=agentv6"
+  tag: "FAQ"
+  text: "Agent configuration files"
 - link: "/agent/faq/common-windows-agent-installation-error-1721"
   tag: "FAQ"
   text: "Common Windows Agent Installation Error 1721"
