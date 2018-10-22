@@ -1,7 +1,7 @@
 ---
 title: Get top 500 custom metrics by hourly average
 type: apicode
-order: 23.3
+order: 23.4
 external_redirect: /api/#get-top-500-custom-metrics-by-hourly-average
 ---
 
