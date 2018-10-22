@@ -22,7 +22,7 @@ further_reading:
 
 This page outlines the basic features of the Datadog Agent for Debian. If you haven't installed the Agent yet, instructions can be found in the [Datadog Agent Integration][1] documentation.
 
-**Note**: Debian 7 (wheezy) and above (we do not support SysVinit) are supported.
+**Note**: Debian 7 (wheezy) and above (we support SysVinit in agent 6.6.0 above) are supported.
 
 ## Commands
 

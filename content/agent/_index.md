@@ -154,18 +154,18 @@ Once the Agent is running, use the `datadog-agent launch-gui` command to launch 
 {{< tabs >}}
 {{% tab "Agent v6" %}}
 
-| OS                                 | Supported versions                                       |
-| :----                              | :----                                                    |
-| [Debian x86_64][7]                 | Debian 7 (wheezy) and above (we do not support SysVinit) |
-| [Ubuntu x86_64][8]                 | Ubuntu 14.04 and above                                   |
-| [RedHat/CentOS x86_64][9]          | RedHat/CentOS 6 and above                                |
-| [Docker][14]                       | Version 1.12 and higher                                  |
-| [Kubernetes][15]                   | Version 1.3 and higher                                   |
-| [SUSE Enterprise Linux x86_64][10] | SUSE 11 SP4 and above (we do not support SysVinit)       |
-| [Fedora x86_64][11]                | Fedora 26 and above                                      |
-| [MacOS][12]                        | macOS 10.10 and above                                    |
-| [Windows server 64-bit][13]        | Windows server 2008r2 or above                           |
-| [Windows 64-bit][13]               | Windows 7 or above                                       |
+| OS                                 | Supported versions                                                  |
+| :----                              | :----                                                               |
+| [Debian x86_64][7]                 | Debian 7 (wheezy) and above (we support SysVinit in agent 6.6.0 and above) |
+| [Ubuntu x86_64][8]                 | Ubuntu 14.04 and above                                              |
+| [RedHat/CentOS x86_64][9]          | RedHat/CentOS 6 and above                                           |
+| [Docker][14]                       | Version 1.12 and higher                                             |
+| [Kubernetes][15]                   | Version 1.3 and higher                                              |
+| [SUSE Enterprise Linux x86_64][10] | SUSE 11 SP4 and above (we do not support SysVinit)                  |
+| [Fedora x86_64][11]                | Fedora 26 and above                                                 |
+| [MacOS][12]                        | macOS 10.10 and above                                               |
+| [Windows server 64-bit][13]        | Windows server 2008r2 or above                                      |
+| [Windows 64-bit][13]               | Windows 7 or above                                                  |
 
 **Note**: [Source][16] install may work on operating systems not listed here and is supported on a best effort basis.
 

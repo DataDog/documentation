@@ -167,7 +167,7 @@ les bonne permissions: Si vous êtes capable d'ouvrir `datadog.yaml`, vous pouve
 ### Agent v6
 | OS                                 | Versions supportées                                       |
 | :----                              | :----                                                    |
-| [Debian x86_64][7]                 | Debian 7 (wheezy) et plus (nous ne supportons pas SysVinit) |
+| [Debian x86_64][7]                 | Debian 7 (wheezy) et plus (nous supportons SysVinit dans l'agent 6.6.0 et plus) |
 | [Ubuntu x86_64][8]                 | Ubuntu 14.04 et plus                                   |
 | [RedHat/CentOS x86_64][9]          | RedHat/CentOS 6 et plus                                |
 | [SUSE Enterprise Linux x86_64][10] | SUSE 11 SP4 et plus (nous ne supportons pas SysVinit)       |
