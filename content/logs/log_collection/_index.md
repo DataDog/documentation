@@ -91,6 +91,8 @@ logs:
     source: custom
 ```
 
+If you are using Serilog, `Serilog.Sinks.Network` is an option for connecting via UDP.
+
 **Note**: The Agent supports raw string, JSON, and Syslog formatted logs. If you are sending logs in batch, use linebreak characters to separate your logs.
 
 [9]: /agent/faq/agent-configuration-files/
