@@ -20,7 +20,7 @@ Composite monitors combine individual monitors into one monitor to define more s
 
 Choose existing monitors to create a composite monitor, for example monitor A and monitor B. Then set a trigger condition using boolean operators (e.g. "A && B"). The composite monitor triggers when its individual monitors' statuses simultaneously have values that cause the composite's trigger condition to be true.
 
-With regard to configuration, a composite monitor is independent of its constituent monitors. The notification policy of a composite monitor can be modified without affecting the policies of its constituent monitors, and vice versa. Furthermore, deleting a composite monitor do not deletes its constituent monitors; a composite monitor does not own other monitors, it only uses their results. Also, many composite monitors may reference the same individual monitor.
+With regard to configuration, a composite monitor is independent of its constituent monitors. The notification policy of a composite monitor can be modified without affecting the policies of its constituent monitors, and vice versa. Furthermore, deleting a composite monitor does not delete its constituent monitors; a composite monitor does not own other monitors, it only uses their results. Also, many composite monitors may reference the same individual monitor.
 
 _Note: we refers variously to 'individual monitors', 'constituent monitors', and 'non-composite monitors'. They all mean the same thing: the monitors that a composite monitor uses to calculate its status._
 
