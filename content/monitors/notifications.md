@@ -33,9 +33,9 @@ Notifications are a key component of any [monitor][1]. You want to make sure the
   Use [conditional variables](#conditional-variables) to modulate the notification text and send them to different contacts with the [Datadog's @-notification syntax](#notification).
   A common use-case for the monitor message is to include a step-by-step way to resolve the problem.
 
-3. Optionally enable **monitor renotification**. This option is useful to remind your team that a problem is not solved until the monitor is marked as [resolved][5]. If enabled, you can configure an escalation message to be sent anytime the monitor renotifies. The original message is included as well.
+3. Optionally enable **monitor renotification**. This option is useful to remind your team that a problem is not solved until the monitor is marked as [resolved][5]. If enabled, an escalation message can be configured to send anytime the monitor renotifies. The original message is included as well.
 
-***Note:*** *To avoid notification storms we now group notifications with the same monitor ID and alert type in 20 second buckets. The first two notifications in the group within a 20 second bucket are sent as normal. All additional notifications within that 20 second window are sent as a single message.*
+***Note:*** *To avoid notification storms Datadog groups notifications with the same monitor ID and alert type in 20 second buckets. The first two notifications in the group within a 20 second bucket are sent as normal. All additional notifications within that 20 second window are sent as a single message.*
 
 ## Variables
 
@@ -53,11 +53,9 @@ Use variables to customize your monitor notifications, the available variables a
 
 For multi-alert monitors, add tag variables to include information in your alert message that's specific to the tag scope that triggered the alert. This is dependent on the tags you used in the *trigger a separate alert for each* field in Section 1 of your monitor.
 
-For example, if you trigger by each **host** tag, then a number of tag variables related to **host** are available to you in your Section 3: **Say what's happening**, such as `{{host.name}}`, `{{host.ip}}`, etc..
+For example, if you trigger by each **host** tag, then a number of tag variables related to **host** are available to you in Section 3: **Say what's happening**, such as `{{host.name}}`, `{{host.ip}}`, etc..
 
-This also works for custom tags as well. If you've added a custom tag that follows the `key:value` syntax, then you can group data by those tag keys.
-
-This means you are able to apply the tag's **key** to the list of tags that a multi-alert has a separate trigger for—which in turn means you can use that tag's `.name` variable in your monitor message.
+This also works for custom tags. If a custom tag is added that follows the `key:value` syntax, then data can be grouped by those tag keys. This enables a multi-alert (separate trigger) for each **value**. Additionally, the tag's `.name` variable can be used in your monitor message.
 
 Note:
 
@@ -78,7 +76,7 @@ Here, the user was able to set up a multi-alert monitor to trigger a separate al
 
 {{< img src="monitors/faq/multi_alert_templating_notification.png" alt="multi_alert_templating_notification" responsive="true" style="width:80%;">}}
 
-Here is an example of how you can use template variables for a multi-alert:
+This is an example of using template variables for a multi-alert:
 
 {{< img src="monitors/notifications/templatevareditor.png" alt="template var editor" responsive="true" style="width:80%;">}}
 
@@ -135,7 +133,7 @@ These variables use simple `if-else` logic to display a different message depend
 
 {{< img src="monitors/notifications/conditionalvars.png" alt="conditional vars" responsive="true" style="width:80%;">}}
 
-Here is an example of how you can set it up in the editor:
+This is an example in the editor:
 
 {{< img src="monitors/notifications/templateconditionaleditor.png" alt="template conditional editor" responsive="true" style="width:80%;">}}
 
@@ -264,7 +262,7 @@ Would produce this slack message:
 
 {{< img src="monitors/notifications/notification_slack_preview.png" alt="notification_slack_preview" responsive="true" style="width:50%;" >}}
 
-You can also mention **@here** or **@channel** using `<!here>` or `<!channel>`, respectively.
+Mention **@here** or **@channel** by using `<!here>` or `<!channel>`, respectively.
 
 For user groups, use `<!subteam^GROUP_ID|GROUP_NAME>`. To find the `GROUP_ID`, [query the `usergroups.list` API endpoint of Slack][10]. For example, for a user group named `testers` you would use the following syntax:
 
@@ -304,7 +302,7 @@ Use `@here` in the monitor message to notify everybody in a given Hipchat channe
 
 Many organizations like to include additional context to their Alerts. Quick links to relevant dashboards as a part of the Alert have proven to reduce the overall time it takes during the break fix process to reduce time to resolution.
 
-Datadog makes message template variables available to each defined monitor. Using these variables, you can dynamically build a URL that links Datadog users to an appropriate dashboard using the scope of the monitor.
+Datadog makes message template variables available to each defined monitor. These variables enable dynamic URL building that link Datadog users to an appropriate dashboard using the scope of the monitor.
 
 Here are a few examples of providing links to items like System Dashboards, Integration Dashboards, HostMaps, and Managed Monitors pages.
 
@@ -314,7 +312,7 @@ The first example to review is the most common. Let's say you would like to prov
 https://app.datadoghq.com/dash/integration/system_overview?tpl_var_scope=host:{{host.name}}
 ```
 
-As you can see, `{{host.name}}` is replaced with the offending host of the monitor in question.
+`{{host.name}}` is replaced with the offending host of the monitor in question.
 
 {{< img src="monitors/notifications/system_dashboard_url.png" alt="system_dashboard_url" responsive="true" style="width:70%;" >}}
 
@@ -350,7 +348,7 @@ https://app.datadoghq.com/monitors/manage?q=scope:host:{{host.name}}
 
 The above URL links to all monitors for this host. You have other options available to further refine the link.
 
-For example, if you would only like monitors that are in an Alert State, you can add the following `status:Alert` (other statuses that can be leveraged are `WARN`, `NO%20DATA`, `OK` and `MUTED`). Below is an example link:
+For example, to see all monitors in an Alert State, add `status:Alert` (other statuses are `WARN`, `NO%20DATA`, `OK` and `MUTED`). Below is an example link:
 
 ```
 https://app.datadoghq.com/monitors/manage?q=scope:host:{{host.name}}&status:Alert
