@@ -12,6 +12,13 @@ comments: <!–– Original flowchart is in lucidchart. Search Trello for link o
 {{< img src="agent/faq/agent_hostname.jpeg" alt="Agent hostname scheme" responsive="true" >}}
 
 {{% /tab %}}
+{{% tab "Agent v6" %}}
+
+For version of Agent 6, some differences in hostname resolution apply. See our document on [Differences in hostname resolution between Agent v5 and Agent v6][2].
+
+[2]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/hostname-resolution.md
+
+{{% /tab %}}
 {{< /tabs >}}
 
 The Datadog Agent collects potential hostnames from a number of different sources. To see all the names the Agent is detecting, [run the Agent info command][1], for example:
@@ -55,3 +62,4 @@ See a list of all the hosts in your account from the Infrastructure tab in Datad
 {{< img src="agent/faq/host_aliases.png" alt="Host aliases" responsive="true" >}}
 
 [1]: /agent/faq/agent-commands/#agent-status-and-information
+[2]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/hostname-resolution.md
