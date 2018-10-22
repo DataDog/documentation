@@ -38,7 +38,7 @@ github:
   pr_title: 'Translation PR'
   pr_body: 'This is an automated PR created by the scheduled translation task pulling the latest translated files'
   pr_labels:
-    - "Architecture"
+    - "Translation"
 reviewers:
   - name: 'David Jones'
     github_user: 'davidejones'
