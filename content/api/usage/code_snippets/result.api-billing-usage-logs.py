@@ -1,2 +1,2 @@
-# This is not yet supported by the Ruby Client for Datadog API
+# This is not yet supported by the Python Client for Datadog API
 # Consult the curl example
