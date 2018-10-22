@@ -14,7 +14,7 @@ comments: <!–– Original flowchart is in lucidchart. Search Trello for link o
 {{% /tab %}}
 {{% tab "Agent v6" %}}
 
-For version of Agent 6, some differences in hostname resolution apply. See our document on [Differences in hostname resolution between Agent v5 and Agent v6][2].
+For Agent 6, some differences in hostname resolution apply. See our document on [Differences in hostname resolution between Agent v5 and Agent v6][2].
 
 [2]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/hostname-resolution.md
 
