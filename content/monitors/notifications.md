@@ -310,11 +310,11 @@ Use `@here` in the monitor message to notify everybody in a given Hipchat channe
 
 Many organizations like to include additional context to their Alerts. Quick links to relevant dashboards as a part of the Alert have proven to reduce the overall time it takes during the break fix process to reduce time to resolution.
 
-Datadog makes message template variables available to each defined monitor. These variables enable dynamic URL building that link Datadog users to an appropriate dashboard using the scope of the monitor.
+Datadog makes message template variables available to each defined monitor. These variables enable dynamic URL building that links Datadog users to an appropriate dashboard using the scope of the monitor.
 
-Here are a few examples of providing links to items like System Dashboards, Integration Dashboards, HostMaps, and Managed Monitors pages.
+Here are a few examples of providing links to items like System Dashboards, Integration Dashboards, Host Maps, and Managed Monitors pages.
 
-The first example to review is the most common. Let's say you would like to provide a link to a System Dashboard when a monitor for a specific system metric has exceeded your defined threshold. The message template variable that can be leveraged in this instance is `{{host.name}}`. Include the following URL as a part of your Monitor "Say What's Happening" section:
+Example: provide a link to a System Dashboard when a monitor for a specific system metric has exceeded a defined threshold. The message template variable that can be leveraged in this instance is `{{host.name}}`. Include the following URL as a part of your Monitor "Say What's Happening" section:
 
 ```
 https://app.datadoghq.com/dash/integration/system_overview?tpl_var_scope=host:{{host.name}}
