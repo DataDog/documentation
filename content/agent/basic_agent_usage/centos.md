@@ -191,8 +191,9 @@ DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/Dat
 
 1. Remove the Agent v6 repository and ensure that the `stable` repo is present:
     ```shell
-    rm /etc/yum.repos.d/datadog-beta.repo
-[ ! -f /etc/yum.repos.d/datadog.repo ] && echo -e '[datadog]\nname = Datadog, Inc.\nbaseurl = https://yum.datadoghq.com/rpm/x86_64/\nenabled=1\ngpgcheck=1\npriority=1\ngpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public\n       https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public' | sudo tee /etc/yum.repos.d/datadog.repo
+    rm /etc/yum.repos.d/datadog-beta.repo [ ! -f /etc/yum.repos.d/datadog.repo ] && 
+    echo -e '[datadog]\nname = Datadog, Inc.\nbaseurl = https://yum.datadoghq.com/rpm/x86_64/\nenabled=1\ngpgcheck=1\npriority=1\ngpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public\n       https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public' | sudo tee 
+    /etc/yum.repos.d/datadog.repo
     ```
 
 2. Update your local Yum cache and downgrade the Agent:
