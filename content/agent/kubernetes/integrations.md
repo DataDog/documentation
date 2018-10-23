@@ -19,7 +19,7 @@ Then, reference this ConfigMap among the volumes of your Agent's manifest.
 For example, in the following case we customize the name, url, and tags fields of the [HTTP check][22].
 To enable other integrations, just specify the correct YAML name and make sure it is properly formated.
 
-```
+```yaml
 kind: ConfigMap
 apiVersion: v1
 metadata:
@@ -36,7 +36,7 @@ data:
 ---
 ```
 And in the manifest of your Agent (DaemonSet/deployment) add the following:
-```
+```yaml
 [...]
         volumeMounts:
         [...]
@@ -55,7 +55,7 @@ And in the manifest of your Agent (DaemonSet/deployment) add the following:
 
 To enable [Log collection][10] add the following lines in your `http-config`:
 
-```
+```yaml
 [...]
 data:
   http-config: |-
@@ -100,7 +100,7 @@ To mount a custom `datadog.yaml` in a container with a ConfigMap, employ the fol
 
  And in your ConfigMap:
 
- ```yaml
+```yaml
 kind: ConfigMap
 apiVersion: v1
 metadata:
