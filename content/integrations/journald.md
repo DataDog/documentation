@@ -18,7 +18,6 @@ supported_os:
 ## Overview
 
 Systemd-journald is a system service that collects and stores logging data. It creates and maintains structured, indexed journals based on logging information that is received from a variety of sources.
-Note that this integration does not support RPM-based Linux distributions, including Red Hat and CentOS.
 
 ## Setup
 
