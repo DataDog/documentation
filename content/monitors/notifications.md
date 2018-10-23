@@ -33,7 +33,7 @@ Notifications are a key component of any [monitor][1]. You want to make sure the
   Use [conditional variables](#conditional-variables) to modulate the notification text and send them to different contacts with the [Datadog's @-notification syntax](#notification).
   A common use-case for the monitor message is to include a step-by-step way to resolve the problem.
 
-3. Optionally enable **monitor renotification**. This option is useful to remind your team that a problem is not solved until the monitor is marked as [resolved][5]. If enabled, an escalation message can be configured to send anytime the monitor renotifies. The original message is included as well.
+3. Optionally enable **monitor renotification**. This option is useful to remind your team that a problem is not solved until the monitor is marked as [resolved][5]. If enabled, an escalation message can be configured to send any time the monitor renotifies. The original message is included as well.
 
 ***Note:*** *To avoid notification storms Datadog groups notifications with the same monitor ID and alert type in 20 second buckets. The first two notifications in the group within a 20 second bucket are sent as normal. All additional notifications within that 20 second window are sent as a single message.*
 
