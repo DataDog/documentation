@@ -41,7 +41,7 @@ Automatic instrumentation is available on Windows if your application runs on .N
 
 #### IIS
 
-If your application is hosted on IIS, restart IIS so it loads new environment variables created by the MSI installer. Note that Microsost does [not recommended][9] using `iisreset.exe` to restart IIS. Instead, it is recommended you use the `net stop` and `net start` commands:
+If your application is hosted on IIS, restart IIS so it loads new environment variables added by the MSI installer. Note that Microsost does [not recommended][9] using `iisreset.exe` to restart IIS. Instead, use the `net stop` and `net start` commands:
 
 ```
 net stop was /y
@@ -50,7 +50,9 @@ net start w3svc
 
 #### .NET Core
 
-.NET Core doesn't support the Windows Global Assembly Cache (GAC) used by .NET Framework. To get around this, you can deploy our managed assemblies together with your application by adding the `Datadog.Trace.ClrProfiler.Managed` NuGet package. It is important that the versions of NuGet package and the MSI installer match.
+.NET Core doesn't support the Windows Global Assembly Cache (GAC) used by .NET Framework. Instead, you can deploy our managed assemblies together with your application by adding the `Datadog.Trace.ClrProfiler.Managed` NuGet package. It is important that you match the versions of the NuGet package and the MSI installer.
+
+For example, if you are using the MSI instalelr for version `0.4.1-beta`, you should use:
 
 ```
 dotnet add package Datadog.Trace.ClrProfiler.Managed --version 0.4.1-beta
