@@ -218,21 +218,30 @@ For instance, if an alert that can be triggered by two hosts tagged with `role:p
 
 If your alert message needs to send double curly braces, such as `{{ my.message }}`, use the `{{{{raw}}}}` formatting:
 
+The following template:
+
 ```
-# 1:
 {{{{raw}}}}
 {{ my.message.1 }} {{ my.message.2 }}
 {{{{/raw}}}}
+```
 
-# 1 outputs:
+outputs:
+
+```
 {{ my.message.1 }} {{ my.message.2 }}
+```
 
-# 2:
-{{{{is_match "host.name" "prod-host"}}}}
+If the host name matches `<HOST_NAME>`, the following template:
+```
+{{{{is_match "host.name" "<HOST_NAME>"}}}}
 {{ .matched }} the host name
 {{{{/is_match}}}}
+```
 
-# If the host name is matched, 2 outputs:
+outputs:
+
+```
 {{ .matched }} the host name
 ```
 
