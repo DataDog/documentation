@@ -84,8 +84,8 @@ The .NET tracer can instrument the following web frameworks automatically:
 | ASP.NET MVC 4     | 4.0.40804 | .NET Framework 4.5+ | Windows | Public Beta       |
 | ASP.NET Web API 2 | 2.2+      | .NET Framework 4.5+ | Windows | Public Beta       |
 | ASP.NET Core MVC  | 2.0+      | .NET Framework 4.5+ | Windows | Public Beta       |
-| ASP.NET Core MVC  | 2.0+      | .NET Core 2.0.x     | Windows | Public Beta       |
-| ASP.NET Core MVC  | 2.0+      | .NET Core 2.0.x     | Linux   | Coming soon       |
+| ASP.NET Core MVC  | 2.0+      | .NET Core 2.0+      | Windows | Public Beta       |
+| ASP.NET Core MVC  | 2.0+      | .NET Core 2.0+      | Linux   | Coming soon       |
 
 Don’t see your desired web frameworks? We’re continually adding additional support. [Check with the Datadog team][5] to see if we can help.
 
