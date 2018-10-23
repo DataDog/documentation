@@ -52,7 +52,7 @@ net start w3svc
 
 .NET Core doesn't support the Windows Global Assembly Cache (GAC) used by .NET Framework. Instead, you can deploy our managed assemblies together with your application by adding the `Datadog.Trace.ClrProfiler.Managed` NuGet package. It is important that you match the versions of the NuGet package and the MSI installer.
 
-For example, if you are using the MSI instalelr for version `0.4.1-beta`, you should use:
+For example, if you are using the MSI installer for version `0.4.1-beta`, you should use:
 
 ```
 dotnet add package Datadog.Trace.ClrProfiler.Managed --version 0.4.1-beta
