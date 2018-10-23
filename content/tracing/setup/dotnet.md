@@ -22,7 +22,7 @@ further_reading:
 
 ## Getting Started
 
-To begin tracing applications written in any language, first [install and configure the Datadog Agent][1]. The .NET Tracer runs in-process to instrument your applications and sends traces from your to the Agent.
+To begin tracing applications written in any language, first [install and configure the Datadog Agent][1]. The .NET Tracer runs in-process to instrument your applications and sends traces to the Agent.
 
 ## Automatic Instrumentation
 
