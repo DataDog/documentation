@@ -216,36 +216,35 @@ For instance, if an alert that can be triggered by two hosts tagged with `role:p
 
 ## Advanced variable usage
 
-If your alert message needs to send double curly braces, such as `{{ my.message }}`, use the `{{{{raw}}}}` formatting:
+If your alert message needs to send double curly braces, such as `{{ <TEXT> }}`, use the `{{{{raw}}}}` formatting:
 
 The following template:
 
 ```
 {{{{raw}}}}
-{{ my.message.1 }} {{ my.message.2 }}
+{{ <TEXT_1> }} {{ <TEXT_2> }}
 {{{{/raw}}}}
 ```
 
 outputs:
 
 ```
-{{ my.message.1 }} {{ my.message.2 }}
+{{ <TEXT_1> }} {{ <TEXT_2> }}
 ```
 
-If the host name matches `<HOST_NAME>`, the following template:
+The `^|#` helpers shown in the [Conditional variables](#conditional-variables) section cannot be used with `{{{{raw}}}}` formatting and must be removed. For instance, to output raw text with the `{{is_match}}` conditional variable use the following template:
+
 ```
 {{{{is_match "host.name" "<HOST_NAME>"}}}}
 {{ .matched }} the host name
 {{{{/is_match}}}}
 ```
 
-outputs:
+If `host.name` matches `<HOST_NAME>`, the template outputs:
 
 ```
 {{ .matched }} the host name
 ```
-
-**Note**: The `^|#` helpers shown in the [Conditional variables](#conditional-variables) section cannot be used with `{{{{raw}}}}` formatting.
 
 ## @-notification
 
