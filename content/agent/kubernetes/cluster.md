@@ -144,17 +144,17 @@ Add the following environment variables to the `Dockerfiles/manifests/agent.yaml
 ```yaml
     - name: DD_CLUSTER_AGENT_ENABLED
             value: 'true'
-          - name: DD_CLUSTER_AGENT_AUTH_TOKEN
-            valueFrom:
-              secretKeyRef:
-                name: datadog-auth-token
-                key: token
-#            value: "<ThirtyX2XcharactersXlongXtoken>" # If you are not using the secret, just set the string.
+    - name: DD_CLUSTER_AGENT_AUTH_TOKEN
+      valueFrom:
+        secretKeyRef:
+          name: datadog-auth-token
+          key: token
+#      value: "<ThirtyX2XcharactersXlongXtoken>" # If you are not using the secret, just set the string.
 ```
 
 Create the DaemonSet with this command:
 ```
-kubectl applyh -f Dockerfiles/manifests/agent.yaml
+kubectl apply -f Dockerfiles/manifests/agent.yaml
 ```
 
 ### Final Verification
