@@ -7,16 +7,16 @@ comments: <!–– Original flowchart is in lucidchart. Search Trello for link o
 ---
 
 {{< tabs >}}
-{{% tab "Agent v5" %}}
-
-{{< img src="agent/faq/agent_hostname.jpeg" alt="Agent hostname scheme" responsive="true" >}}
-
-{{% /tab %}}
 {{% tab "Agent v6" %}}
 
 For Agent 6, some differences in hostname resolution apply. See our document on [Differences in hostname resolution between Agent v5 and Agent v6][2].
 
 [2]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/hostname-resolution.md
+
+{{% /tab %}}
+{{% tab "Agent v5" %}}
+
+{{< img src="agent/faq/agent_hostname.jpeg" alt="Agent hostname scheme" responsive="true" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
