@@ -56,10 +56,10 @@ And in the manifest of your Agent (DaemonSet/deployment) add the following:
 To enable [Log collection][10] add the following lines in your `http-config`:
 
 ```
-(...)
+[...]
 data:
   http-config: |-
-  (...)
+  [...]
     logs:
       - type: docker
         service: docker
@@ -73,50 +73,50 @@ Learn more about this in [the Docker log collection documentation][11].
 To mount a custom `datadog.yaml` in a container with a ConfigMap, employ the following in your DaemonSet manifest:
 
 ```yaml
-[…]
-volumeMounts:
- […]
- - name: confd-config
- mountPath: /conf.d
- - name: datadog-yaml
- mountPath: /etc/datadog-agent/datadog.yaml
- subPath: datadog.yaml
-
-volumes:
- […]
- - name: confd-config
- configMap:
- name: dd-agent-config
- items:
- - key: http-config
- path: http_check.yaml
- - name: datadog-yaml
- configMap:
- name: dd-agent-config
- items:
- - key: datadog-yaml
- path: datadog.yaml 
+[...]
+        volumeMounts:
+        [...]
+          - name: confd-config
+            mountPath: /conf.d
+          - name: datadog-yaml
+            mountPath: /etc/datadog-agent/datadog.yaml
+            subPath: datadog.yaml
+      volumes:
+      [...]
+        - name: confd-config
+          configMap:
+            name: dd-agent-config
+            items:
+              - key: http-config
+                path: http_check.yaml
+        - name: datadog-yaml
+          configMap:
+            name: dd-agent-config
+            items:
+              - key: datadog-yaml
+                path: datadog.yaml 
+[...]
  ```
 
  And in your ConfigMap:
 
  ```yaml
- kind: ConfigMap
+kind: ConfigMap
 apiVersion: v1
 metadata:
- name: dd-agent-config
- namespace: default
+  name: dd-agent-config
+  namespace: default
 data:
- http-config: |-
- init_config:
- instances:
- datadog-yaml: |-
- listeners:
- - name: kubelet
- config_providers:
- - name: kubelet
- polling: true
- check_runners: 1
+  http-config: |-
+    init_config:
+    instances:
+  datadog-yaml: |-
+    check_runners: 1
+    listeners:
+      - name: kubelet
+    config_providers:
+      - name: kubelet
+        polling: true
  ```
 
 
