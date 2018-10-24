@@ -1,7 +1,7 @@
 ---
 title: Récupérer l'utilisation de votre compte multi-org
 type: apicontent
-order: 23.4
+order: 23.5
 external_redirect: /api/#get-usage-across-your-multi-org-account
 ---
 
