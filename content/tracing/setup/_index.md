@@ -95,14 +95,15 @@ For more information about the Datadog Agent, see the [dedicated doc page][18] o
 ## Primary Tags
 ### Definition
 
-There are several dimensions that you can configure to scope an entire Datadog APM application. This includes aggregate statistics (such as requests/second, latency, error rate, Apdex score) and visible traces. Those dimensions are setup through Primary tags allows you to get an even finer view of your application's behavior. Use cases for primary tags include for instance the environment, the Availability zone or the Datacenter...
+There are several dimensions that you can configure to scope an entire Datadog APM application. This includes aggregate statistics (such as requests/second, latency, error rate, Apdex score) and visible traces. Those dimensions are setup through Primary tags allows you to get an even finer view of your application's behavior. Use cases for primary tags include for instance the  the environment, the Availability zone, or the Datacenter...
 
 Primary tags must follow a different set of rules from those of conventional [Datadog tags][26].
 
 ### Setup
 #### Environment 
 
-The default primary tag is `env`, and the default environment value for un-tagged data is `env:none`.  There are several ways to specify an environment when reporting data:
+The default and mandatory primary tag is the environment your traces are collected from. Its tag key is `env`, and its default value for un-tagged data is `env:none`. 
+There are several ways to specify an environment when reporting data:
 
 1. Host tag:  
   Use a host tag with the format `env:<ENVIRONMENT>` to tag all traces from that Agent accordingly.
@@ -173,9 +174,9 @@ Environments appear at the top of APM pages. Use the dropdown to scope the data 
 {{< img src="tracing/setup/envs_tracing_screen.png" alt="Envs tracing" responsive="true" style="width:80%;">}}
 
 
-#### Add a primary tag
+#### Add a second primary tag
 
-If you added another tag than `env` to your traces, it can be set as a primary tag along the environment tag. Go to the [APM Settings][28] page to define, change, or remove your primary tags. 
+If you added another tag than `env:<ENVIRONMENT>` to your traces, it can be set as a primary tag along the environment tag. Go to the [APM Settings][28] page to define, change, or remove your primary tags. 
 
 Note:
 
