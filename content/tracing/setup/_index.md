@@ -116,7 +116,7 @@ There are several ways to specify an environment when reporting data:
     ```
 
 3. Per trace:  
-  When submitting a single trace, specify an environment by tagging one of its spans with the metadata key `env`. This overrides the Agent configuration and the host tags value (if any). Consult the [trace tagging documentation][29]to learn how to assign a tag to your traces.
+  When submitting a single trace, specify an environment by tagging one of its spans with the metadata key `env`. This overrides the Agent configuration and the host tag's value (if any). Consult the [trace tagging documentation][29] to learn how to assign a tag to your traces.
 
 ##### Viewing Data by Environment
 
@@ -126,11 +126,11 @@ Environments appear at the top of APM pages. Use the dropdown to scope the data 
 
 ### Add a second primary tag in Datadog
 
-If you added another tag than `env:<ENVIRONMENT>` to your traces, it can be set as a primary tag along the environment tag. Go to the [APM Settings][28] page to define, change, or remove your primary tags. 
+If you added a tag other than `env:<ENVIRONMENT>` to your traces, it can be set as a primary tag along with the environment tag. Go to the [APM Settings][28] page to define, change, or remove your primary tags. 
 
 Note:
 
-* Only organization Administrators have access to this page. 
+* Only organization administrators have access to this page. 
 * Changes may take up to two hours to be reflected in the UI.
 
 If you change a previously set primary tag, be aware of the following:
