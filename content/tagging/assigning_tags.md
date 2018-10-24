@@ -41,6 +41,58 @@ tags:
 
 It is recommended you assign tags as `<KEY>:<VALUE>` pairs, but simple tags are also accepted. See [defining tags][61] for more details.
 
+### Traces
+
+When submitting a single trace, tag its spans to override Agent configuration tags and/or the host tags value (if any) for those traces:
+
+{{< tabs >}}
+{{% tab "Go" %}}
+
+```go
+tracer.SetTag("env", "<ENVIRONMENT>")
+```
+
+For OpenTracing use the `tracer.WithGlobalTag` start option to set the environment globally.
+
+{{% /tab %}}
+{{% tab "Java" %}}
+Via sysprop:
+
+```
+-Ddd.trace.span.tags=env:<ENVIRONMENT>
+```
+
+Via environment variables:
+
+```
+DD_TRACE_SPAN_TAGS="env:<ENVIRONMENT>"
+```
+
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+```ruby
+Datadog.tracer.set_tags('env' => '<ENVIRONMENT>')
+```
+
+{{% /tab %}}
+{{% tab "Python" %}}
+
+```python
+from ddtrace import tracer
+tracer.set_tags({'env': '<ENVIRONMENT>'})
+```
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+```csharp
+using Datadog.Tracing;
+Tracer.Instance.ActiveScope.Span.SetTag("env", "<ENVIRONMENT>");
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Environment Variables
 
 When installing the containerized Datadog Agent, host tags can be set using the environment variable `DD_TAGS`. We automatically collect common tags from [Docker][77], [Kubernetes][78], [ECS][79], [Swarm, Mesos, Nomad, and Rancher][77]. To extract even more tags, use the following options:

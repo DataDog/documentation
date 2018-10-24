@@ -39,8 +39,7 @@ To start tracing your application:
 2. **Enable trace collection for the Datadog Agent**. [See below dedicated instructions](#agent-configuration).
 
 2. **Configure your environment**:
-  An environment is a first class dimension used to scope a whole Datadog APM application. A common use case is to disaggregate metrics from stage environments such as production, staging, and pre-production. [Learn how to configure environments](#primary-tags).
-  **Note**: if you do not configure your own environments, all data will default to `env:none`.
+  An environment is a mandatory [Primary tags](#primary-tags) used to scope a whole Datadog APM application. A common use case is to disaggregate metrics from stage environments such as production, staging, and pre-production. [Learn how to configure primary tags](#primary-tags).
 
 3. **Instrument your application**:
 
@@ -117,55 +116,7 @@ There are several ways to specify an environment when reporting data:
     ```
 
 3. Per trace:  
-  When submitting a single trace, specify an environment by tagging one of its spans with the metadata key `env`. This overrides the Agent configuration and the host tags value (if any).  
-
-{{< tabs >}}
-{{% tab "Go" %}}
-
-```go
-tracer.SetTag("env", "<ENVIRONMENT>")
-```
-
-For OpenTracing use the `tracer.WithGlobalTag` start option to set the environment globally.
-
-{{% /tab %}}
-{{% tab "Java" %}}
-Via sysprop:
-
-```
--Ddd.trace.span.tags=env:<ENVIRONMENT>
-```
-
-Via environment variables:
-
-```
-DD_TRACE_SPAN_TAGS="env:<ENVIRONMENT>"
-```
-
-{{% /tab %}}
-{{% tab "Ruby" %}}
-
-```ruby
-Datadog.tracer.set_tags('env' => '<ENVIRONMENT>')
-```
-
-{{% /tab %}}
-{{% tab "Python" %}}
-
-```python
-from ddtrace import tracer
-tracer.set_tags({'env': '<ENVIRONMENT>'})
-```
-{{% /tab %}}
-{{% tab ".NET" %}}
-
-```csharp
-using Datadog.Tracing;
-Tracer.Instance.ActiveScope.Span.SetTag("env", "<ENVIRONMENT>");
-```
-
-{{% /tab %}}
-{{< /tabs >}}
+  When submitting a single trace, specify an environment by tagging one of its spans with the metadata key `env`. This overrides the Agent configuration and the host tags value (if any). Consult the [trace tagging documentation][29]to learn how to assign a tag to your traces.
 
 ##### Viewing Data by Environment
 
@@ -173,8 +124,7 @@ Environments appear at the top of APM pages. Use the dropdown to scope the data 
 
 {{< img src="tracing/setup/envs_tracing_screen.png" alt="Envs tracing" responsive="true" style="width:80%;">}}
 
-
-#### Add a second primary tag
+### Add a second primary tag in Datadog
 
 If you added another tag than `env:<ENVIRONMENT>` to your traces, it can be set as a primary tag along the environment tag. Go to the [APM Settings][28] page to define, change, or remove your primary tags. 
 
@@ -225,3 +175,4 @@ Primary tags appear at the top of APM pages. Use these selectors to slice the da
 [26]: /tagging/
 [27]: /agent/faq/agent-configuration-files/?tab=agentv6
 [28]: https://app.datadoghq.com/apm/settings
+[29]: /tagging/assigning_tags/#traces
