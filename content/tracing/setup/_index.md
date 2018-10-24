@@ -94,7 +94,7 @@ For more information about the Datadog Agent, see the [dedicated doc page][18] o
 ## Primary Tags
 ### Definition
 
-There are several dimensions that you can configure to scope an entire Datadog APM application. This includes aggregate statistics (such as requests/second, latency, error rate, Apdex score) and visible traces. Those dimensions are setup through Primary tags allows you to get an even finer view of your application's behavior. Use cases for primary tags include for instance the  the environment, the Availability zone, or the Datacenter...
+There are several dimensions that you can configure to scope an entire Datadog APM application. These include aggregate statistics (such as requests/second, latency, error rate, Apdex score) and visible traces. Those dimensions are set up through primary tags that allow you to get an even finer view of your application's behavior. Use cases for primary tags include, the environment, the availability zone, the datacenter, etc.
 
 Primary tags must follow a different set of rules from those of conventional [Datadog tags][26].
 
