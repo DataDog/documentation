@@ -39,7 +39,7 @@ To start tracing your application:
 2. **Enable trace collection for the Datadog Agent**. [See below dedicated instructions](#agent-configuration).
 
 2. **Configure your environment**:
-  An environment is a mandatory [Primary tags](#primary-tags) used to scope a whole Datadog APM application. A common use case is to disaggregate metrics from stage environments such as production, staging, and pre-production. [Learn how to configure primary tags](#primary-tags).
+  An environment is a mandatory [primary tag](#primary-tags) used to scope a whole Datadog APM application. A common use case is to disaggregate metrics from stage environments such as production, staging, and pre-production. [Learn how to configure primary tags](#primary-tags).
 
 3. **Instrument your application**:
 
