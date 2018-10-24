@@ -718,11 +718,6 @@ languages:
           url: "tracing/getting_further/trace_sampling_and_storage"
           weight: 460
           parent: customnav_tracingnav_getting_further
-        - identifier: customnav_tracingnav_apm_event
-          name: "APM events"
-          url: "tracing/getting_further/apm_events"
-          weight: 470
-          parent: customnav_tracingnav_getting_further
 
         # Trace API
         - identifier: customnav_tracingnav_api
@@ -1770,11 +1765,6 @@ languages:
           name: "Storage & Sampling"
           url: "tracing/getting_further/trace_sampling_and_storage"
           weight: 460
-          parent: customnav_tracingnav_getting_further
-        - identifier: customnav_tracingnav_apm_event
-          name: "APM events"
-          url: "tracing/getting_further/apm_events"
-          weight: 470
           parent: customnav_tracingnav_getting_further
 
         # Trace API
