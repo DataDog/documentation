@@ -723,11 +723,6 @@ languages:
           url: "tracing/getting_further/apm_events"
           weight: 470
           parent: customnav_tracingnav_getting_further
-        - identifier: customnav_tracingnav_apm_first_class_dimensions
-          name: "First Class Dimensions"
-          url: "tracing/getting_further/first_class_dimensions"
-          weight: 480
-          parent: customnav_tracingnav_getting_further
 
         # Trace API
         - identifier: customnav_tracingnav_api
@@ -1780,11 +1775,6 @@ languages:
           name: "APM events"
           url: "tracing/getting_further/apm_events"
           weight: 470
-          parent: customnav_tracingnav_getting_further
-        - identifier: customnav_tracingnav_apm_first_class_dimensions
-          name: "First Class Dimensions"
-          url: "tracing/getting_further/first_class_dimensions"
-          weight: 480
           parent: customnav_tracingnav_getting_further
 
         # Trace API
