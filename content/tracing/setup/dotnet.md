@@ -22,7 +22,7 @@ further_reading:
 
 ## Getting Started
 
-To begin tracing applications written in any language, first [install and configure the Datadog Agent][1].
+To begin tracing applications written in any language, first [install and configure the Datadog Agent][1]. The .NET Tracer runs in-process to instrument your applications and sends traces to the Agent.
 
 ## Automatic Instrumentation
 
@@ -32,23 +32,31 @@ Automatic instrumentation captures:
 
 * Method execution time
 * Relevant trace data such as URL and status response codes for web requests or SQL query for database access
-* Unhandled exceptions, including stacktrace if available
+* Unhandled exceptions, including stacktraces if available
 * A total count of traces (e.g. web requests) flowing through the system
 
 ### Windows
 
-Automatic instrumentation is available on Windows if your web application meets the following requirements:
+Automatic instrumentation is available on Windows if your application runs on .NET Framework 4.5+ or .NET Core 2.0+. In addition to [installing the Datadog Agent][1], install the .NET Tracer using the [MSI installer for Windows][3].
 
-* Hosted on IIS
-* Runs on .NET Framework 4.5+ or .NET Core 2.0.x
+#### IIS
 
-Follow these steps to enable automatic instrumentation:
+If your application is hosted on IIS, restart IIS so it loads new environment variables added by the MSI installer. Note that Microsoft does [not recommend][9] using `iisreset.exe` to restart IIS. Instead, use the `net stop` and `net start` commands:
 
-* [install and configure Datadog Agent][1]
-* install the .NET Tracer using the [MSI installer for Windows][3]
-* restart IIS so it re-reads the registry
+```
+net stop was /y
+net start w3svc
+```
 
-After restarting IIS and using your web application, see your traces in [Datadog APM][7].
+#### .NET Core
+
+.NET Core doesn't support the Windows Global Assembly Cache (GAC) used by the .NET Framework. Instead, you can deploy Datadog's managed assemblies together with your application by adding the `Datadog.Trace.ClrProfiler.Managed` NuGet package. It is important that you match the versions of the NuGet package and the MSI installer.
+
+For example, if you are using the MSI installer for version `0.4.1-beta`, use:
+
+```
+dotnet add package Datadog.Trace.ClrProfiler.Managed --version 0.4.1-beta
+```
 
 ### Linux
 
@@ -61,11 +69,10 @@ The .NET tracer supports automatic instrumentation on the following runtimes:
 | Runtime        | Versions | OS                | Support Type      |
 | :------------- | :------- | :---------------- | :---------------- |
 | .NET Framework | 4.5+     | Windows           | Public Beta       |
-| .NET Core      | 2.0.x    | Windows           | Public Beta       |
-| .NET Core      | 2.0.x    | Linux             | Coming soon       |
-| .NET Core      | 2.1.3+   | Windows and Linux | Coming soon       |
+| .NET Core      | 2.0+     | Windows           | Public Beta       |
+| .NET Core      | 2.0+     | Linux             | Coming soon       |
 
-**Note**: Libraries that target .NET Standard 2.0 are supported when running on either .NET Framework 4.6.1+ or .NET Core 2.0.x.
+**Note**: Libraries that target .NET Standard 2.0 are supported when running on either .NET Framework 4.6.1+ or .NET Core 2.0+.
 
 Don’t see your desired frameworks? We’re continually adding additional support. [Check with the Datadog team][5] to see if we can help.
 
@@ -79,8 +86,8 @@ The .NET tracer can instrument the following web frameworks automatically:
 | ASP.NET MVC 4     | 4.0.40804 | .NET Framework 4.5+ | Windows | Public Beta       |
 | ASP.NET Web API 2 | 2.2+      | .NET Framework 4.5+ | Windows | Public Beta       |
 | ASP.NET Core MVC  | 2.0+      | .NET Framework 4.5+ | Windows | Public Beta       |
-| ASP.NET Core MVC  | 2.0+      | .NET Core 2.0.x     | Windows | Public Beta       |
-| ASP.NET Core MVC  | 2.0+      | .NET Core 2.0.x     | Linux   | Coming soon       |
+| ASP.NET Core MVC  | 2.0+      | .NET Core 2.0+      | Windows | Public Beta       |
+| ASP.NET Core MVC  | 2.0+      | .NET Core 2.0+      | Linux   | Coming soon       |
 
 Don’t see your desired web frameworks? We’re continually adding additional support. [Check with the Datadog team][5] to see if we can help.
 
@@ -128,5 +135,5 @@ For more details on supported platforms, see the [.NET Standard documentation][6
 [4]: https://www.nuget.org/packages/Datadog.Trace/
 [5]: /help
 [6]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support
-[7]: https://app.datadoghq.com/apm
 [8]: #manual-instrumentation
+[9]: https://support.microsoft.com/en-us/help/969864/using-iisreset-exe-to-restart-internet-information-services-iis-result
