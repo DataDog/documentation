@@ -41,7 +41,7 @@ Automatic instrumentation is available on Windows if your application runs on .N
 
 #### IIS
 
-If your application is hosted on IIS, restart IIS so it loads new environment variables added by the MSI installer. Note that Microsost does [not recommended][9] using `iisreset.exe` to restart IIS. Instead, use the `net stop` and `net start` commands:
+If your application is hosted on IIS, restart IIS so it loads new environment variables added by the MSI installer. Note that Microsoft does [not recommend][9] using `iisreset.exe` to restart IIS. Instead, use the `net stop` and `net start` commands:
 
 ```
 net stop was /y
