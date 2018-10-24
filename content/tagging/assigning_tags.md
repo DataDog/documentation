@@ -13,12 +13,13 @@ further_reading:
   text: Learn how to use tags in Datadog
 ---
 
+## Overview 
+
 Tagging is used throughout Datadog to query the machines and metrics you monitor. Without the ability to assign and filter based on tags, finding problems in your environment and narrowing them down enough to discover the true causes could be difficult. Learn how to [define tags][61] in Datadog before going further.
 
-## Where to assign tags
-There are several places tags can be assigned: configuration files, [environment variables][80], the UI, [API][65], [DogStatsD][75], and inheriting from the [integrations][1]. It is recommended that you use configuration files and integration inheritance for most of your tagging needs.
+There are several places tags can be assigned: [configuration files](#configuration-files), [environment variables][80], your [traces](#traces), the Datadog [UI](#ui), [API][65], [DogStatsD][75], and inheriting from the [integrations][1]. It is recommended that you use configuration files and integration inheritance for most of your tagging needs.
 
-### Configuration Files
+## Configuration Files
 
 Configure the host tags submitted by the Agent inside `datadog.yaml`. The tags for the [integrations][1] installed with the Agent are configured via YAML files located in the **conf.d** directory of the Agent install. To locate the configuration files, refer to [the Agent configuration files FAQ][59].
 
@@ -41,7 +42,26 @@ tags:
 
 It is recommended you assign tags as `<KEY>:<VALUE>` pairs, but simple tags are also accepted. See [defining tags][61] for more details.
 
-### Traces
+## Environment Variables
+
+When installing the containerized Datadog Agent, host tags can be set using the environment variable `DD_TAGS`. We automatically collect common tags from [Docker][77], [Kubernetes][78], [ECS][79], [Swarm, Mesos, Nomad, and Rancher][77]. To extract even more tags, use the following options:
+
+| Environment Variable               | Description                                    |
+|------------------------------------|------------------------------------------------|
+| `DD_DOCKER_LABELS_AS_TAGS`         | Extract docker container labels                |
+| `DD_DOCKER_ENV_AS_TAGS`            | Extract docker container environment variables |
+| `DD_KUBERNETES_POD_LABELS_AS_TAGS` | Extract pod labels                             |
+
+**Examples:**
+
+```shell
+DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app","release":"helm_release"}'
+DD_DOCKER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
+```
+
+Either define the variables in your custom `datadog.yaml`, or set them as JSON maps in these environment variables. The map key is the source (`label/envvar`) name, and the map value is the Datadog tag name.
+
+## Traces
 
 When submitting a single trace, tag its spans to override Agent configuration tags and/or the host tags value (if any) for those traces:
 
@@ -93,26 +113,7 @@ Tracer.Instance.ActiveScope.Span.SetTag("env", "<ENVIRONMENT>");
 {{% /tab %}}
 {{< /tabs >}}
 
-### Environment Variables
-
-When installing the containerized Datadog Agent, host tags can be set using the environment variable `DD_TAGS`. We automatically collect common tags from [Docker][77], [Kubernetes][78], [ECS][79], [Swarm, Mesos, Nomad, and Rancher][77]. To extract even more tags, use the following options:
-
-| Environment Variable               | Description                                    |
-|------------------------------------|------------------------------------------------|
-| `DD_DOCKER_LABELS_AS_TAGS`         | Extract docker container labels                |
-| `DD_DOCKER_ENV_AS_TAGS`            | Extract docker container environment variables |
-| `DD_KUBERNETES_POD_LABELS_AS_TAGS` | Extract pod labels                             |
-
-**Examples:**
-
-```shell
-DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app","release":"helm_release"}'
-DD_DOCKER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
-```
-
-Either define the variables in your custom `datadog.yaml`, or set them as JSON maps in these environment variables. The map key is the source (`label/envvar`) name, and the map value is the Datadog tag name.
-
-### UI
+## UI
 
 {{< tabs >}}
 {{% tab "Host Map" %}}
@@ -168,7 +169,7 @@ The [AWS][60] integration tile allows you to assign additional tags to all metri
 {{% /tab %}}
 {{< /tabs >}}
 
-### API
+## API
 
 {{< tabs >}}
 {{% tab "Assignment" %}}
@@ -226,7 +227,7 @@ sum:page.views{domain:example.com} by {host}
 {{% /tab %}}
 {{< /tabs >}}
 
-### DogStatsD
+## DogStatsD
 
 Add tags to any metric, event, or service check you send to [DogStatsD][75]. For example, compare the performance of two algorithms by tagging a timer metric with the algorithm version:
 
@@ -245,7 +246,7 @@ Note that tagging is a [Datadog-specific extension][76] to StatsD.
 
 Special consideration is necessary when assigning the `host` tag to DogStatsD metrics. For more information on the host tag key, see the [DogStatsD section][82].
 
-### Integration Inheritance
+## Integration Inheritance
 
 The most efficient method for assigning tags is to rely on your integrations. Tags assigned to your Amazon Web Services instances, Chef recipes, and more are all automatically assigned to the hosts and metrics when they are brought into Datadog.
 
