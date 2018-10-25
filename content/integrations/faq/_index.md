@@ -34,6 +34,7 @@ private: true
 * [Why is there a delay in receiving my data?][22]
 * [I can't filter out my ELB instances - will I be charged for them?][23]
 * [I just set up my AWS integration. Why am I seeing duplicate hosts?][24]
+* [Integration Setup for ECS Fargate][80]
 
 ## Apache
 
@@ -216,3 +217,4 @@ private: true
 [77]: /integrations/faq/how-to-retrieve-wmi-metrics
 [78]: /integrations/faq/jboss-eap-7-datadog-monitoring-via-jmx
 [79]: /integrations/faq/how-to-collect-metrics-with-sql-stored-procedure
+[80]: /integrations/faq/integration-setup-ecs-fargate

@@ -1,0 +1,26 @@
+{
+  "family": "<TASK_NAME>",
+  "networkMode": "awsvpc",
+  "containerDefinitions": [
+      {
+          "name": "datadog-agent",
+          "image": "datadog/agent:latest",
+          "essential": true,
+          "environment": [
+              {
+                  "name": "DD_API_KEY",
+                  "value": "<YOUR_API_KEY>"
+              },
+              {
+                  "name": "ECS_FARGATE",
+                  "value": "true"
+              }
+          ]
+      }
+  ],
+  "requiresCompatibilities": [
+      "FARGATE"
+  ],
+  "cpu": "256",
+  "memory": "512"
+}
