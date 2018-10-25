@@ -48,11 +48,11 @@ In the Trace Search view you can:
 
 ## APM Events
 
-An APM event is generated every time a trace is generated. It corresponds to all the tags associated to the trace, plus the [top span][3] of the trace.
+An APM event is generated every time a trace is generated. It corresponds to all the tags associated to the trace, plus the [top span][9] of the trace.
 
-Why aren't APM events just traces? Because traces [get sampled][4] and APM events don't, and Datadog only keeps the top span information for the APM events, not the full trace.
+Why aren't APM events just traces? Because traces [get sampled][10] and APM events don't, and Datadog only keeps the top span information for the APM events, not the full trace.
 
-APM Events can be enriched with tags, like `customer`, `service`, `country`, `billing plan`, `request duration`, and `product` type.  You can then [filter][1] and query on those tags in the Trace Search & Analytics UI.
+APM Events can be enriched with tags, like `customer`, `service`, `country`, `billing plan`, `request duration`, and `product` type.  You can then [filter][11] and query on those tags in the Trace Search & Analytics UI.
 
 [Refer to the tagging section to learn how to assign tags to a trace][8].
 
@@ -240,3 +240,6 @@ All measure have their own unit that is then used for display in the Trace searc
 [6]: /tagging/#tags-best-practices
 [7]: https://app.datadoghq.com/apm/search
 [8]: /tagging/assigning_tags/#traces
+[9]: /tracing/visualization/#spans
+[10]: /tracing/getting_further/trace_sampling_and_storage
+[11]: /tracing/visualization/search/#search
