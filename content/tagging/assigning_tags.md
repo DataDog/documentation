@@ -65,6 +65,8 @@ Either define the variables in your custom `datadog.yaml`, or set them as JSON m
 
 When submitting a single trace, tag its spans to override Agent configuration tags and/or the host tags value (if any) for those traces:
 
+The following examples use the default primary tag `env:<ENVIRONMENT>` but you can use any `<KEY>:<VALUE>` tag instead.
+
 {{< tabs >}}
 {{% tab "Go" %}}
 
