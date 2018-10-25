@@ -11,10 +11,10 @@ further_reading:
   text: "Monitor AWS Fargate applications with Datadog"
 ---
 
-Setup integrations for [ECS Fargate][1] with [Docker Label Annotations][2].
+Set up integrations for [ECS Fargate][1] with [Docker Label Annotations][2].
 
 ## Add an Integration
-If you already [setup the Container Agent][3] in ECS Fargate, follow these steps to add an integration to your existing cluster.
+If you already [set up the Container Agent][3] in ECS Fargate, follow these steps to add an integration to your existing cluster.
 
 ### Update the Task Definition
 1. Log in to your [AWS Web Console][4] and navigate to the ECS section.
