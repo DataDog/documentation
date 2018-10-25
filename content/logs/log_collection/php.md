@@ -181,32 +181,6 @@ $monolog->pushHandler($stream);
 return $r;
 ```
 
-## Configure your Datadog Agent
-
-Create a `php.d/conf.yaml` file in your `conf.d/` folder with the following content:
-
-```yaml
-init_config:
-
-instances:
-    
-## Log section
-logs:
-
-    ## - type: file (mandatory) type of log input source (tcp / udp / file)
-    ##   port/path: (mandatory) Set port if type is tcp or udp. Set path if type is file
-    ##   service: (mandatory) name of the service owning the log
-    ##   source: (mandatory) attribute that defines which integration is sending the logs
-    ##   sourcecategory: (optional) Multiple value attribute. Can be used to refine the source attribute
-    ##   tags: (optional) add tags to each logs collected
-
-  - type: file
-    path: /path/to/your/php/application-json.log
-    service: php
-    source: php
-    sourcecategory: sourcecode
-```
-
 ### Symfony (v2+, v3+)
 
 In your configuration directory `/path/to/config/directory/`, edit the `config_dev.yml` and `config_prod.yml` to configure log management to suit your needs for development and production environments.
@@ -536,6 +510,32 @@ Zend\Log\Logger::registerErrorHandler($logger);
 ```
 
 Then [Stream your log files to Datadog][11]
+
+## Configure your Datadog Agent
+
+Create a `php.d/conf.yaml` file in your `conf.d/` folder with the following content:
+
+```yaml
+init_config:
+
+instances:
+    
+## Log section
+logs:
+
+    ## - type: file (mandatory) type of log input source (tcp / udp / file)
+    ##   port/path: (mandatory) Set port if type is tcp or udp. Set path if type is file
+    ##   service: (mandatory) name of the service owning the log
+    ##   source: (mandatory) attribute that defines which integration is sending the logs
+    ##   sourcecategory: (optional) Multiple value attribute. Can be used to refine the source attribute
+    ##   tags: (optional) add tags to each logs collected
+
+  - type: file
+    path: /path/to/your/php/application-json.log
+    service: php
+    source: php
+    sourcecategory: sourcecode
+```
 
 ## Add meta field and context
 
