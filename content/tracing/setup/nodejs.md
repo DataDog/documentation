@@ -47,8 +47,8 @@ const tracer = require('dd-trace').init()
 
 See the [tracer settings][4] for the list of initialization options.
 
-<div class="alert alert-info">
-You must import and initialize the tracer library in an external file and then import that file as a whole when building your application with a transpiler. This prevents hoisting and ensures that the tracer library gets imported and initialized before importing any other instrumented module.
+<div class="alert alert-warning">
+This library <strong>MUST</strong> be imported and initialized before any instrumented module. When using a transpiler, you <strong>MUST</strong> import and initialize the tracer library in an external file and then import that file as a whole when building your application. This prevents hoisting and ensures that the tracer library gets imported and initialized before importing any other instrumented module.
 </div>
 
 ## Compatibility
@@ -66,10 +66,10 @@ For details about how to how to toggle and configure plugins, check out the [API
 | Module        | Versions    | Support Type    | Notes                        |
 | :----------   | :---------- | :-------------- | :--------------------------- |
 | [express][8]  | 4           | Fully Supported | Supports Sails, Loopback, and [more][29] |
-| [graphql][22] | 0.13        | Fully Supported |                              |
-| [hapi][9]     | ^17.1       | Fully Supported |                              |
+| [graphql][22] | 0.10 - 14   | Fully Supported | Supports Apollo Server and express-graphql |
+| [hapi][9]     | 2 - 17      | Fully Supported |                              |
 | [koa][10]     | 2           | Fully Supported |                              |
-| [restify][11] | 7           | Fully Supported |                              |
+| [restify][11] | 3 - 7       | Fully Supported |                              |
 
 [8]: https://expressjs.com/
 [22]: https://github.com/graphql/graphql-js
@@ -93,14 +93,14 @@ For details about how to how to toggle and configure plugins, check out the [API
 | Module                 | Versions    | Support Type    |  Notes              |
 | :----------            | :---------- | :-------------- | :------------------ |
 | [cassandra-driver][25] |             | Coming Soon     |                     |
-| [elasticsearch][14]    | 15          | Fully Supported |                     |
+| [elasticsearch][14]    | 10 - 15     | Fully Supported |                     |
 | [ioredis][15]          | 4           | Fully Supported |                     |
 | [memcached][24]        | ^2.2        | Fully Supported |                     |
-| [mongodb-core][16]     | 3           | Fully Supported | Supports Mongoose   |
+| [mongodb-core][16]     | 2 - 3       | Fully Supported | Supports Mongoose   |
 | [mysql][17]            | 2           | Fully Supported |                     |
-| [mysql2][18]           | ^1.5        | Fully Supported |                     |
-| [pg][19]               | 6 - 7       | Fully Supported |                     |
-| [redis][20]            | ^2.6        | Fully Supported |                     |
+| [mysql2][18]           | 1           | Fully Supported |                     |
+| [pg][19]               | 4 - 7       | Fully Supported | `pg-native` is not supported at the moment |
+| [redis][20]            | 0.12 - 2.6  | Fully Supported |                     |
 
 [14]: https://github.com/elastic/elasticsearch-js
 [15]: https://github.com/luin/ioredis
@@ -116,7 +116,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 | Module           | Versions    | Support Type    | Notes                     |
 | :----------      | :---------- | :-------------- | :------------------------ |
-| [amqp10][27]     | 3           | Fully Supported | Supports AMQP 1.0 brokers (i.e. ActiveMQ, Apache Qpid) | 
+| [amqp10][27]     | 3           | Fully Supported | Supports AMQP 1.0 brokers (i.e. ActiveMQ, Apache Qpid) |
 | [amqplib][21]    | 0.5         | Fully Supported | Supports AMQP 0.9 brokers (i.e. RabbitMQ, Apache Qpid) |
 | [kafka-node][26] |             | Coming Soon     |                           |
 | [rhea][28]       |             | Coming Soon     |                           |
