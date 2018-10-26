@@ -9,7 +9,7 @@ aliases:
 
 ## Event Query Language
 
-You can narrow down your search by filtering on certain event properties. See the list of filters below for more details.
+Narrow down your search by filtering on certain event properties. See the list of filters below for more details.
 Note that filters perform an exact match search and don't work with partial strings.
 
 | Filter                                            | Description                                                                              |
@@ -23,19 +23,26 @@ Note that filters perform an exact match search and don't work with partial stri
 | `priority:low`                                    | Show only low-priority events. (supports: **low** or **normal**. defaults to **all**)    |
 | `cloud_provider:* NOT "azure"`                    | Show all cloud providers except the ones tagged with "azure"                             |
 
-
 Full text search works on all keywords provided in the search query after applying any filters. Full text search looks inside the event text, title, tags, users who commented on the event and host names and devices tied to the event for any related information.
 
-You can use full text search to find all events with the same key tag with the following query: `tags:<KEY>:<VALUE>`. `tags:<VALUE>` also works, but `tags:<KEY>` and `<KEY>:<VALUE>` don't work.
+Use tag search to find all events with the same key tag with the following query: 
 
-To combine multiple terms into a complex query, you can use any of the following Boolean operators:
+| Filter               | Description                                                                    |
+| ----                 | ---                                                                            |
+| `tags:<KEY>:<VALUE>` | Shows events with the `<KEY>:<VALUE>` tag.                                     |
+| `tags:<VALUE>`       | Shows all events with the `<VAlUE>` attached, whatever the `<KEY>`.            |
+| `<KEY>:*`            | Shows all events with the `<KEY>` attached.                                    |
+| `<KEY>`:`<REGEX>`    | Show all events with `<KEY>:<VALUE>` tag where `<VALUE>` matches the `<REGEX>` |
+| `tags:<KEY>`         | Doesn't return anything.                                                       |
+| `<KEY>:<VALUE>`      | Doesn't return anything.                                                       |
 
-|              |                                                                                                                                    |                                     |
-| :----        | :----                                                                                                                              | :----                               |
-| **Operator** | **Description **                                                                                                                   | **Example **                        |
-| `AND`        | **Intersection**: both terms are in the selected events (if nothing is added, `AND` is taken by default)                           | `redis_* AND down`                  |
-| `OR`         | **Union**: either term is contained in the selected events                                                                        | `sources:nagios OR sources:chef`    |
-| `NOT`        | **Exclusion**: the following term is NOT in the event. This operator works for strings only—this does not work for tag searches | `tags:<KEY>:<VALUE> NOT "<STRING>"` |
+To combine multiple terms into a complex query, use any of the following Boolean operators:
+
+| Operator | Description                                                                                                                      | Example                             |
+| ----     | ----                                                                                                                             | -----                               |
+| `AND`    | **Intersection**: both terms are in the selected events (if nothing is added, `AND` is taken by default).                        | `redis_* AND down`                  |
+| `OR`     | **Union**: either term is contained in the selected events.                                                                      | `sources:nagios OR sources:chef`    |
+| `NOT`    | **Exclusion**: the following term is NOT in the event. This operator works for strings only—this does not work for tag searches. | `tags:<KEY>:<VALUE> NOT "<STRING>"` |
 
 In the example below, a full text search is performed to find all open chef or Nagios errors that mention one or more Redis instances that are currently down.
 
@@ -43,7 +50,7 @@ In the example below, a full text search is performed to find all open chef or N
 
 Note that some of the advanced query language features (e.g. boolean logic) work only in the event stream page, and do not work in graph tiles or in screen board widgets.
 
-Prefixes can easily be combined to make much more complex searches.  For example, if you wanted to find all open chef or nagios errors that mention cassandra, you'd have a search like:
+Combine prefixes to construct more complex searches. For example, if you wanted to find all open `chef` or `nagios` errors that mention `cassandra`, you'd have a search like:
 
 `sources:nagios,chef status:error cassandra`
 
@@ -57,9 +64,9 @@ To remove the top level aggregate event from appearing, change `use_date_happene
 ## Events Email
 
 When you need to integrate an application or system with Datadog, you have a few choices. The first is using one of the existing [Datadog integrations][integrations].
-This gets you access to a wide variety of metrics and events with minimal configuration effort on your part. If your application isn't one of the integrated applications, then you can opt to create [a check using the Agent][agentcheck].   This requires much more effort and potentially more knowledge on how the application and how Datadog work.
+This gets you access to a wide variety of metrics and events with minimal configuration effort on your part. If your application isn't one of the integrated applications, then opt to create [a custom check using the Agent][agentcheck].   This requires much more effort and potentially more knowledge on how the application and how Datadog work.
 
-There is another option available if you aren't using an application that has an integration and you don't want to create an Agent check. You can rely on the application or system sending an email instead. There are two different ways to use Events via Email, depending mostly on whether the application offers you the ability to customize the format of the email body being sent.
+There is another option available if you aren't using an application that has an integration and you don't want to create an Agent check. Rely your application or system sending an email instead. There are two different ways to use Events via Email, depending mostly on whether the application offers you the ability to customize the format of the email body being sent.
 
 <div class="alert alert-info">
 <b>JSON-Formatted vs Plain Text:</b> <br>
@@ -71,7 +78,7 @@ stream. See below for examples of each.
 ### Plain Text Email
 #### Source Email
 
-In the source plain text email, you only have three fields you can control: sender email address (required), subject (required), and body (optional).
+In the source plain text email, you only have three fields to control: sender email address (required), subject (required), and body (optional).
 
 {{< img src="graphing/events/plain-email.png" alt="plain email" responsive="true" >}}
 
@@ -138,7 +145,7 @@ Should be encoded to: `http://catchpoint.com/session_id%3A123456`
 * `@all` – Sends a notification to all members of your organization.
 * `@yourname` – Notifies the specific user named 'yourname'.
 * `@test@example.com` Sends an email to `test@example.com`.
-* If you have HipChat, Slack, Webhooks, Pagerduty or VictorOps you can use:
+* If you have HipChat, Slack, Webhooks, Pagerduty or VictorOps, use:
     * `@hipchat-[room-name]` or `@slack-[room-name]` – posts the event or graph to that chat room.
     * `@webhook` – Alerts or triggers whatever is attached to that webhook. Check out [our blogpost on Webhooks][events-1]!
     * `@pagerduty` – Sends an alert to Pagerduty. You can also use `@pagerduty-acknowledge` and `@pagerduty-resolve`.
