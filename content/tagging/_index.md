@@ -38,7 +38,7 @@ Containers and cloud environments regularly churn through hosts, so it is critic
 
 Below are Datadog's tagging restrictions, requirements, and suggestions:
 
-1. Tags must **start with a letter** and after that may contain the characters listed below. Other special characters are converted to underscores. **Note**: A tag cannot end with a colon, for example `tag:`
+1. Tags must **start with a letter** and after that may contain the characters listed below. Other special characters are converted to underscores:
 
     * Alphanumerics
     * Underscores
@@ -46,6 +46,8 @@ Below are Datadog's tagging restrictions, requirements, and suggestions:
     * Colons
     * Periods
     * Slashes
+
+    **Note**: A tag cannot end with a colon, for example `tag:`
 
 2. Tags can be **up to 200 characters** long and support Unicode.
 3. Tags are converted to lowercase.
