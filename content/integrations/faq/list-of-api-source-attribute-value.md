@@ -50,6 +50,7 @@ kind: faq
 |Amazon Waf|WAF|
 |Amazon Web Services|CLOUDWATCH|
 |Amazon Workspaces|WORKSPACES|
+|Amazon Xray|AWSXRAY|
 |Ansible|ANSIBLE|
 |Apache|APACHE|
 |Api|API|
