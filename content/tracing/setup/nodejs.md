@@ -99,7 +99,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 | [mongodb-core][16]     | 2 - 3       | Fully Supported | Supports Mongoose   |
 | [mysql][17]            | 2           | Fully Supported |                     |
 | [mysql2][18]           | 1           | Fully Supported |                     |
-| [pg][19]               | 4 - 7       | Fully Supported | `pg-native` is not supported at the moment |
+| [pg][19]               | 4 - 7       | Fully Supported | `pg-native` support coming soon |
 | [redis][20]            | 0.12 - 2.6  | Fully Supported |                     |
 
 [14]: https://github.com/elastic/elasticsearch-js
