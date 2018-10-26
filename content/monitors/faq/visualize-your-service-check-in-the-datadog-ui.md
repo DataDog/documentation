@@ -1,5 +1,5 @@
 ---
-title: Where can I visualize my service check in the Datadog UI?
+title: Visualize your service check in the Datadog UI.
 kind: faq
 ---
 
