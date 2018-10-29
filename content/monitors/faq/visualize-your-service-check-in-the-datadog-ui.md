@@ -34,10 +34,10 @@ In this form you can:
 * **Scoping**: Select a single check or a cluster of check statuses reported by a single tag value or a tag group.
 * **Widget Title**: Set your widget title.
 
-## Custom check Monitor
+## Custom check monitor
 
 Even if you can't graph a custom check over time as you would for metrics, you can still monitor it.
-In this case you need to go in *monitor tab* > *new monitor*, then select the **custom check** section:
+Go to *monitor tab* > *new monitor*, then select the **custom check** section:
  
 {{< img src="monitors/faq/check_monitor.png" alt="Check monitor" responsive="true" >}}
 
@@ -45,15 +45,15 @@ Configure your custom check monitor: 
 ​
 {{< img src="monitors/faq/check_monitor_config.png" alt="Check monitor configuration" responsive="true" >}}
 
-In this form you can:
+In this form, you can:
 
-* **Pick a Custom Check**: Select your check status name to monitor
+* **Pick a custom check**: Select your check status name to monitor
 * **Pick monitor scope**: Select the context for your monitor (including/excluding tags)
 * **Set alert conditions**: Choose between a simple check alert or a cluster alert
 * **Say what's happening**: Edit the notification sent (find more here)
 * **Notify your team**: Choose who should be notified by this monitor
 
-Worth noticing that service check monitors for out-of-the-box datadog integrations can be set in *monitor tab* > *Integration* > *Integration status* tab on the left. For instance with HAProxy integration: 
+Service check monitors for out-of-the-box Datadog integrations can be set in *monitor tab* > *Integration* > *Integration status* tab on the left. For instance, with the HAProxy integration: 
 
 {{< img src="monitors/faq/haproxy_service_check.gif" alt="Haproxy service check" responsive="true" >}}
 
