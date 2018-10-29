@@ -30,9 +30,9 @@ After clicking on the *Check status* widget icon, the following pop-up appears:
 In this form you can:
 
 * **Check Name**: Select your service check name.
-* **Reporting Timeframe**: Select the time frame on which you want to aggregate your status .
+* **Reporting Timeframe**: Select the time frame on which you want to aggregate your status.
 * **Scoping**: Select a single check or a cluster of check statuses reported by a single tag value or a tag group.
-* **Widget Title**: Set your widget title .
+* **Widget Title**: Set your widget title.
 
 ## Custom check Monitor
 
