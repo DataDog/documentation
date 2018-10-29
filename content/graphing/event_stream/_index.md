@@ -32,7 +32,7 @@ Use tag search to find all events with the same key tag with the following query
 | `tags:<KEY>:<VALUE>` | Shows events with the `<KEY>:<VALUE>` tag.                                     |
 | `tags:<VALUE>`       | Shows all events with the `<VAlUE>` attached, whatever the `<KEY>`.            |
 | `<KEY>:*`            | Shows all events with the `<KEY>` attached.                                    |
-| `<KEY>`:`<REGEX>`    | Show all events with `<KEY>:<VALUE>` tag where `<VALUE>` matches the `<REGEX>` |
+| `<KEY>`:`<REGEX>`    | Shows all events with `<KEY>:<VALUE>` tag where `<VALUE>` matches the `<REGEX>`|
 | `tags:<KEY>`         | Doesn't return anything.                                                       |
 | `<KEY>:<VALUE>`      | Doesn't return anything.                                                       |
 
