@@ -31,7 +31,7 @@ An example of modifying the top level name for Python can be found below:
 
 This function explicitly sets both the service name and Top Level Name, being `tornado-notification` and `tornado.notify` respectively.
 
-More examples and documentation can be found on our Language instrumentation documentation pages:
+More examples and documentation can be found on our language-specific instrumentation documentation pages:
 
 {{< whatsnext desc="Select one of the following supported languages:">}}
     {{< nextlink href="tracing/setup/java" tag="Java" >}}Java language instrumentation.{{< /nextlink >}}
