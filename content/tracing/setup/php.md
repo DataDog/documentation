@@ -83,6 +83,7 @@ Automatic instrumentation captures:
 | CakePHP        | 3.x         | Coming Soon        |
 | Drupal         | 7.x         | Coming Soon        |
 | Wordpress      | 4.x         | Coming Soon        |
+| Yii            | 2.0.x       | Coming Soon        |
 | Slim           | 3.x         | Coming Soon        |
 
 #### Library Compatibility
