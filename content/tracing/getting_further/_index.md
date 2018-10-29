@@ -10,7 +10,5 @@ kind: documentation
     {{< nextlink href="graphing/dashboards/widgets/#service-summary" >}} APM in Dashboard{{< /nextlink >}}
     {{< nextlink href="tracing/getting_further/metrics_namespace" >}} Metrics Namespace{{< /nextlink >}}
     {{< nextlink href="tracing/getting_further/trace_sampling_and_storage" >}} Trace Sampling and Storage{{< /nextlink >}}
-    {{< nextlink href="tracing/getting_further/apm_events" >}}APM Events{{< /nextlink >}}
-    {{< nextlink href="tracing/getting_further/first_class_dimensions" >}}First-Class Dimensions{{< /nextlink >}}
 {{< /whatsnext >}}
 
