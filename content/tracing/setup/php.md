@@ -61,7 +61,7 @@ PHP APM includes support for the following PHP versions:
 
 ## Automatic Instrumentation
 
-Automatic instrumentation uses `ddtrace` extension to modify runtime and inject custom PHP code around specific methods. When [tracing is enabled][5] the PHP tracer is able to automatically instrument all supported libraries out of the box.
+Automatic instrumentation uses the `ddtrace` extension to modify PHP's runtime and inject custom PHP code around specific methods. When [tracing is enabled][5] the PHP tracer is able to automatically instrument all supported libraries out of the box.
 
 Automatic instrumentation captures:
 
