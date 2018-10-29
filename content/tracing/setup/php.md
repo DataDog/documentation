@@ -38,7 +38,7 @@ tar -xf datadog-php-tracer.tar.gz -C /
 /opt/datadog-php/bin/post-install.sh
 ```
 
-Finally, install DataDog tracing library using composer:
+Finally, install the DataDog tracing library using composer:
 
 ```bash
 composer config minimum-stability beta # required to install opentracing 1.0.0-beta5
