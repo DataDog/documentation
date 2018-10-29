@@ -51,9 +51,9 @@ Here you can specify:
 * The [rollup][3] interval.
 * The percentage of points that need to be anomalous for alerting/warning/recovery.
 * If a seasonal algorithm is chosen, if the seasonality:
-    - is weekly, the algorithm expects that a given day of the week behaves like past same days of the week. 
-    - is daily, the algorithm expects that *X*pm today behaves like *X*pm for past days.
-    - is hourly, the algorithm expects that *X* minutes after the hour this hour behaves like *X* minutes after the hour from the past several hours—i.e., that 5:15 behaves like 4:15, 3:15, etc.
+    - is weekly, the algorithm expects that a given day of the week behaves like past same days of the week—e.g., that this Tuesday behaves like past Tuesdays. 
+    - is daily, the algorithm expects that Xpm today behaves like Xpm for past days—e.g., that 5pm today behaves like 5pm yesterday.
+    - is hourly, the algorithm expects that X minutes after the hour this hour behaves like X minutes after the hour from the past several hours—e.g., that 5:15 behaves like 4:15, 3:15, etc.
 
     Note: Machine learning algorithms require at least twice as much historical data time as the chosen seasonality time to be fully efficient.
 
