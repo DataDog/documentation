@@ -218,8 +218,8 @@ Now add `@Trace` to methods to have them be traced when running with `dd-java-ag
 
 ## JMX Metrics
 
-Datadog's Java Tracer provides support for 'in-process' JMX metrics collection. This can be enabled with `jmxfetch.enabled` configuration parameter. Additional JMX metrics can be configured using configuration files that are passed to `jmxfetch.metrics-configs`. Contents of those configuration files is equivalent of contents of `conf` section for external jmxfetch. See [JMX Integration][7] for further details on configuration.
-By default JMX metrics collection when enabled monitors JVM heap memory, thread count, and garbage collection. Use it in conjunction with APM for an even broader view into your Java app's performance.
+Datadog's Java Tracer provides support for 'in-process' JMX metrics collection. This is enabled with `jmxfetch.enabled` configuration parameter. Additional JMX metrics are configured using configuration files that are passed to `jmxfetch.metrics-configs`. Contents of those configuration files is equivalent of contents of `conf` section for external jmxfetch. See [JMX Integration][7] for further details on configuration.
+By default JMX metrics collection-when enabled-monitors JVM heap memory, thread count, and garbage collection. Use it in conjunction with APM for an even broader view into your Java application's performance.
 
 ## Performance
 
