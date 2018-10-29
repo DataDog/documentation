@@ -25,14 +25,17 @@ Next, install [from source][3] the Datadog PHP extension or by using one of the 
 
 ```bash
 # using RPM package (RHEL/Centos 6+, Fedora 20+)
-rpm -ivh ddtrace.rpm
+rpm -ivh datadog-php-tracer.rpm
 
 # using DEB package (Debian Jessie+ , Ubuntu 14.04+)
-deb -i ddtrace.deb
+deb -i datadog-php-tracer.deb
+
+# using APK package (Alpine Linux)
+apk add datadog-php-tracer.apk --allow-untrusted
 
 # using tar.gz archive (Other distributions using libc6)
-tar -xf ddtrace.tar.gz -C /
-/opt/datadog-php/bin/post_install.sh
+tar -xf datadog-php-tracer.tar.gz -C /
+/opt/datadog-php/bin/post-install.sh
 ```
 
 Finally, install DataDog tracing library using composer:
