@@ -28,10 +28,10 @@ Latest release packages can be found on GitHub's [release page][4]
 # using RPM package (RHEL/Centos 6+, Fedora 20+)
 rpm -ivh ddtrace.rpm
 
-# using DEB package (Debian Jessie + , Ubuntu 14.04+)
+# using DEB package (Debian Jessie+ , Ubuntu 14.04+)
 deb -i ddtrace.deb
 
-# using tar.gz archive (Other distributions using glibc)
+# using tar.gz archive (Other distributions using libc6)
 tar -xf ddtrace.tar.gz -C /
 /opt/datadog-php/bin/post_install.sh
 ```
