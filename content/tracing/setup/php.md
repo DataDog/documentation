@@ -19,10 +19,9 @@ The APM tracer for PHP applications is in Open Public Beta.
 
 ## Installation and Getting Started
 
-To begin tracing applications written in PHP, first [install and configure the Datadog Agent][1] (see additional documentation for [tracing Docker applications](/tracing/setup/docker/)).
+To begin tracing applications written in PHP, first [install and configure the Datadog Agent][1] (see additional documentation for [tracing Docker applications][7]).
 
-Next, install the Datadog PHP extension using one of precompiled packages for supported distributions - or [from source][3]
-Latest release packages can be found on GitHub's [release page][4]
+Next, install [from source][3] the Datadog PHP extension or by using one of the precompiled packages for supported distributions. Latest release packages can be found on GitHub's [dd-trace-php releases page][4]:
 
 ```bash
 # using RPM package (RHEL/Centos 6+, Fedora 20+)
@@ -44,7 +43,7 @@ composer require opentracing/opentracing
 composer require datadog/dd-trace
 ```
 
-**Note:** you can also install the DataDog library without changing minimum-stability by following this [guide][6]
+**Note:** You can [install the DataDog library without changing minimum-stability][6]
 
 ## Compatibility
 
@@ -59,14 +58,14 @@ PHP APM includes support for the following PHP versions:
 
 ## Automatic Instrumentation
 
-Automatic instrumentation uses `ddtrace` extension to modify runtime and inject custom PHP code around specific methods. When [configured][5] the PHP tracer is able to automatically instrument all supported libraries out of the box.
+Automatic instrumentation uses `ddtrace` extension to modify runtime and inject custom PHP code around specific methods. When [tracing is enabled][5] the PHP tracer is able to automatically instrument all supported libraries out of the box.
 
 Automatic instrumentation captures:
 
-* Method execution time
+* Method execution time.
 * Relevant trace data such as URL and status response codes for web requests or SQL query for database access
-* Unhandled exceptions, including stacktraces if available
-* A total count of traces (e.g. web requests) flowing through the system
+* Unhandled exceptions, including stacktraces if available.
+* A total count of traces (e.g. web requests) flowing through the system.
 
 ### Integrations
 
@@ -99,9 +98,10 @@ Automatic instrumentation captures:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/tracing/setup
+[1]: /tracing/setup
 [2]: https://github.com/DataDog/dd-trace-php
 [3]: https://github.com/DataDog/dd-trace-php/blob/master/docs/getting_started.md#compiling-and-installing-the-extension-manually
-[4]: https://github.com/DataDog/dd-trace-rb/releases/latest
+[4]: https://github.com/DataDog/dd-trace-php/releases/latest
 [5]: https://github.com/DataDog/dd-trace-php/blob/master/docs/getting_started.md#enabling-tracing
 [6]: https://github.com/DataDog/dd-trace-php/blob/master/docs/getting_started.md#alternative-install-datadogdd-trace-package-without-changing-minimum-stability
+[7]: /tracing/setup/docker/
