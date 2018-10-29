@@ -10,6 +10,9 @@ external_redirect: /api/#slack
 Configure your Datadog-Slack integration directly through Datadog API.  
 [Read more about Datadog-Slack integration][1]
 
+* Using the `POST` method updates your integration configuration by **adding** your new configuration to the current existing one in your Datadog organization. 
+* Using the `PUT` method updates your integration configuration by **replacing** your current configuration with the new one sent to your Datadog organization.
+
 ##### ARGUMENTS
 
 * **`service_hooks`** [*required*]:  
