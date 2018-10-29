@@ -23,7 +23,7 @@ To begin tracing applications written in PHP, first [install and configure the D
 
 Next, install the Datadog PHP extension using one of precompiled packages for supported distributions - or [from source][3]
 Latest release packages can be found on GitHub's [release page][4]
-#### Installing the precompiled extension
+
 ```bash
 # using RPM package (RHEL/Centos 6+, Fedora 20+)
 rpm -ivh ddtrace.rpm
@@ -36,7 +36,7 @@ tar -xf ddtrace.tar.gz -C /
 /opt/datadog-php/bin/post_install.sh
 ```
 
-Next, install DataDog tracing library using composer:
+Finally, install DataDog tracing library using composer:
 
 ```bash
 composer config minimum-stability beta # required to install opentracing 1.0.0-beta5
@@ -44,7 +44,7 @@ composer require opentracing/opentracing
 composer require datadog/dd-trace
 ```
 
-Note: you can also install the DataDog library without changing minimum-stability by following this [guide][6]
+**Note:** you can also install the DataDog library without changing minimum-stability by following this [guide][6]
 
 ## Compatibility
 
