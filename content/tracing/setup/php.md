@@ -1,5 +1,5 @@
 ---
-title: Tracing PHP Applications (Coming Soon)
+title: Tracing PHP Applications
 kind: Documentation
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-php"
@@ -8,9 +8,9 @@ further_reading:
 - link: "tracing/visualization/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
-- link: "https://goo.gl/forms/rKjH2J6nJ585KXri2"
-  tag: "Survey"
-  text: Request Beta Access
+- link: "tracing/advanced_usage/?tab=php"
+  tag: "Advanced Usage"
+  text: "Advanced Usage"
 ---
 
 <div class="alert alert-warning">
@@ -19,42 +19,32 @@ The APM tracer for PHP applications is in Open Public Beta.
 
 ## Installation and Getting Started
 
-
-
-Next, install the Datadog Tracing library, `ddtrace`, using pip:
-
-```python
-pip install ddtrace
-```
-
-Then to instrument your Python application use the included `ddtrace-run` command. To use it, prefix your Python entry-point command with `ddtrace-run`.
-
-For example, if your application is started with `python app.py` then:
----
-
 To begin tracing applications written in PHP, first [install and configure the Datadog Agent][1] (see additional documentation for [tracing Docker applications](/tracing/setup/docker/)).
 
-Next, install the Datadog PHP extension using one of precompiled packages for supported distributions - or from source[3]
-Packages for latest release can be found on GitHub release page[4] https://github.com/DataDog/dd-trace-rb/releases/latest
-
-Installing the precompiled extension using RPM package (RHEL/Centos 6+, Fedora 20+)
-
+Next, install the Datadog PHP extension using one of precompiled packages for supported distributions - or [from source][3]
+Latest release packages can be found on GitHub's [release page][4]
+#### Installing the precompiled extension
 ```bash
+# using RPM package (RHEL/Centos 6+, Fedora 20+)
 rpm -ivh ddtrace.rpm
-```
 
-Installing the precompiled extension using DEB package (Debian Jessie + , Ubuntu 14.04+)
-
-```bash
+# using DEB package (Debian Jessie + , Ubuntu 14.04+)
 deb -i ddtrace.deb
-```
 
-Installing the precompiled package from tar.gz archive (Other distributions using glibc)
-
-```bash
+# using tar.gz archive (Other distributions using glibc)
 tar -xf ddtrace.tar.gz -C /
 /opt/datadog-php/bin/post_install.sh
 ```
+
+Next, install DataDog tracing library using composer:
+
+```bash
+composer config minimum-stability beta # required to install opentracing 1.0.0-beta5
+composer require opentracing/opentracing
+composer require datadog/dd-trace
+```
+
+Note: you can also install the DataDog library without changing minimum-stability by following this [guide][6]
 
 ## Compatibility
 
@@ -62,14 +52,14 @@ PHP APM includes support for the following PHP versions:
 
 | Version | Support type |
 | -----   | ------------ |
-| 5.6.x   | Coming Soon  |
 | 7.0.x   | Public Beta  |
 | 7.1.x   | Public Beta  |
 | 7.2.x   | Public Beta  |
+| 5.6.x   | Coming Soon  |
 
 ## Automatic Instrumentation
 
-Automatic instrumentation uses `ddtrace` extension to modify runtime and inject custom PHP code around specific methods. With tiny bit of configuration the PHP tracer is able to automatically instrument all supported libraries out of the box.
+Automatic instrumentation uses `ddtrace` extension to modify runtime and inject custom PHP code around specific methods. When [configured][5] the PHP tracer is able to automatically instrument all supported libraries out of the box.
 
 Automatic instrumentation captures:
 
@@ -111,3 +101,7 @@ Automatic instrumentation captures:
 
 [1]: https://docs.datadoghq.com/tracing/setup
 [2]: https://github.com/DataDog/dd-trace-php
+[3]: https://github.com/DataDog/dd-trace-php/blob/master/docs/getting_started.md#compiling-and-installing-the-extension-manually
+[4]: https://github.com/DataDog/dd-trace-rb/releases/latest
+[5]: https://github.com/DataDog/dd-trace-php/blob/master/docs/getting_started.md#enabling-tracing
+[6]: https://github.com/DataDog/dd-trace-php/blob/master/docs/getting_started.md#alternative-install-datadogdd-trace-package-without-changing-minimum-stability
