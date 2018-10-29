@@ -57,7 +57,7 @@ PHP APM includes support for the following PHP versions:
 | 7.0.x   | Public Beta  |
 | 7.1.x   | Public Beta  |
 | 7.2.x   | Public Beta  |
-| 5.6.x   | Coming Soon  |
+| 5.6.x   | Alpha        |
 
 ## Automatic Instrumentation
 
