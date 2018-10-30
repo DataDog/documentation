@@ -9,6 +9,11 @@ external_redirect: /api/#google-cloud-platform
 
 Configure your Datadog-Google Cloud Platform integration directly through the Datadog API. [Read more about Datadog-Google Cloud Platform integration][1]
 
+**Note**: 
+
+* Using the `POST` method updates your integration configuration by **adding** your new configuration to the existing one in your Datadog organization. 
+* Using the `PUT` method updates your integration configuration by **replacing** your current configuration with the new one sent to your Datadog organization.
+
 ##### ARGUMENTS
 
 All of the following fields' values are provided by the JSON service account key file created in the [GCP Console for service accounts][2]; Refer to the [Datadog-Google Cloud Platform integration installation instructions][4] to see how to generate one for your organization. 

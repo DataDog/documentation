@@ -10,6 +10,11 @@ external_redirect: /api/#aws
 Configure your Datadog-AWS integration directly through Datadog API.  
 [Read more about Datadog-AWS integration][1]
 
+**Note**: 
+
+* Using the `POST` method updates your integration configuration by **adding** your new configuration to the existing one in your Datadog organization. 
+* Using the `PUT` method updates your integration configuration by **replacing** your current configuration with the new one sent to your Datadog organization.
+
 ##### ARGUMENTS
 
 * **`account_id`** [*required*]:  
