@@ -50,7 +50,7 @@ In this form, you can:
 * **Pick a custom check**: Select your check status name to monitor
 * **Pick monitor scope**: Select the context for your monitor (including/excluding tags)
 * **Set alert conditions**: Choose between a simple check alert or a cluster alert
-* **Say what's happening**: Edit the notification sent (find more here)
+* **Say what's happening**: Edit the notification sent (find more about [Datadog notifications][5].)
 * **Notify your team**: Choose who should be notified by this monitor
 
 Service check monitors for out-of-the-box Datadog integrations can be set in *monitor tab* > *Integration* > *Integration status* tab on the left. For instance, with the HAProxy integration: 
@@ -63,3 +63,5 @@ Learn how to write an Agent check with the main [Agent check documentation][1].
 [2]: https://app.datadoghq.com/check/summary
 [3]: https://app.datadoghq.com/dashboard
 [4]: https://app.datadoghq.com/monitors#create/custom
+[5]: /monitors/notifications/
+
