@@ -46,7 +46,7 @@ composer require opentracing/opentracing
 composer require datadog/dd-trace
 ```
 
-**Note:** You can [install the DataDog library without changing minimum-stability][6]
+**Note:** You can [install the Datadog library without changing minimum-stability][6]
 
 ## Compatibility
 
