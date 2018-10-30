@@ -1445,8 +1445,6 @@ var tracer = Datadog.Trace.Tracer.Create(isDebugEnabled: true);
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-Debug mode is currently not easily inaccessible.
-
 {{% /tab %}}
 {{< /tabs >}}
 

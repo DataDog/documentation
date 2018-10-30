@@ -21,7 +21,7 @@ The APM tracer for PHP applications is in Open Public Beta.
 
 To begin tracing applications written in PHP, first [install and configure the Datadog Agent][1] (see additional documentation for [tracing Docker applications][7]).
 
-Next, install the Datadog PHP extension [from source][3] or by using one of the precompiled packages for supported distributions. The latest packages can be found on GitHub's [dd-trace-php releases page][4]:
+Next, install the Datadog PHP extension using one of the precompiled packages for supported distributions. The latest packages can be found on GitHub's [releases page][4]. If you don't find your distribution, you can install the PHP extension [from source][3]
 
 ```bash
 # using RPM package (RHEL/Centos 6+, Fedora 20+)
@@ -86,6 +86,8 @@ Automatic instrumentation captures:
 | Yii            | 2.0.x       | Coming Soon        |
 | Slim           | 3.x         | Coming Soon        |
 
+Don't see your desired web frameworks? Let Datadog know more about your needs through [this survey][8]
+
 #### Library Compatibility
 
 | Module        | Versions              | Support Type       |
@@ -98,6 +100,8 @@ Automatic instrumentation captures:
 | MongoDB       | 1.x                   | Coming Soon        |
 | Doctrine      | 2.6                   | Coming Soon        |
 
+Don't see your desired libraries? Let Datadog know more about your needs through [this survey][8].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -109,3 +113,4 @@ Automatic instrumentation captures:
 [5]: https://github.com/DataDog/dd-trace-php/blob/master/docs/getting_started.md#enabling-tracing
 [6]: https://github.com/DataDog/dd-trace-php/blob/master/docs/getting_started.md#alternative-install-datadogdd-trace-package-without-changing-minimum-stability
 [7]: /tracing/setup/docker/
+[8]: https://goo.gl/forms/rKjH2J6nJ585KXri2
