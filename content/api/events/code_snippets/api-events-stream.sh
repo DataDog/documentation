@@ -7,6 +7,7 @@ curl -G -H "Content-type: application/json" \
     -d "end=${currenttime}" \
     -d "sources=My Apps" \
     -d "tags=application:web,version:1" \
+    -d "unaggregated=true"\
     -d "api_key=<YOUR_API_KEY>" \
     -d "application_key=<YOUR_APP_KEY>" \
     'https://api.datadoghq.com/api/v1/events'
