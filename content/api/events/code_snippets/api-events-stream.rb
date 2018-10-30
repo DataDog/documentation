@@ -9,4 +9,4 @@ dog = Dogapi::Client.new(api_key, app_key)
 end_time = Time.now.to_i
 start_time = end_time - 100
 
-dog.stream(start_time, end_time, :priority => "normal", :tags => ["application:web"])
+dog.stream(start_time, end_time, :priority => "normal", :tags => ["application:web"], :unaggregated => true)
