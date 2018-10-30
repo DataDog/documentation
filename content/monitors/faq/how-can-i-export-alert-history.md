@@ -4,7 +4,7 @@ kind: faq
 disable_toc: true
 ---
 
-To gather an audit trail of all Monitor Alerts that have triggered during a specific period of time, reach out to your [Datadog monitor report page][1]. This generates a CSV files for the past half year (182 days). 
+To gather an audit trail of all Monitor Alerts that have triggered during a specific period of time, reach out on the [Datadog monitor report page][1]. This generates a CSV for the past half year (182 days). 
 
 **Note**: You need to be an Administrator of your organization to access this page.
 
