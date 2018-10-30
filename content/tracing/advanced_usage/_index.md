@@ -492,7 +492,7 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 
 {{% /tab %}}
 {{% tab "PHP" %}}
-If you aren’t using libraries supported by automatic instrumentation (see [Library compatibility][php compatibility]), you should manually instrument your code.
+If you aren’t using libraries supported by automatic instrumentation (see [library compatibility][php compatibility]), manually instrument your code.
 
 The following example uses the global Datadog Tracer and creates a span to trace a web request:
 
