@@ -30,7 +30,7 @@ rpm -ivh datadog-php-tracer.rpm
 # using DEB package (Debian Jessie+ , Ubuntu 14.04+)
 deb -i datadog-php-tracer.deb
 
-# using APK package (Alpine Linux)
+# using APK package (Alpine)
 apk add datadog-php-tracer.apk --allow-untrusted
 
 # using tar.gz archive (Other distributions using libc6)
