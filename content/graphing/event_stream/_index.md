@@ -64,9 +64,9 @@ To remove the top level aggregate event from appearing, change `use_date_happene
 ## Events Email
 
 When you need to integrate an application or system with Datadog, you have a few choices. The first is using one of the existing [Datadog integrations][integrations].
-This gets you access to a wide variety of metrics and events with minimal configuration effort on your part. If your application isn't one of the integrated applications, then opt to create [a custom check using the Agent][agentcheck].   This requires much more effort and potentially more knowledge on how the application and how Datadog work.
+This gets you access to a wide variety of metrics and events with minimal configuration effort on your part. If your application isn't one of the integrated applications, opt to create [a custom check using the Agent][agentcheck]. This requires  more effort and potentially more knowledge on how the application and Datadog work.
 
-There is another option available if you aren't using an application that has an integration and you don't want to create an Agent check. Rely your application or system sending an email instead. There are two different ways to use Events via Email, depending mostly on whether the application offers you the ability to customize the format of the email body being sent.
+There is another option available if you aren't using an application that has an integration, and you don't want to create an Agent check. Rely on your application or system sending an email instead. There are two different ways to use events via email, depending on whether the application offers you the ability to customize the format of the email body being sent.
 
 <div class="alert alert-info">
 <b>JSON-Formatted vs Plain Text:</b> <br>
