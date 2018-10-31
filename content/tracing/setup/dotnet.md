@@ -62,72 +62,87 @@ dotnet add package Datadog.Trace.ClrProfiler.Managed --version 0.5.0-beta
 
 Automatic instrumention is available on Linux for .NET Core 2.0+. To setup automatic instrumentation, 4 steps are necessary:
 
-1. [Install the Datadog Agent][1]
-1. Add the `Datadog.Trace.ClrProfiler.Managed` nuget package to your project:
+#### Install the Datadog Agent
 
-   ```bash
-   dotnet add package Datadog.Trace.ClrProfiler.Managed --version 0.5.0-beta
-   ```
+Traces are sent to a local Datadog Agent and then forwarded to Datadog. To install the agent, follow the [Linux instructions][1].
 
-1. Install the `Datadog.Trace.ClrProfiler.Native` library, available from the `dd-trace-csharp` [releases page][10].
+#### Add the `Datadog.Trace.ClrProfiler.Managed` Nuget Package
 
-   For Debian or Ubuntu, download and install the Debian package:
+To add the `Datadog.Trace.ClrProfiler.Managed` Nuget package to your project run the following:
 
-   ```bash
-   curl -LO https://github.com/DataDog/dd-trace-csharp/releases/download/v0.5.0-beta/datadog-dotnet-apm_0.5.0_amd64.deb
-   sudo apt install ./datadog-dotnet-apm_0.5.0_amd64.deb
-   ```
+```bash
+dotnet add package Datadog.Trace.ClrProfiler.Managed --version 0.5.0-beta
+```
 
-   For CentOS or Fedora, download and install the RPM package
+#### Install the `Datadog.Trace.ClrProfiler.Native` Library
 
-   ```bash
-   curl -LO https://github.com/DataDog/dd-trace-csharp/releases/download/v0.5.0-beta/datadog-dotnet-apm-0.5.0-1.x86_64.rpm
-   sudo rpm -Uvh datadog-dotnet-apm-0.5.0-1.x86_64.rpm
-   ```
+Automatic instrumention in Linux is implemented using a shared library available from the `dd-trace-csharp` [releases page][10].
 
-   A Tar archive is available for other distributions:
+For Debian or Ubuntu, download and install the Debian package:
 
-   ```bash
-   sudo mkdir -p /opt/datadog
-   curl -L https://github.com/DataDog/dd-trace-csharp/releases/download/v0.5.0-beta/datadog-dotnet-apm-0.5.0.tar.gz \
-   | sudo tar xzf - -C /opt/datadog
-   ```
+```bash
+curl -LO https://github.com/DataDog/dd-trace-csharp/releases/download/v0.5.0-beta/datadog-dotnet-apm_0.5.0_amd64.deb
+sudo apt install ./datadog-dotnet-apm_0.5.0_amd64.deb
+```
 
-   For Alpine Linux you will also need to install `libc6-compat`
+For CentOS or Fedora, download and install the RPM package
 
-   ```bash
-   apk add libc6-compat
-   ```
+```bash
+curl -LO https://github.com/DataDog/dd-trace-csharp/releases/download/v0.5.0-beta/datadog-dotnet-apm-0.5.0-1.x86_64.rpm
+sudo rpm -Uvh datadog-dotnet-apm-0.5.0-1.x86_64.rpm
+```
 
-1. Add environment variables to your service to enable the .NET tracer.
+A Tar archive is available for other distributions:
 
-   For Systemd:
+```bash
+sudo mkdir -p /opt/datadog
+curl -L https://github.com/DataDog/dd-trace-csharp/releases/download/v0.5.0-beta/datadog-dotnet-apm-0.5.0.tar.gz \
+| sudo tar xzf - -C /opt/datadog
+```
 
-   ```ini
-    [Unit]
-    Description=example
+For Alpine Linux you will also need to install `libc6-compat`
 
-    [Service]
-    ExecStart=/usr/bin/dotnet /app/example.dll
-    Restart=always
-    # Datadog .NET Tracer Environment Variables
-    Environment=CORECLR_ENABLE_PROFILING=1
-    Environment=CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-    Environment=CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
-    Environment=DD_INTEGRATIONS=/opt/datadog/integrations.json
+```bash
+apk add libc6-compat
+```
 
-    [Install]
-    WantedBy=multi-user.target
-   ```
+#### Add Environment Variables
 
-   For Docker:
+Automatic instrumention for Linux is enabled by setting 4 environment variables:
 
-   ```docker
-   ENV CORECLR_ENABLE_PROFILING=1
-   ENV CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-   ENV CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
-   ENV DD_INTEGRATIONS=/opt/datadog/integrations.json
-   ```
+```bash
+CORECLR_ENABLE_PROFILING=1
+CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
+DD_INTEGRATIONS=/opt/datadog/integrations.json
+```
+
+For a systemd service use `Environment=`:
+
+```ini
+[Unit]
+Description=example
+
+[Service]
+ExecStart=/usr/bin/dotnet /app/example.dll
+Restart=always
+Environment=CORECLR_ENABLE_PROFILING=1
+Environment=CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+Environment=CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
+Environment=DD_INTEGRATIONS=/opt/datadog/integrations.json
+
+[Install]
+WantedBy=multi-user.target
+```
+
+For Docker use `Env`:
+
+```docker
+ENV CORECLR_ENABLE_PROFILING=1
+ENV CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+ENV CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
+ENV DD_INTEGRATIONS=/opt/datadog/integrations.json
+```
 
 ### Runtime Compatibility
 
