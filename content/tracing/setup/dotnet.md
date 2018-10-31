@@ -135,9 +135,9 @@ Environment=DD_INTEGRATIONS=/opt/datadog/integrations.json
 WantedBy=multi-user.target
 ```
 
-For Docker use `Env`:
+For Docker use `ENV`:
 
-```docker
+```text
 ENV CORECLR_ENABLE_PROFILING=1
 ENV CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 ENV CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
