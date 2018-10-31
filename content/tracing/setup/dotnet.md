@@ -66,9 +66,9 @@ Automatic instrumentation is available on Linux for .NET Core 2.0+. To set up au
 
 Traces are sent to a local Datadog Agent and then forwarded to Datadog. To install the agent, follow the [Linux instructions][1].
 
-#### Add the `Datadog.Trace.ClrProfiler.Managed` Nuget Package
+#### Add the `Datadog.Trace.ClrProfiler.Managed` NuGet Package
 
-To add the `Datadog.Trace.ClrProfiler.Managed` Nuget package to your project run the following:
+To add the `Datadog.Trace.ClrProfiler.Managed` NuGet package to your project run the following:
 
 ```bash
 dotnet add package Datadog.Trace.ClrProfiler.Managed --version 0.5.0-beta
