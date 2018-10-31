@@ -6,7 +6,7 @@ private: true
 
 ## Getting started
 
-APM is available as part of the Datadog Agent with versions 5.11+ as part of the one line install for the Linux and Docker Agents. [Mac][1] and [Windows][2] users must perform a manual install of the APM Agent (aka Trace Agent) via a separate install process.
+APM is available with Datadog Agent versions 5.11+ as part of the one line install for the Linux and Docker Agents. [Mac][1] and [Windows][2] users must perform a manual install of the APM Agent (aka Trace Agent) via a separate install process.
 
 The Agent can be enabled by including the following in your [Datadog Agent configuration file][3]:
 ```
@@ -14,29 +14,32 @@ apm_enabled: true
 ```
 
 <div class="alert alert-info">
-APM is enabled by default after Datadog Agent 5.13 (on Linux and Docker), and can be disabled by adding the parameter: <code>apm_enabled: no</code> in your Datadog Agent configuration file.
+APM is enabled by default after Datadog Agent 5.13 (on Linux and Docker), but can be disabled by adding the parameter: <code>apm_enabled: no</code> in your Datadog Agent configuration file.
 </div>
 
 ### Installing the Agent
 
-With our infrastructure monitoring, metrics are sent to the Datadog Agent, which then forwards them to Datadog. Similarly, tracing metrics are also sent to the Datadog Agent. To enable tracing:
+Tracing metrics are sent to the Datadog through the Datadog Agent. To enable tracing:
 
-Install the latest [Datadog Agent][4] (version 5.11.0 or above is required).
+Install the latest [Datadog Agent][4] (version 5.11.0+ is required).
 
 ### Running the Agent in Docker
 
-To trace applications in Docker containers, you can use the [docker-dd-agent][5] image (tagged version 11.0.5110 or higher) and enable tracing by passing `DD_APM_ENABLED=true` as an environment variable.
+To trace applications in Docker containers, use the [docker-dd-agent][5] image (tagged version 11.0.5110+) and enable tracing by passing `DD_APM_ENABLED=true` as an environment variable.
 
 For additional information, reference [the Docker page][6].
 
 ### Instrument your application
 
-To instrument your application, select one of the following supported languages.
-
-- [Go][7]
-- [Java][8]
-- [Python][9]
-- [Ruby][10]
+{{< whatsnext desc="Select one of the following supported languages:">}}
+    {{< nextlink href="tracing/setup/java" tag="Java" >}}Java language instrumentation.{{< /nextlink >}}
+    {{< nextlink href="tracing/setup/python" tag="Python" >}}Python language instrumentation.{{< /nextlink >}}
+    {{< nextlink href="tracing/setup/ruby" tag="Ruby" >}}Ruby language instrumentation{{< /nextlink >}}
+    {{< nextlink href="tracing/setup/go" tag="Go" >}}Go language instrumentation.{{< /nextlink >}}
+    {{< nextlink href="tracing/setup/nodejs" tag="Nodejs" >}}Node.js language instrumentation.{{< /nextlink >}}
+    {{< nextlink href="tracing/setup/dotnet" tag=".NET" >}}.NET language instrumentation.{{< /nextlink >}}
+    {{< nextlink href="tracing/setup/php" tag="PHP" >}}PHP language instrumentation.{{< /nextlink >}}
+{{< /whatsnext >}}
 
 To instrument an application written in a language that does not yet have official library support, reference the [Tracing API][11].
 
@@ -63,11 +66,12 @@ Additionally, some configuration options may be set as environment variables. No
 
 For more information about the Datadog Agent, see the [dedicated doc page][12] or refer to the [`datadog.conf.example` file][13].
 
-## Additional resources
+### Trace search
+Trace search is available for Agent 5.25.0+. For information, see the set up instructions in the main [APM documentation][18].
 
-For additional help from Datadog staff and other Datadog community members, join the [*apm* channel][14] in our Datadog Slack. Visit [http://chat.datadoghq.com][15] to join the Slack. We maintain a list of [community tracing libraries][16].
+## Troubleshooting
+Need help? Contact [Datadog Support][17].
 
-You can also reach our APM team via email at [support@datadohq.com][17].
 
 [1]: https://github.com/DataDog/datadog-trace-agent#run-on-osx
 [2]: https://github.com/DataDog/datadog-trace-agent#run-on-windows
@@ -75,14 +79,11 @@ You can also reach our APM team via email at [support@datadohq.com][17].
 [4]: https://app.datadoghq.com/account/settings#agent
 [5]: https://hub.docker.com/r/datadog/docker-dd-agent/
 [6]: /tracing/docker
-[7]: /tracing/setup/go
-[8]: /tracing/setup/java
-[9]: /tracing/setup/python
-[10]: /tracing/setup/ruby
 [11]: /api/?lang=console#traces
 [12]: /agent/
 [13]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
 [14]: https://datadoghq.slack.com/messages/apm
 [15]: http://chat.datadoghq.com
 [16]: /developers/libraries/#community-tracing-apm-libraries
-[17]: mailto:support@datadohq.com
+[17]: https://docs.datadoghq.com/help/
+[18]: /tracing/setup/?tab=agent5250#trace-search
