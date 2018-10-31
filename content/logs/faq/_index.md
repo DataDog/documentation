@@ -12,7 +12,6 @@ private: true
     {{< nextlink href="/logs/faq/how-to-investigate-a-log-parsing-issue" >}}How to investigate a log parsing issue?{{< /nextlink >}}
     {{< nextlink href="/logs/faq/why-do-my-logs-not-have-the-expected-timestamp" >}}Why do my logs not have the expected timestamp?{{< /nextlink >}}
     {{< nextlink href="/logs/faq/log-collection-is-the-datadog-agent-losing-logs" >}}Is the Datadog Agent losing logs?{{< /nextlink >}}
-    {{< nextlink href="/logs/faq/instance-initialization-error-while-sending-logs-from-datadog-agent" >}}Instance Initialization Error while sending logs from Datadog Agent{{< /nextlink >}}
     {{< nextlink href="/logs/faq/setting-file-permissions-for-rotating-logs" >}}Setting file permissions for rotating logs (linux){{< /nextlink >}}
     {{< nextlink href="logs/faq/how-to-increase-the-number-of-log-files-tailed-by-the-agent" >}}How to increase the number of log files tailed by the Agent files?{{< /nextlink >}}
     {{< nextlink href="logs/faq/why-do-my-logs-show-up-with-an-info-status-even-for-warnings-or-errors" >}}Why do my logs show up with an Info status even for Warnings or Errors?{{< /nextlink >}}
