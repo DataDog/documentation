@@ -60,7 +60,7 @@ dotnet add package Datadog.Trace.ClrProfiler.Managed --version 0.5.0-beta
 
 ### Linux
 
-Automatic instrumention is available on Linux for .NET Core 2.0+. To setup automatic instrumentation, 4 steps are necessary:
+Automatic instrumentation is available on Linux for .NET Core 2.0+. To set up automatic instrumentation, 4 steps are necessary:
 
 #### Install the Datadog Agent
 
