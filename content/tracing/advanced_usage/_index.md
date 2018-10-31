@@ -499,6 +499,7 @@ The following example uses the global Datadog Tracer and creates a span to trace
 ```php
 use OpenTracing\GlobalTracer;
 use DDTrace\Tags;
+use DDTrace\Types;
 
 $scope = GlobalTracer::get()->startActiveSpan("web.request");
 $span = $scope->getSpan();
