@@ -10,7 +10,6 @@ pygmentsCodeFences: true
 taxonomies:
   tag: "tags"
   video: "videos"
-  example: "examples"
 preserveTaxonomyNames: true
 
 # language
