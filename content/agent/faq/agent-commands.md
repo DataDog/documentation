@@ -17,6 +17,8 @@ For Linux based systems where the `service` wrapper command is not available, <a
 ## Start, Stop, and Restart the Agent 
 
 ### Start the Agent
+List of commands to start the Datadog Agent:
+
 {{< tabs >}}
 {{% tab "Agent v6" %}}
 
@@ -46,6 +48,8 @@ For Linux based systems where the `service` wrapper command is not available, <a
 
 ### Stop the Agent
 
+List of commands to stop the Datadog Agent:
+
 {{< tabs >}}
 {{% tab "Agent v6" %}}
 
@@ -74,6 +78,8 @@ For Linux based systems where the `service` wrapper command is not available, <a
 {{< /tabs >}}
 
 ### Restart the Agent 
+
+List of commands to restart the Datadog Agent:
 
 {{< tabs >}}
 {{% tab "Agent v6" %}}
@@ -105,6 +111,8 @@ For Linux based systems where the `service` wrapper command is not available, <a
 ## Agent Status and Information
 
 ### Service Status
+
+List of commands to display the status of the Datadog Agent:
 
 {{< tabs >}}
 {{% tab "Agent v6" %}}
@@ -145,7 +153,7 @@ For Linux based systems where the `service` wrapper command is not available, <a
 
 ### Agent Information
 
-Running an info command displays the status of your Datadog Agent and enabled integrations.
+List of commands to display the status of your Datadog Agent and enabled integrations.
 
 {{< tabs >}}
 {{% tab "Agent v6" %}}
