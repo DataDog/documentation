@@ -17,7 +17,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-.NET Tracing is in an open Public Beta and will be Generally Available in October 2018.
+.NET Tracing is in an open Public Beta and will be Generally Available in November 2018.
 </div>
 
 ## Getting Started
@@ -64,7 +64,7 @@ Automatic instrumentation is available on Linux for .NET Core 2.0+. To set up au
 
 #### Install the Datadog Agent
 
-Traces are sent to a local Datadog Agent and then forwarded to Datadog. To install the agent, follow the [Linux instructions][1].
+Traces are sent to a local Datadog Agent and then forwarded to Datadog. To install the Agent, follow the [Linux instructions][1].
 
 #### Add the `Datadog.Trace.ClrProfiler.Managed` NuGet Package
 
