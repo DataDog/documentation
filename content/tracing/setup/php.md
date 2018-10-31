@@ -1,5 +1,5 @@
 ---
-title: Tracing PHP Applications (Coming Soon)
+title: Tracing PHP Applications
 kind: Documentation
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-php"
@@ -8,22 +8,45 @@ further_reading:
 - link: "tracing/visualization/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
-- link: "https://goo.gl/forms/rKjH2J6nJ585KXri2"
-  tag: "Survey"
-  text: Request Beta Access
+- link: "tracing/advanced_usage/?tab=php"
+  tag: "Advanced Usage"
+  text: "Advanced Usage"
 ---
 
 <div class="alert alert-warning">
-The APM tracer for PHP applications is in alpha and not officially supported by Datadog. The officially supported beta will launch as early as October 2018. We do not recommend running the alpha tracer in production.
+The APM tracer for PHP applications is in Open Public Beta.
 </div>
 
-{{< whatsnext desc="To be notified of the beta launch, submit this form:">}}
-    {{< nextlink href="https://goo.gl/forms/rKjH2J6nJ585KXri2" tag="Survey" >}}PHP Beta Access Survey{{< /nextlink >}}
-{{< /whatsnext >}}
+## Installation and Getting Started
 
-<br>
+To begin tracing applications written in PHP, first [install and configure the Datadog Agent][1] (see additional documentation for [tracing Docker applications][7]).
 
-The unstable alpha tracer can be [accessed today on Github][2].
+Next, install the Datadog PHP extension using one of the precompiled packages for supported distributions. The latest packages can be found on GitHub's [releases page][4]. If you don't find your distribution, you can install the PHP extension [from source][3]
+
+```bash
+# using RPM package (RHEL/Centos 6+, Fedora 20+)
+rpm -ivh datadog-php-tracer.rpm
+
+# using DEB package (Debian Jessie+ , Ubuntu 14.04+)
+deb -i datadog-php-tracer.deb
+
+# using APK package (Alpine)
+apk add datadog-php-tracer.apk --allow-untrusted
+
+# using tar.gz archive (Other distributions using libc6)
+tar -xf datadog-php-tracer.tar.gz -C /
+/opt/datadog-php/bin/post-install.sh
+```
+
+Finally, install the Datadog tracing library using composer:
+
+```bash
+composer config minimum-stability beta # required to install opentracing 1.0.0-beta5
+composer require opentracing/opentracing
+composer require datadog/dd-trace
+```
+
+**Note:** You can [install the Datadog library without changing minimum-stability][6]
 
 ## Compatibility
 
@@ -31,52 +54,63 @@ PHP APM includes support for the following PHP versions:
 
 | Version | Support type |
 | -----   | ------------ |
+| 7.0.x   | Public Beta  |
+| 7.1.x   | Public Beta  |
+| 7.2.x   | Public Beta  |
 | 5.6.x   | Alpha        |
-| 7.0.x   | Alpha        |
-| 7.1.x   | Alpha        |
-| 7.2.x   | Alpha        |
+
+## Automatic Instrumentation
+
+Automatic instrumentation uses the `ddtrace` extension to modify PHP's runtime and inject custom PHP code around specific methods. When [tracing is enabled][5] the PHP tracer is able to automatically instrument all supported libraries out of the box.
+
+Automatic instrumentation captures:
+
+* Method execution time.
+* Relevant trace data, such as URL and status response codes for web requests or SQL queries for database access.
+* Unhandled exceptions, including stacktraces if available.
+* A total count of traces (e.g. web requests) flowing through the system.
 
 ### Integrations
-
-APM PHP support is in alpha and provides limited automatic instrumentation. Planned beta support will provide automatic instrumentation for popular frameworks and libraries. See some of these listed below.
-Don't see your desired frameworks or libraries? Let Datadog know more about your needs through [this survey][1].
 
 #### Framework Compatibility
 
 | Module         | Versions    | Support Type       |
 | :-----------   | :---------- | :----------------- |
-| Laravel        | 5.x         | Alpha              |
-| Symfony        | 3.x         | Alpha              |
-| Magento        | 2.x         | Coming Soon [beta] |
-| Zend Framework | 3.x         | Coming Soon [beta] |
-| CakePHP        | 3.x         | Coming Soon [beta] |
-| Drupal         | 7.x         | Coming Soon [beta] |
-| Wordpress      | 4.x         | Coming Soon [beta] |
-| Slim           | 3.x         | Coming Soon [beta] |
+| Laravel        | 5.x         | Public Beta        |
+| Symfony        | 3.x         | Public Beta        |
+| Magento        | 2.x         | Coming Soon        |
+| Zend Framework | 3.x         | Coming Soon        |
+| CakePHP        | 3.x         | Coming Soon        |
+| Drupal         | 7.x         | Coming Soon        |
+| Wordpress      | 4.x         | Coming Soon        |
+| Yii            | 2.0.x       | Coming Soon        |
+| Slim           | 3.x         | Coming Soon        |
 
-Don't see your desired web frameworks? Let Datadog know more about your needs through [this survey][1].
-
-[1]: https://goo.gl/forms/rKjH2J6nJ585KXri2
+Don't see your desired web frameworks? Let Datadog know more about your needs through [this survey][8]
 
 #### Library Compatibility
 
 | Module        | Versions              | Support Type       |
 | :------------ | :-------------------- | :----------------- |
-| Memcached     | *(Any Supported PHP)* | Alpha              |
-| Mysqli        | *(Any Supported PHP)* | Alpha              |
-| PDO           | *(Any Supported PHP)* | Alpha              |
-| Predis        | 1.1                   | Alpha              |
-| pgsql         | *(Any Supported PHP)* | Coming Soon [beta] |
-| MongoDB       | 1.x                   | Coming Soon [beta] |
-| Doctrine      | 2.6                   | Coming Soon [beta] |
+| Memcached     | *(Any Supported PHP)* | Public Beta        |
+| Mysqli        | *(Any Supported PHP)* | Public Beta        |
+| PDO           | *(Any Supported PHP)* | Public Beta        |
+| Predis        | 1.1                   | Public Beta        |
+| pgsql         | *(Any Supported PHP)* | Coming Soon        |
+| MongoDB       | 1.x                   | Coming Soon        |
+| Doctrine      | 2.6                   | Coming Soon        |
 
-Don't see your desired libraries? Let Datadog know more about your needs through [this survey][1].
-
-[1]: https://goo.gl/forms/rKjH2J6nJ585KXri2
+Don't see your desired libraries? Let Datadog know more about your needs through [this survey][8].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://goo.gl/forms/rKjH2J6nJ585KXri2
+[1]: /tracing/setup
 [2]: https://github.com/DataDog/dd-trace-php
+[3]: https://github.com/DataDog/dd-trace-php/blob/master/docs/getting_started.md#compiling-and-installing-the-extension-manually
+[4]: https://github.com/DataDog/dd-trace-php/releases/latest
+[5]: https://github.com/DataDog/dd-trace-php/blob/master/docs/getting_started.md#enabling-tracing
+[6]: https://github.com/DataDog/dd-trace-php/blob/master/docs/getting_started.md#alternative-install-datadogdd-trace-package-without-changing-minimum-stability
+[7]: /tracing/setup/docker/
+[8]: https://goo.gl/forms/rKjH2J6nJ585KXri2

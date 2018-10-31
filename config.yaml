@@ -576,7 +576,7 @@ languages:
           weight: 190
           parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_php
-          name: "PHP (Coming soon)"
+          name: "PHP"
           url: "tracing/setup/php/"
           weight: 195
           parent: customnav_tracingnav_setup
@@ -1628,7 +1628,7 @@ languages:
           weight: 190
           parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_php
-          name: "PHP (Coming soon)"
+          name: "PHP"
           url: "tracing/setup/php/"
           weight: 195
           parent: customnav_tracingnav_setup

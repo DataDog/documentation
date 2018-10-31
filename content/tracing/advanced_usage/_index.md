@@ -260,6 +260,24 @@ span?.SetTag("<TAG_KEY>", "<TAG_VALUE>");
 **Note**: `Datadog.Trace.Tracer.Instance.ActiveScope` returns `null` if there is no active span.
 
 {{% /tab %}}
+{{% tab "PHP" %}}
+
+Add tags directly to a `OpenTracing\Span` object by calling `Span.setTag()`. For example:
+
+```php
+use OpenTracing\GlobalTracer;
+
+// get the currently active span (can be null)
+if (($span = GlobalTracer::get()->getActiveSpan()) !== null){
+
+  // add a tag to the span
+  $span->setTag("<TAG_KEY>", "<TAG_VALUE>");
+}
+```
+
+**Note**: `GlobalTracer::get()->getActiveSpan()` returns `null` if there is no active span.
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Manual Instrumentation
@@ -471,6 +489,31 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 ```
 
 [dotnet compatibility]: /tracing/setup/dotnet/#compatibility
+
+{{% /tab %}}
+{{% tab "PHP" %}}
+If you aren’t using libraries supported by automatic instrumentation (see [library compatibility][php compatibility]), manually instrument your code.
+
+The following example uses the global Datadog Tracer and creates a span to trace a web request:
+
+```php
+use OpenTracing\GlobalTracer;
+use DDTrace\Tags;
+use DDTrace\Types;
+
+$scope = GlobalTracer::get()->startActiveSpan("web.request");
+$span = $scope->getSpan();
+
+$span->setResource($request->url);
+$span->setTag(Tags\SPAN_TYPE, Types\WEB_SERVLET);
+$span->setTag('http.method', $request->method);
+
+// do some work...
+
+$span->finish();
+```
+
+[php compatibility]: /tracing/setup/php/#compatibility
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -1399,6 +1442,9 @@ Debug mode is disabled by default. To enable it, set the `isDebugEnabled` argume
 ```csharp
 var tracer = Datadog.Trace.Tracer.Create(isDebugEnabled: true);
 ```
+
+{{% /tab %}}
+{{% tab "PHP" %}}
 
 {{% /tab %}}
 {{< /tabs >}}
