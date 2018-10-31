@@ -24,20 +24,26 @@ Log monitors alert when a specified type of log exceeds a user-defined threshold
 
 ## Setup
 
-1. Define the search query:
+1. Define the search query :
     {{< img src="monitors/monitor_types/log/define_the_search_query.png" alt="Define the search query" responsive="true" style="width:50%;" >}}
     The search query has the same behavior as [the log explore search][1]
 
-2. Set alert conditions:
+2. (Optional) Define the alert grouping:
+  {{< img src="monitors/monitor_types/log/log_monitor_group_by.png" alt="Set alert conditions" responsive="true" style="width:50%;" >}}
+    With or without alert grouping defined, you get one alert when the aggregated value meets the conditions set below. Which means that even if you split the query by host, a single notification is send if several host meets the conditions set below. This is done to reduce the notification noise.
+
+3. Set alert conditions:
     {{< img src="monitors/monitor_types/log/set_alert_conditions.png" alt="Set alert conditions" responsive="true" style="width:50%;" >}}
 
-3. Configure your **notification options**:  
+4. Configure your **notification options**:  
     Refer to the [Notifications][2] dedicated documentation page for a detailed options.
 
 ## Notifications and log samples
 
  It is possible to add up to 10 samples of logs that triggered the monitor in the notification message.
 For now, this is available for Slack and email notifications.
+
+Samples are not available yet for multi alerts.
 
  **Enable log samples in notification message**
     
