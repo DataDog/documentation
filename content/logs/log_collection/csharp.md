@@ -304,7 +304,7 @@ var log = new LoggerConfiguration()
     .CreateLogger();
 ```
 
-You can override the default behavior by manually specifying the following properties (`endpoint`, `port`, `useSSL`) and it is possible to specify the `source`, `service`, `host`, and custom tags:
+You can override the default behavior by manually specifying the following properties in the parameters: `endpoint`, `port`, `useSSL`. You can also specify the `source`, `service`, `host`, and custom tags:
 
 ```
 var config = new DatadogConfiguration("intake.logs.datadoghq.com", 10516, true);
