@@ -49,7 +49,7 @@ L'intégration Flowdock n'inclut aucun check de service pour le moment.
 ## Dépannage
 Besoin d'aide ? Contactez  [l'équipe support de Datadog][1].
 
-[1]: http://docs.datadoghq.com/help/
+[1]: https://docs.datadoghq.com/help/
 
 
 {{< get-dependencies >}}

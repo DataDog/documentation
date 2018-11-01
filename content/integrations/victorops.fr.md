@@ -65,7 +65,7 @@ Les caractères spéciaux ne sont pas autorisés dans les noms. Les lettres maju
 Si ce champ est vide, l'endpoint par défaut sera 'https://alert.victorops.com/integrations/datadog/20140523/alert'
 
 
-[1]: http://docs.datadoghq.com/help/
+[1]: https://docs.datadoghq.com/help/
 
 
 {{< get-dependencies >}}
