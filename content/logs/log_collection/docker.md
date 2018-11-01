@@ -107,8 +107,8 @@ The source and service values can be overriden thanks to Autodiscovery as descri
 
 The second step is to use Autodiscovery to customize the `source` and `service` value. This allows Datadog to identify the log source for each container.
 
-Since version 6.2 of the Datadog Agent, you can configure log collection directly in the container labels. 
-Pod annotations are also supported for Kubernetes environment, see the [Kubernetes Autodiscovery documentation][12].
+Since version 6.2 of the Datadog Agent, you can configure log collection directly in the Docker container labels. 
+Since version 6.5 of the Datadog Agent, Pod annotations are also supported for Kubernetes environment, see the [Kubernetes Autodiscovery documentation][12].
 
 Autodiscovery expects labels to follow this format, depending on the file type:
 

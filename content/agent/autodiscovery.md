@@ -265,6 +265,8 @@ Again, the order of each list matters. The Agent can only generate the HTTP chec
 
 Store check templates in Kubernetes Pod annotations. With Autodiscovery enabled, the Agent detects if it's running on Kubernetes and automatically searches all Pod annotations for check templates.
 
+Since version 6.5 of the Datadog Agent, it is also possible to configure log collection in Kubernetes Pod annotations.
+
 Autodiscovery expects annotations to look like this:
 
 ```
