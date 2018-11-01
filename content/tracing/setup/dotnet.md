@@ -82,7 +82,7 @@ For Debian or Ubuntu, download and install the Debian package:
 
 ```bash
 curl -LO https://github.com/DataDog/dd-trace-csharp/releases/download/v0.5.0-beta/datadog-dotnet-apm_0.5.0_amd64.deb
-sudo apt install ./datadog-dotnet-apm_0.5.0_amd64.deb
+sudo dpkg -i ./datadog-dotnet-apm_0.5.0_amd64.deb
 ```
 
 For CentOS or Fedora, download and install the RPM package
