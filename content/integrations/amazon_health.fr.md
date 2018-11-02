@@ -66,7 +66,7 @@ Besoin d'aide ? Contactez  [l'équipe support de Datadog][5].
 [2]: https://docs.datadoghq.com/integrations/amazon_web_services/#installation
 [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_health.html
 [4]: https://app.datadoghq.com/account/settings#integrations/amazon_health
-[5]: http://docs.datadoghq.com/help/
+[5]: https://docs.datadoghq.com/help/
 
 
 {{< get-dependencies >}}
