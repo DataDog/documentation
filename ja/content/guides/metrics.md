@@ -637,8 +637,7 @@ In this query, all instances of this metric (e.g. across all hosts, indicated by
 <p class="alert alert-warning">
 We store one timeseries per host + metric + tag combination on our backend,
 thus we cannot support infinitely bounded tags. Please don't include endlessly
-growing tags in your metrics, like timestamps or user ids. Please limit each
-metric to 1000 tags.
+growing tags in your metrics, like timestamps or user ids.
 </p>
 
 Tags must start with a letter, and after that may contain alphanumerics,
@@ -707,7 +706,6 @@ Datadogのバックエンドでは、ホスト、メトリクス, タグの組�
 従って、無限にタグづけされたメトリクスをサポートすることができません。
 ユーザIDやタイムスタンプなど、無限に増殖する['key':'value syntax']の付与は止めてください。
 <br /><br />
-<b>それぞれのメトリクスにタグを付与する際には、1000種類を超えないように注意してください。</b>
 </p>
 
 タグを付与するさに注意事項は:

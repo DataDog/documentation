@@ -12,7 +12,6 @@ This article explains:
 * What a custom metric is, and how you can submit it to Datadog.
 * How many custom metrics we allow for out of the box.
 * How to check your custom metric count over time.
-* Some best practices for using custom metrics.
 
 ## How is a custom metric defined ?
 
@@ -121,11 +120,6 @@ If you're submitting metrics directly to the Datadog API *without* using [DogSta
 
 The full payload is approximately \~ 100 bytes. However, with the DogStatsD API, compression is applied and the typical payload is very small.
 
-## Custom metrics best practices
-
-* You can check the number of "distinct metrics" in the metric summary page (click a metric name to see the number of distinct metrics associated). If you need a higher custom metric limit, [email us][8].
-* [Additional information about billing and custom metrics][9].
-
 [1]: /developers/dogstatsd
 [2]: /agent
 [3]: /integrations/
@@ -134,4 +128,3 @@ The full payload is approximately \~ 100 bytes. However, with the DogStatsD API,
 [6]: https://app.datadoghq.com/account/usage/hourly
 [7]: https://app.datadoghq.com/metric/summary
 [8]: /help
-[9]: /account_management/faq/
