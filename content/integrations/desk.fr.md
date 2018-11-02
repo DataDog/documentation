@@ -56,7 +56,7 @@ Besoin d'aide ? Contactez  [l'équipe support de Datadog][4].
 [1]: https://app.datadoghq.com/account/settings#integrations/desk
 [2]: https://app.datadoghq.com/screen/integration/desk
 [3]: https://github.com/DataDog/dogweb/blob/prod/integration/desk/desk_metadata.csv
-[4]: http://docs.datadoghq.com/help/
+[4]: https://docs.datadoghq.com/help/
 
 
 {{< get-dependencies >}}
