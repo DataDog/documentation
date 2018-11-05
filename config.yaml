@@ -681,6 +681,13 @@ languages:
           weight: 50
           parent: menu_references_tracing
 
+        # Troubleshooting
+        - identifier: customnav_tracingnav_troubleshooting
+          name: "Troubleshooting"
+          url: "tracing/visualization/troubleshooting"
+          weight: 60
+          parent: menu_references_tracing
+
         # Getting further
         - identifier: customnav_tracingnav_getting_further
           name: "Getting Further"
@@ -1771,6 +1778,13 @@ languages:
           name: "Trace API"
           url: "api/#tracing"
           weight: 50
+          parent: menu_references_tracing
+
+        # Troubleshooting
+        - identifier: customnav_tracingnav_troubleshooting
+          name: "Troubleshooting"
+          url: "tracing/visualization/troubleshooting"
+          weight: 60
           parent: menu_references_tracing
 
         # Libraries
