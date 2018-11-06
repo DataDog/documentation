@@ -15,7 +15,7 @@ private: true
 * [Uninstall the Agent][21]
 * [Upgrade to Agent v6][22]
 * [Agent configuration file migration][24]
-* [Downgrade the Datadog Agent][23]
+* [Downgrade the Agent to a prior minor version][23]
 * [How does Datadog determine the Agent hostname?][6]
 * [Comparing Agent 5 and Agent 6 for Containerized Environments (Docker and Kubernetes)][20]
 

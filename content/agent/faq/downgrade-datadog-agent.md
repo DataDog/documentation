@@ -1,10 +1,10 @@
 ---
-title: Downgrade the Agent between two version 6 minors versions
+title: Downgrade the Agent to a prior minor version
 kind: faq
 further_reading:
 ---
 
-If you are using the DEB or RPM package of the version `6.<VERSION>` of Agent and want to downgrade to the version `6.<NEW_VERSION>`
+For DEB or RPM package of the Datadog Agent, find below instructions to downgrade the Datadog Agent to a version `6.<VERSION>`.
 
 **Note**: Those instructions works only for Datadog Agent version 6.x and above.
 
@@ -13,7 +13,7 @@ If you are using the DEB or RPM package of the version `6.<VERSION>` of Agent an
 ### CLI
 
 ```
-sudo apt-get update && sudo apt-get install --force-yes datadog-agent=1:6.<NEW_VERSION>
+sudo apt-get update && sudo apt-get install --force-yes datadog-agent=1:6.<VERSION>
 ```
 
 ### Configuration management tools
@@ -24,7 +24,7 @@ sudo apt-get update && sudo apt-get install --force-yes datadog-agent=1:6.<NEW_V
 Set the following attributes on your nodes:
 
 ```rb
-node["datadog"]["agent6_version"] = "1:6.<NEW_VERSION>"
+node["datadog"]["agent6_version"] = "1:6.<VERSION>"
 node["datadog"]["agent6_package_action"] = "install"
 node["datadog"]["agent_allow_downgrade"] = true
 ```
@@ -35,7 +35,7 @@ node["datadog"]["agent_allow_downgrade"] = true
 ```
 class { 'datadog_agent':
       ...
-      agent_version => “1:6.<NEW_VERSION>”,
+      agent_version => “1:6.<VERSION>”,
 }
 ```
 
@@ -45,7 +45,7 @@ class { 'datadog_agent':
 Add the following attributes in you playbook:
 
 ```yaml
-datadog_agent_version: "1:6.<NEW_VERSION>"
+datadog_agent_version: "1:6.<VERSION>"
 datadog_agent_allow_downgrade: true
 ```
 
@@ -57,7 +57,7 @@ datadog_agent_allow_downgrade: true
 ### CLI
 
 ```
-sudo yum clean expire-cache metadata && sudo yum downgrade datadog-agent-6.<NEW_VERSION>
+sudo yum clean expire-cache metadata && sudo yum downgrade datadog-agent-6.<VERSION>
 ```
 
 ### Configuration management tools
@@ -68,7 +68,7 @@ sudo yum clean expire-cache metadata && sudo yum downgrade datadog-agent-6.<NEW_
 Set the following attributes on your nodes:
 
 ```rb
-node["datadog"]["agent6_version"] = "6.<NEW_VERSION>"
+node["datadog"]["agent6_version"] = "6.<VERSION>"
 node["datadog"]["agent6_package_action"] = "install"
 node["datadog"]["agent_allow_downgrade"] = true
 ```
@@ -79,7 +79,7 @@ node["datadog"]["agent_allow_downgrade"] = true
 ```
 class { 'datadog_agent':
       ...
-      agent_version => “6.<NEW_VERSION>”,
+      agent_version => “6.<VERSION>”,
 }
 ```
 
@@ -89,7 +89,7 @@ class { 'datadog_agent':
 Add the following attributes in you playbook (on centos this will only work with ansible 2.4 and up):
 
 ```yaml
-datadog_agent_version: "6.<NEW_VERSION>"
+datadog_agent_version: "6.<VERSION>"
 datadog_agent_allow_downgrade: true
 ```
 
@@ -101,7 +101,7 @@ datadog_agent_allow_downgrade: true
 ### CLI
 
 ```
-sudo zypper --no-gpg-check refresh datadog && sudo zypper install --oldpackage datadog-agent-1:6.<NEW_VERSION>
+sudo zypper --no-gpg-check refresh datadog && sudo zypper install --oldpackage datadog-agent-1:6.<VERSION>
 ```
 
 ### Configuration management tools
@@ -122,7 +122,7 @@ Datadog cookbook doesn’t support SUSE at the moment
 Add the following attributes in you playbook:
 
 ```yaml
-datadog_agent_version: "1:6.<NEW_VERSION>"
+datadog_agent_version: "1:6.<VERSION>"
 datadog_agent_allow_downgrade: true
 ```
 
