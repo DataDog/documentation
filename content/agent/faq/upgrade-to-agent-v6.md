@@ -58,7 +58,7 @@ DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/Dat
     sudo initctl start datadog-agent
     ```
 
-## CentOs
+## CentOS
 
 A script is available to automatically install or upgrade to the new Agent. It sets up the package repositories and installs the Agent package for you. When upgrading, the import tool also searches for an existing `datadog.conf` from a prior version, and converts Agent and Check configurations according to the new v6 format.
 
@@ -251,7 +251,7 @@ This is very similar to the upgrade method above, except instead of specifying t
 DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_mac_os.sh)"
 ```
 
-## Redhat
+## Red Hat
 
 A script is available to automatically install or upgrade to the new Agent. It sets up the package repositories and installs the Agent package for you. When upgrading, the import tool also searches for an existing `datadog.conf` from a prior version, and converts Agent and Check configurations according to the new v6 format.
 
@@ -309,7 +309,7 @@ DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/Dat
     sudo initctl restart datadog-agent
     ```
 
-## Suze
+## SUSE
 
 1. Set up Datadog's Yum repo on your system by creating `/etc/zypp/repos.d/datadog.repo` with the contents:
   ```ini
