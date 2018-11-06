@@ -18,7 +18,7 @@ aliases:
 ---
 
 <div class="alert alert-info">
-Agent v6 is now available, <a href="https://github.com/DataDog/datadog-agent/blob/master/docs/agent/upgrade.md">upgrade to the newest version</a> to benefit from all new functionality.
+Agent v6 is now available, <a href="https://docs.datadoghq.com/agent/faq/upgrade-to-agent-v6">upgrade to the newest version</a> to benefit from all new functionality.
 </div>
 
 ## What is the Agent?
@@ -60,43 +60,6 @@ Agent 6 is the latest major version of the Datadog Agent. The big difference bet
 * [Prometheus OpenMetrics is supported natively][20].
 
 * [All your logs can be sent to Datadog for alerting, analysis, and correlation with metrics][21].
- 
-
-## Agent configuration files migration
-
-[If you haven't done it already, upgrade your Agent v5 to Agent v6][18]
-
-To automatically transition Agent configuration paths and formats from Agent v5 to Agent v6, use the `import` command. The command parses an existing v5 `datadog.conf` and converts the configuration options to the new v6 `datadog.yaml` format. It also copies configuration files for checks that are currently enabled.
-
-{{< tabs >}}
-{{% tab "Linux" %}}
-
-`sudo -u dd-agent -- datadog-agent import`
-
-{{% /tab %}}
-{{% tab "macOS" %}}
-
-`datadog-agent import <old_configuration_dir> <destination_dir>`
-
-With:
-
-* `<old_configuration_dir>` is the directory containing the `datadog.conf` file
-* `<destination_dir>` is the directory where the imported `datadog.yaml` is written (you can use the same directory as `<old_configuration_dir>`).
-
-{{% /tab %}}
-{{% tab "Windows" %}}
-
-`datadog-agent import <old_configuration_dir> <destination_dir>`
-
-With:
-
-* `<old_configuration_dir>` is the directory containing the `datadog.conf` file
-* `<destination_dir>` is the directory where the imported `datadog.yaml` is written (you can use the same directory as `<old_configuration_dir>`).
-
-**Note**: `datadog.conf` is automatically upgraded to `datadog.yaml` on upgrade.
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ## CLI
 

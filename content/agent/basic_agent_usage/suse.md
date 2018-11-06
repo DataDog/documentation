@@ -128,37 +128,6 @@ The Agent contains an embedded Python environment at `/opt/datadog-agent/embedde
 
 See the instructions on how to [add packages to the embedded Agent][5] for more information.
 
-## Upgrade to Agent 6
-
-1. Set up Datadog's Yum repo on your system by creating `/etc/zypp/repos.d/datadog.repo` with the contents:
-  ```ini
-  [datadog]
-  name=Datadog, Inc.
-  enabled=1
-  baseurl=https://yum.datadoghq.com/suse/stable/6/x86_64
-  type=rpm-md
-  gpgcheck=1
-  repo_gpgcheck=0
-  gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY.public
-  ```
-
-2. Update your local Zypper repo and install the Agent:
-  ```
-  sudo zypper refresh
-  sudo rpm --import https://yum.datadoghq.com/DATADOG_RPM_KEY.public
-  sudo zypper install datadog-agent
-  ```
-
-3. Copy the example configuration into place and plug in your API key:
-  ```shell
-  sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_API_KEY>/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
-  ```
-
-4. Re-start the Agent:
-  ```
-  sudo systemctl restart datadog-agent.service
-  ```
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

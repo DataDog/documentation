@@ -12,6 +12,10 @@ private: true
 * [Install core extras][4]
 * [Agent commands][5]
 * [Agent configuration files][19]
+* [Uninstall the Agent][21]
+* [Upgrade to Agent v6][22]
+* [Agent configuration file migration][24]
+* [Downgrade the Datadog Agent][23]
 * [How does Datadog determine the Agent hostname?][6]
 * [Comparing Agent 5 and Agent 6 for Containerized Environments (Docker and Kubernetes)][20]
 
@@ -53,3 +57,7 @@ private: true
 [18]: /agent/faq/how-is-the-system-mem-used-metric-calculated
 [19]: /agent/faq/agent-configuration-files
 [20]: /agent/faq/agent-5-vs-agent-6-for-docker-kubernetes
+[21]: /agent/faq/uninstall-the-datadog-agent
+[22]: /agent/faq/upgrade-to-agent-v6
+[23]: /agent/faq/downgrade-datadog-agent
+[24]: /agent/faq/agent-configuration-file-migration

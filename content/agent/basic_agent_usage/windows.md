@@ -123,25 +123,6 @@ The current way to do so is to add the package in the library zipped folder that
 
 {{< img src="agent/faq/add_package_windows.png" alt="Add Package Windows" responsive="true" style="width:75%;">}}
 
-## Switch between Agent v5 and v6
-### Upgrade to Agent 6
-
-Download the latest version available [from here][2] and run the installation package.
-
-### Downgrade to Agent v5
-
-Run the Agent installer package for the latest 5.x version,  instructions can be found [in the Datadog Agent Integration page][1].
-
-## Uninstall the Agent
-
-**It's important that the original account used to install the Agent is also used to remove it, otherwise it's possible remnants are left behind and it won't be cleanly removed.**
-
-Uninstall the Agent using Add/Remove Programs, alternatively, it's possible to to use Powershell as well. Here is a one liner:
-
-```
-(Get-WmiObject -Class Win32_Product -Filter "Name='Datadog Agent'" -ComputerName . ).Uninstall()
-```
-
 ## Troubleshooting
 ### Agent Status and Information
 
