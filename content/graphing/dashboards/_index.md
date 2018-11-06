@@ -21,7 +21,7 @@ The [Dashboard List][1] page lets you sort your Dashboards into different lists.
 
 {{< img src="graphing/dashboards/dashboard_list.png" alt="Dashboard list" responsive="true" >}}
 
-Search across your Dashboard name with the search bar at the top of the page, Dashboards in the Dashboard list can be sorted with the column headers: 
+Search across your Dashboard with the search bar at the top of the page. Dashboards in the Dashboard list can be sorted with the column headers: 
 
 * `Favorite`: Sort the Dashboard list with your favorite Dashboards first.
 * `Name`: Sort the Dashboard list alphabetically. 
@@ -30,7 +30,7 @@ Search across your Dashboard name with the search bar at the top of the page, Da
 
 ### Popularity
 
-A dashboard popularity is relative. An organization's most popular dashboard appears as 5 bars; every other Dashboards are relative to that. Popularity is based upon the amount of traffic a Dashboard is getting and is updated daily, so new dashboards have 0 popularity bars for up to the first 24 hours.
+A Dashboard's popularity is relative. An organization's most popular dashboard appears as 5 bars; every other Dashboards are relative to that. Popularity is based upon the amount of traffic a Dashboard is getting and is updated daily, so new dashboards have 0 popularity bars for up to the first 24 hours.
 
 If you are using uBlock or a similar browser plugin to block web beacons, then your traffic won't impact a dashboard popularity.
 
