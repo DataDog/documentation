@@ -6,6 +6,9 @@ further_reading:
   tag: "Documentation"
   text: Learn more about the Datadog Agent
 ---
+
+To uninstall the Datadog Agent run:
+
 {{< tabs >}}
 {{% tab "Agent v6" %}}
 
@@ -40,7 +43,7 @@ sudo yum remove datadog-agent
 
 ### Windows
 
-For Windows, it's important that the original account used to install the Agent is also used to remove it, otherwise it's possible remnants will be left behind and it will not be cleanly removed.
+**It's important that the original account used to install the Agent is also used to remove it, otherwise it's possible remnants are left behind and it won't be cleanly removed.**
 
 Uninstall the Agent using Add/Remove Programs, alternatively, it's possible to to use Powershell as well. Here is a one liner:
 
@@ -84,7 +87,7 @@ sudo rm /Library/LaunchDaemons/com.datadoghq.agent.plist
 
 ### Windows
 
-For Windows, it's important that the original account used to install the Agent is also used to remove it, otherwise it's possible remnants will be left behind and it will not be cleanly removed.
+**It's important that the original account used to install the Agent is also used to remove it, otherwise it's possible remnants are left behind and it won't be cleanly removed.**
 
 Uninstall the Agent using Add/Remove Programs, alternatively, it's possible to to use Powershell as well. Here is a one liner:
 
