@@ -67,10 +67,10 @@ Additionally, some configuration options may be set as environment variables. No
 For more information about the Datadog Agent, see the [dedicated doc page][12] or refer to the [`datadog.conf.example` file][13].
 
 ### Trace search
-Trace search is available for Agent 5.25.0+. For information, see the set up instructions in the main [APM documentation][18].
+Trace search is available for Agent 5.25.0+. For more information, see the set up instructions in the main [APM documentation][18].
 
 ## Troubleshooting
-Need help? Contact [Datadog Support][17].
+Need help? Contact [Datadog support][17].
 
 
 [1]: https://github.com/DataDog/datadog-trace-agent#run-on-osx

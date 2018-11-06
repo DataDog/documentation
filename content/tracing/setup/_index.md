@@ -58,7 +58,7 @@ To start tracing your application:
 
 To instrument an application written in a language that does not yet have official library support, visit the list of [community tracing libraries][15].
 
-Finally, start monitoring your app's performance: Within a few minutes of running APM, your services will appear in [the APM home page][16]. See [Using the APM UI][17] to learn more.
+Finally, start monitoring your app's performance: within a few minutes of running APM, your services will appear in [the APM home page][16]. See [Using the APM UI][17] to learn more.
 
 ## Agent configuration
 
@@ -93,7 +93,7 @@ To get a an overview of all the possible settings for APM, take a look at the Ag
 For more information about the Datadog Agent, see the [dedicated doc page][18] or refer to the [`datadog.yaml` templates][19].
 
 ### Trace search
-To enable trace search, [services][30] must be flowing into Datadog. Once services are set up, navigate to the [Trace Search & Analytics doc][31] in the Datadog app. Then follow these steps:
+To enable trace search, [services][30] must be flowing into Datadog. Once services are set up, navigate to the [Trace Search & Analytics docs page][31]. Then follow these steps:
 
 1. Select the `environment` and `services` to extract [APM events][32] from.
 2. Update your Datadog Agent configuration (based on Agent version) with the information shown.
@@ -133,7 +133,7 @@ DD_APM_ANALYZED_SPANS="<SERVICE_NAME_1>|servlet.request=1,<SERVICE_NAME_2>|servl
 ## Primary Tags
 ### Definition
 
-There are several dimensions available to scope an entire Datadog APM application. These include aggregate statistics (such as requests/second, latency, error rate, Apdex score) and visible traces. Those dimensions are set up through primary tags that allow you to get an even finer view of your application's behavior. Use cases for primary tags include, the environment, the availability zone, the datacenter, etc.
+There are several dimensions available to scope an entire Datadog APM application. These include aggregate statistics (such as requests/second, latency, error rate, Apdex score) and visible traces. These dimensions are set up through primary tags that allow you to get an even finer view of your application's behavior. Use cases for primary tags include environment, availability zone, datacenter, etc.
 
 Primary tags must follow a different set of rules from those of conventional [Datadog tags][26].
 
