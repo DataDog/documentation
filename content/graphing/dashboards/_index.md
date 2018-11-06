@@ -34,7 +34,7 @@ A Dashboard's popularity is relative. An organization's most popular Dashboard a
 
 If you are using uBlock or a similar browser plugin to block web beacons, your traffic won't impact a Dashboard's popularity.
 
-**Note**: Traffic to the public URLs of public dashboards is ignored.
+**Note**: Traffic to the public URLs of public Dashboards is ignored.
 
 ## Create a Dashboard list
 
@@ -44,7 +44,7 @@ Change its title by selecting it:
 
 {{< img src="graphing/dashboards/new_list_title.png" alt="New list" responsive="true" style="width:70%;">}}
 
-To add Dashboards to your Dashboard List, select their corresponding check boxes in the main dashboard list and then click on the *Add to List* button in the upper right corner of the Dashboard list:
+To add Dashboards to your Dashboard List, select their corresponding check boxes in the main Dashboard list. Then click on the *Add to List* button in the upper right corner of the Dashboard list:
 
 {{< img src="graphing/dashboards/dash_to_list.png" alt="Add Dashboard to list" responsive="true" style="width:70%;">}}
 
@@ -56,7 +56,7 @@ To create a Dashboard, click on the *New Dashboard* button in the upper right co
 
 ### What is the difference between a Screenboard and a Timeboard?
 
-At Datadog we give you the capability to create and customize two types of dashboards; [Screenboards][5] and [Timeboards][6]. To more clearly understand the differences between the two, consider the following:
+You have the capability to create and customize two types of Dashboards: [Screenboards][5] and [Timeboards][6]. To more clearly understand the differences between the two, consider the following:
 
 |                                | Timeboards                       | Screenboards                                      |
 | ---                            | ------------                     | -------------                                     |
