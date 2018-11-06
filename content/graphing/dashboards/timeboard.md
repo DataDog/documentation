@@ -20,6 +20,37 @@ further_reading:
 2. Click on the pencil icon to edit the title and description
 3. Click the checkmark to save changes
 
+## Event Correlation at Design Time
+Event Correlation refers to overlaying events on top of a dashboard graph and is an important feature of the Datadog platform. You can setup correlation at two different times: either when you setup the dashboard or adhoc at the time you view the dashboard.
+
+{{< img src="graphing/dashboards/guides-eventcorrelation-screenboard.png" alt="guides-eventcorrelation-screenboard" responsive="true" style="width:90%;">}}
+
+Setup event correlation at design time by editing any graph on both Timeboards and Screenboards and adding events to the graph. To learn more about this, visit the [Graphing Primer][1]. You can find details about adding events [using the UI][2] or via the JSON interface further down the page.
+
+## Event Correlation at View Time
+
+{{< img src="graphing/dashboards/guides-eventcorrelation-searchbox.png" alt="guides event correlation" responsive="true" style="width:90%;">}}
+
+Setup event correlation at view time by adding a query in the Search box at the top left of any Timeboard dashboard window. This replaces any events added at design time, but applies the events to all graphs on that particular dashboard.
+
+## Correlation between Logs and Metrics
+
+### Jump from a metric to its logs
+
+Fast and easy correlation is key when troubleshooting an issue. Use the following shortcut from any dashboard timeseries graphs to open a contextual menu with the most related logs.
+
+{{< img src="graphing/dashboards/related_logs.png" alt="Related logs" responsive="true" style="width:80%;">}}
+
+Select `View related logs` to jump to the Log Explorer page zoomed on the selected timeframe with all the current context of your graph.
+
+### How do we define the search query ?
+
+To define the most related logs, we use the following parameters:
+
+* *Timeframe*: Focused on the selected data point and uses the graph bucket size to display data before and after the selected point.
+* *Integration prefix*: If the metric is coming from an integration, Datadog filters on the `source` attribute with the same integration name.
+* *Tags*: All tags used in the graph (*template variable*, *split by*, *filter by*) are automatically added to the search query.
+
 ## Read Only
 
 [An Administrator][1] or Timeboard creator can make a Timeboard read-only by clicking the gear icon (upper right corner of a Timeboard) and clicking the **Permissions** link:
