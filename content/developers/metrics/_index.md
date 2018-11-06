@@ -138,7 +138,7 @@ Units are also displayed at the bottom of Timeboard graphs, and metric descripti
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /developers/dogstatsd
-[2]: /developers/agent_checks
+[2]: /developers/integrations
 [3]: /api/#metrics
 [4]: /developers/metrics/custom_metrics/
 [5]: /developers/dogstatsd/

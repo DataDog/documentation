@@ -28,7 +28,7 @@ Finally, don't miss out on the regular [Datadog Office Hours][7], which is your 
 
 Thanks for stopping by-and welcome to the contributor community!
 
-[1]: /developers/agent_checks
+[1]: /developers/integrations
 [2]: /developers/prometheus
 [3]: /developers/dogstatsd
 [4]: /developers/integrations
