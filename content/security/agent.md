@@ -40,7 +40,7 @@ Datadog's Vulnerability Management program includes regular assessments of suppo
 
 Regarding its Container Agent specifically, Datadog performs regular vulnerability static analysis using [clair by CoreOS][6] and [snyk.io][7]. Additionally, Datadog leverages security scanning as part of its releases of the Container Agent to the [Docker Trusted Registry][8], as well as the [Red Hat Container Catalog][9]. In addition to Datadog's internal Vulnerability Management program, Datadog also partners with container security vendors.
 
-If you believe you've discovered a bug in Datadog's security, get in touch at [security@datadoghq.com][10] and we will get back to you within 24 hours. Our [PGP key][11] is available for download in case you need to encrypt communications with us. We request that you not publicly disclose the issue until we have had a chance to address it.
+If you believe you've discovered a bug in Datadog's security, get in touch at [security@datadoghq.com][10] and we will get back to you within 24 hours. Datadog's [PGP key][11] is available for download in case you need to encrypt communications with us. We request that you not publicly disclose the issue until we have had a chance to address it.
 
 ## [BETA] Secrets Management
 
