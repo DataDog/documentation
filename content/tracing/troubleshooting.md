@@ -1,5 +1,5 @@
 ---
-title: Agent Troubleshooting
+title: APM Troubleshooting
 kind: documentation
 further_reading:
 - link: ""
@@ -17,7 +17,10 @@ If an error was reported by the Agent or the Agent could not be reached, you wil
 
 If you see no such entry at all, no request was sent to the agent, which probably means the tracer is not instrumenting. In this case you should [contact Datadog support][3] and provide the logs.
 
-### JavaScript Tracer Troubleshooting
+### Language Tracer Troubleshooting
+
+{{< tabs >}}
+{{% tab "JavaScript" %}}
 
 #### Traces are not reported in Datadog UI
 
@@ -50,6 +53,13 @@ You can find the list in the [corresponding language documentation][5].
 If you are using manual instrumentation, make sure to set the `childOf` option when calling `startSpan()`, and to use the scope manager to set the span as active so that our integrations will use this span as a parent as well.
 
 If you are not using manual instrumentation or made sure that the parent is properly set, this is probably a bug in our integrations and you should contact [Datadog support][3].
+
+[3]: /help
+[5]: /tracing/setup/#setup-process
+
+{{% /tab %}}
+{{< /tabs >}}
+
 
 ## Agent Troubleshooting
 

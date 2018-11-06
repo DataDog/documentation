@@ -684,7 +684,7 @@ languages:
         # Troubleshooting
         - identifier: customnav_tracingnav_troubleshooting
           name: "Troubleshooting"
-          url: "tracing/visualization/troubleshooting"
+          url: "tracing/troubleshooting"
           weight: 60
           parent: menu_references_tracing
 
@@ -1783,7 +1783,7 @@ languages:
         # Troubleshooting
         - identifier: customnav_tracingnav_troubleshooting
           name: "Troubleshooting"
-          url: "tracing/visualization/troubleshooting"
+          url: "tracing/troubleshooting"
           weight: 60
           parent: menu_references_tracing
 
