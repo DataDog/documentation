@@ -20,7 +20,7 @@ The Datadog Agent submits data to Datadog over a TLS-encrypted TCP connection by
 
 ## Networking and Proxying
 
-Datadog is a SaaS product: customers need to establish an outbound connection from their network to the public internet in order to submit monitoring data. Traffic is always initiated by the Agent to Datadog via TLS-encrypted TCP connection by default. No sessions are ever initiated from Datadog back to the Agent. See the Agent's [Network][3] page for more information on configuring firewalls to whitelist the required Datadog domains and ports. Additionally, customers monitoring hosts with no direct connectivity to the public internet, or with restricted outbound traffic,  should consider submitting monitoring data via a [Proxy][4].
+Datadog is a SaaS product: customers need to establish an outbound connection from their network to the public internet in order to submit monitoring data. Traffic is always initiated by the Agent to Datadog via TLS-encrypted TCP connection by default. No sessions are ever initiated from Datadog back to the Agent. See the Agent's [Network][3] page for more information on configuring firewalls to whitelist the required Datadog domains and ports. Additionally, customers monitoring hosts with no direct connectivity to the public internet, or with restricted outbound traffic, should consider submitting monitoring data via a [Proxy][4].
 
 ## Agent Logs Obfuscation
 
