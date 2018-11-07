@@ -5,13 +5,17 @@ kind: documentation
 
 ## Overview
 
-Connect to Microsoft Azure in order to:
+Azure App Service is a platform-as-a-service that runs web, mobile, API and business logic applications and automatically manages the resources required by those apps.
 
-* Get metrics from Azure VMs with or without installing the Agent
-* Tag your Azure VMs with Azure-specific information (e.g. location)
-* Get metrics for other services: Application Gateway, App Service (Web & Mobile), Batch Service, Event Hub, IOT Hub, Logic App, Redis Cache, Server Farm (App Service Plan), SQL Database, SQL Elastic Pool, Virtual Machine Scale Set, and many more.
+Get metrics from Azure App Service to:
 
-Related integrations include:
+* Visualize your app performance
+* Correlate the performance of your Azure Apps with the rest of your apps
+
+## Setup
+### Installation
+
+If you haven't already, set up the [Microsoft Azure integration first][1]. There are no other installation steps that need to be performed.
 
 |                                                           |                                                                               |
 | :---------------------------------------------------------|:------------------------------------------------------------------------------|
@@ -34,6 +38,31 @@ You can integrate your Microsoft Azure account with Datadog using the Azure CLI 
 
 Refer to the [primary Azure integration][1] for more information.
 
+## Native Database Integration
+
+You can also choose to turn on the Native Database Integration. This is an Agent level integration used to get detailed Postgres metrics and information from your databases.
+
+In the [Azure portal][2], go to your Azure Database for PostgreSQL server and click *Connection strings*.
+
+{{< img src="integrations/azure/dbformysql.png" alt="RDS console" responsive="true">}}
+
+Note the server URL, port, database name, username, and password. 
+
+Then edit `postgres.yaml` in your conf.d directory:
+
+```yaml
+init_config:
+
+instances:
+  - host: myurl.database.windows.net
+    user: my_username
+    pass: my_password
+    port: 5432
+    dbname: db_name
+```
+
+Restart the Agent.
+
 |                                                           |                                                                               |
 | :---------------------------------------------------------|:------------------------------------------------------------------------------|
 | **azure.dbforpostgresql_servers.active_connections** <br/> (count) | Total active connections |
@@ -48,14 +77,4 @@ Refer to the [primary Azure integration][1] for more information.
 | **azure.dbforpostgresql_servers.storage_used** <br/> (gauge) | Storage used <br/> *shown as byte* |
 
 [1]: /integrations/azure
-[7]: https://docs.datadoghq.com/integrations/azure_app_services
-[8]: https://docs.datadoghq.com/integrations/azure_batch
-[9]: https://docs.datadoghq.com/integrations/azure_event_hub
-[10]: https://docs.datadoghq.com/integrations/azure_iot_hub
-[11]: https://docs.datadoghq.com/integrations/azure_logic_app
-[12]: https://docs.datadoghq.com/integrations/azure_redis_cache
-[13]: https://docs.datadoghq.com/integrations/azure_storage
-[14]: https://docs.datadoghq.com/integrations/azure_sql_database
-[15]: https://docs.datadoghq.com/integrations/azure_sql_elastic_pool
-[16]: https://docs.datadoghq.com/integrations/azure_vm
-[17]: https://docs.datadoghq.com/integrations/azure_vm_scale_set
+[2]: https://portal.azure.com/
