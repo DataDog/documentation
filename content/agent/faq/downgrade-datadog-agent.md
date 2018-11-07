@@ -4,9 +4,9 @@ kind: faq
 further_reading:
 ---
 
-For DEB or RPM package of the Datadog Agent, find below instructions to downgrade the Datadog Agent to a version `6.X.Y`.
+For DEB or RPM packages of the Datadog Agent, find below instructions to downgrade the Datadog Agent to version `6.X.Y`.
 
-**Note**: Those instructions works only for Datadog Agent version 6.x and above.
+**Note**: These instructions only work for Datadog Agent version 6.x and above.
 
 ## Debian/Ubuntu
 
@@ -42,7 +42,7 @@ class { 'datadog_agent':
 {{% /tab %}}
 {{% tab "Ansible" %}}
 
-Add the following attributes in you playbook:
+Add the following attributes in your playbook:
 
 ```yaml
 datadog_agent_version: "1:6.X.Y-1"
@@ -86,7 +86,7 @@ class { 'datadog_agent':
 {{% /tab %}}
 {{% tab "Ansible" %}}
 
-Add the following attributes in you playbook (on centos this will only work with ansible 2.4 and up):
+Add the following attributes in your playbook (on CentOS, this will only work with Ansible 2.4+):
 
 ```yaml
 datadog_agent_version: "6.X.Y-1"
@@ -109,17 +109,17 @@ sudo zypper --no-gpg-check refresh datadog && sudo zypper install --oldpackage d
 {{< tabs >}}
 {{% tab "Chef Cookbook" %}}
 
-Datadog cookbook doesn’t support SUSE.
+Datadog's cookbook doesn’t support SUSE.
 
 {{% /tab %}}
 {{% tab "Puppet" %}}
 
-Datadog Module doesn’t support SUSE at the moment
+Datadog's module doesn’t support SUSE.
 
 {{% /tab %}}
 {{% tab "Ansible" %}}
 
-Add the following attributes in you playbook:
+Add the following attributes in your playbook:
 
 ```yaml
 datadog_agent_version: "1:6.X.Y-1"
