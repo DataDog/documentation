@@ -23,15 +23,15 @@ The Log Management solution is an all-in-one comprehensive solution that compris
 
 ## Log Collection
 
-Log collection is the beginning of your journey in the wonderful world of log-management. Use the [Datadog Agent][6] to collect logs directly from your hosts or your containerized environments. You can collect AWS service logs with Datadog's [AWS Lambda function](#from-aws-services).If you are already using a log-shipper daemon, refer to the dedicated documentation for [Rsyslog][1], [Syslog-ng][2], [NXlog][3], [FluentD][4], and [Logstash][5].
+Log collection is the beginning of your journey in the wonderful world of log management. Use the [Datadog Agent][6] to collect logs directly from your hosts or your containerized environments. You can collect AWS service logs with Datadog's [AWS Lambda function](#from-aws-services).If you are already using a log-shipper daemon, refer to the dedicated documentation for [Rsyslog][1], [Syslog-ng][2], [NXlog][3], [FluentD][4], and [Logstash][5].
 
-Integrations and Log Collection are intimately tied together, by collecting Logs the right way you make sure to auto-configure all the the subsequent components such as [processing][33], [parsing][29], and [facets][18] in the Explorer. **[Discover the log integrations supported by Datadog][37]**. You can also define custom log sources if there isn't an integration for your source yet.
+Integrations and Log Collection are intimately tied together. By collecting Logs the right way, you enable all the the subsequent components such as [processing][33], [parsing][29], and [facets][18] in the Explorer. **[Discover the log integrations supported by Datadog][37]**. You can also define custom log sources if there isn't an integration for your source yet.
 
 <div class="alert alert-warning">
 <a href="https://docs.datadoghq.com/integrations/#cat-log-collection">Consult the current list of available supported integrations</a>.
 </div>
 
-Find below the different ways and places to collect logs.
+The different ways and places from which to collect logs.
 
 ### From your hosts
 
@@ -75,17 +75,17 @@ This will produce the following result in your [live tail page][39]:
 
 ### Datadog Logs Endpoints
 
-Find below all the endpoints that can be used to send logs to Datadog:
+The endpoints that can be used to send logs to Datadog:
 
 {{< tabs >}}
 {{% tab "US Region" %}}
 
 | Endpoint                           | Port    | Description                                                                                                           |
 | :--------------------------------- | :------ | :-------                                                                                                              |
-| `agent-intake.logs.datadoghq.com`  | `10516` | Endpoint used by the agent to send logs in protobuf format over a SSL encrypted TCP connection.                       |
-| `intake.logs.datadoghq.com`        | `10516` | Endpoint used by custom forwarders to send logs in raw, Syslog, or JSON format over a SSL encrypted TCP connection.   |
-| `intake.logs.datadoghq.com`        | `10514` | Endpoint used by custom forwarders to send logs in raw, Syslog, or JSON format format over a TCP connection.          |
-| `lambda-intake.logs.datadoghq.com` | `10516` | Endpoint used by the Lambda function to send logs in raw, Syslog, or JSON format over a SSL encrypted TCP connection. |
+| `agent-intake.logs.datadoghq.com`  | `10516` | Used by the Agent to send logs in protobuf format over an SSL-encrypted TCP connection.                       |
+| `intake.logs.datadoghq.com`        | `10516` | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.   |
+| `intake.logs.datadoghq.com`        | `10514` | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an unecrypted TCP connection.          |
+| `lambda-intake.logs.datadoghq.com` | `10516` | Used by Lambda functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection. |
 
 
 {{% /tab %}}
@@ -93,10 +93,10 @@ Find below all the endpoints that can be used to send logs to Datadog:
 
 | Endpoint                           | Port    | Description                                                                                                           |
 | :--------------------------------- | :------ | :-------                                                                                                              |
-| `agent-intake.logs.datadoghq.eu`   | `443`   | Endpoint used by the agent to send logs in protobuf format over SSL encrypted TCP connection.                         |
-| `tcp-intake.logs.datadoghq.eu`     | `443`   | Endpoint used by custom forwarders to send logs in raw, Syslog, or JSON format over a SSL encrypted TCP connection.   |
-| `tcp-intake.logs.datadoghq.eu`     | `1883`  | Endpoint used by custom forwarders to send logs in raw, Syslog, or JSON format format over a TCP connection.          |
-| `lambda-intake.logs.datadoghq.eu`  | `443`   | Endpoint used by the Lambda function to send logs in raw, Syslog, or JSON format over a SSL encrypted TCP connection. |
+| `agent-intake.logs.datadoghq.eu`   | `443`   | Used by the Agent to send logs in protobuf format over an SSL-encrypted TCP connection.                         |
+| `tcp-intake.logs.datadoghq.eu`     | `443`   | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.   |
+| `tcp-intake.logs.datadoghq.eu`     | `1883`  | Used by custom forwarders to send logs in raw, Syslog, or JSON format format over an unecrypted TCP connection.          |
+| `lambda-intake.logs.datadoghq.eu`  | `443`   | Used by Lambda functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection. |
 
 
 {{% /tab %}}
