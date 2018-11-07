@@ -18,7 +18,7 @@ aliases:
 ---
 
 <div class="alert alert-info">
-Agent v6 is now available, <a href="https://docs.datadoghq.com/agent/faq/upgrade-to-agent-v6">upgrade to the newest version</a> to benefit from all new functionality.
+Agent v6 is available. <a href="https://docs.datadoghq.com/agent/faq/upgrade-to-agent-v6">Upgrade to the newest version</a> to benefit from all new functionality.
 </div>
 
 ## What is the Agent?
