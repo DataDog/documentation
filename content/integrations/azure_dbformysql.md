@@ -1,7 +1,40 @@
 ---
-title: Azure MySQL Metrics
+title: Azure DB for MySQL
 kind: documentation
 ---
+
+## Overview
+
+Connect to Microsoft Azure in order to:
+
+* Get metrics from Azure VMs with or without installing the Agent
+* Tag your Azure VMs with Azure-specific information (e.g. location)
+* Get metrics for other services: Application Gateway, App Service (Web & Mobile), Batch Service, Event Hub, IOT Hub, Logic App, Redis Cache, Server Farm (App Service Plan), SQL Database, SQL Elastic Pool, Virtual Machine Scale Set, and many more.
+
+Related integrations include:
+
+|                                                           |                                                                               |
+| :---------------------------------------------------------|:------------------------------------------------------------------------------|
+| [App Service][7] | easy-to-use service for deploying and scaling web, mobile, API and business logic applications |
+| [Batch Service][8] | managed task scheduler and processor |
+| [Event Hub][9] | large scale data stream managed service |
+| [IOT Hub][10] | connect, monitor, and manage billions of IOT assets |
+| [Logic App][11] | quickly build powerful integration solutions |
+| [Redis Cache][12] | managed data cache |
+| [Storage][13] | blob, file, queue, and table storage |
+| [SQL Database][14] | highly scalable relational database in the cloud |
+| [SQL Database Elastic Pool][15] | manage the performance of multiple databases |
+| [Virtual Machine][16] | virtual machine management service |
+| [Virtual Machine Scale Set][17] | deploy, manage, and autoscale a set of identical VMs |
+
+## Setup
+### Installation
+
+You can integrate your Microsoft Azure account with Datadog using the Azure CLI tool or the Azure portal. This integration method works automatically for all Azure Clouds: Public, China, German, and Government. Simply follow the instructions below and Datadog will detect which Cloud you are using and complete the integration. 
+
+Refer to the [primary Azure integration][1] for more information.
+
+## Metrics
 
 |                                                           |                                                                               |
 | :---------------------------------------------------------|:------------------------------------------------------------------------------|
@@ -15,3 +48,5 @@ kind: documentation
 | **azure.dbformysql_servers.storage_limit** <br/> (gauge) | Storage limit <br/> *shown as byte* |
 | **azure.dbformysql_servers.storage_percent** <br/> (gauge) | Storage percentage <br/> *shown as percent* |
 | **azure.dbformysql_servers.storage_used** <br/> (gauge) |	Storage used <br/> *shown as byte* |
+
+[1]: /integrations/azure
