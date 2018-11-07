@@ -207,7 +207,9 @@ spec:
       name: nginx
     spec:
       containers:
-        name: nginx
+        - name: nginx
+          image: nginx:latest
+
 ```
 
 Check our [Autodiscovery Guide][12] for setup, examples, and more information about Autodiscovery.
