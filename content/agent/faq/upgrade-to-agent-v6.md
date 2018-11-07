@@ -3,11 +3,15 @@ title: Upgrade to Datadog Agent v6
 kind: faq
 ---
 
+<div class="alert alert-info">
+To do a fresh install of Datadog Agent v6, refer to the Agent <a href="https://app.datadoghq.com/account/settings#agent">installation process</a>.
+</div>
+
 ## Amazon Linux
 
 A script is available to automatically install or upgrade to the new Agent. It sets up the package repositories and installs the Agent package for you. When upgrading, the import tool also searches for an existing `datadog.conf` from a prior version, and converts Agent and Check configurations according to the new v6 format.
 
-### One-step install
+### One-step Upgrade
 
 The Agent v6 installer can automatically convert v5 configurations during the upgrade:
 ```shell
@@ -16,14 +20,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
 
 **Note:** The import process won't automatically move **custom** Agent checks. This is by design as we cannot guarantee full backwards compatibility out of the box.
 
-#### Fresh install
-
-This is very similar to the upgrade method above, except instead of specifying the upgrade flag, you must supply your API key. This method will also work on Agent v5 machines, however the existing configuration will *not* be converted.
-```shell
-DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
-```
-
-### Manual install
+### Manual Upgrade
 
 1. Set up Datadog's Yum repo on your system by creating `/etc/yum.repos.d/datadog.repo` with the contents:
     ```ini
@@ -46,7 +43,12 @@ DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/Dat
     sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_API_KEY>/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
     ```
 
-4. (Re-)start the Agent:
+4. Transition your Agent configuration paths and formats from Agent v5 to Agent v6, with the `import` command. The command parses an existing v5 `datadog.conf` and converts the configuration options to the new v6 `datadog.yaml` format. It also copies configuration files for checks that are currently enabled:
+    ```
+    sudo -u dd-agent -- datadog-agent import /etc/dd-agent/ /etc/datadog-agent/
+    ```
+
+5. (Re-)start the Agent:
 
     * Amazon Linux 2.0:
     ```
@@ -62,9 +64,7 @@ DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/Dat
 
 A script is available to automatically install or upgrade to the new Agent. It sets up the package repositories and installs the Agent package for you. When upgrading, the import tool also searches for an existing `datadog.conf` from a prior version, and converts Agent and Check configurations according to the new v6 format.
 
-### One-step install
-
-#### Upgrade
+### One-step Upgrade
 
 The Agent v6 installer can automatically convert v5 configurations during the upgrade:
 ```shell
@@ -73,14 +73,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
 
 **Note:** The import process won't automatically move **custom** Agent checks. This is by design as we cannot guarantee full backwards compatibility out of the box.
 
-#### Fresh install
-
-This is very similar to the upgrade method above, except instead of specifying the upgrade flag, you must supply your API key. This method will also work on Agent v5 machines, however the existing configuration will *not* be converted.
-```shell
-DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
-```
-
-### Manual install
+### Manual Upgrade
 
 1. Set up Datadog's Yum repo on your system by creating `/etc/yum.repos.d/datadog.repo` with the contents:
     ```ini
@@ -103,8 +96,12 @@ DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/Dat
     ```shell
     sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_API_KEY>/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
     ```
+4. Transition your Agent configuration paths and formats from Agent v5 to Agent v6, with the `import` command. The command parses an existing v5 `datadog.conf` and converts the configuration options to the new v6 `datadog.yaml` format. It also copies configuration files for checks that are currently enabled:
+    ```
+    sudo -u dd-agent -- datadog-agent import /etc/dd-agent/ /etc/datadog-agent/
+    ```
 
-4. Restart the Agent:
+5. Restart the Agent:
 
     * Centos 7 and above:
     ```
@@ -120,9 +117,7 @@ DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/Dat
 
 A script is available to automatically install or upgrade to the new Agent. It sets up the package repositories and installs the Agent package for you. When upgrading, the import tool also searches for an existing `datadog.conf` from a prior version, and converts Agent and Check configurations according to the new v6 format.
 
-### One-step install
-
-#### Upgrade
+### One-step Upgrade
 
 The Agent v6 installer can automatically convert v5 configurations during the upgrade:
 ```shell
@@ -131,14 +126,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
 
 **Note:** The import process won't automatically move **custom** Agent checks. This is by design as we cannot guarantee full backwards compatibility out of the box.
 
-#### Fresh install
-
-This is very similar to the upgrade method above, except instead of specifying the upgrade flag, you must supply your API key. This method will also work on Agent v5 machines, however the existing configuration will *not* be converted.
-```shell
-DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
-```
-
-### Manual install
+### Manual Upgrade
 
 1. Enable HTTPS support for APT:
     ```
@@ -165,7 +153,12 @@ DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/Dat
     sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_API_KEY>/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml" 
     ```
 
-5. Start the Agent:
+5. Transition your Agent configuration paths and formats from Agent v5 to Agent v6, with the `import` command. The command parses an existing v5 `datadog.conf` and converts the configuration options to the new v6 `datadog.yaml` format. It also copies configuration files for checks that are currently enabled:
+    ```
+    sudo -u dd-agent -- datadog-agent import /etc/dd-agent/ /etc/datadog-agent/
+    ```
+
+6. Start the Agent:
     ```
     sudo service datadog-agent start
     ```
@@ -174,9 +167,7 @@ DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/Dat
 
 A script is available to automatically install or upgrade to the new Agent. It sets up the package repositories and installs the Agent package for you. When upgrading, the import tool also searches for an existing `datadog.conf` from a prior version, and converts Agent and Check configurations according to the new v6 format.
 
-### One-step install
-
-#### Upgrade
+### One-step Upgrade
 
 The Agent v6 installer can automatically convert v5 configurations during the upgrade:
 ```shell
@@ -185,14 +176,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
 
 **Note:** The import process won't automatically move **custom** Agent checks. This is by design as we cannot guarantee full backwards compatibility out of the box.
 
-#### Fresh install
-
-This is very similar to the upgrade method above, except instead of specifying the upgrade flag, you must supply your API key. This method will also work on Agent v5 machines, however the existing configuration will *not* be converted.
-```shell
-DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
-```
-
-### Manual install
+### Manual Upgrade
 
 1. Set up Datadog's Yum repo on your system by creating `/etc/yum.repos.d/datadog.repo` with the contents:
     ```ini
@@ -216,7 +200,12 @@ DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/Dat
     sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_API_KEY>/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
     ```
 
-4. Restart the Agent
+4. Transition your Agent configuration paths and formats from Agent v5 to Agent v6, with the `import` command. The command parses an existing v5 `datadog.conf` and converts the configuration options to the new v6 `datadog.yaml` format. It also copies configuration files for checks that are currently enabled:
+    ```
+    sudo -u dd-agent -- datadog-agent import /etc/dd-agent/ /etc/datadog-agent/
+    ```
+
+5. Restart the Agent
     ```
     sudo systemctl restart datadog-agent.service
     ```
@@ -226,16 +215,7 @@ DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/Dat
 
 You can either download the DMG package and install it manually, or use the one-line install script.
 
-### Manual installation
-
-1. Download the DMG package of the latest Agent version, use the latest macOS release listed on the [release page][4] of the repository
-2. Install the DMG package
-3. Add your API key to `/opt/datadog-agent/etc/datadog.yaml`
-
-Then start the Datadog Agent app (once started, you should see it in the system tray), and manage the Agent from there. Agent v6 includes a web-based GUI to edit the Agent configuration files and much more.
-
-### Install script
-#### Upgrade
+### One-step Upgrade
 
 The Agent v6 installer can automatically convert v5 configurations during the upgrade:
 ```shell
@@ -244,20 +224,25 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
 
 **Note:** The import process won't automatically move **custom** Agent checks. This is by design as we cannot guarantee full backwards compatibility out of the box.
 
-#### To Install Fresh
+### Manual Upgrade
 
-This is very similar to the upgrade method above, except instead of specifying the upgrade flag, you must supply your API key. This method will also work on Agent v5 machines, however the existing configuration will *not* be converted.
-```shell
-DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_mac_os.sh)"
-```
+1. Download the DMG package of the latest Agent version, use the latest macOS release listed on the [release page][4] of the repository
+2. Install the DMG package
+3. Add your API key to `/opt/datadog-agent/etc/datadog.yaml`
+4 Transition your Agent configuration paths and formats from Agent v5 to Agent v6, with the `import` command. The command parses an existing v5 `datadog.conf` and converts the configuration options to the new v6 `datadog.yaml` format. It also copies configuration files for checks that are currently enabled:
+    `datadog-agent import <OLD_CONFIGURATION_DIRECTORY> <DESTINATION_DIRECTORY>`
+    With:
+
+    * `<OLD_CONFIGURATION_DIRECTORY>` is the directory containing the `datadog.conf` file
+    * `<DESTINATION_DIRECTORY>` is the directory where the imported `datadog.yaml` is written (you can use the same directory as `<OLD_CONFIGURATION_DIRECTORY>`).
+
+Then start the Datadog Agent app (once started, you should see it in the system tray), and manage the Agent from there. Agent v6 includes a web-based GUI to edit the Agent configuration files and much more.
 
 ## Red Hat
 
 A script is available to automatically install or upgrade to the new Agent. It sets up the package repositories and installs the Agent package for you. When upgrading, the import tool also searches for an existing `datadog.conf` from a prior version, and converts Agent and Check configurations according to the new v6 format.
 
-### One-step install
-
-#### Upgrade
+### One-step Upgrade
 
 The Agent v6 installer can automatically convert v5 configurations during the upgrade:
 ```shell
@@ -266,14 +251,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
 
 **Note:** The import process won't automatically move **custom** Agent checks. This is by design as we cannot guarantee full backwards compatibility out of the box.
 
-#### Fresh install
-
-This is very similar to the upgrade method above, except instead of specifying the upgrade flag, you must supply your API key. This method will also work on Agent v5 machines, however the existing configuration will *not* be converted.
-```shell
-DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
-```
-
-### Manual install
+### Manual Upgrade
 
 1. Set up Datadog's Yum repo on your system by creating `/etc/yum.repos.d/datadog.repo` with the contents:
     ```ini
@@ -297,7 +275,12 @@ DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/Dat
     sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_API_KEY>/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
     ```
 
-4. Restart the Agent:
+4. Transition your Agent configuration paths and formats from Agent v5 to Agent v6, with the `import` command. The command parses an existing v5 `datadog.conf` and converts the configuration options to the new v6 `datadog.yaml` format. It also copies configuration files for checks that are currently enabled:
+    ```
+    sudo -u dd-agent -- datadog-agent import /etc/dd-agent/ /etc/datadog-agent/
+    ```
+
+5. Restart the Agent:
 
     * Red Hat 7 and above:
     ```
@@ -335,7 +318,12 @@ DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/Dat
   sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_API_KEY>/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
   ```
 
-4. Re-start the Agent:
+4. Transition your Agent configuration paths and formats from Agent v5 to Agent v6, with the `import` command. The command parses an existing v5 `datadog.conf` and converts the configuration options to the new v6 `datadog.yaml` format. It also copies configuration files for checks that are currently enabled:
+    ```
+    sudo -u dd-agent -- datadog-agent import /etc/dd-agent/ /etc/datadog-agent/
+    ```
+
+5. Re-start the Agent:
   ```
   sudo systemctl restart datadog-agent.service
   ```
@@ -344,9 +332,7 @@ DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/Dat
 
 A script is available to automatically install or upgrade to the new Agent. It sets up the package repositories and installs the Agent package for you. When upgrading, the import tool also searches for an existing `datadog.conf` from a prior version, and converts Agent and Check configurations according to the new v6 format.
 
-### One-step install
-
-#### Upgrade
+### One-step Upgrade
 
 The Agent v6 installer can automatically convert v5 configurations during the upgrade:
 ```shell
@@ -355,14 +341,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
 
 **Note:** The import process won't automatically move **custom** Agent checks. This is by design as we cannot guarantee full backwards compatibility out of the box.
 
-#### Fresh install
-
-This is very similar to the upgrade method above, except instead of specifying the upgrade flag, you must supply your API key. This method will also work on Agent v5 machines, however the existing configuration will *not* be converted.
-```shell
-DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
-```
-
-### Manual install
+### Manual Upgrade
 
 1. Enable HTTPS support for APT:
     ```
@@ -389,7 +368,12 @@ DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/Dat
     sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_API_KEY>/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml" 
     ```
 
-5. Start the Agent:
+5. Transition your Agent configuration paths and formats from Agent v5 to Agent v6, with the `import` command. The command parses an existing v5 `datadog.conf` and converts the configuration options to the new v6 `datadog.yaml` format. It also copies configuration files for checks that are currently enabled.:
+    ```
+    sudo -u dd-agent -- datadog-agent import /etc/dd-agent/ /etc/datadog-agent/
+    ```
+
+6. Start the Agent:
 
     * Ubuntu 16.04 or higher:
     ```
@@ -406,4 +390,14 @@ DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/Dat
 
 Download the latest version available [from here][2] and run the installation package.
 
+Transition your Agent configuration paths and formats from Agent v5 to Agent v6, with the `import` command. The command parses an existing v5 `datadog.conf` and converts the configuration options to the new v6 `datadog.yaml` format. It also copies configuration files for checks that are currently enabled.:
+
+`datadog-agent import <OLD_CONFIGURATION_DIRECTORY> <DESTINATION_DIRECTORY>`
+
+With:
+
+* `<OLD_CONFIGURATION_DIRECTORY>` is the directory containing the `datadog.conf` file
+* `<DESTINATION_DIRECTORY>` is the directory where the imported `datadog.yaml` is written (you can use the same directory as `<OLD_CONFIGURATION_DIRECTORY>`).
+
+**Note**: `datadog.conf` is automatically upgraded to `datadog.yaml` on upgrade.
 [2]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-6-latest.amd64.msi

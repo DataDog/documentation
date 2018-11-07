@@ -11,7 +11,6 @@ private: true
 * [Agent commands][5]
 * [Agent configuration files][19]
 * [Upgrade to Agent v6][22]
-* [Agent configuration file migration][24]
 * [Downgrade the Agent to a prior minor version][23]
 * [How does Datadog determine the Agent hostname?][6]
 * [Comparing Agent 5 and Agent 6 for Containerized Environments (Docker and Kubernetes)][20]
@@ -50,4 +49,3 @@ private: true
 [20]: /agent/faq/agent-5-vs-agent-6-for-docker-kubernetes
 [22]: /agent/faq/upgrade-to-agent-v6
 [23]: /agent/faq/downgrade-datadog-agent
-[24]: /agent/faq/agent-configuration-file-migration
