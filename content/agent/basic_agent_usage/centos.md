@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-This page outlines the basic features of the Datadog Agent for CentOS. If you haven't installed the Agent yet, instructions can be found in the [Datadog Agent Integration][1] documentation.
+This page outlines the basic features of the Datadog Agent for CentOS. To install the Datadog Agent, follow the [Agent Installation Instructions][1] for CentOs.
 
 **Note**: CentOS 6 and above are supported.
 
@@ -57,10 +57,10 @@ In Agent v6, the service manager provided by the operating system is responsible
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: If `service` is not available on your system, use:
+**Note**: If the `service` wrapper is not available on your system, use:
 
-* `upstart`-based systems: `initctl`
-* `systemd`-based systems: `systemctl`
+* On `upstart`-based systems: `sudo initctl start/stop/restart/status datadog-agent`
+* On `systemd`-based systems: `sudo systemctl start/stop/restart/status datadog-agent`
 
 [Learn more about Service lifecycle commands][4]
 
@@ -142,11 +142,11 @@ The Agent v6 installer can automatically convert v5 configurations during the up
 DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
 ```
 
-**Note:** The import process won't automatically move **custom** Agent checks. This is by design as we cannot guarantee full backwards compatibility out of the box.
+**Note:** The import process won't automatically move **custom** Agent checks. This is by design because full backwards compatibility is not guaranteed.
 
 ##### Fresh install
 
-This is very similar to the upgrade method above, except instead of specifying the upgrade flag, you must supply your API key. This method will also work on Agent v5 machines, however the existing configuration will *not* be converted.
+This is very similar to the upgrade method above, except instead of specifying the upgrade flag, you must supply your API key. This method also works on Agent v5 machines, however existing configurations are *not* converted.
 ```shell
 DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
 ```
