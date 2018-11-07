@@ -146,7 +146,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
 
 ##### Fresh install
 
-This is very similar to the upgrade method above, except instead of specifying the upgrade flag, you must supply your API key. This method also works on Agent v5 machines, however an existing configuration is *not* converted.
+This is very similar to the upgrade method above, except instead of specifying the upgrade flag, you must supply your API key. This method also works on Agent v5 machines, however existing configurations are *not* converted.
 ```shell
 DD_API_KEY=YOUR_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
 ```
