@@ -45,7 +45,7 @@ class HelloCheck(AgentCheck):
 ```
 
 ### Collection interval
-To changed the collection interval of your check, use `min_collection_interval`. The default value is `15` which means it's collected at the same interval as the rest of the integrations on the Agent.
+To change the collection interval of your check, use `min_collection_interval`. The default value is `15` which means it's collected at the same interval as the rest of the integrations on the Agent.
 
 {{< tabs >}}
 {{% tab "Agent v6" %}}
