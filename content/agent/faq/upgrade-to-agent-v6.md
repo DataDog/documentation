@@ -400,4 +400,6 @@ With:
 * `<DESTINATION_DIRECTORY>` is the directory where the imported `datadog.yaml` is written (you can use the same directory as `<OLD_CONFIGURATION_DIRECTORY>`).
 
 **Note**: `datadog.conf` is automatically upgraded to `datadog.yaml` on upgrade.
+
 [2]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-6-latest.amd64.msi
+[4]: https://github.com/DataDog/datadog-agent/releases
