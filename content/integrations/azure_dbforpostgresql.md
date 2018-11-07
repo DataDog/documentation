@@ -17,27 +17,6 @@ Get metrics from Azure App Service to:
 
 If you haven't already, set up the [Microsoft Azure integration first][1]. There are no other installation steps that need to be performed.
 
-|                                                           |                                                                               |
-| :---------------------------------------------------------|:------------------------------------------------------------------------------|
-| [App Service][7] | easy-to-use service for deploying and scaling web, mobile, API and business logic applications |
-| [Batch Service][8] | managed task scheduler and processor |
-| [Event Hub][9] | large scale data stream managed service |
-| [IOT Hub][10] | connect, monitor, and manage billions of IOT assets |
-| [Logic App][11] | quickly build powerful integration solutions |
-| [Redis Cache][12] | managed data cache |
-| [Storage][13] | blob, file, queue, and table storage |
-| [SQL Database][14] | highly scalable relational database in the cloud |
-| [SQL Database Elastic Pool][15] | manage the performance of multiple databases |
-| [Virtual Machine][16] | virtual machine management service |
-| [Virtual Machine Scale Set][17] | deploy, manage, and autoscale a set of identical VMs |
-
-## Setup
-### Installation
-
-You can integrate your Microsoft Azure account with Datadog using the Azure CLI tool or the Azure portal. This integration method works automatically for all Azure Clouds: Public, China, German, and Government. Simply follow the instructions below and Datadog will detect which Cloud you are using and complete the integration. 
-
-Refer to the [primary Azure integration][1] for more information.
-
 ## Native Database Integration
 
 You can also choose to turn on the Native Database Integration. This is an Agent level integration used to get detailed Postgres metrics and information from your databases.
