@@ -994,7 +994,7 @@ languages:
           parent: menu_references_developers
         - identifier: customnav_developersnav_agent_checks
           name: "Write an Agent Check"
-          url: "developers/agent_checks"
+          url: "developers/write_agent_check"
           weight: 70
           parent: menu_references_developers
         - identifier: customnav_developersnav_prometheus
