@@ -48,3 +48,14 @@ Refer to the [primary Azure integration][1] for more information.
 | **azure.dbforpostgresql_servers.storage_used** <br/> (gauge) | Storage used <br/> *shown as byte* |
 
 [1]: /integrations/azure
+[7]: https://docs.datadoghq.com/integrations/azure_app_services
+[8]: https://docs.datadoghq.com/integrations/azure_batch
+[9]: https://docs.datadoghq.com/integrations/azure_event_hub
+[10]: https://docs.datadoghq.com/integrations/azure_iot_hub
+[11]: https://docs.datadoghq.com/integrations/azure_logic_app
+[12]: https://docs.datadoghq.com/integrations/azure_redis_cache
+[13]: https://docs.datadoghq.com/integrations/azure_storage
+[14]: https://docs.datadoghq.com/integrations/azure_sql_database
+[15]: https://docs.datadoghq.com/integrations/azure_sql_elastic_pool
+[16]: https://docs.datadoghq.com/integrations/azure_vm
+[17]: https://docs.datadoghq.com/integrations/azure_vm_scale_set
