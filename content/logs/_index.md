@@ -81,7 +81,7 @@ Find below all the endpoints that can be used to send logs to Datadog:
 {{% tab "US Region" %}}
 
 | Endpoint                           | Port    | Description                                                                                                           |
-| :-------                           | :------ | :-------                                                                                                              |
+| :--------------------------------- | :------ | :-------                                                                                                              |
 | `agent-intake.logs.datadoghq.com`  | `10516` | Endpoint used by the agent to send logs in protobuf format over a SSL encrypted TCP connection.                       |
 | `intake.logs.datadoghq.com`        | `10516` | Endpoint used by custom forwarders to send logs in raw, Syslog, or JSON format over a SSL encrypted TCP connection.   |
 | `intake.logs.datadoghq.com`        | `10514` | Endpoint used by custom forwarders to send logs in raw, Syslog, or JSON format format over a TCP connection.          |
@@ -91,12 +91,12 @@ Find below all the endpoints that can be used to send logs to Datadog:
 {{% /tab %}}
 {{% tab "EU Region" %}}
 
-| Endpoint                          | Port    | Description                                                                                                           |
-| :-------                          | :------ | :-------                                                                                                              |
-| `agent-intake.logs.datadoghq.eu`  | `443`   | Endpoint used by the agent to send logs in protobuf format over SSL encrypted TCP connection.                         |
-| `tcp-intake.logs.datadoghq.eu`    | `443`   | Endpoint used by custom forwarders to send logs in raw, Syslog, or JSON format over a SSL encrypted TCP connection.   |
-| `tcp-intake.logs.datadoghq.eu`    | `1883`  | Endpoint used by custom forwarders to send logs in raw, Syslog, or JSON format format over a TCP connection.          |
-| `lambda-intake.logs.datadoghq.eu` | `443`   | Endpoint used by the Lambda function to send logs in raw, Syslog, or JSON format over a SSL encrypted TCP connection. |
+| Endpoint                           | Port    | Description                                                                                                           |
+| :--------------------------------- | :------ | :-------                                                                                                              |
+| `agent-intake.logs.datadoghq.eu`   | `443`   | Endpoint used by the agent to send logs in protobuf format over SSL encrypted TCP connection.                         |
+| `tcp-intake.logs.datadoghq.eu`     | `443`   | Endpoint used by custom forwarders to send logs in raw, Syslog, or JSON format over a SSL encrypted TCP connection.   |
+| `tcp-intake.logs.datadoghq.eu`     | `1883`  | Endpoint used by custom forwarders to send logs in raw, Syslog, or JSON format format over a TCP connection.          |
+| `lambda-intake.logs.datadoghq.eu`  | `443`   | Endpoint used by the Lambda function to send logs in raw, Syslog, or JSON format over a SSL encrypted TCP connection. |
 
 
 {{% /tab %}}
