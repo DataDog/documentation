@@ -109,6 +109,6 @@ The system swap check is included in the [Datadog Agent][4] package, so you don'
 [3]: /integrations/process/
 [4]: https://app.datadoghq.com/account/settings#agent
 [4]: https://docs.datadoghq.com/agent/faq/agent-commands/#agent-status-and-information
-[5]: https://github.com/DataDog/integrations-core/blob/master/system_core/conf.yaml.example
-[6]: https://github.com/DataDog/integrations-core/blob/master/system_swap/conf.yaml.example
+[5]: https://github.com/DataDog/integrations-core/blob/master/system_core/datadog_checks/system_core/data/conf.yaml.example
+[6]: https://github.com/DataDog/integrations-core/blob/master/system_swap/datadog_checks/system_swap/data/conf.yaml.example
 [7]: https://docs.datadoghq.com/agent/faq/agent-commands/#start-stop-restart-the-agent
