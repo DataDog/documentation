@@ -1,6 +1,7 @@
 ---
 title: Check summary
 kind: documentation
+description: "See the list of all your checks reporting to Datadog."
 further_reading:
 - link: "monitors/monitor_types"
   tag: "Documentation"
