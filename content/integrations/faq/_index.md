@@ -13,7 +13,6 @@ private: true
 
 ## Amazon Web Services
 
-* [Revoking AWS keys and enabling Role Delegation for the Datadog AWS Integration][4]
 * [How can I monitor the health/status of my RDS instances?][5]
 * [Using Datadog's AWS Billing Integration to monitor your CloudWatch usage][6]
 * [AWS Integration and CloudWatch FAQ][7]
@@ -145,7 +144,6 @@ private: true
 [1]: /integrations/faq/what-standard-integrations-emit-custom-metrics
 [2]: /integrations/faq/using-events-for-service-checks-is-deprecated-in-favor-of-monitors
 [3]: /integrations/faq/issues-getting-integrations-working
-[4]: /integrations/faq/revoking-aws-keys-and-enabling-role-delegation-for-the-datadog-aws-integration
 [5]: /integrations/faq/how-can-i-monitor-the-health-status-of-my-rds-instances
 [6]: /integrations/faq/using-datadog-s-aws-billing-integration-to-monitor-your-cloudwatch-usage
 [7]: /integrations/faq/aws-integration-and-cloudwatch-faq
