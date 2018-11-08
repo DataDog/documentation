@@ -106,6 +106,7 @@ The conditional variables available are:
 | `{{#is_match}}`            | Show when the context matches a string                |
 | `{{^is_match}}`            | Show unless the context matches a string              |
 | `{{#is_exact_match}}`      | Show when the context matches a string exactly        |
+| `{{^is_exact_match}}`      | Show unless the context matches a string exactly      |
 | `{{#is_no_data}}`          | Show when monitor notifies on missing data            |
 | `{{^is_no_data}}`          | Show unless monitor notifies on missing data          |
 | `{{#is_warning}}`          | Show when monitor warns                               |
