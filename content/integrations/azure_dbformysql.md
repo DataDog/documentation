@@ -9,8 +9,8 @@ Azure Database for MySQL provides fully managed, enterprise-ready community MySQ
 
 Get metrics from Azure Database for MySQL to:
 
-* Visualize your app performance
-* Correlate the performance of your Azure Apps with the rest of your apps
+* Visualize your Azure MySQL database performance
+* Correlate the performance of your Azure MySQL databases with the rest of your apps
 
 ## Setup
 ### Standard Integration

@@ -9,8 +9,8 @@ Azure Database for PostgreSQL provides fully managed, enterprise-ready community
 
 Get metrics from Azure Database for PostgreSQL to:
 
-* Visualize your app performance
-* Correlate the performance of your Azure Apps with the rest of your apps
+* Visualize your Azure PostgreSQL database performance
+* Correlate the performance of your Azure PostgreSQL databases with the rest of your apps
 
 ## Setup
 ### Standard Integration
