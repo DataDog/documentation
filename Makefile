@@ -61,6 +61,8 @@ clean-integrations:  ## remove built integrations files.
 	    -a -not -name '_index.md' \
 	    -a -not -name 'amazon_guardduty.md' \
 	    -a -not -name 'amazon_vpc.md' \
+	    -a -not -name 'azure_dbformysql.md' \
+	    -a -not -name 'azure_dbforpostgresql.md' \
 	    -a -not -name 'cloud_foundry.md' \
 	    -a -not -name 'cloudcheckr.md' \
 	    -a -not -name 'integration_sdk.md' \
