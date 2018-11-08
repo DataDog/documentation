@@ -1,5 +1,5 @@
 ---
-title: Writing an Agent check
+title: Writing a custom Agent check
 kind: documentation
 further_reading:
 - link: "/developers/integrations/new_check_howto/"
@@ -8,12 +8,12 @@ further_reading:
 ---
 
 ## Overview
-This page looks at a simple custom Agent check and the `min_collection_interval`. Custom Agent checks are included in the main check run loop, meaning they run every check interval, which defaults to 15 seconds.
+This page looks at a simple custom Agent check and the `min_collection_interval`. Same as regular Agent based integrations, custom checks are scheduled to run at a fixed interval, which defaults to every 15 seconds.
 
 ### Should you write an Agent check or an Integration?
-Agent checks can collect metrics from custom applications or unique systems. However, if you are trying to collect metrics from a generally available application, public service, or open source project, it is recommended that you [create an Integration][1].
+Custom checks are well suited to collect metrics from custom applications or unique systems. However, if you are trying to collect metrics from a generally available application, public service, or open source project, it is recommended that you [create a full fledged Agent Integration][1].
 
-Datadog Agent v5.9+ allows integrations to be released and updated independently from Datadog Agent updates. It also provides an easier way for you to share integrations—and makes it easier for the wider Datadog community to use your integrations.
+Datadog Agent v6.4+ allows integrations to be released and updated independently from Datadog Agent updates. It also provides an easier way for you to share integrations—and makes it easier for the wider Datadog community to use your integrations.
 
 For more information about how to write an integration, see [Creating New Integrations][1]. Refer to the [integrations-extras GitHub repository][2] to see other contributed integrations.
 
@@ -23,29 +23,37 @@ First, ensure the [Agent][3] is properly installed. If you run into any issues d
 ## Custom Agent check
 
 <div class="alert alert-warning">
-  The names of the configuration and check files must match. If your check is called <code>mycheck.py</code>, your configuration file <em>must</em> be	named <code>mycheck.yaml</code>.
+  The names of the configuration and check files must match. If your check is called <code>mycheck.py</code>, your configuration file <em>must</em> be named <code>mycheck.yaml</code>.
 </div>
 
-In this example, the custom check sends a value of `1` for the metric `hello.world`. The configuration file is necessary but includes no real information. This goes in `conf.d/hello.yaml`:
+In this example, the custom check sends a value of `1` for the metric `hello.world`. The configuration file includes no real information but it is necessary to include a sequence called `instances` containing at least one mapping, that can be empty. This goes in `conf.d/hello.yaml`:
 
 ```yaml
-init_config:
- instances:
-    [{}]
+instances: [{}]
 ```
 
 The check itself inherits from `AgentCheck` and sends a gauge of `1` for `hello.world` on each call. This goes in `checks.d/hello.py`:
 
 ```python
+# the following try/except block will make the custom check compatible with any Agent version
+try:
+    # first, try to import the base class from old versions of the Agent...
+    from checks import AgentCheck
+except ImportError:
+    # ...if the above failed, the check is running in Agent version 6 or later
+    from datadog_checks.checks import AgentCheck
+
+# content of the special variable __version__ will be shown in the Agent status page
 __version__ = "1.0.0"
-from checks import AgentCheck
+
+
 class HelloCheck(AgentCheck):
     def check(self, instance):
         self.gauge('hello.world', 1)
 ```
 
 ### Collection interval
-To change the collection interval of your check, use `min_collection_interval`. The default value is `15` which means it's collected at the same interval as the rest of the integrations on the Agent.
+To change the collection interval of your check, use `min_collection_interval` in the configuration file. The default value is `15` which means the `check` method from your class is invoked with the same interval as the rest of the integrations on the Agent.
 
 {{< tabs >}}
 {{% tab "Agent v6" %}}
@@ -65,13 +73,12 @@ For Agent 5, `min_collection_interval` is added to the `init_config` section to 
 init_config:
   min_collection_interval: 30
 
-  instances:
-    [{}]
+  instances: [{}]
 ```
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: If the `min_collection_interval` is set to `30`, it does not mean that the metric is collected every 30 seconds, but rather that it could be collected as often as every 30 seconds. The collector runs every 15-20 seconds depending on how many integrations are enabled. If the interval on this Agent happens to be every 20 seconds, then the Agent collects and includes the Agent check. The next time it collects 20 seconds later, it sees that 20 is less than 30 and doesn't collect the custom Agent check. The next time it sees that the time since last run was 40, which is greater than 30, and collects the custom Agent check.
+**Note**: If the `min_collection_interval` is set to `30`, it does not mean that the metric is collected every 30 seconds, but rather that it could be collected as often as every 30 seconds. The collector will try to run the check every 30 seconds but the check might need to wait in line, depending on how many integrations are enabled on the same Agent. Also if the `check` method takes more than 30 seconds to finish, the Agent will notice the check is still running and will skip its execution until the next interval.
 
 ## Verifying your check
 
