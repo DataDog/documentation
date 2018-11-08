@@ -5,21 +5,19 @@ kind: documentation
 
 ## Overview
 
-Azure App Service is a platform-as-a-service that runs web, mobile, API and business logic applications and automatically manages the resources required by those apps.
+Azure Database for MySQL provides fully managed, enterprise-ready community MySQL database as a service.
 
-Get metrics from Azure App Service to:
+Get metrics from Azure Database for MySQL to:
 
 * Visualize your app performance
 * Correlate the performance of your Azure Apps with the rest of your apps
 
 ## Setup
-### Installation
+### Standard Integration
 
 If you haven't already, set up the [Microsoft Azure integration first][1]. There are no other installation steps that need to be performed.
 
-Refer to the [primary Azure integration][1] for more information.
-
-## Native Database Integration
+### Native Database Integration
 
 You can also choose to turn on the Native Database Integration. This is an Agent level integration used to get detailed MySQL metrics and information from your databases.
 
@@ -38,10 +36,26 @@ instances:
   - server: myurl.database.windows.net
     user: my_username
     pass: my_password
-    port: 3306
+    port: # port number
 ```
 
 Restart the Agent.
+
+### Validation
+
+To validate that the native database integration is working, run `sudo /etc/init.d/datadog-agent info`. You should see something like the following:
+
+```shell
+Checks
+======
+
+[...]
+
+  mysql
+  -----
+      - instance #0 [OK]
+      - Collected 8 metrics & 0 events
+```
 
 ## Metrics
 
