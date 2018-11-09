@@ -52,6 +52,8 @@ class HelloCheck(AgentCheck):
         self.gauge('hello.world', 1)
 ```
 
+For more details about the interface provided by the base class, browse the [API documentation][5].
+
 ### Collection interval
 To change the collection interval of your check, use `min_collection_interval` in the configuration file. The default value is `15` which means the `check` method from your class is invoked with the same interval as the rest of the integrations on the Agent.
 
@@ -97,7 +99,43 @@ sudo -u dd-agent -- dd-agent check <check_name>
 {{% /tab %}}
 {{< /tabs >}}
 
+## Writing checks that run command line programs
 
+It's possible to create a custom check that runs a command line program and captures its output as a custom metric. For example, a check can run the `vgs` command to report information about volume groups. A wrapper function is provided for convenience to avoid the boilerplate around shelling out another process and collecting its output and exit code.
+
+To run a subprocess within a check, use the [`get_subprocess_output()` function][6] from the module `datadog_checks.utils.subprocess_output`. The command and its arguments are passed to `get_subprocess_output()` in the form of a list, with the command and each of its arguments as a string within the list. For instance, a command that is entered at the command prompt like this:
+
+```
+$ vgs -o vg_free
+
+```
+
+must be passed to `get_subprocess_output()` like this:
+
+```python
+out, err, retcode = get_subprocess_output(["vgs", "-o", "vg_free"], self.log, raise_on_empty_output=True)
+```
+
+<div class="alert alert-warning">
+    Since the Python interpreter that runs the checks is embedded in the multi-threaded Go runtime, using the <code>subprocess</code> or <code>multithreading</code> modules from the Python standard library <em>is not supported</em> in Agent version 6 and later.
+</div>
+
+When the command line program is run, the check captures the same output as if it were run on the command line in the terminal. It is important to do string processing on the output and call `int()` or `float()` on the result, so that it returns a numerical type.
+
+If you do not do string processing on the output of the subprocess, or if it does not return an integer or a float, the check appears to run without errors, but doesn't report any data.
+
+Here is an example of a check that returns the results of a command line program:
+
+```python
+# ...
+from datadog_checks.utils.subprocess_output import get_subprocess_output
+
+class LSCheck(AgentCheck):
+    def check(self, instance):
+        files, err, retcode = get_subprocess_output(["ls", "."], self.log, raise_on_empty_output=True)
+        file_count = len(files) #len() returns an int by default
+        self.gauge("file.count", file_count)
+```
 
 
 ## Further Reading
@@ -107,3 +145,5 @@ sudo -u dd-agent -- dd-agent check <check_name>
 [2]: https://github.com/DataDog/integrations-extras
 [3]: http://app.datadoghq.com/account/settings#agent
 [4]: /help/
+[5]: https://datadog-checks-base.readthedocs.io/en/latest/datadog_checks.checks.html#datadog_checks.base.checks.base.AgentCheck
+[6]: https://datadog-checks-base.readthedocs.io/en/latest/datadog_checks.utils.html#module-datadog_checks.base.utils.subprocess_output
