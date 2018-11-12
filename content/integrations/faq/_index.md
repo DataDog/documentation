@@ -34,6 +34,7 @@ private: true
 * [I can't filter out my ELB instances - will I be charged for them?][23]
 * [I just set up my AWS integration. Why am I seeing duplicate hosts?][24]
 * [Integration Setup for ECS Fargate][80]
+* [Error: Datadog is not authorized to perform sts:AssumeRole][81]
 
 ## Apache
 
@@ -216,3 +217,4 @@ private: true
 [78]: /integrations/faq/jboss-eap-7-datadog-monitoring-via-jmx
 [79]: /integrations/faq/how-to-collect-metrics-with-sql-stored-procedure
 [80]: /integrations/faq/integration-setup-ecs-fargate
+[81]: /integrations/faq/error-datadog-not-authorized-sts-assume-role/
