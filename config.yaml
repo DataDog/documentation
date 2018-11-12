@@ -58,7 +58,13 @@ languages:
           pre: "nav_agent"
           weight: 40
 
-        ## Basic Agent usage
+        ## Upgrade to Agent v6
+        - identifier: customnav_agentnav_upgrade_agent_6
+          name: "Upgrade to Agent v6"
+          url: "agent/faq/upgrade-to-agent-v6"
+          weight: 5
+          parent: menu_references_agent
+        ## Basic Agent usage  
         - identifier: customnav_agentnav_basic_usage
           name: "Basic Agent Usage"
           url: "agent/basic_agent_usage/"
@@ -1179,7 +1185,12 @@ languages:
           url: "agent/"
           pre: "nav_agent"
           weight: 40
-
+        ## Upgrade to Agent v6
+        - identifier: customnav_agentnav_upgrade_agent_6
+          name: "Upgrade to Agent v6"
+          url: "agent/faq/upgrade-to-agent-v6"
+          weight: 5
+          parent: menu_references_agent
         ## Basic Agent usage
         - identifier: customnav_agentnav_basic_usage
           name: "Utilisation de base de l'Agent"
