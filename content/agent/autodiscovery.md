@@ -30,19 +30,19 @@ Here's a 5-minute video for a bird's eye view of Datadog Agent v6 Autodiscovery 
 
 ## How it Works
 
-In a traditional non-container environment, Datadog Agent configuration is&mdash;like the environment in which it runs&mdash;static. The Agent reads check configurations from disk when it starts, and as long as it's running, it continuously runs every configured check.
+In a traditional non-container environment, the Datadog Agent configuration is&mdash;like the environment in which it runs&mdash;static. The Agent reads check configurations from disk when it starts, and as long as it's running, it continuously runs every configured check.
 The configuration files are static, and any network-related options configured within them serve to identify specific instances of a monitored service (e.g. a Redis instance at 10.0.0.61:6379).
-When an Agent check cannot connect to such a service, metrics will be missing until you troubleshoot the issue. The Agent check retries its failed connection attempts until an administrator revives the monitored service or fixes the check's configuration.
+When an Agent check cannot connect to such a service, metrics are missing until you troubleshoot the issue. The Agent check retries its failed connection attempts until an administrator revives the monitored service or fixes the check's configuration.
 
 With Autodiscovery enabled, the Agent runs checks differently.
 
 ### Different Configuration
 
-Static configuration files aren't suitable for checks that collect data from ever-changing network endpoints, so Autodiscovery uses **templates** for check configuration. In each template, the Agent looks for two template variables-`%%host%%` and `%%port%%`-to appear in place of any normally-hardcoded network options. For example: a template for the Agent's [Go Expvar check][2] would contain the option `expvar_url: http://%%host%%:%%port%%`. For containers that have more than one IP address or exposed port, you can direct Autodiscovery to pick the right ones by using [template variable indexes](#supported-template-variables).
+Static configuration files aren't suitable for checks that collect data from ever-changing network endpoints, so Autodiscovery uses **templates** for check configuration. In each template, the Agent looks for two template variables-`%%host%%` and `%%port%%`-to appear in place of any normally-hardcoded network options. For example: a template for the Agent's [Go Expvar check][2] would contain the option `expvar_url: http://%%host%%:%%port%%`. For containers that have more than one IP address or exposed port, direct Autodiscovery to pick the right ones by using [template variable indexes](#supported-template-variables).
 
 Because templates don't identify specific instances of a monitored service&mdash;which `%%host%%`? which `%%port%%`?&mdash;Autodiscovery needs one or more **container identifiers** for each template so it can determine which IP(s) and Port(s) to substitute into the templates. For Docker, container identifiers are image names or container labels.
 
-Finally, Autodiscovery can load check templates from places other than disk. Other possible **template sources** include key-value stores like Consul, and, when running on Kubernetes, Pod annotations.
+Finally, Autodiscovery can load check templates from places other than disk. Other possible **template sources** include key-value stores like Consul, Kubernetes pod annotations, and Docker label annotations.
 
 ### Different Execution
 
@@ -148,7 +148,7 @@ The Agent looks for Autodiscovery templates in the `/conf.d` directory, which co
 
 Since 6.2.0 (and 5.24.0), the default templates use the default port for the monitored software, instead of auto-detecting it. If you need to use a different port, provide a custom Autodiscovery template either in [Docker container labels](#template-source-docker-label-annotations) or [Kubernetes pod annotations](#template-source-kubernetes-pod-annotations).
 
-These templates may suit you in basic cases, but if you need to use custom Agent check configurations&mdash;say you want to enable extra check options, use different container identifiers, or use template variable indexing&mdash;you'll have to write your own auto-conf files. You can then provide those in a few ways:
+These templates may suit you in basic cases, but if you need to use custom Agent check configurations&mdash;such as enabling extra check options, using different container identifiers, or using template variable indexing&mdash;write your own auto-conf files. These are provided in the following ways:
 
 1. Add them to each host that runs `docker-datadog-agent` and [mount the directory that contains them][15] into the datadog-agent container when starting it
 2. On Kubernetes, add them [using ConfigMaps][16]
@@ -311,7 +311,7 @@ annotations:
 The format is similar to that for key-value stores. The differences are:
 
 - Annotations must begin with `ad.datadoghq.com/` (for key-value stores, the starting indicator is `/datadog/check_configs/`).
-- For Annotations, Autodiscovery indentifies containers by _name_, NOT image (as it does for auto-conf files and key-value stores). That is, it looks to match `<container identifier>` to `.spec.containers[0].name`, not `.spec.containers[0].image`.
+- For Annotations, Autodiscovery identifies containers by _name_, NOT image (as it does for auto-conf files and key-value stores). That is, it looks to match `<container identifier>` to `.spec.containers[0].name`, not `.spec.containers[0].image`.
 
 If you define your Kubernetes Pods directly (i.e. `kind: Pod`), add each Pod's annotations directly under its `metadata` section (see the first example below). If you define Pods _indirectly_ via Replication Controllers, Replica Sets, or Deployments, add Pod annotations under `.spec.templates.metadata` (see the second example below).
 
@@ -495,7 +495,7 @@ services:
 The following template variables are handled by the Agent:
 
 - Container IP: `host`
-  - `%%host%%`: autodetect the network (use `bridge` or, if only one network is attached, this one)
+  - `%%host%%`: auto-detect the network (use `bridge` or, if only one network is attached, this one)
   - `%%host_<NETWORK NAME>%%`: specify the network name to use, when attached to several networks (e.g. `%%host_bridge%%`, `%%host_myredisnetwork%%`, ...)
 
 - Container hostname: `hostname` (added in Agent 6.4, Docker listener only)
@@ -504,14 +504,14 @@ The following template variables are handled by the Agent:
 - Container port: `port`
   - `%%port%%`: use the highest exposed port **sorted numerically and in ascending order** (eg. 8443 for a container that exposes ports 80, 443, and 8443)
   - `%%port_0%%`: use the first port **sorted numerically and in ascending order** (for the same container, `%%port_0%%` refers to port 80, `%%port_1%%` refers to 443
-  - If your target port is constant, we recommend you directly specify it, without using the `port` variable
+  - If your target port is constant, directly specify it without using the `port` variable
 
 - Environment variable: `env` (added in Agent 6.1)
   - `%%env_MYENVVAR%%`: use the contents of the `$MYENVVAR` environment variable **as seen by the Agent process**
 
 ### Alternate Container Identifier: Labels
 
-You can identify containers by label rather than container name or image. Just label any container `com.datadoghq.ad.check.id: <SOME_LABEL>`, and then put `<SOME_LABEL>` anywhere you'd normally put a container name or image. For example, if you label a container `com.datadoghq.ad.check.id: special-container`, Autodiscovery applies to that container any auto-conf template that contains `special-container` in its `ad_identifiers` list.
+Containers are identified by label rather than container name or image. Just label any container `com.datadoghq.ad.check.id: <SOME_LABEL>`, and then put `<SOME_LABEL>` anywhere you'd normally put a container name or image. For example, if you label a container `com.datadoghq.ad.check.id: special-container`, Autodiscovery applies to that container any auto-conf template that contains `special-container` in its `ad_identifiers` list.
 
 Autodiscovery can only identify each container by label OR image/name&mdash;not both&mdash;and labels take precedence. For a container that has a `com.datadoghq.ad.check.id: special-nginx` label and runs the `nginx` image, the Agent DOESN'T apply templates that include only `nginx` as a container identifier.
 
