@@ -123,6 +123,9 @@ Note: Tags are only set when a pod starts.
 
 Each **Template Source** section below shows a different way to configure check templates and their container identifiers.
 
+{{< tabs >}}
+{{% tab "Files" %}}
+
 ### Template Source: Files (Auto-conf)
 
 Storing templates as local files is easy to understand and doesn't require an external service or a specific orchestration platform. The downside is that you have to restart your Agent containers each time you change, add, or remove templates.
@@ -175,6 +178,27 @@ It looks like a minimal [Apache check configuration][17], but notice the `ad_ide
 _Any_ `httpd` image. Suppose you have one container running `library/httpd:latest` and another running `yourusername/httpd:v2`. Autodiscovery applies the above template to both containers. When it's loading auto-conf files, Autodiscovery cannot distinguish between identically-named images from different sources or with different tags, and **you have to provide short names for container images**, e.g. `httpd`, NOT `library/httpd:latest`.
 
 If this is too limiting&mdash;if you need to apply different check configurations to different containers running the same image&mdash;[use labels to identify the containers][18]. Label each container differently, then add each label to any template file's `ad_identifiers` list (yes, `ad_identifiers` is where to put _any_ kind of container identifier, not just images).
+
+[3]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/auto_conf.yaml
+[4]: https://github.com/DataDog/integrations-core/blob/master/consul/datadog_checks/consul/data/auto_conf.yaml
+[5]: https://github.com/DataDog/integrations-core/blob/master/couch/datadog_checks/couch/data/auto_conf.yaml
+[6]: https://github.com/DataDog/integrations-core/blob/master/couchbase/datadog_checks/couchbase/data/auto_conf.yaml
+[7]: https://github.com/DataDog/integrations-core/blob/master/elastic/datadog_checks/elastic/data/auto_conf.yaml
+[8]: https://github.com/DataDog/integrations-core/blob/master/etcd/datadog_checks/etcd/data/auto_conf.yaml
+[9]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/auto_conf.yaml
+[10]: https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/data/auto_conf.yaml
+[11]: https://github.com/DataDog/integrations-core/blob/master/kyototycoon/datadog_checks/kyototycoon/data/auto_conf.yaml
+[12]: https://github.com/DataDog/integrations-core/blob/master/mcache/datadog_checks/mcache/data/auto_conf.yaml
+[13]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/auto_conf.yaml
+[14]: https://github.com/DataDog/integrations-core/blob/master/riak/datadog_checks/riak/data/auto_conf.yaml
+[15]: https://github.com/DataDog/datadog-agent
+[16]: /agent/basic_agent_usage/kubernetes/#configmap
+[17]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
+[18]: /agent/autodiscovery/#template-source-kubernetes-pod-annotations
+[22]: https://github.com/DataDog/integrations-core/blob/master/kube_proxy/datadog_checks/kube_proxy/data/conf.yaml.example
+
+{{% /tab %}}
+{{% tab "Key-value Store" %}}
 
 ### Template Source: Key-value Store
 
@@ -260,6 +284,13 @@ etcdctl set /datadog/check_configs/library/httpd:latest/instances '[{"apache_sta
 ```
 
 Again, the order of each list matters. The Agent can only generate the HTTP check configuration correctly if all parts of its configuration have the same index across the three lists (they do; the index is 1).
+
+[19]: /integrations/consul
+[20]: /agent/faq/agent-commands
+[21]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
 ### Template Source: Kubernetes Pod Annotations
 
@@ -384,6 +415,9 @@ spec:
         - containerPort: 80
 ```
 
+{{% /tab %}}
+{{% tab "Docker" %}}
+
 ### Template Source: Docker Label Annotations
 
 The Agent detects if it's running on Docker and automatically searches all labels for check templates.
@@ -402,7 +436,7 @@ LABEL "com.datadoghq.ad.logs"='[<LOGS_CONFIG>]'
 ```
 
 **docker-compose.yaml**
-```
+```yaml
 labels:
   com.datadoghq.ad.check_names: '[<CHECK_NAME>]'
   com.datadoghq.ad.init_configs: '[<INIT_CONFIG>]'
@@ -429,6 +463,30 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%:%%port%%/nginx_status"}]'
 LABEL "com.datadoghq.ad.logs"='[{"source": "nginx", "service": "webapp"}]'
 ```
+
+#### Docker Swarm
+
+When using Swarm mode for Docker Cloud, labels must be applied to the image:
+
+```yaml
+
+version: "1.0"
+services:
+...
+  project:
+    image: '<IMAGE_NAME>'
+    labels:
+      com.datadoghq.ad.check_names: '[<CHECK_NAME>]'
+      com.datadoghq.ad.init_configs: '[<INIT_CONFIG>]'
+      com.datadoghq.ad.instances: '[<INSTANCE_CONFIG>]'
+      com.datadoghq.ad.logs: '[<LOGS_CONFIG>]'
+
+```
+
+[23]: https://docs.datadoghq.com/logs/docker/
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Reference
 
