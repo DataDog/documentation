@@ -7,11 +7,50 @@ kind: faq
 To do a fresh install of Datadog Agent v6, refer to the Agent <a href="https://app.datadoghq.com/account/settings#agent">installation process</a>.
 </div>
 
-## Amazon Linux
+## What is the Agent v6?
 
-A script is available to automatically install or upgrade to the new Agent. It sets up the package repositories and installs the Agent package for you. When upgrading, the import tool also searches for an existing `datadog.conf` from a prior version, and converts Agent and Check configurations according to the new v6 format.
+Agent 6 is the latest major version of the Datadog Agent. The big difference between Agent 5 and Agent 6 is that Agent 6 is a complete rewrite of the core Agent in Golang. Golang has allowed the Agent to take advantage of concurrency. In place of the three processes the Agent v5 used to run—*the Forwarder*, *the Collector*, and *DogStatsD*—there is now only one process: *the Agent*. It also comes with a number of other core improvements:
 
-### One-step Upgrade
+* Agent v6 has significantly improved resource usage over Agent v5:
+  * It has decreased CPU usage
+  * It has decrease memory usage
+  * It uses fewer file descriptors
+  * It has an all around decreased footprint
+
+* Agent 6 uses ports `5000` and `5001` by default. You can specify different ports for `expvar_port` and `cmd_port` in the `datadog.yaml` file.
+
+* Custom build your Agent v6 and [DogStatsD][6] much easier and with much more configuration options, to include or exclude almost anything. There is also a "puppy" Agent, which is a truly minimal installation.
+
+### Agent v6 new functionalities
+
+To see all changes between Agent v5 and v6, consult the [Datadog Agent dedicated changes][3] documentation, but here are the key differentiators:
+
+* [Distributions metrics][17] can be performed on the server directly to calculate real, effective global percentiles. (NOTE: this feature is in BETA. Contact support for details on how to have it enabled for your account.)
+
+* [DogStatsD][6] can be used over a Unix socket instead of over UDP.
+
+* [Live Process monitoring is available for Windows][19].
+
+* [Prometheus OpenMetrics is supported natively][20].
+
+* [All your logs can be sent to Datadog for alerting, analysis, and correlation with metrics][21].
+
+## Upgrade to Agent 6
+
+If you have Agent v5 already installed a script is available to automatically install or upgrade to the new Agent. It sets up the package repositories and installs the Agent package for you. When upgrading, the import tool also searches for an existing `datadog.conf` from a prior version, and converts Agent and Check configurations according to the new v6 format. Select your platform to get specific instructions:
+
+* [Amazon Linux](#amazon-linux)
+* [CentOS](#centos)
+* [Debian](#debian)
+* [Fedora](#fedora)
+* [MacOSx](#macosx)
+* [Red Hat](#red-hat)
+* [SUSE](#suse)
+* [Ubuntu](#ubuntu)
+* [Windows](#windows)
+
+### Amazon Linux
+#### One-step Upgrade
 
 The Agent v6 installer can automatically convert v5 configurations during the upgrade:
 ```shell
@@ -20,7 +59,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
 
 **Note:** The import process won't automatically move **custom** Agent checks. This is by design as we cannot guarantee full backwards compatibility out of the box.
 
-### Manual Upgrade
+#### Manual Upgrade
 
 1. Set up Datadog's Yum repo on your system by creating `/etc/yum.repos.d/datadog.repo` with the contents:
     ```ini
@@ -60,11 +99,8 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
     sudo initctl start datadog-agent
     ```
 
-## CentOS
-
-A script is available to automatically install or upgrade to the new Agent. It sets up the package repositories and installs the Agent package for you. When upgrading, the import tool also searches for an existing `datadog.conf` from a prior version, and converts Agent and Check configurations according to the new v6 format.
-
-### One-step Upgrade
+### CentOS
+#### One-step Upgrade
 
 The Agent v6 installer can automatically convert v5 configurations during the upgrade:
 ```shell
@@ -73,7 +109,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
 
 **Note:** The import process won't automatically move **custom** Agent checks. This is by design as we cannot guarantee full backwards compatibility out of the box.
 
-### Manual Upgrade
+#### Manual Upgrade
 
 1. Set up Datadog's Yum repo on your system by creating `/etc/yum.repos.d/datadog.repo` with the contents:
     ```ini
@@ -113,11 +149,8 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
     sudo initctl restart datadog-agent
     ```
 
-## Debian
-
-A script is available to automatically install or upgrade to the new Agent. It sets up the package repositories and installs the Agent package for you. When upgrading, the import tool also searches for an existing `datadog.conf` from a prior version, and converts Agent and Check configurations according to the new v6 format.
-
-### One-step Upgrade
+### Debian
+#### One-step Upgrade
 
 The Agent v6 installer can automatically convert v5 configurations during the upgrade:
 ```shell
@@ -126,7 +159,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
 
 **Note:** The import process won't automatically move **custom** Agent checks. This is by design as we cannot guarantee full backwards compatibility out of the box.
 
-### Manual Upgrade
+#### Manual Upgrade
 
 1. Enable HTTPS support for APT:
     ```
@@ -163,11 +196,8 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
     sudo service datadog-agent start
     ```
 
-## Fedora
-
-A script is available to automatically install or upgrade to the new Agent. It sets up the package repositories and installs the Agent package for you. When upgrading, the import tool also searches for an existing `datadog.conf` from a prior version, and converts Agent and Check configurations according to the new v6 format.
-
-### One-step Upgrade
+### Fedora
+#### One-step Upgrade
 
 The Agent v6 installer can automatically convert v5 configurations during the upgrade:
 ```shell
@@ -176,7 +206,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
 
 **Note:** The import process won't automatically move **custom** Agent checks. This is by design as we cannot guarantee full backwards compatibility out of the box.
 
-### Manual Upgrade
+#### Manual Upgrade
 
 1. Set up Datadog's Yum repo on your system by creating `/etc/yum.repos.d/datadog.repo` with the contents:
     ```ini
@@ -211,11 +241,11 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
     ```
 
 
-## MacOSx
+### MacOSx
 
 You can either download the DMG package and install it manually, or use the one-line install script.
 
-### One-step Upgrade
+#### One-step Upgrade
 
 The Agent v6 installer can automatically convert v5 configurations during the upgrade:
 ```shell
@@ -224,25 +254,18 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
 
 **Note:** The import process won't automatically move **custom** Agent checks. This is by design as we cannot guarantee full backwards compatibility out of the box.
 
-### Manual Upgrade
+#### Manual Upgrade
 
 1. Download the DMG package of the latest Agent version, use the latest macOS release listed on the [release page][4] of the repository
 2. Install the DMG package
 3. Add your API key to `/opt/datadog-agent/etc/datadog.yaml`
-4 Transition your Agent configuration paths and formats from Agent v5 to Agent v6, with the `import` command. The command parses an existing v5 `datadog.conf` and converts the configuration options to the new v6 `datadog.yaml` format. It also copies configuration files for checks that are currently enabled:
-    `datadog-agent import <OLD_CONFIGURATION_DIRECTORY> <DESTINATION_DIRECTORY>`
-    With:
+4. Transition your Agent configuration paths and formats from Agent v5 to Agent v6, with the `import` command. The command parses an existing v5 `datadog.conf` and converts the configuration options to the new v6 `datadog.yaml` format. It also copies configuration files for checks that are currently enabled:
+    `datadog-agent import /opt/datadog-agent/etc/ /opt/datadog-agent/etc/`
 
-    * `<OLD_CONFIGURATION_DIRECTORY>` is the directory containing the `datadog.conf` file
-    * `<DESTINATION_DIRECTORY>` is the directory where the imported `datadog.yaml` is written (you can use the same directory as `<OLD_CONFIGURATION_DIRECTORY>`).
+Then start the Datadog Agent application (once started, you should see it in the system tray), and manage the Agent from there. Agent v6 includes a web-based GUI to edit the Agent configuration files and much more.
 
-Then start the Datadog Agent app (once started, you should see it in the system tray), and manage the Agent from there. Agent v6 includes a web-based GUI to edit the Agent configuration files and much more.
-
-## Red Hat
-
-A script is available to automatically install or upgrade to the new Agent. It sets up the package repositories and installs the Agent package for you. When upgrading, the import tool also searches for an existing `datadog.conf` from a prior version, and converts Agent and Check configurations according to the new v6 format.
-
-### One-step Upgrade
+### Red Hat
+#### One-step Upgrade
 
 The Agent v6 installer can automatically convert v5 configurations during the upgrade:
 ```shell
@@ -251,7 +274,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
 
 **Note:** The import process won't automatically move **custom** Agent checks. This is by design as we cannot guarantee full backwards compatibility out of the box.
 
-### Manual Upgrade
+#### Manual Upgrade
 
 1. Set up Datadog's Yum repo on your system by creating `/etc/yum.repos.d/datadog.repo` with the contents:
     ```ini
@@ -292,7 +315,16 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
     sudo initctl restart datadog-agent
     ```
 
-## SUSE
+### SUSE
+#### One-step Upgrade
+
+The Agent v6 installer can automatically convert v5 configurations during the upgrade:
+```shell
+DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
+```
+**Note:** The import process won't automatically move **custom** Agent checks. This is by design as we cannot guarantee full backwards compatibility out of the box.
+
+#### Manual Upgrade
 
 1. Set up Datadog's Yum repo on your system by creating `/etc/zypp/repos.d/datadog.repo` with the contents:
   ```ini
@@ -328,11 +360,8 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
   sudo systemctl restart datadog-agent.service
   ```
 
-## Ubuntu
-
-A script is available to automatically install or upgrade to the new Agent. It sets up the package repositories and installs the Agent package for you. When upgrading, the import tool also searches for an existing `datadog.conf` from a prior version, and converts Agent and Check configurations according to the new v6 format.
-
-### One-step Upgrade
+### Ubuntu
+#### One-step Upgrade
 
 The Agent v6 installer can automatically convert v5 configurations during the upgrade:
 ```shell
@@ -386,7 +415,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
     ```
 
 
-## Windows
+### Windows
 
 Download the latest version available [from here][2] and run the installation package.
 
@@ -402,4 +431,10 @@ With:
 **Note**: `datadog.conf` is automatically upgraded to `datadog.yaml` on upgrade.
 
 [2]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-6-latest.amd64.msi
+[3]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md
 [4]: https://github.com/DataDog/datadog-agent/releases
+[6]: /developers/dogstatsd/unix_socket/
+[17]: /developers/metrics/distributions 
+[19]: /graphing/infrastructure/process/
+[20]: https://www.datadoghq.com/blog/monitor-prometheus-metrics/
+[21]: /logs/
