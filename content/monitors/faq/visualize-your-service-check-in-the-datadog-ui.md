@@ -57,9 +57,9 @@ Service check monitors for out-of-the-box Datadog integrations can be set in *mo
 
 {{< img src="monitors/faq/haproxy_service_check.gif" alt="Haproxy service check" responsive="true" >}}
 
-Learn how to write an Agent check with the main [Agent check documentation][1].
+Learn how to write an integration with the [integration developer documentation][1].
 
-[1]: /developers/agent_checks/
+[1]: /developers/integrations/
 [2]: https://app.datadoghq.com/check/summary
 [3]: https://app.datadoghq.com/dashboard
 [4]: https://app.datadoghq.com/monitors#create/custom

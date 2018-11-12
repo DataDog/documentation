@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-This page outlines the basic features of the Datadog Agent for CentOS. If you haven't installed the Agent yet, instructions can be found in the [Datadog Agent Integration][1] documentation.
+This page outlines the basic features of the Datadog Agent for CentOS. To install the Datadog Agent, follow the [Agent Installation Instructions][1] for CentOs.
 
 **Note**: CentOS 6 and above are supported.
 
@@ -57,10 +57,10 @@ In Agent v6, the service manager provided by the operating system is responsible
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: If `service` is not available on your system, use:
+**Note**: If the `service` wrapper is not available on your system, use:
 
-* `upstart`-based systems: `initctl`
-* `systemd`-based systems: `systemctl`
+* On `upstart`-based systems: `sudo initctl start/stop/restart/status datadog-agent`
+* On `systemd`-based systems: `sudo systemctl start/stop/restart/status datadog-agent`
 
 [Learn more about Service lifecycle commands][4]
 

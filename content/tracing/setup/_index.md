@@ -52,16 +52,17 @@ To start tracing your application:
       {{< nextlink href="tracing/setup/go" tag="Go" >}}Go language instrumentation.{{< /nextlink >}}
       {{< nextlink href="tracing/setup/nodejs" tag="Nodejs" >}}Node.js language instrumentation.{{< /nextlink >}}
       {{< nextlink href="tracing/setup/dotnet" tag=".NET" >}}.NET language instrumentation.{{< /nextlink >}}
-      {{< nextlink href="tracing/setup/php" tag="PHP" >}}PHP language instrumentation. (Coming Soon){{< /nextlink >}}
+      {{< nextlink href="tracing/setup/php" tag="PHP" >}}PHP language instrumentation.{{< /nextlink >}}
   {{< /whatsnext >}}
 
 
 To instrument an application written in a language that does not yet have official library support, visit the list of [community tracing libraries][15].
 
-Finally, start monitoring your app's performance: Within a few minutes of running APM, you will start to see your services appear in [the APM home page][16]. See [Using the APM UI][17] to learn more.
+Finally, start monitoring your app's performance: within a few minutes of running APM, your services will appear in [the APM home page][16]. See [Using the APM UI][17] to learn more.
 
 ## Agent configuration
 
+### Trace collection
 To enable trace collection for your Agent, update the `apm_config` key in your [Agent `datadog.yaml` main configuration file][25]:
 
 ```
@@ -91,10 +92,48 @@ Find below the list of all available parameters for your `datadog.yaml` configur
 To get a an overview of all the possible settings for APM, take a look at the Agent's [`datadog.example.yaml`][21] configuration file.
 For more information about the Datadog Agent, see the [dedicated doc page][18] or refer to the [`datadog.yaml` templates][19].
 
+### Trace search
+To enable trace search, [services][30] must be flowing into Datadog. Once services are set up, navigate to the [Trace Search & Analytics docs page][31]. Then follow these steps:
+
+1. Select the `environment` and `services` to extract [APM events][32] from.
+2. Update your Datadog Agent configuration (based on Agent version) with the information shown.
+
+{{< tabs >}}
+{{% tab "Agent 6.3.0+" %}}
+In `datadog.yaml`, add `analyzed_spans` under `apm_config`. For example:
+
+```yaml
+apm_config:
+  analyzed_spans:
+    <SERVICE_NAME_1>|servlet.request: 1
+    <SERVICE_NAME_2>|servlet.request: 1
+```
+
+{{% /tab %}}
+{{% tab "Agent 5.25.0+" %}}
+In `datadog.conf`, add `[trace.analyzed_spans]`. For example:
+
+```
+[trace.analyzed_spans]
+<SERVICE_NAME_1>|servlet.request: 1
+<SERVICE_NAME_2>|servlet.request: 1
+```
+
+{{% /tab %}}
+{{% tab "Docker" %}}
+Add `DD_APM_ANALYZED_SPANS` to the Agent container environment (compatible with version 12.6.5250+). For example:
+
+```
+DD_APM_ANALYZED_SPANS="<SERVICE_NAME_1>|servlet.request=1,<SERVICE_NAME_2>|servlet.request=1"
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Primary Tags
 ### Definition
 
-There are several dimensions that you can configure to scope an entire Datadog APM application. These include aggregate statistics (such as requests/second, latency, error rate, Apdex score) and visible traces. Those dimensions are set up through primary tags that allow you to get an even finer view of your application's behavior. Use cases for primary tags include, the environment, the availability zone, the datacenter, etc.
+There are several dimensions available to scope an entire Datadog APM application. These include aggregate statistics (such as requests/second, latency, error rate, Apdex score) and visible traces. These dimensions are set up through primary tags that allow you to get an even finer view of your application's behavior. Use cases for primary tags include environment, availability zone, datacenter, etc.
 
 Primary tags must follow a different set of rules from those of conventional [Datadog tags][26].
 
@@ -135,8 +174,8 @@ Note:
 
 If you change a previously set primary tag, be aware of the following:
 
-* Historical APM data aggregated by the previously set tag will no longer be accessible.
-* Any APM monitors scoped to the previous tag will display a status of _No Data_.
+* Historical APM data aggregated by the previously set tag is no longer be accessible.
+* Any APM monitors scoped to the previous tag display a status of _No Data_.
 
 #### Viewing Data by Primary Tag
 
@@ -176,3 +215,6 @@ Primary tags appear at the top of APM pages. Use these selectors to slice the da
 [27]: /agent/faq/agent-configuration-files/?tab=agentv6
 [28]: https://app.datadoghq.com/apm/settings
 [29]: /tagging/assigning_tags/#traces
+[30]: https://app.datadoghq.com/apm/services
+[31]: https://app.datadoghq.com/apm/docs/trace-search
+[32]: /tracing/visualization/search/#apm-events

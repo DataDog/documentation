@@ -21,7 +21,7 @@ further_reading:
 * All traffic is sent over SSL
 * The destination for [APM][1] data is `trace.agent.datadoghq.com`
 * The destination for [Live Containers][2] data is `process.datadoghq.com`
-* The destination for [Logs][3] data is `intake.logs.datadoghq.com `
+* The destination for [Logs][3] data is `agent-intake.logs.datadoghq.com `
 * The destination for all other Agent data is
   * **Agents < 5.2.0** `app.datadoghq.com`
   *  **Agents >= 5.2.0** `<version>-app.agent.datadoghq.com`

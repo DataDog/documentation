@@ -50,7 +50,7 @@
     },
     {
       "host": {
-        "sourcePath": "/sys/fs/cgroup/"
+        "sourcePath": "/cgroup/"
       },
       "name": "cgroup"
     }
