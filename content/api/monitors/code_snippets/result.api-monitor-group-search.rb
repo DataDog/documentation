@@ -1,2 +1,13 @@
-# This is not yet supported by the Ruby Client for Datadog API
-# Consult the curl example 
+["200",
+ {"counts"=>
+   {"status"=>[{"count"=>1, "name"=>"Alert"}],
+    "type"=>[{"count"=>1, "name"=>"apm"}]},
+  "groups"=>
+   [{"status"=>"Alert",
+     "last_triggered_ts"=>1540483133,
+     "group"=>"*",
+     "monitor_id"=>6797333,
+     "group_tags"=>["*"],
+     "last_nodata_ts"=>0,
+     "monitor_name"=>"Service sample has a high error rate on env:myenv"}],
+  "metadata"=>{"total_count"=>1, "page_count"=>1, "page"=>0, "per_page"=>30}}]
