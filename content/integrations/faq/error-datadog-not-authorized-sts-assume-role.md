@@ -10,7 +10,7 @@ further_reading:
 
 This error usually indicates an issue with the trust policy associated with the `DatadogAWSIntegrationRole`. Most of the time, this issue is caused by the [role delegation process][1].
 
-Please check the following points for the AWS account mentioned in the error:
+Check the following points for the AWS account mentioned in the error:
 
 1. Ensure you using the correct IAM role name in the [Datadog AWS integration tile][2]. Extra spaces or characters in AWS or Datadog causes the role delegation fail.
 2. When creating an IAM role, ensure Datadog's account ID `464622532012` is entered under add `Another AWS account`. Entering any other account id causes the integration to fail.
