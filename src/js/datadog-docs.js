@@ -431,10 +431,12 @@ $(document).ready(function () {
     if($('.code-tabs').length > 0) {
         // page load set code tab titles
         $('.code-tabs .tab-content').find('.tab-pane').each(function(idx, item) {
+          var navTabsMobile = $(this).closest('.code-tabs').find('.nav-tabs-mobile .dropdown-menu');
           var navTabs = $(this).closest('.code-tabs').find('.nav-tabs'),
               title = $(this).attr('title');
           var lang = title.toLowerCase().replace(/\W/g, '');
-          navTabs.append('<li><a href="#" data-lang="'+lang+'">'+title+'</a></li');
+          navTabs.append('<li><a href="#" data-lang="'+lang+'">'+title+'</a></li>');
+          navTabsMobile.append('<a class="dropdown-item" href="#" data-lang="'+lang+'">'+title+'</a>');
         });
 
         // page load if we have a lang in url activate those tabs, otherwise activate first
@@ -455,6 +457,7 @@ $(document).ready(function () {
              tab.addClass('active');
              tabPane.addClass('active');
              tabPane.addClass('show');
+             el.closest('.code-tabs').find('.nav-tabs-mobile .title-dropdown').text(tab.text());
         }
 
         // clicking a tab open them all
@@ -491,6 +494,17 @@ $(document).ready(function () {
 
           // restore
           $(document).scrollTop($(this).offset().top - currentOffset);
+        });
+
+        // mobile tabs trigger desktop ones
+        $('.code-tabs .nav-tabs-mobile .dropdown-menu a').click(function(e){
+            e.preventDefault();
+            var ctabs = $(this).parents('.code-tabs');
+            var lang = $(this).data('lang');
+            var desktopTab = ctabs.find('.nav-tabs a[data-lang="'+lang+'"]');
+            if(desktopTab) {
+              desktopTab.click();
+            }
         });
 
         // activate language from url or first
