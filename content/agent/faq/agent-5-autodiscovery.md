@@ -322,9 +322,16 @@ LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%/nginx
 
 ### Template Variable Indexes
 
-For containers that have many IP addresses or expose many ports, you can tell Autodiscovery which ones to choose by appending an underscore to the template variable, followed by an integer, e.g. `%%host_0%%`, `%%port_4%%`. After inspecting the container, Autodiscovery sorts the IPs and ports **numerically and in ascending order**, so for a container that exposes ports 80, 443, and 8443, `%%port_0%%` refers to port 80. Non-indexed template variables refer to the last item in the sorted list, so in this case, `%%port%%` means port 8443.
+The following template variables are handled by the Agent:
 
-You can also add a network name suffix to the `%%host%%` variable-`%%host_bridge%%`, `%%host_swarm%%`, etc-for containers attached to multiple networks. When `%%host%%` does not have a suffix, Autodiscovery picks the container's `bridge` network IP address.
+- Container IP: `host`
+  - `%%host%%`: Autodiscovery picks the container's `bridge` network IP address.
+  - `%%host_<NETWORK NAME>%%`: specify the network name to use, when attached to several networks (e.g. `%%host_bridge%%`, `%%host_swarm%%`, ...)
+
+- Container port: `port`
+  - `%%port%%`: use the highest exposed port **sorted numerically and in ascending order** (eg. 8443 for a container that exposes ports 80, 443, and 8443)
+  - `%%port_0%%`: use the first port **sorted numerically and in ascending order** (for the same container, `%%port_0%%` refers to port 80, `%%port_1%%` refers to 443
+  - If your target port is constant, we recommend you directly specify it, without using the `port` variable
 
 - Container PID: `pid` (Added in 5.15.x)
   - `%%pid%%`: retrieves the container process ID as returned by `docker inspect --format '{{.State.Pid}}' <container>`
