@@ -1,11 +1,32 @@
 ---
 title: View jmx data in jConsole and set up your jmx.yaml to collect them
 kind: faq
+disable_toc: true
+further_reading:
+- link: "/integrations/java/"
+  tag: "Documentation"
+  text: "Java integration"
+- link: "https://www.datadoghq.com/blog/easy-jmx-discovery-browsing-open-source-agent/"
+  tag: "Blog"
+  text: "Easy JMX discovery & browsing with the open source Agent"
 ---
 
-This articles provides a quick example showing you how you can convert the metric data you can see in jConsole into a valid configuration for the jmx.yaml file of the datadog-agent.
+This article provides two examples of converting metric data from your jConsole into a valid Datadog Agent configuration file (`jmx.yaml`).
+
+The first example shows conversion for `domain -> type -> bean -> attribute`:
+
 {{< img src="integrations/faq/jConsolejmx.png" alt="jConsolejmx" responsive="true" >}}
 
-Once you have the datadog-agent submit these jmx metrics correctly to Datadog, you can graph them and use tags to specify your graph query:
+The second example shows conversion for `domain -> bean -> attribute`:
+
+{{< img src="integrations/faq/jConsolejmx2.png" alt="jConsolejmx" responsive="true" >}}
+
+After the Datadog Agent is set up to submit jmx metrics, use the [Metrics Explorer][1] to verify the metrics are being submitted to Datadog. The example below demonstrates how you can filter the metrics by tags:
+
 {{< img src="integrations/faq/jmxGraphMetric.png" alt="jmxGraphMetric" responsive="true" >}}
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /graphing/metrics/explorer/
