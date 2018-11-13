@@ -1,5 +1,5 @@
 ---
-title: View jmx data in jConsole and set up your jmx.yaml to collect them
+title: View JMX data in jConsole and set up your jmx.yaml to collect them
 kind: faq
 disable_toc: true
 further_reading:
@@ -21,7 +21,7 @@ The second example shows conversion for `domain -> bean -> attribute`:
 
 {{< img src="integrations/faq/jConsolejmx2.png" alt="jConsolejmx" responsive="true" >}}
 
-After the Datadog Agent is set up to submit jmx metrics, use the [Metrics Explorer][1] to verify the metrics are being submitted to Datadog. The example below demonstrates how you can filter the metrics by tags:
+After the Datadog Agent is set up to submit JMX metrics, use the [Metrics Explorer][1] to verify the metrics are being submitted to Datadog. The example below demonstrates how you can filter the metrics by tags:
 
 {{< img src="integrations/faq/jmxGraphMetric.png" alt="jmxGraphMetric" responsive="true" >}}
 
