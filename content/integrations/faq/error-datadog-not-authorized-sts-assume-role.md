@@ -16,7 +16,7 @@ Check the following points for the AWS account mentioned in the error:
 2. When creating an IAM role, ensure Datadog's account ID `464622532012` is entered under add `Another AWS account`. Entering any other account id causes the integration to fail.
 3. Also ensure `Required MFA` is **unchecked**:
     {{< img src="integrations/faq/aws-error-sts-assume-role-01.png" alt="AWS Create IAM Role" responsive="true">}}
-4. Generate a new AWS External ID in the [Datadog AWS integration tile][2] and press **Update Configuration** button:
+4. Generate a new AWS External ID in the [Datadog AWS integration tile][2] and click the **Update Configuration** button:
   {{< img src="integrations/faq/aws-error-sts-assume-role-02.png" alt="Datadog AWS integration tile" responsive="true">}}
 5. Add the newly generated AWS External ID to your AWS trust policy:
   {{< img src="integrations/faq/aws-error-sts-assume-role-03.png" alt="AWS Trust Policy" responsive="true">}}
