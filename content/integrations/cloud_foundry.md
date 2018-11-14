@@ -125,7 +125,7 @@ cf set-env $YOUR_APP_NAME DD_ENABLE_CHECKS false
 # Redirect Container Stdout/Stderr to a local port so the agent can collect the logs
 cf set-env $YOUR_APP_NAME STD_LOG_COLLECTION_PORT <PORT>
 # Configure the agent to collect logs from the wanted port and set the value for source and service
-cf set-env $YOUR_APP_NAME DD_LOGS_CONFIG_CUSTOM_CONFIG '[{"type":"tcp","port":"<PORT>","source":"<SOURCE>","service":"<SERVICE>"}]'
+cf set-env $YOUR_APP_NAME LOGS_CONFIG '[{"type":"tcp","port":"<PORT>","source":"<SOURCE>","service":"<SERVICE>"}]'
 # restage the application to get it to pick up the new environment variable and use the buildpack
 cf restage $YOUR_APP_NAME
 ```
@@ -135,7 +135,7 @@ cf restage $YOUR_APP_NAME
 The following parameters can be used to configure log collection:
 
 - `STD_LOG_COLLECTION_PORT`: Must be used when collecting logs from `stdout`/`stderr`. It redirects the `stdout`/`stderr` stream to the corresponding local port value.
-- `DD_LOGS_CONFIG_CUSTOM_CONFIG`: Use this option to configure the agent to listen to a local TCP port and set the value for the `service` and `source` parameters.
+- `LOGS_CONFIG`: Use this option to configure the agent to listen to a local TCP port and set the value for the `service` and `source` parameters.
 
 **Example**:
 
@@ -145,7 +145,7 @@ An `app01` Java application is running in Cloud Foundry. The following configura
 # Redirect Stdout/Stderr to port 10514
 cf set-env $YOUR_APP_NAME STD_LOG_COLLECTION_PORT 10514
 # Configure the agent to listen to that port
-cf set-env $YOUR_APP_NAME DD_LOGS_CONFIG_CUSTOM_CONFIG '[{"type":"tcp","port":"10514","source":"java","service":"app01"}]'
+cf set-env $YOUR_APP_NAME LOGS_CONFIG '[{"type":"tcp","port":"10514","source":"java","service":"app01"}]'
 ```
 
 ### Build
