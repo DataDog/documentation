@@ -121,11 +121,11 @@ kind: Deployment
       - name: <CONTAINER_NAME>
         image: <CONTAINER_IMAGE>/<TAG>
         env:
-          - name: DD_AGENT_SERVICE_HOST
+          - name: DD_AGENT_HOST
             valueFrom:
             fieldRef:
               fieldPath: status.hostIP
-          - name: DD_AGENT_SERVICE_PORT
+          - name: DD_AGENT_PORT
             value: "8126"
 ```
 
@@ -135,20 +135,18 @@ See the examples below for each supported language:
 {{< tabs >}}
 {{% tab "Java" %}}
 
-Update the Java Agent configuration via environment variables:
+The Java Tracing Module automatically looks for and initializes with the ENV variables DD_AGENT_HOST and DD_AGENT_PORT
 
 ```bash
-DD_AGENT_HOST=$DD_AGENT_SERVICE_HOST \
-DD_AGENT_PORT=$DD_AGENT_SERVICE_PORT \
 java -javaagent:/path/to/the/dd-java-agent.jar -jar /your/app.jar
 ```
 
-or via system properties:
+you can also use system properties:
 
 ```bash
 java -javaagent:/path/to/the/dd-java-agent.jar \
-     -Ddd.agent.host=$DD_AGENT_SERVICE_HOST \
-     -Ddd.agent.port=$DD_AGENT_SERVICE_PORT \
+     -Ddd.agent.host=$DD_AGENT_HOST \
+     -Ddd.agent.port=$DD_AGENT_PORT \
      -jar /your/app.jar
 ```
 
@@ -160,8 +158,8 @@ import os
 from ddtrace import tracer
 
 tracer.configure(
-    hostname=os.environ['DD_AGENT_SERVICE_HOST'],
-    port=os.environ['DD_AGENT_SERVICE_PORT'],
+    hostname=os.environ['DD_AGENT_HOST'],
+    port=os.environ['DD_AGENT_PORT'],
 )
 ```
 
@@ -170,8 +168,8 @@ tracer.configure(
 
 ```ruby
 Datadog.configure do |c|
-  c.tracer hostname: ENV['DD_AGENT_SERVICE_HOST'],
-           port: ENV['DD_AGENT_SERVICE_PORT']
+  c.tracer hostname: ENV['DD_AGENT_HOST'],
+           port: ENV['DD_AGENT_PORT']
 end
 ```
 
@@ -190,8 +188,8 @@ import (
 
 func main() {
     addr := net.JoinHostPort(
-        os.Getenv("DD_AGENT_SERVICE_HOST"),
-        os.Getenv("DD_AGENT_SERVICE_PORT"),
+        os.Getenv("DD_AGENT_HOST"),
+        os.Getenv("DD_AGENT_PORT"),
     )
     tracer.Start(tracer.WithAgentAddr(addr))
     defer tracer.Stop()
@@ -204,8 +202,8 @@ func main() {
 
 ```js
 const tracer = require('dd-trace').init({
-  hostname: process.env.DD_AGENT_SERVICE_HOST,
-  port: process.env.DD_AGENT_SERVICE_PORT
+  hostname: process.env.DD_AGENT_HOST,
+  port: process.env.DD_AGENT_PORT
 })
 ```
 
