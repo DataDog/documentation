@@ -135,13 +135,13 @@ See the examples below for each supported language:
 {{< tabs >}}
 {{% tab "Java" %}}
 
-The Java Tracing Module automatically looks for and initializes with the ENV variables DD_AGENT_HOST and DD_AGENT_PORT
+The Java Tracing Module automatically looks for and initializes with the ENV variables DD_AGENT_HOST and DD_AGENT_PORT:
 
 ```bash
 java -javaagent:/path/to/the/dd-java-agent.jar -jar /your/app.jar
 ```
 
-you can also use system properties:
+You can also use system properties:
 
 ```bash
 java -javaagent:/path/to/the/dd-java-agent.jar \
