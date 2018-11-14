@@ -139,7 +139,7 @@ The following parameters can be used to configure log collection:
 
 **Example**:
 
-An `app01` java application is running in cloudfoundry. The following configuration redirect the container `stdout`/`stderr` to the local port 10514 and then configure the agent to collect logs from that port while setting the proper value for `service` and `source`:
+An `app01` Java application is running in Cloud Foundry. The following configuration redirects the container `stdout`/`stderr` to the local port 10514. It then configures the Agent to collect logs from that port while setting the proper value for `service` and `source`:
 
 ```
 # Redirect Stdout/Stderr to port 10514
