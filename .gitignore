@@ -101,6 +101,7 @@ Temporary Items
 
 # virtual env
 /hugpython/
+.python-version
 
 /DataDog-dogweb-*/
 Makefile.config
