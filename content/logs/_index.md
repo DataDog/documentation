@@ -75,28 +75,40 @@ This will produce the following result in your [live tail page][39]:
 
 ### Datadog Logs Endpoints
 
+There are two cateogries of endpoint to send logs to Datadog, those that support a SSL encrypted connection and others with an unencrypted one.
+We always recommend to use the SSL encryption when possible and the Datadog Agent use an SSL encrypted connection to send logs to Datadog ([more information available here][40]).
+
 The endpoints that can be used to send logs to Datadog:
 
 {{< tabs >}}
 {{% tab "US Region" %}}
 
-| Endpoint                           | Port    | Description                                                                                                           |
+
+| Endpoints for SSL encrypted connections     | Port    | Description                                                                                                           |
 | :--------------------------------- | :------ | :-------                                                                                                              |
 | `agent-intake.logs.datadoghq.com`  | `10516` | Used by the Agent to send logs in protobuf format over an SSL-encrypted TCP connection.                       |
 | `intake.logs.datadoghq.com`        | `10516` | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.   |
-| `intake.logs.datadoghq.com`        | `10514` | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an unecrypted TCP connection.          |
 | `lambda-intake.logs.datadoghq.com` | `10516` | Used by Lambda functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection. |
+
+
+| Endpoint for unencrypted connections        | Port    | Description                                                                                                           |
+| :--------------------------------- | :------ | :-------   
+| `intake.logs.datadoghq.com`        | `10514` | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an unecrypted TCP connection.          |
 
 
 {{% /tab %}}
 {{% tab "EU Region" %}}
 
-| Endpoint                           | Port    | Description                                                                                                           |
+| Endpoints for SSL encrypted connections                       | Port    | Description                                                                                                           |
 | :--------------------------------- | :------ | :-------                                                                                                              |
 | `agent-intake.logs.datadoghq.eu`   | `443`   | Used by the Agent to send logs in protobuf format over an SSL-encrypted TCP connection.                         |
 | `tcp-intake.logs.datadoghq.eu`     | `443`   | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.   |
-| `tcp-intake.logs.datadoghq.eu`     | `1883`  | Used by custom forwarders to send logs in raw, Syslog, or JSON format format over an unecrypted TCP connection.          |
 | `lambda-intake.logs.datadoghq.eu`  | `443`   | Used by Lambda functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection. |
+
+
+| Endpoint for unencrypted connections                           | Port    | Description                                                                                                           |
+| :--------------------------------- | :------ | :-------   
+| `tcp-intake.logs.datadoghq.eu`     | `1883`  | Used by custom forwarders to send logs in raw, Syslog, or JSON format format over an unecrypted TCP connection.          |
 
 
 {{% /tab %}}
@@ -161,3 +173,4 @@ Your logs are collected and centralized into the [Log Explorer][17] view. You ca
 [37]: /integrations/#cat-log-collection
 [38]: https://app.datadoghq.com/account/settings#api
 [39]: https://app.datadoghq.com/logs/livetail
+[40]: https://docs.datadoghq.com/security/logs/#information-security
