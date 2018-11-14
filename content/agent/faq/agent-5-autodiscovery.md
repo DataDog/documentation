@@ -325,7 +325,7 @@ LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%/nginx
 The following template variables are handled by the Agent:
 
 - Container IP: `host`
-  - `%%host%%`: autodetect the network. Returns the `bridge` network IP if present; falls back to the last **sorted** network's IP.
+  - `%%host%%`: auto-detect the network. Returns the `bridge` network IP if present; falls back to the last **sorted** network's IP.
   - `%%host_<NETWORK NAME>%%`: specify the network name to use when attached to multiple networks (e.g. `%%host_bridge%%`, `%%host_swarm%%`, ...); behaves like `%%host%%` if network name specified was not found.
 
 - Container port: `port`

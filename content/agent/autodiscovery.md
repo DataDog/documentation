@@ -495,7 +495,7 @@ services:
 The following template variables are handled by the Agent:
 
 - Container IP: `host`
-  - `%%host%%`: autodetect the network. For single-network containers, returns its corresponding IP; falls back to `bridge` network IP.
+  - `%%host%%`: auto-detect the network. For single-network containers, returns its corresponding IP; falls back to `bridge` network IP.
   - `%%host_<NETWORK NAME>%%`: specify the network name to use, when attached to multiple networks (e.g. `%%host_bridge%%`, `%%host_myredisnetwork%%`, ...); behaves like `%%host%%` if the network name specified was not found.
 
 - Container port: `port`
