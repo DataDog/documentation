@@ -52,8 +52,8 @@ further_reading:
   * The **threshold** options vary slightly depending on what alert type you have chosen. For either case, you input a threshold and comparison type based on your metric. As you change your threshold, you can see the graph update with a marker showing the cutoff point.
   {{< img src="monitors/monitor_types/metric/metric_threshold.png" alt="metric threshold" responsive="true" >}}
   Note that you can use formatted values in this input based on the metric itself. For example, if you are monitoring `system.disk.used`, you can give a threshold of `20GB`.
-  For a **threshold alert** you are able to chose a *time aggregation* of the data. The alerting engine generates a single series and perform selected aggregation.
-  Let's look at the details of each option:
+  For a **threshold alert** you are able to chose a *time aggregation* of the data. The alerting engine generates a single series and performs selected aggregation.
+  The details of each option:
 
     * **on average**: The series is averaged to produce a single value that is checked against the threshold. It adds the `avg()` [functions][6] at the beginning of your monitor query.
 
