@@ -57,7 +57,7 @@ PHP APM includes support for the following PHP versions:
 | 7.0.x   | Public Beta  |
 | 7.1.x   | Public Beta  |
 | 7.2.x   | Public Beta  |
-| 5.6.x   | Alpha        |
+| 5.6.x   | Public Beta  |
 
 ## Automatic Instrumentation
 
@@ -77,6 +77,7 @@ Automatic instrumentation captures:
 | Module         | Versions    | Support Type       |
 | :-----------   | :---------- | :----------------- |
 | Laravel        | 5.x         | Public Beta        |
+| Laravel        | 4.2         | Coming Soon        |
 | Symfony        | 3.x         | Public Beta        |
 | Magento        | 2.x         | Coming Soon        |
 | Zend Framework | 3.x         | Coming Soon        |
