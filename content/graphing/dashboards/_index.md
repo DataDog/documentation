@@ -15,13 +15,48 @@ further_reading:
   text: Discover all available widget for your Dashboard
 ---
 
-To create a [Timeboard][3] or a [Screenboard][4] Select which of these you would prefer to create after clicking 'New Dashboard' in the 'Dashboards' dropdown.
+## Dashboard List
 
-{{< img src="graphing/dashboards/board_selection.jpg" alt="Dashboard selection" responsive="true" >}}
+The [Dashboard List][1] page lets you sort your Dashboards into different lists. 
 
-## What is the difference between a Screenboard and a Timeboard?
+{{< img src="graphing/dashboards/dashboard_list.png" alt="Dashboard list" responsive="true" >}}
 
-At Datadog we give you the capability to create and customize two types of dashboards; [Screenboards][5] and [Timeboards][6]. To more clearly understand the differences between the two, consider the following:
+Search across your Dashboard with the search bar at the top of the page. Dashboards in the Dashboard list can be sorted with the column headers: 
+
+* `Favorite`: Sort the Dashboard list with your favorite Dashboards first.
+* `Name`: Sort the Dashboard list alphabetically. 
+* `Modified`: Sort the Dashboard list by last modification date.
+* `Popularity`: Sort the Dashboard list by [Dashboard popularity](#popularity).
+
+### Popularity
+
+A Dashboard's popularity is relative. An organization's most popular Dashboard appears as 5 bars; all other Dashboards are relative to that. Popularity is based upon the amount of traffic a Dashboard is getting and is updated daily, so new Dashboards have 0 popularity bars for up to the first 24 hours.
+
+If you are using uBlock or a similar browser plugin to block web beacons, your traffic won't impact a Dashboard's popularity.
+
+**Note**: Traffic to the public URLs of public Dashboards is ignored.
+
+## Create a Dashboard list
+
+Click on the *New List +* icon in the upper right corner of the page to create a new Dashboard list. 
+
+Change its title by selecting it:
+
+{{< img src="graphing/dashboards/new_list_title.png" alt="New list" responsive="true" style="width:70%;">}}
+
+To add Dashboards to your Dashboard List, select their corresponding check boxes in the main Dashboard list. Then click on the *Add to List* button in the upper right corner of the Dashboard list:
+
+{{< img src="graphing/dashboards/dash_to_list.png" alt="Add Dashboard to list" responsive="true" style="width:70%;">}}
+
+## Create a Dashboard
+
+To create a Dashboard, click on the *New Dashboard* button in the upper right corner of the page. Datadog will then ask you to choose between creating a [Timeboard][3] or a [Screenboard][4] Select which of these you would prefer to create after clicking 'New Dashboard' in the 'Dashboards' dropdown.
+
+{{< img src="graphing/dashboards/board_selection.jpg" alt="Dashboard selection" responsive="true" style="width:70%;">}}
+
+### What is the difference between a Screenboard and a Timeboard?
+
+You have the capability to create and customize two types of Dashboards: [Screenboards][5] and [Timeboards][6]. To more clearly understand the differences between the two, consider the following:
 
 |                                | Timeboards                       | Screenboards                                      |
 | ---                            | ------------                     | -------------                                     |
@@ -30,62 +65,6 @@ At Datadog we give you the capability to create and customize two types of dashb
 | Can Share Graphs Individually  | Yes                              | No                                                |
 | Can Share the Entire Dashboard | No                               | Yes                                               |
 | Sharing can be Read-Only       | Yes                              | Yes                                               |
-
-## Editing template variables
-
-Dashboard templating allows you to create dashboards that use variables like `$scope` or `$redis` in place of specific tags or hosts. You can then dynamically explore the metrics across different sets of tags. Select a new variable value in the dropdown menu, and that value applies across the dashboard.
-
-To create, edit, and delete template variables click the gear icon at the upper right-hand side of the screen, then select 'Edit Template Variables' from the actions menu.
-
-{{< img src="graphing/dashboards/edit-template-variables.png" alt="edit template variable" responsive="true" style="width:30%;">}}
-
-This open the template variable editing panel.
-
-{{< img src="graphing/dashboards/redis-template-var.png" alt="Redis template var" responsive="true" style="width:50%;">}}
-
-A template variable is defined by a name and optional parameters for 'Tag Group' and 'Default Tag.' A tag group is a prefix shared among several tags, like `redis_port` for the tags `redis_port:6379` and `redis_port:6380`. Setting a tag group eliminates irrelevant tags from the variable's scope selector, and removes the prefix from the listed values for clarity - so you'll see `6379` and `6380` in the 'Default Tag' dropdown instead. The 'Default Tag' option determines the initial value for the variable on dashboard load.
-
-## Using template variables in graph editors/widgets
-
-{{< img src="graphing/dashboards/redis-tpl-graph-editor.png" alt="Redis-tpl graph editor" responsive="true" style="width:70%;" >}}
-
-Once defined, template variables appear alongside normal tag and host options in graph editors. If you set `6379` as the value of `$redis`, all graphs defined with `$redis` is scoped to `redis_port:6379`.
-
-{{< img src="graphing/dashboards/redis-tpl-selected.png" alt="Redis tpl selected" responsive="true" style="width:70%;">}}
-
-You can also use them explicitly in widgets such as Event Stream, with a query of the form `tags:$redis`.
-
-
-## Event Correlation at Design Time
-Event Correlation refers to overlaying events on top of a dashboard graph and is an important feature of the Datadog platform. You can setup correlation at two different times: either when you setup the dashboard or adhoc at the time you view the dashboard.
-
-{{< img src="graphing/dashboards/guides-eventcorrelation-screenboard.png" alt="guides-eventcorrelation-screenboard" responsive="true" style="width:90%;">}}
-
-Setup event correlation at design time by editing any graph on both Timeboards and Screenboards and adding events to the graph. To learn more about this, visit the [Graphing Primer][1]. You can find details about adding events [using the UI][2] or via the JSON interface further down the page.
-
-## Event Correlation at View Time
-
-{{< img src="graphing/dashboards/guides-eventcorrelation-searchbox.png" alt="guides event correlation" responsive="true" style="width:90%;">}}
-
-Setup event correlation at view time by adding a query in the Search box at the top left of any Timeboard dashboard window. This replaces any events added at design time, but applies the events to all graphs on that particular dashboard.
-
-## Correlation between Logs and Metrics
-
-### Jump from a metric to its logs
-
-Fast and easy correlation is key when troubleshooting an issue. Use the following shortcut from any dashboard timeseries graphs to open a contextual menu with the most related logs.
-
-{{< img src="graphing/dashboards/related_logs.png" alt="Related logs" responsive="true" style="width:80%;">}}
-
-Select `View related logs` to jump to the Log Explorer page zoomed on the selected timeframe with all the current context of your graph.
-
-### How do we define the search query ?
-
-To define the most related logs, we use the following parameters:
-
-* *Timeframe*: Focused on the selected data point and uses the graph bucket size to display data before and after the selected point.
-* *Integration prefix*: If the metric is coming from an integration, Datadog filters on the `source` attribute with the same integration name.
-* *Tags*: All tags used in the graph (*template variable*, *split by*, *filter by*) are automatically added to the search query.
 
 ## Further Reading
 
