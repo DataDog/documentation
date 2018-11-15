@@ -63,8 +63,6 @@ further_reading:
 
     * **in total**: If the summation of every point in the series is outside the threshold then an alert is triggered. It adds the `sum()` [functions][6] at the beginning of your monitor query.
 
-    Note the **on average** and **at all times** aggregations *require* a full window of data in the final series. This does *not* mean that each series must be full but that there shouldn't be a gap of more than 1 minute across all aggregated series. In other words, we recommend using **at least once** or **in total** for metrics with > 1 minute interval.
-
   - When you select the **change alert** option, you have additional parameters you can adjust:
 
     -  *change* is an absolute change of the value whereas *% change* is the percentage change of your value compared to its previous value (so if it was a value of 2 and now 4, the *% change* is 100%).
