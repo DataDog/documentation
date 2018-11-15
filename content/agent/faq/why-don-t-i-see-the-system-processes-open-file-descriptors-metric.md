@@ -21,7 +21,7 @@ If users see this line in the Datadog error.log: `sudo: sorry, you must have a t
 {{% /tab %}}
 {{% tab "Agent v6" %}}
 
-If you are running Agent v6 less than 6.3, we recommend updating the Agent. If you are unable to update, a workaround for this issue is running the Agent as `root`.
+If you are running Agent v6 less than 6.3, we recommend updating the Agent and using the `try_sudo` option. If you are unable to update, a workaround for this issue is running the Agent as `root`.
 
 **NOTE**: We do not recommend running the Agent as `root`. This isn't specific to the Datadog Agent or due to any concern that something untrustworthy is happening in any way. Instead, we don't recommend running the daemon as `root` as this is best practice for most processes on Linux. If you have any personal cause for concern, the Agent is open source and may be audited by you or your team via the [GitHub repository][2].
 
@@ -38,7 +38,7 @@ If you are running Agent v6 less than 6.3, we recommend updating the Agent. If y
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-If you are running Agent v5, we recommend updating the Agent. If you are unable to update, a workaround for this issue is running the Agent as `root`.
+If you are running Agent v5, we recommend updating to the latest version of Agent 6 and using the `try_sudo` option. If you are unable to update, a workaround for this issue is running the Agent as `root`.
 
 **NOTE**: We do not recommend running the Agent as `root`. This isn't specific to the Datadog Agent or due to any concern that something untrustworthy is happening in any way. Instead, we don't recommend running the daemon as `root` as this is best practice for most processes on Linux. If you have any personal cause for concern, the Agent is open source and may be audited by you or your team via the [GitHub repository][5].
 
