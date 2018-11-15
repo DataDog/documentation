@@ -30,6 +30,10 @@ For details about contributing, check out the [development guide][development do
 
 ### Quickstart
 
+<div class="alert alert-warning">
+This library <strong>MUST</strong> be imported and initialized before any instrumented module. When using a transpiler, you <strong>MUST</strong> import and initialize the tracer library in an external file and then import that file as a whole when building your application. This prevents hoisting and ensures that the tracer library gets imported and initialized before importing any other instrumented module.
+</div>
+
 To begin tracing Node.js applications, first [install and configure the Datadog Agent][1] (see additional documentation for [tracing Docker applications][3]).
 
 Next, install the Datadog Tracing library using npm:
@@ -46,10 +50,6 @@ const tracer = require('dd-trace').init()
 ```
 
 See the [tracer settings][4] for the list of initialization options.
-
-<div class="alert alert-warning">
-This library <strong>MUST</strong> be imported and initialized before any instrumented module. When using a transpiler, you <strong>MUST</strong> import and initialize the tracer library in an external file and then import that file as a whole when building your application. This prevents hoisting and ensures that the tracer library gets imported and initialized before importing any other instrumented module.
-</div>
 
 ## Compatibility
 
@@ -94,7 +94,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 | :----------            | :---------- | :-------------- | :------------------ |
 | [cassandra-driver][25] |             | Coming Soon     |                     |
 | [elasticsearch][14]    | 10 - 15     | Fully Supported |                     |
-| [ioredis][15]          | 4           | Fully Supported |                     |
+| [ioredis][15]          | 2 - 4       | Fully Supported |                     |
 | [memcached][24]        | ^2.2        | Fully Supported |                     |
 | [mongodb-core][16]     | 2 - 3       | Fully Supported | Supports Mongoose   |
 | [mysql][17]            | 2           | Fully Supported |                     |
@@ -125,6 +125,18 @@ For details about how to how to toggle and configure plugins, check out the [API
 [26]: https://github.com/SOHU-Co/kafka-node
 [27]: https://github.com/noodlefrenzy/node-amqp10
 [28]: https://github.com/amqp/rhea
+
+#### Promise Library Compatibility
+
+| Module           | Versions    | Support Type    |
+| :----------      | :---------- | :-------------- |
+| [bluebird][30]   | 2 - 3       | Fully Supported |
+| [q][31]          | 1           | Fully Supported |
+| [when][32]       | 3           | Fully Supported |
+
+[30]: https://github.com/petkaantonov/bluebird
+[31]: https://github.com/kriskowal/q
+[32]: https://github.com/cujojs/when
 
 ## Further Reading
 
