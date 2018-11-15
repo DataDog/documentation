@@ -126,7 +126,7 @@ hugpython: hugpython/bin/activate  ## build virtualenv used for tests.
 
 hugpython/bin/activate: local/etc/requirements3.txt  ## start python virtual environment.
 	@if [ ${PY3} != "false" ]; then \
-		test -d ${VIRENV} || ${PY3} -m venv ${VIRENV}; \
+		test -x ${VIRENV}/bin/pip || ${PY3} -m venv --clear ${VIRENV}; \
 		$(VIRENV)/bin/pip install -r local/etc/requirements3.txt; \
 	else printf "\e[93mPython 3 is required to fetch integrations and run tests.\033[0m Try https://github.com/pyenv/pyenv.\n"; fi
 
