@@ -111,7 +111,7 @@ cf set-env <YOUR_APP> DD_API_KEY <DD_API_KEY>
 cf restage <YOUR_APP>
 ```
 
-#### Log Collection (beta)
+#### Log Collection
 
 **Enable log collection**:
 
