@@ -1,6 +1,13 @@
 ---
 title: Cloud Functions
 kind: documentation
+further_reading:
+- link: "integrations/amazon_xray"
+  tag: "X-Ray Integration"
+  text: AWS X-Ray Integration
+- link: "integrations/amazon_lambda"
+  tag: "AWS Lambda Integration"
+  text: AWS Lambda Integration
 ---
 
 ## Overview
@@ -17,7 +24,7 @@ The Cloud Functions dashboard requires no installation of its own, but it relies
 
 	This integration is used to populate summary graphs and the main functions table. Install this integration and ensure that Lambda metrics are reporting in your account.
 
-	*Note*: Metrics in the Cloud Function UI are delayed ~10 minutes, as this is the default speed at which we poll AWS APIs. Reach out to support@datadoghq.com if you would like this rate to be decreased to 5 minutes.
+	*Note*: Metrics in the Cloud Function UI are delayed ~10 minutes, as this is the default speed at which we poll AWS APIs. Reach out to support@datadoghq.com if you would like this rate to be decreased.
 
 2. [AWS X-Ray integration][4] (optional)
 	This integration provides traces for Lambda functions in the function detail page.
@@ -34,6 +41,8 @@ The Cloud Functions dashboard requires no installation of its own, but it relies
 	- Navigate to the Lambda function in the AWS console you want to instrument. In the “Debugging and error handling” section, check the box to “Enable active tracing”. This turns on X-Ray for that function.
 
 	- Import the X-Ray SDK in your function, and patch all supported libraries. This automatically causes X-Ray to trace all AWS calls and other X-Ray supported integrations. See [an example of this in Python][5].
+
+	- Datadog's X-Ray integration supports custom subsegments and annotations as well.
 
 	*Note*: Traces are delayed ~5 minutes, as this is the speed at which Datadog polls AWS X-Ray APIs.
 
@@ -63,10 +72,6 @@ Ensure you have the `lambda:List*` permission in your Datadog IAM policy in orde
 
 Ensure you have the `tag:GetResources` permission in your Datadog IAM policy in order to have custom tags collected.
 
-### String Search
-
-Search for functions using flexible string search that matches substrings on function name, AWS Metadata, and custom tags.
-
 ### Filtering
 
 Use the faceted search functionality along the left-hand side of the page to narrow down the functions that are in view. All AWS and custom tags are available to use as filters.
@@ -81,9 +86,9 @@ Non-default metrics you can check are
 - Throttles
 - IteratorAge
 - DeadLetterError
+- Estimated Cost
 - Memory Used (avg)
 - Last Start
-- Estimated Cost
 
 ## Function Detail view
 
@@ -116,6 +121,10 @@ Datadog provides specially formatted serverless traces for readability and usabi
 All logs emitted from that function are pulled into the function detail page as well. Narrow down the timeframe of the page to a specific moment of interest to view the logs during a critical point in time. Click on the logs in the table to see the full log in more detail.
 
 {{< img src="graphing/infrastructure/cloudfunctions/cf-logs.png" alt="logs" responsive="true" style="width:80%;">}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: http://app.datadoghq.com/functions
 [2]: https://docs.datadoghq.com/integrations/amazon_web_services/
