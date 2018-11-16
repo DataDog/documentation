@@ -109,13 +109,13 @@ Clicking on a particular trace opens the trace detail view for that trace. The X
 
 Datadog provides specially formatted serverless traces for readability and usability. Clicking on the span from another Lambda function creates a link to that function’s detail page so you can easily jump to another function that is part of the trace.
 
-{{< img src="graphing/infrastructure/cloudfunctions/cf-traces3.png" alt="Traces" responsive="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/cloudfunctions/cf-traces3.gif" alt="Traces" responsive="true" style="width:80%;">}}
 
 ### Logs
 
 All logs emitted from that function are pulled into the function detail page as well. Narrow down the timeframe of the page to a specific moment of interest to view the logs during a critical point in time. Click on the logs in the table to see the full log in more detail.
 
-{{< img src="graphing/infrastructure/cloudfunctions/logs.png" alt="logs" responsive="true" style="width:80%;">}}
+{{< img src="graphing/infrastructure/cloudfunctions/cf-logs.png" alt="logs" responsive="true" style="width:80%;">}}
 
 [1]: http://app.datadoghq.com/functions
 [2]: https://docs.datadoghq.com/integrations/amazon_web_services/
