@@ -13,6 +13,8 @@ Returns: A JSON consisting of the same elements returned by GET api/v1/graph/emb
 
 Note: If an embed already exists for the exact same query in a given organization, the older embed is returned instead of creating a new embed.
 
+If you are interested in using template variables, see [Embeddable Graphs with Template Variables][1].
+
 ##### ARGUMENTS
 * **`graph_json`** [*required*]:  
     The graph definition in JSON. Same format that is available on the JSON tab of the graph editor
@@ -34,3 +36,5 @@ Note: If an embed already exists for the exact same query in a given organizatio
 * **`title`** [*optional*, *default*=**Embed created through API**]:  
     Determines graph title.  
     *Must be at least 1 character.*
+
+[1]: /graphing/faq/embeddable-graphs-with-template-variables/
