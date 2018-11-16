@@ -18,50 +18,51 @@ Datadog’s integration processing Pipelines are available for the `source` tag 
 
 **Note**: Integration Pipelines implement the [Datadog Attribute Naming Convention][65].
 
-| Source                             | Setup Location                                     | Source ID         |
-| ---------------------------------- | -------------------------------------------------- | ----------------- |
-| [Apache][1]                        | [Datadog integration YAML file][2]                 | `apache`          |
-| [AWS API Gateway][3]               | [AWS Management Console][4]                        | `apigateway`      |
-| [AWS Cloudfront][7]                | [AWS Management Console][4]                        | `cloudfront`      |
-| AWS CloudHSM                       | [AWS Management Console][4]                        | `cloudhsm`        |
-| [AWS Cloudtrail][8]                | [AWS Management Console][4]                        | `cloudtrail`      |
-| [AWS DynamoDB][18]                 | [AWS Management Console][4]                        | `dynamodb`        |
-| [AWS Elastic Load Balancing][21]   | [AWS Management Console][4]                        | `elb`             |
-| [AWS Lambda][34]                   | [AWS Management Console][4]                        | `lambda`          |
-| [AWS Redshift][49]                 | [AWS Management Console][4]                        | `redshift`        |
-| [AWS S3][52]                       | [AWS Management Console][4]                        | `s3`              |
-| [AWS SNS][53]                      | [AWS Management Console][4]                        | `sns`             |
-| [AWS VPC][62]                      | [AWS Management Console][4]                        | `vpc`             |
-| [C#][13]                           | [Custom Datadog YAML file][14]                     | `csharp`          |
-| [Cassandra][5]                     | [Datadog integration YAML file][6]                 | `cassandra`       |
-| [Consul][9]                        | [Datadog integration YAML file][10]                | `consul`          |
-| [CouchDB][11]                      | [Datadog integration YAML file][12]                | `couchdb`         |
-| Cron                               | [Custom Datadog YAML file][67]                     | `CRON`            |
-| [Docker][15]                       | [Container][16] or [Host][17] Agent Installation   | `docker`          |
-| [ElasticSearch][19]                | [Datadog integration YAML file][20]                | `elasticsearch`   |
-| Fail2ban                           | [Custom Datadog YAML file][67]                     | `fail2ban`        |
-| [Go][22]                           | [Custom Datadog YAML file][23]                     | `go`              |
-| [Gunicorn][24]                     | [Datadog integration YAML file][25]                | `gunicorn`        |
-| [HAProxy][26]                      | [Datadog integration YAML file][27]                | `haproxy`         |
-| [IIS][28]                          | [Datadog integration YAML file][29]                | `iis`             |
-| [Java][30]                         | [Custom Datadog YAML file][31]                     | `java`            |
-| [Kafka][32]                        | [Datadog integration YAML file][33]                | `kafka`           |
-| [MongoDB][35]                      | [Datadog integration YAML file][36]                | `mongodb`         |
-| [MySQL][37]                        | [Datadog integration YAML file][38]                | `mysql`           |
-| [Nginx][39]                        | [Datadog integration YAML file][40]                | `nginx`           |
-| [Postgres SQL][41]                 | [Datadog integration YAML file][42]                | `postgresql`      |
-| [Python][43]                       | [Custom Datadog YAML file][44]                     | `python`          |
-| [RabbitMQ][45]                     | [Datadog integration YAML file][46]                | `rabbitmq`        |
-| [Redis][47]                        | [Datadog integration YAML file][48]                | `redis`           |
-| [Ruby][50]                         | [Custom Datadog YAML file][51]                     | `ruby`            |
-| SSHD                               | [Custom Datadog YAML file][67]                     | `sshd`            |
-| [Stunnel][54]                      | [Custom Datadog YAML file][55]                     | `stunnel`         |
-| Sudo                               | [Custom Datadog YAML file][67]                     | `sudo`            |
-| [Tomcat][56]                       | [Datadog integration YAML file][57]                | `tomcat`          |
-| UFW                                | [Custom Datadog YAML file][67]                     | `UFW`             |
-| [uwsgi][58]                        | [Custom Datadog YAML file][59]                     | `uwsgi`           |
-| [Varnish][60]                      | [Custom Datadog YAML file][61]                     | `varnish`         |
-| [ZooKeeper][63]                    | [Datadog integration YAML file][64]                | `zookeeper`       |
+| Source                           | Setup Location                                   | Source ID                  |
+|----------------------------------|--------------------------------------------------|----------------------------|
+| [Adobe Experience Manager][68]   | [Custom Datadog YAML file][69]                   | `adobe.experience.manager` |
+| [Apache][1]                      | [Datadog integration YAML file][2]               | `apache`                   |
+| [AWS API Gateway][3]             | [AWS Management Console][4]                      | `apigateway`               |
+| [AWS Cloudfront][7]              | [AWS Management Console][4]                      | `cloudfront`               |
+| AWS CloudHSM                     | [AWS Management Console][4]                      | `cloudhsm`                 |
+| [AWS Cloudtrail][8]              | [AWS Management Console][4]                      | `cloudtrail`               |
+| [AWS DynamoDB][18]               | [AWS Management Console][4]                      | `dynamodb`                 |
+| [AWS Elastic Load Balancing][21] | [AWS Management Console][4]                      | `elb`                      |
+| [AWS Lambda][34]                 | [AWS Management Console][4]                      | `lambda`                   |
+| [AWS Redshift][49]               | [AWS Management Console][4]                      | `redshift`                 |
+| [AWS S3][52]                     | [AWS Management Console][4]                      | `s3`                       |
+| [AWS SNS][53]                    | [AWS Management Console][4]                      | `sns`                      |
+| [AWS VPC][62]                    | [AWS Management Console][4]                      | `vpc`                      |
+| [C#][13]                         | [Custom Datadog YAML file][14]                   | `csharp`                   |
+| [Cassandra][5]                   | [Datadog integration YAML file][6]               | `cassandra`                |
+| [Consul][9]                      | [Datadog integration YAML file][10]              | `consul`                   |
+| [CouchDB][11]                    | [Datadog integration YAML file][12]              | `couchdb`                  |
+| Cron                             | [Custom Datadog YAML file][67]                   | `CRON`                     |
+| [Docker][15]                     | [Container][16] or [Host][17] Agent Installation | `docker`                   |
+| [ElasticSearch][19]              | [Datadog integration YAML file][20]              | `elasticsearch`            |
+| Fail2ban                         | [Custom Datadog YAML file][67]                   | `fail2ban`                 |
+| [Go][22]                         | [Custom Datadog YAML file][23]                   | `go`                       |
+| [Gunicorn][24]                   | [Datadog integration YAML file][25]              | `gunicorn`                 |
+| [HAProxy][26]                    | [Datadog integration YAML file][27]              | `haproxy`                  |
+| [IIS][28]                        | [Datadog integration YAML file][29]              | `iis`                      |
+| [Java][30]                       | [Custom Datadog YAML file][31]                   | `java`                     |
+| [Kafka][32]                      | [Datadog integration YAML file][33]              | `kafka`                    |
+| [MongoDB][35]                    | [Datadog integration YAML file][36]              | `mongodb`                  |
+| [MySQL][37]                      | [Datadog integration YAML file][38]              | `mysql`                    |
+| [Nginx][39]                      | [Datadog integration YAML file][40]              | `nginx`                    |
+| [Postgres SQL][41]               | [Datadog integration YAML file][42]              | `postgresql`               |
+| [Python][43]                     | [Custom Datadog YAML file][44]                   | `python`                   |
+| [RabbitMQ][45]                   | [Datadog integration YAML file][46]              | `rabbitmq`                 |
+| [Redis][47]                      | [Datadog integration YAML file][48]              | `redis`                    |
+| [Ruby][50]                       | [Custom Datadog YAML file][51]                   | `ruby`                     |
+| SSHD                             | [Custom Datadog YAML file][67]                   | `sshd`                     |
+| [Stunnel][54]                    | [Custom Datadog YAML file][55]                   | `stunnel`                  |
+| Sudo                             | [Custom Datadog YAML file][67]                   | `sudo`                     |
+| [Tomcat][56]                     | [Datadog integration YAML file][57]              | `tomcat`                   |
+| UFW                              | [Custom Datadog YAML file][67]                   | `UFW`                      |
+| [uwsgi][58]                      | [Custom Datadog YAML file][59]                   | `uwsgi`                    |
+| [Varnish][60]                    | [Custom Datadog YAML file][61]                   | `varnish`                  |
+| [ZooKeeper][63]                  | [Datadog integration YAML file][64]              | `zookeeper`                |
 
 
 ## Further Reading
@@ -135,3 +136,5 @@ Datadog’s integration processing Pipelines are available for the `source` tag 
 [65]: /logs/processing/attributes_naming_convention/
 [66]: /logs/processing/pipelines/#integration-pipelines
 [67]: /logs/log_collection/?tab=tailexistingfiles#custom-log-collection
+[68]: /integrations/adobe_experience_manager/
+[69]: /integrations/adobe_experience_manager/#log-collection
