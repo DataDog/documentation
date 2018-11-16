@@ -41,7 +41,7 @@ The Cloud Functions dashboard requires no installation of its own, but it relies
 
 	Install this if you want to see logs from your Lambda functions in the function detail page. This will also populate the additional metrics such as Memory Used (avg) and Last Start in your functions table.
 
-	To enable this, refer to the documentation for sending Lambda logs to Datadog.
+	To enable this, refer to the [documentation for sending Lambda logs to Datadog][6].
 
 ## Searching, Filtering, Sorting
 
@@ -122,3 +122,4 @@ All logs emitted from that function are pulled into the function detail page as 
 [3]: https://docs.datadoghq.com/integrations/amazon_web_services/#installation
 [4]: https://app.datadoghq.com/account/settings#integrations/amazon_xray
 [5]: https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-python-patching.html
+[6]: https://docs.datadoghq.com/integrations/amazon_lambda/#log-collection 
