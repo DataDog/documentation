@@ -1,4 +1,9 @@
 Classic:
+  - Arduino:
+    - name: AdruinoStatsd
+      link: https://github.com/aelse/ArduinoStatsd
+      dogstatsd: true
+      authors: Alexander Else
   - C++:
     - name: cpp-datadogstatsd
       link: https://github.com/BoardiesITSolutions/cpp-datadogstatsd
