@@ -111,7 +111,9 @@ cf set-env <YOUR_APP> DD_API_KEY <DD_API_KEY>
 cf restage <YOUR_APP>
 ```
 
-#### Log Collection (closed beta)
+#### Log Collection
+
+**Enable log collection**:
 
 To start collecting logs from your application in CloudFoundry, the Agent contained in the buildpack needs to be activated and log collection enabled.
 
@@ -120,19 +122,30 @@ cf set-env $YOUR_APP_NAME RUN_AGENT true
 cf set-env $YOUR_APP_NAME DD_LOGS_ENABLED true
 # Disable the Agent core checks to disable system metrics collection
 cf set-env $YOUR_APP_NAME DD_ENABLE_CHECKS false
+# Redirect Container Stdout/Stderr to a local port so the agent can collect the logs
+cf set-env $YOUR_APP_NAME STD_LOG_COLLECTION_PORT <PORT>
+# Configure the agent to collect logs from the wanted port and set the value for source and service
+cf set-env $YOUR_APP_NAME LOGS_CONFIG '[{"type":"tcp","port":"<PORT>","source":"<SOURCE>","service":"<SERVICE>"}]'
 # restage the application to get it to pick up the new environment variable and use the buildpack
 cf restage $YOUR_APP_NAME
 ```
 
-By default, the Agent collects logs from `stdout`/`stderr` and listens to TCP port 10514.
-It is possible to ask the Agent to listen on a different TCP port if you are streaming logs from your application in TCP.
-To disable log collection from `stdout`/`stderr`, use the following configuration:
+**Configure log collection**:
+
+The following parameters can be used to configure log collection:
+
+- `STD_LOG_COLLECTION_PORT`: Must be used when collecting logs from `stdout`/`stderr`. It redirects the `stdout`/`stderr` stream to the corresponding local port value.
+- `LOGS_CONFIG`: Use this option to configure the agent to listen to a local TCP port and set the value for the `service` and `source` parameters.
+
+**Example**:
+
+An `app01` Java application is running in Cloud Foundry. The following configuration redirects the container `stdout`/`stderr` to the local port 10514. It then configures the Agent to collect logs from that port while setting the proper value for `service` and `source`:
 
 ```
-# override the TCP port
-cf set-env $YOUR_APP_NAME DD_LOGS_CONFIG_TCP_FORWARD_PORT 10514
-# disable log collection on stdout/stderr
-cf set-env $YOUR_APP_NAME DISABLE_STD_LOG_COLLECTION true
+# Redirect Stdout/Stderr to port 10514
+cf set-env $YOUR_APP_NAME STD_LOG_COLLECTION_PORT 10514
+# Configure the agent to listen to that port
+cf set-env $YOUR_APP_NAME LOGS_CONFIG '[{"type":"tcp","port":"10514","source":"java","service":"app01"}]'
 ```
 
 ### Build
