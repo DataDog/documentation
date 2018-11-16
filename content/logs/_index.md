@@ -75,10 +75,10 @@ This will produce the following result in your [live tail page][39]:
 
 ### Datadog Logs Endpoints
 
-There are two cateogries of endpoint to send logs to Datadog, those that support a SSL encrypted connection and others with an unencrypted one.
-We always recommend to use the SSL encryption when possible and the Datadog Agent use an SSL encrypted connection to send logs to Datadog ([more information available here][40]).
+Datadog provides logging endpoints for both SSL-encrypted connections and unencrypted connections.
+You should use the encrypted endpoint when possible. The Datadog Agent uses the encrypted endpoint to send logs to Datadog (more information available in the [Datadog security documentation][40]).
 
-The endpoints that can be used to send logs to Datadog:
+Endpoints that can be used to send logs to Datadog:
 
 {{< tabs >}}
 {{% tab "US Region" %}}
