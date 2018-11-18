@@ -332,6 +332,11 @@ languages:
           url: "graphing/infrastructure/process/"
           weight: 530
           parent: customnav_graphingnav_infrastructure
+        - identifier: customnav_infrastructurenav_cloudfunctions
+          name: "Cloud Functions"
+          url: "graphing/infrastructure/cloudfunctions/"
+          weight: 540
+          parent: customnav_graphingnav_infrastructure
 
         # GRAPHING - Functions
         - identifier: customnav_graphingnav_functions
