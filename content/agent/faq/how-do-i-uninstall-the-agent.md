@@ -35,12 +35,6 @@ sudo rm -rf /usr/local/bin/datadog-agent
 sudo rm -rf ~/.datadog-agent/**​ #to remove broken symlinks
 ```
 
-### Redhat
-
-```
-sudo yum remove datadog-agent
-```
-
 ### Windows
 
 **It's important that the original account used to install the Agent is also used to remove it, otherwise it's possible remnants are left behind and it won't be cleanly removed.**

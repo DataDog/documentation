@@ -23,7 +23,7 @@ Agent v6 is available. <a href="https://docs.datadoghq.com/agent/faq/upgrade-to-
 
 ## What is the Agent?
 
-The Datadog Agent is a piece of software that runs on your hosts. Its job is to faithfully collect events and metrics and bring them to Datadog on your behalf so that you can do something useful with your monitoring and performance data. The Datadog Agent is open source: view the source code on GitHub for [Agent v5][1] and [Agent v6][2].
+The Datadog Agent is a piece of software that runs on your hosts. Its job is to faithfully collect events and metrics and bring them to Datadog on your behalf so that you can do something useful with your monitoring and performance data. The Datadog Agent is open source: view the source code on GitHub for [Agent v6][2].
 
 {{< partial name="platforms/platforms.html" >}}
 
@@ -154,7 +154,6 @@ Once the Agent is running, use the `datadog-agent launch-gui` command to launch 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/dd-agent
 [2]: https://github.com/DataDog/datadog-agent
 [4]: /integrations
 [5]: /developers/metrics/custom_metrics/
