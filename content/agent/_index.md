@@ -33,8 +33,6 @@ The Agent has three main parts: the collector, DogStatsD, and the forwarder:
 * **DogStatsD**: A StatsD-compatible backend server that you can send [custom metrics][5] to from your own applications.
 * **Forwarder**: Retrieves data from both DogStatsD and the collector, and then queues it up to be sent to Datadog.
 
-This is all controlled by one supervisor process. We keep this separate so you don't have to deal with the overhead of each application if you don't want to run all parts (although we generally recommend that you do).
-
 ## CLI
 
 The new command line interface for the Agent v6 is sub-command based:
