@@ -70,7 +70,7 @@ A config file for the Datadog tracing implementation is also required.
 ```
 
 The `service` value can be modified to a meaningful value for your usage of NGINX.
-The `agent_host` value mayb need to be changed if NGINX is running in a container or orchestrated environment.
+The `agent_host` value may need to be changed if NGINX is running in a container or orchestrated environment.
 
 Complete examples:
 

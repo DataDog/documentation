@@ -54,7 +54,7 @@ Finally, the `http_connection_manager` sections need to include additional confi
 ```yaml
       - name: envoy.http_connection_manager
         config:
-	  generate_request_id: true
+          generate_request_id: true
           tracing:
             operation_name: egress
 ```
