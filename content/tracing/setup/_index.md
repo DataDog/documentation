@@ -93,7 +93,15 @@ To get a an overview of all the possible settings for APM, take a look at the Ag
 For more information about the Datadog Agent, see the [dedicated doc page][18] or refer to the [`datadog.yaml` templates][19].
 
 ### Trace search
-To enable trace search, [services][30] must be flowing into Datadog. Once services are set up, navigate to the [Trace Search & Analytics docs page][31]. Then follow these steps:
+To enable trace search, [services][30] must be flowing into Datadog. Once services are set up, navigate to the [Trace Search & Analytics docs page][31]. There, you'll find a list of each of the services running within your infrastructure.
+
+In Datadog, every automatically instrumented service has an operation name, which is used to set the type of request being traced. For example, if you're tracing a Python Flask app, you might have a `flask.request` as your operation name. In a Node app using Express, you'd have `express.request` ask your operation name.
+
+Replace both the `SERVICE_NAME` and `OPERATION_NAME` in your configuration with the service name and operation name of the traces you'd like to add to Trace Search.
+
+For example, if you have a Python service named `python-api`, and it's runnning Flask (operation name `flask.request`), your `SERVICE_NAME` would be `python-api`, and your `OPERATION_NAME` would be `flask.request`.
+
+The [Trace Search & Analytics docs][31] page populates with a list of your services and resource names available for usage in Trace Search.
 
 1. Select the `environment` and `services` to extract [APM events][32] from.
 2. Update your Datadog Agent configuration (based on Agent version) with the information shown.
@@ -105,8 +113,8 @@ In `datadog.yaml`, add `analyzed_spans` under `apm_config`. For example:
 ```yaml
 apm_config:
   analyzed_spans:
-    <SERVICE_NAME_1>|servlet.request: 1
-    <SERVICE_NAME_2>|servlet.request: 1
+    <SERVICE_NAME_1>|<OPERATION_NAME_1>: 1
+    <SERVICE_NAME_2>|<OPERATION_NAME_2>: 1
 ```
 
 {{% /tab %}}
@@ -115,8 +123,8 @@ In `datadog.conf`, add `[trace.analyzed_spans]`. For example:
 
 ```
 [trace.analyzed_spans]
-<SERVICE_NAME_1>|servlet.request: 1
-<SERVICE_NAME_2>|servlet.request: 1
+<SERVICE_NAME_1>|<OPERATION_NAME_1>: 1
+<SERVICE_NAME_2>|<OPERATION_NAME_2: 1
 ```
 
 {{% /tab %}}
@@ -124,7 +132,7 @@ In `datadog.conf`, add `[trace.analyzed_spans]`. For example:
 Add `DD_APM_ANALYZED_SPANS` to the Agent container environment (compatible with version 12.6.5250+). For example:
 
 ```
-DD_APM_ANALYZED_SPANS="<SERVICE_NAME_1>|servlet.request=1,<SERVICE_NAME_2>|servlet.request=1"
+DD_APM_ANALYZED_SPANS="<SERVICE_NAME_1>|<OPERATION_NAME_1>=1,<SERVICE_NAME_2>|<OPERATION_NAME_2>=1"
 ```
 
 {{% /tab %}}
