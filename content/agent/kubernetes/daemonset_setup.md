@@ -306,6 +306,6 @@ The workaround in this case is to add `hostNetwork: true` in your Agent pod spec
 [17]: https://github.com/DataDog/integrations-core/tree/73b475d0762829a32c70b63da2564eaa15b1d942/kubelet#compatibility
 [18]: https://kubernetes.io/docs/admin/authentication/#service-account-tokens
 [19]: /agent/docker/#dogstatsd-custom-metrics
-[20]: /agent/apm/kubernetes
+[20]: /agent/kubernetes/apm
 [21]: /graphing/infrastructure/process/?tab=kubernetes#installation
 [22]: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector

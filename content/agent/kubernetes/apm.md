@@ -3,6 +3,7 @@ title: Tracing Kubernetes Applications
 kind: Documentation
 aliases:
   - /tracing/kubernetes/
+  - /tracing/setup/kubernetes
 further_reading:
 - link: "https://github.com/DataDog/datadog-trace-agent"
   tag: "Github"

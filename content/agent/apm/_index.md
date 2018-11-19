@@ -45,7 +45,7 @@ To start tracing your application:
 
   {{< whatsnext desc="Select one of the following supported languages:">}}
       {{< nextlink href="/agent/docker/apm" tag="Docker" >}}Docker setup.{{< /nextlink >}}
-      {{< nextlink href="agent/apm/kubernetes" tag="Kubernetes" >}}Kubernetes setup.{{< /nextlink >}}
+      {{< nextlink href="agent/kubernetes/apm" tag="Kubernetes" >}}Kubernetes setup.{{< /nextlink >}}
       {{< nextlink href="agent/apm/java" tag="Java" >}}Java language instrumentation.{{< /nextlink >}}
       {{< nextlink href="agent/apm/python" tag="Python" >}}Python language instrumentation.{{< /nextlink >}}
       {{< nextlink href="agent/apm/ruby" tag="Ruby" >}}Ruby language instrumentation{{< /nextlink >}}

@@ -96,9 +96,9 @@ To mount a custom `datadog.yaml` in a container with a ConfigMap, employ the fol
               - key: datadog-yaml
                 path: datadog.yaml 
 [...]
- ```
+```
 
- And in your ConfigMap:
+And in your ConfigMap:
 
 ```yaml
 kind: ConfigMap
@@ -117,7 +117,7 @@ data:
     config_providers:
       - name: kubelet
         polling: true
- ```
+```
 
 
 ## Annotations
@@ -148,6 +148,6 @@ This can be done with Autodiscovery. For more details, see the [Autodiscovery][1
 [17]: https://github.com/DataDog/integrations-core/tree/73b475d0762829a32c70b63da2564eaa15b1d942/kubelet#compatibility
 [18]: https://kubernetes.io/docs/admin/authentication/#service-account-tokens
 [19]: /agent/docker/#dogstatsd-custom-metrics
-[20]: /agent/apm/kubernetes
+[20]: /agent/kubernetes/apm
 [21]: /graphing/infrastructure/process
 [22]: /integrations/http_check/

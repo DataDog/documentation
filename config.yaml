@@ -131,11 +131,6 @@ languages:
           weight: 13
           parent: menu_references_tracing
 
-        - identifier: customnav_tracingnav_kubernetes
-          name: "Kubernetes"
-          url: "agent/apm/kubernetes/"
-          weight: 1510
-          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_java
           name: "Java"
           url: "agent/apm/java/"
@@ -208,6 +203,11 @@ languages:
           name: "Cluster Agent"
           url: "agent/kubernetes/cluster"
           weight: 157
+          parent: kubernetes
+        - identifier: kubernetes_apm
+          name: "Kubernetes"
+          url: "agent/kubernetes/apm"
+          weight: 158
           parent: kubernetes
         - identifier: kubernetes_event
           name: "Event Collection"
@@ -1265,11 +1265,6 @@ languages:
           weight: 13
           parent: menu_references_tracing
 
-        - identifier: customnav_tracingnav_kubernetes
-          name: "Kubernetes"
-          url: "agent/apm/kubernetes/"
-          weight: 1510
-          parent: customnav_tracingnav_setup
         - identifier: customnav_tracingnav_java
           name: "Java"
           url: "agent/apm/java/"
@@ -1319,6 +1314,60 @@ languages:
           url: "agent/docker/apm"
           weight: 14
           parent: agent_docker
+        
+        ## Kubernetes
+
+        - identifier: kubernetes
+          name: "Kubernetes"
+          url: "agent/kubernetes/"
+          weight: 15
+          parent: menu_references_agent
+
+        - identifier: kubernetes_daemonset
+          name: "DaemonSet Setup"
+          url: "agent/kubernetes/daemonset_setup"
+          weight: 150
+          parent: kubernetes
+        - identifier: kubernetes_host
+          name: "Host Setup"
+          url: "agent/kubernetes/host_setup"
+          weight: 155
+          parent: kubernetes
+        - identifier: kubernetes_dca
+          name: "Cluster Agent"
+          url: "agent/kubernetes/cluster"
+          weight: 157
+          parent: kubernetes
+        - identifier: kubernetes_apm
+          name: "Kubernetes"
+          url: "agent/kubernetes/apm"
+          weight: 158
+          parent: kubernetes
+        - identifier: kubernetes_event
+          name: "Event Collection"
+          url: "agent/kubernetes/event_collection"
+          weight: 160
+          parent: kubernetes
+        - identifier: kubernetes_integrations
+          name: "Custom Integrations"
+          url: "agent/kubernetes/integrations"
+          weight: 165
+          parent: kubernetes
+        - identifier: kubernetes_metrics
+          name: "Metrics"
+          url: "agent/kubernetes/metrics"
+          weight: 170
+          parent: kubernetes
+        - identifier: kubernetes_dogstatsd
+          name: "Custom Metrics & DogStatsD"
+          url: "agent/kubernetes/dogstatsd"
+          weight: 175
+          parent: kubernetes
+        - identifier: kubernetes_legacy
+          name: "Legacy Versions"
+          url: "agent/kubernetes/legacy"
+          weight: 180
+          parent: kubernetes
 
         - identifier: autodiscovery
           name: "Autodiscovery"
