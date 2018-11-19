@@ -1,6 +1,6 @@
 Classic:
   - Arduino:
-    - name: AdruinoStatsd
+    - name: ArduinoStatsd
       link: https://github.com/aelse/ArduinoStatsd
       dogstatsd: true
       authors: Alexander Else
