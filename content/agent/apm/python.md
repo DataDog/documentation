@@ -99,6 +99,6 @@ The `ddtrace` library includes support for the following libraries:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/setup
+[1]: /agent/apm
 [2]: http://pypi.datadoghq.com/trace/docs/index.html#getting-started
 [3]: http://pypi.datadoghq.com/trace/docs/installation_quickstart.html#opentracing

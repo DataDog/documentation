@@ -191,7 +191,7 @@ Primary tags appear at the top of APM pages. Use these selectors to slice the da
 [2]: https://github.com/DataDog/datadog-trace-agent/blob/master/config/agent.go#L95
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://github.com/DataDog/datadog-trace-agent/tree/master/config#agent-configuration
-[5]: //agent/docker/apm
+[5]: /agent/docker/apm
 [6]: https://github.com/DataDog/datadog-trace-agent
 [7]: https://github.com/DataDog/datadog-trace-agent#run-on-osx
 [8]: https://github.com/DataDog/datadog-trace-agent/#run-on-windows

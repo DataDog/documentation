@@ -71,7 +71,7 @@ Choose what to display in your services list:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/setup
+[1]: /agent/apm
 [2]: https://app.datadoghq.com/apm/services
 [3]: /tracing/visualization/service
 [4]: /agent/apm/first_class_dimensions#environment

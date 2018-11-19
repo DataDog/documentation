@@ -17,7 +17,7 @@ kind: faq
 [5]: /tracing/visualization/service/#resources
 [6]: /tracing/visualization/resource/#out-of-the-box-graphs
 [7]: /tracing/visualization/trace
-[8]: /tracing/setup
+[8]: /agent/apm
 [9]: /tracing/visualization/resource/#traces
 [10]: /tracing/visualization/search
 [11]: /tracing/visualization/trace/#spans

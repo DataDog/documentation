@@ -107,11 +107,11 @@ Don't see your desired libraries? Let Datadog know more about your needs through
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/setup
+[1]: /agent/apm
 [2]: https://github.com/DataDog/dd-trace-php
 [3]: https://github.com/DataDog/dd-trace-php/blob/master/docs/getting_started.md#compiling-and-installing-the-extension-manually
 [4]: https://github.com/DataDog/dd-trace-php/releases/latest
 [5]: https://github.com/DataDog/dd-trace-php/blob/master/docs/getting_started.md#enabling-tracing
 [6]: https://github.com/DataDog/dd-trace-php/blob/master/docs/getting_started.md#alternative-install-datadogdd-trace-package-without-changing-minimum-stability
-[7]: //agent/docker/apm/
+[7]: /agent/docker/apm/
 [8]: https://goo.gl/forms/rKjH2J6nJ585KXri2

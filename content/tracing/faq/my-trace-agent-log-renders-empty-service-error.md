@@ -39,5 +39,5 @@ It's time to contact [the Datadog support team][2]!
 
 Send your flare, and details about the language/library you're using, and a snippet of your code instrumentation.
 
-[1]: /tracing/setup
+[1]: /agent/apm
 [2]: /help

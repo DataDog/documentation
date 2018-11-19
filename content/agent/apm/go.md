@@ -112,7 +112,7 @@ For more tracer settings, see available options in the [configuration documentat
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/setup
+[1]: /agent/apm/
 [contrib godoc]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib
 [api docs]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
 [config docs]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption

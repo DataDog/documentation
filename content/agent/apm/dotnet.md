@@ -211,7 +211,7 @@ For more details on supported platforms, see the [.NET Standard documentation][6
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/tracing/setup
+[1]: https://docs.datadoghq.com/agent/apm/
 [2]: /tracing/advanced_usage/?tab=net
 [3]: https://github.com/DataDog/dd-trace-csharp/releases
 [4]: https://www.nuget.org/packages/Datadog.Trace/

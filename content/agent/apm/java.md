@@ -238,7 +238,7 @@ Java APM has minimal impact on the overhead of an application:
 
 [1]: https://github.com/DataDog/documentation#outside-contributors
 [2]: /help
-[3]: https://docs.datadoghq.com/tracing/setup
+[3]: https://docs.datadoghq.com/agent/apm
 [6]: https://github.com/opentracing/opentracing-java
 [7]: https://docs.datadoghq.com/integrations/java/#configuration
 [8]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
