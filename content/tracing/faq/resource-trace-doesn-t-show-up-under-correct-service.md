@@ -34,11 +34,11 @@ This function explicitly sets both the service name and Top Level Name, being `t
 More examples and documentation can be found on our language-specific instrumentation documentation pages:
 
 {{< whatsnext desc="Select one of the following supported languages:">}}
-    {{< nextlink href="tracing/setup/java" tag="Java" >}}Java language instrumentation.{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/python" tag="Python" >}}Python language instrumentation.{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/ruby" tag="Ruby" >}}Ruby language instrumentation{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/go" tag="Go" >}}Go language instrumentation.{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/nodejs" tag="Nodejs" >}}Node.js language instrumentation.{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/dotnet" tag=".NET" >}}.NET language instrumentation.{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/php" tag="PHP" >}}PHP language instrumentation.{{< /nextlink >}}
+    {{< nextlink href="agent/apm/java" tag="Java" >}}Java language instrumentation.{{< /nextlink >}}
+    {{< nextlink href="agent/apm/python" tag="Python" >}}Python language instrumentation.{{< /nextlink >}}
+    {{< nextlink href="agent/apm/ruby" tag="Ruby" >}}Ruby language instrumentation{{< /nextlink >}}
+    {{< nextlink href="agent/apm/go" tag="Go" >}}Go language instrumentation.{{< /nextlink >}}
+    {{< nextlink href="agent/apm/nodejs" tag="Nodejs" >}}Node.js language instrumentation.{{< /nextlink >}}
+    {{< nextlink href="agent/apm/dotnet" tag=".NET" >}}.NET language instrumentation.{{< /nextlink >}}
+    {{< nextlink href="agent/apm/php" tag="PHP" >}}PHP language instrumentation.{{< /nextlink >}}
 {{< /whatsnext >}}

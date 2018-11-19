@@ -5,7 +5,7 @@ aliases:
     - /tracing/faq/traces-sampling-and-storage/
     - /tracing/faq/how-long-is-tracing-data-stored/
 further_reading:
-- link: "tracing/setup/"
+- link: "agent/apm/"
   tag: "Documentation"
   text: Learn how to setup APM tracing with your application
 - link: "tracing/visualization/services_list/"
@@ -187,5 +187,5 @@ When serialized/flushed to the Agent, the `sampling.priority` is stored in the `
 [4]: /agent
 [5]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#priority-sampling
 [6]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer/#Span.SetSamplingPriority
-[7]: /tracing/setup/java/#sampling-distributed-tracing
+[7]: /agent/apm/java/#sampling-distributed-tracing
 [8]: http://www.rubydoc.info/gems/ddtrace/#Priority_sampling

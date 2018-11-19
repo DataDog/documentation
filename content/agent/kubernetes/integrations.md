@@ -136,7 +136,7 @@ This can be done with Autodiscovery. For more details, see the [Autodiscovery][1
 [5]: https://app.datadoghq.com/account/settings#api
 [6]: https://kubernetes.io/docs/concepts/configuration/secret/
 [7]: https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/
-[8]: /agent/basic_agent_usage/docker/#environment-variables
+[8]: /agent/docker/#environment-variables
 [9]: https://docs.datadoghq.com/agent/autodiscovery
 [10]: /logs
 [11]: /logs/docker/#configuration-file-example
@@ -147,7 +147,7 @@ This can be done with Autodiscovery. For more details, see the [Autodiscovery][1
 [16]: https://kubernetes.io/docs/admin/authorization/rbac/
 [17]: https://github.com/DataDog/integrations-core/tree/73b475d0762829a32c70b63da2564eaa15b1d942/kubelet#compatibility
 [18]: https://kubernetes.io/docs/admin/authentication/#service-account-tokens
-[19]: /agent/basic_agent_usage/docker/#dogstatsd-custom-metrics
-[20]: /tracing/setup/kubernetes
+[19]: /agent/docker/#dogstatsd-custom-metrics
+[20]: /agent/apm/kubernetes
 [21]: /graphing/infrastructure/process
 [22]: /integrations/http_check/

@@ -6,7 +6,7 @@ aliases:
   - tracing/trace_search_analytics/analytics
   - tracing/analytics
 further_reading:
-- link: "tracing/setup/"
+- link: "agent/apm/"
   tag: "Documentation"
   text: Learn how to setup APM tracing with your application
 - link: "tracing/visualization/services_list/"

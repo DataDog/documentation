@@ -2,7 +2,7 @@
 title: Trace Metrics Namespace
 kind: documentation
 further_reading:
-- link: "tracing/setup/"
+- link: "agent/apm/"
   tag: "Documentation"
   text: Learn how to setup APM tracing with your application
 - link: "tracing/visualization/services_list/"

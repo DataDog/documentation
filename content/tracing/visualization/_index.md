@@ -5,7 +5,7 @@ aliases:
   - /tracing/terminology/
   - /tracing/faq/what-is-the-difference-between-type-service-resource-and-name
 further_reading:
-- link: "tracing/setup/"
+- link: "agent/apm/"
   tag: "Documentation"
   text: Learn how to setup APM tracing with your application
 - link: "tracing/visualization/services_list/"
@@ -97,15 +97,15 @@ Spans are associated with a [service][8] and optionally a [resource][13]. Each s
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer/#service
-[2]: /tracing/setup/java/#configuration
+[2]: /agent/apm/java/#configuration
 [3]: http://pypi.datadoghq.com/trace/docs/index.html#getting-started
 [4]: http://www.rubydoc.info/gems/ddtrace/
 [5]: /developers/metrics/
 [6]: /monitors/monitor_types/apm/
 [7]: /tracing/visualization/services_list/
 [8]: /tracing/visualization/service
-[9]: /tracing/setup/go/
-[10]: /tracing/setup/python/
-[11]: /tracing/setup/ruby/
+[9]: /agent/apm/go/
+[10]: /agent/apm/python/
+[11]: /agent/apm/ruby/
 [12]: /tracing/faq/how-to-create-a-monitor-over-every-resource-apm
 [13]: /tracing/visualization/resource

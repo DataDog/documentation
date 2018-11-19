@@ -10,6 +10,8 @@ further_reading:
 - link: "tracing/visualization/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
+aliases:
+  - /agent/apm/docker
 ---
 
 Enable the [datadog-trace-agent][1] in the `datadog/agent` container by passing `DD_APM_ENABLED=true` as an environment variable.
@@ -163,5 +165,5 @@ tracer.configure(hostname='172.17.0.1', port=8126)
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/datadog-trace-agent
-[2]: /agent/basic_agent_usage/docker
+[2]: /agent/docker
 [3]: https://app.datadoghq.com/account/settings#api

@@ -2,7 +2,7 @@
 title: Nommage des métriques de Trace
 kind: documentation
 further_reading:
-- link: "tracing/setup/"
+- link: "agent/apm/"
   tag: "Documentation"
   text: Découvrez comment configurer Tracing d'APM avec votre application
 - link: "tracing/visualization/services_list/"

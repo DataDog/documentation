@@ -261,7 +261,7 @@ For more details about how to activate and configure the processing pipeline, ch
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/setup
-[2]: /tracing/setup/docker/
+[2]: //agent/docker/apm/
 [3]: https://app.datadoghq.com/apm/services
 [4]: https://docs.datadoghq.com/tracing/visualization/
 [6]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#tracer-settings

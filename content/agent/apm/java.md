@@ -18,7 +18,7 @@ further_reading:
 
 ## Installation and Getting Started
 
-To begin tracing applications written in any language, first [install and configure the Datadog Agent][3] (see additional documentation for [tracing Docker applications](/tracing/setup/docker/)).
+To begin tracing applications written in any language, first [install and configure the Datadog Agent][3] (see additional documentation for [tracing Docker applications](//agent/docker/apm/)).
 
 Next, download `dd-java-agent.jar` that contains the Agent class files:
 
@@ -172,7 +172,7 @@ The tracer is configured using System Properties and Environment Variables as fo
 | `jmxfetch.statsd.host`          | `dd.jmxfetch.statsd.host`          | `DD_JMXFETCH_STATSD_HOST`          | same as `agent.host` | Statsd host to send JMX metrics to.                                                                                                                                                                                     |
 | `jmxfetch.statsd.port`          | `dd.jmxfetch.statsd.port`          | `DD_JMXFETCH_STATSD_PORT`          | 8125                 | Statsd port to send JMX metrics to.                                                                                                                                                                                     |
 
-[1]: https://docs.datadoghq.com/tracing/setup/docker/
+[1]: https://docs.datadoghq.com//agent/docker/apm/
 [2]: http://localhost:1313/tracing/advanced_usage/?tab=java#distributed-tracing
 [3]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
 {{% /table %}}

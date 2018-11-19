@@ -26,6 +26,7 @@ private: true
 * [Starting Datadog Agent (using supervisord):Error: Cannot open an HTTP server: socket.error reported errno.EACCES (13)][16]
 * [Why don't I see the 'system.processes.open_file_descriptors' metric?][17]
 * [How is the 'system.mem.used' metric calculated?][18]
+* [Adding a custom Python package to the Agent][24]
 
 [1]: /agent/faq/getting-further-with-docker
 [2]: /agent/faq/docker-jmx
@@ -49,3 +50,4 @@ private: true
 [20]: /agent/faq/agent-5-vs-agent-6-for-docker-kubernetes
 [22]: /agent/faq/upgrade-to-agent-v6
 [23]: /agent/faq/downgrade-datadog-agent
+[24]: /agent/faq/custom-python-package

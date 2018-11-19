@@ -9,7 +9,7 @@ aliases:
   - tracing/search
   - /tracing/getting_further/apm_events/
 further_reading:
-- link: "tracing/setup/"
+- link: "agent/apm/"
   tag: "Documentation"
   text: Learn how to setup APM tracing with your application
 - link: "tracing/visualization/services_list/"

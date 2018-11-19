@@ -27,7 +27,7 @@ For a description of the terminology used in APM, take a look at the [Getting st
 Consult the [migration document][migrating] if you need to migrate from an older version of the tracer (e.g. v<0.6.x) to newest version.
 
 ### Installation
-First [install and configure the Datadog Agent][1] (see additional documentation for [tracing Docker applications](/tracing/setup/docker/)).
+First [install and configure the Datadog Agent][1] (see additional documentation for [tracing Docker applications](//agent/docker/apm/)).
 
 Next, install the Go tracer from its canonical import path:
 

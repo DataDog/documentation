@@ -4,7 +4,7 @@ kind: Documentation
 aliases:
 - /tracing/nodejs/
 - /tracing/languages/nodejs/
-- /tracing/setup/javascript/
+- /agent/apm/javascript/
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-js"
   tag: "Github"
@@ -144,9 +144,9 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 [visualization docs]: https://docs.datadoghq.com/tracing/visualization/
 [development docs]: https://github.com/DataDog/dd-trace-js/blob/master/README.md#development
-[1]: /tracing/setup/
+[1]: /agent/apm/
 [2]: https://datadog.github.io/dd-trace-js/
-[3]: /tracing/setup/docker/
+[3]: //agent/docker/apm/
 [4]: https://datadog.github.io/dd-trace-js/#tracer-settings
 [6]: https://datadog.github.io/dd-trace-js/#integrations
 [7]: https://docs.datadoghq.com/help

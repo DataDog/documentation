@@ -32,13 +32,13 @@ For additional information, reference [the Docker page][6].
 ### Instrument your application
 
 {{< whatsnext desc="Select one of the following supported languages:">}}
-    {{< nextlink href="tracing/setup/java" tag="Java" >}}Java language instrumentation.{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/python" tag="Python" >}}Python language instrumentation.{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/ruby" tag="Ruby" >}}Ruby language instrumentation{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/go" tag="Go" >}}Go language instrumentation.{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/nodejs" tag="Nodejs" >}}Node.js language instrumentation.{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/dotnet" tag=".NET" >}}.NET language instrumentation.{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/php" tag="PHP" >}}PHP language instrumentation.{{< /nextlink >}}
+    {{< nextlink href="agent/apm/java" tag="Java" >}}Java language instrumentation.{{< /nextlink >}}
+    {{< nextlink href="agent/apm/python" tag="Python" >}}Python language instrumentation.{{< /nextlink >}}
+    {{< nextlink href="agent/apm/ruby" tag="Ruby" >}}Ruby language instrumentation{{< /nextlink >}}
+    {{< nextlink href="agent/apm/go" tag="Go" >}}Go language instrumentation.{{< /nextlink >}}
+    {{< nextlink href="agent/apm/nodejs" tag="Nodejs" >}}Node.js language instrumentation.{{< /nextlink >}}
+    {{< nextlink href="agent/apm/dotnet" tag=".NET" >}}.NET language instrumentation.{{< /nextlink >}}
+    {{< nextlink href="agent/apm/php" tag="PHP" >}}PHP language instrumentation.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 To instrument an application written in a language that does not yet have official library support, reference the [Tracing API][11].
@@ -86,4 +86,4 @@ Need help? Contact [Datadog support][17].
 [15]: http://chat.datadoghq.com
 [16]: /developers/libraries/#community-tracing-apm-libraries
 [17]: https://docs.datadoghq.com/help/
-[18]: /tracing/setup/?tab=agent5250#trace-search
+[18]: /agent/apm/?tab=agent5250#trace-search

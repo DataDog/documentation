@@ -2,7 +2,7 @@
 title: Services list
 kind: Documentation
 further_reading:
-- link: "tracing/setup/"
+- link: "agent/apm/"
   tag: "Documentation"
   text: Learn how to setup APM tracing with your application
 - link: "tracing/visualization/service"
@@ -74,9 +74,9 @@ Choose what to display in your services list:
 [1]: /tracing/setup
 [2]: https://app.datadoghq.com/apm/services
 [3]: /tracing/visualization/service
-[4]: /tracing/setup/first_class_dimensions#environment
+[4]: /agent/apm/first_class_dimensions#environment
 [5]: /tracing/visualization/trace/#spans
 [6]: /tracing/visualization/trace
 [7]: /tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm
 [8]: /tracing/visualization/service/#service-monitor
-[9]: /tracing/setup/first_class_dimensions#primary-tag
+[9]: /agent/apm/first_class_dimensions#primary-tag

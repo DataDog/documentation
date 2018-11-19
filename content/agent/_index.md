@@ -112,7 +112,7 @@ Once the Agent is running, use the `datadog-agent launch-gui` command to launch 
 [11]: /agent/basic_agent_usage/fedora
 [12]: /agent/basic_agent_usage/osx
 [13]: /agent/basic_agent_usage/windows
-[14]: /agent/basic_agent_usage/docker
+[14]: /agent/docker
 [15]: /agent/basic_agent_usage/kubernetes
 [16]: /agent/basic_agent_usage/source
 
@@ -141,7 +141,7 @@ Once the Agent is running, use the `datadog-agent launch-gui` command to launch 
 [11]: /agent/basic_agent_usage/fedora
 [12]: /agent/basic_agent_usage/osx
 [13]: /agent/basic_agent_usage/windows
-[14]: /agent/basic_agent_usage/docker
+[14]: /agent/docker
 [15]: /agent/basic_agent_usage/kubernetes
 [16]: /agent/basic_agent_usage/source
 

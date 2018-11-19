@@ -5,7 +5,7 @@ description: "The Service Map visualizes data that is being collected by Datadog
 aliases:
   - /tracing/servicemap
 further_reading:
-- link: "tracing/setup/"
+- link: "agent/apm/"
   tag: "Documentation"
   text: Learn how to setup APM tracing with your application
 - link: "tracing/visualization/services_list/"
@@ -91,5 +91,5 @@ If a monitor is enabled for a service, the circumference has a weighted border c
 
 Monitors are not constrained to APM monitors; the service tag, described above, can be used to associate any monitor type with a service
 
-[1]: https://docs.datadoghq.com/tracing/setup/first_class_dimensions/
+[1]: https://docs.datadoghq.com/agent/apm/first_class_dimensions/
 [2]: https://app.datadoghq.com/apm/services

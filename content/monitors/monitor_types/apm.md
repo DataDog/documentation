@@ -34,6 +34,6 @@ These work just like regular [metric monitors][1] - but with controls tailored s
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/monitor_types/metric
-[2]: /tracing/setup/first_class_dimensions#environment
+[2]: /agent/apm/first_class_dimensions#environment
 [3]: /tracing/visualization/service
 [4]: /monitors/notifications

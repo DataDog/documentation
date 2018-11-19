@@ -66,7 +66,7 @@ Follow the instructions for the [Docker Agent][11], passing in the following att
 * To collect container information in the standard install, the `dd-agent` user needs to have permissions to access `docker.sock`.
 * Running the Agent as container still allows you to collect host processes.
 
-[11]: /agent/basic_agent_usage/docker/#run-the-docker-agent
+[11]: /agent/docker/#run-the-docker-agent
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -91,7 +91,7 @@ Refer to the standard [DaemonSet installation][13] and the [Docker Agent][11] in
 
 **Note**: Running the Agent as container still allows you to collect host processes.
 
-[11]: /agent/basic_agent_usage/docker/#run-the-docker-agent
+[11]: /agent/docker/#run-the-docker-agent
 [12]: https://app.datadoghq.com/account/settings#agent/kubernetes
 [13]: /integrations/kubernetes/#installation-via-daemonsets-kubernetes-110
 

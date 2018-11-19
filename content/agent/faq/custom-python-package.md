@@ -11,6 +11,8 @@ further_reading:
 - link: "tracing"
   tag: "Documentation"
   text: Collect your traces
+aliases:
+    - /agent/custom_python_package
 ---
 
 {{< tabs >}}

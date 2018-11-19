@@ -132,4 +132,4 @@ See the instructions on how to [add packages to the embedded Agent][5] for more 
 [2]: /integrations
 [3]: /help
 [4]: https://github.com/DataDog/datadog-agent/releases
-[5]: /agent/custom_python_package
+[5]: /agent/faq/custom-python-package

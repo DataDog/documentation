@@ -124,6 +124,69 @@ languages:
           weight: 170
           parent: customnav_agentnav_basic_usage
 
+        ## TRACING/APM - Setup basic
+        - identifier: customnav_tracingnav_setup
+          name: "Setup"
+          url: "agent/apm/"
+          weight: 13
+          parent: menu_references_tracing
+
+        - identifier: customnav_tracingnav_kubernetes
+          name: "Kubernetes"
+          url: "agent/apm/kubernetes/"
+          weight: 1510
+          parent: customnav_tracingnav_setup
+        - identifier: customnav_tracingnav_java
+          name: "Java"
+          url: "agent/apm/java/"
+          weight: 1520
+          parent: customnav_tracingnav_setup
+        - identifier: customnav_tracingnav_python
+          name: "Python"
+          url: "agent/apm/python/"
+          weight: 1530
+          parent: customnav_tracingnav_setup
+        - identifier: customnav_tracingnav_ruby
+          name: "Ruby"
+          url: "agent/apm/ruby/"
+          weight: 1540
+          parent: customnav_tracingnav_setup
+        - identifier: customnav_tracingnav_go
+          name: "Go"
+          url: "agent/apm/go/"
+          weight: 1550
+          parent: customnav_tracingnav_setup
+        - identifier: customnav_tracingnav_javascript
+          name: "Node.js"
+          url: "agent/apm/nodejs/"
+          weight: 1560
+          parent: customnav_tracingnav_setup
+        - identifier: customnav_tracingnav_dotnet
+          name: ".NET"
+          url: "agent/apm/dotnet/"
+          weight: 1570
+          parent: customnav_tracingnav_setup
+        - identifier: customnav_tracingnav_php
+          name: "PHP"
+          url: "agent/apm/php/"
+          weight: 1580
+          parent: customnav_tracingnav_setup
+
+        ## Docker
+
+        - identifier: agent_docker
+          name: "Docker"
+          url: "agent/docker/"
+          weight: 14
+          parent: menu_references_agent
+
+        - identifier: docker_apm
+          name: "APM"
+          url: "agent/docker/apm"
+          weight: 14
+          parent: agent_docker
+
+        ## Kubernetes
 
         - identifier: kubernetes
           name: "Kubernetes"
@@ -191,11 +254,6 @@ languages:
           name: "Prometheus Checks"
           url: "agent/prometheus"
           weight: 60
-          parent: menu_references_agent
-        - identifier: custom_python_package
-          name: "Adding Python packages"
-          url: "agent/custom_python_package"
-          weight: 70
           parent: menu_references_agent
 
         ## Upgrade to Agent v6
@@ -538,59 +596,6 @@ languages:
           url: "tracing/"
           pre: "nav_tracing"
           weight: 80
-
-        # TRACING/APM - Setup basic
-        - identifier: customnav_tracingnav_setup
-          name: "Setup"
-          url: "tracing/setup/"
-          weight: 10
-          parent: menu_references_tracing
-
-        - identifier: customnav_tracingnav_docker
-          name: "Docker"
-          url: "tracing/setup/docker/"
-          weight: 120
-          parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_kubernetes
-          name: "Kubernetes"
-          url: "tracing/setup/kubernetes/"
-          weight: 130
-          parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_java
-          name: "Java"
-          url: "tracing/setup/java/"
-          weight: 140
-          parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_python
-          name: "Python"
-          url: "tracing/setup/python/"
-          weight: 150
-          parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_ruby
-          name: "Ruby"
-          url: "tracing/setup/ruby/"
-          weight: 160
-          parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_go
-          name: "Go"
-          url: "tracing/setup/go/"
-          weight: 170
-          parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_javascript
-          name: "Node.js"
-          url: "tracing/setup/nodejs/"
-          weight: 180
-          parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_dotnet
-          name: ".NET"
-          url: "tracing/setup/dotnet/"
-          weight: 190
-          parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_php
-          name: "PHP"
-          url: "tracing/setup/php/"
-          weight: 195
-          parent: customnav_tracingnav_setup
 
         # TRACING/APM - Setup Advanced
 
@@ -1212,11 +1217,6 @@ languages:
           url: "agent/basic_agent_usage/deb/"
           weight: 120
           parent: customnav_agentnav_basic_usage
-        - identifier: customnav_agentnav_docker
-          name: "Docker"
-          url: "agent/basic_agent_usage/docker/"
-          weight: 125
-          parent: customnav_agentnav_basic_usage
         - identifier: fedora
           name: "Fedora"
           url: "agent/basic_agent_usage/fedora/"
@@ -1258,6 +1258,67 @@ languages:
           weight: 165
           parent: customnav_agentnav_basic_usage
 
+        ## TRACING/APM - Setup basic
+        - identifier: customnav_tracingnav_setup
+          name: "Setup"
+          url: "agent/apm/"
+          weight: 13
+          parent: menu_references_tracing
+
+        - identifier: customnav_tracingnav_kubernetes
+          name: "Kubernetes"
+          url: "agent/apm/kubernetes/"
+          weight: 1510
+          parent: customnav_tracingnav_setup
+        - identifier: customnav_tracingnav_java
+          name: "Java"
+          url: "agent/apm/java/"
+          weight: 1520
+          parent: customnav_tracingnav_setup
+        - identifier: customnav_tracingnav_python
+          name: "Python"
+          url: "agent/apm/python/"
+          weight: 1530
+          parent: customnav_tracingnav_setup
+        - identifier: customnav_tracingnav_ruby
+          name: "Ruby"
+          url: "agent/apm/ruby/"
+          weight: 1540
+          parent: customnav_tracingnav_setup
+        - identifier: customnav_tracingnav_go
+          name: "Go"
+          url: "agent/apm/go/"
+          weight: 1550
+          parent: customnav_tracingnav_setup
+        - identifier: customnav_tracingnav_javascript
+          name: "Node.js"
+          url: "agent/apm/nodejs/"
+          weight: 1560
+          parent: customnav_tracingnav_setup
+        - identifier: customnav_tracingnav_dotnet
+          name: ".NET"
+          url: "agent/apm/dotnet/"
+          weight: 1570
+          parent: customnav_tracingnav_setup
+        - identifier: customnav_tracingnav_php
+          name: "PHP"
+          url: "agent/apm/php/"
+          weight: 1580
+          parent: customnav_tracingnav_setup
+
+        ## Docker
+
+        - identifier: agent_docker
+          name: "Docker"
+          url: "agent/docker/"
+          weight: 14
+          parent: menu_references_agent
+
+        - identifier: docker_apm
+          name: "APM"
+          url: "agent/docker/apm"
+          weight: 14
+          parent: agent_docker
 
         - identifier: autodiscovery
           name: "Autodiscovery"
@@ -1278,11 +1339,6 @@ languages:
           name: "Check Prometheus"
           url: "agent/prometheus"
           weight: 60
-          parent: menu_references_agent
-        - identifier: custom_python_package
-          name: "Ajouter des package Python"
-          url: "agent/custom_python_package"
-          weight: 70
           parent: menu_references_agent
 
         ## Upgrade to Agent v6
@@ -1597,59 +1653,6 @@ languages:
           url: "tracing/"
           pre: "nav_tracing"
           weight: 80
-
-        # TRACING/APM - Setup basic
-        - identifier: customnav_tracingnav_setup
-          name: "Getting Started"
-          url: "tracing/setup/"
-          weight: 10
-          parent: menu_references_tracing
-
-        - identifier: customnav_tracingnav_docker
-          name: "Docker"
-          url: "tracing/setup/docker/"
-          weight: 120
-          parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_kubernetes
-          name: "Kubernetes"
-          url: "tracing/setup/kubernetes/"
-          weight: 130
-          parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_java
-          name: "Java"
-          url: "tracing/setup/java/"
-          weight: 140
-          parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_python
-          name: "Python"
-          url: "tracing/setup/python/"
-          weight: 150
-          parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_ruby
-          name: "Ruby"
-          url: "tracing/setup/ruby/"
-          weight: 160
-          parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_go
-          name: "Go"
-          url: "tracing/setup/go/"
-          weight: 170
-          parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_javascript
-          name: "Node.js"
-          url: "tracing/setup/nodejs/"
-          weight: 180
-          parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_dotnet
-          name: ".NET"
-          url: "tracing/setup/dotnet/"
-          weight: 190
-          parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_php
-          name: "PHP"
-          url: "tracing/setup/php/"
-          weight: 195
-          parent: customnav_tracingnav_setup
 
         # TRACING/APM - Setup Advanced
 

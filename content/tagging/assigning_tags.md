@@ -337,7 +337,7 @@ The following [integration][1] sources create tags automatically in Datadog:
 [20]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
 [21]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go
 [22]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go
-[23]: /agent/basic_agent_usage/docker/#tagging
+[23]: /agent/docker/#tagging
 [24]: /integrations/dyn
 [25]: /integrations/elastic
 [26]: /integrations/etcd
@@ -394,6 +394,6 @@ The following [integration][1] sources create tags automatically in Datadog:
 [77]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
 [78]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go
 [79]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go
-[80]: /agent/basic_agent_usage/docker/#environment-variables
+[80]: /agent/docker/#environment-variables
 [81]: /graphing/infrastructure/hostmap/
 [82]: /developers/dogstatsd/data_types/#host-tag-key

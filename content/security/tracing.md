@@ -66,7 +66,7 @@ If a customer requires tailored instrumentation for a specific application, they
 
 [0]: /security/
 [1]: /tracing/languages/
-[2]: /tracing/setup/#agent-configuration
+[2]: /agent/apm/#agent-configuration
 [3]: https://github.com/DataDog/dd-trace-java/blob/master/dd-trace-api/src/main/java/datadog/trace/api/interceptor/TraceInterceptor.java
 [4]: http://gems.datadoghq.com/trace/docs/#Processing_Pipeline
 [5]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#trace-filtering
