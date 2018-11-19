@@ -59,13 +59,13 @@ Set permissions as `644` in the log rotation configuration to make sure the Agen
 
 ## Configuration issues
 
-These are a few of the common configuration issues that are work triple-checking in your `datadog-agent` setup:
+These are a few of the common configuration issues that are worth triple-checking in your `datadog-agent` setup:
 
 1. Run the Agent status config to spot the major configuration issue: `datadog-agent status`.
 
 2. Check if the api_key is defined in `datadog.yaml`.
 
-3. By default the Agent do not collect any logs, make sure there is at least one .yaml file in the Agent's `conf.d/` directory that includes a logs section and the appropriate values.
+3. By default the Agent does not collect any logs, make sure there is at least one .yaml file in the Agent's `conf.d/` directory that includes a logs section and the appropriate values.
 
 4. You may have some .yaml parsing errors in your configuration files. Yaml is notoriously finicky, so when in doubt, a good [yaml validator][3] is worth referencing.
 
