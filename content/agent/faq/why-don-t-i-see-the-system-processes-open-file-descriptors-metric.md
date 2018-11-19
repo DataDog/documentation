@@ -25,11 +25,11 @@ If you are running Agent v6 less than 6.3, we recommend updating the Agent and u
 
 **NOTE**: We do not recommend running the Agent as `root`. This isn't specific to the Datadog Agent or due to any concern that something untrustworthy is happening in any way. Instead, we don't recommend running the daemon as `root` as this is best practice for most processes on Linux. If you have any personal cause for concern, the Agent is open source and may be audited by you or your team via the [GitHub repository][2].
 
-1. [Stop the agent][3]
+1. [Stop the Agent][3]
 
 2. Open `/etc/systemd/system/multi-user.target.wants/datadog-agent.service` and change the `user​` attribute under `[Service]`
 
-3. [Start the agent][4]
+3. [Start the Agent][4]
 
 [2]: https://github.com/DataDog/datadog-agent
 [3]: /agent/faq/agent-commands/?tab=agentv6#stop-the-agent
@@ -42,7 +42,7 @@ If you are running Agent v5, we recommend updating to the latest version of Agen
 
 **NOTE**: We do not recommend running the Agent as `root`. This isn't specific to the Datadog Agent or due to any concern that something untrustworthy is happening in any way. Instead, we don't recommend running the daemon as `root` as this is best practice for most processes on Linux. If you have any personal cause for concern, the Agent is open source and may be audited by you or your team via the [GitHub repository][5].
 
-1. [Stop the agent][6]
+1. [Stop the Agent][6]
 
 2. Open `/etc/dd-agent/supervisor.conf` and replace `dd-agent` with `root` on [line 20][7] and [line 30][8]. Do this again if you upgrade or reinstall the agent.
 
