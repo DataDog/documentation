@@ -20,11 +20,11 @@ There are a number of common issues that can get in the way when [sending new lo
 
 ## The Agent needs to be restarted
 
-After you've made any configuration changes to the `datadog-agent`, the changes only take effect after you restart the dd-agent.
+After you've made any configuration changes to the `datadog-agent`, the changes only take effect after you restart the Datadog Agent.
 
 ## Outbound traffic on port 10516 is blocked
 
-The log-agent within the `datadog-agent` sends its logs to Datadog over tcp via port 10516. If that connection is not available, logs fail to be sent and an error is recorded in the `agent.log` file to that effect.
+The Datadog Agent sends its logs to Datadog over tcp via port 10516. If that connection is not available, logs fail to be sent and an error is recorded in the `agent.log` file to that effect.
 
 Test manually your connection by running a telnet or openssl command like so (port 10514 would work too, but is less secure):
 
@@ -37,9 +37,16 @@ And then by sending a log like the following:
 <API_KEY> this is a test message
 ```
 
+- If opening the port 10514 or 10516 is not an option, it is possible to ask the Datadog Agent to use the port `443` to forward them (only available with the Datadog Agent) by adding the following in `datadog.yaml`:
+
+```
+logs_config:
+  use_port_443: true
+```
+
 ## No new logs have been written
 
-The `datadog-agent` only collects logs that have been written after it has started trying to collect them (whether it be tailing or listening for them). In order to confirm whether log collection has been successfully set up, make sure that new logs have been written.
+The Datadog Agent only collects logs that have been written after it has started trying to collect them (whether it be tailing or listening for them). In order to confirm whether log collection has been successfully set up, make sure that new logs have been written.
 
 ## Permission Issues While Tailing Log Files
 
@@ -72,6 +79,41 @@ There might be an error in the logs that would explain the issue. So just run th
 sudo cat /var/log/datadog/agent.log | grep logs
 ```
 
+## Docker environment
+
+### Log collection is not enabled
+
+1. Make sure the Datadog Agent has access to the Docker socket 
+2. Check if the Agent user is in the Docker group: `usermod -a -G docker dd-agent`
+3. Check if log collection has been enabled `DD_LOGS_ENABLED=true`
+
+### Configuration issues
+
+At least one valid log configuration must be set to start log collection. There are several options to configure log collection; ensure that at least one of them is activated:
+
+1. `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true`, which collects logs from all containers (see [here how to exclude a subset][4])
+https://docs.datadoghq.com/logs/log_collection/docker/?tab=containerinstallation
+
+2. Autodiscovery via [container labels][5]. In this case, ensure that `datadog.yaml` has Docker listener and config provider:
+
+```
+listeners:
+  - name: docker
+config_providers:
+  - name: docker
+    polling: true
+```
+
+3. Autodiscovery in Kubernetes via [pod annotations][6]. In this case, ensure that `datadog.yaml` has the kubelet listener and config provider:
+
+```
+listeners:
+  - name: kubelet
+config_providers:
+  - name: kubelet
+    polling: true
+```
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -79,3 +121,6 @@ sudo cat /var/log/datadog/agent.log | grep logs
 [1]: /logs/
 [2]: /help
 [3]: https://codebeautify.org/yaml-validator
+[4]: https://docs.datadoghq.com/logs/log_collection/docker/?tab=containerinstallation#filter-containers
+[5]: https://docs.datadoghq.com/logs/log_collection/docker/?tab=dockerfile#examples
+[6]: https://docs.datadoghq.com/agent/autodiscovery/?tab=kubernetes#setting-up-check-templates
