@@ -57,8 +57,7 @@ languages:
           url: "agent/"
           pre: "nav_agent"
           weight: 40
-
-        ## Basic Agent usage
+        ## Basic Agent usage  
         - identifier: customnav_agentnav_basic_usage
           name: "Basic Agent Usage"
           url: "agent/basic_agent_usage/"
@@ -197,6 +196,13 @@ languages:
           name: "Adding Python packages"
           url: "agent/custom_python_package"
           weight: 70
+          parent: menu_references_agent
+
+        ## Upgrade to Agent v6
+        - identifier: customnav_agentnav_upgrade_agent_6
+          name: "Upgrade to Agent v6"
+          url: "agent/faq/upgrade-to-agent-v6"
+          weight: 55
           parent: menu_references_agent
 
         # Troubleshooting
@@ -1277,6 +1283,13 @@ languages:
           name: "Ajouter des package Python"
           url: "agent/custom_python_package"
           weight: 70
+          parent: menu_references_agent
+
+        ## Upgrade to Agent v6
+        - identifier: customnav_agentnav_upgrade_agent_6
+          name: "Upgrade to Agent v6"
+          url: "agent/faq/upgrade-to-agent-v6"
+          weight: 55
           parent: menu_references_agent
 
         # Troubleshooting

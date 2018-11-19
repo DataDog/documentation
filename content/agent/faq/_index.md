@@ -4,27 +4,21 @@ kind: faq
 private: true
 ---
 
-## General 
-
 * [Getting further with Docker][1]
 * [Docker JMX][2]
 * [Dogstream][3]
 * [Install core extras][4]
 * [Agent commands][5]
 * [Agent configuration files][19]
+* [Upgrade to Agent v6][22]
+* [Downgrade the Agent to a prior minor version][23]
 * [How does Datadog determine the Agent hostname?][6]
 * [Comparing Agent 5 and Agent 6 for Containerized Environments (Docker and Kubernetes)][20]
-
-## Installation
-
 * [Common Windows Agent Installation Error 1721][7]
 * [How do I install the Agent on a server with limited internet connectivity?][8]
 * [How to monitor SNMP devices?][9]
 * [I stopped my Agent but I'm still seeing the host in my Datadog account.][10]
 * [How do I uninstall the Agent?][11]
-
-## Troubleshooting
-
 * [Network Time Protocol (NTP) Offset Issues][12]
 * [How to solve Permission denied errors?][13]
 * [Error Restarting Agent: Already Listening on a Configured Port][14]
@@ -53,3 +47,5 @@ private: true
 [18]: /agent/faq/how-is-the-system-mem-used-metric-calculated
 [19]: /agent/faq/agent-configuration-files
 [20]: /agent/faq/agent-5-vs-agent-6-for-docker-kubernetes
+[22]: /agent/faq/upgrade-to-agent-v6
+[23]: /agent/faq/downgrade-datadog-agent
