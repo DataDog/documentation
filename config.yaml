@@ -129,7 +129,7 @@ languages:
           name: "Setup"
           url: "agent/apm/"
           weight: 13
-          parent: menu_references_tracing
+          parent: menu_references_agent
 
         - identifier: customnav_tracingnav_java
           name: "Java"
@@ -1263,7 +1263,7 @@ languages:
           name: "Setup"
           url: "agent/apm/"
           weight: 13
-          parent: menu_references_tracing
+          parent: menu_references_agent
 
         - identifier: customnav_tracingnav_java
           name: "Java"
