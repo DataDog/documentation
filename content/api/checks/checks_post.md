@@ -5,7 +5,7 @@ order: 6.1
 external_redirect: /api/#post-a-check-run
 ---
 
-## Post A check run
+## Post a check run
 
 ##### ARGUMENTS
 

@@ -9,6 +9,6 @@ initialize(**options)
 check = 'app.ok'
 host = 'app1'
 status = CheckStatus.OK  # equals 0
+tags = ['env:test']
 
-api.ServiceCheck.check(check=check, host_name=host, status=status,
-                       message='Response: 200 OK')
+api.ServiceCheck.check(check=check, host_name=host, status=status, message='Response: 200 OK', tags=tags)

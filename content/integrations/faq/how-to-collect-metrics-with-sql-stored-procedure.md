@@ -12,14 +12,14 @@ further_reading:
 
 ## Setup a Stored Procedure
 
-A temporary table must be setup to collect the custom metrics for reporting to Datadog. The table needs following columns:
+A temporary table must be setup to collect the custom metrics for reporting to Datadog. The table needs the following columns:
 
 | Column | Description                                                                                                                 |
 | -----  | ----                                                                                                                        |
 | metric | The name of the metric as it appears in Datadog.                                                                            |
-| type   | The [metric type][1] (gauge, rate, count, or [histogram][2]. |
+| type   | The [metric type][1] (gauge, rate, or [histogram][2]). |
 | value  | The value of the metric (must be convertible to a float).                                                                   |
-| tags   | The tags that will appear in Datadog separated by a comma.                                                                  |
+| tags   | The tags that appear in Datadog separated by a comma.                                                                  |
 
 The following stored procedure is created within the master database:
 

@@ -19,6 +19,7 @@ content/integrations/*.md
 !content/integrations/cloud_foundry.md
 !content/integrations/azure_dbformysql.md
 !content/integrations/azure_dbforpostgresql.md
+!content/integrations/adobe_experience_manager.md
 
 # Ignoring all automated content
 # Developers/integrations
@@ -101,6 +102,7 @@ Temporary Items
 
 # virtual env
 /hugpython/
+.python-version
 
 /DataDog-dogweb-*/
 Makefile.config

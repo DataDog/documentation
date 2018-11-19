@@ -65,7 +65,7 @@ To schedule downtime, click the "Schedule Downtime" button in the upper right.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadog.com/monitors#/downtime
+[1]: https://app.datadoghq.com/monitors#/downtime
 [2]: /graphing/graphing_json/#scope
 [3]: http://daringfireball.net/projects/markdown/syntax
 [4]: https://app.datadoghq.com/account/settings#integrations

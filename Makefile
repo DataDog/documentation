@@ -59,6 +59,7 @@ clean-integrations:  ## remove built integrations files.
 	    -exec rm -rf {} \; ;fi
 	@find ./content/integrations -type f -maxdepth 1 \
 	    -a -not -name '_index.md' \
+			-a -not -name 'adobe_experience_manager.md' \
 	    -a -not -name 'amazon_guardduty.md' \
 	    -a -not -name 'amazon_vpc.md' \
 	    -a -not -name 'azure_dbformysql.md' \
@@ -126,7 +127,7 @@ hugpython: hugpython/bin/activate  ## build virtualenv used for tests.
 
 hugpython/bin/activate: local/etc/requirements3.txt  ## start python virtual environment.
 	@if [ ${PY3} != "false" ]; then \
-		test -d ${VIRENV} || ${PY3} -m venv ${VIRENV}; \
+		test -x ${VIRENV}/bin/pip || ${PY3} -m venv --clear ${VIRENV}; \
 		$(VIRENV)/bin/pip install -r local/etc/requirements3.txt; \
 	else printf "\e[93mPython 3 is required to fetch integrations and run tests.\033[0m Try https://github.com/pyenv/pyenv.\n"; fi
 
