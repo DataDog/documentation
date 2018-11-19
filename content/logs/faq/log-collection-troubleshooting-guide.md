@@ -84,17 +84,17 @@ sudo cat /var/log/datadog/agent.log | grep logs
 ### Log collection is not enabled
 
 1. Make sure the Datadog Agent has access to the Docker socket 
-2. Check if the Agent user is in the docker group: `usermod -a -G docker dd-agent`
-3. Check that log collection has been enabled `DD_LOGS_ENABLED=true`
+2. Check if the Agent user is in the Docker group: `usermod -a -G docker dd-agent`
+3. Check if log collection has been enabled `DD_LOGS_ENABLED=true`
 
 ### Configuration issues
 
-At least one valid log configuration must be set to start the log collection. There are several options to configure log collection so make sure that at least one of them is activated:
+At least one valid log configuration must be set to start log collection. There are several options to configure log collection; ensure that at least one of them is activated:
 
-1. `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true` that collect logs from all container (see [here how to exclude a subset][4])
+1. `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true`, which collects logs from all containers (see [here how to exclude a subset][4])
 https://docs.datadoghq.com/logs/log_collection/docker/?tab=containerinstallation
 
-2. With the autodiscovery thanks to [Container label][5]. In this case make sure that in your `datadog.yaml` you do have the docker listener and config provider:
+2. Autodiscovery via [container labels][5]. In this case, ensure that `datadog.yaml` has Docker listener and config provider:
 
 ```
 listeners:
@@ -104,7 +104,7 @@ config_providers:
     polling: true
 ```
 
-3. With the autodiscovery in Kubernetes thanks to [Pod annotations][6]. In this case make sure that in your `datadog.yaml` you do hace the kubelet listener and config provider:
+3. Autodiscovery in Kubernetes via [pod annotations][6]. In this case, ensure that `datadog.yaml` has the kubelet listener and config provider:
 
 ```
 listeners:
