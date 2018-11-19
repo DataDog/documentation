@@ -19,7 +19,7 @@ Agent 6 is the latest major version of the Datadog Agent. The big difference bet
 
 * Agent 6 uses ports `5000` and `5001` by default. You can specify different ports for `expvar_port` and `cmd_port` in the `datadog.yaml` file.
 
-* Custom build your Agent v6 and [DogStatsD][6] much easier and with much more configuration options, to include or exclude almost anything. There is also a "puppy" Agent, which is a truly minimal installation.
+* Custom build your Agent v6 and [DogStatsD][6] much easier and with many more configuration options, to include or exclude almost anything. There is also a "puppy" Agent, a minimal installation.
 
 ### Agent v6 new functionalities
 
@@ -37,7 +37,7 @@ To see all changes between Agent v5 and v6, consult the [Datadog Agent dedicated
 
 ## Upgrade to Agent 6
 
-If you have Agent v5 already installed a script is available to automatically install or upgrade to the new Agent. It sets up the package repositories and installs the Agent package for you. When upgrading, the import tool also searches for an existing `datadog.conf` from a prior version, and converts Agent and Check configurations according to the new v6 format. Select your platform to get specific instructions:
+If you have Agent v5 already installed, a script is available to automatically install or upgrade to the new Agent. It sets up the package repositories and installs the Agent package for you. When upgrading, the import tool also searches for an existing `datadog.conf` from a prior version, and converts Agent and Check configurations according to the new v6 format. Select your platform for specific instructions:
 
 * [Amazon Linux](#amazon-linux)
 * [CentOS](#centos)
@@ -82,7 +82,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dat
     sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_API_KEY>/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
     ```
 
-4. Transition your Agent configuration paths and formats from Agent v5 to Agent v6, with the `import` command. The command parses an existing v5 `datadog.conf` and converts the configuration options to the new v6 `datadog.yaml` format. It also copies configuration files for checks that are currently enabled:
+4. Transition your Agent configuration paths and formats from Agent v5 to Agent v6 with the `import` command. The command parses an existing v5 `datadog.conf` and converts the configuration options to the new v6 `datadog.yaml` format. It also copies configuration files for checks that are currently enabled:
     ```
     sudo -u dd-agent -- datadog-agent import /etc/dd-agent/ /etc/datadog-agent/
     ```
