@@ -23,7 +23,7 @@ With Autodiscovery enabled, the Agent runs checks differently.
 
 ### Different Configuration
 
-Static configuration files aren't suitable for checks that collect data from ever-changing network endpoints, so Autodiscovery uses **templates** for check configuration. In each template, the Agent looks for two template variables-`%%host%%` and `%%port%%`-to appear in place of any normally-hardcoded network options. For example: a template for the Agent's [Go Expvar check][2] would contain the option `expvar_url: http://%%host%%:%%port%%`. For containers that have more than one IP address or exposed port, you can direct Autodiscovery to pick the right ones by using [template variable indexes](#template-variable-indexes).
+Static configuration files aren't suitable for checks that collect data from ever-changing network endpoints, so Autodiscovery uses **templates** for check configuration. In each template, the Agent looks for two template variables—`%%host%%` and `%%port%%`—to appear in place of any normally-hardcoded network options. For example: a template for the Agent's [Go Expvar check][2] contains the option `expvar_url: http://%%host%%:%%port%%`. For containers that have more than one IP address or exposed port, you can direct Autodiscovery to pick the right ones by using [template variable indexes](#supported-template-variables).
 
 Because templates don't identify specific instances of a monitored service-which `%%host%%`? which `%%port%%`?-Autodiscovery needs one or more **container identifiers** for each template so it can determine which IP(s) and Port(s) to substitute into the templates. For Docker, container identifiers are image names or container labels.
 
@@ -85,7 +85,7 @@ The Agent looks for Autodiscovery templates in its `conf.d/auto_conf` directory,
 - [Redis][21]
 - [Riak][22]
 
-These templates may suit you in basic cases, but if you need to use custom Agent check configurations-say you want to enable extra check options, use different container identifiers, or use [template variable indexing](#template-variable-indexes))- you'll have to write your own auto-conf files. You can then provide those in a few ways:
+These templates may suit you in basic cases, but if you need to use custom Agent check configurations-say you want to enable extra check options, use different container identifiers, or use [template variable indexing](#supported-template-variables))- you'll have to write your own auto-conf files. You can then provide those in a few ways:
 
 1. Add them to each host that runs docker-dd-agent and [mount the directory that contains them][6] into the docker-dd-agent container when starting it
 2. Build your own docker image based on docker-dd-agent, adding your custom templates to `/etc/dd-agent/conf.d/auto_conf`
@@ -320,11 +320,24 @@ LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%/nginx
 
 ## Reference
 
-### Template Variable Indexes
+### Supported Template Variables
 
-For containers that have many IP addresses or expose many ports, you can tell Autodiscovery which ones to choose by appending an underscore to the template variable, followed by an integer, e.g. `%%host_0%%`, `%%port_4%%`. After inspecting the container, Autodiscovery sorts the IPs and ports **numerically and in ascending order**, so for a container that exposes ports 80, 443, and 8443, `%%port_0%%` refers to port 80. Non-indexed template variables refer to the last item in the sorted list, so in this case, `%%port%%` means port 8443.
+The following template variables are handled by the Agent:
 
-You can also add a network name suffix to the `%%host%%` variable-`%%host_bridge%%`, `%%host_swarm%%`, etc-for containers attached to multiple networks. When `%%host%%` does not have a suffix, Autodiscovery picks the container's `bridge` network IP address.
+- Container IP: `host`
+  - `%%host%%`: auto-detect the network. Returns the `bridge` network IP if present; falls back to the last **sorted** network's IP.
+  - `%%host_<NETWORK NAME>%%`: specify the network name to use when attached to multiple networks (e.g. `%%host_bridge%%`, `%%host_swarm%%`, ...); behaves like `%%host%%` if network name specified was not found.
+
+- Container port: `port`
+  - `%%port%%`: use the highest exposed port **sorted numerically and in ascending order** (eg. 8443 for a container that exposes ports 80, 443, and 8443)
+  - `%%port_0%%`: use the first port **sorted numerically and in ascending order** (for the same container, `%%port_0%%` refers to port 80, `%%port_1%%` refers to 443
+  - If your target port is constant, we recommend you directly specify it, without using the `port` variable
+
+- Container PID: `pid` (Added in 5.15.x)
+  - `%%pid%%`: retrieves the container process ID as returned by `docker inspect --format '{{.State.Pid}}' <container>`
+
+- Container name: `container_name` (Added in 5.15.x)
+  - `%%container_name%%`: retrieves the container name.
 
 ### Alternate Container Identifier: Labels
 
