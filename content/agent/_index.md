@@ -99,7 +99,7 @@ Once the Agent is running, use the `datadog-agent launch-gui` command to launch 
 | [Kubernetes][15]                   | Version 1.3 and higher                                              |
 | [SUSE Enterprise Linux x86_64][10] | SUSE 11 SP4 and above (we do not support SysVinit)                  |
 | [Fedora x86_64][11]                | Fedora 26 and above                                                 |
-| [MacOS][12]                        | macOS 10.10 and above                                               |
+| [MacOS][12]                        | macOS 10.12 and above                                               |
 | [Windows server 64-bit][13]        | Windows server 2008r2 or above                                      |
 | [Windows 64-bit][13]               | Windows 7 or above                                                  |
 
