@@ -61,6 +61,89 @@ Finally, the `http_connection_manager` sections need to include additional confi
 
 After completing this configuration, HTTP requests to Envoy will initiate and propagate Datadog traces, and will appear in the APM UI.
 
+## Example Envoy Configuration
+
+An example configuration is provided here to demonstrate the placement of items required to enable tracing using Datadog APM.
+
+```yaml
+# Enables the datadog tracing extension
+tracing:
+  http:
+    name: envoy.tracers.datadog
+    config:
+      collector_cluster: datadog_agent
+      service_name: envoy
+
+static_resources:
+  clusters:
+  - name: service1
+    connect_timeout: 0.25s
+    type: strict_dns
+    lb_policy: round_robin
+    http2_protocol_options: {}
+    hosts:
+    - socket_address:
+        address: service1
+        port_value: 80
+  - name: service2
+    connect_timeout: 0.25s
+    type: strict_dns
+    lb_policy: round_robin
+    http2_protocol_options: {}
+    hosts:
+    - socket_address:
+        address: service2
+        port_value: 80
+  # The cluster to communicate with the datadog agent
+  - name: datadog_agent
+    connect_timeout: 1s
+    type: strict_dns
+    lb_policy: round_robin
+    hosts:
+    - socket_address:
+        address: localhost
+        port_value: 8126
+  listeners:
+  - address:
+      socket_address:
+        address: 0.0.0.0
+        port_value: 80
+    filter_chains:
+    - filters:
+      - name: envoy.http_connection_manager
+        config:
+          # Enable tracing for this listener
+          generate_request_id: true
+          tracing:
+            operation_name: egress
+          codec_type: auto
+          stat_prefix: ingress_http
+          route_config:
+            name: local_route
+            virtual_hosts:
+            - name: backend
+              domains:
+              - "*"
+              routes:
+              - match:
+                  prefix: "/service/1"
+                route:
+                  cluster: service1
+              - match:
+                  prefix: "/service/2"
+                route:
+                  cluster: service2
+          http_filters:
+          - name: envoy.router
+            config: {}
+admin:
+  access_log_path: "/dev/null"
+  address:
+    socket_address:
+      address: 0.0.0.0
+      port_value: 8001
+```
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
