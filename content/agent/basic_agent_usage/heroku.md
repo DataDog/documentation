@@ -57,6 +57,63 @@ Heroku dynos are ephemeral-they can move to different host machines whenever new
 
 Depending on your use case, you may want to set your hostname so that hosts are aggregated and report a lower number.  To do this, Set `DD_DYNO_HOST` to `true`. This causes the Agent to report the hostname as the dyno name (e.g. `web.1` or `run.1234`), so your host count will match your dyno usage. One drawback is that you may see some metrics continuity errors whenever a dyno is cycled.
 
+## Files Locations
+
+- The Datadog Agent is installed at `/app/.apt/opt/datadog-agent`
+- The Datadog Agent configuration files are at `/app/.apt/etc/datadog-agent`
+- The Datadog Agent logs are at `/app/.apt/var/log/datadog`
+
+
+## Troubleshooting
+
+You can verify that the Datadog Agent is listening by sending a custom metric: 
+
+```shell
+# From your project directory:
+heroku run bash
+
+# Once your Dyno has started and you are at the command line
+echo -n "custom_metric:60|g|#shell" >/dev/udp/localhost/8125
+```
+
+After a few moments, use the log explorer to verify that the metric was received.
+
+It can also be helpful to obtain logs from your running dyno:
+
+Download Datadog Agent logs:
+
+```shell
+heroku ps:copy /app/.apt/var/log/datadog/datadog.log --dyno=<YOUR DYNO NAME>
+```
+
+Download Datadog Trace Agent logs:
+
+```shell
+heroku ps:copy /app/.apt/var/log/datadog/datadog-apm.log --dyno=<YOUR DYNO NAME>
+```
+
+## Send a flare
+
+You can easily generate a flare by running:
+
+```shell
+# From your project directory:
+heroku run bash
+
+# Once your Dyno has started and you are at the command line, send a flare:
+agent -c /app/.apt/etc/datadog-agent/datadog.yaml flare
+```
+
+The flare will contain the environment information and Datadog Agent configuration. However, since this is a new, stand-alone Dyno, the logs will be sparse and may not contain full log information.
+
+You can generate a more complete flare by setting your API key as an environment variable by running:
+
+```shell
+heroku ps:exec
+DD_API_KEY=<API KEY>
+agent -c /app/.apt/etc/datadog-agent/datadog.yaml flare
+```
+
 ## More information
 
 Visit the [Github project page][6] for more information and to view the source code.
