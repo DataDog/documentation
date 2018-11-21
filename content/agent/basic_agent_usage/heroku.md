@@ -55,7 +55,7 @@ In addition to the environment variables shown above, there are a number of othe
 
 Heroku dynos are ephemeral-they can move to different host machines whenever new code is deployed, configuration changes are made, or resouce needs/availability changes. This makes Heroku flexible and responsive, but can potentially lead to a high number of reported hosts in Datadog. Datadog bills on a per-host basis, and the buildpack default is to report actual hosts, which can lead to higher than expected costs.
 
-Depending on your use case, you may want to set your hostname so that hosts are aggregated and report a lower number.  To do this, Set `DD_DYNO_HOST` to `true`. This causes the Agent to report the hostname as the dyno name (e.g. `web.1` or `run.1234`), so your host count will match your dyno usage. One drawback is that you may see some metrics continuity errors whenever a dyno is cycled.
+Depending on your use case, you may want to set your hostname so that hosts are aggregated and report a lower number. To do this, Set `DD_DYNO_HOST` to `true`. This causes the Agent to report the hostname as the dyno name (e.g. `web.1` or `run.1234`), so your host count will match your dyno usage. One drawback is that you may see some metrics continuity errors whenever a dyno is cycled.
 
 ## Files Locations
 
@@ -94,7 +94,7 @@ heroku ps:copy /app/.apt/var/log/datadog/datadog-apm.log --dyno=<YOUR DYNO NAME>
 
 ## Send a flare
 
-You can easily generate a flare by running:
+Generate a flare by running:
 
 ```shell
 # From your project directory:
@@ -104,7 +104,7 @@ heroku run bash
 agent -c /app/.apt/etc/datadog-agent/datadog.yaml flare
 ```
 
-The flare will contain the environment information and Datadog Agent configuration. However, since this is a new, stand-alone Dyno, the logs will be sparse and may not contain full log information.
+The flare contains the environment information and Datadog Agent configuration. However, since this is a new, stand-alone dyno, the logs will be sparse and may not contain full log information.
 
 You can generate a more complete flare by setting your API key as an environment variable by running:
 
