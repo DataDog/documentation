@@ -96,6 +96,8 @@ is interpreted properly.
 
 If you are not willing to lose the historical data submitted as a `gauge`, create a new metric name with the new type, leaving the type of `app.requests.served` unchanged.
 
+**Note**: For the AgentCheck, the `self.increment` does not calculate the delta for a monotonically increasing counter, rather it reports the value passed in at the check run. To send the delta value on a monotonically increasing counter, use `self.monotonic_count`. 
+
 ## Units
 
 To eliminate ambiguity and help you make sense of your systems as quickly as possible, the following units may be associated with metrics submitted to Datadog.
