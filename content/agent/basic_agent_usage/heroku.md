@@ -78,7 +78,7 @@ echo -n "custom_metric:60|g|#shell" >/dev/udp/localhost/8125
 
 After a few moments, use the log explorer to verify that the metric was received.
 
-It can also be helpful to obtain logs from your running dyno:
+It can also be helpful to obtain Agent and Trace Agent logs from your running dyno.
 
 Download Datadog Agent logs:
 
