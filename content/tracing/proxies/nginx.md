@@ -16,15 +16,15 @@ further_reading:
   text: Datadog OpenTracing C++ Client
 ---
 
-Support for Datadog APM is available for NGINX using a combination of plugins and configuration.
-The instructions below use NGINX from the official [linux repositories][nginx-repos], and pre-built binaries for the plugins
+Support for Datadog APM is available for NGINX using a combination of plugins and configurations.
+The instructions below use NGINX from the official [Linux repositories][nginx-repos] and pre-built binaries for the plugins.
 
 ## Plugin Installation
 
-The following plugins must be installed
+The following plugins must be installed:
 
 - NGINX plugin for OpenTracing - [v0.7.0][ot-plugin] - installed in `/usr/lib/nginx/modules`
-- Datadog Opentracing C++ Plugin - [v0.3.5][dd-plugin] - installed in `/usr/local/lib`
+- Datadog OpenTracing C++ Plugin - [v0.3.5][dd-plugin] - installed in `/usr/local/lib`
 
 Commands to download and install these modules:
 ```bash
@@ -38,12 +38,12 @@ gunzip linux-amd64-libdd_opentracing_plugin.so.gz -c > /usr/local/lib/libdd_open
 
 ## NGINX Configuration
 
-The nginx configuration must load the OpenTracing module
+The NGINX configuration must load the OpenTracing module
 ```nginx
 load_module modules/ngx_http_opentracing_module.so; # Load OpenTracing module
 ```
 
-The `http` section enables the opentracing module and loads the Datadog tracer.
+The `http` section enables the OpenTracing module and loads the Datadog tracer:
 ```nginx
     opentracing on; # Enable OpenTracing
     opentracing_tag http_user_agent $http_user_agent; # Add a tag to each trace!
@@ -59,7 +59,7 @@ Locations within the server where tracing is desired should add the following:
             opentracing_tag "resource.name" "/";
 ```
 
-A config file for the Datadog tracing implementation is also required.
+A config file for the Datadog tracing implementation is also required:
 ```json
 {
   "service": "nginx",

@@ -36,7 +36,7 @@ A cluster for submitting traces to the Datadog Agent needs to be added.
         address: localhost
         port_value: 8126
 ```
-The address value may need to be changed if envoy is running in a container or orchestrated environment.
+The address value may need to be changed if Envoy is running in a container or orchestrated environment.
 
 Envoy's tracing configuration needs to use the Datadog APM extension.
 ```yaml
@@ -94,7 +94,7 @@ static_resources:
     - socket_address:
         address: service2
         port_value: 80
-  # The cluster to communicate with the datadog agent
+  # The cluster to communicate with the Datadog Agent
   - name: datadog_agent
     connect_timeout: 1s
     type: strict_dns
