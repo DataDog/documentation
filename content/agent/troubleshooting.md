@@ -146,8 +146,8 @@ In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if
 | Suse       | `sudo datadog-agent flare <CASE_ID>`                  |
 | Source     | `sudo datadog-agent flare <CASE_ID>`                  |
 | Windows    | Consult the dedicated [Windows documentation][10]     |
+| Heroku     | Consult the dedicated [Heroku documentation][13]      |
 
-[10]: /agent/basic_agent_usage/windows/#agent-v6
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -309,3 +309,4 @@ sudo journalctl -u dd-agent.service
 [10]: /agent/basic_agent_usage/windows/#agent-v6
 [11]: /agent/faq/agent-configuration-files/?tab=agentv6
 [12]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md#service-lifecycle-commands
+[13]: /agent/basic_agent_usage/heroku/#send-a-flare
