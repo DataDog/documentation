@@ -22,16 +22,16 @@ further_reading:
 
 ## Introduction
 
-This section explains the nuts and bolts of metrics—what they are, and what they do. Whether you want to send [custom metrics][4], or just want to have a better understanding about how Datadog works, read on. If you're looking for information about the DogStatsD (which implements these metrics), see the [DogStatsD documentation][5].
+This section explains what metrics are and what they do. Whether you want to send [custom metrics][4], or have a better understanding about how Datadog works, read on. If you're looking for information about the DogStatsD (which implements these metrics), see the [DogStatsD documentation][5].
 
 ### Submitting metrics
 
 There are multiple ways to send metrics to Datadog:
 
-1. Via the Datadog Agent directly. Learn how [to write an integration][2], or examine the [Aggregator source code][9] directly.
+1. Via the Datadog Agent directly. Learn how to [write an integration][2], or examine the [Aggregator source code][9] directly.
 2. Via the DogStatsD server (bundled with the Datadog Agent) and a [client library][16].
 3. Directly via Datadog's [HTTP API][10].
-4. Via Dropwizard's Java [metrics][11] library with the [metrics-datadog][12] backend. Thanks to the good folks at [Vistar Media][19], [Coursera][13], and [Bazaarvoice][14] for their contributions.
+4. Via the [Dropwizard Java metrics library][11] with the [metrics-datadog][12] backend. Thanks to the people at [Vistar Media][19], [Coursera][13], and [Bazaarvoice][14] for their contributions.
 
 ### Naming metrics
 
@@ -43,11 +43,11 @@ There are a few rules regarding metric names:
   * Unicode is _not_ supported.
 * Must not exceed 200 characters. Fewer than 100 is preferred from a UI perspective.
 
-Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. `http.nginx.response_time`). The hierarchy is neither enforced nor interpreted, but it can be used to infer things about servers (e.g. "hey, I see hostA and hostB are reporting `http.nginx.*`, those must be web frontends").
+Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. `http.nginx.response_time`). The hierarchy is neither enforced nor interpreted, but it can be used to infer things about servers. For example, if `hostA` and `hostB` are both reporting `http.nginx.*` those must be web frontends.
 
 ## Metric Types
 
-The "Datadog in-app type" affects how a given metric is interpreted in query results and graph visualizations across the application. The metric type visible on the [metric summary page][20] is the Datadog in-app type. You should only change the type if you have started submitting this metric with a new type, and should be aware that changing the type may render historical data nonsensical.
+The "Datadog in-app type" affects how a given metric is interpreted in query results and graph visualizations across the application. This type is visible and can be changed on the [metric summary page][20]. Be aware that changing the metric type may render historical data nonsensical.
 
 In the Datadog web application there are four metric types (though one is deprecated):
 
@@ -56,7 +56,7 @@ In the Datadog web application there are four metric types (though one is deprec
 * GAUGE
 * RATE
 
-A metric's type is stored as metrics metadata and is used to determine how a metric is interpreted throughout the application by determining default time aggregation function and `as_rate()`/`as_count()` behavior. The `as_count()` and `as_rate()` modifiers behave differently for different Web Application metric types.
+A metric's type is stored as metrics metadata and is used to determine how a metric is interpreted throughout the application by determining default time aggregation function and `as_rate()`/`as_count()` behavior. The `as_count()` and `as_rate()` modifiers behave differently for different web application metric types.
 
 ### Submission types and Datadog in-app types
 
@@ -81,26 +81,26 @@ Datadog accepts metrics submitted from a variety of sources, and as a result the
 
 ### Modify a metric's type
 
-While it is not normally required, it is possible to change a metric's _type_. Some examples:
+While it is not normally required, it is possible to change a metric's _type_. For example:
 
 1. You have a metric `app.requests.served` that counts requests served, but accidentally submitted it via StatsD as a `gauge`. The metric's Datadog type is therefore `gauge`.
 
-2. You realize you should have submitted it as a StatsD `counter` metric, that way you can do time aggregation to answer questions like "How many total requests were served in the past day?" by querying `sum:app.requests.served{*}` (this would not make sense for a `gauge`-type  metric.)
+2. You wanted to submit `app.requests.served` as a StatsD `counter` metric for time aggregation. This would help answer questions like _"How many total requests were served in the past day?"_ by querying `sum:app.requests.served{*}` (this would not make sense for a `gauge`-type  metric.)
 
-3. You like the name `app.requests.served` so rather than submitting a new metric name with the more appropriate `counter` type, you could change the type of `app.requests.served`.
-  * By updating your submission code, calling `dogstatsd.increment('app.requests.served', N)` after N requests are served.
-  * By updating the Datadog in-app type via the metric summary page to `rate`.
+3. You like the name `app.requests.served` so rather than submitting a new metric name with the more appropriate `counter` type, you could change the type of `app.requests.served` by updating:
+  * Your submission code, calling `dogstatsd.increment('app.requests.served', N)` after N requests are served.
+  * The Datadog in-app type via the metric summary page to `rate`.
 
 This causes data submitted before the type change for `app.requests.served`to behave incorrectly because it was stored in a format to be interpreted as an in-app `gauge` not a `rate`. Data submitted after steps 3a and 3b
 is interpreted properly.
 
 If you are not willing to lose the historical data submitted as a `gauge`, create a new metric name with the new type, leaving the type of `app.requests.served` unchanged.
 
-**Note**: For the AgentCheck, the `self.increment` does not calculate the delta for a monotonically increasing counter, rather it reports the value passed in at the check run. To send the delta value on a monotonically increasing counter, use `self.monotonic_count`. 
+**Note**: For the AgentCheck, `self.increment` does not calculate the delta for a monotonically increasing counter, rather it reports the value passed in at the check run. To send the delta value on a monotonically increasing counter, use `self.monotonic_count`. 
 
 ## Units
 
-To eliminate ambiguity and help you make sense of your systems as quickly as possible, the following units may be associated with metrics submitted to Datadog.
+To eliminate ambiguity and help you make sense of your systems, the following units may be associated with metrics submitted to Datadog.
 
 | type         | unit(s)                                                                                                                                                                                                                                            |
 | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -120,7 +120,7 @@ To eliminate ambiguity and help you make sense of your systems as quickly as pos
 | TEMPERATURE  | degree celsius / degree fahrenheit                                                                                                                                                                                                                 |
 | CPU          | nanocore / microcore / millicore / core / kilocore / megacore / gigacore / teracore / petacore / exacore                                                                                                                                           |
 
-Units are displayed automatically on timeseries graphs, query value widgets, and toplists, as shown in the screenshot of a Redis dashboard below:
+Units are displayed automatically on timeseries graphs, query value widgets, and toplists, as shown in the screenshot of the Redis dashboard below:
 
 {{< img src="developers/metrics/redis_dash_metrics_units.png" alt="Redis dash metric units" responsive="true" style="width:70%;">}}
 
@@ -128,8 +128,7 @@ On timeseries graphs, move your cursor over any graph to see the relevant units.
 
 {{< img src="developers/metrics/postgres_commits.png" alt="postgres commits" responsive="true" style="width:70%;">}}
 
-Units are also displayed at the bottom of Timeboard graphs, and metric descriptions are available by selecting *Metrics Info* from the gear dropdown:
-
+Units are also displayed at the bottom of timeboard graphs, and metric descriptions are available by selecting **Metrics Info** from the gear dropdown:
 
 {{< img src="developers/metrics/annotated_ops.png" alt="Annotated ops" responsive="true" style="width:70%;">}}
 
