@@ -21,9 +21,14 @@ It is available in the `envoyproxy/envoy:latest` docker container, and is includ
 
 ## Enabling Datadog APM
 
-Three settings are required to enable Datadog APM in Envoy.
+Three settings are required to enable Datadog APM in Envoy:
+
+- a cluster for submitting traces to the Datadog Agent
+- `tracing` configuration to enable the Datadog APM extension
+- `http_connection_manager` configuration to activate tracing
 
 A cluster for submitting traces to the Datadog Agent needs to be added.
+
 ```yaml
   clusters:
   ... existing cluster configs ...
@@ -36,9 +41,11 @@ A cluster for submitting traces to the Datadog Agent needs to be added.
         address: localhost
         port_value: 8126
 ```
-The address value may need to be changed if Envoy is running in a container or orchestrated environment.
+
+The `address` value may need to be changed if Envoy is running in a container or orchestrated environment.
 
 Envoy's tracing configuration needs to use the Datadog APM extension.
+
 ```yaml
 tracing:
   http:
@@ -47,10 +54,12 @@ tracing:
       collector_cluster: datadog_agent
       service_name: envoy
 ```
+
 The `collector_cluster` value must match the name provided for the Datadog Agent cluster.
 The `service_name` can be changed to a meaningful value for your usage of Envoy.
 
 Finally, the `http_connection_manager` sections need to include additional configuration to enable tracing.
+
 ```yaml
       - name: envoy.http_connection_manager
         config:

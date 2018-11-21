@@ -27,6 +27,7 @@ The following plugins must be installed:
 - Datadog OpenTracing C++ Plugin - [v0.3.5][dd-plugin] - installed in `/usr/local/lib`
 
 Commands to download and install these modules:
+
 ```bash
 # Install NGINX plugin for OpenTracing
 wget https://github.com/opentracing-contrib/nginx-opentracing/releases/download/v0.7.0/linux-amd64-nginx-1.14.0-ngx_http_module.so.tgz
@@ -38,12 +39,14 @@ gunzip linux-amd64-libdd_opentracing_plugin.so.gz -c > /usr/local/lib/libdd_open
 
 ## NGINX Configuration
 
-The NGINX configuration must load the OpenTracing module
+The NGINX configuration must load the OpenTracing module.
+
 ```nginx
 load_module modules/ngx_http_opentracing_module.so; # Load OpenTracing module
 ```
 
 The `http` section enables the OpenTracing module and loads the Datadog tracer:
+
 ```nginx
     opentracing on; # Enable OpenTracing
     opentracing_tag http_user_agent $http_user_agent; # Add a tag to each trace!
@@ -54,12 +57,14 @@ The `http` section enables the OpenTracing module and loads the Datadog tracer:
 ```
 
 Locations within the server where tracing is desired should add the following:
+
 ```nginx
             opentracing_operation_name "$request_method $uri";
             opentracing_tag "resource.name" "/";
 ```
 
 A config file for the Datadog tracing implementation is also required:
+
 ```json
 {
   "service": "nginx",
