@@ -63,7 +63,6 @@ Finally, the `http_connection_manager` sections need to include additional confi
 ```yaml
       - name: envoy.http_connection_manager
         config:
-          generate_request_id: true
           tracing:
             operation_name: egress
 ```
@@ -122,7 +121,6 @@ static_resources:
       - name: envoy.http_connection_manager
         config:
           # Enable tracing for this listener
-          generate_request_id: true
           tracing:
             operation_name: egress
           codec_type: auto
