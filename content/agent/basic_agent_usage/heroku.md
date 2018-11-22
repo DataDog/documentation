@@ -76,7 +76,7 @@ heroku run bash
 echo -n "custom_metric:60|g|#shell" >/dev/udp/localhost/8125
 ```
 
-After a few moments, use the log explorer to verify that the metric was received.
+After a few moments, use the metrics explorer to verify that the metric was received.
 
 It can also be helpful to obtain Agent and Trace Agent logs from your running dyno.
 
