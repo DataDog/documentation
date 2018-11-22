@@ -76,6 +76,14 @@ The following snippet illustrates a `Dockerrun.aws.json` declaring the Datadog a
             {
               "name": "TAGS",
               "value": "simple-tag-0, tag-key-1:tag-value-1"
+            },
+            {
+              "name": "DD_APM_ENABLED",
+              "value": "True"
+            },
+            {
+              "name": "DD_APM_NON_LOCAL_TRAFFIC",
+              "value": "True"
             }
       ],
       "memory": 256,
