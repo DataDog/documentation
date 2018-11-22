@@ -123,8 +123,8 @@ kind: Deployment
         env:
           - name: DD_AGENT_HOST
             valueFrom:
-            fieldRef:
-              fieldPath: status.hostIP
+              fieldRef:
+                fieldPath: status.hostIP
           - name: DD_AGENT_PORT
             value: "8126"
 ```
