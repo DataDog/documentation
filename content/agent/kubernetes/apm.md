@@ -22,6 +22,18 @@ For additional information or different installation processes, see the [Agent 6
 Create the following `datadog-agent.yaml` manifest:
 
 ```yaml
+# datadog-agent.yaml
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: datadog-secret
+  labels:
+    app: "datadog"
+type: Opaque
+data:
+  api-key: "<YOUR_BASE64_ENCODED_API_KEY>"
+---
 apiVersion: extensions/v1beta1
 kind: DaemonSet
 metadata:
@@ -33,24 +45,28 @@ spec:
         app: datadog-agent
       name: datadog-agent
     spec:
+      serviceAccountName: datadog-agent
       containers:
       - image: datadog/agent:latest
         imagePullPolicy: Always
         name: datadog-agent
         ports:
           - containerPort: 8125
+            # Custom metrics via DogStatsD - uncomment this section to enable custom metrics collection
             # hostPort: 8125
             name: dogstatsdport
             protocol: UDP
           - containerPort: 8126
+            # Trace Collection (APM) - uncomment this section to enable APM
             # hostPort: 8126
             name: traceport
             protocol: TCP
         env:
-          - name: DD_APM_ENABLED
-            value: "true"
           - name: DD_API_KEY
-            value: "<YOUR_API_KEY>"
+            valueFrom:
+              secretKeyRef:
+                name: datadog-secret
+                key: api-key
           - name: DD_COLLECT_KUBERNETES_EVENTS
             value: "true"
           - name: DD_LEADER_ELECTION
@@ -61,6 +77,9 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: status.hostIP
+          # Trace Collection (APM) - comment this section to disable APM
+          - name: DD_APM_ENABLED
+            value: "true"
         resources:
           requests:
             memory: "256Mi"
