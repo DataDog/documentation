@@ -117,8 +117,6 @@ OR
 
 * `C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\`
 
-[2]: /integrations
-
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -130,7 +128,9 @@ Configuration files for [Integrations][10]:
 
 * `C:\ProgramData\Datadog\conf.d\` 
 
-[2]: /integrations
+OR
+
+* `C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\`
 
 {{% /tab %}}
 {{< /tabs >}}
