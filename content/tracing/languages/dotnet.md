@@ -3,7 +3,7 @@ title: Tracing .NET Applications
 kind: Documentation
 aliases:
   - /tracing/dotnet
-  - /tracing/languages/dotnet
+  - /tracing/setup/dotnet/
 further_reading:
   - link: "https://github.com/DataDog/dd-trace-csharp"
     tag: "Github"

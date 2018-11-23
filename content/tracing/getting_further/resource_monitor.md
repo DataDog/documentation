@@ -38,4 +38,4 @@ Then the Monitor configuration would resemble the following:
 [2]: /tracing/visualization/resource
 [3]: /tracing/visualization/service/#export-to-timeboard
 [4]: /monitors/monitor_types/apm
-[5]: /agent/apm/first_class_dimensions#environment
+[5]: /agent/apm/

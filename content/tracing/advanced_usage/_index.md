@@ -309,7 +309,7 @@ public class MyClass {
 ```
 
 [opentracing]: #opentracing
-[java framework]: /agent/apm/java/#compatibility
+[java framework]: /tracing/languages/java/#compatibility
 [apm terminology]: /tracing/visualization/services_list/
 [trace api maven docs]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
 
@@ -379,7 +379,7 @@ API details of the decorator can be found here:
 [py_trace]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Tracer.trace
 [py_span]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Span
 [py_span_fin]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Span.finish
-[python lib compatibility]: /agent/apm/python/#compatibility
+[python lib compatibility]: /tracing/languages/python/#compatibility
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
@@ -414,7 +414,7 @@ end
 For more details about manual instrumentation, check out the [API documentation][ruby api doc].
 
 [ruby api doc]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/GettingStarted.md#manual-instrumentation
-[ruby lib compatibility]: /agent/apm/ruby/#compatibility
+[ruby lib compatibility]: /tracing/languages/ruby/#compatibility
 
 {{% /tab %}}
 {{% tab "Go" %}}
@@ -445,7 +445,7 @@ func main() {
 ```
 
 [tracer godoc]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
-[go lib compatibility]: /agent/apm/go/#compatibility
+[go lib compatibility]: /tracing/languages/go/#compatibility
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
@@ -465,7 +465,7 @@ span.finish()
 For more information on manual instrumentation, see the [API documentation][nodejs api doc].
 
 [nodejs api doc]: https://datadog.github.io/dd-trace-js/#manual-instrumentation
-[nodejs compatibility]: /agent/apm/nodejs/#compatibility
+[nodejs compatibility]: /tracing/languages/nodejs/#compatibility
 
 {{% /tab %}}
 {{% tab ".NET" %}}
@@ -488,7 +488,7 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 }
 ```
 
-[dotnet compatibility]: /agent/apm/dotnet/#compatibility
+[dotnet compatibility]: /tracing/languages/dotnet/#compatibility
 
 {{% /tab %}}
 {{% tab "PHP" %}}
@@ -513,7 +513,7 @@ $span->setTag('http.method', $request->method);
 $span->finish();
 ```
 
-[php compatibility]: /agent/apm/php/#compatibility
+[php compatibility]: /tracing/languages/php/#compatibility
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -566,7 +566,7 @@ compile group: 'com.datadoghq', name: 'dd-trace-ot', version: "${dd-trace-java.v
 
 Configure your application using environment variables or system properties as discussed in the [configuration][configuration] section.
 
-[configuration]: /agent/apm/java/#configuration
+[configuration]: /tracing/languages/java/#configuration
 
 **Manual Instrumentation with OpenTracing**:
 
@@ -1009,7 +1009,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 Distributed tracing is enabled by default for all supported integrations (see [Compatibility][nodejs compatibility]).
 
-[nodejs compatibility]: /agent/apm/nodejs/#compatibility
+[nodejs compatibility]: /tracing/languages/nodejs/#compatibility
 
 {{% /tab %}}
 {{% tab ".NET" %}}
@@ -1036,7 +1036,7 @@ For a more detailed explanations of sampling and priority sampling, check the [s
 
 Priority sampling is disabled by default. To enable it, configure the `priority.sampling` flag to `true` ([see how to configure the java client][javaclient].
 
-[javaclient]: /agent/apm/java/#configuration
+[javaclient]: /tracing/languages/java/#configuration
 
 Current Priority Values (more may be added in the future):
 

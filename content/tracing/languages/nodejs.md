@@ -3,8 +3,8 @@ title: Tracing Node.js Applications
 kind: Documentation
 aliases:
 - /tracing/nodejs/
-- /tracing/languages/nodejs/
 - /agent/apm/javascript/
+- /tracing/setup/nodejs/
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-js"
   tag: "Github"

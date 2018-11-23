@@ -131,47 +131,12 @@ languages:
           weight: 13
           parent: menu_references_agent
 
-        - identifier: customnav_tracingnav_java
-          name: "Java"
-          url: "agent/apm/java/"
-          weight: 1520
-          parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_python
-          name: "Python"
-          url: "agent/apm/python/"
-          weight: 1530
-          parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_ruby
-          name: "Ruby"
-          url: "agent/apm/ruby/"
-          weight: 1540
-          parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_go
-          name: "Go"
-          url: "agent/apm/go/"
-          weight: 1550
-          parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_javascript
-          name: "Node.js"
-          url: "agent/apm/nodejs/"
-          weight: 1560
-          parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_dotnet
-          name: ".NET"
-          url: "agent/apm/dotnet/"
-          weight: 1570
-          parent: customnav_tracingnav_setup
-        - identifier: customnav_tracingnav_php
-          name: "PHP"
-          url: "agent/apm/php/"
-          weight: 1580
-          parent: customnav_tracingnav_setup
         - identifier: docker_ecs
           name: "Tracing ECS application"
           url: "agent/apm/ecs"
-          weight: 1590
+          weight: 1310
           parent: customnav_tracingnav_setup
-
+        
         ## Docker
 
         - identifier: agent_docker
@@ -601,6 +566,48 @@ languages:
           url: "tracing/"
           pre: "nav_tracing"
           weight: 80
+        
+        # Languages
+        - identifier: customnav_tracingnav_languages
+          name: "Languages Instrumentation"
+          url: "tracing/languages/"
+          weight: 10
+          parent: menu_references_tracing
+        - identifier: customnav_tracingnav_java
+          name: "Java"
+          url: "tracing/languages/java/"
+          weight: 110
+          parent: customnav_tracingnav_languages
+        - identifier: customnav_tracingnav_python
+          name: "Python"
+          url: "tracing/languages/python/"
+          weight: 120
+          parent: customnav_tracingnav_languages
+        - identifier: customnav_tracingnav_ruby
+          name: "Ruby"
+          url: "tracing/languages/ruby/"
+          weight: 130
+          parent: customnav_tracingnav_languages
+        - identifier: customnav_tracingnav_go
+          name: "Go"
+          url: "tracing/languages/go/"
+          weight: 140
+          parent: customnav_tracingnav_languages
+        - identifier: customnav_tracingnav_javascript
+          name: "Node.js"
+          url: "tracing/languages/nodejs/"
+          weight: 150
+          parent: customnav_tracingnav_languages
+        - identifier: customnav_tracingnav_dotnet
+          name: ".NET"
+          url: "tracing/languages/dotnet/"
+          weight: 160
+          parent: customnav_tracingnav_languages
+        - identifier: customnav_tracingnav_php
+          name: "PHP"
+          url: "tracing/languages/php/"
+          weight: 170
+          parent: customnav_tracingnav_languages
 
         # TRACING/APM - Setup Advanced
 
@@ -1713,6 +1720,49 @@ languages:
           url: "tracing/"
           pre: "nav_tracing"
           weight: 80
+
+        # Languages
+        - identifier: customnav_tracingnav_languages
+          name: "Instrumentation de Languages"
+          url: "tracing/languages/"
+          weight: 10
+          parent: menu_references_tracing
+        - identifier: customnav_tracingnav_java
+          name: "Java"
+          url: "tracing/languages/java/"
+          weight: 110
+          parent: customnav_tracingnav_languages
+        - identifier: customnav_tracingnav_python
+          name: "Python"
+          url: "tracing/languages/python/"
+          weight: 120
+          parent: customnav_tracingnav_languages
+        - identifier: customnav_tracingnav_ruby
+          name: "Ruby"
+          url: "tracing/languages/ruby/"
+          weight: 130
+          parent: customnav_tracingnav_languages
+        - identifier: customnav_tracingnav_go
+          name: "Go"
+          url: "tracing/languages/go/"
+          weight: 140
+          parent: customnav_tracingnav_languages
+        - identifier: customnav_tracingnav_javascript
+          name: "Node.js"
+          url: "tracing/languages/nodejs/"
+          weight: 150
+          parent: customnav_tracingnav_languages
+        - identifier: customnav_tracingnav_dotnet
+          name: ".NET"
+          url: "tracing/languages/dotnet/"
+          weight: 160
+          parent: customnav_tracingnav_languages
+        - identifier: customnav_tracingnav_php
+          name: "PHP"
+          url: "tracing/languages/php/"
+          weight: 170
+          parent: customnav_tracingnav_languages
+
 
         # TRACING/APM - Setup Advanced
 

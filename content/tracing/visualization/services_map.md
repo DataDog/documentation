@@ -91,5 +91,5 @@ If a monitor is enabled for a service, the circumference has a weighted border c
 
 Monitors are not constrained to APM monitors; the service tag, described above, can be used to associate any monitor type with a service
 
-[1]: https://docs.datadoghq.com/agent/apm/first_class_dimensions/
+[1]: https://docs.datadoghq.com/agent/apm/
 [2]: https://app.datadoghq.com/apm/services

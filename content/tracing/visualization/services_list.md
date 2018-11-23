@@ -74,9 +74,9 @@ Choose what to display in your services list:
 [1]: /agent/apm
 [2]: https://app.datadoghq.com/apm/services
 [3]: /tracing/visualization/service
-[4]: /agent/apm/first_class_dimensions#environment
+[4]: /agent/apm/#environment
 [5]: /tracing/visualization/trace/#spans
 [6]: /tracing/visualization/trace
 [7]: /tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm
 [8]: /tracing/visualization/service/#service-monitor
-[9]: /agent/apm/first_class_dimensions#primary-tag
+[9]: /agent/apm/#primary-tag

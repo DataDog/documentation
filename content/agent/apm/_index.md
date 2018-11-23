@@ -4,23 +4,23 @@ kind: Documentation
 aliases:
   - /tracing/languages/
   - /tracing/environments/
-  - /agent/apm/environment
-  - /agent/apm/first_class_dimensions
+  - /tracing/setup/environment
+  - /tracing/setup/first_class_dimensions
   - /tracing/getting_further/first_class_dimensions/
 further_reading:
 - link: "/agent/docker/apm"
   tag: "Documentation"
   text: Docker setup
-- link: "agent/apm/go"
+- link: "tracing/languages/go"
   tag: "Documentation"
   text: Go language instrumentation
-- link: "agent/apm/java"
+- link: "tracing/languages/java"
   tag: "Documentation"
   text: Java language instrumentation
-- link: "agent/apm/python"
+- link: "tracing/languages/python"
   tag: "Documentation"
   text: Python language instrumentation
-- link: "agent/apm/ruby"
+- link: "tracing/languages/ruby"
   tag: "Documentation"
   text: Ruby language instrumentation
 ---
@@ -46,13 +46,13 @@ To start tracing your application:
   {{< whatsnext desc="Select one of the following supported languages:">}}
       {{< nextlink href="/agent/docker/apm" tag="Docker" >}}Docker setup.{{< /nextlink >}}
       {{< nextlink href="agent/kubernetes/apm" tag="Kubernetes" >}}Kubernetes setup.{{< /nextlink >}}
-      {{< nextlink href="agent/apm/java" tag="Java" >}}Java language instrumentation.{{< /nextlink >}}
-      {{< nextlink href="agent/apm/python" tag="Python" >}}Python language instrumentation.{{< /nextlink >}}
-      {{< nextlink href="agent/apm/ruby" tag="Ruby" >}}Ruby language instrumentation{{< /nextlink >}}
-      {{< nextlink href="agent/apm/go" tag="Go" >}}Go language instrumentation.{{< /nextlink >}}
-      {{< nextlink href="agent/apm/nodejs" tag="Nodejs" >}}Node.js language instrumentation.{{< /nextlink >}}
-      {{< nextlink href="agent/apm/dotnet" tag=".NET" >}}.NET language instrumentation.{{< /nextlink >}}
-      {{< nextlink href="agent/apm/php" tag="PHP" >}}PHP language instrumentation.{{< /nextlink >}}
+      {{< nextlink href="tracing/languages/java" tag="Java" >}}Java language instrumentation.{{< /nextlink >}}
+      {{< nextlink href="tracing/languages/python" tag="Python" >}}Python language instrumentation.{{< /nextlink >}}
+      {{< nextlink href="tracing/languages/ruby" tag="Ruby" >}}Ruby language instrumentation{{< /nextlink >}}
+      {{< nextlink href="tracing/languages/go" tag="Go" >}}Go language instrumentation.{{< /nextlink >}}
+      {{< nextlink href="tracing/languages/nodejs" tag="Nodejs" >}}Node.js language instrumentation.{{< /nextlink >}}
+      {{< nextlink href="tracing/languages/dotnet" tag=".NET" >}}.NET language instrumentation.{{< /nextlink >}}
+      {{< nextlink href="tracing/languages/php" tag="PHP" >}}PHP language instrumentation.{{< /nextlink >}}
   {{< /whatsnext >}}
 
 
@@ -196,10 +196,10 @@ Primary tags appear at the top of APM pages. Use these selectors to slice the da
 [7]: https://github.com/DataDog/datadog-trace-agent#run-on-osx
 [8]: https://github.com/DataDog/datadog-trace-agent/#run-on-windows
 [9]: https://github.com/DataDog/heroku-buildpack-datadog
-[11]: /agent/apm/go
-[12]: /agent/apm/java
-[13]: /agent/apm/python
-[14]: /agent/apm/ruby
+[11]: /tracing/languages/go
+[12]: /tracing/languages/java
+[13]: /tracing/languages/python
+[14]: /tracing/languages/ruby
 [15]: /developers/libraries/#community-tracing-apm-libraries
 [16]: https://app.datadoghq.com/apm/home?env=
 [17]: /tracing/visualization
@@ -207,9 +207,9 @@ Primary tags appear at the top of APM pages. Use these selectors to slice the da
 [19]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [20]: https://github.com/DataDog/datadog-trace-agent/#run-on-linux
 [21]: https://github.com/DataDog/datadog-trace-agent/blob/6.4.1/datadog.example.yaml
-[22]: /agent/apm/dotnet
-[23]: /agent/apm/php
-[24]: /agent/apm/nodejs
+[22]: /tracing/languages/dotnet
+[23]: /tracing/languages/php
+[24]: /tracing/languages/nodejs
 [25]: /agent/faq/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
 [26]: /tagging/
 [27]: /agent/faq/agent-configuration-files/?tab=agentv6
