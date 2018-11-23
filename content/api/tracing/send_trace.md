@@ -33,7 +33,7 @@ and each span is a dictionary with a `trace_id`, `span_id`, `resource`..
 *   **`name`** - _required_ The span name. The span name must not be longer than 100 characters.
 *   **`resource`** - _required_ The resource you are tracing. The resource name must not be longer than 5000 characters.
 *   **`service`** - _required_ The service you are tracing. The service name must not be longer than 100 characters.
-*   **`type`** - _optional, default=**custom**_ The type of request. The options available are `web`, `db`, `cache`,  and `custom`, case-sensitive. 
+*   **`type`** - _optional, default=**custom**, case-sensitive_ The type of request. The options available are `web`, `db`, `cache`, and `custom`. 
 *   **`start`** - _required._ The start time of the request in nanoseconds from the unix epoch.
 *   **`duration`** - _required_ The duration of the request in nanoseconds.
 *   **`parent_id`** - _optional_ The span integer ID of the parent span.
