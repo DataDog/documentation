@@ -62,6 +62,14 @@ Add a new file appender to `log4j.xml`:
 </appender>
 ```
 
+If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow those instructions] to set the [MDC (Mapped Diagnostic Contexts)][1] to then automatically add trace and span id in your logs.
+
+Once this is done, the `ConversionPattern` to use becomes:
+
+```xml
+<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n" />
+```
+
 {{% /tab %}}
 {{% tab "Log4j2" %}}
 
@@ -78,6 +86,13 @@ Edit your `log4j2.xml` file:
 </Loggers>
 ```
 
+If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow those instructions] to set the [MDC (Mapped Diagnostic Contexts)](http://logback.qos.ch/manual/mdc.html) to then automatically add trace and span id in your logs.
+
+Once this is done, the `PatternLayout` to use becomes:
+
+```xml
+<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n" />
+```
 
 {{% /tab %}}
 {{% tab "Slf4j" %}}
@@ -101,6 +116,14 @@ Edit your `logback.xml` file:
         <appender-ref ref="FILE" />
     </root>
 </configuration>
+```
+
+If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow those instructions] to set the [MDC (Mapped Diagnostic Contexts)](http://logback.qos.ch/manual/mdc.html) to then automatically add trace and span id in your logs.
+
+Once this is done, the `Pattern` to use becomes:
+
+```xml
+<Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"</Pattern>
 ```
 
 {{% /tab %}}
@@ -141,12 +164,16 @@ Edit your `pom.xml` file:
 
 Once that done, edit your `logback.xml` file as described in the below `Slf4j` section.
 
+If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow those instructions] to set the trace and span ids with [MDC (Mapped Diagnostic Contexts)](http://logback.qos.ch/manual/mdc.html) that are then automatically added in the JSON logs.
+
 {{% /tab %}}
 {{% tab "Log4j2" %}}
 
 There is a default log4j2 JSON Layout that can be used as shown in this [example][4].
 
 [4]: https://gist.github.com/NBParis/8bda7aea745987dd3261d475c613cf66
+
+If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow those instructions] to set the trace and span ids with [MDC (Mapped Diagnostic Contexts)](http://logback.qos.ch/manual/mdc.html) that are then automatically added in the JSON logs.
 
 {{% /tab %}}
 {{% tab "Slf4j" %}}
@@ -180,6 +207,8 @@ Then edit your `logback.xml` file and update the encoder:
     </appender>
 ```
 [5]: https://github.com/logstash/logstash-logback-encoder
+
+If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow those instructions] to set the trace and span ids with [MDC (Mapped Diagnostic Contexts)](http://logback.qos.ch/manual/mdc.html) that are then automatically added in the JSON logs.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -272,3 +301,4 @@ logger.info("Emitted 1001 messages during the last 93 seconds");
 [1]: http://logback.qos.ch/manual/mdc.html
 [2]: /logs/processing/parsing
 [3]: /logs/processing/parsing/#key-value
+[4]: https://docs.datadoghq.com/tracing/advanced_usage/?tab=java#logging
