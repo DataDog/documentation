@@ -98,30 +98,42 @@ You can also use Windows Powershell if you are running on a modern version of Wi
 {{% /tab %}}
 {{< /tabs >}}
 
-## Agent Configuration
+## Configuration
 
 Use the Datadog Agent Manager located in the start menu to enable, disable, and configure checks. 
 Restart the Agent in order for your changes to be applied.
 
-### Agent check directory structure
+{{< tabs >}}
+{{% tab "Agent v6" %}}
+The configuration files and folders for the Agent are located in:
 
-The `checks.d` folder lives in your Agent root, find it at:
+* `C:\ProgramData\Datadog\datadog.yaml` 
 
-    C:\ProgramData\Datadog\checks.d
+Configuration files for [Integrations][10]:
 
-The other folder that you need to care about is `conf.d` which lives in the
-Agent configuration root, find it at:
-
-    C:\ProgramData\Datadog\conf.d\
+* `C:\ProgramData\Datadog\conf.d\` 
 
 OR
 
-    C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\
+* `C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\`
 
-### Adding a custom python package to the Agent
-The current way to do so is to add the package in the library zipped folder that can be found at `C:\Program Files (x86)\Datadog\Datadog Agent\files`, and [restart the Agent][4].
+[2]: /integrations
 
-{{< img src="agent/faq/add_package_windows.png" alt="Add Package Windows" responsive="true" style="width:75%;">}}
+{{% /tab %}}
+{{% tab "Agent v5" %}}
+
+The configuration files and folders for the Agent are located in:
+
+* `C:\ProgramData\Datadog\datadog.conf`  
+
+Configuration files for [Integrations][10]:
+
+* `C:\ProgramData\Datadog\conf.d\` 
+
+[2]: /integrations
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Troubleshooting
 ### Agent Status and Information
@@ -336,3 +348,4 @@ Again, due to the sensitivity of yaml, if you've tried the above and cannot get 
 [7]: /integrations/process/
 [8]: /agent/proxy
 [9]: http://127.0.0.1:5002
+[10]: /integrations
