@@ -58,7 +58,7 @@ The execution of the Agent is controlled by the Windows Service Control Manager.
 There are a few major changes compared to older Datadog Windows Agent v5:
 
 * The main executable name is now `agent.exe` (it was `ddagent.exe` previously)
-* Commands should be run with the command line `C:\program files\datadog\datadog agent\embedded\agent.exe <command>`
+* Commands should be run with the command line `"C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe" <command>`
 * The configuration GUI is now a browser based configuration application (for Windows 64-bit only)
 
 The Agent has a new set of command-line options:
@@ -107,7 +107,7 @@ Restart the Agent in order for your changes to be applied.
 
 The `checks.d` folder lives in your Agent root, find it at:
 
-    C:\programdata\datadog\checks.d\
+    C:\ProgramData\Datadog\checks.d
 
 The other folder that you need to care about is `conf.d` which lives in the
 Agent configuration root, find it at:
@@ -134,17 +134,17 @@ To check if the Agent is running, check if the `DatadogAgent` service in the Ser
 To receive more information about the Agent's state, start the Agent GUI by either:
 
 - Right clicking on the Datadog Agent system tray icon -> Configure
-- Or: running `& 'C:\program files\datadog\datadog agent\embedded\agent.exe' launch-gui` from an admin Powershell prompt
+- Or: running `& "C:\program files\datadog\datadog agent\embedded\agent.exe" launch-gui` from an admin Powershell prompt
 
 Then, open the status page by going to *Status* -> *General*. Get more information on the checks that are running on the *Status* -> *Collector* page and the *Checks* -> *Summary* page.
 
 It's also possible to run the status command directly using Powershell:
 
-`& 'C:\program files\datadog\datadog agent\embedded\agent.exe' status`
+`& "C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe" status`
 
 or `cmd.exe`:
 
-`C:\program files\datadog\datadog agent\embedded\agent.exe" status`
+`"C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe" status`
 
 
 {{% /tab %}}
@@ -159,13 +159,13 @@ For 5.2 and later versions of the Agent go to the Datadog Agent *Manager->Settin
 It's also possible to run the info command using Powershell:
 
 ```
-& 'C:\Program Files\Datadog\Datadog Agent\embedded\python.exe' 'C:\Program Files\Datadog\Datadog Agent\agent\agent.py' info
+& "C:\Program Files\Datadog\Datadog Agent\embedded\python.exe" "C:\Program Files\Datadog\Datadog Agent\agent\agent.py" info
 ```
 
 or cmd.exe:
 
 ```
-C:\"Program Files"\Datadog\"Datadog Agent"\embedded\python.exe" "C:\Program Files\Datadog\Datadog Agent\agent\agent.py" info
+"C:\Program Files\Datadog\Datadog Agent\embedded\python.exe" "C:\Program Files\Datadog\Datadog Agent\agent\agent.py" info
 ```
 
 If you're running on a version older than 5.2 visit the status page in your web browser: `http://localhost:17125/status` The status page is supported in Agent version 3.9.1-5.1.1
@@ -178,7 +178,7 @@ If you're running on a version older than 5.2 visit the status page in your web 
 {{< tabs >}}
 {{% tab "Agent v6" %}}
 
-The Agent logs are located in the `C:\programdata\Datadog\logs` directory and all logs are in the `agent.log` file.
+The Agent logs are located in the `C:\ProgramData\Datadog\logs` directory and all logs are in the `agent.log` file.
 
 If you're still having trouble, [our support team][3] is glad to provide further assistance.
 
@@ -187,7 +187,7 @@ If you're still having trouble, [our support team][3] is glad to provide further
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-For Windows Server 2008, Vista and newer, logs are available at `C:\ProgramData\datadog\logs\ddagent.log` 
+For Windows Server 2008, Vista and newer, logs are available at `C:\ProgramData\Datadog\logs\ddagent.log` 
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -231,11 +231,11 @@ To send Datadog support a copy of your Windows logs and configurations, do the f
 It's also possible to run the flare command using Powershell:
 
 ```
-& 'C:\Program Files\Datadog\Datadog Agent\embedded\python.exe' 'C:\Program Files\Datadog\Datadog Agent\agent\agent.py' flare <CASE_ID>
+& "C:\Program Files\Datadog\Datadog Agent\embedded\python.exe" "C:\Program Files\Datadog\Datadog Agent\agent\agent.py" flare <CASE_ID>
 ```
 or cmd.exe:
 ```
-C:\"Program Files"\Datadog\"Datadog Agent"\embedded\python.exe "C:\Program Files\Datadog\Datadog Agent\agent\agent.py" flare <CASE_ID>
+"C:\Program Files\Datadog\Datadog Agent\embedded\python.exe" "C:\Program Files\Datadog\Datadog Agent\agent\agent.py" flare <CASE_ID>
 ```
 
 #### Flare Fails to Upload
@@ -245,10 +245,10 @@ On Linux and macOS, the output of the flare command tells you where the compress
 For Windows, you can find the location of this file by running the following from the Agent's Python command prompt:
 
 * Since Agent v5.12:
-    `C:\Program Files\Datadog\Datadog Agent\dist\shell.exe since`
+    `"C:\Program Files\Datadog\Datadog Agent\dist\shell.exe" since`
 
 * On older Agent version:
-    `C:\Program Files (x86)\Datadog\Datadog Agent\files\shell.exe`
+    `"C:\Program Files (x86)\Datadog\Datadog Agent\files\shell.exe"`
 
 ```
 import tempfile
