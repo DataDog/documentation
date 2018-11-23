@@ -30,7 +30,7 @@ The Datadog Agent is software that runs on your hosts. It collects events and me
 The Agent has three main parts: the **collector**, **DogStatsD**, and the **forwarder**:
 
 * **Collector**: It runs checks on the current machine for configured [integrations][4], and captures system metrics, such as memory and CPU.
-* **DogStatsD**: It is an StatsD-compatible backend server that you can send [custom metrics][5] to from your applications.
+* **DogStatsD**: It is a StatsD-compatible backend server that you can send [custom metrics][5] to from your applications.
 * **Forwarder**: It retrieves data from both DogStatsD and the collector, queues it up, and then sends it to Datadog.
 
 ## CLI
