@@ -109,13 +109,15 @@ The configuration files and folders for the Agent are located in:
 
 * `C:\ProgramData\Datadog\datadog.yaml` 
 
-Configuration files for [Integrations][10]:
+Configuration files for [Integrations][1]:
 
 * `C:\ProgramData\Datadog\conf.d\` 
 
 OR
 
 * `C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\`
+
+[1]: /integrations
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -124,13 +126,15 @@ The configuration files and folders for the Agent are located in:
 
 * `C:\ProgramData\Datadog\datadog.conf`  
 
-Configuration files for [Integrations][10]:
+Configuration files for [Integrations][1]:
 
 * `C:\ProgramData\Datadog\conf.d\` 
 
 OR
 
 * `C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\`
+
+[1]: /integrations
 
 {{% /tab %}}
 {{< /tabs >}}
