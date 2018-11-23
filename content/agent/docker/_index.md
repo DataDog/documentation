@@ -16,7 +16,7 @@ further_reading:
 - link: "graphing/infrastructure/process"
   tag: "Documentation"
   text: Collect your Docker processes
-- link: "tracing/docker/"
+- link: "agent/docker/apm"
   tag: "Documentation"
   text: Collect your Docker traces
 aliases:
