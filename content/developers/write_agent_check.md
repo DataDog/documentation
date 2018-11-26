@@ -64,8 +64,8 @@ For Agent 6, `min_collection_interval` must be added at an instance level and is
 ```yaml
 init_config:
 
- instances:
-    - min_collection_interval: 30
+instances:
+  - min_collection_interval: 30
 ```
  {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -75,7 +75,7 @@ For Agent 5, `min_collection_interval` is added to the `init_config` section to 
 init_config:
   min_collection_interval: 30
 
-  instances: [{}]
+instances: [{}]
 ```
 {{% /tab %}}
 {{< /tabs >}}
