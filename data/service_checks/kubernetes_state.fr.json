@@ -43,14 +43,5 @@
         "groups": ["host", "node"],
         "name": "Node Network Unavailable",
         "description": "Renvoie `CRITICAL` si un nœud de cluster est dans un état network unavailable. Renvoie `OK` sinon."
-    },
-    {
-        "agent_version": "5.6.0",
-        "integration":"kubernetes",
-        "check": "kubernetes_state.pod.phase",
-        "statuses": ["ok", "critical", "warning", "unknown"],
-        "groups": ["host", "pod"],
-        "name": "Pod Phase",
-        "description": "Renvoie `CRITICAL` si le pod est en phase` Failed`, `WARNING` s'il est `Pending`, `UNKNOWN` s'il est` Unknown` ou `OK` sinon."
     }
 ]
