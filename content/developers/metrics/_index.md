@@ -33,6 +33,10 @@ There are multiple ways to send metrics to Datadog:
 3. Directly via Datadog's [HTTP API][10].
 4. Via the [Dropwizard Java metrics library][11] with the [metrics-datadog][12] backend. Thanks to the people at [Vistar Media][19], [Coursera][13], and [Bazaarvoice][14] for their contributions.
 
+<div class="alert alert-warning">
+Metric timestamps cannot be more than 10 minutes in the future or more than 1 hour in the past.
+</div>
+
 ### Naming metrics
 
 There are a few rules regarding metric names:
