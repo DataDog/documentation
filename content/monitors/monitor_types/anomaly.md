@@ -7,7 +7,7 @@ description: "Detects anomalous behavior for a metric based on historical data"
 further_reading:
 - link: "monitors/notifications"
   tag: "Documentation"
-  text: Configure your monitor notifications
+  text: "Configure your monitor notifications"
 - link: "monitors/downtimes"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
