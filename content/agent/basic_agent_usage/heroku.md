@@ -63,6 +63,38 @@ Depending on your use case, you may want to set your hostname so that hosts are 
 - The Datadog Agent configuration files are at `/app/.apt/etc/datadog-agent`
 - The Datadog Agent logs are at `/app/.apt/var/log/datadog`
 
+## Heroku Log Collection
+
+** This integration is currently available for the EU region only**
+
+Heroku provides 3 types of logs:
+
+* `App Logs`: which are output from the application you pushed on the platform
+* `System Logs`: messages about actions taken by the Heroku platform infrastructure on behalf of your app
+* `API Logs`: Administrative questions implemented by you and other developers working on your app
+
+[Heroku's HTTP/S drains][7] buffer log messages and submit batches of messages to an HTTPS endpoint via a POST request.
+The POST body contains Syslog formatted messages, framed using the Syslog TCP protocol octet counting framing method.
+The Datadog HTTP API implements and understands the Logplex standard defined by the content-header `application/logplex-1`.
+
+To send all these logs to Datadog:
+
+* Connect to your Heroku project
+* Set up the HTTPS drain with the following command:
+
+```
+heroku drains:add https://http-intake.logs.datadoghq.eu/v1/input/<API_KEY>?ddsource=heroku -a myapp
+```
+
+* Replace `<API_KEY>` by your [Datadog API Key][2]
+* Replace `myapp` by your application name
+
+### Custom attributes
+To force the `service` value or add any custom attributes on the logs from an application, replace the url in the drain as follows:
+
+```
+https://http-intake.logs.datad0g.eu/v1/input/<API_KEY>?ddsource=heroku&service=<SERVICE>&attribute_name=<VALUE>
+```
 
 ## Troubleshooting
 
@@ -124,3 +156,4 @@ Visit the [Github project page][6] for more information and to view the source c
 [4]: https://help.datadoghq.com/hc/en-us/articles/204588979-How-to-graph-percentiles-in-Datadog
 [5]: https://docs.datadoghq.com/tracing/environments/
 [6]: https://github.com/DataDog/heroku-buildpack-datadog
+[7]: https://devcenter.heroku.com/articles/log-drains#https-drains
