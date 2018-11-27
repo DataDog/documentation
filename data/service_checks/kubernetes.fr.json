@@ -30,5 +30,59 @@
         "groups": ["host"],
         "name": "Kubelet Health",
         "description": "Renvoie `CRITICAL` si la vérification d'intégrité globale de Kubelet est arrêtée. `OK`, sinon"
+    },
+    {
+        "agent_version": "5.6.0",
+        "integration":"kubernetes",
+        "check": "kubernetes_state.node.ready",
+        "statuses": ["ok", "critical"],
+        "groups": ["host", "node"],
+        "name": "Node Ready",
+        "description": "Renvoie `CRITICAL` si le noeud du cluster n'est pas ready. Renvoie `OK` sinon."
+    },
+    {
+        "agent_version": "5.6.0",
+        "integration":"kubernetes",
+        "check": "kubernetes_state.node.out_of_disk",
+        "statuses": ["ok", "critical"],
+        "groups": ["host", "node"],
+        "name": "Node Out Of Disk",
+        "description": "Renvoie `CRITICAL` si un nœud de cluster manque d'espace disque. Renvoie `OK` sinon."
+    },
+    {
+        "agent_version": "5.6.0",
+        "integration":"kubernetes",
+        "check": "kubernetes_state.node.disk_pressure",
+        "statuses": ["ok", "critical"],
+        "groups": ["host", "node"],
+        "name": "Node Disk Pressure",
+        "description": "Renvoie `CRITICAL` si un nœud de cluster est dans un état disk pressure. Renvoie `OK` sinon."
+    },
+    {
+        "agent_version": "5.6.0",
+        "integration":"kubernetes",
+        "check": "kubernetes_state.node.memory_pressure",
+        "statuses": ["ok", "critical"],
+        "groups": ["host", "node"],
+        "name": "Node Memory Pressure",
+        "description": "Renvoie `CRITICAL` si un nœud de cluster est dans un état memory pressure. Renvoie `OK` sinon."
+    },
+    {
+        "agent_version": "5.6.0",
+        "integration":"kubernetes",
+        "check": "kubernetes_state.node.network_unavailable",
+        "statuses": ["ok", "critical"],
+        "groups": ["host", "node"],
+        "name": "Node Network Unavailable",
+        "description": "Renvoie `CRITICAL` si un nœud de cluster est dans un état network unavailable. Renvoie `OK` sinon."
+    },
+    {
+        "agent_version": "5.6.0",
+        "integration":"kubernetes",
+        "check": "kubernetes_state.pod.phase",
+        "statuses": ["ok", "critical", "warning", "unknown"],
+        "groups": ["host", "pod"],
+        "name": "Pod Phase",
+        "description": "Renvoie `CRITICAL` si le pod est en phase` Failed`, `WARNING` s'il est `Pending`, `UNKNOWN` s'il est` Unknown` ou `OK` sinon."
     }
 ]
