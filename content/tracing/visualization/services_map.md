@@ -31,7 +31,7 @@ The Service Map decomposes your application into all its component services and 
 
 ## Setup
 
-The Service Map visualizes data that is being collected by Datadog APM. No setup is required.
+The Service Map visualizes data that is being collected by Datadog APM. Setup is not required to view services. To see connected services, enable [distributed tracing][3].
 
 ## Ways to use it
 
@@ -93,3 +93,4 @@ Monitors are not constrained to APM monitors; the service tag, described above, 
 
 [1]: https://docs.datadoghq.com/tracing/setup/first_class_dimensions/
 [2]: https://app.datadoghq.com/apm/services
+[3]: /tracing/advanced_usage/#distributed-tracing
