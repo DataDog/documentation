@@ -26,7 +26,7 @@ The Service Map visualizes data collected by Datadog APM. Setup is not required 
 
 ## Ways to use it
 
-The Service Map was built to provide an overview of your services and their health and to cut through noise and isolate problem areas. Also, you can access other telemetry collected by Datadog directly from this view.
+The Service Map was built to provide an overview of your services and their health. This helps to cut through noise and isolate problem areas. Also, you can access other telemetry collected by Datadog directly from this view.
 
 ## Filtering vs changing scopes
 
