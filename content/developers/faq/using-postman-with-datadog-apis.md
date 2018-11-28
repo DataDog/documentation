@@ -1,106 +1,118 @@
 ---
-title: Using Postman With Datadog APIs
+title: Using Postman with Datadog APIs
 kind: faq
 ---
 
 ## Overview
 
-The Datadog API makes it easy to get data in and out of Datadog. The Datadog API uses resource-oriented URLs, uses status codes to indicate the success or failure of requests and returns JSON from all requests.
+The Datadog API allows you to get data in and out of Datadog. It uses resource-oriented URLs and status codes to indicate the success or failure of requests then returns JSON from all requests.
 
-This article walks you through how to use [Postman][1] to perform API calls to Datadog.  This can help you understand the power of the Datadog API, what actions can be performed via the Datadog API, and a high-level introduction to how you can use Postman to GET/PUT/POST/and DELETE via the Datadog API.
+This article explains how to use [Postman][1] to perform API calls to Datadog by showing the actions available within the Datadog API and providing a high-level introduction to using Postman to GET, POST, PUT, and DELETE.
 
 ## Prerequisites
 
-* You have an active Datadog implementation
-* You have admin access and can access the API Key and Application Key (your keys can be found on the [API Key page][5])
-* You have the [Postman API client installed][1]
-* You have some basic knowledge of API structure and JSON formatting
+You have:
 
-## Getting Started
+* An active Datadog implementation.
+* Access to your Datadog [API and APP keys][5].
+* The [Postman API client installed][1].
+* Basic knowledge of API structure and JSON formatting.
 
-### Import The Datadog Collection
+## Setup
 
-Now that you have Postman installed let's begin by downloading the Datadog Postman Collection (pre-configured API call templates, available for [download here][2]).  
+### Import the Datadog collection
 
-In Postman, a collection is a folder of organized API calls for easy editing/saving/and re-use.
+After the prerequisites are met:
 
-Save the file to a location on your computer for importing into Postman. 
+1. Download the [Datadog Postman collection][2] (pre-configured API call templates).  
+    In Postman, a collection is a folder of organized API calls for easy editing, saving, and re-use.
 
-Now, we will import the Datadog Postman Collection:
+2. Import the Datadog Postman Collection:  
+    * Open Postman
+    * Click on File -> Import
+    * Select the [datadog_collection.json][2] file downloaded in step 1.
 
-* Open Postman
-* Click on File -> Import
-* Select the [datadog_collection.json][2] file that was downloaded above.  
 {{< img src="developers/faq/import_collection.gif" alt="postman_collection_import" responsive="true" >}}
 
-Congratulations! You should know have a Datadog collection with many different API examples.
+You should now have a Datadog collection with many different API examples.  
+**Note**: The API calls do not work at this point. See below to set your Datadog API and APP keys.
 
-*Note*: The API calls will not work at this point, as we need to enter your Datadog API Key and App Key values.
+### Set API and APP keys in Postman
 
-## Set API / APP Keys in Postman
+After the Postman collection is imported, a full list of available Datadog API calls is structured by folder in the left pane of Postman. In the folders, the API calls have variables entered for `api_key` and `application_key`:
 
-Now that you have your Postman Collection imported, you will see a full list of available Datadog API calls structured by folder in the left pane of Postman. 
-
-As you open the folders you will notice that the api calls have variables entered for the values of *dd_api_key* and *dd_app_key* values. 
 {{< img src="developers/faq/SetAPIKeys.png" alt="postman_api_template_variables" responsive="true" >}}
 
-This is so that you can setup [Postman environments][6] and save your Datadog API Key and App Key values once and all APIs will authenticate successfully.  As well, if you have multiple Datadog Orgs you can setup multiple environments and select the environment you want to work with without having to modify any of the API calls in the Datadog Collection.
+This allows you to set up [Postman environments][6] and save your Datadog API and APP keys for authentication.  If you have multiple Datadog orgs, set up multiple [Postman environments][6] to make API calls to different orgs without modifying the API calls in the Datadog Postman collection.
 
-Let's go ahead and set your environment up and store your Datadog API Key and App Key values. Click the “Manage Environments” icon in the upper right corner of the Postman app (gear icon), then click on "Add", here you can name it whatever you want and add in your Datadog API / App keys. The "variable" name must be `dd_api_key` and `dd_app_key` to match the variable we have coded into each API call.  The "current value" will be your actual API Key and App Key, which can be found [here][7]. 
+Follow these steps to set up your environment:
 
-If you have multiple Datadog Orgs, you can add several environments with the appropriate dd_api_key and dd_app_key values.
+1. Click the **Manage Environments** gear icon in the upper right corner of Postman.
+
+2. Click **Add** and enter an **Environment Name**.
+
+3. In the table, add the variables `dd_api_key` and `dd_app_key`. In the **Current Value** column, enter your actual [Datadog API and APP keys][5]. 
+
+4. If you have multiple Datadog orgs, repeat steps 1 - 3 for each org.
+
 {{< img src="developers/faq/setAPIKeys2.png" alt="postman_api_template_variables" responsive="true" >}}
 
-## Working With the Collection
+## Working with the Collection
 
-Now that your Postman collection has been imported, your environmental variables have been set for `dd_api_key` and `dd_app_key`, you are ready to begin making some API calls. You will now see in your Datadog folder, you have child folders for each type of API Category listed on the [Datadog API Reference page][8]. This will allow you to click on any of the subfolders, select a predefined API call and modify for your business needs.
+After setup is complete, you are ready to begin making API calls. In the Postman -> Datadog folder there are sub folders for each type of API category listed in the [Datadog API Reference][7]. Expand the sub folders to see the HTTP methods and API call names:
 
-When the folders are expanded you will see the HTTP Method and name of the API call.
-
-Ex: PUT Organization Update API call, references a public orgId from subsequent step. Please reference
-the [Datadog API documentation][8] when using this collection.
 {{< img src="developers/faq/workingWithTheCollection.png" alt="working_with_collection" responsive="true" >}}
 
-##  API GET Calls
+**Note**: The Organization API calls use the `public_id` parameter. Reference the [Datadog API documentation][7] when using this collection.
 
-If you click on any API from the collection pane, it loads the API on the right side of the screen known as the `Builder`.  On this pane you can:
+### Builder
 
-* Send the API call: Send the API call and show you the returned status, response Time, and the API Response.
+When you click on an API call in the collection, it loads in the `Builder` pane on the right. On this pane you can send the API call and see the returned status, response time, and API response.
+
 {{< img src="developers/faq/apiGetCalls.png" alt="postman_api_response" responsive="true" >}}
 
-* Param shows you all parameters and values that are currently on the API call.  This view is much easier than looking at the `param1:value1&param2:value2` structure for editing the API call.
-{{< img src="developers/faq/exampleGetCall.gif" alt="postman_param" responsive="true" >}}
+### Params
 
-* Add any of the desired parameters and appropriate values that are allowed.  You can view what arguments are allowed by visiting the corresponding section on the API documentation. You notice that you can insert the key on the left side of the pane and the Value on the right side.
-    * Note: You do not need to include the ampersand (&) or colon (:) as Postman inserts those for you for the key/value pairs and concatenation.
+The **Params** tab shows all parameters and values that are currently on the API call. Here you are able to add parameters and values. View the available arguments in the corresponding section of the [Datadog API documentation][3]. 
 
-Example call:
+{{< img src="developers/faq/parameters.png" alt="postman_param" responsive="true" >}}
 
-`https://app.datadoghq.com/api/v1/screen/{screenId}?api_key={{dd_api_key}}&application_key= {(dd_app_key}}`
+This tab is an alternative to viewing the `param1:value1&param2:value2` structure of the API call.  
+**Note**: The ampersand (&) and colon (:) are not needed in the params table. Postman inserts these for you.
 
-## API PUT/POST Calls
+### API calls
 
-When you are defining an entity (Screenboard, metric, tags, etc) or updating a previously defined object, you want to use a PUT or a POST call.  Within the [datadog_collection.json][2] file that you imported, you see several examples of these calls to set up new entities or to append or update already created entities.
+#### GET
 
-When using these types of API calls within Postman, you have to define the JSON payload within the Body section of Postman and define the contentType to JSON. You then paste or type in the JSON payload that you want to send on the API. There is built in notifications (red X) that indicates if you have improperly formatted JSON to make for quick and easy identification.
+Retrieving an entity (screenboard, monitor, metric, etc) uses a GET API call. When making a this call, additional parameters may be needed. If you want the output for a specific screenboard, the screenboard's ID is needed. Here is an example API call to get a screenboard:
 
-In the below example, I am using the Setup New Screenboard API call to define a new Screenboard for my Amazon EC2 Agents.
+```
+https://app.datadoghq.com/api/v1/screen/{screenId}?api_key={{dd_api_key}}&application_key= {(dd_app_key}}
+```
+
+#### POST / PUT
+
+Creating an entity uses a POST API call and updating a entity uses a PUT API call. Within the [datadog_collection.json][2] file you imported, there are several examples of these calls to set up new entities or update existing ones.
+
+When using these types of API calls within Postman, define the JSON payload within the **Body** tab and set the contentType to JSON. Postman has built in notifications (red X) for improperly formatted JSON.
+
+This example uses the **Setup New Screenboard** API call to define a new Screenboard:
+
 {{< img src="developers/faq/exampleGetCall.gif" alt="setup_new_screenboard" responsive="true" >}}
 
-After you have all of your JSON entered, you can SEND the request and you should get a Status of 200 signifying the call was successful.  You can reference [this page][4] to see a full list of possible HTTP status codes.
+When sending this API call, you should get a HTTP status of 200 meaning the call was successful. Reference the [List of HTTP status codes][4] for other codes and descriptions.
 
+#### DELETE
 
-## API DELETE Calls
+Deleting an entity uses a DELETE API call. When making a this request, additional parameters may be needed. If you want to delete a specific screenboard, the screenboard's ID is needed. Here is an example API call to delete a screenboard:
 
-If you need to delete any entity, it is a relatively easy process by using the Datadog API: Use the HTTP DELETE method along with the corresponding ID of the entity you are trying to delete.
-
-Example Call:
-
-`https://app.datadoghq.com/api/v1/screen/{screenId}?api_key={{dd_api_key}}&application_key= {{dd_app_key}}`
-
-After sending the DELETE API call, you should receive a 200 Status, as well as an API response that shows what you just deleted.
+```
+https://app.datadoghq.com/api/v1/screen/{screenId}?api_key={{dd_api_key}}&application_key= {{dd_app_key}}
+```
 
 {{< img src="developers/faq/apiDeleteCalls.gif" alt="screenboard_delete_api" responsive="true" >}}
+
+When sending this API call, you should get a HTTP status of 200 meaning the call was successful. Reference the [List of HTTP status codes][4] for other codes and descriptions.
 
 [1]: https://www.getpostman.com/
 [2]: /json/datadog_collection.json
@@ -108,5 +120,4 @@ After sending the DELETE API call, you should receive a 200 Status, as well as a
 [4]: https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
 [5]: https://app.datadoghq.com/account/settings#api
 [6]: https://www.getpostman.com/docs/v6/postman/environments_and_globals/manage_environments
-[7]: https://app.datadoghq.com/account/settings#api
-[8]: http://docs.datadoghq.com/api/
+[7]: /api/#organizations
