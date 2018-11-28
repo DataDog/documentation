@@ -111,6 +111,10 @@ cf set-env <YOUR_APP> DD_API_KEY <DD_API_KEY>
 cf restage <YOUR_APP>
 ```
 
+#### Trace Collection
+
+The Datadog Trace Agent (APM) is enabled by default. Learn more about setup for your specific language in [APM Setup][30].
+
 #### Log Collection
 
 **Enable log collection**:
@@ -422,3 +426,4 @@ The Datadog Firehose Nozzle only collects CounterEvents (as metrics, not events)
 [27]: https://docs.cloudfoundry.org/buildpacks/understand-buildpacks.html
 [28]: https://github.com/cf-platform-eng/meta-buildpack
 [29]: /integrations/system/#metrics
+[30]: /tracing/setup/
