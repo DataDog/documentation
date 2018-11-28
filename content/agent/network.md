@@ -66,7 +66,7 @@ You should whitelist all of these IPs; while only a subset are active at any giv
 
 ## Open Ports
 
-**All traffic is sent (outbound only) over SSL via TCP.**
+**All outbound traffic is sent over SSL via TCP.**
 
 Open the following ports in order to benefit from all the Agent functionalities: 
 
@@ -81,7 +81,7 @@ Open the following ports in order to benefit from all the Agent functionalities:
   * `10255/tcp`: port for the [Kubernetes http kubelet][8]
   * `10250/tcp`: port for the [Kubernetes https kubelet][8]
 
-* **Inbound**:
+* **Inbound (used for agent services communicating among themselves locally within the host only)**:
 
   * `5000/tcp`: port for the [go_expvar server][6]
   * `5001/tcp`: port on which the IPC api listens
