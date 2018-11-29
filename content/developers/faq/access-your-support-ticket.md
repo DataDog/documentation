@@ -15,3 +15,4 @@ From here, you should be able to see your requests:
 
 However, if you don't see this after logging in, click on your name in the upper right hand corner, and then select "My Activities" from there.
 
+If you would like to view your entire organization's tickets, please reach out to our support team at support@datadoghq.com directly.
