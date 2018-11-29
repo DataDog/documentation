@@ -190,7 +190,7 @@ Setting different windows for the alert and alert recovery periods might lead to
 
 ### How does daylight savings affect anomaly detection monitors?  
 
-Datadog monitors use UTC time and by default are agnostic to local time zones (e.g. EST, PST, CST). As a result of the daylight savings time shift, people’s behavior naturally changes as compared to the UTC time. This could be detected as unexpected anomaly. 
+Datadog monitors use UTC time and by default are agnostic to local time zones (e.g. EST, PST, CST). User activity is shifted relative to UTC time because activity typically remains the same for the user's local time. This could be detected as unexpected anomaly. 
 
 Datadog allows you to configure a timezone for each anomaly detection monitor that automatically corrects for the time shift. See [How to update an anomaly detection monitor to account for local timezone][11] for instructions.
 

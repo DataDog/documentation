@@ -16,7 +16,7 @@ further_reading:
   - The monitor ID and query from your anomaly detection monitor:
     {{< img src="monitors/faq/anomaly_monitor_timezone.png" alt="Monitor ID and Query" responsive="true">}}
   - The TZ identification string for the time zone related to your metric, for example `America/New_York` or `Europe/Paris`. Locate your preferred time zone in the TZ column on the [List of tz database time zones][2] (canonical format recommended).<br><br>
-2. Create an updated version of the monitor query by adding a time zone argument to the anomalies() function call.
+2. Create an updated version of the monitor query by adding a `timezone` argument to the anomalies() function call.
   - For example, if you wanted to change the query shown above to use New York's local time, the query would be updated to:
 
     ```
