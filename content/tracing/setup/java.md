@@ -67,6 +67,7 @@ Datadog officially supports the Java JRE 1.7 and higher of both Oracle JDK and O
 | Spark Java                   | 2.3+       | Beta            | `-Ddd.integration.sparkjava.enabled=true -Ddd.integration.jetty.enabled=true` |
 | Spring Web (MVC)             | 4.0+       | Fully Supported | N/A                                                                           |
 | Spring WebFlux               | 5.0+       | Fully Supported | N/A                                                                           |
+| Vert.x-Web                   | 4.1.0      | Fully Supported | N/A                                                                           |
 
 **Web Framework tracing provides:** timing HTTP request to response, tags for the HTTP request (status code, method, etc), error and stacktrace capturing, linking work created within a web request and Distributed Tracing.
 
