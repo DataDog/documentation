@@ -93,7 +93,7 @@ If your container is already running:
 {{% /tab %}}
 {{% tab "Docker Agent v5" %}}
 
-When run in a container, the Agent cannot be restarted via `service datadog-agent restart` (or similar) as this will cause the container to be killed by Docker. Use supervisor to restart a containerised Agent:
+When run in a container, the Agent cannot be restarted via `service datadog-agent restart` (or similar) which causes the container to be killed by Docker. Use supervisor to restart a containerized Agent:
 
 ```
 /opt/datadog-agent/bin/supervisorctl -c /etc/dd-agent/supervisor.conf restart all
@@ -126,7 +126,7 @@ If you are running the 5.3 version (or higher) of the Agent, you're able to send
 
 `flare` gathers all of the Agent's configuration files and logs into an archive file. It removes sensitive information including passwords, API keys, Proxy credentials, and SNMP community strings.  
 **Confirm the upload of the archive to immediately send it to Datadog support**.  
-Since the Datadog Agent is completely open source, you can [verify the code's behavior][7]. You can also review the archive prior to sending as the flare prompts a confirmation before uploading it.  
+Datadog Agent is completely open source, which allows you to [verify the code's behavior][7]. If needed, the flare can be reviewed prior to sending since the flare prompts a confirmation before uploading it.  
 
 In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if you don't specify a case ID, the command asks for an email address that is used to login in your organization and creates a new support case.
 
@@ -148,6 +148,8 @@ In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if
 | Windows    | Consult the dedicated [Windows documentation][10]     |
 | Heroku     | Consult the dedicated [Heroku documentation][13]      |
 
+[10]: /agent/basic_agent_usage/windows/#agent-v6
+[13]: /agent/basic_agent_usage/heroku/#send-a-flare
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -231,7 +233,7 @@ C:\Program Files\Datadog\Datadog agent\embedded\agent.exe check <CHECK_NAME>
 {{% /tab %}}
 {{% tab "Agent v<=5.11" %}}
 
-The Agent install includes a file called `shell.exe` in your `\Program Files\` directory for the Datadog Agent which you can use to run Python within the Agent environment. Once your check (called `<CHECK_NAME>`) is written and you have the `.py` and `.yaml` files in their correct places, you can run the following in shell.exe:
+The Agent install includes a file called `shell.exe` in your `Program Files` directory for the Datadog Agent. This file can be used to run Python within the Agent environment. Once your check (called `<CHECK_NAME>`) is written and you have the `.py` and `.yaml` files in their correct places, run the following in shell.exe:
 
 ```
 from checks import run_check
