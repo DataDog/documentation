@@ -90,9 +90,21 @@ Typing a complex query can be cumbersome. Use the search bar's autocomplete feat
 ## Escaping of special characters
 
 The following attributes are considered as special: `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/`, and `\` require escaping.
+
+## Search in the Message attribute
+
 For instance, to search logs that contain `user=12345` the following search must be entered:
 
 `user\=JaneDoe`
+
+## Search with Facets
+
+Searching on a facet value that contains special characters also requires escaping or double quotes.
+
+Examples:
+
+* Search on `/api/v1/test`: `@http.url_details.path:"/api/v1/test"`
+* Search on all url that starts with `/api/v1/`: `@http.url:\/api\/v1\/*`
 
 The same logic must be applied to spaces within log attributes. Log attributes should not contain spaces, but in such a case, spaces must be escape.
 If an attribute was called `user.first name`, perform a search on this attribute by escaping the space:
@@ -101,7 +113,7 @@ If an attribute was called `user.first name`, perform a search on this attribute
 
 ## Saved Searches
 
-Don't lose time building the same views everyday. Saved Views contain your search query, columns, time horizon, and facet.
+Don't lose time building the same views everyday. [Saved Views][3] contain your search query, columns, time horizon, and facet.
 
 ## Further Reading
 
@@ -109,6 +121,7 @@ Don't lose time building the same views everyday. Saved Views contain your searc
 
 [1]: /logs/processing/processors/#attribute-remapper
 [2]: /logs/explorer/analytics
+[3]: /logs/explorer/saved_views/
 [4]: /graphing/infrastructure/
 [5]: /integrations/#cat-log-collection
 [6]: /tagging/#tags-best-practices
