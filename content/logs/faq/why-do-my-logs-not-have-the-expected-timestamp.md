@@ -73,7 +73,7 @@ However, this default timestamp does not always reflect the actual value that mi
 [3]: /logs/processing/parsing/#matcher
 [4]: /logs/processing/#log-date-remapper
 [5]: /logs/#reserved-attributes
-[6]: /logs/#edit-reserved-attributes
+[6]: /logs/processing/#edit-reserved-attributes
 [7]: https://www.iso.org/iso-8601-date-and-time-format.html
 [8]: https://en.wikipedia.org/wiki/Unix_time
 [9]: https://www.ietf.org/rfc/rfc3164.txt
