@@ -7,6 +7,7 @@ private: true
 * [Getting further with Docker][1]
 * [Docker JMX][2]
 * [Dogstream][3]
+* [Agent network information][25]
 * [Install core extras][4]
 * [Agent commands][5]
 * [Agent configuration files][19]
@@ -51,3 +52,4 @@ private: true
 [22]: /agent/faq/upgrade-to-agent-v6
 [23]: /agent/faq/downgrade-datadog-agent
 [24]: /agent/faq/custom-python-package
+[25]: /agent/faq/network

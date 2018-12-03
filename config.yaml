@@ -215,11 +215,6 @@ languages:
           url: "agent/proxy"
           weight: 30
           parent: menu_references_agent
-        - identifier: network
-          name: "Network"
-          url: "agent/network"
-          weight: 40
-          parent: menu_references_agent
         - identifier: prometheus
           name: "Prometheus Checks"
           url: "agent/prometheus"
@@ -1396,11 +1391,6 @@ languages:
           name: "Proxy"
           url: "agent/proxy"
           weight: 30
-          parent: menu_references_agent
-        - identifier: network
-          name: "Réseaux"
-          url: "agent/network"
-          weight: 40
           parent: menu_references_agent
         - identifier: prometheus
           name: "Check Prometheus"
