@@ -2,6 +2,9 @@
 title: FAQ Integrations
 kind: faq
 private: true
+disable_toc: true
+aliases:
+    - /integrations/faq/how-can-i-gather-metrics-from-the-unix-shell
 ---
 
 ## General
@@ -206,7 +209,7 @@ private: true
 [67]: /integrations/faq/tagging-rabbitmq-queues-by-tag-family
 [68]: /integrations/faq/redis-integration-error-unknown-command-config
 [69]: /integrations/faq/for-snmp-does-datadog-have-a-list-of-commonly-used-compatible-oids
-[70]: /integrations/faq/how-can-i-gather-metrics-from-the-unix-shell
+[70]: https://github.com/DataDog/Miscellany/tree/master/custom_check_shell
 [71]: /integrations/faq/can-i-limit-the-number-of-vms-that-are-pulled-in-via-the-vmware-integration
 [72]: /integrations/faq/how-to-make-trello-card-using-webhooks
 [73]: /integrations/faq/how-to-add-event-log-files-to-the-win32-ntlogevent-wmi-class

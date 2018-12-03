@@ -59,10 +59,10 @@ In Agent v6, the service manager provided by the operating system is responsible
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: If `service` is not available on your system, use:
+**Note**: If the `service` wrapper is not available on your system, use:
 
-* `upstart`-based systems: `initctl`
-* `systemd`-based systems: `systemctl`
+* On `upstart`-based systems: `sudo initctl start/stop/restart/status datadog-agent`
+* On `systemd`-based systems: `sudo systemctl start/stop/restart/status datadog-agent`
 
 [Learn more about Service lifecycle commands][4]
 

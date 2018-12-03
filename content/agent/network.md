@@ -19,12 +19,13 @@ further_reading:
 **Traffic is always initiated by the Agent to Datadog. No sessions are ever initiated from Datadog back to the Agent**:
 
 * All traffic is sent over SSL
-* The destination for [APM][1] data is `trace.agent.datadoghq.com`
-* The destination for [Live Containers][2] data is `process.datadoghq.com`
-* The destination for [Logs][3] data is `agent-intake.logs.datadoghq.com `
-* The destination for all other Agent data is
-  * **Agents < 5.2.0** `app.datadoghq.com`
-  *  **Agents >= 5.2.0** `<version>-app.agent.datadoghq.com`
+* The destination for:
+    * [APM][1] data is `trace.agent.datadoghq.com`
+    * [Live Containers][2] data is `process.datadoghq.com`
+    * [Logs][3] data is `agent-intake.logs.datadoghq.com `
+    * All other Agent data:
+        * **Agents < 5.2.0** `app.datadoghq.com`
+        *  **Agents >= 5.2.0** `<version>-app.agent.datadoghq.com`
 
 This decision was taken after the POODLE problem. Versioned endpoints start with Agent v5.2.0, where each version of the Agent calls a different endpoint based on the version of the *Forwarder*. For example, Agent v5.2.0 calls `5-2-0-app.agent.datadoghq.com`. Therefore you must whitelist `*.agent.datadoghq.com` in your firewall(s).
 
@@ -32,7 +33,7 @@ These domains are **CNAME** records pointing to a set of static IP addresses. Th
 
 * **[https://ip-ranges.datadoghq.com][4]**
 
-The information is structured as JSON following this schema: 
+The information is structured as JSON following this schema:
 
 ```
 {
@@ -62,11 +63,11 @@ Each section has a dedicated endpoint at `https://ip-ranges.datadoghq.com/<secti
 
 ### Note
 
-You should whitelist all of these IPs; while only a subset are active at any given moment, there are variations over time within the entire set due to regular network operation and maintenance.
+You should whitelist all of these IPs. While only a subset are active at any given moment, there are variations over time within the entire set due to regular network operation and maintenance.
 
 ## Open Ports
 
-**All traffic is sent (outbound only) over SSL via TCP.**
+**All outbound traffic is sent over SSL via TCP.**
 
 Open the following ports in order to benefit from all the Agent functionalities: 
 
@@ -81,7 +82,7 @@ Open the following ports in order to benefit from all the Agent functionalities:
   * `10255/tcp`: port for the [Kubernetes http kubelet][8]
   * `10250/tcp`: port for the [Kubernetes https kubelet][8]
 
-* **Inbound**:
+* **Inbound (used for Agent services communicating among themselves locally within the host only)**:
 
   * `5000/tcp`: port for the [go_expvar server][6]
   * `5001/tcp`: port on which the IPC api listens
@@ -111,7 +112,7 @@ Open the following ports in order to benefit from all the Agent functionalities:
 
 * **Inbound**:
 
-  * `8125/udp`: dogstatsd. Unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost: 
+  * `8125/udp`: DogStatsd. Unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost: 
 
       * `127.0.0.1`
       * `::1` 
@@ -130,7 +131,7 @@ Open the following ports in order to benefit from all the Agent functionalities:
 
 ## Using Proxies
 
-For a detailed configuration guide on proxy setup, head over to [Proxy Configuration][9].
+For a detailed configuration guide on proxy setup, see [Agent Proxy Configuration][9].
 
 ## Further Reading
 

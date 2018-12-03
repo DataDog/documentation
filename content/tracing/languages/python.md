@@ -92,6 +92,8 @@ The `ddtrace` library includes support for the following libraries:
 | [Futures](https://docs.python.org/3/library/concurrent.futures.html) | Fully Supported | http://pypi.datadoghq.com/trace/docs/other_integrations.html#futures  |
 | [Celery](http://www.celeryproject.org/)                              | Fully Supported | http://pypi.datadoghq.com/trace/docs/other_integrations.html#celery   |
 | [httplib](https://docs.python.org/2/library/httplib.html)            | Fully Supported | http://pypi.datadoghq.com/trace/docs/other_integrations.html#httplib  |
+| [Jinja2](http://jinja.pocoo.org/)                                    | Fully Supported | http://pypi.datadoghq.com/trace/docs/other_integrations.html#jinja2   |
+| [Kombu](https://kombu.readthedocs.io/en/latest/)                     | Fully Supported | http://pypi.datadoghq.com/trace/docs/other_integrations.html#kombu    |
 | [Requests](http://docs.python-requests.org/en/master/)               | Fully Supported | http://pypi.datadoghq.com/trace/docs/other_integrations.html#requests |
 
 
