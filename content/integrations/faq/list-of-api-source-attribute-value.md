@@ -34,6 +34,7 @@ kind: faq
 |Amazon Kinesis|KINESIS|
 |Amazon Kms|KMS|
 |Amazon Lambda|LAMBDA|
+|Amazon App Mesh|AMAZONAPPMESH|
 |Amazon Machine Learning|MACHINELEARNING|
 |Amazon Mq|MQ|
 |Amazon Ops Works|OPSWORKS|

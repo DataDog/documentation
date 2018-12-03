@@ -131,12 +131,6 @@ languages:
           weight: 13
           parent: menu_references_agent
 
-        - identifier: docker_ecs
-          name: "Tracing ECS application"
-          url: "agent/apm/ecs"
-          weight: 1310
-          parent: customnav_tracingnav_setup
-        
         ## Docker
 
         - identifier: agent_docker
@@ -1307,12 +1301,6 @@ languages:
           url: "agent/apm/php/"
           weight: 1580
           parent: customnav_tracingnav_setup
-        - identifier: docker_ecs
-          name: "Tracing ECS application"
-          url: "agent/apm/ecs"
-          weight: 1590
-          parent: customnav_tracingnav_setup
-        
 
         ## Docker
 

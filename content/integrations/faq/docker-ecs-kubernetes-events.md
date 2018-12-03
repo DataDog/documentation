@@ -42,7 +42,7 @@ The events below will be available per integration:
 * Reboot
 * Terminate
 
-[Learn more about Datadog-AWS ECS integration][5]
+[Learn more about Datadog-Amazon Elastic Container Service integration][5]
 
 ### Kubernetes
 

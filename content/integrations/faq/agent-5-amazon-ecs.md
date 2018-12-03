@@ -1,5 +1,5 @@
 ---
-title: AWS ECS with Agent v5
+title: Amazon Elastic Container Service with Agent v5
 kind: faq
 ---
 
