@@ -214,7 +214,7 @@ logs:
 
 ## Agentless logging
 
-It is possible to stream logs from your application to Datadog or to the Datadog Agent directly. This is not the recommended setup as handling connection issues should not be done directly in your application, but it might not be possible to log to a file when your application is running on a machine that cannot be accessed.
+It is possible to stream logs from your application to Datadog or to the Datadog Agent directly. This is not the recommended setup, as handling connection issues should not be done directly in your application, but it might not be possible to log to a file when your application is running on a machine that cannot be accessed.
 
 There are two steps to configure the Java application to stream logs directly to Datadog:
 
@@ -223,19 +223,19 @@ There are two steps to configure the Java application to stream logs directly to
 
 ### Bridge from Java logging libraries to Logback
 
-* The logging library we recommend to stream logs directly is Logback [logstash-logback-encoder](https://github.com/logstash/logstash-logback-encoder).
+* The recommended logging library stream logs directly is Logback [logstash-logback-encoder](https://github.com/logstash/logstash-logback-encoder).
 
-This Logging library can be linked from the most common Java ones:
+This logging library can be linked from the most common Java ones:
 
 {{< tabs >}}
 {{% tab "Log4j" %}}
 
-Logging to a remote server in json may be difficult with log4j that's why we advise you to use a SLF4J ship with a module called `log4j-over-slf4j` and then use logback for the json format.
+Logging to a remote server in JSON may be difficult with Log4j. It is recommended that you use a SLF4J ship with a module called `log4j-over-slf4j` and then use Logback for the JSON format.
 
-To use `log4j-over-slf4j` in your own application, the first step is to locate and then to replace `log4j.jar` with `log4j-over-slf4j.jar`.
-In most situations, replacing a jar file is all it takes in order to migrate from log4j to SLF4J.
+To use `log4j-over-slf4j` in your own application, the first step is to find-and-replace `log4j.jar` with `log4j-over-slf4j.jar`.
+In most situations, replacing a JAR file is all it takes in order to migrate from Log4j to SLF4J.
 
-Then edit the `pom.xml` file with the following content: 
+Then, edit the `pom.xml` file with the following content: 
 
 ```xml
 <dependency>
@@ -257,17 +257,17 @@ Then edit the `pom.xml` file with the following content:
 </dependency>
 ```
 
-**note:** As a result of this migration, log4j configuration files will no longer be picked up. So you need to migrate your `log4j.properties` file to `logback.xml` thanks to the [log4j translator](https://logback.qos.ch/translator/).
+**note:** As a result of this migration, Log4j configuration files will no longer be picked up. Migrate your `log4j.properties` file to `logback.xml` with the [Log4j translator](https://logback.qos.ch/translator/).
 
 {{% /tab %}}
 
 {{% tab "Log4j2" %}}
 
-Log4j2 allows to log to a remote host but does not offer the ability to prefix the logs by an APIKEY which is why we advise you to use a SLF4J ship with a module called `log4j-over-slf4j` and then use logback for the json format.
+Log4j2 allows logging to a remote host, but it does not offer the ability to prefix the logs by an API key. Because of this, it is recommended that you use a SLF4J ship with a module called `log4j-over-slf4j` and then use Logback for the JSON format.
 
-To use `log4j-over-slf4j` in your own application, the first step is to locate and then to replace `log4j.jar` with `log4j-to-slf4j-2.11.jar`.
+To use `log4j-over-slf4j` in your own application, the first step is to find-and-replace `log4j.jar` with `log4j-to-slf4j-2.11.jar`.
 
-Then edit the `pom.xml` file with the following content: 
+Then, edit the `pom.xml` file with the following content: 
 
 ```xml
 <dependency>
@@ -292,13 +292,13 @@ Then edit the `pom.xml` file with the following content:
 **notes:** 
 
 - Make sure that `log4j-slf4j-impl-2.0.jar` is **not** used as explained here: https://logging.apache.org/log4j/log4j-2.2/log4j-to-slf4j/index.html
-- As a result of this migration, log4j configuration files will no longer be picked up. So you need to migrate your `log4j.properties` file to `logback.xml` thanks to the [log4j translator](https://logback.qos.ch/translator/).
+- As a result of this migration, Log4j configuration files will no longer be picked up. Migrate your `log4j.properties` file to `logback.xml` with the [Log4j translator](https://logback.qos.ch/translator/).
 
 {{% /tab %}}
 
 {{% tab "Slf4j" %}}
 
-To add the Logback [logstash-logback-encoder](https://github.com/logstash/logstash-logback-encoder) into your classpath, simply add the following dependency (version 4.5.1 on the example) in your `pom.xml` file:
+To add Logback [logstash-logback-encoder](https://github.com/logstash/logstash-logback-encoder) into your classpath, add the following dependency (version 4.5.1 on the example) in your `pom.xml` file:
 
 ```xml
 <dependency>
@@ -345,15 +345,13 @@ Configure the Logback logger to stream logs directly to Datadog by adding the fo
 
 **Notes:**
 
-- Replace `<API_KEY>` by your Datadog API key value
-- `%mdc{keyThatDoesNotExist}` is added because the xml configuration trim the whitespace as explained [here](https://github.com/logstash/logstash-logback-encoder#prefixsuffix)
+- Replace `<API_KEY>` with your Datadog API key value
+- `%mdc{keyThatDoesNotExist}` is added because the XML configuration trims whitespace, as explained [here](https://github.com/logstash/logstash-logback-encoder#prefixsuffix)
 - See the list of [available endpoints for the EU region](https://docs.datadoghq.com/logs/?tab=euregion#datadog-logs-endpoints)
 
 ## Getting further
 
-Enrich your log events with valuable attributes!
-
-Logging is great- It tells developers and administrators what is happening at specific moments in time. However, always remember to decorate them with contextual attributes.
+Enrich your log events with contextual attributes.
 
 ### Using the Key/Value parser
 
@@ -367,7 +365,7 @@ For instance if you have:
 logger.info("Emitted 1001 messages during the last 93 seconds for customer scope prod30");
 ```
 
-You can easily change it to:
+You can change it to:
 
 ```java
 logger.info("Emitted quantity=1001 messages during the last durationInMs=93180 ms for customer scope=prod30");
@@ -386,13 +384,13 @@ With the [Key/Value parser][3] enabled, **Datadog** automatically extracts each 
 }
 ```
 
-So you can exploit *scope* as a field, and *durationInMs* & *quantity* as log measures.
+So you can exploit *scope* as a field, and *durationInMs* and *quantity* as log measures.
 
 ### MDC (Mapped Diagnostic Context)
 
 Another option to enrich your logs is to use Java's [MDC (Mapped Diagnostic Contexts)][1].
 
-If you use the logback technology, use the following Java code:
+If you use Logback, use the following Java code:
 
 ```java
 ...
