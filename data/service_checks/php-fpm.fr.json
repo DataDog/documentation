@@ -4,7 +4,7 @@
         "check": "php_fpm.can_ping",
         "statuses": ["ok", "critical"],
         "groups": ["host", "ping_url"],
-        "name": "Can Ping",
-        "description": "Renvoie `CRITICAL` si l'agent ne peut pas obtenir un pong de l'URL de ping PHP-FPM."
+        "name": "Peut ping",
+        "description": "Renvoie `CRITICAL` si l'Agent ne peut pas obtenir un pong depuis l'URL de ping PHP-FPM."
     }
 ]

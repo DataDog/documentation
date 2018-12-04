@@ -4,7 +4,7 @@
         "check": "pingdom.status",
         "statuses": ["ok", "critical"],
         "groups": ["check", "id"],
-        "name": "Status Pingdom",
-        "description": "Renvoie le statut de chacun de vos checks Pingdom. L'heure est rapportée lorsque le service Pingdom a vérifié la disponibilité de votre site."
+        "name": "Statut Pingdom",
+        "description": "Renvoie le statut de chacun de vos checks Pingdom. L'heure indiquée correspond au moment où le service Pingdom a vérifié la disponibilité de votre site."
     }
 ]
