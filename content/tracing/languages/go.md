@@ -116,7 +116,7 @@ For more tracer settings, see available options in the [configuration documentat
 [3]: https://github.com/DataDog/dd-trace-go/tree/v1#contributing
 [4]: https://github.com/DataDog/dd-trace-go/tree/v1/MIGRATING.md
 [5]: /tracing/setup
-[6]: /tracing/setup/docker/
+[6]: /agent/docker/apm
 [7]: https://gin-gonic.github.io/gin/
 [8]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/gin-gonic/gin
 [9]: http://www.gorillatoolkit.org/pkg/mux

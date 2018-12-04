@@ -3,6 +3,7 @@ title: Tracing Docker Applications
 kind: Documentation
 aliases:
   - /tracing/docker/
+  - /tracing/setup/docker/
 further_reading:
 - link: "https://github.com/DataDog/datadog-trace-agent"
   tag: "Github"

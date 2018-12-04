@@ -1,6 +1,8 @@
 ---
 title: Language instrumentation
 kind: Documentation
+aliases:
+    - /tracing/setup
 ---
 
 {{< whatsnext desc="Select one of the following supported languages to start instrumenting your application:">}}
