@@ -7,7 +7,7 @@ external_redirect: /api/#pagerduty
 
 ## PagerDuty
 
-Configure your Datadog-PagerDuty integration directly through Datadog API.
+Configure your Datadog-PagerDuty integration directly through the Datadog API.
 [Read more about Datadog-PagerDuty integration][1]
 
 **Note**:
@@ -22,16 +22,16 @@ Configure your Datadog-PagerDuty integration directly through Datadog API.
     Array of PagerDuty service objects. [Learn how to configure you Datadog service with PagerDuty documentation][2]. A PagerDuty service object is composed by:
 
     * **`service_name`** :
-        Your Service name in PagerDuty.
+        Your service name in PagerDuty.
 
     * **`service_key`** :
-        Your Service name associated service key in Pagerduty.
+        Your service name associated service key in Pagerduty.
 
 * **`subdomain`** :
-    Your PagerDuty accounts personalized sub-domain name.
+    Your PagerDuty account's personalized subdomain name.
 
 * **`schedules`** :
-    Array of your schedule URLs e.g:
+    Array of your schedule URLs, e.g:
      `["https://my-pd.pagerduty.com/schedules#PCPYT4M", "https://my-pd.pagerduty.com/schedules#PKTPB7P"]`
 
 * **`api_token`** :
