@@ -83,17 +83,19 @@ To send all these logs to Datadog:
 * Set up the HTTPS drain with the following command:
 
 ```
-heroku drains:add https://http-intake.logs.datadoghq.eu/v1/input/<API_KEY>?ddsource=heroku -a myapp
+heroku drains:add https://http-intake.logs.datadoghq.eu/v1/input/<API_KEY>?ddsource=heroku&service=<SERVICE>&host=<HOST> -a myapp
 ```
 
 * Replace `<API_KEY>` with your [Datadog API Key][2]
-* Replace `myapp` with your application name
-
+* Replace `myapp` and `<SERVICE>` with your application name¨
+* Replace `<HOST>` by the wanted hostname. Refer to the [host section](#hostname) to make sure that this is the same value set for the metrics as well.
+ 
 ### Custom attributes
-To force the `service` value or add any custom attributes on the logs from an application, replace the URL in the drain as follows:
+
+To add any custom attributes on the logs from an application, replace the URL in the drain as follows:
 
 ```
-https://http-intake.logs.datad0g.eu/v1/input/<API_KEY>?ddsource=heroku&service=<SERVICE>&attribute_name=<VALUE>
+https://http-intake.logs.datad0g.eu/v1/input/<API_KEY>?ddsource=heroku&service=<SERVICE>&host=<HOST>&attribute_name=<VALUE>
 ```
 
 ## Troubleshooting
