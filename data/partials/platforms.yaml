@@ -9,7 +9,7 @@ platforms:
     link: "agent/basic_agent_usage/deb/"
     image: "platform_debian.png"
   - name: docker
-    link: "agent/basic_agent_usage/docker/"
+    link: "agent/docker/"
     image: "platform_docker.png"
   - name: fedora
     link: "agent/basic_agent_usage/fedora/"
