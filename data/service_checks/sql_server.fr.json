@@ -5,6 +5,6 @@
         "statuses": ["ok", "critical"],
         "groups": ["host", "db"],
         "name": "Peut se connecter",
-        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter a l'instance SQL Server qu'il monitor. Sinon renvoie `OK`."
+        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter a l'instance SQL Server surveillée. Si ce n'est pas le cas, renvoie `OK`."
     }
 ]

@@ -2,7 +2,7 @@
 title: Requêter le flux d'événements
 type: apicode
 order: 11.4
-external_redirect: /api/#query-the-event-stream
+external_redirect: /api/#requeter-le-flux-d-evenements
 ---
 
 ##### Signature

@@ -2,7 +2,7 @@
 title: Récupérer un événement
 type: apicode
 order: 11.2
-external_redirect: /api/#get-an-event
+external_redirect: /api/#recuperer-un-evenement
 ---
 
 ##### Signature
