@@ -169,7 +169,7 @@ languages:
           weight: 157
           parent: kubernetes
         - identifier: kubernetes_apm
-          name: "Kubernetes"
+          name: "APM"
           url: "agent/kubernetes/apm"
           weight: 158
           parent: kubernetes
@@ -1352,7 +1352,7 @@ languages:
           weight: 157
           parent: kubernetes
         - identifier: kubernetes_apm
-          name: "Kubernetes"
+          name: "APM"
           url: "agent/kubernetes/apm"
           weight: 158
           parent: kubernetes
