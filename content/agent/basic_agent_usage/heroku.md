@@ -69,9 +69,9 @@ Depending on your use case, you may want to set your hostname so that hosts are 
 
 Heroku provides 3 types of logs:
 
-* `App Logs`: which are output from the application you pushed on the platform
+* `App Logs`: output from the application you pushed on the platform
 * `System Logs`: messages about actions taken by the Heroku platform infrastructure on behalf of your app
-* `API Logs`: Administrative questions implemented by you and other developers working on your app
+* `API Logs`: administrative questions implemented by you and other developers working on your app
 
 [Heroku's HTTP/S drains][7] buffer log messages and submit batches of messages to an HTTPS endpoint via a POST request.
 The POST body contains Syslog formatted messages, framed using the Syslog TCP protocol octet counting framing method.
@@ -86,11 +86,11 @@ To send all these logs to Datadog:
 heroku drains:add https://http-intake.logs.datadoghq.eu/v1/input/<API_KEY>?ddsource=heroku -a myapp
 ```
 
-* Replace `<API_KEY>` by your [Datadog API Key][2]
-* Replace `myapp` by your application name
+* Replace `<API_KEY>` with your [Datadog API Key][2]
+* Replace `myapp` with your application name
 
 ### Custom attributes
-To force the `service` value or add any custom attributes on the logs from an application, replace the url in the drain as follows:
+To force the `service` value or add any custom attributes on the logs from an application, replace the URL in the drain as follows:
 
 ```
 https://http-intake.logs.datad0g.eu/v1/input/<API_KEY>?ddsource=heroku&service=<SERVICE>&attribute_name=<VALUE>
