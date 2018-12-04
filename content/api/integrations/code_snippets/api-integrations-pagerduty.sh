@@ -28,7 +28,7 @@ curl -v -X PUT -H "Content-type: application/json" \
   }' \
 "https://api.datadoghq.com/api/v1/integration/pagerduty?api_key=${api_key}&application_key=${app_key}"
 
-# Append to the `services` and `schedules` list.
+# Add new services and schedules to the existing configuration.
 curl -v -X POST -H "Content-type: application/json" \
 -d '{
       "services": [

@@ -14,7 +14,7 @@ Configure your Datadog-PagerDuty integration directly through Datadog API.
 
 * Using the `POST` method updates your integration configuration by **adding** your new configuration to the existing one in your Datadog organization.
 * Using the `PUT` method updates your integration configuration by **replacing** your current configuration with the new one sent to your Datadog organization.
-* All arguments are required in the payload **only** when creating (`PUT`) a new PagerDuty configuration.
+* All arguments are required when creating (`PUT`) a new PagerDuty configuration.
 
 ##### ARGUMENTS
 
