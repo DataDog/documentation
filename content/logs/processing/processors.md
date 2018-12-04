@@ -138,7 +138,7 @@ Once the log has matched one of the Processor queries, it stops. Make sure they 
 
 ## Log Message Remapper
 
-The message is a key attribute in Datadog. It is displayed in the message column of the Log Explorer and you can do full string search on it. Use this Processor to define some attributes as the official log message: just enter the attribute path in the Processor tile as follows:
+The message is a key attribute in Datadog. It is displayed in the message column of the Log Explorer and you can do full string search on it. Use this Processor to define some attributes as the official log message. Just enter the attribute path in the Processor tile as follows:
 
 {{< img src="logs/processing/processors/message_processor.png" alt="Message Processor" responsive="true" style="width:80%;">}}
 
@@ -161,6 +161,14 @@ An attribute is missing if it is not found in the log attributes, or if it canno
 * The operator `-` needs to be space split in the formula as it can also be contained in attribute names.
 * If the target attribute already exists, it is overwritten by the result of the formula.
 
+## Trace Remapper
+
+This is especially useful to improve the correlation between application traces and logs. 
+Follow [this documentation to inject the trace ids in the application logs][5] and by default the log integrations take care of all the rest of the setup.
+Use this Processor to assign custom attributes as the official trace id. Just enter the attribute path in the Processor tile as follows:
+
+{{< img src="logs/processing/processors/trace_processor.png" alt="Trace Id Processor" responsive="true" style="width:80%;">}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -169,3 +177,4 @@ An attribute is missing if it is not found in the log attributes, or if it canno
 [2]: /logs/processing/parsing
 [3]: https://en.wikipedia.org/wiki/Syslog#Severity_level
 [4]: /tagging/#tags-best-practices
+[5]: https://docs.datadoghq.com/tracing/advanced_usage/?tab=java#logging
