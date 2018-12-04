@@ -21,10 +21,10 @@ Configure your Datadog-PagerDuty integration directly through Datadog API.
 * **`services`** :
     Array of PagerDuty service objects. [Learn how to configure you Datadog service with PagerDuty documentation][2]. A PagerDuty service object is composed by:
 
-    * **`service_name`** :
+    * **`service_name`** [*required*]:
         Your Service name in PagerDuty.
 
-    * **`service_key`** :
+    * **`service_key`** [*required*]:
         Your Service name associated service key in Pagerduty.
 
 * **`subdomain`** :
