@@ -7,7 +7,7 @@ external_redirect: /api/#get-hourly-usage-for-trace-search
 
 ## Get hourly usage for Trace Search
 
-Get Hourly Usage For Trace Search.
+Get hourly usage For Trace Search.
 
 ##### Arguments
 * **`start_hr`** [*required*]:
