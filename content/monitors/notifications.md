@@ -48,6 +48,7 @@ Use variables to customize your monitor notifications, the available variables a
 | `{{warn_threshold}}` | Display the warning threshold selected in the monitor's *Set alert conditions* section if any. |
 | `{{ok_threshold}}`   | Display the value that recovered the monitor.                                                  |
 | `{{comparator}}`     | Display the relational value selected in the monitor's *Set alert conditions* section.         |
+| `{{last_triggered_at}}`     | Display the UTC date/time when the monitor last triggered.         |
 
 ### Tag variables
 
