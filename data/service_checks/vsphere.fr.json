@@ -6,6 +6,6 @@
         "statuses": ["ok", "critical"],
         "groups": ["host", "vcenter_server", "vcenter_host"],
         "name": "Peut se connecter",
-        "description": "Renvoie le statut après avoir ping votre instance vCenter. Des informations supplémentaires sur la statut de la réponse et son temps de collection sont inclus dans le message du check."
+        "description": "Renvoie le statut après avoir ping votre instance vCenter. Des informations supplémentaires sur le statut de la réponse au moment de la collecte sont incluses dans le message du check."
     }
 ]

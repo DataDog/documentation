@@ -1,5 +1,5 @@
 ---
-title: Succès et erreurs
+title: Réussite et erreurs
 external_redirect: /api/
 ---
 

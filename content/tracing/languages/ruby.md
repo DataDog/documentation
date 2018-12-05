@@ -54,6 +54,7 @@ The Ruby APM tracer sends trace data through the Datadog Agent.
 3. Create a `config/initializers/datadog.rb` file containing:
 
     ```ruby
+    require 'ddtrace'
     Datadog.configure do |c|
       # This will activate auto-instrumentation for Rails
       c.use :rails

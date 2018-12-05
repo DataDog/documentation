@@ -2,7 +2,7 @@
 title: Résoudre un monitor
 type: apicode
 order: 16.06
-external_redirect: /api/#resolve-monitor
+external_redirect: /api/#resoudre-un-monitor
 ---
 
 ##### Signature

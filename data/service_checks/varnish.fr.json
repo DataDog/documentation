@@ -5,7 +5,7 @@
         "check": "varnish.backend_healthy",
         "statuses": ["ok", "critical"],
         "groups": ["host", "backend"],
-        "name": "Backend Health Check",
-        "description": "Vérifie l'état de vos différents backends analysés par `varnishadm`. Des informations supplémentaires sur l'état du backend au moment de la collecte sont incluses dans le message du check."
+        "name": "Check santé backend",
+        "description": "Vérifie le statut de vos différents backends analysés par `varnishadm`. Des informations supplémentaires sur le statut du backend au moment de la collecte sont incluses dans le message du check."
     }
 ]
