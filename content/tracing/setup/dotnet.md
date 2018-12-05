@@ -52,7 +52,7 @@ How these components are installed on the host depends on the runtime environmen
 Install the .NET Tracer on the host using the [MSI installer for Windows](https://github.com/DataDog/dd-trace-csharp/releases). Choose the platform that matches your application: x64 for 64-bits or x86 for 32-bits. You can install both side-by-side if needed.
 
 - Native library: deployed into `Program Files` by default and registered as a COM library in the Windows Registry by the MSI installer.
-- Managed libraries: deployed into the Global Assembly Cache (GAC) by the MSI installer, so any .NET Framework application can find them without deploying them with the application.
+- Managed libraries: deployed into the Global Assembly Cache (GAC) by the MSI installer, where any .NET Framework application can access them.
 - Environment variables: added for IIS only by the MSI installer. Applications that do not run in IIS will need additional configuration (see below) to set these environment variables.
 
 {{% /tab %}}
