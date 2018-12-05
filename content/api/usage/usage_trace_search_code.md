@@ -6,7 +6,7 @@ external_redirect: /api/#get-hourly-usage-for-trace-search
 ---
 
 ##### Signature
-`GET https://api.datadoghq.com/api/v1/usage/trace_search`
+`GET https://api.datadoghq.com/api/v1/usage/traces`
 ##### Example Request
 {{< code-snippets basename="api-billing-usage-trace-search" >}}
 ##### Example Response
