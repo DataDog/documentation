@@ -115,7 +115,11 @@ apk add libc6-compat
 
 **Note:** If your application runs on IIS and you used the MSI installer, you don't need to configure environment variables manually. You may skip this section.
 
-Automatic instrumention is enabled by setting 4 environment variables on .NET Framework:
+Automatic instrumention is enabled by setting 4 environment variables:
+
+{{< tabs >}}
+
+{{% tab ".NET Framework" %}}
 
 ```bash
 COR_ENABLE_PROFILING=1
@@ -124,9 +128,22 @@ COR_PROFILER_PATH=(path to Datadog.Trace.ClrProfiler.Native library)
 DD_INTEGRATIONS=(path to integrations.json)
 ```
 
-On .NET Core, the prefix changes from `COR` to `CORECLR`. For example, `COR_ENABLE_PROFILING` becomes `CORECLR_ENABLE_PROFILING`.
+{{% /tab %}}
 
-**Note:** The profiler will try to attach to _any_ .NET process that is started while these environment variables are set, so you will want to limit them only to the applications that need to be traced. _Do not set these environment variales globally for all processes._
+{{% tab ".NET Core" %}}
+
+```bash
+CORECLR_ENABLE_PROFILING=1
+CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+CORECLR_PROFILER_PATH=(path to Datadog.Trace.ClrProfiler.Native library)
+DD_INTEGRATIONS=(path to integrations.json)
+```
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
+**Note:** The profiler will try to attach to _any_ .NET process that is started while these environment variables are set. You should limit profiling only to the applications that need to be traced. **Do not set these environment variables globally as this will cause all .NET processes to be profiled.**
 
 {{< tabs >}}
 
