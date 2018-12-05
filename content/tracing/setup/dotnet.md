@@ -275,7 +275,7 @@ The .NET tracer can instrument the following web frameworks automatically:
 | ASP.NET MVC 5     | 5.1.3+    | .NET Framework 4.5+ | Windows | Public Beta   |
 | ASP.NET MVC 4     | 4.0.40804 | .NET Framework 4.5+ | Windows | Public Beta   |
 | ASP.NET Web API 2 | 2.2+      | .NET Framework 4.5+ | Windows | Public Beta   |
-| ASP.NET WebForms  | 4.5+      | .NET Framework 4.5+ | Windows | _Coming soon_ |
+| ASP.NET Web Forms | 4.5+      | .NET Framework 4.5+ | Windows | _Coming soon_ |
 | ASP.NET Core MVC  | 2.0+      | .NET Framework 4.5+ | Windows | Public Beta   |
 | ASP.NET Core MVC  | 2.0+      | .NET Core 2.0+      | Windows | Public Beta   |
 | ASP.NET Core MVC  | 2.0+      | .NET Core 2.0+      | Linux   | Public Beta   |
