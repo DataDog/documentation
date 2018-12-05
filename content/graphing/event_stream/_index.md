@@ -58,8 +58,13 @@ Note: no spaces after the colon or commas in these lists and anything not attach
 
 ## Show events unaggregated
 
-Change the "aggregate_up" parameter in the url to `false`.
-To remove the top level aggregate event from appearing, change `use_date_happened` to true. [Here is an example link][3]
+To show your events unaggregated in your Event stream change the following parameters in your Event stream URL:
+
+* Set `aggregate_up` to `false`
+* Set `abstraction_level` to `1` 
+* Set `use_date_happened` to `true`. 
+
+[Here is an example link][3]
 
 ## Events Email
 
@@ -154,4 +159,4 @@ Should be encoded to: `http://catchpoint.com/session_id%3A123456`
 
 [1]: /monitors/
 [2]: /graphing/event_stream
-[3]: https://app.datadoghq.com/event/stream?show_private=true&aggregate_up=false&use_date_happened=true&per_page=30&display_timeline=true&from_ts=1418047200000&to_ts=1418050800000&incident=true&codemirror_editor=true&live=true&bucket_size=60000
+[3]: https://app.datadoghq.com/event/stream?show_private=true&aggregate_up=false&abstraction_level=1&use_date_happened=true&per_page=30&display_timeline=true&from_ts=1418047200000&to_ts=1418050800000&incident=true&codemirror_editor=true&live=true&bucket_size=60000
