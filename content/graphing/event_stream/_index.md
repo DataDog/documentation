@@ -58,7 +58,7 @@ Note: no spaces after the colon or commas in these lists and anything not attach
 
 ## Show events unaggregated
 
-To show your events unaggregated in your Event stream change the following parameters in your Event stream URL:
+To show your events unaggregated in your event stream, change the following parameters in your event stream URL:
 
 * Set `aggregate_up` to `false`
 * Set `abstraction_level` to `1` 
