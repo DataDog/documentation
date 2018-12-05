@@ -1,8 +1,8 @@
 ---
-title: Requêter le flux d'événements
+title: Interroger le flux d'événements
 type: apicode
 order: 11.4
-external_redirect: /api/#requeter-le-flux-d-evenements
+external_redirect: /api/#interroger-le-flux-d-evenements
 ---
 
 ##### Signature
