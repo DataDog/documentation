@@ -18,7 +18,7 @@ Configure your Datadog-PagerDuty integration directly through the Datadog API.
 
 ##### ARGUMENTS
 
-* **`services`** :
+* **`services`** [*required*]:
     Array of PagerDuty service objects. [Learn how to configure you Datadog service with PagerDuty documentation][2]. A PagerDuty service object is composed by:
 
     * **`service_name`** [*required*]:
@@ -27,14 +27,14 @@ Configure your Datadog-PagerDuty integration directly through the Datadog API.
     * **`service_key`** [*required*]:
         Your Service name associated service key in Pagerduty.
 
-* **`subdomain`** :
+* **`subdomain`** [*optional*, *default*=**None**]:
     Your PagerDuty account's personalized subdomain name.
 
-* **`schedules`** :
+* **`schedules`** [*required*]::
     Array of your schedule URLs, e.g:
      `["https://my-pd.pagerduty.com/schedules#PCPYT4M", "https://my-pd.pagerduty.com/schedules#PKTPB7P"]`
 
-* **`api_token`** :
+* **`api_token`** [*required*]:
     Your PagerDuty API token.
 
 [1]: /integrations/pagerduty

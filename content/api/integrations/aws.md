@@ -22,7 +22,7 @@ Configure your Datadog-AWS integration directly through Datadog API.
     Your AWS Account ID without dashes.  
     [Consult the Datadog AWS integration to learn more][2] about your AWS account ID.
 
-* **`access_key_id`***optional*, *default*=**None**]:
+* **`access_key_id`** [*optional*, *default*=**None**]:
 
     If your AWS account is a GovCloud or China account, enter the corresponding Access Key ID.
 
