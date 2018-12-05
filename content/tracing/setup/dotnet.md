@@ -113,37 +113,9 @@ apk add libc6-compat
 
 ### Adding Environment Variables
 
-**Note:** If your application runs on IIS and you used the MSI installer, you don't need to configure environment variables manually. You may skip this section.
+**Note:** If your application runs on IIS and you used the MSI installer, you don't need to configure environment variables manually and you may skip this section.
 
-Automatic instrumention is enabled by setting four environment variables:
-
-{{< tabs >}}
-
-{{% tab ".NET Framework" %}}
-
-```bash
-COR_ENABLE_PROFILING=1
-COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-COR_PROFILER_PATH=(path to Datadog.Trace.ClrProfiler.Native library)
-DD_INTEGRATIONS=(path to integrations.json)
-```
-
-{{% /tab %}}
-
-{{% tab ".NET Core" %}}
-
-```bash
-CORECLR_ENABLE_PROFILING=1
-CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-CORECLR_PROFILER_PATH=(path to Datadog.Trace.ClrProfiler.Native library)
-DD_INTEGRATIONS=(path to integrations.json)
-```
-
-{{% /tab %}}
-
-{{< /tabs >}}
-
-**Note:** The profiler will try to attach to _any_ .NET process that is started while these environment variables are set. You should limit profiling only to the applications that need to be traced. **Do not set these environment variables globally as this will cause all .NET processes to be profiled.**
+**Note:** The profiler will try to attach to _any_ .NET process that is started while these environment variables are set. You should limit profiling only to the applications that need to be traced. **Do not set these environment variables globally as this will cause _all_ .NET processes on the host to be profiled.**
 
 {{< tabs >}}
 
@@ -160,7 +132,7 @@ COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 
 `COR_PROFILER_PATH` is not required because the MSI installer registers the native COM library's path in the Windows Registry, and `DD_INTEGRATIONS` is set globally for all processes.
 
-If you did not use the MSI installer, you will need to set all four environment variables manually:
+If you did not use the MSI installer, you need to set all four environment variables:
 
 ```
 COR_ENABLE_PROFILING=1
@@ -169,16 +141,20 @@ COR_PROFILER_PATH=C:\Program Files\Datadog\.NET Tracer\Datadog.Trace.ClrProfiler
 DD_INTEGRATIONS=C:\Program Files\Datadog\.NET Tracer\integrations.json
 ```
 
-One way of limiting the environment variables to your application only is by using a batch file to start your application:
+For example, to set them from a batch file before starting you application:
 
 ```bat
+rem Set environment variables
 SET COR_ENABLE_PROFILING=1
 SET COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 SET COR_PROFILER_PATH=C:\Program Files\Datadog\.NET Tracer\Datadog.Trace.ClrProfiler.Native.dll
 SET DD_INTEGRATIONS=C:\Program Files\Datadog\.NET Tracer\integrations.json
 
+rem Start application
 example.exe
 ```
+
+For Windows Services, you can set environment variables in the multi-string key `HKLM\System\CurrentControlSet\Services\{service name}\Environment`.
 
 {{% /tab %}}
 
@@ -189,13 +165,13 @@ If you used the MSI installer on Windows, the required environment variables are
 For applications not running in IIS, you need to set these two environment variables before starting your application to enable automatic instrumentation:
 
 ```
-COR_ENABLE_PROFILING=1
-COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+CORECLR_ENABLE_PROFILING=1
+CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 ```
 
 `CORECLR_PROFILER_PATH` is not required because the MSI installer registers the native COM library's path in the Windows Registry, and `DD_INTEGRATIONS` is set globally for all processes.
 
-If you did not use the MSI installer, you will need to set all four environment variables manually:
+If you did not use the MSI installer, you need to set all four environment variables:
 
 ```
 CORECLR_ENABLE_PROFILING=1
@@ -204,16 +180,20 @@ CORECLR_PROFILER_PATH=C:\Program Files\Datadog\.NET Tracer\Datadog.Trace.ClrProf
 DD_INTEGRATIONS=C:\Program Files\Datadog\.NET Tracer\integrations.json
 ```
 
-One way of limiting the environment variables to your application only is by using a batch file to start your application:
+For example, to set them from a batch file before starting you application:
 
 ```bat
+rem Set environment variables
 SET CORECLR_ENABLE_PROFILING=1
 SET CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 SET CORECLR_PROFILER_PATH=C:\Program Files\Datadog\.NET Tracer\Datadog.Trace.ClrProfiler.Native.dll
 SET DD_INTEGRATIONS=C:\Program Files\Datadog\.NET Tracer\integrations.json
 
+rem Start application
 dotnet.exe example.dll
 ```
+
+For Windows Services, you can set environment variables in the multi-string key `HKLM\System\CurrentControlSet\Services\{service name}\Environment`.
 
 {{% /tab %}}
 
@@ -231,13 +211,13 @@ DD_INTEGRATIONS=/opt/datadog/integrations.json
 For example, to set them from a bash file before starting you application:
 
 ```bash
-# set environment variables
+# Set environment variables
 EXPORT CORECLR_ENABLE_PROFILING=1
 EXPORT CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 EXPORT CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
 EXPORT DD_INTEGRATIONS=/opt/datadog/integrations.json
 
-# start your application
+# Start your application
 dotnet example.dll
 ```
 
