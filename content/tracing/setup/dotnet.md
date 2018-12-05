@@ -53,7 +53,7 @@ Install the .NET Tracer on the host using the [MSI installer for Windows](https:
 
 - Native library: deployed into `Program Files` by default and registered as a COM library in the Windows Registry by the MSI installer.
 - Managed libraries: deployed into the Global Assembly Cache (GAC) by the MSI installer, where any .NET Framework application can access them.
-- Environment variables: added for IIS only by the MSI installer. Applications that do not run in IIS will need [additional configuration](https://docs-staging.datadoghq.com/lucas/dotnet-tracing-elasticsearch-versions/tracing/setup/dotnet#adding-environment-variables) to set these environment variables.
+- Environment variables: added for IIS only by the MSI installer. Applications that do not run in IIS will need [additional configuration](https://docs.datadoghq.com/tracing/setup/dotnet/?tab=netframeworkonwindows#adding-environment-variables) to set these environment variables.
 
 {{% /tab %}}
 
@@ -65,7 +65,7 @@ Add the `Datadog.Trace.ClrProfiler.Managed` [NuGet package](https://www.nuget.or
 
 - Native library: deployed into `Program Files` by default and registered as a COM library in the Windows Registry by the MSI installer.
 - Managed libraries: deployed together with your application when it is published (via NuGet package).
-- Environment variables: added for IIS only by the MSI installer. Applications that do not run in IIS will need [additional configuration](https://docs-staging.datadoghq.com/lucas/dotnet-tracing-elasticsearch-versions/tracing/setup/dotnet#adding-environment-variables) to set these environment variables.
+- Environment variables: added for IIS only by the MSI installer. Applications that do not run in IIS will need [additional configuration](https://docs.datadoghq.com/tracing/setup/dotnet/?tab=netcoreonwindows#adding-environment-variables) to set these environment variables.
 
 {{% /tab %}}
 
@@ -105,7 +105,7 @@ apk add libc6-compat
 
 - Native library: deployed into `/opt/datadog/` by default, or manually if using the `tar` package.
 - Managed libraries: deployed together with your application when it is published (via NuGet package).
-- Environment variables: [additional configuration](https://docs-staging.datadoghq.com/lucas/dotnet-tracing-elasticsearch-versions/tracing/setup/dotnet#adding-environment-variables) required.
+- Environment variables: [additional configuration](https://docs.datadoghq.com/tracing/setup/dotnet/?tab=netcoreonlinux#adding-environment-variables) required.
 
 {{% /tab %}}
 
