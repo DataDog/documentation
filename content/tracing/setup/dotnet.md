@@ -115,7 +115,7 @@ apk add libc6-compat
 
 **Note:** If your application runs on IIS and you used the MSI installer, you don't need to configure environment variables manually. You may skip this section.
 
-Automatic instrumention is enabled by setting 4 environment variables:
+Automatic instrumention is enabled by setting four environment variables:
 
 {{< tabs >}}
 
@@ -149,18 +149,18 @@ DD_INTEGRATIONS=(path to integrations.json)
 
 {{% tab ".NET Framework on Windows" %}}
 
-If you used the MSI installer on Windows, the required environment variables are already set for IIS. After restarting IIS, the .NET Tracer will be enabled.
+If you used the MSI installer on Windows, the required environment variables are already set for IIS. After restarting IIS, the .NET Tracer will be enabled. If your application runs on IIS and you used the MSI installer, you may skip the rest of this section.
 
-For applications not running in IIS, you need to set these 2 environment variables to enable automatic instrumentation:
+For applications not running in IIS, you need to set these two environment variables before starting your application to enable automatic instrumentation:
 
 ```
 COR_ENABLE_PROFILING=1
 COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 ```
 
-`CORECLR_PROFILER_PATH` is not required because the MSI installer registers the native COM library in the Windows Registry, and `DD_INTEGRATIONS` is set globally for all processes.
+`COR_PROFILER_PATH` is not required because the MSI installer registers the native COM library's path in the Windows Registry, and `DD_INTEGRATIONS` is set globally for all processes.
 
-If you did not use the MSI installer, you will need to set all 4 environment variables manually:
+If you did not use the MSI installer, you will need to set all four environment variables manually:
 
 ```
 COR_ENABLE_PROFILING=1
@@ -184,18 +184,18 @@ example.exe
 
 {{% tab ".NET Core on Windows" %}}
 
-If you used the MSI installer on Windows, the required environment variables are already set for IIS. After restarting IIS, the .NET Tracer will be enabled.
+If you used the MSI installer on Windows, the required environment variables are already set for IIS. After restarting IIS, the .NET Tracer will be enabled. If your application runs on IIS and you used the MSI installer, you may skip the rest of this section.
 
-For applications not running in IIS, you need to set these 2 environment variables to enable automatic instrumentation:
+For applications not running in IIS, you need to set these two environment variables before starting your application to enable automatic instrumentation:
 
 ```
-CORECLR_ENABLE_PROFILING=1
-CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+COR_ENABLE_PROFILING=1
+COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 ```
 
-`CORECLR_PROFILER_PATH` is not required because the MSI installer registers the native COM library in the Windows Registry, and `DD_INTEGRATIONS` is set globally for all processes.
+`CORECLR_PROFILER_PATH` is not required because the MSI installer registers the native COM library's path in the Windows Registry, and `DD_INTEGRATIONS` is set globally for all processes.
 
-If you did not use the MSI installer, you will need to set all 4 environment variables manually:
+If you did not use the MSI installer, you will need to set all four environment variables manually:
 
 ```
 CORECLR_ENABLE_PROFILING=1
@@ -219,7 +219,7 @@ dotnet.exe example.dll
 
 {{% tab ".NET Core on Linux" %}}
 
-On Linux, these 4 environment variables are required to enable automatic instrumentation:
+On Linux, these four environment variables are required to enable automatic instrumentation:
 
 ```
 CORECLR_ENABLE_PROFILING=1
@@ -228,18 +228,20 @@ CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
 DD_INTEGRATIONS=/opt/datadog/integrations.json
 ```
 
-For example, to set them from a bash file:
+For example, to set them from a bash file before starting you application:
 
 ```bash
+# set environment variables
 EXPORT CORECLR_ENABLE_PROFILING=1
 EXPORT CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 EXPORT CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
 EXPORT DD_INTEGRATIONS=/opt/datadog/integrations.json
 
+# start your application
 dotnet example.dll
 ```
 
-To set them for a systemd service, use `Environment=`:
+To set the environment variables for a `systemd` service, use `Environment=`:
 
 ```ini
 [Unit]
@@ -257,9 +259,9 @@ Environment=DD_INTEGRATIONS=/opt/datadog/integrations.json
 WantedBy=multi-user.target
 ```
 
-To set the environment variable on a Linux container in Docker, use `ENV`:
+To set the environment variables on a Linux container in Docker, use `ENV`:
 
-```text
+```docker
 ENV CORECLR_ENABLE_PROFILING=1
 ENV CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 ENV CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
