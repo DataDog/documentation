@@ -26,12 +26,12 @@ To begin tracing applications written in any language, first [install and config
 
 ## Automatic Instrumentation
 
-Automatic instrumentation uses the Profiling API provided by .NET Framework and .NET Core to modify IL instructions at run time and inject instrumentation code into your application. With zero code changes and minimal configuration, the .NET Tracer automatically instruments all supported libraries out of the box.
+Automatic instrumentation uses the Profiling API provided by .NET Framework and .NET Core to modify IL instructions at runtime and inject instrumentation code into your application. With zero code changes and minimal configuration, the .NET Tracer automatically instruments all supported libraries out of the box.
 
 Automatic instrumentation captures:
 
 - Method execution time
-- Relevant trace data such as URL and status response codes for web requests or SQL query for database access
+- Relevant trace data, such as URL and status response codes for web requests or SQL queries for database access
 - Unhandled exceptions, including stacktraces if available
 - A total count of traces (e.g. web requests) flowing through the system
 
@@ -53,7 +53,7 @@ Install the .NET Tracer on the host using the [MSI installer for Windows](https:
 
 - Native library: deployed into `Program Files` by default and registered as a COM library in the Windows Registry by the MSI installer.
 - Managed libraries: deployed into the Global Assembly Cache (GAC) by the MSI installer, where any .NET Framework application can access them.
-- Environment variables: added for IIS only by the MSI installer. Applications that do not run in IIS will need [additional configuration](?tab=netframeworkonwindows#adding-environment-variables) to set these environment variables.
+- Environment variables: added for IIS only by the MSI installer. Applications that do not run in IIS need [additional configuration](?tab=netframeworkonwindows#adding-environment-variables) to set these environment variables.
 
 {{% /tab %}}
 
@@ -65,7 +65,7 @@ Add the `Datadog.Trace.ClrProfiler.Managed` [NuGet package](https://www.nuget.or
 
 - Native library: deployed into `Program Files` by default and registered as a COM library in the Windows Registry by the MSI installer.
 - Managed libraries: deployed together with your application when it is published (via NuGet package).
-- Environment variables: added for IIS only by the MSI installer. Applications that do not run in IIS will need [additional configuration](?tab=netcoreonwindows#adding-environment-variables) to set these environment variables.
+- Environment variables: added for IIS only by the MSI installer. Applications that do not run in IIS need [additional configuration](?tab=netcoreonwindows#adding-environment-variables) to set these environment variables.
 
 {{% /tab %}}
 
@@ -97,7 +97,7 @@ curl -L https://github.com/DataDog/dd-trace-csharp/releases/download/v0.5.2-beta
 | sudo tar xzf - -C /opt/datadog
 ```
 
-For Alpine Linux you will also need to install `libc6-compat`
+For Alpine Linux you also need to install `libc6-compat`
 
 ```bash
 apk add libc6-compat
@@ -115,15 +115,15 @@ apk add libc6-compat
 
 **Note:** If your application runs on IIS and you used the MSI installer, you don't need to configure environment variables manually and you may skip this section.
 
-**Note:** The profiler will try to attach to _any_ .NET process that is started while these environment variables are set. You should limit profiling only to the applications that need to be traced. **Do not set these environment variables globally as this will cause _all_ .NET processes on the host to be profiled.**
+**Note:** The profiler tries to attach to _any_ .NET process that is started while these environment variables are set. You should limit profiling only to the applications that need to be traced. **Do not set these environment variables globally as this causes _all_ .NET processes on the host to be profiled.**
 
 {{< tabs >}}
 
 {{% tab ".NET Framework on Windows" %}}
 
-If you used the MSI installer on Windows, the required environment variables are already set for IIS. After restarting IIS, the .NET Tracer will be enabled. If your application runs on IIS and you used the MSI installer, you may skip the rest of this section.
+If you used the MSI installer on Windows, the required environment variables are already set for IIS. After restarting IIS, the .NET Tracer becomes enabled. If your application runs on IIS and you used the MSI installer, you may skip the rest of this section.
 
-For applications not running in IIS, you need to set these two environment variables before starting your application to enable automatic instrumentation:
+For applications not running in IIS, set these two environment variables before starting your application to enable automatic instrumentation:
 
 ```
 COR_ENABLE_PROFILING=1
@@ -132,7 +132,7 @@ COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 
 `COR_PROFILER_PATH` is not required because the MSI installer registers the native COM library's path in the Windows Registry, and `DD_INTEGRATIONS` is set globally for all processes.
 
-If you did not use the MSI installer, you need to set all four environment variables:
+If you did not use the MSI installer, set all four environment variables:
 
 ```
 COR_ENABLE_PROFILING=1
@@ -162,7 +162,7 @@ For Windows Services, you can set environment variables in the multi-string key 
 
 If you used the MSI installer on Windows, the required environment variables are already set for IIS. After restarting IIS, the .NET Tracer will be enabled. If your application runs on IIS and you used the MSI installer, you may skip the rest of this section.
 
-For applications not running in IIS, you need to set these two environment variables before starting your application to enable automatic instrumentation:
+For applications not running in IIS, set these two environment variables before starting your application to enable automatic instrumentation:
 
 ```
 CORECLR_ENABLE_PROFILING=1
@@ -171,7 +171,7 @@ CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 
 `CORECLR_PROFILER_PATH` is not required because the MSI installer registers the native COM library's path in the Windows Registry, and `DD_INTEGRATIONS` is set globally for all processes.
 
-If you did not use the MSI installer, you need to set all four environment variables:
+If you did not use the MSI installer, set all four environment variables:
 
 ```
 CORECLR_ENABLE_PROFILING=1
@@ -264,7 +264,7 @@ The .NET tracer supports automatic instrumentation on the following runtimes:
 
 **Note**: Libraries that target .NET Standard 2.0 are supported when running on either .NET Framework 4.6.1+ or .NET Core 2.0+.
 
-Don’t see your desired frameworks? We’re continually adding additional support. [Check with the Datadog team][5] to see if we can help.
+Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][5] for help.
 
 ### Web Framework Integrations
 
@@ -280,7 +280,7 @@ The .NET tracer can instrument the following web frameworks automatically:
 | ASP.NET Core MVC  | 2.0+      | .NET Core 2.0+      | Windows | Public Beta   |
 | ASP.NET Core MVC  | 2.0+      | .NET Core 2.0+      | Linux   | Public Beta   |
 
-Don’t see your desired web frameworks? We’re continually adding additional support. [Check with the Datadog team][5] to see if we can help.
+Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][5] for help.
 
 ### Data Store Integrations
 
@@ -296,7 +296,7 @@ The .NET tracer's ability to automatically instrument data store access depends 
 | MongoDB       | `MongoDB.Driver`                         |            | _Coming soon_ |
 | PostgreSQL    | `Npgsql`                                 |            | _Coming soon_ |
 
-Don’t see your desired data store libraries? We’re continually adding additional support. [Check with the Datadog team][5] to see if we can help.
+Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][5] for help.
 
 ## Manual Instrumentation
 
