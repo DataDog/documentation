@@ -270,15 +270,15 @@ Don’t see your desired frameworks? We’re continually adding additional suppo
 
 The .NET tracer can instrument the following web frameworks automatically:
 
-| Web framework     | Versions  | Runtime             | OS      | Support Type |
-| :---------------- | :-------- | :------------------ | :------ | :----------- |
-| ASP.NET MVC 5     | 5.2+      | .NET Framework 4.5+ | Windows | Public Beta  |
-| ASP.NET MVC 4     | 4.0.40804 | .NET Framework 4.5+ | Windows | Public Beta  |
-| ASP.NET Web API 2 | 2.2+      | .NET Framework 4.5+ | Windows | Public Beta  |
-| ASP.NET Core MVC  | 2.0+      | .NET Framework 4.5+ | Windows | Public Beta  |
-| ASP.NET Core MVC  | 2.0+      | .NET Core 2.0+      | Windows | Public Beta  |
-| ASP.NET Core MVC  | 2.0+      | .NET Core 2.0+      | Linux   | Public Beta  |
-| ASP.NET WebForms  | 4.5+      | .NET Framework 4.5+ | Windows | Coming soon  |
+| Web framework     | Versions  | Runtime             | OS      | Support Type  |
+| :---------------- | :-------- | :------------------ | :------ | :------------ |
+| ASP.NET MVC 5     | 5.1.3+    | .NET Framework 4.5+ | Windows | Public Beta   |
+| ASP.NET MVC 4     | 4.0.40804 | .NET Framework 4.5+ | Windows | Public Beta   |
+| ASP.NET Web API 2 | 2.2+      | .NET Framework 4.5+ | Windows | Public Beta   |
+| ASP.NET WebForms  | 4.5+      | .NET Framework 4.5+ | Windows | _Coming soon_ |
+| ASP.NET Core MVC  | 2.0+      | .NET Framework 4.5+ | Windows | Public Beta   |
+| ASP.NET Core MVC  | 2.0+      | .NET Core 2.0+      | Windows | Public Beta   |
+| ASP.NET Core MVC  | 2.0+      | .NET Core 2.0+      | Linux   | Public Beta   |
 
 Don’t see your desired web frameworks? We’re continually adding additional support. [Check with the Datadog team][5] to see if we can help.
 
@@ -286,15 +286,15 @@ Don’t see your desired web frameworks? We’re continually adding additional s
 
 The .NET tracer's ability to automatically instrument data store access depends on the client libraries used:
 
-| Data store    | Library or NuGet package                 | Versions   | Support type |
-| :------------ | :--------------------------------------- | :--------- | :----------- |
-| MS SQL Server | `System.Data.SqlClient` (.NET Framework) | (built-in) | Public Beta  |
-| MS SQL Server | `System.Data.SqlClient` (NuGet)          | 4.1+       | Public Beta  |
-| Redis         | `StackExchange.Redis`                    | 1.0.187+   | Public Beta  |
-| Redis         | `ServiceStack.Redis`                     | 4.0.48+    | Public Beta  |
-| Elasticsearch | `NEST` / `Elasticsearch.Net`             | 6.0.0+     | Public Beta  |
-| MongoDB       | `MongoDB.Driver`                         |            | Coming soon  |
-| PostgreSQL    | `Npgsql`                                 |            | Coming soon  |
+| Data store    | Library or NuGet package                 | Versions   | Support type  |
+| :------------ | :--------------------------------------- | :--------- | :------------ |
+| MS SQL Server | `System.Data.SqlClient` (.NET Framework) | (built-in) | Public Beta   |
+| MS SQL Server | `System.Data.SqlClient` (NuGet)          | 4.1+       | Public Beta   |
+| Redis         | `StackExchange.Redis`                    | 1.0.187+   | Public Beta   |
+| Redis         | `ServiceStack.Redis`                     | 4.0.48+    | Public Beta   |
+| Elasticsearch | `NEST` / `Elasticsearch.Net`             | 6.0.0+     | Public Beta   |
+| MongoDB       | `MongoDB.Driver`                         |            | _Coming soon_ |
+| PostgreSQL    | `Npgsql`                                 |            | _Coming soon_ |
 
 Don’t see your desired data store libraries? We’re continually adding additional support. [Check with the Datadog team][5] to see if we can help.
 
