@@ -163,9 +163,11 @@ An attribute is missing if it is not found in the log attributes, or if it canno
 
 ## Trace Remapper
 
-This is especially useful to improve the correlation between application traces and logs. 
-Follow [this documentation to inject the trace ids in the application logs][5] and by default the log integrations take care of all the rest of the setup.
-Use this Processor to assign custom attributes as the official trace id. Just enter the attribute path in the Processor tile as follows:
+There are two ways to improve correlation between application traces and logs:
+
+1. Follow the documentation on [how to inject a trace id in the application logs][5] and by default log integrations take care of all the rest of the setup.
+
+2. Use the Trace Remapper processor to define a log attribute as its associated trace id by entering the attribute path in the Processor tile as follows:
 
 {{< img src="logs/processing/processors/trace_processor.png" alt="Trace Id Processor" responsive="true" style="width:80%;">}}
 
