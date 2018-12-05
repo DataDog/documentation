@@ -35,7 +35,7 @@ Automatic instrumentation captures:
 - Unhandled exceptions, including stacktraces if available
 - A total count of traces (e.g. web requests) flowing through the system
 
-### Installing .NET Tracer libraries
+### Installing libraries
 
 There are three components needed to enable automatic instrumentation.
 
@@ -111,7 +111,7 @@ apk add libc6-compat
 
 {{< /tabs >}}
 
-#### Adding Environment Variables
+### Adding Environment Variables
 
 **Note:** If your application runs on IIS and you used the MSI installer, you don't need to configure environment variables manually. You may skip this section.
 
