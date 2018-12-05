@@ -39,7 +39,7 @@ Automatic instrumentation captures:
 
 There are three components needed to enable automatic instrumentation.
 
-- Native COM library that implements the Profiling API (a `.dll` file on Windows or `.so` on Linux) to intercept method calls and inject
+- Native COM library that implements the Profiling API (a `.dll` file on Windows or `.so` on Linux) to intercept method calls
 - Managed libraries that interact with your application to measure method execution time and extract data from method arguments
 - Several environment variables that enable the Profiling API and configure the .NET Tracer
 
