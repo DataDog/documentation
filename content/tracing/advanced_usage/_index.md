@@ -1,5 +1,5 @@
 ---
-title: Advanced APM Setup
+title: Advanced Languages instrumentation
 kind: documentation
 ---
 

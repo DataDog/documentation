@@ -601,7 +601,7 @@ languages:
         # TRACING/APM - Setup Advanced
 
         - identifier: customnav_tracingnav_advanced_usage
-          name: "Advanced Usage"
+          name: "Advanced Instrumentation"
           url: "tracing/advanced_usage/"
           weight: 20
           parent: menu_references_tracing
@@ -1757,13 +1757,7 @@ languages:
         # TRACING/APM - Setup Advanced
 
         - identifier: customnav_tracingnav_advanced_usage
-          name: "Advanced Usage"
-          url: "tracing/advanced_usage/"
-          weight: 20
-          parent: menu_references_tracing
-
-        - identifier: customnav_tracingnav_advanced_usage
-          name: "Advanced Usage"
+          name: "Instrumentation avancée"
           url: "tracing/advanced_usage/"
           weight: 20
           parent: menu_references_tracing
