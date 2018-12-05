@@ -61,7 +61,7 @@ Install the .NET Tracer on the host using the [MSI installer for Windows][3]. Ch
 
 Install the .NET Tracer on the host using the [MSI installer for Windows][3]. Choose the platform that matches your application: x64 for 64-bits or x86 for 32-bits. You can install both side-by-side if needed.
 
-Add the `Datadog.Trace.ClrProfiler.Managed` NuGet package to your application, matching the package version to the MSI installer above. Refer to the [NuGet documentation][11] for instructions on how to add a NuGet package to your application.
+Add the `Datadog.Trace.ClrProfiler.Managed` [NuGet package][10] to your application, matching the package version to the MSI installer above. Refer to the [NuGet documentation][11] for instructions on how to add a NuGet package to your application.
 
 - Native library: deployed into `Program Files` by default and registered as a COM library in the Windows Registry by the MSI installer.
 - Managed libraries: deployed together with your application when it is published (via NuGet package).
@@ -71,9 +71,9 @@ Add the `Datadog.Trace.ClrProfiler.Managed` NuGet package to your application, m
 
 {{% tab ".NET Core on Linux" %}}
 
-Add the `Datadog.Trace.ClrProfiler.Managed` NuGet package to your application, matching the package version to the package below. Refer to the [NuGet documentation][11] for instructions on how to add a NuGet package to your application.
+Add the `Datadog.Trace.ClrProfiler.Managed` [NuGet package][10] to your application, matching the package version to the package below. Refer to the [NuGet documentation][11] for instructions on how to add a NuGet package to your application.
 
-Install the .NET Tracer on the host using the using one of the package available from the `dd-trace-csharp` [releases page][10].
+Install the .NET Tracer on the host using the using one of the packages available from the `dd-trace-csharp` [releases page][3].
 
 For Debian or Ubuntu, download and install the Debian package:
 
@@ -318,7 +318,7 @@ Don’t see your desired data store libraries? We’re continually adding additi
 
 ## Manual Instrumentation
 
-To manually instrument your code, add the `Datadog.Trace` package from [NuGet][4] to your application. In your code, access the global tracer through `Datadog.Trace.Tracer.Instance` to create new spans.
+To manually instrument your code, add the `Datadog.Trace` [NuGet package][4] to your application. In your code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
 For more details on manual instrumentation and custom tagging, see [Advanced Usage][2].
 
@@ -346,5 +346,5 @@ For more details on supported platforms, see the [.NET Standard documentation][6
 [6]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support
 [8]: #manual-instrumentation
 [9]: https://support.microsoft.com/en-us/help/969864/using-iisreset-exe-to-restart-internet-information-services-iis-result
-[10]: https://github.com/DataDog/dd-trace-csharp/releases
+[10]: https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed
 [11]: https://docs.microsoft.com/en-us/nuget/consume-packages/ways-to-install-a-package
