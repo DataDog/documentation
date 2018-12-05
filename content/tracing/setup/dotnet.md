@@ -49,7 +49,7 @@ How these components are installed on the host depends on the runtime environmen
 
 {{% tab ".NET Framework on Windows" %}}
 
-Install the .NET Tracer on the host using the [MSI installer for Windows][3]. Choose the platform that matches your application: x64 for 64-bits or x86 for 32-bits. You can install both side-by-side if needed.
+Install the .NET Tracer on the host using the [MSI installer for Windows](https://github.com/DataDog/dd-trace-csharp/releases). Choose the platform that matches your application: x64 for 64-bits or x86 for 32-bits. You can install both side-by-side if needed.
 
 - Native library: deployed into `Program Files` by default and registered as a COM library in the Windows Registry by the MSI installer.
 - Managed libraries: deployed into the Global Assembly Cache (GAC) by the MSI installer, so any .NET Framework application can find them without deploying them with the application.
@@ -59,9 +59,9 @@ Install the .NET Tracer on the host using the [MSI installer for Windows][3]. Ch
 
 {{% tab ".NET Core on Windows" %}}
 
-Install the .NET Tracer on the host using the [MSI installer for Windows][3]. Choose the platform that matches your application: x64 for 64-bits or x86 for 32-bits. You can install both side-by-side if needed.
+Install the .NET Tracer on the host using the [MSI installer for Windows](https://github.com/DataDog/dd-trace-csharp/releases). Choose the platform that matches your application: x64 for 64-bits or x86 for 32-bits. You can install both side-by-side if needed.
 
-Add the `Datadog.Trace.ClrProfiler.Managed` [NuGet package][10] to your application, matching the package version to the MSI installer above. Refer to the [NuGet documentation][11] for instructions on how to add a NuGet package to your application.
+Add the `Datadog.Trace.ClrProfiler.Managed` [NuGet package](https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed) to your application, matching the package version to the MSI installer above. Refer to the [NuGet documentation](https://docs.microsoft.com/en-us/nuget/consume-packages/ways-to-install-a-package) for instructions on how to add a NuGet package to your application.
 
 - Native library: deployed into `Program Files` by default and registered as a COM library in the Windows Registry by the MSI installer.
 - Managed libraries: deployed together with your application when it is published (via NuGet package).
@@ -71,9 +71,9 @@ Add the `Datadog.Trace.ClrProfiler.Managed` [NuGet package][10] to your applicat
 
 {{% tab ".NET Core on Linux" %}}
 
-Add the `Datadog.Trace.ClrProfiler.Managed` [NuGet package][10] to your application, matching the package version to the package below. Refer to the [NuGet documentation][11] for instructions on how to add a NuGet package to your application.
+Add the `Datadog.Trace.ClrProfiler.Managed` [NuGet package](https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed) to your application, matching the package version to the package below. Refer to the [NuGet documentation](https://docs.microsoft.com/en-us/nuget/consume-packages/ways-to-install-a-package) for instructions on how to add a NuGet package to your application.
 
-Install the .NET Tracer on the host using the using one of the packages available from the `dd-trace-csharp` [releases page][3].
+Install the .NET Tracer on the host using the using one of the packages available from the `dd-trace-csharp` [releases page](https://github.com/DataDog/dd-trace-csharp/releases).
 
 For Debian or Ubuntu, download and install the Debian package:
 
@@ -340,11 +340,8 @@ For more details on supported platforms, see the [.NET Standard documentation][6
 
 [1]: https://docs.datadoghq.com/tracing/setup
 [2]: /tracing/advanced_usage/?tab=net
-[3]: https://github.com/DataDog/dd-trace-csharp/releases
 [4]: https://www.nuget.org/packages/Datadog.Trace/
 [5]: /help
 [6]: https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support
 [8]: #manual-instrumentation
 [9]: https://support.microsoft.com/en-us/help/969864/using-iisreset-exe-to-restart-internet-information-services-iis-result
-[10]: https://www.nuget.org/packages/Datadog.Trace.ClrProfiler.Managed
-[11]: https://docs.microsoft.com/en-us/nuget/consume-packages/ways-to-install-a-package
