@@ -133,20 +133,20 @@ In the commands below, replace `<CASE_ID>` with your Datadog support case ID, if
 {{< tabs >}}
 {{% tab "Agent v6" %}}
 
-| Platform   | Command                                               |
-|------------|-------------------------------------------------------|
-| Linux      | `sudo -u dd-agent -- datadog-agent flare <CASE_ID>`   |
-| Docker     | `docker exec -it datadog-agent agent flare <CASE_ID>` |
-| macOS      | `datadog-agent flare <CASE_ID>` or web [web GUI][8]   |
-| CentOS     | `sudo datadog-agent flare <CASE_ID>`                  |
-| Debian     | `sudo datadog-agent flare <CASE_ID>`                  |
-| Kubernetes | `kubectl exec <pod-name> -it agent flare <CASE_ID>`   |
-| Fedora     | `sudo datadog-agent flare <CASE_ID>`                  |
-| Redhat     | `sudo datadog-agent flare <CASE_ID>`                  |
-| Suse       | `sudo datadog-agent flare <CASE_ID>`                  |
-| Source     | `sudo datadog-agent flare <CASE_ID>`                  |
-| Windows    | Consult the dedicated [Windows documentation][10]     |
-| Heroku     | Consult the dedicated [Heroku documentation][13]      |
+| Platform     | Command                                                 |
+| ------------ | ------------------------------------------------------- |
+| Linux        | `sudo -u dd-agent -- datadog-agent flare <CASE_ID>`     |
+| Docker       | `docker exec -it datadog-agent agent flare <CASE_ID>`   |
+| macOS        | `datadog-agent flare <CASE_ID>` or via the [web GUI][8] |
+| CentOS       | `sudo datadog-agent flare <CASE_ID>`                    |
+| Debian       | `sudo datadog-agent flare <CASE_ID>`                    |
+| Kubernetes   | `kubectl exec <pod-name> -it agent flare <CASE_ID>`     |
+| Fedora       | `sudo datadog-agent flare <CASE_ID>`                    |
+| Redhat       | `sudo datadog-agent flare <CASE_ID>`                    |
+| Suse         | `sudo datadog-agent flare <CASE_ID>`                    |
+| Source       | `sudo datadog-agent flare <CASE_ID>`                    |
+| Windows      | Consult the dedicated [Windows documentation][10]       |
+| Heroku       | Consult the dedicated [Heroku documentation][13]        |
 
 [10]: /agent/basic_agent_usage/windows/#agent-v6
 [13]: /agent/basic_agent_usage/heroku/#send-a-flare
