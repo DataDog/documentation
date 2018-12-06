@@ -18,7 +18,7 @@ List of all environment variables available:
 
 | Environment variable       | Description                                                                                   |
 | ------                     | ------                                                                                        |
-| `DD_API_KEY`               | [Datadog API Key][3]                                                                          |
+| `DD_API_KEY`               | [Datadog API Key][2]                                                                          |
 | `DD_APM_ENABLED`           | When set to `true`, the Datadog Agent accepts trace metrics.                                  |
 | `DD_APM_DD_URL`            | Datadog API endpoint where traces are sent.                                                   |
 | `DD_PROXY_HTTPS`           | Set up the URL for the proxy to use.                                                          |
@@ -163,5 +163,4 @@ tracer.configure(hostname='172.17.0.1', port=8126)
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/datadog-trace-agent
-[2]: /agent/basic_agent_usage/docker
-[3]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/account/settings#api

@@ -14,7 +14,7 @@ further_reading:
 
 In order to enable APM tracing, the `datadog/agent` image must be configured to enable the trace collection by passing `DD_APM_ENABLED=true` as environment variable.
 
-For additional information or different installation processes, see the [Agent 6 Kubernetes documentation][2].
+For additional information or different installation processes, see the [Agent 6 Kubernetes documentation][1].
 
 ## Deploy Agent DaemonSet
 
@@ -214,6 +214,4 @@ const tracer = require('dd-trace').init({
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/datadog-trace-agent
-[2]: /agent/basic_agent_usage/kubernetes
-[3]: https://kubernetes.io/docs/concepts/services-networking/service/#discovering-services
+[1]: /agent/basic_agent_usage/kubernetes
