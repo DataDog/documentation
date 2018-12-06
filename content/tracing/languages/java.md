@@ -18,7 +18,7 @@ further_reading:
 
 ## Installation and Getting Started
 
-To begin tracing applications written in any language, first [install and configure the Datadog Agent][3] (see additional documentation for [tracing Docker applications](//agent/docker/apm/)).
+To begin tracing applications written in any language, first [install and configure the Datadog Agent][3] (see additional documentation for [tracing Docker applications](/agent/docker/apm/)).
 
 Next, download `dd-java-agent.jar` that contains the Agent class files:
 

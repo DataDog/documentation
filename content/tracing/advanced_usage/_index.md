@@ -1,5 +1,5 @@
 ---
-title: Advanced Languages instrumentation
+title: Advanced instrumentation
 kind: documentation
 ---
 
