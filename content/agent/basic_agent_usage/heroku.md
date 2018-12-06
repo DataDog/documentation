@@ -65,7 +65,7 @@ Depending on your use case, you may want to set your hostname so that hosts are 
 
 ## Heroku Log Collection
 
-** This integration is currently available for the EU region only**
+** This integration is only available for the Datadog EU region**
 
 Heroku provides 3 types of logs:
 
@@ -83,11 +83,11 @@ To send all these logs to Datadog:
 * Set up the HTTPS drain with the following command:
 
 ```
-heroku drains:add https://http-intake.logs.datadoghq.eu/v1/input/<API_KEY>?ddsource=heroku&service=<SERVICE>&host=<HOST> -a myapp
+heroku drains:add https://http-intake.logs.datadoghq.eu/v1/input/<API_KEY>?ddsource=heroku&service=<SERVICE>&host=<HOST> -a <APPLICATION_NAME>
 ```
 
 * Replace `<API_KEY>` with your [Datadog API Key][2]
-* Replace `myapp` and `<SERVICE>` with your application name¨
+* Replace `<APPLICATION_NAME>` and `<SERVICE>` with your application name¨
 * Replace `<HOST>` by the wanted hostname. Refer to the [host section](#hostname) to make sure that this is the same value set for the metrics as well.
  
 ### Custom attributes
