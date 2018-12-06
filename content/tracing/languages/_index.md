@@ -5,6 +5,12 @@ aliases:
     - /tracing/setup
 ---
 
+After you have [installed the Datadog Agent][1], [enabled trace collection][2], and [configured your environment[3], begin tracing by instrumenting your application.
+
+[1]: /agent
+[2]: /agent/apm/?tab=agent630#agent-configuration
+[3]: /apm/?tab=agent630#primary-tags
+
 {{< whatsnext desc="Select one of the following supported languages to start instrumenting your application:">}}
   {{< nextlink href="/agent/docker/apm" tag="Docker" >}}Docker setup.{{< /nextlink >}}
   {{< nextlink href="agent/kubernetes/apm" tag="Kubernetes" >}}Kubernetes setup.{{< /nextlink >}}
