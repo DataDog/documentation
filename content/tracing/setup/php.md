@@ -78,7 +78,8 @@ Automatic instrumentation captures:
 | :-----------   | :---------- | :----------------- |
 | Laravel        | 5.x         | Public Beta        |
 | Laravel        | 4.2         | Coming Soon        |
-| Symfony        | 3.x         | Public Beta        |
+| Symfony        | 4.x         | Public Beta        |
+| Symfony        | 3.x         | Coming Soon        |
 | Magento        | 2.x         | Coming Soon        |
 | Zend Framework | 3.x         | Coming Soon        |
 | CakePHP        | 3.x         | Coming Soon        |
@@ -91,15 +92,19 @@ Don't see your desired web frameworks? Let Datadog know more about your needs th
 
 #### Library Compatibility
 
-| Module        | Versions              | Support Type       |
-| :------------ | :-------------------- | :----------------- |
-| Memcached     | *(Any Supported PHP)* | Public Beta        |
-| Mysqli        | *(Any Supported PHP)* | Public Beta        |
-| PDO           | *(Any Supported PHP)* | Public Beta        |
-| Predis        | 1.1                   | Public Beta        |
-| pgsql         | *(Any Supported PHP)* | Coming Soon        |
-| MongoDB       | 1.x                   | Coming Soon        |
-| Doctrine      | 2.6                   | Coming Soon        |
+| Module        | Versions                   | Support Type |
+| :------------ | :------------------------- | :----------- |
+| Curl          | *(Any Supported PHP)*      | Public Beta  |
+| Doctrine      | 2.6                        | Coming Soon  |
+| Elasticsearch | 1.x                        | Public Beta  |
+| Eloquent      | Laravel supported versions | Public Beta  |
+| Guzzle        | 5.x                        | Public Beta  |
+| Memcached     | *(Any Supported PHP)*      | Public Beta  |
+| MongoDB       | 1.4.x                      | Public Beta  |
+| Mysqli        | *(Any Supported PHP)*      | Public Beta  |
+| PDO           | *(Any Supported PHP)*      | Public Beta  |
+| pgsql         | *(Any Supported PHP)*      | Coming Soon  |
+| Predis        | 1.1                        | Public Beta  |
 
 Don't see your desired libraries? Let Datadog know more about your needs through [this survey][8].
 
