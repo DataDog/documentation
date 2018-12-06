@@ -157,7 +157,6 @@ class PreBuild:
             'kube_dns': {'action': 'discard', 'target': 'none', 'remove_header': False},
             'kube_proxy': {'action': 'discard', 'target': 'none', 'remove_header': False},
             'kubernetes_state': {'action': 'discard', 'target': 'none', 'remove_header': False},
-            'stride': {'action': 'discard', 'target': 'none', 'remove_header': False},
             'system_core': {'action': 'discard', 'target': 'system', 'remove_header': False},
             'system_swap': {'action': 'discard', 'target': 'system', 'remove_header': False},
             'hbase_regionserver': {'action': 'merge', 'target': 'hbase_master', 'remove_header': False},
