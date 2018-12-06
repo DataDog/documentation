@@ -2,7 +2,7 @@
 title: Créer un monitor
 type: apicode
 order: 16.01
-external_redirect: /api/#create-a-monitor
+external_redirect: /api/#creer-un-monitor
 ---
 
 ##### Signature

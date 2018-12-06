@@ -6,6 +6,6 @@
         "check": "tomcat.can_connect",
         "statuses": ["ok", "critical"],
         "name": "Peut se connecter",
-        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter et de recueillir des métriques depuis l'instance Tomcat surveillée. Su ce n'est pas le cas, renvoie `OK`."
+        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter et de recueillir des métriques depuis l'instance Tomcat surveillée. Si ce n'est pas le cas, renvoie `OK`."
     }
 ]
