@@ -2,7 +2,7 @@
 title: Créer une organisation enfant
 type: apicode
 order: 17.1
-external_redirect: /api/#create-child-organization
+external_redirect: /api/#creer-une-organisation-enfant
 ---
 
 ##### Signature

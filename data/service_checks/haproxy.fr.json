@@ -5,7 +5,7 @@
         "check": "haproxy.backend_up",
         "statuses": ["ok", "critical", "unknown"],
         "groups": ["service", "backend"],
-        "name": "Backend Up",
-        "description": "Convertit la page d'état HAProxy en check de service. Renvoie `CRITICAL` pour un service donné si HAProxy le signale` down`. `maint`,` ok` et tout autre état donnera `OK`."
+        "name": "Backend disponible",
+        "description": "Convertit la page de statut HAProxy en des checks de service. Renvoie `CRITICAL` pour un service donné si HAProxy le signale `down`. Renvoie `OK` pour les états `maint`, ` ok` et tout autre état."
     }
 ]

@@ -5,6 +5,6 @@
         "check": "jmx.can_connect",
         "statuses": ["ok", "critical"],
         "name": "Peut se connecter",
-        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter et de collecter des métriques depuis l'instance JVM qu'il monitor. Sinon renvoie `OK`."
+        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter et de recueillir des métriques depuis l'instance JVM qu'il surveille. Si ce n'est pas le cas, renvoie `OK`."
     }
 ]

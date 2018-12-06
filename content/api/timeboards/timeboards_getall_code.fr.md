@@ -1,8 +1,8 @@
 ---
-title: Récupérer tous les Timeboards
+title: Récupérer tous les timeboards
 type: apicode
 order: 21.4
-external_redirect: /api/#get-all-timeboards
+external_redirect: /api/#recuperer-tous-les-timeboards
 ---
 
 ##### Signature
