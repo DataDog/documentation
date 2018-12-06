@@ -6,7 +6,7 @@ external_redirect: /api/#envoyer-un-evenement
 ---
 
 ## Envoyer un événement
-Cet endpoint vous permet de publier des événements dans le flux. Taggez-les, définissez la priorité et regroupez-les avec d'autres événements.
+Cet endpoint vous permet d'envoyer des événements dans le flux. Taggez-les, définissez la priorité et regroupez-les avec d'autres événements.
 
 ##### ARGUMENTS
 * **`title`** [*obligatoire*] : 
@@ -17,7 +17,7 @@ Cet endpoint vous permet de publier des événements dans le flux. Taggez-les, d
     Le texte prend en charge le [Markdown][2].
     Utilisez `msg_text` avec [la bibliothèque Datadog Ruby][1].
 * **`date_happened`** [*facultatif*, *défaut* = **now**] :
-    Timestamp POSIX de l'événement. Doit être envoyé sous la forme d'un integer (c'est-à-dire sans guillemets). *Limité aux événements de moins de 1 an et 24 jours (389 jours)*.
+    Timestamp POSIX de l'événement. Doit être envoyé sous la forme d'un entier (c'est-à-dire sans guillemets). *Limité aux événements de moins de 1 an et 24 jours (389 jours)*.
 * **`priority`** [*facultatif*, *défaut* = **normal**] :
     La priorité de l'événement : **normal** ou **low**.
 * **`host`** [*facultatif*, *défaut* = **None**] :

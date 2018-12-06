@@ -12,7 +12,7 @@ Obtenez le top des [métriques customisés][1] par moyenne horaire
 ##### Arguments
 * **`month`** [*obligatoire*]:  
     datetime dans le format ISO-8601 , UTC, précis au mois: [YYYY-MM] Pour l'usage depuis le début de cette heure
-* **`names`** [*optionnel*, *défaut*=**None**]:  
+* **`names`** [*facultatif*, *défaut*=**None**]:  
   Liste des noms des métriques en format séparé par des virgules.
 
 [1]: /developers/metrics/custom_metrics/

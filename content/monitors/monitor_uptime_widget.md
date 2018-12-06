@@ -17,8 +17,6 @@ The monitor Uptime widget is in private beta. Interested in trying it out? <a hr
 
 Use the monitor Uptime widget to track your monitor’s uptime via a widget in your [Screenboards][1]. Monitor Uptime is defined as the amount of time a monitor was in an up state (OK) compared to down state (non-OK). Similar to the monitor status page visualization, the status is represented in bars as green (up) and red (down).
 
-Note: The widget is currently not compatible with service checks monitors.
-
 ## Widget configuration
 
 {{< img src="monitors/monitor_uptime_widget_configuration.png" alt="monitor uptime widget configuration" responsive="true" >}}

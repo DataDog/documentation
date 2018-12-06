@@ -1,11 +1,11 @@
 ---
-title: Revoke a shared a Screenboard
+title: Revoke a shared Screenboard
 type: apicontent
 order: 18.7
-external_redirect: /api/#revoke-a-shared-a-screenboard
+external_redirect: /api/#revoke-a-shared-screenboard
 ---
 
-## Revoke a shared a Screenboard
+## Revoke a shared Screenboard
 
 Revoke a shared Screenboard.
 

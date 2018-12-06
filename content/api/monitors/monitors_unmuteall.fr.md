@@ -1,12 +1,12 @@
 ---
-title: Activer tous les monitors
+title: Réactiver tous les monitors
 type: apicontent
 order: 16.08
-external_redirect: /api/#unmute-all-monitors
+external_redirect: /api/#reactiver-tous-les-monitors
 ---
 
-## Activer tous les monitors
-Désactive l'inhibition de tous les monitors. Lève une erreur si la fonction "mute all" n'a pas été activée auparavant.
+## Réactiver tous les monitors
+Annule la désactivation de tous les monitors. Renvoie une erreur si la fonction de désactivation de tous les monitors n'a pas été utilisée auparavant.
 
 ##### ARGUMENTS
 

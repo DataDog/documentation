@@ -7,6 +7,6 @@ external_redirect: /api/#timeboards
 
 ## Timeboards
 
-Cette endpoint vous permet de créer, mettre à jour, supprimer et récupérer des Timeboards. [En apprendre plus sur les Timeboards][1].
+Cet endpoint vous permet de programmer la création, la mise à jour, la suppression et la récupération de timeboards. [En apprendre plus sur les timeboards][1].
 
 [1]: /graphing/dashboards/timeboard

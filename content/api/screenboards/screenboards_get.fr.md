@@ -1,12 +1,12 @@
 ---
-title: Récupérer un Screenboard
+title: Récupérer un screenboard
 type: apicontent
 order: 18.4
-external_redirect: /api/#get-a-screenboard
+external_redirect: /api/#recuperer-un-screenboard
 ---
 
-## Récupérer un Screenboard
-Récupère toutes les spécifications d'un Screenboard.
+## Récupérer un screenboard
+Récupérez toutes les spécifications d'un screenboard.
 
 ##### ARGUMENTS
 

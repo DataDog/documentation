@@ -15,7 +15,7 @@ external_redirect: /api/#post-a-check-run
 * **`host_name`** *[obligatoire]*:  
     Le nom de l'hôte qui soumet le check
 
-* **`status`** *[optionnel]*:   
+* **`status`** *[facultatif]*:   
     Entier pour l'état du check:
     * 0 : OK
     * 1 : Warning
@@ -23,12 +23,12 @@ external_redirect: /api/#post-a-check-run
     * 3 : UNKNOWN
 
 
-* **`timestamp`** *[optionnel]*:  
+* **`timestamp`** *[facultatif]*:  
     Timestamp POSIX de l'événement.
 
-* **`message`** *[optionnel]*:  
+* **`message`** *[facultatif]*:  
     Une description de la raison pour laquelle ce statut s'est produit
 
-* **`tags`** *[optionnel]*:  
+* **`tags`** *[facultatif]*:  
     Une liste de tags key:val pour ce check
 

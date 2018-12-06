@@ -5,7 +5,7 @@
         "statuses": ["ok", "critical"],
         "groups": ["host"],
         "name": "Kubelet Ping",
-        "description": "Renvoie `CRITICAL` si le Kubelet ne répond pas au Ping. `OK` sinon"
+        "description": "Renvoie `CRITICAL` si le Kubelet ne répond pas au Ping. Si ce n'est pas le cas, renvoie`OK`."
     },
     {
         "agent_version": "5.6.0",
@@ -13,7 +13,7 @@
         "statuses": ["ok", "critical"],
         "groups": ["host"],
         "name": "Kubelet Docker Service",
-        "description": "Renvoie `CRITICAL` si le service Docker ne s'exécute pas sur le Kubelet. `OK`, sinon"
+        "description": "Renvoie `CRITICAL` si le service Docker ne s'exécute pas sur le Kubelet. Si ce n'est pas le cas, renvoie `OK`."
     },
     {
         "agent_version": "5.6.0",
@@ -21,7 +21,7 @@
         "statuses": ["ok", "critical"],
         "groups": ["host"],
         "name": "Kubelet Syncloop",
-        "description": "Renvoie `CRITICAL` si le health check de syncloop est arrêté. `OK`, sinon"
+        "description": "Renvoie `CRITICAL` si le check de santé de syncloop est arrêté. Si ce n'est pas le cas, renvoie `OK`."
     },
     {
         "agent_version": "5.6.0",
@@ -29,7 +29,7 @@
         "statuses": ["ok", "critical"],
         "groups": ["host"],
         "name": "Kubelet Health",
-        "description": "Renvoie `CRITICAL` si la vérification d'intégrité globale de Kubelet est arrêtée. `OK`, sinon"
+        "description": "Renvoie `CRITICAL` si le check de santé globale de Kubelet est arrêtée. Si ce n'est pas le cas, renvoie `OK`."
     },
     {
         "agent_version": "5.6.0",

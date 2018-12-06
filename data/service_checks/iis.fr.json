@@ -5,7 +5,7 @@
         "check": "iis.site_up",
         "statuses": ["ok", "critical"],
         "groups": ["host", "site"],
-        "name": "Site Up",
-        "description": "Renvoie `CRITICAL` si la disponibilité pour un site est 0 et` OK` sinon. La disponibilité du site est collectée via Windows Performance Data Helper en utilisatn le compteur  'Web Service(*)\\Service Uptime'."
+        "name": "Site disponible",
+        "description": "Renvoie `CRITICAL` si la disponibilité pour un site est 0. Si ce n'est pas le cas, renvoie `OK`. La disponibilité du site est recueillie via Windows Performance Data Helper à l'aide du compte  'Web Service(*)\\Service Uptime'."
     }
 ]

@@ -6,6 +6,6 @@
         "statuses": ["ok", "critical"],
         "groups": ["host", "port", "db"],
         "name": "Peut se connecter",
-        "description": "Renvoie `CRITICAL` si l'agent ne peut pas se connecter à l'instance PGBouncer qu'il monitor. Renvoie `OK` sinon."
+        "description": "Renvoie `CRITICAL` si l'agent ne peut pas se connecter à l'instance PGBouncer qu'il surveille. Si ce n'est pas le cas, renvoie `OK`."
     }
 ]

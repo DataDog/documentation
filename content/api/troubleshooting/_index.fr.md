@@ -1,4 +1,4 @@
 ---
-title: Troubleshooting
+title: Dépannage
 external_redirect: /api/
 ---

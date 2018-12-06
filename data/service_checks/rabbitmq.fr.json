@@ -6,7 +6,7 @@
         "statuses": ["ok", "critical"],
         "groups": ["host", "vhost"],
         "name": "Aliveness",
-        "description": "Renvoie l'état d'un hôte virtuel basé sur l'API RabbitMQ [Aliveness API](https://github.com/rabbitmq/rabbitmq-management/blob/rabbitmq_v3_6_8/priv/www/api/index.html). \nL'API Aliveness créera une file d'attente de test, puis publiera et consommera un message de cette file d'attente. Renvoie `OK` si le code d'état de l'API est 200 et` CRITICAL` sinon."
+        "description": "Renvoie le statut d'un hôte virtuel basé sur l'API RabbitMQ [API Aliveness](https://github.com/rabbitmq/rabbitmq-management/blob/rabbitmq_v3_6_8/priv/www/api/index.html). L'API Aliveness créera une file d'attente de test, puis publiera et lira un message de cette file d'attente. Renvoie `OK` si le code d'état de l'API est 200 et `CRITICAL` pour les autres cas."
     },
     {
         "agent_version": "5.9.0",
@@ -14,7 +14,7 @@
         "check": "rabbitmq.status",
         "statuses": ["ok", "critical"],
         "groups": ["host"],
-        "name": "Status",
-        "description": "Renvoie l'état du serveur RabbitMQ. Renvoie `OK` si l'agent a pu contacter l'API et` CRITICAL` sinon."
+        "name": "Statut",
+        "description": "Renvoie le statut du serveur RabbitMQ. Renvoie `OK` si l'Agent a pu contacter l'API et `CRITICAL` pour les autres cas."
     }
 ]

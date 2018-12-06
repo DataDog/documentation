@@ -1,12 +1,12 @@
 ---
-title: Récupérer un Timeboard
+title: Récupérer un timeboard
 type: apicontent
 order: 21.5
-external_redirect: /api/#get-a-timeboard
+external_redirect: /api/#recuperer-un-timeboard
 ---
 
 ## Récupérer un Timeboard
-Récupère toutes les spécifications d'un Dashboard.
+Récupérez toutes les spécifications d'un dashboard.
 
 ##### Arguments
 *Cet endpoint ne prend aucun argument JSON.*

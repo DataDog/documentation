@@ -1,10 +1,10 @@
 ---
-title: Checks de Service
+title: Checks de service
 type: apicontent
 order: 6
-external_redirect: /api/#service-checks
+external_redirect: /api/#checks-de-service
 ---
-## Checks de Service
-L'endpoint check de service vous permet de publier des états de check pour une utilisation avec des [monitors][1].
+## Checks de service
+L'endpoint check de service vous permet d'envoyer des statuts de check afin de les utiliser avec des [monitors][1].
 
 [1]: /monitors
