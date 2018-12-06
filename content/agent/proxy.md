@@ -148,9 +148,9 @@ logs_config:
   socks5_proxy_address: <MY_SOCKS5_PROXY_URL>:<MY_SOCKS5_PROXY_PORT>
 ```
 
-This parameter can also be set with the following environement variable:
+This parameter can also be set with the following environment variable:
 
-* `DD_LOGS_CONFIG_SOCK5_PROXY_ADDRESS`
+* `DD_LOGS_CONFIG_SOCKS5_PROXY_ADDRESS`
 
 {{% /tab %}}
 {{< /tabs >}}
