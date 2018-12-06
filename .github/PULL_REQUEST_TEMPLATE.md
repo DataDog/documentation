@@ -9,5 +9,9 @@
 ### Preview link
 <!-- Impacted pages preview links-->
 
+<!-- link to preview on staging:
+https://docs-staging.datadoghq.com/<BRANCH_NAME>
+-->
+
 ### Additional Notes
 <!-- Anything else we should know when reviewing?-->
