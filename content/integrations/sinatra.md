@@ -2,8 +2,8 @@
 title: Sinatra
 name: Sinatra
 kind: integration
-description: "Gather you Sinatra applications logs."
-short_description: "Gather you Sinatra applications logs."
+description: "Gather Sinatra application logs."
+short_description: "Gather Sinatra application logs."
 categories:
 - log collection
 aliases:
@@ -20,7 +20,7 @@ supported_os:
 
 ## Overview
 
-This integration explains how to get web access logging from your [Sinatra][1] applications in order to monitor:
+This integration enables you to get web access logging from your [Sinatra][1] applications in order to monitor:
 
 - Errors logs (4xx codes, 5xx codes)
 - Web pages response time
@@ -34,9 +34,9 @@ This integration explains how to get web access logging from your [Sinatra][1] a
 
 ### Configuration
 
-The default [Sinatra logging][3] feature logs to stdout, therefor Datadog recommends to use the [Rack][4] [Common Logger][5] in order to log into a file and in the console.
+The default [Sinatra logging][3] feature logs to stdout. Datadog recommends that you use the [Rack][4] [Common Logger][5] in order to log to a file and in the console.
 
-Here is a configuration example that generate logs in a file and the console. It that can be set in the Rack configuration file (`config.ru`) or the configuration block for your Sinatra application 
+Here is a configuration example that generate logs in a file and the console. This can be set in the Rack configuration file (`config.ru`) or the configuration block for your Sinatra application.
 
 ```ruby
 require 'sinatra'
@@ -54,9 +54,9 @@ get '/' do
 end
 ```
 
-More details available in the [Rack recipes documentation][6].
+More details are available in the [Rack recipes documentation][6].
 
-This logger use the common Apache Access format and generates logs in the following format:
+This logger uses the common Apache Access format and generates logs in the following format:
 
 ```
 127.0.0.1 - - [15/Jul/2018:17:41:40 +0000] "GET /uptime_status HTTP/1.1" 200 34 0.0004
@@ -67,7 +67,7 @@ This logger use the common Apache Access format and generates logs in the follow
 
 **Available for Agent >6.0**
 
-* Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file with:
+* Collecting logs is disabled by default in the Datadog Agent. Enable it in your `datadog.yaml` file with:
 
       ```yaml
       logs_enabled: true
