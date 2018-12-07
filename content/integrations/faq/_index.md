@@ -38,6 +38,7 @@ aliases:
 * [I just set up my AWS integration. Why am I seeing duplicate hosts?][24]
 * [Integration Setup for ECS Fargate][80]
 * [Error: Datadog is not authorized to perform sts:AssumeRole][81]
+* [The AWS Integration with Terraform][82]
 
 ## Apache
 
@@ -221,3 +222,4 @@ aliases:
 [79]: /integrations/faq/how-to-collect-metrics-with-sql-stored-procedure
 [80]: /integrations/faq/integration-setup-ecs-fargate
 [81]: /integrations/faq/error-datadog-not-authorized-sts-assume-role/
+[82]: /integrations/faq/aws-integration-with-terraform/
