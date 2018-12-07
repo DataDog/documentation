@@ -4,7 +4,7 @@
         "groups": ["region", "service"],
         "check": "aws.status",
         "statuses": ["ok", "critical"],
-        "name": "AWS Status",
-        "description": "Renvoie `CRITICAL` si une ou plusieurs régions AWS rencontrent des problèmes. Renvoie `OK` sinon."
+        "name": "Statut AWS",
+        "description": "Renvoie `CRITICAL` si une ou plusieurs régions AWS rencontrent des problèmes. Si ce n'est pas le cas, renvoie `OK`."
     }
 ]

@@ -1,8 +1,8 @@
 ---
-title: Créer un Screenboard
+title: Créer un screenboard
 type: apicode
 order: 18.1
-external_redirect: /api/#create-a-screenboard
+external_redirect: /api/#creer-un-screenboard
 ---
 
 ##### Signature

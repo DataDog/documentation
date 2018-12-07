@@ -1,18 +1,18 @@
 ---
-title: Récupérer l'utilisation horaire pour les métriques custom.
+title: Obtenir l'utilisation horaire pour des métriques custom
 type: apicontent
 order: 23.3
-external_redirect: /api/#get-hourly-usage-for-custom-metrics
+external_redirect: /api/#obtenir-l-utilisation-horaire-pour-des-metriques-custom
 ---
 
-## Récupérer l'utilisation horaire pour les métriques custom.
+## Obtenir l'utilisation horaire pour des métriques custom
 
-Récupérer l'utilisation horaire pour [les métriques custom][1].
+Obtenez l'utilisation horaire pour [des métriques custom][1].
 
 ##### Arguments
-* **`start_hr`** [*obligatoire*]:  
-    datetime dans le format ISO-8601 , UTC, précis à l'heure: [YYYY-MM-DDThh] Pour l'usage depuis le début de cette heure
-* **`end_hr`** [*facultatif*, *défaut*=**1d+start_hr**]:  
-    datetime dans le format ISO-8601 , UTC, précis à l'heure: [YYYY-MM-DDThh] Pour l'usage AVANT le début de cette heure
+* **`start_hr`** [*obligatoire*] :
+    datetime au format ISO-8601 , UTC, à l'heure près : [YYYY-MM-DDThh]. Pour une utilisation commençant à cette heure.
+* **`end_hr`** [*facultatif*, *défaut* = **1d+start_hr**] :
+    datetime au format ISO-8601 , UTC, à l'heure près : [AAAA-MM-JJThh]. Pour une utilisation se terminant AVANT cette heure.
 
 [1]: /developers/metrics/custom_metrics/

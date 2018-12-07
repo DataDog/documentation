@@ -1,5 +1,5 @@
 ---
-aliases:
-  - /fr/videos/datadog emails/
+aliases :
+  - /videos/datadog emails/
 private: true
 ---

@@ -5,7 +5,7 @@
         "check": "gunicorn.is_running",
         "statuses": ["ok", "critical"],
         "groups": ["host", "app"],
-        "name": "Master process running",
-        "description": "Renvoie `CRITICAL` si l'Agent est incapable de trouver le processus maître Gunicorn. Renvoie `OK` sinon."
+        "name": "Processus principal en cours d'exécution",
+        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de trouver le processus principal Gunicorn. Si ce n'est pas le cas, renvoie `OK`."
     }
 ]

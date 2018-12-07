@@ -2,7 +2,7 @@
 title: Créer un utilisateur
 type: apicode
 order: 24.1
-external_redirect: /api/#create-user
+external_redirect: /api/#creer-un-utilisateur
 ---
 
 ##### Signature

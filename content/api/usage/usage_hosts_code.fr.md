@@ -1,8 +1,8 @@
 ---
-title: Récupérer l'utilisation horaire par hôtes et conteneurs
+title: Obtenir l'utilisation horaire pour les hôtes et conteneurs
 type: apicode
 order: 23.1
-external_redirect: /api/#get-hourly-usage-for-hosts-and-containers
+external_redirect: /api/#obtenir-l-utilisation-horaire-pour-les-hotes-et-conteneurs
 ---
 
 ##### Signature

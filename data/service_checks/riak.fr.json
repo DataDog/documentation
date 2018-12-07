@@ -6,6 +6,6 @@
         "statuses": ["ok", "critical"],
         "groups": ["host", "url"],
         "name": "Peut se connecter",
-        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter a l'instance Riak qu'il monitor. Sinon renvoie `OK`."
+        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à l'instance Riak qu'il surveille. Si ce n'est pas le cas, renvoie `OK`."
     }
 ]
