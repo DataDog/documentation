@@ -12,7 +12,10 @@ further_reading:
   text: Learn how to assign tags
 ---
 
-After [assigning tags][1], start using them to filter and group your data in your Datadog platform.
+After [assigning tags][1], start using them to filter and group your data in your Datadog platform. Tags can be used to include or exclude data. When including or excluding multiple tags:
+
+* Include uses `AND` logic
+* Exclude uses `OR` logic
 
 ## Events
 
