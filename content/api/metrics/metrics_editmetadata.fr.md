@@ -20,7 +20,7 @@ L'endpoint des métadonnées des métriques vous permet de modifier les champs d
 * **`unit`** [*facultatif*, *défaut* = **None**] :
     Unité primaire de la métrique, p. ex. **byte** ou **operation**.
 * **`per_unit`** [*facultatif*, *défaut* = **None**] :
-    Unité secondaire de la métrique, p. ex. **seconde** pour **bytes par seconde**.
+    Unité secondaire de la métrique, p. ex. **seconde** pour **octets par seconde**.
 * **`statsd_interval`** [*facultatif*, *défaut* = **None**] :
     Le cas échéant, statds 
 

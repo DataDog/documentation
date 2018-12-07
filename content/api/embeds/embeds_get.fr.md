@@ -27,7 +27,7 @@ En cas d'échec, la valeur renvoyée est un JSON contenant un message d'erreur {
     * **medium**, 
     * **large**, 
     * **xlarge**.
-* **`legend`** [*facultatif*, *default* = **no**] :
+* **`legend`** [*facultatif*, *défaut* = **no**] :
     Le flag déterminant si le graphique inclut ou non une légende. Valeurs autorisées : **yes** ou **no**.
 * **`template_variables`** [*facultatif*, *défaut* = **None**] :
     Remplacez les template variables dans les requêtes par form $var. Pour remplacer $var par val, utilisez var=val comme paramètre pour chaque template variable que vous souhaitez remplacer. Si des template variables n'ont pas de valeur dans l'URL source de l'iframe, (*) est alors utilisé comme valeur.

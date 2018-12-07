@@ -2,7 +2,7 @@
 title: Créer un screenboard
 type: apicontent
 order: 18.1
-external_redirect: /api/#creer-un-dashboard
+external_redirect: /api/#creer-un-screenboard
 ---
 
 ## Créer un screenboard

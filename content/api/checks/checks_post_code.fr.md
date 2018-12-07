@@ -2,7 +2,7 @@
 title: Envoyer le résultat d'un check
 type: apicode
 order: 6.1
-external_redirect: /api/#envoyer-un-resultat-de-check
+external_redirect: /api/#envoyer-le-resultat-d-un-check
 ---
 
 ##### Signature

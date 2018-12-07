@@ -1,8 +1,8 @@
 ---
-title: Obtenez le top 500 des métriques custom les plus fréquentes par heure
+title: Obtenir les 500 principales métriques custom selon la moyenne horaire
 type: apicode
 order: 23.4
-external_redirect: /api/#get-top-500-custom-metrics-by-hourly-average
+external_redirect: /api/#obtenir-les-500-principales-metriques-custom-selon-la-moyenne-horaire
 ---
 
 ##### Signature

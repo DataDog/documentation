@@ -5,6 +5,6 @@
         "statuses": ["ok", "critical"],
         "groups": ["host", "ping_url"],
         "name": "Peut ping",
-        "description": "Renvoie `CRITICAL` si l'Agent ne peut pas obtenir un ping depuis l'URL de ping PHP-FPM."
+        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable d'obtenir un ping depuis l'URL de ping PHP-FPM."
     }
 ]

@@ -2,7 +2,7 @@
 title: Créer un commentaire
 type: apicode
 order: 7.1
-external_redirect: /api/#create-a-comment
+external_redirect: /api/#creer-un-commentaire
 ---
 
 ##### Signature

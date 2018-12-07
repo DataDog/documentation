@@ -5,14 +5,14 @@
         "statuses": ["ok", "critical"],
         "groups": ["host", "redis_host", "redis_port"],
         "name": "Peut se connecter",
-        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter a l'instance Redis qu'il monitor. Sinon renvoie `OK`."
+        "description": "Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à l'instance Redis qu'il surveille. Si ce n'est pas le cas, renvoie `OK`."
     },
     {
         "agent_version": "5.3.0",
         "check": "redis.replication.master_link_status",
         "statuses": ["ok", "critical"],
         "groups": ["host", "redis_host", "redis_port"],
-        "name": "État du lien principal",
-        "description": "Renvoie `CRITICAL` si cette instance Redis n'est pas capable de se connecter a son instance master. Sinon renvoie `OK`."
+        "name": "Statut du lien avec l'instance principale",
+        "description": "Renvoie `CRITICAL` si cette instance Redis n'est pas capable de se connecter à son instance principale. Si ce n'est pas le cas, renvoie `OK`."
     }
 ]
