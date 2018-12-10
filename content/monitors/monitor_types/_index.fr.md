@@ -4,7 +4,7 @@ kind: documentation
 aliases:
   - /fr/monitoring
 ---
-{{< whatsnext desc="Choose your type of monitor">}}
+{{< whatsnext desc="Choisissez votre type de monitor">}}
     {{< nextlink href="/monitors/monitor_types/anomaly" >}}Anomalie{{< /nextlink >}}
     {{< nextlink href="/monitors/monitor_types/apm" >}}APM{{< /nextlink >}}
     {{< nextlink href="/monitors/monitor_types/composite" >}}Composite{{< /nextlink >}}
