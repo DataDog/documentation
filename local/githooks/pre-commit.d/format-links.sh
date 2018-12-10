@@ -1,6 +1,6 @@
 #!/bin/sh
 shortcodes=$(grep -FRl Inner layouts/shortcodes | sed -E -e 's/[^[:space:]]+\///' -e 's/\.html$//')
-changed=$(git diff --name-only --staged | grep '\.md$')
+changed=$(git diff --name-only --staged | grep -E '^[^.]+\.md$')
 for f in $changed
 do
     if local/bin/format-links "$f" "$shortcodes" > "$f.fixed"; then
