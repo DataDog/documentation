@@ -261,7 +261,6 @@ Example: Every java log line starts with a timestamp with `yyyy-dd-mm` format. T
         at com.example.myproject.Author.getBookTitles(Author.java:25)
         at com.example.myproject.Bootstrap.main(Bootstrap.java:14)
 2018-01-03T09:26:24.365Z UTC starting upload of /my/file.gz
-
 ```
 
 To achieve this, you need to use the following `log_processing_rules`:
@@ -286,6 +285,8 @@ More examples:
 | 11/10/2014               | `\d{2}\/\d{2}\/\d{4}`                      |
 | Thu Jun 16 08:29:03 2016 | `\w{3}\s+\w{3}\s+\d{2}\s\d{2}:\d{2}:\d{2}` |
 | 20180228                 | `\d{8}`                                    |
+
+**Note**: Regex patterns for multi-line logs must start at the **beginning** of a log. Patterns cannot be matched mid-line.
 
 ### Tail multiple directories or whole directories by using wildcards
 
