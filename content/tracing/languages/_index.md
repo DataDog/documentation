@@ -5,7 +5,7 @@ aliases:
     - /tracing/setup
 ---
 
-After you have [installed the Datadog Agent][1], [enabled trace collection][2], and [configured your environment[3], begin tracing by instrumenting your application.
+After you have [installed the Datadog Agent][1], [enabled trace collection][2], and [configured your environment][3], begin tracing by instrumenting your application.
 
 [1]: /agent
 [2]: /agent/apm/?tab=agent630#agent-configuration
