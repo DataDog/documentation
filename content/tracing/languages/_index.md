@@ -9,7 +9,7 @@ After you have [installed the Datadog Agent][1], [enabled trace collection][2], 
 
 [1]: /agent
 [2]: /agent/apm/?tab=agent630#agent-configuration
-[3]: /apm/?tab=agent630#primary-tags
+[3]: /agent/apm/#primary-tags
 
 {{< whatsnext desc="Select one of the following supported languages to start instrumenting your application:">}}
   {{< nextlink href="/agent/docker/apm" tag="Docker" >}}Docker setup.{{< /nextlink >}}
