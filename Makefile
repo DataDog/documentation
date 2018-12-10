@@ -134,6 +134,8 @@ hugpython/bin/activate: local/etc/requirements3.txt  ## start python virtual env
 source-helpers: hugpython  ## source the helper functions used in build, test, deploy.
 	@mkdir -p ${EXEDIR}
 	@find ${LOCALBIN}/*  -type f -exec cp {} ${EXEDIR} \;
+	@mkdir -p .git/hooks
+	@cp -r ${LOCALGITHOOKS}/* .git/hooks
 
 start: clean source-helpers ## start the gulp/hugo server.
 	@echo "starting up..."
