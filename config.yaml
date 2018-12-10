@@ -598,6 +598,23 @@ languages:
           weight: 170
           parent: customnav_tracingnav_languages
 
+        # Proxy Configuration
+        - identifier: customnav_tracingnav_proxy_config
+          name: "Proxy Configuration"
+          url: "tracing/proxies/"
+          weight: 15
+          parent: menu_references_tracing
+        - identifier: customnav_tracingnav_proxy_config_nginx
+          name: "NGINX"
+          url: "tracing/proxies/nginx"
+          weight: 151
+          parent: customnav_tracingnav_proxy_config
+        - identifier: customnav_tracingnav_proxy_config_envoy
+          name: "Envoy"
+          url: "tracing/proxies/envoy"
+          weight: 152
+          parent: customnav_tracingnav_proxy_config
+
         # TRACING/APM - Setup Advanced
 
         - identifier: customnav_tracingnav_advanced_usage
@@ -755,23 +772,6 @@ languages:
         #  url: "tracing/faq/"
         #  weight: 100
         #  parent: menu_references_tracing
-
-        # Proxy Configuration
-        - identifier: customnav_tracingnav_proxy_config
-          name: "Proxy Configuration"
-          url: "tracing/proxies/"
-          weight: 70
-          parent: menu_references_tracing
-        - identifier: customnav_tracingnav_proxy_config_nginx
-          name: "NGINX"
-          url: "tracing/proxies/nginx"
-          weight: 710
-          parent: customnav_tracingnav_proxy_config
-        - identifier: customnav_tracingnav_proxy_config_envoy
-          name: "Envoy"
-          url: "tracing/proxies/envoy"
-          weight: 720
-          parent: customnav_tracingnav_proxy_config
 
 
         # TRACING/APM - Subnav end
@@ -1753,6 +1753,22 @@ languages:
           weight: 170
           parent: customnav_tracingnav_languages
 
+        # Proxy Configuration
+        - identifier: customnav_tracingnav_proxy_config
+          name: "Proxy Configuration"
+          url: "tracing/proxies/"
+          weight: 15
+          parent: menu_references_tracing
+        - identifier: customnav_tracingnav_proxy_config_nginx
+          name: "NGINX"
+          url: "tracing/proxies/nginx"
+          weight: 151
+          parent: customnav_tracingnav_proxy_config
+        - identifier: customnav_tracingnav_proxy_config_envoy
+          name: "Envoy"
+          url: "tracing/proxies/envoy"
+          weight: 152
+          parent: customnav_tracingnav_proxy_config
 
         # TRACING/APM - Setup Advanced
 
@@ -1895,23 +1911,6 @@ languages:
           url: "developers/libraries/#apm-tracing-client-libraries"
           weight: 60
           parent: menu_references_tracing
-
-        # Proxy Configuration
-        - identifier: customnav_tracingnav_proxy_config
-          name: "Proxy Configuration"
-          url: "tracing/proxies/"
-          weight: 70
-          parent: menu_references_tracing
-        - identifier: customnav_tracingnav_proxy_config_nginx
-          name: "NGINX"
-          url: "tracing/proxies/nginx"
-          weight: 710
-          parent: customnav_tracingnav_proxy_config
-        - identifier: customnav_tracingnav_proxy_config_envoy
-          name: "Envoy"
-          url: "tracing/proxies/envoy"
-          weight: 720
-          parent: customnav_tracingnav_proxy_config
 
         #- identifier: customnav_tracingnav_faq
         #  name: "FAQ"
