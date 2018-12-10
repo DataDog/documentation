@@ -1,7 +1,7 @@
 title: "Docs"
 baseURL: "http://localhost:1313/"
 metadataformat: "yaml"
-
+enableGitInfo: true
 canonifyURLs: true
 pygmentsuseclasses: true
 pygmentsCodeFences: true
@@ -57,7 +57,7 @@ languages:
           url: "agent/"
           pre: "nav_agent"
           weight: 40
-        ## Basic Agent usage  
+        ## Basic Agent usage
         - identifier: customnav_agentnav_basic_usage
           name: "Basic Agent Usage"
           url: "agent/basic_agent_usage/"
