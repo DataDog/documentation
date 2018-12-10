@@ -1,8 +1,8 @@
 #!/bin/sh
 
-for f in pre-commit.d/*
+for f in local/githooks/pre-commit.d/*
 do
-    name=$(basename $f)
+    name=$(basename "$f")
     echo "---Running pre-commit hook $name"
     if ! $f; then
         echo "---Pre-commit hook $name failed, check stderr" 1>&2
