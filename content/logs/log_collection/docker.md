@@ -21,14 +21,14 @@ further_reading:
 
 ## Overview
 
-Datadog Agent v6+ collects logs from containers. Two types of installation are available:
+Datadog Agent 6+ collects logs from containers. Two types of installation are available:
 
-- On the host where the Agent is external to the Docker environment
+- On the host, where the Agent is external to the Docker environment
 - By deploying the containerized Agent in the Docker environment
 
-Then collect all the logs from your environment's containers, or filter by container image, name, or container label to choose the logs collected.
+Then, collect all the logs from your environment's containers, or filter by container image, name, or container label to choose the logs collected.
 
-This documentation discusses how to collect logs from all running containers, as well as how to leverage the Autodiscovery feature to activate log integrations.
+This documentation discusses how to collect logs from all running containers, as well as how to leverage Autodiscovery to activate log integrations.
 
 ## Setup
 
@@ -39,7 +39,7 @@ The first step is to install the Agent (whether the containerized version or dir
 {{< tabs >}}
 {{% tab "Container Installation" %}}
 
-To run a [Docker container][3] that embeds the Datadog Agent to monitor your host use the following command:
+To run a [Docker container][3] that embeds the Datadog Agent to monitor your host, use the following command:
 
 ```
 docker run -d --name datadog-agent \
@@ -72,7 +72,7 @@ The commands related to log collection are:
 {{% /tab %}}
 {{% tab "Host Installation" %}}
 
-Install the [latest version of Agent 6][1] on your host. The Agent can collect logs from [files on the host][14] or from container stdout/stderr.
+Install the [latest version of Agent 6][1] on your host. The Agent can collect logs from [files on the host][14] or from container `stdout`/`stderr`.
 
 Collecting logs is *disabled* by default in the Datadog Agent. To enable it, add the following lines in your `datadog.yaml` configuration file: 
 
@@ -105,16 +105,16 @@ logs:
 
 **Important notes**: 
 
-* `source` and `service` are defaulted to the `short_image` tag value in Datadog Agent v6.8+.  
-The source and service values can be overridden with Autodiscovery as described below. Setting the `source` value to an integration name automatically installs integration Pipelines that parse your logs and extract all the relevant information from them.
+* `source` and `service` default to the `short_image` tag value in Datadog Agent 6.8+.  
+The source and service values can be overridden with Autodiscovery as described below. Setting the `source` value to an integration name results in the installation of integration Pipelines that parse your logs and extract relevant information from them.
 
 * Logs coming from container `Stderr` have a default status of `Error`.
 
 ### Activate Log Integrations
 
-The Datadog Agent 6.8+ defaults the `source` and `service` to the `short_image` tag value. This allows Datadog to identify the log source for each container and automatically install the corresponding integration.
+In Datadog Agent 6.8+, `source` and `service` default to the `short_image` tag value. This allows Datadog to identify the log source for each container and automatically install the corresponding integration.
 
-That said the container short image name might not match the integration name (for custom images) or should be overwritten to better reflect the name of your application. This can be done with [Datadog Autodiscovery][12] and [pod annotations in Kubernetes][13] or container labels.
+The container short image name might not match the integration name for custom images, and can be overwritten to better reflect the name of your application. This can be done with [Datadog Autodiscovery][12] and [pod annotations in Kubernetes][13] or container labels.
 
 Autodiscovery expects labels to follow this format, depending on the file type:
 
@@ -160,7 +160,7 @@ The following Dockerfile enables the NGINX log integration on the corresponding 
 LABEL "com.datadoghq.ad.logs"='[{"source": "nginx", "service": "webapp"}]'
 ```
 
-And to enable both the metric and logs NGINX integrations:
+To enable both the metric and logs NGINX integrations:
 
 ```
 LABEL "com.datadoghq.ad.check_names"='["nginx"]'
@@ -170,11 +170,11 @@ LABEL "com.datadoghq.ad.logs"='[{"source": "nginx", "service": "webapp"}]'
 ```
 
 {{% /tab %}}
-{{% tab "Java Multi-line logs" %}}
+{{% tab "Java multi-line logs" %}}
 
 For multi-line logs like stack traces, the Agent has [multi-line processing rules][13] to aggregate lines into a single log.
 
-Example log (Java Stack traces):
+Example log (Java stack traces):
 
 ```
 2018-01-03T09:24:24.983Z UTC Exception in thread "main" java.lang.NullPointerException
@@ -196,7 +196,7 @@ See the [multi-line processing rule documentation][13] to get more pattern examp
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-If you are running in Kubernetes, pod annotations can be used.
+If you are running Kubernetes, pod annotations can be used.
 
 ```
 apiVersion: extensions/v1beta1
@@ -218,7 +218,7 @@ spec:
 
 ```
 
-Check our [Autodiscovery Guide][13] for setup, examples, and more information about Autodiscovery.
+Refer to the [Autodiscovery guide][13] for setup, examples, and more information about Autodiscovery.
 
 [12]: https://docs.datadoghq.com/agent/autodiscovery/?tab=kubernetes#setting-up-check-templates
 [13]: https://docs.datadoghq.com/agent/autodiscovery/?tab=kubernetes#setting-up-check-templates
@@ -234,7 +234,7 @@ Check our [Autodiscovery Guide][13] for setup, examples, and more information ab
 
 #### Short lived containers
 
-Because of Autodiscovery, short lived containers are detected as soon as they are started to ensure their logs are properly collected. If you are using the host installation of the Agent, add this in your `datadog.yaml` file (it is automatically added for the containerized version):
+To ensure their logs are properly collected, Autodiscovery detects short lived containers as soon as they are started. If you are using the host installation of the Agent, add this in your `datadog.yaml` file (it is automatically added for the containerized version):
 
 ```
 listeners:
