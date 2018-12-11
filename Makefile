@@ -137,6 +137,12 @@ source-helpers: hugpython  ## source the helper functions used in build, test, d
 	@cp -r ${LOCALGITHOOKS}/* .git/hooks
 	@c++ -Wall -Werror -O2 local/etc/format-links.cpp -o local/bin/format-links
 
+# ARGS=<file> will format that file
+# ARGS=<directory> will recursively format all english markdown files inside <directory>
+# empty ARGS will format all english markdown files inside content/
+link-formatting: source-helpers
+	@local/bin/sh/format-links.sh $(ARGS)
+
 start: clean source-helpers ## start the gulp/hugo server.
 	@echo "starting up..."
 	@if [ ${PY3} != "false" ]; then \
