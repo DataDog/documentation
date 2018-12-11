@@ -76,7 +76,7 @@ In the screenshot below, the size of the hexagons is the 15 minute average load,
 
 By default, the Host Map only shows hosts that are reporting the selected metric, which can then be used to set a color or size for the individual hexagon within the grid.
 
-Some hosts, like those coming in from Google App Engine, do not pull in these metrics without an Agent running. These hosts can still appear within the Host Map by selecting the "gear" icon on the top-right of the map and enabling "Show hosts with no metrics" in the Host Map settings:
+If a host is not reporting the selected metric, it can still appear within the Host Map by selecting the "gear" icon on the top-right of the map and enabling "Show hosts with no metrics" in the Host Map settings:
 
 {{< img src="graphing/infrastructure/hostmap/host_no_metrics.png" alt="host No Agent" responsive="true" style="width:50%;">}}
 
